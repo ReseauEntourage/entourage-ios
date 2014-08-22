@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
+		6B49DC1419A7471200023415 /* OTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B49DC1319A7471200023415 /* OTViewController.m */; };
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
 		6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
@@ -14,7 +16,6 @@
 		6B92CAAE19A7461C004E8C9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B92CAAD19A7461C004E8C9B /* main.m */; };
 		6B92CAB219A7461C004E8C9B /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B92CAB119A7461C004E8C9B /* OTAppDelegate.m */; };
 		6B92CAB519A7461C004E8C9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAB319A7461C004E8C9B /* Main.storyboard */; };
-		6B92CAB819A7461C004E8C9B /* OTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B92CAB719A7461C004E8C9B /* OTViewController.m */; };
 		6B92CABA19A7461C004E8C9B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAB919A7461C004E8C9B /* Images.xcassets */; };
 		6B92CAC119A7461C004E8C9B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAC019A7461C004E8C9B /* XCTest.framework */; };
 		6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
@@ -34,6 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		318680BA8CAB48E1AB3273AE /* Pods-entourage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.xcconfig"; path = "Pods/Pods-entourage.xcconfig"; sourceTree = "<group>"; };
+		6B49DC1219A7471200023415 /* OTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTViewController.h; sourceTree = "<group>"; };
+		6B49DC1319A7471200023415 /* OTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTViewController.m; sourceTree = "<group>"; };
 		6B92CA9E19A7461C004E8C9B /* entourage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = entourage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B92CAA119A7461C004E8C9B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -45,14 +49,13 @@
 		6B92CAB019A7461C004E8C9B /* OTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppDelegate.h; sourceTree = "<group>"; };
 		6B92CAB119A7461C004E8C9B /* OTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppDelegate.m; sourceTree = "<group>"; };
 		6B92CAB419A7461C004E8C9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6B92CAB619A7461C004E8C9B /* OTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTViewController.h; sourceTree = "<group>"; };
-		6B92CAB719A7461C004E8C9B /* OTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTViewController.m; sourceTree = "<group>"; };
 		6B92CAB919A7461C004E8C9B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6B92CABF19A7461C004E8C9B /* entourageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = entourageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B92CAC019A7461C004E8C9B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6B92CAC819A7461C004E8C9B /* entourageTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "entourageTests-Info.plist"; sourceTree = "<group>"; };
 		6B92CACA19A7461C004E8C9B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6B92CACC19A7461C004E8C9B /* entourageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = entourageTests.m; sourceTree = "<group>"; };
+		7B26FE3EE0C7470099733881 /* libPods-entourage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,7 @@
 				6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
+				3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B49DC1119A7471200023415 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6B49DC1219A7471200023415 /* OTViewController.h */,
+				6B49DC1319A7471200023415 /* OTViewController.m */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
 		6B92CA9519A7461C004E8C9B = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +99,7 @@
 				6B92CAC619A7461C004E8C9B /* entourageTests */,
 				6B92CAA019A7461C004E8C9B /* Frameworks */,
 				6B92CA9F19A7461C004E8C9B /* Products */,
+				318680BA8CAB48E1AB3273AE /* Pods-entourage.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +119,7 @@
 				6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */,
 				6B92CAA519A7461C004E8C9B /* UIKit.framework */,
 				6B92CAC019A7461C004E8C9B /* XCTest.framework */,
+				7B26FE3EE0C7470099733881 /* libPods-entourage.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -112,11 +127,10 @@
 		6B92CAA719A7461C004E8C9B /* entourage */ = {
 			isa = PBXGroup;
 			children = (
+				6B49DC1119A7471200023415 /* controllers */,
 				6B92CAB019A7461C004E8C9B /* OTAppDelegate.h */,
 				6B92CAB119A7461C004E8C9B /* OTAppDelegate.m */,
 				6B92CAB319A7461C004E8C9B /* Main.storyboard */,
-				6B92CAB619A7461C004E8C9B /* OTViewController.h */,
-				6B92CAB719A7461C004E8C9B /* OTViewController.m */,
 				6B92CAB919A7461C004E8C9B /* Images.xcassets */,
 				6B92CAA819A7461C004E8C9B /* Supporting Files */,
 			);
@@ -159,9 +173,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6B92CAD019A7461C004E8C9B /* Build configuration list for PBXNativeTarget "entourage" */;
 			buildPhases = (
+				8447845D58724A5CA61AABA4 /* Check Pods Manifest.lock */,
 				6B92CA9A19A7461C004E8C9B /* Sources */,
 				6B92CA9B19A7461C004E8C9B /* Frameworks */,
 				6B92CA9C19A7461C004E8C9B /* Resources */,
+				9893A6C3CA40422E81C17B55 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -245,6 +261,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8447845D58724A5CA61AABA4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9893A6C3CA40422E81C17B55 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-entourage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6B92CA9A19A7461C004E8C9B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -252,7 +301,7 @@
 			files = (
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				6B92CAB219A7461C004E8C9B /* OTAppDelegate.m in Sources */,
-				6B92CAB819A7461C004E8C9B /* OTViewController.m in Sources */,
+				6B49DC1419A7471200023415 /* OTViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,12 +423,14 @@
 		};
 		6B92CAD119A7461C004E8C9B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 318680BA8CAB48E1AB3273AE /* Pods-entourage.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -387,12 +438,14 @@
 		};
 		6B92CAD219A7461C004E8C9B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 318680BA8CAB48E1AB3273AE /* Pods-entourage.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -457,6 +510,7 @@
 				6B92CAD219A7461C004E8C9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6B92CAD319A7461C004E8C9B /* Build configuration list for PBXNativeTarget "entourageTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +519,7 @@
 				6B92CAD519A7461C004E8C9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
