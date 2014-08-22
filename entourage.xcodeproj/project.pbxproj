@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
-		6B49DC1419A7471200023415 /* OTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B49DC1319A7471200023415 /* OTViewController.m */; };
+		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
+		6B49DC1419A7471200023415 /* OTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B49DC1319A7471200023415 /* OTMapViewController.m */; };
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
 		6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
@@ -36,8 +37,9 @@
 
 /* Begin PBXFileReference section */
 		318680BA8CAB48E1AB3273AE /* Pods-entourage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.xcconfig"; path = "Pods/Pods-entourage.xcconfig"; sourceTree = "<group>"; };
-		6B49DC1219A7471200023415 /* OTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTViewController.h; sourceTree = "<group>"; };
-		6B49DC1319A7471200023415 /* OTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTViewController.m; sourceTree = "<group>"; };
+		6B4930BD19A769EB00DA7EE0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6B49DC1219A7471200023415 /* OTMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMapViewController.h; sourceTree = "<group>"; };
+		6B49DC1319A7471200023415 /* OTMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapViewController.m; sourceTree = "<group>"; };
 		6B92CA9E19A7461C004E8C9B /* entourage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = entourage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B92CAA119A7461C004E8C9B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -63,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */,
 				6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
@@ -86,8 +89,8 @@
 		6B49DC1119A7471200023415 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6B49DC1219A7471200023415 /* OTViewController.h */,
-				6B49DC1319A7471200023415 /* OTViewController.m */,
+				6B49DC1219A7471200023415 /* OTMapViewController.h */,
+				6B49DC1319A7471200023415 /* OTMapViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -115,6 +118,7 @@
 		6B92CAA019A7461C004E8C9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6B4930BD19A769EB00DA7EE0 /* MapKit.framework */,
 				6B92CAA119A7461C004E8C9B /* Foundation.framework */,
 				6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */,
 				6B92CAA519A7461C004E8C9B /* UIKit.framework */,
@@ -216,6 +220,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "OCTO Technology";
 				TargetAttributes = {
+					6B92CA9D19A7461C004E8C9B = {
+						DevelopmentTeam = 7MA98J2NRQ;
+					};
 					6B92CABE19A7461C004E8C9B = {
 						TestTargetID = 6B92CA9D19A7461C004E8C9B;
 					};
@@ -301,7 +308,7 @@
 			files = (
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				6B92CAB219A7461C004E8C9B /* OTAppDelegate.m in Sources */,
-				6B49DC1419A7471200023415 /* OTViewController.m in Sources */,
+				6B49DC1419A7471200023415 /* OTMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +434,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
@@ -442,6 +450,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";

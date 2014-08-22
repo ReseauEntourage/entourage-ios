@@ -1,5 +1,5 @@
 //
-//  OTViewController.h
+//  OTMapViewController.h
 //  entourage
 //
 //  Created by Louis Davin on 22/08/2014.
@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OTViewController : UIViewController
+@class MKMapView;
+
+@interface OTMapViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
