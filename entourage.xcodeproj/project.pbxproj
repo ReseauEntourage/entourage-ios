@@ -9,20 +9,24 @@
 /* Begin PBXBuildFile section */
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
-		6B49DC1419A7471200023415 /* OTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B49DC1319A7471200023415 /* OTMapViewController.m */; };
+		6B4930CC19A773C500DA7EE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B4930C519A773C500DA7EE0 /* Main.storyboard */; };
+		6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930C919A773C500DA7EE0 /* OTMapViewController.m */; };
+		6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */; };
+		6B4930D419A773EC00DA7EE0 /* OTPoiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930D319A773EC00DA7EE0 /* OTPoiTest.m */; };
+		6B4930D919A7793200DA7EE0 /* OTTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930D819A7793200DA7EE0 /* OTTestHelper.m */; };
+		6B4930DB19A779F200DA7EE0 /* poi_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B4930DA19A779F200DA7EE0 /* poi_mock.json */; };
+		6B4930DF19A77C2F00DA7EE0 /* OTHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930DE19A77C2F00DA7EE0 /* OTHTTPRequestManager.m */; };
+		6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930E219A77E1D00DA7EE0 /* OTPoi.m */; };
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
 		6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
 		6B92CAAC19A7461C004E8C9B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
 		6B92CAAE19A7461C004E8C9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B92CAAD19A7461C004E8C9B /* main.m */; };
-		6B92CAB219A7461C004E8C9B /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B92CAB119A7461C004E8C9B /* OTAppDelegate.m */; };
-		6B92CAB519A7461C004E8C9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAB319A7461C004E8C9B /* Main.storyboard */; };
 		6B92CABA19A7461C004E8C9B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAB919A7461C004E8C9B /* Images.xcassets */; };
 		6B92CAC119A7461C004E8C9B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAC019A7461C004E8C9B /* XCTest.framework */; };
 		6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
 		6B92CACB19A7461C004E8C9B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAC919A7461C004E8C9B /* InfoPlist.strings */; };
-		6B92CACD19A7461C004E8C9B /* entourageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B92CACC19A7461C004E8C9B /* entourageTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +42,19 @@
 /* Begin PBXFileReference section */
 		318680BA8CAB48E1AB3273AE /* Pods-entourage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.xcconfig"; path = "Pods/Pods-entourage.xcconfig"; sourceTree = "<group>"; };
 		6B4930BD19A769EB00DA7EE0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		6B49DC1219A7471200023415 /* OTMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMapViewController.h; sourceTree = "<group>"; };
-		6B49DC1319A7471200023415 /* OTMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapViewController.m; sourceTree = "<group>"; };
+		6B4930C619A773C500DA7EE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6B4930C819A773C500DA7EE0 /* OTMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMapViewController.h; sourceTree = "<group>"; };
+		6B4930C919A773C500DA7EE0 /* OTMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapViewController.m; sourceTree = "<group>"; };
+		6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAppDelegate.h; sourceTree = "<group>"; };
+		6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAppDelegate.m; sourceTree = "<group>"; };
+		6B4930D319A773EC00DA7EE0 /* OTPoiTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiTest.m; sourceTree = "<group>"; };
+		6B4930D719A7793200DA7EE0 /* OTTestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTestHelper.h; sourceTree = "<group>"; };
+		6B4930D819A7793200DA7EE0 /* OTTestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTestHelper.m; sourceTree = "<group>"; };
+		6B4930DA19A779F200DA7EE0 /* poi_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi_mock.json; sourceTree = "<group>"; };
+		6B4930DD19A77C2F00DA7EE0 /* OTHTTPRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTHTTPRequestManager.h; sourceTree = "<group>"; };
+		6B4930DE19A77C2F00DA7EE0 /* OTHTTPRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTHTTPRequestManager.m; sourceTree = "<group>"; };
+		6B4930E119A77E1D00DA7EE0 /* OTPoi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoi.h; sourceTree = "<group>"; };
+		6B4930E219A77E1D00DA7EE0 /* OTPoi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoi.m; sourceTree = "<group>"; };
 		6B92CA9E19A7461C004E8C9B /* entourage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = entourage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B92CAA119A7461C004E8C9B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,15 +63,11 @@
 		6B92CAAB19A7461C004E8C9B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6B92CAAD19A7461C004E8C9B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B92CAAF19A7461C004E8C9B /* entourage-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
-		6B92CAB019A7461C004E8C9B /* OTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppDelegate.h; sourceTree = "<group>"; };
-		6B92CAB119A7461C004E8C9B /* OTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppDelegate.m; sourceTree = "<group>"; };
-		6B92CAB419A7461C004E8C9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6B92CAB919A7461C004E8C9B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6B92CABF19A7461C004E8C9B /* entourageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = entourageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B92CAC019A7461C004E8C9B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6B92CAC819A7461C004E8C9B /* entourageTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "entourageTests-Info.plist"; sourceTree = "<group>"; };
 		6B92CACA19A7461C004E8C9B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6B92CACC19A7461C004E8C9B /* entourageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = entourageTests.m; sourceTree = "<group>"; };
 		7B26FE3EE0C7470099733881 /* libPods-entourage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -86,13 +97,85 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6B49DC1119A7471200023415 /* controllers */ = {
+		6B4930C319A773C500DA7EE0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				6B49DC1219A7471200023415 /* OTMapViewController.h */,
-				6B49DC1319A7471200023415 /* OTMapViewController.m */,
 			);
-			path = controllers;
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		6B4930C419A773C500DA7EE0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6B4930E019A77DFE00DA7EE0 /* Model */,
+				6B4930C719A773C500DA7EE0 /* Controller */,
+				6B4930DC19A77C2F00DA7EE0 /* Manager */,
+				6B4930C519A773C500DA7EE0 /* Main.storyboard */,
+				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
+				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		6B4930C719A773C500DA7EE0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6B4930C819A773C500DA7EE0 /* OTMapViewController.h */,
+				6B4930C919A773C500DA7EE0 /* OTMapViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6B4930CF19A773EC00DA7EE0 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				6B4930DA19A779F200DA7EE0 /* poi_mock.json */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		6B4930D019A773EC00DA7EE0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6B4930D119A773EC00DA7EE0 /* Helper */,
+				6B4930D219A773EC00DA7EE0 /* Model */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		6B4930D119A773EC00DA7EE0 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				6B4930D719A7793200DA7EE0 /* OTTestHelper.h */,
+				6B4930D819A7793200DA7EE0 /* OTTestHelper.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		6B4930D219A773EC00DA7EE0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6B4930D319A773EC00DA7EE0 /* OTPoiTest.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6B4930DC19A77C2F00DA7EE0 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				6B4930DD19A77C2F00DA7EE0 /* OTHTTPRequestManager.h */,
+				6B4930DE19A77C2F00DA7EE0 /* OTHTTPRequestManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		6B4930E019A77DFE00DA7EE0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6B4930E119A77E1D00DA7EE0 /* OTPoi.h */,
+				6B4930E219A77E1D00DA7EE0 /* OTPoi.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6B92CA9519A7461C004E8C9B = {
@@ -131,10 +214,8 @@
 		6B92CAA719A7461C004E8C9B /* entourage */ = {
 			isa = PBXGroup;
 			children = (
-				6B49DC1119A7471200023415 /* controllers */,
-				6B92CAB019A7461C004E8C9B /* OTAppDelegate.h */,
-				6B92CAB119A7461C004E8C9B /* OTAppDelegate.m */,
-				6B92CAB319A7461C004E8C9B /* Main.storyboard */,
+				6B4930C319A773C500DA7EE0 /* Assets */,
+				6B4930C419A773C500DA7EE0 /* Classes */,
 				6B92CAB919A7461C004E8C9B /* Images.xcassets */,
 				6B92CAA819A7461C004E8C9B /* Supporting Files */,
 			);
@@ -155,7 +236,8 @@
 		6B92CAC619A7461C004E8C9B /* entourageTests */ = {
 			isa = PBXGroup;
 			children = (
-				6B92CACC19A7461C004E8C9B /* entourageTests.m */,
+				6B4930CF19A773EC00DA7EE0 /* Assets */,
+				6B4930D019A773EC00DA7EE0 /* Classes */,
 				6B92CAC719A7461C004E8C9B /* Supporting Files */,
 			);
 			path = entourageTests;
@@ -252,9 +334,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B4930CC19A773C500DA7EE0 /* Main.storyboard in Resources */,
 				6B92CABA19A7461C004E8C9B /* Images.xcassets in Resources */,
 				6B92CAAC19A7461C004E8C9B /* InfoPlist.strings in Resources */,
-				6B92CAB519A7461C004E8C9B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +344,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B4930DB19A779F200DA7EE0 /* poi_mock.json in Resources */,
 				6B92CACB19A7461C004E8C9B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,9 +389,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B4930DF19A77C2F00DA7EE0 /* OTHTTPRequestManager.m in Sources */,
+				6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */,
+				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
+				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
-				6B92CAB219A7461C004E8C9B /* OTAppDelegate.m in Sources */,
-				6B49DC1419A7471200023415 /* OTMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +401,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B92CACD19A7461C004E8C9B /* entourageTests.m in Sources */,
+				6B4930D919A7793200DA7EE0 /* OTTestHelper.m in Sources */,
+				6B4930D419A773EC00DA7EE0 /* OTPoiTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,20 +417,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6B4930C519A773C500DA7EE0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B4930C619A773C500DA7EE0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6B92CAAB19A7461C004E8C9B /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6B92CAB319A7461C004E8C9B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6B92CAB419A7461C004E8C9B /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		6B92CAC919A7461C004E8C9B /* InfoPlist.strings */ = {

@@ -12,6 +12,10 @@
 
 @interface OTMapViewController : UIViewController
 
+/**************************************************************************************************/
+#pragma mark - IBOutlets
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end

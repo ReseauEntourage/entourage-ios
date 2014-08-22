@@ -20,10 +20,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FLr-cF-t8Z">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="FLr-cF-t8Z" secondAttribute="centerY" id="0VJ-8b-3ax"/>
+                            <constraint firstAttribute="centerX" secondItem="FLr-cF-t8Z" secondAttribute="centerX" id="JAZ-NK-Ayw"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="indicatorView" destination="FLr-cF-t8Z" id="LUz-Z1-DVR"/>
                         <outlet property="mapView" destination="kMW-IR-OpM" id="6fI-iB-4zB"/>
                     </connections>
                 </viewController>
