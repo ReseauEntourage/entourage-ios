@@ -43,26 +43,16 @@
         }];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-
-    CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = 48.870535;
-    zoomLocation.longitude= 2.307400;
-
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 10, 10);
-
-    [[self mapView] setRegion:viewRegion animated:YES];
-}
-
 /**************************************************************************************************/
 #pragma mark - Private methods
 
 - (void)feedMapViewWithPoiArray:(NSArray *)array
 {
+    NSMutableArray *poiArray = [[NSMutableArray alloc] init];
+
     for (NSDictionary *dictionary in array) {
         OTPoi *poi = [OTPoi poiWithJSONDictionnary:dictionary];
+        [poiArray addObject:poi];
         CLLocationCoordinate2D poiCoordinate = {latitude: poi.latitude, longitude: poi.longitude};
 
         MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
@@ -72,6 +62,37 @@
 
         [[self mapView] addAnnotation:pointAnnotation];
     }
+
+    [self computeAndSetCenterForPoiArray:poiArray];
+}
+
+- (void)computeAndSetCenterForPoiArray:(NSMutableArray *)array {
+    double maxLat = -MAXFLOAT;
+    double maxLong = -MAXFLOAT;
+    double minLat = MAXFLOAT;
+    double minLong = MAXFLOAT;
+
+    for (OTPoi *poi in array) {
+        if (poi.latitude < minLat) {
+            minLat = poi.latitude;
+        }
+
+        if (poi.longitude < minLong) {
+            minLong = poi.longitude;
+        }
+
+        if (poi.latitude > maxLat) {
+            maxLat = poi.latitude;
+        }
+
+        if (poi.longitude > maxLong) {
+            maxLong = poi.longitude;
+        }
+    }
+
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake((maxLat + minLat) * 0.5, (maxLong + minLong) * 0.5);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(center, 10000, 10000);
+    [[self mapView] setRegion:viewRegion animated:YES];
 }
 
 
