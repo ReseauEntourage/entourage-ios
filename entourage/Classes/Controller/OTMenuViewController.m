@@ -82,7 +82,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     // Hack : because others segues don't still exist
-    if (indexPath.row < 1)
+    if (indexPath.row < 2)
     {
         OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
         [self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
@@ -98,7 +98,14 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
     if (nextViewController)
     {
         SWRevealViewController *revealViewController = self.revealViewController;
-        [revealViewController pushFrontViewController:nextViewController animated:YES];
+        if (nextViewController != self.revealViewController.frontViewController)
+        {
+            [revealViewController pushFrontViewController:nextViewController animated:YES];
+        }
+        else
+        {
+            [revealViewController revealToggle:self];
+        }
     }
     else
     {

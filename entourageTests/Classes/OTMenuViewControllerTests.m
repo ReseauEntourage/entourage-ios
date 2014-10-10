@@ -199,7 +199,7 @@
     [self.mockViewController verify];
 }
 
-- (void)test_openControllerWithSegueIdentifier_allExpectedMethodsAreCalledWhenSegueIdentifierExist
+- (void)test_openControllerWithSegueIdentifier_allExpectedMethodsAreCalledWhenSegueIdentifierExistAndNotCurrentFrontViewController
 {
     // Given
     NSString *segueIdentifier = @"segueId";
@@ -212,6 +212,31 @@
     
     id mockRevealViewController = [OCMockObject niceMockForClass:SWRevealViewController.class];
     OCMExpect([mockRevealViewController pushFrontViewController:nextViewController animated:YES]);
+    OCMStub([self.mockViewController revealViewController]).andReturn(mockRevealViewController);
+    
+    [[self.mockViewController reject] performSegueWithIdentifier:segueIdentifier sender:self.viewController];
+    
+    // When
+    [self.viewController openControllerWithSegueIdentifier:segueIdentifier];
+    
+    // Then
+    [self.mockViewController verify];
+}
+
+- (void)test_openControllerWithSegueIdentifier_allExpectedMethodsAreCalledWhenSegueIdentifierExistAndCurrentFrontViewController
+{
+    // Given
+    NSString *segueIdentifier = @"segueId";
+    
+    UIViewController *nextViewController = [UIViewController new];
+    
+    id mockControllersDictionary = [OCMockObject niceMockForClass:NSDictionary.class];
+    OCMStub([mockControllersDictionary objectForKey:segueIdentifier]).andReturn(nextViewController);
+    OCMStub([self.mockViewController controllersDictionary]).andReturn(mockControllersDictionary);
+    
+    id mockRevealViewController = [OCMockObject niceMockForClass:SWRevealViewController.class];
+    OCMStub([mockRevealViewController frontViewController]).andReturn(nextViewController);
+    OCMExpect([mockRevealViewController revealToggle:self.viewController]);
     OCMStub([self.mockViewController revealViewController]).andReturn(mockRevealViewController);
     
     [[self.mockViewController reject] performSegueWithIdentifier:segueIdentifier sender:self.viewController];
