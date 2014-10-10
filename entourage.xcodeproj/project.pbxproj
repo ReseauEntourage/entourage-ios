@@ -65,6 +65,7 @@
 		DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */; };
 		DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD519E85EA400FA218E /* OTMyMeetingsViewController.m */; };
 		DBBE8AD919E8652B00FA218E /* OTMenuItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD819E8652B00FA218E /* OTMenuItemTests.m */; };
+		DBBE8ADD19E8664000FA218E /* OTMenuTableViewCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8ADC19E8664000FA218E /* OTMenuTableViewCellTests.m */; };
 		DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */; };
 		DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF3619E7DCCA00031144 /* UIViewController+menu.m */; };
 		DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF4919E7EE5700031144 /* Sofia-Regular.otf */; };
@@ -154,6 +155,7 @@
 		DBBE8AD419E85EA400FA218E /* OTMyMeetingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMyMeetingsViewController.h; sourceTree = "<group>"; };
 		DBBE8AD519E85EA400FA218E /* OTMyMeetingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMyMeetingsViewController.m; sourceTree = "<group>"; };
 		DBBE8AD819E8652B00FA218E /* OTMenuItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuItemTests.m; sourceTree = "<group>"; };
+		DBBE8ADC19E8664000FA218E /* OTMenuTableViewCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuTableViewCellTests.m; sourceTree = "<group>"; };
 		DBE9EF2A19E7D73300031144 /* OTMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMenuViewController.h; sourceTree = "<group>"; };
 		DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuViewController.m; sourceTree = "<group>"; };
 		DBE9EF3519E7DCCA00031144 /* UIViewController+menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+menu.h"; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 		6B4930D019A773EC00DA7EE0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DBBE8ADB19E8663400FA218E /* View */,
 				DBE9EF3819E7DFCD00031144 /* Controller */,
 				6B4930D119A773EC00DA7EE0 /* Helper */,
 				6B4930D219A773EC00DA7EE0 /* Model */,
@@ -523,6 +526,14 @@
 				DBBE8ACD19E857A800FA218E /* OTMenuItem.m */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		DBBE8ADB19E8663400FA218E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DBBE8ADC19E8664000FA218E /* OTMenuTableViewCellTests.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		DBE9EF2919E7D71C00031144 /* Menu */ = {
@@ -778,6 +789,7 @@
 				6B4930D919A7793200DA7EE0 /* OTTestHelper.m in Sources */,
 				DBBE8A9F19E83C2800FA218E /* OTMenuViewControllerTests.m in Sources */,
 				6B1A847719E81F8E0020FB93 /* OTPoiServiceTest.m in Sources */,
+				DBBE8ADD19E8664000FA218E /* OTMenuTableViewCellTests.m in Sources */,
 				6B4930D419A773EC00DA7EE0 /* OTPoiTest.m in Sources */,
 				DBBE8AA219E83C9900FA218E /* OTMapViewControllerTests.m in Sources */,
 				6B89EFA119E7E8BE008F2600 /* OTPoiCategoryTest.m in Sources */,
