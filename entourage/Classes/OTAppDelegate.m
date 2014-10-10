@@ -32,6 +32,7 @@
 
 /**************************************************************************************************/
 #pragma mark - Configure UIAppearance
+
 - (void)configureUIAppearance
 {
     // UIStatusBar
