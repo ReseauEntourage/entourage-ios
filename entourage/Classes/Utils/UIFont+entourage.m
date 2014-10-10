@@ -15,7 +15,7 @@
     return [UIFont fontWithName:@"Sofia-Regular" size:size];
 }
 
-+ (instancetype)calibriBoldFontWithSize:(CGFloat)size
++ (instancetype)calibriFontWithSize:(CGFloat)size
 {
     return [UIFont fontWithName:@"Calibri" size:size];
 }

@@ -11,6 +11,6 @@
 @interface UIFont (entourage)
 
 + (instancetype)sofiaRegularFontWithSize:(CGFloat)size;
-+ (instancetype)calibriBoldFontWithSize:(CGFloat)size;
++ (instancetype)calibriFontWithSize:(CGFloat)size;
 
 @end

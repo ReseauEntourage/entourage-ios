@@ -44,7 +44,7 @@
     UINavigationBar.appearance.backIndicatorTransitionMaskImage = navigationBarImage;
     [UINavigationBar.appearance setBarStyle:UIBarStyleBlackTranslucent];
     
-    UIFont *navigationBarFont = [UIFont calibriBoldFontWithSize:18.];
+    UIFont *navigationBarFont = [UIFont calibriFontWithSize:18.];
     UINavigationBar.appearance.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     [UIBarButtonItem.appearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
                                                          NSFontAttributeName:navigationBarFont} forState:UIControlStateNormal];
