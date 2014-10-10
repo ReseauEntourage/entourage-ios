@@ -61,6 +61,8 @@
 		DBBE8AC819E83CB600FA218E /* poi_category-5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBBE8AB619E83CB600FA218E /* poi_category-5@2x.png */; };
 		DBBE8AC919E83CB600FA218E /* poi_category-6.png in Resources */ = {isa = PBXBuildFile; fileRef = DBBE8AB719E83CB600FA218E /* poi_category-6.png */; };
 		DBBE8ACA19E83CB600FA218E /* poi_category-6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBBE8AB819E83CB600FA218E /* poi_category-6@2x.png */; };
+		DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8ACD19E857A800FA218E /* OTMenuItem.m */; };
+		DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */; };
 		DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */; };
 		DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF3619E7DCCA00031144 /* UIViewController+menu.m */; };
 		DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF4919E7EE5700031144 /* Sofia-Regular.otf */; };
@@ -143,6 +145,10 @@
 		DBBE8AB619E83CB600FA218E /* poi_category-5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poi_category-5@2x.png"; sourceTree = "<group>"; };
 		DBBE8AB719E83CB600FA218E /* poi_category-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poi_category-6.png"; sourceTree = "<group>"; };
 		DBBE8AB819E83CB600FA218E /* poi_category-6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poi_category-6@2x.png"; sourceTree = "<group>"; };
+		DBBE8ACC19E857A800FA218E /* OTMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMenuItem.h; sourceTree = "<group>"; };
+		DBBE8ACD19E857A800FA218E /* OTMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuItem.m; sourceTree = "<group>"; };
+		DBBE8AD019E8580200FA218E /* OTMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMenuTableViewCell.h; sourceTree = "<group>"; };
+		DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuTableViewCell.m; sourceTree = "<group>"; };
 		DBE9EF2A19E7D73300031144 /* OTMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMenuViewController.h; sourceTree = "<group>"; };
 		DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuViewController.m; sourceTree = "<group>"; };
 		DBE9EF3519E7DCCA00031144 /* UIViewController+menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+menu.h"; sourceTree = "<group>"; };
@@ -302,6 +308,8 @@
 				6B4930E219A77E1D00DA7EE0 /* OTPoi.m */,
 				6BFE639219E7E85400C661AB /* OTPoiCategory.h */,
 				6BFE639319E7E85400C661AB /* OTPoiCategory.m */,
+				DBBE8ACC19E857A800FA218E /* OTMenuItem.h */,
+				DBBE8ACD19E857A800FA218E /* OTMenuItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -395,6 +403,7 @@
 		A8E10FAB19E82A1500DF4A01 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DBBE8ACF19E857F000FA218E /* Menu */,
 				A8E10FAC19E82A4800DF4A01 /* OTCustomAnnotation.h */,
 				A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */,
 			);
@@ -473,6 +482,15 @@
 				6B4930C919A773C500DA7EE0 /* OTMapViewController.m */,
 			);
 			name = Map;
+			sourceTree = "<group>";
+		};
+		DBBE8ACF19E857F000FA218E /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				DBBE8AD019E8580200FA218E /* OTMenuTableViewCell.h */,
+				DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		DBE9EF2919E7D71C00031144 /* Menu */ = {
@@ -706,6 +724,7 @@
 				A87D6AF319E84683007ACA29 /* OTCustomAnnotation.m in Sources */,
 				6B4930DF19A77C2F00DA7EE0 /* OTHTTPRequestManager.m in Sources */,
 				6B1A847119E811210020FB93 /* OTPoiService.m in Sources */,
+				DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */,
 				6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
@@ -715,6 +734,7 @@
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
+				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

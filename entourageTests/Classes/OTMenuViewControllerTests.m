@@ -12,23 +12,18 @@
 
 // Controller
 #import "OTMenuViewController.h"
+#import "SWRevealViewController.h"
 
-@interface OTMenuTableViewCell ()
+// Model
+#import "OTMenuItem.h"
 
-@property (nonatomic, weak) IBOutlet UILabel *itemLabel;
-
-@end
-
-@interface OTMenuItem ()
-
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *segueIdentifier;
-
-@end
+// View
+#import "OTMenuTableViewCell.h"
 
 @interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSArray *menuItems;
+@property (nonatomic, strong) NSMutableDictionary *controllersDictionary;
 
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier;
 + (NSArray *)createMenuItems;
@@ -64,9 +59,21 @@
 /**************************************************************************************************/
 #pragma mark - - (void)viewDidLoad
 
-- (void)test_viewDidLoad_allExpectedMethodsAreCalled
+- (void)test_viewDidLoad_allExpectedMethodsAreCalledWhenFrontViewControllerExists
 {
     // Given
+    self.viewController.menuItems = nil;
+    self.viewController.controllersDictionary = nil;
+    
+    UIViewController *frontViewController = [UIViewController new];
+    
+    id mockRevealViewController = [OCMockObject niceMockForClass:SWRevealViewController.class];
+    OCMExpect([mockRevealViewController frontViewController]).andReturn(frontViewController);
+    OCMStub([self.mockViewController revealViewController]).andReturn(mockRevealViewController);
+    
+    id mockDictionary = [OCMockObject niceMockForClass:NSMutableDictionary.class];
+    OCMExpect([mockDictionary setObject:frontViewController forKey:OTMenuViewControllerSegueMenuMapIdentifier]);
+    
     NSArray *items = @[];
     OCMExpect([self.mockViewController createMenuItems]).andReturn(items);
     
@@ -75,8 +82,41 @@
     
     // Then
     OCMVerify(self.mockViewController);
+    OCMVerify(mockDictionary);
+    OCMVerify(mockRevealViewController);
     XCTAssertEqual(self.viewController.menuItems, items, @"");
+    XCTAssertNotNil(self.viewController.controllersDictionary, @"");
 }
+
+- (void)test_viewDidLoad_allExpectedMethodsAreCalledWhenFrontViewControllerDoesntExist
+{
+    // Given
+    self.viewController.menuItems = nil;
+    self.viewController.controllersDictionary = nil;
+    
+    UIViewController *frontViewController = nil;
+    
+    id mockRevealViewController = [OCMockObject niceMockForClass:SWRevealViewController.class];
+    OCMExpect([mockRevealViewController frontViewController]).andReturn(frontViewController);
+    OCMStub([self.mockViewController revealViewController]).andReturn(mockRevealViewController);
+    
+    id mockDictionary = [OCMockObject niceMockForClass:NSMutableDictionary.class];
+    [[mockDictionary reject] setObject:frontViewController forKey:OTMenuViewControllerSegueMenuMapIdentifier];
+    
+    NSArray *items = @[];
+    OCMExpect([self.mockViewController createMenuItems]).andReturn(items);
+    
+    // When
+    [self.viewController viewDidLoad];
+    
+    // Then
+    OCMVerify(self.mockViewController);
+    OCMVerify(mockDictionary);
+    OCMVerify(mockRevealViewController);
+    XCTAssertEqual(self.viewController.menuItems, items, @"");
+    XCTAssertNotNil(self.viewController.controllersDictionary, @"");
+}
+
 
 /**************************************************************************************************/
 #pragma mark - - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -136,11 +176,45 @@
 /**************************************************************************************************/
 #pragma mark - - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier
 
-- (void)test_openControllerWithSegueIdentifier_allExpectedMethodsAreCalled
+- (void)test_openControllerWithSegueIdentifier_allExpectedMethodsAreCalledWhenSegueIdentifierDoesntExist
 {
     // Given
     NSString *segueIdentifier = @"segueId";
+
+    UIViewController *nextViewController = nil;
+    
+    id mockControllersDictionary = [OCMockObject niceMockForClass:NSDictionary.class];
+    OCMStub([mockControllersDictionary objectForKey:segueIdentifier]).andReturn(nextViewController);
+    
+    id mockRevealViewController = [OCMockObject niceMockForClass:SWRevealViewController.class];
+    OCMStub([self.mockViewController revealViewController]).andReturn(mockRevealViewController);
+    [[mockRevealViewController reject] pushFrontViewController:OCMOCK_ANY animated:YES];
+    
     OCMExpect([self.mockViewController performSegueWithIdentifier:segueIdentifier sender:self.viewController]);
+    
+    // When
+    [self.viewController openControllerWithSegueIdentifier:segueIdentifier];
+    
+    // Then
+    [self.mockViewController verify];
+}
+
+- (void)test_openControllerWithSegueIdentifier_allExpectedMethodsAreCalledWhenSegueIdentifierExist
+{
+    // Given
+    NSString *segueIdentifier = @"segueId";
+    
+    UIViewController *nextViewController = [UIViewController new];
+    
+    id mockControllersDictionary = [OCMockObject niceMockForClass:NSDictionary.class];
+    OCMStub([mockControllersDictionary objectForKey:segueIdentifier]).andReturn(nextViewController);
+    OCMStub([self.mockViewController controllersDictionary]).andReturn(mockControllersDictionary);
+    
+    id mockRevealViewController = [OCMockObject niceMockForClass:SWRevealViewController.class];
+    OCMExpect([mockRevealViewController pushFrontViewController:nextViewController animated:YES]);
+    OCMStub([self.mockViewController revealViewController]).andReturn(mockRevealViewController);
+    
+    [[self.mockViewController reject] performSegueWithIdentifier:segueIdentifier sender:self.viewController];
     
     // When
     [self.viewController openControllerWithSegueIdentifier:segueIdentifier];
@@ -221,6 +295,34 @@
     
     // Then
     XCTAssertEqualObjects(result, menuItem, @"");*/
+}
+
+/**************************************************************************************************/
+#pragma mark - - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+
+- (void)test_prepareForSegue_allExpectedMethodsAreCalledWhenSegueIdentifierDoesntExistInDictionary
+{
+    // Given
+    NSString *segueIdentifier = @"segueId";
+    
+    UIViewController *nextViewController = nil;
+    UIViewController *destinationController = [UIViewController new];
+    
+    id mockStoryboardSegue = [OCMockObject niceMockForClass:UIStoryboardSegue.class];
+    OCMExpect([mockStoryboardSegue identifier]).andReturn(segueIdentifier);
+    OCMExpect([mockStoryboardSegue destinationViewController]).andReturn(destinationController);
+    
+    id mockControllersDictionary = [OCMockObject niceMockForClass:NSMutableDictionary.class];
+    OCMExpect([mockControllersDictionary objectForKey:segueIdentifier]).andReturn(nextViewController);
+    OCMExpect([mockControllersDictionary setObject:destinationController forKey:segueIdentifier]);
+    OCMStub([self.mockViewController controllersDictionary]).andReturn(mockControllersDictionary);
+    
+    // When
+    [self.viewController prepareForSegue:mockStoryboardSegue sender:OCMOCK_ANY];
+    
+    // Then
+    [self.mockViewController verify];
+    [mockStoryboardSegue verify];
 }
 
 @end

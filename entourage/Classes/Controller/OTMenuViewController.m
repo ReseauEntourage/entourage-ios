@@ -8,80 +8,25 @@
 
 #import "OTMenuViewController.h"
 
-NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier";
+// Controller
+#import "SWRevealViewController.h"
 
-/**************************************************************************************************/
-// OTMenuTableViewCell
-/**************************************************************************************************/
+// Model
+#import "OTMenuItem.h"
 
-@interface OTMenuTableViewCell ()
+// View
+#import "OTMenuTableViewCell.h"
 
-/**************************************************************************************************/
-#pragma mark - Getters and Setters
-
-@property (nonatomic, weak) IBOutlet UILabel *itemLabel;
-
-@end
-
-@implementation OTMenuTableViewCell
-
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
-{
-    self.itemLabel.highlighted = highlighted;
-}
-
-@end
-
-/**************************************************************************************************/
-// OTMenuItem
-/**************************************************************************************************/
-
-@interface OTMenuItem ()
-
-/**************************************************************************************************/
-#pragma mark - Getters and Setters
-
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *segueIdentifier;
-
-/**************************************************************************************************/
-#pragma mark - Birth and Death
-
-- (instancetype)initWithTitle:(NSString *)title segueIdentifier:(NSString *)segueIdentifier;
-
-@end
-
-@implementation OTMenuItem
-
-/**
- * Init OTMenuItem with title and segueIdentifier
- *
- * @param title
- * The title to display in menu
- *
- * @param segueIdentifier
- * The segueIdentifier corresponding to Main.storyboard to naviguate in different items menu
- *
- * @return OTMenuItem created
- */
-- (instancetype)initWithTitle:(NSString *)title segueIdentifier:(NSString *)segueIdentifier
-{
-    self = [super init];
-    
-    if (self)
-    {
-        _title = title;
-        _segueIdentifier = segueIdentifier;
-    }
-    
-    return self;
-}
-
-@end
-
-/**************************************************************************************************/
-// OTMenuViewController
-/**************************************************************************************************/
+NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuMapIdentifier";
+NSString *const OTMenuViewControllerSegueMenuMyMeetingsIdentifier = @"segueMenuMyMeetingsIdentifier";
+NSString *const OTMenuViewControllerSegueMenuPracticalInformationIdentifier = @"segueMenuPracticalInformationIdentifier";
+NSString *const OTMenuViewControllerSegueMenuForumIdentifier = @"segueMenuForumIdentifier";
+NSString *const OTMenuViewControllerSegueMenuMembersIdentifier = @"segueMenuMembersIdentifier";
+NSString *const OTMenuViewControllerSegueMenuMyProfileIdentifier = @"segueMenuMyProfileIdentifier";
+NSString *const OTMenuViewControllerSegueMenuMyNotificationsIdentifier = @"segueMenuMyNotificationsIdentifier";
+NSString *const OTMenuViewControllerSegueMenuHelpIdentifier = @"segueMenuHelpIdentifier";
+NSString *const OTMenuViewControllerSegueMenuYourOpinionIdentifier = @"segueMenuYourOpinionIdentifier";
+NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
 
 @interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -93,6 +38,7 @@ NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier"
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
+@property (nonatomic, strong) NSMutableDictionary *controllersDictionary;
 
 @end
 
@@ -106,6 +52,13 @@ NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier"
     [super viewDidLoad];
     
     self.menuItems = [OTMenuViewController createMenuItems];
+    self.controllersDictionary = [NSMutableDictionary dictionary];
+    UIViewController *frontViewController = self.revealViewController.frontViewController;
+    if (frontViewController)
+    {
+        [self.controllersDictionary setObject:frontViewController
+                                       forKey:OTMenuViewControllerSegueMenuMapIdentifier];
+    }
 }
 
 /**************************************************************************************************/
@@ -128,6 +81,7 @@ NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier"
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    // Hack : because others segues don't still exist
     if (indexPath.row < 1)
     {
         OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
@@ -140,7 +94,16 @@ NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier"
 
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier
 {
-    [self performSegueWithIdentifier:segueIdentifier sender:self];
+    UIViewController *nextViewController = [self.controllersDictionary objectForKey:segueIdentifier];
+    if (nextViewController)
+    {
+        SWRevealViewController *revealViewController = self.revealViewController;
+        [revealViewController pushFrontViewController:nextViewController animated:YES];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:segueIdentifier sender:self];
+    }
 }
 
 /**************************************************************************************************/
@@ -152,57 +115,56 @@ NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier"
     
     // Map
     OTMenuItem *itemMap = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_map_title", @"")
-                                            segueIdentifier:@"segueMenuIdentifierForMap"];
+                                            segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
     [menuItems addObject:itemMap];
     
     // My Meetings
     OTMenuItem *itemMyMeetings = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myMeetings_title", @"")
-                                                   segueIdentifier:@"segueMenuIdentifierForMyMeetings"];
+                                                   segueIdentifier:OTMenuViewControllerSegueMenuMyMeetingsIdentifier];
     [menuItems addObject:itemMyMeetings];
     
     // Practical Information
     OTMenuItem *itemPracticalInformation = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_practicalInformation_title", @"")
-                                                             segueIdentifier:@"segueMenuIdentifierForPracticalInformation"];
+                                                             segueIdentifier:OTMenuViewControllerSegueMenuPracticalInformationIdentifier];
     [menuItems addObject:itemPracticalInformation];
     
     // Forum
     OTMenuItem *itemForum = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_forum_title", @"")
-                                                             segueIdentifier:@"segueMenuIdentifierForForum"];
+                                                             segueIdentifier:OTMenuViewControllerSegueMenuForumIdentifier];
     [menuItems addObject:itemForum];
     
     // Members
     OTMenuItem *itemMembers = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_members_title", @"")
-                                                             segueIdentifier:@"segueMenuIdentifierForMembers"];
+                                                             segueIdentifier:OTMenuViewControllerSegueMenuMembersIdentifier];
     [menuItems addObject:itemMembers];
     
     // My Profile
     OTMenuItem *itemMyProfile = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myProfile_title", @"")
-                                                             segueIdentifier:@"segueMenuIdentifierForMyProfile"];
+                                                             segueIdentifier:OTMenuViewControllerSegueMenuMyProfileIdentifier];
     [menuItems addObject:itemMyProfile];
     
     // My Notifications
     OTMenuItem *itemMyNotifications = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myNotifications_title", @"")
-                                                             segueIdentifier:@"segueMenuIdentifierForMyNotifications"];
+                                                             segueIdentifier:OTMenuViewControllerSegueMenuMyNotificationsIdentifier];
     [menuItems addObject:itemMyNotifications];
     
     // Help
     OTMenuItem *itemHelp = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_help_title", @"")
-                                                             segueIdentifier:@"segueMenuIdentifierForHelp"];
+                                                             segueIdentifier:OTMenuViewControllerSegueMenuHelpIdentifier];
     [menuItems addObject:itemHelp];
     
     // Your opinion
     OTMenuItem *itemYourOpinion = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_yourOpinion_title", @"")
-                                                             segueIdentifier:@"segueMenuIdentifierForYourOpinion"];
+                                                             segueIdentifier:OTMenuViewControllerSegueMenuYourOpinionIdentifier];
     [menuItems addObject:itemYourOpinion];
     
     // Disconnect
     OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
-                                                    segueIdentifier:@"segueMenuIdentifierForDisconnect"];
+                                                    segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
     [menuItems addObject:itemDisconnect];
 
     return menuItems;
 }
-
 
 - (OTMenuItem *)menuItemsAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -213,6 +175,17 @@ NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier"
     }
     
     return menuItem;
+}
+
+/**************************************************************************************************/
+#pragma mark - Storyboard
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if (![self.controllersDictionary objectForKey:segue.identifier])
+    {
+        [self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
+    }
 }
 
 @end

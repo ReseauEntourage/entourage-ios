@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OTMenuTableViewCell : UITableViewCell
-
-@end
-
-@interface OTMenuItem : NSObject
-
-@end
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuMapIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuMyMeetingsIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuPracticalInformationIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuForumIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuMembersIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuMyProfileIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuMyNotificationsIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuHelpIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuYourOpinionIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier;
 
 @interface OTMenuViewController : UIViewController
 
