@@ -55,6 +55,10 @@
 		DBE9EF4319E7ECD900031144 /* ic_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF4119E7ECD900031144 /* ic_menu@2x.png */; };
 		DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF4919E7EE5700031144 /* Sofia-Regular.otf */; };
 		DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF5019E7EFA200031144 /* UIFont+entourage.m */; };
+		DBE9EF5A19E80AF500031144 /* menu_background.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5819E80AF500031144 /* menu_background.png */; };
+		DBE9EF5B19E80AF500031144 /* menu_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5919E80AF500031144 /* menu_background@2x.png */; };
+		DBE9EF5F19E80EAA00031144 /* bg-top-header.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5D19E80EAA00031144 /* bg-top-header.png */; };
+		DBE9EF6019E80EAA00031144 /* bg-top-header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5E19E80EAA00031144 /* bg-top-header@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +138,14 @@
 		DBE9EF4919E7EE5700031144 /* Sofia-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sofia-Regular.otf"; sourceTree = "<group>"; };
 		DBE9EF4F19E7EFA200031144 /* UIFont+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+entourage.h"; sourceTree = "<group>"; };
 		DBE9EF5019E7EFA200031144 /* UIFont+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+entourage.m"; sourceTree = "<group>"; };
+		DBE9EF5219E7F2A800031144 /* Calibri-Bold-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Bold-Italic.ttf"; sourceTree = "<group>"; };
+		DBE9EF5319E7F2A800031144 /* Calibri-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Bold.ttf"; sourceTree = "<group>"; };
+		DBE9EF5419E7F2A800031144 /* Calibri-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Italic.ttf"; sourceTree = "<group>"; };
+		DBE9EF5519E7F2A800031144 /* Calibri.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Calibri.ttf; sourceTree = "<group>"; };
+		DBE9EF5819E80AF500031144 /* menu_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_background.png; sourceTree = "<group>"; };
+		DBE9EF5919E80AF500031144 /* menu_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_background@2x.png"; sourceTree = "<group>"; };
+		DBE9EF5D19E80EAA00031144 /* bg-top-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-top-header.png"; sourceTree = "<group>"; };
+		DBE9EF5E19E80EAA00031144 /* bg-top-header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-top-header@2x.png"; sourceTree = "<group>"; };
 		E54D38E2663076C6388D22C9 /* Pods-entourageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				DBE9EF4419E7EE5700031144 /* Fonts */,
+				DBE9EF5C19E80EAA00031144 /* Common */,
 				DBE9EF3F19E7ECD900031144 /* Menu */,
 				A8D2372A19E7ECDD005C62D9 /* picto category */,
 				A816F83519E80D3C003EEF86 /* Localizable.strings */,
@@ -423,6 +436,8 @@
 		DBE9EF3F19E7ECD900031144 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				DBE9EF5819E80AF500031144 /* menu_background.png */,
+				DBE9EF5919E80AF500031144 /* menu_background@2x.png */,
 				DBE9EF4019E7ECD900031144 /* ic_menu.png */,
 				DBE9EF4119E7ECD900031144 /* ic_menu@2x.png */,
 			);
@@ -432,9 +447,22 @@
 		DBE9EF4419E7EE5700031144 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				DBE9EF5219E7F2A800031144 /* Calibri-Bold-Italic.ttf */,
+				DBE9EF5319E7F2A800031144 /* Calibri-Bold.ttf */,
+				DBE9EF5419E7F2A800031144 /* Calibri-Italic.ttf */,
+				DBE9EF5519E7F2A800031144 /* Calibri.ttf */,
 				DBE9EF4919E7EE5700031144 /* Sofia-Regular.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		DBE9EF5C19E80EAA00031144 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DBE9EF5D19E80EAA00031144 /* bg-top-header.png */,
+				DBE9EF5E19E80EAA00031144 /* bg-top-header@2x.png */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -523,9 +551,13 @@
 			files = (
 				A8D2373B19E7ECDD005C62D9 /* poi_category-3.png in Resources */,
 				6B4930CC19A773C500DA7EE0 /* Main.storyboard in Resources */,
+				DBE9EF5F19E80EAA00031144 /* bg-top-header.png in Resources */,
+				DBE9EF6019E80EAA00031144 /* bg-top-header@2x.png in Resources */,
 				DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */,
 				A8D2373F19E7ECDD005C62D9 /* poi_category-5.png in Resources */,
 				A8D2373919E7ECDD005C62D9 /* poi_category-2.png in Resources */,
+				DBE9EF5A19E80AF500031144 /* menu_background.png in Resources */,
+				DBE9EF5B19E80AF500031144 /* menu_background@2x.png in Resources */,
 				6B92CABA19A7461C004E8C9B /* Images.xcassets in Resources */,
 				DBE9EF4219E7ECD900031144 /* ic_menu.png in Resources */,
 				6B92CAAC19A7461C004E8C9B /* InfoPlist.strings in Resources */,

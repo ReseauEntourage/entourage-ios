@@ -39,8 +39,14 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Sofia-Regular.otf</string>
+		<string>Calibri-Bold-Italic.ttf</string>
+		<string>Calibri-Bold.ttf</string>
+		<string>Calibri-Italic.ttf</string>
+		<string>Calibri.ttf</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Pour afficher les POIs, vos rencontres, etc....</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
