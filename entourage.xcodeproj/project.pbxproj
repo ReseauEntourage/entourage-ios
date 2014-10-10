@@ -41,8 +41,6 @@
 		DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5319E7F2A800031144 /* Calibri-Bold.ttf */; };
 		DBBE8A9819E81AF600FA218E /* Calibri-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5419E7F2A800031144 /* Calibri-Italic.ttf */; };
 		DBBE8A9919E81AF600FA218E /* Calibri.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5519E7F2A800031144 /* Calibri.ttf */; };
-		DBBE8A9F19E83C2800FA218E /* OTMenuViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8A9E19E83C2800FA218E /* OTMenuViewControllerTests.m */; };
-		DBBE8AA219E83C9900FA218E /* OTMapViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AA119E83C9900FA218E /* OTMapViewControllerTests.m */; };
 		DBBE8AB919E83CB600FA218E /* bg-top-header.png in Resources */ = {isa = PBXBuildFile; fileRef = DBBE8AA519E83CB600FA218E /* bg-top-header.png */; };
 		DBBE8ABA19E83CB600FA218E /* bg-top-header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBBE8AA619E83CB600FA218E /* bg-top-header@2x.png */; };
 		DBBE8ABB19E83CB600FA218E /* ic_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = DBBE8AA819E83CB600FA218E /* ic_menu.png */; };
@@ -65,8 +63,10 @@
 		DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */; };
 		DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD519E85EA400FA218E /* OTMyMeetingsViewController.m */; };
 		DBBE8AD919E8652B00FA218E /* OTMenuItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD819E8652B00FA218E /* OTMenuItemTests.m */; };
-		DBBE8ADD19E8664000FA218E /* OTMenuTableViewCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8ADC19E8664000FA218E /* OTMenuTableViewCellTests.m */; };
 		DBBE8AE019E8723700FA218E /* OTAppDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8ADF19E8723700FA218E /* OTAppDelegateTests.m */; };
+		DBBE8AE619E873C500FA218E /* OTMapViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AE219E873C500FA218E /* OTMapViewControllerTests.m */; };
+		DBBE8AE719E873C500FA218E /* OTMenuViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AE319E873C500FA218E /* OTMenuViewControllerTests.m */; };
+		DBBE8AE819E873C500FA218E /* OTMenuTableViewCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AE519E873C500FA218E /* OTMenuTableViewCellTests.m */; };
 		DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */; };
 		DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF3619E7DCCA00031144 /* UIViewController+menu.m */; };
 		DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF4919E7EE5700031144 /* Sofia-Regular.otf */; };
@@ -129,8 +129,6 @@
 		A8E10FAC19E82A4800DF4A01 /* OTCustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCustomAnnotation.h; sourceTree = "<group>"; };
 		A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCustomAnnotation.m; sourceTree = "<group>"; };
 		C73A9D64DE47F808E1B2C0F4 /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
-		DBBE8A9E19E83C2800FA218E /* OTMenuViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuViewControllerTests.m; sourceTree = "<group>"; };
-		DBBE8AA119E83C9900FA218E /* OTMapViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapViewControllerTests.m; sourceTree = "<group>"; };
 		DBBE8AA519E83CB600FA218E /* bg-top-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-top-header.png"; sourceTree = "<group>"; };
 		DBBE8AA619E83CB600FA218E /* bg-top-header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-top-header@2x.png"; sourceTree = "<group>"; };
 		DBBE8AA819E83CB600FA218E /* ic_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_menu.png; sourceTree = "<group>"; };
@@ -156,8 +154,10 @@
 		DBBE8AD419E85EA400FA218E /* OTMyMeetingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMyMeetingsViewController.h; sourceTree = "<group>"; };
 		DBBE8AD519E85EA400FA218E /* OTMyMeetingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMyMeetingsViewController.m; sourceTree = "<group>"; };
 		DBBE8AD819E8652B00FA218E /* OTMenuItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuItemTests.m; sourceTree = "<group>"; };
-		DBBE8ADC19E8664000FA218E /* OTMenuTableViewCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuTableViewCellTests.m; sourceTree = "<group>"; };
 		DBBE8ADF19E8723700FA218E /* OTAppDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAppDelegateTests.m; sourceTree = "<group>"; };
+		DBBE8AE219E873C500FA218E /* OTMapViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapViewControllerTests.m; sourceTree = "<group>"; };
+		DBBE8AE319E873C500FA218E /* OTMenuViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuViewControllerTests.m; sourceTree = "<group>"; };
+		DBBE8AE519E873C500FA218E /* OTMenuTableViewCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuTableViewCellTests.m; sourceTree = "<group>"; };
 		DBE9EF2A19E7D73300031144 /* OTMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMenuViewController.h; sourceTree = "<group>"; };
 		DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuViewController.m; sourceTree = "<group>"; };
 		DBE9EF3519E7DCCA00031144 /* UIViewController+menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+menu.h"; sourceTree = "<group>"; };
@@ -243,11 +243,11 @@
 				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
 				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
 				6B4930C519A773C500DA7EE0 /* Main.storyboard */,
-				A8E10FAB19E82A1500DF4A01 /* View */,
 				6B4930E019A77DFE00DA7EE0 /* Model */,
 				6B4930C719A773C500DA7EE0 /* Controller */,
-				6B4930DC19A77C2F00DA7EE0 /* Manager */,
+				A8E10FAB19E82A1500DF4A01 /* View */,
 				6B1A846E19E8110B0020FB93 /* Service */,
+				6B4930DC19A77C2F00DA7EE0 /* Manager */,
 				6BFE639519E7E85D00C661AB /* Utils */,
 			);
 			path = Classes;
@@ -276,12 +276,12 @@
 		6B4930D019A773EC00DA7EE0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DBBE8ADB19E8663400FA218E /* View */,
-				DBE9EF3819E7DFCD00031144 /* Controller */,
+				DBBE8ADF19E8723700FA218E /* OTAppDelegateTests.m */,
 				6B4930D119A773EC00DA7EE0 /* Helper */,
 				6B4930D219A773EC00DA7EE0 /* Model */,
+				DBBE8AE119E873C500FA218E /* Controller */,
+				DBBE8AE419E873C500FA218E /* View */,
 				6B1A847519E81F770020FB93 /* Service */,
-				DBBE8ADF19E8723700FA218E /* OTAppDelegateTests.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -422,22 +422,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		DBBE8A9D19E83C0B00FA218E /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				DBBE8A9E19E83C2800FA218E /* OTMenuViewControllerTests.m */,
-			);
-			name = Menu;
-			sourceTree = "<group>";
-		};
-		DBBE8AA019E83C8600FA218E /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				DBBE8AA119E83C9900FA218E /* OTMapViewControllerTests.m */,
-			);
-			name = Map;
-			sourceTree = "<group>";
-		};
 		DBBE8AA319E83CB600FA218E /* Design */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,18 +515,35 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
-		DBBE8ADB19E8663400FA218E /* View */ = {
+		DBBE8AE119E873C500FA218E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DBBE8ADE19E8714B00FA218E /* Menu */,
+				DBBE8AE919E873CA00FA218E /* Menu */,
+				DBBE8AE219E873C500FA218E /* OTMapViewControllerTests.m */,
 			);
-			name = View;
+			path = Controller;
 			sourceTree = "<group>";
 		};
-		DBBE8ADE19E8714B00FA218E /* Menu */ = {
+		DBBE8AE419E873C500FA218E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DBBE8ADC19E8664000FA218E /* OTMenuTableViewCellTests.m */,
+				DBBE8AEA19E873D100FA218E /* Menu */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DBBE8AE919E873CA00FA218E /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				DBBE8AE319E873C500FA218E /* OTMenuViewControllerTests.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		DBBE8AEA19E873D100FA218E /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				DBBE8AE519E873C500FA218E /* OTMenuTableViewCellTests.m */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -556,15 +557,6 @@
 				DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */,
 			);
 			name = Menu;
-			sourceTree = "<group>";
-		};
-		DBE9EF3819E7DFCD00031144 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				DBBE8AA019E83C8600FA218E /* Map */,
-				DBBE8A9D19E83C0B00FA218E /* Menu */,
-			);
-			name = Controller;
 			sourceTree = "<group>";
 		};
 		DBE9EF4419E7EE5700031144 /* Fonts */ = {
@@ -797,15 +789,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBBE8AE719E873C500FA218E /* OTMenuViewControllerTests.m in Sources */,
 				6B4930D919A7793200DA7EE0 /* OTTestHelper.m in Sources */,
-				DBBE8A9F19E83C2800FA218E /* OTMenuViewControllerTests.m in Sources */,
 				6B1A847719E81F8E0020FB93 /* OTPoiServiceTest.m in Sources */,
-				DBBE8ADD19E8664000FA218E /* OTMenuTableViewCellTests.m in Sources */,
+				DBBE8AE819E873C500FA218E /* OTMenuTableViewCellTests.m in Sources */,
 				6B4930D419A773EC00DA7EE0 /* OTPoiTest.m in Sources */,
-				DBBE8AA219E83C9900FA218E /* OTMapViewControllerTests.m in Sources */,
 				DBBE8AE019E8723700FA218E /* OTAppDelegateTests.m in Sources */,
 				6B89EFA119E7E8BE008F2600 /* OTPoiCategoryTest.m in Sources */,
 				DBBE8AD919E8652B00FA218E /* OTMenuItemTests.m in Sources */,
+				DBBE8AE619E873C500FA218E /* OTMapViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
