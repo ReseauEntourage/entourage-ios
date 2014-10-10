@@ -22,7 +22,8 @@
  * @param segueIdentifier
  * The segueIdentifier corresponding to Main.storyboard to naviguate in different items menu
  *
- * @return OTMenuItem created
+ * @return OTMenuItem
+ * The new instance.
  */
 - (instancetype)initWithTitle:(NSString *)title segueIdentifier:(NSString *)segueIdentifier
 {

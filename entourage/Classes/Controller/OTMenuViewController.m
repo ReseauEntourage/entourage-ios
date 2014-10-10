@@ -88,6 +88,16 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 /**************************************************************************************************/
 #pragma mark - Actions
 
+/**
+ * Method which opens the controller according to segueIdentifier.
+ * This method has a particuler implementation.
+ * - if the controller is not instanciated, we load it by the segue in Main.Storyboard
+ * - if the controller is instanciated and isn't the current frontViewController, we push the new controller
+ * - if the controller is instanciated and is the current frontViewController, we do only a revealToggle in order to avoid the effect of disappearance and  appearance
+ *
+ * @param segueIdentifier
+ * The identifier of a segue
+ */
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier
 {
     UIViewController *nextViewController = [self.controllersDictionary objectForKey:segueIdentifier];
@@ -123,6 +133,13 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 /**************************************************************************************************/
 #pragma mark - Private methods
 
+/**
+ * Method which configure controllersDictionary with the first controller displayed by Main.storyboard.
+ * According to the storyboard, this first controller is the Map
+ * This method should be called in viewDidLoad
+ *
+ * @see OTMenuViewController - viewDidLoad
+ */
 - (void)configureControllersDictionary
 {
     UIViewController *frontViewController = self.revealViewController.frontViewController;
@@ -133,6 +150,12 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
     }
 }
 
+/**
+ * Method which creates all MenuItems in expected order for Menu
+ *
+ * @return NSArray<OTMenuItem>
+ * All expected MenuItems
+ */
 + (NSArray *)createMenuItems
 {
     NSMutableArray *menuItems = [NSMutableArray array];
@@ -190,6 +213,15 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
     return menuItems;
 }
 
+/**
+ * Method which returns MenuItem according an indexpath
+ *
+ * @param indexPath
+ * The indexPath to find the corresponding MenuItem in MenuItems
+ *
+ * @return OTMenuItem
+ * The MenuItem according the indexpath
+ */
 - (OTMenuItem *)menuItemsAtIndexPath:(NSIndexPath *)indexPath
 {
     OTMenuItem *menuItem = nil;
