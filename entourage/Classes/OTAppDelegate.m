@@ -41,8 +41,7 @@
     // UINavigationBar
     UIImage *navigationBarImage = [UIImage imageNamed:@"bg-top-header.png"];
     UINavigationBar.appearance.barTintColor = [UIColor clearColor];
-    UINavigationBar.appearance.backIndicatorImage = navigationBarImage;
-    UINavigationBar.appearance.backIndicatorTransitionMaskImage = navigationBarImage;
+    [[UINavigationBar appearance] setBackgroundImage:navigationBarImage forBarMetrics:UIBarMetricsDefault];
     [UINavigationBar.appearance setBarStyle:UIBarStyleBlackTranslucent];
     
     UIFont *navigationBarFont = [UIFont calibriFontWithSize:18.];
