@@ -53,7 +53,7 @@
     for (NSDictionary *dictionary in array) {
         OTPoi *poi = [OTPoi poiWithJSONDictionnary:dictionary];
         [poiArray addObject:poi];
-        CLLocationCoordinate2D poiCoordinate = {latitude: poi.latitude, longitude: poi.longitude};
+        CLLocationCoordinate2D poiCoordinate = {.latitude =  poi.latitude, .longitude =  poi.longitude};
 
         MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
         pointAnnotation.coordinate = poiCoordinate;
