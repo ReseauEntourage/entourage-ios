@@ -8,8 +8,6 @@
 
 #import "AFHTTPRequestOperationManager.h"
 
-extern NSString *const kAPIPoiRoute;
-
 @interface OTHTTPRequestManager : NSObject
 
 /**************************************************************************************************/

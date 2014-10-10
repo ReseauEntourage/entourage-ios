@@ -22,7 +22,7 @@
     NSDictionary *nilDictionary = nil;
     
     // When
-    OTPoiCategory *poiCategory = [OTPoiCategory poiWithJSONDictionnary:nilDictionary];
+    OTPoiCategory *poiCategory = [OTPoiCategory categoryWithJSONDictionnary:nilDictionary];
     
     // Then
     XCTAssertNil(poiCategory, @"");
@@ -34,7 +34,7 @@
     id array = [[NSArray alloc] init];
     
     // When
-    OTPoiCategory *poiCategory = [OTPoiCategory poiWithJSONDictionnary:array];
+    OTPoiCategory *poiCategory = [OTPoiCategory categoryWithJSONDictionnary:array];
     
     // Then
     XCTAssertNil(poiCategory, @"");
@@ -46,7 +46,7 @@
     NSDictionary *dictionary = [OTTestHelper parseJSONFromFileNamed:@"poi_category_mock"];
     
     // When
-    OTPoiCategory *poiCategory = [OTPoiCategory poiWithJSONDictionnary:dictionary];
+    OTPoiCategory *poiCategory = [OTPoiCategory categoryWithJSONDictionnary:dictionary];
     
     // Then
     XCTAssertNotNil(poiCategory, @"");

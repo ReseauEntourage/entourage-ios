@@ -19,7 +19,7 @@ NSString *const kCategoryName = @"name";
 /**************************************************************************************************/
 #pragma mark - Birth & Death
 
-+ (OTPoiCategory *)poiWithJSONDictionnary:(NSDictionary *)dictionary
++ (OTPoiCategory *)categoryWithJSONDictionnary:(NSDictionary *)dictionary
 {
     OTPoiCategory *poiCategory = nil;
 

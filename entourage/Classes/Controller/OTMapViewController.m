@@ -12,15 +12,17 @@
 #import "OTMapViewController.h"
 #import "UIViewController+menu.h"
 
-#import "OTHTTPRequestManager.h"
 #import "OTPoi.h"
+#import "OTPoiService.h"
 
 @interface OTMapViewController ()
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (nonatomic, strong) UIBarButtonItem *menuButton;
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
+@property(weak, nonatomic) IBOutlet MKMapView *mapView;
+@property(nonatomic, strong) UIBarButtonItem *menuButton;
 
+@property(nonatomic, strong) NSArray *categories;
+@property(nonatomic, strong) NSArray *pois;
 @end
 
 @implementation OTMapViewController
@@ -30,30 +32,31 @@
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
+    [super viewDidLoad];
 
-	[self createMenuButton];
+    [self createMenuButton];
 
-	self.title = NSLocalizedString(@"mapviewcontroller_title", @"");
+    self.title = NSLocalizedString(@"mapviewcontroller_title", @"");
 
-	[[OTHTTPRequestManager sharedInstance] GET:kAPIPoiRoute parameters:nil
-									   success:^(AFHTTPRequestOperation *operation, id responseObject)
-	 {
-		 [self.indicatorView setHidden:TRUE];
-		 NSArray *poiArray = responseObject;
-		 [self feedMapViewWithPoiArray:poiArray];
-	 }
+    [[OTPoiService new] allPoisWithSuccess:^(NSArray *categories, NSArray *pois)
+            {
+                [self.indicatorView setHidden:YES];
 
-									   failure:^(AFHTTPRequestOperation *operation, NSError *error)
-	 {
-		 UIAlertView *alertView = [[UIAlertView alloc]     initWithTitle:@"Erreur"
-																 message:@"Impossible de récupérer les POI"
-																delegate:nil
-													   cancelButtonTitle:@"Dommage :("
-													   otherButtonTitles:nil];
-		 [self.indicatorView setHidden:TRUE];
-		 [alertView show];
-	 }];
+                self.categories = categories;
+                self.pois = pois;
+
+                [self feedMapViewWithPoiArray:pois];
+            }
+            failure:^(NSError *error)
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Erreur"
+                        message:@"Impossible de récupérer les POI"
+                        delegate:nil
+                        cancelButtonTitle:@"Dommage :("
+                        otherButtonTitles:nil];
+                [self.indicatorView setHidden:YES];
+                [alertView show];
+            }];
 }
 
 /**************************************************************************************************/
@@ -61,58 +64,54 @@
 
 - (void)feedMapViewWithPoiArray:(NSArray *)array
 {
-	NSMutableArray *poiArray = [[NSMutableArray alloc] init];
+    for (OTPoi *poi in array)
+    {
+        CLLocationCoordinate2D poiCoordinate = {.latitude =  poi.latitude, .longitude =  poi.longitude};
 
-	for (NSDictionary *dictionary in array)
-	{
-		OTPoi *poi = [OTPoi poiWithJSONDictionnary:dictionary];
-		[poiArray addObject:poi];
-		CLLocationCoordinate2D poiCoordinate = { .latitude =  poi.latitude, .longitude =  poi.longitude };
+        MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
+        pointAnnotation.coordinate = poiCoordinate;
+        pointAnnotation.title = poi.name;
+        pointAnnotation.subtitle = poi.details;
 
-		MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
-		pointAnnotation.coordinate = poiCoordinate;
-		pointAnnotation.title = poi.name;
-		pointAnnotation.subtitle = poi.details;
+        [[self mapView] addAnnotation:pointAnnotation];
+    }
 
-		[[self mapView] addAnnotation:pointAnnotation];
-	}
-
-	[self computeAndSetCenterForPoiArray:poiArray];
+    [self computeAndSetCenterForPoiArray:array];
 }
 
 - (void)computeAndSetCenterForPoiArray:(NSMutableArray *)array
 {
-	double maxLat = -MAXFLOAT;
-	double maxLong = -MAXFLOAT;
-	double minLat = MAXFLOAT;
-	double minLong = MAXFLOAT;
+    double maxLat = -MAXFLOAT;
+    double maxLong = -MAXFLOAT;
+    double minLat = MAXFLOAT;
+    double minLong = MAXFLOAT;
 
-	for (OTPoi *poi in array)
-	{
-		if (poi.latitude < minLat)
-		{
-			minLat = poi.latitude;
-		}
+    for (OTPoi *poi in array)
+    {
+        if (poi.latitude < minLat)
+        {
+            minLat = poi.latitude;
+        }
 
-		if (poi.longitude < minLong)
-		{
-			minLong = poi.longitude;
-		}
+        if (poi.longitude < minLong)
+        {
+            minLong = poi.longitude;
+        }
 
-		if (poi.latitude > maxLat)
-		{
-			maxLat = poi.latitude;
-		}
+        if (poi.latitude > maxLat)
+        {
+            maxLat = poi.latitude;
+        }
 
-		if (poi.longitude > maxLong)
-		{
-			maxLong = poi.longitude;
-		}
-	}
+        if (poi.longitude > maxLong)
+        {
+            maxLong = poi.longitude;
+        }
+    }
 
-	CLLocationCoordinate2D center = CLLocationCoordinate2DMake((maxLat + minLat) * 0.5, (maxLong + minLong) * 0.5);
-	MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(center, 10000, 10000);
-	[[self mapView] setRegion:viewRegion animated:YES];
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake((maxLat + minLat) * 0.5, (maxLong + minLong) * 0.5);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(center, 10000, 10000);
+    [[self mapView] setRegion:viewRegion animated:YES];
 }
 
 @end

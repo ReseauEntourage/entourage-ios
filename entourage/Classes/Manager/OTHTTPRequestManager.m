@@ -8,9 +8,7 @@
 
 #import "OTHTTPRequestManager.h"
 
-static NSString *const kBaseAPIUrl = @"https://entourage-octo.herokuapp.com/";
-
-NSString *const kAPIPoiRoute = @"poi.json";
+static NSString *const kBaseAPIUrl = @"https://entourage-back.herokuapp.com/";
 
 @implementation OTHTTPRequestManager
 
@@ -20,14 +18,14 @@ NSString *const kAPIPoiRoute = @"poi.json";
 + (AFHTTPRequestOperationManager *)sharedInstance
 {
     static AFHTTPRequestOperationManager *requestManager = nil;
-    
+
     if (requestManager == nil)
     {
         requestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseAPIUrl]];
         requestManager.responseSerializer = [AFJSONResponseSerializer serializer];
         requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
     }
-    
+
     return requestManager;
 }
 

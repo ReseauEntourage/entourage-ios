@@ -16,5 +16,5 @@ extern NSString *const kCategoryName;
 @property (strong, nonatomic) NSNumber *sid;
 @property (strong, nonatomic) NSString *name;
 
-+ (OTPoiCategory *)poiWithJSONDictionnary:(NSDictionary *)dictionary;
++ (OTPoiCategory *)categoryWithJSONDictionnary:(NSDictionary *)dictionary;
 @end
