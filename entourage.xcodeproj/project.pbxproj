@@ -18,6 +18,8 @@
 		6B4930DB19A779F200DA7EE0 /* poi_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B4930DA19A779F200DA7EE0 /* poi_mock.json */; };
 		6B4930DF19A77C2F00DA7EE0 /* OTHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930DE19A77C2F00DA7EE0 /* OTHTTPRequestManager.m */; };
 		6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930E219A77E1D00DA7EE0 /* OTPoi.m */; };
+		6B89EF9F19E7E8B6008F2600 /* poi_category_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B89EF9E19E7E8B6008F2600 /* poi_category_mock.json */; };
+		6B89EFA119E7E8BE008F2600 /* OTPoiCategroyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B89EFA019E7E8BE008F2600 /* OTPoiCategroyTest.m */; };
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
 		6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
@@ -63,6 +65,8 @@
 		6B4930DE19A77C2F00DA7EE0 /* OTHTTPRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTHTTPRequestManager.m; sourceTree = "<group>"; };
 		6B4930E119A77E1D00DA7EE0 /* OTPoi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoi.h; sourceTree = "<group>"; };
 		6B4930E219A77E1D00DA7EE0 /* OTPoi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoi.m; sourceTree = "<group>"; };
+		6B89EF9E19E7E8B6008F2600 /* poi_category_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi_category_mock.json; sourceTree = "<group>"; };
+		6B89EFA019E7E8BE008F2600 /* OTPoiCategroyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiCategroyTest.m; sourceTree = "<group>"; };
 		6B92CA9E19A7461C004E8C9B /* entourage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = entourage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B92CAA119A7461C004E8C9B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -166,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				6B4930DA19A779F200DA7EE0 /* poi_mock.json */,
+				6B89EF9E19E7E8B6008F2600 /* poi_category_mock.json */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				6B4930D319A773EC00DA7EE0 /* OTPoiTest.m */,
+				6B89EFA019E7E8BE008F2600 /* OTPoiCategroyTest.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -425,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B4930DB19A779F200DA7EE0 /* poi_mock.json in Resources */,
+				6B89EF9F19E7E8B6008F2600 /* poi_category_mock.json in Resources */,
 				6B92CACB19A7461C004E8C9B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,6 +524,7 @@
 			files = (
 				6B4930D919A7793200DA7EE0 /* OTTestHelper.m in Sources */,
 				6B4930D419A773EC00DA7EE0 /* OTPoiTest.m in Sources */,
+				6B89EFA119E7E8BE008F2600 /* OTPoiCategroyTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

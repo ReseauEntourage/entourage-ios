@@ -13,4 +13,5 @@
 @property (strong, nonatomic) NSNumber *sid;
 @property (strong, nonatomic) NSString *name;
 
++ (OTPoiCategory *)poiWithJSONDictionnary:(NSDictionary *)dictionary;
 @end

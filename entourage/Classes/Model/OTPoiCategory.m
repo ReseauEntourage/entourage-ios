@@ -10,6 +10,20 @@
 
 @implementation OTPoiCategory
 
+/**************************************************************************************************/
+#pragma mark - Birth & Death
 
++ (OTPoiCategory *)poiWithJSONDictionnary:(NSDictionary *)dictionary {
+    OTPoiCategory *poiCategory = nil;
 
+    if ([dictionary isKindOfClass:[NSDictionary class]])
+    {
+        poiCategory = [[OTPoiCategory alloc] init];
+
+        poiCategory.sid = dictionary[kCategoryId];
+        poiCategory.name = dictionary[kCategoryName];
+    }
+
+    return poiCategory;
+}
 @end
