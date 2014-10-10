@@ -8,6 +8,8 @@
 
 #import "OTMenuViewController.h"
 
+NSString * const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier";
+
 @interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
 /**************************************************************************************************/
@@ -29,7 +31,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    return [tableView dequeueReusableCellWithIdentifier:OTMenuTableViewCellIdentifier];
 }
 
 @end
