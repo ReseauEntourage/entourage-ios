@@ -22,7 +22,7 @@
 {
 
     self.locationManager = [CLLocationManager new];
-    [self.locationManager requestWhenInUseAuthorization];
+    //[self.locationManager requestWhenInUseAuthorization];
     
 	return YES;
 }
