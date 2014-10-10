@@ -40,5 +40,7 @@
 	<array>
 		<string>Sofia-Regular.otf</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 </dict>
 </plist>
