@@ -13,6 +13,8 @@
 // Util
 #import "UIFont+entourage.h"
 
+const CGFloat OTNavigationBarDefaultFontSize = 18.;
+
 @interface OTAppDelegate ()
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -44,7 +46,7 @@
     [[UINavigationBar appearance] setBackgroundImage:navigationBarImage forBarMetrics:UIBarMetricsDefault];
     [UINavigationBar.appearance setBarStyle:UIBarStyleBlackTranslucent];
     
-    UIFont *navigationBarFont = [UIFont calibriFontWithSize:18.];
+    UIFont *navigationBarFont = [UIFont calibriFontWithSize:OTNavigationBarDefaultFontSize];
     UINavigationBar.appearance.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     [UIBarButtonItem.appearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
                                                          NSFontAttributeName:navigationBarFont} forState:UIControlStateNormal];
