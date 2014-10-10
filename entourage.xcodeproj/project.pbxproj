@@ -36,6 +36,8 @@
 		DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF3619E7DCCA00031144 /* UIViewController+menu.m */; };
 		DBE9EF4219E7ECD900031144 /* ic_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF4019E7ECD900031144 /* ic_menu.png */; };
 		DBE9EF4319E7ECD900031144 /* ic_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF4119E7ECD900031144 /* ic_menu@2x.png */; };
+		DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF4919E7EE5700031144 /* Sofia-Regular.otf */; };
+		DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF5019E7EFA200031144 /* UIFont+entourage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,9 @@
 		DBE9EF3619E7DCCA00031144 /* UIViewController+menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+menu.m"; sourceTree = "<group>"; };
 		DBE9EF4019E7ECD900031144 /* ic_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_menu.png; sourceTree = "<group>"; };
 		DBE9EF4119E7ECD900031144 /* ic_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_menu@2x.png"; sourceTree = "<group>"; };
+		DBE9EF4919E7EE5700031144 /* Sofia-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sofia-Regular.otf"; sourceTree = "<group>"; };
+		DBE9EF4F19E7EFA200031144 /* UIFont+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+entourage.h"; sourceTree = "<group>"; };
+		DBE9EF5019E7EFA200031144 /* UIFont+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+entourage.m"; sourceTree = "<group>"; };
 		E54D38E2663076C6388D22C9 /* Pods-entourageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +142,7 @@
 		6B4930C319A773C500DA7EE0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				DBE9EF4419E7EE5700031144 /* Fonts */,
 				DBE9EF3F19E7ECD900031144 /* Menu */,
 			);
 			path = Assets;
@@ -303,6 +309,8 @@
 			children = (
 				6BFE639619E7E85D00C661AB /* OTConstants.h */,
 				6BFE639719E7E85D00C661AB /* OTConstants.m */,
+				DBE9EF4F19E7EFA200031144 /* UIFont+entourage.h */,
+				DBE9EF5019E7EFA200031144 /* UIFont+entourage.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -332,6 +340,14 @@
 				DBE9EF4119E7ECD900031144 /* ic_menu@2x.png */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		DBE9EF4419E7EE5700031144 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DBE9EF4919E7EE5700031144 /* Sofia-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,6 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B4930CC19A773C500DA7EE0 /* Main.storyboard in Resources */,
+				DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */,
 				6B92CABA19A7461C004E8C9B /* Images.xcassets in Resources */,
 				DBE9EF4219E7ECD900031144 /* ic_menu.png in Resources */,
 				6B92CAAC19A7461C004E8C9B /* InfoPlist.strings in Resources */,
@@ -511,6 +528,7 @@
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
+				DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */,
 				6BFE639819E7E85D00C661AB /* OTConstants.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
