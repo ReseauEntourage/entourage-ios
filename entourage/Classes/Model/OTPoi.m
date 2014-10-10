@@ -8,10 +8,17 @@
 
 #import "OTPoi.h"
 
-static NSString *const kJSONNameKey = @"name";
-static NSString *const kJSONTypeKey = @"poi_type";
-static NSString *const kJSONLatitudeKey = @"latitude";
-static NSString *const kJSONLongitudeKey = @"longitude";
+static NSString *const kPOIId = @"id";
+static NSString *const kPOICategoryId = @"category_id";
+static NSString *const kPOIName = @"name";
+static NSString *const kPOIAudience = @"audience";
+static NSString *const kPOIAddress = @"adress";
+static NSString *const kPOILatitude = @"latitude";
+static NSString *const kPOILongitude = @"longitude";
+static NSString *const kPOIPhone = @"phone";
+static NSString *const kPOIDetails = @"description";
+static NSString *const kPOIWebsite = @"website";
+static NSString *const kPOIEmail = @"email";
 
 @implementation OTPoi
 
@@ -26,10 +33,17 @@ static NSString *const kJSONLongitudeKey = @"longitude";
     {
         poi = [[OTPoi alloc] init];
 
-        poi.name = dictionary[kJSONNameKey];
-        poi.type = dictionary[kJSONTypeKey];
-        poi.latitude = [(dictionary[kJSONLatitudeKey]) doubleValue];
-        poi.longitude = [(dictionary[kJSONLongitudeKey]) doubleValue];
+        poi.sid = dictionary[kPOIId];
+        poi.name = dictionary[kPOIName];
+        poi.audience = dictionary[kPOIAudience];
+        poi.address = dictionary[kPOIAddress];
+        poi.latitude = [(dictionary[kPOILatitude]) doubleValue];
+        poi.longitude = [(dictionary[kPOILongitude]) doubleValue];
+        poi.phone = dictionary[kPOIPhone];
+        poi.details = dictionary[kPOIDetails];
+        poi.website = dictionary[kPOIWebsite];
+        poi.email = dictionary[kPOIEmail];
+        poi.categoryId = dictionary[kPOICategoryId];
     }
 
     return poi;

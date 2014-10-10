@@ -50,9 +50,17 @@
 
     // Then
     XCTAssertNotNil(poi, @"");
-    XCTAssertEqualObjects(@"MGEN", poi.name, @"");
-    XCTAssertEqual(48.842416499999999, poi.latitude, @"");
-    XCTAssertEqual(2.3101579999999999, poi.longitude, @"");
+    XCTAssertEqualObjects(@2, poi.sid, @"");
+    XCTAssertEqualObjects(@"Concorde", poi.name, @"");
+    XCTAssertEqualObjects(@"jf dsmlfmdslk", poi.details, @"");
+    XCTAssertEqual(2.321236, poi.longitude, @"");
+    XCTAssertEqual(48.865633, poi.latitude, @"");
+    XCTAssertEqualObjects(@"Place de la concorde", poi.address, @"");
+    XCTAssertEqualObjects(@"0101010101", poi.phone, @"");
+    XCTAssertEqualObjects(@"www.concorde.com", poi.website, @"");
+    XCTAssertEqualObjects(@"plop@octo.com", poi.email, @"");
+    XCTAssertEqualObjects(@"Tous publics", poi.audience, @"");
+    XCTAssertEqualObjects(@1, poi.categoryId, @"");
 }
 
 @end

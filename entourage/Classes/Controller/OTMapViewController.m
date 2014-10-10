@@ -67,7 +67,7 @@
         MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
         pointAnnotation.coordinate = poiCoordinate;
         pointAnnotation.title = poi.name;
-        pointAnnotation.subtitle = poi.type;
+        pointAnnotation.subtitle = poi.details;
 
         [[self mapView] addAnnotation:pointAnnotation];
     }
