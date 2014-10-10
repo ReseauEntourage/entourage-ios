@@ -50,7 +50,7 @@
     
     // Then
     XCTAssertNotNil(poiCategory, @"");
-    XCTAssertEqual(@1, poiCategory.sid, @"");
+    XCTAssertEqualObjects(@1, poiCategory.sid, @"");
     XCTAssertEqualObjects(@"Pharmacie", poiCategory.name, @"");
 }
 
