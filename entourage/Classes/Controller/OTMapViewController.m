@@ -7,11 +7,18 @@
 //
 
 #import <MapKit/MapKit.h>
+
+// Controller
 #import "OTMapViewController.h"
+#import "UIViewController+menu.h"
+
 #import "OTHTTPRequestManager.h"
 #import "OTPoi.h"
 
 @interface OTMapViewController ()
+
+// UI
+@property (nonatomic, strong) UIBarButtonItem *menuButton;
 
 @end
 
@@ -23,7 +30,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    [self createMenuButton];
+    
     [[OTHTTPRequestManager sharedInstance] GET:kAPIPoiRoute parameters:nil
         success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
@@ -94,6 +103,7 @@
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(center, 10000, 10000);
     [[self mapView] setRegion:viewRegion animated:YES];
 }
+
 
 
 @end
