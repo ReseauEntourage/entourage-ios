@@ -15,7 +15,7 @@
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
 
-//Model
+// Model
 #import "OTUser.h"
 
 @interface OTLoginViewController () <UITextFieldDelegate>
@@ -29,71 +29,74 @@
 
 @implementation OTLoginViewController
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    self.whiteBackground.layer.cornerRadius = 5;
-    self.whiteBackground.layer.masksToBounds = YES;
+	self.whiteBackground.layer.cornerRadius = 5;
+	self.whiteBackground.layer.masksToBounds = YES;
 }
 
-
-
-- (IBAction)validateButtonDidTad:(UIButton *)sender {
-	if (self.emailTextField.text.length == 0) {
+- (IBAction)validateButtonDidTad:(UIButton *)sender
+{
+	if (self.emailTextField.text.length == 0)
+	{
 		[[[UIAlertView alloc]
 		  initWithTitle:@"Connexion impossible"
-		               message:@"Veuillez renseigner une adresse email"
-		              delegate:nil
-		     cancelButtonTitle:nil
-		     otherButtonTitles:@"ok",
+					message:@"Veuillez renseigner une adresse email"
+				   delegate:nil
+		  cancelButtonTitle:nil
+		  otherButtonTitles:@"ok",
 		  nil] show];
 	}
-	else if (!self.validateForm) {
+	else if (!self.validateForm)
+	{
 		[[[UIAlertView alloc]
 		  initWithTitle:@"Connexion impossible"
-		               message:@"Adresse email invalide"
-		              delegate:nil
-		     cancelButtonTitle:nil
-		     otherButtonTitles:@"ok",
+					message:@"Adresse email invalide"
+				   delegate:nil
+		  cancelButtonTitle:nil
+		  otherButtonTitles:@"ok",
 		  nil] show];
 	}
-	else {
+	else
+	{
 		[self launchAuthentication];
 	}
 }
 
-- (BOOL)validateForm {
+- (BOOL)validateForm
+{
 	return [self.emailTextField.text isValidEmail];
 }
 
-- (void)launchAuthentication {
+- (void)launchAuthentication
+{
 	[[OTAuthService new]
-	 authWithEmail:self.emailTextField.text
+		 authWithEmail:self.emailTextField.text
 
-	       success: ^(OTUser *user)
-	{
-	    NSLog(@"User : %@ authenticated successfully", user.email);
-	    [[NSUserDefaults standardUserDefaults] setUserMail:user.email];
-	    [[NSUserDefaults standardUserDefaults] setUserSid:[user.sid integerValue]];
-	    [self dismissViewControllerAnimated:YES completion:nil];
-	}
+			   success: ^(OTUser *user)
+	 {
+		 NSLog(@"User : %@ authenticated successfully", user.email);
+		 [[NSUserDefaults standardUserDefaults] setUserMail:user.email];
+		 [[NSUserDefaults standardUserDefaults] setUserSid:[user.sid integerValue]];
+		 [self dismissViewControllerAnimated:YES completion:nil];
+	 }
 
-	 failure: ^(NSError *error)
-	{
-	    [[[UIAlertView alloc]
-	      initWithTitle:@"error"
-	                   message:error.localizedDescription
-	                  delegate:nil
-	         cancelButtonTitle:nil
-	         otherButtonTitles:@"ok",
-	      nil] show];
-	}];
+			   failure: ^(NSError *error)
+	 {
+		 [[[UIAlertView alloc]
+			   initWithTitle:@"error"
+						 message:error.localizedDescription
+						delegate:nil
+			   cancelButtonTitle:nil
+			   otherButtonTitles:@"ok",
+		   nil] show];
+	 }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
-    return YES;
+	[textField resignFirstResponder];
+	return YES;
 }
-
 
 @end

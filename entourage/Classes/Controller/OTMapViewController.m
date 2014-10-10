@@ -9,6 +9,7 @@
 // Controller
 #import "OTMapViewController.h"
 #import "UIViewController+menu.h"
+#import "OTCalloutViewController.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -21,6 +22,7 @@
 
 // Framework
 #import <MapKit/MKMapView.h>
+#import <WYPopoverController/WYPopoverController.h>
 
 /********************************************************************************/
 #pragma mark - OTMapViewController
@@ -30,8 +32,10 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
-@property(nonatomic, strong) NSArray *categories;
-@property(nonatomic, strong) NSArray *pois;
+@property (nonatomic, strong) NSArray *categories;
+@property (nonatomic, strong) NSArray *pois;
+
+@property (nonatomic, strong) WYPopoverController *popover;
 @end
 
 @implementation OTMapViewController
@@ -134,19 +138,43 @@
 	{
 		MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kAnnotationIdentifier];
 
-		if (annotationView)
-		{
-			annotationView.annotation = annotation;
-		}
-		else
+		if (!annotationView)
 		{
 			annotationView = ((OTCustomAnnotation *)annotation).annotationView;
 		}
-
+		annotationView.annotation = annotation;
 		return annotationView;
 	}
 
 	return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+	[mapView deselectAnnotation:view.annotation animated:NO];
+
+	if ([view.annotation isKindOfClass:[OTCustomAnnotation class]])
+	{
+		// Start up our view controller from a Storyboard
+		OTCalloutViewController *controller = (OTCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCalloutViewController"];
+
+		[controller view];
+
+		OTCustomAnnotation *annotation = [((MKAnnotationView *)view)annotation];
+
+		[controller configureWithPoi:annotation.poi];
+		// Adjust this property to change the size of the popover + content
+		controller.preferredContentSize = CGSizeMake(150, 80);
+
+		self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
+
+		// POP POP
+		[self.popover presentPopoverFromRect:view.bounds
+									  inView:view
+					permittedArrowDirections:WYPopoverArrowDirectionDown
+									animated:YES
+									 options:WYPopoverAnimationOptionFade];
+	}
 }
 
 @end

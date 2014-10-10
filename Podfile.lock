@@ -24,6 +24,7 @@ PODS:
   - OCMock (3.1.1)
   - SWRevealViewController (2.3.0)
   - uservoice-iphone-sdk (3.2.1)
+  - WYPopoverController (0.3.3)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.3)
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - OCMock (~> 3.1)
   - SWRevealViewController (~> 2.3)
   - uservoice-iphone-sdk (~> 3.2)
+  - WYPopoverController (~> 0.3)
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
@@ -38,5 +40,6 @@ SPEC CHECKSUMS:
   OCMock: f6cb8c162ab9d5620dddf411282c7b2c0ee78854
   SWRevealViewController: f6d80638b8e12323e87ac79562345403a799cb77
   uservoice-iphone-sdk: 7cbc1e76dcbbc3d5ae3b4bf009fdcf355e1e83ec
+  WYPopoverController: 86aa5a8993fea95f59028d5d944d0f21f8bee9b9
 
 COCOAPODS: 0.34.2

@@ -7,6 +7,7 @@ target "entourage" do
     pod 'SWRevealViewController', '~> 2.3'
     pod 'uservoice-iphone-sdk', '~> 3.2'
     pod 'MSTranslateVendor', '~> 1.1'
+    pod 'WYPopoverController', '~> 0.3'
 end
 
 target "entourageTests" do

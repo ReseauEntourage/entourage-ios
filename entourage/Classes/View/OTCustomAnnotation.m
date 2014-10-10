@@ -60,7 +60,7 @@ NSString *const kAnnotationIdentifier = @"OTAnnotationIdentifier";
 	MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:self
 																	reuseIdentifier:kAnnotationIdentifier];
 
-	annotationView.canShowCallout = YES;
+	annotationView.canShowCallout = NO;
 	annotationView.image = [self.poi image];
 
 	return annotationView;
