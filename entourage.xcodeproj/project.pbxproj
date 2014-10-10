@@ -10,6 +10,8 @@
 		191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
 		1D962C7119E9277D00547687 /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
 		1D962C7519E9281500547687 /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7419E9281500547687 /* OTLoginViewController.m */; };
+		1D55D8D119E82B6C006A2184 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D55D8CF19E82B6C006A2184 /* Main.storyboard */; };
+		1DA682C919E7D097007BD4BC /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682C819E7D097007BD4BC /* OTLoginViewController.m */; };
 		1DA682CA19E7D097007BD4BC /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682C819E7D097007BD4BC /* OTLoginViewController.m */; };
 		1DA682E119E7F1F4007BD4BC /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682DF19E7F1F4007BD4BC /* OTAuthService.m */; };
 		1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */; };
@@ -22,8 +24,12 @@
 		6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */; };
 		6B1A847719E81F8E0020FB93 /* OTPoiServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847619E81F8E0020FB93 /* OTPoiServiceTest.m */; };
 		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
+		1DA682EE19E81C65007BD4BC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
+		1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */; };
+		1DA682F219E823C3007BD4BC /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */; };
+		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
+		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
-		6B4930CC19A773C500DA7EE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B4930C519A773C500DA7EE0 /* Main.storyboard */; };
 		6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930C919A773C500DA7EE0 /* OTMapViewController.m */; };
 		6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */; };
 		6B4930D419A773EC00DA7EE0 /* OTPoiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930D319A773EC00DA7EE0 /* OTPoiTest.m */; };
@@ -96,12 +102,16 @@
 		1D962C7019E9277D00547687 /* OTAuthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAuthService.m; sourceTree = "<group>"; };
 		1D962C7319E9281500547687 /* OTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLoginViewController.h; sourceTree = "<group>"; };
 		1D962C7419E9281500547687 /* OTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLoginViewController.m; sourceTree = "<group>"; };
+		1D55D8D019E82B6C006A2184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1DA682C719E7D097007BD4BC /* OTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLoginViewController.h; sourceTree = "<group>"; };
 		1DA682C819E7D097007BD4BC /* OTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLoginViewController.m; sourceTree = "<group>"; };
 		1DA682DF19E7F1F4007BD4BC /* OTAuthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAuthService.m; path = Service/OTAuthService.m; sourceTree = "<group>"; };
 		1DA682E619E80BE7007BD4BC /* NSUserDefaults+OT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+OT.h"; path = "Helper/NSUserDefaults+OT.h"; sourceTree = "<group>"; };
 		1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+OT.m"; path = "Helper/NSUserDefaults+OT.m"; sourceTree = "<group>"; };
 		1DA682EA19E81483007BD4BC /* NSString+Validators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Validators.h"; path = "Helper/NSString+Validators.h"; sourceTree = "<group>"; };
 		1DA682EB19E81483007BD4BC /* NSString+Validators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Validators.m"; path = "Helper/NSString+Validators.m"; sourceTree = "<group>"; };
+		1DA682EF19E823C3007BD4BC /* OTSWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSWRevealViewController.h; sourceTree = "<group>"; };
+		1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSWRevealViewController.m; sourceTree = "<group>"; };
 		2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		6B1A846F19E811210020FB93 /* OTPoiService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiService.h; sourceTree = "<group>"; };
@@ -111,7 +121,6 @@
 		6B1A847619E81F8E0020FB93 /* OTPoiServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiServiceTest.m; sourceTree = "<group>"; };
 		6B1A847819E822150020FB93 /* pois_categories_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pois_categories_mock.json; sourceTree = "<group>"; };
 		6B4930BD19A769EB00DA7EE0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		6B4930C619A773C500DA7EE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6B4930C819A773C500DA7EE0 /* OTMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMapViewController.h; sourceTree = "<group>"; };
 		6B4930C919A773C500DA7EE0 /* OTMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapViewController.m; sourceTree = "<group>"; };
 		6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAppDelegate.h; sourceTree = "<group>"; };
@@ -290,6 +299,10 @@
 				6B4930DC19A77C2F00DA7EE0 /* Manager */,
 				6BFE639519E7E85D00C661AB /* Utils */,
 				1DA682D519E7F130007BD4BC /* Helper */,
+				1DA682D019E7D940007BD4BC /* Service */,
+				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
+				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
+				1D55D8CF19E82B6C006A2184 /* Main.storyboard */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -301,6 +314,12 @@
 				DBBE8AD319E85E9000FA218E /* MyMeetings */,
 				DBBE8ACB19E83CCE00FA218E /* Map */,
 				DBE9EF2919E7D71C00031144 /* Menu */,
+				6B4930C819A773C500DA7EE0 /* OTMapViewController.h */,
+				6B4930C919A773C500DA7EE0 /* OTMapViewController.m */,
+				1DA682C719E7D097007BD4BC /* OTLoginViewController.h */,
+				1DA682C819E7D097007BD4BC /* OTLoginViewController.m */,
+				1DA682EF19E823C3007BD4BC /* OTSWRevealViewController.h */,
+				1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -704,6 +723,7 @@
 				DBBE8AC519E83CB600FA218E /* poi_category-4.png in Resources */,
 				6B4930CC19A773C500DA7EE0 /* Main.storyboard in Resources */,
 				DBBE8ACA19E83CB600FA218E /* poi_category-6@2x.png in Resources */,
+				A8D2373B19E7ECDD005C62D9 /* poi_category-3.png in Resources */,
 				DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */,
 				DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */,
 				DBBE8ABC19E83CB600FA218E /* ic_menu@2x.png in Resources */,
@@ -724,6 +744,20 @@
 				DBBE8ABD19E83CB600FA218E /* menu_background.png in Resources */,
 				A816F83619E80D3C003EEF86 /* Localizable.strings in Resources */,
 				DBBE8A9919E81AF600FA218E /* Calibri.ttf in Resources */,
+				DBE9EF4219E7ECD900031144 /* ic_menu.png in Resources */,
+				1DA682EE19E81C65007BD4BC /* InfoPlist.strings in Resources */,
+				DBE9EF4319E7ECD900031144 /* ic_menu@2x.png in Resources */,
+				A8D2374019E7ECDD005C62D9 /* poi_category-5@2x.png in Resources */,
+				A8D2373819E7ECDD005C62D9 /* poi_category-1@2x.png in Resources */,
+				A8D2373A19E7ECDD005C62D9 /* poi_category-2@2x.png in Resources */,
+				A8D2374219E7ECDD005C62D9 /* poi_category-6@2x.png in Resources */,
+				A8D2373D19E7ECDD005C62D9 /* poi_category-4.png in Resources */,
+				A8D2373C19E7ECDD005C62D9 /* poi_category-3@2x.png in Resources */,
+				A8D2373719E7ECDD005C62D9 /* poi_category-1.png in Resources */,
+				A816F83619E80D3C003EEF86 /* Localizable.strings in Resources */,
+				A8D2374119E7ECDD005C62D9 /* poi_category-6.png in Resources */,
+				1D55D8D119E82B6C006A2184 /* Main.storyboard in Resources */,
+				A8D2373E19E7ECDD005C62D9 /* poi_category-4@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -821,6 +855,8 @@
 				DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */,
 				6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */,
 				1D962C7519E9281500547687 /* OTLoginViewController.m in Sources */,
+				6BFE639819E7E85D00C661AB /* OTConstants.m in Sources */,
+				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,
@@ -845,6 +881,7 @@
 				DBBE8AE619E873C500FA218E /* OTMapViewControllerTests.m in Sources */,
 				6B89EFA119E7E8BE008F2600 /* OTPoiCategoryTest.m in Sources */,
 				1DA682ED19E81483007BD4BC /* NSString+Validators.m in Sources */,
+				1DA682F219E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				1DA682E119E7F1F4007BD4BC /* OTAuthService.m in Sources */,
 				6B4930D919A7793200DA7EE0 /* OTTestHelper.m in Sources */,
 				1DA682CA19E7D097007BD4BC /* OTLoginViewController.m in Sources */,
@@ -864,10 +901,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6B4930C519A773C500DA7EE0 /* Main.storyboard */ = {
+		1D55D8CF19E82B6C006A2184 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6B4930C619A773C500DA7EE0 /* Base */,
+				1D55D8D019E82B6C006A2184 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

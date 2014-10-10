@@ -15,18 +15,16 @@ static NSString *const kBaseAPIUrl = @"https://entourage-back.herokuapp.com/";
 /**************************************************************************************************/
 #pragma mark - Singleton
 
-+ (AFHTTPRequestOperationManager *)sharedInstance
-{
-    static AFHTTPRequestOperationManager *requestManager = nil;
++ (AFHTTPRequestOperationManager *)sharedInstance {
+	static AFHTTPRequestOperationManager *requestManager = nil;
 
-    if (requestManager == nil)
-    {
-        requestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseAPIUrl]];
-        requestManager.responseSerializer = [AFJSONResponseSerializer serializer];
-        requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    }
+	if (requestManager == nil) {
+		requestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseAPIUrl]];
+		requestManager.responseSerializer = [AFJSONResponseSerializer serializer];
+		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+	}
 
-    return requestManager;
+	return requestManager;
 }
 
 @end

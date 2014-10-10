@@ -24,12 +24,6 @@
 
 @implementation OTLoginViewController
 
-- (void)viewDidLoad {
-	if ([[NSUserDefaults new] userMail]) {
-		[self performSegueWithIdentifier:@"login_success" sender:self];
-	}
-}
-
 - (IBAction)validateButtonDidTad:(UIButton *)sender {
 	if (self.emailTextField.text.length == 0) {
 		[[[UIAlertView alloc]
@@ -41,6 +35,13 @@
 		  nil] show];
 	}
 	else if (!self.validateForm) {
+		[[[UIAlertView alloc]
+		  initWithTitle:@"Connexion impossible"
+		               message:@"Adresse email invalide"
+		              delegate:nil
+		     cancelButtonTitle:nil
+		     otherButtonTitles:@"ok",
+		  nil] show];
 	}
 	else {
 		[self launchAuthentication];
@@ -58,10 +59,8 @@
 	       success: ^(NSString *email)
 	{
 	    NSLog(@"User : %@ authenticated successfully", email);
-
-	    [[NSUserDefaults new] setUserMail:email];
-	    [self performSegueWithIdentifier:@"login_success" sender:self];
-	    //[self.navigationController popViewControllerAnimated:NO];
+	    [[NSUserDefaults standardUserDefaults] setUserMail:email];
+	    [self dismissViewControllerAnimated:YES completion:nil];
 	}
 
 	 failure: ^(NSError *error)

@@ -13,7 +13,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="Jzq-cb-ZsT">
             <objects>
-                <viewController storyboardIdentifier="SWRevealViewControllerIdentifier" id="bGF-q3-B8f" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SWRevealViewControllerIdentifier" id="bGF-q3-B8f" customClass="OTSWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TA1-Lc-d6N"/>
                         <viewControllerLayoutGuide type="bottom" id="dFF-WN-VDv"/>
@@ -213,6 +213,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1070" y="51"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="evh-Kf-L5B">
+            <objects>
+                <viewController storyboardIdentifier="OTLoginViewControllerIdentifier" id="gue-eJ-8St" customClass="OTLoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PAR-xY-5Xr"/>
+                        <viewControllerLayoutGuide type="bottom" id="qbt-PQ-Jnb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ELK-bx-iSu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7au-hw-a4a">
+                                <rect key="frame" x="58" y="269" width="205" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfc-eK-GVA">
+                                <rect key="frame" x="120" y="333" width="80" height="30"/>
+                                <state key="normal" title="Valider">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="validateButtonDidTad:" destination="gue-eJ-8St" eventType="touchUpInside" id="7B2-14-2Qi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="7au-hw-a4a" id="Fio-Gp-eUu"/>
+                        <outlet property="validateButton" destination="hfc-eK-GVA" id="Zao-mv-TTH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rqu-Dz-Sz4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="94" y="-701"/>
         </scene>
     </scenes>
     <resources>

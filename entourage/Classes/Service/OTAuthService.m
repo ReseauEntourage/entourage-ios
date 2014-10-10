@@ -25,7 +25,7 @@
 	NSDictionary *parameters = @{ @"email": email };
 
 	[[OTHTTPRequestManager sharedInstance]
-	 POST:@""
+	 POST:@"users/validation"
 	    parameters:parameters
 	       success: ^(AFHTTPRequestOperation *operation, id responseObject)
 	{
