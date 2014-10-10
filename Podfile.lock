@@ -20,14 +20,17 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - OCMock (3.1.1)
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.3)
+  - OCMock (~> 3.1)
   - SWRevealViewController (~> 2.3)
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  OCMock: f6cb8c162ab9d5620dddf411282c7b2c0ee78854
   SWRevealViewController: f6d80638b8e12323e87ac79562345403a799cb77
 
 COCOAPODS: 0.34.2

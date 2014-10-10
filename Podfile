@@ -8,6 +8,6 @@ target "entourage" do
 end
 
 target "entourageTests" do
-
+    pod 'OCMock', '~> 3.1'
 end
 
