@@ -8,10 +8,29 @@
 
 #import "OTMenuViewController.h"
 
-@interface OTMenuViewController ()
+@interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate>
+
+/**************************************************************************************************/
+#pragma mark - Getters and Setters
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
 
 @implementation OTMenuViewController
 
+/**************************************************************************************************/
+#pragma mark - UITableViewDelegate & UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
 @end
+    
