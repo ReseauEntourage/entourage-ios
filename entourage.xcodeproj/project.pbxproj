@@ -11,6 +11,8 @@
 		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
 		6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */; };
+		6B1A847719E81F8E0020FB93 /* OTPoiServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847619E81F8E0020FB93 /* OTPoiServiceTest.m */; };
+		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
 		6B4930CC19A773C500DA7EE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B4930C519A773C500DA7EE0 /* Main.storyboard */; };
 		6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930C919A773C500DA7EE0 /* OTMapViewController.m */; };
@@ -72,6 +74,8 @@
 		6B1A847019E811210020FB93 /* OTPoiService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiService.m; sourceTree = "<group>"; };
 		6B1A847219E8143F0020FB93 /* NSDictionary+Parsing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Parsing.h"; sourceTree = "<group>"; };
 		6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Parsing.m"; sourceTree = "<group>"; };
+		6B1A847619E81F8E0020FB93 /* OTPoiServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiServiceTest.m; sourceTree = "<group>"; };
+		6B1A847819E822150020FB93 /* pois_categories_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pois_categories_mock.json; sourceTree = "<group>"; };
 		6B4930BD19A769EB00DA7EE0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6B4930C619A773C500DA7EE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6B4930C819A773C500DA7EE0 /* OTMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMapViewController.h; sourceTree = "<group>"; };
@@ -180,6 +184,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		6B1A847519E81F770020FB93 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6B1A847619E81F8E0020FB93 /* OTPoiServiceTest.m */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		6B4930C319A773C500DA7EE0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +234,7 @@
 			children = (
 				6B4930DA19A779F200DA7EE0 /* poi_mock.json */,
 				6B89EF9E19E7E8B6008F2600 /* poi_category_mock.json */,
+				6B1A847819E822150020FB93 /* pois_categories_mock.json */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -232,6 +245,7 @@
 				DBE9EF3819E7DFCD00031144 /* Controller */,
 				6B4930D119A773EC00DA7EE0 /* Helper */,
 				6B4930D219A773EC00DA7EE0 /* Model */,
+				6B1A847519E81F770020FB93 /* Service */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -536,6 +550,7 @@
 			files = (
 				6B4930DB19A779F200DA7EE0 /* poi_mock.json in Resources */,
 				6B89EF9F19E7E8B6008F2600 /* poi_category_mock.json in Resources */,
+				6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */,
 				6B92CACB19A7461C004E8C9B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,6 +645,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B4930D919A7793200DA7EE0 /* OTTestHelper.m in Sources */,
+				6B1A847719E81F8E0020FB93 /* OTPoiServiceTest.m in Sources */,
 				6B4930D419A773EC00DA7EE0 /* OTPoiTest.m in Sources */,
 				6B89EFA119E7E8BE008F2600 /* OTPoiCategoryTest.m in Sources */,
 			);

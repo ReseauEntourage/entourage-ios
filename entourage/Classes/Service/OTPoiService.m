@@ -55,14 +55,18 @@ NSString *const kAPIPoiRoute = @"pois.json";
 
 - (NSMutableArray *)poisFromDictionary:(NSDictionary *)data
 {
-    NSArray *jsonPois = data[kPOIs];
     NSMutableArray *pois = [NSMutableArray array];
-    for (NSDictionary *dictionary in jsonPois)
+
+    NSArray *jsonPois = data[kPOIs];
+    if ([jsonPois isKindOfClass:[NSArray class]])
     {
-        OTPoi *poi = [OTPoi poiWithJSONDictionnary:dictionary];
-        if (poi)
+        for (NSDictionary *dictionary in jsonPois)
         {
-            [pois addObject:poi];
+            OTPoi *poi = [OTPoi poiWithJSONDictionnary:dictionary];
+            if (poi)
+            {
+                [pois addObject:poi];
+            }
         }
     }
     return pois;
@@ -70,14 +74,18 @@ NSString *const kAPIPoiRoute = @"pois.json";
 
 - (NSMutableArray *)categoriesFromDictionary:(NSDictionary *)data
 {
-    NSArray *jsonCategories = data[kCategories];
     NSMutableArray *categories = [NSMutableArray array];
-    for (NSDictionary *dictionary in jsonCategories)
+
+    NSArray *jsonCategories = data[kCategories];
+    if ([jsonCategories isKindOfClass:[NSArray class]])
     {
-        OTPoiCategory *category = [OTPoiCategory categoryWithJSONDictionnary:dictionary];
-        if (category)
+        for (NSDictionary *dictionary in jsonCategories)
         {
-            [categories addObject:category];
+            OTPoiCategory *category = [OTPoiCategory categoryWithJSONDictionnary:dictionary];
+            if (category)
+            {
+                [categories addObject:category];
+            }
         }
     }
     return categories;
