@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@interface OTMenuTableViewCell : UITableViewCell
+
+@end
+
+@interface OTMenuItem : NSObject
+
+@end
+
 @interface OTMenuViewController : UIViewController
 
 @end

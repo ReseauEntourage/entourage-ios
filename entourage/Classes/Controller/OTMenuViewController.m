@@ -14,7 +14,7 @@ NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier"
 // OTMenuTableViewCell
 /**************************************************************************************************/
 
-@interface OTMenuTableViewCell : UITableViewCell
+@interface OTMenuTableViewCell ()
 
 /**************************************************************************************************/
 #pragma mark - Getters and Setters
@@ -36,7 +36,7 @@ NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier"
 // OTMenuItem
 /**************************************************************************************************/
 
-@interface OTMenuItem : NSObject
+@interface OTMenuItem ()
 
 /**************************************************************************************************/
 #pragma mark - Getters and Setters
@@ -206,7 +206,12 @@ NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier"
 
 - (OTMenuItem *)menuItemsAtIndexPath:(NSIndexPath *)indexPath
 {
-    OTMenuItem *menuItem = [self.menuItems objectAtIndex:indexPath.row];
+    OTMenuItem *menuItem = nil;
+    
+    if (indexPath && (indexPath.row < self.menuItems.count)) {
+        menuItem = [self.menuItems objectAtIndex:indexPath.row];
+    }
+    
     return menuItem;
 }
 

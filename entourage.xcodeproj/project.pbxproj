@@ -53,6 +53,7 @@
 		DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5319E7F2A800031144 /* Calibri-Bold.ttf */; };
 		DBBE8A9819E81AF600FA218E /* Calibri-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5419E7F2A800031144 /* Calibri-Italic.ttf */; };
 		DBBE8A9919E81AF600FA218E /* Calibri.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5519E7F2A800031144 /* Calibri.ttf */; };
+		DBBE8A9F19E83C2800FA218E /* OTMenuViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8A9E19E83C2800FA218E /* OTMenuViewControllerTests.m */; };
 		DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */; };
 		DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF3619E7DCCA00031144 /* UIViewController+menu.m */; };
 		DBE9EF4219E7ECD900031144 /* ic_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF4019E7ECD900031144 /* ic_menu.png */; };
@@ -133,6 +134,7 @@
 		A8E10FAC19E82A4800DF4A01 /* OTCustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCustomAnnotation.h; sourceTree = "<group>"; };
 		A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCustomAnnotation.m; sourceTree = "<group>"; };
 		C73A9D64DE47F808E1B2C0F4 /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
+		DBBE8A9E19E83C2800FA218E /* OTMenuViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuViewControllerTests.m; sourceTree = "<group>"; };
 		DBE9EF2A19E7D73300031144 /* OTMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMenuViewController.h; sourceTree = "<group>"; };
 		DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuViewController.m; sourceTree = "<group>"; };
 		DBE9EF3519E7DCCA00031144 /* UIViewController+menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+menu.h"; sourceTree = "<group>"; };
@@ -419,6 +421,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DBBE8A9D19E83C0B00FA218E /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				DBBE8A9E19E83C2800FA218E /* OTMenuViewControllerTests.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
 		DBE9EF2919E7D71C00031144 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,6 +443,7 @@
 		DBE9EF3819E7DFCD00031144 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DBBE8A9D19E83C0B00FA218E /* Menu */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -685,6 +696,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B4930D919A7793200DA7EE0 /* OTTestHelper.m in Sources */,
+				DBBE8A9F19E83C2800FA218E /* OTMenuViewControllerTests.m in Sources */,
 				6B1A847719E81F8E0020FB93 /* OTPoiServiceTest.m in Sources */,
 				6B4930D419A773EC00DA7EE0 /* OTPoiTest.m in Sources */,
 				6B89EFA119E7E8BE008F2600 /* OTPoiCategoryTest.m in Sources */,
