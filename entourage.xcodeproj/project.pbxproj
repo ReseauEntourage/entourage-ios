@@ -531,9 +531,17 @@
 		DBBE8ADB19E8663400FA218E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DBBE8ADC19E8664000FA218E /* OTMenuTableViewCellTests.m */,
+				DBBE8ADE19E8714B00FA218E /* Menu */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		DBBE8ADE19E8714B00FA218E /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				DBBE8ADC19E8664000FA218E /* OTMenuTableViewCellTests.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		DBE9EF2919E7D71C00031144 /* Menu */ = {
