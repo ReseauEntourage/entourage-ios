@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
+		1D962C7119E9277D00547687 /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
+		1D962C7519E9281500547687 /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7419E9281500547687 /* OTLoginViewController.m */; };
+		1DA682CA19E7D097007BD4BC /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682C819E7D097007BD4BC /* OTLoginViewController.m */; };
+		1DA682E119E7F1F4007BD4BC /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682DF19E7F1F4007BD4BC /* OTAuthService.m */; };
+		1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */; };
+		1DA682E919E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */; };
+		1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682EB19E81483007BD4BC /* NSString+Validators.m */; };
+		1DA682ED19E81483007BD4BC /* NSString+Validators.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682EB19E81483007BD4BC /* NSString+Validators.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
 		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
@@ -84,6 +92,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D962C6F19E9277D00547687 /* OTAuthService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAuthService.h; sourceTree = "<group>"; };
+		1D962C7019E9277D00547687 /* OTAuthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAuthService.m; sourceTree = "<group>"; };
+		1D962C7319E9281500547687 /* OTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLoginViewController.h; sourceTree = "<group>"; };
+		1D962C7419E9281500547687 /* OTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLoginViewController.m; sourceTree = "<group>"; };
+		1DA682C819E7D097007BD4BC /* OTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLoginViewController.m; sourceTree = "<group>"; };
+		1DA682DF19E7F1F4007BD4BC /* OTAuthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAuthService.m; path = Service/OTAuthService.m; sourceTree = "<group>"; };
+		1DA682E619E80BE7007BD4BC /* NSUserDefaults+OT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+OT.h"; path = "Helper/NSUserDefaults+OT.h"; sourceTree = "<group>"; };
+		1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+OT.m"; path = "Helper/NSUserDefaults+OT.m"; sourceTree = "<group>"; };
+		1DA682EA19E81483007BD4BC /* NSString+Validators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Validators.h"; path = "Helper/NSString+Validators.h"; sourceTree = "<group>"; };
+		1DA682EB19E81483007BD4BC /* NSString+Validators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Validators.m"; path = "Helper/NSString+Validators.m"; sourceTree = "<group>"; };
 		2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		6B1A846F19E811210020FB93 /* OTPoiService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiService.h; sourceTree = "<group>"; };
@@ -199,6 +217,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D962C7219E9280800547687 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1D962C7319E9281500547687 /* OTLoginViewController.h */,
+				1D962C7419E9281500547687 /* OTLoginViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		1DA682D519E7F130007BD4BC /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				1DA682EA19E81483007BD4BC /* NSString+Validators.h */,
+				1DA682EB19E81483007BD4BC /* NSString+Validators.m */,
+				1DA682E619E80BE7007BD4BC /* NSUserDefaults+OT.h */,
+				1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
 		3D6ACAA7335664BE2C3F900F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +251,8 @@
 		6B1A846E19E8110B0020FB93 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				1D962C6F19E9277D00547687 /* OTAuthService.h */,
+				1D962C7019E9277D00547687 /* OTAuthService.m */,
 				6B1A846F19E811210020FB93 /* OTPoiService.h */,
 				6B1A847019E811210020FB93 /* OTPoiService.m */,
 			);
@@ -249,6 +289,7 @@
 				6B1A846E19E8110B0020FB93 /* Service */,
 				6B4930DC19A77C2F00DA7EE0 /* Manager */,
 				6BFE639519E7E85D00C661AB /* Utils */,
+				1DA682D519E7F130007BD4BC /* Helper */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -256,6 +297,7 @@
 		6B4930C719A773C500DA7EE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1D962C7219E9280800547687 /* Login */,
 				DBBE8AD319E85E9000FA218E /* MyMeetings */,
 				DBBE8ACB19E83CCE00FA218E /* Map */,
 				DBE9EF2919E7D71C00031144 /* Menu */,
@@ -774,10 +816,14 @@
 				6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
+				1D962C7119E9277D00547687 /* OTAuthService.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
 				DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */,
 				6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */,
+				1D962C7519E9281500547687 /* OTLoginViewController.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
+				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
+				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,
@@ -797,6 +843,13 @@
 				6B89EFA119E7E8BE008F2600 /* OTPoiCategoryTest.m in Sources */,
 				DBBE8AD919E8652B00FA218E /* OTMenuItemTests.m in Sources */,
 				DBBE8AE619E873C500FA218E /* OTMapViewControllerTests.m in Sources */,
+				6B89EFA119E7E8BE008F2600 /* OTPoiCategoryTest.m in Sources */,
+				1DA682ED19E81483007BD4BC /* NSString+Validators.m in Sources */,
+				1DA682E119E7F1F4007BD4BC /* OTAuthService.m in Sources */,
+				6B4930D919A7793200DA7EE0 /* OTTestHelper.m in Sources */,
+				1DA682CA19E7D097007BD4BC /* OTLoginViewController.m in Sources */,
+				1DA682E919E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
+				6B4930D419A773EC00DA7EE0 /* OTPoiTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
