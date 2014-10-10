@@ -1,5 +1,5 @@
 //
-//  OTPoiCategroyTest.m
+//  OTPoiCategoryTest.m
 //  entourage
 //
 //  Created by Louis Davin on 10/10/2014.
@@ -10,11 +10,11 @@
 #import "OTPoiCategory.h"
 #import "OTTestHelper.h"
 
-@interface OTPoiCategroyTest : XCTestCase
+@interface OTPoiCategoryTest : XCTestCase
 
 @end
 
-@implementation OTPoiCategroyTest
+@implementation OTPoiCategoryTest
 
 - (void)test_PoiCategoryWithJSONDictionnary_withNilParameter
 {
