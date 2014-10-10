@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *const kCategories;
-extern NSString *const kCategoryId;
-extern NSString *const kCategoryName;
 extern NSString *const kPOIs;
 extern NSString *const kPOIId;
 extern NSString *const kPOICategoryId;

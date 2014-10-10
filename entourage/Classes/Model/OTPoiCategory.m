@@ -8,12 +8,19 @@
 
 #import "OTPoiCategory.h"
 
+/**************************************************************************************************/
+#pragma mark - Constants
+
+NSString *const kCategoryId = @"id";
+NSString *const kCategoryName = @"name";
+
 @implementation OTPoiCategory
 
 /**************************************************************************************************/
 #pragma mark - Birth & Death
 
-+ (OTPoiCategory *)poiWithJSONDictionnary:(NSDictionary *)dictionary {
++ (OTPoiCategory *)poiWithJSONDictionnary:(NSDictionary *)dictionary
+{
     OTPoiCategory *poiCategory = nil;
 
     if ([dictionary isKindOfClass:[NSDictionary class]])

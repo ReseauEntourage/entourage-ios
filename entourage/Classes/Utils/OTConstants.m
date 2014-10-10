@@ -9,8 +9,6 @@
 #import "OTConstants.h"
 
 NSString *const kCategories = @"categories";
-NSString *const kCategoryId = @"id";
-NSString *const kCategoryName = @"name";
 NSString *const kPOIs = @"pois";
 NSString *const kPOIId = @"id";
 NSString *const kPOICategoryId = @"category_id";

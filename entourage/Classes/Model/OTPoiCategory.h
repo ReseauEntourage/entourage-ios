@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kCategoryId;
+extern NSString *const kCategoryName;
+
 @interface OTPoiCategory : NSObject
 
 @property (strong, nonatomic) NSNumber *sid;
