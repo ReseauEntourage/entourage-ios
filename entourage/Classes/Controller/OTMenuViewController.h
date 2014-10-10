@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+/* MenuItem identifiers */
 FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuMapIdentifier;
 FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuMyMeetingsIdentifier;
 FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuPracticalInformationIdentifier;

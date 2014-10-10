@@ -17,6 +17,7 @@
 // View
 #import "OTMenuTableViewCell.h"
 
+/* MenuItem identifiers */
 NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuMapIdentifier";
 NSString *const OTMenuViewControllerSegueMenuMyMeetingsIdentifier = @"segueMenuMyMeetingsIdentifier";
 NSString *const OTMenuViewControllerSegueMenuPracticalInformationIdentifier = @"segueMenuPracticalInformationIdentifier";
@@ -53,12 +54,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
     
     self.menuItems = [OTMenuViewController createMenuItems];
     self.controllersDictionary = [NSMutableDictionary dictionary];
-    UIViewController *frontViewController = self.revealViewController.frontViewController;
-    if (frontViewController)
-    {
-        [self.controllersDictionary setObject:frontViewController
-                                       forKey:OTMenuViewControllerSegueMenuMapIdentifier];
-    }
+    [self configureControllersDictionary];
 }
 
 /**************************************************************************************************/
@@ -114,7 +110,28 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 }
 
 /**************************************************************************************************/
+#pragma mark - Storyboard
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if (![self.controllersDictionary objectForKey:segue.identifier])
+    {
+        [self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
+    }
+}
+
+/**************************************************************************************************/
 #pragma mark - Private methods
+
+- (void)configureControllersDictionary
+{
+    UIViewController *frontViewController = self.revealViewController.frontViewController;
+    if (frontViewController)
+    {
+        [self.controllersDictionary setObject:frontViewController
+                                       forKey:OTMenuViewControllerSegueMenuMapIdentifier];
+    }
+}
 
 + (NSArray *)createMenuItems
 {
@@ -182,17 +199,6 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
     }
     
     return menuItem;
-}
-
-/**************************************************************************************************/
-#pragma mark - Storyboard
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if (![self.controllersDictionary objectForKey:segue.identifier])
-    {
-        [self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
-    }
 }
 
 @end

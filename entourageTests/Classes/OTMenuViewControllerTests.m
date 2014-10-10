@@ -22,9 +22,11 @@
 
 @interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *menuItems;
 @property (nonatomic, strong) NSMutableDictionary *controllersDictionary;
 
+- (void)configureControllersDictionary;
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier;
 + (NSArray *)createMenuItems;
 - (OTMenuItem *)menuItemsAtIndexPath:(NSIndexPath *)indexPath;
@@ -59,64 +61,25 @@
 /**************************************************************************************************/
 #pragma mark - - (void)viewDidLoad
 
-- (void)test_viewDidLoad_allExpectedMethodsAreCalledWhenFrontViewControllerExists
+- (void)test_viewDidLoad_allExpectedMethodsAreCalled
 {
     // Given
     self.viewController.menuItems = nil;
     self.viewController.controllersDictionary = nil;
     
-    UIViewController *frontViewController = [UIViewController new];
-    
-    id mockRevealViewController = [OCMockObject niceMockForClass:SWRevealViewController.class];
-    OCMExpect([mockRevealViewController frontViewController]).andReturn(frontViewController);
-    OCMStub([self.mockViewController revealViewController]).andReturn(mockRevealViewController);
-    
-    id mockDictionary = [OCMockObject niceMockForClass:NSMutableDictionary.class];
-    OCMExpect([mockDictionary setObject:frontViewController forKey:OTMenuViewControllerSegueMenuMapIdentifier]);
-    
     NSArray *items = @[];
     OCMExpect([self.mockViewController createMenuItems]).andReturn(items);
+    
+    OCMExpect([self.mockViewController configureControllersDictionary]);
     
     // When
     [self.viewController viewDidLoad];
     
     // Then
     OCMVerify(self.mockViewController);
-    OCMVerify(mockDictionary);
-    OCMVerify(mockRevealViewController);
     XCTAssertEqual(self.viewController.menuItems, items, @"");
     XCTAssertNotNil(self.viewController.controllersDictionary, @"");
 }
-
-- (void)test_viewDidLoad_allExpectedMethodsAreCalledWhenFrontViewControllerDoesntExist
-{
-    // Given
-    self.viewController.menuItems = nil;
-    self.viewController.controllersDictionary = nil;
-    
-    UIViewController *frontViewController = nil;
-    
-    id mockRevealViewController = [OCMockObject niceMockForClass:SWRevealViewController.class];
-    OCMExpect([mockRevealViewController frontViewController]).andReturn(frontViewController);
-    OCMStub([self.mockViewController revealViewController]).andReturn(mockRevealViewController);
-    
-    id mockDictionary = [OCMockObject niceMockForClass:NSMutableDictionary.class];
-    [[mockDictionary reject] setObject:frontViewController forKey:OTMenuViewControllerSegueMenuMapIdentifier];
-    
-    NSArray *items = @[];
-    OCMExpect([self.mockViewController createMenuItems]).andReturn(items);
-    
-    // When
-    [self.viewController viewDidLoad];
-    
-    // Then
-    OCMVerify(self.mockViewController);
-    OCMVerify(mockDictionary);
-    OCMVerify(mockRevealViewController);
-    XCTAssertEqual(self.viewController.menuItems, items, @"");
-    XCTAssertNotNil(self.viewController.controllersDictionary, @"");
-}
-
 
 /**************************************************************************************************/
 #pragma mark - - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -171,6 +134,34 @@
     [mockTableView verify];
     [mockItemLabel verify];
     [self.mockViewController verify];
+}
+
+/**************************************************************************************************/
+#pragma mark - - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (void)test_tableViewDidSelectRowAtIndexPath_allExpectedMethodsAreCalled
+{
+    // Given
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSString *segueIdentifier = @"segueIdentifier";
+    
+    id mockTableView = [OCMockObject niceMockForClass:UITableView.class];
+    OCMExpect([mockTableView deselectRowAtIndexPath:indexPath animated:YES]);
+    OCMStub([self.mockViewController tableView]).andReturn(mockTableView);
+    
+    id mockMenuItem = [OCMockObject niceMockForClass:OTMenuItem.class];
+    OCMExpect([mockMenuItem segueIdentifier]).andReturn(segueIdentifier);
+    
+    OCMExpect([self.mockViewController menuItemsAtIndexPath:indexPath]).andReturn(mockMenuItem);
+    OCMExpect([self.mockViewController openControllerWithSegueIdentifier:segueIdentifier]);
+    
+    // When
+    [self.viewController tableView:mockTableView didSelectRowAtIndexPath:indexPath];
+    
+    // Then
+    OCMVerify(mockTableView);
+    OCMVerify(mockMenuItem);
+    OCMVerify(self.mockViewController);
 }
 
 /**************************************************************************************************/
@@ -365,6 +356,76 @@
     // Then
     [self.mockViewController verify];
     [mockStoryboardSegue verify];
+}
+
+
+/**************************************************************************************************/
+#pragma mark - - (void)configureControllersDictionary
+
+- (void)test_configureControllersDictionary_allExpectedMethodsAreCalledWhenFrontViewControllerExists
+{
+    // Given
+    UIViewController *frontViewController = [UIViewController new];
+    
+    id mockRevealViewController = [OCMockObject niceMockForClass:SWRevealViewController.class];
+    OCMExpect([mockRevealViewController frontViewController]).andReturn(frontViewController);
+    OCMStub([self.mockViewController revealViewController]).andReturn(mockRevealViewController);
+    
+    id mockDictionary = [OCMockObject niceMockForClass:NSMutableDictionary.class];
+    OCMExpect([mockDictionary setObject:frontViewController forKey:OTMenuViewControllerSegueMenuMapIdentifier]);
+    
+    // When
+    [self.viewController configureControllersDictionary];
+    
+    // Then
+    OCMVerify(self.mockViewController);
+    OCMVerify(mockDictionary);
+    OCMVerify(mockRevealViewController);
+}
+
+- (void)test_configureControllersDictionary_allExpectedMethodsAreCalledWhenFrontViewControllerDoesntExist
+{
+    // Given
+    UIViewController *frontViewController = nil;
+    
+    id mockRevealViewController = [OCMockObject niceMockForClass:SWRevealViewController.class];
+    OCMExpect([mockRevealViewController frontViewController]).andReturn(frontViewController);
+    OCMStub([self.mockViewController revealViewController]).andReturn(mockRevealViewController);
+    
+    id mockDictionary = [OCMockObject niceMockForClass:NSMutableDictionary.class];
+    [[mockDictionary reject] setObject:frontViewController forKey:OTMenuViewControllerSegueMenuMapIdentifier];
+    
+    // When
+    [self.viewController configureControllersDictionary];
+    
+    // Then
+    OCMVerify(self.mockViewController);
+    OCMVerify(mockDictionary);
+    OCMVerify(mockRevealViewController);
+}
+
+/**************************************************************************************************/
+#pragma mark - + (NSArray *)createMenuItems
+
+- (void)test_createMenuItems_allItemsAreInstanciatedWithRightSegueIdentifierInExpectedOrder
+{
+    // Given
+    
+    // When
+    NSArray *result = [OTMenuViewController createMenuItems];
+    
+    // Then
+    XCTAssertTrue(result.count == 10);
+    XCTAssertTrue([(OTMenuItem *)[result objectAtIndex:0] segueIdentifier] == OTMenuViewControllerSegueMenuMapIdentifier, @"");
+    XCTAssertTrue([(OTMenuItem *)[result objectAtIndex:1] segueIdentifier] == OTMenuViewControllerSegueMenuMyMeetingsIdentifier, @"");
+    XCTAssertTrue([(OTMenuItem *)[result objectAtIndex:2] segueIdentifier] == OTMenuViewControllerSegueMenuPracticalInformationIdentifier, @"");
+    XCTAssertTrue([(OTMenuItem *)[result objectAtIndex:3] segueIdentifier] == OTMenuViewControllerSegueMenuForumIdentifier, @"");
+    XCTAssertTrue([(OTMenuItem *)[result objectAtIndex:4] segueIdentifier] == OTMenuViewControllerSegueMenuMembersIdentifier, @"");
+    XCTAssertTrue([(OTMenuItem *)[result objectAtIndex:5] segueIdentifier] == OTMenuViewControllerSegueMenuMyProfileIdentifier, @"");
+    XCTAssertTrue([(OTMenuItem *)[result objectAtIndex:6] segueIdentifier] == OTMenuViewControllerSegueMenuMyNotificationsIdentifier, @"");
+    XCTAssertTrue([(OTMenuItem *)[result objectAtIndex:7] segueIdentifier] == OTMenuViewControllerSegueMenuHelpIdentifier, @"");
+    XCTAssertTrue([(OTMenuItem *)[result objectAtIndex:8] segueIdentifier] == OTMenuViewControllerSegueMenuYourOpinionIdentifier, @"");
+    XCTAssertTrue([(OTMenuItem *)[result objectAtIndex:9] segueIdentifier] == OTMenuViewControllerSegueMenuDisconnectIdentifier, @"");
 }
 
 @end
