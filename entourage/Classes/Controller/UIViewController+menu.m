@@ -16,6 +16,12 @@
 /**************************************************************************************************/
 #pragma mark - Configure
 
+/**
+ * Method which creates the MenuButton in navigation bar at left position
+ *
+ * @return UIBarButtonItem
+ * The MenuButton instanciated
+ */
 - (UIBarButtonItem *)createMenuButton
 {
     UIBarButtonItem *menuButton = nil;
