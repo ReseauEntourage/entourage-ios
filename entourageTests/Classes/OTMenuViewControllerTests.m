@@ -254,10 +254,10 @@
 - (void)test_menuItemsAtIndexPath_shouldReturnNilWhenNoIndexPath
 {
     // Given
-    id mockIndexPath = nil;
+    NSIndexPath *indexPath = nil;
     
     // When
-    OTMenuItem *result = [self.viewController menuItemsAtIndexPath:mockIndexPath];
+    OTMenuItem *result = [self.viewController menuItemsAtIndexPath:indexPath];
     
     // Then
     XCTAssertNil(result);
@@ -266,15 +266,14 @@
 - (void)test_menuItemsAtIndexPath_shouldReturnNilWhenIndexPathOutOfIndex
 {
     // Given
-    id mockIndexPath = [OCMockObject niceMockForClass:NSIndexPath.class];
-    OCMExpect([mockIndexPath row]).andReturn(3);
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     
     id mockMenuItems = [OCMockObject niceMockForClass:NSArray.class];
     OCMExpect([mockMenuItems count]).andReturn(2);
     OCMStub([self.mockViewController menuItems]).andReturn(mockMenuItems);
     
     // When
-    OTMenuItem *result = [self.viewController menuItemsAtIndexPath:mockIndexPath];
+    OTMenuItem *result = [self.viewController menuItemsAtIndexPath:indexPath];
     
     // Then
     XCTAssertNil(result);
@@ -283,8 +282,7 @@
 - (void)test_menuItemsAtIndexPath_shouldReturnFirstMenuItemWhenExists
 {
     // Given
-    id mockIndexPath = [OCMockObject niceMockForClass:NSIndexPath.class];
-    OCMExpect([mockIndexPath row]).andReturn(0);
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
     id mockMenuItem = [OCMockObject niceMockForClass:OTMenuItem.class];
     
@@ -295,7 +293,27 @@
     OCMStub([self.mockViewController menuItems]).andReturn(mockMenuItems);
     
     // When
-    OTMenuItem *result = [self.viewController menuItemsAtIndexPath:mockIndexPath];
+    OTMenuItem *result = [self.viewController menuItemsAtIndexPath:indexPath];
+    
+    // Then
+    XCTAssertEqualObjects(result, mockMenuItem, @"");
+}
+
+- (void)test_menuItemsAtIndexPath_shouldReturnMenuItemInMiddleWhenExists
+{
+    // Given
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    
+    id mockMenuItem = [OCMockObject niceMockForClass:OTMenuItem.class];
+    
+    id mockMenuItems = [OCMockObject niceMockForClass:NSArray.class];
+    OCMExpect([mockMenuItems count]).andReturn(3);
+    OCMStub([mockMenuItems objectAtIndex:1]).andReturn(mockMenuItem);
+    
+    OCMStub([self.mockViewController menuItems]).andReturn(mockMenuItems);
+    
+    // When
+    OTMenuItem *result = [self.viewController menuItemsAtIndexPath:indexPath];
     
     // Then
     XCTAssertEqualObjects(result, mockMenuItem, @"");
@@ -303,23 +321,22 @@
 
 - (void)test_menuItemsAtIndexPath_shouldReturnLastMenuItemWhenExists
 {
-    /*// Given
-    id mockIndexPath = [OCMockObject niceMockForClass:NSIndexPath.class];
-    OCMExpect([mockIndexPath row]).andReturn(2);
+    // Given
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     
-    OTMenuItem *menuItem = [OTMenuItem new];
+    id mockMenuItem = [OCMockObject niceMockForClass:OTMenuItem.class];
     
     id mockMenuItems = [OCMockObject niceMockForClass:NSArray.class];
     OCMExpect([mockMenuItems count]).andReturn(3);
-    OCMStub([mockMenuItems objectAtIndex:2]).andReturn(menuItem);
+    OCMStub([mockMenuItems objectAtIndex:2]).andReturn(mockMenuItem);
     
     OCMStub([self.mockViewController menuItems]).andReturn(mockMenuItems);
     
     // When
-    OTMenuItem *result = [self.viewController menuItemsAtIndexPath:mockIndexPath];
+    OTMenuItem *result = [self.viewController menuItemsAtIndexPath:indexPath];
     
     // Then
-    XCTAssertEqualObjects(result, menuItem, @"");*/
+    XCTAssertEqualObjects(result, mockMenuItem, @"");
 }
 
 /**************************************************************************************************/
