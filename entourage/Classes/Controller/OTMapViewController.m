@@ -19,9 +19,8 @@
 
 @interface OTMapViewController () <MKMapViewDelegate>
 
-@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
-@property(weak, nonatomic) IBOutlet MKMapView *mapView;
-@property(nonatomic, strong) UIBarButtonItem *menuButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @property(nonatomic, strong) NSArray *categories;
 @property(nonatomic, strong) NSArray *pois;

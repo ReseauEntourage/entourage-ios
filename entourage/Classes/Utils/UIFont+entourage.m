@@ -17,8 +17,6 @@
 
 + (instancetype)calibriBoldFontWithSize:(CGFloat)size
 {
-    NSArray *fontFamiliy = [UIFont familyNames];
-    
     return [UIFont fontWithName:@"Calibri" size:size];
 }
 

@@ -7,3 +7,16 @@
 */
 
 "mapviewcontroller_title" = "LIEUX D'AIDE";
+
+// MenuItems
+"menu_map_title" = "CARTE";
+"menu_myMeetings_title" = "MES RECONTRES";
+"menu_practicalInformation_title" = "INFORMATIONS PRATIQUES";
+"menu_forum_title" = "FORUM";
+"menu_members_title" = "LES MEMBRES";
+"menu_myProfile_title" = "MON PROFIL";
+"menu_myNotifications_title" = "MES NOTIFICATIONS";
+"menu_help_title" = "AIDE";
+"menu_yourOpinion_title" = "VOTRE AVIS";
+"menu_disconnect_title" = "DECONNEXION";
+
