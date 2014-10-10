@@ -36,7 +36,7 @@
 		6B92CACB19A7461C004E8C9B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAC919A7461C004E8C9B /* InfoPlist.strings */; };
 		6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFE639319E7E85400C661AB /* OTPoiCategory.m */; };
 		A816F83619E80D3C003EEF86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A816F83519E80D3C003EEF86 /* Localizable.strings */; };
-		A8E10FAE19E82A4800DF4A01 /* OTCustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */; };
+		A87D6AF319E84683007ACA29 /* OTCustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */; };
 		DBBE8A9619E81AF600FA218E /* Calibri-Bold-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5219E7F2A800031144 /* Calibri-Bold-Italic.ttf */; };
 		DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5319E7F2A800031144 /* Calibri-Bold.ttf */; };
 		DBBE8A9819E81AF600FA218E /* Calibri-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5419E7F2A800031144 /* Calibri-Italic.ttf */; };
@@ -703,7 +703,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8E10FAE19E82A4800DF4A01 /* OTCustomAnnotation.m in Sources */,
+				A87D6AF319E84683007ACA29 /* OTCustomAnnotation.m in Sources */,
 				6B4930DF19A77C2F00DA7EE0 /* OTHTTPRequestManager.m in Sources */,
 				6B1A847119E811210020FB93 /* OTPoiService.m in Sources */,
 				6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */,

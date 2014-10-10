@@ -6,16 +6,24 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
-#import <MapKit/MapKit.h>
-
 // Controller
 #import "OTMapViewController.h"
 #import "UIViewController+menu.h"
 
+// View
+#import "OTCustomAnnotation.h"
+
+// Model
 #import "OTPoi.h"
+
+// Service
 #import "OTPoiService.h"
 
+// Framework
 #import <MapKit/MKMapView.h>
+
+/********************************************************************************/
+#pragma mark - OTMapViewController
 
 @interface OTMapViewController () <MKMapViewDelegate>
 
@@ -70,12 +78,7 @@
 {
 	for (OTPoi *poi in array)
 	{
-		CLLocationCoordinate2D poiCoordinate = { .latitude =  poi.latitude, .longitude =  poi.longitude };
-
-		MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
-		pointAnnotation.coordinate = poiCoordinate;
-		pointAnnotation.title = poi.name;
-		pointAnnotation.subtitle = poi.details;
+		OTCustomAnnotation *pointAnnotation = [[OTCustomAnnotation alloc] initWithPoi:poi];
 
 		[[self mapView] addAnnotation:pointAnnotation];
 	}
@@ -127,41 +130,20 @@
 	{
 		return nil;
 	}
-	else
+	else if ([annotation isKindOfClass:[OTCustomAnnotation class]])
 	{
-		MKAnnotationView *view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"identifier"];
-		[view addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"picto_category-1"]]];
-		return view;
-//
-//
-//		static NSString *const identifier = @"MyCustomAnnotation";
-//
-//		MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-//
-//		if (annotationView)
-//		{
-//			annotationView.annotation = annotation;
-//		}
-//		else
-//		{
-//			annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
-//														  reuseIdentifier:identifier];
-//		}
-//
-//		// set your annotationView properties
-//
-//		annotationView.image = [UIImage imageNamed:@"Your image here"];
-//		annotationView.canShowCallout = YES;
-//
-//		// if you add QuartzCore to your project, you can set shadows for your image, too
-//		//
-//		// [annotationView.layer setShadowColor:[UIColor blackColor].CGColor];
-//		// [annotationView.layer setShadowOpacity:1.0f];
-//		// [annotationView.layer setShadowRadius:5.0f];
-//		// [annotationView.layer setShadowOffset:CGSizeMake(0, 0)];
-//		// [annotationView setBackgroundColor:[UIColor whiteColor]];
-//
-//		return annotationView;
+		MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kAnnotationIdentifier];
+
+		if (annotationView)
+		{
+			annotationView.annotation = annotation;
+		}
+		else
+		{
+			annotationView = ((OTCustomAnnotation *)annotation).annotationView;
+		}
+
+		return annotationView;
 	}
 
 	return nil;

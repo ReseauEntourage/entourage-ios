@@ -10,17 +10,18 @@
 
 #import "NSDictionary+Parsing.h"
 
-static NSString *const kPOIId = @"id";
-static NSString *const kPOICategoryId = @"category_id";
-static NSString *const kPOIName = @"name";
-static NSString *const kPOIAudience = @"audience";
-static NSString *const kPOIAddress = @"adress";
-static NSString *const kPOILatitude = @"latitude";
-static NSString *const kPOILongitude = @"longitude";
-static NSString *const kPOIPhone = @"phone";
-static NSString *const kPOIDetails = @"description";
-static NSString *const kPOIWebsite = @"website";
-static NSString *const kPOIEmail = @"email";
+NSString *const kPOIId = @"id";
+NSString *const kPOICategoryId = @"category_id";
+NSString *const kPOIName = @"name";
+NSString *const kPOIAudience = @"audience";
+NSString *const kPOIAddress = @"adress";
+NSString *const kPOILatitude = @"latitude";
+NSString *const kPOILongitude = @"longitude";
+NSString *const kPOIPhone = @"phone";
+NSString *const kPOIDetails = @"description";
+NSString *const kPOIWebsite = @"website";
+NSString *const kPOIEmail = @"email";
+NSString *const kImagePrefixName = @"poi_category-%d";
 
 @implementation OTPoi
 
@@ -49,6 +50,16 @@ static NSString *const kPOIEmail = @"email";
 	}
 
 	return poi;
+}
+
+/********************************************************************************/
+#pragma mark - Utils
+
+- (UIImage *)image
+{
+	NSString *imageName = [NSString stringWithFormat:kImagePrefixName, [self.categoryId intValue]];
+
+	return [UIImage imageNamed:imageName];
 }
 
 @end

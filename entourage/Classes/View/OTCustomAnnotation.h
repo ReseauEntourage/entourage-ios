@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface OTCustomAnnotation : NSObject
+#import <MapKit/MapKit.h>
+
+@class OTPoi;
+
+extern NSString *const kAnnotationIdentifier;
+
+@interface OTCustomAnnotation : NSObject <MKAnnotation>
+
+- (id)initWithPoi:(OTPoi *)poi;
+- (MKAnnotationView *)annotationView;
+
+@property (nonatomic, strong) OTPoi *poi;
 
 @end

@@ -10,7 +10,7 @@
 
 @interface OTPoi : NSObject
 
-/**************************************************************************************************/
+/********************************************************************************/
 #pragma mark - Getters and Setters
 
 @property(nonatomic, strong) NSNumber *sid;
@@ -25,9 +25,14 @@
 @property(nonatomic, strong) NSString *audience;
 @property(nonatomic, strong) NSNumber *categoryId;
 
-/**************************************************************************************************/
+/********************************************************************************/
 #pragma mark - Birth & Death
 
 + (OTPoi *)poiWithJSONDictionnary:(NSDictionary *)dictionary;
+
+/********************************************************************************/
+#pragma mark - Utils
+
+- (UIImage *)image;
 
 @end
