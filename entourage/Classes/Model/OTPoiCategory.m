@@ -8,6 +8,8 @@
 
 #import "OTPoiCategory.h"
 
+#import "NSDictionary+Parsing.h"
+
 /**************************************************************************************************/
 #pragma mark - Constants
 
@@ -21,16 +23,17 @@ NSString *const kCategoryName = @"name";
 
 + (OTPoiCategory *)categoryWithJSONDictionnary:(NSDictionary *)dictionary
 {
-    OTPoiCategory *poiCategory = nil;
+	OTPoiCategory *poiCategory = nil;
 
-    if ([dictionary isKindOfClass:[NSDictionary class]])
-    {
-        poiCategory = [[OTPoiCategory alloc] init];
+	if ([dictionary isKindOfClass:[NSDictionary class]])
+	{
+		poiCategory = [[OTPoiCategory alloc] init];
 
-        poiCategory.sid = dictionary[kCategoryId];
-        poiCategory.name = dictionary[kCategoryName];
-    }
+		poiCategory.sid = [dictionary numberForKey:kCategoryId];
+		poiCategory.name = [dictionary stringForKey:kCategoryName];
+	}
 
-    return poiCategory;
+	return poiCategory;
 }
+
 @end

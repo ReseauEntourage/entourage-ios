@@ -8,6 +8,8 @@
 
 #import "OTPoi.h"
 
+#import "NSDictionary+Parsing.h"
+
 static NSString *const kPOIId = @"id";
 static NSString *const kPOICategoryId = @"category_id";
 static NSString *const kPOIName = @"name";
@@ -27,26 +29,26 @@ static NSString *const kPOIEmail = @"email";
 
 + (OTPoi *)poiWithJSONDictionnary:(NSDictionary *)dictionary
 {
-    OTPoi *poi = nil;
+	OTPoi *poi = nil;
 
-    if ([dictionary isKindOfClass:[NSDictionary class]])
-    {
-        poi = [[OTPoi alloc] init];
+	if ([dictionary isKindOfClass:[NSDictionary class]])
+	{
+		poi = [[OTPoi alloc] init];
 
-        poi.sid = dictionary[kPOIId];
-        poi.name = dictionary[kPOIName];
-        poi.audience = dictionary[kPOIAudience];
-        poi.address = dictionary[kPOIAddress];
-        poi.latitude = [(dictionary[kPOILatitude]) doubleValue];
-        poi.longitude = [(dictionary[kPOILongitude]) doubleValue];
-        poi.phone = dictionary[kPOIPhone];
-        poi.details = dictionary[kPOIDetails];
-        poi.website = dictionary[kPOIWebsite];
-        poi.email = dictionary[kPOIEmail];
-        poi.categoryId = dictionary[kPOICategoryId];
-    }
+		poi.sid = [dictionary numberForKey:kPOIId];
+		poi.name = [dictionary stringForKey:kPOIName];
+		poi.audience = [dictionary stringForKey:kPOIAudience];
+		poi.address = [dictionary stringForKey:kPOIAddress];
+		poi.latitude = [[dictionary numberForKey:kPOILatitude] doubleValue];
+		poi.longitude = [[dictionary numberForKey:kPOILongitude] doubleValue];
+		poi.phone = [dictionary stringForKey:kPOIPhone];
+		poi.details = [dictionary stringForKey:kPOIDetails];
+		poi.website = [dictionary stringForKey:kPOIWebsite];
+		poi.email = [dictionary stringForKey:kPOIEmail];
+		poi.categoryId = [dictionary numberForKey:kPOICategoryId];
+	}
 
-    return poi;
+	return poi;
 }
 
 @end
