@@ -1,0 +1,25 @@
+//
+//  OTEncounter.h
+//  entourage
+//
+//  Created by Mathieu Hausherr on 11/10/14.
+//  Copyright (c) 2014 OCTO Technology. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface OTEncounter : NSObject
+
+@property (strong, nonatomic) NSNumber *sid;
+@property (strong, nonatomic) NSDate *date;
+@property (strong, nonatomic) NSNumber *longitude;
+@property (strong, nonatomic) NSNumber *latitude;
+@property (strong, nonatomic) NSNumber *userId;
+@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *streetPersonName;
+@property (strong, nonatomic) NSString *message;
+@property (strong, nonatomic) NSString *voiceMessage;
+
++ (OTEncounter *)encounterWithJSONDictionnary:(NSDictionary *)dictionary;
+
+@end

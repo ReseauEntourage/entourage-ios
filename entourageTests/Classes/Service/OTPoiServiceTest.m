@@ -10,12 +10,13 @@
 #import "OTPoiService.h"
 #import "OTTestHelper.h"
 #import "OTPoi.h"
+#import "OTEncounter.h"
 #import "OTPoiCategory.h"
 
 @interface OTPoiService ()
 - (NSMutableArray *)poisFromDictionary:(NSDictionary *)data;
-
 - (NSMutableArray *)categoriesFromDictionary:(NSDictionary *)data;
+- (NSMutableArray *)encountersFromDictionary:(NSDictionary *)data;
 @end
 
 @interface OTPoiServiceTest : XCTestCase
@@ -98,6 +99,45 @@
     OTPoiCategory *lastCategory = pois.lastObject;
     XCTAssertEqualObjects(@"Se nourrir", firstCategory.name, @"");
     XCTAssertEqualObjects(@"Se loger", lastCategory.name, @"");
+}
+
+/**************************************************************************************************/
+#pragma mark - encountersFromDictionary
+
+- (void)test_encountersFromDictionary_withNilInput
+{
+    // Given
+    NSDictionary *dictionary = nil;
+    
+    // When
+    NSMutableArray *pois = [self.poiService encountersFromDictionary:dictionary];
+    
+    // Then
+    XCTAssertNotNil(pois, @"");
+}
+
+- (void)test_encountersFromDictionary_withCorrectInput
+{
+    // Given
+    NSDictionary *dictionary = [OTTestHelper parseJSONFromFileNamed:@"pois_categories_mock"];
+    
+    // When
+    NSMutableArray *encounters = [self.poiService encountersFromDictionary:dictionary];
+    
+    // Then
+    XCTAssertNotNil(encounters, @"");
+    XCTAssertEqual(1, encounters.count, @"");
+    
+    OTEncounter *firstEncounter = encounters.firstObject;
+    XCTAssertEqualObjects(@1, firstEncounter.sid, @"");
+    XCTAssertNotNil(firstEncounter.date, @"");
+    XCTAssertEqualObjects(@2.320442, firstEncounter.longitude, @"");
+    XCTAssertEqualObjects(@48.857464, firstEncounter.latitude, @"");
+    XCTAssertEqualObjects(@1, firstEncounter.userId, @"");
+    XCTAssertEqualObjects(@"Henry", firstEncounter.userName, @"");
+    XCTAssertEqualObjects(@"Mario", firstEncounter.streetPersonName, @"");
+    XCTAssertEqualObjects(@"Message de la rencontre", firstEncounter.message, @"");
+    XCTAssertEqualObjects(@"http://futur.url/de/l-enregistrement.mp3", firstEncounter.voiceMessage, @"");
 }
 
 @end

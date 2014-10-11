@@ -10,14 +10,16 @@
 #import "OTHTTPRequestManager.h"
 #import "OTPoiCategory.h"
 #import "OTPoi.h"
+#import "OTEncounter.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
 
 NSString *const kCategories = @"categories";
 NSString *const kPOIs = @"pois";
+NSString *const kEncounters = @"encounters";
 
-NSString *const kAPIPoiRoute = @"pois.json";
+NSString *const kAPIPoiRoute = @"map.json";
 
 @implementation OTPoiService
 
@@ -90,4 +92,24 @@ NSString *const kAPIPoiRoute = @"pois.json";
     }
     return categories;
 }
+
+- (NSMutableArray *)encountersFromDictionary:(NSDictionary *)data
+{
+    NSMutableArray *encounters = [NSMutableArray array];
+    
+    NSArray *jsonEncounters = data[kEncounters];
+    if ([jsonEncounters isKindOfClass:[NSArray class]])
+    {
+        for (NSDictionary *dictionary in jsonEncounters)
+        {
+            OTEncounter *encounter = [OTEncounter encounterWithJSONDictionnary:dictionary];
+            if (encounter)
+            {
+                [encounters addObject:encounter];
+            }
+        }
+    }
+    return encounters;
+}
+
 @end

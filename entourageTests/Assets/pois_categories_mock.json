@@ -36,5 +36,18 @@
             "audience": "Hommes",
             "category_id": 2
         }
+    ],
+    "encounters": [
+       {
+            "id": 1,
+            "date": "2009-01-01T00:00:00.000Z",
+            "longitude": 2.320442,
+            "latitude": 48.857464,
+            "user_id": 1,
+            "user_name": "Henry",
+            "street_person_name": "Mario",
+            "message": "Message de la rencontre",
+            "voice_message": "http://futur.url/de/l-enregistrement.mp3"
+        }
     ]
 }
