@@ -31,6 +31,7 @@ NSString *const OTMenuViewControllerSegueMenuMyProfileIdentifier = @"segueMenuMy
 NSString *const OTMenuViewControllerSegueMenuMyNotificationsIdentifier = @"segueMenuMyNotificationsIdentifier";
 NSString *const OTMenuViewControllerSegueMenuHelpIdentifier = @"segueMenuHelpIdentifier";
 NSString *const OTMenuViewControllerSegueMenuYourOpinionIdentifier = @"segueMenuYourOpinionIdentifier";
+NSString *const OTMenuViewControllerSegueMenuTranslatetIdentifier = @"segueMenuTanslateIdentifier";
 NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
 
 @interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -81,13 +82,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    // Hack : because others segues don't still exist
-    if (indexPath.row < 2)
-    {
-        OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
-        [self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
-    }
-    else if (indexPath.row == 3)
+    if (indexPath.row == 3)
     {
         // Set this up once when your application launches
         UVConfig *config = [UVConfig configWithSite:@"entourage-social.uservoice.com"];
@@ -100,6 +95,9 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
         
         // Call this wherever you want to launch UserVoice
         [UserVoice presentUserVoiceForumForParentViewController:self];
+    } else {
+        OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
+        [self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
     }
 }
 
@@ -222,6 +220,11 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
     OTMenuItem *itemYourOpinion = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_yourOpinion_title", @"")
                                                              segueIdentifier:OTMenuViewControllerSegueMenuYourOpinionIdentifier];
     [menuItems addObject:itemYourOpinion];
+    
+    // Translate
+    OTMenuItem *itemTranslate = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_translate_title", @"")
+                                                   segueIdentifier:OTMenuViewControllerSegueMenuTranslatetIdentifier];
+    [menuItems addObject:itemTranslate];
     
     // Disconnect
     OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
