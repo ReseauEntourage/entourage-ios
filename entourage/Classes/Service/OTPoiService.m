@@ -33,6 +33,10 @@ NSString *const kAPIPoiRoute = @"map.json";
 {
 	OTUser *user = [[NSUserDefaults standardUserDefaults] currentUser];
 
+	if (!user)
+	{
+		return;
+	}
 	[[OTHTTPRequestManager sharedInstance] GET:kAPIPoiRoute parameters:@{ @"token" : user.token }
 									   success:^(AFHTTPRequestOperation *operation, id responseObject)
 	 {
