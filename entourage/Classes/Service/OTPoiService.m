@@ -54,7 +54,7 @@ NSString *const kAPIEncounterRoute = @"encounters";
 	 }];
 }
 
-- (void)sendEncounter:(OTEncounter *)encounter withSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure
+- (void)sendEncounter:(OTEncounter *)encounter withSuccess:(void (^)(OTEncounter *encounter))success failure:(void (^)(NSError *error))failure
 {
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     [parameters setObject:[encounter dictionaryForWebservice] forKey:kEncounter];
@@ -64,7 +64,8 @@ NSString *const kAPIEncounterRoute = @"encounters";
      {
          if (success)
          {
-             success();
+             OTEncounter *encounter = [self encounterFromDictionary:responseObject];
+             success(encounter);
          }
      }
      
@@ -139,6 +140,18 @@ NSString *const kAPIEncounterRoute = @"encounters";
 		}
 	}
 	return encounters;
+}
+
+- (OTEncounter *)encounterFromDictionary:(NSDictionary *)data
+{
+    OTEncounter *encounter;
+    NSDictionary *jsonEncounters = data[kEncounter];
+    
+    if ([jsonEncounters isKindOfClass:[NSDictionary class]])
+    {
+        encounter = [OTEncounter encounterWithJSONDictionnary:jsonEncounters];
+    }
+    return encounter;
 }
 
 @end

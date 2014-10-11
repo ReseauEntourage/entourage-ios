@@ -40,7 +40,7 @@
 
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSArray *pois;
-@property (nonatomic, strong) NSArray *encounters;
+@property (nonatomic, strong) NSMutableArray *encounters;
 
 @property (nonatomic, strong) WYPopoverController *popover;
 @property (nonatomic, strong) KPClusteringController *clusteringController;
@@ -273,8 +273,12 @@
     encounter.streetPersonName =  @"bar";
     encounter.latitude = self.mapView.region.center.latitude;
     encounter.longitude = self.mapView.region.center.longitude;
-    [[OTPoiService new] sendEncounter:encounter withSuccess:^{
-        
+    [[OTPoiService new] sendEncounter:encounter withSuccess:^(OTEncounter *encounter) {
+        if (encounter)
+        {
+            [self.encounters addObject:encounter];
+            [self feedMapViewWithEncountersArray:self.encounters];
+        }
     } failure:^(NSError *error) {
         
     }];
