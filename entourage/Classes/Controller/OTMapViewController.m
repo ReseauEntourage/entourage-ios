@@ -297,7 +297,7 @@
 #pragma mark - Actions
 
 
-- (IBAction)zoomToCurrentLocation:(UIBarButtonItem *)sender
+- (IBAction)zoomToCurrentLocation:(id)sender
 {
     float spanX = 0.0001;
     float spanY = 0.0001;

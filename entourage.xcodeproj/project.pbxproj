@@ -18,6 +18,10 @@
 		19BA509719E9625A00342A36 /* rencontre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509619E9625A00342A36 /* rencontre@2x.png */; };
 		19BA509919E9626000342A36 /* rencontre.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509819E9626000342A36 /* rencontre.png */; };
 		1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */; };
+		19BA509C19E987A100342A36 /* center-location.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509A19E987A100342A36 /* center-location.png */; };
+		19BA509D19E987A100342A36 /* center-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509B19E987A100342A36 /* center-location@2x.png */; };
+		19BA50A019E9894200342A36 /* pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509E19E9894200342A36 /* pointer.png */; };
+		19BA50A119E9894200342A36 /* pointer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509F19E9894200342A36 /* pointer@2x.png */; };
 		1D55D8D119E82B6C006A2184 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D55D8CF19E82B6C006A2184 /* Main.storyboard */; };
 		1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D319E84E9B006A2184 /* OTUser.m */; };
 		1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
@@ -119,6 +123,10 @@
 		19BA509819E9626000342A36 /* rencontre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rencontre.png; sourceTree = "<group>"; };
 		1D3BD36A19E964FC001687F9 /* OTMeetingCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMeetingCalloutViewController.h; sourceTree = "<group>"; };
 		1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMeetingCalloutViewController.m; sourceTree = "<group>"; };
+		19BA509A19E987A100342A36 /* center-location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "center-location.png"; sourceTree = "<group>"; };
+		19BA509B19E987A100342A36 /* center-location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "center-location@2x.png"; sourceTree = "<group>"; };
+		19BA509E19E9894200342A36 /* pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointer.png; sourceTree = "<group>"; };
+		19BA509F19E9894200342A36 /* pointer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pointer@2x.png"; sourceTree = "<group>"; };
 		1D55D8D019E82B6C006A2184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1D55D8D219E84E9B006A2184 /* OTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUser.h; sourceTree = "<group>"; };
 		1D55D8D319E84E9B006A2184 /* OTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUser.m; sourceTree = "<group>"; };
@@ -559,6 +567,8 @@
 				1DA2911219E92F260098C01E /* logo.png */,
 				DBBE8AA519E83CB600FA218E /* bg-top-header.png */,
 				DBBE8AA619E83CB600FA218E /* bg-top-header@2x.png */,
+				19BA509A19E987A100342A36 /* center-location.png */,
+				19BA509B19E987A100342A36 /* center-location@2x.png */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -593,6 +603,8 @@
 				DBBE8AB619E83CB600FA218E /* poi_category-5@2x.png */,
 				DBBE8AB719E83CB600FA218E /* poi_category-4.png */,
 				DBBE8AB819E83CB600FA218E /* poi_category-4@2x.png */,
+				19BA509E19E9894200342A36 /* pointer.png */,
+				19BA509F19E9894200342A36 /* pointer@2x.png */,
 				19BA509819E9626000342A36 /* rencontre.png */,
 				19BA509619E9625A00342A36 /* rencontre@2x.png */,
 			);
@@ -798,12 +810,14 @@
 				A8B3826019E94BB400CF7184 /* poi_category-0@2x.png in Resources */,
 				DBBE8ACA19E83CB600FA218E /* poi_category-4@2x.png in Resources */,
 				A8B3825F19E94BB400CF7184 /* poi_category-0.png in Resources */,
+				19BA509C19E987A100342A36 /* center-location.png in Resources */,
 				19BA509719E9625A00342A36 /* rencontre@2x.png in Resources */,
 				DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */,
 				DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */,
 				19BA509919E9626000342A36 /* rencontre.png in Resources */,
 				DBBE8ABC19E83CB600FA218E /* ic_menu@2x.png in Resources */,
 				DBBE8AC819E83CB600FA218E /* poi_category-5@2x.png in Resources */,
+				19BA509D19E987A100342A36 /* center-location@2x.png in Resources */,
 				DBBE8AC419E83CB600FA218E /* poi_category-3@2x.png in Resources */,
 				DBBE8AC919E83CB600FA218E /* poi_category-4.png in Resources */,
 				DBBE8A9619E81AF600FA218E /* Calibri-Bold-Italic.ttf in Resources */,
@@ -812,9 +826,11 @@
 				6B92CABA19A7461C004E8C9B /* Images.xcassets in Resources */,
 				DBBE8AC219E83CB600FA218E /* poi_category-2@2x.png in Resources */,
 				DBBE8AB919E83CB600FA218E /* bg-top-header.png in Resources */,
+				19BA50A019E9894200342A36 /* pointer.png in Resources */,
 				A8B3825C19E94B4300CF7184 /* poi_category-6@2x.png in Resources */,
 				A8B3825B19E94B4300CF7184 /* poi_category-6.png in Resources */,
 				DBBE8A9819E81AF600FA218E /* Calibri-Italic.ttf in Resources */,
+				19BA50A119E9894200342A36 /* pointer@2x.png in Resources */,
 				191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */,
 				DBBE8AC019E83CB600FA218E /* poi_category-1@2x.png in Resources */,
 				DBBE8AC719E83CB600FA218E /* poi_category-5.png in Resources */,
