@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - kingpin (0.2.beta)
   - MSTranslateVendor (1.1.0)
   - OCMock (3.1.1)
   - SWRevealViewController (2.3.0)
@@ -28,6 +29,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.3)
+  - kingpin (= 0.2.beta)
   - MSTranslateVendor (~> 1.1)
   - OCMock (~> 3.1)
   - SWRevealViewController (~> 2.3)
@@ -36,6 +38,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  kingpin: 080953063d3d59c07f512623879b69f63c129f84
   MSTranslateVendor: bf54b7003c09b1178bdc8a76d22652545ea329df
   OCMock: f6cb8c162ab9d5620dddf411282c7b2c0ee78854
   SWRevealViewController: f6d80638b8e12323e87ac79562345403a799cb77

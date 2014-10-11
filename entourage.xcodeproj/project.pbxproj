@@ -15,6 +15,8 @@
 		191FE92819E945F200C56BCA /* OTEncounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE92719E945F200C56BCA /* OTEncounter.m */; };
 		19BA509219E956D500342A36 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A816F83519E80D3C003EEF86 /* Localizable.strings */; };
 		19BA509519E9587800342A36 /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BA509419E9587800342A36 /* OTEncounterAnnotation.m */; };
+		19BA509719E9625A00342A36 /* rencontre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509619E9625A00342A36 /* rencontre@2x.png */; };
+		19BA509919E9626000342A36 /* rencontre.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509819E9626000342A36 /* rencontre.png */; };
 		1D55D8D119E82B6C006A2184 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D55D8CF19E82B6C006A2184 /* Main.storyboard */; };
 		1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D319E84E9B006A2184 /* OTUser.m */; };
 		1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
@@ -109,6 +111,8 @@
 		191FE92719E945F200C56BCA /* OTEncounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounter.m; sourceTree = "<group>"; };
 		19BA509319E9587800342A36 /* OTEncounterAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterAnnotation.h; sourceTree = "<group>"; };
 		19BA509419E9587800342A36 /* OTEncounterAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounterAnnotation.m; sourceTree = "<group>"; };
+		19BA509619E9625A00342A36 /* rencontre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rencontre@2x.png"; sourceTree = "<group>"; };
+		19BA509819E9626000342A36 /* rencontre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rencontre.png; sourceTree = "<group>"; };
 		1D55D8D019E82B6C006A2184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1D55D8D219E84E9B006A2184 /* OTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUser.h; sourceTree = "<group>"; };
 		1D55D8D319E84E9B006A2184 /* OTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUser.m; sourceTree = "<group>"; };
@@ -564,6 +568,8 @@
 				DBBE8AB619E83CB600FA218E /* poi_category-5@2x.png */,
 				DBBE8AB719E83CB600FA218E /* poi_category-4.png */,
 				DBBE8AB819E83CB600FA218E /* poi_category-4@2x.png */,
+				19BA509819E9626000342A36 /* rencontre.png */,
+				19BA509619E9625A00342A36 /* rencontre@2x.png */,
 			);
 			path = "picto category";
 			sourceTree = "<group>";
@@ -765,8 +771,10 @@
 				A8B3826019E94BB400CF7184 /* poi_category-0@2x.png in Resources */,
 				DBBE8ACA19E83CB600FA218E /* poi_category-4@2x.png in Resources */,
 				A8B3825F19E94BB400CF7184 /* poi_category-0.png in Resources */,
+				19BA509719E9625A00342A36 /* rencontre@2x.png in Resources */,
 				DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */,
 				DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */,
+				19BA509919E9626000342A36 /* rencontre.png in Resources */,
 				DBBE8ABC19E83CB600FA218E /* ic_menu@2x.png in Resources */,
 				DBBE8AC819E83CB600FA218E /* poi_category-5@2x.png in Resources */,
 				DBBE8AC419E83CB600FA218E /* poi_category-3@2x.png in Resources */,

@@ -16,6 +16,7 @@
 
 
 NSString *const kEncounterAnnotationIdentifier = @"OTEncounterAnnotationIdentifier";
+NSString *const kEncounterClusterAnnotationIdentifier = @"OTEncounterClusterAnnotationIdentifier";
 
 @interface OTEncounterAnnotation () <MKAnnotation>
 
@@ -62,6 +63,7 @@ NSString *const kEncounterAnnotationIdentifier = @"OTEncounterAnnotationIdentifi
                                                                     reuseIdentifier:kEncounterAnnotationIdentifier];
     
     annotationView.canShowCallout = NO;
+    annotationView.image = [UIImage imageNamed:@"rencontre.png"];
     
     return annotationView;
 }

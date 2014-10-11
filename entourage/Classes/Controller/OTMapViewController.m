@@ -25,6 +25,8 @@
 // Framework
 #import <MapKit/MKMapView.h>
 #import <WYPopoverController/WYPopoverController.h>
+#import "KPClusteringController.h"
+#import "KPAnnotation.h"
 
 /********************************************************************************/
 #pragma mark - OTMapViewController
@@ -39,6 +41,7 @@
 @property (nonatomic, strong) NSArray *encounters;
 
 @property (nonatomic, strong) WYPopoverController *popover;
+@property (nonatomic, strong) KPClusteringController *clusteringController;
 @end
 
 @implementation OTMapViewController
@@ -51,6 +54,7 @@
 	[super viewDidLoad];
 
 	self.mapView.delegate = self;
+    self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
 
 	[self createMenuButton];
 
@@ -89,7 +93,7 @@
 	{
 		OTCustomAnnotation *pointAnnotation = [[OTCustomAnnotation alloc] initWithPoi:poi];
 
-		[[self mapView] addAnnotation:pointAnnotation];
+		[self.mapView addAnnotation:pointAnnotation];
 	}
 
 	[self computeAndSetCenterForPoiArray:array];
@@ -97,12 +101,13 @@
 
 - (void)feedMapViewWithEncountersArray:(NSArray *)array
 {
+    NSMutableArray *annotations = [NSMutableArray new];
     for (OTEncounter *encounter in array)
     {
         OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
-        
-        [[self mapView] addAnnotation:pointAnnotation];
+        [annotations addObject:pointAnnotation];
     }
+    [self.clusteringController setAnnotations:annotations];
 }
 
 - (void)computeAndSetCenterForPoiArray:(NSArray *)array
@@ -145,23 +150,54 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-	if ([annotation isKindOfClass:[MKUserLocation class]])
+    MKAnnotationView *annotationView = nil;
+    
+	if ([annotation isKindOfClass:[OTCustomAnnotation class]])
 	{
-		return nil;
-	}
-	else if ([annotation isKindOfClass:[OTCustomAnnotation class]])
-	{
-		MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kAnnotationIdentifier];
+		annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kAnnotationIdentifier];
 
 		if (!annotationView)
 		{
 			annotationView = ((OTCustomAnnotation *)annotation).annotationView;
 		}
 		annotationView.annotation = annotation;
-		return annotationView;
-	}
+    }
+    else if ([annotation isKindOfClass:[KPAnnotation class]])
+    {
+        KPAnnotation *kingpinAnnotation = (KPAnnotation *)annotation;
+        
+        if ([kingpinAnnotation isCluster])
+        {
+            annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterClusterAnnotationIdentifier];
+            if (!annotationView)
+            {
+                annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEncounterClusterAnnotationIdentifier];
+            }
+            MKPinAnnotationView *pinAnnotationView = (MKPinAnnotationView *)annotationView;
 
-	return nil;
+            pinAnnotationView.pinColor = MKPinAnnotationColorGreen;
+        }
+        else {
+            id<MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
+            if([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]])
+            {
+                annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterAnnotationIdentifier];
+                if (!annotationView)
+                {
+                    annotationView = ((OTEncounterAnnotation *)simpleAnnontation).annotationView;
+                }
+                annotationView.annotation = simpleAnnontation;
+            }
+        }
+        annotationView.canShowCallout = YES;
+    }
+
+
+	return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    [self.clusteringController refresh:animated];
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view

@@ -8,13 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-
-
 #import <MapKit/MapKit.h>
 
 @class OTEncounter;
 
-extern NSString *const kAnnotationIdentifier;
+extern NSString *const kEncounterAnnotationIdentifier;
+extern NSString *const kEncounterClusterAnnotationIdentifier;
 
 @interface OTEncounterAnnotation : NSObject <MKAnnotation>
 
