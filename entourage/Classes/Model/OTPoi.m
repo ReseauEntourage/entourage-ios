@@ -22,6 +22,7 @@ NSString *const kPOIDetails = @"description";
 NSString *const kPOIWebsite = @"website";
 NSString *const kPOIEmail = @"email";
 NSString *const kImagePrefixName = @"poi_category-%d";
+NSString *const kImageDefaultName = @"poi_category-0";
 
 @implementation OTPoi
 
@@ -59,7 +60,7 @@ NSString *const kImagePrefixName = @"poi_category-%d";
 {
 	NSString *imageName = [NSString stringWithFormat:kImagePrefixName, [self.categoryId intValue]];
 
-	return [UIImage imageNamed:imageName];
+	return [UIImage imageNamed:imageName] ? [UIImage imageNamed:imageName] : [UIImage imageNamed:kImageDefaultName];
 }
 
 @end
