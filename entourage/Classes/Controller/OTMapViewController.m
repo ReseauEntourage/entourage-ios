@@ -229,6 +229,7 @@
 					permittedArrowDirections:WYPopoverArrowDirectionNone
 									animated:YES
 									 options:WYPopoverAnimationOptionFadeWithScale];
+        [Flurry logEvent:@"Open_POI_From_Map" withParameters:@{@"poi_id" : annotation.poi.sid}];
 	}
 	else if ([view.annotation isKindOfClass:[KPAnnotation class]])
 	{
@@ -270,9 +271,10 @@
 								 permittedArrowDirections:WYPopoverArrowDirectionNone
 												 animated:YES
 												  options:WYPopoverAnimationOptionFadeWithScale];
+                [Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{@"encounter_id" : encounterAnnotation.encounter.sid}];
 			}
 		}
-	}
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
