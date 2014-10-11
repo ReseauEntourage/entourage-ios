@@ -561,11 +561,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="## &lt;Nom> et" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDZ-i8-4OP">
+                                <rect key="frame" x="16" y="15" width="288" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="Yrx-AV-Nye"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nom de la personne de la rue" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a5N-Kb-CX4">
+                                <rect key="frame" x="16" y="46" width="288" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="WP0-00-tFm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="## se sont rencontrés ici, le &lt;date>" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uf-2Y-z5H">
+                                <rect key="frame" x="16" y="84" width="288" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="9Pf-DG-we5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
+                                <rect key="frame" x="16" y="113" width="288" height="393"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aW3-pj-aMW">
                                 <rect key="frame" x="106" y="514" width="108" height="34"/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="zmW-Wf-kFs"/>
+                                    <constraint firstAttribute="height" constant="34" id="VEB-5y-9Vw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="18"/>
                                 <state key="normal" title="ENVOYER">
@@ -577,40 +609,48 @@
                                     <action selector="sendEncounter:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="7NT-qx-1w8"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nom de la personne de la rue" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a5N-Kb-CX4">
-                                <rect key="frame" x="16" y="28" width="288" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
-                                <rect key="frame" x="16" y="66" width="288" height="440"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8c7-iL-w53">
+                                <rect key="frame" x="280" y="8" width="24" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="BFB-Se-6vg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="aW3-pj-aMW" firstAttribute="top" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="8" id="3zr-sf-6Zn"/>
-                            <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="Kdp-SY-LWS"/>
-                            <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="OP8-Um-Xa7"/>
-                            <constraint firstItem="LVP-zg-cRX" firstAttribute="top" secondItem="aW3-pj-aMW" secondAttribute="bottom" constant="20" id="OTO-Ql-Za0"/>
-                            <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="a5N-Kb-CX4" secondAttribute="bottom" constant="8" id="QYZ-OI-ErD"/>
-                            <constraint firstItem="a5N-Kb-CX4" firstAttribute="top" secondItem="4Ke-cm-KmY" secondAttribute="bottom" constant="8" symbolic="YES" id="S0j-r5-bwN"/>
-                            <constraint firstItem="a5N-Kb-CX4" firstAttribute="trailing" secondItem="Ial-X5-VCO" secondAttribute="trailing" id="Wmd-oh-deK"/>
-                            <constraint firstItem="aW3-pj-aMW" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" constant="90" id="dXj-zR-MxB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="aW3-pj-aMW" secondAttribute="trailing" constant="90" id="dqG-2h-EdE"/>
-                            <constraint firstItem="a5N-Kb-CX4" firstAttribute="leading" secondItem="Ial-X5-VCO" secondAttribute="leading" id="qoL-jx-JI6"/>
+                            <constraint firstItem="a5N-Kb-CX4" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="8el-cK-ORT"/>
+                            <constraint firstItem="2uf-2Y-z5H" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="Dgs-Mn-nA5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aW3-pj-aMW" secondAttribute="trailing" constant="90" id="G2h-Rh-puJ"/>
+                            <constraint firstItem="a5N-Kb-CX4" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="Gxj-BP-1Fc"/>
+                            <constraint firstItem="aW3-pj-aMW" firstAttribute="top" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="8" id="INK-95-FXI"/>
+                            <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="KgW-ij-Axb"/>
+                            <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="8" id="L9K-np-DyK"/>
+                            <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="NRN-4b-MX0"/>
+                            <constraint firstItem="KDZ-i8-4OP" firstAttribute="top" secondItem="feS-ZD-ocn" secondAttribute="topMargin" constant="15" id="NeU-Tv-ARP"/>
+                            <constraint firstItem="2uf-2Y-z5H" firstAttribute="top" secondItem="a5N-Kb-CX4" secondAttribute="bottom" constant="8" id="TDf-jr-56m"/>
+                            <constraint firstItem="2uf-2Y-z5H" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="Td3-BW-aaV"/>
+                            <constraint firstItem="KDZ-i8-4OP" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="UBs-OK-aRn"/>
+                            <constraint firstItem="a5N-Kb-CX4" firstAttribute="top" secondItem="KDZ-i8-4OP" secondAttribute="bottom" constant="8" id="UJp-20-Fhz"/>
+                            <constraint firstItem="LVP-zg-cRX" firstAttribute="top" secondItem="aW3-pj-aMW" secondAttribute="bottom" constant="20" id="bHz-Oa-ZWd"/>
+                            <constraint firstItem="aW3-pj-aMW" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" constant="90" id="gGe-jt-RxC"/>
+                            <constraint firstItem="KDZ-i8-4OP" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="hzV-3u-lYK"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dateLabel" destination="2uf-2Y-z5H" id="b2A-nh-SMK"/>
+                        <outlet property="firstLabel" destination="KDZ-i8-4OP" id="1uL-Bh-XUo"/>
                         <outlet property="messageTextView" destination="Ial-X5-VCO" id="ilC-Qg-MDD"/>
                         <outlet property="nameTextField" destination="a5N-Kb-CX4" id="gpj-ZW-kua"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zCS-BA-fyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="1378"/>
+            <point key="canvasLocation" x="572" y="1417"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="evh-Kf-L5B">

@@ -14,15 +14,36 @@
 // Services
 #import "OTPoiService.h"
 
+#import "NSUserDefaults+OT.h"
+#import "OTUser.h"
+
 @interface OTCreateMeetingViewController ()
 
 @property (nonatomic) CLLocationCoordinate2D location;
 @property (nonatomic, strong) IBOutlet UITextField *nameTextField;
 @property (nonatomic, strong) IBOutlet UITextView *messageTextView;
+@property (weak, nonatomic) IBOutlet UILabel *firstLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end
 
 @implementation OTCreateMeetingViewController
+
+-(void)viewDidLoad
+{
+    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.firstName];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
+    
+    NSString *dateString = [formatter stringFromDate:[NSDate date]];
+    
+    self.dateLabel.text = [NSString stringWithFormat:@"se sont rencontré ici le %@", dateString];
+    
+    self.messageTextView.layer.borderWidth = 1;
+    self.messageTextView.layer.borderColor = UIColor.lightGrayColor.CGColor;
+}
 
 - (void)configureWithLocation:(CLLocationCoordinate2D)location
 {
@@ -46,4 +67,14 @@
         
     }];
 }
+
+- (IBAction)close:(id)sender
+{
+    if (self.delegate)
+    {
+        [self.delegate dismissPopoverWithEncounter:nil];
+    }
+}
+
+
 @end
