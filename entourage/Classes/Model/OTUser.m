@@ -13,6 +13,7 @@
 NSString *const kKeySid = @"sid";
 NSString *const kKeyEmail = @"email";
 NSString *const kKeyToken = @"token";
+NSString *const kKeyFirstname = @"first_name";
 
 @implementation OTUser
 
@@ -24,6 +25,7 @@ NSString *const kKeyToken = @"token";
 		_sid = [dictionary numberForKey:kKeySid];
 		_email = [dictionary stringForKey:kKeyEmail];
 		_token = [dictionary stringForKey:kKeyToken];
+        _firstName = [dictionary stringForKey:kKeyFirstname];
 	}
 	return self;
 }
@@ -33,6 +35,7 @@ NSString *const kKeyToken = @"token";
 	[encoder encodeObject:self.sid forKey:kKeySid];
 	[encoder encodeObject:self.email forKey:kKeyEmail];
 	[encoder encodeObject:self.token forKey:kKeyToken];
+    [encoder encodeObject:self.firstName forKey:kKeyFirstname];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -42,8 +45,14 @@ NSString *const kKeyToken = @"token";
 		self.sid = [decoder decodeObjectForKey:kKeySid];
 		self.email = [decoder decodeObjectForKey:kKeyEmail];
 		self.token = [decoder decodeObjectForKey:kKeyToken];
+        self.firstName = [decoder decodeObjectForKey:kKeyFirstname];
 	}
 	return self;
+}
+
+- (NSNumber *)sid
+{
+    return self.sid;
 }
 
 @end

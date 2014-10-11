@@ -22,10 +22,6 @@
 {
 	[super viewDidAppear:animated];
 
-	// To disconnect the user
-//		[[NSUserDefaults standardUserDefaults] setUserMail:nil];
-	//	[[NSUserDefaults standardUserDefaults] setUserSid:nil];
-
 	if (![[NSUserDefaults standardUserDefaults] currentUser])
 	{
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

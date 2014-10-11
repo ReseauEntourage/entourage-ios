@@ -10,6 +10,7 @@
 #import "OTMapViewController.h"
 #import "UIViewController+menu.h"
 #import "OTCalloutViewController.h"
+#import "OTMeetingCalloutViewController.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -33,7 +34,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, OTMeetingCalloutViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -229,7 +230,50 @@
 					permittedArrowDirections:WYPopoverArrowDirectionNone
 									animated:YES
 									 options:WYPopoverAnimationOptionFadeWithScale];
-	}
+    } else if ([view.annotation isKindOfClass:[KPAnnotation class]]) {
+        KPAnnotation *kingpinAnnotation = (KPAnnotation *)view.annotation;
+        if ([kingpinAnnotation isCluster])
+        {
+            // Do nothing
+        }
+        else
+        {
+            id<MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
+            if([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]])
+            {
+                
+                OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTMeetingCalloutViewController"];
+                controller.delegate = self;
+                
+                UIView *popView = [controller view];
+                
+                popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
+                
+                [UIView animateWithDuration:.3f
+                                 animations:^
+                 {
+                     popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
+                 }];
+                
+                OTEncounterAnnotation* encounterAnnotation = (OTEncounterAnnotation *) simpleAnnontation;
+                OTEncounter *encounter = encounterAnnotation.encounter;
+                
+                [controller configureWithEncouter:encounter];
+                
+                controller.preferredContentSize = CGSizeMake(self.view.frame.size.width, 300);
+                
+                self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
+                [self.popover setTheme:[WYPopoverTheme themeForIOS7]];
+                
+                [self.popover presentPopoverFromRect:view.bounds
+                                              inView:view
+                            permittedArrowDirections:WYPopoverArrowDirectionNone
+                                            animated:YES
+                                             options:WYPopoverAnimationOptionFadeWithScale];
+                
+            }
+        }
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation

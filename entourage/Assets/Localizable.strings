@@ -21,3 +21,7 @@
 "menu_translate_title" = "TRADUIRE";
 "menu_disconnect_title" = "DECONNEXION";
 
+
+"has_encountered" = "a rencontré";
+"here" = "ici";
+"their_message" = "Leur message";
