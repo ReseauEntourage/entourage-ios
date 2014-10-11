@@ -11,6 +11,9 @@
 #import "OTPoiCategory.h"
 #import "OTPoi.h"
 #import "OTEncounter.h"
+#import "OTUser.h"
+
+#import "NSUserDefaults+OT.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
@@ -28,29 +31,30 @@ NSString *const kAPIPoiRoute = @"map.json";
 
 - (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois, NSArray *encounters))success failure:(void (^)(NSError *error))failure
 {
-    [[OTHTTPRequestManager sharedInstance] GET:kAPIPoiRoute parameters:nil
-            success:^(AFHTTPRequestOperation *operation, id responseObject)
-            {
-                NSDictionary *data = responseObject;
+	OTUser *user = [[NSUserDefaults standardUserDefaults] currentUser];
 
-                NSMutableArray *categories = [self categoriesFromDictionary:data];
-                NSMutableArray *pois = [self poisFromDictionary:data];
-                NSMutableArray *encounters = [self encountersFromDictionary:data];
+	[[OTHTTPRequestManager sharedInstance] GET:kAPIPoiRoute parameters:@{ @"token" : user.token }
+									   success:^(AFHTTPRequestOperation *operation, id responseObject)
+	 {
+		 NSDictionary *data = responseObject;
 
-                if (success)
-                {
-                    success(categories, pois, encounters);
-                }
-            }
+		 NSMutableArray *categories = [self categoriesFromDictionary:data];
+		 NSMutableArray *pois = [self poisFromDictionary:data];
+		 NSMutableArray *encounters = [self encountersFromDictionary:data];
 
-            failure:^(AFHTTPRequestOperation *operation, NSError *error)
-            {
-                if (failure)
-                {
-                    failure(error);
-                }
-            }];
+		 if (success)
+		 {
+			 success(categories, pois, encounters);
+		 }
+	 }
 
+									   failure:^(AFHTTPRequestOperation *operation, NSError *error)
+	 {
+		 if (failure)
+		 {
+			 failure(error);
+		 }
+	 }];
 }
 
 /**************************************************************************************************/
@@ -58,59 +62,62 @@ NSString *const kAPIPoiRoute = @"map.json";
 
 - (NSMutableArray *)poisFromDictionary:(NSDictionary *)data
 {
-    NSMutableArray *pois = [NSMutableArray array];
+	NSMutableArray *pois = [NSMutableArray array];
 
-    NSArray *jsonPois = data[kPOIs];
-    if ([jsonPois isKindOfClass:[NSArray class]])
-    {
-        for (NSDictionary *dictionary in jsonPois)
-        {
-            OTPoi *poi = [OTPoi poiWithJSONDictionnary:dictionary];
-            if (poi)
-            {
-                [pois addObject:poi];
-            }
-        }
-    }
-    return pois;
+	NSArray *jsonPois = data[kPOIs];
+
+	if ([jsonPois isKindOfClass:[NSArray class]])
+	{
+		for (NSDictionary *dictionary in jsonPois)
+		{
+			OTPoi *poi = [OTPoi poiWithJSONDictionnary:dictionary];
+			if (poi)
+			{
+				[pois addObject:poi];
+			}
+		}
+	}
+	return pois;
 }
 
 - (NSMutableArray *)categoriesFromDictionary:(NSDictionary *)data
 {
-    NSMutableArray *categories = [NSMutableArray array];
+	NSMutableArray *categories = [NSMutableArray array];
 
-    NSArray *jsonCategories = data[kCategories];
-    if ([jsonCategories isKindOfClass:[NSArray class]])
-    {
-        for (NSDictionary *dictionary in jsonCategories)
-        {
-            OTPoiCategory *category = [OTPoiCategory categoryWithJSONDictionnary:dictionary];
-            if (category)
-            {
-                [categories addObject:category];
-            }
-        }
-    }
-    return categories;
+	NSArray *jsonCategories = data[kCategories];
+
+	if ([jsonCategories isKindOfClass:[NSArray class]])
+	{
+		for (NSDictionary *dictionary in jsonCategories)
+		{
+			OTPoiCategory *category = [OTPoiCategory categoryWithJSONDictionnary:dictionary];
+			if (category)
+			{
+				[categories addObject:category];
+			}
+		}
+	}
+	return categories;
 }
 
 - (NSMutableArray *)encountersFromDictionary:(NSDictionary *)data
 {
-    NSMutableArray *encounters = [NSMutableArray array];
-    
-    NSArray *jsonEncounters = data[kEncounters];
-    if ([jsonEncounters isKindOfClass:[NSArray class]])
-    {
-        for (NSDictionary *dictionary in jsonEncounters)
-        {
-            OTEncounter *encounter = [OTEncounter encounterWithJSONDictionnary:dictionary];
-            if (encounter)
-            {
-                [encounters addObject:encounter];
-            }
-        }
-    }
-    return encounters;
+	NSMutableArray *encounters = [NSMutableArray array];
+
+	NSArray *jsonEncounters = data[kEncounters];
+
+	if ([jsonEncounters isKindOfClass:[NSArray class]])
+	{
+		for (NSDictionary *dictionary in jsonEncounters)
+		{
+			OTEncounter *encounter = [OTEncounter encounterWithJSONDictionnary:dictionary];
+			if (encounter)
+			{
+				[encounters addObject:encounter];
+			}
+		}
+	}
+	return encounters;
 }
 
 @end
