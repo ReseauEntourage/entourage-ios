@@ -13,9 +13,11 @@
 
 // View
 #import "OTCustomAnnotation.h"
+#import "OTEncounterAnnotation.h"
 
 // Model
 #import "OTPoi.h"
+#import "OTEncounter.h"
 
 // Service
 #import "OTPoiService.h"
@@ -34,6 +36,7 @@
 
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSArray *pois;
+@property (nonatomic, strong) NSArray *encounters;
 
 @property (nonatomic, strong) WYPopoverController *popover;
 @end
@@ -53,14 +56,16 @@
 
 	self.title = NSLocalizedString(@"mapviewcontroller_title", @"");
 
-	[[OTPoiService new] allPoisWithSuccess:^(NSArray *categories, NSArray *pois)
+	[[OTPoiService new] allPoisWithSuccess:^(NSArray *categories, NSArray *pois, NSArray *encounters)
 	 {
 		 [self.indicatorView setHidden:YES];
 
 		 self.categories = categories;
 		 self.pois = pois;
+         self.encounters = encounters;
 
-		 [self feedMapViewWithPoiArray:pois];
+         [self feedMapViewWithPoiArray:pois];
+         [self feedMapViewWithEncountersArray:encounters];
 	 }
 
 								   failure:^(NSError *error)
@@ -88,6 +93,16 @@
 	}
 
 	[self computeAndSetCenterForPoiArray:array];
+}
+
+- (void)feedMapViewWithEncountersArray:(NSArray *)array
+{
+    for (OTEncounter *encounter in array)
+    {
+        OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
+        
+        [[self mapView] addAnnotation:pointAnnotation];
+    }
 }
 
 - (void)computeAndSetCenterForPoiArray:(NSArray *)array

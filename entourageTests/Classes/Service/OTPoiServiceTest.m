@@ -131,8 +131,8 @@
     OTEncounter *firstEncounter = encounters.firstObject;
     XCTAssertEqualObjects(@1, firstEncounter.sid, @"");
     XCTAssertNotNil(firstEncounter.date, @"");
-    XCTAssertEqualObjects(@2.320442, firstEncounter.longitude, @"");
-    XCTAssertEqualObjects(@48.857464, firstEncounter.latitude, @"");
+    XCTAssertEqual(2.320442, firstEncounter.longitude, @"");
+    XCTAssertEqual(48.857464, firstEncounter.latitude, @"");
     XCTAssertEqualObjects(@1, firstEncounter.userId, @"");
     XCTAssertEqualObjects(@"Henry", firstEncounter.userName, @"");
     XCTAssertEqualObjects(@"Mario", firstEncounter.streetPersonName, @"");

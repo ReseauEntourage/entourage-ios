@@ -33,8 +33,8 @@ NSString *const kEncounterVoiceMessage = @"voice_message";
         
         encounter.sid = [dictionary numberForKey:kEncounterId];
         encounter.date = [dictionary dateForKey:kEncounterDate format:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"];
-        encounter.longitude = [dictionary numberForKey:kEncounterLongitude];
-        encounter.latitude = [dictionary numberForKey:kEncounterLatitude];
+        encounter.longitude = [[dictionary numberForKey:kEncounterLongitude] doubleValue];
+        encounter.latitude = [[dictionary numberForKey:kEncounterLatitude] doubleValue];
         encounter.userId = [dictionary numberForKey:kEncounterUserId];
         encounter.userName = [dictionary stringForKey:kEncounterUserName];
         encounter.streetPersonName = [dictionary stringForKey:kEncounterStreetPersonName];

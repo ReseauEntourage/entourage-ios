@@ -12,8 +12,8 @@
 
 @property (strong, nonatomic) NSNumber *sid;
 @property (strong, nonatomic) NSDate *date;
-@property (strong, nonatomic) NSNumber *longitude;
-@property (strong, nonatomic) NSNumber *latitude;
+@property (nonatomic) double longitude;
+@property (nonatomic) double latitude;
 @property (strong, nonatomic) NSNumber *userId;
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *streetPersonName;

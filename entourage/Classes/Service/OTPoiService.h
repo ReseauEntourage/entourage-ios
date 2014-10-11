@@ -15,6 +15,6 @@ extern NSString *const kAPIPoiRoute;
 
 @interface OTPoiService : NSObject
 
-- (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois))success failure:(void (^)(NSError *error))failure;
+- (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois, NSArray *encounters))success failure:(void (^)(NSError *error))failure;
 
 @end

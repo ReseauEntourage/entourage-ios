@@ -26,7 +26,7 @@ NSString *const kAPIPoiRoute = @"map.json";
 /**************************************************************************************************/
 #pragma mark - Public methods
 
-- (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois))success failure:(void (^)(NSError *error))failure
+- (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois, NSArray *encounters))success failure:(void (^)(NSError *error))failure
 {
     [[OTHTTPRequestManager sharedInstance] GET:kAPIPoiRoute parameters:nil
             success:^(AFHTTPRequestOperation *operation, id responseObject)
@@ -35,10 +35,11 @@ NSString *const kAPIPoiRoute = @"map.json";
 
                 NSMutableArray *categories = [self categoriesFromDictionary:data];
                 NSMutableArray *pois = [self poisFromDictionary:data];
+                NSMutableArray *encounters = [self encountersFromDictionary:data];
 
                 if (success)
                 {
-                    success(categories, pois);
+                    success(categories, pois, encounters);
                 }
             }
 
