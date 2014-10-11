@@ -42,6 +42,9 @@
 
 @property (nonatomic, strong) WYPopoverController *popover;
 @property (nonatomic, strong) KPClusteringController *clusteringController;
+
+@property (nonatomic) BOOL isRegionSetted;
+
 @end
 
 @implementation OTMapViewController
@@ -52,10 +55,22 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-
+    
+    CLLocationManager *locationManager = [[CLLocationManager alloc] init];
+#ifdef __IPHONE_8_0
+    if(IS_OS_8_OR_LATER) {
+        // Use one or the other, not both. Depending on what you put in info.plist
+        [locationManager requestWhenInUseAuthorization];
+    }
+#endif
+    [locationManager startUpdatingLocation];
+    
+    self.mapView.showsUserLocation = YES;
 	self.mapView.delegate = self;
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
-
+    
+    [self zoomToCurrentLocation:nil];
+    
 	[self createMenuButton];
 
 	self.title = NSLocalizedString(@"mapviewcontroller_title", @"");
@@ -92,11 +107,8 @@
 	for (OTPoi *poi in array)
 	{
 		OTCustomAnnotation *pointAnnotation = [[OTCustomAnnotation alloc] initWithPoi:poi];
-
 		[self.mapView addAnnotation:pointAnnotation];
 	}
-
-	[self computeAndSetCenterForPoiArray:array];
 }
 
 - (void)feedMapViewWithEncountersArray:(NSArray *)array
@@ -108,41 +120,6 @@
         [annotations addObject:pointAnnotation];
     }
     [self.clusteringController setAnnotations:annotations];
-}
-
-- (void)computeAndSetCenterForPoiArray:(NSArray *)array
-{
-	double maxLat = -MAXFLOAT;
-	double maxLong = -MAXFLOAT;
-	double minLat = MAXFLOAT;
-	double minLong = MAXFLOAT;
-
-	for (OTPoi *poi in array)
-	{
-		if (poi.latitude < minLat)
-		{
-			minLat = poi.latitude;
-		}
-
-		if (poi.longitude < minLong)
-		{
-			minLong = poi.longitude;
-		}
-
-		if (poi.latitude > maxLat)
-		{
-			maxLat = poi.latitude;
-		}
-
-		if (poi.longitude > maxLong)
-		{
-			maxLong = poi.longitude;
-		}
-	}
-
-	CLLocationCoordinate2D center = CLLocationCoordinate2DMake((maxLat + minLat) * 0.5, (maxLong + minLong) * 0.5);
-	MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(center, 10000, 10000);
-	[[self mapView] setRegion:viewRegion animated:YES];
 }
 
 /********************************************************************************/
@@ -235,12 +212,35 @@
 	}
 }
 
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    if (!self.isRegionSetted)
+    {
+        self.isRegionSetted = YES;
+        [self zoomToCurrentLocation:nil];
+    }
+}
+
 /********************************************************************************/
 #pragma mark - OTCalloutViewControllerDelegate
 
 - (void)dismissPopover
 {
 	[self.popover dismissPopoverAnimated:YES];
+}
+
+/**************************************************************************************************/
+#pragma mark - Actions
+
+
+- (IBAction)zoomToCurrentLocation:(UIBarButtonItem *)sender {
+    float spanX = 0.0001;
+    float spanY = 0.0001;
+    MKCoordinateRegion region;
+    region.center.latitude = self.mapView.userLocation.coordinate.latitude;
+    region.center.longitude = self.mapView.userLocation.coordinate.longitude;
+    region.span.latitudeDelta = spanX;
+    region.span.longitudeDelta = spanY;
+    [self.mapView setRegion:region animated:YES];
 }
 
 @end
