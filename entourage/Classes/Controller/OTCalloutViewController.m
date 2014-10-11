@@ -13,20 +13,50 @@
 
 @interface OTCalloutViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *mailLabel;
-@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
-@property (weak, nonatomic) IBOutlet UILabel *webLabel;
-
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end
 
 @implementation OTCalloutViewController
 
+/********************************************************************************/
+#pragma mark - Public Methods
+
 - (void)configureWithPoi:(OTPoi *)poi
 {
-	self.titleLabel.text = poi.name;
-	self.mailLabel.text = poi.email;
+	NSMutableString *text = [NSMutableString string];
+
+	[self appendNotNilString:poi.name toString:text];
+	[self appendNotNilString:poi.audience toString:text];
+	[self appendNotNilString:poi.details toString:text];
+	[self appendNotNilString:poi.address toString:text];
+	[self appendNotNilString:poi.phone toString:text];
+	[self appendNotNilString:poi.email toString:text];
+	[self appendNotNilString:poi.website toString:text];
+
+	self.textView.text = text;
+}
+
+/********************************************************************************/
+#pragma mark - Private Methods
+
+- (void)appendNotNilString:(NSString *)otherText toString:(NSMutableString *)text
+{
+	if (otherText)
+	{
+		[text appendFormat:@"\n%@", otherText];
+	}
+}
+
+/********************************************************************************/
+#pragma mark - IBActions
+
+- (IBAction)closeMe:(id)sender
+{
+	if ([self.delegate respondsToSelector:@selector(dismissPopover)])
+	{
+		[self.delegate dismissPopover];
+	}
 }
 
 @end

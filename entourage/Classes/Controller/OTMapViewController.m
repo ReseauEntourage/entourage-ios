@@ -27,7 +27,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -157,24 +157,39 @@
 	{
 		// Start up our view controller from a Storyboard
 		OTCalloutViewController *controller = (OTCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCalloutViewController"];
+		controller.delegate = self;
 
-		[controller view];
+		UIView *popView = [controller view];
+
+		popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
+
+		[UIView animateWithDuration:.3f
+						 animations:^
+		 {
+			 popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
+		 }];
 
 		OTCustomAnnotation *annotation = [((MKAnnotationView *)view)annotation];
 
 		[controller configureWithPoi:annotation.poi];
-		// Adjust this property to change the size of the popover + content
-		controller.preferredContentSize = CGSizeMake(150, 80);
 
 		self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
+		[self.popover setTheme:[WYPopoverTheme themeForIOS7]];
 
-		// POP POP
 		[self.popover presentPopoverFromRect:view.bounds
 									  inView:view
-					permittedArrowDirections:WYPopoverArrowDirectionDown
+					permittedArrowDirections:WYPopoverArrowDirectionNone
 									animated:YES
-									 options:WYPopoverAnimationOptionFade];
+									 options:WYPopoverAnimationOptionFadeWithScale];
 	}
+}
+
+/********************************************************************************/
+#pragma mark - OTCalloutViewControllerDelegate
+
+- (void)dismissPopover
+{
+	[self.popover dismissPopoverAnimated:YES];
 }
 
 @end

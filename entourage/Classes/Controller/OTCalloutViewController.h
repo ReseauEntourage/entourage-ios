@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @class OTPoi;
+@protocol OTCalloutViewControllerDelegate <NSObject>
+
+- (void)dismissPopover;
+
+@end
 
 @interface OTCalloutViewController : UIViewController
+
+@property (weak, nonatomic) id<OTCalloutViewControllerDelegate> delegate;
 
 - (void)configureWithPoi:(OTPoi *)poi;
 
