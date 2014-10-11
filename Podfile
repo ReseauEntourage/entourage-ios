@@ -5,6 +5,7 @@ platform :ios, '7.0'
 target "entourage" do
     pod 'AFNetworking', '~> 2.3'
     pod 'SWRevealViewController', '~> 2.3'
+    pod 'uservoice-iphone-sdk', '~> 3.2'
 end
 
 target "entourageTests" do

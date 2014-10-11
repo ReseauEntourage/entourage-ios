@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
 		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
@@ -27,7 +28,6 @@
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
 		6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
-		6B92CAAC19A7461C004E8C9B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
 		6B92CAAE19A7461C004E8C9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B92CAAD19A7461C004E8C9B /* main.m */; };
 		6B92CABA19A7461C004E8C9B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAB919A7461C004E8C9B /* Images.xcassets */; };
 		6B92CAC119A7461C004E8C9B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAC019A7461C004E8C9B /* XCTest.framework */; };
@@ -620,7 +620,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = OT;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "OCTO Technology";
 				TargetAttributes = {
 					6B92CA9D19A7461C004E8C9B = {
@@ -675,9 +675,8 @@
 				DBBE8AC219E83CB600FA218E /* poi_category-2@2x.png in Resources */,
 				DBBE8AB919E83CB600FA218E /* bg-top-header.png in Resources */,
 				DBBE8A9819E81AF600FA218E /* Calibri-Italic.ttf in Resources */,
-				6B92CAAC19A7461C004E8C9B /* InfoPlist.strings in Resources */,
+				191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */,
 				DBBE8AC019E83CB600FA218E /* poi_category-1@2x.png in Resources */,
-				6B92CAAC19A7461C004E8C9B /* InfoPlist.strings in Resources */,
 				DBBE8AC719E83CB600FA218E /* poi_category-5.png in Resources */,
 				DBBE8AC119E83CB600FA218E /* poi_category-2.png in Resources */,
 				DBBE8ABD19E83CB600FA218E /* menu_background.png in Resources */,
