@@ -76,8 +76,7 @@
 			   success: ^(OTUser *user)
 	 {
 		 NSLog(@"User : %@ authenticated successfully", user.email);
-		 [[NSUserDefaults standardUserDefaults] setUserMail:user.email];
-		 [[NSUserDefaults standardUserDefaults] setUserSid:[user.sid integerValue]];
+		 [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
 		 [self dismissViewControllerAnimated:YES completion:nil];
 	 }
 

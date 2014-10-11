@@ -15,6 +15,8 @@
 #import <uservoice-iphone-sdk/UserVoice.h>
 #import "NSUserDefaults+OT.h"
 
+#import "OTUser.h"
+
 @interface OTForumViewController ()
 
 @end
@@ -26,23 +28,24 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    [self createMenuButton];
+	[super viewDidLoad];
+	[self createMenuButton];
 }
 
 - (IBAction)launchForum:(id)sender
 {
-    // Set this up once when your application launches
-    UVConfig *config = [UVConfig configWithSite:@"entourage-social.uservoice.com"];
-    config.showContactUs = NO;
-    config.showKnowledgeBase = NO;
-    config.forumId = 268709;
-    NSString *userMail = [NSUserDefaults standardUserDefaults].userMail;
-    [config identifyUserWithEmail:userMail name:userMail guid:userMail];
-    [UserVoice initialize:config];
-    
-    // Call this wherever you want to launch UserVoice
-    [UserVoice presentUserVoiceForumForParentViewController:self];
+	// Set this up once when your application launches
+	UVConfig *config = [UVConfig configWithSite:@"entourage-social.uservoice.com"];
+
+	config.showContactUs = NO;
+	config.showKnowledgeBase = NO;
+	config.forumId = 268709;
+	NSString *userMail = [[NSUserDefaults standardUserDefaults].currentUser email];
+	[config identifyUserWithEmail:userMail name:userMail guid:userMail];
+	[UserVoice initialize:config];
+
+	// Call this wherever you want to launch UserVoice
+	[UserVoice presentUserVoiceForumForParentViewController:self];
 }
 
 @end

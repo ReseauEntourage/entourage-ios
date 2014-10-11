@@ -1,41 +1,36 @@
 
 
+#import "OTUser.h"
+
 #import "NSUserDefaults+OT.h"
 
-static NSString *const kUserMail   = @"kUserMail";
-static NSString *const kUserSid   = @"kUserSid";
+static NSString *const kUser   = @"kUser";
 
 @implementation NSUserDefaults (OT)
 
 /********************************************************************************/
 #pragma mark - User Settings
 
-- (void)setUserMail:(NSString *)userMail {
-	if (userMail) {
-		[self setObject:userMail forKey:kUserMail];
+- (void)setCurrentUser:(OTUser *)user
+{
+	if (user)
+	{
+		NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:user];
+		[self setObject:encodedObject forKey:kUser];
 	}
-	else {
-		[self removeObjectForKey:kUserMail];
-	}
-	[self synchronize];
-}
-
-- (NSString *)userMail {
-	return [self stringForKey:kUserMail];
-}
-
-- (void)setUserSid:(NSInteger)userId {
-	if (userId) {
-		[self setInteger:userId forKey:kUserSid];
-	}
-	else {
-		[self removeObjectForKey:kUserSid];
+	else
+	{
+		[self removeObjectForKey:kUser];
 	}
 	[self synchronize];
 }
 
-- (NSInteger)userSid {
-	return [self integerForKey:kUserSid];
+- (OTUser *)currentUser
+{
+	NSData *encodedObject = [self objectForKey:kUser];
+	OTUser *user = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+
+	return user;
 }
 
 @end

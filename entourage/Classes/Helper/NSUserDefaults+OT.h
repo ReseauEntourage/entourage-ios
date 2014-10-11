@@ -2,7 +2,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class OTUser;
+
 @interface NSUserDefaults (OT)
-@property (nonatomic, strong) NSString *userMail;
-@property (nonatomic) NSInteger userSid;
+
+@property (nonatomic, strong) OTUser *currentUser;
+
 @end

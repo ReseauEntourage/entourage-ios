@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) NSNumber *sid;
 @property (strong, nonatomic) NSString *email;
+@property (strong, nonatomic) NSString *token;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
