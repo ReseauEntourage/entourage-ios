@@ -11,6 +11,6 @@
 @interface OTAuthService : NSObject
 
 - (void)authWithEmail:(NSString *)email
-              success:(void (^)(OTUser *user))success
-              failure:(void (^)(NSError *error))failure;
+			  success:(void (^)(OTUser *user))success
+			  failure:(void (^)(NSError *error))failure;
 @end

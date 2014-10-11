@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bGF-q3-B8f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bGF-q3-B8f">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -97,7 +96,6 @@
                         <outlet property="tableView" destination="EiD-PN-iyE" id="CgG-Ii-UXP"/>
                         <segue destination="UcL-62-xea" kind="custom" identifier="segueMenuIdentifierForMap" customClass="SWRevealViewControllerSeguePushController" id="xSV-rR-wZy"/>
                         <segue destination="taa-JO-eyt" kind="custom" identifier="segueMenuMyMeetingsIdentifier" customClass="SWRevealViewControllerSeguePushController" id="La5-U2-MIS"/>
-                        <segue destination="V1n-aH-3rc" kind="custom" identifier="segueMenuDisconnectIdentifier" customClass="SWRevealViewControllerSeguePushController" id="ca4-rl-xSV"/>
                         <segue destination="NJM-UO-You" kind="custom" identifier="segueMenuPracticalInformationIdentifier" customClass="SWRevealViewControllerSeguePushController" id="BV8-5E-fk7"/>
                         <segue destination="u32-Jg-4eQ" kind="custom" identifier="segueMenuForumIdentifier" customClass="SWRevealViewControllerSeguePushController" id="f4L-51-pY0"/>
                         <segue destination="TS8-P9-daY" kind="custom" identifier="segueMenuMembersIdentifier" customClass="SWRevealViewControllerSeguePushController" id="FsC-t3-dVZ"/>
@@ -160,22 +158,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpp-UF-smW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2321" y="384"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="lWf-Ay-h1O">
-            <objects>
-                <navigationController id="V1n-aH-3rc" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4e9-Pj-Xu4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="C7H-fl-BMl" kind="relationship" relationship="rootViewController" id="AvU-hH-9Zf"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bip-qT-XuZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1926" y="4105"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FuF-gh-a0T">
@@ -372,39 +354,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLS-sj-pPU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2321" y="2254"/>
-        </scene>
-        <!--Not Implemented View Controller-->
-        <scene sceneID="05s-Zj-kns">
-            <objects>
-                <viewController id="C7H-fl-BMl" customClass="OTNotImplementedViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1uC-wT-BsF"/>
-                        <viewControllerLayoutGuide type="bottom" id="k9f-bJ-abO"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ntW-qI-XT3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bientot Disponnible" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ah-aG-1c2">
-                                <rect key="frame" x="85" y="121" width="151" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Déconnexion" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIh-pz-UXn">
-                                <rect key="frame" x="110" y="78" width="101" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="97l-1s-ylA"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="skr-lv-i9f" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2321" y="4105"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VUc-QP-YG0">

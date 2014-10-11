@@ -8,6 +8,9 @@
 
 #import "OTHTTPRequestManager.h"
 
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
+
 static NSString *const kBaseAPIUrl = @"https://entourage-back.herokuapp.com/";
 
 @implementation OTHTTPRequestManager
@@ -26,5 +29,13 @@ static NSString *const kBaseAPIUrl = @"https://entourage-back.herokuapp.com/";
 
 	return requestManager;
 }
+
++ (NSDictionary*)commonParameters
+{
+    OTUser *user = [[NSUserDefaults standardUserDefaults] currentUser];
+
+    return user ? @{ @"token" : user.token } : nil;
+}
+
 
 @end

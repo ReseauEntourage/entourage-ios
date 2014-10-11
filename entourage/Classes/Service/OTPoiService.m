@@ -11,9 +11,6 @@
 #import "OTPoiCategory.h"
 #import "OTPoi.h"
 #import "OTEncounter.h"
-#import "OTUser.h"
-
-#import "NSUserDefaults+OT.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
@@ -31,13 +28,7 @@ NSString *const kAPIPoiRoute = @"map.json";
 
 - (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois, NSArray *encounters))success failure:(void (^)(NSError *error))failure
 {
-	OTUser *user = [[NSUserDefaults standardUserDefaults] currentUser];
-
-	if (!user)
-	{
-		return;
-	}
-	[[OTHTTPRequestManager sharedInstance] GET:kAPIPoiRoute parameters:@{ @"token" : user.token }
+	[[OTHTTPRequestManager sharedInstance] GET:kAPIPoiRoute parameters:[OTHTTPRequestManager commonParameters]
 									   success:^(AFHTTPRequestOperation *operation, id responseObject)
 	 {
 		 NSDictionary *data = responseObject;

@@ -10,6 +10,9 @@
 
 // Controller
 #import "SWRevealViewController.h"
+#import "OTLoginViewController.h"
+
+#import "NSUserDefaults+OT.h"
 
 // Model
 #import "OTMenuItem.h"
@@ -51,11 +54,11 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
-    self.menuItems = [OTMenuViewController createMenuItems];
-    self.controllersDictionary = [NSMutableDictionary dictionary];
-    [self configureControllersDictionary];
+	[super viewDidLoad];
+
+	self.menuItems = [OTMenuViewController createMenuItems];
+	self.controllersDictionary = [NSMutableDictionary dictionary];
+	[self configureControllersDictionary];
 }
 
 /**************************************************************************************************/
@@ -63,23 +66,36 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.menuItems.count;
+	return self.menuItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:OTMenuTableViewCellIdentifier];
-    OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
-    cell.itemLabel.text = [menuItem.title uppercaseStringWithLocale:[NSLocale currentLocale]];
-    return cell;
+	OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:OTMenuTableViewCellIdentifier];
+	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
+
+	cell.itemLabel.text = [menuItem.title uppercaseStringWithLocale:[NSLocale currentLocale]];
+	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
-    [self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+
+	if (indexPath.row == self.menuItems.count - 1)
+	{
+		[[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
+
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTLoginViewControllerIdentifier"];
+		[self presentViewController:loginViewController animated:YES completion:nil];
+	}
+	else
+	{
+		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
+		[self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
+	}
 }
 
 /**************************************************************************************************/
@@ -97,23 +113,24 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
  */
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier
 {
-    UIViewController *nextViewController = [self.controllersDictionary objectForKey:segueIdentifier];
-    if (nextViewController)
-    {
-        SWRevealViewController *revealViewController = self.revealViewController;
-        if (nextViewController != self.revealViewController.frontViewController)
-        {
-            [revealViewController pushFrontViewController:nextViewController animated:YES];
-        }
-        else
-        {
-            [revealViewController revealToggle:self];
-        }
-    }
-    else
-    {
-        [self performSegueWithIdentifier:segueIdentifier sender:self];
-    }
+	UIViewController *nextViewController = [self.controllersDictionary objectForKey:segueIdentifier];
+
+	if (nextViewController)
+	{
+		SWRevealViewController *revealViewController = self.revealViewController;
+		if (nextViewController != self.revealViewController.frontViewController)
+		{
+			[revealViewController pushFrontViewController:nextViewController animated:YES];
+		}
+		else
+		{
+			[revealViewController revealToggle:self];
+		}
+	}
+	else
+	{
+		[self performSegueWithIdentifier:segueIdentifier sender:self];
+	}
 }
 
 /**************************************************************************************************/
@@ -121,10 +138,10 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if (![self.controllersDictionary objectForKey:segue.identifier])
-    {
-        [self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
-    }
+	if (![self.controllersDictionary objectForKey:segue.identifier])
+	{
+		[self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
+	}
 }
 
 /**************************************************************************************************/
@@ -139,12 +156,13 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
  */
 - (void)configureControllersDictionary
 {
-    UIViewController *frontViewController = self.revealViewController.frontViewController;
-    if (frontViewController)
-    {
-        [self.controllersDictionary setObject:frontViewController
-                                       forKey:OTMenuViewControllerSegueMenuMapIdentifier];
-    }
+	UIViewController *frontViewController = self.revealViewController.frontViewController;
+
+	if (frontViewController)
+	{
+		[self.controllersDictionary setObject:frontViewController
+									   forKey:OTMenuViewControllerSegueMenuMapIdentifier];
+	}
 }
 
 /**
@@ -155,64 +173,65 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
  */
 + (NSArray *)createMenuItems
 {
-    NSMutableArray *menuItems = [NSMutableArray array];
-    
-    // Map
-    OTMenuItem *itemMap = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_map_title", @"")
-                                            segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
-    [menuItems addObject:itemMap];
-    
-    // My Meetings
-    OTMenuItem *itemMyMeetings = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myMeetings_title", @"")
-                                                   segueIdentifier:OTMenuViewControllerSegueMenuMyMeetingsIdentifier];
-    [menuItems addObject:itemMyMeetings];
-    
-    // Practical Information
-    OTMenuItem *itemPracticalInformation = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_practicalInformation_title", @"")
-                                                             segueIdentifier:OTMenuViewControllerSegueMenuPracticalInformationIdentifier];
-    [menuItems addObject:itemPracticalInformation];
-    
-    // Forum
-    OTMenuItem *itemForum = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_forum_title", @"")
-                                                             segueIdentifier:OTMenuViewControllerSegueMenuForumIdentifier];
-    [menuItems addObject:itemForum];
-    
-    // Members
-    OTMenuItem *itemMembers = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_members_title", @"")
-                                                             segueIdentifier:OTMenuViewControllerSegueMenuMembersIdentifier];
-    [menuItems addObject:itemMembers];
-    
-    // My Profile
-    OTMenuItem *itemMyProfile = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myProfile_title", @"")
-                                                             segueIdentifier:OTMenuViewControllerSegueMenuMyProfileIdentifier];
-    [menuItems addObject:itemMyProfile];
-    
-    // My Notifications
-    OTMenuItem *itemMyNotifications = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myNotifications_title", @"")
-                                                             segueIdentifier:OTMenuViewControllerSegueMenuMyNotificationsIdentifier];
-    [menuItems addObject:itemMyNotifications];
-    
-    // Help
-    OTMenuItem *itemHelp = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_help_title", @"")
-                                                             segueIdentifier:OTMenuViewControllerSegueMenuHelpIdentifier];
-    [menuItems addObject:itemHelp];
-    
-    // Your opinion
-    OTMenuItem *itemYourOpinion = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_yourOpinion_title", @"")
-                                                             segueIdentifier:OTMenuViewControllerSegueMenuYourOpinionIdentifier];
-    [menuItems addObject:itemYourOpinion];
-    
-    // Translate
-    OTMenuItem *itemTranslate = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_translate_title", @"")
-                                                   segueIdentifier:OTMenuViewControllerSegueMenuTranslatetIdentifier];
-    [menuItems addObject:itemTranslate];
-    
-    // Disconnect
-    OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
-                                                    segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
-    [menuItems addObject:itemDisconnect];
+	NSMutableArray *menuItems = [NSMutableArray array];
 
-    return menuItems;
+	// Map
+	OTMenuItem *itemMap = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_map_title", @"")
+											segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+
+	[menuItems addObject:itemMap];
+
+	// My Meetings
+	OTMenuItem *itemMyMeetings = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myMeetings_title", @"")
+												   segueIdentifier:OTMenuViewControllerSegueMenuMyMeetingsIdentifier];
+	[menuItems addObject:itemMyMeetings];
+
+	// Practical Information
+	OTMenuItem *itemPracticalInformation = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_practicalInformation_title", @"")
+															 segueIdentifier:OTMenuViewControllerSegueMenuPracticalInformationIdentifier];
+	[menuItems addObject:itemPracticalInformation];
+
+	// Forum
+	OTMenuItem *itemForum = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_forum_title", @"")
+											  segueIdentifier:OTMenuViewControllerSegueMenuForumIdentifier];
+	[menuItems addObject:itemForum];
+
+	// Members
+	OTMenuItem *itemMembers = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_members_title", @"")
+												segueIdentifier:OTMenuViewControllerSegueMenuMembersIdentifier];
+	[menuItems addObject:itemMembers];
+
+	// My Profile
+	OTMenuItem *itemMyProfile = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myProfile_title", @"")
+												  segueIdentifier:OTMenuViewControllerSegueMenuMyProfileIdentifier];
+	[menuItems addObject:itemMyProfile];
+
+	// My Notifications
+	OTMenuItem *itemMyNotifications = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myNotifications_title", @"")
+														segueIdentifier:OTMenuViewControllerSegueMenuMyNotificationsIdentifier];
+	[menuItems addObject:itemMyNotifications];
+
+	// Help
+	OTMenuItem *itemHelp = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_help_title", @"")
+											 segueIdentifier:OTMenuViewControllerSegueMenuHelpIdentifier];
+	[menuItems addObject:itemHelp];
+
+	// Your opinion
+	OTMenuItem *itemYourOpinion = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_yourOpinion_title", @"")
+													segueIdentifier:OTMenuViewControllerSegueMenuYourOpinionIdentifier];
+	[menuItems addObject:itemYourOpinion];
+
+	// Translate
+	OTMenuItem *itemTranslate = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_translate_title", @"")
+												  segueIdentifier:OTMenuViewControllerSegueMenuTranslatetIdentifier];
+	[menuItems addObject:itemTranslate];
+
+	// Disconnect
+	OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
+												   segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
+	[menuItems addObject:itemDisconnect];
+
+	return menuItems;
 }
 
 /**
@@ -226,13 +245,14 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
  */
 - (OTMenuItem *)menuItemsAtIndexPath:(NSIndexPath *)indexPath
 {
-    OTMenuItem *menuItem = nil;
-    
-    if (indexPath && (indexPath.row < self.menuItems.count)) {
-        menuItem = [self.menuItems objectAtIndex:indexPath.row];
-    }
-    
-    return menuItem;
+	OTMenuItem *menuItem = nil;
+
+	if (indexPath && (indexPath.row < self.menuItems.count))
+	{
+		menuItem = [self.menuItems objectAtIndex:indexPath.row];
+	}
+
+	return menuItem;
 }
 
 @end

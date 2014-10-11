@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kKeyToken;
+
 @interface OTUser : NSObject
 
 @property (strong, nonatomic) NSNumber *sid;

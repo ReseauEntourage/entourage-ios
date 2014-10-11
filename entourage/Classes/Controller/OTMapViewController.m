@@ -28,6 +28,8 @@
 #import "KPClusteringController.h"
 #import "KPAnnotation.h"
 
+#import "NSUserDefaults+OT.h"
+
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
@@ -55,52 +57,67 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    
-    CLLocationManager *locationManager = [[CLLocationManager alloc] init];
+
+	CLLocationManager *locationManager = [[CLLocationManager alloc] init];
 #ifdef __IPHONE_8_0
-    if(IS_OS_8_OR_LATER) {
-        // Use one or the other, not both. Depending on what you put in info.plist
-        [locationManager requestWhenInUseAuthorization];
-    }
+	if (IS_OS_8_OR_LATER)
+	{
+		// Use one or the other, not both. Depending on what you put in info.plist
+		[locationManager requestWhenInUseAuthorization];
+	}
 #endif
-    [locationManager startUpdatingLocation];
-    
-    self.mapView.showsUserLocation = YES;
+	[locationManager startUpdatingLocation];
+
+	self.mapView.showsUserLocation = YES;
 	self.mapView.delegate = self;
-    self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
-    
-    [self zoomToCurrentLocation:nil];
-    
+	self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
+
+	[self zoomToCurrentLocation:nil];
+
 	[self createMenuButton];
 
 	self.title = NSLocalizedString(@"mapviewcontroller_title", @"");
 
-	[[OTPoiService new] allPoisWithSuccess:^(NSArray *categories, NSArray *pois, NSArray *encounters)
-	 {
-		 [self.indicatorView setHidden:YES];
+	[self refreshMap];
+}
 
-		 self.categories = categories;
-		 self.pois = pois;
-         self.encounters = encounters;
-
-         [self feedMapViewWithPoiArray:pois];
-         [self feedMapViewWithEncountersArray:encounters];
-	 }
-
-								   failure:^(NSError *error)
-	 {
-		 UIAlertView *alertView = [[UIAlertView alloc]     initWithTitle:@"Erreur"
-																 message:@"Impossible de récupérer les POI"
-																delegate:nil
-													   cancelButtonTitle:@"Dommage :("
-													   otherButtonTitles:nil];
-		 [self.indicatorView setHidden:YES];
-		 [alertView show];
-	 }];
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	[self refreshMap];
+	[[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"currentUser"];
 }
 
 /**************************************************************************************************/
 #pragma mark - Private methods
+
+- (void)registerObserver
+{
+	[[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"currentUser" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)refreshMap
+{
+	if (!self.pois)
+	{
+		[[OTPoiService new] allPoisWithSuccess:^(NSArray *categories, NSArray *pois, NSArray *encounters)
+		 {
+			 [self.indicatorView setHidden:YES];
+
+			 self.categories = categories;
+			 self.pois = pois;
+			 self.encounters = encounters;
+
+			 [self feedMapViewWithPoiArray:pois];
+			 [self feedMapViewWithEncountersArray:encounters];
+		 }
+
+									   failure:^(NSError *error)
+		 {
+			 [self registerObserver];
+			 [self.indicatorView setHidden:YES];
+		 }];
+	}
+}
 
 - (void)feedMapViewWithPoiArray:(NSArray *)array
 {
@@ -113,13 +130,14 @@
 
 - (void)feedMapViewWithEncountersArray:(NSArray *)array
 {
-    NSMutableArray *annotations = [NSMutableArray new];
-    for (OTEncounter *encounter in array)
-    {
-        OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
-        [annotations addObject:pointAnnotation];
-    }
-    [self.clusteringController setAnnotations:annotations];
+	NSMutableArray *annotations = [NSMutableArray new];
+
+	for (OTEncounter *encounter in array)
+	{
+		OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
+		[annotations addObject:pointAnnotation];
+	}
+	[self.clusteringController setAnnotations:annotations];
 }
 
 /********************************************************************************/
@@ -127,8 +145,8 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    MKAnnotationView *annotationView = nil;
-    
+	MKAnnotationView *annotationView = nil;
+
 	if ([annotation isKindOfClass:[OTCustomAnnotation class]])
 	{
 		annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kAnnotationIdentifier];
@@ -138,43 +156,45 @@
 			annotationView = ((OTCustomAnnotation *)annotation).annotationView;
 		}
 		annotationView.annotation = annotation;
-    }
-    else if ([annotation isKindOfClass:[KPAnnotation class]])
-    {
-        KPAnnotation *kingpinAnnotation = (KPAnnotation *)annotation;
-        
-        if ([kingpinAnnotation isCluster])
-        {
-            annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterClusterAnnotationIdentifier];
-            if (!annotationView)
-            {
-                annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEncounterClusterAnnotationIdentifier];
-            }
-            MKPinAnnotationView *pinAnnotationView = (MKPinAnnotationView *)annotationView;
+	}
+	else if ([annotation isKindOfClass:[KPAnnotation class]])
+	{
+		KPAnnotation *kingpinAnnotation = (KPAnnotation *)annotation;
 
-            pinAnnotationView.pinColor = MKPinAnnotationColorGreen;
-        }
-        else {
-            id<MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
-            if([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]])
-            {
-                annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterAnnotationIdentifier];
-                if (!annotationView)
-                {
-                    annotationView = ((OTEncounterAnnotation *)simpleAnnontation).annotationView;
-                }
-                annotationView.annotation = simpleAnnontation;
-            }
-        }
-        annotationView.canShowCallout = YES;
-    }
+		if ([kingpinAnnotation isCluster])
+		{
+			annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterClusterAnnotationIdentifier];
+			if (!annotationView)
+			{
+				annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEncounterClusterAnnotationIdentifier];
+			}
+			MKPinAnnotationView *pinAnnotationView = (MKPinAnnotationView *)annotationView;
+
+			pinAnnotationView.pinColor = MKPinAnnotationColorGreen;
+		}
+		else
+		{
+			id<MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
+			if ([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]])
+			{
+				annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterAnnotationIdentifier];
+				if (!annotationView)
+				{
+					annotationView = ((OTEncounterAnnotation *)simpleAnnontation).annotationView;
+				}
+				annotationView.annotation = simpleAnnontation;
+			}
+		}
+		annotationView.canShowCallout = YES;
+	}
 
 
 	return annotationView;
 }
 
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    [self.clusteringController refresh:animated];
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+	[self.clusteringController refresh:animated];
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
@@ -212,12 +232,13 @@
 	}
 }
 
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    if (!self.isRegionSetted)
-    {
-        self.isRegionSetted = YES;
-        [self zoomToCurrentLocation:nil];
-    }
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+	if (!self.isRegionSetted)
+	{
+		self.isRegionSetted = YES;
+		[self zoomToCurrentLocation:nil];
+	}
 }
 
 /********************************************************************************/
@@ -232,15 +253,17 @@
 #pragma mark - Actions
 
 
-- (IBAction)zoomToCurrentLocation:(UIBarButtonItem *)sender {
-    float spanX = 0.0001;
-    float spanY = 0.0001;
-    MKCoordinateRegion region;
-    region.center.latitude = self.mapView.userLocation.coordinate.latitude;
-    region.center.longitude = self.mapView.userLocation.coordinate.longitude;
-    region.span.latitudeDelta = spanX;
-    region.span.longitudeDelta = spanY;
-    [self.mapView setRegion:region animated:YES];
+- (IBAction)zoomToCurrentLocation:(UIBarButtonItem *)sender
+{
+	float spanX = 0.0001;
+	float spanY = 0.0001;
+	MKCoordinateRegion region;
+
+	region.center.latitude = self.mapView.userLocation.coordinate.latitude;
+	region.center.longitude = self.mapView.userLocation.coordinate.longitude;
+	region.span.latitudeDelta = spanX;
+	region.span.longitudeDelta = spanY;
+	[self.mapView setRegion:region animated:YES];
 }
 
 @end

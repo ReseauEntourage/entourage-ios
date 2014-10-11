@@ -14,5 +14,6 @@
 #pragma mark - Singleton
 
 + (AFHTTPRequestOperationManager *)sharedInstance;
++ (NSDictionary*)commonParameters;
 
 @end

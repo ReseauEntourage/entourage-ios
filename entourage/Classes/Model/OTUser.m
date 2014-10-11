@@ -10,9 +10,9 @@
 
 #import "NSDictionary+Parsing.h"
 
-static NSString *const kKeySid = @"sid";
-static NSString *const kKeyEmail = @"email";
-static NSString *const kKeyToken = @"token";
+NSString *const kKeySid = @"sid";
+NSString *const kKeyEmail = @"email";
+NSString *const kKeyToken = @"token";
 
 @implementation OTUser
 
@@ -30,7 +30,6 @@ static NSString *const kKeyToken = @"token";
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-	// Encode properties, other class variables, etc
 	[encoder encodeObject:self.sid forKey:kKeySid];
 	[encoder encodeObject:self.email forKey:kKeyEmail];
 	[encoder encodeObject:self.token forKey:kKeyToken];
@@ -40,7 +39,6 @@ static NSString *const kKeyToken = @"token";
 {
 	if ((self = [super init]))
 	{
-		// decode properties, other class vars
 		self.sid = [decoder decodeObjectForKey:kKeySid];
 		self.email = [decoder decodeObjectForKey:kKeyEmail];
 		self.token = [decoder decodeObjectForKey:kKeyToken];
