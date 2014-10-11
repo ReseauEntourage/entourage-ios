@@ -670,10 +670,10 @@
             </objects>
             <point key="canvasLocation" x="1926" y="-242"/>
         </scene>
-        <!--Not Implemented View Controller-->
+        <!--Forum View Controller-->
         <scene sceneID="qjo-Zn-H6v">
             <objects>
-                <viewController id="U03-eT-Fur" customClass="OTNotImplementedViewController" sceneMemberID="viewController">
+                <viewController id="U03-eT-Fur" customClass="OTForumViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cPw-4o-Vcf"/>
                         <viewControllerLayoutGuide type="bottom" id="ypD-B7-Gfm"/>
@@ -682,18 +682,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bientot Disponnible" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLJ-MU-42D">
-                                <rect key="frame" x="85" y="130" width="151" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Forum" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1M-e4-KQH">
-                                <rect key="frame" x="135" y="90" width="50" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIh-hs-5YF">
+                                <rect key="frame" x="82" y="93" width="157" height="30"/>
+                                <state key="normal" title="Se connecter au forum">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="launchForum:" destination="U03-eT-Fur" eventType="touchUpInside" id="C16-Jb-Hs8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

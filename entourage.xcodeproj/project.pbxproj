@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
 		191FE91919E935F000C56BCA /* OTNotImplementedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE91819E935F000C56BCA /* OTNotImplementedViewController.m */; };
+		191FE91D19E93B8C00C56BCA /* OTForumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE91C19E93B8C00C56BCA /* OTForumViewController.m */; };
 		1D55D8D119E82B6C006A2184 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D55D8CF19E82B6C006A2184 /* Main.storyboard */; };
 		1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D319E84E9B006A2184 /* OTUser.m */; };
 		1D55D8D519E84E9B006A2184 /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D319E84E9B006A2184 /* OTUser.m */; };
@@ -102,6 +103,8 @@
 /* Begin PBXFileReference section */
 		191FE91719E935F000C56BCA /* OTNotImplementedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTNotImplementedViewController.h; sourceTree = "<group>"; };
 		191FE91819E935F000C56BCA /* OTNotImplementedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTNotImplementedViewController.m; sourceTree = "<group>"; };
+		191FE91B19E93B8C00C56BCA /* OTForumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTForumViewController.h; sourceTree = "<group>"; };
+		191FE91C19E93B8C00C56BCA /* OTForumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTForumViewController.m; sourceTree = "<group>"; };
 		1D55D8D019E82B6C006A2184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1D55D8D219E84E9B006A2184 /* OTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUser.h; sourceTree = "<group>"; };
 		1D55D8D319E84E9B006A2184 /* OTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUser.m; sourceTree = "<group>"; };
@@ -234,6 +237,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		191FE91A19E93B4A00C56BCA /* Forum */ = {
+			isa = PBXGroup;
+			children = (
+				191FE91B19E93B8C00C56BCA /* OTForumViewController.h */,
+				191FE91C19E93B8C00C56BCA /* OTForumViewController.m */,
+			);
+			path = Forum;
+			sourceTree = "<group>";
+		};
 		1D962C7219E9280800547687 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +331,7 @@
 				1D962C7219E9280800547687 /* Login */,
 				DBBE8AD319E85E9000FA218E /* MyMeetings */,
 				DBBE8ACB19E83CCE00FA218E /* Map */,
+				191FE91A19E93B4A00C56BCA /* Forum */,
 				DBE9EF2919E7D71C00031144 /* Menu */,
 				6B4930C819A773C500DA7EE0 /* OTMapViewController.h */,
 				6B4930C919A773C500DA7EE0 /* OTMapViewController.m */,
@@ -842,6 +855,7 @@
 				6B1A847119E811210020FB93 /* OTPoiService.m in Sources */,
 				DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */,
 				DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */,
+				191FE91D19E93B8C00C56BCA /* OTForumViewController.m in Sources */,
 				6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
