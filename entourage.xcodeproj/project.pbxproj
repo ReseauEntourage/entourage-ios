@@ -17,11 +17,11 @@
 		19BA509519E9587800342A36 /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BA509419E9587800342A36 /* OTEncounterAnnotation.m */; };
 		19BA509719E9625A00342A36 /* rencontre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509619E9625A00342A36 /* rencontre@2x.png */; };
 		19BA509919E9626000342A36 /* rencontre.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509819E9626000342A36 /* rencontre.png */; };
-		1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */; };
 		19BA509C19E987A100342A36 /* center-location.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509A19E987A100342A36 /* center-location.png */; };
 		19BA509D19E987A100342A36 /* center-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509B19E987A100342A36 /* center-location@2x.png */; };
 		19BA50A019E9894200342A36 /* pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509E19E9894200342A36 /* pointer.png */; };
 		19BA50A119E9894200342A36 /* pointer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509F19E9894200342A36 /* pointer@2x.png */; };
+		1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */; };
 		1D55D8D119E82B6C006A2184 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D55D8CF19E82B6C006A2184 /* Main.storyboard */; };
 		1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D319E84E9B006A2184 /* OTUser.m */; };
 		1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
@@ -32,6 +32,7 @@
 		1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */; };
 		1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682EB19E81483007BD4BC /* NSString+Validators.m */; };
 		1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */; };
+		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
 		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
@@ -121,12 +122,12 @@
 		19BA509419E9587800342A36 /* OTEncounterAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounterAnnotation.m; sourceTree = "<group>"; };
 		19BA509619E9625A00342A36 /* rencontre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rencontre@2x.png"; sourceTree = "<group>"; };
 		19BA509819E9626000342A36 /* rencontre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rencontre.png; sourceTree = "<group>"; };
-		1D3BD36A19E964FC001687F9 /* OTMeetingCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMeetingCalloutViewController.h; sourceTree = "<group>"; };
-		1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMeetingCalloutViewController.m; sourceTree = "<group>"; };
 		19BA509A19E987A100342A36 /* center-location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "center-location.png"; sourceTree = "<group>"; };
 		19BA509B19E987A100342A36 /* center-location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "center-location@2x.png"; sourceTree = "<group>"; };
 		19BA509E19E9894200342A36 /* pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointer.png; sourceTree = "<group>"; };
 		19BA509F19E9894200342A36 /* pointer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pointer@2x.png"; sourceTree = "<group>"; };
+		1D3BD36A19E964FC001687F9 /* OTMeetingCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMeetingCalloutViewController.h; sourceTree = "<group>"; };
+		1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMeetingCalloutViewController.m; sourceTree = "<group>"; };
 		1D55D8D019E82B6C006A2184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1D55D8D219E84E9B006A2184 /* OTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUser.h; sourceTree = "<group>"; };
 		1D55D8D319E84E9B006A2184 /* OTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUser.m; sourceTree = "<group>"; };
@@ -144,6 +145,8 @@
 		1DA682EB19E81483007BD4BC /* NSString+Validators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Validators.m"; path = "Helper/NSString+Validators.m"; sourceTree = "<group>"; };
 		1DA682EF19E823C3007BD4BC /* OTSWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSWRevealViewController.h; sourceTree = "<group>"; };
 		1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSWRevealViewController.m; sourceTree = "<group>"; };
+		1DF661D919E98AAD00045310 /* OTCreateMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCreateMeetingViewController.h; sourceTree = "<group>"; };
+		1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCreateMeetingViewController.m; sourceTree = "<group>"; };
 		2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		6B1A846F19E811210020FB93 /* OTPoiService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiService.h; sourceTree = "<group>"; };
@@ -620,6 +623,8 @@
 				A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */,
 				1D3BD36A19E964FC001687F9 /* OTMeetingCalloutViewController.h */,
 				1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */,
+				1DF661D919E98AAD00045310 /* OTCreateMeetingViewController.h */,
+				1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -950,6 +955,7 @@
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
+				1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,
 			);

@@ -11,6 +11,7 @@
 #import "UIViewController+menu.h"
 #import "OTCalloutViewController.h"
 #import "OTMeetingCalloutViewController.h"
+#import "OTCreateMeetingViewController.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -34,7 +35,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, OTMeetingCalloutViewControllerDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, OTMeetingCalloutViewControllerDelegate, OTCreateMeetingViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -294,6 +295,19 @@
 	[self.popover dismissPopoverAnimated:YES];
 }
 
+/********************************************************************************/
+#pragma mark - OTCreateMeetingViewControllerDelegate
+
+- (void)dismissPopoverWithEncounter:(OTEncounter *)encounter
+{
+    if (encounter)
+    {
+        [self.encounters addObject:encounter];
+        [self feedMapViewWithEncountersArray:self.encounters];
+    }
+    [self.popover dismissPopoverAnimated:YES];
+}
+
 /**************************************************************************************************/
 #pragma mark - Actions
 
@@ -313,21 +327,30 @@
 
 - (IBAction)createEncounter:(id)sender
 {
-	OTEncounter *encounter = [OTEncounter new];
-
-	encounter.date = [NSDate date];
-	encounter.message = @"foo";
-	encounter.streetPersonName =  @"bar";
-	encounter.latitude = self.mapView.region.center.latitude;
-	encounter.longitude = self.mapView.region.center.longitude;
-	[[OTPoiService new] sendEncounter:encounter withSuccess:^(OTEncounter *encounter) {
-		 if (encounter)
-		 {
-			 [self.encounters addObject:encounter];
-			 [self feedMapViewWithEncountersArray:self.encounters];
-		 }
-	 } failure:^(NSError *error) {
-	 }];
+    OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCreateMeetingViewController"];
+    controller.delegate = self;
+    
+    UIView *popView = [controller view];
+    
+    popView.frame = CGRectOffset(self.view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
+    [UIView animateWithDuration:.3f
+                     animations:^
+     {
+         popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
+     }];
+    
+    [controller configureWithLocation:self.mapView.region.center];
+    
+    controller.preferredContentSize = CGSizeMake(self.view.frame.size.width, 300);
+    
+    self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
+    [self.popover setTheme:[WYPopoverTheme themeForIOS7]];
+    
+    [self.popover presentPopoverFromRect:self.view.bounds
+                                  inView:self.view
+                permittedArrowDirections:WYPopoverArrowDirectionNone
+                                animated:YES
+                                 options:WYPopoverAnimationOptionFadeWithScale];
 }
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bGF-q3-B8f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bGF-q3-B8f">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -12,6 +12,7 @@
             <string>Calibri-Bold</string>
         </mutableArray>
         <mutableArray key="Calibri.ttf">
+            <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
@@ -547,6 +548,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="572" y="747"/>
+        </scene>
+        <!--Create Meeting View Controller-->
+        <scene sceneID="NWf-ex-TvX">
+            <objects>
+                <viewController storyboardIdentifier="OTCreateMeetingViewController" id="b2A-wG-Mz4" customClass="OTCreateMeetingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4Ke-cm-KmY"/>
+                        <viewControllerLayoutGuide type="bottom" id="LVP-zg-cRX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="feS-ZD-ocn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aW3-pj-aMW">
+                                <rect key="frame" x="106" y="514" width="108" height="34"/>
+                                <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="zmW-Wf-kFs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="18"/>
+                                <state key="normal" title="ENVOYER">
+                                    <color key="titleColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeMe:" destination="8hZ-Tf-zqI" eventType="touchUpInside" id="tG9-3v-jlD"/>
+                                    <action selector="sendEncounter:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="7NT-qx-1w8"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nom de la personne de la rue" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a5N-Kb-CX4">
+                                <rect key="frame" x="16" y="28" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
+                                <rect key="frame" x="16" y="66" width="288" height="440"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aW3-pj-aMW" firstAttribute="top" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="8" id="3zr-sf-6Zn"/>
+                            <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="Kdp-SY-LWS"/>
+                            <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="OP8-Um-Xa7"/>
+                            <constraint firstItem="LVP-zg-cRX" firstAttribute="top" secondItem="aW3-pj-aMW" secondAttribute="bottom" constant="20" id="OTO-Ql-Za0"/>
+                            <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="a5N-Kb-CX4" secondAttribute="bottom" constant="8" id="QYZ-OI-ErD"/>
+                            <constraint firstItem="a5N-Kb-CX4" firstAttribute="top" secondItem="4Ke-cm-KmY" secondAttribute="bottom" constant="8" symbolic="YES" id="S0j-r5-bwN"/>
+                            <constraint firstItem="a5N-Kb-CX4" firstAttribute="trailing" secondItem="Ial-X5-VCO" secondAttribute="trailing" id="Wmd-oh-deK"/>
+                            <constraint firstItem="aW3-pj-aMW" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" constant="90" id="dXj-zR-MxB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aW3-pj-aMW" secondAttribute="trailing" constant="90" id="dqG-2h-EdE"/>
+                            <constraint firstItem="a5N-Kb-CX4" firstAttribute="leading" secondItem="Ial-X5-VCO" secondAttribute="leading" id="qoL-jx-JI6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="messageTextView" destination="Ial-X5-VCO" id="ilC-Qg-MDD"/>
+                        <outlet property="nameTextField" destination="a5N-Kb-CX4" id="gpj-ZW-kua"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zCS-BA-fyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="572" y="1378"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="evh-Kf-L5B">
