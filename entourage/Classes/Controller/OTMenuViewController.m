@@ -19,6 +19,7 @@
 
 // Utils
 #import <uservoice-iphone-sdk/UserVoice.h>
+#import "NSUserDefaults+OT.h"
 
 /* MenuItem identifiers */
 NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuMapIdentifier";
@@ -92,9 +93,9 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
         UVConfig *config = [UVConfig configWithSite:@"entourage-social.uservoice.com"];
         config.showContactUs = NO;
         config.showKnowledgeBase = NO;
-        config.showPostIdea = NO;
         config.forumId = 268709;
-        // [config identifyUserWithEmail:@"email@example.com" name:@"User Name", guid:@"USER_ID");
+        NSString *userMail = [NSUserDefaults standardUserDefaults].userMail;
+        [config identifyUserWithEmail:userMail name:userMail guid:userMail];
         [UserVoice initialize:config];
         
         // Call this wherever you want to launch UserVoice
