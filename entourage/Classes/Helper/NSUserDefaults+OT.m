@@ -1,5 +1,4 @@
 
-
 #import "OTUser.h"
 
 #import "NSUserDefaults+OT.h"
