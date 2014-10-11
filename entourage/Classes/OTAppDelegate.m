@@ -13,6 +13,8 @@
 // Util
 #import "UIFont+entourage.h"
 
+#import "Flurry.h"
+
 const CGFloat OTNavigationBarDefaultFontSize = 18.;
 
 @interface OTAppDelegate ()
@@ -25,11 +27,16 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.locationManager = [CLLocationManager new];
-    //[self.locationManager requestWhenInUseAuthorization];
+	[Flurry setCrashReportingEnabled:YES];
 
-    [self configureUIAppearance];
-    return YES;
+	// Replace YOUR_API_KEY with the api key in the downloaded package
+	[Flurry startSession:@"B7KH4H9T4HCY5PCR5P45"];
+
+	self.locationManager = [CLLocationManager new];
+	// [self.locationManager requestWhenInUseAuthorization];
+
+	[self configureUIAppearance];
+	return YES;
 }
 
 /**************************************************************************************************/
@@ -37,19 +44,19 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.;
 
 - (void)configureUIAppearance
 {
-    // UIStatusBar
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-    
-    // UINavigationBar
-    UIImage *navigationBarImage = [UIImage imageNamed:@"bg-top-header.png"];
-    UINavigationBar.appearance.barTintColor = [UIColor clearColor];
-    [[UINavigationBar appearance] setBackgroundImage:navigationBarImage forBarMetrics:UIBarMetricsDefault];
-    [UINavigationBar.appearance setBarStyle:UIBarStyleBlackTranslucent];
-    
-    UIFont *navigationBarFont = [UIFont calibriFontWithSize:OTNavigationBarDefaultFontSize];
-    UINavigationBar.appearance.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
-    [UIBarButtonItem.appearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                         NSFontAttributeName:navigationBarFont} forState:UIControlStateNormal];
+	// UIStatusBar
+	UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
+
+	// UINavigationBar
+	UIImage *navigationBarImage = [UIImage imageNamed:@"bg-top-header.png"];
+	UINavigationBar.appearance.barTintColor = [UIColor clearColor];
+	[[UINavigationBar appearance] setBackgroundImage:navigationBarImage forBarMetrics:UIBarMetricsDefault];
+	[UINavigationBar.appearance setBarStyle:UIBarStyleBlackTranslucent];
+
+	UIFont *navigationBarFont = [UIFont calibriFontWithSize:OTNavigationBarDefaultFontSize];
+	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor whiteColor] };
+	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName:[UIColor whiteColor],
+														  NSFontAttributeName:navigationBarFont } forState:UIControlStateNormal];
 }
 
 @end

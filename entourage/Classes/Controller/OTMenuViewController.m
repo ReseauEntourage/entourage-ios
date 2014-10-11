@@ -95,6 +95,8 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	{
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
 		[self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
+        
+        [Flurry logEvent:@"Open_Screen_From_Menu" withParameters:@{@"screen" : menuItem.segueIdentifier}];
 	}
 }
 

@@ -50,6 +50,9 @@
 		6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
 		6B92CACB19A7461C004E8C9B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAC919A7461C004E8C9B /* InfoPlist.strings */; };
 		6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFE639319E7E85400C661AB /* OTPoiCategory.m */; };
+		A809BAA519E97E2400A45AC9 /* libFlurry_5.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA419E97E2400A45AC9 /* libFlurry_5.4.0.a */; };
+		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
+		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
 		A87D6AF319E84683007ACA29 /* OTCustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */; };
 		A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */; };
 		A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682C819E7D097007BD4BC /* OTLoginViewController.m */; };
@@ -170,6 +173,10 @@
 		6BFE639319E7E85400C661AB /* OTPoiCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiCategory.m; sourceTree = "<group>"; };
 		7B26FE3EE0C7470099733881 /* libPods-entourage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96211180E938D7D9F5B23AC5 /* Pods-entourageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A809BAA319E97E2400A45AC9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		A809BAA419E97E2400A45AC9 /* libFlurry_5.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.4.0.a; sourceTree = "<group>"; };
+		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A816F83519E80D3C003EEF86 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCalloutViewController.h; sourceTree = "<group>"; };
 		A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCalloutViewController.m; sourceTree = "<group>"; };
@@ -228,11 +235,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */,
+				A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */,
 				6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */,
 				6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
 				3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */,
+				A809BAA519E97E2400A45AC9 /* libFlurry_5.4.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +452,9 @@
 		6B92CAA019A7461C004E8C9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A809BAA819E9803700A45AC9 /* Security.framework */,
+				A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */,
+				A809BAA219E97E2400A45AC9 /* Flurry */,
 				6B4930BD19A769EB00DA7EE0 /* MapKit.framework */,
 				6B92CAA119A7461C004E8C9B /* Foundation.framework */,
 				6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */,
@@ -503,6 +516,15 @@
 				6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		A809BAA219E97E2400A45AC9 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				A809BAA319E97E2400A45AC9 /* Flurry.h */,
+				A809BAA419E97E2400A45AC9 /* libFlurry_5.4.0.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 		A8E10FAB19E82A1500DF4A01 /* View */ = {
@@ -1045,6 +1067,10 @@
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Flurry",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1062,6 +1088,10 @@
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Flurry",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
