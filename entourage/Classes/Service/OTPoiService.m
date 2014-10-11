@@ -18,8 +18,10 @@
 NSString *const kCategories = @"categories";
 NSString *const kPOIs = @"pois";
 NSString *const kEncounters = @"encounters";
+NSString *const kEncounter = @"encounter";
 
 NSString *const kAPIPoiRoute = @"map.json";
+NSString *const kAPIEncounterRoute = @"encounters";
 
 @implementation OTPoiService
 
@@ -51,6 +53,30 @@ NSString *const kAPIPoiRoute = @"map.json";
 		 }
 	 }];
 }
+
+- (void)sendEncounter:(OTEncounter *)encounter withSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure
+{
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    [parameters setObject:[encounter dictionaryForWebservice] forKey:kEncounter];
+    [[OTHTTPRequestManager sharedInstance] POST:kAPIEncounterRoute
+                                     parameters:parameters
+                                        success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         if (success)
+         {
+             success();
+         }
+     }
+     
+                                        failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }];
+}
+
 
 /**************************************************************************************************/
 #pragma mark - Private methods

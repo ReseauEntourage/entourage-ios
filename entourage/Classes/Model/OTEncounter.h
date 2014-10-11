@@ -21,5 +21,6 @@
 @property (strong, nonatomic) NSString *voiceMessage;
 
 + (OTEncounter *)encounterWithJSONDictionnary:(NSDictionary *)dictionary;
+- (NSDictionary *)dictionaryForWebservice;
 
 @end

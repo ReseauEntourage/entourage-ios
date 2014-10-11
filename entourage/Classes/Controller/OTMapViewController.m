@@ -255,15 +255,29 @@
 
 - (IBAction)zoomToCurrentLocation:(UIBarButtonItem *)sender
 {
-	float spanX = 0.0001;
-	float spanY = 0.0001;
-	MKCoordinateRegion region;
+    float spanX = 0.0001;
+    float spanY = 0.0001;
+    MKCoordinateRegion region;
+    region.center.latitude = self.mapView.userLocation.coordinate.latitude;
+    region.center.longitude = self.mapView.userLocation.coordinate.longitude;
+    region.span.latitudeDelta = spanX;
+    region.span.longitudeDelta = spanY;
+    [self.mapView setRegion:region animated:YES];
+}
 
-	region.center.latitude = self.mapView.userLocation.coordinate.latitude;
-	region.center.longitude = self.mapView.userLocation.coordinate.longitude;
-	region.span.latitudeDelta = spanX;
-	region.span.longitudeDelta = spanY;
-	[self.mapView setRegion:region animated:YES];
+- (IBAction)createEncounter:(id)sender
+{
+    OTEncounter *encounter = [OTEncounter new];
+    encounter.date = [NSDate date];
+    encounter.message = @"foo";
+    encounter.streetPersonName =  @"bar";
+    encounter.latitude = self.mapView.region.center.latitude;
+    encounter.longitude = self.mapView.region.center.longitude;
+    [[OTPoiService new] sendEncounter:encounter withSuccess:^{
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 @end

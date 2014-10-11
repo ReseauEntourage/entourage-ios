@@ -45,4 +45,17 @@ NSString *const kEncounterVoiceMessage = @"voice_message";
     return encounter;
 }
 
+- (NSDictionary *)dictionaryForWebservice
+{
+    NSMutableDictionary *dictionary = [NSMutableDictionary new];
+        
+    dictionary[kEncounterDate] = self.date;
+    dictionary[kEncounterLongitude] = [NSNumber numberWithDouble:self.longitude];
+    dictionary[kEncounterLatitude] = [NSNumber numberWithDouble:self.latitude];
+    dictionary[kEncounterStreetPersonName] = self.streetPersonName;
+    dictionary[kEncounterMessage] = self.message;
+
+    return dictionary;
+}
+
 @end

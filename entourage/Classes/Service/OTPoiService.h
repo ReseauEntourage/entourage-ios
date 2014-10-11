@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class OTEncounter;
+
 extern NSString *const kCategories;
 extern NSString *const kPOIs;
 
@@ -16,5 +18,7 @@ extern NSString *const kAPIPoiRoute;
 @interface OTPoiService : NSObject
 
 - (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois, NSArray *encounters))success failure:(void (^)(NSError *error))failure;
+- (void)sendEncounter:(OTEncounter *)encounter withSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure
+;
 
 @end
