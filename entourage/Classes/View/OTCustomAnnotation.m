@@ -61,9 +61,14 @@ NSString *const kAnnotationIdentifier = @"OTAnnotationIdentifier";
 																	reuseIdentifier:kAnnotationIdentifier];
 
 	annotationView.canShowCallout = NO;
-	annotationView.image = [self.poi image];
+	annotationView.image = self.poi.image;
 
 	return annotationView;
+}
+
+- (NSString *)annotationIdentifier
+{
+    return [NSString stringWithFormat:@"%@-%@", kAnnotationIdentifier, self.poi.categoryId];
 }
 
 @end

@@ -12,12 +12,11 @@
 
 @class OTPoi;
 
-extern NSString *const kAnnotationIdentifier;
-
 @interface OTCustomAnnotation : NSObject <MKAnnotation>
 
 - (id)initWithPoi:(OTPoi *)poi;
 - (MKAnnotationView *)annotationView;
+- (NSString *)annotationIdentifier;
 
 @property (nonatomic, strong) OTPoi *poi;
 

@@ -151,11 +151,12 @@
 
 	if ([annotation isKindOfClass:[OTCustomAnnotation class]])
 	{
-		annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kAnnotationIdentifier];
+        OTCustomAnnotation *customAnnotation = (OTCustomAnnotation *)annotation;
+		annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:customAnnotation.annotationIdentifier];
 
 		if (!annotationView)
 		{
-			annotationView = ((OTCustomAnnotation *)annotation).annotationView;
+			annotationView = customAnnotation.annotationView;
 		}
 		annotationView.annotation = annotation;
 	}
@@ -165,15 +166,23 @@
 
 		if ([kingpinAnnotation isCluster])
 		{
+            JSBadgeView *badgeView;
 			annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterClusterAnnotationIdentifier];
 			if (!annotationView)
 			{
 				annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEncounterClusterAnnotationIdentifier];
                 annotationView.canShowCallout = NO;
+                annotationView.image = [UIImage imageNamed:@"rencontre.png"];
+                badgeView = [[JSBadgeView alloc] initWithParentView:annotationView alignment:JSBadgeViewAlignmentBottomCenter];
+            } else {
+                for (UIView *subview in annotationView.subviews)
+                {
+                    if ([subview isKindOfClass:JSBadgeView.class])
+                    {
+                        badgeView = (JSBadgeView *)subview;
+                    }
+                }
             }
-            annotationView.image = [UIImage imageNamed:@"rencontre.png"];
-            JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:annotationView
-                                                                   alignment:JSBadgeViewAlignmentBottomCenter];
             badgeView.badgeText = [NSString stringWithFormat:@"%lu", (unsigned long)kingpinAnnotation.annotations.count];
 		}
 		else
