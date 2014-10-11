@@ -15,6 +15,9 @@
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
 
+//Model
+#import "OTUser.h"
+
 @interface OTLoginViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
@@ -56,10 +59,11 @@
 	[[OTAuthService new]
 	 authWithEmail:self.emailTextField.text
 
-	       success: ^(NSString *email)
+	       success: ^(OTUser *user)
 	{
-	    NSLog(@"User : %@ authenticated successfully", email);
-	    [[NSUserDefaults standardUserDefaults] setUserMail:email];
+	    NSLog(@"User : %@ authenticated successfully", user.email);
+	    [[NSUserDefaults standardUserDefaults] setUserMail:user.email];
+	    [[NSUserDefaults standardUserDefaults] setUserSid:[user.sid integerValue]];
 	    [self dismissViewControllerAnimated:YES completion:nil];
 	}
 

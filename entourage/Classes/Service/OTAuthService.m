@@ -17,10 +17,13 @@
 // Helper
 #import "NSUserDefaults+OT.h"
 
+// Model
+#import "OTUser.h"
+
 @implementation OTAuthService
 
 - (void)authWithEmail:(NSString *)email
-              success:(void (^)(NSString *email))success
+              success:(void (^)(OTUser *user))success
               failure:(void (^)(NSError *error))failure {
 	NSDictionary *parameters = @{ @"email": email };
 
@@ -32,8 +35,22 @@
 	    NSDictionary *responseDict = responseObject;
 	    NSLog(@"Authentication service response : %@", responseDict);
 
-	    if (success) {
-	        success(email);
+	    NSString *errorMessage = responseDict[@"error"][@"message"];
+	    NSLog(@"errorMessage %@", errorMessage);
+
+	    if (errorMessage) {
+	        NSError *error = [NSError errorWithDomain:@"Entourage" code:-1 userInfo:@{ NSLocalizedDescriptionKey:errorMessage }];
+	        if (failure) {
+	            failure(error);
+			}
+		}
+	    else {
+	        OTUser *user = [OTUser new];
+	        NSDictionary *responseUser = responseDict[@"user"];
+	        user = [user initWithDictionary:responseUser];
+	        if (success) {
+	            success(user);
+			}
 		}
 	}
 
@@ -66,16 +83,6 @@
 		actualError = [NSError errorWithDomain:error.domain code:error.code userInfo:@{ NSLocalizedDescriptionKey:genericErrorMessage }];
 	}
 	return actualError;
-}
-
-- (void)alertStatus:(NSString *)msg:(NSString *)title:(int)tag {
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-	                                                    message:msg
-	                                                   delegate:self
-	                                          cancelButtonTitle:@"Ok"
-	                                          otherButtonTitles:nil, nil];
-	alertView.tag = tag;
-	[alertView show];
 }
 
 @end

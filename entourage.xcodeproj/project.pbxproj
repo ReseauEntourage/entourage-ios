@@ -11,6 +11,10 @@
 		1D962C7119E9277D00547687 /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
 		1D962C7519E9281500547687 /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7419E9281500547687 /* OTLoginViewController.m */; };
 		1D55D8D119E82B6C006A2184 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D55D8CF19E82B6C006A2184 /* Main.storyboard */; };
+		1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D319E84E9B006A2184 /* OTUser.m */; };
+		1D55D8D519E84E9B006A2184 /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D319E84E9B006A2184 /* OTUser.m */; };
+		1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
+		1D55D8D919E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
 		1DA682C919E7D097007BD4BC /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682C819E7D097007BD4BC /* OTLoginViewController.m */; };
 		1DA682CA19E7D097007BD4BC /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682C819E7D097007BD4BC /* OTLoginViewController.m */; };
 		1DA682E119E7F1F4007BD4BC /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682DF19E7F1F4007BD4BC /* OTAuthService.m */; };
@@ -103,6 +107,10 @@
 		1D962C7319E9281500547687 /* OTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLoginViewController.h; sourceTree = "<group>"; };
 		1D962C7419E9281500547687 /* OTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLoginViewController.m; sourceTree = "<group>"; };
 		1D55D8D019E82B6C006A2184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1D55D8D219E84E9B006A2184 /* OTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUser.h; sourceTree = "<group>"; };
+		1D55D8D319E84E9B006A2184 /* OTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUser.m; sourceTree = "<group>"; };
+		1D55D8D619E8514E006A2184 /* NSDictionary+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Parsing.h"; path = "Helper/NSDictionary+Parsing.h"; sourceTree = "<group>"; };
+		1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Parsing.m"; path = "Helper/NSDictionary+Parsing.m"; sourceTree = "<group>"; };
 		1DA682C719E7D097007BD4BC /* OTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLoginViewController.h; sourceTree = "<group>"; };
 		1DA682C819E7D097007BD4BC /* OTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLoginViewController.m; sourceTree = "<group>"; };
 		1DA682DF19E7F1F4007BD4BC /* OTAuthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAuthService.m; path = Service/OTAuthService.m; sourceTree = "<group>"; };
@@ -238,6 +246,8 @@
 		1DA682D519E7F130007BD4BC /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				1D55D8D619E8514E006A2184 /* NSDictionary+Parsing.h */,
+				1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */,
 				1DA682EA19E81483007BD4BC /* NSString+Validators.h */,
 				1DA682EB19E81483007BD4BC /* NSString+Validators.m */,
 				1DA682E619E80BE7007BD4BC /* NSUserDefaults+OT.h */,
@@ -383,6 +393,8 @@
 				6B4930E219A77E1D00DA7EE0 /* OTPoi.m */,
 				6BFE639219E7E85400C661AB /* OTPoiCategory.h */,
 				6BFE639319E7E85400C661AB /* OTPoiCategory.m */,
+				1D55D8D219E84E9B006A2184 /* OTUser.h */,
+				1D55D8D319E84E9B006A2184 /* OTUser.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -852,12 +864,15 @@
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
 				1D962C7119E9277D00547687 /* OTAuthService.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
+				1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */,
 				DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */,
 				6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */,
 				1D962C7519E9281500547687 /* OTLoginViewController.m in Sources */,
 				6BFE639819E7E85D00C661AB /* OTConstants.m in Sources */,
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
+				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,
+				1DA682E019E7F1F4007BD4BC /* OTAuthService.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
@@ -886,7 +901,9 @@
 				6B4930D919A7793200DA7EE0 /* OTTestHelper.m in Sources */,
 				1DA682CA19E7D097007BD4BC /* OTLoginViewController.m in Sources */,
 				1DA682E919E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
+				1D55D8D519E84E9B006A2184 /* OTUser.m in Sources */,
 				6B4930D419A773EC00DA7EE0 /* OTPoiTest.m in Sources */,
+				1D55D8D919E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

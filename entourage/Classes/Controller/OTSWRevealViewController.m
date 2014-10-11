@@ -13,15 +13,21 @@
 
 #import "OTLoginViewController.h"
 
+// Model
+#import "OTUser.h"
+
 @implementation OTSWRevealViewController
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-//	[[NSUserDefaults standardUserDefaults] setUserMail:nil];
+
+	// To disconnect the user
+	//	[[NSUserDefaults standardUserDefaults] setUserMail:nil];
+	//	[[NSUserDefaults standardUserDefaults] setUserSid:nil];
+
 	if (![[NSUserDefaults standardUserDefaults] userMail]) {
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTLoginViewControllerIdentifier"];
-
 		[self presentViewController:loginViewController animated:YES completion:nil];
 	}
 }

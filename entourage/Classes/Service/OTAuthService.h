@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import "OTUser.h"
 
 @interface OTAuthService : NSObject
 
 - (void)authWithEmail:(NSString *)email
-              success:(void (^)(NSString *email))success
+              success:(void (^)(OTUser *user))success
               failure:(void (^)(NSError *error))failure;
 @end
