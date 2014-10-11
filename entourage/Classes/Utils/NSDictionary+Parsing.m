@@ -1,12 +1,4 @@
-/**
- * @author Cédric Pointel <cpointel@octo.com>
- * @author Olivier Martin <omartin@octo.com>
- *
- * @section Licence
- * Copyright (c) 2014-present BNP Paribas
- *
- * @section Description
- */
+
 
 #import "NSDictionary+Parsing.h"
 
