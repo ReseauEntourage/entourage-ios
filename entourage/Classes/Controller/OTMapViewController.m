@@ -16,6 +16,7 @@
 // View
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
+#import "JSBadgeView.h"
 
 // Model
 #import "OTPoi.h"
@@ -167,11 +168,13 @@
 			annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterClusterAnnotationIdentifier];
 			if (!annotationView)
 			{
-				annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEncounterClusterAnnotationIdentifier];
-			}
-			MKPinAnnotationView *pinAnnotationView = (MKPinAnnotationView *)annotationView;
-
-			pinAnnotationView.pinColor = MKPinAnnotationColorGreen;
+				annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEncounterClusterAnnotationIdentifier];
+                annotationView.canShowCallout = NO;
+            }
+            annotationView.image = [UIImage imageNamed:@"rencontre.png"];
+            JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:annotationView
+                                                                   alignment:JSBadgeViewAlignmentBottomCenter];
+            badgeView.badgeText = [NSString stringWithFormat:@"%lu", (unsigned long)kingpinAnnotation.annotations.count];
 		}
 		else
 		{
