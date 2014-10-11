@@ -18,14 +18,24 @@
 //Model
 #import "OTUser.h"
 
-@interface OTLoginViewController ()
+@interface OTLoginViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UIButton *validateButton;
+@property (strong, nonatomic) IBOutlet UIImageView *logoImage;
+@property (weak, nonatomic) IBOutlet UIView *whiteBackground;
 
 @end
 
 @implementation OTLoginViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.whiteBackground.layer.cornerRadius = 5;
+    self.whiteBackground.layer.masksToBounds = YES;
+}
+
+
 
 - (IBAction)validateButtonDidTad:(UIButton *)sender {
 	if (self.emailTextField.text.length == 0) {
@@ -78,5 +88,12 @@
 	      nil] show];
 	}];
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 
 @end

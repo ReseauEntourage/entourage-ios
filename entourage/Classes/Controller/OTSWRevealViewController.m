@@ -22,7 +22,7 @@
 	[super viewDidAppear:animated];
 
 	// To disconnect the user
-	//	[[NSUserDefaults standardUserDefaults] setUserMail:nil];
+//		[[NSUserDefaults standardUserDefaults] setUserMail:nil];
 	//	[[NSUserDefaults standardUserDefaults] setUserSid:nil];
 
 	if (![[NSUserDefaults standardUserDefaults] userMail]) {

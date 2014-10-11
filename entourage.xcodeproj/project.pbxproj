@@ -17,6 +17,8 @@
 		1D55D8D919E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
 		1D962C7119E9277D00547687 /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
 		1D962C7519E9281500547687 /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7419E9281500547687 /* OTLoginViewController.m */; };
+		1DA2911319E92F260098C01E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA2911219E92F260098C01E /* logo.png */; };
+		1DA2911519E937760098C01E /* background-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA2911419E937760098C01E /* background-button.png */; };
 		1DA682CA19E7D097007BD4BC /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682C819E7D097007BD4BC /* OTLoginViewController.m */; };
 		1DA682E119E7F1F4007BD4BC /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682DF19E7F1F4007BD4BC /* OTAuthService.m */; };
 		1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */; };
@@ -114,6 +116,9 @@
 		1D962C7019E9277D00547687 /* OTAuthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAuthService.m; sourceTree = "<group>"; };
 		1D962C7319E9281500547687 /* OTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLoginViewController.h; sourceTree = "<group>"; };
 		1D962C7419E9281500547687 /* OTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLoginViewController.m; sourceTree = "<group>"; };
+
+		1DA2911219E92F260098C01E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		1DA2911419E937760098C01E /* background-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-button.png"; sourceTree = "<group>"; };
 		1DA682C719E7D097007BD4BC /* OTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLoginViewController.h; sourceTree = "<group>"; };
 		1DA682C819E7D097007BD4BC /* OTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLoginViewController.m; sourceTree = "<group>"; };
 		1DA682DF19E7F1F4007BD4BC /* OTAuthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAuthService.m; path = Service/OTAuthService.m; sourceTree = "<group>"; };
@@ -519,6 +524,8 @@
 		DBBE8AA419E83CB600FA218E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1DA2911419E937760098C01E /* background-button.png */,
+				1DA2911219E92F260098C01E /* logo.png */,
 				DBBE8AA519E83CB600FA218E /* bg-top-header.png */,
 				DBBE8AA619E83CB600FA218E /* bg-top-header@2x.png */,
 			);
@@ -742,6 +749,8 @@
 				DBBE8ABB19E83CB600FA218E /* ic_menu.png in Resources */,
 				DBBE8ABF19E83CB600FA218E /* poi_category-1.png in Resources */,
 				DBBE8AC519E83CB600FA218E /* poi_category-4.png in Resources */,
+
+				1DA2911519E937760098C01E /* background-button.png in Resources */,
 				DBBE8ACA19E83CB600FA218E /* poi_category-6@2x.png in Resources */,
 				DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */,
 				DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */,
@@ -763,6 +772,7 @@
 				DBBE8ABD19E83CB600FA218E /* menu_background.png in Resources */,
 				A816F83619E80D3C003EEF86 /* Localizable.strings in Resources */,
 				DBBE8A9919E81AF600FA218E /* Calibri.ttf in Resources */,
+				1DA2911319E92F260098C01E /* logo.png in Resources */,
 				1DA682EE19E81C65007BD4BC /* InfoPlist.strings in Resources */,
 				A816F83619E80D3C003EEF86 /* Localizable.strings in Resources */,
 				1D55D8D119E82B6C006A2184 /* Main.storyboard in Resources */,
