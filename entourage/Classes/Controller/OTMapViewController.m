@@ -98,26 +98,25 @@
 
 - (void)refreshMap
 {
-	if (!self.pois)
-	{
-		[[OTPoiService new] allPoisWithSuccess:^(NSArray *categories, NSArray *pois, NSArray *encounters)
-		 {
-			 [self.indicatorView setHidden:YES];
+	[[OTPoiService new] allPoisWithSuccess:^(NSArray *categories, NSArray *pois, NSArray *encounters)
+	 {
+		 [self.indicatorView setHidden:YES];
 
-			 self.categories = categories;
-			 self.pois = pois;
-			 self.encounters = encounters;
+		 self.categories = categories;
+		 self.pois = pois;
+		 self.encounters = [encounters mutableCopy];
 
-			 [self feedMapViewWithPoiArray:pois];
-			 [self feedMapViewWithEncountersArray:encounters];
-		 }
+		 [self feedMapViewWithPoiArray:pois];
+		 [self feedMapViewWithEncountersArray:encounters];
+	 }
 
-									   failure:^(NSError *error)
-		 {
-			 [self registerObserver];
-			 [self.indicatorView setHidden:YES];
-		 }];
-	}
+								   failure:^(NSError *error)
+	 {
+		 [self registerObserver];
+		 [self.indicatorView setHidden:YES];
+	 }];
+
+	[self performSelector:@selector(refreshMap) withObject:nil afterDelay:30.f];
 }
 
 - (void)feedMapViewWithPoiArray:(NSArray *)array
@@ -230,50 +229,50 @@
 					permittedArrowDirections:WYPopoverArrowDirectionNone
 									animated:YES
 									 options:WYPopoverAnimationOptionFadeWithScale];
-    } else if ([view.annotation isKindOfClass:[KPAnnotation class]]) {
-        KPAnnotation *kingpinAnnotation = (KPAnnotation *)view.annotation;
-        if ([kingpinAnnotation isCluster])
-        {
-            // Do nothing
-        }
-        else
-        {
-            id<MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
-            if([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]])
-            {
-                
-                OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTMeetingCalloutViewController"];
-                controller.delegate = self;
-                
-                UIView *popView = [controller view];
-                
-                popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
-                
-                [UIView animateWithDuration:.3f
-                                 animations:^
-                 {
-                     popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
-                 }];
-                
-                OTEncounterAnnotation* encounterAnnotation = (OTEncounterAnnotation *) simpleAnnontation;
-                OTEncounter *encounter = encounterAnnotation.encounter;
-                
-                [controller configureWithEncouter:encounter];
-                
-                controller.preferredContentSize = CGSizeMake(self.view.frame.size.width, 300);
-                
-                self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
-                [self.popover setTheme:[WYPopoverTheme themeForIOS7]];
-                
-                [self.popover presentPopoverFromRect:view.bounds
-                                              inView:view
-                            permittedArrowDirections:WYPopoverArrowDirectionNone
-                                            animated:YES
-                                             options:WYPopoverAnimationOptionFadeWithScale];
-                
-            }
-        }
-    }
+	}
+	else if ([view.annotation isKindOfClass:[KPAnnotation class]])
+	{
+		KPAnnotation *kingpinAnnotation = (KPAnnotation *)view.annotation;
+		if ([kingpinAnnotation isCluster])
+		{
+			// Do nothing
+		}
+		else
+		{
+			id<MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
+			if ([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]])
+			{
+				OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTMeetingCalloutViewController"];
+				controller.delegate = self;
+
+				UIView *popView = [controller view];
+
+				popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
+
+				[UIView animateWithDuration:.3f
+								 animations:^
+				 {
+					 popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
+				 }];
+
+				OTEncounterAnnotation *encounterAnnotation = (OTEncounterAnnotation *)simpleAnnontation;
+				OTEncounter *encounter = encounterAnnotation.encounter;
+
+				[controller configureWithEncouter:encounter];
+
+				controller.preferredContentSize = CGSizeMake(self.view.frame.size.width, 300);
+
+				self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
+				[self.popover setTheme:[WYPopoverTheme themeForIOS7]];
+
+				[self.popover presentPopoverFromRect:view.bounds
+												   inView:view
+								 permittedArrowDirections:WYPopoverArrowDirectionNone
+												 animated:YES
+												  options:WYPopoverAnimationOptionFadeWithScale];
+			}
+		}
+	}
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
@@ -299,33 +298,34 @@
 
 - (IBAction)zoomToCurrentLocation:(id)sender
 {
-    float spanX = 0.0001;
-    float spanY = 0.0001;
-    MKCoordinateRegion region;
-    region.center.latitude = self.mapView.userLocation.coordinate.latitude;
-    region.center.longitude = self.mapView.userLocation.coordinate.longitude;
-    region.span.latitudeDelta = spanX;
-    region.span.longitudeDelta = spanY;
-    [self.mapView setRegion:region animated:YES];
+	float spanX = 0.0001;
+	float spanY = 0.0001;
+	MKCoordinateRegion region;
+
+	region.center.latitude = self.mapView.userLocation.coordinate.latitude;
+	region.center.longitude = self.mapView.userLocation.coordinate.longitude;
+	region.span.latitudeDelta = spanX;
+	region.span.longitudeDelta = spanY;
+	[self.mapView setRegion:region animated:YES];
 }
 
 - (IBAction)createEncounter:(id)sender
 {
-    OTEncounter *encounter = [OTEncounter new];
-    encounter.date = [NSDate date];
-    encounter.message = @"foo";
-    encounter.streetPersonName =  @"bar";
-    encounter.latitude = self.mapView.region.center.latitude;
-    encounter.longitude = self.mapView.region.center.longitude;
-    [[OTPoiService new] sendEncounter:encounter withSuccess:^(OTEncounter *encounter) {
-        if (encounter)
-        {
-            [self.encounters addObject:encounter];
-            [self feedMapViewWithEncountersArray:self.encounters];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
+	OTEncounter *encounter = [OTEncounter new];
+
+	encounter.date = [NSDate date];
+	encounter.message = @"foo";
+	encounter.streetPersonName =  @"bar";
+	encounter.latitude = self.mapView.region.center.latitude;
+	encounter.longitude = self.mapView.region.center.longitude;
+	[[OTPoiService new] sendEncounter:encounter withSuccess:^(OTEncounter *encounter) {
+		 if (encounter)
+		 {
+			 [self.encounters addObject:encounter];
+			 [self feedMapViewWithEncountersArray:self.encounters];
+		 }
+	 } failure:^(NSError *error) {
+	 }];
 }
 
 @end
