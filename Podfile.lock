@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - JSBadgeView (1.3.2)
   - kingpin (0.2.beta)
   - MSTranslateVendor (1.1.0)
   - OCMock (3.1.1)
@@ -29,6 +30,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.3)
+  - JSBadgeView (~> 1.3)
   - kingpin (= 0.2.beta)
   - MSTranslateVendor (~> 1.1)
   - OCMock (~> 3.1)
@@ -38,6 +40,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  JSBadgeView: 75bec79d76e0eb01d57c9ce75b7c5ea8d6707955
   kingpin: 080953063d3d59c07f512623879b69f63c129f84
   MSTranslateVendor: bf54b7003c09b1178bdc8a76d22652545ea329df
   OCMock: f6cb8c162ab9d5620dddf411282c7b2c0ee78854

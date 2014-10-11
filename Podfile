@@ -9,6 +9,7 @@ target "entourage" do
     pod 'MSTranslateVendor', '~> 1.1'
     pod 'WYPopoverController', '~> 0.3'
     pod 'kingpin', '0.2.beta'
+    pod 'JSBadgeView', '~> 1.3'
 end
 
 target "entourageTests" do

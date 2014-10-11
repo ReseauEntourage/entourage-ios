@@ -16,9 +16,14 @@
 
 // Model
 #import "OTMenuItem.h"
+#import "OTUser.h"
 
 // View
 #import "OTMenuTableViewCell.h"
+
+// Utils
+#import <uservoice-iphone-sdk/UserVoice.h>
+#import "NSUserDefaults+OT.h"
 
 /* MenuItem identifiers */
 NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuMapIdentifier";
@@ -91,6 +96,21 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTLoginViewControllerIdentifier"];
 		[self presentViewController:loginViewController animated:YES completion:nil];
 	}
+    else if (indexPath.row == 3)
+    {
+        // Set this up once when your application launches
+        UVConfig *config = [UVConfig configWithSite:@"entourage-social.uservoice.com"];
+        
+        config.showContactUs = NO;
+        config.showKnowledgeBase = NO;
+        config.forumId = 268709;
+        NSString *userMail = [[NSUserDefaults standardUserDefaults].currentUser email];
+        [config identifyUserWithEmail:userMail name:userMail guid:userMail];
+        [UserVoice initialize:config];
+        
+        // Call this wherever you want to launch UserVoice
+        [UserVoice presentUserVoiceForumForParentViewController:self];
+    }
 	else
 	{
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
