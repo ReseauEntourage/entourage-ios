@@ -40,6 +40,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>NSLocationUsageDescription</key>
+	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

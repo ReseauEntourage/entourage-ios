@@ -1,11 +1,11 @@
 PODS:
   - AFNetworking (2.4.1):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-    - AFNetworking/UIKit
+    - AFNetworking/NSURLConnection (= 2.4.1)
+    - AFNetworking/NSURLSession (= 2.4.1)
+    - AFNetworking/Reachability (= 2.4.1)
+    - AFNetworking/Security (= 2.4.1)
+    - AFNetworking/Serialization (= 2.4.1)
+    - AFNetworking/UIKit (= 2.4.1)
   - AFNetworking/NSURLConnection (2.4.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
@@ -48,4 +48,4 @@ SPEC CHECKSUMS:
   uservoice-iphone-sdk: 7cbc1e76dcbbc3d5ae3b4bf009fdcf355e1e83ec
   WYPopoverController: 86aa5a8993fea95f59028d5d944d0f21f8bee9b9
 
-COCOAPODS: 0.34.2
+COCOAPODS: 0.35.0
