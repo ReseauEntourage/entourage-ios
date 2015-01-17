@@ -1,5 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
+inhibit_all_warnings!
+
 platform :ios, '7.0'
 
 target "entourage" do
@@ -10,6 +12,7 @@ target "entourage" do
     pod 'WYPopoverController', '~> 0.3'
     pod 'kingpin', '0.2.beta'
     pod 'JSBadgeView', '~> 1.3'
+    pod 'OTAppaloosa', :podspec => "https://raw.github.com/octo-online/appaloosa-ios-sdk/0.5.6/OTAppaloosa.podspec"
 end
 
 target "entourageTests" do

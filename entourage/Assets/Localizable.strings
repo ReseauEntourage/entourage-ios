@@ -6,6 +6,12 @@
   Copyright (c) 2014 OCTO Technology. All rights reserved.
 */
 
+// Keys
+"FLURRY_API_KEY" = "B7KH4H9T4HCY5PCR5P45";
+"APPALOOSA_STORE_TOKEN" = "ypt4d26acetzxivf5ynjeeqfisr9p7dr";
+"APPALOOSA_STORE_ID" = "3949";
+
+
 "mapviewcontroller_title" = "CARTE";
 
 // MenuItems

@@ -28,7 +28,6 @@
 		1D55D8D919E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
 		1DA2911319E92F260098C01E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA2911219E92F260098C01E /* logo.png */; };
 		1DA2911519E937760098C01E /* background-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA2911419E937760098C01E /* background-button.png */; };
-		1DA682E119E7F1F4007BD4BC /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */; };
 		1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682EB19E81483007BD4BC /* NSString+Validators.m */; };
 		1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */; };
@@ -971,7 +970,6 @@
 				DBBE8AE019E8723700FA218E /* OTAppDelegateTests.m in Sources */,
 				DBBE8AD919E8652B00FA218E /* OTMenuItemTests.m in Sources */,
 				DBBE8AE619E873C500FA218E /* OTMapViewControllerTests.m in Sources */,
-				1DA682E119E7F1F4007BD4BC /* (null) in Sources */,
 				1D55D8D919E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1101,6 +1099,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1122,6 +1121,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

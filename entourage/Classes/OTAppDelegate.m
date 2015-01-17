@@ -8,18 +8,14 @@
 
 #import "OTAppDelegate.h"
 
-#import <CoreLocation/CoreLocation.h>
-
 // Util
 #import "UIFont+entourage.h"
 
-#import "Flurry.h"
+#import <OTAppaloosa/OTAppaloosa.h>
 
-const CGFloat OTNavigationBarDefaultFontSize = 18.;
+const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 
-@interface OTAppDelegate ()
-
-@property (strong, nonatomic) CLLocationManager *locationManager;
+@interface OTAppDelegate () <UIApplicationDelegate, OTAppaloosaAgentDelegate>
 
 @end
 
@@ -27,16 +23,26 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	[Flurry setCrashReportingEnabled:YES];
+    [Flurry setCrashReportingEnabled:YES];
+    [Flurry startSession:NSLocalizedString(@"FLURRY_API_KEY", @"")];
 
-	// Replace YOUR_API_KEY with the api key in the downloaded package
-	[Flurry startSession:@"B7KH4H9T4HCY5PCR5P45"];
+    [[OTAppaloosaAgent sharedAgent] feedbackControllerWithDefaultButtonAtPosition:kAppaloosaButtonPositionRightBottom
+                                                          forRecipientsEmailArray:@[@"entourage@octo.com"]];
+    [[OTAppaloosaAgent sharedAgent] devPanelWithDefaultButtonAtPosition:kAppaloosaButtonPositionRightBottom];
 
-	self.locationManager = [CLLocationManager new];
-	// [self.locationManager requestWhenInUseAuthorization];
 
-	[self configureUIAppearance];
-	return YES;
+    [[OTAppaloosaAgent sharedAgent] registerWithStoreId:NSLocalizedString(@"APPALOOSA_STORE_ID", @"")
+                                             storeToken:NSLocalizedString(@"APPALOOSA_STORE_TOKEN", @"")
+                                            andDelegate:self];
+
+    [self configureUIAppearance];
+    return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [[OTAppaloosaAgent sharedAgent] checkUpdates];
+    [[OTAppaloosaAgent sharedAgent] checkAuthorizations];
 }
 
 /**************************************************************************************************/
@@ -44,19 +50,19 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.;
 
 - (void)configureUIAppearance
 {
-	// UIStatusBar
-	UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
+    // UIStatusBar
+    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
 
-	// UINavigationBar
-	UIImage *navigationBarImage = [UIImage imageNamed:@"bg-top-header.png"];
-	UINavigationBar.appearance.barTintColor = [UIColor clearColor];
-	[[UINavigationBar appearance] setBackgroundImage:navigationBarImage forBarMetrics:UIBarMetricsDefault];
-	[UINavigationBar.appearance setBarStyle:UIBarStyleBlackTranslucent];
+    // UINavigationBar
+    UIImage *navigationBarImage = [UIImage imageNamed:@"bg-top-header.png"];
+    UINavigationBar.appearance.barTintColor = [UIColor clearColor];
+    [[UINavigationBar appearance] setBackgroundImage:navigationBarImage forBarMetrics:UIBarMetricsDefault];
+    [UINavigationBar.appearance setBarStyle:UIBarStyleBlackTranslucent];
 
-	UIFont *navigationBarFont = [UIFont calibriFontWithSize:OTNavigationBarDefaultFontSize];
-	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor whiteColor] };
-	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName:[UIColor whiteColor],
-														  NSFontAttributeName:navigationBarFont } forState:UIControlStateNormal];
+    UIFont *navigationBarFont = [UIFont calibriFontWithSize:OTNavigationBarDefaultFontSize];
+    UINavigationBar.appearance.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    [UIBarButtonItem.appearance setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
+            NSFontAttributeName                                                         : navigationBarFont} forState:UIControlStateNormal];
 }
 
 @end

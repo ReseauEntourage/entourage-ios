@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 
@@ -20,8 +19,8 @@
 
 @interface OTAppDelegateTests : XCTestCase
 
-@property (nonatomic, strong) OTAppDelegate *appDelegate;
-@property (nonatomic, strong) id mockAppDelegate;
+@property (nonatomic, strong) id <UIApplicationDelegate> appDelegate;
+@property (nonatomic, strong) id <UIApplicationDelegate> mockAppDelegate;
 
 @end
 
@@ -35,7 +34,7 @@
     [super setUp];
     
     self.appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.mockAppDelegate = [OCMockObject partialMockForObject:self.appDelegate];
+    self.mockAppDelegate = [OCMockObject partialMockForObject:(id) self.appDelegate];
 }
 
 /**************************************************************************************************/
