@@ -12,7 +12,7 @@ target "entourage" do
     pod 'WYPopoverController', '~> 0.3'
     pod 'kingpin', '0.2.beta'
     pod 'JSBadgeView', '~> 1.3'
-    pod 'OTAppaloosa', :podspec => "https://raw.github.com/octo-online/appaloosa-ios-sdk/0.5.6/OTAppaloosa.podspec"
+    pod 'OTAppaloosa'
 end
 
 target "entourageTests" do
