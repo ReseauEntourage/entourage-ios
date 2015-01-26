@@ -14,6 +14,9 @@
 // Services
 #import "OTPoiService.h"
 
+// ViewController
+#import "OTCreateAudioMessageViewController.h"
+
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 
@@ -29,52 +32,50 @@
 
 @implementation OTCreateMeetingViewController
 
--(void)viewDidLoad
-{
-    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.firstName];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd/MM/yyyy"];
-    
-    NSString *dateString = [formatter stringFromDate:[NSDate date]];
-    
-    self.dateLabel.text = [NSString stringWithFormat:@"se sont rencontré ici le %@", dateString];
-    
-    self.messageTextView.layer.borderWidth = 1;
-    self.messageTextView.layer.borderColor = UIColor.lightGrayColor.CGColor;
+- (void)viewDidLoad {
+	OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+	self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.firstName];
+
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"dd/MM/yyyy"];
+
+	NSString *dateString = [formatter stringFromDate:[NSDate date]];
+
+	self.dateLabel.text = [NSString stringWithFormat:@"se sont rencontré ici le %@", dateString];
+
+	self.messageTextView.layer.borderWidth = 1;
+	self.messageTextView.layer.borderColor = UIColor.lightGrayColor.CGColor;
 }
 
-- (void)configureWithLocation:(CLLocationCoordinate2D)location
-{
-    self.location = location;
+- (void)configureWithLocation:(CLLocationCoordinate2D)location {
+	self.location = location;
 }
 
-- (IBAction)sendEncounter:(id)sender
-{
-    OTEncounter *encounter = [OTEncounter new];
-    encounter.date = [NSDate date];
-    encounter.message = self.messageTextView.text;
-    encounter.streetPersonName =  self.nameTextField.text;
-    encounter.latitude = self.location.latitude;
-    encounter.longitude = self.location.longitude;
-    [[OTPoiService new] sendEncounter:encounter withSuccess:^(OTEncounter *encounter) {
-        if (self.delegate)
-        {
-            [self.delegate dismissPopoverWithEncounter:encounter];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
+- (IBAction)addAudioMsgDidTap:(id)sender {
+	OTCreateAudioMessageViewController *controller = (OTCreateAudioMessageViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCreateAudioMessageViewController"];
+	[self.navigationController pushViewController:controller animated:YES];
+//	[self presentViewController:controller animated:YES completion:nil];
 }
 
-- (IBAction)close:(id)sender
-{
-    if (self.delegate)
-    {
-        [self.delegate dismissPopoverWithEncounter:nil];
-    }
+- (IBAction)sendEncounter:(id)sender {
+	OTEncounter *encounter = [OTEncounter new];
+	encounter.date = [NSDate date];
+	encounter.message = self.messageTextView.text;
+	encounter.streetPersonName =  self.nameTextField.text;
+	encounter.latitude = self.location.latitude;
+	encounter.longitude = self.location.longitude;
+	[[OTPoiService new] sendEncounter:encounter withSuccess: ^(OTEncounter *encounter) {
+	    if (self.delegate) {
+	        [self.delegate dismissPopoverWithEncounter:encounter];
+		}
+	} failure: ^(NSError *error) {
+	}];
 }
 
+- (IBAction)close:(id)sender {
+	if (self.delegate) {
+		[self.delegate dismissPopoverWithEncounter:nil];
+	}
+}
 
 @end

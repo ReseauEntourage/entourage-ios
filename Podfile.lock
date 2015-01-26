@@ -21,31 +21,47 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Base64 (1.0.1)
+  - CocoaSoundCloudAPI (1.0.1):
+    - NXOAuth2Client (= 1.2.1)
+  - CocoaSoundCloudUI (1.0.5):
+    - CocoaSoundCloudAPI (~> 1.0.1)
+    - JSONKit
+    - OHAttributedLabel
   - JSBadgeView (1.3.2)
+  - JSONKit (1.4)
   - kingpin (0.2.beta)
   - MSTranslateVendor (1.1.0)
+  - NXOAuth2Client (1.2.1)
   - OCMock (3.1.2)
+  - OHAttributedLabel (3.5.5)
   - OTAppaloosa (0.5.6):
     - Base64 (~> 1.0.1)
     - Reachability (~> 3.1.1)
     - SFHFKeychainUtils (~> 0.0)
     - TPKeyboardAvoiding (~> 1.1)
     - UIDeviceAddition (~> 1.0)
+  - PMAudioRecorderViewController (0.5):
+    - UIImage+BlurredFrame
   - Reachability (3.1.1)
   - SFHFKeychainUtils (0.0.1)
   - SWRevealViewController (2.3.0)
   - TPKeyboardAvoiding (1.2.4)
   - UIDeviceAddition (1.0)
+  - UIImage+BlurredFrame (0.0.4)
   - uservoice-iphone-sdk (3.2.2)
   - WYPopoverController (0.3.5)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.3)
+  - CocoaSoundCloudAPI (= 1.0.1)
+  - CocoaSoundCloudUI (= 1.0.5)
   - JSBadgeView (~> 1.3)
+  - JSONKit
   - kingpin (= 0.2.beta)
   - MSTranslateVendor (~> 1.1)
   - OCMock (~> 3.1)
   - OTAppaloosa
+  - PMAudioRecorderViewController
   - SWRevealViewController (~> 2.3)
   - uservoice-iphone-sdk (~> 3.2)
   - WYPopoverController (~> 0.3)
@@ -53,16 +69,23 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
   Base64: c6d74f31f150543b246a07e180ba813c88e59311
+  CocoaSoundCloudAPI: 5e6bab9b529e0c0de1a0b470a25673e199e3b12b
+  CocoaSoundCloudUI: a9690cb539fc2f9a20cb718caf25be4e760e7f43
   JSBadgeView: 75bec79d76e0eb01d57c9ce75b7c5ea8d6707955
+  JSONKit: 2111ac2b11f7ea0d07bb1d9d09e650918336a134
   kingpin: 080953063d3d59c07f512623879b69f63c129f84
   MSTranslateVendor: bf54b7003c09b1178bdc8a76d22652545ea329df
+  NXOAuth2Client: 28de3d9bde510d398e62d723a0123c500017af84
   OCMock: ecdd510b73ef397f2f97274785c1e87fd147c49f
+  OHAttributedLabel: 733b32053cd02be1044749d394e874143e41e8d7
   OTAppaloosa: eda4cb7c1c44bb574ef11906a0a6d48bc84cdd62
+  PMAudioRecorderViewController: 14854e3f266e18bc5c5fc67b44df8d175c431cb3
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   SFHFKeychainUtils: 6fdda05a86d035db406c7662ec1054814b68f0fd
   SWRevealViewController: f6d80638b8e12323e87ac79562345403a799cb77
   TPKeyboardAvoiding: 925e1e1912597d1a4956697eec3bd9656552153c
   UIDeviceAddition: fb25767a1b5447c4e40af0ca948178c9feb9d05b
+  UIImage+BlurredFrame: 0c38f5760d72125c47d16001a88faaac573bd35d
   uservoice-iphone-sdk: 9dc05d00656482f54bf03f793334a8f7ff070e46
   WYPopoverController: d5350da9e8aa98d607bbc9a2e299b5982938e77b
 

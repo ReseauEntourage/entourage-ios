@@ -22,7 +22,6 @@
 		19BA50A019E9894200342A36 /* pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509E19E9894200342A36 /* pointer.png */; };
 		19BA50A119E9894200342A36 /* pointer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509F19E9894200342A36 /* pointer@2x.png */; };
 		1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */; };
-		1D55D8D119E82B6C006A2184 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D55D8CF19E82B6C006A2184 /* Main.storyboard */; };
 		1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D319E84E9B006A2184 /* OTUser.m */; };
 		1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
 		1D55D8D919E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
@@ -31,6 +30,9 @@
 		1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */; };
 		1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682EB19E81483007BD4BC /* NSString+Validators.m */; };
 		1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */; };
+		1DB278391A764D74009055B1 /* OTCreateAudioMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB278381A764D74009055B1 /* OTCreateAudioMessageViewController.m */; };
+		1DB2783B1A765320009055B1 /* example.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1DB2783A1A765320009055B1 /* example.mp3 */; };
+		1DB2783F1A76A247009055B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DB2783D1A76A247009055B1 /* Main.storyboard */; };
 		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
 		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
@@ -127,7 +129,6 @@
 		19BA509F19E9894200342A36 /* pointer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pointer@2x.png"; sourceTree = "<group>"; };
 		1D3BD36A19E964FC001687F9 /* OTMeetingCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMeetingCalloutViewController.h; sourceTree = "<group>"; };
 		1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMeetingCalloutViewController.m; sourceTree = "<group>"; };
-		1D55D8D019E82B6C006A2184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1D55D8D219E84E9B006A2184 /* OTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUser.h; sourceTree = "<group>"; };
 		1D55D8D319E84E9B006A2184 /* OTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUser.m; sourceTree = "<group>"; };
 		1D55D8D619E8514E006A2184 /* NSDictionary+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Parsing.h"; path = "Helper/NSDictionary+Parsing.h"; sourceTree = "<group>"; };
@@ -144,6 +145,10 @@
 		1DA682EB19E81483007BD4BC /* NSString+Validators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Validators.m"; path = "Helper/NSString+Validators.m"; sourceTree = "<group>"; };
 		1DA682EF19E823C3007BD4BC /* OTSWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSWRevealViewController.h; sourceTree = "<group>"; };
 		1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSWRevealViewController.m; sourceTree = "<group>"; };
+		1DB278381A764D74009055B1 /* OTCreateAudioMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCreateAudioMessageViewController.m; sourceTree = "<group>"; };
+		1DB2783A1A765320009055B1 /* example.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = example.mp3; sourceTree = SOURCE_ROOT; };
+		1DB2783C1A7659B2009055B1 /* OTCreateAudioMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCreateAudioMessageViewController.h; sourceTree = "<group>"; };
+		1DB2783E1A76A247009055B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = entourage/Classes/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		1DF661D919E98AAD00045310 /* OTCreateMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCreateMeetingViewController.h; sourceTree = "<group>"; };
 		1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCreateMeetingViewController.m; sourceTree = "<group>"; };
 		2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -304,6 +309,16 @@
 			name = Helper;
 			sourceTree = "<group>";
 		};
+		1DB278351A764CDA009055B1 /* AudioMessages */ = {
+			isa = PBXGroup;
+			children = (
+				1DB2783A1A765320009055B1 /* example.mp3 */,
+				1DB278381A764D74009055B1 /* OTCreateAudioMessageViewController.m */,
+				1DB2783C1A7659B2009055B1 /* OTCreateAudioMessageViewController.h */,
+			);
+			name = AudioMessages;
+			sourceTree = "<group>";
+		};
 		3D6ACAA7335664BE2C3F900F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,7 +371,6 @@
 				1DA682D519E7F130007BD4BC /* Helper */,
 				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
 				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
-				1D55D8CF19E82B6C006A2184 /* Main.storyboard */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -364,6 +378,7 @@
 		6B4930C719A773C500DA7EE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1DB2783D1A76A247009055B1 /* Main.storyboard */,
 				1D962C7219E9280800547687 /* Login */,
 				DBBE8AD319E85E9000FA218E /* MyMeetings */,
 				DBBE8ACB19E83CCE00FA218E /* Map */,
@@ -616,6 +631,7 @@
 		DBBE8ACB19E83CCE00FA218E /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				1DB278351A764CDA009055B1 /* AudioMessages */,
 				6B4930C819A773C500DA7EE0 /* OTMapViewController.h */,
 				6B4930C919A773C500DA7EE0 /* OTMapViewController.m */,
 				A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */,
@@ -816,6 +832,7 @@
 				A8B3825F19E94BB400CF7184 /* poi_category-0.png in Resources */,
 				19BA509C19E987A100342A36 /* center-location.png in Resources */,
 				19BA509719E9625A00342A36 /* rencontre@2x.png in Resources */,
+				1DB2783F1A76A247009055B1 /* Main.storyboard in Resources */,
 				DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */,
 				DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */,
 				19BA509919E9626000342A36 /* rencontre.png in Resources */,
@@ -826,6 +843,7 @@
 				DBBE8AC919E83CB600FA218E /* poi_category-4.png in Resources */,
 				DBBE8A9619E81AF600FA218E /* Calibri-Bold-Italic.ttf in Resources */,
 				DBBE8AC319E83CB600FA218E /* poi_category-3.png in Resources */,
+				1DB2783B1A765320009055B1 /* example.mp3 in Resources */,
 				DBBE8ABE19E83CB600FA218E /* menu_background@2x.png in Resources */,
 				6B92CABA19A7461C004E8C9B /* Images.xcassets in Resources */,
 				DBBE8AC219E83CB600FA218E /* poi_category-2@2x.png in Resources */,
@@ -843,7 +861,6 @@
 				19BA509219E956D500342A36 /* Localizable.strings in Resources */,
 				DBBE8A9919E81AF600FA218E /* Calibri.ttf in Resources */,
 				1DA2911319E92F260098C01E /* logo.png in Resources */,
-				1D55D8D119E82B6C006A2184 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +945,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DB278391A764D74009055B1 /* OTCreateAudioMessageViewController.m in Sources */,
 				19BA509519E9587800342A36 /* OTEncounterAnnotation.m in Sources */,
 				191FE92819E945F200C56BCA /* OTEncounter.m in Sources */,
 				191FE92419E943D900C56BCA /* OTAuthService.m in Sources */,
@@ -985,10 +1003,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1D55D8CF19E82B6C006A2184 /* Main.storyboard */ = {
+		1DB2783D1A76A247009055B1 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1D55D8D019E82B6C006A2184 /* Base */,
+				1DB2783E1A76A247009055B1 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

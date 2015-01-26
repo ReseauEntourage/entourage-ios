@@ -70,7 +70,7 @@
 	if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
 		[self.locationManager requestWhenInUseAuthorization];
 	}
-    [self.locationManager startUpdatingLocation];
+	[self.locationManager startUpdatingLocation];
 
 	self.mapView.showsUserLocation = YES;
 	self.mapView.delegate = self;
@@ -351,11 +351,12 @@
 #pragma mark - OTCreateMeetingViewControllerDelegate
 
 - (void)dismissPopoverWithEncounter:(OTEncounter *)encounter {
-	if (encounter) {
-		[self.encounters addObject:encounter];
-		[self feedMapViewWithEncountersArray:self.encounters];
-	}
-	[self.popover dismissPopoverAnimated:YES];
+//	if (encounter) {
+//		[self.encounters addObject:encounter];
+//		[self feedMapViewWithEncountersArray:self.encounters];
+//	}
+//	[self.popover dismissPopoverAnimated:YES];
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /********************************************************************************/
@@ -417,27 +418,31 @@
 	OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCreateMeetingViewController"];
 	controller.delegate = self;
 
-	UIView *popView = [controller view];
-
-	popView.frame = CGRectOffset(self.view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
-	[UIView animateWithDuration:.3f
-	                 animations: ^
-	{
-	    popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
-	}];
+//	UIView *popView = [controller view];
+//
+//	popView.frame = CGRectOffset(self.view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
+//	[UIView animateWithDuration:.3f
+//	                 animations: ^
+//	{
+//	    popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
+//	}];
 
 	[controller configureWithLocation:self.mapView.region.center];
 
-	controller.preferredContentSize = CGSizeMake(self.view.frame.size.width, 300);
+	[self.navigationController pushViewController:controller animated:YES];
 
-	self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
-	[self.popover setTheme:[WYPopoverTheme themeForIOS7]];
+//	[self presentViewController:controller animated:YES completion:nil];
 
-	[self.popover presentPopoverFromRect:self.view.bounds
-	                              inView:self.view
-	            permittedArrowDirections:WYPopoverArrowDirectionNone
-	                            animated:YES
-	                             options:WYPopoverAnimationOptionFadeWithScale];
+//	controller.preferredContentSize = CGSizeMake(self.view.frame.size.width, 300);
+
+//	self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
+//	[self.popover setTheme:[WYPopoverTheme themeForIOS7]];
+//
+//	[self.popover presentPopoverFromRect:self.view.bounds
+//	                              inView:self.view
+//	            permittedArrowDirections:WYPopoverArrowDirectionNone
+//	                            animated:YES
+//	                             options:WYPopoverAnimationOptionFadeWithScale];
 }
 
 @end

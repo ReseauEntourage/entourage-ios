@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bGF-q3-B8f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bGF-q3-B8f">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -11,6 +12,7 @@
             <string>Calibri-Bold</string>
         </mutableArray>
         <mutableArray key="Calibri.ttf">
+            <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
@@ -638,7 +640,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
-                                <rect key="frame" x="16" y="113" width="288" height="393"/>
+                                <rect key="frame" x="16" y="211" width="288" height="295"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -670,6 +672,24 @@
                                     <action selector="close:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="BFB-Se-6vg"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8GS-dn-gDU">
+                                <rect key="frame" x="61" y="140" width="198" height="34"/>
+                                <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Px4-nY-HU2"/>
+                                    <constraint firstAttribute="width" constant="198" id="cPq-s1-qaA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="18"/>
+                                <state key="normal" title="LAISSER UN MSG AUDIO">
+                                    <color key="titleColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addAudioMsgDidTap:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="Zhr-Xp-kPh"/>
+                                    <action selector="closeMe:" destination="8hZ-Tf-zqI" eventType="touchUpInside" id="nLF-6u-K4Q"/>
+                                    <action selector="sendEncounter:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="KGo-tX-Nex"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -679,10 +699,12 @@
                             <constraint firstItem="a5N-Kb-CX4" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="Gxj-BP-1Fc"/>
                             <constraint firstItem="aW3-pj-aMW" firstAttribute="top" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="8" id="INK-95-FXI"/>
                             <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="KgW-ij-Axb"/>
-                            <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="8" id="L9K-np-DyK"/>
+                            <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="106" id="L9K-np-DyK"/>
+                            <constraint firstItem="8GS-dn-gDU" firstAttribute="centerX" secondItem="2uf-2Y-z5H" secondAttribute="centerX" id="MoU-fK-90B"/>
                             <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="NRN-4b-MX0"/>
                             <constraint firstItem="KDZ-i8-4OP" firstAttribute="top" secondItem="feS-ZD-ocn" secondAttribute="topMargin" constant="15" id="NeU-Tv-ARP"/>
                             <constraint firstItem="8c7-iL-w53" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="O8e-ui-QoX"/>
+                            <constraint firstItem="8GS-dn-gDU" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="35" id="Rb2-jS-JDD"/>
                             <constraint firstItem="2uf-2Y-z5H" firstAttribute="top" secondItem="a5N-Kb-CX4" secondAttribute="bottom" constant="8" id="TDf-jr-56m"/>
                             <constraint firstItem="2uf-2Y-z5H" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="Td3-BW-aaV"/>
                             <constraint firstItem="KDZ-i8-4OP" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="UBs-OK-aRn"/>
@@ -703,6 +725,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zCS-BA-fyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="572" y="1417"/>
+        </scene>
+        <!--Create Audio Message View Controller-->
+        <scene sceneID="qvU-Vg-y1C">
+            <objects>
+                <viewController storyboardIdentifier="OTCreateAudioMessageViewController" id="ycd-fQ-EsO" customClass="OTCreateAudioMessageViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nsk-bG-QPP"/>
+                        <viewControllerLayoutGuide type="bottom" id="vxI-R7-6SR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VNr-4b-HPm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="YvJ-TZ-OX7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mpv-dn-V0v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="991" y="1417"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="evh-Kf-L5B">
@@ -837,7 +878,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a55-kR-EIf">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a55-kR-EIf">
                                 <rect key="frame" x="106" y="514" width="108" height="34"/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -852,7 +893,7 @@
                                     <action selector="closeMe:" destination="8hZ-Tf-zqI" eventType="touchUpInside" id="RiX-hj-LjL"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvn-hk-k8b">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvn-hk-k8b">
                                 <rect key="frame" x="36" y="40" width="248" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
