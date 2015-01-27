@@ -7,6 +7,7 @@
 //
 
 
+#import <PMAudioRecorderViewController/AudioNoteRecorderViewController.h>
 #import "OTCreateAudioMessageViewController.h"
 
 // SoundCloud
@@ -16,25 +17,30 @@
 // Audio
 #import "AudioNoteRecorderViewController.h"
 
+@interface OTCreateAudioMessageViewController () <AudioNoteRecorderDelegate>
+
+@property(nonatomic, strong) AudioNoteRecorderViewController *audioNoteRecorderController;
+
+@end
+
 @implementation OTCreateAudioMessageViewController
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	[AudioNoteRecorderViewController showRecorderMasterViewController:self withFinishedBlock: ^(BOOL wasRecordingTaken, NSURL *recordingURL) {
-	    if (wasRecordingTaken) {
-	        [self sendToSoundCloudTheSongWithRecordedURL:recordingURL];
-		}
-	}];
+
+    [AudioNoteRecorderViewController showRecorderWithMasterViewController:self withDelegate:self];
 }
 
-//
-//- (void)audioNoteRecorderDidCancel:(AudioNoteRecorderViewController *)audioNoteRecorder {
-//	[self dismissViewControllerAnimated:YES completion:nil];
-//}
-//
-//- (void)audioNoteRecorderDidTapDone:(AudioNoteRecorderViewController *)audioNoteRecorder withRecordedURL:(NSURL *)recordedURL {
-//	[self sendToSoundCloudTheSongWithRecordedURL:recordedURL];
-//}
+/********************************************************************************/
+#pragma mark - AudioNoteRecorderDelegate
+
+- (void)audioNoteRecorderDidCancel:(AudioNoteRecorderViewController *)audioNoteRecorder {
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)audioNoteRecorderDidTapDone:(AudioNoteRecorderViewController *)audioNoteRecorder withRecordedURL:(NSURL *)recordedURL {
+	[self sendToSoundCloudTheSongWithRecordedURL:recordedURL];
+}
 
 - (void)sendToSoundCloudTheSongWithRecordedURL:(NSURL *)recordedURL {
 	NSURL *trackURL = [NSURL

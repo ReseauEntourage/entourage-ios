@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 OCTO Technology. All rights reserved.
 //
 
+@class AudioNoteRecorderViewController;
+
 @interface OTCreateAudioMessageViewController : UIViewController
 
 @end
