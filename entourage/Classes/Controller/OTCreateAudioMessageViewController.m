@@ -37,10 +37,13 @@
 //}
 
 - (void)sendToSoundCloudTheSongWithRecordedURL:(NSURL *)recordedURL {
-//	NSURL *trackURL = [NSURL
-//	                   fileURLWithPath:[
-//	                       [NSBundle mainBundle]pathForResource:@"example" ofType:@"mp3"]];
-
+	NSURL *trackURL = [NSURL
+	                   fileURLWithPath:[
+	                       [NSBundle mainBundle] pathForResource:@"tmp" ofType:@"caf"]];
+    
+    NSLog(@"recorded URL = %@", [recordedURL path]);
+    NSLog(@"track URL = %@", [trackURL path]);
+    
 	SCShareViewController *shareViewController;
 	SCSharingViewControllerCompletionHandler handler;
 
@@ -55,9 +58,8 @@
 			NSLog(@"Uploaded track: %@", trackInfo);
 		}
 	};
-	shareViewController = [SCShareViewController
-	                       shareViewControllerWithFileURL:recordedURL
-	                                    completionHandler:handler];
+	shareViewController = [SCShareViewController shareViewControllerWithFileURL:trackURL
+                                                              completionHandler:handler];
 	[shareViewController setTitle:@"Recorded Sound"];
 	[shareViewController setPrivate:YES];
 
