@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import "SCSoundCloud+Private.h"
 #import "OTAppDelegate.h"
 
 // Util
 #import "UIFont+entourage.h"
 
 #import <OTAppaloosa/OTAppaloosa.h>
-#import "SCUI.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 
@@ -36,15 +36,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 	                                        andDelegate:self];
 
 	[self configureSoundCloud];
+    [self loginToSoundCloud];
 
-	[self configureUIAppearance];
+    [self configureUIAppearance];
 	return YES;
-}
-
-- (void)configureSoundCloud {
-	[SCSoundCloud setClientID:@"8ea64716590a242e6f205bf1f821bb4a"
-	                   secret:@"119dea503c758179e90aa30d4b21d665"
-	              redirectURL:[NSURL URLWithString:@"dev-entourage-ios://oauth"]];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -73,4 +68,19 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 	                                                      NSFontAttributeName                                                         : navigationBarFont } forState:UIControlStateNormal];
 }
 
+
+/********************************************************************************/
+#pragma mark - Configure SoundCloud
+
+- (void)loginToSoundCloud {
+	// TODO : create an account for entourage | flip between dev/prod accounts
+	[[SCSoundCloud shared] requestAccessWithUsername:@"hschouman@octo.com"
+	                                        password:@"passDevForAPI"];
+}
+
+- (void)configureSoundCloud {
+    [SCSoundCloud setClientID:@"8ea64716590a242e6f205bf1f821bb4a"
+                       secret:@"119dea503c758179e90aa30d4b21d665"
+                  redirectURL:[NSURL URLWithString:@"dev-entourage-ios://oauth"]];
+}
 @end

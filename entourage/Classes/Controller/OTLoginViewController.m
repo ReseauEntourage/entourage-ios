@@ -16,9 +16,7 @@
 #import "NSString+Validators.h"
 
 // SoundCloud API
-#import "SCUI.h"
 #import "SCSoundCloud.h"
-#import "SCSoundCloud+Private.h"
 
 // Model
 #import "OTUser.h"
@@ -76,8 +74,6 @@
 	    NSLog(@"User : %@ authenticated successfully", user.email);
 	    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
 
-	    [self loginToSoundCloud];
-
 	    [self dismissViewControllerAnimated:YES completion:nil];
 	}
 
@@ -96,12 +92,6 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
 	return YES;
-}
-
-- (void)loginToSoundCloud {
-	// TODO : create an account for entourage | flip between dev/prod accounts
-	[[SCSoundCloud shared] requestAccessWithUsername:@"hschouman@octo.com"
-	                                        password:@"passDevForAPI"];
 }
 
 @end
