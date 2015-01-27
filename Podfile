@@ -13,9 +13,8 @@ target "entourage" do
     pod 'kingpin', '0.2.beta'
     pod 'JSBadgeView', '~> 1.3'
     pod 'OTAppaloosa'
-    pod 'CocoaSoundCloudAPI', '1.0.1'
-    pod 'CocoaSoundCloudUI', '1.0.5'
-    pod 'JSONKit'
+    pod 'CocoaSoundCloudAPI', :git => 'https://github.com/ReseauEntourage/CocoaSoundCloudAPI.git'
+    pod 'CocoaSoundCloudUI', :git => 'https://github.com/ReseauEntourage/CocoaSoundCloudUI.git'
     pod 'PMAudioRecorderViewController'
 end
 
