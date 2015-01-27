@@ -54,7 +54,6 @@
 - (IBAction)addAudioMsgDidTap:(id)sender {
 	OTCreateAudioMessageViewController *controller = (OTCreateAudioMessageViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCreateAudioMessageViewController"];
 	[self.navigationController pushViewController:controller animated:YES];
-//	[self presentViewController:controller animated:YES completion:nil];
 }
 
 - (IBAction)sendEncounter:(id)sender {
@@ -70,12 +69,6 @@
 		}
 	} failure: ^(NSError *error) {
 	}];
-}
-
-- (IBAction)close:(id)sender {
-	if (self.delegate) {
-		[self.delegate dismissPopoverWithEncounter:nil];
-	}
 }
 
 @end

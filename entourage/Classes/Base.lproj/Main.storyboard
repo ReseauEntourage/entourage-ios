@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bGF-q3-B8f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bGF-q3-B8f">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -661,17 +661,6 @@
                                     <action selector="sendEncounter:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="7NT-qx-1w8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8c7-iL-w53">
-                                <rect key="frame" x="274" y="15" width="30" height="30"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="X">
-                                    <color key="titleColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="close:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="BFB-Se-6vg"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8GS-dn-gDU">
                                 <rect key="frame" x="61" y="140" width="198" height="34"/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -703,7 +692,6 @@
                             <constraint firstItem="8GS-dn-gDU" firstAttribute="centerX" secondItem="2uf-2Y-z5H" secondAttribute="centerX" id="MoU-fK-90B"/>
                             <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="NRN-4b-MX0"/>
                             <constraint firstItem="KDZ-i8-4OP" firstAttribute="top" secondItem="feS-ZD-ocn" secondAttribute="topMargin" constant="15" id="NeU-Tv-ARP"/>
-                            <constraint firstItem="8c7-iL-w53" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="O8e-ui-QoX"/>
                             <constraint firstItem="8GS-dn-gDU" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="35" id="Rb2-jS-JDD"/>
                             <constraint firstItem="2uf-2Y-z5H" firstAttribute="top" secondItem="a5N-Kb-CX4" secondAttribute="bottom" constant="8" id="TDf-jr-56m"/>
                             <constraint firstItem="2uf-2Y-z5H" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="Td3-BW-aaV"/>
@@ -711,10 +699,10 @@
                             <constraint firstItem="a5N-Kb-CX4" firstAttribute="top" secondItem="KDZ-i8-4OP" secondAttribute="bottom" constant="8" id="UJp-20-Fhz"/>
                             <constraint firstItem="LVP-zg-cRX" firstAttribute="top" secondItem="aW3-pj-aMW" secondAttribute="bottom" constant="20" id="bHz-Oa-ZWd"/>
                             <constraint firstItem="aW3-pj-aMW" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" constant="90" id="gGe-jt-RxC"/>
-                            <constraint firstItem="8c7-iL-w53" firstAttribute="top" secondItem="feS-ZD-ocn" secondAttribute="topMargin" constant="15" id="hKw-1v-SQ8"/>
                             <constraint firstItem="KDZ-i8-4OP" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="hzV-3u-lYK"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="dateLabel" destination="2uf-2Y-z5H" id="b2A-nh-SMK"/>
                         <outlet property="firstLabel" destination="KDZ-i8-4OP" id="1uL-Bh-XUo"/>
@@ -935,7 +923,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAd-Tf-8Hv">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAd-Tf-8Hv">
                                 <rect key="frame" x="36" y="99" width="248" height="378"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
