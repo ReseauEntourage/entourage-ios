@@ -23,39 +23,37 @@ NSString *const kEncounterStreetPersonName = @"street_person_name";
 NSString *const kEncounterMessage = @"message";
 NSString *const kEncounterVoiceMessage = @"voice_message";
 
-+ (OTEncounter *)encounterWithJSONDictionnary:(NSDictionary *)dictionary
-{
-    OTEncounter *encounter = nil;
-    
-    if ([dictionary isKindOfClass:[NSDictionary class]])
-    {
-        encounter = [[OTEncounter alloc] init];
-        
-        encounter.sid = [dictionary numberForKey:kEncounterId];
-        encounter.date = [dictionary dateForKey:kEncounterDate format:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"];
-        encounter.longitude = [[dictionary numberForKey:kEncounterLongitude] doubleValue];
-        encounter.latitude = [[dictionary numberForKey:kEncounterLatitude] doubleValue];
-        encounter.userId = [dictionary numberForKey:kEncounterUserId];
-        encounter.userName = [dictionary stringForKey:kEncounterUserName];
-        encounter.streetPersonName = [dictionary stringForKey:kEncounterStreetPersonName];
-        encounter.message = [dictionary stringForKey:kEncounterMessage];
-        encounter.voiceMessage = [dictionary stringForKey:kEncounterVoiceMessage];
-    }
-    
-    return encounter;
++ (OTEncounter *)encounterWithJSONDictionnary:(NSDictionary *)dictionary {
+	OTEncounter *encounter = nil;
+
+	if ([dictionary isKindOfClass:[NSDictionary class]]) {
+		encounter = [[OTEncounter alloc] init];
+
+		encounter.sid = [dictionary numberForKey:kEncounterId];
+		encounter.date = [dictionary dateForKey:kEncounterDate format:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"];
+		encounter.longitude = [[dictionary numberForKey:kEncounterLongitude] doubleValue];
+		encounter.latitude = [[dictionary numberForKey:kEncounterLatitude] doubleValue];
+		encounter.userId = [dictionary numberForKey:kEncounterUserId];
+		encounter.userName = [dictionary stringForKey:kEncounterUserName];
+		encounter.streetPersonName = [dictionary stringForKey:kEncounterStreetPersonName];
+		encounter.message = [dictionary stringForKey:kEncounterMessage];
+		encounter.voiceMessage = [dictionary stringForKey:kEncounterVoiceMessage];
+	}
+
+	return encounter;
 }
 
-- (NSDictionary *)dictionaryForWebservice
-{
-    NSMutableDictionary *dictionary = [NSMutableDictionary new];
-        
-    dictionary[kEncounterDate] = self.date;
-    dictionary[kEncounterLongitude] = [NSNumber numberWithDouble:self.longitude];
-    dictionary[kEncounterLatitude] = [NSNumber numberWithDouble:self.latitude];
-    dictionary[kEncounterStreetPersonName] = self.streetPersonName;
-    dictionary[kEncounterMessage] = self.message;
+- (NSDictionary *)dictionaryForWebservice {
+	NSMutableDictionary *dictionary = [NSMutableDictionary new];
 
-    return dictionary;
+	dictionary[kEncounterDate] = self.date;
+	dictionary[kEncounterLongitude] = [NSNumber numberWithDouble:self.longitude];
+	dictionary[kEncounterLatitude] = [NSNumber numberWithDouble:self.latitude];
+	dictionary[kEncounterStreetPersonName] = self.streetPersonName;
+	dictionary[kEncounterMessage] = self.message;
+	dictionary[kEncounterVoiceMessage] = self.voiceMessage;
+
+	return dictionary;
 }
 
 @end

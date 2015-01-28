@@ -53,45 +53,41 @@
 	self.location = location;
 }
 
-
 - (IBAction)sendEncounter:(id)sender {
-    
-    if ([self.playerView hasRecordedFile])
-    {
-        OTSoundCloudService *service = [OTSoundCloudService new];
-        [service uploadSoundAtURL:self.playerView.recordedURL
-                            title:@"Recorded sound"
-                         progress:^(CGFloat percentageProgress)
-                         {
-                             NSLog(@"percentageProgress = %f", percentageProgress);
-                         }
-                          success:^(NSString *uploadLocation)
-                          {
-                              [self postEncounter];
-                          }
-                          failure:^(NSError *error)
-                          {
-                              NSLog(@"error = %@", error);
-                          }];
-    }
-    else
-    {
-        [self postEncounter];
-    }
+	if ([self.playerView hasRecordedFile]) {
+		OTSoundCloudService *service = [OTSoundCloudService new];
+		[service uploadSoundAtURL:self.playerView.recordedURL
+		                    title:@"Recorded sound"
+		                 progress: ^(CGFloat percentageProgress)
+		{
+		    NSLog(@"percentageProgress = %f", percentageProgress);
+		}
+
+		                  success: ^(NSString *uploadLocation)
+		{
+		    [self postEncounterWithAudioFile:uploadLocation];
+		}
+
+		 failure: ^(NSError *error)
+		{
+		    NSLog(@"error = %@", error);
+		}];
+	}
+	else {
+		[self postEncounterWithAudioFile:nil];
+	}
 }
 
-- (void)postEncounter
-{
-    OTEncounter *encounter = [OTEncounter new];
-    encounter.date = [NSDate date];
-    encounter.message = self.messageTextView.text;
-    encounter.streetPersonName =  self.nameTextField.text;
-    encounter.latitude = self.location.latitude;
-    encounter.longitude = self.location.longitude;
-    [[OTPoiService new] sendEncounter:encounter withSuccess: ^(OTEncounter *encounter) {
-	    if (self.delegate) {
-	        [self.delegate dismissPopoverWithEncounter:encounter];
-		}
+- (void)postEncounterWithAudioFile:(NSString *)urlOfAudioMessage {
+	OTEncounter *encounter = [OTEncounter new];
+	encounter.date = [NSDate date];
+	encounter.message = self.messageTextView.text;
+	encounter.streetPersonName =  self.nameTextField.text;
+	encounter.latitude = self.location.latitude;
+	encounter.longitude = self.location.longitude;
+	encounter.voiceMessage = urlOfAudioMessage == nil ? @"" : urlOfAudioMessage;
+	[[OTPoiService new] sendEncounter:encounter withSuccess: ^(OTEncounter *encounter) {
+	    [self.navigationController popViewControllerAnimated:YES];
 	} failure: ^(NSError *error) {
 	}];
 }

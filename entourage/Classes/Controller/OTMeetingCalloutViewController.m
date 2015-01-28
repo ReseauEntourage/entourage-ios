@@ -25,8 +25,7 @@
 /********************************************************************************/
 #pragma mark - Public Methods
 
-- (void)configureWithEncouter:(OTEncounter *)encounter
-{
+- (void)configureWithEncouter:(OTEncounter *)encounter {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 
 	[formatter setDateFormat:@"dd/MM/yyyy à HH:mm"];
@@ -39,9 +38,11 @@
 
 	NSString *body = @"";
 
-	if (encounter.message.length != 0)
-	{
+	if (encounter.message.length != 0 && encounter.voiceMessage.length == 0) {
 		body = [NSString stringWithFormat:@"%@ :\n %@", NSLocalizedString(@"their_message", @""), encounter.message];
+	}
+	else {
+		body = [NSString stringWithFormat:@"%@ :\n %@\n%@ :\n%@", NSLocalizedString(@"their_message", @""), encounter.message, NSLocalizedString(@"their_audio_message", @""), encounter.voiceMessage];
 	}
 
 	self.textView.text = body;
@@ -50,10 +51,8 @@
 /********************************************************************************/
 #pragma mark - Private Methods
 
-- (void)appendNotNilString:(NSString *)otherText toString:(NSMutableString *)text
-{
-	if (otherText)
-	{
+- (void)appendNotNilString:(NSString *)otherText toString:(NSMutableString *)text {
+	if (otherText) {
 		[text appendFormat:@"\n%@", otherText];
 	}
 }
@@ -61,10 +60,8 @@
 /********************************************************************************/
 #pragma mark - IBActions
 
-- (IBAction)closeMe:(id)sender
-{
-	if ([self.delegate respondsToSelector:@selector(dismissPopover)])
-	{
+- (IBAction)closeMe:(id)sender {
+	if ([self.delegate respondsToSelector:@selector(dismissPopover)]) {
 		[self.delegate dismissPopover];
 	}
 }
