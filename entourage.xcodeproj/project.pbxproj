@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1151E9D82A73565730F4A226 /* OTSoundCloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1151E10ECF78354BE0FA798D /* OTSoundCloudService.m */; };
 		191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
 		191FE91919E935F000C56BCA /* OTNotImplementedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE91819E935F000C56BCA /* OTNotImplementedViewController.m */; };
 		191FE91D19E93B8C00C56BCA /* OTForumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE91C19E93B8C00C56BCA /* OTForumViewController.m */; };
@@ -121,6 +122,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1151E10ECF78354BE0FA798D /* OTSoundCloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSoundCloudService.m; sourceTree = "<group>"; };
+		1151EA76F8FED97A02EAE3C1 /* OTSoundCloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSoundCloudService.h; sourceTree = "<group>"; };
 		191FE91719E935F000C56BCA /* OTNotImplementedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTNotImplementedViewController.h; sourceTree = "<group>"; };
 		191FE91819E935F000C56BCA /* OTNotImplementedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTNotImplementedViewController.m; sourceTree = "<group>"; };
 		191FE91B19E93B8C00C56BCA /* OTForumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTForumViewController.h; sourceTree = "<group>"; };
@@ -380,6 +383,8 @@
 				1D962C7019E9277D00547687 /* OTAuthService.m */,
 				6B1A846F19E811210020FB93 /* OTPoiService.h */,
 				6B1A847019E811210020FB93 /* OTPoiService.m */,
+				1151E10ECF78354BE0FA798D /* OTSoundCloudService.m */,
+				1151EA76F8FED97A02EAE3C1 /* OTSoundCloudService.h */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1028,6 +1033,7 @@
 				1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,
+				1151E9D82A73565730F4A226 /* OTSoundCloudService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
