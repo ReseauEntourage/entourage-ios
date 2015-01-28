@@ -14,13 +14,12 @@
 // Services
 #import "OTPoiService.h"
 
-// ViewController
-#import "OTCreateAudioMessageViewController.h"
 
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 
 #import "OTPlayerView.h"
+#import "OTSoundCloudService.h"
 
 @interface OTCreateMeetingViewController ()
 
@@ -29,6 +28,7 @@
 @property (nonatomic, strong) IBOutlet UITextView *messageTextView;
 @property (weak, nonatomic) IBOutlet UILabel *firstLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet OTPlayerView *playerView;
 
 @end
 
@@ -53,19 +53,42 @@
 	self.location = location;
 }
 
-- (IBAction)addAudioMsgDidTap:(id)sender {
-	OTCreateAudioMessageViewController *controller = (OTCreateAudioMessageViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCreateAudioMessageViewController"];
-	[self.navigationController pushViewController:controller animated:YES];
-}
 
 - (IBAction)sendEncounter:(id)sender {
-	OTEncounter *encounter = [OTEncounter new];
-	encounter.date = [NSDate date];
-	encounter.message = self.messageTextView.text;
-	encounter.streetPersonName =  self.nameTextField.text;
-	encounter.latitude = self.location.latitude;
-	encounter.longitude = self.location.longitude;
-	[[OTPoiService new] sendEncounter:encounter withSuccess: ^(OTEncounter *encounter) {
+    
+    if ([self.playerView hasRecordedFile])
+    {
+        OTSoundCloudService *service = [OTSoundCloudService new];
+        [service uploadSoundAtURL:self.playerView.recordedURL
+                            title:@"Recorded sound"
+                         progress:^(CGFloat percentageProgress)
+                         {
+                             NSLog(@"percentageProgress = %f", percentageProgress);
+                         }
+                          success:^(NSString *uploadLocation)
+                          {
+                              [self postEncounter];
+                          }
+                          failure:^(NSError *error)
+                          {
+                              NSLog(@"error = %@", error);
+                          }];
+    }
+    else
+    {
+        [self postEncounter];
+    }
+}
+
+- (void)postEncounter
+{
+    OTEncounter *encounter = [OTEncounter new];
+    encounter.date = [NSDate date];
+    encounter.message = self.messageTextView.text;
+    encounter.streetPersonName =  self.nameTextField.text;
+    encounter.latitude = self.location.latitude;
+    encounter.longitude = self.location.longitude;
+    [[OTPoiService new] sendEncounter:encounter withSuccess: ^(OTEncounter *encounter) {
 	    if (self.delegate) {
 	        [self.delegate dismissPopoverWithEncounter:encounter];
 		}

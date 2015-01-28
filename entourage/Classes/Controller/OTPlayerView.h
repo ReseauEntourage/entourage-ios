@@ -20,6 +20,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 
 
+@property(nonatomic, strong) NSURL *recordedURL;
+
 - (BOOL)hasRecordedFile;
 
 @end
