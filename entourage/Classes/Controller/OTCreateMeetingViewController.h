@@ -18,7 +18,7 @@
 @end
 
 @interface OTCreateMeetingViewController : UIViewController
-@property (weak, nonatomic) id<OTCreateMeetingViewControllerDelegate> delegate;
+@property (weak, nonatomic) id <OTCreateMeetingViewControllerDelegate> delegate;
 
 - (void)configureWithLocation:(CLLocationCoordinate2D)location;
 

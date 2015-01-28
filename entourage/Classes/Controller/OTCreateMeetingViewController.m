@@ -20,6 +20,8 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 
+#import "OTPlayerView.h"
+
 @interface OTCreateMeetingViewController ()
 
 @property (nonatomic) CLLocationCoordinate2D location;

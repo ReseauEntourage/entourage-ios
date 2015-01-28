@@ -18,7 +18,6 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
-            <string>Calibri</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -642,6 +641,9 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
                                 <rect key="frame" x="16" y="211" width="288" height="295"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="295" id="Ev1-ml-KQi"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -661,45 +663,36 @@
                                     <action selector="sendEncounter:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="7NT-qx-1w8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8GS-dn-gDU">
-                                <rect key="frame" x="61" y="140" width="198" height="34"/>
-                                <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2k-WT-pS4" customClass="OTPlayerView">
+                                <rect key="frame" x="16" y="126" width="288" height="68"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="Px4-nY-HU2"/>
-                                    <constraint firstAttribute="width" constant="198" id="cPq-s1-qaA"/>
+                                    <constraint firstAttribute="width" constant="288" id="K4H-5p-oGl"/>
+                                    <constraint firstAttribute="height" constant="68" id="oRR-ag-gZf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="18"/>
-                                <state key="normal" title="LAISSER UN MSG AUDIO">
-                                    <color key="titleColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="addAudioMsgDidTap:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="Zhr-Xp-kPh"/>
-                                    <action selector="closeMe:" destination="8hZ-Tf-zqI" eventType="touchUpInside" id="nLF-6u-K4Q"/>
-                                    <action selector="sendEncounter:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="KGo-tX-Nex"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="a5N-Kb-CX4" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="8el-cK-ORT"/>
+                            <constraint firstItem="M2k-WT-pS4" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="21" id="B8f-mG-4je"/>
                             <constraint firstItem="2uf-2Y-z5H" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="Dgs-Mn-nA5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aW3-pj-aMW" secondAttribute="trailing" constant="90" id="G2h-Rh-puJ"/>
                             <constraint firstItem="a5N-Kb-CX4" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="Gxj-BP-1Fc"/>
                             <constraint firstItem="aW3-pj-aMW" firstAttribute="top" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="8" id="INK-95-FXI"/>
                             <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="KgW-ij-Axb"/>
                             <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="106" id="L9K-np-DyK"/>
-                            <constraint firstItem="8GS-dn-gDU" firstAttribute="centerX" secondItem="2uf-2Y-z5H" secondAttribute="centerX" id="MoU-fK-90B"/>
                             <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="NRN-4b-MX0"/>
                             <constraint firstItem="KDZ-i8-4OP" firstAttribute="top" secondItem="feS-ZD-ocn" secondAttribute="topMargin" constant="15" id="NeU-Tv-ARP"/>
-                            <constraint firstItem="8GS-dn-gDU" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="35" id="Rb2-jS-JDD"/>
                             <constraint firstItem="2uf-2Y-z5H" firstAttribute="top" secondItem="a5N-Kb-CX4" secondAttribute="bottom" constant="8" id="TDf-jr-56m"/>
                             <constraint firstItem="2uf-2Y-z5H" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="Td3-BW-aaV"/>
                             <constraint firstItem="KDZ-i8-4OP" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="UBs-OK-aRn"/>
                             <constraint firstItem="a5N-Kb-CX4" firstAttribute="top" secondItem="KDZ-i8-4OP" secondAttribute="bottom" constant="8" id="UJp-20-Fhz"/>
+                            <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="17" id="Yfq-Rn-K7Q"/>
                             <constraint firstItem="LVP-zg-cRX" firstAttribute="top" secondItem="aW3-pj-aMW" secondAttribute="bottom" constant="20" id="bHz-Oa-ZWd"/>
                             <constraint firstItem="aW3-pj-aMW" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" constant="90" id="gGe-jt-RxC"/>
                             <constraint firstItem="KDZ-i8-4OP" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="hzV-3u-lYK"/>
+                            <constraint firstItem="M2k-WT-pS4" firstAttribute="leading" secondItem="2uf-2Y-z5H" secondAttribute="leading" id="j3H-bn-UZF"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>

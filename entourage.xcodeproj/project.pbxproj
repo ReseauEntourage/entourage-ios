@@ -25,6 +25,15 @@
 		1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D319E84E9B006A2184 /* OTUser.m */; };
 		1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
 		1D55D8D919E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
+		1D67732B1A77EE3B00C7456C /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773251A77EE3B00C7456C /* pause.png */; };
+		1D67732C1A77EE3B00C7456C /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773261A77EE3B00C7456C /* pause@2x.png */; };
+		1D67732D1A77EE3B00C7456C /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773271A77EE3B00C7456C /* play.png */; };
+		1D67732E1A77EE3B00C7456C /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773281A77EE3B00C7456C /* play@2x.png */; };
+		1D67732F1A77EE3B00C7456C /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773291A77EE3B00C7456C /* record.png */; };
+		1D6773301A77EE3B00C7456C /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D67732A1A77EE3B00C7456C /* record@2x.png */; };
+		1D6773341A77F0B600C7456C /* OTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6773331A77F0B600C7456C /* OTPlayerView.m */; };
+		1D6773361A790F9600C7456C /* OTPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773351A790F9600C7456C /* OTPlayerView.xib */; };
+		1D6773391A79223400C7456C /* OTAudioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6773381A79223400C7456C /* OTAudioButton.m */; };
 		1DA2911319E92F260098C01E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA2911219E92F260098C01E /* logo.png */; };
 		1DA2911519E937760098C01E /* background-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA2911419E937760098C01E /* background-button.png */; };
 		1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */; };
@@ -132,6 +141,17 @@
 		1D55D8D319E84E9B006A2184 /* OTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUser.m; sourceTree = "<group>"; };
 		1D55D8D619E8514E006A2184 /* NSDictionary+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Parsing.h"; path = "Helper/NSDictionary+Parsing.h"; sourceTree = "<group>"; };
 		1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Parsing.m"; path = "Helper/NSDictionary+Parsing.m"; sourceTree = "<group>"; };
+		1D6773251A77EE3B00C7456C /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause.png; path = Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/pause.png; sourceTree = SOURCE_ROOT; };
+		1D6773261A77EE3B00C7456C /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pause@2x.png"; path = "Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/pause@2x.png"; sourceTree = SOURCE_ROOT; };
+		1D6773271A77EE3B00C7456C /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play.png; path = Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/play.png; sourceTree = SOURCE_ROOT; };
+		1D6773281A77EE3B00C7456C /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play@2x.png"; path = "Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/play@2x.png"; sourceTree = SOURCE_ROOT; };
+		1D6773291A77EE3B00C7456C /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = record.png; path = Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/record.png; sourceTree = SOURCE_ROOT; };
+		1D67732A1A77EE3B00C7456C /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "record@2x.png"; path = "Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/record@2x.png"; sourceTree = SOURCE_ROOT; };
+		1D6773321A77F0B600C7456C /* OTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPlayerView.h; sourceTree = "<group>"; };
+		1D6773331A77F0B600C7456C /* OTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPlayerView.m; sourceTree = "<group>"; };
+		1D6773351A790F9600C7456C /* OTPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTPlayerView.xib; sourceTree = "<group>"; };
+		1D6773371A79223400C7456C /* OTAudioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAudioButton.h; sourceTree = "<group>"; };
+		1D6773381A79223400C7456C /* OTAudioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAudioButton.m; sourceTree = "<group>"; };
 		1D962C6F19E9277D00547687 /* OTAuthService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAuthService.h; sourceTree = "<group>"; };
 		1D962C7019E9277D00547687 /* OTAuthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAuthService.m; sourceTree = "<group>"; };
 		1DA2911219E92F260098C01E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -285,6 +305,32 @@
 			path = Forum;
 			sourceTree = "<group>";
 		};
+		1D6773241A77EDE300C7456C /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				1D6773251A77EE3B00C7456C /* pause.png */,
+				1D6773261A77EE3B00C7456C /* pause@2x.png */,
+				1D6773271A77EE3B00C7456C /* play.png */,
+				1D6773281A77EE3B00C7456C /* play@2x.png */,
+				1D6773291A77EE3B00C7456C /* record.png */,
+				1D67732A1A77EE3B00C7456C /* record@2x.png */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+		1D6773311A77F01900C7456C /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				1D6773321A77F0B600C7456C /* OTPlayerView.h */,
+				1D6773331A77F0B600C7456C /* OTPlayerView.m */,
+				1D6773351A790F9600C7456C /* OTPlayerView.xib */,
+				1D6773371A79223400C7456C /* OTAudioButton.h */,
+				1D6773381A79223400C7456C /* OTAudioButton.m */,
+			);
+			name = AudioPlayer;
+			path = ../Controller;
+			sourceTree = "<group>";
+		};
 		1D962C7219E9280800547687 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +414,7 @@
 				1DA682D519E7F130007BD4BC /* Helper */,
 				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
 				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
+				1DB2783D1A76A247009055B1 /* Main.storyboard */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -375,9 +422,9 @@
 		6B4930C719A773C500DA7EE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1DB2783D1A76A247009055B1 /* Main.storyboard */,
 				1D962C7219E9280800547687 /* Login */,
 				DBBE8AD319E85E9000FA218E /* MyMeetings */,
+				1DB278351A764CDA009055B1 /* AudioMessages */,
 				DBBE8ACB19E83CCE00FA218E /* Map */,
 				191FE91A19E93B4A00C56BCA /* Forum */,
 				DBE9EF2919E7D71C00031144 /* Menu */,
@@ -555,6 +602,7 @@
 		A8E10FAB19E82A1500DF4A01 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1D6773311A77F01900C7456C /* AudioPlayer */,
 				DBBE8ACF19E857F000FA218E /* Menu */,
 				A8E10FAC19E82A4800DF4A01 /* OTCustomAnnotation.h */,
 				A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */,
@@ -567,6 +615,7 @@
 		DBBE8AA319E83CB600FA218E /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				1D6773241A77EDE300C7456C /* Player */,
 				DBBE8AA419E83CB600FA218E /* Common */,
 				DBBE8AA719E83CB600FA218E /* Menu */,
 				DBBE8AAC19E83CB600FA218E /* picto category */,
@@ -628,7 +677,6 @@
 		DBBE8ACB19E83CCE00FA218E /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				1DB278351A764CDA009055B1 /* AudioMessages */,
 				6B4930C819A773C500DA7EE0 /* OTMapViewController.h */,
 				6B4930C919A773C500DA7EE0 /* OTMapViewController.m */,
 				A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */,
@@ -818,14 +866,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D67732E1A77EE3B00C7456C /* play@2x.png in Resources */,
 				DBBE8AC619E83CB600FA218E /* poi_category-7@2x.png in Resources */,
 				DBBE8ABA19E83CB600FA218E /* bg-top-header@2x.png in Resources */,
+				1D67732B1A77EE3B00C7456C /* pause.png in Resources */,
 				DBBE8ABB19E83CB600FA218E /* ic_menu.png in Resources */,
 				DBBE8ABF19E83CB600FA218E /* poi_category-1.png in Resources */,
 				DBBE8AC519E83CB600FA218E /* poi_category-7.png in Resources */,
 				1DA2911519E937760098C01E /* background-button.png in Resources */,
 				A8B3826019E94BB400CF7184 /* poi_category-0@2x.png in Resources */,
 				DBBE8ACA19E83CB600FA218E /* poi_category-4@2x.png in Resources */,
+				1D6773301A77EE3B00C7456C /* record@2x.png in Resources */,
 				A8B3825F19E94BB400CF7184 /* poi_category-0.png in Resources */,
 				19BA509C19E987A100342A36 /* center-location.png in Resources */,
 				19BA509719E9625A00342A36 /* rencontre@2x.png in Resources */,
@@ -834,11 +885,14 @@
 				DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */,
 				19BA509919E9626000342A36 /* rencontre.png in Resources */,
 				DBBE8ABC19E83CB600FA218E /* ic_menu@2x.png in Resources */,
+				1D67732C1A77EE3B00C7456C /* pause@2x.png in Resources */,
+				1D6773361A790F9600C7456C /* OTPlayerView.xib in Resources */,
 				DBBE8AC819E83CB600FA218E /* poi_category-5@2x.png in Resources */,
 				19BA509D19E987A100342A36 /* center-location@2x.png in Resources */,
 				DBBE8AC419E83CB600FA218E /* poi_category-3@2x.png in Resources */,
 				DBBE8AC919E83CB600FA218E /* poi_category-4.png in Resources */,
 				DBBE8A9619E81AF600FA218E /* Calibri-Bold-Italic.ttf in Resources */,
+				1D67732F1A77EE3B00C7456C /* record.png in Resources */,
 				DBBE8AC319E83CB600FA218E /* poi_category-3.png in Resources */,
 				DBBE8ABE19E83CB600FA218E /* menu_background@2x.png in Resources */,
 				6B92CABA19A7461C004E8C9B /* Images.xcassets in Resources */,
@@ -851,6 +905,7 @@
 				19BA50A119E9894200342A36 /* pointer@2x.png in Resources */,
 				191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */,
 				DBBE8AC019E83CB600FA218E /* poi_category-1@2x.png in Resources */,
+				1D67732D1A77EE3B00C7456C /* play.png in Resources */,
 				DBBE8AC719E83CB600FA218E /* poi_category-5.png in Resources */,
 				DBBE8AC119E83CB600FA218E /* poi_category-2.png in Resources */,
 				DBBE8ABD19E83CB600FA218E /* menu_background.png in Resources */,
@@ -953,6 +1008,7 @@
 				191FE91D19E93B8C00C56BCA /* OTForumViewController.m in Sources */,
 				A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */,
 				6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */,
+				1D6773341A77F0B600C7456C /* OTPlayerView.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
@@ -967,6 +1023,7 @@
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
+				1D6773391A79223400C7456C /* OTAudioButton.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
 				1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
@@ -1005,6 +1062,7 @@
 				1DB2783E1A76A247009055B1 /* Base */,
 			);
 			name = Main.storyboard;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */ = {

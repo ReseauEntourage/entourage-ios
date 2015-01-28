@@ -19,7 +19,7 @@
 
 @interface OTCreateAudioMessageViewController () <AudioNoteRecorderDelegate>
 
-@property(nonatomic, strong) AudioNoteRecorderViewController *audioNoteRecorderController;
+@property (nonatomic, strong) AudioNoteRecorderViewController *audioNoteRecorderController;
 
 @end
 
@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-    [AudioNoteRecorderViewController showRecorderWithMasterViewController:self withDelegate:self];
+	[AudioNoteRecorderViewController showRecorderWithMasterViewController:self withDelegate:self];
 }
 
 /********************************************************************************/
@@ -46,10 +46,10 @@
 	NSURL *trackURL = [NSURL
 	                   fileURLWithPath:[
 	                       [NSBundle mainBundle] pathForResource:@"tmp" ofType:@"caf"]];
-    
-    NSLog(@"recorded URL = %@", [recordedURL path]);
-    NSLog(@"track URL = %@", [trackURL path]);
-    
+
+	NSLog(@"recorded URL = %@", [recordedURL path]);
+	NSLog(@"track URL = %@", [trackURL path]);
+
 	SCShareViewController *shareViewController;
 	SCSharingViewControllerCompletionHandler handler;
 
@@ -65,7 +65,7 @@
 		}
 	};
 	shareViewController = [SCShareViewController shareViewControllerWithFileURL:trackURL
-                                                              completionHandler:handler];
+	                                                          completionHandler:handler];
 	[shareViewController setTitle:@"Recorded Sound"];
 	[shareViewController setPrivate:YES];
 
