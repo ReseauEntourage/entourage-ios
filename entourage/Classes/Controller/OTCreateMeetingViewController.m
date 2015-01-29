@@ -49,8 +49,8 @@
 	self.messageTextView.layer.borderColor = UIColor.lightGrayColor.CGColor;
 
 	self.playerView.isRecordingMode = YES;
-    
-    [self createSendButton];
+
+	[self createSendButton];
 }
 
 - (void)createSendButton {
@@ -67,9 +67,14 @@
 
 - (IBAction)sendEncounter:(id)sender {
 	if ([self.playerView hasRecordedFile]) {
+		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		[formatter setDateFormat:@"dd/MM/yyyy à HH:mm"];
+		NSString *date = [formatter stringFromDate:[NSDate date]];
+		NSString *title = [NSString stringWithFormat:@"%@ %@ %@ %@, le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, NSLocalizedString(@"has_encountered", @""), self.nameTextField.text, NSLocalizedString(@"here", @""), date];
+
 		OTSoundCloudService *service = [OTSoundCloudService new];
 		[service uploadSoundAtURL:self.playerView.recordedURL
-		                    title:@"Recorded sound"
+		                    title:title
 		                 progress: ^(CGFloat percentageProgress)
 		{
 		    NSLog(@"percentageProgress = %f", percentageProgress);
