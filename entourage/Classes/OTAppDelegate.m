@@ -14,6 +14,10 @@
 
 #import <OTAppaloosa/OTAppaloosa.h>
 
+#ifndef PASS_API_SOUNDCLOUD
+	#define PASS_API_SOUNDCLOUD @"passDevForAPI"
+#endif
+
 const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 
 @interface OTAppDelegate () <UIApplicationDelegate, OTAppaloosaAgentDelegate>
@@ -36,9 +40,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 	                                        andDelegate:self];
 
 	[self configureSoundCloud];
-    [self loginToSoundCloud];
+	[self loginToSoundCloud];
 
-    [self configureUIAppearance];
+	[self configureUIAppearance];
 	return YES;
 }
 
@@ -68,19 +72,25 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 	                                                      NSFontAttributeName                                                         : navigationBarFont } forState:UIControlStateNormal];
 }
 
-
 /********************************************************************************/
 #pragma mark - Configure SoundCloud
 
 - (void)loginToSoundCloud {
 	// TODO : create an account for entourage | flip between dev/prod accounts
+
+#ifdef DEBUG
 	[[SCSoundCloud shared] requestAccessWithUsername:@"hschouman@octo.com"
-	                                        password:@"passDevForAPI"];
+	                                        password:PASS_API_SOUNDCLOUD];
+#else
+	[[SCSoundCloud shared] requestAccessWithUsername:@"entourage@octo.com"
+	                                        password:PASS_API_SOUNDCLOUD];
+#endif
 }
 
 - (void)configureSoundCloud {
-    [SCSoundCloud setClientID:@"8ea64716590a242e6f205bf1f821bb4a"
-                       secret:@"119dea503c758179e90aa30d4b21d665"
-                  redirectURL:[NSURL URLWithString:@"dev-entourage-ios://oauth"]];
+	[SCSoundCloud setClientID:@"8ea64716590a242e6f205bf1f821bb4a"
+	                   secret:@"119dea503c758179e90aa30d4b21d665"
+	              redirectURL:[NSURL URLWithString:@"dev-entourage-ios://oauth"]];
 }
+
 @end

@@ -49,6 +49,16 @@
 	self.messageTextView.layer.borderColor = UIColor.lightGrayColor.CGColor;
 
 	self.playerView.isRecordingMode = YES;
+    
+    [self createSendButton];
+}
+
+- (void)createSendButton {
+	UIBarButtonItem *menuButton = nil;
+	menuButton = [[UIBarButtonItem alloc] init];
+	[menuButton setTitle:@"Envoyer"];
+	[menuButton setAction:@selector(sendEncounter:)];
+	[self.navigationItem setRightBarButtonItem:menuButton];
 }
 
 - (void)configureWithLocation:(CLLocationCoordinate2D)location {
