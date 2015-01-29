@@ -46,25 +46,25 @@
 
 	NSString *body = @"";
 
-//	if (encounter.voiceMessage.length == 0) {
-//		self.player.hidden = YES;
-//	}
-//	else {
-//		self.player.hidden = NO;
-//		self.player.isRecordingMode = NO;
-//	}
-#warning TO BE REMOVED when back will persist url
-	encounter.voiceMessage = @"https://api.soundcloud.com/tracks/188445194/stream";
-
-	[[OTSoundCloudService new] downloadSoundAtURL:encounter.voiceMessage progress: ^(CGFloat percentageProgress) {
-	    //
-	} success: ^(NSData *streamData) {
-	    self.player.hidden = NO;
-	    self.player.isRecordingMode = NO;
-	    self.player.dowloadedFile = streamData;
-	} failure: ^(NSError *error) {
-	    //
-	}];
+	if (encounter.voiceMessage.length == 0) {
+		self.player.hidden = YES;
+	}
+	else {
+		[[OTSoundCloudService new] downloadSoundAtURL:encounter.voiceMessage progress: ^(CGFloat percentageProgress) {
+		} success: ^(NSData *streamData) {
+		    self.player.hidden = NO;
+		    self.player.isRecordingMode = NO;
+		    self.player.dowloadedFile = streamData;
+		} failure: ^(NSError *error) {
+		    [[[UIAlertView alloc]
+		      initWithTitle:@"Audio upload failed"
+		                   message:error.description
+		                  delegate:nil
+		         cancelButtonTitle:nil
+		         otherButtonTitles:@"ok",
+		      nil] show];
+		}];
+	}
 
 
 	if (encounter.message.length != 0) {
