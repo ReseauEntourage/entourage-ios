@@ -31,13 +31,24 @@
 		                                owner:self
 		                              options:nil] objectAtIndex:0]];
 
-		[self.audioButton setRecordingState:RecordingButtonStateInit];
-		[self.deleteButton setEnabled:NO];
-		if ([self hasRecordedFile]) {
-			[self deleteCurrentRecordedFile];
-		}
+		self.recordedURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"tmp.caf"]];
 	}
 	return self;
+}
+
+- (void)initPlayerForRecording {
+	[self.audioButton setRecordingState:RecordingButtonStateInit];
+	[self.deleteButton setEnabled:NO];
+	if ([self hasRecordedFile]) {
+		[self deleteCurrentRecordedFile];
+	}
+}
+
+- (void)initPlayerForPlaying {
+	[self.deleteButton setHidden:YES];
+	[self.totalTimeLabel setHidden:YES];
+	[self.longueurLabel setHidden:YES];
+	[self.audioButton setRecordingState:RecordingButtonStateRecorded];
 }
 
 /********************************************************************************/
@@ -94,7 +105,6 @@
 		                                AVLinearPCMIsBigEndianKey                : @NO,
 		                                AVLinearPCMIsFloatKey                    : @NO };
 	NSError *error = nil;
-	self.recordedURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"tmp.caf"]];
 	self.recorder = [[AVAudioRecorder alloc] initWithURL:self.recordedURL settings:recorderSettings error:&error];
 
 	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
@@ -113,7 +123,13 @@
 	NSError *error = nil;
 	[self.deleteButton setEnabled:NO];
 
-	self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:_recorder.url error:&error];
+	if (self.dowloadedFile) {
+		self.player = [[AVAudioPlayer alloc] initWithData:self.dowloadedFile error:&error];
+	}
+	else {
+		self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recordedURL error:&error];
+	}
+
 	_player.volume = 1.0f;
 	_player.numberOfLoops = 0;
 	_player.delegate = self;
@@ -146,6 +162,16 @@
 
 - (BOOL)hasRecordedFile {
 	return [[NSFileManager defaultManager] fileExistsAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"tmp.caf"]];
+}
+
+- (void)setIsRecordingMode:(BOOL)isRecordingMode {
+	_isRecordingMode = isRecordingMode;
+	if (_isRecordingMode) {
+		[self initPlayerForRecording];
+	}
+	else {
+		[self initPlayerForPlaying];
+	}
 }
 
 @end

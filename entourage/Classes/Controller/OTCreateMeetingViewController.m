@@ -47,6 +47,8 @@
 
 	self.messageTextView.layer.borderWidth = 1;
 	self.messageTextView.layer.borderColor = UIColor.lightGrayColor.CGColor;
+
+	self.playerView.isRecordingMode = YES;
 }
 
 - (void)configureWithLocation:(CLLocationCoordinate2D)location {

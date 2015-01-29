@@ -201,31 +201,12 @@
 	OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTMeetingCalloutViewController"];
 	controller.delegate = self;
 
-	UIView *popView = [controller view];
-
-	popView.frame = CGRectOffset(self.view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
-
-	[UIView animateWithDuration:.3f
-	                 animations: ^
-	{
-	    popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
-	}];
-
 	OTEncounterAnnotation *encounterAnnotation = (OTEncounterAnnotation *)simpleAnnontation;
 	OTEncounter *encounter = encounterAnnotation.encounter;
-
+    [self presentViewController:controller animated:YES completion:nil];
 	[controller configureWithEncouter:encounter];
 
-	controller.preferredContentSize = CGSizeMake(self.view.frame.size.width, 300);
 
-	self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
-	[self.popover setTheme:[WYPopoverTheme themeForIOS7]];
-
-	[self.popover presentPopoverFromRect:self.view.bounds
-	                              inView:self.view
-	            permittedArrowDirections:WYPopoverArrowDirectionNone
-	                            animated:YES
-	                             options:WYPopoverAnimationOptionFadeWithScale];
 	[Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{ @"encounter_id" : encounterAnnotation.encounter.sid }];
 }
 

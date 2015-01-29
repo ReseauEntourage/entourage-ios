@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="audioButton" destination="MlR-A1-R46" id="3aR-cO-4XT"/>
                 <outlet property="deleteButton" destination="TzV-Yz-8tc" id="Ghb-Y3-ohn"/>
+                <outlet property="longueurLabel" destination="i8W-OF-zlH" id="2Nm-2f-u9z"/>
                 <outlet property="playTimeLabel" destination="Pgp-6W-n7h" id="1CI-bl-IdI"/>
                 <outlet property="totalTimeLabel" destination="qNb-o6-Nmh" id="I9f-RF-9hJ"/>
             </connections>

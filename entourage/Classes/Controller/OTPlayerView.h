@@ -18,9 +18,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *totalTimeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *playTimeLabel;
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton;
+@property (strong, nonatomic) IBOutlet UILabel *longueurLabel;
 
+@property (nonatomic, strong) NSURL *recordedURL;
+@property (nonatomic, strong) NSData *dowloadedFile;
 
-@property(nonatomic, strong) NSURL *recordedURL;
+@property (nonatomic, assign) BOOL isRecordingMode;
 
 - (BOOL)hasRecordedFile;
 

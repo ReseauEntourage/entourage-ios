@@ -14,9 +14,17 @@
 // Helper
 #import "NSUserDefaults+OT.h"
 
+// Player
+#import "OTPlayerView.h"
+
+// Service
+#import "OTSoundCloudService.h"
+
 @interface OTMeetingCalloutViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet OTPlayerView *player;
+
 
 @end
 
@@ -38,11 +46,29 @@
 
 	NSString *body = @"";
 
-	if (encounter.message.length != 0 && encounter.voiceMessage.length == 0) {
+//	if (encounter.voiceMessage.length == 0) {
+//		self.player.hidden = YES;
+//	}
+//	else {
+//		self.player.hidden = NO;
+//		self.player.isRecordingMode = NO;
+//	}
+#warning TO BE REMOVED when back will persist url
+	encounter.voiceMessage = @"https://api.soundcloud.com/tracks/188445194/stream";
+
+	[[OTSoundCloudService new] downloadSoundAtURL:encounter.voiceMessage progress: ^(CGFloat percentageProgress) {
+	    //
+	} success: ^(NSData *streamData) {
+	    self.player.hidden = NO;
+	    self.player.isRecordingMode = NO;
+	    self.player.dowloadedFile = streamData;
+	} failure: ^(NSError *error) {
+	    //
+	}];
+
+
+	if (encounter.message.length != 0) {
 		body = [NSString stringWithFormat:@"%@ :\n %@", NSLocalizedString(@"their_message", @""), encounter.message];
-	}
-	else {
-		body = [NSString stringWithFormat:@"%@ :\n %@\n%@ :\n%@", NSLocalizedString(@"their_message", @""), encounter.message, NSLocalizedString(@"their_audio_message", @""), encounter.voiceMessage];
 	}
 
 	self.textView.text = body;
@@ -61,9 +87,7 @@
 #pragma mark - IBActions
 
 - (IBAction)closeMe:(id)sender {
-	if ([self.delegate respondsToSelector:@selector(dismissPopover)]) {
-		[self.delegate dismissPopover];
-	}
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
