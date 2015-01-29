@@ -14,4 +14,5 @@
                  success:(void (^)(NSString *uploadLocation))success
                  failure:(void (^)(NSError *error))failure;
 
+- (void)downloadSoundAtURL:(NSString *)soundPath progress:(void (^)(CGFloat percentageProgress))progress success:(void (^)(NSData *streamData))success failure:(void (^)(NSError *error))failure;
 @end
