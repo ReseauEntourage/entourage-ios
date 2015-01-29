@@ -50,6 +50,8 @@
 		self.player.hidden = YES;
 	}
 	else {
+		self.player.hidden = NO;
+		self.player.isRecordingMode = NO;
 		[[OTSoundCloudService new] downloadSoundAtURL:encounter.voiceMessage progress: ^(CGFloat percentageProgress) {
 		} success: ^(NSData *streamData) {
 		    self.player.hidden = NO;
