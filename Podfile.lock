@@ -46,7 +46,7 @@ PODS:
   - UIDeviceAddition (1.0)
   - UIImage+BlurredFrame (0.0.4)
   - uservoice-iphone-sdk (3.2.2)
-  - WYPopoverController (0.3.5)
+  - WYPopoverController (0.3.6)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.3)
@@ -96,6 +96,6 @@ SPEC CHECKSUMS:
   UIDeviceAddition: fb25767a1b5447c4e40af0ca948178c9feb9d05b
   UIImage+BlurredFrame: 0c38f5760d72125c47d16001a88faaac573bd35d
   uservoice-iphone-sdk: 9dc05d00656482f54bf03f793334a8f7ff070e46
-  WYPopoverController: d5350da9e8aa98d607bbc9a2e299b5982938e77b
+  WYPopoverController: a46116aded5979c354300ef644b9cce906ee3a57
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.0.beta.2

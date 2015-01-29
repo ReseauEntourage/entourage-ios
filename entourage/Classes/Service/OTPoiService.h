@@ -18,6 +18,9 @@ extern NSString *const kAPIPoiRoute;
 @interface OTPoiService : NSObject
 
 - (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois, NSArray *encounters))success failure:(void (^)(NSError *error))failure;
-- (void)sendEncounter:(OTEncounter *)encounter withSuccess:(void (^)(OTEncounter *encounter))success failure:(void (^)(NSError *error))failure;
+
+- (void)poisAroundCoordinate:(CLLocationCoordinate2D)coordinate2d distance:(CLLocationDistance)distance success:(void (^)(NSArray *categories, NSArray *pois, NSArray *encounters))success failure:(void (^)(NSError *error))failure;
+
+- (void)sendEncounter:(OTEncounter *)encounter withSuccess:(void (^)(OTEncounter *sentEncounter))success failure:(void (^)(NSError *error))failure;
 
 @end
