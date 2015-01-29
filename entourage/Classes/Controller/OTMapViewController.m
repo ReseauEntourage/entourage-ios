@@ -126,7 +126,6 @@
 
 - (void)refreshMap
 {
-
     [[OTPoiService new] poisAroundCoordinate:self.mapView.centerCoordinate
                                     distance:[self mapHeight]
                                      success:^(NSArray *categories, NSArray *pois, NSArray *encounters)
@@ -155,7 +154,7 @@
     MKMapPoint mpBottomRight = MKMapPointMake(self.mapView.visibleMapRect.origin.x + self.mapView.visibleMapRect.size.width,
             self.mapView.visibleMapRect.origin.y + self.mapView.visibleMapRect.size.height);
 
-    CLLocationDistance vDist = MKMetersBetweenMapPoints(mpTopRight, mpBottomRight);
+    CLLocationDistance vDist = MKMetersBetweenMapPoints(mpTopRight, mpBottomRight) / 1000.f;
 
     return vDist;
 }
@@ -315,6 +314,7 @@
 {
     [self.clusteringController refresh:animated];
     [self insertCurrentAnnotationsInTableView:[self filterCurrentAnnotations:[mapView annotationsInMapRect:mapView.visibleMapRect]]];
+    [self refreshMap];
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
@@ -405,7 +405,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
 
-    cell.textLabel.text = [self encounterAnnotationToString:[self.tableData objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [self encounterAnnotationToString:self.tableData[(NSUInteger) indexPath.row]];
     return cell;
 }
 
@@ -414,7 +414,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OTEncounterAnnotation *annotationToDisplay = [self.tableData objectAtIndex:indexPath.row];
+    OTEncounterAnnotation *annotationToDisplay = self.tableData[(NSUInteger) indexPath.row];
     [self displayEncounter:annotationToDisplay];
 }
 
@@ -440,10 +440,6 @@
     float spanX = 0.0001;
     float spanY = 0.0001;
     MKCoordinateRegion region;
-
-	[controller configureWithLocation:self.mapView.region.center];
-
-	[self.navigationController pushViewController:controller animated:YES];
 
     region.center.latitude = self.mapView.userLocation.coordinate.latitude;
     region.center.longitude = self.mapView.userLocation.coordinate.longitude;

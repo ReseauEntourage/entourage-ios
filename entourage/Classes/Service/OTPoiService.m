@@ -11,7 +11,6 @@
 #import "OTPoiCategory.h"
 #import "OTPoi.h"
 #import "OTEncounter.h"
-#import <CoreLocation/CoreLocation.h>
 
 /**************************************************************************************************/
 #pragma mark - Constants
@@ -89,7 +88,7 @@ NSString *const kAPIEncounterRoute = @"encounters";
                                            {
                                                failure(error);
                                            }
-                                       }]
+                                       }];
 }
 
 - (void)sendEncounter:(OTEncounter *)encounter
