@@ -130,13 +130,24 @@
 		self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recordedURL error:&error];
 	}
 
-	_player.volume = 1.0f;
-	_player.numberOfLoops = 0;
-	_player.delegate = self;
-	[_player play];
-	self.playingTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(playingTimerUpdate:) userInfo:nil repeats:YES];
-	[_playingTimer fire];
-	NSLog(@"duration: %f", _player.duration);
+	if (error != nil) {
+		[[[UIAlertView alloc]
+		  initWithTitle:@"Lecture Audio Impossible"
+		               message:error.description
+		              delegate:nil
+		     cancelButtonTitle:nil
+		     otherButtonTitles:@"ok",
+		  nil] show];
+	}
+	else {
+		_player.volume = 1.0f;
+		_player.numberOfLoops = 0;
+		_player.delegate = self;
+		[_player play];
+		self.playingTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(playingTimerUpdate:) userInfo:nil repeats:YES];
+		[_playingTimer fire];
+		NSLog(@"duration: %f", _player.duration);
+	}
 }
 
 - (IBAction)deleteButtonDidTap:(id)sender {
@@ -148,7 +159,7 @@
 
 - (void)deleteCurrentRecordedFile {
 	NSError *error = nil;
-	[[NSFileManager defaultManager] removeItemAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"tmp.caf"] error:&error];
+	[[NSFileManager defaultManager] removeItemAtPath:[self.recordedURL path] error:&error];
 	if (error != nil) {
 		NSLog(@"ERROR deleting audio file : %@", error.description);
 	}
@@ -161,7 +172,7 @@
 #pragma mark - public methods
 
 - (BOOL)hasRecordedFile {
-	return [[NSFileManager defaultManager] fileExistsAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"tmp.caf"]];
+	return [[NSFileManager defaultManager] fileExistsAtPath:[self.recordedURL path]];
 }
 
 - (void)setIsRecordingMode:(BOOL)isRecordingMode {
