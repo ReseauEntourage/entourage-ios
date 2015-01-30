@@ -47,13 +47,13 @@
 
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSArray *pois;
-@property (nonatomic, strong) NSMutableArray *encounters;
+@property (nonatomic, strong) NSArray *encounters;
 
 @property (nonatomic, strong) WYPopoverController *popover;
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 
 @property (nonatomic) BOOL isRegionSetted;
-@property (nonatomic, strong) NSMutableArray *tableData;
+@property (nonatomic, strong) NSArray *tableData;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end
@@ -81,16 +81,14 @@
 	[self configureView];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self refreshMap];
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+//	[self refreshMap];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    [self refreshMap];
-    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"currentUser"];
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	[self refreshMap];
+	[[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"currentUser"];
 }
 
 /**************************************************************************************************/
@@ -132,10 +130,11 @@
 
 	    self.categories = categories;
 	    self.pois = pois;
-	    self.encounters = [encounters mutableCopy];
+	    self.encounters = encounters;
 
 	    [self feedMapViewWithPoiArray:pois];
 	    [self feedMapViewWithEncountersArray:encounters];
+	    [self insertCurrentAnnotationsInTableView:[self filterCurrentAnnotations:[self.mapView annotationsInMapRect:self.mapView.visibleMapRect]]];
 	}
 
 	                                 failure: ^(NSError *error)
@@ -174,7 +173,7 @@
 	[self.clusteringController setAnnotations:annotations];
 }
 
-- (NSMutableArray *)filterCurrentAnnotations:(NSSet *)annots {
+- (NSArray *)filterCurrentAnnotations:(NSSet *)annots {
 	NSMutableArray *annotationsToAdd = [[NSMutableArray alloc] init];
 
 	for (id a in[annots allObjects]) {
@@ -199,17 +198,15 @@
 	return cellTitle;
 }
 
-- (void)insertCurrentAnnotationsInTableView:(NSMutableArray *)annotationsToAdd {
-	NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-	NSArray *toInsert = [[NSArray alloc] initWithArray:annotationsToAdd];
-	NSInteger nbAnnotationsToAdd = [toInsert count];
+- (void)insertCurrentAnnotationsInTableView:(NSArray *)annotationsToAdd {
+	NSArray *indexPaths = [[NSArray alloc] init];
+	NSInteger nbAnnotationsToAdd = [annotationsToAdd count];
 
 	if (nbAnnotationsToAdd > 0) {
-		[self.tableData removeAllObjects];
-		[self.tableData addObjectsFromArray:toInsert];
+		self.tableData = annotationsToAdd;
 
 		for (int i = 0; i < nbAnnotationsToAdd; i++) {
-			[indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+			[indexPaths arrayByAddingObject:[NSIndexPath indexPathForRow:i inSection:0]];
 		}
 
 		[self.tableView reloadData];
@@ -284,7 +281,6 @@
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
 	[self.clusteringController refresh:animated];
-	[self insertCurrentAnnotationsInTableView:[self filterCurrentAnnotations:[mapView annotationsInMapRect:mapView.visibleMapRect]]];
 	[self refreshMap];
 }
 
@@ -372,7 +368,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	OTEncounterAnnotation *annotationToDisplay = self.tableData[(NSUInteger)indexPath.row];
+	OTEncounterAnnotation *annotationToDisplay = [self.tableData objectAtIndex:[indexPath row]];
 	[self displayEncounter:annotationToDisplay];
 	[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
@@ -405,11 +401,10 @@
 	[self.mapView setRegion:region animated:YES];
 }
 
-- (IBAction)createEncounter:(id)sender
-{
-    OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *) [self.storyboard instantiateViewControllerWithIdentifier:@"OTCreateMeetingViewController"];
-    [controller configureWithLocation:self.mapView.region.center];
-    [self.navigationController pushViewController:controller animated:YES];
+- (IBAction)createEncounter:(id)sender {
+	OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCreateMeetingViewController"];
+	[controller configureWithLocation:self.mapView.region.center];
+	[self.navigationController pushViewController:controller animated:YES];
 }
 
 @end
