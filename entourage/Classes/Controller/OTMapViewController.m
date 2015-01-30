@@ -374,6 +374,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	OTEncounterAnnotation *annotationToDisplay = self.tableData[(NSUInteger)indexPath.row];
 	[self displayEncounter:annotationToDisplay];
+	[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 /**************************************************************************************************/
