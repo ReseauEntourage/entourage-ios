@@ -190,7 +190,13 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	[menuItems addObject:itemDisconnect];
 
 	// Version
+
+	NSString *buildVersion = [[[NSBundle bundleForClass:[self class]] infoDictionary]
+	                          objectForKey:@"CFBundleVersion"];
+
 	NSString *version = [[[NSBundle bundleForClass:[self class]] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+
+	version = [NSString stringWithFormat:@"%@ (%@)", version, buildVersion];
 	OTMenuItem *itemVersion = [[OTMenuItem alloc] initWithTitle:version segueIdentifier:nil];
 	[menuItems addObject:itemVersion];
 
