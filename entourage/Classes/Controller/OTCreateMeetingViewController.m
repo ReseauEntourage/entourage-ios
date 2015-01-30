@@ -70,7 +70,7 @@
 		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 		[formatter setDateFormat:@"dd/MM/yyyy à HH:mm"];
 		NSString *date = [formatter stringFromDate:[NSDate date]];
-		NSString *title = [NSString stringWithFormat:@"%@ %@ %@ %@, le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, NSLocalizedString(@"has_encountered", @""), self.nameTextField.text, NSLocalizedString(@"here", @""), date];
+		NSString *title = [NSString stringWithFormat:@"%@ %@ %@, le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, NSLocalizedString(@"has_encountered", @""), self.nameTextField.text, date];
 
 		OTSoundCloudService *service = [OTSoundCloudService new];
 		[service uploadSoundAtURL:self.playerView.recordedURL
