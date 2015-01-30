@@ -27,6 +27,7 @@ PODS:
     - OHAttributedLabel
   - JSBadgeView (1.3.2)
   - kingpin (0.2.beta)
+  - MBProgressHUD (0.9)
   - MSTranslateVendor (1.1.0)
   - NXOAuth2Client (1.2.1)
   - OCMock (3.1.2)
@@ -54,6 +55,7 @@ DEPENDENCIES:
   - CocoaSoundCloudUI (from `https://github.com/ReseauEntourage/CocoaSoundCloudUI.git`)
   - JSBadgeView (~> 1.3)
   - kingpin (= 0.2.beta)
+  - MBProgressHUD (~> 0.8)
   - MSTranslateVendor (~> 1.1)
   - OCMock (~> 3.1)
   - OTAppaloosa
@@ -83,6 +85,7 @@ SPEC CHECKSUMS:
   CocoaSoundCloudUI: dc4027e41daec9720e7a516883a6ba83ea968e89
   JSBadgeView: 75bec79d76e0eb01d57c9ce75b7c5ea8d6707955
   kingpin: 080953063d3d59c07f512623879b69f63c129f84
+  MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   MSTranslateVendor: bf54b7003c09b1178bdc8a76d22652545ea329df
   NXOAuth2Client: 28de3d9bde510d398e62d723a0123c500017af84
   OCMock: ecdd510b73ef397f2f97274785c1e87fd147c49f
