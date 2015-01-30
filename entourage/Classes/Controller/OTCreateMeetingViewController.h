@@ -11,14 +11,7 @@
 
 @class OTEncounter;
 
-@protocol OTCreateMeetingViewControllerDelegate <NSObject>
-
-- (void)dismissPopoverWithEncounter:(OTEncounter *)encounter;
-
-@end
-
 @interface OTCreateMeetingViewController : UIViewController
-@property (weak, nonatomic) id <OTCreateMeetingViewControllerDelegate> delegate;
 
 - (void)configureWithLocation:(CLLocationCoordinate2D)location;
 
