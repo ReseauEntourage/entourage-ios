@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet OTPlayerView *player;
 @property (strong, nonatomic) OTEncounter *encounter;
+@property (strong, nonatomic) IBOutlet UILabel *theirVocalMsg;
 
 @end
 
@@ -46,12 +47,12 @@
 //        self.player.isRecordingMode = NO;
 //        [self downloadAudio];
 //    }
-// 
+//
 //}
 
 - (void)configureWithEncouter:(OTEncounter *)encounter {
-    self.encounter = encounter;
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	self.encounter = encounter;
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 
 	[formatter setDateFormat:@"dd/MM/yyyy à HH:mm"];
 
@@ -65,12 +66,14 @@
 
 	if (encounter.voiceMessage.length == 0) {
 		self.player.hidden = YES;
+		self.theirVocalMsg.hidden = YES;
 	}
 	else {
 		self.player.hidden = NO;
-        self.player.isRecordingMode = NO;
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [self downloadAudio];
+		self.theirVocalMsg.hidden = NO;
+		self.player.isRecordingMode = NO;
+		[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+		[self downloadAudio];
 	}
 
 	if (encounter.message.length != 0) {
@@ -89,24 +92,23 @@
 	}
 }
 
-- (void)downloadAudio
-{
-    [[OTSoundCloudService new] downloadSoundAtURL:self.encounter.voiceMessage progress: ^(CGFloat percentageProgress) {
-    } success: ^(NSData *streamData) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        self.player.hidden = NO;
-        self.player.dowloadedFile = streamData;
-        self.player.isRecordingMode = NO;
-    } failure: ^(NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [[[UIAlertView alloc]
-          initWithTitle:@"Audio download failed"
-          message:error.description
-          delegate:nil
-          cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
-          nil] show];
-    }];
+- (void)downloadAudio {
+	[[OTSoundCloudService new] downloadSoundAtURL:self.encounter.voiceMessage progress: ^(CGFloat percentageProgress) {
+	} success: ^(NSData *streamData) {
+	    [MBProgressHUD hideHUDForView:self.view animated:YES];
+	    self.player.hidden = NO;
+	    self.player.dowloadedFile = streamData;
+	    self.player.isRecordingMode = NO;
+	} failure: ^(NSError *error) {
+	    [MBProgressHUD hideHUDForView:self.view animated:YES];
+	    [[[UIAlertView alloc]
+	      initWithTitle:@"Audio download failed"
+	                   message:error.description
+	                  delegate:nil
+	         cancelButtonTitle:nil
+	         otherButtonTitles:@"ok",
+	      nil] show];
+	}];
 }
 
 /********************************************************************************/
