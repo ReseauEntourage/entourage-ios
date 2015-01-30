@@ -16,7 +16,6 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
-            <string>Calibri</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -303,38 +302,61 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
-                                        <rect key="frame" x="20" y="216" width="288" height="185"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2k-WT-pS4" customClass="OTPlayerView">
-                                        <rect key="frame" x="20" y="131" width="288" height="68"/>
+                                        <rect key="frame" x="20" y="162" width="288" height="68"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="288" id="K4H-5p-oGl"/>
                                             <constraint firstAttribute="height" constant="68" id="oRR-ag-gZf"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enregistrez un message vocal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFT-Tz-FBE">
+                                        <rect key="frame" x="20" y="136" width="288" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ou rédigez un message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k99-Ua-RFn">
+                                        <rect key="frame" x="20" y="259" width="288" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
+                                        <rect key="frame" x="20" y="288" width="288" height="71"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="M2k-WT-pS4" firstAttribute="leading" secondItem="Dpb-7A-hEG" secondAttribute="leading" constant="20" id="2Am-qj-67n"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="a5N-Kb-CX4" secondAttribute="trailing" id="2Lt-sd-DRa"/>
+                                    <constraint firstAttribute="trailing" secondItem="k99-Ua-RFn" secondAttribute="trailing" constant="20" id="3OU-Mj-eNe"/>
+                                    <constraint firstItem="M2k-WT-pS4" firstAttribute="top" secondItem="RFT-Tz-FBE" secondAttribute="bottom" constant="5" id="5mV-bs-klT"/>
+                                    <constraint firstItem="k99-Ua-RFn" firstAttribute="leading" secondItem="Dpb-7A-hEG" secondAttribute="leading" constant="20" id="C8X-tr-udk"/>
                                     <constraint firstItem="a5N-Kb-CX4" firstAttribute="top" secondItem="KDZ-i8-4OP" secondAttribute="bottom" constant="8" symbolic="YES" id="FNI-vH-Zuq"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="17" id="Frw-6h-p33"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="58" id="Frw-6h-p33"/>
+                                    <constraint firstItem="k99-Ua-RFn" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="29" id="KNs-mn-hys"/>
+                                    <constraint firstAttribute="trailing" secondItem="M2k-WT-pS4" secondAttribute="trailing" constant="20" id="NVv-e0-Kl1"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="a5N-Kb-CX4" secondAttribute="leading" id="OQc-lb-EVZ"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="2uf-2Y-z5H" secondAttribute="leading" id="Otq-7r-OnK"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="KDZ-i8-4OP" secondAttribute="leading" id="P9Y-VX-sKO"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="Dpb-7A-hEG" secondAttribute="top" constant="216" id="TmV-B9-VKG"/>
+                                    <constraint firstItem="M2k-WT-pS4" firstAttribute="top" secondItem="RFT-Tz-FBE" secondAttribute="bottom" constant="5" id="TI6-4g-exg"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="Dpb-7A-hEG" secondAttribute="top" constant="288" id="TmV-B9-VKG"/>
                                     <constraint firstItem="KDZ-i8-4OP" firstAttribute="top" secondItem="Dpb-7A-hEG" secondAttribute="top" constant="20" id="Uyu-9w-zOX"/>
+                                    <constraint firstAttribute="trailing" secondItem="RFT-Tz-FBE" secondAttribute="trailing" constant="20" id="ZOj-tu-Z3x"/>
+                                    <constraint firstItem="RFT-Tz-FBE" firstAttribute="leading" secondItem="Dpb-7A-hEG" secondAttribute="leading" constant="20" id="arD-LC-ljU"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="centerX" secondItem="Dpb-7A-hEG" secondAttribute="centerX" id="bam-kK-IKH"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="k99-Ua-RFn" secondAttribute="bottom" constant="8" id="fVe-wu-koQ"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="M2k-WT-pS4" secondAttribute="trailing" id="gj9-Hy-5Ga"/>
+                                    <constraint firstItem="RFT-Tz-FBE" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="26" id="i14-77-fif"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="2uf-2Y-z5H" secondAttribute="trailing" id="jsy-fw-UUb"/>
                                     <constraint firstAttribute="trailing" secondItem="Ial-X5-VCO" secondAttribute="trailing" constant="20" id="keG-On-HQi"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="KDZ-i8-4OP" secondAttribute="trailing" id="mc9-IH-ZK9"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="M2k-WT-pS4" secondAttribute="leading" id="okT-z6-NAu"/>
                                     <constraint firstItem="2uf-2Y-z5H" firstAttribute="top" secondItem="a5N-Kb-CX4" secondAttribute="bottom" constant="8" symbolic="YES" id="p6m-i4-RoO"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="172" id="p7Y-8h-70n"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="214" id="p7Y-8h-70n"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -505,7 +527,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                             </textView>
@@ -531,14 +553,20 @@
                                     <action selector="closeMe:" destination="QTd-z6-CnJ" eventType="touchUpInside" id="vXw-0K-HXU"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IG0-bR-TtT" customClass="OTPlayerView">
-                                <rect key="frame" x="16" y="380" width="288" height="68"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IG0-bR-TtT" customClass="OTPlayerView">
+                                <rect key="frame" x="80" y="407" width="204" height="68"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="68" id="Pc9-MX-RGs"/>
-                                    <constraint firstAttribute="width" constant="288" id="jyZ-Pd-TW6"/>
+                                    <constraint firstAttribute="width" constant="204" id="jyZ-Pd-TW6"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leur message vocal :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mC-jA-qbE">
+                                <rect key="frame" x="36" y="380" width="248" height="19"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -548,9 +576,14 @@
                             <constraint firstAttribute="trailingMargin" secondItem="rAd-Tf-8Hv" secondAttribute="trailing" constant="20" id="GIi-ch-fB9"/>
                             <constraint firstItem="rAd-Tf-8Hv" firstAttribute="top" secondItem="vGQ-uo-3Us" secondAttribute="bottom" constant="38" id="H8s-jT-icw"/>
                             <constraint firstItem="vGQ-uo-3Us" firstAttribute="top" secondItem="VaB-Gu-Kit" secondAttribute="bottom" constant="20" id="Lhb-Hb-TIr"/>
+                            <constraint firstItem="IG0-bR-TtT" firstAttribute="top" secondItem="7mC-jA-qbE" secondAttribute="bottom" constant="8" symbolic="YES" id="MXS-WR-ukS"/>
                             <constraint firstItem="8Kz-3G-Uoo" firstAttribute="top" secondItem="rAd-Tf-8Hv" secondAttribute="bottom" constant="149" id="QfM-54-IM3"/>
+                            <constraint firstItem="IG0-bR-TtT" firstAttribute="leading" secondItem="7mC-jA-qbE" secondAttribute="leading" constant="44" id="Wiq-nU-3eW"/>
+                            <constraint firstItem="8Kz-3G-Uoo" firstAttribute="top" secondItem="IG0-bR-TtT" secondAttribute="bottom" constant="39" id="Xjq-n5-AX6"/>
                             <constraint firstItem="kX2-CY-43S" firstAttribute="top" secondItem="8Kz-3G-Uoo" secondAttribute="bottom" constant="20" id="Y57-Td-f92"/>
                             <constraint firstAttribute="centerX" secondItem="8Kz-3G-Uoo" secondAttribute="centerX" id="dp9-WI-rDh"/>
+                            <constraint firstItem="IG0-bR-TtT" firstAttribute="leading" secondItem="vGQ-uo-3Us" secondAttribute="leading" constant="64" id="oJm-DA-y60"/>
+                            <constraint firstItem="IG0-bR-TtT" firstAttribute="trailing" secondItem="7mC-jA-qbE" secondAttribute="trailing" id="xgp-Db-5dG"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
