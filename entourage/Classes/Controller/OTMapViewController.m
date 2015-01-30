@@ -202,15 +202,13 @@
 	NSArray *indexPaths = [[NSArray alloc] init];
 	NSInteger nbAnnotationsToAdd = [annotationsToAdd count];
 
-	if (nbAnnotationsToAdd > 0) {
-		self.tableData = annotationsToAdd;
+	self.tableData = annotationsToAdd;
 
-		for (int i = 0; i < nbAnnotationsToAdd; i++) {
-			[indexPaths arrayByAddingObject:[NSIndexPath indexPathForRow:i inSection:0]];
-		}
-
-		[self.tableView reloadData];
+	for (int i = 0; i < nbAnnotationsToAdd; i++) {
+		[indexPaths arrayByAddingObject:[NSIndexPath indexPathForRow:i inSection:0]];
 	}
+
+	[self.tableView reloadData];
 }
 
 - (void)displayEncounter:(OTEncounterAnnotation *)simpleAnnontation {
