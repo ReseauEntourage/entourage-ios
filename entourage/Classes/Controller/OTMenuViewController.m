@@ -27,15 +27,7 @@
 
 /* MenuItem identifiers */
 NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuMapIdentifier";
-NSString *const OTMenuViewControllerSegueMenuMyMeetingsIdentifier = @"segueMenuMyMeetingsIdentifier";
-NSString *const OTMenuViewControllerSegueMenuPracticalInformationIdentifier = @"segueMenuPracticalInformationIdentifier";
 NSString *const OTMenuViewControllerSegueMenuForumIdentifier = @"segueMenuForumIdentifier";
-NSString *const OTMenuViewControllerSegueMenuMembersIdentifier = @"segueMenuMembersIdentifier";
-NSString *const OTMenuViewControllerSegueMenuMyProfileIdentifier = @"segueMenuMyProfileIdentifier";
-NSString *const OTMenuViewControllerSegueMenuMyNotificationsIdentifier = @"segueMenuMyNotificationsIdentifier";
-NSString *const OTMenuViewControllerSegueMenuHelpIdentifier = @"segueMenuHelpIdentifier";
-NSString *const OTMenuViewControllerSegueMenuYourOpinionIdentifier = @"segueMenuYourOpinionIdentifier";
-NSString *const OTMenuViewControllerSegueMenuTranslatetIdentifier = @"segueMenuTanslateIdentifier";
 NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
 
 @interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -57,8 +49,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 /**************************************************************************************************/
 #pragma mark - View LifeCycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
 	[super viewDidLoad];
 
 	self.menuItems = [OTMenuViewController createMenuItems];
@@ -69,13 +60,11 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 /**************************************************************************************************/
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return self.menuItems.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:OTMenuTableViewCellIdentifier];
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
 
@@ -83,40 +72,36 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 
-	if (indexPath.row == self.menuItems.count - 1)
-	{
+	if (indexPath.row == self.menuItems.count - 1) {
 		[[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
 
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTLoginViewControllerIdentifier"];
 		[self presentViewController:loginViewController animated:YES completion:nil];
 	}
-    else if (indexPath.row == 3)
-    {
-        // Set this up once when your application launches
-        UVConfig *config = [UVConfig configWithSite:@"entourage-social.uservoice.com"];
-        
-        config.showContactUs = NO;
-        config.showKnowledgeBase = NO;
-        config.forumId = 268709;
-        NSString *userMail = [[NSUserDefaults standardUserDefaults].currentUser email];
-        [config identifyUserWithEmail:userMail name:userMail guid:userMail];
-        [UserVoice initialize:config];
-        
-        // Call this wherever you want to launch UserVoice
-        [UserVoice presentUserVoiceForumForParentViewController:self];
-    }
-	else
-	{
+	else if (indexPath.row == 1) {
+		// Set this up once when your application launches
+		UVConfig *config = [UVConfig configWithSite:@"entourage-social.uservoice.com"];
+
+		config.showContactUs = NO;
+		config.showKnowledgeBase = NO;
+		config.forumId = 268709;
+		NSString *userMail = [[NSUserDefaults standardUserDefaults].currentUser email];
+		[config identifyUserWithEmail:userMail name:userMail guid:userMail];
+		[UserVoice initialize:config];
+
+		// Call this wherever you want to launch UserVoice
+		[UserVoice presentUserVoiceForumForParentViewController:self];
+	}
+	else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
 		[self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
-        
-        [Flurry logEvent:@"Open_Screen_From_Menu" withParameters:@{@"screen" : menuItem.segueIdentifier}];
+
+		[Flurry logEvent:@"Open_Screen_From_Menu" withParameters:@{ @"screen" : menuItem.segueIdentifier }];
 	}
 }
 
@@ -133,24 +118,19 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
  * @param segueIdentifier
  * The identifier of a segue
  */
-- (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier
-{
+- (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier {
 	UIViewController *nextViewController = [self.controllersDictionary objectForKey:segueIdentifier];
 
-	if (nextViewController)
-	{
+	if (nextViewController) {
 		SWRevealViewController *revealViewController = self.revealViewController;
-		if (nextViewController != self.revealViewController.frontViewController)
-		{
+		if (nextViewController != self.revealViewController.frontViewController) {
 			[revealViewController pushFrontViewController:nextViewController animated:YES];
 		}
-		else
-		{
+		else {
 			[revealViewController revealToggle:self];
 		}
 	}
-	else
-	{
+	else {
 		[self performSegueWithIdentifier:segueIdentifier sender:self];
 	}
 }
@@ -158,10 +138,8 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 /**************************************************************************************************/
 #pragma mark - Storyboard
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-	if (![self.controllersDictionary objectForKey:segue.identifier])
-	{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	if (![self.controllersDictionary objectForKey:segue.identifier]) {
 		[self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
 	}
 }
@@ -176,14 +154,12 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
  *
  * @see OTMenuViewController - viewDidLoad
  */
-- (void)configureControllersDictionary
-{
+- (void)configureControllersDictionary {
 	UIViewController *frontViewController = self.revealViewController.frontViewController;
 
-	if (frontViewController)
-	{
+	if (frontViewController) {
 		[self.controllersDictionary setObject:frontViewController
-									   forKey:OTMenuViewControllerSegueMenuMapIdentifier];
+		                               forKey:OTMenuViewControllerSegueMenuMapIdentifier];
 	}
 }
 
@@ -193,64 +169,23 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
  * @return NSArray<OTMenuItem>
  * All expected MenuItems
  */
-+ (NSArray *)createMenuItems
-{
++ (NSArray *)createMenuItems {
 	NSMutableArray *menuItems = [NSMutableArray array];
 
 	// Map
 	OTMenuItem *itemMap = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_map_title", @"")
-											segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+	                                        segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
 
 	[menuItems addObject:itemMap];
 
-	// My Meetings
-	OTMenuItem *itemMyMeetings = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myMeetings_title", @"")
-												   segueIdentifier:OTMenuViewControllerSegueMenuMyMeetingsIdentifier];
-	[menuItems addObject:itemMyMeetings];
-
-	// Practical Information
-	OTMenuItem *itemPracticalInformation = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_practicalInformation_title", @"")
-															 segueIdentifier:OTMenuViewControllerSegueMenuPracticalInformationIdentifier];
-	[menuItems addObject:itemPracticalInformation];
-
 	// Forum
 	OTMenuItem *itemForum = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_forum_title", @"")
-											  segueIdentifier:OTMenuViewControllerSegueMenuForumIdentifier];
+	                                          segueIdentifier:OTMenuViewControllerSegueMenuForumIdentifier];
 	[menuItems addObject:itemForum];
-
-	// Members
-	OTMenuItem *itemMembers = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_members_title", @"")
-												segueIdentifier:OTMenuViewControllerSegueMenuMembersIdentifier];
-	[menuItems addObject:itemMembers];
-
-	// My Profile
-	OTMenuItem *itemMyProfile = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myProfile_title", @"")
-												  segueIdentifier:OTMenuViewControllerSegueMenuMyProfileIdentifier];
-	[menuItems addObject:itemMyProfile];
-
-	// My Notifications
-	OTMenuItem *itemMyNotifications = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_myNotifications_title", @"")
-														segueIdentifier:OTMenuViewControllerSegueMenuMyNotificationsIdentifier];
-	[menuItems addObject:itemMyNotifications];
-
-	// Help
-	OTMenuItem *itemHelp = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_help_title", @"")
-											 segueIdentifier:OTMenuViewControllerSegueMenuHelpIdentifier];
-	[menuItems addObject:itemHelp];
-
-	// Your opinion
-	OTMenuItem *itemYourOpinion = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_yourOpinion_title", @"")
-													segueIdentifier:OTMenuViewControllerSegueMenuYourOpinionIdentifier];
-	[menuItems addObject:itemYourOpinion];
-
-	// Translate
-	OTMenuItem *itemTranslate = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_translate_title", @"")
-												  segueIdentifier:OTMenuViewControllerSegueMenuTranslatetIdentifier];
-	[menuItems addObject:itemTranslate];
 
 	// Disconnect
 	OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
-												   segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
+	                                               segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
 	[menuItems addObject:itemDisconnect];
 
 	return menuItems;
@@ -265,12 +200,10 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
  * @return OTMenuItem
  * The MenuItem according the indexpath
  */
-- (OTMenuItem *)menuItemsAtIndexPath:(NSIndexPath *)indexPath
-{
+- (OTMenuItem *)menuItemsAtIndexPath:(NSIndexPath *)indexPath {
 	OTMenuItem *menuItem = nil;
 
-	if (indexPath && (indexPath.row < self.menuItems.count))
-	{
+	if (indexPath && (indexPath.row < self.menuItems.count)) {
 		menuItem = [self.menuItems objectAtIndex:indexPath.row];
 	}
 
