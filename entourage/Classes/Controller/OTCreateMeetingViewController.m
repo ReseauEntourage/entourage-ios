@@ -61,7 +61,7 @@
 - (void)createSendButton {
 	UIBarButtonItem *menuButton = nil;
 	menuButton = [[UIBarButtonItem alloc] init];
-	[menuButton setTitle:@"Envoyer"];
+	[menuButton setTitle:@"Valider"];
 	[menuButton setAction:@selector(sendEncounter:)];
 	[self.navigationItem setRightBarButtonItem:menuButton];
 }
@@ -76,24 +76,31 @@
 		[formatter setDateFormat:@"dd/MM/yyyy à HH:mm"];
 		NSString *date = [formatter stringFromDate:[NSDate date]];
 		NSString *title = [NSString stringWithFormat:@"%@ %@ %@, le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, NSLocalizedString(@"has_encountered", @""), self.nameTextField.text, date];
-		[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+
+		MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+		hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+		hud.labelText = @"Audio Uploading";
+
+
 		OTSoundCloudService *service = [OTSoundCloudService new];
 		[service uploadSoundAtURL:self.playerView.recordedURL
 		                    title:title
 		                 progress: ^(CGFloat percentageProgress)
 		{
+		    hud.progress = percentageProgress;
 		    NSLog(@"percentageProgress = %f", percentageProgress);
 		}
 
 		                  success: ^(NSString *uploadLocation)
 		{
-		    [MBProgressHUD hideHUDForView:self.view animated:YES];
+		    [hud hide:YES];
 		    [self postEncounterWithAudioFile:uploadLocation];
 		}
 
 		 failure: ^(NSError *error)
 		{
-		    [MBProgressHUD hideHUDForView:self.view animated:YES];
+		    [hud hide:YES];
 		    NSLog(@"error = %@", error);
 		}];
 	}
