@@ -20,6 +20,9 @@
 // Service
 #import "OTSoundCloudService.h"
 
+// Progress HUD
+#import "MBProgressHUD.h"
+
 @interface OTMeetingCalloutViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -52,14 +55,17 @@
 	else {
 		self.player.hidden = NO;
 		self.player.isRecordingMode = NO;
+		[MBProgressHUD showHUDAddedTo:self.view animated:YES];
 		[[OTSoundCloudService new] downloadSoundAtURL:encounter.voiceMessage progress: ^(CGFloat percentageProgress) {
 		} success: ^(NSData *streamData) {
+		    [MBProgressHUD hideHUDForView:self.view animated:YES];
 		    self.player.hidden = NO;
-		    self.player.isRecordingMode = NO;
 		    self.player.dowloadedFile = streamData;
+		    self.player.isRecordingMode = NO;
 		} failure: ^(NSError *error) {
+		    [MBProgressHUD hideHUDForView:self.view animated:YES];
 		    [[[UIAlertView alloc]
-		      initWithTitle:@"Audio upload failed"
+		      initWithTitle:@"Audio download failed"
 		                   message:error.description
 		                  delegate:nil
 		         cancelButtonTitle:nil

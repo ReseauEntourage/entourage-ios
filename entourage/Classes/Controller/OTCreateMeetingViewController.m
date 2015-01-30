@@ -21,6 +21,11 @@
 #import "OTPlayerView.h"
 #import "OTSoundCloudService.h"
 
+
+// Progress HUD
+#import "MBProgressHUD.h"
+
+
 @interface OTCreateMeetingViewController ()
 
 @property (nonatomic) CLLocationCoordinate2D location;
@@ -71,7 +76,7 @@
 		[formatter setDateFormat:@"dd/MM/yyyy à HH:mm"];
 		NSString *date = [formatter stringFromDate:[NSDate date]];
 		NSString *title = [NSString stringWithFormat:@"%@ %@ %@, le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, NSLocalizedString(@"has_encountered", @""), self.nameTextField.text, date];
-
+		[MBProgressHUD showHUDAddedTo:self.view animated:YES];
 		OTSoundCloudService *service = [OTSoundCloudService new];
 		[service uploadSoundAtURL:self.playerView.recordedURL
 		                    title:title
@@ -82,11 +87,13 @@
 
 		                  success: ^(NSString *uploadLocation)
 		{
+		    [MBProgressHUD hideHUDForView:self.view animated:YES];
 		    [self postEncounterWithAudioFile:uploadLocation];
 		}
 
 		 failure: ^(NSError *error)
 		{
+		    [MBProgressHUD hideHUDForView:self.view animated:YES];
 		    NSLog(@"error = %@", error);
 		}];
 	}

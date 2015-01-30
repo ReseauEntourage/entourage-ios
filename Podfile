@@ -16,6 +16,7 @@ target "entourage" do
     pod 'CocoaSoundCloudAPI', :git => 'https://github.com/ReseauEntourage/CocoaSoundCloudAPI.git'
     pod 'CocoaSoundCloudUI', :git => 'https://github.com/ReseauEntourage/CocoaSoundCloudUI.git'
     pod 'PMAudioRecorderViewController'
+    pod 'MBProgressHUD', '~> 0.8'
 end
 
 target "entourageTests" do
