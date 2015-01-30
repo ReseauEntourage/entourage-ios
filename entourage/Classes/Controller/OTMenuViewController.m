@@ -75,8 +75,9 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-
 	if (indexPath.row == self.menuItems.count - 1) {
+	}
+	else if (indexPath.row == self.menuItems.count - 2) {
 		[[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
 
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -187,6 +188,11 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
 	                                               segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
 	[menuItems addObject:itemDisconnect];
+
+	// Version
+	NSString *version = [[[NSBundle bundleForClass:[self class]] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+	OTMenuItem *itemVersion = [[OTMenuItem alloc] initWithTitle:version segueIdentifier:nil];
+	[menuItems addObject:itemVersion];
 
 	return menuItems;
 }
