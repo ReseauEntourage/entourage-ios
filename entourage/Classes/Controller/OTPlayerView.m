@@ -55,7 +55,6 @@
 #pragma mark - private methods
 
 - (void)recordingTimerUpdate:(id)sender {
-	NSLog(@"%f %@", _recorder.currentTime, sender);
 	self.totalTimeLabel.text = [NSString stringWithFormat:@"%.2f", _recorder.currentTime];
 }
 
@@ -146,7 +145,6 @@
 		[_player play];
 		self.playingTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(playingTimerUpdate:) userInfo:nil repeats:YES];
 		[_playingTimer fire];
-		NSLog(@"duration: %f", _player.duration);
 	}
 }
 

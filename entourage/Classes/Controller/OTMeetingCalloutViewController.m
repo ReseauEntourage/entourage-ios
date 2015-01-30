@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet OTPlayerView *player;
-
+@property (strong, nonatomic) OTEncounter *encounter;
 
 @end
 
@@ -36,8 +36,22 @@
 /********************************************************************************/
 #pragma mark - Public Methods
 
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    if (self.encounter.voiceMessage.length == 0) {
+//        self.player.hidden = YES;
+//    }
+//    else {
+//        self.player.hidden = NO;
+//        self.player.isRecordingMode = NO;
+//        [self downloadAudio];
+//    }
+// 
+//}
+
 - (void)configureWithEncouter:(OTEncounter *)encounter {
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    self.encounter = encounter;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 
 	[formatter setDateFormat:@"dd/MM/yyyy à HH:mm"];
 
@@ -54,26 +68,10 @@
 	}
 	else {
 		self.player.hidden = NO;
-		self.player.isRecordingMode = NO;
-		[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-		[[OTSoundCloudService new] downloadSoundAtURL:encounter.voiceMessage progress: ^(CGFloat percentageProgress) {
-		} success: ^(NSData *streamData) {
-		    [MBProgressHUD hideHUDForView:self.view animated:YES];
-		    self.player.hidden = NO;
-		    self.player.dowloadedFile = streamData;
-		    self.player.isRecordingMode = NO;
-		} failure: ^(NSError *error) {
-		    [MBProgressHUD hideHUDForView:self.view animated:YES];
-		    [[[UIAlertView alloc]
-		      initWithTitle:@"Audio download failed"
-		                   message:error.description
-		                  delegate:nil
-		         cancelButtonTitle:nil
-		         otherButtonTitles:@"ok",
-		      nil] show];
-		}];
+        self.player.isRecordingMode = NO;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self downloadAudio];
 	}
-
 
 	if (encounter.message.length != 0) {
 		body = [NSString stringWithFormat:@"%@ :\n %@", NSLocalizedString(@"their_message", @""), encounter.message];
@@ -89,6 +87,26 @@
 	if (otherText) {
 		[text appendFormat:@"\n%@", otherText];
 	}
+}
+
+- (void)downloadAudio
+{
+    [[OTSoundCloudService new] downloadSoundAtURL:self.encounter.voiceMessage progress: ^(CGFloat percentageProgress) {
+    } success: ^(NSData *streamData) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        self.player.hidden = NO;
+        self.player.dowloadedFile = streamData;
+        self.player.isRecordingMode = NO;
+    } failure: ^(NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [[[UIAlertView alloc]
+          initWithTitle:@"Audio download failed"
+          message:error.description
+          delegate:nil
+          cancelButtonTitle:nil
+          otherButtonTitles:@"ok",
+          nil] show];
+    }];
 }
 
 /********************************************************************************/

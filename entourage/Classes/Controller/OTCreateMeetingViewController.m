@@ -48,7 +48,7 @@
 
 	NSString *dateString = [formatter stringFromDate:[NSDate date]];
 
-	self.dateLabel.text = [NSString stringWithFormat:@"se sont rencontré ici le %@", dateString];
+	self.dateLabel.text = [NSString stringWithFormat:@"se sont rencontrés ici le %@", dateString];
 
 	self.messageTextView.layer.borderWidth = 1;
 	self.messageTextView.layer.borderColor = UIColor.lightGrayColor.CGColor;
@@ -70,7 +70,7 @@
 	self.location = location;
 }
 
-- (IBAction)sendEncounter:(id)sender {
+- (void)sendEncounter:(id)sender {
 	if ([self.playerView hasRecordedFile]) {
 		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 		[formatter setDateFormat:@"dd/MM/yyyy à HH:mm"];
@@ -89,9 +89,7 @@
 		                 progress: ^(CGFloat percentageProgress)
 		{
 		    hud.progress = percentageProgress;
-		    NSLog(@"percentageProgress = %f", percentageProgress);
 		}
-
 		                  success: ^(NSString *uploadLocation)
 		{
 		    [hud hide:YES];

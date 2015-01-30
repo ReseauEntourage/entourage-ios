@@ -72,7 +72,7 @@ NSString *const kSoundCloudUploadRoute = @"https://api.soundcloud.com/tracks.jso
                      NSLog(@"Upload successful at location : %@", result[@"stream_url"]);
                      if (success)
                      {
-                         success(result[@"uri"]);
+                         success(result[@"stream_url"]);
                      }
                  }
              }

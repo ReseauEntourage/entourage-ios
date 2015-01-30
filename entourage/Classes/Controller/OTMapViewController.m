@@ -77,14 +77,27 @@
 	self.mapView.delegate = self;
 	self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
 	[self zoomToCurrentLocation:nil];
-	[self refreshMap];
 	[self createMenuButton];
 	[self configureView];
 }
 
+<<<<<<< HEAD
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 	[self refreshMap];
 	[[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"currentUser"];
+=======
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self refreshMap];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [self refreshMap];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"currentUser"];
+>>>>>>> Some cleaning and audio fixing
 }
 
 /**************************************************************************************************/
@@ -398,12 +411,11 @@
 	[self.mapView setRegion:region animated:YES];
 }
 
-- (IBAction)createEncounter:(id)sender {
-	OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCreateMeetingViewController"];
-
-	[controller configureWithLocation:self.mapView.region.center];
-
-	[self.navigationController pushViewController:controller animated:YES];
+- (IBAction)createEncounter:(id)sender
+{
+    OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *) [self.storyboard instantiateViewControllerWithIdentifier:@"OTCreateMeetingViewController"];
+    [controller configureWithLocation:self.mapView.region.center];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end
