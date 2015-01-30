@@ -81,15 +81,9 @@
 	[self configureView];
 }
 
-<<<<<<< HEAD
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	[self refreshMap];
-	[[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"currentUser"];
-=======
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [self refreshMap];
 }
 
@@ -97,7 +91,6 @@
 {
     [self refreshMap];
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"currentUser"];
->>>>>>> Some cleaning and audio fixing
 }
 
 /**************************************************************************************************/
