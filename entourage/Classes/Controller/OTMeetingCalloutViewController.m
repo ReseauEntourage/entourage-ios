@@ -35,20 +35,16 @@
 @implementation OTMeetingCalloutViewController
 
 /********************************************************************************/
-#pragma mark - Public Methods
+#pragma mark - lifecycle
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    if (self.encounter.voiceMessage.length == 0) {
-//        self.player.hidden = YES;
-//    }
-//    else {
-//        self.player.hidden = NO;
-//        self.player.isRecordingMode = NO;
-//        [self downloadAudio];
-//    }
-//
-//}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.player stopPlaying];
+    [super viewWillDisappear:animated];
+}
+
+/********************************************************************************/
+#pragma mark - Public Methods
 
 - (void)configureWithEncouter:(OTEncounter *)encounter {
 	self.encounter = encounter;

@@ -51,6 +51,12 @@
 	[self.audioButton setRecordingState:RecordingButtonStateRecorded];
 }
 
+- (void)stopPlaying
+{
+    [self.player stop];
+    [self.playingTimer invalidate];
+}
+
 /********************************************************************************/
 #pragma mark - private methods
 

@@ -26,5 +26,6 @@
 @property (nonatomic, assign) BOOL isRecordingMode;
 
 - (BOOL)hasRecordedFile;
+- (void)stopPlaying;
 
 @end
