@@ -63,6 +63,7 @@
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    [self.audioButton setRecordingState:RecordingButtonStatePlayed];
 	NSLog(@"did finish playing %d", flag);
 	self.playTimeLabel.text = @"0.0";
 	[self.playingTimer invalidate];
@@ -83,6 +84,18 @@
 	else if (self.audioButton.recordingState == RecordingButtonStateRecorded) {
 		[self play];
 	}
+    else if (self.audioButton.recordingState == RecordingButtonStatePaused)
+    {
+        [self playAfterPause];
+    }
+    else if (self.audioButton.recordingState == RecordingButtonStatePlaying)
+    {
+        [self pause];
+    }
+    else if (self.audioButton.recordingState == RecordingButtonStatePlayed)
+    {
+        [self play];
+    }
 }
 
 - (void)stopRecord {
@@ -92,6 +105,20 @@
 	self.recordingTimer = nil;
 	NSLog(@"%@", self.recorder.url);
 	[self.deleteButton setEnabled:YES];
+}
+
+- (void)pause {
+    [self.audioButton setRecordingState:RecordingButtonStatePaused];
+    [_player pause];
+//    NSDate *currentTime = [self.playingTimer fireDate];
+//    [self.playingTimer invalidate];
+//    self.playingTimer = nil;
+}
+
+
+- (void)playAfterPause {
+    [self.audioButton setRecordingState:RecordingButtonStatePlaying];
+    [_player play];
 }
 
 - (void)record {
@@ -118,7 +145,7 @@
 }
 
 - (void)play {
-//Play
+    [self.audioButton setRecordingState:RecordingButtonStatePlaying];
 	NSError *error = nil;
 	[self.deleteButton setEnabled:NO];
 

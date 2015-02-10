@@ -29,12 +29,24 @@
 			break;
 
 		case RecordingButtonStateRecording:
-			imageName = @"pause"; // replace with stop
+			imageName = @"stop";
 			break;
 
 		case RecordingButtonStateRecorded:
 			imageName = @"play.png";
 			break;
+            
+        case RecordingButtonStatePlaying:
+            imageName = @"pause.png";
+            break;
+            
+        case RecordingButtonStatePaused:
+            imageName = @"play.png";
+            break;
+            
+        case RecordingButtonStatePlayed:
+            imageName = @"play.png";
+            break;
 
 		default:
 			imageName = @"record";

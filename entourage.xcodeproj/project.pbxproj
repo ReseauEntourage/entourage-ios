@@ -22,16 +22,18 @@
 		19BA509D19E987A100342A36 /* center-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509B19E987A100342A36 /* center-location@2x.png */; };
 		19BA50A019E9894200342A36 /* pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509E19E9894200342A36 /* pointer.png */; };
 		19BA50A119E9894200342A36 /* pointer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BA509F19E9894200342A36 /* pointer@2x.png */; };
+		1D1503C81A8A4D93001FD7C3 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D1503C01A8A4D93001FD7C3 /* pause.png */; };
+		1D1503C91A8A4D93001FD7C3 /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D1503C11A8A4D93001FD7C3 /* pause@2x.png */; };
+		1D1503CA1A8A4D93001FD7C3 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D1503C21A8A4D93001FD7C3 /* play.png */; };
+		1D1503CB1A8A4D93001FD7C3 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D1503C31A8A4D93001FD7C3 /* play@2x.png */; };
+		1D1503CC1A8A4D93001FD7C3 /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D1503C41A8A4D93001FD7C3 /* record.png */; };
+		1D1503CD1A8A4D93001FD7C3 /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D1503C51A8A4D93001FD7C3 /* record@2x.png */; };
+		1D1503CE1A8A4D93001FD7C3 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D1503C61A8A4D93001FD7C3 /* stop.png */; };
+		1D1503CF1A8A4D93001FD7C3 /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D1503C71A8A4D93001FD7C3 /* stop@2x.png */; };
 		1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */; };
 		1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D319E84E9B006A2184 /* OTUser.m */; };
 		1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
 		1D55D8D919E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
-		1D67732B1A77EE3B00C7456C /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773251A77EE3B00C7456C /* pause.png */; };
-		1D67732C1A77EE3B00C7456C /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773261A77EE3B00C7456C /* pause@2x.png */; };
-		1D67732D1A77EE3B00C7456C /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773271A77EE3B00C7456C /* play.png */; };
-		1D67732E1A77EE3B00C7456C /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773281A77EE3B00C7456C /* play@2x.png */; };
-		1D67732F1A77EE3B00C7456C /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773291A77EE3B00C7456C /* record.png */; };
-		1D6773301A77EE3B00C7456C /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D67732A1A77EE3B00C7456C /* record@2x.png */; };
 		1D6773341A77F0B600C7456C /* OTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6773331A77F0B600C7456C /* OTPlayerView.m */; };
 		1D6773361A790F9600C7456C /* OTPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773351A790F9600C7456C /* OTPlayerView.xib */; };
 		1D6773391A79223400C7456C /* OTAudioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6773381A79223400C7456C /* OTAudioButton.m */; };
@@ -137,18 +139,20 @@
 		19BA509B19E987A100342A36 /* center-location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "center-location@2x.png"; sourceTree = "<group>"; };
 		19BA509E19E9894200342A36 /* pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointer.png; sourceTree = "<group>"; };
 		19BA509F19E9894200342A36 /* pointer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pointer@2x.png"; sourceTree = "<group>"; };
+		1D1503C01A8A4D93001FD7C3 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause.png; path = Player/pause.png; sourceTree = "<group>"; };
+		1D1503C11A8A4D93001FD7C3 /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pause@2x.png"; path = "Player/pause@2x.png"; sourceTree = "<group>"; };
+		1D1503C21A8A4D93001FD7C3 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play.png; path = Player/play.png; sourceTree = "<group>"; };
+		1D1503C31A8A4D93001FD7C3 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play@2x.png"; path = "Player/play@2x.png"; sourceTree = "<group>"; };
+		1D1503C41A8A4D93001FD7C3 /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = record.png; path = Player/record.png; sourceTree = "<group>"; };
+		1D1503C51A8A4D93001FD7C3 /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "record@2x.png"; path = "Player/record@2x.png"; sourceTree = "<group>"; };
+		1D1503C61A8A4D93001FD7C3 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stop.png; path = Player/stop.png; sourceTree = "<group>"; };
+		1D1503C71A8A4D93001FD7C3 /* stop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stop@2x.png"; path = "Player/stop@2x.png"; sourceTree = "<group>"; };
 		1D3BD36A19E964FC001687F9 /* OTMeetingCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMeetingCalloutViewController.h; sourceTree = "<group>"; };
 		1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMeetingCalloutViewController.m; sourceTree = "<group>"; };
 		1D55D8D219E84E9B006A2184 /* OTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUser.h; sourceTree = "<group>"; };
 		1D55D8D319E84E9B006A2184 /* OTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUser.m; sourceTree = "<group>"; };
 		1D55D8D619E8514E006A2184 /* NSDictionary+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Parsing.h"; path = "Helper/NSDictionary+Parsing.h"; sourceTree = "<group>"; };
 		1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Parsing.m"; path = "Helper/NSDictionary+Parsing.m"; sourceTree = "<group>"; };
-		1D6773251A77EE3B00C7456C /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause.png; path = Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/pause.png; sourceTree = SOURCE_ROOT; };
-		1D6773261A77EE3B00C7456C /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pause@2x.png"; path = "Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/pause@2x.png"; sourceTree = SOURCE_ROOT; };
-		1D6773271A77EE3B00C7456C /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play.png; path = Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/play.png; sourceTree = SOURCE_ROOT; };
-		1D6773281A77EE3B00C7456C /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play@2x.png"; path = "Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/play@2x.png"; sourceTree = SOURCE_ROOT; };
-		1D6773291A77EE3B00C7456C /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = record.png; path = Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/record.png; sourceTree = SOURCE_ROOT; };
-		1D67732A1A77EE3B00C7456C /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "record@2x.png"; path = "Pods/PMAudioRecorderViewController/AudioNoteRecorderViewController/Images/record@2x.png"; sourceTree = SOURCE_ROOT; };
 		1D6773321A77F0B600C7456C /* OTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPlayerView.h; sourceTree = "<group>"; };
 		1D6773331A77F0B600C7456C /* OTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPlayerView.m; sourceTree = "<group>"; };
 		1D6773351A790F9600C7456C /* OTPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTPlayerView.xib; sourceTree = "<group>"; };
@@ -308,12 +312,14 @@
 		1D6773241A77EDE300C7456C /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				1D6773251A77EE3B00C7456C /* pause.png */,
-				1D6773261A77EE3B00C7456C /* pause@2x.png */,
-				1D6773271A77EE3B00C7456C /* play.png */,
-				1D6773281A77EE3B00C7456C /* play@2x.png */,
-				1D6773291A77EE3B00C7456C /* record.png */,
-				1D67732A1A77EE3B00C7456C /* record@2x.png */,
+				1D1503C01A8A4D93001FD7C3 /* pause.png */,
+				1D1503C11A8A4D93001FD7C3 /* pause@2x.png */,
+				1D1503C21A8A4D93001FD7C3 /* play.png */,
+				1D1503C31A8A4D93001FD7C3 /* play@2x.png */,
+				1D1503C41A8A4D93001FD7C3 /* record.png */,
+				1D1503C51A8A4D93001FD7C3 /* record@2x.png */,
+				1D1503C61A8A4D93001FD7C3 /* stop.png */,
+				1D1503C71A8A4D93001FD7C3 /* stop@2x.png */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -858,46 +864,48 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D67732E1A77EE3B00C7456C /* play@2x.png in Resources */,
 				DBBE8AC619E83CB600FA218E /* poi_category-7@2x.png in Resources */,
 				DBBE8ABA19E83CB600FA218E /* bg-top-header@2x.png in Resources */,
-				1D67732B1A77EE3B00C7456C /* pause.png in Resources */,
 				DBBE8ABB19E83CB600FA218E /* ic_menu.png in Resources */,
 				DBBE8ABF19E83CB600FA218E /* poi_category-1.png in Resources */,
 				DBBE8AC519E83CB600FA218E /* poi_category-7.png in Resources */,
 				1DA2911519E937760098C01E /* background-button.png in Resources */,
 				A8B3826019E94BB400CF7184 /* poi_category-0@2x.png in Resources */,
 				DBBE8ACA19E83CB600FA218E /* poi_category-4@2x.png in Resources */,
-				1D6773301A77EE3B00C7456C /* record@2x.png in Resources */,
 				A8B3825F19E94BB400CF7184 /* poi_category-0.png in Resources */,
 				19BA509C19E987A100342A36 /* center-location.png in Resources */,
+				1D1503CC1A8A4D93001FD7C3 /* record.png in Resources */,
+				1D1503CD1A8A4D93001FD7C3 /* record@2x.png in Resources */,
 				19BA509719E9625A00342A36 /* rencontre@2x.png in Resources */,
 				1DB2783F1A76A247009055B1 /* Main.storyboard in Resources */,
+				1D1503CF1A8A4D93001FD7C3 /* stop@2x.png in Resources */,
 				DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */,
+				1D1503C91A8A4D93001FD7C3 /* pause@2x.png in Resources */,
 				DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */,
 				19BA509919E9626000342A36 /* rencontre.png in Resources */,
+				1D1503C81A8A4D93001FD7C3 /* pause.png in Resources */,
 				DBBE8ABC19E83CB600FA218E /* ic_menu@2x.png in Resources */,
-				1D67732C1A77EE3B00C7456C /* pause@2x.png in Resources */,
 				1D6773361A790F9600C7456C /* OTPlayerView.xib in Resources */,
 				DBBE8AC819E83CB600FA218E /* poi_category-5@2x.png in Resources */,
 				19BA509D19E987A100342A36 /* center-location@2x.png in Resources */,
 				DBBE8AC419E83CB600FA218E /* poi_category-3@2x.png in Resources */,
 				DBBE8AC919E83CB600FA218E /* poi_category-4.png in Resources */,
 				DBBE8A9619E81AF600FA218E /* Calibri-Bold-Italic.ttf in Resources */,
-				1D67732F1A77EE3B00C7456C /* record.png in Resources */,
 				DBBE8AC319E83CB600FA218E /* poi_category-3.png in Resources */,
 				DBBE8ABE19E83CB600FA218E /* menu_background@2x.png in Resources */,
+				1D1503CE1A8A4D93001FD7C3 /* stop.png in Resources */,
 				6B92CABA19A7461C004E8C9B /* Images.xcassets in Resources */,
 				DBBE8AC219E83CB600FA218E /* poi_category-2@2x.png in Resources */,
 				DBBE8AB919E83CB600FA218E /* bg-top-header.png in Resources */,
 				19BA50A019E9894200342A36 /* pointer.png in Resources */,
+				1D1503CB1A8A4D93001FD7C3 /* play@2x.png in Resources */,
 				A8B3825C19E94B4300CF7184 /* poi_category-6@2x.png in Resources */,
 				A8B3825B19E94B4300CF7184 /* poi_category-6.png in Resources */,
 				DBBE8A9819E81AF600FA218E /* Calibri-Italic.ttf in Resources */,
 				19BA50A119E9894200342A36 /* pointer@2x.png in Resources */,
 				191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */,
 				DBBE8AC019E83CB600FA218E /* poi_category-1@2x.png in Resources */,
-				1D67732D1A77EE3B00C7456C /* play.png in Resources */,
+				1D1503CA1A8A4D93001FD7C3 /* play.png in Resources */,
 				DBBE8AC719E83CB600FA218E /* poi_category-5.png in Resources */,
 				DBBE8AC119E83CB600FA218E /* poi_category-2.png in Resources */,
 				DBBE8ABD19E83CB600FA218E /* menu_background.png in Resources */,
