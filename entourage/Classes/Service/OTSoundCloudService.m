@@ -22,7 +22,7 @@ NSString *const kSoundCloudUploadRoute = @"https://api.soundcloud.com/tracks.jso
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"track[asset_data]"] = soundURL;
     parameters[@"track[title]"] = title ? title : NSLocalizedString(@"Rencontre Entourage", @"Rencontre Entourage");
-    parameters[@"track[sharing]"] = @"private";
+    parameters[@"track[sharing]"] = @"public";
     parameters[@"track[downloadable]"] = @"1";
     parameters[@"track[track_type]"] = @"recording";
 
