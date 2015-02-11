@@ -147,6 +147,7 @@
 		1D1503C51A8A4D93001FD7C3 /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "record@2x.png"; path = "Player/record@2x.png"; sourceTree = "<group>"; };
 		1D1503C61A8A4D93001FD7C3 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stop.png; path = Player/stop.png; sourceTree = "<group>"; };
 		1D1503C71A8A4D93001FD7C3 /* stop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stop@2x.png"; path = "Player/stop@2x.png"; sourceTree = "<group>"; };
+		1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTConsts.h; sourceTree = "<group>"; };
 		1D3BD36A19E964FC001687F9 /* OTMeetingCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMeetingCalloutViewController.h; sourceTree = "<group>"; };
 		1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMeetingCalloutViewController.m; sourceTree = "<group>"; };
 		1D55D8D219E84E9B006A2184 /* OTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUser.h; sourceTree = "<group>"; };
@@ -414,6 +415,7 @@
 				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
 				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
 				1DB2783D1A76A247009055B1 /* Main.storyboard */,
+				1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

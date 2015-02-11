@@ -11,12 +11,9 @@
 
 // Util
 #import "UIFont+entourage.h"
+#import "OTConsts.h"
 
 #import <OTAppaloosa/OTAppaloosa.h>
-
-#ifndef PASS_API_SOUNDCLOUD
-	#define PASS_API_SOUNDCLOUD @"passDevForAPI"
-#endif
 
 const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 
@@ -76,20 +73,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 #pragma mark - Configure SoundCloud
 
 - (void)loginToSoundCloud {
-	// TODO : create an account for entourage | flip between dev/prod accounts
-
-#ifdef DEBUG
-	[[SCSoundCloud shared] requestAccessWithUsername:@"hschouman@octo.com"
+	[[SCSoundCloud shared] requestAccessWithUsername:LOGIN_API_SOUNDCLOUD
 	                                        password:PASS_API_SOUNDCLOUD];
-#else
-	[[SCSoundCloud shared] requestAccessWithUsername:@"entourage@octo.com"
-	                                        password:PASS_API_SOUNDCLOUD];
-#endif
 }
 
 - (void)configureSoundCloud {
-	[SCSoundCloud setClientID:@"8ea64716590a242e6f205bf1f821bb4a"
-	                   secret:@"119dea503c758179e90aa30d4b21d665"
+    [SCSoundCloud setClientID:CLIENT_ID_API_SOUNDCLOUD
+	                   secret:SECRET_API_SOUNDCLOUD
 	              redirectURL:[NSURL URLWithString:@"dev-entourage-ios://oauth"]];
 }
 

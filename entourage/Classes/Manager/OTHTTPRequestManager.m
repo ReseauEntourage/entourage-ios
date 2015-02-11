@@ -10,9 +10,7 @@
 
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
-
-static NSString *const kBaseAPIUrl = @"https://entourage-back.herokuapp.com/";
-static NSString *const kBasePreprodAPIUrl = @"https://entourage-back-preprod.herokuapp.com/";
+#import "OTConsts.h"
 
 @implementation OTHTTPRequestManager
 
@@ -23,13 +21,7 @@ static NSString *const kBasePreprodAPIUrl = @"https://entourage-back-preprod.her
 	static AFHTTPRequestOperationManager *requestManager = nil;
 
 	if (requestManager == nil) {
-        NSString *url;
-#ifdef DEBUG
-        url = kBasePreprodAPIUrl;
-#else
-        url = kBaseAPIUrl;
-#endif
-		requestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:url]];
+		requestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_API_URL]];
 		requestManager.responseSerializer = [AFJSONResponseSerializer serializer];
 		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
 	}
