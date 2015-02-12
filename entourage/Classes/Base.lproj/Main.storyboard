@@ -317,17 +317,26 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ou rédigez un message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k99-Ua-RFn">
-                                        <rect key="frame" x="20" y="259" width="288" height="21"/>
+                                        <rect key="frame" x="20" y="297" width="288" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
-                                        <rect key="frame" x="20" y="288" width="288" height="71"/>
+                                        <rect key="frame" x="20" y="326" width="288" height="71"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0lM-Ur-h8r">
+                                        <rect key="frame" x="205" y="238" width="51" height="31"/>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Partager sur Twitter" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bta-uh-dmM">
+                                        <rect key="frame" x="48" y="238" width="147" height="31"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="M2k-WT-pS4" firstAttribute="leading" secondItem="Dpb-7A-hEG" secondAttribute="leading" constant="20" id="2Am-qj-67n"/>
@@ -336,14 +345,14 @@
                                     <constraint firstItem="M2k-WT-pS4" firstAttribute="top" secondItem="RFT-Tz-FBE" secondAttribute="bottom" constant="5" id="5mV-bs-klT"/>
                                     <constraint firstItem="k99-Ua-RFn" firstAttribute="leading" secondItem="Dpb-7A-hEG" secondAttribute="leading" constant="20" id="C8X-tr-udk"/>
                                     <constraint firstItem="a5N-Kb-CX4" firstAttribute="top" secondItem="KDZ-i8-4OP" secondAttribute="bottom" constant="8" symbolic="YES" id="FNI-vH-Zuq"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="58" id="Frw-6h-p33"/>
-                                    <constraint firstItem="k99-Ua-RFn" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="29" id="KNs-mn-hys"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="96" id="Frw-6h-p33"/>
+                                    <constraint firstItem="k99-Ua-RFn" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="67" id="KNs-mn-hys"/>
                                     <constraint firstAttribute="trailing" secondItem="M2k-WT-pS4" secondAttribute="trailing" constant="20" id="NVv-e0-Kl1"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="a5N-Kb-CX4" secondAttribute="leading" id="OQc-lb-EVZ"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="2uf-2Y-z5H" secondAttribute="leading" id="Otq-7r-OnK"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="KDZ-i8-4OP" secondAttribute="leading" id="P9Y-VX-sKO"/>
                                     <constraint firstItem="M2k-WT-pS4" firstAttribute="top" secondItem="RFT-Tz-FBE" secondAttribute="bottom" constant="5" id="TI6-4g-exg"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="Dpb-7A-hEG" secondAttribute="top" constant="288" id="TmV-B9-VKG"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="Dpb-7A-hEG" secondAttribute="top" constant="326" id="TmV-B9-VKG"/>
                                     <constraint firstItem="KDZ-i8-4OP" firstAttribute="top" secondItem="Dpb-7A-hEG" secondAttribute="top" constant="20" id="Uyu-9w-zOX"/>
                                     <constraint firstAttribute="trailing" secondItem="RFT-Tz-FBE" secondAttribute="trailing" constant="20" id="ZOj-tu-Z3x"/>
                                     <constraint firstItem="RFT-Tz-FBE" firstAttribute="leading" secondItem="Dpb-7A-hEG" secondAttribute="leading" constant="20" id="arD-LC-ljU"/>
@@ -356,7 +365,7 @@
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="KDZ-i8-4OP" secondAttribute="trailing" id="mc9-IH-ZK9"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="M2k-WT-pS4" secondAttribute="leading" id="okT-z6-NAu"/>
                                     <constraint firstItem="2uf-2Y-z5H" firstAttribute="top" secondItem="a5N-Kb-CX4" secondAttribute="bottom" constant="8" symbolic="YES" id="p6m-i4-RoO"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="214" id="p7Y-8h-70n"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="176" id="p7Y-8h-70n"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -375,6 +384,8 @@
                         <outlet property="messageTextView" destination="Ial-X5-VCO" id="ilC-Qg-MDD"/>
                         <outlet property="nameTextField" destination="a5N-Kb-CX4" id="gpj-ZW-kua"/>
                         <outlet property="playerView" destination="M2k-WT-pS4" id="Wwd-BX-lAx"/>
+                        <outlet property="twitterShareLabel" destination="bta-uh-dmM" id="Fnx-O5-JnW"/>
+                        <outlet property="twitterShareSwitch" destination="0lM-Ur-h8r" id="shm-oA-Yig"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zCS-BA-fyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
