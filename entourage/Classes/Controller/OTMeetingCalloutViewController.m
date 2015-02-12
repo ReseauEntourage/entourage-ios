@@ -121,10 +121,13 @@
                                          withKey:@"permalink_url"
                                         progress: ^(CGFloat percentageProgress) {}
                                          success: ^(NSString *url) {
+
+                                             NSString *message = [NSString stringWithFormat:@"Ecoutez le message que j'ai enregistré avec %@ par l'application Entourage : %@ #entourage @R_Entourage",self.encounter.streetPersonName, url];
+                                             
                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
                                              SLComposeViewController *tweetSheet = [SLComposeViewController
                                                                                     composeViewControllerForServiceType:SLServiceTypeTwitter];
-                                             [tweetSheet setInitialText:url];
+                                             [tweetSheet setInitialText:message];
                                              [self presentViewController:tweetSheet animated:YES completion:nil];
                                         } failure: ^(NSError *error) {
                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
