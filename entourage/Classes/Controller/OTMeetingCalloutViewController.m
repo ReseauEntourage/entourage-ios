@@ -23,12 +23,16 @@
 // Progress HUD
 #import "MBProgressHUD.h"
 
+#import <Social/Social.h>
+
 @interface OTMeetingCalloutViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet OTPlayerView *player;
 @property (strong, nonatomic) OTEncounter *encounter;
 @property (strong, nonatomic) IBOutlet UILabel *theirVocalMsg;
+@property (strong, nonatomic) IBOutlet UIButton *tweetButton;
 
 @end
 
@@ -63,11 +67,13 @@
 	if (encounter.voiceMessage.length == 0) {
 		self.player.hidden = YES;
 		self.theirVocalMsg.hidden = YES;
+        self.tweetButton.hidden = YES;
 	}
 	else {
 		self.player.hidden = NO;
 		self.theirVocalMsg.hidden = NO;
 		self.player.isRecordingMode = NO;
+        self.tweetButton.hidden = NO;
 		[MBProgressHUD showHUDAddedTo:self.view animated:YES];
 		[self downloadAudio];
 	}
@@ -109,6 +115,21 @@
 
 /********************************************************************************/
 #pragma mark - IBActions
+- (IBAction)tweetUrlOfVocalMsg:(id)sender {
+    
+    [[OTSoundCloudService new] infosOfTrackAtUrl:self.encounter.voiceMessage
+                                         withKey:@"permalink_url"
+                                        progress: ^(CGFloat percentageProgress) {}
+                                         success: ^(NSString *url) {
+                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                             SLComposeViewController *tweetSheet = [SLComposeViewController
+                                                                                    composeViewControllerForServiceType:SLServiceTypeTwitter];
+                                             [tweetSheet setInitialText:url];
+                                             [self presentViewController:tweetSheet animated:YES completion:nil];
+                                        } failure: ^(NSError *error) {
+                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+}
 
 - (IBAction)closeMe:(id)sender {
 	[self dismissViewControllerAnimated:YES completion:nil];

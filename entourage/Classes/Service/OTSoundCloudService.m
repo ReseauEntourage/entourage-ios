@@ -113,4 +113,44 @@ NSString *const kSoundCloudUploadRoute = @"https://api.soundcloud.com/tracks.jso
     ];
 }
 
+- (void)infosOfTrackAtUrl:(NSString *)soundPath
+                  withKey:(NSString *)key
+                 progress:(void (^)(CGFloat percentageProgress))progress
+                  success:(void (^)(NSString *permanentUrl))success
+                  failure:(void (^)(NSError *error))failure
+{
+    
+    NSString *urlOfTrack = [soundPath substringToIndex:[soundPath length] - 7];
+    
+    [SCRequest performMethod:SCRequestMethodGET
+                  onResource:[NSURL URLWithString:urlOfTrack]
+             usingParameters:nil
+                 withAccount:[SCSoundCloud account]
+      sendingProgressHandler:nil
+             responseHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"get infos of track failed with error : %@", error);
+             if (failure)
+             {
+                 failure(error);
+             }
+         }
+         else
+         {
+             NSLog(@"Get infos of track : success");
+             if (success)
+             {
+                 NSDictionary* dictionaryFromJsonResponse = [NSJSONSerialization JSONObjectWithData:data
+                                                 options:kNilOptions
+                                                   error:&error];
+                 success([dictionaryFromJsonResponse objectForKey:key]);
+             }
+         }
+     }
+     
+     ];
+}
+
 @end
