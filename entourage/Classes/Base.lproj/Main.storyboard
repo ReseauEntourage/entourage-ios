@@ -273,7 +273,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpb-7A-hEG" customClass="TPKeyboardAvoidingScrollView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dpb-7A-hEG" customClass="TPKeyboardAvoidingScrollView">
                                 <rect key="frame" x="-4" y="-5" width="328" height="573"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="## &lt;Nom&gt; et" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDZ-i8-4OP">
@@ -293,7 +293,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="## se sont rencontrés ici, le &lt;date&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uf-2Y-z5H">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="## se sont rencontrés ici, le &lt;date&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uf-2Y-z5H">
                                         <rect key="frame" x="20" y="89" width="288" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="9Pf-DG-we5"/>
@@ -310,7 +310,7 @@
                                             <constraint firstAttribute="height" constant="68" id="oRR-ag-gZf"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enregistrez un message vocal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFT-Tz-FBE">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Enregistrez un message vocal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFT-Tz-FBE">
                                         <rect key="frame" x="20" y="136" width="288" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -322,16 +322,19 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
                                         <rect key="frame" x="20" y="326" width="288" height="71"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="71" id="7pq-wF-kyh"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0lM-Ur-h8r">
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0lM-Ur-h8r">
                                         <rect key="frame" x="205" y="238" width="51" height="31"/>
                                     </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Partager sur Twitter" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bta-uh-dmM">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partager sur Twitter" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bta-uh-dmM">
                                         <rect key="frame" x="48" y="238" width="147" height="31"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -339,33 +342,36 @@
                                     </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="a5N-Kb-CX4" secondAttribute="leading" id="0nc-Fw-AGN"/>
+                                    <constraint firstItem="0lM-Ur-h8r" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="8" id="1I2-CL-ked"/>
                                     <constraint firstItem="M2k-WT-pS4" firstAttribute="leading" secondItem="Dpb-7A-hEG" secondAttribute="leading" constant="20" id="2Am-qj-67n"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="a5N-Kb-CX4" secondAttribute="trailing" id="2Lt-sd-DRa"/>
-                                    <constraint firstAttribute="trailing" secondItem="k99-Ua-RFn" secondAttribute="trailing" constant="20" id="3OU-Mj-eNe"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="176" id="3gq-bC-5Jk"/>
                                     <constraint firstItem="M2k-WT-pS4" firstAttribute="top" secondItem="RFT-Tz-FBE" secondAttribute="bottom" constant="5" id="5mV-bs-klT"/>
-                                    <constraint firstItem="k99-Ua-RFn" firstAttribute="leading" secondItem="Dpb-7A-hEG" secondAttribute="leading" constant="20" id="C8X-tr-udk"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="KDZ-i8-4OP" secondAttribute="leading" id="Cga-qK-JHX"/>
+                                    <constraint firstAttribute="trailing" secondItem="0lM-Ur-h8r" secondAttribute="trailing" constant="74" id="E66-WO-M4u"/>
                                     <constraint firstItem="a5N-Kb-CX4" firstAttribute="top" secondItem="KDZ-i8-4OP" secondAttribute="bottom" constant="8" symbolic="YES" id="FNI-vH-Zuq"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="96" id="Frw-6h-p33"/>
-                                    <constraint firstItem="k99-Ua-RFn" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="67" id="KNs-mn-hys"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="a5N-Kb-CX4" secondAttribute="trailing" id="FZV-Ca-Ytf"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="Dpb-7A-hEG" secondAttribute="top" constant="326" id="JF2-JB-LTP"/>
+                                    <constraint firstItem="0lM-Ur-h8r" firstAttribute="leading" secondItem="bta-uh-dmM" secondAttribute="trailing" constant="10" id="Lxd-5F-3LV"/>
+                                    <constraint firstItem="k99-Ua-RFn" firstAttribute="top" secondItem="bta-uh-dmM" secondAttribute="bottom" constant="28" id="Myy-Hj-OQ2"/>
                                     <constraint firstAttribute="trailing" secondItem="M2k-WT-pS4" secondAttribute="trailing" constant="20" id="NVv-e0-Kl1"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="a5N-Kb-CX4" secondAttribute="leading" id="OQc-lb-EVZ"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="2uf-2Y-z5H" secondAttribute="leading" id="Otq-7r-OnK"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="KDZ-i8-4OP" secondAttribute="leading" id="P9Y-VX-sKO"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="k99-Ua-RFn" secondAttribute="bottom" constant="8" id="PE0-oy-l8d"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="2uf-2Y-z5H" secondAttribute="trailing" id="Poz-6F-9ZC"/>
                                     <constraint firstItem="M2k-WT-pS4" firstAttribute="top" secondItem="RFT-Tz-FBE" secondAttribute="bottom" constant="5" id="TI6-4g-exg"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="Dpb-7A-hEG" secondAttribute="top" constant="326" id="TmV-B9-VKG"/>
+                                    <constraint firstItem="0lM-Ur-h8r" firstAttribute="leading" secondItem="bta-uh-dmM" secondAttribute="trailing" constant="10" id="UMB-O4-qoo"/>
+                                    <constraint firstAttribute="centerX" secondItem="k99-Ua-RFn" secondAttribute="centerX" id="URV-hX-yKD"/>
                                     <constraint firstItem="KDZ-i8-4OP" firstAttribute="top" secondItem="Dpb-7A-hEG" secondAttribute="top" constant="20" id="Uyu-9w-zOX"/>
                                     <constraint firstAttribute="trailing" secondItem="RFT-Tz-FBE" secondAttribute="trailing" constant="20" id="ZOj-tu-Z3x"/>
                                     <constraint firstItem="RFT-Tz-FBE" firstAttribute="leading" secondItem="Dpb-7A-hEG" secondAttribute="leading" constant="20" id="arD-LC-ljU"/>
                                     <constraint firstItem="Ial-X5-VCO" firstAttribute="centerX" secondItem="Dpb-7A-hEG" secondAttribute="centerX" id="bam-kK-IKH"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="k99-Ua-RFn" secondAttribute="bottom" constant="8" id="fVe-wu-koQ"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="M2k-WT-pS4" secondAttribute="trailing" id="gj9-Hy-5Ga"/>
+                                    <constraint firstItem="bta-uh-dmM" firstAttribute="leading" secondItem="Dpb-7A-hEG" secondAttribute="leading" constant="48" id="feo-AZ-niF"/>
                                     <constraint firstItem="RFT-Tz-FBE" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="26" id="i14-77-fif"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="2uf-2Y-z5H" secondAttribute="trailing" id="jsy-fw-UUb"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ial-X5-VCO" secondAttribute="trailing" constant="20" id="keG-On-HQi"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="KDZ-i8-4OP" secondAttribute="trailing" id="mc9-IH-ZK9"/>
-                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="M2k-WT-pS4" secondAttribute="leading" id="okT-z6-NAu"/>
+                                    <constraint firstItem="k99-Ua-RFn" firstAttribute="top" secondItem="0lM-Ur-h8r" secondAttribute="bottom" constant="28" id="jn8-z4-3vq"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="M2k-WT-pS4" secondAttribute="leading" id="nca-2a-iwm"/>
                                     <constraint firstItem="2uf-2Y-z5H" firstAttribute="top" secondItem="a5N-Kb-CX4" secondAttribute="bottom" constant="8" symbolic="YES" id="p6m-i4-RoO"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="176" id="p7Y-8h-70n"/>
+                                    <constraint firstItem="bta-uh-dmM" firstAttribute="top" secondItem="M2k-WT-pS4" secondAttribute="bottom" constant="8" id="uWj-zU-OGZ"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="KDZ-i8-4OP" secondAttribute="trailing" id="yJt-cF-AWJ"/>
+                                    <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="k99-Ua-RFn" secondAttribute="leading" id="z5e-AE-nc9"/>
                                 </constraints>
                             </scrollView>
                         </subviews>

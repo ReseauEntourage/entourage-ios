@@ -44,6 +44,7 @@
 @implementation OTCreateMeetingViewController
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
 	OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
 	self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.firstName];
 
@@ -58,13 +59,19 @@
 	self.messageTextView.layer.borderColor = UIColor.lightGrayColor.CGColor;
     
 	self.playerView.isRecordingMode = YES;
+    
+    [self createSendButton];
+}
 
-	[self createSendButton];
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
 }
 
 - (void)createSendButton {
-	UIBarButtonItem *menuButton = nil;
-	menuButton = [[UIBarButtonItem alloc] init];
+	UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
+    [menuButton setTarget:self];
 	[menuButton setTitle:@"Valider"];
 	[menuButton setAction:@selector(sendEncounter:)];
 	[self.navigationItem setRightBarButtonItem:menuButton];
