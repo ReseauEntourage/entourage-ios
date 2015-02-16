@@ -482,7 +482,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a55-kR-EIf">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a55-kR-EIf">
                                 <rect key="frame" x="106" y="514" width="108" height="34"/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -497,7 +497,7 @@
                                     <action selector="closeMe:" destination="8hZ-Tf-zqI" eventType="touchUpInside" id="RiX-hj-LjL"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvn-hk-k8b">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvn-hk-k8b">
                                 <rect key="frame" x="36" y="40" width="248" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -584,13 +584,28 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3UA-It-T7u">
-                                <rect key="frame" x="106" y="480" width="108" height="30"/>
-                                <state key="normal" title="Tweeter">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4R-MB-fid">
+                                <rect key="frame" x="245" y="444" width="39" height="34"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.29019607843137252" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <inset key="imageEdgeInsets" minX="13" minY="7" maxX="13" maxY="7"/>
+                                <state key="normal" image="icon-aa-facebook.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="tweetUrlOfVocalMsg:" destination="QTd-z6-CnJ" eventType="touchUpInside" id="xhy-VE-bjQ"/>
+                                    <action selector="shareOnFacebook:" destination="QTd-z6-CnJ" eventType="touchUpInside" id="t5S-3k-sOl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3UA-It-T7u">
+                                <rect key="frame" x="245" y="405" width="39" height="34"/>
+                                <color key="backgroundColor" red="0.16862745098039217" green="0.44313725490196076" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="7" minY="7" maxX="7" maxY="7"/>
+                                <state key="normal" image="icon-aa-twitter.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareOnTwitter:" destination="QTd-z6-CnJ" eventType="touchUpInside" id="Teu-Kl-cYs"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -615,6 +630,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
+                        <outlet property="facebookButton" destination="P0j-yB-bte" id="NMz-y5-ltS"/>
                         <outlet property="player" destination="IG0-bR-TtT" id="PxZ-Vh-nZF"/>
                         <outlet property="textView" destination="rAd-Tf-8Hv" id="1Wv-JO-ZMk"/>
                         <outlet property="theirVocalMsg" destination="7mC-jA-qbE" id="eiz-aB-e6a"/>
@@ -630,6 +646,8 @@
     <resources>
         <image name="background-button.png" width="395" height="101"/>
         <image name="center-location.png" width="30" height="30"/>
+        <image name="icon-aa-facebook.png" width="15" height="32"/>
+        <image name="icon-aa-twitter.png" width="33" height="27"/>
         <image name="logo.png" width="280" height="280"/>
         <image name="menu_background.png" width="309" height="540"/>
         <image name="pointer.png" width="37" height="47"/>

@@ -33,6 +33,7 @@
 @property (strong, nonatomic) OTEncounter *encounter;
 @property (strong, nonatomic) IBOutlet UILabel *theirVocalMsg;
 @property (strong, nonatomic) IBOutlet UIButton *tweetButton;
+@property (strong, nonatomic) IBOutlet UIView *facebookButton;
 
 @end
 
@@ -68,12 +69,14 @@
 		self.player.hidden = YES;
 		self.theirVocalMsg.hidden = YES;
         self.tweetButton.hidden = YES;
+        self.facebookButton.hidden = YES;
 	}
 	else {
 		self.player.hidden = NO;
 		self.theirVocalMsg.hidden = NO;
 		self.player.isRecordingMode = NO;
         self.tweetButton.hidden = NO;
+        self.facebookButton.hidden = NO;
 		[MBProgressHUD showHUDAddedTo:self.view animated:YES];
 		[self downloadAudio];
 	}
@@ -115,7 +118,9 @@
 
 /********************************************************************************/
 #pragma mark - IBActions
-- (IBAction)tweetUrlOfVocalMsg:(id)sender {
+- (IBAction)shareOnTwitter:(id)sender {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [[OTSoundCloudService new] infosOfTrackAtUrl:self.encounter.voiceMessage
                                          withKey:@"permalink_url"
@@ -124,14 +129,36 @@
 
                                              NSString *message = [NSString stringWithFormat:@"Ecoutez le message que j'ai enregistré avec %@ par l'application Entourage : %@ #entourage @R_Entourage",self.encounter.streetPersonName, url];
                                              
-                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
                                              SLComposeViewController *tweetSheet = [SLComposeViewController
                                                                                     composeViewControllerForServiceType:SLServiceTypeTwitter];
                                              [tweetSheet setInitialText:message];
-                                             [self presentViewController:tweetSheet animated:YES completion:nil];
+                                             [self presentViewController:tweetSheet animated:YES completion:^{
+                                                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                             }];
                                         } failure: ^(NSError *error) {
                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
+}
+
+- (IBAction)shareOnFacebook:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [[OTSoundCloudService new] infosOfTrackAtUrl:self.encounter.voiceMessage
+                                         withKey:@"permalink_url"
+                                        progress: ^(CGFloat percentageProgress) {}
+                                         success: ^(NSString *url) {
+                                             
+                                             NSString *message = [NSString stringWithFormat:@"Ecoutez le message que j'ai enregistré avec %@ par l'application Entourage : %@ #entourage @Reseau_Entourage",self.encounter.streetPersonName, url];
+                                             
+                                             SLComposeViewController *facebookSheet = [SLComposeViewController
+                                                                                    composeViewControllerForServiceType:SLServiceTypeFacebook];
+                                             [facebookSheet setInitialText:message];
+                                             [self presentViewController:facebookSheet animated:YES completion:^{
+                                                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                             }];
+                                         } failure: ^(NSError *error) {
+                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                         }];
 }
 
 - (IBAction)closeMe:(id)sender {
