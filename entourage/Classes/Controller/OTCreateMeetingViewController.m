@@ -63,12 +63,6 @@
     [self createSendButton];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-
-}
-
 - (void)createSendButton {
 	UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
     [menuButton setTarget:self];
@@ -105,7 +99,7 @@
                                        progress:^(CGFloat percentageProgress) {}
                                         success:^(NSString *permanentUrl) {
                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                            NSString *message = [NSString stringWithFormat:@"Ecoutez le message que j'ai enregistré avec %@ par l'application Entourage : %@ #entourage @R_Entourage", encounter.streetPersonName, permanentUrl];
+                                            NSString *message = [NSString stringWithFormat:@"Ecoutez le message que j'ai enregistré avec %@ par l'application Entourage : %@ #entourage @R_Entour", encounter.streetPersonName, permanentUrl];
                                             [self composeTweetWithString:message];
                                         }
                                         failure:^(NSError *error) {
@@ -129,7 +123,7 @@
         [self postEncounterWithAudioFile:nil withCompletionBlock:^(OTEncounter *encounter){
             if([self.twitterShareSwitch isOn])
             {
-                NSString *message = [NSString stringWithFormat:@"J'ai rencontré %@ #entourage @R_Entourage",encounter.streetPersonName];
+                NSString *message = [NSString stringWithFormat:@"J'ai rencontré %@ #entourage @R_Entour",encounter.streetPersonName];
                 [self composeTweetWithString:message];
             }
             else
