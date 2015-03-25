@@ -33,7 +33,7 @@
 @property (strong, nonatomic) OTEncounter *encounter;
 @property (strong, nonatomic) IBOutlet UILabel *theirVocalMsg;
 @property (strong, nonatomic) IBOutlet UIButton *tweetButton;
-@property (strong, nonatomic) IBOutlet UIView *facebookButton;
+@property (strong, nonatomic) IBOutlet UIButton *facebookButton;
 
 @end
 
@@ -63,8 +63,6 @@
 
 	self.titleLabel.text = title;
 
-	NSString *body = @"";
-
 	if (encounter.voiceMessage.length == 0) {
 		self.player.hidden = YES;
 		self.theirVocalMsg.hidden = YES;
@@ -77,9 +75,10 @@
 		self.player.isRecordingMode = NO;
         self.tweetButton.hidden = NO;
         self.facebookButton.hidden = NO;
-		[MBProgressHUD showHUDAddedTo:self.view animated:YES];
 		[self downloadAudio];
 	}
+    
+    	NSString *body = @"";
 
 	if (encounter.message.length != 0) {
 		body = [NSString stringWithFormat:@"%@ :\n %@", NSLocalizedString(@"their_message", @""), encounter.message];
@@ -98,6 +97,7 @@
 }
 
 - (void)downloadAudio {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 	[[OTSoundCloudService new] downloadSoundAtURL:self.encounter.voiceMessage progress: ^(CGFloat percentageProgress) {
 	} success: ^(NSData *streamData) {
 	    [MBProgressHUD hideHUDForView:self.view animated:YES];

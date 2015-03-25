@@ -319,6 +319,13 @@
 			path = Forum;
 			sourceTree = "<group>";
 		};
+		1D1CB5061AB3158B00D94C31 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		1D6773241A77EDE300C7456C /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +454,7 @@
 		6B4930C719A773C500DA7EE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1D1CB5061AB3158B00D94C31 /* New Group */,
 				1D962C7219E9280800547687 /* Login */,
 				DBBE8AD319E85E9000FA218E /* MyMeetings */,
 				DBBE8ACB19E83CCE00FA218E /* Map */,
