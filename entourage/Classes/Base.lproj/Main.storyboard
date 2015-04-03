@@ -593,6 +593,9 @@
                                 <state key="normal" image="icon-aa-facebook.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="shareOnFacebook:" destination="QTd-z6-CnJ" eventType="touchUpInside" id="KPE-1d-jri"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3UA-It-T7u">
                                 <rect key="frame" x="245" y="405" width="39" height="34"/>

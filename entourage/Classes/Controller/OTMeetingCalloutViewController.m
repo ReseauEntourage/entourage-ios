@@ -148,7 +148,7 @@
                                         progress: ^(CGFloat percentageProgress) {}
                                          success: ^(NSString *url) {
                                              
-                                             NSString *message = [NSString stringWithFormat:@"Ecoutez le message que j'ai enregistré avec %@ par l'application Entourage : %@ #entourage @Reseau_Entourage",self.encounter.streetPersonName, url];
+                                             NSString *message = [NSString stringWithFormat:@"Ecoutez le message que j'ai enregistré avec %@ par l'application Entourage : %@ #entourage @R_Entourage",self.encounter.streetPersonName, url];
                                              
                                              SLComposeViewController *facebookSheet = [SLComposeViewController
                                                                                     composeViewControllerForServiceType:SLServiceTypeFacebook];
