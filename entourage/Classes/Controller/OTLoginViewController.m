@@ -23,9 +23,10 @@
 
 @interface OTLoginViewController () <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *validateButton;
-@property (strong, nonatomic) IBOutlet UIImageView *logoImage;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 @property (weak, nonatomic) IBOutlet UIView *whiteBackground;
 
 @end
@@ -38,10 +39,10 @@
 }
 
 - (IBAction)validateButtonDidTad:(UIButton *)sender {
-	if (self.emailTextField.text.length == 0) {
+	if (self.phoneTextField.text.length == 0) {
 		[[[UIAlertView alloc]
 		  initWithTitle:@"Connexion impossible"
-		               message:@"Veuillez renseigner une adresse email"
+		               message:@"Veuillez renseigner un numéro de téléphone"
 		              delegate:nil
 		     cancelButtonTitle:nil
 		     otherButtonTitles:@"ok",
@@ -50,7 +51,7 @@
 	else if (!self.validateForm) {
 		[[[UIAlertView alloc]
 		  initWithTitle:@"Connexion impossible"
-		               message:@"Adresse email invalide"
+		               message:@"Numéro de téléphone invalide"
 		              delegate:nil
 		     cancelButtonTitle:nil
 		     otherButtonTitles:@"ok",
@@ -62,31 +63,28 @@
 }
 
 - (BOOL)validateForm {
-	return [self.emailTextField.text isValidEmail];
+    return [self.phoneTextField.text isValidPhoneNumber];
+	//return [self.loginTextField.text isValidEmail];
 }
 
 - (void)launchAuthentication {
-	[[OTAuthService new]
-	 authWithEmail:self.emailTextField.text
-
-	       success: ^(OTUser *user)
-	{
-	    NSLog(@"User : %@ authenticated successfully", user.email);
-	    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-
-	    [self dismissViewControllerAnimated:YES completion:nil];
-	}
-
-	 failure: ^(NSError *error)
-	{
-	    [[[UIAlertView alloc]
-	      initWithTitle:@"error"
-	                   message:error.localizedDescription
-	                  delegate:nil
-	         cancelButtonTitle:nil
-	         otherButtonTitles:@"ok",
-	      nil] show];
-	}];
+    [[OTAuthService new] authWithPhone:self.phoneTextField.text
+                              password:self.passwordTextField.text
+                              deviceId:@"test"
+                               success: ^(OTUser *user) {
+                                   NSLog(@"User : %@ authenticated successfully", user.email);
+                                   [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+                                   
+                                   [self dismissViewControllerAnimated:YES completion:nil];
+                               } failure: ^(NSError *error) {
+                                   [[[UIAlertView alloc]
+                                     initWithTitle:@"error"
+                                     message:error.localizedDescription
+                                     delegate:nil
+                                     cancelButtonTitle:nil
+                                     otherButtonTitles:@"ok",
+                                     nil] show];
+                               }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

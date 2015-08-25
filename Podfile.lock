@@ -79,26 +79,26 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ReseauEntourage/CocoaSoundCloudUI.git
 
 SPEC CHECKSUMS:
-  AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
-  Base64: c6d74f31f150543b246a07e180ba813c88e59311
-  CocoaSoundCloudAPI: 34b5a94fbf8c68152b1f2bb54454984af5e6ab7f
+  AFNetworking: 96ac9bf3eda33582701cb1fcc5b896aa1e20311e
+  Base64: 4924bf3ca6fa559a5161ef717291bd450eb7bd1a
+  CocoaSoundCloudAPI: c38dfdc2e58a5690d33c998e3a796613767b4344
   CocoaSoundCloudUI: dc4027e41daec9720e7a516883a6ba83ea968e89
-  JSBadgeView: 75bec79d76e0eb01d57c9ce75b7c5ea8d6707955
-  kingpin: 080953063d3d59c07f512623879b69f63c129f84
-  MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
-  MSTranslateVendor: bf54b7003c09b1178bdc8a76d22652545ea329df
-  NXOAuth2Client: 28de3d9bde510d398e62d723a0123c500017af84
-  OCMock: ecdd510b73ef397f2f97274785c1e87fd147c49f
-  OHAttributedLabel: 733b32053cd02be1044749d394e874143e41e8d7
-  OTAppaloosa: eda4cb7c1c44bb574ef11906a0a6d48bc84cdd62
-  PMAudioRecorderViewController: 14854e3f266e18bc5c5fc67b44df8d175c431cb3
-  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
-  SFHFKeychainUtils: 6fdda05a86d035db406c7662ec1054814b68f0fd
-  SWRevealViewController: f6d80638b8e12323e87ac79562345403a799cb77
-  TPKeyboardAvoiding: 925e1e1912597d1a4956697eec3bd9656552153c
-  UIDeviceAddition: fb25767a1b5447c4e40af0ca948178c9feb9d05b
-  UIImage+BlurredFrame: 0c38f5760d72125c47d16001a88faaac573bd35d
-  uservoice-iphone-sdk: 9dc05d00656482f54bf03f793334a8f7ff070e46
-  WYPopoverController: a46116aded5979c354300ef644b9cce906ee3a57
+  JSBadgeView: 08284afc9d0eb60069674e517cac2d37d4319208
+  kingpin: e6f82f795552daf47d723aa67a3d7b86841647b3
+  MBProgressHUD: d8e7ea388dc1549a42e0d219067cf5f2c898fb66
+  MSTranslateVendor: f1c3dfce53558e3fb0c7a04e8671ac2519dbc993
+  NXOAuth2Client: 4705ee7d3532c106e2758e2f10f4e9964b5aec68
+  OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
+  OHAttributedLabel: 9b2eb99323dee6b3a81ef3bc8e98b084117bca2d
+  OTAppaloosa: d1e4353d98276bde86712878d7f371a120aba745
+  PMAudioRecorderViewController: 61c53633cadb7044ee93824eb77595a368596618
+  Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
+  SFHFKeychainUtils: 9576b411a79a058f4d5381ace6f3242b9a62e664
+  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
+  TPKeyboardAvoiding: 0a40dfbb0af7c8bdae1dd457496dccfd217d85f6
+  UIDeviceAddition: fb4bf5c91da00a0aeb394125471cff2363c58549
+  UIImage+BlurredFrame: ad2f7195c6947ea3117c7d202f75a51958d5061a
+  uservoice-iphone-sdk: 5bf627d60c6d437468b029ea382b884723efeac7
+  WYPopoverController: ef73a24738fb6aa113a9cee55c9027c8a274f3f8
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.38.2

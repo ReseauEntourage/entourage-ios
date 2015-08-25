@@ -22,44 +22,45 @@
 
 @implementation OTAuthService
 
-- (void)authWithEmail:(NSString *)email
-              success:(void (^)(OTUser *user))success
-              failure:(void (^)(NSError *error))failure {
-	NSDictionary *parameters = @{ @"email": email };
-
-	[[OTHTTPRequestManager sharedInstance]
-	 POST:@"login"
-	    parameters:parameters
-	       success: ^(AFHTTPRequestOperation *operation, id responseObject)
-	{
-	    NSDictionary *responseDict = responseObject;
-	    NSLog(@"Authentication service response : %@", responseDict);
-
-	    NSError *actualError = [self errorFromOperation:operation andError:nil];
-	    if (actualError) {
-	        NSLog(@"errorMessage %@", actualError);
-	        if (failure) {
-	            failure(actualError);
-			}
-		}
-	    else {
-	        OTUser *user = [OTUser new];
-	        NSDictionary *responseUser = responseDict[@"user"];
-	        user = [user initWithDictionary:responseUser];
-	        if (success) {
-	            success(user);
-			}
-		}
-	}
-
-	 failure: ^(AFHTTPRequestOperation *operation, NSError *error)
-	{
-	    NSError *actualError = [self errorFromOperation:operation andError:error];
-	    NSLog(@"Failed with error %@", actualError);
-	    if (failure) {
-	        failure(actualError);
-		}
-	}];
+- (void)authWithPhone:(NSString *)phone
+             password:(NSString *)password
+             deviceId:(NSString *)deviceId
+              success:(void (^)(OTUser *))success
+              failure:(void (^)(NSError *))failure
+{
+    NSDictionary *parameters = @{ @"phone": phone, @"sms_code": password, @"device_type": @"ios", @"device_id": deviceId };
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POST:@"login"
+		parameters: parameters
+     		success: ^(AFHTTPRequestOperation *operation, id responseObject)
+            {
+                NSDictionary *responseDict = responseObject;
+                NSLog(@"Authentication service response : %@", responseDict);
+                
+                NSError *actualError = [self errorFromOperation:operation andError:nil];
+                if (actualError) {
+                    NSLog(@"errorMessage %@", actualError);
+                    if (failure) {
+                        failure(actualError);
+                    }
+                }
+                else {
+                    NSDictionary *responseUser = responseDict[@"user"];
+                    OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+                    if (success) {
+                        success(user);
+                    }
+                }
+            }
+            failure: ^(AFHTTPRequestOperation *operation, NSError *error)
+            {
+                    NSError *actualError = [self errorFromOperation:operation andError:error];
+                    NSLog(@"Failed with error %@", actualError);
+                if (failure) {
+                    failure(actualError);
+                }
+            }];
 }
 
 - (NSError *)errorFromOperation:(AFHTTPRequestOperation *)operation
