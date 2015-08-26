@@ -64,7 +64,6 @@
 
 - (BOOL)validateForm {
     return [self.phoneTextField.text isValidPhoneNumber];
-	//return [self.loginTextField.text isValidEmail];
 }
 
 - (void)launchAuthentication {
