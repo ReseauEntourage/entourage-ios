@@ -421,7 +421,7 @@
                                         <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                         <connections>
-                                            <outlet property="delegate" destination="gue-eJ-8St" id="sF6-g3-Ssa"/>
+                                            <outlet property="delegate" destination="gue-eJ-8St" id="jJj-o4-6x2"/>
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2l7-dp-S41">
@@ -475,9 +475,9 @@
                         <color key="backgroundColor" red="0.14509803921568626" green="0.14509803921568626" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="loginTextField" destination="7au-hw-a4a" id="t5M-6n-JxZ"/>
                         <outlet property="logoImage" destination="tLC-R7-7Oc" id="0LU-uB-awq"/>
                         <outlet property="passwordTextField" destination="AFx-Mu-tSQ" id="eth-VT-ggX"/>
+                        <outlet property="phoneTextField" destination="7au-hw-a4a" id="kdV-tu-9iy"/>
                         <outlet property="validateButton" destination="hfc-eK-GVA" id="Zao-mv-TTH"/>
                         <outlet property="whiteBackground" destination="UDl-BA-MSm" id="2YJ-Us-mUG"/>
                     </connections>

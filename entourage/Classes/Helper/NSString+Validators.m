@@ -16,7 +16,7 @@
 
 - (BOOL)isValidPhoneNumber
 {
-	return [self matchesRegularExpression:@"^((\\+|00)33\\s?|0)[67](\\s?\\d{2}){4}$"];
+    return [self matchesRegularExpression:@"^((\\+|00)33\\s?|0)[67](\\s?\\d{2}){4}$"];
 }
 
 - (BOOL)isNotEmpty
@@ -41,6 +41,16 @@
 	NSDecimal decimal = [[formatter numberFromString:text] decimalValue];
 	NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:decimal];
 	return amount;
+}
+
+- (NSString *) phoneNumberServerRepresentation
+{
+    if ([self matchesRegularExpression:@"^(0)[67](\\s?\\d{2}){4}$"])
+    {
+        NSRange range = NSMakeRange(0, 1);
+        return [self stringByReplacingCharactersInRange:range withString:@"+33"];
+    }
+    return self;
 }
 
 /********************************************************************************/

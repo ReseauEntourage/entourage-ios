@@ -5,21 +5,20 @@ inhibit_all_warnings!
 platform :ios, '7.0'
 
 target "entourage" do
-    pod 'AFNetworking', '~> 2.3'
-    pod 'SWRevealViewController', '~> 2.3'
-    pod 'uservoice-iphone-sdk', '~> 3.2'
-    pod 'MSTranslateVendor', '~> 1.1'
-    pod 'WYPopoverController', '~> 0.3'
+    pod 'AFNetworking', '2.3'
+    pod 'SWRevealViewController', '2.3'
+    pod 'uservoice-iphone-sdk', '3.2'
+    pod 'MSTranslateVendor', '1.1'
+    pod 'WYPopoverController', '0.3'
     pod 'kingpin', '0.2.beta'
-    pod 'JSBadgeView', '~> 1.3'
+    pod 'JSBadgeView', '1.3'
     pod 'OTAppaloosa'
     pod 'CocoaSoundCloudAPI', :git => 'https://github.com/ReseauEntourage/CocoaSoundCloudAPI.git'
     pod 'CocoaSoundCloudUI', :git => 'https://github.com/ReseauEntourage/CocoaSoundCloudUI.git'
     pod 'PMAudioRecorderViewController'
-    pod 'MBProgressHUD', '~> 0.8'
+    pod 'MBProgressHUD', '0.8'
 end
 
 target "entourageTests" do
-    pod 'OCMock', '~> 3.1'
+    pod 'OCMock', '3.1'
 end
-

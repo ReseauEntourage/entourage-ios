@@ -1,6 +1,7 @@
 
 
 @interface NSString (Validators)
+@property(nonatomic, readonly) NSString *phoneNumberServerRepresentation;
 
 - (BOOL)isValidEmail;
 - (BOOL)isValidPhoneNumber;

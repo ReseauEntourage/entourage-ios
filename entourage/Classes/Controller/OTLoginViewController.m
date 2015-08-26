@@ -67,7 +67,7 @@
 }
 
 - (void)launchAuthentication {
-    [[OTAuthService new] authWithPhone:self.phoneTextField.text
+    [[OTAuthService new] authWithPhone:self.phoneTextField.text.phoneNumberServerRepresentation
                               password:self.passwordTextField.text
                               deviceId:@"test"
                                success: ^(OTUser *user) {

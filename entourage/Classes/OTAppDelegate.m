@@ -36,8 +36,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 	                                         storeToken:NSLocalizedString(@"APPALOOSA_STORE_TOKEN", @"")
 	                                        andDelegate:self];
 
-	[self configureSoundCloud];
-	[self loginToSoundCloud];
+	//[self configureSoundCloud];
+	//[self loginToSoundCloud];
 
 	[self configureUIAppearance];
 	return YES;
