@@ -23,7 +23,7 @@ NSString *const kEncounterStreetPersonName = @"street_person_name";
 NSString *const kEncounterMessage = @"message";
 NSString *const kEncounterVoiceMessage = @"voice_message";
 
-+ (OTEncounter *)encounterWithJSONDictionnary:(NSDictionary *)dictionary {
++ (OTEncounter *)encounterWithJSONDictionary:(NSDictionary *)dictionary {
 	OTEncounter *encounter = nil;
 
 	if ([dictionary isKindOfClass:[NSDictionary class]]) {

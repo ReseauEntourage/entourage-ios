@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A94B5001B8CC66100402AF3 /* OTTour.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A94B4FF1B8CC66100402AF3 /* OTTour.m */; };
+		0A94B53E1B8F194700402AF3 /* OTTourPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A94B53D1B8F194700402AF3 /* OTTourPoint.m */; };
 		1151E9D82A73565730F4A226 /* OTSoundCloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1151E10ECF78354BE0FA798D /* OTSoundCloudService.m */; };
 		191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
 		191FE91D19E93B8C00C56BCA /* OTForumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE91C19E93B8C00C56BCA /* OTForumViewController.m */; };
@@ -131,6 +132,8 @@
 /* Begin PBXFileReference section */
 		0A94B4FE1B8CC64300402AF3 /* OTTour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTour.h; sourceTree = "<group>"; };
 		0A94B4FF1B8CC66100402AF3 /* OTTour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTour.m; sourceTree = "<group>"; };
+		0A94B53C1B8F185500402AF3 /* OTTourPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourPoint.h; sourceTree = "<group>"; };
+		0A94B53D1B8F194700402AF3 /* OTTourPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourPoint.m; sourceTree = "<group>"; };
 		1151E10ECF78354BE0FA798D /* OTSoundCloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSoundCloudService.m; sourceTree = "<group>"; };
 		1151EA76F8FED97A02EAE3C1 /* OTSoundCloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSoundCloudService.h; sourceTree = "<group>"; };
 		191FE91B19E93B8C00C56BCA /* OTForumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTForumViewController.h; sourceTree = "<group>"; };
@@ -532,6 +535,8 @@
 				191FE92719E945F200C56BCA /* OTEncounter.m */,
 				0A94B4FE1B8CC64300402AF3 /* OTTour.h */,
 				0A94B4FF1B8CC66100402AF3 /* OTTour.m */,
+				0A94B53C1B8F185500402AF3 /* OTTourPoint.h */,
+				0A94B53D1B8F194700402AF3 /* OTTourPoint.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -871,6 +876,11 @@
 				TargetAttributes = {
 					6B92CA9D19A7461C004E8C9B = {
 						DevelopmentTeam = 7MA98J2NRQ;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					6B92CABE19A7461C004E8C9B = {
 						TestTargetID = 6B92CA9D19A7461C004E8C9B;
@@ -1055,6 +1065,7 @@
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
 				1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */,
+				0A94B53E1B8F194700402AF3 /* OTTourPoint.m in Sources */,
 				0A94B5001B8CC66100402AF3 /* OTTour.m in Sources */,
 				DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */,
 				6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */,

@@ -20,6 +20,8 @@
 
 // Model
 #import "OTPoi.h"
+#import "OTTour.h"
+#import "OTTourPoint.h"
 #import "OTEncounter.h"
 
 // Service
@@ -29,6 +31,7 @@
 #import <MapKit/MKMapView.h>
 #import <WYPopoverController/WYPopoverController.h>
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "KPClusteringController.h"
 #import "KPAnnotation.h"
 
@@ -37,7 +40,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, OTMeetingCalloutViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, OTMeetingCalloutViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -54,7 +57,17 @@
 
 @property (nonatomic) BOOL isRegionSetted;
 @property (nonatomic, strong) NSArray *tableData;
+
+@property (nonatomic, weak) IBOutlet UIButton *startButton;
+@property (nonatomic, weak) IBOutlet UIButton *stopButton;
+@property (nonatomic, weak) IBOutlet UIButton *createEncounterButton;
+
+@property BOOL isTourRunning;
+@property int seconds;
+@property float distance;
 @property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) NSMutableArray *locations;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -84,6 +97,15 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 //	[self refreshMap];
+    
+    self.stopButton.hidden = YES;
+    self.createEncounterButton.hidden = YES;
+    [self startLocationUpdates];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -224,6 +246,15 @@
 	[Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{ @"encounter_id" : encounterAnnotation.encounter.sid }];
 }
 
+- (void)eachSecond {
+    self.seconds++;
+    /*
+    self.timeLabel.text = [NSString stringWithFormat:@"Time: %@", [MathController stringifySecondCount:self.seconds usingLongFormat:NO]];
+    self.distLabel.text = [NSString stringWithFormat:@"Distance: %@", [MathController stringifyDistance:self.distance]];
+    self.paceLabel.text = [NSString stringWithFormat:@"Pace: %@", [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
+     */
+}
+
 /********************************************************************************/
 #pragma mark - MKMapViewDelegate
 
@@ -335,6 +366,58 @@
 	}
 }
 
+- (void)startLocationUpdates {
+    if (self.locationManager == nil) {
+        self.locationManager = [[CLLocationManager alloc] init];
+    }
+    
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.activityType = CLActivityTypeFitness;
+    
+    self.locationManager.distanceFilter = 10; // meters
+    
+    [self.locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    for (CLLocation *newLocation in locations) {
+        
+        NSDate *eventDate = newLocation.timestamp;
+        NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+        
+        if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20) {
+            
+            if (self.locations.count > 0) {
+                self.distance += [newLocation distanceFromLocation:self.locations.lastObject];
+            
+                CLLocationCoordinate2D coords[2];
+                coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
+                coords[1] = newLocation.coordinate;
+            
+                MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500);
+                [self.mapView setRegion:region animated:YES];
+            
+                
+                [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
+            }
+        
+            [self.locations addObject:newLocation];
+        }
+    }
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    if ([overlay isKindOfClass:[MKPolyline class]]) {
+        MKPolyline *polyline = (MKPolyline *) overlay;
+        MKPolylineRenderer *aRenderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
+        aRenderer.strokeColor = [UIColor blueColor];
+        aRenderer.lineWidth = 3;
+        return aRenderer;
+    }
+    return nil;
+}
+
 /********************************************************************************/
 #pragma mark - OTCalloutViewControllerDelegate
 
@@ -403,6 +486,25 @@
 	OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCreateMeetingViewController"];
 	[controller configureWithLocation:self.mapView.region.center];
 	[self.navigationController pushViewController:controller animated:YES];
+}
+
+- (IBAction)startTour:(id)sender {
+    self.startButton.hidden = YES;
+    self.stopButton.hidden = NO;
+    self.createEncounterButton.hidden = NO;
+    
+    self.seconds = 0;
+    self.distance = 0;
+    self.locations = [NSMutableArray array];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(eachSecond) userInfo:nil repeats:YES];
+    self.isTourRunning = YES;
+}
+
+- (IBAction)stopTour:(id)sender {
+    self.startButton.hidden = NO;
+    self.stopButton.hidden = YES;
+    self.createEncounterButton.hidden = YES;
+    self.isTourRunning = NO;
 }
 
 @end

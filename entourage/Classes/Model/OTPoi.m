@@ -29,7 +29,7 @@ NSString *const kImageDefaultName = @"poi_category-0";
 /**************************************************************************************************/
 #pragma mark - Birth & Death
 
-+ (OTPoi *)poiWithJSONDictionnary:(NSDictionary *)dictionary
++ (OTPoi *)poiWithJSONDictionary:(NSDictionary *)dictionary
 {
 	OTPoi *poi = nil;
 

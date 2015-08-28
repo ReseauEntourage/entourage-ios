@@ -131,7 +131,7 @@ NSString *const kAPIEncounterRoute = @"encounters";
     {
         for (NSDictionary *dictionary in jsonPois)
         {
-            OTPoi *poi = [OTPoi poiWithJSONDictionnary:dictionary];
+            OTPoi *poi = [OTPoi poiWithJSONDictionary:dictionary];
             if (poi)
             {
                 [pois addObject:poi];
@@ -151,7 +151,7 @@ NSString *const kAPIEncounterRoute = @"encounters";
     {
         for (NSDictionary *dictionary in jsonCategories)
         {
-            OTPoiCategory *category = [OTPoiCategory categoryWithJSONDictionnary:dictionary];
+            OTPoiCategory *category = [OTPoiCategory categoryWithJSONDictionary:dictionary];
             if (category)
             {
                 [categories addObject:category];
@@ -171,7 +171,7 @@ NSString *const kAPIEncounterRoute = @"encounters";
     {
         for (NSDictionary *dictionary in jsonEncounters)
         {
-            OTEncounter *encounter = [OTEncounter encounterWithJSONDictionnary:dictionary];
+            OTEncounter *encounter = [OTEncounter encounterWithJSONDictionary:dictionary];
             if (encounter)
             {
                 [encounters addObject:encounter];
@@ -188,7 +188,7 @@ NSString *const kAPIEncounterRoute = @"encounters";
 
     if ([jsonEncounters isKindOfClass:[NSDictionary class]])
     {
-        encounter = [OTEncounter encounterWithJSONDictionnary:jsonEncounters];
+        encounter = [OTEncounter encounterWithJSONDictionary:jsonEncounters];
     }
     return encounter;
 }

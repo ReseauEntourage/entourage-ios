@@ -28,7 +28,7 @@
 /********************************************************************************/
 #pragma mark - Birth & Death
 
-+ (OTPoi *)poiWithJSONDictionnary:(NSDictionary *)dictionary;
++ (OTPoi *)poiWithJSONDictionary:(NSDictionary *)dictionary;
 
 /********************************************************************************/
 #pragma mark - Utils

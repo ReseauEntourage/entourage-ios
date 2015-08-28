@@ -24,6 +24,8 @@
 	<string>1.0.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationUsageDescription</key>
+	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>UIAppFonts</key>
@@ -34,14 +36,16 @@
 		<string>Calibri-Italic.ttf</string>
 		<string>Calibri.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>NSLocationUsageDescription</key>
-	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

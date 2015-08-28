@@ -75,7 +75,8 @@
 		self.player.isRecordingMode = NO;
         self.tweetButton.hidden = NO;
         self.facebookButton.hidden = NO;
-		[self downloadAudio];
+        // TODO : doesn't work yet -> crash
+		//[self downloadAudio];
 	}
     
     	NSString *body = @"";
