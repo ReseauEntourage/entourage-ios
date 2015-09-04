@@ -7,20 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface OTTourPoint : NSObject
 
 /********************************************************************************/
 #pragma mark - Getters and Setters
 
-@property (strong, nonatomic) NSNumber *latitude;
-@property (strong, nonatomic) NSNumber *longitude;
-@property (strong, nonatomic) NSDate *date;
+@property (nonatomic) double latitude;
+@property (nonatomic) double longitude;
+@property (strong, nonatomic) NSDate *passingTime;
 
 /********************************************************************************/
 #pragma mark - Birth & Death
 
 + (OTTourPoint *)tourPointWithJSONDictionary:(NSDictionary *)dictionary;
+- (instancetype)initWithLocation:(CLLocation *)location;
 
 /********************************************************************************/
 #pragma mark - Utils

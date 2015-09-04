@@ -14,15 +14,18 @@
 #pragma mark - Getters and Setters
 
 @property (strong, nonatomic) NSNumber *sid;
-@property (strong, nonatomic) NSNumber *duration;
-@property (strong, nonatomic) NSNumber *distance;
-@property (strong, nonatomic) NSDate *date;
-@property (strong, nonatomic) NSArray *locations;
+@property (strong, nonatomic) NSString *tourType;
+@property (strong, nonatomic) NSString *vehiculeType;
+@property (strong, nonatomic) NSString *status;
+@property (strong, nonatomic) NSMutableArray *tourPoints;
+@property (strong, nonatomic) NSMutableDictionary *stats;
+@property (strong, nonatomic) NSMutableDictionary *organization;
 
 /********************************************************************************/
 #pragma mark - Birth & Death
 
 + (OTTour *)tourWithJSONDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)dictionaryForWebservice;
 
 /********************************************************************************/
 #pragma mark - Utils

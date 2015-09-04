@@ -5,6 +5,7 @@
 //  Created by Nicolas Telera on 27/08/2015.
 //  Copyright (c) 2015 OCTO Technology. All rights reserved.
 //
+#import <CoreLocation/CoreLocation.h>
 
 #import "OTTourPoint.h"
 
@@ -12,7 +13,7 @@
 
 NSString *const kTourPointLatitude = @"latitude";
 NSString *const kTourPointLongitude = @"longitude";
-NSString *const kTourPointDate = @"date";
+NSString *const kTourPointPassingTime = @"passing_time";
 
 @implementation OTTourPoint
 
@@ -27,12 +28,23 @@ NSString *const kTourPointDate = @"date";
     {
         tourPoint = [[OTTourPoint alloc] init];
         
-        tourPoint.latitude = [dictionary numberForKey:kTourPointLatitude];
-        tourPoint.longitude = [dictionary numberForKey:kTourPointLongitude];
-        tourPoint.date = [dictionary dateForKey:kTourPointDate format:@"yyyy-MM-dd HH:mm:ss"];
+        tourPoint.latitude = [[dictionary numberForKey:kTourPointLatitude] doubleValue];
+        tourPoint.longitude = [[dictionary numberForKey:kTourPointLongitude] doubleValue];
+        tourPoint.passingTime = [dictionary dateForKey:kTourPointPassingTime format:@"yyyy-MM-dd HH:mm:ss"];
     }
     
     return tourPoint;
+}
+
+- (instancetype)initWithLocation:(CLLocation *)location
+{
+    self = [super init];
+    if (self) {
+        _latitude = location.coordinate.latitude;
+        _longitude = location.coordinate.longitude;
+        _passingTime = location.timestamp;
+    }
+    return self;
 }
 
 /********************************************************************************/

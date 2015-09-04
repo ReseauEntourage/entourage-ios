@@ -26,6 +26,7 @@
 
 // Service
 #import "OTPoiService.h"
+#import "OTTourService.h"
 
 // Framework
 #import <MapKit/MKMapView.h>
@@ -42,11 +43,15 @@
 
 @interface OTMapViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, OTMeetingCalloutViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 
+// map
+
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;
 @property (weak, nonatomic) IBOutlet UIButton *listButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+// markers
 
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSArray *pois;
@@ -58,22 +63,28 @@
 @property (nonatomic) BOOL isRegionSetted;
 @property (nonatomic, strong) NSArray *tableData;
 
-@property (nonatomic, weak) IBOutlet UIButton *startButton;
-@property (nonatomic, weak) IBOutlet UIButton *stopButton;
-@property (nonatomic, weak) IBOutlet UIButton *createEncounterButton;
+// tour
 
 @property BOOL isTourRunning;
 @property int seconds;
 @property float distance;
+@property (nonatomic, strong) OTTour *tour;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray *locations;
 @property (nonatomic, strong) NSTimer *timer;
 
+// tour lifecycle
+
+@property (nonatomic, weak) IBOutlet UIView *launcherView;
+@property (nonatomic, weak) IBOutlet UIButton *launcherButton;
+@property (nonatomic, weak) IBOutlet UIButton *startButton;
+@property (nonatomic, weak) IBOutlet UIButton *stopButton;
+@property (nonatomic, weak) IBOutlet UIButton *createEncounterButton;
+@property (weak, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
+
 @end
 
 @implementation OTMapViewController
-
-
 
 /**************************************************************************************************/
 #pragma mark - Life cycle
@@ -98,8 +109,16 @@
 	[super viewWillAppear:animated];
 //	[self refreshMap];
     
-    self.stopButton.hidden = YES;
-    self.createEncounterButton.hidden = YES;
+    self.launcherView.hidden = YES;
+    if (self.isTourRunning) {
+        self.launcherButton.hidden = YES;
+        self.createEncounterButton.hidden = NO;
+        self.stopButton.hidden = NO;
+    }
+    else {
+        self.stopButton.hidden = YES;
+        self.createEncounterButton.hidden = YES;
+    }
     [self startLocationUpdates];
 }
 
@@ -255,6 +274,23 @@
      */
 }
 
+- (void)sendTour:(id)sender {
+    [[OTTourService new] sendTour:self.tour withSuccess:^(OTTour *sentTour) {
+        self.tour.sid = sentTour.sid;
+        NSLog(@"%@", @"open success");
+    } failure:^(NSError *error) {
+        NSLog(@"%@", @"open failure");
+    }];
+}
+
+- (void)closeTour:(id)sender {
+    [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
+        NSLog(@"%@", @"close success");
+    } failure:^(NSError *error) {
+        NSLog(@"%@", @"close failure");
+    }];
+}
+
 /********************************************************************************/
 #pragma mark - MKMapViewDelegate
 
@@ -375,7 +411,7 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.activityType = CLActivityTypeFitness;
     
-    self.locationManager.distanceFilter = 10; // meters
+    self.locationManager.distanceFilter = 5; // meters
     
     [self.locationManager startUpdatingLocation];
 }
@@ -394,12 +430,14 @@
                 CLLocationCoordinate2D coords[2];
                 coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
                 coords[1] = newLocation.coordinate;
-            
+        
                 MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500);
                 [self.mapView setRegion:region animated:YES];
             
-                
-                [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
+                if (self.isTourRunning) {
+                    [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
+                    [self.tour.tourPoints addObject:[[OTTourPoint alloc] initWithLocation:newLocation]];
+                }
             }
         
             [self.locations addObject:newLocation];
@@ -488,8 +526,16 @@
 	[self.navigationController pushViewController:controller animated:YES];
 }
 
+- (IBAction)launcherTour:(id)sender {
+    self.launcherButton.hidden = YES;
+    self.launcherView.hidden = NO;
+}
+
 - (IBAction)startTour:(id)sender {
-    self.startButton.hidden = YES;
+    self.tour = [OTTour new];
+    [self sendTour:self.tour];
+    
+    self.launcherView.hidden = YES;
     self.stopButton.hidden = NO;
     self.createEncounterButton.hidden = NO;
     
@@ -501,7 +547,11 @@
 }
 
 - (IBAction)stopTour:(id)sender {
-    self.startButton.hidden = NO;
+    self.tour.status = @"closed";
+    [self closeTour:self.tour];
+    
+    self.launcherView.hidden = YES;
+    self.launcherButton.hidden = NO;
     self.stopButton.hidden = YES;
     self.createEncounterButton.hidden = YES;
     self.isTourRunning = NO;

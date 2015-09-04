@@ -12,8 +12,9 @@
 
 NSString *const kKeySid = @"sid";
 NSString *const kKeyEmail = @"email";
-NSString *const kKeyToken = @"token";
 NSString *const kKeyFirstname = @"first_name";
+NSString *const kKeyLastname = @"last_name";
+NSString *const kKeyToken = @"token";
 
 @implementation OTUser
 
@@ -24,8 +25,9 @@ NSString *const kKeyFirstname = @"first_name";
 	{
 		_sid = [dictionary numberForKey:kKeySid];
 		_email = [dictionary stringForKey:kKeyEmail];
+        _firstName = [dictionary stringForKey:kKeyFirstname];
+        _lastName = [dictionary stringForKey:kKeyLastname];
 		_token = [dictionary stringForKey:kKeyToken];
-		_firstName = [dictionary stringForKey:kKeyFirstname];
 	}
 	return self;
 }
@@ -34,8 +36,9 @@ NSString *const kKeyFirstname = @"first_name";
 {
 	[encoder encodeObject:self.sid forKey:kKeySid];
 	[encoder encodeObject:self.email forKey:kKeyEmail];
+    [encoder encodeObject:self.firstName forKey:kKeyFirstname];
+    [encoder encodeObject:self.lastName forKey:kKeyLastname];
 	[encoder encodeObject:self.token forKey:kKeyToken];
-	[encoder encodeObject:self.firstName forKey:kKeyFirstname];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -44,8 +47,9 @@ NSString *const kKeyFirstname = @"first_name";
 	{
 		self.sid = [decoder decodeObjectForKey:kKeySid];
 		self.email = [decoder decodeObjectForKey:kKeyEmail];
-		self.token = [decoder decodeObjectForKey:kKeyToken];
-		self.firstName = [decoder decodeObjectForKey:kKeyFirstname];
+        self.firstName = [decoder decodeObjectForKey:kKeyFirstname];
+        self.lastName = [decoder decodeObjectForKey:kKeyLastname];
+        self.token = [decoder decodeObjectForKey:kKeyToken];
 	}
 	return self;
 }
