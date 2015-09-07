@@ -68,13 +68,22 @@ NSString *const kOrganizationAddress = @"address";
     return tour;
 }
 
-- (NSDictionary *)dictionaryForWebservice
+- (NSDictionary *)dictionaryForWebserviceTour
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
     dictionary[kTourType] = self.tourType;
     dictionary[kTourVehicule] = self.vehiculeType;
     dictionary[kTourStatus] = self.status;
+    
+    return dictionary;
+}
+
+- (NSDictionary *)dictionaryForWebserviceTourPoints
+{
+    NSMutableDictionary *dictionary = [NSMutableDictionary new];
+    
+    
     
     return dictionary;
 }

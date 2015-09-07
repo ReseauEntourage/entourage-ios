@@ -25,7 +25,8 @@
 #pragma mark - Birth & Death
 
 + (OTTour *)tourWithJSONDictionary:(NSDictionary *)dictionary;
-- (NSDictionary *)dictionaryForWebservice;
+- (NSDictionary *)dictionaryForWebserviceTour;
+- (NSDictionary *)dictionaryForWebserviceTourPoints;
 
 /********************************************************************************/
 #pragma mark - Utils

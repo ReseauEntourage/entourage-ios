@@ -72,6 +72,7 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray *locations;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSMutableArray *pointsToSend;
 
 // tour lifecycle
 
@@ -274,7 +275,7 @@
      */
 }
 
-- (void)sendTour:(id)sender {
+- (void)sendTour {
     [[OTTourService new] sendTour:self.tour withSuccess:^(OTTour *sentTour) {
         self.tour.sid = sentTour.sid;
         NSLog(@"%@", @"open success");
@@ -283,11 +284,19 @@
     }];
 }
 
-- (void)closeTour:(id)sender {
+- (void)closeTour {
     [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
         NSLog(@"%@", @"close success");
     } failure:^(NSError *error) {
         NSLog(@"%@", @"close failure");
+    }];
+}
+
+- (void)sendTourPoints:(NSMutableArray *)tourPoint {
+    [[OTTourService new] sendTourPoint:tourPoint withTourId:self.tour.sid withSuccess:^(OTTour *updatedTour) {
+        NSLog(@"%@", @"update points success");
+    } failure:^(NSError *error) {
+        NSLog(@"%@", @"update points failure");
     }];
 }
 
@@ -436,7 +445,9 @@
             
                 if (self.isTourRunning) {
                     [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
-                    [self.tour.tourPoints addObject:[[OTTourPoint alloc] initWithLocation:newLocation]];
+                    [self.pointsToSend addObject:[[OTTourPoint alloc] initWithLocation:newLocation]];
+                    [self sendTourPoints:self.pointsToSend];
+                    [self.pointsToSend removeLastObject];
                 }
             }
         
@@ -533,7 +544,8 @@
 
 - (IBAction)startTour:(id)sender {
     self.tour = [OTTour new];
-    [self sendTour:self.tour];
+    self.pointsToSend = [NSMutableArray new];
+    [self sendTour];
     
     self.launcherView.hidden = YES;
     self.stopButton.hidden = NO;
@@ -541,14 +553,15 @@
     
     self.seconds = 0;
     self.distance = 0;
-    self.locations = [NSMutableArray array];
+    self.locations = [NSMutableArray new];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(eachSecond) userInfo:nil repeats:YES];
     self.isTourRunning = YES;
 }
 
 - (IBAction)stopTour:(id)sender {
     self.tour.status = @"closed";
-    [self closeTour:self.tour];
+    [self closeTour];
+    self.pointsToSend = nil;
     
     self.launcherView.hidden = YES;
     self.launcherButton.hidden = NO;

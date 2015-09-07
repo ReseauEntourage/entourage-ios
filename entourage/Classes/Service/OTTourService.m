@@ -18,6 +18,8 @@
 
 NSString *const kTour = @"tour";
 
+NSString *const kTourPoints = @"tour_points";
+
 NSString *const kAPITourRoute = @"tours";
 
 @implementation  OTTourService
@@ -31,14 +33,14 @@ NSString *const kAPITourRoute = @"tours";
 {
     NSString *url = [NSString stringWithFormat:@"%@.json?token=%@", kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
-    parameters[kTour] = [tour dictionaryForWebservice];
+    parameters[kTour] = [tour dictionaryForWebserviceTour];
     [[OTHTTPRequestManager sharedInstance] POST:url
                                      parameters:parameters
                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                          if (success)
                                          {
-                                             OTTour *receivedTour = [self tourFromDictionary:responseObject];
-                                             success(receivedTour);
+                                             OTTour *updatedTour = [self tourFromDictionary:responseObject];
+                                             success(updatedTour);
                                          }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          if (failure)
@@ -54,14 +56,14 @@ NSString *const kAPITourRoute = @"tours";
 {
     NSString *url = [NSString stringWithFormat:@"%@/%@.json?token=%@", kAPITourRoute, [tour sid], [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
-    parameters[kTour] = [tour dictionaryForWebservice];
+    parameters[kTour] = [tour dictionaryForWebserviceTour];
     [[OTHTTPRequestManager sharedInstance] PUT:url
                                     parameters:parameters
                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                            if (success)
                                            {
-                                               OTTour *closedTour = [self tourFromDictionary:responseObject];
-                                               success(closedTour);
+                                               OTTour *updatedTour = [self tourFromDictionary:responseObject];
+                                               success(updatedTour);
                                            }
                                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                            if (failure)
@@ -69,6 +71,31 @@ NSString *const kAPITourRoute = @"tours";
                                                failure(error);
                                            }
                                        }];
+}
+
+- (void)sendTourPoint:(NSMutableArray *)tourPoints
+           withTourId:(NSNumber *)tourId
+          withSuccess:(void (^)(OTTour *updatedTour))success
+              failure:(void (^)(NSError *error))failure
+{
+    NSString *url = [NSString stringWithFormat:@"%@/%@/%@.json?token=%@", kAPITourRoute, tourId, kTourPoints, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    parameters[kTourPoints] = [OTTourPoint arrayForWebservice:tourPoints];
+    [[OTHTTPRequestManager sharedInstance] POST:url
+                                     parameters:parameters
+                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                            if (success)
+                                            {
+                                                OTTour *updatedTour = [self tourFromDictionary:responseObject];
+                                                success(updatedTour);
+                                            }
+                                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                            if (failure)
+                                            {
+                                                failure(error);
+                                            }
+                                        }];
+    
 }
 
 /**************************************************************************************************/

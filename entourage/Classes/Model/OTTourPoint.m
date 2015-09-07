@@ -47,8 +47,30 @@ NSString *const kTourPointPassingTime = @"passing_time";
     return self;
 }
 
+- (NSDictionary *)dictionaryForWebservice
+{
+    NSMutableDictionary *dictionary = [NSMutableDictionary new];
+    
+    dictionary[kTourPointLatitude] = [NSNumber numberWithDouble:self.latitude];
+    dictionary[kTourPointLongitude] = [NSNumber numberWithDouble:self.longitude];
+    dictionary[kTourPointPassingTime] = self.passingTime;
+    
+    return dictionary;
+}
+
 /********************************************************************************/
 #pragma mark - Utils
+
++ (NSArray *)arrayForWebservice:(NSArray *)tourPoints
+{
+    NSMutableArray *array = [NSMutableArray new];
+    
+    for (OTTourPoint *tourPoint in tourPoints) {
+        [array addObject:[tourPoint dictionaryForWebservice]];
+    }
+    
+    return array;
+}
 
 @end
 

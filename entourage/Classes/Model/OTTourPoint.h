@@ -23,6 +23,8 @@
 
 + (OTTourPoint *)tourPointWithJSONDictionary:(NSDictionary *)dictionary;
 - (instancetype)initWithLocation:(CLLocation *)location;
+- (NSDictionary *)dictionaryForWebservice;
++ (NSArray *)arrayForWebservice:(NSArray *)tourPoints;
 
 /********************************************************************************/
 #pragma mark - Utils

@@ -17,4 +17,6 @@
 
 - (void)closeTour:(OTTour *)tour withSuccess:(void (^)(OTTour *closedTour))success failure:(void (^)(NSError *error))failure;
 
+- (void)sendTourPoint:(NSMutableArray *)tourPoints withTourId:(NSNumber *)tourId withSuccess:(void (^)(OTTour *updatedTour))success failure:(void (^)(NSError *error))failure;
+
 @end

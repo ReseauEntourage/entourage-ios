@@ -1262,7 +1262,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 96211180E938D7D9F5B23AC5 /* Pods-entourageTests.debug.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1276,7 +1275,7 @@
 				);
 				INFOPLIST_FILE = "entourageTests/entourageTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -1285,7 +1284,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E54D38E2663076C6388D22C9 /* Pods-entourageTests.release.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1295,7 +1293,7 @@
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
 				INFOPLIST_FILE = "entourageTests/entourageTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
