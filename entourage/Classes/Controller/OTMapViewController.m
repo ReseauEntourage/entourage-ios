@@ -55,7 +55,7 @@
 
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSArray *pois;
-@property (nonatomic, strong) NSArray *encounters;
+@property (nonatomic, strong) NSMutableArray *encounters;
 
 @property (nonatomic, strong) WYPopoverController *popover;
 @property (nonatomic, strong) KPClusteringController *clusteringController;
@@ -81,7 +81,12 @@
 @property (nonatomic, weak) IBOutlet UIButton *startButton;
 @property (nonatomic, weak) IBOutlet UIButton *stopButton;
 @property (nonatomic, weak) IBOutlet UIButton *createEncounterButton;
-@property (weak, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
+
+// launcher
+
+@property (nonatomic, weak) IBOutlet UIButton *feetButton;
+@property (nonatomic, weak) IBOutlet UIButton *carButton;
+@property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *typeButtons;
 
 @end
 
@@ -92,6 +97,9 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+    self.encounters = [NSMutableArray new];
+    
 	_locationManager = [[CLLocationManager alloc] init];
 	if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
 		[self.locationManager requestWhenInUseAuthorization];
@@ -108,6 +116,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+    
 //	[self refreshMap];
     
     self.launcherView.hidden = YES;
@@ -115,6 +124,7 @@
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = NO;
         self.stopButton.hidden = NO;
+        [self feedMapViewWithEncounters];
     }
     else {
         self.stopButton.hidden = YES;
@@ -166,16 +176,15 @@
 - (void)refreshMap {
 	[[OTPoiService new] poisAroundCoordinate:self.mapView.centerCoordinate
 	                                distance:[self mapHeight]
-	                                 success: ^(NSArray *categories, NSArray *pois, NSArray *encounters)
+	                                 success: ^(NSArray *categories, NSArray *pois)
 	{
 	    [self.indicatorView setHidden:YES];
 
 	    self.categories = categories;
 	    self.pois = pois;
-	    self.encounters = encounters;
 
 	    [self feedMapViewWithPoiArray:pois];
-	    [self feedMapViewWithEncountersArray:encounters];
+	    //[self feedMapViewWithEncountersArray:encounters];
 	    [self insertCurrentAnnotationsInTableView:[self filterCurrentAnnotations:[self.mapView annotationsInMapRect:self.mapView.visibleMapRect]]];
 	}
 
@@ -205,10 +214,10 @@
 	}
 }
 
-- (void)feedMapViewWithEncountersArray:(NSArray *)array {
+- (void)feedMapViewWithEncounters {
 	NSMutableArray *annotations = [NSMutableArray new];
 
-	for (OTEncounter *encounter in array) {
+	for (OTEncounter *encounter in self.encounters) {
 		OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
 		[annotations addObject:pointAnnotation];
 	}
@@ -287,6 +296,7 @@
 - (void)closeTour {
     [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
         NSLog(@"%@", @"close success");
+        [self clearMap];
     } failure:^(NSError *error) {
         NSLog(@"%@", @"close failure");
     }];
@@ -445,7 +455,9 @@
             
                 if (self.isTourRunning) {
                     [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
-                    [self.pointsToSend addObject:[[OTTourPoint alloc] initWithLocation:newLocation]];
+                    OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:newLocation];
+                    [self.tour.tourPoints addObject:tourPoint];
+                    [self.pointsToSend addObject:tourPoint];
                     [self sendTourPoints:self.pointsToSend];
                     [self.pointsToSend removeLastObject];
                 }
@@ -465,6 +477,11 @@
         return aRenderer;
     }
     return nil;
+}
+
+- (void)clearMap {
+    [self.mapView removeOverlays:[self.mapView overlays]];
+    [self.clusteringController setAnnotations:nil];
 }
 
 /********************************************************************************/
@@ -503,6 +520,17 @@
 	[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+/********************************************************************************/
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"OTCreateMeeting"]) {
+        OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *)segue.destinationViewController;
+        [controller configureWithTourId:self.tour.sid andLocation:self.mapView.region.center];
+        controller.encounters = self.encounters;
+    }
+}
+
 /**************************************************************************************************/
 #pragma mark - Actions
 
@@ -531,19 +559,29 @@
 	[self.mapView setRegion:region animated:YES];
 }
 
-- (IBAction)createEncounter:(id)sender {
-	OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCreateMeetingViewController"];
-	[controller configureWithLocation:self.mapView.region.center];
-	[self.navigationController pushViewController:controller animated:YES];
-}
-
 - (IBAction)launcherTour:(id)sender {
     self.launcherButton.hidden = YES;
     self.launcherView.hidden = NO;
 }
 
+- (IBAction)feetButtonDidTap:(id)sender {
+    [self.feetButton setSelected:YES];
+    [self.carButton setSelected:NO];
+}
+
+- (IBAction)carButtonDidTap:(id)sender {
+    [self.carButton setSelected:YES];
+    [self.feetButton setSelected:NO];
+}
+
+- (IBAction)typeButtonDidTap:(UIView *)sender {
+    for (UIButton *button in self.typeButtons) {
+        button.selected = (button == sender);
+    }
+}
+
 - (IBAction)startTour:(id)sender {
-    self.tour = [OTTour new];
+    self.tour = [[OTTour alloc] initWithTourType:[self selectedTourType] andVehiculeType:[self selectedVehiculeType]];
     self.pointsToSend = [NSMutableArray new];
     [self sendTour];
     
@@ -561,13 +599,50 @@
 - (IBAction)stopTour:(id)sender {
     self.tour.status = @"closed";
     [self closeTour];
+    self.tour = nil;
     self.pointsToSend = nil;
+    self.encounters = nil;
+    
     
     self.launcherView.hidden = YES;
     self.launcherButton.hidden = NO;
     self.stopButton.hidden = YES;
     self.createEncounterButton.hidden = YES;
     self.isTourRunning = NO;
+}
+
+/**************************************************************************************************/
+#pragma mark - Utils
+
+- (NSString *)selectedVehiculeType {
+    if (self.feetButton.selected) {
+        return @"feet";
+    }
+    else if (self.carButton.selected) {
+        return @"car";
+    }
+    return nil;
+}
+
+- (NSString *)selectedTourType {
+    NSInteger selectedType = 0;
+    for (UIButton *button in self.typeButtons) {
+        if (button.selected) {
+            selectedType = button.tag;
+        }
+    }
+    switch (selectedType) {
+        case OTTypesSocial:
+            return @"social";
+            break;
+        case OTTypesOther:
+            return @"other";
+            break;
+        case OTTypesFood:
+            return @"food";
+            break;
+    }
+    return nil;
 }
 
 @end

@@ -11,7 +11,7 @@
 "APPALOOSA_STORE_TOKEN" = "ypt4d26acetzxivf5ynjeeqfisr9p7dr";
 "APPALOOSA_STORE_ID" = "3949";
 
-
+// Titles
 "mapviewcontroller_title" = "CARTE";
 
 // MenuItems
@@ -27,10 +27,13 @@
 "menu_translate_title" = "TRADUIRE";
 "menu_disconnect_title" = "DECONNEXION";
 
-
+// Encounters
 "has_encountered" = "a rencontré";
 "here" = "ici";
 "their_message" = "Leur message";
 "their_audio_message" = "Leur message audio";
 
 "Rencontre Entourage" = "Rencontre Entourage";
+
+
+// Tours

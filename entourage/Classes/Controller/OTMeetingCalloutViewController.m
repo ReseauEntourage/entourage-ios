@@ -63,23 +63,11 @@
 
 	self.titleLabel.text = title;
 
-	if (encounter.voiceMessage.length == 0) {
-		self.player.hidden = YES;
-		self.theirVocalMsg.hidden = YES;
-        self.tweetButton.hidden = YES;
-        self.facebookButton.hidden = YES;
-	}
-	else {
-		self.player.hidden = NO;
-		self.theirVocalMsg.hidden = NO;
-		self.player.isRecordingMode = NO;
-        self.tweetButton.hidden = NO;
-        self.facebookButton.hidden = NO;
-        // TODO : doesn't work yet -> crash
-		//[self downloadAudio];
-	}
-    
-    	NSString *body = @"";
+    self.player.hidden = YES;
+    self.theirVocalMsg.hidden = YES;
+    self.tweetButton.hidden = YES;
+    self.facebookButton.hidden = YES;
+    NSString *body = @"";
 
 	if (encounter.message.length != 0) {
 		body = [NSString stringWithFormat:@"%@ :\n %@", NSLocalizedString(@"their_message", @""), encounter.message];
@@ -99,22 +87,6 @@
 
 - (void)downloadAudio {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-	[[OTSoundCloudService new] downloadSoundAtURL:self.encounter.voiceMessage progress: ^(CGFloat percentageProgress) {
-	} success: ^(NSData *streamData) {
-	    [MBProgressHUD hideHUDForView:self.view animated:YES];
-	    self.player.hidden = NO;
-	    self.player.dowloadedFile = streamData;
-	    self.player.isRecordingMode = NO;
-	} failure: ^(NSError *error) {
-	    [MBProgressHUD hideHUDForView:self.view animated:YES];
-	    [[[UIAlertView alloc]
-	      initWithTitle:@"Audio download failed"
-	                   message:error.description
-	                  delegate:nil
-	         cancelButtonTitle:nil
-	         otherButtonTitles:@"ok",
-	      nil] show];
-	}];
 }
 
 /********************************************************************************/
@@ -123,43 +95,10 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [[OTSoundCloudService new] infosOfTrackAtUrl:self.encounter.voiceMessage
-                                         withKey:@"permalink_url"
-                                        progress: ^(CGFloat percentageProgress) {}
-                                         success: ^(NSString *url) {
-
-                                             NSString *message = [NSString stringWithFormat:@"Ecoutez le message que j'ai enregistré avec %@ par l'application Entourage : %@ #entourage @R_Entour",self.encounter.streetPersonName, url];
-                                             
-                                             SLComposeViewController *tweetSheet = [SLComposeViewController
-                                                                                    composeViewControllerForServiceType:SLServiceTypeTwitter];
-                                             [tweetSheet setInitialText:message];
-                                             [self presentViewController:tweetSheet animated:YES completion:^{
-                                                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                             }];
-                                        } failure: ^(NSError *error) {
-                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
-    }];
 }
 
 - (IBAction)shareOnFacebook:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [[OTSoundCloudService new] infosOfTrackAtUrl:self.encounter.voiceMessage
-                                         withKey:@"permalink_url"
-                                        progress: ^(CGFloat percentageProgress) {}
-                                         success: ^(NSString *url) {
-                                             
-                                             NSString *message = [NSString stringWithFormat:@"Ecoutez le message que j'ai enregistré avec %@ par l'application Entourage : %@ #entourage @R_Entourage",self.encounter.streetPersonName, url];
-                                             
-                                             SLComposeViewController *facebookSheet = [SLComposeViewController
-                                                                                    composeViewControllerForServiceType:SLServiceTypeFacebook];
-                                             [facebookSheet setInitialText:message];
-                                             [self presentViewController:facebookSheet animated:YES completion:^{
-                                                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                             }];
-                                         } failure: ^(NSError *error) {
-                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                         }];
 }
 
 - (IBAction)closeMe:(id)sender {

@@ -16,11 +16,9 @@
 /**************************************************************************************************/
 #pragma mark - Constants
 
-NSString *const kTour = @"tour";
-
-NSString *const kTourPoints = @"tour_points";
-
 NSString *const kAPITourRoute = @"tours";
+NSString *const kTour = @"tour";
+NSString *const kTourPoints = @"tour_points";
 
 @implementation  OTTourService
 

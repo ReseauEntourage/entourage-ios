@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum { OTVehiculesFeet=0, OTVehiculesCar=1 } OTVehicules;
+typedef enum { OTTypesSocial=0, OTTypesOther=1, OTTypesFood=2 } OTTypes;
+
 @interface OTTour : NSObject
 
 /********************************************************************************/
@@ -24,6 +27,7 @@
 /********************************************************************************/
 #pragma mark - Birth & Death
 
+- (id)initWithTourType:(NSString *)tourType andVehiculeType:(NSString *)vehiculeType;
 + (OTTour *)tourWithJSONDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebserviceTour;
 - (NSDictionary *)dictionaryForWebserviceTourPoints;

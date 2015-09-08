@@ -10,25 +10,20 @@
 #import "OTHTTPRequestManager.h"
 #import "OTPoiCategory.h"
 #import "OTPoi.h"
-#import "OTEncounter.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
 
 NSString *const kCategories = @"categories";
 NSString *const kPOIs = @"pois";
-NSString *const kEncounters = @"encounters";
-NSString *const kEncounter = @"encounter";
-
 NSString *const kAPIPoiRoute = @"map.json";
-NSString *const kAPIEncounterRoute = @"encounters";
 
 @implementation OTPoiService
 
 /**************************************************************************************************/
 #pragma mark - Public methods
 
-- (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois, NSArray *encounters))success
+- (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois))success
                    failure:(void (^)(NSError *error))failure
 {
     [[OTHTTPRequestManager sharedInstance] GET:kAPIPoiRoute
@@ -39,11 +34,10 @@ NSString *const kAPIEncounterRoute = @"encounters";
 
                                            NSMutableArray *categories = [self categoriesFromDictionary:data];
                                            NSMutableArray *pois = [self poisFromDictionary:data];
-                                           NSMutableArray *encounters = [self encountersFromDictionary:data];
 
                                            if (success)
                                            {
-                                               success(categories, pois, encounters);
+                                               success(categories, pois);
                                            }
                                        }
 
@@ -58,7 +52,7 @@ NSString *const kAPIEncounterRoute = @"encounters";
 
 - (void)poisAroundCoordinate:(CLLocationCoordinate2D)coordinate
                     distance:(CLLocationDistance)distance
-                     success:(void (^)(NSArray *categories, NSArray *pois, NSArray *encounters))success
+                     success:(void (^)(NSArray *categories, NSArray *pois))success
                      failure:(void (^)(NSError *error))failure
 {
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
@@ -74,11 +68,10 @@ NSString *const kAPIEncounterRoute = @"encounters";
 
                                            NSMutableArray *categories = [self categoriesFromDictionary:data];
                                            NSMutableArray *pois = [self poisFromDictionary:data];
-                                           NSMutableArray *encounters = [self encountersFromDictionary:data];
 
                                            if (success)
                                            {
-                                               success(categories, pois, encounters);
+                                               success(categories, pois);
                                            }
                                        }
 
@@ -90,33 +83,6 @@ NSString *const kAPIEncounterRoute = @"encounters";
                                            }
                                        }];
 }
-
-- (void)sendEncounter:(OTEncounter *)encounter
-          withSuccess:(void (^)(OTEncounter *receivedEncounter))success
-              failure:(void (^)(NSError *error))failure
-{
-    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
-    parameters[kEncounter] = [encounter dictionaryForWebservice];
-    [[OTHTTPRequestManager sharedInstance] POST:kAPIEncounterRoute
-                                     parameters:parameters
-                                        success:^(AFHTTPRequestOperation *operation, id responseObject)
-                                        {
-                                            if (success)
-                                            {
-                                                OTEncounter *receivedEncounter = [self encounterFromDictionary:responseObject];
-                                                success(receivedEncounter);
-                                            }
-                                        }
-
-                                        failure:^(AFHTTPRequestOperation *operation, NSError *error)
-                                        {
-                                            if (failure)
-                                            {
-                                                failure(error);
-                                            }
-                                        }];
-}
-
 
 /**************************************************************************************************/
 #pragma mark - Private methods
@@ -159,38 +125,6 @@ NSString *const kAPIEncounterRoute = @"encounters";
         }
     }
     return categories;
-}
-
-- (NSMutableArray *)encountersFromDictionary:(NSDictionary *)data
-{
-    NSMutableArray *encounters = [NSMutableArray array];
-
-    NSArray *jsonEncounters = data[kEncounters];
-
-    if ([jsonEncounters isKindOfClass:[NSArray class]])
-    {
-        for (NSDictionary *dictionary in jsonEncounters)
-        {
-            OTEncounter *encounter = [OTEncounter encounterWithJSONDictionary:dictionary];
-            if (encounter)
-            {
-                [encounters addObject:encounter];
-            }
-        }
-    }
-    return encounters;
-}
-
-- (OTEncounter *)encounterFromDictionary:(NSDictionary *)data
-{
-    OTEncounter *encounter;
-    NSDictionary *jsonEncounters = data[kEncounter];
-
-    if ([jsonEncounters isKindOfClass:[NSDictionary class]])
-    {
-        encounter = [OTEncounter encounterWithJSONDictionary:jsonEncounters];
-    }
-    return encounter;
 }
 
 @end

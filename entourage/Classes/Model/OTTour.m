@@ -50,6 +50,24 @@ NSString *const kOrganizationAddress = @"address";
     return self;
 }
 
+- (id)initWithTourType:(NSString *)tourType andVehiculeType:(NSString *)vehiculeType
+{
+    self = [super init];
+    if (self)
+    {
+        self.tourType = tourType;
+        self.vehiculeType = vehiculeType;
+        self.status = @"ongoing";
+        self.tourPoints = [NSMutableArray new];
+        self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
+        self.organization = [NSMutableDictionary dictionaryWithDictionary:@{kOrganizationName : @"",
+                                                                            kOrganizationDescription : @"",
+                                                                            kOrganizationPhone : @"",
+                                                                            kOrganizationAddress : @""}];
+    }
+    return self;
+}
+
 + (OTTour *)tourWithJSONDictionary:(NSDictionary *)dictionary
 {
     OTTour *tour = nil;

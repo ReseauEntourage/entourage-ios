@@ -11,6 +11,8 @@
 
 @class OTTour;
 
+extern NSString *const kAPITourRoute;
+
 @interface OTTourService : NSObject
 
 - (void)sendTour:(OTTour *)tour withSuccess:(void (^)(OTTour *sentTour))success failure:(void (^)(NSError *error))failure;

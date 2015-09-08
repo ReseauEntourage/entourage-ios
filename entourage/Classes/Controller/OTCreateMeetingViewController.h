@@ -13,6 +13,8 @@
 
 @interface OTCreateMeetingViewController : UIViewController
 
-- (void)configureWithLocation:(CLLocationCoordinate2D)location;
+@property (nonatomic, strong) NSMutableArray *encounters;
+
+- (void)configureWithTourId:(NSNumber *)currentTourId andLocation:(CLLocationCoordinate2D)location;
 
 @end

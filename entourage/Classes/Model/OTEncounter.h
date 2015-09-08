@@ -18,7 +18,6 @@
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *streetPersonName;
 @property (strong, nonatomic) NSString *message;
-@property (strong, nonatomic) NSString *voiceMessage;
 
 + (OTEncounter *)encounterWithJSONDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;
