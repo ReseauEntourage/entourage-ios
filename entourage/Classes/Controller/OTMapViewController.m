@@ -39,15 +39,12 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, OTMeetingCalloutViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, OTMeetingCalloutViewControllerDelegate, CLLocationManagerDelegate>
 
 // map
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIButton *mapButton;
-@property (weak, nonatomic) IBOutlet UIButton *listButton;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 // markers
 
@@ -57,7 +54,6 @@
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 
 @property (nonatomic) BOOL isRegionSetted;
-@property (nonatomic, strong) NSArray *tableData;
 
 // tour
 
@@ -145,22 +141,6 @@
 
 - (void)configureView {
 	self.title = NSLocalizedString(@"mapviewcontroller_title", @"");
-	self.tableData = [self filterCurrentAnnotations:[self.mapView annotationsInMapRect:self.mapView.visibleMapRect]];
-
-	if (self.mapButton.isSelected) {
-		[self configureMapView];
-	}
-	else if (self.listButton.isSelected) {
-		[self configureListView];
-	}
-}
-
-- (void)configureMapView {
-	[self.tableView setHidden:YES];
-}
-
-- (void)configureListView {
-	[self.tableView setHidden:NO];
 }
 
 - (void)registerObserver {
@@ -220,19 +200,6 @@
 	                       encounter.streetPersonName];
 
 	return cellTitle;
-}
-
-- (void)insertCurrentAnnotationsInTableView:(NSArray *)annotationsToAdd {
-	NSArray *indexPaths = [[NSArray alloc] init];
-	NSInteger nbAnnotationsToAdd = [annotationsToAdd count];
-
-	self.tableData = annotationsToAdd;
-
-	for (int i = 0; i < nbAnnotationsToAdd; i++) {
-		[indexPaths arrayByAddingObject:[NSIndexPath indexPathForRow:i inSection:0]];
-	}
-
-	[self.tableView reloadData];
 }
 
 - (void)displayEncounter:(OTEncounterAnnotation *)simpleAnnontation {
@@ -427,35 +394,6 @@
 }
 
 /********************************************************************************/
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [self.tableData count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *simpleTableIdentifier = @"EncounterItem";
-
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-
-	if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-	}
-
-	cell.textLabel.text = [self encounterAnnotationToString:self.tableData[(NSUInteger)indexPath.row]];
-	return cell;
-}
-
-/********************************************************************************/
-#pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	OTEncounterAnnotation *annotationToDisplay = [self.tableData objectAtIndex:[indexPath row]];
-	[self displayEncounter:annotationToDisplay];
-	[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
-
-/********************************************************************************/
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -468,18 +406,6 @@
 
 /**************************************************************************************************/
 #pragma mark - Actions
-
-- (IBAction)mapButtonDidTap:(id)sender {
-	[self.mapButton setSelected:YES];
-	[self.listButton setSelected:NO];
-	[self configureView];
-}
-
-- (IBAction)listButtonDidTap:(id)sender {
-	[self.mapButton setSelected:NO];
-	[self.listButton setSelected:YES];
-	[self configureView];
-}
 
 - (IBAction)zoomToCurrentLocation:(id)sender {
 	float spanX = 0.0001;
