@@ -10,6 +10,7 @@
 
 /* MenuItem identifiers */
 FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuMapIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuGuideIdentifier;
 FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuMyMeetingsIdentifier;
 FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuPracticalInformationIdentifier;
 FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuForumIdentifier;

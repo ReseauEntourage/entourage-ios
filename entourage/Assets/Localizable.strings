@@ -13,9 +13,11 @@
 
 // Titles
 "mapviewcontroller_title" = "CARTE";
+"guideviewcontroller_title" = "GUIDE";
 
 // MenuItems
 "menu_map_title" = "CARTE";
+"menu_guide_title" = "GUIDE";
 "menu_myMeetings_title" = "MES RECONTRES";
 "menu_practicalInformation_title" = "INFORMATIONS PRATIQUES";
 "menu_forum_title" = "FORUM";

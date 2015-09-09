@@ -26,7 +26,8 @@
 #import "NSUserDefaults+OT.h"
 
 /* MenuItem identifiers */
-NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuMapIdentifier";
+NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuIdentifierForMap";
+NSString *const OTMenuViewControllerSegueMenuGuideIdentifier = @"segueMenuIdentifierForGuide";
 NSString *const OTMenuViewControllerSegueMenuForumIdentifier = @"segueMenuForumIdentifier";
 NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
 
@@ -84,7 +85,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTLoginViewControllerIdentifier"];
 		[self presentViewController:loginViewController animated:YES completion:nil];
 	}
-	else if (indexPath.row == 1) {
+	else if (indexPath.row == 2) {
 		// Set this up once when your application launches
 		UVConfig *config = [UVConfig configWithSite:@"entourage-social.uservoice.com"];
 
@@ -179,6 +180,12 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 	[menuItems addObject:itemMap];
 
+    // Guide
+    OTMenuItem *itemGuide = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_guide_title", @"")
+                                              segueIdentifier:OTMenuViewControllerSegueMenuGuideIdentifier];
+    
+    [menuItems addObject:itemGuide];
+    
 	// Forum
 	OTMenuItem *itemForum = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_forum_title", @"")
 	                                          segueIdentifier:OTMenuViewControllerSegueMenuForumIdentifier];

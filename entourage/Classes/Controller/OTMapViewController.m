@@ -9,7 +9,6 @@
 // Controller
 #import "OTMapViewController.h"
 #import "UIViewController+menu.h"
-#import "OTCalloutViewController.h"
 #import "OTMeetingCalloutViewController.h"
 #import "OTCreateMeetingViewController.h"
 
@@ -19,29 +18,28 @@
 #import "JSBadgeView.h"
 
 // Model
-#import "OTPoi.h"
 #import "OTTour.h"
 #import "OTTourPoint.h"
 #import "OTEncounter.h"
 
 // Service
-#import "OTPoiService.h"
 #import "OTTourService.h"
 
 // Framework
-#import <MapKit/MKMapView.h>
-#import <WYPopoverController/WYPopoverController.h>
 #import <MapKit/MapKit.h>
+#import <MapKit/MKMapView.h>
 #import <CoreLocation/CoreLocation.h>
+#import <WYPopoverController/WYPopoverController.h>
 #import "KPClusteringController.h"
 #import "KPAnnotation.h"
 
+// User
 #import "NSUserDefaults+OT.h"
 
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, OTMeetingCalloutViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, OTMeetingCalloutViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 
 // map
 
@@ -53,8 +51,6 @@
 
 // markers
 
-@property (nonatomic, strong) NSArray *categories;
-@property (nonatomic, strong) NSArray *pois;
 @property (nonatomic, strong) NSMutableArray *encounters;
 
 @property (nonatomic, strong) WYPopoverController *popover;
@@ -98,6 +94,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
     
+    self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
     
 	_locationManager = [[CLLocationManager alloc] init];
@@ -117,7 +114,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
     
-//	[self refreshMap];
+	[self refreshMap];
     
     self.launcherView.hidden = YES;
     if (self.isTourRunning) {
@@ -174,25 +171,7 @@
 }
 
 - (void)refreshMap {
-	[[OTPoiService new] poisAroundCoordinate:self.mapView.centerCoordinate
-	                                distance:[self mapHeight]
-	                                 success: ^(NSArray *categories, NSArray *pois)
-	{
-	    [self.indicatorView setHidden:YES];
-
-	    self.categories = categories;
-	    self.pois = pois;
-
-	    [self feedMapViewWithPoiArray:pois];
-	    //[self feedMapViewWithEncountersArray:encounters];
-	    [self insertCurrentAnnotationsInTableView:[self filterCurrentAnnotations:[self.mapView annotationsInMapRect:self.mapView.visibleMapRect]]];
-	}
-
-	                                 failure: ^(NSError *error)
-	{
-	    [self registerObserver];
-	    [self.indicatorView setHidden:YES];
-	}];
+	// TODO: update nearby tours
 }
 
 - (CLLocationDistance)mapHeight {
@@ -207,13 +186,6 @@
 	return vDist;
 }
 
-- (void)feedMapViewWithPoiArray:(NSArray *)array {
-	for (OTPoi *poi in array) {
-		OTCustomAnnotation *pointAnnotation = [[OTCustomAnnotation alloc] initWithPoi:poi];
-		[self.mapView addAnnotation:pointAnnotation];
-	}
-}
-
 - (void)feedMapViewWithEncounters {
 	NSMutableArray *annotations = [NSMutableArray new];
 
@@ -225,6 +197,7 @@
 }
 
 - (NSArray *)filterCurrentAnnotations:(NSSet *)annots {
+    // Since POIs moved to another controller, check necessary ?
 	NSMutableArray *annotationsToAdd = [[NSMutableArray alloc] init];
 
 	for (id a in[annots allObjects]) {
@@ -304,7 +277,7 @@
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoint {
     [[OTTourService new] sendTourPoint:tourPoint withTourId:self.tour.sid withSuccess:^(OTTour *updatedTour) {
-        NSLog(@"%@", @"update points success");
+        NSLog(@"%@", @"+1 point");
     } failure:^(NSError *error) {
         NSLog(@"%@", @"update points failure");
     }];
@@ -316,16 +289,7 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation> )annotation {
 	MKAnnotationView *annotationView = nil;
 
-	if ([annotation isKindOfClass:[OTCustomAnnotation class]]) {
-		OTCustomAnnotation *customAnnotation = (OTCustomAnnotation *)annotation;
-		annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:customAnnotation.annotationIdentifier];
-
-		if (!annotationView) {
-			annotationView = customAnnotation.annotationView;
-		}
-		annotationView.annotation = annotation;
-	}
-	else if ([annotation isKindOfClass:[KPAnnotation class]]) {
+    if ([annotation isKindOfClass:[KPAnnotation class]]) {
 		KPAnnotation *kingpinAnnotation = (KPAnnotation *)annotation;
 
 		if ([kingpinAnnotation isCluster]) {
@@ -371,36 +335,7 @@
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
 	[mapView deselectAnnotation:view.annotation animated:NO];
 
-	if ([view.annotation isKindOfClass:[OTCustomAnnotation class]]) {
-		// Start up our view controller from a Storyboard
-		OTCalloutViewController *controller = (OTCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCalloutViewController"];
-		controller.delegate = self;
-
-		UIView *popView = [controller view];
-
-		popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
-
-		[UIView animateWithDuration:.3f
-		                 animations: ^
-		{
-		    popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
-		}];
-
-		OTCustomAnnotation *annotation = [((MKAnnotationView *)view)annotation];
-
-		[controller configureWithPoi:annotation.poi];
-
-		self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
-		[self.popover setTheme:[WYPopoverTheme themeForIOS7]];
-
-		[self.popover presentPopoverFromRect:view.bounds
-		                              inView:view
-		            permittedArrowDirections:WYPopoverArrowDirectionNone
-		                            animated:YES
-		                             options:WYPopoverAnimationOptionFadeWithScale];
-		[Flurry logEvent:@"Open_POI_From_Map" withParameters:@{ @"poi_id" : annotation.poi.sid }];
-	}
-	else if ([view.annotation isKindOfClass:[KPAnnotation class]]) {
+    if ([view.annotation isKindOfClass:[KPAnnotation class]]) {
 		KPAnnotation *kingpinAnnotation = (KPAnnotation *)view.annotation;
 		if ([kingpinAnnotation isCluster]) {
 			// Do nothing
@@ -582,7 +517,6 @@
 
 - (IBAction)startTour:(id)sender {
     self.tour = [[OTTour alloc] initWithTourType:[self selectedTourType] andVehiculeType:[self selectedVehiculeType]];
-    self.pointsToSend = [NSMutableArray new];
     [self sendTour];
     
     self.launcherView.hidden = YES;
@@ -600,8 +534,8 @@
     self.tour.status = @"closed";
     [self closeTour];
     self.tour = nil;
-    self.pointsToSend = nil;
-    self.encounters = nil;
+    [self.pointsToSend removeAllObjects];
+    [self.encounters removeAllObjects];
     
     
     self.launcherView.hidden = YES;
