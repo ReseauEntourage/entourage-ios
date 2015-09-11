@@ -70,7 +70,7 @@
 - (void)createSendButton {
 	UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
     [menuButton setTarget:self];
-	[menuButton setTitle:@"Valider"];
+	[menuButton setTitle:NSLocalizedString(@"button_validate", @"")];
 	[menuButton setAction:@selector(sendEncounter:)];
 	[self.navigationItem setRightBarButtonItem:menuButton];
 }
@@ -97,6 +97,7 @@
     [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId
                                 withSuccess:^(OTEncounter *sentEncounter) {
                                      if (success) {
+                                        NSLog(@"send encounter success");
                                          success(encounter);
                                      }
                                      else

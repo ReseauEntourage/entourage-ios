@@ -85,7 +85,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [self refreshMap];
-    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"currentUser"];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
 }
 
 /**************************************************************************************************/
@@ -97,7 +97,7 @@
 
 - (void)registerObserver {
     [[NSUserDefaults standardUserDefaults] addObserver:self
-                                            forKeyPath:@"currentUser"
+                                            forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")
                                                options:NSKeyValueObservingOptionNew
                                                context:nil];
 }

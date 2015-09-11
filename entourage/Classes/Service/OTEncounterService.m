@@ -30,7 +30,7 @@ NSString *const kEncounter = @"encounter";
           withSuccess:(void (^)(OTEncounter *receivedEncounter))success
               failure:(void (^)(NSError *error))failure
 {
-    NSString *url = [NSString stringWithFormat:@"%@/%@/%@.json?token=%@", kAPITourRoute, tourId, kAPIEncounterRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_encounter", @""), kAPITourRoute, tourId, kAPIEncounterRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kEncounter] = [encounter dictionaryForWebservice];
     [[OTHTTPRequestManager sharedInstance] POST:url

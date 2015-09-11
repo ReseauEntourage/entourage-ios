@@ -135,7 +135,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 	[self refreshMap];
-	[[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"currentUser"];
+	[[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
 }
 
 /**************************************************************************************************/
@@ -147,7 +147,7 @@
 
 - (void)registerObserver {
 	[[NSUserDefaults standardUserDefaults] addObserver:self
-	                                        forKeyPath:@"currentUser"
+	                                        forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")
 	                                           options:NSKeyValueObservingOptionNew
 	                                           context:nil];
 }
@@ -256,26 +256,23 @@
 - (void)sendTour {
     [[OTTourService new] sendTour:self.tour withSuccess:^(OTTour *sentTour) {
         self.tour.sid = sentTour.sid;
-        NSLog(@"%@", @"open success");
+        NSLog(@"send tour success");
     } failure:^(NSError *error) {
-        NSLog(@"%@", @"open failure");
     }];
 }
 
 - (void)closeTour {
     [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
-        NSLog(@"%@", @"close success");
         [self clearMap];
+                NSLog(@"close tour success");
     } failure:^(NSError *error) {
-        NSLog(@"%@", @"close failure");
     }];
 }
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoint {
     [[OTTourService new] sendTourPoint:tourPoint withTourId:self.tour.sid withSuccess:^(OTTour *updatedTour) {
-        NSLog(@"%@", @"+1 point");
+                NSLog(@"send point success");
     } failure:^(NSError *error) {
-        NSLog(@"%@", @"update points failure");
     }];
 }
 
@@ -486,7 +483,7 @@
 }
 
 - (IBAction)stopTour:(id)sender {
-    self.tour.status = @"closed";
+    self.tour.status = NSLocalizedString(@"tour_status_closed", @"");
     [self closeTour];
     self.tour = nil;
     [self.pointsToSend removeAllObjects];
@@ -505,10 +502,10 @@
 
 - (NSString *)selectedVehiculeType {
     if (self.feetButton.selected) {
-        return @"feet";
+        return NSLocalizedString(@"tour_vehicle_feet", @"");
     }
     else if (self.carButton.selected) {
-        return @"car";
+        return NSLocalizedString(@"tour_vehicle_car", @"");
     }
     return nil;
 }
@@ -522,13 +519,13 @@
     }
     switch (selectedType) {
         case OTTypesSocial:
-            return @"social";
+            return NSLocalizedString(@"tour_type_social", @"");
             break;
         case OTTypesOther:
-            return @"other";
+            return NSLocalizedString(@"tour_type_other", @"");
             break;
         case OTTypesFood:
-            return @"food";
+            return NSLocalizedString(@"tour_type_food", @"");
             break;
     }
     return nil;

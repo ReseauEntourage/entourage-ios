@@ -10,6 +10,7 @@
 "FLURRY_API_KEY" = "B7KH4H9T4HCY5PCR5P45";
 "APPALOOSA_STORE_TOKEN" = "ypt4d26acetzxivf5ynjeeqfisr9p7dr";
 "APPALOOSA_STORE_ID" = "3949";
+"CURRENT_USER" = "currentUser";
 
 // Titles
 "mapviewcontroller_title" = "CARTE";
@@ -37,5 +38,20 @@
 
 "Rencontre Entourage" = "Rencontre Entourage";
 
+"button_validate" = "Valider";
 
-// Tours
+// Tour
+"tour_type_social" = "social";
+"tour_type_other" = "other";
+"tour_type_food" = "food";
+"tour_vehicle_feet" = "feet";
+"tour_vehicle_car" = "car";
+"tour_status_ongoing" = "ongoing";
+"tour_status_closed" = "closed";
+
+// API
+"url_send_tour" = "%@.json?token=%@";
+"url_close_tour" = "%@/%@.json?token=%@";
+"url_send_point" = "%@/%@/%@.json?token=%@";
+"url_tours_around" = "%@.json?token=%@";
+"url_send_encounter" = "%@/%@/%@.json?token=%@";

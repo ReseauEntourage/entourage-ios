@@ -38,9 +38,9 @@ NSString *const kOrganizationAddress = @"address";
     self = [super init];
     if (self)
     {
-        self.tourType = @"social";
-        self.vehicleType = @"feet";
-        self.status = @"ongoing";
+        self.tourType = NSLocalizedString(@"tour_type_type", @"");
+        self.vehicleType = NSLocalizedString(@"tour_vehicle_feet", @"");
+        self.status = NSLocalizedString(@"tour_status_ongoing", @"");
         self.tourPoints = [NSMutableArray new];
         self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
         self.organization = [NSMutableDictionary dictionaryWithDictionary:@{kOrganizationName : @"",
@@ -58,7 +58,7 @@ NSString *const kOrganizationAddress = @"address";
     {
         self.tourType = tourType;
         self.vehicleType = vehicleType;
-        self.status = @"ongoing";
+        self.status = NSLocalizedString(@"tour_status_ongoing", @"");
         self.tourPoints = [NSMutableArray new];
         self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
         self.organization = [NSMutableDictionary dictionaryWithDictionary:@{kOrganizationName : @"",

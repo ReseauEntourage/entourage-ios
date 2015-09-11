@@ -30,7 +30,7 @@ NSString *const kTourPoints = @"tour_points";
      withSuccess:(void (^)(OTTour *receivedTour))success
          failure:(void (^)(NSError *error))failure
 {
-    NSString *url = [NSString stringWithFormat:@"%@.json?token=%@", kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_tour", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kTour] = [tour dictionaryForWebserviceTour];
     [[OTHTTPRequestManager sharedInstance] POST:url
@@ -53,7 +53,7 @@ NSString *const kTourPoints = @"tour_points";
       withSuccess:(void (^)(OTTour *closedTour))success
           failure:(void (^)(NSError *error))failure
 {
-    NSString *url = [NSString stringWithFormat:@"%@/%@.json?token=%@", kAPITourRoute, [tour sid], [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_close_tour", @""), kAPITourRoute, [tour sid], [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kTour] = [tour dictionaryForWebserviceTour];
     [[OTHTTPRequestManager sharedInstance] PUT:url
@@ -77,7 +77,7 @@ NSString *const kTourPoints = @"tour_points";
           withSuccess:(void (^)(OTTour *updatedTour))success
               failure:(void (^)(NSError *error))failure
 {
-    NSString *url = [NSString stringWithFormat:@"%@/%@/%@.json?token=%@", kAPITourRoute, tourId, kTourPoints, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_point", @""), kAPITourRoute, tourId, kTourPoints, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kTourPoints] = [OTTourPoint arrayForWebservice:tourPoints];
     [[OTHTTPRequestManager sharedInstance] POST:url
@@ -103,7 +103,7 @@ NSString *const kTourPoints = @"tour_points";
                              success:(void (^)(NSMutableArray *closeTours))success
                              failure:(void (^)(NSError *error))failure;
 {
-    NSString *url = [NSString stringWithFormat:@"%@.json?token=%@", kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tours_around", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSDictionary *parameters = @{ @"limit": limit, @"latitude": @(coordinates.latitude), @"longitude": @(coordinates.longitude), @"distance": @(distance) };
     [[OTHTTPRequestManager sharedInstance] GET:url
                                     parameters:parameters
