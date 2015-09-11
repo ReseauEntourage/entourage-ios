@@ -256,7 +256,6 @@
 - (void)sendTour {
     [[OTTourService new] sendTour:self.tour withSuccess:^(OTTour *sentTour) {
         self.tour.sid = sentTour.sid;
-        NSLog(@"send tour success");
     } failure:^(NSError *error) {
     }];
 }
@@ -264,14 +263,12 @@
 - (void)closeTour {
     [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
         [self clearMap];
-                NSLog(@"close tour success");
     } failure:^(NSError *error) {
     }];
 }
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoint {
     [[OTTourService new] sendTourPoint:tourPoint withTourId:self.tour.sid withSuccess:^(OTTour *updatedTour) {
-                NSLog(@"send point success");
     } failure:^(NSError *error) {
     }];
 }

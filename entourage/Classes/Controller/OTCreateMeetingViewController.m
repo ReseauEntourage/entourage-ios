@@ -97,16 +97,13 @@
     [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId
                                 withSuccess:^(OTEncounter *sentEncounter) {
                                      if (success) {
-                                        NSLog(@"send encounter success");
                                          success(encounter);
                                      }
                                      else
                                      {
                                          [self.navigationController popViewControllerAnimated:YES];
                                      }
-                                    NSLog(@"%@", @"encounter success");
                                  } failure:^(NSError *error) {
-                                     NSLog(@"%@", @"encounter failure");
                                  }];
 }
 
