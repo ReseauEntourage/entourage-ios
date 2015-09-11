@@ -59,6 +59,14 @@ NSString *const kTourPointPassingTime = @"passing_time";
 }
 
 /********************************************************************************/
+#pragma mark - Private methods
+
+- (CLLocation *)toLocation
+{
+    return [[CLLocation alloc] initWithLatitude:self.latitude longitude:self.longitude];
+}
+
+/********************************************************************************/
 #pragma mark - Utils
 
 + (NSArray *)arrayForWebservice:(NSArray *)tourPoints
@@ -70,6 +78,16 @@ NSString *const kTourPointPassingTime = @"passing_time";
     }
     
     return array;
+}
+
++ (NSMutableArray *)tourPointsWithJSONDictionary:(NSDictionary *)dictionary andKey:(NSString *)key
+{
+    NSMutableArray *tourPoints = [NSMutableArray new];
+    for (id parsedObject in [dictionary objectForKey:key]) {
+        OTTourPoint *point = [OTTourPoint tourPointWithJSONDictionary:parsedObject];
+        [tourPoints addObject:point];
+    }
+    return tourPoints;
 }
 
 @end

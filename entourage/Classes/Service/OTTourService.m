@@ -18,6 +18,7 @@
 
 NSString *const kAPITourRoute = @"tours";
 NSString *const kTour = @"tour";
+NSString *const kTours = @"tours";
 NSString *const kTourPoints = @"tour_points";
 
 @implementation  OTTourService
@@ -96,6 +97,33 @@ NSString *const kTourPoints = @"tour_points";
     
 }
 
+- (void)toursAroundCoordinate:(CLLocationCoordinate2D) coordinates
+                               limit:(NSNumber *)limit
+                            distance:(CLLocationDistance)distance
+                             success:(void (^)(NSMutableArray *closeTours))success
+                             failure:(void (^)(NSError *error))failure;
+{
+    NSString *url = [NSString stringWithFormat:@"%@.json?token=%@", kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSDictionary *parameters = @{ @"limit": limit, @"latitude": @(coordinates.latitude), @"longitude": @(coordinates.longitude), @"distance": @(distance) };
+    [[OTHTTPRequestManager sharedInstance] GET:url
+                                    parameters:parameters
+                                       success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                       {
+                                           NSDictionary *data = responseObject;
+                                           NSMutableArray *tours = [self toursFromDictionary:data];
+                                           
+                                           if (success)
+                                           {
+                                               success(tours);
+                                           }
+                                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                           if (failure)
+                                           {
+                                               failure(error);
+                                           }
+                                       }];
+}
+
 /**************************************************************************************************/
 #pragma mark - Private methods
 
@@ -109,6 +137,25 @@ NSString *const kTourPoints = @"tour_points";
         tour = [OTTour tourWithJSONDictionary:jsonTour];
     }
     return tour;
+}
+
+- (NSMutableArray *)toursFromDictionary:(NSDictionary *)data
+{
+    NSMutableArray *tours = [NSMutableArray new];
+    NSArray *jsonTours = data[kTours];
+    
+    if ([jsonTours isKindOfClass:[NSArray class]])
+    {
+        for (NSDictionary *dictionary in jsonTours)
+        {
+            OTTour *tour = [OTTour tourWithJSONDictionary:dictionary];
+            if (tour)
+            {
+                [tours addObject:tour];
+            }
+        }
+    }
+    return tours;
 }
 
 @end

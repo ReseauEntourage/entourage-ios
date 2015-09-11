@@ -15,8 +15,9 @@
 
 NSString *const kTourId = @"id";
 NSString *const kTourType = @"tour_type";
-NSString *const kTourVehicule = @"vehicule_type";
+NSString *const kTourVehicle = @"vehicle_type";
 NSString *const kTourStatus = @"status";
+NSString *const kTourTourPoints = @"tour_points";
 NSString *const kTourStats = @"stats";
 NSString *const kTourOrganization = @"organization";
 
@@ -38,7 +39,7 @@ NSString *const kOrganizationAddress = @"address";
     if (self)
     {
         self.tourType = @"social";
-        self.vehiculeType = @"feet";
+        self.vehicleType = @"feet";
         self.status = @"ongoing";
         self.tourPoints = [NSMutableArray new];
         self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
@@ -50,13 +51,13 @@ NSString *const kOrganizationAddress = @"address";
     return self;
 }
 
-- (id)initWithTourType:(NSString *)tourType andVehiculeType:(NSString *)vehiculeType
+- (id)initWithTourType:(NSString *)tourType andVehicleType:(NSString *)vehicleType
 {
     self = [super init];
     if (self)
     {
         self.tourType = tourType;
-        self.vehiculeType = vehiculeType;
+        self.vehicleType = vehicleType;
         self.status = @"ongoing";
         self.tourPoints = [NSMutableArray new];
         self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
@@ -78,8 +79,9 @@ NSString *const kOrganizationAddress = @"address";
         
         tour.sid = [dictionary numberForKey:kTourId];
         tour.tourType = [dictionary stringForKey:kTourType];
-        tour.vehiculeType = [dictionary stringForKey:kTourVehicule];
+        tour.vehicleType = [dictionary stringForKey:kTourVehicle];
         tour.status = [dictionary stringForKey:kTourStatus];
+        tour.tourPoints = [OTTourPoint tourPointsWithJSONDictionary:dictionary andKey:kTourTourPoints];
         //tour.stats = [dictionary ...] // TODO
     }
     
@@ -91,7 +93,7 @@ NSString *const kOrganizationAddress = @"address";
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
     dictionary[kTourType] = self.tourType;
-    dictionary[kTourVehicule] = self.vehiculeType;
+    dictionary[kTourVehicle] = self.vehicleType;
     dictionary[kTourStatus] = self.status;
     
     return dictionary;

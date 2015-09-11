@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum { OTVehiculesFeet=0, OTVehiculesCar=1 } OTVehicules;
+typedef enum { OTVehiclesFeet=0, OTVehiclesCar=1 } OTVehicles;
 typedef enum { OTTypesSocial=0, OTTypesOther=1, OTTypesFood=2 } OTTypes;
 
 @interface OTTour : NSObject
@@ -18,7 +18,7 @@ typedef enum { OTTypesSocial=0, OTTypesOther=1, OTTypesFood=2 } OTTypes;
 
 @property (strong, nonatomic) NSNumber *sid;
 @property (strong, nonatomic) NSString *tourType;
-@property (strong, nonatomic) NSString *vehiculeType;
+@property (strong, nonatomic) NSString *vehicleType;
 @property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) NSMutableArray *tourPoints;
 @property (strong, nonatomic) NSMutableDictionary *stats;
@@ -27,7 +27,7 @@ typedef enum { OTTypesSocial=0, OTTypesOther=1, OTTypesFood=2 } OTTypes;
 /********************************************************************************/
 #pragma mark - Birth & Death
 
-- (id)initWithTourType:(NSString *)tourType andVehiculeType:(NSString *)vehiculeType;
+- (id)initWithTourType:(NSString *)tourType andVehicleType:(NSString *)vehicleType;
 + (OTTour *)tourWithJSONDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebserviceTour;
 - (NSDictionary *)dictionaryForWebserviceTourPoints;

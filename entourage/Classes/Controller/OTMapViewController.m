@@ -49,10 +49,8 @@
 // markers
 
 @property (nonatomic, strong) NSMutableArray *encounters;
-
 @property (nonatomic, strong) WYPopoverController *popover;
 @property (nonatomic, strong) KPClusteringController *clusteringController;
-
 @property (nonatomic) BOOL isRegionSetted;
 
 // tour
@@ -79,6 +77,10 @@
 @property (nonatomic, weak) IBOutlet UIButton *feetButton;
 @property (nonatomic, weak) IBOutlet UIButton *carButton;
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *typeButtons;
+
+// tours
+
+@property (nonatomic, strong) NSMutableArray *tours;
 
 @end
 
@@ -151,7 +153,19 @@
 }
 
 - (void)refreshMap {
-	// TODO: update nearby tours
+    [[OTTourService new] toursAroundCoordinate:self.mapView.centerCoordinate
+                                         limit:@10
+                                      distance:[self mapHeight]
+                                       success:^(NSMutableArray *closeTours)
+                                        {
+                                            [self.indicatorView setHidden:YES];
+                                            self.tours = closeTours;
+                                            [self feedMapViewWithTours];
+                                        }
+                                       failure:^(NSError *error) {
+                                            [self registerObserver];
+                                            [self.indicatorView setHidden:YES];
+                                        }];
 }
 
 - (CLLocationDistance)mapHeight {
@@ -174,6 +188,21 @@
 		[annotations addObject:pointAnnotation];
 	}
 	[self.clusteringController setAnnotations:annotations];
+}
+
+- (void)feedMapViewWithTours {
+    for (OTTour *tour in self.tours) {
+        [self drawTour:tour];
+    }
+}
+
+- (void)drawTour:(OTTour *)tour {
+    CLLocationCoordinate2D coords[[tour.tourPoints count]];
+    int count = 0;
+    for (OTTourPoint *point in tour.tourPoints) {
+        coords[count++] = point.toLocation.coordinate;
+    }
+    [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:[tour.tourPoints count]]];
 }
 
 - (NSArray *)filterCurrentAnnotations:(NSSet *)annots {
@@ -442,7 +471,7 @@
 }
 
 - (IBAction)startTour:(id)sender {
-    self.tour = [[OTTour alloc] initWithTourType:[self selectedTourType] andVehiculeType:[self selectedVehiculeType]];
+    self.tour = [[OTTour alloc] initWithTourType:[self selectedTourType] andVehicleType:[self selectedVehiculeType]];
     [self sendTour];
     
     self.launcherView.hidden = YES;

@@ -21,4 +21,10 @@ extern NSString *const kAPITourRoute;
 
 - (void)sendTourPoint:(NSMutableArray *)tourPoints withTourId:(NSNumber *)tourId withSuccess:(void (^)(OTTour *updatedTour))success failure:(void (^)(NSError *error))failure;
 
+- (void)toursAroundCoordinate:(CLLocationCoordinate2D) coordinates
+                               limit:(NSNumber *)limit
+                            distance:(CLLocationDistance)distance
+                             success:(void (^)(NSMutableArray *closeTours))success
+                             failure:(void (^)(NSError *error))failure;
+
 @end
