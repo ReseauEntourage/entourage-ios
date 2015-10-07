@@ -12,9 +12,7 @@
 		0A94B53E1B8F194700402AF3 /* OTTourPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A94B53D1B8F194700402AF3 /* OTTourPoint.m */; };
 		0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A94B5B51B94811A00402AF3 /* OTTourService.m */; };
 		0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */; };
-		1151E9D82A73565730F4A226 /* OTSoundCloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1151E10ECF78354BE0FA798D /* OTSoundCloudService.m */; };
 		191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
-		191FE91D19E93B8C00C56BCA /* OTForumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE91C19E93B8C00C56BCA /* OTForumViewController.m */; };
 		191FE92419E943D900C56BCA /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
 		191FE92519E944C000C56BCA /* OTTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930D819A7793200DA7EE0 /* OTTestHelper.m */; };
 		191FE92819E945F200C56BCA /* OTEncounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE92719E945F200C56BCA /* OTEncounter.m */; };
@@ -38,9 +36,6 @@
 		1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D319E84E9B006A2184 /* OTUser.m */; };
 		1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
 		1D55D8D919E8514E006A2184 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */; };
-		1D6773341A77F0B600C7456C /* OTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6773331A77F0B600C7456C /* OTPlayerView.m */; };
-		1D6773361A790F9600C7456C /* OTPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D6773351A790F9600C7456C /* OTPlayerView.xib */; };
-		1D6773391A79223400C7456C /* OTAudioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6773381A79223400C7456C /* OTAudioButton.m */; };
 		1DA2911319E92F260098C01E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA2911219E92F260098C01E /* logo.png */; };
 		1DA2911519E937760098C01E /* background-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA2911419E937760098C01E /* background-button.png */; };
 		1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */; };
@@ -143,10 +138,6 @@
 		0A94B5B51B94811A00402AF3 /* OTTourService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourService.m; sourceTree = "<group>"; };
 		0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterService.h; sourceTree = "<group>"; };
 		0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounterService.m; sourceTree = "<group>"; };
-		1151E10ECF78354BE0FA798D /* OTSoundCloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSoundCloudService.m; sourceTree = "<group>"; };
-		1151EA76F8FED97A02EAE3C1 /* OTSoundCloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSoundCloudService.h; sourceTree = "<group>"; };
-		191FE91B19E93B8C00C56BCA /* OTForumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTForumViewController.h; sourceTree = "<group>"; };
-		191FE91C19E93B8C00C56BCA /* OTForumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTForumViewController.m; sourceTree = "<group>"; };
 		191FE92619E945F200C56BCA /* OTEncounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounter.h; sourceTree = "<group>"; };
 		191FE92719E945F200C56BCA /* OTEncounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounter.m; sourceTree = "<group>"; };
 		19BA509319E9587800342A36 /* OTEncounterAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterAnnotation.h; sourceTree = "<group>"; };
@@ -172,11 +163,6 @@
 		1D55D8D319E84E9B006A2184 /* OTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUser.m; sourceTree = "<group>"; };
 		1D55D8D619E8514E006A2184 /* NSDictionary+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Parsing.h"; path = "Helper/NSDictionary+Parsing.h"; sourceTree = "<group>"; };
 		1D55D8D719E8514E006A2184 /* NSDictionary+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Parsing.m"; path = "Helper/NSDictionary+Parsing.m"; sourceTree = "<group>"; };
-		1D6773321A77F0B600C7456C /* OTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPlayerView.h; sourceTree = "<group>"; };
-		1D6773331A77F0B600C7456C /* OTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPlayerView.m; sourceTree = "<group>"; };
-		1D6773351A790F9600C7456C /* OTPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTPlayerView.xib; sourceTree = "<group>"; };
-		1D6773371A79223400C7456C /* OTAudioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAudioButton.h; sourceTree = "<group>"; };
-		1D6773381A79223400C7456C /* OTAudioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAudioButton.m; sourceTree = "<group>"; };
 		1D962C6F19E9277D00547687 /* OTAuthService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAuthService.h; sourceTree = "<group>"; };
 		1D962C7019E9277D00547687 /* OTAuthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAuthService.m; sourceTree = "<group>"; };
 		1DA2911219E92F260098C01E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -325,22 +311,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		191FE91A19E93B4A00C56BCA /* Forum */ = {
-			isa = PBXGroup;
-			children = (
-				191FE91B19E93B8C00C56BCA /* OTForumViewController.h */,
-				191FE91C19E93B8C00C56BCA /* OTForumViewController.m */,
-			);
-			path = Forum;
-			sourceTree = "<group>";
-		};
-		1D1CB5061AB3158B00D94C31 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group";
-			sourceTree = "<group>";
-		};
 		1D6773241A77EDE300C7456C /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,19 +324,6 @@
 				1D1503C71A8A4D93001FD7C3 /* stop@2x.png */,
 			);
 			name = Player;
-			sourceTree = "<group>";
-		};
-		1D6773311A77F01900C7456C /* AudioPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				1D6773321A77F0B600C7456C /* OTPlayerView.h */,
-				1D6773331A77F0B600C7456C /* OTPlayerView.m */,
-				1D6773351A790F9600C7456C /* OTPlayerView.xib */,
-				1D6773371A79223400C7456C /* OTAudioButton.h */,
-				1D6773381A79223400C7456C /* OTAudioButton.m */,
-			);
-			name = AudioPlayer;
-			path = ../Controller;
 			sourceTree = "<group>";
 		};
 		1D962C7219E9280800547687 /* Login */ = {
@@ -423,8 +380,6 @@
 				1D962C7019E9277D00547687 /* OTAuthService.m */,
 				6B1A846F19E811210020FB93 /* OTPoiService.h */,
 				6B1A847019E811210020FB93 /* OTPoiService.m */,
-				1151E10ECF78354BE0FA798D /* OTSoundCloudService.m */,
-				1151EA76F8FED97A02EAE3C1 /* OTSoundCloudService.h */,
 				0A94B5B41B94810800402AF3 /* OTTourService.h */,
 				0A94B5B51B94811A00402AF3 /* OTTourService.m */,
 				0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */,
@@ -473,11 +428,9 @@
 		6B4930C719A773C500DA7EE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1D1CB5061AB3158B00D94C31 /* New Group */,
 				1D962C7219E9280800547687 /* Login */,
 				DBBE8AD319E85E9000FA218E /* MyMeetings */,
 				DBBE8ACB19E83CCE00FA218E /* Map */,
-				191FE91A19E93B4A00C56BCA /* Forum */,
 				DBE9EF2919E7D71C00031144 /* Menu */,
 			);
 			path = Controller;
@@ -655,7 +608,6 @@
 		A8E10FAB19E82A1500DF4A01 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1D6773311A77F01900C7456C /* AudioPlayer */,
 				DBBE8ACF19E857F000FA218E /* Menu */,
 				A8E10FAC19E82A4800DF4A01 /* OTCustomAnnotation.h */,
 				A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */,
@@ -886,7 +838,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = OT;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "OCTO Technology";
 				TargetAttributes = {
 					6B92CA9D19A7461C004E8C9B = {
@@ -950,7 +902,6 @@
 				19BA509919E9626000342A36 /* rencontre.png in Resources */,
 				1D1503C81A8A4D93001FD7C3 /* pause.png in Resources */,
 				DBBE8ABC19E83CB600FA218E /* ic_menu@2x.png in Resources */,
-				1D6773361A790F9600C7456C /* OTPlayerView.xib in Resources */,
 				DBBE8AC819E83CB600FA218E /* poi_category-5@2x.png in Resources */,
 				19BA509D19E987A100342A36 /* center-location@2x.png in Resources */,
 				DBBE8AC419E83CB600FA218E /* poi_category-3@2x.png in Resources */,
@@ -1072,11 +1023,9 @@
 				6B1A847119E811210020FB93 /* OTPoiService.m in Sources */,
 				DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */,
 				DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */,
-				191FE91D19E93B8C00C56BCA /* OTForumViewController.m in Sources */,
 				A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */,
 				0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */,
 				6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */,
-				1D6773341A77F0B600C7456C /* OTPlayerView.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
@@ -1094,12 +1043,10 @@
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
-				1D6773391A79223400C7456C /* OTAudioButton.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
 				1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,
-				1151E9D82A73565730F4A226 /* OTSoundCloudService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1174,6 +1121,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1241,6 +1189,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -1263,6 +1212,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c18513f5-fe37-44e9-b4c7-5ab277ed59b6";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -1286,6 +1236,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "entourageTests/entourageTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
 				WRAPPER_EXTENSION = xctest;
@@ -1304,6 +1255,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
 				INFOPLIST_FILE = "entourageTests/entourageTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
 				WRAPPER_EXTENSION = xctest;

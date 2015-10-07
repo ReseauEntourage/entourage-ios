@@ -6,18 +6,16 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
-#import "SCSoundCloud+Private.h"
 #import "OTAppDelegate.h"
 
 // Util
 #import "UIFont+entourage.h"
 #import "OTConsts.h"
 
-#import <OTAppaloosa/OTAppaloosa.h>
 
 const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 
-@interface OTAppDelegate () <UIApplicationDelegate, OTAppaloosaAgentDelegate>
+@interface OTAppDelegate () <UIApplicationDelegate>
 
 @end
 
@@ -27,19 +25,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 	[Flurry setCrashReportingEnabled:YES];
 	[Flurry startSession:NSLocalizedString(@"FLURRY_API_KEY", @"")];
 
-	[[OTAppaloosaAgent sharedAgent] feedbackControllerWithDefaultButtonAtPosition:kAppaloosaButtonPositionRightBottom
-	                                                      forRecipientsEmailArray:@[@"entourage@octo.com"]];
-	[[OTAppaloosaAgent sharedAgent] devPanelWithDefaultButtonAtPosition:kAppaloosaButtonPositionRightBottom];
-
-
-	[[OTAppaloosaAgent sharedAgent] registerWithStoreId:NSLocalizedString(@"APPALOOSA_STORE_ID", @"")
-	                                         storeToken:NSLocalizedString(@"APPALOOSA_STORE_TOKEN", @"")
-	                                        andDelegate:self];
-
-	//[self configureSoundCloud];
-	//[self loginToSoundCloud];
-
-	[self configureUIAppearance];
+    [self configureUIAppearance];
 	return YES;
 }
 
@@ -67,20 +53,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor] };
 	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
 	                                                      NSFontAttributeName                                                         : navigationBarFont } forState:UIControlStateNormal];
-}
-
-/********************************************************************************/
-#pragma mark - Configure SoundCloud
-
-- (void)loginToSoundCloud {
-	[[SCSoundCloud shared] requestAccessWithUsername:LOGIN_API_SOUNDCLOUD
-	                                        password:PASS_API_SOUNDCLOUD];
-}
-
-- (void)configureSoundCloud {
-    [SCSoundCloud setClientID:CLIENT_ID_API_SOUNDCLOUD
-	                   secret:SECRET_API_SOUNDCLOUD
-	              redirectURL:[NSURL URLWithString:@"dev-entourage-ios://oauth"]];
 }
 
 @end

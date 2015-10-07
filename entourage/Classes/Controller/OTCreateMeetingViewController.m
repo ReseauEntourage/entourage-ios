@@ -20,9 +20,6 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 
-#import "OTPlayerView.h"
-#import "OTSoundCloudService.h"
-
 // Social
 #import <Social/Social.h>
 

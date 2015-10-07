@@ -15,9 +15,6 @@
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
 
-// SoundCloud API
-#import "SCSoundCloud.h"
-
 // Model
 #import "OTUser.h"
 

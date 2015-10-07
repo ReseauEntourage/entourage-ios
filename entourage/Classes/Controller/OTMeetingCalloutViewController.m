@@ -14,12 +14,6 @@
 // Helper
 #import "NSUserDefaults+OT.h"
 
-// Player
-#import "OTPlayerView.h"
-
-// Service
-#import "OTSoundCloudService.h"
-
 // Progress HUD
 #import "MBProgressHUD.h"
 
@@ -29,7 +23,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (strong, nonatomic) IBOutlet OTPlayerView *player;
 @property (strong, nonatomic) OTEncounter *encounter;
 @property (strong, nonatomic) IBOutlet UILabel *theirVocalMsg;
 @property (strong, nonatomic) IBOutlet UIButton *tweetButton;
@@ -44,7 +37,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.player stopPlaying];
     [super viewWillDisappear:animated];
 }
 
@@ -63,7 +55,6 @@
 
 	self.titleLabel.text = title;
 
-    self.player.hidden = YES;
     self.theirVocalMsg.hidden = YES;
     self.tweetButton.hidden = YES;
     self.facebookButton.hidden = YES;
