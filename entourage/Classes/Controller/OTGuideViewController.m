@@ -249,6 +249,10 @@
     region.center.latitude = self.mapView.userLocation.coordinate.latitude;
     region.center.longitude = self.mapView.userLocation.coordinate.longitude;
     
+    if (region.center.latitude < .00001 && region.center.longitude < .00001) {
+        region.center = CLLocationCoordinate2DMake(48.856578, 2.351828);
+    }
+    
     region.span.latitudeDelta = spanX;
     region.span.longitudeDelta = spanY;
     [self.mapView setRegion:region animated:YES];

@@ -821,7 +821,7 @@
 				6B92CA9B19A7461C004E8C9B /* Frameworks */,
 				6B92CA9C19A7461C004E8C9B /* Resources */,
 				9893A6C3CA40422E81C17B55 /* Copy Pods Resources */,
-				B89903AA54D2B83E4FD3FBDA /* Embed Pods Frameworks */,
+				0DD822C5A42F4D8C880DDA5C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -841,7 +841,7 @@
 				6B92CABC19A7461C004E8C9B /* Frameworks */,
 				6B92CABD19A7461C004E8C9B /* Resources */,
 				F31EA7ACC34E7ECD786F016A /* Copy Pods Resources */,
-				5ABC42D99D4DEFF4C7291D4D /* Embed Pods Frameworks */,
+				5F659DCB8F494A09AA8EA72A /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -974,7 +974,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5ABC42D99D4DEFF4C7291D4D /* Embed Pods Frameworks */ = {
+		0DD822C5A42F4D8C880DDA5C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F659DCB8F494A09AA8EA72A /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1017,21 +1032,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B89903AA54D2B83E4FD3FBDA /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EA2C8874247C3400CC05B210 /* Check Pods Manifest.lock */ = {
