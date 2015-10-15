@@ -82,6 +82,10 @@
 		A8B3825C19E94B4300CF7184 /* poi_category-6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8B3825A19E94B4300CF7184 /* poi_category-6@2x.png */; };
 		A8B3825F19E94BB400CF7184 /* poi_category-0.png in Resources */ = {isa = PBXBuildFile; fileRef = A8B3825D19E94BB400CF7184 /* poi_category-0.png */; };
 		A8B3826019E94BB400CF7184 /* poi_category-0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8B3825E19E94BB400CF7184 /* poi_category-0@2x.png */; };
+		C22BC0721BCEB695003C2A21 /* ic_entourage.png in Resources */ = {isa = PBXBuildFile; fileRef = C22BC06E1BCEB695003C2A21 /* ic_entourage.png */; settings = {ASSET_TAGS = (); }; };
+		C22BC0731BCEB695003C2A21 /* ic_entourage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C22BC06F1BCEB695003C2A21 /* ic_entourage@2x.png */; settings = {ASSET_TAGS = (); }; };
+		C22BC0741BCEB695003C2A21 /* ic_entourage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C22BC0701BCEB695003C2A21 /* ic_entourage@3x.png */; settings = {ASSET_TAGS = (); }; };
+		C22BC0771BCF92BA003C2A21 /* ic_user_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = C22BC0761BCF92BA003C2A21 /* ic_user_photo.png */; settings = {ASSET_TAGS = (); }; };
 		DBBE8A9619E81AF600FA218E /* Calibri-Bold-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5219E7F2A800031144 /* Calibri-Bold-Italic.ttf */; };
 		DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5319E7F2A800031144 /* Calibri-Bold.ttf */; };
 		DBBE8A9819E81AF600FA218E /* Calibri-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBE9EF5419E7F2A800031144 /* Calibri-Italic.ttf */; };
@@ -237,6 +241,14 @@
 		A8B3825E19E94BB400CF7184 /* poi_category-0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poi_category-0@2x.png"; sourceTree = "<group>"; };
 		A8E10FAC19E82A4800DF4A01 /* OTCustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCustomAnnotation.h; sourceTree = "<group>"; };
 		A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCustomAnnotation.m; sourceTree = "<group>"; };
+		C22BC06E1BCEB695003C2A21 /* ic_entourage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_entourage.png; sourceTree = "<group>"; };
+		C22BC06F1BCEB695003C2A21 /* ic_entourage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_entourage@2x.png"; sourceTree = "<group>"; };
+		C22BC0701BCEB695003C2A21 /* ic_entourage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_entourage@3x.png"; sourceTree = "<group>"; };
+		C22BC0761BCF92BA003C2A21 /* ic_user_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_user_photo.png; sourceTree = "<group>"; };
+		C22BC0781BCF9355003C2A21 /* MankSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MankSans-Medium.ttf"; sourceTree = "<group>"; };
+		C22BC0791BCF9355003C2A21 /* MankSans-MediumOblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MankSans-MediumOblique.ttf"; sourceTree = "<group>"; };
+		C22BC07A1BCF9355003C2A21 /* MankSans-Oblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MankSans-Oblique.ttf"; sourceTree = "<group>"; };
+		C22BC07B1BCF9355003C2A21 /* MankSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MankSans.ttf; sourceTree = "<group>"; };
 		C73A9D64DE47F808E1B2C0F4 /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
 		DBBE8AA519E83CB600FA218E /* bg-top-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-top-header.png"; sourceTree = "<group>"; };
 		DBBE8AA619E83CB600FA218E /* bg-top-header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-top-header@2x.png"; sourceTree = "<group>"; };
@@ -644,8 +656,12 @@
 		DBBE8AA719E83CB600FA218E /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				C22BC06E1BCEB695003C2A21 /* ic_entourage.png */,
+				C22BC06F1BCEB695003C2A21 /* ic_entourage@2x.png */,
+				C22BC0701BCEB695003C2A21 /* ic_entourage@3x.png */,
 				DBBE8AA819E83CB600FA218E /* ic_menu.png */,
 				DBBE8AA919E83CB600FA218E /* ic_menu@2x.png */,
+				C22BC0761BCF92BA003C2A21 /* ic_user_photo.png */,
 				DBBE8AAA19E83CB600FA218E /* menu_background.png */,
 				DBBE8AAB19E83CB600FA218E /* menu_background@2x.png */,
 			);
@@ -780,6 +796,10 @@
 		DBE9EF4419E7EE5700031144 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				C22BC0781BCF9355003C2A21 /* MankSans-Medium.ttf */,
+				C22BC0791BCF9355003C2A21 /* MankSans-MediumOblique.ttf */,
+				C22BC07A1BCF9355003C2A21 /* MankSans-Oblique.ttf */,
+				C22BC07B1BCF9355003C2A21 /* MankSans.ttf */,
 				DBE9EF5219E7F2A800031144 /* Calibri-Bold-Italic.ttf */,
 				DBE9EF5319E7F2A800031144 /* Calibri-Bold.ttf */,
 				DBE9EF5419E7F2A800031144 /* Calibri-Italic.ttf */,
@@ -801,6 +821,7 @@
 				6B92CA9B19A7461C004E8C9B /* Frameworks */,
 				6B92CA9C19A7461C004E8C9B /* Resources */,
 				9893A6C3CA40422E81C17B55 /* Copy Pods Resources */,
+				B89903AA54D2B83E4FD3FBDA /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -820,6 +841,7 @@
 				6B92CABC19A7461C004E8C9B /* Frameworks */,
 				6B92CABD19A7461C004E8C9B /* Resources */,
 				F31EA7ACC34E7ECD786F016A /* Copy Pods Resources */,
+				5ABC42D99D4DEFF4C7291D4D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -898,6 +920,7 @@
 				1D1503CF1A8A4D93001FD7C3 /* stop@2x.png in Resources */,
 				DBE9EF4E19E7EE5700031144 /* Sofia-Regular.otf in Resources */,
 				1D1503C91A8A4D93001FD7C3 /* pause@2x.png in Resources */,
+				C22BC0731BCEB695003C2A21 /* ic_entourage@2x.png in Resources */,
 				DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */,
 				19BA509919E9626000342A36 /* rencontre.png in Resources */,
 				1D1503C81A8A4D93001FD7C3 /* pause.png in Resources */,
@@ -906,6 +929,9 @@
 				19BA509D19E987A100342A36 /* center-location@2x.png in Resources */,
 				DBBE8AC419E83CB600FA218E /* poi_category-3@2x.png in Resources */,
 				DBBE8AC919E83CB600FA218E /* poi_category-4.png in Resources */,
+				C22BC0721BCEB695003C2A21 /* ic_entourage.png in Resources */,
+				C22BC0741BCEB695003C2A21 /* ic_entourage@3x.png in Resources */,
+				C22BC0771BCF92BA003C2A21 /* ic_user_photo.png in Resources */,
 				DBBE8A9619E81AF600FA218E /* Calibri-Bold-Italic.ttf in Resources */,
 				1DBFC2411A91ECF700A3CE1F /* icon-aa-facebook.png in Resources */,
 				DBBE8AC319E83CB600FA218E /* poi_category-3.png in Resources */,
@@ -948,6 +974,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5ABC42D99D4DEFF4C7291D4D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8447845D58724A5CA61AABA4 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -976,6 +1017,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B89903AA54D2B83E4FD3FBDA /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EA2C8874247C3400CC05B210 /* Check Pods Manifest.lock */ = {

@@ -1,51 +1,48 @@
 PODS:
-  - AFNetworking (2.3.0):
-    - AFNetworking/NSURLConnection (= 2.3.0)
-    - AFNetworking/NSURLSession (= 2.3.0)
-    - AFNetworking/Reachability (= 2.3.0)
-    - AFNetworking/Security (= 2.3.0)
-    - AFNetworking/Serialization (= 2.3.0)
-    - AFNetworking/UIKit (= 2.3.0)
-  - AFNetworking/NSURLConnection (2.3.0):
+  - AFNetworking (2.6.1):
+    - AFNetworking/NSURLConnection (= 2.6.1)
+    - AFNetworking/NSURLSession (= 2.6.1)
+    - AFNetworking/Reachability (= 2.6.1)
+    - AFNetworking/Security (= 2.6.1)
+    - AFNetworking/Serialization (= 2.6.1)
+    - AFNetworking/UIKit (= 2.6.1)
+  - AFNetworking/NSURLConnection (2.6.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.3.0):
+  - AFNetworking/NSURLSession (2.6.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.3.0)
-  - AFNetworking/Security (2.3.0)
-  - AFNetworking/Serialization (2.3.0)
-  - AFNetworking/UIKit (2.3.0):
+  - AFNetworking/Reachability (2.6.1)
+  - AFNetworking/Security (2.6.1)
+  - AFNetworking/Serialization (2.6.1)
+  - AFNetworking/UIKit (2.6.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - JSBadgeView (1.3.0)
+  - JSBadgeView (1.4.1)
   - kingpin (0.2.beta)
   - MBProgressHUD (0.8)
-  - MSTranslateVendor (1.1.0)
   - OCMock (3.1)
   - SWRevealViewController (2.3.0)
-  - WYPopoverController (0.3.0)
+  - WYPopoverController (0.3.8)
 
 DEPENDENCIES:
-  - AFNetworking (= 2.3)
-  - JSBadgeView (= 1.3)
+  - AFNetworking (= 2.6.1)
+  - JSBadgeView (= 1.4.1)
   - kingpin (= 0.2.beta)
   - MBProgressHUD (= 0.8)
-  - MSTranslateVendor (= 1.1)
   - OCMock (= 3.1)
-  - SWRevealViewController (= 2.3)
-  - WYPopoverController (= 0.3)
+  - SWRevealViewController (= 2.3.0)
+  - WYPopoverController (= 0.3.8)
 
 SPEC CHECKSUMS:
-  AFNetworking: 29871543aa6e8ece4f9557efad6613c57257c93f
-  JSBadgeView: 31ee3f42931ebc753cec4422e2b55860e9f6a8bb
+  AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
+  JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
   kingpin: e6f82f795552daf47d723aa67a3d7b86841647b3
   MBProgressHUD: 8688c331cb64702283be37ab8d7d329cdd25f251
-  MSTranslateVendor: f1c3dfce53558e3fb0c7a04e8671ac2519dbc993
   OCMock: 721c11680ae2d65d67f40932777194daf7002781
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
-  WYPopoverController: 81a73c173005b91d20c20bdd7e602e990302a885
+  WYPopoverController: dda54780e1bef186464ae5a10ab9b4998c279e89
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0
