@@ -133,10 +133,11 @@
 }
 
 - (void)feedMapViewWithPoiArray:(NSArray *)array {
+    NSMutableArray *pointAnnotations = [NSMutableArray new];
     for (OTPoi *poi in array) {
-        OTCustomAnnotation *pointAnnotation = [[OTCustomAnnotation alloc] initWithPoi:poi];
-        [self.mapView addAnnotation:pointAnnotation];
+        [pointAnnotations addObject:[[OTCustomAnnotation alloc] initWithPoi:poi]];
     }
+    [self.clusteringController setAnnotations:pointAnnotations];
 }
 
 /********************************************************************************/
@@ -145,14 +146,28 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation> )annotation {
     MKAnnotationView *annotationView = nil;
     
-    if ([annotation isKindOfClass:[OTCustomAnnotation class]]) {
-        OTCustomAnnotation *customAnnotation = (OTCustomAnnotation *)annotation;
-        annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:customAnnotation.annotationIdentifier];
+    if ([annotation isKindOfClass:[KPAnnotation class]]) {
+        KPAnnotation *kingPinAnnotation = (KPAnnotation *)annotation;
         
-        if (!annotationView) {
-            annotationView = customAnnotation.annotationView;
+        if (kingPinAnnotation.isCluster)
+        {
+            annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"cluster"];
+            
+            if (annotationView == nil) {
+                annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:kingPinAnnotation reuseIdentifier:@"cluster"];
+            }
         }
-        annotationView.annotation = annotation;
+        else
+        {
+            OTCustomAnnotation *customAnnotation = (OTCustomAnnotation *)kingPinAnnotation.annotations.anyObject;
+            annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:customAnnotation.annotationIdentifier];
+            
+            if (!annotationView) {
+                annotationView = customAnnotation.annotationView;
+            }
+            annotationView.annotation = annotation;
+        }
+
     }
     
     return annotationView;
@@ -242,8 +257,8 @@
 #pragma mark - Actions
 
 - (IBAction)zoomToCurrentLocation:(id)sender {
-    float spanX = 0.0001;
-    float spanY = 0.0001;
+    float spanX = 0.01;
+    float spanY = 0.01;
     MKCoordinateRegion region;
     
     region.center.latitude = self.mapView.userLocation.coordinate.latitude;

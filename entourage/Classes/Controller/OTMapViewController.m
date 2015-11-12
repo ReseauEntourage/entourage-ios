@@ -30,8 +30,6 @@
 #import <MapKit/MKMapView.h>
 #import <CoreLocation/CoreLocation.h>
 #import <WYPopoverController/WYPopoverController.h>
-#import "KPClusteringController.h"
-#import "KPAnnotation.h"
 
 // User
 #import "NSUserDefaults+OT.h"
@@ -50,7 +48,6 @@
 
 @property (nonatomic, strong) NSMutableArray *encounters;
 @property (nonatomic, strong) WYPopoverController *popover;
-@property (nonatomic, strong) KPClusteringController *clusteringController;
 @property (nonatomic) BOOL isRegionSetted;
 
 // tour
@@ -103,7 +100,6 @@
 
 	self.mapView.showsUserLocation = YES;
 	self.mapView.delegate = self;
-	self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
 	[self zoomToCurrentLocation:nil];
 	[self createMenuButton];
 	[self configureView];
@@ -187,7 +183,6 @@
 		OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
 		[annotations addObject:pointAnnotation];
 	}
-	[self.clusteringController setAnnotations:annotations];
 }
 
 - (void)feedMapViewWithTours {
@@ -203,23 +198,6 @@
         coords[count++] = point.toLocation.coordinate;
     }
     [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:[tour.tourPoints count]]];
-}
-
-- (NSArray *)filterCurrentAnnotations:(NSSet *)annots {
-    // Since POIs moved to another controller, check necessary ?
-	NSMutableArray *annotationsToAdd = [[NSMutableArray alloc] init];
-
-	for (id a in[annots allObjects]) {
-		if ([a isKindOfClass:[KPAnnotation class]]) {
-			for (id e in[a annotations]) {
-				if ([e isKindOfClass:[OTEncounterAnnotation class]]) {
-					[annotationsToAdd addObject:e];
-				}
-			}
-		}
-	}
-
-	return annotationsToAdd;
 }
 
 - (NSString *)encounterAnnotationToString:(OTEncounterAnnotation *)annotation {
@@ -246,11 +224,6 @@
 
 - (void)eachSecond {
     self.seconds++;
-    /*
-    self.timeLabel.text = [NSString stringWithFormat:@"Time: %@", [MathController stringifySecondCount:self.seconds usingLongFormat:NO]];
-    self.distLabel.text = [NSString stringWithFormat:@"Distance: %@", [MathController stringifyDistance:self.distance]];
-    self.paceLabel.text = [NSString stringWithFormat:@"Pace: %@", [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
-     */
 }
 
 - (void)sendTour {
@@ -276,67 +249,8 @@
 /********************************************************************************/
 #pragma mark - MKMapViewDelegate
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation> )annotation {
-	MKAnnotationView *annotationView = nil;
-
-    if ([annotation isKindOfClass:[KPAnnotation class]]) {
-		KPAnnotation *kingpinAnnotation = (KPAnnotation *)annotation;
-
-		if ([kingpinAnnotation isCluster]) {
-			JSBadgeView *badgeView;
-			annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterClusterAnnotationIdentifier];
-			if (!annotationView) {
-				annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEncounterClusterAnnotationIdentifier];
-				annotationView.canShowCallout = NO;
-				annotationView.image = [UIImage imageNamed:@"rencontre.png"];
-				badgeView = [[JSBadgeView alloc] initWithParentView:annotationView alignment:JSBadgeViewAlignmentBottomCenter];
-			}
-			else {
-				for (UIView *subview in annotationView.subviews) {
-					if ([subview isKindOfClass:JSBadgeView.class]) {
-						badgeView = (JSBadgeView *)subview;
-					}
-				}
-			}
-			badgeView.badgeText = [NSString stringWithFormat:@"%lu", (unsigned long)kingpinAnnotation.annotations.count];
-		}
-		else {
-			id <MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
-			if ([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]]) {
-				annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterAnnotationIdentifier];
-				if (!annotationView) {
-					annotationView = ((OTEncounterAnnotation *)simpleAnnontation).annotationView;
-				}
-				annotationView.annotation = simpleAnnontation;
-			}
-		}
-		annotationView.canShowCallout = YES;
-	}
-
-
-	return annotationView;
-}
-
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-	[self.clusteringController refresh:animated];
 	[self refreshMap];
-}
-
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-	[mapView deselectAnnotation:view.annotation animated:NO];
-
-    if ([view.annotation isKindOfClass:[KPAnnotation class]]) {
-		KPAnnotation *kingpinAnnotation = (KPAnnotation *)view.annotation;
-		if ([kingpinAnnotation isCluster]) {
-			// Do nothing
-		}
-		else {
-			id <MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
-			if ([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]]) {
-				[self displayEncounter:(OTEncounterAnnotation *)simpleAnnontation];
-			}
-		}
-	}
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
@@ -406,7 +320,6 @@
 
 - (void)clearMap {
     [self.mapView removeOverlays:[self.mapView overlays]];
-    [self.clusteringController setAnnotations:nil];
 }
 
 /********************************************************************************/
@@ -431,8 +344,8 @@
 #pragma mark - Actions
 
 - (IBAction)zoomToCurrentLocation:(id)sender {
-	float spanX = 0.0001;
-	float spanY = 0.0001;
+	float spanX = 0.01;
+	float spanY = 0.01;
 	MKCoordinateRegion region;
 
 	region.center.latitude = self.mapView.userLocation.coordinate.latitude;
