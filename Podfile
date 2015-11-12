@@ -11,6 +11,7 @@ target "entourage" do
     pod 'kingpin', '0.2.beta'
     pod 'JSBadgeView', ‘1.4.1’
     pod 'MBProgressHUD', '0.8'
+    pod 'IQKeyboardManager', '3.3.4'
 end
 
 target "entourageTests" do

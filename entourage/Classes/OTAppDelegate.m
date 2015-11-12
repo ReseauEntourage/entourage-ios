@@ -11,7 +11,7 @@
 // Util
 #import "UIFont+entourage.h"
 #import "OTConsts.h"
-
+#import "IQKeyboardManager.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 
@@ -24,6 +24,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	[Flurry setCrashReportingEnabled:YES];
 	[Flurry startSession:NSLocalizedString(@"FLURRY_API_KEY", @"")];
+    [IQKeyboardManager sharedManager].enable = YES;
 
     [self configureUIAppearance];
 	return YES;
