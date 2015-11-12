@@ -149,16 +149,14 @@
     if ([annotation isKindOfClass:[KPAnnotation class]]) {
         KPAnnotation *kingPinAnnotation = (KPAnnotation *)annotation;
         
-        if (kingPinAnnotation.isCluster)
-        {
+        if (kingPinAnnotation.isCluster) {
             annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"cluster"];
             
             if (annotationView == nil) {
                 annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:kingPinAnnotation reuseIdentifier:@"cluster"];
             }
         }
-        else
-        {
+        else {
             OTCustomAnnotation *customAnnotation = (OTCustomAnnotation *)kingPinAnnotation.annotations.anyObject;
             annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:customAnnotation.annotationIdentifier];
             
