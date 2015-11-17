@@ -20,6 +20,9 @@
 
 @property(nonatomic, weak) id<OTConfirmationViewControllerDelegate> delegate;
 
-- (void)configureWithTour:(OTTour *)currentTour;
+- (void)configureWithTour:(OTTour *)currentTour
+       andEncountersCount:(NSNumber *)encountersCount
+              andDistance:(float)distance
+              andDuration:(NSTimeInterval)duration;
 
 @end

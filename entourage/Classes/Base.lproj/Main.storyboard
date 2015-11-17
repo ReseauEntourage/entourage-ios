@@ -246,6 +246,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="distanceLabel" destination="Z0E-tR-3gN" id="abU-ZQ-f7z"/>
+                        <outlet property="durationLabel" destination="ngu-Gg-u7k" id="Juy-F4-Ert"/>
+                        <outlet property="encountersLabel" destination="3Vg-tB-V92" id="QrY-Q0-8m7"/>
                         <outlet property="finishTourButton" destination="36A-RS-KXm" id="22P-zg-rmN"/>
                         <outlet property="resumeTourButton" destination="TOp-eS-Isc" id="e9U-N0-vfp"/>
                     </connections>
@@ -744,7 +747,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a55-kR-EIf">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a55-kR-EIf">
                                 <rect key="frame" x="106" y="514" width="108" height="34"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -760,7 +763,7 @@
                                     <action selector="closeMe:" destination="8hZ-Tf-zqI" eventType="touchUpInside" id="RiX-hj-LjL"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvn-hk-k8b">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvn-hk-k8b">
                                 <rect key="frame" x="36" y="40" width="248" height="464"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

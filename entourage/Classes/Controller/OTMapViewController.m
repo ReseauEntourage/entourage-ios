@@ -55,12 +55,12 @@
 
 @property BOOL isTourRunning;
 @property int seconds;
-@property float distance;
+@property (nonatomic) CLLocationDistance distance;
 @property (nonatomic, strong) OTTour *tour;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray *locations;
-@property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSMutableArray *pointsToSend;
+@property (nonatomic, strong) NSDate *start;
 
 // tour lifecycle
 
@@ -127,7 +127,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.timer invalidate];
+    //[self.timer invalidate];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -350,7 +350,10 @@
     } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
         OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
         controller.delegate = self;
-        [controller configureWithTour:self.tour];
+        [controller configureWithTour:self.tour
+                   andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]
+                          andDistance:self.distance
+                          andDuration:[[NSDate date] timeIntervalSinceDate:self.start]];
         
         // Modal Controller Transparent Bakground ?
         //UIViewController *viewController = segue.destinationViewController;
@@ -408,10 +411,10 @@
     self.createEncounterButton.hidden = NO;
     
     self.seconds = 0;
-    self.distance = 0;
+    self.distance = 0.0;
     self.locations = [NSMutableArray new];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(eachSecond) userInfo:nil repeats:YES];
     self.isTourRunning = YES;
+    self.start = [NSDate date];
 }
 
 - (IBAction)stopTour:(id)sender {
