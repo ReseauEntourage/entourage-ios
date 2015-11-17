@@ -11,6 +11,7 @@
 #import "UIViewController+menu.h"
 #import "OTMeetingCalloutViewController.h"
 #import "OTCreateMeetingViewController.h"
+#import "OTConfirmationViewController.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -37,7 +38,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, OTMeetingCalloutViewControllerDelegate, CLLocationManagerDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, OTMeetingCalloutViewControllerDelegate, OTConfirmationViewControllerDelegate, CLLocationManagerDelegate>
 
 // map
 
@@ -233,13 +234,6 @@
     }];
 }
 
-- (void)closeTour {
-    [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
-        [self clearMap];
-    } failure:^(NSError *error) {
-    }];
-}
-
 - (void)sendTourPoints:(NSMutableArray *)tourPoint {
     [[OTTourService new] sendTourPoint:tourPoint withTourId:self.tour.sid withSuccess:^(OTTour *updatedTour) {
     } failure:^(NSError *error) {
@@ -330,6 +324,22 @@
 }
 
 /********************************************************************************/
+#pragma mark - OTConfirmationViewControllerDelegate
+
+- (void)tourSent {
+    self.tour = nil;
+    [self.pointsToSend removeAllObjects];
+    [self.encounters removeAllObjects];
+    
+    self.launcherView.hidden = YES;
+    self.launcherButton.hidden = NO;
+    self.stopButton.hidden = YES;
+    self.createEncounterButton.hidden = YES;
+    self.isTourRunning = NO;
+    [self clearMap];
+}
+
+/********************************************************************************/
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -337,6 +347,14 @@
         OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *)segue.destinationViewController;
         [controller configureWithTourId:self.tour.sid andLocation:self.mapView.region.center];
         controller.encounters = self.encounters;
+    } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
+        OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
+        controller.delegate = self;
+        [controller configureWithTour:self.tour];
+        
+        // Modal Controller Transparent Bakground ?
+        //UIViewController *viewController = segue.destinationViewController;
+        //viewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     }
 }
 
@@ -397,18 +415,7 @@
 }
 
 - (IBAction)stopTour:(id)sender {
-    self.tour.status = NSLocalizedString(@"tour_status_closed", @"");
-    [self closeTour];
-    self.tour = nil;
-    [self.pointsToSend removeAllObjects];
-    [self.encounters removeAllObjects];
-    
-    
-    self.launcherView.hidden = YES;
-    self.launcherButton.hidden = NO;
-    self.stopButton.hidden = YES;
-    self.createEncounterButton.hidden = YES;
-    self.isTourRunning = NO;
+    [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
 }
 
 /**************************************************************************************************/
