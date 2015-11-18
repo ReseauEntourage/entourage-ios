@@ -37,6 +37,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 // UI
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UIButton *profileButton;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -126,9 +127,9 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 #pragma mark - Storyboard
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	if (![self.controllersDictionary objectForKey:segue.identifier]) {
-		[self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
-	}
+    if (![self.controllersDictionary objectForKey:segue.identifier] && [segue.identifier isEqualToString:@"OTUserProfile"]) {
+        [self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
+    }
 }
 
 /**************************************************************************************************/

@@ -19,6 +19,7 @@
 
 // Model
 #import "OTUser.h"
+#import "OTOrganization.h"
 
 @implementation OTAuthService
 

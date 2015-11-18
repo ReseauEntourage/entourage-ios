@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTOrganization.h"
 
 extern NSString *const kKeyToken;
 
@@ -17,6 +18,9 @@ extern NSString *const kKeyToken;
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSString *token;
+@property (strong, nonatomic) NSNumber *tourCount;
+@property (strong, nonatomic) NSNumber *encounterCount;
+@property (strong, nonatomic) OTOrganization *organization;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
