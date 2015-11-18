@@ -169,7 +169,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="jzv-7n-1aT"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -180,6 +180,16 @@
                                             <constraint firstAttribute="width" constant="114" id="rkp-qa-ddF"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&lt;nom&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hif-i8-jLu">
+                                        <rect key="frame" x="124" y="73" width="196" height="21"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="bfD-EE-cPp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&lt;email&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRC-SA-tBq">
                                         <rect key="frame" x="124" y="102" width="196" height="21"/>
                                         <animations/>
@@ -217,7 +227,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="lsM-3F-FGC"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -235,7 +245,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="TPx-cE-yPf"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -273,21 +283,24 @@
                                                 <rect key="frame" x="8" y="46" width="264" height="30"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirmation" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cMP-zV-sIx">
                                                 <rect key="frame" x="8" y="84" width="264" height="30"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJX-rl-ZUI">
                                                 <rect key="frame" x="61" y="129" width="158" height="44"/>
                                                 <animations/>
-                                                <color key="backgroundColor" red="0.84313725490196079" green="0.13333333333333333" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.88235294117647056" green="0.2196078431372549" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="CONFIRMER">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="updateUserInformation:" destination="imo-7q-aPw" eventType="touchUpInside" id="BgC-kF-5UO"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <animations/>
@@ -299,7 +312,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kN9-7L-aQN">
                                         <rect key="frame" x="101" y="670" width="158" height="44"/>
                                         <animations/>
-                                        <color key="backgroundColor" red="0.84313725490000002" green="0.1333333333" blue="0.090196078430000007" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.88235294117647056" green="0.2196078431372549" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="2g1-ip-5Su"/>
                                             <constraint firstAttribute="width" constant="158" id="gqY-0G-pi1"/>
@@ -307,17 +320,10 @@
                                         <state key="normal" title="ME DÉSINSCRIRE">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="unsubscribe:" destination="imo-7q-aPw" eventType="touchUpInside" id="z6a-Zi-5SC"/>
+                                        </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&lt;nom&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hif-i8-jLu">
-                                        <rect key="frame" x="124" y="73" width="196" height="21"/>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="bfD-EE-cPp"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <animations/>
                                 <constraints>
@@ -396,12 +402,17 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="800"/>
                     <connections>
+                        <outlet property="accessCodeField" destination="2uo-IV-rHP" id="DjW-DA-5rs"/>
                         <outlet property="backButton" destination="EaB-SI-3CV" id="P0g-wl-wPB"/>
+                        <outlet property="confirmationField" destination="cMP-zV-sIx" id="doC-CJ-87t"/>
+                        <outlet property="emailField" destination="0s0-77-pP1" id="gj8-fH-r2r"/>
                         <outlet property="emailLabel" destination="jRC-SA-tBq" id="iVw-GN-g8r"/>
                         <outlet property="encountersLabel" destination="MAW-1t-Oqh" id="Rde-sU-6pk"/>
                         <outlet property="nameLabel" destination="hif-i8-jLu" id="Rpn-0F-9rL"/>
                         <outlet property="organizationLabel" destination="jfX-tI-uoO" id="nze-UU-Y1V"/>
                         <outlet property="toursLabel" destination="dA8-42-kj2" id="8x1-rL-fRA"/>
+                        <outlet property="unsubscribeButton" destination="kN9-7L-aQN" id="GAB-Iw-eN9"/>
+                        <outlet property="updateButton" destination="DJX-rl-ZUI" id="qqg-Dk-XgH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zYw-vN-Dix" userLabel="First Responder" sceneMemberID="firstResponder"/>

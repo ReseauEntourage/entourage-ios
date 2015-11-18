@@ -55,3 +55,4 @@
 "url_send_point" = "%@/%@/%@.json?token=%@";
 "url_tours_around" = "%@.json?token=%@";
 "url_send_encounter" = "%@/%@/%@.json?token=%@";
+"url_update_user" = "%@/%@.json?token=%@";

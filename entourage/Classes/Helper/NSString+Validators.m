@@ -9,9 +9,9 @@
 
 - (BOOL)isValidEmail
 {
-	NSString *stricterFilterString = @"^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,4})$";
-
-	return [self matchesRegularExpression:stricterFilterString];
+    NSString *stricterFilterString = @"^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,4})$";
+    
+    return [self matchesRegularExpression:stricterFilterString];
 }
 
 - (BOOL)isValidPhoneNumber

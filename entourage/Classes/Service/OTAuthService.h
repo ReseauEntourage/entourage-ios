@@ -15,4 +15,10 @@
              deviceId:(NSString *)deviceId
               success:(void (^)(OTUser *user))success
               failure:(void (^)(NSError *error))failure;
+
+- (void)updateUserInformationWithEmail:(NSString *)email
+                            andSmsCode:(NSString *)smsCode
+                               success:(void (^)(NSString *user))success
+                               failure:(void (^)(NSError *error))failure;
+
 @end

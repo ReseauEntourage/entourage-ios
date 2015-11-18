@@ -16,10 +16,20 @@
 
 // Helper
 #import "NSUserDefaults+OT.h"
+#import "NSDictionary+Parsing.h"
 
 // Model
 #import "OTUser.h"
 #import "OTOrganization.h"
+
+/**************************************************************************************************/
+#pragma mark - Constants
+
+NSString *const kAPIUserRoute = @"users";
+NSString *const kAPIUpdateUserRoute = @"update_me";
+
+/**************************************************************************************************/
+#pragma mark - Public methods
 
 @implementation OTAuthService
 
@@ -83,6 +93,36 @@
 		actualError = [NSError errorWithDomain:error.domain code:error.code userInfo:@{ NSLocalizedDescriptionKey:genericErrorMessage }];
 	}
 	return actualError;
+}
+
+- (void)updateUserInformationWithEmail:(NSString *)email
+                            andSmsCode:(NSString *)smsCode
+                               success:(void (^)(NSString *))success
+                               failure:(void (^)(NSError *))failure
+{
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_update_user", @""), kAPIUserRoute, kAPIUpdateUserRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSMutableDictionary *dictionary = [NSMutableDictionary new];
+    dictionary[@"email"] = email;
+    dictionary[@"sms_code"] = smsCode;
+    
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    parameters[@"user"] = dictionary;
+    
+    [[OTHTTPRequestManager sharedInstance]
+     PATCH:url
+        parameters: parameters
+            success: ^(AFHTTPRequestOperation *operation, id responseUser)
+            {
+                if (success) {
+                    success([[responseUser objectForKey:@"user"] stringForKey:@"email"]);
+                }
+            }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error)
+            {
+                if (failure) {
+                    failure(error);
+                }
+            }];
 }
 
 @end
