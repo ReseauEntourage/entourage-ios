@@ -12,6 +12,7 @@
 #import "OTMeetingCalloutViewController.h"
 #import "OTCreateMeetingViewController.h"
 #import "OTConfirmationViewController.h"
+#import "OTToursTableViewController.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -27,6 +28,7 @@
 #import "OTTourService.h"
 
 // Framework
+#import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <MapKit/MKMapView.h>
 #import <CoreLocation/CoreLocation.h>
@@ -38,12 +40,13 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, OTMeetingCalloutViewControllerDelegate, OTConfirmationViewControllerDelegate, CLLocationManagerDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, OTMeetingCalloutViewControllerDelegate, OTConfirmationViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate>
 
 // map
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 
 // markers
 
@@ -60,6 +63,7 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray *locations;
 @property (nonatomic, strong) NSMutableArray *pointsToSend;
+@property (nonatomic, strong) NSMutableArray *closeTours;
 @property (nonatomic, strong) NSDate *start;
 
 // tour lifecycle
@@ -92,6 +96,9 @@
     
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
+    //self.closeTours = [NSMutableArray new];
+    
+    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     
 	_locationManager = [[CLLocationManager alloc] init];
 	if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
@@ -101,6 +108,7 @@
 
 	self.mapView.showsUserLocation = YES;
 	self.mapView.delegate = self;
+    [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
 	[self zoomToCurrentLocation:nil];
 	[self createMenuButton];
 	[self configureView];
@@ -152,7 +160,7 @@
 - (void)refreshMap {
     [[OTTourService new] toursAroundCoordinate:self.mapView.centerCoordinate
                                          limit:@10
-                                      distance:[self mapHeight]
+                                      distance:[NSNumber numberWithDouble:[self mapHeight]]
                                        success:^(NSMutableArray *closeTours)
                                         {
                                             [self.indicatorView setHidden:YES];
@@ -317,6 +325,29 @@
 }
 
 /********************************************************************************/
+#pragma mark - UIGestureRecognizerDelegate
+
+- (void)handleTap:(UITapGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint point = [sender locationInView:self.mapView];
+        CLLocationCoordinate2D location = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
+        [[OTTourService new] toursAroundCoordinate:location
+                                             limit:@5
+                                          distance:@0.04
+                                           success:^(NSMutableArray *closeTours) {
+                                               [self.indicatorView setHidden:YES];
+                                               if (closeTours.count != 0) {
+                                                   self.closeTours = closeTours;
+                                                   [self performSegueWithIdentifier:@"OTCloseTours" sender:sender];
+                                               }
+                                           } failure:^(NSError *error) {
+                                               [self registerObserver];
+                                               [self.indicatorView setHidden:YES];
+                                           }];
+    }
+}
+
+/********************************************************************************/
 #pragma mark - OTCalloutViewControllerDelegate
 
 - (void)dismissPopover {
@@ -349,15 +380,16 @@
         controller.encounters = self.encounters;
     } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
         OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.delegate = self;
         [controller configureWithTour:self.tour
                    andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]
                           andDistance:self.distance
                           andDuration:[[NSDate date] timeIntervalSinceDate:self.start]];
-        
-        // Modal Controller Transparent Bakground ?
-        //UIViewController *viewController = segue.destinationViewController;
-        //viewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    } else if ([segue.identifier isEqualToString:@"OTCloseTours"]) {
+        OTToursTableViewController *controller = (OTToursTableViewController *)segue.destinationViewController;
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [controller configureWithTours:self.closeTours];
     }
 }
 

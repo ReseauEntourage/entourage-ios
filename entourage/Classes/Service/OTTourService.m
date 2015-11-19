@@ -99,12 +99,12 @@ NSString *const kTourPoints = @"tour_points";
 
 - (void)toursAroundCoordinate:(CLLocationCoordinate2D) coordinates
                                limit:(NSNumber *)limit
-                            distance:(CLLocationDistance)distance
+                            distance:(NSNumber *)distance
                              success:(void (^)(NSMutableArray *closeTours))success
                              failure:(void (^)(NSError *error))failure;
 {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tours_around", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
-    NSDictionary *parameters = @{ @"limit": limit, @"latitude": @(coordinates.latitude), @"longitude": @(coordinates.longitude), @"distance": @(distance) };
+    NSDictionary *parameters = @{ @"limit": limit, @"latitude": @(coordinates.latitude), @"longitude": @(coordinates.longitude), @"distance": distance };
     [[OTHTTPRequestManager sharedInstance] GET:url
                                     parameters:parameters
                                        success:^(AFHTTPRequestOperation *operation, id responseObject)

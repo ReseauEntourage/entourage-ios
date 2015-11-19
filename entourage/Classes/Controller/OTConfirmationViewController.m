@@ -1,9 +1,9 @@
 //
 //  OTConfirmationViewController.m
-//  
+//  entourage
 //
-//  Created by OCTO-NTE on 16/11/2015.
-//
+//  Created by Nicolas Telera on 16/11/2015.
+//  Copyright © 2015 OCTO Technology. All rights reserved.
 //
 
 // Controller
