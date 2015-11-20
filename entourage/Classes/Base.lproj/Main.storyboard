@@ -870,6 +870,7 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="T9z-vV-ba0" id="gEN-k3-ds1"/>
+                        <segue destination="Hn0-z2-6tI" kind="modal" identifier="OTSelectedTour" id="Lin-PQ-dcZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t2C-21-chL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -888,6 +889,93 @@
                 </navigationItem>
             </objects>
             <point key="canvasLocation" x="1008" y="751"/>
+        </scene>
+        <!--Tour View Controller-->
+        <scene sceneID="YHX-oC-oM3">
+            <objects>
+                <viewController id="Hn0-z2-6tI" customClass="OTTourViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZqG-Qc-zGT"/>
+                        <viewControllerLayoutGuide type="bottom" id="bCY-0U-VFW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OrS-b3-MxO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CCS-Ik-mAq">
+                                <rect key="frame" x="106" y="28" width="109" height="113"/>
+                                <animations/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8tC-a4-1mh">
+                                <rect key="frame" x="20" y="155" width="280" height="295"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;date&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsA-By-jzK">
+                                        <rect key="frame" x="8" y="32" width="264" height="21"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;organization&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3L-Yj-zhX">
+                                        <rect key="frame" x="8" y="78" width="264" height="21"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;tour_type&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HIl-5n-n0M">
+                                        <rect key="frame" x="8" y="175" width="264" height="21"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;status&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9j-JB-XiU">
+                                        <rect key="frame" x="8" y="223" width="264" height="21"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;transport_type&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ww5-QQ-THg">
+                                        <rect key="frame" x="8" y="128" width="264" height="21"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CkO-r9-KgU">
+                                <rect key="frame" x="20" y="477" width="280" height="58"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.88235294117647056" green="0.2196078431372549" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="FERMER">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeModal:" destination="Hn0-z2-6tI" eventType="touchUpInside" id="O4G-Hb-9LD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="CkO-r9-KgU" id="uAD-0B-y1D"/>
+                        <outlet property="dateLabel" destination="SsA-By-jzK" id="U96-nv-fdY"/>
+                        <outlet property="organizationNameLabel" destination="X3L-Yj-zhX" id="vFC-Yb-RNX"/>
+                        <outlet property="tourStatusLabel" destination="J9j-JB-XiU" id="CeL-zl-ifR"/>
+                        <outlet property="tourTypeImage" destination="CCS-Ik-mAq" id="qyA-1N-9lh"/>
+                        <outlet property="tourTypeLabel" destination="HIl-5n-n0M" id="97Q-kB-3BL"/>
+                        <outlet property="transportTypeLabel" destination="Ww5-QQ-THg" id="Xx0-HO-zeY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vRT-27-ZJ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1464" y="751"/>
         </scene>
         <!--Guide View Controller-->
         <scene sceneID="cCl-FF-sHF">

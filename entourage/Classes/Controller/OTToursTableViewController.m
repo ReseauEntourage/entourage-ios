@@ -6,7 +6,11 @@
 //  Copyright © 2015 OCTO Technology. All rights reserved.
 //
 
+// Controller
 #import "OTToursTableViewController.h"
+#import "OTTourViewController.h"
+
+// Model
 #import "OTTour.h"
 #import "OTTourPoint.h"
 #import "OTOrganization.h"
@@ -15,6 +19,8 @@
 #pragma mark - OTToursTableViewController
 
 @interface OTToursTableViewController ()
+
+@property (nonatomic, strong) OTTour *selectedTour;
 
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *backButton;
 
@@ -81,6 +87,22 @@
     }
 
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedTour = self.tableData[indexPath.row];
+    [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+}
+
+/********************************************************************************/
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"OTSelectedTour"]) {
+        OTTourViewController *controller = (OTTourViewController *)segue.destinationViewController;
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [controller configureWithTour:self.selectedTour];
+    }
 }
 
 /**************************************************************************************************/
