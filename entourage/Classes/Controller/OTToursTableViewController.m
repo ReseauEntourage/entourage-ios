@@ -101,6 +101,7 @@
     if ([segue.identifier isEqualToString:@"OTSelectedTour"]) {
         OTTourViewController *controller = (OTTourViewController *)segue.destinationViewController;
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         [controller configureWithTour:self.selectedTour];
     }
 }
