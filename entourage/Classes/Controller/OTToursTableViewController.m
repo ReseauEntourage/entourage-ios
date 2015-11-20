@@ -8,6 +8,8 @@
 
 #import "OTToursTableViewController.h"
 #import "OTTour.h"
+#import "OTTourPoint.h"
+#import "OTOrganization.h"
 
 /*************************************************************************************************/
 #pragma mark - OTToursTableViewController
@@ -34,6 +36,12 @@
     self.tableData = closeTours;
 }
 
+- (NSString *)formatDateForDisplay:(NSDate *)date {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
+    return [formatter stringFromDate:date];
+}
+
 /**************************************************************************************************/
 #pragma mark - Table View
 
@@ -45,15 +53,27 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TourCell"
                                                             forIndexPath:indexPath];
     OTTour *tour = self.tableData[indexPath.row];
-    cell.textLabel.text = tour.status;
+    OTOrganization *organization = [[OTOrganization alloc] initWithDictionary:tour.organization];
+
+    NSString *type;
     if ([tour.tourType isEqualToString:@"social"]) {
         cell.imageView.image = [UIImage imageNamed:@"ic_social.png"];
+        type = @"A mains nues";
     }
     else if ([tour.tourType isEqualToString:@"other"]) {
         cell.imageView.image = [UIImage imageNamed:@"ic_other.png"];
+        type = @"Médical";
     }
     else if ([tour.tourType isEqualToString:@"food"]) {
         cell.imageView.image = [UIImage imageNamed:@"ic_food.png"];
+        type = @"Alimentaire";
+    }
+    cell.textLabel.text = organization.name;
+    if ([tour.tourPoints count] != 0) {
+        NSString *date = [self formatDateForDisplay:[(OTTourPoint *)[tour.tourPoints objectAtIndex:0] passingTime]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", date, type];
+    } else {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", @"--/--/---", type];
     }
     return cell;
 }

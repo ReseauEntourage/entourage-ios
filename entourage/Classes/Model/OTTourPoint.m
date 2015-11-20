@@ -27,10 +27,16 @@ NSString *const kTourPointPassingTime = @"passing_time";
     if ([dictionary isKindOfClass:[NSDictionary class]])
     {
         tourPoint = [[OTTourPoint alloc] init];
-        
         tourPoint.latitude = [[dictionary numberForKey:kTourPointLatitude] doubleValue];
         tourPoint.longitude = [[dictionary numberForKey:kTourPointLongitude] doubleValue];
-        tourPoint.passingTime = [dictionary dateForKey:kTourPointPassingTime format:@"yyyy-MM-dd HH:mm:ss"];
+        
+        // Java format : "2015-09-09T08:56:48.065+02:00"
+        tourPoint.passingTime = [dictionary dateForKey:kTourPointPassingTime format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
+        if (tourPoint.passingTime == nil) {
+            // Objective-C format : "2015-11-20 09:28:52 +0000"
+            tourPoint.passingTime = [dictionary dateForKey:kTourPointPassingTime format:@"yyyy-MM-dd HH:mm:ss Z"];
+        }
+
     }
     
     return tourPoint;
