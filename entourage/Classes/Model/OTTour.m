@@ -19,14 +19,11 @@ NSString *const kTourVehicle = @"vehicle_type";
 NSString *const kTourStatus = @"status";
 NSString *const kTourTourPoints = @"tour_points";
 NSString *const kTourStats = @"stats";
-NSString *const kTourOrganization = @"organization";
+NSString *const kTourOrganizationName = @"organization_name";
+NSString *const kTourOrganizationDesc = @"organization_description";
 
 NSString *const kToursCount = @"tour_count";
 NSString *const kEncountersCount = @"encounter_count";
-NSString *const kOrganizationName = @"name";
-NSString *const kOrganizationDescription = @"description";
-NSString *const kOrganizationPhone = @"phone";
-NSString *const kOrganizationAddress = @"address";
 
 @implementation OTTour
 
@@ -38,15 +35,15 @@ NSString *const kOrganizationAddress = @"address";
     self = [super init];
     if (self)
     {
+        OTUser *user = [[NSUserDefaults standardUserDefaults] currentUser];
+        
         self.tourType = NSLocalizedString(@"tour_type_type", @"");
         self.vehicleType = NSLocalizedString(@"tour_vehicle_feet", @"");
         self.status = NSLocalizedString(@"tour_status_ongoing", @"");
         self.tourPoints = [NSMutableArray new];
         self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
-        self.organization = [NSMutableDictionary dictionaryWithDictionary:@{kOrganizationName : @"",
-                                                                            kOrganizationDescription : @"",
-                                                                            kOrganizationPhone : @"",
-                                                                        kOrganizationAddress : @""}];
+        self.organizationName = user.organization.name;
+        self.organizationDesc = user.organization.description;
     }
     return self;
 }
@@ -56,15 +53,15 @@ NSString *const kOrganizationAddress = @"address";
     self = [super init];
     if (self)
     {
+        OTUser *user = [[NSUserDefaults standardUserDefaults] currentUser];
+        
         self.tourType = tourType;
         self.vehicleType = vehicleType;
         self.status = NSLocalizedString(@"tour_status_ongoing", @"");
         self.tourPoints = [NSMutableArray new];
         self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
-        self.organization = [NSMutableDictionary dictionaryWithDictionary:@{kOrganizationName : @"",
-                                                                            kOrganizationDescription : @"",
-                                                                            kOrganizationPhone : @"",
-                                                                            kOrganizationAddress : @""}];
+        self.organizationName = user.organization.name;
+        self.organizationDesc = user.organization.description;
     }
     return self;
 }
@@ -82,7 +79,8 @@ NSString *const kOrganizationAddress = @"address";
         tour.vehicleType = [dictionary stringForKey:kTourVehicle];
         tour.status = [dictionary stringForKey:kTourStatus];
         tour.tourPoints = [OTTourPoint tourPointsWithJSONDictionary:dictionary andKey:kTourTourPoints];
-        //tour.stats = [dictionary ...] // TODO
+        tour.organizationName = [dictionary stringForKey:kTourOrganizationName];
+        tour.organizationDesc = [dictionary stringForKey:kTourOrganizationDesc];
     }
     
     return tour;
@@ -102,8 +100,6 @@ NSString *const kOrganizationAddress = @"address";
 - (NSDictionary *)dictionaryForWebserviceTourPoints
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
-    
-    
     
     return dictionary;
 }

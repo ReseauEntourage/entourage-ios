@@ -22,7 +22,8 @@ typedef enum { OTTypesSocial=0, OTTypesOther=1, OTTypesFood=2 } OTTypes;
 @property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) NSMutableArray *tourPoints;
 @property (strong, nonatomic) NSMutableDictionary *stats;
-@property (strong, nonatomic) NSMutableDictionary *organization;
+@property (strong, nonatomic) NSString *organizationName;
+@property (strong, nonatomic) NSString *organizationDesc;
 
 /********************************************************************************/
 #pragma mark - Birth & Death
