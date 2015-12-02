@@ -17,6 +17,7 @@
 - (id)initWithPoi:(OTPoi *)poi;
 - (MKAnnotationView *)annotationView;
 - (NSString *)annotationIdentifier;
+- (BOOL)isEqual:(id)object;
 
 @property (nonatomic, strong) OTPoi *poi;
 

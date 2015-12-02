@@ -8,7 +8,7 @@ target "entourage" do
     pod 'AFNetworking', ‘2.6.1’
     pod 'SWRevealViewController', ‘2.3.0’
     pod 'WYPopoverController', ‘0.3.8’
-    pod 'kingpin', '0.2.beta'
+    pod 'kingpin', '0.3.1'
     pod 'JSBadgeView', ‘1.4.1’
     pod 'MBProgressHUD', '0.8'
     pod 'IQKeyboardManager', '3.3.4'

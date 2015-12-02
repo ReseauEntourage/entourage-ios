@@ -33,6 +33,7 @@
 #import <MapKit/MKMapView.h>
 #import <CoreLocation/CoreLocation.h>
 #import <WYPopoverController/WYPopoverController.h>
+#import <QuartzCore/QuartzCore.h>
 
 // User
 #import "NSUserDefaults+OT.h"
@@ -70,6 +71,7 @@
 
 @property (nonatomic, weak) IBOutlet UIView *launcherView;
 @property (nonatomic, weak) IBOutlet UIButton *launcherButton;
+@property (nonatomic, weak) IBOutlet UIButton *launcherCloseButton;
 @property (nonatomic, weak) IBOutlet UIButton *startButton;
 @property (nonatomic, weak) IBOutlet UIButton *stopButton;
 @property (nonatomic, weak) IBOutlet UIButton *createEncounterButton;
@@ -389,6 +391,7 @@
     } else if ([segue.identifier isEqualToString:@"OTCloseTours"]) {
         OTToursTableViewController *controller = (OTToursTableViewController *)segue.destinationViewController;
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
         [controller configureWithTours:self.closeTours];
     }
 }
@@ -416,6 +419,11 @@
 - (IBAction)launcherTour:(id)sender {
     self.launcherButton.hidden = YES;
     self.launcherView.hidden = NO;
+}
+
+- (IBAction)closeLauncher:(id)sender {
+    self.launcherButton.hidden = NO;
+    self.launcherView.hidden = YES;
 }
 
 - (IBAction)feetButtonDidTap:(id)sender {

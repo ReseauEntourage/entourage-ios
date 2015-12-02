@@ -26,8 +26,7 @@
 #import <MapKit/MKMapView.h>
 #import <CoreLocation/CoreLocation.h>
 #import <WYPopoverController/WYPopoverController.h>
-#import "KPClusteringController.h"
-#import "KPAnnotation.h"
+#import <kingpin/kingpin.h>
 
 // User
 #import "NSUserDefaults+OT.h"
@@ -52,7 +51,7 @@
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 
 @property (nonatomic) BOOL isRegionSetted;
-@property (nonatomic, strong) NSArray *tableData;
+@property (nonatomic, strong) NSMutableArray *markers;
 
 @end
 
@@ -76,6 +75,8 @@
     [self zoomToCurrentLocation:nil];
     [self createMenuButton];
     [self configureView];
+    
+    self.markers = [NSMutableArray new];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -133,11 +134,27 @@
 }
 
 - (void)feedMapViewWithPoiArray:(NSArray *)array {
-    NSMutableArray *pointAnnotations = [NSMutableArray new];
     for (OTPoi *poi in array) {
-        [pointAnnotations addObject:[[OTCustomAnnotation alloc] initWithPoi:poi]];
+        OTCustomAnnotation *annotation = [[OTCustomAnnotation alloc] initWithPoi:poi];
+        if (![self.markers containsObject:annotation]) {
+            [self.markers addObject:annotation];
+        }
     }
-    [self.clusteringController setAnnotations:pointAnnotations];
+    [self.clusteringController setAnnotations:self.markers];
+}
+
+/* CAN DO BETTER */
+- (UIImage *) drawText:(NSString *) text inImage:(UIImage *) image {
+    UIFont *font = [UIFont boldSystemFontOfSize:12];
+    UIGraphicsBeginImageContext(image.size);
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+    [[UIColor whiteColor] set];
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:font, NSFontAttributeName, nil];
+    [text drawInRect:(rect) withAttributes:(dictionary)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 /********************************************************************************/
@@ -151,9 +168,13 @@
         
         if (kingPinAnnotation.isCluster) {
             annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"cluster"];
-            
             if (annotationView == nil) {
-                annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:kingPinAnnotation reuseIdentifier:@"cluster"];
+                annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingPinAnnotation reuseIdentifier:@"cluster"];
+                //NSString *count = [NSString stringWithFormat:@"%lu", (unsigned long)kingPinAnnotation.annotations.count];
+                //annotationView.image = [self drawText:count inImage:[UIImage imageNamed:@"poi_cluster"]];
+                annotationView.image = [UIImage imageNamed:@"poi_cluster"];
+                //kingPinAnnotation.title = [NSString stringWithFormat:@"%lu", (unsigned long)kingPinAnnotation.annotations.count];
+                //annotationView.canShowCallout = YES;
             }
         }
         else {
@@ -165,7 +186,6 @@
             }
             annotationView.annotation = annotation;
         }
-
     }
     
     return annotationView;
@@ -178,8 +198,18 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     [mapView deselectAnnotation:view.annotation animated:NO];
+
+    KPAnnotation *kpAnnotation = view.annotation;
+    if ([[kpAnnotation annotations] count] == 1) {
     
-    if ([view.annotation isKindOfClass:[OTCustomAnnotation class]]) {
+        __block OTCustomAnnotation *annotation = nil;
+        [[kpAnnotation annotations] enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[OTCustomAnnotation class]]) {
+                annotation = obj;
+                *stop = YES;
+            }
+        }];
+        
         // Start up our view controller from a Storyboard
         OTCalloutViewController *controller = (OTCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCalloutViewController"];
         controller.delegate = self;
@@ -193,8 +223,6 @@
          {
              popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
          }];
-        
-        OTCustomAnnotation *annotation = [((MKAnnotationView *)view)annotation];
         
         [controller configureWithPoi:annotation.poi];
         

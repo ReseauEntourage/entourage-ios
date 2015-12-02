@@ -58,7 +58,7 @@ NSString *const kAnnotationIdentifier = @"OTAnnotationIdentifier";
 - (MKAnnotationView *)annotationView
 {
 	MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:self
-																	reuseIdentifier:kAnnotationIdentifier];
+                                                                    reuseIdentifier:kAnnotationIdentifier];
 
 	annotationView.canShowCallout = NO;
 	annotationView.image = self.poi.image;
@@ -69,6 +69,16 @@ NSString *const kAnnotationIdentifier = @"OTAnnotationIdentifier";
 - (NSString *)annotationIdentifier
 {
     return [NSString stringWithFormat:@"%@-%@", kAnnotationIdentifier, self.poi.categoryId];
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[OTCustomAnnotation class]]) {
+        OTCustomAnnotation *compare = (OTCustomAnnotation *) object;
+        return _poi.sid == compare.poi.sid;
+    } else {
+        return false;
+    }
+    
 }
 
 @end

@@ -22,7 +22,7 @@ PODS:
     - AFNetworking/NSURLSession
   - IQKeyboardManager (3.3.4)
   - JSBadgeView (1.4.1)
-  - kingpin (0.2.beta)
+  - kingpin (0.3.1)
   - MBProgressHUD (0.8)
   - OCMock (3.1)
   - SWRevealViewController (2.3.0)
@@ -32,7 +32,7 @@ DEPENDENCIES:
   - AFNetworking (= 2.6.1)
   - IQKeyboardManager (= 3.3.4)
   - JSBadgeView (= 1.4.1)
-  - kingpin (= 0.2.beta)
+  - kingpin (= 0.3.1)
   - MBProgressHUD (= 0.8)
   - OCMock (= 3.1)
   - SWRevealViewController (= 2.3.0)
@@ -42,7 +42,7 @@ SPEC CHECKSUMS:
   AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
   IQKeyboardManager: ac803e61e5b50efae6b3aeedd95a02c7c7d3b2b3
   JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
-  kingpin: e6f82f795552daf47d723aa67a3d7b86841647b3
+  kingpin: 52bb578006bdeb881db225e6ff1a4228375cbfbf
   MBProgressHUD: 8688c331cb64702283be37ab8d7d329cdd25f251
   OCMock: 721c11680ae2d65d67f40932777194daf7002781
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
