@@ -31,10 +31,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-#ifndef DEBUG
-	[[OTAppaloosaAgent sharedAgent] checkUpdates];
-	[[OTAppaloosaAgent sharedAgent] checkAuthorizations];
-#endif
+
 }
 
 /**************************************************************************************************/
