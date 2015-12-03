@@ -36,6 +36,8 @@
 
 @interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffectView;
+
 // map
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
@@ -143,20 +145,6 @@
     [self.clusteringController setAnnotations:self.markers];
 }
 
-/* CAN DO BETTER */
-- (UIImage *) drawText:(NSString *) text inImage:(UIImage *) image {
-    UIFont *font = [UIFont boldSystemFontOfSize:12];
-    UIGraphicsBeginImageContext(image.size);
-    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
-    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
-    [[UIColor whiteColor] set];
-    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:font, NSFontAttributeName, nil];
-    [text drawInRect:(rect) withAttributes:(dictionary)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
 /********************************************************************************/
 #pragma mark - MKMapViewDelegate
 
@@ -170,11 +158,8 @@
             annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"cluster"];
             if (annotationView == nil) {
                 annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingPinAnnotation reuseIdentifier:@"cluster"];
-                //NSString *count = [NSString stringWithFormat:@"%lu", (unsigned long)kingPinAnnotation.annotations.count];
-                //annotationView.image = [self drawText:count inImage:[UIImage imageNamed:@"poi_cluster"]];
                 annotationView.image = [UIImage imageNamed:@"poi_cluster"];
-                //kingPinAnnotation.title = [NSString stringWithFormat:@"%lu", (unsigned long)kingPinAnnotation.annotations.count];
-                //annotationView.canShowCallout = YES;
+                kingPinAnnotation.title = [NSString stringWithFormat:@"%lu", (unsigned long)kingPinAnnotation.annotations.count];
             }
         }
         else {
@@ -191,6 +176,25 @@
     return annotationView;
 }
 
+- (void)mapView:(MKMapView *)mymapView didAddAnnotationViews:(NSArray *)views {
+    for (MKAnnotationView *view in views) {
+        id<MKAnnotation> annotation = [view annotation];
+        KPAnnotation *kpAnnotation = (KPAnnotation *)annotation;
+        if (kpAnnotation.isCluster) {
+            if ([view subviews].count != 0) {
+                UIView *subview = [[view subviews] objectAtIndex:0];
+                [subview removeFromSuperview];
+            }
+            CGRect viewRect = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+            UILabel *count = [[UILabel alloc] initWithFrame:viewRect];
+            count.text = [NSString stringWithFormat:@"%lu", (unsigned long)kpAnnotation.annotations.count];
+            count.textColor = [UIColor whiteColor];
+            count.textAlignment = NSTextAlignmentCenter;
+            [view addSubview:count];
+        }
+    }
+}
+
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     [self.clusteringController refresh:animated];
     [self refreshMap];
@@ -200,7 +204,7 @@
     [mapView deselectAnnotation:view.annotation animated:NO];
 
     KPAnnotation *kpAnnotation = view.annotation;
-    if ([[kpAnnotation annotations] count] == 1) {
+    if (!kpAnnotation.isCluster) {
     
         __block OTCustomAnnotation *annotation = nil;
         [[kpAnnotation annotations] enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -213,9 +217,9 @@
         // Start up our view controller from a Storyboard
         OTCalloutViewController *controller = (OTCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCalloutViewController"];
         controller.delegate = self;
-        
+
         UIView *popView = [controller view];
-        
+
         popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
         
         [UIView animateWithDuration:.3f
@@ -223,7 +227,6 @@
          {
              popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
          }];
-        
         [controller configureWithPoi:annotation.poi];
         
         self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
@@ -235,6 +238,8 @@
                                     animated:YES
                                      options:WYPopoverAnimationOptionFadeWithScale];
         [Flurry logEvent:@"Open_POI_From_Map" withParameters:@{ @"poi_id" : annotation.poi.sid }];
+        
+        self.blurEffectView.hidden = NO;
     }
 }
 
@@ -276,6 +281,7 @@
 #pragma mark - OTCalloutViewControllerDelegate
 
 - (void)dismissPopover {
+    self.blurEffectView.hidden = YES;
     [self.popover dismissPopoverAnimated:YES];
 }
 
