@@ -11,23 +11,22 @@
 
 // Model
 #import "OTEncounter.h"
+#import "OTUser.h"
 
 // Services
 #import "OTPoiService.h"
 #import "OTEncounterService.h"
-
-
 #import "NSUserDefaults+OT.h"
-#import "OTUser.h"
-
-// Social
-#import <Social/Social.h>
 
 // Progress HUD
 #import "MBProgressHUD.h"
 
+// Social
+#import <Social/Social.h>
 
 @interface OTCreateMeetingViewController ()
+
+@property (strong, nonatomic) OEEventsObserver *openEarsEventsObserver;
 
 @property (strong, nonatomic) NSNumber *currentTourId;
 @property (nonatomic) CLLocationCoordinate2D location;
@@ -35,6 +34,7 @@
 @property (nonatomic, strong) IBOutlet UITextView *messageTextView;
 @property (weak, nonatomic) IBOutlet UILabel *firstLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIButton *recordButton;
 
 @end
 
@@ -59,6 +59,9 @@
 	self.messageTextView.layer.borderColor = UIColor.lightGrayColor.CGColor;
         
     [self createSendButton];
+    
+    self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
+    [self.openEarsEventsObserver setDelegate:self];
 }
 
 /**************************************************************************************************/
@@ -102,6 +105,76 @@
                                      }
                                  } failure:^(NSError *error) {
                                  }];
+}
+
+- (IBAction)startVoiceRecognition:(id)sender {
+    if (![[OEPocketsphinxController sharedInstance] isListening]) {
+        [self.recordButton setTitle:@"RECORD" forState:UIControlStateNormal];
+        
+        OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
+
+        NSString *lmPath = [lmGenerator pathToSuccessfullyGeneratedLanguageModelWithRequestedName:@"LanguageModelFiles"];;
+        NSString *dicPath = [lmGenerator pathToSuccessfullyGeneratedDictionaryWithRequestedName:@"LanguageModelFiles"];;
+    
+        [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
+        [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath
+                                                                        dictionaryAtPath:dicPath
+                                                                     acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]
+                                                                     languageModelIsJSGF:NO];
+    } else {
+        [self.recordButton setTitle:@"STOP" forState:UIControlStateNormal];
+        
+        [[OEPocketsphinxController sharedInstance] stopListening];
+        NSString *text = [[OEPocketsphinxController sharedInstance] pathToTestFile];
+        NSLog(@"%@", text);
+    }
+}
+
+/**************************************************************************************************/
+#pragma mark - Voice Recognition methods
+
+- (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
+    NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
+}
+
+- (void) pocketsphinxDidStartListening {
+    NSLog(@"Pocketsphinx is now listening.");
+}
+
+- (void) pocketsphinxDidDetectSpeech {
+    NSLog(@"Pocketsphinx has detected speech.");
+}
+
+- (void) pocketsphinxDidDetectFinishedSpeech {
+    NSLog(@"Pocketsphinx has detected a period of silence, concluding an utterance.");
+}
+
+- (void) pocketsphinxDidStopListening {
+    NSLog(@"Pocketsphinx has stopped listening.");
+}
+
+- (void) pocketsphinxDidSuspendRecognition {
+    NSLog(@"Pocketsphinx has suspended recognition.");
+}
+
+- (void) pocketsphinxDidResumeRecognition {
+    NSLog(@"Pocketsphinx has resumed recognition.");
+}
+
+- (void) pocketsphinxDidChangeLanguageModelToFile:(NSString *)newLanguageModelPathAsString andDictionary:(NSString *)newDictionaryPathAsString {
+    NSLog(@"Pocketsphinx is now using the following language model: \n%@ and the following dictionary: %@",newLanguageModelPathAsString,newDictionaryPathAsString);
+}
+
+- (void) pocketSphinxContinuousSetupDidFailWithReason:(NSString *)reasonForFailure {
+    NSLog(@"Listening setup wasn't successful and returned the failure reason: %@", reasonForFailure);
+}
+
+- (void) pocketSphinxContinuousTeardownDidFailWithReason:(NSString *)reasonForFailure {
+    NSLog(@"Listening teardown wasn't successful and returned the failure reason: %@", reasonForFailure);
+}
+
+- (void) testRecognitionCompleted {
+    NSLog(@"A test file that was submitted for recognition is now complete.");
 }
 
 @end

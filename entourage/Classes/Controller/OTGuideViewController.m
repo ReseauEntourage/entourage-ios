@@ -109,14 +109,14 @@
     [[OTPoiService new] poisAroundCoordinate:self.mapView.centerCoordinate
                                     distance:[self mapHeight]
                                      success:^(NSArray *categories, NSArray *pois)
-                                     {
-                                         [self.indicatorView setHidden:YES];
-                                         
-                                         self.categories = categories;
-                                         self.pois = pois;
-                                         
-                                         [self feedMapViewWithPoiArray:pois];
-                                     }
+     {
+         [self.indicatorView setHidden:YES];
+         
+         self.categories = categories;
+         self.pois = pois;
+         
+         [self feedMapViewWithPoiArray:pois];
+     }
                                      failure:^(NSError *error) {
                                          [self registerObserver];
                                          [self.indicatorView setHidden:YES];
@@ -176,23 +176,26 @@
     return annotationView;
 }
 
-- (void)mapView:(MKMapView *)mymapView didAddAnnotationViews:(NSArray *)views {
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     for (MKAnnotationView *view in views) {
         id<MKAnnotation> annotation = [view annotation];
-        KPAnnotation *kpAnnotation = (KPAnnotation *)annotation;
-        if (kpAnnotation.isCluster) {
-            if ([view subviews].count != 0) {
-                UIView *subview = [[view subviews] objectAtIndex:0];
-                [subview removeFromSuperview];
+        if ([annotation isKindOfClass:[KPAnnotation class]]) {
+            KPAnnotation *kpAnnotation = (KPAnnotation *)annotation;
+            if (kpAnnotation.isCluster) {
+                if ([view subviews].count != 0) {
+                    UIView *subview = [[view subviews] objectAtIndex:0];
+                    [subview removeFromSuperview];
+                }
+                CGRect viewRect = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+                UILabel *count = [[UILabel alloc] initWithFrame:viewRect];
+                count.text = [NSString stringWithFormat:@"%lu", (unsigned long)kpAnnotation.annotations.count];
+                count.textColor = [UIColor whiteColor];
+                count.textAlignment = NSTextAlignmentCenter;
+                [view addSubview:count];
             }
-            CGRect viewRect = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
-            UILabel *count = [[UILabel alloc] initWithFrame:viewRect];
-            count.text = [NSString stringWithFormat:@"%lu", (unsigned long)kpAnnotation.annotations.count];
-            count.textColor = [UIColor whiteColor];
-            count.textAlignment = NSTextAlignmentCenter;
-            [view addSubview:count];
         }
     }
+    [mapView setNeedsDisplay];
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
@@ -202,10 +205,10 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     [mapView deselectAnnotation:view.annotation animated:NO];
-
+    
     KPAnnotation *kpAnnotation = view.annotation;
     if (!kpAnnotation.isCluster) {
-    
+        
         __block OTCustomAnnotation *annotation = nil;
         [[kpAnnotation annotations] enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[OTCustomAnnotation class]]) {
@@ -217,9 +220,9 @@
         // Start up our view controller from a Storyboard
         OTCalloutViewController *controller = (OTCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCalloutViewController"];
         controller.delegate = self;
-
+        
         UIView *popView = [controller view];
-
+        
         popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
         
         [UIView animateWithDuration:.3f
