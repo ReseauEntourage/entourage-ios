@@ -9,18 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MKMapView.h>
 
-// Voice Recognition Framework
+// Frameworks
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
-#import <OpenEars/OELanguageModelGenerator.h>
-#import <OpenEars/OEPocketsphinxController.h>
-#import <OpenEars/OEAcousticModel.h>
-#import <OpenEars/OEEventsObserver.h>
+#import <SpeechKit/SpeechKit.h>
 
 @class OTEncounter;
 
-@interface OTCreateMeetingViewController : UIViewController <OEEventsObserverDelegate>
+@interface OTCreateMeetingViewController : UIViewController <SpeechKitDelegate, SKRecognizerDelegate>
 
+@property (strong, nonatomic) SKRecognizer *recognizer;
 @property (nonatomic, strong) NSMutableArray *encounters;
 
 - (void)configureWithTourId:(NSNumber *)currentTourId andLocation:(CLLocationCoordinate2D)location;

@@ -1273,7 +1273,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="RECORD"/>
                                 <connections>
-                                    <action selector="startVoiceRecognition:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="X9w-oD-JtY"/>
+                                    <action selector="startStopRecording:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="UR0-IC-pHK"/>
                                 </connections>
                             </button>
                         </subviews>

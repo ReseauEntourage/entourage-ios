@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SpeechKit/SpeechKit.h>
 
 @interface OTAppDelegate : UIResponder <UIApplicationDelegate>
 

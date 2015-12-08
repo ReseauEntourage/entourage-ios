@@ -21,22 +21,30 @@
 // Progress HUD
 #import "MBProgressHUD.h"
 
-// Social
+// Frameworks
 #import <Social/Social.h>
 
 @interface OTCreateMeetingViewController ()
 
-@property (strong, nonatomic) OEEventsObserver *openEarsEventsObserver;
-
 @property (strong, nonatomic) NSNumber *currentTourId;
+@property (strong, nonatomic) NSString *lmPath;
+@property (strong, nonatomic) NSString *dicPath;
 @property (nonatomic) CLLocationCoordinate2D location;
+
 @property (nonatomic, strong) IBOutlet UITextField *nameTextField;
 @property (nonatomic, strong) IBOutlet UITextView *messageTextView;
 @property (weak, nonatomic) IBOutlet UILabel *firstLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;
 
+@property (nonatomic) BOOL isRecording;
+
 @end
+
+/**************************************************************************************************/
+#pragma mark - Constants
+
+const unsigned char SpeechKitApplicationKey[] = {0x7c, 0x35, 0xab, 0xb0, 0x7e, 0x90, 0xd0, 0x74, 0x12, 0x80, 0xa8, 0x1e, 0xc0, 0xf7, 0x41, 0xda, 0x26, 0x8a, 0x81, 0x51, 0x58, 0x2b, 0xa3, 0x2d, 0x14, 0x7d, 0x14, 0x49, 0x57, 0xe7, 0x59, 0xd4, 0x1c, 0x04, 0x84, 0x9a, 0x94, 0x54, 0x0f, 0xa6, 0xd5, 0xb7, 0xc5, 0x95, 0xaf, 0x06, 0x6f, 0xd5, 0x90, 0xf1, 0x26, 0xe9, 0x1c, 0xc9, 0x16, 0x30, 0x47, 0x2a, 0x79, 0x9e, 0x12, 0xd2, 0x72, 0x2e};
 
 @implementation OTCreateMeetingViewController
 
@@ -57,11 +65,11 @@
 
 	self.messageTextView.layer.borderWidth = 1;
 	self.messageTextView.layer.borderColor = UIColor.lightGrayColor.CGColor;
-        
-    [self createSendButton];
     
-    self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
-    [self.openEarsEventsObserver setDelegate:self];
+    self.isRecording = NO;
+    
+    [self createSendButton];
+    [self setupSpeechKitConnection];
 }
 
 /**************************************************************************************************/
@@ -107,74 +115,60 @@
                                  }];
 }
 
-- (IBAction)startVoiceRecognition:(id)sender {
-    if (![[OEPocketsphinxController sharedInstance] isListening]) {
-        [self.recordButton setTitle:@"RECORD" forState:UIControlStateNormal];
-        
-        OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
+/**************************************************************************************************/
+#pragma mark - Actions
 
-        NSString *lmPath = [lmGenerator pathToSuccessfullyGeneratedLanguageModelWithRequestedName:@"LanguageModelFiles"];;
-        NSString *dicPath = [lmGenerator pathToSuccessfullyGeneratedDictionaryWithRequestedName:@"LanguageModelFiles"];;
-    
-        [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
-        [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath
-                                                                        dictionaryAtPath:dicPath
-                                                                     acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]
-                                                                     languageModelIsJSGF:NO];
+- (IBAction)startStopRecording:(id)sender {
+    if (!self.isRecording) {
+        _recognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType
+                                                   detection:SKShortEndOfSpeechDetection
+                                                    language:@"fra-FRA"
+                                                    delegate:self];
     } else {
-        [self.recordButton setTitle:@"STOP" forState:UIControlStateNormal];
-        
-        [[OEPocketsphinxController sharedInstance] stopListening];
-        NSString *text = [[OEPocketsphinxController sharedInstance] pathToTestFile];
-        NSLog(@"%@", text);
+        [_recognizer stopRecording];
     }
 }
 
 /**************************************************************************************************/
-#pragma mark - Voice Recognition methods
+#pragma mark - Voice recognition methods
 
-- (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
-    NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
+- (void)setupSpeechKitConnection {
+    [SpeechKit setupWithID:@"NMDPTRIAL_ntelera_octo_com20151207110952"
+                      host:@"sandbox.nmdp.nuancemobility.net"
+                      port:443
+                    useSSL:NO
+                  delegate:nil];
 }
 
-- (void) pocketsphinxDidStartListening {
-    NSLog(@"Pocketsphinx is now listening.");
+- (void)recognizer:(SKRecognizer *)recognizer didFinishWithResults:(SKRecognition *)results {
+    NSLog(@"%@", @"Finish with results");
+    if (results.results.count != 0) {
+        NSString *text = self.messageTextView.text;
+        NSString *result = [results.results objectAtIndex:0];
+        if (text.length == 0) {
+            [self.messageTextView setText:result];
+        } else {
+            [self.messageTextView setText:[NSString stringWithFormat:@"%@ %@", text, result]];
+        }
+
+
+    }
 }
 
-- (void) pocketsphinxDidDetectSpeech {
-    NSLog(@"Pocketsphinx has detected speech.");
+- (void)recognizer:(SKRecognizer *)recognizer didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion {
+    NSLog(@"%@", @"Finish with error");
 }
 
-- (void) pocketsphinxDidDetectFinishedSpeech {
-    NSLog(@"Pocketsphinx has detected a period of silence, concluding an utterance.");
+- (void)recognizerDidBeginRecording:(SKRecognizer *)recognizer {
+    NSLog(@"%@", @"Begin recording");
+    [self.recordButton setTitle:@"STOP" forState:UIControlStateNormal];
+    self.isRecording = YES;
 }
 
-- (void) pocketsphinxDidStopListening {
-    NSLog(@"Pocketsphinx has stopped listening.");
-}
-
-- (void) pocketsphinxDidSuspendRecognition {
-    NSLog(@"Pocketsphinx has suspended recognition.");
-}
-
-- (void) pocketsphinxDidResumeRecognition {
-    NSLog(@"Pocketsphinx has resumed recognition.");
-}
-
-- (void) pocketsphinxDidChangeLanguageModelToFile:(NSString *)newLanguageModelPathAsString andDictionary:(NSString *)newDictionaryPathAsString {
-    NSLog(@"Pocketsphinx is now using the following language model: \n%@ and the following dictionary: %@",newLanguageModelPathAsString,newDictionaryPathAsString);
-}
-
-- (void) pocketSphinxContinuousSetupDidFailWithReason:(NSString *)reasonForFailure {
-    NSLog(@"Listening setup wasn't successful and returned the failure reason: %@", reasonForFailure);
-}
-
-- (void) pocketSphinxContinuousTeardownDidFailWithReason:(NSString *)reasonForFailure {
-    NSLog(@"Listening teardown wasn't successful and returned the failure reason: %@", reasonForFailure);
-}
-
-- (void) testRecognitionCompleted {
-    NSLog(@"A test file that was submitted for recognition is now complete.");
+- (void)recognizerDidFinishRecording:(SKRecognizer *)recognizer {
+    NSLog(@"%@", @"Finish recording");
+    [self.recordButton setTitle:@"RECORD" forState:UIControlStateNormal];
+    self.isRecording = NO;
 }
 
 @end
