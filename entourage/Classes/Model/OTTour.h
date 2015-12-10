@@ -17,6 +17,7 @@ typedef enum { OTTypesSocial=0, OTTypesOther=1, OTTypesFood=2 } OTTypes;
 #pragma mark - Getters and Setters
 
 @property (strong, nonatomic) NSNumber *sid;
+@property (strong, nonatomic) NSNumber *userId;
 @property (strong, nonatomic) NSString *tourType;
 @property (strong, nonatomic) NSString *vehicleType;
 @property (strong, nonatomic) NSString *status;
@@ -24,6 +25,7 @@ typedef enum { OTTypesSocial=0, OTTypesOther=1, OTTypesFood=2 } OTTypes;
 @property (strong, nonatomic) NSMutableDictionary *stats;
 @property (strong, nonatomic) NSString *organizationName;
 @property (strong, nonatomic) NSString *organizationDesc;
+@property (nonatomic) float distance;
 
 /********************************************************************************/
 #pragma mark - Birth & Death

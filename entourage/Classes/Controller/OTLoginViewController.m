@@ -22,9 +22,10 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UIButton *validateButton;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 @property (weak, nonatomic) IBOutlet UIView *whiteBackground;
+@property (weak, nonatomic) IBOutlet UIButton *askMoreButton;
+@property (weak, nonatomic) IBOutlet UIButton *validateButton;
 
 @end
 
@@ -70,7 +71,7 @@
                                success: ^(OTUser *user) {
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-                                   
+                                   [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    [self dismissViewControllerAnimated:YES completion:nil];
                                } failure: ^(NSError *error) {
                                    [[[UIAlertView alloc]
@@ -86,6 +87,10 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
 	return YES;
+}
+
+- (IBAction)displayAskMoreModal:(id)sender {
+    [self performSegueWithIdentifier:@"OTAskMore" sender:self];
 }
 
 @end

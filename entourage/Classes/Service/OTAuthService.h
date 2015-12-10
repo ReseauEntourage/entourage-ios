@@ -21,4 +21,8 @@
                                success:(void (^)(NSString *user))success
                                failure:(void (^)(NSError *error))failure;
 
+- (void)subscribeToNewsletterWithEmail:(NSString *)email
+                               success:(void (^)(BOOL))success
+                               failure:(void (^)(NSError *))failure;
+
 @end

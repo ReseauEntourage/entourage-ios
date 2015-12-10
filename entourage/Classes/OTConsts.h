@@ -8,7 +8,7 @@
 
 #ifdef DEBUG
 // PREPROD
-#define BASE_API_URL @"https://entourage-back-preprod.herokuapp.com/"
+#define BASE_API_URL @"https://entourage-back-preprod.herokuapp.com/api/v0/"
 
 #define LOGIN_API_SOUNDCLOUD @"hschouman@octo.com"
 #define PASS_API_SOUNDCLOUD @"passDevForAPI"
@@ -16,7 +16,7 @@
 #else
 // PROD
 #define LOGIN_API_SOUNDCLOUD @"entourage@octo.com"
-#define BASE_API_URL @"https://entourage-back.herokuapp.com/"
+#define BASE_API_URL @"https://entourage-back.herokuapp.com/api/v0/"
 
 #endif
 

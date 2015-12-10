@@ -125,4 +125,42 @@ NSString *const kAPIUpdateUserRoute = @"update_me";
             }];
 }
 
+- (void)subscribeToNewsletterWithEmail:(NSString *)email
+                               success:(void (^)(BOOL))success
+                               failure:(void (^)(NSError *))failure
+{
+    NSDictionary *dict = @{ @"email": email, @"active": @"true" };
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"newsletter_subscription"] = dict;
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POST:@"newsletter_subscriptions"
+        parameters:parameters
+            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                NSDictionary *responseDict = responseObject;
+                NSLog(@"Authentication service response : %@", responseDict);
+                
+                NSError *actualError = [self errorFromOperation:operation andError:nil];
+                if (actualError) {
+                    NSLog(@"errorMessage %@", actualError);
+                    if (failure) {
+                        failure(actualError);
+                    }
+                }
+                else {
+                    if (success) {
+                        success(YES);
+                    }
+                }
+            }
+            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                NSError *actualError = [self errorFromOperation:operation andError:error];
+                NSLog(@"Failed with error %@", actualError);
+                if (failure) {
+                    failure(actualError);
+                }
+            }];
+}
+
 @end

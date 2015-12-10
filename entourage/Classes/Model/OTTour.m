@@ -14,6 +14,7 @@
 #import "NSUserDefaults+OT.h"
 
 NSString *const kTourId = @"id";
+NSString *const kTourUserId = @"user_id";
 NSString *const kTourType = @"tour_type";
 NSString *const kTourVehicle = @"vehicle_type";
 NSString *const kTourStatus = @"status";
@@ -21,6 +22,7 @@ NSString *const kTourTourPoints = @"tour_points";
 NSString *const kTourStats = @"stats";
 NSString *const kTourOrganizationName = @"organization_name";
 NSString *const kTourOrganizationDesc = @"organization_description";
+NSString *const kTourDistance = @"distance";
 
 NSString *const kToursCount = @"tour_count";
 NSString *const kEncountersCount = @"encounter_count";
@@ -44,6 +46,7 @@ NSString *const kEncountersCount = @"encounter_count";
         self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
         self.organizationName = user.organization.name;
         self.organizationDesc = user.organization.description;
+        self.distance = 0.0;
     }
     return self;
 }
@@ -62,6 +65,7 @@ NSString *const kEncountersCount = @"encounter_count";
         self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
         self.organizationName = user.organization.name;
         self.organizationDesc = user.organization.description;
+        self.distance = 0.0;
     }
     return self;
 }
@@ -75,12 +79,14 @@ NSString *const kEncountersCount = @"encounter_count";
         tour = [[OTTour alloc] init];
         
         tour.sid = [dictionary numberForKey:kTourId];
+        tour.userId = [dictionary numberForKey:kTourUserId];
         tour.tourType = [dictionary stringForKey:kTourType];
         tour.vehicleType = [dictionary stringForKey:kTourVehicle];
         tour.status = [dictionary stringForKey:kTourStatus];
         tour.tourPoints = [OTTourPoint tourPointsWithJSONDictionary:dictionary andKey:kTourTourPoints];
         tour.organizationName = [dictionary stringForKey:kTourOrganizationName];
         tour.organizationDesc = [dictionary stringForKey:kTourOrganizationDesc];
+        tour.distance = [[dictionary numberForKey:kTourDistance] floatValue];
     }
     
     return tour;
@@ -93,6 +99,7 @@ NSString *const kEncountersCount = @"encounter_count";
     dictionary[kTourType] = self.tourType;
     dictionary[kTourVehicle] = self.vehicleType;
     dictionary[kTourStatus] = self.status;
+    dictionary[kTourDistance] = @(self.distance);
     
     return dictionary;
 }
@@ -103,11 +110,5 @@ NSString *const kEncountersCount = @"encounter_count";
     
     return dictionary;
 }
-
-/********************************************************************************/
-#pragma mark - Private methods
-
-/********************************************************************************/
-#pragma mark - Utils
 
 @end

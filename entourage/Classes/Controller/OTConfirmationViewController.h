@@ -13,6 +13,7 @@
 @protocol OTConfirmationViewControllerDelegate <NSObject>
 
 - (void)tourSent;
+- (void)resumeTour;
 
 @end
 
@@ -22,7 +23,6 @@
 
 - (void)configureWithTour:(OTTour *)currentTour
        andEncountersCount:(NSNumber *)encountersCount
-              andDistance:(float)distance
               andDuration:(NSTimeInterval)duration;
 
 @end

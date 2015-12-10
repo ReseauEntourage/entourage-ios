@@ -26,6 +26,9 @@
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
 		0AA4C06F1C15F07700DBBE11 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C06E1C15F07700DBBE11 /* SpeechKit.framework */; };
+		0AA4C0711C171F8E00DBBE11 /* Blokletters-Balpen.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4C0701C171F8E00DBBE11 /* Blokletters-Balpen.ttf */; };
+		0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */; };
+		0AA4C0761C1728FA00DBBE11 /* ic_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4C0751C1728FA00DBBE11 /* ic_close.png */; };
 		0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */; };
 		191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
 		191FE92419E943D900C56BCA /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
@@ -169,6 +172,10 @@
 		0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0AA4C06E1C15F07700DBBE11 /* SpeechKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpeechKit.framework; sourceTree = "<group>"; };
+		0AA4C0701C171F8E00DBBE11 /* Blokletters-Balpen.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blokletters-Balpen.ttf"; sourceTree = "<group>"; };
+		0AA4C0721C17283800DBBE11 /* OTAskMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAskMoreViewController.h; sourceTree = "<group>"; };
+		0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAskMoreViewController.m; sourceTree = "<group>"; };
+		0AA4C0751C1728FA00DBBE11 /* ic_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_close.png; sourceTree = "<group>"; };
 		0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterService.h; sourceTree = "<group>"; };
 		0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounterService.m; sourceTree = "<group>"; };
 		191FE92619E945F200C56BCA /* OTEncounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounter.h; sourceTree = "<group>"; };
@@ -380,6 +387,8 @@
 				1DA682C819E7D097007BD4BC /* OTLoginViewController.m */,
 				0A4769331BFB9F07006EA73A /* OTUserViewController.h */,
 				0A4769341BFB9F07006EA73A /* OTUserViewController.m */,
+				0AA4C0721C17283800DBBE11 /* OTAskMoreViewController.h */,
+				0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -653,6 +662,7 @@
 		DBBE8AA419E83CB600FA218E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0AA4C0751C1728FA00DBBE11 /* ic_close.png */,
 				1DA2911419E937760098C01E /* background-button.png */,
 				1DA2911219E92F260098C01E /* logo.png */,
 				DBBE8AA519E83CB600FA218E /* bg-top-header.png */,
@@ -772,6 +782,7 @@
 		DBE9EF4419E7EE5700031144 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				0AA4C0701C171F8E00DBBE11 /* Blokletters-Balpen.ttf */,
 				C22BC0781BCF9355003C2A21 /* MankSans-Medium.ttf */,
 				C22BC0791BCF9355003C2A21 /* MankSans-MediumOblique.ttf */,
 				C22BC07A1BCF9355003C2A21 /* MankSans-Oblique.ttf */,
@@ -888,7 +899,9 @@
 				1DBFC2441A91ECF700A3CE1F /* icon-aa-twitter@2x.png in Resources */,
 				A8B3826019E94BB400CF7184 /* poi_category-0@2x.png in Resources */,
 				DBBE8ACA19E83CB600FA218E /* poi_category-4@2x.png in Resources */,
+				0AA4C0761C1728FA00DBBE11 /* ic_close.png in Resources */,
 				A8B3825F19E94BB400CF7184 /* poi_category-0.png in Resources */,
+				0AA4C0711C171F8E00DBBE11 /* Blokletters-Balpen.ttf in Resources */,
 				19BA509C19E987A100342A36 /* center-location.png in Resources */,
 				1D1503CC1A8A4D93001FD7C3 /* record.png in Resources */,
 				1DBFC2451A91ECF700A3CE1F /* icon-aa-youtube.png in Resources */,
@@ -1078,6 +1091,7 @@
 				0A94B5001B8CC66100402AF3 /* OTTour.m in Sources */,
 				0A4769381BFCC4EB006EA73A /* OTOrganization.m in Sources */,
 				DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */,
+				0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */,
 				6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */,
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,

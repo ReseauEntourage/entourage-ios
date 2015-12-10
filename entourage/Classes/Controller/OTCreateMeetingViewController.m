@@ -148,7 +148,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7c, 0x35, 0xab, 0xb0, 0x7e, 0
         if (text.length == 0) {
             [self.messageTextView setText:result];
         } else {
-            [self.messageTextView setText:[NSString stringWithFormat:@"%@ %@", text, result]];
+            [self.messageTextView setText:[NSString stringWithFormat:@"%@ %@", text, [result lowercaseString]]];
         }
 
 

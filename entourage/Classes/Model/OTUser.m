@@ -10,7 +10,7 @@
 
 #import "NSDictionary+Parsing.h"
 
-NSString *const kKeySid = @"sid";
+NSString *const kKeySid = @"id";
 NSString *const kKeyEmail = @"email";
 NSString *const kKeyFirstname = @"first_name";
 NSString *const kKeyLastname = @"last_name";

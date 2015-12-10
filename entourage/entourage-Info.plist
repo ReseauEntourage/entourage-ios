@@ -30,6 +30,7 @@
 	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Blokletters-Balpen.ttf</string>
 		<string>Sofia-Regular.otf</string>
 		<string>Calibri-Bold-Italic.ttf</string>
 		<string>Calibri-Bold.ttf</string>

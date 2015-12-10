@@ -9,9 +9,7 @@
 // Controller
 #import "OTMapViewController.h"
 #import "UIViewController+menu.h"
-#import "OTMeetingCalloutViewController.h"
 #import "OTCreateMeetingViewController.h"
-#import "OTConfirmationViewController.h"
 #import "OTToursTableViewController.h"
 
 // View
@@ -20,6 +18,7 @@
 #import "JSBadgeView.h"
 
 // Model
+#import "OTUser.h"
 #import "OTTour.h"
 #import "OTTourPoint.h"
 #import "OTEncounter.h"
@@ -41,7 +40,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, OTMeetingCalloutViewControllerDelegate, OTConfirmationViewControllerDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate>
 
 // map
 
@@ -59,7 +58,6 @@
 
 @property BOOL isTourRunning;
 @property int seconds;
-@property (nonatomic) CLLocationDistance distance;
 @property (nonatomic, strong) OTTour *tour;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray *locations;
@@ -118,7 +116,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-    
+
+    [self clearMap];
 	[self refreshMap];
     
     self.launcherView.hidden = YES;
@@ -197,8 +196,16 @@
 }
 
 - (void)feedMapViewWithTours {
+    NSNumber *userId = [[NSUserDefaults standardUserDefaults] currentUser].sid;
     for (OTTour *tour in self.tours) {
-        [self drawTour:tour];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"user_tours_only"]) {
+            if (tour.userId == userId) {
+                [self drawTour:tour];
+            }
+        }
+        else {
+            [self drawTour:tour];
+        }
     }
 }
 
@@ -240,13 +247,25 @@
 - (void)sendTour {
     [[OTTourService new] sendTour:self.tour withSuccess:^(OTTour *sentTour) {
         self.tour.sid = sentTour.sid;
+        self.tour.distance = 0.0;
+        
+        self.launcherView.hidden = YES;
+        self.stopButton.hidden = NO;
+        self.createEncounterButton.hidden = NO;
+        
+        self.seconds = 0;
+        self.locations = [NSMutableArray new];
+        self.isTourRunning = YES;
+        self.start = [NSDate date];
     } failure:^(NSError *error) {
+        NSLog(@"%@",[error localizedDescription]);
     }];
 }
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoint {
     [[OTTourService new] sendTourPoint:tourPoint withTourId:self.tour.sid withSuccess:^(OTTour *updatedTour) {
     } failure:^(NSError *error) {
+        NSLog(@"%@",[error localizedDescription]);
     }];
 }
 
@@ -287,7 +306,6 @@
         if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20) {
             
             if (self.locations.count > 0) {
-                self.distance += [newLocation distanceFromLocation:self.locations.lastObject];
             
                 CLLocationCoordinate2D coords[2];
                 coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
@@ -297,12 +315,13 @@
                 [self.mapView setRegion:region animated:YES];
             
                 if (self.isTourRunning) {
+                    self.tour.distance += [newLocation distanceFromLocation:self.locations.lastObject];
                     [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
                     OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:newLocation];
                     [self.tour.tourPoints addObject:tourPoint];
                     [self.pointsToSend addObject:tourPoint];
                     [self sendTourPoints:self.pointsToSend];
-                    [self.pointsToSend removeLastObject];
+                    [self.pointsToSend removeLastObject]; // passer dans le success de sendTourPoints ?
                 }
             }
         
@@ -372,6 +391,10 @@
     [self clearMap];
 }
 
+- (void)resumeTour {
+    self.isTourRunning = YES;
+}
+
 /********************************************************************************/
 #pragma mark - Segue
 
@@ -384,9 +407,9 @@
         OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.delegate = self;
+        self.isTourRunning = NO;
         [controller configureWithTour:self.tour
                    andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]
-                          andDistance:self.distance
                           andDuration:[[NSDate date] timeIntervalSinceDate:self.start]];
     } else if ([segue.identifier isEqualToString:@"OTCloseTours"]) {
         OTToursTableViewController *controller = (OTToursTableViewController *)segue.destinationViewController;
@@ -445,16 +468,6 @@
 - (IBAction)startTour:(id)sender {
     self.tour = [[OTTour alloc] initWithTourType:[self selectedTourType] andVehicleType:[self selectedVehiculeType]];
     [self sendTour];
-    
-    self.launcherView.hidden = YES;
-    self.stopButton.hidden = NO;
-    self.createEncounterButton.hidden = NO;
-    
-    self.seconds = 0;
-    self.distance = 0.0;
-    self.locations = [NSMutableArray new];
-    self.isTourRunning = YES;
-    self.start = [NSDate date];
 }
 
 - (IBAction)stopTour:(id)sender {

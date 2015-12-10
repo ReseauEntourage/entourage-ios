@@ -39,6 +39,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *updateButton;
 @property (nonatomic, weak) IBOutlet UIButton *unsubscribeButton;
 
+@property (weak, nonatomic) IBOutlet UISwitch *myToursSwitch;
+
 @end
 
 @implementation OTUserViewController
@@ -57,6 +59,11 @@
     self.toursLabel.text = [NSString stringWithFormat:@"%@ maraudes réalisées", [self.currentUser tourCount]];
     self.encountersLabel.text = [NSString stringWithFormat:@"%@ personnes rencontrées", [self.currentUser encounterCount]];
     self.organizationLabel.text = self.currentUser.organization.name;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"user_tours_only"]) {
+        [self.myToursSwitch setOn:YES];
+    } else {
+        [self.myToursSwitch setOn:NO];
+    }
 }
 
 /********************************************************************************/
@@ -101,6 +108,15 @@
 
 - (IBAction)unsubscribe:(id)sender {
     
+}
+
+- (IBAction)displayUserToursOnly:(id)sender {
+    if ([self.myToursSwitch isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"user_tours_only"];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
+    }
 }
 
 @end

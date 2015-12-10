@@ -23,7 +23,6 @@
 
 @property (nonatomic, strong) OTTour *tour;
 @property (nonatomic, strong) NSNumber *encountersCount;
-@property (nonatomic) float distance;
 @property (nonatomic) NSTimeInterval duration;
 
 @property (nonatomic, weak) IBOutlet UILabel *encountersLabel;
@@ -41,7 +40,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.encountersLabel.text = [NSString stringWithFormat:@"%@ personnes rencontrées", self.encountersCount];
-    self.distanceLabel.text = [NSString stringWithFormat:@"%@ km parcourus", [self stringFromFloatDistance:(self.distance)]];
+    self.distanceLabel.text = [NSString stringWithFormat:@"%@ km parcourus", [self stringFromFloatDistance:(self.tour.distance)]];
     self.durationLabel.text = [NSString stringWithFormat:@"%@ passées dans la rue", [self stringFromTimeInterval:(self.duration)]];
 }
 
@@ -52,10 +51,9 @@
 /**************************************************************************************************/
 #pragma mark - Public Methods
 
-- (void)configureWithTour:(OTTour *)currentTour andEncountersCount:(NSNumber *)encountersCount andDistance:(float)distance andDuration:(NSTimeInterval)duration {
+- (void)configureWithTour:(OTTour *)currentTour andEncountersCount:(NSNumber *)encountersCount andDuration:(NSTimeInterval)duration {
     self.tour = currentTour;
     self.encountersCount = encountersCount;
-    self.distance = distance;
     self.duration = duration;
 }
 
@@ -65,10 +63,12 @@
 - (void)closeTour {
     [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
         if ([self.delegate respondsToSelector:@selector(tourSent)]) {
+            NSLog(@"inside");
             [self.delegate tourSent];
         }
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSError *error) {
+        NSLog(@"%@",[error localizedDescription]);
     }];
 }
 
@@ -76,6 +76,9 @@
 #pragma mark - Actions
 
 - (IBAction)resumeTour:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(resumeTour)]) {
+        [self.delegate resumeTour];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -88,9 +91,9 @@
 #pragma mark - Utils
 
 - (NSString *)stringFromFloatDistance:(float)distance {
-    float dislayDistance = distance / 1000;
-    dislayDistance = floorf(dislayDistance * 100) / 100;
-    NSString *stringDistance = [[NSNumber numberWithFloat:dislayDistance] stringValue];
+    float displayDistance = distance / 1000;
+    displayDistance = floorf(displayDistance * 100) / 100;
+    NSString *stringDistance = [[NSNumber numberWithFloat:displayDistance] stringValue];
     NSArray *parts = [stringDistance componentsSeparatedByString:@"."];
     if ([parts count] > 1) {
         return [NSString stringWithFormat:@"%@,%@", [parts objectAtIndex:0], [parts objectAtIndex:1]];
