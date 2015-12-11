@@ -128,6 +128,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if (![self.controllersDictionary objectForKey:segue.identifier] && [segue.identifier isEqualToString:@"OTUserProfile"]) {
+    // here launch SVP show ?
         [self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
     }
 }

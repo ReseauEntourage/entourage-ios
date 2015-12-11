@@ -18,6 +18,9 @@
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
 
+// View
+#import "SVProgressHUD.h"
+
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
@@ -55,7 +58,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", [self.currentUser firstName], [self.currentUser lastName]];
-    self.emailLabel.text = self.currentUser.email;
+    if (self.currentUser.email != nil) {
+        self.emailLabel.text = self.currentUser.email;
+        self.emailField.text = self.currentUser.email;
+    }
     self.toursLabel.text = [NSString stringWithFormat:@"%@ maraudes réalisées", [self.currentUser tourCount]];
     self.encountersLabel.text = [NSString stringWithFormat:@"%@ personnes rencontrées", [self.currentUser encounterCount]];
     self.organizationLabel.text = self.currentUser.organization.name;
@@ -80,7 +86,6 @@
 }
 
 - (void)emptyForm {
-    self.emailField.text = @"";
     self.accessCodeField.text = @"";
     self.confirmationField.text = @"";
 }
@@ -94,14 +99,18 @@
 
 - (IBAction)updateUserInformation:(id)sender {
     if (self.validateForm) {
+        [SVProgressHUD show];
         [[OTAuthService new] updateUserInformationWithEmail:self.emailField.text
                                                  andSmsCode:self.accessCodeField.text
                                                     success:^(NSString *email) {
+                                                        [SVProgressHUD showSuccessWithStatus:@"Informations mises à jour"];
                                                         self.currentUser.email = email;
                                                         [[NSUserDefaults standardUserDefaults] setCurrentUser:self.currentUser];
                                                         self.emailLabel.text = email;
+                                                        self.emailField.text = email;
                                                         [self emptyForm];
                                                     } failure:^(NSError *error) {
+                                                        [SVProgressHUD showSuccessWithStatus:@"Informations non mises à jour"];
                                                     } ];
     }
 }

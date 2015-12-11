@@ -16,6 +16,7 @@
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
 #import "JSBadgeView.h"
+#import "SVProgressHUD.h"
 
 // Model
 #import "OTUser.h"
@@ -379,6 +380,8 @@
 #pragma mark - OTConfirmationViewControllerDelegate
 
 - (void)tourSent {
+    [SVProgressHUD showSuccessWithStatus:@"Maraude terminée !"];
+    
     self.tour = nil;
     [self.pointsToSend removeAllObjects];
     [self.encounters removeAllObjects];

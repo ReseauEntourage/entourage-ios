@@ -1349,87 +1349,135 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XPr-F9-Obb">
                                 <rect key="frame" x="12" y="28" width="296" height="510"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5m-hh-wuu">
-                                        <rect key="frame" x="55" y="442" width="187" height="36"/>
-                                        <animations/>
-                                        <color key="backgroundColor" red="0.74302884615384612" green="0.74302884615384612" blue="0.74302884615384612" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="ME TENIR INFORMÉ !">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="subscribeToNewsletter:" destination="0pH-8t-QYS" eventType="touchUpInside" id="fPD-7y-0n4"/>
-                                        </connections>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="UzF-3I-yqg">
-                                        <rect key="frame" x="65" y="11" width="166" height="95"/>
-                                        <animations/>
-                                    </imageView>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Dk-ol-toN">
-                                        <rect key="frame" x="0.0" y="114" width="296" height="260"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfG-C5-oIJ">
+                                        <rect key="frame" x="-20" y="-20" width="336" height="518"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DÉCOUVREZ ENTOURAGE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LaF-Jv-tEX">
-                                                <rect key="frame" x="49" y="0.0" width="199" height="43"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5m-hh-wuu">
+                                                <rect key="frame" x="75" y="462" width="187" height="36"/>
                                                 <animations/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSo-fq-kH8">
-                                                <rect key="frame" x="45" y="31" width="96" height="58"/>
-                                                <animations/>
-                                                <state key="normal" image="icon-aa-facebook.png"/>
+                                                <color key="backgroundColor" red="0.74302884615384612" green="0.74302884615384612" blue="0.74302884615384612" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="hce-Ll-YRz"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="ME TENIR INFORMÉ !">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="openFacebook:" destination="0pH-8t-QYS" eventType="touchUpInside" id="zU9-dL-D9U"/>
+                                                    <action selector="subscribeToNewsletter:" destination="0pH-8t-QYS" eventType="touchUpInside" id="fPD-7y-0n4"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIj-zl-4iN">
-                                                <rect key="frame" x="8" y="81" width="280" height="179"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="UzF-3I-yqg">
+                                                <rect key="frame" x="85" y="31" width="166" height="95"/>
                                                 <animations/>
-                                                <string key="text">Entourage est un réseau civique sur téléphone mobile (smartphone), aidant les habitants  des villes à entrer en relation et prendre soin des personnes vivant dans la rue (personnes sdf, migrants, etc.) en établissant des liens fraternels et chaleureux avec eux.</string>
-                                                <fontDescription key="fontDescription" name="Blokletters-Balpen" family="Blokletters Balpen" pointSize="13"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GjL-Tu-ghb">
-                                                <rect key="frame" x="184" y="46" width="33" height="27"/>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Dk-ol-toN">
+                                                <rect key="frame" x="20" y="134" width="296" height="260"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DÉCOUVREZ ENTOURAGE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LaF-Jv-tEX">
+                                                        <rect key="frame" x="49" y="0.0" width="199" height="43"/>
+                                                        <animations/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSo-fq-kH8">
+                                                        <rect key="frame" x="45" y="31" width="96" height="58"/>
+                                                        <animations/>
+                                                        <state key="normal" image="icon-aa-facebook.png"/>
+                                                        <connections>
+                                                            <action selector="openFacebook:" destination="0pH-8t-QYS" eventType="touchUpInside" id="zU9-dL-D9U"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIj-zl-4iN">
+                                                        <rect key="frame" x="8" y="81" width="280" height="179"/>
+                                                        <animations/>
+                                                        <string key="text">Entourage est un réseau civique sur téléphone mobile (smartphone), aidant les habitants  des villes à entrer en relation et prendre soin des personnes vivant dans la rue (personnes sdf, migrants, etc.) en établissant des liens fraternels et chaleureux avec eux.</string>
+                                                        <fontDescription key="fontDescription" name="Blokletters-Balpen" family="Blokletters Balpen" pointSize="13"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GjL-Tu-ghb">
+                                                        <rect key="frame" x="184" y="46" width="33" height="27"/>
+                                                        <animations/>
+                                                        <state key="normal" image="icon-aa-twitter.png"/>
+                                                        <connections>
+                                                            <action selector="openTwitter:" destination="0pH-8t-QYS" eventType="touchUpInside" id="TWs-nw-nHA"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
                                                 <animations/>
-                                                <state key="normal" image="icon-aa-twitter.png"/>
+                                                <color key="backgroundColor" red="0.47988782051282053" green="0.47988782051282053" blue="0.47988782051282053" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="260" id="W7L-Y0-QjJ"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o4Y-wV-5XK">
+                                                <rect key="frame" x="55" y="437" width="227" height="1"/>
+                                                <animations/>
+                                                <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="Eme-1x-UP8"/>
+                                                </constraints>
+                                            </view>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Adresse e-mail" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vpj-pr-Ehw">
+                                                <rect key="frame" x="65" y="408" width="206" height="30"/>
+                                                <animations/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFE-Wy-ZBY">
+                                                <rect key="frame" x="276" y="20" width="40" height="40"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="GKn-VW-spE"/>
+                                                </constraints>
+                                                <state key="normal" image="ic_close.png"/>
                                                 <connections>
-                                                    <action selector="openTwitter:" destination="0pH-8t-QYS" eventType="touchUpInside" id="TWs-nw-nHA"/>
+                                                    <action selector="closeModal:" destination="0pH-8t-QYS" eventType="touchUpInside" id="TdL-kB-gI9"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                         <animations/>
-                                        <color key="backgroundColor" red="0.47988782051282053" green="0.47988782051282053" blue="0.47988782051282053" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o4Y-wV-5XK">
-                                        <rect key="frame" x="35" y="417" width="227" height="1"/>
-                                        <animations/>
-                                        <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Adresse e-mail" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vpj-pr-Ehw">
-                                        <rect key="frame" x="45" y="388" width="206" height="30"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFE-Wy-ZBY">
-                                        <rect key="frame" x="256" y="0.0" width="40" height="40"/>
-                                        <animations/>
-                                        <state key="normal" image="ic_close.png"/>
-                                        <connections>
-                                            <action selector="closeModal:" destination="0pH-8t-QYS" eventType="touchUpInside" id="TdL-kB-gI9"/>
-                                        </connections>
-                                    </button>
+                                        <constraints>
+                                            <constraint firstItem="o4Y-wV-5XK" firstAttribute="top" secondItem="5Dk-ol-toN" secondAttribute="bottom" constant="43" id="10f-Zh-PZv"/>
+                                            <constraint firstItem="J5m-hh-wuu" firstAttribute="top" secondItem="o4Y-wV-5XK" secondAttribute="bottom" constant="24" id="4lp-VB-9Bh"/>
+                                            <constraint firstItem="J5m-hh-wuu" firstAttribute="leading" secondItem="RfG-C5-oIJ" secondAttribute="leading" constant="75" id="5Pd-oq-nG2"/>
+                                            <constraint firstAttribute="trailing" secondItem="CFE-Wy-ZBY" secondAttribute="trailing" constant="20" id="7jU-nG-XeG"/>
+                                            <constraint firstItem="5Dk-ol-toN" firstAttribute="centerX" secondItem="RfG-C5-oIJ" secondAttribute="centerX" id="93V-xZ-b1o"/>
+                                            <constraint firstItem="o4Y-wV-5XK" firstAttribute="centerX" secondItem="Vpj-pr-Ehw" secondAttribute="centerX" id="EWh-W9-8dY"/>
+                                            <constraint firstItem="CFE-Wy-ZBY" firstAttribute="top" secondItem="RfG-C5-oIJ" secondAttribute="top" constant="20" id="Enw-DQ-WcX"/>
+                                            <constraint firstItem="5Dk-ol-toN" firstAttribute="centerX" secondItem="UzF-3I-yqg" secondAttribute="centerX" id="NJx-10-QB4"/>
+                                            <constraint firstItem="Vpj-pr-Ehw" firstAttribute="centerX" secondItem="5Dk-ol-toN" secondAttribute="centerX" id="O5b-sa-PZC"/>
+                                            <constraint firstItem="5Dk-ol-toN" firstAttribute="leading" secondItem="RfG-C5-oIJ" secondAttribute="leading" constant="20" id="PKC-Hz-cX1"/>
+                                            <constraint firstItem="o4Y-wV-5XK" firstAttribute="leading" secondItem="RfG-C5-oIJ" secondAttribute="leading" constant="55" id="PKf-oo-rxG"/>
+                                            <constraint firstItem="5Dk-ol-toN" firstAttribute="top" secondItem="UzF-3I-yqg" secondAttribute="bottom" constant="8" symbolic="YES" id="VAa-qs-7ZU"/>
+                                            <constraint firstItem="Vpj-pr-Ehw" firstAttribute="leading" secondItem="RfG-C5-oIJ" secondAttribute="leading" constant="65" id="ZjC-6t-jVO"/>
+                                            <constraint firstAttribute="bottom" secondItem="J5m-hh-wuu" secondAttribute="bottom" constant="20" id="aW8-8h-UVv"/>
+                                            <constraint firstItem="CFE-Wy-ZBY" firstAttribute="leading" secondItem="UzF-3I-yqg" secondAttribute="trailing" constant="25" id="b9L-7Z-9GS"/>
+                                            <constraint firstItem="Vpj-pr-Ehw" firstAttribute="bottom" secondItem="o4Y-wV-5XK" secondAttribute="bottom" id="kJQ-XM-5Gu"/>
+                                            <constraint firstItem="UzF-3I-yqg" firstAttribute="top" secondItem="RfG-C5-oIJ" secondAttribute="top" constant="31" id="kbD-E8-FG3"/>
+                                            <constraint firstItem="UzF-3I-yqg" firstAttribute="leading" secondItem="RfG-C5-oIJ" secondAttribute="leading" constant="85" id="uAO-al-Fjf"/>
+                                            <constraint firstItem="5Dk-ol-toN" firstAttribute="top" secondItem="CFE-Wy-ZBY" secondAttribute="bottom" constant="74" id="vck-ti-Q95"/>
+                                            <constraint firstItem="5Dk-ol-toN" firstAttribute="trailing" secondItem="CFE-Wy-ZBY" secondAttribute="trailing" id="xY7-e3-tX0"/>
+                                            <constraint firstItem="J5m-hh-wuu" firstAttribute="centerX" secondItem="o4Y-wV-5XK" secondAttribute="centerX" id="yDI-Kg-tV4"/>
+                                            <constraint firstItem="Vpj-pr-Ehw" firstAttribute="top" secondItem="5Dk-ol-toN" secondAttribute="bottom" constant="14" id="zoc-9U-oX1"/>
+                                        </constraints>
+                                    </scrollView>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.85882352941176465" green="0.85882352941176465" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="RfG-C5-oIJ" secondAttribute="bottom" constant="12" id="HQI-XY-wgj"/>
+                                    <constraint firstItem="RfG-C5-oIJ" firstAttribute="leading" secondItem="XPr-F9-Obb" secondAttribute="leading" constant="-20" id="NgX-D0-gC2"/>
+                                    <constraint firstItem="RfG-C5-oIJ" firstAttribute="centerX" secondItem="XPr-F9-Obb" secondAttribute="centerX" id="X5N-WQ-kHU"/>
+                                    <constraint firstItem="RfG-C5-oIJ" firstAttribute="top" secondItem="XPr-F9-Obb" secondAttribute="top" constant="-20" id="sFb-6s-5qq"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="5"/>

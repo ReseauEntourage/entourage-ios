@@ -15,6 +15,9 @@
 #import "NSString+Validators.h"
 #import "NSDictionary+Parsing.h"
 
+// View
+#import "SVProgressHUD.h"
+
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
@@ -67,13 +70,16 @@
 
 - (IBAction)subscribeToNewsletter:(id)sender {
     if (![self.emailField.text isEqualToString:@""] && [self.emailField.text isValidEmail]) {
+        [SVProgressHUD show];
         [[OTAuthService new] subscribeToNewsletterWithEmail:self.emailField.text
                                                     success:^(BOOL active) {
                                                         NSLog(active ? @"Newsletter subscription success" : @"Newsletter subscription failure");
                                                         if (active) {
+                                                            [SVProgressHUD showSuccessWithStatus:@"Demande envoyée"];
                                                             [self dismissViewControllerAnimated:YES completion:nil];
                                                         }
                                                     } failure:^(NSError *error) {
+                                                        [SVProgressHUD showErrorWithStatus:@"Demande non envoyée"];
                                                         NSLog(@"%@", error);
                                                     }];
     }

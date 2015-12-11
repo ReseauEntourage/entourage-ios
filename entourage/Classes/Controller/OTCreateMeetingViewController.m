@@ -20,6 +20,7 @@
 
 // Progress HUD
 #import "MBProgressHUD.h"
+#import "SVProgressHUD.h"
 
 // Frameworks
 #import <Social/Social.h>
@@ -102,8 +103,11 @@ const unsigned char SpeechKitApplicationKey[] = {0x7c, 0x35, 0xab, 0xb0, 0x7e, 0
 	encounter.streetPersonName =  self.nameTextField.text;
 	encounter.latitude = self.location.latitude;
 	encounter.longitude = self.location.longitude;
+    
+    [SVProgressHUD show];
     [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId
                                 withSuccess:^(OTEncounter *sentEncounter) {
+                                    [SVProgressHUD showSuccessWithStatus:@"Rencontre créée"];
                                      if (success) {
                                          success(encounter);
                                      }
@@ -112,6 +116,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7c, 0x35, 0xab, 0xb0, 0x7e, 0
                                          [self.navigationController popViewControllerAnimated:YES];
                                      }
                                  } failure:^(NSError *error) {
+                                     [SVProgressHUD showErrorWithStatus:@"Echec de la création de rencontre"];
                                  }];
 }
 

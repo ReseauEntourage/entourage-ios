@@ -18,6 +18,9 @@
 // Model
 #import "OTUser.h"
 
+// View
+#import "SVProgressHUD.h"
+
 @interface OTLoginViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
@@ -65,6 +68,7 @@
 }
 
 - (void)launchAuthentication {
+    [SVProgressHUD show];
     [[OTAuthService new] authWithPhone:self.phoneTextField.text.phoneNumberServerRepresentation
                               password:self.passwordTextField.text
                               deviceId:@"test"
@@ -72,8 +76,10 @@
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
+                                   [SVProgressHUD dismiss];
                                    [self dismissViewControllerAnimated:YES completion:nil];
                                } failure: ^(NSError *error) {
+                                   [SVProgressHUD dismiss];
                                    [[[UIAlertView alloc]
                                      initWithTitle:@"error"
                                      message:error.localizedDescription

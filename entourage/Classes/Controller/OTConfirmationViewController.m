@@ -16,6 +16,9 @@
 // Model
 #import "OTTour.h"
 
+// View
+#import "SVProgressHUD.h"
+
 /*************************************************************************************************/
 #pragma mark - OTConfirmationViewController
 
@@ -68,6 +71,7 @@
         }
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"Erreur de fermeture de la maraude"];
         NSLog(@"%@",[error localizedDescription]);
     }];
 }
@@ -83,6 +87,7 @@
 }
 
 - (IBAction)finishTour:(id)sender {
+    [SVProgressHUD show];
     self.tour.status = NSLocalizedString(@"tour_status_closed", @"");
     [self closeTour];
 }
