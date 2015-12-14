@@ -49,16 +49,16 @@
         vehicle = @"En voiture";
     }
     
-    if ([self.tour.tourType isEqualToString:@"social"]) {
-        image = @"ic_social.png";
+    if ([self.tour.tourType isEqualToString:@"barehands"]) {
+        image = @"ic_bare_hands.png";
         type = @"A mains nues";
     }
-    else if ([self.tour.tourType isEqualToString:@"other"]) {
-        image = @"ic_other.png";
+    else if ([self.tour.tourType isEqualToString:@"medical"]) {
+        image = @"ic_medical.png";
         type = @"Médical";
     }
-    else if ([self.tour.tourType isEqualToString:@"food"]) {
-        image = @"ic_food.png";
+    else if ([self.tour.tourType isEqualToString:@"alimentary"]) {
+        image = @"ic_alimentary.png";
         type = @"Alimentaire";
     }
     

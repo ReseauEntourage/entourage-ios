@@ -35,6 +35,9 @@
 @implementation OTLoginViewController
 
 - (void)viewWillAppear:(BOOL)animated {
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD dismiss];
+    }
 	self.whiteBackground.layer.cornerRadius = 5;
 	self.whiteBackground.layer.masksToBounds = YES;
 }

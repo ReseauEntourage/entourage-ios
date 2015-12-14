@@ -19,9 +19,9 @@
 // MenuItems
 "menu_map_title" = "CARTE";
 "menu_guide_title" = "GUIDE";
+"menu_profile_title" = "PROFIL";
 "menu_myMeetings_title" = "MES RECONTRES";
 "menu_practicalInformation_title" = "INFORMATIONS PRATIQUES";
-"menu_forum_title" = "FORUM";
 "menu_members_title" = "LES MEMBRES";
 "menu_myProfile_title" = "MON PROFIL";
 "menu_myNotifications_title" = "MES NOTIFICATIONS";
@@ -41,9 +41,9 @@
 "button_validate" = "Valider";
 
 // Tour
-"tour_type_social" = "social";
-"tour_type_other" = "other";
-"tour_type_food" = "food";
+"tour_type_bare_hands" = "barehands";
+"tour_type_medical" = "medical";
+"tour_type_alimentary" = "alimentary";
 "tour_vehicle_feet" = "feet";
 "tour_vehicle_car" = "car";
 "tour_status_ongoing" = "ongoing";

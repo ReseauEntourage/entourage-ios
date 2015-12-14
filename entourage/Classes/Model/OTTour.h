@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef enum { OTVehiclesFeet=0, OTVehiclesCar=1 } OTVehicles;
-typedef enum { OTTypesSocial=0, OTTypesOther=1, OTTypesFood=2 } OTTypes;
+typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTypes;
 
 @interface OTTour : NSObject
 

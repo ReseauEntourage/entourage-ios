@@ -20,6 +20,7 @@
 
 // View
 #import "OTMenuTableViewCell.h"
+#import "SVProgressHUD.h"
 
 // Utils
 #import "NSUserDefaults+OT.h"
@@ -27,7 +28,7 @@
 /* MenuItem identifiers */
 NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuIdentifierForMap";
 NSString *const OTMenuViewControllerSegueMenuGuideIdentifier = @"segueMenuIdentifierForGuide";
-NSString *const OTMenuViewControllerSegueMenuForumIdentifier = @"segueMenuForumIdentifier";
+NSString *const OTMenuViewControllerSegueMenuProfileIdentifier = @"segueMenuIdentifierForProfile";
 NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
 
 @interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -37,7 +38,6 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 // UI
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UIButton *profileButton;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -77,8 +77,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 	if (indexPath.row == self.menuItems.count - 1) {
-	}
-	else if (indexPath.row == self.menuItems.count - 2) {
+        [SVProgressHUD show];
 		[[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
 
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -128,7 +127,6 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if (![self.controllersDictionary objectForKey:segue.identifier] && [segue.identifier isEqualToString:@"OTUserProfile"]) {
-    // here launch SVP show ?
         [self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
     }
 }
@@ -172,6 +170,11 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
                                               segueIdentifier:OTMenuViewControllerSegueMenuGuideIdentifier];
     
     [menuItems addObject:itemGuide];
+    
+    // Profile
+    OTMenuItem *itemProfile = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_profile_title", @"")
+                                                segueIdentifier:OTMenuViewControllerSegueMenuProfileIdentifier];
+    [menuItems addObject:itemProfile];
 
 	// Disconnect
 	OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
@@ -179,7 +182,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	[menuItems addObject:itemDisconnect];
 
 	// Version
-
+    /*
 	NSString *buildVersion = [[[NSBundle bundleForClass:[self class]] infoDictionary]
 	                          objectForKey:@"CFBundleVersion"];
 
@@ -188,6 +191,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	version = [NSString stringWithFormat:@"%@ (%@)", version, buildVersion];
 	OTMenuItem *itemVersion = [[OTMenuItem alloc] initWithTitle:version segueIdentifier:nil];
 	[menuItems addObject:itemVersion];
+     */
 
 	return menuItems;
 }

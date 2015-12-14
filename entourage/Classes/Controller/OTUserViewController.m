@@ -8,6 +8,9 @@
 
 #import "OTUserViewController.h"
 
+// Controller
+#import "UIViewController+menu.h"
+
 // Service
 #import "OTAuthService.h"
 
@@ -38,7 +41,6 @@
 @property (nonatomic, weak) IBOutlet UITextField *accessCodeField;
 @property (nonatomic, weak) IBOutlet UITextField *confirmationField;
 
-@property (nonatomic, weak) IBOutlet UIButton *backButton;
 @property (nonatomic, weak) IBOutlet UIButton *updateButton;
 @property (nonatomic, weak) IBOutlet UIButton *unsubscribeButton;
 
@@ -53,6 +55,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self createMenuButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -92,10 +95,6 @@
 
 /********************************************************************************/
 #pragma mark - Actions
-
-- (IBAction)closeProfile:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 - (IBAction)updateUserInformation:(id)sender {
     if (self.validateForm) {

@@ -48,6 +48,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, strong) NSMapTable *drawnTours;
 
 // markers
 
@@ -59,6 +60,7 @@
 
 @property BOOL isTourRunning;
 @property int seconds;
+@property NSString *currentTourType;
 @property (nonatomic, strong) OTTour *tour;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray *locations;
@@ -98,6 +100,7 @@
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
     //self.closeTours = [NSMutableArray new];
+    self.drawnTours = [NSMapTable new];
     
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     
@@ -216,7 +219,9 @@
     for (OTTourPoint *point in tour.tourPoints) {
         coords[count++] = point.toLocation.coordinate;
     }
-    [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:[tour.tourPoints count]]];
+    MKPolyline *polyline = [MKPolyline polylineWithCoordinates:coords count:[tour.tourPoints count]];
+    [self.drawnTours setObject:tour forKey:polyline];
+    [self.mapView addOverlay:polyline];
 }
 
 - (NSString *)encounterAnnotationToString:(OTEncounterAnnotation *)annotation {
@@ -322,7 +327,7 @@
                     [self.tour.tourPoints addObject:tourPoint];
                     [self.pointsToSend addObject:tourPoint];
                     [self sendTourPoints:self.pointsToSend];
-                    [self.pointsToSend removeLastObject]; // passer dans le success de sendTourPoints ?
+                    [self.pointsToSend removeLastObject];
                 }
             }
         
@@ -335,7 +340,30 @@
     if ([overlay isKindOfClass:[MKPolyline class]]) {
         MKPolyline *polyline = (MKPolyline *) overlay;
         MKPolylineRenderer *aRenderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
-        aRenderer.strokeColor = [UIColor blueColor];
+        
+        OTTour *tour = [self.drawnTours objectForKey:polyline];
+        if ([tour.tourType isEqualToString:@"medical"]) {
+            aRenderer.strokeColor = [UIColor redColor];
+        }
+        else if ([tour.tourType isEqualToString:@"barehands"]) {
+            aRenderer.strokeColor = [UIColor blueColor];
+        }
+        else if ([tour.tourType isEqualToString:@"alimentary"]) {
+            aRenderer.strokeColor = [UIColor greenColor];
+        }
+        
+        if (self.isTourRunning && tour == nil) {
+            if ([self.currentTourType isEqualToString:@"medical"]) {
+                aRenderer.strokeColor = [UIColor redColor];
+            }
+            else if ([self.currentTourType isEqualToString:@"barehands"]) {
+                aRenderer.strokeColor = [UIColor blueColor];
+            }
+            else if ([self.currentTourType isEqualToString:@"alimentary"]) {
+                aRenderer.strokeColor = [UIColor greenColor];
+            }
+        }
+        
         aRenderer.lineWidth = 3;
         return aRenderer;
     }
@@ -383,6 +411,7 @@
     [SVProgressHUD showSuccessWithStatus:@"Maraude terminée !"];
     
     self.tour = nil;
+    self.currentTourType = nil;
     [self.pointsToSend removeAllObjects];
     [self.encounters removeAllObjects];
     
@@ -498,17 +527,17 @@
         }
     }
     switch (selectedType) {
-        case OTTypesSocial:
-            return NSLocalizedString(@"tour_type_social", @"");
+        case OTTypesBareHands:
+            self.currentTourType = NSLocalizedString(@"tour_type_bare_hands", @"");
             break;
-        case OTTypesOther:
-            return NSLocalizedString(@"tour_type_other", @"");
+        case OTTypesMedical:
+            self.currentTourType = NSLocalizedString(@"tour_type_medical", @"");
             break;
-        case OTTypesFood:
-            return NSLocalizedString(@"tour_type_food", @"");
+        case OTTypesAlimentary:
+            self.currentTourType = NSLocalizedString(@"tour_type_alimentary", @"");
             break;
     }
-    return nil;
+    return self.currentTourType;
 }
 
 @end

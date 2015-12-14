@@ -67,16 +67,16 @@
     
     cell.textLabel.text = tour.organizationName;
     NSString *type;
-    if ([tour.tourType isEqualToString:@"social"]) {
-        cell.imageView.image = [UIImage imageNamed:@"ic_social.png"];
+    if ([tour.tourType isEqualToString:@"barehands"]) {
+        cell.imageView.image = [UIImage imageNamed:@"ic_bare_hands.png"];
         type = @"A mains nues";
     }
-    else if ([tour.tourType isEqualToString:@"other"]) {
-        cell.imageView.image = [UIImage imageNamed:@"ic_other.png"];
+    else if ([tour.tourType isEqualToString:@"medical"]) {
+        cell.imageView.image = [UIImage imageNamed:@"ic_medical.png"];
         type = @"Médical";
     }
-    else if ([tour.tourType isEqualToString:@"food"]) {
-        cell.imageView.image = [UIImage imageNamed:@"ic_food.png"];
+    else if ([tour.tourType isEqualToString:@"alimentary"]) {
+        cell.imageView.image = [UIImage imageNamed:@"ic_alimentary.png"];
         type = @"Alimentaire";
     }
     if ([tour.tourPoints count] != 0) {
