@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class OTPoi;
+
 @protocol OTCalloutViewControllerDelegate <NSObject>
 
 - (void)dismissPopover;

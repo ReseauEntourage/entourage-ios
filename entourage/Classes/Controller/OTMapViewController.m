@@ -11,6 +11,7 @@
 #import "UIViewController+menu.h"
 #import "OTCreateMeetingViewController.h"
 #import "OTToursTableViewController.h"
+#import "OTCalloutViewController.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -34,6 +35,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import <WYPopoverController/WYPopoverController.h>
 #import <QuartzCore/QuartzCore.h>
+#import "KPClusteringController.h"
+#import "KPAnnotation.h"
 
 // User
 #import "NSUserDefaults+OT.h"
@@ -55,6 +58,7 @@
 @property (nonatomic, strong) NSMutableArray *encounters;
 @property (nonatomic, strong) WYPopoverController *popover;
 @property (nonatomic) BOOL isRegionSetted;
+@property (nonatomic, strong) KPClusteringController *clusteringController;
 
 // tour
 
@@ -87,6 +91,9 @@
 
 @property (nonatomic, strong) NSMutableArray *tours;
 
+@property (weak, nonatomic) IBOutlet UIButton *notifButton;
+
+
 @end
 
 @implementation OTMapViewController
@@ -112,6 +119,7 @@
 
 	self.mapView.showsUserLocation = YES;
 	self.mapView.delegate = self;
+    self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
 	[self zoomToCurrentLocation:nil];
 	[self createMenuButton];
@@ -197,6 +205,8 @@
 		OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
 		[annotations addObject:pointAnnotation];
 	}
+    
+    [self.clusteringController setAnnotations:annotations];
 }
 
 - (void)feedMapViewWithTours {
@@ -233,17 +243,33 @@
 	return cellTitle;
 }
 
-- (void)displayEncounter:(OTEncounterAnnotation *)simpleAnnontation {
+- (void)displayEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view {
 	OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTMeetingCalloutViewController"];
 	controller.delegate = self;
+ 
+    OTEncounterAnnotation *encounterAnnotation = (OTEncounterAnnotation *)simpleAnnontation;
+    OTEncounter *encounter = encounterAnnotation.encounter;
+    [self presentViewController:controller animated:YES completion:nil];
+    [controller configureWithEncouter:encounter];
+    
+    /*
+    UIView *popView = [controller view];
+    popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
+    [UIView animateWithDuration:.3f animations: ^{
+         popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
+     }];
+    
+    self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
+    [self.popover setTheme:[WYPopoverTheme themeForIOS7]];
+    
+    [self.popover presentPopoverFromRect:view.bounds
+                                  inView:view
+                permittedArrowDirections:WYPopoverArrowDirectionNone
+                                animated:YES
+                                 options:WYPopoverAnimationOptionFadeWithScale];
+     */
 
-	OTEncounterAnnotation *encounterAnnotation = (OTEncounterAnnotation *)simpleAnnontation;
-	OTEncounter *encounter = encounterAnnotation.encounter;
-	[self presentViewController:controller animated:YES completion:nil];
-	[controller configureWithEncouter:encounter];
-
-
-	[Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{ @"encounter_id" : encounterAnnotation.encounter.sid }];
+	//[Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{ @"encounter_id" : encounterAnnotation.encounter.sid }];
 }
 
 - (void)eachSecond {
@@ -278,6 +304,47 @@
 /********************************************************************************/
 #pragma mark - MKMapViewDelegate
 
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation> )annotation {
+    MKAnnotationView *annotationView = nil;
+    
+    if ([annotation isKindOfClass:[KPAnnotation class]]) {
+        KPAnnotation *kingpinAnnotation = (KPAnnotation *)annotation;
+        
+        if ([kingpinAnnotation isCluster]) {
+            JSBadgeView *badgeView;
+            annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterClusterAnnotationIdentifier];
+            if (!annotationView) {
+                annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEncounterClusterAnnotationIdentifier];
+                annotationView.canShowCallout = NO;
+                annotationView.image = [UIImage imageNamed:@"rencontre.png"];
+                badgeView = [[JSBadgeView alloc] initWithParentView:annotationView alignment:JSBadgeViewAlignmentBottomCenter];
+            }
+            else {
+                for (UIView *subview in annotationView.subviews) {
+                    if ([subview isKindOfClass:JSBadgeView.class]) {
+                        badgeView = (JSBadgeView *)subview;
+                    }
+                }
+            }
+            badgeView.badgeText = [NSString stringWithFormat:@"%lu", (unsigned long)kingpinAnnotation.annotations.count];
+        }
+        else {
+            id <MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
+            if ([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]]) {
+                annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterAnnotationIdentifier];
+                if (!annotationView) {
+                    annotationView = ((OTEncounterAnnotation *)simpleAnnontation).annotationView;
+                }
+                annotationView.annotation = simpleAnnontation;
+            }
+        }
+        annotationView.canShowCallout = YES;
+    }
+    
+    
+    return annotationView;
+}
+
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
 	[self refreshMap];
 }
@@ -301,6 +368,23 @@
     self.locationManager.distanceFilter = 5; // meters
     
     [self.locationManager startUpdatingLocation];
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    [mapView deselectAnnotation:view.annotation animated:NO];
+    
+    if ([view.annotation isKindOfClass:[KPAnnotation class]]) {
+        KPAnnotation *kingpinAnnotation = (KPAnnotation *)view.annotation;
+        if ([kingpinAnnotation isCluster]) {
+            // Do nothing
+        }
+        else {
+            id <MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
+            if ([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]]) {
+                [self displayEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view];
+            }
+        }
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -371,6 +455,7 @@
 }
 
 - (void)clearMap {
+    [self.mapView removeAnnotations:[self.mapView annotations]];
     [self.mapView removeOverlays:[self.mapView overlays]];
 }
 
@@ -428,11 +513,19 @@
 }
 
 /********************************************************************************/
+#pragma mark - OTCreateMeetingViewControllerDelegate
+
+- (void)encounterSent:(OTEncounter *)encounter {
+    [self feedMapViewWithEncounters];
+}
+
+/********************************************************************************/
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"OTCreateMeeting"]) {
         OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *)segue.destinationViewController;
+        controller.delegate = self;
         [controller configureWithTourId:self.tour.sid andLocation:self.mapView.region.center];
         controller.encounters = self.encounters;
     } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
@@ -504,6 +597,16 @@
 
 - (IBAction)stopTour:(id)sender {
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
+}
+
+- (IBAction)sendNotification:(id)sender {
+    // Schedule the notification
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.userInfo = @{ @"sender" : @"Developers", @"object" : @"Besoin de vêtements", @"content" : @"Un SDF a besoin de vêtements au 5 rue du temple."};
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
+    // Request to reload table view data
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 }
 
 /**************************************************************************************************/

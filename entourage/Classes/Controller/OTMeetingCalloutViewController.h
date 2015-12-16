@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class OTEncounter;
+
 @protocol OTMeetingCalloutViewControllerDelegate <NSObject>
 
 - (void)dismissPopover;
@@ -16,6 +17,7 @@
 @end
 
 @interface OTMeetingCalloutViewController : UIViewController
+
 @property (weak, nonatomic) id<OTMeetingCalloutViewControllerDelegate> delegate;
 
 - (void)configureWithEncouter:(OTEncounter *)encounter;

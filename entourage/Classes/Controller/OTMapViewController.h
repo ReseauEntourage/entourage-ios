@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "OTMeetingCalloutViewController.h"
+#import "OTCreateMeetingViewController.h"
 #import "OTConfirmationViewController.h"
 
 @class MKMapView;
 
-@interface OTMapViewController : UIViewController <OTMeetingCalloutViewControllerDelegate, OTConfirmationViewControllerDelegate>
+@interface OTMapViewController : UIViewController <OTMeetingCalloutViewControllerDelegate, OTCreateMeetingViewControllerDelegate, OTConfirmationViewControllerDelegate>
+
+
 
 @end

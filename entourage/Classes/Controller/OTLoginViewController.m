@@ -74,7 +74,7 @@
     [SVProgressHUD show];
     [[OTAuthService new] authWithPhone:self.phoneTextField.text.phoneNumberServerRepresentation
                               password:self.passwordTextField.text
-                              deviceId:@"test"
+                              deviceId:[[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"]
                                success: ^(OTUser *user) {
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];

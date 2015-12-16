@@ -16,7 +16,15 @@
 
 @class OTEncounter;
 
+@protocol OTCreateMeetingViewControllerDelegate <NSObject>
+
+- (void)encounterSent:(OTEncounter *)encounter;
+
+@end
+
 @interface OTCreateMeetingViewController : UIViewController <SpeechKitDelegate, SKRecognizerDelegate>
+
+@property(nonatomic, weak) id<OTCreateMeetingViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) SKRecognizer *recognizer;
 @property (nonatomic, strong) NSMutableArray *encounters;

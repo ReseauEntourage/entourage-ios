@@ -66,7 +66,6 @@
 - (void)closeTour {
     [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
         if ([self.delegate respondsToSelector:@selector(tourSent)]) {
-            NSLog(@"inside");
             [self.delegate tourSent];
         }
         [self dismissViewControllerAnimated:YES completion:nil];

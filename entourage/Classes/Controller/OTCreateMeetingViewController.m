@@ -92,6 +92,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7c, 0x35, 0xab, 0xb0, 0x7e, 0
 - (void)sendEncounter:(id)sender {
     [self postEncounterWithCompletionBlock:^(OTEncounter *encounter){
         [self.encounters addObject:encounter];
+        [self.delegate encounterSent:encounter];
         [self.navigationController popViewControllerAnimated:YES];
     }];
 }
@@ -113,6 +114,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7c, 0x35, 0xab, 0xb0, 0x7e, 0
                                      }
                                      else
                                      {
+                                         [self.delegate encounterSent:encounter];
                                          [self.navigationController popViewControllerAnimated:YES];
                                      }
                                  } failure:^(NSError *error) {

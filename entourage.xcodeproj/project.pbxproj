@@ -11,6 +11,7 @@
 		0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */; };
 		0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4769341BFB9F07006EA73A /* OTUserViewController.m */; };
 		0A4769381BFCC4EB006EA73A /* OTOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4769371BFCC4EB006EA73A /* OTOrganization.m */; };
+		0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D16091C21B3AB0066394C /* OTMessageViewController.m */; };
 		0A51B6A01C0F0A8900987F07 /* poi_cluster.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A51B69E1C0F0A8900987F07 /* poi_cluster.png */; };
 		0A51B6A11C0F0A8900987F07 /* poi_cluster@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A51B69F1C0F0A8900987F07 /* poi_cluster@2x.png */; };
 		0A70FA181BFDD69C0080E8EC /* OTToursTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A70FA171BFDD69C0080E8EC /* OTToursTableViewController.m */; };
@@ -152,6 +153,8 @@
 		0A4769341BFB9F07006EA73A /* OTUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUserViewController.m; sourceTree = "<group>"; };
 		0A4769361BFCC4B5006EA73A /* OTOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOrganization.h; sourceTree = "<group>"; };
 		0A4769371BFCC4EB006EA73A /* OTOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOrganization.m; sourceTree = "<group>"; };
+		0A4D16081C21B3AB0066394C /* OTMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMessageViewController.h; sourceTree = "<group>"; };
+		0A4D16091C21B3AB0066394C /* OTMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMessageViewController.m; sourceTree = "<group>"; };
 		0A51B69E1C0F0A8900987F07 /* poi_cluster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poi_cluster.png; sourceTree = "<group>"; };
 		0A51B69F1C0F0A8900987F07 /* poi_cluster@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poi_cluster@2x.png"; sourceTree = "<group>"; };
 		0A70FA161BFDD69C0080E8EC /* OTToursTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToursTableViewController.h; sourceTree = "<group>"; };
@@ -352,6 +355,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A4D16071C21B3950066394C /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				0A4D16081C21B3AB0066394C /* OTMessageViewController.h */,
+				0A4D16091C21B3AB0066394C /* OTMessageViewController.m */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
 		0A70FA2F1BFF31E10080E8EC /* Tour */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,6 +490,7 @@
 		6B4930C719A773C500DA7EE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0A4D16071C21B3950066394C /* Message */,
 				0A70FA2F1BFF31E10080E8EC /* Tour */,
 				1D962C7219E9280800547687 /* Login */,
 				DBBE8AD319E85E9000FA218E /* MyMeetings */,
@@ -856,6 +869,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 					6B92CABE19A7461C004E8C9B = {
@@ -1074,6 +1090,7 @@
 				6B4930DF19A77C2F00DA7EE0 /* OTHTTPRequestManager.m in Sources */,
 				6B1A847119E811210020FB93 /* OTPoiService.m in Sources */,
 				DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */,
+				0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */,
 				DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */,
 				A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */,
 				0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */,

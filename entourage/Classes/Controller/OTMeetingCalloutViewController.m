@@ -9,6 +9,7 @@
 #import "OTMeetingCalloutViewController.h"
 
 // Model
+#import "OTUser.h"
 #import "OTEncounter.h"
 
 // Helper
@@ -24,9 +25,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) OTEncounter *encounter;
-@property (strong, nonatomic) IBOutlet UILabel *theirVocalMsg;
-@property (strong, nonatomic) IBOutlet UIButton *tweetButton;
-@property (strong, nonatomic) IBOutlet UIButton *facebookButton;
 
 @end
 
@@ -51,13 +49,9 @@
 
 	NSString *date = [formatter stringFromDate:encounter.date];
 
-	NSString *title = [NSString stringWithFormat:@"%@ %@ %@ %@, le %@", encounter.userName, NSLocalizedString(@"has_encountered", @""), encounter.streetPersonName, NSLocalizedString(@"here", @""), date];
+	NSString *title = [NSString stringWithFormat:@"%@ %@ %@ %@, le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, NSLocalizedString(@"has_encountered", @""), encounter.streetPersonName, NSLocalizedString(@"here", @""), date];
 
 	self.titleLabel.text = title;
-
-    self.theirVocalMsg.hidden = YES;
-    self.tweetButton.hidden = YES;
-    self.facebookButton.hidden = YES;
     NSString *body = @"";
 
 	if (encounter.message.length != 0) {
