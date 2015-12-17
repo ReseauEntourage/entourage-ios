@@ -236,8 +236,11 @@
         coords[count++] = point.toLocation.coordinate;
     }
     MKPolyline *polyline = [MKPolyline polylineWithCoordinates:coords count:[tour.tourPoints count]];
-    [self.drawnTours setObject:tour forKey:polyline];
-    [self.mapView addOverlay:polyline];
+    //OTTour *t = [self.drawnTours objectForKey:polyline];
+    //if (t == nil) {
+        [self.drawnTours setObject:tour forKey:polyline];
+        [self.mapView addOverlay:polyline];
+    //}
 }
 
 - (NSString *)encounterAnnotationToString:(OTEncounterAnnotation *)annotation {
