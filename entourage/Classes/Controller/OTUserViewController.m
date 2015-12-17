@@ -96,6 +96,15 @@
 /********************************************************************************/
 #pragma mark - Actions
 
+- (IBAction)displayUserToursOnly:(id)sender {
+    if ([self.myToursSwitch isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"user_tours_only"];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
+    }
+}
+
 - (IBAction)updateUserInformation:(id)sender {
     if (self.validateForm) {
         [SVProgressHUD show];
@@ -116,15 +125,6 @@
 
 - (IBAction)unsubscribe:(id)sender {
     
-}
-
-- (IBAction)displayUserToursOnly:(id)sender {
-    if ([self.myToursSwitch isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"user_tours_only"];
-    }
-    else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
-    }
 }
 
 @end

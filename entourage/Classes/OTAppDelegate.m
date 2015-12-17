@@ -18,7 +18,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 
 NSString *const kUserInfoSender = @"sender";
 NSString *const kUserInfoObject = @"object";
-NSString *const kUserInfoMessage = @"message";
+NSString *const kUserInfoMessage = @"content";
 
 @interface OTAppDelegate () <UIApplicationDelegate>
 
@@ -67,8 +67,8 @@ NSString *const kUserInfoMessage = @"message";
     // Building the notification
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:@"sender"]
-                                                                       message:[userInfo objectForKey:@"object"]
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender]
+                                                                       message:[userInfo objectForKey:kUserInfoObject]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
                                                                 style:UIAlertActionStyleDefault
@@ -77,7 +77,14 @@ NSString *const kUserInfoMessage = @"message";
         UIAlertAction *openAction = [UIAlertAction actionWithTitle:@"Afficher"
                                                              style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                               //
+                                                               OTMessageViewController *controller =
+                                                               (OTMessageViewController *)[application.keyWindow.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"OTMessageViewController"];
+                                                               
+                                                               [application.keyWindow.rootViewController presentViewController:controller animated:YES completion:nil];
+                                                               
+                                                               [controller configureWithSender:[userInfo objectForKey:kUserInfoSender]
+                                                                                     andObject:[userInfo objectForKey:kUserInfoObject]
+                                                                                    andMessage:[userInfo objectForKey:kUserInfoMessage]];
                                                            }];
         [alert addAction:defaultAction];
         [alert addAction:openAction];
@@ -86,6 +93,7 @@ NSString *const kUserInfoMessage = @"message";
     
     // Set icon badge number to zero
     application.applicationIconBadgeNumber = 0;
+
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {

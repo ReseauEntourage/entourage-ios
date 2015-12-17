@@ -8,6 +8,8 @@
 
 #import "OTUser.h"
 
+extern NSString *const kAPIUserRoute;
+
 @interface OTAuthService : NSObject
 
 - (void)authWithPhone:(NSString *)phone

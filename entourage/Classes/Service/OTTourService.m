@@ -12,6 +12,7 @@
 #import "OTTourPoint.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
+#import "OTAuthService.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
@@ -122,6 +123,40 @@ NSString *const kTourPoints = @"tour_points";
                                                failure(error);
                                            }
                                        }];
+}
+
+- (void)toursByUserId:(NSNumber *)userId
+       withPageNumber:(NSNumber *)pageNumber
+     andNumberPerPage:(NSNumber *)per
+              success:(void (^)(NSMutableArray *userTours))success
+              failure:(void (^)(NSError *error))failure
+{
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_user_tours", @""),
+                     kAPIUserRoute,
+                     userId,
+                     kTours,
+                     [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSDictionary *parameters = @{ @"page" : pageNumber, @"per" : per };
+    [[OTHTTPRequestManager sharedInstance] GET:url
+                                    parameters:parameters
+                                       success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                        {
+                                           NSDictionary *data = responseObject;
+                                           NSMutableArray *userTours = [self toursFromDictionary:data];
+                                           
+                                           if (success)
+                                           {
+                                               success(userTours);
+                                           }
+                                       }
+                                       failure:^(AFHTTPRequestOperation * operation, NSError *error)
+                                        {
+                                           if (failure)
+                                           {
+                                               failure(error);
+                                           }
+                                       }];
+                  
 }
 
 /**************************************************************************************************/

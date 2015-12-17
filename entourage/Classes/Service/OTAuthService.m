@@ -24,7 +24,6 @@
 
 /**************************************************************************************************/
 #pragma mark - Constants
-
 NSString *const kAPIUserRoute = @"users";
 NSString *const kAPIUpdateUserRoute = @"update_me";
 
@@ -39,7 +38,7 @@ NSString *const kAPIUpdateUserRoute = @"update_me";
               success:(void (^)(OTUser *))success
               failure:(void (^)(NSError *))failure
 {
-    NSDictionary *parameters = @{ @"phone": phone, @"sms_code": password, @"device_type": @"ios", @"device_id": deviceId };
+    NSDictionary *parameters = @{ @"phone": phone, @"sms_code": password, @"device_type": @"ios", @"device_id": (deviceId == nil ? @"" : deviceId) };
     
     [[OTHTTPRequestManager sharedInstance]
      POST:@"login"

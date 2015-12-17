@@ -91,6 +91,7 @@
 
 @property (nonatomic, strong) NSMutableArray *tours;
 
+// Push test
 @property (weak, nonatomic) IBOutlet UIButton *notifButton;
 
 
@@ -184,6 +185,19 @@
                                             [self registerObserver];
                                             [self.indicatorView setHidden:YES];
                                         }];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"user_tours_only"]) {
+        [[OTTourService new] toursByUserId:[[NSUserDefaults standardUserDefaults] currentUser].sid
+                            withPageNumber:@1
+                          andNumberPerPage:@50
+                                   success:^(NSMutableArray *userTours) {
+                                       [self.indicatorView setHidden:YES];
+                                       self.tours = userTours;
+                                       [self feedMapViewWithTours];
+                                   } failure:^(NSError *error) {
+                                       [self registerObserver];
+                                       [self.indicatorView setHidden:YES];
+                                   }];
+    }
 }
 
 - (CLLocationDistance)mapHeight {
@@ -210,16 +224,8 @@
 }
 
 - (void)feedMapViewWithTours {
-    NSNumber *userId = [[NSUserDefaults standardUserDefaults] currentUser].sid;
     for (OTTour *tour in self.tours) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"user_tours_only"]) {
-            if (tour.userId == userId) {
-                [self drawTour:tour];
-            }
-        }
-        else {
-            [self drawTour:tour];
-        }
+        [self drawTour:tour];
     }
 }
 
