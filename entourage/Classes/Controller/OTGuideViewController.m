@@ -145,16 +145,55 @@
     [self.clusteringController setAnnotations:self.markers];
 }
 
+- (void)displayPoiDetails:(MKAnnotationView *)view {
+    KPAnnotation *kpAnnotation = view.annotation;
+    __block OTCustomAnnotation *annotation = nil;
+    [[kpAnnotation annotations] enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[OTCustomAnnotation class]]) {
+            annotation = obj;
+            *stop = YES;
+        }
+    }];
+    
+    // Start up our view controller from a Storyboard
+    OTCalloutViewController *controller = (OTCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCalloutViewController"];
+    controller.delegate = self;
+    
+    UIView *popView = [controller view];
+    
+    popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
+    
+    [UIView animateWithDuration:.3f
+                     animations: ^
+     {
+         popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
+     }];
+    [controller configureWithPoi:annotation.poi];
+    
+    self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
+    [self.popover setTheme:[WYPopoverTheme themeForIOS7]];
+    
+    [self.popover presentPopoverFromRect:view.bounds
+                                  inView:view
+                permittedArrowDirections:WYPopoverArrowDirectionNone
+                                animated:YES
+                                 options:WYPopoverAnimationOptionFadeWithScale];
+    [Flurry logEvent:@"Open_POI_From_Map" withParameters:@{ @"poi_id" : annotation.poi.sid }];
+    
+    self.blurEffectView.hidden = NO;
+}
+
 /********************************************************************************/
 #pragma mark - MKMapViewDelegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation> )annotation {
     MKAnnotationView *annotationView = nil;
+    MKZoomScale currentZoomScale = mapView.bounds.size.width / mapView.visibleMapRect.size.width;
     
     if ([annotation isKindOfClass:[KPAnnotation class]]) {
         KPAnnotation *kingPinAnnotation = (KPAnnotation *)annotation;
         
-        if (kingPinAnnotation.isCluster) {
+        if (currentZoomScale < 0.244113 && kingPinAnnotation.isCluster) {
             annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"cluster"];
             if (annotationView == nil) {
                 annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingPinAnnotation reuseIdentifier:@"cluster"];
@@ -205,44 +244,14 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     [mapView deselectAnnotation:view.annotation animated:NO];
+    MKZoomScale currentZoomScale = mapView.bounds.size.width / mapView.visibleMapRect.size.width;
     
     KPAnnotation *kpAnnotation = view.annotation;
-    if (!kpAnnotation.isCluster) {
-        
-        __block OTCustomAnnotation *annotation = nil;
-        [[kpAnnotation annotations] enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
-            if ([obj isKindOfClass:[OTCustomAnnotation class]]) {
-                annotation = obj;
-                *stop = YES;
-            }
-        }];
-        
-        // Start up our view controller from a Storyboard
-        OTCalloutViewController *controller = (OTCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCalloutViewController"];
-        controller.delegate = self;
-        
-        UIView *popView = [controller view];
-        
-        popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
-        
-        [UIView animateWithDuration:.3f
-                         animations: ^
-         {
-             popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
-         }];
-        [controller configureWithPoi:annotation.poi];
-        
-        self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
-        [self.popover setTheme:[WYPopoverTheme themeForIOS7]];
-        
-        [self.popover presentPopoverFromRect:view.bounds
-                                      inView:view
-                    permittedArrowDirections:WYPopoverArrowDirectionNone
-                                    animated:YES
-                                     options:WYPopoverAnimationOptionFadeWithScale];
-        [Flurry logEvent:@"Open_POI_From_Map" withParameters:@{ @"poi_id" : annotation.poi.sid }];
-        
-        self.blurEffectView.hidden = NO;
+    if (currentZoomScale > 0.244113) {
+        [self displayPoiDetails:view];
+    }
+    else if (!kpAnnotation.isCluster) {
+        [self displayPoiDetails:view];
     }
 }
 

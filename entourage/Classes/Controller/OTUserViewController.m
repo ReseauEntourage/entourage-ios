@@ -73,6 +73,7 @@
     } else {
         [self.myToursSwitch setOn:NO];
     }
+    self.title = NSLocalizedString(@"userviewcontroller_title", @"");
 }
 
 /********************************************************************************/

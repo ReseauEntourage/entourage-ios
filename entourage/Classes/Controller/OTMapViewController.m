@@ -52,6 +52,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, strong) NSMapTable *drawnTours;
+@property (weak, nonatomic) IBOutlet UIImageView *pointerPin;
 
 // markers
 
@@ -290,6 +291,7 @@
         self.tour.sid = sentTour.sid;
         self.tour.distance = 0.0;
         
+        self.pointerPin.hidden = NO;
         self.launcherView.hidden = YES;
         self.stopButton.hidden = NO;
         self.createEncounterButton.hidden = NO;
@@ -509,6 +511,7 @@
     [self.pointsToSend removeAllObjects];
     [self.encounters removeAllObjects];
     
+    self.pointerPin.hidden = YES;
     self.launcherView.hidden = YES;
     self.launcherButton.hidden = NO;
     self.stopButton.hidden = YES;

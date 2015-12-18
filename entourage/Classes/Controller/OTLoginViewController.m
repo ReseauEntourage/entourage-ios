@@ -84,8 +84,8 @@
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    [[[UIAlertView alloc]
-                                     initWithTitle:@"error"
-                                     message:error.localizedDescription
+                                     initWithTitle:@"Erreur"
+                                     message:@"Echec de la connexion"
                                      delegate:nil
                                      cancelButtonTitle:nil
                                      otherButtonTitles:@"ok",

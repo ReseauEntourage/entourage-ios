@@ -13,11 +13,12 @@
 "CURRENT_USER" = "currentUser";
 
 // Titles
-"mapviewcontroller_title" = "CARTE";
+"mapviewcontroller_title" = "MARAUDES";
 "guideviewcontroller_title" = "GUIDE";
+"userviewcontroller_title" = "PROFIL";
 
 // MenuItems
-"menu_map_title" = "CARTE";
+"menu_map_title" = "MARAUDES";
 "menu_guide_title" = "GUIDE";
 "menu_profile_title" = "PROFIL";
 "menu_myMeetings_title" = "MES RECONTRES";

@@ -61,7 +61,7 @@ NSString *const kUserInfoMessage = @"content";
     NSLog(@"Push registration failure : %@", [error localizedDescription]);
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
     NSLog(@"Push notification received");
     
     // Building the notification
