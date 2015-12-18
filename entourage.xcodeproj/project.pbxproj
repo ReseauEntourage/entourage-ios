@@ -30,6 +30,8 @@
 		0AA4C0711C171F8E00DBBE11 /* Blokletters-Balpen.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4C0701C171F8E00DBBE11 /* Blokletters-Balpen.ttf */; };
 		0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */; };
 		0AA4C0761C1728FA00DBBE11 /* ic_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4C0751C1728FA00DBBE11 /* ic_close.png */; };
+		0AB0CAF11C240A6C008975CB /* ic_action_record_sound.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB0CAF01C240A6C008975CB /* ic_action_record_sound.png */; };
+		0AB0CAF31C241237008975CB /* ic_action_stop_sound.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB0CAF21C241237008975CB /* ic_action_stop_sound.png */; };
 		0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */; };
 		191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
 		191FE92419E943D900C56BCA /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
@@ -179,6 +181,8 @@
 		0AA4C0721C17283800DBBE11 /* OTAskMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAskMoreViewController.h; sourceTree = "<group>"; };
 		0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAskMoreViewController.m; sourceTree = "<group>"; };
 		0AA4C0751C1728FA00DBBE11 /* ic_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_close.png; sourceTree = "<group>"; };
+		0AB0CAF01C240A6C008975CB /* ic_action_record_sound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_action_record_sound.png; sourceTree = "<group>"; };
+		0AB0CAF21C241237008975CB /* ic_action_stop_sound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_action_stop_sound.png; sourceTree = "<group>"; };
 		0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterService.h; sourceTree = "<group>"; };
 		0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounterService.m; sourceTree = "<group>"; };
 		191FE92619E945F200C56BCA /* OTEncounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounter.h; sourceTree = "<group>"; };
@@ -675,6 +679,8 @@
 		DBBE8AA419E83CB600FA218E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0AB0CAF21C241237008975CB /* ic_action_stop_sound.png */,
+				0AB0CAF01C240A6C008975CB /* ic_action_record_sound.png */,
 				0AA4C0751C1728FA00DBBE11 /* ic_close.png */,
 				1DA2911419E937760098C01E /* background-button.png */,
 				1DA2911219E92F260098C01E /* logo.png */,
@@ -932,6 +938,7 @@
 				0A51B6A11C0F0A8900987F07 /* poi_cluster@2x.png in Resources */,
 				19BA509919E9626000342A36 /* rencontre.png in Resources */,
 				1D1503C81A8A4D93001FD7C3 /* pause.png in Resources */,
+				0AB0CAF31C241237008975CB /* ic_action_stop_sound.png in Resources */,
 				DBBE8ABC19E83CB600FA218E /* ic_menu@2x.png in Resources */,
 				DBBE8AC819E83CB600FA218E /* poi_category-5@2x.png in Resources */,
 				19BA509D19E987A100342A36 /* center-location@2x.png in Resources */,
@@ -958,6 +965,7 @@
 				DBBE8A9819E81AF600FA218E /* Calibri-Italic.ttf in Resources */,
 				19BA50A119E9894200342A36 /* pointer@2x.png in Resources */,
 				191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */,
+				0AB0CAF11C240A6C008975CB /* ic_action_record_sound.png in Resources */,
 				DBBE8AC019E83CB600FA218E /* poi_category-1@2x.png in Resources */,
 				1D1503CA1A8A4D93001FD7C3 /* play.png in Resources */,
 				DBBE8AC719E83CB600FA218E /* poi_category-5.png in Resources */,

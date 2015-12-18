@@ -1203,26 +1203,70 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qot-mm-bch">
-                                <rect key="frame" x="111" y="318" width="99" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="RECORD"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qot-mm-bch">
+                                <rect key="frame" x="129" y="328" width="62" height="62"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="gRR-q1-r6f"/>
+                                </constraints>
+                                <state key="normal" image="ic_action_record_sound.png"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderIBColor">
+                                        <color key="value" red="0.41119791666666672" green="0.41119791666666672" blue="0.41119791666666672" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="startStopRecording:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="UR0-IC-pHK"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Qvq-t4-y7g">
+                                <rect key="frame" x="150" y="441" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oO-tA-edK">
+                                <rect key="frame" x="20" y="406" width="284" height="21"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Appuyez pour d">
+                                        <attributes>
+                                            <color key="NSColor" red="0.45138221153846159" green="0.45138221153846159" blue="0.45138221153846159" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="13" name="HelveticaNeue-Italic"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="icter un message">
+                                        <attributes>
+                                            <color key="NSColor" red="0.45138221153846159" green="0.45138221153846159" blue="0.45138221153846159" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="13" name="HelveticaNeue-LightItalic"/>
+                                            <font key="NSOriginalFont" size="13" name="HelveticaNeue-Italic"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="LVP-zg-cRX" firstAttribute="top" secondItem="Qvq-t4-y7g" secondAttribute="bottom" constant="43" id="8Te-tv-r0k"/>
+                            <constraint firstItem="Qvq-t4-y7g" firstAttribute="centerX" secondItem="Qot-mm-bch" secondAttribute="centerX" id="E2u-DI-EdL"/>
+                            <constraint firstItem="Qot-mm-bch" firstAttribute="centerX" secondItem="Ial-X5-VCO" secondAttribute="centerX" id="EA1-le-oau"/>
                             <constraint firstItem="2uf-2Y-z5H" firstAttribute="top" secondItem="a5N-Kb-CX4" secondAttribute="bottom" constant="8" id="ERc-sF-f7z"/>
+                            <constraint firstItem="Qot-mm-bch" firstAttribute="top" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="26" id="Ko6-vC-DCQ"/>
                             <constraint firstAttribute="trailing" secondItem="2uf-2Y-z5H" secondAttribute="trailing" constant="20" id="LUN-Ii-LOo"/>
                             <constraint firstItem="Ial-X5-VCO" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="8" id="NEp-co-kJS"/>
                             <constraint firstItem="KDZ-i8-4OP" firstAttribute="top" secondItem="4Ke-cm-KmY" secondAttribute="bottom" constant="20" id="RTD-tY-K8v"/>
                             <constraint firstItem="a5N-Kb-CX4" firstAttribute="top" secondItem="KDZ-i8-4OP" secondAttribute="bottom" constant="8" id="RVL-Lz-Bbv"/>
                             <constraint firstItem="a5N-Kb-CX4" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leading" constant="20" id="Urq-XB-5UN"/>
                             <constraint firstItem="KDZ-i8-4OP" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leading" constant="20" id="XeA-WW-Swa"/>
+                            <constraint firstItem="LVP-zg-cRX" firstAttribute="top" secondItem="Qot-mm-bch" secondAttribute="bottom" constant="114" id="b2C-KS-ozG"/>
                             <constraint firstItem="Ial-X5-VCO" firstAttribute="trailing" secondItem="feS-ZD-ocn" secondAttribute="trailingMargin" id="bzL-vo-yRX"/>
                             <constraint firstAttribute="trailing" secondItem="a5N-Kb-CX4" secondAttribute="trailing" constant="20" id="icM-TM-3SK"/>
+                            <constraint firstItem="Qvq-t4-y7g" firstAttribute="top" secondItem="4oO-tA-edK" secondAttribute="bottom" constant="14" id="jS7-RZ-0JP"/>
                             <constraint firstAttribute="trailing" secondItem="KDZ-i8-4OP" secondAttribute="trailing" constant="20" id="pwP-Ha-ILd"/>
                             <constraint firstItem="2uf-2Y-z5H" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leading" constant="20" id="v7X-7j-czH"/>
                             <constraint firstItem="Ial-X5-VCO" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" id="z7T-pf-VJa"/>
@@ -1236,6 +1280,8 @@
                         <outlet property="messageTextView" destination="Ial-X5-VCO" id="ilC-Qg-MDD"/>
                         <outlet property="nameTextField" destination="a5N-Kb-CX4" id="gpj-ZW-kua"/>
                         <outlet property="recordButton" destination="Qot-mm-bch" id="obm-nd-SjT"/>
+                        <outlet property="recordLabel" destination="4oO-tA-edK" id="b0v-eL-OYm"/>
+                        <outlet property="recordingLoader" destination="Qvq-t4-y7g" id="Nwc-dt-IkA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zCS-BA-fyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1883,6 +1929,7 @@
     </scenes>
     <resources>
         <image name="center-location.png" width="30" height="30"/>
+        <image name="ic_action_record_sound.png" width="132" height="130"/>
         <image name="ic_close.png" width="108" height="108"/>
         <image name="ic_entourage.png" width="130" height="130"/>
         <image name="ic_user_photo.png" width="154" height="152"/>

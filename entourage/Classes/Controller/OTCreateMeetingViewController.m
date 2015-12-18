@@ -37,6 +37,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;
+@property (weak, nonatomic) IBOutlet UILabel *recordLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *recordingLoader;
+
 
 @property (nonatomic) BOOL isRecording;
 
@@ -126,6 +129,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7c, 0x35, 0xab, 0xb0, 0x7e, 0
 #pragma mark - Actions
 
 - (IBAction)startStopRecording:(id)sender {
+    [self.recordButton setEnabled:NO];
     if (!self.isRecording) {
         _recognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType
                                                    detection:SKShortEndOfSpeechDetection
@@ -157,9 +161,8 @@ const unsigned char SpeechKitApplicationKey[] = {0x7c, 0x35, 0xab, 0xb0, 0x7e, 0
         } else {
             [self.messageTextView setText:[NSString stringWithFormat:@"%@ %@", text, [result lowercaseString]]];
         }
-
-
     }
+    
 }
 
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion {
@@ -168,14 +171,20 @@ const unsigned char SpeechKitApplicationKey[] = {0x7c, 0x35, 0xab, 0xb0, 0x7e, 0
 
 - (void)recognizerDidBeginRecording:(SKRecognizer *)recognizer {
     NSLog(@"%@", @"Begin recording");
-    [self.recordButton setTitle:@"STOP" forState:UIControlStateNormal];
+    [self.recordButton setImage:[UIImage imageNamed:@"ic_action_stop_sound.png"] forState:UIControlStateNormal];
+    [self.recordButton setEnabled:YES];
     self.isRecording = YES;
+    [self.recordLabel setText:@"Enregistrement..."];
+    [self.recordingLoader setHidden:NO];
 }
 
 - (void)recognizerDidFinishRecording:(SKRecognizer *)recognizer {
     NSLog(@"%@", @"Finish recording");
-    [self.recordButton setTitle:@"RECORD" forState:UIControlStateNormal];
+    [self.recordButton setImage:[UIImage imageNamed:@"ic_action_record_sound.png"] forState:UIControlStateNormal];
+    [self.recordButton setEnabled:YES];
     self.isRecording = NO;
+    [self.recordLabel setText:@"Appuyez pour dicter un message"];
+    [self.recordingLoader setHidden:YES];
 }
 
 @end
