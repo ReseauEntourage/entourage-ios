@@ -40,6 +40,7 @@ NSString *const kUserInfoMessage = @"content";
     
     // configure appearence
     [self configureUIAppearance];
+    
 	return YES;
 }
 
@@ -66,7 +67,7 @@ NSString *const kUserInfoMessage = @"content";
     
     // Building the notification
     UIApplicationState state = [application applicationState];
-    if (state == UIApplicationStateActive) {
+    if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender]
                                                                        message:[userInfo objectForKey:kUserInfoObject]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
