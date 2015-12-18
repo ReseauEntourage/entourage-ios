@@ -15,6 +15,4 @@
 
 @interface OTMapViewController : UIViewController <OTMeetingCalloutViewControllerDelegate, OTCreateMeetingViewControllerDelegate, OTConfirmationViewControllerDelegate>
 
-
-
 @end

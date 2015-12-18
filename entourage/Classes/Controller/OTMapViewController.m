@@ -112,12 +112,8 @@
     self.drawnTours = [NSMapTable new];
     
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    
-	_locationManager = [[CLLocationManager alloc] init];
-	if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-		[self.locationManager requestWhenInUseAuthorization];
-	}
-	[self.locationManager startUpdatingLocation];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
 
 	self.mapView.showsUserLocation = YES;
 	self.mapView.delegate = self;
@@ -130,6 +126,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+    
+    _locationManager = [[CLLocationManager alloc] init];
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
 
     [self clearMap];
 	[self refreshMap];
@@ -160,6 +162,16 @@
 
 /**************************************************************************************************/
 #pragma mark - Private methods
+
+- (void)appWillEnterBackground:(NSNotification*)note {
+    if (!self.isTourRunning) {
+        [self.locationManager stopUpdatingLocation];
+    }
+}
+
+- (void)appWillEnterForeground:(NSNotification*)note {
+    [self.locationManager startUpdatingLocation];
+}
 
 - (void)configureView {
 	self.title = NSLocalizedString(@"mapviewcontroller_title", @"");
