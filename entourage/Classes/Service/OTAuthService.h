@@ -18,6 +18,11 @@ extern NSString *const kAPIUserRoute;
               success:(void (^)(OTUser *user))success
               failure:(void (^)(NSError *error))failure;
 
+- (void)regenerateSecretCode:(NSString *)phone
+                     success:(void (^)(OTUser *))success
+                     failure:(void (^)(NSError *))failure;
+
+
 - (void)updateUserInformationWithEmail:(NSString *)email
                             andSmsCode:(NSString *)smsCode
                                success:(void (^)(NSString *user))success

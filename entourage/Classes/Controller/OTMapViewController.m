@@ -92,9 +92,6 @@
 
 @property (nonatomic, strong) NSMutableArray *tours;
 
-// Push test
-@property (weak, nonatomic) IBOutlet UIButton *notifButton;
-
 
 @end
 
@@ -621,16 +618,6 @@
 
 - (IBAction)stopTour:(id)sender {
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
-}
-
-- (IBAction)sendNotification:(id)sender {
-    // Schedule the notification
-    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-    localNotification.userInfo = @{ @"sender" : @"Developers", @"object" : @"Besoin de vêtements", @"content" : @"Un SDF a besoin de vêtements au 5 rue du temple."};
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    
-    // Request to reload table view data
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 }
 
 /**************************************************************************************************/

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */; };
 		0A213C491BA0306300202D7B /* OTGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A213C481BA0306300202D7B /* OTGuideViewController.m */; };
 		0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */; };
 		0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4769341BFB9F07006EA73A /* OTUserViewController.m */; };
@@ -147,6 +148,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLostCodeViewController.h; sourceTree = "<group>"; };
+		0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLostCodeViewController.m; sourceTree = "<group>"; };
 		0A213C471BA0306300202D7B /* OTGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGuideViewController.h; sourceTree = "<group>"; };
 		0A213C481BA0306300202D7B /* OTGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGuideViewController.m; sourceTree = "<group>"; };
 		0A35F2B61BFA3AC2002301C3 /* OTConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTConfirmationViewController.h; sourceTree = "<group>"; };
@@ -405,6 +408,8 @@
 				0A4769341BFB9F07006EA73A /* OTUserViewController.m */,
 				0AA4C0721C17283800DBBE11 /* OTAskMoreViewController.h */,
 				0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */,
+				0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */,
+				0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -1127,6 +1132,7 @@
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
+				0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */,
 				1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,

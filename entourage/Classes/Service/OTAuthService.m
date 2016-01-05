@@ -26,6 +26,8 @@
 #pragma mark - Constants
 NSString *const kAPIUserRoute = @"users";
 NSString *const kAPIUpdateUserRoute = @"update_me";
+NSString *const kAPIMe = @"me";
+NSString *const kAPICode = @"code";
 
 /**************************************************************************************************/
 #pragma mark - Public methods
@@ -72,6 +74,53 @@ NSString *const kAPIUpdateUserRoute = @"update_me";
                 }
             }];
 }
+
+- (void)regenerateSecretCode:(NSString *)phone
+                     success:(void (^)(OTUser *))success
+                     failure:(void (^)(NSError *))failure
+{
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_regenerate_code", @""), kAPIUserRoute, kAPIMe, kAPICode];
+
+    NSMutableDictionary *phoneDictionnary = [NSMutableDictionary new];
+    phoneDictionnary[@"phone"] = phone;
+    
+    NSMutableDictionary *actionDictionnary = [NSMutableDictionary new];
+    actionDictionnary[@"action"] = @"regenerate";
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"user"] = phoneDictionnary;
+    parameters[@"code"] = actionDictionnary;
+    
+    [[OTHTTPRequestManager sharedInstance]
+     PATCH:url
+        parameters:parameters
+            success:^(AFHTTPRequestOperation *operation, id responseObject)
+            {
+                NSDictionary *responseDict = responseObject;
+                
+                NSError *actualError = [self errorFromOperation:operation andError:nil];
+                if (actualError) {
+                    NSLog(@"errorMessage %@", actualError);
+                    if (failure) {
+                        failure(actualError);
+                    }
+                }
+                else {
+                    NSDictionary *responseUser = responseDict[@"user"];
+                    OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+                    if (success) {
+                        success(user);
+                    }
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSError *actualError = [self errorFromOperation:operation andError:error];
+                NSLog(@"Failed with error %@", actualError);
+                if (failure) {
+                    failure(actualError);
+                }
+            }];
+}
+
 
 - (NSError *)errorFromOperation:(AFHTTPRequestOperation *)operation
                        andError:(NSError *)error {

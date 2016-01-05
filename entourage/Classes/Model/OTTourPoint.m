@@ -35,13 +35,7 @@ NSString *const kTourPointPassingTime = @"passing_time";
         if (tourPoint.passingTime == nil) {
             // Objective-C format : "2015-11-20 09:28:52 +0000"
             tourPoint.passingTime = [dictionary dateForKey:kTourPointPassingTime format:@"yyyy-MM-dd HH:mm:ss Z"];
-            //NSLog(@"obj c");
-        } else {
-            //NSLog(@"java");
         }
-        
-        // TODO: même traitement côté Android (format de date)
-        //NSLog(@"%@", tourPoint.passingTime);
     }
     
     return tourPoint;

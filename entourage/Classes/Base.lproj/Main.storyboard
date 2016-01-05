@@ -10,6 +10,7 @@
             <string>Blokletters-Balpen</string>
             <string>Blokletters-Balpen</string>
             <string>Blokletters-Balpen</string>
+            <string>Blokletters-Balpen</string>
         </mutableArray>
         <mutableArray key="Calibri-Bold.ttf">
             <string>Calibri-Bold</string>
@@ -20,8 +21,10 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
+            <string>Calibri</string>
         </mutableArray>
         <mutableArray key="MankSans-Medium.ttf">
+            <string>MankSans-Medium</string>
             <string>MankSans-Medium</string>
         </mutableArray>
     </customFonts>
@@ -826,16 +829,6 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.65490196078431373" green="0.65490196078431373" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0h-C5-9mU">
-                                <rect key="frame" x="254" y="78" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.69609374999999996" green="0.69609374999999996" blue="0.69609374999999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendNotification:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="azJ-bd-OF6"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -868,7 +861,6 @@
                         <outlet property="launcherCloseButton" destination="dPD-hr-nWX" id="ySX-cP-2wv"/>
                         <outlet property="launcherView" destination="xGB-GF-aM5" id="yGH-Qe-wNa"/>
                         <outlet property="mapView" destination="kMW-IR-OpM" id="3Oc-O8-uNu"/>
-                        <outlet property="notifButton" destination="h0h-C5-9mU" id="dje-Cj-38j"/>
                         <outlet property="pointerPin" destination="OFe-2j-Ee9" id="UfL-z3-cju"/>
                         <outlet property="startButton" destination="ApN-vx-b3f" id="KmG-SE-wuN"/>
                         <outlet property="stopButton" destination="oVf-Bh-vdD" id="gnm-Su-d3g"/>
@@ -1511,6 +1503,97 @@
             </objects>
             <point key="canvasLocation" x="222" y="-766"/>
         </scene>
+        <!--Lost Code View Controller-->
+        <scene sceneID="Yl5-a9-wVY">
+            <objects>
+                <viewController storyboardIdentifier="OTLostCodeViewController" id="Ay4-Wp-vJi" customClass="OTLostCodeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q7c-SO-ZtM"/>
+                        <viewControllerLayoutGuide type="bottom" id="ibp-7U-lUy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DmA-3z-5TZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="hcm-C8-CIR">
+                                <rect key="frame" x="112" y="28" width="96" height="97"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CODE ÉGARÉ" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hn-tT-VaG">
+                                <rect key="frame" x="76" y="145" width="169" height="43"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Entrez votre numéro de téléphone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6K-NX-T2q">
+                                <rect key="frame" x="13" y="196" width="294" height="68"/>
+                                <fontDescription key="fontDescription" name="Blokletters-Balpen" family="Blokletters Balpen" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCh-uM-F3q">
+                                <rect key="frame" x="69" y="402" width="182" height="50"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.40000000000000002" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="MankSans-Medium" family="MankSans-Medium" pointSize="14"/>
+                                <state key="normal" title="RECEVOIR MON CODE">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="regenerateButtonDidTap:" destination="Ay4-Wp-vJi" eventType="touchUpInside" id="GIL-qN-mqa"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ow-x4-Erv">
+                                <rect key="frame" x="85" y="321" width="151" height="1"/>
+                                <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Numéro de téléphone" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vtb-ta-YYf">
+                                <rect key="frame" x="85" y="286" width="151" height="30"/>
+                                <color key="backgroundColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
+                                        <color key="value" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="0.14544882550335569" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="46L-cq-xUC"/>
+                    <connections>
+                        <outlet property="phoneTextField" destination="vtb-ta-YYf" id="lCf-sU-fkX"/>
+                        <outlet property="regenerateCodeButton" destination="sCh-uM-F3q" id="fgC-4h-7Ub"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DGw-Xk-uFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-677" y="-769"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2I3-7b-0VD">
+            <objects>
+                <navigationController storyboardIdentifier="OTLoginNavigationViewControllerIdentifier" navigationBarHidden="YES" id="C6h-jS-hEy" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Su2-Lk-Pxz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.14544882549999999" alpha="1" colorSpace="calibratedWhite"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gue-eJ-8St" kind="relationship" relationship="rootViewController" id="M9O-vZ-Yg4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VAC-2X-NqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-223" y="-1511"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="evh-Kf-L5B">
             <objects>
@@ -1642,6 +1725,9 @@
                                                 <state key="normal" title="CODE D'ACCÈS ÉGARÉ ?">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="Ay4-Wp-vJi" kind="push" identifier="OTLostCode" id="ZqZ-hO-XIW"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1689,7 +1775,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="F9j-B6-6G4" firstAttribute="top" secondItem="ELK-bx-iSu" secondAttribute="topMargin" constant="14" id="d4z-Wz-adQ"/>
                             <constraint firstItem="F9j-B6-6G4" firstAttribute="leading" secondItem="ELK-bx-iSu" secondAttribute="leadingMargin" constant="-40" id="ipZ-vQ-lEK"/>
@@ -1697,9 +1783,11 @@
                             <constraint firstItem="F9j-B6-6G4" firstAttribute="centerX" secondItem="ELK-bx-iSu" secondAttribute="centerX" id="vTn-tH-4TS"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="eiD-3J-MsA"/>
                     <connections>
                         <outlet property="askMoreButton" destination="aIz-YR-dR9" id="Y5C-vu-hui"/>
                         <outlet property="logoImage" destination="tLC-R7-7Oc" id="0LU-uB-awq"/>
+                        <outlet property="lostCodeButton" destination="HT4-68-zhW" id="OGv-L1-qOq"/>
                         <outlet property="passwordTextField" destination="AFx-Mu-tSQ" id="eth-VT-ggX"/>
                         <outlet property="phoneTextField" destination="7au-hw-a4a" id="kdV-tu-9iy"/>
                         <outlet property="validateButton" destination="hfc-eK-GVA" id="Zao-mv-TTH"/>
@@ -1709,7 +1797,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rqu-Dz-Sz4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-248" y="-766"/>
+            <point key="canvasLocation" x="-223" y="-766"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="CD4-Ww-qZf">
@@ -2002,6 +2090,6 @@
         <image name="pointer.png" width="37" height="47"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xSV-rR-wZy"/>
+        <segue reference="Dfo-uz-6se"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -25,7 +25,7 @@
 	if (![[NSUserDefaults standardUserDefaults] currentUser])
 	{
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTLoginViewControllerIdentifier"];
+		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTLoginNavigationViewControllerIdentifier"];
 		[self presentViewController:loginViewController animated:YES completion:nil];
 	}
 }
