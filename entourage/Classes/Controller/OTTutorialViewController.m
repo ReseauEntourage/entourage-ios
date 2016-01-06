@@ -67,7 +67,11 @@
                                                     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
                                                     currentUser.email = email;
                                                     [[NSUserDefaults standardUserDefaults] setCurrentUser:currentUser];
-                                                    [self displayTutorial];
+                                                    //TODO: remove this when the tutorial content is ready
+                                                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"has_done_tutorial"];
+                                                    [self dismissViewControllerAnimated:YES completion:nil];
+                                                    //TODO: put this back when the tutorial content is ready
+                                                    //[self displayTutorial];
                                                 } failure:^(NSError *error) {
                                                     [SVProgressHUD dismiss];
                                                     [[[UIAlertView alloc]
@@ -109,7 +113,7 @@
     }
 }
 
-- (IBAction)finishTutorialDidTap:(id)sender {
+- (IBAction)finishTutorial:(id)sender {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"has_done_tutorial"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
