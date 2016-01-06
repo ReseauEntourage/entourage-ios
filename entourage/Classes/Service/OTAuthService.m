@@ -113,10 +113,8 @@ NSString *const kAPICode = @"code";
                     }
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSError *actualError = [self errorFromOperation:operation andError:error];
-                NSLog(@"Failed with error %@", actualError);
                 if (failure) {
-                    failure(actualError);
+                    failure(error);
                 }
             }];
 }

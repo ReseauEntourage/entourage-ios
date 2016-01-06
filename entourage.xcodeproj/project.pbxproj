@@ -34,6 +34,7 @@
 		0AB0CAF11C240A6C008975CB /* ic_action_record_sound.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB0CAF01C240A6C008975CB /* ic_action_record_sound.png */; };
 		0AB0CAF31C241237008975CB /* ic_action_stop_sound.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB0CAF21C241237008975CB /* ic_action_stop_sound.png */; };
 		0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */; };
+		0AE855CB1C3D05A0001176B9 /* OTTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE855CA1C3D05A0001176B9 /* OTTutorialViewController.m */; };
 		191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
 		191FE92419E943D900C56BCA /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
 		191FE92819E945F200C56BCA /* OTEncounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE92719E945F200C56BCA /* OTEncounter.m */; };
@@ -188,6 +189,8 @@
 		0AB0CAF21C241237008975CB /* ic_action_stop_sound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_action_stop_sound.png; sourceTree = "<group>"; };
 		0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterService.h; sourceTree = "<group>"; };
 		0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounterService.m; sourceTree = "<group>"; };
+		0AE855C91C3D05A0001176B9 /* OTTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTutorialViewController.h; sourceTree = "<group>"; };
+		0AE855CA1C3D05A0001176B9 /* OTTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTutorialViewController.m; sourceTree = "<group>"; };
 		191FE92619E945F200C56BCA /* OTEncounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounter.h; sourceTree = "<group>"; };
 		191FE92719E945F200C56BCA /* OTEncounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounter.m; sourceTree = "<group>"; };
 		19BA509319E9587800342A36 /* OTEncounterAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterAnnotation.h; sourceTree = "<group>"; };
@@ -410,6 +413,8 @@
 				0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */,
 				0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */,
 				0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */,
+				0AE855C91C3D05A0001176B9 /* OTTutorialViewController.h */,
+				0AE855CA1C3D05A0001176B9 /* OTTutorialViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -1109,6 +1114,7 @@
 				0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */,
 				0A70FA181BFDD69C0080E8EC /* OTToursTableViewController.m in Sources */,
 				6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */,
+				0AE855CB1C3D05A0001176B9 /* OTTutorialViewController.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,

@@ -82,7 +82,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"device_token"];
 
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTLoginViewControllerIdentifier"];
+		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTLoginNavigationViewControllerIdentifier"];
 		[self presentViewController:loginViewController animated:YES completion:nil];
 	}
 	else {

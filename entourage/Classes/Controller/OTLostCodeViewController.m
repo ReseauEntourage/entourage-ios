@@ -86,6 +86,7 @@
           nil] show];
     }
     else {
+        [self.phoneTextField setSelected:NO];
         [self regenerateSecretCode];
     }
 }

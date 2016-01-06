@@ -73,10 +73,15 @@
                               deviceId:[[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"]
                                success: ^(OTUser *user) {
                                    NSLog(@"User : %@ authenticated successfully", user.email);
+                                   [SVProgressHUD dismiss];
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
-                                   [SVProgressHUD dismiss];
-                                   [self dismissViewControllerAnimated:YES completion:nil];
+                                   
+                                   if ([[NSUserDefaults standardUserDefaults] boolForKey:@"has_done_tutorial"]) {
+                                       [self dismissViewControllerAnimated:YES completion:nil];
+                                   } else {
+                                       [self performSegueWithIdentifier:@"OTTutorial" sender:self];
+                                   }
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    [[[UIAlertView alloc]

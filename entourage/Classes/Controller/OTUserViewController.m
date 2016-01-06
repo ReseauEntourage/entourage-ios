@@ -43,6 +43,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *updateButton;
 @property (nonatomic, weak) IBOutlet UIButton *unsubscribeButton;
+@property (nonatomic, weak) IBOutlet UIButton *termsAndConditionsButton;
 
 @property (weak, nonatomic) IBOutlet UISwitch *myToursSwitch;
 
@@ -126,6 +127,17 @@
 
 - (IBAction)unsubscribe:(id)sender {
     
+}
+
+- (IBAction)termsAndConditionsDidTap:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.entourage.social/cgu"]];
+    
+    NSURL *tacURL = [NSURL URLWithString:@"http://www.entourage.social/cgu"];
+    if ([[UIApplication sharedApplication] canOpenURL:tacURL]) {
+        [[UIApplication sharedApplication] openURL:tacURL];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.entourage.social/cgu"]];
+    }
 }
 
 @end
