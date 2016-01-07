@@ -113,8 +113,9 @@ NSString *const kAPICode = @"code";
                     }
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSError *actualError = [self errorFromOperation:operation andError:error];
                 if (failure) {
-                    failure(error);
+                    failure(actualError);
                 }
             }];
 }
@@ -203,6 +204,29 @@ NSString *const kAPICode = @"code";
             failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                 NSError *actualError = [self errorFromOperation:operation andError:error];
                 NSLog(@"Failed with error %@", actualError);
+                if (failure) {
+                    failure(actualError);
+                }
+            }];
+}
+
+- (void)checkVersionWithSuccess:(void (^)(BOOL))success failure:(void (^)(NSError *))failure
+{
+    [[OTHTTPRequestManager sharedInstance]
+     GET:@"check"
+        parameters:nil
+            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSString *status = [responseObject stringForKey:@"status"];
+                if (success) {
+                    if ([status isEqualToString:@"ok"]) {
+                        success(YES);
+                    } else {
+                        success(NO);
+                    }
+                }
+            }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSError *actualError = [self errorFromOperation:operation andError:error];
                 if (failure) {
                     failure(actualError);
                 }

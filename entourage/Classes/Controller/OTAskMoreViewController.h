@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol OTAskMoreViewControllerDelegate <NSObject>
+
+- (void)hideBlurEffect;
+
+@end
+
 @interface OTAskMoreViewController : UIViewController
+
+@property(nonatomic, weak) id<OTAskMoreViewControllerDelegate> delegate;
 
 @end

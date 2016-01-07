@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
-@interface OTLoginViewController : UIViewController
+#import "OTAskMoreViewController.h"
+
+@interface OTLoginViewController : UIViewController <OTAskMoreViewControllerDelegate>
 
 @end

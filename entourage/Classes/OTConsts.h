@@ -10,16 +10,8 @@
 // PREPROD
 #define BASE_API_URL @"https://entourage-back-preprod.herokuapp.com/api/v0/"
 
-#define LOGIN_API_SOUNDCLOUD @"hschouman@octo.com"
-#define PASS_API_SOUNDCLOUD @"passDevForAPI"
-
 #else
 // PROD
-#define LOGIN_API_SOUNDCLOUD @"entourage@octo.com"
 #define BASE_API_URL @"https://entourage-back.herokuapp.com/api/v0/"
 
 #endif
-
-
-#define CLIENT_ID_API_SOUNDCLOUD @"8ea64716590a242e6f205bf1f821bb4a"
-#define SECRET_API_SOUNDCLOUD @"119dea503c758179e90aa30d4b21d665"

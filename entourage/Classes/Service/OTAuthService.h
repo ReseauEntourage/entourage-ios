@@ -32,4 +32,7 @@ extern NSString *const kAPIUserRoute;
                                success:(void (^)(BOOL))success
                                failure:(void (^)(NSError *))failure;
 
+- (void)checkVersionWithSuccess:(void (^)(BOOL))success
+                        failure:(void (^)(NSError *))failure;
+
 @end

@@ -29,6 +29,7 @@
 
 @interface OTLoginViewController () <UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffect;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
@@ -95,9 +96,32 @@
 }
 
 /********************************************************************************/
+#pragma mark - OTAskMoreViewControllerDelegate
+
+- (void)hideBlurEffect {
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        [self.blurEffect setAlpha:0.0];
+    }];
+}
+
+/********************************************************************************/
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"OTAskMore"]) {
+        OTAskMoreViewController *controller = (OTAskMoreViewController *)segue.destinationViewController;
+        controller.delegate = self;
+    }
+}
+
+/********************************************************************************/
 #pragma mark - Actions
 
 - (IBAction)displayAskMoreModal:(id)sender {
+    [self.blurEffect setHidden:NO];
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        [self.blurEffect setAlpha:0.7];
+    }];
     [self performSegueWithIdentifier:@"OTAskMore" sender:self];
 }
 

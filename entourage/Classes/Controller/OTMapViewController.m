@@ -46,6 +46,10 @@
 
 @interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate>
 
+// blur effect
+
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffect;
+
 // map
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
@@ -321,6 +325,12 @@
     }];
 }
 
+- (void)hideBlurEffect {
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        [self.blurEffect setAlpha:0.0];
+    }];
+}
+
 /********************************************************************************/
 #pragma mark - MKMapViewDelegate
 
@@ -514,6 +524,7 @@
 
 - (void)tourSent {
     [SVProgressHUD showSuccessWithStatus:@"Maraude terminée !"];
+    [self hideBlurEffect];
     
     self.tour = nil;
     self.currentTourType = nil;
@@ -530,6 +541,7 @@
 }
 
 - (void)resumeTour {
+    [self hideBlurEffect];
     self.isTourRunning = YES;
 }
 
@@ -617,6 +629,10 @@
 }
 
 - (IBAction)stopTour:(id)sender {
+    [self.blurEffect setHidden:NO];
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        [self.blurEffect setAlpha:0.7];
+    }];
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
 }
 
