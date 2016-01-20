@@ -14,6 +14,9 @@
 // Service
 #import "OTAuthService.h"
 
+// Utils
+#import "UITextField+indentation.h"
+
 // Helper
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
@@ -53,6 +56,11 @@
     }
 	self.whiteBackground.layer.cornerRadius = 5;
 	self.whiteBackground.layer.masksToBounds = YES;
+    
+    [self.phoneTextField indentRight];
+    [self.passwordTextField indentRight];
+    
+    [self.phoneTextField becomeFirstResponder];
 }
 
 /********************************************************************************/
