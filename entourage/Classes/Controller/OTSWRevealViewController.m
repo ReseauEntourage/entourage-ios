@@ -11,7 +11,8 @@
 // Helper
 #import "NSUserDefaults+OT.h"
 
-#import "OTLoginViewController.h"
+//#import "OTLoginViewController.h"
+#import "OTStartupViewController.h"
 
 // Model
 #import "OTUser.h"
@@ -41,8 +42,8 @@
 	if (![[NSUserDefaults standardUserDefaults] currentUser])
 	{
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTLoginNavigationViewControllerIdentifier"];
-		[self presentViewController:loginViewController animated:YES completion:nil];
+		OTStartupViewController *startupViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTStartupNavigationViewControllerIdentifier"];
+		[self presentViewController:startupViewController animated:YES completion:nil];
 	}
 }
 
