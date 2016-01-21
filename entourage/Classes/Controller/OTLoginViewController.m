@@ -20,6 +20,7 @@
 // Helper
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
+#import "UINavigationController+entourage.h"
 
 // Model
 #import "OTUser.h"
@@ -50,7 +51,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+
+    self.navigationController.navigationBarHidden = NO;
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }

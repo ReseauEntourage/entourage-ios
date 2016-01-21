@@ -140,10 +140,8 @@ NSString *const kUserInfoMessage = @"content";
 	UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
 
 	// UINavigationBar
-	UIImage *navigationBarImage = [UIImage imageNamed:@"bg-top-header.png"];
-	UINavigationBar.appearance.barTintColor = [UIColor clearColor];
-	[[UINavigationBar appearance] setBackgroundImage:navigationBarImage forBarMetrics:UIBarMetricsDefault];
-	[UINavigationBar.appearance setBarStyle:UIBarStyleBlackTranslucent];
+    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
+    UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
 
 	UIFont *navigationBarFont = [UIFont calibriFontWithSize:OTNavigationBarDefaultFontSize];
 	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor] };

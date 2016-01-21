@@ -14,6 +14,7 @@
 // Helper
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
+#import "UITextField+indentation.h"
 
 // Model
 #import "OTUser.h"
@@ -40,6 +41,9 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
+    
+    [self.phoneTextField indentRight];
+    [self.phoneTextField becomeFirstResponder];
 }
 
 /********************************************************************************/
