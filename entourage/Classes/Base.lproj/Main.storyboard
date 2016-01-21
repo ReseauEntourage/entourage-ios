@@ -1969,7 +1969,7 @@
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-Ig-nu1">
                                 <rect key="frame" x="-14" y="0.0" width="348" height="568"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BE76A85D-B94B-42C3-95DC-02E1D6F28124" translatesAutoresizingMaskIntoConstraints="NO" id="ULq-DZ-rUN">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0DB6C9B6-3EBC-40C7-83C6-8761441CCBE6" translatesAutoresizingMaskIntoConstraints="NO" id="ULq-DZ-rUN">
                                         <rect key="frame" x="126" y="40" width="96" height="96"/>
                                         <animations/>
                                         <constraints>
@@ -2643,7 +2643,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BE76A85D-B94B-42C3-95DC-02E1D6F28124" width="280" height="280">
+        <image name="0DB6C9B6-3EBC-40C7-83C6-8761441CCBE6" width="280" height="280">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
