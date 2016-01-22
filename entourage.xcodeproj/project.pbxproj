@@ -408,6 +408,9 @@
 		6B4930C419A773C500DA7EE0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
+				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
+				1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */,
 				6B4930E019A77DFE00DA7EE0 /* Model */,
 				6B4930C719A773C500DA7EE0 /* Controller */,
 				A8E10FAB19E82A1500DF4A01 /* View */,
@@ -415,9 +418,6 @@
 				6B4930DC19A77C2F00DA7EE0 /* Manager */,
 				6BFE639519E7E85D00C661AB /* Utils */,
 				1DA682D519E7F130007BD4BC /* Helper */,
-				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
-				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
-				1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
