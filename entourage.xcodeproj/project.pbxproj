@@ -35,13 +35,11 @@
 		1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */; };
 		1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682EB19E81483007BD4BC /* NSString+Validators.m */; };
 		1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */; };
-		1DB2783F1A76A247009055B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DB2783D1A76A247009055B1 /* Main.storyboard */; };
 		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
 		454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */; };
 		454C8F501C4F4C45001362B2 /* UITextField+indentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4F1C4F4C45001362B2 /* UITextField+indentation.m */; };
 		454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F521C500FE2001362B2 /* OTStartupViewController.m */; };
-		454C8F551C501922001362B2 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 454C8F541C501922001362B2 /* Launch Screen.storyboard */; };
 		454C8F581C501B31001362B2 /* UIView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F571C501B31001362B2 /* UIView+entourage.m */; };
 		454C8F5B1C510304001362B2 /* UINavigationController+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F5A1C510304001362B2 /* UINavigationController+entourage.m */; };
 		45CE5A561C5241AA00F68C24 /* Blokletters-Balpen.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A481C5241AA00F68C24 /* Blokletters-Balpen.ttf */; };
@@ -56,6 +54,8 @@
 		45CE5A5F1C5241AA00F68C24 /* Sofia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A511C5241AA00F68C24 /* Sofia-Regular.otf */; };
 		45CE5A601C5241AA00F68C24 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A531C5241AA00F68C24 /* Localizable.strings */; };
 		45CE5A611C5241AA00F68C24 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A551C5241AA00F68C24 /* Images.xcassets */; };
+		45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A631C5242FC00F68C24 /* Main.storyboard */; };
+		45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */; };
 		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
 		6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */; };
@@ -153,7 +153,6 @@
 		1DA682EB19E81483007BD4BC /* NSString+Validators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Validators.m"; path = "Helper/NSString+Validators.m"; sourceTree = "<group>"; };
 		1DA682EF19E823C3007BD4BC /* OTSWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSWRevealViewController.h; sourceTree = "<group>"; };
 		1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSWRevealViewController.m; sourceTree = "<group>"; };
-		1DB2783E1A76A247009055B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = entourage/Classes/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		1DF661D919E98AAD00045310 /* OTCreateMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCreateMeetingViewController.h; sourceTree = "<group>"; };
 		1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCreateMeetingViewController.m; sourceTree = "<group>"; };
 		2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,7 +162,6 @@
 		454C8F4F1C4F4C45001362B2 /* UITextField+indentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+indentation.m"; sourceTree = "<group>"; };
 		454C8F511C500FE2001362B2 /* OTStartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTStartupViewController.h; sourceTree = "<group>"; };
 		454C8F521C500FE2001362B2 /* OTStartupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTStartupViewController.m; sourceTree = "<group>"; };
-		454C8F541C501922001362B2 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		454C8F561C501B31001362B2 /* UIView+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+entourage.h"; sourceTree = "<group>"; };
 		454C8F571C501B31001362B2 /* UIView+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+entourage.m"; sourceTree = "<group>"; };
 		454C8F591C510304001362B2 /* UINavigationController+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+entourage.h"; path = "Helper/UINavigationController+entourage.h"; sourceTree = "<group>"; };
@@ -180,6 +178,8 @@
 		45CE5A511C5241AA00F68C24 /* Sofia-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sofia-Regular.otf"; sourceTree = "<group>"; };
 		45CE5A531C5241AA00F68C24 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		45CE5A551C5241AA00F68C24 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		45CE5A641C5242FC00F68C24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		6B1A846F19E811210020FB93 /* OTPoiService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiService.h; sourceTree = "<group>"; };
 		6B1A847019E811210020FB93 /* OTPoiService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiService.m; sourceTree = "<group>"; };
@@ -370,6 +370,15 @@
 			path = XCAssets;
 			sourceTree = "<group>";
 		};
+		45CE5A621C5242FC00F68C24 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				45CE5A631C5242FC00F68C24 /* Main.storyboard */,
+				45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		6B1A846E19E8110B0020FB93 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,6 +397,7 @@
 		6B4930C319A773C500DA7EE0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				45CE5A621C5242FC00F68C24 /* Storyboards */,
 				45CE5A471C5241AA00F68C24 /* Fonts */,
 				45CE5A521C5241AA00F68C24 /* Strings */,
 				45CE5A541C5241AA00F68C24 /* XCAssets */,
@@ -407,9 +417,7 @@
 				1DA682D519E7F130007BD4BC /* Helper */,
 				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
 				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
-				1DB2783D1A76A247009055B1 /* Main.storyboard */,
 				1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */,
-				454C8F541C501922001362B2 /* Launch Screen.storyboard */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -750,11 +758,11 @@
 				45CE5A601C5241AA00F68C24 /* Localizable.strings in Resources */,
 				45CE5A5D1C5241AA00F68C24 /* MankSans-Oblique.ttf in Resources */,
 				45CE5A5F1C5241AA00F68C24 /* Sofia-Regular.otf in Resources */,
+				45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */,
 				45CE5A611C5241AA00F68C24 /* Images.xcassets in Resources */,
 				45CE5A5E1C5241AA00F68C24 /* MankSans.ttf in Resources */,
 				45CE5A561C5241AA00F68C24 /* Blokletters-Balpen.ttf in Resources */,
-				1DB2783F1A76A247009055B1 /* Main.storyboard in Resources */,
-				454C8F551C501922001362B2 /* Launch Screen.storyboard in Resources */,
+				45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */,
 				45CE5A5A1C5241AA00F68C24 /* Calibri.ttf in Resources */,
 				45CE5A5B1C5241AA00F68C24 /* MankSans-Medium.ttf in Resources */,
 				191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */,
@@ -941,13 +949,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1DB2783D1A76A247009055B1 /* Main.storyboard */ = {
+		45CE5A631C5242FC00F68C24 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1DB2783E1A76A247009055B1 /* Base */,
+				45CE5A641C5242FC00F68C24 /* Base */,
 			);
 			name = Main.storyboard;
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */ = {
