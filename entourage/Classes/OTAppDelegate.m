@@ -144,7 +144,7 @@ NSString *const kUserInfoMessage = @"content";
     UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
 
 	UIFont *navigationBarFont = [UIFont calibriFontWithSize:OTNavigationBarDefaultFontSize];
-	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor] };
+	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
 	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
 	                                                      NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
 }

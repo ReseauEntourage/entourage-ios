@@ -121,9 +121,14 @@
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
 	[self zoomToCurrentLocation:nil];
-	[self createMenuButton];
-	[self configureView];
+	[self configureNavigationBar];
 }
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES
+//                                            withAnimation:UIStatusBarAnimationFade];
+//}
+//- (BOOL)prefersStatusBarHidden {
+//    return YES;
+//}
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
@@ -174,8 +179,30 @@
     [self.locationManager startUpdatingLocation];
 }
 
-- (void)configureView {
-	self.title = NSLocalizedString(@"mapviewcontroller_title", @"");
+- (void)configureNavigationBar {
+    
+    [self createMenuButton];
+    [self setupChatsButton];
+    
+    UIImage *image = [UIImage imageNamed:@"logo"];
+    UIImageView *img = [[UIImageView alloc] initWithImage:image];
+    img.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    img.contentMode = UIViewContentModeScaleAspectFit;
+    self.navigationItem.titleView = img;
+    
+}
+
+
+
+
+- (void)setupChatsButton {
+    UIImage *chatsImage = [[UIImage imageNamed:@"chats"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+
+    UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] init];
+    [chatButton setImage:chatsImage];
+    [chatButton setTarget:self];
+    //        [chatButton setAction:@selector()];
+    [self.navigationItem setRightBarButtonItem:chatButton];
 }
 
 - (void)registerObserver {

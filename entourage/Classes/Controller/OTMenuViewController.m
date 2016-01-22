@@ -56,6 +56,8 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	self.menuItems = [OTMenuViewController createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
+    
+    self.title = @"MON COMPTE";
 }
 
 /**************************************************************************************************/
