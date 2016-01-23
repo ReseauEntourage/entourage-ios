@@ -79,12 +79,11 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 	if (indexPath.row == self.menuItems.count - 1) {
-        [SVProgressHUD show];
 		[[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"device_token"];
 
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTLoginNavigationViewControllerIdentifier"];
+		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTStartupNavigationViewControllerIdentifier"];
 		[self presentViewController:loginViewController animated:YES completion:nil];
 	}
 	else {
