@@ -63,6 +63,12 @@
     [self.passwordTextField indentRight];
     
     [self.phoneTextField becomeFirstResponder];
+    
+#if DEBUG
+    self.phoneTextField.text = @"0651502173";
+    self.passwordTextField.text = @"123456";
+#endif
+    
 }
 
 /********************************************************************************/
