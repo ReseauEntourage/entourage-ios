@@ -8,6 +8,8 @@
 
 #import "OTAskMoreViewController.h"
 
+extern NSString *const kTutorialDone;
+
 @interface OTLoginViewController : UIViewController <OTAskMoreViewControllerDelegate>
 
 @end

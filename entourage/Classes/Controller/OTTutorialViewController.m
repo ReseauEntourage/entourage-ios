@@ -8,6 +8,9 @@
 
 #import "OTTutorialViewController.h"
 
+// Controller
+#import "OTLoginViewController.h"
+
 // Service
 #import "OTAuthService.h"
 
@@ -33,6 +36,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *validateEmailButton;
 @property (weak, nonatomic) IBOutlet UIButton *finishTutorialButton;
 
+@property (nonatomic, strong) NSString *phoneNumberServerRepresentation;
+
 @end
 
 @implementation OTTutorialViewController
@@ -54,6 +59,10 @@
 /********************************************************************************/
 #pragma mark - Public Methods
 
+- (void)configureWithPhoneNumber:(NSString *)phoneNumber {
+    self.phoneNumberServerRepresentation = phoneNumber;
+}
+
 - (void)displayTutorial {
     [self.emailScrollView setHidden:YES];
     [self.tutorialScrollView setHidden:NO];
@@ -67,9 +76,16 @@
                                                     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
                                                     currentUser.email = email;
                                                     [[NSUserDefaults standardUserDefaults] setCurrentUser:currentUser];
+                                                    
                                                     //TODO: remove this when the tutorial content is ready
-                                                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"has_done_tutorial"];
+                                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+                                                    if (loggedNumbers == nil) {
+                                                        loggedNumbers = [NSMutableArray new];
+                                                    }
+                                                    [loggedNumbers addObject:self.phoneNumberServerRepresentation];
+                                                    [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
                                                     [self dismissViewControllerAnimated:YES completion:nil];
+                                                    
                                                     //TODO: put this back when the tutorial content is ready
                                                     //[self displayTutorial];
                                                 } failure:^(NSError *error) {

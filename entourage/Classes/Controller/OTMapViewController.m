@@ -192,9 +192,6 @@
     
 }
 
-
-
-
 - (void)setupChatsButton {
     UIImage *chatsImage = [[UIImage imageNamed:@"chats"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 

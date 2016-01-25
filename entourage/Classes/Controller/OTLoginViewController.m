@@ -10,6 +10,7 @@
 
 // Controller
 #import "OTLostCodeViewController.h"
+#import "OTTutorialViewController.h"
 
 // Service
 #import "OTAuthService.h"
@@ -29,6 +30,10 @@
 #import "SVProgressHUD.h"
 
 /********************************************************************************/
+#pragma mark - Constants
+NSString *const kTutorialDone = @"has_done_tutorial";
+
+/********************************************************************************/
 #pragma mark - OTLoginViewController
 
 @interface OTLoginViewController () <UITextFieldDelegate>
@@ -41,6 +46,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *askMoreButton;
 @property (weak, nonatomic) IBOutlet UIButton *validateButton;
 @property (weak, nonatomic) IBOutlet UIButton *lostCodeButton;
+
+@property (nonatomic, strong) NSString *phoneNumberServerRepresentation;
 
 @end
 
@@ -85,7 +92,8 @@
 
 - (void)launchAuthentication {
     [SVProgressHUD show];
-    [[OTAuthService new] authWithPhone:self.phoneTextField.text.phoneNumberServerRepresentation
+    self.phoneNumberServerRepresentation = self.phoneTextField.text.phoneNumberServerRepresentation;
+    [[OTAuthService new] authWithPhone:self.phoneNumberServerRepresentation
                               password:self.passwordTextField.text
                               deviceId:[[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"]
                                success: ^(OTUser *user) {
@@ -94,11 +102,27 @@
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    
+                                   // new way
+                                   NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+                                   if (loggedNumbers == nil) {
+                                       loggedNumbers = [NSMutableArray new];
+                                   }
+                                   if ([loggedNumbers containsObject:self.phoneNumberServerRepresentation]) {
+                                       [self dismissViewControllerAnimated:YES completion:nil];
+                                   } else {
+                                       [self performSegueWithIdentifier:@"OTTutorial" sender:self];
+                                   }
+                                   
+                                   
+                                   
+                                   // old way
+                                   /*
                                    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"has_done_tutorial"]) {
                                        [self dismissViewControllerAnimated:YES completion:nil];
                                    } else {
                                        [self performSegueWithIdentifier:@"OTTutorial" sender:self];
                                    }
+                                    */
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    [[[UIAlertView alloc]
@@ -127,6 +151,10 @@
     if ([segue.identifier isEqualToString:@"OTAskMore"]) {
         OTAskMoreViewController *controller = (OTAskMoreViewController *)segue.destinationViewController;
         controller.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"OTTutorial"]) {
+        OTTutorialViewController *controller = (OTTutorialViewController *)segue.destinationViewController;
+        [controller configureWithPhoneNumber:self.phoneNumberServerRepresentation];
     }
 }
 

@@ -10,4 +10,6 @@
 
 @interface OTTutorialViewController : UIViewController
 
+- (void)configureWithPhoneNumber:(NSString *)phoneNumber;
+
 @end
