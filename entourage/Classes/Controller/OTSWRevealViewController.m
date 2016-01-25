@@ -42,7 +42,7 @@
 
 	if (![[NSUserDefaults standardUserDefaults] currentUser])
 	{
-		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
 		OTStartupViewController *startupViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTStartupNavigationViewControllerIdentifier"];
 		[self presentViewController:startupViewController animated:YES completion:nil];
 	}
