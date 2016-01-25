@@ -42,4 +42,24 @@
     return menuButton;
 }
 
+- (UIBarButtonItem *)createBackFrontMenuButton {
+    UIBarButtonItem *menuButton = nil;
+    
+    SWRevealViewController *revealViewController = self.revealViewController;
+    if (revealViewController)
+    {
+        UIImage *menuImage = [[UIImage imageNamed:@"backFront.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        menuButton = [[UIBarButtonItem alloc] init];
+        [menuButton setImage:menuImage];
+        [menuButton setTarget:self.revealViewController];
+        [menuButton setAction:@selector(revealToggle:)];
+        [self.navigationController.navigationBar addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+        [self.navigationItem setRightBarButtonItem:menuButton];
+    }
+    
+    return menuButton;
+
+}
+
 @end

@@ -14,5 +14,6 @@
 #pragma mark - Configure
 
 - (UIBarButtonItem *)createMenuButton;
+- (UIBarButtonItem *)createBackFrontMenuButton;
 
 @end

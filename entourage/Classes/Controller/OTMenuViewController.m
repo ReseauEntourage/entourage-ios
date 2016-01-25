@@ -11,6 +11,7 @@
 // Controller
 #import "SWRevealViewController.h"
 #import "OTLoginViewController.h"
+#import "UIViewController+menu.h"
 
 #import "NSUserDefaults+OT.h"
 
@@ -58,6 +59,8 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	[self configureControllersDictionary];
     
     self.title = @"MON COMPTE";
+    [self createBackFrontMenuButton];
+    self.navigationController.navigationBar.tintColor = [UIColor redColor];
 }
 
 /**************************************************************************************************/
