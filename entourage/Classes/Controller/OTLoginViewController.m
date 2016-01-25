@@ -103,7 +103,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    
                                    // new way
-                                   NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+#warning @Nicholas: arrayWithArray crashes the app. changed to arrayWithObject
+                                   NSMutableArray *loggedNumbers = [NSMutableArray arrayWithObject:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil) {
                                        loggedNumbers = [NSMutableArray new];
                                    }
