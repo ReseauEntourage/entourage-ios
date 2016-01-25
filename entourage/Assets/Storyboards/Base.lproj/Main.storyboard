@@ -1873,11 +1873,7 @@
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-Ig-nu1">
                                 <rect key="frame" x="-14" y="0.0" width="348" height="568"/>
                                 <subviews>
-<<<<<<< HEAD
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EB3001C2-D7A4-421B-B76F-6CF5C0FF6805" translatesAutoresizingMaskIntoConstraints="NO" id="ULq-DZ-rUN">
-=======
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2A90FA41-E5C5-49B2-9FAF-A5FD4BD49339" translatesAutoresizingMaskIntoConstraints="NO" id="ULq-DZ-rUN">
->>>>>>> 121812c390dc9c365031484e5132f31091856e0c
                                         <rect key="frame" x="126" y="40" width="96" height="96"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="96" id="c5U-5e-nup"/>
