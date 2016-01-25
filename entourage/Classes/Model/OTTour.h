@@ -25,6 +25,8 @@ typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTyp
 @property (strong, nonatomic) NSMutableDictionary *stats;
 @property (strong, nonatomic) NSString *organizationName;
 @property (strong, nonatomic) NSString *organizationDesc;
+@property (strong, nonatomic) NSDate *startTime;
+@property (strong, nonatomic) NSDate *endTime;
 @property (nonatomic) float distance;
 
 /********************************************************************************/

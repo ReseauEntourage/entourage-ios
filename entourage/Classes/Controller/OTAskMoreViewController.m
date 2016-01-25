@@ -41,9 +41,6 @@
 }
 
 /********************************************************************************/
-#pragma mark - Private methods
-
-/********************************************************************************/
 #pragma mark - Actions
 
 - (IBAction)closeModal:(id)sender {
@@ -85,6 +82,14 @@
                                                         [SVProgressHUD showErrorWithStatus:@"Demande non envoyée"];
                                                         NSLog(@"%@", error);
                                                     }];
+    } else {
+        [[[UIAlertView alloc]
+          initWithTitle:@"Demande impossible"
+          message:@"Veuillez renseigner une adresse email valide"
+          delegate:nil
+          cancelButtonTitle:nil
+          otherButtonTitles:@"ok",
+          nil] show];
     }
 }
 

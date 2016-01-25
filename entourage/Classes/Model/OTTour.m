@@ -22,6 +22,8 @@ NSString *const kTourTourPoints = @"tour_points";
 NSString *const kTourStats = @"stats";
 NSString *const kTourOrganizationName = @"organization_name";
 NSString *const kTourOrganizationDesc = @"organization_description";
+NSString *const kTourStartTime = @"start_time";
+NSString *const ktourEndTime = @"end_time";
 NSString *const kTourDistance = @"distance";
 
 NSString *const kToursCount = @"tour_count";
@@ -87,6 +89,20 @@ NSString *const kEncountersCount = @"encounter_count";
         tour.organizationName = [dictionary stringForKey:kTourOrganizationName];
         tour.organizationDesc = [dictionary stringForKey:kTourOrganizationDesc];
         tour.distance = [[dictionary numberForKey:kTourDistance] floatValue];
+        
+        // Java format : "2015-09-09T08:56:48.065+02:00"
+        tour.startTime = [dictionary dateForKey:kTourStartTime format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
+        if (tour.startTime == nil) {
+            // Objective-C format : "2015-11-20 09:28:52 +0000"
+            tour.startTime = [dictionary dateForKey:kTourStartTime format:@"yyyy-MM-dd HH:mm:ss Z"];
+        }
+        
+        // Java format : "2015-09-09T08:56:48.065+02:00"
+        tour.endTime = [dictionary dateForKey:ktourEndTime format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
+        if (tour.endTime == nil) {
+            // Objective-C format : "2015-11-20 09:28:52 +0000"
+            tour.endTime = [dictionary dateForKey:ktourEndTime format:@"yyyy-MM-dd HH:mm:ss Z"];
+        }
     }
     
     return tour;
