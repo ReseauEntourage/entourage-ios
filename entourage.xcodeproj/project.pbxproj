@@ -15,6 +15,8 @@
 		0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D16091C21B3AB0066394C /* OTMessageViewController.m */; };
 		0A51B6A01C0F0A8900987F07 /* poi_cluster.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A51B69E1C0F0A8900987F07 /* poi_cluster.png */; };
 		0A51B6A11C0F0A8900987F07 /* poi_cluster@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A51B69F1C0F0A8900987F07 /* poi_cluster@2x.png */; };
+		0A6D9A3E1C3FC48B0088D977 /* logo_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6D9A3D1C3FC48B0088D977 /* logo_black.png */; };
+		0A6D9A401C3FE6980088D977 /* DINMittelschrift-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A6D9A3F1C3FE6980088D977 /* DINMittelschrift-Regular.ttf */; };
 		0A70FA181BFDD69C0080E8EC /* OTToursTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A70FA171BFDD69C0080E8EC /* OTToursTableViewController.m */; };
 		0A70FA281BFE186C0080E8EC /* ic_car.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A70FA231BFE186C0080E8EC /* ic_car.png */; };
 		0A70FA291BFE186C0080E8EC /* ic_feet.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A70FA241BFE186C0080E8EC /* ic_feet.png */; };
@@ -163,6 +165,8 @@
 		0A4D16091C21B3AB0066394C /* OTMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMessageViewController.m; sourceTree = "<group>"; };
 		0A51B69E1C0F0A8900987F07 /* poi_cluster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poi_cluster.png; sourceTree = "<group>"; };
 		0A51B69F1C0F0A8900987F07 /* poi_cluster@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poi_cluster@2x.png"; sourceTree = "<group>"; };
+		0A6D9A3D1C3FC48B0088D977 /* logo_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black.png; sourceTree = "<group>"; };
+		0A6D9A3F1C3FE6980088D977 /* DINMittelschrift-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DINMittelschrift-Regular.ttf"; sourceTree = "<group>"; };
 		0A70FA161BFDD69C0080E8EC /* OTToursTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToursTableViewController.h; sourceTree = "<group>"; };
 		0A70FA171BFDD69C0080E8EC /* OTToursTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTToursTableViewController.m; sourceTree = "<group>"; };
 		0A70FA231BFE186C0080E8EC /* ic_car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_car.png; sourceTree = "<group>"; };
@@ -720,6 +724,7 @@
 		DBBE8AAC19E83CB600FA218E /* picto category */ = {
 			isa = PBXGroup;
 			children = (
+				0A6D9A3D1C3FC48B0088D977 /* logo_black.png */,
 				0A51B69E1C0F0A8900987F07 /* poi_cluster.png */,
 				0A51B69F1C0F0A8900987F07 /* poi_cluster@2x.png */,
 				0A70FA231BFE186C0080E8EC /* ic_car.png */,
@@ -811,6 +816,7 @@
 		DBE9EF4419E7EE5700031144 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				0A6D9A3F1C3FE6980088D977 /* DINMittelschrift-Regular.ttf */,
 				0AA4C0701C171F8E00DBBE11 /* Blokletters-Balpen.ttf */,
 				C22BC0781BCF9355003C2A21 /* MankSans-Medium.ttf */,
 				C22BC0791BCF9355003C2A21 /* MankSans-MediumOblique.ttf */,
@@ -919,6 +925,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6D9A401C3FE6980088D977 /* DINMittelschrift-Regular.ttf in Resources */,
 				DBBE8AC619E83CB600FA218E /* poi_category-7@2x.png in Resources */,
 				DBBE8ABA19E83CB600FA218E /* bg-top-header@2x.png in Resources */,
 				DBBE8ABB19E83CB600FA218E /* ic_menu.png in Resources */,
@@ -947,6 +954,7 @@
 				DBBE8A9719E81AF600FA218E /* Calibri-Bold.ttf in Resources */,
 				0A51B6A11C0F0A8900987F07 /* poi_cluster@2x.png in Resources */,
 				19BA509919E9626000342A36 /* rencontre.png in Resources */,
+				0A6D9A3E1C3FC48B0088D977 /* logo_black.png in Resources */,
 				1D1503C81A8A4D93001FD7C3 /* pause.png in Resources */,
 				0AB0CAF31C241237008975CB /* ic_action_stop_sound.png in Resources */,
 				DBBE8ABC19E83CB600FA218E /* ic_menu@2x.png in Resources */,

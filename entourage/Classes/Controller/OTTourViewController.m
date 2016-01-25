@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *tourTypeImage;
 
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
+@property (nonatomic, weak) IBOutlet UILabel *startTime;
+@property (nonatomic, weak) IBOutlet UILabel *endTime;
 @property (nonatomic, weak) IBOutlet UILabel *organizationNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *transportTypeLabel;
 @property (nonatomic, weak) IBOutlet UILabel *tourTypeLabel;
@@ -37,6 +39,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     NSString *date = [self formatDateForDisplay:[(OTTourPoint *)[self.tour.tourPoints objectAtIndex:0] passingTime]];
+    NSString *startTime = [self formatHourForDisplay:self.tour.startTime];
+    NSString *endTime = [self formatHourForDisplay:self.tour.endTime];
     NSString *image;
     NSString *vehicle;
     NSString *type;
@@ -55,7 +59,7 @@
     }
     else if ([self.tour.tourType isEqualToString:@"medical"]) {
         image = @"ic_medical.png";
-        type = @"Médical";
+        type = @"Médicale";
     }
     else if ([self.tour.tourType isEqualToString:@"alimentary"]) {
         image = @"ic_alimentary.png";
@@ -69,12 +73,14 @@
         status = @"Terminée";
     }
     
-    self.tourTypeImage.image = [UIImage imageNamed:image];
+    //self.tourTypeImage.image = [UIImage imageNamed:image];
     self.dateLabel.text = date;
-    self.organizationNameLabel.text = [NSString stringWithFormat:@"Association : %@", self.tour.organizationName];
-    self.transportTypeLabel.text = [NSString stringWithFormat:@"Type de transport : %@", vehicle];
-    self.tourTypeLabel.text = [NSString stringWithFormat:@"Type de maraude : %@", type];
-    self.tourStatusLabel.text = [NSString stringWithFormat:@"Statut de la maraude : %@", status];
+    self.startTime.text = startTime;
+    self.endTime.text = endTime;
+    self.organizationNameLabel.text = self.tour.organizationName;
+    self.transportTypeLabel.text = vehicle;
+    self.tourTypeLabel.text = type;
+    self.tourStatusLabel.text = status;
 }
 
 /**************************************************************************************************/
@@ -87,6 +93,12 @@
 - (NSString *)formatDateForDisplay:(NSDate *)date {
     NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:@"dd/MM/yyyy"];
+    return [formatter stringFromDate:date];
+}
+
+- (NSString *)formatHourForDisplay:(NSDate *)date {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:@"HH'h'mm"];
     return [formatter stringFromDate:date];
 }
 
