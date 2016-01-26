@@ -703,8 +703,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kMW-IR-OpM">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="160"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="PcJ-hE-DfO"/>
+                                </constraints>
                             </mapView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FLr-cF-t8Z">
                                 <rect key="frame" x="150" y="274" width="20" height="20"/>
@@ -725,15 +728,15 @@
                                     <segue destination="b2A-wG-Mz4" kind="push" identifier="OTCreateMeeting" id="3gb-lP-wHV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRg-cj-T9Q">
-                                <rect key="frame" x="28" y="504" width="264" height="44"/>
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRg-cj-T9Q">
+                                <rect key="frame" x="-4" y="510" width="328" height="58"/>
                                 <animations/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.40000000000000002" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="axY-8W-1bi"/>
+                                    <constraint firstAttribute="height" constant="58" id="axY-8W-1bi"/>
                                 </constraints>
-                                <state key="normal" title="Démarrer une maraude">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Créer un mauraude">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -943,16 +946,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="01M-L0-iJE"/>
-                            <constraint firstItem="uRg-cj-T9Q" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="8" id="28V-QY-hCT"/>
+                            <constraint firstItem="uRg-cj-T9Q" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="28V-QY-hCT"/>
                             <constraint firstItem="Kc9-kH-YQ7" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="8" id="DGh-YH-0mh"/>
                             <constraint firstAttribute="width" secondItem="kMW-IR-OpM" secondAttribute="width" id="LUQ-f3-ams"/>
                             <constraint firstItem="kMW-IR-OpM" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="OOu-Fn-olT"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="x5D-lh-QtL" secondAttribute="bottom" id="RLa-CY-5bv"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uRg-cj-T9Q" secondAttribute="bottom" constant="20" id="TDA-nJ-u0d"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uRg-cj-T9Q" secondAttribute="bottom" id="TDA-nJ-u0d"/>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="UhE-G3-aXJ"/>
                             <constraint firstItem="oVf-Bh-vdD" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="65" id="VYk-ZD-Ywe"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uRg-cj-T9Q" secondAttribute="trailing" constant="8" id="ZT2-9H-lNi"/>
-                            <constraint firstItem="kMW-IR-OpM" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="Zzb-lw-Egt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uRg-cj-T9Q" secondAttribute="trailing" constant="-20" id="ZT2-9H-lNi"/>
+                            <constraint firstItem="kMW-IR-OpM" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="64" id="Zzb-lw-Egt"/>
                             <constraint firstAttribute="trailing" secondItem="x5D-lh-QtL" secondAttribute="trailing" id="blK-sr-sHQ"/>
                             <constraint firstItem="x5D-lh-QtL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="e1K-mf-d0a"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oVf-Bh-vdD" secondAttribute="trailing" constant="65" id="gPV-iG-qu0"/>
@@ -961,7 +964,6 @@
                             <constraint firstItem="DaJ-X6-EEa" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ptP-Fx-KEf"/>
                             <constraint firstItem="x5D-lh-QtL" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="qI7-NA-VS0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Kc9-kH-YQ7" secondAttribute="trailing" constant="-4" id="vZM-eA-sfQ"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="kMW-IR-OpM" secondAttribute="bottom" id="x5X-Eu-skn"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="4" id="xTS-eA-bD5"/>
                         </constraints>
                     </view>
