@@ -775,8 +775,8 @@
                                     <action selector="launcherTour:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Jek-KM-xp1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVf-Bh-vdD">
-                                <rect key="frame" x="85" y="460" width="150" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVf-Bh-vdD">
+                                <rect key="frame" x="81" y="450" width="158" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="F0l-W0-UJ0"/>
@@ -984,7 +984,7 @@
                             <constraint firstItem="x5D-lh-QtL" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="qI7-NA-VS0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Kc9-kH-YQ7" secondAttribute="trailing" constant="-4" id="vZM-eA-sfQ"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="kMW-IR-OpM" secondAttribute="bottom" id="x5X-Eu-skn"/>
-                            <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="4" id="xTS-eA-bD5"/>
+                            <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="14" id="xTS-eA-bD5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OWf-3U-PgN"/>
@@ -1263,7 +1263,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="selected">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="highlighted">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1953,7 +1953,7 @@
                                         <color key="backgroundColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
                                                 <color key="value" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2030,7 +2030,7 @@
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-Ig-nu1">
                                 <rect key="frame" x="-14" y="0.0" width="348" height="568"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="11E6611B-B391-4E5A-937B-98640E410CF1" translatesAutoresizingMaskIntoConstraints="NO" id="ULq-DZ-rUN">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="B9F6A13F-5587-4441-AE3C-C187B76BA402" translatesAutoresizingMaskIntoConstraints="NO" id="ULq-DZ-rUN">
                                         <rect key="frame" x="126" y="40" width="96" height="96"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="96" id="c5U-5e-nup"/>
@@ -2680,7 +2680,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="11E6611B-B391-4E5A-937B-98640E410CF1" width="280" height="280">
+        <image name="B9F6A13F-5587-4441-AE3C-C187B76BA402" width="280" height="280">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
