@@ -170,7 +170,31 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
  */
 + (NSArray *)createMenuItems {
 	NSMutableArray *menuItems = [NSMutableArray array];
+    
+    OTMenuItem *itemAmis = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_amis", @"")
+                                            segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+    [menuItems addObject:itemAmis];
+    
+    OTMenuItem *itemGuide = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_guide", @"")
+                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+    [menuItems addObject:itemGuide];
 
+    
+    OTMenuItem *itemParam = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_param", @"")
+                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+    [menuItems addObject:itemParam];
+
+    
+    OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_about", @"")
+                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+    [menuItems addObject:itemAbout];
+
+    // Disconnect
+    OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
+                                                   segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
+    [menuItems addObject:itemDisconnect];
+    
+    /*
 	// Map
 	OTMenuItem *itemMap = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_map_title", @"")
 	                                        segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];

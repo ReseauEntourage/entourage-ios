@@ -18,6 +18,10 @@
 "userviewcontroller_title" = "PROFIL";
 
 // MenuItems
+"menu_amis" = "Amis";
+"menu_guide" = "Guide de solidarité";
+"menu_param" = "Paramètres de l'application";
+"menu_about" = "À propos";
 "menu_map_title" = "Maraudes";
 "menu_guide_title" = "Guide";
 "menu_profile_title" = "Profil";
