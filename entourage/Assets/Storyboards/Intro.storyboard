@@ -229,7 +229,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1a-zz-qxR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="211" y="-2390"/>
+            <point key="canvasLocation" x="349" y="-2392"/>
         </scene>
         <!--Lost Code View Controller-->
         <scene sceneID="Zsy-Vg-MOg">
@@ -355,7 +355,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ia-OO-Shk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-140" y="-1016"/>
+            <point key="canvasLocation" x="-223" y="-1046"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oPo-Hd-wrW">
@@ -388,19 +388,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZcO-iR-1Vc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZcO-iR-1Vc">
+                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_user_photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="NeY-mr-HCz">
-                                        <rect key="frame" x="112" y="31" width="96" height="96"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user_photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="NeY-mr-HCz">
+                                        <rect key="frame" x="116" y="31" width="96" height="96"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="0JW-ZB-dbp"/>
                                             <constraint firstAttribute="height" constant="96" id="I0o-ef-znO"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisissez votre email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sj3-7j-Ihn">
-                                        <rect key="frame" x="0.0" y="163" width="320" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisissez votre email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sj3-7j-Ihn">
+                                        <rect key="frame" x="0.0" y="163" width="328" height="30"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="pgL-bD-WrY"/>
@@ -414,16 +414,16 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CGA-jO-bfn">
-                                        <rect key="frame" x="0.0" y="192" width="320" height="1"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGA-jO-bfn">
+                                        <rect key="frame" x="0.0" y="192" width="328" height="1"/>
                                         <animations/>
                                         <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="uJe-UC-f1n"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xx-s4-ZNI">
-                                        <rect key="frame" x="0.0" y="219" width="320" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xx-s4-ZNI">
+                                        <rect key="frame" x="0.0" y="219" width="328" height="50"/>
                                         <animations/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.40000000000000002" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -542,7 +542,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VE8-ZM-GbG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="211" y="-1745"/>
+            <point key="canvasLocation" x="349" y="-1745"/>
         </scene>
         <!--Startup View Controller-->
         <scene sceneID="6VV-8c-dP7">
