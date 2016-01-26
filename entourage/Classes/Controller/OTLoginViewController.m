@@ -104,7 +104,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    
                                    // new way
 #warning @Nicholas: arrayWithArray crashes the app. changed to arrayWithObject
-                                   NSMutableArray *loggedNumbers = [NSMutableArray arrayWithObject:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+                                   NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil) {
                                        loggedNumbers = [NSMutableArray new];
                                    }

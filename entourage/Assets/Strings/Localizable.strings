@@ -18,9 +18,9 @@
 "userviewcontroller_title" = "PROFIL";
 
 // MenuItems
-"menu_map_title" = "MARAUDES";
-"menu_guide_title" = "GUIDE";
-"menu_profile_title" = "PROFIL";
+"menu_map_title" = "Maraudes";
+"menu_guide_title" = "Guide";
+"menu_profile_title" = "Profil";
 "menu_myMeetings_title" = "MES RECONTRES";
 "menu_practicalInformation_title" = "INFORMATIONS PRATIQUES";
 "menu_members_title" = "LES MEMBRES";
@@ -29,7 +29,7 @@
 "menu_help_title" = "AIDE";
 "menu_yourOpinion_title" = "VOTRE AVIS";
 "menu_translate_title" = "TRADUIRE";
-"menu_disconnect_title" = "DECONNEXION";
+"menu_disconnect_title" = "Deconnexion";
 
 // Encounters
 "has_encountered" = "a rencontré";

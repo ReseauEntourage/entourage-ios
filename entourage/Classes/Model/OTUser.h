@@ -23,5 +23,6 @@ extern NSString *const kKeyToken;
 @property (strong, nonatomic) OTOrganization *organization;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (NSString *)fullname;
 
 @end

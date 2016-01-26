@@ -67,4 +67,9 @@ NSString *const kKeyOrganization =@"organization";
 	return self;
 }
 
+- (NSString *)fullname
+{
+    return [NSString stringWithFormat:@"%@ %@",_firstName.capitalizedString, _lastName.capitalizedString];
+}
+
 @end

@@ -39,10 +39,12 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 // UI
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
 @property (nonatomic, strong) NSMutableDictionary *controllersDictionary;
+@property (nonatomic, strong) OTUser *currentUser;
 
 @end
 
@@ -53,6 +55,10 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+    self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    self.nameLabel.text = [self.currentUser fullname];
+
 
 	self.menuItems = [OTMenuViewController createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
@@ -75,7 +81,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:OTMenuTableViewCellIdentifier];
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
 
-	cell.itemLabel.text = [menuItem.title uppercaseStringWithLocale:[NSLocale currentLocale]];
+    cell.itemLabel.text = menuItem.title;//[menuItem.title uppercaseStringWithLocale:[NSLocale currentLocale]];
 	return cell;
 }
 

@@ -6,9 +6,6 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Calibri-Bold.ttf">
-            <string>Calibri-Bold</string>
-        </mutableArray>
         <mutableArray key="Calibri.ttf">
             <string>Calibri</string>
             <string>Calibri</string>
@@ -51,23 +48,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="37" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EiD-PN-iyE">
-                                <rect key="frame" x="-4" y="198" width="328" height="416"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user_photo" translatesAutoresizingMaskIntoConstraints="NO" id="Qcu-6D-p8T">
+                                <rect key="frame" x="111" y="96" width="100" height="100"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="c4b-4p-dYN"/>
+                                    <constraint firstAttribute="width" constant="100" id="p9L-kW-3bX"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="52" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EiD-PN-iyE">
+                                <rect key="frame" x="-4" y="258" width="328" height="310"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OTMenuTableViewCellIdentifier" id="Daf-t7-24q" customClass="OTMenuTableViewCell">
-                                        <rect key="frame" x="0.0" y="86" width="328" height="37"/>
+                                        <rect key="frame" x="0.0" y="22" width="328" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Daf-t7-24q" id="kwc-jO-Zl4">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="37"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="## ITEM NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdS-73-BBy">
-                                                    <rect key="frame" x="37" y="0.0" width="222" height="37"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="## Item name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdS-73-BBy">
+                                                    <rect key="frame" x="37" y="0.0" width="222" height="52"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="16"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
@@ -85,41 +90,35 @@
                                     <outlet property="delegate" destination="0J6-b7-p0H" id="8IY-4K-OLz"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user_photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qcu-6D-p8T">
-                                <rect key="frame" x="119" y="72" width="83" height="89"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="89" id="c4b-4p-dYN"/>
-                                    <constraint firstAttribute="width" constant="83" id="p9L-kW-3bX"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prenom Nom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZg-OL-qCe">
-                                <rect key="frame" x="20" y="169" width="280" height="21"/>
+                                <rect key="frame" x="20" y="212" width="280" height="21"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="0t1-aN-am2"/>
                                     <constraint firstAttribute="width" constant="280" id="tSZ-2p-xVi"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Qcu-6D-p8T" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="7C8-6E-cUz"/>
-                            <constraint firstItem="gZg-OL-qCe" firstAttribute="top" secondItem="Qcu-6D-p8T" secondAttribute="bottom" constant="8" id="A6B-u2-IVE"/>
+                            <constraint firstItem="Qcu-6D-p8T" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" constant="1" id="7C8-6E-cUz"/>
+                            <constraint firstItem="gZg-OL-qCe" firstAttribute="top" secondItem="Qcu-6D-p8T" secondAttribute="bottom" constant="16" id="A6B-u2-IVE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EiD-PN-iyE" secondAttribute="trailing" constant="-20" id="Byz-Jo-03A"/>
                             <constraint firstItem="EiD-PN-iyE" firstAttribute="leading" secondItem="ljo-QP-YxJ" secondAttribute="leadingMargin" constant="-20" id="MBZ-Fe-hYK"/>
+                            <constraint firstItem="Qcu-6D-p8T" firstAttribute="top" secondItem="slD-Bf-Od0" secondAttribute="bottom" constant="32" id="RLN-OM-keW"/>
                             <constraint firstItem="gZg-OL-qCe" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="TUJ-yt-314"/>
-                            <constraint firstItem="Qcu-6D-p8T" firstAttribute="top" secondItem="slD-Bf-Od0" secondAttribute="bottom" constant="8" id="eMh-Zj-o4Y"/>
-                            <constraint firstItem="EiD-PN-iyE" firstAttribute="top" secondItem="gZg-OL-qCe" secondAttribute="bottom" constant="8" id="j5z-qu-cC3"/>
-                            <constraint firstItem="2Xh-aG-0Ck" firstAttribute="top" secondItem="EiD-PN-iyE" secondAttribute="bottom" constant="-46" id="jYd-tt-tU7"/>
+                            <constraint firstItem="EiD-PN-iyE" firstAttribute="top" secondItem="gZg-OL-qCe" secondAttribute="bottom" constant="25" id="j5z-qu-cC3"/>
+                            <constraint firstItem="2Xh-aG-0Ck" firstAttribute="top" secondItem="EiD-PN-iyE" secondAttribute="bottom" id="jYd-tt-tU7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="a9Y-2c-snz"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="nameLabel" destination="gZg-OL-qCe" id="zeh-G7-D9m"/>
                         <outlet property="tableView" destination="EiD-PN-iyE" id="CgG-Ii-UXP"/>
                         <segue destination="UcL-62-xea" kind="custom" identifier="segueMenuIdentifierForMap" customClass="SWRevealViewControllerSeguePushController" id="xSV-rR-wZy"/>
                         <segue destination="69R-LH-AoF" kind="custom" identifier="segueMenuIdentifierForGuide" customClass="SWRevealViewControllerSeguePushController" id="cE5-Dw-CbA"/>
@@ -1806,6 +1805,7 @@
         <image name="center-location.png" width="30" height="30"/>
         <image name="ic_action_record_sound.png" width="132" height="130"/>
         <image name="ic_entourage.png" width="130" height="130"/>
+        <image name="ic_user_photo" width="154" height="152"/>
         <image name="ic_user_photo.png" width="154" height="152"/>
         <image name="pointer.png" width="37" height="47"/>
     </resources>

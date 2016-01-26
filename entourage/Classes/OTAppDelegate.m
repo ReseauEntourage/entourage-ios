@@ -137,7 +137,7 @@ NSString *const kUserInfoMessage = @"content";
 
 - (void)configureUIAppearance {
 	// UIStatusBar
-	UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
+	UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
 
 	// UINavigationBar
     UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
