@@ -612,6 +612,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Yl-vAI">
+                                <rect key="frame" x="140" y="172" width="40" height="40"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Cf9-2C-NxO"/>
+                                    <constraint firstAttribute="width" constant="40" id="FAX-3S-fc3"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -623,8 +631,10 @@
                             <constraint firstItem="bPF-Wr-lQ0" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="Myk-g9-Wav"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="top" secondItem="1oI-JN-xF6" secondAttribute="bottom" constant="20" id="Pvi-NW-Ow3"/>
                             <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="mwv-HX-aYM" secondAttribute="bottom" constant="64" id="WGz-P9-g6X"/>
+                            <constraint firstItem="gln-Yl-vAI" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="bZY-KF-103"/>
                             <constraint firstItem="URZ-Zx-NV8" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="dIE-6t-6SO"/>
                             <constraint firstItem="bPF-Wr-lQ0" firstAttribute="top" secondItem="URZ-Zx-NV8" secondAttribute="bottom" constant="8" id="dK7-pf-861"/>
+                            <constraint firstItem="URZ-Zx-NV8" firstAttribute="top" secondItem="gln-Yl-vAI" secondAttribute="bottom" constant="8" id="fLS-Dn-eQm"/>
                             <constraint firstItem="URZ-Zx-NV8" firstAttribute="top" secondItem="qgm-QM-88m" secondAttribute="bottom" constant="200" id="rPR-7G-imL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tPf-h7-A0x" secondAttribute="trailing" constant="-20" id="uiF-mg-U8H"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="xue-aD-E7N"/>
@@ -835,6 +845,7 @@
         <image name="ic_user_photo.png" width="154" height="152"/>
         <image name="icon-aa-facebook.png" width="154" height="152"/>
         <image name="icon-aa-twitter.png" width="154" height="152"/>
+        <image name="logo" width="22" height="22"/>
         <image name="logo.png" width="154" height="152"/>
     </resources>
 </document>
