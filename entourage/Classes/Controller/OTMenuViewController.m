@@ -61,6 +61,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
     self.title = @"MON COMPTE";
     [self createBackFrontMenuButton];
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 /**************************************************************************************************/

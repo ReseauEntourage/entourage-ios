@@ -56,6 +56,7 @@
         [menuButton setAction:@selector(revealToggle:)];
         [self.navigationController.navigationBar addGestureRecognizer:self.revealViewController.panGestureRecognizer];
         [self.navigationItem setRightBarButtonItem:menuButton];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     }
     
     return menuButton;
