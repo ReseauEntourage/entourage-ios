@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15E33e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -562,27 +562,29 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oI-JN-xF6">
-                                <rect key="frame" x="80" y="414" width="160" height="40"/>
+                                <rect key="frame" x="55" y="462" width="210" height="50"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="HuL-dl-84D"/>
-                                    <constraint firstAttribute="height" constant="40" id="MCi-Bg-jKH"/>
+                                    <constraint firstAttribute="width" constant="210" id="HuL-dl-84D"/>
+                                    <constraint firstAttribute="height" constant="50" id="MCi-Bg-jKH"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Inscription">
-                                    <color key="titleColor" red="0.93725490199999995" green="0.40000000000000002" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="registerTap:" destination="d0v-Fd-fA9" eventType="touchUpInside" id="ief-LG-Iy6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwv-HX-aYM">
-                                <rect key="frame" x="124" y="474" width="73" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwv-HX-aYM">
+                                <rect key="frame" x="115" y="532" width="92" height="21"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="Dka-8E-FDM"/>
-                                    <constraint firstAttribute="height" constant="30" id="Hz8-G8-WY9"/>
+                                    <constraint firstAttribute="width" constant="92" id="Dka-8E-FDM"/>
+                                    <constraint firstAttribute="height" constant="21" id="Hz8-G8-WY9"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Connexion">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -590,34 +592,25 @@
                                     <segue destination="Gt1-cc-4DI" kind="show" id="duu-Hd-nsS"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entourage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URZ-Zx-NV8">
-                                <rect key="frame" x="80" y="220" width="160" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPF-Wr-lQ0">
+                                <rect key="frame" x="20" y="250" width="280" height="58"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="in8-6J-wZc"/>
-                                    <constraint firstAttribute="height" constant="45" id="z3c-sH-nhW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un peu de chaleur humaine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPF-Wr-lQ0">
-                                <rect key="frame" x="20" y="273" width="280" height="45"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="fz7-U9-CWf"/>
+                                    <constraint firstAttribute="height" constant="58" id="fz7-U9-CWf"/>
                                     <constraint firstAttribute="width" constant="280" id="xZd-ZE-XbC"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <string key="text">Un peu de chaleur humaine
+avec Entourage.</string>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Yl-vAI">
-                                <rect key="frame" x="140" y="172" width="40" height="40"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Yl-vAI">
+                                <rect key="frame" x="135" y="160" width="51" height="75"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Cf9-2C-NxO"/>
-                                    <constraint firstAttribute="width" constant="40" id="FAX-3S-fc3"/>
+                                    <constraint firstAttribute="height" constant="75" id="Cf9-2C-NxO"/>
+                                    <constraint firstAttribute="width" constant="51" id="FAX-3S-fc3"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -630,12 +623,10 @@
                             <constraint firstItem="tPf-h7-A0x" firstAttribute="top" secondItem="60w-tv-tKx" secondAttribute="topMargin" id="JXO-0O-Xrx"/>
                             <constraint firstItem="bPF-Wr-lQ0" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="Myk-g9-Wav"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="top" secondItem="1oI-JN-xF6" secondAttribute="bottom" constant="20" id="Pvi-NW-Ow3"/>
-                            <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="mwv-HX-aYM" secondAttribute="bottom" constant="64" id="WGz-P9-g6X"/>
+                            <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="mwv-HX-aYM" secondAttribute="bottom" constant="15" id="WGz-P9-g6X"/>
+                            <constraint firstItem="gln-Yl-vAI" firstAttribute="top" secondItem="qgm-QM-88m" secondAttribute="bottom" constant="140" id="YGH-ab-kwH"/>
                             <constraint firstItem="gln-Yl-vAI" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="bZY-KF-103"/>
-                            <constraint firstItem="URZ-Zx-NV8" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="dIE-6t-6SO"/>
-                            <constraint firstItem="bPF-Wr-lQ0" firstAttribute="top" secondItem="URZ-Zx-NV8" secondAttribute="bottom" constant="8" id="dK7-pf-861"/>
-                            <constraint firstItem="URZ-Zx-NV8" firstAttribute="top" secondItem="gln-Yl-vAI" secondAttribute="bottom" constant="8" id="fLS-Dn-eQm"/>
-                            <constraint firstItem="URZ-Zx-NV8" firstAttribute="top" secondItem="qgm-QM-88m" secondAttribute="bottom" constant="200" id="rPR-7G-imL"/>
+                            <constraint firstItem="bPF-Wr-lQ0" firstAttribute="top" secondItem="gln-Yl-vAI" secondAttribute="bottom" constant="15" id="foC-Ie-EJD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tPf-h7-A0x" secondAttribute="trailing" constant="-20" id="uiF-mg-U8H"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="xue-aD-E7N"/>
                         </constraints>
@@ -853,7 +844,6 @@
         <image name="ic_user_photo.png" width="154" height="152"/>
         <image name="icon-aa-facebook.png" width="154" height="152"/>
         <image name="icon-aa-twitter.png" width="154" height="152"/>
-        <image name="logo" width="22" height="22"/>
         <image name="logo.png" width="154" height="152"/>
     </resources>
 </document>

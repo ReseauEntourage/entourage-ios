@@ -8,7 +8,7 @@
 
 #import "UIView+entourage.h"
 
-static const CGFloat kRadius = 5.f;
+static const CGFloat kRadius = 4.f;
 
 @implementation UIView (entourage)
 
