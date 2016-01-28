@@ -216,7 +216,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
 	                                               segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
 	[menuItems addObject:itemDisconnect];
-
+     */
 	// Version
     /*
 	NSString *buildVersion = [[[NSBundle bundleForClass:[self class]] infoDictionary]

@@ -587,7 +587,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Gt1-cc-4DI" kind="push" id="duu-Hd-nsS"/>
+                                    <segue destination="Gt1-cc-4DI" kind="show" id="duu-Hd-nsS"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entourage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URZ-Zx-NV8">
@@ -756,7 +756,7 @@
                                                     <color key="titleColor" red="0.93725490199999995" green="0.40000000000000002" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="HjR-IO-SUN" kind="push" identifier="OTLostCode" id="K8j-wn-mEk"/>
+                                                    <segue destination="HjR-IO-SUN" kind="show" identifier="OTLostCode" id="K8j-wn-mEk"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Numéro de téléphone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z1A-vK-s3P">
@@ -838,8 +838,8 @@
                         <outlet property="phoneTextField" destination="dhy-dj-PYm" id="WS8-PO-wZJ"/>
                         <outlet property="validateButton" destination="fqc-ms-rKq" id="evW-HB-3JW"/>
                         <outlet property="whiteBackground" destination="OgF-9U-Zl4" id="aDb-cj-feu"/>
-                        <segue destination="teI-K9-Md6" kind="modal" identifier="OTAskMore" id="wQx-zb-g3U"/>
-                        <segue destination="tqA-lH-zih" kind="push" identifier="OTTutorial" id="zoi-oS-X1h"/>
+                        <segue destination="teI-K9-Md6" kind="presentation" identifier="OTAskMore" id="wQx-zb-g3U"/>
+                        <segue destination="tqA-lH-zih" kind="show" identifier="OTTutorial" id="zoi-oS-X1h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5B5-Uo-Thh" userLabel="First Responder" sceneMemberID="firstResponder"/>
