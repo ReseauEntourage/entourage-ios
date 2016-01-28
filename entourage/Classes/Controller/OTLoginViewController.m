@@ -59,7 +59,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    self.navigationController.navigationBarHidden = NO;
+    //self.navigationController.navigationBarHidden = NO;
+//    UINavigationBar.appearance.barTintColor = [UIColor redColor];
+//    UINavigationBar.appearance.backgroundColor = [UIColor clearColor];
+    [self.navigationController presentTransparentNavigationBar];
+
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
@@ -76,6 +80,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.passwordTextField.text = @"123456";
 #endif
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
+    UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
 }
 
 /********************************************************************************/

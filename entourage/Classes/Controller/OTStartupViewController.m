@@ -9,6 +9,10 @@
 #import "OTStartupViewController.h"
 #import "UIView+entourage.h"
 
+//Helper
+#import "UINavigationController+entourage.h"
+
+
 @interface OTStartupViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 
@@ -29,11 +33,22 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
+//    UINavigationBar.appearance.barTintColor = [UIColor clearColor];
+//    UINavigationBar.appearance.backgroundColor = [UIColor clearColor];
+    [self.navigationController presentTransparentNavigationBar];
+
+    
+    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     self.title = @"";
+    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
+//    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
+//    UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
+     [self.navigationController presentTransparentNavigationBar];
 }
 
 /*

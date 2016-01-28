@@ -14,6 +14,7 @@
     [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setTranslucent:YES];
     [self.navigationBar setShadowImage:[UIImage new]];
+    self.navigationBar.backgroundColor = [UIColor clearColor];
     [self setNavigationBarHidden:NO animated:YES];
 }
 
