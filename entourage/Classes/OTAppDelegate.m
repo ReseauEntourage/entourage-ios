@@ -7,24 +7,43 @@
 //
 
 #import "OTAppDelegate.h"
+
+// Controllers
 #import "OTMessageViewController.h"
+#import "OTLoginViewController.h"
+
+// Pods
+#import "SimpleKeychain.h"
+
+// Service
+#import "OTAuthService.h"
 
 // Util
 #import "UIFont+entourage.h"
 #import "OTConsts.h"
 #import "IQKeyboardManager.h"
 
+// Helper
+#import "NSUserDefaults+OT.h"
+
+/**************************************************************************************************/
+#pragma mark - OTAppDelegate
+
 const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 
 NSString *const kUserInfoSender = @"sender";
 NSString *const kUserInfoObject = @"object";
 NSString *const kUserInfoMessage = @"content";
+NSString *const kLoginFailureNotification = @"loginFailureNotification";
 
 @interface OTAppDelegate () <UIApplicationDelegate>
 
 @end
 
 @implementation OTAppDelegate
+
+/**************************************************************************************************/
+#pragma mark - Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // start flurry
@@ -41,11 +60,29 @@ NSString *const kUserInfoMessage = @"content";
     // configure appearence
     [self configureUIAppearance];
     
+    // add notification observer for 401 error trigger
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
+    
 	return YES;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
 
+}
+
+/**************************************************************************************************/
+#pragma mark - Private methods
+
+- (void)popToLogin:(NSNotification *)notification {
+    [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"device_token"];
+    
+    [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
+    [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPassword];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
+    OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTStartupNavigationViewControllerIdentifier"];
+    [self.window.rootViewController presentViewController:loginViewController animated:YES completion:nil];
 }
 
 /**************************************************************************************************/

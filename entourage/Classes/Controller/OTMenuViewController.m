@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import "OTAppDelegate.h"
 #import "OTMenuViewController.h"
 
 // Controller
@@ -89,12 +90,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 	if (indexPath.row == self.menuItems.count - 1) {
-		[[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"device_token"];
-
-		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
-		OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTStartupNavigationViewControllerIdentifier"];
-		[self presentViewController:loginViewController animated:YES completion:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
 	else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
@@ -218,7 +214,6 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	[menuItems addObject:itemDisconnect];
      */
 	// Version
-    /*
 	NSString *buildVersion = [[[NSBundle bundleForClass:[self class]] infoDictionary]
 	                          objectForKey:@"CFBundleVersion"];
 
@@ -227,7 +222,6 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	version = [NSString stringWithFormat:@"%@ (%@)", version, buildVersion];
 	OTMenuItem *itemVersion = [[OTMenuItem alloc] initWithTitle:version segueIdentifier:nil];
 	[menuItems addObject:itemVersion];
-     */
 
 	return menuItems;
 }

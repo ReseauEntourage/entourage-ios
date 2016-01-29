@@ -17,18 +17,18 @@
 /**************************************************************************************************/
 #pragma mark - Singleton
 
-+ (AFHTTPRequestOperationManager *)sharedInstance {
-	static AFHTTPRequestOperationManager *requestManager = nil;
-
-	if (requestManager == nil) {
-		requestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_API_URL]];
-		requestManager.responseSerializer = [AFJSONResponseSerializer serializer];
-		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
++ (OTRequestOperationManager *)sharedInstance {
+    static OTRequestOperationManager *requestManager = nil;
+    
+    if (requestManager == nil) {
+        requestManager = [[OTRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_API_URL]];
+        requestManager.responseSerializer = [AFJSONResponseSerializer serializer];
+        requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [requestManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [requestManager.requestSerializer setValue:@"(required, string, `b05e6d0d2be8`)" forHTTPHeaderField:@"X-API-Key"];
-	}
-
-	return requestManager;
+        [requestManager.requestSerializer setValue:@"b05e6d0d2be8" forHTTPHeaderField:@"X-API-Key"];
+    }
+    
+    return requestManager;
 }
 
 + (NSDictionary*)commonParameters
@@ -37,6 +37,5 @@
 
     return user ? @{ @"token" : user.token } : nil;
 }
-
 
 @end

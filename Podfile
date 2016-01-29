@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 inhibit_all_warnings!
 
-platform :ios, '7.0'
+platform :ios, '8.0'
 
 target "entourage" do
     pod 'AFNetworking', ‘2.6.1’
@@ -13,6 +13,7 @@ target "entourage" do
     pod 'MBProgressHUD', '0.8'
     pod 'IQKeyboardManager', '3.3.4'
     pod 'SVProgressHUD', :head
+    pod 'SimpleKeychain', '~> 0.7'
 end
 
 target "entourageTests" do

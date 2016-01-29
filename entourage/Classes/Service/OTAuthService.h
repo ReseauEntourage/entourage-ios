@@ -8,7 +8,10 @@
 
 #import "OTUser.h"
 
+extern NSString *const kAPILogin;
 extern NSString *const kAPIUserRoute;
+extern NSString *const kKeychainPhone;
+extern NSString *const kKeychainPassword;
 
 @interface OTAuthService : NSObject
 

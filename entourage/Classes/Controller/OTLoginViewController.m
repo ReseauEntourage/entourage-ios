@@ -111,8 +111,9 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    
-                                   // new way
-#warning @Nicholas: arrayWithArray crashes the app. changed to arrayWithObject
+                                   
+                                   
+#warning : arrayWithArray crashes with @Ciprian, arrayWithObject crashed with @Nicolas
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil) {
                                        loggedNumbers = [NSMutableArray new];
@@ -122,17 +123,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    } else {
                                        [self performSegueWithIdentifier:@"OTTutorial" sender:self];
                                    }
-                                   
-                                   
-                                   
-                                   // old way
-                                   /*
-                                   if ([[NSUserDefaults standardUserDefaults] boolForKey:@"has_done_tutorial"]) {
-                                       [self dismissViewControllerAnimated:YES completion:nil];
-                                   } else {
-                                       [self performSegueWithIdentifier:@"OTTutorial" sender:self];
-                                   }
-                                    */
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    [[[UIAlertView alloc]
