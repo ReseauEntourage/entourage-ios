@@ -33,8 +33,7 @@
 /********************************************************************************/
 #pragma mark - lifecycle
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
 

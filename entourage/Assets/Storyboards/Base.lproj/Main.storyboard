@@ -953,7 +953,7 @@
                                 </connections>
                             </button>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pointer.png" translatesAutoresizingMaskIntoConstraints="NO" id="OFe-2j-Ee9">
-                                <rect key="frame" x="0.0" y="0.0" width="37" height="47"/>
+                                <rect key="frame" x="142" y="260" width="37" height="47"/>
                                 <animations/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaJ-X6-EEa">

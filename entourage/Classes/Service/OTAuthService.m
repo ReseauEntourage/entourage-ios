@@ -10,6 +10,7 @@
 
 // Pods
 #import <AFNetworking/AFNetworking.h>
+#import "SimpleKeychain.h"
 
 // Manager
 #import "OTHTTPRequestManager.h"
@@ -24,10 +25,14 @@
 
 /**************************************************************************************************/
 #pragma mark - Constants
+
+NSString *const kAPILogin = @"login";
 NSString *const kAPIUserRoute = @"users";
 NSString *const kAPIUpdateUserRoute = @"update_me";
 NSString *const kAPIMe = @"me";
 NSString *const kAPICode = @"code";
+NSString *const kKeychainPhone = @"entourage_user_phone";
+NSString *const kKeychainPassword = @"entourage_user_password";
 
 /**************************************************************************************************/
 #pragma mark - Public methods
@@ -43,36 +48,29 @@ NSString *const kAPICode = @"code";
     NSDictionary *parameters = @{ @"phone": phone, @"sms_code": password, @"device_type": @"ios", @"device_id": (deviceId == nil ? @"" : deviceId) };
     
     [[OTHTTPRequestManager sharedInstance]
-     POST:@"login"
-		parameters: parameters
-     		success: ^(AFHTTPRequestOperation *operation, id responseObject)
-            {
-                NSDictionary *responseDict = responseObject;
-                NSLog(@"Authentication service response : %@", responseDict);
-                
-                NSError *actualError = [self errorFromOperation:operation andError:nil];
-                if (actualError) {
-                    NSLog(@"errorMessage %@", actualError);
-                    if (failure) {
-                        failure(actualError);
-                    }
-                }
-                else {
-                    NSDictionary *responseUser = responseDict[@"user"];
-                    OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
-                    if (success) {
-                        success(user);
-                    }
-                }
-            }
-            failure: ^(AFHTTPRequestOperation *operation, NSError *error)
-            {
-                    NSError *actualError = [self errorFromOperation:operation andError:error];
-                    NSLog(@"Failed with error %@", actualError);
-                if (failure) {
-                    failure(actualError);
-                }
-            }];
+     POSTWithUrl:kAPILogin
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *responseDict = responseObject;
+         NSLog(@"Authentication service response : %@", responseDict);
+         NSDictionary *responseUser = responseDict[@"user"];
+         OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+         
+         [[A0SimpleKeychain keychain] setString:phone forKey:kKeychainPhone];
+         [[A0SimpleKeychain keychain] setString:password forKey:kKeychainPassword];
+         
+         if (success) {
+             success(user);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         NSLog(@"Failed with error %@", error);
+         if (failure) {
+             failure(error);
+         }
+     }];
 }
 
 - (void)regenerateSecretCode:(NSString *)phone
@@ -80,7 +78,7 @@ NSString *const kAPICode = @"code";
                      failure:(void (^)(NSError *))failure
 {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_regenerate_code", @""), kAPIUserRoute, kAPIMe, kAPICode];
-
+    
     NSMutableDictionary *phoneDictionnary = [NSMutableDictionary new];
     phoneDictionnary[@"phone"] = phone;
     
@@ -92,54 +90,22 @@ NSString *const kAPICode = @"code";
     parameters[@"code"] = actionDictionnary;
     
     [[OTHTTPRequestManager sharedInstance]
-     PATCH:url
-        parameters:parameters
-            success:^(AFHTTPRequestOperation *operation, id responseObject)
-            {
-                NSDictionary *responseDict = responseObject;
-                
-                NSError *actualError = [self errorFromOperation:operation andError:nil];
-                if (actualError) {
-                    NSLog(@"errorMessage %@", actualError);
-                    if (failure) {
-                        failure(actualError);
-                    }
-                }
-                else {
-                    NSDictionary *responseUser = responseDict[@"user"];
-                    OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
-                    if (success) {
-                        success(user);
-                    }
-                }
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSError *actualError = [self errorFromOperation:operation andError:error];
-                if (failure) {
-                    failure(actualError);
-                }
-            }];
-}
-
-
-- (NSError *)errorFromOperation:(AFHTTPRequestOperation *)operation
-                       andError:(NSError *)error {
-	NSError *actualError = error;
-
-	if ([operation responseString]) {
-		// Convert to JSON object:
-		NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[[operation responseString] dataUsingEncoding:NSUTF8StringEncoding]
-		                                                           options:0
-		                                                             error:NULL];
-
-		if ([jsonObject isKindOfClass:[NSDictionary class]] && [jsonObject objectForKey:@"error"]) {
-			actualError = [NSError errorWithDomain:error.domain code:error.code userInfo:@{ NSLocalizedDescriptionKey:[[jsonObject objectForKey:@"error"] objectForKey:@"message"] }];
-		}
-	}
-	else {
-		NSString *genericErrorMessage = @"Une erreur s'est produite. Vérifiez votre connexion réseau et réessayez.";
-		actualError = [NSError errorWithDomain:error.domain code:error.code userInfo:@{ NSLocalizedDescriptionKey:genericErrorMessage }];
-	}
-	return actualError;
+     PATCHWithUrl:url andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *responseDict = responseObject;
+         NSDictionary *responseUser = responseDict[@"user"];
+         OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+         if (success) {
+             success(user);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure) {
+             failure(error);
+         }
+     }];
 }
 
 - (void)updateUserInformationWithEmail:(NSString *)email
@@ -156,20 +122,22 @@ NSString *const kAPICode = @"code";
     parameters[@"user"] = dictionary;
     
     [[OTHTTPRequestManager sharedInstance]
-     PATCH:url
-        parameters: parameters
-            success: ^(AFHTTPRequestOperation *operation, id responseUser)
-            {
-                if (success) {
-                    success([[responseUser objectForKey:@"user"] stringForKey:@"email"]);
-                }
-            }
-            failure:^(AFHTTPRequestOperation *operation, NSError *error)
-            {
-                if (failure) {
-                    failure(error);
-                }
-            }];
+     PATCHWithUrl:url andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success) {
+             // CHECK THIS
+             NSDictionary *responseDict = responseObject;
+             NSDictionary *responseUser = responseDict[@"user"];
+             success([[responseUser objectForKey:@"user"] stringForKey:@"email"]);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure) {
+             failure(error);
+         }
+     }];
 }
 
 - (void)subscribeToNewsletterWithEmail:(NSString *)email
@@ -182,55 +150,43 @@ NSString *const kAPICode = @"code";
     parameters[@"newsletter_subscription"] = dict;
     
     [[OTHTTPRequestManager sharedInstance]
-     POST:@"newsletter_subscriptions"
-        parameters:parameters
-            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                NSDictionary *responseDict = responseObject;
-                NSLog(@"Authentication service response : %@", responseDict);
-                
-                NSError *actualError = [self errorFromOperation:operation andError:nil];
-                if (actualError) {
-                    NSLog(@"errorMessage %@", actualError);
-                    if (failure) {
-                        failure(actualError);
-                    }
-                }
-                else {
-                    if (success) {
-                        success(YES);
-                    }
-                }
-            }
-            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                NSError *actualError = [self errorFromOperation:operation andError:error];
-                NSLog(@"Failed with error %@", actualError);
-                if (failure) {
-                    failure(actualError);
-                }
-            }];
+     POSTWithUrl:@"newsletter_subscriptions" andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success) {
+             success(YES);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure) {
+             failure(error);
+         }
+     }];
 }
 
 - (void)checkVersionWithSuccess:(void (^)(BOOL))success failure:(void (^)(NSError *))failure
 {
     [[OTHTTPRequestManager sharedInstance]
-     GET:@"check"
-        parameters:nil
-            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSString *status = [responseObject stringForKey:@"status"];
-                if (success) {
-                    if ([status isEqualToString:@"ok"]) {
-                        success(YES);
-                    } else {
-                        success(NO);
-                    }
-                }
-            }
-            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSError *actualError = [self errorFromOperation:operation andError:error];
-                if (failure) {
-                    failure(actualError);
-                }
-            }];
+     GETWithUrl:@"check"
+     andParameters:nil
+     andSuccess:^(id responseObject)
+     {
+         NSString *status = [responseObject stringForKey:@"status"];
+         if (success) {
+             if ([status isEqualToString:@"ok"]) {
+                 success(YES);
+             } else {
+                 success(NO);
+             }
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure) {
+             failure(error);
+         }
+     }];
 }
 
 @end

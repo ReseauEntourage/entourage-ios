@@ -28,102 +28,122 @@ NSString *const kTourPoints = @"tour_points";
 #pragma mark - Public methods
 
 - (void)sendTour:(OTTour *)tour
-     withSuccess:(void (^)(OTTour *receivedTour))success
-         failure:(void (^)(NSError *error))failure
+     withSuccess:(void (^)(OTTour *))success
+         failure:(void (^)(NSError *))failure
 {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_tour", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kTour] = [tour dictionaryForWebserviceTour];
-    [[OTHTTPRequestManager sharedInstance] POST:url
-                                     parameters:parameters
-                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                         if (success)
-                                         {
-                                             OTTour *updatedTour = [self tourFromDictionary:responseObject];
-                                             success(updatedTour);
-                                         }
-                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                         if (failure)
-                                         {
-                                             failure(error);
-                                         }
-                                     }];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             OTTour *updatedTour = [self tourFromDictionary:responseObject];
+             success(updatedTour);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }];
 }
 
 - (void)closeTour:(OTTour *)tour
-      withSuccess:(void (^)(OTTour *closedTour))success
-          failure:(void (^)(NSError *error))failure
+      withSuccess:(void (^)(OTTour *))success
+          failure:(void (^)(NSError *))failure
 {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_close_tour", @""), kAPITourRoute, [tour sid], [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kTour] = [tour dictionaryForWebserviceTour];
-    [[OTHTTPRequestManager sharedInstance] PUT:url
-                                    parameters:parameters
-                                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                           if (success)
-                                           {
-                                               OTTour *updatedTour = [self tourFromDictionary:responseObject];
-                                               success(updatedTour);
-                                           }
-                                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                           if (failure)
-                                           {
-                                               failure(error);
-                                           }
-                                       }];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     PUTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             OTTour *updatedTour = [self tourFromDictionary:responseObject];
+             success(updatedTour);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }];
 }
 
 - (void)sendTourPoint:(NSMutableArray *)tourPoints
            withTourId:(NSNumber *)tourId
-          withSuccess:(void (^)(OTTour *updatedTour))success
-              failure:(void (^)(NSError *error))failure
+          withSuccess:(void (^)(OTTour *))success
+              failure:(void (^)(NSError *))failure
 {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_point", @""), kAPITourRoute, tourId, kTourPoints, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kTourPoints] = [OTTourPoint arrayForWebservice:tourPoints];
-    [[OTHTTPRequestManager sharedInstance] POST:url
-                                     parameters:parameters
-                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                            if (success)
-                                            {
-                                                OTTour *updatedTour = [self tourFromDictionary:responseObject];
-                                                success(updatedTour);
-                                            }
-                                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                            if (failure)
-                                            {
-                                                failure(error);
-                                            }
-                                        }];
     
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             OTTour *updatedTour = [self tourFromDictionary:responseObject];
+             success(updatedTour);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }];
 }
 
-- (void)toursAroundCoordinate:(CLLocationCoordinate2D) coordinates
-                               limit:(NSNumber *)limit
-                            distance:(NSNumber *)distance
-                             success:(void (^)(NSMutableArray *closeTours))success
-                             failure:(void (^)(NSError *error))failure;
+- (void)toursAroundCoordinate:(CLLocationCoordinate2D)coordinates
+                        limit:(NSNumber *)limit
+                     distance:(NSNumber *)distance
+                      success:(void (^)(NSMutableArray *))success
+                      failure:(void (^)(NSError *))failure
 {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tours_around", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSDictionary *parameters = @{ @"limit": limit, @"latitude": @(coordinates.latitude), @"longitude": @(coordinates.longitude), @"distance": distance };
-    [[OTHTTPRequestManager sharedInstance] GET:url
-                                    parameters:parameters
-                                       success:^(AFHTTPRequestOperation *operation, id responseObject)
-                                       {
-                                           NSDictionary *data = responseObject;
-                                           NSMutableArray *tours = [self toursFromDictionary:data];
-                                           
-                                           if (success)
-                                           {
-                                               success(tours);
-                                           }
-                                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                           if (failure)
-                                           {
-                                               failure(error);
-                                           }
-                                       }];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         NSMutableArray *tours = [self toursFromDictionary:data];
+         
+         if (success)
+         {
+             success(tours);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }];
 }
+
+
 
 - (void)toursByUserId:(NSNumber *)userId
        withPageNumber:(NSNumber *)pageNumber
@@ -137,26 +157,27 @@ NSString *const kTourPoints = @"tour_points";
                      kTours,
                      [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSDictionary *parameters = @{ @"page" : pageNumber, @"per" : per };
-    [[OTHTTPRequestManager sharedInstance] GET:url
-                                    parameters:parameters
-                                       success:^(AFHTTPRequestOperation *operation, id responseObject)
-                                        {
-                                           NSDictionary *data = responseObject;
-                                           NSMutableArray *userTours = [self toursFromDictionary:data];
-                                           
-                                           if (success)
-                                           {
-                                               success(userTours);
-                                           }
-                                       }
-                                       failure:^(AFHTTPRequestOperation * operation, NSError *error)
-                                        {
-                                           if (failure)
-                                           {
-                                               failure(error);
-                                           }
-                                       }];
-                  
+    
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         NSMutableArray *userTours = [self toursFromDictionary:data];
+         
+         if (success)
+         {
+             success(userTours);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }];
 }
 
 /**************************************************************************************************/

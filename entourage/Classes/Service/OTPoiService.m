@@ -23,65 +23,64 @@ NSString *const kAPIPoiRoute = @"map.json";
 /**************************************************************************************************/
 #pragma mark - Public methods
 
-- (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois))success
-                   failure:(void (^)(NSError *error))failure
+- (void)allPoisWithSuccess:(void (^)(NSArray *, NSArray *))success failure:(void (^)(NSError *))failure
 {
-    [[OTHTTPRequestManager sharedInstance] GET:kAPIPoiRoute
-                                    parameters:[OTHTTPRequestManager commonParameters]
-                                       success:^(AFHTTPRequestOperation *operation, id responseObject)
-                                       {
-                                           NSDictionary *data = responseObject;
-
-                                           NSMutableArray *categories = [self categoriesFromDictionary:data];
-                                           NSMutableArray *pois = [self poisFromDictionary:data];
-
-                                           if (success)
-                                           {
-                                               success(categories, pois);
-                                           }
-                                       }
-
-                                       failure:^(AFHTTPRequestOperation *operation, NSError *error)
-                                       {
-                                           if (failure)
-                                           {
-                                               failure(error);
-                                           }
-                                       }];
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:kAPIPoiRoute
+     andParameters:[OTHTTPRequestManager commonParameters]
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         
+         NSMutableArray *categories = [self categoriesFromDictionary:data];
+         NSMutableArray *pois = [self poisFromDictionary:data];
+         
+         if (success)
+         {
+             success(categories, pois);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }];
 }
 
 - (void)poisAroundCoordinate:(CLLocationCoordinate2D)coordinate
                     distance:(CLLocationDistance)distance
-                     success:(void (^)(NSArray *categories, NSArray *pois))success
-                     failure:(void (^)(NSError *error))failure
+                     success:(void (^)(NSArray *, NSArray *))success
+                     failure:(void (^)(NSError *))failure
 {
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[@"latitude"] = @(coordinate.latitude);
     parameters[@"longitude"] = @(coordinate.longitude);
     parameters[@"distance"] = @(distance);
-
-    [[OTHTTPRequestManager sharedInstance] GET:kAPIPoiRoute
-                                    parameters:parameters
-                                       success:^(AFHTTPRequestOperation *operation, id responseObject)
-                                       {
-                                           NSDictionary *data = responseObject;
-
-                                           NSMutableArray *categories = [self categoriesFromDictionary:data];
-                                           NSMutableArray *pois = [self poisFromDictionary:data];
-
-                                           if (success)
-                                           {
-                                               success(categories, pois);
-                                           }
-                                       }
-
-                                       failure:^(AFHTTPRequestOperation *operation, NSError *error)
-                                       {
-                                           if (failure)
-                                           {
-                                               failure(error);
-                                           }
-                                       }];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:kAPIPoiRoute
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         
+         NSMutableArray *categories = [self categoriesFromDictionary:data];
+         NSMutableArray *pois = [self poisFromDictionary:data];
+         
+         if (success)
+         {
+             success(categories, pois);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }];
 }
 
 /**************************************************************************************************/

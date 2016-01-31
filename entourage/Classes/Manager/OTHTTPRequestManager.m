@@ -26,7 +26,7 @@
 		requestManager.responseSerializer = [OTJSONResponseSerializer serializer];
 		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [requestManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        //[requestManager.requestSerializer setValue:@"(required, string, `b05e6d0d2be8`)" forHTTPHeaderField:@"X-API-Key"];
+        [requestManager.requestSerializer setValue:@"(required, string, `b05e6d0d2be8`)" forHTTPHeaderField:@"X-API-Key"];
 	}
 
 	return requestManager;
@@ -38,6 +38,5 @@
 
     return user ? @{ @"token" : user.token } : nil;
 }
-
 
 @end

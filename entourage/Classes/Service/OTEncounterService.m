@@ -33,18 +33,23 @@ NSString *const kEncounter = @"encounter";
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_encounter", @""), kAPITourRoute, tourId, kAPIEncounterRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kEncounter] = [encounter dictionaryForWebservice];
-    [[OTHTTPRequestManager sharedInstance] POST:url
-                                     parameters:parameters
-                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                            if (success) {
-                                                OTEncounter *receivedEncounter = [self encounterFromDictionary:responseObject];
-                                                success(receivedEncounter);
-                                            }
-                                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                            if (failure) {
-                                                failure(error);
-                                            }
-                                        }];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success) {
+             OTEncounter *receivedEncounter = [self encounterFromDictionary:responseObject];
+             success(receivedEncounter);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure) {
+             failure(error);
+         }
+     }];
 }
 
 /**************************************************************************************************/
