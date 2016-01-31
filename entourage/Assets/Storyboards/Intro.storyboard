@@ -603,12 +603,12 @@ avec Entourage.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Yl-vAI">
-                                <rect key="frame" x="135" y="160" width="51" height="75"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entourageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Yl-vAI">
+                                <rect key="frame" x="123" y="160" width="75" height="75"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="Cf9-2C-NxO"/>
-                                    <constraint firstAttribute="width" constant="51" id="FAX-3S-fc3"/>
+                                    <constraint firstAttribute="width" constant="75" id="FAX-3S-fc3"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -874,6 +874,7 @@ avec Entourage.</string>
     </scenes>
     <resources>
         <image name="bg" width="166" height="296"/>
+        <image name="entourageLogo" width="75" height="75"/>
         <image name="ic_close.png" width="154" height="152"/>
         <image name="ic_user_photo.png" width="154" height="152"/>
         <image name="icon-aa-facebook.png" width="154" height="152"/>
