@@ -42,6 +42,7 @@
 		454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F521C500FE2001362B2 /* OTStartupViewController.m */; };
 		454C8F581C501B31001362B2 /* UIView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F571C501B31001362B2 /* UIView+entourage.m */; };
 		454C8F5B1C510304001362B2 /* UINavigationController+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F5A1C510304001362B2 /* UINavigationController+entourage.m */; };
+		455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */; };
 		45CE5A561C5241AA00F68C24 /* Blokletters-Balpen.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A481C5241AA00F68C24 /* Blokletters-Balpen.ttf */; };
 		45CE5A571C5241AA00F68C24 /* Calibri-Bold-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A491C5241AA00F68C24 /* Calibri-Bold-Italic.ttf */; };
 		45CE5A581C5241AA00F68C24 /* Calibri-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A4A1C5241AA00F68C24 /* Calibri-Bold.ttf */; };
@@ -167,6 +168,8 @@
 		454C8F571C501B31001362B2 /* UIView+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+entourage.m"; sourceTree = "<group>"; };
 		454C8F591C510304001362B2 /* UINavigationController+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+entourage.h"; path = "Helper/UINavigationController+entourage.h"; sourceTree = "<group>"; };
 		454C8F5A1C510304001362B2 /* UINavigationController+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+entourage.m"; path = "Helper/UINavigationController+entourage.m"; sourceTree = "<group>"; };
+		455940531C5D2E220099A8EE /* OTJSONResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTJSONResponseSerializer.h; sourceTree = "<group>"; };
+		455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTJSONResponseSerializer.m; sourceTree = "<group>"; };
 		45CE5A481C5241AA00F68C24 /* Blokletters-Balpen.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blokletters-Balpen.ttf"; sourceTree = "<group>"; };
 		45CE5A491C5241AA00F68C24 /* Calibri-Bold-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Bold-Italic.ttf"; sourceTree = "<group>"; };
 		45CE5A4A1C5241AA00F68C24 /* Calibri-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Bold.ttf"; sourceTree = "<group>"; };
@@ -415,8 +418,8 @@
 				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
 				1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */,
 				6B4930E019A77DFE00DA7EE0 /* Model */,
-				6B4930C719A773C500DA7EE0 /* Controller */,
 				A8E10FAB19E82A1500DF4A01 /* View */,
+				6B4930C719A773C500DA7EE0 /* Controller */,
 				6B1A846E19E8110B0020FB93 /* Service */,
 				6B4930DC19A77C2F00DA7EE0 /* Manager */,
 				6BFE639519E7E85D00C661AB /* Utils */,
@@ -460,6 +463,8 @@
 			children = (
 				6B4930DD19A77C2F00DA7EE0 /* OTHTTPRequestManager.h */,
 				6B4930DE19A77C2F00DA7EE0 /* OTHTTPRequestManager.m */,
+				455940531C5D2E220099A8EE /* OTJSONResponseSerializer.h */,
+				455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -919,6 +924,7 @@
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,
+				455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
 				0A213C491BA0306300202D7B /* OTGuideViewController.m in Sources */,
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,

@@ -1,4 +1,4 @@
-//
+    //
 //  OTMapViewController.m
 //  entourage
 //
@@ -40,6 +40,10 @@
 
 // User
 #import "NSUserDefaults+OT.h"
+
+#define PARIS_LAT 48.856578
+#define PARIS_LON  2.351828
+#define MAPVIEW_HEIGHT 160.f
 
 /********************************************************************************/
 #pragma mark - OTMapViewController
@@ -112,23 +116,12 @@
     //self.closeTours = [NSMutableArray new];
     self.drawnTours = [NSMapTable new];
     
-    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
 
-	self.mapView.showsUserLocation = YES;
-	self.mapView.delegate = self;
-    self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
-    [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
-	[self zoomToCurrentLocation:nil];
 	[self configureNavigationBar];
+    [self configureMapView];
 }
-//    [[UIApplication sharedApplication] setStatusBarHidden:YES
-//                                            withAnimation:UIStatusBarAnimationFade];
-//}
-//- (BOOL)prefersStatusBarHidden {
-//    return YES;
-//}
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
@@ -168,6 +161,17 @@
 
 /**************************************************************************************************/
 #pragma mark - Private methods
+
+- (void)configureMapView {
+    self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
+
+    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
+
+   	self.mapView.showsUserLocation = YES;
+    self.mapView.delegate = self;
+    [self zoomToCurrentLocation:nil];
+}
 
 - (void)appWillEnterBackground:(NSNotification*)note {
     if (!self.isTourRunning) {
@@ -613,7 +617,7 @@
 	region.center.longitude = self.mapView.userLocation.coordinate.longitude;
     
     if (region.center.latitude < .00001 && region.center.longitude < .00001) {
-        region.center = CLLocationCoordinate2DMake(48.856578, 2.351828);
+        region.center = CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON);
     }
 
 	region.span.latitudeDelta = spanX;
@@ -622,8 +626,14 @@
 }
 
 - (IBAction)launcherTour:(id)sender {
-    self.launcherButton.hidden = YES;
-    self.launcherView.hidden = NO;
+    CGRect mapFrame = self.mapView.frame;
+    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f - self.launcherView.frame.size.height;
+    
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        self.launcherButton.hidden = YES;
+        self.launcherView.hidden = NO;
+        self.mapView.frame = mapFrame;
+    }];
 }
 
 - (IBAction)closeLauncher:(id)sender {
@@ -656,6 +666,9 @@
     [self.blurEffect setHidden:NO];
     [UIView animateWithDuration:0.5 animations:^(void) {
         [self.blurEffect setAlpha:0.7];
+        CGRect mapFrame = self.mapView.frame;
+        mapFrame.size.height = MAPVIEW_HEIGHT;
+        self.mapView.frame = mapFrame;
     }];
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
 }
