@@ -30,15 +30,15 @@
 	[super viewDidAppear:animated];
     [self customizeSlideOutMenu];
     
-    [[OTAuthService new] checkVersionWithSuccess:^(BOOL status) {
-        if (status) {
-            NSLog(@"%@", @"200");
-        } else {
-            NSLog(@"%@", @"426");
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"%@", [error localizedDescription]);
-    }];
+//    [[OTAuthService new] checkVersionWithSuccess:^(BOOL status) {
+//        if (status) {
+//            NSLog(@"%@", @"200");
+//        } else {
+//            NSLog(@"%@", @"426");
+//        }
+//    } failure:^(NSError *error) {
+//        NSLog(@"%@", [error localizedDescription]);
+//    }];
 
 	if (![[NSUserDefaults standardUserDefaults] currentUser])
 	{

@@ -256,14 +256,14 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Entrez votre numéro de téléphone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4D-2E-1CH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entrez votre numéro de téléphone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4D-2E-1CH">
                                 <rect key="frame" x="9" y="180" width="302" height="20"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="Blokletters-Balpen" family="Blokletters Balpen" pointSize="14"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir numéro " textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPw-Yb-coV">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir numéro " textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPw-Yb-coV">
                                 <rect key="frame" x="0.0" y="220" width="320" height="50"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -290,7 +290,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9X8-2l-I1I">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9X8-2l-I1I">
                                 <rect key="frame" x="-4" y="270" width="328" height="1"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
@@ -298,7 +298,7 @@
                                     <constraint firstAttribute="height" constant="1" id="CZ3-6W-5JG"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtb-er-1hO">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtb-er-1hO">
                                 <rect key="frame" x="-4" y="297" width="328" height="57"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -651,10 +651,10 @@ avec Entourage.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ddv-uC-bkv">
-                                <rect key="frame" x="-24" y="20" width="368" height="568"/>
+                                <rect key="frame" x="-4" y="20" width="328" height="568"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bienvenue!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJU-fl-beR">
-                                        <rect key="frame" x="20" y="4" width="328" height="43"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BIENVENUE!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJU-fl-beR">
+                                        <rect key="frame" x="20" y="4" width="288" height="43"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="6gL-la-4mk"/>
@@ -664,10 +664,10 @@ avec Entourage.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OgF-9U-Zl4" userLabel="Black View">
-                                        <rect key="frame" x="20" y="62" width="328" height="270"/>
+                                        <rect key="frame" x="20" y="122" width="288" height="270"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir numéro " textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dhy-dj-PYm">
-                                                <rect key="frame" x="0.0" y="0.0" width="328" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
                                                 <animations/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -686,7 +686,7 @@ avec Entourage.</string>
                                                 </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Kt-fy-9q4">
-                                                <rect key="frame" x="0.0" y="50" width="328" height="1"/>
+                                                <rect key="frame" x="0.0" y="50" width="288" height="1"/>
                                                 <animations/>
                                                 <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -701,7 +701,7 @@ avec Entourage.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir le code " textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Ei-2m-MZj">
-                                                <rect key="frame" x="0.0" y="51" width="328" height="50"/>
+                                                <rect key="frame" x="0.0" y="51" width="288" height="50"/>
                                                 <animations/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -720,7 +720,7 @@ avec Entourage.</string>
                                                 </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HBy-4E-HT1">
-                                                <rect key="frame" x="0.0" y="101" width="328" height="1"/>
+                                                <rect key="frame" x="0.0" y="101" width="288" height="1"/>
                                                 <animations/>
                                                 <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -728,7 +728,7 @@ avec Entourage.</string>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqc-ms-rKq">
-                                                <rect key="frame" x="0.0" y="120" width="328" height="57"/>
+                                                <rect key="frame" x="0.0" y="120" width="288" height="57"/>
                                                 <animations/>
                                                 <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -750,13 +750,13 @@ avec Entourage.</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v59-br-8WY">
-                                                <rect key="frame" x="53" y="193" width="222" height="30"/>
+                                                <rect key="frame" x="33" y="193" width="222" height="30"/>
                                                 <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="222" id="3U1-4c-Wnl"/>
                                                     <constraint firstAttribute="height" constant="30" id="P6Z-Bw-hVZ"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                 <state key="normal" title="Redemander un code">
                                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -832,17 +832,42 @@ avec Entourage.</string>
                                             </mask>
                                         </variation>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version réservée à un usage associatif" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXO-aQ-4GL">
+                                        <rect key="frame" x="4" y="55" width="320" height="21"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="0if-BG-JMM"/>
+                                            <constraint firstAttribute="height" constant="21" id="5B2-wg-A2r"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pKc-kY-NLM">
+                                        <rect key="frame" x="53" y="72" width="222" height="30"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="222" id="Ezs-Vp-0W3"/>
+                                            <constraint firstAttribute="height" constant="30" id="aur-FX-p1d"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <state key="normal" title="En savoir plus">
+                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <animations/>
                                 <constraints>
                                     <constraint firstItem="XJU-fl-beR" firstAttribute="top" secondItem="Ddv-uC-bkv" secondAttribute="top" constant="4" id="0ES-Sb-5Hk"/>
                                     <constraint firstItem="XJU-fl-beR" firstAttribute="centerX" secondItem="Ddv-uC-bkv" secondAttribute="centerX" id="33I-EQ-p47"/>
-                                    <constraint firstItem="OgF-9U-Zl4" firstAttribute="top" secondItem="Ddv-uC-bkv" secondAttribute="top" constant="62" id="3R8-h0-y9j"/>
+                                    <constraint firstItem="OgF-9U-Zl4" firstAttribute="top" secondItem="Ddv-uC-bkv" secondAttribute="top" constant="122" id="3R8-h0-y9j"/>
                                     <constraint firstItem="OgF-9U-Zl4" firstAttribute="trailing" secondItem="XJU-fl-beR" secondAttribute="trailing" id="7Bb-NW-RSx"/>
+                                    <constraint firstItem="aXO-aQ-4GL" firstAttribute="centerX" secondItem="Ddv-uC-bkv" secondAttribute="centerX" id="DtW-Xk-BEb"/>
                                     <constraint firstItem="OgF-9U-Zl4" firstAttribute="leading" secondItem="Ddv-uC-bkv" secondAttribute="leading" constant="20" id="I6T-0L-wOA"/>
                                     <constraint firstAttribute="bottom" secondItem="OgF-9U-Zl4" secondAttribute="bottom" id="IXu-fK-Pvk"/>
                                     <constraint firstItem="XJU-fl-beR" firstAttribute="leading" secondItem="Ddv-uC-bkv" secondAttribute="leading" constant="20" id="Q61-ub-jIO"/>
                                     <constraint firstAttribute="trailing" secondItem="OgF-9U-Zl4" secondAttribute="trailing" constant="20" id="RnT-qG-Bhw"/>
+                                    <constraint firstItem="aXO-aQ-4GL" firstAttribute="top" secondItem="XJU-fl-beR" secondAttribute="bottom" constant="8" id="p1a-yn-SDq"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -851,7 +876,7 @@ avec Entourage.</string>
                         <constraints>
                             <constraint firstItem="Ddv-uC-bkv" firstAttribute="top" secondItem="l3w-HK-BKf" secondAttribute="topMargin" constant="20" id="ANB-VL-5S5"/>
                             <constraint firstItem="Ddv-uC-bkv" firstAttribute="top" secondItem="wX3-SU-kbf" secondAttribute="bottom" id="RqW-WT-xHs"/>
-                            <constraint firstItem="Ddv-uC-bkv" firstAttribute="leading" secondItem="l3w-HK-BKf" secondAttribute="leadingMargin" constant="-40" id="eFc-KS-iqC"/>
+                            <constraint firstItem="Ddv-uC-bkv" firstAttribute="leading" secondItem="l3w-HK-BKf" secondAttribute="leadingMargin" constant="-20" id="eFc-KS-iqC"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Ddv-uC-bkv" secondAttribute="bottom" constant="-20" id="kbh-Z2-6mj"/>
                             <constraint firstItem="Ddv-uC-bkv" firstAttribute="centerX" secondItem="l3w-HK-BKf" secondAttribute="centerX" id="rpR-wT-bvG"/>
                         </constraints>

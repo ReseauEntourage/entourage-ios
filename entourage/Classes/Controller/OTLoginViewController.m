@@ -74,8 +74,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.phoneTextField becomeFirstResponder];
     
 #if DEBUG
-    self.phoneTextField.text = @"0651502173";
-    self.passwordTextField.text = @"123456";
+    self.phoneTextField.text = @"0040740884267";
+    self.passwordTextField.text = @"600533";
 #endif
     
 }
@@ -89,7 +89,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - Public Methods
 
 - (BOOL)validateForm {
+#if DEBUG
+    return YES;
+#else
     return [self.phoneTextField.text isValidPhoneNumber];
+#endif
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

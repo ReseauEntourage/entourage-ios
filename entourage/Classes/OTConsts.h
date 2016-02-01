@@ -8,10 +8,10 @@
 
 #ifdef DEBUG
 // PREPROD
-#define BASE_API_URL @"https://entourage-back-preprod.herokuapp.com/api/v0/"
+#define BASE_API_URL @"https://entourage-back-preprod.herokuapp.com/api/v1/"
 
 #else
 // PROD
-#define BASE_API_URL @"https://entourage-back.herokuapp.com/api/v0/"
+#define BASE_API_URL @"https://entourage-back.herokuapp.com/api/v1/"
 
 #endif
