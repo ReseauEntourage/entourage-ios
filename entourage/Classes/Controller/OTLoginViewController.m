@@ -74,7 +74,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.phoneTextField becomeFirstResponder];
     
 #if DEBUG
-    self.phoneTextField.text = @"0040740884267";
+    self.phoneTextField.text = @"+40740884267";
     self.passwordTextField.text = @"600533";
 #endif
     
