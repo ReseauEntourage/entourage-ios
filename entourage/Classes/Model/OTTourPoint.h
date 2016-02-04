@@ -16,7 +16,6 @@
 
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
-@property (strong, nonatomic) NSDate *passingTime;
 
 /********************************************************************************/
 #pragma mark - Birth & Death
