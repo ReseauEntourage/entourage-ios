@@ -83,6 +83,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
 
     cell.itemLabel.text = menuItem.title;//[menuItem.title uppercaseStringWithLocale:[NSLocale currentLocale]];
+    cell.imageView.image = [UIImage imageNamed:menuItem.iconName];
 	return cell;
 }
 
@@ -168,25 +169,30 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	NSMutableArray *menuItems = [NSMutableArray array];
     
     OTMenuItem *itemAmis = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_amis", @"")
-                                            segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+                                                    iconName: @"friends"
+                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
     [menuItems addObject:itemAmis];
     
     OTMenuItem *itemGuide = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_guide", @"")
-                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+                                                     iconName: @"guide"
+                                              segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
     [menuItems addObject:itemGuide];
 
     
     OTMenuItem *itemParam = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_param", @"")
-                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+                                                     iconName: @"parameters"
+                                              segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
     [menuItems addObject:itemParam];
 
     
     OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_about", @"")
-                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+                                                     iconName: @"about"
+                                              segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
     [menuItems addObject:itemAbout];
 
     // Disconnect
     OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
+                                                          iconName: @""
                                                    segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
     [menuItems addObject:itemDisconnect];
     

@@ -81,7 +81,7 @@ static NSDateFormatter * dateFormatter;
 
 - (NSString *)stringForKey:(NSString *)key
 {
-	return [self stringForKey:key defaultValue:nil];
+	return [self stringForKey:key defaultValue:@""];
 }
 
 /********************************************************************************/

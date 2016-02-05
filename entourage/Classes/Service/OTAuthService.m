@@ -45,31 +45,36 @@ NSString *const kKeychainPassword = @"entourage_user_password";
               success:(void (^)(OTUser *))success
               failure:(void (^)(NSError *))failure
 {
-    NSDictionary *parameters = @{ @"phone": phone, @"sms_code": password, @"device_type": @"ios", @"device_id": (deviceId == nil ? @"" : deviceId) };
+    NSDictionary *parameters = @{@"user": @{@"phone": phone, @"sms_code": password}};
+  
+  
+//  @{ @"phone": phone,
+//                                  @"sms_code": password,
+//                                  @"device_type": @"ios",
+//                                  @"device_id": (deviceId == nil ? @"" : deviceId) };
     
     [[OTHTTPRequestManager sharedInstance]
-     POSTWithUrl:kAPILogin
-     andParameters:parameters
-     andSuccess:^(id responseObject)
-     {
-         NSDictionary *responseDict = responseObject;
-         NSLog(@"Authentication service response : %@", responseDict);
-         NSDictionary *responseUser = responseDict[@"user"];
-         OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
-         
-         [[A0SimpleKeychain keychain] setString:phone forKey:kKeychainPhone];
-         [[A0SimpleKeychain keychain] setString:password forKey:kKeychainPassword];
-         
-         if (success) {
-             success(user);
+         POSTWithUrl:kAPILogin
+         andParameters:parameters
+         andSuccess:^(id responseObject) {
+             NSDictionary *responseDict = responseObject;
+             NSLog(@"Authentication service response : %@", responseDict);
+             NSDictionary *responseUser = responseDict[@"user"];
+             OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+             
+             [[A0SimpleKeychain keychain] setString:phone forKey:kKeychainPhone];
+             [[A0SimpleKeychain keychain] setString:password forKey:kKeychainPassword];
+             
+             if (success) {
+                 success(user);
+             }
          }
-     }
-     andFailure:^(NSError *error)
-     {
-         NSLog(@"Failed with error %@", error);
-         if (failure) {
-             failure(error);
-         }
+         andFailure:^(NSError *error)
+         {
+             NSLog(@"Failed with error %@", error);
+             if (failure) {
+                 failure(error);
+             }
      }];
 }
 

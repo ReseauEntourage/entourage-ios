@@ -25,12 +25,13 @@
  * @return OTMenuItem
  * The new instance.
  */
-- (instancetype)initWithTitle:(NSString *)title segueIdentifier:(NSString *)segueIdentifier
+- (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName segueIdentifier:(NSString *)segueIdentifier
 {
     self = [super init];
     if (self)
     {
         _title = title;
+        _iconName = iconName;
         _segueIdentifier = segueIdentifier;
     }
     return self;

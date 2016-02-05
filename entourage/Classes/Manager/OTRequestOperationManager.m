@@ -50,33 +50,32 @@
          andSuccess:(void (^)(id responseObject))success
          andFailure:(void (^)(NSError *error))failure
 {
-    [self POST:url parameters:parameters
-    success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-    {
-        if (success) {
-            success(responseObject);
-        }
-    }
-    failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
-    {
-        if ([operation.response statusCode] == 401) {
-            if (![url isEqualToString:kAPILogin]) {
-                [self askForNewTokenWithMethod:@"POST" andUrl:url andParameters:parameters andSuccess:success andFailure:failure];
-            }
-            else {
-                NSError *actualError = [self errorFromOperation:operation andError:error];
-                if (failure) {
-                    failure(actualError);
+    [self   POST:url
+            parameters:parameters
+            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                if (success) {
+                    success(responseObject);
                 }
             }
-            
-        }
-        else {
-            NSError *actualError = [self errorFromOperation:operation andError:error];
-            if (failure) {
-                failure(actualError);
-            }
-        }
+            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                if ([operation.response statusCode] == 401) {
+                    if (![url isEqualToString:kAPILogin]) {
+                        [self askForNewTokenWithMethod:@"POST" andUrl:url andParameters:parameters andSuccess:success andFailure:failure];
+                    }
+                    else {
+                        NSError *actualError = [self errorFromOperation:operation andError:error];
+                        if (failure) {
+                            failure(actualError);
+                        }
+                    }
+                    
+                }
+                else {
+                    NSError *actualError = [self errorFromOperation:operation andError:error];
+                    if (failure) {
+                        failure(actualError);
+                    }
+                }
     }];
 }
 

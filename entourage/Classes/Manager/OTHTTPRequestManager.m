@@ -19,14 +19,15 @@
 #pragma mark - Singleton
 
 + (AFHTTPRequestOperationManager *)sharedInstance {
-	static AFHTTPRequestOperationManager *requestManager = nil;
+	static OTRequestOperationManager *requestManager = nil;
 
 	if (requestManager == nil) {
 		requestManager = [[OTRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_API_URL]];
 		requestManager.responseSerializer = [OTJSONResponseSerializer serializer];
 		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [requestManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [requestManager.requestSerializer setValue:@"(required, string, `b05e6d0d2be8`)" forHTTPHeaderField:@"X-API-Key"];
+        [requestManager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        //[requestManager.requestSerializer setValue:@"(required, string, `b05e6d0d2be8`)" forHTTPHeaderField:@"X-API-Key"];
 	}
 
 	return requestManager;
