@@ -60,17 +60,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (IBAction)registerTap:(UIButton *)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"info"
-                                                                    message:@"to be implemented"
-                                                             preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel
-                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                         
-                                                     }];
-    [alert addAction:okAction];
-    [self presentViewController:alert animated:YES completion:NULL];
-}
 
 @end

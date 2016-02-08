@@ -160,7 +160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1a-zz-qxR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="881" y="-2392"/>
+            <point key="canvasLocation" x="817" y="-2471"/>
         </scene>
         <!--Lost Code View Controller-->
         <scene sceneID="Zsy-Vg-MOg">
@@ -286,7 +286,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ia-OO-Shk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-223" y="-1046"/>
+            <point key="canvasLocation" x="-223" y="-1076"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oPo-Hd-wrW">
@@ -305,7 +305,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4r8-Ty-0LX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1291" y="-1745"/>
+            <point key="canvasLocation" x="-627" y="-2471"/>
         </scene>
         <!--Tutorial View Controller-->
         <scene sceneID="m1C-Qa-SEq">
@@ -474,7 +474,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VE8-ZM-GbG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="349" y="-1745"/>
+            <point key="canvasLocation" x="349" y="-1771"/>
         </scene>
         <!--Startup View Controller-->
         <scene sceneID="6VV-8c-dP7">
@@ -506,7 +506,7 @@
                                     <color key="titleColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="registerTap:" destination="d0v-Fd-fA9" eventType="touchUpInside" id="ief-LG-Iy6"/>
+                                    <segue destination="q4V-KK-yJm" kind="presentation" id="2na-Sg-Pua"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwv-HX-aYM">
@@ -570,7 +570,7 @@ avec Entourage.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nCX-hY-Cs0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-764" y="-1745"/>
+            <point key="canvasLocation" x="-223" y="-2471"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="CLK-Te-XOf">
@@ -834,7 +834,7 @@ avec Entourage.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5B5-Uo-Thh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-223" y="-1745"/>
+            <point key="canvasLocation" x="-223" y="-1771"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lxn-X2-fKS">
@@ -853,7 +853,7 @@ avec Entourage.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wyf-xM-UOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="349" y="-2392"/>
+            <point key="canvasLocation" x="349" y="-2471"/>
         </scene>
     </scenes>
     <resources>
@@ -862,4 +862,7 @@ avec Entourage.</string>
         <image name="logo.png" width="154" height="152"/>
         <image name="user" width="100" height="100"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="2na-Sg-Pua"/>
+    </inferredMetricsTieBreakers>
 </document>
