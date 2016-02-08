@@ -34,7 +34,7 @@ NSString *const kKeyOrganization =@"organization";
 		_token = [dictionary stringForKey:kKeyToken];
         _tourCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyTourCount];
         _encounterCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEncounterCount];
-        _organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
+        //_organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
 	}
 	return self;
 }

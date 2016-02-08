@@ -13,10 +13,6 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
-            <string>Calibri</string>
-        </mutableArray>
-        <mutableArray key="MankSans-Medium.ttf">
-            <string>MankSans-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -326,22 +322,23 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZcO-iR-1Vc">
                                 <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user_photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="NeY-mr-HCz">
-                                        <rect key="frame" x="116" y="31" width="96" height="96"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="NeY-mr-HCz">
+                                        <rect key="frame" x="114" y="0.0" width="100" height="100"/>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="96" id="0JW-ZB-dbp"/>
-                                            <constraint firstAttribute="height" constant="96" id="I0o-ef-znO"/>
+                                            <constraint firstAttribute="width" constant="100" id="0JW-ZB-dbp"/>
+                                            <constraint firstAttribute="height" constant="100" id="I0o-ef-znO"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisissez votre email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sj3-7j-Ihn">
-                                        <rect key="frame" x="0.0" y="163" width="328" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir votre adresse email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sj3-7j-Ihn">
+                                        <rect key="frame" x="0.0" y="163" width="328" height="50"/>
                                         <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="pgL-bD-WrY"/>
+                                            <constraint firstAttribute="height" constant="50" id="pgL-bD-WrY"/>
                                         </constraints>
                                         <color key="textColor" red="0.93725490199999995" green="0.40000000000000002" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
@@ -350,7 +347,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGA-jO-bfn">
-                                        <rect key="frame" x="0.0" y="192" width="328" height="1"/>
+                                        <rect key="frame" x="0.0" y="212" width="328" height="1"/>
                                         <animations/>
                                         <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -358,13 +355,13 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xx-s4-ZNI">
-                                        <rect key="frame" x="0.0" y="219" width="328" height="50"/>
+                                        <rect key="frame" x="0.0" y="228" width="328" height="57"/>
                                         <animations/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.40000000000000002" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Rqp-sj-CA3"/>
+                                            <constraint firstAttribute="height" constant="57" id="Rqp-sj-CA3"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="MankSans-Medium" family="MankSans-Medium" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Valider">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -381,7 +378,7 @@
                                     </button>
                                 </subviews>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="CGA-jO-bfn" secondAttribute="trailing" constant="28" id="1BG-Vo-yVs"/>
                                     <constraint firstItem="NeY-mr-HCz" firstAttribute="top" secondItem="ZcO-iR-1Vc" secondAttribute="top" constant="31" id="1Ia-GW-BW9"/>
@@ -410,13 +407,13 @@
                                     <constraint firstAttribute="trailing" secondItem="Sj3-7j-Ihn" secondAttribute="trailing" constant="14" id="Ysn-fh-e1S"/>
                                     <constraint firstItem="Sj3-7j-Ihn" firstAttribute="centerX" secondItem="ZcO-iR-1Vc" secondAttribute="centerX" id="bHp-yr-Y0d"/>
                                     <constraint firstAttribute="trailing" secondItem="0xx-s4-ZNI" secondAttribute="trailing" id="gV1-j2-baj"/>
-                                    <constraint firstItem="Sj3-7j-Ihn" firstAttribute="top" secondItem="NeY-mr-HCz" secondAttribute="bottom" constant="36" id="h0Y-2p-WtW"/>
+                                    <constraint firstItem="Sj3-7j-Ihn" firstAttribute="top" secondItem="NeY-mr-HCz" secondAttribute="bottom" constant="63" id="h0Y-2p-WtW"/>
                                     <constraint firstItem="CGA-jO-bfn" firstAttribute="leading" secondItem="ZcO-iR-1Vc" secondAttribute="leading" constant="14" id="hu0-WO-daU"/>
                                     <constraint firstAttribute="trailing" secondItem="Sj3-7j-Ihn" secondAttribute="trailing" id="lKf-S7-8Od"/>
                                     <constraint firstAttribute="trailing" secondItem="0xx-s4-ZNI" secondAttribute="trailing" id="lhv-OF-XZF"/>
                                     <constraint firstAttribute="trailing" secondItem="CGA-jO-bfn" secondAttribute="trailing" constant="14" id="odp-3H-Guy"/>
-                                    <constraint firstItem="0xx-s4-ZNI" firstAttribute="top" secondItem="Sj3-7j-Ihn" secondAttribute="bottom" constant="26" id="rts-Bq-zE1"/>
-                                    <constraint firstItem="NeY-mr-HCz" firstAttribute="top" secondItem="ZcO-iR-1Vc" secondAttribute="top" constant="31" id="umP-yL-rNM"/>
+                                    <constraint firstItem="0xx-s4-ZNI" firstAttribute="top" secondItem="Sj3-7j-Ihn" secondAttribute="bottom" constant="15" id="rts-Bq-zE1"/>
+                                    <constraint firstItem="NeY-mr-HCz" firstAttribute="top" secondItem="ZcO-iR-1Vc" secondAttribute="top" id="umP-yL-rNM"/>
                                     <constraint firstItem="NeY-mr-HCz" firstAttribute="centerX" secondItem="ZcO-iR-1Vc" secondAttribute="centerX" id="vcP-g7-ltq"/>
                                     <constraint firstItem="NeY-mr-HCz" firstAttribute="centerX" secondItem="Sj3-7j-Ihn" secondAttribute="centerX" id="zpl-uD-gSp"/>
                                 </constraints>
@@ -862,7 +859,7 @@ avec Entourage.</string>
     <resources>
         <image name="bg" width="166" height="296"/>
         <image name="entourageLogo" width="75" height="75"/>
-        <image name="ic_user_photo.png" width="154" height="152"/>
         <image name="logo.png" width="154" height="152"/>
+        <image name="user" width="100" height="100"/>
     </resources>
 </document>

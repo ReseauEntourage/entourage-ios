@@ -98,7 +98,7 @@
 
 #pragma mark - Private
 - (void)setupCloseModal {
-    UIImage *menuImage = [[UIImage imageNamed:@"dismiss.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *menuImage = [[UIImage imageNamed:@"close.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
     [menuButton setImage:menuImage];

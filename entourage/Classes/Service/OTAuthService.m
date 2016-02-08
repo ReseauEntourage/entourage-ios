@@ -118,7 +118,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
                                success:(void (^)(NSString *))success
                                failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_update_user", @""), kAPIUserRoute, kAPIUpdateUserRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_update_user", @""), kAPIUserRoute, kAPIMe, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     dictionary[@"email"] = email;
     dictionary[@"sms_code"] = smsCode;

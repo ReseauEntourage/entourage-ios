@@ -74,8 +74,19 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.phoneTextField becomeFirstResponder];
     
 #if DEBUG
+    // Ciprian
     self.phoneTextField.text = @"+40740884267";
     self.passwordTextField.text = @"600533";
+    
+    //Vincent
+    self.phoneTextField.text = @"0651502173";
+    self.passwordTextField.text = @"123456";
+    
+    // Ciprian + Mihai
+    self.phoneTextField.text = @"0623456789";
+    self.passwordTextField.text = @"123456";
+
+    
 #endif
     
 }
@@ -83,6 +94,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)viewWillDisappear:(BOOL)animated {
     UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
     UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
+    self.title = @"";
 }
 
 /********************************************************************************/
