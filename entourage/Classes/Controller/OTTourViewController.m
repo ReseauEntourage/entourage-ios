@@ -38,7 +38,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    NSString *date = [self formatDateForDisplay:[(OTTourPoint *)[self.tour.tourPoints objectAtIndex:0] passingTime]];
+    NSString *date = [self formatDateForDisplay:self.tour.startTime];
     NSString *startTime = [self formatHourForDisplay:self.tour.startTime];
     NSString *endTime = [self formatHourForDisplay:self.tour.endTime];
     NSString *image;
@@ -66,7 +66,7 @@
         type = @"Alimentaire";
     }
     
-    if ([self.tour.status isEqualToString:@"on_going"]) {
+    if ([self.tour.status isEqualToString:@"ongoing"]) {
         status = @"En cours";
     }
     else if ([self.tour.status isEqualToString:@"closed"]) {

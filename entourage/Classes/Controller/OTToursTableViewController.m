@@ -41,8 +41,8 @@
 - (void)configureWithTours:(NSMutableArray *)closeTours {
     self.tableData = closeTours;
     self.tableData = (NSMutableArray *)[self.tableData sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        NSDate *first = [[[(OTTour *)a tourPoints] objectAtIndex:0] passingTime];
-        NSDate *second = [[[(OTTour *)b tourPoints] objectAtIndex:0] passingTime];
+        NSDate *first = [(OTTour *)a startTime];
+        NSDate *second = [(OTTour *)b startTime];
         return [second compare:first];
     }];
 }
@@ -79,8 +79,8 @@
         cell.imageView.image = [UIImage imageNamed:@"ic_alimentary.png"];
         type = @"Alimentaire";
     }
-    if ([tour.tourPoints count] != 0) {
-        NSString *date = [self formatDateForDisplay:[(OTTourPoint *)[tour.tourPoints objectAtIndex:0] passingTime]];
+    if (tour.startTime != nil) {
+        NSString *date = [self formatDateForDisplay:tour.startTime];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", date, type];
     } else {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", @"--/--/---", type];
