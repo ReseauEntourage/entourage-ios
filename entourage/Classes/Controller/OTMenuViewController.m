@@ -226,7 +226,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	NSString *version = [[[NSBundle bundleForClass:[self class]] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 
 	version = [NSString stringWithFormat:@"%@ (%@)", version, buildVersion];
-	OTMenuItem *itemVersion = [[OTMenuItem alloc] initWithTitle:version segueIdentifier:nil];
+    OTMenuItem *itemVersion = [[OTMenuItem alloc] initWithTitle:version iconName:@"" segueIdentifier:nil];
 	[menuItems addObject:itemVersion];
 
 	return menuItems;

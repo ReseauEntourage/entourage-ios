@@ -11,6 +11,7 @@
 // Controllers
 #import "OTMessageViewController.h"
 #import "OTLoginViewController.h"
+#import "OTStartupViewController.h"
 
 // Pods
 #import "SimpleKeychain.h"
@@ -62,6 +63,15 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     
     // add notification observer for 401 error trigger
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
+    
+    if (![[NSUserDefaults standardUserDefaults] currentUser])
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
+        OTStartupViewController *startupViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTStartupNavigationViewControllerIdentifier"];
+        self.window.rootViewController = startupViewController;
+        [self.window makeKeyAndVisible];
+    }
+
     
 	return YES;
 }
