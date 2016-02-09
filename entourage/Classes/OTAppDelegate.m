@@ -49,7 +49,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
     // start flurry
 	[Flurry setCrashReportingEnabled:YES];
 	[Flurry startSession:NSLocalizedString(@"FLURRY_API_KEY", @"")];
@@ -70,7 +69,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     if (![[NSUserDefaults standardUserDefaults] currentUser])
     {
         self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-
+                    
         [UIStoryboard showStartup];
     }
     
