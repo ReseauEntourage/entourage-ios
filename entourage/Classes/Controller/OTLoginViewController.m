@@ -129,16 +129,12 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    
                                    
-                                   
-#warning : arrayWithArray crashes with @Ciprian, arrayWithObject crashed with @Nicolas
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil) {
                                        loggedNumbers = [NSMutableArray new];
                                    }
                                    if ([loggedNumbers containsObject:self.phoneNumberServerRepresentation]) {
-#warning: Storyboard category to load Main
                                        [UIStoryboard showSWRevealController];
-                                       //[self dismissViewControllerAnimated:YES completion:nil];
                                    } else {
                                        [self performSegueWithIdentifier:@"OTTutorial" sender:self];
                                    }

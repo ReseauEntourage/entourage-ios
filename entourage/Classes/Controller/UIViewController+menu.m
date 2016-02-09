@@ -22,8 +22,7 @@
  * @return UIBarButtonItem
  * The MenuButton instanciated
  */
-- (UIBarButtonItem *)createMenuButton
-{
+- (UIBarButtonItem *)createMenuButton {
     UIBarButtonItem *menuButton = nil;
     
     SWRevealViewController *revealViewController = self.revealViewController;
@@ -63,4 +62,20 @@
 
 }
 
+
+- (void)setupCloseModal {
+    UIImage *menuImage = [[UIImage imageNamed:@"close.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
+    [menuButton setImage:menuImage];
+    [menuButton setTarget:self];
+    [menuButton setAction:@selector(dismissModal)];
+    
+    [self.navigationItem setLeftBarButtonItem:menuButton];
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+
+- (void)dismissModal {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

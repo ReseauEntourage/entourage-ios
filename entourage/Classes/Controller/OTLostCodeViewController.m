@@ -11,6 +11,8 @@
 // Service
 #import "OTAuthService.h"
 
+#import "UIViewController+menu.h"
+
 // Helper
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
@@ -41,7 +43,8 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
-    
+    self.title = @"REDEMANDER UN CODE";
+    [self setupCloseModal];
     [self.phoneTextField indentRight];
     [self.phoneTextField becomeFirstResponder];
 }

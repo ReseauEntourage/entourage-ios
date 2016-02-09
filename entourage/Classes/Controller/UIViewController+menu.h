@@ -15,5 +15,6 @@
 
 - (UIBarButtonItem *)createMenuButton;
 - (UIBarButtonItem *)createBackFrontMenuButton;
+- (void)setupCloseModal;
 
 @end

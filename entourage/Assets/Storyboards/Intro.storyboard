@@ -6,11 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Blokletters-Balpen.ttf">
-            <string>Blokletters-Balpen</string>
-        </mutableArray>
         <mutableArray key="Calibri.ttf">
-            <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
         </mutableArray>
@@ -174,37 +170,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="V4v-la-W6J">
-                                <rect key="frame" x="112" y="24" width="96" height="97"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="V4v-la-W6J">
+                                <rect key="frame" x="110" y="120" width="100" height="100"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="97" id="RSB-4b-qZM"/>
-                                    <constraint firstAttribute="width" constant="96" id="lqD-S5-ggd"/>
+                                    <constraint firstAttribute="height" constant="100" id="RSB-4b-qZM"/>
+                                    <constraint firstAttribute="width" constant="100" id="lqD-S5-ggd"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CODE ÉGARÉ" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yia-0l-AeM">
-                                <rect key="frame" x="16" y="141" width="288" height="19"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entrez votre numéro de téléphone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4D-2E-1CH">
-                                <rect key="frame" x="9" y="180" width="302" height="20"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Blokletters-Balpen" family="Blokletters Balpen" pointSize="14"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir numéro " textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPw-Yb-coV">
-                                <rect key="frame" x="0.0" y="220" width="320" height="50"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir votre numéro de téléphone" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPw-Yb-coV">
+                                <rect key="frame" x="0.0" y="276" width="320" height="50"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="jwW-J7-viW"/>
                                 </constraints>
                                 <color key="textColor" red="0.93725490199999995" green="0.40000000000000002" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
@@ -212,19 +194,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Numéro de téléphone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Lo-ps-tLm">
-                                <rect key="frame" x="12" y="234" width="149" height="21"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="Mdh-to-LPM"/>
-                                    <constraint firstAttribute="width" constant="149" id="dMf-1B-6q1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9X8-2l-I1I">
-                                <rect key="frame" x="-4" y="270" width="328" height="1"/>
+                                <rect key="frame" x="-4" y="326" width="328" height="1"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -232,7 +203,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtb-er-1hO">
-                                <rect key="frame" x="-4" y="297" width="328" height="57"/>
+                                <rect key="frame" x="-4" y="342" width="328" height="57"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -254,26 +225,17 @@
                             </button>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="jtb-er-1hO" secondAttribute="trailing" constant="-20" id="4Nd-PA-YfV"/>
-                            <constraint firstItem="Yia-0l-AeM" firstAttribute="centerX" secondItem="9S6-Ia-0PY" secondAttribute="centerX" id="5kG-8M-0Oh"/>
-                            <constraint firstItem="Yia-0l-AeM" firstAttribute="leading" secondItem="9S6-Ia-0PY" secondAttribute="leadingMargin" id="KQc-cY-UWX"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Yia-0l-AeM" secondAttribute="trailing" id="MO7-EM-uuz"/>
-                            <constraint firstItem="jtb-er-1hO" firstAttribute="top" secondItem="9X8-2l-I1I" secondAttribute="bottom" constant="26" id="QY9-M3-vM2"/>
-                            <constraint firstItem="c4D-2E-1CH" firstAttribute="leading" secondItem="9S6-Ia-0PY" secondAttribute="leadingMargin" constant="-7" id="V3t-xJ-iuM"/>
+                            <constraint firstItem="kPw-Yb-coV" firstAttribute="top" secondItem="V4v-la-W6J" secondAttribute="bottom" constant="56" id="DPW-xb-aKW"/>
+                            <constraint firstItem="jtb-er-1hO" firstAttribute="top" secondItem="9X8-2l-I1I" secondAttribute="bottom" constant="15" id="QY9-M3-vM2"/>
                             <constraint firstItem="kPw-Yb-coV" firstAttribute="leading" secondItem="9S6-Ia-0PY" secondAttribute="leadingMargin" constant="-16" id="VD2-7b-BrX"/>
-                            <constraint firstItem="8Lo-ps-tLm" firstAttribute="leading" secondItem="9S6-Ia-0PY" secondAttribute="leadingMargin" constant="-4" id="WlA-GW-l5D"/>
                             <constraint firstItem="9X8-2l-I1I" firstAttribute="leading" secondItem="9S6-Ia-0PY" secondAttribute="leadingMargin" constant="-20" id="XKg-KW-xbQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kPw-Yb-coV" secondAttribute="trailing" constant="-16" id="a1a-Ec-XKW"/>
                             <constraint firstItem="jtb-er-1hO" firstAttribute="leading" secondItem="9S6-Ia-0PY" secondAttribute="leadingMargin" constant="-20" id="bUN-Ka-xmh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="c4D-2E-1CH" secondAttribute="trailing" constant="-7" id="bnF-pl-vRF"/>
-                            <constraint firstItem="c4D-2E-1CH" firstAttribute="top" secondItem="Yia-0l-AeM" secondAttribute="bottom" constant="20" id="fgv-Fc-P2F"/>
-                            <constraint firstItem="kPw-Yb-coV" firstAttribute="top" secondItem="c4D-2E-1CH" secondAttribute="bottom" constant="20" id="gVH-8u-SQv"/>
-                            <constraint firstItem="Yia-0l-AeM" firstAttribute="top" secondItem="V4v-la-W6J" secondAttribute="bottom" constant="20" id="kG1-ux-BMC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9X8-2l-I1I" secondAttribute="trailing" constant="-20" id="mXe-ah-SxC"/>
-                            <constraint firstItem="9X8-2l-I1I" firstAttribute="top" secondItem="8Lo-ps-tLm" secondAttribute="bottom" constant="10" id="pEk-cD-fbd"/>
-                            <constraint firstItem="V4v-la-W6J" firstAttribute="top" secondItem="gya-DC-g74" secondAttribute="bottom" constant="4" id="qzU-cc-efa"/>
+                            <constraint firstItem="V4v-la-W6J" firstAttribute="top" secondItem="gya-DC-g74" secondAttribute="bottom" constant="56" id="qzU-cc-efa"/>
                             <constraint firstItem="9X8-2l-I1I" firstAttribute="top" secondItem="kPw-Yb-coV" secondAttribute="bottom" id="s8E-cw-Fi4"/>
                             <constraint firstItem="V4v-la-W6J" firstAttribute="centerX" secondItem="9S6-Ia-0PY" secondAttribute="centerX" id="uCN-1k-HJf"/>
                         </constraints>
@@ -286,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ia-OO-Shk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-223" y="-1076"/>
+            <point key="canvasLocation" x="309" y="-1076"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oPo-Hd-wrW">
@@ -474,7 +436,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VE8-ZM-GbG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="349" y="-1771"/>
+            <point key="canvasLocation" x="309" y="-1771"/>
         </scene>
         <!--Startup View Controller-->
         <scene sceneID="6VV-8c-dP7">
@@ -722,7 +684,7 @@ avec Entourage.</string>
                                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="HjR-IO-SUN" kind="show" identifier="OTLostCode" id="K8j-wn-mEk"/>
+                                                    <segue destination="uQ4-e4-eq2" kind="presentation" identifier="OTLostCode" id="K8j-wn-mEk"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Code d'accès" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ic-AL-6w2">
@@ -853,13 +815,32 @@ avec Entourage.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wyf-xM-UOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="349" y="-2471"/>
+            <point key="canvasLocation" x="309" y="-2471"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5R7-fG-YOa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uQ4-e4-eq2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jb6-3O-aIx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HjR-IO-SUN" kind="relationship" relationship="rootViewController" id="jVF-Te-kyC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nft-KP-9QM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-223" y="-1076"/>
         </scene>
     </scenes>
     <resources>
         <image name="bg" width="166" height="296"/>
         <image name="entourageLogo" width="75" height="75"/>
-        <image name="logo.png" width="154" height="152"/>
+        <image name="phone" width="100" height="100"/>
         <image name="user" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
