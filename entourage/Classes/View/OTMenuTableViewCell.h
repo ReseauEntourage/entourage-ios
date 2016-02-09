@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 
 FOUNDATION_EXPORT NSString *const OTMenuTableViewCellIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuLogoutTableViewCellIdentifier;
 
 @interface OTMenuTableViewCell : UITableViewCell
 
 /**************************************************************************************************/
 #pragma mark - Getters and Setters
 
+@property (nonatomic, weak) IBOutlet UIImageView *itemIcon;
 @property (nonatomic, weak) IBOutlet UILabel *itemLabel;
 
 @end

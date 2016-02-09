@@ -37,6 +37,7 @@
 		1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */; };
 		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
+		452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */; };
 		454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */; };
 		454C8F501C4F4C45001362B2 /* UITextField+indentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4F1C4F4C45001362B2 /* UITextField+indentation.m */; };
 		454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F521C500FE2001362B2 /* OTStartupViewController.m */; };
@@ -159,6 +160,8 @@
 		1DF661D919E98AAD00045310 /* OTCreateMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCreateMeetingViewController.h; sourceTree = "<group>"; };
 		1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCreateMeetingViewController.m; sourceTree = "<group>"; };
 		2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		452FA62E1C6A50BF00D5D56D /* UIStoryboard+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+entourage.h"; sourceTree = "<group>"; };
+		452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+entourage.m"; sourceTree = "<group>"; };
 		454C8F4B1C4D20EA001362B2 /* UIColor+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+entourage.h"; sourceTree = "<group>"; };
 		454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+entourage.m"; sourceTree = "<group>"; };
 		454C8F4E1C4F4C45001362B2 /* UITextField+indentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+indentation.h"; sourceTree = "<group>"; };
@@ -589,6 +592,8 @@
 				454C8F4F1C4F4C45001362B2 /* UITextField+indentation.m */,
 				454C8F561C501B31001362B2 /* UIView+entourage.h */,
 				454C8F571C501B31001362B2 /* UIView+entourage.m */,
+				452FA62E1C6A50BF00D5D56D /* UIStoryboard+entourage.h */,
+				452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -908,6 +913,7 @@
 				A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */,
 				0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */,
 				0A70FA181BFDD69C0080E8EC /* OTToursTableViewController.m in Sources */,
+				452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */,
 				6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */,
 				0AE855CB1C3D05A0001176B9 /* OTTutorialViewController.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
@@ -1070,8 +1076,8 @@
 			baseConfigurationReference = 611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicolas Telera (SNGY7JH873)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nicolas Telera (SNGY7JH873)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1086,7 +1092,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ab1d9e39-4fb6-4d99-a88e-f8c88ca70914";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};

@@ -17,6 +17,7 @@
 
 // Utils
 #import "UITextField+indentation.h"
+#import "UIStoryboard+entourage.h"
 
 // Helper
 #import "NSUserDefaults+OT.h"
@@ -86,7 +87,9 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.phoneTextField.text = @"0623456789";
     self.passwordTextField.text = @"123456";
 
-    
+    // Vincent2
+    self.phoneTextField.text = @"+33623456789";
+    self.passwordTextField.text = @"123456";
 #endif
     
 }
@@ -133,7 +136,9 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                        loggedNumbers = [NSMutableArray new];
                                    }
                                    if ([loggedNumbers containsObject:self.phoneNumberServerRepresentation]) {
-                                       [self dismissViewControllerAnimated:YES completion:nil];
+#warning: Storyboard category to load Main
+                                       [UIStoryboard showSWRevealController];
+                                       //[self dismissViewControllerAnimated:YES completion:nil];
                                    } else {
                                        [self performSegueWithIdentifier:@"OTTutorial" sender:self];
                                    }

@@ -23,6 +23,7 @@
 #import "UIFont+entourage.h"
 #import "OTConsts.h"
 #import "IQKeyboardManager.h"
+#import "UIStoryboard+entourage.h"
 
 // Helper
 #import "NSUserDefaults+OT.h"
@@ -47,6 +48,8 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 #pragma mark - Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
     // start flurry
 	[Flurry setCrashReportingEnabled:YES];
 	[Flurry startSession:NSLocalizedString(@"FLURRY_API_KEY", @"")];
@@ -66,12 +69,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     
     if (![[NSUserDefaults standardUserDefaults] currentUser])
     {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
-        OTStartupViewController *startupViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTStartupNavigationViewControllerIdentifier"];
-        self.window.rootViewController = startupViewController;
-        [self.window makeKeyAndVisible];
-    }
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 
+        [UIStoryboard showStartup];
+    }
     
 	return YES;
 }
@@ -90,9 +91,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPassword];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
-    OTLoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTStartupNavigationViewControllerIdentifier"];
-    [self.window.rootViewController presentViewController:loginViewController animated:YES completion:nil];
+    [UIStoryboard showStartup];
 }
 
 /**************************************************************************************************/

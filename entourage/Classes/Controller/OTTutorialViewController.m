@@ -14,6 +14,9 @@
 // Service
 #import "OTAuthService.h"
 
+// Util
+#import "UIStoryboard+entourage.h"
+
 // Helper
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
@@ -84,11 +87,13 @@
                                                     }
                                                     [loggedNumbers addObject:self.phoneNumberServerRepresentation];
                                                     [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
-                                                    [self dismissViewControllerAnimated:YES completion:nil];
-                                                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                                                    //NewController *new = [sb instantiateInitialViewController];
-                                                    self.view.window.rootViewController = [sb instantiateInitialViewController];
-                                                    [self.view.window makeKeyAndVisible];
+                                                    
+                                                    [UIStoryboard showSWRevealController];
+//                                                    [self dismissViewControllerAnimated:YES completion:nil];
+//                                                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//                                                    //NewController *new = [sb instantiateInitialViewController];
+//                                                    self.view.window.rootViewController = [sb instantiateInitialViewController];
+//                                                    [self.view.window makeKeyAndVisible];
                                                     //TODO: put this back when the tutorial content is ready
                                                     //[self displayTutorial];
                                                 } failure:^(NSError *error) {

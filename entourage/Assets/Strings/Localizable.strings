@@ -33,7 +33,7 @@
 "menu_help_title" = "AIDE";
 "menu_yourOpinion_title" = "VOTRE AVIS";
 "menu_translate_title" = "TRADUIRE";
-"menu_disconnect_title" = "Deconnexion";
+"menu_disconnect_title" = "Déconnexion";
 
 // Encounters
 "has_encountered" = "a rencontré";

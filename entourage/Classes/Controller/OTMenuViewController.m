@@ -73,24 +73,33 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 /**************************************************************************************************/
 #pragma mark - UITableViewDelegate & UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return (section == 0) ? 30.f : 1.f;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return self.menuItems.count;
+    return (section == 0) ? self.menuItems.count - 1 : 1 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:OTMenuTableViewCellIdentifier];
-	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
 
-    cell.itemLabel.text = menuItem.title;//[menuItem.title uppercaseStringWithLocale:[NSLocale currentLocale]];
-    cell.imageView.image = [UIImage imageNamed:menuItem.iconName];
+    NSString *cellID = (indexPath.section == 0) ?   OTMenuTableViewCellIdentifier :
+                                                    OTMenuLogoutTableViewCellIdentifier;
+    OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
+    if (menuItem.iconName != nil)
+        cell.itemIcon.image = [UIImage imageNamed:menuItem.iconName];
+    cell.itemLabel.text = menuItem.title;
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-	if (indexPath.row == self.menuItems.count - 1) {
+	if (indexPath.section == 1) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
 	else {
@@ -192,7 +201,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
     // Disconnect
     OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
-                                                          iconName: @""
+                                                          iconName: nil
                                                    segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
     [menuItems addObject:itemDisconnect];
     
@@ -247,6 +256,9 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	if (indexPath && (indexPath.row < self.menuItems.count)) {
 		menuItem = [self.menuItems objectAtIndex:indexPath.row];
 	}
+    if (indexPath.section == 1) {
+        menuItem = [self.menuItems lastObject];
+    }
 
 	return menuItem;
 }

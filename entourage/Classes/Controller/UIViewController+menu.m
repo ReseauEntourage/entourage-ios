@@ -48,7 +48,7 @@
     SWRevealViewController *revealViewController = self.revealViewController;
     if (revealViewController)
     {
-        UIImage *menuImage = [[UIImage imageNamed:@"backFront.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIImage *menuImage = [[UIImage imageNamed:@"backArrow.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         menuButton = [[UIBarButtonItem alloc] init];
         [menuButton setImage:menuImage];

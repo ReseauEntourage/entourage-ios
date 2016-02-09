@@ -8,6 +8,9 @@
 
 #import "OTSWRevealViewController.h"
 
+//Util
+#import "UIStoryboard+entourage.h"
+
 // Helper
 #import "NSUserDefaults+OT.h"
 
@@ -30,21 +33,9 @@
 	[super viewDidAppear:animated];
     [self customizeSlideOutMenu];
     
-//    [[OTAuthService new] checkVersionWithSuccess:^(BOOL status) {
-//        if (status) {
-//            NSLog(@"%@", @"200");
-//        } else {
-//            NSLog(@"%@", @"426");
-//        }
-//    } failure:^(NSError *error) {
-//        NSLog(@"%@", [error localizedDescription]);
-//    }];
-
 	if (![[NSUserDefaults standardUserDefaults] currentUser])
 	{
-		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
-		OTStartupViewController *startupViewController = [storyboard instantiateViewControllerWithIdentifier:@"OTStartupNavigationViewControllerIdentifier"];
-		[self presentViewController:startupViewController animated:YES completion:nil];
+		[UIStoryboard showStartup];
 	}
 }
 

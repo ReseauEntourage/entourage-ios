@@ -110,6 +110,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
+
     
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
