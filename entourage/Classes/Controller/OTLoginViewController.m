@@ -37,7 +37,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 /********************************************************************************/
 #pragma mark - OTLoginViewController
 
-@interface OTLoginViewController () <UITextFieldDelegate>
+@interface OTLoginViewController () <UITextFieldDelegate, LostCodeDelegate>
 
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffect;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
@@ -170,6 +170,10 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     else if ([segue.identifier isEqualToString:@"OTTutorial"]) {
         OTTutorialViewController *controller = (OTTutorialViewController *)segue.destinationViewController;
         [controller configureWithPhoneNumber:self.phoneNumberServerRepresentation];
+    } else if ([segue.identifier isEqualToString:@"OTLostCode"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTLostCodeViewController *controller = (OTLostCodeViewController *)navController.viewControllers.firstObject;
+        controller.codeDelegate = self;
     }
 }
 
@@ -207,5 +211,16 @@ NSString *const kTutorialDone = @"has_done_tutorial";
         [self launchAuthentication];
     }
 }
+
+/********************************************************************************/
+#pragma mark - LostCodeDelegate
+
+- (void)loginWithNewCode:(NSString *)code {
+    [self dismissViewControllerAnimated:YES completion:^() {
+        self.passwordTextField.text = code;
+        [self launchAuthentication];
+    }];
+}
+
 
 @end

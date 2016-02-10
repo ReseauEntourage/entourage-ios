@@ -35,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIView *numberNotFoundContainerView;
 @property (weak, nonatomic) IBOutlet UIView *smsContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *actionIcon;
+@property (weak, nonatomic) IBOutlet UITextField *smsTextField;
 
 @end
 
@@ -50,16 +51,11 @@
     self.title = @"REDEMANDER UN CODE";
     [self setupCloseModal];
     [self.phoneTextField indentRight];
-    [self showPhoneInputContainer];
+    [self showPhoneInput];
 }
 
 #pragma mark - Private
-- (void)showPhoneInputContainer {
-    [self.phoneTextField becomeFirstResponder];
-    self.numberNotFoundContainerView.hidden = YES;
-    self.smsContainerView.hidden = YES;
 
-}
 
 - (void)showNumberNotFoundContainer {
     [self.phoneTextField resignFirstResponder];
@@ -92,6 +88,8 @@
                                           [SVProgressHUD dismiss];
                                           if ([error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"Not Found"]) {
                                               [self showNumberNotFoundContainer];
+                                              //test SMS without really resetting code
+                                              //[self showSMSContainer];
                                           }
                                           else
                                           {
@@ -132,6 +130,44 @@
         [self.phoneTextField setSelected:NO];
         [self regenerateSecretCode];
     }
+}
+- (IBAction)sendSMSButtonDidTap:(id)sender {
+
+    if (self.smsTextField.text.length == 0) {
+        [[[UIAlertView alloc]
+          initWithTitle:@"Demande impossible"
+          message:@"Veuillez renseigner un code de vérification"
+          delegate:nil
+          cancelButtonTitle:nil
+          otherButtonTitles:@"ok",
+          nil] show];
+    }
+    else if (![self.smsTextField.text isValidCode]) {
+        [[[UIAlertView alloc]
+          initWithTitle:@"Demande impossible"
+          message:@"Code de vérification invalide"
+          delegate:nil
+          cancelButtonTitle:nil
+          otherButtonTitles:@"ok",
+          nil] show];
+    }
+    else {
+        if ([self.codeDelegate respondsToSelector:@selector(loginWithNewCode:)]) {
+            //[self dismissViewControllerAnimated:YES completion:nil];
+            NSLog(@"New code: %@", self.smsTextField.text);
+            [self.codeDelegate loginWithNewCode:self.smsTextField.text];
+        }
+        
+    }
+}
+
+- (IBAction)showPhoneInput {
+    [self.phoneTextField becomeFirstResponder];
+    self.inputContainerView.hidden = NO;
+    self.numberNotFoundContainerView.hidden = YES;
+    self.smsContainerView.hidden = YES;
+    self.actionIcon.image = [UIImage imageNamed:@"phone"];
+
 }
 
 @end

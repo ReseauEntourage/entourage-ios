@@ -326,7 +326,7 @@ dans notre base de données.</string>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="regenerateButtonDidTap:" destination="HjR-IO-SUN" eventType="touchUpInside" id="wa0-cZ-50j"/>
+                                            <action selector="sendSMSButtonDidTap:" destination="HjR-IO-SUN" eventType="touchUpInside" id="LSX-al-I7G"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gB9-sl-n5O">
@@ -341,6 +341,9 @@ dans notre base de données.</string>
                                         <state key="normal" title="Redemander un code">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="regenerateButtonDidTap:" destination="HjR-IO-SUN" eventType="touchUpInside" id="23W-of-PIn"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vny-dX-vSw">
                                         <rect key="frame" x="98" y="127" width="222" height="30"/>
@@ -354,6 +357,9 @@ dans notre base de données.</string>
                                         <state key="normal" title="Modifier le numéro">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="showPhoneInput" destination="HjR-IO-SUN" eventType="touchUpInside" id="cwG-1o-MBs"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <animations/>
@@ -412,6 +418,7 @@ dans notre base de données.</string>
                         <outlet property="phoneTextField" destination="kPw-Yb-coV" id="yLZ-ss-4eE"/>
                         <outlet property="regenerateCodeButton" destination="jtb-er-1hO" id="bQH-fe-nhp"/>
                         <outlet property="smsContainerView" destination="Jdk-ly-nld" id="Be1-Ne-mOj"/>
+                        <outlet property="smsTextField" destination="i3r-fb-Fjw" id="Izr-nI-JQU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ia-OO-Shk" userLabel="First Responder" sceneMemberID="firstResponder"/>

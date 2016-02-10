@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LostCodeDelegate <NSObject>
+
+- (void)loginWithNewCode:(NSString*)code;
+
+@end
+
 @interface OTLostCodeViewController : UIViewController
+
+@property(nonatomic, weak) id<LostCodeDelegate> codeDelegate;
+
 
 @end
