@@ -50,6 +50,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.title = @"";
     if (![[[NSUserDefaults standardUserDefaults] currentUser].email isEqualToString:@""]) {
         self.emailTextField.text = [[NSUserDefaults standardUserDefaults] currentUser].email;
     }
@@ -87,7 +88,7 @@
                                                     }
                                                     [loggedNumbers addObject:self.phoneNumberServerRepresentation];
                                                     [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
-                                                    
+                                                    //[self performSegueWithIdentifier:@"RightsSegue" sender:nil];
                                                     [UIStoryboard showSWRevealController];
 //                                                    [self dismissViewControllerAnimated:YES completion:nil];
 //                                                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

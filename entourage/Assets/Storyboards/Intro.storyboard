@@ -607,11 +607,31 @@ dans notre base de données.</string>
                         <outlet property="emailScrollView" destination="ZcO-iR-1Vc" id="g6K-wH-jj2"/>
                         <outlet property="emailTextField" destination="Sj3-7j-Ihn" id="VsH-wn-MdC"/>
                         <outlet property="validateEmailButton" destination="0xx-s4-ZNI" id="Tu9-3c-8mb"/>
+                        <segue destination="YF5-7T-Mo4" kind="show" identifier="RightsSegue" id="b90-P3-gLi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VE8-ZM-GbG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="309" y="-1771"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="pJ2-P8-Xuv">
+            <objects>
+                <viewController id="YF5-7T-Mo4" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tps-xA-PZQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="vpT-e1-9it"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="26C-Fh-nPo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fh9-nH-gBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="817" y="-1771"/>
         </scene>
         <!--Startup View Controller-->
         <scene sceneID="6VV-8c-dP7">

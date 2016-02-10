@@ -38,6 +38,7 @@
 		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
 		452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */; };
+		452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452FA6321C6BCE8500D5D56D /* OTRightsViewController.m */; };
 		454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */; };
 		454C8F501C4F4C45001362B2 /* UITextField+indentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4F1C4F4C45001362B2 /* UITextField+indentation.m */; };
 		454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F521C500FE2001362B2 /* OTStartupViewController.m */; };
@@ -162,6 +163,8 @@
 		2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		452FA62E1C6A50BF00D5D56D /* UIStoryboard+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+entourage.h"; sourceTree = "<group>"; };
 		452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+entourage.m"; sourceTree = "<group>"; };
+		452FA6311C6BCE8500D5D56D /* OTRightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRightsViewController.h; sourceTree = "<group>"; };
+		452FA6321C6BCE8500D5D56D /* OTRightsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRightsViewController.m; sourceTree = "<group>"; };
 		454C8F4B1C4D20EA001362B2 /* UIColor+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+entourage.h"; sourceTree = "<group>"; };
 		454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+entourage.m"; sourceTree = "<group>"; };
 		454C8F4E1C4F4C45001362B2 /* UITextField+indentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+indentation.h"; sourceTree = "<group>"; };
@@ -318,6 +321,8 @@
 				0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */,
 				0AE855C91C3D05A0001176B9 /* OTTutorialViewController.h */,
 				0AE855CA1C3D05A0001176B9 /* OTTutorialViewController.m */,
+				452FA6311C6BCE8500D5D56D /* OTRightsViewController.h */,
+				452FA6321C6BCE8500D5D56D /* OTRightsViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -940,6 +945,7 @@
 				0A213C491BA0306300202D7B /* OTGuideViewController.m in Sources */,
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
+				452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
 				0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */,
