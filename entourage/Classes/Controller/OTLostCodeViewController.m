@@ -33,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *regenerateCodeButton;
 @property (weak, nonatomic) IBOutlet UIView *inputContainerView;
 @property (weak, nonatomic) IBOutlet UIView *numberNotFoundContainerView;
+@property (weak, nonatomic) IBOutlet UIView *smsContainerView;
+@property (weak, nonatomic) IBOutlet UIImageView *actionIcon;
 
 @end
 
@@ -48,32 +50,59 @@
     self.title = @"REDEMANDER UN CODE";
     [self setupCloseModal];
     [self.phoneTextField indentRight];
+    [self showPhoneInputContainer];
+}
+
+#pragma mark - Private
+- (void)showPhoneInputContainer {
     [self.phoneTextField becomeFirstResponder];
     self.numberNotFoundContainerView.hidden = YES;
+    self.smsContainerView.hidden = YES;
+
+}
+
+- (void)showNumberNotFoundContainer {
+    [self.phoneTextField resignFirstResponder];
+    self.inputContainerView.hidden = YES;
+    self.numberNotFoundContainerView.hidden = NO;
+    self.smsContainerView.hidden = YES;
+    self.actionIcon.image = [UIImage imageNamed:@"phone"];
+}
+
+- (void)showSMSContainer {
+    [self.phoneTextField resignFirstResponder];
+    
+    self.inputContainerView.hidden = YES;
+    self.numberNotFoundContainerView.hidden = YES;
+    self.smsContainerView.hidden = NO;
+    self.actionIcon.image = [UIImage imageNamed:@"sms"];
 }
 
 /********************************************************************************/
 #pragma mark - Public Methods
 
 - (void)regenerateSecretCode {
-    self.inputContainerView.hidden = YES;
-    self.numberNotFoundContainerView.hidden = NO;
-    return;
-#warning DEBUG
     [SVProgressHUD show];
     [[OTAuthService new] regenerateSecretCode:self.phoneTextField.text.phoneNumberServerRepresentation
                                       success:^(OTUser *user) {
-                                              [SVProgressHUD showSuccessWithStatus:@"Demande effectuée !"];
-                                              [self dismissViewControllerAnimated:YES completion:nil];
-                                      } failure:^(NSError *error) {
+                                          [SVProgressHUD showSuccessWithStatus:@"Demande effectuée!"];
+                                          [self showSMSContainer];
+                                      }
+                                      failure:^(NSError *error) {
                                           [SVProgressHUD dismiss];
-                                          [[[UIAlertView alloc]
-                                            initWithTitle:@"Erreur"
-                                            message:@"Echec lors de la demande"
-                                            delegate:nil
-                                            cancelButtonTitle:nil
-                                            otherButtonTitles:@"ok",
-                                            nil] show];
+                                          if ([error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"Not Found"]) {
+                                              [self showNumberNotFoundContainer];
+                                          }
+                                          else
+                                          {
+                                              [[[UIAlertView alloc]
+                                                initWithTitle:@"Erreur"
+                                                message:@"Echec lors de la demande"
+                                                delegate:nil
+                                                cancelButtonTitle:nil
+                                                otherButtonTitles:@"ok",
+                                                nil] show];
+                                          }
                                       }];
 }
 

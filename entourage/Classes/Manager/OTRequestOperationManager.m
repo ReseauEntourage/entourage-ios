@@ -178,7 +178,18 @@
         NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:
                                 [[operation responseString] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
         if ([jsonObject isKindOfClass:[NSDictionary class]] && [jsonObject objectForKey:@"error"]) {
-            actualError = [NSError errorWithDomain:error.domain code:error.code userInfo:@{ NSLocalizedDescriptionKey:[[jsonObject objectForKey:@"error"] objectForKey:@"message"] }];
+            
+            NSString *errorString = @"";
+            id errorValue = [jsonObject objectForKey:@"error"];
+            if ([errorValue isKindOfClass:[NSDictionary class]] && [jsonObject objectForKey:@"message"]) {
+                errorString = [errorValue objectForKey:@"message"];
+            } else {
+                errorString = errorValue;
+            }
+            
+            
+            
+            actualError = [NSError errorWithDomain:error.domain code:error.code userInfo:@{ NSLocalizedDescriptionKey:errorString }];
         }
     }
     else {
