@@ -16,6 +16,9 @@
 
 - (BOOL)isValidPhoneNumber
 {
+#if DEBUG
+    return YES;
+#endif
     return [self matchesRegularExpression:@"^((\\+|00)33\\s?|0)[67](\\s?\\d{2}){4}$"];
 }
 

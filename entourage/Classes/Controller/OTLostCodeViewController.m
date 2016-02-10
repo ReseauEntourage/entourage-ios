@@ -31,6 +31,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UIButton *regenerateCodeButton;
+@property (weak, nonatomic) IBOutlet UIView *inputContainerView;
+@property (weak, nonatomic) IBOutlet UIView *numberNotFoundContainerView;
 
 @end
 
@@ -47,12 +49,17 @@
     [self setupCloseModal];
     [self.phoneTextField indentRight];
     [self.phoneTextField becomeFirstResponder];
+    self.numberNotFoundContainerView.hidden = YES;
 }
 
 /********************************************************************************/
 #pragma mark - Public Methods
 
 - (void)regenerateSecretCode {
+    self.inputContainerView.hidden = YES;
+    self.numberNotFoundContainerView.hidden = NO;
+    return;
+#warning DEBUG
     [SVProgressHUD show];
     [[OTAuthService new] regenerateSecretCode:self.phoneTextField.text.phoneNumberServerRepresentation
                                       success:^(OTUser *user) {

@@ -59,7 +59,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="52" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EiD-PN-iyE">
                                 <rect key="frame" x="-4" y="258" width="328" height="310"/>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.70196078431372544" green="0.70196078431372544" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="81" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -96,7 +96,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="itemIcon" destination="wc1-BD-BQp" id="w8p-dg-ICq"/>
                                             <outlet property="itemLabel" destination="XdS-73-BBy" id="oZk-iO-4I0"/>
@@ -125,7 +125,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="itemLabel" destination="TzU-dN-mcx" id="F98-9M-xVV"/>
                                         </connections>
