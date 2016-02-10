@@ -7,6 +7,7 @@
 //
 
 #import "OTRightsViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface OTRightsViewController ()
 
@@ -27,11 +28,15 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    CLLocationManager *locationManager = [[CLLocationManager alloc] init];
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [locationManager requestWhenInUseAuthorization];
+    }
 
+//    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
+//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
+//    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+//    [[UIApplication sharedApplication] registerForRemoteNotifications];
 }
 
 /*

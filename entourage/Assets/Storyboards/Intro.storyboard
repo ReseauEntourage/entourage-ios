@@ -614,10 +614,10 @@ dans notre base de données.</string>
             </objects>
             <point key="canvasLocation" x="309" y="-1771"/>
         </scene>
-        <!--View Controller-->
+        <!--Rights View Controller-->
         <scene sceneID="pJ2-P8-Xuv">
             <objects>
-                <viewController id="YF5-7T-Mo4" sceneMemberID="viewController">
+                <viewController id="YF5-7T-Mo4" customClass="OTRightsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tps-xA-PZQ"/>
                         <viewControllerLayoutGuide type="bottom" id="vpT-e1-9it"/>

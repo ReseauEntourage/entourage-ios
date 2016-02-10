@@ -76,7 +76,8 @@
     [[OTAuthService new] updateUserInformationWithEmail:self.emailTextField.text
                                              andSmsCode:nil
                                                 success:^(NSString *email) {
-                                                    [SVProgressHUD showSuccessWithStatus:@"Adresse email mise à jour !"];
+                                                    [SVProgressHUD dismiss];
+                                                    //[SVProgressHUD showSuccessWithStatus:@"Adresse email mise à jour !"];
                                                     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
                                                     currentUser.email = email;
                                                     [[NSUserDefaults standardUserDefaults] setCurrentUser:currentUser];
@@ -88,13 +89,7 @@
                                                     }
                                                     [loggedNumbers addObject:self.phoneNumberServerRepresentation];
                                                     [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
-                                                    //[self performSegueWithIdentifier:@"RightsSegue" sender:nil];
-                                                    [UIStoryboard showSWRevealController];
-//                                                    [self dismissViewControllerAnimated:YES completion:nil];
-//                                                    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//                                                    //NewController *new = [sb instantiateInitialViewController];
-//                                                    self.view.window.rootViewController = [sb instantiateInitialViewController];
-//                                                    [self.view.window makeKeyAndVisible];
+                                                    [self performSegueWithIdentifier:@"RightsSegue" sender:nil];
                                                     //TODO: put this back when the tutorial content is ready
                                                     //[self displayTutorial];
                                                 } failure:^(NSError *error) {
