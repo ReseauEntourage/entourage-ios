@@ -137,6 +137,7 @@
     CGFloat dummyViewHeight = 90;
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, dummyViewHeight)];
     self.tableView.tableFooterView = dummyView;
+    self.blurEffect.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -658,7 +659,23 @@
 	[self.mapView setRegion:region animated:YES];
 }
 
+static bool showOptions = NO;
 - (IBAction)launcherTour:(id)sender {
+    if (showOptions) {
+        self.blurEffect.hidden = YES;
+        [((UIButton *)sender) setSelected:NO];
+    } else {
+        self.blurEffect.hidden = NO;
+        [((UIButton *)sender) setSelected:YES];
+    }
+    showOptions = !showOptions;
+}
+
+- (IBAction)createTour:(id)sender {
+    showOptions = !showOptions;
+    self.launcherButton.hidden = YES;
+    self.blurEffect.hidden = YES;
+    
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f - self.launcherView.frame.size.height;
     
@@ -667,6 +684,7 @@
         self.launcherView.hidden = NO;
         self.mapView.frame = mapFrame;
     }];
+
 }
 
 - (IBAction)closeLauncher:(id)sender {
@@ -752,7 +770,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-#warning count - 1
     if (section == self.tours.count - 1)
         return 0.f;
     else

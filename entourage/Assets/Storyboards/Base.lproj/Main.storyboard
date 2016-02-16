@@ -747,16 +747,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x5D-lh-QtL">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="O1D-oC-idM">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <animations/>
-                                </view>
-                                <animations/>
-                                <blurEffect style="dark"/>
-                            </visualEffectView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="152" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Vi-LCk">
                                 <rect key="frame" x="-4" y="224" width="328" height="344"/>
                                 <animations/>
@@ -764,7 +754,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AllToursCell" id="KgN-kr-NT6">
-                                        <rect key="frame" x="0.0" y="28" width="328" height="152"/>
+                                        <rect key="frame" x="0.0" y="92" width="328" height="152"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KgN-kr-NT6" id="pSt-IB-Y9T">
                                             <rect key="frame" x="0.0" y="0.0" width="328" height="152"/>
@@ -899,6 +889,33 @@
                                     <constraint firstAttribute="height" constant="160" id="PcJ-hE-DfO"/>
                                 </constraints>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaJ-X6-EEa">
+                                <rect key="frame" x="16" y="78" width="30" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="S2z-Ry-bgf"/>
+                                    <constraint firstAttribute="width" constant="30" id="ek7-Qe-u84"/>
+                                </constraints>
+                                <state key="normal" image="center-location.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="zoomToCurrentLocation:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cSD-wJ-9r6"/>
+                                </connections>
+                            </button>
+                            <segmentedControl hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gsB-s5-FKP">
+                                <rect key="frame" x="111" y="80" width="97" height="29"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="Carte"/>
+                                    <segment title="Liste"/>
+                                </segments>
+                                <color key="tintColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="changedSegmentedControlValue:" destination="vXZ-lx-hvc" eventType="valueChanged" id="nIw-6r-9Fq"/>
+                                </connections>
+                            </segmentedControl>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FLr-cF-t8Z">
                                 <rect key="frame" x="150" y="274" width="20" height="20"/>
                                 <animations/>
@@ -1091,6 +1108,47 @@
                                     <segue destination="b2A-wG-Mz4" kind="push" identifier="OTCreateMeeting" id="3gb-lP-wHV"/>
                                 </connections>
                             </button>
+                            <visualEffectView opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x5D-lh-QtL">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="O1D-oC-idM">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4Y-NY-wTi">
+                                            <rect key="frame" x="257" y="370" width="48" height="48"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="0Jp-yw-WSZ"/>
+                                                <constraint firstAttribute="width" constant="48" id="Afw-no-Z7v"/>
+                                            </constraints>
+                                            <state key="normal" image="createMaraude"/>
+                                            <connections>
+                                                <action selector="createTour:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9Tv-iS-lOE"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une maraude" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N41-3z-QQj">
+                                            <rect key="frame" x="39" y="383" width="210" height="21"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="CgV-Z9-lJD"/>
+                                                <constraint firstAttribute="width" constant="210" id="Mjb-Dh-e3t"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                            <color key="textColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstItem="W4Y-NY-wTi" firstAttribute="centerY" secondItem="N41-3z-QQj" secondAttribute="centerY" id="1SO-xd-T8o"/>
+                                        <constraint firstAttribute="trailing" secondItem="W4Y-NY-wTi" secondAttribute="trailing" constant="15" id="D36-5I-6Mm"/>
+                                        <constraint firstAttribute="bottom" secondItem="W4Y-NY-wTi" secondAttribute="bottom" constant="86" id="E7d-UB-QIy"/>
+                                        <constraint firstItem="W4Y-NY-wTi" firstAttribute="leading" secondItem="N41-3z-QQj" secondAttribute="trailing" constant="8" id="N1f-zt-Xhv"/>
+                                    </constraints>
+                                </view>
+                                <animations/>
+                                <blurEffect style="extraLight"/>
+                            </visualEffectView>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRg-cj-T9Q">
                                 <rect key="frame" x="250" y="494" width="62" height="62"/>
                                 <animations/>
@@ -1133,33 +1191,6 @@
                                 <rect key="frame" x="142" y="260" width="37" height="47"/>
                                 <animations/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaJ-X6-EEa">
-                                <rect key="frame" x="16" y="78" width="30" height="30"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="S2z-Ry-bgf"/>
-                                    <constraint firstAttribute="width" constant="30" id="ek7-Qe-u84"/>
-                                </constraints>
-                                <state key="normal" image="center-location.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="zoomToCurrentLocation:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cSD-wJ-9r6"/>
-                                </connections>
-                            </button>
-                            <segmentedControl hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gsB-s5-FKP">
-                                <rect key="frame" x="111" y="80" width="97" height="29"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <segments>
-                                    <segment title="Carte"/>
-                                    <segment title="Liste"/>
-                                </segments>
-                                <color key="tintColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="changedSegmentedControlValue:" destination="vXZ-lx-hvc" eventType="valueChanged" id="nIw-6r-9Fq"/>
-                                </connections>
-                            </segmentedControl>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -2038,6 +2069,7 @@
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>
+        <image name="createMaraude" width="48" height="48"/>
         <image name="ic_action_record_sound.png" width="132" height="130"/>
         <image name="ic_entourage.png" width="130" height="130"/>
         <image name="ic_user_photo.png" width="154" height="152"/>
