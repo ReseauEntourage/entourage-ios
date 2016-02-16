@@ -45,10 +45,17 @@
 #define PARIS_LON  2.351828
 #define MAPVIEW_HEIGHT 160.f
 
+#define TAG_ORGANIZATION 1
+#define TAG_TOURTYPE 2
+#define TAG_TIMELOCATION 3
+#define TAG_TOURUSER 4
+#define TAG_TOURUSERSCOUNT 5
+
+
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 // blur effect
 
@@ -57,6 +64,8 @@
 // map
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *mapSegmentedControl;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, strong) NSMapTable *drawnTours;
@@ -123,6 +132,11 @@
 
 	[self configureNavigationBar];
     [self configureMapView];
+    self.mapSegmentedControl.layer.cornerRadius = 4;
+    //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 90, 0);
+    CGFloat dummyViewHeight = 90;
+    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, dummyViewHeight)];
+    self.tableView.tableFooterView = dummyView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -163,6 +177,11 @@
 
 /**************************************************************************************************/
 #pragma mark - Private methods
+- (NSString *)formatDateForDisplay:(NSDate *)date {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
+    return [formatter stringFromDate:date];
+}
 
 - (void)configureMapView {
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
@@ -218,12 +237,13 @@
 - (void)refreshMap {
     [[OTTourService new] toursAroundCoordinate:self.mapView.centerCoordinate
                                          limit:@10
-                                      distance:[NSNumber numberWithDouble:[self mapHeight]]
+                                      distance:@1000//[NSNumber numberWithDouble:[self mapHeight]]
                                        success:^(NSMutableArray *closeTours)
                                         {
                                             [self.indicatorView setHidden:YES];
                                             self.tours = closeTours;
                                             [self feedMapViewWithTours];
+                                            [self.tableView reloadData];
                                         }
                                        failure:^(NSError *error) {
                                             [self registerObserver];
@@ -524,21 +544,32 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateEnded) {
-        CGPoint point = [sender locationInView:self.mapView];
-        CLLocationCoordinate2D location = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
-        [[OTTourService new] toursAroundCoordinate:location
-                                             limit:@5
-                                          distance:@0.04
-                                           success:^(NSMutableArray *closeTours) {
-                                               [self.indicatorView setHidden:YES];
-                                               if (closeTours.count != 0) {
-                                                   self.closeTours = closeTours;
-                                                   [self performSegueWithIdentifier:@"OTCloseTours" sender:sender];
-                                               }
-                                           } failure:^(NSError *error) {
-                                               [self registerObserver];
-                                               [self.indicatorView setHidden:YES];
-                                           }];
+        CGRect mapFrame = self.mapView.frame;
+        mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
+        [self.mapSegmentedControl setSelectedSegmentIndex:0];
+        [UIView animateWithDuration:0.5 animations:^(void) {
+            //self.launcherButton.hidden = YES;
+            //self.launcherView.hidden = NO;
+            self.mapView.frame = mapFrame;
+            self.mapSegmentedControl.hidden = NO;
+        }];
+
+//        
+//        CGPoint point = [sender locationInView:self.mapView];
+//        CLLocationCoordinate2D location = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
+//        [[OTTourService new] toursAroundCoordinate:location
+//                                             limit:@5
+//                                          distance:@0.04
+//                                           success:^(NSMutableArray *closeTours) {
+//                                               [self.indicatorView setHidden:YES];
+//                                               if (closeTours.count != 0) {
+//                                                   self.closeTours = closeTours;
+//                                                   [self performSegueWithIdentifier:@"OTCloseTours" sender:sender];
+//                                               }
+//                                           } failure:^(NSError *error) {
+//                                               [self registerObserver];
+//                                               [self.indicatorView setHidden:YES];
+//                                           }];
     }
 }
 
@@ -708,5 +739,99 @@
     }
     return self.currentTourType;
 }
+
+/**************************************************************************************************/
+#pragma mark - Table View
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.tours.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+#warning count - 1
+    if (section == self.tours.count - 1)
+        return 0.f;
+    else
+        return 15.f;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
+    
+    OTTour *tour = self.tours[indexPath.section];
+    
+    UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
+    organizationLabel.text = tour.organizationName;
+    
+    
+    NSString *tourType = tour.tourType;
+    if ([tourType isEqualToString:@"barehands"]) {
+        tourType = @"sociale";
+    } else     if ([tourType isEqualToString:@"medical"]) {
+        tourType = @"médicale";
+    } else if ([tourType isEqualToString:@"alimentary"]) {
+        tourType = @"distributive";
+    }
+    UILabel *typeLabel = [cell viewWithTag:TAG_TOURTYPE];
+    typeLabel.text = [NSString stringWithFormat:@"Mauraude %@ par %@", tourType, tour.userId];
+    UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
+    if (tour.startTime != nil) {
+        NSString *date = [self formatDateForDisplay:tour.startTime];
+        timeLocationLabel.text = [NSString stringWithFormat:@"%@  -  %@", date, @"Paris"];
+    } else {
+        timeLocationLabel.text = [NSString stringWithFormat:@"%@  -  %@", @"?", @"Paris"];
+    }
+    
+    UIImageView *userImage = [cell viewWithTag:TAG_TOURUSER];
+    userImage.layer.cornerRadius = userImage.bounds.size.height/2.f;
+    userImage.clipsToBounds = YES;
+//    cell.textLabel.text = tour.organizationName;
+//    NSString *type;
+//    if ([tour.tourType isEqualToString:@"barehands"]) {
+//        cell.imageView.image = [UIImage imageNamed:@"ic_bare_hands.png"];
+//        type = @"A mains nues";
+//    }
+//    else if ([tour.tourType isEqualToString:@"medical"]) {
+//        cell.imageView.image = [UIImage imageNamed:@"ic_medical.png"];
+//        type = @"Médical";
+//    }
+//    else if ([tour.tourType isEqualToString:@"alimentary"]) {
+//        cell.imageView.image = [UIImage imageNamed:@"ic_alimentary.png"];
+//        type = @"Alimentaire";
+//    }
+//    if (tour.startTime != nil) {
+//        NSString *date = [self formatDateForDisplay:tour.startTime];
+//        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", date, type];
+//    } else {
+//        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", @"--/--/---", type];
+//    }
+//    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    self.selectedTour = self.tableData[indexPath.row];
+//    [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+}
+
+/**************************************************************************************************/
+#pragma mark - Segmented control
+- (IBAction)changedSegmentedControlValue:(UISegmentedControl *)sender {
+    [self.blurEffect setHidden:NO];
+    if (sender.selectedSegmentIndex == 1) {
+        [UIView animateWithDuration:0.5 animations:^(void) {
+            [self.blurEffect setAlpha:0.7];
+            CGRect mapFrame = self.mapView.frame;
+            mapFrame.size.height = MAPVIEW_HEIGHT;
+            self.mapView.frame = mapFrame;
+            self.mapSegmentedControl.hidden = YES;
+        }];
+    }
+}
+
 
 @end

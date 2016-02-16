@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Platinia.gpx">
+   </FileRef>
+   <FileRef
       location = "group:entourage.xcodeproj">
    </FileRef>
    <FileRef

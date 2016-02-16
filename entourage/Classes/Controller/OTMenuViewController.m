@@ -177,10 +177,10 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 + (NSArray *)createMenuItems {
 	NSMutableArray *menuItems = [NSMutableArray array];
     
-    OTMenuItem *itemAmis = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_amis", @"")
-                                                    iconName: @"friends"
-                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
-    [menuItems addObject:itemAmis];
+//    OTMenuItem *itemAmis = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_amis", @"")
+//                                                    iconName: @"friends"
+//                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+//    [menuItems addObject:itemAmis];
     
     OTMenuItem *itemGuide = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_guide", @"")
                                                      iconName: @"guide"
