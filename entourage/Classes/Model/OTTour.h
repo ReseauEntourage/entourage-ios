@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTTourAuthor.h"
 
 typedef enum { OTVehiclesFeet=0, OTVehiclesCar=1 } OTVehicles;
 typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTypes;
@@ -21,6 +22,8 @@ typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTyp
 @property (strong, nonatomic) NSString *tourType;
 @property (strong, nonatomic) NSString *vehicleType;
 @property (strong, nonatomic) NSString *status;
+@property (strong, nonatomic) NSString *joinStatus;
+@property (strong, nonatomic) OTTourAuthor *author;
 @property (strong, nonatomic) NSMutableArray *tourPoints;
 @property (strong, nonatomic) NSMutableDictionary *stats;
 @property (strong, nonatomic) NSString *organizationName;

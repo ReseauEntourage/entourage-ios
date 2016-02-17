@@ -28,6 +28,8 @@
 // Service
 #import "OTTourService.h"
 
+#import "UIColor+entourage.h"
+
 // Framework
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
@@ -50,6 +52,8 @@
 #define TAG_TIMELOCATION 3
 #define TAG_TOURUSER 4
 #define TAG_TOURUSERSCOUNT 5
+#define TAG_STATUSBUTTON 6
+#define TAG_STATUSTEXT 7
 
 
 /********************************************************************************/
@@ -780,7 +784,7 @@ static bool showOptions = NO;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
     
     OTTour *tour = self.tours[indexPath.section];
-    
+    OTTourAuthor *author = tour.author;
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
     organizationLabel.text = tour.organizationName;
     
@@ -793,8 +797,17 @@ static bool showOptions = NO;
     } else if ([tourType isEqualToString:@"alimentary"]) {
         tourType = @"distributive";
     }
+    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
+    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", tourType] attributes:lightAttrs];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
+    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+    [typeByNameAttrString appendAttributedString:nameAttrString];
+    
+    
     UILabel *typeLabel = [cell viewWithTag:TAG_TOURTYPE];
-    typeLabel.text = [NSString stringWithFormat:@"Mauraude %@ par %@", tourType, tour.userId];
+    typeLabel.attributedText = typeByNameAttrString;
+    //text = [NSString stringWithFormat:@"Mauraude %@ par %@", tourType, author.displayName];
     UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
     if (tour.startTime != nil) {
         NSString *date = [self formatDateForDisplay:tour.startTime];
@@ -806,6 +819,18 @@ static bool showOptions = NO;
     UIImageView *userImage = [cell viewWithTag:TAG_TOURUSER];
     userImage.layer.cornerRadius = userImage.bounds.size.height/2.f;
     userImage.clipsToBounds = YES;
+    
+    UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
+    UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
+    if ([tour.joinStatus isEqualToString:@"accepted"]) {
+        [statusButton setImage:[UIImage imageNamed:@"activeButton"] forState:UIControlStateNormal];
+        [statusLabel setText:@"Actif"];
+        [statusLabel setTextColor:[UIColor appOrangeColor]];
+    } else {
+        [statusButton setImage:[UIImage imageNamed:@"joinButton"] forState:UIControlStateNormal];
+        [statusLabel setText:@"Je rejoins"];
+        [statusLabel setTextColor:[UIColor appGreyishColor]];
+    }
 //    cell.textLabel.text = tour.organizationName;
 //    NSString *type;
 //    if ([tour.tourType isEqualToString:@"barehands"]) {

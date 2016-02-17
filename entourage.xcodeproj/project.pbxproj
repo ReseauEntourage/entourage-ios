@@ -46,6 +46,7 @@
 		454C8F5B1C510304001362B2 /* UINavigationController+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F5A1C510304001362B2 /* UINavigationController+entourage.m */; };
 		455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */; };
 		4559405E1C5F6D480099A8EE /* OTRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4559405D1C5F6D480099A8EE /* OTRequestOperationManager.m */; };
+		45B3F8F61C74F40B00DCF2EC /* OTTourAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B3F8F51C74F40A00DCF2EC /* OTTourAuthor.m */; };
 		45CE5A561C5241AA00F68C24 /* Blokletters-Balpen.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A481C5241AA00F68C24 /* Blokletters-Balpen.ttf */; };
 		45CE5A571C5241AA00F68C24 /* Calibri-Bold-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A491C5241AA00F68C24 /* Calibri-Bold-Italic.ttf */; };
 		45CE5A581C5241AA00F68C24 /* Calibri-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A4A1C5241AA00F68C24 /* Calibri-Bold.ttf */; };
@@ -179,6 +180,8 @@
 		455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTJSONResponseSerializer.m; sourceTree = "<group>"; };
 		4559405C1C5F6D480099A8EE /* OTRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRequestOperationManager.h; sourceTree = "<group>"; };
 		4559405D1C5F6D480099A8EE /* OTRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRequestOperationManager.m; sourceTree = "<group>"; };
+		45B3F8F41C74F40A00DCF2EC /* OTTourAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourAuthor.h; sourceTree = "<group>"; };
+		45B3F8F51C74F40A00DCF2EC /* OTTourAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourAuthor.m; sourceTree = "<group>"; };
 		45CE5A481C5241AA00F68C24 /* Blokletters-Balpen.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blokletters-Balpen.ttf"; sourceTree = "<group>"; };
 		45CE5A491C5241AA00F68C24 /* Calibri-Bold-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Bold-Italic.ttf"; sourceTree = "<group>"; };
 		45CE5A4A1C5241AA00F68C24 /* Calibri-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Bold.ttf"; sourceTree = "<group>"; };
@@ -500,6 +503,8 @@
 				0A94B53D1B8F194700402AF3 /* OTTourPoint.m */,
 				0A4769361BFCC4B5006EA73A /* OTOrganization.h */,
 				0A4769371BFCC4EB006EA73A /* OTOrganization.m */,
+				45B3F8F41C74F40A00DCF2EC /* OTTourAuthor.h */,
+				45B3F8F51C74F40A00DCF2EC /* OTTourAuthor.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -941,6 +946,7 @@
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,
 				455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */,
+				45B3F8F61C74F40B00DCF2EC /* OTTourAuthor.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
 				0A213C491BA0306300202D7B /* OTGuideViewController.m in Sources */,
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,

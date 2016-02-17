@@ -10,6 +10,7 @@
 
 @interface UIColor (entourage)
 
-- (UIColor *)appOrangeColor;
++ (UIColor *)appOrangeColor;
++ (UIColor *)appGreyishColor;
 
 @end
