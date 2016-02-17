@@ -139,9 +139,16 @@
     self.mapSegmentedControl.layer.cornerRadius = 4;
     //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 90, 0);
     CGFloat dummyViewHeight = 90;
-    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, dummyViewHeight)];
+    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(-10, 0, self.tableView.bounds.size.width, dummyViewHeight)];
     self.tableView.tableFooterView = dummyView;
     self.blurEffect.hidden = YES;
+    
+    self.tableView.clipsToBounds = NO;
+    self.tableView.layer.masksToBounds = NO;
+    self.tableView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.tableView.layer.shadowOffset = CGSizeMake(0,-10);
+    self.tableView.layer.shadowOpacity = 0.5;
+    self.tableView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:self.tableView.layer.bounds] CGPath];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
