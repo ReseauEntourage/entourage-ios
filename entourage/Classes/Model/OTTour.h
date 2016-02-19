@@ -23,6 +23,7 @@ typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTyp
 @property (strong, nonatomic) NSString *vehicleType;
 @property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) NSString *joinStatus;
+@property (strong, nonatomic) NSNumber *noPeople;
 @property (strong, nonatomic) OTTourAuthor *author;
 @property (strong, nonatomic) NSMutableArray *tourPoints;
 @property (strong, nonatomic) NSMutableDictionary *stats;

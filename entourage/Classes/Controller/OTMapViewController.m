@@ -833,6 +833,10 @@ static bool showOptions = NO;
     userImage.layer.cornerRadius = userImage.bounds.size.height/2.f;
     userImage.clipsToBounds = YES;
     
+    UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
+    noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
+    
+    
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     if ([tour.joinStatus isEqualToString:@"accepted"]) {
