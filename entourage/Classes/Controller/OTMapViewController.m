@@ -64,6 +64,8 @@
 // blur effect
 
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffect;
+@property (weak, nonatomic) IBOutlet UIButton *createTourOnBlurButton;
+@property (weak, nonatomic) IBOutlet UILabel *createTourLabel;
 
 // map
 
@@ -137,18 +139,7 @@
 	[self configureNavigationBar];
     [self configureMapView];
     self.mapSegmentedControl.layer.cornerRadius = 4;
-    //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 90, 0);
-    CGFloat dummyViewHeight = 90;
-    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(-10, 0, self.tableView.bounds.size.width, dummyViewHeight)];
-    self.tableView.tableFooterView = dummyView;
-    self.blurEffect.hidden = YES;
-    
-    self.tableView.clipsToBounds = NO;
-    self.tableView.layer.masksToBounds = NO;
-    self.tableView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.tableView.layer.shadowOffset = CGSizeMake(0,-10);
-    self.tableView.layer.shadowOpacity = 0.5;
-    self.tableView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:self.tableView.layer.bounds] CGPath];
+    [self configureTableView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -195,6 +186,21 @@
     return [formatter stringFromDate:date];
 }
 
+- (void)configureTableView {
+    //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 90, 0);
+    CGFloat dummyViewHeight = 90;
+    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(-10, 0, self.tableView.bounds.size.width, dummyViewHeight)];
+    self.tableView.tableFooterView = dummyView;
+    self.blurEffect.hidden = YES;
+    
+    //self.tableView.clipsToBounds = NO;
+    self.tableView.layer.masksToBounds = NO;
+    self.tableView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.tableView.layer.shadowOffset = CGSizeMake(0,-1);
+    self.tableView.layer.shadowOpacity = 0.5;
+    //self.tableView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:self.tableView.layer.bounds] CGPath];
+}
+
 - (void)configureMapView {
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
 
@@ -204,6 +210,21 @@
    	self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
     [self zoomToCurrentLocation:nil];
+    
+    UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showCreateTourOverlay:)];
+    [self.mapView addGestureRecognizer:longPressMapGesture];
+    
+    UITapGestureRecognizer *hideTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideCreateTourOverlay)];
+    [self.blurEffect addGestureRecognizer:hideTapGesture];
+}
+
+- (void)showCreateTourOverlay:(UILongPressGestureRecognizer *)longPressGesture {
+    CGPoint touchPoint = [longPressGesture locationInView:self.mapView];
+    [self showMapOverlayToCreateTourAtPoint:touchPoint];
+}
+
+- (void)hideCreateTourOverlay {
+    self.blurEffect.hidden = YES;
 }
 
 - (void)appWillEnterBackground:(NSNotification*)note {
@@ -556,16 +577,7 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateEnded) {
-        CGRect mapFrame = self.mapView.frame;
-        mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
-        [self.mapSegmentedControl setSelectedSegmentIndex:0];
-        [UIView animateWithDuration:0.5 animations:^(void) {
-            //self.launcherButton.hidden = YES;
-            //self.launcherView.hidden = NO;
-            self.mapView.frame = mapFrame;
-            self.mapSegmentedControl.hidden = NO;
-        }];
-
+        [self showToursMap];
 //        
 //        CGPoint point = [sender locationInView:self.mapView];
 //        CLLocationCoordinate2D location = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
@@ -672,6 +684,7 @@
 
 static bool showOptions = NO;
 - (IBAction)launcherTour:(id)sender {
+    
     if (showOptions) {
         self.blurEffect.hidden = YES;
         [((UIButton *)sender) setSelected:NO];
@@ -687,15 +700,7 @@ static bool showOptions = NO;
     self.launcherButton.hidden = YES;
     self.blurEffect.hidden = YES;
     
-    CGRect mapFrame = self.mapView.frame;
-    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f - self.launcherView.frame.size.height;
-    
-    [UIView animateWithDuration:0.5 animations:^(void) {
-        self.launcherButton.hidden = YES;
-        self.launcherView.hidden = NO;
-        self.mapView.frame = mapFrame;
-    }];
-
+    [self showNewTourStart];
 }
 
 - (IBAction)closeLauncher:(id)sender {
@@ -722,12 +727,13 @@ static bool showOptions = NO;
 - (IBAction)startTour:(id)sender {
     self.tour = [[OTTour alloc] initWithTourType:[self selectedTourType] andVehicleType:[self selectedVehiculeType]];
     [self sendTour];
+    [self showNewTourOnGoing];
 }
 
 - (IBAction)stopTour:(id)sender {
     [self.blurEffect setHidden:NO];
     [UIView animateWithDuration:0.5 animations:^(void) {
-        [self.blurEffect setAlpha:0.7];
+        //[self.blurEffect setAlpha:0.7];
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
         self.mapView.frame = mapFrame;
@@ -871,15 +877,79 @@ static bool showOptions = NO;
 #pragma mark - Segmented control
 - (IBAction)changedSegmentedControlValue:(UISegmentedControl *)sender {
     [self.blurEffect setHidden:NO];
+    
     if (sender.selectedSegmentIndex == 1) {
-        [UIView animateWithDuration:0.5 animations:^(void) {
-            [self.blurEffect setAlpha:0.7];
-            CGRect mapFrame = self.mapView.frame;
-            mapFrame.size.height = MAPVIEW_HEIGHT;
-            self.mapView.frame = mapFrame;
-            self.mapSegmentedControl.hidden = YES;
-        }];
+        [self showToursList];
     }
+}
+
+/**************************************************************************************************/
+#pragma mark - "Screens"
+
+- (void)showToursList {
+    [self.blurEffect setHidden:YES];
+    self.launcherButton.hidden = NO;
+    self.stopButton.hidden = YES;
+
+    [UIView animateWithDuration:0.5 animations:^(void) {
+//        [self.blurEffect setAlpha:0.7];
+        CGRect mapFrame = self.mapView.frame;
+        mapFrame.size.height = MAPVIEW_HEIGHT;
+        self.mapView.frame = mapFrame;
+        self.mapSegmentedControl.hidden = YES;
+    }];
+}
+
+- (void)showToursMap {
+    [self.blurEffect setHidden:YES];
+    self.launcherButton.hidden = NO;
+
+    CGRect mapFrame = self.mapView.frame;
+    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
+    [self.mapSegmentedControl setSelectedSegmentIndex:0];
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        //self.launcherButton.hidden = YES;
+        //self.launcherView.hidden = NO;
+        self.mapView.frame = mapFrame;
+        self.mapSegmentedControl.hidden = NO;
+    }];
+
+}
+
+#pragma mark 6.3 Tours long press on map
+- (void)showMapOverlayToCreateTourAtPoint:(CGPoint)point {
+    [self.blurEffect setHidden:NO];
+    self.launcherButton.hidden = YES;
+    self.createTourLabel.hidden = YES;
+    self.createTourOnBlurButton.center = point;
+}
+
+#pragma mark 15.1 New Tour - start
+- (void)showNewTourStart {
+    CGRect mapFrame = self.mapView.frame;
+    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f - self.launcherView.frame.size.height;
+    
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        self.mapSegmentedControl.hidden = YES;
+        self.launcherButton.hidden = YES;
+        self.launcherView.hidden = NO;
+        self.mapView.frame = mapFrame;
+    }];
+
+}
+
+#pragma mark 15.2 New Tour - on going
+- (void)showNewTourOnGoing {
+    CGRect mapFrame = self.mapView.frame;
+    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
+    
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        self.mapSegmentedControl.hidden = NO;
+        self.launcherButton.hidden = NO;
+        self.launcherView.hidden = YES;
+        self.mapView.frame = mapFrame;
+    }];
+    
 }
 
 
