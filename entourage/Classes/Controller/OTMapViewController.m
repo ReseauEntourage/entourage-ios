@@ -842,8 +842,6 @@ static bool showOptions = NO;
         timeLocationLabel.text = [timeLocationLabel.text stringByAppendingString:placemark.locality];
     }];
 
-    
-    
     UIImageView *userImage = [cell viewWithTag:TAG_TOURUSER];
     userImage.layer.cornerRadius = userImage.bounds.size.height/2.f;
     userImage.clipsToBounds = YES;

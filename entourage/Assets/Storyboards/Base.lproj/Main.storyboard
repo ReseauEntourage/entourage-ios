@@ -595,13 +595,12 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36A-RS-KXm">
-                                        <rect key="frame" x="45" y="407" width="170" height="52"/>
-                                        <color key="backgroundColor" red="0.88235294117647056" green="0.2196078431372549" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36A-RS-KXm">
+                                        <rect key="frame" x="99" y="402" width="62" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="gwc-P1-e9n"/>
                                         </constraints>
-                                        <state key="normal" title="TERMINER">
+                                        <state key="normal" image="stop">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -624,13 +623,12 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOp-eS-Isc">
-                                        <rect key="frame" x="45" y="337" width="170" height="52"/>
-                                        <color key="backgroundColor" red="0.88235294117647056" green="0.2196078431372549" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOp-eS-Isc">
+                                        <rect key="frame" x="99" y="332" width="62" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="LZ4-1X-Hzh"/>
                                         </constraints>
-                                        <state key="normal" title="REPRENDRE">
+                                        <state key="normal" image="play">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1981,6 +1979,7 @@
         <image name="pointer.png" width="37" height="47"/>
         <image name="social" width="30" height="30"/>
         <image name="socialActive" width="30" height="30"/>
+        <image name="stop" width="62" height="62"/>
         <image name="user" width="100" height="100"/>
         <image name="userSmall" width="35" height="35"/>
         <image name="users" width="22" height="22"/>
