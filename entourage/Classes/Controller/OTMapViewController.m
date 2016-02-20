@@ -652,6 +652,7 @@
         controller.encounters = self.encounters;
     } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
         OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
+        controller.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.f];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.delegate = self;
         self.isTourRunning = NO;
@@ -829,7 +830,7 @@ static bool showOptions = NO;
 
         
         NSString *dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
-        timeLocationLabel.text = [NSString stringWithFormat:@"%@  - ", dateString];
+        timeLocationLabel.text = [NSString stringWithFormat:@"%@ ", dateString];
     } else {
         timeLocationLabel.text = @"";
     }
@@ -839,7 +840,8 @@ static bool showOptions = NO;
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         CLPlacemark *placemark = placemarks.firstObject;
-        timeLocationLabel.text = [timeLocationLabel.text stringByAppendingString:placemark.locality];
+        if (placemark.locality !=  nil)
+            timeLocationLabel.text = [timeLocationLabel.text stringByAppendingString:placemark.locality];
     }];
 
     UIImageView *userImage = [cell viewWithTag:TAG_TOURUSER];

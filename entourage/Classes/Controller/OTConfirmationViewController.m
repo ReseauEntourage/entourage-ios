@@ -42,9 +42,9 @@
 #pragma mark - Life cycle
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.encountersLabel.text = [NSString stringWithFormat:@"%@ personnes rencontrées", self.encountersCount];
-    self.distanceLabel.text = [NSString stringWithFormat:@"%@ km parcourus", [self stringFromFloatDistance:(self.tour.distance)]];
-    self.durationLabel.text = [NSString stringWithFormat:@"%@ passées dans la rue", [self stringFromTimeInterval:(self.duration)]];
+    self.encountersLabel.text = [NSString stringWithFormat:@"%@", self.encountersCount];
+    self.distanceLabel.text = [self stringFromFloatDistance:(self.tour.distance)];
+    self.durationLabel.text = [self stringFromTimeInterval:(self.duration)];
 }
 
 - (void)viewDidLoad {
