@@ -14,6 +14,7 @@ target "entourage" do
     pod 'IQKeyboardManager', '3.3.4'
     pod 'SVProgressHUD', :head
     pod 'SimpleKeychain', '~> 0.7'
+    pod 'FormatterKit'
 end
 
 target "entourageTests" do

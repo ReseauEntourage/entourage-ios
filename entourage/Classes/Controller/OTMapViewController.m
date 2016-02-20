@@ -39,6 +39,10 @@
 #import <QuartzCore/QuartzCore.h>
 #import "KPClusteringController.h"
 #import "KPAnnotation.h"
+#import "TTTTimeIntervalFormatter.h"
+#import "TTTLocationFormatter.h"
+
+
 
 // User
 #import "NSUserDefaults+OT.h"
@@ -817,17 +821,28 @@ static bool showOptions = NO;
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];
     
-    
-    UILabel *typeLabel = [cell viewWithTag:TAG_TOURTYPE];
-    typeLabel.attributedText = typeByNameAttrString;
-    //text = [NSString stringWithFormat:@"Mauraude %@ par %@", tourType, author.displayName];
     UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
     if (tour.startTime != nil) {
-        NSString *date = [self formatDateForDisplay:tour.startTime];
-        timeLocationLabel.text = [NSString stringWithFormat:@"%@  -  %@", date, @"Paris"];
+        TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
+        NSTimeInterval timeInterval = [tour.startTime timeIntervalSinceDate:[NSDate date]];
+        [timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
+
+        
+        NSString *dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
+        timeLocationLabel.text = [NSString stringWithFormat:@"%@  - ", dateString];
     } else {
-        timeLocationLabel.text = [NSString stringWithFormat:@"%@  -  %@", @"?", @"Paris"];
+        timeLocationLabel.text = @"";
     }
+    
+    OTTourPoint *startPoint = tour.tourPoints.firstObject;
+    CLLocation *loc =  [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        CLPlacemark *placemark = placemarks.firstObject;
+        timeLocationLabel.text = [timeLocationLabel.text stringByAppendingString:placemark.locality];
+    }];
+
+    
     
     UIImageView *userImage = [cell viewWithTag:TAG_TOURUSER];
     userImage.layer.cornerRadius = userImage.bounds.size.height/2.f;
