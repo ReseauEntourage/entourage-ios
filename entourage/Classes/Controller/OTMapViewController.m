@@ -652,7 +652,7 @@
         controller.encounters = self.encounters;
     } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
         OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
-        controller.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.f];
+        controller.view.backgroundColor = [UIColor clearColor];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.delegate = self;
         self.isTourRunning = NO;
@@ -821,6 +821,8 @@ static bool showOptions = NO;
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];
+    UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
+    typeByNameLabel.attributedText = typeByNameAttrString;
     
     UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
     if (tour.startTime != nil) {
