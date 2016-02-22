@@ -702,7 +702,7 @@ static bool showOptions = NO;
 }
 
 - (IBAction)createTour:(id)sender {
-    showOptions = NO; //!showOptions;
+    showOptions = NO;//!showOptions;
     [self.launcherButton setSelected:NO];
     self.launcherButton.hidden = YES;
     self.blurEffect.hidden = YES;
@@ -838,7 +838,7 @@ static bool showOptions = NO;
     }
     
     OTTourPoint *startPoint = tour.tourPoints.firstObject;
-    NSLog(@"start: %.4f", startPoint.longitude);
+    NSLog(@"start: %f", startPoint.longitude);
     CLLocation *loc =  [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
