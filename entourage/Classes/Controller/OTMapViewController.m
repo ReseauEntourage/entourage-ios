@@ -27,6 +27,7 @@
 
 // Service
 #import "OTTourService.h"
+#import "UIImageView+AFNetworking.h"
 
 #import "UIColor+entourage.h"
 
@@ -701,7 +702,8 @@ static bool showOptions = NO;
 }
 
 - (IBAction)createTour:(id)sender {
-    showOptions = !showOptions;
+    showOptions = NO; //!showOptions;
+    [self.launcherButton setSelected:NO];
     self.launcherButton.hidden = YES;
     self.blurEffect.hidden = YES;
     
@@ -824,32 +826,53 @@ static bool showOptions = NO;
     UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
     typeByNameLabel.attributedText = typeByNameAttrString;
     
+    // dateString - location
     UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
+    NSString *dateString = nil;
     if (tour.startTime != nil) {
         TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
         NSTimeInterval timeInterval = [tour.startTime timeIntervalSinceDate:[NSDate date]];
         [timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
-
-        
-        NSString *dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
-        timeLocationLabel.text = [NSString stringWithFormat:@"%@ ", dateString];
-    } else {
-        timeLocationLabel.text = @"";
+        dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
+        timeLocationLabel.text = dateString;
     }
     
     OTTourPoint *startPoint = tour.tourPoints.firstObject;
+    NSLog(@"start: %.4f", startPoint.longitude);
     CLLocation *loc =  [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"error: %@", error.description);
+        }
         CLPlacemark *placemark = placemarks.firstObject;
-        if (placemark.locality !=  nil)
-            timeLocationLabel.text = [timeLocationLabel.text stringByAppendingString:placemark.locality];
+        if (placemark.locality !=  nil) {
+            if (dateString != nil) {
+                timeLocationLabel.text = [NSString stringWithFormat:@"%@ - %@", dateString, placemark.locality];
+            } else {
+                timeLocationLabel.text = placemark.locality;
+            }
+        }
     }];
 
-    UIImageView *userImage = [cell viewWithTag:TAG_TOURUSER];
+    __weak UIImageView *userImage = [cell viewWithTag:TAG_TOURUSER];
     userImage.layer.cornerRadius = userImage.bounds.size.height/2.f;
     userImage.clipsToBounds = YES;
-    
+    if (tour.author.avatarUrl != nil) {
+        NSURL *url = [NSURL URLWithString:tour.author.avatarUrl];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
+        __weak UITableViewCell *weakCell = cell;
+        
+        [userImage setImageWithURLRequest:request
+                              placeholderImage:placeholderImage
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                           
+                                           userImage.image = image;
+                                           [weakCell setNeedsLayout];
+                                           
+                                       } failure:nil];
+    }
     UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
     noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
     
@@ -865,27 +888,6 @@ static bool showOptions = NO;
         [statusLabel setText:@"Je rejoins"];
         [statusLabel setTextColor:[UIColor appGreyishColor]];
     }
-//    cell.textLabel.text = tour.organizationName;
-//    NSString *type;
-//    if ([tour.tourType isEqualToString:@"barehands"]) {
-//        cell.imageView.image = [UIImage imageNamed:@"ic_bare_hands.png"];
-//        type = @"A mains nues";
-//    }
-//    else if ([tour.tourType isEqualToString:@"medical"]) {
-//        cell.imageView.image = [UIImage imageNamed:@"ic_medical.png"];
-//        type = @"Médical";
-//    }
-//    else if ([tour.tourType isEqualToString:@"alimentary"]) {
-//        cell.imageView.image = [UIImage imageNamed:@"ic_alimentary.png"];
-//        type = @"Alimentaire";
-//    }
-//    if (tour.startTime != nil) {
-//        NSString *date = [self formatDateForDisplay:tour.startTime];
-//        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", date, type];
-//    } else {
-//        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", @"--/--/---", type];
-//    }
-//    
     return cell;
 }
 
