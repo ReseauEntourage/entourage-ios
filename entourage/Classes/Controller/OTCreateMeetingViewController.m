@@ -17,6 +17,7 @@
 #import "OTPoiService.h"
 #import "OTEncounterService.h"
 #import "NSUserDefaults+OT.h"
+#import "UITextField+indentation.h"
 
 // Progress HUD
 #import "MBProgressHUD.h"
@@ -57,22 +58,23 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"DECRIVEZ LA RENCONTRE";
+    
 	OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
 	self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.firstName];
+    
+    [self.nameTextField indent];
 
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"dd/MM/yyyy"];
 
 	NSString *dateString = [formatter stringFromDate:[NSDate date]];
-
 	self.dateLabel.text = [NSString stringWithFormat:@"se sont rencontrés ici le %@", dateString];
-
-	self.messageTextView.layer.borderWidth = 1;
-	self.messageTextView.layer.borderColor = UIColor.lightGrayColor.CGColor;
-    
+    [self.messageTextView setTextContainerInset:UIEdgeInsetsMake(15, 15, 0, 0)];
+	
     self.isRecording = NO;
     
-    [self createSendButton];
+    //[self createSendButton];
     [self setupSpeechKitConnection];
 }
 
@@ -92,7 +94,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 	self.location = location;
 }
 
-- (void)sendEncounter:(id)sender {
+- (IBAction)sendEncounter:(id)sender {
     [self postEncounterWithCompletionBlock:^(OTEncounter *encounter){
         [self.encounters addObject:encounter];
         [self.delegate encounterSent:encounter];
