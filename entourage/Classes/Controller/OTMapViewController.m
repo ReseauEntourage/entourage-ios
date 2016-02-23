@@ -198,27 +198,21 @@
     self.tableView.tableFooterView = dummyView;
     self.blurEffect.hidden = YES;
     
-    //self.tableView.clipsToBounds = NO;
-    self.tableView.layer.masksToBounds = NO;
-    self.tableView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.tableView.layer.shadowOffset = CGSizeMake(0,-1);
-    self.tableView.layer.shadowOpacity = 0.5;
-    //self.tableView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:self.tableView.layer.bounds] CGPath];
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, MAPVIEW_HEIGHT)];
-    MKMapView *mapView = [[MKMapView alloc] initWithFrame:headerView.bounds];
-    [headerView addSubview:mapView];
-    [headerView sendSubviewToBack:mapView];
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156 , headerView.frame.size.width + 30, 4.0f)];
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = view.frame;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)[[UIColor appGreyishColor] CGColor], nil];
-    [headerView.layer insertSublayer:gradient atIndex:10];
-    
-    self.tableView.tableHeaderView = headerView;
-    self.tableView.delegate = self;
-    
+    //show map on table header
+//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, MAPVIEW_HEIGHT)];
+//    MKMapView *mapView = [[MKMapView alloc] initWithFrame:headerView.bounds];
+//    [headerView addSubview:mapView];
+//    [headerView sendSubviewToBack:mapView];
+//    
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156 , headerView.frame.size.width + 30, 4.0f)];
+//    CAGradientLayer *gradient = [CAGradientLayer layer];
+//    gradient.frame = view.frame;
+//    gradient.colors = [NSArray arrayWithObjects:(id)([UIColor colorWithRed:1 green:1 blue:1 alpha:.1].CGColor), (id)[[UIColor blackColor] CGColor], nil];
+//    [headerView.layer insertSublayer:gradient atIndex:10];
+//    
+//    self.tableView.tableHeaderView = headerView;
+//    self.tableView.delegate = self;
+//    
 }
 
 - (void)configureMapView {
@@ -403,7 +397,9 @@
 }
 
 - (void)sendTour {
-    [[OTTourService new] sendTour:self.tour withSuccess:^(OTTour *sentTour) {
+    [[OTTourService new]
+     sendTour:self.tour
+     withSuccess:^(OTTour *sentTour) {
         self.tour.sid = sentTour.sid;
         self.tour.distance = 0.0;
         
@@ -759,6 +755,8 @@ static bool showOptions = NO;
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
         self.mapView.frame = mapFrame;
+        self.launcherButton.hidden = YES;
+        self.mapSegmentedControl.hidden = YES;
     }];
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
 }
@@ -961,7 +959,7 @@ static bool showOptions = NO;
 
 - (void)showToursMap {
     [self.blurEffect setHidden:YES];
-    self.launcherButton.hidden = NO;
+    self.launcherButton.hidden = !self.createEncounterButton.hidden;
 
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
@@ -1004,7 +1002,7 @@ static bool showOptions = NO;
     
     [UIView animateWithDuration:0.5 animations:^(void) {
         self.mapSegmentedControl.hidden = NO;
-        self.launcherButton.hidden = NO;
+        self.launcherButton.hidden = YES;
         self.launcherView.hidden = YES;
         self.mapView.frame = mapFrame;
     }];
