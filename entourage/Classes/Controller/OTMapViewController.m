@@ -64,7 +64,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 // blur effect
 
@@ -204,6 +204,21 @@
     self.tableView.layer.shadowOffset = CGSizeMake(0,-1);
     self.tableView.layer.shadowOpacity = 0.5;
     //self.tableView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:self.tableView.layer.bounds] CGPath];
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, MAPVIEW_HEIGHT)];
+    MKMapView *mapView = [[MKMapView alloc] initWithFrame:headerView.bounds];
+    [headerView addSubview:mapView];
+    [headerView sendSubviewToBack:mapView];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156 , headerView.frame.size.width + 30, 4.0f)];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = view.frame;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)[[UIColor appGreyishColor] CGColor], nil];
+    [headerView.layer insertSublayer:gradient atIndex:10];
+    
+    self.tableView.tableHeaderView = headerView;
+    self.tableView.delegate = self;
+    
 }
 
 - (void)configureMapView {
@@ -256,7 +271,7 @@
 }
 
 - (void)setupChatsButton {
-    UIImage *chatsImage = [[UIImage imageNamed:@"chats"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *chatsImage = [[UIImage imageNamed:@"discussion"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
     UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] init];
     [chatButton setImage:chatsImage];
@@ -414,9 +429,8 @@
 }
 
 - (void)hideBlurEffect {
-    [UIView animateWithDuration:0.5 animations:^(void) {
-        [self.blurEffect setAlpha:0.0];
-    }];
+    [self.blurEffect setHidden:YES];
+    
 }
 
 /********************************************************************************/
@@ -695,7 +709,8 @@ static bool showOptions = NO;
         self.blurEffect.hidden = YES;
         [((UIButton *)sender) setSelected:NO];
     } else {
-        self.blurEffect.hidden = NO;
+        [self.blurEffect setHidden: NO];
+        [self.blurEffect setNeedsDisplay];
         [((UIButton *)sender) setSelected:YES];
     }
     showOptions = !showOptions;
@@ -738,7 +753,7 @@ static bool showOptions = NO;
 }
 
 - (IBAction)stopTour:(id)sender {
-    [self.blurEffect setHidden:NO];
+    [self.blurEffect setHidden:YES];
     [UIView animateWithDuration:0.5 animations:^(void) {
         //[self.blurEffect setAlpha:0.7];
         CGRect mapFrame = self.mapView.frame;
@@ -838,7 +853,7 @@ static bool showOptions = NO;
     }
     
     OTTourPoint *startPoint = tour.tourPoints.firstObject;
-    NSLog(@"start: %f", startPoint.longitude);
+    //NSLog(@"start: %f", startPoint.longitude);
     CLLocation *loc =  [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
@@ -894,6 +909,27 @@ static bool showOptions = NO;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    self.selectedTour = self.tableData[indexPath.row];
 //    [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+}
+
+#pragma mark - UIScrollViewDelegate
+#define kMapHeaderOffsetY 0.0
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat scrollOffset = scrollView.contentOffset.y;
+    CGRect headerFrame = self.tableView.tableHeaderView.frame;//self.mapView.frame;
+    
+    if (scrollOffset < 0)
+    {
+        headerFrame.origin.y = scrollOffset;// MIN(kMapHeaderOffsetY - ((scrollOffset / 3)), 0);
+        headerFrame.size.height = 160 - scrollOffset;
+        
+    }
+    else //scrolling up
+    {
+        headerFrame.origin.y = kMapHeaderOffsetY ;//- scrollOffset;
+    }
+    
+    self.tableView.tableHeaderView.subviews[0].frame = headerFrame;
 }
 
 /**************************************************************************************************/
