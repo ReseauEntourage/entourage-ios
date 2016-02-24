@@ -398,23 +398,24 @@
 
 - (void)sendTour {
     [[OTTourService new]
-     sendTour:self.tour
-     withSuccess:^(OTTour *sentTour) {
-        self.tour.sid = sentTour.sid;
-        self.tour.distance = 0.0;
-        
-        self.pointerPin.hidden = NO;
-        self.launcherView.hidden = YES;
-        self.stopButton.hidden = NO;
-        self.createEncounterButton.hidden = NO;
-        
-        self.seconds = 0;
-        self.locations = [NSMutableArray new];
-        self.isTourRunning = YES;
-        self.start = [NSDate date];
-    } failure:^(NSError *error) {
-        NSLog(@"%@",[error localizedDescription]);
-    }];
+         sendTour:self.tour
+         withSuccess:^(OTTour *sentTour) {
+            self.tour.sid = sentTour.sid;
+            self.tour.distance = 0.0;
+            
+            self.pointerPin.hidden = NO;
+            self.launcherView.hidden = YES;
+            self.stopButton.hidden = NO;
+            self.createEncounterButton.hidden = NO;
+            
+            self.seconds = 0;
+            self.locations = [NSMutableArray new];
+            self.isTourRunning = YES;
+            self.start = [NSDate date];
+        } failure:^(NSError *error) {
+            NSLog(@"%@",[error localizedDescription]);
+        }
+     ];
 }
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoint {
@@ -623,7 +624,7 @@
 #pragma mark - OTConfirmationViewControllerDelegate
 
 - (void)tourSent {
-    [SVProgressHUD showSuccessWithStatus:@"Maraude terminée !"];
+    [SVProgressHUD showSuccessWithStatus:@"Maraude terminée!"];
     [self hideBlurEffect];
     
     self.tour = nil;

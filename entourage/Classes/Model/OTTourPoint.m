@@ -13,6 +13,8 @@
 
 NSString *const kTourPointLatitude = @"latitude";
 NSString *const kTourPointLongitude = @"longitude";
+NSString *const kTourPointPassingTime = @"passing_time";
+
 
 @implementation OTTourPoint
 
@@ -28,6 +30,12 @@ NSString *const kTourPointLongitude = @"longitude";
         tourPoint = [[OTTourPoint alloc] init];
         tourPoint.latitude = [[dictionary numberForKey:kTourPointLatitude] doubleValue];
         tourPoint.longitude = [[dictionary numberForKey:kTourPointLongitude] doubleValue];
+        // Java format : "2015-09-09T08:56:48.065+02:00"
+        tourPoint.passingTime = [dictionary dateForKey:kTourPointPassingTime format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
+        if (tourPoint.passingTime == nil) {
+            // Objective-C format : "2015-11-20 09:28:52 +0000"
+            tourPoint.passingTime = [dictionary dateForKey:kTourPointPassingTime format:@"yyyy-MM-dd HH:mm:ss Z"];
+        }
     }
     
     return tourPoint;
@@ -39,6 +47,7 @@ NSString *const kTourPointLongitude = @"longitude";
     if (self) {
         _latitude = location.coordinate.latitude;
         _longitude = location.coordinate.longitude;
+        _passingTime = [NSDate date];
     }
     return self;
 }
@@ -49,6 +58,8 @@ NSString *const kTourPointLongitude = @"longitude";
     
     dictionary[kTourPointLatitude] = [NSNumber numberWithDouble:self.latitude];
     dictionary[kTourPointLongitude] = [NSNumber numberWithDouble:self.longitude];
+    dictionary[kTourPointPassingTime] = self.passingTime;
+#warning passing time
     
     return dictionary;
 }
