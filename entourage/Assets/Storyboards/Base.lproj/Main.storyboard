@@ -771,7 +771,7 @@ Un mail récapitulatif te sera envoyé.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdb-7x-qlW">
-                                <rect key="frame" x="253" y="440" width="48" height="48"/>
+                                <rect key="frame" x="257" y="440" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="64J-Nf-Ayn"/>
                                     <constraint firstAttribute="height" constant="48" id="hQC-GI-ha6"/>
@@ -783,7 +783,7 @@ Un mail récapitulatif te sera envoyé.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qlo-Hm-BSG">
-                                <rect key="frame" x="246" y="496" width="62" height="62"/>
+                                <rect key="frame" x="250" y="496" width="62" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="62" id="AKD-6H-Og5"/>
                                     <constraint firstAttribute="height" constant="62" id="BKb-de-NE6"/>
@@ -794,7 +794,7 @@ Un mail récapitulatif te sera envoyé.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une rencontre" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhw-r6-g45">
-                                <rect key="frame" x="35" y="453" width="210" height="21"/>
+                                <rect key="frame" x="39" y="453" width="210" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="1fJ-JE-qCM"/>
                                     <constraint firstAttribute="height" constant="21" id="Qzp-ey-Od6"/>
@@ -806,14 +806,18 @@ Un mail récapitulatif te sera envoyé.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="qlo-Hm-BSG" firstAttribute="trailing" secondItem="yHN-0I-uCY" secondAttribute="trailingMargin" constant="4" id="IeK-Xb-s8t"/>
-                            <constraint firstItem="qlo-Hm-BSG" firstAttribute="centerX" secondItem="xdb-7x-qlW" secondAttribute="centerX" id="U7Y-Hr-QVH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xdb-7x-qlW" secondAttribute="trailing" constant="-1" id="5C3-4r-lLf"/>
+                            <constraint firstItem="qlo-Hm-BSG" firstAttribute="trailing" secondItem="yHN-0I-uCY" secondAttribute="trailingMargin" constant="8" id="IeK-Xb-s8t"/>
                             <constraint firstItem="xdb-7x-qlW" firstAttribute="centerY" secondItem="zhw-r6-g45" secondAttribute="centerY" id="XlL-ty-XOC"/>
                             <constraint firstItem="Fqo-er-23H" firstAttribute="top" secondItem="qlo-Hm-BSG" secondAttribute="bottom" constant="10" id="qsf-p6-3kX"/>
                             <constraint firstItem="qlo-Hm-BSG" firstAttribute="top" secondItem="xdb-7x-qlW" secondAttribute="bottom" constant="8" id="sLn-57-ZwP"/>
                             <constraint firstItem="xdb-7x-qlW" firstAttribute="leading" secondItem="zhw-r6-g45" secondAttribute="trailing" constant="8" id="vUM-it-FBj"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="createButton" destination="xdb-7x-qlW" id="Dh6-gc-hr9"/>
+                        <outlet property="createLabel" destination="zhw-r6-g45" id="BWL-Kv-G8m"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66X-IN-NwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

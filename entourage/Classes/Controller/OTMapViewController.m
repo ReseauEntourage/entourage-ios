@@ -92,6 +92,7 @@
 
 // tour
 
+@property (nonatomic, assign) CGPoint mapPoint;
 @property BOOL isTourRunning;
 @property int seconds;
 @property NSString *currentTourType;
@@ -226,16 +227,22 @@
     self.mapView.delegate = self;
     [self zoomToCurrentLocation:nil];
     
-    UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showCreateTourOverlay:)];
+    UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
     [self.mapView addGestureRecognizer:longPressMapGesture];
     
     UITapGestureRecognizer *hideTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideCreateTourOverlay)];
     [self.blurEffect addGestureRecognizer:hideTapGesture];
 }
 
-- (void)showCreateTourOverlay:(UILongPressGestureRecognizer *)longPressGesture {
+- (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
     CGPoint touchPoint = [longPressGesture locationInView:self.mapView];
-    [self showMapOverlayToCreateTourAtPoint:touchPoint];
+
+    if (_isTourRunning) {
+        self.mapPoint = touchPoint;
+        [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+    } else {
+        [self showMapOverlayToCreateTourAtPoint:touchPoint];
+    }
 }
 
 - (void)hideCreateTourOverlay {
@@ -698,6 +705,9 @@
         controller.view.backgroundColor = [UIColor colorWithWhite:1.f alpha:.88f];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.tourOptionsDelegate = self;
+        if (!CGPointEqualToPoint(self.mapPoint, CGPointZero) ) {
+            controller.c2aPoint = self.mapPoint;
+        }
     }
 }
 

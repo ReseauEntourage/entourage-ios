@@ -18,5 +18,6 @@
 @interface OTTourOptionsViewController : UIViewController
 
 @property(nonatomic, weak) id<OTTourOptionsDelegate> tourOptionsDelegate;
+@property(nonatomic, assign) CGPoint c2aPoint;
 
 @end

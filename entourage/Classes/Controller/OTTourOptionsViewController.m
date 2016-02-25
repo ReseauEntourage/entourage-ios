@@ -10,6 +10,9 @@
 
 @interface OTTourOptionsViewController ()
 
+@property (nonatomic, weak) IBOutlet UILabel *createLabel;
+@property (nonatomic, weak) IBOutlet UIButton *createButton;
+
 @end
 
 @implementation OTTourOptionsViewController
@@ -17,6 +20,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    if (!CGPointEqualToPoint(self.c2aPoint, CGPointZero)) {
+        self.createLabel.hidden = YES;
+        self.createButton.center = self.c2aPoint;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
