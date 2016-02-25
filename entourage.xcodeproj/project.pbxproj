@@ -1131,7 +1131,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "94533c90-4346-4acd-966d-7d4ed45c6b3b";
+				PROVISIONING_PROFILE = "818e0201-cc63-44f9-b9f3-84b5e2f9274b";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
