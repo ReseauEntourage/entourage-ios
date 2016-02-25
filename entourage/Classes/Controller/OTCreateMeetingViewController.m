@@ -103,14 +103,15 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 }
 
 - (void)postEncounterWithCompletionBlock:(void (^)(OTEncounter *))success {
-	OTEncounter *encounter = [OTEncounter new];
+    [SVProgressHUD show];
+    
+    OTEncounter *encounter = [OTEncounter new];
 	encounter.date = [NSDate date];
 	encounter.message = self.messageTextView.text;
 	encounter.streetPersonName =  self.nameTextField.text;
 	encounter.latitude = self.location.latitude;
 	encounter.longitude = self.location.longitude;
     
-    [SVProgressHUD show];
     [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId
                                 withSuccess:^(OTEncounter *sentEncounter) {
                                     [SVProgressHUD showSuccessWithStatus:@"Rencontre créée"];

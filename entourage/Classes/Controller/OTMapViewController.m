@@ -12,6 +12,7 @@
 #import "OTCreateMeetingViewController.h"
 #import "OTToursTableViewController.h"
 #import "OTCalloutViewController.h"
+#import "OTTourOptionsViewController.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -64,7 +65,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, OTTourOptionsDelegate>
 
 // blur effect
 
@@ -650,8 +651,24 @@
 #pragma mark - OTCreateMeetingViewControllerDelegate
 
 - (void)encounterSent:(OTEncounter *)encounter {
-    [self feedMapViewWithEncounters];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self feedMapViewWithEncounters];
+    }];
 }
+
+/********************************************************************************/
+#pragma mark - OTTourOptionsDelegate
+
+- (void)createEncounter {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self performSegueWithIdentifier:@"OTCreateMeeting" sender:nil];
+    }];
+}
+
+- (void)dismissTourOptions {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 /********************************************************************************/
 #pragma mark - Segue
@@ -676,6 +693,11 @@
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
         [controller configureWithTours:self.closeTours];
+    } else if ([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
+        OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
+        controller.view.backgroundColor = [UIColor colorWithWhite:1.f alpha:.88f];
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.tourOptionsDelegate = self;
     }
 }
 

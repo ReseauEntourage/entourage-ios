@@ -37,6 +37,7 @@
 		1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */; };
 		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
+		4508AE311C7F924B00EDAC1B /* OTTourOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */; };
 		452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */; };
 		452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452FA6321C6BCE8500D5D56D /* OTRightsViewController.m */; };
 		454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */; };
@@ -162,6 +163,8 @@
 		1DF661D919E98AAD00045310 /* OTCreateMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCreateMeetingViewController.h; sourceTree = "<group>"; };
 		1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCreateMeetingViewController.m; sourceTree = "<group>"; };
 		2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4508AE2F1C7F924B00EDAC1B /* OTTourOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourOptionsViewController.h; sourceTree = "<group>"; };
+		4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourOptionsViewController.m; sourceTree = "<group>"; };
 		452FA62E1C6A50BF00D5D56D /* UIStoryboard+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+entourage.h"; sourceTree = "<group>"; };
 		452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+entourage.m"; sourceTree = "<group>"; };
 		452FA6311C6BCE8500D5D56D /* OTRightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRightsViewController.h; sourceTree = "<group>"; };
@@ -642,6 +645,8 @@
 				1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */,
 				0A213C471BA0306300202D7B /* OTGuideViewController.h */,
 				0A213C481BA0306300202D7B /* OTGuideViewController.m */,
+				4508AE2F1C7F924B00EDAC1B /* OTTourOptionsViewController.h */,
+				4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -958,6 +963,7 @@
 				454C8F501C4F4C45001362B2 /* UITextField+indentation.m in Sources */,
 				1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
+				4508AE311C7F924B00EDAC1B /* OTTourOptionsViewController.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,
 				4559405E1C5F6D480099A8EE /* OTRequestOperationManager.m in Sources */,
 				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,
