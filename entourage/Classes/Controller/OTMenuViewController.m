@@ -15,6 +15,8 @@
 #import "UIViewController+menu.h"
 
 #import "NSUserDefaults+OT.h"
+#import "UIImageView+AFNetworking.h"
+
 
 // Model
 #import "OTMenuItem.h"
@@ -41,6 +43,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 // UI
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -69,6 +72,22 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
     [self createBackFrontMenuButton];
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    if (self.currentUser.avatarURL) {
+        NSURL *url = [NSURL URLWithString:self.currentUser.avatarURL];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        
+        [_avatarImageView setImageWithURLRequest:request
+                         placeholderImage:[UIImage imageNamed:@"user"]
+                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                      
+                                      _avatarImageView.image = image;
+                                      [_avatarImageView setNeedsLayout];
+                                      
+                                  } failure:nil];
+
+    }
+    
 }
 
 /**************************************************************************************************/

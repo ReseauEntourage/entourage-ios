@@ -47,12 +47,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="Qcu-6D-p8T">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="Qcu-6D-p8T">
                                 <rect key="frame" x="111" y="96" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="c4b-4p-dYN"/>
                                     <constraint firstAttribute="width" constant="100" id="p9L-kW-3bX"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="52" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EiD-PN-iyE">
                                 <rect key="frame" x="-4" y="258" width="328" height="310"/>
@@ -151,6 +156,7 @@
                     <navigationItem key="navigationItem" id="a9Y-2c-snz"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="avatarImageView" destination="Qcu-6D-p8T" id="sDH-Fl-2de"/>
                         <outlet property="nameLabel" destination="gZg-OL-qCe" id="zeh-G7-D9m"/>
                         <outlet property="tableView" destination="EiD-PN-iyE" id="CgG-Ii-UXP"/>
                         <segue destination="UcL-62-xea" kind="custom" identifier="segueMenuIdentifierForMap" customClass="SWRevealViewControllerSeguePushController" id="xSV-rR-wZy"/>
@@ -160,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tAy-vt-yhu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="767" y="-766"/>
+            <point key="canvasLocation" x="827" y="-766"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lst-Gh-Xmp">
@@ -1869,7 +1875,7 @@ Un mail récapitulatif te sera envoyé.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7RG-xb-8oS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="174" y="751"/>
+            <point key="canvasLocation" x="188" y="765"/>
         </scene>
         <!--Callout View Controller-->
         <scene sceneID="Xvu-Ok-e3n">
@@ -2037,6 +2043,6 @@ Un mail récapitulatif te sera envoyé.</string>
         <image name="walkActive" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Dfo-uz-6se"/>
+        <segue reference="xSV-rR-wZy"/>
     </inferredMetricsTieBreakers>
 </document>

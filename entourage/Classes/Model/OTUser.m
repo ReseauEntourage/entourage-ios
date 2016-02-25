@@ -14,6 +14,7 @@ NSString *const kKeySid = @"id";
 NSString *const kKeyEmail = @"email";
 NSString *const kKeyFirstname = @"first_name";
 NSString *const kKeyLastname = @"last_name";
+NSString *const kKeyAvatarURL = @"avatar_url";
 NSString *const kKeyToken = @"token";
 NSString *const kKeyStats = @"stats";
 NSString *const kKeyTourCount = @"tour_count";
@@ -29,6 +30,7 @@ NSString *const kKeyOrganization =@"organization";
 	{
 		_sid = [dictionary numberForKey:kKeySid];
 		_email = [dictionary stringForKey:kKeyEmail];
+        _avatarURL = [dictionary stringForKey:kKeyAvatarURL];
         _firstName = [dictionary stringForKey:kKeyFirstname];
         _lastName = [dictionary stringForKey:kKeyLastname];
 		_token = [dictionary stringForKey:kKeyToken];
@@ -43,6 +45,7 @@ NSString *const kKeyOrganization =@"organization";
 {
 	[encoder encodeObject:self.sid forKey:kKeySid];
 	[encoder encodeObject:self.email forKey:kKeyEmail];
+    [encoder encodeObject:self.avatarURL forKey:kKeyAvatarURL];
     [encoder encodeObject:self.firstName forKey:kKeyFirstname];
     [encoder encodeObject:self.lastName forKey:kKeyLastname];
 	[encoder encodeObject:self.token forKey:kKeyToken];
@@ -57,6 +60,7 @@ NSString *const kKeyOrganization =@"organization";
 	{
 		self.sid = [decoder decodeObjectForKey:kKeySid];
 		self.email = [decoder decodeObjectForKey:kKeyEmail];
+        self.avatarURL = [decoder decodeObjectForKey:kKeyAvatarURL];
         self.firstName = [decoder decodeObjectForKey:kKeyFirstname];
         self.lastName = [decoder decodeObjectForKey:kKeyLastname];
         self.token = [decoder decodeObjectForKey:kKeyToken];
