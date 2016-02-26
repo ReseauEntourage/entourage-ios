@@ -27,7 +27,8 @@
 		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [requestManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [requestManager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-        //[requestManager.requestSerializer setValue:@"(required, string, `b05e6d0d2be8`)" forHTTPHeaderField:@"X-API-Key"];
+        //TODO add this to header: [requestManager.requestSerializer setValue:@"(required, string, `b05e6d0d2be8`)" forHTTPHeaderField:@"X-API-KEY"];
+				//TODO api key should be changed after each release
 	}
 
 	return requestManager;
