@@ -200,7 +200,7 @@
     self.tableView.tableFooterView = dummyView;
     self.blurEffect.hidden = YES;
     
-    //show map on table header
+    //TODO: show map on table header
 //    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, MAPVIEW_HEIGHT)];
 //    MKMapView *mapView = [[MKMapView alloc] initWithFrame:headerView.bounds];
 //    [headerView addSubview:mapView];
@@ -731,23 +731,20 @@
 	[self.mapView setRegion:region animated:YES];
 }
 
-static bool showOptions = NO;
-- (IBAction)launcherTour:(id)sender {
+static bool isShowingOptions = NO;
+- (IBAction)launcherTour:(UIButton *)sender {
     
-    if (showOptions) {
+    if (isShowingOptions) {
         self.blurEffect.hidden = YES;
-        [((UIButton *)sender) setSelected:NO];
     } else {
         [self showMapOverlayToCreateTour];
-//        [self.blurEffect setHidden: NO];
-//        [self.blurEffect setNeedsDisplay];
-        [((UIButton *)sender) setSelected:YES];
     }
-    showOptions = !showOptions;
+    isShowingOptions = !isShowingOptions;
+    [sender setSelected:!sender.isSelected];
 }
 
 - (IBAction)createTour:(id)sender {
-    showOptions = NO;//!showOptions;
+    isShowingOptions = NO;
     [self.launcherButton setSelected:NO];
     self.launcherButton.hidden = YES;
     self.blurEffect.hidden = YES;
@@ -885,7 +882,6 @@ static bool showOptions = NO;
     }
     
     OTTourPoint *startPoint = tour.tourPoints.firstObject;
-    //NSLog(@"start: %f", startPoint.longitude);
     CLLocation *loc =  [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
@@ -983,7 +979,6 @@ static bool showOptions = NO;
     self.stopButton.hidden = YES;
 
     [UIView animateWithDuration:0.5 animations:^(void) {
-//        [self.blurEffect setAlpha:0.7];
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
         self.mapView.frame = mapFrame;
@@ -999,8 +994,6 @@ static bool showOptions = NO;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
     [self.mapSegmentedControl setSelectedSegmentIndex:0];
     [UIView animateWithDuration:0.5 animations:^(void) {
-        //self.launcherButton.hidden = YES;
-        //self.launcherView.hidden = NO;
         self.mapView.frame = mapFrame;
         self.mapSegmentedControl.hidden = NO;
     }];
@@ -1022,11 +1015,8 @@ static bool showOptions = NO;
     self.createTourLabel.hidden = NO;
     [self.createTourOnBlurButton setNeedsLayout];
     CGPoint center = CGPointMake(self.launcherButton.center.x, self.createTourLabel.center.y);
-//    center.y -= 55;
-//    center = CGPointMake(100, 200);
     self.createTourOnBlurButton.center = center;
     [self.createTourOnBlurButton setNeedsDisplay];
-    //[self.createTourOnBlurButton setNeedsUpdateConstraints];
 }
 
 
