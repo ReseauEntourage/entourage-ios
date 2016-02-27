@@ -738,8 +738,9 @@ static bool showOptions = NO;
         self.blurEffect.hidden = YES;
         [((UIButton *)sender) setSelected:NO];
     } else {
-        [self.blurEffect setHidden: NO];
-        [self.blurEffect setNeedsDisplay];
+        [self showMapOverlayToCreateTour];
+//        [self.blurEffect setHidden: NO];
+//        [self.blurEffect setNeedsDisplay];
         [((UIButton *)sender) setSelected:YES];
     }
     showOptions = !showOptions;
@@ -1013,6 +1014,21 @@ static bool showOptions = NO;
     self.createTourLabel.hidden = YES;
     self.createTourOnBlurButton.center = point;
 }
+
+#pragma mark 6.4 Tours "+" press
+- (void)showMapOverlayToCreateTour {
+    [self.blurEffect setHidden:NO];
+    self.launcherButton.hidden = NO;
+    self.createTourLabel.hidden = NO;
+    [self.createTourOnBlurButton setNeedsLayout];
+    CGPoint center = CGPointMake(self.launcherButton.center.x, self.createTourLabel.center.y);
+//    center.y -= 55;
+//    center = CGPointMake(100, 200);
+    self.createTourOnBlurButton.center = center;
+    [self.createTourOnBlurButton setNeedsDisplay];
+    //[self.createTourOnBlurButton setNeedsUpdateConstraints];
+}
+
 
 #pragma mark 15.1 New Tour - start
 - (void)showNewTourStart {
