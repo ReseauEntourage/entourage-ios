@@ -1699,8 +1699,8 @@ Un mail récapitulatif te sera envoyé.</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="## &lt;Nom&gt; et" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDZ-i8-4OP">
-                                <rect key="frame" x="20" y="20" width="280" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="## &lt;Nom&gt; et" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDZ-i8-4OP">
+                                <rect key="frame" x="20" y="40" width="280" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="VOj-DB-hRA"/>
                                 </constraints>
@@ -1708,8 +1708,8 @@ Un mail récapitulatif te sera envoyé.</string>
                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom de la personne" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a5N-Kb-CX4">
-                                <rect key="frame" x="0.0" y="51" width="320" height="48"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom de la personne" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a5N-Kb-CX4">
+                                <rect key="frame" x="0.0" y="71" width="320" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="1EM-6H-t6r"/>
@@ -1717,8 +1717,8 @@ Un mail récapitulatif te sera envoyé.</string>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="## se sont rencontrés ici, le &lt;date&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uf-2Y-z5H">
-                                <rect key="frame" x="20" y="107" width="280" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="## se sont rencontrés ici, le &lt;date&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uf-2Y-z5H">
+                                <rect key="frame" x="20" y="127" width="280" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="nSc-AR-Iw4"/>
                                 </constraints>
@@ -1726,8 +1726,8 @@ Un mail récapitulatif te sera envoyé.</string>
                                 <color key="textColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
-                                <rect key="frame" x="-4" y="136" width="328" height="184"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-X5-VCO">
+                                <rect key="frame" x="-4" y="156" width="328" height="184"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="184" id="NgI-Bh-n6k"/>
@@ -1735,8 +1735,8 @@ Un mail récapitulatif te sera envoyé.</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qot-mm-bch">
-                                <rect key="frame" x="286" y="152" width="26" height="26"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qot-mm-bch">
+                                <rect key="frame" x="286" y="172" width="26" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="HSi-zf-52z"/>
                                     <constraint firstAttribute="width" constant="26" id="gRR-q1-r6f"/>
@@ -1746,11 +1746,11 @@ Un mail récapitulatif te sera envoyé.</string>
                                     <action selector="startStopRecording:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="UR0-IC-pHK"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Qvq-t4-y7g">
-                                <rect key="frame" x="150" y="328" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Qvq-t4-y7g">
+                                <rect key="frame" x="150" y="348" width="20" height="20"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8V-gv-7gG">
-                                <rect key="frame" x="0.0" y="511" width="320" height="57"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8V-gv-7gG">
+                                <rect key="frame" x="-4" y="511" width="328" height="57"/>
                                 <color key="backgroundColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="TvT-EC-w3Z"/>

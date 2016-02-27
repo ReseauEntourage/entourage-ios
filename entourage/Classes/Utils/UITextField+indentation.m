@@ -14,7 +14,12 @@ static int const kPadding = 10;
 
 - (void)indent
 {
-    UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kPadding, kPadding)];
+    [self indentWithPadding:kPadding];
+}
+
+- (void)indentWithPadding:(CGFloat)padding
+{
+    UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, padding, padding)];
     [self setLeftViewMode:UITextFieldViewModeAlways];
     [self setLeftView:spacerView];
 }

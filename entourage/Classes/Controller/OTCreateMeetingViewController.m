@@ -26,6 +26,9 @@
 // Frameworks
 #import <Social/Social.h>
 
+
+#define PADDING 20.0f
+
 @interface OTCreateMeetingViewController ()
 
 @property (strong, nonatomic) NSNumber *currentTourId;
@@ -60,26 +63,28 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
     [super viewDidLoad];
     self.title = @"DECRIVEZ LA RENCONTRE";
     
-	OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-	self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.firstName];
-    
-    [self.nameTextField indent];
-
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"dd/MM/yyyy"];
-
-	NSString *dateString = [formatter stringFromDate:[NSDate date]];
-	self.dateLabel.text = [NSString stringWithFormat:@"se sont rencontrés ici le %@", dateString];
-    [self.messageTextView setTextContainerInset:UIEdgeInsetsMake(15, 15, 0, 0)];
-	
     self.isRecording = NO;
-    
-    //[self createSendButton];
     [self setupSpeechKitConnection];
+    
+    [self setupUI];
 }
 
 /**************************************************************************************************/
 #pragma mark - Private methods
+
+- (void)setupUI {
+    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.firstName];
+    
+    [self.nameTextField indentWithPadding:PADDING];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
+    
+    NSString *dateString = [formatter stringFromDate:[NSDate date]];
+    self.dateLabel.text = [NSString stringWithFormat:@"se sont rencontrés ici le %@", dateString];
+    [self.messageTextView setTextContainerInset:UIEdgeInsetsMake(PADDING, PADDING, 0, 0)];
+}
 
 - (void)createSendButton {
 	UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];

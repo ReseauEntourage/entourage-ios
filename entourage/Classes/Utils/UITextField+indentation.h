@@ -11,6 +11,7 @@
 @interface UITextField (indentation)
 
 - (void)indent;
+- (void)indentWithPadding:(CGFloat)padding;
 - (void)indentRight;
 
 @end
