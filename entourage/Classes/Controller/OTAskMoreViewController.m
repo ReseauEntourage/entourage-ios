@@ -14,6 +14,7 @@
 // Helper
 #import "NSString+Validators.h"
 #import "NSDictionary+Parsing.h"
+#import "UIViewController+menu.h"
 
 // View
 #import "SVProgressHUD.h"
@@ -98,18 +99,5 @@
     }
 }
 
-#pragma mark - Private
-- (void)setupCloseModal {
-    UIImage *menuImage = [[UIImage imageNamed:@"close.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
-    [menuButton setImage:menuImage];
-    [menuButton setTarget:self];
-    [menuButton setAction:@selector(closeModal:)];
-    
-    [self.navigationItem setLeftBarButtonItem:menuButton];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-
-}
 
 @end

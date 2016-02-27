@@ -28,7 +28,6 @@
         //[self.createButton setCenter:self.c2aPoint];
         CGPoint initial = self.createButton.center;
 //        self.createButton.transform = CGAffineTransformTranslate(self.createButton.transform, - initial.x,  - initial.y);
-//
 //        self.createButton.transform = CGAffineTransformTranslate(self.createButton.transform, self.c2aPoint.x, self.c2aPoint.y);
         [UIView performWithoutAnimation:^{
             self.createButton.center = self.c2aPoint;
@@ -44,9 +43,7 @@
 - (IBAction)doCreateEncounter:(id)sender {
     if ([self.tourOptionsDelegate respondsToSelector:@selector(createEncounter)]) {
         [self.tourOptionsDelegate performSelector:@selector(createEncounter) withObject:nil];
-        
     }
-    
 }
 
 

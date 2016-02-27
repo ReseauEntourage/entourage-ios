@@ -18,6 +18,8 @@
 #import "OTEncounterService.h"
 #import "NSUserDefaults+OT.h"
 #import "UITextField+indentation.h"
+#import "UIViewController+menu.h"
+#import "UIColor+entourage.h"
 
 // Progress HUD
 #import "MBProgressHUD.h"
@@ -29,7 +31,7 @@
 
 #define PADDING 20.0f
 
-@interface OTCreateMeetingViewController ()
+@interface OTCreateMeetingViewController () <UITextViewDelegate>
 
 @property (strong, nonatomic) NSNumber *currentTourId;
 @property (strong, nonatomic) NSString *lmPath;
@@ -51,6 +53,7 @@
 
 /**************************************************************************************************/
 #pragma mark - Constants
+#warning check keys with Francois: getting error [NMSP_ERROR] check status Error: 696e6974 init -> line: 485
 
 const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0xc2, 0xcd, 0x4a, 0x31, 0x70, 0x9f, 0x4a, 0x34, 0x5d, 0x4c, 0xc0, 0x2c, 0xc1, 0xce, 0x26, 0xda, 0xdb, 0xd7, 0x3b, 0x28, 0x9c, 0x58, 0x0c, 0xb8, 0xc7, 0x4a, 0x37, 0x58, 0x42, 0x36, 0x86, 0x04, 0x03, 0xd1, 0x35, 0x74, 0x70, 0x80, 0xa8, 0xcd, 0xcc, 0x69, 0xfa, 0x8e, 0x37, 0x20, 0x68, 0x12, 0xf7, 0xa4, 0x3a, 0x94, 0xfc, 0x47, 0x4c, 0xc3, 0x91, 0x83, 0x1c};
 
@@ -73,6 +76,9 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 #pragma mark - Private methods
 
 - (void)setupUI {
+    [self setupCloseModal];
+
+    
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.firstName];
     
@@ -84,14 +90,10 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     self.dateLabel.text = [NSString stringWithFormat:@"se sont rencontrés ici le %@", dateString];
     [self.messageTextView setTextContainerInset:UIEdgeInsetsMake(PADDING, PADDING, 0, 0)];
-}
+    
+    self.messageTextView.text = @"Détaillez votre rencontre";
+    self.messageTextView.textColor = [UIColor lightGrayColor];
 
-- (void)createSendButton {
-	UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
-    [menuButton setTarget:self];
-	[menuButton setTitle:NSLocalizedString(@"button_validate", @"")];
-	[menuButton setAction:@selector(sendEncounter:)];
-	[self.navigationItem setRightBarButtonItem:menuButton];
 }
 
 - (void)configureWithTourId:(NSNumber *)currentTourId andLocation:(CLLocationCoordinate2D)location {
@@ -174,7 +176,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 }
 
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion {
-    NSLog(@"%@", @"Finish with error");
+    NSLog( @"Finish with error %@. Suggestion: %@", error.description, suggestion);
 }
 
 - (void)recognizerDidBeginRecording:(SKRecognizer *)recognizer {
@@ -193,6 +195,26 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
     self.isRecording = NO;
     [self.recordLabel setText:@"Appuyez pour dicter un message"];
     [self.recordingLoader setHidden:YES];
+}
+
+/**************************************************************************************************/
+#pragma mark - UITextViewDelegate
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@"Détaillez votre rencontre"]) {
+        self.messageTextView.text = @"";
+        self.messageTextView.textColor = [UIColor blackColor];
+    }
+    [self.messageTextView becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([self.messageTextView.text isEqualToString:@""]) {
+        self.messageTextView.text = @"Détaillez votre rencontre";
+        self.messageTextView.textColor = [UIColor appGreyishColor];
+    }
+    [self.messageTextView resignFirstResponder];
 }
 
 @end

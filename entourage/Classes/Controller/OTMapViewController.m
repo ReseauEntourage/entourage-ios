@@ -682,7 +682,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"OTCreateMeeting"]) {
-        OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *)segue.destinationViewController;
+        UINavigationController *navController = segue.destinationViewController;
+        OTCreateMeetingViewController *controller = (OTCreateMeetingViewController*)navController.topViewController;
         controller.delegate = self;
         [controller configureWithTourId:self.tour.sid andLocation:self.mapView.region.center];
         controller.encounters = self.encounters;
