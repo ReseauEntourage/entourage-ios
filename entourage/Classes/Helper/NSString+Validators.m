@@ -16,10 +16,13 @@
 
 - (BOOL)isValidPhoneNumber
 {
+    NSString *regexCA = @"^(\\+|00)1\\s?|)\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+    NSString *regexFR = @"^((\\+|00)33\\s?|0)[67](\\s?\\d{2}){4}$";
+    
 #if DEBUG
     return YES;
 #endif
-    return [self matchesRegularExpression:@"^((\\+|00)33\\s?|0)[67](\\s?\\d{2}){4}$"];
+    return [self matchesRegularExpression:regexFR] || [self matchesRegularExpression:regexCA];
 }
 
 - (BOOL)isValidCode {
