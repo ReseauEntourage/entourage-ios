@@ -56,7 +56,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self createMenuButton];
+    //[self createMenuButton];
+    [self setupCloseModal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

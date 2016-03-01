@@ -13,6 +13,8 @@
 #import "OTToursTableViewController.h"
 #import "OTCalloutViewController.h"
 #import "OTTourOptionsViewController.h"
+#import "OTTourJoinRequestViewController.h"
+#import "OTTourViewController.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -65,7 +67,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, OTTourOptionsDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate>
 
 // blur effect
 
@@ -102,6 +104,7 @@
 @property (nonatomic, strong) NSMutableArray *pointsToSend;
 @property (nonatomic, strong) NSMutableArray *closeTours;
 @property (nonatomic, strong) NSDate *start;
+@property (nonatomic, strong) OTTour *selectedTour;
 
 // tour lifecycle
 
@@ -676,6 +679,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+/********************************************************************************/
+#pragma mark - OTTourOptionsDelegate
+
+- (void)dismissTourJoinRequestController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 /********************************************************************************/
 #pragma mark - Segue
@@ -696,11 +707,10 @@
         [controller configureWithTour:self.tour
                    andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]
                           andDuration:[[NSDate date] timeIntervalSinceDate:self.start]];
-    } else if ([segue.identifier isEqualToString:@"OTCloseTours"]) {
-        OTToursTableViewController *controller = (OTToursTableViewController *)segue.destinationViewController;
-        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-        [controller configureWithTours:self.closeTours];
+    } else if ([segue.identifier isEqualToString:@"OTSelectedTour"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTTourViewController *controller = (OTTourViewController *)navController.topViewController;;
+        [controller configureWithTour:self.selectedTour];
     } else if ([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
         OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
         controller.view.backgroundColor = [UIColor colorWithWhite:1.f alpha:.88f];
@@ -709,6 +719,12 @@
         if (!CGPointEqualToPoint(self.mapPoint, CGPointZero) ) {
             controller.c2aPoint = self.mapPoint;
         }
+    } else if ([segue.identifier isEqualToString:@"OTTourJoinRequestSegue"]) {
+        OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
+        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.tourJoinRequestDelegate = self;
+       
     }
 }
 
@@ -936,8 +952,8 @@ static bool isShowingOptions = NO;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    self.selectedTour = self.tableData[indexPath.row];
-//    [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+    self.selectedTour = self.tours[indexPath.row];
+    [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
 }
 
 #pragma mark - UIScrollViewDelegate

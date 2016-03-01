@@ -10,6 +10,8 @@
 #import "OTTour.h"
 #import "OTTourPoint.h"
 #import "OTOrganization.h"
+#import "UIViewController+menu.h"
+
 
 @interface OTTourViewController ()
 
@@ -34,6 +36,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"MARAUDE";
+    [self setupCloseModal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
