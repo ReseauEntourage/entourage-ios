@@ -11,5 +11,6 @@
 @interface UIView (entourage)
 
 - (void)setupRoundedCorners;
+- (void)showRedBorders;
 
 @end

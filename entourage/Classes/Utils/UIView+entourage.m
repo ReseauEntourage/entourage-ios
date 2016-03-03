@@ -16,4 +16,10 @@ static const CGFloat kRadius = 4.f;
     self.layer.cornerRadius = kRadius;
 }
 
+- (void)showRedBorders {
+    self.layer.borderWidth = 2.f;
+    self.layer.borderColor = [UIColor redColor].CGColor;
+}
+
+
 @end

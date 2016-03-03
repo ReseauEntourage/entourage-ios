@@ -15,6 +15,7 @@
 #import "OTTourOptionsViewController.h"
 #import "OTTourJoinRequestViewController.h"
 #import "OTTourViewController.h"
+#import "UIView+entourage.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -45,7 +46,6 @@
 #import "KPAnnotation.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "TTTLocationFormatter.h"
-
 
 
 // User
@@ -80,7 +80,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapSegmentedControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, strong) NSMapTable *drawnTours;
 @property (weak, nonatomic) IBOutlet UIImageView *pointerPin;
@@ -147,7 +147,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
 
 	[self configureNavigationBar];
-    [self configureMapView];
+    //[self configureMapView];
     self.mapSegmentedControl.layer.cornerRadius = 4;
     [self configureTableView];
 }
@@ -197,27 +197,40 @@
 }
 
 - (void)configureTableView {
-    //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 90, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -90, 0);
     CGFloat dummyViewHeight = 90;
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(-10, 0, self.tableView.bounds.size.width, dummyViewHeight)];
     self.tableView.tableFooterView = dummyView;
     self.blurEffect.hidden = YES;
     
     //TODO: show map on table header
-//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, MAPVIEW_HEIGHT)];
-//    MKMapView *mapView = [[MKMapView alloc] initWithFrame:headerView.bounds];
-//    [headerView addSubview:mapView];
-//    [headerView sendSubviewToBack:mapView];
-//    
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156 , headerView.frame.size.width + 30, 4.0f)];
-//    CAGradientLayer *gradient = [CAGradientLayer layer];
-//    gradient.frame = view.frame;
-//    gradient.colors = [NSArray arrayWithObjects:(id)([UIColor colorWithRed:1 green:1 blue:1 alpha:.1].CGColor), (id)[[UIColor blackColor] CGColor], nil];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width + 8, MAPVIEW_HEIGHT)];
+    self.mapView = [[MKMapView alloc] initWithFrame:headerView.bounds];
+    [headerView addSubview:self.mapView];
+    [headerView sendSubviewToBack:self.mapView];
+    [self configureMapView];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156 , headerView.frame.size.width + 30, 4.0f)];
+    view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = view.frame;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)([UIColor colorWithRed:0 green:0 blue:0 alpha:.1].CGColor),  nil];
 //    [headerView.layer insertSublayer:gradient atIndex:10];
-//    
-//    self.tableView.tableHeaderView = headerView;
-//    self.tableView.delegate = self;
-//    
+    
+    //[headerView addSubview:view];
+//    [headerView addConstraint:[NSLayoutConstraint constraintWithItem:view
+//                                                          attribute:NSLayoutAttributeBottom
+//                                                          relatedBy:NSLayoutRelationEqual
+//                                                             toItem:headerView
+//                                                          attribute:NSLayoutAttributeBottom
+//                                                         multiplier:1.0
+//                                                           constant:0.0]];
+    
+    
+    self.mapView.center = headerView.center;
+    self.tableView.tableHeaderView = headerView;
+    self.tableView.delegate = self;
+    
 }
 
 - (void)configureMapView {
@@ -456,7 +469,7 @@
             if (!annotationView) {
                 annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEncounterClusterAnnotationIdentifier];
                 annotationView.canShowCallout = NO;
-                annotationView.image = [UIImage imageNamed:@"rencontre.png"];
+                annotationView.image = [UIImage imageNamed:@"report"];
                 badgeView = [[JSBadgeView alloc] initWithParentView:annotationView alignment:JSBadgeViewAlignmentBottomCenter];
             }
             else {
@@ -799,12 +812,14 @@ static bool isShowingOptions = NO;
 - (IBAction)stopTour:(id)sender {
     [self.blurEffect setHidden:YES];
     [UIView animateWithDuration:0.5 animations:^(void) {
-        //[self.blurEffect setAlpha:0.7];
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
         self.mapView.frame = mapFrame;
+        self.tableView.tableHeaderView.frame = mapFrame;
         self.launcherButton.hidden = YES;
         self.mapSegmentedControl.hidden = YES;
+        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+
     }];
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
 }
@@ -998,8 +1013,10 @@ static bool isShowingOptions = NO;
     [UIView animateWithDuration:0.5 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
+        self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         self.mapSegmentedControl.hidden = YES;
+        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
 }
 
@@ -1011,8 +1028,11 @@ static bool isShowingOptions = NO;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
     [self.mapSegmentedControl setSelectedSegmentIndex:0];
     [UIView animateWithDuration:0.5 animations:^(void) {
+        self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         self.mapSegmentedControl.hidden = NO;
+        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+
     }];
 
 }
@@ -1046,7 +1066,10 @@ static bool isShowingOptions = NO;
         self.mapSegmentedControl.hidden = YES;
         self.launcherButton.hidden = YES;
         self.launcherView.hidden = NO;
+        self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
+        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+
     }];
 
 }
@@ -1060,7 +1083,9 @@ static bool isShowingOptions = NO;
         self.mapSegmentedControl.hidden = NO;
         self.launcherButton.hidden = YES;
         self.launcherView.hidden = YES;
+        self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
+        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
     
 }
