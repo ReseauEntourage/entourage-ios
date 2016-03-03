@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10109" systemVersion="15E39d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qeH-DW-jd0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qeH-DW-jd0">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10083"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -596,8 +596,72 @@ dans notre base de données.</string>
                     <view key="view" contentMode="scaleToFill" id="26C-Fh-nPo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="OMW-Pf-N5Y">
+                                <rect key="frame" x="-8" y="0.0" width="336" height="568"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ieu-wy-wct">
+                                <rect key="frame" x="16" y="199" width="288" height="301"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="xpg-eb-VqG"/>
+                                    <constraint firstAttribute="width" constant="280" id="zoS-Oh-hCD"/>
+                                </constraints>
+                                <string key="text">Afin de vous suggérer
+des maraudes, des
+demandes et des contributions.
+Entourage doit connaître
+votre position.
+
+Allez dans :
+
+Réglages &gt; Confidentialité
+Services de localisation  et activez Entourage</string>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="21"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="xpg-eb-VqG"/>
+                                        <exclude reference="zoS-Oh-hCD"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entourageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="9bo-f4-rFo">
+                                <rect key="frame" x="123" y="109" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="1Hq-1J-9VC"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="1QF-0l-XQ9"/>
+                                    <constraint firstAttribute="height" constant="75" id="Dd3-ki-bPz"/>
+                                    <constraint firstAttribute="width" constant="75" id="mmW-27-wdc"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="vpT-e1-9it" firstAttribute="top" secondItem="OMW-Pf-N5Y" secondAttribute="bottom" id="3I4-00-8mb"/>
+                            <constraint firstItem="vpT-e1-9it" firstAttribute="top" secondItem="ieu-wy-wct" secondAttribute="bottom" constant="68" id="71E-1D-y9S"/>
+                            <constraint firstItem="9bo-f4-rFo" firstAttribute="centerX" secondItem="26C-Fh-nPo" secondAttribute="centerX" id="QhM-6w-CBz"/>
+                            <constraint firstItem="ieu-wy-wct" firstAttribute="trailing" secondItem="26C-Fh-nPo" secondAttribute="trailingMargin" id="RMd-OM-ruA"/>
+                            <constraint firstItem="OMW-Pf-N5Y" firstAttribute="top" secondItem="26C-Fh-nPo" secondAttribute="topMargin" id="Ygh-yi-ZPg"/>
+                            <constraint firstItem="ieu-wy-wct" firstAttribute="centerX" secondItem="26C-Fh-nPo" secondAttribute="centerX" id="Z0J-g3-OZu"/>
+                            <constraint firstItem="ieu-wy-wct" firstAttribute="leading" secondItem="26C-Fh-nPo" secondAttribute="leadingMargin" id="bUV-G0-BpV"/>
+                            <constraint firstItem="ieu-wy-wct" firstAttribute="top" secondItem="9bo-f4-rFo" secondAttribute="bottom" constant="15" id="bt7-cr-LEq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OMW-Pf-N5Y" secondAttribute="trailing" constant="-24" id="gq4-e0-FIL"/>
+                            <constraint firstItem="ieu-wy-wct" firstAttribute="top" secondItem="9bo-f4-rFo" secondAttribute="bottom" constant="15" id="jS6-OQ-Ln8"/>
+                            <constraint firstItem="OMW-Pf-N5Y" firstAttribute="leading" secondItem="26C-Fh-nPo" secondAttribute="leadingMargin" constant="-24" id="ubU-RL-W6H"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="jS6-OQ-Ln8"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="OMW-Pf-N5Y" id="ubh-wA-8Ov"/>
+                        <outlet property="explanationLabel" destination="ieu-wy-wct" id="nki-2b-Ljv"/>
+                        <outlet property="logoImageView" destination="9bo-f4-rFo" id="8AP-LL-ATo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fh9-nH-gBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -987,6 +1051,6 @@ avec Entourage.</string>
         <image name="user" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qBA-5Z-gkW"/>
+        <segue reference="2na-Sg-Pua"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,7 +9,12 @@
 #import "OTRightsViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface OTRightsViewController ()
+@interface OTRightsViewController () <CLLocationManagerDelegate>
+
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
+@property (nonatomic, weak) IBOutlet UILabel *explanationLabel;
 
 @end
 
@@ -18,7 +23,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self setElementsHidden:YES];
+    // prompt the user for location usage
+    [self promptUserForLocationUsage];
+
     // register for push notifications
+    //[self promptUserForPushNotifications];
     
 }
 
@@ -27,16 +38,28 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    CLLocationManager *locationManager = [[CLLocationManager alloc] init];
-    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [locationManager requestWhenInUseAuthorization];
-    }
+#pragma mark - Private
 
-//    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
-//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
-//    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-//    [[UIApplication sharedApplication] registerForRemoteNotifications];
+- (void)promptUserForLocationUsage {
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
+}
+
+- (void)promptUserForPushNotifications {
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+}
+
+- (void)setElementsHidden:(BOOL) hidden {
+    self.backgroundImageView.hidden = hidden;
+    self.logoImageView.hidden = hidden;
+    self.explanationLabel.hidden = hidden;
 }
 
 /*
@@ -48,5 +71,25 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
+#pragma mark - CLLocationMangerDelegate
+
+static BOOL shouldShowInfo = YES;
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    
+    if (status == kCLAuthorizationStatusNotDetermined) {
+        return;
+    }
+    
+    if (status == kCLAuthorizationStatusDenied) {
+        shouldShowInfo = YES;
+        [self setElementsHidden:NO];
+        
+    } else {
+        [self promptUserForPushNotifications];
+    }
+}
 
 @end
