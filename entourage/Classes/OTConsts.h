@@ -14,4 +14,10 @@
 // PROD
 #define BASE_API_URL @"https://entourage-back.herokuapp.com/api/v1/"
 
+#warning change for AppStore
+#define BASE_API_URL @"https://entourage-back-preprod.herokuapp.com/api/v1/"
 #endif
+
+
+#define kNotificationPushStatusChanged @"NotificationAPNSStatusChanged"
+

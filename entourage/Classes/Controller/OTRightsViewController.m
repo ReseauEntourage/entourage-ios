@@ -8,6 +8,11 @@
 
 #import "OTRightsViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "OTConsts.h"
+
+// Util
+#import "UIStoryboard+entourage.h"
+
 
 @interface OTRightsViewController () <CLLocationManagerDelegate>
 
@@ -30,6 +35,10 @@
 
     // register for push notifications
     //[self promptUserForPushNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showMainStorybord)
+                                                 name:kNotificationPushStatusChanged
+                                               object:nil];
     
 }
 
@@ -60,6 +69,11 @@
     self.backgroundImageView.hidden = hidden;
     self.logoImageView.hidden = hidden;
     self.explanationLabel.hidden = hidden;
+}
+
+- (void)showMainStorybord {
+    NSLog(@"received kNotificationPushStatusChanged");
+    [UIStoryboard showSWRevealController];
 }
 
 /*
