@@ -215,7 +215,7 @@
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = view.frame;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)([UIColor colorWithRed:0 green:0 blue:0 alpha:.1].CGColor),  nil];
-//    [headerView.layer insertSublayer:gradient atIndex:10];
+    //[headerView.layer insertSublayer:gradient atIndex:10];
     
     //[headerView addSubview:view];
 //    [headerView addConstraint:[NSLayoutConstraint constraintWithItem:view
@@ -393,26 +393,12 @@
  
     OTEncounterAnnotation *encounterAnnotation = (OTEncounterAnnotation *)simpleAnnontation;
     OTEncounter *encounter = encounterAnnotation.encounter;
-    [self presentViewController:controller animated:YES completion:nil];
-    [controller configureWithEncouter:encounter];
+    [controller setEncounter:encounter];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [self presentViewController:navController animated:YES completion:nil];
     
-    /*
-    UIView *popView = [controller view];
-    popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
-    [UIView animateWithDuration:.3f animations: ^{
-         popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
-     }];
+//    [controller configureWithEncouter:encounter];
     
-    self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
-    [self.popover setTheme:[WYPopoverTheme themeForIOS7]];
-    
-    [self.popover presentPopoverFromRect:view.bounds
-                                  inView:view
-                permittedArrowDirections:WYPopoverArrowDirectionNone
-                                animated:YES
-                                 options:WYPopoverAnimationOptionFadeWithScale];
-     */
-
 	//[Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{ @"encounter_id" : encounterAnnotation.encounter.sid }];
 }
 

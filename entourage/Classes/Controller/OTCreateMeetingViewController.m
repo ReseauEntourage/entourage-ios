@@ -30,6 +30,7 @@
 
 
 #define PADDING 20.0f
+#define PLACEHOLDER @"Détaillez votre rencontre"
 
 @interface OTCreateMeetingViewController () <UITextViewDelegate>
 
@@ -89,9 +90,9 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
     
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     self.dateLabel.text = [NSString stringWithFormat:@"se sont rencontrés ici le %@", dateString];
-    [self.messageTextView setTextContainerInset:UIEdgeInsetsMake(PADDING, PADDING, 0, 0)];
+    [self.messageTextView setTextContainerInset:UIEdgeInsetsMake(PADDING, PADDING, PADDING, 2*PADDING)];
     
-    self.messageTextView.text = @"Détaillez votre rencontre";
+    self.messageTextView.text = PLACEHOLDER;
     self.messageTextView.textColor = [UIColor lightGrayColor];
 
 }
@@ -114,7 +115,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
     
     OTEncounter *encounter = [OTEncounter new];
 	encounter.date = [NSDate date];
-	encounter.message = self.messageTextView.text;
+    encounter.message = [self.messageTextView.text isEqualToString:PLACEHOLDER] ? @"" : self.messageTextView.text;
 	encounter.streetPersonName =  self.nameTextField.text;
 	encounter.latitude = self.location.latitude;
 	encounter.longitude = self.location.longitude;
@@ -201,7 +202,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 #pragma mark - UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:@"Détaillez votre rencontre"]) {
+    if ([textView.text isEqualToString:PLACEHOLDER]) {
         self.messageTextView.text = @"";
         self.messageTextView.textColor = [UIColor blackColor];
     }
@@ -211,7 +212,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if ([self.messageTextView.text isEqualToString:@""]) {
-        self.messageTextView.text = @"Détaillez votre rencontre";
+        self.messageTextView.text = PLACEHOLDER;
         self.messageTextView.textColor = [UIColor appGreyishColor];
     }
     [self.messageTextView resignFirstResponder];

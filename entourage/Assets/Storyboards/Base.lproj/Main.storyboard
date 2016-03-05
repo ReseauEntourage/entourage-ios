@@ -756,7 +756,7 @@ Un mail récapitulatif te sera envoyé.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zS4-YZ-2A0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550" y="1496"/>
+            <point key="canvasLocation" x="1082" y="1496"/>
         </scene>
         <!--Tour Options View Controller-->
         <scene sceneID="TLF-3I-8Si">
@@ -821,7 +821,7 @@ Un mail récapitulatif te sera envoyé.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66X-IN-NwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1013" y="1496"/>
+            <point key="canvasLocation" x="1545" y="1496"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -1354,25 +1354,6 @@ Un mail récapitulatif te sera envoyé.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eK5-zo-rg8">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CkO-r9-KgU">
-                                        <rect key="frame" x="25" y="434" width="270" height="44"/>
-                                        <color key="backgroundColor" red="0.88235294117647056" green="0.2196078431372549" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="Z1x-mt-gwJ"/>
-                                        </constraints>
-                                        <state key="normal" title="FERMER">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="closeModal:" destination="Hn0-z2-6tI" eventType="touchUpInside" id="O4G-Hb-9LD"/>
-                                        </connections>
-                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CCS-Ik-mAq">
                                         <rect key="frame" x="105" y="21" width="111" height="88"/>
                                         <constraints>
@@ -1460,10 +1441,7 @@ Un mail récapitulatif te sera envoyé.</string>
                                     <constraint firstAttribute="trailing" secondItem="CCS-Ik-mAq" secondAttribute="trailing" constant="104" id="12i-sU-LXt"/>
                                     <constraint firstItem="8tC-a4-1mh" firstAttribute="leading" secondItem="eK5-zo-rg8" secondAttribute="leading" constant="22" id="17z-Qr-lPY"/>
                                     <constraint firstItem="8tC-a4-1mh" firstAttribute="top" secondItem="CCS-Ik-mAq" secondAttribute="bottom" constant="28" id="7rP-Ih-Y3O"/>
-                                    <constraint firstItem="CkO-r9-KgU" firstAttribute="leading" secondItem="eK5-zo-rg8" secondAttribute="leading" constant="25" id="VHh-wQ-TxC"/>
-                                    <constraint firstItem="CkO-r9-KgU" firstAttribute="top" secondItem="8tC-a4-1mh" secondAttribute="bottom" constant="29" id="WyG-TA-Gw6"/>
                                     <constraint firstItem="CCS-Ik-mAq" firstAttribute="top" secondItem="eK5-zo-rg8" secondAttribute="top" constant="21" id="csy-me-86K"/>
-                                    <constraint firstAttribute="trailing" secondItem="CkO-r9-KgU" secondAttribute="trailing" constant="25" id="geh-0X-fyb"/>
                                     <constraint firstAttribute="trailing" secondItem="8tC-a4-1mh" secondAttribute="trailing" constant="21" id="s6t-hx-Loy"/>
                                     <constraint firstItem="CCS-Ik-mAq" firstAttribute="leading" secondItem="eK5-zo-rg8" secondAttribute="leading" constant="105" id="ts3-KP-MaZ"/>
                                 </constraints>
@@ -1479,7 +1457,6 @@ Un mail récapitulatif te sera envoyé.</string>
                     </view>
                     <navigationItem key="navigationItem" id="KLC-7p-Nqh"/>
                     <connections>
-                        <outlet property="backButton" destination="CkO-r9-KgU" id="uAD-0B-y1D"/>
                         <outlet property="dateLabel" destination="SsA-By-jzK" id="U96-nv-fdY"/>
                         <outlet property="organizationNameLabel" destination="X3L-Yj-zhX" id="vFC-Yb-RNX"/>
                         <outlet property="tourStatusLabel" destination="J9j-JB-XiU" id="CeL-zl-ifR"/>
@@ -1602,7 +1579,7 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kqk-eM-ld2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1449" y="1496"/>
+            <point key="canvasLocation" x="1981" y="1496"/>
         </scene>
         <!--Guide View Controller-->
         <scene sceneID="cCl-FF-sHF">
@@ -2010,7 +1987,7 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
         <!--Meeting Callout View Controller-->
         <scene sceneID="n88-kc-SdR">
             <objects>
-                <viewController storyboardIdentifier="OTMeetingCalloutViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="currentContext" id="QTd-z6-CnJ" customClass="OTMeetingCalloutViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTMeetingCalloutViewController" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="currentContext" id="QTd-z6-CnJ" customClass="OTMeetingCalloutViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VaB-Gu-Kit"/>
                         <viewControllerLayoutGuide type="bottom" id="kX2-CY-43S"/>
@@ -2020,26 +1997,22 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAd-Tf-8Hv">
-                                <rect key="frame" x="36" y="99" width="248" height="266"/>
+                                <rect key="frame" x="0.0" y="36" width="320" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="fMm-af-Yey"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
+                                <color key="textColor" red="0.64705884456634521" green="0.64705884456634521" blue="0.61176472902297974" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGQ-uo-3Us">
-                                <rect key="frame" x="16" y="40" width="288" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Kz-3G-Uoo">
-                                <rect key="frame" x="106" y="514" width="108" height="34"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Kz-3G-Uoo">
+                                <rect key="frame" x="0.0" y="511" width="320" height="57"/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="108" id="Iip-PX-wT2"/>
-                                    <constraint firstAttribute="height" constant="34" id="mRs-Bd-O2F"/>
+                                    <constraint firstAttribute="height" constant="57" id="mRs-Bd-O2F"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="18"/>
                                 <state key="normal" title="FERMER">
@@ -2057,29 +2030,28 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="rAd-Tf-8Hv" firstAttribute="leading" secondItem="P0j-yB-bte" secondAttribute="leadingMargin" constant="20" id="CdJ-gh-Kig"/>
-                            <constraint firstItem="vGQ-uo-3Us" firstAttribute="leading" secondItem="P0j-yB-bte" secondAttribute="leadingMargin" id="DHw-ic-Him"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="vGQ-uo-3Us" secondAttribute="trailing" id="Ftv-Tk-SJp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="rAd-Tf-8Hv" secondAttribute="trailing" constant="20" id="GIi-ch-fB9"/>
-                            <constraint firstItem="rAd-Tf-8Hv" firstAttribute="top" secondItem="vGQ-uo-3Us" secondAttribute="bottom" constant="38" id="H8s-jT-icw"/>
-                            <constraint firstItem="vGQ-uo-3Us" firstAttribute="top" secondItem="VaB-Gu-Kit" secondAttribute="bottom" constant="20" id="Lhb-Hb-TIr"/>
-                            <constraint firstItem="8Kz-3G-Uoo" firstAttribute="top" secondItem="rAd-Tf-8Hv" secondAttribute="bottom" constant="149" id="QfM-54-IM3"/>
-                            <constraint firstItem="kX2-CY-43S" firstAttribute="top" secondItem="8Kz-3G-Uoo" secondAttribute="bottom" constant="20" id="Y57-Td-f92"/>
+                            <constraint firstItem="rAd-Tf-8Hv" firstAttribute="leading" secondItem="P0j-yB-bte" secondAttribute="leadingMargin" constant="-16" id="CdJ-gh-Kig"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rAd-Tf-8Hv" secondAttribute="trailing" constant="-16" id="GIi-ch-fB9"/>
+                            <constraint firstItem="kX2-CY-43S" firstAttribute="top" secondItem="8Kz-3G-Uoo" secondAttribute="bottom" id="Y57-Td-f92"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8Kz-3G-Uoo" secondAttribute="trailing" constant="-16" id="Z0I-vc-eFe"/>
+                            <constraint firstItem="rAd-Tf-8Hv" firstAttribute="top" secondItem="VaB-Gu-Kit" secondAttribute="bottom" constant="16" id="bUo-bT-BMW"/>
                             <constraint firstAttribute="centerX" secondItem="8Kz-3G-Uoo" secondAttribute="centerX" id="dp9-WI-rDh"/>
+                            <constraint firstItem="8Kz-3G-Uoo" firstAttribute="leading" secondItem="P0j-yB-bte" secondAttribute="leadingMargin" constant="-16" id="gxw-eG-8uD"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="4da-S9-m39"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="textView" destination="rAd-Tf-8Hv" id="1Wv-JO-ZMk"/>
-                        <outlet property="titleLabel" destination="vGQ-uo-3Us" id="iee-WV-DfO"/>
+                        <outlet property="textViewHeightConstraint" destination="fMm-af-Yey" id="lWg-d2-xaV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B7y-U0-cbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226" y="1460"/>
+            <point key="canvasLocation" x="188" y="1460"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iQI-Ek-yG4">
@@ -2097,7 +2069,7 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uC2-Gx-JX2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="188" y="1496"/>
+            <point key="canvasLocation" x="720" y="1496"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="J3Y-Qy-Grd">
