@@ -63,6 +63,9 @@
 #define TAG_STATUSBUTTON 6
 #define TAG_STATUSTEXT 7
 
+#define TABLEVIEW_FOOTER_HEIGHT 15.0f
+#define TABLEVIEW_BOTTOM_INSET 86.0f
+
 
 /********************************************************************************/
 #pragma mark - OTMapViewController
@@ -197,40 +200,29 @@
 }
 
 - (void)configureTableView {
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -90, 0);
-    CGFloat dummyViewHeight = 90;
-    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(-10, 0, self.tableView.bounds.size.width, dummyViewHeight)];
+    self.tableView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, -TABLEVIEW_FOOTER_HEIGHT, 0.0f);
+    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableView.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
     self.tableView.tableFooterView = dummyView;
     self.blurEffect.hidden = YES;
     
-    //TODO: show map on table header
+    //show map on table header
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width + 8, MAPVIEW_HEIGHT)];
     self.mapView = [[MKMapView alloc] initWithFrame:headerView.bounds];
     [headerView addSubview:self.mapView];
     [headerView sendSubviewToBack:self.mapView];
     [self configureMapView];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156 , headerView.frame.size.width + 30, 4.0f)];
-    view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+    UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156 , headerView.frame.size.width + 30, 4.0f)];
+    //view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
     CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = view.frame;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)([UIColor colorWithRed:0 green:0 blue:0 alpha:.1].CGColor),  nil];
-    //[headerView.layer insertSublayer:gradient atIndex:10];
-    
-    //[headerView addSubview:view];
-//    [headerView addConstraint:[NSLayoutConstraint constraintWithItem:view
-//                                                          attribute:NSLayoutAttributeBottom
-//                                                          relatedBy:NSLayoutRelationEqual
-//                                                             toItem:headerView
-//                                                          attribute:NSLayoutAttributeBottom
-//                                                         multiplier:1.0
-//                                                           constant:0.0]];
-    
+    gradient.frame = shadowView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)([UIColor colorWithRed:0 green:0 blue:0 alpha:.2].CGColor),  nil];
+    [shadowView.layer insertSublayer:gradient atIndex:1];
+    [headerView addSubview:shadowView];
     
     self.mapView.center = headerView.center;
     self.tableView.tableHeaderView = headerView;
     self.tableView.delegate = self;
-    
 }
 
 - (void)configureMapView {
@@ -856,10 +848,7 @@ static bool isShowingOptions = NO;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == self.tours.count - 1)
-        return 0.f;
-    else
-        return 15.f;
+    return TABLEVIEW_FOOTER_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -950,6 +939,12 @@ static bool isShowingOptions = NO;
         [statusLabel setTextColor:[UIColor appGreyishColor]];
     }
     return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, TABLEVIEW_FOOTER_HEIGHT)];
+    footerView.backgroundColor = [UIColor clearColor];
+    return footerView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
