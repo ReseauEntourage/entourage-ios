@@ -220,6 +220,23 @@
     [shadowView.layer insertSublayer:gradient atIndex:1];
     [headerView addSubview:shadowView];
     
+    NSDictionary *viewsDictionary = @{@"shadow":shadowView};
+    NSArray *constraint_height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow(4)]"
+                                                                         options:0
+                                                                         metrics:nil
+                                                                           views:viewsDictionary];
+    NSArray *constraint_pos_horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[shadow]-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:viewsDictionary];
+    NSArray *constraint_pos_bottom = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow]-0-|"
+                                                                                   options:0
+                                                                                   metrics:nil
+                                                                                     views:viewsDictionary];
+    shadowView.translatesAutoresizingMaskIntoConstraints = NO;
+    [shadowView addConstraints:constraint_height];
+    [headerView addConstraints:constraint_pos_horizontal];
+    [headerView addConstraints:constraint_pos_bottom];
     self.mapView.center = headerView.center;
     self.tableView.tableHeaderView = headerView;
     self.tableView.delegate = self;
@@ -991,7 +1008,7 @@ static bool isShowingOptions = NO;
     self.launcherButton.hidden = NO;
     self.stopButton.hidden = YES;
 
-    [UIView animateWithDuration:0.5 animations:^(void) {
+    [UIView animateWithDuration:0.2 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
         self.tableView.tableHeaderView.frame = mapFrame;
@@ -1008,7 +1025,7 @@ static bool isShowingOptions = NO;
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
     [self.mapSegmentedControl setSelectedSegmentIndex:0];
-    [UIView animateWithDuration:0.5 animations:^(void) {
+    [UIView animateWithDuration:0.25 animations:^(void) {
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         self.mapSegmentedControl.hidden = NO;

@@ -1354,13 +1354,13 @@ Un mail récapitulatif te sera envoyé.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eK5-zo-rg8">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CCS-Ik-mAq">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CCS-Ik-mAq">
                                         <rect key="frame" x="105" y="21" width="111" height="88"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="88" id="nDo-sX-MjL"/>
                                         </constraints>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tC-a4-1mh">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tC-a4-1mh">
                                         <rect key="frame" x="22" y="137" width="277" height="268"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;organization&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3L-Yj-zhX">
@@ -1435,13 +1435,23 @@ Un mail récapitulatif te sera envoyé.</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="15" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CGA-by-Pfy">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="separatorColor" red="0.64705884456634521" green="0.64705884456634521" blue="0.61176472902297974" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <inset key="separatorInset" minX="101" minY="0.0" maxX="101" maxY="0.0"/>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="CCS-Ik-mAq" secondAttribute="trailing" constant="104" id="12i-sU-LXt"/>
                                     <constraint firstItem="8tC-a4-1mh" firstAttribute="leading" secondItem="eK5-zo-rg8" secondAttribute="leading" constant="22" id="17z-Qr-lPY"/>
                                     <constraint firstItem="8tC-a4-1mh" firstAttribute="top" secondItem="CCS-Ik-mAq" secondAttribute="bottom" constant="28" id="7rP-Ih-Y3O"/>
+                                    <constraint firstItem="CGA-by-Pfy" firstAttribute="top" secondItem="eK5-zo-rg8" secondAttribute="top" id="L69-ve-fSb"/>
+                                    <constraint firstAttribute="trailing" secondItem="CGA-by-Pfy" secondAttribute="trailing" id="RF1-Dr-fbP"/>
+                                    <constraint firstAttribute="bottom" secondItem="CGA-by-Pfy" secondAttribute="bottom" id="aYW-Ir-Ido"/>
                                     <constraint firstItem="CCS-Ik-mAq" firstAttribute="top" secondItem="eK5-zo-rg8" secondAttribute="top" constant="21" id="csy-me-86K"/>
+                                    <constraint firstItem="CGA-by-Pfy" firstAttribute="leading" secondItem="eK5-zo-rg8" secondAttribute="leading" id="hYS-3v-XDs"/>
                                     <constraint firstAttribute="trailing" secondItem="8tC-a4-1mh" secondAttribute="trailing" constant="21" id="s6t-hx-Loy"/>
                                     <constraint firstItem="CCS-Ik-mAq" firstAttribute="leading" secondItem="eK5-zo-rg8" secondAttribute="leading" constant="105" id="ts3-KP-MaZ"/>
                                 </constraints>
