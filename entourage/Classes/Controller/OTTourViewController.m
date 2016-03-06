@@ -38,6 +38,7 @@
     [super viewDidLoad];
     self.title = @"MARAUDE";
     [self setupCloseModal];
+    [self setupMoreButtons];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -86,6 +87,30 @@
     self.tourTypeLabel.text = type;
     self.tourStatusLabel.text = status;
 }
+
+/**************************************************************************************************/
+#pragma mark - Private Methods
+- (void)setupMoreButtons {
+    UIImage *plusImage = [[UIImage imageNamed:@"userPlus.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] init];
+    [plusButton setImage:plusImage];
+    [plusButton setTarget:self];
+    //[moreButton setAction:@selector(dismissModal)];
+
+    
+    UIImage *moreImage = [[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] init];
+    [moreButton setImage:moreImage];
+    [moreButton setTarget:self];
+    //[moreButton setAction:@selector(dismissModal)];
+    
+    [self.navigationItem setRightBarButtonItems:@[moreButton]];
+    //[self.navigationItem setRightBarButtonItem:moreButton];
+
+}
+
 
 /**************************************************************************************************/
 #pragma mark - Public Methods
