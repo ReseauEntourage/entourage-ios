@@ -11,21 +11,19 @@
 #import "OTTourPoint.h"
 #import "OTOrganization.h"
 #import "UIViewController+menu.h"
+#import "UIColor+entourage.h"
+#import "UIImageView+AFNetworking.h"
 
+#define TAG_ORGANIZATION 1
+#define TAG_TOURTYPE 2
+#define TAG_TOURUSER 3
+
+typedef NS_ENUM(unsigned) {
+    SectionTypeHeader,
+    SectionTypeTimeline
+} SectionType;
 
 @interface OTTourViewController ()
-
-@property (weak, nonatomic) IBOutlet UIImageView *tourTypeImage;
-
-@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
-@property (nonatomic, weak) IBOutlet UILabel *startTime;
-@property (nonatomic, weak) IBOutlet UILabel *endTime;
-@property (nonatomic, weak) IBOutlet UILabel *organizationNameLabel;
-@property (nonatomic, weak) IBOutlet UILabel *transportTypeLabel;
-@property (nonatomic, weak) IBOutlet UILabel *tourTypeLabel;
-@property (nonatomic, weak) IBOutlet UILabel *tourStatusLabel;
-
-@property (nonatomic, weak) IBOutlet UIButton *backButton;
 
 @end
 
@@ -79,13 +77,13 @@
     }
     
     //self.tourTypeImage.image = [UIImage imageNamed:image];
-    self.dateLabel.text = date;
-    self.startTime.text = startTime;
-    self.endTime.text = endTime;
-    self.organizationNameLabel.text = self.tour.organizationName;
-    self.transportTypeLabel.text = vehicle;
-    self.tourTypeLabel.text = type;
-    self.tourStatusLabel.text = status;
+//    self.dateLabel.text = date;
+//    self.startTime.text = startTime;
+//    self.endTime.text = endTime;
+//    self.organizationNameLabel.text = self.tour.organizationName;
+//    self.transportTypeLabel.text = vehicle;
+//    self.tourTypeLabel.text = type;
+//    self.tourStatusLabel.text = status;
 }
 
 /**************************************************************************************************/
@@ -137,5 +135,107 @@
 - (IBAction)closeModal:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+/**************************************************************************************************/
+#pragma mark - Table View
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case SectionTypeHeader:
+            return 15.0f;
+        case SectionTypeTimeline:
+            return 40.0f;
+            
+        default:
+            return 0.0f;
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
+        case SectionTypeHeader:
+            return 1;
+        case SectionTypeTimeline:
+            return 0;
+            
+        default:
+            return 0.0f;
+    }
+
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40)];
+    if (section == SectionTypeTimeline) {
+        headerView.backgroundColor = [UIColor clearColor];
+        headerView.text = @"DISCUSSION";
+        headerView.textAlignment = NSTextAlignmentCenter;
+        headerView.textColor = [UIColor appGreyishColor];
+        headerView.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
+    }
+    return headerView;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailsToursCell" forIndexPath:indexPath];
+    
+    OTTourAuthor *author = self.tour.author;
+    UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
+    organizationLabel.text = self.tour.organizationName;
+
+    
+    NSString *tourType = self.tour.tourType;
+    if ([tourType isEqualToString:@"barehands"]) {
+        tourType = @"sociale";
+    } else     if ([tourType isEqualToString:@"medical"]) {
+        tourType = @"médicale";
+    } else if ([tourType isEqualToString:@"alimentary"]) {
+        tourType = @"distributive";
+    }
+    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
+    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", tourType] attributes:lightAttrs];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
+    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+    [typeByNameAttrString appendAttributedString:nameAttrString];
+    UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
+    typeByNameLabel.attributedText = typeByNameAttrString;
+
+    
+    __weak UIButton *userImage = [cell viewWithTag:TAG_TOURUSER];
+    userImage.layer.cornerRadius = userImage.bounds.size.height/2.f;
+    userImage.clipsToBounds = YES;
+    if (self.tour.author.avatarUrl != nil) {
+        NSURL *url = [NSURL URLWithString:self.tour.author.avatarUrl];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
+        __weak UITableViewCell *weakCell = cell;
+        
+        [userImage.imageView setImageWithURLRequest:request
+                         placeholderImage:placeholderImage
+                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                      
+                                      userImage.imageView.image = image;
+                                      [weakCell setNeedsLayout];
+                                      
+                                  } failure:nil];
+    }
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.5f;
+}
+
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    self.selectedTour = self.tours[indexPath.row];
+//    [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+//}
+
 
 @end

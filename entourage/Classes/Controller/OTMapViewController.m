@@ -717,7 +717,8 @@
                           andDuration:[[NSDate date] timeIntervalSinceDate:self.start]];
     } else if ([segue.identifier isEqualToString:@"OTSelectedTour"]) {
         UINavigationController *navController = segue.destinationViewController;
-        OTTourViewController *controller = (OTTourViewController *)navController.topViewController;;
+        OTTourViewController *controller = (OTTourViewController *)navController.topViewController;
+        controller.tour = self.selectedTour;
         [controller configureWithTour:self.selectedTour];
     } else if ([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
         OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
