@@ -160,7 +160,7 @@ typedef NS_ENUM(unsigned) {
         case SectionTypeHeader:
             return 1;
         case SectionTypeTimeline:
-            return 0;
+            return 2;
             
         default:
             return 0.0f;
@@ -174,7 +174,7 @@ typedef NS_ENUM(unsigned) {
         headerView.backgroundColor = [UIColor clearColor];
         headerView.text = @"DISCUSSION";
         headerView.textAlignment = NSTextAlignmentCenter;
-        headerView.textColor = [UIColor appGreyishColor];
+        headerView.textColor = [UIColor appGreyishBrownColor];
         headerView.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
     }
     return headerView;
@@ -182,50 +182,77 @@ typedef NS_ENUM(unsigned) {
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailsToursCell" forIndexPath:indexPath];
-    
-    OTTourAuthor *author = self.tour.author;
-    UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
-    organizationLabel.text = self.tour.organizationName;
-
-    
-    NSString *tourType = self.tour.tourType;
-    if ([tourType isEqualToString:@"barehands"]) {
-        tourType = @"sociale";
-    } else     if ([tourType isEqualToString:@"medical"]) {
-        tourType = @"médicale";
-    } else if ([tourType isEqualToString:@"alimentary"]) {
-        tourType = @"distributive";
+    NSString *cellID = @"";
+    switch (indexPath.section) {
+        case SectionTypeHeader:
+            cellID = @"TourDetailsCell";
+            break;
+        case SectionTypeTimeline:
+            cellID = @"TourStatusCell";
+            break;
+        default:
+            break;
     }
-    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
-    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", tourType] attributes:lightAttrs];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
-    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
-    [typeByNameAttrString appendAttributedString:nameAttrString];
-    UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
-    typeByNameLabel.attributedText = typeByNameAttrString;
 
     
-    __weak UIButton *userImage = [cell viewWithTag:TAG_TOURUSER];
-    userImage.layer.cornerRadius = userImage.bounds.size.height/2.f;
-    userImage.clipsToBounds = YES;
-    if (self.tour.author.avatarUrl != nil) {
-        NSURL *url = [NSURL URLWithString:self.tour.author.avatarUrl];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
-        __weak UITableViewCell *weakCell = cell;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    if (indexPath.section == SectionTypeHeader) {
+        OTTourAuthor *author = self.tour.author;
+        UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
+        organizationLabel.text = self.tour.organizationName;
+
         
-        [userImage.imageView setImageWithURLRequest:request
-                         placeholderImage:placeholderImage
-                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                      
-                                      userImage.imageView.image = image;
-                                      [weakCell setNeedsLayout];
-                                      
-                                  } failure:nil];
+        NSString *tourType = self.tour.tourType;
+        if ([tourType isEqualToString:@"barehands"]) {
+            tourType = @"sociale";
+        } else     if ([tourType isEqualToString:@"medical"]) {
+            tourType = @"médicale";
+        } else if ([tourType isEqualToString:@"alimentary"]) {
+            tourType = @"distributive";
+        }
+        NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
+        NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
+        NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", tourType] attributes:lightAttrs];
+        NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
+        NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+        [typeByNameAttrString appendAttributedString:nameAttrString];
+        UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
+        typeByNameLabel.attributedText = typeByNameAttrString;
+
+        
+        __weak UIButton *userImage = [cell viewWithTag:TAG_TOURUSER];
+        userImage.layer.cornerRadius = userImage.bounds.size.height/2.f;
+        userImage.clipsToBounds = YES;
+        if (self.tour.author.avatarUrl != nil) {
+            NSURL *url = [NSURL URLWithString:self.tour.author.avatarUrl];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
+            __weak UITableViewCell *weakCell = cell;
+            
+            [userImage.imageView setImageWithURLRequest:request
+                             placeholderImage:placeholderImage
+                                      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                          
+                                          userImage.imageView.image = image;
+                                          [weakCell setNeedsLayout];
+                                          
+                                      } failure:nil];
+        }
     }
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case SectionTypeHeader:
+            return  70.0f;
+        case SectionTypeTimeline:
+            return 157.0f;
+            
+        default:
+            return 0.0f;
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

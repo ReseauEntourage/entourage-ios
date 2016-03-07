@@ -12,5 +12,6 @@
 
 + (UIColor *)appOrangeColor;
 + (UIColor *)appGreyishColor;
++ (UIColor *)appGreyishBrownColor;
 
 @end
