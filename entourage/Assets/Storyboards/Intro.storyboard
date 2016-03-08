@@ -5,12 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="Calibri.ttf">
-            <string>Calibri</string>
-            <string>Calibri</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--Ask More View Controller-->
         <scene sceneID="1Kh-V1-hZ9">
@@ -75,7 +69,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="vj8-De-W5h"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                             </textField>
                                         </subviews>
@@ -816,7 +810,7 @@ avec Entourage.</string>
                                                     <constraint firstAttribute="height" constant="50" id="x4V-6x-rr9"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.91372549020000005" green="0.30980392159999998" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
@@ -847,7 +841,7 @@ avec Entourage.</string>
                                                     <constraint firstAttribute="height" constant="50" id="GVg-o5-jdv"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.91372549020000005" green="0.30980392159999998" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
