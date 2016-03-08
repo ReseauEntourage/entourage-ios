@@ -31,7 +31,7 @@
 
 // Service
 #import "OTTourService.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIButton+AFNetworking.h"
 
 #import "UIColor+entourage.h"
 
@@ -58,7 +58,7 @@
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
 #define TAG_TIMELOCATION 3
-#define TAG_TOURUSER 4
+#define TAG_TOURUSERIMAGE 4
 #define TAG_TOURUSERSCOUNT 5
 #define TAG_STATUSBUTTON 6
 #define TAG_STATUSTEXT 7
@@ -922,29 +922,20 @@ static bool isShowingOptions = NO;
             }
         }
     }];
-
-    __weak UIImageView *userImage = [cell viewWithTag:TAG_TOURUSER];
-    userImage.layer.cornerRadius = userImage.bounds.size.height/2.f;
-    userImage.clipsToBounds = YES;
+    __weak UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSERIMAGE];
+    userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
+    userImageButton.clipsToBounds = YES;
     if (tour.author.avatarUrl != nil) {
         NSURL *url = [NSURL URLWithString:tour.author.avatarUrl];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
         UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
-        __weak UITableViewCell *weakCell = cell;
-        
-        [userImage setImageWithURLRequest:request
-                              placeholderImage:placeholderImage
-                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                           
-                                           userImage.image = image;
-                                           [weakCell setNeedsLayout];
-                                           
-                                       } failure:nil];
+        [userImageButton setImageForState:UIControlStateNormal
+                                  withURL:url
+                         placeholderImage:placeholderImage];
     }
+
     UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
     noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
-    
-    
+        
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     if ([tour.joinStatus isEqualToString:@"accepted"]) {

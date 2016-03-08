@@ -12,7 +12,7 @@
 #import "OTOrganization.h"
 #import "UIViewController+menu.h"
 #import "UIColor+entourage.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIButton+AFNetworking.h"
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -180,7 +180,6 @@ typedef NS_ENUM(unsigned) {
     return headerView;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellID = @"";
     switch (indexPath.section) {
@@ -220,23 +219,15 @@ typedef NS_ENUM(unsigned) {
         typeByNameLabel.attributedText = typeByNameAttrString;
 
         
-        __weak UIButton *userImage = [cell viewWithTag:TAG_TOURUSER];
-        userImage.layer.cornerRadius = userImage.bounds.size.height/2.f;
-        userImage.clipsToBounds = YES;
+        __weak UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSER];
+        userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
+        userImageButton.clipsToBounds = YES;
         if (self.tour.author.avatarUrl != nil) {
             NSURL *url = [NSURL URLWithString:self.tour.author.avatarUrl];
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
             UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
-            __weak UITableViewCell *weakCell = cell;
-            
-            [userImage.imageView setImageWithURLRequest:request
-                             placeholderImage:placeholderImage
-                                      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                          
-                                          userImage.imageView.image = image;
-                                          [weakCell setNeedsLayout];
-                                          
-                                      } failure:nil];
+            [userImageButton setImageForState:UIControlStateNormal
+                                      withURL:url
+                             placeholderImage:placeholderImage];
         }
     }
     return cell;

@@ -122,25 +122,26 @@ NSString *const kTourPoints = @"tour_points";
     NSDictionary *parameters = @{ @"limit": limit, @"latitude": @(coordinates.latitude), @"longitude": @(coordinates.longitude), @"distance": distance };
     
     [[OTHTTPRequestManager sharedInstance]
-     GETWithUrl:url
-     andParameters:parameters
-     andSuccess:^(id responseObject)
-     {
-         NSDictionary *data = responseObject;
-         NSMutableArray *tours = [self toursFromDictionary:data];
-         
-         if (success)
-         {
-             success(tours);
-         }
-     }
-     andFailure:^(NSError *error)
-     {
-         if (failure)
-         {
-             failure(error);
-         }
-     }];
+             GETWithUrl:url
+             andParameters:parameters
+             andSuccess:^(id responseObject)
+             {
+                 NSDictionary *data = responseObject;
+                 NSMutableArray *tours = [self toursFromDictionary:data];
+                 
+                 if (success)
+                 {
+                     success(tours);
+                 }
+             }
+             andFailure:^(NSError *error)
+             {
+                 if (failure)
+                 {
+                     failure(error);
+                 }
+             }
+     ];
 }
 
 
