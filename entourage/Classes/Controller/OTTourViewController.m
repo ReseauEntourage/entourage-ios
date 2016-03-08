@@ -13,6 +13,7 @@
 #import "UIViewController+menu.h"
 #import "UIColor+entourage.h"
 #import "UIButton+AFNetworking.h"
+#import "OTTourDetailsOptionsViewController.h"
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -121,13 +122,19 @@ typedef NS_ENUM(unsigned) {
 
 - (NSString *)formatDateForDisplay:(NSDate *)date {
     NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:@"dd/MM/yyyy"];
+    [formatter setDateFormat:@"EEE"];
     return [formatter stringFromDate:date];
 }
 
 - (NSString *)formatHourForDisplay:(NSDate *)date {
     NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:@"HH'h'mm"];
+    [formatter setDateFormat:@"HH':'mm"];
+    return [formatter stringFromDate:date];
+}
+
+- (NSString *)formatHourToSecondsForDisplay:(NSDate *)date {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:@"HH':'mm':'ss"];
     return [formatter stringFromDate:date];
 }
 
@@ -198,41 +205,92 @@ typedef NS_ENUM(unsigned) {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     if (indexPath.section == SectionTypeHeader) {
-        OTTourAuthor *author = self.tour.author;
-        UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
-        organizationLabel.text = self.tour.organizationName;
-
-        
-        NSString *tourType = self.tour.tourType;
-        if ([tourType isEqualToString:@"barehands"]) {
-            tourType = @"sociale";
-        } else     if ([tourType isEqualToString:@"medical"]) {
-            tourType = @"médicale";
-        } else if ([tourType isEqualToString:@"alimentary"]) {
-            tourType = @"distributive";
-        }
-        NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
-        NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
-        NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", tourType] attributes:lightAttrs];
-        NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
-        NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
-        [typeByNameAttrString appendAttributedString:nameAttrString];
-        UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
-        typeByNameLabel.attributedText = typeByNameAttrString;
-
-        
-        __weak UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSER];
-        userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
-        userImageButton.clipsToBounds = YES;
-        if (self.tour.author.avatarUrl != nil) {
-            NSURL *url = [NSURL URLWithString:self.tour.author.avatarUrl];
-            UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
-            [userImageButton setImageForState:UIControlStateNormal
-                                      withURL:url
-                             placeholderImage:placeholderImage];
+        [self setupHeaderCell:cell];
+    } else {
+        if (indexPath.row == 0) {
+            [self setupCell:cell withStatutOngoingOfTour:self.tour];
+        } else {
+            [self setupCell:cell withStatutEndOfTour:self.tour];
         }
     }
     return cell;
+}
+
+#define TIMELINE_TIME_TAG 10
+#define TIMELINE_STATUS_TAG 11
+#define TIMELINE_DURATION_TAG 12
+#define TIMELINE_KM_TAG 13
+
+- (void)setupHeaderCell:(UITableViewCell *)cell {
+    OTTourAuthor *author = self.tour.author;
+    UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
+    organizationLabel.text = self.tour.organizationName;
+    
+    
+    NSString *tourType = self.tour.tourType;
+    if ([tourType isEqualToString:@"barehands"]) {
+        tourType = @"sociale";
+    } else     if ([tourType isEqualToString:@"medical"]) {
+        tourType = @"médicale";
+    } else if ([tourType isEqualToString:@"alimentary"]) {
+        tourType = @"distributive";
+    }
+    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
+    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", tourType] attributes:lightAttrs];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
+    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+    [typeByNameAttrString appendAttributedString:nameAttrString];
+    UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
+    typeByNameLabel.attributedText = typeByNameAttrString;
+    
+    
+    __weak UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSER];
+    userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
+    userImageButton.clipsToBounds = YES;
+    if (self.tour.author.avatarUrl != nil) {
+        NSURL *url = [NSURL URLWithString:self.tour.author.avatarUrl];
+        UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
+        [userImageButton setImageForState:UIControlStateNormal
+                                  withURL:url
+                         placeholderImage:placeholderImage];
+    }
+
+}
+
+- (void)setupCell:(UITableViewCell *)cell withStatutOngoingOfTour:(OTTour*)tour {
+    UILabel *timeLabel = [cell viewWithTag:TIMELINE_TIME_TAG];
+    NSString *day  = [self formatDateForDisplay:tour.startTime];
+    NSString *time = [self formatHourForDisplay:tour.startTime];
+    timeLabel.text = [NSString stringWithFormat:@"%@. %@", [day uppercaseString], time];
+    
+    UILabel *statusLabel = [cell viewWithTag:TIMELINE_STATUS_TAG];
+    statusLabel.text = @"Maraude en cours";
+    
+    UILabel *durationLabel = [cell viewWithTag:TIMELINE_DURATION_TAG];
+    durationLabel.text = @"";
+    
+    UILabel *kmLabel = [cell viewWithTag:TIMELINE_KM_TAG];
+    kmLabel.text = @"";
+    
+}
+
+- (void)setupCell:(UITableViewCell *)cell withStatutEndOfTour:(OTTour*)tour {
+    UILabel *timeLabel = [cell viewWithTag:TIMELINE_TIME_TAG];
+    NSString *day  = [self formatDateForDisplay:tour.endTime];
+    NSString *time = [self formatHourForDisplay:tour.endTime];
+    
+    timeLabel.text = [NSString stringWithFormat:@"%@. %@", [day uppercaseString], time];
+    
+    UILabel *statusLabel = [cell viewWithTag:TIMELINE_STATUS_TAG];
+    statusLabel.text = @"Maraude terminée";
+    
+    UILabel *durationLabel = [cell viewWithTag:TIMELINE_DURATION_TAG];
+    NSTimeInterval interval = [tour.endTime timeIntervalSinceDate:tour.startTime];
+    durationLabel.text = [self formatHourToSecondsForDisplay:[NSDate dateWithTimeIntervalSince1970: interval]];
+    
+    UILabel *kmLabel = [cell viewWithTag:TIMELINE_KM_TAG];
+    kmLabel.text = [NSString stringWithFormat:@"%.2fkm", tour.distance];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -257,5 +315,16 @@ typedef NS_ENUM(unsigned) {
 //    [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
 //}
 
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    OTTourDetailsOptionsViewController *controller = (OTTourDetailsOptionsViewController *)segue.destinationViewController;
+    controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+    [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    
+}
 
 @end
