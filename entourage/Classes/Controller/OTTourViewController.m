@@ -94,7 +94,7 @@ typedef NS_ENUM(unsigned) {
     UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] init];
     [plusButton setImage:plusImage];
     [plusButton setTarget:self];
-    //[moreButton setAction:@selector(dismissModal)];
+    //[plusButton setAction:@selector(addUser)];
 
     
     UIImage *moreImage = [[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -102,13 +102,15 @@ typedef NS_ENUM(unsigned) {
     UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] init];
     [moreButton setImage:moreImage];
     [moreButton setTarget:self];
-    //[moreButton setAction:@selector(dismissModal)];
+    [moreButton setAction:@selector(showOptions)];
     
     [self.navigationItem setRightBarButtonItems:@[moreButton]];
     //[self.navigationItem setRightBarButtonItem:moreButton];
-
 }
 
+- (void)showOptions {
+    [self performSegueWithIdentifier:@"TourOptionsSegue" sender:nil];
+}
 
 /**************************************************************************************************/
 #pragma mark - Public Methods

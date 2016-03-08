@@ -1534,10 +1534,31 @@ Un mail récapitulatif te sera envoyé.</string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KLC-7p-Nqh"/>
+                    <connections>
+                        <segue destination="ARd-Al-TGt" kind="modal" identifier="TourOptionsSegue" id="0g9-AU-hY5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRT-27-ZJ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1690" y="751"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2H1-3R-sHe">
+            <objects>
+                <viewController id="ARd-Al-TGt" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Oeo-TB-LuT"/>
+                        <viewControllerLayoutGuide type="bottom" id="a6F-zB-XqV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wWJ-ra-tkm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jEF-tA-QbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2075" y="751"/>
         </scene>
         <!--Tour Join Request View Controller-->
         <scene sceneID="QK8-h7-B6P">
