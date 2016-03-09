@@ -41,6 +41,7 @@ typedef NS_ENUM(unsigned) {
     [self setupMoreButtons];
     
     [self getTourUsersJoins];
+    [self getTourMessages];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -118,12 +119,23 @@ typedef NS_ENUM(unsigned) {
 
 #pragma mark - Service
 - (void)getTourUsersJoins {
-    [[OTTourService new] tourUsersJoins:self.tour success:^(NSArray *tourUsers) {
+    [[OTTourService new] tourUsersJoins:self.tour
+                                success:^(NSArray *tourUsers) {
         NSLog(@"USERS: %@", tourUsers);
     } failure:^(NSError *error) {
         NSLog(@"USERSerr %@", error.description);
     }];
 }
+
+- (void)getTourMessages {
+    [[OTTourService new] tourMessages:self.tour
+                                success:^(NSArray *tourUsers) {
+        NSLog(@"MESSAGES: %@", tourUsers);
+    } failure:^(NSError *error) {
+        NSLog(@"MESSAGESerr %@", error.description);
+    }];
+}
+
 
 /**************************************************************************************************/
 #pragma mark - Public Methods

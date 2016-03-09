@@ -23,10 +23,12 @@
     {
         _uID = [dictionary valueForKey:kWSKeyID];
         _displayName = [dictionary valueForKey:kWSKeyDisplayName];
-        _requestedAtDate = [dictionary dateForKey:kWSKeyRequestedAt format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
-        if (_requestedAtDate == nil) {
+        //Java format
+        self.date = [dictionary dateForKey:kWSKeyRequestedAt format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
+        if (self.date == nil)
+        {
             // Objective-C format : "2015-11-20 09:28:52 +0000"
-            _requestedAtDate = [dictionary dateForKey:kWSKeyRequestedAt format:@"yyyy-MM-dd HH:mm:ss Z"];
+            self.date = [dictionary dateForKey:kWSKeyRequestedAt format:@"yyyy-MM-dd HH:mm:ss Z"];
         }
     }
     return self;

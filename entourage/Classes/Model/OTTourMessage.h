@@ -1,5 +1,5 @@
 //
-//  OTTourJoiner.h
+//  OTTourMessage.h
 //  entourage
 //
 //  Created by Ciprian Habuc on 09/03/16.
@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "OTTourTimelinePoint.h"
 
-@interface OTTourJoiner : OTTourTimelinePoint
+@interface OTTourMessage : OTTourTimelinePoint
 
-@property (strong, nonatomic) NSNumber *uID;
-@property (strong, nonatomic) NSString *displayName;
-@property (strong, nonatomic) NSString *status;
+@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString *userAvatarURL;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

@@ -13,6 +13,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
 #import "OTTourJoiner.h"
+#import "OTTourMessage.h"
 #import "NSDictionary+Parsing.h"
 
 /**************************************************************************************************/
@@ -23,6 +24,7 @@ NSString *const kAPITourUsersRoute = @"users";
 NSString *const kTour = @"tour";
 NSString *const kTours = @"tours";
 NSString *const kUsers = @"users";
+NSString *const kMessages = @"chat_messages";
 NSString *const kTourPoints = @"tour_points";
 
 @implementation  OTTourService
@@ -174,7 +176,35 @@ NSString *const kTourPoints = @"tour_points";
                  }
              }
      ];
+}
 
+- (void)tourMessages:(OTTour *)tour
+               success:(void (^)(NSArray *))success
+               failure:(void (^)(NSError *))failure {
+    
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_messages", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    
+    [[OTHTTPRequestManager sharedInstance]
+         GETWithUrl:url
+         andParameters:nil
+         andSuccess:^(id responseObject)
+         {
+             NSDictionary *data = responseObject;
+             NSArray *messages = [self messagesFromDictionary:data];
+             
+             if (success)
+             {
+                 success(joiners);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }
+     ];
 }
 
 
@@ -247,6 +277,8 @@ NSString *const kTourPoints = @"tour_points";
     return tours;
 }
 
+#pragma mark User Joins
+
 - (NSArray *)usersFromDictionary:(NSDictionary *)data
 {
     NSMutableArray *joiners = [[NSMutableArray alloc] init];
@@ -264,5 +296,28 @@ NSString *const kTourPoints = @"tour_points";
     OTTourJoiner *joiner = [[OTTourJoiner alloc] initWithDictionary:dictionary];
     return joiner;
 }
+
+#pragma mark Chat Messages
+
+- (NSArray *)messagesFromDictionary:(NSDictionary *)data
+{
+    NSMutableArray *messages = [[NSMutableArray alloc] init];
+    NSArray *messagesDictionaries = [data objectForKey:kUsers];
+    for (NSDictionary *messageDictionary in messagesDictionaries)
+    {
+        OTTourMessage *message = [[OTTourMessage alloc] initWithDictionary:messageDictionary];
+        [messages addObject:message];
+    }
+    return messages;
+}
+
+- (OTTourMessage *)messageFromDictionary:(NSDictionary *)dictionary
+{
+    OTTourMessage *message = [[OTTourMessage alloc] initWithDictionary:dictionary];
+    return message;
+}
+
+#pragma mark Encounters
+
 
 @end
