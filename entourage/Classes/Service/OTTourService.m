@@ -10,16 +10,19 @@
 #import "OTHTTPRequestManager.h"
 #import "OTTour.h"
 #import "OTTourPoint.h"
-#import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
+#import "OTTourJoiner.h"
+#import "NSDictionary+Parsing.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
 
 NSString *const kAPITourRoute = @"tours";
+NSString *const kAPITourUsersRoute = @"users";
 NSString *const kTour = @"tour";
 NSString *const kTours = @"tours";
+NSString *const kUsers = @"users";
 NSString *const kTourPoints = @"tour_points";
 
 @implementation  OTTourService
@@ -144,6 +147,35 @@ NSString *const kTourPoints = @"tour_points";
      ];
 }
 
+- (void)tourUsersJoins:(OTTour *)tour
+               success:(void (^)(NSArray *))success
+               failure:(void (^)(NSError *))failure {
+
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    
+    [[OTHTTPRequestManager sharedInstance]
+             GETWithUrl:url
+             andParameters:nil
+             andSuccess:^(id responseObject)
+             {
+                 NSDictionary *data = responseObject;
+                 NSArray *joiners = [self usersFromDictionary:data];
+                 
+                 if (success)
+                 {
+                     success(joiners);
+                 }
+             }
+             andFailure:^(NSError *error)
+             {
+                 if (failure)
+                 {
+                     failure(error);
+                 }
+             }
+     ];
+
+}
 
 
 - (void)toursByUserId:(NSNumber *)userId
@@ -213,6 +245,24 @@ NSString *const kTourPoints = @"tour_points";
         }
     }
     return tours;
+}
+
+- (NSArray *)usersFromDictionary:(NSDictionary *)data
+{
+    NSMutableArray *joiners = [[NSMutableArray alloc] init];
+    NSArray *joinersDictionaries = [data objectForKey:kUsers];
+    for (NSDictionary *joinerDictionary in joinersDictionaries)
+    {
+        OTTourJoiner *joiner = [[OTTourJoiner alloc] initWithDictionary:joinerDictionary];
+        [joiners addObject:joiner];
+    }
+    return joiners;
+}
+
+- (OTTourJoiner *)joinerFromDictionary:(NSDictionary *)dictionary
+{
+    OTTourJoiner *joiner = [[OTTourJoiner alloc] initWithDictionary:dictionary];
+    return joiner;
 }
 
 @end

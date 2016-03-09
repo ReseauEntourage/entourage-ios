@@ -14,6 +14,7 @@
 #import "UIColor+entourage.h"
 #import "UIButton+AFNetworking.h"
 #import "OTTourDetailsOptionsViewController.h"
+#import "OTTourService.h"
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -38,6 +39,8 @@ typedef NS_ENUM(unsigned) {
     self.title = @"MARAUDE";
     [self setupCloseModal];
     [self setupMoreButtons];
+    
+    [self getTourUsersJoins];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -111,6 +114,15 @@ typedef NS_ENUM(unsigned) {
 
 - (void)showOptions {
     [self performSegueWithIdentifier:@"TourOptionsSegue" sender:nil];
+}
+
+#pragma mark - Service
+- (void)getTourUsersJoins {
+    [[OTTourService new] tourUsersJoins:self.tour success:^(NSArray *tourUsers) {
+        NSLog(@"USERS: %@", tourUsers);
+    } failure:^(NSError *error) {
+        NSLog(@"USERSerr %@", error.description);
+    }];
 }
 
 /**************************************************************************************************/

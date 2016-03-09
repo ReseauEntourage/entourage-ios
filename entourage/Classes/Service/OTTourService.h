@@ -27,6 +27,10 @@ extern NSString *const kAPITourRoute;
                              success:(void (^)(NSMutableArray *closeTours))success
                              failure:(void (^)(NSError *error))failure;
 
+- (void)tourUsersJoins:(OTTour *)tour
+               success:(void (^)(NSArray *))success
+               failure:(void (^)(NSError *))failure;
+
 - (void)toursByUserId:(NSNumber *)userId
        withPageNumber:(NSNumber *)pageNumber
      andNumberPerPage:(NSNumber *)per

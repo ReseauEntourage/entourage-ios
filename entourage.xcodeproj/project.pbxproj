@@ -65,6 +65,7 @@
 		45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A711C56961500F68C24 /* Intro.storyboard */; };
 		45E267821C860239004D14EB /* OTTourJoinRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */; };
 		45E6BFCF1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */; };
+		45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443381C9080E900DDEBE1 /* OTTourJoiner.m */; };
 		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
 		6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */; };
@@ -206,6 +207,8 @@
 		45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoinRequestViewController.m; sourceTree = "<group>"; };
 		45E6BFCD1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourDetailsOptionsViewController.h; sourceTree = "<group>"; };
 		45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourDetailsOptionsViewController.m; sourceTree = "<group>"; };
+		45F443371C9080E900DDEBE1 /* OTTourJoiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourJoiner.h; sourceTree = "<group>"; };
+		45F443381C9080E900DDEBE1 /* OTTourJoiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoiner.m; sourceTree = "<group>"; };
 		611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		6B1A846F19E811210020FB93 /* OTPoiService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiService.h; sourceTree = "<group>"; };
 		6B1A847019E811210020FB93 /* OTPoiService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiService.m; sourceTree = "<group>"; };
@@ -516,6 +519,8 @@
 				0A4769371BFCC4EB006EA73A /* OTOrganization.m */,
 				45B3F8F41C74F40A00DCF2EC /* OTTourAuthor.h */,
 				45B3F8F51C74F40A00DCF2EC /* OTTourAuthor.m */,
+				45F443371C9080E900DDEBE1 /* OTTourJoiner.h */,
+				45F443381C9080E900DDEBE1 /* OTTourJoiner.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -977,6 +982,7 @@
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				4508AE311C7F924B00EDAC1B /* OTTourOptionsViewController.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,
+				45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */,
 				4559405E1C5F6D480099A8EE /* OTRequestOperationManager.m in Sources */,
 				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,
 			);
