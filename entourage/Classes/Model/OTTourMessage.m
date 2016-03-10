@@ -21,6 +21,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
+        self.tag = TimelinePointTagMessage;
         self.date = [dictionary dateForKey:kWSKeyCreatedAt format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
         if (self.date == nil)
         {

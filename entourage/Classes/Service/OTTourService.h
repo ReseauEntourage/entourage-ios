@@ -15,11 +15,18 @@ extern NSString *const kAPITourRoute;
 
 @interface OTTourService : NSObject
 
-- (void)sendTour:(OTTour *)tour withSuccess:(void (^)(OTTour *sentTour))success failure:(void (^)(NSError *error))failure;
+- (void)sendTour:(OTTour *)tour
+     withSuccess:(void (^)(OTTour *sentTour))success
+         failure:(void (^)(NSError *error))failure;
 
-- (void)closeTour:(OTTour *)tour withSuccess:(void (^)(OTTour *closedTour))success failure:(void (^)(NSError *error))failure;
+- (void)closeTour:(OTTour *)tour
+      withSuccess:(void (^)(OTTour *closedTour))success
+          failure:(void (^)(NSError *error))failure;
 
-- (void)sendTourPoint:(NSMutableArray *)tourPoints withTourId:(NSNumber *)tourId withSuccess:(void (^)(OTTour *updatedTour))success failure:(void (^)(NSError *error))failure;
+- (void)sendTourPoint:(NSMutableArray *)tourPoints
+           withTourId:(NSNumber *)tourId
+          withSuccess:(void (^)(OTTour *updatedTour))success
+              failure:(void (^)(NSError *error))failure;
 
 - (void)toursAroundCoordinate:(CLLocationCoordinate2D) coordinates
                                limit:(NSNumber *)limit
@@ -34,6 +41,10 @@ extern NSString *const kAPITourRoute;
 - (void)tourMessages:(OTTour *)tour
              success:(void (^)(NSArray *))success
              failure:(void (^)(NSError *))failure;
+
+- (void)tourEncounters:(OTTour *)tour
+               success:(void (^)(NSArray *))success
+               failure:(void (^)(NSError *))failure;
 
 - (void)toursByUserId:(NSNumber *)userId
        withPageNumber:(NSNumber *)pageNumber

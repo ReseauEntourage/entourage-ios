@@ -14,6 +14,7 @@
 @implementation OTEncounter
 
 NSString *const kEncounterId = @"id";
+NSString *const kUserName = @"user_name";
 NSString *const kEncounterStreetPersonName = @"street_person_name";
 NSString *const kEncounterDate = @"date";
 NSString *const kEncounterLatitude = @"latitude";
@@ -22,14 +23,16 @@ NSString *const kEncounterMessage = @"message";
 
 + (OTEncounter *)encounterWithJSONDictionary:(NSDictionary *)dictionary {
 	OTEncounter *encounter = nil;
-
+    
 	if ([dictionary isKindOfClass:[NSDictionary class]]) {
 		encounter = [[OTEncounter alloc] init];
-
+        encounter.tag = TimelinePointTagEncounter;
+        
 		encounter.sid = [dictionary numberForKey:kEncounterId];
         encounter.date = [dictionary dateForKey:kEncounterDate format:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"];
         encounter.latitude = [[dictionary numberForKey:kEncounterLatitude] doubleValue];
         encounter.longitude = [[dictionary numberForKey:kEncounterLongitude] doubleValue];
+        encounter.userName = [dictionary stringForKey:kUserName];
         encounter.streetPersonName = [dictionary stringForKey:kEncounterStreetPersonName];
         encounter.message = [dictionary stringForKey:kEncounterMessage];
 	}

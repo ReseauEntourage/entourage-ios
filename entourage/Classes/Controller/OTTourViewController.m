@@ -16,6 +16,11 @@
 #import "OTTourDetailsOptionsViewController.h"
 #import "OTTourService.h"
 
+#import "OTTourJoiner.h"
+#import "OTEncounter.h"
+#import "OTTourMessage.h"
+@class OTTourStatus;
+
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
 #define TAG_TOURUSER 3
@@ -25,8 +30,12 @@ typedef NS_ENUM(unsigned) {
     SectionTypeTimeline
 } SectionType;
 
+
 @interface OTTourViewController ()
 
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *timelinePoints;
+@property (nonatomic, strong) NSDictionary *timelineCardsClassesCellsIDs;
 @end
 
 @implementation OTTourViewController
@@ -40,55 +49,15 @@ typedef NS_ENUM(unsigned) {
     [self setupCloseModal];
     [self setupMoreButtons];
     
+    self.timelineCardsClassesCellsIDs = @{@"OTTourJoiner": @"TourJoinerCell",
+                                          @"OTTourMessage": @"TourJoinerCell",
+                                          @"OTEncounter": @"TourEncounterCell",
+                                          @"OTTourStatus": @"TourStatusCell"};
+    
+    self.timelinePoints = [[NSMutableArray alloc] init];
     [self getTourUsersJoins];
     [self getTourMessages];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    
-    NSString *date = [self formatDateForDisplay:self.tour.startTime];
-    NSString *startTime = [self formatHourForDisplay:self.tour.startTime];
-    NSString *endTime = [self formatHourForDisplay:self.tour.endTime];
-    NSString *image;
-    NSString *vehicle;
-    NSString *type;
-    NSString *status;
-    
-    if ([self.tour.vehicleType isEqualToString:@"feet"]) {
-        vehicle = @"A pieds";
-    }
-    else if ([self.tour.vehicleType isEqualToString:@"car"]) {
-        vehicle = @"En voiture";
-    }
-    
-    if ([self.tour.tourType isEqualToString:@"barehands"]) {
-        image = @"ic_bare_hands.png";
-        type = @"A mains nues";
-    }
-    else if ([self.tour.tourType isEqualToString:@"medical"]) {
-        image = @"ic_medical.png";
-        type = @"Médicale";
-    }
-    else if ([self.tour.tourType isEqualToString:@"alimentary"]) {
-        image = @"ic_alimentary.png";
-        type = @"Alimentaire";
-    }
-    
-    if ([self.tour.status isEqualToString:@"ongoing"]) {
-        status = @"En cours";
-    }
-    else if ([self.tour.status isEqualToString:@"closed"]) {
-        status = @"Terminée";
-    }
-    
-    //self.tourTypeImage.image = [UIImage imageNamed:image];
-//    self.dateLabel.text = date;
-//    self.startTime.text = startTime;
-//    self.endTime.text = endTime;
-//    self.organizationNameLabel.text = self.tour.organizationName;
-//    self.transportTypeLabel.text = vehicle;
-//    self.tourTypeLabel.text = type;
-//    self.tourStatusLabel.text = status;
+    [self getTourEncounters];
 }
 
 /**************************************************************************************************/
@@ -117,11 +86,19 @@ typedef NS_ENUM(unsigned) {
     [self performSegueWithIdentifier:@"TourOptionsSegue" sender:nil];
 }
 
+- (void)updateTableViewAddingTimelinePoints:(NSArray *)timelinePoints {
+    [self.timelinePoints addObjectsFromArray:timelinePoints];
+    self.timelinePoints = [self.timelinePoints sortedArrayUsingSelector:@selector(compare:)].mutableCopy;
+    [self.tableView reloadData];
+}
+
+
 #pragma mark - Service
 - (void)getTourUsersJoins {
     [[OTTourService new] tourUsersJoins:self.tour
                                 success:^(NSArray *tourUsers) {
-        NSLog(@"USERS: %@", tourUsers);
+                                    NSLog(@"USERS: %@", tourUsers);
+                                    [self updateTableViewAddingTimelinePoints:tourUsers];
     } failure:^(NSError *error) {
         NSLog(@"USERSerr %@", error.description);
     }];
@@ -129,11 +106,23 @@ typedef NS_ENUM(unsigned) {
 
 - (void)getTourMessages {
     [[OTTourService new] tourMessages:self.tour
-                                success:^(NSArray *tourUsers) {
-        NSLog(@"MESSAGES: %@", tourUsers);
+                                success:^(NSArray *tourMessages) {
+                                    NSLog(@"MESSAGES: %@", tourMessages);
+                                    [self updateTableViewAddingTimelinePoints:tourMessages];
+
     } failure:^(NSError *error) {
         NSLog(@"MESSAGESerr %@", error.description);
     }];
+}
+
+- (void)getTourEncounters {
+    [[OTTourService new] tourEncounters:self.tour
+                              success:^(NSArray *tourEncounters) {
+                                  NSLog(@"ENCOUNTERS: %@", tourEncounters);
+                                  [self updateTableViewAddingTimelinePoints:tourEncounters];
+                              } failure:^(NSError *error) {
+                                  NSLog(@"ENCOUNTERSSerr %@", error.description);
+                              }];
 }
 
 
@@ -176,6 +165,19 @@ typedef NS_ENUM(unsigned) {
     return 2;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
+        case SectionTypeHeader:
+            return 1;
+        case SectionTypeTimeline:
+            return self.timelinePoints.count;
+            
+        default:
+            return 0.0f;
+    }
+    
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     switch (section) {
         case SectionTypeHeader:
@@ -186,19 +188,6 @@ typedef NS_ENUM(unsigned) {
         default:
             return 0.0f;
     }
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case SectionTypeHeader:
-            return 1;
-        case SectionTypeTimeline:
-            return 2;
-            
-        default:
-            return 0.0f;
-    }
-
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -219,8 +208,10 @@ typedef NS_ENUM(unsigned) {
         case SectionTypeHeader:
             cellID = @"TourDetailsCell";
             break;
-        case SectionTypeTimeline:
-            cellID = @"TourStatusCell";
+        case SectionTypeTimeline: {
+            NSString *timelinePointClassName = NSStringFromClass([ self.timelinePoints[indexPath.row] class]);
+            cellID = [self.timelineCardsClassesCellsIDs valueForKey:timelinePointClassName];
+        }
             break;
         default:
             break;
@@ -231,19 +222,47 @@ typedef NS_ENUM(unsigned) {
     if (indexPath.section == SectionTypeHeader) {
         [self setupHeaderCell:cell];
     } else {
-        if (indexPath.row == 0) {
-            [self setupCell:cell withStatutOngoingOfTour:self.tour];
-        } else {
-            [self setupCell:cell withStatutEndOfTour:self.tour];
+        switch (((OTTourTimelinePoint *)self.timelinePoints[indexPath.row]).tag) {
+            case TimelinePointTagEncounter:
+                [self setupEncounterCell:cell withEncounter:((OTEncounter *)self.timelinePoints[indexPath.row])];
+                break;
+            case TimelinePointTagJoiner:
+                [self setupJoinerCell:cell withJoiner:((OTTourJoiner *)self.timelinePoints[indexPath.row])];
+                break;
+            case TimelinePointTagMessage:
+            case TimelinePointTagStatus:
+                
+            default:
+                break;
         }
     }
     return cell;
 }
 
+
+
+
 #define TIMELINE_TIME_TAG 10
 #define TIMELINE_STATUS_TAG 11
 #define TIMELINE_DURATION_TAG 12
 #define TIMELINE_KM_TAG 13
+
+#define TIMELINE_ENCOUNTER 100
+#define TIMELINE_JOINER 200
+
+- (void)setupEncounterCell:(UITableViewCell *)cell withEncounter:(OTEncounter *)encounter {
+    //User et Encounter se sont rencontrés ici.
+    NSString *text = [NSString stringWithFormat:@"%@ et %@ se sont rencontrés ici.", encounter.userName, encounter.streetPersonName];
+    UILabel *encounterLabel = [cell viewWithTag:TIMELINE_ENCOUNTER];
+    encounterLabel.text = text;
+}
+
+- (void)setupJoinerCell:(UITableViewCell *)cell withJoiner:(OTTourJoiner *)joiner {
+    NSString *text = [NSString stringWithFormat:@"%@ a rejoint votre maraude.", joiner.displayName];
+    UILabel *joinerLabel = [cell viewWithTag:TIMELINE_JOINER];
+    joinerLabel.text = text;
+}
+
 
 - (void)setupHeaderCell:(UITableViewCell *)cell {
     OTTourAuthor *author = self.tour.author;
@@ -317,12 +336,23 @@ typedef NS_ENUM(unsigned) {
     kmLabel.text = [NSString stringWithFormat:@"%.2fkm", tour.distance];
 }
 
+#define CELLHEIGHT_JOINER 49.0f
+#define CELLHEIGHT_ENCOUNTER 49.0f
+#define CELLHEIGHT_STATUS 157.0f
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case SectionTypeHeader:
             return  70.0f;
-        case SectionTypeTimeline:
-            return 157.0f;
+        case SectionTypeTimeline: {
+            OTTourTimelinePoint *timelinePoint = self.timelinePoints[indexPath.row];
+            if ([timelinePoint isKindOfClass:[OTTourJoiner class]])
+                return CELLHEIGHT_JOINER;
+            if ([timelinePoint isKindOfClass:[OTEncounter class]])
+                return CELLHEIGHT_ENCOUNTER;
+            if ([timelinePoint isKindOfClass:[NSString class]])
+                return CELLHEIGHT_STATUS;
+        }
             
         default:
             return 0.0f;

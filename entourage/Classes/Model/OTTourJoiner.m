@@ -21,6 +21,7 @@
     self = [super init];
     if (self)
     {
+        self.tag = TimelinePointTagJoiner;
         _uID = [dictionary valueForKey:kWSKeyID];
         _displayName = [dictionary valueForKey:kWSKeyDisplayName];
         //Java format

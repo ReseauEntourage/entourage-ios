@@ -958,7 +958,12 @@ static bool isShowingOptions = NO;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedTour = self.tours[indexPath.row];
-    [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+    if ([self.selectedTour.joinStatus isEqualToString:@"accepted"]) {
+        [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+    } else {
+#warning goto screen 14.2
+        NSLog(@"self.selectedTour.joinStatus = %@", self.selectedTour.joinStatus);
+    }
 }
 
 #pragma mark - UIScrollViewDelegate

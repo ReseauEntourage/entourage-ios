@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTTourTimelinePoint.h"
 
-@interface OTEncounter : NSObject
+@interface OTEncounter : OTTourTimelinePoint
 
 @property (strong, nonatomic) NSNumber *sid;
-@property (strong, nonatomic) NSDate *date;
 @property (nonatomic) double longitude;
 @property (nonatomic) double latitude;
 @property (strong, nonatomic) NSNumber *userId;

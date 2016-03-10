@@ -53,7 +53,7 @@ NSString *const kEncounter = @"encounter";
 }
 
 /**************************************************************************************************/
-#pragma mark - Private methods
+#pragma mark -  methods
 
 - (OTEncounter *)encounterFromDictionary:(NSDictionary *)data
 {

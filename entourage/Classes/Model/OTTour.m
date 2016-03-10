@@ -120,6 +120,7 @@ NSString *const kEncountersCount = @"encounter_count";
             // Objective-C format : "2015-11-20 09:28:52 +0000"
             tour.endTime = [dictionary dateForKey:ktourEndTime format:@"yyyy-MM-dd HH:mm:ss Z"];
         }
+        //NSLog(@"Tour %@ is %@", tour.sid, tour.status);
     }
     
     return tour;

@@ -8,9 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(long) {
+    TimelinePointTagStatus,
+    TimelinePointTagEncounter,
+    TimelinePointTagJoiner,
+    TimelinePointTagMessage
+} TimelinePointTag;
+
 @interface OTTourTimelinePoint : NSObject
 
 @property (strong, nonatomic) NSDate *date;
+@property (nonatomic) NSInteger tag;
 
 - (NSComparisonResult)compare:(OTTourTimelinePoint *)otherObject;
 
