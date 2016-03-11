@@ -68,6 +68,7 @@
 		45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443381C9080E900DDEBE1 /* OTTourJoiner.m */; };
 		45F4433C1C90B40400DDEBE1 /* OTTourTimelinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F4433B1C90B40400DDEBE1 /* OTTourTimelinePoint.m */; };
 		45F443441C90BCB700DDEBE1 /* OTTourMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443431C90BCB700DDEBE1 /* OTTourMessage.m */; };
+		45F443471C9314A800DDEBE1 /* OTTourStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443461C9314A800DDEBE1 /* OTTourStatus.m */; };
 		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
 		6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */; };
@@ -215,6 +216,8 @@
 		45F4433B1C90B40400DDEBE1 /* OTTourTimelinePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourTimelinePoint.m; sourceTree = "<group>"; };
 		45F443421C90BCB700DDEBE1 /* OTTourMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourMessage.h; sourceTree = "<group>"; };
 		45F443431C90BCB700DDEBE1 /* OTTourMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourMessage.m; sourceTree = "<group>"; };
+		45F443451C9314A800DDEBE1 /* OTTourStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourStatus.h; sourceTree = "<group>"; };
+		45F443461C9314A800DDEBE1 /* OTTourStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourStatus.m; sourceTree = "<group>"; };
 		611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		6B1A846F19E811210020FB93 /* OTPoiService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiService.h; sourceTree = "<group>"; };
 		6B1A847019E811210020FB93 /* OTPoiService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiService.m; sourceTree = "<group>"; };
@@ -461,6 +464,8 @@
 				45F443381C9080E900DDEBE1 /* OTTourJoiner.m */,
 				45F443421C90BCB700DDEBE1 /* OTTourMessage.h */,
 				45F443431C90BCB700DDEBE1 /* OTTourMessage.m */,
+				45F443451C9314A800DDEBE1 /* OTTourStatus.h */,
+				45F443461C9314A800DDEBE1 /* OTTourStatus.m */,
 			);
 			name = Timeline;
 			sourceTree = "<group>";
@@ -992,6 +997,7 @@
 				0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */,
 				DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */,
 				A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */,
+				45F443471C9314A800DDEBE1 /* OTTourStatus.m in Sources */,
 				0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */,
 				0A70FA181BFDD69C0080E8EC /* OTToursTableViewController.m in Sources */,
 				452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */,

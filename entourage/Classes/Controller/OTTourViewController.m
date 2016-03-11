@@ -19,7 +19,8 @@
 #import "OTTourJoiner.h"
 #import "OTEncounter.h"
 #import "OTTourMessage.h"
-@class OTTourStatus;
+#import "OTTourStatus.h"
+
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -33,7 +34,8 @@ typedef NS_ENUM(unsigned) {
 
 @interface OTTourViewController ()
 
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) UITextField *chatTextField;
 @property (nonatomic, strong) NSMutableArray *timelinePoints;
 @property (nonatomic, strong) NSDictionary *timelineCardsClassesCellsIDs;
 @end
@@ -54,7 +56,8 @@ typedef NS_ENUM(unsigned) {
                                           @"OTEncounter": @"TourEncounterCell",
                                           @"OTTourStatus": @"TourStatusCell"};
     
-    self.timelinePoints = [[NSMutableArray alloc] init];
+    [self initializeTimelinePoints];
+    
     [self getTourUsersJoins];
     [self getTourMessages];
     [self getTourEncounters];
@@ -62,6 +65,29 @@ typedef NS_ENUM(unsigned) {
 
 /**************************************************************************************************/
 #pragma mark - Private Methods
+
+- (void)initializeTimelinePoints {
+    self.timelinePoints = [[NSMutableArray alloc] init];
+    
+    OTTourStatus *tourStartStatus = [[OTTourStatus alloc] init];
+    tourStartStatus.date = self.tour.startTime;
+    tourStartStatus.status = @"Maraude en cours";
+    tourStartStatus.duration = 0;
+    tourStartStatus.km = 0;
+    //[self.timelinePoints addObject:tourStartStatus];
+    [self updateTableViewAddingTimelinePoints:@[tourStartStatus]];
+    
+    if (self.tour.endTime) {
+        OTTourStatus *tourEndStatus = [[OTTourStatus alloc] init];
+        tourEndStatus.date = self.tour.endTime;
+        tourEndStatus.status = @"Maraude terminée";
+        tourEndStatus.duration = [self.tour.endTime timeIntervalSinceDate:self.tour.startTime];;
+        tourEndStatus.km = self.tour.distance;
+        //[self.timelinePoints addObject:tourStartStatus];
+        [self updateTableViewAddingTimelinePoints:@[tourEndStatus]];
+    }
+}
+
 - (void)setupMoreButtons {
     UIImage *plusImage = [[UIImage imageNamed:@"userPlus.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
@@ -89,6 +115,7 @@ typedef NS_ENUM(unsigned) {
 - (void)updateTableViewAddingTimelinePoints:(NSArray *)timelinePoints {
     [self.timelinePoints addObjectsFromArray:timelinePoints];
     self.timelinePoints = [self.timelinePoints sortedArrayUsingSelector:@selector(compare:)].mutableCopy;
+    NSLog(@"%lu timeline points", (unsigned long)self.timelinePoints.count);
     [self.tableView reloadData];
 }
 
@@ -219,6 +246,7 @@ typedef NS_ENUM(unsigned) {
 
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    
     if (indexPath.section == SectionTypeHeader) {
         [self setupHeaderCell:cell];
     } else {
@@ -230,7 +258,11 @@ typedef NS_ENUM(unsigned) {
                 [self setupJoinerCell:cell withJoiner:((OTTourJoiner *)self.timelinePoints[indexPath.row])];
                 break;
             case TimelinePointTagMessage:
+                //[self setupMessageCell:cell withMessage:((OTTourMessage *)self.timelinePoints[indexPath.row])];
+                break;
             case TimelinePointTagStatus:
+                [self setupStatusCell:cell withStatus:((OTTourStatus *)self.timelinePoints[indexPath.row])];
+                break;
                 
             default:
                 break;
@@ -238,9 +270,6 @@ typedef NS_ENUM(unsigned) {
     }
     return cell;
 }
-
-
-
 
 #define TIMELINE_TIME_TAG 10
 #define TIMELINE_STATUS_TAG 11
@@ -252,17 +281,47 @@ typedef NS_ENUM(unsigned) {
 
 - (void)setupEncounterCell:(UITableViewCell *)cell withEncounter:(OTEncounter *)encounter {
     //User et Encounter se sont rencontrés ici.
-    NSString *text = [NSString stringWithFormat:@"%@ et %@ se sont rencontrés ici.", encounter.userName, encounter.streetPersonName];
+    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
+    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold],
+                                NSForegroundColorAttributeName: [UIColor appOrangeColor]};
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ", encounter.userName] attributes:boldAttrs];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"et %@ se sont rencontrés ici.", encounter.streetPersonName] attributes:lightAttrs];
+    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+    [typeByNameAttrString appendAttributedString:nameAttrString];
     UILabel *encounterLabel = [cell viewWithTag:TIMELINE_ENCOUNTER];
-    encounterLabel.text = text;
+    encounterLabel.attributedText = typeByNameAttrString;
 }
 
 - (void)setupJoinerCell:(UITableViewCell *)cell withJoiner:(OTTourJoiner *)joiner {
-    NSString *text = [NSString stringWithFormat:@"%@ a rejoint votre maraude.", joiner.displayName];
+    
+    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
+    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold],
+                                NSForegroundColorAttributeName: [UIColor appOrangeColor]};
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ", joiner.displayName] attributes:boldAttrs];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:@"a rejoint votre maraude." attributes:lightAttrs];
+    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+    [typeByNameAttrString appendAttributedString:nameAttrString];
     UILabel *joinerLabel = [cell viewWithTag:TIMELINE_JOINER];
-    joinerLabel.text = text;
+    joinerLabel.attributedText = typeByNameAttrString;
 }
 
+- (void)setupStatusCell:(UITableViewCell *)cell withStatus:(OTTourStatus *)statusPoint {
+    UILabel *timeLabel = [cell viewWithTag:TIMELINE_TIME_TAG];
+    NSString *day  = [self formatDateForDisplay:statusPoint.date];
+    NSString *time = [self formatHourForDisplay:statusPoint.date];
+    
+    timeLabel.text = [NSString stringWithFormat:@"%@. %@", [day uppercaseString], time];
+    
+    UILabel *statusLabel = [cell viewWithTag:TIMELINE_STATUS_TAG];
+    statusLabel.text = statusPoint.status;
+    
+    UILabel *durationLabel = [cell viewWithTag:TIMELINE_DURATION_TAG];
+    durationLabel.text = [self formatHourToSecondsForDisplay:[NSDate dateWithTimeIntervalSince1970: statusPoint.duration]];
+    
+    UILabel *kmLabel = [cell viewWithTag:TIMELINE_KM_TAG];
+    kmLabel.text = [NSString stringWithFormat:@"%.2fkm", statusPoint.km];
+
+}
 
 - (void)setupHeaderCell:(UITableViewCell *)cell {
     OTTourAuthor *author = self.tour.author;
@@ -301,41 +360,7 @@ typedef NS_ENUM(unsigned) {
 
 }
 
-- (void)setupCell:(UITableViewCell *)cell withStatutOngoingOfTour:(OTTour*)tour {
-    UILabel *timeLabel = [cell viewWithTag:TIMELINE_TIME_TAG];
-    NSString *day  = [self formatDateForDisplay:tour.startTime];
-    NSString *time = [self formatHourForDisplay:tour.startTime];
-    timeLabel.text = [NSString stringWithFormat:@"%@. %@", [day uppercaseString], time];
-    
-    UILabel *statusLabel = [cell viewWithTag:TIMELINE_STATUS_TAG];
-    statusLabel.text = @"Maraude en cours";
-    
-    UILabel *durationLabel = [cell viewWithTag:TIMELINE_DURATION_TAG];
-    durationLabel.text = @"";
-    
-    UILabel *kmLabel = [cell viewWithTag:TIMELINE_KM_TAG];
-    kmLabel.text = @"";
-    
-}
-
-- (void)setupCell:(UITableViewCell *)cell withStatutEndOfTour:(OTTour*)tour {
-    UILabel *timeLabel = [cell viewWithTag:TIMELINE_TIME_TAG];
-    NSString *day  = [self formatDateForDisplay:tour.endTime];
-    NSString *time = [self formatHourForDisplay:tour.endTime];
-    
-    timeLabel.text = [NSString stringWithFormat:@"%@. %@", [day uppercaseString], time];
-    
-    UILabel *statusLabel = [cell viewWithTag:TIMELINE_STATUS_TAG];
-    statusLabel.text = @"Maraude terminée";
-    
-    UILabel *durationLabel = [cell viewWithTag:TIMELINE_DURATION_TAG];
-    NSTimeInterval interval = [tour.endTime timeIntervalSinceDate:tour.startTime];
-    durationLabel.text = [self formatHourToSecondsForDisplay:[NSDate dateWithTimeIntervalSince1970: interval]];
-    
-    UILabel *kmLabel = [cell viewWithTag:TIMELINE_KM_TAG];
-    kmLabel.text = [NSString stringWithFormat:@"%.2fkm", tour.distance];
-}
-
+#define CELLHEIGHT_HEADER 70.0f
 #define CELLHEIGHT_JOINER 49.0f
 #define CELLHEIGHT_ENCOUNTER 49.0f
 #define CELLHEIGHT_STATUS 157.0f
@@ -343,21 +368,19 @@ typedef NS_ENUM(unsigned) {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case SectionTypeHeader:
-            return  70.0f;
+            return CELLHEIGHT_HEADER;
         case SectionTypeTimeline: {
             OTTourTimelinePoint *timelinePoint = self.timelinePoints[indexPath.row];
             if ([timelinePoint isKindOfClass:[OTTourJoiner class]])
                 return CELLHEIGHT_JOINER;
             if ([timelinePoint isKindOfClass:[OTEncounter class]])
                 return CELLHEIGHT_ENCOUNTER;
-            if ([timelinePoint isKindOfClass:[NSString class]])
+            if ([timelinePoint isKindOfClass:[OTTourStatus class]])
                 return CELLHEIGHT_STATUS;
         }
-            
         default:
             return 0.0f;
     }
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
