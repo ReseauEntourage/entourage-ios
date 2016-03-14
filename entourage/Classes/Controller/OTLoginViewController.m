@@ -14,6 +14,7 @@
 
 // Service
 #import "OTAuthService.h"
+#import "OTJSONResponseSerializer.h"
 
 // Utils
 #import "UITextField+indentation.h"
@@ -140,15 +141,36 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    }
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
-                                   [[[UIAlertView alloc]
-                                     initWithTitle:@"Erreur"
-                                     message:@"Echec de la connexion"
-                                     delegate:nil
-                                     cancelButtonTitle:nil
-                                     otherButtonTitles:@"ok",
-                                     nil] show];
+                                   NSString *alertTitle = @"Erreur";
+                                   NSString *alertText = @"Echec de la connexion";
+                                   NSString *buttonTitle = @"ok";
+                                   if ([[error.userInfo valueForKey:JSONResponseSerializerWithDataKey] isEqualToString:@"unauthorized"]) {
+                                       alertTitle = @"Veuillez réessayer";
+                                       alertText = @"Le numéro de téléphone et ce code d’accès ne correspondent pas.";
+                                       buttonTitle = @"Réessayer";
+
+                                   }
+                                   UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
+                                                                                                  message:alertText
+                                                                                           preferredStyle:UIAlertControllerStyleAlert];
+                                   UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle
+                                                                                           style:UIAlertActionStyleDefault
+                                                                                         handler:^(UIAlertAction * _Nonnull action) {}];
+                                   [alert addAction: defaultAction];
+                                   [self presentViewController:alert animated:YES completion:nil];
+                                   
                                }];
 }
+
+/********************************************************************************/
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if (textField == self.phoneTextField) {
+        textField.text = [textField.text phoneNumberServerRepresentation];
+    }
+    return YES;
+}
+
 
 /********************************************************************************/
 #pragma mark - OTAskMoreViewControllerDelegate

@@ -55,13 +55,14 @@
 
 - (NSString *) phoneNumberServerRepresentation
 {
-  //TODO if number if starting with a 0, it means it is a french number so replace 0 by +33
+  //if number if starting with a 0, it means it is a French number so replace 0 by +33
     if ([self matchesRegularExpression:@"^(0)[67](\\s?\\d{2}){4}$"])
     {
         NSRange range = NSMakeRange(0, 1);
         return [[self stringByReplacingCharactersInRange:range withString:@"+33"] stringByReplacingOccurrencesOfString:@" " withString:@""];
     }
-  //TODO: if number is not starting by a + we add one + so we assume it is a international number (maybe use NSTextCheckingTypePhoneNumber here)
+   
+   //if number is not starting by a + we add one + so we assume it is a international number (maybe use NSTextCheckingTypePhoneNumber here)
     return self;
 }
 

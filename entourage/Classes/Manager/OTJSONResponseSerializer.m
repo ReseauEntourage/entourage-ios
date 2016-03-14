@@ -24,7 +24,7 @@
         if (data == nil) {
             userInfo[JSONResponseSerializerWithDataKey] = @"";
         } else {
-            NSString *errorMessage = [JSONObject valueForKey:@"error"];
+            NSString *errorMessage = [JSONObject valueForKey:@"message"];
             if (errorMessage != nil) {
                 userInfo[JSONResponseSerializerWithDataKey] = errorMessage;
             }

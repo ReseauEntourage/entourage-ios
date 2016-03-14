@@ -1541,7 +1541,7 @@ Un mail récapitulatif te sera envoyé.</string>
                                             <rect key="frame" x="54" y="7" width="219" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                             <connections>
                                                 <outlet property="delegate" destination="Hn0-z2-6tI" id="aRR-LO-b3E"/>
                                             </connections>

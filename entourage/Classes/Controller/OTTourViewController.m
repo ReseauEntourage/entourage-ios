@@ -20,6 +20,7 @@
 #import "OTEncounter.h"
 #import "OTTourMessage.h"
 #import "OTTourStatus.h"
+#import "IQKeyboardManager.h"
 
 
 #define TAG_ORGANIZATION 1
@@ -61,6 +62,8 @@ typedef NS_ENUM(unsigned) {
     [self getTourUsersJoins];
     [self getTourMessages];
     [self getTourEncounters];
+    
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
 /**************************************************************************************************/
@@ -159,6 +162,7 @@ typedef NS_ENUM(unsigned) {
                               onTour:self.tour
                              success:^(OTTourMessage * message) {
                                  NSLog(@"CHAT %@", message.text);
+                                 self.chatTextField.text = @"";
                              } failure:^(NSError *error) {
                                  NSLog(@"CHATerr: %@", error.description);
                              }];
