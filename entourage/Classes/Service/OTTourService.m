@@ -182,7 +182,6 @@ NSString *const kTourPoints = @"tour_points";
              }
          }
      ];
-
 }
 
 

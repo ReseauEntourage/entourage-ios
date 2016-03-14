@@ -61,7 +61,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 	[super viewDidLoad];
     
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    self.nameLabel.text = [self.currentUser fullname];
+    self.nameLabel.text = [self.currentUser displayName];
 
 
 	self.menuItems = [OTMenuViewController createMenuItems];
