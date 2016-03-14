@@ -151,6 +151,41 @@ NSString *const kTourPoints = @"tour_points";
      ];
 }
 
+- (void)sendMessage:(NSString *)message
+             onTour:(OTTour *)tour
+            success:(void(^)(OTTourMessage *))success
+            failure:(void (^)(NSError *)) failure {
+    
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_messages", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    
+    NSDictionary *messageDictionary = @{@"chat_message" : @{@"content": message}};
+
+    
+    [[OTHTTPRequestManager sharedInstance]
+         POSTWithUrl:url
+         andParameters:messageDictionary
+         andSuccess:^(id responseObject)
+         {
+             NSDictionary *data = responseObject;
+             OTTourMessage *message = [self messageFromDictionary:data];
+             
+             if (success)
+             {
+                 success(message);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }
+     ];
+
+}
+
+
 - (void)tourUsersJoins:(OTTour *)tour
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure {

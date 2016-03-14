@@ -32,10 +32,10 @@ typedef NS_ENUM(unsigned) {
 } SectionType;
 
 
-@interface OTTourViewController ()
+@interface OTTourViewController () <UITextFieldDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) UITextField *chatTextField;
+@property (nonatomic, weak) IBOutlet UITextField *chatTextField;
 @property (nonatomic, strong) NSMutableArray *timelinePoints;
 @property (nonatomic, strong) NSDictionary *timelineCardsClassesCellsIDs;
 @end
@@ -150,6 +150,18 @@ typedef NS_ENUM(unsigned) {
                               } failure:^(NSError *error) {
                                   NSLog(@"ENCOUNTERSSerr %@", error.description);
                               }];
+}
+
+- (IBAction)sendMessage {
+    
+    [self.chatTextField resignFirstResponder];
+    [[OTTourService new] sendMessage:self.chatTextField.text
+                              onTour:self.tour
+                             success:^(OTTourMessage * message) {
+                                 NSLog(@"CHAT %@", message.text);
+                             } failure:^(NSError *error) {
+                                 NSLog(@"CHATerr: %@", error.description);
+                             }];
 }
 
 
@@ -392,6 +404,13 @@ typedef NS_ENUM(unsigned) {
 //    [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
 //}
 
+#pragma mark - UITextFieldDelegate 
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    // Do whatever you want for your done button
+    //[self.chatTextField resignFirstResponder];
+    return YES;
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

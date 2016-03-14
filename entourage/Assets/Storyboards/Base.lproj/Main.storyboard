@@ -1530,7 +1530,11 @@ Un mail récapitulatif te sera envoyé.</string>
                                     <constraint firstAttribute="height" constant="44" id="nmY-5F-a8W"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem image="plus" id="hkh-wW-8qq"/>
+                                    <barButtonItem image="plus" id="hkh-wW-8qq">
+                                        <connections>
+                                            <action selector="sendMessage" destination="Hn0-z2-6tI" id="vze-v3-giA"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="9pR-xK-GKv"/>
                                     <barButtonItem style="plain" id="2ru-bF-8ya">
                                         <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="yxt-8Y-Wpv">
@@ -1538,6 +1542,9 @@ Un mail récapitulatif te sera envoyé.</string>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="Hn0-z2-6tI" id="aRR-LO-b3E"/>
+                                            </connections>
                                         </textField>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="N5I-mS-IMG"/>
@@ -1560,6 +1567,7 @@ Un mail récapitulatif te sera envoyé.</string>
                     </view>
                     <navigationItem key="navigationItem" id="KLC-7p-Nqh"/>
                     <connections>
+                        <outlet property="chatTextField" destination="yxt-8Y-Wpv" id="wTZ-eH-GBD"/>
                         <outlet property="tableView" destination="CGA-by-Pfy" id="3FD-W1-cWm"/>
                         <segue destination="ARd-Al-TGt" kind="modal" identifier="TourOptionsSegue" id="0g9-AU-hY5"/>
                     </connections>

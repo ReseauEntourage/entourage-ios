@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@class OTTour;
+@class OTTour, OTTourMessage;
 
 extern NSString *const kAPITourRoute;
 
@@ -37,6 +37,11 @@ extern NSString *const kAPITourRoute;
 - (void)tourUsersJoins:(OTTour *)tour
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure;
+
+- (void)sendMessage:(NSString *)message
+             onTour:(OTTour *)tour
+            success:(void(^)(OTTourMessage *))success
+            failure:(void (^)(NSError *)) failure;
 
 - (void)tourMessages:(OTTour *)tour
              success:(void (^)(NSArray *))success
