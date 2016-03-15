@@ -7,6 +7,8 @@
 //
 
 #import "OTTourJoinRequestViewController.h"
+#import "OTTourService.h"
+#import "SVProgressHUD.h"
 
 @interface OTTourJoinRequestViewController ()
 
@@ -21,6 +23,20 @@
     // Do any additional setup after loading the view.
     
     [self setupUI];
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[OTTourService new] joinTour:self.tour
+                          success:^(OTTourJoiner *joiner) {
+                              
+                          }
+                          failure:^(NSError *error) {
+                              NSLog(@"failed joining tour %@ with error %@", self.tour.sid, error.description);
+                              [self dismissViewControllerAnimated:YES completion:^{
+                                  [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
+                              }];
+                          }];
+
 }
 
 - (void)didReceiveMemoryWarning {

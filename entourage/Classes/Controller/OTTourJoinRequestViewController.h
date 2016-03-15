@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTTour.h"
 
 @protocol OTTourJoinRequestDelegate  <NSObject>
 
@@ -17,5 +18,6 @@
 @interface OTTourJoinRequestViewController : UIViewController
 
 @property (nonatomic, weak) id<OTTourJoinRequestDelegate> tourJoinRequestDelegate;
+@property (nonatomic, strong) OTTour *tour;
 
 @end

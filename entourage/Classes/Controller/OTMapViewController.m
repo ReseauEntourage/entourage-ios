@@ -154,11 +154,6 @@
     self.mapSegmentedControl.layer.cornerRadius = 4;
     [self configureTableView];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"token"
-message:[[NSUserDefaults standardUserDefaults]stringForKey:@"device_token"]
-                                                   delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
-    [alert show];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -738,6 +733,7 @@ message:[[NSUserDefaults standardUserDefaults]stringForKey:@"device_token"]
         OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
         controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.tour = [self.tours firstObject];
         controller.tourJoinRequestDelegate = self;
        
     }

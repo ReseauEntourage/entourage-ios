@@ -272,6 +272,39 @@ NSString *const kTourPoints = @"tour_points";
      ];
 }
 
+- (void)joinTour:(OTTour *)tour
+         success:(void(^)(OTTourJoiner *))success
+         failure:(void (^)(NSError *)) failure {
+    
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    
+    
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         NSDictionary *joinerDictionary = [data objectForKey:@"user"];
+         OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
+         
+         if (success)
+         {
+             success(joiner);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }
+     ];
+}
+
+
 
 - (void)toursByUserId:(NSNumber *)userId
        withPageNumber:(NSNumber *)pageNumber
