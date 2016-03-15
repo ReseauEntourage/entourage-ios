@@ -153,6 +153,12 @@
     //[self configureMapView];
     self.mapSegmentedControl.layer.cornerRadius = 4;
     [self configureTableView];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"token"
+message:[[NSUserDefaults standardUserDefaults]stringForKey:@"device_token"]
+                                                   delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+    [alert show];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

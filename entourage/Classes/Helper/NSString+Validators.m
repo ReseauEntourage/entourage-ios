@@ -16,9 +16,11 @@
 
 - (BOOL)isValidPhoneNumber
 {
-    NSString *regexCA = @"^((\\+|00)1\\s?|)\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+    NSString *regexCA = @"^((\\+|00)1\\s?|)\\(?(\\d{3})\\)?\\s?(\\d{3})\\s?(\\d{4})$";
     NSString *regexFR = @"^((\\+|00)33\\s?|0)[67](\\s?\\d{2}){4}$";
     
+    
+    NSString *regexInternational = @"^\\+(?:[0-9]?){6,14}[0-9]$";
 #if DEBUG
     return YES;
 #endif
@@ -55,14 +57,31 @@
 
 - (NSString *) phoneNumberServerRepresentation
 {
-  //if number if starting with a 0, it means it is a French number so replace 0 by +33
+    NSString *serverNumber = self;
+    serverNumber = [serverNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    serverNumber = [serverNumber stringByReplacingOccurrencesOfString:@"." withString:@""];
+    serverNumber = [serverNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    serverNumber = [serverNumber stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    serverNumber = [serverNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
+
+    //if number if starting with a 0, it means it is a French number so replace 0 by +33
     if ([self matchesRegularExpression:@"^(0)[67](\\s?\\d{2}){4}$"])
     {
+        //    07 40 88 42 67
+        // +40 7 40 88 42 67
         NSRange range = NSMakeRange(0, 1);
-        return [[self stringByReplacingCharactersInRange:range withString:@"+33"] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        serverNumber = [serverNumber stringByReplacingCharactersInRange:range withString:@"+33"];
     }
-   
-   //if number is not starting by a + we add one + so we assume it is a international number (maybe use NSTextCheckingTypePhoneNumber here)
+    if ([serverNumber hasPrefix:@"00"])
+    {
+        serverNumber = [serverNumber stringByReplacingCharactersInRange:NSMakeRange(0, 2) withString:@"+"];
+    }
+    //if number is not starting by a + we add one + so we assume it is a international number (maybe use NSTextCheckingTypePhoneNumber here
+    if (![serverNumber hasPrefix:@"+"])
+    {
+        serverNumber = [NSString stringWithFormat:@"+%@", serverNumber];
+    }
+    
     return self;
 }
 
