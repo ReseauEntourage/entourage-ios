@@ -898,9 +898,6 @@ Un mail récapitulatif te sera envoyé.</string>
                                                         <constraint firstAttribute="width" constant="45" id="oVZ-gM-7dj"/>
                                                     </constraints>
                                                     <state key="normal" image="activeButton"/>
-                                                    <connections>
-                                                        <segue destination="NTX-qP-dnX" kind="modal" identifier="OTTourJoinRequestSegue" id="sw1-UK-eDZ"/>
-                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="7" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Actif" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkZ-O0-Eop">
                                                     <rect key="frame" x="8" y="129" width="312" height="15"/>
@@ -929,9 +926,6 @@ Un mail récapitulatif te sera envoyé.</string>
                                                         <constraint firstAttribute="width" constant="35" id="sMV-aF-xk7"/>
                                                     </constraints>
                                                     <state key="normal" image="userSmall"/>
-                                                    <connections>
-                                                        <segue destination="Th9-id-j6L" kind="modal" identifier="UserProfileSegue" id="y84-vV-gVh"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -965,12 +959,6 @@ Un mail récapitulatif te sera envoyé.</string>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="GXM-nx-VtR"/>
                                 </connections>
                             </tableView>
-                            <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kMW-IR-OpM">
-                                <rect key="frame" x="0.0" y="64" width="320" height="160"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="PcJ-hE-DfO"/>
-                                </constraints>
-                            </mapView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaJ-X6-EEa">
                                 <rect key="frame" x="16" y="78" width="30" height="30"/>
                                 <constraints>
@@ -1288,25 +1276,22 @@ Un mail récapitulatif te sera envoyé.</string>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="DfT-Ek-eFw"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Kc9-kH-YQ7" secondAttribute="bottom" constant="12" id="DuD-zc-Fd5"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="leading" secondItem="Kc9-kH-YQ7" secondAttribute="trailing" constant="-62" id="Kq0-ZY-fSh"/>
-                            <constraint firstAttribute="width" secondItem="kMW-IR-OpM" secondAttribute="width" id="LUQ-f3-ams"/>
-                            <constraint firstItem="kMW-IR-OpM" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="OOu-Fn-olT"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="x5D-lh-QtL" secondAttribute="bottom" id="RLa-CY-5bv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oHF-Vi-LCk" secondAttribute="trailing" constant="-20" id="Raa-Pi-Iwj"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uRg-cj-T9Q" secondAttribute="bottom" constant="12" id="TDA-nJ-u0d"/>
                             <constraint firstItem="gsB-s5-FKP" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="TbH-ff-fPP"/>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="UhE-G3-aXJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uRg-cj-T9Q" secondAttribute="trailing" constant="-8" id="ZT2-9H-lNi"/>
-                            <constraint firstItem="kMW-IR-OpM" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="64" id="Zzb-lw-Egt"/>
                             <constraint firstAttribute="trailing" secondItem="x5D-lh-QtL" secondAttribute="trailing" id="blK-sr-sHQ"/>
                             <constraint firstItem="x5D-lh-QtL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="e1K-mf-d0a"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="centerX" secondItem="oVf-Bh-vdD" secondAttribute="centerX" id="hB3-UZ-01t"/>
-                            <constraint firstItem="xGB-GF-aM5" firstAttribute="top" secondItem="kMW-IR-OpM" secondAttribute="bottom" id="jzO-o8-ghY"/>
                             <constraint firstItem="DaJ-X6-EEa" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="14" id="pOM-6J-NsW"/>
                             <constraint firstItem="DaJ-X6-EEa" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ptP-Fx-KEf"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="10" id="puD-5n-gle"/>
                             <constraint firstItem="x5D-lh-QtL" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="qI7-NA-VS0"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="64" id="sQA-pi-JcK"/>
                             <constraint firstItem="gsB-s5-FKP" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="16" id="t6b-Vu-ZMD"/>
+                            <constraint firstItem="xGB-GF-aM5" firstAttribute="top" secondItem="gsB-s5-FKP" secondAttribute="bottom" constant="116" id="ymd-v1-tQ8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OWf-3U-PgN"/>
@@ -1331,6 +1316,8 @@ Un mail récapitulatif te sera envoyé.</string>
                         <segue destination="Y2B-mN-W3a" kind="modal" identifier="OTConfirmationPopup" id="Qf1-vA-gd6"/>
                         <segue destination="alD-dM-t4k" kind="modal" identifier="OTCreateMeeting" id="b08-id-ZFb"/>
                         <segue destination="l83-vw-4NM" kind="modal" identifier="OTSelectedTour" id="qik-GS-fOD"/>
+                        <segue destination="NTX-qP-dnX" kind="modal" identifier="OTTourJoinRequestSegue" id="a8P-lF-ebs"/>
+                        <segue destination="Th9-id-j6L" kind="modal" identifier="UserProfileSegue" id="b42-UE-vP1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -2328,6 +2315,6 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xSV-rR-wZy"/>
-        <segue reference="y84-vV-gVh"/>
+        <segue reference="b42-UE-vP1"/>
     </inferredMetricsTieBreakers>
 </document>

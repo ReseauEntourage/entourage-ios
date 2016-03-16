@@ -692,10 +692,10 @@
 #pragma mark - OTTourOptionsDelegate
 
 - (void)dismissTourJoinRequestController {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.tableView reloadData];
+    }];
 }
-
-
 
 /********************************************************************************/
 #pragma mark - Segue
@@ -733,7 +733,7 @@
         OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
         controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        controller.tour = [self.tours firstObject];
+        controller.tour = self.selectedTour;
         controller.tourJoinRequestDelegate = self;
        
     }
@@ -822,6 +822,29 @@ static bool isShowingOptions = NO;
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
 }
 
+- (void)doJoinRequest:(UIButton *)senderButton {
+    UITableViewCell *cell = (UITableViewCell*)senderButton.superview.superview;
+    NSInteger index = [self.tableView indexPathForCell:cell].section;
+    OTTour *tour = self.tours[index]; 
+    self.selectedTour = tour;
+    if ([tour.joinStatus isEqualToString:@"not_requested"])
+    {
+        [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
+    } else {
+        NSLog(@"tour %@ is %@", tour.sid, tour.joinStatus);
+    }
+}
+
+- (void)doShowProfile:(UIButton *)userButton {
+    UITableViewCell *cell = (UITableViewCell*)userButton.superview.superview;
+    NSInteger index = [self.tableView indexPathForCell:cell].section;
+    OTTour *tour = self.tours[index];
+    
+    self.selectedTour = tour;
+    [self performSegueWithIdentifier:@"UserProfileSegue" sender:nil];
+    
+}
+
 /**************************************************************************************************/
 #pragma mark - Utils
 
@@ -878,7 +901,8 @@ static bool isShowingOptions = NO;
     OTTourAuthor *author = tour.author;
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
     organizationLabel.text = tour.organizationName;
-    
+    NSLog(@"+tour %@ is %@", tour.sid, tour.joinStatus);
+
     
     NSString *tourType = tour.tourType;
     if ([tourType isEqualToString:@"barehands"]) {
@@ -925,6 +949,7 @@ static bool isShowingOptions = NO;
         }
     }];
     __weak UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSERIMAGE];
+    [userImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
     userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
     userImageButton.clipsToBounds = YES;
     if (tour.author.avatarUrl != nil) {
@@ -939,6 +964,7 @@ static bool isShowingOptions = NO;
     noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
         
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
+    [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     if ([tour.joinStatus isEqualToString:@"accepted"]) {
         [statusButton setImage:[UIImage imageNamed:@"activeButton"] forState:UIControlStateNormal];
@@ -946,7 +972,10 @@ static bool isShowingOptions = NO;
         [statusLabel setTextColor:[UIColor appOrangeColor]];
     } else {
         [statusButton setImage:[UIImage imageNamed:@"joinButton"] forState:UIControlStateNormal];
-        [statusLabel setText:@"Je rejoins"];
+        if ([tour.joinStatus isEqualToString:@"pending"])
+            [statusLabel setText:@"En attente"];
+        else
+            [statusLabel setText:@"Je rejoins"];
         [statusLabel setTextColor:[UIColor appGreyishColor]];
     }
     return cell;
@@ -970,8 +999,7 @@ static bool isShowingOptions = NO;
 
 #pragma mark - UIScrollViewDelegate
 #define kMapHeaderOffsetY 0.0
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat scrollOffset = scrollView.contentOffset.y;
     CGRect headerFrame = self.tableView.tableHeaderView.frame;//self.mapView.frame;
     
@@ -1086,6 +1114,5 @@ static bool isShowingOptions = NO;
     }];
     
 }
-
 
 @end
