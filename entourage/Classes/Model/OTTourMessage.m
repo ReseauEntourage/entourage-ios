@@ -14,7 +14,7 @@
 #define kWSKeyCreatedAt @"created_at"
 #define kWSUser @"user"
 #define kWSAvatarURL @"avatar_url"
-
+#define kWSID @"id"
 
 @implementation OTTourMessage
 
@@ -32,6 +32,7 @@
         NSDictionary *user;
         if ((user = [dictionary objectForKey:kWSUser])) {
             self.userAvatarURL = [user valueForKey:kWSAvatarURL];
+            self.uID = [user valueForKey:kWSID];
         }
     }
     return self;

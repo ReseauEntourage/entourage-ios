@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSString *userAvatarURL;
+@property (nonatomic, strong) NSNumber *uID;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

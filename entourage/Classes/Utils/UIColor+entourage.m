@@ -22,5 +22,8 @@
     return [UIColor colorWithRed:  74.0f/255.0f green:  74.0f/255.0f blue:   74.0f/255.0f alpha:1.0f];
 }
 
++ (UIColor *)appPaleGreyColor {
+    return [UIColor colorWithRed: 239.0f/255.0f green: 239.0f/255.0f blue:  244.0f/255.0f alpha:1.0f];
+}
 
 @end

@@ -167,7 +167,8 @@ NSString *const kTourPoints = @"tour_points";
          andSuccess:^(id responseObject)
          {
              NSDictionary *data = responseObject;
-             OTTourMessage *message = [self messageFromDictionary:data];
+             NSDictionary *messageDictionary = [data objectForKey:@"chat_message"];
+             OTTourMessage *message = [self messageFromDictionary:messageDictionary];
              
              if (success)
              {
