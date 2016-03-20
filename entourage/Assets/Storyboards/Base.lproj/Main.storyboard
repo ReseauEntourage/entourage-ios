@@ -1513,11 +1513,30 @@ Un mail récapitulatif te sera envoyé.</string>
                                             <rect key="frame" x="0.0" y="0.0" width="328" height="148"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view tag="30" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZO-gx-9oa">
+                                                <view tag="30" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZO-gx-9oa">
                                                     <rect key="frame" x="16" y="8" width="296" height="128"/>
                                                     <color key="backgroundColor" red="0.0" green="0.47843137383460999" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="296" id="Q74-iZ-PLr"/>
+                                                        <constraint firstAttribute="height" constant="128" identifier="chatHeight" id="Rf7-PX-2j0"/>
+                                                    </constraints>
                                                 </view>
+                                                <button opaque="NO" clipsSubviews="YES" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqf-aP-3ad">
+                                                    <rect key="frame" x="26" y="18" width="35" height="35"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="bcB-Uy-F3z"/>
+                                                        <constraint firstAttribute="height" constant="35" id="xJt-Aj-z4Q"/>
+                                                    </constraints>
+                                                    <state key="normal" image="userSmall"/>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bZO-gx-9oa" firstAttribute="top" secondItem="1jR-D3-17A" secondAttribute="topMargin" id="7rF-EU-lHg"/>
+                                                <constraint firstItem="wqf-aP-3ad" firstAttribute="top" secondItem="1jR-D3-17A" secondAttribute="topMargin" constant="10" id="D0j-J8-lNO"/>
+                                                <constraint firstItem="wqf-aP-3ad" firstAttribute="leading" secondItem="1jR-D3-17A" secondAttribute="leadingMargin" constant="18" id="Xsg-q1-8NU"/>
+                                                <constraint firstItem="bZO-gx-9oa" firstAttribute="leading" secondItem="1jR-D3-17A" secondAttribute="leadingMargin" constant="8" id="zha-Rr-V6b"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -1540,7 +1559,7 @@ Un mail récapitulatif te sera envoyé.</string>
                                             <action selector="sendMessage" destination="Hn0-z2-6tI" eventType="touchUpInside" id="k6S-JM-AOy"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wn1-vT-qg7">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wn1-vT-qg7">
                                         <rect key="frame" x="52" y="7" width="224" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1551,6 +1570,9 @@ Un mail récapitulatif te sera envoyé.</string>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>

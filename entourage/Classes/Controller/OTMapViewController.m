@@ -318,7 +318,7 @@
 - (void)refreshMap {
     [[OTTourService new] toursAroundCoordinate:self.mapView.centerCoordinate
                                          limit:@10
-                                      distance:@1000//[NSNumber numberWithDouble:[self mapHeight]]
+                                      distance:[NSNumber numberWithDouble:[self mapHeight]]
                                        success:^(NSMutableArray *closeTours)
                                         {
                                             [self.indicatorView setHidden:YES];

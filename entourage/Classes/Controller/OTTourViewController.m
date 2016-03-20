@@ -69,6 +69,7 @@ typedef NS_ENUM(unsigned) {
     [self getTourMessages];
     [self getTourEncounters];
     
+    
     self.chatTextView.layer.borderColor = [UIColor appGreyishColor].CGColor;
     //[self.chatTextView setInputAccessoryView:self.chatToolbar];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
@@ -140,6 +141,12 @@ typedef NS_ENUM(unsigned) {
     self.timelinePoints = [self.timelinePoints sortedArrayUsingSelector:@selector(compare:)].mutableCopy;
     NSLog(@"%lu timeline points", (unsigned long)self.timelinePoints.count);
     [self.tableView reloadData];
+    
+     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.timelinePoints.count-1 inSection:1];
+     [self.tableView scrollToRowAtIndexPath:indexPath
+                           atScrollPosition:UITableViewScrollPositionBottom
+                                   animated:YES];
+
 }
 
 
@@ -178,17 +185,17 @@ typedef NS_ENUM(unsigned) {
 - (IBAction)sendMessage {
     
     [self.chatTextView resignFirstResponder];
-
+    
     [[OTTourService new] sendMessage:self.chatTextView.text
                               onTour:self.tour
                              success:^(OTTourMessage * message) {
                                  NSLog(@"CHAT %@", message.text);
                                  self.chatTextView.text = @"";
+                                 [self updateTableViewAddingTimelinePoints:@[message]];
                              } failure:^(NSError *error) {
                                  NSLog(@"CHATerr: %@", error.description);
                              }];
 }
-
 
 /**************************************************************************************************/
 #pragma mark - Public Methods
@@ -233,8 +240,10 @@ typedef NS_ENUM(unsigned) {
     switch (section) {
         case SectionTypeHeader:
             return 1;
-        case SectionTypeTimeline:
+        case SectionTypeTimeline:{
+            NSLog(@"tPoints %lu", self.timelinePoints.count);
             return self.timelinePoints.count;
+        }
             
         default:
             return 0.0f;
@@ -314,6 +323,7 @@ typedef NS_ENUM(unsigned) {
 #define TIMELINE_KM_TAG 13
 
 #define TIMELINE_MESSAGE_TAG 30
+#define TIMELINE_MESSAGE_USER 31
 
 #define TIMELINE_ENCOUNTER 100
 #define TIMELINE_JOINER 200
@@ -354,18 +364,38 @@ typedef NS_ENUM(unsigned) {
     
     messageContainer.layer.cornerRadius = 5;
     messageContainer.clipsToBounds = YES;
-    messageContainer.frame =CGRectMake(x, 10, width, height);
+    messageContainer.frame =CGRectMake(x, PADDING, width, height);
     
+    for (NSLayoutConstraint *constraint in messageContainer.constraints) {
+        if ([constraint.identifier isEqualToString:@"chatHeight"]) {
+            constraint.constant = height;
+        }
+    }
+    //user
     
+    __weak UIButton *userImageButton = [cell viewWithTag:TIMELINE_MESSAGE_USER];
+    [userImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
+    userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
+    userImageButton.clipsToBounds = YES;
+    if (message.userAvatarURL != nil) {
+        NSURL *url = [NSURL URLWithString:message.userAvatarURL];
+        UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
+        [userImageButton setImageForState:UIControlStateNormal
+                                  withURL:url
+                         placeholderImage:placeholderImage];
+    }
+
     
-    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, 10, width, height)];
+    //text
+    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, 0, width, height)];
     messageLabel.text = message.text;
+    messageLabel.textColor = [UIColor whiteColor];
     messageLabel.numberOfLines = 0;
     messageLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightLight];
     messageLabel.backgroundColor = [UIColor colorWithRed:0 green:122/255.f blue:1 alpha:1];
     messageLabel.layer.cornerRadius = 5;
     messageLabel.clipsToBounds = YES;
-    //[cell addSubview:messageLabel];
+    [messageContainer addSubview:messageLabel];
     
 }
 
@@ -424,6 +454,11 @@ typedef NS_ENUM(unsigned) {
 
 }
 
+- (void)doShowProfile:(UIButton *)senderButton {
+    
+}
+
+
 #define CELLHEIGHT_HEADER 70.0f
 #define CELLHEIGHT_JOINER 49.0f
 #define CELLHEIGHT_ENCOUNTER 49.0f
@@ -440,7 +475,7 @@ typedef NS_ENUM(unsigned) {
             if ([timelinePoint isKindOfClass:[OTEncounter class]])
                 return CELLHEIGHT_ENCOUNTER;
             if ([timelinePoint isKindOfClass:[OTTourMessage class]])
-                 return 40.f+[self messageHeightForText:((OTTourMessage*)timelinePoint).text];
+                 return 2*PADDING + [self messageHeightForText:((OTTourMessage*)timelinePoint).text];
             if ([timelinePoint isKindOfClass:[OTTourStatus class]])
                 return CELLHEIGHT_STATUS;
         }
@@ -480,7 +515,7 @@ typedef NS_ENUM(unsigned) {
                       constrainedToSize:CGSizeMake(224, 80)
                       lineBreakMode:NSLineBreakByWordWrapping];
     self.chatHConstraint.constant = MAX(TEXTFIELD_HEIGHT_MIN, newSize.height + PADDING);
-    NSLog(@"newsize: %f * %f", newSize.width, newSize.height);
+   // NSLog(@"newsize: %f * %f", newSize.width, newSize.height);
 
 }
 
@@ -547,6 +582,8 @@ static CGFloat keyboardOverlap;
 
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {
+    
+    self.chatHConstraint.constant = 30.f;
     
     UIScrollView *tableView;
     if ([self.tableView.superview isKindOfClass:[UIScrollView class]])
