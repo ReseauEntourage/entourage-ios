@@ -81,7 +81,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.firstName];
+    self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.displayName];
     
     [self.nameTextField indentWithPadding:PADDING];
     

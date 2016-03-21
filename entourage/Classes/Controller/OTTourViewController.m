@@ -377,7 +377,7 @@ typedef NS_ENUM(unsigned) {
     [userImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
     userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
     userImageButton.clipsToBounds = YES;
-    if (message.userAvatarURL != nil) {
+    if (message.userAvatarURL != nil && message.userAvatarURL.class != [NSNull class]) {
         NSURL *url = [NSURL URLWithString:message.userAvatarURL];
         UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
         [userImageButton setImageForState:UIControlStateNormal
@@ -389,10 +389,10 @@ typedef NS_ENUM(unsigned) {
     //text
     UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, 0, width, height)];
     messageLabel.text = message.text;
-    messageLabel.textColor = [UIColor whiteColor];
+    //messageLabel.textColor = [UIColor whiteColor];
     messageLabel.numberOfLines = 0;
     messageLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightLight];
-    messageLabel.backgroundColor = [UIColor colorWithRed:0 green:122/255.f blue:1 alpha:1];
+    messageLabel.backgroundColor = [UIColor clearColor];
     messageLabel.layer.cornerRadius = 5;
     messageLabel.clipsToBounds = YES;
     [messageContainer addSubview:messageLabel];
