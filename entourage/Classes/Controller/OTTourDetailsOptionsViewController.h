@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTTour.h"
 
 @interface OTTourDetailsOptionsViewController : UIViewController
+
+@property (nonatomic, strong) OTTour *tour;
 
 @end

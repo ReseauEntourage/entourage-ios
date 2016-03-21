@@ -15,12 +15,14 @@
 #import "UIButton+AFNetworking.h"
 #import "OTTourDetailsOptionsViewController.h"
 #import "OTTourService.h"
+#import "NSUserDefaults+OT.h"
 
 #import "OTTourJoiner.h"
 #import "OTEncounter.h"
 #import "OTTourMessage.h"
 #import "OTTourStatus.h"
 #import "IQKeyboardManager.h"
+#import "OTUser.h"
 
 
 #define TAG_ORGANIZATION 1
@@ -241,7 +243,7 @@ typedef NS_ENUM(unsigned) {
         case SectionTypeHeader:
             return 1;
         case SectionTypeTimeline:{
-            NSLog(@"tPoints %lu", self.timelinePoints.count);
+            NSLog(@"tPoints %lu", (unsigned long)self.timelinePoints.count);
             return self.timelinePoints.count;
         }
             
@@ -324,6 +326,7 @@ typedef NS_ENUM(unsigned) {
 
 #define TIMELINE_MESSAGE_TAG 30
 #define TIMELINE_MESSAGE_USER 31
+#define TIMELINE_MESSAGE_TEXT 32
 
 #define TIMELINE_ENCOUNTER 100
 #define TIMELINE_JOINER 200
@@ -357,18 +360,22 @@ typedef NS_ENUM(unsigned) {
 - (void)setupMessageCell:(UITableViewCell *)cell withMessage:(OTTourMessage *)message {
     
     UIView *messageContainer = [cell viewWithTag:TIMELINE_MESSAGE_TAG];
-    
-    CGFloat x  = [UIScreen mainScreen].bounds.size.width - 305;
-    CGFloat width = 297.f;
     CGFloat height = [self messageHeightForText:message.text];
     
     messageContainer.layer.cornerRadius = 5;
     messageContainer.clipsToBounds = YES;
-    messageContainer.frame =CGRectMake(x, PADDING, width, height);
-    
+
     for (NSLayoutConstraint *constraint in messageContainer.constraints) {
         if ([constraint.identifier isEqualToString:@"chatHeight"]) {
             constraint.constant = height;
+        }
+        //NSLog(@"constraint %@", constraint.identifier);
+        OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+        if ([currentUser.sid intValue] == [message.uID intValue]) {
+            if ([constraint.identifier isEqualToString:@"chatLeading"]) {
+                CGFloat leading = [UIScreen mainScreen].bounds.size.width - messageContainer.bounds.size.width;
+                constraint.constant = leading;
+            }
         }
     }
     //user
@@ -387,7 +394,7 @@ typedef NS_ENUM(unsigned) {
 
     
     //text
-    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, 0, width, height)];
+    UILabel *messageLabel = [cell viewWithTag:TIMELINE_MESSAGE_TEXT];
     messageLabel.text = message.text;
     //messageLabel.textColor = [UIColor whiteColor];
     messageLabel.numberOfLines = 0;
@@ -489,11 +496,6 @@ typedef NS_ENUM(unsigned) {
     
     CGSize expectedLabelSize = [messageContent sizeWithFont:[UIFont systemFontOfSize:15 weight:UIFontWeightLight] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByWordWrapping];
     return expectedLabelSize.height + 4*PADDING;
-    
-    //adjust the label the the new height.
-//    CGRect newFrame = yourLabel.frame;
-//    newFrame.size.height = expectedLabelSize.height;
-//    yourLabel.frame = newFrame;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -642,6 +644,7 @@ static CGFloat keyboardOverlap;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     OTTourDetailsOptionsViewController *controller = (OTTourDetailsOptionsViewController *)segue.destinationViewController;
+    controller.tour = self.tour;
     controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
     [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     

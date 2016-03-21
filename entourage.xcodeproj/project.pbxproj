@@ -320,14 +320,14 @@
 		0A70FA2F1BFF31E10080E8EC /* Tour */ = {
 			isa = PBXGroup;
 			children = (
-				0A35F2B61BFA3AC2002301C3 /* OTConfirmationViewController.h */,
-				0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */,
-				0A70FA161BFDD69C0080E8EC /* OTToursTableViewController.h */,
-				0A70FA171BFDD69C0080E8EC /* OTToursTableViewController.m */,
 				0A70FA301BFF32AD0080E8EC /* OTTourViewController.h */,
 				0A70FA311BFF32AD0080E8EC /* OTTourViewController.m */,
 				45E6BFCD1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.h */,
 				45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */,
+				0A35F2B61BFA3AC2002301C3 /* OTConfirmationViewController.h */,
+				0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */,
+				0A70FA161BFDD69C0080E8EC /* OTToursTableViewController.h */,
+				0A70FA171BFDD69C0080E8EC /* OTToursTableViewController.m */,
 			);
 			name = Tour;
 			sourceTree = "<group>";

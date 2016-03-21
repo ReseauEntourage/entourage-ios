@@ -756,7 +756,7 @@ Un mail récapitulatif te sera envoyé.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zS4-YZ-2A0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1082" y="1496"/>
+            <point key="canvasLocation" x="188" y="1496"/>
         </scene>
         <!--Tour Options View Controller-->
         <scene sceneID="TLF-3I-8Si">
@@ -821,7 +821,7 @@ Un mail récapitulatif te sera envoyé.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66X-IN-NwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1545" y="1496"/>
+            <point key="canvasLocation" x="188" y="2222"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -1441,6 +1441,14 @@ Un mail récapitulatif te sera envoyé.</string>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Gj-qX-1F4">
+                                                    <rect key="frame" x="24" y="51" width="68" height="68"/>
+                                                    <color key="backgroundColor" red="0.99215686274509807" green="0.96078431372549022" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="68" id="cQ9-yY-MEx"/>
+                                                        <constraint firstAttribute="width" constant="68" id="j6a-rz-IZV"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="9Ce-Dw-DgI" secondAttribute="trailing" constant="17" id="2kK-Hz-1Mf"/>
@@ -1448,12 +1456,15 @@ Un mail récapitulatif te sera envoyé.</string>
                                                 <constraint firstItem="bSR-py-OL9" firstAttribute="top" secondItem="9Ce-Dw-DgI" secondAttribute="bottom" constant="4" id="5Ej-lD-11j"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="aIi-Ke-Fe9" secondAttribute="trailing" constant="7" id="5Qq-63-oOx"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="RF7-J6-LG0" secondAttribute="trailing" constant="17" id="70c-VB-Idq"/>
+                                                <constraint firstItem="bSR-py-OL9" firstAttribute="leading" secondItem="0Gj-qX-1F4" secondAttribute="trailing" constant="7" id="9zT-vW-IVa"/>
                                                 <constraint firstItem="RF7-J6-LG0" firstAttribute="top" secondItem="aBH-wO-iJN" secondAttribute="bottom" constant="22" id="Bkn-JZ-gpY"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="0Gj-qX-1F4" secondAttribute="bottom" constant="29" id="BzD-F1-RFD"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="bSR-py-OL9" secondAttribute="trailing" constant="17" id="Nde-gJ-abg"/>
                                                 <constraint firstItem="9Ce-Dw-DgI" firstAttribute="top" secondItem="RF7-J6-LG0" secondAttribute="bottom" constant="5" id="ZzH-LB-3Zw"/>
                                                 <constraint firstItem="aBH-wO-iJN" firstAttribute="leading" secondItem="JE5-p9-A98" secondAttribute="leadingMargin" constant="7" id="h13-22-a8b"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="aBH-wO-iJN" secondAttribute="trailing" constant="7" id="k5L-Jx-DVQ"/>
                                                 <constraint firstItem="aBH-wO-iJN" firstAttribute="top" secondItem="JE5-p9-A98" secondAttribute="topMargin" constant="7" id="mdB-QS-3AR"/>
+                                                <constraint firstItem="0Gj-qX-1F4" firstAttribute="top" secondItem="aBH-wO-iJN" secondAttribute="bottom" constant="21" id="uOl-44-F82"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1514,10 +1525,24 @@ Un mail récapitulatif te sera envoyé.</string>
                                             <subviews>
                                                 <view tag="30" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZO-gx-9oa">
                                                     <rect key="frame" x="16" y="8" width="296" height="128"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="32" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPY-4V-uyt">
+                                                            <rect key="frame" x="55" y="8" width="233" height="112"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="233" id="06q-01-sGI"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                     <color key="backgroundColor" red="0.97647058963775635" green="0.97647058963775635" blue="0.97647058963775635" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="296" id="Q74-iZ-PLr"/>
                                                         <constraint firstAttribute="height" constant="128" identifier="chatHeight" id="Rf7-PX-2j0"/>
+                                                        <constraint firstItem="rPY-4V-uyt" firstAttribute="top" secondItem="bZO-gx-9oa" secondAttribute="top" constant="8" id="ok3-58-xIU"/>
+                                                        <constraint firstAttribute="bottom" secondItem="rPY-4V-uyt" secondAttribute="bottom" constant="8" id="qUb-bq-zkB"/>
+                                                        <constraint firstAttribute="trailing" secondItem="rPY-4V-uyt" secondAttribute="trailing" constant="8" id="tgh-vv-ycN"/>
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" clipsSubviews="YES" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqf-aP-3ad">
@@ -1534,7 +1559,7 @@ Un mail récapitulatif te sera envoyé.</string>
                                                 <constraint firstItem="bZO-gx-9oa" firstAttribute="top" secondItem="1jR-D3-17A" secondAttribute="topMargin" id="7rF-EU-lHg"/>
                                                 <constraint firstItem="wqf-aP-3ad" firstAttribute="top" secondItem="1jR-D3-17A" secondAttribute="topMargin" constant="10" id="D0j-J8-lNO"/>
                                                 <constraint firstItem="wqf-aP-3ad" firstAttribute="leading" secondItem="1jR-D3-17A" secondAttribute="leadingMargin" constant="18" id="Xsg-q1-8NU"/>
-                                                <constraint firstItem="bZO-gx-9oa" firstAttribute="leading" secondItem="1jR-D3-17A" secondAttribute="leadingMargin" constant="8" id="zha-Rr-V6b"/>
+                                                <constraint firstItem="bZO-gx-9oa" firstAttribute="leading" secondItem="1jR-D3-17A" secondAttribute="leadingMargin" constant="8" identifier="chatLeading" id="zha-Rr-V6b"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1656,68 +1681,17 @@ Un mail récapitulatif te sera envoyé.</string>
                                     <action selector="dismissOptions" destination="ARd-Al-TGt" eventType="touchUpInside" id="9zt-EN-VDP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPE-6m-K3S">
-                                <rect key="frame" x="4" y="399" width="312" height="44"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="aKe-Wn-cfG"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Clôturer">
-                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                </state>
-                                <state key="disabled">
-                                    <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="doCloseTour" destination="ARd-Al-TGt" eventType="touchUpInside" id="P5p-lM-th9"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Meh-bE-zCz">
-                                <rect key="frame" x="4" y="347" width="312" height="44"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Xgl-cy-dl4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Editer">
-                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1d-qN-HXo">
-                                <rect key="frame" x="4" y="451" width="312" height="44"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="fhl-2d-eYt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Quitter">
-                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                </state>
-                                <state key="disabled">
-                                    <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="doQuitTour" destination="ARd-Al-TGt" eventType="touchUpInside" id="Sv0-9O-aq8"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CeQ-5o-j8V" firstAttribute="top" secondItem="X1d-qN-HXo" secondAttribute="bottom" constant="8" id="7TV-gR-qeH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="nPE-6m-K3S" secondAttribute="trailing" constant="-12" id="By3-FH-fEq"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="X1d-qN-HXo" secondAttribute="trailing" constant="-12" id="FFd-zo-8nJ"/>
-                            <constraint firstItem="Meh-bE-zCz" firstAttribute="leading" secondItem="wWJ-ra-tkm" secondAttribute="leadingMargin" constant="-12" id="Gjg-L7-aVL"/>
                             <constraint firstItem="CeQ-5o-j8V" firstAttribute="leading" secondItem="wWJ-ra-tkm" secondAttribute="leadingMargin" constant="-12" id="Glg-00-QLo"/>
-                            <constraint firstItem="nPE-6m-K3S" firstAttribute="leading" secondItem="wWJ-ra-tkm" secondAttribute="leadingMargin" constant="-12" id="HFP-5X-rzb"/>
-                            <constraint firstItem="nPE-6m-K3S" firstAttribute="top" secondItem="Meh-bE-zCz" secondAttribute="bottom" constant="8" id="QWX-Xr-XGw"/>
-                            <constraint firstItem="X1d-qN-HXo" firstAttribute="leading" secondItem="wWJ-ra-tkm" secondAttribute="leadingMargin" constant="-12" id="XU5-6j-smg"/>
-                            <constraint firstItem="X1d-qN-HXo" firstAttribute="top" secondItem="nPE-6m-K3S" secondAttribute="bottom" constant="8" id="kGl-dw-fPF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Meh-bE-zCz" secondAttribute="trailing" constant="-12" id="r4x-eR-VDX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CeQ-5o-j8V" secondAttribute="trailing" constant="-12" id="vZ5-Nb-LX2"/>
                             <constraint firstItem="a6F-zB-XqV" firstAttribute="top" secondItem="CeQ-5o-j8V" secondAttribute="bottom" constant="8" id="xcS-1Q-rYH"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cancelTourButton" destination="CeQ-5o-j8V" id="cfZ-qu-dOa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jEF-tA-QbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1833,7 +1807,7 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kqk-eM-ld2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1981" y="1496"/>
+            <point key="canvasLocation" x="557" y="2230"/>
         </scene>
         <!--Guide View Controller-->
         <scene sceneID="cCl-FF-sHF">
@@ -2032,7 +2006,7 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zCS-BA-fyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="188" y="2200"/>
+            <point key="canvasLocation" x="-226" y="2328"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="CD4-Ww-qZf">
@@ -2236,7 +2210,7 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZ5-dp-z89" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-613" y="1460"/>
+            <point key="canvasLocation" x="-631" y="751"/>
         </scene>
         <!--Meeting Callout View Controller-->
         <scene sceneID="n88-kc-SdR">
@@ -2305,7 +2279,7 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B7y-U0-cbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="188" y="1460"/>
+            <point key="canvasLocation" x="-226" y="751"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iQI-Ek-yG4">
@@ -2323,7 +2297,7 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uC2-Gx-JX2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="720" y="1496"/>
+            <point key="canvasLocation" x="-226" y="1496"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="J3Y-Qy-Grd">

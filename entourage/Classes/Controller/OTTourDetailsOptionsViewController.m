@@ -7,8 +7,18 @@
 //
 
 #import "OTTourDetailsOptionsViewController.h"
+#import "OTTourService.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
+#import "UIColor+entourage.h"
+
+#define BUTTON_HEIGHT 44.0f
+#define BUTTON_DELTAY  8.0f
+#define BUTTON_FONT_SIZE 17
 
 @interface OTTourDetailsOptionsViewController ()
+
+@property (nonatomic, weak) IBOutlet UIButton *cancelTourButton;
 
 @end
 
@@ -19,6 +29,30 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    if ([currentUser.sid intValue] == [self.tour.author.uID intValue]) {
+        [self addButtonWithTitle:@"Clôturer" withSelectorNamed:@"doCloseTour"];
+    } else {
+        [self addButtonWithTitle:@"Quitter" withSelectorNamed:@"doQuitTour"];
+    }
+
+}
+
+- (void)addButtonWithTitle:(NSString *)title withSelectorNamed:(NSString *)selector {
+    CGRect frame = self.cancelTourButton.frame;
+    frame.origin.y -= (BUTTON_HEIGHT + BUTTON_DELTAY);
+    frame.size.height = BUTTON_HEIGHT;
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:frame];
+    button.backgroundColor = [UIColor whiteColor];
+    [button.titleLabel setFont:[UIFont systemFontOfSize:BUTTON_FONT_SIZE]];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
+    [button addTarget:self action:NSSelectorFromString(selector) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -26,11 +60,23 @@
 
 #pragma mark - Actions
 - (IBAction)doCloseTour {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [[OTTourService new] closeTour:self.tour
+                          withSuccess:^(OTTour *updatedTour) {
+                              NSLog(@"Closed tour: %@", updatedTour.sid);
+                              [self dismissViewControllerAnimated:YES completion:nil];
+                          } failure:^(NSError *error) {
+                              NSLog(@"CLOSEerr %@", error.description);
+                          }];
 }
 
 - (IBAction)doQuitTour {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [[OTTourService new] quitTour:self.tour
+                          success:^(OTTour *updatedTour) {
+                                NSLog(@"Quited tour: %@", updatedTour.sid);
+                                [self dismissViewControllerAnimated:YES completion:nil];
+                        } failure:^(NSError *error) {
+                                NSLog(@"QUITerr %@", error.description);
+                                }];
 }
 
 

@@ -71,23 +71,23 @@ NSString *const kTourPoints = @"tour_points";
     parameters[kTour] = [tour dictionaryForWebserviceTour];
     
     [[OTHTTPRequestManager sharedInstance]
-     PUTWithUrl:url
-     andParameters:parameters
-     andSuccess:^(id responseObject)
-     {
-         if (success)
+         PUTWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
          {
-             OTTour *updatedTour = [self tourFromDictionary:responseObject];
-             success(updatedTour);
+             if (success)
+             {
+                 OTTour *updatedTour = [self tourFromDictionary:responseObject];
+                 success(updatedTour);
+             }
          }
-     }
-     andFailure:^(NSError *error)
-     {
-         if (failure)
+         andFailure:^(NSError *error)
          {
-             failure(error);
-         }
-     }];
+             if (failure)
+             {
+                 failure(error);
+             }
+         }];
 }
 
 - (void)sendTourPoint:(NSMutableArray *)tourPoints
@@ -282,26 +282,59 @@ NSString *const kTourPoints = @"tour_points";
     
     
     [[OTHTTPRequestManager sharedInstance]
-     POSTWithUrl:url
-     andParameters:nil
-     andSuccess:^(id responseObject)
-     {
-         NSDictionary *data = responseObject;
-         NSDictionary *joinerDictionary = [data objectForKey:@"user"];
-         OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
-         
-         if (success)
+         POSTWithUrl:url
+         andParameters:nil
+         andSuccess:^(id responseObject)
          {
-             success(joiner);
+             NSDictionary *data = responseObject;
+             NSDictionary *joinerDictionary = [data objectForKey:@"user"];
+             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
+             
+             if (success)
+             {
+                 success(joiner);
+             }
          }
-     }
-     andFailure:^(NSError *error)
-     {
-         if (failure)
+         andFailure:^(NSError *error)
          {
-             failure(error);
+             if (failure)
+             {
+                 failure(error);
+             }
          }
-     }
+     ];
+}
+
+- (void)quitTour:(OTTour *)tour
+         success:(void (^)(OTTour *updatedTour))success
+         failure:(void (^)(NSError *error))failure {
+   
+#warning
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    
+    
+    
+    [[OTHTTPRequestManager sharedInstance]
+         POSTWithUrl:url
+         andParameters:nil
+         andSuccess:^(id responseObject)
+         {
+             NSDictionary *data = responseObject;
+             NSDictionary *joinerDictionary = [data objectForKey:@"user"];
+             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
+             
+             if (success)
+             {
+                 success(nil);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }
      ];
 }
 
