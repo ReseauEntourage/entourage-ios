@@ -12,6 +12,10 @@
 typedef enum { OTVehiclesFeet=0, OTVehiclesCar=1 } OTVehicles;
 typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTypes;
 
+#define JOIN_ACCEPTED @"accepted"
+#define JOIN_PENDING @"pending"
+#define JOIN_NOT_REQUESTED @"not_requested"
+
 @interface OTTour : NSObject
 
 /********************************************************************************/

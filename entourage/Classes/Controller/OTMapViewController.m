@@ -15,6 +15,7 @@
 #import "OTTourOptionsViewController.h"
 #import "OTTourJoinRequestViewController.h"
 #import "OTTourViewController.h"
+#import "OTPublicTourViewController.h"
 #import "UIView+entourage.h"
 
 // View
@@ -31,9 +32,10 @@
 
 // Service
 #import "OTTourService.h"
-#import "UIButton+AFNetworking.h"
 
+#import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
+#import "UILabel+entourage.h"
 
 // Framework
 #import <UIKit/UIKit.h>
@@ -47,9 +49,10 @@
 #import "TTTTimeIntervalFormatter.h"
 #import "TTTLocationFormatter.h"
 
-
 // User
 #import "NSUserDefaults+OT.h"
+
+
 
 #define PARIS_LAT 48.856578
 #define PARIS_LON  2.351828
@@ -721,6 +724,10 @@
         OTTourViewController *controller = (OTTourViewController *)navController.topViewController;
         controller.tour = self.selectedTour;
         [controller configureWithTour:self.selectedTour];
+    } else if ([segue.identifier isEqualToString:@"OTPublicTourSegue"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTPublicTourViewController *controller = (OTPublicTourViewController *)navController.topViewController;
+        controller.tour = self.selectedTour;
     } else if ([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
         OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
         controller.view.backgroundColor = [UIColor colorWithWhite:1.f alpha:.88f];
@@ -830,9 +837,13 @@ static bool isShowingOptions = NO;
     if ([tour.joinStatus isEqualToString:@"not_requested"])
     {
         [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
+    } else  if ([tour.joinStatus isEqualToString:@"pending"]) {
+        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:nil];
     } else {
         NSLog(@"tour %@ is %@", tour.sid, tour.joinStatus);
+        
     }
+        
 }
 
 - (void)doShowProfile:(UIButton *)userButton {
@@ -898,86 +909,30 @@ static bool isShowingOptions = NO;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
     
     OTTour *tour = self.tours[indexPath.section];
-    OTTourAuthor *author = tour.author;
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
     organizationLabel.text = tour.organizationName;
-    NSLog(@"+tour %@ is %@", tour.sid, tour.joinStatus);
-
     
-    NSString *tourType = tour.tourType;
-    if ([tourType isEqualToString:@"barehands"]) {
-        tourType = @"sociale";
-    } else     if ([tourType isEqualToString:@"medical"]) {
-        tourType = @"médicale";
-    } else if ([tourType isEqualToString:@"alimentary"]) {
-        tourType = @"distributive";
-    }
-    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
-    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", tourType] attributes:lightAttrs];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
-    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
-    [typeByNameAttrString appendAttributedString:nameAttrString];
     UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
-    typeByNameLabel.attributedText = typeByNameAttrString;
+    [typeByNameLabel setupWithTypeAndAuthorOfTour:tour];
     
     // dateString - location
     UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
-    NSString *dateString = nil;
-    if (tour.startTime != nil) {
-        TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
-        NSTimeInterval timeInterval = [tour.startTime timeIntervalSinceDate:[NSDate date]];
-        [timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
-        dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
-        timeLocationLabel.text = dateString;
-    }
-    
-    OTTourPoint *startPoint = tour.tourPoints.firstObject;
-    CLLocation *loc =  [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"error: %@", error.description);
-        }
-        CLPlacemark *placemark = placemarks.firstObject;
-        if (placemark.locality !=  nil) {
-            if (dateString != nil) {
-                timeLocationLabel.text = [NSString stringWithFormat:@"%@ - %@", dateString, placemark.locality];
-            } else {
-                timeLocationLabel.text = placemark.locality;
-            }
-        }
-    }];
-    __weak UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSERIMAGE];
-    [userImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
-    userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
-    userImageButton.clipsToBounds = YES;
-    if (tour.author.avatarUrl != nil) {
-        NSURL *url = [NSURL URLWithString:tour.author.avatarUrl];
-        UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
-        [userImageButton setImageForState:UIControlStateNormal
-                                  withURL:url
-                         placeholderImage:placeholderImage];
-    }
+    [timeLocationLabel setupWithTimeAndLocationOfTour:tour];
 
+    UIButton *userProfileImageButton = [cell viewWithTag:TAG_TOURUSERIMAGE];
+    [userProfileImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
+    [userProfileImageButton setupAsProfilePictureFromUrl:tour.author.avatarUrl];
+    
     UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
     noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
         
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
+    [statusButton setupWithJoinStatusOfTour:tour];
+    
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
-    if ([tour.joinStatus isEqualToString:@"accepted"]) {
-        [statusButton setImage:[UIImage imageNamed:@"activeButton"] forState:UIControlStateNormal];
-        [statusLabel setText:@"Actif"];
-        [statusLabel setTextColor:[UIColor appOrangeColor]];
-    } else {
-        [statusButton setImage:[UIImage imageNamed:@"joinButton"] forState:UIControlStateNormal];
-        if ([tour.joinStatus isEqualToString:@"pending"])
-            [statusLabel setText:@"En attente"];
-        else
-            [statusLabel setText:@"Je rejoins"];
-        [statusLabel setTextColor:[UIColor appGreyishColor]];
-    }
+    [statusLabel setupWithJoinStatusOfTour:tour];
+    
     return cell;
 }
 
@@ -996,6 +951,7 @@ static bool isShowingOptions = NO;
     {
 #warning goto screen 14.2
         NSLog(@"self.selectedTour.joinStatus = %@", self.selectedTour.joinStatus);
+        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:self];
     }
 }
 
