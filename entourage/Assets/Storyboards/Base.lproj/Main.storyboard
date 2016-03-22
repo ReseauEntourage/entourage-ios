@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bGF-q3-B8f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bGF-q3-B8f">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -38,7 +38,7 @@
         <!--Menu View Controller-->
         <scene sceneID="nYF-ko-kf1">
             <objects>
-                <viewController storyboardIdentifier="OTMenuViewControllerIdentifier" id="0J6-b7-p0H" customClass="OTMenuViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTMenuViewControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="0J6-b7-p0H" customClass="OTMenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="slD-Bf-Od0"/>
                         <viewControllerLayoutGuide type="bottom" id="2Xh-aG-0Ck"/>
@@ -47,18 +47,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="Qcu-6D-p8T">
-                                <rect key="frame" x="111" y="96" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="c4b-4p-dYN"/>
-                                    <constraint firstAttribute="width" constant="100" id="p9L-kW-3bX"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="50"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="52" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EiD-PN-iyE">
                                 <rect key="frame" x="-4" y="258" width="328" height="310"/>
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -140,24 +128,35 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hU9-Dq-Xg8">
+                                <rect key="frame" x="110" y="96" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="DIh-w5-3LX"/>
+                                    <constraint firstAttribute="height" constant="100" id="aUK-yF-lLd"/>
+                                </constraints>
+                                <state key="normal" image="user"/>
+                                <connections>
+                                    <action selector="showProfile" destination="0J6-b7-p0H" eventType="touchUpInside" id="ynk-Rg-oNF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Qcu-6D-p8T" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" constant="1" id="7C8-6E-cUz"/>
-                            <constraint firstItem="gZg-OL-qCe" firstAttribute="top" secondItem="Qcu-6D-p8T" secondAttribute="bottom" constant="16" id="A6B-u2-IVE"/>
-                            <constraint firstItem="Qcu-6D-p8T" firstAttribute="top" secondItem="slD-Bf-Od0" secondAttribute="bottom" constant="32" id="RLN-OM-keW"/>
+                            <constraint firstItem="hU9-Dq-Xg8" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="No1-Gp-qXl"/>
                             <constraint firstItem="gZg-OL-qCe" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="TUJ-yt-314"/>
                             <constraint firstItem="EiD-PN-iyE" firstAttribute="leading" secondItem="ljo-QP-YxJ" secondAttribute="leadingMargin" constant="-20" id="W0l-aH-tXM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EiD-PN-iyE" secondAttribute="trailing" constant="-20" id="aFF-pJ-c2w"/>
+                            <constraint firstItem="hU9-Dq-Xg8" firstAttribute="top" secondItem="slD-Bf-Od0" secondAttribute="bottom" constant="32" id="cYs-tz-XCE"/>
                             <constraint firstItem="EiD-PN-iyE" firstAttribute="top" secondItem="gZg-OL-qCe" secondAttribute="bottom" constant="25" id="j5z-qu-cC3"/>
                             <constraint firstItem="2Xh-aG-0Ck" firstAttribute="top" secondItem="EiD-PN-iyE" secondAttribute="bottom" id="jYd-tt-tU7"/>
+                            <constraint firstItem="gZg-OL-qCe" firstAttribute="top" secondItem="hU9-Dq-Xg8" secondAttribute="bottom" constant="16" id="tfD-aq-AN2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="a9Y-2c-snz"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="avatarImageView" destination="Qcu-6D-p8T" id="sDH-Fl-2de"/>
                         <outlet property="nameLabel" destination="gZg-OL-qCe" id="zeh-G7-D9m"/>
+                        <outlet property="profileButton" destination="hU9-Dq-Xg8" id="7ln-AG-5Qf"/>
                         <outlet property="tableView" destination="EiD-PN-iyE" id="CgG-Ii-UXP"/>
                         <segue destination="UcL-62-xea" kind="custom" identifier="segueMenuIdentifierForMap" customClass="SWRevealViewControllerSeguePushController" id="xSV-rR-wZy"/>
                         <segue destination="69R-LH-AoF" kind="custom" identifier="segueMenuIdentifierForGuide" customClass="SWRevealViewControllerSeguePushController" id="cE5-Dw-CbA"/>
@@ -1650,6 +1649,41 @@ Un mail récapitulatif te sera envoyé.</string>
             </objects>
             <point key="canvasLocation" x="1690" y="751"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lYw-Bx-2B9">
+            <objects>
+                <navigationController id="7wY-UT-vNw" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TCH-dj-mfg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="dvK-7J-7ft" kind="relationship" relationship="rootViewController" id="h4E-gm-aCh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ukh-53-jjd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1241" y="1451"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2Ps-yq-AOb">
+            <objects>
+                <viewController id="dvK-7J-7ft" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iYX-Gi-5nE"/>
+                        <viewControllerLayoutGuide type="bottom" id="AL6-2q-abg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uXd-SD-NzS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dX9-Ym-jMh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fzt-Em-2Z8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1690" y="1451"/>
+        </scene>
         <!--Tour Details Options View Controller-->
         <scene sceneID="2H1-3R-sHe">
             <objects>
@@ -2351,6 +2385,6 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xSV-rR-wZy"/>
-        <segue reference="b42-UE-vP1"/>
+        <segue reference="ZNZ-ec-dR4"/>
     </inferredMetricsTieBreakers>
 </document>

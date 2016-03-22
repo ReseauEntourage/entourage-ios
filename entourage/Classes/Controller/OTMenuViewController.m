@@ -15,7 +15,6 @@
 #import "UIViewController+menu.h"
 
 #import "NSUserDefaults+OT.h"
-#import "UIImageView+AFNetworking.h"
 
 
 // Model
@@ -27,6 +26,7 @@
 #import "SVProgressHUD.h"
 
 // Utils
+#import "UIButton+AFNetworking.h"
 #import "NSUserDefaults+OT.h"
 
 /* MenuItem identifiers */
@@ -43,7 +43,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 // UI
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UIButton *profileButton;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -74,20 +74,16 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     if (self.currentUser.avatarURL) {
-        NSURL *url = [NSURL URLWithString:self.currentUser.avatarURL];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        __weak UIButton *userImageButton = self.profileButton;
+        userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
+        userImageButton.clipsToBounds = YES;
         
-        [_avatarImageView setImageWithURLRequest:request
-                         placeholderImage:[UIImage imageNamed:@"user"]
-                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                      
-                                      _avatarImageView.image = image;
-                                      [_avatarImageView setNeedsLayout];
-                                      
-                                  } failure:nil];
-
+        NSURL *url = [NSURL URLWithString:self.currentUser.avatarURL];
+        UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
+        [userImageButton setImageForState:UIControlStateNormal
+                                  withURL:url
+                         placeholderImage:placeholderImage];
     }
-    
 }
 
 /**************************************************************************************************/
@@ -95,6 +91,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return (section == 0) ? 30.f : 1.f;
 }
@@ -131,6 +128,11 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 
 /**************************************************************************************************/
 #pragma mark - Actions
+
+- (IBAction)showProfile {
+//    [self openControllerWithSegueIdentifier:@"OTUserProfile"];
+    [self performSegueWithIdentifier:@"segueMenuIdentifierForProfile" sender:nil];
+}
 
 /**
  * Method which opens the controller according to segueIdentifier.
@@ -201,10 +203,10 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 //                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
 //    [menuItems addObject:itemAmis];
     
-    OTMenuItem *itemGuide = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_guide", @"")
-                                                     iconName: @"guide"
-                                              segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
-    [menuItems addObject:itemGuide];
+//    OTMenuItem *itemGuide = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_guide", @"")
+//                                                     iconName: @"guide"
+//                                              segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+//    [menuItems addObject:itemGuide];
 
     
     OTMenuItem *itemParam = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_param", @"")
