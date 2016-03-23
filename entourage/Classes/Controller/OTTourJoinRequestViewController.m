@@ -49,12 +49,12 @@
     NSDictionary *mediumAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:17 weight:UIFontWeightMedium]};
     NSAttributedString *merciAttrString = [[NSAttributedString alloc] initWithString:@"MERCI!\n\n"attributes:mediumAttrs];
     NSAttributedString *cetteTourAttrString = [[NSAttributedString alloc] initWithString:@"Cette maraude étant privée, \nvotre demande a été \ntransmise au créateur.\n\n" attributes:lightAttrs];
-    NSAttributedString *messageAttrString = [[NSAttributedString alloc] initWithString:@"Si vous le souhaitez, \nenvoyez-lui un message:" attributes:mediumAttrs];
+    //NSAttributedString *messageAttrString = [[NSAttributedString alloc] initWithString:@"Si vous le souhaitez, \nenvoyez-lui un message:" attributes:mediumAttrs];
     
     
     NSMutableAttributedString *greetingAttrString = merciAttrString.mutableCopy;
     [greetingAttrString appendAttributedString:cetteTourAttrString];
-    [greetingAttrString appendAttributedString:messageAttrString];
+    //[greetingAttrString appendAttributedString:messageAttrString];
 
     [self.greetingLabel setAttributedText:greetingAttrString];
 }
