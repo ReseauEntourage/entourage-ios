@@ -131,6 +131,35 @@
     }];
 }
 
+- (void)DELETEWithUrl:(NSString *)url
+        andParameters:(NSDictionary *)parameters
+           andSuccess:(void (^)(id responseObject))success
+           andFailure:(void (^)(NSError *error))failure
+{
+    [self DELETE:url
+      parameters:parameters
+        success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+         {
+             if (success) {
+                 success(responseObject);
+             }
+         }
+        failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+         {
+             if ([operation.response statusCode] == 401) {
+                 [self askForNewTokenWithMethod:@"DELETE" andUrl:url andParameters:parameters andSuccess:success andFailure:failure];
+             }
+             else {
+                 NSError *actualError = [self errorFromOperation:operation andError:error];
+                 if (failure) {
+                     failure(actualError);
+                 }
+             }
+     }];
+
+}
+
+
 - (void)askForNewTokenWithMethod:(NSString *)method
                           andUrl:(NSString *)url
                    andParameters:(NSDictionary *)parameters
@@ -160,6 +189,8 @@
                    }
                    else if ([method isEqualToString:@"PATCH"]) {
                        [self PATCHWithUrl:url andParameters:parameters andSuccess:success andFailure:failure];
+                   }  else if ([method isEqualToString:@"DELETE"]) {
+                       [self DELETEWithUrl:url andParameters:parameters andSuccess:success andFailure:failure];
                    }
                } andFailure:^(NSError *error) {
                    if (failure) {

@@ -57,6 +57,7 @@
 // API
 "url_send_tour" = "%@.json?token=%@";
 "url_close_tour" = "%@/%@.json?token=%@";
+"url_quit_tour" = "%@/%@/users/%@?token=%@";
 "url_send_point" = "%@/%@/%@.json?token=%@";
 "url_tours_around" = "%@.json?token=%@";
 "url_tour_users" = "%@/%@/users.json?token=%@";

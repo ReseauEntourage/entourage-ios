@@ -310,22 +310,21 @@ NSString *const kTourPoints = @"tour_points";
          failure:(void (^)(NSError *error))failure {
    
 #warning
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_quit_tour", @""), kTours, tour.sid, [[NSUserDefaults standardUserDefaults] currentUser].sid, [[NSUserDefaults standardUserDefaults] currentUser].token];
     
     
     
     [[OTHTTPRequestManager sharedInstance]
-         POSTWithUrl:url
+         DELETEWithUrl:url
          andParameters:nil
          andSuccess:^(id responseObject)
          {
-             NSDictionary *data = responseObject;
-             NSDictionary *joinerDictionary = [data objectForKey:@"user"];
-             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
-             
+             NSDictionary *data = [responseObject valueForKey:@"user"];
+#warning "user"
+             OTTour *updatedTour = [self tourFromDictionary:responseObject];
              if (success)
              {
-                 success(nil);
+                 success(updatedTour);
              }
          }
          andFailure:^(NSError *error)

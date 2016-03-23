@@ -16,6 +16,7 @@
 #import "OTTourJoinRequestViewController.h"
 #import "OTTourViewController.h"
 #import "OTPublicTourViewController.h"
+#import "OTQuitTourViewController.h"
 #import "UIView+entourage.h"
 
 // View
@@ -742,7 +743,12 @@
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.tour = self.selectedTour;
         controller.tourJoinRequestDelegate = self;
-       
+    } else if ([segue.identifier isEqualToString:@"QuitTourSegue"]) {
+        OTQuitTourViewController *controller = (OTQuitTourViewController *)segue.destinationViewController;
+        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.tour = self.selectedTour;
+        //controller.tourJoinRequestDelegate = self;
     }
 }
 
@@ -837,13 +843,15 @@ static bool isShowingOptions = NO;
     if ([tour.joinStatus isEqualToString:@"not_requested"])
     {
         [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
-    } else  if ([tour.joinStatus isEqualToString:@"pending"]) {
-        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:nil];
-    } else {
-        NSLog(@"tour %@ is %@", tour.sid, tour.joinStatus);
-        
     }
-        
+    else  if ([tour.joinStatus isEqualToString:@"pending"])
+    {
+        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:nil];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"QuitTourSegue" sender:self];
+    }
 }
 
 - (void)doShowProfile:(UIButton *)userButton {
@@ -949,8 +957,6 @@ static bool isShowingOptions = NO;
     }
     else
     {
-#warning goto screen 14.2
-        NSLog(@"self.selectedTour.joinStatus = %@", self.selectedTour.joinStatus);
         [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:self];
     }
 }

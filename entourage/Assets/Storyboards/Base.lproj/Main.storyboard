@@ -1318,6 +1318,7 @@ Un mail récapitulatif te sera envoyé.</string>
                         <segue destination="l83-vw-4NM" kind="modal" identifier="OTSelectedTour" id="qik-GS-fOD"/>
                         <segue destination="NTX-qP-dnX" kind="modal" identifier="OTTourJoinRequestSegue" id="a8P-lF-ebs"/>
                         <segue destination="Th9-id-j6L" kind="modal" identifier="UserProfileSegue" id="b42-UE-vP1"/>
+                        <segue destination="WqR-bT-UxS" kind="modal" identifier="QuitTourSegue" id="QCV-ym-9OZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -2491,6 +2492,72 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
             </objects>
             <point key="canvasLocation" x="1241" y="751"/>
         </scene>
+        <!--Quit Tour View Controller-->
+        <scene sceneID="26o-cF-zLp">
+            <objects>
+                <viewController id="WqR-bT-UxS" customClass="OTQuitTourViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SoA-g2-9Xh"/>
+                        <viewControllerLayoutGuide type="bottom" id="9iA-AY-aMY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="57H-YU-vSm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3t-ZX-AkQ">
+                                <rect key="frame" x="4" y="503" width="312" height="57"/>
+                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="Oti-sU-82o"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Annuler">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="dismissViewController" destination="WqR-bT-UxS" eventType="touchUpInside" id="lRo-sX-KQe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBR-Hm-u3e">
+                                <rect key="frame" x="4" y="451" width="312" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="rbT-3m-3Jf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Quitter">
+                                    <color key="titleColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="doQuitTour" destination="WqR-bT-UxS" eventType="touchUpInside" id="x81-UB-L9N"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gBR-Hm-u3e" firstAttribute="leading" secondItem="57H-YU-vSm" secondAttribute="leadingMargin" constant="-12" id="Pgv-r0-iiI"/>
+                            <constraint firstItem="I3t-ZX-AkQ" firstAttribute="leading" secondItem="57H-YU-vSm" secondAttribute="leadingMargin" constant="-12" id="aVS-uA-9Jz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gBR-Hm-u3e" secondAttribute="trailing" constant="-12" id="eWg-iM-PKc"/>
+                            <constraint firstItem="9iA-AY-aMY" firstAttribute="top" secondItem="I3t-ZX-AkQ" secondAttribute="bottom" constant="8" id="hfm-eX-iL8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="I3t-ZX-AkQ" secondAttribute="trailing" constant="-12" id="ozu-9o-WLc"/>
+                            <constraint firstItem="I3t-ZX-AkQ" firstAttribute="top" secondItem="gBR-Hm-u3e" secondAttribute="bottom" constant="8" id="rsX-Vu-itc"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s2Y-gD-xy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="793" y="1550"/>
+        </scene>
     </scenes>
     <resources>
         <image name="activeButton" width="45" height="45"/>
@@ -2525,7 +2592,7 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xSV-rR-wZy"/>
+        <segue reference="a8P-lF-ebs"/>
         <segue reference="b42-UE-vP1"/>
-        <segue reference="S2P-ze-yMz"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -30,5 +30,10 @@
         andSuccess:(void (^)(id responseObject))success
         andFailure:(void (^)(NSError *error))failure;
 
+- (void)DELETEWithUrl:(NSString *)url
+       andParameters:(NSDictionary *)parameters
+          andSuccess:(void (^)(id responseObject))success
+          andFailure:(void (^)(NSError *error))failure;
+
 
 @end
