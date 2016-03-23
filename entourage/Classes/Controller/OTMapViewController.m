@@ -692,7 +692,7 @@
 }
 
 /********************************************************************************/
-#pragma mark - OTTourOptionsDelegate
+#pragma mark - OTTourJoinRequestDelegate
 
 - (void)dismissTourJoinRequestController {
     [self dismissViewControllerAnimated:YES completion:^{

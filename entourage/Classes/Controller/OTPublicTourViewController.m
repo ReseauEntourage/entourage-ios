@@ -7,11 +7,12 @@
 //
 
 #import "OTPublicTourViewController.h"
+#import "OTTourJoinRequestViewController.h"
 #import "UIViewController+menu.h"
 #import "UIButton+entourage.h"
 #import "UILabel+entourage.h"
 
-@interface OTPublicTourViewController ()
+@interface OTPublicTourViewController () <OTTourJoinRequestDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *organizationNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *typeNameLabel;
@@ -74,21 +75,36 @@
 }
 
 - (void)doShowProfile {
-    
+#warning show profile
 }
 
 - (IBAction)doJoinTour {
-    
+    [self performSegueWithIdentifier:@"PublicJoinRequestSegue" sender:self];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"PublicJoinRequestSegue"]) {
+        OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
+        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.tour = self.tour;
+        controller.tourJoinRequestDelegate = self;
+    }
 }
-*/
+
+/********************************************************************************/
+#pragma mark - OTTourJoinRequestDelegate
+- (void)dismissTourJoinRequestController {
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"dismissed tour join screen");
+        [self setupUI];
+    }];
+}
 
 @end

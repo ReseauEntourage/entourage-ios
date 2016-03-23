@@ -1816,6 +1816,7 @@ Un mail récapitulatif te sera envoyé.</string>
                         <outlet property="timeLocationLabel" destination="Q6t-ma-M2F" id="iNX-Cu-IkE"/>
                         <outlet property="typeNameLabel" destination="38j-CJ-LV0" id="SPS-8H-XCf"/>
                         <outlet property="userProfileImageButton" destination="Z7c-Pk-Mpm" id="fLv-hM-wmt"/>
+                        <segue destination="NTX-qP-dnX" kind="modal" identifier="PublicJoinRequestSegue" id="S2P-ze-yMz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fzt-Em-2Z8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2525,5 +2526,6 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
     <inferredMetricsTieBreakers>
         <segue reference="xSV-rR-wZy"/>
         <segue reference="b42-UE-vP1"/>
+        <segue reference="S2P-ze-yMz"/>
     </inferredMetricsTieBreakers>
 </document>
