@@ -13,6 +13,7 @@
 #import "SWRevealViewController.h"
 #import "OTLoginViewController.h"
 #import "UIViewController+menu.h"
+#import "OTSettingsViewController.h"
 
 #import "NSUserDefaults+OT.h"
 
@@ -33,7 +34,9 @@
 NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuIdentifierForMap";
 NSString *const OTMenuViewControllerSegueMenuGuideIdentifier = @"segueMenuIdentifierForGuide";
 NSString *const OTMenuViewControllerSegueMenuProfileIdentifier = @"segueMenuIdentifierForProfile";
+NSString *const OTMenuViewControllerSegueMenuSettingsIdentifier = @"segueMenuIdentifierForSettings";
 NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
+NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdentifierForAbout";
 
 @interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -73,13 +76,14 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
+    
     if (self.currentUser.avatarURL) {
         __weak UIButton *userImageButton = self.profileButton;
         userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
         userImageButton.clipsToBounds = YES;
         
         NSURL *url = [NSURL URLWithString:self.currentUser.avatarURL];
-        UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
+        UIImage *placeholderImage = [UIImage imageNamed:@"user"];
         [userImageButton setImageForState:UIControlStateNormal
                                   withURL:url
                          placeholderImage:placeholderImage];
@@ -130,8 +134,11 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 #pragma mark - Actions
 
 - (IBAction)showProfile {
-//    [self openControllerWithSegueIdentifier:@"OTUserProfile"];
+    //[self openControllerWithSegueIdentifier:@"OTUserProfile"];
+    SWRevealViewController *revealViewController = self.revealViewController;
+    [revealViewController revealToggle:self];
     [self performSegueWithIdentifier:@"segueMenuIdentifierForProfile" sender:nil];
+    
 }
 
 /**
@@ -208,16 +215,23 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 //                                              segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
 //    [menuItems addObject:itemGuide];
 
+    // Map
+    OTMenuItem *itemMap = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_map_title", @"")
+                                                   iconName: @"guide"
+                                            segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+    
+    [menuItems addObject:itemMap];
+    
     
     OTMenuItem *itemParam = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_param", @"")
                                                      iconName: @"parameters"
-                                              segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+                                              segueIdentifier:OTMenuViewControllerSegueMenuSettingsIdentifier];
     [menuItems addObject:itemParam];
 
     
     OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_about", @"")
                                                      iconName: @"about"
-                                              segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+                                              segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
     [menuItems addObject:itemAbout];
 
     // Disconnect

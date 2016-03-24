@@ -38,6 +38,8 @@
 		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
 		4508AE311C7F924B00EDAC1B /* OTTourOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */; };
+		4525EB311CA46082006784E6 /* OTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4525EB301CA46082006784E6 /* OTSettingsViewController.m */; };
+		4525EB341CA46582006784E6 /* OTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4525EB331CA46582006784E6 /* OTAboutViewController.m */; };
 		452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */; };
 		452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452FA6321C6BCE8500D5D56D /* OTRightsViewController.m */; };
 		454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */; };
@@ -176,6 +178,10 @@
 		2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4508AE2F1C7F924B00EDAC1B /* OTTourOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourOptionsViewController.h; sourceTree = "<group>"; };
 		4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourOptionsViewController.m; sourceTree = "<group>"; };
+		4525EB2F1CA46082006784E6 /* OTSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSettingsViewController.h; sourceTree = "<group>"; };
+		4525EB301CA46082006784E6 /* OTSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSettingsViewController.m; sourceTree = "<group>"; };
+		4525EB321CA46582006784E6 /* OTAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutViewController.h; sourceTree = "<group>"; };
+		4525EB331CA46582006784E6 /* OTAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutViewController.m; sourceTree = "<group>"; };
 		452FA62E1C6A50BF00D5D56D /* UIStoryboard+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+entourage.h"; sourceTree = "<group>"; };
 		452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+entourage.m"; sourceTree = "<group>"; };
 		452FA6311C6BCE8500D5D56D /* OTRightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRightsViewController.h; sourceTree = "<group>"; };
@@ -782,6 +788,10 @@
 				DBE9EF3619E7DCCA00031144 /* UIViewController+menu.m */,
 				DBE9EF2A19E7D73300031144 /* OTMenuViewController.h */,
 				DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */,
+				4525EB2F1CA46082006784E6 /* OTSettingsViewController.h */,
+				4525EB301CA46082006784E6 /* OTSettingsViewController.m */,
+				4525EB321CA46582006784E6 /* OTAboutViewController.h */,
+				4525EB331CA46582006784E6 /* OTAboutViewController.m */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -1040,6 +1050,7 @@
 				0A94B53E1B8F194700402AF3 /* OTTourPoint.m in Sources */,
 				0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */,
 				0A94B5001B8CC66100402AF3 /* OTTour.m in Sources */,
+				4525EB341CA46582006784E6 /* OTAboutViewController.m in Sources */,
 				0A4769381BFCC4EB006EA73A /* OTOrganization.m in Sources */,
 				454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */,
 				454C8F581C501B31001362B2 /* UIView+entourage.m in Sources */,
@@ -1050,6 +1061,7 @@
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,
 				455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */,
+				4525EB311CA46082006784E6 /* OTSettingsViewController.m in Sources */,
 				45B3F8F61C74F40B00DCF2EC /* OTTourAuthor.m in Sources */,
 				45F4433C1C90B40400DDEBE1 /* OTTourTimelinePoint.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
