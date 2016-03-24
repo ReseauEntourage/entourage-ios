@@ -100,23 +100,23 @@ NSString *const kTourPoints = @"tour_points";
     parameters[kTourPoints] = [OTTourPoint arrayForWebservice:tourPoints];
     
     [[OTHTTPRequestManager sharedInstance]
-     POSTWithUrl:url
-     andParameters:parameters
-     andSuccess:^(id responseObject)
-     {
-         if (success)
+         POSTWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
          {
-             OTTour *updatedTour = [self tourFromDictionary:responseObject];
-             success(updatedTour);
+             if (success)
+             {
+                 OTTour *updatedTour = [self tourFromDictionary:responseObject];
+                 success(updatedTour);
+             }
          }
-     }
-     andFailure:^(NSError *error)
-     {
-         if (failure)
+         andFailure:^(NSError *error)
          {
-             failure(error);
-         }
-     }];
+             if (failure)
+             {
+                 failure(error);
+             }
+         }];
 }
 
 - (void)toursAroundCoordinate:(CLLocationCoordinate2D)coordinates

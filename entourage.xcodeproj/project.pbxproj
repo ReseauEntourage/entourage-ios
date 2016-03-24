@@ -51,6 +51,7 @@
 		456ABD801CA18416004A81D6 /* UILabel+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ABD7F1CA18416004A81D6 /* UILabel+entourage.m */; };
 		456ABD831CA18DB5004A81D6 /* UIButton+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ABD821CA18DB5004A81D6 /* UIButton+entourage.m */; };
 		45ADCACF1CA2A27E0050EB96 /* OTQuitTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADCACE1CA2A27E0050EB96 /* OTQuitTourViewController.m */; };
+		45ADCAD21CA321380050EB96 /* UIViewController+MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADCAD11CA321380050EB96 /* UIViewController+MapView.m */; };
 		45B3F8F61C74F40B00DCF2EC /* OTTourAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B3F8F51C74F40A00DCF2EC /* OTTourAuthor.m */; };
 		45CE5A561C5241AA00F68C24 /* Blokletters-Balpen.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A481C5241AA00F68C24 /* Blokletters-Balpen.ttf */; };
 		45CE5A571C5241AA00F68C24 /* Calibri-Bold-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A491C5241AA00F68C24 /* Calibri-Bold-Italic.ttf */; };
@@ -201,6 +202,8 @@
 		456ABD821CA18DB5004A81D6 /* UIButton+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+entourage.m"; sourceTree = "<group>"; };
 		45ADCACD1CA2A27E0050EB96 /* OTQuitTourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTQuitTourViewController.h; sourceTree = "<group>"; };
 		45ADCACE1CA2A27E0050EB96 /* OTQuitTourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTQuitTourViewController.m; sourceTree = "<group>"; };
+		45ADCAD01CA321380050EB96 /* UIViewController+MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MapView.h"; sourceTree = "<group>"; };
+		45ADCAD11CA321380050EB96 /* UIViewController+MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MapView.m"; sourceTree = "<group>"; };
 		45B3F8F41C74F40A00DCF2EC /* OTTourAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourAuthor.h; sourceTree = "<group>"; };
 		45B3F8F51C74F40A00DCF2EC /* OTTourAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourAuthor.m; sourceTree = "<group>"; };
 		45CE5A481C5241AA00F68C24 /* Blokletters-Balpen.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blokletters-Balpen.ttf"; sourceTree = "<group>"; };
@@ -725,6 +728,8 @@
 			children = (
 				6B4930C819A773C500DA7EE0 /* OTMapViewController.h */,
 				6B4930C919A773C500DA7EE0 /* OTMapViewController.m */,
+				45ADCAD01CA321380050EB96 /* UIViewController+MapView.h */,
+				45ADCAD11CA321380050EB96 /* UIViewController+MapView.m */,
 				A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */,
 				A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */,
 				1D3BD36A19E964FC001687F9 /* OTMeetingCalloutViewController.h */,
@@ -1048,6 +1053,7 @@
 				45B3F8F61C74F40B00DCF2EC /* OTTourAuthor.m in Sources */,
 				45F4433C1C90B40400DDEBE1 /* OTTourTimelinePoint.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
+				45ADCAD21CA321380050EB96 /* UIViewController+MapView.m in Sources */,
 				0A213C491BA0306300202D7B /* OTGuideViewController.m in Sources */,
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,
 				456ABD7D1CA15F2D004A81D6 /* OTPublicTourViewController.m in Sources */,

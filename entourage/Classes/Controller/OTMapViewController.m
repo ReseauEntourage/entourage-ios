@@ -19,10 +19,15 @@
 #import "OTQuitTourViewController.h"
 #import "UIView+entourage.h"
 
-// View
+//#import "UIViewController+MapView.h"
+#import "KPAnnotation.h"
+#import "KPClusteringController.h"
+#import "JSBadgeView.h"
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
-#import "JSBadgeView.h"
+
+
+// View
 #import "SVProgressHUD.h"
 
 // Model
@@ -40,13 +45,8 @@
 
 // Framework
 #import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
-#import <MapKit/MKMapView.h>
-#import <CoreLocation/CoreLocation.h>
 #import <WYPopoverController/WYPopoverController.h>
 #import <QuartzCore/QuartzCore.h>
-#import "KPClusteringController.h"
-#import "KPAnnotation.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "TTTLocationFormatter.h"
 
@@ -412,7 +412,6 @@
     [self presentViewController:navController animated:YES completion:nil];
     
 //    [controller configureWithEncouter:encounter];
-    
 	//[Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{ @"encounter_id" : encounterAnnotation.encounter.sid }];
 }
 
@@ -443,10 +442,15 @@
 }
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoint {
-    [[OTTourService new] sendTourPoint:tourPoint withTourId:self.tour.sid withSuccess:^(OTTour *updatedTour) {
-    } failure:^(NSError *error) {
-        NSLog(@"%@",[error localizedDescription]);
-    }];
+    [[OTTourService new] sendTourPoint:tourPoint
+                            withTourId:self.tour.sid
+                           withSuccess:^(OTTour *updatedTour) {
+                           
+                           }
+                               failure:^(NSError *error) {
+                                   NSLog(@"%@",[error localizedDescription]);
+                               }
+     ];
 }
 
 - (void)hideBlurEffect {

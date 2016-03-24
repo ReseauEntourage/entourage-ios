@@ -1765,19 +1765,13 @@ Un mail récapitulatif te sera envoyé.</string>
                                         </constraints>
                                         <state key="normal" image="userSmall"/>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBu-aE-xUf">
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="auS-eX-dE3">
                                         <rect key="frame" x="0.0" y="96" width="328" height="161"/>
-                                        <color key="backgroundColor" red="0.99215686270000003" green="0.96078431369999995" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="161" id="VU5-1D-hFl"/>
-                                        </constraints>
-                                    </view>
+                                    </mapView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="lBu-aE-xUf" firstAttribute="leading" secondItem="6r8-Js-6ZZ" secondAttribute="leading" id="0U7-er-Ay5"/>
                                     <constraint firstItem="Z7c-Pk-Mpm" firstAttribute="top" secondItem="6r8-Js-6ZZ" secondAttribute="top" constant="10" id="1av-Dv-B7d"/>
-                                    <constraint firstAttribute="trailing" secondItem="lBu-aE-xUf" secondAttribute="trailing" id="5mm-Rn-bq9"/>
                                     <constraint firstItem="Q6t-ma-M2F" firstAttribute="top" secondItem="38j-CJ-LV0" secondAttribute="bottom" constant="10" id="6uL-nY-V9I"/>
                                     <constraint firstItem="7tN-ge-idb" firstAttribute="centerX" secondItem="6r8-Js-6ZZ" secondAttribute="centerX" id="BE5-x0-yC9"/>
                                     <constraint firstAttribute="trailing" secondItem="9EC-WN-pq9" secondAttribute="trailing" constant="8" id="HZc-NM-HwN"/>
@@ -1789,7 +1783,6 @@ Un mail récapitulatif te sera envoyé.</string>
                                     <constraint firstItem="31i-sZ-HrY" firstAttribute="top" secondItem="6r8-Js-6ZZ" secondAttribute="top" constant="15" id="cQT-Kd-avy"/>
                                     <constraint firstItem="31i-sZ-HrY" firstAttribute="leading" secondItem="6r8-Js-6ZZ" secondAttribute="leading" constant="15" id="daP-77-aN4"/>
                                     <constraint firstItem="hNZ-KZ-Vqb" firstAttribute="leading" secondItem="6r8-Js-6ZZ" secondAttribute="leading" constant="16" id="esP-77-xqG"/>
-                                    <constraint firstItem="lBu-aE-xUf" firstAttribute="top" secondItem="3LY-i2-vap" secondAttribute="bottom" constant="14" id="hDz-nN-sGs"/>
                                     <constraint firstItem="Q6t-ma-M2F" firstAttribute="leading" secondItem="6r8-Js-6ZZ" secondAttribute="leading" constant="15" id="hS7-QM-gq2"/>
                                     <constraint firstItem="7tN-ge-idb" firstAttribute="top" secondItem="hNZ-KZ-Vqb" secondAttribute="bottom" constant="22" id="kox-fN-HjU"/>
                                     <constraint firstItem="2hv-BF-VGZ" firstAttribute="centerY" secondItem="hNZ-KZ-Vqb" secondAttribute="centerY" id="mqu-mD-VtG"/>
@@ -2592,7 +2585,7 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xSV-rR-wZy"/>
-        <segue reference="a8P-lF-ebs"/>
         <segue reference="b42-UE-vP1"/>
+        <segue reference="S2P-ze-yMz"/>
     </inferredMetricsTieBreakers>
 </document>
