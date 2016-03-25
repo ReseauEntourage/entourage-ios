@@ -12,7 +12,6 @@
 #import "OTOrganization.h"
 #import "UIViewController+menu.h"
 #import "UIColor+entourage.h"
-#import "UIButton+AFNetworking.h"
 #import "OTTourDetailsOptionsViewController.h"
 #import "OTTourService.h"
 #import "NSUserDefaults+OT.h"
@@ -23,6 +22,8 @@
 #import "OTTourStatus.h"
 #import "IQKeyboardManager.h"
 #import "OTUser.h"
+#import "UIButton+entourage.h"
+
 
 
 #define TAG_ORGANIZATION 1
@@ -380,18 +381,11 @@ typedef NS_ENUM(unsigned) {
     }
     //user
     
-    __weak UIButton *userImageButton = [cell viewWithTag:TIMELINE_MESSAGE_USER];
-    [userImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
-    userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
-    userImageButton.clipsToBounds = YES;
-    if (message.userAvatarURL != nil && message.userAvatarURL.class != [NSNull class]) {
-        NSURL *url = [NSURL URLWithString:message.userAvatarURL];
-        UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
-        [userImageButton setImageForState:UIControlStateNormal
-                                  withURL:url
-                         placeholderImage:placeholderImage];
-    }
-
+    
+    
+    UIButton *userImageButton = [cell viewWithTag:TIMELINE_MESSAGE_USER];
+    [userImageButton setupAsProfilePictureFromUrl:message.userAvatarURL];
+    
     
     //text
     UILabel *messageLabel = [cell viewWithTag:TIMELINE_MESSAGE_TEXT];
@@ -448,16 +442,8 @@ typedef NS_ENUM(unsigned) {
     typeByNameLabel.attributedText = typeByNameAttrString;
     
     
-    __weak UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSER];
-    userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
-    userImageButton.clipsToBounds = YES;
-    if (self.tour.author.avatarUrl != nil) {
-        NSURL *url = [NSURL URLWithString:self.tour.author.avatarUrl];
-        UIImage *placeholderImage = [UIImage imageNamed:@"userSmall"];
-        [userImageButton setImageForState:UIControlStateNormal
-                                  withURL:url
-                         placeholderImage:placeholderImage];
-    }
+    UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSER];
+    [userImageButton setupAsProfilePictureFromUrl:self.tour.author.avatarUrl];
 
 }
 

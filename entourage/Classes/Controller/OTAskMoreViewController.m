@@ -42,7 +42,6 @@
     self.title = @"DÉCOUVREZ ENTOURAGE";
     self.navigationController.navigationBarHidden = NO;
     [self setupCloseModal];
-    self.emailField.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"device_token"];
 }
 
 /********************************************************************************/

@@ -118,6 +118,15 @@
                                     <outlet property="delegate" destination="0J6-b7-p0H" id="8IY-4K-OLz"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="v 1.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUd-rX-Mc5">
+                                <rect key="frame" x="20" y="531" width="280" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="xHT-4I-gLR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prenom Nom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZg-OL-qCe">
                                 <rect key="frame" x="20" y="212" width="280" height="21"/>
                                 <constraints>
@@ -142,11 +151,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="2Xh-aG-0Ck" firstAttribute="top" secondItem="GUd-rX-Mc5" secondAttribute="bottom" constant="8" id="7Yv-RP-uae"/>
                             <constraint firstItem="hU9-Dq-Xg8" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="No1-Gp-qXl"/>
                             <constraint firstItem="gZg-OL-qCe" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="TUJ-yt-314"/>
+                            <constraint firstItem="GUd-rX-Mc5" firstAttribute="leading" secondItem="ljo-QP-YxJ" secondAttribute="leadingMargin" id="Try-j4-heD"/>
                             <constraint firstItem="EiD-PN-iyE" firstAttribute="leading" secondItem="ljo-QP-YxJ" secondAttribute="leadingMargin" constant="-20" id="W0l-aH-tXM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EiD-PN-iyE" secondAttribute="trailing" constant="-20" id="aFF-pJ-c2w"/>
                             <constraint firstItem="hU9-Dq-Xg8" firstAttribute="top" secondItem="slD-Bf-Od0" secondAttribute="bottom" constant="32" id="cYs-tz-XCE"/>
+                            <constraint firstItem="GUd-rX-Mc5" firstAttribute="trailing" secondItem="ljo-QP-YxJ" secondAttribute="trailingMargin" id="fzS-4C-42X"/>
                             <constraint firstItem="EiD-PN-iyE" firstAttribute="top" secondItem="gZg-OL-qCe" secondAttribute="bottom" constant="25" id="j5z-qu-cC3"/>
                             <constraint firstItem="2Xh-aG-0Ck" firstAttribute="top" secondItem="EiD-PN-iyE" secondAttribute="bottom" id="jYd-tt-tU7"/>
                             <constraint firstItem="gZg-OL-qCe" firstAttribute="top" secondItem="hU9-Dq-Xg8" secondAttribute="bottom" constant="16" id="tfD-aq-AN2"/>
@@ -158,6 +170,7 @@
                         <outlet property="nameLabel" destination="gZg-OL-qCe" id="zeh-G7-D9m"/>
                         <outlet property="profileButton" destination="hU9-Dq-Xg8" id="7ln-AG-5Qf"/>
                         <outlet property="tableView" destination="EiD-PN-iyE" id="CgG-Ii-UXP"/>
+                        <outlet property="versionLabel" destination="GUd-rX-Mc5" id="H7u-qc-Yj2"/>
                         <segue destination="UcL-62-xea" kind="custom" identifier="segueMenuIdentifierForMap" customClass="SWRevealViewControllerSeguePushController" id="xSV-rR-wZy"/>
                         <segue destination="69R-LH-AoF" kind="custom" identifier="segueMenuIdentifierForGuide" customClass="SWRevealViewControllerSeguePushController" id="cE5-Dw-CbA"/>
                         <segue destination="Th9-id-j6L" kind="modal" identifier="segueMenuIdentifierForProfile" id="ZNZ-ec-dR4"/>
@@ -561,6 +574,58 @@ Un mail récapitulatif te sera envoyé.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66X-IN-NwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="364" y="1538"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mLq-en-3eJ">
+            <objects>
+                <navigationController id="SwJ-ps-aSG" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="KW2-d6-Rkv"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RV6-bb-ZVV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="n1k-4m-yQ6" kind="relationship" relationship="rootViewController" id="aj8-R6-BEq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="21B-7P-kEx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2228" y="-616"/>
+        </scene>
+        <!--Entourages View Controller-->
+        <scene sceneID="yEy-Yk-dJ1">
+            <objects>
+                <viewController id="n1k-4m-yQ6" customClass="OTEntouragesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="51m-e5-0NN"/>
+                        <viewControllerLayoutGuide type="bottom" id="UJ8-5y-3RH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e81-tP-cg4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ggf-jT-5VJ">
+                                <rect key="frame" x="16" y="79" width="288" height="29"/>
+                                <segments>
+                                    <segment title="En cours"/>
+                                    <segment title="Enregistrés"/>
+                                    <segment title="Clôturés"/>
+                                </segments>
+                                <color key="tintColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="ggf-jT-5VJ" secondAttribute="trailing" constant="-4" id="6dU-2g-7i9"/>
+                            <constraint firstItem="ggf-jT-5VJ" firstAttribute="leading" secondItem="e81-tP-cg4" secondAttribute="leadingMargin" constant="-4" id="HTg-BE-6ZF"/>
+                            <constraint firstItem="ggf-jT-5VJ" firstAttribute="top" secondItem="51m-e5-0NN" secondAttribute="bottom" constant="15" id="lHh-Z1-XaZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="jMb-tR-6p0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oAm-vJ-bDO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2658" y="-616"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -1059,6 +1124,7 @@ Un mail récapitulatif te sera envoyé.</string>
                         <segue destination="NTX-qP-dnX" kind="modal" identifier="OTTourJoinRequestSegue" id="a8P-lF-ebs"/>
                         <segue destination="Th9-id-j6L" kind="modal" identifier="UserProfileSegue" id="b42-UE-vP1"/>
                         <segue destination="WqR-bT-UxS" kind="modal" identifier="QuitTourSegue" id="QCV-ym-9OZ"/>
+                        <segue destination="SwJ-ps-aSG" kind="modal" identifier="EntouragesSegue" id="NTA-1a-2nr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -1738,8 +1804,8 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
                                     <action selector="zoomToCurrentLocation:" destination="p8v-jb-uzQ" eventType="touchUpInside" id="wG1-x9-6gu"/>
                                 </connections>
                             </button>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wcs-Ze-80M">
-                                <rect key="frame" x="0.0" y="-1" width="320" height="570"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wcs-Ze-80M">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </mapView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BGA-gz-HV7">
                                 <rect key="frame" x="150" y="274" width="20" height="20"/>
@@ -1757,6 +1823,10 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
                         <constraints>
                             <constraint firstItem="juE-RS-22d" firstAttribute="top" secondItem="DRg-uC-LYj" secondAttribute="bottom" id="Ea6-Yk-vIp"/>
                             <constraint firstItem="DRg-uC-LYj" firstAttribute="top" secondItem="Dep-tr-liv" secondAttribute="topMargin" id="Exg-zr-asS"/>
+                            <constraint firstItem="Wcs-Ze-80M" firstAttribute="leading" secondItem="Dep-tr-liv" secondAttribute="leadingMargin" constant="-20" id="FA4-ou-Qh9"/>
+                            <constraint firstItem="Wcs-Ze-80M" firstAttribute="top" secondItem="7Mg-f0-gGB" secondAttribute="bottom" id="GJ8-8d-Hno"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Wcs-Ze-80M" secondAttribute="trailing" constant="-20" id="LQl-5W-Izd"/>
+                            <constraint firstItem="juE-RS-22d" firstAttribute="top" secondItem="Wcs-Ze-80M" secondAttribute="bottom" id="P2M-pe-Lxo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DRg-uC-LYj" secondAttribute="trailing" constant="-24" id="hHL-WP-eej"/>
                             <constraint firstItem="DRg-uC-LYj" firstAttribute="leading" secondItem="Dep-tr-liv" secondAttribute="leadingMargin" constant="-24" id="sIa-MM-I9Z"/>
                         </constraints>
@@ -2357,8 +2427,8 @@ Cette maraude étant privée, votre demande a été  transmise au créateur.
         <image name="walkActive" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b42-UE-vP1"/>
         <segue reference="xSV-rR-wZy"/>
-        <segue reference="S2P-ze-yMz"/>
+        <segue reference="b42-UE-vP1"/>
+        <segue reference="a8P-lF-ebs"/>
     </inferredMetricsTieBreakers>
 </document>

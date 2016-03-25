@@ -18,6 +18,7 @@
 // Helper
 #import "NSUserDefaults+OT.h"
 #import "NSDictionary+Parsing.h"
+#import "NSBundle+entourage.h"
 
 // Model
 #import "OTUser.h"
@@ -25,6 +26,8 @@
 
 /**************************************************************************************************/
 #pragma mark - Constants
+
+NSString *const kAPIApps = @"applications";
 
 NSString *const kAPILogin = @"login";
 NSString *const kAPIUserRoute = @"users";
@@ -47,12 +50,6 @@ NSString *const kKeychainPassword = @"entourage_user_password";
 {
     NSDictionary *parameters = @{@"user": @{@"phone": phone, @"sms_code": password}};
   
-  
-//  @{ @"phone": phone,
-//                                  @"sms_code": password,
-//                                  @"device_type": @"ios",
-//                                  @"device_id": (deviceId == nil ? @"" : deviceId) };
-    
     [[OTHTTPRequestManager sharedInstance]
          POSTWithUrl:kAPILogin
          andParameters:parameters
@@ -76,6 +73,49 @@ NSString *const kKeychainPassword = @"entourage_user_password";
                  failure(error);
              }
      }];
+}
+
+- (void)sendAppInfoWithSuccess:(void (^)(OTUser *))success
+                       failure:(void (^)(NSError *))failure
+{
+    NSString *pushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
+    if (!pushToken)
+        pushToken = @"";
+    NSString *deviceiOS = [[NSProcessInfo processInfo] operatingSystemVersionString];
+    
+    NSString *version = [NSBundle currentVersion];
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];//[[OTHTTPRequestManager commonParameters] mutableCopy];
+    parameters[@"application"] =  @{@"push_token": pushToken,
+                                                    @"device_os" : deviceiOS,
+                                                    @"version" : version
+                                    };
+    
+    NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSLog(@"Applications: %@\n%@", url, parameters);
+    
+    [[OTHTTPRequestManager sharedInstance]
+         PUTWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject) {
+             NSDictionary *responseDict = responseObject;
+             NSLog(@"Applications response : %@", responseDict);
+            // NSDictionary *responseUser = responseDict[@"user"];
+             
+             if (success) {
+                 success(nil);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             NSLog(@"Failed with error %@", error);
+             if (failure) {
+                 failure(error);
+             }
+         }];
+
+    
+    
+    
 }
 
 - (void)regenerateSecretCode:(NSString *)phone

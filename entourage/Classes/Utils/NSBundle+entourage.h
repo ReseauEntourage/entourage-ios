@@ -10,4 +10,6 @@
 
 @interface NSBundle (entourage)
 
++ (NSString *)currentVersion;
+
 @end

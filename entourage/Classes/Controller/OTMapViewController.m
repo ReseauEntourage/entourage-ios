@@ -308,8 +308,12 @@
     UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] init];
     [chatButton setImage:chatsImage];
     [chatButton setTarget:self];
-    //        [chatButton setAction:@selector()];
+    [chatButton setAction:@selector(showEntourages)];
     [self.navigationItem setRightBarButtonItem:chatButton];
+}
+
+- (void)showEntourages {
+    [self performSegueWithIdentifier:@"EntouragesSegue" sender:self];
 }
 
 - (void)registerObserver {

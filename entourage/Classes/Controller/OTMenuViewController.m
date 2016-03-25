@@ -28,7 +28,10 @@
 
 // Utils
 #import "UIButton+AFNetworking.h"
+#import "UIButton+entourage.h"
 #import "NSUserDefaults+OT.h"
+#import "NSBundle+entourage.h"
+
 
 /* MenuItem identifiers */
 NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuIdentifierForMap";
@@ -47,6 +50,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
+@property (nonatomic, weak) IBOutlet UILabel *versionLabel;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -63,6 +67,8 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 - (void)viewDidLoad {
 	[super viewDidLoad];
     
+    self.versionLabel.text = [NSBundle currentVersion];
+    
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
 
@@ -73,21 +79,10 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     
     self.title = @"MON COMPTE";
     [self createBackFrontMenuButton];
-    self.navigationController.navigationBar.tintColor = [UIColor redColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
+    [self.profileButton setupAsProfilePictureFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
     
-    if (self.currentUser.avatarURL) {
-        __weak UIButton *userImageButton = self.profileButton;
-        userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
-        userImageButton.clipsToBounds = YES;
-        
-        NSURL *url = [NSURL URLWithString:self.currentUser.avatarURL];
-        UIImage *placeholderImage = [UIImage imageNamed:@"user"];
-        [userImageButton setImageForState:UIControlStateNormal
-                                  withURL:url
-                         placeholderImage:placeholderImage];
-    }
 }
 
 /**************************************************************************************************/
@@ -205,22 +200,24 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 + (NSArray *)createMenuItems {
 	NSMutableArray *menuItems = [NSMutableArray array];
     
-//    OTMenuItem *itemAmis = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_amis", @"")
-//                                                    iconName: @"friends"
-//                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
-//    [menuItems addObject:itemAmis];
     
-//    OTMenuItem *itemGuide = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_guide", @"")
-//                                                     iconName: @"guide"
-//                                              segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
-//    [menuItems addObject:itemGuide];
 
     // Map
     OTMenuItem *itemMap = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_map_title", @"")
                                                    iconName: @"guide"
                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
-    
     [menuItems addObject:itemMap];
+    
+//    OTMenuItem *itemAmis = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_amis", @"")
+//                                                    iconName: @"friends"
+//                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+//    [menuItems addObject:itemAmis];
+
+
+    OTMenuItem *itemGuide = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_guide", @"")
+                                                     iconName: @"guide"
+                                              segueIdentifier:OTMenuViewControllerSegueMenuGuideIdentifier];
+    [menuItems addObject:itemGuide];
     
     
     OTMenuItem *itemParam = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_param", @"")
@@ -240,39 +237,6 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
                                                    segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
     [menuItems addObject:itemDisconnect];
     
-    /*
-	// Map
-	OTMenuItem *itemMap = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_map_title", @"")
-	                                        segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
-
-	[menuItems addObject:itemMap];
-
-    // Guide
-    OTMenuItem *itemGuide = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_guide_title", @"")
-                                              segueIdentifier:OTMenuViewControllerSegueMenuGuideIdentifier];
-    
-    [menuItems addObject:itemGuide];
-    
-    // Profile
-    OTMenuItem *itemProfile = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_profile_title", @"")
-                                                segueIdentifier:OTMenuViewControllerSegueMenuProfileIdentifier];
-    [menuItems addObject:itemProfile];
-
-	// Disconnect
-	OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
-	                                               segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
-	[menuItems addObject:itemDisconnect];
-     */
-	// Version
-//	NSString *buildVersion = [[[NSBundle bundleForClass:[self class]] infoDictionary]
-//	                          objectForKey:@"CFBundleVersion"];
-//
-//	NSString *version = [[[NSBundle bundleForClass:[self class]] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-//
-//	version = [NSString stringWithFormat:@"%@ (%@)", version, buildVersion];
-//    OTMenuItem *itemVersion = [[OTMenuItem alloc] initWithTitle:version iconName:@"" segueIdentifier:nil];
-//	[menuItems addObject:itemVersion];
-
 	return menuItems;
 }
 

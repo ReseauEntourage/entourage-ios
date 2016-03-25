@@ -40,6 +40,8 @@
 		4508AE311C7F924B00EDAC1B /* OTTourOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */; };
 		4525EB311CA46082006784E6 /* OTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4525EB301CA46082006784E6 /* OTSettingsViewController.m */; };
 		4525EB341CA46582006784E6 /* OTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4525EB331CA46582006784E6 /* OTAboutViewController.m */; };
+		4525EB371CA5DFE1006784E6 /* NSBundle+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4525EB361CA5DFE1006784E6 /* NSBundle+entourage.m */; };
+		4525EB3A1CA5EE1C006784E6 /* OTEntouragesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4525EB391CA5EE1C006784E6 /* OTEntouragesViewController.m */; };
 		452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */; };
 		452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452FA6321C6BCE8500D5D56D /* OTRightsViewController.m */; };
 		454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */; };
@@ -182,6 +184,10 @@
 		4525EB301CA46082006784E6 /* OTSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSettingsViewController.m; sourceTree = "<group>"; };
 		4525EB321CA46582006784E6 /* OTAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutViewController.h; sourceTree = "<group>"; };
 		4525EB331CA46582006784E6 /* OTAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutViewController.m; sourceTree = "<group>"; };
+		4525EB351CA5DFE1006784E6 /* NSBundle+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+entourage.h"; sourceTree = "<group>"; };
+		4525EB361CA5DFE1006784E6 /* NSBundle+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+entourage.m"; sourceTree = "<group>"; };
+		4525EB381CA5EE1C006784E6 /* OTEntouragesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntouragesViewController.h; sourceTree = "<group>"; };
+		4525EB391CA5EE1C006784E6 /* OTEntouragesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntouragesViewController.m; sourceTree = "<group>"; };
 		452FA62E1C6A50BF00D5D56D /* UIStoryboard+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+entourage.h"; sourceTree = "<group>"; };
 		452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+entourage.m"; sourceTree = "<group>"; };
 		452FA6311C6BCE8500D5D56D /* OTRightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRightsViewController.h; sourceTree = "<group>"; };
@@ -353,6 +359,8 @@
 				0A70FA171BFDD69C0080E8EC /* OTToursTableViewController.m */,
 				45ADCACD1CA2A27E0050EB96 /* OTQuitTourViewController.h */,
 				45ADCACE1CA2A27E0050EB96 /* OTQuitTourViewController.m */,
+				4525EB381CA5EE1C006784E6 /* OTEntouragesViewController.h */,
+				4525EB391CA5EE1C006784E6 /* OTEntouragesViewController.m */,
 			);
 			name = Tour;
 			sourceTree = "<group>";
@@ -704,6 +712,8 @@
 				456ABD7F1CA18416004A81D6 /* UILabel+entourage.m */,
 				456ABD811CA18DB5004A81D6 /* UIButton+entourage.h */,
 				456ABD821CA18DB5004A81D6 /* UIButton+entourage.m */,
+				4525EB351CA5DFE1006784E6 /* NSBundle+entourage.h */,
+				4525EB361CA5DFE1006784E6 /* NSBundle+entourage.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1060,6 +1070,7 @@
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,
+				4525EB3A1CA5EE1C006784E6 /* OTEntouragesViewController.m in Sources */,
 				455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */,
 				4525EB311CA46082006784E6 /* OTSettingsViewController.m in Sources */,
 				45B3F8F61C74F40B00DCF2EC /* OTTourAuthor.m in Sources */,
@@ -1069,6 +1080,7 @@
 				0A213C491BA0306300202D7B /* OTGuideViewController.m in Sources */,
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,
 				456ABD7D1CA15F2D004A81D6 /* OTPublicTourViewController.m in Sources */,
+				4525EB371CA5DFE1006784E6 /* NSBundle+entourage.m in Sources */,
 				456ABD831CA18DB5004A81D6 /* UIButton+entourage.m in Sources */,
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */,
