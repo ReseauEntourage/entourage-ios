@@ -73,14 +73,14 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         [UIStoryboard showStartup];
     }
     
-    
-    [[OTAuthService new] sendAppInfoWithSuccess:^(OTUser *user) {
-        NSLog(@"Applications !");
+    if ([[NSUserDefaults standardUserDefaults] currentUser].token) {
+        [[OTAuthService new] sendAppInfoWithSuccess:^(OTUser *user) {
+            NSLog(@"Application info sent!");
+        }
+                                            failure:^(NSError * error) {
+            NSLog(@"ApplicationsERR: %@", error.description);
+        }];
     }
-                                        failure:^(NSError * error) {
-        NSLog(@"ApplicationsERR: %@", error.description);
-    }];
-    
 	return YES;
 }
 

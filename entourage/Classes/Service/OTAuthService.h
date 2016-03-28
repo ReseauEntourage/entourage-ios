@@ -21,7 +21,7 @@ extern NSString *const kKeychainPassword;
               success:(void (^)(OTUser *user))success
               failure:(void (^)(NSError *error))failure;
 
-- (void)sendAppInfoWithSuccess:(void (^)(OTUser *))success
+- (void)sendAppInfoWithSuccess:(void (^)())success
                        failure:(void (^)(NSError *))failure;
 
 - (void)regenerateSecretCode:(NSString *)phone

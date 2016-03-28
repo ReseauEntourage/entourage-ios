@@ -49,8 +49,11 @@ NSString *const kKeychainPassword = @"entourage_user_password";
               failure:(void (^)(NSError *))failure
 {
     NSDictionary *parameters = @{@"user": @{@"phone": phone, @"sms_code": password}};
-  
-    [[OTHTTPRequestManager sharedInstance]
+    OTRequestOperationManager *requestManager = [OTHTTPRequestManager sharedInstance];
+    [requestManager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    
+    [requestManager
          POSTWithUrl:kAPILogin
          andParameters:parameters
          andSuccess:^(id responseObject) {
@@ -75,20 +78,18 @@ NSString *const kKeychainPassword = @"entourage_user_password";
      }];
 }
 
-- (void)sendAppInfoWithSuccess:(void (^)(OTUser *))success
+- (void)sendAppInfoWithSuccess:(void (^)())success
                        failure:(void (^)(NSError *))failure
 {
     NSString *pushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
     if (!pushToken)
-        pushToken = @"";
-    NSString *deviceiOS = [[NSProcessInfo processInfo] operatingSystemVersionString];
+        return;
+
+    NSString *deviceiOS = [NSString stringWithFormat:@"iOS %@",[[NSProcessInfo processInfo] operatingSystemVersionString]];
     
     NSString *version = [NSBundle currentVersion];
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];//[[OTHTTPRequestManager commonParameters] mutableCopy];
-    parameters[@"application"] =  @{@"push_token": pushToken,
-                                                    @"device_os" : deviceiOS,
-                                                    @"version" : version
-                                    };
+    NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken, @"device_os" : deviceiOS, @"version" : version}};
+                                    
     
     NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSLog(@"Applications: %@\n%@", url, parameters);
@@ -97,12 +98,8 @@ NSString *const kKeychainPassword = @"entourage_user_password";
          PUTWithUrl:url
          andParameters:parameters
          andSuccess:^(id responseObject) {
-             NSDictionary *responseDict = responseObject;
-             NSLog(@"Applications response : %@", responseDict);
-            // NSDictionary *responseUser = responseDict[@"user"];
-             
              if (success) {
-                 success(nil);
+                 success();
              }
          }
          andFailure:^(NSError *error)
@@ -112,10 +109,6 @@ NSString *const kKeychainPassword = @"entourage_user_password";
                  failure(error);
              }
          }];
-
-    
-    
-    
 }
 
 - (void)regenerateSecretCode:(NSString *)phone

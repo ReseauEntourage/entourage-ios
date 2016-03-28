@@ -23,14 +23,16 @@
 
 	if (requestManager == nil) {
 		requestManager = [[OTRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_API_URL]];
+        
 		requestManager.responseSerializer = [OTJSONResponseSerializer serializer];
 		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [requestManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [requestManager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-        //[requestManager.requestSerializer setValue:@"(required, string, `d05394bcf705bbd4d6923bd9`)" forHTTPHeaderField:@"X-API-KEY"];
+        //[requestManager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        
         //TODO api key should be changed after each release
+        [requestManager.requestSerializer setValue:@"d05394bcf705bbd4d6923bd9" forHTTPHeaderField:@"X-API-KEY"];
 	}
-
+    //NSLog(@"HTTP %@", requestManager.requestSerializer.HTTPRequestHeaders);
 	return requestManager;
 }
 
