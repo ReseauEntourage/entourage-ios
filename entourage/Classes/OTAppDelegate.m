@@ -120,7 +120,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
-    NSLog(@"Push notification received");
+    NSLog(@"Push notification received: %@", userInfo);
     
     // Building the notification
     UIApplicationState state = [application applicationState];

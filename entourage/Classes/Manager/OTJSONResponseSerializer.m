@@ -25,7 +25,7 @@
             userInfo[JSONResponseSerializerWithDataKey] = @"";
         } else {
             NSString* dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"responsedata: %@", dataString);
+            NSLog(@"response data: %@", dataString);
             NSString *errorMessage = [JSONObject valueForKey:@"message"];
             if (errorMessage != nil) {
                 userInfo[JSONResponseSerializerWithDataKey] = errorMessage;

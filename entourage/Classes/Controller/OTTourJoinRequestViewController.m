@@ -28,6 +28,7 @@
     [super viewDidAppear:animated];
     [[OTTourService new] joinTour:self.tour
                           success:^(OTTourJoiner *joiner) {
+                              NSLog(@"sent request to join tour %@", self.tour.sid);
                               self.tour.joinStatus = @"pending";
                           }
                           failure:^(NSError *error) {

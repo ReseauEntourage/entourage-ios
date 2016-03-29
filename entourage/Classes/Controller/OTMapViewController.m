@@ -818,7 +818,7 @@ static bool isShowingOptions = NO;
 
 - (IBAction)typeButtonDidTap:(UIView *)sender {
     for (UIButton *button in self.typeButtons) {
-        button.selected = (button == sender);
+        button.selected = (button.tag == sender.tag);
     }
 }
 

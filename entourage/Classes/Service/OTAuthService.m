@@ -52,7 +52,8 @@ NSString *const kKeychainPassword = @"entourage_user_password";
     OTRequestOperationManager *requestManager = [OTHTTPRequestManager sharedInstance];
     [requestManager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
-    
+    NSLog(@"Login with user %@", parameters);
+    NSLog(@"Login header: %@", requestManager.requestSerializer.HTTPRequestHeaders);
     [requestManager
          POSTWithUrl:kAPILogin
          andParameters:parameters
@@ -203,7 +204,8 @@ NSString *const kKeychainPassword = @"entourage_user_password";
      }];
 }
 
-- (void)checkVersionWithSuccess:(void (^)(BOOL))success failure:(void (^)(NSError *))failure
+- (void)checkVersionWithSuccess:(void (^)(BOOL))success
+                        failure:(void (^)(NSError *))failure
 {
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:@"check"

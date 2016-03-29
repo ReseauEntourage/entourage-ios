@@ -851,7 +851,7 @@ Un mail récapitulatif te sera envoyé.</string>
                                             <action selector="closeLauncher:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hqD-eK-Db4"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vu-2J-Hii">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vu-2J-Hii">
                                         <rect key="frame" x="0.0" y="86" width="109" height="85"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -874,7 +874,7 @@ Un mail récapitulatif te sera envoyé.</string>
                                             <action selector="typeButtonDidTap:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="rKt-bL-iUM"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Uk-IS-rcP">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Uk-IS-rcP">
                                         <rect key="frame" x="110" y="86" width="108" height="85"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -892,10 +892,9 @@ Un mail récapitulatif te sera envoyé.</string>
                                         </state>
                                         <connections>
                                             <action selector="typeButtonDidTap:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0q3-vj-GML"/>
-                                            <segue destination="7wY-UT-vNw" kind="modal" identifier="OTPublicTourSegue" id="Ut5-NA-e4R"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0S-hy-GgY">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0S-hy-GgY">
                                         <rect key="frame" x="219" y="86" width="109" height="85"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
