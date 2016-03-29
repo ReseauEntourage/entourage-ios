@@ -31,22 +31,6 @@
 
 @property (nonatomic, strong) OTUser *currentUser;
 
-@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (nonatomic, weak) IBOutlet UILabel *emailLabel;
-@property (nonatomic, weak) IBOutlet UILabel *toursLabel;
-@property (nonatomic, weak) IBOutlet UILabel *encountersLabel;
-@property (nonatomic, weak) IBOutlet UILabel *organizationLabel;
-
-@property (nonatomic, weak) IBOutlet UITextField *emailField;
-@property (nonatomic, weak) IBOutlet UITextField *accessCodeField;
-@property (nonatomic, weak) IBOutlet UITextField *confirmationField;
-
-@property (nonatomic, weak) IBOutlet UIButton *updateButton;
-@property (nonatomic, weak) IBOutlet UIButton *unsubscribeButton;
-@property (nonatomic, weak) IBOutlet UIButton *termsAndConditionsButton;
-
-@property (weak, nonatomic) IBOutlet UISwitch *myToursSwitch;
-
 @end
 
 @implementation OTUserViewController
