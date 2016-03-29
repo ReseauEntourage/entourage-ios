@@ -47,14 +47,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *recordLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *recordingLoader;
 
-
 @property (nonatomic) BOOL isRecording;
 
 @end
 
 /**************************************************************************************************/
 #pragma mark - Constants
-#warning check keys with Francois: getting error [NMSP_ERROR] check status Error: 696e6974 init -> line: 485
 
 const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0xc2, 0xcd, 0x4a, 0x31, 0x70, 0x9f, 0x4a, 0x34, 0x5d, 0x4c, 0xc0, 0x2c, 0xc1, 0xce, 0x26, 0xda, 0xdb, 0xd7, 0x3b, 0x28, 0x9c, 0x58, 0x0c, 0xb8, 0xc7, 0x4a, 0x37, 0x58, 0x42, 0x36, 0x86, 0x04, 0x03, 0xd1, 0x35, 0x74, 0x70, 0x80, 0xa8, 0xcd, 0xcc, 0x69, 0xfa, 0x8e, 0x37, 0x20, 0x68, 0x12, 0xf7, 0xa4, 0x3a, 0x94, 0xfc, 0x47, 0x4c, 0xc3, 0x91, 0x83, 0x1c};
 
@@ -141,6 +139,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 
 - (IBAction)startStopRecording:(id)sender {
     [self.recordButton setEnabled:NO];
+   
     if (!self.isRecording) {
         _recognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType
                                                    detection:SKShortEndOfSpeechDetection
@@ -165,7 +164,8 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithResults:(SKRecognition *)results {
     NSLog(@"%@", @"Finish with results");
     if (results.results.count != 0) {
-        NSString *text = self.messageTextView.text;
+        self.messageTextView.textColor = [UIColor blackColor];
+        NSString *text = [self.messageTextView.text isEqualToString:PLACEHOLDER]? @"" : self.messageTextView.text;
         NSString *result = [results.results objectAtIndex:0];
         if (text.length == 0) {
             [self.messageTextView setText:result];
@@ -191,7 +191,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 
 - (void)recognizerDidFinishRecording:(SKRecognizer *)recognizer {
     NSLog(@"%@", @"Finish recording");
-    [self.recordButton setImage:[UIImage imageNamed:@"ic_action_record_sound.png"] forState:UIControlStateNormal];
+    [self.recordButton setImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
     [self.recordButton setEnabled:YES];
     self.isRecording = NO;
     [self.recordLabel setText:@"Appuyez pour dicter un message"];

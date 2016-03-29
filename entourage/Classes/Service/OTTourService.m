@@ -279,7 +279,7 @@ NSString *const kTourPoints = @"tour_points";
     
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
     
-    
+    NSLog(@"Join request: %@", url);
     
     [[OTHTTPRequestManager sharedInstance]
          POSTWithUrl:url

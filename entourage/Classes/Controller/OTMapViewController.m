@@ -818,7 +818,7 @@ static bool isShowingOptions = NO;
 
 - (IBAction)typeButtonDidTap:(UIView *)sender {
     for (UIButton *button in self.typeButtons) {
-        button.selected = (button.tag == sender.tag);
+        button.selected = (button == sender);
     }
 }
 
@@ -922,9 +922,10 @@ static bool isShowingOptions = NO;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
     
     OTTour *tour = self.tours[indexPath.section];
+    NSLog(@"TourID %@ by %@", tour.sid, tour.author.displayName);
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
     organizationLabel.text = tour.organizationName;
     

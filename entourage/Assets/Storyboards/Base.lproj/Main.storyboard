@@ -874,7 +874,7 @@ Un mail récapitulatif te sera envoyé.</string>
                                             <action selector="typeButtonDidTap:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="rKt-bL-iUM"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Uk-IS-rcP">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Uk-IS-rcP">
                                         <rect key="frame" x="110" y="86" width="108" height="85"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -894,7 +894,7 @@ Un mail récapitulatif te sera envoyé.</string>
                                             <action selector="typeButtonDidTap:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0q3-vj-GML"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0S-hy-GgY">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0S-hy-GgY">
                                         <rect key="frame" x="219" y="86" width="109" height="85"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1416,6 +1416,9 @@ Un mail récapitulatif te sera envoyé.</string>
                                             <constraint firstAttribute="height" constant="22" id="ikx-NL-ctU"/>
                                         </constraints>
                                         <state key="normal" image="mic"/>
+                                        <connections>
+                                            <action selector="startStopRecording:" destination="Hn0-z2-6tI" eventType="touchUpInside" id="6HD-df-gaZ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97647058963775635" green="0.97647058963775635" blue="0.97647058963775635" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1448,6 +1451,7 @@ Un mail récapitulatif te sera envoyé.</string>
                         <outlet property="chatHConstraint" destination="a5G-fI-GU7" id="uv3-tA-Vjc"/>
                         <outlet property="chatTextView" destination="wn1-vT-qg7" id="XGn-dx-wq6"/>
                         <outlet property="chatToolbar" destination="kAn-xh-GvT" id="w2j-S3-OcK"/>
+                        <outlet property="recordButton" destination="eIr-gk-lDN" id="lcq-9x-EYU"/>
                         <outlet property="tableView" destination="CGA-by-Pfy" id="3FD-W1-cWm"/>
                         <segue destination="ARd-Al-TGt" kind="modal" identifier="TourOptionsSegue" id="0g9-AU-hY5"/>
                     </connections>

@@ -24,9 +24,8 @@
 
 @interface OTCreateMeetingViewController : UIViewController <SpeechKitDelegate, SKRecognizerDelegate>
 
-@property(nonatomic, weak) id<OTCreateMeetingViewControllerDelegate> delegate;
-
-@property (strong, nonatomic) SKRecognizer *recognizer;
+@property (nonatomic, weak) id<OTCreateMeetingViewControllerDelegate> delegate;
+@property (nonatomic, strong) SKRecognizer *recognizer;
 @property (nonatomic, strong) NSMutableArray *encounters;
 
 - (void)configureWithTourId:(NSNumber *)currentTourId andLocation:(CLLocationCoordinate2D)location;

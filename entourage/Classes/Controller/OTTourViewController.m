@@ -37,6 +37,10 @@ typedef NS_ENUM(unsigned) {
     SectionTypeTimeline
 } SectionType;
 
+/**************************************************************************************************/
+#pragma mark - Constants
+
+//const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0xc2, 0xcd, 0x4a, 0x31, 0x70, 0x9f, 0x4a, 0x34, 0x5d, 0x4c, 0xc0, 0x2c, 0xc1, 0xce, 0x26, 0xda, 0xdb, 0xd7, 0x3b, 0x28, 0x9c, 0x58, 0x0c, 0xb8, 0xc7, 0x4a, 0x37, 0x58, 0x42, 0x36, 0x86, 0x04, 0x03, 0xd1, 0x35, 0x74, 0x70, 0x80, 0xa8, 0xcd, 0xcc, 0x69, 0xfa, 0x8e, 0x37, 0x20, 0x68, 0x12, 0xf7, 0xa4, 0x3a, 0x94, 0xfc, 0x47, 0x4c, 0xc3, 0x91, 0x83, 0x1c};
 
 @interface OTTourViewController () <UITextViewDelegate>
 
@@ -48,6 +52,10 @@ typedef NS_ENUM(unsigned) {
 
 @property (nonatomic, strong) NSMutableArray *timelinePoints;
 @property (nonatomic, strong) NSDictionary *timelineCardsClassesCellsIDs;
+
+@property (nonatomic, weak) IBOutlet UIButton *recordButton;
+@property (nonatomic) BOOL isRecording;
+
 @end
 
 @implementation OTTourViewController
@@ -87,6 +95,72 @@ typedef NS_ENUM(unsigned) {
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
+    self.isRecording = NO;
+    [self setupSpeechKitConnection];
+    
+}
+/**************************************************************************************************/
+#pragma mark - Actions
+
+- (IBAction)startStopRecording:(id)sender {
+    [self.recordButton setEnabled:NO];
+    
+    if (!self.isRecording) {
+        _recognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType
+                                               detection:SKShortEndOfSpeechDetection
+                                                language:@"fra-FRA"
+                                                delegate:self];
+    } else {
+        [_recognizer stopRecording];
+    }
+}
+
+/**************************************************************************************************/
+#pragma mark - Voice recognition methods
+
+- (void)setupSpeechKitConnection {
+    [SpeechKit setupWithID:@"NMDPPRODUCTION_Fran__ois_Pellissier_Entourage_20160104053924"
+                      host:@"gcb.nmdp.nuancemobility.net"
+                      port:443
+                    useSSL:YES
+                  delegate:nil];
+}
+
+- (void)recognizer:(SKRecognizer *)recognizer didFinishWithResults:(SKRecognition *)results {
+    NSLog(@"%@", @"Finish with results");
+    if (results.results.count != 0) {
+        self.chatTextView.textColor = [UIColor blackColor];
+        NSString *text = self.chatTextView.text;
+        NSString *result = [results.results objectAtIndex:0];
+        if (text.length == 0) {
+            [self.chatTextView setText:result];
+        } else {
+            [self.chatTextView setText:[NSString stringWithFormat:@"%@ %@", text, [result lowercaseString]]];
+        }
+    }
+    
+}
+
+- (void)recognizer:(SKRecognizer *)recognizer didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion {
+    NSLog( @"Finish with error %@. Suggestion: %@", error.description, suggestion);
+}
+
+- (void)recognizerDidBeginRecording:(SKRecognizer *)recognizer {
+    NSLog(@"%@", @"Begin recording");
+    [self.recordButton setImage:[UIImage imageNamed:@"ic_action_stop_sound.png"] forState:UIControlStateNormal];
+    [self.recordButton setEnabled:YES];
+    self.isRecording = YES;
+    //[self.recordLabel setText:@"Enregistrement..."];
+    //[self.recordingLoader setHidden:NO];
+}
+
+- (void)recognizerDidFinishRecording:(SKRecognizer *)recognizer {
+    NSLog(@"%@", @"Finish recording");
+    [self.recordButton setImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
+    [self.recordButton setEnabled:YES];
+    self.isRecording = NO;
+    //[self.recordLabel setText:@"Appuyez pour dicter un message"];
+    //[self.recordingLoader setHidden:YES];
 }
 
 
