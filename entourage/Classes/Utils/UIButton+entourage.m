@@ -29,7 +29,7 @@
     __weak UIButton *userImageButton = self;
     userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
     userImageButton.clipsToBounds = YES;
-    if (avatarURLString != nil) {
+    if (avatarURLString != nil && ![avatarURLString isKindOfClass:[NSNull class]]) {
         NSURL *url = [NSURL URLWithString:avatarURLString];
         UIImage *placeholderImage = [UIImage imageNamed:placeholder];
         [userImageButton setImageForState:UIControlStateNormal

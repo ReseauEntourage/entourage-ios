@@ -211,14 +211,13 @@
     self.blurEffect.hidden = YES;
     
     //show map on table header
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width + 8, MAPVIEW_HEIGHT)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width + 80, MAPVIEW_HEIGHT)];
     self.mapView = [[MKMapView alloc] initWithFrame:headerView.bounds];
     [headerView addSubview:self.mapView];
     [headerView sendSubviewToBack:self.mapView];
     [self configureMapView];
     
-    UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156 , headerView.frame.size.width + 30, 4.0f)];
-    //view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+    UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156.0f , headerView.frame.size.width + 130.0f, 4.0f)];
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = shadowView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)([UIColor colorWithRed:0 green:0 blue:0 alpha:.2].CGColor),  nil];
@@ -230,7 +229,7 @@
                                                                          options:0
                                                                          metrics:nil
                                                                            views:viewsDictionary];
-    NSArray *constraint_pos_horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[shadow]-|"
+    NSArray *constraint_pos_horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-8)-[shadow]-(-8)-|"
                                                                              options:0
                                                                              metrics:nil
                                                                                views:viewsDictionary];

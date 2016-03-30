@@ -36,6 +36,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 18.f;
 NSString *const kUserInfoSender = @"sender";
 NSString *const kUserInfoObject = @"object";
 NSString *const kUserInfoMessage = @"content";
+NSString *const kUserInfoExtraMessage = @"extra";
+NSString *const kAPNType = @"type";
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
 
 @interface OTAppDelegate () <UIApplicationDelegate>
@@ -125,6 +127,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     // Building the notification
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive) {
+        NSDictionary *apnContent = [userInfo objectForKey:kUserInfoMessage];
+        NSDictionary *apnExtra = [apnContent objectForKey:kUserInfoExtraMessage];
+        NSString *apnType = [apnExtra valueForKey:kAPNType];
+        
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender]
                                                                        message:[userInfo objectForKey:kUserInfoObject]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
