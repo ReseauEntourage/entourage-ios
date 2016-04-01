@@ -44,6 +44,14 @@
 		4525EB3A1CA5EE1C006784E6 /* OTEntouragesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4525EB391CA5EE1C006784E6 /* OTEntouragesViewController.m */; };
 		452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */; };
 		452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452FA6321C6BCE8500D5D56D /* OTRightsViewController.m */; };
+		452FE3E61CAD544F00063334 /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3E41CAD544F00063334 /* UserProfile.storyboard */; };
+		452FE3E81CAD549200063334 /* GuideSolidarity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3E71CAD549200063334 /* GuideSolidarity.storyboard */; };
+		452FE3EB1CAD54CE00063334 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3E91CAD54CE00063334 /* Settings.storyboard */; };
+		452FE3ED1CAD54F800063334 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3EC1CAD54F700063334 /* About.storyboard */; };
+		452FE3F01CAD55A400063334 /* Tour.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3EE1CAD55A400063334 /* Tour.storyboard */; };
+		452FE3F21CAD561500063334 /* QuitTour.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3F11CAD561500063334 /* QuitTour.storyboard */; };
+		452FE3F51CAD563F00063334 /* TourOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3F31CAD563F00063334 /* TourOptions.storyboard */; };
+		452FE4011CAD5AC700063334 /* Entourages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3FF1CAD5AC700063334 /* Entourages.storyboard */; };
 		454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */; };
 		454C8F501C4F4C45001362B2 /* UITextField+indentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4F1C4F4C45001362B2 /* UITextField+indentation.m */; };
 		454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F521C500FE2001362B2 /* OTStartupViewController.m */; };
@@ -74,6 +82,7 @@
 		45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A711C56961500F68C24 /* Intro.storyboard */; };
 		45E267821C860239004D14EB /* OTTourJoinRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */; };
 		45E6BFCF1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */; };
+		45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */; };
 		45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443381C9080E900DDEBE1 /* OTTourJoiner.m */; };
 		45F4433C1C90B40400DDEBE1 /* OTTourTimelinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F4433B1C90B40400DDEBE1 /* OTTourTimelinePoint.m */; };
 		45F443441C90BCB700DDEBE1 /* OTTourMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443431C90BCB700DDEBE1 /* OTTourMessage.m */; };
@@ -192,6 +201,14 @@
 		452FA62F1C6A50BF00D5D56D /* UIStoryboard+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+entourage.m"; sourceTree = "<group>"; };
 		452FA6311C6BCE8500D5D56D /* OTRightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRightsViewController.h; sourceTree = "<group>"; };
 		452FA6321C6BCE8500D5D56D /* OTRightsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRightsViewController.m; sourceTree = "<group>"; };
+		452FE3E51CAD544F00063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserProfile.storyboard; sourceTree = "<group>"; };
+		452FE3E71CAD549200063334 /* GuideSolidarity.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GuideSolidarity.storyboard; sourceTree = "<group>"; };
+		452FE3EA1CAD54CE00063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		452FE3EC1CAD54F700063334 /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
+		452FE3EF1CAD55A400063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Tour.storyboard; sourceTree = "<group>"; };
+		452FE3F11CAD561500063334 /* QuitTour.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QuitTour.storyboard; sourceTree = "<group>"; };
+		452FE3F41CAD563F00063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourOptions.storyboard; sourceTree = "<group>"; };
+		452FE4001CAD5AC700063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Entourages.storyboard; sourceTree = "<group>"; };
 		454C8F4B1C4D20EA001362B2 /* UIColor+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+entourage.h"; sourceTree = "<group>"; };
 		454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+entourage.m"; sourceTree = "<group>"; };
 		454C8F4E1C4F4C45001362B2 /* UITextField+indentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+indentation.h"; sourceTree = "<group>"; };
@@ -237,6 +254,7 @@
 		45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoinRequestViewController.m; sourceTree = "<group>"; };
 		45E6BFCD1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourDetailsOptionsViewController.h; sourceTree = "<group>"; };
 		45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourDetailsOptionsViewController.m; sourceTree = "<group>"; };
+		45E6FE121CAE42E700505660 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourConfirmation.storyboard; sourceTree = "<group>"; };
 		45F443371C9080E900DDEBE1 /* OTTourJoiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourJoiner.h; sourceTree = "<group>"; };
 		45F443381C9080E900DDEBE1 /* OTTourJoiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoiner.m; sourceTree = "<group>"; };
 		45F4433A1C90B40400DDEBE1 /* OTTourTimelinePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourTimelinePoint.h; sourceTree = "<group>"; };
@@ -450,6 +468,15 @@
 			children = (
 				45CE5A711C56961500F68C24 /* Intro.storyboard */,
 				45CE5A631C5242FC00F68C24 /* Main.storyboard */,
+				45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */,
+				452FE3FF1CAD5AC700063334 /* Entourages.storyboard */,
+				452FE3F31CAD563F00063334 /* TourOptions.storyboard */,
+				452FE3F11CAD561500063334 /* QuitTour.storyboard */,
+				452FE3EE1CAD55A400063334 /* Tour.storyboard */,
+				452FE3EC1CAD54F700063334 /* About.storyboard */,
+				452FE3E91CAD54CE00063334 /* Settings.storyboard */,
+				452FE3E71CAD549200063334 /* GuideSolidarity.storyboard */,
+				452FE3E41CAD544F00063334 /* UserProfile.storyboard */,
 				45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */,
 			);
 			path = Storyboards;
@@ -901,10 +928,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				45CE5A581C5241AA00F68C24 /* Calibri-Bold.ttf in Resources */,
+				452FE3EB1CAD54CE00063334 /* Settings.storyboard in Resources */,
 				45CE5A5C1C5241AA00F68C24 /* MankSans-MediumOblique.ttf in Resources */,
 				45CE5A591C5241AA00F68C24 /* Calibri-Italic.ttf in Resources */,
 				45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */,
+				452FE3E61CAD544F00063334 /* UserProfile.storyboard in Resources */,
+				452FE3ED1CAD54F800063334 /* About.storyboard in Resources */,
 				45CE5A601C5241AA00F68C24 /* Localizable.strings in Resources */,
+				45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */,
+				452FE3F51CAD563F00063334 /* TourOptions.storyboard in Resources */,
 				45CE5A5D1C5241AA00F68C24 /* MankSans-Oblique.ttf in Resources */,
 				45CE5A5F1C5241AA00F68C24 /* Sofia-Regular.otf in Resources */,
 				45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */,
@@ -913,9 +945,13 @@
 				45CE5A561C5241AA00F68C24 /* Blokletters-Balpen.ttf in Resources */,
 				45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */,
 				45CE5A5A1C5241AA00F68C24 /* Calibri.ttf in Resources */,
+				452FE4011CAD5AC700063334 /* Entourages.storyboard in Resources */,
 				45CE5A5B1C5241AA00F68C24 /* MankSans-Medium.ttf in Resources */,
 				191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */,
 				45CE5A571C5241AA00F68C24 /* Calibri-Bold-Italic.ttf in Resources */,
+				452FE3F21CAD561500063334 /* QuitTour.storyboard in Resources */,
+				452FE3E81CAD549200063334 /* GuideSolidarity.storyboard in Resources */,
+				452FE3F01CAD55A400063334 /* Tour.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1119,12 +1155,60 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		452FE3E41CAD544F00063334 /* UserProfile.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				452FE3E51CAD544F00063334 /* Base */,
+			);
+			name = UserProfile.storyboard;
+			sourceTree = "<group>";
+		};
+		452FE3E91CAD54CE00063334 /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				452FE3EA1CAD54CE00063334 /* Base */,
+			);
+			name = Settings.storyboard;
+			sourceTree = "<group>";
+		};
+		452FE3EE1CAD55A400063334 /* Tour.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				452FE3EF1CAD55A400063334 /* Base */,
+			);
+			name = Tour.storyboard;
+			sourceTree = "<group>";
+		};
+		452FE3F31CAD563F00063334 /* TourOptions.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				452FE3F41CAD563F00063334 /* Base */,
+			);
+			name = TourOptions.storyboard;
+			sourceTree = "<group>";
+		};
+		452FE3FF1CAD5AC700063334 /* Entourages.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				452FE4001CAD5AC700063334 /* Base */,
+			);
+			name = Entourages.storyboard;
+			sourceTree = "<group>";
+		};
 		45CE5A631C5242FC00F68C24 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				45CE5A641C5242FC00F68C24 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45E6FE121CAE42E700505660 /* Base */,
+			);
+			name = TourConfirmation.storyboard;
 			sourceTree = "<group>";
 		};
 		6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */ = {

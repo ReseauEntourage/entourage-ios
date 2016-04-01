@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger) {
 
 @interface OTUserViewController ()
 
-@property (nonatomic, strong) OTUser *currentUser;
+@property (nonatomic, strong) OTUser *user;
 
 @end
 
@@ -52,7 +52,30 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    self.user = [[NSUserDefaults standardUserDefaults] currentUser];
+    
+    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    if (self.user.sid == currentUser.sid) {
+        [self showEditButton];
+    }
+}
+
+/**************************************************************************************************/
+#pragma mark - Private
+
+- (void)showEditButton {
+    UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] initWithTitle:@"Editer"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(showEditView)];
+    [chatButton setTintColor:[UIColor appOrangeColor]];
+    [self.navigationItem setRightBarButtonItem:chatButton];
+    //self.navigationController.navigationBar.barTintColor = [UIColor appOrangeColor];
+    self.navigationController.navigationBar.tintColor = [UIColor redColor];
+}
+
+- (void)showEditView {
+    
 }
 
 /**************************************************************************************************/
@@ -163,7 +186,7 @@ typedef NS_ENUM(NSInteger) {
         }
         case SectionTypeVerification: {
             if (indexPath.row == 0)
-                [self setupTitleProfileCell:cell withTitle:@"Identitification vérifiée"];
+                [self setupTitleProfileCell:cell withTitle:@"Identification vérifiée"];
             else {
                 if (indexPath.row == 1)
                     [self setupVerificationProfileCell:cell
@@ -220,7 +243,7 @@ typedef NS_ENUM(NSInteger) {
     [avatarButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
 
     UILabel *nameLabel = [cell viewWithTag:SUMMARY_NAME];
-    nameLabel.text = self.currentUser.displayName;
+    nameLabel.text = self.user.displayName;
     
     UILabel *roleLabel = [cell viewWithTag:SUMMARY_ROLE];
     roleLabel.text = @"Ambassadeur";//self.currentUser.role;

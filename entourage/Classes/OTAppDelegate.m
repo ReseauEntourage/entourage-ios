@@ -27,6 +27,7 @@
 
 // Helper
 #import "NSUserDefaults+OT.h"
+#import "UIColor+entourage.h"
 
 /**************************************************************************************************/
 #pragma mark - OTAppDelegate
@@ -208,7 +209,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 
 	UIFont *navigationBarFont = [UIFont calibriFontWithSize:OTNavigationBarDefaultFontSize];
 	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
-	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
+	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor appOrangeColor],
 	                                                      NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
 }
 

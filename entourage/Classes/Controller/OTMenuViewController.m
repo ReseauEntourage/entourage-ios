@@ -131,9 +131,9 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 - (IBAction)showProfile {
     //[self openControllerWithSegueIdentifier:@"OTUserProfile"];
     SWRevealViewController *revealViewController = self.revealViewController;
-    [revealViewController revealToggle:self];
-    [self performSegueWithIdentifier:@"segueMenuIdentifierForProfile" sender:nil];
-    
+    //[revealViewController revealToggle:self];
+    [self performSegueWithIdentifier:@"segueMenuIdentifierForProfile" sender:self];
+    //[revealViewController performSegueWithIdentifier:@"RevealProfileSegue" sender:self];
 }
 
 /**
@@ -168,7 +168,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if (![self.controllersDictionary objectForKey:segue.identifier] && [segue.identifier isEqualToString:@"OTUserProfile"]) {
-        [self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
+       // [self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
     }
 }
 

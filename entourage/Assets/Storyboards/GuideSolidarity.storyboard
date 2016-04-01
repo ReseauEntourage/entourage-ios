@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="69R-LH-AoF">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="rV2-bR-xMf">
+            <objects>
+                <navigationController id="69R-LH-AoF" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tng-qi-Ztp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="p8v-jb-uzQ" kind="relationship" relationship="rootViewController" id="w7l-84-HFQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wY9-9P-f0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1355" y="-1403"/>
+        </scene>
+        <!--Guide View Controller-->
+        <scene sceneID="cCl-FF-sHF">
+            <objects>
+                <viewController id="p8v-jb-uzQ" customClass="OTGuideViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7Mg-f0-gGB"/>
+                        <viewControllerLayoutGuide type="bottom" id="juE-RS-22d"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dep-tr-liv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yob-78-j3g">
+                                <rect key="frame" x="16" y="78" width="30" height="30"/>
+                                <state key="normal" image="center-location.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="zoomToCurrentLocation:" destination="p8v-jb-uzQ" eventType="touchUpInside" id="wG1-x9-6gu"/>
+                                </connections>
+                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wcs-Ze-80M">
+                                <rect key="frame" x="-4" y="64" width="328" height="504"/>
+                            </mapView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BGA-gz-HV7">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <visualEffectView hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DRg-uC-LYj">
+                                <rect key="frame" x="-8" y="0.0" width="336" height="568"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cOx-Dv-b3U">
+                                    <rect key="frame" x="0.0" y="0.0" width="336" height="568"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="juE-RS-22d" firstAttribute="top" secondItem="DRg-uC-LYj" secondAttribute="bottom" id="Ea6-Yk-vIp"/>
+                            <constraint firstItem="DRg-uC-LYj" firstAttribute="top" secondItem="Dep-tr-liv" secondAttribute="topMargin" id="Exg-zr-asS"/>
+                            <constraint firstItem="Wcs-Ze-80M" firstAttribute="leading" secondItem="Dep-tr-liv" secondAttribute="leadingMargin" constant="-20" id="FA4-ou-Qh9"/>
+                            <constraint firstItem="Wcs-Ze-80M" firstAttribute="top" secondItem="7Mg-f0-gGB" secondAttribute="bottom" id="GJ8-8d-Hno"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Wcs-Ze-80M" secondAttribute="trailing" constant="-20" id="LQl-5W-Izd"/>
+                            <constraint firstItem="juE-RS-22d" firstAttribute="top" secondItem="Wcs-Ze-80M" secondAttribute="bottom" id="P2M-pe-Lxo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DRg-uC-LYj" secondAttribute="trailing" constant="-24" id="hHL-WP-eej"/>
+                            <constraint firstItem="DRg-uC-LYj" firstAttribute="leading" secondItem="Dep-tr-liv" secondAttribute="leadingMargin" constant="-24" id="sIa-MM-I9Z"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vuW-gH-par"/>
+                    <connections>
+                        <outlet property="blurEffectView" destination="DRg-uC-LYj" id="qgZ-6z-x2V"/>
+                        <outlet property="indicatorView" destination="BGA-gz-HV7" id="Y8y-8q-iXP"/>
+                        <outlet property="mapView" destination="Wcs-Ze-80M" id="hmz-tS-dWG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OdF-4i-561" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1838" y="-1403"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="center-location.png" width="30" height="30"/>
+    </resources>
+</document>
