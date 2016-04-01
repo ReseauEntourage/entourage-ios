@@ -11,9 +11,11 @@
 #import "OTConsts.h"
 #import "OTAboutTableViewCell.h"
 #import "OTAboutItem.h"
+
 @import MessageUI;
 
 #import "NSBundle+entourage.h"
+#import "UIColor+entourage.h"
 
 @interface OTAboutViewController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
 
@@ -45,6 +47,12 @@
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.aboutItems count];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 15)];
+    headerView.backgroundColor = [UIColor appPaleGreyColor];
+    return headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
