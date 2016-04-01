@@ -50,7 +50,6 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
-@property (nonatomic, weak) IBOutlet UILabel *versionLabel;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -66,8 +65,6 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-    
-    self.versionLabel.text = [NSBundle currentVersion];
     
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];

@@ -35,6 +35,14 @@
 "menu_translate_title" = "TRADUIRE";
 "menu_disconnect_title" = "Déconnexion";
 
+// AboutItems
+"about_rateus" = "Notez-nous dans l’App Store";
+"about_facebook" = "Aimer notre page Facebook";
+"about_cgu" = "Conditions générales d’utilisation";
+"about_website" = "Entourage.social";
+"about_email" = "Contactez Entourage";
+"about_email_notavailable" = "!!Email not available";
+
 // Encounters
 "has_encountered" = "a rencontré";
 "here" = "ici";
