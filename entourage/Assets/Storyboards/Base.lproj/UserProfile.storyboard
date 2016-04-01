@@ -345,8 +345,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="328" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="20" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="David" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hI2-GX-ilI">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="David" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hI2-GX-ilI">
                                                     <rect key="frame" x="113" y="9" width="200" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="200" id="KUD-IV-Xkz"/>
+                                                        <constraint firstAttribute="height" constant="30" id="bQF-8F-zR6"/>
+                                                    </constraints>
                                                     <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -364,7 +368,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Smx-lj-j5B" firstAttribute="centerY" secondItem="E4w-uG-LRH" secondAttribute="centerY" id="ZNa-mV-pL3"/>
+                                                <constraint firstItem="hI2-GX-ilI" firstAttribute="centerY" secondItem="E4w-uG-LRH" secondAttribute="centerY" id="f9u-Q2-kLl"/>
                                                 <constraint firstItem="Smx-lj-j5B" firstAttribute="leading" secondItem="E4w-uG-LRH" secondAttribute="leadingMargin" constant="7" id="qQg-Ys-DTb"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="hI2-GX-ilI" secondAttribute="trailing" constant="7" id="rdV-22-2Z3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
