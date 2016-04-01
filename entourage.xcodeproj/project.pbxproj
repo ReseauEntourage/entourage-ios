@@ -83,6 +83,7 @@
 		45E267821C860239004D14EB /* OTTourJoinRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */; };
 		45E6BFCF1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */; };
 		45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */; };
+		45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */; };
 		45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443381C9080E900DDEBE1 /* OTTourJoiner.m */; };
 		45F4433C1C90B40400DDEBE1 /* OTTourTimelinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F4433B1C90B40400DDEBE1 /* OTTourTimelinePoint.m */; };
 		45F443441C90BCB700DDEBE1 /* OTTourMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443431C90BCB700DDEBE1 /* OTTourMessage.m */; };
@@ -255,6 +256,8 @@
 		45E6BFCD1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourDetailsOptionsViewController.h; sourceTree = "<group>"; };
 		45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourDetailsOptionsViewController.m; sourceTree = "<group>"; };
 		45E6FE121CAE42E700505660 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourConfirmation.storyboard; sourceTree = "<group>"; };
+		45E6FE141CAE44EA00505660 /* OTUserEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUserEditViewController.h; sourceTree = "<group>"; };
+		45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUserEditViewController.m; sourceTree = "<group>"; };
 		45F443371C9080E900DDEBE1 /* OTTourJoiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourJoiner.h; sourceTree = "<group>"; };
 		45F443381C9080E900DDEBE1 /* OTTourJoiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoiner.m; sourceTree = "<group>"; };
 		45F4433A1C90B40400DDEBE1 /* OTTourTimelinePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourTimelinePoint.h; sourceTree = "<group>"; };
@@ -392,6 +395,8 @@
 				1DA682C819E7D097007BD4BC /* OTLoginViewController.m */,
 				0A4769331BFB9F07006EA73A /* OTUserViewController.h */,
 				0A4769341BFB9F07006EA73A /* OTUserViewController.m */,
+				45E6FE141CAE44EA00505660 /* OTUserEditViewController.h */,
+				45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */,
 				0AA4C0721C17283800DBBE11 /* OTAskMoreViewController.h */,
 				0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */,
 				0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */,
@@ -1090,6 +1095,7 @@
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
 				0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */,
+				45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */,
 				0A70FA321BFF32AD0080E8EC /* OTTourViewController.m in Sources */,
 				1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */,
 				0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */,

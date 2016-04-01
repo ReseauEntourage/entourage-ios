@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="SwJ-ps-aSG">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="mLq-en-3eJ">
+            <objects>
+                <navigationController id="SwJ-ps-aSG" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="KW2-d6-Rkv"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RV6-bb-ZVV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="n1k-4m-yQ6" kind="relationship" relationship="rootViewController" id="aj8-R6-BEq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="21B-7P-kEx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2228" y="-616"/>
+        </scene>
+        <!--Entourages View Controller-->
+        <scene sceneID="yEy-Yk-dJ1">
+            <objects>
+                <viewController id="n1k-4m-yQ6" customClass="OTEntouragesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="51m-e5-0NN"/>
+                        <viewControllerLayoutGuide type="bottom" id="UJ8-5y-3RH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e81-tP-cg4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ggf-jT-5VJ">
+                                <rect key="frame" x="12" y="79" width="296" height="29"/>
+                                <segments>
+                                    <segment title="En cours"/>
+                                    <segment title="Enregistrés"/>
+                                    <segment title="Clôturés"/>
+                                </segments>
+                                <color key="tintColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="ggf-jT-5VJ" secondAttribute="trailing" constant="-4" id="6dU-2g-7i9"/>
+                            <constraint firstItem="ggf-jT-5VJ" firstAttribute="leading" secondItem="e81-tP-cg4" secondAttribute="leadingMargin" constant="-4" id="HTg-BE-6ZF"/>
+                            <constraint firstItem="ggf-jT-5VJ" firstAttribute="top" secondItem="51m-e5-0NN" secondAttribute="bottom" constant="15" id="lHh-Z1-XaZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="jMb-tR-6p0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oAm-vJ-bDO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2658" y="-616"/>
+        </scene>
+    </scenes>
+</document>

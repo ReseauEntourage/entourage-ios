@@ -1,110 +1,92 @@
 //
-//  OTUserViewController.m
+//  OTUserEditViewController.m
 //  entourage
 //
-//  Created by Nicolas Telera on 17/11/2015.
-//  Copyright © 2015 OCTO Technology. All rights reserved.
+//  Created by Ciprian Habuc on 01/04/16.
+//  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTUserViewController.h"
-
+#import "OTUserEditViewController.h"
 // Controller
 #import "UIViewController+menu.h"
 
-// Service
-#import "OTAuthService.h"
-
-// Model
-#import "OTUser.h"
-
-// Helper
-#import "NSUserDefaults+OT.h"
-#import "NSString+Validators.h"
 #import "UIColor+entourage.h"
-
-// View
-#import "SVProgressHUD.h"
+#import "NSUserDefaults+OT.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
-    SectionTypeVerification,
-    SectionTypeEntourages,
-    SectionTypeAssociations
+    SectionTypeInfoPrivate,
+    SectionTypeInfoPublic,
+    SectionTypeAssociations,
+    SectionTypeDelete
 } SectionType;
 
+@interface OTUserEditViewController()
 
-@interface OTUserViewController ()
-
-@property (nonatomic, strong) OTUser *user;
+@property (nonatomic, strong) UITextField *firstNameTextField;
+@property (nonatomic, strong) UITextField *lastNameTextField;
 
 @end
 
-@implementation OTUserViewController
+@implementation OTUserEditViewController
 
-/********************************************************************************/
-#pragma mark - Life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"PROFIL";
     [self setupCloseModal];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    self.user = [[NSUserDefaults standardUserDefaults] currentUser];
+    [self showSaveButton];
     
-    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    //if (self.user.sid == currentUser.sid)
-    {
-        [self showEditButton];
-    }
+    self.user = [[NSUserDefaults standardUserDefaults] currentUser];
+
+
 }
 
 /**************************************************************************************************/
 #pragma mark - Private
 
-- (void)showEditButton {
-    UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] initWithTitle:@"Editer"
+- (void)showSaveButton {
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Enregistrer"
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
-                                                                  action:@selector(showEditView)];
-    [chatButton setTintColor:[UIColor appOrangeColor]];
-    [self.navigationItem setRightBarButtonItem:chatButton];
+                                                                  action:@selector(updateUser)];
+    [saveButton setTintColor:[UIColor appOrangeColor]];
+    [self.navigationItem setRightBarButtonItem:saveButton];
 }
 
-- (void)showEditView {
-    [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
+- (void)updateUser {
+    
 }
 
 /**************************************************************************************************/
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case SectionTypeSummary: {
-            return 1;
-        }
-        case SectionTypeVerification: {
             return 3;
         }
-        case SectionTypeEntourages: {
+        case SectionTypeInfoPrivate: {
+            return 0;
+        }
+        case SectionTypeInfoPublic: {
             return 1;
         }
         case SectionTypeAssociations: {
-            return 2;
+            return 1;
         }
         default:
-            return 0;
+            return 1;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-   
-    return (section == 0) ? 0.0f : 15.0f;
+    
+    return (section == 0) ? 0.0f : 45.0f;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -113,7 +95,7 @@ typedef NS_ENUM(NSInteger) {
     
 }
 
-#define CELLHEIGHT_SUMMARY 237.0f
+#define CELLHEIGHT_SUMMARY 133.0f
 #define CELLHEIGHT_TITLE    33.0f
 #define CELLHEIGHT_ENTOURAGES  80.0f
 #define CELLHEIGHT_DEFAULT  48.0f
@@ -122,15 +104,19 @@ typedef NS_ENUM(NSInteger) {
 {
     switch (indexPath.section) {
         case SectionTypeSummary: {
-            return CELLHEIGHT_SUMMARY;
+            
+            if (indexPath.row == 0)
+                return CELLHEIGHT_SUMMARY;
+            else
+                return CELLHEIGHT_DEFAULT;
         }
-        case SectionTypeVerification: {
+        case SectionTypeInfoPrivate: {
             if (indexPath.row == 0)
                 return CELLHEIGHT_TITLE;
             else
                 return CELLHEIGHT_DEFAULT;
-            }
-        case SectionTypeEntourages: {
+        }
+        case SectionTypeInfoPublic: {
             return CELLHEIGHT_DEFAULT;
         }
         case SectionTypeAssociations: {
@@ -139,7 +125,7 @@ typedef NS_ENUM(NSInteger) {
             else
                 return CELLHEIGHT_ENTOURAGES;
         }
-        
+            
         default:
             return CELLHEIGHT_DEFAULT;;
     }
@@ -147,8 +133,12 @@ typedef NS_ENUM(NSInteger) {
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 15)];
+    UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 15)];
+    headerView.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
+    headerView.textColor = [UIColor appGreyishBrownColor];
     headerView.backgroundColor = [UIColor appPaleGreyColor];
+    headerView.text = @"Informations privées";
+    headerView.textAlignment = NSTextAlignmentCenter;
     return headerView;
 }
 
@@ -157,14 +147,14 @@ typedef NS_ENUM(NSInteger) {
     NSString *cellID;
     switch (indexPath.section) {
         case SectionTypeSummary: {
-            cellID = @"SummaryProfileCell";
+            cellID = indexPath.row == 0 ? @"SummaryProfileCell" : @"EditProfileCell";
             break;
         }
-        case SectionTypeVerification: {
+        case SectionTypeInfoPrivate: {
             cellID = indexPath.row == 0 ? @"TitleProfileCell" : @"VerificationProfileCell";
             break;
         }
-        case SectionTypeEntourages: {
+        case SectionTypeInfoPublic: {
             cellID = @"EntouragesProfileCell";
             break;
         }
@@ -179,25 +169,33 @@ typedef NS_ENUM(NSInteger) {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     switch (indexPath.section) {
         case SectionTypeSummary: {
-            [self setupSummaryProfileCell:cell];
-            break;
-        }
-        case SectionTypeVerification: {
-            if (indexPath.row == 0)
-                [self setupTitleProfileCell:cell withTitle:@"Identification vérifiée"];
-            else {
-                if (indexPath.row == 1)
-                    [self setupVerificationProfileCell:cell
-                                             withCheck:@"Adresse e-mail"
-                                             andStatus:NO];
-                else
-                    [self setupVerificationProfileCell:cell
-                                             withCheck:@"Numéro de téléphone"
-                                             andStatus:YES];
+            if (indexPath.row == 0) {
+                [self setupSummaryProfileCell:cell];
+                
+            } else {
+                NSString *title = indexPath.row == 1 ? @"Prénom" : @"Nom";
+                UITextField *textField = indexPath.row == 1 ? self.firstNameTextField : self.lastNameTextField;
+                [self setupInfoCell:cell withTitle:title withTextField:textField];
+
             }
             break;
         }
-        case SectionTypeEntourages: {
+        case SectionTypeInfoPrivate: {
+            if (indexPath.row == 0)
+                [self setupTitleProfileCell:cell withTitle:@"Identification vérifiée"];
+            else {
+//                if (indexPath.row == 1)
+//                    [self setupVerificationProfileCell:cell
+//                                             withCheck:@"Adresse e-mail"
+//                                             andStatus:NO];
+//                else
+//                    [self setupVerificationProfileCell:cell
+//                                             withCheck:@"Numéro de téléphone"
+//                                             andStatus:YES];
+            }
+            break;
+        }
+        case SectionTypeInfoPublic: {
             [self setupEntouragesProfileCell:cell];
             break;
         }
@@ -209,18 +207,17 @@ typedef NS_ENUM(NSInteger) {
                              withAssociationTitle:@"Aux captifs la liberation" andAssociationTitle:nil];
             break;
         }
-        
+            
     }
     
     return cell;
 }
 #define SUMMARY_AVATAR 1
-#define SUMMARY_NAME 2
-#define SUMMARY_ROLE 3
-#define SUMMARY_DATE 4
-#define SUMMARY_ADDRESS 5
 
-#define TITLE 6
+#define CELL_TITLE 10
+#define CELL_TEXTFIELD 20
+
+
 
 #define VERIFICATION_LABEL 1
 #define VERIFICATION_STATUS 2
@@ -231,7 +228,8 @@ typedef NS_ENUM(NSInteger) {
 #define ASSOCIATION_IMAGE 2
 
 
-- (void)setupSummaryProfileCell:(UITableViewCell *)cell {
+- (void)setupSummaryProfileCell:(UITableViewCell *)cell
+{
     
     UIButton *avatarButton = [cell viewWithTag:SUMMARY_AVATAR];
     avatarButton.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -239,37 +237,28 @@ typedef NS_ENUM(NSInteger) {
     [avatarButton.layer setShadowOpacity:0.5];
     [avatarButton.layer setShadowRadius:4.0];
     [avatarButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
-
-    UILabel *nameLabel = [cell viewWithTag:SUMMARY_NAME];
-    nameLabel.text = self.user.displayName;
     
-    UILabel *roleLabel = [cell viewWithTag:SUMMARY_ROLE];
-    roleLabel.text = @"Ambassadeur";//self.currentUser.role;
-    
-    UILabel *dateLabel = [cell viewWithTag:SUMMARY_DATE];
-    dateLabel.text = @"Membre depuis juillet 2014";//self.currentUser.joinDate;
-
-    UILabel *addressLabel = [cell viewWithTag:SUMMARY_ADDRESS];
-    addressLabel.text = @"Paris, France";//self.currentUser.address;
+    cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }
 
 - (void)setupTitleProfileCell:(UITableViewCell *)cell withTitle:(NSString *)title {
-    UILabel *titleLabel = [cell viewWithTag:TITLE];
+    UILabel *titleLabel = [cell viewWithTag:CELL_TITLE];
     titleLabel.text = title;
     
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }
 
-- (void)setupVerificationProfileCell:(UITableViewCell *)cell
-                           withCheck:(NSString *)checkString
-                           andStatus:(BOOL)isChecked
+- (void)setupInfoCell:(UITableViewCell *)cell
+            withTitle:(NSString *)title
+        withTextField:(UITextField *)myTextField
 {
-    UILabel *checkLabel = [cell viewWithTag:VERIFICATION_LABEL];
-    checkLabel.text = checkString;
+    UILabel *titleLabel = [cell viewWithTag:CELL_TITLE];
+    titleLabel.text = title;
     
-    UIButton *statusButton = [cell viewWithTag:VERIFICATION_STATUS];
-    NSString *statusImage = isChecked ? @"verified" : @"notVerified";
-    [statusButton setImage:[UIImage imageNamed: statusImage] forState:UIControlStateNormal];
+    
+    UITextField *nameTextField = [cell viewWithTag:CELL_TEXTFIELD];
+    myTextField = nameTextField;
+    nameTextField.text = self.user.displayName;
 }
 
 - (void)setupEntouragesProfileCell:(UITableViewCell *)cell {
@@ -286,4 +275,6 @@ typedef NS_ENUM(NSInteger) {
     
     //UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE];
 }
+
+
 @end
