@@ -21,8 +21,7 @@
 
 #define kNotificationPushStatusChanged @"NotificationAPNSStatusChanged"
 
-#warning Need the RATE US URL
-#define ABOUT_RATE_US_URL @""
+#define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"
 #define ABOUT_CGU_URL @"https://s3-eu-west-1.amazonaws.com/entourage-ressources/charte.pdf"
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"

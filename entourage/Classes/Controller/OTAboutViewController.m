@@ -20,7 +20,7 @@
 @interface OTAboutViewController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
 
 // UI
-@property(nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 // Data
 @property (nonatomic, strong) NSArray *aboutItems;
@@ -80,7 +80,9 @@
     if (indexPath.row == [self.aboutItems count]-1) {
         //Email
         if (![MFMailComposeViewController canSendMail]) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"about_email_notavailable", @"") preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+                                                                           message:NSLocalizedString(@"about_email_notavailable", @"")
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
             [self presentViewController:alert animated:YES completion:nil];
             return nil;
         }
