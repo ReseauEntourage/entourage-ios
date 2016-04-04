@@ -10,6 +10,8 @@
 #import "OTGuideViewController.h"
 #import "UIViewController+menu.h"
 #import "OTCalloutViewController.h"
+#import "OTMapOptionsViewController.h"
+#import "OTSWRevealViewController.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -34,7 +36,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate>
+@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate, OTMapOptionsDelegate>
 
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffectView;
 
@@ -315,6 +317,34 @@
     region.span.latitudeDelta = spanX;
     region.span.longitudeDelta = spanY;
     [self.mapView setRegion:region animated:YES];
+}
+
+/********************************************************************************/
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"OTMapOptionsSegue"]) {
+        OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;
+        controller.mapOptionsDelegate = self;
+        [controller setIsPOIVisible:YES];
+    }
+}
+
+/********************************************************************************/
+#pragma mark - OTMapOptionsDelegate
+
+-(void)createTour {
+    //TODO:
+}
+
+-(void)togglePOI {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self performSegueWithIdentifier:@"OTMapViewSegue" sender:nil];
+    }];
+}
+
+-(void)dismissMapOptions {
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 @end

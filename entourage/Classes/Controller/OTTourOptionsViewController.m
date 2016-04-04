@@ -12,6 +12,8 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *createLabel;
 @property (nonatomic, weak) IBOutlet UIButton *createButton;
+@property (nonatomic, weak) IBOutlet UILabel *poiLabel;
+@property (nonatomic, weak) IBOutlet UIButton *poiButton;
 
 @end
 
@@ -43,6 +45,12 @@
 - (IBAction)doCreateEncounter:(id)sender {
     if ([self.tourOptionsDelegate respondsToSelector:@selector(createEncounter)]) {
         [self.tourOptionsDelegate performSelector:@selector(createEncounter) withObject:nil];
+    }
+}
+
+- (IBAction)doShowPOI:(id)sender {
+    if ([self.tourOptionsDelegate respondsToSelector:@selector(showPOI)]) {
+        [self.tourOptionsDelegate performSelector:@selector(showPOI) withObject:nil];
     }
 }
 

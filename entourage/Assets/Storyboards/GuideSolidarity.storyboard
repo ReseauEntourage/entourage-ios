@@ -49,40 +49,76 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BGA-gz-HV7">
                                 <rect key="frame" x="150" y="274" width="20" height="20"/>
                             </activityIndicatorView>
-                            <visualEffectView hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DRg-uC-LYj">
-                                <rect key="frame" x="-8" y="0.0" width="336" height="568"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cOx-Dv-b3U">
-                                    <rect key="frame" x="0.0" y="0.0" width="336" height="568"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="dark"/>
-                            </visualEffectView>
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6X-r7-JgQ" userLabel="Map Options Button">
+                                <rect key="frame" x="250" y="494" width="62" height="62"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="0Di-u5-Ian"/>
+                                    <constraint firstAttribute="height" constant="62" id="DPm-4j-Lq9"/>
+                                </constraints>
+                                <state key="normal" image="create">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="closeShadow"/>
+                                <state key="highlighted" image="closeNoShadow"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="YHG-EK-BWm" kind="modal" identifier="OTMapOptionsSegue" id="rSN-7J-VwV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="juE-RS-22d" firstAttribute="top" secondItem="DRg-uC-LYj" secondAttribute="bottom" id="Ea6-Yk-vIp"/>
-                            <constraint firstItem="DRg-uC-LYj" firstAttribute="top" secondItem="Dep-tr-liv" secondAttribute="topMargin" id="Exg-zr-asS"/>
+                            <constraint firstItem="juE-RS-22d" firstAttribute="top" secondItem="X6X-r7-JgQ" secondAttribute="bottom" constant="12" id="6Q2-PA-qvd"/>
                             <constraint firstItem="Wcs-Ze-80M" firstAttribute="leading" secondItem="Dep-tr-liv" secondAttribute="leadingMargin" constant="-20" id="FA4-ou-Qh9"/>
                             <constraint firstItem="Wcs-Ze-80M" firstAttribute="top" secondItem="7Mg-f0-gGB" secondAttribute="bottom" id="GJ8-8d-Hno"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Wcs-Ze-80M" secondAttribute="trailing" constant="-20" id="LQl-5W-Izd"/>
                             <constraint firstItem="juE-RS-22d" firstAttribute="top" secondItem="Wcs-Ze-80M" secondAttribute="bottom" id="P2M-pe-Lxo"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="DRg-uC-LYj" secondAttribute="trailing" constant="-24" id="hHL-WP-eej"/>
-                            <constraint firstItem="DRg-uC-LYj" firstAttribute="leading" secondItem="Dep-tr-liv" secondAttribute="leadingMargin" constant="-24" id="sIa-MM-I9Z"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="X6X-r7-JgQ" secondAttribute="trailing" constant="-8" id="foy-nI-0cT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vuW-gH-par"/>
                     <connections>
-                        <outlet property="blurEffectView" destination="DRg-uC-LYj" id="qgZ-6z-x2V"/>
                         <outlet property="indicatorView" destination="BGA-gz-HV7" id="Y8y-8q-iXP"/>
                         <outlet property="mapView" destination="Wcs-Ze-80M" id="hmz-tS-dWG"/>
+                        <segue destination="VKG-VN-nl9" kind="custom" identifier="OTMapViewSegue" customClass="SWRevealViewControllerSeguePushController" id="Q9g-ht-956"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OdF-4i-561" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1838" y="-1403"/>
         </scene>
+        <!--OTMapView-->
+        <scene sceneID="mBw-PB-iJd">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="OTMapView" id="VKG-VN-nl9" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="9g7-NZ-ott"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wFf-ME-AKo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2195.5" y="-1455"/>
+        </scene>
+        <!--MapOptions-->
+        <scene sceneID="Zyc-6d-g2y">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MapOptions" id="YHG-EK-BWm" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="k4a-AZ-uI1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qq2-Oy-mRE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2207" y="-1247"/>
+        </scene>
     </scenes>
     <resources>
         <image name="center-location.png" width="30" height="30"/>
+        <image name="closeNoShadow" width="62" height="62"/>
+        <image name="closeShadow" width="62" height="62"/>
+        <image name="create" width="62" height="62"/>
     </resources>
 </document>

@@ -11,6 +11,7 @@
 @protocol OTTourOptionsDelegate <NSObject>
 
 - (void)createEncounter;
+- (void)togglePOI;
 - (void)dismissTourOptions;
 
 @end
