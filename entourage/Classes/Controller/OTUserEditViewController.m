@@ -95,10 +95,10 @@ typedef NS_ENUM(NSInteger) {
     
 }
 
-#define CELLHEIGHT_SUMMARY 133.0f
+#define CELLHEIGHT_SUMMARY 135.0f
 #define CELLHEIGHT_TITLE    33.0f
 #define CELLHEIGHT_ENTOURAGES  80.0f
-#define CELLHEIGHT_DEFAULT  48.0f
+#define CELLHEIGHT_DEFAULT  51.0f
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
