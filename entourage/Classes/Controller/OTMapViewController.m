@@ -325,7 +325,7 @@
 - (void)refreshMap {
     [[OTTourService new] toursAroundCoordinate:self.mapView.centerCoordinate
                                          limit:@10
-                                      distance:[NSNumber numberWithDouble:[self mapHeight]]
+                                      distance:@100//*[NSNumber numberWithDouble:[self mapHeight]]
                                        success:^(NSMutableArray *closeTours)
                                         {
                                             [self.indicatorView setHidden:YES];
@@ -549,7 +549,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     for (CLLocation *newLocation in locations) {
-        
+        NSLog(@"LOC %.4f, %.4f of %lu", newLocation.coordinate.latitude, newLocation.coordinate.longitude, (unsigned long)locations.count);
         NSDate *eventDate = newLocation.timestamp;
         NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
         
