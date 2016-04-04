@@ -292,24 +292,10 @@
 - (void)configureNavigationBar {
     
     [self createMenuButton];
-    [self setupChatsButton];
-    
-    UIImage *image = [UIImage imageNamed:@"logo"];
-    UIImageView *img = [[UIImageView alloc] initWithImage:image];
-    img.frame = CGRectMake(0, 0, image.size.width, image.size.height);
-    img.contentMode = UIViewContentModeScaleAspectFit;
-    self.navigationItem.titleView = img;
-    
-}
-
-- (void)setupChatsButton {
-    UIImage *chatsImage = [[UIImage imageNamed:@"discussion"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-
-    UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] init];
-    [chatButton setImage:chatsImage];
+    UIBarButtonItem *chatButton = [self setupChatsButton];
     [chatButton setTarget:self];
     [chatButton setAction:@selector(showEntourages)];
-    [self.navigationItem setRightBarButtonItem:chatButton];
+    [self setupLogoImage];
 }
 
 - (void)showEntourages {

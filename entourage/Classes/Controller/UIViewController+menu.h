@@ -15,6 +15,8 @@
 
 - (UIBarButtonItem *)createMenuButton;
 - (UIBarButtonItem *)createBackFrontMenuButton;
+- (UIBarButtonItem *)setupChatsButton;
 - (void)setupCloseModal;
+- (UIImage*)setupLogoImage;
 
 @end

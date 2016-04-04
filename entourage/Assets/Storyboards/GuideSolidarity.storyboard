@@ -88,11 +88,20 @@
                         <outlet property="indicatorView" destination="BGA-gz-HV7" id="Y8y-8q-iXP"/>
                         <outlet property="mapView" destination="Wcs-Ze-80M" id="hmz-tS-dWG"/>
                         <segue destination="VKG-VN-nl9" kind="custom" identifier="OTMapViewSegue" customClass="SWRevealViewControllerSeguePushController" id="Q9g-ht-956"/>
+                        <segue destination="UaW-eY-xg6" kind="modal" identifier="EntouragesSegue" id="NL8-qC-fv3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OdF-4i-561" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1838" y="-1403"/>
+        </scene>
+        <!--Entourages-->
+        <scene sceneID="Z09-6d-ROw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Entourages" id="UaW-eY-xg6" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DkI-cr-6wu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2228.5" y="-1556"/>
         </scene>
         <!--OTMapView-->
         <scene sceneID="mBw-PB-iJd">
@@ -116,7 +125,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="center-location.png" width="30" height="30"/>
+        <image name="center-location.png" width="100" height="100"/>
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>

@@ -62,6 +62,15 @@
 
 }
 
+- (UIBarButtonItem *)setupChatsButton {
+    UIImage *chatsImage = [[UIImage imageNamed:@"discussion"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] init];
+    [chatButton setImage:chatsImage];
+    [self.navigationItem setRightBarButtonItem:chatButton];
+    
+    return chatButton;
+}
 
 - (void)setupCloseModal {
     UIImage *menuImage = [[UIImage imageNamed:@"close.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -72,7 +81,17 @@
     [menuButton setAction:@selector(dismissModal)];
     
     [self.navigationItem setLeftBarButtonItem:menuButton];
-//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+
+- (UIImage*)setupLogoImage {
+    UIImage *image = [UIImage imageNamed:@"logo"];
+    UIImageView *img = [[UIImageView alloc] initWithImage:image];
+    img.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    img.contentMode = UIViewContentModeScaleAspectFit;
+    self.navigationItem.titleView = img;
+    return image;
 }
 
 - (void)dismissModal {
