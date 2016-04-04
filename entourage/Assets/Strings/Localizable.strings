@@ -62,6 +62,7 @@
 "tour_status_ongoing" = "ongoing";
 "tour_status_closed" = "closed";
 
+
 // API
 "url_send_tour" = "%@.json?token=%@";
 "url_close_tour" = "%@/%@.json?token=%@";
@@ -70,6 +71,7 @@
 "url_tours_around" = "%@.json?token=%@";
 "url_tour_users" = "%@/%@/users.json?token=%@";
 "url_tour_messages" = "%@/%@/chat_messages.json?token=%@";
+"url_entourages" = "entourages?token=%@&status=%@";
 "url_tour_encounters" = "%@/%@/encounters.json?token=%@";
 "url_user_tours" = "%@/%@/%@.json?token=%@";
 "url_send_encounter" = "%@/%@/%@.json?token=%@";
