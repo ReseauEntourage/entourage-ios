@@ -119,13 +119,13 @@ typedef NS_ENUM(unsigned) {
                 // Microphone disabled code
                 NSLog(@"Mic not enabled!!!!");
                 [[[UIAlertView alloc] initWithTitle:@"Microphone Access Denied"
-                                            message:@"This app requires access to your device's Microphone.\n\nPlease enable Microphone access for this app in Settings > Privacy > Micro"
+                                            message:@"This app requires access to your device's Microphone.\n\nPlease enable Microphone access for this app in Reglages > Confidentialite > Micro"
                                            delegate:nil
                                   cancelButtonTitle:@"Dismiss"
                                   otherButtonTitles:nil] show];
             }
         }];
-        } else {
+    } else {
         [_recognizer stopRecording];
     }
 }

@@ -141,10 +141,25 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
     [self.recordButton setEnabled:NO];
    
     if (!self.isRecording) {
-        _recognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType
-                                                   detection:SKShortEndOfSpeechDetection
-                                                    language:@"fra-FRA"
-                                                    delegate:self];
+        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+            if (granted) {
+                // Microphone enabled code
+                _recognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType
+                                                       detection:SKShortEndOfSpeechDetection
+                                                        language:@"fra-FRA"
+                                                        delegate:self];
+                
+            }
+            else {
+                // Microphone disabled code
+                NSLog(@"Mic not enabled!!!!");
+                [[[UIAlertView alloc] initWithTitle:@"Microphone Access Denied"
+                                            message:@"This app requires access to your device's Microphone.\n\nPlease enable Microphone access for this app in Reglages > Confidentialite > Micro"
+                                           delegate:nil
+                                  cancelButtonTitle:@"Dismiss"
+                                  otherButtonTitles:nil] show];
+            }
+        }];
     } else {
         [_recognizer stopRecording];
     }

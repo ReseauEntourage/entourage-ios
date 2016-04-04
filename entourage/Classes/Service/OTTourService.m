@@ -41,25 +41,27 @@ NSString *const kTourPoints = @"tour_points";
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_tour", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kTour] = [tour dictionaryForWebserviceTour];
-    
+    NSLog(@"request to create tour ...");
     [[OTHTTPRequestManager sharedInstance]
-     POSTWithUrl:url
-     andParameters:parameters
-     andSuccess:^(id responseObject)
-     {
-         if (success)
+         POSTWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
          {
-             OTTour *updatedTour = [self tourFromDictionary:responseObject];
-             success(updatedTour);
+             
+             if (success)
+             {
+                 OTTour *updatedTour = [self tourFromDictionary:responseObject];
+                 NSLog(@"... created tour %d", updatedTour.sid.intValue);
+                 success(updatedTour);
+             }
          }
-     }
-     andFailure:^(NSError *error)
-     {
-         if (failure)
+         andFailure:^(NSError *error)
          {
-             failure(error);
-         }
-     }];
+             if (failure)
+             {
+                 failure(error);
+             }
+         }];
 }
 
 - (void)closeTour:(OTTour *)tour
@@ -127,7 +129,7 @@ NSString *const kTourPoints = @"tour_points";
 {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tours_around", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSDictionary *parameters = @{ @"limit": limit, @"latitude": @(coordinates.latitude), @"longitude": @(coordinates.longitude), @"distance": distance };
-    
+    NSLog(@"requestion tours %@ with parameters %@ ...", url, parameters);
     [[OTHTTPRequestManager sharedInstance]
              GETWithUrl:url
              andParameters:parameters
@@ -135,7 +137,7 @@ NSString *const kTourPoints = @"tour_points";
              {
                  NSDictionary *data = responseObject;
                  NSMutableArray *tours = [self toursFromDictionary:data];
-                 
+                 NSLog(@"received %lu tours", (unsigned long)tours.count);
                  if (success)
                  {
                      success(tours);
@@ -373,6 +375,41 @@ NSString *const kTourPoints = @"tour_points";
          }
      }];
 }
+
+- (void)entouragesWithStatus:(NSString *)entouragesStatus
+                     success:(void (^)(NSArray *))success
+                     failure:(void (^)(NSError *))failure
+{
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_entourages", @""), [[NSUserDefaults standardUserDefaults] currentUser].token, entouragesStatus];
+    //NSDictionary *parameters = @{ @"limit": limit, @"latitude": @(coordinates.latitude), @"longitude": @(coordinates.longitude), @"distance": distance };
+    NSLog(@"requesting entourages %@ with parameters %@ ...", url, @"0");
+   
+    [[OTHTTPRequestManager sharedInstance]
+         GETWithUrl:url
+         andParameters:nil
+         andSuccess:^(id responseObject)
+         {
+             NSDictionary *data = responseObject;
+             NSMutableArray *tours = [self toursFromDictionary:data];
+             NSLog(@"received %lu ent", (unsigned long)tours.count);
+             if (success)
+             {
+                 success(tours);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }
+     ];
+
+    
+}
+
+
 
 /**************************************************************************************************/
 #pragma mark - Private methods
