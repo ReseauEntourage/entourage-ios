@@ -53,25 +53,26 @@
                                             <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAN-eS-vcl">
-                                                    <rect key="frame" x="18" y="14" width="269" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAN-eS-vcl">
+                                                    <rect key="frame" x="15" y="14" width="241" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEr-8f-cxG">
-                                                    <rect key="frame" x="295" y="34" width="0.0" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEr-8f-cxG">
+                                                    <rect key="frame" x="256" y="15" width="40" height="18"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="zEr-8f-cxG" secondAttribute="trailing" constant="-8" id="BsM-vW-WuF"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="zAN-eS-vcl" secondAttribute="leading" constant="-10" id="TJ2-BF-SwC"/>
-                                                <constraint firstItem="zAN-eS-vcl" firstAttribute="baseline" secondItem="zEr-8f-cxG" secondAttribute="baseline" id="bSn-2T-PIF"/>
+                                                <constraint firstItem="zAN-eS-vcl" firstAttribute="leading" secondItem="jbH-S4-sUi" secondAttribute="leadingMargin" constant="7" id="7jL-11-6Qc"/>
+                                                <constraint firstItem="zEr-8f-cxG" firstAttribute="leading" secondItem="zAN-eS-vcl" secondAttribute="trailing" id="bfL-Fq-Z3x"/>
                                                 <constraint firstItem="zAN-eS-vcl" firstAttribute="centerY" secondItem="jbH-S4-sUi" secondAttribute="centerY" id="hBf-2C-K9n"/>
-                                                <constraint firstItem="zAN-eS-vcl" firstAttribute="trailing" secondItem="zEr-8f-cxG" secondAttribute="leading" constant="-8" id="ojZ-As-tbs"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="zEr-8f-cxG" secondAttribute="trailing" constant="-9" id="mBn-t3-Q5Q"/>
+                                                <constraint firstItem="zEr-8f-cxG" firstAttribute="centerY" secondItem="jbH-S4-sUi" secondAttribute="centerY" id="rUM-YH-HeT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
