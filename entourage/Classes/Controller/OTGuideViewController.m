@@ -10,6 +10,8 @@
 #import "OTGuideViewController.h"
 #import "UIViewController+menu.h"
 #import "OTCalloutViewController.h"
+#import "OTMapOptionsViewController.h"
+#import "OTSWRevealViewController.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -34,7 +36,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate>
+@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate, OTMapOptionsDelegate>
 
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffectView;
 
@@ -43,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (nonatomic)CLLocationCoordinate2D currentMapCenter;
 
 // markers
 
@@ -95,7 +98,15 @@
 #pragma mark - Private methods
 
 - (void)configureView {
-    self.title = NSLocalizedString(@"guideviewcontroller_title", @"");
+    [self setupLogoImage];
+    UIBarButtonItem *chatButton = [self setupChatsButton];
+    [chatButton setTarget:self];
+    [chatButton setAction:@selector(showEntourages)];
+    //self.title = NSLocalizedString(@"guideviewcontroller_title", @"");
+}
+
+- (void)showEntourages {
+    [self performSegueWithIdentifier:@"EntouragesSegue" sender:nil];
 }
 
 - (void)registerObserver {
@@ -239,7 +250,12 @@
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     [self.clusteringController refresh:animated];
-    [self refreshMap];
+    
+    CLLocationDistance distance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(_currentMapCenter), MKMapPointForCoordinate(mapView.centerCoordinate))) / 1000.0f;
+    if (distance > [self mapHeight]) {
+        [self refreshMap];
+        self.currentMapCenter = mapView.centerCoordinate;
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
@@ -315,6 +331,34 @@
     region.span.latitudeDelta = spanX;
     region.span.longitudeDelta = spanY;
     [self.mapView setRegion:region animated:YES];
+}
+
+/********************************************************************************/
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"OTMapOptionsSegue"]) {
+        OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;
+        controller.mapOptionsDelegate = self;
+        [controller setIsPOIVisible:YES];
+    }
+}
+
+/********************************************************************************/
+#pragma mark - OTMapOptionsDelegate
+
+-(void)createTour {
+    //TODO:
+}
+
+-(void)togglePOI {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self performSegueWithIdentifier:@"OTMapViewSegue" sender:nil];
+    }];
+}
+
+-(void)dismissMapOptions {
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 @end

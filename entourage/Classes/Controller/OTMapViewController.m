@@ -12,6 +12,7 @@
 #import "OTCreateMeetingViewController.h"
 #import "OTToursTableViewController.h"
 #import "OTCalloutViewController.h"
+#import "OTMapOptionsViewController.h"
 #import "OTTourOptionsViewController.h"
 #import "OTTourJoinRequestViewController.h"
 #import "OTTourViewController.h"
@@ -74,7 +75,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate>
 
 // blur effect
 
@@ -291,24 +292,10 @@
 - (void)configureNavigationBar {
     
     [self createMenuButton];
-    [self setupChatsButton];
-    
-    UIImage *image = [UIImage imageNamed:@"logo"];
-    UIImageView *img = [[UIImageView alloc] initWithImage:image];
-    img.frame = CGRectMake(0, 0, image.size.width, image.size.height);
-    img.contentMode = UIViewContentModeScaleAspectFit;
-    self.navigationItem.titleView = img;
-    
-}
-
-- (void)setupChatsButton {
-    UIImage *chatsImage = [[UIImage imageNamed:@"discussion"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-
-    UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] init];
-    [chatButton setImage:chatsImage];
+    UIBarButtonItem *chatButton = [self setupChatsButton];
     [chatButton setTarget:self];
     [chatButton setAction:@selector(showEntourages)];
-    [self.navigationItem setRightBarButtonItem:chatButton];
+    [self setupLogoImage];
 }
 
 - (void)showEntourages {
@@ -700,6 +687,25 @@
 }
 
 /********************************************************************************/
+#pragma mark - OTMapOptionsDelegate
+
+- (void)createTour {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self showNewTourStart];
+    }];
+}
+
+- (void)togglePOI {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self performSegueWithIdentifier:@"GuideSegue" sender:nil];
+    }];
+}
+
+- (void)dismissMapOptions {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+/********************************************************************************/
 #pragma mark - OTTourJoinRequestDelegate
 
 - (void)dismissTourJoinRequestController {
@@ -744,6 +750,10 @@
         if (!CGPointEqualToPoint(self.mapPoint, CGPointZero) ) {
             controller.c2aPoint = self.mapPoint;
         }
+    } else if ([segue.identifier isEqualToString:@"OTMapOptionsSegue"]) {
+        OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;;
+        controller.mapOptionsDelegate = self;
+        [controller setIsPOIVisible:NO];
     } else if ([segue.identifier isEqualToString:@"OTTourJoinRequestSegue"]) {
         OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
         controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
@@ -782,22 +792,29 @@
 static bool isShowingOptions = NO;
 - (IBAction)launcherTour:(UIButton *)sender {
     
+    /*
     if (isShowingOptions) {
         self.blurEffect.hidden = YES;
     } else {
         [self showMapOverlayToCreateTour];
     }
+     */
     isShowingOptions = !isShowingOptions;
+    [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
     [sender setSelected:!sender.isSelected];
 }
 
 - (IBAction)createTour:(id)sender {
-    isShowingOptions = NO;
-    [self.launcherButton setSelected:NO];
+    [self launcherTour:self.launcherButton];
     self.launcherButton.hidden = YES;
-    self.blurEffect.hidden = YES;
     
     [self showNewTourStart];
+}
+
+- (IBAction)showPOI:(id)sender {
+    [self launcherTour:self.launcherButton];
+    
+    [self togglePOI];
 }
 
 - (IBAction)closeLauncher:(id)sender {

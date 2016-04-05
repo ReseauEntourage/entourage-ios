@@ -50,20 +50,39 @@
                                 <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upg-Fe-YLk" userLabel="POI Button">
+                                <rect key="frame" x="257" y="384" width="48" height="48"/>
+                                <state key="normal" image="solidarity"/>
+                                <connections>
+                                    <action selector="doShowPOI:" destination="mpV-Sz-lXL" eventType="touchUpInside" id="NUu-Dq-29c"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Afficher le guide de solidarité" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2yT-Pg-ZcZ" userLabel="POI Label">
+                                <rect key="frame" x="43" y="398.5" width="206" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <color key="textColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="xdb-7x-qlW" secondAttribute="trailing" constant="-1" id="5C3-4r-lLf"/>
+                            <constraint firstItem="Upg-Fe-YLk" firstAttribute="trailing" secondItem="yHN-0I-uCY" secondAttribute="trailingMargin" constant="1" id="BNa-FK-qwB"/>
                             <constraint firstItem="qlo-Hm-BSG" firstAttribute="trailing" secondItem="yHN-0I-uCY" secondAttribute="trailingMargin" constant="8" id="IeK-Xb-s8t"/>
+                            <constraint firstItem="Upg-Fe-YLk" firstAttribute="bottom" secondItem="xdb-7x-qlW" secondAttribute="top" constant="-8" id="Lx3-IK-Mfk"/>
                             <constraint firstItem="xdb-7x-qlW" firstAttribute="centerY" secondItem="zhw-r6-g45" secondAttribute="centerY" id="XlL-ty-XOC"/>
+                            <constraint firstItem="2yT-Pg-ZcZ" firstAttribute="centerY" secondItem="Upg-Fe-YLk" secondAttribute="centerY" id="ePA-Td-aNT"/>
                             <constraint firstItem="Fqo-er-23H" firstAttribute="top" secondItem="qlo-Hm-BSG" secondAttribute="bottom" constant="10" id="qsf-p6-3kX"/>
                             <constraint firstItem="qlo-Hm-BSG" firstAttribute="top" secondItem="xdb-7x-qlW" secondAttribute="bottom" constant="8" id="sLn-57-ZwP"/>
+                            <constraint firstItem="2yT-Pg-ZcZ" firstAttribute="trailing" secondItem="Upg-Fe-YLk" secondAttribute="leading" constant="-8" id="t2p-vC-c6f"/>
                             <constraint firstItem="xdb-7x-qlW" firstAttribute="leading" secondItem="zhw-r6-g45" secondAttribute="trailing" constant="8" id="vUM-it-FBj"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="createButton" destination="xdb-7x-qlW" id="Dh6-gc-hr9"/>
                         <outlet property="createLabel" destination="zhw-r6-g45" id="BWL-Kv-G8m"/>
+                        <outlet property="poiButton" destination="Upg-Fe-YLk" id="kh2-29-Vb0"/>
+                        <outlet property="poiLabel" destination="2yT-Pg-ZcZ" id="Gry-9C-9cq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66X-IN-NwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -74,5 +93,6 @@
     <resources>
         <image name="closeShadow" width="62" height="62"/>
         <image name="report" width="48" height="48"/>
+        <image name="solidarity" width="48" height="48"/>
     </resources>
 </document>
