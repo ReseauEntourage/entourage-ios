@@ -121,6 +121,34 @@ NSString *const kTourPoints = @"tour_points";
          }];
 }
 
+- (void)getTourWithId:(NSNumber *)tourId
+          withSuccess:(void(^)(OTTour *))success
+              failure:(void (^)(NSError *))failure
+{
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour", @""), kAPITourRoute, tourId, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    
+    [[OTHTTPRequestManager sharedInstance]
+         GETWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
+         {
+             if (success)
+             {
+                 OTTour *tour = [self tourFromDictionary:responseObject];
+                 success(tour);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }];
+}
+
+
 - (void)toursAroundCoordinate:(CLLocationCoordinate2D)coordinates
                         limit:(NSNumber *)limit
                      distance:(NSNumber *)distance
@@ -156,7 +184,8 @@ NSString *const kTourPoints = @"tour_points";
 - (void)sendMessage:(NSString *)message
              onTour:(OTTour *)tour
             success:(void(^)(OTTourMessage *))success
-            failure:(void (^)(NSError *)) failure {
+            failure:(void (^)(NSError *)) failure
+{
     
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_messages", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
     
@@ -190,7 +219,8 @@ NSString *const kTourPoints = @"tour_points";
 
 - (void)tourUsersJoins:(OTTour *)tour
                success:(void (^)(NSArray *))success
-               failure:(void (^)(NSError *))failure {
+               failure:(void (^)(NSError *))failure
+{
 
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
     

@@ -9,7 +9,7 @@
         <!--Tour View Controller-->
         <scene sceneID="YHX-oC-oM3">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Hn0-z2-6tI" customClass="OTTourViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTTourViewController" automaticallyAdjustsScrollViewInsets="NO" id="Hn0-z2-6tI" customClass="OTTourViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZqG-Qc-zGT"/>
                         <viewControllerLayoutGuide type="bottom" id="bCY-0U-VFW"/>
