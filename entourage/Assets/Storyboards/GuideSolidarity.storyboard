@@ -46,9 +46,6 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wcs-Ze-80M">
                                 <rect key="frame" x="-4" y="64" width="328" height="504"/>
                             </mapView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BGA-gz-HV7">
-                                <rect key="frame" x="150" y="274" width="20" height="20"/>
-                            </activityIndicatorView>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6X-r7-JgQ" userLabel="Map Options Button">
                                 <rect key="frame" x="250" y="494" width="62" height="62"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -72,6 +69,32 @@
                                     <segue destination="YHG-EK-BWm" kind="modal" identifier="OTMapOptionsSegue" id="rSN-7J-VwV"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BGA-gz-HV7">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <button hidden="YES" opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L1d-r2-a3o" userLabel="Tour Options Button">
+                                <rect key="frame" x="250" y="494" width="62" height="62"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="Kgq-dR-w3V"/>
+                                    <constraint firstAttribute="height" constant="62" id="bgZ-ek-zM5"/>
+                                </constraints>
+                                <state key="normal" image="create">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="closeShadow"/>
+                                <state key="highlighted" image="closeNoShadow"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="I9u-Zg-Ouj" kind="modal" identifier="OTTourOptionsSegue" id="miL-uy-jeg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -81,12 +104,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Wcs-Ze-80M" secondAttribute="trailing" constant="-20" id="LQl-5W-Izd"/>
                             <constraint firstItem="juE-RS-22d" firstAttribute="top" secondItem="Wcs-Ze-80M" secondAttribute="bottom" id="P2M-pe-Lxo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="X6X-r7-JgQ" secondAttribute="trailing" constant="-8" id="foy-nI-0cT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="L1d-r2-a3o" secondAttribute="trailing" constant="-8" id="nwI-ta-fDY"/>
+                            <constraint firstItem="juE-RS-22d" firstAttribute="top" secondItem="L1d-r2-a3o" secondAttribute="bottom" constant="12" id="w0I-zq-c8F"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vuW-gH-par"/>
                     <connections>
                         <outlet property="indicatorView" destination="BGA-gz-HV7" id="Y8y-8q-iXP"/>
+                        <outlet property="mapOptionsButton" destination="X6X-r7-JgQ" id="r5x-Dh-QZl"/>
                         <outlet property="mapView" destination="Wcs-Ze-80M" id="hmz-tS-dWG"/>
+                        <outlet property="tourOptionsButton" destination="L1d-r2-a3o" id="Rx9-yD-JZX"/>
                         <segue destination="VKG-VN-nl9" kind="custom" identifier="OTMapViewSegue" customClass="SWRevealViewControllerSeguePushController" id="Q9g-ht-956"/>
                         <segue destination="UaW-eY-xg6" kind="modal" identifier="EntouragesSegue" id="NL8-qC-fv3"/>
                     </connections>
@@ -122,6 +149,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qq2-Oy-mRE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2207" y="-1247"/>
+        </scene>
+        <!--TourOptions-->
+        <scene sceneID="LZo-dm-P82">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TourOptions" id="I9u-Zg-Ouj" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pQM-of-i8z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2178.5" y="-1175"/>
         </scene>
     </scenes>
     <resources>

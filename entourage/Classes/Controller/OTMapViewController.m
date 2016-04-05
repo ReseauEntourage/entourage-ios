@@ -18,6 +18,7 @@
 #import "OTTourViewController.h"
 #import "OTPublicTourViewController.h"
 #import "OTQuitTourViewController.h"
+#import "OTGuideViewController.h"
 #import "UIView+entourage.h"
 
 //#import "UIViewController+MapView.h"
@@ -767,6 +768,10 @@
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.tour = self.selectedTour;
         //controller.tourJoinRequestDelegate = self;
+    } else if ([segue.identifier isEqualToString:@"GuideSegue"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTGuideViewController *controller = (OTGuideViewController *)navController.childViewControllers[0];
+        [controller setIsTourRunning:self.isTourRunning];
     }
 }
 

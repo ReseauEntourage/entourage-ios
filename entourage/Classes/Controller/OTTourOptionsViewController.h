@@ -21,4 +21,6 @@
 @property(nonatomic, weak) id<OTTourOptionsDelegate> tourOptionsDelegate;
 @property(nonatomic, assign) CGPoint c2aPoint;
 
+- (void)setIsPOIVisible:(BOOL)isPOIVisible;
+
 @end

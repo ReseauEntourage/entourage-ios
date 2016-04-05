@@ -15,6 +15,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *poiLabel;
 @property (nonatomic, weak) IBOutlet UIButton *poiButton;
 
+@property (nonatomic) BOOL isPOIVisible;
+
 @end
 
 @implementation OTTourOptionsViewController
@@ -22,6 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (self.isPOIVisible) {
+        self.poiLabel.text = NSLocalizedString(@"map_options_hide_poi", @"");
+    }
+    else {
+        self.poiLabel.text = NSLocalizedString(@"map_options_show_poi", @"");
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,8 +57,8 @@
 }
 
 - (IBAction)doShowPOI:(id)sender {
-    if ([self.tourOptionsDelegate respondsToSelector:@selector(showPOI)]) {
-        [self.tourOptionsDelegate performSelector:@selector(showPOI) withObject:nil];
+    if ([self.tourOptionsDelegate respondsToSelector:@selector(togglePOI)]) {
+        [self.tourOptionsDelegate performSelector:@selector(togglePOI) withObject:nil];
     }
 }
 
@@ -59,6 +67,10 @@
     if ([self.tourOptionsDelegate respondsToSelector:@selector(dismissTourOptions)]) {
        [self.tourOptionsDelegate performSelector:@selector(dismissTourOptions) withObject:nil];
     }
+}
+
+- (void)setIsPOIVisible:(BOOL)isPOIVisible {
+    _isPOIVisible = isPOIVisible;
 }
 
 /*

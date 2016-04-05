@@ -11,6 +11,7 @@
 #import "UIViewController+menu.h"
 #import "OTCalloutViewController.h"
 #import "OTMapOptionsViewController.h"
+#import "OTTourOptionsViewController.h"
 #import "OTSWRevealViewController.h"
 
 // View
@@ -36,7 +37,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate, OTMapOptionsDelegate>
+@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate, OTMapOptionsDelegate, OTTourOptionsDelegate>
 
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffectView;
 
@@ -57,6 +58,12 @@
 
 @property (nonatomic) BOOL isRegionSetted;
 @property (nonatomic, strong) NSMutableArray *markers;
+
+// tour options
+
+@property (nonatomic, weak) IBOutlet UIButton *mapOptionsButton;
+@property (nonatomic, weak) IBOutlet UIButton *tourOptionsButton;
+@property (nonatomic) BOOL isTourRunning;
 
 @end
 
@@ -80,6 +87,7 @@
     [self zoomToCurrentLocation:nil];
     [self createMenuButton];
     [self configureView];
+    [self updateOptionsButtons];
     
     self.markers = [NSMutableArray new];
 }
@@ -341,6 +349,10 @@
         OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;
         controller.mapOptionsDelegate = self;
         [controller setIsPOIVisible:YES];
+    } else if([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
+        OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
+        controller.tourOptionsDelegate = self;
+        [controller setIsPOIVisible:YES];
     }
 }
 
@@ -348,7 +360,18 @@
 #pragma mark - OTMapOptionsDelegate
 
 -(void)createTour {
-    //TODO:
+    [self dismissViewControllerAnimated:NO completion:^{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"poi_create_tour_alert", @"") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:cancelAction];
+        UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self performSegueWithIdentifier:@"OTMapViewSegue" sender:nil];
+        }];
+        [alert addAction:quitAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }];
 }
 
 -(void)togglePOI {
@@ -359,6 +382,43 @@
 
 -(void)dismissMapOptions {
     [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+/********************************************************************************/
+#pragma mark - OTTourOptionsDelegate
+
+- (void)createEncounter {
+    [self dismissViewControllerAnimated:NO completion:^{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"poi_create_encounter_alert", @"") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:cancelAction];
+        UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self performSegueWithIdentifier:@"OTMapViewSegue" sender:nil];
+        }];
+        [alert addAction:quitAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }];
+}
+
+- (void)dismissTourOptions {
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+/********************************************************************************/
+#pragma mark - Tour Handling
+
+-(void) setIsTourRunning:(BOOL)isTourRunning {
+    _isTourRunning = isTourRunning;
+    if (self.isViewLoaded) {
+        [self updateOptionsButtons];
+    }
+}
+
+- (void)updateOptionsButtons {
+    self.mapOptionsButton.hidden = self.isTourRunning;
+    self.tourOptionsButton.hidden = !self.isTourRunning;
 }
 
 @end
