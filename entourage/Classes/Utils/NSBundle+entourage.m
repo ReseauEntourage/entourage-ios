@@ -14,6 +14,12 @@
 + (NSString *)currentVersion {
     NSDictionary *bundleInfoDictionary = [[NSBundle bundleForClass:[OTAppDelegate class]] infoDictionary];
     NSString *buildVersion = [bundleInfoDictionary objectForKey:@"CFBundleShortVersionString"];
+    return buildVersion;
+}
+
++ (NSString *)fullCurrentVersion {
+    NSDictionary *bundleInfoDictionary = [[NSBundle bundleForClass:[OTAppDelegate class]] infoDictionary];
+    NSString *buildVersion = [bundleInfoDictionary objectForKey:@"CFBundleShortVersionString"];
     NSString *buildNumber = [bundleInfoDictionary objectForKey:@"CFBundleVersion"];
     NSString *version = [NSString stringWithFormat:@"%@-%@", buildVersion, buildNumber];
     return version;
