@@ -38,6 +38,17 @@ extern NSString *const kAPITourRoute;
          success:(void(^)(OTTourJoiner *))success
          failure:(void (^)(NSError *)) failure;
 
+- (void)updateTourJoinRequestStatus:(NSString *)status
+                            forUser:(NSNumber*)userID
+                            forTour:(NSNumber*)tourID
+                        withSuccess:(void (^)())success
+                            failure:(void (^)(NSError *))failure;
+
+- (void)rejectTourJoinRequestForUser:(NSNumber*)userID
+                              forTour:(NSNumber*)tourID
+                          withSuccess:(void (^)())success
+                              failure:(void (^)(NSError *))failure;
+
 - (void)tourUsersJoins:(OTTour *)tour
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure;

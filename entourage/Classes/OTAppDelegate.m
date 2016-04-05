@@ -12,6 +12,7 @@
 #import "OTMessageViewController.h"
 #import "OTLoginViewController.h"
 #import "OTStartupViewController.h"
+#import "OTTourService.h"
 
 // Pods
 #import "SimpleKeychain.h"
@@ -28,6 +29,11 @@
 // Helper
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
+#import "NSDictionary+Parsing.h"
+
+#define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
+#define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
+#define APNOTIFICATION_REQUEST_ACCEPTED "JOIN_REQUEST_ACCEPTED"
 
 /**************************************************************************************************/
 #pragma mark - OTAppDelegate
@@ -135,29 +141,81 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender]
                                                                        message:[userInfo objectForKey:kUserInfoObject]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
-                                                                style:UIAlertActionStyleDefault
-                                                              handler:^(UIAlertAction * _Nonnull action) {}];
-        
-        UIAlertAction *openAction = [UIAlertAction actionWithTitle:@"Afficher"
-                                                             style:UIAlertActionStyleDefault
-                                                           handler:^(UIAlertAction * _Nonnull action) {
-                                                               OTMessageViewController *controller =
-                                                               (OTMessageViewController *)[application.keyWindow.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"OTMessageViewController"];
-                                                               
-                                                               [application.keyWindow.rootViewController presentViewController:controller animated:YES completion:nil];
-                                                               
-                                                               [controller configureWithSender:[userInfo objectForKey:kUserInfoSender]
-                                                                                     andObject:[userInfo objectForKey:kUserInfoObject]
-                                                                                    andMessage:[userInfo objectForKey:kUserInfoMessage]];
-                                                           }];
-        [alert addAction:defaultAction];
-        [alert addAction:openAction];
+
+        if ([apnType isEqualToString:@APNOTIFICATION_JOIN_REQUEST]) {
+            [self handleJoinRequestNotification:userInfo showingAlert:alert];
+        } else {
+            if ([apnType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE]) {
+                [self handleChatNotification:userInfo showingAlert:alert];
+            } else {
+                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {}];
+    
+                [alert addAction:defaultAction];
+            }
+        }
         [application.keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
     }
     
     // Set icon badge number to zero
     application.applicationIconBadgeNumber = 0;
+}
+
+- (void)handleJoinRequestNotification:(NSDictionary *)notificationDictionary
+                         showingAlert:(UIAlertController*)alert
+{
+    NSDictionary *apnContent = [notificationDictionary objectForKey:kUserInfoMessage];
+    NSDictionary *apnExtra = [apnContent objectForKey:kUserInfoExtraMessage];
+    
+    NSNumber *tourId = [apnExtra numberForKey:@"tour_id"];
+    NSNumber *userId = [apnExtra numberForKey:@"user_id"];
+    
+    UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:@"Refuser"
+                                                                      style:UIAlertActionStyleDefault
+                                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                                            [[OTTourService new] rejectTourJoinRequestForUser:userId
+                                                                                                                      forTour:tourId
+                                                                                                                  withSuccess:^() {
+                                                                                                                      NSLog(@"Rejected user's join request.");
+                                                                                                                  } failure:^(NSError *error) {
+                                                                                                                      NSLog(@"Something went wrong on user rejection: %@", error.description);
+                                                                                                                  }];
+                                                                    }
+                                              ];
+    
+    UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:@"Accepter"
+                                                                      style:UIAlertActionStyleDefault
+                                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                                        [[OTTourService new] updateTourJoinRequestStatus:@"accepted"
+                                                                                                                 forUser:userId
+                                                                                                                 forTour:tourId
+                                                                                                             withSuccess:^{
+                                                                                                                 NSLog(@"Accepted user's join request.");                                                                                                                 }
+                                                                                                                 failure:^(NSError * error) {
+                                                                                                                     NSLog(@"Something went wrong on user acceptance: %@", error.description);
+                                                                                                                 }];
+                                                                    }
+                                              ];
+    [alert addAction:refuseJoinRequestAction];
+    [alert addAction:acceptJoinRequestAction];
+}
+
+- (void)handleChatNotification:(NSDictionary *)notificationDictionary
+                         showingAlert:(UIAlertController*)alert
+{
+//    UIAlertAction *openAction = [UIAlertAction actionWithTitle:@"Afficher"
+//                                                         style:UIAlertActionStyleDefault
+//                                                       handler:^(UIAlertAction * _Nonnull action) {
+//                                                           OTMessageViewController *controller =
+//                                                           (OTMessageViewController *)[application.keyWindow.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"OTMessageViewController"];
+//                                                           [controller configureWithSender:[userInfo objectForKey:kUserInfoSender]
+//                                                                                 andObject:[userInfo objectForKey:kUserInfoObject]
+//                                                                                andMessage:[userInfo objectForKey:kUserInfoMessage]];
+//                                                           
+//                                                           
+//                                                           [alert addAction:openAction];
+//                                                       }];
 
 }
 

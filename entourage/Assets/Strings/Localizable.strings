@@ -70,6 +70,7 @@
 "url_send_point" = "%@/%@/%@.json?token=%@";
 "url_tours_around" = "%@.json?token=%@";
 "url_tour_users" = "%@/%@/users.json?token=%@";
+"url_join_request_response" = "tours/%@/users/%@?token=%@";
 "url_tour_messages" = "%@/%@/chat_messages.json?token=%@";
 "url_entourages" = "entourages?token=%@&status=%@";
 "url_tour_encounters" = "%@/%@/encounters.json?token=%@";

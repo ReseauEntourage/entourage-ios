@@ -217,6 +217,68 @@ NSString *const kTourPoints = @"tour_points";
      ];
 }
 
+- (void)updateTourJoinRequestStatus:(NSString *)status
+                            forUser:(NSNumber*)userID
+                            forTour:(NSNumber*)tourID
+                        withSuccess:(void (^)())success
+                            failure:(void (^)(NSError *))failure
+{
+    
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_join_request_response", @""), tourID, userID, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSDictionary *parameters = @{@"user":@{@"status":status}};
+    
+    [[OTHTTPRequestManager sharedInstance]
+         PUTWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
+         {
+             
+             if (success)
+             {
+                 success();
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }
+     ];
+}
+
+- (void)rejectTourJoinRequestForUser:(NSNumber*)userID
+                              forTour:(NSNumber*)tourID
+                          withSuccess:(void (^)())success
+                              failure:(void (^)(NSError *))failure
+{
+    
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_join_request_response", @""), tourID, userID, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    
+    [[OTHTTPRequestManager sharedInstance]
+         DELETEWithUrl:url
+         andParameters:nil
+         andSuccess:^(id responseObject)
+         {
+             NSDictionary *data = responseObject;
+
+             if (success)
+             {
+                 success();
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }
+    ];
+}
+
+
 - (void)tourMessages:(OTTour *)tour
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure {
