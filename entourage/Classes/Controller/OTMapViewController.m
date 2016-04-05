@@ -160,6 +160,8 @@
     self.mapSegmentedControl.layer.cornerRadius = 4;
     [self configureTableView];
     
+    [self showToursMap];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -311,12 +313,18 @@
 	                                           context:nil];
 }
 
+
+static BOOL didGetAnyData = NO;
 - (void)refreshMap {
     [[OTTourService new] toursAroundCoordinate:self.mapView.centerCoordinate
                                          limit:@10
                                       distance:@100//*[NSNumber numberWithDouble:[self mapHeight]]
                                        success:^(NSMutableArray *closeTours)
                                         {
+                                            if (closeTours.count && !didGetAnyData) {
+                                                [self showToursList];
+                                                didGetAnyData = YES;
+                                            }
                                             [self.indicatorView setHidden:YES];
                                             self.tours = closeTours;
                                             [self feedMapViewWithTours];

@@ -11,5 +11,6 @@
 @interface NSBundle (entourage)
 
 + (NSString *)currentVersion;
++ (NSString *)fullCurrentVersion;
 
 @end

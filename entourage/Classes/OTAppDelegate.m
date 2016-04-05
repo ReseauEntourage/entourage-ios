@@ -13,6 +13,7 @@
 #import "OTLoginViewController.h"
 #import "OTStartupViewController.h"
 #import "OTTourService.h"
+#import "OTTourViewController.h"
 
 // Pods
 #import "SimpleKeychain.h"
@@ -24,6 +25,7 @@
 #import "UIFont+entourage.h"
 #import "OTConsts.h"
 #import "IQKeyboardManager.h"
+#import "UIStoryboard+entourage.h"
 #import "UIStoryboard+entourage.h"
 
 // Helper
@@ -147,15 +149,19 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         } else {
             if ([apnType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE]) {
                 [self handleChatNotification:userInfo showingAlert:alert];
-            } else {
-                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
+            }
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * _Nonnull action) {}];
     
-                [alert addAction:defaultAction];
-            }
+            [alert addAction:defaultAction];
         }
-        [application.keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
+        
+        UIViewController *rootVC = application.keyWindow.rootViewController;
+        if (rootVC.presentedViewController)
+            [rootVC.presentedViewController presentViewController:alert animated:YES completion:nil];
+        else
+            [rootVC presentViewController:alert animated:YES completion:nil];
     }
     
     // Set icon badge number to zero
@@ -204,19 +210,33 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 - (void)handleChatNotification:(NSDictionary *)notificationDictionary
                          showingAlert:(UIAlertController*)alert
 {
-//    UIAlertAction *openAction = [UIAlertAction actionWithTitle:@"Afficher"
-//                                                         style:UIAlertActionStyleDefault
-//                                                       handler:^(UIAlertAction * _Nonnull action) {
-//                                                           OTMessageViewController *controller =
-//                                                           (OTMessageViewController *)[application.keyWindow.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"OTMessageViewController"];
-//                                                           [controller configureWithSender:[userInfo objectForKey:kUserInfoSender]
-//                                                                                 andObject:[userInfo objectForKey:kUserInfoObject]
-//                                                                                andMessage:[userInfo objectForKey:kUserInfoMessage]];
-//                                                           
-//                                                           
-//                                                           [alert addAction:openAction];
-//                                                       }];
+    NSDictionary *apnContent = [notificationDictionary objectForKey:kUserInfoMessage];
+    NSDictionary *apnExtra = [apnContent objectForKey:kUserInfoExtraMessage];
+    
+    NSNumber *tourId = [apnExtra numberForKey:@"tour_id"];
 
+    UIAlertAction *openAction = [UIAlertAction actionWithTitle:@"Afficher"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                           [[OTTourService new] getTourWithId:tourId
+                                                                                  withSuccess:^(OTTour *tour) {
+                                                                                      NSLog(@"got tour info");
+                                                                                      //open timeline
+                                                                                      UIApplication *app = [UIApplication sharedApplication];
+                                                                                      UIViewController *rootVC = app.windows.firstObject.rootViewController;
+                                                                                      [rootVC dismissViewControllerAnimated:YES completion:nil];
+                                                                                      UINavigationController *navC = [[UIStoryboard tourStoryboard] instantiateInitialViewController];
+                                                                                      OTTourViewController *tourVC = navC.viewControllers.firstObject;
+                                                                                      tourVC.tour = tour;
+                                                                                      [rootVC presentViewController:navC animated:YES completion:^{
+                                                                                          NSLog(@"showing tour vc");
+                                                                                      }];
+                                                                                      
+                                                                                  } failure:^(NSError *error) {
+                                                                                      NSLog(@"something went wrong on getting tour info for tourId %@", tourId);
+                                                                                  }];
+                                                       }];
+    [alert addAction:openAction];
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {

@@ -337,19 +337,6 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="GXM-nx-VtR"/>
                                 </connections>
                             </tableView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaJ-X6-EEa">
-                                <rect key="frame" x="16" y="78" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="S2z-Ry-bgf"/>
-                                    <constraint firstAttribute="width" constant="30" id="ek7-Qe-u84"/>
-                                </constraints>
-                                <state key="normal" image="center-location.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="zoomToCurrentLocation:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cSD-wJ-9r6"/>
-                                </connections>
-                            </button>
                             <segmentedControl hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gsB-s5-FKP">
                                 <rect key="frame" x="111" y="80" width="97" height="29"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -680,8 +667,6 @@
                             <constraint firstAttribute="trailing" secondItem="x5D-lh-QtL" secondAttribute="trailing" id="blK-sr-sHQ"/>
                             <constraint firstItem="x5D-lh-QtL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="e1K-mf-d0a"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="centerX" secondItem="oVf-Bh-vdD" secondAttribute="centerX" id="hB3-UZ-01t"/>
-                            <constraint firstItem="DaJ-X6-EEa" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="14" id="pOM-6J-NsW"/>
-                            <constraint firstItem="DaJ-X6-EEa" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ptP-Fx-KEf"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="10" id="puD-5n-gle"/>
                             <constraint firstItem="x5D-lh-QtL" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="qI7-NA-VS0"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="64" id="sQA-pi-JcK"/>
@@ -1518,7 +1503,6 @@ transmise au créateur.
         <image name="activeButton" width="45" height="45"/>
         <image name="car" width="30" height="30"/>
         <image name="carActive" width="30" height="30"/>
-        <image name="center-location.png" width="30" height="30"/>
         <image name="close" width="22" height="22"/>
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>

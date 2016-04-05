@@ -20,6 +20,12 @@
     [self showInitialViewControllerFromStoryboardNamed:@"Main"];
 }
 
++ (UIStoryboard*)tourStoryboard {
+    UIStoryboard *tourStoryboard = [UIStoryboard storyboardWithName:@"Tour" bundle:nil];
+    return tourStoryboard;
+}
+
+
 #pragma mark - Private
 
 + (void)showInitialViewControllerFromStoryboardNamed:(NSString *)storyboardName {
