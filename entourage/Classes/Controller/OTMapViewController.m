@@ -211,8 +211,9 @@
     self.tableView.tableFooterView = dummyView;
     self.blurEffect.hidden = YES;
     
+    
     //show map on table header
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width + 80, MAPVIEW_HEIGHT)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, MAPVIEW_HEIGHT)];
     self.mapView = [[MKMapView alloc] initWithFrame:headerView.bounds];
     [headerView addSubview:self.mapView];
     [headerView sendSubviewToBack:self.mapView];
@@ -424,7 +425,7 @@
             self.seconds = 0;
             self.locations = [NSMutableArray new];
             self.isTourRunning = YES;
-            self.start = [NSDate date];
+//            self.start = [NSDate date];
         } failure:^(NSError *error) {
             NSLog(@"%@",[error localizedDescription]);
         }

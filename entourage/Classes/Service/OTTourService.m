@@ -41,7 +41,7 @@ NSString *const kTourPoints = @"tour_points";
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_tour", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kTour] = [tour dictionaryForWebserviceTour];
-    NSLog(@"request to create tour ...");
+    NSLog(@"request to create tour %@...", parameters);
     [[OTHTTPRequestManager sharedInstance]
          POSTWithUrl:url
          andParameters:parameters

@@ -77,6 +77,7 @@ NSString *const kEncountersCount = @"encounter_count";
         self.organizationName = user.organization.name;
         self.organizationDesc = user.organization.description;
         self.distance = 0.0;
+        self.startTime = [NSDate date];
     }
     return self;
 }
@@ -134,6 +135,7 @@ NSString *const kEncountersCount = @"encounter_count";
     dictionary[kTourVehicle] = self.vehicleType;
     dictionary[kTourStatus] = self.status;
     dictionary[kTourDistance] = @(self.distance);
+    dictionary[kTourStartTime] = self.startTime;
     
     return dictionary;
 }
