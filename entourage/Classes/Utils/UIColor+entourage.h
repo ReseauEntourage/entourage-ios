@@ -15,4 +15,13 @@
 + (UIColor *)appGreyishBrownColor;
 + (UIColor *)appPaleGreyColor;
 
++ (UIColor *)poiCategory0;
++ (UIColor *)poiCategory1;
++ (UIColor *)poiCategory2;
++ (UIColor *)poiCategory3;
++ (UIColor *)poiCategory4;
++ (UIColor *)poiCategory5;
++ (UIColor *)poiCategory6;
++ (UIColor *)poiCategory7;
+
 @end

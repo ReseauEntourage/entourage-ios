@@ -116,11 +116,12 @@
                         <outlet property="tourOptionsButton" destination="L1d-r2-a3o" id="Rx9-yD-JZX"/>
                         <segue destination="VKG-VN-nl9" kind="custom" identifier="OTMapViewSegue" customClass="SWRevealViewControllerSeguePushController" id="Q9g-ht-956"/>
                         <segue destination="UaW-eY-xg6" kind="modal" identifier="EntouragesSegue" id="NL8-qC-fv3"/>
+                        <segue destination="ar7-tr-3dW" kind="modal" identifier="OTGuideDetailsSegue" id="kO3-SX-Jeq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OdF-4i-561" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1838" y="-1403"/>
+            <point key="canvasLocation" x="1792" y="-1386"/>
         </scene>
         <!--Entourages-->
         <scene sceneID="Z09-6d-ROw">
@@ -158,11 +159,157 @@
             </objects>
             <point key="canvasLocation" x="2178.5" y="-1175"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DE5-7B-nBY">
+            <objects>
+                <navigationController id="ar7-tr-3dW" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QDv-s5-Rca">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="mWl-3f-MlG" kind="relationship" relationship="rootViewController" id="j9N-yM-OL5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y6p-QR-pX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1677" y="-666"/>
+        </scene>
+        <!--GUIDE DE SOLIDARITE-->
+        <scene sceneID="LoE-Tt-veI">
+            <objects>
+                <viewController id="mWl-3f-MlG" customClass="OTGuideDetailsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4tM-3T-kBf"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ml6-QU-mfT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cKN-AU-VPj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSl-o0-ITN" userLabel="Title View">
+                                <rect key="frame" x="-4" y="64" width="324" height="56"/>
+                                <subviews>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQw-uh-GTq" userLabel="Category Button">
+                                        <rect key="frame" x="138" y="4" width="48" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <state key="normal" image="poi_category-1">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="HQw-uh-GTq" firstAttribute="centerX" secondItem="YSl-o0-ITN" secondAttribute="centerX" id="2Bk-kY-FgF"/>
+                                    <constraint firstItem="HQw-uh-GTq" firstAttribute="centerY" secondItem="YSl-o0-ITN" secondAttribute="centerY" id="KeO-6z-jNK"/>
+                                    <constraint firstAttribute="height" constant="56" id="qMV-fL-kxU"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGK-BG-AWp" userLabel="POI Name Label">
+                                <rect key="frame" x="16" y="150" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yVR-N8-kQk" userLabel="Separator View">
+                                <rect key="frame" x="16" y="166" width="288" height="1"/>
+                                <color key="backgroundColor" red="0.64705884456634521" green="0.64705884456634521" blue="0.61176472902297974" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="YsI-qg-SBs"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jy0-W7-dV3" userLabel="POI Details Label">
+                                <rect key="frame" x="16" y="183" width="288" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <color key="textColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQR-av-iAm" userLabel="POI Address Button">
+                                <rect key="frame" x="16" y="199" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showAddress:" destination="mWl-3f-MlG" eventType="touchUpInside" id="yXj-p2-yDu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDG-hQ-vUR" userLabel="POI Phone Button">
+                                <rect key="frame" x="16" y="237" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showPhone:" destination="mWl-3f-MlG" eventType="touchUpInside" id="Lgd-Ve-rop"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Uo-fD-70B" userLabel="POI Email Button">
+                                <rect key="frame" x="16" y="275" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showEmail:" destination="mWl-3f-MlG" eventType="touchUpInside" id="atT-pz-zFU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gja-46-eyJ" userLabel="POI Web Button">
+                                <rect key="frame" x="16" y="313" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showWebsite:" destination="mWl-3f-MlG" eventType="touchUpInside" id="aF4-nk-vPk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5Uo-fD-70B" firstAttribute="leading" secondItem="cKN-AU-VPj" secondAttribute="leadingMargin" id="4uB-mu-wee"/>
+                            <constraint firstItem="YSl-o0-ITN" firstAttribute="top" secondItem="4tM-3T-kBf" secondAttribute="bottom" id="6TR-yZ-QSN"/>
+                            <constraint firstItem="Jy0-W7-dV3" firstAttribute="top" secondItem="yVR-N8-kQk" secondAttribute="bottom" constant="16" id="77c-GM-8k7"/>
+                            <constraint firstItem="gja-46-eyJ" firstAttribute="leading" secondItem="cKN-AU-VPj" secondAttribute="leadingMargin" id="7yM-lt-d10"/>
+                            <constraint firstItem="GQR-av-iAm" firstAttribute="leading" secondItem="cKN-AU-VPj" secondAttribute="leadingMargin" id="DmG-Lq-F4N"/>
+                            <constraint firstItem="GQR-av-iAm" firstAttribute="top" secondItem="Jy0-W7-dV3" secondAttribute="bottom" constant="16" id="Lw8-Dd-lum"/>
+                            <constraint firstItem="yVR-N8-kQk" firstAttribute="top" secondItem="SGK-BG-AWp" secondAttribute="bottom" constant="16" id="MPo-A2-Unw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yVR-N8-kQk" secondAttribute="trailing" id="PeP-my-vme"/>
+                            <constraint firstItem="SDG-hQ-vUR" firstAttribute="top" secondItem="GQR-av-iAm" secondAttribute="bottom" constant="8" id="RYx-YF-nSe"/>
+                            <constraint firstItem="Jy0-W7-dV3" firstAttribute="leading" secondItem="cKN-AU-VPj" secondAttribute="leadingMargin" id="VXW-FO-EYC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YSl-o0-ITN" secondAttribute="trailing" constant="-16" id="W4A-ct-1Jp"/>
+                            <constraint firstItem="5Uo-fD-70B" firstAttribute="top" secondItem="SDG-hQ-vUR" secondAttribute="bottom" constant="8" id="WtY-Us-hpI"/>
+                            <constraint firstItem="YSl-o0-ITN" firstAttribute="leading" secondItem="cKN-AU-VPj" secondAttribute="leadingMargin" constant="-20" id="YUX-s9-Obv"/>
+                            <constraint firstItem="SGK-BG-AWp" firstAttribute="top" secondItem="YSl-o0-ITN" secondAttribute="bottom" constant="30" id="cOk-yx-i9P"/>
+                            <constraint firstItem="SDG-hQ-vUR" firstAttribute="leading" secondItem="cKN-AU-VPj" secondAttribute="leadingMargin" id="j4o-BG-wPE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Jy0-W7-dV3" secondAttribute="trailing" id="suV-P0-gTF"/>
+                            <constraint firstItem="yVR-N8-kQk" firstAttribute="leading" secondItem="cKN-AU-VPj" secondAttribute="leadingMargin" id="uXd-ll-IFh"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="SGK-BG-AWp" secondAttribute="leading" id="zBB-v0-CQa"/>
+                            <constraint firstItem="gja-46-eyJ" firstAttribute="top" secondItem="5Uo-fD-70B" secondAttribute="bottom" constant="8" id="zN3-6a-I1B"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="GUIDE DE SOLIDARITE" id="6fH-t1-8sJ"/>
+                    <connections>
+                        <outlet property="addressButton" destination="GQR-av-iAm" id="JoR-6d-27O"/>
+                        <outlet property="categoryButton" destination="HQw-uh-GTq" id="lNx-nb-xbs"/>
+                        <outlet property="detailsLabel" destination="Jy0-W7-dV3" id="kbX-cc-dkV"/>
+                        <outlet property="emailButton" destination="5Uo-fD-70B" id="dK9-xB-FwN"/>
+                        <outlet property="nameLabel" destination="SGK-BG-AWp" id="hdb-8H-Bft"/>
+                        <outlet property="phoneButton" destination="SDG-hQ-vUR" id="JiW-cG-sHT"/>
+                        <outlet property="titleView" destination="YSl-o0-ITN" id="vyd-Ke-ZBa"/>
+                        <outlet property="webButton" destination="gja-46-eyJ" id="UEM-aJ-tph"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZIn-gW-OXV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2124" y="-666"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="center-location.png" width="100" height="100"/>
+        <image name="center-location.png" width="35" height="35"/>
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>
+        <image name="poi_category-1" width="48" height="48"/>
     </resources>
 </document>

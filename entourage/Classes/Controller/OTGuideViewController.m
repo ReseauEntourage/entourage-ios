@@ -9,6 +9,7 @@
 // Controller
 #import "OTGuideViewController.h"
 #import "UIViewController+menu.h"
+#import "OTGuideDetailsViewController.h"
 #import "OTCalloutViewController.h"
 #import "OTMapOptionsViewController.h"
 #import "OTTourOptionsViewController.h"
@@ -20,6 +21,7 @@
 
 // Model
 #import "OTPoi.h"
+#import "OTPoiCategory.h"
 
 // Service
 #import "OTPoiService.h"
@@ -174,32 +176,11 @@
         }
     }];
     
-    // Start up our view controller from a Storyboard
-    OTCalloutViewController *controller = (OTCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCalloutViewController"];
-    controller.delegate = self;
+    if (annotation == nil) return;
     
-    UIView *popView = [controller view];
-    
-    popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
-    
-    [UIView animateWithDuration:.3f
-                     animations: ^
-     {
-         popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
-     }];
-    [controller configureWithPoi:annotation.poi];
-    
-    self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
-    [self.popover setTheme:[WYPopoverTheme themeForIOS7]];
-    
-    [self.popover presentPopoverFromRect:view.bounds
-                                  inView:view
-                permittedArrowDirections:WYPopoverArrowDirectionNone
-                                animated:YES
-                                 options:WYPopoverAnimationOptionFadeWithScale];
     [Flurry logEvent:@"Open_POI_From_Map" withParameters:@{ @"poi_id" : annotation.poi.sid }];
     
-    self.blurEffectView.hidden = NO;
+    [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation];
 }
 
 /********************************************************************************/
@@ -313,6 +294,18 @@
     }
 }
 
+- (OTPoiCategory*)categoryById:(NSNumber*)sid {
+    if (sid == nil) return nil;
+    for (OTPoiCategory* category in self.categories) {
+        if (category.sid != nil) {
+            if ([category.sid isEqualToNumber:sid]) {
+                return category;
+            }
+        }
+    }
+    return nil;
+}
+
 /********************************************************************************/
 #pragma mark - OTCalloutViewControllerDelegate
 
@@ -353,6 +346,11 @@
         OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
         controller.tourOptionsDelegate = self;
         [controller setIsPOIVisible:YES];
+    } else if ([segue.identifier isEqualToString:@"OTGuideDetailsSegue"]) {
+        UINavigationController *navController = (UINavigationController*)segue.destinationViewController;
+        OTGuideDetailsViewController *controller = navController.childViewControllers[0];
+        controller.poi = ((OTCustomAnnotation*)sender).poi;
+        controller.category = [self categoryById:controller.poi.categoryId];
     }
 }
 

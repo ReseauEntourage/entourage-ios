@@ -26,4 +26,36 @@
     return [UIColor colorWithRed: 239.0f/255.0f green: 239.0f/255.0f blue:  244.0f/255.0f alpha:1.0f];
 }
 
++ (UIColor *)poiCategory0 {
+    return [UIColor blackColor];
+}
+
++ (UIColor *)poiCategory1 {
+    return [UIColor colorWithRed:255.0f/255.0f green:197.0f/255.0f blue:127.0f/255.0f alpha:1.0f];
+}
+
++ (UIColor *)poiCategory2 {
+    return [UIColor colorWithRed:202.0f/255.0f green:167.0f/255.0f blue:234.0f/255.0f alpha:1.0f];
+}
+
++ (UIColor *)poiCategory3 {
+    return [UIColor colorWithRed:255.0f/255.0f green:153.0f/255.0f blue:153.0f/255.0f alpha:1.0f];
+}
+
++ (UIColor *)poiCategory4 {
+    return [UIColor colorWithRed:58.0f/255.0f green:215.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
+}
+
++ (UIColor *)poiCategory5 {
+    return [UIColor colorWithRed:191.0f/255.0f green:191.0f/255.0f blue:185.0f/255.0f alpha:1.0f];
+}
+
++ (UIColor *)poiCategory6 {
+    return [UIColor colorWithRed:136.0f/255.0f green:192.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
+}
+
++ (UIColor *)poiCategory7 {
+    return [UIColor colorWithRed:151.0f/255.0f green:215.0f/255.0f blue:145.0f/255.0f alpha:1.0f];
+}
+
 @end
