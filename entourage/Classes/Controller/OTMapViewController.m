@@ -54,6 +54,7 @@
 
 // User
 #import "NSUserDefaults+OT.h"
+#import "NSDictionary+Parsing.h"
 
 
 
@@ -605,7 +606,7 @@ static BOOL didGetAnyData = NO;
             }
         }
         
-        aRenderer.lineWidth = 3;
+        aRenderer.lineWidth = 4;
         return aRenderer;
     }
     return nil;
@@ -726,8 +727,29 @@ static BOOL didGetAnyData = NO;
 
 /********************************************************************************/
 #pragma mark - Segue
+typedef NS_ENUM(NSInteger) {
+    SegueIDCreateMeeting,
+    SegueIDConfirmation,
+    SegueIDSelectedTour,
+    SegueIDPublicTour,
+    SegueIDTourOptions,
+    SegueIDMapOptions,
+    SegueIDTourJoinRequest,
+    SegueIDQuitTour,
+    SegueIDGuideSolidarity
+} SegueID;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSDictionary *seguesDictionary = @{@"OTCreateMeeting" : [NSNumber numberWithInteger:SegueIDCreateMeeting]};
+    
+    NSString *segueIDString = segue.identifier;
+    NSInteger segueID = [[seguesDictionary numberForKey:segueIDString] integerValue];
+    switch (segueID) {
+            
+        default:
+            break;
+    }
+    
     if ([segue.identifier isEqualToString:@"OTCreateMeeting"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTCreateMeetingViewController *controller = (OTCreateMeetingViewController*)navController.topViewController;

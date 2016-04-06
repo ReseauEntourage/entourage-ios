@@ -700,7 +700,7 @@
                         <segue destination="cEE-ZD-h1d" kind="modal" identifier="UserProfileSegue" id="b42-UE-vP1"/>
                         <segue destination="R63-9E-dkT" kind="modal" identifier="QuitTourSegue" id="QCV-ym-9OZ"/>
                         <segue destination="ntx-AK-ysq" kind="modal" identifier="EntouragesSegue" id="NTA-1a-2nr"/>
-                        <segue destination="Yq0-qf-lgm" kind="push" identifier="GuideSegue" customClass="SWRevealViewControllerSeguePushController" id="x8u-KE-dPr"/>
+                        <segue destination="Yq0-qf-lgm" kind="push" identifier="GuideSegue" customClass="SWRevealViewControllerSegueSetController" id="x8u-KE-dPr"/>
                         <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" id="Gfi-xi-1Da"/>
                     </connections>
                 </viewController>
