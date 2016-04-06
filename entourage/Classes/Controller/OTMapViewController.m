@@ -31,6 +31,7 @@
 
 // View
 #import "SVProgressHUD.h"
+#import "OTToursTableView.h"
 
 // Model
 #import "OTUser.h"
@@ -61,14 +62,6 @@
 #define PARIS_LON  2.351828
 #define MAPVIEW_HEIGHT 160.f
 
-#define TAG_ORGANIZATION 1
-#define TAG_TOURTYPE 2
-#define TAG_TIMELOCATION 3
-#define TAG_TOURUSERIMAGE 4
-#define TAG_TOURUSERSCOUNT 5
-#define TAG_STATUSBUTTON 6
-#define TAG_STATUSTEXT 7
-
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 #define TABLEVIEW_BOTTOM_INSET 86.0f
 
@@ -76,7 +69,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate>
+@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate>
 
 // blur effect
 
@@ -88,7 +81,7 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapSegmentedControl;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet OTToursTableView *tableView;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, strong) NSMapTable *drawnTours;
@@ -248,7 +241,7 @@
     [headerView addConstraints:constraint_pos_bottom];
     self.mapView.center = headerView.center;
     self.tableView.tableHeaderView = headerView;
-    self.tableView.delegate = self;
+    self.tableView.toursDelegate = self;
 }
 
 - (void)configureMapView {
@@ -327,6 +320,7 @@ static BOOL didGetAnyData = NO;
                                             }
                                             [self.indicatorView setHidden:YES];
                                             self.tours = closeTours;
+                                            [self.tableView addTours:closeTours];
                                             [self feedMapViewWithTours];
                                             [self.tableView reloadData];
                                         }
@@ -341,7 +335,9 @@ static BOOL didGetAnyData = NO;
                                    success:^(NSMutableArray *userTours) {
                                        [self.indicatorView setHidden:YES];
                                        self.tours = userTours;
+                                       [self.tableView addTours:userTours];
                                        [self feedMapViewWithTours];
+                                       [self.tableView reloadData];
                                    } failure:^(NSError *error) {
                                        [self registerObserver];
                                        [self.indicatorView setHidden:YES];
@@ -873,35 +869,6 @@ static bool isShowingOptions = NO;
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
 }
 
-- (void)doJoinRequest:(UIButton *)senderButton {
-    UITableViewCell *cell = (UITableViewCell*)senderButton.superview.superview;
-    NSInteger index = [self.tableView indexPathForCell:cell].section;
-    OTTour *tour = self.tours[index]; 
-    self.selectedTour = tour;
-    if ([tour.joinStatus isEqualToString:@"not_requested"])
-    {
-        [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
-    }
-    else  if ([tour.joinStatus isEqualToString:@"pending"])
-    {
-        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:nil];
-    }
-    else
-    {
-        [self performSegueWithIdentifier:@"QuitTourSegue" sender:self];
-    }
-}
-
-- (void)doShowProfile:(UIButton *)userButton {
-    UITableViewCell *cell = (UITableViewCell*)userButton.superview.superview;
-    NSInteger index = [self.tableView indexPathForCell:cell].section;
-    OTTour *tour = self.tours[index];
-    
-    self.selectedTour = tour;
-    [self performSegueWithIdentifier:@"UserProfileSegue" sender:nil];
-    
-}
-
 /**************************************************************************************************/
 #pragma mark - Utils
 
@@ -937,60 +904,11 @@ static bool isShowingOptions = NO;
 }
 
 /**************************************************************************************************/
-#pragma mark - Table View
+#pragma mark - Tours Table View
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.tours.count;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return TABLEVIEW_FOOTER_HEIGHT;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)showTourInfo:(OTTour*)tour {
+    self.selectedTour = tour;
     
-    OTTour *tour = self.tours[indexPath.section];
-    NSLog(@"TourID %@ by %@", tour.sid, tour.author.displayName);
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
-    UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
-    organizationLabel.text = tour.organizationName;
-    
-    UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
-    [typeByNameLabel setupWithTypeAndAuthorOfTour:tour];
-    
-    // dateString - location
-    UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
-    [timeLocationLabel setupWithTimeAndLocationOfTour:tour];
-
-    UIButton *userProfileImageButton = [cell viewWithTag:TAG_TOURUSERIMAGE];
-    [userProfileImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
-    [userProfileImageButton setupAsProfilePictureFromUrl:tour.author.avatarUrl];
-    
-    UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
-    noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
-        
-    UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
-    [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-    [statusButton setupWithJoinStatusOfTour:tour];
-    
-    UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
-    [statusLabel setupWithJoinStatusOfTour:tour];
-    
-    return cell;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, TABLEVIEW_FOOTER_HEIGHT)];
-    footerView.backgroundColor = [UIColor clearColor];
-    return footerView;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectedTour = self.tours[indexPath.section];
     if ([self.selectedTour.joinStatus isEqualToString:@"accepted"]) {
         [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
     }
@@ -1000,24 +918,25 @@ static bool isShowingOptions = NO;
     }
 }
 
-#pragma mark - UIScrollViewDelegate
-#define kMapHeaderOffsetY 0.0
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat scrollOffset = scrollView.contentOffset.y;
-    CGRect headerFrame = self.tableView.tableHeaderView.frame;//self.mapView.frame;
+- (void)showUserProfile:(NSNumber*)userId {
+    [self performSegueWithIdentifier:@"UserProfileSegue" sender:userId];
+}
+
+- (void)doJoinRequest:(OTTour*)tour {
+    self.selectedTour = tour;
     
-    if (scrollOffset < 0)
+    if ([tour.joinStatus isEqualToString:@"not_requested"])
     {
-        headerFrame.origin.y = scrollOffset;// MIN(kMapHeaderOffsetY - ((scrollOffset / 3)), 0);
-        headerFrame.size.height = 160 - scrollOffset;
-        
+        [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
     }
-    else //scrolling up
+    else  if ([tour.joinStatus isEqualToString:@"pending"])
     {
-        headerFrame.origin.y = kMapHeaderOffsetY ;//- scrollOffset;
+        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:nil];
     }
-    
-    self.tableView.tableHeaderView.subviews[0].frame = headerFrame;
+    else
+    {
+        [self performSegueWithIdentifier:@"QuitTourSegue" sender:self];
+    }
 }
 
 /**************************************************************************************************/

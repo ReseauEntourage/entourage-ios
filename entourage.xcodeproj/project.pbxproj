@@ -39,6 +39,7 @@
 		2E7064EE1CB273120034C55A /* MapOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E7064ED1CB273120034C55A /* MapOptions.storyboard */; };
 		2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7064F01CB273AE0034C55A /* OTMapOptionsViewController.m */; };
 		2EDA5F031CB3F84300849172 /* OTGuideDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */; };
+		2EDA5F071CB50CEE00849172 /* OTToursTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F061CB50CEE00849172 /* OTToursTableView.m */; };
 		2EDFADD71CAE810800B66026 /* OTAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */; };
 		2EDFADDA1CAE84D000B66026 /* OTAboutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD91CAE84D000B66026 /* OTAboutItem.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
@@ -198,6 +199,8 @@
 		2E7064F01CB273AE0034C55A /* OTMapOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapOptionsViewController.m; sourceTree = "<group>"; };
 		2EDA5F011CB3F84300849172 /* OTGuideDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGuideDetailsViewController.h; sourceTree = "<group>"; };
 		2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGuideDetailsViewController.m; sourceTree = "<group>"; };
+		2EDA5F051CB50CEE00849172 /* OTToursTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToursTableView.h; sourceTree = "<group>"; };
+		2EDA5F061CB50CEE00849172 /* OTToursTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTToursTableView.m; sourceTree = "<group>"; };
 		2EDFADD51CAE810800B66026 /* OTAboutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutTableViewCell.h; sourceTree = "<group>"; };
 		2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutTableViewCell.m; sourceTree = "<group>"; };
 		2EDFADD81CAE84D000B66026 /* OTAboutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutItem.h; sourceTree = "<group>"; };
@@ -436,6 +439,15 @@
 				454C8F5A1C510304001362B2 /* UINavigationController+entourage.m */,
 			);
 			name = Helper;
+			sourceTree = "<group>";
+		};
+		2EDA5F041CB50CB700849172 /* Tour */ = {
+			isa = PBXGroup;
+			children = (
+				2EDA5F051CB50CEE00849172 /* OTToursTableView.h */,
+				2EDA5F061CB50CEE00849172 /* OTToursTableView.m */,
+			);
+			name = Tour;
 			sourceTree = "<group>";
 		};
 		3D6ACAA7335664BE2C3F900F /* Pods */ = {
@@ -777,6 +789,7 @@
 		A8E10FAB19E82A1500DF4A01 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2EDA5F041CB50CB700849172 /* Tour */,
 				DBBE8ACF19E857F000FA218E /* Menu */,
 				A8E10FAC19E82A4800DF4A01 /* OTCustomAnnotation.h */,
 				A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */,
@@ -1153,6 +1166,7 @@
 				456ABD831CA18DB5004A81D6 /* UIButton+entourage.m in Sources */,
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */,
+				2EDA5F071CB50CEE00849172 /* OTToursTableView.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				45ADCACF1CA2A27E0050EB96 /* OTQuitTourViewController.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,

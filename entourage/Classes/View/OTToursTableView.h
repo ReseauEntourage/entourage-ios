@@ -1,0 +1,30 @@
+//
+//  OTToursTableView.h
+//  entourage
+//
+//  Created by Mihai Ionescu on 06/04/16.
+//  Copyright © 2016 OCTO Technology. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@class OTTour;
+
+@protocol OTToursTableViewDelegate <NSObject>
+
+- (void)showTourInfo:(OTTour*)tour;
+- (void)showUserProfile:(NSNumber*)userId;
+- (void)doJoinRequest:(OTTour*)tour;
+
+@end
+
+@interface OTToursTableView : UITableView
+
+@property (nonatomic, weak) id<OTToursTableViewDelegate> toursDelegate;
+
+- (void)addTours:(NSArray*)tours;
+- (void)addTour:(OTTour*)tour;
+- (void)removeTour:(OTTour*)tour;
+- (void)removeAll;
+
+@end

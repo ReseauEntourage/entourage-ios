@@ -439,12 +439,25 @@ NSString *const kTourPoints = @"tour_points";
               success:(void (^)(NSMutableArray *userTours))success
               failure:(void (^)(NSError *error))failure
 {
+    [self toursByUserId:userId withStatus:nil andPageNumber:pageNumber andNumberPerPage:per success:success failure:failure];
+}
+
+- (void)toursByUserId:(NSNumber *)userId
+           withStatus:(NSString *)status
+        andPageNumber:(NSNumber *)pageNumber
+     andNumberPerPage:(NSNumber *)per
+              success:(void (^)(NSMutableArray *userTours))success
+              failure:(void (^)(NSError *error))failure
+{
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_user_tours", @""),
                      kAPIUserRoute,
                      userId,
                      kTours,
                      [[NSUserDefaults standardUserDefaults] currentUser].token];
-    NSDictionary *parameters = @{ @"page" : pageNumber, @"per" : per };
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{ @"page" : pageNumber, @"per" : per }];
+    if (status != nil) {
+        [parameters setObject:status forKey:@"status"];
+    }
     
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url

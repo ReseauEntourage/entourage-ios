@@ -56,7 +56,7 @@
                                         <rect key="frame" x="0.0" y="22" width="328" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="Daf-t7-24q" id="kwc-jO-Zl4">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="51"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="51.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="## Item name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdS-73-BBy">
@@ -91,7 +91,7 @@
                                         <rect key="frame" x="0.0" y="74" width="328" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="0Bk-lW-HXi" id="bPT-U6-cnQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="51"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="51.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logout" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzU-dN-mcx">
@@ -213,7 +213,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="152" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Vi-LCk">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="152" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Vi-LCk" customClass="OTToursTableView">
                                 <rect key="frame" x="-4" y="64" width="328" height="504"/>
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -332,10 +332,6 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="17c-ex-ie8"/>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="GXM-nx-VtR"/>
-                                </connections>
                             </tableView>
                             <segmentedControl hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gsB-s5-FKP">
                                 <rect key="frame" x="111" y="80" width="97" height="29"/>
@@ -435,7 +431,7 @@
                                             <action selector="typeButtonDidTap:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="rKt-bL-iUM"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Uk-IS-rcP">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Uk-IS-rcP">
                                         <rect key="frame" x="110" y="86" width="108" height="85"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1525,8 +1521,8 @@ transmise au créateur.
         <image name="walkActive" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b42-UE-vP1"/>
         <segue reference="xSV-rR-wZy"/>
         <segue reference="a8P-lF-ebs"/>
+        <segue reference="b42-UE-vP1"/>
     </inferredMetricsTieBreakers>
 </document>
