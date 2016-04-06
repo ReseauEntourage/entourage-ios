@@ -167,27 +167,78 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hCF-Ea-4uI" userLabel="Indicator View">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="hCF-Ea-4uI" firstAttribute="centerX" secondItem="e81-tP-cg4" secondAttribute="centerX" id="59h-k4-37k"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ggf-jT-5VJ" secondAttribute="trailing" constant="-4" id="6dU-2g-7i9"/>
                             <constraint firstItem="ggf-jT-5VJ" firstAttribute="top" secondItem="51m-e5-0NN" secondAttribute="bottom" constant="15" id="7Dg-MT-hr5"/>
                             <constraint firstItem="ggf-jT-5VJ" firstAttribute="leading" secondItem="e81-tP-cg4" secondAttribute="leadingMargin" constant="-4" id="HTg-BE-6ZF"/>
                             <constraint firstItem="j2e-z5-qHw" firstAttribute="leading" secondItem="e81-tP-cg4" secondAttribute="leadingMargin" constant="-20" id="Hl2-UG-lhH"/>
                             <constraint firstItem="UJ8-5y-3RH" firstAttribute="top" secondItem="j2e-z5-qHw" secondAttribute="bottom" id="Ngd-lZ-qNC"/>
                             <constraint firstItem="j2e-z5-qHw" firstAttribute="top" secondItem="ggf-jT-5VJ" secondAttribute="bottom" constant="15" id="QI8-fU-uAb"/>
+                            <constraint firstItem="hCF-Ea-4uI" firstAttribute="centerY" secondItem="e81-tP-cg4" secondAttribute="centerY" id="Wiy-7G-8df"/>
                             <constraint firstAttribute="trailingMargin" secondItem="j2e-z5-qHw" secondAttribute="trailing" constant="-20" id="Xdg-b3-RJD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jMb-tR-6p0"/>
                     <connections>
+                        <outlet property="indicatorView" destination="hCF-Ea-4uI" id="luZ-QF-aR0"/>
                         <outlet property="statusSC" destination="ggf-jT-5VJ" id="V1f-Nv-1VP"/>
                         <outlet property="tableView" destination="j2e-z5-qHw" id="C5b-2Z-RNO"/>
+                        <segue destination="vbq-ns-eUN" kind="modal" identifier="UserProfileSegue" id="1Mf-zz-lke"/>
+                        <segue destination="nwQ-gt-ewY" kind="modal" identifier="OTSelectedTourSegue" id="66o-vY-9cz"/>
+                        <segue destination="8WQ-di-H6o" kind="modal" identifier="OTTourJoinRequestSegue" id="kZV-ad-fUS"/>
+                        <segue destination="TcF-p0-k5X" kind="modal" identifier="QuitTourSegue" id="Aeh-Uh-28s"/>
+                        <segue destination="g6j-63-9qQ" kind="modal" identifier="OTPublicTourSegue" id="PSM-UX-CIT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAm-vJ-bDO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2658" y="-616"/>
+            <point key="canvasLocation" x="2755" y="-616"/>
+        </scene>
+        <!--UserProfile-->
+        <scene sceneID="fK4-3m-Lko">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserProfile" id="vbq-ns-eUN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VpV-eS-Mrc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3094.5" y="-832"/>
+        </scene>
+        <!--Tour-->
+        <scene sceneID="j6x-xi-6f9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Tour" id="nwQ-gt-ewY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0xc-6x-nHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3127.5" y="-751"/>
+        </scene>
+        <!--OTTourJoinRequestViewController-->
+        <scene sceneID="Trg-Dt-AGz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="OTTourJoinRequestViewController" id="8WQ-di-H6o" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1yd-89-zFW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3236.5" y="-616"/>
+        </scene>
+        <!--QuitTour-->
+        <scene sceneID="cYr-K8-XHA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="QuitTour" id="TcF-p0-k5X" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cXp-l5-YrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3185.5" y="-531"/>
+        </scene>
+        <!--OTPublicTourViewController-->
+        <scene sceneID="NLq-Af-i7X">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="OTPublicTourViewController" id="g6j-63-9qQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4UT-LX-byg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3223.5" y="-454"/>
         </scene>
     </scenes>
     <resources>

@@ -23,6 +23,8 @@
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
+#define LOAD_MORE_CELLS_DELTA 4
+
 @interface OTToursTableView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tours;
@@ -153,6 +155,13 @@
     
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     [statusLabel setupWithJoinStatusOfTour:tour];
+    
+    //check if we need to load more data
+    if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.tours.count) {
+        if (self.toursDelegate && [self.toursDelegate respondsToSelector:@selector(loadMoreTours)]) {
+            [self.toursDelegate loadMoreTours];
+        }
+    }
     
     return cell;
 }

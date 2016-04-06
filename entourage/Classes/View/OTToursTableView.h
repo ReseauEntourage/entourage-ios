@@ -15,6 +15,8 @@
 - (void)showTourInfo:(OTTour*)tour;
 - (void)showUserProfile:(NSNumber*)userId;
 - (void)doJoinRequest:(OTTour*)tour;
+@optional
+- (void)loadMoreTours;
 
 @end
 

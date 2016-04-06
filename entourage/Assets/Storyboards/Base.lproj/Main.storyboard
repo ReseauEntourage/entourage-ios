@@ -698,16 +698,17 @@
                         <segue destination="ntx-AK-ysq" kind="modal" identifier="EntouragesSegue" id="NTA-1a-2nr"/>
                         <segue destination="Yq0-qf-lgm" kind="push" identifier="GuideSegue" customClass="SWRevealViewControllerSeguePushController" id="x8u-KE-dPr"/>
                         <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" id="Gfi-xi-1Da"/>
+                        <segue destination="7wY-UT-vNw" kind="modal" identifier="OTPublicTourSegue" id="89Z-Ej-cDk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="827" y="45"/>
+            <point key="canvasLocation" x="841" y="63"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lYw-Bx-2B9">
             <objects>
-                <navigationController id="7wY-UT-vNw" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OTPublicTourViewController" id="7wY-UT-vNw" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TCH-dj-mfg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -873,7 +874,7 @@
         <!--Tour Join Request View Controller-->
         <scene sceneID="QK8-h7-B6P">
             <objects>
-                <viewController id="NTX-qP-dnX" customClass="OTTourJoinRequestViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTTourJoinRequestViewController" id="NTX-qP-dnX" customClass="OTTourJoinRequestViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bmj-G7-2n6"/>
                         <viewControllerLayoutGuide type="bottom" id="n9e-dq-pRt"/>
