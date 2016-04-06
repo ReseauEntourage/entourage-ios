@@ -43,7 +43,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une maraude" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVl-d3-s2f">
-                                <rect key="frame" x="38" y="458" width="210" height="21"/>
+                                <rect key="frame" x="38" y="451" width="210" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="iPF-wK-KJe"/>
                                     <constraint firstAttribute="height" constant="21" id="n1v-bC-fs4"/>
@@ -53,20 +53,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0k-nN-D8h" userLabel="POI Button">
-                                <rect key="frame" x="256" y="396" width="48" height="48"/>
+                                <rect key="frame" x="256" y="382" width="48" height="48"/>
                                 <state key="normal" image="solidarity"/>
                                 <connections>
                                     <action selector="doTogglePOI:" destination="KRS-0L-Lvt" eventType="touchUpInside" id="tcZ-Dm-1X2"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Afficher le guide de solidarité" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tym-1e-o0T" userLabel="POI Label">
-                                <rect key="frame" x="42" y="411" width="206" height="18"/>
+                                <rect key="frame" x="42" y="397" width="206" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0f-Bh-fVG" userLabel="Maraude Button">
-                                <rect key="frame" x="256" y="445" width="48" height="48"/>
+                                <rect key="frame" x="256" y="438" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="C5A-HR-p5p"/>
                                     <constraint firstAttribute="height" constant="48" id="wS4-pg-UpG"/>
@@ -80,13 +80,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="EHe-Ul-0Ho" firstAttribute="trailing" secondItem="b4u-bP-vhy" secondAttribute="trailingMargin" constant="8" id="2ae-hg-Vjn"/>
-                            <constraint firstItem="X0f-Bh-fVG" firstAttribute="centerY" secondItem="EHe-Ul-0Ho" secondAttribute="centerY" constant="-56" id="9qU-Dz-VJf"/>
+                            <constraint firstItem="EHe-Ul-0Ho" firstAttribute="top" secondItem="X0f-Bh-fVG" secondAttribute="bottom" constant="8" id="Bg4-Th-oKi"/>
                             <constraint firstItem="tym-1e-o0T" firstAttribute="centerY" secondItem="e0k-nN-D8h" secondAttribute="centerY" id="FPE-ih-BSB"/>
                             <constraint firstItem="tym-1e-o0T" firstAttribute="trailing" secondItem="e0k-nN-D8h" secondAttribute="leading" constant="-8" id="Fhe-i8-3Mx"/>
                             <constraint firstItem="Bki-Tw-5Yw" firstAttribute="top" secondItem="EHe-Ul-0Ho" secondAttribute="bottomMargin" constant="20" id="IIg-qF-V1k"/>
                             <constraint firstItem="X0f-Bh-fVG" firstAttribute="trailing" secondItem="b4u-bP-vhy" secondAttribute="trailingMargin" id="ZzN-PJ-CJX"/>
                             <constraint firstItem="pVl-d3-s2f" firstAttribute="trailing" secondItem="X0f-Bh-fVG" secondAttribute="leading" constant="-8" id="bvU-Aa-f6c"/>
-                            <constraint firstItem="e0k-nN-D8h" firstAttribute="bottom" secondItem="X0f-Bh-fVG" secondAttribute="top" constant="-1" id="mdm-Og-oPb"/>
+                            <constraint firstItem="e0k-nN-D8h" firstAttribute="bottom" secondItem="X0f-Bh-fVG" secondAttribute="top" constant="-8" id="mdm-Og-oPb"/>
                             <constraint firstItem="pVl-d3-s2f" firstAttribute="centerY" secondItem="X0f-Bh-fVG" secondAttribute="centerY" id="r78-Pq-z1u"/>
                             <constraint firstItem="e0k-nN-D8h" firstAttribute="leading" secondItem="X0f-Bh-fVG" secondAttribute="leading" id="wBm-Gh-Dle"/>
                         </constraints>
