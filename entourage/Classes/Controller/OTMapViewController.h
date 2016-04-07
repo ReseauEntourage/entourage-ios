@@ -12,7 +12,24 @@
 #import "OTConfirmationViewController.h"
 
 @class MKMapView;
+@class KPClusteringController;
+@class OTEncounterAnnotation;
 
 @interface OTMapViewController : UIViewController <OTMeetingCalloutViewControllerDelegate, OTCreateMeetingViewControllerDelegate, OTConfirmationViewControllerDelegate>
+
+
+// tour properties
+@property BOOL isTourRunning;
+@property NSString *currentTourType;
+@property (nonatomic, strong) OTTour *tour;
+@property (nonatomic, strong) OTTour *selectedTour;
+
+@property (nonatomic, strong) KPClusteringController *clusteringController;
+
+- (IBAction)zoomToCurrentLocation:(id)sender;
+-(void)refreshMap;
+
+- (void)displayEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view;
+- (void)displayPoiDetails:(MKAnnotationView *)view;
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="69R-LH-AoF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ar7-tr-3dW">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -205,8 +205,8 @@
                                     <constraint firstAttribute="height" constant="56" id="qMV-fL-kxU"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGK-BG-AWp" userLabel="POI Name Label">
-                                <rect key="frame" x="16" y="150" width="0.0" height="0.0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGK-BG-AWp" userLabel="POI Name Label">
+                                <rect key="frame" x="16" y="150" width="288" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -282,6 +282,7 @@
                             <constraint firstItem="YSl-o0-ITN" firstAttribute="leading" secondItem="cKN-AU-VPj" secondAttribute="leadingMargin" constant="-20" id="YUX-s9-Obv"/>
                             <constraint firstItem="SGK-BG-AWp" firstAttribute="top" secondItem="YSl-o0-ITN" secondAttribute="bottom" constant="30" id="cOk-yx-i9P"/>
                             <constraint firstItem="SDG-hQ-vUR" firstAttribute="leading" secondItem="cKN-AU-VPj" secondAttribute="leadingMargin" id="j4o-BG-wPE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="SGK-BG-AWp" secondAttribute="trailing" id="q9m-Rt-sMA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Jy0-W7-dV3" secondAttribute="trailing" id="suV-P0-gTF"/>
                             <constraint firstItem="yVR-N8-kQk" firstAttribute="leading" secondItem="cKN-AU-VPj" secondAttribute="leadingMargin" id="uXd-ll-IFh"/>
                             <constraint firstAttribute="leadingMargin" secondItem="SGK-BG-AWp" secondAttribute="leading" id="zBB-v0-CQa"/>
@@ -306,7 +307,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="center-location.png" width="35" height="35"/>
+        <image name="center-location.png" width="100" height="100"/>
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>

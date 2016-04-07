@@ -543,52 +543,6 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="O1D-oC-idM">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4Y-NY-wTi">
-                                            <rect key="frame" x="257" y="370" width="48" height="48"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="48" id="0Jp-yw-WSZ"/>
-                                                <constraint firstAttribute="width" constant="48" id="Afw-no-Z7v"/>
-                                            </constraints>
-                                            <state key="normal" image="createMaraude"/>
-                                            <connections>
-                                                <action selector="createTour:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9Tv-iS-lOE"/>
-                                            </connections>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une maraude" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N41-3z-QQj">
-                                            <rect key="frame" x="39" y="383" width="210" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="CgV-Z9-lJD"/>
-                                                <constraint firstAttribute="width" constant="210" id="Mjb-Dh-e3t"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                            <color key="textColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbv-4S-bkl" userLabel="POI Button">
-                                            <rect key="frame" x="257" y="314" width="48" height="48"/>
-                                            <state key="normal" image="solidarity"/>
-                                            <connections>
-                                                <action selector="showPOI:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="VDT-oo-YVp"/>
-                                            </connections>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Afficher le guide de solidarité" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfa-Rt-foB" userLabel="POI Label">
-                                            <rect key="frame" x="43" y="329" width="206" height="18"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                            <color key="textColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="W4Y-NY-wTi" firstAttribute="centerY" secondItem="N41-3z-QQj" secondAttribute="centerY" id="1SO-xd-T8o"/>
-                                        <constraint firstAttribute="trailing" secondItem="W4Y-NY-wTi" secondAttribute="trailing" constant="15" id="D36-5I-6Mm"/>
-                                        <constraint firstItem="Jfa-Rt-foB" firstAttribute="trailing" secondItem="Bbv-4S-bkl" secondAttribute="leading" constant="-8" id="DLB-Vz-MUc"/>
-                                        <constraint firstAttribute="bottom" secondItem="W4Y-NY-wTi" secondAttribute="bottom" constant="86" id="E7d-UB-QIy"/>
-                                        <constraint firstItem="W4Y-NY-wTi" firstAttribute="leading" secondItem="N41-3z-QQj" secondAttribute="trailing" constant="8" id="N1f-zt-Xhv"/>
-                                        <constraint firstItem="Jfa-Rt-foB" firstAttribute="centerY" secondItem="Bbv-4S-bkl" secondAttribute="centerY" id="bHr-Ud-QQK"/>
-                                        <constraint firstItem="Bbv-4S-bkl" firstAttribute="bottom" secondItem="W4Y-NY-wTi" secondAttribute="top" constant="-8" id="fEQ-Wd-reX"/>
-                                        <constraint firstItem="Bbv-4S-bkl" firstAttribute="trailing" secondItem="O1D-oC-idM" secondAttribute="trailing" constant="-15" id="yIQ-s8-Scz"/>
-                                    </constraints>
                                 </view>
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
@@ -614,7 +568,7 @@
                                     <action selector="launcherTour:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Jek-KM-xp1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVf-Bh-vdD">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVf-Bh-vdD">
                                 <rect key="frame" x="250" y="422" width="62" height="62"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -629,7 +583,7 @@
                                     <action selector="stopTour:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Zi7-4z-uHY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc9-kH-YQ7">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc9-kH-YQ7">
                                 <rect key="frame" x="250" y="494" width="62" height="62"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -675,8 +629,6 @@
                         <outlet property="blurEffect" destination="x5D-lh-QtL" id="j9n-Wq-iHK"/>
                         <outlet property="carButton" destination="6Ny-H7-fvx" id="VB1-yk-3WB"/>
                         <outlet property="createEncounterButton" destination="Kc9-kH-YQ7" id="q2Y-Ck-e7b"/>
-                        <outlet property="createTourLabel" destination="N41-3z-QQj" id="JYU-ep-PVo"/>
-                        <outlet property="createTourOnBlurButton" destination="W4Y-NY-wTi" id="59Z-CL-Xpq"/>
                         <outlet property="feetButton" destination="ypF-iS-zfd" id="eP5-Ob-qw5"/>
                         <outlet property="indicatorView" destination="FLr-cF-t8Z" id="LUz-Z1-DVR"/>
                         <outlet property="launcherButton" destination="uRg-cj-T9Q" id="oSp-ac-Y8Q"/>
@@ -696,7 +648,7 @@
                         <segue destination="cEE-ZD-h1d" kind="modal" identifier="UserProfileSegue" id="b42-UE-vP1"/>
                         <segue destination="R63-9E-dkT" kind="modal" identifier="QuitTourSegue" id="QCV-ym-9OZ"/>
                         <segue destination="ntx-AK-ysq" kind="modal" identifier="EntouragesSegue" id="NTA-1a-2nr"/>
-                        <segue destination="Yq0-qf-lgm" kind="push" identifier="GuideSegue" customClass="SWRevealViewControllerSeguePushController" id="x8u-KE-dPr"/>
+                        <segue destination="Yq0-qf-lgm" kind="modal" identifier="OTGuideDetailsSegue" id="x8u-KE-dPr"/>
                         <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" id="Gfi-xi-1Da"/>
                         <segue destination="7wY-UT-vNw" kind="modal" identifier="OTPublicTourSegue" id="89Z-Ej-cDk"/>
                     </connections>
@@ -1504,7 +1456,6 @@ transmise au créateur.
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>
-        <image name="createMaraude" width="48" height="48"/>
         <image name="distibutive" width="30" height="30"/>
         <image name="distibutiveActive" width="30" height="30"/>
         <image name="medical" width="30" height="30"/>
@@ -1514,7 +1465,6 @@ transmise au créateur.
         <image name="play" width="62" height="62"/>
         <image name="social" width="30" height="30"/>
         <image name="socialActive" width="30" height="30"/>
-        <image name="solidarity" width="48" height="48"/>
         <image name="user" width="100" height="100"/>
         <image name="userSmall" width="35" height="35"/>
         <image name="users" width="22" height="22"/>

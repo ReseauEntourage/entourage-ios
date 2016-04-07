@@ -9,12 +9,12 @@
         <!--Tour Options View Controller-->
         <scene sceneID="TLF-3I-8Si">
             <objects>
-                <viewController id="mpV-Sz-lXL" customClass="OTTourOptionsViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overCurrentContext" id="mpV-Sz-lXL" customClass="OTTourOptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uky-FJ-Jo8"/>
                         <viewControllerLayoutGuide type="bottom" id="Fqo-er-23H"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="yHN-0I-uCY">
+                    <view key="view" alpha="0.88" contentMode="scaleToFill" id="yHN-0I-uCY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

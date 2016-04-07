@@ -85,7 +85,9 @@
 }
 
 - (void)addTour:(OTTour*)tour {
-    if ([self.tours containsObject:tour]) {
+    NSUInteger oldTourIndex = [self.tours indexOfObject:tour];
+    if (oldTourIndex != NSNotFound) {
+        [self.tours replaceObjectAtIndex:oldTourIndex withObject:tour];
         return;
     }
     if (tour.startTime != nil) {

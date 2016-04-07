@@ -21,8 +21,11 @@
 #import "OTGuideViewController.h"
 #import "UIView+entourage.h"
 #import "OTUserViewController.h"
+#import "OTGuideDetailsViewController.h"
 
-//#import "UIViewController+MapView.h"
+#import "OTNewsfeedMapDelegate.h"
+#import "OTGuideMapDelegate.h"
+
 #import "KPAnnotation.h"
 #import "KPClusteringController.h"
 #import "JSBadgeView.h"
@@ -39,10 +42,12 @@
 #import "OTTour.h"
 #import "OTTourPoint.h"
 #import "OTEncounter.h"
+#import "OTPOI.h"
 
 // Service
 #import "OTTourService.h"
 #import "OTAuthService.h"
+#import "OTPOIService.h"
 
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
@@ -73,7 +78,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate>
+@interface OTMapViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate>
 
 // blur effect
 
@@ -88,29 +93,28 @@
 @property (weak, nonatomic) IBOutlet OTToursTableView *tableView;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
-@property (nonatomic, strong) NSMapTable *drawnTours;
+//@property (nonatomic, strong) NSMapTable *drawnTours;
 @property (weak, nonatomic) IBOutlet UIImageView *pointerPin;
+
+@property (nonatomic, strong) OTNewsfeedMapDelegate *newsfeedMapDelegate;
+@property (nonatomic, strong) OTGuideMapDelegate *guideMapDelegate;
 
 // markers
 
 @property (nonatomic, strong) NSMutableArray *encounters;
 @property (nonatomic, strong) WYPopoverController *popover;
 @property (nonatomic) BOOL isRegionSetted;
-@property (nonatomic, strong) KPClusteringController *clusteringController;
 
 // tour
 
 @property (nonatomic, assign) CGPoint mapPoint;
-@property BOOL isTourRunning;
 @property int seconds;
-@property NSString *currentTourType;
-@property (nonatomic, strong) OTTour *tour;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray *locations;
 @property (nonatomic, strong) NSMutableArray *pointsToSend;
 @property (nonatomic, strong) NSMutableArray *closeTours;
 @property (nonatomic, strong) NSDate *start;
-@property (nonatomic, strong) OTTour *selectedTour;
+@property (nonatomic) BOOL isTourListDisplayed;
 
 // tour lifecycle
 
@@ -132,6 +136,12 @@
 @property (nonatomic, strong) NSMutableArray *tours;
 @property (nonatomic, strong) OTToursTableView *toursTableView;
 
+// POI
+
+@property (nonatomic, strong) NSArray *categories;
+@property (nonatomic, strong) NSArray *pois;
+@property (nonatomic, strong) NSMutableArray *markers;
+
 @end
 
 @implementation OTMapViewController
@@ -147,7 +157,14 @@
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
     //self.closeTours = [NSMutableArray new];
-    self.drawnTours = [NSMapTable new];
+    //self.drawnTours = [NSMapTable new];
+    self.markers = [NSMutableArray new];
+    
+    self.newsfeedMapDelegate = [[OTNewsfeedMapDelegate alloc] init];
+    self.newsfeedMapDelegate.mapController = self;
+    
+    self.guideMapDelegate = [[OTGuideMapDelegate alloc] init];
+    self.guideMapDelegate.mapController = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -157,6 +174,7 @@
     self.mapSegmentedControl.layer.cornerRadius = 4;
     [self configureTableView];
     
+    [self switchToNewsfeed];
     [self showToursMap];
     
 }
@@ -196,6 +214,27 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 	[self refreshMap];
 	[[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
+}
+
+- (void)switchToNewsfeed {
+    self.newsfeedMapDelegate.isActive = YES;
+    self.guideMapDelegate.isActive = NO;
+    self.mapView.delegate = self.newsfeedMapDelegate;
+    self.mapSegmentedControl.hidden = NO;
+    [self clearMap];
+    [self.newsfeedMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
+    if (self.isTourListDisplayed) {
+        [self showToursList];
+    }
+}
+
+- (void)switchToGuide {
+    self.newsfeedMapDelegate.isActive = NO;
+    self.guideMapDelegate.isActive = YES;
+    self.mapView.delegate = self.guideMapDelegate;
+    [self clearMap];
+    [self showToursMap];
+    [self.guideMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
 }
 
 /**************************************************************************************************/
@@ -257,7 +296,7 @@
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
 
    	self.mapView.showsUserLocation = YES;
-    self.mapView.delegate = self;
+    //self.mapView.delegate = self;
     [self zoomToCurrentLocation:nil];
     
     UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
@@ -315,25 +354,34 @@
 
 static BOOL didGetAnyData = NO;
 - (void)refreshMap {
+    if (self.newsfeedMapDelegate.isActive) {
+        [self getTourList];
+    }
+    else {
+        [self getPOIList];
+    }
+}
+
+- (void)getTourList {
     [[OTTourService new] toursAroundCoordinate:self.mapView.centerCoordinate
                                          limit:@10
                                       distance:@100//*[NSNumber numberWithDouble:[self mapHeight]]
                                        success:^(NSMutableArray *closeTours)
-                                        {
-                                            if (closeTours.count && !didGetAnyData) {
-                                                [self showToursList];
-                                                didGetAnyData = YES;
-                                            }
-                                            [self.indicatorView setHidden:YES];
-                                            self.tours = closeTours;
-                                            [self.tableView addTours:closeTours];
-                                            [self feedMapViewWithTours];
-                                            [self.tableView reloadData];
-                                        }
+     {
+         if (closeTours.count && !didGetAnyData) {
+             [self showToursList];
+             didGetAnyData = YES;
+         }
+         [self.indicatorView setHidden:YES];
+         self.tours = closeTours;
+         [self.tableView addTours:closeTours];
+         [self feedMapViewWithTours];
+         [self.tableView reloadData];
+     }
                                        failure:^(NSError *error) {
-                                            [self registerObserver];
-                                            [self.indicatorView setHidden:YES];
-                                        }];
+                                           [self registerObserver];
+                                           [self.indicatorView setHidden:YES];
+                                       }];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"user_tours_only"]) {
         [[OTTourService new] toursByUserId:[[NSUserDefaults standardUserDefaults] currentUser].sid
                             withPageNumber:@1
@@ -351,32 +399,54 @@ static BOOL didGetAnyData = NO;
     }
 }
 
-- (CLLocationDistance)mapHeight {
-	MKMapPoint mpTopRight = MKMapPointMake(self.mapView.visibleMapRect.origin.x + self.mapView.visibleMapRect.size.width,
-	                                       self.mapView.visibleMapRect.origin.y);
-
-	MKMapPoint mpBottomRight = MKMapPointMake(self.mapView.visibleMapRect.origin.x + self.mapView.visibleMapRect.size.width,
-	                                          self.mapView.visibleMapRect.origin.y + self.mapView.visibleMapRect.size.height);
-
-	CLLocationDistance vDist = MKMetersBetweenMapPoints(mpTopRight, mpBottomRight) / 1000.f;
-
-	return vDist;
+- (void)getPOIList {
+    [[OTPoiService new] poisAroundCoordinate:self.mapView.centerCoordinate
+                                    distance:[self mapHeight]
+                                     success:^(NSArray *categories, NSArray *pois)
+     {
+         [self.indicatorView setHidden:YES];
+         
+         self.categories = categories;
+         self.pois = pois;
+         
+         [self feedMapViewWithPoiArray:pois];
+     }
+                                     failure:^(NSError *error) {
+                                         [self registerObserver];
+                                         [self.indicatorView setHidden:YES];
+                                     }];
 }
 
 - (void)feedMapViewWithEncounters {
-	NSMutableArray *annotations = [NSMutableArray new];
+    if (self.newsfeedMapDelegate.isActive) {
+        NSMutableArray *annotations = [NSMutableArray new];
 
-	for (OTEncounter *encounter in self.encounters) {
-		OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
-		[annotations addObject:pointAnnotation];
-	}
-    
-    [self.clusteringController setAnnotations:annotations];
+        for (OTEncounter *encounter in self.encounters) {
+            OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
+            [annotations addObject:pointAnnotation];
+        }
+        
+        [self.clusteringController setAnnotations:annotations];
+    }
 }
 
 - (void)feedMapViewWithTours {
-    for (OTTour *tour in self.tours) {
-        [self drawTour:tour];
+    if (self.newsfeedMapDelegate.isActive) {
+        for (OTTour *tour in self.tours) {
+            [self drawTour:tour];
+        }
+    }
+}
+
+- (void)feedMapViewWithPoiArray:(NSArray *)array {
+    if (self.guideMapDelegate.isActive) {
+        for (OTPoi *poi in array) {
+            OTCustomAnnotation *annotation = [[OTCustomAnnotation alloc] initWithPoi:poi];
+            if (![self.markers containsObject:annotation]) {
+                [self.markers addObject:annotation];
+            }
+        }
+        [self.clusteringController setAnnotations:self.markers];
     }
 }
 
@@ -387,11 +457,8 @@ static BOOL didGetAnyData = NO;
         coords[count++] = point.toLocation.coordinate;
     }
     MKPolyline *polyline = [MKPolyline polylineWithCoordinates:coords count:[tour.tourPoints count]];
-    //OTTour *t = [self.drawnTours objectForKey:polyline];
-    //if (t == nil) {
-        [self.drawnTours setObject:tour forKey:polyline];
-        [self.mapView addOverlay:polyline];
-    //}
+    [self.newsfeedMapDelegate.drawnTours setObject:tour forKey:polyline];
+    [self.mapView addOverlay:polyline];
 }
 
 - (NSString *)encounterAnnotationToString:(OTEncounterAnnotation *)annotation {
@@ -415,6 +482,35 @@ static BOOL didGetAnyData = NO;
     
 //    [controller configureWithEncouter:encounter];
 	//[Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{ @"encounter_id" : encounterAnnotation.encounter.sid }];
+}
+
+- (void)displayPoiDetails:(MKAnnotationView *)view {
+    KPAnnotation *kpAnnotation = view.annotation;
+    __block OTCustomAnnotation *annotation = nil;
+    [[kpAnnotation annotations] enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[OTCustomAnnotation class]]) {
+            annotation = obj;
+            *stop = YES;
+        }
+    }];
+    
+    if (annotation == nil) return;
+    
+    [Flurry logEvent:@"Open_POI_From_Map" withParameters:@{ @"poi_id" : annotation.poi.sid }];
+    
+    [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation];
+}
+
+- (CLLocationDistance)mapHeight {
+    MKMapPoint mpTopRight = MKMapPointMake(self.mapView.visibleMapRect.origin.x + self.mapView.visibleMapRect.size.width,
+                                           self.mapView.visibleMapRect.origin.y);
+    
+    MKMapPoint mpBottomRight = MKMapPointMake(self.mapView.visibleMapRect.origin.x + self.mapView.visibleMapRect.size.width,
+                                              self.mapView.visibleMapRect.origin.y + self.mapView.visibleMapRect.size.height);
+    
+    CLLocationDistance vDist = MKMetersBetweenMapPoints(mpTopRight, mpBottomRight) / 1000.f;
+    
+    return vDist;
 }
 
 - (void)eachSecond {
@@ -462,63 +558,22 @@ static BOOL didGetAnyData = NO;
 
 - (void)hideBlurEffect {
     [self.blurEffect setHidden:YES];
-    
+}
+
+- (OTPoiCategory*)categoryById:(NSNumber*)sid {
+    if (sid == nil) return nil;
+    for (OTPoiCategory* category in self.categories) {
+        if (category.sid != nil) {
+            if ([category.sid isEqualToNumber:sid]) {
+                return category;
+            }
+        }
+    }
+    return nil;
 }
 
 /********************************************************************************/
-#pragma mark - MKMapViewDelegate
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation> )annotation {
-    MKAnnotationView *annotationView = nil;
-    
-    if ([annotation isKindOfClass:[KPAnnotation class]]) {
-        KPAnnotation *kingpinAnnotation = (KPAnnotation *)annotation;
-        
-        if ([kingpinAnnotation isCluster]) {
-            JSBadgeView *badgeView;
-            annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterClusterAnnotationIdentifier];
-            if (!annotationView) {
-                annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEncounterClusterAnnotationIdentifier];
-                annotationView.canShowCallout = NO;
-                annotationView.image = [UIImage imageNamed:@"report"];
-                badgeView = [[JSBadgeView alloc] initWithParentView:annotationView alignment:JSBadgeViewAlignmentBottomCenter];
-            }
-            else {
-                for (UIView *subview in annotationView.subviews) {
-                    if ([subview isKindOfClass:JSBadgeView.class]) {
-                        badgeView = (JSBadgeView *)subview;
-                    }
-                }
-            }
-            badgeView.badgeText = [NSString stringWithFormat:@"%lu", (unsigned long)kingpinAnnotation.annotations.count];
-        }
-        else {
-            id <MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
-            if ([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]]) {
-                annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterAnnotationIdentifier];
-                if (!annotationView) {
-                    annotationView = ((OTEncounterAnnotation *)simpleAnnontation).annotationView;
-                }
-                annotationView.annotation = simpleAnnontation;
-            }
-        }
-        annotationView.canShowCallout = YES;
-    }
-    
-    
-    return annotationView;
-}
-
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-	[self refreshMap];
-}
-
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-	if (!self.isRegionSetted) {
-		self.isRegionSetted = YES;
-		[self zoomToCurrentLocation:nil];
-	}
-}
+#pragma mark - Location Manager
 
 - (void)startLocationUpdates {
     if (self.locationManager == nil) {
@@ -532,23 +587,6 @@ static BOOL didGetAnyData = NO;
     self.locationManager.distanceFilter = 5; // meters
     
     [self.locationManager startUpdatingLocation];
-}
-
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    [mapView deselectAnnotation:view.annotation animated:NO];
-    
-    if ([view.annotation isKindOfClass:[KPAnnotation class]]) {
-        KPAnnotation *kingpinAnnotation = (KPAnnotation *)view.annotation;
-        if ([kingpinAnnotation isCluster]) {
-            // Do nothing
-        }
-        else {
-            id <MKAnnotation> simpleAnnontation = [kingpinAnnotation.annotations anyObject];
-            if ([simpleAnnontation isKindOfClass:[OTEncounterAnnotation class]]) {
-                [self displayEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view];
-            }
-        }
-    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -576,7 +614,9 @@ static BOOL didGetAnyData = NO;
             
                 if (self.isTourRunning) {
                     self.tour.distance += [newLocation distanceFromLocation:self.locations.lastObject];
-                    [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
+                    if (self.newsfeedMapDelegate.isActive) {
+                        [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
+                    }
                     OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:newLocation];
                     [self.tour.tourPoints addObject:tourPoint];
                     [self.pointsToSend addObject:tourPoint];
@@ -587,40 +627,6 @@ static BOOL didGetAnyData = NO;
             [self.locations addObject:newLocation];
         }
     }
-}
-
-- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
-    if ([overlay isKindOfClass:[MKPolyline class]]) {
-        MKPolyline *polyline = (MKPolyline *) overlay;
-        MKPolylineRenderer *aRenderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
-        
-        OTTour *tour = [self.drawnTours objectForKey:polyline];
-        if ([tour.tourType isEqualToString:@"medical"]) {
-            aRenderer.strokeColor = [UIColor redColor];
-        }
-        else if ([tour.tourType isEqualToString:@"barehands"]) {
-            aRenderer.strokeColor = [UIColor blueColor];
-        }
-        else if ([tour.tourType isEqualToString:@"alimentary"]) {
-            aRenderer.strokeColor = [UIColor greenColor];
-        }
-        
-        if (self.isTourRunning && tour == nil) {
-            if ([self.currentTourType isEqualToString:@"medical"]) {
-                aRenderer.strokeColor = [UIColor redColor];
-            }
-            else if ([self.currentTourType isEqualToString:@"barehands"]) {
-                aRenderer.strokeColor = [UIColor blueColor];
-            }
-            else if ([self.currentTourType isEqualToString:@"alimentary"]) {
-                aRenderer.strokeColor = [UIColor greenColor];
-            }
-        }
-        
-        aRenderer.lineWidth = 4;
-        return aRenderer;
-    }
-    return nil;
 }
 
 - (void)clearMap {
@@ -684,6 +690,8 @@ static BOOL didGetAnyData = NO;
 - (void)resumeTour {
     [self hideBlurEffect];
     self.isTourRunning = YES;
+    self.stopButton.hidden = NO;
+    self.createEncounterButton.hidden = NO;
 }
 
 /********************************************************************************/
@@ -700,7 +708,11 @@ static BOOL didGetAnyData = NO;
 
 - (void)createEncounter {
     [self dismissViewControllerAnimated:NO completion:^{
-        [self performSegueWithIdentifier:@"OTCreateMeeting" sender:nil];
+        if (self.newsfeedMapDelegate.isActive) {
+            [self performSegueWithIdentifier:@"OTCreateMeeting" sender:nil];
+        } else {
+            [self showNewEncounterStartDialogFromGuide];
+        }
     }];
 }
 
@@ -713,13 +725,22 @@ static BOOL didGetAnyData = NO;
 
 - (void)createTour {
     [self dismissViewControllerAnimated:NO completion:^{
-        [self showNewTourStart];
+        if (self.newsfeedMapDelegate.isActive) {
+            [self showNewTourStart];
+        } else {
+            [self showNewTourStartDialogFromGuide];
+        }
     }];
 }
 
 - (void)togglePOI {
     [self dismissViewControllerAnimated:NO completion:^{
-        [self performSegueWithIdentifier:@"GuideSegue" sender:nil];
+        //[self performSegueWithIdentifier:@"GuideSegue" sender:nil];
+        if (self.newsfeedMapDelegate.isActive) {
+            [self switchToGuide];
+        } else {
+            [self switchToNewsfeed];
+        }
     }];
 }
 
@@ -790,16 +811,15 @@ typedef NS_ENUM(NSInteger) {
         controller.tour = self.selectedTour;
     } else if ([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
         OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
-        controller.view.backgroundColor = [UIColor colorWithWhite:1.f alpha:.88f];
-        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.tourOptionsDelegate = self;
+        [controller setIsPOIVisible:self.guideMapDelegate.isActive];
         if (!CGPointEqualToPoint(self.mapPoint, CGPointZero) ) {
             controller.c2aPoint = self.mapPoint;
         }
     } else if ([segue.identifier isEqualToString:@"OTMapOptionsSegue"]) {
         OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;;
         controller.mapOptionsDelegate = self;
-        [controller setIsPOIVisible:NO];
+        [controller setIsPOIVisible:self.guideMapDelegate.isActive];
     } else if ([segue.identifier isEqualToString:@"OTTourJoinRequestSegue"]) {
         OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
         controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
@@ -816,6 +836,11 @@ typedef NS_ENUM(NSInteger) {
         UINavigationController *navController = segue.destinationViewController;
         OTGuideViewController *controller = (OTGuideViewController *)navController.childViewControllers[0];
         [controller setIsTourRunning:self.isTourRunning];
+    } else if ([segue.identifier isEqualToString:@"OTGuideDetailsSegue"]) {
+        UINavigationController *navController = (UINavigationController*)segue.destinationViewController;
+        OTGuideDetailsViewController *controller = navController.childViewControllers[0];
+        controller.poi = ((OTCustomAnnotation*)sender).poi;
+        controller.category = [self categoryById:controller.poi.categoryId];
     }
 }
 
@@ -908,6 +933,7 @@ static bool isShowingOptions = NO;
         self.mapView.frame = mapFrame;
         self.tableView.tableHeaderView.frame = mapFrame;
         self.launcherButton.hidden = YES;
+        self.createEncounterButton.hidden = YES;
         self.mapSegmentedControl.hidden = YES;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
 
@@ -1008,8 +1034,8 @@ static bool isShowingOptions = NO;
 
 - (void)showToursList {
     [self.blurEffect setHidden:YES];
-    self.launcherButton.hidden = NO;
-    self.stopButton.hidden = YES;
+    
+    self.isTourListDisplayed = YES;
 
     [UIView animateWithDuration:0.2 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
@@ -1023,15 +1049,18 @@ static bool isShowingOptions = NO;
 
 - (void)showToursMap {
     [self.blurEffect setHidden:YES];
-    self.launcherButton.hidden = !self.createEncounterButton.hidden;
-
+    
+    if (self.newsfeedMapDelegate.isActive) {
+        self.isTourListDisplayed = NO;
+    }
+    
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
     [self.mapSegmentedControl setSelectedSegmentIndex:0];
     [UIView animateWithDuration:0.25 animations:^(void) {
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
-        self.mapSegmentedControl.hidden = NO;
+        self.mapSegmentedControl.hidden = self.guideMapDelegate.isActive;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
 
     }];
@@ -1072,7 +1101,6 @@ static bool isShowingOptions = NO;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
 
     }];
-
 }
 
 #pragma mark 15.2 New Tour - on going
@@ -1084,6 +1112,7 @@ static bool isShowingOptions = NO;
         self.mapSegmentedControl.hidden = NO;
         self.launcherButton.hidden = YES;
         self.launcherView.hidden = YES;
+        self.createEncounterButton.hidden = NO;
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
@@ -1091,8 +1120,32 @@ static bool isShowingOptions = NO;
     
 }
 
+#pragma mark - Guide
 
+-(void)showNewTourStartDialogFromGuide {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"poi_create_tour_alert", @"") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:cancelAction];
+    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self switchToNewsfeed];
+    }];
+    [alert addAction:quitAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
-
+-(void)showNewEncounterStartDialogFromGuide {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"poi_create_encounter_alert", @"") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:cancelAction];
+    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self switchToNewsfeed];
+    }];
+    [alert addAction:quitAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 @end

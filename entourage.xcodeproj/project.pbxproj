@@ -40,6 +40,9 @@
 		2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7064F01CB273AE0034C55A /* OTMapOptionsViewController.m */; };
 		2EDA5F031CB3F84300849172 /* OTGuideDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */; };
 		2EDA5F071CB50CEE00849172 /* OTToursTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F061CB50CEE00849172 /* OTToursTableView.m */; };
+		2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */; };
+		2EDA5F0E1CB67FFE00849172 /* OTNewsfeedMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F0D1CB67FFE00849172 /* OTNewsfeedMapDelegate.m */; };
+		2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F101CB68BE200849172 /* OTGuideMapDelegate.m */; };
 		2EDFADD71CAE810800B66026 /* OTAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */; };
 		2EDFADDA1CAE84D000B66026 /* OTAboutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD91CAE84D000B66026 /* OTAboutItem.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
@@ -201,6 +204,12 @@
 		2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGuideDetailsViewController.m; sourceTree = "<group>"; };
 		2EDA5F051CB50CEE00849172 /* OTToursTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToursTableView.h; sourceTree = "<group>"; };
 		2EDA5F061CB50CEE00849172 /* OTToursTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTToursTableView.m; sourceTree = "<group>"; };
+		2EDA5F081CB67F3500849172 /* OTBaseMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTBaseMapDelegate.h; sourceTree = "<group>"; };
+		2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTBaseMapDelegate.m; sourceTree = "<group>"; };
+		2EDA5F0C1CB67FFE00849172 /* OTNewsfeedMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTNewsfeedMapDelegate.h; sourceTree = "<group>"; };
+		2EDA5F0D1CB67FFE00849172 /* OTNewsfeedMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTNewsfeedMapDelegate.m; sourceTree = "<group>"; };
+		2EDA5F0F1CB68BE200849172 /* OTGuideMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGuideMapDelegate.h; sourceTree = "<group>"; };
+		2EDA5F101CB68BE200849172 /* OTGuideMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGuideMapDelegate.m; sourceTree = "<group>"; };
 		2EDFADD51CAE810800B66026 /* OTAboutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutTableViewCell.h; sourceTree = "<group>"; };
 		2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutTableViewCell.m; sourceTree = "<group>"; };
 		2EDFADD81CAE84D000B66026 /* OTAboutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutItem.h; sourceTree = "<group>"; };
@@ -448,6 +457,19 @@
 				2EDA5F061CB50CEE00849172 /* OTToursTableView.m */,
 			);
 			name = Tour;
+			sourceTree = "<group>";
+		};
+		2EDA5F0B1CB67F4000849172 /* MapDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				2EDA5F081CB67F3500849172 /* OTBaseMapDelegate.h */,
+				2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */,
+				2EDA5F0C1CB67FFE00849172 /* OTNewsfeedMapDelegate.h */,
+				2EDA5F0D1CB67FFE00849172 /* OTNewsfeedMapDelegate.m */,
+				2EDA5F0F1CB68BE200849172 /* OTGuideMapDelegate.h */,
+				2EDA5F101CB68BE200849172 /* OTGuideMapDelegate.m */,
+			);
+			name = MapDelegate;
 			sourceTree = "<group>";
 		};
 		3D6ACAA7335664BE2C3F900F /* Pods */ = {
@@ -802,6 +824,7 @@
 		DBBE8ACB19E83CCE00FA218E /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				2EDA5F0B1CB67F4000849172 /* MapDelegate */,
 				6B4930C819A773C500DA7EE0 /* OTMapViewController.h */,
 				6B4930C919A773C500DA7EE0 /* OTMapViewController.m */,
 				45ADCAD01CA321380050EB96 /* UIViewController+MapView.h */,
@@ -1147,7 +1170,9 @@
 				454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */,
 				454C8F581C501B31001362B2 /* UIView+entourage.m in Sources */,
 				DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */,
+				2EDA5F0E1CB67FFE00849172 /* OTNewsfeedMapDelegate.m in Sources */,
 				0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */,
+				2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */,
 				6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */,
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
@@ -1177,6 +1202,7 @@
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				4508AE311C7F924B00EDAC1B /* OTTourOptionsViewController.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,
+				2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */,
 				45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */,
 				4559405E1C5F6D480099A8EE /* OTRequestOperationManager.m in Sources */,
 				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,
