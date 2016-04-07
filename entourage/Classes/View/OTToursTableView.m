@@ -85,9 +85,18 @@
 }
 
 - (void)addTour:(OTTour*)tour {
-    for (OTTour* internalTour in self.tours) {
-        if ([internalTour.sid isEqualToNumber:tour.sid]) {
-            return;
+    if ([self.tours containsObject:tour]) {
+        return;
+    }
+    if (tour.startTime != nil) {
+        for (NSUInteger i = 0; i < [self.tours count]; i++) {
+            OTTour* internalTour = self.tours[i];
+            if (internalTour.startTime != nil) {
+                if ([internalTour.startTime compare:tour.startTime] == NSOrderedAscending) {
+                    [self.tours insertObject:tour atIndex:i];
+                    return;
+                }
+            }
         }
     }
     [self.tours addObject:tour];

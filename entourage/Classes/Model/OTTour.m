@@ -136,6 +136,9 @@ NSString *const kEncountersCount = @"encounter_count";
     dictionary[kTourStatus] = self.status;
     dictionary[kTourDistance] = @(self.distance);
     dictionary[kTourStartTime] = self.startTime;
+    if (self.endTime != nil) {
+        dictionary[ktourEndTime] = self.endTime;
+    }
     
     return dictionary;
 }
@@ -145,6 +148,16 @@ NSString *const kEncountersCount = @"encounter_count";
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
     return dictionary;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[self class]]) {
+        OTTour *otherTour = (OTTour*)object;
+        if (otherTour.sid != nil) {
+            return [self.sid isEqualToValue:((OTTour*)object).sid];
+        }
+    }
+    return false;
 }
 
 @end

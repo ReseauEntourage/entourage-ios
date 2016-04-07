@@ -64,6 +64,7 @@
 #define PARIS_LAT 48.856578
 #define PARIS_LON  2.351828
 #define MAPVIEW_HEIGHT 160.f
+#define LOCATION_MIN_DISTANCE 10.f
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 #define TABLEVIEW_BOTTOM_INSET 86.0f
@@ -142,7 +143,7 @@
 	[super viewDidLoad];
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
 
-    
+    self.locations = [NSMutableArray new];
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
     //self.closeTours = [NSMutableArray new];
@@ -423,18 +424,22 @@ static BOOL didGetAnyData = NO;
     [[OTTourService new]
          sendTour:self.tour
          withSuccess:^(OTTour *sentTour) {
-            self.tour.sid = sentTour.sid;
-            self.tour.distance = 0.0;
-            
-            self.pointerPin.hidden = NO;
-            self.launcherView.hidden = YES;
-            self.stopButton.hidden = NO;
-            self.createEncounterButton.hidden = NO;
-            
-            self.seconds = 0;
-            self.locations = [NSMutableArray new];
-            self.isTourRunning = YES;
-//            self.start = [NSDate date];
+             self.tour.sid = sentTour.sid;
+             self.tour.distance = 0.0;
+             
+             self.pointerPin.hidden = NO;
+             self.launcherView.hidden = YES;
+             self.stopButton.hidden = NO;
+             self.createEncounterButton.hidden = NO;
+             
+             self.seconds = 0;
+             self.locations = [NSMutableArray new];
+             self.isTourRunning = YES;
+             
+             if ([self.pointsToSend count] > 0) {
+                 [self performSelector:@selector(sendTourPoints:) withObject:self.pointsToSend afterDelay:0.0];
+             }
+             
         } failure:^(NSError *error) {
             NSLog(@"%@",[error localizedDescription]);
         }
@@ -442,10 +447,11 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoint {
+    __block NSArray *sentPoints = [NSArray arrayWithArray:tourPoint];
     [[OTTourService new] sendTourPoint:tourPoint
                             withTourId:self.tour.sid
                            withSuccess:^(OTTour *updatedTour) {
-                           
+                               [self.pointsToSend removeObjectsInArray:sentPoints];
                            }
                                failure:^(NSError *error) {
                                    NSLog(@"%@",[error localizedDescription]);
@@ -550,7 +556,13 @@ static BOOL didGetAnyData = NO;
         NSDate *eventDate = newLocation.timestamp;
         NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
         
-        if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20) {
+        double distance = 1000.0f;
+        if ([self.locations count] > 0) {
+            CLLocation *previousLocation = self.locations.lastObject;
+            distance = [newLocation distanceFromLocation:previousLocation];
+        }
+        
+        if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20 && fabs(distance) > LOCATION_MIN_DISTANCE) {
             
             if (self.locations.count > 0) {
             
@@ -568,7 +580,6 @@ static BOOL didGetAnyData = NO;
                     [self.tour.tourPoints addObject:tourPoint];
                     [self.pointsToSend addObject:tourPoint];
                     [self sendTourPoints:self.pointsToSend];
-                    [self.pointsToSend removeLastObject];
                 }
             }
         
@@ -766,8 +777,7 @@ typedef NS_ENUM(NSInteger) {
         controller.delegate = self;
         self.isTourRunning = NO;
         [controller configureWithTour:self.tour
-                   andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]
-                          andDuration:[[NSDate date] timeIntervalSinceDate:self.start]];
+                   andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]];
     } else if ([segue.identifier isEqualToString:@"OTSelectedTour"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTTourViewController *controller = (OTTourViewController *)navController.topViewController;
@@ -879,6 +889,12 @@ static bool isShowingOptions = NO;
 
 - (IBAction)startTour:(id)sender {
     self.tour = [[OTTour alloc] initWithTourType:[self selectedTourType] andVehicleType:[self selectedVehiculeType]];
+    [self.pointsToSend removeAllObjects];
+    if ([self.locations count] > 0) {
+        OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:self.locations.lastObject];
+        [self.tour.tourPoints addObject:tourPoint];
+        [self.pointsToSend addObject:tourPoint];
+    }
     [self sendTour];
     [self showNewTourOnGoing];
 }

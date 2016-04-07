@@ -54,16 +54,17 @@
 /**************************************************************************************************/
 #pragma mark - Public Methods
 
-- (void)configureWithTour:(OTTour *)currentTour andEncountersCount:(NSNumber *)encountersCount andDuration:(NSTimeInterval)duration {
+- (void)configureWithTour:(OTTour *)currentTour andEncountersCount:(NSNumber *)encountersCount {
     self.tour = currentTour;
     self.encountersCount = encountersCount;
-    self.duration = duration;
+    self.duration = [[NSDate date] timeIntervalSinceDate:self.tour.startTime];
 }
 
 /**************************************************************************************************/
 #pragma mark - Private methods
 
 - (void)closeTour {
+    self.tour.endTime = [NSDate date];
     [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
         if ([self.delegate respondsToSelector:@selector(tourSent)]) {
             [self.delegate tourSent];

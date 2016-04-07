@@ -175,7 +175,7 @@ typedef NS_ENUM(NSInteger){
         currentPagination.isLoading = YES;
     }
     
-    NSLog(@"getting tours with status %@ ...", statusString);
+    //NSLog(@"getting tours with status %@ ...", statusString);
     __block NSInteger requestedStatus = entourageStatus;
     [self.indicatorView startAnimating];
     [[OTTourService new] toursByUserId:[[NSUserDefaults standardUserDefaults] currentUser].sid
