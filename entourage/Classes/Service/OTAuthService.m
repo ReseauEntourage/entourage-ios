@@ -79,6 +79,34 @@ NSString *const kKeychainPassword = @"entourage_user_password";
      }];
 }
 
+- (void)getDetailsForUser:(NSNumber *)userID
+              success:(void (^)(OTUser *))success
+              failure:(void (^)(NSError *))failure
+{
+    
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_user_details", @""), userID, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    
+    [[OTHTTPRequestManager sharedInstance]
+         GETWithUrl:url
+         andParameters:nil
+         andSuccess:^(id responseObject) {
+             NSDictionary *responseDict = responseObject;
+             NSDictionary *responseUser = responseDict[@"user"];
+             OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+             
+             if (success) {
+                 success(user);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             NSLog(@"Failed with error %@", error);
+             if (failure) {
+                 failure(error);
+             }
+         }];
+}
+
 - (void)sendAppInfoWithSuccess:(void (^)())success
                        failure:(void (^)(NSError *))failure
 {

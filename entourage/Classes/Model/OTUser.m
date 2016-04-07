@@ -36,9 +36,9 @@ NSString *const kKeyOrganization =@"organization";
         _lastName = [dictionary stringForKey:kKeyLastname];
         _displayName = [dictionary stringForKey:kKeyDisplayName];
 		_token = [dictionary stringForKey:kKeyToken];
-        _tourCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyTourCount];
+        _tourCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyTourCount defaultValue:0];
         _encounterCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEncounterCount];
-        //_organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
+        _organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
 	}
 	return self;
 }

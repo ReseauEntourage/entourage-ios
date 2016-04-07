@@ -20,6 +20,7 @@
 #import "OTQuitTourViewController.h"
 #import "OTGuideViewController.h"
 #import "UIView+entourage.h"
+#import "OTUserViewController.h"
 
 //#import "UIViewController+MapView.h"
 #import "KPAnnotation.h"
@@ -41,6 +42,7 @@
 
 // Service
 #import "OTTourService.h"
+#import "OTAuthService.h"
 
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
@@ -127,7 +129,7 @@
 // tours
 
 @property (nonatomic, strong) NSMutableArray *tours;
-
+@property (nonatomic, strong) OTToursTableView *toursTableView;
 
 @end
 
@@ -203,6 +205,7 @@
 }
 
 - (void)configureTableView {
+    
     self.tableView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, -TABLEVIEW_FOOTER_HEIGHT, 0.0f);
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableView.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
     self.tableView.tableFooterView = dummyView;
@@ -745,7 +748,11 @@ typedef NS_ENUM(NSInteger) {
         default:
             break;
     }
-    
+    if ([segue.identifier isEqualToString:@"UserProfileSegue"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
+        controller.user = (OTUser*)sender;
+    } else
     if ([segue.identifier isEqualToString:@"OTCreateMeeting"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTCreateMeetingViewController *controller = (OTCreateMeetingViewController*)navController.topViewController;
@@ -926,7 +933,7 @@ static bool isShowingOptions = NO;
 }
 
 /**************************************************************************************************/
-#pragma mark - Tours Table View
+#pragma mark - Tours Table View Delegate
 
 - (void)showTourInfo:(OTTour*)tour {
     self.selectedTour = tour;
@@ -941,7 +948,15 @@ static bool isShowingOptions = NO;
 }
 
 - (void)showUserProfile:(NSNumber*)userId {
-    [self performSegueWithIdentifier:@"UserProfileSegue" sender:userId];
+    [[OTAuthService new] getDetailsForUser:userId
+                                   success:^(OTUser *user) {
+                                       NSLog(@"got user %@", user);
+                                       [self performSegueWithIdentifier:@"UserProfileSegue" sender:user];
+
+                                   } failure:^(NSError *error) {
+                                       NSLog(@"@fails getting user %@", error.description);
+                                   }];
+    
 }
 
 - (void)doJoinRequest:(OTTour*)tour {
@@ -1058,5 +1073,9 @@ static bool isShowingOptions = NO;
     }];
     
 }
+
+
+
+
 
 @end

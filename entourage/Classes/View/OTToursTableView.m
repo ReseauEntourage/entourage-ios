@@ -203,7 +203,7 @@
     OTTour *selectedTour = self.tours[index];
     
     if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(showUserProfile:)]) {
-        [self.toursDelegate showUserProfile:selectedTour.userId];
+        [self.toursDelegate showUserProfile:selectedTour.author.uID];
     }
 }
 

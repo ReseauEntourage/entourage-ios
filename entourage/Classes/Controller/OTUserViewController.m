@@ -14,13 +14,12 @@
 // Service
 #import "OTAuthService.h"
 
-// Model
-#import "OTUser.h"
 
 // Helper
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
 #import "UIColor+entourage.h"
+#import "UIButton+entourage.h"
 
 // View
 #import "SVProgressHUD.h"
@@ -35,7 +34,6 @@ typedef NS_ENUM(NSInteger) {
 
 @interface OTUserViewController ()
 
-@property (nonatomic, strong) OTUser *user;
 
 @end
 
@@ -51,10 +49,9 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.user = [[NSUserDefaults standardUserDefaults] currentUser];
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    //if (self.user.sid == currentUser.sid)
+    if (self.user.sid.intValue == currentUser.sid.intValue)
     {
         [self showEditButton];
     }
@@ -187,13 +184,14 @@ typedef NS_ENUM(NSInteger) {
                 [self setupTitleProfileCell:cell withTitle:@"Identification vérifiée"];
             else {
                 if (indexPath.row == 1)
+                    //TODO: Ask Vincent for status
                     [self setupVerificationProfileCell:cell
                                              withCheck:@"Adresse e-mail"
                                              andStatus:NO];
                 else
                     [self setupVerificationProfileCell:cell
                                              withCheck:@"Numéro de téléphone"
-                                             andStatus:YES];
+                                             andStatus:NO];
             }
             break;
         }
@@ -206,7 +204,8 @@ typedef NS_ENUM(NSInteger) {
                 [self setupTitleProfileCell:cell withTitle:@"Association(s)"];
             else
                 [self setupAssociationProfileCell:cell
-                             withAssociationTitle:@"Aux captifs la liberation" andAssociationTitle:nil];
+                             withAssociationTitle:self.user.organization.name
+                            andAssociationLogoUrl:nil];
             break;
         }
         
@@ -215,6 +214,7 @@ typedef NS_ENUM(NSInteger) {
     return cell;
 }
 #define SUMMARY_AVATAR 1
+#define SUMMARY_AVATAR_SHADOW 10
 #define SUMMARY_NAME 2
 #define SUMMARY_ROLE 3
 #define SUMMARY_DATE 4
@@ -233,16 +233,19 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)setupSummaryProfileCell:(UITableViewCell *)cell {
     
+    UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
+    [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];
+    [avatarShadow.layer setShadowOpacity:0.5];
+    [avatarShadow.layer setShadowRadius:4.0];
+    [avatarShadow.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
     UIButton *avatarButton = [cell viewWithTag:SUMMARY_AVATAR];
     avatarButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    [avatarButton.layer setShadowColor:[UIColor blackColor].CGColor];
-    [avatarButton.layer setShadowOpacity:0.5];
-    [avatarButton.layer setShadowRadius:4.0];
-    [avatarButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
-
+    [avatarButton setupAsProfilePictureFromUrl:self.user.avatarURL withPlaceholder:@"user"];
+    
     UILabel *nameLabel = [cell viewWithTag:SUMMARY_NAME];
     nameLabel.text = self.user.displayName;
     
+    //TODO: ask Vincent for role, joinDate, and address
     UILabel *roleLabel = [cell viewWithTag:SUMMARY_ROLE];
     roleLabel.text = @"Ambassadeur";//self.currentUser.role;
     
@@ -274,12 +277,12 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)setupEntouragesProfileCell:(UITableViewCell *)cell {
     UILabel *noEntouragesLabel = [cell viewWithTag:NOENTOURAGES];
-    noEntouragesLabel.text = [NSString stringWithFormat:@"%d", 1];
+    noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.tourCount.intValue];
 }
 
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell
                withAssociationTitle:(NSString *)title
-                andAssociationTitle:(NSString *)imageURL
+                andAssociationLogoUrl:(NSString *)imageURL
 {
     UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE];
     titleLabel.text = title;

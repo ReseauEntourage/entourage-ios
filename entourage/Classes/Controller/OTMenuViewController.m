@@ -14,6 +14,7 @@
 #import "OTLoginViewController.h"
 #import "UIViewController+menu.h"
 #import "OTSettingsViewController.h"
+#import "OTUserViewController.h"
 
 #import "NSUserDefaults+OT.h"
 
@@ -164,8 +165,12 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 #pragma mark - Storyboard
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if (![self.controllersDictionary objectForKey:segue.identifier] && [segue.identifier isEqualToString:@"OTUserProfile"]) {
+    if (![self.controllersDictionary objectForKey:segue.identifier] && [segue.identifier isEqualToString:@"segueMenuIdentifierForProfile"]) {
        // [self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
+            UINavigationController *navController = segue.destinationViewController;
+            OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
+            controller.user = [[NSUserDefaults standardUserDefaults] currentUser];
+        
     }
 }
 
