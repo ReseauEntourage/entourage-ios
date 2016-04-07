@@ -181,6 +181,7 @@
         [self feedMapViewWithEncounters];
     }
     else {
+        self.launcherButton.hidden = NO;
         self.stopButton.hidden = YES;
         self.createEncounterButton.hidden = YES;
     }
@@ -850,7 +851,7 @@ static bool isShowingOptions = NO;
      */
     isShowingOptions = !isShowingOptions;
     [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
-    [sender setSelected:!sender.isSelected];
+    //[sender setSelected:!sender.isSelected];
 }
 
 - (IBAction)createTour:(id)sender {
