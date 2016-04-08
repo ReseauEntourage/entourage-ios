@@ -43,6 +43,7 @@
 		2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */; };
 		2EDA5F0E1CB67FFE00849172 /* OTNewsfeedMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F0D1CB67FFE00849172 /* OTNewsfeedMapDelegate.m */; };
 		2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F101CB68BE200849172 /* OTGuideMapDelegate.m */; };
+		2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F131CB7BE7200849172 /* OTUserEditPasswordViewController.m */; };
 		2EDFADD71CAE810800B66026 /* OTAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */; };
 		2EDFADDA1CAE84D000B66026 /* OTAboutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD91CAE84D000B66026 /* OTAboutItem.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
@@ -210,6 +211,8 @@
 		2EDA5F0D1CB67FFE00849172 /* OTNewsfeedMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTNewsfeedMapDelegate.m; sourceTree = "<group>"; };
 		2EDA5F0F1CB68BE200849172 /* OTGuideMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGuideMapDelegate.h; sourceTree = "<group>"; };
 		2EDA5F101CB68BE200849172 /* OTGuideMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGuideMapDelegate.m; sourceTree = "<group>"; };
+		2EDA5F121CB7BE7200849172 /* OTUserEditPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUserEditPasswordViewController.h; sourceTree = "<group>"; };
+		2EDA5F131CB7BE7200849172 /* OTUserEditPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUserEditPasswordViewController.m; sourceTree = "<group>"; };
 		2EDFADD51CAE810800B66026 /* OTAboutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutTableViewCell.h; sourceTree = "<group>"; };
 		2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutTableViewCell.m; sourceTree = "<group>"; };
 		2EDFADD81CAE84D000B66026 /* OTAboutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutItem.h; sourceTree = "<group>"; };
@@ -423,6 +426,8 @@
 				0A4769341BFB9F07006EA73A /* OTUserViewController.m */,
 				45E6FE141CAE44EA00505660 /* OTUserEditViewController.h */,
 				45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */,
+				2EDA5F121CB7BE7200849172 /* OTUserEditPasswordViewController.h */,
+				2EDA5F131CB7BE7200849172 /* OTUserEditPasswordViewController.m */,
 				0AA4C0721C17283800DBBE11 /* OTAskMoreViewController.h */,
 				0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */,
 				0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */,
@@ -1201,6 +1206,7 @@
 				1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				4508AE311C7F924B00EDAC1B /* OTTourOptionsViewController.m in Sources */,
+				2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,
 				2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */,
 				45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */,

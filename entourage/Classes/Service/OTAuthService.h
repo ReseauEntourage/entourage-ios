@@ -38,6 +38,10 @@ extern NSString *const kKeychainPassword;
                                success:(void (^)(NSString *user))success
                                failure:(void (^)(NSError *error))failure;
 
+- (void)updateUserInformationWithUser:(OTUser *)user
+                              success:(void (^)(OTUser *user))success
+                              failure:(void (^)(NSError *error))failure;
+
 - (void)subscribeToNewsletterWithEmail:(NSString *)email
                                success:(void (^)(BOOL))success
                                failure:(void (^)(NSError *))failure;

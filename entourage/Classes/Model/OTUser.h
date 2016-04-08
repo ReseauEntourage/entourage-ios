@@ -18,6 +18,8 @@ extern NSString *const kKeyToken;
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSString *displayName;
+@property (strong, nonatomic) NSString *phone;
+@property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) NSString *avatarURL;
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSNumber *tourCount;
@@ -25,6 +27,7 @@ extern NSString *const kKeyToken;
 @property (strong, nonatomic) OTOrganization *organization;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)dictionaryForWebservice;
 - (NSString *)fullname;
 
 @end

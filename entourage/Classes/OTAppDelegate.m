@@ -17,6 +17,7 @@
 
 // Pods
 #import "SimpleKeychain.h"
+#import "AFNetworkActivityLogger.h"
 
 // Service
 #import "OTAuthService.h"
@@ -92,6 +93,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
             NSLog(@"ApplicationsERR: %@", error.description);
         }];
     }
+    
+    //[[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
+    //[[AFNetworkActivityLogger sharedLogger] startLogging];
+    
 	return YES;
 }
 

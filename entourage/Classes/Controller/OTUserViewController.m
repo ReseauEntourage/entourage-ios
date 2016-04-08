@@ -34,6 +34,7 @@ typedef NS_ENUM(NSInteger) {
 
 @interface OTUserViewController ()
 
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
 
@@ -49,11 +50,14 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     if (self.user.sid.intValue == currentUser.sid.intValue)
     {
+        self.user = currentUser;
         [self showEditButton];
+        [self.tableView reloadData];
     }
 }
 

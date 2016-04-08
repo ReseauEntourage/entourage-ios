@@ -66,10 +66,6 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-    
-    self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    self.nameLabel.text = [self.currentUser displayName];
-
 
 	self.menuItems = [OTMenuViewController createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
@@ -81,6 +77,13 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     
     [self.profileButton setupAsProfilePictureFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    self.nameLabel.text = [self.currentUser displayName];
 }
 
 /**************************************************************************************************/
