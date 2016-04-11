@@ -170,8 +170,8 @@ typedef NS_ENUM(NSInteger) {
     }
 }
 
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 15)];
     headerView.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
     headerView.textColor = [UIColor appGreyishBrownColor];

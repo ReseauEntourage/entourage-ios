@@ -125,6 +125,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                               deviceId:[[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"]
                                success: ^(OTUser *user) {
                                    NSLog(@"User : %@ authenticated successfully", user.email);
+                                   user.phone = self.phoneNumberServerRepresentation;
                                    [SVProgressHUD dismiss];
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
