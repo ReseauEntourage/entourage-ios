@@ -69,6 +69,9 @@
 #define PARIS_LAT 48.856578
 #define PARIS_LON  2.351828
 #define MAPVIEW_HEIGHT 160.f
+#define MAPVIEW_REGION_SPAN_X_METERS 500
+#define MAPVIEW_REGION_SPAN_Y_METERS 500
+#define TOURS_REQUEST_DISTANCE_KM 10
 #define LOCATION_MIN_DISTANCE 10.f
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
@@ -135,6 +138,7 @@
 
 @property (nonatomic, strong) NSMutableArray *tours;
 @property (nonatomic, strong) OTToursTableView *toursTableView;
+@property (nonatomic) CLLocationCoordinate2D requestedToursCoordinate;
 
 // POI
 
@@ -306,6 +310,15 @@
     [self.blurEffect addGestureRecognizer:hideTapGesture];
 }
 
+- (void)configureNavigationBar {
+    
+    [self createMenuButton];
+    UIBarButtonItem *chatButton = [self setupChatsButton];
+    [chatButton setTarget:self];
+    [chatButton setAction:@selector(showEntourages)];
+    [self setupLogoImage];
+}
+
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
     CGPoint touchPoint = [longPressGesture locationInView:self.mapView];
 
@@ -331,15 +344,6 @@
     [self.locationManager startUpdatingLocation];
 }
 
-- (void)configureNavigationBar {
-    
-    [self createMenuButton];
-    UIBarButtonItem *chatButton = [self setupChatsButton];
-    [chatButton setTarget:self];
-    [chatButton setAction:@selector(showEntourages)];
-    [self setupLogoImage];
-}
-
 - (void)showEntourages {
     [self performSegueWithIdentifier:@"EntouragesSegue" sender:self];
 }
@@ -363,9 +367,19 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)getTourList {
+    // check if we need to make a new request
+    CLLocationDistance distance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.requestedToursCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
+    if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
+        return;
+    }
+    __block CLLocationCoordinate2D oldRequestedCoordinate;
+    oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
+    oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
+    self.requestedToursCoordinate = self.mapView.centerCoordinate;
+    
     [[OTTourService new] toursAroundCoordinate:self.mapView.centerCoordinate
                                          limit:@10
-                                      distance:@100//*[NSNumber numberWithDouble:[self mapHeight]]
+                                      distance:@TOURS_REQUEST_DISTANCE_KM //*[NSNumber numberWithDouble:[self mapHeight]]
                                        success:^(NSMutableArray *closeTours)
      {
          if (closeTours.count && !didGetAnyData) {
@@ -379,6 +393,7 @@ static BOOL didGetAnyData = NO;
          [self.tableView reloadData];
      }
                                        failure:^(NSError *error) {
+                                           self.requestedToursCoordinate = oldRequestedCoordinate;
                                            [self registerObserver];
                                            [self.indicatorView setHidden:YES];
                                        }];
@@ -578,6 +593,10 @@ static BOOL didGetAnyData = NO;
 - (void)startLocationUpdates {
     if (self.locationManager == nil) {
         self.locationManager = [[CLLocationManager alloc] init];
+        
+        if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+            [self.locationManager requestAlwaysAuthorization];
+        }
     }
     
     self.locationManager.delegate = self;
@@ -592,6 +611,12 @@ static BOOL didGetAnyData = NO;
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     for (CLLocation *newLocation in locations) {
         NSLog(@"LOC %.4f, %.4f of %lu", newLocation.coordinate.latitude, newLocation.coordinate.longitude, (unsigned long)locations.count);
+        
+        //Negative accuracy means invalid coordinates
+        if (newLocation.horizontalAccuracy < 0) {
+            continue;
+        }
+        
         NSDate *eventDate = newLocation.timestamp;
         NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
         
@@ -601,6 +626,8 @@ static BOOL didGetAnyData = NO;
             distance = [newLocation distanceFromLocation:previousLocation];
         }
         
+        NSLog(@"distance = %.0f howRecent = %.2f accuracy = %.2f", distance, fabs(howRecent), newLocation.horizontalAccuracy);
+        
         if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20 && fabs(distance) > LOCATION_MIN_DISTANCE) {
             
             if (self.locations.count > 0) {
@@ -608,8 +635,9 @@ static BOOL didGetAnyData = NO;
                 CLLocationCoordinate2D coords[2];
                 coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
                 coords[1] = newLocation.coordinate;
-        
-                MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500);
+                
+                MKCoordinateRegion region = self.mapView.region;
+                region.center = newLocation.coordinate;
                 [self.mapView setRegion:region animated:YES];
             
                 if (self.isTourRunning) {
@@ -684,6 +712,7 @@ static BOOL didGetAnyData = NO;
     self.stopButton.hidden = YES;
     self.createEncounterButton.hidden = YES;
     self.isTourRunning = NO;
+    self.requestedToursCoordinate = CLLocationCoordinate2DMake(0.0f, 0.0f);
     [self clearMap];
 }
 
@@ -848,19 +877,14 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Actions
 
 - (IBAction)zoomToCurrentLocation:(id)sender {
-	float spanX = 0.01;
-	float spanY = 0.01;
-	MKCoordinateRegion region;
 
-	region.center.latitude = self.mapView.userLocation.coordinate.latitude;
-	region.center.longitude = self.mapView.userLocation.coordinate.longitude;
+    MKCoordinateRegion region = self.mapView.region;
+    region.center = self.mapView.userLocation.coordinate;
     
     if (region.center.latitude < .00001 && region.center.longitude < .00001) {
-        region.center = CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON);
+        region = MKCoordinateRegionMakeWithDistance( CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
     }
 
-	region.span.latitudeDelta = spanX;
-	region.span.longitudeDelta = spanY;
 	[self.mapView setRegion:region animated:YES];
 }
 

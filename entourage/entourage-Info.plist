@@ -45,6 +45,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
