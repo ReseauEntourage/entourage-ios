@@ -48,7 +48,7 @@ PODS:
   - MBProgressHUD (0.8)
   - OCMock (3.1)
   - SimpleKeychain (0.7.0)
-  - SVProgressHUD (HEAD based on 2.0.3)
+  - SVProgressHUD (HEAD based on 2.0-beta8)
   - SWRevealViewController (2.3.0)
   - WYPopoverController (0.3.8)
 
@@ -76,7 +76,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 8688c331cb64702283be37ab8d7d329cdd25f251
   OCMock: 721c11680ae2d65d67f40932777194daf7002781
   SimpleKeychain: b50cef3b87939d480ea1143425c00f5b4b70fe21
-  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
+  SVProgressHUD: 6e48a1dda09ce3b58adc41d013baed3a8e8980ff
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   WYPopoverController: dda54780e1bef186464ae5a10ab9b4998c279e89
 
