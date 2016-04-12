@@ -78,23 +78,19 @@ typedef NS_ENUM(NSInteger) {
 - (void)updateUser {
     NSString *firstName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeSummary]];
     NSString *lastName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:SectionTypeSummary]];
-    
+
     NSString *email = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeInfoPrivate]];
-    
+
     NSString *warning = nil;
     if (![email isValidEmail])
-        //TODO: @Francois: please translate
-        warning = @"Invalid email";
+        warning = @"Email invalide";
     if (lastName.length < 2)
-        //TODO: @Francois: please translate
-        warning = @"Invalid last name";
+        warning = @"Nom invalide";
     if (firstName.length < 2)
-        //TODO: @Francois: please translate
-        warning = @"Invalid first name";
-    
-   
+        warning = @"Prénom invalide";
+
+
     if (warning != nil) {
-        //TODO: @Francois: please translate
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                        message:warning
                                                                 preferredStyle:UIAlertControllerStyleAlert];
