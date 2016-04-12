@@ -86,7 +86,7 @@ typedef NS_ENUM(NSInteger) {
 
     NSString *warning = nil;
     if (![email isValidEmail])
-        warning = NSLocalizedString(@"invalidEmail", @"")
+        warning = NSLocalizedString(@"invalidEmail", @"");
     if (lastName.length < 2)
         warning =  NSLocalizedString(@"invalidLastName", @"");
     if (firstName.length < 2)
