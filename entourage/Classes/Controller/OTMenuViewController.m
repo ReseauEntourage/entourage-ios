@@ -75,6 +75,8 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     [self createBackFrontMenuButton];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
+    self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+
     [self.profileButton setupAsProfilePictureFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
     
 }
@@ -124,6 +126,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 		[Flurry logEvent:@"Open_Screen_From_Menu" withParameters:@{ @"screen" : menuItem.segueIdentifier }];
 	}
+    [[tableView cellForRowAtIndexPath:indexPath]setSelected:NO];
 }
 
 /**************************************************************************************************/
@@ -131,7 +134,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (IBAction)showProfile {
     //[self openControllerWithSegueIdentifier:@"OTUserProfile"];
-    SWRevealViewController *revealViewController = self.revealViewController;
+//    SWRevealViewController *revealViewController = self.revealViewController;
     //[revealViewController revealToggle:self];
     [self performSegueWithIdentifier:@"segueMenuIdentifierForProfile" sender:self];
     //[revealViewController performSegueWithIdentifier:@"RevealProfileSegue" sender:self];

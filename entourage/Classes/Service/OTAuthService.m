@@ -217,23 +217,24 @@ NSString *const kKeychainPassword = @"entourage_user_password";
     parameters[@"user"] = [user dictionaryForWebservice];
     
     [[OTHTTPRequestManager sharedInstance]
-     PATCHWithUrl:url andParameters:parameters
-     andSuccess:^(id responseObject)
-     {
-         if (success) {
-             // CHECK THIS
-             NSDictionary *responseDict = responseObject;
-             NSDictionary *responseUser = responseDict[@"user"];
-             OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
-             success(user);
+            PATCHWithUrl:url
+            andParameters:parameters
+            andSuccess:^(id responseObject)
+         {
+             if (success) {
+                 // CHECK THIS
+                 NSDictionary *responseDict = responseObject;
+                 NSDictionary *responseUser = responseDict[@"user"];
+                 OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+                 success(user);
+             }
          }
-     }
-     andFailure:^(NSError *error)
-     {
-         if (failure) {
-             failure(error);
-         }
-     }];
+         andFailure:^(NSError *error)
+         {
+             if (failure) {
+                 failure(error);
+             }
+         }];
 }
 
 - (void)subscribeToNewsletterWithEmail:(NSString *)email

@@ -10,6 +10,7 @@
 #import "OTUserEditViewController.h"
 #import "UIViewController+menu.h"
 #import "OTUserEditPasswordViewController.h"
+#import "UIButton+entourage.h"
 
 // Service
 #import "OTAuthService.h"
@@ -50,8 +51,6 @@ typedef NS_ENUM(NSInteger) {
     [self showSaveButton];
     
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
-
-
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -80,7 +79,8 @@ typedef NS_ENUM(NSInteger) {
     self.user.lastName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:SectionTypeSummary]];
     
     [SVProgressHUD showWithStatus:NSLocalizedString(@"user_edit_saving", @"")];
-    [[OTAuthService new] updateUserInformationWithUser:self.user success:^(OTUser *user) {
+    [[OTAuthService new] updateUserInformationWithUser:self.user
+                                               success:^(OTUser *user) {
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"user_edit_saved_ok", @"")];
         [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
         if (self.user.password != nil) {
@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -109,7 +109,7 @@ typedef NS_ENUM(NSInteger) {
             return 3;
         }
         case SectionTypeInfoPublic: {
-            return 0;
+            return 1;
         }
         case SectionTypeAssociations: {
             return self.user.organization == nil ? 0 : 1;
@@ -124,10 +124,14 @@ typedef NS_ENUM(NSInteger) {
     CGFloat height = 0.0f;
     switch (section) {
         case SectionTypeInfoPrivate:
+        case SectionTypeInfoPublic:
             height = 45.0f;
             break;
         case SectionTypeAssociations:
             height = self.user.organization == nil ? 0.0f : 45.0f;
+            break;
+        case SectionTypeDelete:
+            height = 45.0f;
         default:
             break;
     }
@@ -172,11 +176,31 @@ typedef NS_ENUM(NSInteger) {
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    NSString *title = @"";
+    switch (section) {
+        case SectionTypeInfoPrivate: {
+            title = @"Informations privées";
+            break;
+        }
+        case SectionTypeInfoPublic: {
+            title = @"Informations publiques";
+            break;
+        }
+        case SectionTypeAssociations: {
+            title = @"Association(s)";
+            break;
+        }
+            
+        default:
+            title = @"";
+    }
+
+    
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 15)];
     headerView.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
     headerView.textColor = [UIColor appGreyishBrownColor];
     headerView.backgroundColor = [UIColor appPaleGreyColor];
-    headerView.text = (section == 1 ? @"Informations privées" : @"Association(s)");
+    headerView.text = title;
     headerView.textAlignment = NSTextAlignmentCenter;
     return headerView;
 }
@@ -206,11 +230,15 @@ typedef NS_ENUM(NSInteger) {
             break;
         }
         case SectionTypeInfoPublic: {
-            cellID = @"EntouragesProfileCell";
+            cellID = @"EditProfileCell";
             break;
         }
         case SectionTypeAssociations: {
             cellID = @"AssociationProfileCell";
+            break;
+        }
+        case SectionTypeDelete: {
+            cellID = @"DeleteProfileCell";
             break;
         }
         default:
@@ -249,7 +277,7 @@ typedef NS_ENUM(NSInteger) {
             break;
         }
         case SectionTypeInfoPublic: {
-            [self setupEntouragesProfileCell:cell];
+            [self setupInfoCell:cell withTitle:@"Quartier" withTextField:nil andText:@"ROU"];
             break;
         }
         case SectionTypeAssociations: {
@@ -268,18 +296,46 @@ typedef NS_ENUM(NSInteger) {
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == SectionTypeInfoPrivate) {
-        if (indexPath.row == 1) {
-            [self performSegueWithIdentifier:EDIT_PASSWORD_SEGUE sender:nil];
-        }
+    switch (indexPath.section) {
+        case SectionTypeInfoPrivate:
+            if (indexPath.row == 1) {
+                [self performSegueWithIdentifier:EDIT_PASSWORD_SEGUE sender:nil];
+            }
+            break;
+        case SectionTypeDelete: {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                           message:@"Are you sure you want to delete your account?"                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
+      
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
+                                                                    style:UIAlertActionStyleCancel
+                                                                  handler:^(UIAlertAction * _Nonnull action) {}];
+            
+            [alert addAction:defaultAction];
+            UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Oui"
+                                                                    style:UIAlertActionStyleDestructive
+                                                                  handler:^(UIAlertAction * _Nonnull action) {
+                                                                      NSLog(@"delete account");
+                                                                  }];
+            
+            [alert addAction:deleteAction];
+            [self presentViewController:alert animated:YES completion:nil];
+
+            }
+            break;
+        default:
+            break;
     }
+    
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }
 
 /**************************************************************************************************/
 #pragma mark - TableViewCells Setup
 
-#define SUMMARY_AVATAR_TAG 1
+#define SUMMARY_AVATAR 1
+#define SUMMARY_AVATAR_SHADOW 10
+
 
 #define CELL_TITLE_TAG 10
 #define CELL_TEXTFIELD_TAG 20
@@ -298,12 +354,15 @@ typedef NS_ENUM(NSInteger) {
 - (void)setupSummaryProfileCell:(UITableViewCell *)cell
 {
     
-    UIButton *avatarButton = [cell viewWithTag:SUMMARY_AVATAR_TAG];
+    UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
+    [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];
+    [avatarShadow.layer setShadowOpacity:0.5];
+    [avatarShadow.layer setShadowRadius:4.0];
+    [avatarShadow.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
+    UIButton *avatarButton = [cell viewWithTag:SUMMARY_AVATAR];
     avatarButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    [avatarButton.layer setShadowColor:[UIColor blackColor].CGColor];
-    [avatarButton.layer setShadowOpacity:0.5];
-    [avatarButton.layer setShadowRadius:4.0];
-    [avatarButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
+    [avatarButton setupAsProfilePictureFromUrl:self.user.avatarURL withPlaceholder:@"user"];
+
     
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }
@@ -339,10 +398,6 @@ typedef NS_ENUM(NSInteger) {
     return nil;
 }
 
-- (void)setupEntouragesProfileCell:(UITableViewCell *)cell {
-    UILabel *noEntouragesLabel = [cell viewWithTag:NOENTOURAGES_TAG];
-    noEntouragesLabel.text = [NSString stringWithFormat:@"%d", 1];
-}
 
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell
                withAssociationTitle:(NSString *)title

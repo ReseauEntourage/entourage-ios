@@ -305,11 +305,11 @@
                         <viewControllerLayoutGuide type="bottom" id="WFO-bS-A50"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="df5-9E-sOe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="668"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Auw-kh-iqH">
-                                <rect key="frame" x="-4" y="64" width="328" height="504"/>
+                                <rect key="frame" x="-4" y="64" width="328" height="604"/>
                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <prototypes>
@@ -326,6 +326,21 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="73" id="FJr-Vi-6Qi"/>
                                                     </constraints>
+                                                </view>
+                                                <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7V-87-SCI">
+                                                    <rect key="frame" x="113" y="22" width="102" height="102"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="102" id="4vn-qL-Yga"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="102" id="C8F-cb-shq"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="102" id="qaa-1v-uZy"/>
+                                                        <constraint firstAttribute="width" constant="102" id="spK-Vd-XVk"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="51"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crj-0T-hSo">
                                                     <rect key="frame" x="113" y="22" width="102" height="102"/>
@@ -346,11 +361,13 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="crj-0T-hSo" firstAttribute="centerX" secondItem="d7V-87-SCI" secondAttribute="centerX" id="XCM-4E-mGo"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="5mT-xf-eHP" secondAttribute="trailing" constant="-8" id="ZHK-KR-9ht"/>
                                                 <constraint firstItem="5mT-xf-eHP" firstAttribute="top" secondItem="tV6-cF-ayN" secondAttribute="topMargin" constant="-8" id="iG2-DA-phK"/>
                                                 <constraint firstItem="crj-0T-hSo" firstAttribute="centerX" secondItem="tV6-cF-ayN" secondAttribute="centerX" id="jNH-uN-1wE"/>
                                                 <constraint firstItem="5mT-xf-eHP" firstAttribute="leading" secondItem="tV6-cF-ayN" secondAttribute="leadingMargin" constant="-8" id="kFn-go-oYy"/>
                                                 <constraint firstItem="crj-0T-hSo" firstAttribute="top" secondItem="tV6-cF-ayN" secondAttribute="topMargin" constant="14" id="m8B-bH-PaW"/>
+                                                <constraint firstItem="crj-0T-hSo" firstAttribute="centerY" secondItem="d7V-87-SCI" secondAttribute="centerY" id="xP8-uv-YSe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -540,6 +557,30 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DeleteProfileCell" rowHeight="51" id="xvl-bA-nB0">
+                                        <rect key="frame" x="0.0" y="463" width="328" height="51"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xvl-bA-nB0" id="EF0-Yg-4Ql">
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Supprimer mon compte" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBF-ZI-KQa">
+                                                    <rect key="frame" x="16" y="14" width="297" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="5vt-GH-Rl1"/>
+                                                        <constraint firstAttribute="width" constant="297" id="JNO-Ot-QgC"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <color key="textColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZBF-ZI-KQa" firstAttribute="centerX" secondItem="EF0-Yg-4Ql" secondAttribute="centerX" id="6m5-UP-Cne"/>
+                                                <constraint firstItem="ZBF-ZI-KQa" firstAttribute="centerY" secondItem="EF0-Yg-4Ql" secondAttribute="centerY" id="yuQ-AR-Aoy"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="TKj-HF-OVy" id="wNb-SH-BLx"/>
@@ -556,7 +597,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UUn-a4-zT1"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="668"/>
                     <connections>
                         <outlet property="tableView" destination="Auw-kh-iqH" id="k1n-RG-LFg"/>
                         <segue destination="JY3-Ti-PBi" kind="modal" identifier="EditPasswordSegue" id="uE9-pz-j86"/>
