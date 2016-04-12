@@ -71,6 +71,7 @@
 #define MAPVIEW_HEIGHT 160.f
 #define MAPVIEW_REGION_SPAN_X_METERS 500
 #define MAPVIEW_REGION_SPAN_Y_METERS 500
+#define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define TOURS_REQUEST_DISTANCE_KM 10
 #define LOCATION_MIN_DISTANCE 10.f
 
@@ -294,6 +295,11 @@
 }
 
 - (void)configureMapView {
+    
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+    
+    [self.mapView setRegion:region animated:YES];
+    
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
 
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -571,6 +577,14 @@ static BOOL didGetAnyData = NO;
      ];
 }
 
+- (void)addTourPointFromLocation:(CLLocation *)location {
+    self.tour.distance += [location distanceFromLocation:self.locations.lastObject];
+    OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:location];
+    [self.tour.tourPoints addObject:tourPoint];
+    [self.pointsToSend addObject:tourPoint];
+    [self sendTourPoints:self.pointsToSend];
+}
+
 - (void)hideBlurEffect {
     [self.blurEffect setHidden:YES];
 }
@@ -641,14 +655,10 @@ static BOOL didGetAnyData = NO;
                 [self.mapView setRegion:region animated:YES];
             
                 if (self.isTourRunning) {
-                    self.tour.distance += [newLocation distanceFromLocation:self.locations.lastObject];
+                    [self addTourPointFromLocation:newLocation];
                     if (self.newsfeedMapDelegate.isActive) {
                         [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
                     }
-                    OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:newLocation];
-                    [self.tour.tourPoints addObject:tourPoint];
-                    [self.pointsToSend addObject:tourPoint];
-                    [self sendTourPoints:self.pointsToSend];
                 }
             }
         
@@ -877,15 +887,12 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Actions
 
 - (IBAction)zoomToCurrentLocation:(id)sender {
-
-    MKCoordinateRegion region = self.mapView.region;
-    region.center = self.mapView.userLocation.coordinate;
     
-    if (region.center.latitude < .00001 && region.center.longitude < .00001) {
-        region = MKCoordinateRegionMakeWithDistance( CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+    if (self.mapView.userLocation.location != nil) {
+        CLLocationDistance distance = MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.mapView.centerCoordinate), MKMapPointForCoordinate(self.mapView.userLocation.coordinate));
+        BOOL animatedSetCenter = (distance < MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS);
+        [self.mapView setCenterCoordinate:self.mapView.userLocation.coordinate animated:animatedSetCenter];
     }
-
-	[self.mapView setRegion:region animated:YES];
 }
 
 static bool isShowingOptions = NO;
@@ -1086,7 +1093,6 @@ static bool isShowingOptions = NO;
         self.mapView.frame = mapFrame;
         self.mapSegmentedControl.hidden = self.guideMapDelegate.isActive;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-
     }];
 
 }
