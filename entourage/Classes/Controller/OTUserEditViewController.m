@@ -304,11 +304,10 @@ typedef NS_ENUM(NSInteger) {
             }
             break;
         case SectionTypeDelete: {
-            //TODO: @Francois: please translate
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                           message:@"Are you sure you want to delete your account?"                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            
-      
+                                                                           message:@"Etes-vous sûr de vouloir supprimer votre compte ?"                                                                    preferredStyle:UIAlertControllerStyleAlert];
+
+
             UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
                                                                     style:UIAlertActionStyleCancel
                                                                   handler:^(UIAlertAction * _Nonnull action) {}];
