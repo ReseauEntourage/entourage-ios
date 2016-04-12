@@ -726,10 +726,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFW-Nw-9dW" userLabel="Confirm Button">
-                                <rect key="frame" x="0.0" y="372" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="372" width="320" height="57"/>
                                 <color key="backgroundColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="y7j-GU-SPv"/>
+                                    <constraint firstAttribute="height" constant="57" id="y7j-GU-SPv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Valider"/>
