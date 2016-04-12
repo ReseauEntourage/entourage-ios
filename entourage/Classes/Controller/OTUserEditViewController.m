@@ -21,6 +21,7 @@
 #import "UIButton+AFNetworking.h"
 #import "SVProgressHUD.h"
 #import "A0SimpleKeychain.h"
+#import "NSString+Validators.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -75,9 +76,42 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)updateUser {
+    NSString *firstName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeSummary]];
+    NSString *lastName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:SectionTypeSummary]];
     
-    self.user.firstName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeSummary]];
-    self.user.lastName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:SectionTypeSummary]];
+    NSString *email = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeInfoPrivate]];
+    
+    NSString *warning = nil;
+    if (![email isValidEmail])
+        //TODO: @Francois: please translate
+        warning = @"Invalid email";
+    if (lastName.length < 2)
+        //TODO: @Francois: please translate
+        warning = @"Invalid last name";
+    if (firstName.length < 2)
+        //TODO: @Francois: please translate
+        warning = @"Invalid first name";
+    
+   
+    if (warning != nil) {
+        //TODO: @Francois: please translate
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:warning
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
+                                                                style:UIAlertActionStyleCancel
+                                                              handler:^(UIAlertAction * _Nonnull action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
+    self.user.firstName = firstName;
+    self.user.lastName = lastName;
+    self.user.email = email;
     
     [SVProgressHUD showWithStatus:NSLocalizedString(@"user_edit_saving", @"")];
     [[OTAuthService new] updateUserInformationWithUser:self.user
