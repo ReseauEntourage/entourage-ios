@@ -542,6 +542,7 @@
                                                 </label>
                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVt-Iv-VWB">
                                                     <rect key="frame" x="255" y="15" width="50" height="50"/>
+                                                    <color key="backgroundColor" red="0.97647058963775635" green="0.97647058963775635" blue="0.97647058963775635" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="CwO-Tm-mRe"/>
                                                         <constraint firstAttribute="height" constant="50" id="hfz-u7-AZE"/>
