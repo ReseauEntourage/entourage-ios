@@ -153,10 +153,9 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
             else {
                 // Microphone disabled code
                 NSLog(@"Mic not enabled!!!!");
-                //TODO: @Francois: please translate
-                
-                [[[UIAlertView alloc] initWithTitle:@"Microphone Access Denied"
-                                            message:@"This app requires access to your device's Microphone.\n\nPlease enable Microphone access for this app in Reglages > Confidentialite > Micro"
+
+                [[[UIAlertView alloc] initWithTitle:@"Accès refusé au micro"
+                                            message:@"L'application demande l'accès à votre microphone.\n\nSVP Activez l'accès au micro pour cette app dans Réglages > Confidentialité > Micro"
                                            delegate:nil
                                   cancelButtonTitle:@"Dismiss"
                                   otherButtonTitles:nil] show];
