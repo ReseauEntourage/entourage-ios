@@ -25,9 +25,10 @@
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
     SectionTypeInfoPrivate,
-    SectionTypeInfoPublic,
+    
     SectionTypeAssociations,
-    SectionTypeDelete
+    SectionTypeDelete,
+    SectionTypeInfoPublic// to be the 3rd in version 1.2
 } SectionType;
 
 #define EDIT_PASSWORD_SEGUE @"EditPasswordSegue"
@@ -97,7 +98,7 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 4; //5 in version 1.2
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -303,6 +304,7 @@ typedef NS_ENUM(NSInteger) {
             }
             break;
         case SectionTypeDelete: {
+            //TODO: @Francois: please translate
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                            message:@"Are you sure you want to delete your account?"                                                                    preferredStyle:UIAlertControllerStyleAlert];
             
