@@ -539,9 +539,11 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)sendTour {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"tour_create_sending", @"")];
     [[OTTourService new]
          sendTour:self.tour
          withSuccess:^(OTTour *sentTour) {
+             [SVProgressHUD dismiss];
              self.tour.sid = sentTour.sid;
              self.tour.distance = 0.0;
              
@@ -549,6 +551,8 @@ static BOOL didGetAnyData = NO;
              self.launcherView.hidden = YES;
              self.stopButton.hidden = NO;
              self.createEncounterButton.hidden = NO;
+             
+             [self showNewTourOnGoing];
              
              self.seconds = 0;
              self.locations = [NSMutableArray new];
@@ -559,6 +563,7 @@ static BOOL didGetAnyData = NO;
              }
              
         } failure:^(NSError *error) {
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"tour_create_error", @"")];
             NSLog(@"%@",[error localizedDescription]);
         }
      ];
@@ -953,7 +958,6 @@ static bool isShowingOptions = NO;
         [self.pointsToSend addObject:tourPoint];
     }
     [self sendTour];
-    [self showNewTourOnGoing];
 }
 
 - (IBAction)stopTour:(id)sender {

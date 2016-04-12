@@ -66,6 +66,9 @@
 "tour_status_ongoing" = "ongoing";
 "tour_status_closed" = "closed";
 
+"tour_create_sending" = "!!Creating the tour";
+"tour_create_error" = "!!Error creating the tour";
+
 // POI
 "poi_create_tour_alert" = "!!Si vous desirez creer une maraude, vouz devez quitter le quide de solidarite";
 "poi_create_encounter_alert" = "!!Si vous desirez creer une rencontre, vouz devez quitterle quide de solidarite";
