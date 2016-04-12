@@ -6,6 +6,8 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+
+#import "OTAppDelegate.h"
 // Controllers
 #import "OTUserEditViewController.h"
 #import "UIViewController+menu.h"
@@ -33,6 +35,7 @@ typedef NS_ENUM(NSInteger) {
 } SectionType;
 
 #define EDIT_PASSWORD_SEGUE @"EditPasswordSegue"
+#define NOTIFY_LOGOUT @"loginFailureNotification"
 
 @interface OTUserEditViewController() <UITableViewDelegate, UITableViewDataSource, OTUserEditPasswordProtocol>
 
@@ -173,6 +176,7 @@ typedef NS_ENUM(NSInteger) {
     return height;
     
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
     return .5f;
@@ -351,7 +355,15 @@ typedef NS_ENUM(NSInteger) {
             UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Oui"
                                                                     style:UIAlertActionStyleDestructive
                                                                   handler:^(UIAlertAction * _Nonnull action) {
-                                                                      NSLog(@"delete account");
+                                                                      NSLog(@"deleting account ...");
+                                                                      [[OTAuthService new] deleteAccountForUser:0
+                                                                                                        success:^{
+                                                                                                            NSLog(@"deleted account.");
+                                                                                                            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFY_LOGOUT object:self];
+                                                                                                        } failure:^(NSError *error) {
+                                                                                                            NSLog(@"Something went wrong");
+                                                                                                            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"user_edit_saved_ok", @"")];
+                                                                                                        }];
                                                                   }];
             
             [alert addAction:deleteAction];

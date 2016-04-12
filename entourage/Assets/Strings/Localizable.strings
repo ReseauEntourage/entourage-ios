@@ -78,6 +78,7 @@
 "user_edit_saving" = "!!Saving user info";
 "user_edit_saved_ok" = "!!User info saved";
 "user_edit_saved_error" = "!!Error saving user info";
+"user_edit_delete_error" = "!!Error deleting account";
 
 // API
 "url_send_tour" = "%@.json?token=%@";
@@ -95,4 +96,5 @@
 "url_user_tours" = "%@/%@/%@.json?token=%@";
 "url_send_encounter" = "%@/%@/%@.json?token=%@";
 "url_update_user" = "%@/%@.json?token=%@";
+"url_delete_account" = "users/me?token=%@";
 "url_regenerate_code" = "%@/%@/%@.json";

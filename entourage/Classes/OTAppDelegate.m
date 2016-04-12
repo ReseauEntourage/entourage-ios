@@ -76,7 +76,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [self configureUIAppearance];
     
     // add notification observer for 401 error trigger
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(popToLogin:)
+                                                 name:[kLoginFailureNotification copy]
+                                               object:nil];
     
     if (![[NSUserDefaults standardUserDefaults] currentUser])
     {
