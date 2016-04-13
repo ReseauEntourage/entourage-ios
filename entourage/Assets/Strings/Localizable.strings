@@ -81,6 +81,7 @@
 "user_edit_saving" = "!!Saving user info";
 "user_edit_saved_ok" = "!!User info saved";
 "user_edit_saved_error" = "!!Error saving user info";
+"user_profile_error" = "!!Error retrieving user profile";
 
 // API
 "url_send_tour" = "%@.json?token=%@";

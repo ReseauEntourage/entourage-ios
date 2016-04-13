@@ -232,10 +232,10 @@
             </objects>
             <point key="canvasLocation" x="3185.5" y="-531"/>
         </scene>
-        <!--OTPublicTourViewController-->
+        <!--PublicTourViewController-->
         <scene sceneID="NLq-Af-i7X">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="OTPublicTourViewController" id="g6j-63-9qQ" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Tour" referencedIdentifier="PublicTourViewController" id="g6j-63-9qQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4UT-LX-byg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3223.5" y="-454"/>

@@ -8,9 +8,14 @@
 
 #import "OTPublicTourViewController.h"
 #import "OTTourJoinRequestViewController.h"
+#import "OTUserViewController.h"
 #import "UIViewController+menu.h"
 #import "UIButton+entourage.h"
 #import "UILabel+entourage.h"
+
+#import "OTTourPoint.h"
+
+#import <MapKit/MapKit.h>
 
 @interface OTPublicTourViewController () <OTTourJoinRequestDelegate>
 
@@ -21,7 +26,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *userProfileImageButton;
 @property (nonatomic, weak) IBOutlet UIButton *joinButton;
 @property (nonatomic, weak) IBOutlet UILabel *joinLabel;
-
+@property (nonatomic, weak) IBOutlet MKMapView *mapView;
 
 
 @end
@@ -67,6 +72,15 @@
     
     [self.joinButton setupWithJoinStatusOfTour:self.tour];
     [self.joinLabel setupWithJoinStatusOfTour:self.tour];
+    
+    if ([self.tour.tourPoints count] > 0) {
+        OTTourPoint *startPoint = self.tour.tourPoints[0];
+        CLLocationCoordinate2D startCoordinate = CLLocationCoordinate2DMake(startPoint.latitude, startPoint.longitude);
+        [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(startCoordinate, 1000, 1000)];
+        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+        [annotation setCoordinate:startCoordinate];
+        [self.mapView addAnnotation:annotation];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,7 +89,7 @@
 }
 
 - (void)doShowProfile {
-#warning show profile
+    [self performSegueWithIdentifier:@"OTUserProfileSegue" sender:self.tour.author.uID];
 }
 
 - (IBAction)doJoinTour {
@@ -95,6 +109,11 @@
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.tour = self.tour;
         controller.tourJoinRequestDelegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"OTUserProfileSegue"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
+        controller.userId = (NSNumber *)sender;
     }
 }
 
