@@ -28,7 +28,7 @@
                                         <rect key="frame" x="0.0" y="1" width="328" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Hl-Av-bP9" id="gu1-nG-hYh">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="69"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Organization name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGO-2B-OPy">
@@ -74,7 +74,7 @@
                                         <rect key="frame" x="0.0" y="71" width="328" height="157"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ihP-eA-haV" id="JE5-p9-A98">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="156"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="156.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DAY. Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBH-wO-iJN">
@@ -154,7 +154,7 @@
                                         <rect key="frame" x="0.0" y="228" width="328" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z2g-w0-fsF" id="tJY-6t-5xj">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="48"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="48.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="200" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sophie a rejoint votre maraude." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ZV-0B-fyK">
@@ -178,7 +178,7 @@
                                         <rect key="frame" x="0.0" y="277" width="328" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kGY-Dc-uny" id="9fS-6L-KU2">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="48"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="48.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User et Encounter se sont rencontrés ici." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACT-79-BBL">
@@ -202,46 +202,87 @@
                                         <rect key="frame" x="0.0" y="326" width="328" height="149"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DPF-6v-R0L" id="1jR-D3-17A">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="148"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="148.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view tag="30" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZO-gx-9oa">
-                                                    <rect key="frame" x="16" y="8" width="296" height="128"/>
+                                                <view hidden="YES" tag="33" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtH-6L-Wlh" userLabel="Others Chat View">
+                                                    <rect key="frame" x="8" y="8" width="312" height="122.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" tag="32" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPY-4V-uyt">
-                                                            <rect key="frame" x="55" y="8" width="233" height="112"/>
+                                                        <view tag="30" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZO-gx-9oa" userLabel="Chat Background">
+                                                            <rect key="frame" x="53" y="10" width="240" height="128"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" tag="32" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPY-4V-uyt" userLabel="Chat Label">
+                                                                    <rect key="frame" x="8" y="8" width="224" height="112"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.97647058963775635" green="0.97647058963775635" blue="0.97647058963775635" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="233" id="06q-01-sGI"/>
+                                                                <constraint firstAttribute="width" constant="240" id="Q74-iZ-PLr"/>
+                                                                <constraint firstAttribute="height" constant="128" identifier="chatHeight" id="Rf7-PX-2j0"/>
+                                                                <constraint firstItem="rPY-4V-uyt" firstAttribute="top" secondItem="bZO-gx-9oa" secondAttribute="top" constant="8" id="ok3-58-xIU"/>
+                                                                <constraint firstAttribute="bottom" secondItem="rPY-4V-uyt" secondAttribute="bottom" constant="8" id="qUb-bq-zkB"/>
+                                                                <constraint firstItem="rPY-4V-uyt" firstAttribute="leading" secondItem="bZO-gx-9oa" secondAttribute="leading" constant="8" id="rAV-MJ-3PU"/>
+                                                                <constraint firstAttribute="trailing" secondItem="rPY-4V-uyt" secondAttribute="trailing" constant="8" id="tgh-vv-ycN"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        </view>
+                                                        <button opaque="NO" clipsSubviews="YES" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqf-aP-3ad" userLabel="User Image Button">
+                                                            <rect key="frame" x="10" y="77" width="35" height="35"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="35" id="bcB-Uy-F3z"/>
+                                                                <constraint firstAttribute="height" constant="35" id="xJt-Aj-z4Q"/>
+                                                            </constraints>
+                                                            <state key="normal" image="userSmall"/>
+                                                        </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.97647058963775635" green="0.97647058963775635" blue="0.97647058963775635" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="296" id="Q74-iZ-PLr"/>
-                                                        <constraint firstAttribute="height" constant="128" identifier="chatHeight" id="Rf7-PX-2j0"/>
-                                                        <constraint firstItem="rPY-4V-uyt" firstAttribute="top" secondItem="bZO-gx-9oa" secondAttribute="top" constant="8" id="ok3-58-xIU"/>
-                                                        <constraint firstAttribute="bottom" secondItem="rPY-4V-uyt" secondAttribute="bottom" constant="8" id="qUb-bq-zkB"/>
-                                                        <constraint firstAttribute="trailing" secondItem="rPY-4V-uyt" secondAttribute="trailing" constant="8" id="tgh-vv-ycN"/>
+                                                        <constraint firstItem="bZO-gx-9oa" firstAttribute="leading" secondItem="wqf-aP-3ad" secondAttribute="trailing" constant="8" id="5Qz-NP-Ess"/>
+                                                        <constraint firstItem="wqf-aP-3ad" firstAttribute="leading" secondItem="rtH-6L-Wlh" secondAttribute="leading" constant="10" id="IKd-23-kJn"/>
+                                                        <constraint firstAttribute="bottom" secondItem="wqf-aP-3ad" secondAttribute="bottom" constant="10" id="Khi-I5-L49"/>
+                                                        <constraint firstItem="bZO-gx-9oa" firstAttribute="top" secondItem="rtH-6L-Wlh" secondAttribute="top" constant="10" id="p6h-hh-Fbp"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" clipsSubviews="YES" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqf-aP-3ad">
-                                                    <rect key="frame" x="26" y="18" width="35" height="35"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <view hidden="YES" tag="34" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1J-nx-8Bf" userLabel="My Chat View">
+                                                    <rect key="frame" x="8" y="8" width="312" height="122.5"/>
+                                                    <subviews>
+                                                        <view tag="35" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c77-cc-GpG" userLabel="Chat Background">
+                                                            <rect key="frame" x="59" y="10" width="240" height="128"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" tag="36" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IrU-fx-zaR" userLabel="Chat Label">
+                                                                    <rect key="frame" x="8" y="8" width="224" height="112"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="128" identifier="chatHeight" id="46k-kG-5Ge"/>
+                                                                <constraint firstAttribute="bottom" secondItem="IrU-fx-zaR" secondAttribute="bottom" constant="8" id="W8Q-aU-cNW"/>
+                                                                <constraint firstItem="IrU-fx-zaR" firstAttribute="top" secondItem="c77-cc-GpG" secondAttribute="top" constant="8" id="Yee-vg-8Ub"/>
+                                                                <constraint firstAttribute="trailing" secondItem="IrU-fx-zaR" secondAttribute="trailing" constant="8" id="fKb-5P-aWZ"/>
+                                                                <constraint firstItem="IrU-fx-zaR" firstAttribute="leading" secondItem="c77-cc-GpG" secondAttribute="leading" constant="8" id="gRO-Fl-pwH"/>
+                                                                <constraint firstAttribute="width" constant="240" id="gcz-OU-xBW"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="35" id="bcB-Uy-F3z"/>
-                                                        <constraint firstAttribute="height" constant="35" id="xJt-Aj-z4Q"/>
+                                                        <constraint firstAttribute="trailing" secondItem="c77-cc-GpG" secondAttribute="trailing" constant="13" id="2e9-rC-h0F"/>
+                                                        <constraint firstItem="c77-cc-GpG" firstAttribute="top" secondItem="B1J-nx-8Bf" secondAttribute="top" constant="10" id="d0j-ak-5v1"/>
                                                     </constraints>
-                                                    <state key="normal" image="userSmall"/>
-                                                </button>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="bZO-gx-9oa" firstAttribute="top" secondItem="1jR-D3-17A" secondAttribute="topMargin" id="7rF-EU-lHg"/>
-                                                <constraint firstItem="wqf-aP-3ad" firstAttribute="top" secondItem="1jR-D3-17A" secondAttribute="topMargin" constant="10" id="D0j-J8-lNO"/>
-                                                <constraint firstItem="wqf-aP-3ad" firstAttribute="leading" secondItem="1jR-D3-17A" secondAttribute="leadingMargin" constant="18" id="Xsg-q1-8NU"/>
-                                                <constraint firstItem="bZO-gx-9oa" firstAttribute="leading" secondItem="1jR-D3-17A" secondAttribute="leadingMargin" constant="8" identifier="chatLeading" id="zha-Rr-V6b"/>
+                                                <constraint firstItem="rtH-6L-Wlh" firstAttribute="leading" secondItem="1jR-D3-17A" secondAttribute="leadingMargin" id="GBM-Ow-rjM"/>
+                                                <constraint firstItem="rtH-6L-Wlh" firstAttribute="top" secondItem="1jR-D3-17A" secondAttribute="topMargin" id="JCv-7x-Edc"/>
+                                                <constraint firstItem="B1J-nx-8Bf" firstAttribute="top" secondItem="1jR-D3-17A" secondAttribute="topMargin" id="boB-8a-8De"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="B1J-nx-8Bf" secondAttribute="trailing" id="hbf-Zf-hsZ"/>
+                                                <constraint firstItem="B1J-nx-8Bf" firstAttribute="leading" secondItem="1jR-D3-17A" secondAttribute="leadingMargin" id="lIO-cq-ndp"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="rtH-6L-Wlh" secondAttribute="trailing" id="nLx-Sp-ht4"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="rtH-6L-Wlh" secondAttribute="bottom" constant="10" id="r4w-Sz-Sjv"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="B1J-nx-8Bf" secondAttribute="bottom" constant="10" id="z9b-vd-Nej"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -329,7 +370,8 @@
                         <outlet property="chatToolbar" destination="kAn-xh-GvT" id="w2j-S3-OcK"/>
                         <outlet property="recordButton" destination="eIr-gk-lDN" id="lcq-9x-EYU"/>
                         <outlet property="tableView" destination="CGA-by-Pfy" id="3FD-W1-cWm"/>
-                        <segue destination="ARd-Al-TGt" kind="modal" identifier="TourOptionsSegue" id="0g9-AU-hY5"/>
+                        <segue destination="ARd-Al-TGt" kind="modal" identifier="OTTourOptionsSegue" id="0g9-AU-hY5"/>
+                        <segue destination="Dot-lS-3Ml" kind="modal" identifier="OTUserProfileSegue" id="mcl-xY-cOE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRT-27-ZJ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -339,7 +381,7 @@
         <!--Tour Details Options View Controller-->
         <scene sceneID="2H1-3R-sHe">
             <objects>
-                <viewController id="ARd-Al-TGt" customClass="OTTourDetailsOptionsViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overCurrentContext" id="ARd-Al-TGt" customClass="OTTourDetailsOptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oeo-TB-LuT"/>
                         <viewControllerLayoutGuide type="bottom" id="a6F-zB-XqV"/>
@@ -382,6 +424,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jEF-tA-QbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2300" y="945"/>
+        </scene>
+        <!--UserProfile-->
+        <scene sceneID="Wjc-PB-ATp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserProfile" id="Dot-lS-3Ml" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n5q-Fw-sJ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2075.5" y="1389"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="J3Y-Qy-Grd">
