@@ -74,13 +74,25 @@
 "poi_create_encounter_alert" = "Si vous désirez créer une rencontre, vouz devez quitter le guide de solidarité";
 
 // User
-"user_edit_password_invalid_current" = "!!The current password doesn't match";
-"user_edit_password_invalid_length_too_short" = "!!The password must be at least %d characters";
-"user_edit_password_invalid_length_too_long" = "!!The password must not exceed %d characters";
-"user_edit_password_invalid_match" = "!!The new password and confirm password doesn't match";
-"user_edit_saving" = "!!Saving user info";
-"user_edit_saved_ok" = "!!User info saved";
-"user_edit_saved_error" = "!!Error saving user info";
+"firstName" = "Prénom";
+"lastName" = "Nom";
+"profile" = "profil";
+"save" = "Enregistrer";
+"invalidEmail" = "Email invalide";
+"invalidFirstName" = "Prénom invalide";
+"invalidLastName" = "Nom invalide";
+"close" = "Fermer";
+"privateInfo" = "Informations privées";
+"publicInfo" = "Informations publiques";
+"organizations" = "Association(s)";
+"user_edit_password_invalid_current" = "Le mot de passe ne correspond pas";
+"user_edit_password_invalid_length_too_short" = "Le mot de passe doit contenir au moins %d caractères";
+"user_edit_password_invalid_length_too_long" = "Le mot de passe ne peut pas dépasser %d caractères";
+"user_edit_password_invalid_match" = "Les mots de passe ne correspondent pas";
+"user_edit_saving" = "Sauvegarde en cours";
+"user_edit_saved_ok" = "Infos sauvegardées";
+"user_edit_saved_error" = "Erreur de sauvegarde";
+"user_edit_delete_error" = "Erreur suppression compte";
 "user_profile_error" = "!!Error retrieving user profile";
 
 // API
