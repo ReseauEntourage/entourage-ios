@@ -41,7 +41,7 @@
 "about_cgu" = "Conditions générales d’utilisation";
 "about_website" = "Entourage.social";
 "about_email" = "Contactez Entourage";
-"about_email_notavailable" = "!!Email not available";
+"about_email_notavailable" = "Email introuvable";
 
 // Map Options
 "map_options_hide_poi" = "Masquer le guide de solidarité";
@@ -66,12 +66,12 @@
 "tour_status_ongoing" = "ongoing";
 "tour_status_closed" = "closed";
 
-"tour_create_sending" = "!!Creating the tour";
-"tour_create_error" = "!!Error creating the tour";
+"tour_create_sending" = "Création de la maraude";
+"tour_create_error" = "Erreur de création de la maraude";
 
 // POI
-"poi_create_tour_alert" = "!!Si vous desirez creer une maraude, vouz devez quitter le quide de solidarite";
-"poi_create_encounter_alert" = "!!Si vous desirez creer une rencontre, vouz devez quitterle quide de solidarite";
+"poi_create_tour_alert" = "Si vous désirez créer une maraude, vouz devez quitter le guide de solidarité";
+"poi_create_encounter_alert" = "Si vous désirez créer une rencontre, vouz devez quitter le guide de solidarité";
 
 // User
 "user_edit_password_invalid_current" = "!!The current password doesn't match";
@@ -99,4 +99,5 @@
 "url_user_tours" = "%@/%@/%@.json?token=%@";
 "url_send_encounter" = "%@/%@/%@.json?token=%@";
 "url_update_user" = "%@/%@.json?token=%@";
+"url_delete_account" = "users/me?token=%@";
 "url_regenerate_code" = "%@/%@/%@.json";

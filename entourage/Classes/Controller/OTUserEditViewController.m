@@ -6,6 +6,8 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+
+#import "OTAppDelegate.h"
 // Controllers
 #import "OTUserEditViewController.h"
 #import "UIViewController+menu.h"
@@ -33,6 +35,7 @@ typedef NS_ENUM(NSInteger) {
 } SectionType;
 
 #define EDIT_PASSWORD_SEGUE @"EditPasswordSegue"
+#define NOTIFY_LOGOUT @"loginFailureNotification"
 
 @interface OTUserEditViewController() <UITableViewDelegate, UITableViewDataSource, OTUserEditPasswordProtocol>
 
@@ -48,7 +51,7 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"PROFIL";
+    self.title = NSLocalizedString(@"profile", @"").uppercaseString;
     [self setupCloseModal];
     [self showSaveButton];
     
@@ -67,7 +70,7 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Private
 
 - (void)showSaveButton {
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Enregistrer"
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"save", @"")
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(updateUser)];
@@ -78,29 +81,25 @@ typedef NS_ENUM(NSInteger) {
 - (void)updateUser {
     NSString *firstName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeSummary]];
     NSString *lastName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:SectionTypeSummary]];
-    
+
     NSString *email = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeInfoPrivate]];
-    
+
     NSString *warning = nil;
     if (![email isValidEmail])
-        //TODO: @Francois: please translate
-        warning = @"Invalid email";
+        warning = NSLocalizedString(@"invalidEmail", @"");
     if (lastName.length < 2)
-        //TODO: @Francois: please translate
-        warning = @"Invalid last name";
+        warning =  NSLocalizedString(@"invalidLastName", @"");
     if (firstName.length < 2)
-        //TODO: @Francois: please translate
-        warning = @"Invalid first name";
-    
-   
+        warning =  NSLocalizedString(@"invalidFirstName", @"");
+
+
     if (warning != nil) {
-        //TODO: @Francois: please translate
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                        message:warning
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
         
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: NSLocalizedString(@"close", @"")
                                                                 style:UIAlertActionStyleCancel
                                                               handler:^(UIAlertAction * _Nonnull action) {}];
         
@@ -173,6 +172,7 @@ typedef NS_ENUM(NSInteger) {
     return height;
     
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
     return .5f;
@@ -214,15 +214,17 @@ typedef NS_ENUM(NSInteger) {
     NSString *title = @"";
     switch (section) {
         case SectionTypeInfoPrivate: {
-            title = @"Informations privées";
+            title = NSLocalizedString(@"privateInfo", @"");
             break;
         }
         case SectionTypeInfoPublic: {
-            title = @"Informations publiques";
+            title =  NSLocalizedString(@"publicInfo", @"");
+
             break;
         }
         case SectionTypeAssociations: {
-            title = @"Association(s)";
+            title =  NSLocalizedString(@"organizations", @"");
+
             break;
         }
             
@@ -287,7 +289,7 @@ typedef NS_ENUM(NSInteger) {
                 [self setupSummaryProfileCell:cell];
                 
             } else {
-                NSString *title = indexPath.row == 1 ? @"Prénom" : @"Nom";
+                NSString *title = indexPath.row == 1 ? NSLocalizedString(@"firstName", @"") : NSLocalizedString(@"lastName", @"");
                 NSString *text = indexPath.row == 1 ? self.user.firstName : self.user.lastName;
                 UITextField *textField = indexPath.row == 1 ? self.firstNameTextField : self.lastNameTextField;
                 [self setupInfoCell:cell withTitle:title withTextField:textField andText:text];
@@ -312,7 +314,7 @@ typedef NS_ENUM(NSInteger) {
             break;
         }
         case SectionTypeInfoPublic: {
-            [self setupInfoCell:cell withTitle:@"Quartier" withTextField:nil andText:@"ROU"];
+            [self setupInfoCell:cell withTitle:@"Quartier" withTextField:nil andText:@""];
             break;
         }
         case SectionTypeAssociations: {
@@ -338,11 +340,10 @@ typedef NS_ENUM(NSInteger) {
             }
             break;
         case SectionTypeDelete: {
-            //TODO: @Francois: please translate
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                           message:@"Are you sure you want to delete your account?"                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            
-      
+                                                                           message:@"Etes-vous sûr de vouloir supprimer votre compte ?"                                                                    preferredStyle:UIAlertControllerStyleAlert];
+
+
             UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
                                                                     style:UIAlertActionStyleCancel
                                                                   handler:^(UIAlertAction * _Nonnull action) {}];
@@ -351,7 +352,15 @@ typedef NS_ENUM(NSInteger) {
             UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Oui"
                                                                     style:UIAlertActionStyleDestructive
                                                                   handler:^(UIAlertAction * _Nonnull action) {
-                                                                      NSLog(@"delete account");
+                                                                      NSLog(@"deleting account ...");
+                                                                      [[OTAuthService new] deleteAccountForUser:0
+                                                                                                        success:^{
+                                                                                                            NSLog(@"deleted account.");
+                                                                                                            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFY_LOGOUT object:self];
+                                                                                                        } failure:^(NSError *error) {
+                                                                                                            NSLog(@"Something went wrong");
+                                                                                                            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"user_edit_saved_ok", @"")];
+                                                                                                        }];
                                                                   }];
             
             [alert addAction:deleteAction];

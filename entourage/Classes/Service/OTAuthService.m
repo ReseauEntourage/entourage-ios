@@ -79,6 +79,31 @@ NSString *const kKeychainPassword = @"entourage_user_password";
      }];
 }
 
+- (void)deleteAccountForUser:(NSNumber *)userID
+                     success:(void (^)())success
+                     failure:(void (^)(NSError *))failure
+{
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_delete_account", @""), [[NSUserDefaults standardUserDefaults] currentUser].token];
+    
+    [[OTHTTPRequestManager sharedInstance]
+         DELETEWithUrl:url
+         andParameters:nil
+         andSuccess:^(id responseObject) {
+             if (success) {
+                 success();
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             NSLog(@"Failed with error %@", error);
+             if (failure) {
+                 failure(error);
+             }
+         }];
+
+}
+
+
 - (void)getDetailsForUser:(NSNumber *)userID
               success:(void (^)(OTUser *))success
               failure:(void (^)(NSError *))failure
