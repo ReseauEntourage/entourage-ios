@@ -20,6 +20,6 @@
 
 @property (nonatomic, weak) id<OTMapOptionsDelegate> mapOptionsDelegate;
 
--(void) setIsPOIVisible:(BOOL)isPOIVisible;
+- (void)setIsPOIVisible:(BOOL)POIVisible;
 
 @end

@@ -184,11 +184,14 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     NSDictionary *apnContent = [notificationDictionary objectForKey:kUserInfoMessage];
     NSDictionary *apnExtra = [apnContent objectForKey:kUserInfoExtraMessage];
     
-    NSNumber *tourId = [apnExtra numberForKey:@"tour_id"];
-    NSNumber *userId = [apnExtra numberForKey:@"user_id"];
-#warning add validation
+    NSString *joinableType = [apnExtra valueForKey:@"joinable_type"];
     NSNumber *joinableId = [apnExtra numberForKey:@"joinable_id"];
-    NSNumber *tourType = [apnExtra numberForKey:@"joinable_type"];
+    NSNumber *userId = [apnExtra numberForKey:@"user_id"];
+
+    NSNumber *tourId;
+    if ([@"Tour" isEqualToString:joinableType]) {
+        tourId = joinableId;
+    }
 
     
     UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:@"Refuser"

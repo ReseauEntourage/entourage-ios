@@ -98,8 +98,6 @@ typedef NS_ENUM(NSInteger){
     
     [self setupPagination];
     [self configureTableView];
-    
-//    [self.statusSC setSelectedSegmentIndex:EntourageStatusOpen];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -19,8 +19,7 @@
     NSString *regexCA = @"^((\\+|00)1\\s?|)\\(?(\\d{3})\\)?\\s?(\\d{3})\\s?(\\d{4})$";
     NSString *regexFR = @"^((\\+|00)33\\s?|0)[67](\\s?\\d{2}){4}$";
     
-    
-    NSString *regexInternational = @"^\\+(?:[0-9]?){6,14}[0-9]$";
+    //NSString *regexInternational = @"^\\+(?:[0-9]?){6,14}[0-9]$";
 #if DEBUG
     return YES;
 #endif

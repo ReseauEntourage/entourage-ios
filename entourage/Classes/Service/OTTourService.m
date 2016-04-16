@@ -262,7 +262,6 @@ NSString *const kTourPoints = @"tour_points";
          andParameters:parameters
          andSuccess:^(id responseObject)
          {
-             
              if (success)
              {
                  success();
@@ -291,8 +290,6 @@ NSString *const kTourPoints = @"tour_points";
          andParameters:nil
          andSuccess:^(id responseObject)
          {
-             NSDictionary *data = responseObject;
-
              if (success)
              {
                  success();
@@ -400,25 +397,18 @@ NSString *const kTourPoints = @"tour_points";
 }
 
 - (void)quitTour:(OTTour *)tour
-         success:(void (^)(OTTour *updatedTour))success
+         success:(void (^)())success
          failure:(void (^)(NSError *error))failure {
    
-#warning
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_quit_tour", @""), kTours, tour.sid, [[NSUserDefaults standardUserDefaults] currentUser].sid, [[NSUserDefaults standardUserDefaults] currentUser].token];
-    
-    
     
     [[OTHTTPRequestManager sharedInstance]
          DELETEWithUrl:url
          andParameters:nil
          andSuccess:^(id responseObject)
          {
-             NSDictionary *data = [responseObject valueForKey:@"user"];
-#warning "user"
-             OTTour *updatedTour = [self tourFromDictionary:responseObject];
-             if (success)
-             {
-                 success(updatedTour);
+             if (success) {
+                 success();
              }
          }
          andFailure:^(NSError *error)

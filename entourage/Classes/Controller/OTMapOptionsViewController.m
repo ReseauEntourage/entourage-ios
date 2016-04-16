@@ -55,8 +55,8 @@
     }
 }
 
--(void) setIsPOIVisible:(bool)isPOIVisible {
-    _isPOIVisible = isPOIVisible;
+- (void)setIsPOIVisible:(BOOL)POIVisible {
+    _isPOIVisible = POIVisible;
 }
 
 /*

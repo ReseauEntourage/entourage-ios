@@ -187,8 +187,6 @@
     } else {
         [self showToursMap];
     }
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -860,7 +858,7 @@ typedef NS_ENUM(NSInteger) {
                                        @"OTGuideDetailsSegue": [NSNumber numberWithInteger:SegueIDGuideSolidarityDetails]};
     
     UIViewController *destinationViewController = segue.destinationViewController;
-    NSInteger segueID = [[seguesDictionary numberForKey:segue.identifier] integerValue];
+    NSInteger segueID = [[seguesDictionary numberForKey:segue.identifier defaultValue:@-1] integerValue];
     switch (segueID) {
         case SegueIDUserProfile: {
             UINavigationController *navController = (UINavigationController*)destinationViewController;

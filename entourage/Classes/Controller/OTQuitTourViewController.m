@@ -13,8 +13,8 @@
 
 - (IBAction)doQuitTour {
     [[OTTourService new] quitTour:self.tour
-                          success:^(OTTour *updatedTour) {
-                              NSLog(@"Quited tour: %@", updatedTour.sid);
+                          success:^() {
+                              NSLog(@"Quited tour: %@", self.tour.sid);
                               [self dismissViewControllerAnimated:YES completion:nil];
                           } failure:^(NSError *error) {
                               NSLog(@"QUITerr %@", error.description);

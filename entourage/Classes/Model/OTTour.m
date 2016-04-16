@@ -52,7 +52,7 @@ NSString *const kEncountersCount = @"encounter_count";
         self.vehicleType = NSLocalizedString(@"tour_vehicle_feet", @"");
         self.status = NSLocalizedString(@"tour_status_ongoing", @"");
         self.joinStatus = NSLocalizedString(@"tour_status_ongoing", @"");
-#warning init joinStatus, TourAuthor, noPeople
+        self.noPeople = @0;
         self.tourPoints = [NSMutableArray new];
         self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
         self.organizationName = user.organization.name;
