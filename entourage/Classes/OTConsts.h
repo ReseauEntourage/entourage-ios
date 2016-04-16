@@ -19,6 +19,8 @@
 
 #define kNotificationPushStatusChanged @"NotificationAPNSStatusChanged"
 
+#define kNotificationLocalTourConfirmation "NotificationShowTourConfirmation"
+
 #define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"
 #define ABOUT_CGU_URL @"https://s3-eu-west-1.amazonaws.com/entourage-ressources/charte.pdf"

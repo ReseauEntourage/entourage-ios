@@ -161,8 +161,8 @@
                         <segue destination="UcL-62-xea" kind="custom" identifier="segueMenuIdentifierForMap" customClass="SWRevealViewControllerSeguePushController" id="xSV-rR-wZy"/>
                         <segue destination="Qnh-OU-tAM" kind="custom" identifier="segueMenuIdentifierForGuide" customClass="SWRevealViewControllerSeguePushController" id="cE5-Dw-CbA"/>
                         <segue destination="cEE-ZD-h1d" kind="modal" identifier="segueMenuIdentifierForProfile" modalTransitionStyle="coverVertical" id="ZNZ-ec-dR4"/>
-                        <segue destination="pnd-2e-8CK" kind="custom" identifier="segueMenuIdentifierForSettings" customClass="SWRevealViewControllerSeguePushController" id="9SM-98-Uj4"/>
-                        <segue destination="vTa-22-9U0" kind="custom" identifier="segueMenuIdentifierForAbout" customClass="SWRevealViewControllerSeguePushController" id="nHP-sl-eUN"/>
+                        <segue destination="pnd-2e-8CK" kind="modal" identifier="segueMenuIdentifierForSettings" id="9SM-98-Uj4"/>
+                        <segue destination="vTa-22-9U0" kind="modal" identifier="segueMenuIdentifierForAbout" id="nHP-sl-eUN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tAy-vt-yhu" userLabel="First Responder" sceneMemberID="firstResponder"/>

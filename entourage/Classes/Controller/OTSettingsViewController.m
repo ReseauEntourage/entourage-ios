@@ -14,7 +14,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"PARAMETRES";
-    [self createMenuButton];
+    //[self createMenuButton];
+    [self setupCloseModal];
 }
 
 @end

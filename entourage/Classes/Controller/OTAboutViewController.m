@@ -32,7 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"À PROPOS";
-    [self createMenuButton];
+    //[self createMenuButton];
+    [self setupCloseModal];
     
     self.aboutItems = [OTAboutViewController createAboutItems];
 }

@@ -83,14 +83,14 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 //    //Vincent
 //    self.phoneTextField.text = @"0651502173";
 //    self.passwordTextField.text = @"123456";
-//    
+//
 //    // Ciprian + Mihai
 //    self.phoneTextField.text = @"0623456789";
 //    self.passwordTextField.text = @"123456";
 //
-    // Vincent2
-//    self.phoneTextField.text = @"+33623456789";
-//    self.passwordTextField.text = @"123456";
+    // Vincent PRO
+    self.phoneTextField.text = @"+33651502173";
+    self.passwordTextField.text = @"123456";
 #endif
     
 }

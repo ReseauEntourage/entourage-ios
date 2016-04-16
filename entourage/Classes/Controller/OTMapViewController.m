@@ -32,6 +32,7 @@
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
 
+#import "OTConsts.h"
 
 // View
 #import "SVProgressHUD.h"
@@ -77,6 +78,7 @@
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 #define TABLEVIEW_BOTTOM_INSET 86.0f
+
 
 
 /********************************************************************************/
@@ -173,14 +175,19 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTourConfirmation) name:@kNotificationLocalTourConfirmation object:nil];
 
 	[self configureNavigationBar];
     //[self configureMapView];
-    self.mapSegmentedControl.layer.cornerRadius = 4;
     [self configureTableView];
     
     [self switchToNewsfeed];
-    [self showToursMap];
+    if (self.isTourRunning) {
+        [self showNewTourOnGoing];
+    } else {
+        [self showToursMap];
+    }
+    
     
 }
 
@@ -214,6 +221,8 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     //[self.timer invalidate];
+    if (_isTourRunning)
+        [self createLocalNotificationForTour:self.tour.sid];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -341,7 +350,9 @@
 }
 
 - (void)appWillEnterBackground:(NSNotification*)note {
-    if (!self.isTourRunning) {
+    if (self.isTourRunning) {
+        [self createLocalNotificationForTour:self.tour.sid];
+    } else {
         [self.locationManager stopUpdatingLocation];
     }
 }
@@ -562,12 +573,27 @@ static BOOL didGetAnyData = NO;
                  [self performSelector:@selector(sendTourPoints:) withObject:self.pointsToSend afterDelay:0.0];
              }
              
+             //[self createLocalNotificationForTour:self.tour.sid];
         } failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"tour_create_error", @"")];
             NSLog(@"%@",[error localizedDescription]);
         }
      ];
 }
+
+- (void)createLocalNotificationForTour:(NSNumber*)tourId {
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:2];
+    localNotification.alertBody = @"Maraude en cours";
+    localNotification.alertAction = @"Stop";
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    localNotification.userInfo = @{@"tourId": tourId, @"object":@"Maraude en cours"};
+    localNotification.applicationIconBadgeNumber = 0;//[[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
+}
+
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoint {
     __block NSArray *sentPoints = [NSArray arrayWithArray:tourPoint];
@@ -729,6 +755,7 @@ static BOOL didGetAnyData = NO;
     self.isTourRunning = NO;
     self.requestedToursCoordinate = CLLocationCoordinate2DMake(0.0f, 0.0f);
     [self clearMap];
+    [self showToursList];
 }
 
 - (void)resumeTour {
@@ -804,6 +831,7 @@ static BOOL didGetAnyData = NO;
 /********************************************************************************/
 #pragma mark - Segue
 typedef NS_ENUM(NSInteger) {
+    SegueIDUserProfile,
     SegueIDCreateMeeting,
     SegueIDConfirmation,
     SegueIDSelectedTour,
@@ -812,79 +840,97 @@ typedef NS_ENUM(NSInteger) {
     SegueIDMapOptions,
     SegueIDTourJoinRequest,
     SegueIDQuitTour,
-    SegueIDGuideSolidarity
+    SegueIDGuideSolidarity,
+    SegueIDGuideSolidarityDetails
 } SegueID;
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSDictionary *seguesDictionary = @{@"OTCreateMeeting" : [NSNumber numberWithInteger:SegueIDCreateMeeting]};
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSDictionary *seguesDictionary = @{@"UserProfileSegue" : [NSNumber numberWithInteger:SegueIDUserProfile],
+                                       @"OTCreateMeeting":[NSNumber numberWithInteger:SegueIDCreateMeeting],
+                                       @"OTConfirmationPopup" : [NSNumber numberWithInteger:SegueIDConfirmation],
+                                       @"OTSelectedTour" : [NSNumber numberWithInteger:SegueIDSelectedTour],
+                                       @"OTPublicTourSegue" : [NSNumber numberWithInteger:SegueIDPublicTour],
+                                       @"OTTourOptionsSegue" : [NSNumber numberWithInteger:SegueIDTourOptions],
+                                       @"OTMapOptionsSegue": [NSNumber numberWithInteger:SegueIDMapOptions],
+                                       @"OTTourJoinRequestSegue": [NSNumber numberWithInteger:SegueIDTourJoinRequest],
+                                       @"QuitTourSegue": [NSNumber numberWithInteger:SegueIDQuitTour],
+                                       @"GuideSegue": [NSNumber numberWithInteger:SegueIDGuideSolidarity],
+                                       @"OTGuideDetailsSegue": [NSNumber numberWithInteger:SegueIDGuideSolidarityDetails]};
     
-    NSString *segueIDString = segue.identifier;
-    NSInteger segueID = [[seguesDictionary numberForKey:segueIDString] integerValue];
+    UIViewController *destinationViewController = segue.destinationViewController;
+    NSInteger segueID = [[seguesDictionary numberForKey:segue.identifier] integerValue];
     switch (segueID) {
-            
+        case SegueIDUserProfile: {
+            UINavigationController *navController = (UINavigationController*)destinationViewController;
+            OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
+            controller.user = (OTUser*)sender;
+        } break;
+        case SegueIDCreateMeeting: {
+            UINavigationController *navController = (UINavigationController*)destinationViewController;
+            OTCreateMeetingViewController *controller = (OTCreateMeetingViewController*)navController.topViewController;
+            controller.delegate = self;
+            [controller configureWithTourId:self.tour.sid andLocation:self.mapView.region.center];
+            controller.encounters = self.encounters;
+        } break;
+        case SegueIDConfirmation: {
+            OTConfirmationViewController *controller = (OTConfirmationViewController *)destinationViewController;
+            [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+            controller.delegate = self;
+            self.isTourRunning = NO;
+            [controller configureWithTour:self.tour
+                       andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]];
+        } break;
+        case SegueIDSelectedTour: {
+            UINavigationController *navController = (UINavigationController*)destinationViewController;
+            OTTourViewController *controller = (OTTourViewController *)navController.topViewController;
+            controller.tour = self.selectedTour;
+            [controller configureWithTour:self.selectedTour];
+        } break;
+        case SegueIDPublicTour: {
+            UINavigationController *navController = segue.destinationViewController;
+            OTPublicTourViewController *controller = (OTPublicTourViewController *)navController.topViewController;
+            controller.tour = self.selectedTour;
+        } break;
+        case SegueIDTourOptions: {
+            OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
+            controller.tourOptionsDelegate = self;
+            [controller setIsPOIVisible:self.guideMapDelegate.isActive];
+            if (!CGPointEqualToPoint(self.mapPoint, CGPointZero)) {
+                controller.c2aPoint = self.mapPoint;
+            }
+        } break;
+        case SegueIDMapOptions: {
+            OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;;
+            controller.mapOptionsDelegate = self;
+            [controller setIsPOIVisible:self.guideMapDelegate.isActive];
+        } break;
+        case SegueIDTourJoinRequest: {
+            OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
+            controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+            [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+            controller.tour = self.selectedTour;
+            controller.tourJoinRequestDelegate = self;
+        } break;
+        case SegueIDQuitTour: {
+            OTQuitTourViewController *controller = (OTQuitTourViewController *)segue.destinationViewController;
+            controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+            [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+            controller.tour = self.selectedTour;
+        } break;
+        case SegueIDGuideSolidarity: {
+            UINavigationController *navController = segue.destinationViewController;
+            OTGuideViewController *controller = (OTGuideViewController *)navController.childViewControllers[0];
+            [controller setIsTourRunning:self.isTourRunning];
+        } break;
+        case SegueIDGuideSolidarityDetails: {
+            UINavigationController *navController = (UINavigationController*)segue.destinationViewController;
+            OTGuideDetailsViewController *controller = navController.childViewControllers[0];
+            controller.poi = ((OTCustomAnnotation*)sender).poi;
+            controller.category = [self categoryById:controller.poi.categoryId];
+        } break;
         default:
             break;
-    }
-    if ([segue.identifier isEqualToString:@"UserProfileSegue"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
-        controller.user = (OTUser*)sender;
-    } else
-    if ([segue.identifier isEqualToString:@"OTCreateMeeting"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        OTCreateMeetingViewController *controller = (OTCreateMeetingViewController*)navController.topViewController;
-        controller.delegate = self;
-        [controller configureWithTourId:self.tour.sid andLocation:self.mapView.region.center];
-        controller.encounters = self.encounters;
-    } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
-        OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
-        controller.view.backgroundColor = [UIColor clearColor];
-        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        controller.delegate = self;
-        self.isTourRunning = NO;
-        [controller configureWithTour:self.tour
-                   andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]];
-    } else if ([segue.identifier isEqualToString:@"OTSelectedTour"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        OTTourViewController *controller = (OTTourViewController *)navController.topViewController;
-        controller.tour = self.selectedTour;
-        [controller configureWithTour:self.selectedTour];
-    } else if ([segue.identifier isEqualToString:@"OTPublicTourSegue"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        OTPublicTourViewController *controller = (OTPublicTourViewController *)navController.topViewController;
-        controller.tour = self.selectedTour;
-    } else if ([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
-        OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
-        controller.tourOptionsDelegate = self;
-        [controller setIsPOIVisible:self.guideMapDelegate.isActive];
-        if (!CGPointEqualToPoint(self.mapPoint, CGPointZero) ) {
-            controller.c2aPoint = self.mapPoint;
-        }
-    } else if ([segue.identifier isEqualToString:@"OTMapOptionsSegue"]) {
-        OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;;
-        controller.mapOptionsDelegate = self;
-        [controller setIsPOIVisible:self.guideMapDelegate.isActive];
-    } else if ([segue.identifier isEqualToString:@"OTTourJoinRequestSegue"]) {
-        OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
-        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
-        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        controller.tour = self.selectedTour;
-        controller.tourJoinRequestDelegate = self;
-    } else if ([segue.identifier isEqualToString:@"QuitTourSegue"]) {
-        OTQuitTourViewController *controller = (OTQuitTourViewController *)segue.destinationViewController;
-        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
-        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        controller.tour = self.selectedTour;
-        //controller.tourJoinRequestDelegate = self;
-    } else if ([segue.identifier isEqualToString:@"GuideSegue"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        OTGuideViewController *controller = (OTGuideViewController *)navController.childViewControllers[0];
-        [controller setIsTourRunning:self.isTourRunning];
-    } else if ([segue.identifier isEqualToString:@"OTGuideDetailsSegue"]) {
-        UINavigationController *navController = (UINavigationController*)segue.destinationViewController;
-        OTGuideDetailsViewController *controller = navController.childViewControllers[0];
-        controller.poi = ((OTCustomAnnotation*)sender).poi;
-        controller.category = [self categoryById:controller.poi.categoryId];
     }
 }
 
@@ -903,16 +949,8 @@ typedef NS_ENUM(NSInteger) {
 static bool isShowingOptions = NO;
 - (IBAction)launcherTour:(UIButton *)sender {
     
-    /*
-    if (isShowingOptions) {
-        self.blurEffect.hidden = YES;
-    } else {
-        [self showMapOverlayToCreateTour];
-    }
-     */
     isShowingOptions = !isShowingOptions;
     [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
-    //[sender setSelected:!sender.isSelected];
 }
 
 - (IBAction)createTour:(id)sender {
@@ -1152,6 +1190,12 @@ static bool isShowingOptions = NO;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
     
+}
+
+- (void)showTourConfirmation {
+    NSLog(@"showing tour confirmation");
+    
+    [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
 }
 
 #pragma mark - Guide

@@ -14,6 +14,7 @@
 #import "OTStartupViewController.h"
 #import "OTTourService.h"
 #import "OTTourViewController.h"
+#import "SWRevealViewController.h"
 
 // Pods
 #import "SimpleKeychain.h"
@@ -28,6 +29,7 @@
 #import "IQKeyboardManager.h"
 #import "UIStoryboard+entourage.h"
 #import "UIStoryboard+entourage.h"
+#import "OTMapViewController.h"
 
 // Helper
 #import "NSUserDefaults+OT.h"
@@ -184,6 +186,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     
     NSNumber *tourId = [apnExtra numberForKey:@"tour_id"];
     NSNumber *userId = [apnExtra numberForKey:@"user_id"];
+#warning add validation
+    NSNumber *joinableId = [apnExtra numberForKey:@"joinable_id"];
+    NSNumber *tourType = [apnExtra numberForKey:@"joinable_type"];
+
     
     UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:@"Refuser"
                                                                       style:UIAlertActionStyleDefault
@@ -250,10 +256,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     // Retrieving the data
     NSDictionary *userInfo = notification.userInfo;
-    
+    NSLog(@"Local notification received: %@", userInfo);
     // Building the notification
     UIApplicationState state = [application applicationState];
-    if (state == UIApplicationStateActive) {
+    if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender]
                                                                        message:[userInfo objectForKey:kUserInfoObject]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
@@ -264,18 +270,35 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         UIAlertAction *openAction = [UIAlertAction actionWithTitle:@"Afficher"
                                                              style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                               OTMessageViewController *controller =
-                                                               (OTMessageViewController *)[application.keyWindow.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"OTMessageViewController"];
-
-                                                               [application.keyWindow.rootViewController presentViewController:controller animated:YES completion:nil];
+                                                               UIApplication *app = [UIApplication sharedApplication];
+                                                               UIViewController *rootVC = app.windows.firstObject.rootViewController;
+                                                               [rootVC dismissViewControllerAnimated:YES completion:nil];
+//                                                               if ([rootVC isKindOfClass:[SWRevealViewController class]]) {
+//                                                                   SWRevealViewController *revealVC = rootVC.revealViewController;
+//                                                                   [UIStoryboard showSWRevealController];
+//
+////                                                                   [revealVC performSegueWithIdentifier:@"segueMenuIdentifierForMap" sender:nil];
+////                                                                   UINavigationController *frontNavController = (UINavigationController*)((SWRevealViewController*)rootVC).frontViewController;
+////                                                                   UIViewController *frontVC = frontNavController.viewControllers.firstObject;
+////                                                                   
+//                                                                
+//                                                               }
                                                                
-                                                               [controller configureWithSender:[userInfo objectForKey:kUserInfoSender]
-                                                                                     andObject:[userInfo objectForKey:kUserInfoObject]
-                                                                                    andMessage:[userInfo objectForKey:kUserInfoMessage]];
-                                                           }];
+                                                               
+                                                               if ([rootVC isKindOfClass:[SWRevealViewController class]]) {
+                                                                   [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationLocalTourConfirmation object:nil];
+                                                               } else {
+                                                                   [UIStoryboard showSWRevealController];
+                                                               }
+                                                }];
         [alert addAction:defaultAction];
         [alert addAction:openAction];
-        [application.keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
+        //[application.keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
+        UIViewController *rootVC = application.keyWindow.rootViewController;
+        if (rootVC.presentedViewController)
+            [rootVC.presentedViewController presentViewController:alert animated:YES completion:nil];
+        else
+            [rootVC presentViewController:alert animated:YES completion:nil];
     }
     
     // Set icon badge number to zero
