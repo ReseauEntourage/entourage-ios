@@ -93,6 +93,7 @@
 "user_edit_saved_ok" = "Infos sauvegardées";
 "user_edit_saved_error" = "Erreur de sauvegarde";
 "user_edit_delete_error" = "Erreur lors de la suppression du compte";
+"user_profile_error" = "!!Error retrieving user profile";
 
 // API
 "url_send_tour" = "%@.json?token=%@";

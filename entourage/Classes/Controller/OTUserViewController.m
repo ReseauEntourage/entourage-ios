@@ -53,11 +53,16 @@ typedef NS_ENUM(NSInteger) {
     [super viewWillAppear:animated];
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    if (self.user.sid.intValue == currentUser.sid.intValue)
-    {
-        self.user = currentUser;
-        [self showEditButton];
-        [self.tableView reloadData];
+    if (self.user != nil) {
+        if (self.user.sid.intValue == currentUser.sid.intValue)
+        {
+            self.user = currentUser;
+            [self showEditButton];
+            [self.tableView reloadData];
+        }
+    }
+    else {
+        [self loadUser];
     }
 }
 
@@ -77,11 +82,27 @@ typedef NS_ENUM(NSInteger) {
     [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
 }
 
+- (void)loadUser {
+    if (self.userId != nil) {
+        [SVProgressHUD show];
+        [[OTAuthService new] getDetailsForUser:self.userId
+                                       success:^(OTUser *user) {
+                                           [SVProgressHUD dismiss];
+                                           self.user = user;
+                                           [self.tableView reloadData];
+                                           
+                                       } failure:^(NSError *error) {
+                                           [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"user_profile_error", @"")];
+                                           NSLog(@"@fails getting user %@", error.description);
+                                       }];
+    }
+}
+
 /**************************************************************************************************/
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return self.user != nil ? 4 : 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

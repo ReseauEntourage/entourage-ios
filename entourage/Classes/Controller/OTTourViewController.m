@@ -6,22 +6,30 @@
 //  Copyright © 2015 OCTO Technology. All rights reserved.
 //
 
+// Controllers
 #import "OTTourViewController.h"
+#import "UIViewController+menu.h"
+#import "OTTourDetailsOptionsViewController.h"
+#import "OTUserViewController.h"
+#import "OTMeetingCalloutViewController.h"
+
+// Models
 #import "OTTour.h"
 #import "OTTourPoint.h"
 #import "OTOrganization.h"
-#import "UIViewController+menu.h"
-#import "UIColor+entourage.h"
-#import "OTTourDetailsOptionsViewController.h"
-#import "OTTourService.h"
-#import "NSUserDefaults+OT.h"
-
 #import "OTTourJoiner.h"
 #import "OTEncounter.h"
 #import "OTTourMessage.h"
 #import "OTTourStatus.h"
-#import "IQKeyboardManager.h"
 #import "OTUser.h"
+
+// Services
+#import "OTTourService.h"
+
+// Helpers
+#import "UIColor+entourage.h"
+#import "NSUserDefaults+OT.h"
+#import "IQKeyboardManager.h"
 #import "UIButton+entourage.h"
 
 
@@ -226,7 +234,7 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (void)showOptions {
-    [self performSegueWithIdentifier:@"TourOptionsSegue" sender:nil];
+    [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
 }
 
 - (void)updateTableViewAddingTimelinePoints:(NSArray *)timelinePoints {
@@ -247,17 +255,24 @@ typedef NS_ENUM(unsigned) {
 - (void)getTourUsersJoins {
     [[OTTourService new] tourUsersJoins:self.tour
                                 success:^(NSArray *tourUsers) {
-                                    NSLog(@"USERS: %@", tourUsers);
-                                    [self updateTableViewAddingTimelinePoints:tourUsers];
+                                    //NSLog(@"USERS: %@", tourUsers);
+                                    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+                                    NSMutableArray *users = [NSMutableArray new];
+                                    for (OTTourJoiner *joiner  in tourUsers) {
+                                        if (![joiner.uID isEqualToValue:currentUser.sid]) {
+                                            [users addObject:joiner];
+                                        }
+                                    }
+                                    [self updateTableViewAddingTimelinePoints:users];
     } failure:^(NSError *error) {
-        NSLog(@"USERSerr %@", error.description);
+        NSLog(@"USERS err %@", error.description);
     }];
 }
 
 - (void)getTourMessages {
     [[OTTourService new] tourMessages:self.tour
                                 success:^(NSArray *tourMessages) {
-                                    NSLog(@"MESSAGES: %@", tourMessages);
+                                    //NSLog(@"MESSAGES: %@", tourMessages);
                                     [self updateTableViewAddingTimelinePoints:tourMessages];
 
     } failure:^(NSError *error) {
@@ -268,7 +283,7 @@ typedef NS_ENUM(unsigned) {
 - (void)getTourEncounters {
     [[OTTourService new] tourEncounters:self.tour
                               success:^(NSArray *tourEncounters) {
-                                  NSLog(@"ENCOUNTERS: %@", tourEncounters);
+                                 // NSLog(@"ENCOUNTERS: %@", tourEncounters);
                                   [self updateTableViewAddingTimelinePoints:tourEncounters];
                               } failure:^(NSError *error) {
                                   NSLog(@"ENCOUNTERSSerr %@", error.description);
@@ -415,9 +430,15 @@ typedef NS_ENUM(unsigned) {
 #define TIMELINE_DURATION_TAG 12
 #define TIMELINE_KM_TAG 13
 
-#define TIMELINE_MESSAGE_TAG 30
-#define TIMELINE_MESSAGE_USER 31
-#define TIMELINE_MESSAGE_TEXT 32
+#define TIMELINE_MESSAGE_OTHER_BACKGROUND_TAG 30
+#define TIMELINE_MESSAGE_OTHER_USER 31
+#define TIMELINE_MESSAGE_OTHER_TEXT 32
+
+#define TIMELINE_MESSAGE_OTHER_CONTENT_TAG 33
+#define TIMELINE_MESSAGE_ME_CONTENT_TAG 34
+
+#define TIMELINE_MESSAGE_ME_BACKGROUND_TAG 35
+#define TIMELINE_MESSAGE_ME_TEXT 36
 
 #define TIMELINE_ENCOUNTER 100
 #define TIMELINE_JOINER 200
@@ -450,44 +471,62 @@ typedef NS_ENUM(unsigned) {
 
 - (void)setupMessageCell:(UITableViewCell *)cell withMessage:(OTTourMessage *)message {
     
-    UIView *messageContainer = [cell viewWithTag:TIMELINE_MESSAGE_TAG];
-    CGFloat height = [self messageHeightForText:message.text];
+    UIView *messageOtherContainer = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_CONTENT_TAG];
+    UIView *messageMeContainer = [cell viewWithTag:TIMELINE_MESSAGE_ME_CONTENT_TAG];
     
-    messageContainer.layer.cornerRadius = 5;
-    messageContainer.clipsToBounds = YES;
+    UIView *messageBackground = nil;
+    UILabel *messageLabel = nil;
+    UIImage *background = nil;
+    
+    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    if ([currentUser.sid intValue] == [message.uID intValue]) {
+        [messageMeContainer setHidden:NO];
+        [messageOtherContainer setHidden:YES];
+        
+        messageBackground = [cell viewWithTag:TIMELINE_MESSAGE_ME_BACKGROUND_TAG];
+        messageLabel = [cell viewWithTag:TIMELINE_MESSAGE_ME_TEXT];
+        background = [UIImage imageNamed:@"bubbleDiscussion"];
+        
+    } else {
+        [messageMeContainer setHidden:YES];
+        [messageOtherContainer setHidden:NO];
+        
+        messageBackground = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_BACKGROUND_TAG];
+        messageLabel = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_TEXT];
+        background = [UIImage imageNamed:@"bubbleDiscussionGrey"];
+        
+        UIButton *userImageButton = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_USER];
+        [userImageButton setupAsProfilePictureFromUrl:message.userAvatarURL];
+    }
+    
+    //CGFloat height = [self messageHeightForText:message.text];
+    
+//    messageBackground.layer.cornerRadius = 5;
+//    messageBackground.clipsToBounds = YES;
 
-    for (NSLayoutConstraint *constraint in messageContainer.constraints) {
+    //text
+    CGFloat height = [self messageHeightForText:message.text];
+    for (NSLayoutConstraint *constraint in messageBackground.constraints) {
         if ([constraint.identifier isEqualToString:@"chatHeight"]) {
             constraint.constant = height;
         }
         //NSLog(@"constraint %@", constraint.identifier);
-        OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-        if ([currentUser.sid intValue] == [message.uID intValue]) {
-            if ([constraint.identifier isEqualToString:@"chatLeading"]) {
-                CGFloat leading = [UIScreen mainScreen].bounds.size.width - messageContainer.bounds.size.width;
-                constraint.constant = leading;
-            }
-        }
+//        OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+//        if ([currentUser.sid intValue] == [message.uID intValue]) {
+//            if ([constraint.identifier isEqualToString:@"chatLeading"]) {
+//                CGFloat leading = [UIScreen mainScreen].bounds.size.width - messageContainer.bounds.size.width;
+//                constraint.constant = leading;
+//            }
+//        }
     }
-    //user
-    
-    
-    
-    UIButton *userImageButton = [cell viewWithTag:TIMELINE_MESSAGE_USER];
-    [userImageButton setupAsProfilePictureFromUrl:message.userAvatarURL];
-    
-    
-    //text
-    UILabel *messageLabel = [cell viewWithTag:TIMELINE_MESSAGE_TEXT];
     messageLabel.text = message.text;
-    //messageLabel.textColor = [UIColor whiteColor];
-    messageLabel.numberOfLines = 0;
-    messageLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightLight];
-    messageLabel.backgroundColor = [UIColor clearColor];
-    messageLabel.layer.cornerRadius = 5;
-    messageLabel.clipsToBounds = YES;
-    [messageContainer addSubview:messageLabel];
     
+    UIGraphicsBeginImageContextWithOptions(messageBackground.frame.size, NO, 0);
+    [background drawInRect:CGRectMake(0, 0, messageBackground.frame.size.width, height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    messageBackground.backgroundColor = [UIColor colorWithPatternImage:newImage];
 }
 
 - (void)setupStatusCell:(UITableViewCell *)cell withStatus:(OTTourStatus *)statusPoint {
@@ -534,11 +573,11 @@ typedef NS_ENUM(unsigned) {
     
     UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSER];
     [userImageButton setupAsProfilePictureFromUrl:self.tour.author.avatarUrl];
-
+    [userImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)doShowProfile:(UIButton *)senderButton {
-    
+    [self performSegueWithIdentifier:@"OTUserProfileSegue" sender:self.tour.author.uID];
 }
 
 
@@ -570,7 +609,8 @@ typedef NS_ENUM(unsigned) {
 - (CGFloat)messageHeightForText:(NSString *)messageContent {
     CGSize maximumLabelSize = CGSizeMake(297, FLT_MAX);
     
-    CGSize expectedLabelSize = [messageContent sizeWithFont:[UIFont systemFontOfSize:15 weight:UIFontWeightLight] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize expectedLabelSize = [messageContent sizeWithFont:[UIFont systemFontOfSize:17 weight:UIFontWeightRegular] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByWordWrapping];
+    
     return expectedLabelSize.height + 4*PADDING;
 }
 
@@ -578,10 +618,41 @@ typedef NS_ENUM(unsigned) {
     return 0.5f;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    self.selectedTour = self.tours[indexPath.row];
-//    [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == SectionTypeTimeline) {
+        OTTourTimelinePoint *timelinePoint = self.timelinePoints[indexPath.row];
+        switch (timelinePoint.tag) {
+            case TimelinePointTagJoiner:
+                {
+                    OTTourJoiner *joinerPoint = (OTTourJoiner *)timelinePoint;
+                    [self performSegueWithIdentifier:@"OTUserProfileSegue" sender:joinerPoint.uID];
+                }
+                break;
+            case TimelinePointTagEncounter:
+                {
+                    OTEncounter *encounter = (OTEncounter *)timelinePoint;
+                    if ([encounter.userId isEqualToValue:self.tour.author.uID]) {
+                        //show the encounter
+                        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"OTMeetingCalloutViewController"];
+                        [controller setEncounter:encounter];
+                        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+                        [self presentViewController:navController animated:YES completion:nil];
+                    }
+                    else {
+                        //show the user profile
+                        [self performSegueWithIdentifier:@"OTUserProfileSegue" sender:encounter.userId];
+                    }
+                }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
+}
 
 #pragma mark - UITextFieldDelegate
 
@@ -717,13 +788,17 @@ static CGFloat keyboardOverlap;
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    OTTourDetailsOptionsViewController *controller = (OTTourDetailsOptionsViewController *)segue.destinationViewController;
-    controller.tour = self.tour;
-    controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
-    [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    
+    if ([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
+        OTTourDetailsOptionsViewController *controller = (OTTourDetailsOptionsViewController *)segue.destinationViewController;
+        controller.tour = self.tour;
+        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    }
+    if ([segue.identifier isEqualToString:@"OTUserProfileSegue"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
+        controller.userId = (NSNumber *)sender;
+    }
 }
 
 @end

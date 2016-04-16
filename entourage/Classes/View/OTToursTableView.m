@@ -182,6 +182,7 @@
     if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(showTourInfo:)]) {
         [self.toursDelegate showTourInfo:selectedTour];
     }
+    [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }
 
 #define kMapHeaderOffsetY 0.0

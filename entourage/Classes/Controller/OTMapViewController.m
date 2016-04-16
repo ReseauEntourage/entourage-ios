@@ -755,7 +755,8 @@ static BOOL didGetAnyData = NO;
     self.isTourRunning = NO;
     self.requestedToursCoordinate = CLLocationCoordinate2DMake(0.0f, 0.0f);
     [self clearMap];
-    [self showToursList];
+    //[self showToursList];
+    [self refreshMap];
 }
 
 - (void)resumeTour {

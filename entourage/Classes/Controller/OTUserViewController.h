@@ -13,5 +13,6 @@
 @interface OTUserViewController : UIViewController
 
 @property (nonatomic, strong) OTUser *user;
+@property (nonatomic, strong) NSNumber *userId;
 
 @end
