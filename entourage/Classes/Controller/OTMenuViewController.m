@@ -211,10 +211,10 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     
 
     // Map
-    OTMenuItem *itemMap = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_map_title", @"")
-                                                   iconName: @"guide"
-                                            segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
-    [menuItems addObject:itemMap];
+//    OTMenuItem *itemMap = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_map_title", @"")
+//                                                   iconName: @"guide"
+//                                            segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
+//    [menuItems addObject:itemMap];
     
 //    OTMenuItem *itemAmis = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_amis", @"")
 //                                                    iconName: @"friends"

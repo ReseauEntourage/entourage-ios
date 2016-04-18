@@ -120,6 +120,10 @@ typedef NS_ENUM(NSInteger) {
         if (self.user.password != nil) {
             [[A0SimpleKeychain keychain] setString:self.user.password forKey:kKeychainPassword];
         }
+       [self dismissViewControllerAnimated:YES completion:^{
+           
+       }];
+                                                
         
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"user_edit_saved_error", @"")];
