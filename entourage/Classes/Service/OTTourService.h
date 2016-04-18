@@ -39,6 +39,7 @@ extern NSString *const kAPITourRoute;
                              failure:(void (^)(NSError *error))failure;
 
 - (void)joinTour:(OTTour *)tour
+     withMessage:(NSString*)message
          success:(void(^)(OTTourJoiner *))success
          failure:(void (^)(NSError *)) failure;
 

@@ -365,16 +365,18 @@ NSString *const kTourPoints = @"tour_points";
 }
 
 - (void)joinTour:(OTTour *)tour
+     withMessage:(NSString*)message
          success:(void(^)(OTTourJoiner *))success
          failure:(void (^)(NSError *)) failure {
     
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
-    
+    NSDictionary *parameters = @{@"request":@{@"message":message}};
+    parameters = nil; //TODO: remove on version 1.2
     NSLog(@"Join request: %@", url);
     
     [[OTHTTPRequestManager sharedInstance]
          POSTWithUrl:url
-         andParameters:nil
+         andParameters:parameters
          andSuccess:^(id responseObject)
          {
              NSDictionary *data = responseObject;
