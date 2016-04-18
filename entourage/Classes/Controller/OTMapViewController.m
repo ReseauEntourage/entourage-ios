@@ -97,9 +97,8 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapSegmentedControl;
 @property (weak, nonatomic) IBOutlet OTToursTableView *tableView;
-@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong)  MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
-//@property (nonatomic, strong) NSMapTable *drawnTours;
 @property (weak, nonatomic) IBOutlet UIImageView *pointerPin;
 
 @property (nonatomic, strong) OTNewsfeedMapDelegate *newsfeedMapDelegate;
@@ -1172,6 +1171,20 @@ static bool isShowingOptions = NO;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
 
     }];
+}
+
+- (IBAction)hideNewTourStart {
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        CGRect mapFrame = self.mapView.frame;
+        mapFrame.size.height = MAPVIEW_HEIGHT;self.mapSegmentedControl.hidden = YES;
+        self.launcherButton.hidden = NO;
+        self.launcherView.hidden = YES;
+        self.tableView.tableHeaderView.frame = mapFrame;
+        self.mapView.frame = mapFrame;
+        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+        
+    }];
+
 }
 
 #pragma mark 15.2 New Tour - on going

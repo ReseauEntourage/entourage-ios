@@ -474,8 +474,18 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4b-wb-wJK">
                                         <rect key="frame" x="0.0" y="171" width="328" height="173"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Démarrez votre maraude" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlF-KK-qs6">
+                                                <rect key="frame" x="43" y="16" width="242" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="Gql-3b-0UM"/>
+                                                    <constraint firstAttribute="width" constant="242" id="WoV-Nj-MEi"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
+                                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApN-vx-b3f">
-                                                <rect key="frame" x="133" y="101" width="62" height="62"/>
+                                                <rect key="frame" x="133" y="48" width="62" height="62"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="62" id="Naz-5B-bpb"/>
                                                     <constraint firstAttribute="width" constant="62" id="rdT-NX-IO7"/>
@@ -494,23 +504,30 @@
                                                     <action selector="startTour:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Hxz-tg-Bai"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Démarrez votre maraude" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlF-KK-qs6">
-                                                <rect key="frame" x="43" y="50" width="242" height="21"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fE-au-fRK">
+                                                <rect key="frame" x="0.0" y="116" width="328" height="57"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="Gql-3b-0UM"/>
-                                                    <constraint firstAttribute="width" constant="242" id="WoV-Nj-MEi"/>
+                                                    <constraint firstAttribute="height" constant="57" id="NBy-xH-FwD"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <state key="normal" title="Annuler">
+                                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="hideNewTourStart" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9gI-tL-hVw"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="7fE-au-fRK" secondAttribute="trailing" id="LTJ-l2-RrD"/>
+                                            <constraint firstAttribute="bottom" secondItem="7fE-au-fRK" secondAttribute="bottom" id="OUg-f3-kyZ"/>
                                             <constraint firstItem="ApN-vx-b3f" firstAttribute="centerX" secondItem="P4b-wb-wJK" secondAttribute="centerX" id="Q2i-iB-daY"/>
-                                            <constraint firstItem="tlF-KK-qs6" firstAttribute="centerY" secondItem="P4b-wb-wJK" secondAttribute="centerY" constant="-26" id="XlY-MP-2ZX"/>
+                                            <constraint firstItem="tlF-KK-qs6" firstAttribute="centerY" secondItem="P4b-wb-wJK" secondAttribute="centerY" constant="-60" id="XlY-MP-2ZX"/>
                                             <constraint firstItem="tlF-KK-qs6" firstAttribute="centerX" secondItem="P4b-wb-wJK" secondAttribute="centerX" id="eAf-1Z-5tK"/>
-                                            <constraint firstItem="ApN-vx-b3f" firstAttribute="centerY" secondItem="P4b-wb-wJK" secondAttribute="centerY" constant="45" id="ydP-Ky-MCH"/>
+                                            <constraint firstItem="7fE-au-fRK" firstAttribute="leading" secondItem="P4b-wb-wJK" secondAttribute="leading" id="unV-2V-7bP"/>
+                                            <constraint firstItem="ApN-vx-b3f" firstAttribute="centerY" secondItem="P4b-wb-wJK" secondAttribute="centerY" constant="-8" id="ydP-Ky-MCH"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1314,7 +1331,7 @@ transmise au créateur.
         <image name="walkActive" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Dfo-uz-6se"/>
         <segue reference="b42-UE-vP1"/>
-        <segue reference="xSV-rR-wZy"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -27,6 +27,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [[OTTourService new] joinTour:self.tour
+                      withMessage:@""
                           success:^(OTTourJoiner *joiner) {
                               NSLog(@"sent request to join tour %@", self.tour.sid);
                               self.tour.joinStatus = @"pending";
