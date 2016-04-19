@@ -39,7 +39,7 @@
                                 <rect key="frame" x="12" y="79" width="296" height="29"/>
                                 <segments>
                                     <segment title="En cours"/>
-                                    <segment title="Enregistrés"/>
+                                    <segment title="Actifs"/>
                                     <segment title="Clôturés"/>
                                 </segments>
                                 <color key="tintColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
