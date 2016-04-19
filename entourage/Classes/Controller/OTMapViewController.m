@@ -86,18 +86,12 @@
 
 @interface OTMapViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate>
 
-// blur effect
-
-@property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffect;
-@property (weak, nonatomic) IBOutlet UIButton *createTourOnBlurButton;
-@property (weak, nonatomic) IBOutlet UILabel *createTourLabel;
-
 // map
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapSegmentedControl;
 @property (weak, nonatomic) IBOutlet OTToursTableView *tableView;
-@property (nonatomic, strong)  MKMapView *mapView;
+@property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UIImageView *pointerPin;
 
@@ -261,8 +255,6 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, -TABLEVIEW_FOOTER_HEIGHT, 0.0f);
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableView.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
     self.tableView.tableFooterView = dummyView;
-    self.blurEffect.hidden = YES;
-    
     
     //show map on table header
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, MAPVIEW_HEIGHT)];
@@ -317,9 +309,6 @@
     
     UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
     [self.mapView addGestureRecognizer:longPressMapGesture];
-    
-    UITapGestureRecognizer *hideTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideCreateTourOverlay)];
-    [self.blurEffect addGestureRecognizer:hideTapGesture];
 }
 
 - (void)configureNavigationBar {
@@ -340,10 +329,6 @@
     } else {
         [self showMapOverlayToCreateTourAtPoint:touchPoint];
     }
-}
-
-- (void)hideCreateTourOverlay {
-    self.blurEffect.hidden = YES;
 }
 
 - (void)appWillEnterBackground:(NSNotification*)note {
@@ -613,9 +598,6 @@ static BOOL didGetAnyData = NO;
     [self sendTourPoints:self.pointsToSend];
 }
 
-- (void)hideBlurEffect {
-    [self.blurEffect setHidden:YES];
-}
 
 - (OTPoiCategory*)categoryById:(NSNumber*)sid {
     if (sid == nil) return nil;
@@ -737,7 +719,6 @@ static BOOL didGetAnyData = NO;
 
 - (void)tourSent {
     [SVProgressHUD showSuccessWithStatus:@"Maraude terminée!"];
-    [self hideBlurEffect];
     
     self.tour = nil;
     self.currentTourType = nil;
@@ -757,7 +738,6 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)resumeTour {
-    [self hideBlurEffect];
     self.isTourRunning = YES;
     self.stopButton.hidden = NO;
     self.createEncounterButton.hidden = NO;
@@ -997,7 +977,6 @@ static bool isShowingOptions = NO;
 }
 
 - (IBAction)stopTour:(id)sender {
-    [self.blurEffect setHidden:YES];
     [UIView animateWithDuration:0.5 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
@@ -1093,8 +1072,6 @@ static bool isShowingOptions = NO;
 /**************************************************************************************************/
 #pragma mark - Segmented control
 - (IBAction)changedSegmentedControlValue:(UISegmentedControl *)sender {
-    [self.blurEffect setHidden:NO];
-    
     if (sender.selectedSegmentIndex == 1) {
         [self showToursList];
     }
@@ -1104,7 +1081,6 @@ static bool isShowingOptions = NO;
 #pragma mark - "Screens"
 
 - (void)showToursList {
-    [self.blurEffect setHidden:YES];
     
     self.isTourListDisplayed = YES;
 
@@ -1119,7 +1095,6 @@ static bool isShowingOptions = NO;
 }
 
 - (void)showToursMap {
-    [self.blurEffect setHidden:YES];
     
     if (self.newsfeedMapDelegate.isActive) {
         self.isTourListDisplayed = NO;
@@ -1139,21 +1114,12 @@ static bool isShowingOptions = NO;
 
 #pragma mark 6.3 Tours long press on map
 - (void)showMapOverlayToCreateTourAtPoint:(CGPoint)point {
-    [self.blurEffect setHidden:NO];
     self.launcherButton.hidden = YES;
-    self.createTourLabel.hidden = YES;
-    self.createTourOnBlurButton.center = point;
 }
 
 #pragma mark 6.4 Tours "+" press
 - (void)showMapOverlayToCreateTour {
-    [self.blurEffect setHidden:NO];
     self.launcherButton.hidden = NO;
-    self.createTourLabel.hidden = NO;
-    [self.createTourOnBlurButton setNeedsLayout];
-    CGPoint center = CGPointMake(self.launcherButton.center.x, self.createTourLabel.center.y);
-    self.createTourOnBlurButton.center = center;
-    [self.createTourOnBlurButton setNeedsDisplay];
 }
 
 

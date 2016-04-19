@@ -555,14 +555,6 @@
                                     <constraint firstItem="ypF-iS-zfd" firstAttribute="leading" secondItem="xGB-GF-aM5" secondAttribute="leading" id="xhd-6j-HKS"/>
                                 </constraints>
                             </view>
-                            <visualEffectView hidden="YES" opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x5D-lh-QtL">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="O1D-oC-idM">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="extraLight"/>
-                            </visualEffectView>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRg-cj-T9Q">
                                 <rect key="frame" x="250" y="494" width="62" height="62"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -625,17 +617,13 @@
                             <constraint firstItem="xGB-GF-aM5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="Cqx-y0-hHi"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Kc9-kH-YQ7" secondAttribute="bottom" constant="12" id="DuD-zc-Fd5"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="leading" secondItem="Kc9-kH-YQ7" secondAttribute="trailing" constant="-62" id="Kq0-ZY-fSh"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="x5D-lh-QtL" secondAttribute="bottom" id="RLa-CY-5bv"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uRg-cj-T9Q" secondAttribute="bottom" constant="12" id="TDA-nJ-u0d"/>
                             <constraint firstItem="gsB-s5-FKP" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="TbH-ff-fPP"/>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="UhE-G3-aXJ"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="VLV-3h-yeI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uRg-cj-T9Q" secondAttribute="trailing" constant="-8" id="ZT2-9H-lNi"/>
-                            <constraint firstAttribute="trailing" secondItem="x5D-lh-QtL" secondAttribute="trailing" id="blK-sr-sHQ"/>
-                            <constraint firstItem="x5D-lh-QtL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="e1K-mf-d0a"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="centerX" secondItem="oVf-Bh-vdD" secondAttribute="centerX" id="hB3-UZ-01t"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="10" id="puD-5n-gle"/>
-                            <constraint firstItem="x5D-lh-QtL" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="qI7-NA-VS0"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="64" id="sQA-pi-JcK"/>
                             <constraint firstItem="gsB-s5-FKP" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="16" id="t6b-Vu-ZMD"/>
                             <constraint firstItem="xGB-GF-aM5" firstAttribute="top" secondItem="gsB-s5-FKP" secondAttribute="bottom" constant="116" id="ymd-v1-tQ8"/>
@@ -643,7 +631,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="OWf-3U-PgN"/>
                     <connections>
-                        <outlet property="blurEffect" destination="x5D-lh-QtL" id="j9n-Wq-iHK"/>
                         <outlet property="carButton" destination="6Ny-H7-fvx" id="VB1-yk-3WB"/>
                         <outlet property="createEncounterButton" destination="Kc9-kH-YQ7" id="q2Y-Ck-e7b"/>
                         <outlet property="feetButton" destination="ypF-iS-zfd" id="eP5-Ob-qw5"/>
