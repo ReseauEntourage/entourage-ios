@@ -13,6 +13,8 @@
 #import <AVFoundation/AVFoundation.h>
 #include <SpeechKit/SpeechKit.h>
 
+#import "OTSpeechKitManager.h"
+
 @interface OTTourViewController : UIViewController <SpeechKitDelegate, SKRecognizerDelegate>
 
 @property (nonatomic, strong) OTTour *tour;

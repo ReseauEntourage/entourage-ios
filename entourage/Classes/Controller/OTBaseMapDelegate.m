@@ -10,6 +10,14 @@
 
 @implementation OTBaseMapDelegate
 
+- (instancetype)initWithMapController:(OTMapViewController *)mapController {
+    self = [super init];
+    if (self) {
+        self.mapController = mapController;
+    }
+    return self;
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     

@@ -45,10 +45,7 @@ typedef NS_ENUM(unsigned) {
     SectionTypeTimeline
 } SectionType;
 
-/**************************************************************************************************/
-#pragma mark - Constants
 
-//const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0xc2, 0xcd, 0x4a, 0x31, 0x70, 0x9f, 0x4a, 0x34, 0x5d, 0x4c, 0xc0, 0x2c, 0xc1, 0xce, 0x26, 0xda, 0xdb, 0xd7, 0x3b, 0x28, 0x9c, 0x58, 0x0c, 0xb8, 0xc7, 0x4a, 0x37, 0x58, 0x42, 0x36, 0x86, 0x04, 0x03, 0xd1, 0x35, 0x74, 0x70, 0x80, 0xa8, 0xcd, 0xcc, 0x69, 0xfa, 0x8e, 0x37, 0x20, 0x68, 0x12, 0xf7, 0xa4, 0x3a, 0x94, 0xfc, 0x47, 0x4c, 0xc3, 0x91, 0x83, 0x1c};
 
 @interface OTTourViewController () <UITextViewDelegate>
 
@@ -104,9 +101,10 @@ typedef NS_ENUM(unsigned) {
                                                object:nil];
     
     self.isRecording = NO;
-    [self setupSpeechKitConnection];
     
+    [OTSpeechKitManager setup];
 }
+
 /**************************************************************************************************/
 #pragma mark - Actions
 
@@ -141,14 +139,6 @@ typedef NS_ENUM(unsigned) {
 
 /**************************************************************************************************/
 #pragma mark - Voice recognition methods
-
-- (void)setupSpeechKitConnection {
-    [SpeechKit setupWithID:@"NMDPPRODUCTION_Fran__ois_Pellissier_Entourage_20160104053924"
-                      host:@"gcb.nmdp.nuancemobility.net"
-                      port:443
-                    useSSL:YES
-                  delegate:nil];
-}
 
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithResults:(SKRecognition *)results {
     NSLog(@"%@", @"Finish with results");
@@ -240,7 +230,7 @@ typedef NS_ENUM(unsigned) {
 - (void)updateTableViewAddingTimelinePoints:(NSArray *)timelinePoints {
     [self.timelinePoints addObjectsFromArray:timelinePoints];
     self.timelinePoints = [self.timelinePoints sortedArrayUsingSelector:@selector(compare:)].mutableCopy;
-    NSLog(@"%lu timeline points", (unsigned long)self.timelinePoints.count);
+    //NSLog(@"%lu timeline points", (unsigned long)self.timelinePoints.count);
     [self.tableView reloadData];
     
      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.timelinePoints.count-1 inSection:1];
@@ -349,7 +339,7 @@ typedef NS_ENUM(unsigned) {
         case SectionTypeHeader:
             return 1;
         case SectionTypeTimeline:{
-            NSLog(@"tPoints %lu", (unsigned long)self.timelinePoints.count);
+            //NSLog(@"tPoints %lu", (unsigned long)self.timelinePoints.count);
             return self.timelinePoints.count;
         }
             
@@ -534,7 +524,7 @@ typedef NS_ENUM(unsigned) {
     NSString *day  = [self formatDateForDisplay:statusPoint.date];
     NSString *time = [self formatHourForDisplay:statusPoint.date];
     
-    timeLabel.text = [NSString stringWithFormat:@"%@. %@", [day uppercaseString], time];
+    timeLabel.text = [NSString stringWithFormat:@"%@ %@", [day uppercaseString], time];
     
     UILabel *statusLabel = [cell viewWithTag:TIMELINE_STATUS_TAG];
     statusLabel.text = statusPoint.status;

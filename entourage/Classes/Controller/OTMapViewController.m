@@ -88,12 +88,12 @@
 
 // map
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *mapSegmentedControl;
-@property (weak, nonatomic) IBOutlet OTToursTableView *tableView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *mapSegmentedControl;
+@property (nonatomic, weak) IBOutlet OTToursTableView *tableView;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
-@property (weak, nonatomic) IBOutlet UIImageView *pointerPin;
+@property (nonatomic, weak) IBOutlet UIImageView *pointerPin;
 
 @property (nonatomic, strong) OTNewsfeedMapDelegate *newsfeedMapDelegate;
 @property (nonatomic, strong) OTGuideMapDelegate *guideMapDelegate;
@@ -151,28 +151,21 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
-
+    [self configureNavigationBar];
+    
     self.locations = [NSMutableArray new];
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
-    //self.closeTours = [NSMutableArray new];
-    //self.drawnTours = [NSMapTable new];
     self.markers = [NSMutableArray new];
     
-    self.newsfeedMapDelegate = [[OTNewsfeedMapDelegate alloc] init];
-    self.newsfeedMapDelegate.mapController = self;
-    
-    self.guideMapDelegate = [[OTGuideMapDelegate alloc] init];
-    self.guideMapDelegate.mapController = self;
+    self.newsfeedMapDelegate = [[OTNewsfeedMapDelegate alloc] initWithMapController:self];
+    self.guideMapDelegate = [[OTGuideMapDelegate alloc] initWithMapController:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTourConfirmation) name:@kNotificationLocalTourConfirmation object:nil];
 
-	[self configureNavigationBar];
-    //[self configureMapView];
-    [self configureTableView];
+	[self configureTableView];
     
     [self switchToNewsfeed];
     if (self.isTourRunning) {
@@ -312,6 +305,7 @@
 }
 
 - (void)configureNavigationBar {
+    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
     
     [self createMenuButton];
     UIBarButtonItem *chatButton = [self setupChatsButton];
@@ -634,7 +628,7 @@ static BOOL didGetAnyData = NO;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     for (CLLocation *newLocation in locations) {
-        NSLog(@"LOC %.4f, %.4f of %lu", newLocation.coordinate.latitude, newLocation.coordinate.longitude, (unsigned long)locations.count);
+        //NSLog(@"LOC %.4f, %.4f of %lu", newLocation.coordinate.latitude, newLocation.coordinate.longitude, (unsigned long)locations.count);
         
         //Negative accuracy means invalid coordinates
         if (newLocation.horizontalAccuracy < 0) {
@@ -650,7 +644,7 @@ static BOOL didGetAnyData = NO;
             distance = [newLocation distanceFromLocation:previousLocation];
         }
         
-        NSLog(@"distance = %.0f howRecent = %.2f accuracy = %.2f", distance, fabs(howRecent), newLocation.horizontalAccuracy);
+        //NSLog(@"distance = %.0f howRecent = %.2f accuracy = %.2f", distance, fabs(howRecent), newLocation.horizontalAccuracy);
         
         if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20 && fabs(distance) > LOCATION_MIN_DISTANCE) {
             

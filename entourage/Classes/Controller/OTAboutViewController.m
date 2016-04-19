@@ -85,6 +85,12 @@
                                                                            message:NSLocalizedString(@"about_email_notavailable", @"")
                                                                     preferredStyle:UIAlertControllerStyleAlert];
             [self presentViewController:alert animated:YES completion:nil];
+            
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * _Nonnull action) {}];
+            
+            [alert addAction:defaultAction];
             return nil;
         }
         MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];

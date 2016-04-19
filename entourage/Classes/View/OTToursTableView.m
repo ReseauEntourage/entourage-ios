@@ -141,7 +141,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     OTTour *tour = self.tours[indexPath.section];
-    NSLog(@"TourID %@ by %@", tour.sid, tour.author.displayName);
+    //NSLog(@"TourID %@ by %@", tour.sid, tour.author.displayName);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
     organizationLabel.text = tour.organizationName;

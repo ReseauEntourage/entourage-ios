@@ -16,6 +16,8 @@
 @property (nonatomic, weak) OTMapViewController* mapController;
 @property (nonatomic) BOOL isActive;
 
+- (instancetype)initWithMapController:(OTMapViewController *)mapController;
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;
 
 - (CLLocationDistance)mapHeight:(MKMapView *)mapView;

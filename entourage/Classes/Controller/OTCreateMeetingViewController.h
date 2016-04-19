@@ -13,6 +13,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 #import <SpeechKit/SpeechKit.h>
+#import "OTSpeechKitManager.h"
 
 @class OTEncounter;
 
