@@ -381,6 +381,7 @@ static BOOL didGetAnyData = NO;
          }
          [self.indicatorView setHidden:YES];
          self.tours = closeTours;
+         [self.tableView removeAll];
          [self.tableView addTours:closeTours];
          [self feedMapViewWithTours];
          [self.tableView reloadData];
