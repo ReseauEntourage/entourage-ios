@@ -54,6 +54,8 @@ typedef NS_ENUM(unsigned) {
 @property (nonatomic, weak) IBOutlet UIView *chatToolbar;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *chatHConstraint;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *recordButtonWidthConstraint;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *recordButtonDynamicWidthConstraint;
 
 @property (nonatomic, strong) NSMutableArray *timelinePoints;
 @property (nonatomic, strong) NSDictionary *timelineCardsClassesCellsIDs;
@@ -70,7 +72,7 @@ typedef NS_ENUM(unsigned) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"MARAUDE";
+    self.title = [NSLocalizedString(@"tour", nil) uppercaseString];
     [self setupCloseModal];
     [self setupMoreButtons];
     
@@ -87,7 +89,6 @@ typedef NS_ENUM(unsigned) {
     
     
     self.chatTextView.layer.borderColor = [UIColor appGreyishColor].CGColor;
-    //[self.chatTextView setInputAccessoryView:self.chatToolbar];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[self class]];
     
@@ -102,6 +103,8 @@ typedef NS_ENUM(unsigned) {
     
     self.isRecording = NO;
     
+    [self updateRecordButton];
+    
     [OTSpeechKitManager setup];
 }
 
@@ -109,31 +112,33 @@ typedef NS_ENUM(unsigned) {
 #pragma mark - Actions
 
 - (IBAction)startStopRecording:(id)sender {
-    [self.recordButton setEnabled:NO];
     
-    if (!self.isRecording) {
-        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
-            if (granted) {
-                // Microphone enabled code
-                _recognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType
-                                                       detection:SKShortEndOfSpeechDetection
-                                                        language:@"fra-FRA"
-                                                        delegate:self];
-                
-            }
-            else {
-                // Microphone disabled code
-                NSLog(@"Mic not enabled!!!!");
-
-                [[[UIAlertView alloc] initWithTitle:@"Accès refusé au micro"
-                                            message:@"L'application demande l'accès à votre microphone.\n\nSVP Activez l'accès au micro pour cette app dans Réglages > Confidentialité > Micro"
-                                           delegate:nil
-                                  cancelButtonTitle:@"Dismiss"
-                                  otherButtonTitles:nil] show];
-            }
-        }];
+    if (self.chatTextView.text.length) {
+        [self sendMessage];
     } else {
-        [_recognizer stopRecording];
+        [self.recordButton setEnabled:NO];
+        if (!self.isRecording) {
+            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+                if (granted) {
+                    // Microphone enabled code
+                    _recognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType
+                                                           detection:SKShortEndOfSpeechDetection
+                                                            language:@"fra-FRA"
+                                                            delegate:self];
+                }
+                else {
+                    // Microphone disabled code
+                    NSLog(@"Mic not enabled!");
+                    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"microphoneNotEnabled", nil)
+                                                message:NSLocalizedString(@"promptForMicrophone", nil)
+                                               delegate:nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil] show];
+                }
+            }];
+        } else {
+            [_recognizer stopRecording];
+        }
     }
 }
 
@@ -152,31 +157,28 @@ typedef NS_ENUM(unsigned) {
             [self.chatTextView setText:[NSString stringWithFormat:@"%@ %@", text, [result lowercaseString]]];
         }
     }
-    
+    [self updateRecordButton];
 }
 
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion {
     NSLog( @"Finish with error %@. Suggestion: %@", error.description, suggestion);
+    [self updateRecordButton];
 }
 
 - (void)recognizerDidBeginRecording:(SKRecognizer *)recognizer {
     NSLog(@"%@", @"Begin recording");
-    [self.recordButton setImage:[UIImage imageNamed:@"ic_action_stop_sound.png"] forState:UIControlStateNormal];
     [self.recordButton setEnabled:YES];
     self.isRecording = YES;
-    //[self.recordLabel setText:@"Enregistrement..."];
-    //[self.recordingLoader setHidden:NO];
+    [self updateRecordButton];
 }
 
 - (void)recognizerDidFinishRecording:(SKRecognizer *)recognizer {
     NSLog(@"%@", @"Finish recording");
-    [self.recordButton setImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
+   
     [self.recordButton setEnabled:YES];
     self.isRecording = NO;
-    //[self.recordLabel setText:@"Appuyez pour dicter un message"];
-    //[self.recordingLoader setHidden:YES];
+    [self updateRecordButton];
 }
-
 
 /**************************************************************************************************/
 #pragma mark - Private Methods
@@ -290,9 +292,32 @@ typedef NS_ENUM(unsigned) {
                                  NSLog(@"CHAT %@", message.text);
                                  self.chatTextView.text = @"";
                                  [self updateTableViewAddingTimelinePoints:@[message]];
+                                 [self updateRecordButton];
                              } failure:^(NSError *error) {
                                  NSLog(@"CHATerr: %@", error.description);
                              }];
+}
+
+- (void)updateRecordButton {
+    if (self.isRecording) {
+        [self.recordButton setImage:[UIImage imageNamed:@"ic_action_stop_sound.png"] forState:UIControlStateNormal];
+        [self.recordButton setTitle:nil forState:UIControlStateNormal];
+        self.recordButtonWidthConstraint.active = YES;
+        self.recordButtonDynamicWidthConstraint.active = NO;
+    } else {
+        if (self.chatTextView.text.length) {
+            [self.recordButton setImage:nil forState:UIControlStateNormal];
+            [self.recordButton setTitle:NSLocalizedString(@"send", nil) forState:UIControlStateNormal];
+            self.recordButtonWidthConstraint.active = NO;
+            self.recordButtonDynamicWidthConstraint.active = YES;
+        } else {
+            [self.recordButton setImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
+            [self.recordButton setTitle:nil forState:UIControlStateNormal];
+            self.recordButtonWidthConstraint.active = YES;
+            self.recordButtonDynamicWidthConstraint.active = NO;
+        }
+    }
+    [self.recordButton layoutIfNeeded];
 }
 
 /**************************************************************************************************/
@@ -624,13 +649,15 @@ typedef NS_ENUM(unsigned) {
 #define TEXTFIELD_HEIGHT_MIN 30.f
 
 - (void)textViewDidChange:(UITextView *)textView {
-    CGSize newSize = [textView.text
-                      sizeWithFont:textView.font
-                      constrainedToSize:CGSizeMake(224, 80)
-                      lineBreakMode:NSLineBreakByWordWrapping];
+    NSLog(@"Text view did change...");
+    [self updateRecordButton];
+    
+    UIFont *fontText = textView.font;
+    CGSize newSize = [textView.text boundingRectWithSize:CGSizeMake(224, 80)
+                                                 options:(NSStringDrawingUsesLineFragmentOrigin| NSStringDrawingUsesFontLeading)
+                                              attributes:@{NSFontAttributeName:fontText}
+                                                 context:nil].size;
     self.chatHConstraint.constant = MAX(TEXTFIELD_HEIGHT_MIN, newSize.height + PADDING);
-   // NSLog(@"newsize: %f * %f", newSize.width, newSize.height);
-
 }
 
 #pragma mark - UIKeyboard
@@ -742,16 +769,15 @@ static CGFloat keyboardOverlap;
 - (void) tableAnimationEnded:(NSString*)animationID finished:(NSNumber *)finished contextInfo:(void *)context
 {
     // Scroll to the active cell
-//    if(self.activeCellIndexPath)
-//    {
-//        [self.tableView scrollToRowAtIndexPath:self.activeCellIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
-//        [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-//    }
+    //    if(self.activeCellIndexPath)
+    //    {
+    //        [self.tableView scrollToRowAtIndexPath:self.activeCellIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    //        [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    //    }
 }
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
         OTTourDetailsOptionsViewController *controller = (OTTourDetailsOptionsViewController *)segue.destinationViewController;

@@ -12,6 +12,11 @@
 "APPALOOSA_STORE_ID" = "3949";
 "CURRENT_USER" = "currentUser";
 
+// User prompted
+"microphoneNotEnabled" = "Accès refusé au micro";
+"promptForMicrophone" = "L'application demande l'accès à votre microphone.\n\nSVP Activez l'accès au micro pour cette app dans Réglages > Confidentialité > Micro";
+
+
 // Titles
 "mapviewcontroller_title" = "MARAUDES";
 "guideviewcontroller_title" = "GUIDE";
@@ -68,6 +73,9 @@
 
 "tour_create_sending" = "Création de la maraude";
 "tour_create_error" = "Erreur de création de la maraude";
+
+"tour" = "Maraude";
+"send" = "Envoyer";
 
 // POI
 "poi_create_tour_alert" = "Si vous désirez créer une maraude, vouz devez quitter le guide de solidarité";

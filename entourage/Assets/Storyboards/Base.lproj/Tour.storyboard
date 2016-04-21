@@ -293,7 +293,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAn-xh-GvT">
                                 <rect key="frame" x="-4" y="624" width="328" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gA-fv-XoU">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gA-fv-XoU">
                                         <rect key="frame" x="15" y="11" width="22" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="AeS-As-lRk"/>
@@ -305,7 +305,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wn1-vT-qg7">
-                                        <rect key="frame" x="52" y="7" width="224" height="30"/>
+                                        <rect key="frame" x="15" y="7" width="261" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="a5G-fI-GU7"/>
@@ -329,8 +329,11 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="22" id="CXJ-K4-HxH"/>
                                             <constraint firstAttribute="height" constant="22" id="ikx-NL-ctU"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="22" id="xd9-wb-D0w"/>
                                         </constraints>
-                                        <state key="normal" image="mic"/>
+                                        <state key="normal" image="mic">
+                                            <color key="titleColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="startStopRecording:" destination="Hn0-z2-6tI" eventType="touchUpInside" id="6HD-df-gaZ"/>
                                         </connections>
@@ -339,7 +342,7 @@
                                 <color key="backgroundColor" red="0.97647058963775635" green="0.97647058963775635" blue="0.97647058963775635" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="eIr-gk-lDN" secondAttribute="trailing" constant="15" id="Aln-7o-8Ur"/>
-                                    <constraint firstItem="wn1-vT-qg7" firstAttribute="leading" secondItem="1gA-fv-XoU" secondAttribute="trailing" constant="15" id="Etg-wA-JMY"/>
+                                    <constraint firstItem="wn1-vT-qg7" firstAttribute="leading" secondItem="1gA-fv-XoU" secondAttribute="trailing" constant="-22" id="Etg-wA-JMY"/>
                                     <constraint firstAttribute="bottom" secondItem="1gA-fv-XoU" secondAttribute="bottom" constant="11" id="Ie5-7n-RBA"/>
                                     <constraint firstAttribute="bottom" secondItem="eIr-gk-lDN" secondAttribute="bottom" constant="11" id="Ub0-uS-n1V"/>
                                     <constraint firstItem="eIr-gk-lDN" firstAttribute="leading" secondItem="wn1-vT-qg7" secondAttribute="trailing" constant="15" id="WsV-6w-S7c"/>
@@ -369,6 +372,8 @@
                         <outlet property="chatTextView" destination="wn1-vT-qg7" id="XGn-dx-wq6"/>
                         <outlet property="chatToolbar" destination="kAn-xh-GvT" id="w2j-S3-OcK"/>
                         <outlet property="recordButton" destination="eIr-gk-lDN" id="lcq-9x-EYU"/>
+                        <outlet property="recordButtonDynamicWidthConstraint" destination="xd9-wb-D0w" id="bEp-3A-ID4"/>
+                        <outlet property="recordButtonWidthConstraint" destination="CXJ-K4-HxH" id="JBr-2y-v5l"/>
                         <outlet property="tableView" destination="CGA-by-Pfy" id="3FD-W1-cWm"/>
                         <segue destination="ARd-Al-TGt" kind="modal" identifier="OTTourOptionsSegue" id="0g9-AU-hY5"/>
                         <segue destination="Dot-lS-3Ml" kind="modal" identifier="OTUserProfileSegue" id="mcl-xY-cOE"/>
