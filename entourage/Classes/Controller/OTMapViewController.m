@@ -766,7 +766,11 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)dismissTourOptions {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (self.isTourRunning) {
+            [self showNewTourOnGoing];
+        }
+    }];
 }
 
 /********************************************************************************/

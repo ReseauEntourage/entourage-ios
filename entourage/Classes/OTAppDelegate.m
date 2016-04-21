@@ -263,6 +263,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     // Building the notification
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive) {
+        
+        UIApplication *app = [UIApplication sharedApplication];
+        UIViewController *rootVC = app.windows.firstObject.rootViewController;
+
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender]
                                                                        message:[userInfo objectForKey:kUserInfoObject]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
@@ -273,34 +277,20 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         UIAlertAction *openAction = [UIAlertAction actionWithTitle:@"Afficher"
                                                              style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                               UIApplication *app = [UIApplication sharedApplication];
-                                                               UIViewController *rootVC = app.windows.firstObject.rootViewController;
-                                                               [rootVC dismissViewControllerAnimated:YES completion:nil];
-//                                                               if ([rootVC isKindOfClass:[SWRevealViewController class]]) {
-//                                                                   SWRevealViewController *revealVC = rootVC.revealViewController;
-//                                                                   [UIStoryboard showSWRevealController];
-//
-////                                                                   [revealVC performSegueWithIdentifier:@"segueMenuIdentifierForMap" sender:nil];
-////                                                                   UINavigationController *frontNavController = (UINavigationController*)((SWRevealViewController*)rootVC).frontViewController;
-////                                                                   UIViewController *frontVC = frontNavController.viewControllers.firstObject;
-////                                                                   
-//                                                                
-//                                                               }
-                                                               
-                                                               
-                                                               if ([rootVC isKindOfClass:[SWRevealViewController class]]) {
-                                                                   [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationLocalTourConfirmation object:nil];
-                                                               } else {
-                                                                   [UIStoryboard showSWRevealController];
-                                                               }
+                                                                    [rootVC dismissViewControllerAnimated:YES completion:nil];
+                                                                   if ([rootVC isKindOfClass:[SWRevealViewController class]]) {
+                                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationLocalTourConfirmation object:nil];
+                                                                   } else {
+                                                                       [UIStoryboard showSWRevealController];
+                                                                   }
                                                 }];
         [alert addAction:defaultAction];
         [alert addAction:openAction];
-        //[application.keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
-        UIViewController *rootVC = application.keyWindow.rootViewController;
-        if (rootVC.presentedViewController)
-            [rootVC.presentedViewController presentViewController:alert animated:YES completion:nil];
-        else
+        
+        if (rootVC.presentedViewController) {
+            if (![((UINavigationController*)rootVC.presentedViewController).viewControllers.firstObject isKindOfClass:[OTCreateMeetingViewController class]])
+                [rootVC.presentedViewController presentViewController:alert animated:YES completion:nil];
+        } else
             [rootVC presentViewController:alert animated:YES completion:nil];
     }
     
