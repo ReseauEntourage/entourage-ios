@@ -464,59 +464,34 @@ typedef NS_ENUM(unsigned) {
     UIView *messageOtherContainer = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_CONTENT_TAG];
     UIView *messageMeContainer = [cell viewWithTag:TIMELINE_MESSAGE_ME_CONTENT_TAG];
     
-    UIView *messageBackground = nil;
+    UIImageView *messageBackgroundImageView = nil;
     UILabel *messageLabel = nil;
-    UIImage *background = nil;
+    UIImage *backgroundImage = nil;
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     if ([currentUser.sid intValue] == [message.uID intValue]) {
         [messageMeContainer setHidden:NO];
         [messageOtherContainer setHidden:YES];
         
-        messageBackground = [cell viewWithTag:TIMELINE_MESSAGE_ME_BACKGROUND_TAG];
+        messageBackgroundImageView = [cell viewWithTag:TIMELINE_MESSAGE_ME_BACKGROUND_TAG];
         messageLabel = [cell viewWithTag:TIMELINE_MESSAGE_ME_TEXT];
-        background = [UIImage imageNamed:@"bubbleDiscussion"];
+        backgroundImage = [UIImage imageNamed:@"bubbleDiscussion"];
         
     } else {
         [messageMeContainer setHidden:YES];
         [messageOtherContainer setHidden:NO];
         
-        messageBackground = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_BACKGROUND_TAG];
+        messageBackgroundImageView = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_BACKGROUND_TAG];
         messageLabel = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_TEXT];
-        background = [UIImage imageNamed:@"bubbleDiscussionGrey"];
+        backgroundImage = [UIImage imageNamed:@"bubbleDiscussionGrey"];
         
         UIButton *userImageButton = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_USER];
         [userImageButton setupAsProfilePictureFromUrl:message.userAvatarURL];
     }
     
-    //CGFloat height = [self messageHeightForText:message.text];
-    
-//    messageBackground.layer.cornerRadius = 5;
-//    messageBackground.clipsToBounds = YES;
-
-    //text
-    CGFloat height = [self messageHeightForText:message.text];
-    for (NSLayoutConstraint *constraint in messageBackground.constraints) {
-        if ([constraint.identifier isEqualToString:@"chatHeight"]) {
-            constraint.constant = height;
-        }
-        //NSLog(@"constraint %@", constraint.identifier);
-//        OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-//        if ([currentUser.sid intValue] == [message.uID intValue]) {
-//            if ([constraint.identifier isEqualToString:@"chatLeading"]) {
-//                CGFloat leading = [UIScreen mainScreen].bounds.size.width - messageContainer.bounds.size.width;
-//                constraint.constant = leading;
-//            }
-//        }
-    }
+    backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(20, 20, 20, 20)];
     messageLabel.text = message.text;
-    
-    UIGraphicsBeginImageContextWithOptions(messageBackground.frame.size, NO, 0);
-    [background drawInRect:CGRectMake(0, 0, messageBackground.frame.size.width, height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    messageBackground.backgroundColor = [UIColor colorWithPatternImage:newImage];
+    messageBackgroundImageView.image = backgroundImage;
 }
 
 - (void)setupStatusCell:(UITableViewCell *)cell withStatus:(OTTourStatus *)statusPoint {

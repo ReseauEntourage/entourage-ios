@@ -15,11 +15,11 @@
                         <viewControllerLayoutGuide type="bottom" id="bCY-0U-VFW"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="OrS-b3-MxO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="668"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CGA-by-Pfy">
-                                <rect key="frame" x="-4" y="64" width="328" height="460"/>
+                                <rect key="frame" x="-4" y="64" width="328" height="560"/>
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.64705884456634521" green="0.64705884456634521" blue="0.61176472902297974" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="101" minY="0.0" maxX="101" maxY="0.0"/>
@@ -207,26 +207,21 @@
                                                 <view hidden="YES" tag="33" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtH-6L-Wlh" userLabel="Others Chat View">
                                                     <rect key="frame" x="8" y="8" width="312" height="122"/>
                                                     <subviews>
-                                                        <view tag="30" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZO-gx-9oa" userLabel="Chat Background">
-                                                            <rect key="frame" x="53" y="10" width="240" height="128"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" tag="32" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPY-4V-uyt" userLabel="Chat Label">
-                                                                    <rect key="frame" x="8" y="8" width="224" height="112"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" red="0.97647058963775635" green="0.97647058963775635" blue="0.97647058963775635" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bubbleDiscussionGrey" translatesAutoresizingMaskIntoConstraints="NO" id="8RX-pc-XZ8">
+                                                            <rect key="frame" x="53" y="10" width="240" height="120"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="240" id="Q74-iZ-PLr"/>
-                                                                <constraint firstAttribute="height" constant="128" identifier="chatHeight" id="Rf7-PX-2j0"/>
-                                                                <constraint firstItem="rPY-4V-uyt" firstAttribute="top" secondItem="bZO-gx-9oa" secondAttribute="top" constant="8" id="ok3-58-xIU"/>
-                                                                <constraint firstAttribute="bottom" secondItem="rPY-4V-uyt" secondAttribute="bottom" constant="8" id="qUb-bq-zkB"/>
-                                                                <constraint firstItem="rPY-4V-uyt" firstAttribute="leading" secondItem="bZO-gx-9oa" secondAttribute="leading" constant="8" id="rAV-MJ-3PU"/>
-                                                                <constraint firstAttribute="trailing" secondItem="rPY-4V-uyt" secondAttribute="trailing" constant="8" id="tgh-vv-ycN"/>
+                                                                <constraint firstAttribute="width" constant="240" id="Cvu-r5-dOz"/>
                                                             </constraints>
-                                                        </view>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="32" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPY-4V-uyt" userLabel="Chat Label">
+                                                            <rect key="frame" x="65" y="18" width="224" height="104"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="224" id="6sw-pe-obv"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                         <button opaque="NO" clipsSubviews="YES" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqf-aP-3ad" userLabel="User Image Button">
                                                             <rect key="frame" x="10" y="77" width="35" height="35"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -238,38 +233,42 @@
                                                         </button>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="bZO-gx-9oa" firstAttribute="leading" secondItem="wqf-aP-3ad" secondAttribute="trailing" constant="8" id="5Qz-NP-Ess"/>
+                                                        <constraint firstAttribute="bottom" secondItem="8RX-pc-XZ8" secondAttribute="bottom" constant="-8" id="73C-fX-SbE"/>
+                                                        <constraint firstItem="8RX-pc-XZ8" firstAttribute="top" secondItem="rtH-6L-Wlh" secondAttribute="top" constant="10" id="9Wy-5o-l3J"/>
+                                                        <constraint firstItem="rPY-4V-uyt" firstAttribute="centerY" secondItem="8RX-pc-XZ8" secondAttribute="centerY" id="EfJ-ca-xHm"/>
                                                         <constraint firstItem="wqf-aP-3ad" firstAttribute="leading" secondItem="rtH-6L-Wlh" secondAttribute="leading" constant="10" id="IKd-23-kJn"/>
                                                         <constraint firstAttribute="bottom" secondItem="wqf-aP-3ad" secondAttribute="bottom" constant="10" id="Khi-I5-L49"/>
-                                                        <constraint firstItem="bZO-gx-9oa" firstAttribute="top" secondItem="rtH-6L-Wlh" secondAttribute="top" constant="10" id="p6h-hh-Fbp"/>
+                                                        <constraint firstItem="rPY-4V-uyt" firstAttribute="height" secondItem="8RX-pc-XZ8" secondAttribute="height" constant="-16" id="VS6-Qe-MV4"/>
+                                                        <constraint firstItem="rPY-4V-uyt" firstAttribute="leading" secondItem="wqf-aP-3ad" secondAttribute="trailing" constant="20" id="ez1-08-6cG"/>
+                                                        <constraint firstItem="8RX-pc-XZ8" firstAttribute="leading" secondItem="wqf-aP-3ad" secondAttribute="trailing" constant="8" id="o3g-y4-97J"/>
                                                     </constraints>
                                                 </view>
                                                 <view hidden="YES" tag="34" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1J-nx-8Bf" userLabel="My Chat View">
                                                     <rect key="frame" x="8" y="8" width="312" height="122"/>
                                                     <subviews>
-                                                        <view tag="35" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c77-cc-GpG" userLabel="Chat Background">
-                                                            <rect key="frame" x="59" y="10" width="240" height="128"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" tag="36" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IrU-fx-zaR" userLabel="Chat Label">
-                                                                    <rect key="frame" x="8" y="8" width="224" height="112"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
+                                                        <imageView userInteractionEnabled="NO" tag="35" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bubbleDiscussion" translatesAutoresizingMaskIntoConstraints="NO" id="PxU-oJ-jSN">
+                                                            <rect key="frame" x="59" y="10" width="240" height="120"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="128" identifier="chatHeight" id="46k-kG-5Ge"/>
-                                                                <constraint firstAttribute="bottom" secondItem="IrU-fx-zaR" secondAttribute="bottom" constant="8" id="W8Q-aU-cNW"/>
-                                                                <constraint firstItem="IrU-fx-zaR" firstAttribute="top" secondItem="c77-cc-GpG" secondAttribute="top" constant="8" id="Yee-vg-8Ub"/>
-                                                                <constraint firstAttribute="trailing" secondItem="IrU-fx-zaR" secondAttribute="trailing" constant="8" id="fKb-5P-aWZ"/>
-                                                                <constraint firstItem="IrU-fx-zaR" firstAttribute="leading" secondItem="c77-cc-GpG" secondAttribute="leading" constant="8" id="gRO-Fl-pwH"/>
-                                                                <constraint firstAttribute="width" constant="240" id="gcz-OU-xBW"/>
+                                                                <constraint firstAttribute="width" constant="240" id="F8a-WD-n2h"/>
                                                             </constraints>
-                                                        </view>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="36" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IrU-fx-zaR" userLabel="Chat Label">
+                                                            <rect key="frame" x="67" y="18" width="220" height="104"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="220" id="yv1-f0-zc2"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="c77-cc-GpG" secondAttribute="trailing" constant="13" id="2e9-rC-h0F"/>
-                                                        <constraint firstItem="c77-cc-GpG" firstAttribute="top" secondItem="B1J-nx-8Bf" secondAttribute="top" constant="10" id="d0j-ak-5v1"/>
+                                                        <constraint firstAttribute="trailing" secondItem="IrU-fx-zaR" secondAttribute="trailing" constant="25" id="7hW-Jj-VS1"/>
+                                                        <constraint firstItem="IrU-fx-zaR" firstAttribute="height" secondItem="PxU-oJ-jSN" secondAttribute="height" constant="-16" id="AHW-nb-5vk"/>
+                                                        <constraint firstAttribute="bottom" secondItem="PxU-oJ-jSN" secondAttribute="bottom" constant="-8" id="Ge4-x4-Wcr"/>
+                                                        <constraint firstItem="IrU-fx-zaR" firstAttribute="centerY" secondItem="PxU-oJ-jSN" secondAttribute="centerY" id="QKE-QS-HSv"/>
+                                                        <constraint firstItem="PxU-oJ-jSN" firstAttribute="top" secondItem="B1J-nx-8Bf" secondAttribute="top" constant="10" id="iZ5-hM-DkP"/>
+                                                        <constraint firstAttribute="trailing" secondItem="PxU-oJ-jSN" secondAttribute="trailing" constant="13" id="jE2-U1-uh8"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -292,7 +291,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAn-xh-GvT">
-                                <rect key="frame" x="-4" y="524" width="328" height="44"/>
+                                <rect key="frame" x="-4" y="624" width="328" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gA-fv-XoU">
                                         <rect key="frame" x="15" y="11" width="22" height="22"/>
@@ -362,6 +361,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KLC-7p-Nqh"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="668"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="00L-Wg-I7n" id="0XK-jL-em0"/>
                         <outlet property="chatHConstraint" destination="a5G-fI-GU7" id="uv3-tA-Vjc"/>
@@ -636,6 +637,7 @@
     <resources>
         <image name="activeButton" width="45" height="45"/>
         <image name="bubbleDiscussion" width="297" height="85"/>
+        <image name="bubbleDiscussionGrey" width="255" height="75"/>
         <image name="mic" width="26" height="26"/>
         <image name="plus" width="22" height="22"/>
         <image name="userSmall" width="35" height="35"/>
