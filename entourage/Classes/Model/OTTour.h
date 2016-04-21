@@ -42,6 +42,7 @@ typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTyp
 
 - (id)initWithTourType:(NSString *)tourType andVehicleType:(NSString *)vehicleType;
 + (OTTour *)tourWithJSONDictionary:(NSDictionary *)dictionary;
++ (UIColor *)colorForTourType:(NSString*)tourType;
 - (NSDictionary *)dictionaryForWebserviceTour;
 - (NSDictionary *)dictionaryForWebserviceTourPoints;
 

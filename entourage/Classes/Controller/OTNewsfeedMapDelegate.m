@@ -14,6 +14,7 @@
 #import "OTEncounterAnnotation.h"
 #import "OTTour.h"
 #import "OTTourService.h"
+#import "UIColor+entourage.h"
 
 @interface OTNewsfeedMapDelegate ()
 
@@ -110,29 +111,12 @@
         MKPolylineRenderer *aRenderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
 
         OTTour *tour = [self.drawnTours objectForKey:polyline];
-        if ([tour.tourType isEqualToString:@"medical"]) {
-            aRenderer.strokeColor = [UIColor redColor];
-        }
-        else if ([tour.tourType isEqualToString:@"barehands"]) {
-            aRenderer.strokeColor = [UIColor blueColor];
-        }
-        else if ([tour.tourType isEqualToString:@"alimentary"]) {
-            aRenderer.strokeColor = [UIColor greenColor];
-        }
-
+        NSLog(@"%d TOUR-TYPE %@", tour.sid.intValue, tour.tourType);
+        aRenderer.strokeColor = [OTTour colorForTourType:tour.tourType];
         if (self.mapController.isTourRunning && tour == nil) {
-            if ([self.mapController.currentTourType isEqualToString:@"medical"]) {
-                aRenderer.strokeColor = [UIColor redColor];
-            }
-            else if ([self.mapController.currentTourType isEqualToString:@"barehands"]) {
-                aRenderer.strokeColor = [UIColor blueColor];
-            }
-            else if ([self.mapController.currentTourType isEqualToString:@"alimentary"]) {
-                aRenderer.strokeColor = [UIColor greenColor];
-            }
+            aRenderer.strokeColor = [OTTour colorForTourType:self.mapController.currentTourType];
         }
-
-        aRenderer.lineWidth = 3;
+        aRenderer.lineWidth = MAP_TOUR_LINE_WIDTH;
         return aRenderer;
     }
     return nil;

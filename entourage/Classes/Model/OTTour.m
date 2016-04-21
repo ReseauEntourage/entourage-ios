@@ -12,6 +12,11 @@
 
 #import "NSDictionary+Parsing.h"
 #import "NSUserDefaults+OT.h"
+#import "UIColor+entourage.h"
+
+#define TOUR_COLOR_MEDICAL [UIColor redColor]
+#define TOUR_COLOR_SOCIAL [UIColor blueColor]
+#define TOUR_COLOR_DISTRIBUTIVE [UIColor greenColor]
 
 NSString *const kTourId = @"id";
 NSString *const kTourAuthor = @"author";
@@ -159,5 +164,22 @@ NSString *const kEncountersCount = @"encounter_count";
     }
     return false;
 }
+
++ (UIColor *)colorForTourType:(NSString*)tourType {
+    UIColor *color = [UIColor appOrangeColor];
+    
+    if ([tourType isEqualToString:@"medical"]) {
+        color = TOUR_COLOR_MEDICAL;
+    }
+    else if ([tourType isEqualToString:@"barehands"]) {
+        color = TOUR_COLOR_SOCIAL;
+    }
+    else if ([tourType isEqualToString:@"alimentary"])
+    {
+        color = TOUR_COLOR_DISTRIBUTIVE;
+    }
+    return color;
+}
+
 
 @end

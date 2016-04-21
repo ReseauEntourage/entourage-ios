@@ -74,7 +74,7 @@
 #define MAPVIEW_REGION_SPAN_Y_METERS 500
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define TOURS_REQUEST_DISTANCE_KM 10
-#define LOCATION_MIN_DISTANCE 10.f
+#define LOCATION_MIN_DISTANCE 5.f
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 #define TABLEVIEW_BOTTOM_INSET 86.0f
@@ -173,19 +173,15 @@
     } else {
         [self showToursMap];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
     
     _locationManager = [[CLLocationManager alloc] init];
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
     }
     [self.locationManager startUpdatingLocation];
-
+    
     [self clearMap];
-	[self refreshMap];
+    [self refreshMap];
     
     self.launcherView.hidden = YES;
     if (self.isTourRunning) {
@@ -200,7 +196,14 @@
         self.createEncounterButton.hidden = YES;
     }
     [self startLocationUpdates];
+
+    
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+    
+   }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -219,7 +222,7 @@
     self.guideMapDelegate.isActive = NO;
     self.mapView.delegate = self.newsfeedMapDelegate;
     self.mapSegmentedControl.hidden = NO;
-    [self clearMap];
+    //[self clearMap];
     [self.newsfeedMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
     if (self.isTourListDisplayed) {
         [self showToursList];
@@ -440,6 +443,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)feedMapViewWithTours {
+    self.newsfeedMapDelegate.drawnTours = [[NSMapTable alloc] init];
     if (self.newsfeedMapDelegate.isActive) {
         for (OTTour *tour in self.tours) {
             [self drawTour:tour];
@@ -460,6 +464,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)drawTour:(OTTour *)tour {
+    NSLog(@"drawing tour %d with %lu points ...", tour.sid.intValue, (unsigned long)tour.tourPoints.count);
     CLLocationCoordinate2D coords[[tour.tourPoints count]];
     int count = 0;
     for (OTTourPoint *point in tour.tourPoints) {
