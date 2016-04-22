@@ -134,7 +134,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [SVProgressHUD dismiss];
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
-                                   
+                                   [[NSUserDefaults standardUserDefaults] synchronize];
                                    
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil) {
