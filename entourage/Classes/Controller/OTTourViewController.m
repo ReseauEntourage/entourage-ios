@@ -190,7 +190,7 @@ typedef NS_ENUM(unsigned) {
     tourStartStatus.date = self.tour.startTime;
     tourStartStatus.status = @"Maraude en cours";
     tourStartStatus.duration = 0;
-    tourStartStatus.km = 0;
+    tourStartStatus.distance = 0;
     //[self.timelinePoints addObject:tourStartStatus];
     [self updateTableViewAddingTimelinePoints:@[tourStartStatus]];
     
@@ -199,7 +199,7 @@ typedef NS_ENUM(unsigned) {
         tourEndStatus.date = self.tour.endTime;
         tourEndStatus.status = @"Maraude terminée";
         tourEndStatus.duration = [self.tour.endTime timeIntervalSinceDate:self.tour.startTime];;
-        tourEndStatus.km = self.tour.distance;
+        tourEndStatus.distance = self.tour.distance;
         //[self.timelinePoints addObject:tourStartStatus];
         [self updateTableViewAddingTimelinePoints:@[tourEndStatus]];
     }
@@ -341,6 +341,7 @@ typedef NS_ENUM(unsigned) {
 
 - (NSString *)formatHourToSecondsForDisplay:(NSDate *)date {
     NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
     [formatter setDateFormat:@"HH':'mm':'ss"];
     return [formatter stringFromDate:date];
 }
@@ -533,7 +534,7 @@ typedef NS_ENUM(unsigned) {
     durationLabel.text = [self formatHourToSecondsForDisplay:[NSDate dateWithTimeIntervalSince1970: statusPoint.duration]];
     
     UILabel *kmLabel = [cell viewWithTag:TIMELINE_KM_TAG];
-    kmLabel.text = [NSString stringWithFormat:@"%.2fkm", statusPoint.km];
+    kmLabel.text = [NSString stringWithFormat:@"%.2fkm", statusPoint.distance / 1000.0f]; //distance is in meters
 
 }
 

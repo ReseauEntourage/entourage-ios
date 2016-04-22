@@ -12,6 +12,6 @@
 
 @property(nonatomic, strong) NSString *status;
 @property(nonatomic) NSTimeInterval duration;
-@property(nonatomic) CGFloat km;
+@property(nonatomic) CGFloat distance;
 
 @end
