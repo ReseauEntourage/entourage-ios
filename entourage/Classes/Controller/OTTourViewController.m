@@ -108,6 +108,12 @@ typedef NS_ENUM(unsigned) {
     [OTSpeechKitManager setup];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
+}
+
 /**************************************************************************************************/
 #pragma mark - Actions
 
