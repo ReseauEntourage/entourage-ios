@@ -374,7 +374,7 @@ static BOOL didGetAnyData = NO;
     self.requestedToursCoordinate = self.mapView.centerCoordinate;
     
     [[OTTourService new] toursAroundCoordinate:self.mapView.centerCoordinate
-                                         limit:@10
+                                         limit:@20
                                       distance:@TOURS_REQUEST_DISTANCE_KM //*[NSNumber numberWithDouble:[self mapHeight]]
                                        success:^(NSMutableArray *closeTours)
      {
@@ -464,7 +464,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)drawTour:(OTTour *)tour {
-    NSLog(@"drawing tour %d with %lu points ...", tour.sid.intValue, (unsigned long)tour.tourPoints.count);
+    NSLog(@"drawing %@ tour %d with %lu points ...", tour.vehicleType, tour.sid.intValue, (unsigned long)tour.tourPoints.count);
     CLLocationCoordinate2D coords[[tour.tourPoints count]];
     int count = 0;
     for (OTTourPoint *point in tour.tourPoints) {
