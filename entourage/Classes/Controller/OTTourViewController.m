@@ -605,9 +605,12 @@ typedef NS_ENUM(unsigned) {
                  
 - (CGFloat)messageHeightForText:(NSString *)messageContent {
     CGSize maximumLabelSize = CGSizeMake(297, FLT_MAX);
-    
-    CGSize expectedLabelSize = [messageContent sizeWithFont:[UIFont systemFontOfSize:17 weight:UIFontWeightRegular] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByWordWrapping];
-    
+    UIFont *fontText = [UIFont systemFontOfSize:17 weight:UIFontWeightRegular];
+    CGSize expectedLabelSize = [messageContent boundingRectWithSize:maximumLabelSize
+                                                 options:(NSStringDrawingUsesLineFragmentOrigin| NSStringDrawingUsesFontLeading)
+                                              attributes:@{NSFontAttributeName:fontText}
+                                                 context:nil].size;
+
     return expectedLabelSize.height + 4*PADDING;
 }
 

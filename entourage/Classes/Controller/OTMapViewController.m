@@ -79,7 +79,7 @@
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 #define TABLEVIEW_BOTTOM_INSET 86.0f
 
-
+#define DATA_REFRESH_RATE 60.0 //seconds
 
 /********************************************************************************/
 #pragma mark - OTMapViewController
@@ -181,7 +181,7 @@
     [self.locationManager startUpdatingLocation];
     
     [self clearMap];
-    [self refreshMap];
+    [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(refreshMap) userInfo:nil repeats:YES];
     
     self.launcherView.hidden = YES;
     if (self.isTourRunning) {
@@ -354,6 +354,7 @@
 
 static BOOL didGetAnyData = NO;
 - (void)refreshMap {
+    NSLog(@"Refreshing map ...");
     if (self.newsfeedMapDelegate.isActive) {
         [self getTourList];
     }
@@ -372,12 +373,13 @@ static BOOL didGetAnyData = NO;
     oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
     oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
     self.requestedToursCoordinate = self.mapView.centerCoordinate;
-    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[OTTourService new] toursAroundCoordinate:self.mapView.centerCoordinate
-                                         limit:@10
+                                         limit:@20
                                       distance:@TOURS_REQUEST_DISTANCE_KM //*[NSNumber numberWithDouble:[self mapHeight]]
                                        success:^(NSMutableArray *closeTours)
      {
+         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
          if (closeTours.count && !didGetAnyData) {
              [self showToursList];
              didGetAnyData = YES;
@@ -390,6 +392,7 @@ static BOOL didGetAnyData = NO;
          [self.tableView reloadData];
      }
                                        failure:^(NSError *error) {
+                                           [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                            self.requestedToursCoordinate = oldRequestedCoordinate;
                                            [self registerObserver];
                                            [self.indicatorView setHidden:YES];
@@ -464,7 +467,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)drawTour:(OTTour *)tour {
-    NSLog(@"drawing tour %d with %lu points ...", tour.sid.intValue, (unsigned long)tour.tourPoints.count);
+    NSLog(@"drawing %@ tour %d with %lu points ...", tour.vehicleType, tour.sid.intValue, (unsigned long)tour.tourPoints.count);
     CLLocationCoordinate2D coords[[tour.tourPoints count]];
     int count = 0;
     for (OTTourPoint *point in tour.tourPoints) {
@@ -527,15 +530,15 @@ static BOOL didGetAnyData = NO;
     return vDist;
 }
 
-- (void)eachSecond {
-    self.seconds++;
-}
-
 - (void)sendTour {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"tour_create_sending", @"")];
     [[OTTourService new]
          sendTour:self.tour
          withSuccess:^(OTTour *sentTour) {
+             
+             [self.tours addObject:sentTour];
+             [self.tableView addTours:@[sentTour]];
+             [self.tableView reloadData];
              [SVProgressHUD dismiss];
              self.tour.sid = sentTour.sid;
              self.tour.distance = 0.0;

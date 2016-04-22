@@ -307,7 +307,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="center-location.png" width="100" height="100"/>
+        <image name="center-location.png" width="35" height="35"/>
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>

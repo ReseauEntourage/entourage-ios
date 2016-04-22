@@ -156,8 +156,8 @@ NSString *const kTourPoints = @"tour_points";
                       failure:(void (^)(NSError *))failure
 {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tours_around", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
-    NSDictionary *parameters = @{ @"limit": limit, @"latitude": @(coordinates.latitude), @"longitude": @(coordinates.longitude), @"distance": distance };
-    NSLog(@"requestion tours %@ with parameters %@ ...", url, parameters);
+    NSDictionary *parameters = @{ @"per": limit, @"latitude": @(coordinates.latitude), @"longitude": @(coordinates.longitude), @"distance": distance };
+    NSLog(@"requesting tours %@ with parameters %@ ...", url, parameters);
     [[OTHTTPRequestManager sharedInstance]
              GETWithUrl:url
              andParameters:parameters
@@ -215,7 +215,6 @@ NSString *const kTourPoints = @"tour_points";
          }
      ];
 }
-
 
 - (void)tourUsersJoins:(OTTour *)tour
                success:(void (^)(NSArray *))success
