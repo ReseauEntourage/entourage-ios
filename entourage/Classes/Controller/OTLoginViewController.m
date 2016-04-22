@@ -89,7 +89,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 //    self.passwordTextField.text = @"123456";
 //
     // Vasile QA
-    //self.phoneTextField.text = @"+40723199641";
+    self.phoneTextField.text = @"+40723199641";
     //self.passwordTextField.text = @"123456";
     
     

@@ -20,6 +20,7 @@
 #import "UITextField+indentation.h"
 #import "UIViewController+menu.h"
 #import "UIColor+entourage.h"
+#import "IQKeyboardManager.h"
 
 // Progress HUD
 #import "MBProgressHUD.h"
@@ -72,6 +73,9 @@
 
 - (void)setupUI {
     [self setupCloseModal];
+
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    [[IQKeyboardManager sharedManager] setEnable:YES];
 
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
