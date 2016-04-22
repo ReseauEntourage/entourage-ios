@@ -527,15 +527,15 @@ static BOOL didGetAnyData = NO;
     return vDist;
 }
 
-- (void)eachSecond {
-    self.seconds++;
-}
-
 - (void)sendTour {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"tour_create_sending", @"")];
     [[OTTourService new]
          sendTour:self.tour
          withSuccess:^(OTTour *sentTour) {
+             
+             [self.tours addObject:sentTour];
+             [self.tableView addTours:@[sentTour]];
+             [self.tableView reloadData];
              [SVProgressHUD dismiss];
              self.tour.sid = sentTour.sid;
              self.tour.distance = 0.0;
