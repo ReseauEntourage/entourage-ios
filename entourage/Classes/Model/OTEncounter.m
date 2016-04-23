@@ -15,6 +15,7 @@
 
 NSString *const kEncounterId = @"id";
 NSString *const kUserName = @"user_name";
+NSString *const kUserId = @"user_id";
 NSString *const kEncounterStreetPersonName = @"street_person_name";
 NSString *const kEncounterDate = @"date";
 NSString *const kEncounterLatitude = @"latitude";
@@ -33,6 +34,8 @@ NSString *const kEncounterMessage = @"message";
         encounter.latitude = [[dictionary numberForKey:kEncounterLatitude] doubleValue];
         encounter.longitude = [[dictionary numberForKey:kEncounterLongitude] doubleValue];
         encounter.userName = [dictionary stringForKey:kUserName];
+        encounter.userId = [dictionary numberForKey:kUserId];
+        
         encounter.streetPersonName = [dictionary stringForKey:kEncounterStreetPersonName];
         encounter.message = [dictionary stringForKey:kEncounterMessage];
 	}

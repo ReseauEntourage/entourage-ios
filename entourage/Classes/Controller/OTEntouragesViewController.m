@@ -263,12 +263,12 @@ typedef NS_ENUM(NSInteger){
 }
 
 - (void)doJoinRequest:(OTTour*)tour {
-    if ([tour.joinStatus isEqualToString:@"not_requested"])
+    if ([tour.joinStatus isEqualToString:JOIN_NOT_REQUESTED])
     {
         //We shouldn't arrive here
         //[self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:tour];
     }
-    else  if ([tour.joinStatus isEqualToString:@"pending"])
+    else  if ([tour.joinStatus isEqualToString:JOIN_PENDING])
     {
         [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:tour];
     }
