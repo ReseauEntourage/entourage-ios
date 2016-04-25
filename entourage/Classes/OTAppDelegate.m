@@ -19,7 +19,7 @@
 // Pods
 #import "SimpleKeychain.h"
 #import "AFNetworkActivityLogger.h"
-
+#import "SVProgressHUD.h"
 // Service
 #import "OTAuthService.h"
 
@@ -313,6 +313,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
 	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor appOrangeColor],
 	                                                      NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
+    
+//    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
+//    [[SVProgressHUD appearance] setForegroundColor:[UIColor appOrangeColor]];
+//    [[SVProgressHUD appearance] setBackgroundColor:[UIColor whiteColor]];
 }
 
 @end

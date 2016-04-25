@@ -26,6 +26,11 @@
     return [UIColor colorWithRed: 239.0f/255.0f green: 239.0f/255.0f blue:  244.0f/255.0f alpha:1.0f];
 }
 
++ (UIColor *)appModalBackgroundColor {
+    return [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+}
+
+
 + (UIColor *)poiCategory0 {
     return [UIColor blackColor];
 }

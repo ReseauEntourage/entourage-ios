@@ -47,6 +47,7 @@
 		2EDFADD71CAE810800B66026 /* OTAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */; };
 		2EDFADDA1CAE84D000B66026 /* OTAboutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD91CAE84D000B66026 /* OTAboutItem.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
+		4500115E1CCE5BD2004754DF /* OTTourCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4500115D1CCE5BD2004754DF /* OTTourCreatorViewController.m */; };
 		4508AE311C7F924B00EDAC1B /* OTTourOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */; };
 		4525EB311CA46082006784E6 /* OTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4525EB301CA46082006784E6 /* OTSettingsViewController.m */; };
 		4525EB341CA46582006784E6 /* OTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4525EB331CA46582006784E6 /* OTAboutViewController.m */; };
@@ -218,6 +219,8 @@
 		2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutTableViewCell.m; sourceTree = "<group>"; };
 		2EDFADD81CAE84D000B66026 /* OTAboutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutItem.h; sourceTree = "<group>"; };
 		2EDFADD91CAE84D000B66026 /* OTAboutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutItem.m; sourceTree = "<group>"; };
+		4500115C1CCE5BD2004754DF /* OTTourCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourCreatorViewController.h; sourceTree = "<group>"; };
+		4500115D1CCE5BD2004754DF /* OTTourCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourCreatorViewController.m; sourceTree = "<group>"; };
 		4508AE2F1C7F924B00EDAC1B /* OTTourOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourOptionsViewController.h; sourceTree = "<group>"; };
 		4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourOptionsViewController.m; sourceTree = "<group>"; };
 		4525EB2F1CA46082006784E6 /* OTSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSettingsViewController.h; sourceTree = "<group>"; };
@@ -855,6 +858,8 @@
 				2E7064F01CB273AE0034C55A /* OTMapOptionsViewController.m */,
 				2EDA5F011CB3F84300849172 /* OTGuideDetailsViewController.h */,
 				2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */,
+				4500115C1CCE5BD2004754DF /* OTTourCreatorViewController.h */,
+				4500115D1CCE5BD2004754DF /* OTTourCreatorViewController.m */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -1150,6 +1155,7 @@
 				6B1A847119E811210020FB93 /* OTPoiService.m in Sources */,
 				45E6BFCF1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m in Sources */,
 				DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */,
+				4500115E1CCE5BD2004754DF /* OTTourCreatorViewController.m in Sources */,
 				456ABD801CA18416004A81D6 /* UILabel+entourage.m in Sources */,
 				0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */,
 				DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */,
@@ -1349,6 +1355,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1382,6 +1389,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;

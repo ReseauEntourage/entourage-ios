@@ -14,6 +14,7 @@
 + (UIColor *)appGreyishColor;
 + (UIColor *)appGreyishBrownColor;
 + (UIColor *)appPaleGreyColor;
++ (UIColor *)appModalBackgroundColor;
 
 + (UIColor *)poiCategory0;
 + (UIColor *)poiCategory1;

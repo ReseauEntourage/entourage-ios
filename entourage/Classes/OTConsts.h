@@ -17,6 +17,9 @@
 
 #endif
 
+#define PARIS_LAT 48.856578
+#define PARIS_LON  2.351828
+
 
 #define kNotificationPushStatusChanged @"NotificationAPNSStatusChanged"
 
@@ -28,3 +31,5 @@
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
 
+#define OTLocalizedString(key) \
+    [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
