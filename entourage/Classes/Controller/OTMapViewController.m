@@ -24,7 +24,7 @@
 #import "OTGuideDetailsViewController.h"
 #import "OTTourCreatorViewController.h"
 
-#import "OTNewsfeedMapDelegate.h"
+#import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
 
 #import "KPAnnotation.h"
@@ -91,7 +91,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, weak) IBOutlet UIImageView *pointerPin;
 
-@property (nonatomic, strong) OTNewsfeedMapDelegate *newsfeedMapDelegate;
+@property (nonatomic, strong) OTToursMapDelegate *toursMapDelegate;
 @property (nonatomic, strong) OTGuideMapDelegate *guideMapDelegate;
 
 // markers
@@ -141,7 +141,7 @@
     self.encounters = [NSMutableArray new];
     self.markers = [NSMutableArray new];
     
-    self.newsfeedMapDelegate = [[OTNewsfeedMapDelegate alloc] initWithMapController:self];
+    self.toursMapDelegate = [[OTToursMapDelegate alloc] initWithMapController:self];
     self.guideMapDelegate = [[OTGuideMapDelegate alloc] initWithMapController:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
@@ -197,19 +197,19 @@
 }
 
 - (void)switchToNewsfeed {
-    self.newsfeedMapDelegate.isActive = YES;
+    self.toursMapDelegate.isActive = YES;
     self.guideMapDelegate.isActive = NO;
-    self.mapView.delegate = self.newsfeedMapDelegate;
+    self.mapView.delegate = self.toursMapDelegate;
     self.mapSegmentedControl.hidden = NO;
     //[self clearMap];
-    [self.newsfeedMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
+    [self.toursMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
     if (self.isTourListDisplayed) {
         [self showToursList];
     }
 }
 
 - (void)switchToGuide {
-    self.newsfeedMapDelegate.isActive = NO;
+    self.toursMapDelegate.isActive = NO;
     self.guideMapDelegate.isActive = YES;
     self.mapView.delegate = self.guideMapDelegate;
     [self clearMap];
@@ -333,7 +333,7 @@
 static BOOL didGetAnyData = NO;
 - (void)refreshMap {
     NSLog(@"Refreshing map ...");
-    if (self.newsfeedMapDelegate.isActive) {
+    if (self.toursMapDelegate.isActive) {
         [self getTourList];
     }
     else {
@@ -411,7 +411,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)feedMapViewWithEncounters {
-    if (self.newsfeedMapDelegate.isActive) {
+    if (self.toursMapDelegate.isActive) {
         NSMutableArray *annotations = [NSMutableArray new];
 
         for (OTEncounter *encounter in self.encounters) {
@@ -424,8 +424,8 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)feedMapViewWithTours {
-    self.newsfeedMapDelegate.drawnTours = [[NSMapTable alloc] init];
-    if (self.newsfeedMapDelegate.isActive) {
+    self.toursMapDelegate.drawnTours = [[NSMapTable alloc] init];
+    if (self.toursMapDelegate.isActive) {
         for (OTTour *tour in self.tours) {
             [self drawTour:tour];
         }
@@ -452,7 +452,7 @@ static BOOL didGetAnyData = NO;
         coords[count++] = point.toLocation.coordinate;
     }
     MKPolyline *polyline = [MKPolyline polylineWithCoordinates:coords count:[tour.tourPoints count]];
-    [self.newsfeedMapDelegate.drawnTours setObject:tour forKey:polyline];
+    [self.toursMapDelegate.drawnTours setObject:tour forKey:polyline];
     [self.mapView addOverlay:polyline];
 }
 
@@ -647,7 +647,7 @@ static BOOL didGetAnyData = NO;
             
                 if (self.isTourRunning) {
                     [self addTourPointFromLocation:newLocation];
-                    if (self.newsfeedMapDelegate.isActive) {
+                    if (self.toursMapDelegate.isActive) {
                         [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
                     }
                 }
@@ -737,7 +737,7 @@ static BOOL didGetAnyData = NO;
 
 - (void)createEncounter {
     [self dismissViewControllerAnimated:NO completion:^{
-        if (self.newsfeedMapDelegate.isActive) {
+        if (self.toursMapDelegate.isActive) {
             [self performSegueWithIdentifier:@"OTCreateMeeting" sender:nil];
         } else {
             [self showNewEncounterStartDialogFromGuide];
@@ -758,7 +758,7 @@ static BOOL didGetAnyData = NO;
 
 - (void)createTour {
     [self dismissViewControllerAnimated:NO completion:^{
-        if (self.newsfeedMapDelegate.isActive) {
+        if (self.toursMapDelegate.isActive) {
             [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
         } else {
             [self showNewTourStartDialogFromGuide];
@@ -769,7 +769,7 @@ static BOOL didGetAnyData = NO;
 - (void)togglePOI {
     [self dismissViewControllerAnimated:NO completion:^{
         //[self performSegueWithIdentifier:@"GuideSegue" sender:nil];
-        if (self.newsfeedMapDelegate.isActive) {
+        if (self.toursMapDelegate.isActive) {
             [self switchToGuide];
         } else {
             [self switchToNewsfeed];
@@ -922,7 +922,7 @@ static bool isShowingOptions = NO;
 
 - (void)showToursMap {
     
-    if (self.newsfeedMapDelegate.isActive) {
+    if (self.toursMapDelegate.isActive) {
         self.isTourListDisplayed = NO;
     }
     

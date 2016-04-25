@@ -9,7 +9,7 @@
 #import "OTBaseMapDelegate.h"
 #import <MapKit/MapKit.h>
 
-@interface OTNewsfeedMapDelegate : OTBaseMapDelegate <MKMapViewDelegate>
+@interface OTToursMapDelegate : OTBaseMapDelegate <MKMapViewDelegate>
 
 @property (nonatomic, strong) NSMapTable *drawnTours;
 

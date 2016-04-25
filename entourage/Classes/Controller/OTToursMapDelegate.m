@@ -6,7 +6,7 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTNewsfeedMapDelegate.h"
+#import "OTToursMapDelegate.h"
 #import "KPAnnotation.h"
 #import "KPClusteringController.h"
 #import "JSBadgeView.h"
@@ -16,11 +16,11 @@
 #import "OTTourService.h"
 #import "UIColor+entourage.h"
 
-@interface OTNewsfeedMapDelegate ()
+@interface OTToursMapDelegate ()
 
 @end
 
-@implementation OTNewsfeedMapDelegate
+@implementation OTToursMapDelegate
 
 #pragma mark - Lifecycle
 
@@ -111,7 +111,7 @@
         MKPolylineRenderer *aRenderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
 
         OTTour *tour = [self.drawnTours objectForKey:polyline];
-        NSLog(@"%d TOUR-TYPE %@", tour.sid.intValue, tour.tourType);
+        //NSLog(@"%d TOUR-TYPE %@", tour.sid.intValue, tour.tourType);
         aRenderer.strokeColor = [OTTour colorForTourType:tour.tourType];
         if (self.mapController.isTourRunning && tour == nil) {
             aRenderer.strokeColor = [OTTour colorForTourType:self.mapController.currentTourType];

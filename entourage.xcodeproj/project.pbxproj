@@ -41,7 +41,7 @@
 		2EDA5F031CB3F84300849172 /* OTGuideDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */; };
 		2EDA5F071CB50CEE00849172 /* OTToursTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F061CB50CEE00849172 /* OTToursTableView.m */; };
 		2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */; };
-		2EDA5F0E1CB67FFE00849172 /* OTNewsfeedMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F0D1CB67FFE00849172 /* OTNewsfeedMapDelegate.m */; };
+		2EDA5F0E1CB67FFE00849172 /* OTToursMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F0D1CB67FFE00849172 /* OTToursMapDelegate.m */; };
 		2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F101CB68BE200849172 /* OTGuideMapDelegate.m */; };
 		2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F131CB7BE7200849172 /* OTUserEditPasswordViewController.m */; };
 		2EDFADD71CAE810800B66026 /* OTAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */; };
@@ -209,8 +209,8 @@
 		2EDA5F061CB50CEE00849172 /* OTToursTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTToursTableView.m; sourceTree = "<group>"; };
 		2EDA5F081CB67F3500849172 /* OTBaseMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTBaseMapDelegate.h; sourceTree = "<group>"; };
 		2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTBaseMapDelegate.m; sourceTree = "<group>"; };
-		2EDA5F0C1CB67FFE00849172 /* OTNewsfeedMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTNewsfeedMapDelegate.h; sourceTree = "<group>"; };
-		2EDA5F0D1CB67FFE00849172 /* OTNewsfeedMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTNewsfeedMapDelegate.m; sourceTree = "<group>"; };
+		2EDA5F0C1CB67FFE00849172 /* OTToursMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToursMapDelegate.h; sourceTree = "<group>"; };
+		2EDA5F0D1CB67FFE00849172 /* OTToursMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTToursMapDelegate.m; sourceTree = "<group>"; };
 		2EDA5F0F1CB68BE200849172 /* OTGuideMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGuideMapDelegate.h; sourceTree = "<group>"; };
 		2EDA5F101CB68BE200849172 /* OTGuideMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGuideMapDelegate.m; sourceTree = "<group>"; };
 		2EDA5F121CB7BE7200849172 /* OTUserEditPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUserEditPasswordViewController.h; sourceTree = "<group>"; };
@@ -475,8 +475,8 @@
 			children = (
 				2EDA5F081CB67F3500849172 /* OTBaseMapDelegate.h */,
 				2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */,
-				2EDA5F0C1CB67FFE00849172 /* OTNewsfeedMapDelegate.h */,
-				2EDA5F0D1CB67FFE00849172 /* OTNewsfeedMapDelegate.m */,
+				2EDA5F0C1CB67FFE00849172 /* OTToursMapDelegate.h */,
+				2EDA5F0D1CB67FFE00849172 /* OTToursMapDelegate.m */,
 				2EDA5F0F1CB68BE200849172 /* OTGuideMapDelegate.h */,
 				2EDA5F101CB68BE200849172 /* OTGuideMapDelegate.m */,
 			);
@@ -1186,7 +1186,7 @@
 				454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */,
 				454C8F581C501B31001362B2 /* UIView+entourage.m in Sources */,
 				DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */,
-				2EDA5F0E1CB67FFE00849172 /* OTNewsfeedMapDelegate.m in Sources */,
+				2EDA5F0E1CB67FFE00849172 /* OTToursMapDelegate.m in Sources */,
 				0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */,
 				2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */,
 				6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */,
