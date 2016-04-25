@@ -212,11 +212,11 @@ typedef NS_ENUM(NSInteger) {
                     //TODO: Ask Vincent for status
                     [self setupVerificationProfileCell:cell
                                              withCheck:@"Adresse e-mail"
-                                             andStatus:NO];
+                                             andStatus:YES];
                 else
                     [self setupVerificationProfileCell:cell
                                              withCheck:@"Numéro de téléphone"
-                                             andStatus:NO];
+                                             andStatus:YES];
             }
             break;
         }

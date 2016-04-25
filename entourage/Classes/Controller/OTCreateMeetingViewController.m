@@ -60,7 +60,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"DECRIVEZ LA RENCONTRE";
+    self.title = @"DESCRIPTION";//@"DECRIVEZ LA RENCONTRE";
     
     self.isRecording = NO;
     
@@ -74,6 +74,14 @@
 
 - (void)setupUI {
     [self setupCloseModal];
+    
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Valider"
+                                                                   style:UIBarButtonItemStyleDone
+                                                                  target:self
+                                                                  action:@selector(sendEncounter:)];
+    [self.navigationItem setRightBarButtonItem:menuButton];
+
+    
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.displayName];
