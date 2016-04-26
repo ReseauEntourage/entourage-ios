@@ -341,13 +341,17 @@ static BOOL didGetAnyData = NO;
     }
 }
 
-- (void)getTourList {
+- (void)didChangePosition {
     // check if we need to make a new request
     CLLocationDistance distance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.requestedToursCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
-    NSLog(@"getting tours list");
+    [self getTourList];
+}
+
+- (void)getTourList {
+    NSLog(@"Getting tours list ...");
     __block CLLocationCoordinate2D oldRequestedCoordinate;
     oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
     oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
@@ -357,21 +361,21 @@ static BOOL didGetAnyData = NO;
                                          limit:@20
                                       distance:@TOURS_REQUEST_DISTANCE_KM //*[NSNumber numberWithDouble:[self mapHeight]]
                                        success:^(NSMutableArray *closeTours)
-     {
-         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-         
-         NSLog(@"got tours list");
-         if (closeTours.count && !didGetAnyData) {
-             [self showToursList];
-             didGetAnyData = YES;
-         }
-         [self.indicatorView setHidden:YES];
-         self.tours = closeTours;
-         [self.tableView removeAll];
-         [self.tableView addTours:closeTours];
-         [self feedMapViewWithTours];
-         [self.tableView reloadData];
-     }
+                                             {
+                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                 
+                                                 NSLog(@"got tours list");
+                                                 if (closeTours.count && !didGetAnyData) {
+                                                     [self showToursList];
+                                                     didGetAnyData = YES;
+                                                 }
+                                                 [self.indicatorView setHidden:YES];
+                                                 self.tours = closeTours;
+                                                 [self.tableView removeAll];
+                                                 [self.tableView addTours:closeTours];
+                                                 [self feedMapViewWithTours];
+                                                 [self.tableView reloadData];
+                                             }
                                        failure:^(NSError *error) {
                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                            self.requestedToursCoordinate = oldRequestedCoordinate;
