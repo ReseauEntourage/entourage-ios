@@ -81,7 +81,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate>
+@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTTourQuitDelegate, OTTourTimelineDelegate>
 
 // map
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
@@ -150,7 +150,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTourConfirmation) name:@kNotificationLocalTourConfirmation object:nil];
 
 	[self configureTableView];
-    
+    self.mapSegmentedControl.layer.cornerRadius = 5;
     [self switchToNewsfeed];
     if (self.isTourRunning) {
         [self showNewTourOnGoing];
@@ -817,6 +817,24 @@ static BOOL didGetAnyData = NO;
     }];
 }
 
+/********************************************************************************/
+#pragma mark - OTTourQuitDelegate
+
+- (void)didQuitTour {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.tableView reloadData];
+    }];
+}
+
+/**************************************************************************************************/
+#pragma mark - OTTourDetailsOptionsDelegate
+
+- (void)promptToCloseTour {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self stopTour:nil];
+    }];
+}
+
 /**************************************************************************************************/
 #pragma mark - Actions
 
@@ -861,6 +879,7 @@ static bool isShowingOptions = NO;
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
 }
 
+
 /**************************************************************************************************/
 #pragma mark - Tours Table View Delegate
 
@@ -901,7 +920,28 @@ static bool isShowingOptions = NO;
     }
     else
     {
-        [self performSegueWithIdentifier:@"QuitTourSegue" sender:self];
+        OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+        if (currentUser.sid.intValue == tour.author.uID.intValue) {
+            if (self.isTourRunning && tour.sid.intValue == self.tour.sid.intValue) {
+                [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
+            } else {
+                //TODO: freeze! :D
+                tour.status = TOUR_STATUS_FREEZED;
+                [[OTTourService new] closeTour:tour
+                                   withSuccess:^(OTTour *closedTour) {
+                                       [self dismissViewControllerAnimated:YES completion:^{
+                                           [self.tableView reloadData];
+                                           
+                                       }];
+                                       [SVProgressHUD showSuccessWithStatus:@""];
+                } failure:^(NSError *error) {
+                    [SVProgressHUD showErrorWithStatus:@"Erreur"];
+                    NSLog(@"%@",[error localizedDescription]);
+                }];
+            }
+        } else {
+            [self performSegueWithIdentifier:@"QuitTourSegue" sender:self];
+        }
     }
 }
 
@@ -962,7 +1002,7 @@ static bool isShowingOptions = NO;
 - (void)showNewTourOnGoing {
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
-    
+    [self.mapSegmentedControl setSelectedSegmentIndex:0];
     [UIView animateWithDuration:0.5 animations:^(void) {
         self.mapSegmentedControl.hidden = NO;
         self.launcherButton.hidden = YES;
@@ -1058,6 +1098,7 @@ typedef NS_ENUM(NSInteger) {
         case SegueIDConfirmation: {
             OTConfirmationViewController *controller = (OTConfirmationViewController *)destinationViewController;
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+            controller.view.backgroundColor = [UIColor appModalBackgroundColor];
             controller.delegate = self;
             self.isTourRunning = NO;
             [controller configureWithTour:self.tour
@@ -1068,7 +1109,8 @@ typedef NS_ENUM(NSInteger) {
             OTTourViewController *controller = (OTTourViewController *)navController.topViewController;
             controller.tour = self.selectedTour;
             [controller configureWithTour:self.selectedTour];
-        } break;
+            controller.delegate = self;
+        } 
         case SegueIDPublicTour: {
             UINavigationController *navController = segue.destinationViewController;
             OTPublicTourViewController *controller = (OTPublicTourViewController *)navController.topViewController;
@@ -1099,6 +1141,7 @@ typedef NS_ENUM(NSInteger) {
             controller.view.backgroundColor = [UIColor appModalBackgroundColor];
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
             controller.tour = self.selectedTour;
+            controller.tourQuitDelegate = self;
         } break;
         case SegueIDGuideSolidarity: {
             UINavigationController *navController = segue.destinationViewController;

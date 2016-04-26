@@ -67,16 +67,22 @@
 }
 
 - (void)setupWithJoinStatusOfTour:(OTTour *)tour {
+    self.hidden = [TOUR_STATUS_FREEZED isEqualToString:tour.status];
     
     if ([tour.joinStatus isEqualToString:JOIN_ACCEPTED]) {
         [self setText:@"Actif"];
         [self setTextColor:[UIColor appOrangeColor]];
     } else {
-        if ([tour.joinStatus isEqualToString:JOIN_PENDING])
-            [self setText:@"En attente"];
-        else
+        if ([tour.joinStatus isEqualToString:JOIN_PENDING]) {
+            [self setText:@"Demende en attente"];
+            [self setTextColor:[UIColor appOrangeColor]];
+        } else if ([tour.joinStatus isEqualToString:JOIN_REJECTED]) {
+            [self setText:@"Demende rejetée"];
+            [self setTextColor:[UIColor appGreyishColor]];
+        } else {
             [self setText:@"Je rejoins"];
-        [self setTextColor:[UIColor appGreyishColor]];
+            [self setTextColor:[UIColor appGreyishColor]];
+        }
     }
 }
 

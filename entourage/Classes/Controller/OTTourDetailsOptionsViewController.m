@@ -32,7 +32,11 @@
 - (void)viewDidAppear:(BOOL)animated {
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     if ([currentUser.sid intValue] == [self.tour.author.uID intValue]) {
-        [self addButtonWithTitle:@"Clôturer" withSelectorNamed:@"doCloseTour"];
+        NSLog(@"status>>> %@", self.tour.status);
+        if ([self.tour.status isEqualToString:@"ongoing"])
+            [self addButtonWithTitle:@"Arrêter" withSelectorNamed:@"doCloseTour"];
+        else
+            [self addButtonWithTitle:@"Clôturer" withSelectorNamed:@"doFreezeTour"];
     } else {
         [self addButtonWithTitle:@"Quitter" withSelectorNamed:@"doQuitTour"];
     }
@@ -59,11 +63,24 @@
 }
 
 #pragma mark - Actions
+- (IBAction)doFreezeTour {
+    self.tour.status = TOUR_STATUS_FREEZED;
+    [[OTTourService new] closeTour:self.tour
+                       withSuccess:^(OTTour *updatedTour) {
+                           NSLog(@"freezed tour: %@", updatedTour.sid);
+                           [self dismissViewControllerAnimated:YES completion:nil];
+                       } failure:^(NSError *error) {
+                           NSLog(@"FREEZEerr %@", error.description);
+                       }];
+}
+
 - (IBAction)doCloseTour {
+    
     [[OTTourService new] closeTour:self.tour
                           withSuccess:^(OTTour *updatedTour) {
                               NSLog(@"Closed tour: %@", updatedTour.sid);
-                              [self dismissViewControllerAnimated:YES completion:nil];
+                              //[self dismissViewControllerAnimated:YES completion:nil];
+                              [self.delegate promptToCloseTour];
                           } failure:^(NSError *error) {
                               NSLog(@"CLOSEerr %@", error.description);
                           }];

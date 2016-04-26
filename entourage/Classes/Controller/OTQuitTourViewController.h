@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "OTTour.h"
 
+@protocol OTTourQuitDelegate <NSObject>
+
+@required
+- (void)didQuitTour;
+
+@end
+
 @interface OTQuitTourViewController : UIViewController
 
 @property (nonatomic, strong) OTTour *tour;
+@property (nonatomic, weak) id<OTTourQuitDelegate> tourQuitDelegate;
 
 @end
