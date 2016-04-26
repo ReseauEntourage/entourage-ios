@@ -662,8 +662,8 @@
 			children = (
 				DBE9EF2919E7D71C00031144 /* Menu */,
 				1D962C7219E9280800547687 /* Login */,
+				DBBE8ACB19E83CCE00FA218E /* Main */,
 				0A70FA2F1BFF31E10080E8EC /* Tour */,
-				DBBE8ACB19E83CCE00FA218E /* Map */,
 				0A4D16071C21B3950066394C /* Message */,
 				DBBE8AD319E85E9000FA218E /* MyMeetings */,
 			);
@@ -840,7 +840,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		DBBE8ACB19E83CCE00FA218E /* Map */ = {
+		DBBE8ACB19E83CCE00FA218E /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				2EDA5F0B1CB67F4000849172 /* MapDelegate */,
@@ -867,7 +867,7 @@
 				4500115C1CCE5BD2004754DF /* OTTourCreatorViewController.h */,
 				4500115D1CCE5BD2004754DF /* OTTourCreatorViewController.m */,
 			);
-			name = Map;
+			name = Main;
 			sourceTree = "<group>";
 		};
 		DBBE8ACF19E857F000FA218E /* Menu */ = {
