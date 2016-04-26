@@ -119,6 +119,7 @@
 @property (nonatomic, strong) NSMutableArray *tours;
 @property (nonatomic, strong) OTToursTableView *toursTableView;
 @property (nonatomic) CLLocationCoordinate2D requestedToursCoordinate;
+@property (nonatomic, strong) NSTimer *refreshTimer;
 
 // POI
 @property (nonatomic, strong) NSArray *categories;
@@ -164,7 +165,7 @@
     [self.locationManager startUpdatingLocation];
     
     [self clearMap];
-    [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(refreshMap) userInfo:nil repeats:YES];
+    
     
        if (self.isTourRunning) {
         self.launcherButton.hidden = YES;
@@ -182,11 +183,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(refreshMap) userInfo:nil repeats:YES];
+    [self.refreshTimer fire];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    //[self.timer invalidate];
+    [self.refreshTimer invalidate];
     if (_isTourRunning)
         [self createLocalNotificationForTour:self.tour.sid];
 }

@@ -843,9 +843,9 @@
 		DBBE8ACB19E83CCE00FA218E /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				2EDA5F0B1CB67F4000849172 /* MapDelegate */,
 				6B4930C819A773C500DA7EE0 /* OTMainViewController.h */,
 				6B4930C919A773C500DA7EE0 /* OTMainViewController.m */,
+				2EDA5F0B1CB67F4000849172 /* MapDelegate */,
 				45ADCAD01CA321380050EB96 /* UIViewController+MapView.h */,
 				45ADCAD11CA321380050EB96 /* UIViewController+MapView.m */,
 				A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */,
