@@ -10,7 +10,7 @@
 
 @implementation OTBaseMapDelegate
 
-- (instancetype)initWithMapController:(OTMapViewController *)mapController {
+- (instancetype)initWithMapController:(OTMainViewController *)mapController {
     self = [super init];
     if (self) {
         self.mapController = mapController;

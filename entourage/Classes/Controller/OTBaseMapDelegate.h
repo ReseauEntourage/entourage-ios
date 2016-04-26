@@ -9,16 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CLLocationManager.h>
 
-#import "OTMapViewController.h"
+#import "OTMainViewController.h"
 
 #define MAP_TOUR_LINE_WIDTH 4.0f
 
 @interface OTBaseMapDelegate : NSObject
 
-@property (nonatomic, weak) OTMapViewController* mapController;
+@property (nonatomic, weak) OTMainViewController* mapController;
 @property (nonatomic) BOOL isActive;
 
-- (instancetype)initWithMapController:(OTMapViewController *)mapController;
+- (instancetype)initWithMapController:(OTMainViewController *)mapController;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;
 

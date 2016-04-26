@@ -104,7 +104,7 @@
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76Y-K4-a3l">
-                                                    <rect key="frame" x="141.5" y="86" width="45" height="45"/>
+                                                    <rect key="frame" x="142" y="86" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="sL5-zJ-iQe"/>
                                                         <constraint firstAttribute="height" constant="45" id="xSr-tm-LKp"/>

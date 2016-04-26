@@ -81,6 +81,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    NSLog(@"region did change");
     [self.mapController refreshMap];
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import "OTCreateMeetingViewController.h"
-#import "OTMapViewController.h"
+#import "OTMainViewController.h"
 
 // Model
 #import "OTEncounter.h"

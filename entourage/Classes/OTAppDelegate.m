@@ -29,7 +29,7 @@
 #import "IQKeyboardManager.h"
 #import "UIStoryboard+entourage.h"
 #import "UIStoryboard+entourage.h"
-#import "OTMapViewController.h"
+#import "OTMainViewController.h"
 
 // Helper
 #import "NSUserDefaults+OT.h"

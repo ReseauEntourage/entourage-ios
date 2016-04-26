@@ -15,7 +15,7 @@
 @class KPClusteringController;
 @class OTEncounterAnnotation;
 
-@interface OTMapViewController : UIViewController <OTMeetingCalloutViewControllerDelegate, OTCreateMeetingViewControllerDelegate, OTConfirmationViewControllerDelegate>
+@interface OTMainViewController : UIViewController <OTMeetingCalloutViewControllerDelegate, OTCreateMeetingViewControllerDelegate, OTConfirmationViewControllerDelegate>
 
 
 // tour properties

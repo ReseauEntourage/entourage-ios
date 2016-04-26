@@ -48,6 +48,8 @@
 		2EDFADDA1CAE84D000B66026 /* OTAboutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD91CAE84D000B66026 /* OTAboutItem.m */; };
 		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
 		4500115E1CCE5BD2004754DF /* OTTourCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4500115D1CCE5BD2004754DF /* OTTourCreatorViewController.m */; };
+		4507017C1CCF459B00432548 /* TourCreator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4507017A1CCF459B00432548 /* TourCreator.storyboard */; };
+		4507017E1CCF494800432548 /* TourJoinRequest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4507017D1CCF494800432548 /* TourJoinRequest.storyboard */; };
 		4508AE311C7F924B00EDAC1B /* OTTourOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */; };
 		4525EB311CA46082006784E6 /* OTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4525EB301CA46082006784E6 /* OTSettingsViewController.m */; };
 		4525EB341CA46582006784E6 /* OTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4525EB331CA46582006784E6 /* OTAboutViewController.m */; };
@@ -105,7 +107,7 @@
 		6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */; };
 		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
-		6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930C919A773C500DA7EE0 /* OTMapViewController.m */; };
+		6B4930CD19A773C500DA7EE0 /* OTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930C919A773C500DA7EE0 /* OTMainViewController.m */; };
 		6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */; };
 		6B4930DB19A779F200DA7EE0 /* poi_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B4930DA19A779F200DA7EE0 /* poi_mock.json */; };
 		6B4930DF19A77C2F00DA7EE0 /* OTHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930DE19A77C2F00DA7EE0 /* OTHTTPRequestManager.m */; };
@@ -221,6 +223,8 @@
 		2EDFADD91CAE84D000B66026 /* OTAboutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutItem.m; sourceTree = "<group>"; };
 		4500115C1CCE5BD2004754DF /* OTTourCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourCreatorViewController.h; sourceTree = "<group>"; };
 		4500115D1CCE5BD2004754DF /* OTTourCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourCreatorViewController.m; sourceTree = "<group>"; };
+		4507017B1CCF459B00432548 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourCreator.storyboard; sourceTree = "<group>"; };
+		4507017D1CCF494800432548 /* TourJoinRequest.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TourJoinRequest.storyboard; sourceTree = "<group>"; };
 		4508AE2F1C7F924B00EDAC1B /* OTTourOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourOptionsViewController.h; sourceTree = "<group>"; };
 		4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourOptionsViewController.m; sourceTree = "<group>"; };
 		4525EB2F1CA46082006784E6 /* OTSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSettingsViewController.h; sourceTree = "<group>"; };
@@ -308,8 +312,8 @@
 		6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Parsing.m"; sourceTree = "<group>"; };
 		6B1A847819E822150020FB93 /* pois_categories_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pois_categories_mock.json; sourceTree = "<group>"; };
 		6B4930BD19A769EB00DA7EE0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		6B4930C819A773C500DA7EE0 /* OTMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMapViewController.h; sourceTree = "<group>"; };
-		6B4930C919A773C500DA7EE0 /* OTMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapViewController.m; sourceTree = "<group>"; };
+		6B4930C819A773C500DA7EE0 /* OTMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMainViewController.h; sourceTree = "<group>"; };
+		6B4930C919A773C500DA7EE0 /* OTMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMainViewController.m; sourceTree = "<group>"; };
 		6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAppDelegate.h; sourceTree = "<group>"; };
 		6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAppDelegate.m; sourceTree = "<group>"; };
 		6B4930DA19A779F200DA7EE0 /* poi_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi_mock.json; sourceTree = "<group>"; };
@@ -532,6 +536,8 @@
 			children = (
 				45CE5A711C56961500F68C24 /* Intro.storyboard */,
 				45CE5A631C5242FC00F68C24 /* Main.storyboard */,
+				4507017D1CCF494800432548 /* TourJoinRequest.storyboard */,
+				4507017A1CCF459B00432548 /* TourCreator.storyboard */,
 				45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */,
 				452FE3FF1CAD5AC700063334 /* Entourages.storyboard */,
 				452FE3F31CAD563F00063334 /* TourOptions.storyboard */,
@@ -838,8 +844,8 @@
 			isa = PBXGroup;
 			children = (
 				2EDA5F0B1CB67F4000849172 /* MapDelegate */,
-				6B4930C819A773C500DA7EE0 /* OTMapViewController.h */,
-				6B4930C919A773C500DA7EE0 /* OTMapViewController.m */,
+				6B4930C819A773C500DA7EE0 /* OTMainViewController.h */,
+				6B4930C919A773C500DA7EE0 /* OTMainViewController.m */,
 				45ADCAD01CA321380050EB96 /* UIViewController+MapView.h */,
 				45ADCAD11CA321380050EB96 /* UIViewController+MapView.m */,
 				A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */,
@@ -1022,9 +1028,11 @@
 				45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */,
 				45CE5A611C5241AA00F68C24 /* Images.xcassets in Resources */,
 				45CE5A5E1C5241AA00F68C24 /* MankSans.ttf in Resources */,
+				4507017E1CCF494800432548 /* TourJoinRequest.storyboard in Resources */,
 				45CE5A561C5241AA00F68C24 /* Blokletters-Balpen.ttf in Resources */,
 				45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */,
 				45CE5A5A1C5241AA00F68C24 /* Calibri.ttf in Resources */,
+				4507017C1CCF459B00432548 /* TourCreator.storyboard in Resources */,
 				452FE4011CAD5AC700063334 /* Entourages.storyboard in Resources */,
 				45CE5A5B1C5241AA00F68C24 /* MankSans-Medium.ttf in Resources */,
 				191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */,
@@ -1166,7 +1174,7 @@
 				452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */,
 				45F443441C90BCB700DDEBE1 /* OTTourMessage.m in Sources */,
 				2EDFADD71CAE810800B66026 /* OTAboutTableViewCell.m in Sources */,
-				6B4930CD19A773C500DA7EE0 /* OTMapViewController.m in Sources */,
+				6B4930CD19A773C500DA7EE0 /* OTMainViewController.m in Sources */,
 				0AE855CB1C3D05A0001176B9 /* OTTutorialViewController.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
@@ -1247,6 +1255,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		4507017A1CCF459B00432548 /* TourCreator.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4507017B1CCF459B00432548 /* Base */,
+			);
+			name = TourCreator.storyboard;
+			sourceTree = "<group>";
+		};
 		452FE3E41CAD544F00063334 /* UserProfile.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

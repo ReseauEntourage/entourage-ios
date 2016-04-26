@@ -8,7 +8,7 @@
 
 // Controller
 #import "OTConfirmationViewController.h"
-#import "OTMapViewController.h"
+#import "OTMainViewController.h"
 
 // Service
 #import "OTTourService.h"

@@ -7,7 +7,7 @@
 //
 
 // Controller
-#import "OTMapViewController.h"
+#import "OTMainViewController.h"
 #import "UIViewController+menu.h"
 #import "OTCreateMeetingViewController.h"
 #import "OTToursTableViewController.h"
@@ -81,7 +81,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMapViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate>
+@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate>
 
 // map
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
@@ -127,7 +127,7 @@
 
 @end
 
-@implementation OTMapViewController
+@implementation OTMainViewController
 
 /**************************************************************************************************/
 #pragma mark - Life cycle
@@ -347,6 +347,7 @@ static BOOL didGetAnyData = NO;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
+    NSLog(@"getting tours list");
     __block CLLocationCoordinate2D oldRequestedCoordinate;
     oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
     oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
@@ -358,6 +359,8 @@ static BOOL didGetAnyData = NO;
                                        success:^(NSMutableArray *closeTours)
      {
          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+         
+         NSLog(@"got tours list");
          if (closeTours.count && !didGetAnyData) {
              [self showToursList];
              didGetAnyData = YES;
@@ -445,7 +448,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)drawTour:(OTTour *)tour {
-    NSLog(@"drawing %@ tour %d with %lu points ...", tour.vehicleType, tour.sid.intValue, (unsigned long)tour.tourPoints.count);
+    NSLog(@"drawing %@ tour %d with %lu points ... by %@", tour.vehicleType, tour.sid.intValue, (unsigned long)tour.tourPoints.count, tour.author.displayName);
     CLLocationCoordinate2D coords[[tour.tourPoints count]];
     int count = 0;
     for (OTTourPoint *point in tour.tourPoints) {
