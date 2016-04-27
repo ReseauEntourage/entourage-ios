@@ -74,6 +74,10 @@
 "tour_create_sending" = "Création de la maraude";
 "tour_create_error" = "Erreur de création de la maraude";
 
+"thanks" = "Merci";
+"tour_join_intro" = "Cette maraude étant privée, \nvotre demande a été \ntransmise au créateur.";
+"tour_join_message" = "Si vous le souhaitez, \nenvoyez-lui un message:";
+
 "tour" = "Maraude";
 "send" = "Envoyer";
 

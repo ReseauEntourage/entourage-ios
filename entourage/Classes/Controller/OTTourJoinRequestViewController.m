@@ -9,6 +9,7 @@
 #import "OTTourJoinRequestViewController.h"
 #import "OTTourService.h"
 #import "SVProgressHUD.h"
+#import "OTConsts.h"
 
 @interface OTTourJoinRequestViewController ()
 
@@ -36,11 +37,13 @@
 }
 
 - (void)setupUI {
+    
+    
     NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:17 weight:UIFontWeightLight]};
     NSDictionary *mediumAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:17 weight:UIFontWeightMedium]};
-    NSAttributedString *merciAttrString = [[NSAttributedString alloc] initWithString:@"MERCI!\n\n"attributes:mediumAttrs];
-    NSAttributedString *cetteTourAttrString = [[NSAttributedString alloc] initWithString:@"Cette maraude étant privée, \nvotre demande a été \ntransmise au créateur.\n\n" attributes:lightAttrs];
-    NSAttributedString *messageAttrString = [[NSAttributedString alloc] initWithString:@"Si vous le souhaitez, \nenvoyez-lui un message:" attributes:mediumAttrs];
+    NSAttributedString *merciAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@!\n\n", OTLocalizedString(@"thanks").uppercaseString] attributes:mediumAttrs];
+    NSAttributedString *cetteTourAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n\n", OTLocalizedString(@"tour_join_intro")] attributes:lightAttrs];
+    NSAttributedString *messageAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", OTLocalizedString(@"tour_join_message")] attributes:mediumAttrs];
     
     NSMutableAttributedString *greetingAttrString = merciAttrString.mutableCopy;
     [greetingAttrString appendAttributedString:cetteTourAttrString];
