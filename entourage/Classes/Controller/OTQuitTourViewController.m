@@ -15,7 +15,9 @@
     [[OTTourService new] quitTour:self.tour
                           success:^() {
                               NSLog(@"Quited tour: %@", self.tour.sid);
-                              [self dismissViewControllerAnimated:YES completion:nil];
+                              self.tour.joinStatus = @"not_requested";
+                              //[self dismissViewControllerAnimated:YES completion:nil];
+                              [self.tourQuitDelegate didQuitTour];
                           } failure:^(NSError *error) {
                               NSLog(@"QUITerr %@", error.description);
                           }];

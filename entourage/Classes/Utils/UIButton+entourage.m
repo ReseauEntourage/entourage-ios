@@ -12,6 +12,7 @@
 #define DEFAULT_IMAGE @"userSmall"
 
 #define JOINBUTTON_ACCEPTED     @"activeButton"
+#define JOINBUTTON_PENDING     @"pendingRequestButton"
 #define JOINBUTTON_NOTACCEPTED  @"joinButton"
 
 
@@ -40,8 +41,11 @@
 }
 
 - (void)setupWithJoinStatusOfTour:(OTTour *)tour {
+    self.hidden = [TOUR_STATUS_FREEZED isEqualToString:tour.status];
     if ([tour.joinStatus isEqualToString:JOIN_ACCEPTED]) {
         [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
+    } else  if ([tour.joinStatus isEqualToString:JOIN_PENDING]) {
+        [self setImage:[UIImage imageNamed:JOINBUTTON_PENDING] forState:UIControlStateNormal];
     } else {
         [self setImage:[UIImage imageNamed:JOINBUTTON_NOTACCEPTED] forState:UIControlStateNormal];
     }

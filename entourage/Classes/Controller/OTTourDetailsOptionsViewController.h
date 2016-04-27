@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "OTTour.h"
 
+@protocol OTTourDetailsOptionsDelegate <NSObject>
+
+@required
+- (void)promptToCloseTour;
+
+@end
+
 @interface OTTourDetailsOptionsViewController : UIViewController
 
 @property (nonatomic, strong) OTTour *tour;
+@property (nonatomic, weak) id<OTTourDetailsOptionsDelegate> delegate;
 
 @end

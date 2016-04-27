@@ -47,7 +47,7 @@ typedef NS_ENUM(unsigned) {
 
 
 
-@interface OTTourViewController () <UITextViewDelegate>
+@interface OTTourViewController () <UITextViewDelegate, OTTourDetailsOptionsDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UITextView *chatTextView;
@@ -226,6 +226,9 @@ typedef NS_ENUM(unsigned) {
     //[plusButton setAction:@selector(addUser)];
 
     
+    
+    if ([self.tour.status isEqualToString:TOUR_STATUS_FREEZED])
+        return;
     UIImage *moreImage = [[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] init];
@@ -363,6 +366,15 @@ typedef NS_ENUM(unsigned) {
 
 - (IBAction)closeModal:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+/**************************************************************************************************/
+#pragma mark - OTTourDetailsOptionsDelegate
+
+- (void)promptToCloseTour {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self.delegate promptToCloseTour];
+    }];
 }
 
 /**************************************************************************************************/
@@ -798,8 +810,9 @@ static CGFloat keyboardOverlap;
     if ([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
         OTTourDetailsOptionsViewController *controller = (OTTourDetailsOptionsViewController *)segue.destinationViewController;
         controller.tour = self.tour;
-        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+        controller.view.backgroundColor = [UIColor appModalBackgroundColor];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.delegate  = self;
     }
     if ([segue.identifier isEqualToString:@"OTUserProfileSegue"]) {
         UINavigationController *navController = segue.destinationViewController;
