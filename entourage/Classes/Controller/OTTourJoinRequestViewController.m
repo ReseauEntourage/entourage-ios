@@ -13,6 +13,7 @@
 @interface OTTourJoinRequestViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *greetingLabel;
+@property (nonatomic, weak) IBOutlet UITextView *greetingMessage;
 
 @end
 
@@ -26,19 +27,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[OTTourService new] joinTour:self.tour
-                      withMessage:@""
-                          success:^(OTTourJoiner *joiner) {
-                              NSLog(@"sent request to join tour %@", self.tour.sid);
-                              self.tour.joinStatus = @"pending";
-                          }
-                          failure:^(NSError *error) {
-                              NSLog(@"failed joining tour %@ with error %@", self.tour.sid, error.description);
-                              [self dismissViewControllerAnimated:YES completion:^{
-                                  [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
-                              }];
-                          }];
-
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,12 +40,11 @@
     NSDictionary *mediumAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:17 weight:UIFontWeightMedium]};
     NSAttributedString *merciAttrString = [[NSAttributedString alloc] initWithString:@"MERCI!\n\n"attributes:mediumAttrs];
     NSAttributedString *cetteTourAttrString = [[NSAttributedString alloc] initWithString:@"Cette maraude étant privée, \nvotre demande a été \ntransmise au créateur.\n\n" attributes:lightAttrs];
-    //NSAttributedString *messageAttrString = [[NSAttributedString alloc] initWithString:@"Si vous le souhaitez, \nenvoyez-lui un message:" attributes:mediumAttrs];
-    
+    NSAttributedString *messageAttrString = [[NSAttributedString alloc] initWithString:@"Si vous le souhaitez, \nenvoyez-lui un message:" attributes:mediumAttrs];
     
     NSMutableAttributedString *greetingAttrString = merciAttrString.mutableCopy;
     [greetingAttrString appendAttributedString:cetteTourAttrString];
-    //[greetingAttrString appendAttributedString:messageAttrString];
+    [greetingAttrString appendAttributedString:messageAttrString];
 
     [self.greetingLabel setAttributedText:greetingAttrString];
 }
@@ -79,7 +67,23 @@
 
 
 - (IBAction)doSendRequest {
+    NSString *message = self.greetingMessage.text;
+    if (!message)
+        message = @"";
     
+    [[OTTourService new] joinTour:self.tour
+                      withMessage:message
+                          success:^(OTTourJoiner *joiner) {
+                              NSLog(@"sent request to join tour %@: %@", self.tour.sid, message);
+                              self.tour.joinStatus = @"pending";
+                          }
+                          failure:^(NSError *error) {
+                              NSLog(@"failed joining tour %@ with error %@", self.tour.sid, error.description);
+                              [self dismissViewControllerAnimated:YES completion:^{
+                                  [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
+                              }];
+                          }];
+
     
     if ([self.tourJoinRequestDelegate respondsToSelector:@selector(dismissTourJoinRequestController)]) {
         [self.tourJoinRequestDelegate dismissTourJoinRequestController];
