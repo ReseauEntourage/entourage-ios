@@ -89,6 +89,17 @@ typedef NS_ENUM(unsigned) {
     
     
     self.chatTextView.layer.borderColor = [UIColor appGreyishColor].CGColor;
+    
+    self.isRecording = NO;
+    
+    [self updateRecordButton];
+    
+    [OTSpeechKitManager setup];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[self class]];
     
@@ -100,18 +111,13 @@ typedef NS_ENUM(unsigned) {
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-    
-    self.isRecording = NO;
-    
-    [self updateRecordButton];
-    
-    [OTSpeechKitManager setup];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 /**************************************************************************************************/
