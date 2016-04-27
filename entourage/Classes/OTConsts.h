@@ -17,6 +17,8 @@
 
 #endif
 
+#define API_KEY @"fbe5b5e0bd4ec94146b3dc9b"
+
 #define PARIS_LAT 48.856578
 #define PARIS_LON  2.351828
 

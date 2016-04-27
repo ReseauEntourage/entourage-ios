@@ -30,7 +30,7 @@
         //[requestManager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
         
         //TODO api key should be changed after each release
-        [requestManager.requestSerializer setValue:@"d05394bcf705bbd4d6923bd9" forHTTPHeaderField:@"X-API-KEY"];
+        [requestManager.requestSerializer setValue:API_KEY forHTTPHeaderField:@"X-API-KEY"];
 	}
     //NSLog(@"HTTP %@", requestManager.requestSerializer.HTTPRequestHeaders);
 	return requestManager;
