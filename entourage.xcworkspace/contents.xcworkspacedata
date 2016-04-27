@@ -5,9 +5,6 @@
       location = "group:Platinia.gpx">
    </FileRef>
    <FileRef
-      location = "group:Bucharest.gpx">
-   </FileRef>
-   <FileRef
       location = "group:entourage.xcodeproj">
    </FileRef>
    <FileRef

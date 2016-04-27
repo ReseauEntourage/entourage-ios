@@ -91,7 +91,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     }
     
     if ([[NSUserDefaults standardUserDefaults] currentUser].token) {
-        [[OTAuthService new] sendAppInfoWithSuccess:^(OTUser *user) {
+        [[OTAuthService new] sendAppInfoWithSuccess:^() {
             NSLog(@"Application info sent!");
         }
                                             failure:^(NSError * error) {
