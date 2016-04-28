@@ -123,7 +123,15 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Gj-qX-1F4">
+                                                <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ace-eD-QAn">
+                                                    <rect key="frame" x="24" y="51" width="68" height="68"/>
+                                                    <color key="backgroundColor" red="0.97647058963775635" green="0.97647058963775635" blue="0.97647058963775635" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="68" id="GLu-Cb-EOk"/>
+                                                        <constraint firstAttribute="height" constant="68" id="qtv-Lo-Ijp"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Gj-qX-1F4">
                                                     <rect key="frame" x="24" y="51" width="68" height="68"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -141,11 +149,13 @@
                                                 <constraint firstItem="bSR-py-OL9" firstAttribute="leading" secondItem="0Gj-qX-1F4" secondAttribute="trailing" constant="7" id="9zT-vW-IVa"/>
                                                 <constraint firstItem="0Gj-qX-1F4" firstAttribute="centerY" secondItem="aIi-Ke-Fe9" secondAttribute="centerY" id="ACI-fS-R7s"/>
                                                 <constraint firstItem="RF7-J6-LG0" firstAttribute="top" secondItem="aBH-wO-iJN" secondAttribute="bottom" constant="22" id="Bkn-JZ-gpY"/>
+                                                <constraint firstItem="bSR-py-OL9" firstAttribute="leading" secondItem="ace-eD-QAn" secondAttribute="trailing" constant="7" id="KaR-8z-ANC"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="bSR-py-OL9" secondAttribute="trailing" constant="17" id="Nde-gJ-abg"/>
                                                 <constraint firstItem="9Ce-Dw-DgI" firstAttribute="top" secondItem="RF7-J6-LG0" secondAttribute="bottom" constant="5" id="ZzH-LB-3Zw"/>
                                                 <constraint firstItem="aBH-wO-iJN" firstAttribute="leading" secondItem="JE5-p9-A98" secondAttribute="leadingMargin" constant="7" id="h13-22-a8b"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="aBH-wO-iJN" secondAttribute="trailing" constant="7" id="k5L-Jx-DVQ"/>
                                                 <constraint firstItem="aBH-wO-iJN" firstAttribute="top" secondItem="JE5-p9-A98" secondAttribute="topMargin" constant="7" id="mdB-QS-3AR"/>
+                                                <constraint firstItem="ace-eD-QAn" firstAttribute="centerY" secondItem="aIi-Ke-Fe9" secondAttribute="centerY" id="w8m-xx-bNd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

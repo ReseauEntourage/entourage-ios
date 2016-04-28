@@ -54,6 +54,7 @@
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
 #import "UILabel+entourage.h"
+#import "MKMapView+entourage.h"
 
 // Framework
 #import <UIKit/UIKit.h>
@@ -518,8 +519,46 @@ static BOOL didGetAnyData = NO;
     return vDist;
 }
 
+//- (NSURL *)createMapSnapshot {
+//    NSLog(@"%f x %f", self.mapView.region.span.latitudeDelta, self.mapView.region.span.longitudeDelta);
+//    
+//    MKMapSnapshotOptions *options = [[MKMapSnapshotOptions alloc] init];
+//    MKCoordinateRegion region = self.mapView.region;
+//    region.span = MKCoordinateSpanMake(MIN(region.span.latitudeDelta, region.span.longitudeDelta), MIN(region.span.latitudeDelta, region.span.longitudeDelta));
+//    options.region = region;
+//    NSLog(@"%f = %f", region.span.latitudeDelta, region.span.longitudeDelta);
+//
+//    options.size =  CGSizeMake(MIN(self.mapView.frame.size.width, self.mapView.frame.size.height), MIN(self.mapView.frame.size.width, self.mapView.frame.size.height));
+//    // self.mapView.frame.size;
+//    options.scale = [[UIScreen mainScreen] scale];
+//    
+//    NSURL *fileURL = [NSURL fileURLWithPath:@"path/to/snapshot.png"];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"snapshot.png"];
+//
+//    MKMapSnapshotter *snapshotter = [[MKMapSnapshotter alloc] initWithOptions:options];
+//    [snapshotter startWithCompletionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
+//        if (error) {
+//            NSLog(@"[Error] %@", error);
+//            return;
+//        }
+//        
+//        UIImage *image = snapshot.image;
+//        NSData *data = UIImagePNGRepresentation(image);
+//        //[data writeToURL:fileURL atomically:YES];
+//        [data writeToFile:filePath atomically:YES];
+//    }];
+//    NSLog(@"Saved map snapshot to %@", fileURL);
+//    return fileURL;
+//}
+
+
 - (void)sendTour {
     [SVProgressHUD showWithStatus:OTLocalizedString(@"tour_create_sending")];
+    
+    //[self createMapSnapshot];
+    
+    
     [[OTTourService new]
          sendTour:self.tour
          withSuccess:^(OTTour *sentTour) {
@@ -533,9 +572,12 @@ static BOOL didGetAnyData = NO;
              
              self.pointerPin.hidden = NO;
              
+             
              self.stopButton.hidden = NO;
              self.createEncounterButton.hidden = NO;
              
+             NSString *snapshotStartFilename = [NSString stringWithFormat:@SNAPSHOT_START, sentTour.sid.intValue];
+             [self.mapView takeSnapshotToFile:snapshotStartFilename];
              [self showNewTourOnGoing];
              
              self.seconds = 0;
@@ -545,6 +587,7 @@ static BOOL didGetAnyData = NO;
              if ([self.pointsToSend count] > 0) {
                  [self performSelector:@selector(sendTourPoints:) withObject:self.pointsToSend afterDelay:0.0];
              }
+            
              
              //[self createLocalNotificationForTour:self.tour.sid];
         } failure:^(NSError *error) {
@@ -876,6 +919,9 @@ static bool isShowingOptions = NO;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
 
     }];
+    NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tour.sid.intValue];
+    [self.mapView takeSnapshotToFile:snapshotEndFilename];
+    
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
 }
 

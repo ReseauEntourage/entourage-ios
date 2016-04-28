@@ -12,6 +12,7 @@
 #import "OTTourDetailsOptionsViewController.h"
 #import "OTUserViewController.h"
 #import "OTMeetingCalloutViewController.h"
+#import "OTConsts.h"
 
 // Models
 #import "OTTour.h"
@@ -200,6 +201,7 @@ typedef NS_ENUM(unsigned) {
     
     OTTourStatus *tourStartStatus = [[OTTourStatus alloc] init];
     tourStartStatus.date = self.tour.startTime;
+    tourStartStatus.type = OTTourStatusStart;
     tourStartStatus.status = @"Maraude en cours";
     tourStartStatus.duration = 0;
     tourStartStatus.distance = 0;
@@ -209,6 +211,7 @@ typedef NS_ENUM(unsigned) {
     if (self.tour.endTime) {
         OTTourStatus *tourEndStatus = [[OTTourStatus alloc] init];
         tourEndStatus.date = self.tour.endTime;
+        tourStartStatus.type = OTTourStatusEnd;
         tourEndStatus.status = @"Maraude terminée";
         tourEndStatus.duration = [self.tour.endTime timeIntervalSinceDate:self.tour.startTime];;
         tourEndStatus.distance = self.tour.distance;
@@ -469,6 +472,8 @@ typedef NS_ENUM(unsigned) {
 #define TIMELINE_STATUS_TAG 11
 #define TIMELINE_DURATION_TAG 12
 #define TIMELINE_KM_TAG 13
+#define TIMELINE_STATUS_IMAGE 20
+
 
 #define TIMELINE_MESSAGE_OTHER_BACKGROUND_TAG 30
 #define TIMELINE_MESSAGE_OTHER_USER 31
@@ -545,6 +550,17 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (void)setupStatusCell:(UITableViewCell *)cell withStatus:(OTTourStatus *)statusPoint {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *snapshotFormat = statusPoint.type == OTTourStatusStart ? @SNAPSHOT_START : @SNAPSHOT_STOP;
+    NSString *snapshotStartFilename = [NSString stringWithFormat:snapshotFormat, self.tour.sid.intValue];
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:snapshotStartFilename];
+    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+    
+    // TIMELINE_STATUS_IMAGE
+    UIImageView *mapImageView = [cell viewWithTag:TIMELINE_STATUS_IMAGE];
+    [mapImageView setImage:image];
+    
     UILabel *timeLabel = [cell viewWithTag:TIMELINE_TIME_TAG];
     NSString *day  = [self formatDateForDisplay:statusPoint.date];
     NSString *time = [self formatHourForDisplay:statusPoint.date];

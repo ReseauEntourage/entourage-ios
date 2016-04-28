@@ -65,6 +65,7 @@
 		452FE3F21CAD561500063334 /* QuitTour.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3F11CAD561500063334 /* QuitTour.storyboard */; };
 		452FE3F51CAD563F00063334 /* TourOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3F31CAD563F00063334 /* TourOptions.storyboard */; };
 		452FE4011CAD5AC700063334 /* Entourages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3FF1CAD5AC700063334 /* Entourages.storyboard */; };
+		453117A41CD251C200C00BA8 /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 453117A31CD251C200C00BA8 /* MKMapView+entourage.m */; };
 		4536FC5E1CC64E55000BF620 /* OTSpeechKitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4536FC5D1CC64E55000BF620 /* OTSpeechKitManager.m */; };
 		454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */; };
 		454C8F501C4F4C45001362B2 /* UITextField+indentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4F1C4F4C45001362B2 /* UITextField+indentation.m */; };
@@ -246,6 +247,8 @@
 		452FE3F11CAD561500063334 /* QuitTour.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QuitTour.storyboard; sourceTree = "<group>"; };
 		452FE3F41CAD563F00063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourOptions.storyboard; sourceTree = "<group>"; };
 		452FE4001CAD5AC700063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Entourages.storyboard; sourceTree = "<group>"; };
+		453117A21CD251C200C00BA8 /* MKMapView+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+entourage.h"; sourceTree = "<group>"; };
+		453117A31CD251C200C00BA8 /* MKMapView+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+entourage.m"; sourceTree = "<group>"; };
 		4536FC5C1CC64E55000BF620 /* OTSpeechKitManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSpeechKitManager.h; sourceTree = "<group>"; };
 		4536FC5D1CC64E55000BF620 /* OTSpeechKitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSpeechKitManager.m; sourceTree = "<group>"; };
 		454C8F4B1C4D20EA001362B2 /* UIColor+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+entourage.h"; sourceTree = "<group>"; };
@@ -793,6 +796,8 @@
 		6BFE639519E7E85D00C661AB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				453117A21CD251C200C00BA8 /* MKMapView+entourage.h */,
+				453117A31CD251C200C00BA8 /* MKMapView+entourage.m */,
 				DBE9EF4F19E7EFA200031144 /* UIFont+entourage.h */,
 				DBE9EF5019E7EFA200031144 /* UIFont+entourage.m */,
 				6B1A847219E8143F0020FB93 /* NSDictionary+Parsing.h */,
@@ -1220,6 +1225,7 @@
 				1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				4508AE311C7F924B00EDAC1B /* OTTourOptionsViewController.m in Sources */,
+				453117A41CD251C200C00BA8 /* MKMapView+entourage.m in Sources */,
 				2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,
 				2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */,

@@ -8,10 +8,16 @@
 
 #import "OTTourTimelinePoint.h"
 
+typedef NS_ENUM(NSInteger) {
+    OTTourStatusStart,
+    OTTourStatusEnd
+} OTTourStatusType;
+
 @interface OTTourStatus : OTTourTimelinePoint
 
 @property(nonatomic, strong) NSString *status;
 @property(nonatomic) NSTimeInterval duration;
 @property(nonatomic) CGFloat distance;
+@property(nonatomic) OTTourStatusType type;
 
 @end

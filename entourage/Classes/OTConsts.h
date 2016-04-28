@@ -35,3 +35,8 @@
 
 #define OTLocalizedString(key) \
     [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
+
+
+
+#define SNAPSHOT_START "snapshot_start_%d.png"
+#define SNAPSHOT_STOP "snapshot_end_%d.png"
