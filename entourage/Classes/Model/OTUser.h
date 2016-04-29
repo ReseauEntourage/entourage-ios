@@ -11,9 +11,13 @@
 
 extern NSString *const kKeyToken;
 
+#define USER_TYPE_PRO       @"pro"
+#define USER_TYPE_PUBLIC    @"public"
+
 @interface OTUser : NSObject
 
 @property (strong, nonatomic) NSNumber *sid;
+@property (strong, nonatomic) NSString *type;
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
@@ -28,6 +32,5 @@ extern NSString *const kKeyToken;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;
-- (NSString *)fullname;
 
 @end

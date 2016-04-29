@@ -11,6 +11,7 @@
 #import "NSDictionary+Parsing.h"
 
 NSString *const kKeySid = @"id";
+NSString *const kKeyType = @"user_type";
 NSString *const kKeyEmail = @"email";
 NSString *const kKeyFirstname = @"first_name";
 NSString *const kKeyLastname = @"last_name";
@@ -32,6 +33,7 @@ NSString *const kKeyOrganization =@"organization";
 	if (self)
 	{
 		_sid = [dictionary numberForKey:kKeySid];
+        _type = [dictionary stringForKey:kKeyType];
 		_email = [dictionary stringForKey:kKeyEmail];
         _avatarURL = [dictionary stringForKey:kKeyAvatarURL];
         _firstName = [dictionary stringForKey:kKeyFirstname];
@@ -68,6 +70,7 @@ NSString *const kKeyOrganization =@"organization";
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
 	[encoder encodeObject:self.sid forKey:kKeySid];
+    [encoder encodeObject:self.type forKey:kKeyType];
 	[encoder encodeObject:self.email forKey:kKeyEmail];
     [encoder encodeObject:self.avatarURL forKey:kKeyAvatarURL];
     [encoder encodeObject:self.firstName forKey:kKeyFirstname];
@@ -85,6 +88,7 @@ NSString *const kKeyOrganization =@"organization";
 	if ((self = [super init]))
 	{
 		self.sid = [decoder decodeObjectForKey:kKeySid];
+        self.type = [decoder decodeObjectForKey:kKeyType];
 		self.email = [decoder decodeObjectForKey:kKeyEmail];
         self.avatarURL = [decoder decodeObjectForKey:kKeyAvatarURL];
         self.firstName = [decoder decodeObjectForKey:kKeyFirstname];
@@ -97,11 +101,6 @@ NSString *const kKeyOrganization =@"organization";
         self.organization = [decoder decodeObjectForKey:kKeyOrganization];
 	}
 	return self;
-}
-
-- (NSString *)fullname
-{
-    return [NSString stringWithFormat:@"%@ %@",_firstName.capitalizedString, _lastName.capitalizedString];
 }
 
 @end
