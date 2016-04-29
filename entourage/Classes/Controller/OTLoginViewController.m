@@ -95,7 +95,12 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     
     // Vincent PRO
     //self.phoneTextField.text = @"+33651502173";
+    
+    
+    // JM
+    self.phoneTextField.text = @"0783601123";
     self.passwordTextField.text = @"123456";
+    
 #endif
     
 }
@@ -131,6 +136,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                success: ^(OTUser *user) {
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    user.phone = self.phoneNumberServerRepresentation;
+                                   //TODO: get userType from server
+                                   user.type = USER_TYPE_PUBLIC;
                                    [SVProgressHUD dismiss];
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];

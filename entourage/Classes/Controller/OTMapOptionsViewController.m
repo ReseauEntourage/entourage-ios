@@ -7,6 +7,16 @@
 //
 
 #import "OTMapOptionsViewController.h"
+#import "OTConsts.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
+#import "UIColor+entourage.h"
+
+#define BUTTON_SIDE 48.0f
+#define PADDING_VERTICAL 8.0f
+#define PADDING_HORIZONTAL 16.0f
+#define INITI
+
 
 @interface OTMapOptionsViewController ()
 
@@ -30,12 +40,40 @@
     else {
         self.togglePOILabel.text = NSLocalizedString(@"map_options_show_poi", @"");
     }
+    
+    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    if ([currentUser.type isEqualToString:USER_TYPE_PRO]) {
+        
+    } else {
+        [self setupForPublicUser];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)setupForPublicUser {
+    //[self addOption:OTLocalizedString(@"create_tour") withIcon:@"createMaraude" andAction:nil];
+    [self addOption:OTLocalizedString(@"create_demande") withIcon:@"megaphone" andAction:@selector(doDismiss:)];
+    
+}
+
+- (void)addOption:(NSString *)optionName
+         withIcon:(NSString *)optionIcon
+        andAction:(SEL)selector
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGFloat x = [UIScreen mainScreen].bounds.size.width - PADDING_HORIZONTAL - BUTTON_SIDE;
+    CGFloat y = [UIScreen mainScreen].bounds.size.height - PADDING_VERTICAL - BUTTON_SIDE;
+    
+    button.frame = CGRectMake(x, y, BUTTON_SIDE, BUTTON_SIDE);
+    [button setImage:[UIImage imageNamed:optionIcon] forState:UIControlStateNormal];
+    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+}
+
 
 - (IBAction)doDismiss:(id)sender {
     if ([self.mapOptionsDelegate respondsToSelector:@selector(dismissMapOptions)]) {
