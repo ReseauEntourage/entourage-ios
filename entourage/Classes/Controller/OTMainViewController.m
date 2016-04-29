@@ -197,8 +197,8 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.refreshTimer invalidate];
-    if (_isTourRunning)
-        [self createLocalNotificationForTour:self.tour.sid];
+//    if (_isTourRunning)
+//        [self createLocalNotificationForTour:self.tour.sid];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
