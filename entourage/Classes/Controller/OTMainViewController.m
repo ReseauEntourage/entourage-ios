@@ -990,7 +990,7 @@ static bool isShowingOptions = NO;
 
 #pragma mark 6.3 Tours long press on map
 - (void)showMapOverlayToCreateTourAtPoint:(CGPoint)point {
-    self.launcherButton.hidden = YES;
+//    self.launcherButton.hidden = YES;
 }
 
 #pragma mark 6.4 Tours "+" press
@@ -1122,6 +1122,7 @@ typedef NS_ENUM(NSInteger) {
             [controller setIsPOIVisible:self.guideMapDelegate.isActive];
             if (!CGPointEqualToPoint(self.mapPoint, CGPointZero)) {
                 controller.c2aPoint = self.mapPoint;
+                self.mapPoint = CGPointZero;
             }
         } break;
         case SegueIDMapOptions: {
