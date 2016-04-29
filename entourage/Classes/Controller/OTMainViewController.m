@@ -78,6 +78,8 @@
 
 #define DATA_REFRESH_RATE 60.0 //seconds
 
+#define CENTER_MAP_FRAME CGRectMake(8.0f, 8.0f, 30.0f, 30.0f)
+
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
@@ -185,13 +187,18 @@
 	[super viewWillAppear:animated];
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(refreshMap) userInfo:nil repeats:YES];
     [self.refreshTimer fire];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self zoomToCurrentLocation:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.refreshTimer invalidate];
-    if (_isTourRunning)
-        [self createLocalNotificationForTour:self.tour.sid];
+//    if (_isTourRunning)
+//        [self createLocalNotificationForTour:self.tour.sid];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -266,6 +273,13 @@
     [headerView addConstraints:constraint_pos_horizontal];
     [headerView addConstraints:constraint_pos_bottom];
     self.mapView.center = headerView.center;
+    
+    UIButton *centerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    centerButton.frame = CENTER_MAP_FRAME;
+    [centerButton setImage:[UIImage imageNamed:@"center-location"] forState:UIControlStateNormal];
+    [centerButton addTarget:self action:@selector(zoomToCurrentLocation:) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:centerButton];
+    
     self.tableView.tableHeaderView = headerView;
     self.tableView.toursDelegate = self;
 }
@@ -345,6 +359,10 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)didChangePosition {
+    if (![self.mapView showsUserLocation]) {
+        [self zoomToCurrentLocation:nil];
+    }
+    
     // check if we need to make a new request
     CLLocationDistance distance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.requestedToursCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
