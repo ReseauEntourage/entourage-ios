@@ -18,6 +18,8 @@
 
 @interface OTToursMapDelegate ()
 
+@property (nonatomic) BOOL mapWasCenteredOnUserLocation;
+
 @end
 
 @implementation OTToursMapDelegate
@@ -28,6 +30,7 @@
 {
     self = [super init];
     if (self) {
+        self.mapWasCenteredOnUserLocation = NO;
         self.isActive = NO;
     }
     return self;
@@ -86,7 +89,10 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    [self.mapController zoomToCurrentLocation:nil];
+    if (!self.mapWasCenteredOnUserLocation) {
+        [self.mapController zoomToCurrentLocation:nil];
+        self.mapWasCenteredOnUserLocation = YES;
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
