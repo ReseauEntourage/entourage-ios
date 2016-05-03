@@ -34,7 +34,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     if (!CGPointEqualToPoint(self.c2aPoint, CGPointZero)) {
-        self.createLabel.hidden = YES;
+        //self.createLabel.hidden = YES;
         //[self.createButton setCenter:self.c2aPoint];
         //CGPoint initial = self.createButton.center;
 //        self.createButton.transform = CGAffineTransformTranslate(self.createButton.transform, - initial.x,  - initial.y);
