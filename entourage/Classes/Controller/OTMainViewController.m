@@ -169,7 +169,7 @@
     [self clearMap];
     
     
-       if (self.isTourRunning) {
+    if (self.isTourRunning) {
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = NO;
         self.stopButton.hidden = NO;
@@ -211,7 +211,8 @@
     self.guideMapDelegate.isActive = NO;
     self.mapView.delegate = self.toursMapDelegate;
     self.mapSegmentedControl.hidden = NO;
-    //[self clearMap];
+    [self clearMap];
+    [self feedMapViewWithTours];
     [self.toursMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
     if (self.isTourListDisplayed) {
         [self showToursList];
