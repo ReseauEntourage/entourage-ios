@@ -15,6 +15,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *togglePOIButton;
 @property (nonatomic, weak) IBOutlet UILabel *togglePOILabel;
 
+
+
 @property (nonatomic) BOOL isPOIVisible;
 
 @end
@@ -24,11 +26,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (self.isPOIVisible) {
-        self.togglePOILabel.text = NSLocalizedString(@"map_options_hide_poi", @"");
-    }
-    else {
-        self.togglePOILabel.text = NSLocalizedString(@"map_options_show_poi", @"");
+    if (!CGPointEqualToPoint(self.fingerPoint, CGPointZero)) {
+        self.togglePOILabel.hidden = YES;
+        self.togglePOIButton.hidden = YES;
+        self.createTourLabel.hidden = YES;
+        
+        
+        
+    } else {
+        if (self.isPOIVisible) {
+            self.togglePOILabel.text = NSLocalizedString(@"map_options_hide_poi", @"");
+        }
+        else {
+            self.togglePOILabel.text = NSLocalizedString(@"map_options_show_poi", @"");
+        }
     }
 }
 

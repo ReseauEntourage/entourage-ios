@@ -315,12 +315,17 @@
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
     CGPoint touchPoint = [longPressGesture locationInView:self.mapView];
-
-    if (_isTourRunning) {
-        self.mapPoint = touchPoint;
+    
+    if (self.presentedViewController)
+        return;
+    
+    self.mapPoint = touchPoint;
+    
+    if (self.isTourRunning) {
         [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
     } else {
-        [self showMapOverlayToCreateTourAtPoint:touchPoint];
+        self.launcherButton.hidden = NO;
+        [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
     }
 }
 
@@ -1007,10 +1012,11 @@ static bool isShowingOptions = NO;
 
 }
 
-#pragma mark 6.3 Tours long press on map
-- (void)showMapOverlayToCreateTourAtPoint:(CGPoint)point {
-//    self.launcherButton.hidden = YES;
-}
+//#pragma mark 6.3 Tours long press on map
+//- (void)showMapOverlayToCreateTourAtPoint:(CGPoint)point {
+//    self.launcherButton.hidden = NO;
+//    [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
+//}
 
 #pragma mark 6.4 Tours "+" press
 - (void)showMapOverlayToCreateTour {
@@ -1086,6 +1092,7 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
     NSDictionary *seguesDictionary = @{@"UserProfileSegue" : [NSNumber numberWithInteger:SegueIDUserProfile],
                                        @"OTCreateMeeting":[NSNumber numberWithInteger:SegueIDCreateMeeting],
                                        @"OTConfirmationPopup" : [NSNumber numberWithInteger:SegueIDConfirmation],
@@ -1101,6 +1108,8 @@ typedef NS_ENUM(NSInteger) {
     
     UIViewController *destinationViewController = segue.destinationViewController;
     NSInteger segueID = [[seguesDictionary numberForKey:segue.identifier defaultValue:@-1] integerValue];
+    
+    NSLog(@"SEGUE %lu", segueID);
     switch (segueID) {
         case SegueIDUserProfile: {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
@@ -1135,6 +1144,17 @@ typedef NS_ENUM(NSInteger) {
             OTPublicTourViewController *controller = (OTPublicTourViewController *)navController.topViewController;
             controller.tour = self.selectedTour;
         } break;
+        
+        case SegueIDMapOptions: {
+            OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;;
+            if (!CGPointEqualToPoint(self.mapPoint, CGPointZero)) {
+                controller.fingerPoint = self.mapPoint;
+                self.mapPoint = CGPointZero;
+            }
+
+            controller.mapOptionsDelegate = self;
+            [controller setIsPOIVisible:self.guideMapDelegate.isActive];
+        } break;
         case SegueIDTourOptions: {
             OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
             controller.tourOptionsDelegate = self;
@@ -1144,11 +1164,7 @@ typedef NS_ENUM(NSInteger) {
                 self.mapPoint = CGPointZero;
             }
         } break;
-        case SegueIDMapOptions: {
-            OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;;
-            controller.mapOptionsDelegate = self;
-            [controller setIsPOIVisible:self.guideMapDelegate.isActive];
-        } break;
+            
         case SegueIDTourJoinRequest: {
             OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
             controller.view.backgroundColor = [UIColor appModalBackgroundColor];
