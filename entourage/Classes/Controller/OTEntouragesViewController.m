@@ -21,11 +21,6 @@
 
 #define TOURS_PER_PAGE 10
 
-#define STATUS_OPEN @"open"
-#define STATUS_FREEZED @"freezed"
-#define STATUS_CLOSED @"closed"
-
-
 typedef NS_ENUM(NSInteger){
     EntourageStatusOpen,
     EntourageStatusClosed,
@@ -141,23 +136,23 @@ typedef NS_ENUM(NSInteger){
 }
 
 - (void)getEntouragesWithStatus:(NSInteger) entourageStatus {
-    NSString *statusString = STATUS_OPEN;
+    NSString *statusString = TOUR_STATUS_ONGOING;
     NSInteger page = 1;
     
     OTToursPagination *currentPagination = nil;
     
     switch (entourageStatus) {
         case EntourageStatusOpen:
-            statusString = STATUS_OPEN;
+            statusString = TOUR_STATUS_ONGOING;
             currentPagination = self.openToursPagination;
             page = self.openToursPagination.page;
             break;
         case EntourageStatusFreezed:
-            statusString = STATUS_FREEZED;
+            statusString = TOUR_STATUS_FREEZED;
             page = self.closedToursPagination.page;
             break;
         case EntourageStatusClosed:
-            statusString = STATUS_CLOSED;
+            statusString = TOUR_STATUS_CLOSED;
             currentPagination = self.freezedToursPagination;
             break;
             
