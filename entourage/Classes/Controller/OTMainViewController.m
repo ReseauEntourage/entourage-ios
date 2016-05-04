@@ -61,6 +61,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TTTTimeIntervalFormatter.h"
 #import "TTTLocationFormatter.h"
+#import <AudioToolbox/AudioServices.h>
 
 // User
 #import "NSUserDefaults+OT.h"
@@ -77,8 +78,10 @@
 #define TABLEVIEW_BOTTOM_INSET 86.0f
 
 #define DATA_REFRESH_RATE 60.0 //seconds
+#define MAX_DISTANCE 100.0 //meters
 
 #define CENTER_MAP_FRAME CGRectMake(8.0f, 8.0f, 30.0f, 30.0f)
+
 
 /********************************************************************************/
 #pragma mark - OTMapViewController
@@ -92,6 +95,7 @@
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, weak) IBOutlet UIImageView *pointerPin;
+@property (nonatomic) CLLocationCoordinate2D encounterLocation;
 
 @property (nonatomic, strong) OTToursMapDelegate *toursMapDelegate;
 @property (nonatomic, strong) OTGuideMapDelegate *guideMapDelegate;
@@ -322,7 +326,29 @@
     self.mapPoint = touchPoint;
     
     if (self.isTourRunning) {
-        [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+        self.encounterLocation =
+            [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:self.encounterLocation.latitude longitude:self.encounterLocation.longitude];
+        CLLocation *userLocation = [[CLLocation alloc]
+                                    initWithLatitude:self.mapView.userLocation.coordinate.latitude
+                                    longitude:self.mapView.userLocation.coordinate.longitude];
+        
+        CLLocationDistance distance = [location distanceFromLocation:userLocation];
+        if (distance <=  MAX_DISTANCE) {
+            [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+        } else {
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+                                                                           message:OTLocalizedString(@"distance_100")
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            [self presentViewController:alert animated:YES completion:nil];
+            
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * _Nonnull action) {}];
+            
+            [alert addAction:defaultAction];
+        }
     } else {
         self.launcherButton.hidden = NO;
         [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
@@ -1109,7 +1135,7 @@ typedef NS_ENUM(NSInteger) {
     UIViewController *destinationViewController = segue.destinationViewController;
     NSInteger segueID = [[seguesDictionary numberForKey:segue.identifier defaultValue:@-1] integerValue];
     
-    NSLog(@"SEGUE %lu", segueID);
+
     switch (segueID) {
         case SegueIDUserProfile: {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
@@ -1120,7 +1146,7 @@ typedef NS_ENUM(NSInteger) {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
             OTCreateMeetingViewController *controller = (OTCreateMeetingViewController*)navController.topViewController;
             controller.delegate = self;
-            [controller configureWithTourId:self.tour.sid andLocation:self.mapView.region.center];
+            [controller configureWithTourId:self.tour.sid andLocation:self.encounterLocation];
             controller.encounters = self.encounters;
         } break;
         case SegueIDConfirmation: {

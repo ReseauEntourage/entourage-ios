@@ -24,24 +24,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (self.isPOIVisible) {
-        self.poiLabel.text = NSLocalizedString(@"map_options_hide_poi", @"");
-    }
-    else {
-        self.poiLabel.text = NSLocalizedString(@"map_options_show_poi", @"");
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
     if (!CGPointEqualToPoint(self.c2aPoint, CGPointZero)) {
-        //self.createLabel.hidden = YES;
-        //[self.createButton setCenter:self.c2aPoint];
-        //CGPoint initial = self.createButton.center;
-//        self.createButton.transform = CGAffineTransformTranslate(self.createButton.transform, - initial.x,  - initial.y);
-//        self.createButton.transform = CGAffineTransformTranslate(self.createButton.transform, self.c2aPoint.x, self.c2aPoint.y);
-        [UIView performWithoutAnimation:^{
-            self.createButton.center = self.c2aPoint;
-        }];
+        self.createLabel.hidden = YES;
+        self.createButton.hidden = YES;
+        self.poiLabel.hidden = YES;
+        self.poiButton.hidden = YES;
+        
+        [self addOptionWithIcon:@"report" andAction:@selector(doCreateEncounter:)];
+    } else {
+        if (self.isPOIVisible) {
+            self.poiLabel.text = NSLocalizedString(@"map_options_hide_poi", @"");
+        }
+        else {
+            self.poiLabel.text = NSLocalizedString(@"map_options_show_poi", @"");
+        }
     }
 }
 
@@ -82,5 +78,17 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)addOptionWithIcon:(NSString *)optionIcon
+                andAction:(SEL)selector
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *image = [UIImage imageNamed:optionIcon];
+    
+    button.frame = CGRectMake(self.c2aPoint.x - image.size.width/2, self.c2aPoint.y+10, image.size.width, image.size.height);
+    [button setImage:[UIImage imageNamed:optionIcon] forState:UIControlStateNormal];
+    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+}
 
 @end

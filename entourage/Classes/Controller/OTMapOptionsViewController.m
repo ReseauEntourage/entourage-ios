@@ -31,7 +31,8 @@
         self.togglePOIButton.hidden = YES;
         self.createTourLabel.hidden = YES;
         
-        
+        self.createTourButton.hidden = YES;
+        [self addOptionWithIcon:@"createMaraude" andAction:@selector(doCreateTour:)];
         
     } else {
         if (self.isPOIVisible) {
@@ -79,5 +80,17 @@
     // Pass the selected object to the new view controller.
 }
  */
+
+- (void)addOptionWithIcon:(NSString *)optionIcon
+                andAction:(SEL)selector
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *image = [UIImage imageNamed:optionIcon];
+    
+    button.frame = CGRectMake(self.fingerPoint.x - image.size.width/2, self.fingerPoint.y+10, image.size.width, image.size.height);
+    [button setImage:[UIImage imageNamed:optionIcon] forState:UIControlStateNormal];
+    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+}
 
 @end

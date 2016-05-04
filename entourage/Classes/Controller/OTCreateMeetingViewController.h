@@ -29,6 +29,8 @@
 @property (nonatomic, strong) SKRecognizer *recognizer;
 @property (nonatomic, strong) NSMutableArray *encounters;
 
-- (void)configureWithTourId:(NSNumber *)currentTourId andLocation:(CLLocationCoordinate2D)location;
+
+- (void)configureWithTourId:(NSNumber *)currentTourId
+                andLocation:(CLLocationCoordinate2D)location;
 
 @end

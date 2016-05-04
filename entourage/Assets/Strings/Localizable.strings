@@ -22,6 +22,8 @@
 "guideviewcontroller_title" = "GUIDE";
 "userviewcontroller_title" = "PROFIL";
 
+"distance_100" = "Distance must be smaller than 100 meters";
+
 // MenuItems
 "menu_amis" = "Amis";
 "menu_guide" = "Guide de solidarité";
