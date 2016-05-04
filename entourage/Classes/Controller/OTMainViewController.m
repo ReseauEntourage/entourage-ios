@@ -731,7 +731,7 @@ static BOOL didGetAnyData = NO;
 - (void)tourSent:(OTTour*)tour {
     
     //check if there is an ongoing tour
-    if (!self.isTourRunning || self.tour == nil) {
+    if (self.tour == nil) {
         return;
     }
     //check if we are stoping the current ongoing tour
