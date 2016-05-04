@@ -66,8 +66,9 @@
 - (void)closeTour {
     self.tour.endTime = [NSDate date];
     [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
-        if ([self.delegate respondsToSelector:@selector(tourSent)]) {
-            [self.delegate tourSent];
+        [SVProgressHUD dismiss];
+        if ([self.delegate respondsToSelector:@selector(tourSent:)]) {
+            [self.delegate tourSent:self.tour];
         }
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSError *error) {
@@ -88,7 +89,7 @@
 
 - (IBAction)finishTour:(id)sender {
     [SVProgressHUD show];
-    self.tour.status = NSLocalizedString(@"tour_status_closed", @"");
+    self.tour.status = TOUR_STATUS_CLOSED;
     [self closeTour];
 }
 

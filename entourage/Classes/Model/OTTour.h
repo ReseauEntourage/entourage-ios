@@ -17,7 +17,10 @@ typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTyp
 #define JOIN_NOT_REQUESTED @"not_requested"
 #define JOIN_REJECTED @"rejected"
 
+#define TOUR_STATUS_ONGOING @"ongoing"
+#define TOUR_STATUS_CLOSED @"closed"
 #define TOUR_STATUS_FREEZED @"freezed"
+
 
 @interface OTTour : NSObject
 
