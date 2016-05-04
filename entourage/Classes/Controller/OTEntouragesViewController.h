@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class OTMainViewController;
+
 @interface OTEntouragesViewController : UIViewController
+
+@property (nonatomic, weak) OTMainViewController *mainViewController;
 
 @end

@@ -6,18 +6,25 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+// Controllers
 #import "OTEntouragesViewController.h"
 #import "OTToursTableView.h"
 #import "OTTourViewController.h"
 #import "OTPublicTourViewController.h"
 #import "OTQuitTourViewController.h"
+#import "OTConfirmationViewController.h"
+#import "OTMainViewController.h"
 
+// Services
 #import "OTTourService.h"
 #import "OTUser.h"
 #import "OTTour.h"
 
+// Helpers
 #import "NSUserDefaults+OT.h"
 #import "UIViewController+menu.h"
+#import "UIColor+entourage.h"
+#import "SVProgressHUD.h"
 
 #define TOURS_PER_PAGE 10
 
@@ -66,7 +73,7 @@ typedef NS_ENUM(NSInteger){
 /**************************************************************************************************/
 #pragma mark - OTEntouragesViewController
 
-@interface OTEntouragesViewController() <OTToursTableViewDelegate>
+@interface OTEntouragesViewController() <OTToursTableViewDelegate, OTConfirmationViewControllerDelegate>
 
 // UI
 @property (nonatomic, weak) IBOutlet UISegmentedControl *statusSC;
@@ -119,6 +126,13 @@ typedef NS_ENUM(NSInteger){
         controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.tour = (OTTour*)sender;
+    } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
+        OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.view.backgroundColor = [UIColor appModalBackgroundColor];
+        controller.delegate = self;
+        [controller configureWithTour:(OTTour*)sender
+                   andEncountersCount:[NSNumber numberWithUnsignedInteger:0]];
     }
 }
 
@@ -147,13 +161,13 @@ typedef NS_ENUM(NSInteger){
             currentPagination = self.openToursPagination;
             page = self.openToursPagination.page;
             break;
-        case EntourageStatusFreezed:
-            statusString = TOUR_STATUS_FREEZED;
-            page = self.closedToursPagination.page;
-            break;
         case EntourageStatusClosed:
             statusString = TOUR_STATUS_CLOSED;
-            currentPagination = self.freezedToursPagination;
+            currentPagination = self.closedToursPagination;
+            break;
+        case EntourageStatusFreezed:
+            statusString = TOUR_STATUS_FREEZED;
+            page = self.freezedToursPagination.page;
             break;
             
         default:
@@ -181,10 +195,10 @@ typedef NS_ENUM(NSInteger){
                                        case EntourageStatusOpen:
                                            [self.openToursPagination addTours:userTours];
                                            break;
-                                       case EntourageStatusFreezed:
+                                       case EntourageStatusClosed:
                                            [self.closedToursPagination addTours:userTours];
                                            break;
-                                       case EntourageStatusClosed:
+                                       case EntourageStatusFreezed:
                                            [self.freezedToursPagination addTours:userTours];
                                            break;
                                            
@@ -203,10 +217,10 @@ typedef NS_ENUM(NSInteger){
                                            self.openToursPagination.isLoading = NO;
                                            break;
                                        case EntourageStatusFreezed:
-                                           self.closedToursPagination.isLoading = NO;
+                                           self.freezedToursPagination.isLoading = NO;
                                            break;
                                        case EntourageStatusClosed:
-                                           self.freezedToursPagination.isLoading = NO;
+                                           self.closedToursPagination.isLoading = NO;
                                            break;
                                            
                                        default:
@@ -224,10 +238,10 @@ typedef NS_ENUM(NSInteger){
         case EntourageStatusOpen:
             [self.tableView addTours:self.openToursPagination.tours];
             break;
-        case EntourageStatusFreezed:
+        case EntourageStatusClosed:
             [self.tableView addTours:self.closedToursPagination.tours];
             break;
-        case EntourageStatusClosed:
+        case EntourageStatusFreezed:
             [self.tableView addTours:self.freezedToursPagination.tours];
             break;
             
@@ -269,12 +283,67 @@ typedef NS_ENUM(NSInteger){
     }
     else
     {
-        [self performSegueWithIdentifier:@"QuitTourSegue" sender:tour];
+        OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+        if (currentUser.sid.intValue == tour.author.uID.intValue && tour.status != nil) {
+            if ([tour.status isEqualToString:TOUR_STATUS_ONGOING]) {
+                [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:tour];
+            } else {
+                tour.status = TOUR_STATUS_FREEZED;
+                [self.indicatorView startAnimating];
+                [[OTTourService new] closeTour:tour
+                                   withSuccess:^(OTTour *closedTour) {
+                                       [self.indicatorView stopAnimating];
+                                       [self.closedToursPagination.tours removeObject:tour];
+                                       [self.freezedToursPagination.tours addObject:tour];
+                                       NSInteger selectedSegmentIndex = self.statusSC.selectedSegmentIndex;
+                                       if (selectedSegmentIndex == EntourageStatusClosed) {
+                                           [self.tableView removeTour:tour];
+                                           [self.tableView reloadData];
+                                       }
+                                       else if (selectedSegmentIndex == EntourageStatusFreezed) {
+                                           [self.tableView addTour:tour];
+                                           [self.tableView reloadData];
+                                       }
+                                   } failure:^(NSError *error) {
+                                       [self.indicatorView stopAnimating];
+                                       [SVProgressHUD showErrorWithStatus:@"Erreur"];
+                                       NSLog(@"%@",[error localizedDescription]);
+                                       tour.status = TOUR_STATUS_CLOSED;
+                                   }];
+            }
+        } else {
+            [self performSegueWithIdentifier:@"QuitTourSegue" sender:tour];
+        }
     }
 }
 
 - (void)loadMoreTours {
     [self getEntouragesWithStatus:self.statusSC.selectedSegmentIndex];
+}
+
+/**************************************************************************************************/
+#pragma mark - OTConfirmationViewControllerDelegate
+
+- (void)tourSent:(OTTour*)tour {
+    if (tour == nil) return;
+    [self.openToursPagination.tours removeObject:tour];
+    [self.closedToursPagination.tours addObject:tour];
+    NSInteger selectedSegmentIndex = self.statusSC.selectedSegmentIndex;
+    if (selectedSegmentIndex == EntourageStatusOpen) {
+        [self.tableView removeTour:tour];
+        [self.tableView reloadData];
+    }
+    else if (selectedSegmentIndex == EntourageStatusClosed) {
+        [self.tableView addTour:tour];
+        [self.tableView reloadData];
+    }
+    if (self.mainViewController != nil && [self.mainViewController respondsToSelector:@selector(tourSent:)]) {
+        [self.mainViewController tourSent:tour];
+    }
+}
+
+- (void)resumeTour {
+    
 }
 
 @end

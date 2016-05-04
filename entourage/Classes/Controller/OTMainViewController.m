@@ -23,6 +23,7 @@
 #import "OTUserViewController.h"
 #import "OTGuideDetailsViewController.h"
 #import "OTTourCreatorViewController.h"
+#import "OTEntouragesViewController.h"
 
 #import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
@@ -727,7 +728,19 @@ static BOOL didGetAnyData = NO;
 /********************************************************************************/
 #pragma mark - OTConfirmationViewControllerDelegate
 
-- (void)tourSent {
+- (void)tourSent:(OTTour*)tour {
+    
+    //check if there is an ongoing tour
+    if (!self.isTourRunning || self.tour == nil) {
+        return;
+    }
+    //check if we are stoping the current ongoing tour
+    if (tour != nil && tour.sid != nil) {
+        if (self.tour.sid == nil || ![tour.sid isEqualToNumber:self.tour.sid]) {
+            return;
+        }
+    }
+    
     [SVProgressHUD showSuccessWithStatus:@"Maraude terminée!"];
     
     self.tour = nil;
@@ -1081,7 +1094,8 @@ typedef NS_ENUM(NSInteger) {
     SegueIDQuitTour,
     SegueIDGuideSolidarity,
     SegueIDGuideSolidarityDetails,
-    SegueIDTourCreator
+    SegueIDTourCreator,
+    SegueIDEntourages
 } SegueID;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -1097,7 +1111,8 @@ typedef NS_ENUM(NSInteger) {
                                        @"QuitTourSegue": [NSNumber numberWithInteger:SegueIDQuitTour],
                                        @"GuideSegue": [NSNumber numberWithInteger:SegueIDGuideSolidarity],
                                        @"OTGuideDetailsSegue": [NSNumber numberWithInteger:SegueIDGuideSolidarityDetails],
-                                       @"TourCreatorSegue": [NSNumber numberWithInteger:SegueIDTourCreator]};
+                                       @"TourCreatorSegue": [NSNumber numberWithInteger:SegueIDTourCreator],
+                                       @"EntouragesSegue": [NSNumber numberWithInteger:SegueIDEntourages]};
     
     UIViewController *destinationViewController = segue.destinationViewController;
     NSInteger segueID = [[seguesDictionary numberForKey:segue.identifier defaultValue:@-1] integerValue];
@@ -1136,7 +1151,7 @@ typedef NS_ENUM(NSInteger) {
             controller.tour = self.selectedTour;
         } break;
         case SegueIDTourOptions: {
-            OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
+            OTTourOptionsViewController *controller = (OTTourOptionsViewController *)destinationViewController;
             controller.tourOptionsDelegate = self;
             [controller setIsPOIVisible:self.guideMapDelegate.isActive];
             if (!CGPointEqualToPoint(self.mapPoint, CGPointZero)) {
@@ -1145,19 +1160,19 @@ typedef NS_ENUM(NSInteger) {
             }
         } break;
         case SegueIDMapOptions: {
-            OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;;
+            OTMapOptionsViewController *controller = (OTMapOptionsViewController *)destinationViewController;;
             controller.mapOptionsDelegate = self;
             [controller setIsPOIVisible:self.guideMapDelegate.isActive];
         } break;
         case SegueIDTourJoinRequest: {
-            OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
+            OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)destinationViewController;
             controller.view.backgroundColor = [UIColor appModalBackgroundColor];
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
             controller.tour = self.selectedTour;
             controller.tourJoinRequestDelegate = self;
         } break;
         case SegueIDQuitTour: {
-            OTQuitTourViewController *controller = (OTQuitTourViewController *)segue.destinationViewController;
+            OTQuitTourViewController *controller = (OTQuitTourViewController *)destinationViewController;
             controller.view.backgroundColor = [UIColor appModalBackgroundColor];
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
             controller.tour = self.selectedTour;
@@ -1169,16 +1184,21 @@ typedef NS_ENUM(NSInteger) {
             [controller setIsTourRunning:self.isTourRunning];
         } break;
         case SegueIDGuideSolidarityDetails: {
-            UINavigationController *navController = (UINavigationController*)segue.destinationViewController;
+            UINavigationController *navController = (UINavigationController*)destinationViewController;
             OTGuideDetailsViewController *controller = navController.childViewControllers[0];
             controller.poi = ((OTCustomAnnotation*)sender).poi;
             controller.category = [self categoryById:controller.poi.categoryId];
         } break;
         case SegueIDTourCreator: {
-            OTTourCreatorViewController *controller = (OTTourCreatorViewController *)segue.destinationViewController;
+            OTTourCreatorViewController *controller = (OTTourCreatorViewController *)destinationViewController;
             controller.view.backgroundColor = [UIColor appModalBackgroundColor];
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
             controller.tourCreatorDelegate = self;
+        } break;
+        case SegueIDEntourages: {
+            UINavigationController *navController = (UINavigationController*)destinationViewController;
+            OTEntouragesViewController *controller = (OTEntouragesViewController*)navController.topViewController;
+            controller.mainViewController = self;
         } break;
         default:
             break;
