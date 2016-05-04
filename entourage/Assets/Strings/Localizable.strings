@@ -22,7 +22,7 @@
 "guideviewcontroller_title" = "GUIDE";
 "userviewcontroller_title" = "PROFIL";
 
-"distance_100" = "Distance must be smaller than 100 meters";
+"distance_100" = "La rencontre est trop éloignée de la maraude";
 
 // MenuItems
 "menu_amis" = "Amis";
