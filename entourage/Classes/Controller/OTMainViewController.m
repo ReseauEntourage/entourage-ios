@@ -1093,6 +1093,8 @@ static bool isShowingOptions = NO;
     [alert addAction:cancelAction];
     UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self switchToNewsfeed];
+        
+        [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
     }];
     [alert addAction:quitAction];
     
