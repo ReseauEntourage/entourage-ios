@@ -216,7 +216,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self performSegueWithIdentifier:@"OTAskMore" sender:self];
 }
 
-- (IBAction)validateButtonDidTad:(UIButton *)sender {
+- (IBAction)validateButtonDidTad {
     if (self.phoneTextField.text.length == 0) {
         [[[UIAlertView alloc]
           initWithTitle:@"Connexion impossible"
@@ -246,7 +246,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)loginWithNewCode:(NSString *)code {
     [self dismissViewControllerAnimated:YES completion:^() {
         self.passwordTextField.text = code;
-        [self launchAuthentication];
+        [self validateButtonDidTad];
     }];
 }
 

@@ -26,6 +26,7 @@
 
 // MenuItems
 "menu_amis" = "Amis";
+
 "menu_guide" = "Guide de solidarité";
 "menu_param" = "Paramètres de l'application";
 "menu_about" = "À propos";
