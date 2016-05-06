@@ -172,6 +172,19 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
             [rootVC.presentedViewController presentViewController:alert animated:YES completion:nil];
         else
             [rootVC presentViewController:alert animated:YES completion:nil];
+        
+        //Refreshing the newsfeed when a push notification is received
+        if ([rootVC isKindOfClass:[SWRevealViewController class]]) {
+            SWRevealViewController *revealController = (SWRevealViewController*)rootVC;
+            if ([[revealController frontViewController] isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *navController = (UINavigationController*)[revealController frontViewController];
+                if ([navController.topViewController isKindOfClass:[OTMainViewController class]]) {
+                    OTMainViewController *mainController = (OTMainViewController*)navController.topViewController;
+                    [mainController refreshMap];
+                }
+            }
+        }
+        //End refreshing
     }
     
     // Set icon badge number to zero
