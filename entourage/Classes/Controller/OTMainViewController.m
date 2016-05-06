@@ -192,6 +192,7 @@
 	[super viewWillAppear:animated];
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(refreshMap) userInfo:nil repeats:YES];
     [self.refreshTimer fire];
+    [self refreshMap];
     
 }
 

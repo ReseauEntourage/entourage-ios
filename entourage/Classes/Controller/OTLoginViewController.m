@@ -75,28 +75,28 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     
     [self.phoneTextField becomeFirstResponder];
     
-#if DEBUG
-    // Ciprian
-    self.phoneTextField.text = @"+40740884267";
-    self.passwordTextField.text = @"600533";
-    
-//    //Vincent
-//    self.phoneTextField.text = @"0651502173";
+//#if DEBUG
+//    // Ciprian
+//    self.phoneTextField.text = @"+40740884267";
+//    self.passwordTextField.text = @"600533";
+//    
+////    //Vincent
+////    self.phoneTextField.text = @"0651502173";
+////    self.passwordTextField.text = @"123456";
+////
+////    // Ciprian + Mihai
+////    self.phoneTextField.text = @"0623456789";
+////    self.passwordTextField.text = @"123456";
+////
+//    // Vasile QA
+//    self.phoneTextField.text = @"+40723199641";
+//    //self.passwordTextField.text = @"123456";
+//    
+//    
+//    // Vincent PRO
+//    //self.phoneTextField.text = @"+33651502173";
 //    self.passwordTextField.text = @"123456";
-//
-//    // Ciprian + Mihai
-//    self.phoneTextField.text = @"0623456789";
-//    self.passwordTextField.text = @"123456";
-//
-    // Vasile QA
-    self.phoneTextField.text = @"+40723199641";
-    //self.passwordTextField.text = @"123456";
-    
-    
-    // Vincent PRO
-    //self.phoneTextField.text = @"+33651502173";
-    self.passwordTextField.text = @"123456";
-#endif
+//#endif
     
 }
 
