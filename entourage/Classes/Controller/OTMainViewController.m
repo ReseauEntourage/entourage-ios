@@ -507,7 +507,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)drawTour:(OTTour *)tour {
-    NSLog(@"drawing %@ tour %d with %lu points ... by %@", tour.vehicleType, tour.sid.intValue, (unsigned long)tour.tourPoints.count, tour.author.displayName);
+    NSLog(@"drawing %@ tour %d with %lu points ... by %@ - %@", tour.vehicleType, tour.sid.intValue, (unsigned long)tour.tourPoints.count, tour.author.displayName, tour.joinStatus);
     CLLocationCoordinate2D coords[[tour.tourPoints count]];
     int count = 0;
     for (OTTourPoint *point in tour.tourPoints) {
