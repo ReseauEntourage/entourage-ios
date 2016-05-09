@@ -41,7 +41,8 @@ NSString *const kTourPoints = @"tour_points";
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_tour", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kTour] = [tour dictionaryForWebserviceTour];
-    NSLog(@"request to create tour %@...", parameters);
+    NSLog(@"Request to create tour %@...", parameters);
+    NSLog(@"requestdetails: %@", tour.debugDescription);
     [[OTHTTPRequestManager sharedInstance]
          POSTWithUrl:url
          andParameters:parameters
@@ -52,6 +53,8 @@ NSString *const kTourPoints = @"tour_points";
              {
                  OTTour *updatedTour = [self tourFromDictionary:responseObject];
                  NSLog(@"... created tour %d", updatedTour.sid.intValue);
+                 NSLog(@"responsedetails: %@", updatedTour.debugDescription);
+                 
                  success(updatedTour);
              }
          }

@@ -181,5 +181,10 @@ NSString *const kEncountersCount = @"encounter_count";
     return color;
 }
 
+- (NSString *)debugDescription {
+    NSString *emaDescription = [NSString stringWithFormat:@"Tour %d with %lu points", _sid.intValue, (unsigned long)_tourPoints.count];
+    return emaDescription;
+}
+
 
 @end
