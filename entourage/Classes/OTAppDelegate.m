@@ -133,6 +133,13 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"Push registration success with token : %@", token);
     [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"device_token"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[OTAuthService new] sendAppInfoWithSuccess:^{
+        NSLog(@"Application info sent!");
+    } failure:^(NSError *error) {
+        NSLog(@"ApplicationsERR: %@", error.description);
+    }];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
