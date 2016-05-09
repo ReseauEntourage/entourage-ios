@@ -266,9 +266,13 @@ typedef NS_ENUM(unsigned) {
                                     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
                                     NSMutableArray *users = [NSMutableArray new];
                                     for (OTTourJoiner *joiner  in tourUsers) {
-                                        if (![joiner.uID isEqualToValue:currentUser.sid]) {
-                                            [users addObject:joiner];
+                                        if ([joiner.uID isEqualToValue:currentUser.sid]) {
+                                            continue;
                                         }
+                                        if (![joiner.status isEqualToString:JOIN_ACCEPTED]) {
+                                            continue;
+                                        }
+                                        [users addObject:joiner];
                                     }
                                     [self updateTableViewAddingTimelinePoints:users];
     } failure:^(NSError *error) {
