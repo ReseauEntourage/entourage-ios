@@ -60,7 +60,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"DESCRIPTION";//@"DECRIVEZ LA RENCONTRE";
+    self.title = @"DESCRIPTION";
     
     self.isRecording = NO;
     

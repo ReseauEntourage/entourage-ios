@@ -228,10 +228,10 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 //    [menuItems addObject:itemGuide];
     
     
-    OTMenuItem *itemParam = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_param", @"")
-                                                     iconName: @"parameters"
-                                              segueIdentifier:OTMenuViewControllerSegueMenuSettingsIdentifier];
-    [menuItems addObject:itemParam];
+//    OTMenuItem *itemParam = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_param", @"")
+//                                                     iconName: @"parameters"
+//                                              segueIdentifier:OTMenuViewControllerSegueMenuSettingsIdentifier];
+//    [menuItems addObject:itemParam];
 
     
     OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_about", @"")

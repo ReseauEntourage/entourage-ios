@@ -194,6 +194,7 @@
                         <segue destination="8WQ-di-H6o" kind="modal" identifier="OTTourJoinRequestSegue" id="kZV-ad-fUS"/>
                         <segue destination="TcF-p0-k5X" kind="modal" identifier="QuitTourSegue" id="Aeh-Uh-28s"/>
                         <segue destination="g6j-63-9qQ" kind="modal" identifier="OTPublicTourSegue" id="PSM-UX-CIT"/>
+                        <segue destination="Av4-dn-ksH" kind="modal" identifier="OTConfirmationPopup" id="uRF-Bh-5af"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAm-vJ-bDO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -239,6 +240,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4UT-LX-byg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3223.5" y="-454"/>
+        </scene>
+        <!--TourConfirmation-->
+        <scene sceneID="NEy-4b-CtA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TourConfirmation" id="Av4-dn-ksH" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="XN6-zc-ED3"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Xy-be-Em5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3199.5" y="-383"/>
         </scene>
     </scenes>
     <resources>

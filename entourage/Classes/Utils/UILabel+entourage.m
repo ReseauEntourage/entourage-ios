@@ -74,10 +74,10 @@
         [self setTextColor:[UIColor appOrangeColor]];
     } else {
         if ([tour.joinStatus isEqualToString:JOIN_PENDING]) {
-            [self setText:@"Demende en attente"];
+            [self setText:@"Demande en attente"];
             [self setTextColor:[UIColor appOrangeColor]];
         } else if ([tour.joinStatus isEqualToString:JOIN_REJECTED]) {
-            [self setText:@"Demende rejetée"];
+            [self setText:@"Demande rejetée"];
             [self setTextColor:[UIColor appGreyishColor]];
         } else {
             [self setText:@"Je rejoins"];

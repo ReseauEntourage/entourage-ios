@@ -69,7 +69,11 @@
         cell.titleLabel.text = aboutItem.title;
         if (indexPath.row == 0) {
             //Add the version number on first item
+#if DEBUG
+            cell.extraLabel.text = [NSString stringWithFormat:@"v%@",[NSBundle fullCurrentVersion]];
+#else
             cell.extraLabel.text = [NSString stringWithFormat:@"v%@",[NSBundle currentVersion]];
+#endif
         }
     }
     return cell;

@@ -269,9 +269,13 @@ typedef NS_ENUM(unsigned) {
                                     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
                                     NSMutableArray *users = [NSMutableArray new];
                                     for (OTTourJoiner *joiner  in tourUsers) {
-                                        if (![joiner.uID isEqualToValue:currentUser.sid]) {
-                                            [users addObject:joiner];
+                                        if ([joiner.uID isEqualToValue:currentUser.sid]) {
+                                            continue;
                                         }
+                                        if (![joiner.status isEqualToString:JOIN_ACCEPTED]) {
+                                            continue;
+                                        }
+                                        [users addObject:joiner];
                                     }
                                     [self updateTableViewAddingTimelinePoints:users];
     } failure:^(NSError *error) {
@@ -638,7 +642,7 @@ typedef NS_ENUM(unsigned) {
 }
                  
 - (CGFloat)messageHeightForText:(NSString *)messageContent {
-    CGSize maximumLabelSize = CGSizeMake(297, FLT_MAX);
+    CGSize maximumLabelSize = CGSizeMake(220, FLT_MAX);
     UIFont *fontText = [UIFont systemFontOfSize:17 weight:UIFontWeightRegular];
     CGSize expectedLabelSize = [messageContent boundingRectWithSize:maximumLabelSize
                                                  options:(NSStringDrawingUsesLineFragmentOrigin| NSStringDrawingUsesFontLeading)

@@ -76,26 +76,24 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.phoneTextField becomeFirstResponder];
     
 #if DEBUG
-    // Ciprian
+    // Ciprian Public - Staging
     self.phoneTextField.text = @"+40740884267";
-    self.passwordTextField.text = @"600533";
     
-//    //Vincent
-//    self.phoneTextField.text = @"0651502173";
-//    self.passwordTextField.text = @"123456";
-//
-//    // Ciprian + Mihai
-//    self.phoneTextField.text = @"0623456789";
-//    self.passwordTextField.text = @"123456";
-//
-    // Vasile QA
+    // Ciprian Pro - Prod
+    self.phoneTextField.text = @"+33740884267";
+    
+    //Vincent
+    //self.phoneTextField.text = @"0651502173";
+
+    // Ciprian + Mihai
+    // self.phoneTextField.text = @"0623456789";
+
+    // Vasile Pro - Prod
     self.phoneTextField.text = @"+40723199641";
-    //self.passwordTextField.text = @"123456";
     
     
     // Vincent PRO
     //self.phoneTextField.text = @"+33651502173";
-    
     
     // JM
     self.phoneTextField.text = @"0783601123";
@@ -223,7 +221,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self performSegueWithIdentifier:@"OTAskMore" sender:self];
 }
 
-- (IBAction)validateButtonDidTad:(UIButton *)sender {
+- (IBAction)validateButtonDidTad {
     if (self.phoneTextField.text.length == 0) {
         [[[UIAlertView alloc]
           initWithTitle:@"Connexion impossible"
@@ -253,7 +251,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)loginWithNewCode:(NSString *)code {
     [self dismissViewControllerAnimated:YES completion:^() {
         self.passwordTextField.text = code;
-        [self launchAuthentication];
+        [self validateButtonDidTad];
     }];
 }
 

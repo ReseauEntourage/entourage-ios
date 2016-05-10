@@ -19,7 +19,9 @@
 @interface OTMapOptionsViewController : UIViewController
 
 @property (nonatomic, weak) id<OTMapOptionsDelegate> mapOptionsDelegate;
+@property (nonatomic, assign) CGPoint fingerPoint;
 
 - (void)setIsPOIVisible:(BOOL)POIVisible;
+
 
 @end

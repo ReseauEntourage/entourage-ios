@@ -22,8 +22,11 @@
 "guideviewcontroller_title" = "GUIDE";
 "userviewcontroller_title" = "PROFIL";
 
+"distance_100" = "La rencontre est trop éloignée de la maraude";
+
 // MenuItems
 "menu_amis" = "Amis";
+
 "menu_guide" = "Guide de solidarité";
 "menu_param" = "Paramètres de l'application";
 "menu_about" = "À propos";
