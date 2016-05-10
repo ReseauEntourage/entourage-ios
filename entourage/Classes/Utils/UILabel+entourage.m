@@ -78,7 +78,7 @@
             [self setTextColor:[UIColor appOrangeColor]];
         } else if ([tour.joinStatus isEqualToString:JOIN_REJECTED]) {
             [self setText:@"Demande rejetée"];
-            [self setTextColor:[UIColor appGreyishColor]];
+            [self setTextColor:[UIColor appTomatoColor]];
         } else {
             [self setText:@"Je rejoins"];
             [self setTextColor:[UIColor appGreyishColor]];
