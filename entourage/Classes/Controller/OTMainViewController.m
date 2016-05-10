@@ -883,6 +883,26 @@ static BOOL didGetAnyData = NO;
     }];
 }
 
+- (void)createDemande {
+    [self dismissViewControllerAnimated:NO completion:^{
+        if (self.toursMapDelegate.isActive) {
+            [self performSegueWithIdentifier:@"EntourageCreator" sender:nil];
+        } else {
+            [self showNewTourStartDialogFromGuide];
+        }
+    }];
+}
+
+- (void)createContribution {
+    [self dismissViewControllerAnimated:NO completion:^{
+        if (self.toursMapDelegate.isActive) {
+            [self performSegueWithIdentifier:@"EntourageCreator" sender:nil];
+        } else {
+            [self showNewTourStartDialogFromGuide];
+        }
+    }];
+}
+
 - (void)togglePOI {
     [self dismissViewControllerAnimated:NO completion:^{
         //[self performSegueWithIdentifier:@"GuideSegue" sender:nil];

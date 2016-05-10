@@ -10,9 +10,12 @@
 
 @protocol OTMapOptionsDelegate <NSObject>
 
--(void)createTour;
--(void)togglePOI;
--(void)dismissMapOptions;
+- (void)createTour;
+- (void)createDemande;
+- (void)createContribution;
+
+- (void)togglePOI;
+- (void)dismissMapOptions;
 
 @end
 
@@ -22,6 +25,5 @@
 @property (nonatomic, assign) CGPoint fingerPoint;
 
 - (void)setIsPOIVisible:(BOOL)POIVisible;
-
 
 @end

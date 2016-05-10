@@ -372,6 +372,8 @@
     }];
 }
 
+//TODO: add demande, contribution
+
 -(void)togglePOI {
     [self dismissViewControllerAnimated:NO completion:^{
         [self performSegueWithIdentifier:@"OTMapViewSegue" sender:nil];
