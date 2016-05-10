@@ -77,7 +77,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     
 #if DEBUG
     // Ciprian Public - Staging
-    self.phoneTextField.text = @"+40740884267";
+    //self.phoneTextField.text = @"+40740884267";
     
     // Ciprian Pro - Prod
     self.phoneTextField.text = @"+33740884267";
@@ -89,14 +89,14 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     // self.phoneTextField.text = @"0623456789";
 
     // Vasile Pro - Prod
-    self.phoneTextField.text = @"+40723199641";
+    //self.phoneTextField.text = @"+40723199641";
     
     
     // Vincent PRO
     //self.phoneTextField.text = @"+33651502173";
     
     // JM
-    self.phoneTextField.text = @"0783601123";
+    //self.phoneTextField.text = @"0783601123";
     self.passwordTextField.text = @"123456";
     
 #endif
