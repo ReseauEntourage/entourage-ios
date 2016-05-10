@@ -14,6 +14,10 @@
     return [UIColor colorWithRed: 242.0f/255.0f green: 101.0f/255.0f blue:   33.0f/255.0f alpha:1.0f];
 }
 
++ (UIColor *)appTomatoColor {
+    return [UIColor colorWithRed: 238.0f/255.0f green:  62.0f/255.0f blue:   58.0f/255.0f alpha:1.0f];
+}
+
 + (UIColor *)appGreyishColor {
     return [UIColor colorWithRed: 165.0f/255.0f green: 165.0f/255.0f blue:  156.0f/255.0f alpha:1.0f];
 }

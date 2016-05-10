@@ -11,9 +11,10 @@
 
 #define DEFAULT_IMAGE @"userSmall"
 
+#define JOINBUTTON_NOTREQUESTED @"joinButton"
+#define JOINBUTTON_PENDING      @"pendingRequestButton"
 #define JOINBUTTON_ACCEPTED     @"activeButton"
-#define JOINBUTTON_PENDING     @"pendingRequestButton"
-#define JOINBUTTON_NOTACCEPTED  @"joinButton"
+#define JOINBUTTON_REJECTED     @"refusedRequestButton"
 
 
 @implementation UIButton (entourage)
@@ -46,8 +47,10 @@
         [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
     } else  if ([tour.joinStatus isEqualToString:JOIN_PENDING]) {
         [self setImage:[UIImage imageNamed:JOINBUTTON_PENDING] forState:UIControlStateNormal];
+    } else if ([tour.joinStatus isEqualToString:JOIN_REJECTED]) {
+        [self setImage:[UIImage imageNamed:JOINBUTTON_REJECTED] forState:UIControlStateNormal];
     } else {
-        [self setImage:[UIImage imageNamed:JOINBUTTON_NOTACCEPTED] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:JOINBUTTON_NOTREQUESTED] forState:UIControlStateNormal];
     }
 }
 
