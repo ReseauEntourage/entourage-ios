@@ -43,7 +43,7 @@
 /**************************************************************************************************/
 #pragma mark - OTAppDelegate
 
-const CGFloat OTNavigationBarDefaultFontSize = 18.f;
+const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 NSString *const kUserInfoSender = @"sender";
 NSString *const kUserInfoObject = @"object";
@@ -329,7 +329,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
     UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
 
-	UIFont *navigationBarFont = [UIFont calibriFontWithSize:OTNavigationBarDefaultFontSize];
+	UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
 	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
 	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor appOrangeColor],
 	                                                      NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];

@@ -348,21 +348,6 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FLr-cF-t8Z">
                                 <rect key="frame" x="150" y="274" width="20" height="20"/>
                             </activityIndicatorView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2EG-u9-ELx">
-                                <rect key="frame" x="-8" y="524" width="336" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="yjx-J2-NFV"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem image="filters" id="Pkv-Fp-SD3"/>
-                                    <barButtonItem image="geoloc" id="Tmd-7k-imW"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Rvz-lj-J2G"/>
-                                    <barButtonItem title="Entourages" id="dU5-SW-p8f">
-                                        <color key="tintColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GWP-Nm-YPn"/>
-                                </items>
-                            </toolbar>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRg-cj-T9Q">
                                 <rect key="frame" x="250" y="494" width="62" height="62"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -418,7 +403,6 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="01M-L0-iJE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2EG-u9-ELx" secondAttribute="trailing" constant="-24" id="9IK-Pv-mXM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oHF-Vi-LCk" secondAttribute="trailing" constant="-20" id="9ho-oj-3FF"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="oHF-Vi-LCk" secondAttribute="bottom" id="CoI-BK-C8y"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Kc9-kH-YQ7" secondAttribute="bottom" constant="12" id="DuD-zc-Fd5"/>
@@ -429,17 +413,14 @@
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="VLV-3h-yeI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uRg-cj-T9Q" secondAttribute="trailing" constant="-8" id="ZT2-9H-lNi"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="centerX" secondItem="oVf-Bh-vdD" secondAttribute="centerX" id="hB3-UZ-01t"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="2EG-u9-ELx" secondAttribute="bottom" id="mi6-0M-xlF"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="10" id="puD-5n-gle"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="64" id="sQA-pi-JcK"/>
                             <constraint firstItem="gsB-s5-FKP" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="16" id="t6b-Vu-ZMD"/>
-                            <constraint firstItem="2EG-u9-ELx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-24" id="y4I-N7-Bd9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OWf-3U-PgN"/>
                     <connections>
                         <outlet property="createEncounterButton" destination="Kc9-kH-YQ7" id="q2Y-Ck-e7b"/>
-                        <outlet property="footerToolbar" destination="2EG-u9-ELx" id="eNS-jR-fWV"/>
                         <outlet property="indicatorView" destination="FLr-cF-t8Z" id="LUz-Z1-DVR"/>
                         <outlet property="launcherButton" destination="uRg-cj-T9Q" id="oSp-ac-Y8Q"/>
                         <outlet property="mapSegmentedControl" destination="gsB-s5-FKP" id="Vvs-3z-462"/>
@@ -456,7 +437,7 @@
                         <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" id="Gfi-xi-1Da"/>
                         <segue destination="Qc8-Ez-r95" kind="modal" identifier="OTPublicTourSegue" id="gok-hK-Hg9"/>
                         <segue destination="cUF-7c-FT1" kind="modal" identifier="TourCreatorSegue" id="giF-18-m0W"/>
-                        <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageCreator" id="dno-Ju-GCg"/>
+                        <segue destination="M82-2j-4qh" kind="modal" identifier="EntourageCreator" id="YUb-zj-uBJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -988,23 +969,59 @@
             </objects>
             <point key="canvasLocation" x="1346" y="333"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7rf-3C-aBu">
+            <objects>
+                <navigationController id="M82-2j-4qh" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Cc-gM-0wq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="UEB-Je-c5t" kind="relationship" relationship="rootViewController" id="R2g-iN-Idc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mP9-n9-KUP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="364" y="793"/>
+        </scene>
+        <!--Entourage Creator View Controller-->
+        <scene sceneID="1KP-Ao-jAx">
+            <objects>
+                <viewController id="UEB-Je-c5t" customClass="OTEntourageCreatorViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dEQ-Bo-9Bm"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ysa-oq-h9F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RRp-DS-txs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6z5-qg-bZE">
+                                <rect key="frame" x="-4" y="64" width="328" height="504"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ysa-oq-h9F" firstAttribute="top" secondItem="6z5-qg-bZE" secondAttribute="bottom" id="Ef0-li-YNj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6z5-qg-bZE" secondAttribute="trailing" constant="-20" id="FaU-9e-yk2"/>
+                            <constraint firstItem="6z5-qg-bZE" firstAttribute="top" secondItem="dEQ-Bo-9Bm" secondAttribute="bottom" id="aWu-YF-x09"/>
+                            <constraint firstItem="6z5-qg-bZE" firstAttribute="leading" secondItem="RRp-DS-txs" secondAttribute="leadingMargin" constant="-20" id="lfz-lx-KyG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="6a8-wr-eGG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S0x-1A-brf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="364" y="1490"/>
+        </scene>
         <!--OTTourJoinRequestViewController-->
         <scene sceneID="JPP-j5-gm1">
             <objects>
-                <viewControllerPlaceholder storyboardName="TourJoinRequest" referencedIdentifier="OTTourJoinRequestViewController" id="GHS-CJ-wmd" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="OTTourJoinRequestViewController" storyboardName="TourJoinRequest" referencedIdentifier="OTTourJoinRequestViewController" id="GHS-CJ-wmd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ny-Mu-RyI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="866.5" y="938"/>
-        </scene>
-        <!--EntourageCreator-->
-        <scene sceneID="zTc-vn-arv">
-            <objects>
-                <viewControllerPlaceholder storyboardName="EntourageCreator" id="OHs-Ag-wCJ" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Wd5-ZJ-ll5"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c1y-5B-KU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="354" y="595"/>
         </scene>
     </scenes>
     <resources>
@@ -1012,8 +1029,6 @@
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>
-        <image name="filters" width="22" height="22"/>
-        <image name="geoloc" width="22" height="22"/>
         <image name="mic" width="26" height="26"/>
         <image name="pause" width="62" height="62"/>
         <image name="user" width="100" height="100"/>

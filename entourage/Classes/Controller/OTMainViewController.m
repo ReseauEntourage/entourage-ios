@@ -91,6 +91,8 @@
 
 @interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTTourQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate>
 
+@property (nonatomic, weak) IBOutlet UIToolbar *footerToolbar;
+
 // map
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *mapSegmentedControl;
@@ -147,7 +149,10 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
     [self configureNavigationBar];
-    
+    UIFont *toolbarFont = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
+    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor appGreyishBrownColor],
+                                                                        NSFontAttributeName : toolbarFont }
+                                                 forState:UIControlStateNormal];
     self.locations = [NSMutableArray new];
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
