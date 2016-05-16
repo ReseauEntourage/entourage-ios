@@ -43,7 +43,7 @@ NSString *const kEncounterMessage = @"message";
 	return encounter;
 }
 
-- (NSDictionary *)dictionaryForWebservice {
+- (NSDictionary *)dictionaryForWebService {
 	NSMutableDictionary *dictionary = [NSMutableDictionary new];
 
     dictionary[kEncounterStreetPersonName] = self.streetPersonName;

@@ -23,6 +23,7 @@
 #import "OTUserViewController.h"
 #import "OTGuideDetailsViewController.h"
 #import "OTTourCreatorViewController.h"
+#import "OTEntourageCreatorViewController.h"
 #import "OTEntouragesViewController.h"
 
 #import "OTToursMapDelegate.h"
@@ -88,7 +89,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTTourQuitDelegate, OTTourTimelineDelegate>
+@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTTourQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate>
 
 // map
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
@@ -101,6 +102,8 @@
 
 @property (nonatomic, strong) OTToursMapDelegate *toursMapDelegate;
 @property (nonatomic, strong) OTGuideMapDelegate *guideMapDelegate;
+
+@property (nonatomic) EntourageType entourageType;
 
 // markers
 @property (nonatomic, strong) NSMutableArray *encounters;
@@ -884,6 +887,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)createDemande {
+    self.entourageType = EntourageTypeDemande;
     [self dismissViewControllerAnimated:NO completion:^{
         if (self.toursMapDelegate.isActive) {
             [self performSegueWithIdentifier:@"EntourageCreator" sender:nil];
@@ -894,6 +898,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)createContribution {
+    self.entourageType = EntourageTypeContribution;
     [self dismissViewControllerAnimated:NO completion:^{
         if (self.toursMapDelegate.isActive) {
             [self performSegueWithIdentifier:@"EntourageCreator" sender:nil];
@@ -933,6 +938,15 @@ static BOOL didGetAnyData = NO;
         [self.pointsToSend addObject:tourPoint];
     }
     [self sendTour];
+}
+
+/********************************************************************************/
+#pragma mark - EntourageCreatorDelegate
+
+- (void)didCreateEntourage {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 /********************************************************************************/
@@ -1196,6 +1210,7 @@ typedef NS_ENUM(NSInteger) {
     SegueIDGuideSolidarity,
     SegueIDGuideSolidarityDetails,
     SegueIDTourCreator,
+    SegueIDEntourageCreator,
     SegueIDEntourages
 } SegueID;
 
@@ -1214,6 +1229,7 @@ typedef NS_ENUM(NSInteger) {
                                        @"GuideSegue": [NSNumber numberWithInteger:SegueIDGuideSolidarity],
                                        @"OTGuideDetailsSegue": [NSNumber numberWithInteger:SegueIDGuideSolidarityDetails],
                                        @"TourCreatorSegue": [NSNumber numberWithInteger:SegueIDTourCreator],
+                                       @"EntourageCreator": [NSNumber numberWithInteger:SegueIDEntourageCreator],
                                        @"EntouragesSegue": [NSNumber numberWithInteger:SegueIDEntourages]};
     
     UIViewController *destinationViewController = segue.destinationViewController;
@@ -1304,6 +1320,15 @@ typedef NS_ENUM(NSInteger) {
             controller.view.backgroundColor = [UIColor appModalBackgroundColor];
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
             controller.tourCreatorDelegate = self;
+        } break;
+        case SegueIDEntourageCreator: {
+            //TODO:
+            UINavigationController *navController = (UINavigationController*)destinationViewController;
+            OTEntourageCreatorViewController *controller = (OTEntourageCreatorViewController *)navController.childViewControllers[0];;
+            controller.type = self.entourageType;
+            controller.latitude = self.mapView.userLocation.coordinate.latitude;
+            controller.longitude = self.mapView.userLocation.coordinate.longitude;
+            controller.entourageCreatorDelegate = self;
         } break;
         case SegueIDEntourages: {
             UINavigationController *navController = (UINavigationController*)destinationViewController;

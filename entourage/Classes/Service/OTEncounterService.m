@@ -52,6 +52,33 @@ NSString *const kEncounter = @"encounter";
      }];
 }
 
+- (void)sendEntourage:(OTEntourage *)entourage
+          withSuccess:(void (^)(OTEntourage *updatedEntourage))success
+              failure:(void (^)(NSError *error))failure
+{
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_entourage", @"")];
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    parameters[@"entourage"] = [entourage dictionaryForWebService];
+    
+    [[OTHTTPRequestManager sharedInstance]
+         POSTWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
+         {
+             if (success) {
+                 OTEntourage *updatedEntourage = [[OTEntourage alloc] initWithDictionary:(NSDictionary*)responseObject];
+                 success(updatedEntourage);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure) {
+                 failure(error);
+             }
+         }];
+}
+
+
 /**************************************************************************************************/
 #pragma mark -  methods
 

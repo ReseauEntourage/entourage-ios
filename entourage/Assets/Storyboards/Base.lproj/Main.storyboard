@@ -437,7 +437,7 @@
                         <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" id="Gfi-xi-1Da"/>
                         <segue destination="Qc8-Ez-r95" kind="modal" identifier="OTPublicTourSegue" id="gok-hK-Hg9"/>
                         <segue destination="cUF-7c-FT1" kind="modal" identifier="TourCreatorSegue" id="giF-18-m0W"/>
-                        <segue destination="M82-2j-4qh" kind="modal" identifier="EntourageCreator" id="YUb-zj-uBJ"/>
+                        <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageCreator" id="dno-Ju-GCg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -969,48 +969,23 @@
             </objects>
             <point key="canvasLocation" x="1346" y="333"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="7rf-3C-aBu">
-            <objects>
-                <navigationController id="M82-2j-4qh" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Cc-gM-0wq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="UEB-Je-c5t" kind="relationship" relationship="rootViewController" id="R2g-iN-Idc"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mP9-n9-KUP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="364" y="793"/>
-        </scene>
-        <!--Entourage Creator View Controller-->
-        <scene sceneID="1KP-Ao-jAx">
-            <objects>
-                <viewController id="UEB-Je-c5t" customClass="OTEntourageCreatorViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dEQ-Bo-9Bm"/>
-                        <viewControllerLayoutGuide type="bottom" id="Ysa-oq-h9F"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="RRp-DS-txs">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="6a8-wr-eGG"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S0x-1A-brf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="364" y="1490"/>
-        </scene>
         <!--OTTourJoinRequestViewController-->
         <scene sceneID="JPP-j5-gm1">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="OTTourJoinRequestViewController" storyboardName="TourJoinRequest" referencedIdentifier="OTTourJoinRequestViewController" id="GHS-CJ-wmd" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="TourJoinRequest" referencedIdentifier="OTTourJoinRequestViewController" id="GHS-CJ-wmd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ny-Mu-RyI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="866.5" y="938"/>
+        </scene>
+        <!--EntourageCreator-->
+        <scene sceneID="zTc-vn-arv">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EntourageCreator" id="OHs-Ag-wCJ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Wd5-ZJ-ll5"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c1y-5B-KU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="354" y="595"/>
         </scene>
     </scenes>
     <resources>

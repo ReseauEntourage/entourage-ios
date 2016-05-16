@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTEntourage.h"
+
+
+@protocol EntourageCreatorDelegate <NSObject>
+
+- (void)didCreateEntourage;
+
+@end
 
 @interface OTEntourageCreatorViewController : UIViewController
+
+@property (nonatomic, weak) id<EntourageCreatorDelegate> entourageCreatorDelegate;
+@property (nonatomic) EntourageType type;
+@property (nonatomic) double latitude;
+@property (nonatomic) double longitude;
 
 @end

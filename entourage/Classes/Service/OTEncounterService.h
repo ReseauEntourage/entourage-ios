@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "OTEntourage.h"
+
 
 @class OTEncounter;
 
@@ -18,6 +20,9 @@
           withSuccess:(void (^)(OTEncounter *sentEncounter))success
               failure:(void (^)(NSError *error))failure;
 
+- (void)sendEntourage:(OTEntourage *)entourage
+          withSuccess:(void (^)(OTEntourage *updatedEntourage))success
+              failure:(void (^)(NSError *error))failure;
 
 - (NSMutableArray *)encountersFromDictionary:(NSDictionary *)data;
 - (OTEncounter *)encounterFromDictionary:(NSDictionary *)data;

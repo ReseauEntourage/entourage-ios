@@ -68,6 +68,12 @@
 
 "button_validate" = "Valider";
 
+"entourageTitle" = "Titre de votre %@*";
+"demande" = "Demande";
+"contribution" = "Contribution";
+"detailedDescription" = "Description détaillée";
+
+
 // Tour
 "tour_type_bare_hands" = "barehands";
 "tour_type_medical" = "medical";
@@ -131,3 +137,4 @@
 "url_update_user" = "%@/%@.json?token=%@";
 "url_delete_account" = "users/me?token=%@";
 "url_regenerate_code" = "%@/%@/%@.json";
+"url_send_entourage" = "entourages";

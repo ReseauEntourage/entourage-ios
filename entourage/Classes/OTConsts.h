@@ -22,6 +22,10 @@
 #define PARIS_LAT 48.856578
 #define PARIS_LON  2.351828
 
+#define TEXTVIEW_PADDING 10.0f
+#define TEXTVIEW_PADDING_TOP 12.0f
+#define TEXTVIEW_PADDING_BOTTOM 23.0f
+
 
 #define kNotificationPushStatusChanged @"NotificationAPNSStatusChanged"
 

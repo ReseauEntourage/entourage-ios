@@ -126,15 +126,17 @@
     [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId
                                 withSuccess:^(OTEncounter *sentEncounter) {
                                     [SVProgressHUD showSuccessWithStatus:@"Rencontre créée"];
-                                     if (success) {
-                                         success(encounter);
-                                     }
-                                     else
-                                     {
-                                         [self.delegate encounterSent:encounter];
-                                         [self.navigationController popViewControllerAnimated:YES];
-                                     }
-                                 } failure:^(NSError *error) {
+                                    if (success) {
+                                        success(encounter);
+                                    }
+                                    else
+                                    {
+                                        [self.delegate encounterSent:encounter];
+                                        [self.navigationController popViewControllerAnimated:YES];
+                                    }
+
+                                }
+                                failure:^(NSError *error) {
                                      [SVProgressHUD showErrorWithStatus:@"Echec de la création de rencontre"];
                                  }];
 }
