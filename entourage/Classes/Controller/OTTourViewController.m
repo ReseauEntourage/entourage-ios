@@ -511,7 +511,7 @@ typedef NS_ENUM(unsigned) {
     NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold],
                                 NSForegroundColorAttributeName: [UIColor appOrangeColor]};
     NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ", joiner.displayName] attributes:boldAttrs];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:@"a rejoint votre maraude." attributes:lightAttrs];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:@"a rejoint la maraude." attributes:lightAttrs];
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];
     UILabel *joinerLabel = [cell viewWithTag:TIMELINE_JOINER];
