@@ -29,4 +29,6 @@
 - (void)removeTour:(OTTour*)tour;
 - (void)removeAll;
 
+- (void)addEntourages:(NSArray*)entourages;
+
 @end

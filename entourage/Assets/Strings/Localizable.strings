@@ -70,6 +70,7 @@
 
 "entourageTitle" = "Titre de votre %@*";
 "demande" = "Demande";
+"ask_for_help" = "Demande";
 "contribution" = "Contribution";
 "detailedDescription" = "Description détaillée";
 

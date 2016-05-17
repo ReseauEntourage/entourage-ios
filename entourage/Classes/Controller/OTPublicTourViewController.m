@@ -62,7 +62,11 @@
 - (void)setupUI {
     self.organizationNameLabel.text = self.tour.organizationName;
     [self.typeNameLabel setupWithTypeAndAuthorOfTour:self.tour];
-    [self.timeLocationLabel setupWithTimeAndLocationOfTour:self.tour];
+//    [self.timeLocationLabel setupWithTimeAndLocationOfTour:self.tour];
+//    
+    OTTourPoint *startPoint = self.tour.tourPoints.firstObject;
+    CLLocation *startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
+    [self.timeLocationLabel setupWithTime:self.tour.startTime andLocation:startPointLocation];
     
     [self.userProfileImageButton addTarget:self action:@selector(doShowProfile) forControlEvents:UIControlEventTouchUpInside];
     [self.userProfileImageButton setupAsProfilePictureFromUrl:self.tour.author.avatarUrl];
@@ -70,8 +74,10 @@
     self.noUsersLabel.text = [NSString stringWithFormat:@"%d", self.tour.noPeople.intValue];
     
     
-    [self.joinButton setupWithJoinStatusOfTour:self.tour];
-    [self.joinLabel setupWithJoinStatusOfTour:self.tour];
+    //[self.joinButton setupWithJoinStatusOfTour:self.tour];
+    [self.joinButton setupWithStatus:self.tour.status andJoinStatus:self.tour.joinStatus];
+    //[self.joinLabel setupWithJoinStatusOfTour:self.tour];
+    [self.joinLabel setupWithStatus:self.tour.status andJoinStatus:self.tour.joinStatus];
     
     if ([self.tour.tourPoints count] > 0) {
         OTTourPoint *startPoint = self.tour.tourPoints[0];

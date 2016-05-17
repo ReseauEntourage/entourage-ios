@@ -355,7 +355,7 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem image="filters" id="Pkv-Fp-SD3"/>
-                                    <barButtonItem image="geoloc" id="Tmd-7k-imW"/>
+                                    <barButtonItem image="geoloc" style="done" id="Tmd-7k-imW"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Rvz-lj-J2G"/>
                                     <barButtonItem title="Entourages" id="dU5-SW-p8f">
                                         <color key="tintColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>

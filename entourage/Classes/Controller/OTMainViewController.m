@@ -34,6 +34,7 @@
 #import "JSBadgeView.h"
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
+#import "OTEntourageAnnotation.h"
 
 #import "OTConsts.h"
 
@@ -108,6 +109,8 @@
 @property (nonatomic) EntourageType entourageType;
 
 // markers
+@property (nonatomic, strong) NSMutableArray *entourages;
+
 @property (nonatomic, strong) NSMutableArray *encounters;
 @property (nonatomic, strong) WYPopoverController *popover;
 @property (nonatomic) BOOL isRegionSetted;
@@ -149,13 +152,14 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
     [self configureNavigationBar];
-    UIFont *toolbarFont = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
-    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor appGreyishBrownColor],
-                                                                        NSFontAttributeName : toolbarFont }
-                                                 forState:UIControlStateNormal];
+//    UIFont *toolbarFont = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
+//    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor appGreyishBrownColor],
+//                                                                        NSFontAttributeName : toolbarFont }
+//                                                 forState:UIControlStateNormal];
     self.locations = [NSMutableArray new];
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
+    self.entourages = [NSMutableArray new];
     self.markers = [NSMutableArray new];
     
     self.toursMapDelegate = [[OTToursMapDelegate alloc] initWithMapController:self];
@@ -182,7 +186,7 @@
     
     [self clearMap];
     
-    
+    [self feedMapViewWithEntourages];
     if (self.isTourRunning) {
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = NO;
@@ -228,6 +232,7 @@
     self.mapSegmentedControl.hidden = NO;
     [self clearMap];
     [self feedMapViewWithTours];
+    [self feedMapViewWithEntourages];
     [self.toursMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
     if (self.isTourListDisplayed) {
         [self showToursList];
@@ -319,13 +324,18 @@
 }
 
 - (void)configureNavigationBar {
+    //status bar
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
     
+    //navigation bar
     [self createMenuButton];
     UIBarButtonItem *chatButton = [self setupChatsButton];
     [chatButton setTarget:self];
     [chatButton setAction:@selector(showEntourages)];
     [self setupLogoImage];
+    
+    //footer toolbar
+    
 }
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
@@ -394,7 +404,8 @@ static BOOL didGetAnyData = NO;
 - (void)refreshMap {
     NSLog(@"Refreshing map ...");
     if (self.toursMapDelegate.isActive) {
-        [self getTourList];
+        //[self getTourList];
+        [self getEntourages];
     }
     else {
         [self getPOIList];
@@ -411,8 +422,31 @@ static BOOL didGetAnyData = NO;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
-    [self getTourList];
+    //[self getTourList];
+    [self getEntourages];
 }
+
+- (void)getEntourages {
+    NSLog(@"Getting entourages list ...");
+    __block CLLocationCoordinate2D oldRequestedCoordinate;
+    oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
+    oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
+    self.requestedToursCoordinate = self.mapView.centerCoordinate;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[OTTourService new] entouragesAroundCoordinate:self.mapView.centerCoordinate
+                                            success:^(NSArray *entourages) {
+                                                self.entourages = entourages.mutableCopy;
+                                                [self.tableView removeAll];
+                                                [self.tableView addEntourages:entourages];
+                                                [self feedMapViewWithEntourages];
+                                                [self.tableView reloadData];
+                                                 [self.indicatorView setHidden:YES];
+                                            } failure:^(NSError *error) {
+                                                NSLog(@"Error getting entourages: %@", error.description);
+                                                 [self.indicatorView setHidden:YES];
+                                            }];
+}
+
 
 - (void)getTourList {
     NSLog(@"Getting tours list ...");
@@ -479,6 +513,20 @@ static BOOL didGetAnyData = NO;
                                          [self registerObserver];
                                          [self.indicatorView setHidden:YES];
                                      }];
+}
+
+- (void)feedMapViewWithEntourages {
+    if (self.toursMapDelegate.isActive) {
+        NSMutableArray *annotations = [NSMutableArray new];
+        
+        for (OTEntourage *entourage in self.entourages) {
+            OTEntourageAnnotation *pointAnnotation = [[OTEntourageAnnotation alloc] initWithEntourage:entourage];
+            [annotations addObject:pointAnnotation];
+        }
+        
+        [self.clusteringController setAnnotations:annotations];
+        [self.clusteringController refresh:YES force:YES];
+    }
 }
 
 - (void)feedMapViewWithEncounters {

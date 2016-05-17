@@ -16,6 +16,7 @@
 - (void)setupAsProfilePictureFromUrl:(NSString *)avatarURLString
                      withPlaceholder:(NSString *)placeholder;
 
-- (void)setupWithJoinStatusOfTour:(OTTour *)tour;
+- (void)setupWithStatus:(NSString*)status andJoinStatus:(NSString *)joinStatus;
+//- (void)setupWithJoinStatusOfTour:(OTTour *)tour;
 
 @end

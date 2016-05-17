@@ -31,7 +31,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        //self.author = [[OTTourAuthor alloc] initWithDictionary:];
+        self.author = [[OTTourAuthor alloc] initWithDictionary:[dictionary objectForKey:@"author"]];
         self.creationDate =  [dictionary dateForKey:kWSCreateDate format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
         if (self.creationDate == nil) {
             // Objective-C format : "2015-11-20 09:28:52 +0000"
@@ -39,9 +39,10 @@
         }
         self.type = [ENTOURAGE_DEMANDE isEqualToString:[dictionary valueForKey:kWSType]] ? EntourageTypeDemande : EntourageTypeContribution;
         self.sid = [dictionary numberForKey:kWSID];
-        self.join_status = [dictionary valueForKey:kWSJoinStatus];
-        self.latitude = [dictionary numberForKey:kWSLatitude];
-        self.longitude = [dictionary numberForKey:kWSLongitude];
+        self.joinStatus = [dictionary valueForKey:kWSJoinStatus];
+        NSDictionary *locationDictionary = [dictionary objectForKey:kWSLocation];
+        self.latitude = [locationDictionary numberForKey:kWSLatitude];
+        self.longitude = [locationDictionary numberForKey:kWSLongitude];
         self.noPeople = [dictionary numberForKey:kWSNoPeople];
         self.noUnreadMessages = [dictionary numberForKey:kWSNoUnreadMessages];
         self.status = [dictionary valueForKey:kWSStatus];
@@ -49,6 +50,8 @@
     }
     return self;
 }
+
+
 
 - (NSString *)stringFromType {
     switch (self.type) {

@@ -7,9 +7,9 @@
 //
 
 #if DEBUG
-// PREPROD
-//#define BASE_API_URL @"https://entourage-back-preprod.herokuapp.com/api/v1/"
-#define BASE_API_URL @"https://api.entourage.social/api/v1/"
+// PREPROD - Staging
+#define BASE_API_URL @"https://entourage-back-preprod.herokuapp.com/api/v1/"
+//#define BASE_API_URL @"https://api.entourage.social/api/v1/"
 
 #else
 // PROD

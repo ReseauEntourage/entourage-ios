@@ -12,6 +12,7 @@
 #import "JSBadgeView.h"
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
+#import "OTEntourageAnnotation.h"
 #import "OTTour.h"
 #import "OTTourService.h"
 #import "UIColor+entourage.h"
@@ -47,13 +48,26 @@
         if ([kingpinAnnotation isCluster])
         {
             JSBadgeView *badgeView;
-            annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEncounterClusterAnnotationIdentifier];
+            
+            
+            id firstAnnotation = kingpinAnnotation.annotations.allObjects.firstObject;
+            NSString *annotationViewIdentifier = kEncounterAnnotationIdentifier;
+            NSString *annotationImageName = @"report";
+            JSBadgeViewAlignment badgeAlignament = JSBadgeViewAlignmentBottomCenter;
+            if ([firstAnnotation isKindOfClass:[OTEntourageAnnotation class]]) {
+                annotationViewIdentifier = kEntourageAnnotationIdentifier;
+                annotationImageName = @"heatZone";
+                badgeAlignament = JSBadgeViewAlignmentCenter;
+            }
+            
+            
+            annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewIdentifier];
             if (!annotationView)
             {
-                annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEncounterClusterAnnotationIdentifier];
+                annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:annotationViewIdentifier];
                 annotationView.canShowCallout = NO;
-                annotationView.image = [UIImage imageNamed:@"report"];
-                badgeView = [[JSBadgeView alloc] initWithParentView:annotationView alignment:JSBadgeViewAlignmentBottomCenter];
+                annotationView.image = [UIImage imageNamed:annotationImageName];
+                badgeView = [[JSBadgeView alloc] initWithParentView:annotationView alignment:badgeAlignament];
             }
             else
             {
@@ -74,6 +88,12 @@
                     annotationView = ((OTEncounterAnnotation *)simpleAnnontation).annotationView;
                 }
                 annotationView.annotation = simpleAnnontation;
+            } else if ([simpleAnnontation isKindOfClass:[OTEntourageAnnotation class]]) {
+                annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEntourageAnnotationIdentifier];
+                if (!annotationView) {
+                    annotationView = ((OTEntourageAnnotation *)simpleAnnontation).annotationView;
+                }
+                annotationView.annotation = simpleAnnontation;
             }
         }
         annotationView.canShowCallout = YES;
@@ -83,7 +103,13 @@
     return annotationView;
 }
 
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+
+    
+}
+
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    [self.mapController.clusteringController refresh:animated];
     NSLog(@"region did change");
     [self.mapController didChangePosition];
 }

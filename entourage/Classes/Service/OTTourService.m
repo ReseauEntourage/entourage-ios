@@ -16,6 +16,8 @@
 #import "OTTourMessage.h"
 #import "OTEncounter.h"
 #import "NSDictionary+Parsing.h"
+#import "OTAPIConsts.h"
+#import "OTEntourage.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
@@ -28,6 +30,10 @@ NSString *const kUsers = @"users";
 NSString *const kMessages = @"chat_messages";
 NSString *const kWSKeyEncounters = @"encounters";
 NSString *const kTourPoints = @"tour_points";
+
+NSString *const kEntourages = @"entourages";
+
+
 
 @implementation  OTTourService
 
@@ -480,7 +486,6 @@ NSString *const kTourPoints = @"tour_points";
                      failure:(void (^)(NSError *))failure
 {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_entourages", @""), [[NSUserDefaults standardUserDefaults] currentUser].token, entouragesStatus];
-    //NSDictionary *parameters = @{ @"limit": limit, @"latitude": @(coordinates.latitude), @"longitude": @(coordinates.longitude), @"distance": distance };
     NSLog(@"requesting entourages %@ with parameters %@ ...", url, @"0");
    
     [[OTHTTPRequestManager sharedInstance]
@@ -504,14 +509,62 @@ NSString *const kTourPoints = @"tour_points";
              }
          }
      ];
+}
 
+- (void)entouragesAroundCoordinate:(CLLocationCoordinate2D)coordinate
+                           success:(void (^)(NSArray *))success
+                           failure:(void (^)(NSError *))failure
+{
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGES, [[NSUserDefaults standardUserDefaults] currentUser].token ];
+    NSDictionary *parameters = @{@"latitude": @(coordinate.latitude), @"longitude": @(coordinate.longitude)};
+    NSLog(@"requesting entourages %@  ...", url);
     
+    [[OTHTTPRequestManager sharedInstance]
+         GETWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
+         {
+             NSDictionary *data = responseObject;
+             NSMutableArray *entourages = [self entouragesFromDictionary:data];
+             NSLog(@"received %lu ent", (unsigned long)entourages.count);
+             if (success)
+             {
+                 success(entourages);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }
+     ];
 }
 
 
 
 /**************************************************************************************************/
 #pragma mark - Private methods
+
+- (NSMutableArray *)entouragesFromDictionary:(NSDictionary *)data
+{
+    NSMutableArray *entourages = [NSMutableArray new];
+    NSArray *jsonEntourages = data[kEntourages];
+    
+    if ([jsonEntourages isKindOfClass:[NSArray class]])
+    {
+        for (NSDictionary *dictionary in jsonEntourages)
+        {
+            OTEntourage *ent = [[OTEntourage alloc]initWithDictionary:dictionary];
+            if (ent)
+            {
+                [entourages addObject:ent];
+            }
+        }
+    }
+    return entourages;
+}
 
 - (OTTour *)tourFromDictionary:(NSDictionary *)data
 {
@@ -543,6 +596,8 @@ NSString *const kTourPoints = @"tour_points";
     }
     return tours;
 }
+
+
 
 #pragma mark User Joins
 

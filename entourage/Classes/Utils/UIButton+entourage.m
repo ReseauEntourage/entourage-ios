@@ -41,6 +41,21 @@
 
 }
 
+- (void)setupWithStatus:(NSString*)status andJoinStatus:(NSString *)joinStatus {
+    self.hidden = [TOUR_STATUS_FREEZED isEqualToString:status];
+    if ([joinStatus isEqualToString:JOIN_ACCEPTED]) {
+        [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
+    } else  if ([joinStatus isEqualToString:JOIN_PENDING]) {
+        [self setImage:[UIImage imageNamed:JOINBUTTON_PENDING] forState:UIControlStateNormal];
+    } else if ([joinStatus isEqualToString:JOIN_REJECTED]) {
+        [self setImage:[UIImage imageNamed:JOINBUTTON_REJECTED] forState:UIControlStateNormal];
+    } else {
+        [self setImage:[UIImage imageNamed:JOINBUTTON_NOTREQUESTED] forState:UIControlStateNormal];
+    }
+
+}
+
+
 - (void)setupWithJoinStatusOfTour:(OTTour *)tour {
     self.hidden = [TOUR_STATUS_FREEZED isEqualToString:tour.status];
     if ([tour.joinStatus isEqualToString:JOIN_ACCEPTED]) {

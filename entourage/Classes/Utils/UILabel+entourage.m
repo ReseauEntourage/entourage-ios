@@ -12,6 +12,7 @@
 #import "TTTTimeIntervalFormatter.h"
 #import "TTTLocationFormatter.h"
 #import "UIColor+entourage.h"
+#import "OTConsts.h"
 
 
 @implementation UILabel (entourage)
@@ -34,6 +35,47 @@
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];
     self.attributedText = typeByNameAttrString;
+}
+
+- (void)setupAsTypeByNameFromEntourage:(OTEntourage*)ent {
+    NSString *entType = OTLocalizedString([ent stringFromType]);
+    NSString *authorName = ent.author.displayName;
+    
+    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
+    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ par ", entType.capitalizedString] attributes:lightAttrs];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:authorName attributes:boldAttrs];
+    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+    [typeByNameAttrString appendAttributedString:nameAttrString];
+    self.attributedText = typeByNameAttrString;
+}
+
+- (void)setupWithTime:(NSDate*)date andLocation:(CLLocation*)location {
+    // dateString - location
+    NSString *dateString = nil;
+    if (date != nil) {
+        TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
+        NSTimeInterval timeInterval = [date timeIntervalSinceDate:[NSDate date]];
+        [timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
+        dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
+        self.text = dateString;
+    }
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"error: %@", error.description);
+        }
+        CLPlacemark *placemark = placemarks.firstObject;
+        if (placemark.locality !=  nil) {
+            if (dateString != nil) {
+                self.text = [NSString stringWithFormat:@"%@ - %@", dateString, placemark.locality];
+            } else {
+                self.text = placemark.locality;
+            }
+        }
+    }];
+
 }
 
 - (void)setupWithTimeAndLocationOfTour:(OTTour *)tour {
@@ -64,6 +106,26 @@
         }
     }];
 
+}
+
+- (void)setupWithStatus:(NSString *)status andJoinStatus:(NSString*)joinStatus {
+    self.hidden = [TOUR_STATUS_FREEZED isEqualToString:status];
+    
+    if ([joinStatus isEqualToString:JOIN_ACCEPTED]) {
+        [self setText:@"Actif"];
+        [self setTextColor:[UIColor appOrangeColor]];
+    } else {
+        if ([joinStatus isEqualToString:JOIN_PENDING]) {
+            [self setText:@"Demande en attente"];
+            [self setTextColor:[UIColor appOrangeColor]];
+        } else if ([joinStatus isEqualToString:JOIN_REJECTED]) {
+            [self setText:@"Demande rejetée"];
+            [self setTextColor:[UIColor appTomatoColor]];
+        } else {
+            [self setText:@"Je rejoins"];
+            [self setTextColor:[UIColor appGreyishColor]];
+        }
+    }
 }
 
 - (void)setupWithJoinStatusOfTour:(OTTour *)tour {

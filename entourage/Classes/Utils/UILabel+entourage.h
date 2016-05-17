@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "OTTour.h"
+#import "OTEntourage.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface UILabel (entourage)
 
 - (void)setupWithTypeAndAuthorOfTour:(OTTour*)tour;
-- (void)setupWithTimeAndLocationOfTour:(OTTour *)tour;
-- (void)setupWithJoinStatusOfTour:(OTTour *)tour;
+- (void)setupWithTime:(NSDate*)date andLocation:(CLLocation*)location;
+//- (void)setupWithTimeAndLocationOfTour:(OTTour *)tour;
+//- (void)setupWithJoinStatusOfTour:(OTTour *)tour;
+- (void)setupWithStatus:(NSString *)status andJoinStatus:(NSString*)joinStatus;
+
+- (void)setupAsTypeByNameFromEntourage:(OTEntourage*)ent;
 
 @end

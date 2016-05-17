@@ -8,10 +8,12 @@
 
 #import "OTToursTableView.h"
 #import "OTTour.h"
+#import "OTEntourage.h"
 
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
 #import "UILabel+entourage.h"
+#import "OTTourPoint.h"
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -78,6 +80,10 @@
     return _tours;
 }
 
+- (void)addEntourages:(NSArray*)entourages {
+    [self.tours addObjectsFromArray:entourages];
+}
+
 - (void)addTours:(NSArray*)tours {
     for (OTTour* tour in tours) {
         [self addTour:tour];
@@ -139,45 +145,76 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    OTTour *tour = self.tours[indexPath.section];
-    //NSLog(@"TourID %@ by %@", tour.sid, tour.author.displayName);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
+    
+    id item = self.tours[indexPath.section];
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
-    organizationLabel.text = tour.organizationName;
-    
     UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
-    [typeByNameLabel setupWithTypeAndAuthorOfTour:tour];
-    
-    // dateString - location
     UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
-    [timeLocationLabel setupWithTimeAndLocationOfTour:tour];
-    
     UIButton *userProfileImageButton = [cell viewWithTag:TAG_TOURUSERIMAGE];
-    [userProfileImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
-    [userProfileImageButton setupAsProfilePictureFromUrl:tour.author.avatarUrl];
-    
+     [userProfileImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
-    noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
-    
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
-    [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-    [statusButton setupWithJoinStatusOfTour:tour];
-    
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
-    [statusLabel setupWithJoinStatusOfTour:tour];
     
-    //check if we need to load more data
-    if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.tours.count) {
-        if (self.toursDelegate && [self.toursDelegate respondsToSelector:@selector(loadMoreTours)]) {
-            [self.toursDelegate loadMoreTours];
+    
+    if ([item isKindOfClass:[OTTour class]]) {
+    
+        OTTour *tour = item;
+        organizationLabel.text = tour.organizationName;
+        [typeByNameLabel setupWithTypeAndAuthorOfTour:tour];
+        
+        // dateString - location
+        //[timeLocationLabel setupWithTimeAndLocationOfTour:tour];
+        OTTourPoint *startPoint = tour.tourPoints.firstObject;
+        CLLocation *startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
+        [timeLocationLabel setupWithTime:tour.startTime andLocation:startPointLocation];
+
+        
+       
+        [userProfileImageButton setupAsProfilePictureFromUrl:tour.author.avatarUrl];
+        
+        noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
+        
+        [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
+        //[statusButton setupWithJoinStatusOfTour:tour];
+        [statusButton setupWithStatus:tour.status andJoinStatus:tour.joinStatus];
+        
+        //[statusLabel setupWithJoinStatusOfTour:tour];
+        [statusLabel setupWithStatus:tour.status andJoinStatus:tour.joinStatus];
+        
+        //check if we need to load more data
+        if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.tours.count) {
+            if (self.toursDelegate && [self.toursDelegate respondsToSelector:@selector(loadMoreTours)]) {
+                [self.toursDelegate loadMoreTours];
+            }
         }
+    } else {
+        OTEntourage *ent = (OTEntourage*)item;
+        
+        organizationLabel.text = ent.name;
+        [typeByNameLabel setupAsTypeByNameFromEntourage:ent];
+        CLLocation *startPointLocation = [[CLLocation alloc] initWithLatitude:ent.latitude.doubleValue longitude:ent.longitude.doubleValue];
+        [timeLocationLabel setupWithTime:ent.creationDate andLocation:startPointLocation];
+        [userProfileImageButton setupAsProfilePictureFromUrl:ent.author.avatarUrl];
+        
+        noPeopleLabel.text = [NSString stringWithFormat:@"%d", ent.noPeople.intValue];
+        
+        [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
+        //[statusButton setupWithJoinStatusOfTour:tour];
+        [statusButton setupWithStatus:ent.status andJoinStatus:ent.joinStatus];
+        //[statusLabel setupWithJoinStatusOfTour:tour];
+        [statusLabel setupWithStatus:ent.status andJoinStatus:ent.joinStatus];
     }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    id item = self.tours[indexPath.section];
+    if ([item isKindOfClass:[OTEntourage class]])
+        return;
+    //TODO: handle Entourages
     OTTour *selectedTour = (OTTour*)self.tours[indexPath.section];
     if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(showTourInfo:)]) {
         [self.toursDelegate showTourInfo:selectedTour];

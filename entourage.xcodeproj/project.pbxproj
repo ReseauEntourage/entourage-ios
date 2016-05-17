@@ -67,6 +67,7 @@
 		452FE4011CAD5AC700063334 /* Entourages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3FF1CAD5AC700063334 /* Entourages.storyboard */; };
 		453117A41CD251C200C00BA8 /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 453117A31CD251C200C00BA8 /* MKMapView+entourage.m */; };
 		4536FC5E1CC64E55000BF620 /* OTSpeechKitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4536FC5D1CC64E55000BF620 /* OTSpeechKitManager.m */; };
+		45391A031CEBA89100C93908 /* OTEntourageAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 45391A021CEBA89100C93908 /* OTEntourageAnnotation.m */; };
 		454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */; };
 		454C8F501C4F4C45001362B2 /* UITextField+indentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4F1C4F4C45001362B2 /* UITextField+indentation.m */; };
 		454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F521C500FE2001362B2 /* OTStartupViewController.m */; };
@@ -255,6 +256,8 @@
 		453117A31CD251C200C00BA8 /* MKMapView+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+entourage.m"; sourceTree = "<group>"; };
 		4536FC5C1CC64E55000BF620 /* OTSpeechKitManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSpeechKitManager.h; sourceTree = "<group>"; };
 		4536FC5D1CC64E55000BF620 /* OTSpeechKitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSpeechKitManager.m; sourceTree = "<group>"; };
+		45391A011CEBA89100C93908 /* OTEntourageAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageAnnotation.h; sourceTree = "<group>"; };
+		45391A021CEBA89100C93908 /* OTEntourageAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageAnnotation.m; sourceTree = "<group>"; };
 		454C8F4B1C4D20EA001362B2 /* UIColor+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+entourage.h"; sourceTree = "<group>"; };
 		454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+entourage.m"; sourceTree = "<group>"; };
 		454C8F4E1C4F4C45001362B2 /* UITextField+indentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+indentation.h"; sourceTree = "<group>"; };
@@ -308,6 +311,7 @@
 		45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUserEditViewController.m; sourceTree = "<group>"; };
 		45EB70D81CE5F0CC00EB2CD1 /* OTEntourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourage.h; sourceTree = "<group>"; };
 		45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourage.m; sourceTree = "<group>"; };
+		45EB70DB1CEA08F900EB2CD1 /* OTAPIConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAPIConsts.h; sourceTree = "<group>"; };
 		45F443371C9080E900DDEBE1 /* OTTourJoiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourJoiner.h; sourceTree = "<group>"; };
 		45F443381C9080E900DDEBE1 /* OTTourJoiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoiner.m; sourceTree = "<group>"; };
 		45F4433A1C90B40400DDEBE1 /* OTTourTimelinePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourTimelinePoint.h; sourceTree = "<group>"; };
@@ -660,6 +664,7 @@
 				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
 				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
 				1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */,
+				45EB70DB1CEA08F900EB2CD1 /* OTAPIConsts.h */,
 				6B4930E019A77DFE00DA7EE0 /* Model */,
 				A8E10FAB19E82A1500DF4A01 /* View */,
 				6B4930C719A773C500DA7EE0 /* Controller */,
@@ -854,6 +859,8 @@
 				19BA509419E9587800342A36 /* OTEncounterAnnotation.m */,
 				45BC9BCF1CE363D5000065B7 /* OTTextView.h */,
 				45BC9BD01CE363D5000065B7 /* OTTextView.m */,
+				45391A011CEBA89100C93908 /* OTEntourageAnnotation.h */,
+				45391A021CEBA89100C93908 /* OTEntourageAnnotation.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1183,6 +1190,7 @@
 				45E6BFCF1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m in Sources */,
 				DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */,
 				4500115E1CCE5BD2004754DF /* OTTourCreatorViewController.m in Sources */,
+				45391A031CEBA89100C93908 /* OTEntourageAnnotation.m in Sources */,
 				456ABD801CA18416004A81D6 /* UILabel+entourage.m in Sources */,
 				0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */,
 				DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */,

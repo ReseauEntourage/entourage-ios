@@ -14,4 +14,6 @@
 @property (strong, nonatomic) NSString *avatarUrl;
 @property (strong, nonatomic) NSString *displayName;
 
+- (instancetype)initWithDictionary:(NSDictionary*)dictionary;
+
 @end
