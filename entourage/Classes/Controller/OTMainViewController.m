@@ -152,6 +152,20 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
     [self configureNavigationBar];
+    
+//    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"geoloc"]
+//                                                            style:UIBarButtonItemStylePlain
+//                                                           target:self
+//                                                           action:nil];
+//    
+//    [self.footerToolbar setItems:@[bbi]];
+    
+    
+    
+//    UILabel*footerLabel =  (UILabel*)self.footerToolbar.items[3];
+//    footerLabel.textColor = [UIColor appGreyishBrownColor];
+//    footerLabel.font = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
+    
 //    UIFont *toolbarFont = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
 //    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor appGreyishBrownColor],
 //                                                                        NSFontAttributeName : toolbarFont }
@@ -206,7 +220,6 @@
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(refreshMap) userInfo:nil repeats:YES];
     [self.refreshTimer fire];
     [self refreshMap];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -626,40 +639,6 @@ static BOOL didGetAnyData = NO;
     
     return vDist;
 }
-
-//- (NSURL *)createMapSnapshot {
-//    NSLog(@"%f x %f", self.mapView.region.span.latitudeDelta, self.mapView.region.span.longitudeDelta);
-//    
-//    MKMapSnapshotOptions *options = [[MKMapSnapshotOptions alloc] init];
-//    MKCoordinateRegion region = self.mapView.region;
-//    region.span = MKCoordinateSpanMake(MIN(region.span.latitudeDelta, region.span.longitudeDelta), MIN(region.span.latitudeDelta, region.span.longitudeDelta));
-//    options.region = region;
-//    NSLog(@"%f = %f", region.span.latitudeDelta, region.span.longitudeDelta);
-//
-//    options.size =  CGSizeMake(MIN(self.mapView.frame.size.width, self.mapView.frame.size.height), MIN(self.mapView.frame.size.width, self.mapView.frame.size.height));
-//    // self.mapView.frame.size;
-//    options.scale = [[UIScreen mainScreen] scale];
-//    
-//    NSURL *fileURL = [NSURL fileURLWithPath:@"path/to/snapshot.png"];
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"snapshot.png"];
-//
-//    MKMapSnapshotter *snapshotter = [[MKMapSnapshotter alloc] initWithOptions:options];
-//    [snapshotter startWithCompletionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
-//        if (error) {
-//            NSLog(@"[Error] %@", error);
-//            return;
-//        }
-//        
-//        UIImage *image = snapshot.image;
-//        NSData *data = UIImagePNGRepresentation(image);
-//        //[data writeToURL:fileURL atomically:YES];
-//        [data writeToFile:filePath atomically:YES];
-//    }];
-//    NSLog(@"Saved map snapshot to %@", fileURL);
-//    return fileURL;
-//}
-
 
 - (void)sendTour {
     [SVProgressHUD showWithStatus:OTLocalizedString(@"tour_create_sending")];
