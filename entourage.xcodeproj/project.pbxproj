@@ -38,6 +38,7 @@
 		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
 		2E7064EE1CB273120034C55A /* MapOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E7064ED1CB273120034C55A /* MapOptions.storyboard */; };
 		2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7064F01CB273AE0034C55A /* OTMapOptionsViewController.m */; };
+		2EC77E4F1CEDE4BC0031BB67 /* OTEntourageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */; };
 		2EDA5F031CB3F84300849172 /* OTGuideDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */; };
 		2EDA5F071CB50CEE00849172 /* OTToursTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F061CB50CEE00849172 /* OTToursTableView.m */; };
 		2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */; };
@@ -210,6 +211,8 @@
 		2E7064ED1CB273120034C55A /* MapOptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapOptions.storyboard; sourceTree = "<group>"; };
 		2E7064EF1CB273AE0034C55A /* OTMapOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMapOptionsViewController.h; sourceTree = "<group>"; };
 		2E7064F01CB273AE0034C55A /* OTMapOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapOptionsViewController.m; sourceTree = "<group>"; };
+		2EC77E4D1CEDE4BC0031BB67 /* OTEntourageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageService.h; sourceTree = "<group>"; };
+		2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageService.m; sourceTree = "<group>"; };
 		2EDA5F011CB3F84300849172 /* OTGuideDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGuideDetailsViewController.h; sourceTree = "<group>"; };
 		2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGuideDetailsViewController.m; sourceTree = "<group>"; };
 		2EDA5F051CB50CEE00849172 /* OTToursTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToursTableView.h; sourceTree = "<group>"; };
@@ -654,6 +657,8 @@
 				0A94B5B51B94811A00402AF3 /* OTTourService.m */,
 				0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */,
 				0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */,
+				2EC77E4D1CEDE4BC0031BB67 /* OTEntourageService.h */,
+				2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1243,6 +1248,7 @@
 				455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */,
 				4525EB311CA46082006784E6 /* OTSettingsViewController.m in Sources */,
 				45B3F8F61C74F40B00DCF2EC /* OTTourAuthor.m in Sources */,
+				2EC77E4F1CEDE4BC0031BB67 /* OTEntourageService.m in Sources */,
 				45F4433C1C90B40400DDEBE1 /* OTTourTimelinePoint.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
 				0A213C491BA0306300202D7B /* OTGuideViewController.m in Sources */,

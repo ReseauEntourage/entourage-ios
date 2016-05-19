@@ -89,14 +89,4 @@ extern NSString *const kAPITourRoute;
               success:(void (^)(NSMutableArray *userTours))success
               failure:(void (^)(NSError *error))failure;
 
-
-- (void)entouragesWithStatus:(NSString *)entouragesStatus
-             success:(void (^)(NSArray *))success
-             failure:(void (^)(NSError *))failure;
-
-- (void)entouragesAroundCoordinate:(CLLocationCoordinate2D)coordinate
-                           success:(void (^)(NSArray *))success
-                           failure:(void (^)(NSError *))failure;
-
-
 @end

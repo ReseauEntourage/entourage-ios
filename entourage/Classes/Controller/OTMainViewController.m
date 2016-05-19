@@ -53,6 +53,7 @@
 #import "OTTourService.h"
 #import "OTAuthService.h"
 #import "OTPOIService.h"
+#import "OTEntourageService.h"
 
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
@@ -405,7 +406,7 @@ static BOOL didGetAnyData = NO;
     oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
     self.requestedToursCoordinate = self.mapView.centerCoordinate;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[OTTourService new] entouragesAroundCoordinate:self.mapView.centerCoordinate
+    [[OTEntourageService new] entouragesAroundCoordinate:self.mapView.centerCoordinate
                                             success:^(NSArray *entourages) {
                                                 self.entourages = entourages.mutableCopy;
                                                 [self.tableView removeAll];
