@@ -1,10 +1,13 @@
-
+#import <CoreLocation/CoreLocation.h>
 
 typedef NS_ENUM (NSInteger, NSDictionaryParsingNumberOptions)
 {
 	NSDictionaryParsingNumberOptionFromString = 0x01,
 	NSDictionaryParsingNumberOptionFromNumber = 0x02
 };
+
+#define DATE_FORMAT_JAVA @"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+#define DATE_FORMAT_OBJC @"yyyy-MM-dd HH:mm:ss Z"
 
 @interface NSDictionary (Parsing)
 
@@ -39,6 +42,7 @@ typedef NS_ENUM (NSInteger, NSDictionaryParsingNumberOptions)
 
 - (NSDate *)dateForKey:(NSString *)key format:(NSString *)format defaultValue:(NSDate *)defaultDate;
 - (NSDate *)dateForKey:(NSString *)key format:(NSString *)format;
+- (NSDate *)dateForKey:(NSString *)key;
 
 /********************************************************************************/
 #pragma mark - Array
@@ -51,5 +55,11 @@ typedef NS_ENUM (NSInteger, NSDictionaryParsingNumberOptions)
 - (NSURL *)urlForKey:(NSString *)key defaultValue:(NSURL *)defaultUrl;
 - (NSURL *)urlForKey:(NSString *)key;
 + (BOOL)validateUrl:(NSString *)urlString;
+
+/********************************************************************************/
+#pragma mark - NSURL
+- (CLLocation *)locationForKey:(NSString *)key
+               withLatitudeKey:(NSString *)latitudeKey
+               andLongitudeKey:(NSString *)longitudeKey;
 
 @end

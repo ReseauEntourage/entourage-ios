@@ -7,34 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OTTourAuthor.h"
+#import <CoreLocation/CoreLocation.h>
+#import "OTFeedItem.h"
 
 #define ENTOURAGE_DEMANDE @"ask_for_help"
 #define ENTOURAGE_CONTRIBUTION @"contribution"
 
-typedef NS_ENUM(NSInteger) {
-    EntourageTypeDemande,
-    EntourageTypeContribution
-} EntourageType;
 
+@interface OTEntourage : OTFeedItem
 
-@interface OTEntourage : NSObject
-
-@property (nonatomic, strong) NSNumber *sid;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic) EntourageType type;
+@property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *desc;
-@property (nonatomic) NSNumber *latitude;
-@property (nonatomic) NSNumber *longitude;
-@property (nonatomic, strong) OTTourAuthor *author;
-@property (nonatomic, strong) NSDate *creationDate;
-@property (nonatomic, strong) NSString *joinStatus;
-@property (nonatomic, strong) NSNumber *noPeople;
-@property (nonatomic, strong) NSNumber *noUnreadMessages;
-@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) CLLocation *location;
 
 - (instancetype) initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *) dictionaryForWebService;
-- (NSString *)stringFromType;
+
+- (NSString *)displayType;
 
 @end

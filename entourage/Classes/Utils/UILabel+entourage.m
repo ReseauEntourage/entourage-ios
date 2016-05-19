@@ -38,12 +38,11 @@
 }
 
 - (void)setupAsTypeByNameFromEntourage:(OTEntourage*)ent {
-    NSString *entType = OTLocalizedString([ent stringFromType]);
     NSString *authorName = ent.author.displayName;
     
     NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
     NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ par ", entType.capitalizedString] attributes:lightAttrs];
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ par ", [ent displayType].capitalizedString] attributes:lightAttrs];
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:authorName attributes:boldAttrs];
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];

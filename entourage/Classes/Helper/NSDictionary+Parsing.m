@@ -148,6 +148,16 @@ static NSDateFormatter * dateFormatter;
 	return [self dateForKey:key format:format defaultValue:nil];
 }
 
+- (NSDate *)dateForKey:(NSString *)key
+{
+    NSDate *date = [self dateForKey:key format:DATE_FORMAT_JAVA];
+    if (date == nil) {
+        date = [self dateForKey:key format:DATE_FORMAT_OBJC];
+    }
+    
+    return date;
+}
+
 /********************************************************************************/
 #pragma mark - Array
 
@@ -210,5 +220,23 @@ static NSDateFormatter * dateFormatter;
 
 	return [urlTest evaluateWithObject:urlString];
 }
+
+/********************************************************************************/
+#pragma mark - NSURL
+- (CLLocation *)locationForKey:(NSString *)key
+               withLatitudeKey:(NSString *)latitudeKey
+               andLongitudeKey:(NSString *)longitudeKey
+{
+    NSDictionary *dictionary = [self objectForKey:key];
+    CLLocationDegrees lat = [dictionary degreesForKey:latitudeKey];
+    CLLocationDegrees lon = [dictionary degreesForKey:longitudeKey];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
+    return location;
+}
+
+- (CLLocationDegrees)degreesForKey:(NSString *)key {
+    return [self numberForKey:key].doubleValue;
+}
+
 
 @end

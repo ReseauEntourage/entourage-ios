@@ -103,13 +103,13 @@
 		45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */; };
 		45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */; };
 		45EB70DA1CE5F0CC00EB2CD1 /* OTEntourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */; };
+		45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F24A3C1CEDB1490003BF9E /* OTFeedItem.m */; };
 		45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443381C9080E900DDEBE1 /* OTTourJoiner.m */; };
 		45F4433C1C90B40400DDEBE1 /* OTTourTimelinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F4433B1C90B40400DDEBE1 /* OTTourTimelinePoint.m */; };
 		45F443441C90BCB700DDEBE1 /* OTTourMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443431C90BCB700DDEBE1 /* OTTourMessage.m */; };
 		45F443471C9314A800DDEBE1 /* OTTourStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443461C9314A800DDEBE1 /* OTTourStatus.m */; };
 		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
-		6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */; };
 		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
 		6B4930CD19A773C500DA7EE0 /* OTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4930C919A773C500DA7EE0 /* OTMainViewController.m */; };
@@ -312,6 +312,9 @@
 		45EB70D81CE5F0CC00EB2CD1 /* OTEntourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourage.h; sourceTree = "<group>"; };
 		45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourage.m; sourceTree = "<group>"; };
 		45EB70DB1CEA08F900EB2CD1 /* OTAPIConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAPIConsts.h; sourceTree = "<group>"; };
+		45F24A3B1CEDB1490003BF9E /* OTFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItem.h; sourceTree = "<group>"; };
+		45F24A3C1CEDB1490003BF9E /* OTFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItem.m; sourceTree = "<group>"; };
+		45F24A3F1CEDB3E70003BF9E /* OTAPIKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAPIKeys.h; sourceTree = "<group>"; };
 		45F443371C9080E900DDEBE1 /* OTTourJoiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourJoiner.h; sourceTree = "<group>"; };
 		45F443381C9080E900DDEBE1 /* OTTourJoiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoiner.m; sourceTree = "<group>"; };
 		45F4433A1C90B40400DDEBE1 /* OTTourTimelinePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourTimelinePoint.h; sourceTree = "<group>"; };
@@ -323,8 +326,6 @@
 		611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		6B1A846F19E811210020FB93 /* OTPoiService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiService.h; sourceTree = "<group>"; };
 		6B1A847019E811210020FB93 /* OTPoiService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiService.m; sourceTree = "<group>"; };
-		6B1A847219E8143F0020FB93 /* NSDictionary+Parsing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Parsing.h"; sourceTree = "<group>"; };
-		6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Parsing.m"; sourceTree = "<group>"; };
 		6B1A847819E822150020FB93 /* pois_categories_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pois_categories_mock.json; sourceTree = "<group>"; };
 		6B4930BD19A769EB00DA7EE0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6B4930C819A773C500DA7EE0 /* OTMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMainViewController.h; sourceTree = "<group>"; };
@@ -569,15 +570,24 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		45F4433D1C90B40D00DDEBE1 /* Tour */ = {
+		45F24A3E1CEDB1880003BF9E /* Entourage */ = {
 			isa = PBXGroup;
 			children = (
-				45F443411C90B93900DDEBE1 /* Common */,
-				45F443401C90B92200DDEBE1 /* Timeline */,
 				45EB70D81CE5F0CC00EB2CD1 /* OTEntourage.h */,
 				45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */,
 			);
-			name = Tour;
+			name = Entourage;
+			sourceTree = "<group>";
+		};
+		45F4433D1C90B40D00DDEBE1 /* Feeds */ = {
+			isa = PBXGroup;
+			children = (
+				45F24A3B1CEDB1490003BF9E /* OTFeedItem.h */,
+				45F24A3C1CEDB1490003BF9E /* OTFeedItem.m */,
+				45F24A3E1CEDB1880003BF9E /* Entourage */,
+				45F443411C90B93900DDEBE1 /* Tour */,
+			);
+			name = Feeds;
 			sourceTree = "<group>";
 		};
 		45F4433E1C90B76D00DDEBE1 /* User */ = {
@@ -619,17 +629,18 @@
 			name = Timeline;
 			sourceTree = "<group>";
 		};
-		45F443411C90B93900DDEBE1 /* Common */ = {
+		45F443411C90B93900DDEBE1 /* Tour */ = {
 			isa = PBXGroup;
 			children = (
-				0A94B53C1B8F185500402AF3 /* OTTourPoint.h */,
-				0A94B53D1B8F194700402AF3 /* OTTourPoint.m */,
 				0A94B4FE1B8CC64300402AF3 /* OTTour.h */,
 				0A94B4FF1B8CC66100402AF3 /* OTTour.m */,
+				45F443401C90B92200DDEBE1 /* Timeline */,
+				0A94B53C1B8F185500402AF3 /* OTTourPoint.h */,
+				0A94B53D1B8F194700402AF3 /* OTTourPoint.m */,
 				45B3F8F41C74F40A00DCF2EC /* OTTourAuthor.h */,
 				45B3F8F51C74F40A00DCF2EC /* OTTourAuthor.m */,
 			);
-			name = Common;
+			name = Tour;
 			sourceTree = "<group>";
 		};
 		6B1A846E19E8110B0020FB93 /* Service */ = {
@@ -665,6 +676,7 @@
 				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
 				1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */,
 				45EB70DB1CEA08F900EB2CD1 /* OTAPIConsts.h */,
+				45F24A3F1CEDB3E70003BF9E /* OTAPIKeys.h */,
 				6B4930E019A77DFE00DA7EE0 /* Model */,
 				A8E10FAB19E82A1500DF4A01 /* View */,
 				6B4930C719A773C500DA7EE0 /* Controller */,
@@ -722,10 +734,10 @@
 		6B4930E019A77DFE00DA7EE0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				45F4433F1C90B78100DDEBE1 /* POI */,
 				45F4433E1C90B76D00DDEBE1 /* User */,
-				45F4433D1C90B40D00DDEBE1 /* Tour */,
+				45F4433D1C90B40D00DDEBE1 /* Feeds */,
 				DBBE8ADA19E8655B00FA218E /* Menu */,
+				45F4433F1C90B78100DDEBE1 /* POI */,
 				4536FC5C1CC64E55000BF620 /* OTSpeechKitManager.h */,
 				4536FC5D1CC64E55000BF620 /* OTSpeechKitManager.m */,
 			);
@@ -819,8 +831,6 @@
 				453117A31CD251C200C00BA8 /* MKMapView+entourage.m */,
 				DBE9EF4F19E7EFA200031144 /* UIFont+entourage.h */,
 				DBE9EF5019E7EFA200031144 /* UIFont+entourage.m */,
-				6B1A847219E8143F0020FB93 /* NSDictionary+Parsing.h */,
-				6B1A847319E814460020FB93 /* NSDictionary+Parsing.m */,
 				454C8F4B1C4D20EA001362B2 /* UIColor+entourage.h */,
 				454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */,
 				454C8F4E1C4F4C45001362B2 /* UITextField+indentation.h */,
@@ -1209,6 +1219,7 @@
 				0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */,
 				45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */,
 				2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */,
+				45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */,
 				0A70FA321BFF32AD0080E8EC /* OTTourViewController.m in Sources */,
 				45BC9BC91CE26E83000065B7 /* OTEntourageCreatorViewController.m in Sources */,
 				1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */,
@@ -1225,7 +1236,6 @@
 				2EDA5F0E1CB67FFE00849172 /* OTToursMapDelegate.m in Sources */,
 				0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */,
 				2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */,
-				6B1A847419E814460020FB93 /* NSDictionary+Parsing.m in Sources */,
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,

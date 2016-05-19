@@ -106,7 +106,7 @@
 @property (nonatomic, strong) OTToursMapDelegate *toursMapDelegate;
 @property (nonatomic, strong) OTGuideMapDelegate *guideMapDelegate;
 
-@property (nonatomic) EntourageType entourageType;
+@property (nonatomic, strong) NSString *entourageType;
 
 // markers
 @property (nonatomic, strong) NSMutableArray *entourages;
@@ -275,54 +275,7 @@
     return [formatter stringFromDate:date];
 }
 
-//- (void)configureTableView {
-//    
-//    self.tableView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, -TABLEVIEW_FOOTER_HEIGHT, 0.0f);
-//    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableView.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
-//    self.tableView.tableFooterView = dummyView;
-//    
-//    //show map on table header
-//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, MAPVIEW_HEIGHT)];
-//    self.mapView = [[MKMapView alloc] initWithFrame:headerView.bounds];
-//    [headerView addSubview:self.mapView];
-//    [headerView sendSubviewToBack:self.mapView];
-//    [self configureMapView];
-//    
-//    UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156.0f , headerView.frame.size.width + 130.0f, 4.0f)];
-//    CAGradientLayer *gradient = [CAGradientLayer layer];
-//    gradient.frame = shadowView.bounds;
-//    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)([UIColor colorWithRed:0 green:0 blue:0 alpha:.2].CGColor),  nil];
-//    [shadowView.layer insertSublayer:gradient atIndex:1];
-//    [headerView addSubview:shadowView];
-//    
-//    NSDictionary *viewsDictionary = @{@"shadow":shadowView};
-//    NSArray *constraint_height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow(4)]"
-//                                                                         options:0
-//                                                                         metrics:nil
-//                                                                           views:viewsDictionary];
-//    NSArray *constraint_pos_horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-8)-[shadow]-(-8)-|"
-//                                                                             options:0
-//                                                                             metrics:nil
-//                                                                               views:viewsDictionary];
-//    NSArray *constraint_pos_bottom = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow]-0-|"
-//                                                                                   options:0
-//                                                                                   metrics:nil
-//                                                                                     views:viewsDictionary];
-//    shadowView.translatesAutoresizingMaskIntoConstraints = NO;
-//    [shadowView addConstraints:constraint_height];
-//    [headerView addConstraints:constraint_pos_horizontal];
-//    [headerView addConstraints:constraint_pos_bottom];
-//    self.mapView.center = headerView.center;
-//    
-//    UIButton *centerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    centerButton.frame = CENTER_MAP_FRAME;
-//    [centerButton setImage:[UIImage imageNamed:@"center-location"] forState:UIControlStateNormal];
-//    [centerButton addTarget:self action:@selector(zoomToCurrentLocation:) forControlEvents:UIControlEventTouchUpInside];
-//    [headerView addSubview:centerButton];
-//    
-//    self.tableView.tableHeaderView = headerView;
-//    self.tableView.toursDelegate = self;
-//}
+
 
 - (void)configureMapView {
     
@@ -925,7 +878,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)createDemande {
-    self.entourageType = EntourageTypeDemande;
+    self.entourageType = ENTOURAGE_DEMANDE;
     [self dismissViewControllerAnimated:NO completion:^{
         if (self.toursMapDelegate.isActive) {
             [self performSegueWithIdentifier:@"EntourageCreator" sender:nil];
@@ -936,7 +889,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)createContribution {
-    self.entourageType = EntourageTypeContribution;
+    self.entourageType = ENTOURAGE_CONTRIBUTION;
     [self dismissViewControllerAnimated:NO completion:^{
         if (self.toursMapDelegate.isActive) {
             [self performSegueWithIdentifier:@"EntourageCreator" sender:nil];
@@ -1361,10 +1314,13 @@ typedef NS_ENUM(NSInteger) {
         } break;
         case SegueIDEntourageCreator: {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
-            OTEntourageCreatorViewController *controller = (OTEntourageCreatorViewController *)navController.childViewControllers[0];;
+            OTEntourageCreatorViewController *controller = (OTEntourageCreatorViewController *)navController.childViewControllers[0];
             controller.type = self.entourageType;
-            controller.latitude = self.mapView.userLocation.coordinate.latitude;
-            controller.longitude = self.mapView.userLocation.coordinate.longitude;
+            CLLocationDegrees lat = self.mapView.userLocation.coordinate.latitude;
+            CLLocationDegrees lon = self.mapView.userLocation.coordinate.longitude;
+            CLLocation *location = [[CLLocation alloc] initWithLatitude: lat
+                                                              longitude:lon];
+            controller.location = location;
             controller.entourageCreatorDelegate = self;
         } break;
         case SegueIDEntourages: {

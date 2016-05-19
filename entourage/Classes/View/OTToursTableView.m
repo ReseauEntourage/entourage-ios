@@ -253,9 +253,9 @@
     } else {
         OTEntourage *ent = (OTEntourage*)item;
         
-        organizationLabel.text = ent.name;
+        organizationLabel.text = ent.title;
         [typeByNameLabel setupAsTypeByNameFromEntourage:ent];
-        CLLocation *startPointLocation = [[CLLocation alloc] initWithLatitude:ent.latitude.doubleValue longitude:ent.longitude.doubleValue];
+        CLLocation *startPointLocation = ent.location;
         [timeLocationLabel setupWithTime:ent.creationDate andLocation:startPointLocation];
         [userProfileImageButton setupAsProfilePictureFromUrl:ent.author.avatarUrl];
         

@@ -37,14 +37,14 @@ NSString *const kEntourageClusterAnnotationIdentifier = @"OTEntourageClusterAnno
 
 - (CLLocationCoordinate2D)coordinate
 {
-    CLLocationCoordinate2D poiCoordinate = { .latitude =  self.entourage.latitude.doubleValue, .longitude =  self.entourage.longitude.doubleValue };
+    CLLocationCoordinate2D poiCoordinate = { .latitude =  self.entourage.location.coordinate.latitude, .longitude =  self.entourage.location.coordinate.longitude };
     
     return poiCoordinate;
 }
 
 - (NSString *)title
 {
-    return self.entourage.name;
+    return self.entourage.title;
 }
 
 - (NSString *)subtitle

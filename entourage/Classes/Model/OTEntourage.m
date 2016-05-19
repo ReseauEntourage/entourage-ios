@@ -7,74 +7,41 @@
 //
 
 #import "OTEntourage.h"
-#import "NSDictionary+Parsing.h"
-
-#define kWSID @"id"
-#define kWSEntourage @"entourage"
-#define kWSName @"title"
-#define kWSType @"entourage_type"
-#define kWSDescription @"description"
-#define kWSLocation @"location"
-#define kWSLatitude @"latitude"
-#define kWSLongitude @"longitude"
-#define kWSCreateDate @"created_at"
-#define kWSJoinStatus @"join_status"
-#define kWSNoPeople @"number_of_people"
-#define kWSNoUnreadMessages @"number_of_unread_messages"
-#define kWSStatus @"status"
-
+#import "OTConsts.h"
 
 
 
 @implementation OTEntourage
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
-    self = [super init];
+    self = [super initWithDictionary:dictionary];
     if (self) {
-        self.author = [[OTTourAuthor alloc] initWithDictionary:[dictionary objectForKey:@"author"]];
-        self.creationDate =  [dictionary dateForKey:kWSCreateDate format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
-        if (self.creationDate == nil) {
-            // Objective-C format : "2015-11-20 09:28:52 +0000"
-            self.creationDate = [dictionary dateForKey:kWSCreateDate format:@"yyyy-MM-dd HH:mm:ss Z"];
-        }
-        self.type = [ENTOURAGE_DEMANDE isEqualToString:[dictionary valueForKey:kWSType]] ? EntourageTypeDemande : EntourageTypeContribution;
-        self.sid = [dictionary numberForKey:kWSID];
-        self.joinStatus = [dictionary valueForKey:kWSJoinStatus];
-        NSDictionary *locationDictionary = [dictionary objectForKey:kWSLocation];
-        self.latitude = [locationDictionary numberForKey:kWSLatitude];
-        self.longitude = [locationDictionary numberForKey:kWSLongitude];
-        self.noPeople = [dictionary numberForKey:kWSNoPeople];
-        self.noUnreadMessages = [dictionary numberForKey:kWSNoUnreadMessages];
-        self.status = [dictionary valueForKey:kWSStatus];
-        self.name = [dictionary valueForKey:kWSName];
+        self.creationDate = [dictionary dateForKey:kWSKeyCreateDate];
+        self.title = [dictionary valueForKey:kWSKeyTitle];
+        self.location = [dictionary locationForKey:kWSKeyLocation
+                                   withLatitudeKey:kWSKeyLatitude
+                                   andLongitudeKey:kWSKeyLongitude];
+        self.desc = [dictionary valueForKey:kWSKeyDescription];
+        self.type = [dictionary valueForKey:kWSKeyType];
     }
     return self;
 }
 
 
-
-- (NSString *)stringFromType {
-    switch (self.type) {
-        case EntourageTypeDemande:
-            return ENTOURAGE_DEMANDE;
-        case EntourageTypeContribution:
-            return ENTOURAGE_CONTRIBUTION;
-            
-        default:
-            return @"";
-            break;
-    }
-}
-
 - (NSDictionary *)dictionaryForWebService {
-    NSDictionary *dictionary = @{        kWSName: self.name,
-                                         kWSType: [self stringFromType],
+    NSDictionary *dictionary = @{        kWSKeyTitle: self.title,
+                                         kWSType: self.type,
                                          kWSDescription: self.desc,
-                                         kWSLocation: @{
-                                                 kWSLatitude: self.latitude,
-                                                 kWSLongitude: self.longitude}
+                                         kWSKeyLocation: @{
+                                                 kWSKeyLatitude: @(self.location.coordinate.latitude),
+                                                 kWSKeyLongitude: @(self.location.coordinate.longitude)}
                                  };
     return dictionary;
+}
+
+- (NSString *)displayType {
+    NSString *displayString = OTLocalizedString(self.type);
+    return displayString;
 }
 
 

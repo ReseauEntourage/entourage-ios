@@ -19,8 +19,7 @@
 @interface OTEntourageCreatorViewController : UIViewController
 
 @property (nonatomic, weak) id<EntourageCreatorDelegate> entourageCreatorDelegate;
-@property (nonatomic) EntourageType type;
-@property (nonatomic) double latitude;
-@property (nonatomic) double longitude;
+@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) CLLocation *location;
 
 @end

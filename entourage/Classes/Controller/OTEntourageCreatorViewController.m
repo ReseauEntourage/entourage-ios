@@ -33,8 +33,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *typeString = self.type == EntourageTypeDemande ? OTLocalizedString(@"demande") : OTLocalizedString(@"contribution");
-    self.title =  typeString.uppercaseString;
+    
+    self.title =  self.type.uppercaseString;
     
     [self setupCloseModal];
     
@@ -52,15 +52,14 @@
 - (void)setupUI {
     [self.titleTextView         setTextContainerInset:UIEdgeInsetsMake(TEXTVIEW_PADDING_TOP, TEXTVIEW_PADDING, TEXTVIEW_PADDING_BOTTOM, 2*TEXTVIEW_PADDING)];
     [self.descriptionTextView   setTextContainerInset:UIEdgeInsetsMake(TEXTVIEW_PADDING_TOP, TEXTVIEW_PADDING, TEXTVIEW_PADDING_BOTTOM, 2*TEXTVIEW_PADDING)];
-    NSString *typeString = self.type == EntourageTypeDemande ? OTLocalizedString(@"demande") : OTLocalizedString(@"contribution");
+    NSString *typeString = [self.type isEqualToString: ENTOURAGE_DEMANDE] ? OTLocalizedString(@"demande") : OTLocalizedString(@"contribution");
     NSString *titlePlaceholder = [NSString stringWithFormat:OTLocalizedString(@"entourageTitle"), typeString.lowercaseString];
     [self.titleTextView setPlaceholder:titlePlaceholder];
     [self.titleTextView showCharCount];
     [self.descriptionTextView setPlaceholder:OTLocalizedString(@"detailedDescription")];
 
-    CLLocation *loc =  [[CLLocation alloc] initWithLatitude:self.latitude longitude:self.longitude];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+    [geocoder reverseGeocodeLocation:self.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error) {
             NSLog(@"error: %@", error.description);
         }
@@ -77,9 +76,8 @@
 - (void)sendEntourage {
     __block OTEntourage *entourage = [[OTEntourage alloc] init];
     entourage.type = self.type;
-    entourage.latitude = [NSNumber numberWithDouble: self.latitude];
-    entourage.longitude = [NSNumber numberWithDouble:self.longitude];
-    entourage.name = self.titleTextView.text;
+    entourage.location = self.location;
+    entourage.title = self.titleTextView.text;
     entourage.desc = self.descriptionTextView.text;
     
     [[OTEncounterService new] sendEntourage:entourage
