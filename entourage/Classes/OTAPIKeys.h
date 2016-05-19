@@ -11,11 +11,13 @@
 
 // General
 #define kWSKeyID @"id"
+#define kWSKeyData @"data"
+#define kWSKeyType @"type"
+
 
 // FeedItems
 #define kWSKeyJoinStatus @"joinStatus"
 #define kWSKeyStatus @"status"
-#define kWSKeyType @"entourage_type"
 #define kWSKeyNoPeople @"number_of_people"
 #define kWSKeyLocation @"location"
 #define kWSKeyLatitude @"latitude"
@@ -24,11 +26,23 @@
 //Entourage
 #define kWSKeyEntourage @"entourage"
 #define kWSKeyCreateDate @"created_at"
+#define kWSKeyEntourageType @"entourage_type"
+
 #define kWSKeyTitle @"title"
 #define kWSKeyDescription @"description"
 
 // Tour
-#define kWSType @"entourage_type"
+#define kWSKeyTour @"tour"
+#define kWSKeyStartDate @"start_date"
+#define kWSKeyEndDate @"end_date"
+#define kWSKeyTourType @"tour_type"
+#define kWSKeyVehicleType @"vehicle_type"
+#define kWSKeyDistance @"distance"
+#define kWSKeyOrganizationName @"organization_name"
+#define kWSKeyOrganizationDescription @"organization_description"
+#define kWSKeyTourPoints @"tour_points"
+#define kWSKeyNoMessages @"number_of_unread_messages"
+
 #define kWSDescription @"description"
 #define kWSCreateDate @"created_at"
 #define kWSJoinStatus @"join_status"

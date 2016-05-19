@@ -351,7 +351,7 @@
 
 - (void)appWillEnterBackground:(NSNotification*)note {
     if (self.isTourRunning) {
-        [self createLocalNotificationForTour:self.tour.sid];
+        [self createLocalNotificationForTour:self.tour.uid];
     } else {
         [self.locationManager stopUpdatingLocation];
     }
@@ -377,8 +377,8 @@ static BOOL didGetAnyData = NO;
 - (void)refreshMap {
     NSLog(@"Refreshing map ...");
     if (self.toursMapDelegate.isActive) {
-        //[self getTourList];
-        [self getEntourages];
+        [self getTourList];
+        //[self getEntourages];
     }
     else {
         [self getPOIList];
@@ -395,8 +395,8 @@ static BOOL didGetAnyData = NO;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
-    //[self getTourList];
-    [self getEntourages];
+    [self getTourList];
+    //[self getEntourages];
 }
 
 - (void)getEntourages {
@@ -537,7 +537,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)drawTour:(OTTour *)tour {
-    NSLog(@"drawing %@ tour %d with %lu points ... by %@ - %@", tour.vehicleType, tour.sid.intValue, (unsigned long)tour.tourPoints.count, tour.author.displayName, tour.joinStatus);
+    NSLog(@"drawing %@ tour %d with %lu points ... by %@ - %@", tour.vehicleType, tour.uid.intValue, (unsigned long)tour.tourPoints.count, tour.author.displayName, tour.joinStatus);
     CLLocationCoordinate2D coords[[tour.tourPoints count]];
     int count = 0;
     for (OTTourPoint *point in tour.tourPoints) {
@@ -614,8 +614,8 @@ static BOOL didGetAnyData = NO;
              [self.tableView addTours:@[sentTour]];
              [self.tableView reloadData];
              [SVProgressHUD dismiss];
-             self.tour.sid = sentTour.sid;
-             self.tour.distance = 0.0;
+             self.tour.uid = sentTour.uid;
+             self.tour.distance = @0.0;
              
              self.pointerPin.hidden = NO;
              
@@ -623,7 +623,7 @@ static BOOL didGetAnyData = NO;
              self.stopButton.hidden = NO;
              self.createEncounterButton.hidden = NO;
              
-             NSString *snapshotStartFilename = [NSString stringWithFormat:@SNAPSHOT_START, sentTour.sid.intValue];
+             NSString *snapshotStartFilename = [NSString stringWithFormat:@SNAPSHOT_START, sentTour.uid.intValue];
              [self.mapView takeSnapshotToFile:snapshotStartFilename];
              [self showNewTourOnGoing];
              
@@ -661,7 +661,7 @@ static BOOL didGetAnyData = NO;
 - (void)sendTourPoints:(NSMutableArray *)tourPoint {
     __block NSArray *sentPoints = [NSArray arrayWithArray:tourPoint];
     [[OTTourService new] sendTourPoint:tourPoint
-                            withTourId:self.tour.sid
+                            withTourId:self.tour.uid
                            withSuccess:^(OTTour *updatedTour) {
                                [self.pointsToSend removeObjectsInArray:sentPoints];
                            }
@@ -672,7 +672,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)addTourPointFromLocation:(CLLocation *)location {
-    self.tour.distance += [location distanceFromLocation:self.locations.lastObject];
+    self.tour.distance = @(self.tour.distance.doubleValue + [location distanceFromLocation:self.locations.lastObject]);
     OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:location];
     [self.tour.tourPoints addObject:tourPoint];
     [self.pointsToSend addObject:tourPoint];
@@ -805,8 +805,8 @@ static BOOL didGetAnyData = NO;
         return;
     }
     //check if we are stoping the current ongoing tour
-    if (tour != nil && tour.sid != nil) {
-        if (self.tour.sid == nil || ![tour.sid isEqualToNumber:self.tour.sid]) {
+    if (tour != nil && tour.uid != nil) {
+        if (self.tour.uid == nil || ![tour.uid isEqualToNumber:self.tour.uid]) {
             return;
         }
     }
@@ -1009,7 +1009,7 @@ static bool isShowingOptions = NO;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
 
     }];
-    NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tour.sid.intValue];
+    NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotEndFilename];
     
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
@@ -1058,7 +1058,7 @@ static bool isShowingOptions = NO;
     {
         OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
         if (currentUser.sid.intValue == tour.author.uID.intValue) {
-            if (self.isTourRunning && tour.sid.intValue == self.tour.sid.intValue) {
+            if (self.isTourRunning && tour.uid.intValue == self.tour.uid.intValue) {
                 [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
             } else {
                 //TODO: freeze! :D
@@ -1238,7 +1238,7 @@ typedef NS_ENUM(NSInteger) {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
             OTCreateMeetingViewController *controller = (OTCreateMeetingViewController*)navController.topViewController;
             controller.delegate = self;
-            [controller configureWithTourId:self.tour.sid andLocation:self.encounterLocation];
+            [controller configureWithTourId:self.tour.uid andLocation:self.encounterLocation];
             controller.encounters = self.encounters;
         } break;
         case SegueIDConfirmation: {

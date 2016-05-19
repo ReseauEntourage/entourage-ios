@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OTTourAuthor.h"
+#import "OTFeedItem.h"
 
 typedef enum { OTVehiclesFeet=0, OTVehiclesCar=1 } OTVehicles;
 typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTypes;
@@ -22,37 +22,20 @@ typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTyp
 #define TOUR_STATUS_FREEZED @"freezed"
 
 
-@interface OTTour : NSObject
+@interface OTTour : OTFeedItem
 
-/********************************************************************************/
-#pragma mark - Getters and Setters
+@property (nonatomic, strong) NSString *vehicleType;
+@property (nonatomic, strong) NSMutableArray *tourPoints;
+@property (nonatomic, strong) NSString *organizationName;
+@property (nonatomic, strong) NSString *organizationDesc;
+@property (nonatomic, strong) NSDate *endTime;
+@property (nonatomic, strong) NSNumber *distance;
+@property (nonatomic, strong) NSNumber *noMessages;
 
-@property (strong, nonatomic) NSNumber *sid;
-@property (strong, nonatomic) NSNumber *userId;
-@property (strong, nonatomic) NSString *tourType;
-@property (strong, nonatomic) NSString *vehicleType;
-@property (strong, nonatomic) NSString *status;
-@property (strong, nonatomic) NSString *joinStatus;
-@property (strong, nonatomic) NSNumber *noPeople;
-@property (strong, nonatomic) OTTourAuthor *author;
-@property (strong, nonatomic) NSMutableArray *tourPoints;
-@property (strong, nonatomic) NSMutableDictionary *stats;
-@property (strong, nonatomic) NSString *organizationName;
-@property (strong, nonatomic) NSString *organizationDesc;
-@property (strong, nonatomic) NSDate *startTime;
-@property (strong, nonatomic) NSDate *endTime;
-@property (nonatomic) float distance;
+- (instancetype)initWithTourType:(NSString *)tourType andVehicleType:(NSString *)vehicleType;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)dictionaryForWebService;
 
-/********************************************************************************/
-#pragma mark - Birth & Death
-
-- (id)initWithTourType:(NSString *)tourType andVehicleType:(NSString *)vehicleType;
-+ (OTTour *)tourWithJSONDictionary:(NSDictionary *)dictionary;
 + (UIColor *)colorForTourType:(NSString*)tourType;
-- (NSDictionary *)dictionaryForWebserviceTour;
-- (NSDictionary *)dictionaryForWebserviceTourPoints;
-
-/********************************************************************************/
-#pragma mark - Utils
 
 @end

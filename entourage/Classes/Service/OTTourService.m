@@ -46,7 +46,7 @@ NSString *const kEntourages = @"entourages";
 {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_tour", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
-    parameters[kTour] = [tour dictionaryForWebserviceTour];
+    parameters[kTour] = [tour dictionaryForWebService];
     NSLog(@"Request to create tour %@...", parameters);
     NSLog(@"requestdetails: %@", tour.debugDescription);
     [[OTHTTPRequestManager sharedInstance]
@@ -58,7 +58,7 @@ NSString *const kEntourages = @"entourages";
              if (success)
              {
                  OTTour *updatedTour = [self tourFromDictionary:responseObject];
-                 NSLog(@"... created tour %d", updatedTour.sid.intValue);
+                 NSLog(@"... created tour %d", updatedTour.uid.intValue);
                  NSLog(@"responsedetails: %@", updatedTour.debugDescription);
                  
                  success(updatedTour);
@@ -77,9 +77,9 @@ NSString *const kEntourages = @"entourages";
       withSuccess:(void (^)(OTTour *))success
           failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_close_tour", @""), kAPITourRoute, [tour sid], [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_close_tour", @""), kAPITourRoute, [tour uid], [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
-    parameters[kTour] = [tour dictionaryForWebserviceTour];
+    parameters[kTour] = [tour dictionaryForWebService];
     
     [[OTHTTPRequestManager sharedInstance]
          PUTWithUrl:url
@@ -196,7 +196,7 @@ NSString *const kEntourages = @"entourages";
             failure:(void (^)(NSError *)) failure
 {
     
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_messages", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_messages", @""), kTours, tour.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
     
     NSDictionary *messageDictionary = @{@"chat_message" : @{@"content": message}};
 
@@ -230,7 +230,7 @@ NSString *const kEntourages = @"entourages";
                failure:(void (^)(NSError *))failure
 {
 
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
     
     [[OTHTTPRequestManager sharedInstance]
              GETWithUrl:url
@@ -318,7 +318,7 @@ NSString *const kEntourages = @"entourages";
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure {
     
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_messages", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_messages", @""), kTours, tour.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
     
     [[OTHTTPRequestManager sharedInstance]
          GETWithUrl:url
@@ -347,7 +347,7 @@ NSString *const kEntourages = @"entourages";
              success:(void (^)(NSArray *))success
              failure:(void (^)(NSError *))failure {
     
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_encounters", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_encounters", @""), kTours, tour.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
     
     [[OTHTTPRequestManager sharedInstance]
          GETWithUrl:url
@@ -377,7 +377,7 @@ NSString *const kEntourages = @"entourages";
          success:(void(^)(OTTourJoiner *))success
          failure:(void (^)(NSError *)) failure {
     
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.sid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSDictionary *parameters = @{@"request":@{@"message":message}};
     parameters = nil; //TODO: remove on version 1.2
     NSLog(@"Join request: %@", url);
@@ -410,7 +410,7 @@ NSString *const kEntourages = @"entourages";
          success:(void (^)())success
          failure:(void (^)(NSError *error))failure {
    
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_quit_tour", @""), kTours, tour.sid, [[NSUserDefaults standardUserDefaults] currentUser].sid, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_quit_tour", @""), kTours, tour.uid, [[NSUserDefaults standardUserDefaults] currentUser].sid, [[NSUserDefaults standardUserDefaults] currentUser].token];
     
     [[OTHTTPRequestManager sharedInstance]
          DELETEWithUrl:url
@@ -491,7 +491,7 @@ NSString *const kEntourages = @"entourages";
     
     if ([jsonTour isKindOfClass:[NSDictionary class]])
     {
-        tour = [OTTour tourWithJSONDictionary:jsonTour];
+        tour = [[OTTour alloc] initWithDictionary:jsonTour];
     }
     return tour;
 }
@@ -505,7 +505,7 @@ NSString *const kEntourages = @"entourages";
     {
         for (NSDictionary *dictionary in jsonTours)
         {
-            OTTour *tour = [OTTour tourWithJSONDictionary:dictionary];
+            OTTour *tour = [[OTTour alloc] initWithDictionary:dictionary];
             if (tour)
             {
                 [tours addObject:tour];

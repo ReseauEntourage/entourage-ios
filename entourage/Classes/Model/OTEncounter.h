@@ -20,6 +20,6 @@
 @property (strong, nonatomic) NSString *message;
 
 + (OTEncounter *)encounterWithJSONDictionary:(NSDictionary *)dictionary;
-- (NSDictionary *)dictionaryForWebservice;
+- (NSDictionary *)dictionaryForWebService;
 
 @end

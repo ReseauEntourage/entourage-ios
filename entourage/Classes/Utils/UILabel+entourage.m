@@ -20,7 +20,7 @@
 - (void)setupWithTypeAndAuthorOfTour:(OTTour*)tour {
     OTTourAuthor *author = tour.author;
     
-    NSString *tourType = tour.tourType;
+    NSString *tourType = tour.type;
     if ([tourType isEqualToString:@"barehands"]) {
         tourType = @"sociale";
     } else     if ([tourType isEqualToString:@"medical"]) {
@@ -81,9 +81,9 @@
     
     // dateString - location
     NSString *dateString = nil;
-    if (tour.startTime != nil) {
+    if (tour.creationDate != nil) {
         TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
-        NSTimeInterval timeInterval = [tour.startTime timeIntervalSinceDate:[NSDate date]];
+        NSTimeInterval timeInterval = [tour.creationDate timeIntervalSinceDate:[NSDate date]];
         [timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
         dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
         self.text = dateString;

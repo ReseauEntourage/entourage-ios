@@ -11,7 +11,7 @@
 #import "NSDictionary+Parsing.h"
 
 
-@class OTTourAuthor;
+#import "OTTourAuthor.h"
 
 @interface OTFeedItem : NSObject
 

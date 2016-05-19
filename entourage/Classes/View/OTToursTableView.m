@@ -157,11 +157,11 @@
         [self.tours replaceObjectAtIndex:oldTourIndex withObject:tour];
         return;
     }
-    if (tour.startTime != nil) {
+    if (tour.creationDate != nil) {
         for (NSUInteger i = 0; i < [self.tours count]; i++) {
             OTTour* internalTour = self.tours[i];
-            if (internalTour.startTime != nil) {
-                if ([internalTour.startTime compare:tour.startTime] == NSOrderedAscending) {
+            if (internalTour.creationDate != nil) {
+                if ([internalTour.creationDate compare:tour.creationDate] == NSOrderedAscending) {
                     [self.tours insertObject:tour atIndex:i];
                     return;
                 }
@@ -173,7 +173,7 @@
 
 - (void)removeTour:(OTTour*)tour {
     for (OTTour* internalTour in self.tours) {
-        if ([internalTour.sid isEqualToNumber:tour.sid]) {
+        if ([internalTour.uid isEqualToNumber:tour.uid]) {
             [self.tours removeObject:internalTour];
             return;
         }
@@ -229,7 +229,7 @@
         //[timeLocationLabel setupWithTimeAndLocationOfTour:tour];
         OTTourPoint *startPoint = tour.tourPoints.firstObject;
         CLLocation *startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
-        [timeLocationLabel setupWithTime:tour.startTime andLocation:startPointLocation];
+        [timeLocationLabel setupWithTime:tour.creationDate andLocation:startPointLocation];
 
         
        
