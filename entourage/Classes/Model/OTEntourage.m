@@ -9,8 +9,6 @@
 #import "OTEntourage.h"
 #import "OTConsts.h"
 
-
-
 @implementation OTEntourage
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {

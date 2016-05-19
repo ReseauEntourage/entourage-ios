@@ -53,6 +53,7 @@
 #import "OTTourService.h"
 #import "OTAuthService.h"
 #import "OTPOIService.h"
+#import "OTFeedsService.h"
 
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
@@ -100,7 +101,6 @@
 @property (nonatomic, weak) IBOutlet OTToursTableView *tableView;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
-@property (nonatomic, weak) IBOutlet UIImageView *pointerPin;
 @property (nonatomic) CLLocationCoordinate2D encounterLocation;
 
 @property (nonatomic, strong) OTToursMapDelegate *toursMapDelegate;
@@ -223,9 +223,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(refreshMap) userInfo:nil repeats:YES];
+    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getData) userInfo:nil repeats:YES];
     [self.refreshTimer fire];
-    [self refreshMap];
+    //[self refreshMap];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -235,12 +235,10 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.refreshTimer invalidate];
-//    if (_isTourRunning)
-//        [self createLocalNotificationForTour:self.tour.sid];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	[self refreshMap];
+	[self getData];
 	[[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
 }
 
@@ -373,11 +371,10 @@
 
 
 static BOOL didGetAnyData = NO;
-- (void)refreshMap {
-    NSLog(@"Refreshing map ...");
+- (void)getData {
+    NSLog(@"Getting new data ...");
     if (self.toursMapDelegate.isActive) {
-        [self getTourList];
-        //[self getEntourages];
+        [self getFeeds];
     }
     else {
         [self getPOIList];
@@ -394,11 +391,52 @@ static BOOL didGetAnyData = NO;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
-    [self getTourList];
-    //[self getEntourages];
+    [self getFeeds];
 }
 
-- (void)getEntourages {
+- (void) getFeeds {
+    NSLog(@"Getting feeds ...");
+    __block CLLocationCoordinate2D oldRequestedCoordinate;
+    oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
+    oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
+    self.requestedToursCoordinate = self.mapView.centerCoordinate;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+ 
+    NSDictionary *filterDictionary =@{  @"per": @20,
+                                        @"latitude": @(self.requestedToursCoordinate.latitude),
+                                        @"longitude": @(self.requestedToursCoordinate.longitude),
+                                        @"distance": @TOURS_REQUEST_DISTANCE_KM};
+    
+    [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
+                                            success:^(NSMutableArray *feeds) {
+                                                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                NSLog(@"Got %lu feed items.", (unsigned long)feeds.count);
+                                                
+                                                NSLog(@"got tours list");
+                                                if (feeds.count && !didGetAnyData) {
+                                                    [self showToursList];
+                                                    didGetAnyData = YES;
+                                                }
+                                                [self.indicatorView setHidden:YES];
+//                                                self.tours = closeTours;
+//                                                [self.tableView removeAll];
+//                                                [self.tableView addTours:closeTours];
+//                                                [self feedMapViewWithTours];
+                                                [self.tableView reloadData];
+
+                                                
+                                            } failure:^(NSError *error) {
+                                                NSLog(@"Error getting feeds: %@", error.description);
+                                                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                self.requestedToursCoordinate = oldRequestedCoordinate;
+                                                [self registerObserver];
+                                                [self.indicatorView setHidden:YES];
+                                            }];
+}
+
+
+- (void)getEntourages __attribute__((deprecated("Please use getFeeds instead"))){
+    
     NSLog(@"Getting entourages list ...");
     __block CLLocationCoordinate2D oldRequestedCoordinate;
     oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
@@ -420,7 +458,9 @@ static BOOL didGetAnyData = NO;
 }
 
 
-- (void)getTourList {
+
+- (void)  getTourList __attribute__((deprecated("Please use getFeeds instead")))
+{
     NSLog(@"Getting tours list ...");
     __block CLLocationCoordinate2D oldRequestedCoordinate;
     oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
@@ -615,9 +655,6 @@ static BOOL didGetAnyData = NO;
              [SVProgressHUD dismiss];
              self.tour.uid = sentTour.uid;
              self.tour.distance = @0.0;
-             
-             self.pointerPin.hidden = NO;
-             
              
              self.stopButton.hidden = NO;
              self.createEncounterButton.hidden = NO;
@@ -817,15 +854,13 @@ static BOOL didGetAnyData = NO;
     [self.pointsToSend removeAllObjects];
     [self.encounters removeAllObjects];
     
-    self.pointerPin.hidden = YES;
     self.launcherButton.hidden = NO;
     self.stopButton.hidden = YES;
     self.createEncounterButton.hidden = YES;
     self.isTourRunning = NO;
     self.requestedToursCoordinate = CLLocationCoordinate2DMake(0.0f, 0.0f);
     [self clearMap];
-    //[self showToursList];
-    [self refreshMap];
+    [self getData];
 }
 
 - (void)resumeTour {
