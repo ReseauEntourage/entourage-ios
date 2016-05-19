@@ -8,6 +8,10 @@
 
 #import "OTTourJoinRequestViewController.h"
 #import "OTTourService.h"
+#import "OTEntourageService.h"
+#import "OTTour.h"
+#import "OTEntourage.h"
+
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
 
@@ -73,19 +77,33 @@
     NSString *message = self.greetingMessage.text;
     if (!message)
         message = @"";
+    if ([self.feedItem isKindOfClass:[OTTour class]]) {
     
-    [[OTTourService new] joinTour:self.tour
-                      withMessage:message
-                          success:^(OTTourJoiner *joiner) {
-                              NSLog(@"sent request to join tour %@: %@", self.tour.uid, message);
-                              self.tour.joinStatus = @"pending";
-                          }
-                          failure:^(NSError *error) {
-                              NSLog(@"failed joining tour %@ with error %@", self.tour.uid, error.description);
-                              [self dismissViewControllerAnimated:YES completion:^{
-                                  [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
+        [[OTTourService new] joinTour:(OTTour*)self.feedItem
+                          withMessage:message
+                              success:^(OTTourJoiner *joiner) {
+                                  NSLog(@"sent request to join tour %@: %@", self.feedItem.uid, message);
+                                  self.feedItem.joinStatus = @"pending";
+                              }
+                              failure:^(NSError *error) {
+                                  NSLog(@"failed joining tour %@ with error %@", self.feedItem.uid, error.description);
+                                  [self dismissViewControllerAnimated:YES completion:^{
+                                      [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
+                                  }];
                               }];
-                          }];
+    }
+    else if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
+        [[OTEntourageService new] joinEntourage:(OTEntourage*)self.feedItem
+                                        success:^(OTTourJoiner *joiner) {
+                                            NSLog(@"sent request to join tour %@: %@", self.feedItem.uid, message);
+                                            self.feedItem.joinStatus = @"pending";
+                                        } failure:^(NSError *error) {
+                                            NSLog(@"failed joining tour %@ with error %@", self.feedItem.uid, error.description);
+                                            [self dismissViewControllerAnimated:YES completion:^{
+                                                [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
+                                            }];
+                                        }];
+    }
 
     
     if ([self.tourJoinRequestDelegate respondsToSelector:@selector(dismissTourJoinRequestController)]) {

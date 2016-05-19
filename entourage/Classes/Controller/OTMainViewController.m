@@ -1234,7 +1234,7 @@ typedef NS_ENUM(NSInteger) {
             OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)destinationViewController;
             controller.view.backgroundColor = [UIColor appModalBackgroundColor];
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-            controller.tour = (OTTour*)self.selectedFeedItem;
+            controller.feedItem = self.selectedFeedItem;
             controller.tourJoinRequestDelegate = self;
         } break;
         case SegueIDQuitTour: {

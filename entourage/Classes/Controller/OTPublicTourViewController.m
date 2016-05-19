@@ -113,7 +113,7 @@
         OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
         controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        controller.tour = self.tour;
+        controller.feedItem = self.tour;
         controller.tourJoinRequestDelegate = self;
     }
     else if ([segue.identifier isEqualToString:@"OTUserProfileSegue"]) {
