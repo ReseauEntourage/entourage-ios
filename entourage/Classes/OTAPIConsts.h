@@ -9,13 +9,7 @@
 #ifndef OTAPIConsts_h
 #define OTAPIConsts_h
 
-#define TOKEN [[NSUserDefaults standardUserDefaults] currentUser].token
-
-// Feeds
-#define API_URL_FEEDS    @"feeds?token=%@"
-
 // Entourages
-#define API_URL_ENTOURAGES @"entourages?token=%@"
 
 #define API_URL_ENTOURAGES @"entourages?token=%@"
 //&latitude=%f&longitude=%f"

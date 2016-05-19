@@ -27,7 +27,7 @@
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 
 - (IBAction)zoomToCurrentLocation:(id)sender;
-- (void)getData;
+- (void)refreshMap;
 - (void)didChangePosition;
 
 - (void)displayEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view;

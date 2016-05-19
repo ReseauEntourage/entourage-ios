@@ -13,7 +13,6 @@
 #define kWSKeyID @"id"
 #define kWSKeyData @"data"
 #define kWSKeyType @"type"
-#define kWSKeyFeeds @"feeds"
 
 
 // FeedItems

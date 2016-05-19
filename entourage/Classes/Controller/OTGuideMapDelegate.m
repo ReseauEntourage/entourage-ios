@@ -98,7 +98,7 @@
     
     CLLocationDistance distance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(_currentMapCenter), MKMapPointForCoordinate(mapView.centerCoordinate))) / 1000.0f;
     if (distance > [self mapHeight:mapView]) {
-        [self.mapController getData];
+        [self.mapController refreshMap];
         self.currentMapCenter = mapView.centerCoordinate;
     }
 }
