@@ -12,7 +12,6 @@
 #import "OTMessageViewController.h"
 #import "OTLoginViewController.h"
 #import "OTStartupViewController.h"
-#import "OTTourService.h"
 #import "OTTourViewController.h"
 #import "SWRevealViewController.h"
 
@@ -20,8 +19,11 @@
 #import "SimpleKeychain.h"
 #import "AFNetworkActivityLogger.h"
 #import "SVProgressHUD.h"
+
 // Service
 #import "OTAuthService.h"
+#import "OTTourService.h"
+#import "OTEntourageService.h"
 
 // Util
 #import "UIFont+entourage.h"
@@ -213,32 +215,60 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         tourId = joinableId;
     }
 
+    // Reject join
+    void(^rejectBlock)(UIAlertAction * _Nonnull action) = ^void(UIAlertAction * _Nonnull action) {
+        if ([@"Tour" isEqualToString:joinableType]) {
+            [[OTTourService new] rejectTourJoinRequestForUser:userId
+                                                      forTour:joinableId
+                                                  withSuccess:^() {
+                                                      NSLog(@"Rejected user's join request.");
+                                                  } failure:^(NSError *error) {
+                                                      NSLog(@"Something went wrong on user rejection: %@", error.description);
+                                                  }];
+        }
+        else if ([@"Entourage" isEqualToString:joinableType]) {
+            [[OTEntourageService new] rejectEntourageJoinRequestForUser:userId
+                                                           forEntourage:joinableId
+                                                            withSuccess:^{
+                                                                NSLog(@"Rejected user's join request to entourage.");
+                                                            } failure:^(NSError *error) {
+                                                                NSLog(@"Something went wrong on user rejection: %@", error.description);
+                                                            }];
+        }
+    };
     
     UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:@"Refuser"
                                                                       style:UIAlertActionStyleDefault
-                                                                    handler:^(UIAlertAction * _Nonnull action) {
-                                                                            [[OTTourService new] rejectTourJoinRequestForUser:userId
-                                                                                                                      forTour:tourId
-                                                                                                                  withSuccess:^() {
-                                                                                                                      NSLog(@"Rejected user's join request.");
-                                                                                                                  } failure:^(NSError *error) {
-                                                                                                                      NSLog(@"Something went wrong on user rejection: %@", error.description);
-                                                                                                                  }];
-                                                                    }
+                                                                    handler:rejectBlock
                                               ];
     
+    // Accept join
+    void(^acceptBlock)(UIAlertAction * _Nonnull action) = ^void(UIAlertAction * _Nonnull action) {
+        if ([@"Tour" isEqualToString:joinableType]) {
+            [[OTTourService new] updateTourJoinRequestStatus:@"accepted"
+                                                     forUser:userId
+                                                     forTour:joinableId
+                                                 withSuccess:^{
+                                                     NSLog(@"Accepted user's join request.");                                                                                                                 }
+                                                     failure:^(NSError * error) {
+                                                         NSLog(@"Something went wrong on user acceptance: %@", error.description);
+                                                     }];
+        }
+        else if ([@"Entourage" isEqualToString:joinableType]) {
+            [[OTEntourageService new] updateEntourageJoinRequestStatus:@"accepted"
+                                                               forUser:userId
+                                                          forEntourage:joinableId
+                                                           withSuccess:^{
+                                                               NSLog(@"Accepted user's entourage join request.");
+                                                           } failure:^(NSError *error) {
+                                                               NSLog(@"Something went wrong on user acceptance: %@", error.description);
+                                                           }];
+        }
+
+    };
     UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:@"Accepter"
                                                                       style:UIAlertActionStyleDefault
-                                                                    handler:^(UIAlertAction * _Nonnull action) {
-                                                                        [[OTTourService new] updateTourJoinRequestStatus:@"accepted"
-                                                                                                                 forUser:userId
-                                                                                                                 forTour:tourId
-                                                                                                             withSuccess:^{
-                                                                                                                 NSLog(@"Accepted user's join request.");                                                                                                                 }
-                                                                                                                 failure:^(NSError * error) {
-                                                                                                                     NSLog(@"Something went wrong on user acceptance: %@", error.description);
-                                                                                                                 }];
-                                                                    }
+                                                                    handler:acceptBlock
                                               ];
     [alert addAction:refuseJoinRequestAction];
     [alert addAction:acceptJoinRequestAction];
