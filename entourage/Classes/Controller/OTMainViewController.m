@@ -109,7 +109,6 @@
 @property (nonatomic, strong) NSString *entourageType;
 
 // markers
-@property (nonatomic, strong) NSMutableArray *entourages;
 
 @property (nonatomic, strong) NSMutableArray *encounters;
 @property (nonatomic, strong) WYPopoverController *popover;
@@ -133,7 +132,6 @@
 @property (nonatomic, strong) NSMutableArray *feeds;
 
 // tours
-//@property (nonatomic, strong) NSMutableArray *tours;
 @property (nonatomic, strong) OTToursTableView *toursTableView;
 @property (nonatomic) CLLocationCoordinate2D requestedToursCoordinate;
 @property (nonatomic, strong) NSTimer *refreshTimer;
@@ -175,7 +173,6 @@
     self.locations = [NSMutableArray new];
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
-    self.entourages = [NSMutableArray new];
     self.markers = [NSMutableArray new];
     
     self.toursMapDelegate = [[OTToursMapDelegate alloc] initWithMapController:self];
@@ -403,7 +400,7 @@ static BOOL didGetAnyData = NO;
     self.requestedToursCoordinate = self.mapView.centerCoordinate;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
  
-    NSDictionary *filterDictionary =@{  @"per": @20,
+    NSDictionary *filterDictionary = @{  @"per": @20,
                                         @"latitude": @(self.requestedToursCoordinate.latitude),
                                         @"longitude": @(self.requestedToursCoordinate.longitude),
                                         @"distance": @TOURS_REQUEST_DISTANCE_KM};
@@ -420,8 +417,8 @@ static BOOL didGetAnyData = NO;
                                                 [self.indicatorView setHidden:YES];
                                                 self.feeds = feeds;
                                                 [self.tableView removeAll];
-                                                [self.tableView addTours:feeds];
-                                                [self feedMapViewWithTours];
+//                                                [self.tableView addTours:feeds];
+//                                                [self feedMapViewWithTours];
                                                 [self.tableView reloadData];
                                             } failure:^(NSError *error) {
                                                 NSLog(@"Error getting feeds: %@", error.description);
@@ -463,6 +460,24 @@ static BOOL didGetAnyData = NO;
         [self.clusteringController refresh:YES force:YES];
     }
 }
+- (void)feedMapViewWithTours {
+    self.toursMapDelegate.drawnTours = [[NSMapTable alloc] init];
+    if (self.toursMapDelegate.isActive) {
+        for (OTTour *tour in self.feeds) {
+            
+            [self drawTour:tour];
+        }
+    }
+}
+
+- (void)feedMapWithFeedItems {
+    if (self.toursMapDelegate.isActive) {
+        NSMutableArray *annotations = [NSMutableArray new];
+        self.toursMapDelegate.drawnTours = [[NSMapTable alloc] init];
+        
+    }
+}
+
 
 - (void)feedMapViewWithEncounters {
     if (self.toursMapDelegate.isActive) {
@@ -477,14 +492,6 @@ static BOOL didGetAnyData = NO;
     }
 }
 
-- (void)feedMapViewWithTours {
-    self.toursMapDelegate.drawnTours = [[NSMapTable alloc] init];
-    if (self.toursMapDelegate.isActive) {
-        for (OTTour *tour in self.feeds) {
-            [self drawTour:tour];
-        }
-    }
-}
 
 - (void)feedMapViewWithPoiArray:(NSArray *)array {
     if (self.guideMapDelegate.isActive) {
