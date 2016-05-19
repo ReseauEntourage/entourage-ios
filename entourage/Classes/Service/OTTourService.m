@@ -31,9 +31,6 @@ NSString *const kMessages = @"chat_messages";
 NSString *const kWSKeyEncounters = @"encounters";
 NSString *const kTourPoints = @"tour_points";
 
-NSString *const kEntourages = @"entourages";
-
-
 
 @implementation  OTTourService
 

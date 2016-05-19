@@ -11,7 +11,10 @@
 
 // Entourages
 
-#define API_URL_ENTOURAGES @"entourages?token=%@" 
+#define API_URL_ENTOURAGES @"entourages?token=%@"
 //&latitude=%f&longitude=%f"
+#define API_URL_ENTOURAGE_JOIN_REQUEST @"entourages/%@?token=%@"
+#define API_URL_ENTOURAGE_JOIN_UPDATE @"entourages/%@/users/%@?token=%@"
+
 
 #endif /* OTAPIConsts_h */

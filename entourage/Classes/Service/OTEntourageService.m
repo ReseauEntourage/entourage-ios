@@ -13,44 +13,20 @@
 // Models
 #import "OTUser.h"
 #import "OTEntourage.h"
+#import "OTTourJoiner.h"
 
 // Helpers
 #import "NSUserDefaults+OT.h"
+
+/**************************************************************************************************/
+#pragma mark - Constants
+
+NSString *const kEntourages = @"entourages";
 
 @implementation OTEntourageService
 
 /**************************************************************************************************/
 #pragma mark - Public methods
-
-- (void)entouragesWithStatus:(NSString *)entouragesStatus
-                     success:(void (^)(NSArray *))success
-                     failure:(void (^)(NSError *))failure
-{
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_entourages", @""), [[NSUserDefaults standardUserDefaults] currentUser].token, entouragesStatus];
-    NSLog(@"requesting entourages %@ with parameters %@ ...", url, @"0");
-    
-    [[OTHTTPRequestManager sharedInstance]
-     GETWithUrl:url
-     andParameters:nil
-     andSuccess:^(id responseObject)
-     {
-         NSDictionary *data = responseObject;
-         NSMutableArray *tours = [self toursFromDictionary:data];
-         NSLog(@"received %lu ent", (unsigned long)tours.count);
-         if (success)
-         {
-             success(tours);
-         }
-     }
-     andFailure:^(NSError *error)
-     {
-         if (failure)
-         {
-             failure(error);
-         }
-     }
-     ];
-}
 
 - (void)entouragesAroundCoordinate:(CLLocationCoordinate2D)coordinate
                            success:(void (^)(NSArray *))success
@@ -71,6 +47,96 @@
          if (success)
          {
              success(entourages);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }
+     ];
+}
+
+- (void)joinEntourage:(OTEntourage *)entourage
+              success:(void(^)(OTTourJoiner *))success
+              failure:(void (^)(NSError *)) failure
+{
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_REQUEST, entourage.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSDictionary *parameters = nil;
+    NSLog(@"Join request: %@", url);
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         NSDictionary *joinerDictionary = [data objectForKey:@"user"];
+         OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
+         
+         if (success)
+         {
+             success(joiner);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }
+     ];
+}
+
+- (void)updateEntourageJoinRequestStatus:(NSString *)status
+                                 forUser:(NSNumber*)userID
+                            forEntourage:(NSNumber*)entourageID
+                             withSuccess:(void (^)())success
+                                 failure:(void (^)(NSError *))failure
+{
+    
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, entourageID, userID, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSDictionary *parameters = @{@"user":@{@"status":status}};
+    
+    [[OTHTTPRequestManager sharedInstance]
+     PUTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             success();
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }
+     ];
+}
+
+- (void)rejectEntourageJoinRequestForUser:(NSNumber*)userID
+                             forEntourage:(NSNumber*)entourageID
+                              withSuccess:(void (^)())success
+                                  failure:(void (^)(NSError *))failure
+{
+    
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, entourageID, userID, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     DELETEWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             success();
          }
      }
      andFailure:^(NSError *error)
