@@ -130,9 +130,10 @@
 @property (nonatomic, weak) IBOutlet UIButton *stopButton;
 @property (nonatomic, weak) IBOutlet UIButton *createEncounterButton;
 
+@property (nonatomic, strong) NSMutableArray *feeds;
 
 // tours
-@property (nonatomic, strong) NSMutableArray *tours;
+//@property (nonatomic, strong) NSMutableArray *tours;
 @property (nonatomic, strong) OTToursTableView *toursTableView;
 @property (nonatomic) CLLocationCoordinate2D requestedToursCoordinate;
 @property (nonatomic, strong) NSTimer *refreshTimer;
@@ -412,19 +413,16 @@ static BOOL didGetAnyData = NO;
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                 NSLog(@"Got %lu feed items.", (unsigned long)feeds.count);
                                                 
-                                                NSLog(@"got tours list");
                                                 if (feeds.count && !didGetAnyData) {
                                                     [self showToursList];
                                                     didGetAnyData = YES;
                                                 }
                                                 [self.indicatorView setHidden:YES];
-//                                                self.tours = closeTours;
-//                                                [self.tableView removeAll];
-//                                                [self.tableView addTours:closeTours];
-//                                                [self feedMapViewWithTours];
+                                                self.feeds = feeds;
+                                                [self.tableView removeAll];
+                                                [self.tableView addTours:feeds];
+                                                [self feedMapViewWithTours];
                                                 [self.tableView reloadData];
-
-                                                
                                             } failure:^(NSError *error) {
                                                 NSLog(@"Error getting feeds: %@", error.description);
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -432,81 +430,6 @@ static BOOL didGetAnyData = NO;
                                                 [self registerObserver];
                                                 [self.indicatorView setHidden:YES];
                                             }];
-}
-
-
-- (void)getEntourages __attribute__((deprecated("Please use getFeeds instead"))){
-    
-    NSLog(@"Getting entourages list ...");
-    __block CLLocationCoordinate2D oldRequestedCoordinate;
-    oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
-    oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
-    self.requestedToursCoordinate = self.mapView.centerCoordinate;
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[OTTourService new] entouragesAroundCoordinate:self.mapView.centerCoordinate
-                                            success:^(NSArray *entourages) {
-                                                self.entourages = entourages.mutableCopy;
-                                                [self.tableView removeAll];
-                                                [self.tableView addEntourages:entourages];
-                                                [self feedMapViewWithEntourages];
-                                                [self.tableView reloadData];
-                                                 [self.indicatorView setHidden:YES];
-                                            } failure:^(NSError *error) {
-                                                NSLog(@"Error getting entourages: %@", error.description);
-                                                 [self.indicatorView setHidden:YES];
-                                            }];
-}
-
-
-
-- (void)  getTourList __attribute__((deprecated("Please use getFeeds instead")))
-{
-    NSLog(@"Getting tours list ...");
-    __block CLLocationCoordinate2D oldRequestedCoordinate;
-    oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
-    oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
-    self.requestedToursCoordinate = self.mapView.centerCoordinate;
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[OTTourService new] toursAroundCoordinate:self.mapView.centerCoordinate
-                                         limit:@20
-                                      distance:@TOURS_REQUEST_DISTANCE_KM //*[NSNumber numberWithDouble:[self mapHeight]]
-                                       success:^(NSMutableArray *closeTours)
-                                             {
-                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                 
-                                                 NSLog(@"got tours list");
-                                                 if (closeTours.count && !didGetAnyData) {
-                                                     [self showToursList];
-                                                     didGetAnyData = YES;
-                                                 }
-                                                 [self.indicatorView setHidden:YES];
-                                                 self.tours = closeTours;
-                                                 [self.tableView removeAll];
-                                                 [self.tableView addTours:closeTours];
-                                                 [self feedMapViewWithTours];
-                                                 [self.tableView reloadData];
-                                             }
-                                       failure:^(NSError *error) {
-                                           [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                           self.requestedToursCoordinate = oldRequestedCoordinate;
-                                           [self registerObserver];
-                                           [self.indicatorView setHidden:YES];
-                                       }];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"user_tours_only"]) {
-        [[OTTourService new] toursByUserId:[[NSUserDefaults standardUserDefaults] currentUser].sid
-                            withPageNumber:@1
-                          andNumberPerPage:@50
-                                   success:^(NSMutableArray *userTours) {
-                                       [self.indicatorView setHidden:YES];
-                                       self.tours = userTours;
-                                       [self.tableView addTours:userTours];
-                                       [self feedMapViewWithTours];
-                                       [self.tableView reloadData];
-                                   } failure:^(NSError *error) {
-                                       [self registerObserver];
-                                       [self.indicatorView setHidden:YES];
-                                   }];
-    }
 }
 
 - (void)getPOIList {
@@ -557,7 +480,7 @@ static BOOL didGetAnyData = NO;
 - (void)feedMapViewWithTours {
     self.toursMapDelegate.drawnTours = [[NSMapTable alloc] init];
     if (self.toursMapDelegate.isActive) {
-        for (OTTour *tour in self.tours) {
+        for (OTTour *tour in self.feeds) {
             [self drawTour:tour];
         }
     }
@@ -642,14 +565,11 @@ static BOOL didGetAnyData = NO;
 - (void)sendTour {
     [SVProgressHUD showWithStatus:OTLocalizedString(@"tour_create_sending")];
     
-    //[self createMapSnapshot];
-    
-    
     [[OTTourService new]
-         sendTour:self.tour
-         withSuccess:^(OTTour *sentTour) {
+        sendTour:self.tour
+     withSuccess:^(OTTour *sentTour) {
              
-             [self.tours addObject:sentTour];
+             [self.feeds addObject:sentTour];
              [self.tableView addTours:@[sentTour]];
              [self.tableView reloadData];
              [SVProgressHUD dismiss];
@@ -670,10 +590,7 @@ static BOOL didGetAnyData = NO;
              if ([self.pointsToSend count] > 0) {
                  [self performSelector:@selector(sendTourPoints:) withObject:self.pointsToSend afterDelay:0.0];
              }
-            
-             
-             //[self createLocalNotificationForTour:self.tour.sid];
-        } failure:^(NSError *error) {
+     } failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"tour_create_error", @"")];
             NSLog(@"%@",[error localizedDescription]);
         }
@@ -751,7 +668,6 @@ static BOOL didGetAnyData = NO;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     for (CLLocation *newLocation in locations) {
-        //NSLog(@"LOC %.4f, %.4f of %lu", newLocation.coordinate.latitude, newLocation.coordinate.longitude, (unsigned long)locations.count);
         
         //Negative accuracy means invalid coordinates
         if (newLocation.horizontalAccuracy < 0) {
@@ -766,8 +682,6 @@ static BOOL didGetAnyData = NO;
             CLLocation *previousLocation = self.locations.lastObject;
             distance = [newLocation distanceFromLocation:previousLocation];
         }
-        
-        //NSLog(@"distance = %.0f howRecent = %.2f accuracy = %.2f", distance, fabs(howRecent), newLocation.horizontalAccuracy);
         
         if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20 && fabs(distance) > LOCATION_MIN_DISTANCE) {
             
@@ -935,8 +849,8 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)togglePOI {
-    [self dismissViewControllerAnimated:NO completion:^{
-        //[self performSegueWithIdentifier:@"GuideSegue" sender:nil];
+    [self dismissViewControllerAnimated:NO
+                             completion:^{
         if (self.toursMapDelegate.isActive) {
             [self switchToGuide];
         } else {
@@ -1158,12 +1072,6 @@ static bool isShowingOptions = NO;
 
 }
 
-//#pragma mark 6.3 Tours long press on map
-//- (void)showMapOverlayToCreateTourAtPoint:(CGPoint)point {
-//    self.launcherButton.hidden = NO;
-//    [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
-//}
-
 #pragma mark 6.4 Tours "+" press
 - (void)showMapOverlayToCreateTour {
     self.launcherButton.hidden = NO;
@@ -1187,7 +1095,6 @@ static bool isShowingOptions = NO;
 
 - (void)showTourConfirmation {
     NSLog(@"showing tour confirmation");
-    
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
 }
 
