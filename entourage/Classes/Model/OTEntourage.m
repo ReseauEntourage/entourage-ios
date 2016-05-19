@@ -22,7 +22,7 @@
                                    withLatitudeKey:kWSKeyLatitude
                                    andLongitudeKey:kWSKeyLongitude];
         self.desc = [dictionary valueForKey:kWSKeyDescription];
-        self.type = [dictionary valueForKey:kWSKeyType];
+        self.type = [dictionary valueForKey:kWSKeyEntourageType];
     }
     return self;
 }
@@ -30,7 +30,7 @@
 
 - (NSDictionary *)dictionaryForWebService {
     NSDictionary *dictionary = @{        kWSKeyTitle: self.title,
-                                         kWSType: self.type,
+                                         kWSKeyEntourageType: self.type,
                                          kWSDescription: self.desc,
                                          kWSKeyLocation: @{
                                                  kWSKeyLatitude: @(self.location.coordinate.latitude),
@@ -43,6 +43,5 @@
     NSString *displayString = OTLocalizedString(self.type);
     return displayString;
 }
-
 
 @end

@@ -41,8 +41,8 @@
 - (void)configureWithTours:(NSMutableArray *)closeTours {
     self.tableData = closeTours;
     self.tableData = (NSMutableArray *)[self.tableData sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        NSDate *first = [(OTTour *)a startTime];
-        NSDate *second = [(OTTour *)b startTime];
+        NSDate *first = [(OTTour *)a creationDate];
+        NSDate *second = [(OTTour *)b creationDate];
         return [second compare:first];
     }];
 }
@@ -67,20 +67,20 @@
     
     cell.textLabel.text = tour.organizationName;
     NSString *type;
-    if ([tour.tourType isEqualToString:@"barehands"]) {
+    if ([tour.type isEqualToString:@"barehands"]) {
         cell.imageView.image = [UIImage imageNamed:@"ic_bare_hands.png"];
         type = @"A mains nues";
     }
-    else if ([tour.tourType isEqualToString:@"medical"]) {
+    else if ([tour.type isEqualToString:@"medical"]) {
         cell.imageView.image = [UIImage imageNamed:@"ic_medical.png"];
         type = @"Médical";
     }
-    else if ([tour.tourType isEqualToString:@"alimentary"]) {
+    else if ([tour.type isEqualToString:@"alimentary"]) {
         cell.imageView.image = [UIImage imageNamed:@"ic_alimentary.png"];
         type = @"Alimentaire";
     }
-    if (tour.startTime != nil) {
-        NSString *date = [self formatDateForDisplay:tour.startTime];
+    if (tour.creationDate != nil) {
+        NSString *date = [self formatDateForDisplay:tour.creationDate];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", date, type];
     } else {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", @"--/--/---", type];

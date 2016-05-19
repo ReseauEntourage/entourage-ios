@@ -66,7 +66,7 @@
 //    
     OTTourPoint *startPoint = self.tour.tourPoints.firstObject;
     CLLocation *startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
-    [self.timeLocationLabel setupWithTime:self.tour.startTime andLocation:startPointLocation];
+    [self.timeLocationLabel setupWithTime:self.tour.creationDate andLocation:startPointLocation];
     
     [self.userProfileImageButton addTarget:self action:@selector(doShowProfile) forControlEvents:UIControlEventTouchUpInside];
     [self.userProfileImageButton setupAsProfilePictureFromUrl:self.tour.author.avatarUrl];

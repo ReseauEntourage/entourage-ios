@@ -43,7 +43,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.encountersLabel.text = [NSString stringWithFormat:@"%@", self.encountersCount];
-    self.distanceLabel.text = [self stringFromFloatDistance:(self.tour.distance)];
+    self.distanceLabel.text = [self stringFromFloatDistance:(self.tour.distance.floatValue)];
     self.durationLabel.text = [self stringFromTimeInterval:(self.duration)];
 }
 
@@ -57,7 +57,7 @@
 - (void)configureWithTour:(OTTour *)currentTour andEncountersCount:(NSNumber *)encountersCount {
     self.tour = currentTour;
     self.encountersCount = encountersCount;
-    self.duration = [[NSDate date] timeIntervalSinceDate:self.tour.startTime];
+    self.duration = [[NSDate date] timeIntervalSinceDate:self.tour.creationDate];
 }
 
 /**************************************************************************************************/

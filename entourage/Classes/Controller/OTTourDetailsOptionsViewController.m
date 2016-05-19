@@ -67,7 +67,7 @@
     self.tour.status = TOUR_STATUS_FREEZED;
     [[OTTourService new] closeTour:self.tour
                        withSuccess:^(OTTour *updatedTour) {
-                           NSLog(@"freezed tour: %@", updatedTour.sid);
+                           NSLog(@"freezed tour: %@", updatedTour.uid);
                            [self dismissViewControllerAnimated:YES completion:nil];
                        } failure:^(NSError *error) {
                            NSLog(@"FREEZEerr %@", error.description);
@@ -78,7 +78,7 @@
     
     [[OTTourService new] closeTour:self.tour
                           withSuccess:^(OTTour *updatedTour) {
-                              NSLog(@"Closed tour: %@", updatedTour.sid);
+                              NSLog(@"Closed tour: %@", updatedTour.uid);
                               //[self dismissViewControllerAnimated:YES completion:nil];
                               [self.delegate promptToCloseTour];
                           } failure:^(NSError *error) {
@@ -89,7 +89,7 @@
 - (IBAction)doQuitTour {
     [[OTTourService new] quitTour:self.tour
                           success:^() {
-                                NSLog(@"Quited tour: %@", self.tour.sid);
+                                NSLog(@"Quited tour: %@", self.tour.uid);
                                 [self dismissViewControllerAnimated:YES completion:nil];
                         } failure:^(NSError *error) {
                                 NSLog(@"QUITerr %@", error.description);

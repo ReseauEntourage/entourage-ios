@@ -32,7 +32,7 @@ NSString *const kEncounter = @"encounter";
 {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_encounter", @""), kAPITourRoute, tourId, kAPIEncounterRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
-    parameters[kEncounter] = [encounter dictionaryForWebservice];
+    parameters[kEncounter] = [encounter dictionaryForWebService];
     
     [[OTHTTPRequestManager sharedInstance]
      POSTWithUrl:url

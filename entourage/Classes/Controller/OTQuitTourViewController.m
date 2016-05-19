@@ -14,7 +14,7 @@
 - (IBAction)doQuitTour {
     [[OTTourService new] quitTour:self.tour
                           success:^() {
-                              NSLog(@"Quited tour: %@", self.tour.sid);
+                              NSLog(@"Quited tour: %@", self.tour.uid);
                               self.tour.joinStatus = @"not_requested";
                               //[self dismissViewControllerAnimated:YES completion:nil];
                               [self.tourQuitDelegate didQuitTour];

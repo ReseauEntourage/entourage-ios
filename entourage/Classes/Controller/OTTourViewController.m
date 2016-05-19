@@ -200,7 +200,7 @@ typedef NS_ENUM(unsigned) {
     self.timelinePoints = [[NSMutableArray alloc] init];
     
     OTTourStatus *tourStartStatus = [[OTTourStatus alloc] init];
-    tourStartStatus.date = self.tour.startTime;
+    tourStartStatus.date = self.tour.creationDate;
     tourStartStatus.type = OTTourStatusStart;
     tourStartStatus.status = @"Maraude en cours";
     tourStartStatus.duration = 0;
@@ -213,8 +213,8 @@ typedef NS_ENUM(unsigned) {
         tourEndStatus.date = self.tour.endTime;
         tourStartStatus.type = OTTourStatusEnd;
         tourEndStatus.status = @"Maraude terminée";
-        tourEndStatus.duration = [self.tour.endTime timeIntervalSinceDate:self.tour.startTime];;
-        tourEndStatus.distance = self.tour.distance;
+        tourEndStatus.duration = [self.tour.endTime timeIntervalSinceDate:self.tour.creationDate];;
+        tourEndStatus.distance = self.tour.distance.doubleValue;
         //[self.timelinePoints addObject:tourStartStatus];
         [self updateTableViewAddingTimelinePoints:@[tourEndStatus]];
     }
@@ -557,7 +557,7 @@ typedef NS_ENUM(unsigned) {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *snapshotFormat = statusPoint.type == OTTourStatusStart ? @SNAPSHOT_START : @SNAPSHOT_STOP;
-    NSString *snapshotStartFilename = [NSString stringWithFormat:snapshotFormat, self.tour.sid.intValue];
+    NSString *snapshotStartFilename = [NSString stringWithFormat:snapshotFormat, self.tour.uid.intValue];
     NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:snapshotStartFilename];
     UIImage *image = [UIImage imageWithContentsOfFile:filePath];
     
@@ -588,7 +588,7 @@ typedef NS_ENUM(unsigned) {
     organizationLabel.text = self.tour.organizationName;
     
     
-    NSString *tourType = self.tour.tourType;
+    NSString *tourType = self.tour.type;
     if ([tourType isEqualToString:@"barehands"]) {
         tourType = @"sociale";
     } else     if ([tourType isEqualToString:@"medical"]) {

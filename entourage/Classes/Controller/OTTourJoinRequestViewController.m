@@ -77,11 +77,11 @@
     [[OTTourService new] joinTour:self.tour
                       withMessage:message
                           success:^(OTTourJoiner *joiner) {
-                              NSLog(@"sent request to join tour %@: %@", self.tour.sid, message);
+                              NSLog(@"sent request to join tour %@: %@", self.tour.uid, message);
                               self.tour.joinStatus = @"pending";
                           }
                           failure:^(NSError *error) {
-                              NSLog(@"failed joining tour %@ with error %@", self.tour.sid, error.description);
+                              NSLog(@"failed joining tour %@ with error %@", self.tour.uid, error.description);
                               [self dismissViewControllerAnimated:YES completion:^{
                                   [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
                               }];
