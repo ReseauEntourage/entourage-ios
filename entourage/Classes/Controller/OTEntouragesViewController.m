@@ -207,7 +207,7 @@ typedef NS_ENUM(NSInteger){
                                    }
                                    if (userTours == nil || userTours.count == 0) return;
                                    if (requestedStatus != self.statusSC.selectedSegmentIndex) return;
-                                   [self.tableView addFeedItems:userTours];
+                                   [self.tableView addTours:userTours];
                                    [self.tableView reloadData];
                                }
                                failure:^(NSError *error) {
@@ -236,13 +236,13 @@ typedef NS_ENUM(NSInteger){
     [self.tableView removeAll];
     switch (segControl.selectedSegmentIndex) {
         case EntourageStatusOpen:
-            [self.tableView addFeedItems:self.openToursPagination.tours];
+            [self.tableView addTours:self.openToursPagination.tours];
             break;
         case EntourageStatusClosed:
-            [self.tableView addFeedItems:self.closedToursPagination.tours];
+            [self.tableView addTours:self.closedToursPagination.tours];
             break;
         case EntourageStatusFreezed:
-            [self.tableView addFeedItems:self.freezedToursPagination.tours];
+            [self.tableView addTours:self.freezedToursPagination.tours];
             break;
             
         default:
@@ -257,7 +257,7 @@ typedef NS_ENUM(NSInteger){
 /**************************************************************************************************/
 #pragma mark - OTToursTableViewDelegate
 
-- (void)showFeedInfo:(OTTour*)tour {
+- (void)showTourInfo:(OTTour*)tour {
     if ([tour.joinStatus isEqualToString:@"accepted"]) {
         [self performSegueWithIdentifier:@"OTSelectedTourSegue" sender:tour];
     }
@@ -297,11 +297,11 @@ typedef NS_ENUM(NSInteger){
                                        [self.freezedToursPagination.tours addObject:tour];
                                        NSInteger selectedSegmentIndex = self.statusSC.selectedSegmentIndex;
                                        if (selectedSegmentIndex == EntourageStatusClosed) {
-                                           [self.tableView removeFeedItem:tour];
+                                           [self.tableView removeTour:tour];
                                            [self.tableView reloadData];
                                        }
                                        else if (selectedSegmentIndex == EntourageStatusFreezed) {
-                                           [self.tableView addFeedItem:tour];
+                                           [self.tableView addTour:tour];
                                            [self.tableView reloadData];
                                        }
                                    } failure:^(NSError *error) {
@@ -330,11 +330,11 @@ typedef NS_ENUM(NSInteger){
     [self.closedToursPagination.tours addObject:tour];
     NSInteger selectedSegmentIndex = self.statusSC.selectedSegmentIndex;
     if (selectedSegmentIndex == EntourageStatusOpen) {
-        [self.tableView removeFeedItem:tour];
+        [self.tableView removeTour:tour];
         [self.tableView reloadData];
     }
     else if (selectedSegmentIndex == EntourageStatusClosed) {
-        [self.tableView addFeedItem:tour];
+        [self.tableView addTour:tour];
         [self.tableView reloadData];
     }
     if (self.mainViewController != nil && [self.mainViewController respondsToSelector:@selector(tourSent:)]) {

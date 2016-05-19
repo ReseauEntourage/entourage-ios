@@ -443,7 +443,7 @@ static BOOL didGetAnyData = NO;
                                                  [self.indicatorView setHidden:YES];
                                                  self.tours = closeTours;
                                                  [self.tableView removeAll];
-                                                 [self.tableView addFeedItems:closeTours];
+                                                 [self.tableView addTours:closeTours];
                                                  [self feedMapViewWithTours];
                                                  [self.tableView reloadData];
                                              }
@@ -460,7 +460,7 @@ static BOOL didGetAnyData = NO;
                                    success:^(NSMutableArray *userTours) {
                                        [self.indicatorView setHidden:YES];
                                        self.tours = userTours;
-                                       [self.tableView addFeedItems:userTours];
+                                       [self.tableView addTours:userTours];
                                        [self feedMapViewWithTours];
                                        [self.tableView reloadData];
                                    } failure:^(NSError *error) {
@@ -611,7 +611,7 @@ static BOOL didGetAnyData = NO;
          withSuccess:^(OTTour *sentTour) {
              
              [self.tours addObject:sentTour];
-             [self.tableView addFeedItems:@[sentTour]];
+             [self.tableView addTours:@[sentTour]];
              [self.tableView reloadData];
              [SVProgressHUD dismiss];
              self.tour.uid = sentTour.uid;
@@ -1019,7 +1019,7 @@ static bool isShowingOptions = NO;
 /**************************************************************************************************/
 #pragma mark - Tours Table View Delegate
 
-- (void)showFeedInfo:(OTTour*)tour {
+- (void)showTourInfo:(OTTour*)tour {
     self.selectedTour = tour;
     
     if ([self.selectedTour.joinStatus isEqualToString:@"accepted"]) {
@@ -1286,7 +1286,7 @@ typedef NS_ENUM(NSInteger) {
             OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)destinationViewController;
             controller.view.backgroundColor = [UIColor appModalBackgroundColor];
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-            controller.feedItem = self.selectedTour;
+            controller.tour = self.selectedTour;
             controller.tourJoinRequestDelegate = self;
         } break;
         case SegueIDQuitTour: {

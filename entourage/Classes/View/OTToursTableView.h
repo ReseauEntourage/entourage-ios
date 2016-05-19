@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@class OTFeedItem;
+@class OTTour;
 
 @protocol OTToursTableViewDelegate <NSObject>
 
-- (void)showFeedInfo:(OTFeedItem*)feedItem;
+- (void)showTourInfo:(OTTour*)tour;
 - (void)showUserProfile:(NSNumber*)userId;
-- (void)doJoinRequest:(OTFeedItem*)feedItem;
+- (void)doJoinRequest:(OTTour*)tour;
 @optional
 - (void)loadMoreTours;
 
@@ -27,9 +27,9 @@
 
 - (void)configureWithMapView:(MKMapView *)mapView;
 
-- (void)addFeedItems:(NSArray*)feedItems;
-- (void)addFeedItem:(OTFeedItem*)feedItem;
-- (void)removeFeedItem:(OTFeedItem*)feedItem;
+- (void)addTours:(NSArray*)tours;
+- (void)addTour:(OTTour*)tour;
+- (void)removeTour:(OTTour*)tour;
 - (void)removeAll;
 
 - (void)addEntourages:(NSArray*)entourages;
