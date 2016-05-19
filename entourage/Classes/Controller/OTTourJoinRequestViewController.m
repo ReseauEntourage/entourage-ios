@@ -8,6 +8,8 @@
 
 #import "OTTourJoinRequestViewController.h"
 #import "OTTourService.h"
+#import "OTTour.h"
+
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
 
@@ -74,18 +76,21 @@
     if (!message)
         message = @"";
     
-    [[OTTourService new] joinTour:self.tour
-                      withMessage:message
-                          success:^(OTTourJoiner *joiner) {
-                              NSLog(@"sent request to join tour %@: %@", self.tour.uid, message);
-                              self.tour.joinStatus = @"pending";
-                          }
-                          failure:^(NSError *error) {
-                              NSLog(@"failed joining tour %@ with error %@", self.tour.uid, error.description);
-                              [self dismissViewControllerAnimated:YES completion:^{
-                                  [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
+    if ([self.feedItem isKindOfClass:[OTTour class]]) {
+    
+        [[OTTourService new] joinTour:(OTTour*)self.feedItem
+                          withMessage:message
+                              success:^(OTTourJoiner *joiner) {
+                                  NSLog(@"sent request to join tour %@: %@", self.feedItem.uid, message);
+                                  self.feedItem.joinStatus = @"pending";
+                              }
+                              failure:^(NSError *error) {
+                                  NSLog(@"failed joining tour %@ with error %@", self.feedItem.uid, error.description);
+                                  [self dismissViewControllerAnimated:YES completion:^{
+                                      [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
+                                  }];
                               }];
-                          }];
+    }
 
     
     if ([self.tourJoinRequestDelegate respondsToSelector:@selector(dismissTourJoinRequestController)]) {

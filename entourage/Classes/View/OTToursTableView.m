@@ -40,7 +40,7 @@
 
 @interface OTToursTableView () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *tours;
+@property (nonatomic, strong) NSMutableArray *feedItems;
 
 @end
 
@@ -134,61 +134,61 @@
 /********************************************************************************/
 #pragma mark - Tour list handlind
 
-- (NSMutableArray*)tours {
-    if (_tours == nil) {
-        _tours = [[NSMutableArray alloc] init];
+- (NSMutableArray*)feedItems {
+    if (_feedItems == nil) {
+        _feedItems = [[NSMutableArray alloc] init];
     }
-    return _tours;
+    return _feedItems;
 }
 
 - (void)addEntourages:(NSArray*)entourages {
-    [self.tours addObjectsFromArray:entourages];
+    [self.feedItems addObjectsFromArray:entourages];
 }
 
-- (void)addTours:(NSArray*)tours {
-    for (OTTour* tour in tours) {
-        [self addTour:tour];
+- (void)addFeedItems:(NSArray*)feedItems {
+    for (OTFeedItem* feedItem in feedItems) {
+        [self addFeedItem:feedItem];
     }
 }
 
-- (void)addTour:(OTTour*)tour {
-    NSUInteger oldTourIndex = [self.tours indexOfObject:tour];
-    if (oldTourIndex != NSNotFound) {
-        [self.tours replaceObjectAtIndex:oldTourIndex withObject:tour];
+- (void)addFeedItem:(OTFeedItem *)feedItem {
+    NSUInteger oldFeedIndex = [self.feedItems indexOfObject:feedItem];
+    if (oldFeedIndex != NSNotFound) {
+        [self.feedItems replaceObjectAtIndex:oldFeedIndex withObject:feedItem];
         return;
     }
-    if (tour.creationDate != nil) {
-        for (NSUInteger i = 0; i < [self.tours count]; i++) {
-            OTTour* internalTour = self.tours[i];
-            if (internalTour.creationDate != nil) {
-                if ([internalTour.creationDate compare:tour.creationDate] == NSOrderedAscending) {
-                    [self.tours insertObject:tour atIndex:i];
+    if (feedItem.creationDate != nil) {
+        for (NSUInteger i = 0; i < [self.feedItems count]; i++) {
+            OTTour* internalFeedItem = self.feedItems[i];
+            if (internalFeedItem.creationDate != nil) {
+                if ([internalFeedItem.creationDate compare:feedItem.creationDate] == NSOrderedAscending) {
+                    [self.feedItems insertObject:feedItem atIndex:i];
                     return;
                 }
             }
         }
     }
-    [self.tours addObject:tour];
+    [self.feedItems addObject:feedItem];
 }
 
-- (void)removeTour:(OTTour*)tour {
-    for (OTTour* internalTour in self.tours) {
-        if ([internalTour.uid isEqualToNumber:tour.uid]) {
-            [self.tours removeObject:internalTour];
+- (void)removeFeedItem:(OTFeedItem*)feedItem; {
+    for (OTTour* internalFeedItem in self.feedItems) {
+        if ([internalFeedItem.uid isEqualToNumber:feedItem.uid]) {
+            [self.feedItems removeObject:internalFeedItem];
             return;
         }
     }
 }
 
 - (void)removeAll {
-    [self.tours removeAllObjects];
+    [self.feedItems removeAllObjects];
 }
 
 /********************************************************************************/
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.tours.count;
+    return self.feedItems.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -208,7 +208,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
     
-    id item = self.tours[indexPath.section];
+    id item = self.feedItems[indexPath.section];
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
     UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
     UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
@@ -245,7 +245,7 @@
         [statusLabel setupWithStatus:tour.status andJoinStatus:tour.joinStatus];
         
         //check if we need to load more data
-        if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.tours.count) {
+        if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
             if (self.toursDelegate && [self.toursDelegate respondsToSelector:@selector(loadMoreTours)]) {
                 [self.toursDelegate loadMoreTours];
             }
@@ -272,13 +272,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    id item = self.tours[indexPath.section];
+    id item = self.feedItems[indexPath.section];
     if ([item isKindOfClass:[OTEntourage class]])
         return;
     //TODO: handle Entourages
-    OTTour *selectedTour = (OTTour*)self.tours[indexPath.section];
-    if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(showTourInfo:)]) {
-        [self.toursDelegate showTourInfo:selectedTour];
+    OTTour *selectedTour = (OTTour*)self.feedItems[indexPath.section];
+    if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(showFeedInfo:)]) {
+        [self.toursDelegate showFeedInfo:selectedTour];
     }
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }
@@ -310,20 +310,20 @@
 - (void)doShowProfile:(UIButton*)userButton {
     UITableViewCell *cell = (UITableViewCell*)userButton.superview.superview;
     NSInteger index = [self indexPathForCell:cell].section;
-    OTTour *selectedTour = self.tours[index];
+    OTFeedItem *selectedFeedItem = self.feedItems[index];
     
     if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(showUserProfile:)]) {
-        [self.toursDelegate showUserProfile:selectedTour.author.uID];
+        [self.toursDelegate showUserProfile:selectedFeedItem.author.uID];
     }
 }
 
 - (void)doJoinRequest:(UIButton*)statusButton {
     UITableViewCell *cell = (UITableViewCell*)statusButton.superview.superview;
     NSInteger index = [self indexPathForCell:cell].section;
-    OTTour *selectedTour = self.tours[index];
+    OTFeedItem *selectedFeedItem = self.feedItems[index];
     
     if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(doJoinRequest:)]) {
-        [self.toursDelegate doJoinRequest:selectedTour];
+        [self.toursDelegate doJoinRequest:selectedFeedItem];
     }
 }
 
