@@ -54,6 +54,7 @@
 #import "OTAuthService.h"
 #import "OTPOIService.h"
 #import "OTEntourageService.h"
+#import "OTFeedsService.h"
 
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
@@ -605,8 +606,8 @@ static BOOL didGetAnyData = NO;
         sendTour:self.tour
      withSuccess:^(OTTour *sentTour) {
              
-             [self.tours addObject:sentTour];
-             [self.tableView addFeedItems:@[sentTour]];
+             [self.feeds addObject:sentTour];
+             [self.tableView addTours:@[sentTour]];
              [self.tableView reloadData];
              [SVProgressHUD dismiss];
              self.tour.uid = sentTour.uid;
