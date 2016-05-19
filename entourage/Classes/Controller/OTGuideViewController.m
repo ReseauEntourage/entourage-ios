@@ -317,6 +317,7 @@
 /**************************************************************************************************/
 #pragma mark - Actions
 
+
 - (IBAction)zoomToCurrentLocation:(id)sender {
     float spanX = 0.01;
     float spanY = 0.01;

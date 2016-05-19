@@ -101,6 +101,9 @@
 		45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A711C56961500F68C24 /* Intro.storyboard */; };
 		45E267821C860239004D14EB /* OTTourJoinRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */; };
 		45E37E531CEE1F7D005C3175 /* OTFeedsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E521CEE1F7D005C3175 /* OTFeedsService.m */; };
+		45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E551CEE5C3F005C3175 /* OTToolbar.m */; };
+		45E37E591CEE64F7005C3175 /* OTFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E581CEE64F7005C3175 /* OTFiltersViewController.m */; };
+		45E37E5C1CEE657A005C3175 /* Filters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E37E5A1CEE657A005C3175 /* Filters.storyboard */; };
 		45E6BFCF1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */; };
 		45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */; };
 		45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */; };
@@ -310,6 +313,11 @@
 		45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoinRequestViewController.m; sourceTree = "<group>"; };
 		45E37E511CEE1F7D005C3175 /* OTFeedsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedsService.h; sourceTree = "<group>"; };
 		45E37E521CEE1F7D005C3175 /* OTFeedsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedsService.m; sourceTree = "<group>"; };
+		45E37E541CEE5C3F005C3175 /* OTToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToolbar.h; sourceTree = "<group>"; };
+		45E37E551CEE5C3F005C3175 /* OTToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTToolbar.m; sourceTree = "<group>"; };
+		45E37E571CEE64F7005C3175 /* OTFiltersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFiltersViewController.h; sourceTree = "<group>"; };
+		45E37E581CEE64F7005C3175 /* OTFiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFiltersViewController.m; sourceTree = "<group>"; };
+		45E37E5B1CEE657A005C3175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Filters.storyboard; sourceTree = "<group>"; };
 		45E6BFCD1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourDetailsOptionsViewController.h; sourceTree = "<group>"; };
 		45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourDetailsOptionsViewController.m; sourceTree = "<group>"; };
 		45E6FE121CAE42E700505660 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourConfirmation.storyboard; sourceTree = "<group>"; };
@@ -558,6 +566,7 @@
 			children = (
 				45CE5A711C56961500F68C24 /* Intro.storyboard */,
 				45CE5A631C5242FC00F68C24 /* Main.storyboard */,
+				45E37E5A1CEE657A005C3175 /* Filters.storyboard */,
 				45BC9BCD1CE32AE1000065B7 /* EntourageCreator.storyboard */,
 				4507017D1CCF494800432548 /* TourJoinRequest.storyboard */,
 				4507017A1CCF459B00432548 /* TourCreator.storyboard */,
@@ -881,6 +890,8 @@
 				45BC9BD01CE363D5000065B7 /* OTTextView.m */,
 				45391A011CEBA89100C93908 /* OTEntourageAnnotation.h */,
 				45391A021CEBA89100C93908 /* OTEntourageAnnotation.m */,
+				45E37E541CEE5C3F005C3175 /* OTToolbar.h */,
+				45E37E551CEE5C3F005C3175 /* OTToolbar.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -891,6 +902,8 @@
 				6B4930C819A773C500DA7EE0 /* OTMainViewController.h */,
 				6B4930C919A773C500DA7EE0 /* OTMainViewController.m */,
 				2EDA5F0B1CB67F4000849172 /* MapDelegate */,
+				45E37E571CEE64F7005C3175 /* OTFiltersViewController.h */,
+				45E37E581CEE64F7005C3175 /* OTFiltersViewController.m */,
 				A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */,
 				A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */,
 				1D3BD36A19E964FC001687F9 /* OTMeetingCalloutViewController.h */,
@@ -1075,6 +1088,7 @@
 				45CE5A5E1C5241AA00F68C24 /* MankSans.ttf in Resources */,
 				4507017E1CCF494800432548 /* TourJoinRequest.storyboard in Resources */,
 				45CE5A561C5241AA00F68C24 /* Blokletters-Balpen.ttf in Resources */,
+				45E37E5C1CEE657A005C3175 /* Filters.storyboard in Resources */,
 				45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */,
 				45CE5A5A1C5241AA00F68C24 /* Calibri.ttf in Resources */,
 				4507017C1CCF459B00432548 /* TourCreator.storyboard in Resources */,
@@ -1214,6 +1228,7 @@
 				456ABD801CA18416004A81D6 /* UILabel+entourage.m in Sources */,
 				0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */,
 				DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */,
+				45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */,
 				A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */,
 				45F443471C9314A800DDEBE1 /* OTTourStatus.m in Sources */,
 				0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */,
@@ -1262,6 +1277,7 @@
 				456ABD7D1CA15F2D004A81D6 /* OTPublicTourViewController.m in Sources */,
 				4525EB371CA5DFE1006784E6 /* NSBundle+entourage.m in Sources */,
 				456ABD831CA18DB5004A81D6 /* UIButton+entourage.m in Sources */,
+				45E37E591CEE64F7005C3175 /* OTFiltersViewController.m in Sources */,
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */,
 				2EDA5F071CB50CEE00849172 /* OTToursTableView.m in Sources */,
@@ -1361,6 +1377,14 @@
 				45CE5A641C5242FC00F68C24 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		45E37E5A1CEE657A005C3175 /* Filters.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45E37E5B1CEE657A005C3175 /* Base */,
+			);
+			name = Filters.storyboard;
 			sourceTree = "<group>";
 		};
 		45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */ = {

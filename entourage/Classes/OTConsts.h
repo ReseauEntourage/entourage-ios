@@ -17,6 +17,8 @@
 
 #endif
 
+
+
 #define API_KEY @"fbe5b5e0bd4ec94146b3dc9b"
 
 #define PARIS_LAT 48.856578
@@ -28,8 +30,10 @@
 
 
 #define kNotificationPushStatusChanged @"NotificationAPNSStatusChanged"
-
 #define kNotificationLocalTourConfirmation "NotificationShowTourConfirmation"
+
+#define kNotificationShowFilters "NotificationShowFilter"
+#define kNotificationShowCurrentLocation "NotificationCurrentLocation"
 
 #define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"

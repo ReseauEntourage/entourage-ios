@@ -74,7 +74,7 @@
 "contribution" = "Contribution";
 "detailedDescription" = "Description détaillée";
 
-
+"filters" = "filters";
 // Tour
 "tour_type_bare_hands" = "barehands";
 "tour_type_medical" = "medical";

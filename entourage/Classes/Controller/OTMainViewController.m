@@ -41,6 +41,7 @@
 // View
 #import "SVProgressHUD.h"
 #import "OTToursTableView.h"
+#import "OTToolbar.h"
 
 // Model
 #import "OTUser.h"
@@ -93,7 +94,7 @@
 
 @interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTTourQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate>
 
-@property (nonatomic, weak) IBOutlet UIToolbar *footerToolbar;
+@property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
 // map
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
@@ -152,24 +153,6 @@
     [super viewDidLoad];
     [self configureNavigationBar];
     
-    
-    //    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"geoloc"]
-    //                                                            style:UIBarButtonItemStylePlain
-    //                                                           target:self
-    //                                                           action:nil];
-    //
-    //    [self.footerToolbar setItems:@[bbi]];
-    
-    
-    
-    //    UILabel*footerLabel =  (UILabel*)self.footerToolbar.items[3];
-    //    footerLabel.textColor = [UIColor appGreyishBrownColor];
-    //    footerLabel.font = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
-    
-    //    UIFont *toolbarFont = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
-    //    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor appGreyishBrownColor],
-    //                                                                        NSFontAttributeName : toolbarFont }
-    //                                                 forState:UIControlStateNormal];
     self.locations = [NSMutableArray new];
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
@@ -181,6 +164,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTourConfirmation) name:@kNotificationLocalTourConfirmation object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFilters) name:@kNotificationShowFilters object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
+    
+    
     
     //[self configureTableView];
     self.mapView = [[MKMapView alloc] init];
@@ -223,7 +211,6 @@
     [super viewWillAppear:animated];
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getData) userInfo:nil repeats:YES];
     [self.refreshTimer fire];
-    //[self refreshMap];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -301,9 +288,6 @@
     [chatButton setTarget:self];
     [chatButton setAction:@selector(showEntourages)];
     [self setupLogoImage];
-    
-    //footer toolbar
-    
 }
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
@@ -925,6 +909,11 @@ static BOOL didGetAnyData = NO;
 
 /**************************************************************************************************/
 #pragma mark - Actions
+
+- (void)showFilters {
+    [self performSegueWithIdentifier:@"FiltersSegue" sender:self];
+}
+
 
 - (IBAction)zoomToCurrentLocation:(id)sender {
     
