@@ -417,7 +417,7 @@ static BOOL didGetAnyData = NO;
                                                 [self.indicatorView setHidden:YES];
                                                 self.feeds = feeds;
                                                 [self.tableView removeAll];
-                                                //                                                [self.tableView addTours:feeds];
+                                                [self.tableView addFeedItems:feeds];
                                                 //                                                [self feedMapViewWithTours];
                                                 [self.tableView reloadData];
                                             } failure:^(NSError *error) {
@@ -577,7 +577,7 @@ static BOOL didGetAnyData = NO;
      withSuccess:^(OTTour *sentTour) {
          
          [self.feeds addObject:sentTour];
-         [self.tableView addTours:@[sentTour]];
+         [self.tableView addFeedItems:@[sentTour]];
          [self.tableView reloadData];
          [SVProgressHUD dismiss];
          self.tour.uid = sentTour.uid;
@@ -974,10 +974,10 @@ static bool isShowingOptions = NO;
 /**************************************************************************************************/
 #pragma mark - Tours Table View Delegate
 
-- (void)showTourInfo:(OTTour*)tour {
-    self.selectedTour = tour;
+- (void)showFeedInfo:(OTFeedItem *)feedItem {
+    self.selectedFeedItem = feedItem;
     
-    if ([self.selectedTour.joinStatus isEqualToString:@"accepted"]) {
+    if ([self.selectedFeedItem.joinStatus isEqualToString:@"accepted"]) {
         [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
     }
     else
@@ -998,27 +998,27 @@ static bool isShowingOptions = NO;
     
 }
 
-- (void)doJoinRequest:(OTTour*)tour {
-    self.selectedTour = tour;
+- (void)doJoinRequest:(OTFeedItem*)feedItem {
+    self.selectedFeedItem = feedItem;
     
-    if ([tour.joinStatus isEqualToString:@"not_requested"])
+    if ([feedItem.joinStatus isEqualToString:@"not_requested"])
     {
         [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
     }
-    else  if ([tour.joinStatus isEqualToString:@"pending"])
+    else  if ([feedItem.joinStatus isEqualToString:@"pending"])
     {
         [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:nil];
     }
     else
     {
         OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-        if (currentUser.sid.intValue == tour.author.uID.intValue) {
-            if (self.isTourRunning && tour.uid.intValue == self.tour.uid.intValue) {
+        if (currentUser.sid.intValue == feedItem.author.uID.intValue) {
+            if (self.isTourRunning && feedItem.uid.intValue == self.tour.uid.intValue) {
                 [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
             } else {
                 //TODO: freeze! :D
-                tour.status = TOUR_STATUS_FREEZED;
-                [[OTTourService new] closeTour:tour
+                feedItem.status = TOUR_STATUS_FREEZED;
+                [[OTTourService new] closeTour:(OTTour*)feedItem
                                    withSuccess:^(OTTour *closedTour) {
                                        [self dismissViewControllerAnimated:YES completion:^{
                                            [self.tableView reloadData];
@@ -1201,14 +1201,14 @@ typedef NS_ENUM(NSInteger) {
         case SegueIDSelectedTour: {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
             OTTourViewController *controller = (OTTourViewController *)navController.topViewController;
-            controller.tour = self.selectedTour;
-            [controller configureWithTour:self.selectedTour];
+            controller.tour = (OTTour*)self.selectedFeedItem;
+            [controller configureWithTour:(OTTour*)self.selectedFeedItem];
             controller.delegate = self;
         }
         case SegueIDPublicTour: {
             UINavigationController *navController = segue.destinationViewController;
             OTPublicTourViewController *controller = (OTPublicTourViewController *)navController.topViewController;
-            controller.tour = self.selectedTour;
+            controller.tour = (OTTour*)self.selectedFeedItem;
         } break;
             
         case SegueIDMapOptions: {
@@ -1234,14 +1234,14 @@ typedef NS_ENUM(NSInteger) {
             OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)destinationViewController;
             controller.view.backgroundColor = [UIColor appModalBackgroundColor];
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-            controller.tour = self.selectedTour;
+            controller.tour = (OTTour*)self.selectedFeedItem;
             controller.tourJoinRequestDelegate = self;
         } break;
         case SegueIDQuitTour: {
             OTQuitTourViewController *controller = (OTQuitTourViewController *)destinationViewController;
             controller.view.backgroundColor = [UIColor appModalBackgroundColor];
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-            controller.tour = self.selectedTour;
+            controller.tour = (OTTour*)self.selectedFeedItem;
             controller.tourQuitDelegate = self;
         } break;
         case SegueIDGuideSolidarity: {

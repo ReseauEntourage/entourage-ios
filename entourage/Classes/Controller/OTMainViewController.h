@@ -14,6 +14,7 @@
 @class MKMapView;
 @class KPClusteringController;
 @class OTEncounterAnnotation;
+@class OTFeedItem;
 
 @interface OTMainViewController : UIViewController <OTMeetingCalloutViewControllerDelegate, OTCreateMeetingViewControllerDelegate, OTConfirmationViewControllerDelegate>
 
@@ -22,7 +23,7 @@
 @property BOOL isTourRunning;
 @property NSString *currentTourType;
 @property (nonatomic, strong) OTTour *tour;
-@property (nonatomic, strong) OTTour *selectedTour;
+@property (nonatomic, strong) OTFeedItem *selectedFeedItem;
 
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 

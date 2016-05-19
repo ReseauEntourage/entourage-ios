@@ -207,7 +207,7 @@ typedef NS_ENUM(NSInteger){
                                    }
                                    if (userTours == nil || userTours.count == 0) return;
                                    if (requestedStatus != self.statusSC.selectedSegmentIndex) return;
-                                   [self.tableView addTours:userTours];
+                                   [self.tableView addFeedItems:userTours];
                                    [self.tableView reloadData];
                                }
                                failure:^(NSError *error) {
@@ -236,13 +236,13 @@ typedef NS_ENUM(NSInteger){
     [self.tableView removeAll];
     switch (segControl.selectedSegmentIndex) {
         case EntourageStatusOpen:
-            [self.tableView addTours:self.openToursPagination.tours];
+            [self.tableView addFeedItems:self.openToursPagination.tours];
             break;
         case EntourageStatusClosed:
-            [self.tableView addTours:self.closedToursPagination.tours];
+            [self.tableView addFeedItems:self.closedToursPagination.tours];
             break;
         case EntourageStatusFreezed:
-            [self.tableView addTours:self.freezedToursPagination.tours];
+            [self.tableView addFeedItems:self.freezedToursPagination.tours];
             break;
             
         default:
@@ -257,13 +257,13 @@ typedef NS_ENUM(NSInteger){
 /**************************************************************************************************/
 #pragma mark - OTToursTableViewDelegate
 
-- (void)showTourInfo:(OTTour*)tour {
-    if ([tour.joinStatus isEqualToString:@"accepted"]) {
-        [self performSegueWithIdentifier:@"OTSelectedTourSegue" sender:tour];
+- (void)showFeedInfo:(OTFeedItem *)feedItem {
+    if ([feedItem.joinStatus isEqualToString:@"accepted"]) {
+        [self performSegueWithIdentifier:@"OTSelectedTourSegue" sender:feedItem];
     }
     else
     {
-        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:tour];
+        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:feedItem];
     }
 }
 
@@ -297,11 +297,11 @@ typedef NS_ENUM(NSInteger){
                                        [self.freezedToursPagination.tours addObject:tour];
                                        NSInteger selectedSegmentIndex = self.statusSC.selectedSegmentIndex;
                                        if (selectedSegmentIndex == EntourageStatusClosed) {
-                                           [self.tableView removeTour:tour];
+                                           [self.tableView removeFeedItem:tour];
                                            [self.tableView reloadData];
                                        }
                                        else if (selectedSegmentIndex == EntourageStatusFreezed) {
-                                           [self.tableView addTour:tour];
+                                           [self.tableView addFeedItem:tour];
                                            [self.tableView reloadData];
                                        }
                                    } failure:^(NSError *error) {
@@ -330,11 +330,11 @@ typedef NS_ENUM(NSInteger){
     [self.closedToursPagination.tours addObject:tour];
     NSInteger selectedSegmentIndex = self.statusSC.selectedSegmentIndex;
     if (selectedSegmentIndex == EntourageStatusOpen) {
-        [self.tableView removeTour:tour];
+        [self.tableView removeFeedItem:tour];
         [self.tableView reloadData];
     }
     else if (selectedSegmentIndex == EntourageStatusClosed) {
-        [self.tableView addTour:tour];
+        [self.tableView addFeedItem:tour];
         [self.tableView reloadData];
     }
     if (self.mainViewController != nil && [self.mainViewController respondsToSelector:@selector(tourSent:)]) {
