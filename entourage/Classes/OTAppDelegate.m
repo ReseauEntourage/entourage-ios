@@ -187,7 +187,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
                 UINavigationController *navController = (UINavigationController*)[revealController frontViewController];
                 if ([navController.topViewController isKindOfClass:[OTMainViewController class]]) {
                     OTMainViewController *mainController = (OTMainViewController*)navController.topViewController;
-                    [mainController getData];
+                    [mainController refreshMap];
                 }
             }
         }

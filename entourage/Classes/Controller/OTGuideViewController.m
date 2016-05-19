@@ -100,7 +100,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    [self getData];
+    [self refreshMap];
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
 }
 
@@ -126,7 +126,7 @@
                                                context:nil];
 }
 
-- (void)getData {
+- (void)refreshMap {
     [[OTPoiService new] poisAroundCoordinate:self.mapView.centerCoordinate
                                     distance:[self mapHeight]
                                      success:^(NSArray *categories, NSArray *pois)
@@ -242,7 +242,7 @@
     
     CLLocationDistance distance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(_currentMapCenter), MKMapPointForCoordinate(mapView.centerCoordinate))) / 1000.0f;
     if (distance > [self mapHeight]) {
-        [self getData];
+        [self refreshMap];
         self.currentMapCenter = mapView.centerCoordinate;
     }
 }

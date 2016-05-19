@@ -1,4 +1,4 @@
-    //
+//
 //  OTMapViewController.m
 //  entourage
 //
@@ -109,7 +109,7 @@
 @property (nonatomic, strong) NSString *entourageType;
 
 // markers
-
+@property (nonatomic, strong) NSMutableArray *entourages;
 @property (nonatomic, strong) NSMutableArray *encounters;
 @property (nonatomic, strong) WYPopoverController *popover;
 @property (nonatomic) BOOL isRegionSetted;
@@ -149,27 +149,27 @@
 #pragma mark - Life cycle
 
 - (void)viewDidLoad {
-	[super viewDidLoad];
+    [super viewDidLoad];
     [self configureNavigationBar];
-
+    
     
     //    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"geoloc"]
-//                                                            style:UIBarButtonItemStylePlain
-//                                                           target:self
-//                                                           action:nil];
-//    
-//    [self.footerToolbar setItems:@[bbi]];
+    //                                                            style:UIBarButtonItemStylePlain
+    //                                                           target:self
+    //                                                           action:nil];
+    //
+    //    [self.footerToolbar setItems:@[bbi]];
     
     
     
-//    UILabel*footerLabel =  (UILabel*)self.footerToolbar.items[3];
-//    footerLabel.textColor = [UIColor appGreyishBrownColor];
-//    footerLabel.font = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
+    //    UILabel*footerLabel =  (UILabel*)self.footerToolbar.items[3];
+    //    footerLabel.textColor = [UIColor appGreyishBrownColor];
+    //    footerLabel.font = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
     
-//    UIFont *toolbarFont = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
-//    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor appGreyishBrownColor],
-//                                                                        NSFontAttributeName : toolbarFont }
-//                                                 forState:UIControlStateNormal];
+    //    UIFont *toolbarFont = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
+    //    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor appGreyishBrownColor],
+    //                                                                        NSFontAttributeName : toolbarFont }
+    //                                                 forState:UIControlStateNormal];
     self.locations = [NSMutableArray new];
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
@@ -181,8 +181,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTourConfirmation) name:@kNotificationLocalTourConfirmation object:nil];
-
-	//[self configureTableView];
+    
+    //[self configureTableView];
     self.mapView = [[MKMapView alloc] init];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.toursDelegate = self;
@@ -220,7 +220,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
+    [super viewWillAppear:animated];
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getData) userInfo:nil repeats:YES];
     [self.refreshTimer fire];
     //[self refreshMap];
@@ -236,8 +236,8 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	[self getData];
-	[[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
+    [self getData];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
 }
 
 - (void)switchToNewsfeed {
@@ -280,10 +280,10 @@
     [self.mapView setRegion:region animated:YES];
     
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
-
+    
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
-
+    
    	self.mapView.showsUserLocation = YES;
     [self zoomToCurrentLocation:nil];
     
@@ -316,7 +316,7 @@
     
     if (self.isTourRunning) {
         self.encounterLocation =
-            [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+        [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
         CLLocation *location = [[CLLocation alloc] initWithLatitude:self.encounterLocation.latitude longitude:self.encounterLocation.longitude];
         CLLocation *userLocation = [[CLLocation alloc]
                                     initWithLatitude:self.mapView.userLocation.coordinate.latitude
@@ -361,10 +361,10 @@
 }
 
 - (void)registerObserver {
-	[[NSUserDefaults standardUserDefaults] addObserver:self
-	                                        forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")
-	                                           options:NSKeyValueObservingOptionNew
-	                                           context:nil];
+    [[NSUserDefaults standardUserDefaults] addObserver:self
+                                            forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")
+                                               options:NSKeyValueObservingOptionNew
+                                               context:nil];
 }
 
 
@@ -399,11 +399,11 @@ static BOOL didGetAnyData = NO;
     oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
     self.requestedToursCoordinate = self.mapView.centerCoordinate;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
- 
+    
     NSDictionary *filterDictionary = @{  @"per": @20,
-                                        @"latitude": @(self.requestedToursCoordinate.latitude),
-                                        @"longitude": @(self.requestedToursCoordinate.longitude),
-                                        @"distance": @TOURS_REQUEST_DISTANCE_KM};
+                                         @"latitude": @(self.requestedToursCoordinate.latitude),
+                                         @"longitude": @(self.requestedToursCoordinate.longitude),
+                                         @"distance": @TOURS_REQUEST_DISTANCE_KM};
     
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
@@ -417,8 +417,8 @@ static BOOL didGetAnyData = NO;
                                                 [self.indicatorView setHidden:YES];
                                                 self.feeds = feeds;
                                                 [self.tableView removeAll];
-//                                                [self.tableView addTours:feeds];
-//                                                [self feedMapViewWithTours];
+                                                //                                                [self.tableView addTours:feeds];
+                                                //                                                [self feedMapViewWithTours];
                                                 [self.tableView reloadData];
                                             } failure:^(NSError *error) {
                                                 NSLog(@"Error getting feeds: %@", error.description);
@@ -482,7 +482,7 @@ static BOOL didGetAnyData = NO;
 - (void)feedMapViewWithEncounters {
     if (self.toursMapDelegate.isActive) {
         NSMutableArray *annotations = [NSMutableArray new];
-
+        
         for (OTEncounter *encounter in self.encounters) {
             OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
             [annotations addObject:pointAnnotation];
@@ -518,26 +518,26 @@ static BOOL didGetAnyData = NO;
 }
 
 - (NSString *)encounterAnnotationToString:(OTEncounterAnnotation *)annotation {
-	OTEncounter *encounter = [annotation encounter];
-	NSString *cellTitle = [NSString stringWithFormat:@"%@ a rencontré %@",
-	                       encounter.userName,
-	                       encounter.streetPersonName];
-
-	return cellTitle;
+    OTEncounter *encounter = [annotation encounter];
+    NSString *cellTitle = [NSString stringWithFormat:@"%@ a rencontré %@",
+                           encounter.userName,
+                           encounter.streetPersonName];
+    
+    return cellTitle;
 }
 
 - (void)displayEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view {
-	OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTMeetingCalloutViewController"];
-	controller.delegate = self;
- 
+    OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTMeetingCalloutViewController"];
+    controller.delegate = self;
+    
     OTEncounterAnnotation *encounterAnnotation = (OTEncounterAnnotation *)simpleAnnontation;
     OTEncounter *encounter = encounterAnnotation.encounter;
     [controller setEncounter:encounter];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:navController animated:YES completion:nil];
     
-//    [controller configureWithEncouter:encounter];
-	//[Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{ @"encounter_id" : encounterAnnotation.encounter.sid }];
+    //    [controller configureWithEncouter:encounter];
+    //[Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{ @"encounter_id" : encounterAnnotation.encounter.sid }];
 }
 
 - (void)displayPoiDetails:(MKAnnotationView *)view {
@@ -573,34 +573,34 @@ static BOOL didGetAnyData = NO;
     [SVProgressHUD showWithStatus:OTLocalizedString(@"tour_create_sending")];
     
     [[OTTourService new]
-        sendTour:self.tour
+     sendTour:self.tour
      withSuccess:^(OTTour *sentTour) {
-             
-             [self.feeds addObject:sentTour];
-             [self.tableView addTours:@[sentTour]];
-             [self.tableView reloadData];
-             [SVProgressHUD dismiss];
-             self.tour.uid = sentTour.uid;
-             self.tour.distance = @0.0;
-             
-             self.stopButton.hidden = NO;
-             self.createEncounterButton.hidden = NO;
-             
-             NSString *snapshotStartFilename = [NSString stringWithFormat:@SNAPSHOT_START, sentTour.uid.intValue];
-             [self.mapView takeSnapshotToFile:snapshotStartFilename];
-             [self showNewTourOnGoing];
-             
-             self.seconds = 0;
-             self.locations = [NSMutableArray new];
-             self.isTourRunning = YES;
-             
-             if ([self.pointsToSend count] > 0) {
-                 [self performSelector:@selector(sendTourPoints:) withObject:self.pointsToSend afterDelay:0.0];
-             }
+         
+         [self.feeds addObject:sentTour];
+         [self.tableView addTours:@[sentTour]];
+         [self.tableView reloadData];
+         [SVProgressHUD dismiss];
+         self.tour.uid = sentTour.uid;
+         self.tour.distance = @0.0;
+         
+         self.stopButton.hidden = NO;
+         self.createEncounterButton.hidden = NO;
+         
+         NSString *snapshotStartFilename = [NSString stringWithFormat:@SNAPSHOT_START, sentTour.uid.intValue];
+         [self.mapView takeSnapshotToFile:snapshotStartFilename];
+         [self showNewTourOnGoing];
+         
+         self.seconds = 0;
+         self.locations = [NSMutableArray new];
+         self.isTourRunning = YES;
+         
+         if ([self.pointsToSend count] > 0) {
+             [self performSelector:@selector(sendTourPoints:) withObject:self.pointsToSend afterDelay:0.0];
+         }
      } failure:^(NSError *error) {
-            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"tour_create_error", @"")];
-            NSLog(@"%@",[error localizedDescription]);
-        }
+         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"tour_create_error", @"")];
+         NSLog(@"%@",[error localizedDescription]);
+     }
      ];
 }
 
@@ -693,7 +693,7 @@ static BOOL didGetAnyData = NO;
         if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20 && fabs(distance) > LOCATION_MIN_DISTANCE) {
             
             if (self.locations.count > 0) {
-            
+                
                 CLLocationCoordinate2D coords[2];
                 coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
                 coords[1] = newLocation.coordinate;
@@ -701,7 +701,7 @@ static BOOL didGetAnyData = NO;
                 MKCoordinateRegion region = self.mapView.region;
                 region.center = newLocation.coordinate;
                 [self.mapView setRegion:region animated:YES];
-            
+                
                 if (self.isTourRunning) {
                     [self addTourPointFromLocation:newLocation];
                     if (self.toursMapDelegate.isActive) {
@@ -709,7 +709,7 @@ static BOOL didGetAnyData = NO;
                     }
                 }
             }
-        
+            
             [self.locations addObject:newLocation];
         }
     }
@@ -726,22 +726,22 @@ static BOOL didGetAnyData = NO;
 - (void)handleTap:(UITapGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateEnded) {
         [self showToursMap];
-//        
-//        CGPoint point = [sender locationInView:self.mapView];
-//        CLLocationCoordinate2D location = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
-//        [[OTTourService new] toursAroundCoordinate:location
-//                                             limit:@5
-//                                          distance:@0.04
-//                                           success:^(NSMutableArray *closeTours) {
-//                                               [self.indicatorView setHidden:YES];
-//                                               if (closeTours.count != 0) {
-//                                                   self.closeTours = closeTours;
-//                                                   [self performSegueWithIdentifier:@"OTCloseTours" sender:sender];
-//                                               }
-//                                           } failure:^(NSError *error) {
-//                                               [self registerObserver];
-//                                               [self.indicatorView setHidden:YES];
-//                                           }];
+        //
+        //        CGPoint point = [sender locationInView:self.mapView];
+        //        CLLocationCoordinate2D location = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
+        //        [[OTTourService new] toursAroundCoordinate:location
+        //                                             limit:@5
+        //                                          distance:@0.04
+        //                                           success:^(NSMutableArray *closeTours) {
+        //                                               [self.indicatorView setHidden:YES];
+        //                                               if (closeTours.count != 0) {
+        //                                                   self.closeTours = closeTours;
+        //                                                   [self performSegueWithIdentifier:@"OTCloseTours" sender:sender];
+        //                                               }
+        //                                           } failure:^(NSError *error) {
+        //                                               [self registerObserver];
+        //                                               [self.indicatorView setHidden:YES];
+        //                                           }];
     }
 }
 
@@ -749,7 +749,7 @@ static BOOL didGetAnyData = NO;
 #pragma mark - OTCalloutViewControllerDelegate
 
 - (void)dismissPopover {
-	[self.popover dismissPopoverAnimated:YES];
+    [self.popover dismissPopoverAnimated:YES];
 }
 
 /********************************************************************************/
@@ -858,12 +858,12 @@ static BOOL didGetAnyData = NO;
 - (void)togglePOI {
     [self dismissViewControllerAnimated:NO
                              completion:^{
-        if (self.toursMapDelegate.isActive) {
-            [self switchToGuide];
-        } else {
-            [self switchToNewsfeed];
-        }
-    }];
+                                 if (self.toursMapDelegate.isActive) {
+                                     [self switchToGuide];
+                                 } else {
+                                     [self switchToNewsfeed];
+                                 }
+                             }];
 }
 
 - (void)dismissMapOptions {
@@ -962,7 +962,7 @@ static bool isShowingOptions = NO;
         self.createEncounterButton.hidden = YES;
         self.mapSegmentedControl.hidden = YES;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-
+        
     }];
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotEndFilename];
@@ -991,7 +991,7 @@ static bool isShowingOptions = NO;
                                    success:^(OTUser *user) {
                                        NSLog(@"got user %@", user);
                                        [self performSegueWithIdentifier:@"UserProfileSegue" sender:user];
-
+                                       
                                    } failure:^(NSError *error) {
                                        NSLog(@"@fails getting user %@", error.description);
                                    }];
@@ -1025,10 +1025,10 @@ static bool isShowingOptions = NO;
                                            
                                        }];
                                        [SVProgressHUD showSuccessWithStatus:@""];
-                } failure:^(NSError *error) {
-                    [SVProgressHUD showErrorWithStatus:@"Erreur"];
-                    NSLog(@"%@",[error localizedDescription]);
-                }];
+                                   } failure:^(NSError *error) {
+                                       [SVProgressHUD showErrorWithStatus:@"Erreur"];
+                                       NSLog(@"%@",[error localizedDescription]);
+                                   }];
             }
         } else {
             [self performSegueWithIdentifier:@"QuitTourSegue" sender:self];
@@ -1050,7 +1050,7 @@ static bool isShowingOptions = NO;
 - (void)showToursList {
     
     self.isTourListDisplayed = YES;
-
+    
     [UIView animateWithDuration:0.2 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
@@ -1076,7 +1076,7 @@ static bool isShowingOptions = NO;
         self.mapSegmentedControl.hidden = self.guideMapDelegate.isActive;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
-
+    
 }
 
 #pragma mark 6.4 Tours "+" press
@@ -1175,7 +1175,7 @@ typedef NS_ENUM(NSInteger) {
     UIViewController *destinationViewController = segue.destinationViewController;
     NSInteger segueID = [[seguesDictionary numberForKey:segue.identifier defaultValue:@-1] integerValue];
     
-
+    
     switch (segueID) {
         case SegueIDUserProfile: {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
@@ -1204,20 +1204,20 @@ typedef NS_ENUM(NSInteger) {
             controller.tour = self.selectedTour;
             [controller configureWithTour:self.selectedTour];
             controller.delegate = self;
-        } 
+        }
         case SegueIDPublicTour: {
             UINavigationController *navController = segue.destinationViewController;
             OTPublicTourViewController *controller = (OTPublicTourViewController *)navController.topViewController;
             controller.tour = self.selectedTour;
         } break;
-        
+            
         case SegueIDMapOptions: {
             OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;;
             if (!CGPointEqualToPoint(self.mapPoint, CGPointZero)) {
                 controller.fingerPoint = self.mapPoint;
                 self.mapPoint = CGPointZero;
             }
-
+            
             controller.mapOptionsDelegate = self;
             [controller setIsPOIVisible:self.guideMapDelegate.isActive];
         } break;
