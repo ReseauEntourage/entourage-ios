@@ -100,6 +100,7 @@
 		45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */; };
 		45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A711C56961500F68C24 /* Intro.storyboard */; };
 		45E267821C860239004D14EB /* OTTourJoinRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */; };
+		45E37E501CEDFC39005C3175 /* OTFeedsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E4F1CEDFC39005C3175 /* OTFeedsService.m */; };
 		45E6BFCF1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */; };
 		45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */; };
 		45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */; };
@@ -307,6 +308,8 @@
 		45CE5A711C56961500F68C24 /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
 		45E267801C860239004D14EB /* OTTourJoinRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourJoinRequestViewController.h; sourceTree = "<group>"; };
 		45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoinRequestViewController.m; sourceTree = "<group>"; };
+		45E37E4E1CEDFC39005C3175 /* OTFeedsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedsService.h; sourceTree = "<group>"; };
+		45E37E4F1CEDFC39005C3175 /* OTFeedsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedsService.m; sourceTree = "<group>"; };
 		45E6BFCD1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourDetailsOptionsViewController.h; sourceTree = "<group>"; };
 		45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourDetailsOptionsViewController.m; sourceTree = "<group>"; };
 		45E6FE121CAE42E700505660 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourConfirmation.storyboard; sourceTree = "<group>"; };
@@ -1205,6 +1208,7 @@
 				45E6BFCF1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m in Sources */,
 				DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */,
 				4500115E1CCE5BD2004754DF /* OTTourCreatorViewController.m in Sources */,
+				45E37E501CEDFC39005C3175 /* OTFeedsService.m in Sources */,
 				45391A031CEBA89100C93908 /* OTEntourageAnnotation.m in Sources */,
 				456ABD801CA18416004A81D6 /* UILabel+entourage.m in Sources */,
 				0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */,
