@@ -27,6 +27,17 @@
 
 #define LOAD_MORE_CELLS_DELTA 4
 
+#define MAPVIEW_HEIGHT 160.f
+#define MAPVIEW_REGION_SPAN_X_METERS 500
+#define MAPVIEW_REGION_SPAN_Y_METERS 500
+#define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
+#define TOURS_REQUEST_DISTANCE_KM 10
+#define LOCATION_MIN_DISTANCE 5.f
+
+#define TABLEVIEW_FOOTER_HEIGHT 15.0f
+#define TABLEVIEW_BOTTOM_INSET 86.0f
+
+
 @interface OTToursTableView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tours;
@@ -69,6 +80,56 @@
     self.dataSource = self;
     self.delegate = self;
 }
+
+- (void)configureWithMapView:(MKMapView *)mapView {
+    
+    self.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, -TABLEVIEW_FOOTER_HEIGHT, 0.0f);
+    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
+    self.tableFooterView = dummyView;
+    
+    //show map on table header
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, MAPVIEW_HEIGHT)];
+    mapView.frame = headerView.bounds;
+    [headerView addSubview:mapView];
+    [headerView sendSubviewToBack:mapView];
+    //[self configureMapView];
+    
+    UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156.0f , headerView.frame.size.width + 130.0f, 4.0f)];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = shadowView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)([UIColor colorWithRed:0 green:0 blue:0 alpha:.2].CGColor),  nil];
+    [shadowView.layer insertSublayer:gradient atIndex:1];
+    [headerView addSubview:shadowView];
+    
+    NSDictionary *viewsDictionary = @{@"shadow":shadowView};
+    NSArray *constraint_height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow(4)]"
+                                                                         options:0
+                                                                         metrics:nil
+                                                                           views:viewsDictionary];
+    NSArray *constraint_pos_horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-8)-[shadow]-(-8)-|"
+                                                                                 options:0
+                                                                                 metrics:nil
+                                                                                   views:viewsDictionary];
+    NSArray *constraint_pos_bottom = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow]-0-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:viewsDictionary];
+    shadowView.translatesAutoresizingMaskIntoConstraints = NO;
+    [shadowView addConstraints:constraint_height];
+    [headerView addConstraints:constraint_pos_horizontal];
+    [headerView addConstraints:constraint_pos_bottom];
+    mapView.center = headerView.center;
+    
+//    UIButton *centerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    centerButton.frame = CENTER_MAP_FRAME;
+//    [centerButton setImage:[UIImage imageNamed:@"center-location"] forState:UIControlStateNormal];
+//    [centerButton addTarget:self action:@selector(zoomToCurrentLocation:) forControlEvents:UIControlEventTouchUpInside];
+//    [headerView addSubview:centerButton];
+    
+    self.tableHeaderView = headerView;
+    //self.toursDelegate = self;
+}
+
 
 /********************************************************************************/
 #pragma mark - Tour list handlind

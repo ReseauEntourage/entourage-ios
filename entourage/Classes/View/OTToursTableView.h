@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @class OTTour;
 
@@ -23,6 +24,8 @@
 @interface OTToursTableView : UITableView
 
 @property (nonatomic, weak) id<OTToursTableViewDelegate> toursDelegate;
+
+- (void)configureWithMapView:(MKMapView *)mapView;
 
 - (void)addTours:(NSArray*)tours;
 - (void)addTour:(OTTour*)tour;
