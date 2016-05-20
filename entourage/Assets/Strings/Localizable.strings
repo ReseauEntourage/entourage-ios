@@ -120,6 +120,23 @@
 "user_edit_delete_error" = "Erreur lors de la suppression du compte";
 "user_profile_error" = "Erreur lors de la récupération du profil";
 
+// Filter
+"filter_maraudes_title" = "Types de maraude";
+"filter_maraude_medical" = "Médicale";
+"filter_maraude_bare_hands" = "Sociale";
+"filter_maraude_alimentary" = "Distributive";
+
+"filter_entourages_title" = "Types d’entourage";
+"filter_entourage_demand" = "Demande";
+"filter_entourage_contribution" = "Contribution";
+"filter_entourage_show_tours" = "Maraudes";
+"filter_entourage_only_my_entourages" = "Ne visualiser que mes entourages";
+
+"filter_timeframe_title" = "Affichage des entourages";
+"filter_timeframe_days_1" = "24H";
+"filter_timeframe_days_2" = "2J";
+"filter_timeframe_days_3" = "3J";
+
 // API
 "url_send_tour" = "%@.json?token=%@";
 "url_close_tour" = "%@/%@.json?token=%@";

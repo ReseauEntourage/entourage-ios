@@ -10,4 +10,6 @@
 
 @interface OTFiltersViewController : UIViewController
 
+@property (nonatomic) BOOL isOngoingTour;
+
 @end
