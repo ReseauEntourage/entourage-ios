@@ -294,7 +294,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
                                                                                       [rootVC dismissViewControllerAnimated:YES completion:nil];
                                                                                       UINavigationController *navC = [[UIStoryboard tourStoryboard] instantiateInitialViewController];
                                                                                       OTTourViewController *tourVC = navC.viewControllers.firstObject;
-                                                                                      tourVC.tour = tour;
+                                                                                      tourVC.feedItem = (OTFeedItem*)tour;
                                                                                       [rootVC presentViewController:navC animated:YES completion:^{
                                                                                           NSLog(@"showing tour vc");
                                                                                       }];

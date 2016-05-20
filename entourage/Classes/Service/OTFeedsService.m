@@ -52,10 +52,12 @@
     
     for (NSDictionary *dictionary in feedsDictionaries) {
         NSString *feedType = [dictionary valueForKey:kWSKeyType];
+        NSLog(@"Feed %@", feedType);
         NSDictionary *feedItemDictionary = [dictionary objectForKey:kWSKeyData];
         OTFeedItem *feedItem;
         if ([feedType isEqualToString:@"Entourage"]) {
             feedItem = [[OTEntourage alloc] initWithDictionary:feedItemDictionary];
+            
         } else if ([feedType isEqualToString:@"Tour"]) {
             feedItem = [[OTTour alloc] initWithDictionary:feedItemDictionary];
         }

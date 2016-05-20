@@ -387,7 +387,8 @@ static BOOL didGetAnyData = NO;
     NSDictionary *filterDictionary = @{  @"per": @20,
                                          @"latitude": @(self.requestedToursCoordinate.latitude),
                                          @"longitude": @(self.requestedToursCoordinate.longitude),
-                                         @"distance": @TOURS_REQUEST_DISTANCE_KM};
+                                         @"distance": @TOURS_REQUEST_DISTANCE_KM,
+                                         @"show_tours": @"true"};
     
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
@@ -456,7 +457,7 @@ static BOOL didGetAnyData = NO;
 
 - (void)feedMapWithFeedItems {
     if (self.toursMapDelegate.isActive) {
-        NSMutableArray *annotations = [NSMutableArray new];
+        //NSMutableArray *annotations = [NSMutableArray new];
         self.toursMapDelegate.drawnTours = [[NSMapTable alloc] init];
         
     }
@@ -961,10 +962,13 @@ static bool isShowingOptions = NO;
 
 
 /**************************************************************************************************/
-#pragma mark - Tours Table View Delegate
+#pragma mark - Feeds Table View Delegate
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;
+    
+    [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+    return;
     
     if ([self.selectedFeedItem.joinStatus isEqualToString:@"accepted"]) {
         [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
@@ -1190,10 +1194,10 @@ typedef NS_ENUM(NSInteger) {
         case SegueIDSelectedTour: {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
             OTTourViewController *controller = (OTTourViewController *)navController.topViewController;
-            controller.tour = (OTTour*)self.selectedFeedItem;
-            [controller configureWithTour:(OTTour*)self.selectedFeedItem];
-            controller.delegate = self;
-        }
+            controller.feedItem = (OTFeedItem*)self.selectedFeedItem;
+            //[controller configureWithTour:(OTFeedItem*)self.selectedFeedItem];
+            //controller.delegate = self;
+        } break;
         case SegueIDPublicTour: {
             UINavigationController *navController = segue.destinationViewController;
             OTPublicTourViewController *controller = (OTPublicTourViewController *)navController.topViewController;

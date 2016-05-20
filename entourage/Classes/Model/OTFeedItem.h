@@ -11,6 +11,7 @@
 #import "NSDictionary+Parsing.h"
 
 
+
 #import "OTTourAuthor.h"
 
 @interface OTFeedItem : NSObject
@@ -24,5 +25,8 @@
 @property (nonatomic, strong) NSNumber *noPeople;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (NSString *)navigationTitle;
+- (NSString *)summary;
+- (NSAttributedString *)typeByNameAttributedString;
 
 @end

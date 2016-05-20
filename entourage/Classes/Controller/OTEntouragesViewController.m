@@ -117,8 +117,8 @@ typedef NS_ENUM(NSInteger){
     } else if ([segue.identifier isEqualToString:@"OTSelectedTourSegue"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTTourViewController *controller = (OTTourViewController *)navController.topViewController;
-        controller.tour = (OTTour*)sender;
-        [controller configureWithTour:controller.tour];
+        controller.feedItem = (OTFeedItem*)sender;
+        [controller configureWithTour:controller.feedItem];
     } else if ([segue.identifier isEqualToString:@"OTTourJoinRequestSegue"]) {
         //We shouldn't arrive here
     } else if ([segue.identifier isEqualToString:@"QuitTourSegue"]) {

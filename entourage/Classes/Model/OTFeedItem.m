@@ -22,9 +22,20 @@
         self.joinStatus = [dictionary valueForKey:kWSKeyJoinStatus];
         self.noPeople = [dictionary numberForKey:kWSKeyNoPeople];
         self.type = [dictionary valueForKey:kWSKeyType];
-        
     }
     return self;
+}
+
+- (NSString *)navigationTitle {
+    return nil;
+}
+
+- (NSString *)summary {
+    return nil;
+}
+
+- (NSAttributedString *)typeByNameAttributedString {
+    return nil;
 }
 
 @end

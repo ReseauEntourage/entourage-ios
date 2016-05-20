@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OTTour.h"
+#import "OTFeedItem.h"
+//#import "OTTour.h"
+
 // Frameworks
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
@@ -24,10 +26,10 @@
 
 @interface OTTourViewController : UIViewController <SpeechKitDelegate, SKRecognizerDelegate>
 
-@property (nonatomic, strong) OTTour *tour;
+@property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, strong) SKRecognizer *recognizer;
 @property (nonatomic, weak) id<OTTourTimelineDelegate> delegate;
 
-- (void)configureWithTour:(OTTour *)tour;
+- (void)configureWithTour:(OTFeedItem *)feedItem;
 
 @end

@@ -13,6 +13,7 @@
 #import "OTUserViewController.h"
 #import "OTMeetingCalloutViewController.h"
 #import "OTConsts.h"
+#import "OTFeedItemSummaryView.h"
 
 // Models
 #import "OTTour.h"
@@ -50,6 +51,7 @@ typedef NS_ENUM(unsigned) {
 
 @interface OTTourViewController () <UITextViewDelegate, OTTourDetailsOptionsDelegate>
 
+@property (nonatomic, weak) IBOutlet OTFeedItemSummaryView *feedSummaryView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UITextView *chatTextView;
 @property (nonatomic, weak) IBOutlet UIView *chatToolbar;
@@ -73,21 +75,24 @@ typedef NS_ENUM(unsigned) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [NSLocalizedString(@"tour", nil) uppercaseString];
+    self.title = [[_feedItem navigationTitle] uppercaseString];
     [self setupCloseModal];
     [self setupMoreButtons];
+    
+    [self.feedSummaryView setupWithFeedItem:self.feedItem];
+    
     
     self.timelineCardsClassesCellsIDs = @{@"OTTourJoiner": @"TourJoinerCell",
                                           @"OTTourMessage": @"TourMessageCell",
                                           @"OTEncounter": @"TourEncounterCell",
                                           @"OTTourStatus": @"TourStatusCell"};
     
-    [self initializeTimelinePoints];
+    //[self initializeTimelinePoints];
     
-    [self getTourUsersJoins];
-    [self getTourMessages];
-    [self getTourEncounters];
-    
+//    [self getTourUsersJoins];
+//    [self getTourMessages];
+//    [self getTourEncounters];
+//    
     
     self.chatTextView.layer.borderColor = [UIColor appGreyishColor].CGColor;
     
@@ -100,6 +105,10 @@ typedef NS_ENUM(unsigned) {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    
+    
+    self.tableView.hidden = YES;
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[self class]];
@@ -200,7 +209,7 @@ typedef NS_ENUM(unsigned) {
     self.timelinePoints = [[NSMutableArray alloc] init];
     
     OTTourStatus *tourStartStatus = [[OTTourStatus alloc] init];
-    tourStartStatus.date = self.tour.creationDate;
+    tourStartStatus.date = self.feedItem.creationDate;
     tourStartStatus.type = OTTourStatusStart;
     tourStartStatus.status = @"Maraude en cours";
     tourStartStatus.duration = 0;
@@ -208,16 +217,15 @@ typedef NS_ENUM(unsigned) {
     //[self.timelinePoints addObject:tourStartStatus];
     [self updateTableViewAddingTimelinePoints:@[tourStartStatus]];
     
-    if (self.tour.endTime) {
-        OTTourStatus *tourEndStatus = [[OTTourStatus alloc] init];
-        tourEndStatus.date = self.tour.endTime;
-        tourStartStatus.type = OTTourStatusEnd;
-        tourEndStatus.status = @"Maraude terminée";
-        tourEndStatus.duration = [self.tour.endTime timeIntervalSinceDate:self.tour.creationDate];;
-        tourEndStatus.distance = self.tour.distance.doubleValue;
-        //[self.timelinePoints addObject:tourStartStatus];
-        [self updateTableViewAddingTimelinePoints:@[tourEndStatus]];
-    }
+//    if (self.tour.endTime) {
+//        OTTourStatus *tourEndStatus = [[OTTourStatus alloc] init];
+//        tourEndStatus.date = self.feedItem.endTime;
+//        tourStartStatus.type = OTTourStatusEnd;
+//        tourEndStatus.status = @"Maraude terminée";
+////        tourEndStatus.duration = [self.feedItem.endTime timeIntervalSinceDate:self.tour.creationDate];;
+////        tourEndStatus.distance = self.feedItem.distance.doubleValue;
+//        [self updateTableViewAddingTimelinePoints:@[tourEndStatus]];
+//    }
 }
 
 - (void)setupMoreButtons {
@@ -230,7 +238,7 @@ typedef NS_ENUM(unsigned) {
 
     
     
-    if ([self.tour.status isEqualToString:TOUR_STATUS_FREEZED])
+    if ([self.feedItem.status isEqualToString:TOUR_STATUS_FREEZED])
         return;
     UIImage *moreImage = [[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
@@ -263,61 +271,61 @@ typedef NS_ENUM(unsigned) {
 
 #pragma mark - Service
 - (void)getTourUsersJoins {
-    [[OTTourService new] tourUsersJoins:self.tour
-                                success:^(NSArray *tourUsers) {
-                                    //NSLog(@"USERS: %@", tourUsers);
-                                    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-                                    NSMutableArray *users = [NSMutableArray new];
-                                    for (OTTourJoiner *joiner  in tourUsers) {
-                                        if ([joiner.uID isEqualToValue:currentUser.sid]) {
-                                            continue;
-                                        }
-                                        if (![joiner.status isEqualToString:JOIN_ACCEPTED]) {
-                                            continue;
-                                        }
-                                        [users addObject:joiner];
-                                    }
-                                    [self updateTableViewAddingTimelinePoints:users];
-    } failure:^(NSError *error) {
-        NSLog(@"USERS err %@", error.description);
-    }];
+//    [[OTTourService new] tourUsersJoins:self.tour
+//                                success:^(NSArray *tourUsers) {
+//                                    //NSLog(@"USERS: %@", tourUsers);
+//                                    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+//                                    NSMutableArray *users = [NSMutableArray new];
+//                                    for (OTTourJoiner *joiner  in tourUsers) {
+//                                        if ([joiner.uID isEqualToValue:currentUser.sid]) {
+//                                            continue;
+//                                        }
+//                                        if (![joiner.status isEqualToString:JOIN_ACCEPTED]) {
+//                                            continue;
+//                                        }
+//                                        [users addObject:joiner];
+//                                    }
+//                                    [self updateTableViewAddingTimelinePoints:users];
+//    } failure:^(NSError *error) {
+//        NSLog(@"USERS err %@", error.description);
+//    }];
 }
 
 - (void)getTourMessages {
-    [[OTTourService new] tourMessages:self.tour
-                                success:^(NSArray *tourMessages) {
-                                    //NSLog(@"MESSAGES: %@", tourMessages);
-                                    [self updateTableViewAddingTimelinePoints:tourMessages];
-
-    } failure:^(NSError *error) {
-        NSLog(@"MESSAGESerr %@", error.description);
-    }];
+//    [[OTTourService new] tourMessages:self.tour
+//                                success:^(NSArray *tourMessages) {
+//                                    //NSLog(@"MESSAGES: %@", tourMessages);
+//                                    [self updateTableViewAddingTimelinePoints:tourMessages];
+//
+//    } failure:^(NSError *error) {
+//        NSLog(@"MESSAGESerr %@", error.description);
+//    }];
 }
 
 - (void)getTourEncounters {
-    [[OTTourService new] tourEncounters:self.tour
-                              success:^(NSArray *tourEncounters) {
-                                 // NSLog(@"ENCOUNTERS: %@", tourEncounters);
-                                  [self updateTableViewAddingTimelinePoints:tourEncounters];
-                              } failure:^(NSError *error) {
-                                  NSLog(@"ENCOUNTERSSerr %@", error.description);
-                              }];
+//    [[OTTourService new] tourEncounters:self.tour
+//                              success:^(NSArray *tourEncounters) {
+//                                 // NSLog(@"ENCOUNTERS: %@", tourEncounters);
+//                                  [self updateTableViewAddingTimelinePoints:tourEncounters];
+//                              } failure:^(NSError *error) {
+//                                  NSLog(@"ENCOUNTERSSerr %@", error.description);
+//                              }];
 }
 
 - (IBAction)sendMessage {
     
     [self.chatTextView resignFirstResponder];
     
-    [[OTTourService new] sendMessage:self.chatTextView.text
-                              onTour:self.tour
-                             success:^(OTTourMessage * message) {
-                                 NSLog(@"CHAT %@", message.text);
-                                 self.chatTextView.text = @"";
-                                 [self updateTableViewAddingTimelinePoints:@[message]];
-                                 [self updateRecordButton];
-                             } failure:^(NSError *error) {
-                                 NSLog(@"CHATerr: %@", error.description);
-                             }];
+//    [[OTTourService new] sendMessage:self.chatTextView.text
+//                              onTour:self.tour
+//                             success:^(OTTourMessage * message) {
+//                                 NSLog(@"CHAT %@", message.text);
+//                                 self.chatTextView.text = @"";
+//                                 [self updateTableViewAddingTimelinePoints:@[message]];
+//                                 [self updateRecordButton];
+//                             } failure:^(NSError *error) {
+//                                 NSLog(@"CHATerr: %@", error.description);
+//                             }];
 }
 
 - (void)updateRecordButton {
@@ -345,8 +353,8 @@ typedef NS_ENUM(unsigned) {
 /**************************************************************************************************/
 #pragma mark - Public Methods
 
-- (void)configureWithTour:(OTTour *)tour {
-    self.tour = tour;
+- (void)configureWithTour:(OTFeedItem *)feedItem {
+    self.feedItem = feedItem;
 }
 
 - (NSString *)formatDateForDisplay:(NSDate *)date {
@@ -557,7 +565,7 @@ typedef NS_ENUM(unsigned) {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *snapshotFormat = statusPoint.type == OTTourStatusStart ? @SNAPSHOT_START : @SNAPSHOT_STOP;
-    NSString *snapshotStartFilename = [NSString stringWithFormat:snapshotFormat, self.tour.uid.intValue];
+    NSString *snapshotStartFilename = [NSString stringWithFormat:snapshotFormat, self.feedItem.uid.intValue];
     NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:snapshotStartFilename];
     UIImage *image = [UIImage imageWithContentsOfFile:filePath];
     
@@ -583,36 +591,36 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (void)setupHeaderCell:(UITableViewCell *)cell {
-    OTTourAuthor *author = self.tour.author;
-    UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
-    organizationLabel.text = self.tour.organizationName;
-    
-    
-    NSString *tourType = self.tour.type;
-    if ([tourType isEqualToString:@"barehands"]) {
-        tourType = @"sociale";
-    } else     if ([tourType isEqualToString:@"medical"]) {
-        tourType = @"médicale";
-    } else if ([tourType isEqualToString:@"alimentary"]) {
-        tourType = @"distributive";
-    }
-    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
-    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", tourType] attributes:lightAttrs];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
-    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
-    [typeByNameAttrString appendAttributedString:nameAttrString];
-    UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
-    typeByNameLabel.attributedText = typeByNameAttrString;
-    
-    
-    UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSER];
-    [userImageButton setupAsProfilePictureFromUrl:self.tour.author.avatarUrl];
-    [userImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
+//    OTTourAuthor *author = self.tour.author;
+//    UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
+//    organizationLabel.text = self.tour.organizationName;
+//    
+//    
+//    NSString *tourType = self.tour.type;
+//    if ([tourType isEqualToString:@"barehands"]) {
+//        tourType = @"sociale";
+//    } else     if ([tourType isEqualToString:@"medical"]) {
+//        tourType = @"médicale";
+//    } else if ([tourType isEqualToString:@"alimentary"]) {
+//        tourType = @"distributive";
+//    }
+//    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
+//    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
+//    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", tourType] attributes:lightAttrs];
+//    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
+//    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+//    [typeByNameAttrString appendAttributedString:nameAttrString];
+//    UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
+//    typeByNameLabel.attributedText = typeByNameAttrString;
+//    
+//    
+//    UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSER];
+//    [userImageButton setupAsProfilePictureFromUrl:self.tour.author.avatarUrl];
+//    [userImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)doShowProfile:(UIButton *)senderButton {
-    [self performSegueWithIdentifier:@"OTUserProfileSegue" sender:self.tour.author.uID];
+    [self performSegueWithIdentifier:@"OTUserProfileSegue" sender:self.feedItem.author.uID];
 }
 
 
@@ -669,7 +677,7 @@ typedef NS_ENUM(unsigned) {
             case TimelinePointTagEncounter:
                 {
                     OTEncounter *encounter = (OTEncounter *)timelinePoint;
-                    if ([encounter.userId isEqualToValue:self.tour.author.uID]) {
+                    if ([encounter.userId isEqualToValue:self.feedItem.author.uID]) {
                         //show the encounter
                         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                         OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"OTMeetingCalloutViewController"];
@@ -829,7 +837,7 @@ static CGFloat keyboardOverlap;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
         OTTourDetailsOptionsViewController *controller = (OTTourDetailsOptionsViewController *)segue.destinationViewController;
-        controller.tour = self.tour;
+        ///controller.tour = self.feedItem;
         controller.view.backgroundColor = [UIColor appModalBackgroundColor];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.delegate  = self;

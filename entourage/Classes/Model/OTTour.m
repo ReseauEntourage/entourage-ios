@@ -105,4 +105,35 @@
     return emaDescription;
 }
 
+- (NSString *)navigationTitle {
+    return OTLocalizedString(@"tour");
+}
+
+- (NSString *)summary {
+    return self.organizationName;
+}
+
+- (NSString *)displayType {
+    NSString *tourType;
+    if ([self.type isEqualToString:@"barehands"]) {
+        tourType = @"sociale";
+    } else     if ([self.type isEqualToString:@"medical"]) {
+        tourType = @"médicale";
+    } else if ([self.type isEqualToString:@"alimentary"]) {
+        tourType = @"distributive";
+    }
+    return tourType;
+}
+
+- (NSAttributedString *)typeByNameAttributedString {
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", [self displayType]]
+                                                                         attributes:ATTR_LIGHT_15];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:self.author.displayName
+                                                                         attributes:ATTR_SEMIBOLD_15];
+    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+    [typeByNameAttrString appendAttributedString:nameAttrString];
+    
+    return typeByNameAttrString;
+}
+
 @end
