@@ -44,4 +44,23 @@
     return displayString;
 }
 
+- (NSString *)navigationTitle {
+    return OTLocalizedString([self displayType]);
+}
+
+- (NSString *)summary {
+    return self.title;
+}
+
+- (NSAttributedString *)typeByNameAttributedString {
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ par ", [self displayType].capitalizedString]
+                                                                         attributes:ATTR_LIGHT_15];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:self.author.displayName
+                                                                         attributes:ATTR_SEMIBOLD_15];
+    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+    [typeByNameAttrString appendAttributedString:nameAttrString];
+    
+    return typeByNameAttrString;
+}
+
 @end

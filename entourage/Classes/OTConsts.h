@@ -24,6 +24,10 @@
 #define PARIS_LAT 48.856578
 #define PARIS_LON  2.351828
 
+#define ATTR_LIGHT_15       @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]}
+#define ATTR_SEMIBOLD_15    @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]}
+
+
 #define TEXTVIEW_PADDING 10.0f
 #define TEXTVIEW_PADDING_TOP 12.0f
 #define TEXTVIEW_PADDING_BOTTOM 23.0f

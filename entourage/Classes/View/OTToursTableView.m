@@ -272,13 +272,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    id item = self.feedItems[indexPath.section];
-    if ([item isKindOfClass:[OTEntourage class]])
-        return;
-    //TODO: handle Entourages
-    OTTour *selectedTour = (OTTour*)self.feedItems[indexPath.section];
+    id selectedFeedItem = self.feedItems[indexPath.section];
+//    if ([item isKindOfClass:[OTEntourage class]])
+//        return;
+//    //TODO: handle Entourages
+    //OTFeedItem *selectedFeedItem = (OTFeedItem*)self.feedItems[indexPath.section];
     if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(showFeedInfo:)]) {
-        [self.toursDelegate showFeedInfo:selectedTour];
+        [self.toursDelegate showFeedInfo:selectedFeedItem];
     }
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }

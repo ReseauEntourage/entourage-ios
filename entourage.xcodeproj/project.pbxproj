@@ -104,6 +104,7 @@
 		45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E551CEE5C3F005C3175 /* OTToolbar.m */; };
 		45E37E591CEE64F7005C3175 /* OTFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E581CEE64F7005C3175 /* OTFiltersViewController.m */; };
 		45E37E5C1CEE657A005C3175 /* Filters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E37E5A1CEE657A005C3175 /* Filters.storyboard */; };
+		45E37E5F1CEF4D60005C3175 /* OTFeedItemSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E5E1CEF4D60005C3175 /* OTFeedItemSummaryView.m */; };
 		45E6BFCF1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */; };
 		45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */; };
 		45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */; };
@@ -318,6 +319,8 @@
 		45E37E571CEE64F7005C3175 /* OTFiltersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFiltersViewController.h; sourceTree = "<group>"; };
 		45E37E581CEE64F7005C3175 /* OTFiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFiltersViewController.m; sourceTree = "<group>"; };
 		45E37E5B1CEE657A005C3175 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Filters.storyboard; sourceTree = "<group>"; };
+		45E37E5D1CEF4D60005C3175 /* OTFeedItemSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemSummaryView.h; sourceTree = "<group>"; };
+		45E37E5E1CEF4D60005C3175 /* OTFeedItemSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemSummaryView.m; sourceTree = "<group>"; };
 		45E6BFCD1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourDetailsOptionsViewController.h; sourceTree = "<group>"; };
 		45E6BFCE1C8F46BE00DAC7F6 /* OTTourDetailsOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourDetailsOptionsViewController.m; sourceTree = "<group>"; };
 		45E6FE121CAE42E700505660 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourConfirmation.storyboard; sourceTree = "<group>"; };
@@ -500,6 +503,8 @@
 			children = (
 				2EDA5F051CB50CEE00849172 /* OTToursTableView.h */,
 				2EDA5F061CB50CEE00849172 /* OTToursTableView.m */,
+				45E37E5D1CEF4D60005C3175 /* OTFeedItemSummaryView.h */,
+				45E37E5E1CEF4D60005C3175 /* OTFeedItemSummaryView.m */,
 			);
 			name = Tour;
 			sourceTree = "<group>";
@@ -1239,6 +1244,7 @@
 				6B4930CD19A773C500DA7EE0 /* OTMainViewController.m in Sources */,
 				0AE855CB1C3D05A0001176B9 /* OTTutorialViewController.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
+				45E37E5F1CEF4D60005C3175 /* OTFeedItemSummaryView.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
 				0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */,
