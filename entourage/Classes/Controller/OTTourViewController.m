@@ -43,8 +43,9 @@
 #define PADDING 10
 
 typedef NS_ENUM(unsigned) {
-    SectionTypeHeader,
-    SectionTypeTimeline
+    SectionTypeTimeline,
+    SectionTypeHeader
+    
 } SectionType;
 
 
@@ -52,6 +53,10 @@ typedef NS_ENUM(unsigned) {
 @interface OTTourViewController () <UITextViewDelegate, OTTourDetailsOptionsDelegate>
 
 @property (nonatomic, weak) IBOutlet OTFeedItemSummaryView *feedSummaryView;
+@property (nonatomic, weak) IBOutlet UIButton *timelineButton;
+@property (nonatomic, weak) IBOutlet UIButton *infoButton;
+
+
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UITextView *chatTextView;
 @property (nonatomic, weak) IBOutlet UIView *chatToolbar;
@@ -87,12 +92,12 @@ typedef NS_ENUM(unsigned) {
                                           @"OTEncounter": @"TourEncounterCell",
                                           @"OTTourStatus": @"TourStatusCell"};
     
-    //[self initializeTimelinePoints];
+    [self initializeTimelinePoints];
     
-//    [self getTourUsersJoins];
-//    [self getTourMessages];
-//    [self getTourEncounters];
-//    
+    [self getTourUsersJoins];
+    [self getTourMessages];
+    [self getTourEncounters];
+    
     
     self.chatTextView.layer.borderColor = [UIColor appGreyishColor].CGColor;
     
@@ -108,7 +113,6 @@ typedef NS_ENUM(unsigned) {
     
     
     
-    self.tableView.hidden = YES;
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[self class]];
@@ -132,6 +136,19 @@ typedef NS_ENUM(unsigned) {
 
 /**************************************************************************************************/
 #pragma mark - Actions
+
+- (IBAction)showTimeline {
+    [self.timelineButton setSelected:YES];
+    [self.infoButton setSelected:NO];
+}
+
+- (IBAction)showInfo {
+    [self.timelineButton setSelected:NO];
+    [self.infoButton setSelected:YES];
+}
+
+
+
 
 - (IBAction)startStopRecording:(id)sender {
     
@@ -211,21 +228,26 @@ typedef NS_ENUM(unsigned) {
     OTTourStatus *tourStartStatus = [[OTTourStatus alloc] init];
     tourStartStatus.date = self.feedItem.creationDate;
     tourStartStatus.type = OTTourStatusStart;
-    tourStartStatus.status = @"Maraude en cours";
+    tourStartStatus.status = [NSString stringWithFormat: @"%@ en cours", self.feedItem.navigationTitle.capitalizedString];
     tourStartStatus.duration = 0;
     tourStartStatus.distance = 0;
     //[self.timelinePoints addObject:tourStartStatus];
     [self updateTableViewAddingTimelinePoints:@[tourStartStatus]];
     
-//    if (self.tour.endTime) {
-//        OTTourStatus *tourEndStatus = [[OTTourStatus alloc] init];
-//        tourEndStatus.date = self.feedItem.endTime;
-//        tourStartStatus.type = OTTourStatusEnd;
-//        tourEndStatus.status = @"Maraude terminée";
-////        tourEndStatus.duration = [self.feedItem.endTime timeIntervalSinceDate:self.tour.creationDate];;
-////        tourEndStatus.distance = self.feedItem.distance.doubleValue;
-//        [self updateTableViewAddingTimelinePoints:@[tourEndStatus]];
-//    }
+    
+    if ([self.feedItem isKindOfClass:[OTTour class]]) {
+        OTTour *tour = (OTTour*)self.feedItem;
+        
+        if (tour.endTime) {
+            OTTourStatus *tourEndStatus = [[OTTourStatus alloc] init];
+            tourEndStatus.date = tour.endTime;
+            tourStartStatus.type = OTTourStatusEnd;
+            tourEndStatus.status = @"Maraude terminée";
+            tourEndStatus.duration = [tour.endTime timeIntervalSinceDate:tour.creationDate];;
+            tourEndStatus.distance = tour.distance.doubleValue;
+            [self updateTableViewAddingTimelinePoints:@[tourEndStatus]];
+        }
+    }
 }
 
 - (void)setupMoreButtons {
@@ -261,7 +283,7 @@ typedef NS_ENUM(unsigned) {
     //NSLog(@"%lu timeline points", (unsigned long)self.timelinePoints.count);
     [self.tableView reloadData];
     
-     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.timelinePoints.count-1 inSection:1];
+     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.timelinePoints.count-1 inSection:0];
      [self.tableView scrollToRowAtIndexPath:indexPath
                            atScrollPosition:UITableViewScrollPositionBottom
                                    animated:YES];
@@ -396,54 +418,40 @@ typedef NS_ENUM(unsigned) {
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case SectionTypeHeader:
-            return 1;
-        case SectionTypeTimeline:{
-            //NSLog(@"tPoints %lu", (unsigned long)self.timelinePoints.count);
-            return self.timelinePoints.count;
-        }
-            
-        default:
-            return 0.0f;
-    }
-    
+    return self.timelinePoints.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case SectionTypeHeader:
-            return 15.0f;
-        case SectionTypeTimeline:
-            return 40.0f;
-            
-        default:
-            return 0.0f;
-    }
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    switch (section) {
+//        case SectionTypeHeader:
+//            return 15.0f;
+//        case SectionTypeTimeline:
+//            return 40.0f;
+//            
+//        default:
+//            return 0.0f;
+//    }
+//}
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40)];
-    if (section == SectionTypeTimeline) {
-        headerView.backgroundColor = [UIColor appPaleGreyColor];
-        headerView.text = @"DISCUSSION";
-        headerView.textAlignment = NSTextAlignmentCenter;
-        headerView.textColor = [UIColor appGreyishBrownColor];
-        headerView.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
-    }
-    return headerView;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40)];
+//    if (section == SectionTypeTimeline) {
+//        headerView.backgroundColor = [UIColor appPaleGreyColor];
+//        headerView.text = @"DISCUSSION";
+//        headerView.textAlignment = NSTextAlignmentCenter;
+//        headerView.textColor = [UIColor appGreyishBrownColor];
+//        headerView.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
+//    }
+//    return headerView;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellID = @"";
     switch (indexPath.section) {
-        case SectionTypeHeader:
-            cellID = @"TourDetailsCell";
-            break;
         case SectionTypeTimeline: {
             NSString *timelinePointClassName = NSStringFromClass([ self.timelinePoints[indexPath.row] class]);
             cellID = [self.timelineCardsClassesCellsIDs valueForKey:timelinePointClassName];
@@ -455,28 +463,24 @@ typedef NS_ENUM(unsigned) {
 
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
-    
-    if (indexPath.section == SectionTypeHeader) {
-        [self setupHeaderCell:cell];
-    } else {
-        switch (((OTTourTimelinePoint *)self.timelinePoints[indexPath.row]).tag) {
-            case TimelinePointTagEncounter:
-                [self setupEncounterCell:cell withEncounter:((OTEncounter *)self.timelinePoints[indexPath.row])];
-                break;
-            case TimelinePointTagJoiner:
-                [self setupJoinerCell:cell withJoiner:((OTTourJoiner *)self.timelinePoints[indexPath.row])];
-                break;
-            case TimelinePointTagMessage:
-                [self setupMessageCell:cell withMessage:((OTTourMessage *)self.timelinePoints[indexPath.row])];
-                break;
-            case TimelinePointTagStatus:
-                [self setupStatusCell:cell withStatus:((OTTourStatus *)self.timelinePoints[indexPath.row])];
-                break;
-                
-            default:
-                break;
-        }
+    switch (((OTTourTimelinePoint *)self.timelinePoints[indexPath.row]).tag) {
+        case TimelinePointTagEncounter:
+            [self setupEncounterCell:cell withEncounter:((OTEncounter *)self.timelinePoints[indexPath.row])];
+            break;
+        case TimelinePointTagJoiner:
+            [self setupJoinerCell:cell withJoiner:((OTTourJoiner *)self.timelinePoints[indexPath.row])];
+            break;
+        case TimelinePointTagMessage:
+            [self setupMessageCell:cell withMessage:((OTTourMessage *)self.timelinePoints[indexPath.row])];
+            break;
+        case TimelinePointTagStatus:
+            [self setupStatusCell:cell withStatus:((OTTourStatus *)self.timelinePoints[indexPath.row])];
+            break;
+            
+        default:
+            break;
     }
+    
     return cell;
 }
 
@@ -583,10 +587,14 @@ typedef NS_ENUM(unsigned) {
     statusLabel.text = statusPoint.status;
     
     UILabel *durationLabel = [cell viewWithTag:TIMELINE_DURATION_TAG];
-    durationLabel.text = [self formatHourToSecondsForDisplay:[NSDate dateWithTimeIntervalSince1970: statusPoint.duration]];
-    
     UILabel *kmLabel = [cell viewWithTag:TIMELINE_KM_TAG];
-    kmLabel.text = [NSString stringWithFormat:@"%.2fkm", statusPoint.distance / 1000.0f]; //distance is in meters
+    if ([self.feedItem isKindOfClass:[OTTour class]]) {
+        durationLabel.text = [self formatHourToSecondsForDisplay:[NSDate dateWithTimeIntervalSince1970: statusPoint.duration]];
+        kmLabel.text = [NSString stringWithFormat:@"%.2fkm", statusPoint.distance / 1000.0f]; //distance is in meters
+    } else {
+        durationLabel.text = @"";
+        kmLabel.text = @"";
+    }
 
 }
 

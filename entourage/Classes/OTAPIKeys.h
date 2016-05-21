@@ -34,7 +34,7 @@
 
 // Tour
 #define kWSKeyTour @"tour"
-#define kWSKeyStartDate @"start_date"
+#define kWSKeyStartDate @"start_time"
 #define kWSKeyEndDate @"end_date"
 #define kWSKeyTourType @"tour_type"
 #define kWSKeyVehicleType @"vehicle_type"
