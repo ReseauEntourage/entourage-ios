@@ -50,7 +50,7 @@ typedef NS_ENUM(unsigned) {
 
 
 
-@interface OTTourViewController () <UITextViewDelegate, OTTourDetailsOptionsDelegate>
+@interface OTTourViewController () <UITextViewDelegate, OTTourDetailsOptionsDelegate, OTFeedItemSummaryDelegate>
 
 @property (nonatomic, weak) IBOutlet OTFeedItemSummaryView *feedSummaryView;
 @property (nonatomic, weak) IBOutlet UIButton *timelineButton;
@@ -85,6 +85,9 @@ typedef NS_ENUM(unsigned) {
     [self setupMoreButtons];
     
     [self.feedSummaryView setupWithFeedItem:self.feedItem];
+    self.feedSummaryView.delegate = self;
+    [self showTimeline];
+    
     
     
     self.timelineCardsClassesCellsIDs = @{@"OTTourJoiner": @"TourJoinerCell",
@@ -94,10 +97,11 @@ typedef NS_ENUM(unsigned) {
     
     [self initializeTimelinePoints];
     
-    [self getTourUsersJoins];
-    [self getTourMessages];
-    [self getTourEncounters];
-    
+    if ([self.feedItem isKindOfClass:[OTTour class]]) {
+        [self getTourUsersJoins];
+        [self getTourMessages];
+        [self getTourEncounters];
+    }
     
     self.chatTextView.layer.borderColor = [UIColor appGreyishColor].CGColor;
     
@@ -140,11 +144,15 @@ typedef NS_ENUM(unsigned) {
 - (IBAction)showTimeline {
     [self.timelineButton setSelected:YES];
     [self.infoButton setSelected:NO];
+    
+    self.chatToolbar.hidden = NO;
 }
 
 - (IBAction)showInfo {
     [self.timelineButton setSelected:NO];
     [self.infoButton setSelected:YES];
+    
+    self.chatToolbar.hidden = YES;
 }
 
 
@@ -293,61 +301,65 @@ typedef NS_ENUM(unsigned) {
 
 #pragma mark - Service
 - (void)getTourUsersJoins {
-//    [[OTTourService new] tourUsersJoins:self.tour
-//                                success:^(NSArray *tourUsers) {
-//                                    //NSLog(@"USERS: %@", tourUsers);
-//                                    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-//                                    NSMutableArray *users = [NSMutableArray new];
-//                                    for (OTTourJoiner *joiner  in tourUsers) {
-//                                        if ([joiner.uID isEqualToValue:currentUser.sid]) {
-//                                            continue;
-//                                        }
-//                                        if (![joiner.status isEqualToString:JOIN_ACCEPTED]) {
-//                                            continue;
-//                                        }
-//                                        [users addObject:joiner];
-//                                    }
-//                                    [self updateTableViewAddingTimelinePoints:users];
-//    } failure:^(NSError *error) {
-//        NSLog(@"USERS err %@", error.description);
-//    }];
+    OTTour *tour = (OTTour *)self.feedItem;
+    
+    [[OTTourService new] tourUsersJoins:tour
+                                success:^(NSArray *tourUsers) {
+                                    //NSLog(@"USERS: %@", tourUsers);
+                                    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+                                    NSMutableArray *users = [NSMutableArray new];
+                                    for (OTTourJoiner *joiner  in tourUsers) {
+                                        if ([joiner.uID isEqualToValue:currentUser.sid]) {
+                                            continue;
+                                        }
+                                        if (![joiner.status isEqualToString:JOIN_ACCEPTED]) {
+                                            continue;
+                                        }
+                                        [users addObject:joiner];
+                                    }
+                                    [self updateTableViewAddingTimelinePoints:users];
+    } failure:^(NSError *error) {
+        NSLog(@"USERS err %@", error.description);
+    }];
 }
 
 - (void)getTourMessages {
-//    [[OTTourService new] tourMessages:self.tour
-//                                success:^(NSArray *tourMessages) {
-//                                    //NSLog(@"MESSAGES: %@", tourMessages);
-//                                    [self updateTableViewAddingTimelinePoints:tourMessages];
-//
-//    } failure:^(NSError *error) {
-//        NSLog(@"MESSAGESerr %@", error.description);
-//    }];
+    OTTour *tour = (OTTour *)self.feedItem;
+    [[OTTourService new] tourMessages:tour
+                                success:^(NSArray *tourMessages) {
+                                    //NSLog(@"MESSAGES: %@", tourMessages);
+                                    [self updateTableViewAddingTimelinePoints:tourMessages];
+
+    } failure:^(NSError *error) {
+        NSLog(@"MESSAGESerr %@", error.description);
+    }];
 }
 
 - (void)getTourEncounters {
-//    [[OTTourService new] tourEncounters:self.tour
-//                              success:^(NSArray *tourEncounters) {
-//                                 // NSLog(@"ENCOUNTERS: %@", tourEncounters);
-//                                  [self updateTableViewAddingTimelinePoints:tourEncounters];
-//                              } failure:^(NSError *error) {
-//                                  NSLog(@"ENCOUNTERSSerr %@", error.description);
-//                              }];
+    OTTour *tour = (OTTour *)self.feedItem;
+    [[OTTourService new] tourEncounters:tour
+                              success:^(NSArray *tourEncounters) {
+                                 // NSLog(@"ENCOUNTERS: %@", tourEncounters);
+                                  [self updateTableViewAddingTimelinePoints:tourEncounters];
+                              } failure:^(NSError *error) {
+                                  NSLog(@"ENCOUNTERSSerr %@", error.description);
+                              }];
 }
 
 - (IBAction)sendMessage {
     
     [self.chatTextView resignFirstResponder];
-    
-//    [[OTTourService new] sendMessage:self.chatTextView.text
-//                              onTour:self.tour
-//                             success:^(OTTourMessage * message) {
-//                                 NSLog(@"CHAT %@", message.text);
-//                                 self.chatTextView.text = @"";
-//                                 [self updateTableViewAddingTimelinePoints:@[message]];
-//                                 [self updateRecordButton];
-//                             } failure:^(NSError *error) {
-//                                 NSLog(@"CHATerr: %@", error.description);
-//                             }];
+     OTTour *tour = (OTTour *)self.feedItem;
+    [[OTTourService new] sendMessage:self.chatTextView.text
+                              onTour:tour
+                             success:^(OTTourMessage * message) {
+                                 NSLog(@"CHAT %@", message.text);
+                                 self.chatTextView.text = @"";
+                                 [self updateTableViewAddingTimelinePoints:@[message]];
+                                 [self updateRecordButton];
+                             } failure:^(NSError *error) {
+                                 NSLog(@"CHATerr: %@", error.description);
+                             }];
 }
 
 - (void)updateRecordButton {
@@ -627,7 +639,7 @@ typedef NS_ENUM(unsigned) {
 //    [userImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)doShowProfile:(UIButton *)senderButton {
+- (void)doShowProfile {
     [self performSegueWithIdentifier:@"OTUserProfileSegue" sender:self.feedItem.author.uID];
 }
 

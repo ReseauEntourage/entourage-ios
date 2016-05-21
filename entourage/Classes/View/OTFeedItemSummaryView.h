@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "OTFeedItem.h"
 
+@protocol OTFeedItemSummaryDelegate <NSObject>
+
+- (void)doShowProfile;
+
+@end
 
 @interface OTFeedItemSummaryView : UIView
+
+@property (nonatomic, weak) id<OTFeedItemSummaryDelegate> delegate;
 
 - (void)setupWithFeedItem:(OTFeedItem *)feedItem;
 

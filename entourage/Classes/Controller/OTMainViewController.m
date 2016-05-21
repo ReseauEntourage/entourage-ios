@@ -416,7 +416,7 @@ static BOOL didGetAnyData = NO;
                                                 self.feeds = feeds;
                                                 [self.tableView removeAll];
                                                 [self.tableView addFeedItems:feeds];
-                                                //                                                [self feedMapViewWithTours];
+                                                [self feedMapViewWithTours];
                                                 [self.tableView reloadData];
                                             } failure:^(NSError *error) {
                                                 NSLog(@"Error getting feeds: %@", error.description);
@@ -461,9 +461,9 @@ static BOOL didGetAnyData = NO;
 - (void)feedMapViewWithTours {
     self.toursMapDelegate.drawnTours = [[NSMapTable alloc] init];
     if (self.toursMapDelegate.isActive) {
-        for (OTTour *tour in self.feeds) {
-            
-            [self drawTour:tour];
+        for (OTFeedItem *feedItem in self.feeds) {
+            if ([feedItem isKindOfClass:[OTTour class]])
+                [self drawTour:(OTTour*)feedItem];
         }
     }
 }
