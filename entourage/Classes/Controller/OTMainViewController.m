@@ -15,7 +15,7 @@
 #import "OTMapOptionsViewController.h"
 #import "OTTourOptionsViewController.h"
 #import "OTTourJoinRequestViewController.h"
-#import "OTTourViewController.h"
+#import "OTFeedItemViewController.h"
 #import "OTPublicTourViewController.h"
 #import "OTQuitTourViewController.h"
 #import "OTGuideViewController.h"
@@ -1215,7 +1215,7 @@ typedef NS_ENUM(NSInteger) {
         } break;
         case SegueIDSelectedTour: {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
-            OTTourViewController *controller = (OTTourViewController *)navController.topViewController;
+            OTFeedItemViewController *controller = (OTFeedItemViewController *)navController.topViewController;
             controller.feedItem = (OTFeedItem*)self.selectedFeedItem;
             //[controller configureWithTour:(OTFeedItem*)self.selectedFeedItem];
             //controller.delegate = self;

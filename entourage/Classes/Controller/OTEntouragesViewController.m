@@ -9,7 +9,7 @@
 // Controllers
 #import "OTEntouragesViewController.h"
 #import "OTToursTableView.h"
-#import "OTTourViewController.h"
+#import "OTFeedItemViewController.h"
 #import "OTPublicTourViewController.h"
 #import "OTQuitTourViewController.h"
 #import "OTConfirmationViewController.h"
@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger){
         controller.tour = (OTTour*)sender;
     } else if ([segue.identifier isEqualToString:@"OTSelectedTourSegue"]) {
         UINavigationController *navController = segue.destinationViewController;
-        OTTourViewController *controller = (OTTourViewController *)navController.topViewController;
+        OTFeedItemViewController *controller = (OTFeedItemViewController *)navController.topViewController;
         controller.feedItem = (OTFeedItem*)sender;
         [controller configureWithTour:controller.feedItem];
     } else if ([segue.identifier isEqualToString:@"OTTourJoinRequestSegue"]) {

@@ -7,7 +7,7 @@
 //
 
 // Controllers
-#import "OTTourViewController.h"
+#import "OTFeedItemViewController.h"
 #import "UIViewController+menu.h"
 #import "OTTourDetailsOptionsViewController.h"
 #import "OTUserViewController.h"
@@ -50,7 +50,7 @@ typedef NS_ENUM(unsigned) {
 
 
 
-@interface OTTourViewController () <UITextViewDelegate, OTTourDetailsOptionsDelegate, OTFeedItemSummaryDelegate>
+@interface OTFeedItemViewController () <UITextViewDelegate, OTTourDetailsOptionsDelegate, OTFeedItemSummaryDelegate>
 
 @property (nonatomic, weak) IBOutlet OTFeedItemSummaryView *feedSummaryView;
 @property (nonatomic, weak) IBOutlet UIButton *timelineButton;
@@ -73,7 +73,7 @@ typedef NS_ENUM(unsigned) {
 
 @end
 
-@implementation OTTourViewController
+@implementation OTFeedItemViewController
 
 /**************************************************************************************************/
 #pragma mark - Life cycle
@@ -86,9 +86,6 @@ typedef NS_ENUM(unsigned) {
     
     [self.feedSummaryView setupWithFeedItem:self.feedItem];
     self.feedSummaryView.delegate = self;
-    [self showTimeline];
-    
-    
     
     self.timelineCardsClassesCellsIDs = @{@"OTTourJoiner": @"TourJoinerCell",
                                           @"OTTourMessage": @"TourMessageCell",
@@ -96,27 +93,15 @@ typedef NS_ENUM(unsigned) {
                                           @"OTTourStatus": @"TourStatusCell"};
     
     [self initializeTimelinePoints];
-    
-    if ([self.feedItem isKindOfClass:[OTTour class]]) {
-        [self getTourUsersJoins];
-        [self getTourMessages];
-        [self getTourEncounters];
-    }
-    
+    [self showTimeline];
+
     self.chatTextView.layer.borderColor = [UIColor appGreyishColor].CGColor;
-    
-    self.isRecording = NO;
-    
-    [self updateRecordButton];
-    
-    [OTSpeechKitManager setup];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
-    
+    self.isRecording = NO;
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[self class]];
@@ -130,6 +115,20 @@ typedef NS_ENUM(unsigned) {
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self updateRecordButton];
+    
+    [OTSpeechKitManager setup];
+    
+    if ([self.feedItem isKindOfClass:[OTTour class]]) {
+        [self getTourUsersJoins];
+        [self getTourMessages];
+        [self getTourEncounters];
+    }
+
+}
+
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];

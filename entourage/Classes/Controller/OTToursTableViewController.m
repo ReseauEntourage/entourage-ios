@@ -8,7 +8,7 @@
 
 // Controller
 #import "OTToursTableViewController.h"
-#import "OTTourViewController.h"
+#import "OTFeedItemViewController.h"
 
 // Model
 #import "OTTour.h"
@@ -99,7 +99,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"OTSelectedTour"]) {
-        OTTourViewController *controller = (OTTourViewController *)segue.destinationViewController;
+        OTFeedItemViewController *controller = (OTFeedItemViewController *)segue.destinationViewController;
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         [controller configureWithTour:self.selectedTour];

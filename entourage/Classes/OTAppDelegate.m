@@ -12,7 +12,7 @@
 #import "OTMessageViewController.h"
 #import "OTLoginViewController.h"
 #import "OTStartupViewController.h"
-#import "OTTourViewController.h"
+#import "OTFeedItemViewController.h"
 #import "SWRevealViewController.h"
 
 // Pods
@@ -293,7 +293,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
                                                                                       UIViewController *rootVC = app.windows.firstObject.rootViewController;
                                                                                       [rootVC dismissViewControllerAnimated:YES completion:nil];
                                                                                       UINavigationController *navC = [[UIStoryboard tourStoryboard] instantiateInitialViewController];
-                                                                                      OTTourViewController *tourVC = navC.viewControllers.firstObject;
+                                                                                      OTFeedItemViewController *tourVC = navC.viewControllers.firstObject;
                                                                                       tourVC.feedItem = (OTFeedItem*)tour;
                                                                                       [rootVC presentViewController:navC animated:YES completion:^{
                                                                                           NSLog(@"showing tour vc");

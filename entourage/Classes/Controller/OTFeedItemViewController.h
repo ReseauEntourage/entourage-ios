@@ -24,7 +24,7 @@
 
 @end
 
-@interface OTTourViewController : UIViewController <SpeechKitDelegate, SKRecognizerDelegate>
+@interface OTFeedItemViewController : UIViewController <SpeechKitDelegate, SKRecognizerDelegate>
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, strong) SKRecognizer *recognizer;
