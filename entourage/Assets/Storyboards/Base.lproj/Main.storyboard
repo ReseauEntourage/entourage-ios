@@ -226,9 +226,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Organization name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zk3-TU-RZt">
-                                                    <rect key="frame" x="15" y="10" width="240" height="20"/>
+                                                    <rect key="frame" x="15" y="10" width="255" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="240" id="TFk-Rb-0wt"/>
                                                         <constraint firstAttribute="height" constant="20" id="hPk-OF-Amv"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -236,10 +235,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tour type by Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxf-2i-lHo">
-                                                    <rect key="frame" x="15" y="30" width="240" height="18"/>
+                                                    <rect key="frame" x="15" y="30" width="255" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="SQM-s8-PxV"/>
-                                                        <constraint firstAttribute="width" constant="240" id="jdD-9O-ltp"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
@@ -308,9 +306,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="UQM-of-cg8" secondAttribute="trailing" constant="20" id="5oS-sg-U48"/>
+                                                <constraint firstItem="ABs-B6-uQi" firstAttribute="leading" secondItem="gxf-2i-lHo" secondAttribute="trailing" constant="8" id="85n-Md-tql"/>
                                                 <constraint firstItem="UQM-of-cg8" firstAttribute="centerY" secondItem="1qA-N1-SQJ" secondAttribute="centerY" id="8iz-Ii-BPL"/>
                                                 <constraint firstItem="nAb-fr-obm" firstAttribute="centerY" secondItem="BLD-XW-fJb" secondAttribute="centerY" id="9Im-zD-5ff"/>
                                                 <constraint firstItem="1qA-N1-SQJ" firstAttribute="leading" secondItem="pSt-IB-Y9T" secondAttribute="leadingMargin" constant="7" id="9Ux-Zb-iRn"/>
+                                                <constraint firstItem="ABs-B6-uQi" firstAttribute="leading" secondItem="Zk3-TU-RZt" secondAttribute="trailing" constant="8" id="BTm-hJ-66u"/>
                                                 <constraint firstItem="hkZ-O0-Eop" firstAttribute="centerX" secondItem="pSt-IB-Y9T" secondAttribute="centerX" id="BzD-Bu-bPG"/>
                                                 <constraint firstItem="lDU-fK-BnV" firstAttribute="centerY" secondItem="1qA-N1-SQJ" secondAttribute="centerY" id="Gyj-bR-ste"/>
                                                 <constraint firstItem="Zk3-TU-RZt" firstAttribute="top" secondItem="pSt-IB-Y9T" secondAttribute="topMargin" constant="2" id="LFp-sv-XJb"/>
