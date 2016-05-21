@@ -15,8 +15,10 @@
 #import "OTEntourage.h"
 #import "OTTourJoiner.h"
 
+
 // Helpers
 #import "NSUserDefaults+OT.h"
+#import "NSDictionary+Parsing.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
@@ -148,6 +150,42 @@ NSString *const kEntourages = @"entourages";
      }
      ];
 }
+
+- (void)sendMessage:(NSString *)message
+        onEntourage:(OTEntourage *)entourage
+            success:(void(^)(OTTourMessage *))success
+            failure:(void (^)(NSError *)) failure
+{
+    
+    NSString *url = [NSString stringWithFormat:@API_URL_ENTOURAGE_SEND_MESSAGE, entourage.uid, TOKEN];
+    
+    NSDictionary *messageDictionary = @{@"chat_message" : @{@"content": message}};
+    
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url
+     andParameters:messageDictionary
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         NSDictionary *messageDictionary = [data objectForKey:@"chat_message"];
+         OTTourMessage *message = nil;//[self messageFromDictionary:messageDictionary];
+         
+         if (success)
+         {
+             success(message);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }
+     ];
+}
+
 
 /**************************************************************************************************/
 #pragma mark - Private methods

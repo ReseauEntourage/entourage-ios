@@ -97,6 +97,9 @@
 // POI
 "poi_create_tour_alert" = "Si vous désirez créer une maraude, vouz devez quitter le guide de solidarité";
 "poi_create_encounter_alert" = "Si vous désirez créer une rencontre, vouz devez quitter le guide de solidarité";
+"poi_create_demande_alert" = "Si vous désirez créer une demande, vouz devez quitter le guide de solidarité";
+"poi_create_contribution_alert" = "Si vous désirez créer une contribution, vouz devez quitter le guide de solidarité";
+
 
 // User
 "firstName" = "Prénom";

@@ -14,6 +14,8 @@
 #import "OTMeetingCalloutViewController.h"
 #import "OTConsts.h"
 #import "OTFeedItemSummaryView.h"
+#import "OTFeedItemInfoView.h"
+#import "OTTourJoinRequestViewController.h"
 
 // Models
 #import "OTTour.h"
@@ -27,6 +29,7 @@
 
 // Services
 #import "OTTourService.h"
+#import "OTEntourageService.h"
 
 // Helpers
 #import "UIColor+entourage.h"
@@ -34,7 +37,7 @@
 #import "IQKeyboardManager.h"
 #import "UIButton+entourage.h"
 
-
+#define IS_ACCEPTED ([self.feedItem.joinStatus isEqualToString:@"accepted"])
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -50,18 +53,20 @@ typedef NS_ENUM(unsigned) {
 
 
 
-@interface OTFeedItemViewController () <UITextViewDelegate, OTTourDetailsOptionsDelegate, OTFeedItemSummaryDelegate>
+@interface OTFeedItemViewController () <UITextViewDelegate, OTTourDetailsOptionsDelegate, OTFeedItemSummaryDelegate, OTTourJoinRequestDelegate, OTFeedItemInfoDelegate>
 
 @property (nonatomic, weak) IBOutlet OTFeedItemSummaryView *feedSummaryView;
 @property (nonatomic, weak) IBOutlet UIButton *timelineButton;
 @property (nonatomic, weak) IBOutlet UIButton *infoButton;
 @property (nonatomic, weak) IBOutlet UIView *timelineView;
+@property (nonatomic, weak) IBOutlet OTFeedItemInfoView *infoView;
 
 
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UITextView *chatTextView;
 @property (nonatomic, weak) IBOutlet UIView *chatToolbar;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *distanceToSummaryConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *chatHConstraint;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *recordButtonWidthConstraint;
@@ -87,16 +92,26 @@ typedef NS_ENUM(unsigned) {
     [self setupMoreButtons];
     
     [self.feedSummaryView setupWithFeedItem:self.feedItem];
+    
     self.feedSummaryView.delegate = self;
+    self.infoView.delegate = self;
     
     self.timelineCardsClassesCellsIDs = @{@"OTTourJoiner": @"TourJoinerCell",
                                           @"OTTourMessage": @"TourMessageCell",
                                           @"OTEncounter": @"TourEncounterCell",
                                           @"OTTourStatus": @"TourStatusCell"};
     
-    [self initializeTimelinePoints];
-    [self showTimeline];
-
+    if (IS_ACCEPTED) {
+        [self initializeTimelinePoints];
+        [self showTimeline];
+    } else {
+        
+        self.timelineButton.hidden = YES;
+        self.infoButton.hidden = YES;
+        self.distanceToSummaryConstraint.constant = 0;
+        [self showInfo];
+    }
+    
     self.chatTextView.layer.borderColor = [UIColor appGreyishColor].CGColor;
 }
 
@@ -144,19 +159,23 @@ typedef NS_ENUM(unsigned) {
 
 - (IBAction)showTimeline {
     self.timelineView.hidden = NO;
+    self.infoView.hidden = YES;
     [self.timelineButton setSelected:YES];
     [self.infoButton setSelected:NO];
     
-    self.chatToolbar.hidden = NO;
+    self.chatToolbar.hidden = ![self.feedItem isKindOfClass:[OTTour class]];
 }
 
 - (IBAction)showInfo {
     self.timelineView.hidden = YES;
-    
+    self.infoView.hidden = NO;
     [self.timelineButton setSelected:NO];
     [self.infoButton setSelected:YES];
     
     self.chatToolbar.hidden = YES;
+    
+    
+    [self.infoView setupWithFeedItem:self.feedItem];
 }
 
 
@@ -263,6 +282,9 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (void)setupMoreButtons {
+    
+    if (IS_ACCEPTED) {
+    
     UIImage *plusImage = [[UIImage imageNamed:@"userPlus.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] init];
@@ -283,10 +305,23 @@ typedef NS_ENUM(unsigned) {
     
     [self.navigationItem setRightBarButtonItems:@[moreButton]];
     //[self.navigationItem setRightBarButtonItem:moreButton];
+    } else {
+        UIImage *shareImage = [[UIImage imageNamed:@"share.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        UIBarButtonItem *joinButton = [[UIBarButtonItem alloc] init];
+        [joinButton setImage:shareImage];
+        [joinButton setTarget:self];
+        [joinButton setAction:@selector(doJoinTour)];
+        [self.navigationItem setRightBarButtonItem:joinButton];
+    }
 }
 
 - (void)showOptions {
     [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+}
+
+- (void)doJoinTour {
+    [self performSegueWithIdentifier:@"PublicJoinRequestSegue" sender:self];
 }
 
 - (void)updateTableViewAddingTimelinePoints:(NSArray *)timelinePoints {
@@ -353,17 +388,32 @@ typedef NS_ENUM(unsigned) {
 - (IBAction)sendMessage {
     
     [self.chatTextView resignFirstResponder];
-     OTTour *tour = (OTTour *)self.feedItem;
-    [[OTTourService new] sendMessage:self.chatTextView.text
-                              onTour:tour
-                             success:^(OTTourMessage * message) {
-                                 NSLog(@"CHAT %@", message.text);
-                                 self.chatTextView.text = @"";
-                                 [self updateTableViewAddingTimelinePoints:@[message]];
-                                 [self updateRecordButton];
-                             } failure:^(NSError *error) {
-                                 NSLog(@"CHATerr: %@", error.description);
-                             }];
+    if ([self.feedItem isKindOfClass:[OTTour class]]) {
+        OTTour *tour = (OTTour *)self.feedItem;
+        [[OTTourService new] sendMessage:self.chatTextView.text
+                                  onTour:tour
+                                 success:^(OTTourMessage * message) {
+                                     NSLog(@"CHAT %@", message.text);
+                                     self.chatTextView.text = @"";
+                                     [self updateTableViewAddingTimelinePoints:@[message]];
+                                     [self updateRecordButton];
+                                 } failure:^(NSError *error) {
+                                     NSLog(@"CHATerr: %@", error.description);
+                                 }];
+    } else {
+        OTEntourage *entourage = (OTEntourage *)self.feedItem;
+        [[OTEntourageService new] sendMessage:self.chatTextView.text
+                                  onEntourage:entourage
+                                 success:^(OTTourMessage * message) {
+                                     NSLog(@"CHAT %@", message.text);
+                                     self.chatTextView.text = @"";
+                                     [self updateTableViewAddingTimelinePoints:@[message]];
+                                     [self updateRecordButton];
+                                 } failure:^(NSError *error) {
+                                     NSLog(@"CHATerr: %@", error.description);
+                                 }];
+
+    }
 }
 
 - (void)updateRecordButton {
@@ -871,6 +921,23 @@ static CGFloat keyboardOverlap;
         OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
         controller.userId = (NSNumber *)sender;
     }
+    if ([segue.identifier isEqualToString:@"PublicJoinRequestSegue"]) {
+        OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
+        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.feedItem = self.feedItem;
+        controller.tourJoinRequestDelegate = self;
+    }
 }
+
+/********************************************************************************/
+#pragma mark - OTTourJoinRequestDelegate
+- (void)dismissTourJoinRequestController {
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"dismissed join screen");
+        //[self setupUI];
+    }];
+}
+
 
 @end

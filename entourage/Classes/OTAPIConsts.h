@@ -18,6 +18,6 @@
 #define API_URL_ENTOURAGES @"entourages?token=%@"
 #define API_URL_ENTOURAGE_JOIN_REQUEST @"entourages/%@/users?token=%@"
 #define API_URL_ENTOURAGE_JOIN_UPDATE @"entourages/%@/users/%@?token=%@"
-
+#define API_URL_ENTOURAGE_SEND_MESSAGE "entourages/%@/chat_messages.json?token=%@"
 
 #endif /* OTAPIConsts_h */

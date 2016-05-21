@@ -241,6 +241,7 @@
     if (self.isTourListDisplayed) {
         [self showToursList];
     }
+    [self.footerToolbar setTitle:@"Entourages"];
 }
 
 - (void)switchToGuide {
@@ -250,6 +251,7 @@
     [self clearMap];
     [self showToursMap];
     [self.guideMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
+    [self.footerToolbar setTitle:@"Guide"];// de solidarité"];
 }
 
 /**************************************************************************************************/

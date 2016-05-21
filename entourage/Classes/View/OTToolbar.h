@@ -10,4 +10,6 @@
 
 @interface OTToolbar : UIToolbar
 
+- (void)setTitle:(NSString *)title;
+
 @end

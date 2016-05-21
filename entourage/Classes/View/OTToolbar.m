@@ -10,6 +10,12 @@
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 
+@interface OTToolbar()
+
+@property(nonatomic, strong) NSString *title;
+
+@end
+
 @implementation OTToolbar
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -34,7 +40,7 @@
                                                                  action:@selector(showCurrentLocation)];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = @"Entourages";
+    titleLabel.text = self.title;
     titleLabel.textColor = [UIColor appGreyishBrownColor];
     titleLabel.font = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
     UIBarButtonItem *titleBBI = [[UIBarButtonItem alloc] initWithCustomView:titleLabel];
@@ -42,6 +48,13 @@
                                                                                   target:nil action:nil];
     
     [self setItems:@[filtersBBI, geolocBBI, flexibleBBI, titleBBI, flexibleBBI]];
+}
+
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    [self initialize];
+    [self setNeedsDisplay];
+    
 }
 
 - (void)showFilters {

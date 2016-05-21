@@ -14,6 +14,7 @@
 #import "OTMapOptionsViewController.h"
 #import "OTTourOptionsViewController.h"
 #import "OTSWRevealViewController.h"
+#import "OTConsts.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -358,20 +359,38 @@
 /********************************************************************************/
 #pragma mark - OTMapOptionsDelegate
 
--(void)createTour {
+- (void)createTour {
     [self dismissViewControllerAnimated:NO completion:^{
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"poi_create_tour_alert", @"") preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        [alert addAction:cancelAction];
-        UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self performSegueWithIdentifier:@"OTMapViewSegue" sender:nil];
-        }];
-        [alert addAction:quitAction];
-        
-        [self presentViewController:alert animated:YES completion:nil];
+        [self showCreateFeedItemAlertWithText:OTLocalizedString(@"poi_create_tour_alert")];
+
     }];
 }
+
+- (void)createDemande {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self showCreateFeedItemAlertWithText:OTLocalizedString(@"poi_create_demande_alert")];
+    }];
+}
+
+- (void)createContribution {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self showCreateFeedItemAlertWithText:OTLocalizedString(@"poi_create_contribution_alert")];
+    }];
+}
+
+- (void)showCreateFeedItemAlertWithText:(NSString *)text {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:text preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:cancelAction];
+    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self performSegueWithIdentifier:@"OTMapViewSegue" sender:nil];
+    }];
+    [alert addAction:quitAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 //TODO: add demande, contribution
 

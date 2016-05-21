@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+#import "OTTourMessage.h" //TODO:
+
 @class OTEntourage, OTTourJoiner;
 
 @interface OTEntourageService : NSObject
@@ -32,5 +34,10 @@
                              forEntourage:(NSNumber*)entourageID
                               withSuccess:(void (^)())success
                                   failure:(void (^)(NSError *))failure;
+
+- (void)sendMessage:(NSString *)message
+        onEntourage:(OTEntourage *)entourage
+            success:(void(^)(OTTourMessage *))success
+            failure:(void (^)(NSError *)) failure;
 
 @end
