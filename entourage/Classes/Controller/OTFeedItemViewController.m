@@ -55,6 +55,8 @@ typedef NS_ENUM(unsigned) {
 @property (nonatomic, weak) IBOutlet OTFeedItemSummaryView *feedSummaryView;
 @property (nonatomic, weak) IBOutlet UIButton *timelineButton;
 @property (nonatomic, weak) IBOutlet UIButton *infoButton;
+@property (nonatomic, weak) IBOutlet UIView *timelineView;
+
 
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -141,6 +143,7 @@ typedef NS_ENUM(unsigned) {
 #pragma mark - Actions
 
 - (IBAction)showTimeline {
+    self.timelineView.hidden = NO;
     [self.timelineButton setSelected:YES];
     [self.infoButton setSelected:NO];
     
@@ -148,6 +151,8 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (IBAction)showInfo {
+    self.timelineView.hidden = YES;
+    
     [self.timelineButton setSelected:NO];
     [self.infoButton setSelected:YES];
     
