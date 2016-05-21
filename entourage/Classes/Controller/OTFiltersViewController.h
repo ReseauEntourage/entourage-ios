@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol OTFiltersViewControllerDelegate <NSObject>
+
+- (void)filterChanged;
+
+@end
+
 @interface OTFiltersViewController : UIViewController
 
 @property (nonatomic) BOOL isOngoingTour;
+@property (nonatomic, weak) id<OTFiltersViewControllerDelegate> delegate;
 
 @end

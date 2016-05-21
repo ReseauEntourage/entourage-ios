@@ -25,6 +25,7 @@
 #import "OTTourCreatorViewController.h"
 #import "OTEntourageCreatorViewController.h"
 #import "OTEntouragesViewController.h"
+#import "OTFiltersViewController.h"
 
 #import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
@@ -49,6 +50,7 @@
 #import "OTTourPoint.h"
 #import "OTEncounter.h"
 #import "OTPOI.h"
+#import "OTEntourageFilter.h"
 
 // Service
 #import "OTTourService.h"
@@ -92,7 +94,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTTourQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate>
+@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTTourQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
@@ -384,11 +386,22 @@ static BOOL didGetAnyData = NO;
     self.requestedToursCoordinate = self.mapView.centerCoordinate;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    NSDictionary *filterDictionary = @{  @"per": @20,
+    OTEntourageFilter *entourageFilter = [OTEntourageFilter sharedInstance];
+    
+    BOOL showTours = [[entourageFilter valueForFilter:kEntourageFilterEntourageShowTours] boolValue];
+    BOOL myEntouragesOnly = [[entourageFilter valueForFilter:kEntourageFilterEntourageOnlyMyEntourages] boolValue];
+    
+    NSDictionary *filterDictionary = @{  @"page": @1,
+                                         @"per": @20,
                                          @"latitude": @(self.requestedToursCoordinate.latitude),
                                          @"longitude": @(self.requestedToursCoordinate.longitude),
                                          @"distance": @TOURS_REQUEST_DISTANCE_KM,
-                                         @"show_tours": @"true"};
+                                         @"tour_types": [entourageFilter getTourTypes],
+                                         @"entourage_types": [entourageFilter getEntourageTypes],
+                                         @"show_tours": showTours ? @"true" : @"false",
+                                         @"show_my_entourages_only" : myEntouragesOnly ? @"true" : @"false",
+                                         @"time_range" : [entourageFilter valueForFilter:kEntourageFilterTimeframe]
+                                         };
     
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
@@ -909,6 +922,13 @@ static BOOL didGetAnyData = NO;
 }
 
 /**************************************************************************************************/
+#pragma mark - OTFiltersViewControllerDelegate
+
+- (void) filterChanged {
+    [self getData];
+}
+
+/**************************************************************************************************/
 #pragma mark - Actions
 
 - (void)showFilters {
@@ -1144,7 +1164,8 @@ typedef NS_ENUM(NSInteger) {
     SegueIDGuideSolidarityDetails,
     SegueIDTourCreator,
     SegueIDEntourageCreator,
-    SegueIDEntourages
+    SegueIDEntourages,
+    SegueIDFilter
 } SegueID;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -1163,7 +1184,8 @@ typedef NS_ENUM(NSInteger) {
                                        @"OTGuideDetailsSegue": [NSNumber numberWithInteger:SegueIDGuideSolidarityDetails],
                                        @"TourCreatorSegue": [NSNumber numberWithInteger:SegueIDTourCreator],
                                        @"EntourageCreator": [NSNumber numberWithInteger:SegueIDEntourageCreator],
-                                       @"EntouragesSegue": [NSNumber numberWithInteger:SegueIDEntourages]};
+                                       @"EntouragesSegue": [NSNumber numberWithInteger:SegueIDEntourages],
+                                       @"FiltersSegue" : [NSNumber numberWithInteger:SegueIDFilter]};
     
     UIViewController *destinationViewController = segue.destinationViewController;
     NSInteger segueID = [[seguesDictionary numberForKey:segue.identifier defaultValue:@-1] integerValue];
@@ -1269,6 +1291,12 @@ typedef NS_ENUM(NSInteger) {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
             OTEntouragesViewController *controller = (OTEntouragesViewController*)navController.topViewController;
             controller.mainViewController = self;
+        } break;
+        case SegueIDFilter: {
+            UINavigationController *navController = (UINavigationController*)destinationViewController;
+            OTFiltersViewController *controller = (OTFiltersViewController*)navController.topViewController;
+            controller.isOngoingTour = self.isTourRunning;
+            controller.delegate = self;
         } break;
         default:
             break;

@@ -7,9 +7,13 @@
 //
 
 #import "OTFiltersViewController.h"
+#import "OTFilterCellTableViewCell.h"
+#import "OTFilterRadioButton.h"
 #import "UIViewController+menu.h"
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
+
+#import "OTEntourageFilter.h"
 
 #define FILTER_IMAGE_TAG 1
 #define FILTER_DESCRIPTION_TAG 2
@@ -61,32 +65,64 @@
     
     self.items = @[
                    @[
-                       OTLocalizedString(@"filter_maraude_medical"),
-                       OTLocalizedString(@"filter_maraude_bare_hands"),
-                       OTLocalizedString(@"filter_maraude_alimentary")
+                       @[OTLocalizedString(@"filter_maraude_medical"), kEntourageFilterMaraudeMedical],
+                       @[OTLocalizedString(@"filter_maraude_bare_hands"), kEntourageFilterMaraudeBarehands],
+                       @[OTLocalizedString(@"filter_maraude_alimentary"), kEntourageFilterMaraudeAlimentary],
                        ],
                    @[
-                       OTLocalizedString(@"filter_entourage_demand"),
-                       OTLocalizedString(@"filter_entourage_contribution"),
-                       OTLocalizedString(@"filter_entourage_show_tours"),
-                       OTLocalizedString(@"filter_entourage_only_my_entourages")
+                       @[OTLocalizedString(@"filter_entourage_demand"), kEntourageFilterEntourageDemand],
+                       @[OTLocalizedString(@"filter_entourage_contribution"), kEntourageFilterentourageContribution],
+                       @[OTLocalizedString(@"filter_entourage_show_tours"), kEntourageFilterEntourageShowTours],
+                       @[OTLocalizedString(@"filter_entourage_only_my_entourages"), kEntourageFilterEntourageOnlyMyEntourages],
                        ],
                    @[
-                       @""
+                       @[@"", kEntourageFilterTimeframe],
                        ]
                    ];
     
     self.maraudeIcons = @[
                           @"medicalActive",
                           @"socialActive",
-                          @"distributiveActive"
+                          @"distibutiveActive"
                           ];
     
     self.timeframeButtons = [NSMutableArray new];
 }
 
 - (void)saveFilters {
+    OTEntourageFilter *entourageFilter = [OTEntourageFilter sharedInstance];
     
+    int arrayShift = self.isOngoingTour ? 0 : 1;
+    
+    for (NSInteger section = 0; section < self.sections.count - arrayShift; section++) {
+        NSArray *items = self.items[section+arrayShift];
+        // First item is the header cell, so we start from 1
+        for (NSInteger row = 1; row <= items.count; row++) {
+            OTFilterCellTableViewCell *cell = [self.filterTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
+            if (section != self.sections.count-1-arrayShift) {
+                UISwitch *switchButton = [cell viewWithTag:FILTER_SWITCH_TAG];
+                [entourageFilter setFilterValue:[NSNumber numberWithBool:switchButton.isOn] forKey:cell.filterKey];
+            }
+            else {
+                for (NSInteger tag = FILTER_TIMEFRAME_BUTTON_START_TAG; tag <= FILTER_TIMEFRAME_BUTTON_END_TAG; tag++) {
+                    OTFilterRadioButton *timeframeButton = [cell.contentView viewWithTag:tag];
+                    if ([timeframeButton isSelected]) {
+                        NSNumber *filterValue = [timeframeButton valueForKeyPath:@"filterValue"];
+                        [entourageFilter setFilterValue:filterValue forKey:cell.filterKey];
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    // Inform the delegate
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(filterChanged)]) {
+        [self.delegate filterChanged];
+    }
+    
+    // Dismiss the controller
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)timeframeButtonClicked:(UIButton *)sender {
@@ -112,6 +148,8 @@
     
     int arrayShift = self.isOngoingTour ? 0 : 1;
     
+    OTEntourageFilter *entourageFilter = [OTEntourageFilter sharedInstance];
+    
     if (indexPath.section != self.sections.count-1-arrayShift) {
         if (indexPath.row == 0) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"OTFilterHeaderCell" forIndexPath:indexPath];
@@ -135,8 +173,12 @@
         }
         // Description
         NSArray *sectionItems = (NSArray*)self.items[indexPath.section+arrayShift];
-        [filterDescription setText:sectionItems[indexPath.row-1]];
+        NSArray *filterItem = sectionItems[indexPath.row-1];
+        [filterDescription setText:filterItem[0]];
         // Switch status
+        [filterSwitch setOn:[[entourageFilter valueForFilter:filterItem[1]] boolValue]];
+        
+        ((OTFilterCellTableViewCell*)cell).filterKey = filterItem[1];
     }
     else {
         // Timeframe cell
@@ -151,12 +193,26 @@
         
         cell = [tableView dequeueReusableCellWithIdentifier:@"OTFilterTimeframeCell" forIndexPath:indexPath];
         
+        NSArray *sectionItems = (NSArray*)self.items[indexPath.section+arrayShift];
+        NSArray *filterItem = sectionItems[indexPath.row-1];
+        
+        NSNumber *timeframeFilterValue = [entourageFilter valueForFilter:filterItem[1]];
+        
         if (self.timeframeButtons.count == 0) {
             for (NSInteger tag = FILTER_TIMEFRAME_BUTTON_START_TAG; tag <= FILTER_TIMEFRAME_BUTTON_END_TAG; tag++) {
                 UIButton *timeframeButton = [cell.contentView viewWithTag:tag];
                 [self.timeframeButtons addObject:timeframeButton];
+                NSNumber *filterValue = [timeframeButton valueForKeyPath:@"filterValue"];
+                if ([filterValue isEqualToNumber:timeframeFilterValue]) {
+                    [timeframeButton setSelected:YES];
+                }
+                else {
+                    [timeframeButton setSelected:NO];
+                }
             }
         }
+        
+        ((OTFilterCellTableViewCell*)cell).filterKey = filterItem[1];
     }
     
     return cell;
