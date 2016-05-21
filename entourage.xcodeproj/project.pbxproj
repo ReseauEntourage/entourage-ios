@@ -65,7 +65,7 @@
 		452FE3E81CAD549200063334 /* GuideSolidarity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3E71CAD549200063334 /* GuideSolidarity.storyboard */; };
 		452FE3EB1CAD54CE00063334 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3E91CAD54CE00063334 /* Settings.storyboard */; };
 		452FE3ED1CAD54F800063334 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3EC1CAD54F700063334 /* About.storyboard */; };
-		452FE3F01CAD55A400063334 /* Tour.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3EE1CAD55A400063334 /* Tour.storyboard */; };
+		452FE3F01CAD55A400063334 /* FeedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3EE1CAD55A400063334 /* FeedItem.storyboard */; };
 		452FE3F21CAD561500063334 /* QuitTour.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3F11CAD561500063334 /* QuitTour.storyboard */; };
 		452FE3F51CAD563F00063334 /* TourOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3F31CAD563F00063334 /* TourOptions.storyboard */; };
 		452FE4011CAD5AC700063334 /* Entourages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452FE3FF1CAD5AC700063334 /* Entourages.storyboard */; };
@@ -265,7 +265,7 @@
 		452FE3E71CAD549200063334 /* GuideSolidarity.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GuideSolidarity.storyboard; sourceTree = "<group>"; };
 		452FE3EA1CAD54CE00063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		452FE3EC1CAD54F700063334 /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
-		452FE3EF1CAD55A400063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Tour.storyboard; sourceTree = "<group>"; };
+		452FE3EF1CAD55A400063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/FeedItem.storyboard; sourceTree = "<group>"; };
 		452FE3F11CAD561500063334 /* QuitTour.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QuitTour.storyboard; sourceTree = "<group>"; };
 		452FE3F41CAD563F00063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourOptions.storyboard; sourceTree = "<group>"; };
 		452FE4001CAD5AC700063334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Entourages.storyboard; sourceTree = "<group>"; };
@@ -664,6 +664,7 @@
 			children = (
 				45CE5A711C56961500F68C24 /* Intro.storyboard */,
 				45CE5A631C5242FC00F68C24 /* Main.storyboard */,
+				452FE3EE1CAD55A400063334 /* FeedItem.storyboard */,
 				45E37E5A1CEE657A005C3175 /* Filters.storyboard */,
 				45BC9BCD1CE32AE1000065B7 /* EntourageCreator.storyboard */,
 				4507017D1CCF494800432548 /* TourJoinRequest.storyboard */,
@@ -672,7 +673,6 @@
 				452FE3FF1CAD5AC700063334 /* Entourages.storyboard */,
 				452FE3F31CAD563F00063334 /* TourOptions.storyboard */,
 				452FE3F11CAD561500063334 /* QuitTour.storyboard */,
-				452FE3EE1CAD55A400063334 /* Tour.storyboard */,
 				452FE3EC1CAD54F700063334 /* About.storyboard */,
 				452FE3E91CAD54CE00063334 /* Settings.storyboard */,
 				452FE3E71CAD549200063334 /* GuideSolidarity.storyboard */,
@@ -1183,7 +1183,7 @@
 				452FE3F21CAD561500063334 /* QuitTour.storyboard in Resources */,
 				45BC9BCE1CE32AE1000065B7 /* EntourageCreator.storyboard in Resources */,
 				452FE3E81CAD549200063334 /* GuideSolidarity.storyboard in Resources */,
-				452FE3F01CAD55A400063334 /* Tour.storyboard in Resources */,
+				452FE3F01CAD55A400063334 /* FeedItem.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1435,12 +1435,12 @@
 			name = Settings.storyboard;
 			sourceTree = "<group>";
 		};
-		452FE3EE1CAD55A400063334 /* Tour.storyboard */ = {
+		452FE3EE1CAD55A400063334 /* FeedItem.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				452FE3EF1CAD55A400063334 /* Base */,
 			);
-			name = Tour.storyboard;
+			name = FeedItem.storyboard;
 			sourceTree = "<group>";
 		};
 		452FE3F31CAD563F00063334 /* TourOptions.storyboard */ = {

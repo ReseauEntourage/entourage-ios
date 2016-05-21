@@ -69,7 +69,7 @@
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tour type by Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNo-Ck-gyb">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FeedItem type by Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNo-Ck-gyb">
                                                     <rect key="frame" x="15" y="30" width="240" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="OW6-9g-zJa"/>
@@ -209,10 +209,10 @@
             </objects>
             <point key="canvasLocation" x="3094.5" y="-832"/>
         </scene>
-        <!--Tour-->
+        <!--FeedItem-->
         <scene sceneID="j6x-xi-6f9">
             <objects>
-                <viewControllerPlaceholder storyboardName="Tour" id="nwQ-gt-ewY" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="FeedItem" id="nwQ-gt-ewY" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0xc-6x-nHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3127.5" y="-751"/>
@@ -236,7 +236,7 @@
         <!--PublicTourViewController-->
         <scene sceneID="NLq-Af-i7X">
             <objects>
-                <viewControllerPlaceholder storyboardName="Tour" referencedIdentifier="PublicTourViewController" id="g6j-63-9qQ" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="FeedItem" referencedIdentifier="PublicTourViewController" id="g6j-63-9qQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4UT-LX-byg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3223.5" y="-454"/>
