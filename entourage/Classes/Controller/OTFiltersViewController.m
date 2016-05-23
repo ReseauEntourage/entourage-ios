@@ -81,9 +81,9 @@
                    ];
     
     self.maraudeIcons = @[
-                          @"medicalActive",
-                          @"socialActive",
-                          @"distibutiveActive"
+                          @"filter_heal",//@"medicalActive",
+                          @"filter_social",
+                          @"filter_eat"//@"distibutiveActive"
                           ];
     
     self.timeframeButtons = [NSMutableArray new];
@@ -171,6 +171,17 @@
                 [filterImage setImage:[UIImage imageNamed:self.maraudeIcons[indexPath.row-1]]];
             }
         }
+        
+        if (indexPath.section == self.sections.count - 2 - arrayShift) {
+            CGRect frame = filterDescription.frame;
+            CGFloat x = frame.origin.x;
+            
+            frame.origin.x = 15.0f;
+            frame.size.width += x-15.0f;
+            filterDescription.frame = frame;
+            [filterDescription setNeedsDisplay];
+        }
+        
         // Description
         NSArray *sectionItems = (NSArray*)self.items[indexPath.section+arrayShift];
         NSArray *filterItem = sectionItems[indexPath.row-1];

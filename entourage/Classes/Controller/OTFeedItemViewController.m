@@ -18,6 +18,7 @@
 #import "OTTourJoinRequestViewController.h"
 
 // Models
+#import "OTEntourage.h"
 #import "OTTour.h"
 #import "OTTourPoint.h"
 #import "OTOrganization.h"
@@ -134,14 +135,18 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self updateRecordButton];
     
-    [OTSpeechKitManager setup];
+    if (IS_ACCEPTED) {
+        [self updateRecordButton];
+        [OTSpeechKitManager setup];
     
-    if ([self.feedItem isKindOfClass:[OTTour class]]) {
-        [self getTourUsersJoins];
-        [self getTourMessages];
-        [self getTourEncounters];
+        if ([self.feedItem isKindOfClass:[OTTour class]]) {
+            [self getTourUsersJoins];
+            [self getTourMessages];
+            [self getTourEncounters];
+        } else {
+            [self getEntourageMessages];
+        }
     }
 
 }
@@ -163,7 +168,7 @@ typedef NS_ENUM(unsigned) {
     [self.timelineButton setSelected:YES];
     [self.infoButton setSelected:NO];
     
-    self.chatToolbar.hidden = ![self.feedItem isKindOfClass:[OTTour class]];
+    self.chatToolbar.hidden = NO;//![self.feedItem isKindOfClass:[OTTour class]];
 }
 
 - (IBAction)showInfo {
@@ -360,6 +365,17 @@ typedef NS_ENUM(unsigned) {
     } failure:^(NSError *error) {
         NSLog(@"USERS err %@", error.description);
     }];
+}
+
+- (void)getEntourageMessages {
+    OTEntourage *entourage = (OTEntourage *)self.feedItem;
+    [[OTEntourageService new] entourageMessagesForEntourage:entourage.uid
+                                                WithSuccess:^(NSArray *entourageMessages) {
+                                                    [self updateTableViewAddingTimelinePoints:entourageMessages];
+                                                } failure:^(NSError * error) {
+                                                    NSLog(@"MESSAGESerr %@", error.description);
+
+                                                }];
 }
 
 - (void)getTourMessages {

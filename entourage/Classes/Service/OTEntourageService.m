@@ -151,6 +151,36 @@ NSString *const kEntourages = @"entourages";
      ];
 }
 
+- (void)entourageMessagesForEntourage:(NSNumber *)entourageID
+                          WithSuccess:(void(^)(NSArray *entourageMessages))success
+                              failure:(void (^)(NSError *)) failure
+{
+    NSString *url = [NSString stringWithFormat:@API_URL_ENTOURAGE_GET_MESSAGES, entourageID, TOKEN];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         NSArray *messages = [self messagesFromDictionary:data];
+         
+         if (success)
+         {
+             success(messages);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }
+     ];
+
+}
+
 - (void)sendMessage:(NSString *)message
         onEntourage:(OTEntourage *)entourage
             success:(void(^)(OTTourMessage *))success
@@ -169,7 +199,7 @@ NSString *const kEntourages = @"entourages";
      {
          NSDictionary *data = responseObject;
          NSDictionary *messageDictionary = [data objectForKey:@"chat_message"];
-         OTTourMessage *message = nil;//[self messageFromDictionary:messageDictionary];
+         OTTourMessage *message = [[OTTourMessage alloc] initWithDictionary:messageDictionary];
          
          if (success)
          {
@@ -189,6 +219,18 @@ NSString *const kEntourages = @"entourages";
 
 /**************************************************************************************************/
 #pragma mark - Private methods
+
+- (NSArray *)messagesFromDictionary:(NSDictionary *)data
+{
+    NSMutableArray *messages = [[NSMutableArray alloc] init];
+    NSArray *messagesDictionaries = [data objectForKey:@"chat_messages"];
+    for (NSDictionary *messageDictionary in messagesDictionaries)
+    {
+        OTTourMessage *message = [[OTTourMessage alloc] initWithDictionary:messageDictionary];
+        [messages addObject:message];
+    }
+    return messages;
+}
 
 - (NSMutableArray *)entouragesFromDictionary:(NSDictionary *)data
 {

@@ -40,4 +40,8 @@
             success:(void(^)(OTTourMessage *))success
             failure:(void (^)(NSError *)) failure;
 
+- (void)entourageMessagesForEntourage:(NSNumber *)entourageID
+                          WithSuccess:(void(^)(NSArray *entourageMessages))success
+                              failure:(void (^)(NSError *)) failure;
+
 @end

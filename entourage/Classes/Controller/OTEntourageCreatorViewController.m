@@ -33,8 +33,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title =  self.type.uppercaseString;
+     NSString *typeString = [self.type isEqualToString: ENTOURAGE_DEMANDE] ? OTLocalizedString(@"demande") : OTLocalizedString(@"contribution");
+    self.title =  typeString.uppercaseString;
     
     [self setupCloseModal];
     
