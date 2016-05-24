@@ -12,6 +12,7 @@
 @interface OTTourMessage : OTTourTimelinePoint
 
 @property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *userAvatarURL;
 @property (nonatomic, strong) NSNumber *uID;
 

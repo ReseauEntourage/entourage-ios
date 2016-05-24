@@ -69,7 +69,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 	[Flurry setCrashReportingEnabled:YES];
 	[Flurry startSession:NSLocalizedString(@"FLURRY_API_KEY", @"")];
     [IQKeyboardManager sharedManager].enable = YES;
-
+    [[UIApplication sharedApplication] unregisterForRemoteNotifications];
 //    // register for push notifications
 //    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
 //    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];

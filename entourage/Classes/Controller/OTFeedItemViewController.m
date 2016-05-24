@@ -576,6 +576,7 @@ typedef NS_ENUM(unsigned) {
 #define TIMELINE_MESSAGE_OTHER_BACKGROUND_TAG 30
 #define TIMELINE_MESSAGE_OTHER_USER 31
 #define TIMELINE_MESSAGE_OTHER_TEXT 32
+#define TIMELINE_MESSAGE_OTHER_NAME 40
 
 #define TIMELINE_MESSAGE_OTHER_CONTENT_TAG 33
 #define TIMELINE_MESSAGE_ME_CONTENT_TAG 34
@@ -633,6 +634,9 @@ typedef NS_ENUM(unsigned) {
     } else {
         [messageMeContainer setHidden:YES];
         [messageOtherContainer setHidden:NO];
+        
+        UILabel *nameLabel = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_NAME];
+        nameLabel.text = message.userName;
         
         messageBackgroundImageView = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_BACKGROUND_TAG];
         messageLabel = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_TEXT];
@@ -730,7 +734,7 @@ typedef NS_ENUM(unsigned) {
             if ([timelinePoint isKindOfClass:[OTEncounter class]])
                 return CELLHEIGHT_ENCOUNTER;
             if ([timelinePoint isKindOfClass:[OTTourMessage class]])
-                 return 2*PADDING + [self messageHeightForText:((OTTourMessage*)timelinePoint).text];
+                 return 4*PADDING + [self messageHeightForText:((OTTourMessage*)timelinePoint).text];
             if ([timelinePoint isKindOfClass:[OTTourStatus class]])
                 return CELLHEIGHT_STATUS;
         }

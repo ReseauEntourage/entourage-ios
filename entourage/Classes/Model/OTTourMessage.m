@@ -13,6 +13,7 @@
 #define kWSKeyContent @"content"
 #define kWSKeyCreatedAt @"created_at"
 #define kWSUser @"user"
+#define kWSUserName @"display_name"
 #define kWSAvatarURL @"avatar_url"
 #define kWSID @"id"
 
@@ -33,6 +34,7 @@
         if ((user = [dictionary objectForKey:kWSUser])) {
             self.userAvatarURL = [user valueForKey:kWSAvatarURL];
             self.uID = [user valueForKey:kWSID];
+            self.userName = [user valueForKey:kWSUserName];
         }
     }
     return self;
