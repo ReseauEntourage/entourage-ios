@@ -86,7 +86,7 @@
 #define TABLEVIEW_BOTTOM_INSET 86.0f
 
 #define DATA_REFRESH_RATE 60.0 //seconds
-#define MAX_DISTANCE 100.0 //meters
+#define MAX_DISTANCE 250.0 //meters
 
 #define CENTER_MAP_FRAME CGRectMake(8.0f, 8.0f, 30.0f, 30.0f)
 
@@ -316,7 +316,7 @@
         } else {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
-                                                                           message:OTLocalizedString(@"distance_100")
+                                                                           message:OTLocalizedString(@"distance_250")
                                                                     preferredStyle:UIAlertControllerStyleAlert];
             [self presentViewController:alert animated:YES completion:nil];
             
