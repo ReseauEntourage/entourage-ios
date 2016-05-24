@@ -419,6 +419,7 @@ static BOOL didGetAnyData = NO;
                                                 [self.tableView removeAll];
                                                 [self.tableView addFeedItems:feeds];
                                                 [self feedMapViewWithTours];
+                                                [self feedMapViewWithEntourages];
                                                 [self.tableView reloadData];
                                             } failure:^(NSError *error) {
                                                 NSLog(@"Error getting feeds: %@", error.description);
@@ -451,9 +452,11 @@ static BOOL didGetAnyData = NO;
     if (self.toursMapDelegate.isActive) {
         NSMutableArray *annotations = [NSMutableArray new];
         
-        for (OTEntourage *entourage in self.entourages) {
-            OTEntourageAnnotation *pointAnnotation = [[OTEntourageAnnotation alloc] initWithEntourage:entourage];
-            [annotations addObject:pointAnnotation];
+        for (OTFeedItem *feedItem in self.feeds) {
+            if ([feedItem isKindOfClass:[OTEntourage class]]) {
+                OTEntourageAnnotation *pointAnnotation = [[OTEntourageAnnotation alloc] initWithEntourage:(OTEntourage*)feedItem];
+                [annotations addObject:pointAnnotation];
+            }
         }
         
         [self.clusteringController setAnnotations:annotations];

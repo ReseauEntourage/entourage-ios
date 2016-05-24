@@ -13,8 +13,9 @@
 #import "OTTourPoint.h"
 #import "UILabel+entourage.h"
 #import "UIButton+entourage.h"
+#import "OTEntourageAnnotation.h"
 
-#import <MapKit/MapKit.h>
+
 
 #define FEEDITEM_MAP_TAG 1
 #define FEEDITEM_DESCRIPTION_TAG 2
@@ -37,12 +38,17 @@
         coordinate = ent.location.coordinate;
     }
     MKMapView *mapView = [self viewWithTag:FEEDITEM_MAP_TAG];
+    mapView.delegate = self;
     [mapView setRegion:MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)];
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    [annotation setCoordinate:coordinate];
-    [mapView addAnnotation:annotation];
+    if ([feedItem isKindOfClass:[OTEntourage class]]) {
+        OTEntourageAnnotation *pointAnnotation = [[OTEntourageAnnotation alloc] initWithEntourage:(OTEntourage*)feedItem];
+        [mapView addAnnotation:pointAnnotation];
+    } else {
+        [annotation setCoordinate:coordinate];
+        [mapView addAnnotation:annotation];
+    }
 
-   
     if ([feedItem isKindOfClass:[OTEntourage class]]) {
         UITextView *textView = [self viewWithTag:FEEDITEM_DESCRIPTION_TAG];
         textView.text = ((OTEntourage *)feedItem).desc;
@@ -58,6 +64,18 @@
 - (void)doJoinFeed:(UIButton *)senderButton {
     if ([self.delegate respondsToSelector:@selector(doJoinTour)])
         [ self.delegate performSelector:@selector(doJoinTour)];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(nonnull id<MKAnnotation>)annotation {
+    
+    if ([annotation isKindOfClass:[OTEntourageAnnotation class]]) {
+        OTEntourageAnnotation *entAnnotation = (OTEntourageAnnotation*)annotation;
+        MKAnnotationView *annotationView = entAnnotation.annotationView;// [mapView dequeueReusableAnnotationViewWithIdentifier:@"EntourageAnnotation"];
+
+        return annotationView;
+    } else {
+        return nil;
+    }
 }
 
 @end

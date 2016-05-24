@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OTFeedItem.h"
+#import <MapKit/MapKit.h>
 
 @protocol OTFeedItemInfoDelegate <NSObject>
 
@@ -15,7 +16,7 @@
 
 @end
 
-@interface OTFeedItemInfoView : UIView
+@interface OTFeedItemInfoView : UIView <MKMapViewDelegate>
 
 @property (nonatomic, weak) id<OTFeedItemInfoDelegate> delegate;
 

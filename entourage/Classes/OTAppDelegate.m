@@ -69,8 +69,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 	[Flurry setCrashReportingEnabled:YES];
 	[Flurry startSession:NSLocalizedString(@"FLURRY_API_KEY", @"")];
     [IQKeyboardManager sharedManager].enable = YES;
-    [[UIApplication sharedApplication] unregisterForRemoteNotifications];
-//    // register for push notifications
+      // register for push notifications
 //    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
 //    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
 //    [application registerUserNotificationSettings:settings];
@@ -117,6 +116,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 - (void)popToLogin:(NSNotification *)notification {
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"device_token"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPassword];

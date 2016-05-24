@@ -81,7 +81,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.phoneTextField.text = @"+40724591112";
     
     // Ciprian Pro - Prod
-    self.phoneTextField.text = @"+40740884267";
+    //self.phoneTextField.text = @"+40740884267";
     // Br
     //self.phoneTextField.text = @"+40742224359";
     
@@ -134,9 +134,10 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)launchAuthentication {
     [SVProgressHUD show];
     self.phoneNumberServerRepresentation = self.phoneTextField.text.phoneNumberServerRepresentation;
+    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
     [[OTAuthService new] authWithPhone:self.phoneNumberServerRepresentation
                               password:self.passwordTextField.text
-                              deviceId:[[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"]
+                              deviceId:deviceAPNSid
                                success: ^(OTUser *user) {
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    user.phone = self.phoneNumberServerRepresentation;
@@ -149,7 +150,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    if (loggedNumbers == nil) {
                                        loggedNumbers = [NSMutableArray new];
                                    }
-                                   if ([loggedNumbers containsObject:self.phoneNumberServerRepresentation]) {
+                                   if ([loggedNumbers containsObject:self.phoneNumberServerRepresentation] && !deviceAPNSid) {
                                        [UIStoryboard showSWRevealController];
                                    } else {
                                        [self performSegueWithIdentifier:@"OTTutorial" sender:self];
