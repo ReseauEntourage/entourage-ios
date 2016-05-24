@@ -828,7 +828,8 @@ static BOOL didGetAnyData = NO;
         if (self.toursMapDelegate.isActive) {
             [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
         } else {
-            [self showNewTourStartDialogFromGuide];
+            //[self showNewTourStartDialogFromGuide];
+            [self showAlert:OTLocalizedString(@"poi_create_tour_alert") withSegue:@"TourCreatorSegue"];
         }
     }];
 }
@@ -839,7 +840,8 @@ static BOOL didGetAnyData = NO;
         if (self.toursMapDelegate.isActive) {
             [self performSegueWithIdentifier:@"EntourageCreator" sender:nil];
         } else {
-            [self showNewTourStartDialogFromGuide];
+            //[self showNewTourStartDialogFromGuide];
+            [self showAlert:OTLocalizedString(@"poi_create_demande_alert") withSegue:@"EntourageCreator"];
         }
     }];
 }
@@ -850,7 +852,8 @@ static BOOL didGetAnyData = NO;
         if (self.toursMapDelegate.isActive) {
             [self performSegueWithIdentifier:@"EntourageCreator" sender:nil];
         } else {
-            [self showNewTourStartDialogFromGuide];
+            //[self showNewTourStartDialogFromGuide];
+             [self showAlert:OTLocalizedString(@"poi_create_contribution_alert") withSegue:@"EntourageCreator"];
         }
     }];
 }
@@ -1122,15 +1125,25 @@ static bool isShowingOptions = NO;
 
 #pragma mark - Guide
 
--(void)showNewTourStartDialogFromGuide {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"poi_create_tour_alert", @"") preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//- (void)showNewTourStartDialogFromGuide {
+//    [self showAlert:OTLocalizedString(@"poi_create_tour_alert") withSegue:@"TourCreatorSegue"];
+//}
+
+- (void)showAlert:(NSString *)feedItemAlertMessage withSegue:(NSString *)segueID {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+                                                                   message:feedItemAlertMessage
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alert addAction:cancelAction];
-    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * _Nonnull action) {
         [self switchToNewsfeed];
         
-        [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
+        [self performSegueWithIdentifier:segueID sender:nil];
     }];
     [alert addAction:quitAction];
     
