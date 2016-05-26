@@ -290,26 +290,26 @@ typedef NS_ENUM(unsigned) {
     
     if (IS_ACCEPTED) {
     
-    UIImage *plusImage = [[UIImage imageNamed:@"userPlus.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] init];
-    [plusButton setImage:plusImage];
-    [plusButton setTarget:self];
-    //[plusButton setAction:@selector(addUser)];
+        UIImage *plusImage = [[UIImage imageNamed:@"userPlus.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] init];
+        [plusButton setImage:plusImage];
+        [plusButton setTarget:self];
+        //[plusButton setAction:@selector(addUser)];
 
-    
-    
-    if ([self.feedItem.status isEqualToString:TOUR_STATUS_FREEZED])
-        return;
-    UIImage *moreImage = [[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] init];
-    [moreButton setImage:moreImage];
-    [moreButton setTarget:self];
-    [moreButton setAction:@selector(showOptions)];
-    
-    [self.navigationItem setRightBarButtonItems:@[moreButton]];
-    //[self.navigationItem setRightBarButtonItem:moreButton];
+        
+        
+        if ([self.feedItem.status isEqualToString:TOUR_STATUS_FREEZED])
+            return;
+        UIImage *moreImage = [[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] init];
+        [moreButton setImage:moreImage];
+        [moreButton setTarget:self];
+        [moreButton setAction:@selector(showOptions)];
+        
+        [self.navigationItem setRightBarButtonItems:@[moreButton]];
+        //[self.navigationItem setRightBarButtonItem:moreButton];
     } else {
         UIImage *shareImage = [[UIImage imageNamed:@"share.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
@@ -326,7 +326,8 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (void)doJoinTour {
-    [self performSegueWithIdentifier:@"PublicJoinRequestSegue" sender:self];
+    if ([self.feedItem.joinStatus isEqualToString:JOIN_NOT_REQUESTED])
+        [self performSegueWithIdentifier:@"PublicJoinRequestSegue" sender:self];
 }
 
 - (void)updateTableViewAddingTimelinePoints:(NSArray *)timelinePoints {

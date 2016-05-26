@@ -996,15 +996,15 @@ static bool isShowingOptions = NO;
     self.selectedFeedItem = feedItem;
     
     [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
-    return;
-    
-    if ([self.selectedFeedItem.joinStatus isEqualToString:@"accepted"]) {
-        [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
-    }
-    else
-    {
-        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:self];
-    }
+//    return;
+//    
+//    if ([self.selectedFeedItem.joinStatus isEqualToString:@"accepted"]) {
+//        [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+//    }
+//    else
+//    {
+//        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:self];
+//    }
 }
 
 - (void)showUserProfile:(NSNumber*)userId {
@@ -1028,7 +1028,8 @@ static bool isShowingOptions = NO;
     }
     else  if ([feedItem.joinStatus isEqualToString:@"pending"])
     {
-        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:nil];
+        [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+        //[self performSegueWithIdentifier:@"OTPublicTourSegue" sender:nil];
     }
     else
     {
@@ -1193,7 +1194,6 @@ typedef NS_ENUM(NSInteger) {
                                        @"OTCreateMeeting":[NSNumber numberWithInteger:SegueIDCreateMeeting],
                                        @"OTConfirmationPopup" : [NSNumber numberWithInteger:SegueIDConfirmation],
                                        @"OTSelectedTour" : [NSNumber numberWithInteger:SegueIDSelectedTour],
-                                       @"OTPublicTourSegue" : [NSNumber numberWithInteger:SegueIDPublicTour],
                                        @"OTTourOptionsSegue" : [NSNumber numberWithInteger:SegueIDTourOptions],
                                        @"OTMapOptionsSegue": [NSNumber numberWithInteger:SegueIDMapOptions],
                                        @"OTTourJoinRequestSegue": [NSNumber numberWithInteger:SegueIDTourJoinRequest],
@@ -1238,12 +1238,6 @@ typedef NS_ENUM(NSInteger) {
             //[controller configureWithTour:(OTFeedItem*)self.selectedFeedItem];
             //controller.delegate = self;
         } break;
-        case SegueIDPublicTour: {
-            UINavigationController *navController = segue.destinationViewController;
-            OTPublicTourViewController *controller = (OTPublicTourViewController *)navController.topViewController;
-            controller.tour = (OTTour*)self.selectedFeedItem;
-        } break;
-            
         case SegueIDMapOptions: {
             OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;;
             if (!CGPointEqualToPoint(self.mapPoint, CGPointZero)) {

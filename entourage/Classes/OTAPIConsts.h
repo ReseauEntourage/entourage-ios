@@ -13,6 +13,7 @@
 
 // Feeds
 #define API_URL_FEEDS    @"feeds?token=%@"
+#define API_URL_MYFEEDS  @"myfeeds?token=%@"
 
 // Entourages
 #define API_URL_ENTOURAGES @"entourages?token=%@"
@@ -20,6 +21,5 @@
 #define API_URL_ENTOURAGE_JOIN_UPDATE @"entourages/%@/users/%@?token=%@"
 #define API_URL_ENTOURAGE_SEND_MESSAGE "entourages/%@/chat_messages.json?token=%@"
 #define API_URL_ENTOURAGE_GET_MESSAGES "entourages/%@/chat_messages.json?token=%@"
-
 
 #endif /* OTAPIConsts_h */

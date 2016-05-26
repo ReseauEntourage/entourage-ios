@@ -46,6 +46,42 @@
      ];
 }
 
+- (void)getMyFeedsWithStatus:(NSString *)status
+               andPageNumber:(NSNumber *)pageNumber
+            andNumberPerPage:(NSNumber *)per
+                     success:(void (^)(NSMutableArray *userTours))success
+                     failure:(void (^)(NSError *error))failure
+{
+    NSString *url = [NSString stringWithFormat:API_URL_MYFEEDS, TOKEN];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{ @"page" : pageNumber,
+                                                                                       @"per" : per }];
+    if (status != nil) {
+        [parameters setObject:status forKey:@"status"];
+    }
+    
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         NSMutableArray *myFeeds = [self feedItemsFromDictionary:data];
+         
+         if (success)
+         {
+             success(myFeeds);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }];
+}
+
+
 - (NSMutableArray *)feedItemsFromDictionary:(NSDictionary *)dictionary {
     NSMutableArray *feedItems = [[NSMutableArray alloc] init];
     NSArray *feedsDictionaries = [dictionary objectForKey:kWSKeyFeeds];

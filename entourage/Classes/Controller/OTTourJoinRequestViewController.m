@@ -95,7 +95,7 @@
     else if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
         [[OTEntourageService new] joinEntourage:(OTEntourage*)self.feedItem
                                         success:^(OTTourJoiner *joiner) {
-                                            NSLog(@"sent request to join tour %@: %@", self.feedItem.uid, message);
+                                            NSLog(@"sent request to join entourage %@: %@", self.feedItem.uid, message);
                                             self.feedItem.joinStatus = @"pending";
                                         } failure:^(NSError *error) {
                                             NSLog(@"failed joining tour %@ with error %@", self.feedItem.uid, error.description);

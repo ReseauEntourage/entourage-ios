@@ -41,7 +41,7 @@
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Valider"
                                                                    style:UIBarButtonItemStyleDone
                                                                   target:self
-                                                                  action:@selector(sendEntourage)];
+                                                                  action:@selector(sendEntourage:)];
     [self.navigationItem setRightBarButtonItem:menuButton];
     
     [self setupUI];
@@ -73,13 +73,14 @@
 
 }
 
-- (void)sendEntourage {
+- (void)sendEntourage:(UIButton*)sender {
+    sender.enabled = NO;
     __block OTEntourage *entourage = [[OTEntourage alloc] init];
     entourage.type = self.type;
     entourage.location = self.location;
     entourage.title = self.titleTextView.text;
     entourage.desc = self.descriptionTextView.text;
-    
+    [SVProgressHUD show];
     [[OTEncounterService new] sendEntourage:entourage
                                 withSuccess:^(OTEntourage *sentEncounter) {
                                     [SVProgressHUD showSuccessWithStatus:@"Entourage créée"];
@@ -88,6 +89,7 @@
                                     }
                                 } failure:^(NSError *error) {
                                     [SVProgressHUD showErrorWithStatus:@"Echec de la création de entourage"];
+                                    sender.enabled = YES;
                                 }];
 }
 
