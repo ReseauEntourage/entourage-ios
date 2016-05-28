@@ -18,6 +18,7 @@
 #import "NSDictionary+Parsing.h"
 #import "OTAPIConsts.h"
 #import "OTEntourage.h"
+#import "OTConsts.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
@@ -41,22 +42,22 @@ NSString *const kTourPoints = @"tour_points";
      withSuccess:(void (^)(OTTour *))success
          failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_tour", @""), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:OTLocalizedString(@"url_send_tour"), kAPITourRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kTour] = [tour dictionaryForWebService];
     NSLog(@"Request to create tour %@...", parameters);
-    NSLog(@"requestdetails: %@", tour.debugDescription);
+    NSLog(@"request details: %@", tour.debugDescription);
     [[OTHTTPRequestManager sharedInstance]
-         POSTWithUrl:url
-         andParameters:parameters
-         andSuccess:^(id responseObject)
+        POSTWithUrl:url
+        andParameters:parameters
+        andSuccess:^(id responseObject)
          {
              
              if (success)
              {
                  OTTour *updatedTour = [self tourFromDictionary:responseObject];
                  NSLog(@"... created tour %d", updatedTour.uid.intValue);
-                 NSLog(@"responsedetails: %@", updatedTour.debugDescription);
+                 NSLog(@"response details: %@", updatedTour.debugDescription);
                  
                  success(updatedTour);
              }
@@ -103,7 +104,7 @@ NSString *const kTourPoints = @"tour_points";
           withSuccess:(void (^)(OTTour *))success
               failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_point", @""), kAPITourRoute, tourId, kTourPoints, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:OTLocalizedString(@"url_send_point"), kAPITourRoute, tourId, kTourPoints, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[kTourPoints] = [OTTourPoint arrayForWebservice:tourPoints];
     

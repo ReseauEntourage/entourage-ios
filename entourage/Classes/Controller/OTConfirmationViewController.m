@@ -65,16 +65,18 @@
 
 - (void)closeTour {
     self.tour.endTime = [NSDate date];
-    [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
-        [SVProgressHUD dismiss];
-        if ([self.delegate respondsToSelector:@selector(tourSent:)]) {
-            [self.delegate tourSent:self.tour];
-        }
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"Erreur de fermeture de la maraude"];
-        NSLog(@"%@",[error localizedDescription]);
-    }];
+    [[OTTourService new]
+        closeTour:self.tour
+        withSuccess:^(OTTour *closedTour) {
+            [SVProgressHUD dismiss];
+            if ([self.delegate respondsToSelector:@selector(tourSent:)]) {
+                [self.delegate tourSent:self.tour];
+            }
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } failure:^(NSError *error) {
+            [SVProgressHUD showErrorWithStatus:@"Erreur de fermeture de la maraude"];
+            NSLog(@"%@",[error localizedDescription]);
+        }];
 }
 
 /**************************************************************************************************/

@@ -64,6 +64,20 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 #pragma mark - Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //logger
+    
+#if DEBUG
+//#ifdef LOG2FILE
+#if TARGET_IPHONE_SIMULATOR == 0
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"CH3.log"];
+    freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+#endif
+//#endif
+#endif
+    
+    
     
     // start flurry
 	[Flurry setCrashReportingEnabled:YES];

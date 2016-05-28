@@ -119,13 +119,7 @@
     [headerView addConstraints:constraint_pos_horizontal];
     [headerView addConstraints:constraint_pos_bottom];
     mapView.center = headerView.center;
-    
-//    UIButton *centerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    centerButton.frame = CENTER_MAP_FRAME;
-//    [centerButton setImage:[UIImage imageNamed:@"center-location"] forState:UIControlStateNormal];
-//    [centerButton addTarget:self action:@selector(zoomToCurrentLocation:) forControlEvents:UIControlEventTouchUpInside];
-//    [headerView addSubview:centerButton];
-    
+        
     self.tableHeaderView = headerView;
     //self.toursDelegate = self;
 }

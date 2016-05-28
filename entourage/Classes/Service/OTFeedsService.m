@@ -23,7 +23,7 @@
                           failure:(void (^)(NSError *error))failure
 {
     NSString *url = [NSString stringWithFormat:API_URL_FEEDS, TOKEN];
-    NSLog(@"requesting feeds %@ with parameters %@ ...", url, parameters);
+    //NSLog(@"requesting feeds %@ with parameters %@ ...", url, parameters);
     [[OTHTTPRequestManager sharedInstance]
          GETWithUrl:url
          andParameters:parameters
@@ -88,7 +88,7 @@
     
     for (NSDictionary *dictionary in feedsDictionaries) {
         NSString *feedType = [dictionary valueForKey:kWSKeyType];
-        NSLog(@"Feed %@", feedType);
+        //NSLog(@"Feed %@", feedType);
         NSDictionary *feedItemDictionary = [dictionary objectForKey:kWSKeyData];
         OTFeedItem *feedItem;
         if ([feedType isEqualToString:@"Entourage"]) {

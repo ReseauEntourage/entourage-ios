@@ -67,6 +67,7 @@
     dictionary[kWSKeyStatus] = self.status;
     dictionary[kWSKeyDistance] = self.distance;
     dictionary[kWSKeyStartDate] = self.creationDate;
+    dictionary[kWSKeyTourPoints] = [OTTourPoint arrayForWebservice:self.tourPoints];
     if (self.endTime != nil) {
         dictionary[kWSKeyEndDate] = self.endTime;
     }

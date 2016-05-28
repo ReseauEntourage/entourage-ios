@@ -110,7 +110,7 @@
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     [self.mapController.clusteringController refresh:animated];
-    NSLog(@"region did change");
+    //NSLog(@"region did change");
     [self.mapController didChangePosition];
 }
 
