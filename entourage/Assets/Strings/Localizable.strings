@@ -69,6 +69,7 @@
 "button_validate" = "Valider";
 
 "entourageTitle" = "Titre de votre %@*";
+"invalidTitle" = "Titre invalide";
 "demande" = "Demande";
 "ask_for_help" = "Demande";
 "contribution" = "Contribution";

@@ -996,19 +996,23 @@ static bool isShowingOptions = NO;
             if (self.isTourRunning && feedItem.uid.intValue == self.tour.uid.intValue) {
                 [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
             } else {
-                //TODO: freeze! :D
+                
                 feedItem.status = TOUR_STATUS_FREEZED;
-                [[OTTourService new] closeTour:(OTTour*)feedItem
-                                   withSuccess:^(OTTour *closedTour) {
-                                       [self dismissViewControllerAnimated:YES completion:^{
-                                           [self.tableView reloadData];
-                                           
+                if ([feedItem isKindOfClass:[OTTour class]]) {
+                    [[OTTourService new] closeTour:(OTTour*)feedItem
+                                       withSuccess:^(OTTour *closedTour) {
+                                           [self dismissViewControllerAnimated:YES completion:^{
+                                               [self.tableView reloadData];
+                                               
+                                           }];
+                                           [SVProgressHUD showSuccessWithStatus:@"Maraude clôturée."];
+                                       } failure:^(NSError *error) {
+                                           [SVProgressHUD showErrorWithStatus:@"Erreur"];
+                                           NSLog(@"%@",[error localizedDescription]);
                                        }];
-                                       [SVProgressHUD showSuccessWithStatus:@""];
-                                   } failure:^(NSError *error) {
-                                       [SVProgressHUD showErrorWithStatus:@"Erreur"];
-                                       NSLog(@"%@",[error localizedDescription]);
-                                   }];
+                } else {
+                    
+                }
             }
         } else {
             [self performSegueWithIdentifier:@"QuitTourSegue" sender:self];

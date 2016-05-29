@@ -74,6 +74,28 @@
 }
 
 - (void)sendEntourage:(UIButton*)sender {
+    NSArray* words = [self.titleTextView.text componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString* nospacestring = [words componentsJoinedByString:@""];
+    
+    if (!nospacestring.length) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"invalidTitle")
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * _Nonnull action) {}];
+        
+        [alert addAction:defaultAction];
+        
+        
+        
+        return;
+    }
+        
+    
+    
     sender.enabled = NO;
     __block OTEntourage *entourage = [[OTEntourage alloc] init];
     entourage.type = self.type;
