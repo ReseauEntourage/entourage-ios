@@ -205,6 +205,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self zoomToCurrentLocation:nil];
 }
 
@@ -310,7 +311,7 @@
             
             UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
                                                                     style:UIAlertActionStyleDefault
-                                                                  handler:^(UIAlertAction * _Nonnull action) {}];
+                                                                  handler:nil];
             
             [alert addAction:defaultAction];
         }
@@ -433,6 +434,7 @@ static BOOL didGetAnyData = NO;
                                      failure:^(NSError *error) {
                                          [self registerObserver];
                                          [self.indicatorView setHidden:YES];
+                                         NSLog(@"Err getting POI %@", error.description);
                                      }];
 }
 
@@ -559,7 +561,6 @@ static BOOL didGetAnyData = NO;
 }
 
 
-
 - (OTPoiCategory*)categoryById:(NSNumber*)sid {
     if (sid == nil) return nil;
     for (OTPoiCategory* category in self.categories) {
@@ -570,6 +571,79 @@ static BOOL didGetAnyData = NO;
         }
     }
     return nil;
+}
+
+/********************************************************************************/
+#pragma mark - Location Manager
+
+- (void)startLocationUpdates {
+    if (self.locationManager == nil) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        //iOS 8+
+        if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+            [self.locationManager requestAlwaysAuthorization];
+        }
+        //iOS 9+
+        if ([self.locationManager respondsToSelector:@selector(allowsBackgroundLocationUpdates)]) {
+            self.locationManager.allowsBackgroundLocationUpdates = YES;
+        }
+    }
+    
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.activityType = CLActivityTypeFitness;
+    
+    self.locationManager.distanceFilter = 5; // meters
+    
+    [self.locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    //NSLog(@"Did update %d locations", locations.count);
+    for (CLLocation *newLocation in locations) {
+        
+        //Negative accuracy means invalid coordinates
+        if (newLocation.horizontalAccuracy < 0) {
+            continue;
+        }
+        NSLog(@"------- (%.6f, %.6f)", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+        
+        NSDate *eventDate = newLocation.timestamp;
+        NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+        
+        double distance = 100.0f;
+        if ([self.locations count] > 0) {
+            CLLocation *previousLocation = self.locations.lastObject;
+            distance = [newLocation distanceFromLocation:previousLocation];
+        }
+        
+        if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20 && fabs(distance) > LOCATION_MIN_DISTANCE) {
+            
+            if (self.locations.count > 0) {
+                CLLocationCoordinate2D coords[2];
+                coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
+                coords[1] = newLocation.coordinate;
+                
+                MKCoordinateRegion region = self.mapView.region;
+                region.center = newLocation.coordinate;
+                [self.mapView setRegion:region animated:YES];
+                
+                if (self.isTourRunning) {
+                    [self addTourPointFromLocation:newLocation];
+                    if (self.toursMapDelegate.isActive) {
+                        [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
+                    }
+                }
+            }
+            
+            [self.locations addObject:newLocation];
+        }
+    }
+}
+
+- (void)clearMap {
+    [self.mapView removeAnnotations:[self.mapView annotations]];
+    [self.mapView removeOverlays:[self.mapView overlays]];
 }
 
 /********************************************************************************/
@@ -666,7 +740,7 @@ static bool isShowingOptions = NO;
                                [self.pointsToSend removeObjectsInArray:sentPoints];
                            }
                                failure:^(NSError *error) {
-                                   //NSLog(@"%@",[error localizedDescription]);
+                                   NSLog(@"%@",[error localizedDescription]);
                                    NSLog(@"NOT Sent %lu tour point(s).", (unsigned long)tourPoints.count);
                                    
                                }
@@ -727,78 +801,6 @@ static bool isShowingOptions = NO;
     self.createEncounterButton.hidden = NO;
 }
 
-/********************************************************************************/
-#pragma mark - Location Manager
-
-- (void)startLocationUpdates {
-    if (self.locationManager == nil) {
-        self.locationManager = [[CLLocationManager alloc] init];
-        //iOS 8+
-        if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-            [self.locationManager requestAlwaysAuthorization];
-        }
-        //iOS 9+
-        if ([self.locationManager respondsToSelector:@selector(allowsBackgroundLocationUpdates)]) {
-            self.locationManager.allowsBackgroundLocationUpdates = YES;
-        }
-    }
-    
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.activityType = CLActivityTypeFitness;
-    
-    self.locationManager.distanceFilter = 5; // meters
-    
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    //NSLog(@"Did update %d locations", locations.count);
-    for (CLLocation *newLocation in locations) {
-        
-        //Negative accuracy means invalid coordinates
-        if (newLocation.horizontalAccuracy < 0) {
-            continue;
-        }
-        //NSLog(@"------- (%.6f, %.6f)", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
-        
-        NSDate *eventDate = newLocation.timestamp;
-        NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-        
-        double distance = 0.0f;
-        if ([self.locations count] > 0) {
-            CLLocation *previousLocation = self.locations.lastObject;
-            distance = [newLocation distanceFromLocation:previousLocation];
-        }
-        
-        if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20 && fabs(distance) > LOCATION_MIN_DISTANCE) {
-            
-            if (self.locations.count > 0) {
-                CLLocationCoordinate2D coords[2];
-                coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
-                coords[1] = newLocation.coordinate;
-                
-                MKCoordinateRegion region = self.mapView.region;
-                region.center = newLocation.coordinate;
-                [self.mapView setRegion:region animated:YES];
-                
-                if (self.isTourRunning) {
-                    [self addTourPointFromLocation:newLocation];
-                    if (self.toursMapDelegate.isActive) {
-                        [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
-                    }
-                }
-            }
-            
-            [self.locations addObject:newLocation];
-        }
-    }
-}
-
-- (void)clearMap {
-    [self.mapView removeAnnotations:[self.mapView annotations]];
-    [self.mapView removeOverlays:[self.mapView overlays]];
-}
 
 /********************************************************************************/
 #pragma mark - UIGestureRecognizerDelegate
@@ -1086,8 +1088,7 @@ static bool isShowingOptions = NO;
                                                             preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler"
                                                            style:UIAlertActionStyleCancel
-                                                         handler:^(UIAlertAction * _Nonnull action) {
-    }];
+                                                         handler:nil];
     [alert addAction:cancelAction];
     UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter"
                                                          style:UIAlertActionStyleDefault
@@ -1103,8 +1104,7 @@ static bool isShowingOptions = NO;
 
 -(void)showNewEncounterStartDialogFromGuide {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"poi_create_encounter_alert", @"") preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:cancelAction];
     UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self switchToNewsfeed];
