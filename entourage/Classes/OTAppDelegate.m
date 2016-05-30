@@ -71,7 +71,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 #if TARGET_IPHONE_SIMULATOR == 0
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"CH5.log"];
+    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"CH6.log"];
     freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
 #endif
 //#endif
@@ -122,6 +122,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
 
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    NSLog(@"APP WILL TERMINATE.");
 }
 
 /**************************************************************************************************/

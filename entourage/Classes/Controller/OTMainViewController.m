@@ -200,6 +200,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    NSLog(@"Restarted refresher");
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getData) userInfo:nil repeats:YES];
     [self.refreshTimer fire];
 }
@@ -250,8 +251,6 @@
     [formatter setDateFormat:@"dd/MM/yyyy"];
     return [formatter stringFromDate:date];
 }
-
-
 
 - (void)configureMapView {
     
@@ -323,6 +322,7 @@
 
 - (void)appWillEnterBackground:(NSNotification*)note {
     NSLog(@">>>>>>>>>>>>>>>>>>>>> APP ENTERS BACKGROUND!!!");
+     [self.refreshTimer invalidate];
     if (self.isTourRunning) {
         [self createLocalNotificationForTour:self.tour.uid];
     } else {
@@ -331,6 +331,7 @@
 }
 
 - (void)appWillEnterForeground:(NSNotification*)note {
+    NSLog(@"<<<<<<<<<<<<<<<<<<<<< APP COMES FOREGROUND!!!");
     [self.locationManager startUpdatingLocation];
 }
 
