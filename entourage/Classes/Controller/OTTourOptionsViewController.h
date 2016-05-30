@@ -7,18 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTOptionsViewController.h"
 
-@protocol OTTourOptionsDelegate <NSObject>
+//@protocol OTTourOptionsDelegate <NSObject>
+//
+//- (void)createEncounter;
+//- (void)togglePOI;
+//- (void)dismissTourOptions;
+//
+//@end
 
-- (void)createEncounter;
-- (void)togglePOI;
-- (void)dismissTourOptions;
+@interface OTTourOptionsViewController : OTOptionsViewController
 
-@end
-
-@interface OTTourOptionsViewController : UIViewController
-
-@property(nonatomic, weak) id<OTTourOptionsDelegate> tourOptionsDelegate;
+//@property(nonatomic, weak) id<OTTourOptionsDelegate> tourOptionsDelegate;
 @property(nonatomic, assign) CGPoint c2aPoint;
 
 - (void)setIsPOIVisible:(BOOL)isPOIVisible;

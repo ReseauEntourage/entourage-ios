@@ -7,6 +7,16 @@
 //
 
 #import "OTTourOptionsViewController.h"
+#import "OTConsts.h"
+#import "UIColor+entourage.h"
+
+
+#define BUTTON_SIDE 48.0f
+#define PADDING_VERTICAL 8.0f
+#define PADDING_HORIZONTAL 16.0f
+#define INITIAL_BOTTOM 82.0f
+
+#define ACTION_LABEL_FRAME CGRectMake(0.0f, 0.0f, 230.0f, 21.0f)
 
 @interface OTTourOptionsViewController ()
 
@@ -14,6 +24,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *createButton;
 @property (nonatomic, weak) IBOutlet UILabel *poiLabel;
 @property (nonatomic, weak) IBOutlet UIButton *poiButton;
+@property (nonatomic) int buttonIndex;
 
 @property (nonatomic) BOOL isPOIVisible;
 
@@ -23,6 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.buttonIndex = 1;
     // Do any additional setup after loading the view.
     if (!CGPointEqualToPoint(self.c2aPoint, CGPointZero)) {
         self.createLabel.hidden = YES;
@@ -33,36 +45,39 @@
         [self addOptionWithIcon:@"report" andAction:@selector(doCreateEncounter:)];
     } else {
         if (self.isPOIVisible) {
-            self.poiLabel.text = NSLocalizedString(@"map_options_hide_poi", @"");
+            self.poiLabel.text = OTLocalizedString(@"map_options_hide_poi");
         }
         else {
-            self.poiLabel.text = NSLocalizedString(@"map_options_show_poi", @"");
+            self.poiLabel.text = OTLocalizedString(@"map_options_show_poi");
         }
     }
+    
+    [self addOption:OTLocalizedString(@"create_encounter")
+            atIndex:self.buttonIndex++
+           withIcon:@"report"
+          andAction:@selector(doCreateEncounter:)];
+    
+    [self addOption:OTLocalizedString(@"create_demande")
+            atIndex:self.buttonIndex++
+           withIcon:@"megaphone"
+          andAction:@selector(doCreateDemande:)];
+    
+    [self addOption:OTLocalizedString(@"create_contribution")
+            atIndex:self.buttonIndex++
+           withIcon:@"heart"
+          andAction:@selector(doCreateContribution:)];
+    
+    NSString *poiTitle = self.isPOIVisible ? @"map_options_hide_poi" : @"map_options_show_poi";
+    [self addOption:OTLocalizedString(poiTitle)
+            atIndex:self.buttonIndex++
+           withIcon:@"solidarity"
+          andAction:@selector(doTogglePOI:)];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)doCreateEncounter:(id)sender {
-    if ([self.tourOptionsDelegate respondsToSelector:@selector(createEncounter)]) {
-        [self.tourOptionsDelegate performSelector:@selector(createEncounter) withObject:nil];
-    }
-}
-
-- (IBAction)doShowPOI:(id)sender {
-    if ([self.tourOptionsDelegate respondsToSelector:@selector(togglePOI)]) {
-        [self.tourOptionsDelegate performSelector:@selector(togglePOI) withObject:nil];
-    }
-}
-
-
-- (IBAction)doDismiss:(id)sender {
-    if ([self.tourOptionsDelegate respondsToSelector:@selector(dismissTourOptions)]) {
-       [self.tourOptionsDelegate performSelector:@selector(dismissTourOptions) withObject:nil];
-    }
 }
 
 - (void)setIsPOIVisible:(BOOL)isPOIVisible {

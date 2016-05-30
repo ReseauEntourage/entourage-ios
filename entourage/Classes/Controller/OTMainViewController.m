@@ -94,7 +94,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourOptionsDelegate, OTTourJoinRequestDelegate, OTMapOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTTourQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
+@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourJoinRequestDelegate, OTOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTTourQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
@@ -829,28 +829,7 @@ static bool isShowingOptions = NO;
 }
 
 /********************************************************************************/
-#pragma mark - OTTourOptionsDelegate
-
-- (void)createEncounter {
-    [self dismissViewControllerAnimated:NO completion:^{
-        if (self.toursMapDelegate.isActive) {
-            [self performSegueWithIdentifier:@"OTCreateMeeting" sender:nil];
-        } else {
-            [self showNewEncounterStartDialogFromGuide];
-        }
-    }];
-}
-
-- (void)dismissTourOptions {
-    [self dismissViewControllerAnimated:YES completion:^{
-        if (self.isTourRunning) {
-            [self showNewTourOnGoing];
-        }
-    }];
-}
-
-/********************************************************************************/
-#pragma mark - OTMapOptionsDelegate
+#pragma mark - OTOptionsDelegate
 
 - (void)createTour {
     [self dismissViewControllerAnimated:NO completion:^{
@@ -858,6 +837,16 @@ static bool isShowingOptions = NO;
             [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
         } else {
             [self showAlert:OTLocalizedString(@"poi_create_tour_alert") withSegue:@"TourCreatorSegue"];
+        }
+    }];
+}
+
+- (void)createEncounter {
+    [self dismissViewControllerAnimated:NO completion:^{
+        if (self.toursMapDelegate.isActive) {
+            [self performSegueWithIdentifier:@"OTCreateMeeting" sender:nil];
+        } else {
+            [self showNewEncounterStartDialogFromGuide];
         }
     }];
 }
@@ -895,10 +884,13 @@ static bool isShowingOptions = NO;
                              }];
 }
 
-- (void)dismissMapOptions {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (void)dismissOptions {
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (self.isTourRunning) {
+            [self showNewTourOnGoing];
+        }
+    }];
 }
-
 
 /********************************************************************************/
 #pragma mark - EntourageCreatorDelegate
@@ -1197,12 +1189,12 @@ typedef NS_ENUM(NSInteger) {
                 self.mapPoint = CGPointZero;
             }
             
-            controller.mapOptionsDelegate = self;
+            controller.optionsDelegate = self;
             [controller setIsPOIVisible:self.guideMapDelegate.isActive];
         } break;
         case SegueIDTourOptions: {
             OTTourOptionsViewController *controller = (OTTourOptionsViewController *)destinationViewController;
-            controller.tourOptionsDelegate = self;
+            controller.optionsDelegate = self;
             [controller setIsPOIVisible:self.guideMapDelegate.isActive];
             if (!CGPointEqualToPoint(self.mapPoint, CGPointZero)) {
                 controller.c2aPoint = self.mapPoint;

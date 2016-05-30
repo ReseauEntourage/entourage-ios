@@ -78,7 +78,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #if DEBUG
     // Ciprian Public - Staging
     //self.phoneTextField.text = @"+40740884267";
-    self.phoneTextField.text = @"+40724591112";
+    self.phoneTextField.text = @"+40724591114";
     
     // Ciprian Pro - Prod
     //self.phoneTextField.text = @"+40740884267";

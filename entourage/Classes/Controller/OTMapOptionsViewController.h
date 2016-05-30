@@ -7,21 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTOptionsViewController.h"
 
-@protocol OTMapOptionsDelegate <NSObject>
 
-- (void)createTour;
-- (void)createDemande;
-- (void)createContribution;
+@interface OTMapOptionsViewController : OTOptionsViewController
 
-- (void)togglePOI;
-- (void)dismissMapOptions;
-
-@end
-
-@interface OTMapOptionsViewController : UIViewController
-
-@property (nonatomic, weak) id<OTMapOptionsDelegate> mapOptionsDelegate;
 @property (nonatomic, assign) CGPoint fingerPoint;
 
 - (void)setIsPOIVisible:(BOOL)POIVisible;

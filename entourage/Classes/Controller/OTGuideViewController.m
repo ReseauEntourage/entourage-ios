@@ -40,7 +40,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate, OTMapOptionsDelegate, OTTourOptionsDelegate>
+@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate, OTOptionsDelegate>
 
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffectView;
 
@@ -342,11 +342,11 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"OTMapOptionsSegue"]) {
         OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;
-        controller.mapOptionsDelegate = self;
+        controller.optionsDelegate = self;
         [controller setIsPOIVisible:YES];
     } else if([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
         OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
-        controller.tourOptionsDelegate = self;
+        controller.optionsDelegate = self;
         [controller setIsPOIVisible:YES];
     } else if ([segue.identifier isEqualToString:@"OTGuideDetailsSegue"]) {
         UINavigationController *navController = (UINavigationController*)segue.destinationViewController;

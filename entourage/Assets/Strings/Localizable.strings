@@ -55,6 +55,7 @@
 "map_options_hide_poi" = "Masquer le guide de solidarité";
 "map_options_show_poi" = "Afficher le guide de solidarité";
 "create_tour" = "Créer une maraude";
+"create_encounter" = "Créer une rencontre";
 "create_demande" = "Créer une demande";
 "create_contribution" = "Créer une contribution";
 

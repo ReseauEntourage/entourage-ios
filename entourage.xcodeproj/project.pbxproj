@@ -118,6 +118,7 @@
 		45F4433C1C90B40400DDEBE1 /* OTTourTimelinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F4433B1C90B40400DDEBE1 /* OTTourTimelinePoint.m */; };
 		45F443441C90BCB700DDEBE1 /* OTTourMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443431C90BCB700DDEBE1 /* OTTourMessage.m */; };
 		45F443471C9314A800DDEBE1 /* OTTourStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443461C9314A800DDEBE1 /* OTTourStatus.m */; };
+		45FD17B71CFC4F3E0037270B /* OTOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FD17B61CFC4F3E0037270B /* OTOptionsViewController.m */; };
 		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
 		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
@@ -353,6 +354,8 @@
 		45F443431C90BCB700DDEBE1 /* OTTourMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourMessage.m; sourceTree = "<group>"; };
 		45F443451C9314A800DDEBE1 /* OTTourStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourStatus.h; sourceTree = "<group>"; };
 		45F443461C9314A800DDEBE1 /* OTTourStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourStatus.m; sourceTree = "<group>"; };
+		45FD17B51CFC4F3E0037270B /* OTOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOptionsViewController.h; sourceTree = "<group>"; };
+		45FD17B61CFC4F3E0037270B /* OTOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOptionsViewController.m; sourceTree = "<group>"; };
 		611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		6B1A846F19E811210020FB93 /* OTPoiService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiService.h; sourceTree = "<group>"; };
 		6B1A847019E811210020FB93 /* OTPoiService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiService.m; sourceTree = "<group>"; };
@@ -616,6 +619,8 @@
 			children = (
 				4500115C1CCE5BD2004754DF /* OTTourCreatorViewController.h */,
 				4500115D1CCE5BD2004754DF /* OTTourCreatorViewController.m */,
+				4508AE2F1C7F924B00EDAC1B /* OTTourOptionsViewController.h */,
+				4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */,
 				455170891CF0BE8700962369 /* Encounter */,
 			);
 			name = Tour;
@@ -1009,8 +1014,8 @@
 			children = (
 				6B4930C819A773C500DA7EE0 /* OTMainViewController.h */,
 				6B4930C919A773C500DA7EE0 /* OTMainViewController.m */,
-				4508AE2F1C7F924B00EDAC1B /* OTTourOptionsViewController.h */,
-				4508AE301C7F924B00EDAC1B /* OTTourOptionsViewController.m */,
+				45FD17B51CFC4F3E0037270B /* OTOptionsViewController.h */,
+				45FD17B61CFC4F3E0037270B /* OTOptionsViewController.m */,
 				2EDA5F0B1CB67F4000849172 /* MapDelegate */,
 				455170851CF0BCEA00962369 /* Feeds */,
 				455170861CF0BCFC00962369 /* Guide de solidarite */,
@@ -1338,6 +1343,7 @@
 				0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */,
 				45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */,
 				2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */,
+				45FD17B71CFC4F3E0037270B /* OTOptionsViewController.m in Sources */,
 				2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */,
 				45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */,
 				0A70FA321BFF32AD0080E8EC /* OTFeedItemViewController.m in Sources */,
