@@ -34,11 +34,15 @@
                                                                   target:self
                                                                   action:@selector(showFilters)];
     
-    UIBarButtonItem *geolocBBI = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"geoloc"]
-                                                                  style:UIBarButtonItemStylePlain
-                                                                 target:self
-                                                                 action:@selector(showCurrentLocation)];
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+    UIButton *locButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *locImage = [UIImage imageNamed:@"geoloc"];
+    [locButton setImage:locImage forState:UIControlStateNormal];
+    locButton.frame = CGRectMake(0.0f, 0.0f, locImage.size.width, locImage.size.height);
+    [locButton addTarget:self action:@selector(showCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *geolocBBI = [[UIBarButtonItem alloc] initWithCustomView:locButton];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = self.title;
     titleLabel.textColor = [UIColor appGreyishBrownColor];

@@ -357,7 +357,7 @@
 }
 
 /********************************************************************************/
-#pragma mark - OTMapOptionsDelegate
+#pragma mark - OTOptionsDelegate
 
 - (void)createTour {
     [self dismissViewControllerAnimated:NO completion:^{
@@ -392,20 +392,18 @@
 }
 
 
-//TODO: add demande, contribution
-
 -(void)togglePOI {
     [self dismissViewControllerAnimated:NO completion:^{
         [self performSegueWithIdentifier:@"OTMapViewSegue" sender:nil];
     }];
 }
 
--(void)dismissMapOptions {
+-(void)dismissOptions {
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 /********************************************************************************/
-#pragma mark - OTTourOptionsDelegate
+#pragma mark - OTOptionsDelegate - tours
 
 - (void)createEncounter {
     [self dismissViewControllerAnimated:NO completion:^{
@@ -420,10 +418,6 @@
         
         [self presentViewController:alert animated:YES completion:nil];
     }];
-}
-
-- (void)dismissTourOptions {
-    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 /********************************************************************************/

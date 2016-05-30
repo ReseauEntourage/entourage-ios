@@ -59,7 +59,6 @@ NSString *const kTourPointPassingTime = @"passing_time";
     dictionary[kTourPointLatitude] = [NSNumber numberWithDouble:self.latitude];
     dictionary[kTourPointLongitude] = [NSNumber numberWithDouble:self.longitude];
     dictionary[kTourPointPassingTime] = self.passingTime;
-#warning passing time
     
     return dictionary;
 }

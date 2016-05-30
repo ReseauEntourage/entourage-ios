@@ -241,7 +241,7 @@
     [self clearMap];
     [self showToursMap];
     [self.guideMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
-    [self.footerToolbar setTitle:@"Guide"];// de solidarité"];
+    [self.footerToolbar setTitle:@"Guide de solidarité"];
 }
 
 /**************************************************************************************************/
