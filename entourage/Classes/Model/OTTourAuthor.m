@@ -7,6 +7,7 @@
 //
 
 #import "OTTourAuthor.h"
+#import "NSDictionary+Parsing.h"
 
 #define kWSuid @"id"
 #define kWDisplayName @"display_name"
@@ -20,7 +21,9 @@
     self = [super init];
     if (self) {
         self.uID = [dictionary valueForKey:kWSuid];
-        self.displayName = [dictionary valueForKey:kWDisplayName];
+        NSString *dnameVal = [dictionary valueForKey:kWDisplayName];
+       
+        self.displayName = [dnameVal isKindOfClass:[NSNull class]] ? @"" : dnameVal;
         self.avatarUrl = [dictionary valueForKey:kWSAvatar_URL];
     }
     return self;

@@ -31,7 +31,7 @@
 }
 
 + (UIColor *)appModalBackgroundColor {
-    return [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+    return [UIColor colorWithRed:0 green:0 blue:0 alpha:.2];
 }
 
 

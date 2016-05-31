@@ -24,6 +24,11 @@
               success:(void(^)(OTTourJoiner *))success
               failure:(void (^)(NSError *)) failure;
 
+- (void)joinMessageEntourage:(OTEntourage *)entourage
+                     message:(NSString *)message
+                     success:(void(^)(OTTourJoiner *))success
+                     failure:(void (^)(NSError *)) failure;
+
 - (void)updateEntourageJoinRequestStatus:(NSString *)status
                                  forUser:(NSNumber*)userID
                             forEntourage:(NSNumber*)entourageID

@@ -57,6 +57,7 @@
 #import "OTAuthService.h"
 #import "OTPOIService.h"
 #import "OTFeedsService.h"
+#import "OTEntourageService.h"
 
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
@@ -561,7 +562,6 @@ static BOOL didGetAnyData = NO;
     
 }
 
-
 - (OTPoiCategory*)categoryById:(NSNumber*)sid {
     if (sid == nil) return nil;
     for (OTPoiCategory* category in self.categories) {
@@ -710,6 +710,7 @@ static bool isShowingOptions = NO;
              if ([self.pointsToSend count] > 0) {
                  [self performSelector:@selector(sendTourPoints:) withObject:self.pointsToSend afterDelay:0.0];
              }
+             [self.footerToolbar setTitle:@"Maraude en cours"];
          } failure:^(NSError *error) {
              [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"tour_create_error", @"")];
              NSLog(@"%@",[error localizedDescription]);
@@ -782,7 +783,7 @@ static bool isShowingOptions = NO;
     }
     
     [SVProgressHUD showSuccessWithStatus:@"Maraude terminée!"];
-    
+    [self.footerToolbar setTitle:@"Entourages"];
     self.tour = nil;
     [self.pointsToSend removeAllObjects];
     [self.encounters removeAllObjects];
@@ -971,12 +972,45 @@ static bool isShowingOptions = NO;
     
 }
 
+- (void)sendJoinRequest:(OTFeedItem*)feedItem {
+    [SVProgressHUD show];
+    if ([feedItem isKindOfClass:[OTTour class]]) {
+        OTTour *tour = (OTTour *)feedItem;
+        [[OTTourService new]
+            joinTour:tour
+            success:^(OTTourJoiner *joiner) {
+                [SVProgressHUD dismiss];
+                [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
+            } failure:^(NSError *error) {
+                [SVProgressHUD dismiss];
+                NSLog(@"Error sending tour join request: %@", error.description);
+            }];
+    } else {
+        OTEntourage *entourage = (OTEntourage*)feedItem;
+        [[OTEntourageService new] joinEntourage:entourage
+                                        success:^(OTTourJoiner *joiner) {
+                                            [SVProgressHUD dismiss];
+                                            NSLog(@"Successfuly sent request to join entourage %@", feedItem.uid);
+                                            feedItem.joinStatus = @"pending";
+                                            [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
+
+                                        } failure:^(NSError *error) {
+                                            [SVProgressHUD dismiss];
+                                            NSLog(@"failed joining tour %@ with error %@", feedItem.uid, error.description);
+                                            [self dismissViewControllerAnimated:YES completion:^{
+                                                [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
+                                            }];
+                                        }];
+
+    }
+}
+
 - (void)doJoinRequest:(OTFeedItem*)feedItem {
     self.selectedFeedItem = feedItem;
-    
+33328
     if ([feedItem.joinStatus isEqualToString:@"not_requested"])
     {
-        [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
+        [self sendJoinRequest:feedItem];
     }
     else  if ([feedItem.joinStatus isEqualToString:@"pending"])
     {

@@ -65,13 +65,12 @@ NSString *const kEntourages = @"entourages";
               success:(void(^)(OTTourJoiner *))success
               failure:(void (^)(NSError *)) failure
 {
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_REQUEST, entourage.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
-    NSDictionary *parameters = nil;
-    NSLog(@"Join request: %@", url);
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_REQUEST, entourage.uid, TOKEN];
+    NSLog(@"Join entourage request: %@", url);
     
     [[OTHTTPRequestManager sharedInstance]
      POSTWithUrl:url
-     andParameters:parameters
+     andParameters:nil
      andSuccess:^(id responseObject)
      {
          NSDictionary *data = responseObject;
@@ -92,6 +91,41 @@ NSString *const kEntourages = @"entourages";
      }
      ];
 }
+
+- (void)joinMessageEntourage:(OTEntourage *)entourage
+                     message:(NSString *)message
+              success:(void(^)(OTTourJoiner *))success
+              failure:(void (^)(NSError *)) failure
+{
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, entourage.uid, currentUser.sid, TOKEN];
+    NSDictionary *parameters = @{@"request": @{@"message":message}};
+    NSLog(@"JoinMessage entourage request: %@", url);
+    
+    [[OTHTTPRequestManager sharedInstance]
+         PUTWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
+         {
+             NSDictionary *data = responseObject;
+             NSDictionary *joinerDictionary = [data objectForKey:@"user"];
+             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
+             
+             if (success)
+             {
+                 success(joiner);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }
+    ];
+}
+
 
 - (void)updateEntourageJoinRequestStatus:(NSString *)status
                                  forUser:(NSNumber*)userID

@@ -15,6 +15,12 @@
 #define API_URL_FEEDS    @"feeds?token=%@"
 #define API_URL_MYFEEDS  @"myfeeds?token=%@"
 
+// Tours
+#define API_URL_TOUR_JOIN_REQUEST @"tours/%@/users?token=%@"
+#define API_URL_TOUR_JOIN_MESSAGE @"tours/%@/users/%@?token=%@"
+
+
+
 // Entourages
 #define API_URL_ENTOURAGES @"entourages?token=%@"
 #define API_URL_ENTOURAGE_JOIN_REQUEST @"entourages/%@/users?token=%@"

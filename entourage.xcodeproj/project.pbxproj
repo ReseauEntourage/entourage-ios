@@ -466,8 +466,6 @@
 				0A70FA171BFDD69C0080E8EC /* OTToursTableViewController.m */,
 				45ADCACD1CA2A27E0050EB96 /* OTQuitTourViewController.h */,
 				45ADCACE1CA2A27E0050EB96 /* OTQuitTourViewController.m */,
-				4525EB381CA5EE1C006784E6 /* OTEntouragesViewController.h */,
-				4525EB391CA5EE1C006784E6 /* OTEntouragesViewController.m */,
 			);
 			name = Tour;
 			sourceTree = "<group>";
@@ -586,6 +584,8 @@
 				2E7064F01CB273AE0034C55A /* OTMapOptionsViewController.m */,
 				45E267801C860239004D14EB /* OTTourJoinRequestViewController.h */,
 				45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */,
+				4525EB381CA5EE1C006784E6 /* OTEntouragesViewController.h */,
+				4525EB391CA5EE1C006784E6 /* OTEntouragesViewController.m */,
 				455170881CF0BDB800962369 /* Tour */,
 				455170871CF0BDAC00962369 /* Entourage */,
 			);

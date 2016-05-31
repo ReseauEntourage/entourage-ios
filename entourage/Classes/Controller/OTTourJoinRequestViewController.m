@@ -14,6 +14,7 @@
 
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
+#import "IQKeyboardManager.h"
 
 @interface OTTourJoinRequestViewController ()
 
@@ -29,10 +30,27 @@
     // Do any additional setup after loading the view.
     
     [self setupUI];
+    
 }
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //[[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    //[[IQKeyboardManager sharedManager] disableInViewControllerClass:[self class]];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+     //[[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,7 +64,7 @@
     NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:17 weight:UIFontWeightLight]};
     NSDictionary *mediumAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:17 weight:UIFontWeightMedium]};
     NSAttributedString *merciAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@!\n\n", OTLocalizedString(@"thanks").uppercaseString] attributes:mediumAttrs];
-    NSAttributedString *cetteTourAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n\n", OTLocalizedString(@"tour_join_intro")] attributes:lightAttrs];
+    NSAttributedString *cetteTourAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", OTLocalizedString(@"tour_join_intro")] attributes:lightAttrs];
     NSAttributedString *messageAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", OTLocalizedString(@"tour_join_message")] attributes:mediumAttrs];
     
     NSMutableAttributedString *greetingAttrString = merciAttrString.mutableCopy;
@@ -77,32 +95,28 @@
     NSString *message = self.greetingMessage.text;
     if (!message)
         message = @"";
+    [SVProgressHUD show];
     if ([self.feedItem isKindOfClass:[OTTour class]]) {
-    
-        [[OTTourService new] joinTour:(OTTour*)self.feedItem
-                          withMessage:message
-                              success:^(OTTourJoiner *joiner) {
-                                  NSLog(@"sent request to join tour %@: %@", self.feedItem.uid, message);
-                                  self.feedItem.joinStatus = @"pending";
-                              }
-                              failure:^(NSError *error) {
-                                  NSLog(@"failed joining tour %@ with error %@", self.feedItem.uid, error.description);
-                                  [self dismissViewControllerAnimated:YES completion:^{
-                                      [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
-                                  }];
-                              }];
+        OTTour *tour = (OTTour*)_feedItem;
+        [[OTTourService new] joinMessageTour:tour
+                                     message:message
+                                     success:^(OTTourJoiner *joiner) {
+            [SVProgressHUD dismiss];
+            NSLog(@"JoinMessageTour was sent. :)");
+        } failure:^(NSError *error) {
+            [SVProgressHUD dismiss];
+            NSLog(@"Failed to send join message tour: %@", error.description);
+        }];
     }
     else if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
-        [[OTEntourageService new] joinEntourage:(OTEntourage*)self.feedItem
-                                        success:^(OTTourJoiner *joiner) {
-                                            NSLog(@"sent request to join entourage %@: %@", self.feedItem.uid, message);
-                                            self.feedItem.joinStatus = @"pending";
-                                        } failure:^(NSError *error) {
-                                            NSLog(@"failed joining tour %@ with error %@", self.feedItem.uid, error.description);
-                                            [self dismissViewControllerAnimated:YES completion:^{
-                                                [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
-                                            }];
-                                        }];
+        OTEntourage *entourage = (OTEntourage *)_feedItem;
+        [[OTEntourageService new] joinMessageEntourage:entourage message:message success:^(OTTourJoiner *joiner) {
+            [SVProgressHUD dismiss];
+            NSLog(@"JoinMessage was sent. :)");
+        } failure:^(NSError *error) {
+            [SVProgressHUD dismiss];
+            NSLog(@"Failed to send join message: %@", error.description);
+        }];
     }
 
     

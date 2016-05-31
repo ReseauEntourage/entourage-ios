@@ -371,6 +371,73 @@ NSString *const kTourPoints = @"tour_points";
 }
 
 - (void)joinTour:(OTTour *)tour
+         success:(void(^)(OTTourJoiner *))success
+         failure:(void (^)(NSError *)) failure {
+    
+    NSString *url = [NSString stringWithFormat:API_URL_TOUR_JOIN_REQUEST, tour.uid, TOKEN];
+    NSLog(@"Join request: %@", url);
+    
+    [[OTHTTPRequestManager sharedInstance]
+         POSTWithUrl:url
+         andParameters:nil
+         andSuccess:^(id responseObject)
+         {
+             NSDictionary *data = responseObject;
+             NSDictionary *joinerDictionary = [data objectForKey:@"user"];
+             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
+             
+             if (success)
+             {
+                 success(joiner);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }
+     ];
+}
+
+- (void)joinMessageTour:(OTTour*)tour
+                message:(NSString*)message
+                success:(void(^)(OTTourJoiner *))success
+                failure:(void (^)(NSError *)) failure {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    NSString *url = [NSString stringWithFormat:API_URL_TOUR_JOIN_MESSAGE, tour.uid, currentUser.sid, TOKEN];
+    NSDictionary *parameters = @{@"request": @{@"message":message}};
+    NSLog(@"JoinMessage tour request: %@", url);
+    
+    [[OTHTTPRequestManager sharedInstance]
+         PUTWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
+         {
+             NSDictionary *data = responseObject;
+             NSDictionary *joinerDictionary = [data objectForKey:@"user"];
+             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
+             
+             if (success)
+             {
+                 success(joiner);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }
+     ];
+
+}
+
+
+
+- (void)join_OLD_Tour:(OTTour *)tour
      withMessage:(NSString*)message
          success:(void(^)(OTTourJoiner *))success
          failure:(void (^)(NSError *)) failure {

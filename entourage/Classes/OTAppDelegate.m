@@ -66,7 +66,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //logger
     
-#if DEBUG
+#if DEBUGY
 //#ifdef LOG2FILE
 #if TARGET_IPHONE_SIMULATOR == 0
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
