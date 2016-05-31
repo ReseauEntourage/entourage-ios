@@ -34,7 +34,7 @@ NSString *const kEntourages = @"entourages";
                            success:(void (^)(NSArray *))success
                            failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGES, [[NSUserDefaults standardUserDefaults] currentUser].token ];
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGES, TOKEN];
     NSDictionary *parameters = @{@"latitude": @(coordinate.latitude), @"longitude": @(coordinate.longitude)};
     NSLog(@"requesting entourages %@  ...", url);
     
@@ -60,6 +60,35 @@ NSString *const kEntourages = @"entourages";
      }
      ];
 }
+
+- (void)getEntourageWithId:(NSNumber *)entourageId
+          withSuccess:(void(^)(OTEntourage *))success
+              failure:(void (^)(NSError *))failure
+{
+    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, entourageId, TOKEN];
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             NSDictionary *entDictionary = [(NSDictionary*)responseObject objectForKey:@"entourage"];
+             OTEntourage *ent = [[OTEntourage alloc] initWithDictionary:entDictionary];
+             success(ent);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }];
+}
+
 
 - (void)joinEntourage:(OTEntourage *)entourage
               success:(void(^)(OTTourJoiner *))success

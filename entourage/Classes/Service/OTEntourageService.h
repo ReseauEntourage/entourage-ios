@@ -19,6 +19,9 @@
                            success:(void (^)(NSArray *))success
                            failure:(void (^)(NSError *))failure;
 
+- (void)getEntourageWithId:(NSNumber *)entourageId
+          withSuccess:(void(^)(OTEntourage *))success
+              failure:(void (^)(NSError *))failure;
 
 - (void)joinEntourage:(OTEntourage *)entourage
               success:(void(^)(OTTourJoiner *))success

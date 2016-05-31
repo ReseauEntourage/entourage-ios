@@ -21,7 +21,7 @@
 }
 
 + (UIStoryboard*)tourStoryboard {
-    UIStoryboard *tourStoryboard = [UIStoryboard storyboardWithName:@"Tour" bundle:nil];
+    UIStoryboard *tourStoryboard = [UIStoryboard storyboardWithName:@"FeedItem" bundle:nil];
     return tourStoryboard;
 }
 
