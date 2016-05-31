@@ -208,7 +208,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self zoomToCurrentLocation:nil];
+    if (self.toursMapDelegate.isActive) {
+        [self zoomToCurrentLocation:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -1007,7 +1009,6 @@ static bool isShowingOptions = NO;
 
 - (void)doJoinRequest:(OTFeedItem*)feedItem {
     self.selectedFeedItem = feedItem;
-33328
     if ([feedItem.joinStatus isEqualToString:@"not_requested"])
     {
         [self sendJoinRequest:feedItem];
