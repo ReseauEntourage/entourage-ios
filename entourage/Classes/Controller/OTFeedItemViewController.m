@@ -265,7 +265,8 @@ typedef NS_ENUM(unsigned) {
     tourStartStatus.date = self.feedItem.creationDate;
     tourStartStatus.type = OTTourStatusStart;
     tourStartStatus.status = [NSString stringWithFormat: @"%@ en cours", self.feedItem.navigationTitle.capitalizedString];
-    tourStartStatus.duration = 0;
+    NSDate *now = [NSDate date];
+    tourStartStatus.duration = [now timeIntervalSinceDate:self.feedItem.creationDate];
     tourStartStatus.distance = 0;
     //[self.timelinePoints addObject:tourStartStatus];
     [self updateTableViewAddingTimelinePoints:@[tourStartStatus]];
@@ -279,7 +280,7 @@ typedef NS_ENUM(unsigned) {
             tourEndStatus.date = tour.endTime;
             tourStartStatus.type = OTTourStatusEnd;
             tourEndStatus.status = @"Maraude terminée";
-            tourEndStatus.duration = [tour.endTime timeIntervalSinceDate:tour.creationDate];;
+            tourEndStatus.duration = [tour.endTime timeIntervalSinceDate:tour.creationDate];
             tourEndStatus.distance = tour.distance.doubleValue;
             [self updateTableViewAddingTimelinePoints:@[tourEndStatus]];
         }

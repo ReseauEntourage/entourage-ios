@@ -54,6 +54,10 @@
         self.organizationDesc = [dictionary valueForKey:kWSKeyOrganizationDescription];
         self.tourPoints = [OTTourPoint tourPointsWithJSONDictionary:dictionary andKey:kWSKeyTourPoints];
         self.noMessages = [dictionary valueForKey:kWSNoUnreadMessages];
+        
+        if (self.distance == nil || self.distance.doubleValue == 0) {
+            [self computeDistance];
+        }
     }
     return self;
 }
@@ -135,6 +139,18 @@
     [typeByNameAttrString appendAttributedString:nameAttrString];
     
     return typeByNameAttrString;
+}
+
+- (void)computeDistance {
+    // We need at least two points to compute the distance
+    if (self.tourPoints == nil || self.tourPoints.count < 2) return;
+    self.distance = @0.0;
+    CLLocation *firstLocation = ((OTTourPoint*)self.tourPoints[0]).toLocation;
+    for (NSUInteger i = 1; i < self.tourPoints.count; i++) {
+        CLLocation *secondLocation = ((OTTourPoint*)self.tourPoints[i]).toLocation;
+        self.distance = @(self.distance.doubleValue + [secondLocation distanceFromLocation:firstLocation]);
+        firstLocation = ((OTTourPoint*)self.tourPoints[i]).toLocation;
+    }
 }
 
 @end
