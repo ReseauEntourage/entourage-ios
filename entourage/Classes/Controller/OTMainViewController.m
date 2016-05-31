@@ -86,7 +86,7 @@
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 #define TABLEVIEW_BOTTOM_INSET 86.0f
 
-#define DATA_REFRESH_RATE 60.0 //seconds
+
 #define MAX_DISTANCE 250.0 //meters
 
 #define CENTER_MAP_FRAME CGRectMake(8.0f, 8.0f, 30.0f, 30.0f)
@@ -1009,6 +1009,7 @@ static bool isShowingOptions = NO;
 
 - (void)doJoinRequest:(OTFeedItem*)feedItem {
     self.selectedFeedItem = feedItem;
+
     if ([feedItem.joinStatus isEqualToString:@"not_requested"])
     {
         [self sendJoinRequest:feedItem];

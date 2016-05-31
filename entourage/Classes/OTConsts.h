@@ -27,6 +27,7 @@
 #define ATTR_LIGHT_15       @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]}
 #define ATTR_SEMIBOLD_15    @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]}
 
+#define DATA_REFRESH_RATE 60.0 //seconds
 
 #define TEXTVIEW_PADDING 10.0f
 #define TEXTVIEW_PADDING_TOP 12.0f
