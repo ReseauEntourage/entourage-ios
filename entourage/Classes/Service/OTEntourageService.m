@@ -155,6 +155,33 @@ NSString *const kEntourages = @"entourages";
     ];
 }
 
+- (void)closeEntourage:(OTEntourage *)entourage
+      withSuccess:(void (^)(OTEntourage *))success
+          failure:(void (^)(NSError *))failure
+{
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_UPDATE, entourage.uid, TOKEN];
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    parameters[@"entourage"] = [entourage dictionaryForWebService];
+    
+    [[OTHTTPRequestManager sharedInstance]
+         PUTWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
+         {
+             if (success)
+             {
+                 OTEntourage *updatedEntourage = [[OTEntourage alloc] initWithDictionary:responseObject];
+                 success(updatedEntourage);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure)
+             {
+                 failure(error);
+             }
+         }];
+}
 
 - (void)updateEntourageJoinRequestStatus:(NSString *)status
                                  forUser:(NSNumber*)userID

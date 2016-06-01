@@ -1026,7 +1026,7 @@ static bool isShowingOptions = NO;
                 [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
             } else {
                 
-                feedItem.status = TOUR_STATUS_FREEZED;
+                feedItem.status = TOUR_STATUS_CLOSED;
                 if ([feedItem isKindOfClass:[OTTour class]]) {
                     [[OTTourService new] closeTour:(OTTour*)feedItem
                                        withSuccess:^(OTTour *closedTour) {
@@ -1040,7 +1040,16 @@ static bool isShowingOptions = NO;
                                            NSLog(@"%@",[error localizedDescription]);
                                        }];
                 } else {
-                    
+                    OTEntourage *entourage = (OTEntourage*)feedItem;
+                    entourage.status = TOUR_STATUS_CLOSED;
+                    [[OTEntourageService new] closeEntourage:entourage
+                                                 withSuccess:^(OTEntourage *entoruage) {
+                                                     [self.tableView reloadData];
+                                                     [SVProgressHUD showSuccessWithStatus:@"Entourage clôturée."];
+                                                 } failure:^(NSError *error) {
+                                                     [SVProgressHUD showErrorWithStatus:@"Erreur"];
+                                                     NSLog(@"%@",[error localizedDescription]);
+                                                 }];
                 }
             }
         } else {

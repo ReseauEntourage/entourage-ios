@@ -20,7 +20,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wY9-9P-f0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1355" y="-1403"/>
+            <point key="canvasLocation" x="1355" y="-1386"/>
         </scene>
         <!--Guide View Controller-->
         <scene sceneID="cCl-FF-sHF">
@@ -331,7 +331,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="center-location.png" width="35" height="35"/>
+        <image name="center-location.png" width="22" height="22"/>
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>

@@ -17,6 +17,5 @@
                      withPlaceholder:(NSString *)placeholder;
 
 - (void)setupWithStatus:(NSString*)status andJoinStatus:(NSString *)joinStatus;
-//- (void)setupWithJoinStatusOfTour:(OTTour *)tour;
 
 @end

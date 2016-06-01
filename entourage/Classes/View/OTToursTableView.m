@@ -232,10 +232,8 @@
         noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
         
         [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-        //[statusButton setupWithJoinStatusOfTour:tour];
         [statusButton setupWithStatus:tour.status andJoinStatus:tour.joinStatus];
         
-        //[statusLabel setupWithJoinStatusOfTour:tour];
         [statusLabel setupWithStatus:tour.status andJoinStatus:tour.joinStatus];
         
         //check if we need to load more data
@@ -256,9 +254,7 @@
         noPeopleLabel.text = [NSString stringWithFormat:@"%d", ent.noPeople.intValue];
         
         [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-        //[statusButton setupWithJoinStatusOfTour:tour];
         [statusButton setupWithStatus:ent.status andJoinStatus:ent.joinStatus];
-        //[statusLabel setupWithJoinStatusOfTour:tour];
         [statusLabel setupWithStatus:ent.status andJoinStatus:ent.joinStatus];
     }
     
@@ -267,10 +263,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id selectedFeedItem = self.feedItems[indexPath.section];
-//    if ([item isKindOfClass:[OTEntourage class]])
-//        return;
-//    //TODO: handle Entourages
-    //OTFeedItem *selectedFeedItem = (OTFeedItem*)self.feedItems[indexPath.section];
+
     if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(showFeedInfo:)]) {
         [self.toursDelegate showFeedInfo:selectedFeedItem];
     }
