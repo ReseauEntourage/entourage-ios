@@ -413,7 +413,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="odF-HL-m84" kind="modal" identifier="OTTourOptionsSegue" id="BEq-sX-RRl"/>
+                                    <segue destination="odF-HL-m84" kind="modal" identifier="OTTourOptionsSegue" animates="NO" id="BEq-sX-RRl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -454,7 +454,7 @@
                         <segue destination="R63-9E-dkT" kind="modal" identifier="QuitTourSegue" id="QCV-ym-9OZ"/>
                         <segue destination="ntx-AK-ysq" kind="modal" identifier="EntouragesSegue" id="NTA-1a-2nr"/>
                         <segue destination="Yq0-qf-lgm" kind="modal" identifier="OTGuideDetailsSegue" id="x8u-KE-dPr"/>
-                        <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" id="Gfi-xi-1Da"/>
+                        <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" animates="NO" id="Gfi-xi-1Da"/>
                         <segue destination="Qc8-Ez-r95" kind="modal" identifier="OTPublicTourSegue" id="gok-hK-Hg9"/>
                         <segue destination="cUF-7c-FT1" kind="modal" identifier="TourCreatorSegue" id="giF-18-m0W"/>
                         <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageCreator" id="dno-Ju-GCg"/>

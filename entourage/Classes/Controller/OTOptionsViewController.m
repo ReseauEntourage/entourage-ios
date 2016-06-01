@@ -12,11 +12,17 @@
 
 @end
 
+
 @implementation OTOptionsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (!CGPointEqualToPoint(self.fingerPoint, CGPointZero)) {
+        [self setupOptionsAtFingerPoint];
+    } else {
+        [self setupOptionsAsList];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,6 +30,36 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setIsPOIVisible:(BOOL)isPOIVisible {
+    self.isPOIVisible = isPOIVisible;
+}
+
+/*******************************************************************************/
+
+#pragma mark - Show options at fingerPoint
+
+- (void)setupOptionsAtFingerPoint {
+    
+    self.togglePOILabel.hidden = YES;
+    self.togglePOIButton.hidden = YES;
+    
+    [self addOptionWithIcon:@"heatZone" andAction:nil withTranslation:CGPointZero];
+}
+
+
+/*******************************************************************************/
+
+#pragma mark - Show options as a list
+
+- (void)setupOptionsAsList {
+    
+    if (self.isPOIVisible) {
+        self.togglePOILabel.text = OTLocalizedString(@"map_options_hide_poi");
+    } else {
+        self.togglePOILabel.text = OTLocalizedString(@"map_options_show_poi");
+    }
+    self.buttonIndex = 1;
+}
 /*
 #pragma mark - Navigation
 
@@ -90,10 +126,19 @@
     }
 }
 
-//- (void)setIsPOIVisible:(BOOL)POIVisible {
-//    _isPOIVisible = POIVisible;
-//}
+- (void)addOptionWithIcon:(NSString *)optionIcon
+                andAction:(SEL)selector
+          withTranslation:(CGPoint)translationPoint
 
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *image = [UIImage imageNamed:optionIcon];
+    
+    button.frame = CGRectMake(self.fingerPoint.x - image.size.width/2 + translationPoint.x, self.fingerPoint.y+10 + translationPoint.y, image.size.width, image.size.height);
+    [button setImage:[UIImage imageNamed:optionIcon] forState:UIControlStateNormal];
+    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+}
 - (IBAction)doDismiss:(id)sender {
     if ([self.optionsDelegate respondsToSelector:@selector(dismissOptions)]) {
         [self.optionsDelegate performSelector:@selector(dismissOptions) withObject:nil];

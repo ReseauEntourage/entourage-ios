@@ -87,6 +87,7 @@
 #define TABLEVIEW_BOTTOM_INSET 86.0f
 
 
+#define LONGPRESS_DELTA 65.0f
 #define MAX_DISTANCE 250.0 //meters
 
 #define CENTER_MAP_FRAME CGRectMake(8.0f, 8.0f, 30.0f, 30.0f)
@@ -318,8 +319,14 @@
             [alert addAction:defaultAction];
         }
     } else {
-        self.launcherButton.hidden = NO;
-        [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
+        if (touchPoint.x - LONGPRESS_DELTA > 0 &&
+            touchPoint.x + LONGPRESS_DELTA < [UIScreen mainScreen].bounds.size.width)
+        {
+            self.launcherButton.hidden = NO;
+            [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
+        } else {
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+        }
     }
 }
 
@@ -1242,7 +1249,7 @@ typedef NS_ENUM(NSInteger) {
             controller.optionsDelegate = self;
             [controller setIsPOIVisible:self.guideMapDelegate.isActive];
             if (!CGPointEqualToPoint(self.mapPoint, CGPointZero)) {
-                controller.c2aPoint = self.mapPoint;
+                controller.fingerPoint = self.mapPoint;
                 self.mapPoint = CGPointZero;
             }
         } break;

@@ -682,6 +682,7 @@
 				4507017A1CCF459B00432548 /* TourCreator.storyboard */,
 				45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */,
 				452FE3FF1CAD5AC700063334 /* Entourages.storyboard */,
+				2E7064ED1CB273120034C55A /* MapOptions.storyboard */,
 				452FE3F31CAD563F00063334 /* TourOptions.storyboard */,
 				452FE3F11CAD561500063334 /* QuitTour.storyboard */,
 				452FE3EC1CAD54F700063334 /* About.storyboard */,
@@ -689,7 +690,6 @@
 				452FE3E71CAD549200063334 /* GuideSolidarity.storyboard */,
 				452FE3E41CAD544F00063334 /* UserProfile.storyboard */,
 				45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */,
-				2E7064ED1CB273120034C55A /* MapOptions.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";

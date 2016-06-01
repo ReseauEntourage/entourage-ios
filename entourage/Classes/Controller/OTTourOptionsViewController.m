@@ -22,11 +22,9 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *createLabel;
 @property (nonatomic, weak) IBOutlet UIButton *createButton;
-@property (nonatomic, weak) IBOutlet UILabel *poiLabel;
-@property (nonatomic, weak) IBOutlet UIButton *poiButton;
-@property (nonatomic) int buttonIndex;
+//@property (nonatomic, weak) IBOutlet UILabel *poiLabel;
+//@property (nonatomic, weak) IBOutlet UIButton *poiButton;
 
-@property (nonatomic) BOOL isPOIVisible;
 
 @end
 
@@ -36,21 +34,39 @@
     [super viewDidLoad];
     self.buttonIndex = 1;
     // Do any additional setup after loading the view.
-    if (!CGPointEqualToPoint(self.c2aPoint, CGPointZero)) {
-        self.createLabel.hidden = YES;
-        self.createButton.hidden = YES;
-        self.poiLabel.hidden = YES;
-        self.poiButton.hidden = YES;
-        
-        [self addOptionWithIcon:@"report" andAction:@selector(doCreateEncounter:)];
+    if (!CGPointEqualToPoint(self.fingerPoint, CGPointZero)) {
+        [self setupOptionsAtFingerPoint];
     } else {
-        if (self.isPOIVisible) {
-            self.poiLabel.text = OTLocalizedString(@"map_options_hide_poi");
-        }
-        else {
-            self.poiLabel.text = OTLocalizedString(@"map_options_show_poi");
-        }
+        [self setupOptionsAsList];
     }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*******************************************************************************/
+
+#pragma mark - Show options at fingerPoint
+
+- (void)setupOptionsAtFingerPoint {
+    [super setupOptionsAtFingerPoint];
+    
+    self.createLabel.hidden = YES;
+    self.createButton.hidden = YES;
+
+    [self addOptionWithIcon:@"report" andAction:@selector(doCreateEncounter:) withTranslation:NORTH_WEST];
+    [self addOptionWithIcon:@"megaphone" andAction:@selector(doCreateDemande:) withTranslation:NORTH];
+    [self addOptionWithIcon:@"heart" andAction:@selector(doCreateContribution:) withTranslation:NORTH_EAST];
+}
+
+/*******************************************************************************/
+
+#pragma mark - Show options as a list
+
+- (void)setupOptionsAsList {
+    [super setupOptionsAsList];
     
     [self addOption:OTLocalizedString(@"create_encounter")
             atIndex:self.buttonIndex++
@@ -73,37 +89,6 @@
            withIcon:@"solidarity"
           andAction:@selector(doTogglePOI:)];
 
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)setIsPOIVisible:(BOOL)isPOIVisible {
-    _isPOIVisible = isPOIVisible;
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (void)addOptionWithIcon:(NSString *)optionIcon
-                andAction:(SEL)selector
-{
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *image = [UIImage imageNamed:optionIcon];
-    
-    button.frame = CGRectMake(self.c2aPoint.x - image.size.width/2, self.c2aPoint.y+10, image.size.width, image.size.height);
-    [button setImage:[UIImage imageNamed:optionIcon] forState:UIControlStateNormal];
-    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
 }
 
 @end
