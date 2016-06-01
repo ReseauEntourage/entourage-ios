@@ -30,9 +30,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setIsPOIVisible:(BOOL)isPOIVisible {
-    self.isPOIVisible = isPOIVisible;
-}
+//- (void)setIsPOIVisible:(BOOL)isPOIVisible {
+//    self.isPOIVisible = isPOIVisible;
+//}
 
 /*******************************************************************************/
 

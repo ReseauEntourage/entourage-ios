@@ -81,8 +81,8 @@
                     <connections>
                         <outlet property="createButton" destination="xdb-7x-qlW" id="Dh6-gc-hr9"/>
                         <outlet property="createLabel" destination="zhw-r6-g45" id="BWL-Kv-G8m"/>
-                        <outlet property="poiButton" destination="Upg-Fe-YLk" id="kh2-29-Vb0"/>
-                        <outlet property="poiLabel" destination="2yT-Pg-ZcZ" id="Gry-9C-9cq"/>
+                        <outlet property="togglePOIButton" destination="Upg-Fe-YLk" id="WEj-CJ-NB9"/>
+                        <outlet property="togglePOILabel" destination="2yT-Pg-ZcZ" id="who-sY-0hw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66X-IN-NwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
