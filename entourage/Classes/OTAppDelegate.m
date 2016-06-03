@@ -56,6 +56,8 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 
 @interface OTAppDelegate () <UIApplicationDelegate>
 
+@property (nonatomic) BOOL shouldShowNotificationAlert;
+
 @end
 
 @implementation OTAppDelegate
@@ -167,16 +169,18 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil];
 }
 
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
     NSLog(@"Push notification received: %@", userInfo);
     
     // Building the notification
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive) {
+        self.shouldShowNotificationAlert =  YES;
         NSDictionary *apnContent = [userInfo objectForKey:kUserInfoMessage];
         NSDictionary *apnExtra = [apnContent objectForKey:kUserInfoExtraMessage];
         NSString *apnType = [apnExtra valueForKey:kAPNType];
-        
+        NSNumber *joinableId = [apnExtra numberForKey:@"joinable_id"];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender]
                                                                        message:[userInfo objectForKey:kUserInfoObject]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
@@ -195,10 +199,24 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         }
         
         UIViewController *rootVC = application.keyWindow.rootViewController;
-        if (rootVC.presentedViewController)
-            [rootVC.presentedViewController presentViewController:alert animated:YES completion:nil];
-        else
+        if (rootVC.presentedViewController) {
+            if ([rootVC.presentedViewController isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *navC = (UINavigationController*)rootVC.presentedViewController;
+                UIViewController *topVC = navC.viewControllers.firstObject;
+                if ([topVC isKindOfClass:[OTFeedItemViewController class]]) {
+                    OTFeedItemViewController *feedItemVC = (OTFeedItemViewController*)topVC;
+                    if (feedItemVC.feedItem.uid.intValue == joinableId.intValue) {
+                        self.shouldShowNotificationAlert = NO;
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationNewMessage object:nil userInfo:apnContent];
+                    }
+                }
+            }
+            
+            if (self.shouldShowNotificationAlert)
+                [rootVC.presentedViewController presentViewController:alert animated:YES completion:nil];
+        } else {
             [rootVC presentViewController:alert animated:YES completion:nil];
+        }
         
         //Refreshing the newsfeed when a push notification is received
         if ([rootVC isKindOfClass:[SWRevealViewController class]]) {

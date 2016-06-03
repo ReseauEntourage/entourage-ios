@@ -114,6 +114,20 @@ typedef NS_ENUM(unsigned) {
     }
     
     self.chatTextView.layer.borderColor = [UIColor appGreyishColor].CGColor;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showNewMessage:)
+                                                 name:@kNotificationNewMessage
+                                               object:nil];
+}
+
+- (void)showNewMessage:(NSNotification*)notification {
+    NSLog(@"DAA %@", notification.userInfo);
+    
+    if ([self.feedItem isKindOfClass:[OTTour class]])
+        [self getTourMessages];
+    else
+        [self getEntourageMessages];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
