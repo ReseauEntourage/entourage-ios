@@ -475,7 +475,7 @@ NSString *const kTourPoints = @"tour_points";
          success:(void (^)())success
          failure:(void (^)(NSError *error))failure {
    
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_quit_tour", @""), kTours, tour.uid, [[NSUserDefaults standardUserDefaults] currentUser].sid, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:OTLocalizedString(@"url_quit_tour"), kTours, tour.uid, [[NSUserDefaults standardUserDefaults] currentUser].sid, TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
          DELETEWithUrl:url

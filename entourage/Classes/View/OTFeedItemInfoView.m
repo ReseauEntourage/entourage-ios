@@ -56,9 +56,11 @@
     
     UIButton *joinButton = [self viewWithTag:FEEDITEM_JOINBUTTON_TAG];
     [joinButton addTarget:self action:@selector(doJoinFeed:) forControlEvents:UIControlEventTouchUpInside];
-    [joinButton setupWithStatus:feedItem.status andJoinStatus:feedItem.joinStatus];
+    //[joinButton setupWithStatus:feedItem.status andJoinStatus:feedItem.joinStatus];
+    [joinButton setupAsStatusButtonForFeedItem:feedItem];
     UILabel *joinLabel = [self viewWithTag:FEEDITEM_JOINLABEL_TAG];
-    [joinLabel setupWithStatus:feedItem.status andJoinStatus:feedItem.joinStatus];
+    //[joinLabel setupWithStatus:feedItem.status andJoinStatus:feedItem.joinStatus];
+    [joinLabel setupAsStatusButtonForFeedItem:feedItem];
 }
 
 - (void)doJoinFeed:(UIButton *)senderButton {

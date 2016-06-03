@@ -23,8 +23,7 @@
 /********************************************************************************/
 #pragma mark - Birth & Death
 
-- (id)initWithTourType:(NSString *)tourType andVehicleType:(NSString *)vehicleType
-{
+- (id)initWithTourType:(NSString *)tourType andVehicleType:(NSString *)vehicleType {
     self = [super init];
     if (self)
     {
@@ -62,8 +61,7 @@
     return self;
 }
 
-- (NSDictionary *)dictionaryForWebService
-{
+- (NSDictionary *)dictionaryForWebService {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
     dictionary[kWSKeyTourType] = self.type;
@@ -151,6 +149,14 @@
         self.distance = @(self.distance.doubleValue + [secondLocation distanceFromLocation:firstLocation]);
         firstLocation = ((OTTourPoint*)self.tourPoints[i]).toLocation;
     }
+}
+
+- (NSString *)newsfeedStatus {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (self.author.uID.intValue == currentUser.sid.intValue)
+        if ([self.status isEqualToString:TOUR_STATUS_ONGOING] || [self.status isEqualToString:TOUR_STATUS_CLOSED])
+            return FEEDITEM_STATUS_ACTIVE;
+    return self.status;
 }
 
 @end

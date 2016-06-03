@@ -232,9 +232,11 @@
         noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
         
         [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-        [statusButton setupWithStatus:tour.status andJoinStatus:tour.joinStatus];
+        //[statusButton setupWithStatus:[tour newsfeedStatus] andJoinStatus:tour.joinStatus];
+        [statusButton setupAsStatusButtonForFeedItem:tour];
         
-        [statusLabel setupWithStatus:tour.status andJoinStatus:tour.joinStatus];
+        //[statusLabel setupWithStatus:[tour newsfeedStatus] andJoinStatus:tour.joinStatus];
+        [statusLabel setupAsStatusButtonForFeedItem:tour];
         
         //check if we need to load more data
         if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
@@ -254,8 +256,10 @@
         noPeopleLabel.text = [NSString stringWithFormat:@"%d", ent.noPeople.intValue];
         
         [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-        [statusButton setupWithStatus:ent.status andJoinStatus:ent.joinStatus];
-        [statusLabel setupWithStatus:ent.status andJoinStatus:ent.joinStatus];
+        //[statusButton setupWithStatus:[ent newsfeedStatus] andJoinStatus:ent.joinStatus];
+        [statusButton setupAsStatusButtonForFeedItem:ent];
+        //[statusLabel setupWithStatus:[ent newsfeedStatus] andJoinStatus:ent.joinStatus];
+        [statusLabel setupAsStatusButtonForFeedItem:ent];
     }
     
     return cell;

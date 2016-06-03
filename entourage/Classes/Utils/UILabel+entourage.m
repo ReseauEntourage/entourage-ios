@@ -13,6 +13,9 @@
 #import "TTTLocationFormatter.h"
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
+#import "OTFeedItem.h"
 
 
 @implementation UILabel (entourage)
@@ -108,9 +111,9 @@
 }
 
 - (void)setupWithStatus:(NSString *)status andJoinStatus:(NSString*)joinStatus {
-    self.hidden = [TOUR_STATUS_CLOSED isEqualToString:status];
+    self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:status];
     
-    if ([joinStatus isEqualToString:JOIN_ACCEPTED]) {
+    if ([joinStatus isEqualToString:JOIN_ACCEPTED] || [status isEqualToString:FEEDITEM_STATUS_ACTIVE]) {
         [self setText:@"Actif"];
         [self setTextColor:[UIColor appOrangeColor]];
     } else {
@@ -127,6 +130,29 @@
     }
 }
 
-
+- (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {
+    self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:[feedItem newsfeedStatus]];
+    
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
+        //
+        [self setText:@"Actif"];
+        [self setTextColor:[UIColor appOrangeColor]];
+    } else {
+        if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
+            [self setText:@"Actif"];
+            [self setTextColor:[UIColor appOrangeColor]];
+        } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
+            [self setText:@"Demande en attente"];
+            [self setTextColor:[UIColor appOrangeColor]];
+        } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
+            [self setText:@"Demande rejetée"];
+            [self setTextColor:[UIColor appTomatoColor]];
+        } else {
+            [self setText:@"Je rejoins"];
+            [self setTextColor:[UIColor appGreyishColor]];
+        }
+    }
+}
 
 @end

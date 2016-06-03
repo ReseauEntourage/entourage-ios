@@ -988,8 +988,10 @@ static bool isShowingOptions = NO;
         [[OTTourService new]
             joinTour:tour
             success:^(OTTourJoiner *joiner) {
+                tour.joinStatus = JOIN_PENDING;
                 [SVProgressHUD dismiss];
                 [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
+                [self.tableView reloadData];
             } failure:^(NSError *error) {
                 [SVProgressHUD dismiss];
                 NSLog(@"Error sending tour join request: %@", error.description);
@@ -1000,9 +1002,9 @@ static bool isShowingOptions = NO;
                                         success:^(OTTourJoiner *joiner) {
                                             [SVProgressHUD dismiss];
                                             NSLog(@"Successfuly sent request to join entourage %@", feedItem.uid);
-                                            feedItem.joinStatus = @"pending";
+                                            entourage.joinStatus = JOIN_PENDING;
+                                            [self.tableView reloadData];
                                             [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
-
                                         } failure:^(NSError *error) {
                                             [SVProgressHUD dismiss];
                                             NSLog(@"failed joining tour %@ with error %@", feedItem.uid, error.description);
@@ -1010,7 +1012,6 @@ static bool isShowingOptions = NO;
                                                 [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
                                             }];
                                         }];
-
     }
 }
 

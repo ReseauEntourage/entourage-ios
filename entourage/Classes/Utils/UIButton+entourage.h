@@ -16,6 +16,7 @@
 - (void)setupAsProfilePictureFromUrl:(NSString *)avatarURLString
                      withPlaceholder:(NSString *)placeholder;
 
-- (void)setupWithStatus:(NSString*)status andJoinStatus:(NSString *)joinStatus;
+//- (void)setupWithStatus:(NSString*)status andJoinStatus:(NSString *)joinStatus;
+- (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem;
 
 @end

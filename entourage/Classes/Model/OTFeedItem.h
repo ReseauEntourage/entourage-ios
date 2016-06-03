@@ -28,5 +28,6 @@
 - (NSString *)navigationTitle;
 - (NSString *)summary;
 - (NSAttributedString *)typeByNameAttributedString;
+- (NSString *)newsfeedStatus;
 
 @end

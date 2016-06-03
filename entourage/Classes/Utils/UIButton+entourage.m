@@ -8,6 +8,8 @@
 
 #import "UIButton+entourage.h"
 #import "UIButton+AFNetworking.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
 
 #define DEFAULT_IMAGE @"userSmall"
 
@@ -38,12 +40,12 @@
                                   withURL:url
                          placeholderImage:placeholderImage];
     }
-
 }
 
 - (void)setupWithStatus:(NSString*)status andJoinStatus:(NSString *)joinStatus {
-    self.hidden = [TOUR_STATUS_CLOSED isEqualToString:status];
-    if ([joinStatus isEqualToString:JOIN_ACCEPTED]) {
+    self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:status];
+    
+    if ([joinStatus isEqualToString:JOIN_ACCEPTED] || [status isEqualToString:FEEDITEM_STATUS_ACTIVE]) {
         [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
     } else  if ([joinStatus isEqualToString:JOIN_PENDING]) {
         [self setImage:[UIImage imageNamed:JOINBUTTON_PENDING] forState:UIControlStateNormal];
@@ -53,6 +55,25 @@
         [self setImage:[UIImage imageNamed:JOINBUTTON_NOTREQUESTED] forState:UIControlStateNormal];
     }
 
+}
+
+- (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {
+    self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:[feedItem newsfeedStatus]];
+    
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
+        //
+        [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];    } else {
+        if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
+            [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
+        } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
+            [self setImage:[UIImage imageNamed:JOINBUTTON_PENDING] forState:UIControlStateNormal];
+        } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
+           [self setImage:[UIImage imageNamed:JOINBUTTON_REJECTED] forState:UIControlStateNormal];
+        } else {
+           [self setImage:[UIImage imageNamed:JOINBUTTON_NOTREQUESTED] forState:UIControlStateNormal];
+        }
+    }
 }
 
 @end

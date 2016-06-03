@@ -8,7 +8,7 @@
 
 #import "OTEntourage.h"
 #import "OTConsts.h"
-
+#import "OTTour.h"
 
 
 @implementation OTEntourage
@@ -61,6 +61,13 @@
     [typeByNameAttrString appendAttributedString:nameAttrString];
     
     return typeByNameAttrString;
+}
+
+
+- (NSString *)newsfeedStatus {
+    if ([self.status isEqualToString:ENTOURAGE_STATUS_OPEN])
+        return FEEDITEM_STATUS_ACTIVE;
+    return self.status;
 }
 
 @end

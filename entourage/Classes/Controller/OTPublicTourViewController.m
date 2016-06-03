@@ -73,8 +73,10 @@
     self.noUsersLabel.text = [NSString stringWithFormat:@"%d", self.tour.noPeople.intValue];
     
     
-    [self.joinButton setupWithStatus:self.tour.status andJoinStatus:self.tour.joinStatus];
-    [self.joinLabel setupWithStatus:self.tour.status andJoinStatus:self.tour.joinStatus];
+    //[self.joinButton setupWithStatus:self.tour.status andJoinStatus:self.tour.joinStatus];
+    [self.joinButton setupAsStatusButtonForFeedItem:self.tour];
+    //[self.joinLabel setupWithStatus:self.tour.status andJoinStatus:self.tour.joinStatus];
+    [self.joinLabel setupAsStatusButtonForFeedItem:self.tour];
     
     if ([self.tour.tourPoints count] > 0) {
         OTTourPoint *startPoint = self.tour.tourPoints[0];

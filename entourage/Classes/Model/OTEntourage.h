@@ -13,6 +13,7 @@
 #define ENTOURAGE_DEMANDE @"ask_for_help"
 #define ENTOURAGE_CONTRIBUTION @"contribution"
 
+#define ENTOURAGE_STATUS_OPEN @"open"
 
 @interface OTEntourage : OTFeedItem
 

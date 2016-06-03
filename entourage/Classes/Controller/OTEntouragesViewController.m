@@ -171,7 +171,7 @@ typedef NS_ENUM(NSInteger){
     
     switch (entourageStatus) {
         case EntourageStatusActive:
-            statusString = TOUR_STATUS_ACTIVE;
+            statusString = FEEDITEM_STATUS_ACTIVE;
             currentPagination = self.activeToursPagination;
             page = self.activeToursPagination.page;
             break;
