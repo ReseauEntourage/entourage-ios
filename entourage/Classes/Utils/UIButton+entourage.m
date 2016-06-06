@@ -63,7 +63,8 @@
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
         //
-        [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];    } else {
+        [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
+    } else {
         if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
             [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
         } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {

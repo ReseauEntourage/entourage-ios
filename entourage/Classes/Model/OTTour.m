@@ -152,11 +152,13 @@
 }
 
 - (NSString *)newsfeedStatus {
-    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if (self.author.uID.intValue == currentUser.sid.intValue)
+    //OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    //if (self.author.uID.intValue == currentUser.sid.intValue)
+    {
         if ([self.status isEqualToString:TOUR_STATUS_ONGOING] || [self.status isEqualToString:TOUR_STATUS_CLOSED])
             return FEEDITEM_STATUS_ACTIVE;
-    return self.status;
+    }
+    return self.joinStatus;
 }
 
 @end
