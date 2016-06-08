@@ -99,9 +99,8 @@
 }
 
 - (void)dealloc {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 - (void)setPlaceholder:(NSString *)placeholder {
     

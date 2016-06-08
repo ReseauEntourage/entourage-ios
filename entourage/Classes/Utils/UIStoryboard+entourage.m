@@ -25,6 +25,12 @@
     return tourStoryboard;
 }
 
++ (UIStoryboard*)entourageCreatorStoryboard {
+    UIStoryboard *tourStoryboard = [UIStoryboard storyboardWithName:@"EntourageCreator" bundle:nil];
+    return tourStoryboard;
+}
+
+
 
 #pragma mark - Private
 

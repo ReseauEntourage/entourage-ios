@@ -77,8 +77,7 @@
 #import "NSDictionary+Parsing.h"
 
 #define MAPVIEW_HEIGHT 160.f
-#define MAPVIEW_REGION_SPAN_X_METERS 500
-#define MAPVIEW_REGION_SPAN_Y_METERS 500
+
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define TOURS_REQUEST_DISTANCE_KM 10
 #define LOCATION_MIN_DISTANCE 5.f //m
@@ -154,6 +153,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureNavigationBar];
+    [self.footerToolbar setupWithFilters];
     
     self.locations = [NSMutableArray new];
     self.pointsToSend = [NSMutableArray new];
@@ -198,6 +198,10 @@
         self.createEncounterButton.hidden = YES;
     }
     [self startLocationUpdates];
+}
+
+- (void)dealloc {
+   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

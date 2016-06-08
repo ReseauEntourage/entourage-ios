@@ -23,6 +23,8 @@
 
 #define PARIS_LAT 48.856578
 #define PARIS_LON  2.351828
+#define MAPVIEW_REGION_SPAN_X_METERS 500
+#define MAPVIEW_REGION_SPAN_Y_METERS 500
 
 #define ATTR_LIGHT_15       @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]}
 #define ATTR_SEMIBOLD_15    @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]}

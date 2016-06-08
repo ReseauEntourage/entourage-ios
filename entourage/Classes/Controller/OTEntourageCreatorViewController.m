@@ -22,7 +22,7 @@
 
 @interface OTEntourageCreatorViewController()
 
-@property (nonatomic, weak) IBOutlet UILabel *locationLabel;
+@property (nonatomic, weak) IBOutlet UIButton *locationButton;
 @property (nonatomic, weak) IBOutlet OTTextView *titleTextView;
 @property (nonatomic, weak) IBOutlet OTTextView *descriptionTextView;
 
@@ -33,8 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     NSString *typeString = [self.type isEqualToString: ENTOURAGE_DEMANDE] ? OTLocalizedString(@"demande") : OTLocalizedString(@"contribution");
-    self.title =  typeString.uppercaseString;
+    
     
     [self setupCloseModal];
     
@@ -45,6 +44,15 @@
     [self.navigationItem setRightBarButtonItem:menuButton];
     
     [self setupUI];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSString *typeString = [self.type isEqualToString: ENTOURAGE_DEMANDE] ? OTLocalizedString(@"demande") : OTLocalizedString(@"contribution");
+    self.title =  typeString.uppercaseString;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    self.title = @"";
 }
 
 #pragma mark - Private
@@ -65,9 +73,9 @@
         }
         CLPlacemark *placemark = placemarks.firstObject;
         if (placemark.thoroughfare !=  nil) {
-            self.locationLabel.text = placemark.thoroughfare;
+            [self.locationButton setTitle:placemark.thoroughfare forState:UIControlStateNormal];
         } else {
-            self.locationLabel.text = placemark.locality;
+            [self.locationButton setTitle:placemark.locality forState:UIControlStateNormal];
         }
     }];
 

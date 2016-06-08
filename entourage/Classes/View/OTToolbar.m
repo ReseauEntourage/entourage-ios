@@ -12,7 +12,8 @@
 
 @interface OTToolbar()
 
-@property(nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 @end
 
@@ -22,18 +23,53 @@
 {
     self = [super initWithCoder:coder];
     if (self) {
-        [self initialize];
+        //[self initialize];
     }
     return self;
 }
 
-- (void)initialize {
+//- (void)initialize {
+//    
+//    UIBarButtonItem *filtersBBI = [self filtersBarButtonItem];
+//    UIBarButtonItem *locationBBI = [self locationBarButtonItem];
+//    UIBarButtonItem *titleBBI = [self titleBarButtonItem];
+//
+//    UIBarButtonItem *flexibleBBI = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+//                                                                                  target:nil action:nil];
+//    
+//    [self setItems:@[filtersBBI, locationBBI, flexibleBBI, titleBBI, flexibleBBI]];
+//}
+
+- (void)setupWithFilters {
+    UIBarButtonItem *filtersBBI = [self filtersBarButtonItem];
+    UIBarButtonItem *locationBBI = [self locationBarButtonItem];
+    UIBarButtonItem *titleBBI = [self titleBarButtonItem];
     
+    UIBarButtonItem *flexibleBBI = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                 target:nil action:nil];
+    
+    [self setItems:@[filtersBBI, locationBBI, flexibleBBI, titleBBI, flexibleBBI]];
+}
+
+- (void)setupDefault {
+    UIBarButtonItem *locationBBI = [self locationBarButtonItem];
+    UIBarButtonItem *titleBBI = [self titleBarButtonItem];
+    
+    UIBarButtonItem *flexibleBBI = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                 target:nil action:nil];
+    
+    [self setItems:@[locationBBI, flexibleBBI, titleBBI, flexibleBBI]];
+}
+
+- (UIBarButtonItem*)filtersBarButtonItem {
     UIBarButtonItem *filtersBBI = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"filters"]
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(showFilters)];
-    
+    return filtersBBI;
+}
+
+- (UIBarButtonItem*)locationBarButtonItem {
     UIButton *locButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *locImage = [UIImage imageNamed:@"geoloc"];
     [locButton setImage:locImage forState:UIControlStateNormal];
@@ -41,22 +77,23 @@
     [locButton addTarget:self action:@selector(showCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *geolocBBI = [[UIBarButtonItem alloc] initWithCustomView:locButton];
-    
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = self.title;
-    titleLabel.textColor = [UIColor appGreyishBrownColor];
-    titleLabel.font = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
-    UIBarButtonItem *titleBBI = [[UIBarButtonItem alloc] initWithCustomView:titleLabel];
-    UIBarButtonItem *flexibleBBI = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                  target:nil action:nil];
-    
-    [self setItems:@[filtersBBI, geolocBBI, flexibleBBI, titleBBI, flexibleBBI]];
+    return geolocBBI;
+}
+
+- (UIBarButtonItem*)titleBarButtonItem {
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    _titleLabel.text = self.title;
+    _titleLabel.textColor = [UIColor appGreyishBrownColor];
+    _titleLabel.font = [UIFont systemFontOfSize:12.0f weight:UIFontWeightRegular];
+    UIBarButtonItem *titleBBI = [[UIBarButtonItem alloc] initWithCustomView:_titleLabel];
+    return titleBBI;
 }
 
 - (void)setTitle:(NSString *)title {
     _title = title;
-    [self initialize];
+    _titleLabel.text = title;
+    //[self initialize];
     [self setNeedsDisplay];
     
 }

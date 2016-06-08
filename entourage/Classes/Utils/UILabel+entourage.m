@@ -57,8 +57,12 @@
     NSString *dateString = nil;
     if (date != nil) {
         TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
+        timeIntervalFormatter.usesIdiomaticDeicticExpressions = YES;
+        NSLocale *frLocale = [NSLocale localeWithLocaleIdentifier:@"fr"];
+        [timeIntervalFormatter setLocale:frLocale];
+        
         NSTimeInterval timeInterval = [date timeIntervalSinceDate:[NSDate date]];
-        [timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
+        //[timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
         dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
         self.text = dateString;
     }
@@ -86,8 +90,12 @@
     NSString *dateString = nil;
     if (tour.creationDate != nil) {
         TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
+        timeIntervalFormatter.usesIdiomaticDeicticExpressions = NO;
+        NSLocale *frLocale = [NSLocale localeWithLocaleIdentifier:@"fr"];
+        [timeIntervalFormatter setLocale:frLocale];
+        
         NSTimeInterval timeInterval = [tour.creationDate timeIntervalSinceDate:[NSDate date]];
-        [timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
+        //[timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
         dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
         self.text = dateString;
     }

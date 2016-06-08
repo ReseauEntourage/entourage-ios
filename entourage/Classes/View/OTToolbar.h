@@ -11,5 +11,6 @@
 @interface OTToolbar : UIToolbar
 
 - (void)setTitle:(NSString *)title;
-
+- (void)setupDefault;
+- (void)setupWithFilters;
 @end

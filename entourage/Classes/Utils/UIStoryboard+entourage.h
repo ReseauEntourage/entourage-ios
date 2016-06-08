@@ -13,5 +13,6 @@
 + (void)showStartup;
 + (void)showSWRevealController;
 + (UIStoryboard*)tourStoryboard;
++ (UIStoryboard*)entourageCreatorStoryboard;
 
 @end
