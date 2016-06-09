@@ -103,10 +103,7 @@
     return annotationView;
 }
 
-- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
 
-    
-}
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     [self.mapController.clusteringController refresh:animated];

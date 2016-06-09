@@ -587,6 +587,7 @@
                         <outlet property="nameTextField" destination="a5N-Kb-CX4" id="gpj-ZW-kua"/>
                         <outlet property="recordButton" destination="Qot-mm-bch" id="obm-nd-SjT"/>
                         <outlet property="recordingLoader" destination="Qvq-t4-y7g" id="Nwc-dt-IkA"/>
+                        <segue destination="9dY-SB-iaF" kind="modal" identifier="DisclaimerSegue" id="kmM-Ah-gnZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zCS-BA-fyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1015,6 +1016,77 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f44-Ea-6he" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="541" y="965"/>
+        </scene>
+        <!--Disclaimer View Controller-->
+        <scene sceneID="2C6-y0-nAz">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MZ0-4A-UO9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="zDc-da-doR" customClass="OTDisclaimerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wtM-uy-cwT"/>
+                        <viewControllerLayoutGuide type="bottom" id="ESU-9c-38g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lIC-lT-L5B">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zse-oR-8BS">
+                                <rect key="frame" x="12" y="64" width="296" height="447"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <string key="text">Bonjour, 
+
+Nous vous rappelons qu'en vertu de la charte d'Entourage (http://entourage.social/cgu), vous devez vous assurer que les personnes que vous rencontrerez consentent à ce que des données sur vos échanges soient stockées et échangées au sein de votre association.</string>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES" calendarEvent="YES"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OtU-nq-qE1">
+                                <rect key="frame" x="-4" y="511" width="328" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="3Sk-1e-qXO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="J'ai lu et j'accepte">
+                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="doAcceptDisclaimer" destination="zDc-da-doR" eventType="touchUpInside" id="l2Y-fw-wRN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Zse-oR-8BS" firstAttribute="top" secondItem="wtM-uy-cwT" secondAttribute="bottom" id="J9B-Ul-GpM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zse-oR-8BS" secondAttribute="trailing" constant="-4" id="OIi-oW-Efi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OtU-nq-qE1" secondAttribute="trailing" constant="-20" id="e1c-kT-C70"/>
+                            <constraint firstItem="OtU-nq-qE1" firstAttribute="leading" secondItem="lIC-lT-L5B" secondAttribute="leadingMargin" constant="-20" id="hZl-xP-Vhq"/>
+                            <constraint firstItem="OtU-nq-qE1" firstAttribute="top" secondItem="Zse-oR-8BS" secondAttribute="bottom" id="s18-6H-gcQ"/>
+                            <constraint firstItem="ESU-9c-38g" firstAttribute="top" secondItem="OtU-nq-qE1" secondAttribute="bottom" id="tC1-1b-syb"/>
+                            <constraint firstItem="Zse-oR-8BS" firstAttribute="leading" secondItem="lIC-lT-L5B" secondAttribute="leadingMargin" constant="-4" id="tMH-DV-Eqa"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="04C-A8-PBS"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="690" y="1490"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="m97-MD-k5D">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9dY-SB-iaF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sgn-4F-2CA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zDc-da-doR" kind="relationship" relationship="rootViewController" id="f5Y-Cw-hd1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="41G-Vd-9R6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="307" y="1490"/>
         </scene>
     </scenes>
     <resources>

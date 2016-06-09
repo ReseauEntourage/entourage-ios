@@ -72,7 +72,7 @@
     return chatButton;
 }
 
-- (void)setupCloseModal {
+- (UIBarButtonItem*)setupCloseModal {
     UIImage *menuImage = [[UIImage imageNamed:@"close.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
@@ -83,6 +83,7 @@
     [self.navigationItem setLeftBarButtonItem:menuButton];
 //
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    return  menuButton;
 }
 
 - (UIImage*)setupLogoImage {

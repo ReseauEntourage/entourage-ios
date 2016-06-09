@@ -8,6 +8,7 @@
 
 #import "OTCreateMeetingViewController.h"
 #import "OTMainViewController.h"
+#import "OTDisclaimerViewController.h"
 
 // Model
 #import "OTEncounter.h"
@@ -34,7 +35,7 @@
 #define PADDING 20.0f
 #define PLACEHOLDER @"Détaillez votre rencontre"
 
-@interface OTCreateMeetingViewController () <UITextViewDelegate>
+@interface OTCreateMeetingViewController () <UITextViewDelegate, DisclaimerDelegate>
 
 @property (strong, nonatomic) NSNumber *currentTourId;
 @property (strong, nonatomic) NSString *lmPath;
@@ -67,6 +68,9 @@
     [self setupUI];
     
     [OTSpeechKitManager setup];
+    
+    if (![NSUserDefaults wasDisclaimerAccepted])
+        [self performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
 }
 
 /**************************************************************************************************/
@@ -80,8 +84,6 @@
                                                                   target:self
                                                                   action:@selector(sendEncounter:)];
     [self.navigationItem setRightBarButtonItem:menuButton];
-
-    
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.displayName];
@@ -188,7 +190,6 @@
             [self.messageTextView setText:[NSString stringWithFormat:@"%@ %@", text, [result lowercaseString]]];
         }
     }
-    
 }
 
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion {
@@ -231,6 +232,37 @@
         self.messageTextView.textColor = [UIColor appGreyishColor];
     }
     [self.messageTextView resignFirstResponder];
+}
+
+/**************************************************************************************************/
+#pragma mark - DisclaimerDelegate
+- (void)disclaimerWasAccepted {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDisclaimer];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)disclaimerWasRejected {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kDisclaimer];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+}
+
+/**************************************************************************************************/
+
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    UINavigationController *navigationViewController = segue.destinationViewController;
+    UIViewController *destinationViewController = navigationViewController.topViewController;
+    if ([destinationViewController isKindOfClass:[OTDisclaimerViewController class]]) {
+        ((OTDisclaimerViewController*)destinationViewController).disclaimerDelegate = self;
+    }
 }
 
 @end

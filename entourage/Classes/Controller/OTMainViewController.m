@@ -372,7 +372,32 @@ static BOOL didGetAnyData = NO;
     }
 }
 
+
+
 - (void)didChangePosition {
+    
+    
+    for (id<MKAnnotation> annotation in self.mapView.annotations) {
+        if(![annotation isKindOfClass:[MKUserLocation class]] && [annotation isMemberOfClass:[OTEntourageAnnotation class]]){
+            MKAnnotationView* annotationView = (MKAnnotationView*)[self.mapView viewForAnnotation:annotation];
+            CLLocationDistance currentMapWidth = [self mapWidthInMeters];
+            NSLog(@"ZOOM: %fpx = %fm", annotationView.frame.size.width, currentMapWidth);
+            //            CGAffineTransform transform;
+            //            CGFloat currentScale = self.mapView.frame.size.width/self.view.bounds.size.width;
+            
+            //            CGFloat newScale = pinch.scale*currentScale;
+            //            transform = CGAffineTransformScale(annotationView.transform, newScale, newScale);
+            //            annotationView.transform = transform;
+            //            //pinch.scale = 1;
+            //
+            //            CLLocationDistance currentMapWidth = [self mapWidthInMeters];
+            //            CGFloat scale = self.previousMapWidth/currentMapWidth;
+            //            //apply the transformation with that scale
+            //            self.previousMapWidth = currentMapWidth;
+        }
+    }
+
+    
     if (![self.mapView showsUserLocation]) {
         [self zoomToCurrentLocation:nil];
     }
@@ -383,6 +408,14 @@ static BOOL didGetAnyData = NO;
         return;
     }
     [self getFeeds];
+    
+}
+
+
+- (CLLocationDistance)mapWidthInMeters {
+    CLLocationDegrees deltaLongitude = self.mapView.region.span.longitudeDelta;
+    CGFloat latitudeCircumference = 40075160 * cos(self.mapView.region.center.latitude * M_PI / 180);
+    return deltaLongitude * latitudeCircumference/360;
 }
 
 - (void)getFeeds {

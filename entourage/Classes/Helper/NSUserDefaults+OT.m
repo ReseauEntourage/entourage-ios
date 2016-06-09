@@ -32,4 +32,9 @@ static NSString *const kUser   = @"kUser";
 	return user;
 }
 
++ (BOOL)wasDisclaimerAccepted {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kDisclaimer];
+}
+
+
 @end

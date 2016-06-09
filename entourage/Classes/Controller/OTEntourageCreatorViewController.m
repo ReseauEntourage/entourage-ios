@@ -51,6 +51,8 @@
     self.title =  typeString.uppercaseString;
 }
 
+
+
 - (void)viewWillDisappear:(BOOL)animated {
     self.title = @"";
 }
