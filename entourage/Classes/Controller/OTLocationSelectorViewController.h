@@ -16,8 +16,16 @@
 @end
 
 
+@protocol LocationSelectionDelegate <NSObject>
+
+- (void)didSelectLocation:(CLLocation *)location;
+
+@end
+
+
 @interface OTLocationSelectorViewController : UIViewController<HandleMapSearch>
 
-@property (nonatomic, assign) CLLocationCoordinate2D selectedCoordinate;
+@property (nonatomic, strong) CLLocation *selectedLocation;
+@property (nonatomic, weak) id<LocationSelectionDelegate> locationSelectionDelegate;
 
 @end

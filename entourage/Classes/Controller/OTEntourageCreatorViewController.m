@@ -10,7 +10,7 @@
 #import "OTTextView.h"
 #import "OTConsts.h"
 #import "OTEntourage.h"
-
+#import "OTLocationSelectorViewController.h"
 #import "OTEncounterService.h"
 
 // Helpers
@@ -20,7 +20,7 @@
 // Progress HUD
 #import "SVProgressHUD.h"
 
-@interface OTEntourageCreatorViewController()
+@interface OTEntourageCreatorViewController() <LocationSelectionDelegate>
 
 @property (nonatomic, weak) IBOutlet UIButton *locationButton;
 @property (nonatomic, weak) IBOutlet OTTextView *titleTextView;
@@ -66,6 +66,11 @@
     [self.titleTextView showCharCount];
     [self.descriptionTextView setPlaceholder:OTLocalizedString(@"detailedDescription")];
 
+    [self updateLocationTitle];
+}
+
+- (void)updateLocationTitle {
+    
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:self.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error) {
@@ -121,6 +126,24 @@
                                     [SVProgressHUD showErrorWithStatus:@"Echec de la création de entourage"];
                                     sender.enabled = YES;
                                 }];
+}
+
+#pragma mark - LocationSelectionDelegate
+
+- (void)didSelectLocation:(CLLocation *)selectedLocation {
+    self.location = selectedLocation;
+    
+    [self updateLocationTitle];
+}
+
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
+    UIViewController *destinationViewController = segue.destinationViewController;
+    if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]]) {
+        ((OTLocationSelectorViewController*)destinationViewController).locationSelectionDelegate = self;
+    }
 }
 
 @end

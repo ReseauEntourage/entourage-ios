@@ -13,6 +13,7 @@
 #import "MKMapView+entourage.h"
 #import "OTLocationSearchTableViewController.h"
 #import "UIStoryboard+entourage.h"
+#import "OTEntourageCreatorViewController.h"
 
 #define SEARCHBAR_FRAME CGRectMake(16, 80, [UIScreen mainScreen].bounds.size.width-32, 48)
 
@@ -20,14 +21,13 @@
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
+
 @property (nonatomic, strong)  UISearchBar *searchBar;
 
 @property (nonatomic, strong) UISearchController *resultSearchController;
 @property (nonatomic, strong) OTLocationSearchTableViewController *locationSearchTable;
-@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
-
-
 
 @end
 
@@ -84,7 +84,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
 - (void)viewDidAppear:(BOOL)animated {
     [self zoomToCurrentLocation:nil];
 }
@@ -108,22 +107,44 @@
     if (locations.count) {
         CLLocation *location = locations.firstObject;
         
-        //[self zoomToCurrentLocation:nil];
-        NSLog(@"--LOCATION %.6f %.6f", location.coordinate.latitude, location.coordinate.longitude);
-        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil];
-        
-        [self.mapView removeAnnotations:self.mapView.annotations];
-        MKPointAnnotation *annotation = [MKPointAnnotation new];
-        annotation.coordinate = placemark.coordinate;
-        annotation.title = placemark.name;
-        [self.mapView addAnnotation:annotation];
-        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( location.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
-        [self.mapView setRegion:region animated:YES];
-        [self.activityIndicator stopAnimating];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowCurrentLocation object:nil];
+        if (!self.activityIndicator.isHidden) {
+            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil];
+            
+            [self.mapView removeAnnotations:self.mapView.annotations];
+            MKPointAnnotation *annotation = [MKPointAnnotation new];
+            annotation.coordinate = placemark.coordinate;
+            annotation.title = placemark.name;
+            [self.mapView addAnnotation:annotation];
+            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( location.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+            [self.mapView setRegion:region animated:YES];
+            [self.activityIndicator stopAnimating];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowCurrentLocation object:nil];
+            
+            [self updateSelectedLocation:location];
+
+        }
     }
+}
+
+- (void)updateSelectedLocation:(CLLocation *) location {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"error: %@", error.description);
+        }
+        CLPlacemark *placemark = placemarks.firstObject;
+        if (placemark.thoroughfare !=  nil) {
+            [self.footerToolbar setTitle:placemark.thoroughfare ];
+        } else {
+            [self.footerToolbar setTitle:placemark.locality ];
+        }
+    }];
+    self.selectedLocation = location;
+    if ([self.locationSelectionDelegate respondsToSelector:@selector(didSelectLocation:)]) {
+        [self.locationSelectionDelegate didSelectLocation:location];
+    }
 }
 
 #pragma mark - HandleMapSearch
@@ -175,11 +196,9 @@
         [annotationView.annotation setCoordinate:droppedAt];
         
         NSLog(@"Pin dropped at %f,%f", droppedAt.latitude, droppedAt.longitude);
-        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:droppedAt addressDictionary:nil];
-        [self.footerToolbar setTitle:placemark.name];
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:droppedAt.latitude longitude:droppedAt.longitude];
+        [self updateSelectedLocation:location];
     }
-    
 }
-
 
 @end
