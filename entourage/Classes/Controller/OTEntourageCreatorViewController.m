@@ -83,7 +83,6 @@
             [self.locationButton setTitle:placemark.locality forState:UIControlStateNormal];
         }
     }];
-
 }
 
 - (void)sendEntourage:(UIButton*)sender {
@@ -101,12 +100,8 @@
                                                               handler:^(UIAlertAction * _Nonnull action) {}];
         
         [alert addAction:defaultAction];
-        
-        
-        
         return;
     }
-        
     
     
     sender.enabled = NO;
