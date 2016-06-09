@@ -15,6 +15,8 @@ NSString *const kEntourageClusterAnnotationIdentifier = @"OTEntourageClusterAnno
 
 @interface OTEntourageAnnotation () <MKAnnotation>
 
+@property (nonatomic) double scale;
+
 @end
 
 @implementation OTEntourageAnnotation
@@ -28,6 +30,18 @@ NSString *const kEntourageClusterAnnotationIdentifier = @"OTEntourageClusterAnno
     if (self)
     {
         _entourage = entourage;
+        _scale = 1.0;
+    }
+    return self;
+}
+
+- (id)initWithEntourage:(OTEntourage *)entourage andScale:(double)scale
+{
+    self = [super init];
+    if (self)
+    {
+        _entourage = entourage;
+        _scale = scale;
     }
     return self;
 }
@@ -51,14 +65,39 @@ NSString *const kEntourageClusterAnnotationIdentifier = @"OTEntourageClusterAnno
 {
     return self.entourage.description;
 }
+/*
+ 
+ let image = UIImage(contentsOfFile: self.URL.absoluteString!)
+ 
+ let size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(0.5, 0.5))
+ let hasAlpha = false
+ let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+ 
+ UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+ image.drawInRect(CGRect(origin: CGPointZero, size: size))
+ 
+ let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+ UIGraphicsEndImageContext()
+ 
+ */
+
 
 - (MKAnnotationView *)annotationView
 {
-    MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:self
-                                                                    reuseIdentifier:kEntourageAnnotationIdentifier];
+    UIImage *image = [UIImage imageNamed:@"heatZone"];
+    CGSize size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(_scale, _scale));
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+        [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    
+    
+    MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:self reuseIdentifier:nil];
+                                                                    //reuseIdentifier:kEntourageAnnotationIdentifier];
     
     annotationView.canShowCallout = NO;
-    annotationView.image = [UIImage imageNamed:@"heatZone"];
+    annotationView.image = scaledImage;//[UIImage imageNamed:@"heatZone"];
     
     return annotationView;
 }

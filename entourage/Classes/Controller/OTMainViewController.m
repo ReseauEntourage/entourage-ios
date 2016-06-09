@@ -143,6 +143,8 @@
 @property (nonatomic, strong) NSArray *pois;
 @property (nonatomic, strong) NSMutableArray *markers;
 
+@property (nonatomic) double entourageScale;
+
 @end
 
 @implementation OTMainViewController
@@ -160,6 +162,7 @@
     self.encounters = [NSMutableArray new];
     self.markers = [NSMutableArray new];
     
+    self.entourageScale = 1.0;
     self.toursMapDelegate = [[OTToursMapDelegate alloc] initWithMapController:self];
     self.guideMapDelegate = [[OTGuideMapDelegate alloc] initWithMapController:self];
     
@@ -372,30 +375,28 @@ static BOOL didGetAnyData = NO;
     }
 }
 
+//- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+//    MKMapRect mRect = self.map.visibleMapRect;
+//    MKMapPoint eastMapPoint = MKMapPointMake(MKMapRectGetMinX(mRect), MKMapRectGetMidY(mRect));
+//    MKMapPoint westMapPoint = MKMapPointMake(MKMapRectGetMaxX(mRect), MKMapRectGetMidY(mRect));
+//    
+//    self.currentDist = MKMetersBetweenMapPoints(eastMapPoint, westMapPoint);
+//}
 
 
 - (void)didChangePosition {
+    CLLocationDistance ddistance = [self mapWidthInMeters];
     
+    double screenWidth = [UIScreen mainScreen].bounds.size.width;
+    double scale500 = screenWidth/300;
     
-    for (id<MKAnnotation> annotation in self.mapView.annotations) {
-        if(![annotation isKindOfClass:[MKUserLocation class]] && [annotation isMemberOfClass:[OTEntourageAnnotation class]]){
-            MKAnnotationView* annotationView = (MKAnnotationView*)[self.mapView viewForAnnotation:annotation];
-            CLLocationDistance currentMapWidth = [self mapWidthInMeters];
-            NSLog(@"ZOOM: %fpx = %fm", annotationView.frame.size.width, currentMapWidth);
-            //            CGAffineTransform transform;
-            //            CGFloat currentScale = self.mapView.frame.size.width/self.view.bounds.size.width;
-            
-            //            CGFloat newScale = pinch.scale*currentScale;
-            //            transform = CGAffineTransformScale(annotationView.transform, newScale, newScale);
-            //            annotationView.transform = transform;
-            //            //pinch.scale = 1;
-            //
-            //            CLLocationDistance currentMapWidth = [self mapWidthInMeters];
-            //            CGFloat scale = self.previousMapWidth/currentMapWidth;
-            //            //apply the transformation with that scale
-            //            self.previousMapWidth = currentMapWidth;
-        }
+    NSLog(@"DEBUG distance = %.1fm", ddistance);
+    if (ddistance < 500) {
+        self.entourageScale = scale500 * 500 / ddistance;
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        [self feedMapWithFeedItems];
     }
+        
 
     
     if (![self.mapView showsUserLocation]) {
@@ -496,7 +497,7 @@ static BOOL didGetAnyData = NO;
                 [self drawTour:(OTTour*)feedItem];
             
             if ([feedItem isKindOfClass:[OTEntourage class]]) {
-                OTEntourageAnnotation *pointAnnotation = [[OTEntourageAnnotation alloc] initWithEntourage:(OTEntourage*)feedItem];
+                OTEntourageAnnotation *pointAnnotation = [[OTEntourageAnnotation alloc] initWithEntourage:(OTEntourage*)feedItem andScale:self.entourageScale];
                 [entouragesAnnotations addObject:pointAnnotation];
             }
         }

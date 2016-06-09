@@ -19,7 +19,6 @@
         NSDictionary *authorDictionary = [dictionary objectForKey:kWSKeyAuthor];
         self.author = [[OTTourAuthor alloc] initWithDictionary:authorDictionary];
         self.status = [dictionary valueForKey:kWSKeyStatus];
-        NSLog(@"STATUS == %@", self.status);
         self.joinStatus = [dictionary valueForKey:kWSKeyJoinStatus];
         self.noPeople = [dictionary numberForKey:kWSKeyNoPeople];
         self.type = [dictionary valueForKey:kWSKeyType];
