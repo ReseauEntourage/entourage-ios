@@ -53,7 +53,7 @@
 }
 
 - (NSAttributedString *)typeByNameAttributedString {
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ par ", [self displayType].capitalizedString]
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formater_by"), [self displayType].capitalizedString]
                                                                          attributes:ATTR_LIGHT_15];
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:self.author.displayName
                                                                          attributes:ATTR_SEMIBOLD_15];

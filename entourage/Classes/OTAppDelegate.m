@@ -83,7 +83,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     
     // start flurry
 	[Flurry setCrashReportingEnabled:YES];
-	[Flurry startSession:NSLocalizedString(@"FLURRY_API_KEY", @"")];
+	[Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
     [IQKeyboardManager sharedManager].enable = YES;
       // register for push notifications
 //    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
@@ -192,7 +192,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
             if ([apnType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE]) {
                 [self handleChatNotification:userInfo showingAlert:alert];
             }
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert")
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * _Nonnull action) {}];
     
@@ -274,7 +274,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         }
     };
     
-    UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:@"Refuser"
+    UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert")
                                                                       style:UIAlertActionStyleDefault
                                                                     handler:rejectBlock
                                               ];
@@ -303,7 +303,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         }
 
     };
-    UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:@"Accepter"
+    UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert")
                                                                       style:UIAlertActionStyleDefault
                                                                     handler:acceptBlock
                                               ];
@@ -321,7 +321,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     NSString *type = [apnExtra valueForKey:@"joinable_type"];
 
     if ([@"Tour" isEqualToString:type]) {
-        UIAlertAction *openTourAction = [UIAlertAction actionWithTitle:@"Afficher"
+        UIAlertAction *openTourAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert")//@"Afficher"
                                                              style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction * _Nonnull action) {
                                                                [[OTTourService new] getTourWithId:joinableId
@@ -344,7 +344,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
                                                            }];
         [alert addAction:openTourAction];
     } else {
-        UIAlertAction *openEntourageAction = [UIAlertAction actionWithTitle:@"Afficher"
+        UIAlertAction *openEntourageAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"showAlert")
                                                                  style:UIAlertActionStyleDefault
                                                                handler:^(UIAlertAction * _Nonnull action) {
                                                                    [[OTEntourageService new] getEntourageWithId:joinableId
@@ -384,11 +384,11 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender]
                                                                        message:[userInfo objectForKey:kUserInfoObject]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert")
                                                                 style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction * _Nonnull action) {}];
         
-        UIAlertAction *openAction = [UIAlertAction actionWithTitle:@"Afficher"
+        UIAlertAction *openAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"showAlert")
                                                              style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction * _Nonnull action) {
                                                                     [rootVC dismissViewControllerAnimated:YES completion:nil];

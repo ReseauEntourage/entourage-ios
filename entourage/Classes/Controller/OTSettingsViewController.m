@@ -8,12 +8,13 @@
 
 #import "OTSettingsViewController.h"
 #import "UIViewController+menu.h"
+#import "OTConsts.h"
 
 @implementation OTSettingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"PARAMETRES";
+    self.title = OTLocalizedString( @"parameters");
     //[self createMenuButton];
     [self setupCloseModal];
 }

@@ -9,6 +9,7 @@
 // Controller
 #import "OTConfirmationViewController.h"
 #import "OTMainViewController.h"
+#import "OTConsts.h"
 
 // Service
 #import "OTTourService.h"
@@ -74,7 +75,7 @@
             }
             [self dismissViewControllerAnimated:YES completion:nil];
         } failure:^(NSError *error) {
-            [SVProgressHUD showErrorWithStatus:@"Erreur de fermeture de la maraude"];
+            [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"tour_close_error")];
             NSLog(@"%@",[error localizedDescription]);
         }];
 }

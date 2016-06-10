@@ -16,16 +16,16 @@
 "microphoneNotEnabled" = "Accès refusé au micro";
 "promptForMicrophone" = "L'application demande l'accès à votre microphone.\n\nSVP Activez l'accès au micro pour cette app dans Réglages > Confidentialité > Micro";
 
-
-// Titles
-"mapviewcontroller_title" = "MARAUDES";
-"guideviewcontroller_title" = "GUIDE";
-"userviewcontroller_title" = "PROFIL";
+"error" = "Erreur";
+"connection_error" = "Echec de la connexion";;
+"connection_imposible" = "Connexion impossible";
 
 "distance_250" = "La rencontre est trop éloignée de la maraude";
 
 // MenuItems
 "menu_amis" = "Amis";
+"myProfile" = "Mon compte";
+"parameters" = "Parameters";
 
 "menu_guide" = "Guide de solidarité";
 "menu_param" = "Paramètres de l'application";
@@ -61,6 +61,7 @@
 
 // Encounters
 "has_encountered" = "a rencontré";
+"formatter_has_meet" = "%@ a rencontré %@";
 "here" = "ici";
 "their_message" = "Notes";
 "their_audio_message" = "Leur message audio";
@@ -88,6 +89,7 @@
 
 "tour_create_sending" = "Création de la maraude";
 "tour_create_error" = "Erreur de création de la maraude";
+"tour_close_error" = "Erreur de fermeture de la maraude";
 
 "thanks" = "Merci";
 "tour_join_intro" = "Cette maraude étant privée, \nvotre demande a été \ntransmise au créateur.";
@@ -96,9 +98,30 @@
 "tour" = "Maraude";
 "send" = "Envoyer";
 
+"formatter_tour_status_ongoing" = "%@ en cours";
+"tour_ongoing" = "Maraude en cours";
+"stop" = "Stop";
+"tour_status_completed" = "Maraude terminée";
+"tour_quitted" = "Maraude clôturée.";
+// encounter
+"detailEncounter" = "Détaillez votre rencontre";
+"formater_encounterAnd" = "%@ et";
+"formater_meetEncounter" = "se sont rencontrés ici le %@";
+"formatter_encounter_and_user_meet" = "et %@ se sont rencontrés ici.";
+"user_joined_tour" = "a rejoint la maraude.";
+"meetingCreated" = "Rencontre créée";
+"meetingNotCreated" = "Echec de la création de rencontre";
+
+
 // Entourage
+"entourages" = "Entourages";
 "myLocation" = "Ma position";
 "searchLocationPlaceholder" = "Chercher ou déplacer la carte";
+"formater_by" = "%@ par ";
+"entourageCreated" = "Entourage créée";
+"entourageNotCreated" = "Echec de la création de entourage";
+"entourageQuitted" = "Entourage clôturée.";
+
 
 // POI
 "poi_create_tour_alert" = "Si vous désirez créer une maraude, vouz devez quitter le guide de solidarité";
@@ -115,6 +138,12 @@
 "invalidEmail" = "Email invalide";
 "invalidFirstName" = "Prénom invalide";
 "invalidLastName" = "Nom invalide";
+"mustAddCode" = "Veuillez renseigner un code de vérification";
+"invalidCode" = "Code de vérification invalide";
+"invalidPhoneNumber" = "Numéro de téléphone invalide";
+"invalidPhoneNumberOrCode" = "Le numéro de téléphone et ce code d’accès ne correspondent pas.";
+
+"retryPhone" = "Veuillez renseigner un numéro de téléphone";
 "close" = "Fermer";
 "privateInfo" = "Informations privées";
 "publicInfo" = "Informations publiques";
@@ -165,3 +194,35 @@
 "url_delete_account" = "users/me?token=%@";
 "url_regenerate_code" = "%@/%@/%@.json";
 "url_send_entourage" = "entourages";
+
+// Titles
+"aboutTitle" = "À propos";
+"descriptionTitle" = "Description";
+"discoverEntourage" = "Découvrez Entourage";
+"guideviewcontroller_title" = "GUIDE";
+"guideTitle" = "Guide de solidarité";
+"lostCodeTitle" = "Redemander un code";
+"mapviewcontroller_title" = "MARAUDES";
+"meetingTitle" = "Compte-rendu de rencontre";
+"myEntouragesTitle" = "Mes entourages";
+"userviewcontroller_title" = "PROFIL";
+
+// Alerts
+"acceptAlert" = "Accepter";
+"cancelAlert" = "Annuler";
+"closeAlert" = "Fermer";
+"quitAlert" = "Quitter";
+"refuseAlert" = "Refuser";
+"showAlert" = "Afficher";
+
+//
+"requestSent" = "Demande envoyée";
+"requestNotSent" = "Demande non envoyée";
+"requestImposible" = "Demande impossible";
+"needValidEmail" = "Veuillez renseigner une adresse email valide";
+"tryAgain" = "Veuillez réessayer";
+"tryAgain_short" = "Réessayer";
+
+
+// Navigation Bar Buttons
+"validate" = "Valider";

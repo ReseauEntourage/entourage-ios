@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger){
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"MES ENTOURAGES";
+    self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self setupCloseModal];
     
     [self setupPagination];
@@ -297,7 +297,7 @@ typedef NS_ENUM(NSInteger){
                                        }
                                    } failure:^(NSError *error) {
                                        [self.indicatorView stopAnimating];
-                                       [SVProgressHUD showErrorWithStatus:@"Erreur"];
+                                       [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
                                        NSLog(@"%@",[error localizedDescription]);
                                        tour.status = TOUR_STATUS_CLOSED;
                                    }];

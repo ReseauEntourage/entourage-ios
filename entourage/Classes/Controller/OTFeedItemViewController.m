@@ -278,7 +278,7 @@ typedef NS_ENUM(unsigned) {
     OTTourStatus *tourStartStatus = [[OTTourStatus alloc] init];
     tourStartStatus.date = self.feedItem.creationDate;
     tourStartStatus.type = OTTourStatusStart;
-    tourStartStatus.status = [NSString stringWithFormat: @"%@ en cours", self.feedItem.navigationTitle.capitalizedString];
+    tourStartStatus.status = [NSString stringWithFormat: OTLocalizedString(@"formatter_tour_status_ongoing"), self.feedItem.navigationTitle.capitalizedString];
     NSDate *now = [NSDate date];
     tourStartStatus.duration = [now timeIntervalSinceDate:self.feedItem.creationDate];
     tourStartStatus.distance = 0;
@@ -293,7 +293,7 @@ typedef NS_ENUM(unsigned) {
             OTTourStatus *tourEndStatus = [[OTTourStatus alloc] init];
             tourEndStatus.date = tour.endTime;
             tourStartStatus.type = OTTourStatusEnd;
-            tourEndStatus.status = @"Maraude terminée";
+            tourEndStatus.status = OTLocalizedString(@"tour_status_completed");
             tourEndStatus.duration = [tour.endTime timeIntervalSinceDate:tour.creationDate];
             tourEndStatus.distance = tour.distance.doubleValue;
             [self updateTableViewAddingTimelinePoints:@[tourEndStatus]];
@@ -457,7 +457,7 @@ typedef NS_ENUM(unsigned) {
     } else {
         if (self.chatTextView.text.length) {
             [self.recordButton setImage:nil forState:UIControlStateNormal];
-            [self.recordButton setTitle:NSLocalizedString(@"send", nil) forState:UIControlStateNormal];
+            [self.recordButton setTitle:OTLocalizedString(@"send") forState:UIControlStateNormal];
             self.recordButtonWidthConstraint.active = NO;
             self.recordButtonDynamicWidthConstraint.active = YES;
         } else {
@@ -523,30 +523,6 @@ typedef NS_ENUM(unsigned) {
     return self.timelinePoints.count;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    switch (section) {
-//        case SectionTypeHeader:
-//            return 15.0f;
-//        case SectionTypeTimeline:
-//            return 40.0f;
-//            
-//        default:
-//            return 0.0f;
-//    }
-//}
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40)];
-//    if (section == SectionTypeTimeline) {
-//        headerView.backgroundColor = [UIColor appPaleGreyColor];
-//        headerView.text = @"DISCUSSION";
-//        headerView.textAlignment = NSTextAlignmentCenter;
-//        headerView.textColor = [UIColor appGreyishBrownColor];
-//        headerView.font = [UIFont systemFontOfSize:12 weight:UIFontWeightMedium];
-//    }
-//    return headerView;
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellID = @"";
     switch (indexPath.section) {
@@ -609,7 +585,7 @@ typedef NS_ENUM(unsigned) {
     NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold],
                                 NSForegroundColorAttributeName: [UIColor appOrangeColor]};
     NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ", encounter.userName] attributes:boldAttrs];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"et %@ se sont rencontrés ici.", encounter.streetPersonName] attributes:lightAttrs];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_encounter_and_user_meet") , encounter.streetPersonName] attributes:lightAttrs];
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];
     UILabel *encounterLabel = [cell viewWithTag:TIMELINE_ENCOUNTER];
@@ -622,7 +598,7 @@ typedef NS_ENUM(unsigned) {
     NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold],
                                 NSForegroundColorAttributeName: [UIColor appOrangeColor]};
     NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ", joiner.displayName] attributes:boldAttrs];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:@"a rejoint la maraude." attributes:lightAttrs];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:OTLocalizedString(@"user_joined_tour")  attributes:lightAttrs];
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];
     UILabel *joinerLabel = [cell viewWithTag:TIMELINE_JOINER];

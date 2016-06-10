@@ -11,6 +11,7 @@
 // Controller
 #import "OTLostCodeViewController.h"
 #import "OTTutorialViewController.h"
+#import "OTConsts.h"
 
 // Service
 #import "OTAuthService.h"
@@ -159,13 +160,12 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    }
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
-                                   NSString *alertTitle = @"Erreur";
-                                   NSString *alertText = @"Echec de la connexion";
+                                   NSString *alertTitle = OTLocalizedString(@"error");
+                                   NSString *alertText = OTLocalizedString(@"connection_error");
                                    NSString *buttonTitle = @"ok";
                                    if ([[error.userInfo valueForKey:JSONResponseSerializerWithDataKey] isEqualToString:@"unauthorized"]) {
-                                       alertTitle = @"Veuillez réessayer";
-                                       alertText = @"Le numéro de téléphone et ce code d’accès ne correspondent pas.";
-                                       buttonTitle = @"Réessayer";
+                                       alertTitle = OTLocalizedString(@"tryAgain");
+                                       alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");                                       buttonTitle = OTLocalizedString(@"tryAgain_short");
 
                                    }
                                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
@@ -231,20 +231,20 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (IBAction)validateButtonDidTad {
     if (self.phoneTextField.text.length == 0) {
         [[[UIAlertView alloc]
-          initWithTitle:@"Connexion impossible"
-          message:@"Veuillez renseigner un numéro de téléphone"
+          initWithTitle:OTLocalizedString(@"connection_imposible")
+          message:OTLocalizedString(@"retryPhone")
           delegate:nil
           cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
+          otherButtonTitles:@"Ok",
           nil] show];
     }
     else if (!self.validateForm) {
         [[[UIAlertView alloc]
-          initWithTitle:@"Connexion impossible"
-          message:@"Numéro de téléphone invalide"
+          initWithTitle:OTLocalizedString(@"connection_imposible")
+          message:OTLocalizedString(@"invalidPhoneNumber")
           delegate:nil
           cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
+          otherButtonTitles:@"Ok",
           nil] show];
     }
     else {

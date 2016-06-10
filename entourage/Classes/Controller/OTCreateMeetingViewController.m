@@ -13,6 +13,7 @@
 // Model
 #import "OTEncounter.h"
 #import "OTUser.h"
+#import "OTConsts.h"
 
 // Services
 #import "OTPoiService.h"
@@ -33,7 +34,7 @@
 
 
 #define PADDING 20.0f
-#define PLACEHOLDER @"Détaillez votre rencontre"
+#define PLACEHOLDER OTLocalizedString(@"detailEncounter")
 
 @interface OTCreateMeetingViewController () <UITextViewDelegate, DisclaimerDelegate>
 
@@ -61,7 +62,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"DESCRIPTION";
+    self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
+    
     
     self.isRecording = NO;
     
@@ -79,14 +81,14 @@
 - (void)setupUI {
     [self setupCloseModal];
     
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Valider"
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"validate")
                                                                    style:UIBarButtonItemStyleDone
                                                                   target:self
                                                                   action:@selector(sendEncounter:)];
     [self.navigationItem setRightBarButtonItem:menuButton];
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    self.firstLabel.text = [NSString stringWithFormat:@"%@ et", currentUser.displayName];
+    self.firstLabel.text = [NSString stringWithFormat:OTLocalizedString(@"formater_encounterAnd"), currentUser.displayName];
     
     [self.nameTextField indentWithPadding:PADDING];
     
@@ -94,7 +96,7 @@
     [formatter setDateFormat:@"dd/MM/yyyy"];
     
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
-    self.dateLabel.text = [NSString stringWithFormat:@"se sont rencontrés ici le %@", dateString];
+    self.dateLabel.text = [NSString stringWithFormat:OTLocalizedString(@"formater_meetEncounter"), dateString];
     [self.messageTextView setTextContainerInset:UIEdgeInsetsMake(PADDING, PADDING, PADDING, 2*PADDING)];
     
     self.messageTextView.text = PLACEHOLDER;
@@ -127,7 +129,7 @@
     
     [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId
                                 withSuccess:^(OTEncounter *sentEncounter) {
-                                    [SVProgressHUD showSuccessWithStatus:@"Rencontre créée"];
+                                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
                                     if (success) {
                                         success(encounter);
                                     }
@@ -139,7 +141,7 @@
 
                                 }
                                 failure:^(NSError *error) {
-                                     [SVProgressHUD showErrorWithStatus:@"Echec de la création de rencontre"];
+                                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
                                  }];
 }
 
@@ -163,10 +165,10 @@
                 // Microphone disabled code
                 NSLog(@"Mic not enabled!!!!");
 
-                [[[UIAlertView alloc] initWithTitle:@"Accès refusé au micro"
-                                            message:@"L'application demande l'accès à votre microphone.\n\nSVP Activez l'accès au micro pour cette app dans Réglages > Confidentialité > Micro"
+                [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"microphoneNotEnabled")
+                                            message:OTLocalizedString(@"promptForMicrophone")
                                            delegate:nil
-                                  cancelButtonTitle:@"Dismiss"
+                                  cancelButtonTitle:OTLocalizedString(@"closeAlert")
                                   otherButtonTitles:nil] show];
             }
         }];

@@ -8,6 +8,7 @@
 
 #import "OTLostCodeViewController.h"
 
+#import "OTConsts.h"
 // Service
 #import "OTAuthService.h"
 
@@ -48,7 +49,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
-    self.title = @"REDEMANDER UN CODE";
+    self.title = OTLocalizedString(@"lostCodeTitle");
     [self setupCloseModal];
     [self.phoneTextField indentRight];
     [self showPhoneInput];
@@ -81,7 +82,7 @@
     [SVProgressHUD show];
     [[OTAuthService new] regenerateSecretCode:self.phoneTextField.text.phoneNumberServerRepresentation
                                       success:^(OTUser *user) {
-                                          [SVProgressHUD showSuccessWithStatus:@"Demande effectuée!"];
+                                          [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
                                           [self showSMSContainer];
                                       }
                                       failure:^(NSError *error) {
@@ -94,11 +95,11 @@
                                           else
                                           {
                                               [[[UIAlertView alloc]
-                                                initWithTitle:@"Erreur"
-                                                message:@"Echec lors de la demande"
+                                                initWithTitle:OTLocalizedString(@"error") //@"Erreur"
+                                                message:OTLocalizedString(@"requestNotSent")// @"Echec lors de la demande"
                                                 delegate:nil
                                                 cancelButtonTitle:nil
-                                                otherButtonTitles:@"ok",
+                                                otherButtonTitles:@"Ok",
                                                 nil] show];
                                           }
                                       }];
@@ -110,7 +111,7 @@
 - (IBAction)regenerateButtonDidTap:(id)sender {
     if (self.phoneTextField.text.length == 0) {
         [[[UIAlertView alloc]
-          initWithTitle:@"Demande impossible"
+          initWithTitle: OTLocalizedString(@"requestImposible")
           message:@"Veuillez renseigner un numéro de téléphone"
           delegate:nil
           cancelButtonTitle:nil
@@ -119,11 +120,11 @@
     }
     else if (![self.phoneTextField.text isValidPhoneNumber]) {
         [[[UIAlertView alloc]
-          initWithTitle:@"Demande impossible"
-          message:@"Numéro de téléphone invalide"
+          initWithTitle:OTLocalizedString(@"requestImposible")
+          message:OTLocalizedString(@"invalidPhoneNumber")//@"Numéro de téléphone invalide"
           delegate:nil
           cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
+          otherButtonTitles:@"Ok",
           nil] show];
     }
     else {
@@ -135,20 +136,20 @@
 
     if (self.smsTextField.text.length == 0) {
         [[[UIAlertView alloc]
-          initWithTitle:@"Demande impossible"
-          message:@"Veuillez renseigner un code de vérification"
+          initWithTitle:OTLocalizedString(@"requestImposible")
+          message:OTLocalizedString(@"mustAddCode")
           delegate:nil
           cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
+          otherButtonTitles:@"Ok",
           nil] show];
     }
     else if (![self.smsTextField.text isValidCode]) {
         [[[UIAlertView alloc]
-          initWithTitle:@"Demande impossible"
-          message:@"Code de vérification invalide"
+          initWithTitle:OTLocalizedString(@"requestImposible")
+          message:OTLocalizedString(@"invalidCode")
           delegate:nil
           cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
+          otherButtonTitles:@"Ok",
           nil] show];
     }
     else {
@@ -167,7 +168,6 @@
     self.numberNotFoundContainerView.hidden = YES;
     self.smsContainerView.hidden = YES;
     self.actionIcon.image = [UIImage imageNamed:@"phone"];
-
 }
 
 @end

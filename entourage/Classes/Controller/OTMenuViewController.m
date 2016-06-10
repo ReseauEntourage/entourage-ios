@@ -8,6 +8,7 @@
 
 #import "OTAppDelegate.h"
 #import "OTMenuViewController.h"
+#import "OTConsts.h"
 
 // Controller
 #import "SWRevealViewController.h"
@@ -71,7 +72,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
     
-    self.title = @"MON COMPTE";
+    self.title = OTLocalizedString(@"myProfile");
     [self createBackFrontMenuButton];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
@@ -207,34 +208,8 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
  */
 + (NSArray *)createMenuItems {
 	NSMutableArray *menuItems = [NSMutableArray array];
-    
-    
-
-    // Map
-//    OTMenuItem *itemMap = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_map_title", @"")
-//                                                   iconName: @"guide"
-//                                            segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
-//    [menuItems addObject:itemMap];
-    
-//    OTMenuItem *itemAmis = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_amis", @"")
-//                                                    iconName: @"friends"
-//                                             segueIdentifier:OTMenuViewControllerSegueMenuMapIdentifier];
-//    [menuItems addObject:itemAmis];
-
-
-//    OTMenuItem *itemGuide = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_guide", @"")
-//                                                     iconName: @"guide"
-//                                              segueIdentifier:OTMenuViewControllerSegueMenuGuideIdentifier];
-//    [menuItems addObject:itemGuide];
-    
-    
-//    OTMenuItem *itemParam = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_param", @"")
-//                                                     iconName: @"parameters"
-//                                              segueIdentifier:OTMenuViewControllerSegueMenuSettingsIdentifier];
-//    [menuItems addObject:itemParam];
-
-    
-    OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_about", @"")
+        
+    OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_about")
                                                      iconName: @"about"
                                               segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
     [menuItems addObject:itemAbout];

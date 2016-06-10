@@ -37,7 +37,7 @@
     
     [self setupCloseModal];
     
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Valider"
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"validate")
                                                                    style:UIBarButtonItemStyleDone
                                                                   target:self
                                                                   action:@selector(sendEntourage:)];
@@ -115,12 +115,12 @@
     [SVProgressHUD show];
     [[OTEncounterService new] sendEntourage:entourage
                                 withSuccess:^(OTEntourage *sentEncounter) {
-                                    [SVProgressHUD showSuccessWithStatus:@"Entourage créée"];
+                                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageNotCreated")];
                                     if ([self.entourageCreatorDelegate respondsToSelector:@selector(didCreateEntourage)]) {
                                         [self.entourageCreatorDelegate performSelector:@selector(didCreateEntourage)];
                                     }
                                 } failure:^(NSError *error) {
-                                    [SVProgressHUD showErrorWithStatus:@"Echec de la création de entourage"];
+                                    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageCreated")];
                                     sender.enabled = YES;
                                 }];
 }

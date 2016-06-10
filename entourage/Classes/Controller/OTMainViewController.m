@@ -242,7 +242,7 @@
     if (self.isTourListDisplayed) {
         [self showToursList];
     }
-    [self.footerToolbar setTitle:@"Entourages"];
+    [self.footerToolbar setTitle:OTLocalizedString(@"entourages")];
 }
 
 - (void)switchToGuide {
@@ -252,7 +252,7 @@
     [self clearMap];
     [self showToursMap];
     [self.guideMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
-    [self.footerToolbar setTitle:@"Guide de solidarité"];
+    [self.footerToolbar setTitle:OTLocalizedString(@"guideTitle")];
 }
 
 /**************************************************************************************************/
@@ -374,14 +374,6 @@ static BOOL didGetAnyData = NO;
         [self getPOIList];
     }
 }
-
-//- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-//    MKMapRect mRect = self.map.visibleMapRect;
-//    MKMapPoint eastMapPoint = MKMapPointMake(MKMapRectGetMinX(mRect), MKMapRectGetMidY(mRect));
-//    MKMapPoint westMapPoint = MKMapPointMake(MKMapRectGetMaxX(mRect), MKMapRectGetMidY(mRect));
-//    
-//    self.currentDist = MKMetersBetweenMapPoints(eastMapPoint, westMapPoint);
-//}
 
 
 - (void)didChangePosition {
@@ -546,7 +538,7 @@ static BOOL didGetAnyData = NO;
 
 - (NSString *)encounterAnnotationToString:(OTEncounterAnnotation *)annotation {
     OTEncounter *encounter = [annotation encounter];
-    NSString *cellTitle = [NSString stringWithFormat:@"%@ a rencontré %@",
+    NSString *cellTitle = [NSString stringWithFormat:OTLocalizedString(@"formatter_has_meet"),
                            encounter.userName,
                            encounter.streetPersonName];
     
@@ -563,7 +555,6 @@ static BOOL didGetAnyData = NO;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:navController animated:YES completion:nil];
     
-    //    [controller configureWithEncouter:encounter];
     //[Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{ @"encounter_id" : encounterAnnotation.encounter.sid }];
 }
 
@@ -599,8 +590,8 @@ static BOOL didGetAnyData = NO;
 - (void)createLocalNotificationForTour:(NSNumber*)tourId {
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
     localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:2];
-    localNotification.alertBody = @"Maraude en cours";
-    localNotification.alertAction = @"Stop";
+    localNotification.alertBody = OTLocalizedString(@"tour_ongoing");
+    localNotification.alertAction = OTLocalizedString(@"Stop");
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     localNotification.userInfo = @{@"tourId": tourId, @"object":@"Maraude en cours"};
     localNotification.applicationIconBadgeNumber = 0;//[[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
@@ -757,7 +748,7 @@ static bool isShowingOptions = NO;
              if ([self.pointsToSend count] > 0) {
                  [self performSelector:@selector(sendTourPoints:) withObject:self.pointsToSend afterDelay:0.0];
              }
-             [self.footerToolbar setTitle:@"Maraude en cours"];
+             [self.footerToolbar setTitle:OTLocalizedString(@"tour_ongoing")];
          } failure:^(NSError *error) {
              [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"tour_create_error", @"")];
              NSLog(@"%@",[error localizedDescription]);
@@ -829,8 +820,8 @@ static bool isShowingOptions = NO;
         }
     }
     
-    [SVProgressHUD showSuccessWithStatus:@"Maraude terminée!"];
-    [self.footerToolbar setTitle:@"Entourages"];
+    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_status_completed")];
+    [self.footerToolbar setTitle:OTLocalizedString(@"entourages")];
     self.tour = nil;
     [self.pointsToSend removeAllObjects];
     [self.encounters removeAllObjects];
@@ -1080,9 +1071,9 @@ static bool isShowingOptions = NO;
                                                [self.tableView reloadData];
                                                
                                            }];
-                                           [SVProgressHUD showSuccessWithStatus:@"Maraude clôturée."];
+                                           [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_quitted")];
                                        } failure:^(NSError *error) {
-                                           [SVProgressHUD showErrorWithStatus:@"Erreur"];
+                                           [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
                                            NSLog(@"%@",[error localizedDescription]);
                                        }];
                 } else {
@@ -1091,9 +1082,9 @@ static bool isShowingOptions = NO;
                     [[OTEntourageService new] closeEntourage:entourage
                                                  withSuccess:^(OTEntourage *entoruage) {
                                                      [self.tableView reloadData];
-                                                     [SVProgressHUD showSuccessWithStatus:@"Entourage clôturée."];
+                                                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageQuitted")];
                                                  } failure:^(NSError *error) {
-                                                     [SVProgressHUD showErrorWithStatus:@"Erreur"];
+                                                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"Erreur")];
                                                      NSLog(@"%@",[error localizedDescription]);
                                                  }];
                 }
@@ -1174,11 +1165,11 @@ static bool isShowingOptions = NO;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
                                                                    message:feedItemAlertMessage
                                                             preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler"
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"cancelAlert")
                                                            style:UIAlertActionStyleCancel
                                                          handler:nil];
     [alert addAction:cancelAction];
-    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter"
+    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"quitAlert")
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
         [self switchToNewsfeed];
@@ -1191,10 +1182,10 @@ static bool isShowingOptions = NO;
 }
 
 -(void)showNewEncounterStartDialogFromGuide {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"poi_create_encounter_alert", @"") preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Annuler" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:OTLocalizedString(@"poi_create_encounter_alert") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"cancelAlert") style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:cancelAction];
-    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:@"Quitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"quitAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self switchToNewsfeed];
     }];
     [alert addAction:quitAction];
@@ -1270,8 +1261,6 @@ typedef NS_ENUM(NSInteger) {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
             OTFeedItemViewController *controller = (OTFeedItemViewController *)navController.topViewController;
             controller.feedItem = (OTFeedItem*)self.selectedFeedItem;
-            //[controller configureWithTour:(OTFeedItem*)self.selectedFeedItem];
-            //controller.delegate = self;
         } break;
         case SegueIDMapOptions: {
             OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;;

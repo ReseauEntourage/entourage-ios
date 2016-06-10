@@ -8,6 +8,8 @@
 
 #import "OTGuideDetailsViewController.h"
 #import "UIViewController+menu.h"
+#import "OTConsts.h"
+
 @import MessageUI;
 
 @interface OTGuideDetailsViewController () <MFMailComposeViewControllerDelegate>
@@ -28,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"GUIDE DE SOLIDARITE";
+    self.title = OTLocalizedString(@"guideTitle");
     self.navigationController.navigationBarHidden = NO;
     [self setupCloseModal];
     
@@ -106,7 +108,7 @@
 - (IBAction)showEmail:(id)sender {
     if (![MFMailComposeViewController canSendMail]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
-                                                                       message:NSLocalizedString(@"about_email_notavailable", @"")
+                                                                       message:OTLocalizedString(@"about_email_notavailable")
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         [self presentViewController:alert animated:YES completion:nil];
         return;

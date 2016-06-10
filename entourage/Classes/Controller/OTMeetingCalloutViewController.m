@@ -7,6 +7,7 @@
 //
 
 #import "OTMeetingCalloutViewController.h"
+#import "OTConsts.h"
 
 // Model
 #import "OTUser.h"
@@ -37,7 +38,7 @@
 #pragma mark - lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"COMPTE-RENDU DE RENCONTRE";
+    self.title = OTLocalizedString(@"meetingTitle");
     [self setupCloseModal];
     [self.textView setTextContainerInset:UIEdgeInsetsMake(PADDING, PADDING, PADDING, PADDING)];
     [self configureWithEncouter:self.encounter];
@@ -59,7 +60,7 @@
 
 	NSString *date = [formatter stringFromDate:encounter.date];
 
-	NSString *title = [NSString stringWithFormat:@"%@ %@ %@ %@, le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, NSLocalizedString(@"has_encountered", @""), encounter.streetPersonName, NSLocalizedString(@"here", @""), date];
+	NSString *title = [NSString stringWithFormat:@"%@ %@ %@ %@, le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, OTLocalizedString(@"has_encountered"), encounter.streetPersonName, OTLocalizedString(@"here"), date];
 
     NSString *bodyText = title;
 

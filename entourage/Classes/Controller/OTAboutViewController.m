@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"À PROPOS";
+    self.title = OTLocalizedString(@"aboutTitle").uppercaseString;//@"À PROPOS";
     //[self createMenuButton];
     [self setupCloseModal];
     
@@ -86,7 +86,7 @@
         //Email
         if (![MFMailComposeViewController canSendMail]) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
-                                                                           message:NSLocalizedString(@"about_email_notavailable", @"")
+                                                                           message:OTLocalizedString(@"about_email_notavailable")
                                                                     preferredStyle:UIAlertControllerStyleAlert];
             [self presentViewController:alert animated:YES completion:nil];
             
@@ -120,23 +120,23 @@
 {
     NSMutableArray *aboutItems = [NSMutableArray array];
     
-    OTAboutItem *itemRate = [[OTAboutItem alloc] initWithTitle:NSLocalizedString(@"about_rateus", @"")
+    OTAboutItem *itemRate = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_rateus")
                                                            url:ABOUT_RATE_US_URL];
     [aboutItems addObject:itemRate];
     
-    OTAboutItem *itemFacebook = [[OTAboutItem alloc] initWithTitle:NSLocalizedString(@"about_facebook", @"")
+    OTAboutItem *itemFacebook = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_facebook")
                                                                url:ABOUT_FACEBOOK_URL];
     [aboutItems addObject:itemFacebook];
     
-    OTAboutItem *itemCGU = [[OTAboutItem alloc] initWithTitle:NSLocalizedString(@"about_cgu", @"")
+    OTAboutItem *itemCGU = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_cgu")
                                                           url:ABOUT_CGU_URL];
     [aboutItems addObject:itemCGU];
     
-    OTAboutItem *itemWebsite = [[OTAboutItem alloc] initWithTitle:NSLocalizedString(@"about_website", @"")
+    OTAboutItem *itemWebsite = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_website")
                                                               url:ABOUT_WEBSITE_URL];
     [aboutItems addObject:itemWebsite];
     
-    OTAboutItem *itemEmail = [[OTAboutItem alloc] initWithTitle:NSLocalizedString(@"about_email", @"")
+    OTAboutItem *itemEmail = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_email")
                                                             url:ABOUT_EMAIL_ADDRESS];
     [aboutItems addObject:itemEmail];
     
