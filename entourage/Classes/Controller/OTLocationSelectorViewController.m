@@ -150,6 +150,8 @@
 #pragma mark - HandleMapSearch
 
 - (void)dropPinZoomIn:(MKPlacemark *)placemark {
+    self.selectedLocation = placemark.location;
+    [self updateSelectedLocation:self.selectedLocation];
     [self dismissViewControllerAnimated:YES
                              completion:^{
                                  
