@@ -17,7 +17,7 @@
 "promptForMicrophone" = "L'application demande l'accès à votre microphone.\n\nSVP Activez l'accès au micro pour cette app dans Réglages > Confidentialité > Micro";
 
 "error" = "Erreur";
-"connection_error" = "Echec de la connexion";;
+"connection_error" = "Echec de la connexion";
 "connection_imposible" = "Connexion impossible";
 
 "distance_250" = "La rencontre est trop éloignée de la maraude";

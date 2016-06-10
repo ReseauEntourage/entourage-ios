@@ -24,7 +24,6 @@
 		0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */; };
 		0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */; };
 		0AE855CB1C3D05A0001176B9 /* OTTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE855CA1C3D05A0001176B9 /* OTTutorialViewController.m */; };
-		191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */; };
 		191FE92419E943D900C56BCA /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
 		191FE92819E945F200C56BCA /* OTEncounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE92719E945F200C56BCA /* OTEncounter.m */; };
 		19BA509519E9587800342A36 /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BA509419E9587800342A36 /* OTEncounterAnnotation.m */; };
@@ -139,7 +138,6 @@
 		6B92CAC119A7461C004E8C9B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAC019A7461C004E8C9B /* XCTest.framework */; };
 		6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
-		6B92CACB19A7461C004E8C9B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B92CAC919A7461C004E8C9B /* InfoPlist.strings */; };
 		6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFE639319E7E85400C661AB /* OTPoiCategory.m */; };
 		A809BAA519E97E2400A45AC9 /* libFlurry_5.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA419E97E2400A45AC9 /* libFlurry_5.4.0.a */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
@@ -385,13 +383,11 @@
 		6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6B92CAA519A7461C004E8C9B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6B92CAA919A7461C004E8C9B /* entourage-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "entourage-Info.plist"; sourceTree = "<group>"; };
-		6B92CAAB19A7461C004E8C9B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6B92CAAD19A7461C004E8C9B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B92CAAF19A7461C004E8C9B /* entourage-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		6B92CABF19A7461C004E8C9B /* entourageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = entourageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B92CAC019A7461C004E8C9B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6B92CAC819A7461C004E8C9B /* entourageTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "entourageTests-Info.plist"; sourceTree = "<group>"; };
-		6B92CACA19A7461C004E8C9B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6BFE639219E7E85400C661AB /* OTPoiCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiCategory.h; sourceTree = "<group>"; };
 		6BFE639319E7E85400C661AB /* OTPoiCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiCategory.m; sourceTree = "<group>"; };
 		7B26FE3EE0C7470099733881 /* libPods-entourage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -944,7 +940,6 @@
 			isa = PBXGroup;
 			children = (
 				6B92CAA919A7461C004E8C9B /* entourage-Info.plist */,
-				6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */,
 				6B92CAAD19A7461C004E8C9B /* main.m */,
 				6B92CAAF19A7461C004E8C9B /* entourage-Prefix.pch */,
 			);
@@ -965,7 +960,6 @@
 			isa = PBXGroup;
 			children = (
 				6B92CAC819A7461C004E8C9B /* entourageTests-Info.plist */,
-				6B92CAC919A7461C004E8C9B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1205,7 +1199,6 @@
 				4507017C1CCF459B00432548 /* TourCreator.storyboard in Resources */,
 				452FE4011CAD5AC700063334 /* Entourages.storyboard in Resources */,
 				45CE5A5B1C5241AA00F68C24 /* MankSans-Medium.ttf in Resources */,
-				191FE91619E9285800C56BCA /* InfoPlist.strings in Resources */,
 				45CE5A571C5241AA00F68C24 /* Calibri-Bold-Italic.ttf in Resources */,
 				452FE3F21CAD561500063334 /* QuitTour.storyboard in Resources */,
 				45BC9BCE1CE32AE1000065B7 /* EntourageCreator.storyboard in Resources */,
@@ -1221,7 +1214,6 @@
 				6B4930DB19A779F200DA7EE0 /* poi_mock.json in Resources */,
 				6B89EF9F19E7E8B6008F2600 /* poi_category_mock.json in Resources */,
 				6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */,
-				6B92CACB19A7461C004E8C9B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1513,22 +1505,6 @@
 				45E6FE121CAE42E700505660 /* Base */,
 			);
 			name = TourConfirmation.storyboard;
-			sourceTree = "<group>";
-		};
-		6B92CAAA19A7461C004E8C9B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6B92CAAB19A7461C004E8C9B /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6B92CAC919A7461C004E8C9B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6B92CACA19A7461C004E8C9B /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
