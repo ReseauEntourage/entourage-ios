@@ -115,12 +115,12 @@
     [SVProgressHUD show];
     [[OTEncounterService new] sendEntourage:entourage
                                 withSuccess:^(OTEntourage *sentEncounter) {
-                                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageNotCreated")];
+                                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
                                     if ([self.entourageCreatorDelegate respondsToSelector:@selector(didCreateEntourage)]) {
                                         [self.entourageCreatorDelegate performSelector:@selector(didCreateEntourage)];
                                     }
                                 } failure:^(NSError *error) {
-                                    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageCreated")];
+                                    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotCreated")];
                                     sender.enabled = YES;
                                 }];
 }
