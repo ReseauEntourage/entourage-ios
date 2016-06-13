@@ -636,7 +636,6 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    //NSLog(@"Did update %d locations", locations.count);
     for (CLLocation *newLocation in locations) {
         
         //Negative accuracy means invalid coordinates
@@ -663,7 +662,7 @@ static BOOL didGetAnyData = NO;
                 
                 MKCoordinateRegion region = self.mapView.region;
                 region.center = newLocation.coordinate;
-                [self.mapView setRegion:region animated:YES];
+                //[self.mapView setRegion:region animated:YES];
                 
                 if (self.isTourRunning) {
                     [self addTourPointFromLocation:newLocation];
