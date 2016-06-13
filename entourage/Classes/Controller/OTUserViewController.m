@@ -7,6 +7,7 @@
 //
 
 #import "OTUserViewController.h"
+#import "OTConsts.h"
 
 // Controller
 #import "UIViewController+menu.h"
@@ -45,7 +46,7 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"PROFIL";
+    self.title = OTLocalizedString(@"profil").uppercaseString;
     [self setupCloseModal];
 }
 
@@ -70,7 +71,7 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Private
 
 - (void)showEditButton {
-    UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] initWithTitle:@"Editer"
+    UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"edit")
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(showEditView)];
@@ -92,7 +93,7 @@ typedef NS_ENUM(NSInteger) {
                                            [self.tableView reloadData];
                                            
                                        } failure:^(NSError *error) {
-                                           [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"user_profile_error", @"")];
+                                           [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_profile_error")];
                                            NSLog(@"@fails getting user %@", error.description);
                                        }];
     }
@@ -206,16 +207,16 @@ typedef NS_ENUM(NSInteger) {
         }
         case SectionTypeVerification: {
             if (indexPath.row == 0)
-                [self setupTitleProfileCell:cell withTitle:@"Identification vérifiée"];
+                [self setupTitleProfileCell:cell withTitle:OTLocalizedString(@"user_verified")];
             else {
                 if (indexPath.row == 1)
                     //TODO: Ask Vincent for status
                     [self setupVerificationProfileCell:cell
-                                             withCheck:@"Adresse e-mail"
+                                             withCheck:OTLocalizedString(@"user_email_address")
                                              andStatus:YES];
                 else
                     [self setupVerificationProfileCell:cell
-                                             withCheck:@"Numéro de téléphone"
+                                             withCheck:OTLocalizedString(@"user_phone_number")
                                              andStatus:YES];
             }
             break;
@@ -226,7 +227,7 @@ typedef NS_ENUM(NSInteger) {
         }
         case SectionTypeAssociations: {
             if (indexPath.row == 0)
-                [self setupTitleProfileCell:cell withTitle:@"Association(s)"];
+                [self setupTitleProfileCell:cell withTitle:OTLocalizedString(@"organizations")];
             else
                 [self setupAssociationProfileCell:cell
                              withAssociationTitle:self.user.organization.name
@@ -272,13 +273,13 @@ typedef NS_ENUM(NSInteger) {
     
     //TODO: ask Vincent for role, joinDate, and address
     UILabel *roleLabel = [cell viewWithTag:SUMMARY_ROLE];
-    roleLabel.text = @"Ambassadeur";//self.currentUser.role;
+    roleLabel.text = @"";//self.currentUser.role;
     
     UILabel *dateLabel = [cell viewWithTag:SUMMARY_DATE];
-    dateLabel.text = @"Membre depuis juillet 2014";//self.currentUser.joinDate;
+    dateLabel.text = @"";//self.currentUser.joinDate;
 
     UILabel *addressLabel = [cell viewWithTag:SUMMARY_ADDRESS];
-    addressLabel.text = @"Paris, France";//self.currentUser.address;
+    addressLabel.text = @"";//self.currentUser.address;
 }
 
 - (void)setupTitleProfileCell:(UITableViewCell *)cell withTitle:(NSString *)title {

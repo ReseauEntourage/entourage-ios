@@ -7,6 +7,7 @@
 //
 
 #import "OTTutorialViewController.h"
+#import "OTConsts.h"
 
 // Controller
 #import "OTLoginViewController.h"
@@ -96,11 +97,11 @@
                                                 } failure:^(NSError *error) {
                                                     [SVProgressHUD dismiss];
                                                     [[[UIAlertView alloc]
-                                                      initWithTitle:@"Erreur"
-                                                      message:@"Echec de la mise à jour de l'email"
+                                                      initWithTitle:OTLocalizedString(@"error")
+                                                      message:OTLocalizedString(@"emailNotSent")
                                                       delegate:nil
                                                       cancelButtonTitle:nil
-                                                      otherButtonTitles:@"ok",
+                                                      otherButtonTitles:@"Ok",
                                                       nil] show];
                                                 }];
     
@@ -112,20 +113,20 @@
 - (IBAction)updateEmailDidTap:(id)sender {
     if (self.emailTextField.text.length == 0) {
         [[[UIAlertView alloc]
-          initWithTitle:@"Validation impossible"
-          message:@"Veuillez renseigner une adresse email"
+          initWithTitle:OTLocalizedString(@"impossibleValidation")
+          message:OTLocalizedString(@"mustAddEmail")
           delegate:nil
           cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
+          otherButtonTitles:@"Ok",
           nil] show];
     }
     else if (![self.emailTextField.text isValidEmail]) {
         [[[UIAlertView alloc]
-          initWithTitle:@"Validation impossible"
-          message:@"Adresse email invalide"
+          initWithTitle:OTLocalizedString(@"impossibleValidation")
+          message:OTLocalizedString(@"invalidEmail")//@"Adresse email invalide"
           delegate:nil
           cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
+          otherButtonTitles:@"Ok",
           nil] show];
     }
     else {

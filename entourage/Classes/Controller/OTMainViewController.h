@@ -26,6 +26,8 @@
 @property (nonatomic, strong) OTFeedItem *selectedFeedItem;
 
 @property (nonatomic, strong) KPClusteringController *clusteringController;
+@property (nonatomic) double entourageScale;
+
 
 - (IBAction)zoomToCurrentLocation:(id)sender;
 - (void)didChangePosition;

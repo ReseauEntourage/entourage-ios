@@ -7,6 +7,7 @@
 //
 
 #import "OTAppDelegate.h"
+#import "OTConsts.h"
 
 // Pods
 #import "SimpleKeychain.h"
@@ -225,7 +226,7 @@
         }
     }
     else {
-        NSString *genericErrorMessage = @"Une erreur s'est produite. Vérifiez votre connexion réseau et réessayez.";
+        NSString *genericErrorMessage = OTLocalizedString(@"generic_error");
         actualError = [NSError errorWithDomain:error.domain code:error.code userInfo:@{ NSLocalizedDescriptionKey:genericErrorMessage }];
     }
     return actualError;

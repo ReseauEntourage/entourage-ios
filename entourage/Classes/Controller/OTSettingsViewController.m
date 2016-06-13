@@ -14,8 +14,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = OTLocalizedString( @"parameters");
-    //[self createMenuButton];
+    self.title = OTLocalizedString( @"parameters").uppercaseString;
     [self setupCloseModal];
 }
 

@@ -78,6 +78,8 @@
 
 #define MAPVIEW_HEIGHT 160.f
 
+#define MIN_ENTOURAGE_HEATZONE 500.0f // m
+
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define TOURS_REQUEST_DISTANCE_KM 10
 #define LOCATION_MIN_DISTANCE 5.f //m
@@ -143,7 +145,6 @@
 @property (nonatomic, strong) NSArray *pois;
 @property (nonatomic, strong) NSMutableArray *markers;
 
-@property (nonatomic) double entourageScale;
 
 @end
 
@@ -377,26 +378,22 @@ static BOOL didGetAnyData = NO;
 
 
 - (void)didChangePosition {
-    CLLocationDistance ddistance = [self mapWidthInMeters];
+    CLLocationDistance distance = [self mapWidthInMeters];
     
+    // image width without transparent border ~70%
+    double imageWidth = [UIImage imageNamed:@"heatZone"].size.width * 0.7;
     double screenWidth = [UIScreen mainScreen].bounds.size.width;
-    double scale500 = screenWidth/300;
-    
-    NSLog(@"DEBUG distance = %.1fm", ddistance);
-    if (ddistance < 500) {
-        self.entourageScale = scale500 * 500 / ddistance;
-        [self.mapView removeAnnotations:self.mapView.annotations];
-        [self feedMapWithFeedItems];
-    }
-        
+    double scale500 = (500* screenWidth)/(imageWidth *distance)  ;
 
+    self.entourageScale = MAX(scale500, 0.5);
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    [self feedMapWithFeedItems];
     
     if (![self.mapView showsUserLocation]) {
         [self zoomToCurrentLocation:nil];
     }
     
     // check if we need to make a new request
-    CLLocationDistance distance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.requestedToursCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
@@ -489,7 +486,8 @@ static BOOL didGetAnyData = NO;
                 [self drawTour:(OTTour*)feedItem];
             
             if ([feedItem isKindOfClass:[OTEntourage class]]) {
-                OTEntourageAnnotation *pointAnnotation = [[OTEntourageAnnotation alloc] initWithEntourage:(OTEntourage*)feedItem andScale:self.entourageScale];
+                OTEntourageAnnotation *pointAnnotation = [[OTEntourageAnnotation alloc] initWithEntourage:(OTEntourage*)feedItem
+                                                                                                 andScale:self.entourageScale];
                 [entouragesAnnotations addObject:pointAnnotation];
             }
         }
@@ -593,8 +591,8 @@ static BOOL didGetAnyData = NO;
     localNotification.alertBody = OTLocalizedString(@"tour_ongoing");
     localNotification.alertAction = OTLocalizedString(@"Stop");
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
-    localNotification.userInfo = @{@"tourId": tourId, @"object":@"Maraude en cours"};
-    localNotification.applicationIconBadgeNumber = 0;//[[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    localNotification.userInfo = @{@"tourId": tourId, @"object":OTLocalizedString(@"tour_ongoing")};
+    localNotification.applicationIconBadgeNumber = 0;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     

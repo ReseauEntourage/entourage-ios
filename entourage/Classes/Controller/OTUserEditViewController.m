@@ -8,6 +8,8 @@
 
 
 #import "OTAppDelegate.h"
+#import "OTConsts.h"
+
 // Controllers
 #import "OTUserEditViewController.h"
 #import "UIViewController+menu.h"
@@ -51,7 +53,7 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = NSLocalizedString(@"profile", @"").uppercaseString;
+    self.title = OTLocalizedString(@"profile").uppercaseString;
     [self setupCloseModal];
     [self showSaveButton];
     
@@ -70,7 +72,7 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Private
 
 - (void)showSaveButton {
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"save", @"")
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"save")
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(updateUser)];
@@ -86,11 +88,11 @@ typedef NS_ENUM(NSInteger) {
 
     NSString *warning = nil;
     if (![email isValidEmail])
-        warning = NSLocalizedString(@"invalidEmail", @"");
+        warning = OTLocalizedString(@"invalidEmail");
     if (lastName.length < 2)
-        warning =  NSLocalizedString(@"invalidLastName", @"");
+        warning =  OTLocalizedString(@"invalidLastName");
     if (firstName.length < 2)
-        warning =  NSLocalizedString(@"invalidFirstName", @"");
+        warning =  OTLocalizedString(@"invalidFirstName");
 
 
     if (warning != nil) {
@@ -99,7 +101,7 @@ typedef NS_ENUM(NSInteger) {
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
         
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: NSLocalizedString(@"close", @"")
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"close")
                                                                 style:UIAlertActionStyleCancel
                                                               handler:^(UIAlertAction * _Nonnull action) {}];
         
@@ -112,10 +114,10 @@ typedef NS_ENUM(NSInteger) {
     self.user.lastName = lastName;
     self.user.email = email;
     
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"user_edit_saving", @"")];
+    [SVProgressHUD showWithStatus:OTLocalizedString(@"user_edit_saving")];
     [[OTAuthService new] updateUserInformationWithUser:self.user
                                                success:^(OTUser *user) {
-        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"user_edit_saved_ok", @"")];
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"user_edit_saved_ok")];
         [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
         if (self.user.password != nil) {
             [[A0SimpleKeychain keychain] setString:self.user.password forKey:kKeychainPassword];
@@ -126,7 +128,7 @@ typedef NS_ENUM(NSInteger) {
                                                 
         
     } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"user_edit_saved_error", @"")];
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_edit_saved_error")];
         NSLog(@"%@", [error description]);
     }];
 }
@@ -218,16 +220,16 @@ typedef NS_ENUM(NSInteger) {
     NSString *title = @"";
     switch (section) {
         case SectionTypeInfoPrivate: {
-            title = NSLocalizedString(@"privateInfo", @"");
+            title = OTLocalizedString(@"privateInfo");
             break;
         }
         case SectionTypeInfoPublic: {
-            title =  NSLocalizedString(@"publicInfo", @"");
+            title =  OTLocalizedString(@"publicInfo");
 
             break;
         }
         case SectionTypeAssociations: {
-            title =  NSLocalizedString(@"organizations", @"");
+            title =  OTLocalizedString(@"organizations");
 
             break;
         }
@@ -293,7 +295,7 @@ typedef NS_ENUM(NSInteger) {
                 [self setupSummaryProfileCell:cell];
                 
             } else {
-                NSString *title = indexPath.row == 1 ? NSLocalizedString(@"firstName", @"") : NSLocalizedString(@"lastName", @"");
+                NSString *title = indexPath.row == 1 ? OTLocalizedString(@"firstName") : OTLocalizedString(@"lastName");
                 NSString *text = indexPath.row == 1 ? self.user.firstName : self.user.lastName;
                 UITextField *textField = indexPath.row == 1 ? self.firstNameTextField : self.lastNameTextField;
                 [self setupInfoCell:cell withTitle:title withTextField:textField andText:text];
@@ -304,7 +306,7 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeInfoPrivate: {
             switch (indexPath.row) {
                 case 0:
-                    [self setupInfoCell:cell withTitle:@"E-mail" withTextField:nil andText:self.user.email];
+                    [self setupInfoCell:cell withTitle:OTLocalizedString(@"user_edit_email") withTextField:nil andText:self.user.email];
                     break;
                 case 1:
                     //nothing
@@ -318,7 +320,7 @@ typedef NS_ENUM(NSInteger) {
             break;
         }
         case SectionTypeInfoPublic: {
-            [self setupInfoCell:cell withTitle:@"Quartier" withTextField:nil andText:@""];
+            [self setupInfoCell:cell withTitle:OTLocalizedString(@"user_edit_quartier") withTextField:nil andText:@""];
             break;
         }
         case SectionTypeAssociations: {
@@ -345,15 +347,14 @@ typedef NS_ENUM(NSInteger) {
             break;
         case SectionTypeDelete: {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                           message:@"Etes-vous sûr de vouloir supprimer votre compte ?"                                                                    preferredStyle:UIAlertControllerStyleAlert];
+                                                                           message:OTLocalizedString(@"user_edit_delete")                                                                   preferredStyle:UIAlertControllerStyleAlert];
 
 
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Fermer"
-                                                                    style:UIAlertActionStyleCancel
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert")                                                                    style:UIAlertActionStyleCancel
                                                                   handler:^(UIAlertAction * _Nonnull action) {}];
             
             [alert addAction:defaultAction];
-            UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Oui"
+            UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"yes")
                                                                     style:UIAlertActionStyleDestructive
                                                                   handler:^(UIAlertAction * _Nonnull action) {
                                                                       NSLog(@"deleting account ...");
@@ -363,7 +364,7 @@ typedef NS_ENUM(NSInteger) {
                                                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFY_LOGOUT object:self];
                                                                                                         } failure:^(NSError *error) {
                                                                                                             NSLog(@"Something went wrong");
-                                                                                                            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"user_edit_saved_ok", @"")];
+                                                                                                            [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"user_edit_saved_ok")];
                                                                                                         }];
                                                                   }];
             

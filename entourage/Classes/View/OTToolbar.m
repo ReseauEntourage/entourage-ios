@@ -22,23 +22,8 @@
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
-    if (self) {
-        //[self initialize];
-    }
     return self;
 }
-
-//- (void)initialize {
-//    
-//    UIBarButtonItem *filtersBBI = [self filtersBarButtonItem];
-//    UIBarButtonItem *locationBBI = [self locationBarButtonItem];
-//    UIBarButtonItem *titleBBI = [self titleBarButtonItem];
-//
-//    UIBarButtonItem *flexibleBBI = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-//                                                                                  target:nil action:nil];
-//    
-//    [self setItems:@[filtersBBI, locationBBI, flexibleBBI, titleBBI, flexibleBBI]];
-//}
 
 - (void)setupWithFilters {
     UIBarButtonItem *filtersBBI = [self filtersBarButtonItem];
@@ -93,9 +78,8 @@
 - (void)setTitle:(NSString *)title {
     _title = title;
     _titleLabel.text = title;
-    //[self initialize];
+
     [self setNeedsDisplay];
-    
 }
 
 - (void)showFilters {

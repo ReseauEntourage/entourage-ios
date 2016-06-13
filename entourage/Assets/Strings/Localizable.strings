@@ -17,10 +17,13 @@
 "promptForMicrophone" = "L'application demande l'accès à votre microphone.\n\nSVP Activez l'accès au micro pour cette app dans Réglages > Confidentialité > Micro";
 
 "error" = "Erreur";
+"generic_error" = "Une erreur s'est produite. Vérifiez votre connexion réseau et réessayez.";
 "connection_error" = "Echec de la connexion";
 "connection_imposible" = "Connexion impossible";
 
 "distance_250" = "La rencontre est trop éloignée de la maraude";
+"yes" = "Oui";
+
 
 // MenuItems
 "menu_amis" = "Amis";
@@ -52,45 +55,35 @@
 "about_email_notavailable" = "Email introuvable";
 
 // Map Options
-"map_options_hide_poi" = "Masquer le guide de solidarité";
-"map_options_show_poi" = "Afficher le guide de solidarité";
 "create_tour" = "Créer une maraude";
 "create_encounter" = "Créer une rencontre";
 "create_demande" = "Créer une demande";
 "create_contribution" = "Créer une contribution";
+"map_options_hide_poi" = "Masquer le guide de solidarité";
+"map_options_show_poi" = "Afficher le guide de solidarité";
 
-// Encounters
-"has_encountered" = "a rencontré";
-"formatter_has_meet" = "%@ a rencontré %@";
-"here" = "ici";
-"their_message" = "Notes";
-"their_audio_message" = "Leur message audio";
 
-"Rencontre Entourage" = "Rencontre Entourage";
+// Feed item
+"join_active" = "Actif";
+"join_pending" = "Demande en attente";
+"join_rejected" = "Demande rejetée";
+"join_to_join" = "Je rejoins";
 
-"button_validate" = "Valider";
-
-"entourageTitle" = "Titre de votre %@*";
-"invalidTitle" = "Titre invalide";
-"demande" = "Demande";
-"ask_for_help" = "Demande";
-"contribution" = "Contribution";
-"detailedDescription" = "Description détaillée";
-
-"filters" = "filters";
 // Tour
 "tour_type_bare_hands" = "barehands";
 "tour_type_medical" = "medical";
 "tour_type_alimentary" = "alimentary";
-"tour_vehicle_feet" = "feet";
-"tour_vehicle_car" = "car";
-"tour_status_ongoing" = "ongoing";
-"tour_status_closed" = "closed";
+"tour_type_display_social" = "sociale";
+"tour_type_display_medical" = "médicale";
+"tour_type_display_distributive" = "distributive";
 
+"tour_status_closed" = "closed";
 "tour_create_sending" = "Création de la maraude";
 "tour_create_error" = "Erreur de création de la maraude";
 "tour_close_error" = "Erreur de fermeture de la maraude";
-
+"tour_vehicle_feet" = "feet";
+"tour_vehicle_car" = "car";
+"tour_status_ongoing" = "ongoing";
 "thanks" = "Merci";
 "tour_join_intro" = "Cette maraude étant privée, \nvotre demande a été \ntransmise au créateur.";
 "tour_join_message" = "Si vous le souhaitez, \nenvoyez-lui un message:";
@@ -98,12 +91,26 @@
 "tour" = "Maraude";
 "send" = "Envoyer";
 
+"formatter_tour_by" = "Mauraude %@ par ";
 "formatter_tour_status_ongoing" = "%@ en cours";
+
 "tour_ongoing" = "Maraude en cours";
 "stop" = "Stop";
 "tour_status_completed" = "Maraude terminée";
 "tour_quitted" = "Maraude clôturée.";
-// encounter
+
+// Encounters
+"formatter_has_meet" = "%@ a rencontré %@";
+"has_encountered" = "a rencontré";
+"here" = "ici";
+"their_message" = "Notes";
+"entourageTitle" = "Titre de votre %@*";
+"invalidTitle" = "Titre invalide";
+"demande" = "Demande";
+"ask_for_help" = "Demande";
+"contribution" = "Contribution";
+"detailedDescription" = "Description détaillée";
+"filters" = "filters";
 "detailEncounter" = "Détaillez votre rencontre";
 "formater_encounterAnd" = "%@ et";
 "formater_meetEncounter" = "se sont rencontrés ici le %@";
@@ -111,7 +118,6 @@
 "user_joined_tour" = "a rejoint la maraude.";
 "meetingCreated" = "Rencontre créée";
 "meetingNotCreated" = "Echec de la création de rencontre";
-
 
 // Entourage
 "entourages" = "Entourages";
@@ -122,13 +128,21 @@
 "entourageNotCreated" = "Echec de la création de entourage";
 "entourageQuitted" = "Entourage clôturée.";
 
+// Feed Item details
+"item_option_close" = "Arrêter";
+"item_option_freeze" = "Clôturer";
+"item_option_quit" = "doQuitTour";
+
+// Tutorial
+"emailNotSent" = "Echec de la mise à jour de l'email";
+"impossibleValidation" = "Validation impossible";
+"mustAddEmail" = "Veuillez renseigner une adresse email";
 
 // POI
-"poi_create_tour_alert" = "Si vous désirez créer une maraude, vouz devez quitter le guide de solidarité";
-"poi_create_encounter_alert" = "Si vous désirez créer une rencontre, vouz devez quitter le guide de solidarité";
-"poi_create_demande_alert" = "Si vous désirez créer une demande, vouz devez quitter le guide de solidarité";
 "poi_create_contribution_alert" = "Si vous désirez créer une contribution, vouz devez quitter le guide de solidarité";
-
+"poi_create_demande_alert" = "Si vous désirez créer une demande, vouz devez quitter le guide de solidarité";
+"poi_create_encounter_alert" = "Si vous désirez créer une rencontre, vouz devez quitter le guide de solidarité";
+"poi_create_tour_alert" = "Si vous désirez créer une maraude, vouz devez quitter le guide de solidarité";
 
 // User
 "firstName" = "Prénom";
@@ -138,16 +152,20 @@
 "invalidEmail" = "Email invalide";
 "invalidFirstName" = "Prénom invalide";
 "invalidLastName" = "Nom invalide";
-"mustAddCode" = "Veuillez renseigner un code de vérification";
 "invalidCode" = "Code de vérification invalide";
 "invalidPhoneNumber" = "Numéro de téléphone invalide";
 "invalidPhoneNumberOrCode" = "Le numéro de téléphone et ce code d’accès ne correspondent pas.";
+"mustAddCode" = "Veuillez renseigner un code de vérification";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
 "close" = "Fermer";
 "privateInfo" = "Informations privées";
 "publicInfo" = "Informations publiques";
 "organizations" = "Association(s)";
+"user_verified" = "Identification vérifiée";
+"user_email_address" = "Adresse e-mail";
+"user_phone_number" = "Numéro de téléphone";
+
 "user_edit_password_invalid_current" = "Le mot de passe ne correspond pas";
 "user_edit_password_invalid_length_too_short" = "Le mot de passe doit contenir au moins %d caractères";
 "user_edit_password_invalid_length_too_long" = "Le mot de passe ne peut pas dépasser %d caractères";
@@ -155,8 +173,11 @@
 "user_edit_saving" = "Sauvegarde en cours";
 "user_edit_saved_ok" = "Infos sauvegardées";
 "user_edit_saved_error" = "Erreur de sauvegarde";
+"user_edit_delete" = "Etes-vous sûr de vouloir supprimer votre compte?";
 "user_edit_delete_error" = "Erreur lors de la suppression du compte";
 "user_profile_error" = "Erreur lors de la récupération du profil";
+"user_edit_email" = "E-mail";
+"user_edit_quartier" = "Quartier";
 
 // Filter
 "filter_maraudes_title" = "Types de maraude";
@@ -226,3 +247,4 @@
 
 // Navigation Bar Buttons
 "validate" = "Valider";
+"edit" = "Editer";

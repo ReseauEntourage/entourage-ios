@@ -16,6 +16,7 @@
 #import "OTTour.h"
 #import "OTTourService.h"
 #import "UIColor+entourage.h"
+#import "UIImage+entourage.h"
 
 @interface OTToursMapDelegate ()
 
@@ -60,13 +61,14 @@
                 badgeAlignament = JSBadgeViewAlignmentCenter;
             }
             
-            
             annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewIdentifier];
             if (!annotationView)
             {
-                annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:annotationViewIdentifier];
+                annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:nil];
                 annotationView.canShowCallout = NO;
-                annotationView.image = [UIImage imageNamed:annotationImageName];
+                UIImage *scaledImage = [UIImage imageNamed:@"heatZone"
+                                                 withScale:self.mapController.entourageScale];
+                annotationView.image = scaledImage;
                 badgeView = [[JSBadgeView alloc] initWithParentView:annotationView alignment:badgeAlignament];
             }
             else
