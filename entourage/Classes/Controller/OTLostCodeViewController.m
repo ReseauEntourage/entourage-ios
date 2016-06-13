@@ -112,10 +112,10 @@
     if (self.phoneTextField.text.length == 0) {
         [[[UIAlertView alloc]
           initWithTitle: OTLocalizedString(@"requestImposible")
-          message:@"Veuillez renseigner un numéro de téléphone"
+          message:OTLocalizedString(@"retryPhone")
           delegate:nil
           cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
+          otherButtonTitles:@"Ok",
           nil] show];
     }
     else if (![self.phoneTextField.text isValidPhoneNumber]) {

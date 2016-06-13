@@ -11,6 +11,7 @@
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
+#import "OTConsts.h"
 
 #define BUTTON_HEIGHT 44.0f
 #define BUTTON_DELTAY  8.0f
@@ -34,11 +35,11 @@
     if ([currentUser.sid intValue] == [self.tour.author.uID intValue]) {
         NSLog(@"status>>> %@", self.tour.status);
         if ([self.tour.status isEqualToString:@"ongoing"])
-            [self addButtonWithTitle:@"Arrêter" withSelectorNamed:@"doCloseTour"];
+            [self addButtonWithTitle:OTLocalizedString(@"item_option_close") withSelectorNamed:@"doCloseTour"];
         else
-            [self addButtonWithTitle:@"Clôturer" withSelectorNamed:@"doFreezeTour"];
+            [self addButtonWithTitle:OTLocalizedString(@"item_option_freeze") withSelectorNamed:@"doFreezeTour"];
     } else {
-        [self addButtonWithTitle:@"Quitter" withSelectorNamed:@"doQuitTour"];
+        [self addButtonWithTitle:OTLocalizedString(@"item_option_quit") withSelectorNamed:@"doQuitTour"];
     }
 
 }

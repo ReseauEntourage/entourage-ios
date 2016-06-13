@@ -119,17 +119,17 @@
 - (NSString *)displayType {
     NSString *tourType;
     if ([self.type isEqualToString:@"barehands"]) {
-        tourType = @"sociale";
+        tourType = OTLocalizedString(@"tour_type_display_social");
     } else     if ([self.type isEqualToString:@"medical"]) {
-        tourType = @"médicale";
+        tourType = OTLocalizedString(@"tour_type_display_medical");
     } else if ([self.type isEqualToString:@"alimentary"]) {
-        tourType = @"distributive";
+        tourType = OTLocalizedString(@"tour_type_display_distributive");
     }
     return tourType;
 }
 
 - (NSAttributedString *)typeByNameAttributedString {
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", [self displayType]]
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_tour_by"), [self displayType]]
                                                                          attributes:ATTR_LIGHT_15];
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:self.author.displayName
                                                                          attributes:ATTR_SEMIBOLD_15];

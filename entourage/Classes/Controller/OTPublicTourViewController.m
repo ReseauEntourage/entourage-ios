@@ -12,6 +12,7 @@
 #import "UIViewController+menu.h"
 #import "UIButton+entourage.h"
 #import "UILabel+entourage.h"
+#import "OTConsts.h"
 
 #import "OTTourPoint.h"
 
@@ -36,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"MARAUDE";
+    self.title = OTLocalizedString(@"tour");
     [self setupCloseModal];
     [self setupMoreButtons];
     [self setupUI];

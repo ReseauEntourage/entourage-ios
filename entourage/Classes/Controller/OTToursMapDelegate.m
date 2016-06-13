@@ -61,7 +61,6 @@
                 badgeAlignament = JSBadgeViewAlignmentCenter;
             }
             
-            
             annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewIdentifier];
             if (!annotationView)
             {

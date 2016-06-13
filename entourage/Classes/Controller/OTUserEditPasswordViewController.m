@@ -9,6 +9,7 @@
 // Controllers
 #import "OTUserEditPasswordViewController.h"
 #import "UIViewController+menu.h"
+#import "OTConsts.h"
 
 // Services
 #import "OTAuthService.h"
@@ -61,25 +62,25 @@
     //check if the current password matches
     NSString *savedPassword = [[A0SimpleKeychain keychain] stringForKey:kKeychainPassword];
     if (![savedPassword isEqualToString:currentPassword]) {
-        [self showDialogWithMessage:NSLocalizedString(@"user_edit_password_invalid_current", @"")
+        [self showDialogWithMessage:OTLocalizedString(@"user_edit_password_invalid_current")
                          setFocusAt:self.currentPasswordTextField];
         return;
     }
     //check for minimum length
     if (newPassword.length < MIN_PASSWORD_LENGTH) {
-        [self showDialogWithMessage:[NSString stringWithFormat:NSLocalizedString(@"user_edit_password_invalid_length_too_short", @""), MIN_PASSWORD_LENGTH]
+        [self showDialogWithMessage:[NSString stringWithFormat:OTLocalizedString(@"user_edit_password_invalid_length_too_short"), MIN_PASSWORD_LENGTH]
                          setFocusAt:self.passwordTextField];
         return;
     }
     //check for maximum length
     if (newPassword.length > MAX_PASSWORD_LENGTH) {
-        [self showDialogWithMessage:[NSString stringWithFormat:NSLocalizedString(@"user_edit_password_invalid_length_too_long", @""), MAX_PASSWORD_LENGTH]
+        [self showDialogWithMessage:[NSString stringWithFormat:OTLocalizedString(@"user_edit_password_invalid_length_too_long"), MAX_PASSWORD_LENGTH]
                          setFocusAt:self.passwordTextField];
         return;
     }
     //check if the new and confirm password match
     if (![newPassword isEqualToString:confirmPassword]) {
-        [self showDialogWithMessage:NSLocalizedString(@"user_edit_password_invalid_match", @"")
+        [self showDialogWithMessage:OTLocalizedString(@"user_edit_password_invalid_match")
                          setFocusAt:self.confirmPasswordTextField];
         return;
     }

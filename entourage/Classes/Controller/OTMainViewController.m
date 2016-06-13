@@ -591,8 +591,8 @@ static BOOL didGetAnyData = NO;
     localNotification.alertBody = OTLocalizedString(@"tour_ongoing");
     localNotification.alertAction = OTLocalizedString(@"Stop");
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
-    localNotification.userInfo = @{@"tourId": tourId, @"object":@"Maraude en cours"};
-    localNotification.applicationIconBadgeNumber = 0;//[[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    localNotification.userInfo = @{@"tourId": tourId, @"object":OTLocalizedString(@"tour_ongoing")};
+    localNotification.applicationIconBadgeNumber = 0;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     

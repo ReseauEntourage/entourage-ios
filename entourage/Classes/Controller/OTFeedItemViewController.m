@@ -122,7 +122,6 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (void)showNewMessage:(NSNotification*)notification {
-    NSLog(@"DAA %@", notification.userInfo);
     
     if ([self.feedItem isKindOfClass:[OTTour class]])
         [self getTourMessages];

@@ -25,15 +25,15 @@
     
     NSString *tourType = tour.type;
     if ([tourType isEqualToString:@"barehands"]) {
-        tourType = @"sociale";
+        tourType = OTLocalizedString(@"tour_type_display_social");
     } else     if ([tourType isEqualToString:@"medical"]) {
-        tourType = @"médicale";
+        tourType = OTLocalizedString(@"tour_type_display_medical");
     } else if ([tourType isEqualToString:@"alimentary"]) {
-        tourType = @"distributive";
+        tourType = OTLocalizedString(@"tour_type_display_distributive");;
     }
     NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
     NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", tourType] attributes:lightAttrs];
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_tour_by"), tourType] attributes:lightAttrs];
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];
@@ -45,7 +45,7 @@
     
     NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
     NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ par ", [ent displayType].capitalizedString] attributes:lightAttrs];
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formater_by"), [ent displayType].capitalizedString] attributes:lightAttrs];
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:authorName attributes:boldAttrs];
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];
@@ -122,17 +122,17 @@
     self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:status];
     
     if ([joinStatus isEqualToString:JOIN_ACCEPTED] || [status isEqualToString:FEEDITEM_STATUS_ACTIVE]) {
-        [self setText:@"Actif"];
+        [self setText:OTLocalizedString(@"join_active")];
         [self setTextColor:[UIColor appOrangeColor]];
     } else {
         if ([joinStatus isEqualToString:JOIN_PENDING]) {
-            [self setText:@"Demande en attente"];
+            [self setText:OTLocalizedString(@"join_pending")];
             [self setTextColor:[UIColor appOrangeColor]];
         } else if ([joinStatus isEqualToString:JOIN_REJECTED]) {
-            [self setText:@"Demande rejetée"];
+            [self setText:OTLocalizedString(@"join_rejected")];
             [self setTextColor:[UIColor appTomatoColor]];
         } else {
-            [self setText:@"Je rejoins"];
+            [self setText:OTLocalizedString(@"join_to_join")];
             [self setTextColor:[UIColor appGreyishColor]];
         }
     }
@@ -144,20 +144,20 @@
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
         //
-        [self setText:@"Actif"];
+        [self setText:OTLocalizedString(@"join_active")];
         [self setTextColor:[UIColor appOrangeColor]];
     } else {
         if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
-            [self setText:@"Actif"];
+            [self setText:OTLocalizedString(@"join_active")];
             [self setTextColor:[UIColor appOrangeColor]];
         } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
-            [self setText:@"Demande en attente"];
+            [self setText:OTLocalizedString(@"join_pending")];
             [self setTextColor:[UIColor appOrangeColor]];
         } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
-            [self setText:@"Demande rejetée"];
+            [self setText:OTLocalizedString(@"join_rejected")];
             [self setTextColor:[UIColor appTomatoColor]];
         } else {
-            [self setText:@"Je rejoins"];
+            [self setText:OTLocalizedString(@"join_to_join")];
             [self setTextColor:[UIColor appGreyishColor]];
         }
     }

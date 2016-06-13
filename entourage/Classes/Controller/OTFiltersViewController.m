@@ -81,9 +81,9 @@
                    ];
     
     self.maraudeIcons = @[
-                          @"filter_heal",//@"medicalActive",
+                          @"filter_heal",
                           @"filter_social",
-                          @"filter_eat"//@"distibutiveActive"
+                          @"filter_eat"
                           ];
     
     self.timeframeButtons = [NSMutableArray new];
