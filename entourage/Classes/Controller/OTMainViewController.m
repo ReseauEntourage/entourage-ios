@@ -83,14 +83,8 @@
 #define TOURS_REQUEST_DISTANCE_KM 10
 #define LOCATION_MIN_DISTANCE 5.f //m
 
-#define TABLEVIEW_FOOTER_HEIGHT 15.0f
-#define TABLEVIEW_BOTTOM_INSET 86.0f
-
-
 #define LONGPRESS_DELTA 65.0f
 #define MAX_DISTANCE 250.0 //meters
-
-#define CENTER_MAP_FRAME CGRectMake(8.0f, 8.0f, 30.0f, 30.0f)
 
 
 /********************************************************************************/

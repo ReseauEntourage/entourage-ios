@@ -42,7 +42,6 @@
 
 @interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate, OTOptionsDelegate>
 
-@property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffectView;
 
 // map
 
@@ -311,7 +310,6 @@
 #pragma mark - OTCalloutViewControllerDelegate
 
 - (void)dismissPopover {
-    self.blurEffectView.hidden = YES;
     [self.popover dismissPopoverAnimated:YES];
 }
 

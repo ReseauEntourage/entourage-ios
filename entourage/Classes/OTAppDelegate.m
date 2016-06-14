@@ -26,7 +26,6 @@
 #import "OTEntourageService.h"
 
 // Util
-#import "UIFont+entourage.h"
 #import "OTConsts.h"
 #import "IQKeyboardManager.h"
 #import "UIStoryboard+entourage.h"

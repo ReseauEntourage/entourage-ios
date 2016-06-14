@@ -29,7 +29,7 @@
 @property (nonatomic) double entourageScale;
 
 
-- (IBAction)zoomToCurrentLocation:(id)sender;
+- (void)zoomToCurrentLocation:(id)sender;
 - (void)didChangePosition;
 - (void)getData;
 
