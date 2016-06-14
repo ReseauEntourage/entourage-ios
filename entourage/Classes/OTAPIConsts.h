@@ -10,6 +10,7 @@
 #define OTAPIConsts_h
 
 #define TOKEN [[NSUserDefaults standardUserDefaults] currentUser].token
+#define USER_ID [[NSUserDefaults standardUserDefaults] currentUser].sid
 
 // Feeds
 #define API_URL_FEEDS    @"feeds?token=%@"
@@ -25,6 +26,7 @@
 #define API_URL_ENTOURAGES @"entourages?token=%@"
 #define API_URL_ENTOURAGE_BY_ID @"entourages/%@?token=%@"
 #define API_URL_ENTOURAGE_UPDATE @"entourages/%@?token=%@"
+#define API_URL_ENTOURAGE_QUIT @"entourages/%@/users/%@?token=%@"
 #define API_URL_ENTOURAGE_JOIN_REQUEST @"entourages/%@/users?token=%@"
 #define API_URL_ENTOURAGE_JOIN_UPDATE @"entourages/%@/users/%@?token=%@"
 #define API_URL_ENTOURAGE_SEND_MESSAGE "entourages/%@/chat_messages.json?token=%@"

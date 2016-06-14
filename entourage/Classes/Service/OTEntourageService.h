@@ -56,4 +56,9 @@
                           WithSuccess:(void(^)(NSArray *entourageMessages))success
                               failure:(void (^)(NSError *)) failure;
 
+- (void)quitEntourage:(OTEntourage *)entourage
+         success:(void (^)())success
+         failure:(void (^)(NSError *error))failure;
+
+
 @end

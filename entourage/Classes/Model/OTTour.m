@@ -155,7 +155,7 @@
     //OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     //if (self.author.uID.intValue == currentUser.sid.intValue)
     {
-        if ([self.status isEqualToString:TOUR_STATUS_ONGOING] || [self.status isEqualToString:TOUR_STATUS_CLOSED])
+        if ([self.status isEqualToString:TOUR_STATUS_ONGOING] || [self.status isEqualToString:FEEDITEM_STATUS_CLOSED])
             return FEEDITEM_STATUS_ACTIVE;
     }
     return self.joinStatus;

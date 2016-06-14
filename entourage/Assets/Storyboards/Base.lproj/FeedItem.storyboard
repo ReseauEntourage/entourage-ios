@@ -534,10 +534,10 @@
             </objects>
             <point key="canvasLocation" x="1826" y="945"/>
         </scene>
-        <!--Tour Details Options View Controller-->
+        <!--Feed Item Details Options View Controller-->
         <scene sceneID="2H1-3R-sHe">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="ARd-Al-TGt" customClass="OTTourDetailsOptionsViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overCurrentContext" id="ARd-Al-TGt" customClass="OTFeedItemDetailsOptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oeo-TB-LuT"/>
                         <viewControllerLayoutGuide type="bottom" id="a6F-zB-XqV"/>
@@ -546,7 +546,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeQ-5o-j8V">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeQ-5o-j8V" userLabel="Cancel Feed Item Button">
                                 <rect key="frame" x="4" y="503" width="312" height="57"/>
                                 <color key="backgroundColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
@@ -574,7 +574,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cancelTourButton" destination="CeQ-5o-j8V" id="cfZ-qu-dOa"/>
+                        <outlet property="cancelFeedItemButton" destination="CeQ-5o-j8V" id="Ic1-MH-Dwo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jEF-tA-QbX" userLabel="First Responder" sceneMemberID="firstResponder"/>

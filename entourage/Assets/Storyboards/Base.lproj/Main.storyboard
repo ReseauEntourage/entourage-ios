@@ -451,7 +451,7 @@
                         <segue destination="8mK-2Y-fe2" kind="modal" identifier="OTSelectedTour" id="qik-GS-fOD"/>
                         <segue destination="GHS-CJ-wmd" kind="modal" identifier="OTTourJoinRequestSegue" id="a8P-lF-ebs"/>
                         <segue destination="cEE-ZD-h1d" kind="modal" identifier="UserProfileSegue" id="b42-UE-vP1"/>
-                        <segue destination="R63-9E-dkT" kind="modal" identifier="QuitTourSegue" id="QCV-ym-9OZ"/>
+                        <segue destination="R63-9E-dkT" kind="modal" identifier="QuitFeedItemSegue" id="QCV-ym-9OZ"/>
                         <segue destination="ntx-AK-ysq" kind="modal" identifier="EntouragesSegue" id="NTA-1a-2nr"/>
                         <segue destination="Yq0-qf-lgm" kind="modal" identifier="OTGuideDetailsSegue" id="x8u-KE-dPr"/>
                         <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" animates="NO" id="Gfi-xi-1Da"/>
@@ -925,10 +925,10 @@
             </objects>
             <point key="canvasLocation" x="1368" y="487"/>
         </scene>
-        <!--QuitTour-->
+        <!--QuitFeedItem-->
         <scene sceneID="BFl-vb-SXz">
             <objects>
-                <viewControllerPlaceholder storyboardName="QuitTour" id="R63-9E-dkT" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="QuitFeedItem" id="R63-9E-dkT" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSm-UU-MOh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1368.5" y="793"/>
@@ -1020,7 +1020,6 @@
         <!--Disclaimer View Controller-->
         <scene sceneID="2C6-y0-nAz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MZ0-4A-UO9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zDc-da-doR" customClass="OTDisclaimerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wtM-uy-cwT"/>
@@ -1067,6 +1066,7 @@ Nous vous rappelons qu'en vertu de la charte d'Entourage (http://entourage.socia
                     </view>
                     <navigationItem key="navigationItem" id="04C-A8-PBS"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MZ0-4A-UO9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="690" y="1490"/>
         </scene>

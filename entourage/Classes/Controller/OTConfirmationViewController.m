@@ -92,7 +92,7 @@
 
 - (IBAction)finishTour:(id)sender {
     [SVProgressHUD show];
-    self.tour.status = TOUR_STATUS_CLOSED;
+    self.tour.status = FEEDITEM_STATUS_CLOSED;
     [self closeTour];
 }
 

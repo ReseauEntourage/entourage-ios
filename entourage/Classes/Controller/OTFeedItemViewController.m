@@ -9,7 +9,7 @@
 // Controllers
 #import "OTFeedItemViewController.h"
 #import "UIViewController+menu.h"
-#import "OTTourDetailsOptionsViewController.h"
+#import "OTFeedItemDetailsOptionsViewController.h"
 #import "OTUserViewController.h"
 #import "OTMeetingCalloutViewController.h"
 #import "OTConsts.h"
@@ -27,6 +27,8 @@
 #import "OTTourMessage.h"
 #import "OTTourStatus.h"
 #import "OTUser.h"
+#import "OTFeedItemFactory.h"
+#import "OTStateFactoryDelegate.h"
 
 // Services
 #import "OTTourService.h"
@@ -54,7 +56,7 @@ typedef NS_ENUM(unsigned) {
 
 
 
-@interface OTFeedItemViewController () <UITextViewDelegate, OTTourDetailsOptionsDelegate, OTFeedItemSummaryDelegate, OTTourJoinRequestDelegate, OTFeedItemInfoDelegate>
+@interface OTFeedItemViewController () <UITextViewDelegate, OTFeedItemDetailsOptionsDelegate, OTFeedItemSummaryDelegate, OTTourJoinRequestDelegate, OTFeedItemInfoDelegate>
 
 @property (nonatomic, weak) IBOutlet OTFeedItemSummaryView *feedSummaryView;
 @property (nonatomic, weak) IBOutlet UIButton *timelineButton;
@@ -81,13 +83,16 @@ typedef NS_ENUM(unsigned) {
 
 @end
 
-@implementation OTFeedItemViewController
+@implementation OTFeedItemViewController {
+    id<OTStateFactoryDelegate> stateHandler;
+}
 
 /**************************************************************************************************/
 #pragma mark - Life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    stateHandler = [[OTFeedItemFactory createFor:self.feedItem] getStateFactory];
     self.title = [[_feedItem navigationTitle] uppercaseString];
     [self setupCloseModal];
     [self setupMoreButtons];
@@ -311,9 +316,7 @@ typedef NS_ENUM(unsigned) {
         [plusButton setTarget:self];
         //[plusButton setAction:@selector(addUser)];
 
-        
-        
-        if ([self.feedItem.status isEqualToString:TOUR_STATUS_FREEZED])
+        if(![stateHandler canChangeState])
             return;
         UIImage *moreImage = [[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
@@ -503,9 +506,9 @@ typedef NS_ENUM(unsigned) {
 }
 
 /**************************************************************************************************/
-#pragma mark - OTTourDetailsOptionsDelegate
+#pragma mark - OTFeedItemDetailsOptionsDelegate
 
-- (void)promptToCloseTour {
+- (void)promptToCloseFeedItem {
     [self dismissViewControllerAnimated:NO completion:^{
         [self.delegate promptToCloseTour];
     }];
@@ -921,8 +924,8 @@ static CGFloat keyboardOverlap;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
-        OTTourDetailsOptionsViewController *controller = (OTTourDetailsOptionsViewController *)segue.destinationViewController;
-        ///controller.tour = self.feedItem;
+        OTFeedItemDetailsOptionsViewController *controller = (OTFeedItemDetailsOptionsViewController *)segue.destinationViewController;
+        controller.feedItem = self.feedItem;
         controller.view.backgroundColor = [UIColor appModalBackgroundColor];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.delegate  = self;

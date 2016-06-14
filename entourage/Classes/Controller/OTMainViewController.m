@@ -17,7 +17,7 @@
 #import "OTTourJoinRequestViewController.h"
 #import "OTFeedItemViewController.h"
 #import "OTPublicTourViewController.h"
-#import "OTQuitTourViewController.h"
+#import "OTQuitFeedItemViewController.h"
 #import "OTGuideViewController.h"
 #import "UIView+entourage.h"
 #import "OTUserViewController.h"
@@ -97,7 +97,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourJoinRequestDelegate, OTOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTTourQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
+@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourJoinRequestDelegate, OTOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
@@ -945,9 +945,9 @@ static bool isShowingOptions = NO;
 }
 
 /********************************************************************************/
-#pragma mark - OTTourQuitDelegate
+#pragma mark - OTFeedItemQuitDelegate
 
-- (void)didQuitTour {
+- (void)didQuitFeedItem {
     [self dismissViewControllerAnimated:YES completion:^{
         [self.tableView reloadData];
     }];
@@ -1060,7 +1060,7 @@ static bool isShowingOptions = NO;
                 [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
             } else {
                 
-                feedItem.status = TOUR_STATUS_CLOSED;
+                feedItem.status = FEEDITEM_STATUS_CLOSED;
                 if ([feedItem isKindOfClass:[OTTour class]]) {
                     [[OTTourService new] closeTour:(OTTour*)feedItem
                                        withSuccess:^(OTTour *closedTour) {
@@ -1075,7 +1075,7 @@ static bool isShowingOptions = NO;
                                        }];
                 } else {
                     OTEntourage *entourage = (OTEntourage*)feedItem;
-                    entourage.status = TOUR_STATUS_CLOSED;
+                    entourage.status = FEEDITEM_STATUS_CLOSED;
                     [[OTEntourageService new] closeEntourage:entourage
                                                  withSuccess:^(OTEntourage *entoruage) {
                                                      [self.tableView reloadData];
@@ -1087,7 +1087,7 @@ static bool isShowingOptions = NO;
                 }
             }
         } else {
-            [self performSegueWithIdentifier:@"QuitTourSegue" sender:self];
+            [self performSegueWithIdentifier:@"QuitFeedItemSegue" sender:self];
         }
     }
 }
@@ -1220,7 +1220,7 @@ typedef NS_ENUM(NSInteger) {
                                        @"OTTourOptionsSegue" : [NSNumber numberWithInteger:SegueIDTourOptions],
                                        @"OTMapOptionsSegue": [NSNumber numberWithInteger:SegueIDMapOptions],
                                        @"OTTourJoinRequestSegue": [NSNumber numberWithInteger:SegueIDTourJoinRequest],
-                                       @"QuitTourSegue": [NSNumber numberWithInteger:SegueIDQuitTour],
+                                       @"QuitFeedItemSegue": [NSNumber numberWithInteger:SegueIDQuitTour],
                                        @"GuideSegue": [NSNumber numberWithInteger:SegueIDGuideSolidarity],
                                        @"OTGuideDetailsSegue": [NSNumber numberWithInteger:SegueIDGuideSolidarityDetails],
                                        @"TourCreatorSegue": [NSNumber numberWithInteger:SegueIDTourCreator],
@@ -1286,11 +1286,11 @@ typedef NS_ENUM(NSInteger) {
             controller.tourJoinRequestDelegate = self;
         } break;
         case SegueIDQuitTour: {
-            OTQuitTourViewController *controller = (OTQuitTourViewController *)destinationViewController;
+            OTQuitFeedItemViewController *controller = (OTQuitFeedItemViewController *)destinationViewController;
             controller.view.backgroundColor = [UIColor appModalBackgroundColor];
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-            controller.tour = (OTTour*)self.selectedFeedItem;
-            controller.tourQuitDelegate = self;
+            controller.feedItem = self.selectedFeedItem;
+            controller.feedItemQuitDelegate = self;
         } break;
         case SegueIDGuideSolidarity: {
             UINavigationController *navController = segue.destinationViewController;

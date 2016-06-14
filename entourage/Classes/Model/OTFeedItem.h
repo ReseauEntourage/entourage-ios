@@ -14,6 +14,9 @@
 
 #import "OTTourAuthor.h"
 
+#define FEEDITEM_STATUS_ACTIVE @"active"
+#define FEEDITEM_STATUS_CLOSED @"closed"
+
 @interface OTFeedItem : NSObject
 
 @property (nonatomic, strong) NSNumber *uid;

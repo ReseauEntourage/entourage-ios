@@ -11,7 +11,7 @@
 #import "OTToursTableView.h"
 #import "OTFeedItemViewController.h"
 #import "OTPublicTourViewController.h"
-#import "OTQuitTourViewController.h"
+#import "OTQuitFeedItemViewController.h"
 #import "OTConfirmationViewController.h"
 #import "OTMainViewController.h"
 
@@ -136,11 +136,11 @@ typedef NS_ENUM(NSInteger){
         [controller configureWithTour:controller.feedItem];
     } else if ([segue.identifier isEqualToString:@"OTTourJoinRequestSegue"]) {
         //We shouldn't arrive here
-    } else if ([segue.identifier isEqualToString:@"QuitTourSegue"]) {
-        OTQuitTourViewController *controller = (OTQuitTourViewController *)segue.destinationViewController;
+    } else if ([segue.identifier isEqualToString:@"QuitFeedItemSegue"]) {
+        OTQuitFeedItemViewController *controller = (OTQuitFeedItemViewController *)segue.destinationViewController;
         controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        controller.tour = (OTTour*)sender;
+        controller.feedItem = (OTFeedItem*)sender;
     } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
         OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
@@ -176,7 +176,7 @@ typedef NS_ENUM(NSInteger){
             page = self.activeToursPagination.page;
             break;
         case EntourageStatusClosed:
-            statusString = TOUR_STATUS_CLOSED;
+            statusString = FEEDITEM_STATUS_CLOSED;
             currentPagination = self.closedToursPagination;
             break;
             
@@ -299,11 +299,11 @@ typedef NS_ENUM(NSInteger){
                                        [self.indicatorView stopAnimating];
                                        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
                                        NSLog(@"%@",[error localizedDescription]);
-                                       tour.status = TOUR_STATUS_CLOSED;
+                                       tour.status = FEEDITEM_STATUS_CLOSED;
                                    }];
             }
         } else {
-            [self performSegueWithIdentifier:@"QuitTourSegue" sender:tour];
+            [self performSegueWithIdentifier:@"QuitFeedItemSegue" sender:tour];
         }
     }
 }

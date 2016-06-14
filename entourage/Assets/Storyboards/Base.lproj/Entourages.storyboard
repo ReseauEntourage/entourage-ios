@@ -191,7 +191,7 @@
                         <segue destination="vbq-ns-eUN" kind="modal" identifier="UserProfileSegue" id="1Mf-zz-lke"/>
                         <segue destination="nwQ-gt-ewY" kind="modal" identifier="OTSelectedTourSegue" id="66o-vY-9cz"/>
                         <segue destination="8WQ-di-H6o" kind="modal" identifier="OTTourJoinRequestSegue" id="kZV-ad-fUS"/>
-                        <segue destination="TcF-p0-k5X" kind="modal" identifier="QuitTourSegue" id="Aeh-Uh-28s"/>
+                        <segue destination="TcF-p0-k5X" kind="modal" identifier="QuitFeedItemSegue" id="Aeh-Uh-28s"/>
                         <segue destination="g6j-63-9qQ" kind="modal" identifier="OTPublicTourSegue" id="PSM-UX-CIT"/>
                         <segue destination="Av4-dn-ksH" kind="modal" identifier="OTConfirmationPopup" id="uRF-Bh-5af"/>
                     </connections>
@@ -224,10 +224,10 @@
             </objects>
             <point key="canvasLocation" x="3236.5" y="-616"/>
         </scene>
-        <!--QuitTour-->
+        <!--QuitFeedItem-->
         <scene sceneID="cYr-K8-XHA">
             <objects>
-                <viewControllerPlaceholder storyboardName="QuitTour" id="TcF-p0-k5X" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="QuitFeedItem" id="TcF-p0-k5X" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXp-l5-YrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3185.5" y="-531"/>
