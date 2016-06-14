@@ -112,6 +112,7 @@
     entourage.location = self.location;
     entourage.title = self.titleTextView.text;
     entourage.desc = self.descriptionTextView.text;
+    entourage.status = ENTOURAGE_STATUS_OPEN;
     [SVProgressHUD show];
     [[OTEncounterService new] sendEntourage:entourage
                                 withSuccess:^(OTEntourage *sentEncounter) {
