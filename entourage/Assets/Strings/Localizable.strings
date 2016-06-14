@@ -131,7 +131,7 @@
 // Feed Item details
 "item_option_close" = "Arrêter";
 "item_option_freeze" = "Clôturer";
-"item_option_quit" = "!!doQuitTourOrEntourage";
+"item_option_quit" = "Quitter";
 
 // Tutorial
 "emailNotSent" = "Echec de la mise à jour de l'email";
