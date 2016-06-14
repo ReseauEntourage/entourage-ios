@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-#import "OTTourMessage.h" //TODO:
+#import "OTTourMessage.h" 
 
 @class OTEntourage, OTTourJoiner;
 

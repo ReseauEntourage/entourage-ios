@@ -436,41 +436,6 @@ NSString *const kTourPoints = @"tour_points";
 }
 
 
-
-- (void)join_OLD_Tour:(OTTour *)tour
-     withMessage:(NSString*)message
-         success:(void(^)(OTTourJoiner *))success
-         failure:(void (^)(NSError *)) failure {
-    
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
-    NSDictionary *parameters = @{@"request":@{@"message":message}};
-    parameters = nil; //TODO: remove on version 1.2
-    NSLog(@"Join request: %@", url);
-    
-    [[OTHTTPRequestManager sharedInstance]
-         POSTWithUrl:url
-         andParameters:parameters
-         andSuccess:^(id responseObject)
-         {
-             NSDictionary *data = responseObject;
-             NSDictionary *joinerDictionary = [data objectForKey:@"user"];
-             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
-             
-             if (success)
-             {
-                 success(joiner);
-             }
-         }
-         andFailure:^(NSError *error)
-         {
-             if (failure)
-             {
-                 failure(error);
-             }
-         }
-     ];
-}
-
 - (void)quitTour:(OTTour *)tour
          success:(void (^)())success
          failure:(void (^)(NSError *error))failure {
@@ -634,11 +599,5 @@ NSString *const kTourPoints = @"tour_points";
     }
     return encounters;
 }
-
-//- (OTTourMessage *)encounterFromDictionary:(NSDictionary *)dictionary
-//{
-//    OTTourMessage *message = [[OTTourMessage alloc] initWithDictionary:dictionary];
-//    return message;
-//}
 
 @end

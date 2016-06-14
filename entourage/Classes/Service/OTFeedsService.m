@@ -23,7 +23,6 @@
                           failure:(void (^)(NSError *error))failure
 {
     NSString *url = [NSString stringWithFormat:API_URL_FEEDS, TOKEN];
-    //NSLog(@"requesting feeds %@ with parameters %@ ...", url, parameters);
     [[OTHTTPRequestManager sharedInstance]
          GETWithUrl:url
          andParameters:parameters

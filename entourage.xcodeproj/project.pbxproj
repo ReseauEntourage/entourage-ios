@@ -319,8 +319,8 @@
 		45BC9BCD1CE32AE1000065B7 /* EntourageCreator.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EntourageCreator.storyboard; sourceTree = "<group>"; };
 		45BC9BCF1CE363D5000065B7 /* OTTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTextView.h; sourceTree = "<group>"; };
 		45BC9BD01CE363D5000065B7 /* OTTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTextView.m; sourceTree = "<group>"; };
-		45CE5A531C5241AA00F68C24 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		45CE5A551C5241AA00F68C24 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		45CE5A531C5241AA00F68C24 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Strings/Localizable.strings; sourceTree = "<group>"; };
+		45CE5A551C5241AA00F68C24 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = XCAssets/Images.xcassets; sourceTree = "<group>"; };
 		45CE5A641C5242FC00F68C24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		45CE5A711C56961500F68C24 /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
@@ -675,22 +675,6 @@
 			name = Encounter;
 			sourceTree = "<group>";
 		};
-		45CE5A521C5241AA00F68C24 /* Strings */ = {
-			isa = PBXGroup;
-			children = (
-				45CE5A531C5241AA00F68C24 /* Localizable.strings */,
-			);
-			path = Strings;
-			sourceTree = "<group>";
-		};
-		45CE5A541C5241AA00F68C24 /* XCAssets */ = {
-			isa = PBXGroup;
-			children = (
-				45CE5A551C5241AA00F68C24 /* Images.xcassets */,
-			);
-			path = XCAssets;
-			sourceTree = "<group>";
-		};
 		45CE5A621C5242FC00F68C24 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,6 +697,21 @@
 				45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		45D6B82D1D109ABD00357FEF /* FeedItems Services */ = {
+			isa = PBXGroup;
+			children = (
+				45E37E511CEE1F7D005C3175 /* OTFeedsService.h */,
+				45E37E521CEE1F7D005C3175 /* OTFeedsService.m */,
+				0A94B5B41B94810800402AF3 /* OTTourService.h */,
+				0A94B5B51B94811A00402AF3 /* OTTourService.m */,
+				0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */,
+				0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */,
+				2EC77E4D1CEDE4BC0031BB67 /* OTEntourageService.h */,
+				2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */,
+			);
+			name = "FeedItems Services";
 			sourceTree = "<group>";
 		};
 		45F24A3E1CEDB1880003BF9E /* Entourage */ = {
@@ -791,31 +790,26 @@
 			name = Tour;
 			sourceTree = "<group>";
 		};
-		6B1A846E19E8110B0020FB93 /* Service */ = {
+		6B1A846E19E8110B0020FB93 /* WebService */ = {
 			isa = PBXGroup;
 			children = (
-				45E37E511CEE1F7D005C3175 /* OTFeedsService.h */,
-				45E37E521CEE1F7D005C3175 /* OTFeedsService.m */,
+				6B4930DC19A77C2F00DA7EE0 /* Manager */,
+				45D6B82D1D109ABD00357FEF /* FeedItems Services */,
 				1D962C6F19E9277D00547687 /* OTAuthService.h */,
 				1D962C7019E9277D00547687 /* OTAuthService.m */,
 				6B1A846F19E811210020FB93 /* OTPoiService.h */,
 				6B1A847019E811210020FB93 /* OTPoiService.m */,
-				0A94B5B41B94810800402AF3 /* OTTourService.h */,
-				0A94B5B51B94811A00402AF3 /* OTTourService.m */,
-				0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */,
-				0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */,
-				2EC77E4D1CEDE4BC0031BB67 /* OTEntourageService.h */,
-				2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */,
 			);
+			name = WebService;
 			path = Service;
 			sourceTree = "<group>";
 		};
 		6B4930C319A773C500DA7EE0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				45CE5A551C5241AA00F68C24 /* Images.xcassets */,
+				45CE5A531C5241AA00F68C24 /* Localizable.strings */,
 				45CE5A621C5242FC00F68C24 /* Storyboards */,
-				45CE5A521C5241AA00F68C24 /* Strings */,
-				45CE5A541C5241AA00F68C24 /* XCAssets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -831,8 +825,7 @@
 				6B4930E019A77DFE00DA7EE0 /* Model */,
 				A8E10FAB19E82A1500DF4A01 /* View */,
 				6B4930C719A773C500DA7EE0 /* Controller */,
-				6B1A846E19E8110B0020FB93 /* Service */,
-				6B4930DC19A77C2F00DA7EE0 /* Manager */,
+				6B1A846E19E8110B0020FB93 /* WebService */,
 				6BFE639519E7E85D00C661AB /* Utils */,
 				1DA682D519E7F130007BD4BC /* Helper */,
 			);
@@ -879,7 +872,8 @@
 				455940531C5D2E220099A8EE /* OTJSONResponseSerializer.h */,
 				455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */,
 			);
-			path = Manager;
+			name = Manager;
+			path = ../Manager;
 			sourceTree = "<group>";
 		};
 		6B4930E019A77DFE00DA7EE0 /* Model */ = {

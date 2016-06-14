@@ -90,7 +90,6 @@
                                                     }
                                                     [loggedNumbers addObject:self.phoneNumberServerRepresentation];
                                                     [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
-                                                    //[UIStoryboard showSWRevealController];
                                                     [self performSegueWithIdentifier:@"RightsSegue" sender:nil];
                                                     //TODO: put this back when the tutorial content is ready
                                                     //[self displayTutorial];
