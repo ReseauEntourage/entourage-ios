@@ -10,7 +10,6 @@
 #import "OTEntouragesViewController.h"
 #import "OTToursTableView.h"
 #import "OTFeedItemViewController.h"
-#import "OTPublicTourViewController.h"
 #import "OTQuitFeedItemViewController.h"
 #import "OTConfirmationViewController.h"
 #import "OTMainViewController.h"
@@ -123,13 +122,8 @@ typedef NS_ENUM(NSInteger){
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"UserProfileSegue"]) {
-        
-    } else if ([segue.identifier isEqualToString:@"OTPublicTourSegue"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        OTPublicTourViewController *controller = (OTPublicTourViewController *)navController.topViewController;
-        controller.tour = (OTTour*)sender;
-    } else if ([segue.identifier isEqualToString:@"OTSelectedTourSegue"]) {
+    //if ([segue.identifier isEqualToString:@"UserProfileSegue"])
+    if ([segue.identifier isEqualToString:@"OTSelectedTourSegue"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTFeedItemViewController *controller = (OTFeedItemViewController *)navController.topViewController;
         controller.feedItem = (OTFeedItem*)sender;
@@ -275,7 +269,7 @@ typedef NS_ENUM(NSInteger){
     }
     else  if ([tour.joinStatus isEqualToString:JOIN_PENDING])
     {
-        [self performSegueWithIdentifier:@"OTPublicTourSegue" sender:tour];
+        [self performSegueWithIdentifier:@"OTSelectedTourSegue" sender:tour];
     }
     else
     {

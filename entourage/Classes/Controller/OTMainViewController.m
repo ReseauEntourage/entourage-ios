@@ -16,7 +16,6 @@
 #import "OTTourOptionsViewController.h"
 #import "OTTourJoinRequestViewController.h"
 #import "OTFeedItemViewController.h"
-#import "OTPublicTourViewController.h"
 #import "OTQuitFeedItemViewController.h"
 #import "OTGuideViewController.h"
 #import "UIView+entourage.h"
@@ -1197,7 +1196,6 @@ typedef NS_ENUM(NSInteger) {
     SegueIDCreateMeeting,
     SegueIDConfirmation,
     SegueIDSelectedTour,
-    SegueIDPublicTour,
     SegueIDTourOptions,
     SegueIDMapOptions,
     SegueIDTourJoinRequest,
