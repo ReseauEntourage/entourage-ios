@@ -186,7 +186,7 @@ typedef NS_ENUM(unsigned) {
     [self.timelineButton setSelected:YES];
     [self.infoButton setSelected:NO];
     
-    self.chatToolbar.hidden = NO;//![self.feedItem isKindOfClass:[OTTour class]];
+    self.chatToolbar.hidden = ![stateHandler canChangeState];//![self.feedItem isKindOfClass:[OTTour class]];
 }
 
 - (IBAction)showInfo {
@@ -306,9 +306,7 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (void)setupMoreButtons {
-    
     if (IS_ACCEPTED) {
-    
         UIImage *plusImage = [[UIImage imageNamed:@"userPlus.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] init];
@@ -326,10 +324,8 @@ typedef NS_ENUM(unsigned) {
         [moreButton setAction:@selector(showOptions)];
         
         [self.navigationItem setRightBarButtonItems:@[moreButton]];
-        //[self.navigationItem setRightBarButtonItem:moreButton];
     } else {
         UIImage *shareImage = [[UIImage imageNamed:@"share.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
         UIBarButtonItem *joinButton = [[UIBarButtonItem alloc] init];
         [joinButton setImage:shareImage];
         [joinButton setTarget:self];
