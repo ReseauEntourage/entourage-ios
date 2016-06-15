@@ -109,40 +109,26 @@
 	self.location = location;
 }
 
-- (IBAction)sendEncounter:(id)sender {
-    [self postEncounterWithCompletionBlock:^(OTEncounter *encounter){
-        [self.encounters addObject:encounter];
-        [self.delegate encounterSent:encounter];
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
-}
-
-- (void)postEncounterWithCompletionBlock:(void (^)(OTEncounter *))success {
+- (IBAction)sendEncounter:(UIButton*)sender {
+    sender.enabled = NO;
     [SVProgressHUD show];
-    
-    OTEncounter *encounter = [OTEncounter new];
-	encounter.date = [NSDate date];
+    __block OTEncounter *encounter = [OTEncounter new];
+    encounter.date = [NSDate date];
     encounter.message = [self.messageTextView.text isEqualToString:PLACEHOLDER] ? @"" : self.messageTextView.text;
-	encounter.streetPersonName =  self.nameTextField.text;
-	encounter.latitude = self.location.latitude;
-	encounter.longitude = self.location.longitude;
-    
+    encounter.streetPersonName =  self.nameTextField.text;
+    encounter.latitude = self.location.latitude;
+    encounter.longitude = self.location.longitude;
     [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId
                                 withSuccess:^(OTEncounter *sentEncounter) {
                                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
-                                    if (success) {
-                                        success(encounter);
-                                    }
-                                    else
-                                    {
-                                        [self.delegate encounterSent:encounter];
-                                        [self.navigationController popViewControllerAnimated:YES];
-                                    }
-
+                                    [self.encounters addObject:encounter];
+                                    [self.delegate encounterSent:encounter];
+                                    [self.navigationController popViewControllerAnimated:YES];
                                 }
                                 failure:^(NSError *error) {
-                                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
-                                 }];
+                                    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
+                                    sender.enabled = YES;
+                                }];
 }
 
 /**************************************************************************************************/
