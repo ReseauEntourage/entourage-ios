@@ -620,20 +620,19 @@ static BOOL didGetAnyData = NO;
         
         if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20 && fabs(distance) > LOCATION_MIN_DISTANCE) {
             
-            if (self.locations.count > 0) {
-                CLLocationCoordinate2D coords[2];
-                coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
-                coords[1] = newLocation.coordinate;
-                
-                MKCoordinateRegion region = self.mapView.region;
-                region.center = newLocation.coordinate;
-                
-                if(!MKMapRectContainsPoint(self.mapView.visibleMapRect, MKMapPointForCoordinate(newLocation.coordinate)))
-                    self.mapView.centerCoordinate = newLocation.coordinate;
-                if (self.isTourRunning) {
-                    [self addTourPointFromLocation:newLocation];
-                    if (self.toursMapDelegate.isActive)
-                        [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
+            if (self.locations.count > 0 && self.isTourRunning) {
+                [self addTourPointFromLocation:newLocation];
+                if (self.toursMapDelegate.isActive) {
+                    // draw tour line
+                    CLLocationCoordinate2D coords[2];
+                    coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
+                    coords[1] = newLocation.coordinate;
+                    [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
+                    
+                    //recenter map because tour is ongoing
+                    MKCoordinateRegion region = self.mapView.region;
+                    region.center = newLocation.coordinate;
+                    [self.mapView setRegion:region animated:YES];
                 }
             }
             
@@ -663,7 +662,7 @@ static bool isShowingOptions = NO;
 
 - (void)createTour:(NSString*)tourType withVehicle:(NSString*)vehicleType {
     [self dismissViewControllerAnimated:NO completion:nil];
-    
+    [self zoomToCurrentLocation:nil];
     self.currentTourType = tourType;
     self.tour = [[OTTour alloc] initWithTourType:tourType
                                   andVehicleType:vehicleType];
