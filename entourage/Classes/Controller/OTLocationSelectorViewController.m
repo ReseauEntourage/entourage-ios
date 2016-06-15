@@ -14,12 +14,13 @@
 #import "OTLocationSearchTableViewController.h"
 #import "UIStoryboard+entourage.h"
 #import "OTEntourageCreatorViewController.h"
+#import "OTLocationManager.h"
+#import "NSNotification+entourage.h"
 
 #define SEARCHBAR_FRAME CGRectMake(16, 80, [UIScreen mainScreen].bounds.size.width-32, 48)
 
-@interface OTLocationSelectorViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface OTLocationSelectorViewController () <MKMapViewDelegate>
 
-@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
@@ -39,25 +40,6 @@
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     [self.footerToolbar setupDefault];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
-    
-    
-    self.locationManager = [CLLocationManager new];
-    //iOS 8+
-    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        [self.locationManager requestAlwaysAuthorization];
-    }
-    //iOS 9+
-    if ([self.locationManager respondsToSelector:@selector(allowsBackgroundLocationUpdates)]) {
-        self.locationManager.allowsBackgroundLocationUpdates = YES;
-    }
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.activityType = CLActivityTypeFitness;
-    
-    self.locationManager.distanceFilter = 5; // meters
-    
-    [self.locationManager startUpdatingLocation];
-
     
     self.locationSearchTable = [[UIStoryboard entourageCreatorStoryboard] instantiateViewControllerWithIdentifier:@"OTLocationSearchTableViewController"];
     self.resultSearchController = [[UISearchController alloc] initWithSearchResultsController:self.locationSearchTable];
@@ -86,6 +68,11 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [self zoomToCurrentLocation:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationLocationUpdated object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,30 +87,27 @@
     }
 }
 
-#pragma mark - CLLocationManagerDelegate
+#pragma mark - Location notifications
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-{
-    if (locations.count) {
-        CLLocation *location = locations.firstObject;
+- (void)locationUpdated:(NSNotification *)notification {
+    NSArray *locations = [notification readLocations];
+    if(!locations.count)
+        return;
+    
+    CLLocation *location = locations.firstObject;
+    if (!self.activityIndicator.isHidden) {
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil];
         
-        if (!self.activityIndicator.isHidden) {
-            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil];
-            
-            [self.mapView removeAnnotations:self.mapView.annotations];
-            MKPointAnnotation *annotation = [MKPointAnnotation new];
-            annotation.coordinate = placemark.coordinate;
-            annotation.title = placemark.name;
-            [self.mapView addAnnotation:annotation];
-            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( location.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
-            [self.mapView setRegion:region animated:YES];
-            [self.activityIndicator stopAnimating];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowCurrentLocation object:nil];
-            
-            [self updateSelectedLocation:location];
-
-        }
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        MKPointAnnotation *annotation = [MKPointAnnotation new];
+        annotation.coordinate = placemark.coordinate;
+        annotation.title = placemark.name;
+        [self.mapView addAnnotation:annotation];
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( location.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+        [self.mapView setRegion:region animated:YES];
+        [self.activityIndicator stopAnimating];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowCurrentLocation object:nil];
+        [self updateSelectedLocation:location];
     }
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreLocation/CLLocationManager.h>
 
 #import "OTMainViewController.h"
 
@@ -19,8 +18,6 @@
 @property (nonatomic) BOOL isActive;
 
 - (instancetype)initWithMapController:(OTMainViewController *)mapController;
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;
 
 - (CLLocationDistance)mapHeight:(MKMapView *)mapView;
 

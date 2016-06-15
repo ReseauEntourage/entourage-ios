@@ -7,16 +7,13 @@
 //
 
 #import "OTRightsViewController.h"
-#import <CoreLocation/CoreLocation.h>
 #import "OTConsts.h"
 
 // Util
 #import "UIStoryboard+entourage.h"
 
+@interface OTRightsViewController ()
 
-@interface OTRightsViewController () <CLLocationManagerDelegate>
-
-@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *explanationLabel;
@@ -30,8 +27,6 @@
     // Do any additional setup after loading the view.
     
     [self setElementsHidden:YES];
-    // prompt the user for location usage
-    [self promptUserForLocationUsage];
 
     // register for push notifications
     //[self promptUserForPushNotifications];
@@ -39,13 +34,11 @@
                                              selector:@selector(showMainStorybord)
                                                  name:kNotificationPushStatusChanged
                                                object:nil];
-    
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -53,15 +46,6 @@
 }
 
 #pragma mark - Private
-
-- (void)promptUserForLocationUsage {
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        [self.locationManager requestAlwaysAuthorization];
-    }
-    [self.locationManager startUpdatingLocation];
-}
 
 - (void)promptUserForPushNotifications {
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
@@ -79,35 +63,6 @@
 - (void)showMainStorybord {
     NSLog(@"received kNotificationPushStatusChanged");
     [UIStoryboard showSWRevealController];
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-#pragma mark - CLLocationMangerDelegate
-
-static BOOL shouldShowInfo = YES;
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    
-    if (status == kCLAuthorizationStatusNotDetermined) {
-        return;
-    }
-    
-    if (status == kCLAuthorizationStatusDenied) {
-        shouldShowInfo = YES;
-        [self setElementsHidden:NO];
-        
-    } else {
-        [self promptUserForPushNotifications];
-    }
 }
 
 @end

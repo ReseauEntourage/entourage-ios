@@ -41,6 +41,8 @@
 		1E31748B1D101BB600027824 /* OTTourFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E31748A1D101BB600027824 /* OTTourFactory.m */; };
 		1E31748E1D101BC800027824 /* OTEntourageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E31748D1D101BC800027824 /* OTEntourageFactory.m */; };
 		1E3174911D10299400027824 /* QuitFeedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E3174901D10299400027824 /* QuitFeedItem.storyboard */; };
+		1E71E6501D107E1C001F3777 /* OTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E71E64F1D107E1C001F3777 /* OTLocationManager.m */; };
+		1E71E6531D108790001F3777 /* NSNotification+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E71E6521D108790001F3777 /* NSNotification+entourage.m */; };
 		2E5B0EBC1CF0603D0078454F /* OTEntourageFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EBB1CF0603D0078454F /* OTEntourageFilter.m */; };
 		2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EBF1CF06CE50078454F /* OTFilterRadioButton.m */; };
 		2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EC21CF070DD0078454F /* OTFilterCellTableViewCell.m */; };
@@ -237,6 +239,10 @@
 		1E31748D1D101BC800027824 /* OTEntourageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageFactory.m; sourceTree = "<group>"; };
 		1E31748F1D101D7800027824 /* OTFeedItemFactoryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemFactoryDelegate.h; sourceTree = "<group>"; };
 		1E3174901D10299400027824 /* QuitFeedItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QuitFeedItem.storyboard; sourceTree = "<group>"; };
+		1E71E64E1D107E1C001F3777 /* OTLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLocationManager.h; sourceTree = "<group>"; };
+		1E71E64F1D107E1C001F3777 /* OTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLocationManager.m; sourceTree = "<group>"; };
+		1E71E6511D108790001F3777 /* NSNotification+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotification+entourage.h"; sourceTree = "<group>"; };
+		1E71E6521D108790001F3777 /* NSNotification+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotification+entourage.m"; sourceTree = "<group>"; };
 		2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E5B0EBA1CF0603D0078454F /* OTEntourageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFilter.h; sourceTree = "<group>"; };
 		2E5B0EBB1CF0603D0078454F /* OTEntourageFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageFilter.m; sourceTree = "<group>"; };
@@ -566,6 +572,15 @@
 			path = Tour;
 			sourceTree = "<group>";
 		};
+		1E71E64D1D107E08001F3777 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				1E71E64E1D107E1C001F3777 /* OTLocationManager.h */,
+				1E71E64F1D107E1C001F3777 /* OTLocationManager.m */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		2E5B0EBD1CF06CCA0078454F /* Filter */ = {
 			isa = PBXGroup;
 			children = (
@@ -868,6 +883,7 @@
 		6B4930C419A773C500DA7EE0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1E71E64D1D107E08001F3777 /* Location */,
 				1E3174791D10150000027824 /* FeedItem */,
 				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
 				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
@@ -1043,6 +1059,8 @@
 				4525EB361CA5DFE1006784E6 /* NSBundle+entourage.m */,
 				45F039321D0EBDB6005ABE90 /* UIImage+entourage.h */,
 				45F039331D0EBDB6005ABE90 /* UIImage+entourage.m */,
+				1E71E6511D108790001F3777 /* NSNotification+entourage.h */,
+				1E71E6521D108790001F3777 /* NSNotification+entourage.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1390,6 +1408,7 @@
 				1E3174881D1019B700027824 /* OTEntourageStateFactory.m in Sources */,
 				45391A031CEBA89100C93908 /* OTEntourageAnnotation.m in Sources */,
 				456ABD801CA18416004A81D6 /* UILabel+entourage.m in Sources */,
+				1E71E6501D107E1C001F3777 /* OTLocationManager.m in Sources */,
 				0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */,
 				DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */,
 				45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */,
@@ -1464,6 +1483,7 @@
 				454C8F501C4F4C45001362B2 /* UITextField+indentation.m in Sources */,
 				4536FC5E1CC64E55000BF620 /* OTSpeechKitManager.m in Sources */,
 				1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */,
+				1E71E6531D108790001F3777 /* NSNotification+entourage.m in Sources */,
 				6B92CAAE19A7461C004E8C9B /* main.m in Sources */,
 				4508AE311C7F924B00EDAC1B /* OTTourOptionsViewController.m in Sources */,
 				45BC9BD11CE363D5000065B7 /* OTTextView.m in Sources */,

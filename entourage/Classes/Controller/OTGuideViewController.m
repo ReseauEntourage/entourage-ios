@@ -26,11 +26,12 @@
 
 // Service
 #import "OTPoiService.h"
+#import "OTLocationManager.h"
+#import "NSNotification+entourage.h"
 
 // Framework
 #import <MapKit/MapKit.h>
 #import <MapKit/MKMapView.h>
-#import <CoreLocation/CoreLocation.h>
 #import <WYPopoverController/WYPopoverController.h>
 #import <kingpin/kingpin.h>
 
@@ -40,7 +41,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate, OTOptionsDelegate>
+@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, OTOptionsDelegate>
 
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffectView;
 
@@ -48,7 +49,6 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic)CLLocationCoordinate2D currentMapCenter;
 
 // markers
@@ -78,12 +78,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _locationManager = [[CLLocationManager alloc] init];
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
-    [self.locationManager startUpdatingLocation];
-    
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
@@ -97,7 +91,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self startLocationUpdates];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationLocationUpdated object:nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -268,26 +266,11 @@
     }
 }
 
-- (void)startLocationUpdates {
-    if (self.locationManager == nil) {
-        self.locationManager = [[CLLocationManager alloc] init];
-    }
-    
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.activityType = CLActivityTypeFitness;
-    
-    self.locationManager.distanceFilter = 5;
-    
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+- (void)locationUpdated:(NSNotification *)notification {
+    NSArray *locations = [notification readLocations];
     for (CLLocation *newLocation in locations) {
-        
         NSDate *eventDate = newLocation.timestamp;
         NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-        
         if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20) {
             MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500);
             [self.mapView setRegion:region animated:YES];

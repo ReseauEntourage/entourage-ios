@@ -18,11 +18,6 @@
     return self;
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    
-}
-
 - (CLLocationDistance)mapHeight:(MKMapView *)mapView {
     MKMapPoint mpTopRight = MKMapPointMake(mapView.visibleMapRect.origin.x + mapView.visibleMapRect.size.width,
                                            mapView.visibleMapRect.origin.y);

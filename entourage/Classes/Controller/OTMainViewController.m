@@ -76,6 +76,9 @@
 #import "NSUserDefaults+OT.h"
 #import "NSDictionary+Parsing.h"
 
+#import "OTLocationManager.h"
+#import "NSNotification+entourage.h"
+
 #define MAPVIEW_HEIGHT 160.f
 
 #define MIN_ENTOURAGE_HEATZONE 500.0f // m
@@ -97,7 +100,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourJoinRequestDelegate, OTOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
+@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourJoinRequestDelegate, OTOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
@@ -121,7 +124,6 @@
 
 // tour
 @property (nonatomic, assign) CGPoint mapPoint;
-@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray *locations;
 @property (nonatomic, strong) NSMutableArray *pointsToSend;
 @property (nonatomic, strong) NSMutableArray *closeTours;
@@ -174,7 +176,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFilters) name:@kNotificationShowFilters object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
     
-    
     self.mapView = [[MKMapView alloc] init];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.toursDelegate = self;
@@ -201,7 +202,7 @@
         self.stopButton.hidden = YES;
         self.createEncounterButton.hidden = YES;
     }
-    [self startLocationUpdates];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
 }
 
 - (void)dealloc {
@@ -344,13 +345,13 @@
     if (self.isTourRunning) {
         [self createLocalNotificationForTour:self.tour.uid];
     } else {
-        [self.locationManager stopUpdatingLocation];
+        //[self.locationManager stopUpdatingLocation];
     }
 }
 
 - (void)appWillEnterForeground:(NSNotification*)note {
     NSLog(@"<<<<<<<<<<<<<<<<<<<<< APP COMES FOREGROUND!!!");
-    [self.locationManager startUpdatingLocation];
+    //[self.locationManager startUpdatingLocation];
 }
 
 - (void)showEntourages {
@@ -611,39 +612,11 @@ static BOOL didGetAnyData = NO;
 }
 
 /********************************************************************************/
-#pragma mark - Location Manager
+#pragma mark - Location updates
 
-- (void)startLocationUpdates {
-    if (self.locationManager == nil) {
-        self.locationManager = [[CLLocationManager alloc] init];
-        //iOS 8+
-        if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-            [self.locationManager requestAlwaysAuthorization];
-        }
-        //iOS 9+
-        if ([self.locationManager respondsToSelector:@selector(allowsBackgroundLocationUpdates)]) {
-            self.locationManager.allowsBackgroundLocationUpdates = YES;
-        }
-    }
-    
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.activityType = CLActivityTypeFitness;
-    
-    self.locationManager.distanceFilter = 5; // meters
-    
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+- (void)locationUpdated:(NSNotification *)notification {
+    NSArray *locations = [notification readLocations];
     for (CLLocation *newLocation in locations) {
-        
-        //Negative accuracy means invalid coordinates
-        if (newLocation.horizontalAccuracy < 0) {
-            continue;
-        }
-        NSLog(@"------- (%.6f, %.6f)", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
-        
         NSDate *eventDate = newLocation.timestamp;
         NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
         
@@ -662,13 +635,13 @@ static BOOL didGetAnyData = NO;
                 
                 MKCoordinateRegion region = self.mapView.region;
                 region.center = newLocation.coordinate;
-                //[self.mapView setRegion:region animated:YES];
                 
+                if(!MKMapRectContainsPoint(self.mapView.visibleMapRect, MKMapPointForCoordinate(newLocation.coordinate)))
+                    self.mapView.centerCoordinate = newLocation.coordinate;
                 if (self.isTourRunning) {
                     [self addTourPointFromLocation:newLocation];
-                    if (self.toursMapDelegate.isActive) {
+                    if (self.toursMapDelegate.isActive)
                         [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
-                    }
                 }
             }
             
