@@ -84,40 +84,6 @@
 
 }
 
-- (void)setupWithTimeAndLocationOfTour:(OTTour *)tour {
-    
-    // dateString - location
-    NSString *dateString = nil;
-    if (tour.creationDate != nil) {
-        TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
-        timeIntervalFormatter.usesIdiomaticDeicticExpressions = NO;
-        NSLocale *frLocale = [NSLocale localeWithLocaleIdentifier:@"fr"];
-        [timeIntervalFormatter setLocale:frLocale];
-        
-        NSTimeInterval timeInterval = [tour.creationDate timeIntervalSinceDate:[NSDate date]];
-        //[timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
-        dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
-        self.text = dateString;
-    }
-    OTTourPoint *startPoint = tour.tourPoints.firstObject;
-    CLLocation *loc =  [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"error: %@", error.description);
-        }
-        CLPlacemark *placemark = placemarks.firstObject;
-        if (placemark.locality !=  nil) {
-            if (dateString != nil) {
-                self.text = [NSString stringWithFormat:@"%@ - %@", dateString, placemark.locality];
-            } else {
-                self.text = placemark.locality;
-            }
-        }
-    }];
-
-}
-
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {
     self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:[feedItem newsfeedStatus]];
     

@@ -121,7 +121,6 @@
     mapView.center = headerView.center;
         
     self.tableHeaderView = headerView;
-    //self.toursDelegate = self;
 }
 
 
@@ -216,13 +215,10 @@
         [typeByNameLabel setupWithTypeAndAuthorOfTour:tour];
         
         // dateString - location
-        //[timeLocationLabel setupWithTimeAndLocationOfTour:tour];
         OTTourPoint *startPoint = tour.tourPoints.firstObject;
         CLLocation *startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
         [timeLocationLabel setupWithTime:tour.creationDate andLocation:startPointLocation];
 
-        
-       
         [userProfileImageButton setupAsProfilePictureFromUrl:tour.author.avatarUrl];
         
         noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];

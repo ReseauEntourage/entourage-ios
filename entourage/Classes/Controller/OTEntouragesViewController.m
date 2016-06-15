@@ -35,8 +35,6 @@
 typedef NS_ENUM(NSInteger){
     EntourageStatusActive,
     EntourageStatusClosed
-    //EntourageStatusFreezed
-    
 } EntourageStatus;
 
 /**************************************************************************************************/
