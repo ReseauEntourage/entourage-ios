@@ -31,13 +31,12 @@
 #import "UIStoryboard+entourage.h"
 #import "UIStoryboard+entourage.h"
 #import "OTMainViewController.h"
+#import "OTLocationManager.h"
 
 // Helper
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
 #import "NSDictionary+Parsing.h"
-
-#import "OTLocationManager.h"
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
@@ -101,10 +100,11 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
                                                  name:[kLoginFailureNotification copy]
                                                object:nil];
     
-    if (![[NSUserDefaults standardUserDefaults] currentUser])
+    if ([[NSUserDefaults standardUserDefaults] currentUser])
+        [[OTLocationManager sharedInstance] startLocationUpdates];
+    else
     {
         self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-                    
         [UIStoryboard showStartup];
     }
     
@@ -119,8 +119,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     
     //[[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
     //[[AFNetworkActivityLogger sharedLogger] startLogging];
-    
-    [[OTLocationManager sharedInstance] startLocationUpdates];
     
 	return YES;
 }

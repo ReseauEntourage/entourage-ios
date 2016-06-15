@@ -11,6 +11,8 @@
 
 // Util
 #import "UIStoryboard+entourage.h"
+#import "OTLocationManager.h"
+#import "NSNotification+entourage.h"
 
 @interface OTRightsViewController ()
 
@@ -28,12 +30,14 @@
     
     [self setElementsHidden:YES];
 
-    // register for push notifications
-    //[self promptUserForPushNotifications];
+    // prompt the user for location usage
+    [self promptUserForLocationUsage];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(showMainStorybord)
                                                  name:kNotificationPushStatusChanged
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationAuthorizationChanged:) name:kNotificationLocationAuthorizationChanged object:nil];
 }
 
 - (void)dealloc {
@@ -46,6 +50,10 @@
 }
 
 #pragma mark - Private
+
+- (void)promptUserForLocationUsage {
+    [[OTLocationManager sharedInstance] startLocationUpdates];
+}
 
 - (void)promptUserForPushNotifications {
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
@@ -63,6 +71,16 @@
 - (void)showMainStorybord {
     NSLog(@"received kNotificationPushStatusChanged");
     [UIStoryboard showSWRevealController];
+}
+
+#pragma mark - Location notifications
+
+- (void)locationAuthorizationChanged:(NSNotification *)notification {
+    BOOL allowed = [notification readAuthorizationAllowed];
+    if(allowed)
+        [self promptUserForPushNotifications];
+    else
+        [self setElementsHidden:NO];
 }
 
 @end

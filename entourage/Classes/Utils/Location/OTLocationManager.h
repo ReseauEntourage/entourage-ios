@@ -11,6 +11,9 @@
 #define kNotificationLocationUpdated @"NotificationLocationUpdated"
 #define kNotificationLocationUpdatedInfoKey @"NotificationLocationUpdatedInfoKey"
 
+#define kNotificationLocationAuthorizationChanged @"NotificationLocationAuthorizationChanged"
+#define kNotificationLocationAuthorizationChangedKey @"NotificationLocationAuthorizationChangedKey"
+
 @interface OTLocationManager : NSObject
 
 +(OTLocationManager *)sharedInstance;

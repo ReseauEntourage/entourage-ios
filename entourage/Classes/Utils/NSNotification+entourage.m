@@ -15,4 +15,8 @@
     return [self.userInfo objectForKey:kNotificationLocationUpdatedInfoKey];
 }
 
+- (BOOL)readAuthorizationAllowed {
+    return [(NSNumber *)[self.userInfo objectForKey:kNotificationLocationAuthorizationChangedKey] boolValue];
+}
+
 @end

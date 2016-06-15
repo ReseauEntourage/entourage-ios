@@ -49,6 +49,8 @@
     [self.locationManager startUpdatingLocation];
 }
 
+#pragma mark - CLLocationManagerDelegate
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     NSPredicate *filter = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         CLLocation *item = (CLLocation *)evaluatedObject;
@@ -57,5 +59,14 @@
     NSDictionary *info = @{ kNotificationLocationUpdatedInfoKey: [locations filteredArrayUsingPredicate:filter] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationUpdated object:self userInfo:info];
 }
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == kCLAuthorizationStatusNotDetermined)
+        return;
+    
+    NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:(status == kCLAuthorizationStatusAuthorizedAlways)] };
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationAuthorizationChanged object:self userInfo:info];
+}
+
 
 @end
