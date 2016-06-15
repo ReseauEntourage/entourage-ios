@@ -16,7 +16,6 @@
 #import "OTTourOptionsViewController.h"
 #import "OTTourJoinRequestViewController.h"
 #import "OTFeedItemViewController.h"
-#import "OTPublicTourViewController.h"
 #import "OTQuitFeedItemViewController.h"
 #import "OTGuideViewController.h"
 #import "UIView+entourage.h"
@@ -41,7 +40,7 @@
 
 // View
 #import "SVProgressHUD.h"
-#import "OTToursTableView.h"
+#import "OTFeedItemsTableView.h"
 #import "OTToolbar.h"
 
 // Model
@@ -87,27 +86,21 @@
 #define TOURS_REQUEST_DISTANCE_KM 10
 #define LOCATION_MIN_DISTANCE 5.f //m
 
-#define TABLEVIEW_FOOTER_HEIGHT 15.0f
-#define TABLEVIEW_BOTTOM_INSET 86.0f
-
-
 #define LONGPRESS_DELTA 65.0f
 #define MAX_DISTANCE 250.0 //meters
-
-#define CENTER_MAP_FRAME CGRectMake(8.0f, 8.0f, 30.0f, 30.0f)
 
 
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourJoinRequestDelegate, OTOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
+@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourJoinRequestDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
 // map
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *mapSegmentedControl;
-@property (nonatomic, weak) IBOutlet OTToursTableView *tableView;
+@property (nonatomic, weak) IBOutlet OTFeedItemsTableView *tableView;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic) CLLocationCoordinate2D encounterLocation;
@@ -138,7 +131,6 @@
 @property (nonatomic, strong) NSMutableArray *feeds;
 
 // tours
-@property (nonatomic, strong) OTToursTableView *toursTableView;
 @property (nonatomic) CLLocationCoordinate2D requestedToursCoordinate;
 @property (nonatomic, strong) NSTimer *refreshTimer;
 
@@ -178,7 +170,7 @@
     
     self.mapView = [[MKMapView alloc] init];
     [self.tableView configureWithMapView:self.mapView];
-    self.tableView.toursDelegate = self;
+    self.tableView.feedItemsDelegate = self;
     [self configureMapView];
     
     self.mapSegmentedControl.layer.cornerRadius = 5;
@@ -341,7 +333,7 @@
 
 - (void)appWillEnterBackground:(NSNotification*)note {
     NSLog(@">>>>>>>>>>>>>>>>>>>>> APP ENTERS BACKGROUND!!!");
-     [self.refreshTimer invalidate];
+    [self.refreshTimer invalidate];
     if (self.isTourRunning) {
         [self createLocalNotificationForTour:self.tour.uid];
     } else {
@@ -1170,7 +1162,6 @@ typedef NS_ENUM(NSInteger) {
     SegueIDCreateMeeting,
     SegueIDConfirmation,
     SegueIDSelectedTour,
-    SegueIDPublicTour,
     SegueIDTourOptions,
     SegueIDMapOptions,
     SegueIDTourJoinRequest,

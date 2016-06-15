@@ -9,7 +9,7 @@
         <!--Navigation Controller-->
         <scene sceneID="rV2-bR-xMf">
             <objects>
-                <navigationController id="69R-LH-AoF" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavGuideViewController" id="69R-LH-AoF" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tng-qi-Ztp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -25,7 +25,7 @@
         <!--Guide View Controller-->
         <scene sceneID="cCl-FF-sHF">
             <objects>
-                <viewController id="p8v-jb-uzQ" customClass="OTGuideViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTGuideViewController" id="p8v-jb-uzQ" customClass="OTGuideViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Mg-f0-gGB"/>
                         <viewControllerLayoutGuide type="bottom" id="juE-RS-22d"/>
@@ -129,7 +129,7 @@
                 <viewControllerPlaceholder storyboardName="Entourages" id="UaW-eY-xg6" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DkI-cr-6wu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2228.5" y="-1556"/>
+            <point key="canvasLocation" x="2225.5" y="-1556"/>
         </scene>
         <!--OTMapView-->
         <scene sceneID="mBw-PB-iJd">
@@ -139,7 +139,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFf-ME-AKo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2195.5" y="-1455"/>
+            <point key="canvasLocation" x="2227" y="-1436"/>
         </scene>
         <!--MapOptions-->
         <scene sceneID="Zyc-6d-g2y">
@@ -149,7 +149,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qq2-Oy-mRE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2207" y="-1247"/>
+            <point key="canvasLocation" x="2228" y="-1284"/>
         </scene>
         <!--TourOptions-->
         <scene sceneID="LZo-dm-P82">
@@ -157,12 +157,12 @@
                 <viewControllerPlaceholder storyboardName="TourOptions" id="I9u-Zg-Ouj" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pQM-of-i8z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2178.5" y="-1175"/>
+            <point key="canvasLocation" x="2228.5" y="-1173"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DE5-7B-nBY">
             <objects>
-                <navigationController id="ar7-tr-3dW" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavGuideDetailsViewController" id="ar7-tr-3dW" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QDv-s5-Rca">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -173,12 +173,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y6p-QR-pX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1677" y="-666"/>
+            <point key="canvasLocation" x="1792" y="-666"/>
         </scene>
         <!--GUIDE DE SOLIDARITE-->
         <scene sceneID="LoE-Tt-veI">
             <objects>
-                <viewController id="mWl-3f-MlG" customClass="OTGuideDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTGuideDetailsViewController" id="mWl-3f-MlG" customClass="OTGuideDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4tM-3T-kBf"/>
                         <viewControllerLayoutGuide type="bottom" id="Ml6-QU-mfT"/>
@@ -327,11 +327,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZIn-gW-OXV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2124" y="-666"/>
+            <point key="canvasLocation" x="2257" y="-666"/>
         </scene>
     </scenes>
     <resources>
-        <image name="center-location.png" width="22" height="22"/>
+        <image name="center-location.png" width="48" height="48"/>
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>

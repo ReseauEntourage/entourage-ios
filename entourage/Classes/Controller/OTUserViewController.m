@@ -271,7 +271,6 @@ typedef NS_ENUM(NSInteger) {
     UILabel *nameLabel = [cell viewWithTag:SUMMARY_NAME];
     nameLabel.text = self.user.displayName;
     
-    //TODO: ask Vincent for role, joinDate, and address
     UILabel *roleLabel = [cell viewWithTag:SUMMARY_ROLE];
     roleLabel.text = @"";//self.currentUser.role;
     

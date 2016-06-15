@@ -50,7 +50,7 @@
 		2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7064F01CB273AE0034C55A /* OTMapOptionsViewController.m */; };
 		2EC77E4F1CEDE4BC0031BB67 /* OTEntourageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */; };
 		2EDA5F031CB3F84300849172 /* OTGuideDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */; };
-		2EDA5F071CB50CEE00849172 /* OTToursTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F061CB50CEE00849172 /* OTToursTableView.m */; };
+		2EDA5F071CB50CEE00849172 /* OTFeedItemsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F061CB50CEE00849172 /* OTFeedItemsTableView.m */; };
 		2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */; };
 		2EDA5F0E1CB67FFE00849172 /* OTToursMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F0D1CB67FFE00849172 /* OTToursMapDelegate.m */; };
 		2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F101CB68BE200849172 /* OTGuideMapDelegate.m */; };
@@ -89,7 +89,6 @@
 		4551708C1CF0D54100962369 /* OTFeedItemInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4551708B1CF0D54100962369 /* OTFeedItemInfoView.m */; };
 		455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */; };
 		4559405E1C5F6D480099A8EE /* OTRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4559405D1C5F6D480099A8EE /* OTRequestOperationManager.m */; };
-		456ABD7D1CA15F2D004A81D6 /* OTPublicTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ABD7C1CA15F2D004A81D6 /* OTPublicTourViewController.m */; };
 		456ABD801CA18416004A81D6 /* UILabel+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ABD7F1CA18416004A81D6 /* UILabel+entourage.m */; };
 		456ABD831CA18DB5004A81D6 /* UIButton+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ABD821CA18DB5004A81D6 /* UIButton+entourage.m */; };
 		45ADCACF1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADCACE1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m */; };
@@ -97,16 +96,6 @@
 		45BC9BC91CE26E83000065B7 /* OTEntourageCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BC9BC81CE26E83000065B7 /* OTEntourageCreatorViewController.m */; };
 		45BC9BCE1CE32AE1000065B7 /* EntourageCreator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45BC9BCD1CE32AE1000065B7 /* EntourageCreator.storyboard */; };
 		45BC9BD11CE363D5000065B7 /* OTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BC9BD01CE363D5000065B7 /* OTTextView.m */; };
-		45CE5A561C5241AA00F68C24 /* Blokletters-Balpen.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A481C5241AA00F68C24 /* Blokletters-Balpen.ttf */; };
-		45CE5A571C5241AA00F68C24 /* Calibri-Bold-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A491C5241AA00F68C24 /* Calibri-Bold-Italic.ttf */; };
-		45CE5A581C5241AA00F68C24 /* Calibri-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A4A1C5241AA00F68C24 /* Calibri-Bold.ttf */; };
-		45CE5A591C5241AA00F68C24 /* Calibri-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A4B1C5241AA00F68C24 /* Calibri-Italic.ttf */; };
-		45CE5A5A1C5241AA00F68C24 /* Calibri.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A4C1C5241AA00F68C24 /* Calibri.ttf */; };
-		45CE5A5B1C5241AA00F68C24 /* MankSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A4D1C5241AA00F68C24 /* MankSans-Medium.ttf */; };
-		45CE5A5C1C5241AA00F68C24 /* MankSans-MediumOblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A4E1C5241AA00F68C24 /* MankSans-MediumOblique.ttf */; };
-		45CE5A5D1C5241AA00F68C24 /* MankSans-Oblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A4F1C5241AA00F68C24 /* MankSans-Oblique.ttf */; };
-		45CE5A5E1C5241AA00F68C24 /* MankSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A501C5241AA00F68C24 /* MankSans.ttf */; };
-		45CE5A5F1C5241AA00F68C24 /* Sofia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A511C5241AA00F68C24 /* Sofia-Regular.otf */; };
 		45CE5A601C5241AA00F68C24 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A531C5241AA00F68C24 /* Localizable.strings */; };
 		45CE5A611C5241AA00F68C24 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A551C5241AA00F68C24 /* Images.xcassets */; };
 		45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A631C5242FC00F68C24 /* Main.storyboard */; };
@@ -158,7 +147,6 @@
 		DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD519E85EA400FA218E /* OTMyMeetingsViewController.m */; };
 		DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */; };
 		DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF3619E7DCCA00031144 /* UIViewController+menu.m */; };
-		DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9EF5019E7EFA200031144 /* UIFont+entourage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,8 +245,8 @@
 		2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageService.m; sourceTree = "<group>"; };
 		2EDA5F011CB3F84300849172 /* OTGuideDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGuideDetailsViewController.h; sourceTree = "<group>"; };
 		2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGuideDetailsViewController.m; sourceTree = "<group>"; };
-		2EDA5F051CB50CEE00849172 /* OTToursTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToursTableView.h; sourceTree = "<group>"; };
-		2EDA5F061CB50CEE00849172 /* OTToursTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTToursTableView.m; sourceTree = "<group>"; };
+		2EDA5F051CB50CEE00849172 /* OTFeedItemsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemsTableView.h; sourceTree = "<group>"; };
+		2EDA5F061CB50CEE00849172 /* OTFeedItemsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemsTableView.m; sourceTree = "<group>"; };
 		2EDA5F081CB67F3500849172 /* OTBaseMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTBaseMapDelegate.h; sourceTree = "<group>"; };
 		2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTBaseMapDelegate.m; sourceTree = "<group>"; };
 		2EDA5F0C1CB67FFE00849172 /* OTToursMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToursMapDelegate.h; sourceTree = "<group>"; };
@@ -324,8 +312,6 @@
 		455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTJSONResponseSerializer.m; sourceTree = "<group>"; };
 		4559405C1C5F6D480099A8EE /* OTRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRequestOperationManager.h; sourceTree = "<group>"; };
 		4559405D1C5F6D480099A8EE /* OTRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRequestOperationManager.m; sourceTree = "<group>"; };
-		456ABD7B1CA15F2D004A81D6 /* OTPublicTourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPublicTourViewController.h; sourceTree = "<group>"; };
-		456ABD7C1CA15F2D004A81D6 /* OTPublicTourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPublicTourViewController.m; sourceTree = "<group>"; };
 		456ABD7E1CA18416004A81D6 /* UILabel+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+entourage.h"; sourceTree = "<group>"; };
 		456ABD7F1CA18416004A81D6 /* UILabel+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+entourage.m"; sourceTree = "<group>"; };
 		456ABD811CA18DB5004A81D6 /* UIButton+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+entourage.h"; sourceTree = "<group>"; };
@@ -339,18 +325,8 @@
 		45BC9BCD1CE32AE1000065B7 /* EntourageCreator.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EntourageCreator.storyboard; sourceTree = "<group>"; };
 		45BC9BCF1CE363D5000065B7 /* OTTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTextView.h; sourceTree = "<group>"; };
 		45BC9BD01CE363D5000065B7 /* OTTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTextView.m; sourceTree = "<group>"; };
-		45CE5A481C5241AA00F68C24 /* Blokletters-Balpen.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blokletters-Balpen.ttf"; sourceTree = "<group>"; };
-		45CE5A491C5241AA00F68C24 /* Calibri-Bold-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Bold-Italic.ttf"; sourceTree = "<group>"; };
-		45CE5A4A1C5241AA00F68C24 /* Calibri-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Bold.ttf"; sourceTree = "<group>"; };
-		45CE5A4B1C5241AA00F68C24 /* Calibri-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Italic.ttf"; sourceTree = "<group>"; };
-		45CE5A4C1C5241AA00F68C24 /* Calibri.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Calibri.ttf; sourceTree = "<group>"; };
-		45CE5A4D1C5241AA00F68C24 /* MankSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MankSans-Medium.ttf"; sourceTree = "<group>"; };
-		45CE5A4E1C5241AA00F68C24 /* MankSans-MediumOblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MankSans-MediumOblique.ttf"; sourceTree = "<group>"; };
-		45CE5A4F1C5241AA00F68C24 /* MankSans-Oblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MankSans-Oblique.ttf"; sourceTree = "<group>"; };
-		45CE5A501C5241AA00F68C24 /* MankSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MankSans.ttf; sourceTree = "<group>"; };
-		45CE5A511C5241AA00F68C24 /* Sofia-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sofia-Regular.otf"; sourceTree = "<group>"; };
-		45CE5A531C5241AA00F68C24 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		45CE5A551C5241AA00F68C24 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		45CE5A531C5241AA00F68C24 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Strings/Localizable.strings; sourceTree = "<group>"; };
+		45CE5A551C5241AA00F68C24 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = XCAssets/Images.xcassets; sourceTree = "<group>"; };
 		45CE5A641C5242FC00F68C24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		45CE5A711C56961500F68C24 /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
@@ -370,7 +346,6 @@
 		45E6FE121CAE42E700505660 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourConfirmation.storyboard; sourceTree = "<group>"; };
 		45E6FE141CAE44EA00505660 /* OTUserEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUserEditViewController.h; sourceTree = "<group>"; };
 		45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUserEditViewController.m; sourceTree = "<group>"; };
-		45EA799B1CFAF113005D2AD1 /* Walk.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Walk.gpx; sourceTree = "<group>"; };
 		45EB70D81CE5F0CC00EB2CD1 /* OTEntourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourage.h; sourceTree = "<group>"; };
 		45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourage.m; sourceTree = "<group>"; };
 		45EB70DB1CEA08F900EB2CD1 /* OTAPIConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAPIConsts.h; sourceTree = "<group>"; };
@@ -437,8 +412,6 @@
 		DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuViewController.m; sourceTree = "<group>"; };
 		DBE9EF3519E7DCCA00031144 /* UIViewController+menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+menu.h"; sourceTree = "<group>"; };
 		DBE9EF3619E7DCCA00031144 /* UIViewController+menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+menu.m"; sourceTree = "<group>"; };
-		DBE9EF4F19E7EFA200031144 /* UIFont+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+entourage.h"; sourceTree = "<group>"; };
-		DBE9EF5019E7EFA200031144 /* UIFont+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+entourage.m"; sourceTree = "<group>"; };
 		E54D38E2663076C6388D22C9 /* Pods-entourageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -487,8 +460,6 @@
 		0A70FA2F1BFF31E10080E8EC /* Tour */ = {
 			isa = PBXGroup;
 			children = (
-				456ABD7B1CA15F2D004A81D6 /* OTPublicTourViewController.h */,
-				456ABD7C1CA15F2D004A81D6 /* OTPublicTourViewController.m */,
 				0A35F2B61BFA3AC2002301C3 /* OTConfirmationViewController.h */,
 				0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */,
 				0A70FA161BFDD69C0080E8EC /* OTToursTableViewController.h */,
@@ -547,7 +518,8 @@
 				1E3174801D10164200027824 /* OTStateFactoryDelegate.h */,
 				1E31748F1D101D7800027824 /* OTFeedItemFactoryDelegate.h */,
 			);
-			path = FeedItem;
+			name = FeedItem;
+			path = ../FeedItem;
 			sourceTree = "<group>";
 		};
 		1E31747E1D10162300027824 /* Entourage */ = {
@@ -595,8 +567,8 @@
 		2EDA5F041CB50CB700849172 /* Tour */ = {
 			isa = PBXGroup;
 			children = (
-				2EDA5F051CB50CEE00849172 /* OTToursTableView.h */,
-				2EDA5F061CB50CEE00849172 /* OTToursTableView.m */,
+				2EDA5F051CB50CEE00849172 /* OTFeedItemsTableView.h */,
+				2EDA5F061CB50CEE00849172 /* OTFeedItemsTableView.m */,
 				45E37E5D1CEF4D60005C3175 /* OTFeedItemSummaryView.h */,
 				45E37E5E1CEF4D60005C3175 /* OTFeedItemSummaryView.m */,
 				4551708A1CF0D54100962369 /* OTFeedItemInfoView.h */,
@@ -718,46 +690,13 @@
 			name = Encounter;
 			sourceTree = "<group>";
 		};
-		45CE5A471C5241AA00F68C24 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				45CE5A481C5241AA00F68C24 /* Blokletters-Balpen.ttf */,
-				45CE5A491C5241AA00F68C24 /* Calibri-Bold-Italic.ttf */,
-				45CE5A4A1C5241AA00F68C24 /* Calibri-Bold.ttf */,
-				45CE5A4B1C5241AA00F68C24 /* Calibri-Italic.ttf */,
-				45CE5A4C1C5241AA00F68C24 /* Calibri.ttf */,
-				45CE5A4D1C5241AA00F68C24 /* MankSans-Medium.ttf */,
-				45CE5A4E1C5241AA00F68C24 /* MankSans-MediumOblique.ttf */,
-				45CE5A4F1C5241AA00F68C24 /* MankSans-Oblique.ttf */,
-				45CE5A501C5241AA00F68C24 /* MankSans.ttf */,
-				45CE5A511C5241AA00F68C24 /* Sofia-Regular.otf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
-		45CE5A521C5241AA00F68C24 /* Strings */ = {
-			isa = PBXGroup;
-			children = (
-				45CE5A531C5241AA00F68C24 /* Localizable.strings */,
-			);
-			path = Strings;
-			sourceTree = "<group>";
-		};
-		45CE5A541C5241AA00F68C24 /* XCAssets */ = {
-			isa = PBXGroup;
-			children = (
-				45CE5A551C5241AA00F68C24 /* Images.xcassets */,
-			);
-			path = XCAssets;
-			sourceTree = "<group>";
-		};
 		45CE5A621C5242FC00F68C24 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				1E3174901D10299400027824 /* QuitFeedItem.storyboard */,
 				45CE5A711C56961500F68C24 /* Intro.storyboard */,
 				45CE5A631C5242FC00F68C24 /* Main.storyboard */,
 				452FE3EE1CAD55A400063334 /* FeedItem.storyboard */,
+				1E3174901D10299400027824 /* QuitFeedItem.storyboard */,
 				45E37E5A1CEE657A005C3175 /* Filters.storyboard */,
 				45BC9BCD1CE32AE1000065B7 /* EntourageCreator.storyboard */,
 				4507017D1CCF494800432548 /* TourJoinRequest.storyboard */,
@@ -775,6 +714,21 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		45D6B82D1D109ABD00357FEF /* FeedItems Services */ = {
+			isa = PBXGroup;
+			children = (
+				45E37E511CEE1F7D005C3175 /* OTFeedsService.h */,
+				45E37E521CEE1F7D005C3175 /* OTFeedsService.m */,
+				0A94B5B41B94810800402AF3 /* OTTourService.h */,
+				0A94B5B51B94811A00402AF3 /* OTTourService.m */,
+				0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */,
+				0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */,
+				2EC77E4D1CEDE4BC0031BB67 /* OTEntourageService.h */,
+				2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */,
+			);
+			name = "FeedItems Services";
+			sourceTree = "<group>";
+		};
 		45F24A3E1CEDB1880003BF9E /* Entourage */ = {
 			isa = PBXGroup;
 			children = (
@@ -789,6 +743,7 @@
 			children = (
 				45F24A3B1CEDB1490003BF9E /* OTFeedItem.h */,
 				45F24A3C1CEDB1490003BF9E /* OTFeedItem.m */,
+				1E3174791D10150000027824 /* FeedItem */,
 				45F24A3E1CEDB1880003BF9E /* Entourage */,
 				45F443411C90B93900DDEBE1 /* Tour */,
 				2E5B0EBA1CF0603D0078454F /* OTEntourageFilter.h */,
@@ -850,32 +805,26 @@
 			name = Tour;
 			sourceTree = "<group>";
 		};
-		6B1A846E19E8110B0020FB93 /* Service */ = {
+		6B1A846E19E8110B0020FB93 /* WebService */ = {
 			isa = PBXGroup;
 			children = (
-				45E37E511CEE1F7D005C3175 /* OTFeedsService.h */,
-				45E37E521CEE1F7D005C3175 /* OTFeedsService.m */,
+				6B4930DC19A77C2F00DA7EE0 /* Manager */,
+				45D6B82D1D109ABD00357FEF /* FeedItems Services */,
 				1D962C6F19E9277D00547687 /* OTAuthService.h */,
 				1D962C7019E9277D00547687 /* OTAuthService.m */,
 				6B1A846F19E811210020FB93 /* OTPoiService.h */,
 				6B1A847019E811210020FB93 /* OTPoiService.m */,
-				0A94B5B41B94810800402AF3 /* OTTourService.h */,
-				0A94B5B51B94811A00402AF3 /* OTTourService.m */,
-				0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */,
-				0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */,
-				2EC77E4D1CEDE4BC0031BB67 /* OTEntourageService.h */,
-				2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */,
 			);
+			name = WebService;
 			path = Service;
 			sourceTree = "<group>";
 		};
 		6B4930C319A773C500DA7EE0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				45CE5A551C5241AA00F68C24 /* Images.xcassets */,
+				45CE5A531C5241AA00F68C24 /* Localizable.strings */,
 				45CE5A621C5242FC00F68C24 /* Storyboards */,
-				45CE5A471C5241AA00F68C24 /* Fonts */,
-				45CE5A521C5241AA00F68C24 /* Strings */,
-				45CE5A541C5241AA00F68C24 /* XCAssets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -893,8 +842,7 @@
 				6B4930E019A77DFE00DA7EE0 /* Model */,
 				A8E10FAB19E82A1500DF4A01 /* View */,
 				6B4930C719A773C500DA7EE0 /* Controller */,
-				6B1A846E19E8110B0020FB93 /* Service */,
-				6B4930DC19A77C2F00DA7EE0 /* Manager */,
+				6B1A846E19E8110B0020FB93 /* WebService */,
 				6BFE639519E7E85D00C661AB /* Utils */,
 				1DA682D519E7F130007BD4BC /* Helper */,
 			);
@@ -941,7 +889,8 @@
 				455940531C5D2E220099A8EE /* OTJSONResponseSerializer.h */,
 				455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */,
 			);
-			path = Manager;
+			name = Manager;
+			path = ../Manager;
 			sourceTree = "<group>";
 		};
 		6B4930E019A77DFE00DA7EE0 /* Model */ = {
@@ -960,7 +909,6 @@
 		6B92CA9519A7461C004E8C9B = {
 			isa = PBXGroup;
 			children = (
-				45EA799B1CFAF113005D2AD1 /* Walk.gpx */,
 				6B92CAA719A7461C004E8C9B /* entourage */,
 				6B92CAC619A7461C004E8C9B /* entourageTests */,
 				6B92CAA019A7461C004E8C9B /* Frameworks */,
@@ -1041,8 +989,6 @@
 			children = (
 				453117A21CD251C200C00BA8 /* MKMapView+entourage.h */,
 				453117A31CD251C200C00BA8 /* MKMapView+entourage.m */,
-				DBE9EF4F19E7EFA200031144 /* UIFont+entourage.h */,
-				DBE9EF5019E7EFA200031144 /* UIFont+entourage.m */,
 				454C8F4B1C4D20EA001362B2 /* UIColor+entourage.h */,
 				454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */,
 				454C8F4E1C4F4C45001362B2 /* UITextField+indentation.h */,
@@ -1251,10 +1197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45CE5A581C5241AA00F68C24 /* Calibri-Bold.ttf in Resources */,
 				452FE3EB1CAD54CE00063334 /* Settings.storyboard in Resources */,
-				45CE5A5C1C5241AA00F68C24 /* MankSans-MediumOblique.ttf in Resources */,
-				45CE5A591C5241AA00F68C24 /* Calibri-Italic.ttf in Resources */,
 				45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */,
 				452FE3E61CAD544F00063334 /* UserProfile.storyboard in Resources */,
 				452FE3ED1CAD54F800063334 /* About.storyboard in Resources */,
@@ -1263,20 +1206,13 @@
 				2E7064EE1CB273120034C55A /* MapOptions.storyboard in Resources */,
 				45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */,
 				452FE3F51CAD563F00063334 /* TourOptions.storyboard in Resources */,
-				45CE5A5D1C5241AA00F68C24 /* MankSans-Oblique.ttf in Resources */,
-				45CE5A5F1C5241AA00F68C24 /* Sofia-Regular.otf in Resources */,
 				45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */,
 				45CE5A611C5241AA00F68C24 /* Images.xcassets in Resources */,
-				45CE5A5E1C5241AA00F68C24 /* MankSans.ttf in Resources */,
 				4507017E1CCF494800432548 /* TourJoinRequest.storyboard in Resources */,
-				45CE5A561C5241AA00F68C24 /* Blokletters-Balpen.ttf in Resources */,
 				45E37E5C1CEE657A005C3175 /* Filters.storyboard in Resources */,
 				45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */,
-				45CE5A5A1C5241AA00F68C24 /* Calibri.ttf in Resources */,
 				4507017C1CCF459B00432548 /* TourCreator.storyboard in Resources */,
 				452FE4011CAD5AC700063334 /* Entourages.storyboard in Resources */,
-				45CE5A5B1C5241AA00F68C24 /* MankSans-Medium.ttf in Resources */,
-				45CE5A571C5241AA00F68C24 /* Calibri-Bold-Italic.ttf in Resources */,
 				45BC9BCE1CE32AE1000065B7 /* EntourageCreator.storyboard in Resources */,
 				452FE3E81CAD549200063334 /* GuideSolidarity.storyboard in Resources */,
 				452FE3F01CAD55A400063334 /* FeedItem.storyboard in Resources */,
@@ -1450,7 +1386,6 @@
 				0A4769381BFCC4EB006EA73A /* OTOrganization.m in Sources */,
 				454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */,
 				454C8F581C501B31001362B2 /* UIView+entourage.m in Sources */,
-				DBE9EF5119E7EFA200031144 /* UIFont+entourage.m in Sources */,
 				2EDA5F0E1CB67FFE00849172 /* OTToursMapDelegate.m in Sources */,
 				0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */,
 				2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */,
@@ -1468,13 +1403,12 @@
 				0A213C491BA0306300202D7B /* OTGuideViewController.m in Sources */,
 				4541EDEE1D07197700589ECB /* OTLocationSearchTableViewController.m in Sources */,
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,
-				456ABD7D1CA15F2D004A81D6 /* OTPublicTourViewController.m in Sources */,
 				4525EB371CA5DFE1006784E6 /* NSBundle+entourage.m in Sources */,
 				456ABD831CA18DB5004A81D6 /* UIButton+entourage.m in Sources */,
 				45E37E591CEE64F7005C3175 /* OTFiltersViewController.m in Sources */,
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */,
-				2EDA5F071CB50CEE00849172 /* OTToursTableView.m in Sources */,
+				2EDA5F071CB50CEE00849172 /* OTFeedItemsTableView.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				45ADCACF1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,

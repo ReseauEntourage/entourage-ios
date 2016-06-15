@@ -42,21 +42,6 @@
     }
 }
 
-- (void)setupWithStatus:(NSString*)status andJoinStatus:(NSString *)joinStatus {
-    self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:status];
-    
-    if ([joinStatus isEqualToString:JOIN_ACCEPTED] || [status isEqualToString:FEEDITEM_STATUS_ACTIVE]) {
-        [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
-    } else  if ([joinStatus isEqualToString:JOIN_PENDING]) {
-        [self setImage:[UIImage imageNamed:JOINBUTTON_PENDING] forState:UIControlStateNormal];
-    } else if ([joinStatus isEqualToString:JOIN_REJECTED]) {
-        [self setImage:[UIImage imageNamed:JOINBUTTON_REJECTED] forState:UIControlStateNormal];
-    } else {
-        [self setImage:[UIImage imageNamed:JOINBUTTON_NOTREQUESTED] forState:UIControlStateNormal];
-    }
-
-}
-
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {
     self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:[feedItem newsfeedStatus]];
     
