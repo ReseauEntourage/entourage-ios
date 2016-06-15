@@ -13,6 +13,7 @@
 @protocol OTConfirmationViewControllerDelegate <NSObject>
 
 - (void)tourSent:(OTTour*)tour;
+@optional
 - (void)resumeTour;
 
 @end

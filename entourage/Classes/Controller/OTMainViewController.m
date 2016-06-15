@@ -25,6 +25,7 @@
 #import "OTEntourageCreatorViewController.h"
 #import "OTEntouragesViewController.h"
 #import "OTFiltersViewController.h"
+#import "OTFeedItemsPagination.h"
 
 #import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
@@ -139,6 +140,8 @@
 @property (nonatomic, strong) NSArray *pois;
 @property (nonatomic, strong) NSMutableArray *markers;
 
+@property (nonatomic) OTFeedItemsPagination *currentPagination;
+
 
 @end
 
@@ -171,6 +174,7 @@
     self.mapView = [[MKMapView alloc] init];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
+    self.currentPagination = [OTFeedItemsPagination new];
     [self configureMapView];
     
     self.mapSegmentedControl.layer.cornerRadius = 5;
@@ -401,6 +405,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)getFeeds {
+    
     NSLog(@"Getting feeds ...");
     __block CLLocationCoordinate2D oldRequestedCoordinate;
     oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
@@ -412,9 +417,10 @@ static BOOL didGetAnyData = NO;
     
     BOOL showTours = [[entourageFilter valueForFilter:kEntourageFilterEntourageShowTours] boolValue];
     BOOL myEntouragesOnly = [[entourageFilter valueForFilter:kEntourageFilterEntourageOnlyMyEntourages] boolValue];
-    
-    NSDictionary *filterDictionary = @{  @"page": @1,
-                                         @"per": @20,
+#warning get paginated data
+    NSDictionary *filterDictionary = @{//  @"page": @(self.currentPagination.page),
+                                       //  @"per": @20,//FEEDITEMS_PER_PAGE,
+                                         @"before" : [NSDate date],
                                          @"latitude": @(self.requestedToursCoordinate.latitude),
                                          @"longitude": @(self.requestedToursCoordinate.longitude),
                                          @"distance": @TOURS_REQUEST_DISTANCE_KM,
@@ -424,7 +430,7 @@ static BOOL didGetAnyData = NO;
                                          @"show_my_entourages_only" : myEntouragesOnly ? @"true" : @"false",
                                          @"time_range" : [entourageFilter valueForFilter:kEntourageFilterTimeframe]
                                          };
-    
+    NSLog(@"data params %@", filterDictionary);
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -954,6 +960,14 @@ static bool isShowingOptions = NO;
 
 /**************************************************************************************************/
 #pragma mark - Feeds Table View Delegate
+
+- (void)loadMoreData {
+#warning Load some more data
+    NSLog(@"We should load some more feed items on newsfeeds!");
+    [self getData];
+
+}
+
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;

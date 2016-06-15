@@ -207,6 +207,7 @@
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     
+    NSLog(@"TABLEVIEW %ld", (long)indexPath.section);
     
     if ([item isKindOfClass:[OTTour class]]) {
     
@@ -227,12 +228,6 @@
         [statusButton setupAsStatusButtonForFeedItem:tour];
         [statusLabel setupAsStatusButtonForFeedItem:tour];
         
-        //check if we need to load more data
-        if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
-            if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {
-                [self.feedItemsDelegate loadMoreData];
-            }
-        }
     } else {
         OTEntourage *ent = (OTEntourage*)item;
         
@@ -247,6 +242,12 @@
         [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
         [statusButton setupAsStatusButtonForFeedItem:ent];
         [statusLabel setupAsStatusButtonForFeedItem:ent];
+    }
+    //check if we need to load more data
+    if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
+        if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {
+            [self.feedItemsDelegate loadMoreData];
+        }
     }
     
     return cell;
