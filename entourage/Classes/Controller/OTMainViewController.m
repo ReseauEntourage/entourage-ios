@@ -296,8 +296,7 @@
     self.mapPoint = touchPoint;
     
     if (self.isTourRunning) {
-        self.encounterLocation =
-        [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+        self.encounterLocation = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
         CLLocation *location = [[CLLocation alloc] initWithLatitude:self.encounterLocation.latitude longitude:self.encounterLocation.longitude];
         CLLocation *userLocation = [[CLLocation alloc]
                                     initWithLatitude:self.mapView.userLocation.coordinate.latitude
@@ -609,6 +608,9 @@ static BOOL didGetAnyData = NO;
 - (void)locationUpdated:(NSNotification *)notification {
     NSArray *locations = [notification readLocations];
     for (CLLocation *newLocation in locations) {
+        if(self.isTourRunning)
+            self.encounterLocation = newLocation.coordinate;
+        
         NSDate *eventDate = newLocation.timestamp;
         NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
         
