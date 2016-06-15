@@ -16,6 +16,7 @@
         self.page = 1;
         self.feedItems = [NSMutableArray new];
         self.isLoading = NO;
+        self.beforeDate = [NSDate date];
     }
     return self;
 }

@@ -397,6 +397,7 @@ static BOOL didGetAnyData = NO;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
+    NSLog(@"didChangePositions so we need to ask for data");
     [self getFeeds];
     
 }
@@ -421,10 +422,13 @@ static BOOL didGetAnyData = NO;
     
     BOOL showTours = [[entourageFilter valueForFilter:kEntourageFilterEntourageShowTours] boolValue];
     BOOL myEntouragesOnly = [[entourageFilter valueForFilter:kEntourageFilterEntourageOnlyMyEntourages] boolValue];
+    if (!self.currentPagination.beforeDate)
+        self.currentPagination.beforeDate = [NSDate date];
+    NSLog(@"before = %@", self.currentPagination.beforeDate);
 #warning get paginated data
     NSDictionary *filterDictionary = @{//  @"page": @(self.currentPagination.page),
                                        //  @"per": @20,//FEEDITEMS_PER_PAGE,
-                                         @"before" : [NSDate date],
+                                         @"before" : self.currentPagination.beforeDate,
                                          @"latitude": @(self.requestedToursCoordinate.latitude),
                                          @"longitude": @(self.requestedToursCoordinate.longitude),
                                          @"distance": @TOURS_REQUEST_DISTANCE_KM,
@@ -434,22 +438,28 @@ static BOOL didGetAnyData = NO;
                                          @"show_my_entourages_only" : myEntouragesOnly ? @"true" : @"false",
                                          @"time_range" : [entourageFilter valueForFilter:kEntourageFilterTimeframe]
                                          };
-    NSLog(@"data params %@", filterDictionary);
-    [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
+        [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                NSLog(@"Got %lu feed items.", (unsigned long)feeds.count);
                                                 
                                                 if (feeds.count && !didGetAnyData) {
                                                     [self showToursList];
                                                     didGetAnyData = YES;
                                                 }
                                                 [self.indicatorView setHidden:YES];
-                                                self.feeds = feeds;
-                                                [self.tableView removeAll];
+                                                
+                                                OTFeedItem *lastFeed = self.feeds.lastObject;
+                                                if ([lastFeed.creationDate compare:self.currentPagination.beforeDate] != NSOrderedDescending) {
+                                                    self.feeds = feeds;
+                                                    [self.tableView removeAll];
+                                                }
+                                                NSLog(@"Got %lu feed items on %lu existing items", (unsigned long)feeds.count, (unsigned long)self.feeds.count);
+
                                                 [self.tableView addFeedItems:feeds];
                                                 [self feedMapWithFeedItems];
                                                 [self.tableView reloadData];
+                                                
+                                                
                                             } failure:^(NSError *error) {
                                                 NSLog(@"Error getting feeds: %@", error.description);
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -968,8 +978,8 @@ static bool isShowingOptions = NO;
 - (void)loadMoreData {
 #warning Load some more data
     NSLog(@"We should load some more feed items on newsfeeds!");
+    self.currentPagination.beforeDate = ((OTFeedItem*)self.feeds.lastObject).creationDate;
     [self getData];
-
 }
 
 

@@ -15,6 +15,7 @@
 @property (nonatomic) NSInteger page;
 @property (nonatomic) BOOL isLoading;
 @property (nonatomic, strong) NSMutableArray *feedItems;
+@property (nonatomic, strong) NSDate *beforeDate;
 
 - (void)addFeedItems:(NSArray*)feedItems;
 
