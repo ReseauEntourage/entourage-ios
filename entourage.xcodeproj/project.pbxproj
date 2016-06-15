@@ -519,7 +519,7 @@
 				1E31747F1D10162300027824 /* Tour */,
 			);
 			name = FeedItem;
-			path = ../FeedItem;
+			path = ../../FeedItem;
 			sourceTree = "<group>";
 		};
 		1E31747E1D10162300027824 /* Entourage */ = {
@@ -550,7 +550,8 @@
 				1E71E64E1D107E1C001F3777 /* OTLocationManager.h */,
 				1E71E64F1D107E1C001F3777 /* OTLocationManager.m */,
 			);
-			path = Location;
+			name = Location;
+			path = ../Location;
 			sourceTree = "<group>";
 		};
 		2E5B0EBD1CF06CCA0078454F /* Filter */ = {
@@ -831,8 +832,6 @@
 		6B4930C419A773C500DA7EE0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1E71E64D1D107E08001F3777 /* Location */,
-				1E3174791D10150000027824 /* FeedItem */,
 				6B4930CA19A773C500DA7EE0 /* OTAppDelegate.h */,
 				6B4930CB19A773C500DA7EE0 /* OTAppDelegate.m */,
 				1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */,
@@ -986,6 +985,8 @@
 		6BFE639519E7E85D00C661AB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1E71E64D1D107E08001F3777 /* Location */,
+				1E3174791D10150000027824 /* FeedItem */,
 				453117A21CD251C200C00BA8 /* MKMapView+entourage.h */,
 				453117A31CD251C200C00BA8 /* MKMapView+entourage.m */,
 				454C8F4B1C4D20EA001362B2 /* UIColor+entourage.h */,
