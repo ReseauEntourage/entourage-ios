@@ -142,7 +142,9 @@
 
 @end
 
-@implementation OTMainViewController
+@implementation OTMainViewController {
+    BOOL encounterFromTap;
+}
 
 /**************************************************************************************************/
 #pragma mark - Life cycle
@@ -296,14 +298,16 @@
     self.mapPoint = touchPoint;
     
     if (self.isTourRunning) {
-        self.encounterLocation = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
-        CLLocation *location = [[CLLocation alloc] initWithLatitude:self.encounterLocation.latitude longitude:self.encounterLocation.longitude];
+        CLLocationCoordinate2D whereTap = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:whereTap.latitude longitude:whereTap.longitude];
         CLLocation *userLocation = [[CLLocation alloc]
                                     initWithLatitude:self.mapView.userLocation.coordinate.latitude
                                     longitude:self.mapView.userLocation.coordinate.longitude];
         
         CLLocationDistance distance = [location distanceFromLocation:userLocation];
         if (distance <=  MAX_DISTANCE) {
+            encounterFromTap = YES;
+            self.encounterLocation = whereTap;
             [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
         } else {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
@@ -608,7 +612,7 @@ static BOOL didGetAnyData = NO;
 - (void)locationUpdated:(NSNotification *)notification {
     NSArray *locations = [notification readLocations];
     for (CLLocation *newLocation in locations) {
-        if(self.isTourRunning)
+        if(self.isTourRunning && !encounterFromTap)
             self.encounterLocation = newLocation.coordinate;
         
         NSDate *eventDate = newLocation.timestamp;
@@ -1209,6 +1213,7 @@ typedef NS_ENUM(NSInteger) {
             controller.delegate = self;
             [controller configureWithTourId:self.tour.uid andLocation:self.encounterLocation];
             controller.encounters = self.encounters;
+            encounterFromTap = NO;
         } break;
         case SegueIDConfirmation: {
             OTConfirmationViewController *controller = (OTConfirmationViewController *)destinationViewController;
