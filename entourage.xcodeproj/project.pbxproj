@@ -48,7 +48,7 @@
 		2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7064F01CB273AE0034C55A /* OTMapOptionsViewController.m */; };
 		2EC77E4F1CEDE4BC0031BB67 /* OTEntourageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */; };
 		2EDA5F031CB3F84300849172 /* OTGuideDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */; };
-		2EDA5F071CB50CEE00849172 /* OTToursTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F061CB50CEE00849172 /* OTToursTableView.m */; };
+		2EDA5F071CB50CEE00849172 /* OTFeedItemsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F061CB50CEE00849172 /* OTFeedItemsTableView.m */; };
 		2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */; };
 		2EDA5F0E1CB67FFE00849172 /* OTToursMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F0D1CB67FFE00849172 /* OTToursMapDelegate.m */; };
 		2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F101CB68BE200849172 /* OTGuideMapDelegate.m */; };
@@ -239,8 +239,8 @@
 		2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageService.m; sourceTree = "<group>"; };
 		2EDA5F011CB3F84300849172 /* OTGuideDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGuideDetailsViewController.h; sourceTree = "<group>"; };
 		2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGuideDetailsViewController.m; sourceTree = "<group>"; };
-		2EDA5F051CB50CEE00849172 /* OTToursTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToursTableView.h; sourceTree = "<group>"; };
-		2EDA5F061CB50CEE00849172 /* OTToursTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTToursTableView.m; sourceTree = "<group>"; };
+		2EDA5F051CB50CEE00849172 /* OTFeedItemsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemsTableView.h; sourceTree = "<group>"; };
+		2EDA5F061CB50CEE00849172 /* OTFeedItemsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemsTableView.m; sourceTree = "<group>"; };
 		2EDA5F081CB67F3500849172 /* OTBaseMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTBaseMapDelegate.h; sourceTree = "<group>"; };
 		2EDA5F091CB67F3500849172 /* OTBaseMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTBaseMapDelegate.m; sourceTree = "<group>"; };
 		2EDA5F0C1CB67FFE00849172 /* OTToursMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToursMapDelegate.h; sourceTree = "<group>"; };
@@ -552,8 +552,8 @@
 		2EDA5F041CB50CB700849172 /* Tour */ = {
 			isa = PBXGroup;
 			children = (
-				2EDA5F051CB50CEE00849172 /* OTToursTableView.h */,
-				2EDA5F061CB50CEE00849172 /* OTToursTableView.m */,
+				2EDA5F051CB50CEE00849172 /* OTFeedItemsTableView.h */,
+				2EDA5F061CB50CEE00849172 /* OTFeedItemsTableView.m */,
 				45E37E5D1CEF4D60005C3175 /* OTFeedItemSummaryView.h */,
 				45E37E5E1CEF4D60005C3175 /* OTFeedItemSummaryView.m */,
 				4551708A1CF0D54100962369 /* OTFeedItemInfoView.h */,
@@ -1388,7 +1388,7 @@
 				45E37E591CEE64F7005C3175 /* OTFiltersViewController.m in Sources */,
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */,
-				2EDA5F071CB50CEE00849172 /* OTToursTableView.m in Sources */,
+				2EDA5F071CB50CEE00849172 /* OTFeedItemsTableView.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				45ADCACF1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,

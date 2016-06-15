@@ -6,7 +6,7 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTToursTableView.h"
+#import "OTFeedItemsTableView.h"
 #import "OTTour.h"
 #import "OTEntourage.h"
 
@@ -38,13 +38,13 @@
 #define TABLEVIEW_BOTTOM_INSET 86.0f
 
 
-@interface OTToursTableView () <UITableViewDataSource, UITableViewDelegate>
+@interface OTFeedItemsTableView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *feedItems;
 
 @end
 
-@implementation OTToursTableView
+@implementation OTFeedItemsTableView
 
 /********************************************************************************/
 #pragma mark - Life Cycle
@@ -133,10 +133,6 @@
         _feedItems = [[NSMutableArray alloc] init];
     }
     return _feedItems;
-}
-
-- (void)addEntourages:(NSArray*)entourages {
-    [self.feedItems addObjectsFromArray:entourages];
 }
 
 - (void)addFeedItems:(NSArray*)feedItems {
@@ -232,16 +228,13 @@
         noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
         
         [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-        //[statusButton setupWithStatus:[tour newsfeedStatus] andJoinStatus:tour.joinStatus];
         [statusButton setupAsStatusButtonForFeedItem:tour];
-        
-        //[statusLabel setupWithStatus:[tour newsfeedStatus] andJoinStatus:tour.joinStatus];
         [statusLabel setupAsStatusButtonForFeedItem:tour];
         
         //check if we need to load more data
         if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
-            if (self.toursDelegate && [self.toursDelegate respondsToSelector:@selector(loadMoreTours)]) {
-                [self.toursDelegate loadMoreTours];
+            if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {
+                [self.feedItemsDelegate loadMoreData];
             }
         }
     } else {
@@ -256,9 +249,7 @@
         noPeopleLabel.text = [NSString stringWithFormat:@"%d", ent.noPeople.intValue];
         
         [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-        //[statusButton setupWithStatus:[ent newsfeedStatus] andJoinStatus:ent.joinStatus];
         [statusButton setupAsStatusButtonForFeedItem:ent];
-        //[statusLabel setupWithStatus:[ent newsfeedStatus] andJoinStatus:ent.joinStatus];
         [statusLabel setupAsStatusButtonForFeedItem:ent];
     }
     
@@ -268,8 +259,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id selectedFeedItem = self.feedItems[indexPath.section];
 
-    if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(showFeedInfo:)]) {
-        [self.toursDelegate showFeedInfo:selectedFeedItem];
+    if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)]) {
+        [self.feedItemsDelegate showFeedInfo:selectedFeedItem];
     }
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }
@@ -303,8 +294,8 @@
     NSInteger index = [self indexPathForCell:cell].section;
     OTFeedItem *selectedFeedItem = self.feedItems[index];
     
-    if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(showUserProfile:)]) {
-        [self.toursDelegate showUserProfile:selectedFeedItem.author.uID];
+    if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showUserProfile:)]) {
+        [self.feedItemsDelegate showUserProfile:selectedFeedItem.author.uID];
     }
 }
 
@@ -313,8 +304,8 @@
     NSInteger index = [self indexPathForCell:cell].section;
     OTFeedItem *selectedFeedItem = self.feedItems[index];
     
-    if (self.toursDelegate != nil && [self.toursDelegate respondsToSelector:@selector(doJoinRequest:)]) {
-        [self.toursDelegate doJoinRequest:selectedFeedItem];
+    if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(doJoinRequest:)]) {
+        [self.feedItemsDelegate doJoinRequest:selectedFeedItem];
     }
 }
 

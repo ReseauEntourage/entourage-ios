@@ -11,19 +11,19 @@
 
 @class OTFeedItem;
 
-@protocol OTToursTableViewDelegate <NSObject>
+@protocol OTFeedItemsTableViewDelegate <NSObject>
 
 - (void)showFeedInfo:(OTFeedItem*)feedItem;
 - (void)showUserProfile:(NSNumber*)userId;
 - (void)doJoinRequest:(OTFeedItem*)feedItem;
 @optional
-- (void)loadMoreTours;
+- (void)loadMoreData;
 
 @end
 
-@interface OTToursTableView : UITableView
+@interface OTFeedItemsTableView : UITableView
 
-@property (nonatomic, weak) id<OTToursTableViewDelegate> toursDelegate;
+@property (nonatomic, weak) id<OTFeedItemsTableViewDelegate> feedItemsDelegate;
 
 - (void)configureWithMapView:(MKMapView *)mapView;
 
@@ -32,6 +32,5 @@
 - (void)removeFeedItem:(OTFeedItem*)feedItem;
 - (void)removeAll;
 
-- (void)addEntourages:(NSArray*)entourages;
 
 @end

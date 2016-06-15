@@ -118,26 +118,6 @@
 
 }
 
-- (void)setupWithStatus:(NSString *)status andJoinStatus:(NSString*)joinStatus {
-    self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:status];
-    
-    if ([joinStatus isEqualToString:JOIN_ACCEPTED] || [status isEqualToString:FEEDITEM_STATUS_ACTIVE]) {
-        [self setText:OTLocalizedString(@"join_active")];
-        [self setTextColor:[UIColor appOrangeColor]];
-    } else {
-        if ([joinStatus isEqualToString:JOIN_PENDING]) {
-            [self setText:OTLocalizedString(@"join_pending")];
-            [self setTextColor:[UIColor appOrangeColor]];
-        } else if ([joinStatus isEqualToString:JOIN_REJECTED]) {
-            [self setText:OTLocalizedString(@"join_rejected")];
-            [self setTextColor:[UIColor appTomatoColor]];
-        } else {
-            [self setText:OTLocalizedString(@"join_to_join")];
-            [self setTextColor:[UIColor appGreyishColor]];
-        }
-    }
-}
-
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {
     self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:[feedItem newsfeedStatus]];
     

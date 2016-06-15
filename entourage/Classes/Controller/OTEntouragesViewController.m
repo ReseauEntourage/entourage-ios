@@ -8,7 +8,7 @@
 
 // Controllers
 #import "OTEntouragesViewController.h"
-#import "OTToursTableView.h"
+#import "OTFeedItemsTableView.h"
 #import "OTFeedItemViewController.h"
 #import "OTQuitFeedItemViewController.h"
 #import "OTConfirmationViewController.h"
@@ -77,18 +77,17 @@ typedef NS_ENUM(NSInteger){
 /**************************************************************************************************/
 #pragma mark - OTEntouragesViewController
 
-@interface OTEntouragesViewController() <OTToursTableViewDelegate, OTConfirmationViewControllerDelegate>
+@interface OTEntouragesViewController() <OTFeedItemsTableViewDelegate, OTConfirmationViewControllerDelegate>
 
 // UI
 @property (nonatomic, weak) IBOutlet UISegmentedControl *statusSC;
-@property (nonatomic, weak) IBOutlet OTToursTableView *tableView;
+@property (nonatomic, weak) IBOutlet OTFeedItemsTableView *tableView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (nonatomic, strong) NSTimer *refreshTimer;
 
 // Pagination
 @property (nonatomic, strong) OTToursPagination *activeToursPagination;
 @property (nonatomic, strong) OTToursPagination *closedToursPagination;
-//@property (nonatomic, strong) OTToursPagination *freezedToursPagination;
 
 @end
 
@@ -154,7 +153,7 @@ typedef NS_ENUM(NSInteger){
 }
 
 - (void)configureTableView {
-    self.tableView.toursDelegate = self;
+    self.tableView.feedItemsDelegate = self;
 }
 
 - (void)getEntouragesWithStatus:(NSInteger) entourageStatus {
@@ -249,7 +248,7 @@ typedef NS_ENUM(NSInteger){
 }
 
 /**************************************************************************************************/
-#pragma mark - OTToursTableViewDelegate
+#pragma mark - OTFeedItemsTableViewDelegate
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     [self performSegueWithIdentifier:@"OTSelectedTourSegue" sender:feedItem];
@@ -306,7 +305,7 @@ typedef NS_ENUM(NSInteger){
     [self getEntouragesWithStatus:self.statusSC.selectedSegmentIndex];
 }
 
-- (void)loadMoreTours {
+- (void)loadMoreData {
     [self getData];
 }
 

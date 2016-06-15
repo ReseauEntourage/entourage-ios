@@ -40,7 +40,7 @@
 
 // View
 #import "SVProgressHUD.h"
-#import "OTToursTableView.h"
+#import "OTFeedItemsTableView.h"
 #import "OTToolbar.h"
 
 // Model
@@ -90,14 +90,14 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourJoinRequestDelegate, OTOptionsDelegate, OTToursTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
+@interface OTMainViewController () <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourJoinRequestDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
 // map
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *mapSegmentedControl;
-@property (nonatomic, weak) IBOutlet OTToursTableView *tableView;
+@property (nonatomic, weak) IBOutlet OTFeedItemsTableView *tableView;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic) CLLocationCoordinate2D encounterLocation;
@@ -129,7 +129,6 @@
 @property (nonatomic, strong) NSMutableArray *feeds;
 
 // tours
-@property (nonatomic, strong) OTToursTableView *toursTableView;
 @property (nonatomic) CLLocationCoordinate2D requestedToursCoordinate;
 @property (nonatomic, strong) NSTimer *refreshTimer;
 
@@ -170,7 +169,7 @@
     
     self.mapView = [[MKMapView alloc] init];
     [self.tableView configureWithMapView:self.mapView];
-    self.tableView.toursDelegate = self;
+    self.tableView.feedItemsDelegate = self;
     [self configureMapView];
     
     self.mapSegmentedControl.layer.cornerRadius = 5;
@@ -333,7 +332,7 @@
 
 - (void)appWillEnterBackground:(NSNotification*)note {
     NSLog(@">>>>>>>>>>>>>>>>>>>>> APP ENTERS BACKGROUND!!!");
-     [self.refreshTimer invalidate];
+    [self.refreshTimer invalidate];
     if (self.isTourRunning) {
         [self createLocalNotificationForTour:self.tour.uid];
     } else {
