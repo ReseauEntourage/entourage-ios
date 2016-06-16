@@ -34,7 +34,7 @@
     [self promptUserForLocationUsage];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showMainStorybord)
+                                             selector:@selector(pushNotificationAuthorizationChanged:)
                                                  name:kNotificationPushStatusChanged
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationAuthorizationChanged:) name:kNotificationLocationAuthorizationChanged object:nil];
@@ -52,7 +52,12 @@
 #pragma mark - Private
 
 - (void)promptUserForLocationUsage {
-    [[OTLocationManager sharedInstance] startLocationUpdates];
+    if([OTLocationManager sharedInstance].started)
+        [UIStoryboard showSWRevealController];
+    else {
+        [[OTLocationManager sharedInstance] startLocationUpdates];
+        [self setElementsHidden:NO];
+    }
 }
 
 - (void)promptUserForPushNotifications {
@@ -68,15 +73,16 @@
     self.explanationLabel.hidden = hidden;
 }
 
-- (void)showMainStorybord {
+#pragma mark - App authorization notifications
+
+- (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {
     NSLog(@"received kNotificationPushStatusChanged");
     [UIStoryboard showSWRevealController];
 }
 
-#pragma mark - Location notifications
-
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
-    BOOL allowed = [notification readAuthorizationAllowed];
+    NSLog(@"received kNotificationLocationAuthorizationChanged");
+    BOOL allowed = [notification readAllowedLocation];
     if(allowed)
         [self promptUserForPushNotifications];
     else

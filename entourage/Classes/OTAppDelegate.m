@@ -146,8 +146,8 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 #pragma mark - Configure push notifications
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil];
+    NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:YES] };
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
 
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -164,7 +164,8 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSLog(@"Push registration failure : %@", [error localizedDescription]);
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil];
+    NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:NO] };
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
 }
 
 
