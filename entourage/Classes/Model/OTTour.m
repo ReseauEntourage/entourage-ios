@@ -77,16 +77,6 @@
     return dictionary;
 }
 
-- (BOOL)isEqual:(id)object {
-    if ([object isKindOfClass:[self class]]) {
-        OTTour *otherTour = (OTTour*)object;
-        if (otherTour.uid != nil) {
-            return [self.uid isEqualToValue:((OTTour*)object).uid];
-        }
-    }
-    return false;
-}
-
 + (UIColor *)colorForTourType:(NSString*)tourType {
     UIColor *color = [UIColor appOrangeColor];
     

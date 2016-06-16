@@ -17,6 +17,7 @@
 
 
 // FeedItems
+#define kWSUpdatedDate @"updated_at"
 #define kWSKeyJoinStatus @"join_status"
 #define kWSKeyStatus @"status"
 #define kWSKeyNoPeople @"number_of_people"

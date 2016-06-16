@@ -22,8 +22,19 @@
         self.joinStatus = [dictionary valueForKey:kWSKeyJoinStatus];
         self.noPeople = [dictionary numberForKey:kWSKeyNoPeople];
         self.type = [dictionary valueForKey:kWSKeyType];
+        self.updatedDate = [dictionary dateForKey:kWSUpdatedDate];
     }
     return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[self class]]) {
+        OTFeedItem *otherItem = (OTFeedItem*)object;
+        if (otherItem.uid != nil) {
+            return [self.uid isEqualToValue:otherItem.uid] && [self.type isEqualToString:otherItem.type];
+        }
+    }
+    return false;
 }
 
 - (NSString *)navigationTitle {
