@@ -109,15 +109,15 @@
 	self.location = location;
 }
 
-- (IBAction)sendEncounter:(UIButton*)sender {
+- (IBAction)sendEncounter:(UIBarButtonItem*)sender {
     sender.enabled = NO;
-    [SVProgressHUD show];
     __block OTEncounter *encounter = [OTEncounter new];
     encounter.date = [NSDate date];
     encounter.message = [self.messageTextView.text isEqualToString:PLACEHOLDER] ? @"" : self.messageTextView.text;
     encounter.streetPersonName =  self.nameTextField.text;
     encounter.latitude = self.location.latitude;
     encounter.longitude = self.location.longitude;
+    [SVProgressHUD show];
     [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId
                                 withSuccess:^(OTEncounter *sentEncounter) {
                                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
