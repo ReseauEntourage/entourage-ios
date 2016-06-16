@@ -38,6 +38,7 @@
 
 
 #define kNotificationPushStatusChanged @"NotificationAPNSStatusChanged"
+#define kNotificationPushStatusChangedStatusKey @"NotificationAPNSStatusChangedStatusKey"
 #define kNotificationLocalTourConfirmation "NotificationShowTourConfirmation"
 
 #define kNotificationShowFilters "NotificationShowFilter"

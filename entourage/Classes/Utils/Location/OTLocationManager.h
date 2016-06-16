@@ -16,6 +16,8 @@
 
 @interface OTLocationManager : NSObject
 
+@property (nonatomic, assign) BOOL started;
+
 +(OTLocationManager *)sharedInstance;
 
 - (void)startLocationUpdates;

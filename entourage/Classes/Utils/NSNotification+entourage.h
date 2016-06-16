@@ -11,6 +11,7 @@
 @interface NSNotification (entourage)
 
 - (NSArray *)readLocations;
-- (BOOL)readAuthorizationAllowed;
+- (BOOL)readAllowedLocation;
+- (BOOL)readAllowedPushNotifications;
 
 @end

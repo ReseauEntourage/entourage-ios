@@ -8,6 +8,7 @@
 
 #import "NSNotification+entourage.h"
 #import "OTLocationManager.h"
+#import "OTConsts.h"
 
 @implementation NSNotification (entourage)
 
@@ -15,8 +16,12 @@
     return [self.userInfo objectForKey:kNotificationLocationUpdatedInfoKey];
 }
 
-- (BOOL)readAuthorizationAllowed {
+- (BOOL)readAllowedLocation {
     return [(NSNumber *)[self.userInfo objectForKey:kNotificationLocationAuthorizationChangedKey] boolValue];
+}
+
+- (BOOL)readAllowedPushNotifications {
+    return [(NSNumber *)[self.userInfo objectForKey:kNotificationPushStatusChangedStatusKey] boolValue];
 }
 
 @end

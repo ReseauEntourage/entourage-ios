@@ -22,6 +22,7 @@
     static dispatch_once_t entourageFilterToken;
     dispatch_once(&entourageFilterToken, ^{
         sharedInstance = [self new];
+        sharedInstance.started = NO;
     });
     return sharedInstance;
 }
@@ -64,7 +65,8 @@
     if (status == kCLAuthorizationStatusNotDetermined)
         return;
     
-    NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:(status == kCLAuthorizationStatusAuthorizedAlways)] };
+    self.started = status == kCLAuthorizationStatusAuthorizedAlways;
+    NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:self.started] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationAuthorizationChanged object:self userInfo:info];
 }
 
