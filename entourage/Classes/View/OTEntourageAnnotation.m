@@ -11,15 +11,6 @@
 #import "OTEntourage.h"
 #import "UIImage+entourage.h"
 
-NSString *const kEntourageAnnotationIdentifier = @"OTEntourageAnnotationIdentifier";
-NSString *const kEntourageClusterAnnotationIdentifier = @"OTEntourageClusterAnnotationIdentifier";
-
-@interface OTEntourageAnnotation () <MKAnnotation>
-
-@property (nonatomic) CGFloat scale;
-
-@end
-
 @implementation OTEntourageAnnotation
 
 /********************************************************************************/
@@ -30,8 +21,8 @@ NSString *const kEntourageClusterAnnotationIdentifier = @"OTEntourageClusterAnno
     self = [super init];
     if (self)
     {
-        _entourage = entourage;
-        _scale = 1.0;
+        self.entourage = entourage;
+        self.scale = 1.0;
     }
     return self;
 }
@@ -41,8 +32,8 @@ NSString *const kEntourageClusterAnnotationIdentifier = @"OTEntourageClusterAnno
     self = [super init];
     if (self)
     {
-        _entourage = entourage;
-        _scale = scale;
+        self.entourage = entourage;
+        self.scale = scale;
     }
     return self;
 }
@@ -52,9 +43,7 @@ NSString *const kEntourageClusterAnnotationIdentifier = @"OTEntourageClusterAnno
 
 - (CLLocationCoordinate2D)coordinate
 {
-    CLLocationCoordinate2D poiCoordinate = { .latitude =  self.entourage.location.coordinate.latitude,
-                                            .longitude =  self.entourage.location.coordinate.longitude };
-    
+    CLLocationCoordinate2D poiCoordinate = { .latitude =  self.entourage.location.coordinate.latitude, .longitude =  self.entourage.location.coordinate.longitude };
     return poiCoordinate;
 }
 
@@ -67,19 +56,4 @@ NSString *const kEntourageClusterAnnotationIdentifier = @"OTEntourageClusterAnno
 {
     return self.entourage.description;
 }
-
-
-- (MKAnnotationView *)annotationView
-{
-    UIImage *scaledImage = [UIImage imageNamed:@"heatZone"
-                                     withScale:self.scale];
-    MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:self
-                                                                    reuseIdentifier:nil];//kEntourageAnnotationIdentifier];
-    
-    annotationView.canShowCallout = NO;
-    annotationView.image = scaledImage;
-    
-    return annotationView;
-}
-
 @end
