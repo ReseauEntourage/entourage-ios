@@ -81,6 +81,11 @@
     self.delegate = self;
 }
 
+- (NSArray *)items {
+    return self.feedItems;
+}
+
+
 - (void)configureWithMapView:(MKMapView *)mapView {
     
     self.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, -TABLEVIEW_FOOTER_HEIGHT, 0.0f);
@@ -121,7 +126,6 @@
     mapView.center = headerView.center;
         
     self.tableHeaderView = headerView;
-    //self.toursDelegate = self;
 }
 
 
@@ -149,7 +153,7 @@
     }
     if (feedItem.creationDate != nil) {
         for (NSUInteger i = 0; i < [self.feedItems count]; i++) {
-            OTTour* internalFeedItem = self.feedItems[i];
+            OTFeedItem* internalFeedItem = self.feedItems[i];
             if (internalFeedItem.creationDate != nil) {
                 if ([internalFeedItem.creationDate compare:feedItem.creationDate] == NSOrderedAscending) {
                     [self.feedItems insertObject:feedItem atIndex:i];
@@ -162,8 +166,8 @@
 }
 
 - (void)removeFeedItem:(OTFeedItem*)feedItem; {
-    for (OTTour* internalFeedItem in self.feedItems) {
-        if ([internalFeedItem.uid isEqualToNumber:feedItem.uid]) {
+    for (OTFeedItem* internalFeedItem in self.feedItems) {
+        if ([internalFeedItem.uid isEqualToNumber:feedItem.uid] && [internalFeedItem.type isEqualToString:feedItem.type]) {
             [self.feedItems removeObject:internalFeedItem];
             return;
         }
@@ -172,6 +176,10 @@
 
 - (void)removeAll {
     [self.feedItems removeAllObjects];
+}
+
+- (NSUInteger)itemsCount {
+    return [self.feedItems count];
 }
 
 /********************************************************************************/
@@ -208,6 +216,7 @@
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     
+    NSLog(@"TABLEVIEW %ld", (long)indexPath.section);
     
     if ([item isKindOfClass:[OTTour class]]) {
     
@@ -216,13 +225,10 @@
         [typeByNameLabel setupWithTypeAndAuthorOfTour:tour];
         
         // dateString - location
-        //[timeLocationLabel setupWithTimeAndLocationOfTour:tour];
         OTTourPoint *startPoint = tour.tourPoints.firstObject;
         CLLocation *startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
         [timeLocationLabel setupWithTime:tour.creationDate andLocation:startPointLocation];
 
-        
-       
         [userProfileImageButton setupAsProfilePictureFromUrl:tour.author.avatarUrl];
         
         noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
@@ -231,12 +237,6 @@
         [statusButton setupAsStatusButtonForFeedItem:tour];
         [statusLabel setupAsStatusButtonForFeedItem:tour];
         
-        //check if we need to load more data
-        if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
-            if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {
-                [self.feedItemsDelegate loadMoreData];
-            }
-        }
     } else {
         OTEntourage *ent = (OTEntourage*)item;
         
@@ -251,6 +251,12 @@
         [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
         [statusButton setupAsStatusButtonForFeedItem:ent];
         [statusLabel setupAsStatusButtonForFeedItem:ent];
+    }
+    //check if we need to load more data
+    if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
+        if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {
+            [self.feedItemsDelegate loadMoreData];
+        }
     }
     
     return cell;

@@ -8,6 +8,7 @@
 
 // Controllers
 #import "OTEntouragesViewController.h"
+#import "OTFeedItemsPagination.h"
 #import "OTFeedItemsTableView.h"
 #import "OTFeedItemViewController.h"
 #import "OTQuitFeedItemViewController.h"
@@ -30,49 +31,12 @@
 #import "UIColor+entourage.h"
 #import "SVProgressHUD.h"
 
-#define TOURS_PER_PAGE 10
+
 
 typedef NS_ENUM(NSInteger){
     EntourageStatusActive,
     EntourageStatusClosed
-    //EntourageStatusFreezed
-    
 } EntourageStatus;
-
-/**************************************************************************************************/
-#pragma mark - OTToursPagination
-
-@interface OTToursPagination : NSObject
-
-@property (nonatomic) NSInteger page;
-@property (nonatomic) BOOL isLoading;
-@property (nonatomic, strong) NSMutableArray *tours;
-
-@end
-
-@implementation OTToursPagination
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.page = 1;
-        self.tours = [NSMutableArray new];
-        self.isLoading = NO;
-    }
-    return self;
-}
-
-- (void)addTours:(NSArray*)tours
-{
-    self.isLoading = NO;
-    if (tours != nil && tours.count > 0) {
-        self.page++;
-        [self.tours addObjectsFromArray:tours];
-    }
-}
-
-@end
 
 /**************************************************************************************************/
 #pragma mark - OTEntouragesViewController
@@ -86,8 +50,8 @@ typedef NS_ENUM(NSInteger){
 @property (nonatomic, strong) NSTimer *refreshTimer;
 
 // Pagination
-@property (nonatomic, strong) OTToursPagination *activeToursPagination;
-@property (nonatomic, strong) OTToursPagination *closedToursPagination;
+@property (nonatomic, strong) OTFeedItemsPagination *activeToursPagination;
+@property (nonatomic, strong) OTFeedItemsPagination *closedToursPagination;
 
 @end
 
@@ -120,47 +84,25 @@ typedef NS_ENUM(NSInteger){
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    //if ([segue.identifier isEqualToString:@"UserProfileSegue"])
-    if ([segue.identifier isEqualToString:@"OTSelectedTourSegue"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        OTFeedItemViewController *controller = (OTFeedItemViewController *)navController.topViewController;
-        controller.feedItem = (OTFeedItem*)sender;
-        [controller configureWithTour:controller.feedItem];
-    } else if ([segue.identifier isEqualToString:@"OTTourJoinRequestSegue"]) {
-        //We shouldn't arrive here
-    } else if ([segue.identifier isEqualToString:@"QuitFeedItemSegue"]) {
-        OTQuitFeedItemViewController *controller = (OTQuitFeedItemViewController *)segue.destinationViewController;
-        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
-        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        controller.feedItem = (OTFeedItem*)sender;
-    } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
-        OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
-        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        controller.view.backgroundColor = [UIColor appModalBackgroundColor];
-        controller.delegate = self;
-        [controller configureWithTour:(OTTour*)sender
-                   andEncountersCount:[NSNumber numberWithUnsignedInteger:0]];
-    }
-}
 
 /**************************************************************************************************/
 #pragma mark - Private
 
 - (void)setupPagination {
-    self.activeToursPagination = [OTToursPagination new];
-    self.closedToursPagination = [OTToursPagination new];
+    self.activeToursPagination = [OTFeedItemsPagination new];
+    self.closedToursPagination = [OTFeedItemsPagination new];
 }
 
 - (void)configureTableView {
     self.tableView.feedItemsDelegate = self;
+
 }
 
 - (void)getEntouragesWithStatus:(NSInteger) entourageStatus {
     NSString *statusString = TOUR_STATUS_ONGOING;
     NSInteger page = 1;
     
-    OTToursPagination *currentPagination = nil;
+    OTFeedItemsPagination *currentPagination = nil;
     
     switch (entourageStatus) {
         case EntourageStatusActive:
@@ -191,23 +133,26 @@ typedef NS_ENUM(NSInteger){
     NSLog(@"Getting data ...");
     [[OTFeedsService new] getMyFeedsWithStatus:statusString
                                  andPageNumber:@(page)
-                              andNumberPerPage:@TOURS_PER_PAGE
-                                       success:^(NSMutableArray *userTours) {
+                              andNumberPerPage:@FEEDITEMS_PER_PAGE
+                                       success:^(NSMutableArray *userFeedItems) {
+                                           NSLog(@"MYE got %lu feeditems", (unsigned long)userFeedItems.count);
                                            [self.indicatorView stopAnimating];
                                            switch (requestedStatus) {
                                                case EntourageStatusActive:
-                                                   [self.activeToursPagination addTours:userTours];
+                                                   [self.activeToursPagination addFeedItems:userFeedItems];
                                                    break;
                                                case EntourageStatusClosed:
-                                                   [self.closedToursPagination addTours:userTours];
+                                                   [self.closedToursPagination addFeedItems:userFeedItems];
                                                    break;
                                                    
                                                default:
                                                    break;
                                            }
-                                           if (userTours == nil || userTours.count == 0) return;
-                                           if (requestedStatus != self.statusSC.selectedSegmentIndex) return;
-                                           [self.tableView addFeedItems:userTours];
+                                           if (userFeedItems == nil || userFeedItems.count == 0)
+                                               return;
+                                           if (requestedStatus != self.statusSC.selectedSegmentIndex)
+                                               return;
+                                           [self.tableView addFeedItems:userFeedItems];
                                            [self.tableView reloadData];
 
                                        } failure:^(NSError *error) {
@@ -232,10 +177,10 @@ typedef NS_ENUM(NSInteger){
     [self.tableView removeAll];
     switch (segControl.selectedSegmentIndex) {
         case EntourageStatusActive:
-            [self.tableView addFeedItems:self.activeToursPagination.tours];
+            [self.tableView addFeedItems:self.activeToursPagination.feedItems];
             break;
         case EntourageStatusClosed:
-            [self.tableView addFeedItems:self.closedToursPagination.tours];
+            [self.tableView addFeedItems:self.closedToursPagination.feedItems];
             break;
             
         default:
@@ -282,7 +227,7 @@ typedef NS_ENUM(NSInteger){
                 [[OTTourService new] closeTour:tour
                                    withSuccess:^(OTTour *closedTour) {
                                        [self.indicatorView stopAnimating];
-                                       [self.closedToursPagination.tours removeObject:tour];
+                                       [self.closedToursPagination.feedItems removeObject:tour];
                                        NSInteger selectedSegmentIndex = self.statusSC.selectedSegmentIndex;
                                        if (selectedSegmentIndex == EntourageStatusClosed) {
                                            [self.tableView removeFeedItem:tour];
@@ -314,8 +259,8 @@ typedef NS_ENUM(NSInteger){
 
 - (void)tourSent:(OTTour*)tour {
     if (tour == nil) return;
-    [self.activeToursPagination.tours removeObject:tour];
-    [self.closedToursPagination.tours addObject:tour];
+    [self.activeToursPagination.feedItems removeObject:tour];
+    [self.closedToursPagination.feedItems addObject:tour];
     NSInteger selectedSegmentIndex = self.statusSC.selectedSegmentIndex;
     if (selectedSegmentIndex == EntourageStatusActive) {
         [self.tableView removeFeedItem:tour];
@@ -330,8 +275,31 @@ typedef NS_ENUM(NSInteger){
     }
 }
 
-- (void)resumeTour {
-    
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    //if ([segue.identifier isEqualToString:@"UserProfileSegue"])
+    if ([segue.identifier isEqualToString:@"OTSelectedTourSegue"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTFeedItemViewController *controller = (OTFeedItemViewController *)navController.topViewController;
+        controller.feedItem = (OTFeedItem*)sender;
+        [controller configureWithTour:controller.feedItem];
+    } else if ([segue.identifier isEqualToString:@"OTTourJoinRequestSegue"]) {
+        //We shouldn't arrive here
+    } else if ([segue.identifier isEqualToString:@"QuitFeedItemSegue"]) {
+        OTQuitFeedItemViewController *controller = (OTQuitFeedItemViewController *)segue.destinationViewController;
+        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.feedItem = (OTFeedItem*)sender;
+    } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
+        OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.view.backgroundColor = [UIColor appModalBackgroundColor];
+        controller.delegate = self;
+        [controller configureWithTour:(OTTour*)sender
+                   andEncountersCount:[NSNumber numberWithUnsignedInteger:0]];
+    }
 }
+
 
 @end

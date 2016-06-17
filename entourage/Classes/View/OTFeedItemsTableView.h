@@ -32,5 +32,8 @@
 - (void)removeFeedItem:(OTFeedItem*)feedItem;
 - (void)removeAll;
 
+- (NSArray *)items;
+
+- (NSUInteger)itemsCount;
 
 @end

@@ -27,7 +27,6 @@
     return self;
 }
 
-
 - (NSDictionary *)dictionaryForWebService {
     NSDictionary *dictionary = @{        kWSKeyTitle: self.title,
                                          kWSKeyEntourageType: self.type,

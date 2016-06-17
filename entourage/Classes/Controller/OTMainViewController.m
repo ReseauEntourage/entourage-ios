@@ -25,6 +25,7 @@
 #import "OTEntourageCreatorViewController.h"
 #import "OTEntouragesViewController.h"
 #import "OTFiltersViewController.h"
+#import "OTFeedItemsPagination.h"
 
 #import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
@@ -139,6 +140,9 @@
 @property (nonatomic, strong) NSArray *pois;
 @property (nonatomic, strong) NSMutableArray *markers;
 
+@property (nonatomic) OTFeedItemsPagination *currentPagination;
+@property (nonatomic) BOOL isRefreshing;
+@property (nonatomic, weak) IBOutlet UIButton *nouveauxFeedItemsButton;
 
 @end
 
@@ -173,6 +177,7 @@
     self.mapView = [[MKMapView alloc] init];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
+    self.currentPagination = [OTFeedItemsPagination new];
     [self configureMapView];
     
     self.mapSegmentedControl.layer.cornerRadius = 5;
@@ -206,7 +211,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSLog(@"Restarted refresher");
-    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getData) userInfo:nil repeats:YES];
+    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getNewFeeds) userInfo:nil repeats:YES];
     [self.refreshTimer fire];
 }
 
@@ -361,11 +366,13 @@
 }
 
 
+
 static BOOL didGetAnyData = NO;
 - (void)getData {
     NSLog(@"Getting new data ...");
     if (self.toursMapDelegate.isActive) {
         [self getFeeds];
+//        [self getNewFeeds];
     }
     else {
         [self getPOIList];
@@ -374,6 +381,7 @@ static BOOL didGetAnyData = NO;
 
 
 - (void)didChangePosition {
+#warning here we need 2 distances (the existing one refers to zooming to refresh heatZone size)
     CLLocationDistance distance = [self mapWidthInMeters];
     
     // image width without transparent border ~70%
@@ -393,6 +401,7 @@ static BOOL didGetAnyData = NO;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
+    NSLog(@"didChangePositions so we need to ask for data");
     [self getFeeds];
     
 }
@@ -404,7 +413,75 @@ static BOOL didGetAnyData = NO;
     return deltaLongitude * latitudeCircumference/360;
 }
 
+- (void)getNewFeeds {
+#warning
+    if (self.isRefreshing)
+        return;
+    self.isRefreshing = YES;
+    
+    NSLog(@"Getting NEW feeds ...");
+    __block CLLocationCoordinate2D oldRequestedCoordinate;
+    oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
+    oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
+    self.requestedToursCoordinate = self.mapView.centerCoordinate;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    OTEntourageFilter *entourageFilter = [OTEntourageFilter sharedInstance];
+    
+    BOOL showTours = [[entourageFilter valueForFilter:kEntourageFilterEntourageShowTours] boolValue];
+    BOOL myEntouragesOnly = [[entourageFilter valueForFilter:kEntourageFilterEntourageOnlyMyEntourages] boolValue];
+
+    
+    NSLog(@"\n\nGetting NEW feeds ... before = %@", self.currentPagination.beforeDate);
+    NSDictionary *filterDictionary = @{
+                                       @"before" : [NSDate date],
+                                       @"latitude": @(self.requestedToursCoordinate.latitude),
+                                       @"longitude": @(self.requestedToursCoordinate.longitude),
+                                       @"distance": @TOURS_REQUEST_DISTANCE_KM,
+                                       @"tour_types": [entourageFilter getTourTypes],
+                                       @"entourage_types": [entourageFilter getEntourageTypes],
+                                       @"show_tours": showTours ? @"true" : @"false",
+                                       @"show_my_entourages_only" : myEntouragesOnly ? @"true" : @"false",
+                                       @"time_range" : [entourageFilter valueForFilter:kEntourageFilterTimeframe]
+                                       };
+    
+    [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
+                                            success:^(NSMutableArray *feeds) {
+                                                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                NSLog(@"Got %lu NEW feed items.", (unsigned long)feeds.count);
+                                                self.isRefreshing = NO;
+                                                
+                                                if (!feeds.count || !didGetAnyData) {
+                                                    return;
+                                                }
+                                                
+                                                NSUInteger existingItemsCount = [self.tableView itemsCount];
+                                                [self.tableView addFeedItems:feeds];
+                                                NSUInteger updatedItemsCount = [self.tableView itemsCount];
+                                                if (updatedItemsCount > existingItemsCount) {
+                                                    self.nouveauxFeedItemsButton.hidden = NO;
+                                                }
+                                                self.feeds = [[self.tableView items] mutableCopy];
+                                                [self feedMapWithFeedItems];
+                                                [self.tableView reloadData];
+                                                
+                                            } failure:^(NSError *error) {
+                                                NSLog(@"Error getting feeds: %@", error.description);
+                                                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                self.requestedToursCoordinate = oldRequestedCoordinate;
+                                                [self registerObserver];
+                                                [self.indicatorView setHidden:YES];
+                                                self.isRefreshing = NO;
+                                            }];
+
+}
+
 - (void)getFeeds {
+    
+    if (self.currentPagination.isLoading)
+        return;
+    self.currentPagination.isLoading = YES;
+
     NSLog(@"Getting feeds ...");
     __block CLLocationCoordinate2D oldRequestedCoordinate;
     oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
@@ -416,9 +493,15 @@ static BOOL didGetAnyData = NO;
     
     BOOL showTours = [[entourageFilter valueForFilter:kEntourageFilterEntourageShowTours] boolValue];
     BOOL myEntouragesOnly = [[entourageFilter valueForFilter:kEntourageFilterEntourageOnlyMyEntourages] boolValue];
+    if (!self.currentPagination.beforeDate)
+        self.currentPagination.beforeDate = [NSDate date];
     
-    NSDictionary *filterDictionary = @{  @"page": @1,
-                                         @"per": @20,
+    
+    NSLog(@"\n\nGetting feeds ... before = %@", self.currentPagination.beforeDate);
+#warning get paginated data
+    NSDictionary *filterDictionary = @{  //@"page": @(self.currentPagination.page),
+                                         //@"per": @20,//FEEDITEMS_PER_PAGE,
+                                         @"before" : self.currentPagination.beforeDate,
                                          @"latitude": @(self.requestedToursCoordinate.latitude),
                                          @"longitude": @(self.requestedToursCoordinate.longitude),
                                          @"distance": @TOURS_REQUEST_DISTANCE_KM,
@@ -429,27 +512,43 @@ static BOOL didGetAnyData = NO;
                                          @"time_range" : [entourageFilter valueForFilter:kEntourageFilterTimeframe]
                                          };
     
-    [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
+        [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                 NSLog(@"Got %lu feed items.", (unsigned long)feeds.count);
-                                                
                                                 if (feeds.count && !didGetAnyData) {
                                                     [self showToursList];
                                                     didGetAnyData = YES;
                                                 }
+                                                
+                                                if (!feeds.count) {
+                                                    self.currentPagination.isLoading = NO;
+                                                    return;
+                                                }
                                                 [self.indicatorView setHidden:YES];
-                                                self.feeds = feeds;
-                                                [self.tableView removeAll];
+                                                
+                                                OTFeedItem *lastFeed = self.feeds.lastObject;
+                                                NSLog(@"%@ > %@", lastFeed.creationDate, self.currentPagination.beforeDate);
+                                                if ([lastFeed.creationDate compare:self.currentPagination.beforeDate] != NSOrderedDescending) {
+                                                    self.feeds = feeds;
+                                                    [self.tableView removeAll];
+                                                } else {
+                                                    [self.feeds addObjectsFromArray:feeds];
+                                                }
+                                                //NSLog(@"Got %lu feed items on %lu existing items", (unsigned long)feeds.count, (unsigned long)self.feeds.count);
+
                                                 [self.tableView addFeedItems:feeds];
                                                 [self feedMapWithFeedItems];
                                                 [self.tableView reloadData];
+                                                 self.currentPagination.isLoading = NO;
+                                                
                                             } failure:^(NSError *error) {
                                                 NSLog(@"Error getting feeds: %@", error.description);
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                 self.requestedToursCoordinate = oldRequestedCoordinate;
                                                 [self registerObserver];
                                                 [self.indicatorView setHidden:YES];
+                                                 self.currentPagination.isLoading = NO;
                                             }];
 }
 
@@ -936,6 +1035,7 @@ static bool isShowingOptions = NO;
 #pragma mark - OTFiltersViewControllerDelegate
 
 - (void) filterChanged {
+    self.currentPagination.beforeDate = nil;
     [self getData];
 }
 
@@ -955,9 +1055,22 @@ static bool isShowingOptions = NO;
     }
 }
 
+- (IBAction)doShowNewFeedItems:(UIButton*)sender {
+    self.nouveauxFeedItemsButton.hidden = YES;
+    [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointZero animated:YES];}
+
 
 /**************************************************************************************************/
 #pragma mark - Feeds Table View Delegate
+
+- (void)loadMoreData {
+#warning Load some more data
+    NSLog(@"We should load some more feed items on newsfeeds!");
+    self.currentPagination.beforeDate = ((OTFeedItem*)self.feeds.lastObject).creationDate;
+    [self getData];
+}
+
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;
@@ -1088,7 +1201,7 @@ static bool isShowingOptions = NO;
 }
 
 - (void)showToursMap {
-    
+    self.nouveauxFeedItemsButton.hidden = YES;
     if (self.toursMapDelegate.isActive) {
         self.isTourListDisplayed = NO;
     }
