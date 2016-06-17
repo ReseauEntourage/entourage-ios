@@ -7,7 +7,8 @@
 //
 
 #import "OTTourFactory.h"
-#import "OTTourStateFactory.h"
+#import "OTTourStateTransition.h"
+#import "OTTourStateInfo.h"
 
 @implementation OTTourFactory
 
@@ -20,8 +21,12 @@
     return self;
 }
 
-- (id<OTStateFactoryDelegate>)getStateFactory {
-    return [[OTTourStateFactory alloc] initWithTour:self.tour];
+- (id<OTStateTransitionDelegate>)getStateTransition {
+    return [[OTTourStateTransition alloc] initWithTour:self.tour];
+}
+
+- (id<OTStateInfoDelegate>)getStateInfo {
+    return [[OTTourStateInfo alloc] initWithTour:self.tour];
 }
 
 @end

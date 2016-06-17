@@ -9,14 +9,14 @@
 #import "OTQuitFeedItemViewController.h"
 #import "OTTourService.h"
 #import "OTFeedItemFactory.h"
-#import "OTStateFactoryDelegate.h"
+#import "OTStateTransitionDelegate.h"
 
 @implementation OTQuitFeedItemViewController
 
 - (IBAction)doQuitFeedItem {
-    id<OTStateFactoryDelegate> stateHandler = [[OTFeedItemFactory createFor:self.feedItem] getStateFactory];
+    id<OTStateTransitionDelegate> stateTransitionHandler = [[OTFeedItemFactory createFor:self.feedItem] getStateTransition];
     
-    [stateHandler quitWithSuccess:^() {
+    [stateTransitionHandler quitWithSuccess:^() {
         self.feedItem.joinStatus = @"not_requested";
         //[self dismissViewControllerAnimated:YES completion:nil];
         [self.feedItemQuitDelegate didQuitFeedItem];

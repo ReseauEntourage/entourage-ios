@@ -1,13 +1,12 @@
 //
-//  OTStateFactory.h
+//  OTStateInfoDelegate.h
 //  entourage
 //
-//  Created by sergiu buceac on 6/14/16.
+//  Created by sergiu buceac on 6/17/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "OTFeedItem.h"
 
 typedef enum {
     FeedItemStateNone = -1,
@@ -17,11 +16,8 @@ typedef enum {
     FeedItemStateQuit
 } FeedItemState;
 
-@protocol OTStateFactoryDelegate <NSObject>
+@protocol OTStateInfoDelegate <NSObject>
 
-- (void)closeWithSuccess:(void (^)())success;
-- (void)freezeWithSuccess:(void (^)())success;
-- (void)quitWithSuccess:(void (^)())success;
 - (FeedItemState)getActionableState;
 - (BOOL)canChangeState;
 

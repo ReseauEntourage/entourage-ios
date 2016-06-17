@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OTStateFactoryDelegate.h"
+#import "OTStateTransitionDelegate.h"
 #import "OTEntourageFactory.h"
 
-@interface OTEntourageStateFactory : OTEntourageFactory<OTStateFactoryDelegate>
+@interface OTEntourageStateTransition : OTEntourageFactory<OTStateTransitionDelegate>
 @end

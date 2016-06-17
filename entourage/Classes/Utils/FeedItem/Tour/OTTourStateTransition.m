@@ -6,13 +6,11 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTTourStateFactory.h"
+#import "OTTourStateTransition.h"
 #import "OTTour.h"
 #import "OTTourService.h"
-#import "OTUser.h"
-#import "NSUserDefaults+OT.h"
 
-@implementation OTTourStateFactory
+@implementation OTTourStateTransition
 
 - (void)closeWithSuccess:(void (^)())success {
     [[OTTourService new] closeTour:self.tour
@@ -43,22 +41,6 @@
                           } failure:^(NSError *error) {
                               NSLog(@"QUITerr %@", error.description);
                           }];
-}
-
-- (FeedItemState)getActionableState {
-    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    if ([currentUser.sid intValue] == [self.tour.author.uID intValue]) {
-        if ([self.tour.status isEqualToString:TOUR_STATUS_ONGOING])
-            return FeedItemStateClosed;
-        else
-            return FeedItemStateFrozen;
-    } else {
-        return FeedItemStateQuit;
-    }
-}
-
-- (BOOL)canChangeState {
-    return ![self.tour.status isEqualToString:TOUR_STATUS_FREEZED];
 }
 
 @end

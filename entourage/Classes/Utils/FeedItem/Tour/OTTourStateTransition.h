@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OTStateFactoryDelegate.h"
+#import "OTStateTransitionDelegate.h"
 #import "OTTourFactory.h"
 
-@interface OTTourStateFactory : OTTourFactory<OTStateFactoryDelegate>
+@interface OTTourStateTransition : OTTourFactory<OTStateTransitionDelegate>
 @end

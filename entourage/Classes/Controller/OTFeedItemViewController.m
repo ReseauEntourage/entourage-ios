@@ -28,7 +28,7 @@
 #import "OTTourStatus.h"
 #import "OTUser.h"
 #import "OTFeedItemFactory.h"
-#import "OTStateFactoryDelegate.h"
+#import "OTStateInfoDelegate.h"
 
 // Services
 #import "OTTourService.h"
@@ -84,7 +84,7 @@ typedef NS_ENUM(unsigned) {
 @end
 
 @implementation OTFeedItemViewController {
-    id<OTStateFactoryDelegate> stateHandler;
+    id<OTStateInfoDelegate> stateInfoHandler;
 }
 
 /**************************************************************************************************/
@@ -92,7 +92,7 @@ typedef NS_ENUM(unsigned) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    stateHandler = [[OTFeedItemFactory createFor:self.feedItem] getStateFactory];
+    stateInfoHandler = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
     self.title = [[_feedItem navigationTitle] uppercaseString];
     [self setupCloseModal];
     [self setupMoreButtons];
@@ -186,7 +186,7 @@ typedef NS_ENUM(unsigned) {
     [self.timelineButton setSelected:YES];
     [self.infoButton setSelected:NO];
     
-    self.chatToolbar.hidden = ![stateHandler canChangeState];//![self.feedItem isKindOfClass:[OTTour class]];
+    self.chatToolbar.hidden = ![stateInfoHandler canChangeState];//![self.feedItem isKindOfClass:[OTTour class]];
 }
 
 - (IBAction)showInfo {
@@ -314,7 +314,7 @@ typedef NS_ENUM(unsigned) {
         [plusButton setTarget:self];
         //[plusButton setAction:@selector(addUser)];
 
-        if(![stateHandler canChangeState])
+        if(![stateInfoHandler canChangeState])
             return;
         UIImage *moreImage = [[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
