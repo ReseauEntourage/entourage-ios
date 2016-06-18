@@ -35,6 +35,7 @@
         case FeedItemStateOngoing:
             [self addButtonWithTitle:OTLocalizedString(@"item_option_close") withSelectorNamed:@"doCloseFeedItem"];
             break;
+        case FeedItemStateOpen:
         case FeedItemStateClosed:
             [self addButtonWithTitle:OTLocalizedString(@"item_option_freeze") withSelectorNamed:@"doFreezeFeedItem"];
             break;
@@ -67,15 +68,15 @@
 
 #pragma mark - Actions
 - (IBAction)doFreezeFeedItem {
-    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] freezeWithSuccess:^() {
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] deactivateWithSuccess:^(BOOL isTour) {
         [self dismissViewControllerAnimated:YES completion:nil];
-    }];
+    } orFailure:nil];
 }
 
 - (IBAction)doCloseFeedItem {
-    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] stopWithSuccess:^() {
         [self.delegate promptToCloseFeedItem];
-    } orFailure:nil];
+    }];
 }
 
 - (IBAction)doQuitFeedItem {

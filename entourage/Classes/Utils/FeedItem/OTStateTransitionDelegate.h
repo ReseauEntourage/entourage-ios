@@ -11,8 +11,8 @@
 
 @protocol OTStateTransitionDelegate <NSObject>
 
-- (void)closeWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure;
-- (void)freezeWithSuccess:(void (^)())success;
+- (void)stopWithSuccess:(void (^)())success;
+- (void)deactivateWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure;
 - (void)quitWithSuccess:(void (^)())success;
 
 @end

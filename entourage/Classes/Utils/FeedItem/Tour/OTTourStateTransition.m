@@ -12,26 +12,26 @@
 
 @implementation OTTourStateTransition
 
-- (void)closeWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure {
+- (void)stopWithSuccess:(void (^)())success {
     [[OTTourService new] closeTour:self.tour
                        withSuccess:^(OTTour *updatedTour) {
                            NSLog(@"Closed tour: %@", updatedTour.uid);
-                           success(YES);
+                           success();
                        } failure:^(NSError *error) {
                            NSLog(@"CLOSEerr %@", error.description);
-                           if(failure)
-                               failure(error);
                        }];
 }
 
-- (void)freezeWithSuccess:(void (^)())success {
+- (void)deactivateWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure {
     self.tour.status = TOUR_STATUS_FREEZED;
     [[OTTourService new] closeTour:self.tour
                        withSuccess:^(OTTour *updatedTour) {
                            NSLog(@"freezed tour: %@", updatedTour.uid);
-                           success();
+                           success(YES);
                        } failure:^(NSError *error) {
                            NSLog(@"FREEZEerr %@", error.description);
+                           if(failure)
+                               failure(error);
                        }];
 }
 

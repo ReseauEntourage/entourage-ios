@@ -13,21 +13,21 @@
 
 @implementation OTEntourageStateTransition
 
-- (void)closeWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure {
-    self.entourage.status = FEEDITEM_STATUS_CLOSED;
-    [[OTEntourageService new] closeEntourage:self.entourage
-                       withSuccess:^(OTEntourage *updatedEntourage) {
-                           NSLog(@"Closed entourage: %@", updatedEntourage.uid);
-                           success(NO);
-                       } failure:^(NSError *error) {
-                           NSLog(@"CLOSEerr %@", error.description);
-                           if(failure)
-                               failure(error);
-                       }];
+- (void)stopWithSuccess:(void (^)())success {
+    success();
 }
 
-- (void)freezeWithSuccess:(void (^)())success {
-    success();
+- (void)deactivateWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError *))failure {
+    self.entourage.status = FEEDITEM_STATUS_CLOSED;
+    [[OTEntourageService new] closeEntourage:self.entourage
+                                 withSuccess:^(OTEntourage *updatedEntourage) {
+                                     NSLog(@"Closed entourage: %@", updatedEntourage.uid);
+                                     success(NO);
+                                 } failure:^(NSError *error) {
+                                     NSLog(@"CLOSEerr %@", error.description);
+                                     if(failure)
+                                         failure(error);
+                                 }];
 }
 
 - (void)quitWithSuccess:(void (^)())success {
