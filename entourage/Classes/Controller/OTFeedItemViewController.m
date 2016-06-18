@@ -183,7 +183,7 @@ typedef NS_ENUM(unsigned) {
     [self.timelineButton setSelected:YES];
     [self.infoButton setSelected:NO];
     
-    self.chatToolbar.hidden = ![[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canChangeState];
+    self.chatToolbar.hidden = ![[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canChangeEditState];
     //![self.feedItem isKindOfClass:[OTTour class]];
 }
 
@@ -312,7 +312,7 @@ typedef NS_ENUM(unsigned) {
         [plusButton setTarget:self];
         //[plusButton setAction:@selector(addUser)];
 
-        if(![[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canChangeState])
+        if(![[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canChangeEditState])
             return;
         UIImage *moreImage = [[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         

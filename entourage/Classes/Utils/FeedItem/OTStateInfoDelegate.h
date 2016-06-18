@@ -19,14 +19,12 @@ typedef enum {
     FeedItemStateJoinAccepted,
     FeedItemStateJoinPending,
     FeedItemStateJoinNotRequested,
-    FeedItemStateJoinRejected,
-    FeedItemStateQuit
+    FeedItemStateJoinRejected
 } FeedItemState;
 
 @protocol OTStateInfoDelegate <NSObject>
 
-- (FeedItemState)getEditNextState;
-- (FeedItemState)getFeedNextState;
-- (BOOL)canChangeState;
+- (FeedItemState)getState;
+- (BOOL)canChangeEditState;
 
 @end

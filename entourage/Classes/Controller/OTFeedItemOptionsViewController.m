@@ -30,15 +30,15 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    FeedItemState newState = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getEditNextState];
-    switch (newState) {
-        case FeedItemStateClosed:
+    FeedItemState currentState = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
+    switch (currentState) {
+        case FeedItemStateOngoing:
             [self addButtonWithTitle:OTLocalizedString(@"item_option_close") withSelectorNamed:@"doCloseFeedItem"];
             break;
-        case FeedItemStateFrozen:
+        case FeedItemStateClosed:
             [self addButtonWithTitle:OTLocalizedString(@"item_option_freeze") withSelectorNamed:@"doFreezeFeedItem"];
             break;
-        case FeedItemStateQuit:
+        case FeedItemStateJoinAccepted:
             [self addButtonWithTitle:OTLocalizedString(@"item_option_quit") withSelectorNamed:@"doQuitFeedItem"];
             break;
         default:

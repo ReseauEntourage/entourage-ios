@@ -12,24 +12,34 @@
 
 @implementation OTTourStateInfo
 
-- (FeedItemState)getEditNextState {
+- (FeedItemState)getState {
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     if ([currentUser.sid intValue] == [self.tour.author.uID intValue]) {
         if ([TOUR_STATUS_ONGOING isEqualToString:self.tour.status])
-            return FeedItemStateClosed;
-        else
+            return FeedItemStateOngoing;
+        else if ([TOUR_STATUS_FREEZED isEqualToString:self.tour.status])
             return FeedItemStateFrozen;
-    } else if([JOIN_ACCEPTED isEqualToString:self.tour.joinStatus])
-        return FeedItemStateQuit;
+        else
+            return FeedItemStateClosed;
+    }
+    else {
+        if([JOIN_NOT_REQUESTED isEqualToString:self.tour.joinStatus])
+            return FeedItemStateJoinNotRequested;
+        else if([JOIN_ACCEPTED isEqualToString:self.tour.joinStatus])
+            return FeedItemStateJoinAccepted;
+        else if([JOIN_PENDING isEqualToString:self.tour.joinStatus])
+            return FeedItemStateJoinPending;
+        else if([JOIN_REJECTED isEqualToString:self.tour.joinStatus])
+            return FeedItemStateJoinRejected;
+    }
     return FeedItemStateNone;
 }
 
-- (FeedItemState)getFeedNextState {
-    return 0;
-}
-
-- (BOOL)canChangeState {
-    return ![self.tour.status isEqualToString:TOUR_STATUS_FREEZED];
+- (BOOL)canChangeEditState {
+    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    if ([currentUser.sid intValue] == [self.tour.author.uID intValue])
+        return ![self.tour.status isEqualToString:TOUR_STATUS_FREEZED];
+    return NO;
 }
 
 @end
