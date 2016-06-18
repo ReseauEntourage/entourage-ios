@@ -12,16 +12,18 @@
 
 @implementation OTEntourageStateInfo
 
-- (FeedItemState)getActionableState {
+- (FeedItemState)getEditNextState {
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     if ([currentUser.sid intValue] == [self.entourage.author.uID intValue]) {
-        NSLog(@"status>>> %@", self.entourage.status);
-        if ([self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN])
+        if ([ENTOURAGE_STATUS_OPEN isEqualToString:self.entourage.status])
             return FeedItemStateClosed;
-    } else {
+    } else if([JOIN_ACCEPTED isEqualToString:self.entourage.joinStatus])
         return FeedItemStateQuit;
-    }
     return FeedItemStateNone;
+}
+
+- (FeedItemState)getFeedNextState {
+    return 0;
 }
 
 - (BOOL)canChangeState {

@@ -11,8 +11,6 @@
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 #import "OTFeedItemFactory.h"
-#import "OTStateTransitionDelegate.h"
-#import "OTStateInfoDelegate.h"
 
 #define BUTTON_HEIGHT 44.0f
 #define BUTTON_DELTAY  8.0f
@@ -24,10 +22,7 @@
 
 @end
 
-@implementation OTFeedItemDetailsOptionsViewController {
-    id<OTStateTransitionDelegate> stateTransitionHandler;
-    id<OTStateInfoDelegate> stateInfoHandler;
-}
+@implementation OTFeedItemDetailsOptionsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,8 +30,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    stateInfoHandler = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
-    FeedItemState newState = [stateInfoHandler getActionableState];
+    FeedItemState newState = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getEditNextState];
     switch (newState) {
         case FeedItemStateClosed:
             [self addButtonWithTitle:OTLocalizedString(@"item_option_close") withSelectorNamed:@"doCloseFeedItem"];
@@ -73,19 +67,19 @@
 
 #pragma mark - Actions
 - (IBAction)doFreezeFeedItem {
-    [stateTransitionHandler freezeWithSuccess:^() {
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] freezeWithSuccess:^() {
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
 }
 
 - (IBAction)doCloseFeedItem {
-    [stateTransitionHandler closeWithSuccess:^() {
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
         [self.delegate promptToCloseFeedItem];
-    }];
+    } orFailure:nil];
 }
 
 - (IBAction)doQuitFeedItem {
-    [stateTransitionHandler quitWithSuccess:^() {
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
 }

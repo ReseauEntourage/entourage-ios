@@ -12,13 +12,15 @@
 
 @implementation OTTourStateTransition
 
-- (void)closeWithSuccess:(void (^)())success {
+- (void)closeWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure {
     [[OTTourService new] closeTour:self.tour
                        withSuccess:^(OTTour *updatedTour) {
                            NSLog(@"Closed tour: %@", updatedTour.uid);
-                           success();
+                           success(YES);
                        } failure:^(NSError *error) {
                            NSLog(@"CLOSEerr %@", error.description);
+                           if(failure)
+                               failure(error);
                        }];
 }
 

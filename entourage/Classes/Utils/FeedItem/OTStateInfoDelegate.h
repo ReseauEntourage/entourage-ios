@@ -9,16 +9,24 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    FeedItemStateNone = -1,
+    FeedItemStateNone,
+    FeedItemStateActive,
+    FeedItemStateInactive,
     FeedItemStateOpen,
     FeedItemStateClosed,
+    FeedItemStateOngoing,
     FeedItemStateFrozen,
+    FeedItemStateJoinAccepted,
+    FeedItemStateJoinPending,
+    FeedItemStateJoinNotRequested,
+    FeedItemStateJoinRejected,
     FeedItemStateQuit
 } FeedItemState;
 
 @protocol OTStateInfoDelegate <NSObject>
 
-- (FeedItemState)getActionableState;
+- (FeedItemState)getEditNextState;
+- (FeedItemState)getFeedNextState;
 - (BOOL)canChangeState;
 
 @end

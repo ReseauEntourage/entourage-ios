@@ -78,6 +78,7 @@
 
 #import "OTLocationManager.h"
 #import "NSNotification+entourage.h"
+#import "OTFeedItemFactory.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -1142,32 +1143,21 @@ static bool isShowingOptions = NO;
             if (self.isTourRunning && feedItem.uid.intValue == self.tour.uid.intValue) {
                 [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
             } else {
-                
-                feedItem.status = FEEDITEM_STATUS_CLOSED;
-                if ([feedItem isKindOfClass:[OTTour class]]) {
-                    [[OTTourService new] closeTour:(OTTour*)feedItem
-                                       withSuccess:^(OTTour *closedTour) {
-                                           [self dismissViewControllerAnimated:YES completion:^{
-                                               [self.tableView reloadData];
-                                               
-                                           }];
-                                           [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_quitted")];
-                                       } failure:^(NSError *error) {
-                                           [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
-                                           NSLog(@"%@",[error localizedDescription]);
-                                       }];
-                } else {
-                    OTEntourage *entourage = (OTEntourage*)feedItem;
-                    entourage.status = FEEDITEM_STATUS_CLOSED;
-                    [[OTEntourageService new] closeEntourage:entourage
-                                                 withSuccess:^(OTEntourage *entoruage) {
-                                                     [self.tableView reloadData];
-                                                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageQuitted")];
-                                                 } failure:^(NSError *error) {
-                                                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"Erreur")];
-                                                     NSLog(@"%@",[error localizedDescription]);
-                                                 }];
-                }
+                [[[OTFeedItemFactory createFor:feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
+                    if(isTour) {
+                        [self dismissViewControllerAnimated:YES completion:^{
+                            [self.tableView reloadData];
+                        }];
+                        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_quitted")];
+                    }
+                    else {
+                        [self.tableView reloadData];
+                        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageQuitted")];
+                    }
+                } orFailure:^(NSError *error) {
+                    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
+                    NSLog(@"%@",[error localizedDescription]);
+                }];
             }
         } else {
             [self performSegueWithIdentifier:@"QuitFeedItemSegue" sender:self];

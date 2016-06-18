@@ -12,16 +12,20 @@
 
 @implementation OTTourStateInfo
 
-- (FeedItemState)getActionableState {
+- (FeedItemState)getEditNextState {
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     if ([currentUser.sid intValue] == [self.tour.author.uID intValue]) {
-        if ([self.tour.status isEqualToString:TOUR_STATUS_ONGOING])
+        if ([TOUR_STATUS_ONGOING isEqualToString:self.tour.status])
             return FeedItemStateClosed;
         else
             return FeedItemStateFrozen;
-    } else {
+    } else if([JOIN_ACCEPTED isEqualToString:self.tour.joinStatus])
         return FeedItemStateQuit;
-    }
+    return FeedItemStateNone;
+}
+
+- (FeedItemState)getFeedNextState {
+    return 0;
 }
 
 - (BOOL)canChangeState {

@@ -581,7 +581,7 @@
 			name = Filter;
 			sourceTree = "<group>";
 		};
-		2EDA5F041CB50CB700849172 /* Tour */ = {
+		2EDA5F041CB50CB700849172 /* FeedItems */ = {
 			isa = PBXGroup;
 			children = (
 				2EDA5F051CB50CEE00849172 /* OTFeedItemsTableView.h */,
@@ -591,7 +591,7 @@
 				4551708A1CF0D54100962369 /* OTFeedItemInfoView.h */,
 				4551708B1CF0D54100962369 /* OTFeedItemInfoView.m */,
 			);
-			name = Tour;
+			name = FeedItems;
 			sourceTree = "<group>";
 		};
 		2EDA5F0B1CB67F4000849172 /* MapDelegate */ = {
@@ -1042,7 +1042,7 @@
 			isa = PBXGroup;
 			children = (
 				2E5B0EBD1CF06CCA0078454F /* Filter */,
-				2EDA5F041CB50CB700849172 /* Tour */,
+				2EDA5F041CB50CB700849172 /* FeedItems */,
 				DBBE8ACF19E857F000FA218E /* Menu */,
 				A8E10FAC19E82A4800DF4A01 /* OTCustomAnnotation.h */,
 				A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */,

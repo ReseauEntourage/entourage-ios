@@ -14,6 +14,11 @@
 #define FEEDITEM_STATUS_ACTIVE @"active"
 #define FEEDITEM_STATUS_CLOSED @"closed"
 
+#define JOIN_ACCEPTED @"accepted"
+#define JOIN_PENDING @"pending"
+#define JOIN_NOT_REQUESTED @"not_requested"
+#define JOIN_REJECTED @"rejected"
+
 @interface OTFeedItem : NSObject
 
 @property (nonatomic, strong) NSNumber *uid;

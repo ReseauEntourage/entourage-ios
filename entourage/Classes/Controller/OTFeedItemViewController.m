@@ -83,16 +83,13 @@ typedef NS_ENUM(unsigned) {
 
 @end
 
-@implementation OTFeedItemViewController {
-    id<OTStateInfoDelegate> stateInfoHandler;
-}
+@implementation OTFeedItemViewController
 
 /**************************************************************************************************/
 #pragma mark - Life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    stateInfoHandler = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
     self.title = [[_feedItem navigationTitle] uppercaseString];
     [self setupCloseModal];
     [self setupMoreButtons];
@@ -186,7 +183,8 @@ typedef NS_ENUM(unsigned) {
     [self.timelineButton setSelected:YES];
     [self.infoButton setSelected:NO];
     
-    self.chatToolbar.hidden = ![stateInfoHandler canChangeState];//![self.feedItem isKindOfClass:[OTTour class]];
+    self.chatToolbar.hidden = ![[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canChangeState];
+    //![self.feedItem isKindOfClass:[OTTour class]];
 }
 
 - (IBAction)showInfo {
@@ -314,7 +312,7 @@ typedef NS_ENUM(unsigned) {
         [plusButton setTarget:self];
         //[plusButton setAction:@selector(addUser)];
 
-        if(![stateInfoHandler canChangeState])
+        if(![[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canChangeState])
             return;
         UIImage *moreImage = [[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
