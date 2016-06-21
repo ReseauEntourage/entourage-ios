@@ -1128,10 +1128,8 @@ static bool isShowingOptions = NO;
                     [self dismissViewControllerAnimated:YES completion:nil];
                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_quitted")];
                 }
-                else {
-                    [self.tableView reloadData];
+                else
                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageQuitted")];
-                }
                 [self.tableView reloadData];
             } orFailure:^(NSError *error) {
                 [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
