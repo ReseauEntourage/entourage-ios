@@ -115,7 +115,7 @@
     entourage.status = ENTOURAGE_STATUS_OPEN;
     [SVProgressHUD show];
     [[OTEncounterService new] sendEntourage:entourage
-                                withSuccess:^(OTEntourage *sentEncounter) {
+                                withSuccess:^(OTEntourage *sentEntourage) {
                                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
                                     if ([self.entourageCreatorDelegate respondsToSelector:@selector(didCreateEntourage)]) {
                                         [self.entourageCreatorDelegate performSelector:@selector(didCreateEntourage)];

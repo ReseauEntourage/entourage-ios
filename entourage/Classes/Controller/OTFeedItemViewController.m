@@ -183,8 +183,7 @@ typedef NS_ENUM(unsigned) {
     [self.timelineButton setSelected:YES];
     [self.infoButton setSelected:NO];
     
-    self.chatToolbar.hidden = ![[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canChangeEditState];
-    //![self.feedItem isKindOfClass:[OTTour class]];
+    self.chatToolbar.hidden = NO;
 }
 
 - (IBAction)showInfo {
@@ -195,12 +194,8 @@ typedef NS_ENUM(unsigned) {
     
     self.chatToolbar.hidden = YES;
     
-    
     [self.infoView setupWithFeedItem:self.feedItem];
 }
-
-
-
 
 - (IBAction)startStopRecording:(id)sender {
     
