@@ -1023,6 +1023,9 @@ static bool isShowingOptions = NO;
 
 - (void) filterChanged {
     self.currentPagination.beforeDate = nil;
+    self.feeds = [NSMutableArray new];
+    [self.tableView removeAll];
+    [self.tableView reloadData];
     [self getData];
 }
 
