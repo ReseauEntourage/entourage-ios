@@ -78,6 +78,7 @@
 
 #import "OTLocationManager.h"
 #import "NSNotification+entourage.h"
+#import "OTFeedItemFactory.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -1126,52 +1127,39 @@ static bool isShowingOptions = NO;
 
 - (void)doJoinRequest:(OTFeedItem*)feedItem {
     self.selectedFeedItem = feedItem;
-
-    if ([feedItem.joinStatus isEqualToString:@"not_requested"])
-    {
-        [self sendJoinRequest:feedItem];
-    }
-    else  if ([feedItem.joinStatus isEqualToString:@"pending"])
-    {
-        [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
-    }
-    else
-    {
-        OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-        if (currentUser.sid.intValue == feedItem.author.uID.intValue) {
-            if (self.isTourRunning && feedItem.uid.intValue == self.tour.uid.intValue) {
-                [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
-            } else {
-                
-                feedItem.status = FEEDITEM_STATUS_CLOSED;
-                if ([feedItem isKindOfClass:[OTTour class]]) {
-                    [[OTTourService new] closeTour:(OTTour*)feedItem
-                                       withSuccess:^(OTTour *closedTour) {
-                                           [self dismissViewControllerAnimated:YES completion:^{
-                                               [self.tableView reloadData];
-                                               
-                                           }];
-                                           [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_quitted")];
-                                       } failure:^(NSError *error) {
-                                           [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
-                                           NSLog(@"%@",[error localizedDescription]);
-                                       }];
-                } else {
-                    OTEntourage *entourage = (OTEntourage*)feedItem;
-                    entourage.status = FEEDITEM_STATUS_CLOSED;
-                    [[OTEntourageService new] closeEntourage:entourage
-                                                 withSuccess:^(OTEntourage *entoruage) {
-                                                     [self.tableView reloadData];
-                                                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageQuitted")];
-                                                 } failure:^(NSError *error) {
-                                                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"Erreur")];
-                                                     NSLog(@"%@",[error localizedDescription]);
-                                                 }];
-                }
-            }
-        } else {
+    FeedItemState currentState = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] getState];
+    switch (currentState) {
+        case FeedItemStateJoinAccepted:
             [self performSegueWithIdentifier:@"QuitFeedItemSegue" sender:self];
-        }
+            break;
+        case FeedItemStateJoinNotRequested:
+            [self sendJoinRequest:feedItem];
+            break;
+        case FeedItemStateJoinPending:
+            [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+            break;
+        case FeedItemStateOngoing:
+            if (self.isTourRunning && feedItem.uid.intValue == self.tour.uid.intValue)
+                [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
+            break;
+        case FeedItemStateOpen:
+        case FeedItemStateClosed:
+            [[[OTFeedItemFactory createFor:feedItem] getStateTransition] deactivateWithSuccess:^(BOOL isTour) {
+                if(isTour) {
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        [self.tableView reloadData];
+                    }];
+                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_quitted")];
+                }
+                else {
+                    [self.tableView reloadData];
+                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageQuitted")];
+                }
+            } orFailure:^(NSError *error) {
+                [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
+                NSLog(@"%@",[error localizedDescription]);
+            }];
+            break;
     }
 }
 

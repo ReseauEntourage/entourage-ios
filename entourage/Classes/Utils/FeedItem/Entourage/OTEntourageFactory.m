@@ -7,7 +7,8 @@
 //
 
 #import "OTEntourageFactory.h"
-#import "OTEntourageStateFactory.h"
+#import "OTEntourageStateTransition.h"
+#import "OTEntourageStateInfo.h"
 
 @implementation OTEntourageFactory
 
@@ -20,8 +21,12 @@
     return self;
 }
 
-- (id<OTStateFactoryDelegate>)getStateFactory {
-    return [[OTEntourageStateFactory alloc] initWithEntourage:self.entourage];
+- (id<OTStateTransitionDelegate>)getStateTransition {
+    return [[OTEntourageStateTransition alloc] initWithEntourage:self.entourage];
+}
+
+- (id<OTStateInfoDelegate>)getStateInfo {
+    return [[OTEntourageStateInfo alloc] initWithEntourage:self.entourage];
 }
 
 @end

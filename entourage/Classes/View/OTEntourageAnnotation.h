@@ -11,15 +11,12 @@
 
 @class OTEntourage;
 
-extern NSString *const kEntourageAnnotationIdentifier;
-extern NSString *const kEntourageClusterAnnotationIdentifier;
-
 @interface OTEntourageAnnotation : NSObject <MKAnnotation>
 
 - (id)initWithEntourage:(OTEntourage *)entourage;
 - (id)initWithEntourage:(OTEntourage *)entourage andScale:(double)scale;
-- (MKAnnotationView *)annotationView;
 
 @property (nonatomic, strong) OTEntourage *entourage;
+@property (nonatomic) CGFloat scale;
 
 @end

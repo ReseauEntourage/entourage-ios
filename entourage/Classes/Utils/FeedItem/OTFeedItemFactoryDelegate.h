@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "OTFeedItem.h"
-#import "OTStateFactoryDelegate.h"
+#import "OTStateTransitionDelegate.h"
+#import "OTStateInfoDelegate.h"
 
 @protocol OTFeedItemFactoryDelegate <NSObject>
 
-- (id<OTStateFactoryDelegate>)getStateFactory;
+- (id<OTStateTransitionDelegate>)getStateTransition;
+- (id<OTStateInfoDelegate>)getStateInfo;
 
 @end

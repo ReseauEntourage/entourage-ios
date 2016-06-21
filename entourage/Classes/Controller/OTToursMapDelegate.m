@@ -17,6 +17,7 @@
 #import "OTTourService.h"
 #import "UIColor+entourage.h"
 #import "UIImage+entourage.h"
+#import "OTEntourageAnnotationView.h"
 
 @interface OTToursMapDelegate ()
 
@@ -91,11 +92,15 @@
                 }
                 annotationView.annotation = simpleAnnontation;
             } else if ([simpleAnnontation isKindOfClass:[OTEntourageAnnotation class]]) {
+                OTEntourageAnnotation *entAnnotation = (OTEntourageAnnotation *)simpleAnnontation;
                 annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEntourageAnnotationIdentifier];
-                if (!annotationView) {
-                    annotationView = ((OTEntourageAnnotation *)simpleAnnontation).annotationView;
+                if(annotationView) {
+                    OTEntourageAnnotationView *entAnnotationView = (OTEntourageAnnotationView *)annotationView;
+                    entAnnotationView.annotation = entAnnotation;
+                    [entAnnotationView updateScale:entAnnotation.scale];
                 }
-                annotationView.annotation = simpleAnnontation;
+                else
+                    annotationView = [[OTEntourageAnnotationView alloc] initWithAnnotation:entAnnotation reuseIdentifier:kEntourageAnnotationIdentifier andScale:entAnnotation.scale];
             }
         }
         annotationView.canShowCallout = YES;

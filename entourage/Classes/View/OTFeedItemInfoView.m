@@ -14,8 +14,7 @@
 #import "UILabel+entourage.h"
 #import "UIButton+entourage.h"
 #import "OTEntourageAnnotation.h"
-
-
+#import "OTEntourageAnnotationView.h"
 
 #define FEEDITEM_MAP_TAG 1
 #define FEEDITEM_DESCRIPTION_TAG 2
@@ -72,8 +71,14 @@
     
     if ([annotation isKindOfClass:[OTEntourageAnnotation class]]) {
         OTEntourageAnnotation *entAnnotation = (OTEntourageAnnotation*)annotation;
-        MKAnnotationView *annotationView = entAnnotation.annotationView;// [mapView dequeueReusableAnnotationViewWithIdentifier:@"EntourageAnnotation"];
-
+        MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEntourageAnnotationIdentifier];
+        if(annotationView ) {
+            OTEntourageAnnotationView *entAnnotationView = (OTEntourageAnnotationView *)annotationView;
+            entAnnotationView.annotation = entAnnotation;
+            [entAnnotationView updateScale:entAnnotation.scale];
+        }
+        else
+            annotationView = [[OTEntourageAnnotationView alloc] initWithAnnotation:entAnnotation reuseIdentifier:kEntourageAnnotationIdentifier andScale:entAnnotation.scale];
         return annotationView;
     } else {
         return nil;

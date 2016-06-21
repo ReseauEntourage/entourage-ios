@@ -11,7 +11,6 @@
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 #import "OTFeedItemFactory.h"
-#import "OTStateFactoryDelegate.h"
 
 #define BUTTON_HEIGHT 44.0f
 #define BUTTON_DELTAY  8.0f
@@ -23,9 +22,7 @@
 
 @end
 
-@implementation OTFeedItemDetailsOptionsViewController {
-    id<OTStateFactoryDelegate> stateHandler;
-}
+@implementation OTFeedItemDetailsOptionsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,16 +30,16 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    stateHandler = [[OTFeedItemFactory createFor:self.feedItem] getStateFactory];
-    FeedItemState newState = [stateHandler getActionableState];
-    switch (newState) {
-        case FeedItemStateClosed:
+    FeedItemState currentState = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
+    switch (currentState) {
+        case FeedItemStateOngoing:
             [self addButtonWithTitle:OTLocalizedString(@"item_option_close") withSelectorNamed:@"doCloseFeedItem"];
             break;
-        case FeedItemStateFrozen:
+        case FeedItemStateOpen:
+        case FeedItemStateClosed:
             [self addButtonWithTitle:OTLocalizedString(@"item_option_freeze") withSelectorNamed:@"doFreezeFeedItem"];
             break;
-        case FeedItemStateQuit:
+        case FeedItemStateJoinAccepted:
             [self addButtonWithTitle:OTLocalizedString(@"item_option_quit") withSelectorNamed:@"doQuitFeedItem"];
             break;
         default:
@@ -71,19 +68,19 @@
 
 #pragma mark - Actions
 - (IBAction)doFreezeFeedItem {
-    [stateHandler freezeWithSuccess:^() {
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] deactivateWithSuccess:^(BOOL isTour) {
         [self dismissViewControllerAnimated:YES completion:nil];
-    }];
+    } orFailure:nil];
 }
 
 - (IBAction)doCloseFeedItem {
-    [stateHandler closeWithSuccess:^() {
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] stopWithSuccess:^() {
         [self.delegate promptToCloseFeedItem];
     }];
 }
 
 - (IBAction)doQuitFeedItem {
-    [stateHandler quitWithSuccess:^() {
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
 }
