@@ -10,8 +10,6 @@
 
 typedef enum {
     FeedItemStateNone,
-    FeedItemStateActive,
-    FeedItemStateInactive,
     FeedItemStateOpen,
     FeedItemStateClosed,
     FeedItemStateOngoing,
