@@ -1124,10 +1124,8 @@ static bool isShowingOptions = NO;
         case FeedItemStateOpen:
         case FeedItemStateClosed:
             [[[OTFeedItemFactory createFor:feedItem] getStateTransition] deactivateWithSuccess:^(BOOL isTour) {
-                if(isTour) {
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                if(isTour)
                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_quitted")];
-                }
                 else
                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageQuitted")];
                 [self.tableView reloadData];
