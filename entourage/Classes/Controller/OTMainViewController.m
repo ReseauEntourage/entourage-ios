@@ -460,7 +460,11 @@ static BOOL didGetAnyData = NO;
                                                 [self.tableView addFeedItems:feeds];
                                                 NSUInteger updatedItemsCount = [self.tableView itemsCount];
                                                 if (updatedItemsCount > existingItemsCount) {
-                                                    self.nouveauxFeedItemsButton.hidden = NO;
+                                                    NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                                                    CGRect cellRect = [self.tableView rectForRowAtIndexPath:firstIndexPath];
+                                                    BOOL completelyVisible = CGRectContainsRect(self.tableView.bounds, cellRect);
+                                                    if (!completelyVisible)
+                                                        self.nouveauxFeedItemsButton.hidden = NO;
                                                 }
                                                 self.feeds = [[self.tableView items] mutableCopy];
                                                 [self feedMapWithFeedItems];
@@ -1144,21 +1148,19 @@ static bool isShowingOptions = NO;
             break;
         case FeedItemStateOpen:
         case FeedItemStateClosed:
-            [[[OTFeedItemFactory createFor:feedItem] getStateTransition] deactivateWithSuccess:^(BOOL isTour) {
-                if(isTour) {
-                    [self dismissViewControllerAnimated:YES completion:^{
-                        [self.tableView reloadData];
-                    }];
-                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_quitted")];
-                }
-                else {
+            [[[OTFeedItemFactory createFor:feedItem] getStateTransition]
+                deactivateWithSuccess:^(BOOL isTour) {
                     [self.tableView reloadData];
-                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageQuitted")];
+                    if (isTour) {
+                         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_quitted")];
+                    } else {
+                        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageQuitted")];
+                    }
+                } orFailure:^(NSError *error) {
+                    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
+                    NSLog(@"%@",[error localizedDescription]);
                 }
-            } orFailure:^(NSError *error) {
-                [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
-                NSLog(@"%@",[error localizedDescription]);
-            }];
+             ];
             break;
     }
 }
