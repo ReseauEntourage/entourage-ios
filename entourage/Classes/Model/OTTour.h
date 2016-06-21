@@ -17,7 +17,6 @@ typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTyp
 
 @interface OTTour : OTFeedItem
 
-@property (nonatomic, strong) NSString *vehicleType;
 @property (nonatomic, strong) NSMutableArray *tourPoints;
 @property (nonatomic, strong) NSString *organizationName;
 @property (nonatomic, strong) NSString *organizationDesc;
@@ -25,7 +24,7 @@ typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTyp
 @property (nonatomic, strong) NSNumber *distance;
 @property (nonatomic, strong) NSNumber *noMessages;
 
-- (instancetype)initWithTourType:(NSString *)tourType andVehicleType:(NSString *)vehicleType;
+- (instancetype)initWithTourType:(NSString *)tourType;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebService;
 

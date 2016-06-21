@@ -38,7 +38,6 @@
 #define kWSKeyStartDate @"start_time"
 #define kWSKeyEndDate @"end_time"
 #define kWSKeyTourType @"tour_type"
-#define kWSKeyVehicleType @"vehicle_type"
 #define kWSKeyDistance @"distance"
 #define kWSKeyOrganizationName @"organization_name"
 #define kWSKeyOrganizationDescription @"organization_description"

@@ -23,14 +23,13 @@
 /********************************************************************************/
 #pragma mark - Birth & Death
 
-- (id)initWithTourType:(NSString *)tourType andVehicleType:(NSString *)vehicleType {
+- (id)initWithTourType:(NSString *)tourType {
     self = [super init];
     if (self)
     {
         OTUser *user = [[NSUserDefaults standardUserDefaults] currentUser];
         
         self.type = tourType;
-        self.vehicleType = vehicleType;
         self.status = OTLocalizedString(@"tour_status_ongoing");
         self.tourPoints = [NSMutableArray new];
         self.organizationName = user.organization.name;
@@ -47,7 +46,6 @@
         self.creationDate = [dictionary dateForKey:kWSKeyStartDate];
         self.endTime = [dictionary dateForKey:kWSKeyEndDate];
         self.type = [dictionary valueForKey:kWSKeyTourType];
-        self.vehicleType = [dictionary valueForKey:kWSKeyVehicleType];
         self.distance = [dictionary numberForKey:kWSKeyDistance];
         self.organizationName = [dictionary valueForKey:kWSKeyOrganizationName];
         self.organizationDesc = [dictionary valueForKey:kWSKeyOrganizationDescription];
@@ -65,7 +63,6 @@
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
     dictionary[kWSKeyTourType] = self.type;
-    dictionary[kWSKeyVehicleType] = self.vehicleType;
     dictionary[kWSKeyStatus] = self.status;
     dictionary[kWSKeyDistance] = self.distance;
     dictionary[kWSKeyStartDate] = self.creationDate;

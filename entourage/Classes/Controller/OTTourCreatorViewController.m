@@ -12,28 +12,18 @@
 
 @interface OTTourCreatorViewController ()
 
-@property (nonatomic, weak) IBOutlet UIButton *feetButton;
-@property (nonatomic, weak) IBOutlet UIButton *carButton;
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *typeButtons;
 @property (nonatomic, strong) NSString *currentTourType;
 
-
 @end
-
 
 @implementation OTTourCreatorViewController
 #pragma mark - Private
 
 #pragma mark - Utils
 
-- (NSString *)selectedVehiculeType {
-    if (self.feetButton.selected) {
-        return OTLocalizedString(@"tour_vehicle_feet");
-    }
-    else if (self.carButton.selected) {
-        return OTLocalizedString(@"tour_vehicle_car");
-    }
-    return nil;
+- (void)viewDidLoad {
+    
 }
 
 - (NSString *)selectedTourType {
@@ -60,16 +50,6 @@
 
 #pragma mark - IBActions
 
-- (IBAction)feetButtonDidTap:(id)sender {
-    [self.feetButton setSelected:YES];
-    [self.carButton setSelected:NO];
-}
-
-- (IBAction)carButtonDidTap:(id)sender {
-    [self.carButton setSelected:YES];
-    [self.feetButton setSelected:NO];
-}
-
 - (IBAction)typeButtonDidTap:(UIView *)sender {
     for (UIButton *button in self.typeButtons) {
         button.selected = (button == sender);
@@ -77,15 +57,11 @@
 }
 
 - (IBAction)createTour:(id)sender {
-    //[self dismissViewControllerAnimated:YES completion:nil];
     NSString *tourType = [self selectedTourType];
-    NSString *tourVehicle = [self selectedVehiculeType];
-    //NSLog(@"about to create %@ tour on %@", tourType, tourVehicle);
-    if ([self.tourCreatorDelegate respondsToSelector:@selector(createTour:withVehicle:)]) {
-        [self.tourCreatorDelegate createTour:tourType withVehicle:tourVehicle];
+    if ([self.tourCreatorDelegate respondsToSelector:@selector(createTour:)]) {
+        [self.tourCreatorDelegate createTour:tourType];
     }
 }
-
 
 - (IBAction)dismissTourCreatpr:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

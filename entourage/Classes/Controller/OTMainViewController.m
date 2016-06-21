@@ -758,12 +758,11 @@ static bool isShowingOptions = NO;
 
 #pragma mark  OTTourCreatorDelegate
 
-- (void)createTour:(NSString*)tourType withVehicle:(NSString*)vehicleType {
+- (void)createTour:(NSString*)tourType {
     [self dismissViewControllerAnimated:NO completion:nil];
     [self zoomToCurrentLocation:nil];
     self.currentTourType = tourType;
-    self.tour = [[OTTour alloc] initWithTourType:tourType
-                                  andVehicleType:vehicleType];
+    self.tour = [[OTTour alloc] initWithTourType:tourType];
     [self.pointsToSend removeAllObjects];
     
     //    if (self.locations.count == 0)

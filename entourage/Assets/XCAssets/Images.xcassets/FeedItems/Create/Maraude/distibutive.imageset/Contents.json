@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "distibutive.png",
+      "filename" : "distributiveOff.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "distibutive@2x.png",
+      "filename" : "distributiveOff@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "distibutive@3x.png",
+      "filename" : "distributiveOff@3x.png",
       "scale" : "3x"
     }
   ],

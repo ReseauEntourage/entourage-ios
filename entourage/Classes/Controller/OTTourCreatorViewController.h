@@ -11,7 +11,7 @@
 @protocol OTTourCreatorDelegate <NSObject>
 
 @required
-- (void)createTour:(NSString*)tourType withVehicle:(NSString*)vehicleType;
+- (void)createTour:(NSString*)tourType;
 
 @end
 
