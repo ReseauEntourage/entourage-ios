@@ -211,7 +211,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"Restarted refresher");
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getNewFeeds) userInfo:nil repeats:YES];
     [self.refreshTimer fire];
 }
@@ -370,7 +369,6 @@
 
 static BOOL didGetAnyData = NO;
 - (void)getData {
-    NSLog(@"Getting new data ...");
     if (self.toursMapDelegate.isActive) {
         [self getFeeds];
 //        [self getNewFeeds];
@@ -402,7 +400,6 @@ static BOOL didGetAnyData = NO;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
-    NSLog(@"didChangePositions so we need to ask for data");
     [self getFeeds];
     
 }
@@ -420,7 +417,6 @@ static BOOL didGetAnyData = NO;
         return;
     self.isRefreshing = YES;
     
-    NSLog(@"Getting NEW feeds ...");
     __block CLLocationCoordinate2D oldRequestedCoordinate;
     oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
     oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
@@ -433,7 +429,6 @@ static BOOL didGetAnyData = NO;
     BOOL myEntouragesOnly = [[entourageFilter valueForFilter:kEntourageFilterEntourageOnlyMyEntourages] boolValue];
 
     
-    NSLog(@"\n\nGetting NEW feeds ... before = %@", self.currentPagination.beforeDate);
     NSDictionary *filterDictionary = @{
                                        @"before" : [NSDate date],
                                        @"latitude": @(self.requestedToursCoordinate.latitude),
@@ -449,7 +444,6 @@ static BOOL didGetAnyData = NO;
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                NSLog(@"Got %lu NEW feed items.", (unsigned long)feeds.count);
                                                 self.isRefreshing = NO;
                                                 
                                                 if (!feeds.count || !didGetAnyData) {
@@ -487,7 +481,6 @@ static BOOL didGetAnyData = NO;
         return;
     self.currentPagination.isLoading = YES;
 
-    NSLog(@"Getting feeds ...");
     __block CLLocationCoordinate2D oldRequestedCoordinate;
     oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
     oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
@@ -501,8 +494,6 @@ static BOOL didGetAnyData = NO;
     if (!self.currentPagination.beforeDate)
         self.currentPagination.beforeDate = [NSDate date];
     
-    
-    NSLog(@"\n\nGetting feeds ... before = %@", self.currentPagination.beforeDate);
 #warning get paginated data
     NSDictionary *filterDictionary = @{  //@"page": @(self.currentPagination.page),
                                          //@"per": @20,//FEEDITEMS_PER_PAGE,
@@ -520,7 +511,6 @@ static BOOL didGetAnyData = NO;
         [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                NSLog(@"Got %lu feed items.", (unsigned long)feeds.count);
                                                 if (feeds.count && !didGetAnyData) {
                                                     [self showToursList];
                                                     didGetAnyData = YES;
@@ -540,7 +530,6 @@ static BOOL didGetAnyData = NO;
                                                 } else {
                                                     [self.feeds addObjectsFromArray:feeds];
                                                 }
-                                                //NSLog(@"Got %lu feed items on %lu existing items", (unsigned long)feeds.count, (unsigned long)self.feeds.count);
 
                                                 [self.tableView addFeedItems:feeds];
                                                 [self feedMapWithFeedItems];
@@ -623,7 +612,6 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)drawTour:(OTTour *)tour {
-    //NSLog(@"drawing %@ tour %d with %lu points ... by %@ - %@", tour.vehicleType, tour.uid.intValue, (unsigned long)tour.tourPoints.count, tour.author.displayName, tour.joinStatus);
     CLLocationCoordinate2D coords[[tour.tourPoints count]];
     int count = 0;
     for (OTTourPoint *point in tour.tourPoints) {
@@ -838,16 +826,10 @@ static bool isShowingOptions = NO;
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoints {
     __block NSArray *sentPoints = [NSArray arrayWithArray:tourPoints];
-    //NSLog(@"Sending %d points ...", tourPoints.count);
-    for (int i = 0; i<tourPoints.count; i++) {
-        //OTTourPoint *tourPoint = (OTTourPoint*)tourPoints[i];
-        //NSLog(@"... (%.6f, %.6f)", tourPoint.latitude, tourPoint.longitude);
-    }
     [[OTTourService new] sendTourPoint:tourPoints
                             withTourId:self.tour.uid
                            withSuccess:^(OTTour *updatedTour) {
                                OTTourPoint *tourPoint = (OTTourPoint*)tourPoints.lastObject;
-                               NSLog(@"Sent %lu tour point(s): (%.6f, %.6f)", (unsigned long)tourPoints.count, tourPoint.latitude, tourPoint.longitude);
                                [self.pointsToSend removeObjectsInArray:sentPoints];
                            }
                                failure:^(NSError *error) {
@@ -1071,7 +1053,6 @@ static bool isShowingOptions = NO;
 
 - (void)loadMoreData {
 #warning Load some more data
-    NSLog(@"We should load some more feed items on newsfeeds!");
     self.currentPagination.beforeDate = ((OTFeedItem*)self.feeds.lastObject).creationDate;
     [self getData];
 }
@@ -1086,7 +1067,6 @@ static bool isShowingOptions = NO;
 - (void)showUserProfile:(NSNumber*)userId {
     [[OTAuthService new] getDetailsForUser:userId
                                    success:^(OTUser *user) {
-                                       NSLog(@"got user %@", user);
                                        [self performSegueWithIdentifier:@"UserProfileSegue" sender:user];
                                        
                                    } failure:^(NSError *error) {
@@ -1115,7 +1095,6 @@ static bool isShowingOptions = NO;
         [[OTEntourageService new] joinEntourage:entourage
                                         success:^(OTTourJoiner *joiner) {
                                             [SVProgressHUD dismiss];
-                                            NSLog(@"Successfuly sent request to join entourage %@", feedItem.uid);
                                             entourage.joinStatus = JOIN_PENDING;
                                             [self.tableView reloadData];
                                             [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
@@ -1225,7 +1204,6 @@ static bool isShowingOptions = NO;
 }
 
 - (void)showTourConfirmation {
-    NSLog(@"showing tour confirmation");
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
 }
 

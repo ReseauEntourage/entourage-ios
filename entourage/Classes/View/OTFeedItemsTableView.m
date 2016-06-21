@@ -216,8 +216,6 @@
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     
-    NSLog(@"TABLEVIEW %ld", (long)indexPath.section);
-    
     if ([item isKindOfClass:[OTTour class]]) {
     
         OTTour *tour = item;
