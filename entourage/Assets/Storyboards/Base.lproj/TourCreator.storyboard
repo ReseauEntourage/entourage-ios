@@ -87,8 +87,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G7V-ml-vYP">
                                         <rect key="frame" x="0.0" y="85" width="336" height="259"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Démarrez votre maraude" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kq-yQ-FtA">
-                                                <rect key="frame" x="47" y="59" width="242" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Démarrez" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kq-yQ-FtA">
+                                                <rect key="frame" x="47" y="54" width="242" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="Use-QT-6Vk"/>
                                                     <constraint firstAttribute="width" constant="242" id="hGW-nd-bYP"/>
@@ -98,7 +98,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yG3-SE-w4M">
-                                                <rect key="frame" x="137" y="91" width="62" height="62"/>
+                                                <rect key="frame" x="137" y="99" width="62" height="62"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="62" id="KBF-15-oFH"/>
                                                     <constraint firstAttribute="width" constant="62" id="iAj-vr-mTF"/>
@@ -134,12 +134,12 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="6kq-yQ-FtA" firstAttribute="centerY" secondItem="G7V-ml-vYP" secondAttribute="centerY" constant="-60" id="9mz-bY-3sd"/>
+                                            <constraint firstItem="6kq-yQ-FtA" firstAttribute="centerY" secondItem="G7V-ml-vYP" secondAttribute="centerY" constant="-65" id="9mz-bY-3sd"/>
                                             <constraint firstItem="6kq-yQ-FtA" firstAttribute="centerX" secondItem="G7V-ml-vYP" secondAttribute="centerX" id="Dow-wn-o3W"/>
                                             <constraint firstAttribute="bottom" secondItem="FbW-7U-niN" secondAttribute="bottom" id="QLh-bs-1pa"/>
                                             <constraint firstAttribute="trailing" secondItem="FbW-7U-niN" secondAttribute="trailing" id="SWh-bb-Ayy"/>
                                             <constraint firstItem="FbW-7U-niN" firstAttribute="leading" secondItem="G7V-ml-vYP" secondAttribute="leading" id="avX-Jp-fK2"/>
-                                            <constraint firstItem="yG3-SE-w4M" firstAttribute="centerY" secondItem="G7V-ml-vYP" secondAttribute="centerY" constant="-8" id="smI-Oa-Lxn"/>
+                                            <constraint firstItem="yG3-SE-w4M" firstAttribute="centerY" secondItem="G7V-ml-vYP" secondAttribute="centerY" id="smI-Oa-Lxn"/>
                                             <constraint firstItem="yG3-SE-w4M" firstAttribute="centerX" secondItem="G7V-ml-vYP" secondAttribute="centerX" id="x4G-nF-R3C"/>
                                         </constraints>
                                     </view>
