@@ -371,9 +371,7 @@ static BOOL didGetAnyData = NO;
 - (void)getData {
     if (self.toursMapDelegate.isActive) {
         [self getFeeds];
-//        [self getNewFeeds];
-    }
-    else {
+    } else {
         [self getPOIList];
     }
 }
@@ -409,6 +407,11 @@ static BOOL didGetAnyData = NO;
     CLLocationDegrees deltaLongitude = self.mapView.region.span.longitudeDelta;
     CGFloat latitudeCircumference = 40075160 * cos(self.mapView.region.center.latitude * M_PI / 180);
     return deltaLongitude * latitudeCircumference/360;
+}
+
+- (void)forceGetNewData {
+    self.isRefreshing = NO;
+    [self getNewFeeds];
 }
 
 - (void)getNewFeeds {
@@ -885,7 +888,8 @@ static bool isShowingOptions = NO;
     self.isTourRunning = NO;
     self.requestedToursCoordinate = CLLocationCoordinate2DMake(0.0f, 0.0f);
     [self clearMap];
-    [self getData];
+    //[self getData];
+    [self forceGetNewData];
 }
 
 - (void)resumeTour {
@@ -988,7 +992,9 @@ static bool isShowingOptions = NO;
 #pragma mark - EntourageCreatorDelegate
 
 - (void)didCreateEntourage {
-    [self dismissViewControllerAnimated:YES completion:^{ }];
+    [self dismissViewControllerAnimated:YES completion:^{
+       [self forceGetNewData];
+    }];
 }
 
 /********************************************************************************/
@@ -1126,7 +1132,7 @@ static bool isShowingOptions = NO;
                 [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
             break;
         case FeedItemStateOpen:
-        case FeedItemStateClosed:
+        case FeedItemStateClosed: {
             [[[OTFeedItemFactory createFor:feedItem] getStateTransition]
                 deactivateWithSuccess:^(BOOL isTour) {
                     [self.tableView reloadData];
@@ -1140,6 +1146,8 @@ static bool isShowingOptions = NO;
                     NSLog(@"%@",[error localizedDescription]);
                 }
              ];
+        } break;
+        default:
             break;
     }
 }
