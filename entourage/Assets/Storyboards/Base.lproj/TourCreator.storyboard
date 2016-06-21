@@ -97,8 +97,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G7V-ml-vYP">
                                         <rect key="frame" x="0.0" y="125" width="336" height="219"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" Démarrez" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kq-yQ-FtA">
-                                                <rect key="frame" x="47" y="30" width="242" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Démarrez" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kq-yQ-FtA">
+                                                <rect key="frame" x="47" y="34" width="242" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="Use-QT-6Vk"/>
                                                     <constraint firstAttribute="width" constant="242" id="hGW-nd-bYP"/>
@@ -107,8 +107,8 @@
                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yG3-SE-w4M">
-                                                <rect key="frame" x="137" y="87" width="62" height="62"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yG3-SE-w4M">
+                                                <rect key="frame" x="137" y="79" width="62" height="62"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="62" id="KBF-15-oFH"/>
                                                     <constraint firstAttribute="width" constant="62" id="iAj-vr-mTF"/>
