@@ -1126,13 +1126,13 @@ static bool isShowingOptions = NO;
             [[[OTFeedItemFactory createFor:feedItem] getStateTransition] deactivateWithSuccess:^(BOOL isTour) {
                 if(isTour) {
                     [self dismissViewControllerAnimated:YES completion:nil];
-                    [self.tableView reloadData];
                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_quitted")];
                 }
                 else {
                     [self.tableView reloadData];
                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageQuitted")];
                 }
+                [self.tableView reloadData];
             } orFailure:^(NSError *error) {
                 [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
                 NSLog(@"%@",[error localizedDescription]);
