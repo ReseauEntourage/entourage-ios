@@ -91,15 +91,12 @@
 
 - (void)saveFilters {
     OTEntourageFilter *entourageFilter = [OTEntourageFilter sharedInstance];
-    
-    int arrayShift = self.isOngoingTour ? 0 : 1;
-    
-    for (NSInteger section = 0; section < self.sections.count - arrayShift; section++) {
-        NSArray *items = self.items[section+arrayShift];
+    for (NSInteger section = 0; section < self.sections.count; section++) {
+        NSArray *items = self.items[section];
         // First item is the header cell, so we start from 1
         for (NSInteger row = 1; row <= items.count; row++) {
             OTFilterCellTableViewCell *cell = [self.filterTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
-            if (section != self.sections.count-1-arrayShift) {
+            if (section != self.sections.count-1) {
                 UISwitch *switchButton = [cell viewWithTag:FILTER_SWITCH_TAG];
                 [entourageFilter setFilterValue:[NSNumber numberWithBool:switchButton.isOn] forKey:cell.filterKey];
             }
@@ -135,27 +132,22 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return (self.isOngoingTour ? self.sections.count : self.sections.count - 1) ;
+    return self.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int arrayShift = self.isOngoingTour ? 0 : 1;
-    return ((NSArray*)self.items[section+arrayShift]).count + 1;
+    return ((NSArray*)self.items[section]).count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = nil;
-    
-    int arrayShift = self.isOngoingTour ? 0 : 1;
-    
     OTEntourageFilter *entourageFilter = [OTEntourageFilter sharedInstance];
-    
-    if (indexPath.section != self.sections.count-1-arrayShift) {
+    if (indexPath.section != self.sections.count-1) {
         if (indexPath.row == 0) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"OTFilterHeaderCell" forIndexPath:indexPath];
             
             UILabel *title = [cell viewWithTag:FILTER_SECTION_TITLE_TAG];
-            [title setText:self.sections[indexPath.section+arrayShift]];
+            [title setText:self.sections[indexPath.section]];
             
             return cell;
         }
@@ -166,13 +158,13 @@
         UILabel *filterDescription = [cell.contentView viewWithTag:FILTER_DESCRIPTION_TAG];
         UISwitch *filterSwitch = [cell.contentView viewWithTag:FILTER_SWITCH_TAG];
         // Image
-        if (self.isOngoingTour && indexPath.section == 0) {
+        if (indexPath.section == 0) {
             if (indexPath.row-1 < self.maraudeIcons.count) {
                 [filterImage setImage:[UIImage imageNamed:self.maraudeIcons[indexPath.row-1]]];
             }
         }
         
-        if (indexPath.section == self.sections.count - 2 - arrayShift) {
+        if (indexPath.section == self.sections.count - 2) {
             CGRect frame = filterDescription.frame;
             CGFloat x = frame.origin.x;
             
@@ -183,7 +175,7 @@
         }
         
         // Description
-        NSArray *sectionItems = (NSArray*)self.items[indexPath.section+arrayShift];
+        NSArray *sectionItems = (NSArray*)self.items[indexPath.section];
         NSArray *filterItem = sectionItems[indexPath.row-1];
         [filterDescription setText:filterItem[0]];
         // Switch status
@@ -197,14 +189,14 @@
             cell = [tableView dequeueReusableCellWithIdentifier:@"OTFilterHeaderCell" forIndexPath:indexPath];
             
             UILabel *title = [cell viewWithTag:FILTER_SECTION_TITLE_TAG];
-            [title setText:self.sections[indexPath.section+arrayShift]];
+            [title setText:self.sections[indexPath.section]];
             
             return cell;
         }
         
         cell = [tableView dequeueReusableCellWithIdentifier:@"OTFilterTimeframeCell" forIndexPath:indexPath];
         
-        NSArray *sectionItems = (NSArray*)self.items[indexPath.section+arrayShift];
+        NSArray *sectionItems = (NSArray*)self.items[indexPath.section];
         NSArray *filterItem = sectionItems[indexPath.row-1];
         
         NSNumber *timeframeFilterValue = [entourageFilter valueForFilter:filterItem[1]];
@@ -230,8 +222,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    int arrayShift = self.isOngoingTour ? 0 : 1;
-    if (indexPath.section != self.sections.count-1-arrayShift) {
+    if (indexPath.section != self.sections.count-1) {
         return 44;
     }
     else {
