@@ -1389,7 +1389,8 @@ typedef NS_ENUM(NSInteger) {
         case SegueIDFilter: {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
             OTFiltersViewController *controller = (OTFiltersViewController*)navController.topViewController;
-            controller.isOngoingTour = self.isTourRunning;
+            OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+            controller.isProUser = [currentUser.type isEqualToString:USER_TYPE_PRO];
             controller.delegate = self;
         } break;
         default:

@@ -54,14 +54,37 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OTNoImageFilterCell" rowHeight="44" id="91L-M4-rzX" userLabel="OTNoImageFilterCell" customClass="OTFilterCellTableViewCell">
+                                        <rect key="frame" x="0.0" y="72" width="328" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="91L-M4-rzX" id="sxh-vr-r6C">
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsf-WX-9yL">
+                                                    <rect key="frame" x="260" y="6" width="51" height="31"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHv-Pk-DsX" userLabel="Description">
+                                                    <rect key="frame" x="15" y="11" width="237" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fsf-WX-9yL" secondAttribute="trailing" constant="11" id="aD3-qs-6Qq"/>
+                                                <constraint firstItem="fsf-WX-9yL" firstAttribute="centerY" secondItem="sxh-vr-r6C" secondAttribute="centerY" id="lHm-lB-Jfb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OTFilterTimeframeCell" rowHeight="88" id="tKr-Qu-bqY" customClass="OTFilterCellTableViewCell">
-                                        <rect key="frame" x="0.0" y="72" width="328" height="88"/>
+                                        <rect key="frame" x="0.0" y="116" width="328" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tKr-Qu-bqY" id="cIU-d4-lDY">
                                             <rect key="frame" x="0.0" y="0.0" width="328" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJA-IP-QlI" customClass="OTFilterRadioButton">
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJA-IP-QlI" customClass="OTFilterRadioButton">
                                                     <rect key="frame" x="72" y="20" width="48" height="48"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <state key="normal" title="24H" backgroundImage="24HInactive">
@@ -79,7 +102,7 @@
                                                         <action selector="timeframeButtonClicked:" destination="sar-e7-wDz" eventType="touchUpInside" id="9IA-As-kHz"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVf-DG-Xrr" customClass="OTFilterRadioButton">
+                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVf-DG-Xrr" customClass="OTFilterRadioButton">
                                                     <rect key="frame" x="140" y="20" width="48" height="48"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <state key="normal" title="2J" backgroundImage="24HInactive">
@@ -97,7 +120,7 @@
                                                         <action selector="timeframeButtonClicked:" destination="sar-e7-wDz" eventType="touchUpInside" id="bB6-bf-eOm"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QM-U6-9ZW" customClass="OTFilterRadioButton">
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QM-U6-9ZW" customClass="OTFilterRadioButton">
                                                     <rect key="frame" x="208" y="20" width="48" height="48"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <state key="normal" title="3J" backgroundImage="24HInactive">
@@ -127,7 +150,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OTFilterHeaderCell" id="9Jp-Mc-bXt">
-                                        <rect key="frame" x="0.0" y="160" width="328" height="44"/>
+                                        <rect key="frame" x="0.0" y="204" width="328" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Jp-Mc-bXt" id="Llq-cR-lk8">
                                             <rect key="frame" x="0.0" y="0.0" width="328" height="43"/>
