@@ -127,28 +127,11 @@
                                                     <action selector="createTour:" destination="V67-Ha-ubZ" eventType="touchUpInside" id="QsK-xb-LVB"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FbW-7U-niN">
-                                                <rect key="frame" x="0.0" y="162" width="336" height="57"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="57" id="bvV-to-TRV"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                <state key="normal" title="Annuler">
-                                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="dismissTourCreatpr:" destination="V67-Ha-ubZ" eventType="touchUpInside" id="uod-L7-rfg"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="6kq-yQ-FtA" firstAttribute="centerY" secondItem="G7V-ml-vYP" secondAttribute="centerY" constant="-65" id="9mz-bY-3sd"/>
                                             <constraint firstItem="6kq-yQ-FtA" firstAttribute="centerX" secondItem="G7V-ml-vYP" secondAttribute="centerX" id="Dow-wn-o3W"/>
-                                            <constraint firstAttribute="bottom" secondItem="FbW-7U-niN" secondAttribute="bottom" id="QLh-bs-1pa"/>
-                                            <constraint firstAttribute="trailing" secondItem="FbW-7U-niN" secondAttribute="trailing" id="SWh-bb-Ayy"/>
-                                            <constraint firstItem="FbW-7U-niN" firstAttribute="leading" secondItem="G7V-ml-vYP" secondAttribute="leading" id="avX-Jp-fK2"/>
                                             <constraint firstItem="yG3-SE-w4M" firstAttribute="centerY" secondItem="G7V-ml-vYP" secondAttribute="centerY" id="smI-Oa-Lxn"/>
                                             <constraint firstItem="yG3-SE-w4M" firstAttribute="centerX" secondItem="G7V-ml-vYP" secondAttribute="centerX" id="x4G-nF-R3C"/>
                                         </constraints>
@@ -176,20 +159,30 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="91T-5H-P5K" firstAttribute="top" secondItem="rR5-51-6aY" secondAttribute="bottom" constant="204" id="BFL-gl-wJb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="91T-5H-P5K" secondAttribute="trailing" constant="-24" id="FLt-0h-81r"/>
                             <constraint firstItem="91T-5H-P5K" firstAttribute="leading" secondItem="3P6-Z8-f29" secondAttribute="leadingMargin" constant="-24" id="Yvm-e1-GR8"/>
                             <constraint firstItem="jwO-Bf-Kem" firstAttribute="top" secondItem="91T-5H-P5K" secondAttribute="bottom" id="buB-Po-SES"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="D8D-cJ-Wfr" appends="YES" id="VQ1-GZ-rAJ"/>
+                        </connections>
                     </view>
                     <connections>
+                        <outlet property="contentView" destination="91T-5H-P5K" id="85L-gz-ZdC"/>
                         <outletCollection property="typeButtons" destination="sXS-gy-T2w" id="ZbT-Mg-bfH"/>
                         <outletCollection property="typeButtons" destination="abA-o7-WJR" id="RfJ-z9-Hv7"/>
                         <outletCollection property="typeButtons" destination="pWk-zO-UZk" id="2Hk-ui-Smg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYr-2P-h8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="D8D-cJ-Wfr">
+                    <connections>
+                        <action selector="viewDidTap:" destination="V67-Ha-ubZ" id="z7l-b4-ksc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1620" y="412"/>
         </scene>

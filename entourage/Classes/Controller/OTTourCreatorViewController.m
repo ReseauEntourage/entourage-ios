@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *typeButtons;
 @property (nonatomic, strong) NSString *currentTourType;
+@property (nonatomic, strong) IBOutlet UIView *contentView;
 
 @end
 
@@ -65,6 +66,12 @@
 
 - (IBAction)dismissTourCreatpr:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)viewDidTap:(UITapGestureRecognizer *)recognizer {
+    CGPoint point = [recognizer locationInView:self.view];
+    if(point.y < self.contentView.frame.origin.y)
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

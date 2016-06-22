@@ -1366,7 +1366,7 @@ typedef NS_ENUM(NSInteger) {
         } break;
         case SegueIDTourCreator: {
             OTTourCreatorViewController *controller = (OTTourCreatorViewController *)destinationViewController;
-            controller.view.backgroundColor = [UIColor appModalBackgroundColor];
+            controller.view.backgroundColor = [UIColor clearColor];
             [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
             controller.tourCreatorDelegate = self;
         } break;
