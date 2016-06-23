@@ -386,7 +386,7 @@ static BOOL didGetAnyData = NO;
     double screenWidth = [UIScreen mainScreen].bounds.size.width;
     double scale500 = (500* screenWidth)/(imageWidth *distance)  ;
 
-    self.entourageScale = MAX(scale500, 0.5);
+    self.entourageScale = scale500;
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self feedMapWithFeedItems];
     
