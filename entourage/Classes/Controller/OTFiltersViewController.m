@@ -59,28 +59,28 @@
 }
 
 - (void) initData {
-    self.sections = @[
+    self.sections = [NSMutableArray arrayWithArray: @[
                       OTLocalizedString(@"filter_maraudes_title"),
                       OTLocalizedString(@"filter_entourages_title"),
                       OTLocalizedString(@"filter_timeframe_title")
-                      ];
+                      ]];
     
-    self.items = @[
+    self.items = [NSMutableArray arrayWithArray:@[
                    @[
                        @[OTLocalizedString(@"filter_maraude_medical"), kEntourageFilterMaraudeMedical],
                        @[OTLocalizedString(@"filter_maraude_bare_hands"), kEntourageFilterMaraudeBarehands],
                        @[OTLocalizedString(@"filter_maraude_alimentary"), kEntourageFilterMaraudeAlimentary],
                        ],
-                   @[
+                   [NSMutableArray arrayWithArray:@[
                        @[OTLocalizedString(@"filter_entourage_demand"), kEntourageFilterEntourageDemand],
                        @[OTLocalizedString(@"filter_entourage_contribution"), kEntourageFilterentourageContribution],
                        @[OTLocalizedString(@"filter_entourage_show_tours"), kEntourageFilterEntourageShowTours],
                        @[OTLocalizedString(@"filter_entourage_only_my_entourages"), kEntourageFilterEntourageOnlyMyEntourages],
-                       ],
+                       ]],
                    @[
                        @[@"", kEntourageFilterTimeframe],
                        ]
-                   ];
+                   ]];
     
     self.maraudeIcons = @[
                           @"filter_heal",
@@ -91,16 +91,9 @@
     noImageSection = 1;
     if(!self.isProUser) {
         noImageSection = 0;
-        NSMutableArray *newSections = [NSMutableArray arrayWithArray:self.sections];
-        [newSections removeObjectAtIndex:0];
-        self.sections = newSections;
-        
-        NSMutableArray *newItems = [NSMutableArray arrayWithArray:self.items];
-        [newItems removeObjectAtIndex:0];
-        NSMutableArray *newEntourageFilters = [NSMutableArray arrayWithArray:[newItems objectAtIndex:0]];
-        [newEntourageFilters removeObjectAtIndex:2];
-        [newItems replaceObjectAtIndex:0 withObject:newEntourageFilters];
-        self.items = newItems;
+        [(NSMutableArray *)self.sections removeObjectAtIndex:0];
+        [(NSMutableArray *)self.items removeObjectAtIndex:0];
+        [(NSMutableArray *)[self.items objectAtIndex:0] removeObjectAtIndex:2];
     }
     self.timeframeButtons = [NSMutableArray new];
 }
