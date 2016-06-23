@@ -15,6 +15,9 @@
 #import "UIButton+entourage.h"
 #import "OTEntourageAnnotation.h"
 #import "OTEntourageAnnotationView.h"
+#import "OTAPIConsts.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
 
 #define FEEDITEM_MAP_TAG 1
 #define FEEDITEM_DESCRIPTION_TAG 2
@@ -54,12 +57,16 @@
     }
     
     UIButton *joinButton = [self viewWithTag:FEEDITEM_JOINBUTTON_TAG];
-    [joinButton addTarget:self action:@selector(doJoinFeed:) forControlEvents:UIControlEventTouchUpInside];
-    //[joinButton setupWithStatus:feedItem.status andJoinStatus:feedItem.joinStatus];
-    [joinButton setupAsStatusButtonForFeedItem:feedItem];
     UILabel *joinLabel = [self viewWithTag:FEEDITEM_JOINLABEL_TAG];
-    //[joinLabel setupWithStatus:feedItem.status andJoinStatus:feedItem.joinStatus];
-    [joinLabel setupAsStatusButtonForFeedItem:feedItem];
+    if([USER_ID isEqualToNumber:feedItem.author.uID]) {
+        joinButton.hidden = YES;
+        joinLabel.hidden = YES;
+    }
+    else {
+        [joinButton addTarget:self action:@selector(doJoinFeed:) forControlEvents:UIControlEventTouchUpInside];
+        [joinButton setupAsStatusButtonForFeedItem:feedItem];
+        [joinLabel setupAsStatusButtonForFeedItem:feedItem];
+    }
 }
 
 - (void)doJoinFeed:(UIButton *)senderButton {
