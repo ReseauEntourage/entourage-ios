@@ -123,7 +123,7 @@
                                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
                                     [self.encounters addObject:encounter];
                                     [self.delegate encounterSent:encounter];
-                                    [self.navigationController popViewControllerAnimated:YES];
+                                    //[self.navigationController popViewControllerAnimated:YES];
                                 }
                                 failure:^(NSError *error) {
                                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];

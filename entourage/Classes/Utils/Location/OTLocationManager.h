@@ -18,7 +18,7 @@
 
 @property (nonatomic, assign) BOOL started;
 
-+(OTLocationManager *)sharedInstance;
++ (OTLocationManager *)sharedInstance;
 
 - (void)startLocationUpdates;
 

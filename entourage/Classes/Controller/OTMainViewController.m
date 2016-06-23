@@ -460,7 +460,6 @@ static BOOL didGetAnyData = NO;
                                                 NSUInteger existingItemsCount = [self.tableView itemsCount];
                                                 [self.tableView addFeedItems:feeds];
                                                 NSUInteger updatedItemsCount = [self.tableView itemsCount];
-                                                NSString *firstOne = [self.tableView.items.firstObject isKindOfClass:[OTTour class]] ? ((OTTour*)self.tableView.items.firstObject).organizationName : ((OTEntourage*)self.tableView.items.firstObject).title;
                                                 if (updatedItemsCount > existingItemsCount) {
                                                     NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
                                                     CGRect cellRect = [self.tableView rectForRowAtIndexPath:firstIndexPath];
@@ -470,6 +469,8 @@ static BOOL didGetAnyData = NO;
                                                 }
                                                 self.feeds = [[self.tableView items] mutableCopy];
                                                 [self feedMapWithFeedItems];
+#warning Maybe we need to draw only feedItems/encounters
+                                                // [self feedMapViewWithEncounters];
                                                 [self.tableView reloadData];
                                             } failure:^(NSError *error) {
                                                 NSLog(@"Error getting feeds: %@", error.description);
@@ -540,6 +541,8 @@ static BOOL didGetAnyData = NO;
 
                                                 [self.tableView addFeedItems:feeds];
                                                 [self feedMapWithFeedItems];
+#warning Maybe we need to draw only feedItems/encounters
+                                                  //[self feedMapViewWithEncounters];
                                                 [self.tableView reloadData];
                                                  self.currentPagination.isLoading = NO;
                                                 
@@ -575,20 +578,29 @@ static BOOL didGetAnyData = NO;
 - (void)feedMapWithFeedItems {
     if (self.toursMapDelegate.isActive) {
         self.toursMapDelegate.drawnTours = [[NSMapTable alloc] init];
-        NSMutableArray *entouragesAnnotations = [NSMutableArray new];
+        NSMutableArray *annotations = [NSMutableArray new];
         
+        //draw entoruages first
         for (OTFeedItem *feedItem in self.feeds) {
-            if ([feedItem isKindOfClass:[OTTour class]])
-                [self drawTour:(OTTour*)feedItem];
-            
             if ([feedItem isKindOfClass:[OTEntourage class]]) {
                 OTEntourageAnnotation *pointAnnotation = [[OTEntourageAnnotation alloc] initWithEntourage:(OTEntourage*)feedItem
                                                                                                  andScale:self.entourageScale];
-                [entouragesAnnotations addObject:pointAnnotation];
+                [annotations addObject:pointAnnotation];
             }
         }
+        // draw tours
+        for (OTFeedItem *feedItem in self.feeds) {
+            if ([feedItem isKindOfClass:[OTTour class]])
+                [self drawTour:(OTTour*)feedItem];
+        }
         
-        [self.clusteringController setAnnotations:entouragesAnnotations];
+        // draw encounters
+        for (OTEncounter *encounter in self.encounters) {
+            OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
+            [annotations addObject:pointAnnotation];
+        }
+        
+        [self.clusteringController setAnnotations:annotations];
         [self.clusteringController refresh:YES force:YES];
     }
 }
@@ -603,6 +615,7 @@ static BOOL didGetAnyData = NO;
         }
         
         [self.clusteringController setAnnotations:annotations];
+        [self.clusteringController refresh:YES force:YES];
     }
 }
 
@@ -711,7 +724,8 @@ static BOOL didGetAnyData = NO;
 - (void)locationUpdated:(NSNotification *)notification {
     NSArray *locations = [notification readLocations];
     for (CLLocation *newLocation in locations) {
-        if(self.isTourRunning && !encounterFromTap)
+        // location may not change so often
+        if (/*self.isTourRunning &&*/ !encounterFromTap)
             self.encounterLocation = newLocation.coordinate;
         
         NSDate *eventDate = newLocation.timestamp;
@@ -1030,7 +1044,7 @@ static bool isShowingOptions = NO;
 /**************************************************************************************************/
 #pragma mark - OTFiltersViewControllerDelegate
 
-- (void) filterChanged {
+- (void)filterChanged {
     self.currentPagination.beforeDate = nil;
     self.feeds = [NSMutableArray new];
     [self.tableView removeAll];
@@ -1068,7 +1082,6 @@ static bool isShowingOptions = NO;
     self.currentPagination.beforeDate = ((OTFeedItem*)self.feeds.lastObject).creationDate;
     [self getData];
 }
-
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;
@@ -1243,7 +1256,7 @@ static bool isShowingOptions = NO;
     [self presentViewController:alert animated:YES completion:nil];
 }
 
--(void)showNewEncounterStartDialogFromGuide {
+- (void)showNewEncounterStartDialogFromGuide {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:OTLocalizedString(@"poi_create_encounter_alert") preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"cancelAlert") style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:cancelAction];
@@ -1306,6 +1319,7 @@ typedef NS_ENUM(NSInteger) {
             UINavigationController *navController = (UINavigationController*)destinationViewController;
             OTCreateMeetingViewController *controller = (OTCreateMeetingViewController*)navController.topViewController;
             controller.delegate = self;
+            NSLog(@"self.encounterLocation = (%.6f, %.6f)", self.encounterLocation.latitude, self.encounterLocation.longitude);
             [controller configureWithTourId:self.tour.uid andLocation:self.encounterLocation];
             controller.encounters = self.encounters;
             encounterFromTap = NO;
