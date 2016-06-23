@@ -67,7 +67,8 @@ NSString *const kEncounter = @"encounter";
          andSuccess:^(id responseObject)
          {
              if (success) {
-                 OTEntourage *updatedEntourage = [[OTEntourage alloc] initWithDictionary:(NSDictionary*)responseObject];
+                 NSDictionary *entourageDictionary = [(NSDictionary*)responseObject objectForKey:kWSKeyEntourage];
+                 OTEntourage *updatedEntourage = [[OTEntourage alloc] initWithDictionary:entourageDictionary];
                  success(updatedEntourage);
              }
          }

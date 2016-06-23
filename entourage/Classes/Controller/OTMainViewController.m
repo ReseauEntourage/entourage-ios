@@ -398,6 +398,8 @@ static BOOL didGetAnyData = NO;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
+    NSLog(@"Main: position did change = > getFeeds");
+    self.currentPagination.beforeDate = [NSDate date];
     [self getFeeds];
     
 }
@@ -410,6 +412,7 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)forceGetNewData {
+    NSLog(@"Forcing get new data.");
     self.isRefreshing = NO;
     [self getNewFeeds];
 }
@@ -443,11 +446,11 @@ static BOOL didGetAnyData = NO;
                                        @"show_my_entourages_only" : myEntouragesOnly ? @"true" : @"false",
                                        @"time_range" : [entourageFilter valueForFilter:kEntourageFilterTimeframe]
                                        };
-    
+    NSLog(@"Getting new data ...");
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                self.isRefreshing = NO;
+                                                
                                                 
                                                 if (!feeds.count || !didGetAnyData) {
                                                     return;
@@ -456,6 +459,8 @@ static BOOL didGetAnyData = NO;
                                                 NSUInteger existingItemsCount = [self.tableView itemsCount];
                                                 [self.tableView addFeedItems:feeds];
                                                 NSUInteger updatedItemsCount = [self.tableView itemsCount];
+                                                NSString *firstOne = [self.tableView.items.firstObject isKindOfClass:[OTTour class]] ? ((OTTour*)self.tableView.items.firstObject).organizationName : ((OTEntourage*)self.tableView.items.firstObject).title;
+                                                NSLog(@"We got %lu items over %lu existing ones. The first one is %@", (unsigned long)updatedItemsCount, (unsigned long)existingItemsCount, firstOne);
                                                 if (updatedItemsCount > existingItemsCount) {
                                                     NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
                                                     CGRect cellRect = [self.tableView rectForRowAtIndexPath:firstIndexPath];
@@ -466,6 +471,7 @@ static BOOL didGetAnyData = NO;
                                                 self.feeds = [[self.tableView items] mutableCopy];
                                                 [self feedMapWithFeedItems];
                                                 [self.tableView reloadData];
+                                                self.isRefreshing = NO;
                                                 
                                             } failure:^(NSError *error) {
                                                 NSLog(@"Error getting feeds: %@", error.description);
@@ -831,7 +837,7 @@ static bool isShowingOptions = NO;
     [[OTTourService new] sendTourPoint:tourPoints
                             withTourId:self.tour.uid
                            withSuccess:^(OTTour *updatedTour) {
-                               OTTourPoint *tourPoint = (OTTourPoint*)tourPoints.lastObject;
+                               //OTTourPoint *tourPoint = (OTTourPoint*)tourPoints.lastObject;
                                [self.pointsToSend removeObjectsInArray:sentPoints];
                            }
                                failure:^(NSError *error) {

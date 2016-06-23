@@ -86,16 +86,16 @@
 
 - (void)myTextBeginChange {
     [self showSmallPlaceholder];
-    NSLog (@"%d/%d", (int)self.text.length, MAX_LENGTH);
+    //NSLog (@"%d/%d", (int)self.text.length, MAX_LENGTH);
 }
 - (void)myTextDidChange {
     [self showSmallPlaceholder];
-    self.charCountLabel.text = [NSString stringWithFormat:@"%d/%d", (int)self.text.length, MAX_LENGTH];
+    //self.charCountLabel.text = [NSString stringWithFormat:@"%d/%d", (int)self.text.length, MAX_LENGTH];
 }
 - (void)myTextEndedChange {
     if (self.text.length == 0)
         [self showLargePlaceholder];
-    NSLog (@"%d/%d", (int)self.text.length, MAX_LENGTH);
+    //NSLog (@"%d/%d", (int)self.text.length, MAX_LENGTH);
 }
 
 - (void)dealloc {
@@ -135,11 +135,9 @@
     return text.length <= MAX_LENGTH;
 }
 
-- (void)textViewDidChange:(UITextView *)textView {
-    NSLog (@"%d/%d", (int)textView.text.length, MAX_LENGTH);
-    
-    
-}
+//- (void)textViewDidChange:(UITextView *)textView {
+//    //NSLog (@"%d/%d", (int)textView.text.length, MAX_LENGTH);
+//}
 
 - (void)showSmallPlaceholder {
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{

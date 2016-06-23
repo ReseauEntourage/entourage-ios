@@ -151,6 +151,7 @@
         [self.feedItems replaceObjectAtIndex:oldFeedIndex withObject:feedItem];
         return;
     }
+    
     if (feedItem.creationDate != nil) {
         for (NSUInteger i = 0; i < [self.feedItems count]; i++) {
             OTFeedItem* internalFeedItem = self.feedItems[i];
@@ -206,19 +207,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
     
-    id item = self.feedItems[indexPath.section];
+    OTFeedItem *item = self.feedItems[indexPath.section];
+    NSLog(@">> %ld: %@", (long)indexPath.section, [item isKindOfClass:[OTTour class]] ? ((OTTour*)item).organizationName : ((OTEntourage*)item).title);
+    
+
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
     UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
     UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
     UIButton *userProfileImageButton = [cell viewWithTag:TAG_TOURUSERIMAGE];
-     [userProfileImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
+    [userProfileImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     
     if ([item isKindOfClass:[OTTour class]]) {
-    
-        OTTour *tour = item;
+        OTTour *tour = (OTTour *)item;
         organizationLabel.text = tour.organizationName;
         [typeByNameLabel setupWithTypeAndAuthorOfTour:tour];
         
@@ -226,15 +229,6 @@
         OTTourPoint *startPoint = tour.tourPoints.firstObject;
         CLLocation *startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
         [timeLocationLabel setupWithTime:tour.creationDate andLocation:startPointLocation];
-
-        [userProfileImageButton setupAsProfilePictureFromUrl:tour.author.avatarUrl];
-        
-        noPeopleLabel.text = [NSString stringWithFormat:@"%d", tour.noPeople.intValue];
-        
-        [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-        [statusButton setupAsStatusButtonForFeedItem:tour];
-        [statusLabel setupAsStatusButtonForFeedItem:tour];
-        
     } else {
         OTEntourage *ent = (OTEntourage*)item;
         
@@ -242,14 +236,13 @@
         [typeByNameLabel setupAsTypeByNameFromEntourage:ent];
         CLLocation *startPointLocation = ent.location;
         [timeLocationLabel setupWithTime:ent.creationDate andLocation:startPointLocation];
-        [userProfileImageButton setupAsProfilePictureFromUrl:ent.author.avatarUrl];
-        
-        noPeopleLabel.text = [NSString stringWithFormat:@"%d", ent.noPeople.intValue];
-        
-        [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-        [statusButton setupAsStatusButtonForFeedItem:ent];
-        [statusLabel setupAsStatusButtonForFeedItem:ent];
     }
+    [userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
+    noPeopleLabel.text = [NSString stringWithFormat:@"%d", item.noPeople.intValue];
+    [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
+    [statusButton setupAsStatusButtonForFeedItem:item];
+    [statusLabel setupAsStatusButtonForFeedItem:item];
+
     //check if we need to load more data
     if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
         if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {

@@ -23,6 +23,14 @@
 /********************************************************************************/
 #pragma mark - Birth & Death
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        //self.status = TOUR_STATUS_ONGOING;
+    }
+    return self;
+}
+
 - (id)initWithTourType:(NSString *)tourType {
     self = [super init];
     if (self)

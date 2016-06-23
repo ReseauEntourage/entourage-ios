@@ -13,6 +13,14 @@
 
 @implementation OTEntourage
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.status = ENTOURAGE_STATUS_OPEN;
+    }
+    return self;
+}
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super initWithDictionary:dictionary];
     if (self) {

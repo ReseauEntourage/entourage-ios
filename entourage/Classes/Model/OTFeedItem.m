@@ -12,6 +12,15 @@
 
 @implementation OTFeedItem
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.creationDate = [NSDate date];
+        self.updatedDate = [NSDate date];
+    }
+    return self;
+}
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
