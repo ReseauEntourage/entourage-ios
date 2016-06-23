@@ -16,7 +16,7 @@
 
 @interface OTFiltersViewController : UIViewController
 
-@property (nonatomic) BOOL isOngoingTour;
+@property (nonatomic) BOOL isProUser;
 @property (nonatomic, weak) id<OTFiltersViewControllerDelegate> delegate;
 
 @end
