@@ -398,7 +398,7 @@ static BOOL didGetAnyData = NO;
     if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
-    NSLog(@"Main: position did change = > getFeeds");
+    //NSLog(@"Main: position did change = > getFeeds");
     self.currentPagination.beforeDate = [NSDate date];
     [self getFeeds];
     
@@ -418,7 +418,8 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)getNewFeeds {
-#warning
+//#warning
+    //NSLog(@"Attempt to getNewFeeds.\n\n");
     if (self.isRefreshing)
         return;
     self.isRefreshing = YES;
@@ -450,7 +451,7 @@ static BOOL didGetAnyData = NO;
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                
+                                                self.isRefreshing = NO;
                                                 
                                                 if (!feeds.count || !didGetAnyData) {
                                                     return;
@@ -460,7 +461,6 @@ static BOOL didGetAnyData = NO;
                                                 [self.tableView addFeedItems:feeds];
                                                 NSUInteger updatedItemsCount = [self.tableView itemsCount];
                                                 NSString *firstOne = [self.tableView.items.firstObject isKindOfClass:[OTTour class]] ? ((OTTour*)self.tableView.items.firstObject).organizationName : ((OTEntourage*)self.tableView.items.firstObject).title;
-                                                NSLog(@"We got %lu items over %lu existing ones. The first one is %@", (unsigned long)updatedItemsCount, (unsigned long)existingItemsCount, firstOne);
                                                 if (updatedItemsCount > existingItemsCount) {
                                                     NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
                                                     CGRect cellRect = [self.tableView rectForRowAtIndexPath:firstIndexPath];
@@ -471,8 +471,6 @@ static BOOL didGetAnyData = NO;
                                                 self.feeds = [[self.tableView items] mutableCopy];
                                                 [self feedMapWithFeedItems];
                                                 [self.tableView reloadData];
-                                                self.isRefreshing = NO;
-                                                
                                             } failure:^(NSError *error) {
                                                 NSLog(@"Error getting feeds: %@", error.description);
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
