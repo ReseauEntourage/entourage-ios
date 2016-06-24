@@ -58,8 +58,6 @@
         return item.horizontalAccuracy >= 0;
     }];
     NSDictionary *info = @{ kNotificationLocationUpdatedInfoKey: [locations filteredArrayUsingPredicate:filter] };
-    NSLog(@"Location manager did update location: %@", info);
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationUpdated object:self userInfo:info];
 }
 

@@ -378,7 +378,6 @@ static BOOL didGetAnyData = NO;
 
 
 - (void)didChangePosition {
-#warning here we need 2 distances (the existing one refers to zooming to refresh heatZone size)
     CLLocationDistance distance = [self mapWidthInMeters];
     
     // image width without transparent border ~70%
@@ -395,13 +394,13 @@ static BOOL didGetAnyData = NO;
     }
     
     // check if we need to make a new request
-    if (distance < TOURS_REQUEST_DISTANCE_KM / 4) {
+    CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.requestedToursCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
+    if (moveDistance < TOURS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
     //NSLog(@"Main: position did change = > getFeeds");
     self.currentPagination.beforeDate = [NSDate date];
     [self getFeeds];
-    
 }
 
 
