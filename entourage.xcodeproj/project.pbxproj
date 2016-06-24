@@ -115,7 +115,6 @@
 		45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */; };
 		45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */; };
 		45EB70DA1CE5F0CC00EB2CD1 /* OTEntourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */; };
-		45F039341D0EBDB6005ABE90 /* UIImage+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F039331D0EBDB6005ABE90 /* UIImage+entourage.m */; };
 		45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F24A3C1CEDB1490003BF9E /* OTFeedItem.m */; };
 		45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443381C9080E900DDEBE1 /* OTTourJoiner.m */; };
 		45F4433C1C90B40400DDEBE1 /* OTTourTimelinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F4433B1C90B40400DDEBE1 /* OTTourTimelinePoint.m */; };
@@ -362,8 +361,6 @@
 		45EB70D81CE5F0CC00EB2CD1 /* OTEntourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourage.h; sourceTree = "<group>"; };
 		45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourage.m; sourceTree = "<group>"; };
 		45EB70DB1CEA08F900EB2CD1 /* OTAPIConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAPIConsts.h; sourceTree = "<group>"; };
-		45F039321D0EBDB6005ABE90 /* UIImage+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+entourage.h"; sourceTree = "<group>"; };
-		45F039331D0EBDB6005ABE90 /* UIImage+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+entourage.m"; sourceTree = "<group>"; };
 		45F24A3B1CEDB1490003BF9E /* OTFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItem.h; sourceTree = "<group>"; };
 		45F24A3C1CEDB1490003BF9E /* OTFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItem.m; sourceTree = "<group>"; };
 		45F24A3F1CEDB3E70003BF9E /* OTAPIKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAPIKeys.h; sourceTree = "<group>"; };
@@ -1021,8 +1018,6 @@
 				456ABD821CA18DB5004A81D6 /* UIButton+entourage.m */,
 				4525EB351CA5DFE1006784E6 /* NSBundle+entourage.h */,
 				4525EB361CA5DFE1006784E6 /* NSBundle+entourage.m */,
-				45F039321D0EBDB6005ABE90 /* UIImage+entourage.h */,
-				45F039331D0EBDB6005ABE90 /* UIImage+entourage.m */,
 				1E71E6511D108790001F3777 /* NSNotification+entourage.h */,
 				1E71E6521D108790001F3777 /* NSNotification+entourage.m */,
 			);
@@ -1360,7 +1355,6 @@
 				45E6BFCF1C8F46BE00DAC7F6 /* OTFeedItemOptionsViewController.m in Sources */,
 				DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */,
 				4500115E1CCE5BD2004754DF /* OTTourCreatorViewController.m in Sources */,
-				45F039341D0EBDB6005ABE90 /* UIImage+entourage.m in Sources */,
 				45391A031CEBA89100C93908 /* OTEntourageAnnotation.m in Sources */,
 				1EACE41A1D11515200F3A2A6 /* OTTourStateTransition.m in Sources */,
 				456ABD801CA18416004A81D6 /* UILabel+entourage.m in Sources */,

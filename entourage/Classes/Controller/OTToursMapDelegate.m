@@ -16,7 +16,6 @@
 #import "OTTour.h"
 #import "OTTourService.h"
 #import "UIColor+entourage.h"
-#import "UIImage+entourage.h"
 #import "OTEntourageAnnotationView.h"
 
 @interface OTToursMapDelegate ()
@@ -65,15 +64,13 @@
             annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewIdentifier];
             if (!annotationView)
             {
-                annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:nil];
-                annotationView.canShowCallout = NO;
-                UIImage *scaledImage = [UIImage imageNamed:@"heatZone"
-                                                 withScale:self.mapController.entourageScale];
-                annotationView.image = scaledImage;
+                annotationView = [[OTEntourageAnnotationView alloc] initWithAnnotation:kingpinAnnotation reuseIdentifier:kEntourageAnnotationIdentifier andScale:self.mapController.entourageScale];
                 badgeView = [[JSBadgeView alloc] initWithParentView:annotationView alignment:badgeAlignament];
             }
             else
             {
+                if([annotationView class] == [OTEntourageAnnotationView class])
+                    [((OTEntourageAnnotationView *)annotationView) updateScale:self.mapController.entourageScale];
                 for (UIView *subview in annotationView.subviews) {
                     if ([subview isKindOfClass:JSBadgeView.class]) {
                         badgeView = (JSBadgeView *)subview;

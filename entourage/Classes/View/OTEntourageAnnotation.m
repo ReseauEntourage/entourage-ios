@@ -9,7 +9,6 @@
 #import "OTEntourageAnnotation.h"
 
 #import "OTEntourage.h"
-#import "UIImage+entourage.h"
 
 @implementation OTEntourageAnnotation
 
