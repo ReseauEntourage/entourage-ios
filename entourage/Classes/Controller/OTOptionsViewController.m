@@ -43,7 +43,7 @@
     self.togglePOILabel.hidden = YES;
     self.togglePOIButton.hidden = YES;
     
-    [self addOptionWithIcon:@"heatZone" andAction:nil withTranslation:CGPointZero];
+    [self addOptionWithIcon:@"heatZoneFinger" andAction:nil withTranslation:CGPointZero];
 }
 
 
