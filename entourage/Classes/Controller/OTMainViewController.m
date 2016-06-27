@@ -468,8 +468,6 @@ static BOOL didGetAnyData = NO;
                                                 }
                                                 self.feeds = [[self.tableView items] mutableCopy];
                                                 [self feedMapWithFeedItems];
-#warning Maybe we need to draw only feedItems/encounters
-                                                // [self feedMapViewWithEncounters];
                                                 [self.tableView reloadData];
                                             } failure:^(NSError *error) {
                                                 NSLog(@"Error getting feeds: %@", error.description);
@@ -501,7 +499,6 @@ static BOOL didGetAnyData = NO;
     if (!self.currentPagination.beforeDate)
         self.currentPagination.beforeDate = [NSDate date];
     
-#warning get paginated data
     NSDictionary *filterDictionary = @{  //@"page": @(self.currentPagination.page),
                                          //@"per": @20,//FEEDITEMS_PER_PAGE,
                                          @"before" : self.currentPagination.beforeDate,
@@ -540,7 +537,6 @@ static BOOL didGetAnyData = NO;
 
                                                 [self.tableView addFeedItems:feeds];
                                                 [self feedMapWithFeedItems];
-#warning Maybe we need to draw only feedItems/encounters
                                                   //[self feedMapViewWithEncounters];
                                                 [self.tableView reloadData];
                                                  self.currentPagination.isLoading = NO;
@@ -1077,7 +1073,6 @@ static bool isShowingOptions = NO;
 #pragma mark - Feeds Table View Delegate
 
 - (void)loadMoreData {
-#warning Load some more data
     self.currentPagination.beforeDate = ((OTFeedItem*)self.feeds.lastObject).creationDate;
     [self getData];
 }
