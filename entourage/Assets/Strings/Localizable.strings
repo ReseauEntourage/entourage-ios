@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   entourage
 
@@ -110,7 +110,7 @@
 "ask_for_help" = "Demande";
 "contribution" = "Contribution";
 "detailedDescription" = "Description détaillée";
-"filters" = "filters";
+"filters" = "filtres";
 "detailEncounter" = "Détaillez votre rencontre";
 "formater_encounterAnd" = "%@ et";
 "formater_meetEncounter" = "se sont rencontrés ici le %@";
