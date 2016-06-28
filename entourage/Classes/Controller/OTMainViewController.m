@@ -797,7 +797,7 @@ static bool isShowingOptions = NO;
 
 - (void)sendTour {
     [SVProgressHUD showWithStatus:OTLocalizedString(@"tour_create_sending")];
-    
+    self.launcherButton.enabled = NO;
     [[OTTourService new]
          sendTour:self.tour
          withSuccess:^(OTTour *sentTour) {
@@ -822,6 +822,7 @@ static bool isShowingOptions = NO;
              OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:self.mapView.userLocation.location];
              [self.pointsToSend addObject:tourPoint];
              self.isTourRunning = YES;
+             self.launcherButton.enabled = YES;
              
              if ([self.pointsToSend count] > 0) {
                  [self performSelector:@selector(sendTourPoints:) withObject:self.pointsToSend afterDelay:0.0];
@@ -830,6 +831,8 @@ static bool isShowingOptions = NO;
          } failure:^(NSError *error) {
              [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"tour_create_error", @"")];
              NSLog(@"%@",[error localizedDescription]);
+             self.launcherButton.enabled = YES;
+             
          }
      ];
 }
