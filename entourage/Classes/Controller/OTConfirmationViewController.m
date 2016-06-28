@@ -76,6 +76,7 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         } failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"tour_close_error")];
+            [self dismissViewControllerAnimated:YES completion:nil];
             NSLog(@"%@",[error localizedDescription]);
         }];
 }
