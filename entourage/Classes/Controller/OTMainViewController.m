@@ -844,25 +844,35 @@ static bool isShowingOptions = NO;
     [self.tour.tourPoints addObject:tourPoint];
     [self.pointsToSend addObject:tourPoint];
     [self sendTourPoints:self.pointsToSend];
+    
+    NSLog(@"Added point (%.6f, %.6f)", tourPoint.latitude, tourPoint.longitude);
 }
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoints {
     __block NSArray *sentPoints = [NSArray arrayWithArray:tourPoints];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
     [[OTTourService new] sendTourPoint:tourPoints
                             withTourId:self.tour.uid
                            withSuccess:^(OTTour *updatedTour) {
                                //OTTourPoint *tourPoint = (OTTourPoint*)tourPoints.lastObject;
                                [self.pointsToSend removeObjectsInArray:sentPoints];
+                               [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                               NSLog(@"Sent %lu tour point(s)", (unsigned long)tourPoints.count);
                            }
                                failure:^(NSError *error) {
                                    NSLog(@"%@",[error localizedDescription]);
                                    NSLog(@"NOT Sent %lu tour point(s).", (unsigned long)tourPoints.count);
-                                   
-                               }
+                                   [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                            }
      ];
 }
 
 - (IBAction)stopTour:(id)sender {
+    if (self.pointsToSend.count) {
+        [self sendTourPoints:self.pointsToSend];
+    }
+    
     [UIView animateWithDuration:0.5 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;

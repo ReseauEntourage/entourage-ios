@@ -154,6 +154,7 @@ typedef NS_ENUM(unsigned) {
     if (IS_ACCEPTED) {
         [self updateRecordButton];
         [OTSpeechKitManager setup];
+#warning remove existing items.
     
         if ([self.feedItem isKindOfClass:[OTTour class]]) {
             [self getTourUsersJoins];
