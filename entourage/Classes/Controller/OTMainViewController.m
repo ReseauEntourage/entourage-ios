@@ -849,6 +849,9 @@ static bool isShowingOptions = NO;
 }
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoints {
+    if (!tourPoints.count)
+        return;
+    
     __block NSArray *sentPoints = [NSArray arrayWithArray:tourPoints];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 

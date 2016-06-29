@@ -33,6 +33,7 @@
 #import "UIButton+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "NSBundle+entourage.h"
+@import MessageUI;
 
 
 /* MenuItem identifiers */
@@ -43,7 +44,7 @@ NSString *const OTMenuViewControllerSegueMenuSettingsIdentifier = @"segueMenuIde
 NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
 NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdentifierForAbout";
 
-@interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
 /**************************************************************************************************/
 #pragma mark - Getters and Setters
@@ -122,10 +123,14 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
 	else {
+        if (indexPath.row == 1) {
+            [self sendDebugEmail];
+        } else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
 		[self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
 
 		[Flurry logEvent:@"Open_Screen_From_Menu" withParameters:@{ @"screen" : menuItem.segueIdentifier }];
+        }
 	}
     [[tableView cellForRowAtIndexPath:indexPath]setSelected:NO];
 }
@@ -181,6 +186,49 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     }
 }
 
+- (void)sendDebugEmail {
+    //Email
+    if (![MFMailComposeViewController canSendMail]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+                                                                       message:OTLocalizedString(@"about_email_notavailable")
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * _Nonnull action) {}];
+        
+        [alert addAction:defaultAction];
+        return;
+    }
+    MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
+    composeVC.mailComposeDelegate = self;
+    
+    // Configure the fields of the interface.
+    [composeVC setToRecipients:@[@"ciprian.habuc@tecknoworks.com"]];
+    [composeVC setSubject:@"EMA - debug info"];
+    [composeVC setMessageBody:@"" isHTML:NO];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"EMA.log"];
+    NSData *fileData = [NSData dataWithContentsOfFile:logPath];
+    
+    [composeVC addAttachmentData:fileData mimeType:@"text/text" fileName:@"EMA.log"];
+    
+    // Present the view controller modally.
+    [self presentViewController:composeVC animated:YES completion:nil];
+
+}
+
+#pragma mark - MFMailComposerDelegate
+
+-(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 /**************************************************************************************************/
 #pragma mark - Private methods
 
@@ -214,6 +262,12 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
                                               segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
     [menuItems addObject:itemAbout];
 
+    OTMenuItem *itemDebug = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"Mail logs")
+                                                     iconName: @"plus"
+                                              segueIdentifier:nil];
+    [menuItems addObject:itemDebug];
+
+    
     // Disconnect
     OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
                                                           iconName: nil
