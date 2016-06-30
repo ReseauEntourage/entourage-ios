@@ -123,14 +123,14 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
 	else {
-        if (indexPath.row == 1) {
-            [self sendDebugEmail];
-        } else {
+//        if (indexPath.row == 1) {
+//            [self sendDebugEmail];
+//        } else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
 		[self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
 
 		[Flurry logEvent:@"Open_Screen_From_Menu" withParameters:@{ @"screen" : menuItem.segueIdentifier }];
-        }
+        //}
 	}
     [[tableView cellForRowAtIndexPath:indexPath]setSelected:NO];
 }
@@ -186,6 +186,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     }
 }
 
+/*
 - (void)sendDebugEmail {
     //Email
     if (![MFMailComposeViewController canSendMail]) {
@@ -220,14 +221,16 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     [self presentViewController:composeVC animated:YES completion:nil];
 
 }
+ */
 
+/*
 #pragma mark - MFMailComposerDelegate
 
 -(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+*/
 
 /**************************************************************************************************/
 #pragma mark - Private methods
@@ -262,10 +265,10 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
                                               segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
     [menuItems addObject:itemAbout];
 
-    OTMenuItem *itemDebug = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"Mail logs")
-                                                     iconName: @"plus"
-                                              segueIdentifier:nil];
-    [menuItems addObject:itemDebug];
+//    OTMenuItem *itemDebug = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"Mail logs")
+//                                                     iconName: @"plus"
+//                                              segueIdentifier:nil];
+//    [menuItems addObject:itemDebug];
 
     
     // Disconnect

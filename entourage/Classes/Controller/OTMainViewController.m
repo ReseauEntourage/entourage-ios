@@ -858,10 +858,9 @@ static bool isShowingOptions = NO;
     [[OTTourService new] sendTourPoint:tourPoints
                             withTourId:self.tour.uid
                            withSuccess:^(OTTour *updatedTour) {
-                               //OTTourPoint *tourPoint = (OTTourPoint*)tourPoints.lastObject;
+                               NSLog(@"Sent %lu tour point(s)", (unsigned long)tourPoints.count);
                                [self.pointsToSend removeObjectsInArray:sentPoints];
                                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                               NSLog(@"Sent %lu tour point(s)", (unsigned long)tourPoints.count);
                            }
                                failure:^(NSError *error) {
                                    NSLog(@"%@",[error localizedDescription]);

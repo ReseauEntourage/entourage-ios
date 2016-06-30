@@ -63,6 +63,18 @@ NSString *const kTourPointPassingTime = @"passing_time";
     return dictionary;
 }
 
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[OTTourPoint class]]) {
+        OTTourPoint *compare = (OTTourPoint *) object;
+        return (_latitude == compare.latitude &&
+                _longitude == compare.longitude &&
+                [_passingTime isEqualToDate:compare.passingTime]);
+    } else {
+        return false;
+    }
+    
+}
+
 /********************************************************************************/
 #pragma mark - Private methods
 
