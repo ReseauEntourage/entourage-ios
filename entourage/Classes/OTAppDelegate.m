@@ -57,6 +57,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 @interface OTAppDelegate () <UIApplicationDelegate>
 
 @property (nonatomic) BOOL shouldShowNotificationAlert;
+@property (nonatomic) BOOL shouldShowLocalNotificationAlert;
 
 @end
 
