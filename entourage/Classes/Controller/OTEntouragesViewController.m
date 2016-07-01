@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger){
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self.statusSC setSelectedSegmentIndex:EntourageStatusClosed];
+    [self.statusSC setSelectedSegmentIndex:EntourageStatusActive];
     [self changedSegmentedControlSelection:self.statusSC];
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getData) userInfo:nil repeats:YES];
     [self.refreshTimer fire];

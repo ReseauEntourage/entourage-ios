@@ -57,6 +57,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 @interface OTAppDelegate () <UIApplicationDelegate>
 
 @property (nonatomic) BOOL shouldShowNotificationAlert;
+@property (nonatomic) BOOL shouldShowLocalNotificationAlert;
 
 @end
 
@@ -68,16 +69,16 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //logger
     
-#if DEBUGY
+//#if DEBUG
 //#ifdef LOG2FILE
 #if TARGET_IPHONE_SIMULATOR == 0
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"CH6.log"];
+    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"EMA.log"];
     freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
 #endif
 //#endif
-#endif
+//#endif
     
     
     

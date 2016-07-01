@@ -154,12 +154,17 @@ typedef NS_ENUM(unsigned) {
     if (IS_ACCEPTED) {
         [self updateRecordButton];
         [OTSpeechKitManager setup];
+#warning remove existing items.
     
         if ([self.feedItem isKindOfClass:[OTTour class]]) {
+            [self initializeTimelinePoints];
+            
+
             [self getTourUsersJoins];
             [self getTourMessages];
             [self getTourEncounters];
         } else {
+            self.timelinePoints = [NSMutableArray new];
             [self getEntourageMessages];
         }
     }
@@ -270,7 +275,7 @@ typedef NS_ENUM(unsigned) {
 #pragma mark - Private Methods
 
 - (void)initializeTimelinePoints {
-    self.timelinePoints = [[NSMutableArray alloc] init];
+    self.timelinePoints = [NSMutableArray new];
     
     OTTourStatus *tourStartStatus = [[OTTourStatus alloc] init];
     tourStartStatus.date = self.feedItem.creationDate;
