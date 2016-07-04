@@ -25,7 +25,7 @@
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
 #import "UINavigationController+entourage.h"
-
+#import "UIView+entourage.h"
 // Model
 #import "OTUser.h"
 
@@ -61,10 +61,14 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
     //self.navigationController.navigationBarHidden = NO;
-    [self.navigationController presentTransparentNavigationBar];
-
+    //[self.navigationController presentTransparentNavigationBar]
+    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
+    UINavigationBar.appearance.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
@@ -74,7 +78,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.phoneTextField indentRight];
     [self.passwordTextField indentRight];
     
-    [self.phoneTextField becomeFirstResponder];
+    
+    [self.validateButton setupHalfRoundedCorners];
     
 #if DEBUG
     // Ciprian Public - Staging
@@ -110,6 +115,10 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     
 #endif
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.phoneTextField becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

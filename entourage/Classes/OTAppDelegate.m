@@ -424,7 +424,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 
 	UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
 	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
-	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor appOrangeColor],
+	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
 	                                                      NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
     
 //    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];

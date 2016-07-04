@@ -14,7 +14,9 @@
 
 
 @interface OTStartupViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 
 @end
@@ -24,7 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.registerButton setupRoundedCorners];
+    [self.registerButton setupHalfRoundedCorners];
+    [self.loginButton setupHalfRoundedCorners];
+    self.loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.loginButton.layer.borderWidth = 1.5f;
+    
+    [self.facebookButton setupHalfRoundedCorners];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,7 +40,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-//    self.navigationController.navigationBarHidden = YES;
+    //self.navigationController.navigationBarHidden = NO;
 //    UINavigationBar.appearance.barTintColor = [UIColor clearColor];
 //    UINavigationBar.appearance.backgroundColor = [UIColor clearColor];
     [self.navigationController presentTransparentNavigationBar];
@@ -45,10 +52,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     self.title = @"";
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
-//    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
-//    UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
-     [self.navigationController presentTransparentNavigationBar];
+    //UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
+    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
+    UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
+     //[self.navigationController presentTransparentNavigationBar];
 }
 
 /*

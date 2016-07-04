@@ -16,10 +16,13 @@ static const CGFloat kRadius = 4.f;
     self.layer.cornerRadius = kRadius;
 }
 
+- (void)setupHalfRoundedCorners {
+    self.layer.cornerRadius = self.bounds.size.height/2.0f;
+}
+
 - (void)showRedBorders {
     self.layer.borderWidth = 2.f;
     self.layer.borderColor = [UIColor redColor].CGColor;
 }
-
 
 @end
