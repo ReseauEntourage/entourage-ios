@@ -54,8 +54,8 @@
     self.title = @"";
     //UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
     UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
-    UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
-     //[self.navigationController presentTransparentNavigationBar];
+    //UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
+     [self.navigationController presentTransparentNavigationBar];
 }
 
 /*

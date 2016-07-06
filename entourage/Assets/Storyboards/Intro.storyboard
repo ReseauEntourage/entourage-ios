@@ -136,6 +136,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="OhM-64-W7i"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="emailField" destination="QPv-nU-qcZ" id="R8A-jh-0vo"/>
                         <outlet property="subscribeButton" destination="z8p-i9-8me" id="wjn-ki-eOM"/>
@@ -143,7 +144,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1a-zz-qxR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="817" y="-2471"/>
+            <point key="canvasLocation" x="309" y="-3114"/>
         </scene>
         <!--Lost Code View Controller-->
         <scene sceneID="Zsy-Vg-MOg">
@@ -1015,12 +1016,61 @@ Services de localisation  et activez Entourage</string>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="teI-K9-Md6" kind="relationship" relationship="rootViewController" id="l2n-8q-sRz"/>
+                        <segue destination="8Xe-SI-Qb4" kind="relationship" relationship="rootViewController" id="nWB-hO-aZu"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wyf-xM-UOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="309" y="-2471"/>
+        </scene>
+        <!--Welcome View Controller-->
+        <scene sceneID="GQp-d6-tQ0">
+            <objects>
+                <viewController id="8Xe-SI-Qb4" customClass="OTWelcomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mwi-eM-ihk"/>
+                        <viewControllerLayoutGuide type="bottom" id="S14-Td-FIy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fLw-yP-SgY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isl-E7-TEl">
+                                <rect key="frame" x="12" y="502" width="296" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="7xs-l3-ZgN"/>
+                                    <constraint firstAttribute="height" constant="50" id="TGS-Ug-ocd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Commencer">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7xs-l3-ZgN"/>
+                                    </mask>
+                                </variation>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sRp-Lj-Ec2">
+                                <rect key="frame" x="16" y="72" width="38" height="56"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhA-p2-t9h">
+                                <rect key="frame" x="16" y="147" width="225" height="72"/>
+                                <string key="text">Bienvenue
+sur Entourage.</string>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="leP-Gh-R2U"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qbH-RT-l4m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="817" y="-2471"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5R7-fG-YOa">
