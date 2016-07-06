@@ -64,9 +64,9 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     
     //self.navigationController.navigationBarHidden = NO;
     //[self.navigationController presentTransparentNavigationBar]
-    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
-    UINavigationBar.appearance.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
+//    UINavigationBar.appearance.tintColor = [UIColor whiteColor];
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     
     if ([SVProgressHUD isVisible]) {

@@ -695,7 +695,7 @@ Services de localisation  et activez Entourage</string>
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="q4V-KK-yJm" kind="show" id="2na-Sg-Pua"/>
+                                    <segue destination="8Xe-SI-Qb4" kind="show" id="73k-zc-Ntq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwv-HX-aYM">
@@ -815,7 +815,7 @@ Services de localisation  et activez Entourage</string>
                                 <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connexion" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJU-fl-beR">
-                                        <rect key="frame" x="16" y="0.0" width="280" height="35"/>
+                                        <rect key="frame" x="16" y="20" width="280" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="6gL-la-4mk"/>
                                             <constraint firstAttribute="width" constant="280" id="U8b-rK-lfN"/>
@@ -825,7 +825,7 @@ Services de localisation  et activez Entourage</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pKc-kY-NLM">
-                                        <rect key="frame" x="57" y="60" width="222" height="30"/>
+                                        <rect key="frame" x="57" y="80" width="222" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="222" id="Ezs-Vp-0W3"/>
                                             <constraint firstAttribute="height" constant="30" id="aur-FX-p1d"/>
@@ -834,12 +834,9 @@ Services de localisation  et activez Entourage</string>
                                         <state key="normal" title="En savoir plus">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="q4V-KK-yJm" kind="presentation" identifier="OTAskMore" id="qBA-5Z-gkW"/>
-                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OgF-9U-Zl4" userLabel="Black View">
-                                        <rect key="frame" x="0.0" y="110" width="328" height="270"/>
+                                        <rect key="frame" x="0.0" y="130" width="328" height="270"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir numéro " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dhy-dj-PYm">
                                                 <rect key="frame" x="16" y="0.0" width="296" height="50"/>
@@ -962,7 +959,7 @@ Services de localisation  et activez Entourage</string>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="XJU-fl-beR" firstAttribute="top" secondItem="Ddv-uC-bkv" secondAttribute="top" id="0ES-Sb-5Hk"/>
+                                    <constraint firstItem="XJU-fl-beR" firstAttribute="top" secondItem="Ddv-uC-bkv" secondAttribute="top" constant="20" id="0ES-Sb-5Hk"/>
                                     <constraint firstItem="XJU-fl-beR" firstAttribute="centerX" secondItem="Ddv-uC-bkv" secondAttribute="centerX" id="33I-EQ-p47"/>
                                     <constraint firstItem="OgF-9U-Zl4" firstAttribute="leading" secondItem="Ddv-uC-bkv" secondAttribute="leading" id="8su-rm-W7f"/>
                                     <constraint firstItem="XJU-fl-beR" firstAttribute="leading" secondItem="Ddv-uC-bkv" secondAttribute="leading" constant="16" id="A8s-6M-fTm"/>
@@ -1005,24 +1002,6 @@ Services de localisation  et activez Entourage</string>
             </objects>
             <point key="canvasLocation" x="-223" y="-1771"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Lxn-X2-fKS">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="q4V-KK-yJm" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BYc-Nf-A4Y">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="8Xe-SI-Qb4" kind="relationship" relationship="rootViewController" id="nWB-hO-aZu"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wyf-xM-UOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="309" y="-2471"/>
-        </scene>
         <!--Welcome View Controller-->
         <scene sceneID="GQp-d6-tQ0">
             <objects>
@@ -1035,12 +1014,13 @@ Services de localisation  et activez Entourage</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isl-E7-TEl">
-                                <rect key="frame" x="12" y="502" width="296" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isl-E7-TEl">
+                                <rect key="frame" x="8" y="502" width="304" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="7xs-l3-ZgN"/>
                                     <constraint firstAttribute="height" constant="50" id="TGS-Ug-ocd"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="ewg-jD-IGP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Commencer">
@@ -1049,28 +1029,82 @@ Services de localisation  et activez Entourage</string>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="7xs-l3-ZgN"/>
+                                        <exclude reference="ewg-jD-IGP"/>
                                     </mask>
                                 </variation>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sRp-Lj-Ec2">
-                                <rect key="frame" x="16" y="72" width="38" height="56"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhiteEntourage" translatesAutoresizingMaskIntoConstraints="NO" id="sRp-Lj-Ec2">
+                                <rect key="frame" x="12" y="40" width="56" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="Hl4-WP-OFO"/>
+                                    <constraint firstAttribute="height" constant="56" id="dAz-nP-s2x"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhA-p2-t9h">
-                                <rect key="frame" x="16" y="147" width="225" height="72"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhA-p2-t9h">
+                                <rect key="frame" x="12" y="112" width="225" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="225" id="OGZ-cu-OTZ"/>
+                                    <constraint firstAttribute="height" constant="72" id="gyT-5Z-6qd"/>
+                                </constraints>
                                 <string key="text">Bienvenue
 sur Entourage.</string>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <webView contentMode="scaleToFill" allowsInlineMediaPlayback="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCr-lu-Oze">
+                                <rect key="frame" x="8" y="192" width="304" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="3Vj-n5-gyy"/>
+                                </constraints>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8Xe-SI-Qb4" id="PKK-mK-td7"/>
+                                </connections>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="S14-Td-FIy" firstAttribute="top" secondItem="isl-E7-TEl" secondAttribute="bottom" constant="16" id="2ZA-f2-Rc2"/>
+                            <constraint firstItem="sRp-Lj-Ec2" firstAttribute="leading" secondItem="fLw-yP-SgY" secondAttribute="leadingMargin" constant="-4" id="3UQ-R5-WMD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yCr-lu-Oze" secondAttribute="trailing" constant="-8" id="7Rb-VZ-OOU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="isl-E7-TEl" secondAttribute="trailing" constant="-8" id="BAe-Q9-7ZO"/>
+                            <constraint firstItem="isl-E7-TEl" firstAttribute="leading" secondItem="fLw-yP-SgY" secondAttribute="leadingMargin" constant="-8" id="BpC-7Q-ACT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="isl-E7-TEl" secondAttribute="trailing" constant="-8" id="FLn-15-CvN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="isl-E7-TEl" secondAttribute="trailing" constant="-8" id="Iqi-U9-Kj7"/>
+                            <constraint firstItem="isl-E7-TEl" firstAttribute="leading" secondItem="fLw-yP-SgY" secondAttribute="leadingMargin" constant="-8" id="Jx6-qQ-Jox"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="isl-E7-TEl" secondAttribute="trailing" constant="-8" id="XWZ-jH-a5G"/>
+                            <constraint firstItem="sRp-Lj-Ec2" firstAttribute="top" secondItem="mwi-eM-ihk" secondAttribute="bottom" constant="20" id="bb8-9r-CLy"/>
+                            <constraint firstItem="yCr-lu-Oze" firstAttribute="leading" secondItem="fLw-yP-SgY" secondAttribute="leadingMargin" constant="-8" id="bcf-ZI-tBW"/>
+                            <constraint firstItem="YhA-p2-t9h" firstAttribute="top" secondItem="sRp-Lj-Ec2" secondAttribute="bottom" constant="16" id="jdB-5b-Eow"/>
+                            <constraint firstItem="isl-E7-TEl" firstAttribute="leading" secondItem="fLw-yP-SgY" secondAttribute="leadingMargin" constant="-8" id="o5S-ZS-fOu"/>
+                            <constraint firstItem="YhA-p2-t9h" firstAttribute="leading" secondItem="fLw-yP-SgY" secondAttribute="leadingMargin" constant="-4" id="pLF-0V-Oo5"/>
+                            <constraint firstItem="isl-E7-TEl" firstAttribute="leading" secondItem="fLw-yP-SgY" secondAttribute="leadingMargin" constant="-8" id="qcY-Tv-Hl0"/>
+                            <constraint firstItem="yCr-lu-Oze" firstAttribute="top" secondItem="YhA-p2-t9h" secondAttribute="bottom" constant="8" id="vLe-k5-IwR"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="BAe-Q9-7ZO"/>
+                                <exclude reference="BpC-7Q-ACT"/>
+                                <exclude reference="FLn-15-CvN"/>
+                                <exclude reference="Jx6-qQ-Jox"/>
+                                <exclude reference="XWZ-jH-a5G"/>
+                                <exclude reference="o5S-ZS-fOu"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="leP-Gh-R2U"/>
+                    <connections>
+                        <outlet property="startButton" destination="isl-E7-TEl" id="z6k-TJ-wrq"/>
+                        <outlet property="webView" destination="yCr-lu-Oze" id="voQ-1V-qQ3"/>
+                        <segue destination="Gt1-cc-4DI" kind="show" identifier="WelcomeLoginSegue" id="Fe0-4M-cQ0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qbH-RT-l4m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="817" y="-2471"/>
+            <point key="canvasLocation" x="309" y="-2471"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5R7-fG-YOa">
@@ -1094,10 +1128,11 @@ sur Entourage.</string>
     <resources>
         <image name="bg" width="166" height="296"/>
         <image name="entourageLogo" width="75" height="75"/>
+        <image name="logoWhiteEntourage" width="56" height="56"/>
         <image name="phone" width="100" height="100"/>
         <image name="user" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qBA-5Z-gkW"/>
+        <segue reference="Fe0-4M-cQ0"/>
     </inferredMetricsTieBreakers>
 </document>

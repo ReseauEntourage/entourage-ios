@@ -24,6 +24,8 @@
 "distance_250" = "La rencontre est trop éloignée de la maraude";
 "yes" = "Oui";
 
+// Onboarding
+"doLogin" = "Se connecter";
 
 // MenuItems
 "menu_amis" = "Amis";
