@@ -26,6 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
+    [self.navigationController presentTransparentNavigationBar];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
+    self.title = @"";
+    
     [self.registerButton setupHalfRoundedCorners];
     [self.loginButton setupHalfRoundedCorners];
     self.loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -37,25 +43,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    //self.navigationController.navigationBarHidden = NO;
-//    UINavigationBar.appearance.barTintColor = [UIColor clearColor];
-//    UINavigationBar.appearance.backgroundColor = [UIColor clearColor];
-    [self.navigationController presentTransparentNavigationBar];
-
-    
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-    
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    self.title = @"";
-    //UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
-    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
-    //UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
-     [self.navigationController presentTransparentNavigationBar];
 }
 
 /*

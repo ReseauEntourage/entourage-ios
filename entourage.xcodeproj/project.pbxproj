@@ -92,6 +92,7 @@
 		4551708C1CF0D54100962369 /* OTFeedItemInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4551708B1CF0D54100962369 /* OTFeedItemInfoView.m */; };
 		455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */; };
 		4559405E1C5F6D480099A8EE /* OTRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4559405D1C5F6D480099A8EE /* OTRequestOperationManager.m */; };
+		4564493F1D2CFBA600DFDEB1 /* welcome.html in Resources */ = {isa = PBXBuildFile; fileRef = 4564493E1D2CFBA600DFDEB1 /* welcome.html */; };
 		456ABD801CA18416004A81D6 /* UILabel+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ABD7F1CA18416004A81D6 /* UILabel+entourage.m */; };
 		456ABD831CA18DB5004A81D6 /* UIButton+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ABD821CA18DB5004A81D6 /* UIButton+entourage.m */; };
 		45ADCACF1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADCACE1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m */; };
@@ -323,6 +324,7 @@
 		455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTJSONResponseSerializer.m; sourceTree = "<group>"; };
 		4559405C1C5F6D480099A8EE /* OTRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRequestOperationManager.h; sourceTree = "<group>"; };
 		4559405D1C5F6D480099A8EE /* OTRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRequestOperationManager.m; sourceTree = "<group>"; };
+		4564493E1D2CFBA600DFDEB1 /* welcome.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = welcome.html; sourceTree = "<group>"; };
 		456ABD7E1CA18416004A81D6 /* UILabel+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+entourage.h"; sourceTree = "<group>"; };
 		456ABD7F1CA18416004A81D6 /* UILabel+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+entourage.m"; sourceTree = "<group>"; };
 		456ABD811CA18DB5004A81D6 /* UIButton+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+entourage.h"; sourceTree = "<group>"; };
@@ -484,9 +486,9 @@
 		1D962C7219E9280800547687 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				45CAC66B1D2CE66E00B0D5DC /* Onboarding */,
 				454C8F511C500FE2001362B2 /* OTStartupViewController.h */,
 				454C8F521C500FE2001362B2 /* OTStartupViewController.m */,
+				45CAC66B1D2CE66E00B0D5DC /* Onboarding */,
 				1DA682C719E7D097007BD4BC /* OTLoginViewController.h */,
 				1DA682C819E7D097007BD4BC /* OTLoginViewController.m */,
 				0A4769331BFB9F07006EA73A /* OTUserViewController.h */,
@@ -853,6 +855,7 @@
 				45CE5A551C5241AA00F68C24 /* Images.xcassets */,
 				45CE5A531C5241AA00F68C24 /* Localizable.strings */,
 				45CE5A621C5242FC00F68C24 /* Storyboards */,
+				4564493E1D2CFBA600DFDEB1 /* welcome.html */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -1228,6 +1231,7 @@
 				452FE3EB1CAD54CE00063334 /* Settings.storyboard in Resources */,
 				45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */,
 				452FE3E61CAD544F00063334 /* UserProfile.storyboard in Resources */,
+				4564493F1D2CFBA600DFDEB1 /* welcome.html in Resources */,
 				452FE3ED1CAD54F800063334 /* About.storyboard in Resources */,
 				1E3174911D10299400027824 /* QuitFeedItem.storyboard in Resources */,
 				45CE5A601C5241AA00F68C24 /* Localizable.strings in Resources */,
