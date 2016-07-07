@@ -81,6 +81,7 @@
 		453117A41CD251C200C00BA8 /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 453117A31CD251C200C00BA8 /* MKMapView+entourage.m */; };
 		4536FC5E1CC64E55000BF620 /* OTSpeechKitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4536FC5D1CC64E55000BF620 /* OTSpeechKitManager.m */; };
 		45391A031CEBA89100C93908 /* OTEntourageAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 45391A021CEBA89100C93908 /* OTEntourageAnnotation.m */; };
+		453BB3371D2E2831002F9255 /* OTOnboardingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 453BB3361D2E2831002F9255 /* OTOnboardingService.m */; };
 		454062A31D06ADB600B0D756 /* OTLocationSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454062A21D06ADB600B0D756 /* OTLocationSelectorViewController.m */; };
 		4541EDEE1D07197700589ECB /* OTLocationSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4541EDED1D07197700589ECB /* OTLocationSearchTableViewController.m */; };
 		4541EDF11D09AB4C00589ECB /* OTDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4541EDF01D09AB4C00589ECB /* OTDisclaimerViewController.m */; };
@@ -303,6 +304,8 @@
 		4536FC5D1CC64E55000BF620 /* OTSpeechKitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSpeechKitManager.m; sourceTree = "<group>"; };
 		45391A011CEBA89100C93908 /* OTEntourageAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageAnnotation.h; sourceTree = "<group>"; };
 		45391A021CEBA89100C93908 /* OTEntourageAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageAnnotation.m; sourceTree = "<group>"; };
+		453BB3351D2E2831002F9255 /* OTOnboardingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingService.h; sourceTree = "<group>"; };
+		453BB3361D2E2831002F9255 /* OTOnboardingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingService.m; sourceTree = "<group>"; };
 		454062A11D06ADB600B0D756 /* OTLocationSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLocationSelectorViewController.h; sourceTree = "<group>"; };
 		454062A21D06ADB600B0D756 /* OTLocationSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLocationSelectorViewController.m; sourceTree = "<group>"; };
 		4541EDEC1D07197700589ECB /* OTLocationSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLocationSearchTableViewController.h; sourceTree = "<group>"; };
@@ -843,6 +846,8 @@
 		6B1A846E19E8110B0020FB93 /* WebService */ = {
 			isa = PBXGroup;
 			children = (
+				453BB3351D2E2831002F9255 /* OTOnboardingService.h */,
+				453BB3361D2E2831002F9255 /* OTOnboardingService.m */,
 				6B4930DC19A77C2F00DA7EE0 /* Manager */,
 				45D6B82D1D109ABD00357FEF /* FeedItems Services */,
 				1D962C6F19E9277D00547687 /* OTAuthService.h */,
@@ -1425,6 +1430,7 @@
 				1E76AE4A1D144D9900C496BA /* OTEntourageStateInfo.m in Sources */,
 				0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */,
 				2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */,
+				453BB3371D2E2831002F9255 /* OTOnboardingService.m in Sources */,
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,

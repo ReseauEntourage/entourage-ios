@@ -12,6 +12,10 @@
 #define TOKEN [[NSUserDefaults standardUserDefaults] currentUser].token
 #define USER_ID [[NSUserDefaults standardUserDefaults] currentUser].sid
 
+// Onboarding
+#define API_URL_ONBOARD  @"users"
+
+
 // Feeds
 #define API_URL_FEEDS    @"feeds?token=%@"
 #define API_URL_MYFEEDS  @"myfeeds?token=%@"

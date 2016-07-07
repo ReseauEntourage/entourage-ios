@@ -9,6 +9,9 @@
 #import "OTOnboardingPhoneViewController.h"
 #import "IQKeyboardManager.h"
 #import "UIView+entourage.h"
+#import "OTOnboardingService.h"
+#import "SVProgressHUD.h"
+#import "OTConsts.h"
 
 @interface OTOnboardingPhoneViewController ()
 
@@ -39,12 +42,31 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.phoneTextField becomeFirstResponder];
-    //[self.scrollView setContentOffset:CGPointMake(0, self.scrollView.bounds.size.height) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)doContinue {
+    NSString *phone = self.phoneTextField.text;
+    [SVProgressHUD show];
+    [[OTOnboardingService new] setupNewUserWithPhone:phone
+        success:^(OTUser *onboardUser) {
+            [SVProgressHUD dismiss];
+        } failure:^(NSError *error) {
+            NSDictionary *userInfo = [error userInfo];
+            NSString *errorMessage = @"";
+            NSDictionary *errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
+            if (errorDictionary) {
+                //NSString *code = [errorDictionary valueForKey:@"code"];
+                errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
+            }
+            
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+            NSLog(@"ERR: something went wrong on onboarding user phone: %@", error.description);
+        }];
 }
 
 /*
@@ -60,14 +82,12 @@
 - (void)showKeyboard:(NSNotification*)notification {
     NSDictionary* keyboardInfo = [notification userInfo];
     CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-    //animationDuration = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
     CGRect viewFrame = self.scrollView.frame;
-    viewFrame.size.height -= keyboardFrame.size.height;
+    CGFloat maxY = [UIScreen mainScreen].bounds.size.height - keyboardFrame.size.height;
+    viewFrame.size.height = maxY - viewFrame.origin.y;//-= keyboardFrame.size.height;
     self.scrollView.frame = viewFrame;
     
     [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - 1) animated:YES];
-    //[self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.contentSize.width - 1,self.scrollView.contentSize.height - 1, 1, 1) animated:YES];
 }
 
 @end

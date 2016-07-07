@@ -1251,6 +1251,9 @@ numéro de portable ? </string>
                                                 <exclude reference="zcj-MI-vHi"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="doContinue" destination="R3f-b6-jbC" eventType="touchUpInside" id="15d-aE-RLi"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
