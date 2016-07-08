@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"";
     
     NSAttributedString *str = [[NSAttributedString alloc] initWithString:self.phoneTextField.placeholder attributes:@{ NSForegroundColorAttributeName : [UIColor colorWithWhite:1 alpha:.7] }];
     self.phoneTextField.attributedPlaceholder = str;
@@ -55,6 +56,7 @@
     [[OTOnboardingService new] setupNewUserWithPhone:phone
         success:^(OTUser *onboardUser) {
             [SVProgressHUD dismiss];
+            [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
             NSDictionary *userInfo = [error userInfo];
             NSString *errorMessage = @"";
