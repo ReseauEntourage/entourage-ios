@@ -13,5 +13,6 @@
 - (void)indent;
 - (void)indentWithPadding:(CGFloat)padding;
 - (void)indentRight;
+- (void)setupWithWhitePlaceholder;
 
 @end

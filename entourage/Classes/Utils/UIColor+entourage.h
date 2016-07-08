@@ -16,6 +16,7 @@
 + (UIColor *)appGreyishBrownColor;
 + (UIColor *)appPaleGreyColor;
 + (UIColor *)appModalBackgroundColor;
++ (UIColor *)appTextFieldPlaceholderColor;
 
 + (UIColor *)poiCategory0;
 + (UIColor *)poiCategory1;

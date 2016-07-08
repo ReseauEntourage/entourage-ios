@@ -34,6 +34,10 @@
     return [UIColor colorWithRed:0 green:0 blue:0 alpha:.2];
 }
 
++ (UIColor *)appTextFieldPlaceholderColor {
+    return [UIColor colorWithWhite:1 alpha:.7];
+}
+
 
 + (UIColor *)poiCategory0 {
     return [UIColor blackColor];

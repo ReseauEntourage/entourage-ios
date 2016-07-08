@@ -8,11 +8,13 @@
 
 #import "OTOnboardingCodeViewController.h"
 #import "IQKeyboardManager.h"
+#import "NSUserDefaults+OT.h"
 #import "UIView+entourage.h"
 #import "OTOnboardingService.h"
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
+#import "OTAuthService.h"
 
 @interface OTOnboardingCodeViewController ()
 
@@ -69,24 +71,53 @@
 }
 
 - (IBAction)doContinue {
-    NSString *phone = self.codeTextField.text;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *phone = [userDefaults currentUser].phone;
+    NSString *code = self.codeTextField.text;
+    NSString *deviceAPNSid = [userDefaults objectForKey:@"device_token"];
     [SVProgressHUD show];
-    return;
-    [[OTOnboardingService new] setupNewUserWithPhone:phone
-                                             success:^(OTUser *onboardUser) {
-                                                 [SVProgressHUD dismiss];
-                                             } failure:^(NSError *error) {
-                                                 NSDictionary *userInfo = [error userInfo];
-                                                 NSString *errorMessage = @"";
-                                                 NSDictionary *errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
-                                                 if (errorDictionary) {
-                                                     //NSString *code = [errorDictionary valueForKey:@"code"];
-                                                     errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
-                                                 }
-                                                 
-                                                 [SVProgressHUD showErrorWithStatus:errorMessage];
-                                                 NSLog(@"ERR: something went wrong on onboarding user phone: %@", error.description);
-                                             }];
+    
+    [[OTAuthService new] authWithPhone:phone
+                              password:code
+                              deviceId:deviceAPNSid
+                               success: ^(OTUser *user) {
+                                   NSLog(@"User : %@ authenticated successfully", user.email);
+                                   //user.phone = self.phoneNumberServerRepresentation;
+                                   [SVProgressHUD dismiss];
+                                   [self performSegueWithIdentifier:@"" sender:self];
+                                   [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+                                   [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
+                                   [[NSUserDefaults standardUserDefaults] synchronize];
+                                   
+//                                   NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+//                                   if (loggedNumbers == nil) {
+//                                       loggedNumbers = [NSMutableArray new];
+//                                   }
+//                                   if ([loggedNumbers containsObject:self.phoneNumberServerRepresentation] && !deviceAPNSid) {
+//                                       [UIStoryboard showSWRevealController];
+//                                   } else {
+//                                       [self performSegueWithIdentifier:@"OTTutorial" sender:self];
+//                                   }
+                               } failure: ^(NSError *error) {
+                                   [SVProgressHUD dismiss];
+//                                   NSString *alertTitle = OTLocalizedString(@"error");
+//                                   NSString *alertText = OTLocalizedString(@"connection_error");
+//                                   NSString *buttonTitle = @"ok";
+//                                   if ([[error.userInfo valueForKey:JSONResponseSerializerWithDataKey] isEqualToString:@"unauthorized"]) {
+//                                       alertTitle = OTLocalizedString(@"tryAgain");
+//                                       alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");                                       buttonTitle = OTLocalizedString(@"tryAgain_short");
+//                                       
+//                                   }
+//                                   UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
+//                                                                                                  message:alertText
+//                                                                                           preferredStyle:UIAlertControllerStyleAlert];
+//                                   UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle
+//                                                                                           style:UIAlertActionStyleDefault
+//                                                                                         handler:^(UIAlertAction * _Nonnull action) {}];
+//                                   [alert addAction: defaultAction];
+//                                   [self presentViewController:alert animated:YES completion:nil];
+                                   
+                               }];
 }
 
 
@@ -105,10 +136,12 @@
     CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect viewFrame = self.scrollView.frame;
     CGFloat maxY = [UIScreen mainScreen].bounds.size.height - keyboardFrame.size.height;
-    viewFrame.size.height = maxY - viewFrame.origin.y;
-    self.scrollView.frame = viewFrame;
-    
-    [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - 1) animated:YES];
+    if (maxY < viewFrame.origin.y + viewFrame.size.height) {
+        viewFrame.size.height = maxY - viewFrame.origin.y;
+        self.scrollView.frame = viewFrame;
+        [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - 1) animated:YES];
+    }
+
 }
 
 

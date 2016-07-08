@@ -8,10 +8,12 @@
 
 #import "OTOnboardingPhoneViewController.h"
 #import "IQKeyboardManager.h"
+#import "UITextField+indentation.h"
 #import "UIView+entourage.h"
 #import "OTOnboardingService.h"
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTOnboardingPhoneViewController ()
 
@@ -28,9 +30,7 @@
     // Do any additional setup after loading the view.
     self.title = @"";
     
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:self.phoneTextField.placeholder attributes:@{ NSForegroundColorAttributeName : [UIColor colorWithWhite:1 alpha:.7] }];
-    self.phoneTextField.attributedPlaceholder = str;
-    
+    [self.phoneTextField setupWithWhitePlaceholder];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.continueButton setupHalfRoundedCorners];
     
@@ -38,6 +38,9 @@
                                              selector:@selector(showKeyboard:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
+#if TARGET_IPHONE_SIMULATOR
+    self.phoneTextField.text = @"+40740884267";
+#endif
     
 }
 
@@ -56,6 +59,9 @@
     [[OTOnboardingService new] setupNewUserWithPhone:phone
         success:^(OTUser *onboardUser) {
             [SVProgressHUD dismiss];
+            onboardUser.phone = phone;
+            [[NSUserDefaults standardUserDefaults] setCurrentUser:onboardUser];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
             NSDictionary *userInfo = [error userInfo];
@@ -86,10 +92,11 @@
     CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect viewFrame = self.scrollView.frame;
     CGFloat maxY = [UIScreen mainScreen].bounds.size.height - keyboardFrame.size.height;
-    viewFrame.size.height = maxY - viewFrame.origin.y;//-= keyboardFrame.size.height;
-    self.scrollView.frame = viewFrame;
-    
-    [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - 1) animated:YES];
+    if (maxY < viewFrame.origin.y + viewFrame.size.height) {
+        viewFrame.size.height = maxY - viewFrame.origin.y;
+        self.scrollView.frame = viewFrame;
+        [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - 1) animated:YES];
+    }
 }
 
 @end
