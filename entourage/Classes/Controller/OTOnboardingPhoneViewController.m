@@ -54,6 +54,10 @@
 }
 
 - (IBAction)doContinue {
+    [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
+    return;
+#warning Handle request
+    
     NSString *phone = self.phoneTextField.text;
     [SVProgressHUD show];
     [[OTOnboardingService new] setupNewUserWithPhone:phone
@@ -95,7 +99,7 @@
     if (maxY < viewFrame.origin.y + viewFrame.size.height) {
         viewFrame.size.height = maxY - viewFrame.origin.y;
         self.scrollView.frame = viewFrame;
-        [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - 1) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height - 1) animated:YES];
     }
 }
 

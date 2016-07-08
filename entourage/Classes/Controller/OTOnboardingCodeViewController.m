@@ -9,6 +9,7 @@
 #import "OTOnboardingCodeViewController.h"
 #import "IQKeyboardManager.h"
 #import "NSUserDefaults+OT.h"
+#import "UITextField+indentation.h"
 #import "UIView+entourage.h"
 #import "OTOnboardingService.h"
 #import "SVProgressHUD.h"
@@ -29,10 +30,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"";
     [self addRegenerateBarButton];
     
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:self.codeTextField.placeholder attributes:@{ NSForegroundColorAttributeName : [UIColor colorWithWhite:1 alpha:.7] }];
-    self.codeTextField.attributedPlaceholder = str;
+    [self.codeTextField setupWithWhitePlaceholder];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.validateButton setupHalfRoundedCorners];
@@ -71,6 +72,10 @@
 }
 
 - (IBAction)doContinue {
+    [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:nil];
+    return;
+#warning Handle request
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *phone = [userDefaults currentUser].phone;
     NSString *code = self.codeTextField.text;
@@ -141,7 +146,6 @@
         self.scrollView.frame = viewFrame;
         [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - 1) animated:YES];
     }
-
 }
 
 

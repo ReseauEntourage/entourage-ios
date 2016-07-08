@@ -9,6 +9,7 @@
 #import "OTOnboardingEmailViewController.h"
 
 #import "IQKeyboardManager.h"
+#import "UITextField+indentation.h"
 #import "UIView+entourage.h"
 #import "OTOnboardingService.h"
 #import "SVProgressHUD.h"
@@ -29,8 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:self.emailTextField.placeholder attributes:@{ NSForegroundColorAttributeName : [UIColor colorWithWhite:1 alpha:.7] }];
-    self.emailTextField.attributedPlaceholder = str;
+    [self.emailTextField setupWithWhitePlaceholder];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.validateButton setupHalfRoundedCorners];
@@ -91,10 +91,11 @@
     CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect viewFrame = self.scrollView.frame;
     CGFloat maxY = [UIScreen mainScreen].bounds.size.height - keyboardFrame.size.height;
-    viewFrame.size.height = maxY - viewFrame.origin.y;
-    self.scrollView.frame = viewFrame;
-    
-    [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - 1) animated:YES];
+    if (maxY < viewFrame.origin.y + viewFrame.size.height) {
+        viewFrame.size.height = maxY - viewFrame.origin.y;
+        self.scrollView.frame = viewFrame;
+        [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height - 1) animated:YES];
+    }
 }
 
 @end
