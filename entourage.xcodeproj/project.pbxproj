@@ -111,6 +111,7 @@
 		45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A711C56961500F68C24 /* Intro.storyboard */; };
 		45D6B8301D116A2C00357FEF /* OTFeedItemsPagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D6B82F1D116A2C00357FEF /* OTFeedItemsPagination.m */; };
 		45D789151D2EFB50005EBACC /* OTOnboardingEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D789141D2EFB50005EBACC /* OTOnboardingEmailViewController.m */; };
+		45D789181D2FEE53005EBACC /* OTOnboardingNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D789171D2FEE53005EBACC /* OTOnboardingNameViewController.m */; };
 		45E267821C860239004D14EB /* OTTourJoinRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */; };
 		45E37E531CEE1F7D005C3175 /* OTFeedsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E521CEE1F7D005C3175 /* OTFeedsService.m */; };
 		45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E551CEE5C3F005C3175 /* OTToolbar.m */; };
@@ -359,6 +360,8 @@
 		45D6B82F1D116A2C00357FEF /* OTFeedItemsPagination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemsPagination.m; sourceTree = "<group>"; };
 		45D789131D2EFB50005EBACC /* OTOnboardingEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingEmailViewController.h; sourceTree = "<group>"; };
 		45D789141D2EFB50005EBACC /* OTOnboardingEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingEmailViewController.m; sourceTree = "<group>"; };
+		45D789161D2FEE53005EBACC /* OTOnboardingNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingNameViewController.h; sourceTree = "<group>"; };
+		45D789171D2FEE53005EBACC /* OTOnboardingNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingNameViewController.m; sourceTree = "<group>"; };
 		45E267801C860239004D14EB /* OTTourJoinRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourJoinRequestViewController.h; sourceTree = "<group>"; };
 		45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoinRequestViewController.m; sourceTree = "<group>"; };
 		45E37E511CEE1F7D005C3175 /* OTFeedsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedsService.h; sourceTree = "<group>"; };
@@ -733,6 +736,8 @@
 				453BB3391D2EF3EF002F9255 /* OTOnboardingCodeViewController.m */,
 				45D789131D2EFB50005EBACC /* OTOnboardingEmailViewController.h */,
 				45D789141D2EFB50005EBACC /* OTOnboardingEmailViewController.m */,
+				45D789161D2FEE53005EBACC /* OTOnboardingNameViewController.h */,
+				45D789171D2FEE53005EBACC /* OTOnboardingNameViewController.m */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -1425,6 +1430,7 @@
 				0A70FA321BFF32AD0080E8EC /* OTFeedItemViewController.m in Sources */,
 				453BB33A1D2EF3EF002F9255 /* OTOnboardingCodeViewController.m in Sources */,
 				454062A31D06ADB600B0D756 /* OTLocationSelectorViewController.m in Sources */,
+				45D789181D2FEE53005EBACC /* OTOnboardingNameViewController.m in Sources */,
 				45BC9BC91CE26E83000065B7 /* OTEntourageCreatorViewController.m in Sources */,
 				1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */,
 				0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */,

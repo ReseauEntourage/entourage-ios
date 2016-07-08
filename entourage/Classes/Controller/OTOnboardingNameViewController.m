@@ -1,12 +1,12 @@
 //
-//  OTOnboardingEmailViewController.m
+//  OTOnboardingNameViewController.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 08/07/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTOnboardingEmailViewController.h"
+#import "OTOnboardingNameViewController.h"
 
 #import "IQKeyboardManager.h"
 #import "UITextField+indentation.h"
@@ -16,21 +16,25 @@
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
 
-@interface OTOnboardingEmailViewController ()
 
-@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
+@interface OTOnboardingNameViewController ()
+
+@property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
+@property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;
 @property (nonatomic, weak) IBOutlet UIButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
 @end
 
-@implementation OTOnboardingEmailViewController
+@implementation OTOnboardingNameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"";
-    [self.emailTextField setupWithWhitePlaceholder];
+    
+    [self.firstNameTextField setupWithWhitePlaceholder];
+    [self.lastNameTextField setupWithWhitePlaceholder];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.validateButton setupHalfRoundedCorners];
@@ -43,7 +47,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self.emailTextField becomeFirstResponder];
+    [self.firstNameTextField becomeFirstResponder];
 }
 
 
@@ -55,14 +59,11 @@
 
 
 - (IBAction)doContinue {
-    NSString *phone = self.emailTextField.text;
-    
-    [self performSegueWithIdentifier:@"EmailToNameSegue" sender:self];
-    return;
+    NSString *firstName = self.firstNameTextField.text;
+    NSString *lastName = self.lastNameTextField.text;
     [SVProgressHUD show];
-    
-
-    [[OTOnboardingService new] setupNewUserWithPhone:phone
+    return;
+    [[OTOnboardingService new] setupNewUserWithPhone:firstName
                                              success:^(OTUser *onboardUser) {
                                                  [SVProgressHUD dismiss];
                                              } failure:^(NSError *error) {
