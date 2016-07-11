@@ -1513,7 +1513,7 @@ vérification</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x67-Cu-c39">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x67-Cu-c39">
                                 <rect key="frame" x="0.0" y="20" width="320" height="379"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteUser" translatesAutoresizingMaskIntoConstraints="NO" id="HRb-nN-d0G">
@@ -1652,7 +1652,7 @@ vérification</string>
                                     <constraint firstItem="pG4-Jx-qRh" firstAttribute="top" secondItem="PFB-6X-bFX" secondAttribute="bottom" constant="24" id="lLz-UH-Fm5"/>
                                     <constraint firstItem="iGx-N2-9fT" firstAttribute="top" secondItem="HRb-nN-d0G" secondAttribute="bottom" constant="30" id="nsd-XY-1SV"/>
                                     <constraint firstItem="7bK-A4-yP7" firstAttribute="leading" secondItem="x67-Cu-c39" secondAttribute="leading" constant="12" id="o4R-Wi-ukn"/>
-                                    <constraint firstAttribute="bottom" secondItem="pG4-Jx-qRh" secondAttribute="bottom" constant="15" id="oTG-Z1-2tr"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pG4-Jx-qRh" secondAttribute="bottom" constant="15" id="oTG-Z1-2tr"/>
                                     <constraint firstAttribute="trailing" secondItem="pG4-Jx-qRh" secondAttribute="trailing" constant="12" id="uCR-md-Q54"/>
                                     <constraint firstItem="pG4-Jx-qRh" firstAttribute="leading" secondItem="x67-Cu-c39" secondAttribute="leading" constant="8" id="uCt-ww-pDi"/>
                                     <constraint firstItem="OnU-np-xDM" firstAttribute="top" secondItem="iGx-N2-9fT" secondAttribute="bottom" constant="4" id="uVa-Sy-cUP"/>

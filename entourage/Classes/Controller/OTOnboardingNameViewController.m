@@ -15,6 +15,7 @@
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
+#import "UIScrollView+entourage.h"
 
 
 @interface OTOnboardingNameViewController ()
@@ -92,15 +93,8 @@
  */
 
 - (void)showKeyboard:(NSNotification*)notification {
-    NSDictionary* keyboardInfo = [notification userInfo];
-    CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-    CGRect viewFrame = self.scrollView.frame;
-    CGFloat maxY = [UIScreen mainScreen].bounds.size.height - keyboardFrame.size.height;
-    if (maxY < viewFrame.origin.y + viewFrame.size.height) {
-        viewFrame.size.height = maxY - viewFrame.origin.y;
-        self.scrollView.frame = viewFrame;
-        [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height - 1) animated:YES];
-    }
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification];
+
 }
 
 @end

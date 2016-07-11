@@ -112,6 +112,7 @@
 		45D6B8301D116A2C00357FEF /* OTFeedItemsPagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D6B82F1D116A2C00357FEF /* OTFeedItemsPagination.m */; };
 		45D789151D2EFB50005EBACC /* OTOnboardingEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D789141D2EFB50005EBACC /* OTOnboardingEmailViewController.m */; };
 		45D789181D2FEE53005EBACC /* OTOnboardingNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D789171D2FEE53005EBACC /* OTOnboardingNameViewController.m */; };
+		45D7891B1D2FFC3E005EBACC /* UIScrollView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D7891A1D2FFC3E005EBACC /* UIScrollView+entourage.m */; };
 		45E267821C860239004D14EB /* OTTourJoinRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */; };
 		45E37E531CEE1F7D005C3175 /* OTFeedsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E521CEE1F7D005C3175 /* OTFeedsService.m */; };
 		45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E551CEE5C3F005C3175 /* OTToolbar.m */; };
@@ -362,6 +363,8 @@
 		45D789141D2EFB50005EBACC /* OTOnboardingEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingEmailViewController.m; sourceTree = "<group>"; };
 		45D789161D2FEE53005EBACC /* OTOnboardingNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingNameViewController.h; sourceTree = "<group>"; };
 		45D789171D2FEE53005EBACC /* OTOnboardingNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingNameViewController.m; sourceTree = "<group>"; };
+		45D789191D2FFC3E005EBACC /* UIScrollView+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+entourage.h"; sourceTree = "<group>"; };
+		45D7891A1D2FFC3E005EBACC /* UIScrollView+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+entourage.m"; sourceTree = "<group>"; };
 		45E267801C860239004D14EB /* OTTourJoinRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourJoinRequestViewController.h; sourceTree = "<group>"; };
 		45E267811C860239004D14EB /* OTTourJoinRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoinRequestViewController.m; sourceTree = "<group>"; };
 		45E37E511CEE1F7D005C3175 /* OTFeedsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedsService.h; sourceTree = "<group>"; };
@@ -1061,6 +1064,8 @@
 				4525EB361CA5DFE1006784E6 /* NSBundle+entourage.m */,
 				1E71E6511D108790001F3777 /* NSNotification+entourage.h */,
 				1E71E6521D108790001F3777 /* NSNotification+entourage.m */,
+				45D789191D2FFC3E005EBACC /* UIScrollView+entourage.h */,
+				45D7891A1D2FFC3E005EBACC /* UIScrollView+entourage.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1434,6 +1439,7 @@
 				45BC9BC91CE26E83000065B7 /* OTEntourageCreatorViewController.m in Sources */,
 				1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */,
 				0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */,
+				45D7891B1D2FFC3E005EBACC /* UIScrollView+entourage.m in Sources */,
 				0A94B53E1B8F194700402AF3 /* OTTourPoint.m in Sources */,
 				2EDFADDA1CAE84D000B66026 /* OTAboutItem.m in Sources */,
 				0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */,
