@@ -21,6 +21,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *phoneTextField;
 @property (nonatomic, weak) IBOutlet UIButton *continueButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 
 @end
 
@@ -30,8 +31,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"";
-    
-    [self.scrollView showRedBorders];
     
     [self.phoneTextField setupWithWhitePlaceholder];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
@@ -95,7 +94,9 @@
 */
 
 - (void)showKeyboard:(NSNotification*)notification {
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification];
+    //[self.scrollView scrollToBottomFromKeyboardNotification:notification];
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+
 }
 
 @end

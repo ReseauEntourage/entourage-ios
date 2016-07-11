@@ -16,12 +16,14 @@
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
 #import "OTAuthService.h"
+#import "UIScrollView+entourage.h"
 
 @interface OTOnboardingCodeViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *codeTextField;
 @property (nonatomic, weak) IBOutlet UIButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 
 @end
 
@@ -137,15 +139,8 @@
 */
 
 - (void)showKeyboard:(NSNotification*)notification {
-    NSDictionary* keyboardInfo = [notification userInfo];
-    CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-    CGRect viewFrame = self.scrollView.frame;
-    CGFloat maxY = [UIScreen mainScreen].bounds.size.height - keyboardFrame.size.height;
-    if (maxY < viewFrame.origin.y + viewFrame.size.height) {
-        viewFrame.size.height = maxY - viewFrame.origin.y;
-        self.scrollView.frame = viewFrame;
-        [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - 1) animated:YES];
-    }
+    //[self.scrollView scrollToBottomFromKeyboardNotification:notification];
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
 }
 
 

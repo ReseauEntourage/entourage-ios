@@ -10,6 +10,7 @@
 
 @interface UIScrollView (entourage)
 
+- (void)scrollToBottomFromKeyboardNotification:(NSNotification*)notification andHeightContraint:(NSLayoutConstraint*)constraint;
 - (void)scrollToBottomFromKeyboardNotification:(NSNotification*)notification;
 
 @end

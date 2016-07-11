@@ -22,6 +22,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
 @property (nonatomic, weak) IBOutlet UIButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 
 @end
 
@@ -92,6 +93,8 @@
  */
 
 - (void)showKeyboard:(NSNotification*)notification {
-   [self.scrollView scrollToBottomFromKeyboardNotification:notification];}
+    //[self.scrollView scrollToBottomFromKeyboardNotification:notification];
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+}
 
 @end

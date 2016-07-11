@@ -10,6 +10,19 @@
 
 @implementation UIScrollView (entourage)
 
+- (void)scrollToBottomFromKeyboardNotification:(NSNotification*)notification andHeightContraint:(NSLayoutConstraint*)constraint {
+
+    NSDictionary* keyboardInfo = [notification userInfo];
+    CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect viewFrame = self.frame;
+    CGFloat keyboardOriginY = keyboardFrame.origin.y;
+    constraint.constant = keyboardOriginY - viewFrame.origin.y;
+    viewFrame.size.height = keyboardOriginY - viewFrame.origin.y;
+    self.frame = viewFrame;
+    [self scrollToBottom];
+    self.contentInset = UIEdgeInsetsZero;
+}
+
 - (void)scrollToBottomFromKeyboardNotification:(NSNotification*)notification {
     NSDictionary* keyboardInfo = [notification userInfo];
     CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];

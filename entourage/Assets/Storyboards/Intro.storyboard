@@ -1139,8 +1139,8 @@ sur Entourage.</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaD-hV-9KA">
-                                <rect key="frame" x="0.0" y="20" width="320" height="379"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaD-hV-9KA">
+                                <rect key="frame" x="-4" y="20" width="328" height="379"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whitePhone" translatesAutoresizingMaskIntoConstraints="NO" id="Kv4-C7-l1p">
                                         <rect key="frame" x="12" y="20" width="56" height="56"/>
@@ -1190,8 +1190,8 @@ numéro de portable? </string>
                                             </mask>
                                         </variation>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Numéro de portable" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hUG-qJ-EmA">
-                                        <rect key="frame" x="12" y="233" width="296" height="50"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Numéro de portable" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hUG-qJ-EmA">
+                                        <rect key="frame" x="12" y="233" width="304" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="29R-Ua-8tA"/>
@@ -1214,8 +1214,8 @@ numéro de portable? </string>
                                             <outlet property="delegate" destination="Gt1-cc-4DI" id="Dlo-1U-Usz"/>
                                         </connections>
                                     </textField>
-                                    <view alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S7E-82-Kxz">
-                                        <rect key="frame" x="12" y="283" width="296" height="1"/>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7E-82-Kxz">
+                                        <rect key="frame" x="12" y="283" width="304" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="296" id="3Uk-P4-JZa"/>
@@ -1229,28 +1229,16 @@ numéro de portable? </string>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iqo-Y2-ebL">
-                                        <rect key="frame" x="12" y="314" width="296" height="50"/>
+                                    <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iqo-Y2-ebL">
+                                        <rect key="frame" x="12" y="314" width="304" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="FFM-qF-yV5"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="J9f-IC-UbS"/>
-                                            <constraint firstAttribute="width" constant="304" id="i6X-qh-VdY"/>
-                                            <constraint firstAttribute="width" constant="296" id="jqz-CA-XUR"/>
-                                            <constraint firstAttribute="width" constant="210" id="zcj-MI-vHi"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Continuer">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="J9f-IC-UbS"/>
-                                                <exclude reference="i6X-qh-VdY"/>
-                                                <exclude reference="jqz-CA-XUR"/>
-                                                <exclude reference="zcj-MI-vHi"/>
-                                            </mask>
-                                        </variation>
                                         <connections>
                                             <action selector="doContinue" destination="R3f-b6-jbC" eventType="touchUpInside" id="15d-aE-RLi"/>
                                         </connections>
@@ -1258,20 +1246,16 @@ numéro de portable? </string>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="hUG-qJ-EmA" secondAttribute="trailing" constant="12" id="2tc-w8-G9I"/>
                                     <constraint firstAttribute="trailing" secondItem="Iqo-Y2-ebL" secondAttribute="trailing" constant="12" id="4jx-Yg-pYi"/>
                                     <constraint firstItem="Udn-Ks-sJ9" firstAttribute="leading" secondItem="QaD-hV-9KA" secondAttribute="leading" constant="12" id="5V4-hR-RI8"/>
                                     <constraint firstItem="Iqo-Y2-ebL" firstAttribute="centerX" secondItem="QaD-hV-9KA" secondAttribute="centerX" id="81Y-zs-NXk"/>
                                     <constraint firstItem="hUG-qJ-EmA" firstAttribute="leading" secondItem="QaD-hV-9KA" secondAttribute="leading" constant="12" id="JrR-ky-Qb3"/>
-                                    <constraint firstAttribute="trailing" secondItem="Cgd-aF-46l" secondAttribute="trailing" constant="12" id="KGr-xP-1dg"/>
                                     <constraint firstItem="S7E-82-Kxz" firstAttribute="top" secondItem="hUG-qJ-EmA" secondAttribute="bottom" id="LLU-Hc-PCM"/>
                                     <constraint firstItem="hUG-qJ-EmA" firstAttribute="top" secondItem="Cgd-aF-46l" secondAttribute="bottom" constant="15" id="N5p-Jm-891"/>
                                     <constraint firstAttribute="bottom" secondItem="Iqo-Y2-ebL" secondAttribute="bottom" constant="15" id="bWy-UX-RCq"/>
                                     <constraint firstItem="Iqo-Y2-ebL" firstAttribute="top" secondItem="S7E-82-Kxz" secondAttribute="bottom" constant="30" id="bi2-m0-IOc"/>
-                                    <constraint firstAttribute="trailing" secondItem="Iqo-Y2-ebL" secondAttribute="trailing" constant="8" id="bqQ-Xe-cla"/>
                                     <constraint firstAttribute="trailing" secondItem="S7E-82-Kxz" secondAttribute="trailing" constant="12" id="e6q-b0-DbW"/>
                                     <constraint firstItem="Iqo-Y2-ebL" firstAttribute="leading" secondItem="QaD-hV-9KA" secondAttribute="leading" constant="12" id="fEM-7V-eER"/>
-                                    <constraint firstItem="hUG-qJ-EmA" firstAttribute="leading" secondItem="QaD-hV-9KA" secondAttribute="leading" constant="12" id="lwR-Tg-RXy"/>
                                     <constraint firstItem="S7E-82-Kxz" firstAttribute="leading" secondItem="QaD-hV-9KA" secondAttribute="leading" constant="12" id="mg3-xY-fut"/>
                                     <constraint firstItem="Kv4-C7-l1p" firstAttribute="top" secondItem="QaD-hV-9KA" secondAttribute="top" constant="20" id="nIQ-sm-yyT"/>
                                     <constraint firstItem="Udn-Ks-sJ9" firstAttribute="top" secondItem="Kv4-C7-l1p" secondAttribute="bottom" constant="30" id="o4I-v9-czN"/>
@@ -1279,20 +1263,8 @@ numéro de portable? </string>
                                     <constraint firstAttribute="trailing" secondItem="hUG-qJ-EmA" secondAttribute="trailing" constant="12" id="vLm-eh-imB"/>
                                     <constraint firstItem="Kv4-C7-l1p" firstAttribute="leading" secondItem="QaD-hV-9KA" secondAttribute="leading" constant="12" id="vVA-pV-FEy"/>
                                     <constraint firstItem="Cgd-aF-46l" firstAttribute="top" secondItem="Udn-Ks-sJ9" secondAttribute="bottom" constant="4" id="weh-SZ-9td"/>
-                                    <constraint firstItem="Iqo-Y2-ebL" firstAttribute="leading" secondItem="QaD-hV-9KA" secondAttribute="leading" constant="8" id="xLt-P6-idR"/>
                                     <constraint firstAttribute="height" constant="379" id="xww-kz-Dhq"/>
-                                    <constraint firstAttribute="trailing" secondItem="Udn-Ks-sJ9" secondAttribute="trailing" constant="12" id="zr1-Rm-n3z"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="zr1-Rm-n3z"/>
-                                        <exclude reference="KGr-xP-1dg"/>
-                                        <exclude reference="2tc-w8-G9I"/>
-                                        <exclude reference="lwR-Tg-RXy"/>
-                                        <exclude reference="bqQ-Xe-cla"/>
-                                        <exclude reference="xLt-P6-idR"/>
-                                    </mask>
-                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1305,6 +1277,7 @@ numéro de portable? </string>
                     <navigationItem key="navigationItem" id="3Pe-2Q-kUc"/>
                     <connections>
                         <outlet property="continueButton" destination="Iqo-Y2-ebL" id="kxz-rP-i16"/>
+                        <outlet property="heightContraint" destination="xww-kz-Dhq" id="U6k-1l-0cc"/>
                         <outlet property="phoneTextField" destination="hUG-qJ-EmA" id="wBb-QG-SwH"/>
                         <outlet property="scrollView" destination="QaD-hV-9KA" id="qcz-p1-UdI"/>
                         <segue destination="u7d-4R-Qgs" kind="show" identifier="PhoneToCodeSegue" id="oHg-Ia-tT1"/>
@@ -1326,8 +1299,8 @@ numéro de portable? </string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9w-am-EYE">
-                                <rect key="frame" x="-4" y="20" width="320" height="379"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9w-am-EYE">
+                                <rect key="frame" x="-4" y="20" width="328" height="379"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="code" translatesAutoresizingMaskIntoConstraints="NO" id="Wqs-Fu-HRW">
                                         <rect key="frame" x="12" y="20" width="56" height="56"/>
@@ -1377,8 +1350,8 @@ vérification</string>
                                             </mask>
                                         </variation>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UWh-sq-01y">
-                                        <rect key="frame" x="12" y="233" width="296" height="50"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UWh-sq-01y">
+                                        <rect key="frame" x="12" y="233" width="304" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="296" id="FfV-tr-S1y"/>
@@ -1401,8 +1374,8 @@ vérification</string>
                                             <outlet property="delegate" destination="Gt1-cc-4DI" id="cRJ-yG-DcC"/>
                                         </connections>
                                     </textField>
-                                    <view alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j0Z-cz-6CT">
-                                        <rect key="frame" x="12" y="283" width="296" height="1"/>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0Z-cz-6CT">
+                                        <rect key="frame" x="12" y="283" width="304" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="296" id="B4d-Aa-u60"/>
@@ -1416,8 +1389,8 @@ vérification</string>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xy9-iJ-kPe">
-                                        <rect key="frame" x="12" y="314" width="296" height="50"/>
+                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xy9-iJ-kPe">
+                                        <rect key="frame" x="12" y="314" width="304" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="296" id="CMY-4j-Mfe"/>
@@ -1492,6 +1465,7 @@ vérification</string>
                     <navigationItem key="navigationItem" id="Mzg-gd-uCn"/>
                     <connections>
                         <outlet property="codeTextField" destination="UWh-sq-01y" id="V9r-ai-NiJ"/>
+                        <outlet property="heightContraint" destination="chM-FT-zG2" id="TIg-TA-jwS"/>
                         <outlet property="scrollView" destination="c9w-am-EYE" id="99h-1i-LqU"/>
                         <outlet property="validateButton" destination="xy9-iJ-kPe" id="CTB-Er-rHi"/>
                         <segue destination="rTx-KX-qtK" kind="show" identifier="CodeToEmailSegue" id="UQg-wF-eS4"/>
@@ -1513,8 +1487,8 @@ vérification</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x67-Cu-c39">
-                                <rect key="frame" x="0.0" y="20" width="320" height="379"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x67-Cu-c39">
+                                <rect key="frame" x="-4" y="20" width="328" height="379"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteUser" translatesAutoresizingMaskIntoConstraints="NO" id="HRb-nN-d0G">
                                         <rect key="frame" x="12" y="20" width="56" height="56"/>
@@ -1524,8 +1498,8 @@ vérification</string>
                                             <constraint firstAttribute="width" constant="56" id="oib-yf-0Kw"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Quel est votre email?" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGx-N2-9fT">
-                                        <rect key="frame" x="12" y="106" width="299" height="72"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quel est votre email?" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGx-N2-9fT">
+                                        <rect key="frame" x="12" y="106" width="304" height="72"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="72" id="Djv-iX-2po"/>
                                             <constraint firstAttribute="width" constant="296" id="Hd3-GK-BS5"/>
@@ -1538,9 +1512,9 @@ vérification</string>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="g1J-cg-aYn"/>
-                                                <exclude reference="Hd3-GK-BS5"/>
                                                 <exclude reference="Djv-iX-2po"/>
+                                                <exclude reference="Hd3-GK-BS5"/>
+                                                <exclude reference="g1J-cg-aYn"/>
                                             </mask>
                                         </variation>
                                     </label>
@@ -1557,13 +1531,13 @@ vérification</string>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="LdP-z6-NOd"/>
                                                 <exclude reference="FSo-b2-Lpc"/>
+                                                <exclude reference="LdP-z6-NOd"/>
                                             </mask>
                                         </variation>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7bK-A4-yP7">
-                                        <rect key="frame" x="12" y="233" width="299" height="50"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7bK-A4-yP7">
+                                        <rect key="frame" x="12" y="233" width="304" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="JJU-2K-i0e"/>
@@ -1586,8 +1560,8 @@ vérification</string>
                                             <outlet property="delegate" destination="Gt1-cc-4DI" id="UpY-hV-Czq"/>
                                         </connections>
                                     </textField>
-                                    <view alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFB-6X-bFX">
-                                        <rect key="frame" x="12" y="283" width="299" height="1"/>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFB-6X-bFX">
+                                        <rect key="frame" x="12" y="283" width="304" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="IgL-zj-WLy"/>
@@ -1596,13 +1570,13 @@ vérification</string>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="lUz-RA-Awf"/>
                                                 <exclude reference="R1T-HZ-VnT"/>
+                                                <exclude reference="lUz-RA-Awf"/>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pG4-Jx-qRh">
-                                        <rect key="frame" x="12" y="308" width="296" height="56"/>
+                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pG4-Jx-qRh">
+                                        <rect key="frame" x="12" y="308" width="304" height="56"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="296" id="Cj9-jY-8Ds"/>
@@ -1652,7 +1626,7 @@ vérification</string>
                                     <constraint firstItem="pG4-Jx-qRh" firstAttribute="top" secondItem="PFB-6X-bFX" secondAttribute="bottom" constant="24" id="lLz-UH-Fm5"/>
                                     <constraint firstItem="iGx-N2-9fT" firstAttribute="top" secondItem="HRb-nN-d0G" secondAttribute="bottom" constant="30" id="nsd-XY-1SV"/>
                                     <constraint firstItem="7bK-A4-yP7" firstAttribute="leading" secondItem="x67-Cu-c39" secondAttribute="leading" constant="12" id="o4R-Wi-ukn"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pG4-Jx-qRh" secondAttribute="bottom" constant="15" id="oTG-Z1-2tr"/>
+                                    <constraint firstAttribute="bottom" secondItem="pG4-Jx-qRh" secondAttribute="bottom" constant="15" id="oTG-Z1-2tr"/>
                                     <constraint firstAttribute="trailing" secondItem="pG4-Jx-qRh" secondAttribute="trailing" constant="12" id="uCR-md-Q54"/>
                                     <constraint firstItem="pG4-Jx-qRh" firstAttribute="leading" secondItem="x67-Cu-c39" secondAttribute="leading" constant="8" id="uCt-ww-pDi"/>
                                     <constraint firstItem="OnU-np-xDM" firstAttribute="top" secondItem="iGx-N2-9fT" secondAttribute="bottom" constant="4" id="uVa-Sy-cUP"/>
@@ -1683,6 +1657,7 @@ vérification</string>
                     <navigationItem key="navigationItem" id="mf5-jp-GpE"/>
                     <connections>
                         <outlet property="emailTextField" destination="7bK-A4-yP7" id="ZIN-dk-T8X"/>
+                        <outlet property="heightContraint" destination="Rgz-c1-x9L" id="yk6-Mj-9fA"/>
                         <outlet property="scrollView" destination="x67-Cu-c39" id="bwM-9k-Pq2"/>
                         <outlet property="validateButton" destination="pG4-Jx-qRh" id="QYN-aG-9o7"/>
                         <segue destination="3l8-aX-f11" kind="show" identifier="EmailToNameSegue" id="0Vi-Nd-gjg"/>
@@ -1704,8 +1679,8 @@ vérification</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olv-YK-o5Z">
-                                <rect key="frame" x="0.0" y="20" width="320" height="379"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olv-YK-o5Z">
+                                <rect key="frame" x="-4" y="20" width="328" height="379"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteUser" translatesAutoresizingMaskIntoConstraints="NO" id="Fli-Nr-R3B">
                                         <rect key="frame" x="12" y="20" width="56" height="56"/>
@@ -1715,8 +1690,8 @@ vérification</string>
                                             <constraint firstAttribute="width" constant="56" id="ree-qa-rDC"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Quel est votre nom?" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTr-Ou-wB2">
-                                        <rect key="frame" x="12" y="106" width="299" height="72"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quel est votre nom?" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTr-Ou-wB2">
+                                        <rect key="frame" x="12" y="106" width="304" height="72"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="72" id="P4w-xI-TBI"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="72" id="YTe-xP-i4j"/>
@@ -1729,9 +1704,9 @@ vérification</string>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="yAM-rR-DYo"/>
-                                                <exclude reference="bVT-yN-Gzr"/>
                                                 <exclude reference="YTe-xP-i4j"/>
+                                                <exclude reference="bVT-yN-Gzr"/>
+                                                <exclude reference="yAM-rR-DYo"/>
                                             </mask>
                                         </variation>
                                     </label>
@@ -1748,13 +1723,13 @@ vérification</string>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="My0-dr-pCD"/>
                                                 <exclude reference="AYz-oE-HbF"/>
+                                                <exclude reference="My0-dr-pCD"/>
                                             </mask>
                                         </variation>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Prénom" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LYl-T0-GUe">
-                                        <rect key="frame" x="12" y="172" width="299" height="50"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Prénom" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LYl-T0-GUe">
+                                        <rect key="frame" x="12" y="172" width="304" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="SG4-qd-gUe"/>
@@ -1779,8 +1754,8 @@ vérification</string>
                                             <outlet property="delegate" destination="Gt1-cc-4DI" id="lFU-tn-CKW"/>
                                         </connections>
                                     </textField>
-                                    <view alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Smh-b2-HcN">
-                                        <rect key="frame" x="12" y="222" width="296" height="1"/>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Smh-b2-HcN">
+                                        <rect key="frame" x="12" y="222" width="304" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="0LM-Ze-Txh"/>
@@ -1796,8 +1771,8 @@ vérification</string>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ia-WG-cql">
-                                        <rect key="frame" x="12" y="233" width="299" height="50"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ia-WG-cql">
+                                        <rect key="frame" x="12" y="233" width="304" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="THo-PL-4aG"/>
@@ -1820,8 +1795,8 @@ vérification</string>
                                             <outlet property="delegate" destination="Gt1-cc-4DI" id="h0V-87-OkZ"/>
                                         </connections>
                                     </textField>
-                                    <view alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SKS-rk-LIi">
-                                        <rect key="frame" x="12" y="283" width="296" height="1"/>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKS-rk-LIi">
+                                        <rect key="frame" x="12" y="283" width="304" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ab1-v9-Z2A"/>
@@ -1830,13 +1805,13 @@ vérification</string>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="pFj-5o-AFW"/>
                                                 <exclude reference="hHx-Qh-EK5"/>
+                                                <exclude reference="pFj-5o-AFW"/>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Gj-pm-mY8">
-                                        <rect key="frame" x="12" y="308" width="296" height="56"/>
+                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Gj-pm-mY8">
+                                        <rect key="frame" x="12" y="308" width="304" height="56"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="0a9-g3-3ho"/>
@@ -1851,11 +1826,11 @@ vérification</string>
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="x9w-Lw-AJd"/>
                                                 <exclude reference="8J8-6H-iXJ"/>
-                                                <exclude reference="iVD-C2-Bv4"/>
                                                 <exclude reference="FqJ-Lf-G0Y"/>
+                                                <exclude reference="iVD-C2-Bv4"/>
                                                 <exclude reference="qXL-wf-ZYh"/>
+                                                <exclude reference="x9w-Lw-AJd"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -1927,6 +1902,7 @@ vérification</string>
                     <navigationItem key="navigationItem" id="HL5-ZC-eQR"/>
                     <connections>
                         <outlet property="firstNameTextField" destination="LYl-T0-GUe" id="pNJ-Yo-pOq"/>
+                        <outlet property="heightContraint" destination="xfk-IV-DJQ" id="uxE-Fb-ld9"/>
                         <outlet property="lastNameTextField" destination="2ia-WG-cql" id="rJ7-Un-i9m"/>
                         <outlet property="scrollView" destination="olv-YK-o5Z" id="h6z-fS-Glk"/>
                         <outlet property="validateButton" destination="8Gj-pm-mY8" id="Gts-cn-Oik"/>
