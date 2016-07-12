@@ -368,7 +368,7 @@
                                                     <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
                                                     <state key="normal" title="Button" image="cameraSquare"/>
                                                     <connections>
-                                                        <segue destination="V4t-y3-wRQ" kind="presentation" identifier="EditPictureSegue" id="iNF-B6-mPY"/>
+                                                        <segue destination="paK-dN-ukL" kind="show" identifier="EditPictureSegue" id="tjQ-W3-Ae3"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -816,12 +816,14 @@
             <point key="canvasLocation" x="3525" y="-826"/>
         </scene>
         <!--UserPicture-->
-        <scene sceneID="lcE-GY-E6e">
+        <scene sceneID="MEm-xX-BKd">
             <objects>
-                <viewControllerPlaceholder storyboardName="UserPicture" id="V4t-y3-wRQ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lx2-ew-slN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="UserPicture" id="paK-dN-ukL" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="t0R-7g-dZm"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ggk-z7-icI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3991" y="-298"/>
+            <point key="canvasLocation" x="3991" y="-296"/>
         </scene>
     </scenes>
     <resources>

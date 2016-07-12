@@ -1835,7 +1835,6 @@ vérification</string>
                                         </variation>
                                         <connections>
                                             <action selector="doContinue" destination="3l8-aX-f11" eventType="touchUpInside" id="ssM-6g-s8v"/>
-                                            <segue destination="vRi-8y-Ilf" kind="show" id="Nra-qx-PcG"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1907,6 +1906,7 @@ vérification</string>
                         <outlet property="lastNameTextField" destination="2ia-WG-cql" id="rJ7-Un-i9m"/>
                         <outlet property="scrollView" destination="olv-YK-o5Z" id="h6z-fS-Glk"/>
                         <outlet property="validateButton" destination="8Gj-pm-mY8" id="Gts-cn-Oik"/>
+                        <segue destination="vRi-8y-Ilf" kind="show" identifier="AddPictureSegue" id="iyU-LI-6bc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A4F-pa-s3g" userLabel="First Responder" sceneMemberID="firstResponder"/>

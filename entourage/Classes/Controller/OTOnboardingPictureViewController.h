@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OTUserEditPictureViewController : UIViewController
+@interface OTOnboardingPictureViewController : UIViewController
 
+@property (nonatomic) BOOL isOnboarding;
 
 @end

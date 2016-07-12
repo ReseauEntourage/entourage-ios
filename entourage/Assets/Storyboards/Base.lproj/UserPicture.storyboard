@@ -1,33 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0l7-F2-byG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bha-JG-S7n">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="ODd-ek-0tN">
-            <objects>
-                <navigationController id="0l7-F2-byG" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="vLg-pI-brj"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oli-eZ-1IC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="bha-JG-S7n" kind="relationship" relationship="rootViewController" id="0Ci-kf-pg5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kVq-bL-RtP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4397" y="-44"/>
-        </scene>
         <!--User Edit Picture-->
         <scene sceneID="wWI-WC-BDE">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="bha-JG-S7n" userLabel="User Edit Picture" customClass="OTUserEditPictureViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="bha-JG-S7n" userLabel="User Edit Picture" customClass="OTOnboardingPictureViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M7s-An-XhF"/>
                         <viewControllerLayoutGuide type="bottom" id="kX1-rt-rX1"/>
@@ -37,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraSquare" translatesAutoresizingMaskIntoConstraints="NO" id="VCD-Ez-jrk">
-                                <rect key="frame" x="12" y="84" width="56" height="56"/>
+                                <rect key="frame" x="12" y="40" width="56" height="56"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="FH5-J7-nFd"/>
@@ -45,7 +27,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ajouter une photo ?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="811-zf-BIU">
-                                <rect key="frame" x="12" y="160" width="296" height="36"/>
+                                <rect key="frame" x="12" y="116" width="296" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="TT4-Bf-VKO"/>
                                     <constraint firstAttribute="width" constant="280" id="h0s-gY-c6e"/>
@@ -60,7 +42,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avec une photo, c’est tout de suite plus sympa. Montrez-nous votre sourire le plus chaleureux." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="vBy-8m-m47">
-                                <rect key="frame" x="12" y="204" width="296" height="36"/>
+                                <rect key="frame" x="12" y="160" width="296" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="Zgg-Co-nQB"/>
                                     <constraint firstAttribute="width" constant="280" id="pZa-8O-8Ma"/>
@@ -110,8 +92,8 @@
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="fdM-nV-lR4"/>
                                         <exclude reference="MXz-Vz-P5J"/>
+                                        <exclude reference="fdM-nV-lR4"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -138,10 +120,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="I8k-tV-cnv"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnFromGallery" destination="ma1-OC-ZEH" id="gMy-2R-MiY"/>
                         <outlet property="btnTakePicture" destination="XBY-w9-wlD" id="XPc-eL-EAL"/>
-                        <segue destination="xml-Uv-sbT" kind="show" id="9bG-Kh-Ax2"/>
+                        <segue destination="xml-Uv-sbT" kind="show" identifier="PreviewPictureSegue" id="9bG-Kh-Ax2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v8G-gr-vqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -154,12 +137,12 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="4869" y="-44"/>
+            <point key="canvasLocation" x="4573" y="-44"/>
         </scene>
-        <!--View Controller-->
+        <!--Onboarding Preview View Controller-->
         <scene sceneID="hRq-c8-az9">
             <objects>
-                <viewController id="xml-Uv-sbT" sceneMemberID="viewController">
+                <viewController id="xml-Uv-sbT" customClass="OTOnboardingPreviewViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8OU-hy-Cl1"/>
                         <viewControllerLayoutGuide type="bottom" id="qzZ-lL-4Ao"/>
@@ -167,15 +150,53 @@
                     <view key="view" contentMode="scaleToFill" id="bq0-9o-4Id">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fot-wr-6TS">
+                                <rect key="frame" x="8" y="502" width="304" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="296" id="HXC-sY-0y9"/>
+                                    <constraint firstAttribute="width" constant="56" id="IH1-G0-e1a"/>
+                                    <constraint firstAttribute="width" constant="210" id="Nbg-SI-BIU"/>
+                                    <constraint firstAttribute="width" constant="304" id="OiO-lg-h0t"/>
+                                    <constraint firstAttribute="height" constant="56" id="m2Y-kf-TpW"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="oE3-92-Ki7"/>
+                                </constraints>
+                                <state key="normal" image="nextOpacity70">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Nbg-SI-BIU"/>
+                                        <exclude reference="OiO-lg-h0t"/>
+                                        <exclude reference="oE3-92-Ki7"/>
+                                        <exclude reference="IH1-G0-e1a"/>
+                                        <exclude reference="HXC-sY-0y9"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="doContinue" destination="xml-Uv-sbT" eventType="touchUpInside" id="YvB-UG-7kB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="qzZ-lL-4Ao" firstAttribute="top" secondItem="Fot-wr-6TS" secondAttribute="bottom" constant="10" id="BBB-US-7Qs"/>
+                            <constraint firstItem="Fot-wr-6TS" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-8" id="pSC-J3-z9G"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Fot-wr-6TS" secondAttribute="trailing" constant="-8" id="uBa-r4-9r6"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnDone" destination="Fot-wr-6TS" id="DH3-O9-fJo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8TY-Tj-u9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5285" y="-44"/>
+            <point key="canvasLocation" x="5109" y="-44"/>
         </scene>
     </scenes>
     <resources>
         <image name="cameraSquare" width="56" height="56"/>
+        <image name="nextOpacity70" width="56" height="56"/>
     </resources>
 </document>

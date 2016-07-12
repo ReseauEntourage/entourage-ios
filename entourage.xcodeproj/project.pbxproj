@@ -36,12 +36,13 @@
 		1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */; };
 		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
 		1E2FE74E1D354AE900746447 /* OTPhotoPickerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE74D1D354AE900746447 /* OTPhotoPickerBehavior.m */; };
+		1E2FE7511D35668B00746447 /* OTOnboardingPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE7501D35668B00746447 /* OTOnboardingPreviewViewController.m */; };
 		1E3174911D10299400027824 /* QuitFeedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E3174901D10299400027824 /* QuitFeedItem.storyboard */; };
 		1E71E6531D108790001F3777 /* NSNotification+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E71E6521D108790001F3777 /* NSNotification+entourage.m */; };
 		1E76AE471D144D1F00C496BA /* OTTourStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE461D144D1F00C496BA /* OTTourStateInfo.m */; };
 		1E76AE4A1D144D9900C496BA /* OTEntourageStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE491D144D9900C496BA /* OTEntourageStateInfo.m */; };
 		1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9003681D34FAAB004E18BC /* OTBehavior.m */; };
-		1E90036C1D351F40004E18BC /* OTUserEditPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90036B1D351F40004E18BC /* OTUserEditPictureViewController.m */; };
+		1E90036C1D351F40004E18BC /* OTOnboardingPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90036B1D351F40004E18BC /* OTOnboardingPictureViewController.m */; };
 		1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E90036D1D352C0B004E18BC /* UserPicture.storyboard */; };
 		1EACE4161D11515200F3A2A6 /* OTEntourageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */; };
 		1EACE4171D11515200F3A2A6 /* OTEntourageStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4091D11515200F3A2A6 /* OTEntourageStateTransition.m */; };
@@ -231,6 +232,8 @@
 		1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCreateMeetingViewController.m; sourceTree = "<group>"; };
 		1E2FE74C1D354AE900746447 /* OTPhotoPickerBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPhotoPickerBehavior.h; path = Behaviors/OTPhotoPickerBehavior.h; sourceTree = "<group>"; };
 		1E2FE74D1D354AE900746447 /* OTPhotoPickerBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTPhotoPickerBehavior.m; path = Behaviors/OTPhotoPickerBehavior.m; sourceTree = "<group>"; };
+		1E2FE74F1D35668B00746447 /* OTOnboardingPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingPreviewViewController.h; sourceTree = "<group>"; };
+		1E2FE7501D35668B00746447 /* OTOnboardingPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingPreviewViewController.m; sourceTree = "<group>"; };
 		1E3174901D10299400027824 /* QuitFeedItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QuitFeedItem.storyboard; sourceTree = "<group>"; };
 		1E71E6511D108790001F3777 /* NSNotification+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotification+entourage.h"; sourceTree = "<group>"; };
 		1E71E6521D108790001F3777 /* NSNotification+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotification+entourage.m"; sourceTree = "<group>"; };
@@ -241,8 +244,8 @@
 		1E76AE491D144D9900C496BA /* OTEntourageStateInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageStateInfo.m; sourceTree = "<group>"; };
 		1E9003671D34FAAB004E18BC /* OTBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTBehavior.h; path = Behaviors/OTBehavior.h; sourceTree = "<group>"; };
 		1E9003681D34FAAB004E18BC /* OTBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTBehavior.m; path = Behaviors/OTBehavior.m; sourceTree = "<group>"; };
-		1E90036A1D351F40004E18BC /* OTUserEditPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUserEditPictureViewController.h; sourceTree = "<group>"; };
-		1E90036B1D351F40004E18BC /* OTUserEditPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUserEditPictureViewController.m; sourceTree = "<group>"; };
+		1E90036A1D351F40004E18BC /* OTOnboardingPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingPictureViewController.h; sourceTree = "<group>"; };
+		1E90036B1D351F40004E18BC /* OTOnboardingPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingPictureViewController.m; sourceTree = "<group>"; };
 		1E90036E1D352C0B004E18BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserPicture.storyboard; sourceTree = "<group>"; };
 		1EACE4061D11515200F3A2A6 /* OTEntourageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFactory.h; sourceTree = "<group>"; };
 		1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageFactory.m; sourceTree = "<group>"; };
@@ -524,8 +527,6 @@
 				0A4769341BFB9F07006EA73A /* OTUserViewController.m */,
 				45E6FE141CAE44EA00505660 /* OTUserEditViewController.h */,
 				45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */,
-				1E90036A1D351F40004E18BC /* OTUserEditPictureViewController.h */,
-				1E90036B1D351F40004E18BC /* OTUserEditPictureViewController.m */,
 				2EDA5F121CB7BE7200849172 /* OTUserEditPasswordViewController.h */,
 				2EDA5F131CB7BE7200849172 /* OTUserEditPasswordViewController.m */,
 				0AA4C0721C17283800DBBE11 /* OTAskMoreViewController.h */,
@@ -765,6 +766,10 @@
 				45D789141D2EFB50005EBACC /* OTOnboardingEmailViewController.m */,
 				45D789161D2FEE53005EBACC /* OTOnboardingNameViewController.h */,
 				45D789171D2FEE53005EBACC /* OTOnboardingNameViewController.m */,
+				1E90036A1D351F40004E18BC /* OTOnboardingPictureViewController.h */,
+				1E90036B1D351F40004E18BC /* OTOnboardingPictureViewController.m */,
+				1E2FE74F1D35668B00746447 /* OTOnboardingPreviewViewController.h */,
+				1E2FE7501D35668B00746447 /* OTOnboardingPreviewViewController.m */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -1436,6 +1441,7 @@
 				1EACE4171D11515200F3A2A6 /* OTEntourageStateTransition.m in Sources */,
 				0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */,
 				DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */,
+				1E2FE7511D35668B00746447 /* OTOnboardingPreviewViewController.m in Sources */,
 				45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */,
 				A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */,
 				45F443471C9314A800DDEBE1 /* OTTourStatus.m in Sources */,
@@ -1506,7 +1512,7 @@
 				45E37E591CEE64F7005C3175 /* OTFiltersViewController.m in Sources */,
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */,
-				1E90036C1D351F40004E18BC /* OTUserEditPictureViewController.m in Sources */,
+				1E90036C1D351F40004E18BC /* OTOnboardingPictureViewController.m in Sources */,
 				2EDA5F071CB50CEE00849172 /* OTFeedItemsTableView.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				45ADCACF1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m in Sources */,

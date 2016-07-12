@@ -27,6 +27,7 @@
 // Onboarding
 "doLogin" = "Se connecter";
 "doRegenerateCode" = "Redemander un code";
+"doIgnore" = "Ignorer";
 
 // MenuItems
 "menu_amis" = "Amis";

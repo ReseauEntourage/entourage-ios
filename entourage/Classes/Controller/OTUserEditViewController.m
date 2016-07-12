@@ -14,7 +14,7 @@
 #import "OTUserEditViewController.h"
 #import "UIViewController+menu.h"
 #import "OTUserEditPasswordViewController.h"
-#import "OTUserEditPictureViewController.h"
+#import "OTOnboardingPictureViewController.h"
 #import "UIButton+entourage.h"
 
 // Service
@@ -69,8 +69,8 @@ typedef NS_ENUM(NSInteger) {
         controller.delegate = self;
     }
     else if ([segue.identifier isEqualToString:EDIT_PICTURE_SEGUE]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        OTUserEditPictureViewController *controller = (OTUserEditPictureViewController*)navController.topViewController;
+        OTOnboardingPictureViewController *controller = (OTOnboardingPictureViewController*)[segue destinationViewController];
+        controller.isOnboarding = NO;
         // TODO set delegate for action after picture is ok
         //controller.delegate = self;
     }

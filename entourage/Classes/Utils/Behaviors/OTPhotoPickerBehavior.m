@@ -28,14 +28,12 @@
     controller.modalPresentationStyle = UIModalPresentationCurrentContext;
     controller.sourceType = sourceType;
     controller.delegate = self;
-    
     [self.parent presentViewController:controller animated:YES completion:nil];
 }
 
 #pragma mark - UIImagePickerDelegate
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSURL *imageUrl = [self getImageUrlForPicker:picker withInfo:info];
     if(imageUrl)
         [self notifyPictureSelected:imageUrl];
@@ -43,8 +41,7 @@
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

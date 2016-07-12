@@ -18,6 +18,9 @@
 #import "UIScrollView+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
+#import "OTOnboardingPictureViewController.h"
+
+#define ADD_PICTURE_SEGUE @"AddPictureSegue"
 
 @interface OTOnboardingNameViewController ()
 
@@ -75,8 +78,8 @@
                                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                                    [[NSUserDefaults standardUserDefaults] synchronize];
                                                    
-                                                   [SVProgressHUD showSuccessWithStatus:@""];
-                                                   //[self performSegueWithIdentifier:@"" sender:self];
+                                                   [SVProgressHUD dismiss];
+                                                   [self performSegueWithIdentifier:ADD_PICTURE_SEGUE sender:self];
                                                }
                                                failure:^(NSError *error) {
                                                    NSDictionary *userInfo = [error userInfo];
@@ -97,6 +100,15 @@
     //[self.scrollView scrollToBottomFromKeyboardNotification:notification];
     [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
 
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:ADD_PICTURE_SEGUE]) {
+        OTOnboardingPictureViewController *controller = (OTOnboardingPictureViewController*)[segue destinationViewController];
+        controller.isOnboarding = YES;
+        // TODO set delegate for action after picture is ok
+        //controller.delegate = self;
+    }
 }
 
 @end
