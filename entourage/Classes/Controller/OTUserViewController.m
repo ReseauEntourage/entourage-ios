@@ -76,6 +76,7 @@ typedef NS_ENUM(NSInteger) {
                                                                   target:self
                                                                   action:@selector(showEditView)];
     [chatButton setTintColor:[UIColor appOrangeColor]];
+    [chatButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     [self.navigationItem setRightBarButtonItem:chatButton];
 }
 

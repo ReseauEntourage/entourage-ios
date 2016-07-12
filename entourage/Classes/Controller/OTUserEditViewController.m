@@ -77,6 +77,7 @@ typedef NS_ENUM(NSInteger) {
                                                                   target:self
                                                                   action:@selector(updateUser)];
     [saveButton setTintColor:[UIColor appOrangeColor]];
+    [saveButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     [self.navigationItem setRightBarButtonItem:saveButton];
 }
 
