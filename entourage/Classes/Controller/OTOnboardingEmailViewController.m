@@ -16,6 +16,8 @@
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
 #import "UIScrollView+entourage.h"
+#import "NSUserDefaults+OT.h"
+#import "OTAuthService.h"
 
 @interface OTOnboardingEmailViewController ()
 
@@ -57,44 +59,38 @@
 
 
 - (IBAction)doContinue {
-    NSString *phone = self.emailTextField.text;
-    
-    [self performSegueWithIdentifier:@"EmailToNameSegue" sender:self];
-    return;
-    [SVProgressHUD show];
-    
+    NSString *email = self.emailTextField.text;
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    currentUser.email = email;
 
-    [[OTOnboardingService new] setupNewUserWithPhone:phone
-                                             success:^(OTUser *onboardUser) {
-                                                 [SVProgressHUD dismiss];
-                                             } failure:^(NSError *error) {
-                                                 NSDictionary *userInfo = [error userInfo];
-                                                 NSString *errorMessage = @"";
-                                                 NSDictionary *errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
-                                                 if (errorDictionary) {
-                                                     //NSString *code = [errorDictionary valueForKey:@"code"];
-                                                     errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
-                                                 }
-                                                 
-                                                 [SVProgressHUD showErrorWithStatus:errorMessage];
-                                                 NSLog(@"ERR: something went wrong on onboarding user phone: %@", error.description);
-                                             }];
+    [SVProgressHUD show];
+    [[OTAuthService new] updateUserInformationWithUser:currentUser
+                                               success:^(OTUser *user) {
+                                                   [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+                                                   [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
+                                                   [[NSUserDefaults standardUserDefaults] synchronize];
+
+                                                   [SVProgressHUD dismiss];
+                                                   [self performSegueWithIdentifier:@"EmailToNameSegue" sender:self];
+                                               }
+                                               failure:^(NSError *error) {
+                                                   NSDictionary *userInfo = [error userInfo];
+                                                   NSString *errorMessage = @"";
+                                                   NSDictionary *errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
+                                                   if (errorDictionary) {
+                                                       //NSString *code = [errorDictionary valueForKey:@"code"];
+                                                       errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
+                                                   }
+                                                   
+                                                   [SVProgressHUD showErrorWithStatus:errorMessage];
+                                                   NSLog(@"ERR: something went wrong on onboarding user email: %@", error.description);
+                                               }];
+
 }
 
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
 - (void)showKeyboard:(NSNotification*)notification {
-    //[self.scrollView scrollToBottomFromKeyboardNotification:notification];
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification
+                                         andHeightContraint:self.heightContraint];
 }
 
 @end

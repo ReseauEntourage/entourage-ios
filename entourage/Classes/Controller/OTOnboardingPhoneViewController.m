@@ -56,9 +56,9 @@
 }
 
 - (IBAction)doContinue {
-    [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
-    return;
-#warning Handle request
+//    [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
+//    return;
+//#warning Handle request
     
     NSString *phone = self.phoneTextField.text;
     [SVProgressHUD show];

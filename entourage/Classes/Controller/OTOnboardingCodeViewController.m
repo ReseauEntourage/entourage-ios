@@ -74,9 +74,6 @@
 }
 
 - (IBAction)doContinue {
-    [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:nil];
-    return;
-#warning Handle request
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *phone = [userDefaults currentUser].phone;
@@ -89,59 +86,20 @@
                               deviceId:deviceAPNSid
                                success: ^(OTUser *user) {
                                    NSLog(@"User : %@ authenticated successfully", user.email);
-                                   //user.phone = self.phoneNumberServerRepresentation;
+                                   user.phone = phone;
                                    [SVProgressHUD dismiss];
-                                   [self performSegueWithIdentifier:@"" sender:self];
+                                   
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-                                   [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    [[NSUserDefaults standardUserDefaults] synchronize];
-                                   
-//                                   NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
-//                                   if (loggedNumbers == nil) {
-//                                       loggedNumbers = [NSMutableArray new];
-//                                   }
-//                                   if ([loggedNumbers containsObject:self.phoneNumberServerRepresentation] && !deviceAPNSid) {
-//                                       [UIStoryboard showSWRevealController];
-//                                   } else {
-//                                       [self performSegueWithIdentifier:@"OTTutorial" sender:self];
-//                                   }
+                                   [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:self];
                                } failure: ^(NSError *error) {
-                                   [SVProgressHUD dismiss];
-//                                   NSString *alertTitle = OTLocalizedString(@"error");
-//                                   NSString *alertText = OTLocalizedString(@"connection_error");
-//                                   NSString *buttonTitle = @"ok";
-//                                   if ([[error.userInfo valueForKey:JSONResponseSerializerWithDataKey] isEqualToString:@"unauthorized"]) {
-//                                       alertTitle = OTLocalizedString(@"tryAgain");
-//                                       alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");                                       buttonTitle = OTLocalizedString(@"tryAgain_short");
-//                                       
-//                                   }
-//                                   UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
-//                                                                                                  message:alertText
-//                                                                                           preferredStyle:UIAlertControllerStyleAlert];
-//                                   UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle
-//                                                                                           style:UIAlertActionStyleDefault
-//                                                                                         handler:^(UIAlertAction * _Nonnull action) {}];
-//                                   [alert addAction: defaultAction];
-//                                   [self presentViewController:alert animated:YES completion:nil];
-                                   
+                                   [SVProgressHUD showErrorWithStatus:@""];
                                }];
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (void)showKeyboard:(NSNotification*)notification {
-    //[self.scrollView scrollToBottomFromKeyboardNotification:notification];
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification
+                                         andHeightContraint:self.heightContraint];
 }
-
 
 @end
