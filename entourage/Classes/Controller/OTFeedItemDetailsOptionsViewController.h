@@ -14,6 +14,7 @@
 
 @required
 - (void)promptToCloseFeedItem;
+- (void)feedItemFrozen:(OTFeedItem *)item;
 
 @end
 

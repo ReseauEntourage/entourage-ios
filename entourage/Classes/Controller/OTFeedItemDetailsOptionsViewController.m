@@ -68,7 +68,8 @@
 
 #pragma mark - Actions
 - (IBAction)doFreezeFeedItem {
-    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] deactivateWithSuccess:^(BOOL isTour) {
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
+        [self.delegate feedItemFrozen:self.feedItem];
         [self dismissViewControllerAnimated:YES completion:nil];
     } orFailure:nil];
 }
@@ -81,6 +82,7 @@
 
 - (IBAction)doQuitFeedItem {
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
+        [self.delegate feedItemFrozen:self.feedItem];
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
 }

@@ -17,7 +17,7 @@
     success();
 }
 
-- (void)deactivateWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError *))failure {
+- (void)closeWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError *))failure {
     self.entourage.status = FEEDITEM_STATUS_CLOSED;
     [[OTEntourageService new] closeEntourage:self.entourage
                                  withSuccess:^(OTEntourage *updatedEntourage) {
@@ -38,6 +38,17 @@
                           } failure:^(NSError *error) {
                               NSLog(@"QUITerr %@", error.description);
                           }];
+}
+
+- (void)sendJoinRequest:(void (^)(OTTourJoiner *))success orFailure:(void (^)(NSError *, BOOL))failure {
+    [[OTEntourageService new] joinEntourage:self.entourage
+        success:^(OTTourJoiner *joiner) {
+            NSLog(@"Sent entourage join request: %@", self.entourage.uid);
+            success(joiner);
+        } failure:^(NSError *error) {
+            NSLog(@"Send entourage join request error: %@", error.description);
+            failure(error, NO);
+        }];
 }
 
 @end
