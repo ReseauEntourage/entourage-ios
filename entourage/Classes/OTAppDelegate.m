@@ -69,9 +69,9 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //logger
     
-//#if DEBUG
+#if DEBUGi
 //#ifdef LOG2FILE
-#if TARGET_IPHONE_SIMULATOR == 0
+//#if TARGET_IPHONE_SIMULATOR == 0
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"EMA.log"];
