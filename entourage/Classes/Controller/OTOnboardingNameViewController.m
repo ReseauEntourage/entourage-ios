@@ -75,8 +75,8 @@
                                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                                    [[NSUserDefaults standardUserDefaults] synchronize];
                                                    
-                                                   [SVProgressHUD dismiss];
-                                                   [self performSegueWithIdentifier:@"" sender:self];
+                                                   [SVProgressHUD showSuccessWithStatus:@""];
+                                                   //[self performSegueWithIdentifier:@"" sender:self];
                                                }
                                                failure:^(NSError *error) {
                                                    NSDictionary *userInfo = [error userInfo];

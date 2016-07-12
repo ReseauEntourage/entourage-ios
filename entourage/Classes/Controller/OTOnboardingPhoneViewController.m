@@ -40,7 +40,7 @@
                                              selector:@selector(showKeyboard:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
-#if TARGET_IPHONE_SIMULATOR
+#if DEBUG //TARGET_IPHONE_SIMULATOR
     self.phoneTextField.text = @"+40740884267";
 #endif
     
