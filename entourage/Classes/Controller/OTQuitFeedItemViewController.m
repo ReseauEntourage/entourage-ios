@@ -14,8 +14,7 @@
 
 - (IBAction)doQuitFeedItem {
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
-        self.feedItem.joinStatus = @"not_requested";
-        //[self dismissViewControllerAnimated:YES completion:nil];
+        self.feedItem.joinStatus = JOIN_NOT_REQUESTED;
         [self.feedItemQuitDelegate didQuitFeedItem];
     }];
 }

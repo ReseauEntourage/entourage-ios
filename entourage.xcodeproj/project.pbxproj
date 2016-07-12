@@ -39,6 +39,7 @@
 		1E71E6531D108790001F3777 /* NSNotification+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E71E6521D108790001F3777 /* NSNotification+entourage.m */; };
 		1E76AE471D144D1F00C496BA /* OTTourStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE461D144D1F00C496BA /* OTTourStateInfo.m */; };
 		1E76AE4A1D144D9900C496BA /* OTEntourageStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE491D144D9900C496BA /* OTEntourageStateInfo.m */; };
+		1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9003681D34FAAB004E18BC /* OTBehavior.m */; };
 		1EACE4161D11515200F3A2A6 /* OTEntourageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */; };
 		1EACE4171D11515200F3A2A6 /* OTEntourageStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4091D11515200F3A2A6 /* OTEntourageStateTransition.m */; };
 		1EACE4181D11515200F3A2A6 /* OTFeedItemFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE40B1D11515200F3A2A6 /* OTFeedItemFactory.m */; };
@@ -233,6 +234,8 @@
 		1E76AE461D144D1F00C496BA /* OTTourStateInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourStateInfo.m; sourceTree = "<group>"; };
 		1E76AE481D144D9900C496BA /* OTEntourageStateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageStateInfo.h; sourceTree = "<group>"; };
 		1E76AE491D144D9900C496BA /* OTEntourageStateInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageStateInfo.m; sourceTree = "<group>"; };
+		1E9003671D34FAAB004E18BC /* OTBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTBehavior.h; path = Behaviors/OTBehavior.h; sourceTree = "<group>"; };
+		1E9003681D34FAAB004E18BC /* OTBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTBehavior.m; path = Behaviors/OTBehavior.m; sourceTree = "<group>"; };
 		1EACE4061D11515200F3A2A6 /* OTEntourageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFactory.h; sourceTree = "<group>"; };
 		1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageFactory.m; sourceTree = "<group>"; };
 		1EACE4081D11515200F3A2A6 /* OTEntourageStateTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageStateTransition.h; sourceTree = "<group>"; };
@@ -540,6 +543,15 @@
 				454C8F5A1C510304001362B2 /* UINavigationController+entourage.m */,
 			);
 			name = Helper;
+			sourceTree = "<group>";
+		};
+		1E9003661D34FA90004E18BC /* Behaviors */ = {
+			isa = PBXGroup;
+			children = (
+				1E9003671D34FAAB004E18BC /* OTBehavior.h */,
+				1E9003681D34FAAB004E18BC /* OTBehavior.m */,
+			);
+			name = Behaviors;
 			sourceTree = "<group>";
 		};
 		1EACE4041D11515200F3A2A6 /* FeedItem */ = {
@@ -1044,6 +1056,7 @@
 		6BFE639519E7E85D00C661AB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1E9003661D34FA90004E18BC /* Behaviors */,
 				1EACE4041D11515200F3A2A6 /* FeedItem */,
 				1EACE4131D11515200F3A2A6 /* Location */,
 				453117A21CD251C200C00BA8 /* MKMapView+entourage.h */,
@@ -1496,6 +1509,7 @@
 				2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,
 				45D6B8301D116A2C00357FEF /* OTFeedItemsPagination.m in Sources */,
+				1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */,
 				1EC184B71D1420D800E29D96 /* OTEntourageAnnotationView.m in Sources */,
 				2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */,
 				45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */,

@@ -29,17 +29,18 @@
 - (void)setupAsProfilePictureFromUrl:(NSString *)avatarURLString
                      withPlaceholder:(NSString *)placeholder
 {
-    
     __weak UIButton *userImageButton = self;
     userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
     userImageButton.clipsToBounds = YES;
+    UIImage *placeholderImage = [UIImage imageNamed:placeholder];
     if (avatarURLString != nil && ![avatarURLString isKindOfClass:[NSNull class]]) {
         NSURL *url = [NSURL URLWithString:avatarURLString];
-        UIImage *placeholderImage = [UIImage imageNamed:placeholder];
         [userImageButton setImageForState:UIControlStateNormal
                                   withURL:url
                          placeholderImage:placeholderImage];
     }
+    else
+        [userImageButton setImage:placeholderImage forState:UIControlStateNormal];
 }
 
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {

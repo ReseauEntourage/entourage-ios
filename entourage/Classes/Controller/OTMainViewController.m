@@ -975,23 +975,20 @@ static bool isShowingOptions = NO;
 }
 
 - (void)createDemande {
-    self.entourageType = ENTOURAGE_DEMANDE;
-    [self dismissViewControllerAnimated:NO completion:^{
-        if (self.toursMapDelegate.isActive) {
-            [self performSegueWithIdentifier:@"EntourageCreator" sender:nil];
-        } else {
-            [self showAlert:OTLocalizedString(@"poi_create_demande_alert") withSegue:@"EntourageCreator"];
-        }
-    }];
+    [self createEntourageOfType:ENTOURAGE_DEMANDE withAlertMessage:OTLocalizedString(@"poi_create_demande_alert")];
 }
 
 - (void)createContribution {
-    self.entourageType = ENTOURAGE_CONTRIBUTION;
+    [self createEntourageOfType:ENTOURAGE_CONTRIBUTION withAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
+}
+
+- (void) createEntourageOfType:(NSString *)entourageType withAlertMessage:(NSString *)message {
+    self.entourageType = entourageType;
     [self dismissViewControllerAnimated:NO completion:^{
         if (self.toursMapDelegate.isActive) {
             [self performSegueWithIdentifier:@"EntourageCreator" sender:nil];
         } else {
-            [self showAlert:OTLocalizedString(@"poi_create_contribution_alert") withSegue:@"EntourageCreator"];
+            [self showAlert:message withSegue:@"EntourageCreator"];
         }
     }];
 }
@@ -1111,35 +1108,19 @@ static bool isShowingOptions = NO;
 
 - (void)sendJoinRequest:(OTFeedItem*)feedItem {
     [SVProgressHUD show];
-    if ([feedItem isKindOfClass:[OTTour class]]) {
-        OTTour *tour = (OTTour *)feedItem;
-        [[OTTourService new]
-            joinTour:tour
-            success:^(OTTourJoiner *joiner) {
-                tour.joinStatus = JOIN_PENDING;
-                [SVProgressHUD dismiss];
-                [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
-                [self.tableView reloadData];
-            } failure:^(NSError *error) {
-                [SVProgressHUD dismiss];
-                NSLog(@"Error sending tour join request: %@", error.description);
+    [[[OTFeedItemFactory createFor:feedItem] getStateTransition] sendJoinRequest:^(OTTourJoiner *joiner) {
+        [SVProgressHUD dismiss];
+        feedItem.joinStatus = JOIN_PENDING;
+        [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
+        [self.tableView reloadData];
+    } orFailure:^(NSError *error, BOOL isTour) {
+        NSLog(@"Error sending tour join request: %@", error.description);
+        [SVProgressHUD dismiss];
+        if(!isTour)
+            [self dismissViewControllerAnimated:YES completion:^{
+                [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
             }];
-    } else {
-        OTEntourage *entourage = (OTEntourage*)feedItem;
-        [[OTEntourageService new] joinEntourage:entourage
-                                        success:^(OTTourJoiner *joiner) {
-                                            [SVProgressHUD dismiss];
-                                            entourage.joinStatus = JOIN_PENDING;
-                                            [self.tableView reloadData];
-                                            [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
-                                        } failure:^(NSError *error) {
-                                            [SVProgressHUD dismiss];
-                                            NSLog(@"failed joining tour %@ with error %@", feedItem.uid, error.description);
-                                            [self dismissViewControllerAnimated:YES completion:^{
-                                                [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
-                                            }];
-                                        }];
-    }
+    }];
 }
 
 - (void)doJoinRequest:(OTFeedItem*)feedItem {
@@ -1162,13 +1143,10 @@ static bool isShowingOptions = NO;
         case FeedItemStateOpen:
         case FeedItemStateClosed: {
             [[[OTFeedItemFactory createFor:feedItem] getStateTransition]
-                deactivateWithSuccess:^(BOOL isTour) {
+                closeWithSuccess:^(BOOL isTour) {
                     [self.tableView reloadData];
-                    if (isTour) {
-                         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_quitted")];
-                    } else {
-                        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageQuitted")];
-                    }
+                    NSString* messageKey = isTour ? @"tour_quitted" : @"entourageQuitted";
+                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(messageKey)];
                 } orFailure:^(NSError *error) {
                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
                     NSLog(@"%@",[error localizedDescription]);

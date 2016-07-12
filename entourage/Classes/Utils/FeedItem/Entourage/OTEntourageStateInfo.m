@@ -37,6 +37,8 @@
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     if ([currentUser.sid intValue] == [self.entourage.author.uID intValue])
         return ![self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED];
+    else
+        return [self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
     return NO;
 }
 

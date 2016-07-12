@@ -508,6 +508,12 @@ typedef NS_ENUM(unsigned) {
     }];
 }
 
+- (void)feedItemFrozen:(OTFeedItem *)item {
+    self.feedItem = item;
+    self.chatToolbar.hidden = YES;
+    [self.navigationItem setRightBarButtonItems:nil];
+}
+
 /**************************************************************************************************/
 #pragma mark - Table View
 

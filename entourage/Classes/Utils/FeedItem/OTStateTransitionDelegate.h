@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "OTFeedItem.h"
+#import "OTTourJoiner.h"
 
 @protocol OTStateTransitionDelegate <NSObject>
 
 - (void)stopWithSuccess:(void (^)())success;
-- (void)deactivateWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure;
+- (void)closeWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure;
 - (void)quitWithSuccess:(void (^)())success;
+- (void)sendJoinRequest:(void (^)(OTTourJoiner*))success orFailure:(void (^)(NSError*, BOOL))failure;
 
 @end
