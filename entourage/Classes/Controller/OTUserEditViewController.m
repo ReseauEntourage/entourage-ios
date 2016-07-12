@@ -14,6 +14,7 @@
 #import "OTUserEditViewController.h"
 #import "UIViewController+menu.h"
 #import "OTUserEditPasswordViewController.h"
+#import "OTUserEditPictureViewController.h"
 #import "UIButton+entourage.h"
 
 // Service
@@ -36,6 +37,7 @@ typedef NS_ENUM(NSInteger) {
     SectionTypeInfoPublic// to be the 3rd in version 1.2
 } SectionType;
 
+#define EDIT_PICTURE_SEGUE @"EditPictureSegue"
 #define EDIT_PASSWORD_SEGUE @"EditPasswordSegue"
 #define NOTIFY_LOGOUT @"loginFailureNotification"
 
@@ -65,6 +67,12 @@ typedef NS_ENUM(NSInteger) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         OTUserEditPasswordViewController *controller = (OTUserEditPasswordViewController*)navController.topViewController;
         controller.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:EDIT_PICTURE_SEGUE]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        OTUserEditPictureViewController *controller = (OTUserEditPictureViewController*)navController.topViewController;
+        // TODO set delegate for action after picture is ok
+        //controller.delegate = self;
     }
 }
 
@@ -387,7 +395,6 @@ typedef NS_ENUM(NSInteger) {
 #define SUMMARY_AVATAR 1
 #define SUMMARY_AVATAR_SHADOW 10
 
-
 #define CELL_TITLE_TAG 10
 #define CELL_TEXTFIELD_TAG 20
 
@@ -413,7 +420,6 @@ typedef NS_ENUM(NSInteger) {
     UIButton *avatarButton = [cell viewWithTag:SUMMARY_AVATAR];
     avatarButton.layer.borderColor = [UIColor whiteColor].CGColor;
     [avatarButton setupAsProfilePictureFromUrl:self.user.avatarURL withPlaceholder:@"user"];
-
     
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }

@@ -40,6 +40,8 @@
 		1E76AE471D144D1F00C496BA /* OTTourStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE461D144D1F00C496BA /* OTTourStateInfo.m */; };
 		1E76AE4A1D144D9900C496BA /* OTEntourageStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE491D144D9900C496BA /* OTEntourageStateInfo.m */; };
 		1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9003681D34FAAB004E18BC /* OTBehavior.m */; };
+		1E90036C1D351F40004E18BC /* OTUserEditPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90036B1D351F40004E18BC /* OTUserEditPictureViewController.m */; };
+		1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E90036D1D352C0B004E18BC /* UserPicture.storyboard */; };
 		1EACE4161D11515200F3A2A6 /* OTEntourageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */; };
 		1EACE4171D11515200F3A2A6 /* OTEntourageStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4091D11515200F3A2A6 /* OTEntourageStateTransition.m */; };
 		1EACE4181D11515200F3A2A6 /* OTFeedItemFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE40B1D11515200F3A2A6 /* OTFeedItemFactory.m */; };
@@ -236,6 +238,9 @@
 		1E76AE491D144D9900C496BA /* OTEntourageStateInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageStateInfo.m; sourceTree = "<group>"; };
 		1E9003671D34FAAB004E18BC /* OTBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTBehavior.h; path = Behaviors/OTBehavior.h; sourceTree = "<group>"; };
 		1E9003681D34FAAB004E18BC /* OTBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTBehavior.m; path = Behaviors/OTBehavior.m; sourceTree = "<group>"; };
+		1E90036A1D351F40004E18BC /* OTUserEditPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUserEditPictureViewController.h; sourceTree = "<group>"; };
+		1E90036B1D351F40004E18BC /* OTUserEditPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUserEditPictureViewController.m; sourceTree = "<group>"; };
+		1E90036E1D352C0B004E18BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserPicture.storyboard; sourceTree = "<group>"; };
 		1EACE4061D11515200F3A2A6 /* OTEntourageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFactory.h; sourceTree = "<group>"; };
 		1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageFactory.m; sourceTree = "<group>"; };
 		1EACE4081D11515200F3A2A6 /* OTEntourageStateTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageStateTransition.h; sourceTree = "<group>"; };
@@ -516,6 +521,8 @@
 				0A4769341BFB9F07006EA73A /* OTUserViewController.m */,
 				45E6FE141CAE44EA00505660 /* OTUserEditViewController.h */,
 				45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */,
+				1E90036A1D351F40004E18BC /* OTUserEditPictureViewController.h */,
+				1E90036B1D351F40004E18BC /* OTUserEditPictureViewController.m */,
 				2EDA5F121CB7BE7200849172 /* OTUserEditPasswordViewController.h */,
 				2EDA5F131CB7BE7200849172 /* OTUserEditPasswordViewController.m */,
 				0AA4C0721C17283800DBBE11 /* OTAskMoreViewController.h */,
@@ -776,6 +783,7 @@
 				452FE3E91CAD54CE00063334 /* Settings.storyboard */,
 				452FE3E71CAD549200063334 /* GuideSolidarity.storyboard */,
 				452FE3E41CAD544F00063334 /* UserProfile.storyboard */,
+				1E90036D1D352C0B004E18BC /* UserPicture.storyboard */,
 				45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */,
 			);
 			path = Storyboards;
@@ -1287,6 +1295,7 @@
 				45E37E5C1CEE657A005C3175 /* Filters.storyboard in Resources */,
 				45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */,
 				4507017C1CCF459B00432548 /* TourCreator.storyboard in Resources */,
+				1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */,
 				452FE4011CAD5AC700063334 /* Entourages.storyboard in Resources */,
 				45BC9BCE1CE32AE1000065B7 /* EntourageCreator.storyboard in Resources */,
 				452FE3E81CAD549200063334 /* GuideSolidarity.storyboard in Resources */,
@@ -1491,6 +1500,7 @@
 				45E37E591CEE64F7005C3175 /* OTFiltersViewController.m in Sources */,
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				452FA6331C6BCE8500D5D56D /* OTRightsViewController.m in Sources */,
+				1E90036C1D351F40004E18BC /* OTUserEditPictureViewController.m in Sources */,
 				2EDA5F071CB50CEE00849172 /* OTFeedItemsTableView.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				45ADCACF1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m in Sources */,
@@ -1539,6 +1549,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1E90036D1D352C0B004E18BC /* UserPicture.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E90036E1D352C0B004E18BC /* Base */,
+			);
+			name = UserPicture.storyboard;
+			sourceTree = "<group>";
+		};
 		4507017A1CCF459B00432548 /* TourCreator.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Th9-id-j6L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Th9-id-j6L">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -273,12 +273,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="8C3-0y-HVH" id="4Rf-Gt-8w0"/>
-                        <segue destination="62l-06-625" kind="modal" identifier="EditProfileSegue" animates="NO" id="pXR-yC-dMJ"/>
+                        <segue destination="62l-06-625" kind="presentation" identifier="EditProfileSegue" animates="NO" id="pXR-yC-dMJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zYw-vN-Dix" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1838" y="-766"/>
+            <point key="canvasLocation" x="3110" y="-826"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="M5j-4s-qmF">
@@ -294,7 +294,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="abc-6D-Qga" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1355" y="-766"/>
+            <point key="canvasLocation" x="2540.625" y="-809.15492957746471"/>
         </scene>
         <!--User Edit View Controller-->
         <scene sceneID="mMt-C6-6Sg">
@@ -359,6 +359,18 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
+                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weG-53-exw">
+                                                    <rect key="frame" x="139" y="74" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="0QV-Ri-7t0"/>
+                                                        <constraint firstAttribute="width" constant="50" id="8bt-k4-urA"/>
+                                                    </constraints>
+                                                    <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                                                    <state key="normal" title="Button" image="cameraSquare"/>
+                                                    <connections>
+                                                        <segue destination="V4t-y3-wRQ" kind="presentation" identifier="EditPictureSegue" id="iNF-B6-mPY"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="crj-0T-hSo" firstAttribute="centerX" secondItem="d7V-87-SCI" secondAttribute="centerX" id="XCM-4E-mGo"/>
@@ -367,7 +379,9 @@
                                                 <constraint firstItem="crj-0T-hSo" firstAttribute="centerX" secondItem="tV6-cF-ayN" secondAttribute="centerX" id="jNH-uN-1wE"/>
                                                 <constraint firstItem="5mT-xf-eHP" firstAttribute="leading" secondItem="tV6-cF-ayN" secondAttribute="leadingMargin" constant="-8" id="kFn-go-oYy"/>
                                                 <constraint firstItem="crj-0T-hSo" firstAttribute="top" secondItem="tV6-cF-ayN" secondAttribute="topMargin" constant="14" id="m8B-bH-PaW"/>
+                                                <constraint firstItem="weG-53-exw" firstAttribute="bottom" secondItem="crj-0T-hSo" secondAttribute="bottom" id="mn1-cs-Bsg"/>
                                                 <constraint firstItem="crj-0T-hSo" firstAttribute="centerY" secondItem="d7V-87-SCI" secondAttribute="centerY" id="xP8-uv-YSe"/>
+                                                <constraint firstItem="weG-53-exw" firstAttribute="centerX" secondItem="crj-0T-hSo" secondAttribute="centerX" id="zmx-c2-ho4"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -602,12 +616,12 @@
                     <size key="freeformSize" width="320" height="668"/>
                     <connections>
                         <outlet property="tableView" destination="Auw-kh-iqH" id="k1n-RG-LFg"/>
-                        <segue destination="JY3-Ti-PBi" kind="modal" identifier="EditPasswordSegue" id="uE9-pz-j86"/>
+                        <segue destination="JY3-Ti-PBi" kind="presentation" identifier="EditPasswordSegue" id="uE9-pz-j86"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VaY-Ee-nZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2662" y="-766"/>
+            <point key="canvasLocation" x="3991" y="-776"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="U66-ZG-q0z">
@@ -623,7 +637,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ynK-VA-Ukm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3109" y="-766"/>
+            <point key="canvasLocation" x="4397" y="-826"/>
         </scene>
         <!--Mot de passe-->
         <scene sceneID="GdM-6U-7Qo">
@@ -781,7 +795,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rt1-r3-0bx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3532" y="-766"/>
+            <point key="canvasLocation" x="4798" y="-826"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pMV-Eu-1AZ">
@@ -799,10 +813,19 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KgH-Wd-h2Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2247" y="-766"/>
+            <point key="canvasLocation" x="3525" y="-826"/>
+        </scene>
+        <!--UserPicture-->
+        <scene sceneID="lcE-GY-E6e">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserPicture" id="V4t-y3-wRQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lx2-ew-slN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3991" y="-298"/>
         </scene>
     </scenes>
     <resources>
+        <image name="cameraSquare" width="56" height="56"/>
         <image name="password" width="100" height="100"/>
         <image name="user" width="100" height="100"/>
     </resources>

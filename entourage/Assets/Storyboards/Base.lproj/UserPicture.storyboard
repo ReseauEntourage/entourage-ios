@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0l7-F2-byG">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="ODd-ek-0tN">
+            <objects>
+                <navigationController id="0l7-F2-byG" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="vLg-pI-brj"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oli-eZ-1IC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bha-JG-S7n" kind="relationship" relationship="rootViewController" id="0Ci-kf-pg5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kVq-bL-RtP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4397" y="-44"/>
+        </scene>
+        <!--User Edit Picture View Controller-->
+        <scene sceneID="wWI-WC-BDE">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="bha-JG-S7n" customClass="OTUserEditPictureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="M7s-An-XhF"/>
+                        <viewControllerLayoutGuide type="bottom" id="kX1-rt-rX1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DYE-Bz-b0j">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraSquare" translatesAutoresizingMaskIntoConstraints="NO" id="4xY-ao-EVJ">
+                                <rect key="frame" x="28" y="84" width="56" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="D3f-hg-kK8"/>
+                                    <constraint firstAttribute="height" constant="56" id="hjE-RH-200"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ajouter une photo ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqW-EW-2Wd">
+                                <rect key="frame" x="28" y="148" width="272" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="272" id="gMA-F0-Qf5"/>
+                                    <constraint firstAttribute="height" constant="40" id="zbi-Mb-Sk0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="4xY-ao-EVJ" firstAttribute="leading" secondItem="DYE-Bz-b0j" secondAttribute="leadingMargin" constant="12" id="0P5-Mh-WsV"/>
+                            <constraint firstItem="4xY-ao-EVJ" firstAttribute="top" secondItem="M7s-An-XhF" secondAttribute="bottom" constant="20" id="5vk-hR-Mdo"/>
+                            <constraint firstItem="UqW-EW-2Wd" firstAttribute="leading" secondItem="4xY-ao-EVJ" secondAttribute="leading" id="HPc-Sg-IOl"/>
+                            <constraint firstItem="UqW-EW-2Wd" firstAttribute="top" secondItem="4xY-ao-EVJ" secondAttribute="bottom" constant="8" symbolic="YES" id="qlg-au-hV8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="I8k-tV-cnv"/>
+                    <connections>
+                        <segue destination="xml-Uv-sbT" kind="show" id="9bG-Kh-Ax2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v8G-gr-vqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4869" y="-44"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hRq-c8-az9">
+            <objects>
+                <viewController id="xml-Uv-sbT" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8OU-hy-Cl1"/>
+                        <viewControllerLayoutGuide type="bottom" id="qzZ-lL-4Ao"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bq0-9o-4Id">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8TY-Tj-u9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5285" y="-44"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="cameraSquare" width="56" height="56"/>
+    </resources>
+</document>

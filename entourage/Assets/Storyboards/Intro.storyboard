@@ -1835,6 +1835,7 @@ vérification</string>
                                         </variation>
                                         <connections>
                                             <action selector="doContinue" destination="3l8-aX-f11" eventType="touchUpInside" id="ssM-6g-s8v"/>
+                                            <segue destination="vRi-8y-Ilf" kind="show" id="Nra-qx-PcG"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1911,6 +1912,14 @@ vérification</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A4F-pa-s3g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2003" y="-2471"/>
+        </scene>
+        <!--UserPicture-->
+        <scene sceneID="Hbb-g7-Abi">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserPicture" id="vRi-8y-Ilf" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zLw-T3-34k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2331" y="-2471"/>
         </scene>
     </scenes>
     <resources>

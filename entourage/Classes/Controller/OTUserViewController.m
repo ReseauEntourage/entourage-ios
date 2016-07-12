@@ -246,8 +246,7 @@ typedef NS_ENUM(NSInteger) {
 #define SUMMARY_ROLE 3
 #define SUMMARY_DATE 4
 #define SUMMARY_ADDRESS 5
-
-#define TITLE 6
+#define SUMMARY_TITLE 6
 
 #define VERIFICATION_LABEL 1
 #define VERIFICATION_STATUS 2
@@ -283,7 +282,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)setupTitleProfileCell:(UITableViewCell *)cell withTitle:(NSString *)title {
-    UILabel *titleLabel = [cell viewWithTag:TITLE];
+    UILabel *titleLabel = [cell viewWithTag:SUMMARY_TITLE];
     titleLabel.text = title;
     
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
