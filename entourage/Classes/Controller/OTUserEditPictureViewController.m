@@ -8,8 +8,12 @@
 
 #import "OTUserEditPictureViewController.h"
 #import "UIViewController+menu.h"
+#import "UIView+entourage.h"
 
 @interface OTUserEditPictureViewController ()
+
+@property (weak, nonatomic) IBOutlet UIButton *btnFromGallery;
+@property (weak, nonatomic) IBOutlet UIButton *btnTakePicture;
 
 @end
 
@@ -18,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.btnFromGallery setupHalfRoundedCorners];
+    [self.btnTakePicture setupHalfRoundedCorners];
     [self setupCloseModal];
 }
 

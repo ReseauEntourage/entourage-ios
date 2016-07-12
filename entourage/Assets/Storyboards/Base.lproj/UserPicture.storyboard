@@ -36,35 +36,105 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraSquare" translatesAutoresizingMaskIntoConstraints="NO" id="4xY-ao-EVJ">
-                                <rect key="frame" x="28" y="84" width="56" height="56"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraSquare" translatesAutoresizingMaskIntoConstraints="NO" id="VCD-Ez-jrk">
+                                <rect key="frame" x="12" y="84" width="56" height="56"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="56" id="D3f-hg-kK8"/>
-                                    <constraint firstAttribute="height" constant="56" id="hjE-RH-200"/>
+                                    <constraint firstAttribute="height" constant="56" id="FH5-J7-nFd"/>
+                                    <constraint firstAttribute="width" constant="56" id="vi1-fQ-iU0"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ajouter une photo ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqW-EW-2Wd">
-                                <rect key="frame" x="28" y="148" width="272" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ajouter une photo ?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="811-zf-BIU">
+                                <rect key="frame" x="12" y="160" width="296" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="272" id="gMA-F0-Qf5"/>
-                                    <constraint firstAttribute="height" constant="40" id="zbi-Mb-Sk0"/>
+                                    <constraint firstAttribute="height" constant="36" id="TT4-Bf-VKO"/>
+                                    <constraint firstAttribute="width" constant="280" id="h0s-gY-c6e"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="h0s-gY-c6e"/>
+                                    </mask>
+                                </variation>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avec une photo, c’est tout de suite plus sympa. Montrez-nous votre sourire le plus chaleureux." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="vBy-8m-m47">
+                                <rect key="frame" x="12" y="204" width="296" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="Zgg-Co-nQB"/>
+                                    <constraint firstAttribute="width" constant="280" id="pZa-8O-8Ma"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="pZa-8O-8Ma"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ma1-OC-ZEH">
+                                <rect key="frame" x="8" y="440" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="ZYB-ag-xPG"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="hkR-TM-2Lo"/>
+                                    <constraint firstAttribute="height" constant="50" id="ytV-Vj-KxA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Choisir une photo">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ZYB-ag-xPG"/>
+                                        <exclude reference="hkR-TM-2Lo"/>
+                                    </mask>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBY-w9-wlD">
+                                <rect key="frame" x="8" y="502" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="MXz-Vz-P5J"/>
+                                    <constraint firstAttribute="height" constant="50" id="agW-cI-vXG"/>
+                                    <constraint firstAttribute="width" constant="210" id="fdM-nV-lR4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Prendre une photo">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="fdM-nV-lR4"/>
+                                        <exclude reference="MXz-Vz-P5J"/>
+                                    </mask>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="4xY-ao-EVJ" firstAttribute="leading" secondItem="DYE-Bz-b0j" secondAttribute="leadingMargin" constant="12" id="0P5-Mh-WsV"/>
-                            <constraint firstItem="4xY-ao-EVJ" firstAttribute="top" secondItem="M7s-An-XhF" secondAttribute="bottom" constant="20" id="5vk-hR-Mdo"/>
-                            <constraint firstItem="UqW-EW-2Wd" firstAttribute="leading" secondItem="4xY-ao-EVJ" secondAttribute="leading" id="HPc-Sg-IOl"/>
-                            <constraint firstItem="UqW-EW-2Wd" firstAttribute="top" secondItem="4xY-ao-EVJ" secondAttribute="bottom" constant="8" symbolic="YES" id="qlg-au-hV8"/>
+                            <constraint firstItem="811-zf-BIU" firstAttribute="leading" secondItem="VCD-Ez-jrk" secondAttribute="leading" id="AKX-2N-BkR"/>
+                            <constraint firstItem="vBy-8m-m47" firstAttribute="trailing" secondItem="811-zf-BIU" secondAttribute="trailing" id="EOG-8V-icI"/>
+                            <constraint firstItem="vBy-8m-m47" firstAttribute="top" secondItem="811-zf-BIU" secondAttribute="bottom" constant="8" id="KL9-RD-Wg7"/>
+                            <constraint firstItem="VCD-Ez-jrk" firstAttribute="leading" secondItem="DYE-Bz-b0j" secondAttribute="leadingMargin" constant="-4" id="OMF-Q1-5HR"/>
+                            <constraint firstItem="VCD-Ez-jrk" firstAttribute="top" secondItem="M7s-An-XhF" secondAttribute="bottom" constant="20" id="Pqi-K3-E3l"/>
+                            <constraint firstItem="XBY-w9-wlD" firstAttribute="top" secondItem="ma1-OC-ZEH" secondAttribute="bottom" constant="12" id="Yic-qb-Pth"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="811-zf-BIU" secondAttribute="trailing" constant="-4" id="Yue-1j-u2t"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ma1-OC-ZEH" secondAttribute="trailing" constant="-8" id="ePF-2T-sFh"/>
+                            <constraint firstItem="vBy-8m-m47" firstAttribute="leading" secondItem="811-zf-BIU" secondAttribute="leading" id="iC1-W7-RVo"/>
+                            <constraint firstItem="kX1-rt-rX1" firstAttribute="top" secondItem="XBY-w9-wlD" secondAttribute="bottom" constant="16" id="k2a-rh-XaF"/>
+                            <constraint firstItem="811-zf-BIU" firstAttribute="top" secondItem="VCD-Ez-jrk" secondAttribute="bottom" constant="20" id="mc1-gi-i2d"/>
+                            <constraint firstItem="XBY-w9-wlD" firstAttribute="leading" secondItem="DYE-Bz-b0j" secondAttribute="leadingMargin" constant="-8" id="oih-3X-fRc"/>
+                            <constraint firstItem="ma1-OC-ZEH" firstAttribute="leading" secondItem="DYE-Bz-b0j" secondAttribute="leadingMargin" constant="-8" id="uEo-3U-mMA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XBY-w9-wlD" secondAttribute="trailing" constant="-8" id="wNc-Kh-3xF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="I8k-tV-cnv"/>
                     <connections>
+                        <outlet property="btnFromGallery" destination="ma1-OC-ZEH" id="gMy-2R-MiY"/>
+                        <outlet property="btnTakePicture" destination="XBY-w9-wlD" id="XPc-eL-EAL"/>
                         <segue destination="xml-Uv-sbT" kind="show" id="9bG-Kh-Ax2"/>
                     </connections>
                 </viewController>
