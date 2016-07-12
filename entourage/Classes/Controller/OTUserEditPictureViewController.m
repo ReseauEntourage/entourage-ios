@@ -27,4 +27,8 @@
     [self setupCloseModal];
 }
 
+- (void) pictureUrlSelected:(NSURL *)uri {
+    
+}
+
 @end

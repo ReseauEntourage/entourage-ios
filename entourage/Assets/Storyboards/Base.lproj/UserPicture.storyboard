@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="4397" y="-44"/>
         </scene>
-        <!--User Edit Picture View Controller-->
+        <!--User Edit Picture-->
         <scene sceneID="wWI-WC-BDE">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="bha-JG-S7n" customClass="OTUserEditPictureViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="bha-JG-S7n" userLabel="User Edit Picture" customClass="OTUserEditPictureViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M7s-An-XhF"/>
                         <viewControllerLayoutGuide type="bottom" id="kX1-rt-rX1"/>
@@ -92,6 +92,9 @@
                                         <exclude reference="hkR-TM-2Lo"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="pickFromGallery:" destination="aO6-e6-oYq" eventType="touchUpInside" id="D6f-48-Cvp"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBY-w9-wlD">
                                 <rect key="frame" x="8" y="502" width="304" height="50"/>
@@ -111,6 +114,9 @@
                                         <exclude reference="MXz-Vz-P5J"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="pickFromCamera:" destination="aO6-e6-oYq" eventType="touchUpInside" id="w3N-FD-DQG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
@@ -139,6 +145,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v8G-gr-vqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="aO6-e6-oYq" customClass="OTPhotoPickerBehavior">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="urlChoosenSelector" value="pictureUrlSelected:"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="parent" destination="bha-JG-S7n" id="c92-Y9-uqq"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="4869" y="-44"/>
         </scene>
