@@ -14,7 +14,9 @@
 
 @interface OTOnboardingPreviewViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *btnDone;
+@property (nonatomic, weak) IBOutlet UIButton *btnDone;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+
 
 @end
 
@@ -24,11 +26,15 @@
     [super viewDidLoad];
     self.title = @"";
     [self.btnDone setupHalfRoundedCorners];
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:self.pictureUri];
+    UIImage *image = [UIImage imageWithData:imageData];
+    [self.imageView setImage:image];
 }
 
 - (IBAction)doContinue {
     [SVProgressHUD show];
-    if(self.isOnboarding)
+    if (self.isOnboarding)
         [UIStoryboard showSWRevealController];
     else
         [self popToProfile];

@@ -16,7 +16,7 @@
 @implementation OTPhotoPickerBehavior
 
 - (void)pickFromCamera:(UIButton *)sender {
-    if([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
         [self pickPhotoFromSource:UIImagePickerControllerSourceTypeCamera];
 }
 
@@ -35,7 +35,7 @@
 #pragma mark - UIImagePickerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
         [self notifyCameraImage:info];
     else
         [self notifyGalleryImage:info];
@@ -49,9 +49,9 @@
 
 - (void)notifyGalleryImage:(NSDictionary *)info {
     NSURL *imageUrl = [info objectForKey:UIImagePickerControllerMediaURL];
-    if(!imageUrl)
+    if (!imageUrl)
         imageUrl = [info objectForKey:UIImagePickerControllerReferenceURL];
-    if(imageUrl)
+    if (imageUrl)
         [self notifyPictureSelected:imageUrl];
 }
 
@@ -74,7 +74,7 @@
 
 - (void)notifyPictureSelected:(NSURL *)pictureUrl {
     SEL selector = NSSelectorFromString(self.urlChoosenSelector);
-    if([self.parent respondsToSelector:selector])
+    if ([self.parent respondsToSelector:selector])
         ((void (*)(id, SEL, NSURL *))[self.parent methodForSelector:selector])(self.parent, selector, pictureUrl);
 }
 

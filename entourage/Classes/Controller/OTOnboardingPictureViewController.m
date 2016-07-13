@@ -17,8 +17,8 @@
 
 @interface OTOnboardingPictureViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *btnFromGallery;
-@property (weak, nonatomic) IBOutlet UIButton *btnTakePicture;
+@property (nonatomic, weak) IBOutlet UIButton *btnFromGallery;
+@property (nonatomic, weak) IBOutlet UIButton *btnTakePicture;
 @property (nonatomic, strong) NSURL *pictureUri;
 
 @end
@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    if(self.isOnboarding)
+    if (self.isOnboarding)
         [self addIgnoreButton];
     [self.btnFromGallery setupHalfRoundedCorners];
     [self.btnTakePicture setupHalfRoundedCorners];
@@ -52,7 +52,10 @@
 #pragma mark - Ignore button
 
 - (void)addIgnoreButton {
-    UIBarButtonItem *ignoreButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"doIgnore") style:UIBarButtonItemStylePlain target:self action:@selector(ignore)];
+    UIBarButtonItem *ignoreButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"doIgnore")
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(ignore)];
     [ignoreButton setTintColor:[UIColor whiteColor]];
     [ignoreButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     [self.navigationItem setRightBarButtonItem:ignoreButton];

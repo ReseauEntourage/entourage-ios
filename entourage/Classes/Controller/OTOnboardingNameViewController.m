@@ -65,6 +65,10 @@
 
 
 - (IBAction)doContinue {
+#if TARGET_IPHONE_SIMULATOR == 1
+    [self performSegueWithIdentifier:ADD_PICTURE_SEGUE sender:nil];
+    return;
+#endif
     NSString *firstName = self.firstNameTextField.text;
     NSString *lastName = self.lastNameTextField.text;
     

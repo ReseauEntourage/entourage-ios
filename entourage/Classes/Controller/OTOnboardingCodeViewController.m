@@ -74,6 +74,10 @@
 }
 
 - (IBAction)doContinue {
+#if TARGET_IPHONE_SIMULATOR == 1
+    [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:nil];
+    return;
+#endif
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *phone = [userDefaults currentUser].phone;

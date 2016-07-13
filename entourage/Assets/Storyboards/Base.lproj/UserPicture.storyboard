@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -138,7 +139,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="4573" y="-44"/>
+            <point key="canvasLocation" x="4584" y="-44"/>
         </scene>
         <!--Onboarding Preview View Controller-->
         <scene sceneID="hRq-c8-az9">
@@ -179,25 +180,77 @@
                                     <action selector="doContinue" destination="xml-Uv-sbT" eventType="touchUpInside" id="YvB-UG-7kB"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Déplacer et zoomer pour ajuster la photo de profil." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="IxH-xR-j7Q">
+                                <rect key="frame" x="8" y="28" width="304" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="Z8t-c4-3Ei"/>
+                                    <constraint firstAttribute="height" constant="36" id="f0o-wm-uAQ"/>
+                                    <constraint firstAttribute="width" constant="280" id="vjb-Ag-n6B"/>
+                                    <constraint firstAttribute="width" constant="296" id="yAF-9L-dPH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Z8t-c4-3Ei"/>
+                                        <exclude reference="vjb-Ag-n6B"/>
+                                        <exclude reference="yAF-9L-dPH"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TpG-O0-eKf">
+                                <rect key="frame" x="11" y="120" width="298" height="298"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="TpG-O0-eKf" secondAttribute="height" multiplier="1:1" id="4xq-5e-a8W"/>
+                                    <constraint firstAttribute="width" secondItem="TpG-O0-eKf" secondAttribute="height" multiplier="1:1" id="qdv-Ud-aKE"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layer" translatesAutoresizingMaskIntoConstraints="NO" id="vq9-7x-SXS">
+                                <rect key="frame" x="11" y="120" width="298" height="298"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vq9-7x-SXS" secondAttribute="height" multiplier="1:1" id="dxE-Cx-vP1"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="vq9-7x-SXS" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-5" id="7X2-ry-NkT"/>
                             <constraint firstItem="qzZ-lL-4Ao" firstAttribute="top" secondItem="Fot-wr-6TS" secondAttribute="bottom" constant="10" id="BBB-US-7Qs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vq9-7x-SXS" secondAttribute="trailing" constant="-5" id="Emg-4a-l8L"/>
+                            <constraint firstItem="TpG-O0-eKf" firstAttribute="top" secondItem="IxH-xR-j7Q" secondAttribute="bottom" constant="56" id="F53-IR-6pW"/>
+                            <constraint firstItem="IxH-xR-j7Q" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-8" id="Kjf-UO-CsQ"/>
+                            <constraint firstItem="TpG-O0-eKf" firstAttribute="top" secondItem="IxH-xR-j7Q" secondAttribute="bottom" constant="56" id="LjG-rd-eVb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TpG-O0-eKf" secondAttribute="trailing" constant="-9" id="Otd-ds-DXR"/>
+                            <constraint firstItem="vq9-7x-SXS" firstAttribute="top" secondItem="IxH-xR-j7Q" secondAttribute="bottom" constant="56" id="S5k-ii-G1c"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IxH-xR-j7Q" secondAttribute="trailing" constant="-8" id="WRh-N2-XLW"/>
+                            <constraint firstItem="IxH-xR-j7Q" firstAttribute="top" secondItem="8OU-hy-Cl1" secondAttribute="bottom" constant="8" id="cvL-hB-IUu"/>
+                            <constraint firstItem="TpG-O0-eKf" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-5" id="fch-9x-CxD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TpG-O0-eKf" secondAttribute="trailing" constant="-5" id="o5d-Cw-6YI"/>
                             <constraint firstItem="Fot-wr-6TS" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-8" id="pSC-J3-z9G"/>
+                            <constraint firstItem="TpG-O0-eKf" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-9" id="rgy-1k-QvS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Fot-wr-6TS" secondAttribute="trailing" constant="-8" id="uBa-r4-9r6"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Otd-ds-DXR"/>
+                                <exclude reference="rgy-1k-QvS"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="btnDone" destination="Fot-wr-6TS" id="DH3-O9-fJo"/>
+                        <outlet property="imageView" destination="TpG-O0-eKf" id="hRl-Oq-9SU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8TY-Tj-u9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5109" y="-44"/>
+            <point key="canvasLocation" x="4973" y="-44"/>
         </scene>
     </scenes>
     <resources>
         <image name="cameraSquare" width="56" height="56"/>
+        <image name="layer" width="346" height="345"/>
         <image name="nextOpacity70" width="56" height="56"/>
     </resources>
 </document>
