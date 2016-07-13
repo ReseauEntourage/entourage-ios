@@ -14,17 +14,14 @@
 #import "OTPictureUploadService.h"
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
+#import "OTAuthService.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTOnboardingPreviewViewController ()
 
 @property (nonatomic, weak) IBOutlet UIButton *btnDone;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
-
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *imageViewTopConstraint;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *imageViewLeftConstraint;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *imageViewRightonstraint;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *imageViewBottomConstraint;
 
 @end
 
@@ -33,17 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    
     [self.btnDone setupHalfRoundedCorners];
     [self.imageView setImage:self.image];
-    /* FOR TESTING
-    [SVProgressHUD show];
-    [[OTPictureUploadService new] uploadPicture:self.image withSuccess:^(NSString *pictureName) {
-        [SVProgressHUD dismiss];
-    } orError:^(void) {
-        [SVProgressHUD dismiss];
-    }];*/
-    
     self.scrollView.layer.cornerRadius = self.scrollView.bounds.size.height / 2.0f;
     self.scrollView.layer.borderWidth = 2.0f;
     self.scrollView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -55,21 +43,42 @@
     [self updateMinZoomScaleForSize:self.view.bounds.size];
 }
 
-
-
 - (IBAction)doContinue {
 #if SKIP_ONBOARDING_REQUESTS
     [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
     return;
 #endif
-    
-    UIImage *futureImage = [self cropVisibleArea];
+    UIImage *finalImage = [self cropVisibleArea];
     [SVProgressHUD show];
-    if (self.isOnboarding)
-        [UIStoryboard showSWRevealController];
-    else
-        [self popToProfile];
-    [SVProgressHUD dismiss];
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    [[OTPictureUploadService new] uploadPicture:finalImage withSuccess:^(NSString *pictureName) {
+        currentUser.avatarKey = pictureName;
+        [[OTAuthService new] updateUserInformationWithUser:currentUser success:^(OTUser *user) {
+            [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+                                                       
+            [SVProgressHUD dismiss];
+            if (self.isOnboarding)
+                [UIStoryboard showSWRevealController];
+            else
+                [self popToProfile];
+        }
+        failure:^(NSError *error) {
+            NSDictionary *userInfo = [error userInfo];
+            NSString *errorMessage = @"";
+            NSDictionary *errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
+            if (errorDictionary) {
+                //NSString *code = [errorDictionary valueForKey:@"code"];
+                errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
+            }
+
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+            NSLog(@"ERR: something went wrong on user picture: %@", error.description);
+        }];
+    } orError:^(void) {
+#warning Show a proper message
+        [SVProgressHUD dismiss];
+    }];
 }
 
 - (void)popToProfile {
@@ -89,8 +98,7 @@
     visibleRect.size.width = self.scrollView.bounds.size.width * scale;
     visibleRect.size.height = self.scrollView.bounds.size.height * scale;
     UIImage *image = [self imageByCropping:self.imageView.image toRect:visibleRect];
-    //UIImage *image = imageFromView(imageView.image, &visibleRect);
-    //[croppedImageImageView setImage:self.objPostPikUploadPhotoPage.croppedImage];
+
     return image;
 }
 
