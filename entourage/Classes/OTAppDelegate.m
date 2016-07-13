@@ -38,6 +38,8 @@
 #import "UIColor+entourage.h"
 #import "NSDictionary+Parsing.h"
 
+#import "OTPictureUploadService.h"
+
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
 #define APNOTIFICATION_REQUEST_ACCEPTED "JOIN_REQUEST_ACCEPTED"
@@ -120,6 +122,8 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     
     //[[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
     //[[AFNetworkActivityLogger sharedLogger] startLogging];
+    
+    [OTPictureUploadService configure];
     
 	return YES;
 }

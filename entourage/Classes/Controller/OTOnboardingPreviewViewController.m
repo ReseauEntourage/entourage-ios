@@ -11,6 +11,7 @@
 #import "UIStoryboard+entourage.h"
 #import "SVProgressHUD.h"
 #import "UIView+entourage.h"
+#import "OTPictureUploadService.h"
 
 @interface OTOnboardingPreviewViewController ()
 
@@ -27,6 +28,13 @@
     self.title = @"";
     [self.btnDone setupHalfRoundedCorners];
     [self.imageView setImage:self.image];
+    /* FOR TESTING
+    [SVProgressHUD show];
+    [[OTPictureUploadService new] uploadPicture:self.image withSuccess:^(NSString *pictureName) {
+        [SVProgressHUD dismiss];
+    } orError:^(void) {
+        [SVProgressHUD dismiss];
+    }];*/
 }
 
 - (IBAction)doContinue {

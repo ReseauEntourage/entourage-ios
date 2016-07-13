@@ -15,7 +15,6 @@
 #define kWSKeyType @"type"
 #define kWSKeyFeeds @"feeds"
 
-
 // FeedItems
 #define kWSUpdatedDate @"updated_at"
 #define kWSKeyJoinStatus @"join_status"

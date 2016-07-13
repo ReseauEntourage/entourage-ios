@@ -46,6 +46,7 @@
 		1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9003681D34FAAB004E18BC /* OTBehavior.m */; };
 		1E90036C1D351F40004E18BC /* OTOnboardingPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90036B1D351F40004E18BC /* OTOnboardingPictureViewController.m */; };
 		1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E90036D1D352C0B004E18BC /* UserPicture.storyboard */; };
+		1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */; };
 		1EACE4161D11515200F3A2A6 /* OTEntourageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */; };
 		1EACE4171D11515200F3A2A6 /* OTEntourageStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4091D11515200F3A2A6 /* OTEntourageStateTransition.m */; };
 		1EACE4181D11515200F3A2A6 /* OTFeedItemFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE40B1D11515200F3A2A6 /* OTFeedItemFactory.m */; };
@@ -250,6 +251,9 @@
 		1E90036A1D351F40004E18BC /* OTOnboardingPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingPictureViewController.h; sourceTree = "<group>"; };
 		1E90036B1D351F40004E18BC /* OTOnboardingPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingPictureViewController.m; sourceTree = "<group>"; };
 		1E90036E1D352C0B004E18BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserPicture.storyboard; sourceTree = "<group>"; };
+		1EA51FCB1D366F6B00350255 /* OTPictureUploadService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPictureUploadService.h; path = Amazon/OTPictureUploadService.h; sourceTree = "<group>"; };
+		1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTPictureUploadService.m; path = Amazon/OTPictureUploadService.m; sourceTree = "<group>"; };
+		1EA51FCE1D368AD800350255 /* OTAmazonConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
 		1EACE4061D11515200F3A2A6 /* OTEntourageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFactory.h; sourceTree = "<group>"; };
 		1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageFactory.m; sourceTree = "<group>"; };
 		1EACE4081D11515200F3A2A6 /* OTEntourageStateTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageStateTransition.h; sourceTree = "<group>"; };
@@ -565,6 +569,15 @@
 				1E2FE74D1D354AE900746447 /* OTPhotoPickerBehavior.m */,
 			);
 			name = Behaviors;
+			sourceTree = "<group>";
+		};
+		1EA51FCA1D366F0F00350255 /* Amazon */ = {
+			isa = PBXGroup;
+			children = (
+				1EA51FCB1D366F6B00350255 /* OTPictureUploadService.h */,
+				1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */,
+			);
+			name = Amazon;
 			sourceTree = "<group>";
 		};
 		1EACE4041D11515200F3A2A6 /* FeedItem */ = {
@@ -926,6 +939,7 @@
 				1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */,
 				45EB70DB1CEA08F900EB2CD1 /* OTAPIConsts.h */,
 				45F24A3F1CEDB3E70003BF9E /* OTAPIKeys.h */,
+				1EA51FCE1D368AD800350255 /* OTAmazonConsts.h */,
 				6B4930E019A77DFE00DA7EE0 /* Model */,
 				A8E10FAB19E82A1500DF4A01 /* View */,
 				6B4930C719A773C500DA7EE0 /* Controller */,
@@ -1074,6 +1088,7 @@
 		6BFE639519E7E85D00C661AB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1EA51FCA1D366F0F00350255 /* Amazon */,
 				1E9003661D34FA90004E18BC /* Behaviors */,
 				1EACE4041D11515200F3A2A6 /* FeedItem */,
 				1EACE4131D11515200F3A2A6 /* Location */,
@@ -1454,6 +1469,7 @@
 				6B4930CD19A773C500DA7EE0 /* OTMainViewController.m in Sources */,
 				0AE855CB1C3D05A0001176B9 /* OTTutorialViewController.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
+				1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */,
 				45E37E5F1CEF4D60005C3175 /* OTFeedItemSummaryView.m in Sources */,
 				45CAC66E1D2CE6A600B0D5DC /* OTWelcomeViewController.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
