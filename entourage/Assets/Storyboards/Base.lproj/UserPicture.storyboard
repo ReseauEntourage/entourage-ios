@@ -153,8 +153,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fot-wr-6TS">
-                                <rect key="frame" x="8" y="502" width="304" height="56"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fot-wr-6TS">
+                                <rect key="frame" x="12" y="497" width="296" height="56"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="296" id="HXC-sY-0y9"/>
@@ -164,7 +164,7 @@
                                     <constraint firstAttribute="height" constant="56" id="m2Y-kf-TpW"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="oE3-92-Ki7"/>
                                 </constraints>
-                                <state key="normal" image="nextOpacity70">
+                                <state key="normal" image="nextFull">
                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="default">
@@ -216,7 +216,7 @@
                         <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="vq9-7x-SXS" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-5" id="7X2-ry-NkT"/>
-                            <constraint firstItem="qzZ-lL-4Ao" firstAttribute="top" secondItem="Fot-wr-6TS" secondAttribute="bottom" constant="10" id="BBB-US-7Qs"/>
+                            <constraint firstItem="qzZ-lL-4Ao" firstAttribute="top" secondItem="Fot-wr-6TS" secondAttribute="bottom" constant="15" id="BBB-US-7Qs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vq9-7x-SXS" secondAttribute="trailing" constant="-5" id="Emg-4a-l8L"/>
                             <constraint firstItem="TpG-O0-eKf" firstAttribute="top" secondItem="IxH-xR-j7Q" secondAttribute="bottom" constant="56" id="F53-IR-6pW"/>
                             <constraint firstItem="IxH-xR-j7Q" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-8" id="Kjf-UO-CsQ"/>
@@ -227,9 +227,9 @@
                             <constraint firstItem="IxH-xR-j7Q" firstAttribute="top" secondItem="8OU-hy-Cl1" secondAttribute="bottom" constant="8" id="cvL-hB-IUu"/>
                             <constraint firstItem="TpG-O0-eKf" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-5" id="fch-9x-CxD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TpG-O0-eKf" secondAttribute="trailing" constant="-5" id="o5d-Cw-6YI"/>
-                            <constraint firstItem="Fot-wr-6TS" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-8" id="pSC-J3-z9G"/>
+                            <constraint firstItem="Fot-wr-6TS" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-4" id="pSC-J3-z9G"/>
                             <constraint firstItem="TpG-O0-eKf" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-9" id="rgy-1k-QvS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Fot-wr-6TS" secondAttribute="trailing" constant="-8" id="uBa-r4-9r6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Fot-wr-6TS" secondAttribute="trailing" constant="-4" id="uBa-r4-9r6"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -251,6 +251,6 @@
     <resources>
         <image name="cameraSquare" width="56" height="56"/>
         <image name="layer" width="346" height="345"/>
-        <image name="nextOpacity70" width="56" height="56"/>
+        <image name="nextFull" width="56" height="56"/>
     </resources>
 </document>
