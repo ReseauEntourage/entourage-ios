@@ -12,6 +12,7 @@
 #import "OTEntourage.h"
 #import "OTLocationSelectorViewController.h"
 #import "OTEncounterService.h"
+#import "UIColor+entourage.h"
 
 // Helpers
 #import "UIViewController+menu.h"
@@ -41,6 +42,8 @@
                                                                    style:UIBarButtonItemStyleDone
                                                                   target:self
                                                                   action:@selector(sendEntourage:)];
+    [menuButton setTintColor:[UIColor appOrangeColor]];
+    [menuButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     [self.navigationItem setRightBarButtonItem:menuButton];
     
     [self setupUI];

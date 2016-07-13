@@ -35,7 +35,6 @@
     self.scrollView.layer.cornerRadius = self.scrollView.bounds.size.height / 2.0f;
     self.scrollView.layer.borderWidth = 2.0f;
     self.scrollView.layer.borderColor = [UIColor whiteColor].CGColor;
-    
 }
 
 - (void)viewDidLayoutSubviews {
@@ -101,7 +100,6 @@
 
     return image;
 }
-
 
 - (UIImage*)imageByCropping:(UIImage *)myImage toRect:(CGRect)cropToArea{
     CGImageRef cropImageRef = CGImageCreateWithImageInRect(myImage.CGImage, cropToArea);
