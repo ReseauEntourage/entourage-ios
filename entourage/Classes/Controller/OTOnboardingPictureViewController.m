@@ -28,8 +28,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    if (self.isOnboarding)
+    if (self.isOnboarding) {
         [self addIgnoreButton];
+    } else {
+        self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    }
     [self.btnFromGallery setupHalfRoundedCorners];
     [self.btnTakePicture setupHalfRoundedCorners];
 }
