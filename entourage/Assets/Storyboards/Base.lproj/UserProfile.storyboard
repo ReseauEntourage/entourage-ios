@@ -358,9 +358,6 @@
                                                             <integer key="value" value="2"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <segue destination="paK-dN-ukL" kind="show" id="lmS-hP-eNy"/>
-                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weG-53-exw">
                                                     <rect key="frame" x="139" y="74" width="50" height="50"/>
@@ -370,6 +367,9 @@
                                                     </constraints>
                                                     <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
                                                     <state key="normal" title="Button" image="cameraSquare"/>
+                                                    <connections>
+                                                        <segue destination="paK-dN-ukL" kind="show" id="7QC-VK-dcc"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

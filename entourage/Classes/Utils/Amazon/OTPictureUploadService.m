@@ -46,6 +46,7 @@
     uploadRequest.bucket = PICTURE_BUCKET;
     uploadRequest.key = [PICTURE_FOLDER_PREFIX stringByAppendingString:fileName];
     uploadRequest.body = fileUri;
+    uploadRequest.contentType = @"image/jpeg";
     return uploadRequest;
 }
 

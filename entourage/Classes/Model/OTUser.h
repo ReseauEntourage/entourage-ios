@@ -25,6 +25,7 @@ extern NSString *const kKeyToken;
 @property (strong, nonatomic) NSString *phone;
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) NSString *avatarURL;
+@property (strong, nonatomic) NSString *avatarKey;
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSNumber *tourCount;
 @property (strong, nonatomic) NSNumber *encounterCount;

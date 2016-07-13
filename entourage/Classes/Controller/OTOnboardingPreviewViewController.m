@@ -13,6 +13,8 @@
 #import "UIView+entourage.h"
 #import "OTPictureUploadService.h"
 #import "UIColor+entourage.h"
+#import "OTAuthService.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTOnboardingPreviewViewController ()
 
@@ -32,17 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    
     [self.btnDone setupHalfRoundedCorners];
     [self.imageView setImage:self.image];
-    /* FOR TESTING
-    [SVProgressHUD show];
-    [[OTPictureUploadService new] uploadPicture:self.image withSuccess:^(NSString *pictureName) {
-        [SVProgressHUD dismiss];
-    } orError:^(void) {
-        [SVProgressHUD dismiss];
-    }];*/
-    
     self.scrollView.layer.cornerRadius = self.scrollView.bounds.size.height / 2.0f;
     self.scrollView.layer.borderWidth = 2.0f;
     self.scrollView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -54,18 +47,37 @@
     [self updateMinZoomScaleForSize:self.view.bounds.size];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 - (IBAction)doContinue {
-    UIImage *futureImage = [self cropVisibleArea];
+    UIImage *finalImage = [self cropVisibleArea];
     [SVProgressHUD show];
-    if (self.isOnboarding)
-        [UIStoryboard showSWRevealController];
-    else
-        [self popToProfile];
-    [SVProgressHUD dismiss];
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    [[OTPictureUploadService new] uploadPicture:finalImage withSuccess:^(NSString *pictureName) {
+        currentUser.avatarKey = pictureName;
+        [[OTAuthService new] updateUserInformationWithUser:currentUser success:^(OTUser *user) {
+            [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+                                                       
+            [SVProgressHUD dismiss];
+            if (self.isOnboarding)
+                [UIStoryboard showSWRevealController];
+            else
+                [self popToProfile];
+        }
+        failure:^(NSError *error) {
+            NSDictionary *userInfo = [error userInfo];
+            NSString *errorMessage = @"";
+            NSDictionary *errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
+            if (errorDictionary) {
+                //NSString *code = [errorDictionary valueForKey:@"code"];
+                errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
+            }
+
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+            NSLog(@"ERR: something went wrong on user picture: %@", error.description);
+        }];
+    } orError:^(void) {
+        [SVProgressHUD dismiss];
+    }];
 }
 
 - (void)popToProfile {

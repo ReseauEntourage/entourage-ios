@@ -19,11 +19,12 @@ NSString *const kKeyDisplayName = @"display_name";
 NSString *const kKeyUserPhone = @"phone";
 NSString *const kKeyPassword = @"sms_code";
 NSString *const kKeyAvatarURL = @"avatar_url";
+NSString *const kKeyAvatarKey = @"avatar_key";
 NSString *const kKeyToken = @"token";
 NSString *const kKeyStats = @"stats";
 NSString *const kKeyTourCount = @"tour_count";
 NSString *const kKeyEncounterCount = @"encounter_count";
-NSString *const kKeyOrganization =@"organization";
+NSString *const kKeyOrganization = @"organization";
 
 @implementation OTUser
 
@@ -62,6 +63,9 @@ NSString *const kKeyOrganization =@"organization";
     }
     if (self.password != nil) {
         [dictionary setObject:self.password forKey:kKeyPassword];
+    }
+    if(self.avatarKey != nil) {
+        [dictionary setObject:self.avatarKey forKey:kKeyAvatarKey];
     }
     
     return dictionary;
