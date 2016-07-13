@@ -26,10 +26,7 @@
     [super viewDidLoad];
     self.title = @"";
     [self.btnDone setupHalfRoundedCorners];
-    
-    NSData *imageData = [NSData dataWithContentsOfURL:self.pictureUri];
-    UIImage *image = [UIImage imageWithData:imageData];
-    [self.imageView setImage:image];
+    [self.imageView setImage:self.image];
 }
 
 - (IBAction)doContinue {

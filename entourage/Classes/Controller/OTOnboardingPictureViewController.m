@@ -19,7 +19,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *btnFromGallery;
 @property (nonatomic, weak) IBOutlet UIButton *btnTakePicture;
-@property (nonatomic, strong) NSURL *pictureUri;
+@property (nonatomic, strong) UIImage *image;
 
 @end
 
@@ -34,8 +34,8 @@
     [self.btnTakePicture setupHalfRoundedCorners];
 }
 
-- (void) pictureUrlSelected:(NSURL *)uri {
-    self.pictureUri = uri;
+- (void) pictureSelected:(UIImage *)image {
+    self.image = image;
     [self performSegueWithIdentifier:PREVIEW_PICTURE_SEGUE sender:self];
 }
 
@@ -45,7 +45,7 @@
     if ([segue.identifier isEqualToString:PREVIEW_PICTURE_SEGUE]) {
         OTOnboardingPreviewViewController *controller = (OTOnboardingPreviewViewController*)[segue destinationViewController];
         controller.isOnboarding = self.isOnboarding;
-        controller.pictureUri = self.pictureUri;
+        controller.image = self.image;
     }
 }
 

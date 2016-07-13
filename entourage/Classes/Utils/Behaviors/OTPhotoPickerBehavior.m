@@ -35,10 +35,8 @@
 #pragma mark - UIImagePickerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
-        [self notifyCameraImage:info];
-    else
-        [self notifyGalleryImage:info];
+    UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self notifyPictureSelected:img];
     [picker dismissViewControllerAnimated:YES completion:nil];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
@@ -47,35 +45,10 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)notifyGalleryImage:(NSDictionary *)info {
-    NSURL *imageUrl = [info objectForKey:UIImagePickerControllerMediaURL];
-    if (!imageUrl)
-        imageUrl = [info objectForKey:UIImagePickerControllerReferenceURL];
-    if (imageUrl)
-        [self notifyPictureSelected:imageUrl];
-}
-
-- (void)notifyCameraImage:(NSDictionary *)info {
-    [SVProgressHUD show];
-    UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-    dispatch_queue_t globalConcurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(globalConcurrentQueue, ^{
-        NSString *photoFilePath = [[[NSUUID UUID] UUIDString] stringByAppendingPathExtension:@"jpg"];
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:photoFilePath];
-        NSData *data = UIImageJPEGRepresentation(img, 1);
-        [data writeToFile:filePath atomically:YES];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-            [self notifyPictureSelected:[NSURL URLWithString:filePath]];
-        });
-    });
-}
-
-- (void)notifyPictureSelected:(NSURL *)pictureUrl {
+- (void)notifyPictureSelected:(UIImage *)image {
     SEL selector = NSSelectorFromString(self.urlChoosenSelector);
     if ([self.parent respondsToSelector:selector])
-        ((void (*)(id, SEL, NSURL *))[self.parent methodForSelector:selector])(self.parent, selector, pictureUrl);
+        ((void (*)(id, SEL, UIImage *))[self.parent methodForSelector:selector])(self.parent, selector, image);
 }
 
 @end

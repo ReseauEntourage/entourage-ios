@@ -10,7 +10,7 @@
 
 @interface OTOnboardingPreviewViewController : UIViewController
 
-@property (nonatomic, strong) NSURL *pictureUri;
+@property (nonatomic, strong) UIImage *image;
 @property (nonatomic) BOOL isOnboarding;
 
 @end

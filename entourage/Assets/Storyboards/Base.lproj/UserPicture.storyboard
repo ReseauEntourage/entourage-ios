@@ -132,7 +132,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v8G-gr-vqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="aO6-e6-oYq" customClass="OTPhotoPickerBehavior">
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="urlChoosenSelector" value="pictureUrlSelected:"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="urlChoosenSelector" value="pictureSelected:"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="parent" destination="bha-JG-S7n" id="c92-Y9-uqq"/>
