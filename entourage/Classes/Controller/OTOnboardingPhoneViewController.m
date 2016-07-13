@@ -56,11 +56,10 @@
 }
 
 - (IBAction)doContinue {
-#if TARGET_IPHONE_SIMULATOR == 1
+#if SKIP_ONBOARDING_REQUESTS 
     [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
     return;
 #endif
-//#warning Handle request
     
     NSString *phone = self.phoneTextField.text;
     [SVProgressHUD show];
