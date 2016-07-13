@@ -42,7 +42,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avec une photo, c’est tout de suite plus sympa. Montrez-nous votre sourire le plus chaleureux." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="vBy-8m-m47">
-                                <rect key="frame" x="12" y="160" width="296" height="36"/>
+                                <rect key="frame" x="12" y="160" width="296" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="Zgg-Co-nQB"/>
                                     <constraint firstAttribute="width" constant="280" id="pZa-8O-8Ma"/>
@@ -52,6 +52,7 @@
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="Zgg-Co-nQB"/>
                                         <exclude reference="pZa-8O-8Ma"/>
                                     </mask>
                                 </variation>
@@ -167,11 +168,11 @@
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="HXC-sY-0y9"/>
+                                        <exclude reference="IH1-G0-e1a"/>
                                         <exclude reference="Nbg-SI-BIU"/>
                                         <exclude reference="OiO-lg-h0t"/>
                                         <exclude reference="oE3-92-Ki7"/>
-                                        <exclude reference="IH1-G0-e1a"/>
-                                        <exclude reference="HXC-sY-0y9"/>
                                     </mask>
                                 </variation>
                                 <connections>

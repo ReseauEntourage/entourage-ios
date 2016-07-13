@@ -7,6 +7,7 @@
 //
 
 #import "OTPhotoPickerBehavior.h"
+#import "SVProgressHUD.h"
 
 @interface OTPhotoPickerBehavior () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -34,9 +35,10 @@
 #pragma mark - UIImagePickerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSURL *imageUrl = [self getImageUrlForPicker:picker withInfo:info];
-    if(imageUrl)
-        [self notifyPictureSelected:imageUrl];
+    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera)
+        [self notifyCameraImage:info];
+    else
+        [self notifyGalleryImage:info];
     [picker dismissViewControllerAnimated:YES completion:nil];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
@@ -45,27 +47,29 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (NSURL *)getImageUrlForPicker:(UIImagePickerController *)picker withInfo:(NSDictionary *)info {
-    NSURL *imageUrl;
-    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-        imageUrl = [self saveImage:img];
-    }
-    else {
-        imageUrl = [info objectForKey:UIImagePickerControllerMediaURL];
-        if(!imageUrl)
-            imageUrl = [info objectForKey:UIImagePickerControllerReferenceURL];
-    }
-    return imageUrl;
+- (void)notifyGalleryImage:(NSDictionary *)info {
+    NSURL *imageUrl = [info objectForKey:UIImagePickerControllerMediaURL];
+    if(!imageUrl)
+        imageUrl = [info objectForKey:UIImagePickerControllerReferenceURL];
+    if(imageUrl)
+        [self notifyPictureSelected:imageUrl];
 }
 
-- (NSURL *)saveImage:(UIImage *)img {
-    NSString *photoFilePath = [[[NSUUID UUID] UUIDString] stringByAppendingPathExtension:@"jpg"];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:photoFilePath];
-    NSData *data = UIImageJPEGRepresentation(img, 1);
-    [data writeToFile:filePath atomically:YES];
-    return [NSURL URLWithString:filePath];
+- (void)notifyCameraImage:(NSDictionary *)info {
+    [SVProgressHUD show];
+    UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
+    dispatch_queue_t globalConcurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(globalConcurrentQueue, ^{
+        NSString *photoFilePath = [[[NSUUID UUID] UUIDString] stringByAppendingPathExtension:@"jpg"];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:photoFilePath];
+        NSData *data = UIImageJPEGRepresentation(img, 1);
+        [data writeToFile:filePath atomically:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [self notifyPictureSelected:[NSURL URLWithString:filePath]];
+        });
+    });
 }
 
 - (void)notifyPictureSelected:(NSURL *)pictureUrl {
