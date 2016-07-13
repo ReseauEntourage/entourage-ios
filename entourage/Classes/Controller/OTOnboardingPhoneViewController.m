@@ -56,8 +56,10 @@
 }
 
 - (IBAction)doContinue {
-//    [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
-//    return;
+#if TARGET_IPHONE_SIMULATOR == 1
+    [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
+    return;
+#endif
 //#warning Handle request
     
     NSString *phone = self.phoneTextField.text;
