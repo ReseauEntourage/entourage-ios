@@ -65,7 +65,7 @@
 
 
 - (IBAction)doContinue {
-#if TARGET_IPHONE_SIMULATOR == 1
+#if SKIP_ONBOARDING_REQUESTS
     [self performSegueWithIdentifier:ADD_PICTURE_SEGUE sender:nil];
     return;
 #endif

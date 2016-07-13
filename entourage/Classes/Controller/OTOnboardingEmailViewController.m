@@ -62,7 +62,7 @@
 
 
 - (IBAction)doContinue {
-#if TARGET_IPHONE_SIMULATOR == 1
+#if SKIP_ONBOARDING_REQUESTS
     [self performSegueWithIdentifier:@"EmailToNameSegue" sender:nil];
     return;
 #endif
