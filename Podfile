@@ -13,9 +13,10 @@ target "entourage" do
     pod 'JSBadgeView', ‘1.4.1’
     pod 'MBProgressHUD', '0.8'
     pod 'IQKeyboardManager', '3.3.4'
-    pod 'SVProgressHUD', :head
+    pod 'SVProgressHUD'
     pod 'SimpleKeychain', '~> 0.7'
     pod 'FormatterKit'
+    pod 'AWSiOSSDKv2', '~> 2.4'
 end
 
 target "entourageTests" do

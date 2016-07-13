@@ -23,6 +23,71 @@ PODS:
   - AFNetworking/UIKit (2.6.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - AWSAutoScaling (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSCloudWatch (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSCore (2.4.3)
+  - AWSDynamoDB (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSEC2 (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSElasticLoadBalancing (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSiOSSDKv2 (2.4.3):
+    - AWSiOSSDKv2/AutoScaling (= 2.4.3)
+    - AWSiOSSDKv2/AWSCore (= 2.4.3)
+    - AWSiOSSDKv2/CloudWatch (= 2.4.3)
+    - AWSiOSSDKv2/DynamoDB (= 2.4.3)
+    - AWSiOSSDKv2/EC2 (= 2.4.3)
+    - AWSiOSSDKv2/ElasticLoadBalancing (= 2.4.3)
+    - AWSiOSSDKv2/Kinesis (= 2.4.3)
+    - AWSiOSSDKv2/MobileAnalytics (= 2.4.3)
+    - AWSiOSSDKv2/S3 (= 2.4.3)
+    - AWSiOSSDKv2/SES (= 2.4.3)
+    - AWSiOSSDKv2/SimpleDB (= 2.4.3)
+    - AWSiOSSDKv2/SNS (= 2.4.3)
+    - AWSiOSSDKv2/SQS (= 2.4.3)
+  - AWSiOSSDKv2/AutoScaling (2.4.3):
+    - AWSAutoScaling (= 2.4.3)
+  - AWSiOSSDKv2/AWSCore (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSiOSSDKv2/CloudWatch (2.4.3):
+    - AWSCloudWatch (= 2.4.3)
+  - AWSiOSSDKv2/DynamoDB (2.4.3):
+    - AWSDynamoDB (= 2.4.3)
+  - AWSiOSSDKv2/EC2 (2.4.3):
+    - AWSEC2 (= 2.4.3)
+  - AWSiOSSDKv2/ElasticLoadBalancing (2.4.3):
+    - AWSElasticLoadBalancing (= 2.4.3)
+  - AWSiOSSDKv2/Kinesis (2.4.3):
+    - AWSKinesis (= 2.4.3)
+  - AWSiOSSDKv2/MobileAnalytics (2.4.3):
+    - AWSMobileAnalytics (= 2.4.3)
+  - AWSiOSSDKv2/S3 (2.4.3):
+    - AWSS3 (= 2.4.3)
+  - AWSiOSSDKv2/SES (2.4.3):
+    - AWSSES (= 2.4.3)
+  - AWSiOSSDKv2/SimpleDB (2.4.3):
+    - AWSSimpleDB (= 2.4.3)
+  - AWSiOSSDKv2/SNS (2.4.3):
+    - AWSSNS (= 2.4.3)
+  - AWSiOSSDKv2/SQS (2.4.3):
+    - AWSSQS (= 2.4.3)
+  - AWSKinesis (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSMobileAnalytics (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSS3 (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSSES (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSSimpleDB (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSSNS (2.4.3):
+    - AWSCore (= 2.4.3)
+  - AWSSQS (2.4.3):
+    - AWSCore (= 2.4.3)
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
     - FormatterKit/ArrayFormatter (= 1.8.0)
@@ -48,13 +113,14 @@ PODS:
   - MBProgressHUD (0.8)
   - OCMock (3.1)
   - SimpleKeychain (0.7.0)
-  - SVProgressHUD (HEAD based on 2.0-beta8)
+  - SVProgressHUD (2.0.3)
   - SWRevealViewController (2.3.0)
   - WYPopoverController (0.3.8)
 
 DEPENDENCIES:
   - AFNetworkActivityLogger
   - AFNetworking (= 2.6.1)
+  - AWSiOSSDKv2 (~> 2.4)
   - FormatterKit
   - IQKeyboardManager (= 3.3.4)
   - JSBadgeView (= 1.4.1)
@@ -62,13 +128,27 @@ DEPENDENCIES:
   - MBProgressHUD (= 0.8)
   - OCMock (= 3.1)
   - SimpleKeychain (~> 0.7)
-  - SVProgressHUD (HEAD)
+  - SVProgressHUD
   - SWRevealViewController (= 2.3.0)
   - WYPopoverController (= 0.3.8)
 
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
   AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
+  AWSAutoScaling: e851257779e5004c40ea307ad54521f008027e84
+  AWSCloudWatch: d617f2c7d794f8fd80e397377f673ba778b579a2
+  AWSCore: 1b1edbf65f948804c9d522f1c49e29f51f72c6d8
+  AWSDynamoDB: 50d4c3abc823f93b0cdc16ca5041996b9294d057
+  AWSEC2: 78287885516f22666ca295294fce9f7d5f51bfd1
+  AWSElasticLoadBalancing: 86e1bb336ca4282fac434d9d55c44c1a1539d76f
+  AWSiOSSDKv2: d2a683418fd84e1352f052a3f00194b5929b989d
+  AWSKinesis: 93a839715c0bb6037cec36bc7558b6e1dc147429
+  AWSMobileAnalytics: 0242c2d0206dcf2231dbd0f62e15f0c61675d023
+  AWSS3: 82159813c72679e1a049e9d0be40ad73ffdb2982
+  AWSSES: 2e0fcccac6b60559b9889080325d33ff2257bc00
+  AWSSimpleDB: 3a8733e34a349c55527e37249296b897a6b30711
+  AWSSNS: 4dde743fe01ad3f1581bb1005dbb7fb59b518c1e
+  AWSSQS: 9a50f2c73d6c92a82a40ff0caec1f42db433145c
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   IQKeyboardManager: ac803e61e5b50efae6b3aeedd95a02c7c7d3b2b3
   JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
@@ -76,8 +156,10 @@ SPEC CHECKSUMS:
   MBProgressHUD: 8688c331cb64702283be37ab8d7d329cdd25f251
   OCMock: 721c11680ae2d65d67f40932777194daf7002781
   SimpleKeychain: b50cef3b87939d480ea1143425c00f5b4b70fe21
-  SVProgressHUD: 6e48a1dda09ce3b58adc41d013baed3a8e8980ff
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   WYPopoverController: dda54780e1bef186464ae5a10ab9b4998c279e89
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: b5766b99969284e68d7f8f689e696334d455cb78
+
+COCOAPODS: 1.0.1

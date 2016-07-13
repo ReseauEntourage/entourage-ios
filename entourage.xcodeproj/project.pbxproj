@@ -24,6 +24,8 @@
 		0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */; };
 		0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */; };
 		0AE855CB1C3D05A0001176B9 /* OTTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE855CA1C3D05A0001176B9 /* OTTutorialViewController.m */; };
+		0EFF83D8D43A3E2E9F8A9E52 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31872915271F48F60EECA4C2 /* libPods-entourageTests.a */; };
+		1326182E58098BE9019F3879 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0873042019DFF62732713E7 /* libPods-entourage.a */; };
 		191FE92419E943D900C56BCA /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
 		191FE92819E945F200C56BCA /* OTEncounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE92719E945F200C56BCA /* OTEncounter.m */; };
 		19BA509519E9587800342A36 /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BA509419E9587800342A36 /* OTEncounterAnnotation.m */; };
@@ -65,7 +67,6 @@
 		2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA5F131CB7BE7200849172 /* OTUserEditPasswordViewController.m */; };
 		2EDFADD71CAE810800B66026 /* OTAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */; };
 		2EDFADDA1CAE84D000B66026 /* OTAboutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDFADD91CAE84D000B66026 /* OTAboutItem.m */; };
-		3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B26FE3EE0C7470099733881 /* libPods-entourage.a */; };
 		4500115E1CCE5BD2004754DF /* OTTourCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4500115D1CCE5BD2004754DF /* OTTourCreatorViewController.m */; };
 		4507017C1CCF459B00432548 /* TourCreator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4507017A1CCF459B00432548 /* TourCreator.storyboard */; };
 		4507017E1CCF494800432548 /* TourJoinRequest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4507017D1CCF494800432548 /* TourJoinRequest.storyboard */; };
@@ -134,7 +135,6 @@
 		45F443441C90BCB700DDEBE1 /* OTTourMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443431C90BCB700DDEBE1 /* OTTourMessage.m */; };
 		45F443471C9314A800DDEBE1 /* OTTourStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443461C9314A800DDEBE1 /* OTTourStatus.m */; };
 		45FD17B71CFC4F3E0037270B /* OTOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FD17B61CFC4F3E0037270B /* OTOptionsViewController.m */; };
-		5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
 		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
@@ -207,10 +207,13 @@
 		0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounterService.m; sourceTree = "<group>"; };
 		0AE855C91C3D05A0001176B9 /* OTTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTutorialViewController.h; sourceTree = "<group>"; };
 		0AE855CA1C3D05A0001176B9 /* OTTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTutorialViewController.m; sourceTree = "<group>"; };
+		143551A9A6ED152DD5F655B3 /* Pods-entourageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.release.xcconfig"; sourceTree = "<group>"; };
+		15EC20D970ACDA904DB58803 /* Pods-entourageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.debug.xcconfig"; sourceTree = "<group>"; };
 		191FE92619E945F200C56BCA /* OTEncounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounter.h; sourceTree = "<group>"; };
 		191FE92719E945F200C56BCA /* OTEncounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounter.m; sourceTree = "<group>"; };
 		19BA509319E9587800342A36 /* OTEncounterAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterAnnotation.h; sourceTree = "<group>"; };
 		19BA509419E9587800342A36 /* OTEncounterAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounterAnnotation.m; sourceTree = "<group>"; };
+		1CEF53464F294EC4BFB802DB /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
 		1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTConsts.h; sourceTree = "<group>"; };
 		1D3BD36A19E964FC001687F9 /* OTMeetingCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMeetingCalloutViewController.h; sourceTree = "<group>"; };
 		1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMeetingCalloutViewController.m; sourceTree = "<group>"; };
@@ -263,7 +266,6 @@
 		1EACE4151D11515200F3A2A6 /* OTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLocationManager.m; sourceTree = "<group>"; };
 		1EC184B51D1420D800E29D96 /* OTEntourageAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageAnnotationView.h; sourceTree = "<group>"; };
 		1EC184B61D1420D800E29D96 /* OTEntourageAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageAnnotationView.m; sourceTree = "<group>"; };
-		2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E5B0EBA1CF0603D0078454F /* OTEntourageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFilter.h; sourceTree = "<group>"; };
 		2E5B0EBB1CF0603D0078454F /* OTEntourageFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageFilter.m; sourceTree = "<group>"; };
 		2E5B0EBE1CF06CE50078454F /* OTFilterRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFilterRadioButton.h; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 		2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutTableViewCell.m; sourceTree = "<group>"; };
 		2EDFADD81CAE84D000B66026 /* OTAboutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutItem.h; sourceTree = "<group>"; };
 		2EDFADD91CAE84D000B66026 /* OTAboutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutItem.m; sourceTree = "<group>"; };
+		31872915271F48F60EECA4C2 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4500115C1CCE5BD2004754DF /* OTTourCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourCreatorViewController.h; sourceTree = "<group>"; };
 		4500115D1CCE5BD2004754DF /* OTTourCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourCreatorViewController.m; sourceTree = "<group>"; };
 		4507017B1CCF459B00432548 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourCreator.storyboard; sourceTree = "<group>"; };
@@ -411,7 +414,6 @@
 		45F443461C9314A800DDEBE1 /* OTTourStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourStatus.m; sourceTree = "<group>"; };
 		45FD17B51CFC4F3E0037270B /* OTOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOptionsViewController.h; sourceTree = "<group>"; };
 		45FD17B61CFC4F3E0037270B /* OTOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOptionsViewController.m; sourceTree = "<group>"; };
-		611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		6B1A846F19E811210020FB93 /* OTPoiService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiService.h; sourceTree = "<group>"; };
 		6B1A847019E811210020FB93 /* OTPoiService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiService.m; sourceTree = "<group>"; };
 		6B1A847819E822150020FB93 /* pois_categories_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pois_categories_mock.json; sourceTree = "<group>"; };
@@ -438,8 +440,8 @@
 		6B92CAC819A7461C004E8C9B /* entourageTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "entourageTests-Info.plist"; sourceTree = "<group>"; };
 		6BFE639219E7E85400C661AB /* OTPoiCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiCategory.h; sourceTree = "<group>"; };
 		6BFE639319E7E85400C661AB /* OTPoiCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiCategory.m; sourceTree = "<group>"; };
-		7B26FE3EE0C7470099733881 /* libPods-entourage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		96211180E938D7D9F5B23AC5 /* Pods-entourageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6DE4A491763D292ADECF1896 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
+		A0873042019DFF62732713E7 /* libPods-entourage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A809BAA319E97E2400A45AC9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		A809BAA419E97E2400A45AC9 /* libFlurry_5.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.4.0.a; sourceTree = "<group>"; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -448,7 +450,6 @@
 		A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCalloutViewController.m; sourceTree = "<group>"; };
 		A8E10FAC19E82A4800DF4A01 /* OTCustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCustomAnnotation.h; sourceTree = "<group>"; };
 		A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCustomAnnotation.m; sourceTree = "<group>"; };
-		C73A9D64DE47F808E1B2C0F4 /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
 		DBBE8ACC19E857A800FA218E /* OTMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMenuItem.h; sourceTree = "<group>"; };
 		DBBE8ACD19E857A800FA218E /* OTMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuItem.m; sourceTree = "<group>"; };
 		DBBE8AD019E8580200FA218E /* OTMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMenuTableViewCell.h; sourceTree = "<group>"; };
@@ -459,7 +460,6 @@
 		DBE9EF2B19E7D73300031144 /* OTMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuViewController.m; sourceTree = "<group>"; };
 		DBE9EF3519E7DCCA00031144 /* UIViewController+menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+menu.h"; sourceTree = "<group>"; };
 		DBE9EF3619E7DCCA00031144 /* UIViewController+menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+menu.m"; sourceTree = "<group>"; };
-		E54D38E2663076C6388D22C9 /* Pods-entourageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,8 +476,8 @@
 				0A9FEBC21C22B8A0009943D2 /* SpeechKit.framework in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
-				3CE57D120A12410790CC58F0 /* libPods-entourage.a in Frameworks */,
 				A809BAA519E97E2400A45AC9 /* libFlurry_5.4.0.a in Frameworks */,
+				1326182E58098BE9019F3879 /* libPods-entourage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,7 +488,7 @@
 				6B92CAC119A7461C004E8C9B /* XCTest.framework in Frameworks */,
 				6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */,
-				5C822C5BF4546B8E89D80939 /* libPods-entourageTests.a in Frameworks */,
+				0EFF83D8D43A3E2E9F8A9E52 /* libPods-entourageTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,17 +651,6 @@
 				2EDA5F101CB68BE200849172 /* OTGuideMapDelegate.m */,
 			);
 			name = MapDelegate;
-			sourceTree = "<group>";
-		};
-		3D6ACAA7335664BE2C3F900F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */,
-				C73A9D64DE47F808E1B2C0F4 /* Pods-entourage.release.xcconfig */,
-				96211180E938D7D9F5B23AC5 /* Pods-entourageTests.debug.xcconfig */,
-				E54D38E2663076C6388D22C9 /* Pods-entourageTests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		455170831CF0BB0F00962369 /* Feed Item */ = {
@@ -891,6 +880,17 @@
 			name = Tour;
 			sourceTree = "<group>";
 		};
+		53280EA9BCEBA15D998CCED4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4A491763D292ADECF1896 /* Pods-entourage.debug.xcconfig */,
+				1CEF53464F294EC4BFB802DB /* Pods-entourage.release.xcconfig */,
+				15EC20D970ACDA904DB58803 /* Pods-entourageTests.debug.xcconfig */,
+				143551A9A6ED152DD5F655B3 /* Pods-entourageTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6B1A846E19E8110B0020FB93 /* WebService */ = {
 			isa = PBXGroup;
 			children = (
@@ -1000,7 +1000,7 @@
 				6B92CAC619A7461C004E8C9B /* entourageTests */,
 				6B92CAA019A7461C004E8C9B /* Frameworks */,
 				6B92CA9F19A7461C004E8C9B /* Products */,
-				3D6ACAA7335664BE2C3F900F /* Pods */,
+				53280EA9BCEBA15D998CCED4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1027,8 +1027,8 @@
 				6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */,
 				6B92CAA519A7461C004E8C9B /* UIKit.framework */,
 				6B92CAC019A7461C004E8C9B /* XCTest.framework */,
-				7B26FE3EE0C7470099733881 /* libPods-entourage.a */,
-				2E118F5FD1F403E5EE48B2C6 /* libPods-entourageTests.a */,
+				A0873042019DFF62732713E7 /* libPods-entourage.a */,
+				31872915271F48F60EECA4C2 /* libPods-entourageTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1202,12 +1202,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6B92CAD019A7461C004E8C9B /* Build configuration list for PBXNativeTarget "entourage" */;
 			buildPhases = (
-				8447845D58724A5CA61AABA4 /* Check Pods Manifest.lock */,
+				C35D400466E62235DE9A01F4 /* [CP] Check Pods Manifest.lock */,
 				6B92CA9A19A7461C004E8C9B /* Sources */,
 				6B92CA9B19A7461C004E8C9B /* Frameworks */,
 				6B92CA9C19A7461C004E8C9B /* Resources */,
-				9893A6C3CA40422E81C17B55 /* Copy Pods Resources */,
-				0DD822C5A42F4D8C880DDA5C /* Embed Pods Frameworks */,
+				34A63FBA43859415DF1BB474 /* [CP] Embed Pods Frameworks */,
+				03E4165EBDB7F78C344C0C78 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1222,12 +1222,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6B92CAD319A7461C004E8C9B /* Build configuration list for PBXNativeTarget "entourageTests" */;
 			buildPhases = (
-				EA2C8874247C3400CC05B210 /* Check Pods Manifest.lock */,
+				8BB937377C51714611858F51 /* [CP] Check Pods Manifest.lock */,
 				6B92CABB19A7461C004E8C9B /* Sources */,
 				6B92CABC19A7461C004E8C9B /* Frameworks */,
 				6B92CABD19A7461C004E8C9B /* Resources */,
-				F31EA7ACC34E7ECD786F016A /* Copy Pods Resources */,
-				5F659DCB8F494A09AA8EA72A /* Embed Pods Frameworks */,
+				9B95D715EC2077A1D3EEB380 /* [CP] Embed Pods Frameworks */,
+				18FAF9F5CACE80211DD77939 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1326,59 +1326,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0DD822C5A42F4D8C880DDA5C /* Embed Pods Frameworks */ = {
+		03E4165EBDB7F78C344C0C78 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5F659DCB8F494A09AA8EA72A /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8447845D58724A5CA61AABA4 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		9893A6C3CA40422E81C17B55 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1386,14 +1341,44 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EA2C8874247C3400CC05B210 /* Check Pods Manifest.lock */ = {
+		18FAF9F5CACE80211DD77939 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		34A63FBA43859415DF1BB474 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8BB937377C51714611858F51 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1401,19 +1386,34 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F31EA7ACC34E7ECD786F016A /* Copy Pods Resources */ = {
+		9B95D715EC2077A1D3EEB380 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C35D400466E62235DE9A01F4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1723,7 +1723,7 @@
 		};
 		6B92CAD119A7461C004E8C9B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 611EAAEE6FD7C40D2D6901E0 /* Pods-entourage.debug.xcconfig */;
+			baseConfigurationReference = 6DE4A491763D292ADECF1896 /* Pods-entourage.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -1755,7 +1755,7 @@
 		};
 		6B92CAD219A7461C004E8C9B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C73A9D64DE47F808E1B2C0F4 /* Pods-entourage.release.xcconfig */;
+			baseConfigurationReference = 1CEF53464F294EC4BFB802DB /* Pods-entourage.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -1786,7 +1786,7 @@
 		};
 		6B92CAD419A7461C004E8C9B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96211180E938D7D9F5B23AC5 /* Pods-entourageTests.debug.xcconfig */;
+			baseConfigurationReference = 15EC20D970ACDA904DB58803 /* Pods-entourageTests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1809,7 +1809,7 @@
 		};
 		6B92CAD519A7461C004E8C9B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E54D38E2663076C6388D22C9 /* Pods-entourageTests.release.xcconfig */;
+			baseConfigurationReference = 143551A9A6ED152DD5F655B3 /* Pods-entourageTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
