@@ -13,6 +13,7 @@
 #import "UIView+entourage.h"
 #import "OTPictureUploadService.h"
 #import "UIColor+entourage.h"
+#import "OTConsts.h"
 
 @interface OTOnboardingPreviewViewController ()
 
@@ -54,11 +55,14 @@
     [self updateMinZoomScaleForSize:self.view.bounds.size];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
+
 
 - (IBAction)doContinue {
+#if SKIP_ONBOARDING_REQUESTS
+    [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
+    return;
+#endif
+    
     UIImage *futureImage = [self cropVisibleArea];
     [SVProgressHUD show];
     if (self.isOnboarding)

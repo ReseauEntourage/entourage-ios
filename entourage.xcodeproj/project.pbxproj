@@ -98,6 +98,9 @@
 		454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F521C500FE2001362B2 /* OTStartupViewController.m */; };
 		454C8F581C501B31001362B2 /* UIView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F571C501B31001362B2 /* UIView+entourage.m */; };
 		454C8F5B1C510304001362B2 /* UINavigationController+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F5A1C510304001362B2 /* UINavigationController+entourage.m */; };
+		454E429C1D369A720051FDFF /* OTOnboardingGeolocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454E429B1D369A720051FDFF /* OTOnboardingGeolocationViewController.m */; };
+		454E429F1D36B1670051FDFF /* OTOnboardingNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454E429E1D36B1670051FDFF /* OTOnboardingNotificationsViewController.m */; };
+		454E42A21D36B6F60051FDFF /* Rights.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 454E42A01D36B6F60051FDFF /* Rights.storyboard */; };
 		4551708C1CF0D54100962369 /* OTFeedItemInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4551708B1CF0D54100962369 /* OTFeedItemInfoView.m */; };
 		455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 455940541C5D2E220099A8EE /* OTJSONResponseSerializer.m */; };
 		4559405E1C5F6D480099A8EE /* OTRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4559405D1C5F6D480099A8EE /* OTRequestOperationManager.m */; };
@@ -349,6 +352,11 @@
 		454C8F571C501B31001362B2 /* UIView+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+entourage.m"; sourceTree = "<group>"; };
 		454C8F591C510304001362B2 /* UINavigationController+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+entourage.h"; path = "Helper/UINavigationController+entourage.h"; sourceTree = "<group>"; };
 		454C8F5A1C510304001362B2 /* UINavigationController+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+entourage.m"; path = "Helper/UINavigationController+entourage.m"; sourceTree = "<group>"; };
+		454E429A1D369A720051FDFF /* OTOnboardingGeolocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingGeolocationViewController.h; sourceTree = "<group>"; };
+		454E429B1D369A720051FDFF /* OTOnboardingGeolocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingGeolocationViewController.m; sourceTree = "<group>"; };
+		454E429D1D36B1670051FDFF /* OTOnboardingNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingNotificationsViewController.h; sourceTree = "<group>"; };
+		454E429E1D36B1670051FDFF /* OTOnboardingNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingNotificationsViewController.m; sourceTree = "<group>"; };
+		454E42A11D36B6F60051FDFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Rights.storyboard; sourceTree = "<group>"; };
 		4551708A1CF0D54100962369 /* OTFeedItemInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemInfoView.h; sourceTree = "<group>"; };
 		4551708B1CF0D54100962369 /* OTFeedItemInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemInfoView.m; sourceTree = "<group>"; };
 		455940531C5D2E220099A8EE /* OTJSONResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTJSONResponseSerializer.h; sourceTree = "<group>"; };
@@ -772,6 +780,10 @@
 				1E90036B1D351F40004E18BC /* OTOnboardingPictureViewController.m */,
 				1E2FE74F1D35668B00746447 /* OTOnboardingPreviewViewController.h */,
 				1E2FE7501D35668B00746447 /* OTOnboardingPreviewViewController.m */,
+				454E429A1D369A720051FDFF /* OTOnboardingGeolocationViewController.h */,
+				454E429B1D369A720051FDFF /* OTOnboardingGeolocationViewController.m */,
+				454E429D1D36B1670051FDFF /* OTOnboardingNotificationsViewController.h */,
+				454E429E1D36B1670051FDFF /* OTOnboardingNotificationsViewController.m */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -796,6 +808,7 @@
 				452FE3E71CAD549200063334 /* GuideSolidarity.storyboard */,
 				452FE3E41CAD544F00063334 /* UserProfile.storyboard */,
 				1E90036D1D352C0B004E18BC /* UserPicture.storyboard */,
+				454E42A01D36B6F60051FDFF /* Rights.storyboard */,
 				45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */,
 			);
 			path = Storyboards;
@@ -1307,6 +1320,7 @@
 				452FE3EB1CAD54CE00063334 /* Settings.storyboard in Resources */,
 				45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */,
 				452FE3E61CAD544F00063334 /* UserProfile.storyboard in Resources */,
+				454E42A21D36B6F60051FDFF /* Rights.storyboard in Resources */,
 				4564493F1D2CFBA600DFDEB1 /* welcome.html in Resources */,
 				452FE3ED1CAD54F800063334 /* About.storyboard in Resources */,
 				1E3174911D10299400027824 /* QuitFeedItem.storyboard in Resources */,
@@ -1467,6 +1481,7 @@
 				4541EDF11D09AB4C00589ECB /* OTDisclaimerViewController.m in Sources */,
 				2EDFADD71CAE810800B66026 /* OTAboutTableViewCell.m in Sources */,
 				6B4930CD19A773C500DA7EE0 /* OTMainViewController.m in Sources */,
+				454E429F1D36B1670051FDFF /* OTOnboardingNotificationsViewController.m in Sources */,
 				0AE855CB1C3D05A0001176B9 /* OTTutorialViewController.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
 				1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */,
@@ -1483,6 +1498,7 @@
 				45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */,
 				0A70FA321BFF32AD0080E8EC /* OTFeedItemViewController.m in Sources */,
 				453BB33A1D2EF3EF002F9255 /* OTOnboardingCodeViewController.m in Sources */,
+				454E429C1D369A720051FDFF /* OTOnboardingGeolocationViewController.m in Sources */,
 				454062A31D06ADB600B0D756 /* OTLocationSelectorViewController.m in Sources */,
 				45D789181D2FEE53005EBACC /* OTOnboardingNameViewController.m in Sources */,
 				45BC9BC91CE26E83000065B7 /* OTEntourageCreatorViewController.m in Sources */,
@@ -1631,6 +1647,14 @@
 				452FE4001CAD5AC700063334 /* Base */,
 			);
 			name = Entourages.storyboard;
+			sourceTree = "<group>";
+		};
+		454E42A01D36B6F60051FDFF /* Rights.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				454E42A11D36B6F60051FDFF /* Base */,
+			);
+			name = Rights.storyboard;
 			sourceTree = "<group>";
 		};
 		45CE5A631C5242FC00F68C24 /* Main.storyboard */ = {

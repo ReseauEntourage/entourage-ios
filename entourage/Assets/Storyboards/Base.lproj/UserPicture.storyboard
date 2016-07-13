@@ -127,6 +127,7 @@
                         <outlet property="btnFromGallery" destination="ma1-OC-ZEH" id="gMy-2R-MiY"/>
                         <outlet property="btnTakePicture" destination="XBY-w9-wlD" id="XPc-eL-EAL"/>
                         <segue destination="xml-Uv-sbT" kind="show" identifier="PreviewPictureSegue" id="9bG-Kh-Ax2"/>
+                        <segue destination="tKv-lS-TmP" kind="show" identifier="SkipPreviewSegue" id="k7U-3x-y4I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v8G-gr-vqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -286,11 +287,20 @@
                         <outlet property="imageViewRightonstraint" destination="mCm-qS-Vc0" id="xp5-fU-q2u"/>
                         <outlet property="imageViewTopConstraint" destination="3gH-Qz-8vQ" id="Ay0-m1-AVc"/>
                         <outlet property="scrollView" destination="29I-VR-dA4" id="e9U-kh-UDx"/>
+                        <segue destination="tKv-lS-TmP" kind="show" identifier="PreviewToGeoSegue" id="7Aa-Ot-sEG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8TY-Tj-u9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4973" y="-44"/>
+        </scene>
+        <!--Rights-->
+        <scene sceneID="bZI-En-DCe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Rights" id="tKv-lS-TmP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ELD-hb-UOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4784.5" y="403"/>
         </scene>
     </scenes>
     <resources>
@@ -298,4 +308,7 @@
         <image name="layer" width="346" height="345"/>
         <image name="nextFull" width="56" height="56"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="k7U-3x-y4I"/>
+    </inferredMetricsTieBreakers>
 </document>

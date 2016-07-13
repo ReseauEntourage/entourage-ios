@@ -65,7 +65,7 @@
 }
 
 - (void)ignore {
-    [UIStoryboard showSWRevealController];
+    [self performSegueWithIdentifier:@"SkipPreviewSegue" sender:self];
 }
 
 @end
