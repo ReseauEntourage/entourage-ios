@@ -60,8 +60,11 @@
     [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
     return;
 #endif
+    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     
     NSString *phone = self.phoneTextField.text;
+    currentUser.phone = phone;
+    
     [SVProgressHUD show];
     [[OTOnboardingService new] setupNewUserWithPhone:phone
         success:^(OTUser *onboardUser) {
@@ -81,8 +84,16 @@
             } else if ([errorDictionary isKindOfClass:[NSString class]]) {
                 errorMessage = errorDictionary;
             }
-            
-            [SVProgressHUD showErrorWithStatus:errorMessage];
+#warning Create special message(code) on server-side
+            if ([errorMessage isEqualToString:@"Phone n'est pas disponible"]) {
+                [SVProgressHUD dismiss];
+                [[NSUserDefaults standardUserDefaults] setCurrentUser:currentUser];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+
+                [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
+            } else {
+                [SVProgressHUD showErrorWithStatus:errorMessage];
+            }
             NSLog(@"ERR: something went wrong on onboarding user phone: %@", error.description);
         }];
 }

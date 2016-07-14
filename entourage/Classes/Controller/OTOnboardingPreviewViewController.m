@@ -57,10 +57,12 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationProfilePictureUpdated object:self];
             [SVProgressHUD dismiss];
-            if (self.isOnboarding)
-                [UIStoryboard showSWRevealController];
-            else
+            if (self.isOnboarding) {
+                [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
+                //[UIStoryboard showSWRevealController];
+            } else {
                 [self popToProfile];
+            }
         }
         failure:^(NSError *error) {
             NSDictionary *userInfo = [error userInfo];
