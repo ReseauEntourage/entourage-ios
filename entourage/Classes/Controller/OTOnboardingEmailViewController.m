@@ -18,6 +18,7 @@
 #import "UIScrollView+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
+#import "NSError+message.h"
 
 @interface OTOnboardingEmailViewController ()
 
@@ -81,15 +82,7 @@
                                                    [self performSegueWithIdentifier:@"EmailToNameSegue" sender:self];
                                                }
                                                failure:^(NSError *error) {
-                                                   NSDictionary *userInfo = [error userInfo];
-                                                   NSString *errorMessage = @"";
-                                                   NSDictionary *errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
-                                                   if (errorDictionary) {
-                                                       //NSString *code = [errorDictionary valueForKey:@"code"];
-                                                       errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
-                                                   }
-                                                   
-                                                   [SVProgressHUD showErrorWithStatus:errorMessage];
+                                                   [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
                                                    NSLog(@"ERR: something went wrong on onboarding user email: %@", error.description);
                                                }];
 

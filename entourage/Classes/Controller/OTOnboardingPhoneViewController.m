@@ -15,6 +15,7 @@
 #import "OTConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "UIScrollView+entourage.h"
+#import "NSError+message.h"
 
 @interface OTOnboardingPhoneViewController ()
 
@@ -74,16 +75,7 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
-            NSDictionary *userInfo = [error userInfo];
-            NSString *errorMessage = @"";
-            id errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
-            
-            if ([errorDictionary isKindOfClass:[NSDictionary class]]) {
-                //NSString *code = [errorDictionary valueForKey:@"code"];
-                errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
-            } else if ([errorDictionary isKindOfClass:[NSString class]]) {
-                errorMessage = errorDictionary;
-            }
+            NSString *errorMessage = [error userUpdateMessage];
 #warning Create special message(code) on server-side
             if ([errorMessage isEqualToString:@"Phone n'est pas disponible"]) {
                 [SVProgressHUD dismiss];

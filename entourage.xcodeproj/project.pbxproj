@@ -40,6 +40,7 @@
 		1E2FE74E1D354AE900746447 /* OTPhotoPickerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE74D1D354AE900746447 /* OTPhotoPickerBehavior.m */; };
 		1E2FE7511D35668B00746447 /* OTOnboardingPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE7501D35668B00746447 /* OTOnboardingPreviewViewController.m */; };
 		1E3174911D10299400027824 /* QuitFeedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E3174901D10299400027824 /* QuitFeedItem.storyboard */; };
+		1E69CABD1D37B3CC00118E33 /* NSError+message.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E69CABC1D37B3CC00118E33 /* NSError+message.m */; };
 		1E71E6531D108790001F3777 /* NSNotification+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E71E6521D108790001F3777 /* NSNotification+entourage.m */; };
 		1E76AE471D144D1F00C496BA /* OTTourStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE461D144D1F00C496BA /* OTTourStateInfo.m */; };
 		1E76AE4A1D144D9900C496BA /* OTEntourageStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE491D144D9900C496BA /* OTEntourageStateInfo.m */; };
@@ -242,6 +243,8 @@
 		1E2FE74F1D35668B00746447 /* OTOnboardingPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingPreviewViewController.h; sourceTree = "<group>"; };
 		1E2FE7501D35668B00746447 /* OTOnboardingPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingPreviewViewController.m; sourceTree = "<group>"; };
 		1E3174901D10299400027824 /* QuitFeedItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QuitFeedItem.storyboard; sourceTree = "<group>"; };
+		1E69CABB1D37B3CC00118E33 /* NSError+message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+message.h"; sourceTree = "<group>"; };
+		1E69CABC1D37B3CC00118E33 /* NSError+message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+message.m"; sourceTree = "<group>"; };
 		1E71E6511D108790001F3777 /* NSNotification+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotification+entourage.h"; sourceTree = "<group>"; };
 		1E71E6521D108790001F3777 /* NSNotification+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotification+entourage.m"; sourceTree = "<group>"; };
 		1E76AE441D144CEB00C496BA /* OTStateInfoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTStateInfoDelegate.h; sourceTree = "<group>"; };
@@ -1125,6 +1128,8 @@
 				1E71E6521D108790001F3777 /* NSNotification+entourage.m */,
 				45D789191D2FFC3E005EBACC /* UIScrollView+entourage.h */,
 				45D7891A1D2FFC3E005EBACC /* UIScrollView+entourage.m */,
+				1E69CABB1D37B3CC00118E33 /* NSError+message.h */,
+				1E69CABC1D37B3CC00118E33 /* NSError+message.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1477,6 +1482,7 @@
 				0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */,
 				0A70FA181BFDD69C0080E8EC /* OTToursTableViewController.m in Sources */,
 				452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */,
+				1E69CABD1D37B3CC00118E33 /* NSError+message.m in Sources */,
 				45F443441C90BCB700DDEBE1 /* OTTourMessage.m in Sources */,
 				4541EDF11D09AB4C00589ECB /* OTDisclaimerViewController.m in Sources */,
 				2EDFADD71CAE810800B66026 /* OTAboutTableViewCell.m in Sources */,
