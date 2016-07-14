@@ -1078,7 +1078,8 @@ static bool isShowingOptions = NO;
 - (IBAction)doShowNewFeedItems:(UIButton*)sender {
     self.nouveauxFeedItemsButton.hidden = YES;
     [self.tableView reloadData];
-    [self.tableView setContentOffset:CGPointZero animated:YES];}
+    [self.tableView setContentOffset:CGPointZero animated:YES];
+}
 
 
 /**************************************************************************************************/

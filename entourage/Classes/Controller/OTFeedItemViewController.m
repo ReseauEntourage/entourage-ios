@@ -153,18 +153,18 @@ typedef NS_ENUM(unsigned) {
     
     if (IS_ACCEPTED) {
         [self updateRecordButton];
-        [OTSpeechKitManager setup];
+        // to be removed on 1.9
+        //[OTSpeechKitManager setup];
 #warning remove existing items.
-    
+        [self initializeTimelinePoints];
+        
         if ([self.feedItem isKindOfClass:[OTTour class]]) {
-            [self initializeTimelinePoints];
-            
-
+           
             [self getTourUsersJoins];
             [self getTourMessages];
             [self getTourEncounters];
         } else {
-            self.timelinePoints = [NSMutableArray new];
+            //self.timelinePoints = [NSMutableArray new];
             [self getEntourageMessages];
         }
     }
@@ -678,35 +678,6 @@ typedef NS_ENUM(unsigned) {
 
 }
 
-- (void)setupHeaderCell:(UITableViewCell *)cell {
-//    OTTourAuthor *author = self.tour.author;
-//    UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
-//    organizationLabel.text = self.tour.organizationName;
-//    
-//    
-//    NSString *tourType = self.tour.type;
-//    if ([tourType isEqualToString:@"barehands"]) {
-//        tourType = @"sociale";
-//    } else     if ([tourType isEqualToString:@"medical"]) {
-//        tourType = @"médicale";
-//    } else if ([tourType isEqualToString:@"alimentary"]) {
-//        tourType = @"distributive";
-//    }
-//    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
-//    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
-//    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Mauraude %@ par ", tourType] attributes:lightAttrs];
-//    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
-//    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
-//    [typeByNameAttrString appendAttributedString:nameAttrString];
-//    UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
-//    typeByNameLabel.attributedText = typeByNameAttrString;
-//    
-//    
-//    UIButton *userImageButton = [cell viewWithTag:TAG_TOURUSER];
-//    [userImageButton setupAsProfilePictureFromUrl:self.tour.author.avatarUrl];
-//    [userImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
-}
-
 - (void)doShowProfile {
     [self performSegueWithIdentifier:@"OTUserProfileSegue" sender:self.feedItem.author.uID];
 }
@@ -727,8 +698,14 @@ typedef NS_ENUM(unsigned) {
                 return CELLHEIGHT_JOINER;
             if ([timelinePoint isKindOfClass:[OTEncounter class]])
                 return CELLHEIGHT_ENCOUNTER;
-            if ([timelinePoint isKindOfClass:[OTTourMessage class]])
-                 return 4*PADDING + [self messageHeightForText:((OTTourMessage*)timelinePoint).text];
+            if ([timelinePoint isKindOfClass:[OTTourMessage class]]) {
+                OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+                OTTourMessage *message = (OTTourMessage*)timelinePoint;
+                CGFloat otherUserDelta = PADDING;
+                if ([currentUser.sid intValue] != [message.uID intValue])
+                    otherUserDelta = 2*PADDING;
+                return otherUserDelta + [self messageHeightForText:message.text];
+            }
             if ([timelinePoint isKindOfClass:[OTTourStatus class]])
                 return CELLHEIGHT_STATUS;
         }
