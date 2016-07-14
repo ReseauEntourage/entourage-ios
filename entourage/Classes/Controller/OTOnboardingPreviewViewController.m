@@ -55,7 +55,7 @@
         [[OTAuthService new] updateUserInformationWithUser:currentUser success:^(OTUser *user) {
             [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
             [[NSUserDefaults standardUserDefaults] synchronize];
-                                                       
+            [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationProfilePictureUpdated object:self];
             [SVProgressHUD dismiss];
             if (self.isOnboarding)
                 [UIStoryboard showSWRevealController];

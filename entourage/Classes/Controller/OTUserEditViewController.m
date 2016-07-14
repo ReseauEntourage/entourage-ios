@@ -60,6 +60,11 @@ typedef NS_ENUM(NSInteger) {
     [self showSaveButton];
     
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -71,13 +76,16 @@ typedef NS_ENUM(NSInteger) {
     else if ([segue.identifier isEqualToString:EDIT_PICTURE_SEGUE]) {
         OTOnboardingPictureViewController *controller = (OTOnboardingPictureViewController*)[segue destinationViewController];
         controller.isOnboarding = NO;
-        // TODO set delegate for action after picture is ok
-        //controller.delegate = self;
     }
 }
 
 /**************************************************************************************************/
 #pragma mark - Private
+
+- (void)profilePictureUpdated:(NSNotification *)notification {
+    self.user.avatarURL = [[[NSUserDefaults standardUserDefaults] currentUser] avatarURL];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
 
 - (void)showSaveButton {
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"save")

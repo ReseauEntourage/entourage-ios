@@ -80,7 +80,11 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
 
     [self.profileButton setupAsProfilePictureFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -105,7 +109,6 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
     NSString *cellID = (indexPath.section == 0) ?   OTMenuTableViewCellIdentifier :
                                                     OTMenuLogoutTableViewCellIdentifier;
     OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
@@ -300,6 +303,11 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     }
 
 	return menuItem;
+}
+
+- (void)profilePictureUpdated:(NSNotification *)notification {
+    self.currentUser.avatarURL = [[[NSUserDefaults standardUserDefaults] currentUser] avatarURL];
+    [self.profileButton setupAsProfilePictureFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
 }
 
 @end
