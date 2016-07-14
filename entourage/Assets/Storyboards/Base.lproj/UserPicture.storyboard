@@ -282,10 +282,6 @@
                     <connections>
                         <outlet property="btnDone" destination="Fot-wr-6TS" id="DH3-O9-fJo"/>
                         <outlet property="imageView" destination="TpG-O0-eKf" id="hRl-Oq-9SU"/>
-                        <outlet property="imageViewBottomConstraint" destination="wcb-0p-XPr" id="0F1-Nm-XPk"/>
-                        <outlet property="imageViewLeftConstraint" destination="kKa-7p-W6Z" id="Fby-7R-ZfS"/>
-                        <outlet property="imageViewRightonstraint" destination="mCm-qS-Vc0" id="xp5-fU-q2u"/>
-                        <outlet property="imageViewTopConstraint" destination="3gH-Qz-8vQ" id="Ay0-m1-AVc"/>
                         <outlet property="scrollView" destination="29I-VR-dA4" id="e9U-kh-UDx"/>
                         <segue destination="tKv-lS-TmP" kind="show" identifier="PreviewToGeoSegue" id="7Aa-Ot-sEG"/>
                     </connections>
@@ -309,6 +305,6 @@
         <image name="nextFull" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="k7U-3x-y4I"/>
+        <segue reference="7Aa-Ot-sEG"/>
     </inferredMetricsTieBreakers>
 </document>
