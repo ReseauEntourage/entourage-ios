@@ -73,7 +73,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
     
-    self.title = OTLocalizedString(@"myProfile");
+    self.title = OTLocalizedString(@"myProfile").capitalizedString;
     [self createBackFrontMenuButton];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
