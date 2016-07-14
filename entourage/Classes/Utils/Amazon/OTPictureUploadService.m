@@ -36,7 +36,7 @@
             [self removeFile:toUpload];
             if(task.completed && !task.cancelled && success)
                 success(fileName);
-            if(error)
+            if(task.faulted)
                 error(task.error);
             return nil;
         }];

@@ -464,7 +464,7 @@ typedef NS_ENUM(NSInteger) {
     titleLabel.text = title;
     
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE_TAG];
-    if (associationImageButton != nil && imageURL != nil) {
+    if (associationImageButton != nil && imageURL && imageURL.length > 0) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
     }
 }
