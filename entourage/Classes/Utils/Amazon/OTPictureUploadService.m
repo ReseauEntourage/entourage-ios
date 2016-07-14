@@ -37,6 +37,7 @@
             success(fileName);
         if(error)
             error();
+        [self removeFile:toUpload];
         return nil;
     }];
 }
@@ -56,6 +57,13 @@
     NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
     [UIImageJPEGRepresentation(image, 1) writeToFile:filePath atomically:YES];
     return [NSURL fileURLWithPath:filePath];
+}
+
+- (void)removeFile:(NSURL *)fileUri {
+    NSError *error;
+    [[NSFileManager defaultManager] removeItemAtPath:[fileUri path] error:&error];
+    if (error)
+        NSLog(@"Can't remove local uploaded file: %@", error);
 }
 
 @end
