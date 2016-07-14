@@ -51,6 +51,8 @@
                                                                    style:UIBarButtonItemStyleDone
                                                                   target:self
                                                                   action:@selector(saveFilters)];
+    [menuButton setTintColor:[UIColor appOrangeColor]];
+    [menuButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     [self.navigationItem setRightBarButtonItem:menuButton];
     
     [self initData];

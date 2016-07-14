@@ -16,6 +16,7 @@
 #import "OTConsts.h"
 #import "OTAuthService.h"
 #import "NSUserDefaults+OT.h"
+#import "NSError+message.h"
 
 @interface OTOnboardingPreviewViewController ()
 
@@ -57,23 +58,13 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationProfilePictureUpdated object:self];
             [SVProgressHUD dismiss];
-            if (self.isOnboarding) {
+            if (self.isOnboarding)
                 [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
-                //[UIStoryboard showSWRevealController];
-            } else {
+            else
                 [self popToProfile];
-            }
         }
         failure:^(NSError *error) {
-            NSDictionary *userInfo = [error userInfo];
-            NSString *errorMessage = @"";
-            NSDictionary *errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
-            if (errorDictionary) {
-                //NSString *code = [errorDictionary valueForKey:@"code"];
-                errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
-            }
-
-            [SVProgressHUD showErrorWithStatus:errorMessage];
+            [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
             NSLog(@"ERR: something went wrong on user picture: %@", error.description);
         }];
     } orError:^(NSError *error) {
