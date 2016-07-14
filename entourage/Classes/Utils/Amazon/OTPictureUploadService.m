@@ -27,19 +27,19 @@
     AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
 }
 
-- (void)uploadPicture:(UIImage *)picture withSuccess:(void (^)(NSString *))success orError:(void (^)())error {
-    NSURL *toUpload = [self saveToFile:picture];
-    NSString *fileName = [NSString stringWithFormat:@"user_%@.jpg", USER_ID];
-    AWSS3TransferManagerUploadRequest *uploadRequest = [self buildUploadRequestFor:toUpload withName:fileName];
-    AWSS3TransferManager *transferManager = [AWSS3TransferManager defaultS3TransferManager];
-    [[transferManager upload:uploadRequest] continueWithBlock:^id(AWSTask *task) {
-        if(task.completed && !task.cancelled && success)
-            success(fileName);
-        if(error)
-            error();
-        [self removeFile:toUpload];
-        return nil;
-    }];
+- (void)uploadPicture:(UIImage *)picture withSuccess:(void (^)(NSString *))success orError:(void (^)(NSError *))error {
+        NSURL *toUpload = [self saveToFile:picture];
+        NSString *fileName = [NSString stringWithFormat:@"user_%@.jpg", USER_ID];
+        AWSS3TransferManagerUploadRequest *uploadRequest = [self buildUploadRequestFor:toUpload withName:fileName];
+        AWSS3TransferManager *transferManager = [AWSS3TransferManager defaultS3TransferManager];
+        [[transferManager upload:uploadRequest] continueWithBlock:^id(AWSTask *task) {
+            [self removeFile:toUpload];
+            if(task.completed && !task.cancelled && success)
+                success(fileName);
+            if(error)
+                error(task.error);
+            return nil;
+        }];
 }
 
 - (AWSS3TransferManagerUploadRequest *)buildUploadRequestFor:(NSURL *)fileUri withName:(NSString *)fileName {

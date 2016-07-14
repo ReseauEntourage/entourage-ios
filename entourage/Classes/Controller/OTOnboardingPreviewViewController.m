@@ -74,9 +74,10 @@
             [SVProgressHUD showErrorWithStatus:errorMessage];
             NSLog(@"ERR: something went wrong on user picture: %@", error.description);
         }];
-    } orError:^(void) {
-#warning Show a proper message
-        [SVProgressHUD dismiss];
+    } orError:^(NSError *error) {
+        NSDictionary *userInfo = [error userInfo];
+        NSString *errorMessage = [userInfo objectForKey:@"NSLocalizedDescription"];
+        [SVProgressHUD showErrorWithStatus:errorMessage];
     }];
 }
 

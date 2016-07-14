@@ -12,6 +12,6 @@
 
 + (void)configure;
 
-- (void)uploadPicture:(UIImage *)picture withSuccess:(void(^)(NSString *))success orError:(void(^)())error;
+- (void)uploadPicture:(UIImage *)picture withSuccess:(void(^)(NSString *))success orError:(void(^)(NSError *))error;
 
 @end
