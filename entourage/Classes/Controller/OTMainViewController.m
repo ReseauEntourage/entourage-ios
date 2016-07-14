@@ -966,11 +966,10 @@ static bool isShowingOptions = NO;
 
 - (void)createEncounter {
     [self dismissViewControllerAnimated:NO completion:^{
-        if (self.toursMapDelegate.isActive) {
+        if (self.toursMapDelegate.isActive)
             [self performSegueWithIdentifier:@"OTCreateMeeting" sender:nil];
-        } else {
-            [self showNewEncounterStartDialogFromGuide];
-        }
+        else
+            [self showAlert:OTLocalizedString(@"poi_create_encounter_alert") withSegue:nil];
     }];
 }
 
@@ -1235,23 +1234,10 @@ static bool isShowingOptions = NO;
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
         [self switchToNewsfeed];
-        
-        [self performSegueWithIdentifier:segueID sender:nil];
+        if([segueID class] != [NSNull class])
+            [self performSegueWithIdentifier:segueID sender:nil];
     }];
     [alert addAction:quitAction];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-- (void)showNewEncounterStartDialogFromGuide {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:OTLocalizedString(@"poi_create_encounter_alert") preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"cancelAlert") style:UIAlertActionStyleCancel handler:nil];
-    [alert addAction:cancelAction];
-    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"quitAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self switchToNewsfeed];
-    }];
-    [alert addAction:quitAction];
-    
     [self presentViewController:alert animated:YES completion:nil];
 }
 
