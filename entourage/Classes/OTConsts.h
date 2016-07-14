@@ -18,7 +18,7 @@
 #endif
 
 
-#define SKIP_ONBOARDING_REQUESTS DEBUG2
+#define SKIP_ONBOARDING_REQUESTS DEBUG__
 
 #define API_KEY @"91f908e8f674fc9dfc5c1dba"
 

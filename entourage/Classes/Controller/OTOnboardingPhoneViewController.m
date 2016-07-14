@@ -73,10 +73,13 @@
         } failure:^(NSError *error) {
             NSDictionary *userInfo = [error userInfo];
             NSString *errorMessage = @"";
-            NSDictionary *errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
-            if (errorDictionary) {
+            id errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
+            
+            if ([errorDictionary isKindOfClass:[NSDictionary class]]) {
                 //NSString *code = [errorDictionary valueForKey:@"code"];
                 errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
+            } else if ([errorDictionary isKindOfClass:[NSString class]]) {
+                errorMessage = errorDictionary;
             }
             
             [SVProgressHUD showErrorWithStatus:errorMessage];
