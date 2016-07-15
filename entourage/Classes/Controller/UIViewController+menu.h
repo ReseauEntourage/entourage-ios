@@ -17,6 +17,7 @@
 - (UIBarButtonItem *)createBackFrontMenuButton;
 - (UIBarButtonItem *)setupChatsButton;
 - (UIBarButtonItem *)setupCloseModal;
+- (UIBarButtonItem *)setupCloseModalTransparent;
 - (UIImage*)setupLogoImage;
 
 @end

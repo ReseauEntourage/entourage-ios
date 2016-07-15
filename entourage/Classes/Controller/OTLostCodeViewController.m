@@ -19,6 +19,9 @@
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
 #import "UITextField+indentation.h"
+#import "UINavigationController+entourage.h"
+#import "UIView+entourage.h"
+#import "UIScrollView+entourage.h"
 
 // Model
 #import "OTUser.h"
@@ -33,11 +36,13 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UIButton *regenerateCodeButton;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *inputContainerView;
 @property (weak, nonatomic) IBOutlet UIView *numberNotFoundContainerView;
 @property (weak, nonatomic) IBOutlet UIView *smsContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *actionIcon;
 @property (weak, nonatomic) IBOutlet UITextField *smsTextField;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 
 @end
 
@@ -50,11 +55,30 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
-    self.title = OTLocalizedString(@"lostCodeTitle");
-    [self setupCloseModal];
+    self.title = @"";
+    [self setupCloseModalTransparent];
     [self.phoneTextField indentRight];
-    [self showPhoneInput];
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
+    //[self showPhoneInput];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    [self.navigationController presentTransparentNavigationBar];
+    
+    [self.regenerateCodeButton setupHalfRoundedCorners];
+    [self.phoneTextField setupWithWhitePlaceholder];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showKeyboard:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+#if DEBUG
+    self.phoneTextField.text = @"+40723199641";
+#endif
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.phoneTextField becomeFirstResponder];
 }
 
 #pragma mark - Private
@@ -134,6 +158,7 @@
         [self regenerateSecretCode];
     }
 }
+
 - (IBAction)sendSMSButtonDidTap:(id)sender {
 
     if (self.smsTextField.text.length == 0) {
@@ -171,5 +196,12 @@
     self.smsContainerView.hidden = YES;
     self.actionIcon.image = [UIImage imageNamed:@"phone"];
 }
+
+- (void)showKeyboard:(NSNotification*)notification {
+    //[self.scrollView scrollToBottomFromKeyboardNotification:notification];
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+    
+}
+
 
 @end

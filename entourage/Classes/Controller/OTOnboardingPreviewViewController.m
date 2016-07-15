@@ -38,9 +38,16 @@
     self.scrollView.layer.borderColor = [UIColor whiteColor].CGColor;
 }
 
+
+
+static BOOL wasShown = YES;
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self updateMinZoomScaleForSize:self.view.bounds.size];
+    if (wasShown) {
+        [self updateMinZoomScaleForSize:self.view.bounds.size];
+    } else {
+        //wasShown = YES;
+    }
 }
 
 - (IBAction)doContinue {
@@ -111,9 +118,14 @@
     CGFloat widthScale = size.width / self.imageView.bounds.size.width;
     CGFloat heightScale = size.height / self.imageView.bounds.size.height;
     CGFloat minScale = MIN(widthScale, heightScale);
-    
+    CGFloat maxScale = MAX(widthScale, heightScale);
     self.scrollView.minimumZoomScale = minScale;
     self.scrollView.zoomScale = minScale;
+
+    
+    UIImage *image = self.imageView.image;
+    if (image.imageOrientation != UIImageOrientationLeft && image.imageOrientation != UIImageOrientationRight)
+        self.scrollView.zoomScale = maxScale;
 }
 
 @end

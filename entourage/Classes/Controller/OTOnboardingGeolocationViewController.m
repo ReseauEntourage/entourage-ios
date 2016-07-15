@@ -11,6 +11,7 @@
 #import "UIView+entourage.h"
 #import "OTLocationManager.h"
 #import "NSNotification+entourage.h"
+#import "UINavigationController+entourage.h"
 
 @interface OTOnboardingGeolocationViewController()
 
@@ -24,6 +25,7 @@
     [super viewDidLoad];
     self.title = @"";
     [self addIgnoreButton];
+    [self.navigationController presentTransparentNavigationBar];
     
     [self.activateButton setupHalfRoundedCorners];
     

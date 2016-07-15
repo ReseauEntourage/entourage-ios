@@ -72,18 +72,25 @@
     return chatButton;
 }
 
-- (UIBarButtonItem*)setupCloseModal {
-    UIImage *menuImage = [[UIImage imageNamed:@"close.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+- (UIBarButtonItem*)setupCloseModalWithImageNamed:(NSString *)imageName {
     
+    UIImage *menuImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
     [menuButton setImage:menuImage];
     [menuButton setTarget:self];
     [menuButton setAction:@selector(dismissModal)];
     
     [self.navigationItem setLeftBarButtonItem:menuButton];
-//
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     return  menuButton;
+}
+
+- (UIBarButtonItem*)setupCloseModal {
+    return [self setupCloseModalWithImageNamed:@"close.png"];
+}
+
+- (UIBarButtonItem *)setupCloseModalTransparent {
+    return [self setupCloseModalWithImageNamed:@"whiteClose.png"];
 }
 
 - (UIImage*)setupLogoImage {

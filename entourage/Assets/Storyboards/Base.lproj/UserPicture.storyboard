@@ -206,13 +206,15 @@
                                     <constraint firstAttribute="width" secondItem="vq9-7x-SXS" secondAttribute="height" multiplier="1:1" id="dxE-Cx-vP1"/>
                                 </constraints>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="29I-VR-dA4">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29I-VR-dA4">
                                 <rect key="frame" x="11" y="120" width="298" height="298"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TpG-O0-eKf">
                                         <rect key="frame" x="0.0" y="0.0" width="298" height="298"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                 </subviews>
+                                <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="TpG-O0-eKf" firstAttribute="top" secondItem="29I-VR-dA4" secondAttribute="top" id="3gH-Qz-8vQ"/>
                                     <constraint firstAttribute="height" constant="298" id="88W-Lf-0rJ"/>
