@@ -19,8 +19,8 @@
     constraint.constant = keyboardOriginY - viewFrame.origin.y;
     viewFrame.size.height = keyboardOriginY - viewFrame.origin.y;
     self.frame = viewFrame;
-    [self scrollToBottom];
     self.contentInset = UIEdgeInsetsZero;
+    [self scrollToBottom];
 }
 
 - (void)scrollToBottomFromKeyboardNotification:(NSNotification*)notification {

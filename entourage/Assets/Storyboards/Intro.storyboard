@@ -961,6 +961,7 @@ Services de localisation  et activez Entourage</string>
                                 <constraints>
                                     <constraint firstItem="XJU-fl-beR" firstAttribute="top" secondItem="Ddv-uC-bkv" secondAttribute="top" constant="20" id="0ES-Sb-5Hk"/>
                                     <constraint firstItem="XJU-fl-beR" firstAttribute="centerX" secondItem="Ddv-uC-bkv" secondAttribute="centerX" id="33I-EQ-p47"/>
+                                    <constraint firstAttribute="bottom" secondItem="OgF-9U-Zl4" secondAttribute="bottom" id="6hM-D9-NYw"/>
                                     <constraint firstItem="OgF-9U-Zl4" firstAttribute="leading" secondItem="Ddv-uC-bkv" secondAttribute="leading" id="8su-rm-W7f"/>
                                     <constraint firstItem="XJU-fl-beR" firstAttribute="leading" secondItem="Ddv-uC-bkv" secondAttribute="leading" constant="16" id="A8s-6M-fTm"/>
                                     <constraint firstItem="OgF-9U-Zl4" firstAttribute="centerX" secondItem="Ddv-uC-bkv" secondAttribute="centerX" id="ArO-JY-iyf"/>
@@ -975,6 +976,7 @@ Services de localisation  et activez Entourage</string>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="33I-EQ-p47"/>
+                                        <exclude reference="u1p-bU-vmF"/>
                                         <exclude reference="wLs-GV-wTB"/>
                                     </mask>
                                 </variation>

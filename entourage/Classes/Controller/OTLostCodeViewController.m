@@ -11,6 +11,7 @@
 #import "OTConsts.h"
 // Service
 #import "OTAuthService.h"
+#import "IQKeyboardManager.h"
 
 #import "UIViewController+menu.h"
 
@@ -53,6 +54,7 @@
     [self setupCloseModal];
     [self.phoneTextField indentRight];
     [self showPhoneInput];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
 }
 
 #pragma mark - Private
