@@ -136,7 +136,7 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="urlChoosenSelector" value="pictureSelected:"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <outlet property="parent" destination="bha-JG-S7n" id="c92-Y9-uqq"/>
+                        <outlet property="owner" destination="bha-JG-S7n" id="u4J-JO-sgJ"/>
                     </connections>
                 </customObject>
             </objects>

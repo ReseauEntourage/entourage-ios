@@ -10,7 +10,7 @@
 
 @interface OTPhotoPickerBehavior : OTBehavior
 
-@property (nonatomic, weak) IBOutlet UIViewController *parent;
+@property (nonatomic, weak) IBOutlet UIViewController *owner;
 - (IBAction)pickFromGallery:(UIButton *)sender;
 - (IBAction)pickFromCamera:(UIButton *)sender;
 

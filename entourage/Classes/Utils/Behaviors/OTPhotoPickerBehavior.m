@@ -29,7 +29,7 @@
     controller.modalPresentationStyle = UIModalPresentationCurrentContext;
     controller.sourceType = sourceType;
     controller.delegate = self;
-    [self.parent presentViewController:controller animated:YES completion:nil];
+    [self.owner presentViewController:controller animated:YES completion:nil];
 }
 
 #pragma mark - UIImagePickerDelegate
@@ -47,8 +47,8 @@
 
 - (void)notifyPictureSelected:(UIImage *)image {
     SEL selector = NSSelectorFromString(self.urlChoosenSelector);
-    if ([self.parent respondsToSelector:selector])
-        ((void (*)(id, SEL, UIImage *))[self.parent methodForSelector:selector])(self.parent, selector, image);
+    if ([self.owner respondsToSelector:selector])
+        ((void (*)(id, SEL, UIImage *))[self.owner methodForSelector:selector])(self.owner, selector, image);
 }
 
 @end

@@ -84,7 +84,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="328" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJA-IP-QlI" customClass="OTFilterRadioButton">
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJA-IP-QlI" customClass="OTFilterRadioButton">
                                                     <rect key="frame" x="72" y="20" width="48" height="48"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <state key="normal" title="24H" backgroundImage="24HInactive">
@@ -102,7 +102,7 @@
                                                         <action selector="timeframeButtonClicked:" destination="sar-e7-wDz" eventType="touchUpInside" id="9IA-As-kHz"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVf-DG-Xrr" customClass="OTFilterRadioButton">
+                                                <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVf-DG-Xrr" customClass="OTFilterRadioButton">
                                                     <rect key="frame" x="140" y="20" width="48" height="48"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <state key="normal" title="2J" backgroundImage="24HInactive">
@@ -120,7 +120,7 @@
                                                         <action selector="timeframeButtonClicked:" destination="sar-e7-wDz" eventType="touchUpInside" id="bB6-bf-eOm"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QM-U6-9ZW" customClass="OTFilterRadioButton">
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QM-U6-9ZW" customClass="OTFilterRadioButton">
                                                     <rect key="frame" x="208" y="20" width="48" height="48"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <state key="normal" title="3J" backgroundImage="24HInactive">
