@@ -12,6 +12,7 @@
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 #import "UIStoryboard+entourage.h"
+#import "OTPhotoPickerBehavior.h"
 
 #define PREVIEW_PICTURE_SEGUE @"PreviewPictureSegue"
 
@@ -20,6 +21,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *btnFromGallery;
 @property (nonatomic, weak) IBOutlet UIButton *btnTakePicture;
 @property (nonatomic, strong) UIImage *image;
+@property (strong, nonatomic) IBOutlet OTPhotoPickerBehavior *photoPickerBehavior;
 
 @end
 
@@ -36,8 +38,8 @@
     [self.btnTakePicture setupHalfRoundedCorners];
 }
 
-- (void) pictureSelected:(UIImage *)image {
-    self.image = image;
+- (IBAction)pictureSelected:(id)sender {
+    self.image = self.photoPickerBehavior.selectedImage;
     [self performSegueWithIdentifier:PREVIEW_PICTURE_SEGUE sender:self];
 }
 

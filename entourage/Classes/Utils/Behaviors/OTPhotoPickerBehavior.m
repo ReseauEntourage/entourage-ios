@@ -38,7 +38,6 @@
     UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self notifyPictureSelected:img];
     [picker dismissViewControllerAnimated:YES completion:nil];
-    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -46,9 +45,8 @@
 }
 
 - (void)notifyPictureSelected:(UIImage *)image {
-    SEL selector = NSSelectorFromString(self.urlChoosenSelector);
-    if ([self.owner respondsToSelector:selector])
-        ((void (*)(id, SEL, UIImage *))[self.owner methodForSelector:selector])(self.owner, selector, image);
+    self.selectedImage = image;
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 @end

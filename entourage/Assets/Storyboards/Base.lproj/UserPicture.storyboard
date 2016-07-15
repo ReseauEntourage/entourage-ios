@@ -126,16 +126,15 @@
                     <connections>
                         <outlet property="btnFromGallery" destination="ma1-OC-ZEH" id="gMy-2R-MiY"/>
                         <outlet property="btnTakePicture" destination="XBY-w9-wlD" id="XPc-eL-EAL"/>
+                        <outlet property="photoPickerBehavior" destination="aO6-e6-oYq" id="sZZ-zL-6n7"/>
                         <segue destination="xml-Uv-sbT" kind="show" identifier="PreviewPictureSegue" id="9bG-Kh-Ax2"/>
                         <segue destination="tKv-lS-TmP" kind="show" identifier="SkipPreviewSegue" id="k7U-3x-y4I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v8G-gr-vqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="aO6-e6-oYq" customClass="OTPhotoPickerBehavior">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="urlChoosenSelector" value="pictureSelected:"/>
-                    </userDefinedRuntimeAttributes>
                     <connections>
+                        <action selector="pictureSelected:" destination="bha-JG-S7n" eventType="valueChanged" id="lZ8-vd-uCp"/>
                         <outlet property="owner" destination="bha-JG-S7n" id="u4J-JO-sgJ"/>
                     </connections>
                 </customObject>

@@ -11,9 +11,9 @@
 @interface OTPhotoPickerBehavior : OTBehavior
 
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
+@property (nonatomic, strong) UIImage *selectedImage;
+
 - (IBAction)pickFromGallery:(UIButton *)sender;
 - (IBAction)pickFromCamera:(UIButton *)sender;
-
-@property (nonatomic, strong) NSString *urlChoosenSelector;
 
 @end
