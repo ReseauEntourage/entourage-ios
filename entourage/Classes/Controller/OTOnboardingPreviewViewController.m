@@ -64,13 +64,11 @@
                 [self popToProfile];
         }
         failure:^(NSError *error) {
-            [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
+            [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];
             NSLog(@"ERR: something went wrong on user picture: %@", error.description);
         }];
     } orError:^(NSError *error) {
-        NSDictionary *userInfo = [error userInfo];
-        NSString *errorMessage = [userInfo objectForKey:@"NSLocalizedDescription"];
-        [SVProgressHUD showErrorWithStatus:errorMessage];
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];
     }];
 }
 

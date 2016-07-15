@@ -252,3 +252,6 @@
 // Navigation Bar Buttons
 "validate" = "Valider";
 "edit" = "Editer";
+
+// User profile
+"user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";
