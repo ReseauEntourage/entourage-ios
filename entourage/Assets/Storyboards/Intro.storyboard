@@ -812,7 +812,7 @@ Services de localisation  et activez Entourage</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ddv-uC-bkv">
-                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
+                                <rect key="frame" x="-4" y="20" width="328" height="379"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connexion" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJU-fl-beR">
                                         <rect key="frame" x="16" y="20" width="280" height="35"/>
@@ -836,7 +836,7 @@ Services de localisation  et activez Entourage</string>
                                         </state>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OgF-9U-Zl4" userLabel="Black View">
-                                        <rect key="frame" x="0.0" y="130" width="328" height="270"/>
+                                        <rect key="frame" x="0.0" y="130" width="328" height="249"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir numéro " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dhy-dj-PYm">
                                                 <rect key="frame" x="16" y="0.0" width="296" height="50"/>
@@ -943,7 +943,7 @@ Services de localisation  et activez Entourage</string>
                                             <constraint firstAttribute="trailing" secondItem="dhy-dj-PYm" secondAttribute="trailing" constant="16" id="aQ2-c2-Oaa"/>
                                             <constraint firstItem="HBy-4E-HT1" firstAttribute="leading" secondItem="OgF-9U-Zl4" secondAttribute="leading" id="b52-cq-a69"/>
                                             <constraint firstItem="HBy-4E-HT1" firstAttribute="trailing" secondItem="3Ei-2m-MZj" secondAttribute="trailing" id="chF-jI-gKA"/>
-                                            <constraint firstAttribute="height" constant="270" id="js9-dl-cqP"/>
+                                            <constraint firstAttribute="height" constant="249" id="js9-dl-cqP"/>
                                             <constraint firstItem="fqc-ms-rKq" firstAttribute="top" secondItem="HBy-4E-HT1" secondAttribute="bottom" constant="18" id="k6g-R5-W2M"/>
                                             <constraint firstItem="3Ei-2m-MZj" firstAttribute="leading" secondItem="OgF-9U-Zl4" secondAttribute="leading" constant="16" id="lZj-Qj-OKG"/>
                                             <constraint firstItem="dhy-dj-PYm" firstAttribute="top" secondItem="OgF-9U-Zl4" secondAttribute="top" id="tw6-V1-uGU"/>
@@ -968,6 +968,7 @@ Services de localisation  et activez Entourage</string>
                                     <constraint firstItem="pKc-kY-NLM" firstAttribute="top" secondItem="XJU-fl-beR" secondAttribute="bottom" constant="25" id="X1b-fb-RpI"/>
                                     <constraint firstItem="pKc-kY-NLM" firstAttribute="centerX" secondItem="Ddv-uC-bkv" secondAttribute="centerX" constant="4" id="iJq-rn-h0V"/>
                                     <constraint firstAttribute="trailing" secondItem="OgF-9U-Zl4" secondAttribute="trailing" id="m4h-4O-Lyn"/>
+                                    <constraint firstAttribute="height" constant="379" id="skE-g0-pyY"/>
                                     <constraint firstAttribute="bottom" secondItem="OgF-9U-Zl4" secondAttribute="bottom" constant="176" id="u1p-bU-vmF"/>
                                     <constraint firstItem="OgF-9U-Zl4" firstAttribute="top" secondItem="pKc-kY-NLM" secondAttribute="bottom" constant="20" id="wLs-GV-wTB"/>
                                 </constraints>
@@ -986,13 +987,22 @@ Services de localisation  et activez Entourage</string>
                             <constraint firstAttribute="trailingMargin" secondItem="Ddv-uC-bkv" secondAttribute="trailing" constant="-20" id="qwe-ge-sHb"/>
                             <constraint firstItem="Ddv-uC-bkv" firstAttribute="centerX" secondItem="l3w-HK-BKf" secondAttribute="centerX" id="rpR-wT-bvG"/>
                             <constraint firstItem="8IX-Sx-Dln" firstAttribute="top" secondItem="Ddv-uC-bkv" secondAttribute="bottom" id="xl7-pS-4dT"/>
+                            <constraint firstItem="Ddv-uC-bkv" firstAttribute="top" secondItem="wX3-SU-kbf" secondAttribute="bottom" id="yQT-yl-ALM"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ANB-VL-5S5"/>
+                                <exclude reference="xl7-pS-4dT"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="s68-PV-7yo"/>
                     <connections>
+                        <outlet property="heightContraint" destination="skE-g0-pyY" id="zfW-Ui-X3q"/>
                         <outlet property="lostCodeButton" destination="v59-br-8WY" id="PZc-OS-8kY"/>
                         <outlet property="passwordTextField" destination="3Ei-2m-MZj" id="jr9-Z1-8VF"/>
                         <outlet property="phoneTextField" destination="dhy-dj-PYm" id="WS8-PO-wZJ"/>
+                        <outlet property="scrollView" destination="Ddv-uC-bkv" id="zPI-M0-0qw"/>
                         <outlet property="validateButton" destination="fqc-ms-rKq" id="evW-HB-3JW"/>
                         <outlet property="whiteBackground" destination="OgF-9U-Zl4" id="aDb-cj-feu"/>
                         <segue destination="tqA-lH-zih" kind="show" identifier="OTTutorial" id="zoi-oS-X1h"/>
