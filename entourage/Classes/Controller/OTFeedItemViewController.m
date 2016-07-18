@@ -29,6 +29,7 @@
 #import "OTUser.h"
 #import "OTFeedItemFactory.h"
 #import "OTStateInfoDelegate.h"
+#import "OTSpeechBehavior.h"
 
 // Services
 #import "OTTourService.h"
@@ -64,22 +65,17 @@ typedef NS_ENUM(unsigned) {
 @property (nonatomic, weak) IBOutlet UIView *timelineView;
 @property (nonatomic, weak) IBOutlet OTFeedItemInfoView *infoView;
 
-
-
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UITextView *chatTextView;
 @property (nonatomic, weak) IBOutlet UIView *chatToolbar;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *distanceToSummaryConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *chatHConstraint;
-@property (nonatomic, strong) IBOutlet NSLayoutConstraint *recordButtonWidthConstraint;
-@property (nonatomic, strong) IBOutlet NSLayoutConstraint *recordButtonDynamicWidthConstraint;
+
+@property (nonatomic, strong) IBOutlet OTSpeechBehavior *chatSpeechBehavior;
 
 @property (nonatomic, strong) NSMutableArray *timelinePoints;
 @property (nonatomic, strong) NSDictionary *timelineCardsClassesCellsIDs;
-
-@property (nonatomic, weak) IBOutlet UIButton *recordButton;
-@property (nonatomic) BOOL isRecording;
 
 @end
 
@@ -90,6 +86,8 @@ typedef NS_ENUM(unsigned) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.chatSpeechBehavior initialize];
     self.title = [[_feedItem navigationTitle] uppercaseString];
     [self setupCloseModal];
     [self setupMoreButtons];
@@ -134,8 +132,6 @@ typedef NS_ENUM(unsigned) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.isRecording = NO;
-    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[self class]];
     
@@ -152,12 +148,9 @@ typedef NS_ENUM(unsigned) {
 - (void)viewDidAppear:(BOOL)animated {
     
     if (IS_ACCEPTED) {
-        [self updateRecordButton];
-        // to be removed on 1.9
-        //[OTSpeechKitManager setup];
+        [self.chatSpeechBehavior updateRecordButton];
 #warning remove existing items.
         [self initializeTimelinePoints];
-        
         if ([self.feedItem isKindOfClass:[OTTour class]]) {
            
             [self getTourUsersJoins];
@@ -168,13 +161,10 @@ typedef NS_ENUM(unsigned) {
             [self getEntourageMessages];
         }
     }
-
 }
-
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -196,79 +186,8 @@ typedef NS_ENUM(unsigned) {
     self.infoView.hidden = NO;
     [self.timelineButton setSelected:NO];
     [self.infoButton setSelected:YES];
-    
     self.chatToolbar.hidden = YES;
-    
     [self.infoView setupWithFeedItem:self.feedItem];
-}
-
-- (IBAction)startStopRecording:(id)sender {
-    
-    if (self.chatTextView.text.length) {
-        [self sendMessage];
-    } else {
-        [self.recordButton setEnabled:NO];
-        if (!self.isRecording) {
-            [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
-                if (granted) {
-                    // Microphone enabled code
-                    _recognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType
-                                                           detection:SKShortEndOfSpeechDetection
-                                                            language:@"fra-FRA"
-                                                            delegate:self];
-                }
-                else {
-                    // Microphone disabled code
-                    NSLog(@"Mic not enabled!");
-                    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"microphoneNotEnabled", nil)
-                                                message:NSLocalizedString(@"promptForMicrophone", nil)
-                                               delegate:nil
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil] show];
-                }
-            }];
-        } else {
-            [_recognizer stopRecording];
-        }
-    }
-}
-
-/**************************************************************************************************/
-#pragma mark - Voice recognition methods
-
-- (void)recognizer:(SKRecognizer *)recognizer didFinishWithResults:(SKRecognition *)results {
-    NSLog(@"%@", @"Finish with results");
-    if (results.results.count != 0) {
-        self.chatTextView.textColor = [UIColor blackColor];
-        NSString *text = self.chatTextView.text;
-        NSString *result = [results.results objectAtIndex:0];
-        if (text.length == 0) {
-            [self.chatTextView setText:result];
-        } else {
-            [self.chatTextView setText:[NSString stringWithFormat:@"%@ %@", text, [result lowercaseString]]];
-        }
-    }
-    [self updateRecordButton];
-}
-
-- (void)recognizer:(SKRecognizer *)recognizer didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion {
-    NSLog( @"Finish with error %@. Suggestion: %@", error.description, suggestion);
-    [self updateRecordButton];
-}
-
-- (void)recognizerDidBeginRecording:(SKRecognizer *)recognizer {
-    NSLog(@"%@", @"Begin recording");
-    [self.recordButton setEnabled:YES];
-    self.isRecording = YES;
-    [self updateRecordButton];
-}
-
-- (void)recognizerDidFinishRecording:(SKRecognizer *)recognizer {
-    NSLog(@"%@", @"Finish recording");
-   
-    [self.recordButton setEnabled:YES];
-    self.isRecording = NO;
-    [self updateRecordButton];
 }
 
 /**************************************************************************************************/
@@ -418,31 +337,9 @@ typedef NS_ENUM(unsigned) {
     [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.chatTextView.text withSuccess:^(OTTourMessage *message) {
         self.chatTextView.text = @"";
         [self updateTableViewAddingTimelinePoints:@[message]];
-        [self updateRecordButton];
+        [self.chatSpeechBehavior updateRecordButton];
     } orFailure:^(NSError *error) {
     }];
-}
-
-- (void)updateRecordButton {
-    if (self.isRecording) {
-        [self.recordButton setImage:[UIImage imageNamed:@"ic_action_stop_sound.png"] forState:UIControlStateNormal];
-        [self.recordButton setTitle:nil forState:UIControlStateNormal];
-        self.recordButtonWidthConstraint.active = YES;
-        self.recordButtonDynamicWidthConstraint.active = NO;
-    } else {
-        if (self.chatTextView.text.length) {
-            [self.recordButton setImage:nil forState:UIControlStateNormal];
-            [self.recordButton setTitle:OTLocalizedString(@"send") forState:UIControlStateNormal];
-            self.recordButtonWidthConstraint.active = NO;
-            self.recordButtonDynamicWidthConstraint.active = YES;
-        } else {
-            [self.recordButton setImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
-            [self.recordButton setTitle:nil forState:UIControlStateNormal];
-            self.recordButtonWidthConstraint.active = YES;
-            self.recordButtonDynamicWidthConstraint.active = NO;
-        }
-    }
-    [self.recordButton layoutIfNeeded];
 }
 
 /**************************************************************************************************/
@@ -750,8 +647,8 @@ typedef NS_ENUM(unsigned) {
 
 - (void)textViewDidChange:(UITextView *)textView {
     NSLog(@"Text view did change...");
-    [self updateRecordButton];
-    
+    [self.chatSpeechBehavior updateRecordButton];
+
     UIFont *fontText = textView.font;
     CGSize newSize = [textView.text boundingRectWithSize:CGSizeMake(224, 80)
                                                  options:(NSStringDrawingUsesLineFragmentOrigin| NSStringDrawingUsesFontLeading)

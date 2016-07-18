@@ -10,11 +10,15 @@
 #include <SpeechKit/SpeechKit.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "OTSpeechKitManager.h"
 
 @interface OTSpeechBehavior : OTBehavior
 
 @property (nonatomic, weak) IBOutlet UIButton *btnRecord;
 @property (nonatomic, weak) IBOutlet UITextView *txtOutput;
 @property (nonatomic, strong) SKRecognizer *speechRecognizer;
+
+- (void)initialize;
+- (void)updateRecordButton;
 
 @end

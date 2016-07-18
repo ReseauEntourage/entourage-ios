@@ -12,32 +12,68 @@
 @interface OTSpeechBehavior () <SpeechKitDelegate, SKRecognizerDelegate>
 
 @property (nonatomic) BOOL isRecording;
+@property (nonatomic, strong) NSLayoutConstraint *widthConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *widthDynamicConstraint;
 
 @end
 
 @implementation OTSpeechBehavior
 
-- (void)awakeFromNib {
+-(void) initialize {
+    // to be removed on 1.9
+    //[OTSpeechKitManager setup];
+    for(NSLayoutConstraint *constraint in self.btnRecord.constraints) {
+        if(constraint.firstAttribute == NSLayoutAttributeWidth && constraint.secondAttribute == NSLayoutAttributeNotAnAttribute) {
+            self.widthConstraint = constraint;
+            break;
+        }
+    }
+    if(!self.widthConstraint)
+        [NSException raise:@"Constrint not found" format:@"No width constraint on record button"];
+    self.widthDynamicConstraint = [NSLayoutConstraint constraintWithItem:self.btnRecord attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:self.widthConstraint.constant];
+    self.widthDynamicConstraint.active = NO;
+    [self.btnRecord addConstraint:self.widthDynamicConstraint];
     self.isRecording = NO;
     [self.btnRecord addTarget:self action:@selector(toggleRecording:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (IBAction)toggleRecording:(id)sender {
-    if (self.txtOutput.text.length) {
-        //[self sendMessage];
+- (void)updateRecordButton {
+    self.widthConstraint.active = YES;
+    if (self.isRecording) {
+        [self.btnRecord setImage:[UIImage imageNamed:@"ic_action_stop_sound.png"] forState:UIControlStateNormal];
+        [self.btnRecord setTitle:nil forState:UIControlStateNormal];
     } else {
+        [self.btnRecord setImage:nil forState:UIControlStateNormal];
+        if (self.txtOutput.text.length) {
+            [self.btnRecord setTitle:OTLocalizedString(@"send") forState:UIControlStateNormal];
+            self.widthConstraint.active = NO;
+        } else
+            [self.btnRecord setImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
+    }
+    self.widthDynamicConstraint.active = !self.widthConstraint.active;
+    [self.btnRecord layoutIfNeeded];
+}
+
+- (IBAction)toggleRecording:(id)sender {
+    if (self.txtOutput.text.length)
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
+    else {
         [self.btnRecord setEnabled:NO];
         if (!self.isRecording)
             [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
-                if (granted)
+                BOOL ok = NO;
+                if (granted) {
                     // Microphone enabled code
-                    _speechRecognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType detection:SKShortEndOfSpeechDetection language:@"fra-FRA" delegate:self];
-                else
+                    self.speechRecognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType detection:SKShortEndOfSpeechDetection language:@"fra-FRA" delegate:self];
+                    if(self.speechRecognizer)
+                        ok = YES;
+                }
+                if(!granted || !ok)
                     // Microphone disabled code
                     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"microphoneNotEnabled", nil) message:NSLocalizedString(@"promptForMicrophone", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             }];
         else
-            [_speechRecognizer stopRecording];
+            [self.speechRecognizer stopRecording];
     }
 }
 
@@ -75,27 +111,6 @@
     [self.btnRecord setEnabled:YES];
     self.isRecording = NO;
     [self updateRecordButton];
-}
-
-#pragma mark - Private Methods
-
-- (void)updateRecordButton {
-    if (self.isRecording) {
-        [self.btnRecord setImage:[UIImage imageNamed:@"ic_action_stop_sound.png"] forState:UIControlStateNormal];
-        [self.btnRecord setTitle:nil forState:UIControlStateNormal];
-        //self.recordButtonWidthConstraint.active = YES;
-    } else {
-        [self.btnRecord setImage:nil forState:UIControlStateNormal];
-        if (self.txtOutput.text.length) {
-            [self.btnRecord setTitle:OTLocalizedString(@"send") forState:UIControlStateNormal];
-            //self.recordButtonWidthConstraint.active = NO;
-        } else {
-            [self.btnRecord setImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
-            //self.recordButtonWidthConstraint.active = YES;
-        }
-    }
-    //self.recordButtonDynamicWidthConstraint.active = !self.recordButtonWidthConstraint.active;
-    [self.btnRecord layoutIfNeeded];
 }
 
 @end

@@ -451,14 +451,10 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="22" id="CXJ-K4-HxH"/>
                                                     <constraint firstAttribute="height" constant="22" id="ikx-NL-ctU"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="22" id="xd9-wb-D0w"/>
                                                 </constraints>
                                                 <state key="normal" image="mic">
                                                     <color key="titleColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="startStopRecording:" destination="Hn0-z2-6tI" eventType="touchUpInside" id="6HD-df-gaZ"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.97647058963775635" green="0.97647058963775635" blue="0.97647058963775635" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -510,15 +506,13 @@
                     <connections>
                         <outlet property="bottomConstraint" destination="WK1-Zs-1za" id="t8w-7f-Shh"/>
                         <outlet property="chatHConstraint" destination="a5G-fI-GU7" id="uv3-tA-Vjc"/>
+                        <outlet property="chatSpeechBehavior" destination="UDc-Gv-eQH" id="8m7-sg-OpQ"/>
                         <outlet property="chatTextView" destination="wn1-vT-qg7" id="XGn-dx-wq6"/>
                         <outlet property="chatToolbar" destination="kAn-xh-GvT" id="w2j-S3-OcK"/>
                         <outlet property="distanceToSummaryConstraint" destination="NO1-eK-zao" id="vZ0-go-P5l"/>
                         <outlet property="feedSummaryView" destination="79Y-jZ-SoG" id="9Sz-i4-p9E"/>
                         <outlet property="infoButton" destination="C4C-uC-Fku" id="ePj-Dv-mur"/>
                         <outlet property="infoView" destination="LGu-ud-nIR" id="S3l-vo-ajI"/>
-                        <outlet property="recordButton" destination="eIr-gk-lDN" id="lcq-9x-EYU"/>
-                        <outlet property="recordButtonDynamicWidthConstraint" destination="xd9-wb-D0w" id="bEp-3A-ID4"/>
-                        <outlet property="recordButtonWidthConstraint" destination="CXJ-K4-HxH" id="JBr-2y-v5l"/>
                         <outlet property="tableView" destination="CGA-by-Pfy" id="3FD-W1-cWm"/>
                         <outlet property="timelineButton" destination="WIm-sB-VRn" id="niq-a1-s6Z"/>
                         <outlet property="timelineView" destination="aEN-VY-Idz" id="VxA-xC-AP8"/>
@@ -528,6 +522,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRT-27-ZJ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="UDc-Gv-eQH" customClass="OTSpeechBehavior">
+                    <connections>
+                        <action selector="sendMessage" destination="Hn0-z2-6tI" eventType="valueChanged" id="49H-mR-qtB"/>
+                        <outlet property="btnRecord" destination="eIr-gk-lDN" id="NsZ-mC-AAB"/>
+                        <outlet property="txtOutput" destination="wn1-vT-qg7" id="Ebe-T0-oin"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1826" y="945"/>
         </scene>
