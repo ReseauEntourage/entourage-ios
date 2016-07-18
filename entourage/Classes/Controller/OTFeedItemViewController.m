@@ -414,34 +414,13 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (IBAction)sendMessage {
-    
     [self.chatTextView resignFirstResponder];
-    if ([self.feedItem isKindOfClass:[OTTour class]]) {
-        OTTour *tour = (OTTour *)self.feedItem;
-        [[OTTourService new] sendMessage:self.chatTextView.text
-                                  onTour:tour
-                                 success:^(OTTourMessage * message) {
-                                     NSLog(@"CHAT %@", message.text);
-                                     self.chatTextView.text = @"";
-                                     [self updateTableViewAddingTimelinePoints:@[message]];
-                                     [self updateRecordButton];
-                                 } failure:^(NSError *error) {
-                                     NSLog(@"CHATerr: %@", error.description);
-                                 }];
-    } else {
-        OTEntourage *entourage = (OTEntourage *)self.feedItem;
-        [[OTEntourageService new] sendMessage:self.chatTextView.text
-                                  onEntourage:entourage
-                                 success:^(OTTourMessage * message) {
-                                     NSLog(@"CHAT %@", message.text);
-                                     self.chatTextView.text = @"";
-                                     [self updateTableViewAddingTimelinePoints:@[message]];
-                                     [self updateRecordButton];
-                                 } failure:^(NSError *error) {
-                                     NSLog(@"CHATerr: %@", error.description);
-                                 }];
-
-    }
+    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.chatTextView.text withSuccess:^(OTTourMessage *message) {
+        self.chatTextView.text = @"";
+        [self updateTableViewAddingTimelinePoints:@[message]];
+        [self updateRecordButton];
+    } orFailure:^(NSError *error) {
+    }];
 }
 
 - (void)updateRecordButton {

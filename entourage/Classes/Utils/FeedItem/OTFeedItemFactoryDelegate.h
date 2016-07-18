@@ -10,10 +10,12 @@
 #import "OTFeedItem.h"
 #import "OTStateTransitionDelegate.h"
 #import "OTStateInfoDelegate.h"
+#import "OTMessagingDelegate.h"
 
 @protocol OTFeedItemFactoryDelegate <NSObject>
 
 - (id<OTStateTransitionDelegate>)getStateTransition;
 - (id<OTStateInfoDelegate>)getStateInfo;
+- (id<OTMessagingDelegate>)getMessaging;
 
 @end
