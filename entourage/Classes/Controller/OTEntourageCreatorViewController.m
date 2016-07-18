@@ -18,6 +18,8 @@
 #import "UIViewController+menu.h"
 #import "UITextField+indentation.h"
 
+#import "OTSpeechBehavior.h"
+
 // Progress HUD
 #import "SVProgressHUD.h"
 
@@ -27,6 +29,9 @@
 @property (nonatomic, weak) IBOutlet OTTextView *titleTextView;
 @property (nonatomic, weak) IBOutlet OTTextView *descriptionTextView;
 
+@property (nonatomic, weak) IBOutlet OTSpeechBehavior *titleSpeechBehavior;
+@property (nonatomic, weak) IBOutlet OTSpeechBehavior *descriptionSpeechBehavior;
+
 @end
 
 
@@ -35,7 +40,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    [self.titleSpeechBehavior initialize];
+    [self.descriptionSpeechBehavior initialize];
     [self setupCloseModal];
     
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"validate")

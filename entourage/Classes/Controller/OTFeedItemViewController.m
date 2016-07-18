@@ -72,7 +72,7 @@ typedef NS_ENUM(unsigned) {
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *chatHConstraint;
 
-@property (nonatomic, strong) IBOutlet OTSpeechBehavior *chatSpeechBehavior;
+@property (nonatomic, weak) IBOutlet OTSpeechBehavior *chatSpeechBehavior;
 
 @property (nonatomic, strong) NSMutableArray *timelinePoints;
 @property (nonatomic, strong) NSDictionary *timelineCardsClassesCellsIDs;

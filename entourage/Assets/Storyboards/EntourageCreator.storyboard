@@ -74,14 +74,6 @@
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaS-cA-NpN">
-                                        <rect key="frame" x="290" y="88" width="26" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="Erz-dj-X0D"/>
-                                            <constraint firstAttribute="width" constant="26" id="c7n-zJ-pKt"/>
-                                        </constraints>
-                                        <state key="normal" image="mic"/>
-                                    </button>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8s-NE-WXH">
                                         <rect key="frame" x="15" y="154" width="298" height="1"/>
                                         <color key="backgroundColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -108,14 +100,6 @@
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ff7-J0-M6b">
-                                        <rect key="frame" x="290" y="202" width="26" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="3UG-xY-EyU"/>
-                                            <constraint firstAttribute="width" constant="26" id="7pQ-Di-kKQ"/>
-                                        </constraints>
-                                        <state key="normal" image="mic"/>
-                                    </button>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ntm-E3-Q3a">
                                         <rect key="frame" x="15" y="353" width="298" height="1"/>
                                         <color key="backgroundColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -123,6 +107,22 @@
                                             <constraint firstAttribute="height" constant="1" id="wT3-nu-VKy"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaS-cA-NpN">
+                                        <rect key="frame" x="290" y="88" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="Erz-dj-X0D"/>
+                                            <constraint firstAttribute="width" constant="26" id="c7n-zJ-pKt"/>
+                                        </constraints>
+                                        <state key="normal" image="mic"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ff7-J0-M6b">
+                                        <rect key="frame" x="290" y="202" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="3UG-xY-EyU"/>
+                                            <constraint firstAttribute="width" constant="26" id="7pQ-Di-kKQ"/>
+                                        </constraints>
+                                        <state key="normal" image="mic"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
@@ -163,12 +163,26 @@
                     <navigationItem key="navigationItem" id="6a8-wr-eGG"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="descriptionSpeechBehavior" destination="WHP-f1-Giq" id="bqz-13-pop"/>
                         <outlet property="descriptionTextView" destination="HZx-CX-XAj" id="lqv-yn-ewZ"/>
                         <outlet property="locationButton" destination="TMq-vF-SkB" id="mAT-hP-ehE"/>
+                        <outlet property="titleSpeechBehavior" destination="E8P-ny-BW9" id="uGc-17-YT1"/>
                         <outlet property="titleTextView" destination="zAO-qi-LuA" id="zJ9-Kb-Xpx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S0x-1A-brf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="E8P-ny-BW9" userLabel="Title Speech Behavior" customClass="OTSpeechBehavior">
+                    <connections>
+                        <outlet property="btnRecord" destination="iaS-cA-NpN" id="AMP-p2-Gkq"/>
+                        <outlet property="txtOutput" destination="zAO-qi-LuA" id="2F7-ZT-XBT"/>
+                    </connections>
+                </customObject>
+                <customObject id="WHP-f1-Giq" userLabel="Description Speech Behavior" customClass="OTSpeechBehavior">
+                    <connections>
+                        <outlet property="btnRecord" destination="ff7-J0-M6b" id="e2x-XZ-HVN"/>
+                        <outlet property="txtOutput" destination="HZx-CX-XAj" id="X3r-tK-CQA"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="821" y="1490"/>
         </scene>
