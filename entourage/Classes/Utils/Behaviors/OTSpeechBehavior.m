@@ -19,7 +19,7 @@
 
 @implementation OTSpeechBehavior
 
--(void) initialize {
+- (void)initialize {
     // to be removed on 1.9
     //[OTSpeechKitManager setup];
     for(NSLayoutConstraint *constraint in self.btnRecord.constraints) {
@@ -34,7 +34,7 @@
     self.widthDynamicConstraint.active = NO;
     [self.btnRecord addConstraint:self.widthDynamicConstraint];
     self.isRecording = NO;
-    [self.btnRecord addTarget:self action:@selector(toggleRecording:) forControlEvents:UIControlEventTouchUpInside];
+    [self.btnRecord addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)updateRecordButton {
@@ -54,7 +54,7 @@
     [self.btnRecord layoutIfNeeded];
 }
 
-- (IBAction)toggleRecording:(id)sender {
+- (void)toggleRecording {
     if (self.txtOutput.text.length)
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     else {
