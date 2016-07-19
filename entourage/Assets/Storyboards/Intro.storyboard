@@ -158,15 +158,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="V4v-la-W6J">
-                                <rect key="frame" x="250" y="120" width="100" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="V4v-la-W6J">
+                                <rect key="frame" x="250" y="76" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="RSB-4b-qZM"/>
                                     <constraint firstAttribute="width" constant="100" id="lqD-S5-ggd"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4XA-xt-gD9">
-                                <rect key="frame" x="0.0" y="234" width="600" height="72"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4XA-xt-gD9">
+                                <rect key="frame" x="0.0" y="190" width="600" height="72"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contactez votre association." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9J9-4F-R9T">
                                         <rect key="frame" x="4" y="52" width="592" height="18"/>
@@ -200,8 +200,8 @@ dans notre base de données.</string>
                                     <constraint firstAttribute="trailing" secondItem="9J9-4F-R9T" secondAttribute="trailing" constant="4" id="z0l-F7-j7n"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" restorationIdentifier="InputContainer" translatesAutoresizingMaskIntoConstraints="NO" id="E2h-cz-qap">
-                                <rect key="frame" x="0.0" y="276" width="600" height="123"/>
+                            <view contentMode="scaleToFill" restorationIdentifier="InputContainer" translatesAutoresizingMaskIntoConstraints="NO" id="E2h-cz-qap">
+                                <rect key="frame" x="0.0" y="232" width="600" height="123"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir votre numéro de téléphone" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPw-Yb-coV">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
@@ -261,8 +261,8 @@ dans notre base de données.</string>
                                     <constraint firstItem="kPw-Yb-coV" firstAttribute="leading" secondItem="E2h-cz-qap" secondAttribute="leading" id="xZK-KY-sRE"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" restorationIdentifier="SMSContainer" translatesAutoresizingMaskIntoConstraints="NO" id="Jdk-ly-nld">
-                                <rect key="frame" x="-4" y="276" width="608" height="160"/>
+                            <view contentMode="scaleToFill" restorationIdentifier="SMSContainer" translatesAutoresizingMaskIntoConstraints="NO" id="Jdk-ly-nld">
+                                <rect key="frame" x="-4" y="232" width="608" height="160"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir le code de vérification reçu par SMS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3r-fb-Fjw">
                                         <rect key="frame" x="0.0" y="0.0" width="608" height="50"/>

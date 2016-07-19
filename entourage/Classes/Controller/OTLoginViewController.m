@@ -118,10 +118,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     
 #endif
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showKeyboard:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -274,7 +271,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 }
 
 - (void)showKeyboard:(NSNotification*)notification {
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint andMarker:self.phoneTextField];
 }
 
 @end

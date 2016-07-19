@@ -12,5 +12,6 @@
 
 - (void)scrollToBottomFromKeyboardNotification:(NSNotification*)notification andHeightContraint:(NSLayoutConstraint*)constraint;
 - (void)scrollToBottomFromKeyboardNotification:(NSNotification*)notification;
+- (void)scrollToBottomFromKeyboardNotification:(NSNotification*)notification andHeightContraint:(NSLayoutConstraint*)constraint andMarker:(UIView *)control;
 
 @end

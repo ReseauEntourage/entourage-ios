@@ -1793,8 +1793,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Razvan Furca (SVNLDJ97TL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Razvan Furca (SVNLDJ97TL)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1844,7 +1844,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4f6f360b-b6fe-40f9-bb7b-9704ebb47449";
+				PROVISIONING_PROFILE = "3a4f9c19-3296-4fe3-9d31-9bab6146269b";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
