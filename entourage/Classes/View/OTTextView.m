@@ -84,6 +84,10 @@
     
 }
 
+- (void)updateAfterSpeech {
+    [self showSmallPlaceholder];
+}
+
 - (void)myTextBeginChange {
     [self showSmallPlaceholder];
     //NSLog (@"%d/%d", (int)self.text.length, MAX_LENGTH);

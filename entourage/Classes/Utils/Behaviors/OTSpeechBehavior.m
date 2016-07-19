@@ -8,8 +8,9 @@
 
 #import "OTSpeechBehavior.h"
 #import "OTConsts.h"
+#import "OTTextView.h"
 
-@interface OTSpeechBehavior () <SpeechKitDelegate, SKRecognizerDelegate>
+@interface OTSpeechBehavior () <SKRecognizerDelegate>
 
 @property (nonatomic) BOOL isRecording;
 @property (nonatomic, strong) NSLayoutConstraint *widthConstraint;
@@ -63,7 +64,7 @@
 }
 
 - (void)toggleRecording {
-    if (self.txtOutput.text.length)
+    if (!self.twoState && self.txtOutput.text.length)
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     else {
         [self.btnRecord setEnabled:NO];
@@ -92,6 +93,8 @@
         } else {
             [self.txtOutput setText:[NSString stringWithFormat:@"%@ %@", text, [result lowercaseString]]];
         }
+        if([self.txtOutput class] == [OTTextView class])
+            [((OTTextView *)self.txtOutput) updateAfterSpeech];
     }
     [self updateRecordButton];
 }
