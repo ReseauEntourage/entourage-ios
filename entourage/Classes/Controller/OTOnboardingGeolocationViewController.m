@@ -78,10 +78,6 @@
 
 - (IBAction)doContinue {
     [self promptUserForLocationUsage];
-//#if SKIP_ONBOARDING_REQUESTS
-//    [self performSegueWithIdentifier:@"GeoToNotificationsSegue" sender:self];
-//    return;
-//#endif
 }
 
 @end

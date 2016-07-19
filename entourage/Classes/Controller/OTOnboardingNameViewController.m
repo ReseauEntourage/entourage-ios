@@ -66,10 +66,6 @@
 
 
 - (IBAction)doContinue {
-#if SKIP_ONBOARDING_REQUESTS
-    [self performSegueWithIdentifier:ADD_PICTURE_SEGUE sender:nil];
-    return;
-#endif
     NSString *firstName = self.firstNameTextField.text;
     NSString *lastName = self.lastNameTextField.text;
     

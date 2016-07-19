@@ -57,10 +57,6 @@
 }
 
 - (IBAction)doContinue {
-#if SKIP_ONBOARDING_REQUESTS 
-    [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
-    return;
-#endif
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     
     NSString *phone = self.phoneTextField.text;

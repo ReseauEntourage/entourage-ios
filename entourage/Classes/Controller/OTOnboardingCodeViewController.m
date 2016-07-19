@@ -74,11 +74,6 @@
 }
 
 - (IBAction)doContinue {
-#if SKIP_ONBOARDING_REQUESTS
-    [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:nil];
-    return;
-#endif
-    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *phone = [userDefaults currentUser].phone;
     NSString *code = self.codeTextField.text;

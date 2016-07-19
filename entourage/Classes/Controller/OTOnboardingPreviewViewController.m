@@ -51,10 +51,6 @@ static BOOL wasShown = YES;
 }
 
 - (IBAction)doContinue {
-#if SKIP_ONBOARDING_REQUESTS
-    [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
-    return;
-#endif
     UIImage *finalImage = [self cropVisibleArea];
     [SVProgressHUD show];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;

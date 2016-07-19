@@ -63,10 +63,6 @@
 
 
 - (IBAction)doContinue {
-#if SKIP_ONBOARDING_REQUESTS
-    [self performSegueWithIdentifier:@"EmailToNameSegue" sender:nil];
-    return;
-#endif
     NSString *email = self.emailTextField.text;
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     currentUser.email = email;

@@ -1970,9 +1970,9 @@ vérification</string>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="B30-m1-9ov"/>
                                                 <exclude reference="Snq-uV-cVi"/>
                                                 <exclude reference="ugG-Dr-zH8"/>
-                                                <exclude reference="B30-m1-9ov"/>
                                             </mask>
                                         </variation>
                                     </label>
@@ -2030,8 +2030,8 @@ saisissez votre numéro de portable.</string>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="Krh-bO-b1M"/>
                                                 <exclude reference="DUy-F9-IH7"/>
+                                                <exclude reference="Krh-bO-b1M"/>
                                             </mask>
                                         </variation>
                                     </view>
