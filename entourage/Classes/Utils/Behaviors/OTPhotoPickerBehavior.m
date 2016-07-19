@@ -36,7 +36,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-    [self notifyPictureSelected:img];
+    [self notifyPictureSelected:[self rotateImage:img]];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -47,6 +47,17 @@
 - (void)notifyPictureSelected:(UIImage *)image {
     self.selectedImage = image;
     [self sendActionsForControlEvents:UIControlEventValueChanged];
+}
+
+- (UIImage *)rotateImage:(UIImage *)img {
+    if (img.imageOrientation == UIImageOrientationUp)
+        return img;
+    
+    UIGraphicsBeginImageContextWithOptions(img.size, NO, img.scale);
+    [img drawInRect:(CGRect){0, 0, img.size}];
+    UIImage *normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return normalizedImage;
 }
 
 @end
