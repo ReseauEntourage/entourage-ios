@@ -17,6 +17,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *btnRecord;
 @property (nonatomic, weak) IBOutlet UITextView *txtOutput;
 @property (nonatomic, strong) SKRecognizer *speechRecognizer;
+@property (nonatomic) BOOL twoState;
 
 - (void)initialize;
 - (void)updateRecordButton;

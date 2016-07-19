@@ -172,12 +172,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S0x-1A-brf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="E8P-ny-BW9" userLabel="Title Speech Behavior" customClass="OTSpeechBehavior">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="twoState" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="btnRecord" destination="iaS-cA-NpN" id="AMP-p2-Gkq"/>
                         <outlet property="txtOutput" destination="zAO-qi-LuA" id="2F7-ZT-XBT"/>
                     </connections>
                 </customObject>
                 <customObject id="WHP-f1-Giq" userLabel="Description Speech Behavior" customClass="OTSpeechBehavior">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="twoState" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="btnRecord" destination="ff7-J0-M6b" id="e2x-XZ-HVN"/>
                         <outlet property="txtOutput" destination="HZx-CX-XAj" id="X3r-tK-CQA"/>

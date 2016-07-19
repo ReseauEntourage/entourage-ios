@@ -19,6 +19,14 @@
 
 @implementation OTSpeechBehavior
 
+- (id)init {
+    self = [super init];
+    if(self) {
+        self.twoState = NO;
+    }
+    return self;
+}
+
 - (void)initialize {
     // to be removed on 1.9
     //[OTSpeechKitManager setup];
@@ -44,7 +52,7 @@
         [self.btnRecord setTitle:nil forState:UIControlStateNormal];
     } else {
         [self.btnRecord setImage:nil forState:UIControlStateNormal];
-        if (self.txtOutput.text.length) {
+        if (self.txtOutput.text.length > 0 && !self.twoState) {
             [self.btnRecord setTitle:OTLocalizedString(@"send") forState:UIControlStateNormal];
             self.widthConstraint.active = NO;
         } else
