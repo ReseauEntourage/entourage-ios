@@ -28,6 +28,7 @@
 "doLogin" = "Se connecter";
 "doRegenerateCode" = "Redemander un code";
 "doIgnore" = "Ignorer";
+"alreadyRegisteredMessage" = "!Phone already registered. Check SMS for code or resend!";
 
 // MenuItems
 "menu_amis" = "Amis";

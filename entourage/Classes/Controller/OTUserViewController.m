@@ -92,7 +92,6 @@ typedef NS_ENUM(NSInteger) {
                                            [SVProgressHUD dismiss];
                                            self.user = user;
                                            [self.tableView reloadData];
-                                           
                                        } failure:^(NSError *error) {
                                            [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_profile_error")];
                                            NSLog(@"@fails getting user %@", error.description);

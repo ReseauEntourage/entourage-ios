@@ -42,7 +42,7 @@
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
 #if DEBUG //TARGET_IPHONE_SIMULATOR
-    self.phoneTextField.text = @"+40723199641";
+    self.phoneTextField.text = @"+40724593579";
 #endif
     
 }
@@ -57,8 +57,7 @@
 }
 
 - (IBAction)doContinue {
-    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    
+    OTUser *currentUser = [OTUser new];
     NSString *phone = self.phoneTextField.text;
     currentUser.phone = phone;
     
@@ -74,10 +73,11 @@
             NSString *errorMessage = [error userUpdateMessage];
 #warning Create special message(code) on server-side
             if ([errorMessage isEqualToString:@"Phone n'est pas disponible"]) {
-                [SVProgressHUD dismiss];
                 [[NSUserDefaults standardUserDefaults] setCurrentUser:currentUser];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-
+                [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"alreadyRegisteredMessage")];
+                [[NSUserDefaults standardUserDefaults] setCurrentUser:currentUser];
+                [[NSUserDefaults standardUserDefaults] synchronize];
                 [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
             } else {
                 [SVProgressHUD showErrorWithStatus:errorMessage];

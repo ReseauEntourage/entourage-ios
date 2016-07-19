@@ -17,6 +17,7 @@
 #import "UIColor+entourage.h"
 #import "OTAuthService.h"
 #import "UIScrollView+entourage.h"
+#import "NSString+Validators.h"
 
 @interface OTOnboardingCodeViewController ()
 
@@ -63,14 +64,28 @@
     [self.codeTextField becomeFirstResponder];
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)doRegenerateCode {
-    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *phone = [userDefaults currentUser].phone;
+    [SVProgressHUD show];
+    [[OTAuthService new] regenerateSecretCode:phone.phoneNumberServerRepresentation
+                                      success:^(OTUser *user) {
+                                          [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
+                                      }
+                                      failure:^(NSError *error) {
+                                          [SVProgressHUD dismiss];
+                                          [[[UIAlertView alloc]
+                                            initWithTitle:OTLocalizedString(@"error") //@"Erreur"
+                                            message:OTLocalizedString(@"requestNotSent")// @"Echec lors de la demande"
+                                            delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:@"Ok",
+                                            nil] show];
+                                      }];
 }
 
 - (IBAction)doContinue {

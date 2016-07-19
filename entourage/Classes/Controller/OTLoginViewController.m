@@ -131,18 +131,13 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)viewWillDisappear:(BOOL)animated {
     UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
     UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
-    
 }
 
 /********************************************************************************/
 #pragma mark - Public Methods
 
 - (BOOL)validateForm {
-#if DEBUG
-    return YES;
-#else
     return [self.phoneTextField.text isValidPhoneNumber];
-#endif
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -205,7 +200,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     }
     return YES;
 }
-
 
 /********************************************************************************/
 #pragma mark - OTAskMoreViewControllerDelegate
