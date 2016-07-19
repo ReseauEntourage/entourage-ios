@@ -31,9 +31,9 @@
                                                 </constraints>
                                                 <string key="text">MERCI!
 
-Cette maraude étant privée,
-votre demande a été 
-transmise au créateur. 
+Cet entourage étant privé,
+votre demande a été
+transmise au créateur.
 </string>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
