@@ -8,8 +8,9 @@
 
 #import "OTSpeechBehavior.h"
 #import "OTConsts.h"
+#import "OTTextView.h"
 
-@interface OTSpeechBehavior () <SpeechKitDelegate, SKRecognizerDelegate>
+@interface OTSpeechBehavior () <SKRecognizerDelegate>
 
 @property (nonatomic) BOOL isRecording;
 @property (nonatomic, strong) NSLayoutConstraint *widthConstraint;
@@ -29,7 +30,7 @@
 
 - (void)initialize {
     // to be removed on 1.9
-    //[OTSpeechKitManager setup];
+    [OTSpeechKitManager setup];
     for(NSLayoutConstraint *constraint in self.btnRecord.constraints) {
         if(constraint.firstAttribute == NSLayoutAttributeWidth && constraint.secondAttribute == NSLayoutAttributeNotAnAttribute) {
             self.widthConstraint = constraint;
@@ -37,7 +38,7 @@
         }
     }
     if(!self.widthConstraint)
-        [NSException raise:@"Constrint not found" format:@"No width constraint on record button"];
+        [NSException raise:@"Constraint not found" format:@"No width constraint on record button"];
     self.widthDynamicConstraint = [NSLayoutConstraint constraintWithItem:self.btnRecord attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:self.widthConstraint.constant];
     self.widthDynamicConstraint.active = NO;
     [self.btnRecord addConstraint:self.widthDynamicConstraint];
@@ -63,21 +64,15 @@
 }
 
 - (void)toggleRecording {
-    if (self.txtOutput.text.length)
+    if (!self.twoState && self.txtOutput.text.length)
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     else {
         [self.btnRecord setEnabled:NO];
         if (!self.isRecording)
             [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
-                BOOL ok = NO;
-                if (granted) {
-                    // Microphone enabled code
+                if (granted)
                     self.speechRecognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType detection:SKShortEndOfSpeechDetection language:@"fra-FRA" delegate:self];
-                    if(self.speechRecognizer)
-                        ok = YES;
-                }
-                if(!granted || !ok)
-                    // Microphone disabled code
+                else
                     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"microphoneNotEnabled", nil) message:NSLocalizedString(@"promptForMicrophone", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             }];
         else
@@ -98,6 +93,8 @@
         } else {
             [self.txtOutput setText:[NSString stringWithFormat:@"%@ %@", text, [result lowercaseString]]];
         }
+        if([self.txtOutput class] == [OTTextView class])
+            [((OTTextView *)self.txtOutput) updateAfterSpeech];
     }
     [self updateRecordButton];
 }

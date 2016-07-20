@@ -92,7 +92,6 @@ static BOOL wasShown = YES;
     visibleRect.size.width = self.scrollView.bounds.size.width * scale;
     visibleRect.size.height = self.scrollView.bounds.size.height * scale;
     UIImage *image = [self imageByCropping:self.imageView.image toRect:visibleRect];
-
     return image;
 }
 

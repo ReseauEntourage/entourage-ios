@@ -153,33 +153,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fot-wr-6TS">
-                                <rect key="frame" x="12" y="497" width="296" height="56"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="296" id="HXC-sY-0y9"/>
-                                    <constraint firstAttribute="width" constant="56" id="IH1-G0-e1a"/>
-                                    <constraint firstAttribute="width" constant="210" id="Nbg-SI-BIU"/>
-                                    <constraint firstAttribute="width" constant="304" id="OiO-lg-h0t"/>
-                                    <constraint firstAttribute="height" constant="56" id="m2Y-kf-TpW"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="oE3-92-Ki7"/>
-                                </constraints>
-                                <state key="normal" image="nextFull">
-                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="HXC-sY-0y9"/>
-                                        <exclude reference="IH1-G0-e1a"/>
-                                        <exclude reference="Nbg-SI-BIU"/>
-                                        <exclude reference="OiO-lg-h0t"/>
-                                        <exclude reference="oE3-92-Ki7"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="doContinue" destination="xml-Uv-sbT" eventType="touchUpInside" id="YvB-UG-7kB"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Déplacer et zoomer pour ajuster la photo de profil." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="IxH-xR-j7Q">
                                 <rect key="frame" x="8" y="28" width="304" height="36"/>
                                 <constraints>
@@ -226,6 +199,33 @@
                                     <outlet property="delegate" destination="xml-Uv-sbT" id="6m5-K9-uLO"/>
                                 </connections>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fot-wr-6TS">
+                                <rect key="frame" x="12" y="497" width="296" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="296" id="HXC-sY-0y9"/>
+                                    <constraint firstAttribute="width" constant="56" id="IH1-G0-e1a"/>
+                                    <constraint firstAttribute="width" constant="210" id="Nbg-SI-BIU"/>
+                                    <constraint firstAttribute="width" constant="304" id="OiO-lg-h0t"/>
+                                    <constraint firstAttribute="height" constant="56" id="m2Y-kf-TpW"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="oE3-92-Ki7"/>
+                                </constraints>
+                                <state key="normal" image="nextFull">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="HXC-sY-0y9"/>
+                                        <exclude reference="IH1-G0-e1a"/>
+                                        <exclude reference="Nbg-SI-BIU"/>
+                                        <exclude reference="OiO-lg-h0t"/>
+                                        <exclude reference="oE3-92-Ki7"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="doContinue" destination="xml-Uv-sbT" eventType="touchUpInside" id="YvB-UG-7kB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>

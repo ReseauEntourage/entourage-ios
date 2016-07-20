@@ -14,5 +14,6 @@
 @property (nonatomic, retain) UILabel *placeholderLabel;
 
 - (void)showCharCount;
+- (void)updateAfterSpeech;
 
 @end

@@ -85,6 +85,8 @@
                                                                    style:UIBarButtonItemStyleDone
                                                                   target:self
                                                                   action:@selector(sendEncounter:)];
+    [menuButton setTintColor:[UIColor appOrangeColor]];
+    [menuButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     [self.navigationItem setRightBarButtonItem:menuButton];
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
