@@ -90,7 +90,7 @@
 "tour_vehicle_car" = "car";
 "tour_status_ongoing" = "ongoing";
 "thanks" = "Merci";
-"tour_join_intro" = "Cette maraude étant privée, \nvotre demande a été \ntransmise au créateur.";
+"tour_join_intro" = "Cet entourage étant privé, \nvotre demande a été \ntransmise au créateur.";
 "tour_join_message" = "Si vous le souhaitez, \nenvoyez-lui un message:";
 
 "tour" = "Maraude";
