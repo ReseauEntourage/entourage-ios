@@ -218,10 +218,9 @@ NSString *const kKeychainPassword = @"entourage_user_password";
      andSuccess:^(id responseObject)
      {
          if (success) {
-             // CHECK THIS
              NSDictionary *responseDict = responseObject;
              NSDictionary *responseUser = responseDict[@"user"];
-             success([[responseUser objectForKey:@"user"] stringForKey:@"email"]);
+             success([responseUser stringForKey:@"email"]);
          }
      }
      andFailure:^(NSError *error)
