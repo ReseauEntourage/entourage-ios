@@ -1223,7 +1223,8 @@ static bool isShowingOptions = NO;
 }
 
 - (void)showTourConfirmation {
-    [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
+    if(self.isTourRunning)
+        [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
 }
 
 #pragma mark - Guide
