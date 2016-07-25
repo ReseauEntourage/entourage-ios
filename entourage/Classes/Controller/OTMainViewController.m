@@ -919,6 +919,11 @@ static bool isShowingOptions = NO;
     [self forceGetNewData];
 }
 
+- (void)tourCloseError {
+    self.launcherButton.hidden = YES;
+    self.createEncounterButton.hidden = NO;
+}
+
 - (void)resumeTour {
     self.isTourRunning = YES;
     self.stopButton.hidden = NO;

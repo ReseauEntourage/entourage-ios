@@ -15,6 +15,7 @@
 - (void)tourSent:(OTTour*)tour;
 @optional
 - (void)resumeTour;
+- (void)tourCloseError;
 
 @end
 

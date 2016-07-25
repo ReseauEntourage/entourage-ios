@@ -70,12 +70,13 @@
         closeTour:self.tour
         withSuccess:^(OTTour *closedTour) {
             [SVProgressHUD dismiss];
-            if ([self.delegate respondsToSelector:@selector(tourSent:)]) {
+            if ([self.delegate respondsToSelector:@selector(tourSent:)])
                 [self.delegate tourSent:self.tour];
-            }
             [self dismissViewControllerAnimated:YES completion:nil];
         } failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"tour_close_error")];
+            if ([self.delegate respondsToSelector:@selector(tourCloseError)])
+                [self.delegate tourCloseError];
             [self dismissViewControllerAnimated:YES completion:nil];
             NSLog(@"%@",[error localizedDescription]);
         }];
