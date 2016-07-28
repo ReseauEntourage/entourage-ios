@@ -519,6 +519,9 @@
                         <segue destination="ARd-Al-TGt" kind="modal" identifier="OTTourOptionsSegue" id="0g9-AU-hY5"/>
                         <segue destination="Dot-lS-3Ml" kind="modal" identifier="OTUserProfileSegue" id="mcl-xY-cOE"/>
                         <segue destination="0y6-Yv-y4M" kind="modal" identifier="PublicJoinRequestSegue" id="YAn-nW-sMV"/>
+                        <segue destination="dbx-lW-t26" kind="modal" identifier="InviteSourceSegue" modalTransitionStyle="coverVertical" id="PTW-Ys-gEX"/>
+                        <segue destination="mgS-5a-ooi" kind="push" identifier="InviteContactsSegue" id="Cth-hA-lgd"/>
+                        <segue destination="f7z-jk-TMf" kind="push" identifier="InvitePhoneSegue" id="KTg-Xv-MTL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRT-27-ZJ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -585,7 +588,7 @@
                 <viewControllerPlaceholder storyboardName="UserProfile" id="Dot-lS-3Ml" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n5q-Fw-sJ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1658.5" y="1444"/>
+            <point key="canvasLocation" x="1509.5" y="1353"/>
         </scene>
         <!--OTTourJoinRequestViewController-->
         <scene sceneID="9h6-GN-OfW">
@@ -593,7 +596,176 @@
                 <viewControllerPlaceholder storyboardName="TourJoinRequest" referencedIdentifier="OTTourJoinRequestViewController" id="0y6-Yv-y4M" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HMc-ux-H9f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1989.5" y="1444"/>
+            <point key="canvasLocation" x="1579.5" y="1441"/>
+        </scene>
+        <!--Entourage Invite Source View Controller-->
+        <scene sceneID="RPO-45-nOb">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="dbx-lW-t26" customClass="OTEntourageInviteSourceViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z0l-TW-zlW"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yqw-be-eSF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zs9-MC-A5z">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TLw-b1-K3S">
+                                <rect key="frame" x="16" y="159" width="288" height="250"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXd-y0-BP7">
+                                        <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="NHg-Da-7Ga"/>
+                                            <constraint firstAttribute="width" constant="30" id="khm-w8-i7r"/>
+                                        </constraints>
+                                        <state key="normal" image="whiteClose"/>
+                                        <connections>
+                                            <action selector="close:" destination="dbx-lW-t26" eventType="touchUpInside" id="B5Y-Xd-o9n"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r51-PY-h1o">
+                                        <rect key="frame" x="15" y="70" width="258" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="K2V-Y8-uYl"/>
+                                            <constraint firstAttribute="width" constant="304" id="l38-Yy-evM"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="ngP-ms-n7E"/>
+                                            <constraint firstAttribute="width" constant="210" id="s6C-2D-17i"/>
+                                            <constraint firstAttribute="width" constant="296" id="xeQ-O7-SWp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <state key="normal" title="Contacts">
+                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="xeQ-O7-SWp"/>
+                                                <exclude reference="s6C-2D-17i"/>
+                                                <exclude reference="ngP-ms-n7E"/>
+                                                <exclude reference="l38-Yy-evM"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="inviteContacts:" destination="dbx-lW-t26" eventType="touchUpInside" id="TuP-uc-o3W"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Evf-DZ-Tta">
+                                        <rect key="frame" x="15" y="135" width="258" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="304" id="43t-Qx-zkL"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="6IT-Iq-zEG"/>
+                                            <constraint firstAttribute="height" constant="50" id="6ck-MG-20K"/>
+                                            <constraint firstAttribute="width" constant="210" id="CYj-mR-d1w"/>
+                                            <constraint firstAttribute="width" constant="296" id="IMr-na-UOv"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <state key="normal" title="Phone">
+                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="IMr-na-UOv"/>
+                                                <exclude reference="CYj-mR-d1w"/>
+                                                <exclude reference="6IT-Iq-zEG"/>
+                                                <exclude reference="43t-Qx-zkL"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="inviteByPhone:" destination="dbx-lW-t26" eventType="touchUpInside" id="Pu2-xC-hLI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="r51-PY-h1o" firstAttribute="leading" secondItem="TLw-b1-K3S" secondAttribute="leading" constant="15" id="0dl-Oi-nVk"/>
+                                    <constraint firstItem="PXd-y0-BP7" firstAttribute="leading" secondItem="TLw-b1-K3S" secondAttribute="leading" constant="10" id="5Eh-KR-v5s"/>
+                                    <constraint firstAttribute="trailing" secondItem="Evf-DZ-Tta" secondAttribute="trailing" constant="15" id="GZk-wJ-9CB"/>
+                                    <constraint firstItem="Evf-DZ-Tta" firstAttribute="top" secondItem="r51-PY-h1o" secondAttribute="bottom" constant="15" id="V3p-Si-zgC"/>
+                                    <constraint firstItem="r51-PY-h1o" firstAttribute="top" secondItem="PXd-y0-BP7" secondAttribute="bottom" constant="30" id="bHj-sm-4bF"/>
+                                    <constraint firstAttribute="height" constant="250" id="dJk-hf-qiV"/>
+                                    <constraint firstItem="PXd-y0-BP7" firstAttribute="top" secondItem="TLw-b1-K3S" secondAttribute="top" constant="10" id="h3a-dJ-iSt"/>
+                                    <constraint firstItem="Evf-DZ-Tta" firstAttribute="leading" secondItem="TLw-b1-K3S" secondAttribute="leading" constant="15" id="pay-Ez-8pm"/>
+                                    <constraint firstAttribute="trailing" secondItem="r51-PY-h1o" secondAttribute="trailing" constant="15" id="yuv-t3-miG"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="TLw-b1-K3S" firstAttribute="leading" secondItem="zs9-MC-A5z" secondAttribute="leadingMargin" id="2r7-XR-EVg"/>
+                            <constraint firstItem="TLw-b1-K3S" firstAttribute="centerY" secondItem="zs9-MC-A5z" secondAttribute="centerY" id="nJ8-E8-Hhl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TLw-b1-K3S" secondAttribute="trailing" id="ofe-Ff-Xht"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ObK-f0-evG"/>
+                    <connections>
+                        <outlet property="btnInviteByPhone" destination="Evf-DZ-Tta" id="w3M-S5-LxA"/>
+                        <outlet property="btnInviteContacts" destination="r51-PY-h1o" id="siQ-ep-rhq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HYp-OB-RIQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1736" y="1819"/>
+        </scene>
+        <!--Entourage Invite Contacts View Controller-->
+        <scene sceneID="qML-3V-15j">
+            <objects>
+                <viewController id="mgS-5a-ooi" customClass="OTEntourageInviteContactsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ddh-Yc-YiD"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Jh-NT-aHo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="O5u-Dm-Hwg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="668"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This is contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNK-41-e5w">
+                                <rect key="frame" x="139" y="87" width="130" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="FfE-Gm-pZx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ifv-sB-m43" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2095" y="1869"/>
+        </scene>
+        <!--Entourage Invite By Phone View Controller-->
+        <scene sceneID="i1N-T4-0TT">
+            <objects>
+                <viewController id="f7z-jk-TMf" customClass="OTEntourageInviteByPhoneViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Qy-1n-iT6"/>
+                        <viewControllerLayoutGuide type="bottom" id="l4J-5B-1tN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Nsy-qV-8Zg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="668"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This is phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEn-dt-Qhf">
+                                <rect key="frame" x="92" y="96" width="130" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KwL-mg-Ilc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f8c-go-Hv8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2443" y="1869"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="J3Y-Qy-Grd">
@@ -625,5 +797,6 @@
         <image name="mic" width="26" height="26"/>
         <image name="plus" width="22" height="22"/>
         <image name="userSmall" width="35" height="35"/>
+        <image name="whiteClose" width="22" height="22"/>
     </resources>
 </document>

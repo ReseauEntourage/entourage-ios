@@ -16,6 +16,7 @@
 #import "OTFeedItemSummaryView.h"
 #import "OTFeedItemInfoView.h"
 #import "OTTourJoinRequestViewController.h"
+#import "OTEntourageInviteSourceViewController.h"
 
 // Models
 #import "OTEntourage.h"
@@ -58,7 +59,7 @@ typedef NS_ENUM(unsigned) {
 
 
 
-@interface OTFeedItemViewController () <UITextViewDelegate, OTFeedItemDetailsOptionsDelegate, OTFeedItemSummaryDelegate, OTTourJoinRequestDelegate, OTFeedItemInfoDelegate>
+@interface OTFeedItemViewController () <UITextViewDelegate, OTFeedItemDetailsOptionsDelegate, OTFeedItemSummaryDelegate, OTTourJoinRequestDelegate, OTFeedItemInfoDelegate, InviteSourceDelegate>
 
 @property (nonatomic, weak) IBOutlet OTFeedItemSummaryView *feedSummaryView;
 @property (nonatomic, weak) IBOutlet UIButton *timelineButton;
@@ -237,8 +238,17 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (void)addUser {
-#warning TODO set segue
-    [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+    [self performSegueWithIdentifier:@"InviteSourceSegue" sender:nil];
+}
+
+#pragma mark - InviteSourceDelegate implementation
+
+- (void)inviteContacts {
+    [self performSegueWithIdentifier:@"InviteContactsSegue" sender:nil];
+}
+
+- (void)inviteByPhone {
+    [self performSegueWithIdentifier:@"InvitePhoneSegue" sender:nil];
 }
 
 - (void)showOptions {
@@ -770,17 +780,21 @@ static CGFloat keyboardOverlap;
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.delegate  = self;
     }
-    if ([segue.identifier isEqualToString:@"OTUserProfileSegue"]) {
+    else if ([segue.identifier isEqualToString:@"OTUserProfileSegue"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
         controller.userId = (NSNumber *)sender;
     }
-    if ([segue.identifier isEqualToString:@"PublicJoinRequestSegue"]) {
+    else if ([segue.identifier isEqualToString:@"PublicJoinRequestSegue"]) {
         OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
         controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.feedItem = self.feedItem;
         controller.tourJoinRequestDelegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"InviteSourceSegue"]) {
+        OTEntourageInviteSourceViewController *controller = (OTEntourageInviteSourceViewController *)segue.destinationViewController;
+        controller.delegate = self;
     }
 }
 
