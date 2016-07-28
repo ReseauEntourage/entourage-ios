@@ -123,6 +123,7 @@
 "user_joined_tour" = "a rejoint la maraude.";
 "meetingCreated" = "Rencontre créée";
 "meetingNotCreated" = "Echec de la création de rencontre";
+"contacts" = "Contacts";
 
 // Entourage
 "entourages" = "Entourages";

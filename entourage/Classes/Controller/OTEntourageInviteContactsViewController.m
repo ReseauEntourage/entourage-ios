@@ -10,6 +10,9 @@
 #import "SVProgressHUD.h"
 #import "OTAddressBookItem.h"
 #import "OTAddressBookService.h"
+#import "OTConsts.h"
+#import "UIBarButtonItem+factory.h"
+#import "UIColor+entourage.h"
 
 #define FULLNAME_CELL_TAG 1
 #define SELECTED_IMAGE_CELL_TAG 2
@@ -19,6 +22,7 @@
 @interface OTEntourageInviteContactsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tblContacts;
+@property (nonatomic, strong) UIBarButtonItem *btnSave;
 
 @property (nonatomic, strong) NSDictionary *dataSource;
 @property (nonatomic, strong) NSArray *quickJumpList;
@@ -31,7 +35,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = OTLocalizedString(@"contacts").uppercaseString;
+    self.btnSave = [UIBarButtonItem createWithTitle:OTLocalizedString(@"send") withTarget:self andAction:@selector(save) colored:[UIColor appOrangeColor]];
+    [self.btnSave changeEnabled:NO];
+    [self.navigationItem setRightBarButtonItem:self.btnSave];
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     self.tblContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tblContacts.sectionIndexColor = [UIColor appOrangeColor];
+    self.tblContacts.sectionIndexMinimumDisplayRowCount = 10;
     [self loadContacts];
 }
 
@@ -82,6 +93,10 @@
     OTAddressBookItem *item = [self getItemAtIndexPath:indexPath];
     item.selected = !item.selected;
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    if(item.selected)
+        [self.btnSave changeEnabled:YES];
+    else
+        [self checkIfDisable];
 }
 
 #pragma mark - search bar delegate
@@ -126,6 +141,16 @@
     NSString *key = [self.quickJumpList objectAtIndex:indexPath.section];
     NSArray *items = [self.dataSource objectForKey:key];
     return [items objectAtIndex:indexPath.row];
+}
+
+- (void)save {
+#warning TODO
+}
+
+- (void)checkIfDisable {
+    NSArray *enabled = [self.currentContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(selected == YES)"]];
+    if([enabled count] == 0)
+        [self.btnSave changeEnabled:NO];
 }
 
 @end

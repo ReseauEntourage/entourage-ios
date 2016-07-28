@@ -21,9 +21,20 @@
 
 + (UIBarButtonItem *)createWithTitle:(NSString *)title withTarget:(id)target andAction:(SEL)action colored:(UIColor *)color {
     UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleDone target:target action:action];
-    [btn setTintColor:color];
-    [btn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: color, NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    [btn changeColor:color];
     return btn;
+}
+
+- (void)changeEnabled:(BOOL)enabled {
+    self.enabled = enabled;
+    CGFloat alpha = enabled ? 1 : 0.3;
+    UIColor* newColor = [self.tintColor colorWithAlphaComponent:alpha];
+    [self changeColor:newColor];
+}
+
+- (void)changeColor:(UIColor *)color {
+    [self setTintColor:color];
+    [self setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: color, NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
 }
 
 @end
