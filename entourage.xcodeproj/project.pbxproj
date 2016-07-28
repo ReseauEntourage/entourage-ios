@@ -44,6 +44,8 @@
 		1E40A3371D4A4B8D009E2D73 /* OTEntourageInviteSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E40A3361D4A4B8D009E2D73 /* OTEntourageInviteSourceViewController.m */; };
 		1E40A33A1D4A4BD0009E2D73 /* OTEntourageInviteContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E40A3391D4A4BD0009E2D73 /* OTEntourageInviteContactsViewController.m */; };
 		1E40A33D1D4A4BE6009E2D73 /* OTEntourageInviteByPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E40A33C1D4A4BE6009E2D73 /* OTEntourageInviteByPhoneViewController.m */; };
+		1E40A3401D4A81C3009E2D73 /* OTAddressBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E40A33F1D4A81C3009E2D73 /* OTAddressBookItem.m */; };
+		1E40A3441D4A9058009E2D73 /* OTAddressBookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E40A3431D4A9058009E2D73 /* OTAddressBookService.m */; };
 		1E69CABD1D37B3CC00118E33 /* NSError+message.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E69CABC1D37B3CC00118E33 /* NSError+message.m */; };
 		1E71E6531D108790001F3777 /* NSNotification+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E71E6521D108790001F3777 /* NSNotification+entourage.m */; };
 		1E76AE471D144D1F00C496BA /* OTTourStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE461D144D1F00C496BA /* OTTourStateInfo.m */; };
@@ -258,6 +260,10 @@
 		1E40A3391D4A4BD0009E2D73 /* OTEntourageInviteContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageInviteContactsViewController.m; sourceTree = "<group>"; };
 		1E40A33B1D4A4BE6009E2D73 /* OTEntourageInviteByPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageInviteByPhoneViewController.h; sourceTree = "<group>"; };
 		1E40A33C1D4A4BE6009E2D73 /* OTEntourageInviteByPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageInviteByPhoneViewController.m; sourceTree = "<group>"; };
+		1E40A33E1D4A81C3009E2D73 /* OTAddressBookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAddressBookItem.h; sourceTree = "<group>"; };
+		1E40A33F1D4A81C3009E2D73 /* OTAddressBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAddressBookItem.m; sourceTree = "<group>"; };
+		1E40A3421D4A9058009E2D73 /* OTAddressBookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAddressBookService.h; path = AddressBook/OTAddressBookService.h; sourceTree = "<group>"; };
+		1E40A3431D4A9058009E2D73 /* OTAddressBookService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAddressBookService.m; path = AddressBook/OTAddressBookService.m; sourceTree = "<group>"; };
 		1E69CABB1D37B3CC00118E33 /* NSError+message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+message.h"; sourceTree = "<group>"; };
 		1E69CABC1D37B3CC00118E33 /* NSError+message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+message.m"; sourceTree = "<group>"; };
 		1E71E6511D108790001F3777 /* NSNotification+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotification+entourage.h"; sourceTree = "<group>"; };
@@ -593,6 +599,15 @@
 			name = Helper;
 			sourceTree = "<group>";
 		};
+		1E40A3411D4A900B009E2D73 /* AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				1E40A3421D4A9058009E2D73 /* OTAddressBookService.h */,
+				1E40A3431D4A9058009E2D73 /* OTAddressBookService.m */,
+			);
+			name = AddressBook;
+			sourceTree = "<group>";
+		};
 		1E9003661D34FA90004E18BC /* Behaviors */ = {
 			isa = PBXGroup;
 			children = (
@@ -872,6 +887,8 @@
 			children = (
 				45EB70D81CE5F0CC00EB2CD1 /* OTEntourage.h */,
 				45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */,
+				1E40A33E1D4A81C3009E2D73 /* OTAddressBookItem.h */,
+				1E40A33F1D4A81C3009E2D73 /* OTAddressBookItem.m */,
 			);
 			name = Entourage;
 			sourceTree = "<group>";
@@ -1139,6 +1156,7 @@
 		6BFE639519E7E85D00C661AB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1E40A3411D4A900B009E2D73 /* AddressBook */,
 				1EA51FCA1D366F0F00350255 /* Amazon */,
 				1E9003661D34FA90004E18BC /* Behaviors */,
 				1EACE4041D11515200F3A2A6 /* FeedItem */,
@@ -1543,6 +1561,7 @@
 				45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */,
 				0A70FA321BFF32AD0080E8EC /* OTFeedItemViewController.m in Sources */,
 				453BB33A1D2EF3EF002F9255 /* OTOnboardingCodeViewController.m in Sources */,
+				1E40A3401D4A81C3009E2D73 /* OTAddressBookItem.m in Sources */,
 				1E40A33D1D4A4BE6009E2D73 /* OTEntourageInviteByPhoneViewController.m in Sources */,
 				454E429C1D369A720051FDFF /* OTOnboardingGeolocationViewController.m in Sources */,
 				454062A31D06ADB600B0D756 /* OTLocationSelectorViewController.m in Sources */,
@@ -1608,6 +1627,7 @@
 				45BC9BD11CE363D5000065B7 /* OTTextView.m in Sources */,
 				453117A41CD251C200C00BA8 /* MKMapView+entourage.m in Sources */,
 				1ECDBC6C1D3D363600DD87B2 /* OTEntourageMessaging.m in Sources */,
+				1E40A3441D4A9058009E2D73 /* OTAddressBookService.m in Sources */,
 				2E5B0EBC1CF0603D0078454F /* OTEntourageFilter.m in Sources */,
 				2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */,
 				1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */,

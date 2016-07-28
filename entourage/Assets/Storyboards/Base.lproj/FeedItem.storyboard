@@ -793,10 +793,39 @@
                             <searchBar contentMode="redraw" placeholder="Rechercher" translatesAutoresizingMaskIntoConstraints="NO" id="sjH-Ya-WWQ">
                                 <rect key="frame" x="-4" y="64" width="328" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="mgS-5a-ooi" id="ORT-U5-qxy"/>
+                                </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oG7-MH-XzN">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oG7-MH-XzN">
                                 <rect key="frame" x="-4" y="108" width="328" height="560"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContactCell" id="msy-Sm-qe3">
+                                        <rect key="frame" x="0.0" y="28" width="328" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="msy-Sm-qe3" id="6eo-Ln-e1p">
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53V-VM-Pfb">
+                                                    <rect key="frame" x="18" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="53V-VM-Pfb" firstAttribute="leading" secondItem="6eo-Ln-e1p" secondAttribute="leadingMargin" constant="10" id="Ma7-Gd-YlV"/>
+                                                <constraint firstItem="53V-VM-Pfb" firstAttribute="centerY" secondItem="6eo-Ln-e1p" secondAttribute="centerY" id="j9W-uU-fgF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="mgS-5a-ooi" id="Av6-AL-Mvj"/>
+                                    <outlet property="delegate" destination="mgS-5a-ooi" id="dnB-wM-tRn"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -811,6 +840,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FfE-Gm-pZx"/>
+                    <connections>
+                        <outlet property="tblContacts" destination="oG7-MH-XzN" id="3TF-kc-wt2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifv-sB-m43" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

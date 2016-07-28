@@ -33,8 +33,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSContactsUsageDescription</key>
-	<string>Entourage souhaite accéder au carnet d’adresse.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>UIBackgroundModes</key>
