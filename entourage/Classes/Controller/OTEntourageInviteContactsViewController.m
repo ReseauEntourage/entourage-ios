@@ -11,7 +11,10 @@
 #import "OTAddressBookItem.h"
 #import "OTAddressBookService.h"
 
-#define FULLNAME_CELL_TAG 0
+#define FULLNAME_CELL_TAG 1
+#define SELECTED_IMAGE_CELL_TAG 2
+#define SELECTED_IMAGE @"24HSelected"
+#define UNSELECTED_IMAGE @"24HInactive"
 
 @interface OTEntourageInviteContactsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
@@ -28,6 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tblContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self loadContacts];
 }
 
@@ -42,7 +46,7 @@
     }];
 }
 
-#pragma mark - Contacts table view data source implementation
+#pragma mark - Contacts table view data source delegate implementation
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.quickJumpList count];
@@ -64,15 +68,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell"];
-    
-    NSString *key = [self.quickJumpList objectAtIndex:indexPath.section];
-    NSArray *items = [self.dataSource objectForKey:key];
-    OTAddressBookItem *addressBookItem = [items objectAtIndex:indexPath.row];
-    
+    OTAddressBookItem *addressBookItem = [self getItemAtIndexPath:indexPath];
     UILabel *lblFullName = [cell viewWithTag:FULLNAME_CELL_TAG];
     lblFullName.text = addressBookItem.fullName;
-    
+    UIImageView *imgSelected = [cell viewWithTag:SELECTED_IMAGE_CELL_TAG];
+    imgSelected.image = [[UIImage imageNamed:(addressBookItem.selected ? SELECTED_IMAGE : UNSELECTED_IMAGE)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return cell;
+}
+
+#pragma mark - Contacts table view delegate implementation
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    OTAddressBookItem *item = [self getItemAtIndexPath:indexPath];
+    item.selected = !item.selected;
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - search bar delegate
@@ -90,7 +99,7 @@
     [self.tblContacts reloadData];
 }
 
-#pragma mark - build source
+#pragma mark - private members
 
 - (void)refreshDataSource {
     NSMutableArray *sections = [NSMutableArray new];
@@ -111,6 +120,12 @@
     }
     self.dataSource = data;
     self.quickJumpList = sections;
+}
+
+- (OTAddressBookItem *)getItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *key = [self.quickJumpList objectAtIndex:indexPath.section];
+    NSArray *items = [self.dataSource objectForKey:key];
+    return [items objectAtIndex:indexPath.row];
 }
 
 @end
