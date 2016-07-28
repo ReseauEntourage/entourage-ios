@@ -17,6 +17,7 @@
 // Helpers
 #import "UIViewController+menu.h"
 #import "UITextField+indentation.h"
+#import "UIBarButtonItem+factory.h"
 
 #import "OTSpeechBehavior.h"
 
@@ -44,14 +45,8 @@
     [self.descriptionSpeechBehavior initialize];
     [self setupCloseModal];
     
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"validate")
-                                                                   style:UIBarButtonItemStyleDone
-                                                                  target:self
-                                                                  action:@selector(sendEntourage:)];
-    [menuButton setTintColor:[UIColor appOrangeColor]];
-    [menuButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEntourage:) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
-    
     [self setupUI];
 }
 
@@ -59,8 +54,6 @@
     NSString *typeString = [self.type isEqualToString: ENTOURAGE_DEMANDE] ? OTLocalizedString(@"demande") : OTLocalizedString(@"contribution");
     self.title =  typeString.uppercaseString;
 }
-
-
 
 - (void)viewWillDisappear:(BOOL)animated {
     self.title = @"";

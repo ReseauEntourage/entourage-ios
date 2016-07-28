@@ -18,6 +18,7 @@
 #import "OTAuthService.h"
 #import "UIScrollView+entourage.h"
 #import "NSString+Validators.h"
+#import "UIBarButtonItem+factory.h"
 
 @interface OTOnboardingCodeViewController ()
 
@@ -51,11 +52,7 @@
 #pragma mark - Private
 
 - (void)addRegenerateBarButton {
-    UIBarButtonItem *regenerateButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"doRegenerateCode")
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:self
-                                                                   action:@selector(doRegenerateCode)];
-    [regenerateButton setTintColor:[UIColor appOrangeColor]];
+    UIBarButtonItem *regenerateButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doRegenerateCode").capitalizedString withTarget:self andAction:@selector(doRegenerateCode) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:regenerateButton];
 }
 

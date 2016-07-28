@@ -27,6 +27,7 @@
 #import "SVProgressHUD.h"
 #import "A0SimpleKeychain.h"
 #import "NSString+Validators.h"
+#import "UIBarButtonItem+factory.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -88,12 +89,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)showSaveButton {
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"save")
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(updateUser)];
-    [saveButton setTintColor:[UIColor appOrangeColor]];
-    [saveButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save") withTarget:self andAction:@selector(updateUser) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:saveButton];
 }
 

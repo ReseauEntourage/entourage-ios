@@ -13,6 +13,7 @@
 #import "OTConsts.h"
 #import "UIStoryboard+entourage.h"
 #import "OTPhotoPickerBehavior.h"
+#import "UIBarButtonItem+factory.h"
 
 #define PREVIEW_PICTURE_SEGUE @"PreviewPictureSegue"
 
@@ -56,12 +57,7 @@
 #pragma mark - Ignore button
 
 - (void)addIgnoreButton {
-    UIBarButtonItem *ignoreButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"doIgnore")
-                                                                     style:UIBarButtonItemStylePlain
-                                                                    target:self
-                                                                    action:@selector(ignore)];
-    [ignoreButton setTintColor:[UIColor whiteColor]];
-    [ignoreButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore") withTarget:self andAction:@selector(ignore) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:ignoreButton];
 }
 

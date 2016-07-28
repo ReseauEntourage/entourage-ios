@@ -10,6 +10,7 @@
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
 #import "UIView+entourage.h"
+#import "UIBarButtonItem+factory.h"
 
 #define SHOW_LOGIN_SEGUE @"WelcomeLoginSegue"
 
@@ -34,11 +35,7 @@
 #pragma mark - Private
 
 - (void)addLoginBarButton {
-    UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"doLogin")
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:self
-                                                                   action:@selector(doLogin)];
-    [loginButton setTintColor:[UIColor appOrangeColor]];
+    UIBarButtonItem *loginButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doLogin") withTarget:self andAction:@selector(doLogin) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:loginButton];
 }
 

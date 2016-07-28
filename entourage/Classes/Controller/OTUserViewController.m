@@ -21,6 +21,7 @@
 #import "NSString+Validators.h"
 #import "UIColor+entourage.h"
 #import "UIButton+entourage.h"
+#import "UIBarButtonItem+factory.h"
 
 // View
 #import "SVProgressHUD.h"
@@ -71,12 +72,7 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Private
 
 - (void)showEditButton {
-    UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"edit")
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(showEditView)];
-    [chatButton setTintColor:[UIColor appOrangeColor]];
-    [chatButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    UIBarButtonItem *chatButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"edit") withTarget:self andAction:@selector(showEditView) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:chatButton];
 }
 

@@ -11,6 +11,7 @@
 #import "UIStoryboard+entourage.h"
 #import "UIView+entourage.h"
 #import "NSNotification+entourage.h"
+#import "UIBarButtonItem+factory.h"
 
 @interface OTOnboardingNotificationsViewController()
 
@@ -36,12 +37,7 @@
 }
 
 - (void)addIgnoreButton {
-    UIBarButtonItem *ignoreButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"doIgnore")
-                                                                     style:UIBarButtonItemStylePlain
-                                                                    target:self
-                                                                    action:@selector(doIgnore)];
-    [ignoreButton setTintColor:[UIColor whiteColor]];
-    [ignoreButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore") withTarget:self andAction:@selector(doIgnore) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:ignoreButton];
 }
 

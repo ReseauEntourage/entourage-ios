@@ -14,6 +14,7 @@
 #import "OTConsts.h"
 
 #import "OTEntourageFilter.h"
+#import "UIBarButtonItem+factory.h"
 
 #define FILTER_IMAGE_TAG 1
 #define FILTER_DESCRIPTION_TAG 2
@@ -47,12 +48,7 @@
     
     [self setupCloseModal];
     
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"save").capitalizedString
-                                                                   style:UIBarButtonItemStyleDone
-                                                                  target:self
-                                                                  action:@selector(saveFilters)];
-    [menuButton setTintColor:[UIColor appOrangeColor]];
-    [menuButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString withTarget:self andAction:@selector(saveFilters) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
     
     [self initData];

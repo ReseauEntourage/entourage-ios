@@ -24,6 +24,7 @@
 #import "UITextField+indentation.h"
 #import "UIViewController+menu.h"
 #import "UIColor+entourage.h"
+#import "UIBarButtonItem+factory.h"
 
 // Progress HUD
 #import "MBProgressHUD.h"
@@ -81,12 +82,7 @@
 - (void)setupUI {
     [self setupCloseModal];
     
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"validate")
-                                                                   style:UIBarButtonItemStyleDone
-                                                                  target:self
-                                                                  action:@selector(sendEncounter:)];
-    [menuButton setTintColor:[UIColor appOrangeColor]];
-    [menuButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEncounter:) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];

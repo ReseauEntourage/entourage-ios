@@ -19,4 +19,11 @@
     return btn;
 }
 
++ (UIBarButtonItem *)createWithTitle:(NSString *)title withTarget:(id)target andAction:(SEL)action colored:(UIColor *)color {
+    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleDone target:target action:action];
+    [btn setTintColor:color];
+    [btn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: color, NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    return btn;
+}
+
 @end
