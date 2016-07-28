@@ -7,6 +7,7 @@
 //
 
 #import "OTEntourageInviteSourceViewController.h"
+#import "UIView+entourage.h"
 
 @interface OTEntourageInviteSourceViewController ()
 
@@ -19,9 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
-    self.navigationController.toolbarHidden = YES;
+
+    [self.btnInviteContacts setupHalfRoundedCorners];
+    [self.btnInviteByPhone setupHalfRoundedCorners];
 }
 
 - (IBAction)close:(id)sender {
