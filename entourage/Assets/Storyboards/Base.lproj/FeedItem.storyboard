@@ -634,6 +634,7 @@
                                             <constraint firstAttribute="width" constant="210" id="s6C-2D-17i"/>
                                             <constraint firstAttribute="width" constant="296" id="xeQ-O7-SWp"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Contacts">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -659,6 +660,7 @@
                                             <constraint firstAttribute="width" constant="210" id="CYj-mR-d1w"/>
                                             <constraint firstAttribute="width" constant="296" id="IMr-na-UOv"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Numéro de portable">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
