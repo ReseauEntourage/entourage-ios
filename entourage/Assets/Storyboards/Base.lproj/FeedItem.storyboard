@@ -790,14 +790,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="668"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This is contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNK-41-e5w">
-                                <rect key="frame" x="139" y="87" width="130" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <searchBar contentMode="redraw" placeholder="Rechercher" translatesAutoresizingMaskIntoConstraints="NO" id="sjH-Ya-WWQ">
+                                <rect key="frame" x="-4" y="64" width="328" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oG7-MH-XzN">
+                                <rect key="frame" x="-4" y="108" width="328" height="560"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="sjH-Ya-WWQ" secondAttribute="trailing" constant="-20" id="H9j-fm-243"/>
+                            <constraint firstItem="oG7-MH-XzN" firstAttribute="leading" secondItem="O5u-Dm-Hwg" secondAttribute="leadingMargin" constant="-20" id="LPa-bt-bfd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oG7-MH-XzN" secondAttribute="trailing" constant="-20" id="slU-YC-L6k"/>
+                            <constraint firstItem="sjH-Ya-WWQ" firstAttribute="top" secondItem="ddh-Yc-YiD" secondAttribute="bottom" id="u00-9I-sI8"/>
+                            <constraint firstItem="0Jh-NT-aHo" firstAttribute="top" secondItem="oG7-MH-XzN" secondAttribute="bottom" id="v53-az-fbR"/>
+                            <constraint firstItem="sjH-Ya-WWQ" firstAttribute="leading" secondItem="O5u-Dm-Hwg" secondAttribute="leadingMargin" constant="-20" id="vD0-c7-kUd"/>
+                            <constraint firstItem="oG7-MH-XzN" firstAttribute="top" secondItem="sjH-Ya-WWQ" secondAttribute="bottom" id="wkI-9O-COW"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FfE-Gm-pZx"/>
                 </viewController>

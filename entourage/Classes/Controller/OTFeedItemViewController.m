@@ -6,6 +6,8 @@
 //  Copyright © 2015 OCTO Technology. All rights reserved.
 //
 
+@import AddressBook;
+
 // Controllers
 #import "OTFeedItemViewController.h"
 #import "UIViewController+menu.h"
@@ -42,6 +44,7 @@
 #import "IQKeyboardManager.h"
 #import "UIButton+entourage.h"
 #import "UIBarButtonItem+factory.h"
+#import "SVProgressHUD.h"
 
 #define IS_ACCEPTED ([self.feedItem.joinStatus isEqualToString:@"accepted"])
 
@@ -244,7 +247,19 @@ typedef NS_ENUM(unsigned) {
 #pragma mark - InviteSourceDelegate implementation
 
 - (void)inviteContacts {
-    [self performSegueWithIdentifier:@"InviteContactsSegue" sender:nil];
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied || ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusRestricted) {
+        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"addressBookDenied") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+    } else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+        [self performSegueWithIdentifier:@"InviteContactsSegue" sender:nil];
+    } else {
+        ABAddressBookRequestAccessWithCompletion(ABAddressBookCreateWithOptions(NULL, nil), ^(bool granted, CFErrorRef error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!granted)
+                    return;
+                [self performSegueWithIdentifier:@"InviteContactsSegue" sender:nil];
+            });
+        });
+    }
 }
 
 - (void)inviteByPhone {
@@ -302,7 +317,6 @@ typedef NS_ENUM(unsigned) {
                                                     [self updateTableViewAddingTimelinePoints:entourageMessages];
                                                 } failure:^(NSError * error) {
                                                     NSLog(@"MESSAGESerr %@", error.description);
-
                                                 }];
 }
 
