@@ -40,6 +40,7 @@
 #import "NSUserDefaults+OT.h"
 #import "IQKeyboardManager.h"
 #import "UIButton+entourage.h"
+#import "UIBarButtonItem+factory.h"
 
 #define IS_ACCEPTED ([self.feedItem.joinStatus isEqualToString:@"accepted"])
 
@@ -224,31 +225,20 @@ typedef NS_ENUM(unsigned) {
 
 - (void)setupMoreButtons {
     if (IS_ACCEPTED) {
-        UIImage *plusImage = [[UIImage imageNamed:@"userPlus.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
-        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] init];
-        [plusButton setImage:plusImage];
-        [plusButton setTarget:self];
-        //[plusButton setAction:@selector(addUser)];
-
         if(![[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canChangeEditState])
             return;
-        UIImage *moreImage = [[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
-        UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] init];
-        [moreButton setImage:moreImage];
-        [moreButton setTarget:self];
-        [moreButton setAction:@selector(showOptions)];
-        
-        [self.navigationItem setRightBarButtonItems:@[moreButton]];
+        UIBarButtonItem *plusButton = [UIBarButtonItem createWithImageNamed:@"userPlus" withTarget:self andAction:@selector(addUser)];
+        UIBarButtonItem *moreButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self andAction:@selector(showOptions)];
+        [self.navigationItem setRightBarButtonItems:@[moreButton, plusButton]];
     } else {
-        UIImage *shareImage = [[UIImage imageNamed:@"share.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        UIBarButtonItem *joinButton = [[UIBarButtonItem alloc] init];
-        [joinButton setImage:shareImage];
-        [joinButton setTarget:self];
-        [joinButton setAction:@selector(doJoinTour)];
+        UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(doJoinTour)];
         [self.navigationItem setRightBarButtonItem:joinButton];
     }
+}
+
+- (void)addUser {
+#warning TODO set segue
+    [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
 }
 
 - (void)showOptions {
@@ -263,14 +253,11 @@ typedef NS_ENUM(unsigned) {
 - (void)updateTableViewAddingTimelinePoints:(NSArray *)timelinePoints {
     [self.timelinePoints addObjectsFromArray:timelinePoints];
     self.timelinePoints = [self.timelinePoints sortedArrayUsingSelector:@selector(compare:)].mutableCopy;
-    //NSLog(@"%lu timeline points", (unsigned long)self.timelinePoints.count);
     [self.tableView reloadData];
-    
      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.timelinePoints.count-1 inSection:0];
      [self.tableView scrollToRowAtIndexPath:indexPath
                            atScrollPosition:UITableViewScrollPositionBottom
                                    animated:YES];
-
 }
 
 
@@ -325,7 +312,6 @@ typedef NS_ENUM(unsigned) {
     OTTour *tour = (OTTour *)self.feedItem;
     [[OTTourService new] tourEncounters:tour
                               success:^(NSArray *tourEncounters) {
-                                 // NSLog(@"ENCOUNTERS: %@", tourEncounters);
                                   [self updateTableViewAddingTimelinePoints:tourEncounters];
                               } failure:^(NSError *error) {
                                   NSLog(@"ENCOUNTERSSerr %@", error.description);
@@ -339,6 +325,7 @@ typedef NS_ENUM(unsigned) {
         [self updateTableViewAddingTimelinePoints:@[message]];
         [self.chatSpeechBehavior updateRecordButton];
     } orFailure:^(NSError *error) {
+        NSLog(@"send message failure %@", error.description);
     }];
 }
 

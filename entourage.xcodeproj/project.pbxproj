@@ -40,6 +40,7 @@
 		1E2FE74E1D354AE900746447 /* OTPhotoPickerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE74D1D354AE900746447 /* OTPhotoPickerBehavior.m */; };
 		1E2FE7511D35668B00746447 /* OTOnboardingPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE7501D35668B00746447 /* OTOnboardingPreviewViewController.m */; };
 		1E3174911D10299400027824 /* QuitFeedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E3174901D10299400027824 /* QuitFeedItem.storyboard */; };
+		1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E40A3331D4A2A10009E2D73 /* UIBarButtonItem+factory.m */; };
 		1E69CABD1D37B3CC00118E33 /* NSError+message.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E69CABC1D37B3CC00118E33 /* NSError+message.m */; };
 		1E71E6531D108790001F3777 /* NSNotification+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E71E6521D108790001F3777 /* NSNotification+entourage.m */; };
 		1E76AE471D144D1F00C496BA /* OTTourStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE461D144D1F00C496BA /* OTTourStateInfo.m */; };
@@ -246,6 +247,8 @@
 		1E2FE74F1D35668B00746447 /* OTOnboardingPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingPreviewViewController.h; sourceTree = "<group>"; };
 		1E2FE7501D35668B00746447 /* OTOnboardingPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingPreviewViewController.m; sourceTree = "<group>"; };
 		1E3174901D10299400027824 /* QuitFeedItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QuitFeedItem.storyboard; sourceTree = "<group>"; };
+		1E40A3321D4A2A10009E2D73 /* UIBarButtonItem+factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+factory.h"; sourceTree = "<group>"; };
+		1E40A3331D4A2A10009E2D73 /* UIBarButtonItem+factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+factory.m"; sourceTree = "<group>"; };
 		1E69CABB1D37B3CC00118E33 /* NSError+message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+message.h"; sourceTree = "<group>"; };
 		1E69CABC1D37B3CC00118E33 /* NSError+message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+message.m"; sourceTree = "<group>"; };
 		1E71E6511D108790001F3777 /* NSNotification+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotification+entourage.h"; sourceTree = "<group>"; };
@@ -1147,6 +1150,8 @@
 				45D7891A1D2FFC3E005EBACC /* UIScrollView+entourage.m */,
 				1E69CABB1D37B3CC00118E33 /* NSError+message.h */,
 				1E69CABC1D37B3CC00118E33 /* NSError+message.m */,
+				1E40A3321D4A2A10009E2D73 /* UIBarButtonItem+factory.h */,
+				1E40A3331D4A2A10009E2D73 /* UIBarButtonItem+factory.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1587,6 +1592,7 @@
 				1ECDBC6C1D3D363600DD87B2 /* OTEntourageMessaging.m in Sources */,
 				2E5B0EBC1CF0603D0078454F /* OTEntourageFilter.m in Sources */,
 				2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */,
+				1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,
 				45D6B8301D116A2C00357FEF /* OTFeedItemsPagination.m in Sources */,
 				1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */,
