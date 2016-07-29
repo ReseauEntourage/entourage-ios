@@ -640,10 +640,10 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="xeQ-O7-SWp"/>
-                                                <exclude reference="s6C-2D-17i"/>
-                                                <exclude reference="ngP-ms-n7E"/>
                                                 <exclude reference="l38-Yy-evM"/>
+                                                <exclude reference="ngP-ms-n7E"/>
+                                                <exclude reference="s6C-2D-17i"/>
+                                                <exclude reference="xeQ-O7-SWp"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -666,10 +666,10 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="IMr-na-UOv"/>
-                                                <exclude reference="CYj-mR-d1w"/>
-                                                <exclude reference="6IT-Iq-zEG"/>
                                                 <exclude reference="43t-Qx-zkL"/>
+                                                <exclude reference="6IT-Iq-zEG"/>
+                                                <exclude reference="CYj-mR-d1w"/>
+                                                <exclude reference="IMr-na-UOv"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -699,9 +699,9 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="hwP-nn-ILh"/>
                                                 <exclude reference="i31-Qg-SFe"/>
                                                 <exclude reference="z8H-h1-LvC"/>
-                                                <exclude reference="hwP-nn-ILh"/>
                                                 <exclude reference="zxz-7k-gB0"/>
                                             </mask>
                                         </variation>
@@ -778,10 +778,10 @@
             </objects>
             <point key="canvasLocation" x="1736" y="1819"/>
         </scene>
-        <!--Entourage Invite Contacts View Controller-->
+        <!--Entourage Invite Contacts-->
         <scene sceneID="qML-3V-15j">
             <objects>
-                <viewController id="mgS-5a-ooi" customClass="OTEntourageInviteContactsViewController" sceneMemberID="viewController">
+                <viewController id="mgS-5a-ooi" userLabel="Entourage Invite Contacts" customClass="OTEntourageInviteContactsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ddh-Yc-YiD"/>
                         <viewControllerLayoutGuide type="bottom" id="0Jh-NT-aHo"/>
@@ -790,7 +790,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="668"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Rechercher" translatesAutoresizingMaskIntoConstraints="NO" id="sjH-Ya-WWQ">
+                            <searchBar contentMode="redraw" placeholder="Rechercher" translatesAutoresizingMaskIntoConstraints="NO" id="sjH-Ya-WWQ" userLabel="SearchView">
                                 <rect key="frame" x="-4" y="64" width="328" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -814,7 +814,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3EB86215-2DDA-41B5-BAAD-09EE86DA9689" translatesAutoresizingMaskIntoConstraints="NO" id="B5y-60-Dat">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="8E61FEDB-A89F-470A-B36E-F485782366D0" translatesAutoresizingMaskIntoConstraints="NO" id="B5y-60-Dat">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="H5n-PU-mzk"/>
@@ -855,6 +855,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifv-sB-m43" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="ovW-vH-33D" customClass="OTCloseKeyboardOnTapBehavior">
+                    <connections>
+                        <outlet property="inputView" destination="sjH-Ya-WWQ" id="YWQ-CZ-XA2"/>
+                        <outlet property="owner" destination="mgS-5a-ooi" id="0Td-1N-Ujf"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="2095" y="1869"/>
         </scene>
@@ -905,7 +911,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="3EB86215-2DDA-41B5-BAAD-09EE86DA9689" width="48" height="48">
+        <image name="8E61FEDB-A89F-470A-B36E-F485782366D0" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
