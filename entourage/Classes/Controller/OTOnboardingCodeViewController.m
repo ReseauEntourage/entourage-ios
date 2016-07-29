@@ -37,7 +37,7 @@
     self.title = @"";
     [self addRegenerateBarButton];
     
-    [self.codeTextField setupWithWhitePlaceholder];
+    [self.codeTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.validateButton setupHalfRoundedCorners];

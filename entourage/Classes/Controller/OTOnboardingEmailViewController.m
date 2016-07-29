@@ -35,7 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"";
-    [self.emailTextField setupWithWhitePlaceholder];
+    [self.emailTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.validateButton setupHalfRoundedCorners];

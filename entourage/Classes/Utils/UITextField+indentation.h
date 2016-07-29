@@ -13,6 +13,7 @@
 - (void)indent;
 - (void)indentWithPadding:(CGFloat)padding;
 - (void)indentRight;
-- (void)setupWithWhitePlaceholder;
+- (void)setupWithPlaceholderColor:(UIColor *)color;
+- (void)setupWithPlaceholderColor:(UIColor *)color andFont:(UIFont *)font;
 
 @end

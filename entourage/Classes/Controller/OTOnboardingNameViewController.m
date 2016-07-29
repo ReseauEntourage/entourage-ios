@@ -40,8 +40,8 @@
     // Do any additional setup after loading the view.
     self.title = @"";
     
-    [self.firstNameTextField setupWithWhitePlaceholder];
-    [self.lastNameTextField setupWithWhitePlaceholder];
+    [self.firstNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    [self.lastNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.validateButton setupHalfRoundedCorners];

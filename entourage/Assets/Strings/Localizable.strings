@@ -124,6 +124,7 @@
 "meetingCreated" = "Rencontre créée";
 "meetingNotCreated" = "Echec de la création de rencontre";
 "contacts" = "Contacts";
+"mobilePhone" = "Numero Portable";
 
 // Entourage
 "entourages" = "Entourages";

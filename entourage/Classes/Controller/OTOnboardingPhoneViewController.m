@@ -16,6 +16,7 @@
 #import "NSUserDefaults+OT.h"
 #import "UIScrollView+entourage.h"
 #import "NSError+message.h"
+#import "UIColor+entourage.h"
 
 @interface OTOnboardingPhoneViewController ()
 
@@ -30,10 +31,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.title = @"";
     
-    [self.phoneTextField setupWithWhitePlaceholder];
+    [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.continueButton setupHalfRoundedCorners];
     
@@ -44,16 +45,10 @@
 #if DEBUG //TARGET_IPHONE_SIMULATOR
     self.phoneTextField.text = @"+40724593579";
 #endif
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.phoneTextField becomeFirstResponder];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)doContinue {
@@ -86,20 +81,8 @@
         }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (void)showKeyboard:(NSNotification*)notification {
-    //[self.scrollView scrollToBottomFromKeyboardNotification:notification];
     [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
-
 }
 
 @end

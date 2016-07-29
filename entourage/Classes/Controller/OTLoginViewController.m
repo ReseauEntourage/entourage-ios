@@ -31,6 +31,7 @@
 #import "UITextField+indentation.h"
 // Model
 #import "OTUser.h"
+#import "UIColor+entourage.h"
 
 // View
 #import "SVProgressHUD.h"
@@ -78,8 +79,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     
     [self.phoneTextField indentRight];
     [self.passwordTextField indentRight];
-    [self.phoneTextField setupWithWhitePlaceholder];
-    [self.passwordTextField setupWithWhitePlaceholder];
+    [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     
     
     [self.validateButton setupHalfRoundedCorners];

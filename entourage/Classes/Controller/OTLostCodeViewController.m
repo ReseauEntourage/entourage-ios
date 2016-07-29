@@ -22,6 +22,7 @@
 #import "UINavigationController+entourage.h"
 #import "UIView+entourage.h"
 #import "UIScrollView+entourage.h"
+#import "UIColor+entourage.h"
 
 // Model
 #import "OTUser.h"
@@ -63,7 +64,7 @@
     [self.navigationController presentTransparentNavigationBar];
     
     [self.regenerateCodeButton setupHalfRoundedCorners];
-    [self.phoneTextField setupWithWhitePlaceholder];
+    [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self

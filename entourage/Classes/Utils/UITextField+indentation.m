@@ -7,7 +7,6 @@
 //
 
 #import "UITextField+indentation.h"
-#import "UIColor+entourage.h"
 
 static int const kPadding = 10;
 
@@ -32,10 +31,17 @@ static int const kPadding = 10;
     [self setRightView:spacerView];
 }
 
-- (void)setupWithWhitePlaceholder {
-    NSDictionary *whiteAttributes = @{ NSForegroundColorAttributeName : [UIColor appTextFieldPlaceholderColor]};
+- (void)setupWithPlaceholderColor:(UIColor *)color {
+    NSDictionary *colorAttributes = @{ NSForegroundColorAttributeName :color};
     NSAttributedString *str = [[NSAttributedString alloc] initWithString:self.placeholder
-                                                              attributes:whiteAttributes];
+                                                              attributes:colorAttributes];
+    self.attributedPlaceholder = str;
+}
+
+- (void)setupWithPlaceholderColor:(UIColor *)color andFont:(UIFont *)font {
+    NSDictionary *attributes = @{ NSForegroundColorAttributeName: color, NSFontAttributeName: font };
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:self.placeholder
+                                                              attributes:attributes];
     self.attributedPlaceholder = str;
 }
 
