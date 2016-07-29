@@ -32,10 +32,13 @@
     self.btnSave = [UIBarButtonItem createWithTitle:OTLocalizedString(@"send") withTarget:self andAction:@selector(save) colored:[UIColor appOrangeColor]];
     [self.btnSave changeEnabled:NO];
     [self.navigationItem setRightBarButtonItem:self.btnSave];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     self.tblContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tblContacts.sectionIndexColor = [UIColor appOrangeColor];
     [self loadContacts];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }
 
 - (void)loadContacts {

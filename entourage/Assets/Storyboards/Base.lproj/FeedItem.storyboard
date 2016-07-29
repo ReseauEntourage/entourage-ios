@@ -811,7 +811,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4067232E-04AE-4746-AB0B-0D7D2148A01C" translatesAutoresizingMaskIntoConstraints="NO" id="B5y-60-Dat">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6D7FC7B6-CA5C-4EC4-ACB5-2643D4482337" translatesAutoresizingMaskIntoConstraints="NO" id="B5y-60-Dat">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="H5n-PU-mzk"/>
@@ -932,7 +932,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="4067232E-04AE-4746-AB0B-0D7D2148A01C" width="48" height="48">
+        <image name="6D7FC7B6-CA5C-4EC4-ACB5-2643D4482337" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
