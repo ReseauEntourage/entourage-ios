@@ -6,22 +6,17 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTGroupedTableSourceBehavior.h"
+#import "OTGroupedTableDataSourceBehavior.h"
 
-@interface OTGroupedTableSourceBehavior () <UITableViewDataSource>
-
-@end
-
-@implementation OTGroupedTableSourceBehavior
-
-- (void)initialise {
-    self.tableView.dataSource = self;
-}
+@implementation OTGroupedTableDataSourceBehavior
 
 - (id)getItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *key = [self.quickJumpList objectAtIndex:indexPath.section];
-    NSArray *items = [self.dataSource objectForKey:key];
+    NSArray *items = [self.groupedSource objectForKey:key];
     return [items objectAtIndex:indexPath.row];
+}
+
+- (void)refresh {
 }
 
 #pragma mark - UITableViewDataSource
@@ -32,7 +27,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *key = [self.quickJumpList objectAtIndex:section];
-    NSArray *items = [self.dataSource objectForKey:key];
+    NSArray *items = [self.groupedSource objectForKey:key];
     return [items count];
 }
 
@@ -42,10 +37,6 @@
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     return self.quickJumpList;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.dataProviderBehavior getTableViewCellForPath:indexPath];
 }
 
 @end

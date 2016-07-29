@@ -10,4 +10,7 @@
 
 @implementation OTBehavior
 
+- (void)initialize {
+}
+
 @end

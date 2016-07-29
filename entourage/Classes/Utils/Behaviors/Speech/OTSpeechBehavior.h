@@ -19,7 +19,6 @@
 @property (nonatomic, strong) SKRecognizer *speechRecognizer;
 @property (nonatomic) BOOL twoState;
 
-- (void)initialize;
 - (void)updateRecordButton;
 
 @end

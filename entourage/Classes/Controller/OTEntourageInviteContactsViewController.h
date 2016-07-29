@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OTGroupedTableSourceBehavior.h"
-#import "OTGroupedTableDataProviderBehavior.h"
+#import "OTDataSourceBehavior.h"
+#import "OTTableDataSourceBehavior.h"
 
 @interface OTEntourageInviteContactsViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet OTGroupedTableSourceBehavior *groupedSource;
-@property (nonatomic, weak) IBOutlet OTGroupedTableDataProviderBehavior *dataProvider;
+@property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
+@property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 
 @end

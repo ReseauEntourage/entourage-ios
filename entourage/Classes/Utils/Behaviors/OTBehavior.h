@@ -10,4 +10,6 @@
 
 @interface OTBehavior : UIControl
 
+- (void)initialize;
+
 @end
