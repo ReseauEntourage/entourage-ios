@@ -814,7 +814,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="8E61FEDB-A89F-470A-B36E-F485782366D0" translatesAutoresizingMaskIntoConstraints="NO" id="B5y-60-Dat">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="43483987-68FE-41FE-9374-8DE66CB2A9FF" translatesAutoresizingMaskIntoConstraints="NO" id="B5y-60-Dat">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="H5n-PU-mzk"/>
@@ -832,6 +832,11 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="sectionIndexMinimumDisplayRowCount">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="mgS-5a-ooi" id="Av6-AL-Mvj"/>
                                     <outlet property="delegate" destination="mgS-5a-ooi" id="dnB-wM-tRn"/>
@@ -911,7 +916,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="8E61FEDB-A89F-470A-B36E-F485782366D0" width="48" height="48">
+        <image name="43483987-68FE-41FE-9374-8DE66CB2A9FF" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

@@ -42,7 +42,6 @@
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     self.tblContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tblContacts.sectionIndexColor = [UIColor appOrangeColor];
-    self.tblContacts.sectionIndexMinimumDisplayRowCount = 10;
     [self loadContacts];
 }
 
