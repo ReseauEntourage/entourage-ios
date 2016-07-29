@@ -14,18 +14,11 @@
 #import "UIBarButtonItem+factory.h"
 #import "UIColor+entourage.h"
 
-#define FULLNAME_CELL_TAG 1
-#define SELECTED_IMAGE_CELL_TAG 2
-#define SELECTED_IMAGE @"24HSelected"
-#define UNSELECTED_IMAGE @"24HInactive"
-
-@interface OTEntourageInviteContactsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface OTEntourageInviteContactsViewController () <UITableViewDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tblContacts;
 @property (nonatomic, strong) UIBarButtonItem *btnSave;
 
-@property (nonatomic, strong) NSDictionary *dataSource;
-@property (nonatomic, strong) NSArray *quickJumpList;
 @property (nonatomic, strong) NSArray *contacts;
 @property (nonatomic, strong) NSArray *currentContacts;
 
@@ -35,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.groupedSource initialise];
     self.title = OTLocalizedString(@"contacts").uppercaseString;
     self.btnSave = [UIBarButtonItem createWithTitle:OTLocalizedString(@"send") withTarget:self andAction:@selector(save) colored:[UIColor appOrangeColor]];
     [self.btnSave changeEnabled:NO];
@@ -50,46 +45,16 @@
     [[OTAddressBookService new] readWithResultBlock:^(NSArray *results) {
         self.contacts = results;
         self.currentContacts = results;
-        [self refreshDataSource];
+        [self.dataProvider refreshSource:self.currentContacts];
         [self.tblContacts reloadData];
         [SVProgressHUD dismiss];
     }];
 }
 
-#pragma mark - Contacts table view data source delegate implementation
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.quickJumpList count];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSString *key = [self.quickJumpList objectAtIndex:section];
-    NSArray *items = [self.dataSource objectForKey:key];
-    return [items count];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.quickJumpList objectAtIndex:section];
-}
-
-- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return self.quickJumpList;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell"];
-    OTAddressBookItem *addressBookItem = [self getItemAtIndexPath:indexPath];
-    UILabel *lblFullName = [cell viewWithTag:FULLNAME_CELL_TAG];
-    lblFullName.text = addressBookItem.fullName;
-    UIImageView *imgSelected = [cell viewWithTag:SELECTED_IMAGE_CELL_TAG];
-    imgSelected.image = [[UIImage imageNamed:(addressBookItem.selected ? SELECTED_IMAGE : UNSELECTED_IMAGE)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    return cell;
-}
-
 #pragma mark - Contacts table view delegate implementation
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    OTAddressBookItem *item = [self getItemAtIndexPath:indexPath];
+    OTAddressBookItem *item = [self.groupedSource getItemAtIndexPath:indexPath];
     item.selected = !item.selected;
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     if(item.selected)
@@ -109,38 +74,11 @@
             BOOL contains = rangeValue.length > 0;
             return contains;
         }]];
-    [self refreshDataSource];
+    [self.dataProvider refreshSource:self.currentContacts];
     [self.tblContacts reloadData];
 }
 
 #pragma mark - private members
-
-- (void)refreshDataSource {
-    NSMutableArray *sections = [NSMutableArray new];
-    NSMutableDictionary *data = [NSMutableDictionary new];
-    NSString *index = nil;
-    for (OTAddressBookItem *item in self.currentContacts) {
-        NSString *currentIndex = [item.fullName substringToIndex:1];
-        if(!index || ![index isEqualToString:currentIndex]) {
-            index = currentIndex;
-            [sections addObject:currentIndex];
-        }
-        NSMutableArray *array = [data objectForKey:currentIndex];
-        if(!array) {
-            array = [NSMutableArray new];
-            [data setObject:array forKey:currentIndex];
-        }
-        [array addObject:item];
-    }
-    self.dataSource = data;
-    self.quickJumpList = sections;
-}
-
-- (OTAddressBookItem *)getItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *key = [self.quickJumpList objectAtIndex:indexPath.section];
-    NSArray *items = [self.dataSource objectForKey:key];
-    return [items objectAtIndex:indexPath.row];
-}
 
 - (void)save {
 #warning TODO

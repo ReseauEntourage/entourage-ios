@@ -797,7 +797,7 @@
                                     <outlet property="delegate" destination="mgS-5a-ooi" id="ORT-U5-qxy"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="oG7-MH-XzN">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="oG7-MH-XzN" userLabel="Contacts Table View">
                                 <rect key="frame" x="-4" y="108" width="328" height="560"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -814,7 +814,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="43483987-68FE-41FE-9374-8DE66CB2A9FF" translatesAutoresizingMaskIntoConstraints="NO" id="B5y-60-Dat">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="8A4AC302-7CDD-46CE-96DF-F1470C95C2FA" translatesAutoresizingMaskIntoConstraints="NO" id="B5y-60-Dat">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="H5n-PU-mzk"/>
@@ -838,7 +838,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="dataSource" destination="mgS-5a-ooi" id="Av6-AL-Mvj"/>
                                     <outlet property="delegate" destination="mgS-5a-ooi" id="dnB-wM-tRn"/>
                                 </connections>
                             </tableView>
@@ -856,14 +855,27 @@
                     </view>
                     <navigationItem key="navigationItem" id="FfE-Gm-pZx"/>
                     <connections>
+                        <outlet property="dataProvider" destination="54d-gh-3pq" id="8nJ-yT-kVF"/>
+                        <outlet property="groupedSource" destination="8F3-u3-zY9" id="rQO-Wu-ahh"/>
                         <outlet property="tblContacts" destination="oG7-MH-XzN" id="3TF-kc-wt2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifv-sB-m43" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="ovW-vH-33D" customClass="OTCloseKeyboardOnTapBehavior">
+                <customObject id="ovW-vH-33D" userLabel="Close Keyboard On Tap" customClass="OTCloseKeyboardOnTapBehavior">
                     <connections>
                         <outlet property="inputView" destination="sjH-Ya-WWQ" id="YWQ-CZ-XA2"/>
                         <outlet property="owner" destination="mgS-5a-ooi" id="0Td-1N-Ujf"/>
+                    </connections>
+                </customObject>
+                <customObject id="54d-gh-3pq" userLabel="Grouped Table Data Provider" customClass="OTContactsGroupedTableDataProviderBehavior">
+                    <connections>
+                        <outlet property="groupedSource" destination="8F3-u3-zY9" id="5gP-hH-I95"/>
+                    </connections>
+                </customObject>
+                <customObject id="8F3-u3-zY9" userLabel="Grouped Table Source" customClass="OTGroupedTableSourceBehavior">
+                    <connections>
+                        <outlet property="dataProviderBehavior" destination="54d-gh-3pq" id="ch6-cb-P3i"/>
+                        <outlet property="tableView" destination="oG7-MH-XzN" id="nl6-kc-55U"/>
                     </connections>
                 </customObject>
             </objects>
@@ -916,7 +928,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="43483987-68FE-41FE-9374-8DE66CB2A9FF" width="48" height="48">
+        <image name="8A4AC302-7CDD-46CE-96DF-F1470C95C2FA" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
