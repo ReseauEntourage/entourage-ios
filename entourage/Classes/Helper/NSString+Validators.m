@@ -9,21 +9,14 @@
 
 - (BOOL)isValidEmail
 {
-
     NSString *stricterFilterString = @"^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,10})$";
-    
     return [self matchesRegularExpression:stricterFilterString];
 }
 
 - (BOOL)isValidPhoneNumber
 {
-#if DEBUG
-    return YES;
-#else
-    NSString *regexCA = @"^((\\+|00)1\\s?|)\\(?(\\d{3})\\)?\\s?(\\d{3})\\s?(\\d{4})$";
-    NSString *regexFR = @"^((\\+|00)33\\s?|0)[67](\\s?\\d{2}){4}$";
-    return [self matchesRegularExpression:regexFR] || [self matchesRegularExpression:regexCA];
-#endif
+    NSString *regex = @"^(\\+[0-9]+[\\- \\.]*)?(\\([0-9]+\\)[\\- \\.]*)?([0-9][0-9\\- \\.]+[0-9])$";
+    return [self matchesRegularExpression:regex];
 }
 
 - (BOOL)isValidCode {

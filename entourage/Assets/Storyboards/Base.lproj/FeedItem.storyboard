@@ -811,7 +811,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="9D5A30C0-F05A-455B-AF16-E842DBBF8C8B" translatesAutoresizingMaskIntoConstraints="NO" id="B5y-60-Dat">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="423C495B-6D5E-4E09-9E94-9E3BF8EB2EF0" translatesAutoresizingMaskIntoConstraints="NO" id="B5y-60-Dat">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="H5n-PU-mzk"/>
@@ -915,6 +915,9 @@
                                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                        <connections>
+                                            <action selector="txtPhone_EditingChanged:" destination="f7z-jk-TMf" eventType="editingChanged" id="PWD-NL-7u9"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aY8-za-izb">
                                         <rect key="frame" x="15" y="67" width="298" height="1"/>
@@ -975,7 +978,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="9D5A30C0-F05A-455B-AF16-E842DBBF8C8B" width="48" height="48">
+        <image name="423C495B-6D5E-4E09-9E94-9E3BF8EB2EF0" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

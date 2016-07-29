@@ -8,6 +8,7 @@
 
 #import "OTAddressBookService.h"
 #import "OTAddressBookItem.h"
+#import "NSString+Validators.h"
 @import AddressBook;
 
 @implementation OTAddressBookService
@@ -69,13 +70,13 @@
 - (NSString *)readPhone:(ABRecordRef)record {
     NSString *phone = @"";
     ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(record, kABPersonPhoneProperty));
+    NSString *readPhone = nil;
     for(CFIndex phoneIndex = 0; phoneIndex < ABMultiValueGetCount(phones); phoneIndex++) {
         NSString *mobileLabel = (__bridge NSString*)ABMultiValueCopyLabelAtIndex(phones, phoneIndex);
-        phone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, phoneIndex);
-        if(!phone)
+        readPhone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, phoneIndex);
+        if(![readPhone isValidPhoneNumber])
             continue;
-        if([phone isEqualToString:@""])
-            continue;
+        phone = readPhone;
         if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
             break;
     }

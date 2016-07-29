@@ -11,6 +11,7 @@
 #import "UIColor+entourage.h"
 #import "UIBarButtonItem+factory.h"
 #import "UITextField+indentation.h"
+#import "NSString+Validators.h"
 
 @interface OTEntourageInviteByPhoneViewController ()
 
@@ -33,6 +34,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     [self.txtPhone becomeFirstResponder];
+}
+
+- (IBAction)txtPhone_EditingChanged:(id)sender {
+    [self.btnSave changeEnabled:[self.txtPhone.text isValidPhoneNumber]];
 }
 
 #pragma mark - private members
