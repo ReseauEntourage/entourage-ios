@@ -14,9 +14,9 @@
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
 
-#define TOUR_COLOR_MEDICAL [UIColor redColor]
-#define TOUR_COLOR_SOCIAL [UIColor blueColor]
-#define TOUR_COLOR_DISTRIBUTIVE [UIColor greenColor]
+#define TOUR_COLOR_MEDICAL [UIColor colorWithRed:1 green:153.0/255.0 blue:153.0/255.0 alpha:1]
+#define TOUR_COLOR_SOCIAL [UIColor colorWithRed:151.0/255.0 green:215.0/255.0 blue:145.0/255.0 alpha:1]
+#define TOUR_COLOR_DISTRIBUTIVE [UIColor colorWithRed:1 green:197.0/255.0 blue:127.0/255.0 alpha:1]
 
 @implementation OTTour
 

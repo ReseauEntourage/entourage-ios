@@ -655,8 +655,6 @@ static BOOL didGetAnyData = NO;
     [controller setEncounter:encounter];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:navController animated:YES completion:nil];
-    
-    //[Flurry logEvent:@"Open_Encounter_From_Map" withParameters:@{ @"encounter_id" : encounterAnnotation.encounter.sid }];
 }
 
 - (void)displayPoiDetails:(MKAnnotationView *)view {

@@ -145,7 +145,6 @@
         MKPolylineRenderer *aRenderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
 
         OTTour *tour = [self.drawnTours objectForKey:polyline];
-        //NSLog(@"%d TOUR-TYPE %@", tour.sid.intValue, tour.tourType);
         aRenderer.strokeColor = [OTTour colorForTourType:tour.type];
         if (self.mapController.isTourRunning && tour == nil) {
             aRenderer.strokeColor = [OTTour colorForTourType:self.mapController.currentTourType];
