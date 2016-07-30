@@ -9,5 +9,6 @@
 - (BOOL)isNotEmpty;
 - (BOOL)isNumeric;
 - (NSDecimalNumber *)numberFromString;
+- (NSString *) phoneNumberServerRepresentation;
 
 @end

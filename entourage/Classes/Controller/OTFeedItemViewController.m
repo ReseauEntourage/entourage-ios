@@ -64,7 +64,7 @@ typedef NS_ENUM(unsigned) {
 
 
 
-@interface OTFeedItemViewController () <UITextViewDelegate, OTFeedItemDetailsOptionsDelegate, OTFeedItemSummaryDelegate, OTTourJoinRequestDelegate, OTFeedItemInfoDelegate, InviteSourceDelegate>
+@interface OTFeedItemViewController () <UITextViewDelegate, OTFeedItemDetailsOptionsDelegate, OTFeedItemSummaryDelegate, OTTourJoinRequestDelegate, OTFeedItemInfoDelegate, InviteSourceDelegate, InviteSuccessDelegate>
 
 @property (nonatomic, weak) IBOutlet OTFeedItemSummaryView *feedSummaryView;
 @property (nonatomic, weak) IBOutlet UIButton *timelineButton;
@@ -272,6 +272,12 @@ typedef NS_ENUM(unsigned) {
 
 - (void)inviteByPhone {
     [self performSegueWithIdentifier:@"InvitePhoneSegue" sender:nil];
+}
+
+#pragma mark - InviteSuccessDelegate implementation
+
+- (void)didInviteWithSuccess {
+    [self performSegueWithIdentifier:@"InvitationSentSegue" sender:nil];
 }
 
 - (void)showOptions {
@@ -821,10 +827,12 @@ static CGFloat keyboardOverlap;
     else if ([segue.identifier isEqualToString:@"InviteContactsSegue"]) {
         OTEntourageInviteContactsViewController *controller = (OTEntourageInviteContactsViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
+        controller.delegate = self;
     }
     else if ([segue.identifier isEqualToString:@"InvitePhoneSegue"]) {
         OTEntourageInviteByPhoneViewController *controller = (OTEntourageInviteByPhoneViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
+        controller.delegate = self;
     }
 }
 

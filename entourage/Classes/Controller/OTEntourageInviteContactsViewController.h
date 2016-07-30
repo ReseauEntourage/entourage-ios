@@ -10,6 +10,7 @@
 #import "OTDataSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTFeedItem.h"
+#import "OTEntourageInviteSourceViewController.h"
 
 @interface OTEntourageInviteContactsViewController : UIViewController
 
@@ -17,5 +18,6 @@
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
+@property (nonatomic, weak) id<InviteSuccessDelegate> delegate;
 
 @end

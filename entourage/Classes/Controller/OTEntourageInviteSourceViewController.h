@@ -15,6 +15,12 @@
 
 @end
 
+@protocol InviteSuccessDelegate <NSObject>
+
+- (void)didInviteWithSuccess;
+
+@end
+
 @interface OTEntourageInviteSourceViewController : UIViewController
 
 @property(nonatomic, weak) id<InviteSourceDelegate> delegate;

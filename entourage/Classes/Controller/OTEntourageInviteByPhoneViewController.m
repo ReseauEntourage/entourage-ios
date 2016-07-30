@@ -12,6 +12,8 @@
 #import "UIBarButtonItem+factory.h"
 #import "UITextField+indentation.h"
 #import "NSString+Validators.h"
+#import "OTFeedItemFactory.h"
+#import "SVProgressHUD.h"
 
 @interface OTEntourageInviteByPhoneViewController ()
 
@@ -43,7 +45,16 @@
 #pragma mark - private members
 
 - (void)save {
-#warning TODO
+    [SVProgressHUD show];
+    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] invitePhone:[self.txtPhone.text phoneNumberServerRepresentation] withSuccess:^() {
+        [SVProgressHUD dismiss];
+        [self.navigationController popViewControllerAnimated:YES];
+        if(self.delegate)
+            [self.delegate didInviteWithSuccess];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD dismiss];
+        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"inviteByPhoneFailed") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+    }];
 }
 
 @end

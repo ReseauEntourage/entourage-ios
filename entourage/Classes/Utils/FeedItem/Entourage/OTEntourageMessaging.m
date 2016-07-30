@@ -25,4 +25,17 @@
                                   }];
 }
 
+- (void)invitePhone:(NSString *)phone withSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+    [[OTEntourageService new] inviteNumber:phone toEntourage:self.entourage success:^() {
+        NSLog(@"INVITE BY PHONE %@", phone);
+        if(success)
+            success();
+        
+    } failure:^(NSError *error) {
+        NSLog(@"ERROR INVITE BY PHONE %@", error.description);
+        if(failure)
+            failure(error);
+    }];
+}
+
 @end

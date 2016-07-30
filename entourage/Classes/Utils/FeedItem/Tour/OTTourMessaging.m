@@ -25,4 +25,8 @@
                              }];
 }
 
+- (void)invitePhone:(NSString *)phone withSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+    // NOT IN THS VERSION (maybe 2.0)
+}
+
 @end

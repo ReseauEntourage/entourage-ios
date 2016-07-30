@@ -12,5 +12,6 @@
 @protocol OTMessagingDelegate <NSObject>
 
 - (void)send:(NSString *)message withSuccess:(void (^)(OTTourMessage *))success orFailure:(void (^)(NSError *))failure;
+- (void)invitePhone:(NSString *)phone withSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure;
 
 @end

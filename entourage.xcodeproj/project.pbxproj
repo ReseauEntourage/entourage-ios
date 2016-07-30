@@ -64,6 +64,7 @@
 		1E90036C1D351F40004E18BC /* OTOnboardingPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90036B1D351F40004E18BC /* OTOnboardingPictureViewController.m */; };
 		1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E90036D1D352C0B004E18BC /* UserPicture.storyboard */; };
 		1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */; };
+		1EA8358D1D4D0D330013B7D3 /* OTInviteSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA8358C1D4D0D330013B7D3 /* OTInviteSuccessViewController.m */; };
 		1EACE4161D11515200F3A2A6 /* OTEntourageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */; };
 		1EACE4171D11515200F3A2A6 /* OTEntourageStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4091D11515200F3A2A6 /* OTEntourageStateTransition.m */; };
 		1EACE4181D11515200F3A2A6 /* OTFeedItemFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE40B1D11515200F3A2A6 /* OTFeedItemFactory.m */; };
@@ -310,6 +311,8 @@
 		1EA51FCB1D366F6B00350255 /* OTPictureUploadService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPictureUploadService.h; path = Amazon/OTPictureUploadService.h; sourceTree = "<group>"; };
 		1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTPictureUploadService.m; path = Amazon/OTPictureUploadService.m; sourceTree = "<group>"; };
 		1EA51FCE1D368AD800350255 /* OTAmazonConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
+		1EA8358B1D4D0D330013B7D3 /* OTInviteSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTInviteSuccessViewController.h; sourceTree = "<group>"; };
+		1EA8358C1D4D0D330013B7D3 /* OTInviteSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTInviteSuccessViewController.m; sourceTree = "<group>"; };
 		1EACE4061D11515200F3A2A6 /* OTEntourageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFactory.h; sourceTree = "<group>"; };
 		1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageFactory.m; sourceTree = "<group>"; };
 		1EACE4081D11515200F3A2A6 /* OTEntourageStateTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageStateTransition.h; sourceTree = "<group>"; };
@@ -872,6 +875,8 @@
 				1E40A3391D4A4BD0009E2D73 /* OTEntourageInviteContactsViewController.m */,
 				1E40A33B1D4A4BE6009E2D73 /* OTEntourageInviteByPhoneViewController.h */,
 				1E40A33C1D4A4BE6009E2D73 /* OTEntourageInviteByPhoneViewController.m */,
+				1EA8358B1D4D0D330013B7D3 /* OTInviteSuccessViewController.h */,
+				1EA8358C1D4D0D330013B7D3 /* OTInviteSuccessViewController.m */,
 			);
 			name = Entourage;
 			sourceTree = "<group>";
@@ -1713,6 +1718,7 @@
 				45E267821C860239004D14EB /* OTTourJoinRequestViewController.m in Sources */,
 				0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */,
 				454C8F501C4F4C45001362B2 /* UITextField+indentation.m in Sources */,
+				1EA8358D1D4D0D330013B7D3 /* OTInviteSuccessViewController.m in Sources */,
 				4536FC5E1CC64E55000BF620 /* OTSpeechKitManager.m in Sources */,
 				1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */,
 				1E71E6531D108790001F3777 /* NSNotification+entourage.m in Sources */,
