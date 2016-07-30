@@ -310,26 +310,38 @@ NSString *const kEntourages = @"entourages";
 - (void)quitEntourage:(OTEntourage *)entourage
          success:(void (^)())success
          failure:(void (^)(NSError *error))failure {
-    
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_QUIT, entourage.uid, USER_ID, TOKEN];
-    
     [[OTHTTPRequestManager sharedInstance]
      DELETEWithUrl:url
      andParameters:nil
      andSuccess:^(id responseObject)
      {
-         if (success) {
+         if (success)
              success();
-         }
      }
      andFailure:^(NSError *error)
      {
          if (failure)
-         {
              failure(error);
-         }
+     }];
+}
+
+- (void)inviteNumber:(NSString *)phoneNumber toEntourage:(OTEntourage *)entourage success:(void (^)())success failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_INVITE, entourage.uid, TOKEN];
+    NSDictionary *messageDictionary = @{@"invite" : @{@"mode": @"SMS", @"phone_number": phoneNumber}};
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url
+     andParameters:messageDictionary
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+             success();
      }
-     ];
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+             failure(error);
+     }];
 }
 
 /**************************************************************************************************/

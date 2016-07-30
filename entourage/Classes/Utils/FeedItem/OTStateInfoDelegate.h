@@ -24,5 +24,6 @@ typedef enum {
 
 - (FeedItemState)getState;
 - (BOOL)canChangeEditState;
+- (BOOL)canInvite;
 
 @end

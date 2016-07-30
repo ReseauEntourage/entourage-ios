@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "OTDataSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
+#import "OTFeedItem.h"
 
 @interface OTEntourageInviteContactsViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
+
+@property (nonatomic, strong) OTFeedItem *feedItem;
 
 @end

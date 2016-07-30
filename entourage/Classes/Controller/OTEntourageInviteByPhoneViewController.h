@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTFeedItem.h"
 
 @interface OTEntourageInviteByPhoneViewController : UIViewController
+
+@property (nonatomic, strong) OTFeedItem *feedItem;
 
 @end

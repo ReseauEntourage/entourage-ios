@@ -60,5 +60,8 @@
          success:(void (^)())success
          failure:(void (^)(NSError *error))failure;
 
+- (void)inviteNumber:(NSString *)phoneNumber toEntourage:(OTEntourage *)entourage
+              success:(void (^)())success
+              failure:(void (^)(NSError *error))failure;
 
 @end

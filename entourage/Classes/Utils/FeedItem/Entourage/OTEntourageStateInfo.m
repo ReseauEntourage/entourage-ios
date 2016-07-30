@@ -42,4 +42,8 @@
     return NO;
 }
 
+- (BOOL)canInvite {
+    return YES;
+}
+
 @end

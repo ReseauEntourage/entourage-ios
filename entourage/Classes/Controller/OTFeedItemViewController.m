@@ -19,6 +19,8 @@
 #import "OTFeedItemInfoView.h"
 #import "OTTourJoinRequestViewController.h"
 #import "OTEntourageInviteSourceViewController.h"
+#import "OTEntourageInviteContactsViewController.h"
+#import "OTEntourageInviteByPhoneViewController.h"
 
 // Models
 #import "OTEntourage.h"
@@ -231,9 +233,15 @@ typedef NS_ENUM(unsigned) {
     if (IS_ACCEPTED) {
         if(![[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canChangeEditState])
             return;
-        UIBarButtonItem *plusButton = [UIBarButtonItem createWithImageNamed:@"userPlus" withTarget:self andAction:@selector(addUser)];
         UIBarButtonItem *moreButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self andAction:@selector(showOptions)];
-        [self.navigationItem setRightBarButtonItems:@[moreButton, plusButton]];
+        
+        if(![[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canInvite])
+            [self.navigationItem setRightBarButtonItems:@[moreButton]];
+        else {
+            UIBarButtonItem *plusButton = [UIBarButtonItem createWithImageNamed:@"userPlus" withTarget:self andAction:@selector(addUser)];
+            [self.navigationItem setRightBarButtonItems:@[moreButton, plusButton]];
+        }
+            
     } else {
         UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(doJoinTour)];
         [self.navigationItem setRightBarButtonItem:joinButton];
@@ -809,6 +817,14 @@ static CGFloat keyboardOverlap;
     else if ([segue.identifier isEqualToString:@"InviteSourceSegue"]) {
         OTEntourageInviteSourceViewController *controller = (OTEntourageInviteSourceViewController *)segue.destinationViewController;
         controller.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"InviteContactsSegue"]) {
+        OTEntourageInviteContactsViewController *controller = (OTEntourageInviteContactsViewController *)segue.destinationViewController;
+        controller.feedItem = self.feedItem;
+    }
+    else if ([segue.identifier isEqualToString:@"InvitePhoneSegue"]) {
+        OTEntourageInviteByPhoneViewController *controller = (OTEntourageInviteByPhoneViewController *)segue.destinationViewController;
+        controller.feedItem = self.feedItem;
     }
 }
 
