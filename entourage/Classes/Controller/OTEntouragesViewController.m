@@ -19,7 +19,6 @@
 
 // Services
 #import "OTFeedsService.h"
-#import "OTTourService.h"
 #import "OTUser.h"
 #import "OTTour.h"
 #import "OTFeedItem.h"
@@ -30,6 +29,7 @@
 #import "UIViewController+menu.h"
 #import "UIColor+entourage.h"
 #import "SVProgressHUD.h"
+#import "OTFeedItemFactory.h"
 
 
 
@@ -222,23 +222,19 @@ typedef NS_ENUM(NSInteger){
             if ([tour.status isEqualToString:TOUR_STATUS_ONGOING]) {
                 [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:tour];
             } else {
-                tour.status = TOUR_STATUS_FREEZED;
                 [self.indicatorView startAnimating];
-                [[OTTourService new] closeTour:tour
-                                   withSuccess:^(OTTour *closedTour) {
-                                       [self.indicatorView stopAnimating];
-                                       [self.closedToursPagination.feedItems removeObject:tour];
-                                       NSInteger selectedSegmentIndex = self.statusSC.selectedSegmentIndex;
-                                       if (selectedSegmentIndex == EntourageStatusClosed) {
-                                           [self.tableView removeFeedItem:tour];
-                                           [self.tableView reloadData];
-                                       }
-                                   } failure:^(NSError *error) {
-                                       [self.indicatorView stopAnimating];
-                                       [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
-                                       NSLog(@"%@",[error localizedDescription]);
-                                       tour.status = FEEDITEM_STATUS_CLOSED;
-                                   }];
+                [[[OTFeedItemFactory createFor:tour] getStateTransition] closeWithSuccess:^(BOOL isTour) {
+                    [self.indicatorView stopAnimating];
+                    [self.activeToursPagination.feedItems removeObject:tour];
+                    [self.closedToursPagination.feedItems addObject:tour];
+                    [self.tableView removeFeedItem:tour];
+                    [self.tableView reloadData];
+                } orFailure:^(NSError *error) {
+                    [self.indicatorView stopAnimating];
+                    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
+                    NSLog(@"%@",[error localizedDescription]);
+                    tour.status = FEEDITEM_STATUS_CLOSED;
+                }];
             }
         } else {
             [self performSegueWithIdentifier:@"QuitFeedItemSegue" sender:tour];
