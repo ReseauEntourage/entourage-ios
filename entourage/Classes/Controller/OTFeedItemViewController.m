@@ -812,6 +812,9 @@ static CGFloat keyboardOverlap;
         UINavigationController *navController = segue.destinationViewController;
         OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
         controller.userId = (NSNumber *)sender;
+        OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+        if([currentUser.sid isEqual:controller.userId])
+            controller.user = currentUser;
     }
     else if ([segue.identifier isEqualToString:@"PublicJoinRequestSegue"]) {
         OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
