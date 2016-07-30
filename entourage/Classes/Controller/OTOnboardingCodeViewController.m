@@ -19,6 +19,7 @@
 #import "UIScrollView+entourage.h"
 #import "NSString+Validators.h"
 #import "UIBarButtonItem+factory.h"
+#import "NSError+message.h"
 
 @interface OTOnboardingCodeViewController ()
 
@@ -104,7 +105,7 @@
                                    [[NSUserDefaults standardUserDefaults] synchronize];
                                    [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:self];
                                } failure: ^(NSError *error) {
-                                   [SVProgressHUD showErrorWithStatus:@""];
+                                   [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
                                }];
 }
 

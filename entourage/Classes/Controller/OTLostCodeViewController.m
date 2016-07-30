@@ -72,7 +72,7 @@
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
 #if DEBUG
-    self.phoneTextField.text = @"+40723199641";
+    self.phoneTextField.text = @"+40724593579";
 #endif
 }
 

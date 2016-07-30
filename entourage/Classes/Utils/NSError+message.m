@@ -7,6 +7,7 @@
 //
 
 #import "NSError+message.h"
+#import "OTConsts.h"
 
 @implementation NSError (message)
 
@@ -14,7 +15,9 @@
     NSDictionary *userInfo = [self userInfo];
     NSString *errorMessage = @"";
     NSDictionary *errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
-    //NSString *code = [errorDictionary valueForKey:@"code"];
+    NSString *code = [errorDictionary valueForKey:@"code"];
+    if([code caseInsensitiveCompare:@"UNAUTHORIZED"] == NSOrderedSame)
+        return OTLocalizedString(@"invalidCode");
     if (errorDictionary)
         errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
     return errorMessage;
