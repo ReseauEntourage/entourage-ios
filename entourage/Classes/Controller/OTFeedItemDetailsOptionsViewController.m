@@ -11,6 +11,7 @@
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 #import "OTFeedItemFactory.h"
+#import "SVProgressHUD.h"
 
 #define BUTTON_HEIGHT 44.0f
 #define BUTTON_DELTAY  8.0f
@@ -61,16 +62,11 @@
     [self.view addSubview:button];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Actions
 - (IBAction)doFreezeFeedItem {
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
+        [self dismissViewControllerAnimated:NO completion:nil];
         [self.delegate feedItemFrozen:self.feedItem];
-        [self dismissViewControllerAnimated:YES completion:nil];
     } orFailure:nil];
 }
 

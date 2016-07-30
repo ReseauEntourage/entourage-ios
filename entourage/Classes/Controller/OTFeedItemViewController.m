@@ -410,9 +410,9 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (void)feedItemFrozen:(OTFeedItem *)item {
-    self.feedItem = item;
-    self.chatToolbar.hidden = YES;
-    [self.navigationItem setRightBarButtonItems:nil];
+    [self dismissViewControllerAnimated:NO completion:^() {
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closedItem")];
+    }];
 }
 
 /**************************************************************************************************/
