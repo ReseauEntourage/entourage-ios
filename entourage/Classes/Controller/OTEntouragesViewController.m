@@ -233,7 +233,6 @@ typedef NS_ENUM(NSInteger){
                     [self.indicatorView stopAnimating];
                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
                     NSLog(@"%@",[error localizedDescription]);
-                    tour.status = FEEDITEM_STATUS_CLOSED;
                 }];
             }
         } else {

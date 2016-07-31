@@ -14,7 +14,6 @@
 
 - (IBAction)doQuitFeedItem {
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
-        self.feedItem.joinStatus = JOIN_NOT_REQUESTED;
         [self.feedItemQuitDelegate didQuitFeedItem];
     }];
 }

@@ -23,6 +23,7 @@
 }
 
 - (void)closeWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure {
+    NSString *oldStatus = self.tour.status;
     self.tour.status = TOUR_STATUS_FREEZED;
     [[OTTourService new] closeTour:self.tour
                        withSuccess:^(OTTour *updatedTour) {
@@ -30,18 +31,22 @@
                            success(YES);
                        } failure:^(NSError *error) {
                            NSLog(@"FREEZEerr %@", error.description);
+                           self.tour.status = oldStatus;
                            if(failure)
                                failure(error);
                        }];
 }
 
 - (void)quitWithSuccess:(void (^)())success {
+    NSString *oldJoinState = self.tour.joinStatus;
+    self.tour.joinStatus = JOIN_NOT_REQUESTED;
     [[OTTourService new] quitTour:self.tour
                           success:^() {
                               NSLog(@"Quited tour: %@", self.tour.uid);
                               success();
                           } failure:^(NSError *error) {
                               NSLog(@"QUITerr %@", error.description);
+                              self.tour.joinStatus = oldJoinState;
                           }];
 }
 
