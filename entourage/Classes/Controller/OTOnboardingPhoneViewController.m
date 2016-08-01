@@ -48,31 +48,28 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [[NSUserDefaults standardUserDefaults] setTemporaryUser:nil];
     [self.phoneTextField becomeFirstResponder];
 }
 
 - (IBAction)doContinue {
-    OTUser *currentUser = [OTUser new];
+    OTUser *temporaryUser = [OTUser new];
     NSString *phone = self.phoneTextField.text;
-    currentUser.phone = phone;
+    temporaryUser.phone = phone;
     
     [SVProgressHUD show];
     [[OTOnboardingService new] setupNewUserWithPhone:phone
         success:^(OTUser *onboardUser) {
             [SVProgressHUD dismiss];
             onboardUser.phone = phone;
-            [[NSUserDefaults standardUserDefaults] setCurrentUser:onboardUser];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSUserDefaults standardUserDefaults] setTemporaryUser:onboardUser];
             [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
             NSString *errorMessage = [error userUpdateMessage];
 #warning Create special message(code) on server-side
             if ([errorMessage isEqualToString:@"Phone n'est pas disponible"]) {
-                [[NSUserDefaults standardUserDefaults] setCurrentUser:currentUser];
-                [[NSUserDefaults standardUserDefaults] synchronize];
+                [[NSUserDefaults standardUserDefaults] setTemporaryUser:temporaryUser];
                 [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"alreadyRegisteredMessage")];
-                [[NSUserDefaults standardUserDefaults] setCurrentUser:currentUser];
-                [[NSUserDefaults standardUserDefaults] synchronize];
                 [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
             } else {
                 [SVProgressHUD showErrorWithStatus:errorMessage];

@@ -159,14 +159,12 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [[NSUserDefaults standardUserDefaults] synchronize];
                                    
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
-                                   if (loggedNumbers == nil) {
+                                   if (loggedNumbers == nil)
                                        loggedNumbers = [NSMutableArray new];
-                                   }
-                                   if ([loggedNumbers containsObject:self.phoneNumberServerRepresentation] && !deviceAPNSid) {
+                                   if ([loggedNumbers containsObject:self.phoneNumberServerRepresentation] && !deviceAPNSid)
                                        [UIStoryboard showSWRevealController];
-                                   } else {
+                                   else
                                        [self performSegueWithIdentifier:@"OTTutorial" sender:self];
-                                   }
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    NSString *alertTitle = OTLocalizedString(@"error");

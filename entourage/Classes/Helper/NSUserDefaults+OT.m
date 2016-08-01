@@ -3,7 +3,8 @@
 
 #import "NSUserDefaults+OT.h"
 
-static NSString *const kUser   = @"kUser";
+static NSString *const kUser = @"kUser";
+static NSString *const kTemporaryUser = @"kTemporaryUser";
 
 @implementation NSUserDefaults (OT)
 
@@ -28,8 +29,26 @@ static NSString *const kUser   = @"kUser";
 {
 	NSData *encodedObject = [self objectForKey:kUser];
 	OTUser *user = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
-
 	return user;
+}
+
+- (void)setTemporaryUser:(OTUser *)temporaryUser {
+    if (temporaryUser)
+    {
+        NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:temporaryUser];
+        [self setObject:encodedObject forKey:kTemporaryUser];
+    }
+    else
+    {
+        [self removeObjectForKey:kTemporaryUser];
+    }
+    [self synchronize];
+}
+
+- (OTUser *)temporaryUser {
+    NSData *encodedObject = [self objectForKey:kTemporaryUser];
+    OTUser *user = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+    return user;
 }
 
 + (BOOL)wasDisclaimerAccepted {

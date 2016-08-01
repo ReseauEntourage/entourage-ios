@@ -68,7 +68,7 @@
 
 - (void)doRegenerateCode {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *phone = [userDefaults currentUser].phone;
+    NSString *phone = [userDefaults temporaryUser].phone;
     [SVProgressHUD show];
     [[OTAuthService new] regenerateSecretCode:phone.phoneNumberServerRepresentation
                                       success:^(OTUser *user) {
@@ -88,7 +88,7 @@
 
 - (IBAction)doContinue {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *phone = [userDefaults currentUser].phone;
+    NSString *phone = [userDefaults temporaryUser].phone;
     NSString *code = self.codeTextField.text;
     NSString *deviceAPNSid = [userDefaults objectForKey:@"device_token"];
     [SVProgressHUD show];
@@ -100,9 +100,8 @@
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    user.phone = phone;
                                    [SVProgressHUD dismiss];
-                                   
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-                                   [[NSUserDefaults standardUserDefaults] synchronize];
+                                   [[NSUserDefaults standardUserDefaults] setTemporaryUser:nil];
                                    [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:self];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];

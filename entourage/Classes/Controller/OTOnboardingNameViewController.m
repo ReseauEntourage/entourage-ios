@@ -79,7 +79,6 @@
                                                    // TODO phone is not in response so need to restore it manually
                                                    user.phone = currentUser.phone;
                                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-                                                   [[NSUserDefaults standardUserDefaults] synchronize];
                                                    [SVProgressHUD dismiss];
                                                    [self performSegueWithIdentifier:ADD_PICTURE_SEGUE sender:self];
                                                }
