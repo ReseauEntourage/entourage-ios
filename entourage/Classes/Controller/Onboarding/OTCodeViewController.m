@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.title = @"";
     [self addRegenerateBarButton];
     
@@ -48,6 +48,10 @@
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 #pragma mark - Private
@@ -67,8 +71,7 @@
 }
 
 - (void)doRegenerateCode {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *phone = [userDefaults temporaryUser].phone;
+    NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
     [SVProgressHUD show];
     [[OTAuthService new] regenerateSecretCode:phone.phoneNumberServerRepresentation
                                       success:^(OTUser *user) {
@@ -87,10 +90,9 @@
 }
 
 - (IBAction)doContinue {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *phone = [userDefaults temporaryUser].phone;
+    NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
     NSString *code = self.codeTextField.text;
-    NSString *deviceAPNSid = [userDefaults objectForKey:@"device_token"];
+    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
     [SVProgressHUD show];
     
     [[OTAuthService new] authWithPhone:phone
@@ -100,8 +102,8 @@
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    user.phone = phone;
                                    [SVProgressHUD dismiss];
-                                   [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-                                   [[NSUserDefaults standardUserDefaults] setTemporaryUser:nil];
+                                   [NSUserDefaults standardUserDefaults].currentUser = user;
+                                   [NSUserDefaults standardUserDefaults].temporaryUser = nil;
                                    [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:self];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];

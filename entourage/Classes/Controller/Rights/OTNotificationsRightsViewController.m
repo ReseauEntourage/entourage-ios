@@ -12,13 +12,14 @@
 #import "UIView+entourage.h"
 #import "NSNotification+entourage.h"
 #import "UIBarButtonItem+factory.h"
+#import "NSUserDefaults+OT.h"
+#import "OTUser.h"
 
 @interface OTNotificationsRightsViewController()
 
 @property (nonatomic, weak) IBOutlet UIButton *activateButton;
 
 @end
-
 
 @implementation OTNotificationsRightsViewController
 
@@ -37,7 +38,7 @@
 }
 
 - (void)addIgnoreButton {
-    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore") withTarget:self andAction:@selector(doIgnore) colored:[UIColor whiteColor]];
+    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore") withTarget:self andAction:@selector(doShowNewsFeeds) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:ignoreButton];
 }
 
@@ -52,19 +53,23 @@
 
 - (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {
     NSLog(@"received kNotificationPushStatusChanged");
-    [UIStoryboard showSWRevealController];
+    [self doShowNewsFeeds];
 }
 
 #pragma mark - IBAction
 
-- (void)doIgnore {
+- (void)doShowNewsFeeds {
+    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+    if (loggedNumbers == nil)
+        loggedNumbers = [NSMutableArray new];
+    [loggedNumbers addObject:[NSUserDefaults standardUserDefaults].currentUser.phone];
+    [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [UIStoryboard showSWRevealController];
 }
 
 - (IBAction)doContinue {
     [self promptUserForPushNotifications];
 }
-
-
 
 @end

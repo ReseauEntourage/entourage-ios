@@ -17,6 +17,7 @@
 #import "OTAuthService.h"
 #import "NSUserDefaults+OT.h"
 #import "NSError+message.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTPicturePreviewViewController ()
 
@@ -38,8 +39,6 @@
     self.scrollView.layer.borderColor = [UIColor whiteColor].CGColor;
 }
 
-
-
 static BOOL wasShown = YES;
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
@@ -57,13 +56,13 @@ static BOOL wasShown = YES;
     [[OTPictureUploadService new] uploadPicture:finalImage withSuccess:^(NSString *pictureName) {
         currentUser.avatarKey = pictureName;
         [[OTAuthService new] updateUserInformationWithUser:currentUser success:^(OTUser *user) {
-            [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+            [NSUserDefaults standardUserDefaults].currentUser = user;
+            if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
+                [self popToProfile];
+            else
+                [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationProfilePictureUpdated object:self];
             [SVProgressHUD dismiss];
-            if (self.isOnboarding)
-                [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
-            else
-                [self popToProfile];
         }
         failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];

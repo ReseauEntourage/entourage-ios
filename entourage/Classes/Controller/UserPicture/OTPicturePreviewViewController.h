@@ -11,6 +11,5 @@
 @interface OTPicturePreviewViewController : UIViewController
 
 @property (nonatomic, strong) UIImage *image;
-@property (nonatomic) BOOL isOnboarding;
 
 @end

@@ -14,6 +14,7 @@
 #import "UIStoryboard+entourage.h"
 #import "OTPhotoPickerBehavior.h"
 #import "UIBarButtonItem+factory.h"
+#import "NSUserDefaults+OT.h"
 
 #define PREVIEW_PICTURE_SEGUE @"PreviewPictureSegue"
 
@@ -31,12 +32,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    if (self.isOnboarding)
+    if (![NSUserDefaults standardUserDefaults].isTutorialCompleted)
         [self addIgnoreButton];
-    else
-        self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     [self.btnFromGallery setupHalfRoundedCorners];
     [self.btnTakePicture setupHalfRoundedCorners];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    if ([NSUserDefaults standardUserDefaults].isTutorialCompleted)
+        self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    else
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (IBAction)pictureSelected:(id)sender {
@@ -49,7 +55,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:PREVIEW_PICTURE_SEGUE]) {
         OTPicturePreviewViewController *controller = (OTPicturePreviewViewController*)[segue destinationViewController];
-        controller.isOnboarding = self.isOnboarding;
         controller.image = self.image;
     }
 }

@@ -39,36 +39,34 @@
 }
 
 - (void)addIgnoreButton {
-    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString withTarget:self andAction:@selector(doIgnore) colored:[UIColor whiteColor]];
+    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString withTarget:self andAction:@selector(goToNotifications) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:ignoreButton];
 }
 
 #pragma mark - Private
 
 - (void)promptUserForLocationUsage {
-    if ([OTLocationManager sharedInstance].started) {
-        [self performSegueWithIdentifier:@"GeoToNotificationsSegue" sender:self];
-    } else {
+    if ([OTLocationManager sharedInstance].started)
+        [self goToNotifications];
+    else
         [[OTLocationManager sharedInstance] startLocationUpdates];
-    }
 }
-
 
 #pragma mark - App authorization notifications
 
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
     NSLog(@"received kNotificationLocationAuthorizationChanged");
     BOOL allowed = [notification readAllowedLocation];
-    if (allowed) {
-        [self performSegueWithIdentifier:@"GeoToNotificationsSegue" sender:self];
-    } else {
+    if (allowed)
+        [self goToNotifications];
+    else
 #warning What to show?
-    }
+        ;
 }
 
 #pragma mark - IBAction
 
-- (void)doIgnore {
+- (void)goToNotifications {
     [self performSegueWithIdentifier:@"GeoToNotificationsSegue" sender:self];
 }
 

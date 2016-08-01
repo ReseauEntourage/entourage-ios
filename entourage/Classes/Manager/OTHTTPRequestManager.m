@@ -38,8 +38,7 @@
 
 + (NSDictionary*)commonParameters
 {
-    OTUser *user = [[NSUserDefaults standardUserDefaults] currentUser];
-
+    OTUser *user =[NSUserDefaults standardUserDefaults].currentUser;
     return user ? @{ @"token" : user.token } : nil;
 }
 

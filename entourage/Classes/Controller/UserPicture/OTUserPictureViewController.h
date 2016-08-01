@@ -10,6 +10,4 @@
 
 @interface OTUserPictureViewController : UIViewController
 
-@property (nonatomic) BOOL isOnboarding;
-
 @end

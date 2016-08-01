@@ -199,10 +199,7 @@
 }
 
 - (void)showKeyboard:(NSNotification*)notification {
-    //[self.scrollView scrollToBottomFromKeyboardNotification:notification];
     [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
-    
 }
-
 
 @end

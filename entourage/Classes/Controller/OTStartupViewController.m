@@ -8,6 +8,7 @@
 
 #import "OTStartupViewController.h"
 #import "UIView+entourage.h"
+#import "NSUserDefaults+OT.h"
 
 //Helper
 #import "UINavigationController+entourage.h"
@@ -17,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
-
 
 @end
 
@@ -40,19 +40,9 @@
     [self.facebookButton setupHalfRoundedCorners];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [NSUserDefaults standardUserDefaults].temporaryUser = nil;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

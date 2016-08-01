@@ -10,6 +10,4 @@
 
 @interface OTUserNameViewController : UIViewController
 
-@property (nonatomic) BOOL isOnboarding;
-
 @end

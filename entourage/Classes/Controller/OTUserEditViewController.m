@@ -74,10 +74,6 @@ typedef NS_ENUM(NSInteger) {
         OTUserEditPasswordViewController *controller = (OTUserEditPasswordViewController*)navController.topViewController;
         controller.delegate = self;
     }
-    else if ([segue.identifier isEqualToString:EDIT_PICTURE_SEGUE]) {
-        OTUserPictureViewController *controller = (OTUserPictureViewController*)[segue destinationViewController];
-        controller.isOnboarding = NO;
-    }
 }
 
 /**************************************************************************************************/

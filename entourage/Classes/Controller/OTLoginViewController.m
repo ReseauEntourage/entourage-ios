@@ -81,9 +81,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.passwordTextField indentRight];
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    
-    
     [self.validateButton setupHalfRoundedCorners];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
 #if DEBUG
     // Ciprian Public - Staging
@@ -153,15 +152,13 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                success: ^(OTUser *user) {
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    user.phone = self.phoneNumberServerRepresentation;
-                                   [SVProgressHUD dismiss];
-                                   [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-                                   [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
-                                   [[NSUserDefaults standardUserDefaults] synchronize];
-                                   
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil)
                                        loggedNumbers = [NSMutableArray new];
-                                   if ([loggedNumbers containsObject:self.phoneNumberServerRepresentation] && !deviceAPNSid)
+                                   [SVProgressHUD dismiss];
+                                   [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
+                                   [NSUserDefaults standardUserDefaults].currentUser = user;
+                                   if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid)
                                        [UIStoryboard showSWRevealController];
                                    else
                                        [self performSegueWithIdentifier:@"UserProfileDetailsSegue" sender:self];
@@ -172,8 +169,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    NSString *buttonTitle = @"ok";
                                    if ([[error.userInfo valueForKey:JSONResponseSerializerWithDataKey] isEqualToString:@"unauthorized"]) {
                                        alertTitle = OTLocalizedString(@"tryAgain");
-                                       alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");                                       buttonTitle = OTLocalizedString(@"tryAgain_short");
-
+                                       alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");
+                                       buttonTitle = OTLocalizedString(@"tryAgain_short");
                                    }
                                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
                                                                                                   message:alertText
@@ -217,9 +214,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
         UINavigationController *navController = segue.destinationViewController;
         OTLostCodeViewController *controller = (OTLostCodeViewController *)navController.viewControllers.firstObject;
         controller.codeDelegate = self;
-    } else if ([segue.identifier isEqualToString:@"UserProfileDetailsSegue"]) {
-        OTUserEmailViewController *controller = (OTUserEmailViewController *)segue.destinationViewController;
-        controller.isOnboarding = NO;
     }
 }
 

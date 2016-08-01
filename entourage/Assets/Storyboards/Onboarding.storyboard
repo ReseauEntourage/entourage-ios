@@ -32,10 +32,13 @@
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="tO1-XO-EQd"/>
                                         <exclude reference="qBL-2d-2rD"/>
+                                        <exclude reference="tO1-XO-EQd"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <segue destination="BbA-ED-vfm" kind="show" id="FT0-SB-kB4"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhiteEntourage" translatesAutoresizingMaskIntoConstraints="NO" id="x1o-IU-aRU">
                                 <rect key="frame" x="12" y="40" width="56" height="56"/>
@@ -90,12 +93,12 @@ sur Entourage.</string>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="hSk-8c-gON"/>
+                                <exclude reference="J6t-Td-Obf"/>
                                 <exclude reference="Jqn-XP-hOr"/>
-                                <exclude reference="S56-e1-MrX"/>
                                 <exclude reference="NYh-bP-XrQ"/>
                                 <exclude reference="NzW-5S-2P8"/>
-                                <exclude reference="J6t-Td-Obf"/>
+                                <exclude reference="S56-e1-MrX"/>
+                                <exclude reference="hSk-8c-gON"/>
                             </mask>
                         </variation>
                     </view>
@@ -104,7 +107,6 @@ sur Entourage.</string>
                     <connections>
                         <outlet property="startButton" destination="jat-8a-lZx" id="RBI-eQ-VZb"/>
                         <outlet property="webView" destination="6ah-33-NTk" id="E7b-xD-5eL"/>
-                        <segue destination="BbA-ED-vfm" kind="show" identifier="CodeToEmailSegue" id="XzF-Ao-02t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QPt-Jm-DBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -150,9 +152,9 @@ numéro de portable? </string>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="uaN-2R-opd"/>
-                                                <exclude reference="NgL-b1-u9I"/>
                                                 <exclude reference="1Sf-jD-hlG"/>
+                                                <exclude reference="NgL-b1-u9I"/>
+                                                <exclude reference="uaN-2R-opd"/>
                                             </mask>
                                         </variation>
                                     </label>
@@ -169,8 +171,8 @@ numéro de portable? </string>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="Hzb-mB-taG"/>
                                                 <exclude reference="Gba-No-ok7"/>
+                                                <exclude reference="Hzb-mB-taG"/>
                                             </mask>
                                         </variation>
                                     </label>
@@ -205,8 +207,8 @@ numéro de portable? </string>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="y0v-mg-mAQ"/>
                                                 <exclude reference="oTt-ov-A0k"/>
+                                                <exclude reference="y0v-mg-mAQ"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -262,7 +264,7 @@ numéro de portable? </string>
                         <outlet property="heightContraint" destination="Wg4-Ig-Fqk" id="LIS-Ti-430"/>
                         <outlet property="phoneTextField" destination="8h5-LL-TYs" id="Yfa-sb-k8C"/>
                         <outlet property="scrollView" destination="ZKP-h6-GEA" id="0nk-qH-HWC"/>
-                        <segue destination="ay8-4Z-lNJ" kind="show" identifier="EmailToNameSegue" id="CzJ-t3-xN5"/>
+                        <segue destination="ay8-4Z-lNJ" kind="show" identifier="PhoneToCodeSegue" id="CzJ-t3-xN5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y9w-fS-4o9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -327,8 +329,8 @@ vérification</string>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="oQj-Ec-gnW"/>
                                                 <exclude reference="Wdy-XV-VRt"/>
+                                                <exclude reference="oQj-Ec-gnW"/>
                                             </mask>
                                         </variation>
                                     </label>
@@ -384,9 +386,9 @@ vérification</string>
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="0eh-TJ-r93"/>
                                                 <exclude reference="4eX-br-TBN"/>
                                                 <exclude reference="X3U-Bm-69i"/>
-                                                <exclude reference="0eh-TJ-r93"/>
                                                 <exclude reference="oVl-nZ-5xQ"/>
                                             </mask>
                                         </variation>
@@ -448,7 +450,7 @@ vérification</string>
                         <outlet property="heightContraint" destination="apC-Kc-icw" id="h6e-pA-KVC"/>
                         <outlet property="scrollView" destination="GL7-KN-5la" id="pQv-r2-Yis"/>
                         <outlet property="validateButton" destination="ZH7-Ij-WiF" id="caZ-eL-9TI"/>
-                        <segue destination="WWp-Jk-pyc" kind="show" identifier="UserProfileDetailsSegue" id="el8-oc-xQX"/>
+                        <segue destination="WWp-Jk-pyc" kind="show" identifier="CodeToEmailSegue" id="el8-oc-xQX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esw-lb-Cqw" userLabel="First Responder" sceneMemberID="firstResponder"/>

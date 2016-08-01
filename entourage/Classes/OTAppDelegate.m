@@ -103,8 +103,12 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
                                                  name:[kLoginFailureNotification copy]
                                                object:nil];
     
-    if ([[NSUserDefaults standardUserDefaults] currentUser])
-        [[OTLocationManager sharedInstance] startLocationUpdates];
+    if ([NSUserDefaults standardUserDefaults].currentUser) {
+        if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
+            [[OTLocationManager sharedInstance] startLocationUpdates];
+        else
+            [UIStoryboard showUserProfileDetails];
+    }
     else
     {
         self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -119,10 +123,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
             NSLog(@"ApplicationsERR: %@", error.description);
         }];
     }
-    
-    //[[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
-    //[[AFNetworkActivityLogger sharedLogger] startLogging];
-    
     [OTPictureUploadService configure];
     
 	return YES;
@@ -430,10 +430,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
 	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
 	                                                      NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
-    
-//    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
-//    [[SVProgressHUD appearance] setForegroundColor:[UIColor appOrangeColor]];
-//    [[SVProgressHUD appearance] setBackgroundColor:[UIColor whiteColor]];
 }
 
 @end

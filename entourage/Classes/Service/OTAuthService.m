@@ -235,7 +235,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
                               success:(void (^)(OTUser *user))success
                               failure:(void (^)(NSError *error))failure
 {
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_update_user", @""), kAPIUserRoute, kAPIMe, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_update_user", @""), kAPIUserRoute, kAPIMe, [NSUserDefaults standardUserDefaults].currentUser.token];
     
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[@"user"] = [user dictionaryForWebservice];

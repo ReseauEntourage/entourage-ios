@@ -48,8 +48,8 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [[NSUserDefaults standardUserDefaults] setTemporaryUser:nil];
     [self.phoneTextField becomeFirstResponder];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (IBAction)doContinue {
@@ -62,13 +62,13 @@
         success:^(OTUser *onboardUser) {
             [SVProgressHUD dismiss];
             onboardUser.phone = phone;
-            [[NSUserDefaults standardUserDefaults] setTemporaryUser:onboardUser];
+            [NSUserDefaults standardUserDefaults].temporaryUser = onboardUser;
             [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
             NSString *errorMessage = [error userUpdateMessage];
 #warning Create special message(code) on server-side
             if ([errorMessage isEqualToString:@"Phone n'est pas disponible"]) {
-                [[NSUserDefaults standardUserDefaults] setTemporaryUser:temporaryUser];
+                [NSUserDefaults standardUserDefaults].temporaryUser = temporaryUser;
                 [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"alreadyRegisteredMessage")];
                 [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
             } else {

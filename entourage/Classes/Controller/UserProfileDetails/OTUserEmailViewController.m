@@ -46,12 +46,13 @@
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
 #if DEBUG //TARGET_IPHONE_SIMULATOR
-    self.emailTextField.text = @"chip@tecknoworks.com";
+    self.emailTextField.text = @"brindusa.duma@tecknoworks.com";
 #endif
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.emailTextField becomeFirstResponder];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (IBAction)doContinue {
@@ -64,7 +65,7 @@
                                                success:^(OTUser *user) {
                                                    // TODO phone is not in response so need to restore it manually
                                                    user.phone = currentUser.phone;
-                                                   [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+                                                   [NSUserDefaults standardUserDefaults].currentUser = user;
                                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                                    [[NSUserDefaults standardUserDefaults] synchronize];
 
@@ -80,13 +81,6 @@
 - (void)showKeyboard:(NSNotification*)notification {
     [self.scrollView scrollToBottomFromKeyboardNotification:notification
                                          andHeightContraint:self.heightContraint];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"EmailToNameSegue"]) {
-        OTUserNameViewController *controller = (OTUserNameViewController *)segue.destinationViewController;
-        controller.isOnboarding = NO;
-    }
 }
 
 @end

@@ -37,7 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.title = @"";
     
     [self.firstNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
@@ -50,35 +50,29 @@
                                              selector:@selector(showKeyboard:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.firstNameTextField becomeFirstResponder];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
-
 - (IBAction)doContinue {
-    NSString *firstName = self.firstNameTextField.text;
-    NSString *lastName = self.lastNameTextField.text;
-    
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    currentUser.firstName = firstName;
-    currentUser.lastName = lastName;
+    currentUser.firstName = self.firstNameTextField.text;
+    currentUser.lastName = self.lastNameTextField.text;
     
     [SVProgressHUD show];
     [[OTAuthService new] updateUserInformationWithUser:currentUser
                                                success:^(OTUser *user) {
                                                    // TODO phone is not in response so need to restore it manually
                                                    user.phone = currentUser.phone;
-                                                   [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+                                                   [NSUserDefaults standardUserDefaults].currentUser = user;
                                                    [SVProgressHUD dismiss];
                                                    [self performSegueWithIdentifier:ADD_PICTURE_SEGUE sender:self];
                                                }
@@ -86,18 +80,10 @@
                                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
                                                    NSLog(@"ERR: something went wrong on onboarding user name: %@", error.description);
                                                }];
-
 }
 
 - (void)showKeyboard:(NSNotification*)notification {
     [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:ADD_PICTURE_SEGUE]) {
-        OTUserPictureViewController *controller = (OTUserPictureViewController*)[segue destinationViewController];
-        controller.isOnboarding = self.isOnboarding;
-    }
 }
 
 @end

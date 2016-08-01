@@ -13,7 +13,7 @@ static NSString *const kTemporaryUser = @"kTemporaryUser";
 
 - (void)setCurrentUser:(OTUser *)user
 {
-	if (user)
+    if (user)
 	{
 		NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:user];
 		[self setObject:encodedObject forKey:kUser];
@@ -51,9 +51,13 @@ static NSString *const kTemporaryUser = @"kTemporaryUser";
     return user;
 }
 
+- (BOOL)isTutorialCompleted {
+    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+    return [loggedNumbers containsObject:[self.currentUser phone]];
+}
+
 + (BOOL)wasDisclaimerAccepted {
     return [[NSUserDefaults standardUserDefaults] boolForKey:kDisclaimer];
 }
-
 
 @end

@@ -10,6 +10,4 @@
 
 @interface OTUserEmailViewController : UIViewController
 
-@property (nonatomic) BOOL isOnboarding;
-
 @end

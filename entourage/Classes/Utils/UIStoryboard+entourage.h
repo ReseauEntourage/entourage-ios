@@ -11,6 +11,7 @@
 @interface UIStoryboard (entourage)
 
 + (void)showStartup;
++ (void)showUserProfileDetails;
 + (void)showSWRevealController;
 + (UIStoryboard*)tourStoryboard;
 + (UIStoryboard*)entourageCreatorStoryboard;
