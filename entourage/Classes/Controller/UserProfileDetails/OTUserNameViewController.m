@@ -1,12 +1,12 @@
 //
-//  OTOnboardingNameViewController.m
+//  OTUserNameViewController.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 08/07/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTOnboardingNameViewController.h"
+#import "OTUserNameViewController.h"
 
 #import "IQKeyboardManager.h"
 #import "UITextField+indentation.h"
@@ -18,12 +18,12 @@
 #import "UIScrollView+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
-#import "OTOnboardingPictureViewController.h"
+#import "OTUserPictureViewController.h"
 #import "NSError+message.h"
 
 #define ADD_PICTURE_SEGUE @"AddPictureSegue"
 
-@interface OTOnboardingNameViewController ()
+@interface OTUserNameViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
 @property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation OTOnboardingNameViewController
+@implementation OTUserNameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -90,17 +90,13 @@
 }
 
 - (void)showKeyboard:(NSNotification*)notification {
-    //[self.scrollView scrollToBottomFromKeyboardNotification:notification];
     [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
-
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:ADD_PICTURE_SEGUE]) {
-        OTOnboardingPictureViewController *controller = (OTOnboardingPictureViewController*)[segue destinationViewController];
-        controller.isOnboarding = YES;
-        // TODO set delegate for action after picture is ok
-        //controller.delegate = self;
+        OTUserPictureViewController *controller = (OTUserPictureViewController*)[segue destinationViewController];
+        controller.isOnboarding = self.isOnboarding;
     }
 }
 

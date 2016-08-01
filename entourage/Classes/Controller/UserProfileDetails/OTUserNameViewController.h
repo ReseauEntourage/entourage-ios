@@ -1,5 +1,5 @@
 //
-//  OTOnboardingNameViewController.h
+//  OTUserNameViewController.h
 //  entourage
 //
 //  Created by Ciprian Habuc on 08/07/16.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OTOnboardingNameViewController : UIViewController
+@interface OTUserNameViewController : UIViewController
+
+@property (nonatomic) BOOL isOnboarding;
 
 @end

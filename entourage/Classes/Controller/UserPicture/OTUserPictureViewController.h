@@ -1,5 +1,5 @@
 //
-//  OTUserPicturePreviewViewController.h
+//  OTUserPictureViewController.h
 //  entourage
 //
 //  Created by sergiu buceac on 7/12/16.
@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OTOnboardingPreviewViewController : UIViewController
+@interface OTUserPictureViewController : UIViewController
 
-@property (nonatomic, strong) UIImage *image;
 @property (nonatomic) BOOL isOnboarding;
 
 @end

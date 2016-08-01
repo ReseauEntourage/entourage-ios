@@ -1,12 +1,12 @@
 //
-//  OTOnboardingCodeViewController.m
+//  OTCodeViewController.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 07/07/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTOnboardingCodeViewController.h"
+#import "OTCodeViewController.h"
 #import "IQKeyboardManager.h"
 #import "NSUserDefaults+OT.h"
 #import "UITextField+indentation.h"
@@ -21,7 +21,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "NSError+message.h"
 
-@interface OTOnboardingCodeViewController ()
+@interface OTCodeViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *codeTextField;
 @property (nonatomic, weak) IBOutlet UIButton *validateButton;
@@ -30,7 +30,7 @@
 
 @end
 
-@implementation OTOnboardingCodeViewController
+@implementation OTCodeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

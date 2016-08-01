@@ -1,5 +1,5 @@
 //
-//  OTOnboardingEmailViewController.h
+//  OTUserEmailViewController.h
 //  entourage
 //
 //  Created by Ciprian Habuc on 08/07/16.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OTOnboardingEmailViewController : UIViewController
+@interface OTUserEmailViewController : UIViewController
+
+@property (nonatomic) BOOL isOnboarding;
 
 @end

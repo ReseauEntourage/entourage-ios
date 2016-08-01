@@ -1,26 +1,26 @@
 //
-//  OTOnboardingNotificationsViewController.m
+//  OTNotificationsRightsViewController.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 13/07/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTOnboardingNotificationsViewController.h"
+#import "OTNotificationsRightsViewController.h"
 #import "OTConsts.h"
 #import "UIStoryboard+entourage.h"
 #import "UIView+entourage.h"
 #import "NSNotification+entourage.h"
 #import "UIBarButtonItem+factory.h"
 
-@interface OTOnboardingNotificationsViewController()
+@interface OTNotificationsRightsViewController()
 
 @property (nonatomic, weak) IBOutlet UIButton *activateButton;
 
 @end
 
 
-@implementation OTOnboardingNotificationsViewController
+@implementation OTNotificationsRightsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

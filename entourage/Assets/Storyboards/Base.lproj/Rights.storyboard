@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Onboarding Geolocation View Controller-->
+        <!--Geolocation Rights View Controller-->
         <scene sceneID="RPK-7h-VPK">
             <objects>
-                <viewController id="Cy0-zh-yFt" customClass="OTOnboardingGeolocationViewController" sceneMemberID="viewController">
+                <viewController id="Cy0-zh-yFt" customClass="OTGeolocationRightsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dOQ-hz-Rnx"/>
                         <viewControllerLayoutGuide type="bottom" id="ncD-V6-d47"/>
@@ -48,8 +48,8 @@
                                     <constraint firstAttribute="height" constant="56" id="qFc-fi-jag"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Activer la géolocalisation?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rv-q7-YzH">
-                                <rect key="frame" x="12" y="112" width="300" height="72"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activer la géolocalisation?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rv-q7-YzH">
+                                <rect key="frame" x="12" y="112" width="304" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="X1J-KQ-xvw"/>
                                     <constraint firstAttribute="width" constant="225" id="brm-xY-AV0"/>
@@ -63,8 +63,8 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Entourage est un réseau local.  La géolocalisation nous permettra d’afficher les actions les plus proches de vous." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="dqk-c4-rFx">
-                                <rect key="frame" x="8" y="192" width="296" height="100"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entourage est un réseau local.  La géolocalisation nous permettra d’afficher les actions les plus proches de vous." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="dqk-c4-rFx">
+                                <rect key="frame" x="8" y="192" width="304" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="88u-4A-EMR"/>
                                     <constraint firstAttribute="width" constant="280" id="RDP-jD-gxP"/>
@@ -123,10 +123,10 @@
             </objects>
             <point key="canvasLocation" x="5429" y="-44"/>
         </scene>
-        <!--Onboarding Notifications View Controller-->
+        <!--Notifications Rights View Controller-->
         <scene sceneID="hcv-mY-dvN">
             <objects>
-                <viewController id="gUz-vW-h1c" customClass="OTOnboardingNotificationsViewController" sceneMemberID="viewController">
+                <viewController id="gUz-vW-h1c" customClass="OTNotificationsRightsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RFo-jt-ATk"/>
                         <viewControllerLayoutGuide type="bottom" id="z2F-Et-Dbc"/>
@@ -165,8 +165,8 @@
                                     <constraint firstAttribute="width" constant="56" id="xqd-2z-c6u"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Activer les notifications?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LzF-gS-pCs">
-                                <rect key="frame" x="12" y="112" width="300" height="72"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activer les notifications?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LzF-gS-pCs">
+                                <rect key="frame" x="12" y="112" width="304" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="225" id="wRb-fX-CXJ"/>
                                     <constraint firstAttribute="height" constant="72" id="zQm-74-dsa"/>
@@ -180,8 +180,8 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Nous pouvons vous avertir lors de la réception d’un message." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ROi-Zv-4sG">
-                                <rect key="frame" x="8" y="192" width="296" height="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nous pouvons vous avertir lors de la réception d’un message." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ROi-Zv-4sG">
+                                <rect key="frame" x="8" y="192" width="304" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Q6a-p3-rRr"/>
                                     <constraint firstAttribute="height" constant="36" id="VXA-rG-gcR"/>

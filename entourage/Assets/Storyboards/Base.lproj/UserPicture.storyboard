@@ -10,7 +10,7 @@
         <!--User Edit Picture-->
         <scene sceneID="wWI-WC-BDE">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="bha-JG-S7n" userLabel="User Edit Picture" customClass="OTOnboardingPictureViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="bha-JG-S7n" userLabel="User Edit Picture" customClass="OTUserPictureViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M7s-An-XhF"/>
                         <viewControllerLayoutGuide type="bottom" id="kX1-rt-rX1"/>
@@ -141,10 +141,10 @@
             </objects>
             <point key="canvasLocation" x="4584" y="-44"/>
         </scene>
-        <!--Onboarding Preview View Controller-->
+        <!--Picture Preview View Controller-->
         <scene sceneID="hRq-c8-az9">
             <objects>
-                <viewController id="xml-Uv-sbT" customClass="OTOnboardingPreviewViewController" sceneMemberID="viewController">
+                <viewController id="xml-Uv-sbT" customClass="OTPicturePreviewViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8OU-hy-Cl1"/>
                         <viewControllerLayoutGuide type="bottom" id="qzZ-lL-4Ao"/>

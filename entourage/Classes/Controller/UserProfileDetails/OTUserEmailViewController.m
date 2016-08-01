@@ -1,12 +1,13 @@
 //
-//  OTOnboardingEmailViewController.m
+//  OTUserEmailViewController.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 08/07/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTOnboardingEmailViewController.h"
+#import "OTUserEmailViewController.h"
+#import "OTUserNameViewController.h"
 
 #import "IQKeyboardManager.h"
 #import "UITextField+indentation.h"
@@ -20,7 +21,7 @@
 #import "OTAuthService.h"
 #import "NSError+message.h"
 
-@interface OTOnboardingEmailViewController ()
+@interface OTUserEmailViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
 @property (nonatomic, weak) IBOutlet UIButton *validateButton;
@@ -29,7 +30,7 @@
 
 @end
 
-@implementation OTOnboardingEmailViewController
+@implementation OTUserEmailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,20 +48,11 @@
 #if DEBUG //TARGET_IPHONE_SIMULATOR
     self.emailTextField.text = @"chip@tecknoworks.com";
 #endif
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.emailTextField becomeFirstResponder];
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 
 - (IBAction)doContinue {
     NSString *email = self.emailTextField.text;
@@ -83,12 +75,18 @@
                                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
                                                    NSLog(@"ERR: something went wrong on onboarding user email: %@", error.description);
                                                }];
-
 }
 
 - (void)showKeyboard:(NSNotification*)notification {
     [self.scrollView scrollToBottomFromKeyboardNotification:notification
                                          andHeightContraint:self.heightContraint];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"EmailToNameSegue"]) {
+        OTUserNameViewController *controller = (OTUserNameViewController *)segue.destinationViewController;
+        controller.isOnboarding = NO;
+    }
 }
 
 @end

@@ -10,9 +10,9 @@
 
 // Controller
 #import "OTLostCodeViewController.h"
-#import "OTTutorialViewController.h"
 #import "OTConsts.h"
 #import "IQKeyboardManager.h"
+#import "OTUserEmailViewController.h"
 
 // Service
 #import "OTAuthService.h"
@@ -164,7 +164,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    if ([loggedNumbers containsObject:self.phoneNumberServerRepresentation] && !deviceAPNSid)
                                        [UIStoryboard showSWRevealController];
                                    else
-                                       [self performSegueWithIdentifier:@"OTTutorial" sender:self];
+                                       [self performSegueWithIdentifier:@"UserProfileDetailsSegue" sender:self];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    NSString *alertTitle = OTLocalizedString(@"error");
@@ -213,14 +213,13 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     if ([segue.identifier isEqualToString:@"OTAskMore"]) {
         OTAskMoreViewController *controller = (OTAskMoreViewController *)segue.destinationViewController;
         controller.delegate = self;
-    }
-    else if ([segue.identifier isEqualToString:@"OTTutorial"]) {
-        OTTutorialViewController *controller = (OTTutorialViewController *)segue.destinationViewController;
-        [controller configureWithPhoneNumber:self.phoneNumberServerRepresentation];
     } else if ([segue.identifier isEqualToString:@"OTLostCode"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTLostCodeViewController *controller = (OTLostCodeViewController *)navController.viewControllers.firstObject;
         controller.codeDelegate = self;
+    } else if ([segue.identifier isEqualToString:@"UserProfileDetailsSegue"]) {
+        OTUserEmailViewController *controller = (OTUserEmailViewController *)segue.destinationViewController;
+        controller.isOnboarding = NO;
     }
 }
 

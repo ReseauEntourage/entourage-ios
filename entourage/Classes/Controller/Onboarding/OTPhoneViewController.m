@@ -1,12 +1,12 @@
 //
-//  OTOnboardingPhoneViewController.m
+//  OTPhoneViewController.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 06/07/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTOnboardingPhoneViewController.h"
+#import "OTPhoneViewController.h"
 #import "IQKeyboardManager.h"
 #import "UITextField+indentation.h"
 #import "UIView+entourage.h"
@@ -18,7 +18,7 @@
 #import "NSError+message.h"
 #import "UIColor+entourage.h"
 
-@interface OTOnboardingPhoneViewController ()
+@interface OTPhoneViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *phoneTextField;
 @property (nonatomic, weak) IBOutlet UIButton *continueButton;
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation OTOnboardingPhoneViewController
+@implementation OTPhoneViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

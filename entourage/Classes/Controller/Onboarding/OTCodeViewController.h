@@ -1,5 +1,5 @@
 //
-//  OTOnboardingCodeViewController.h
+//  OTCodeViewController.h
 //  entourage
 //
 //  Created by Ciprian Habuc on 07/07/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OTOnboardingCodeViewController : UIViewController
+@interface OTCodeViewController : UIViewController
 
 @end

@@ -1,5 +1,5 @@
 //
-//  OTOnboardingNotificationsViewController.h
+//  OTGeolocationRightsViewController.h
 //  entourage
 //
 //  Created by Ciprian Habuc on 13/07/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OTOnboardingNotificationsViewController : UIViewController
+@interface OTGeolocationRightsViewController : UIViewController
 
 @end

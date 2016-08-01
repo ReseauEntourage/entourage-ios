@@ -1,14 +1,14 @@
 //
-//  OTUserEditPictureViewController.m
+//  OTUserPictureViewController.m
 //  entourage
 //
 //  Created by sergiu buceac on 7/12/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTOnboardingPictureViewController.h"
+#import "OTUserPictureViewController.h"
 #import "UIView+entourage.h"
-#import "OTOnboardingPreviewViewController.h"
+#import "OTPicturePreviewViewController.h"
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 #import "UIStoryboard+entourage.h"
@@ -17,7 +17,7 @@
 
 #define PREVIEW_PICTURE_SEGUE @"PreviewPictureSegue"
 
-@interface OTOnboardingPictureViewController ()
+@interface OTUserPictureViewController ()
 
 @property (nonatomic, weak) IBOutlet UIButton *btnFromGallery;
 @property (nonatomic, weak) IBOutlet UIButton *btnTakePicture;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation OTOnboardingPictureViewController
+@implementation OTUserPictureViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,7 +48,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:PREVIEW_PICTURE_SEGUE]) {
-        OTOnboardingPreviewViewController *controller = (OTOnboardingPreviewViewController*)[segue destinationViewController];
+        OTPicturePreviewViewController *controller = (OTPicturePreviewViewController*)[segue destinationViewController];
         controller.isOnboarding = self.isOnboarding;
         controller.image = self.image;
     }

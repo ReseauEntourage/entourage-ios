@@ -1,5 +1,5 @@
 //
-//  OTOnboardingPhoneViewController.h
+//  OTPhoneViewController.h
 //  entourage
 //
 //  Created by Ciprian Habuc on 06/07/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OTOnboardingPhoneViewController : UIViewController
+@interface OTPhoneViewController : UIViewController
 
 @end

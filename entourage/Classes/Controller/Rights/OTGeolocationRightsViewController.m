@@ -1,12 +1,12 @@
 //
-//  OTOnboardingGeolocationViewController.m
+//  OTGeolocationRightsViewController.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 13/07/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTOnboardingGeolocationViewController.h"
+#import "OTGeolocationRightsViewController.h"
 #import "OTConsts.h"
 #import "UIView+entourage.h"
 #import "OTLocationManager.h"
@@ -14,13 +14,13 @@
 #import "UINavigationController+entourage.h"
 #import "UIBarButtonItem+factory.h"
 
-@interface OTOnboardingGeolocationViewController()
+@interface OTGeolocationRightsViewController()
 
 @property (nonatomic, weak) IBOutlet UIButton *activateButton;
 
 @end
 
-@implementation OTOnboardingGeolocationViewController
+@implementation OTGeolocationRightsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

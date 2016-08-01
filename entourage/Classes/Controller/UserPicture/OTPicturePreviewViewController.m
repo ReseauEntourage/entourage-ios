@@ -1,12 +1,12 @@
 //
-//  OTUserPicturePreviewViewController.m
+//  OTPicturePreviewViewController.m
 //  entourage
 //
 //  Created by sergiu buceac on 7/12/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTOnboardingPreviewViewController.h"
+#import "OTPicturePreviewViewController.h"
 #import "OTUserEditViewController.h"
 #import "UIStoryboard+entourage.h"
 #import "SVProgressHUD.h"
@@ -18,7 +18,7 @@
 #import "NSUserDefaults+OT.h"
 #import "NSError+message.h"
 
-@interface OTOnboardingPreviewViewController ()
+@interface OTPicturePreviewViewController ()
 
 @property (nonatomic, weak) IBOutlet UIButton *btnDone;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation OTOnboardingPreviewViewController
+@implementation OTPicturePreviewViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
