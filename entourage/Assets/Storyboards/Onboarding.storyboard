@@ -1,118 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="uzM-Ak-HDY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BbA-ED-vfm">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Welcome View Controller-->
-        <scene sceneID="05X-0J-Qvg">
-            <objects>
-                <viewController id="uzM-Ak-HDY" customClass="OTWelcomeViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Hd1-vs-vuM"/>
-                        <viewControllerLayoutGuide type="bottom" id="nVB-c2-QJT"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="S04-AV-c9Z">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jat-8a-lZx">
-                                <rect key="frame" x="8" y="502" width="304" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="UDT-RY-FCF"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="qBL-2d-2rD"/>
-                                    <constraint firstAttribute="width" constant="210" id="tO1-XO-EQd"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Commencer">
-                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="qBL-2d-2rD"/>
-                                        <exclude reference="tO1-XO-EQd"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <segue destination="BbA-ED-vfm" kind="show" id="FT0-SB-kB4"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhiteEntourage" translatesAutoresizingMaskIntoConstraints="NO" id="x1o-IU-aRU">
-                                <rect key="frame" x="12" y="40" width="56" height="56"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="56" id="iU1-gz-8Od"/>
-                                    <constraint firstAttribute="height" constant="56" id="qej-y8-es5"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rql-kN-2Ij">
-                                <rect key="frame" x="12" y="112" width="225" height="72"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="72" id="b4i-hE-ZNT"/>
-                                    <constraint firstAttribute="width" constant="225" id="rvX-qw-re3"/>
-                                </constraints>
-                                <string key="text">Bienvenue
-sur Entourage.</string>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <webView contentMode="scaleToFill" allowsInlineMediaPlayback="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ah-33-NTk">
-                                <rect key="frame" x="8" y="192" width="304" height="200"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="8H3-Fo-QnT"/>
-                                </constraints>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="uzM-Ak-HDY" id="fpk-1C-d28"/>
-                                </connections>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="jat-8a-lZx" secondAttribute="trailing" constant="-8" id="4WL-yz-lK5"/>
-                            <constraint firstItem="jat-8a-lZx" firstAttribute="leading" secondItem="S04-AV-c9Z" secondAttribute="leadingMargin" constant="-8" id="53x-tc-hc6"/>
-                            <constraint firstItem="Rql-kN-2Ij" firstAttribute="leading" secondItem="S04-AV-c9Z" secondAttribute="leadingMargin" constant="-4" id="Dbo-Fq-6R2"/>
-                            <constraint firstItem="6ah-33-NTk" firstAttribute="leading" secondItem="S04-AV-c9Z" secondAttribute="leadingMargin" constant="-8" id="FDm-HH-6c3"/>
-                            <constraint firstItem="Rql-kN-2Ij" firstAttribute="top" secondItem="x1o-IU-aRU" secondAttribute="bottom" constant="16" id="FXd-mM-P8v"/>
-                            <constraint firstItem="jat-8a-lZx" firstAttribute="leading" secondItem="S04-AV-c9Z" secondAttribute="leadingMargin" constant="-8" id="J6t-Td-Obf"/>
-                            <constraint firstItem="jat-8a-lZx" firstAttribute="leading" secondItem="S04-AV-c9Z" secondAttribute="leadingMargin" constant="-8" id="Jqn-XP-hOr"/>
-                            <constraint firstItem="nVB-c2-QJT" firstAttribute="top" secondItem="jat-8a-lZx" secondAttribute="bottom" constant="16" id="LwW-3t-mc8"/>
-                            <constraint firstItem="jat-8a-lZx" firstAttribute="leading" secondItem="S04-AV-c9Z" secondAttribute="leadingMargin" constant="-8" id="NYh-bP-XrQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jat-8a-lZx" secondAttribute="trailing" constant="-8" id="NzW-5S-2P8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jat-8a-lZx" secondAttribute="trailing" constant="-8" id="S56-e1-MrX"/>
-                            <constraint firstItem="x1o-IU-aRU" firstAttribute="leading" secondItem="S04-AV-c9Z" secondAttribute="leadingMargin" constant="-4" id="dyh-HB-Kj0"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6ah-33-NTk" secondAttribute="trailing" constant="-8" id="eSy-VJ-48c"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jat-8a-lZx" secondAttribute="trailing" constant="-8" id="hSk-8c-gON"/>
-                            <constraint firstItem="6ah-33-NTk" firstAttribute="top" secondItem="Rql-kN-2Ij" secondAttribute="bottom" constant="8" id="mh7-FD-uN8"/>
-                            <constraint firstItem="x1o-IU-aRU" firstAttribute="top" secondItem="Hd1-vs-vuM" secondAttribute="bottom" constant="20" id="n5j-Iu-Kvh"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="J6t-Td-Obf"/>
-                                <exclude reference="Jqn-XP-hOr"/>
-                                <exclude reference="NYh-bP-XrQ"/>
-                                <exclude reference="NzW-5S-2P8"/>
-                                <exclude reference="S56-e1-MrX"/>
-                                <exclude reference="hSk-8c-gON"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <navigationItem key="navigationItem" id="OJG-RM-7Vv"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="startButton" destination="jat-8a-lZx" id="RBI-eQ-VZb"/>
-                        <outlet property="webView" destination="6ah-33-NTk" id="E7b-xD-5eL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QPt-Jm-DBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="365" y="-2471"/>
-        </scene>
         <!--Phone View Controller-->
         <scene sceneID="qT4-XV-W5p">
             <objects>
@@ -468,7 +361,6 @@ vérification</string>
     </scenes>
     <resources>
         <image name="code" width="56" height="57"/>
-        <image name="logoWhiteEntourage" width="56" height="56"/>
         <image name="whitePhone" width="56" height="57"/>
     </resources>
 </document>
