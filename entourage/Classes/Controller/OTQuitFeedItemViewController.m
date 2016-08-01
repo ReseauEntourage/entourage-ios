@@ -14,7 +14,7 @@
 
 - (IBAction)doQuitFeedItem {
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
-        [self.feedItemQuitDelegate didQuitFeedItem];
+        [self.feedItemQuitDelegate didQuitFeedItem:self.feedItem];
     }];
 }
 

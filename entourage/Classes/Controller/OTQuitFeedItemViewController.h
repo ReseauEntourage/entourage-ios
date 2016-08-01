@@ -12,7 +12,7 @@
 @protocol OTFeedItemQuitDelegate <NSObject>
 
 @required
-- (void)didQuitFeedItem;
+- (void)didQuitFeedItem:(OTFeedItem *)item;
 
 @end
 

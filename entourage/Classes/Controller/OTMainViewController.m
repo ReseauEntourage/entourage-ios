@@ -1035,7 +1035,7 @@ static bool isShowingOptions = NO;
 /********************************************************************************/
 #pragma mark - OTFeedItemQuitDelegate
 
-- (void)didQuitFeedItem {
+- (void)didQuitFeedItem:(OTFeedItem *)item {
     [self dismissViewControllerAnimated:YES completion:^{
         [self.tableView reloadData];
     }];

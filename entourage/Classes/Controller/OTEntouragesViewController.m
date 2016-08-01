@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger){
 /**************************************************************************************************/
 #pragma mark - OTEntouragesViewController
 
-@interface OTEntouragesViewController() <OTFeedItemsTableViewDelegate, OTConfirmationViewControllerDelegate>
+@interface OTEntouragesViewController() <OTFeedItemsTableViewDelegate, OTConfirmationViewControllerDelegate, OTFeedItemQuitDelegate>
 
 // UI
 @property (nonatomic, weak) IBOutlet UISegmentedControl *statusSC;
@@ -199,36 +199,41 @@ typedef NS_ENUM(NSInteger){
     [self performSegueWithIdentifier:@"OTSelectedTourSegue" sender:feedItem];
 }
 
+#pragma mark - OTFeedItemQuitDelegate
+
+- (void)didQuitFeedItem:(OTFeedItem *)item {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self removeFromActive:item];
+    }];
+}
+
 - (void)showUserProfile:(NSNumber*)userId {
     [self performSegueWithIdentifier:@"UserProfileSegue" sender:userId];
 }
 
-- (void)doJoinRequest:(OTTour*)tour {
+- (void)doJoinRequest:(OTFeedItem *)feedItem {
     
     // TODO: test each branch
-    if ([tour.joinStatus isEqualToString:JOIN_NOT_REQUESTED])
+    if ([feedItem.joinStatus isEqualToString:JOIN_NOT_REQUESTED])
     {
         //We shouldn't arrive here
         //[self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:tour];
     }
-    else  if ([tour.joinStatus isEqualToString:JOIN_PENDING])
+    else  if ([feedItem.joinStatus isEqualToString:JOIN_PENDING])
     {
-        [self performSegueWithIdentifier:@"OTSelectedTourSegue" sender:tour];
+        [self performSegueWithIdentifier:@"OTSelectedTourSegue" sender:feedItem];
     }
     else
     {
         OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-        if (currentUser.sid.intValue == tour.author.uID.intValue && tour.status != nil) {
-            if ([tour.status isEqualToString:TOUR_STATUS_ONGOING]) {
-                [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:tour];
+        if (currentUser.sid.intValue == feedItem.author.uID.intValue && feedItem.status != nil) {
+            if ([feedItem.status isEqualToString:TOUR_STATUS_ONGOING]) {
+                [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:feedItem];
             } else {
                 [self.indicatorView startAnimating];
-                [[[OTFeedItemFactory createFor:tour] getStateTransition] closeWithSuccess:^(BOOL isTour) {
+                [[[OTFeedItemFactory createFor:feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
                     [self.indicatorView stopAnimating];
-                    [self.activeToursPagination.feedItems removeObject:tour];
-                    [self.closedToursPagination.feedItems addObject:tour];
-                    [self.tableView removeFeedItem:tour];
-                    [self.tableView reloadData];
+                    [self removeFromActive:feedItem];
                 } orFailure:^(NSError *error) {
                     [self.indicatorView stopAnimating];
                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
@@ -236,7 +241,7 @@ typedef NS_ENUM(NSInteger){
                 }];
             }
         } else {
-            [self performSegueWithIdentifier:@"QuitFeedItemSegue" sender:tour];
+            [self performSegueWithIdentifier:@"QuitFeedItemSegue" sender:feedItem];
         }
     }
 }
@@ -247,6 +252,13 @@ typedef NS_ENUM(NSInteger){
 
 - (void)loadMoreData {
     [self getData];
+}
+
+- (void)removeFromActive:(OTFeedItem *)feedItem {
+    [self.activeToursPagination.feedItems removeObject:feedItem];
+    [self.closedToursPagination.feedItems addObject:feedItem];
+    [self.tableView removeFeedItem:feedItem];
+    [self.tableView reloadData];
 }
 
 /**************************************************************************************************/
@@ -286,6 +298,7 @@ typedef NS_ENUM(NSInteger){
         controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.feedItem = (OTFeedItem*)sender;
+        controller.feedItemQuitDelegate = self;
     } else if ([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
         OTConfirmationViewController *controller = (OTConfirmationViewController *)segue.destinationViewController;
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];

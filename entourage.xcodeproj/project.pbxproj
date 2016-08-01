@@ -696,9 +696,17 @@
 			name = AddressBook;
 			sourceTree = "<group>";
 		};
+		1E7C49C11D4E2456004D414D /* NewsFeed */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NewsFeed;
+			sourceTree = "<group>";
+		};
 		1E9003661D34FA90004E18BC /* Behaviors */ = {
 			isa = PBXGroup;
 			children = (
+				1E7C49C11D4E2456004D414D /* NewsFeed */,
 				1E2F290D1D4BC6A200ABC68A /* UITableView */,
 				1E2F29091D4BC27500ABC68A /* Keyboard */,
 				1E2F29021D4BC25000ABC68A /* Speech */,
