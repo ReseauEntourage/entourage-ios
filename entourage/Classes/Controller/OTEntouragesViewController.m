@@ -204,6 +204,9 @@ typedef NS_ENUM(NSInteger){
 - (void)didQuitFeedItem:(OTFeedItem *)item {
     [self dismissViewControllerAnimated:YES completion:^{
         [self removeFromActive:item];
+        BOOL isTour = [item class] == [OTTour class];
+        NSString *messageKey = isTour ? @"tour_quitted" : @"entourageQuitted";
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(messageKey)];
     }];
 }
 
@@ -234,6 +237,8 @@ typedef NS_ENUM(NSInteger){
                 [[[OTFeedItemFactory createFor:feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
                     [self.indicatorView stopAnimating];
                     [self removeFromActive:feedItem];
+                    NSString *messageKey = isTour ? @"tour_quitted" : @"entourageQuitted";
+                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(messageKey)];
                 } orFailure:^(NSError *error) {
                     [self.indicatorView stopAnimating];
                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
