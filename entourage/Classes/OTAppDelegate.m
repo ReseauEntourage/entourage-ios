@@ -405,8 +405,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         [alert addAction:openAction];
         
         if (rootVC.presentedViewController) {
-            if (![((UINavigationController*)rootVC.presentedViewController).viewControllers.firstObject isKindOfClass:[OTCreateMeetingViewController class]])
-                [rootVC.presentedViewController presentViewController:alert animated:YES completion:nil];
+            UIViewController *presentedController = (UINavigationController*)rootVC.presentedViewController;
+            if([presentedController class] == [UINavigationController class])
+                if (![((UINavigationController *)presentedController).viewControllers.firstObject isKindOfClass:[OTCreateMeetingViewController class]])
+                    [rootVC.presentedViewController presentViewController:alert animated:YES completion:nil];
         } else
             [rootVC presentViewController:alert animated:YES completion:nil];
     }
