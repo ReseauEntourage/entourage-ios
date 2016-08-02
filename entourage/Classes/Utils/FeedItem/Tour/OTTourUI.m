@@ -29,7 +29,7 @@
 }
 
 - (void)timeDataWithCompletion:(void (^)(NSString *))completion {
-    completion([NSString stringWithFormat:OTLocalizedString(@"item_time_data"), [self.tour.creationDate sinceNow], self.tour.distance]);
+    completion([NSString stringWithFormat:OTLocalizedString(@"tour_time_data"), [self.tour.creationDate sinceNow], self.tour.distance]);
 }
 
 - (NSString *)displayType {

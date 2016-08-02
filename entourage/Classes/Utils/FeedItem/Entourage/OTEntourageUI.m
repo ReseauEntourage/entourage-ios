@@ -41,7 +41,7 @@
         }
         CLPlacemark *placemark = placemarks.firstObject;
         if (placemark.locality)
-            completion([NSString stringWithFormat:OTLocalizedString(@"item_time_data"), [self.entourage.creationDate sinceNow], placemark.locality]);
+            completion([NSString stringWithFormat:OTLocalizedString(@"entourage_time_data"), [self.entourage.creationDate sinceNow], placemark.locality]);
     }];
 }
 
