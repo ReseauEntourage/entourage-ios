@@ -142,6 +142,7 @@
 "item_option_close" = "Arrêter";
 "item_option_freeze" = "Clôturer";
 "item_option_quit" = "Quitter";
+"item_time_data" = "%@ - à %@ m";
 
 // Tutorial
 "emailNotSent" = "Echec de la mise à jour de l'email";

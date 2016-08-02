@@ -8,6 +8,7 @@
 
 #import "OTEntourageUI.h"
 #import "OTConsts.h"
+#import "NSDate+ui.h"
 
 @implementation OTEntourageUI
 
@@ -17,6 +18,31 @@
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];
     return typeByNameAttrString;
+}
+
+- (NSString *)summary {
+    return self.entourage.title;
+}
+
+- (NSString *)navigationTitle {
+    return OTLocalizedString([self displayType]);
+}
+
+- (void)timeDataWithCompletion:(void (^)(NSString *))completion {
+    if(!self.entourage.location || !completion) {
+        completion(@"");
+        return;
+    }
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:self.entourage.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"error: %@", error.description);
+        }
+        CLPlacemark *placemark = placemarks.firstObject;
+        if (placemark.locality)
+            completion([NSString stringWithFormat:OTLocalizedString(@"item_time_data"), [self.entourage.creationDate sinceNow], placemark.locality]);
+    }];
 }
 
 - (NSString *)displayType {

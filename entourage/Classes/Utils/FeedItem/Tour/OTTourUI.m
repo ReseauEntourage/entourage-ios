@@ -8,6 +8,7 @@
 
 #import "OTTourUI.h"
 #import "OTConsts.h"
+#import "NSDate+ui.h"
 
 @implementation OTTourUI
 
@@ -17,6 +18,18 @@
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];
     return typeByNameAttrString;
+}
+
+- (NSString *)summary {
+    return self.tour.organizationName;
+}
+
+- (NSString *)navigationTitle {
+    return OTLocalizedString(@"tour");
+}
+
+- (void)timeDataWithCompletion:(void (^)(NSString *))completion {
+    completion([NSString stringWithFormat:OTLocalizedString(@"item_time_data"), [self.tour.creationDate sinceNow], self.tour.distance]);
 }
 
 - (NSString *)displayType {

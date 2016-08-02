@@ -133,7 +133,7 @@
                         <outlet property="btnAvatar" destination="RcA-br-gXo" id="C9e-qc-4fh"/>
                         <outlet property="lblDescription" destination="ZOB-K8-3My" id="0Ud-M2-BqT"/>
                         <outlet property="lblTimeDistance" destination="xDt-dA-Asj" id="dGy-Hj-0F1"/>
-                        <outlet property="lblTitle" destination="KaD-Co-GmI" id="kVG-pO-dRV"/>
+                        <outlet property="lblTitle" destination="KaD-Co-GmI" id="Cfo-Bc-WCB"/>
                         <outlet property="lblUserCount" destination="4QV-vH-V9y" id="xQV-zT-36c"/>
                     </connections>
                 </customObject>

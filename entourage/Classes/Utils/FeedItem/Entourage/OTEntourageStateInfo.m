@@ -46,4 +46,8 @@
     return YES;
 }
 
+- (BOOL)isActive {
+    return [self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN];
+}
+
 @end

@@ -13,9 +13,7 @@
 
 @interface UILabel (entourage)
 
-- (void)setupWithTypeAndAuthorOfTour:(OTTour*)tour;
 - (void)setupWithTime:(NSDate*)date andLocation:(CLLocation*)location;
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem;
-- (void)setupAsTypeByNameFromEntourage:(OTEntourage*)ent;
 
 @end

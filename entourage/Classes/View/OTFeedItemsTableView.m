@@ -14,6 +14,8 @@
 #import "UIColor+entourage.h"
 #import "UILabel+entourage.h"
 #import "OTTourPoint.h"
+#import "OTFeedItemFactory.h"
+#import "OTUIDelegate.h"
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -210,7 +212,6 @@
     OTFeedItem *item = self.feedItems[indexPath.section];
     NSLog(@">> %ld: %@", (long)indexPath.section, [item isKindOfClass:[OTTour class]] ? ((OTTour*)item).organizationName : ((OTEntourage*)item).title);
     
-
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
     UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
     UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
@@ -220,23 +221,21 @@
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     
+    id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
+    CLLocation *startPointLocation = nil;
     if ([item isKindOfClass:[OTTour class]]) {
         OTTour *tour = (OTTour *)item;
-        organizationLabel.text = tour.organizationName;
-        [typeByNameLabel setupWithTypeAndAuthorOfTour:tour];
-        
         // dateString - location
         OTTourPoint *startPoint = tour.tourPoints.firstObject;
-        CLLocation *startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
-        [timeLocationLabel setupWithTime:tour.creationDate andLocation:startPointLocation];
+        startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
     } else {
         OTEntourage *ent = (OTEntourage*)item;
-        
-        organizationLabel.text = ent.title;
-        [typeByNameLabel setupAsTypeByNameFromEntourage:ent];
-        CLLocation *startPointLocation = ent.location;
-        [timeLocationLabel setupWithTime:ent.creationDate andLocation:startPointLocation];
+        startPointLocation = ent.location;
     }
+    typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];
+    organizationLabel.text = [uiDelegate summary];
+    [timeLocationLabel setupWithTime:item.creationDate andLocation:startPointLocation];
+
     [userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
     noPeopleLabel.text = [NSString stringWithFormat:@"%d", item.noPeople.intValue];
     [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];

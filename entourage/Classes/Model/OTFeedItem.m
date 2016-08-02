@@ -46,20 +46,4 @@
     return false;
 }
 
-- (NSString *)navigationTitle {
-    return nil;
-}
-
-- (NSString *)summary {
-    return nil;
-}
-
-- (NSAttributedString *)typeByNameAttributedString {
-    return nil;
-}
-
-- (NSString *)newsfeedStatus {
-    return self.status;
-}
-
 @end

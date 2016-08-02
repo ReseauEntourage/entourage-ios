@@ -46,4 +46,8 @@
     return NO;
 }
 
+- (BOOL)isActive {
+    return [self.tour.status isEqualToString:FEEDITEM_STATUS_ACTIVE];
+}
+
 @end

@@ -24,6 +24,4 @@
 - (instancetype) initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *) dictionaryForWebService;
 
-- (NSString *)displayType;
-
 @end

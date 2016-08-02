@@ -11,6 +11,8 @@
 #import "OTTour.h"
 #import "UILabel+entourage.h"
 #import "UIButton+entourage.h"
+#import "OTFeedItemFactory.h"
+#import "OTUIDelegate.h"
 
 #define FEEDITEM_SUMMAY_TAG 1
 #define FEEDITEM_TYPE_BY_NAME_TAG 2
@@ -19,11 +21,13 @@
 @implementation OTFeedItemSummaryView
 
 - (void)setupWithFeedItem:(OTFeedItem *)feedItem {
+    id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:feedItem] getUI];
+    
     UILabel *summaryLabel = [self viewWithTag:FEEDITEM_SUMMAY_TAG];
-    summaryLabel.text = [feedItem summary];
+    summaryLabel.text = [uiDelegate summary];
     
     UILabel *typeByNameLabel = [self viewWithTag:FEEDITEM_TYPE_BY_NAME_TAG];
-    typeByNameLabel.attributedText = [feedItem typeByNameAttributedString];
+    typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];
 
     UIButton *userImageButton = [self viewWithTag:FEEDITEM_AVATAR_TAG];
     [userImageButton setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];

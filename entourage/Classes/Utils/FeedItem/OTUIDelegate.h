@@ -10,9 +10,13 @@
 
 #define FONT_NORMAL_DESCRIPTION @"SFUIText-Light"
 #define FONT_BOLD_DESCRIPTION @"SFUIText-Bold"
+#define DEFAULT_DESCRIPTION_SIZE 15.0
 
 @protocol OTUIDelegate <NSObject>
 
 - (NSAttributedString *) descriptionWithSize:(CGFloat)size;
+- (NSString *)summary;
+- (NSString *)navigationTitle;
+- (void)timeDataWithCompletion:(void(^)(NSString *))completion;
 
 @end

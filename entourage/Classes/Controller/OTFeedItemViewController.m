@@ -95,7 +95,7 @@ typedef NS_ENUM(unsigned) {
     [super viewDidLoad];
     
     [self.chatSpeechBehavior initialize];
-    self.title = [[_feedItem navigationTitle] uppercaseString];
+    self.title = [[[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle] uppercaseString];
     [self setupCloseModal];
     [self setupMoreButtons];
     
@@ -206,7 +206,8 @@ typedef NS_ENUM(unsigned) {
     OTTourStatus *tourStartStatus = [[OTTourStatus alloc] init];
     tourStartStatus.date = self.feedItem.creationDate;
     tourStartStatus.type = OTTourStatusStart;
-    tourStartStatus.status = [NSString stringWithFormat: OTLocalizedString(@"formatter_tour_status_ongoing"), self.feedItem.navigationTitle.capitalizedString];
+    
+    tourStartStatus.status = [NSString stringWithFormat: OTLocalizedString(@"formatter_tour_status_ongoing"), [[[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle] uppercaseString]];
     NSDate *now = [NSDate date];
     tourStartStatus.duration = [now timeIntervalSinceDate:self.feedItem.creationDate];
     tourStartStatus.distance = 0;

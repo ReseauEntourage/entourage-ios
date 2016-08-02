@@ -9,19 +9,25 @@
 #import "OTSummaryProviderBehavior.h"
 #import "UIButton+entourage.h"
 #import "OTFeedItemFactory.h"
+#import "OTUIDelegate.h"
 
 @implementation OTSummaryProviderBehavior
 
 - (void)awakeFromNib {
     if(!self.fontSize)
-        self.fontSize = [NSNumber numberWithFloat:15];
+        self.fontSize = [NSNumber numberWithFloat:DEFAULT_DESCRIPTION_SIZE];
 }
 
 - (void)configureWith:(OTFeedItem *)feedItem {
-    self.lblTitle.text = feedItem.summary;
+    id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:feedItem] getUI];
+    self.lblTitle.text = [uiDelegate summary];
     self.lblUserCount.text = [feedItem.noPeople stringValue];
     [self.btnAvatar setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];
-    [self.lblDescription setAttributedText:[[[OTFeedItemFactory createFor:feedItem] getUI] descriptionWithSize:self.fontSize.floatValue]];
+    [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+    self.lblTimeDistance.text = @"";
+    [uiDelegate timeDataWithCompletion:^(NSString *result) {
+        self.lblTimeDistance.text = result;
+    }];
 }
 
 @end

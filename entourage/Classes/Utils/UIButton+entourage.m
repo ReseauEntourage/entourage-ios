@@ -10,6 +10,7 @@
 #import "UIButton+AFNetworking.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
+#import "OTFeedItemFactory.h"
 
 #define DEFAULT_IMAGE @"userSmall"
 
@@ -44,7 +45,7 @@
 }
 
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {
-    self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:[feedItem newsfeedStatus]];
+    self.hidden = ![[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (feedItem.author.uID.intValue == currentUser.sid.intValue) {

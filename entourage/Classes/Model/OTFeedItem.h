@@ -31,9 +31,5 @@
 @property (nonatomic, strong) NSNumber *noPeople;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
-- (NSString *)navigationTitle;
-- (NSString *)summary;
-- (NSAttributedString *)typeByNameAttributedString;
-- (NSString *)newsfeedStatus;
 
 @end

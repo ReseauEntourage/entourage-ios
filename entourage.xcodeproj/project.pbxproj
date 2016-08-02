@@ -89,6 +89,7 @@
 		1E78B7E91D5134D20008C00E /* SF-UI-Text-UltrathinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E78B7DB1D5134D20008C00E /* SF-UI-Text-UltrathinItalic.otf */; };
 		1E78B7ED1D513ECA0008C00E /* OTTourUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E78B7EC1D513ECA0008C00E /* OTTourUI.m */; };
 		1E78B7F01D513F0F0008C00E /* OTEntourageUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E78B7EF1D513F0F0008C00E /* OTEntourageUI.m */; };
+		1E78B7F41D515E240008C00E /* NSDate+ui.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E78B7F31D515E240008C00E /* NSDate+ui.m */; };
 		1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9003681D34FAAB004E18BC /* OTBehavior.m */; };
 		1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E90036D1D352C0B004E18BC /* UserPicture.storyboard */; };
 		1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */; };
@@ -364,6 +365,8 @@
 		1E78B7EC1D513ECA0008C00E /* OTTourUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourUI.m; sourceTree = "<group>"; };
 		1E78B7EE1D513F0F0008C00E /* OTEntourageUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageUI.h; sourceTree = "<group>"; };
 		1E78B7EF1D513F0F0008C00E /* OTEntourageUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageUI.m; sourceTree = "<group>"; };
+		1E78B7F21D515E240008C00E /* NSDate+ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+ui.h"; path = "Helper/NSDate+ui.h"; sourceTree = "<group>"; };
+		1E78B7F31D515E240008C00E /* NSDate+ui.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+ui.m"; path = "Helper/NSDate+ui.m"; sourceTree = "<group>"; };
 		1E9003671D34FAAB004E18BC /* OTBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTBehavior.h; path = Behaviors/OTBehavior.h; sourceTree = "<group>"; };
 		1E9003681D34FAAB004E18BC /* OTBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTBehavior.m; path = Behaviors/OTBehavior.m; sourceTree = "<group>"; };
 		1E90036E1D352C0B004E18BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserPicture.storyboard; sourceTree = "<group>"; };
@@ -663,6 +666,8 @@
 				1DA682E719E80BE7007BD4BC /* NSUserDefaults+OT.m */,
 				454C8F591C510304001362B2 /* UINavigationController+entourage.h */,
 				454C8F5A1C510304001362B2 /* UINavigationController+entourage.m */,
+				1E78B7F21D515E240008C00E /* NSDate+ui.h */,
+				1E78B7F31D515E240008C00E /* NSDate+ui.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1810,6 +1815,7 @@
 				45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */,
 				0A70FA321BFF32AD0080E8EC /* OTFeedItemViewController.m in Sources */,
 				1E40A3401D4A81C3009E2D73 /* OTAddressBookItem.m in Sources */,
+				1E78B7F41D515E240008C00E /* NSDate+ui.m in Sources */,
 				1E40A33D1D4A4BE6009E2D73 /* OTEntourageInviteByPhoneViewController.m in Sources */,
 				454062A31D06ADB600B0D756 /* OTLocationSelectorViewController.m in Sources */,
 				45BC9BC91CE26E83000065B7 /* OTEntourageCreatorViewController.m in Sources */,
