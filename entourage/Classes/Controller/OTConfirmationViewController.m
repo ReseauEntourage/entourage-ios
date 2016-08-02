@@ -65,6 +65,7 @@
 #pragma mark - Private methods
 
 - (void)closeTour {
+    self.tour.status = FEEDITEM_STATUS_CLOSED;
     self.tour.endTime = [NSDate date];
     [[OTTourService new]
         closeTour:self.tour
@@ -94,7 +95,6 @@
 
 - (IBAction)finishTour:(id)sender {
     [SVProgressHUD show];
-    self.tour.status = FEEDITEM_STATUS_CLOSED;
     [self closeTour];
 }
 

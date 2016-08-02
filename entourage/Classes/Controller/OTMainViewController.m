@@ -895,7 +895,6 @@ static bool isShowingOptions = NO;
 #pragma mark  OTConfirmationViewControllerDelegate
 
 - (void)tourSent:(OTTour*)tour {
-    
     //check if there is an ongoing tour
     if (self.tour == nil) {
         return;
@@ -919,7 +918,6 @@ static bool isShowingOptions = NO;
     self.isTourRunning = NO;
     self.requestedToursCoordinate = CLLocationCoordinate2DMake(0.0f, 0.0f);
     [self clearMap];
-    //[self getData];
     [self forceGetNewData];
 }
 
