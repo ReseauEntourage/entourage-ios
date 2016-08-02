@@ -59,6 +59,7 @@
         self.organizationDesc = [dictionary valueForKey:kWSKeyOrganizationDescription];
         self.tourPoints = [OTTourPoint tourPointsWithJSONDictionary:dictionary andKey:kWSKeyTourPoints];
         self.noMessages = [dictionary valueForKey:kWSNoUnreadMessages];
+        self.noPeople = [dictionary valueForKey:kWSNoPeople];
         
         if (self.distance == nil || self.distance.doubleValue == 0) {
             [self computeDistance];

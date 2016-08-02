@@ -201,6 +201,16 @@
             </objects>
             <point key="canvasLocation" x="364" y="45"/>
         </scene>
+        <!--PublicFeedItem-->
+        <scene sceneID="R5i-fD-RJi">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PublicFeedItem" id="4jA-Gt-JYo" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Ayf-Tm-l66"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xJ8-7h-blf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="972.5" y="-338"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -474,11 +484,12 @@
                         <segue destination="cUF-7c-FT1" kind="modal" identifier="TourCreatorSegue" id="giF-18-m0W"/>
                         <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageCreator" id="dno-Ju-GCg"/>
                         <segue destination="0av-Qe-fFs" kind="modal" identifier="FiltersSegue" id="22w-GJ-qhb"/>
+                        <segue destination="4jA-Gt-JYo" kind="push" identifier="PublicFeedItemDetailsSegue" id="wzY-Lz-9e9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="841" y="63"/>
+            <point key="canvasLocation" x="827" y="45"/>
         </scene>
         <!--Create Meeting View Controller-->
         <scene sceneID="NWf-ex-TvX">

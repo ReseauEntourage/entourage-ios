@@ -11,11 +11,13 @@
 #import "OTStateTransitionDelegate.h"
 #import "OTStateInfoDelegate.h"
 #import "OTMessagingDelegate.h"
+#import "OTUIDelegate.h"
 
 @protocol OTFeedItemFactoryDelegate <NSObject>
 
 - (id<OTStateTransitionDelegate>)getStateTransition;
 - (id<OTStateInfoDelegate>)getStateInfo;
 - (id<OTMessagingDelegate>)getMessaging;
+- (id<OTUIDelegate>)getUI;
 
 @end

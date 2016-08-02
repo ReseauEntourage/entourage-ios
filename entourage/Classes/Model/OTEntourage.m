@@ -31,6 +31,7 @@
                                    andLongitudeKey:kWSKeyLongitude];
         self.desc = [dictionary valueForKey:kWSKeyDescription];
         self.type = [dictionary valueForKey:kWSKeyEntourageType];
+        self.noPeople = [dictionary valueForKey:kWSNoPeople];
     }
     return self;
 }

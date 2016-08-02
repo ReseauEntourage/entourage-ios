@@ -10,6 +10,7 @@
 #import "OTEntourageStateTransition.h"
 #import "OTEntourageStateInfo.h"
 #import "OTEntourageMessaging.h"
+#import "OTEntourageUI.h"
 
 @implementation OTEntourageFactory
 
@@ -32,6 +33,10 @@
 
 - (id<OTMessagingDelegate>)getMessaging {
     return [[OTEntourageMessaging alloc] initWithEntourage:self.entourage];
+}
+
+- (id<OTUIDelegate>)getUI {
+    return [[OTEntourageUI alloc] initWithEntourage:self.entourage];
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "OTTourStateTransition.h"
 #import "OTTourStateInfo.h"
 #import "OTTourMessaging.h"
+#import "OTTourUI.h"
 
 @implementation OTTourFactory
 
@@ -32,6 +33,10 @@
 
 - (id<OTMessagingDelegate>)getMessaging {
     return [[OTTourMessaging alloc] initWithTour:self.tour];
+}
+
+- (id<OTUIDelegate>)getUI {
+    return [[OTTourUI alloc] initWithTour:self.tour];
 }
 
 @end
