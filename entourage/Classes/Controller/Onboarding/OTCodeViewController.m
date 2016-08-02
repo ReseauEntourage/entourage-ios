@@ -47,11 +47,14 @@
                                              selector:@selector(showKeyboard:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    if([NSUserDefaults standardUserDefaults].currentUser) {
+        [NSUserDefaults standardUserDefaults].temporaryUser = [NSUserDefaults standardUserDefaults].currentUser;
+        [NSUserDefaults standardUserDefaults].currentUser = nil;
+    }
 }
 
 #pragma mark - Private
@@ -60,7 +63,6 @@
     UIBarButtonItem *regenerateButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doRegenerateCode").capitalizedString withTarget:self andAction:@selector(doRegenerateCode) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:regenerateButton];
 }
-
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.codeTextField becomeFirstResponder];
