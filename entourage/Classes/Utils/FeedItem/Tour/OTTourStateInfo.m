@@ -47,7 +47,7 @@
 }
 
 - (BOOL)isActive {
-    return [self.tour.status isEqualToString:FEEDITEM_STATUS_ACTIVE];
+    return [self.tour.status isEqualToString:TOUR_STATUS_ONGOING] || [self.tour.status isEqualToString:FEEDITEM_STATUS_CLOSED];
 }
 
 @end

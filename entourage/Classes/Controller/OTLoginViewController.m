@@ -94,7 +94,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     // Ciprian Pro - Prod
     //self.phoneTextField.text = @"+40740884267";
     // Br
-    self.phoneTextField.text = @"+40742224359";
+    self.phoneTextField.text = @"+40722300942";
     
     //Vincent
     //self.phoneTextField.text = @"0651502173";
