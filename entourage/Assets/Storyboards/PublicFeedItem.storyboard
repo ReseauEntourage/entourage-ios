@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fid-Iu-R1a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fid-Iu-R1a">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -53,17 +53,9 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QV-vH-V9y">
                                         <rect key="frame" x="301" y="63" width="10" height="18"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="10" id="SUZ-5s-u6Z"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="SUZ-5s-u6Z"/>
-                                            </mask>
-                                        </variation>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="users" translatesAutoresizingMaskIntoConstraints="NO" id="Q8P-B0-Gly">
                                         <rect key="frame" x="276" y="62" width="22" height="19"/>
@@ -83,8 +75,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="4QV-vH-V9y" secondAttribute="trailing" constant="16" id="0KS-6L-6j6"/>
-                                    <constraint firstItem="4QV-vH-V9y" firstAttribute="leading" secondItem="Q8P-B0-Gly" secondAttribute="trailing" id="1Gu-S8-cwa"/>
                                     <constraint firstItem="Q8P-B0-Gly" firstAttribute="centerY" secondItem="xDt-dA-Asj" secondAttribute="centerY" id="1i3-xh-Z08"/>
                                     <constraint firstItem="RcA-br-gXo" firstAttribute="bottom" secondItem="KaD-Co-GmI" secondAttribute="bottom" constant="17" id="3nN-cL-T23"/>
                                     <constraint firstItem="KaD-Co-GmI" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="15" id="4Gz-DE-FSS"/>
@@ -94,24 +84,10 @@
                                     <constraint firstItem="xDt-dA-Asj" firstAttribute="leading" secondItem="KaD-Co-GmI" secondAttribute="leading" id="CMu-td-PHd"/>
                                     <constraint firstItem="4QV-vH-V9y" firstAttribute="trailing" secondItem="RcA-br-gXo" secondAttribute="trailing" id="MKP-sc-G4w"/>
                                     <constraint firstItem="KaD-Co-GmI" firstAttribute="top" secondItem="0Ms-j8-jfY" secondAttribute="top" constant="15" id="QbM-4e-HP5"/>
-                                    <constraint firstItem="Q8P-B0-Gly" firstAttribute="baseline" secondItem="xDt-dA-Asj" secondAttribute="baseline" id="UNv-cd-xlC"/>
                                     <constraint firstItem="xDt-dA-Asj" firstAttribute="top" secondItem="ZOB-K8-3My" secondAttribute="bottom" constant="9.5" id="UXQ-nG-9Lj"/>
-                                    <constraint firstItem="4QV-vH-V9y" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="305" id="VKG-3q-4kT"/>
-                                    <constraint firstItem="RcA-br-gXo" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="264" id="ccF-Fk-KQs"/>
                                     <constraint firstItem="Q8P-B0-Gly" firstAttribute="leading" secondItem="RcA-br-gXo" secondAttribute="leading" id="rEf-Qf-cY9"/>
-                                    <constraint firstItem="Q8P-B0-Gly" firstAttribute="baseline" secondItem="xDt-dA-Asj" secondAttribute="baseline" id="wog-Wu-xBf"/>
                                     <constraint firstItem="ZOB-K8-3My" firstAttribute="top" secondItem="KaD-Co-GmI" secondAttribute="bottom" id="xJx-Rq-DU7"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="ccF-Fk-KQs"/>
-                                        <exclude reference="UNv-cd-xlC"/>
-                                        <exclude reference="wog-Wu-xBf"/>
-                                        <exclude reference="0KS-6L-6j6"/>
-                                        <exclude reference="1Gu-S8-cwa"/>
-                                        <exclude reference="VKG-3q-4kT"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
@@ -125,6 +101,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="summaryProvider" destination="dGI-3e-zqZ" id="18h-cY-5YP"/>
+                        <segue destination="cpn-kw-7GN" kind="modal" identifier="JoinRequestSegue" id="YTg-Ni-VC1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jpu-8v-Jpr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -138,7 +115,15 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="624" y="344"/>
+            <point key="canvasLocation" x="332.80000000000001" y="325.65333333333331"/>
+        </scene>
+        <!--FeedItemJoinRequest-->
+        <scene sceneID="yHN-uK-5aw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FeedItemJoinRequest" id="cpn-kw-7GN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8nx-5x-nQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="333.06666666666666" y="691.06666666666661"/>
         </scene>
     </scenes>
     <resources>

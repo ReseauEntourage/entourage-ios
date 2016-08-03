@@ -17,7 +17,7 @@
 #import "OTConsts.h"
 #import "OTFeedItemSummaryView.h"
 #import "OTFeedItemInfoView.h"
-#import "OTTourJoinRequestViewController.h"
+#import "OTFeedItemJoinRequestViewController.h"
 #import "OTEntourageInviteSourceViewController.h"
 #import "OTEntourageInviteContactsViewController.h"
 #import "OTEntourageInviteByPhoneViewController.h"
@@ -64,7 +64,7 @@ typedef NS_ENUM(unsigned) {
 
 
 
-@interface OTFeedItemViewController () <UITextViewDelegate, OTFeedItemDetailsOptionsDelegate, OTFeedItemSummaryDelegate, OTTourJoinRequestDelegate, OTFeedItemInfoDelegate, InviteSourceDelegate, InviteSuccessDelegate>
+@interface OTFeedItemViewController () <UITextViewDelegate, OTFeedItemDetailsOptionsDelegate, OTFeedItemSummaryDelegate, OTFeedItemJoinRequestDelegate, OTFeedItemInfoDelegate, InviteSourceDelegate, InviteSuccessDelegate>
 
 @property (nonatomic, weak) IBOutlet OTFeedItemSummaryView *feedSummaryView;
 @property (nonatomic, weak) IBOutlet UIButton *timelineButton;
@@ -818,11 +818,11 @@ static CGFloat keyboardOverlap;
             controller.user = currentUser;
     }
     else if ([segue.identifier isEqualToString:@"PublicJoinRequestSegue"]) {
-        OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)segue.destinationViewController;
+        OTFeedItemJoinRequestViewController *controller = (OTFeedItemJoinRequestViewController *)segue.destinationViewController;
         controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.feedItem = self.feedItem;
-        controller.tourJoinRequestDelegate = self;
+        controller.feedItemJoinRequestDelegate = self;
     }
     else if ([segue.identifier isEqualToString:@"InviteSourceSegue"]) {
         OTEntourageInviteSourceViewController *controller = (OTEntourageInviteSourceViewController *)segue.destinationViewController;
@@ -841,12 +841,9 @@ static CGFloat keyboardOverlap;
 }
 
 /********************************************************************************/
-#pragma mark - OTTourJoinRequestDelegate
-- (void)dismissTourJoinRequestController {
-    [self dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"dismissed join screen");
-        //[self setupUI];
-    }];
+#pragma mark - OTFeedItemJoinRequestDelegate
+- (void)dismissFeedItemJoinRequestController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

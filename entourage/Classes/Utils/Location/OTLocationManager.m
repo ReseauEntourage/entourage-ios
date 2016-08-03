@@ -6,7 +6,6 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import <CoreLocation/CoreLocation.h>
 #import "OTLocationManager.h"
 
 @interface OTLocationManager () <CLLocationManagerDelegate>
@@ -57,7 +56,10 @@
         CLLocation *item = (CLLocation *)evaluatedObject;
         return item.horizontalAccuracy >= 0 && (item.coordinate.latitude != 0 || item.coordinate.longitude != 0);
     }];
-    NSDictionary *info = @{ kNotificationLocationUpdatedInfoKey: [locations filteredArrayUsingPredicate:filter] };
+    locations = [locations filteredArrayUsingPredicate:filter];
+    if([locations count] > 0)
+        self.currentLocation = [locations objectAtIndex:0];
+    NSDictionary *info = @{ kNotificationLocationUpdatedInfoKey: locations };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationUpdated object:self userInfo:info];
 }
 

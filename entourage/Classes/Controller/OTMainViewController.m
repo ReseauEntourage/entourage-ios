@@ -14,7 +14,7 @@
 #import "OTCalloutViewController.h"
 #import "OTMapOptionsViewController.h"
 #import "OTTourOptionsViewController.h"
-#import "OTTourJoinRequestViewController.h"
+#import "OTFeedItemJoinRequestViewController.h"
 #import "OTFeedItemViewController.h"
 #import "OTQuitFeedItemViewController.h"
 #import "OTGuideViewController.h"
@@ -96,7 +96,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTTourJoinRequestDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
+@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTFeedItemJoinRequestDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
@@ -1029,9 +1029,9 @@ static bool isShowingOptions = NO;
 }
 
 /********************************************************************************/
-#pragma mark - OTTourJoinRequestDelegate
+#pragma mark - OTFeedItemJoinRequestDelegate
 
-- (void)dismissTourJoinRequestController {
+- (void)dismissFeedItemJoinRequestController {
     [self dismissViewControllerAnimated:YES completion:^{
         [self.tableView reloadData];
     }];
@@ -1305,11 +1305,11 @@ static bool isShowingOptions = NO;
         [controller setIsPOIVisible:self.guideMapDelegate.isActive];
     }
     else if([segue.identifier isEqualToString:@"OTTourJoinRequestSegue"]) {
-        OTTourJoinRequestViewController *controller = (OTTourJoinRequestViewController *)destinationViewController;
+        OTFeedItemJoinRequestViewController *controller = (OTFeedItemJoinRequestViewController *)destinationViewController;
         controller.view.backgroundColor = [UIColor appModalBackgroundColor];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.feedItem = self.selectedFeedItem;
-        controller.tourJoinRequestDelegate = self;
+        controller.feedItemJoinRequestDelegate = self;
     }
     else if([segue.identifier isEqualToString:@"QuitFeedItemSegue"]) {
         OTQuitFeedItemViewController *controller = (OTQuitFeedItemViewController *)destinationViewController;

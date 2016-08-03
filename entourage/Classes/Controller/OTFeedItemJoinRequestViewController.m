@@ -1,12 +1,12 @@
 //
-//  OTTourJoinRequestViewController.m
+//  OTFeedItemJoinRequestViewController.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 01/03/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTTourJoinRequestViewController.h"
+#import "OTFeedItemJoinRequestViewController.h"
 #import "OTTourService.h"
 #import "OTEntourageService.h"
 #import "OTTour.h"
@@ -16,14 +16,14 @@
 #import "OTConsts.h"
 #import "IQKeyboardManager.h"
 
-@interface OTTourJoinRequestViewController ()
+@interface OTFeedItemJoinRequestViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *greetingLabel;
 @property (nonatomic, weak) IBOutlet UITextView *greetingMessage;
 
 @end
 
-@implementation OTTourJoinRequestViewController
+@implementation OTFeedItemJoinRequestViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -85,8 +85,8 @@
 */
 
 - (IBAction)doDismiss {
-    if ([self.tourJoinRequestDelegate respondsToSelector:@selector(dismissTourJoinRequestController)]) {
-        [self.tourJoinRequestDelegate dismissTourJoinRequestController];
+    if ([self.feedItemJoinRequestDelegate respondsToSelector:@selector(dismissFeedItemJoinRequestController)]) {
+        [self.feedItemJoinRequestDelegate dismissFeedItemJoinRequestController];
     }
 }
 
@@ -120,8 +120,8 @@
     }
 
     
-    if ([self.tourJoinRequestDelegate respondsToSelector:@selector(dismissTourJoinRequestController)]) {
-        [self.tourJoinRequestDelegate dismissTourJoinRequestController];
+    if ([self.feedItemJoinRequestDelegate respondsToSelector:@selector(dismissFeedItemJoinRequestController)]) {
+        [self.feedItemJoinRequestDelegate dismissFeedItemJoinRequestController];
     }
 }
 

@@ -1009,10 +1009,10 @@
             </objects>
             <point key="canvasLocation" x="1346" y="333"/>
         </scene>
-        <!--OTTourJoinRequestViewController-->
+        <!--FeedItemJoinRequest-->
         <scene sceneID="JPP-j5-gm1">
             <objects>
-                <viewControllerPlaceholder storyboardName="TourJoinRequest" referencedIdentifier="OTTourJoinRequestViewController" id="GHS-CJ-wmd" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="FeedItemJoinRequest" id="GHS-CJ-wmd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ny-Mu-RyI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="866.5" y="938"/>

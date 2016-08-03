@@ -12,12 +12,16 @@
 
 - (NSString *)sinceNow {
     double timeInterval = [[NSDate date] timeIntervalSinceDate:self];
-    timeInterval /= 3600;
-    if(timeInterval > 24) {
-        timeInterval /= 24;
-        return [NSString stringWithFormat:@"%dd", (int)timeInterval];
-    }
-    return [NSString stringWithFormat:@"%dh", (int)timeInterval];
+    if(timeInterval < 60)
+        return [NSString stringWithFormat:@"%ds", (int)timeInterval];
+    timeInterval /= 60;
+    if(timeInterval < 60)
+        return [NSString stringWithFormat:@"%dm", (int)timeInterval];
+    timeInterval /= 60;
+    if(timeInterval < 24)
+        return [NSString stringWithFormat:@"%dh", (int)timeInterval];
+    timeInterval /= 24;
+    return [NSString stringWithFormat:@"%dd", (int)timeInterval];
 }
 
 @end

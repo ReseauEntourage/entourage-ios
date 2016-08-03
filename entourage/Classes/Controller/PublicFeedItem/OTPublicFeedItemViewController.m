@@ -11,8 +11,9 @@
 #import "UIColor+entourage.h"
 #import "OTFeedItemFactory.h"
 #import "UIBarButtonItem+factory.h"
+#import "OTFeedItemJoinRequestViewController.h"
 
-@interface OTPublicFeedItemViewController ()
+@interface OTPublicFeedItemViewController () <OTFeedItemJoinRequestDelegate>
 
 @property (strong, nonatomic) IBOutlet OTSummaryProviderBehavior *summaryProvider;
 
@@ -25,18 +26,36 @@
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self.summaryProvider configureWith:self.feedItem];
-    UIBarButtonItem *shareButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(doShare)];
-    [self.navigationItem setRightBarButtonItem:shareButton];
+    UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(doJoin)];
+    [self.navigationItem setRightBarButtonItem:joinButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }
 
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"JoinRequestSegue"]) {
+        OTFeedItemJoinRequestViewController *controller = (OTFeedItemJoinRequestViewController *)segue.destinationViewController;
+        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.feedItem = self.feedItem;
+        controller.feedItemJoinRequestDelegate = self;
+    }
+}
+
+#pragma mark - OTFeedItemJoinRequestDelegate
+
+- (void)dismissFeedItemJoinRequestController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - private methods
 
-- (void)doShare {
-    
+- (void)doJoin {
+    [self performSegueWithIdentifier:@"JoinRequestSegue" sender:self];
 }
 
 @end
