@@ -12,12 +12,15 @@
 #import "OTStateInfoDelegate.h"
 #import "OTMessagingDelegate.h"
 #import "OTUIDelegate.h"
+#import "OTMapHandlerDelegate.h"
 
 @protocol OTFeedItemFactoryDelegate <NSObject>
 
+- (BOOL)isTour;
 - (id<OTStateTransitionDelegate>)getStateTransition;
 - (id<OTStateInfoDelegate>)getStateInfo;
 - (id<OTMessagingDelegate>)getMessaging;
 - (id<OTUIDelegate>)getUI;
+- (id<OTMapHandlerDelegate>)getMapHandler;
 
 @end

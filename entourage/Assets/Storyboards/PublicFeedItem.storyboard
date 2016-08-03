@@ -72,6 +72,12 @@
                                         </constraints>
                                         <state key="normal" image="userSmall"/>
                                     </button>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IvY-Fu-Kho">
+                                        <rect key="frame" x="-20" y="97" width="368" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="128" id="3pU-j9-8bf"/>
+                                        </constraints>
+                                    </mapView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -82,10 +88,13 @@
                                     <constraint firstItem="4QV-vH-V9y" firstAttribute="centerY" secondItem="xDt-dA-Asj" secondAttribute="centerY" id="4No-5E-o2H"/>
                                     <constraint firstItem="ZOB-K8-3My" firstAttribute="leading" secondItem="KaD-Co-GmI" secondAttribute="leading" id="91W-Ie-Na1"/>
                                     <constraint firstItem="xDt-dA-Asj" firstAttribute="leading" secondItem="KaD-Co-GmI" secondAttribute="leading" id="CMu-td-PHd"/>
+                                    <constraint firstItem="IvY-Fu-Kho" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="-20" id="FVs-sa-fzs"/>
                                     <constraint firstItem="4QV-vH-V9y" firstAttribute="trailing" secondItem="RcA-br-gXo" secondAttribute="trailing" id="MKP-sc-G4w"/>
                                     <constraint firstItem="KaD-Co-GmI" firstAttribute="top" secondItem="0Ms-j8-jfY" secondAttribute="top" constant="15" id="QbM-4e-HP5"/>
                                     <constraint firstItem="xDt-dA-Asj" firstAttribute="top" secondItem="ZOB-K8-3My" secondAttribute="bottom" constant="9.5" id="UXQ-nG-9Lj"/>
+                                    <constraint firstAttribute="trailing" secondItem="IvY-Fu-Kho" secondAttribute="trailing" constant="-20" id="Z7R-ne-A5w"/>
                                     <constraint firstItem="Q8P-B0-Gly" firstAttribute="leading" secondItem="RcA-br-gXo" secondAttribute="leading" id="rEf-Qf-cY9"/>
+                                    <constraint firstItem="IvY-Fu-Kho" firstAttribute="top" secondItem="xDt-dA-Asj" secondAttribute="bottom" constant="17" id="wjV-Rc-kCA"/>
                                     <constraint firstItem="ZOB-K8-3My" firstAttribute="top" secondItem="KaD-Co-GmI" secondAttribute="bottom" id="xJx-Rq-DU7"/>
                                 </constraints>
                             </view>
@@ -100,6 +109,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="mapAnnotationProvider" destination="ZXV-cG-4Hc" id="8yu-i1-7Zu"/>
                         <outlet property="summaryProvider" destination="dGI-3e-zqZ" id="18h-cY-5YP"/>
                         <segue destination="cpn-kw-7GN" kind="modal" identifier="JoinRequestSegue" id="YTg-Ni-VC1"/>
                     </connections>
@@ -114,6 +124,11 @@
                         <outlet property="lblUserCount" destination="4QV-vH-V9y" id="xQV-zT-36c"/>
                     </connections>
                 </customObject>
+                <customObject id="ZXV-cG-4Hc" userLabel="Map Annotation Provider" customClass="OTMapAnnotationProviderBehavior">
+                    <connections>
+                        <outlet property="map" destination="IvY-Fu-Kho" id="b2P-Xp-FkF"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="332.80000000000001" y="325.65333333333331"/>
         </scene>
@@ -123,7 +138,7 @@
                 <viewControllerPlaceholder storyboardName="FeedItemJoinRequest" id="cpn-kw-7GN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nx-5x-nQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="333.06666666666666" y="691.06666666666661"/>
+            <point key="canvasLocation" x="332" y="699"/>
         </scene>
     </scenes>
     <resources>

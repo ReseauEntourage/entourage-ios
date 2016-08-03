@@ -8,6 +8,7 @@
 
 #import "OTPublicFeedItemViewController.h"
 #import "OTSummaryProviderBehavior.h"
+#import "OTMapAnnotationProviderBehavior.h"
 #import "UIColor+entourage.h"
 #import "OTFeedItemFactory.h"
 #import "UIBarButtonItem+factory.h"
@@ -16,6 +17,7 @@
 @interface OTPublicFeedItemViewController () <OTFeedItemJoinRequestDelegate>
 
 @property (strong, nonatomic) IBOutlet OTSummaryProviderBehavior *summaryProvider;
+@property (strong, nonatomic) IBOutlet OTMapAnnotationProviderBehavior *mapAnnotationProvider;
 
 @end
 
@@ -24,8 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self.summaryProvider configureWith:self.feedItem];
+    [self.mapAnnotationProvider configureWith:self.feedItem];
+
+    self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(doJoin)];
     [self.navigationItem setRightBarButtonItem:joinButton];
 }

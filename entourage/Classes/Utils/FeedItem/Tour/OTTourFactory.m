@@ -11,6 +11,7 @@
 #import "OTTourStateInfo.h"
 #import "OTTourMessaging.h"
 #import "OTTourUI.h"
+#import "OTTourMapHandler.h"
 
 @implementation OTTourFactory
 
@@ -21,6 +22,10 @@
         self.tour = tour;
     }
     return self;
+}
+
+- (BOOL)isTour {
+    return YES;
 }
 
 - (id<OTStateTransitionDelegate>)getStateTransition {
@@ -37,6 +42,10 @@
 
 - (id<OTUIDelegate>)getUI {
     return [[OTTourUI alloc] initWithTour:self.tour];
+}
+
+- (id<OTMapHandlerDelegate>)getMapHandler {
+    return [[OTTourMapHandler alloc] initWithTour:self.tour];
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "OTEntourageStateInfo.h"
 #import "OTEntourageMessaging.h"
 #import "OTEntourageUI.h"
+#import "OTEntourageMapHandler.h"
 
 @implementation OTEntourageFactory
 
@@ -21,6 +22,10 @@
         self.entourage = entourage;
     }
     return self;
+}
+
+- (BOOL)isTour {
+    return NO;
 }
 
 - (id<OTStateTransitionDelegate>)getStateTransition {
@@ -37,6 +42,10 @@
 
 - (id<OTUIDelegate>)getUI {
     return [[OTEntourageUI alloc] initWithEntourage:self.entourage];
+}
+
+- (id<OTMapHandlerDelegate>)getMapHandler {
+    return [[OTEntourageMapHandler alloc] initWithEntourage:self.entourage];
 }
 
 @end

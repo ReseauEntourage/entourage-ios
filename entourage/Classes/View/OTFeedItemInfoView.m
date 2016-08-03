@@ -27,7 +27,6 @@
 @implementation OTFeedItemInfoView
 
 - (void)setupWithFeedItem:(OTFeedItem *)feedItem {
-    
     CLLocationCoordinate2D coordinate;
     if ([feedItem isKindOfClass:[OTTour class]]) {
         OTTour *tour = (OTTour*)feedItem;
@@ -75,7 +74,6 @@
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(nonnull id<MKAnnotation>)annotation {
-    
     if ([annotation isKindOfClass:[OTEntourageAnnotation class]]) {
         OTEntourageAnnotation *entAnnotation = (OTEntourageAnnotation*)annotation;
         MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEntourageAnnotationIdentifier];
