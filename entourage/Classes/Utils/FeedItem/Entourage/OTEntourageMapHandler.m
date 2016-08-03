@@ -19,4 +19,12 @@
     return [[OTEntourageAnnotation alloc] initWithEntourage:self.entourage];
 }
 
+- (MKPolyline *)lineData {
+    return nil;
+}
+
+- (MKOverlayRenderer *)rendererFor:(MKPolyline *)line {
+    return nil;
+}
+
 @end

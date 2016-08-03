@@ -17,6 +17,7 @@
 #import "OTTourService.h"
 #import "UIColor+entourage.h"
 #import "OTEntourageAnnotationView.h"
+#import "OTConsts.h"
 
 @interface OTToursMapDelegate ()
 

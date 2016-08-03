@@ -15,5 +15,7 @@
 @property (nonatomic, weak) IBOutlet MKMapView *map;
 
 - (void)configureWith:(OTFeedItem *)feedItem;
+- (void)addStartPoint;
+- (void)drawData;
 
 @end

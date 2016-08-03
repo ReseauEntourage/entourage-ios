@@ -30,7 +30,7 @@
 #define TEXTVIEW_PADDING_TOP 12.0f
 #define TEXTVIEW_PADDING_BOTTOM 23.0f
 
-
+#define MAP_TOUR_LINE_WIDTH 4.0f
 
 #define kNotificationPushStatusChanged @"NotificationAPNSStatusChanged"
 #define kNotificationPushStatusChangedStatusKey @"NotificationAPNSStatusChangedStatusKey"

@@ -28,6 +28,8 @@
 
     [self.summaryProvider configureWith:self.feedItem];
     [self.mapAnnotationProvider configureWith:self.feedItem];
+    [self.mapAnnotationProvider addStartPoint];
+    [self.mapAnnotationProvider drawData];
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(doJoin)];
