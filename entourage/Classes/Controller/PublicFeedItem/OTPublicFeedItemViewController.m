@@ -13,11 +13,13 @@
 #import "OTFeedItemFactory.h"
 #import "UIBarButtonItem+factory.h"
 #import "OTFeedItemJoinRequestViewController.h"
+#import "OTStatusBehavior.h"
 
 @interface OTPublicFeedItemViewController () <OTFeedItemJoinRequestDelegate>
 
 @property (strong, nonatomic) IBOutlet OTSummaryProviderBehavior *summaryProvider;
 @property (strong, nonatomic) IBOutlet OTMapAnnotationProviderBehavior *mapAnnotationProvider;
+@property (strong, nonatomic) IBOutlet OTStatusBehavior *statusBehavior;
 
 @end
 
@@ -30,6 +32,8 @@
     [self.mapAnnotationProvider configureWith:self.feedItem];
     [self.mapAnnotationProvider addStartPoint];
     [self.mapAnnotationProvider drawData];
+    [self.statusBehavior initialize];
+    [self.statusBehavior updateWith:self.feedItem];
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(doJoin)];
@@ -62,6 +66,9 @@
 
 - (void)doJoin {
     [self performSegueWithIdentifier:@"JoinRequestSegue" sender:self];
+}
+
+- (IBAction)btnStateChange_TouchUpInside:(id)sender {
 }
 
 @end
