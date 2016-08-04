@@ -13,5 +13,6 @@
 
 - (void)send:(NSString *)message withSuccess:(void (^)(OTTourMessage *))success orFailure:(void (^)(NSError *))failure;
 - (void)invitePhone:(NSString *)phone withSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure;
+- (void)sendJoinMessage:(NSString *)message success:(void(^)(OTTourJoiner *))success failure:(void (^)(NSError *)) failure;
 
 @end

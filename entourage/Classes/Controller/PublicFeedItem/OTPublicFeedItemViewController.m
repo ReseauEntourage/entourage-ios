@@ -60,6 +60,7 @@
 
 - (void)dismissFeedItemJoinRequestController {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self.statusBehavior updateWith:self.feedItem];
 }
 
 #pragma mark - private methods
@@ -69,6 +70,9 @@
 }
 
 - (IBAction)btnStateChange_TouchUpInside:(id)sender {
+    FeedItemState state = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
+    if(state == FeedItemStateJoinNotRequested)
+        [self performSegueWithIdentifier:@"JoinRequestSegue" sender:self];
 }
 
 @end
