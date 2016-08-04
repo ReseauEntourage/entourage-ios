@@ -86,8 +86,7 @@ NSString *const kTourPoints = @"tour_points";
          {
              if (success)
              {
-                 NSDictionary *tourDictionary = [(NSDictionary*)responseObject objectForKey:kWSKeyTour];
-                 OTTour *updatedTour = [self tourFromDictionary:tourDictionary];
+                 OTTour *updatedTour = [self tourFromDictionary:responseObject];
                  success(updatedTour);
              }
          }

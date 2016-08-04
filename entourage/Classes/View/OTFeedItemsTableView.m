@@ -244,7 +244,7 @@
     [statusLabel setupAsStatusButtonForFeedItem:item];
 
     //check if we need to load more data
-    if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
+     if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
         if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {
             [self.feedItemsDelegate loadMoreData];
         }

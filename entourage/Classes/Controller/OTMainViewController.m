@@ -440,9 +440,9 @@ static BOOL didGetAnyData = NO;
     BOOL showTours = [[entourageFilter valueForFilter:kEntourageFilterEntourageShowTours] boolValue];
     BOOL myEntouragesOnly = [[entourageFilter valueForFilter:kEntourageFilterEntourageOnlyMyEntourages] boolValue];
 
-    
+    // need to add time in the future because of wrong time difference
     NSDictionary *filterDictionary = @{
-                                       @"before" : [NSDate date],
+                                       @"before" : [[NSDate date] dateByAddingTimeInterval:10],
                                        @"latitude": @(self.requestedToursCoordinate.latitude),
                                        @"longitude": @(self.requestedToursCoordinate.longitude),
                                        @"distance": @TOURS_REQUEST_DISTANCE_KM,
@@ -530,6 +530,7 @@ static BOOL didGetAnyData = NO;
                                                     self.currentPagination.isLoading = NO;
                                                     return;
                                                 }
+                                                
                                                 [self.indicatorView setHidden:YES];
                                                 
                                                 OTFeedItem *lastFeed = self.feeds.lastObject;
@@ -1092,7 +1093,8 @@ static bool isShowingOptions = NO;
 #pragma mark - Feeds Table View Delegate
 
 - (void)loadMoreData {
-    self.currentPagination.beforeDate = ((OTFeedItem*)self.feeds.lastObject).creationDate;
+    // add -1 seconds to prevent getting the same item over and over again
+    self.currentPagination.beforeDate = [((OTFeedItem*)self.feeds.lastObject).creationDate dateByAddingTimeInterval:-1];
     [self getData];
 }
 
