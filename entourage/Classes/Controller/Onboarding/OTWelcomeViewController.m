@@ -11,6 +11,7 @@
 #import "UIColor+entourage.h"
 #import "UIView+entourage.h"
 #import "UIBarButtonItem+factory.h"
+#import "NSUserDefaults+OT.h"
 
 #define SHOW_LOGIN_SEGUE @"WelcomeLoginSegue"
 
@@ -26,7 +27,8 @@
     [super viewDidLoad];
     
     self.title = @"";
-    [self addLoginBarButton];
+    if(![NSUserDefaults standardUserDefaults].currentUser)
+        [self addLoginBarButton];
     [self.startButton setupHalfRoundedCorners];
     [self setupWebView];
     
