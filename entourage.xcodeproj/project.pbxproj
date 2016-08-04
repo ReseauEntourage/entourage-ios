@@ -103,6 +103,7 @@
 		1EACE41A1D11515200F3A2A6 /* OTTourStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4121D11515200F3A2A6 /* OTTourStateTransition.m */; };
 		1EACE41B1D11515200F3A2A6 /* OTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4151D11515200F3A2A6 /* OTLocationManager.m */; };
 		1EC184B71D1420D800E29D96 /* OTEntourageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC184B61D1420D800E29D96 /* OTEntourageAnnotationView.m */; };
+		1EC6F3C71D53DBEF0026766D /* OTActiveFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC6F3C61D53DBEF0026766D /* OTActiveFeedItemViewController.m */; };
 		1ECDBC691D3D35C300DD87B2 /* OTTourMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECDBC681D3D35C300DD87B2 /* OTTourMessaging.m */; };
 		1ECDBC6C1D3D363600DD87B2 /* OTEntourageMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECDBC6B1D3D363600DD87B2 /* OTEntourageMessaging.m */; };
 		1ECFB3691D52570900722DAC /* OTTourMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECFB3681D52570900722DAC /* OTTourMapHandler.m */; };
@@ -399,6 +400,8 @@
 		1EACE4151D11515200F3A2A6 /* OTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLocationManager.m; sourceTree = "<group>"; };
 		1EC184B51D1420D800E29D96 /* OTEntourageAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageAnnotationView.h; sourceTree = "<group>"; };
 		1EC184B61D1420D800E29D96 /* OTEntourageAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageAnnotationView.m; sourceTree = "<group>"; };
+		1EC6F3C51D53DBEF0026766D /* OTActiveFeedItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTActiveFeedItemViewController.h; path = ActiveFeedItem/OTActiveFeedItemViewController.h; sourceTree = "<group>"; };
+		1EC6F3C61D53DBEF0026766D /* OTActiveFeedItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTActiveFeedItemViewController.m; path = ActiveFeedItem/OTActiveFeedItemViewController.m; sourceTree = "<group>"; };
 		1ECDBC661D3D354000DD87B2 /* OTMessagingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMessagingDelegate.h; sourceTree = "<group>"; };
 		1ECDBC671D3D35C300DD87B2 /* OTTourMessaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourMessaging.h; sourceTree = "<group>"; };
 		1ECDBC681D3D35C300DD87B2 /* OTTourMessaging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourMessaging.m; sourceTree = "<group>"; };
@@ -951,6 +954,15 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
+		1EC6F3C41D53DBC90026766D /* ActiveFeedItem */ = {
+			isa = PBXGroup;
+			children = (
+				1EC6F3C51D53DBEF0026766D /* OTActiveFeedItemViewController.h */,
+				1EC6F3C61D53DBEF0026766D /* OTActiveFeedItemViewController.m */,
+			);
+			name = ActiveFeedItem;
+			sourceTree = "<group>";
+		};
 		1ECFB3621D52525C00722DAC /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -1278,6 +1290,7 @@
 		6B4930C719A773C500DA7EE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1EC6F3C41D53DBC90026766D /* ActiveFeedItem */,
 				1E78B7A71D512D950008C00E /* PublicFeedItem */,
 				1E488E151D4FB98400A2E5B0 /* UserPicture */,
 				1E488E141D4FB97E00A2E5B0 /* Rights */,
@@ -1840,6 +1853,7 @@
 				2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */,
 				0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */,
 				45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */,
+				1EC6F3C71D53DBEF0026766D /* OTActiveFeedItemViewController.m in Sources */,
 				2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */,
 				45FD17B71CFC4F3E0037270B /* OTOptionsViewController.m in Sources */,
 				2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */,

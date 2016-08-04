@@ -27,6 +27,7 @@
 #import "OTFiltersViewController.h"
 #import "OTFeedItemsPagination.h"
 #import "OTPublicFeedItemViewController.h"
+#import "OTActiveFeedItemViewController.h"
 
 #import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
@@ -1103,7 +1104,7 @@ static bool isShowingOptions = NO;
     self.selectedFeedItem = feedItem;
     
     if([feedItem.author.uID isEqual:[NSUserDefaults standardUserDefaults].currentUser.sid])
-        [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
+        [self performSegueWithIdentifier:@"ActiveFeedItemDetailsSegue" sender:self];
     else
         [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
 }
@@ -1362,6 +1363,10 @@ static bool isShowingOptions = NO;
     }
     else if([segue.identifier isEqualToString:@"PublicFeedItemDetailsSegue"]) {
         OTPublicFeedItemViewController *controller = (OTPublicFeedItemViewController *)destinationViewController;
+        controller.feedItem = self.selectedFeedItem;
+    }
+    else if([segue.identifier isEqualToString:@"ActiveFeedItemDetailsSegue"]) {
+        OTActiveFeedItemViewController *controller = (OTActiveFeedItemViewController *)destinationViewController;
         controller.feedItem = self.selectedFeedItem;
     }
 }

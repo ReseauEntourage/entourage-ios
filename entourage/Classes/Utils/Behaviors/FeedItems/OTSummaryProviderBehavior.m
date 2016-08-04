@@ -20,14 +20,20 @@
 
 - (void)configureWith:(OTFeedItem *)feedItem {
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:feedItem] getUI];
-    self.lblTitle.text = [uiDelegate summary];
-    self.lblUserCount.text = [feedItem.noPeople stringValue];
-    [self.btnAvatar setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];
-    [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+    if(self.lblTitle)
+        self.lblTitle.text = [uiDelegate summary];
+    if(self.lblUserCount)
+        self.lblUserCount.text = [feedItem.noPeople stringValue];
+    if(self.btnAvatar)
+        [self.btnAvatar setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];
+    if(self.lblDescription)
+        [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+    if(self.lblTimeDistance) {
     self.lblTimeDistance.text = @"";
-    [uiDelegate timeDataWithCompletion:^(NSString *result) {
-        self.lblTimeDistance.text = result;
-    }];
+        [uiDelegate timeDataWithCompletion:^(NSString *result) {
+            self.lblTimeDistance.text = result;
+        }];
+    }
 }
 
 @end

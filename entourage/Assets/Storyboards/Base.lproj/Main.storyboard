@@ -201,6 +201,16 @@
             </objects>
             <point key="canvasLocation" x="364" y="45"/>
         </scene>
+        <!--ActiveFeedItem-->
+        <scene sceneID="19F-zf-hvr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ActiveFeedItem" id="b7J-bU-8VV" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="FN1-5g-EDc"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FuL-C2-u9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="950.5" y="-379"/>
+        </scene>
         <!--PublicFeedItem-->
         <scene sceneID="R5i-fD-RJi">
             <objects>
@@ -485,6 +495,7 @@
                         <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageCreator" id="dno-Ju-GCg"/>
                         <segue destination="0av-Qe-fFs" kind="modal" identifier="FiltersSegue" id="22w-GJ-qhb"/>
                         <segue destination="4jA-Gt-JYo" kind="push" identifier="PublicFeedItemDetailsSegue" id="wzY-Lz-9e9"/>
+                        <segue destination="b7J-bU-8VV" kind="push" identifier="ActiveFeedItemDetailsSegue" id="5Vn-Sd-WAu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
