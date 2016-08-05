@@ -1,22 +1,22 @@
 //
-//  OTEntourageInviteSourceViewController.m
+//  OTInviteSourceViewController.m
 //  entourage
 //
 //  Created by sergiu buceac on 7/28/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTEntourageInviteSourceViewController.h"
+#import "OTInviteSourceViewController.h"
 #import "UIView+entourage.h"
 
-@interface OTEntourageInviteSourceViewController ()
+@interface OTInviteSourceViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *btnInviteContacts;
 @property (weak, nonatomic) IBOutlet UIButton *btnInviteByPhone;
 
 @end
 
-@implementation OTEntourageInviteSourceViewController
+@implementation OTInviteSourceViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

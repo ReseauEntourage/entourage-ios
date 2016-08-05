@@ -18,9 +18,9 @@
 #import "OTFeedItemSummaryView.h"
 #import "OTFeedItemInfoView.h"
 #import "OTFeedItemJoinRequestViewController.h"
-#import "OTEntourageInviteSourceViewController.h"
-#import "OTEntourageInviteContactsViewController.h"
-#import "OTEntourageInviteByPhoneViewController.h"
+#import "OTInviteSourceViewController.h"
+#import "OTInviteContactsViewController.h"
+#import "OTInviteByPhoneViewController.h"
 
 // Models
 #import "OTEntourage.h"
@@ -825,16 +825,16 @@ static CGFloat keyboardOverlap;
         controller.feedItemJoinRequestDelegate = self;
     }
     else if ([segue.identifier isEqualToString:@"InviteSourceSegue"]) {
-        OTEntourageInviteSourceViewController *controller = (OTEntourageInviteSourceViewController *)segue.destinationViewController;
+        OTInviteSourceViewController *controller = (OTInviteSourceViewController *)segue.destinationViewController;
         controller.delegate = self;
     }
     else if ([segue.identifier isEqualToString:@"InviteContactsSegue"]) {
-        OTEntourageInviteContactsViewController *controller = (OTEntourageInviteContactsViewController *)segue.destinationViewController;
+        OTInviteContactsViewController *controller = (OTInviteContactsViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
         controller.delegate = self;
     }
     else if ([segue.identifier isEqualToString:@"InvitePhoneSegue"]) {
-        OTEntourageInviteByPhoneViewController *controller = (OTEntourageInviteByPhoneViewController *)segue.destinationViewController;
+        OTInviteByPhoneViewController *controller = (OTInviteByPhoneViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
         controller.delegate = self;
     }

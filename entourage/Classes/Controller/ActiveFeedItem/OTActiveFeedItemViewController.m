@@ -12,10 +12,15 @@
 #import "UIColor+entourage.h"
 #import "OTStateInfoDelegate.h"
 #import "OTSummaryProviderBehavior.h"
+#import "OTSpeechBehavior.h"
+#import "OTInviteBehavior.h"
 
 @interface OTActiveFeedItemViewController ()
 
 @property (strong, nonatomic) IBOutlet OTSummaryProviderBehavior *summaryProvider;
+@property (strong, nonatomic) IBOutlet OTSpeechBehavior *speechBehavior;
+@property (strong, nonatomic) IBOutlet OTInviteBehavior *inviteBehavior;
+@property (weak, nonatomic) IBOutlet UITableView *tblChat;
 
 @end
 
@@ -25,7 +30,9 @@
     [super viewDidLoad];
     
     [self.summaryProvider configureWith:self.feedItem];
-    
+    [self.speechBehavior initialize];
+    [self.inviteBehavior configureWith:self.feedItem];
+
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];
 }
@@ -34,25 +41,28 @@
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }
 
+#pragma mark - navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [self.inviteBehavior prepareSegueForInvite:segue];
+}
+
 #pragma mark - private methods
 
 -(void)setupToolbarButtons {
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
     if(![stateInfo canChangeEditState])
         return;
-    UIBarButtonItem *moreButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self andAction:@selector(showOptions)];
-    [self.navigationItem setRightBarButtonItems:@[moreButton]];
+    UIBarButtonItem *optionsButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self andAction:@selector(showOptions)];
     if([stateInfo canInvite]) {
-        UIBarButtonItem *plusButton = [UIBarButtonItem createWithImageNamed:@"userPlus" withTarget:self andAction:@selector(inviteUser)];
-        [self.navigationItem setRightBarButtonItems:@[moreButton, plusButton]];
+        UIBarButtonItem *plusButton = [UIBarButtonItem createWithImageNamed:@"userPlus" withTarget:self.inviteBehavior andAction:@selector(startInvite)];
+        [self.navigationItem setRightBarButtonItems:@[optionsButton, plusButton]];
     }
+    else
+        [self.navigationItem setRightBarButtonItems:@[optionsButton]];
 }
 
 - (void)showOptions {
-    
-}
-
-- (void)inviteUser {
     
 }
 

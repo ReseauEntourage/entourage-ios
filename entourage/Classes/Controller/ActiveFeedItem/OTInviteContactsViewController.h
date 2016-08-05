@@ -1,5 +1,5 @@
 //
-//  OTEntourageAddressBookViewController.h
+//  OTInviteContactsViewController.h
 //  entourage
 //
 //  Created by sergiu buceac on 7/28/16.
@@ -10,9 +10,9 @@
 #import "OTDataSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTFeedItem.h"
-#import "OTEntourageInviteSourceViewController.h"
+#import "OTInviteSourceViewController.h"
 
-@interface OTEntourageInviteContactsViewController : UIViewController
+@interface OTInviteContactsViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;

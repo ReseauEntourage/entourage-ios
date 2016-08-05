@@ -1,12 +1,12 @@
 //
-//  OTEntourageInviteByPhoneViewController.m
+//  OTInviteByPhoneViewController.m
 //  entourage
 //
 //  Created by sergiu buceac on 7/28/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTEntourageInviteByPhoneViewController.h"
+#import "OTInviteByPhoneViewController.h"
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
 #import "UIBarButtonItem+factory.h"
@@ -15,14 +15,14 @@
 #import "OTFeedItemFactory.h"
 #import "SVProgressHUD.h"
 
-@interface OTEntourageInviteByPhoneViewController ()
+@interface OTInviteByPhoneViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
 @property (nonatomic, strong) UIBarButtonItem *btnSave;
 
 @end
 
-@implementation OTEntourageInviteByPhoneViewController
+@implementation OTInviteByPhoneViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

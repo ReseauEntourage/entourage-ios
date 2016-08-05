@@ -1,5 +1,5 @@
 //
-//  OTEntourageInviteByPhoneViewController.h
+//  OTInviteByPhoneViewController.h
 //  entourage
 //
 //  Created by sergiu buceac on 7/28/16.
@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "OTFeedItem.h"
-#import "OTEntourageInviteSourceViewController.h"
+#import "OTInviteSourceViewController.h"
 
-@interface OTEntourageInviteByPhoneViewController : UIViewController
+@interface OTInviteByPhoneViewController : UIViewController
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, weak) id<InviteSuccessDelegate> delegate;

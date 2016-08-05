@@ -1,12 +1,12 @@
 //
-//  OTEntourageAddressBookViewController.m
+//  OTInviteContactsViewController.m
 //  entourage
 //
 //  Created by sergiu buceac on 7/28/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTEntourageInviteContactsViewController.h"
+#import "OTInviteContactsViewController.h"
 #import "SVProgressHUD.h"
 #import "OTAddressBookItem.h"
 #import "OTAddressBookService.h"
@@ -16,14 +16,14 @@
 #import "OTFeedItemFactory.h"
 #import "NSString+Validators.h"
 
-@interface OTEntourageInviteContactsViewController () <UITableViewDelegate>
+@interface OTInviteContactsViewController () <UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tblContacts;
 @property (nonatomic, strong) UIBarButtonItem *btnSave;
 
 @end
 
-@implementation OTEntourageInviteContactsViewController
+@implementation OTInviteContactsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

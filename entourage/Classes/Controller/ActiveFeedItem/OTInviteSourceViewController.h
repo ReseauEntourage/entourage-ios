@@ -1,5 +1,5 @@
 //
-//  OTEntourageInviteSourceViewController.h
+//  OTInviteSourceViewController.h
 //  entourage
 //
 //  Created by sergiu buceac on 7/28/16.
@@ -21,7 +21,7 @@
 
 @end
 
-@interface OTEntourageInviteSourceViewController : UIViewController
+@interface OTInviteSourceViewController : UIViewController
 
 @property(nonatomic, weak) id<InviteSourceDelegate> delegate;
 
