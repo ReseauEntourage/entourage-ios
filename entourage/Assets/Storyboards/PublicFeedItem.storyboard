@@ -144,6 +144,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="joinBehavior" destination="3hI-5m-VDv" id="udZ-Hx-j8R"/>
                         <outlet property="mapAnnotationProvider" destination="ZXV-cG-4Hc" id="8yu-i1-7Zu"/>
                         <outlet property="statusBehavior" destination="fgE-8v-az0" id="HgB-v3-Bi3"/>
                         <outlet property="summaryProvider" destination="dGI-3e-zqZ" id="18h-cY-5YP"/>
@@ -169,6 +170,12 @@
                     <connections>
                         <outlet property="btnStatus" destination="fJK-hn-36o" id="IKq-i9-roN"/>
                         <outlet property="lblStatus" destination="nU0-h0-mOV" id="SAP-cU-JUH"/>
+                    </connections>
+                </customObject>
+                <customObject id="3hI-5m-VDv" customClass="OTJoinBehavior">
+                    <connections>
+                        <action selector="updateStatusToPending" destination="fid-Iu-R1a" eventType="valueChanged" id="dDc-Km-KRO"/>
+                        <outlet property="owner" destination="fid-Iu-R1a" id="402-lY-Prx"/>
                     </connections>
                 </customObject>
             </objects>

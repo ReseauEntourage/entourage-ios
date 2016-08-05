@@ -36,6 +36,7 @@
 		1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682EB19E81483007BD4BC /* NSString+Validators.m */; };
 		1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */; };
 		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
+		1E0972B41D54B797006E1FAD /* OTJoinBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972B31D54B797006E1FAD /* OTJoinBehavior.m */; };
 		1E2F29051D4BC25C00ABC68A /* OTSpeechBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F29041D4BC25C00ABC68A /* OTSpeechBehavior.m */; };
 		1E2F29081D4BC26600ABC68A /* OTPhotoPickerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F29071D4BC26600ABC68A /* OTPhotoPickerBehavior.m */; };
 		1E2F290C1D4BC2A000ABC68A /* OTCloseKeyboardOnTapBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F290B1D4BC2A000ABC68A /* OTCloseKeyboardOnTapBehavior.m */; };
@@ -281,6 +282,8 @@
 		1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSWRevealViewController.m; sourceTree = "<group>"; };
 		1DF661D919E98AAD00045310 /* OTCreateMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCreateMeetingViewController.h; sourceTree = "<group>"; };
 		1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCreateMeetingViewController.m; sourceTree = "<group>"; };
+		1E0972B21D54B797006E1FAD /* OTJoinBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTJoinBehavior.h; path = Behaviors/FeedItems/OTJoinBehavior.h; sourceTree = "<group>"; };
+		1E0972B31D54B797006E1FAD /* OTJoinBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTJoinBehavior.m; path = Behaviors/FeedItems/OTJoinBehavior.m; sourceTree = "<group>"; };
 		1E2F29031D4BC25C00ABC68A /* OTSpeechBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSpeechBehavior.h; path = Behaviors/Speech/OTSpeechBehavior.h; sourceTree = "<group>"; };
 		1E2F29041D4BC25C00ABC68A /* OTSpeechBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSpeechBehavior.m; path = Behaviors/Speech/OTSpeechBehavior.m; sourceTree = "<group>"; };
 		1E2F29061D4BC26600ABC68A /* OTPhotoPickerBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPhotoPickerBehavior.h; path = Behaviors/Photo/OTPhotoPickerBehavior.h; sourceTree = "<group>"; };
@@ -817,6 +820,8 @@
 				1E78B7AD1D512E710008C00E /* OTSummaryProviderBehavior.m */,
 				1E5EBCED1D53CECF006695F1 /* OTStatusBehavior.h */,
 				1E5EBCEE1D53CECF006695F1 /* OTStatusBehavior.m */,
+				1E0972B21D54B797006E1FAD /* OTJoinBehavior.h */,
+				1E0972B31D54B797006E1FAD /* OTJoinBehavior.m */,
 			);
 			name = FeedItems;
 			sourceTree = "<group>";
@@ -1832,6 +1837,7 @@
 				A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */,
 				45F443471C9314A800DDEBE1 /* OTTourStatus.m in Sources */,
 				0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */,
+				1E0972B41D54B797006E1FAD /* OTJoinBehavior.m in Sources */,
 				0A70FA181BFDD69C0080E8EC /* OTToursTableViewController.m in Sources */,
 				452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */,
 				1E69CABD1D37B3CC00118E33 /* NSError+message.m in Sources */,
