@@ -23,15 +23,15 @@
     }];
 }
 
-- (void)invitePhone:(NSString *)phone withSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] inviteNumber:phone toEntourage:self.entourage success:^() {
-        NSLog(@"INVITE BY PHONE %@", phone);
+- (void)invitePhones:(NSArray *)phones withSuccess:(void (^)())success orFailure:(void (^)(NSError *, NSArray *))failure {
+    [[OTEntourageService new] inviteNumbers:phones toEntourage:self.entourage success:^() {
+        NSLog(@"INVITE BY PHONES");
         if(success)
             success();
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSArray* failedNumbers) {
         NSLog(@"ERROR INVITE BY PHONE %@", error.description);
         if(failure)
-            failure(error);
+            failure(error, failedNumbers);
     }];
 }
 

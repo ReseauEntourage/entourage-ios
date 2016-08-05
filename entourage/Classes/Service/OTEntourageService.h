@@ -60,8 +60,8 @@
          success:(void (^)())success
          failure:(void (^)(NSError *error))failure;
 
-- (void)inviteNumber:(NSString *)phoneNumber toEntourage:(OTEntourage *)entourage
+- (void)inviteNumbers:(NSArray *)phoneNumbers toEntourage:(OTEntourage *)entourage
               success:(void (^)())success
-              failure:(void (^)(NSError *error))failure;
+              failure:(void (^)(NSError *error, NSArray *failedNumbers))failure;
 
 @end

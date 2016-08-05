@@ -67,41 +67,20 @@
 #pragma mark - private members
 
 - (void)save {
-    dispatch_group_t group = dispatch_group_create();
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    NSMutableArray *success = [NSMutableArray new];
-    NSMutableArray *failure = [NSMutableArray new];
-    
     [SVProgressHUD show];
-    dispatch_group_async(group, queue, ^() {
-        NSArray *selectedItems = [self selectedItems];
-        for(OTAddressBookItem *item in selectedItems) {
-            dispatch_group_enter(group);
-                [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] invitePhone:[item.telephone phoneNumberServerRepresentation] withSuccess:^() {
-                    @synchronized (success) {
-                        [success addObject:item.telephone];
-                    }
-                    dispatch_group_leave(group);
-                } orFailure:^(NSError *error) {
-                    @synchronized (failure) {
-                        [failure addObject:item.telephone];
-                    }
-                    dispatch_group_leave(group);
-                }];
-        }
-        dispatch_group_notify(group, queue, ^ {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [SVProgressHUD dismiss];
-                if([failure count] > 0)  {
-                    [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"inviteByPhoneFailed") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
-                } else {
-                    [self.navigationController popViewControllerAnimated:YES];
-                    if(self.delegate)
-                        [self.delegate didInviteWithSuccess];
-                }
-            });
-        });
-    });
+    NSArray *selectedItems = [self selectedItems];
+    NSMutableArray *phones = [NSMutableArray new];
+    for(OTAddressBookItem *item in selectedItems)
+        [phones addObject:item.telephone];
+    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] invitePhones:phones withSuccess:^() {
+        [SVProgressHUD dismiss];
+        [self.navigationController popViewControllerAnimated:YES];
+        if(self.delegate)
+            [self.delegate didInviteWithSuccess];
+    } orFailure:^(NSError *error, NSArray *failedNUmbers) {
+        [SVProgressHUD dismiss];
+        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"inviteByPhoneFailed") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+    }];
 }
 
 - (void)checkIfDisable {

@@ -107,7 +107,7 @@
 
 - (void)regenerateSecretCode {
     [SVProgressHUD show];
-    [[OTAuthService new] regenerateSecretCode:self.phoneTextField.text.phoneNumberServerRepresentation
+    [[OTAuthService new] regenerateSecretCode:self.phoneTextField.text
                                       success:^(OTUser *user) {
                                           [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
                                           [self showSMSContainer];

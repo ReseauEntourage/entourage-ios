@@ -46,12 +46,12 @@
 
 - (void)save {
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] invitePhone:[self.txtPhone.text phoneNumberServerRepresentation] withSuccess:^() {
+    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] invitePhones:@[self.txtPhone.text] withSuccess:^() {
         [SVProgressHUD dismiss];
         [self.navigationController popViewControllerAnimated:YES];
         if(self.delegate)
             [self.delegate didInviteWithSuccess];
-    } orFailure:^(NSError *error) {
+    } orFailure:^(NSError *error, NSArray *failedNumbers) {
         [SVProgressHUD dismiss];
         [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"inviteByPhoneFailed") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
     }];
