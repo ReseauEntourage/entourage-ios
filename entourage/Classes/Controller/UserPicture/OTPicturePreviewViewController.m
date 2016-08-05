@@ -56,6 +56,8 @@ static BOOL wasShown = YES;
     [[OTPictureUploadService new] uploadPicture:finalImage withSuccess:^(NSString *pictureName) {
         currentUser.avatarKey = pictureName;
         [[OTAuthService new] updateUserInformationWithUser:currentUser success:^(OTUser *user) {
+            // TODO phone is not in response so need to restore it manually
+            user.phone = currentUser.phone;
             [NSUserDefaults standardUserDefaults].currentUser = user;
             if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
                 [self popToProfile];
