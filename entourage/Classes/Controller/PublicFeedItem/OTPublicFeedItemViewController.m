@@ -14,6 +14,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "OTFeedItemJoinRequestViewController.h"
 #import "OTStatusBehavior.h"
+#import "SVProgressHUD.h"
 
 @interface OTPublicFeedItemViewController () <OTFeedItemJoinRequestDelegate>
 
@@ -36,8 +37,10 @@
     [self.statusBehavior updateWith:self.feedItem];
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
-    UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(doJoin)];
-    [self.navigationItem setRightBarButtonItem:joinButton];
+    if(FeedItemStateJoinNotRequested == [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState]) {
+        UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(joinFeedItem:)];
+        [self.navigationItem setRightBarButtonItem:joinButton];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -60,19 +63,32 @@
 
 - (void)dismissFeedItemJoinRequestController {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self.statusBehavior updateWith:self.feedItem];
 }
 
 #pragma mark - private methods
 
-- (void)doJoin {
-    [self performSegueWithIdentifier:@"JoinRequestSegue" sender:self];
+- (IBAction)joinFeedItem:(id)sender {
+    FeedItemState state = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
+    if(state != FeedItemStateJoinNotRequested)
+        return;
+    [self joinFeedItem];
 }
 
-- (IBAction)btnStateChange_TouchUpInside:(id)sender {
-    FeedItemState state = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
-    if(state == FeedItemStateJoinNotRequested)
+- (void)joinFeedItem {
+    [SVProgressHUD show];
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] sendJoinRequest:^(OTTourJoiner *joiner) {
+        [self updateStatusToPending];
+        [SVProgressHUD dismiss];
         [self performSegueWithIdentifier:@"JoinRequestSegue" sender:self];
+    } orFailure:^(NSError *error, BOOL isTour) {
+        [SVProgressHUD dismiss];
+    }];
+}
+
+- (void)updateStatusToPending {
+    self.feedItem.joinStatus = JOIN_PENDING;
+    [self.statusBehavior updateWith:self.feedItem];
+    [self.navigationItem setRightBarButtonItem:nil];
 }
 
 @end

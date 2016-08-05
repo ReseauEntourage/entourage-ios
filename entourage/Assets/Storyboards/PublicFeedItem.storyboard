@@ -96,7 +96,7 @@
                                         </constraints>
                                         <state key="normal" image="joinButton"/>
                                         <connections>
-                                            <action selector="btnStateChange_TouchUpInside:" destination="fid-Iu-R1a" eventType="touchUpInside" id="kVp-9v-RKm"/>
+                                            <action selector="joinFeedItem:" destination="fid-Iu-R1a" eventType="touchUpInside" id="OWI-BG-4Dz"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je rejoins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nU0-h0-mOV">

@@ -51,9 +51,8 @@
 }
 
 - (IBAction)doDismiss {
-    if ([self.feedItemJoinRequestDelegate respondsToSelector:@selector(dismissFeedItemJoinRequestController)]) {
+    if ([self.feedItemJoinRequestDelegate respondsToSelector:@selector(dismissFeedItemJoinRequestController)])
         [self.feedItemJoinRequestDelegate dismissFeedItemJoinRequestController];
-    }
 }
 
 - (IBAction)doSendRequest {
