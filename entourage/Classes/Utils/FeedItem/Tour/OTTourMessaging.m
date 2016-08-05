@@ -25,7 +25,7 @@
                              }];
 }
 
-- (void)invitePhone:(NSString *)phone withSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)invitePhones:(NSArray *)phones withSuccess:(void (^)())success orFailure:(void (^)(NSError *, NSArray *))failure {
     // NOT IN THS VERSION (maybe 2.0)
 }
 

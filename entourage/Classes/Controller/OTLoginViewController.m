@@ -43,7 +43,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 /********************************************************************************/
 #pragma mark - OTLoginViewController
 
-@interface OTLoginViewController () <UITextFieldDelegate, LostCodeDelegate>
+@interface OTLoginViewController () <LostCodeDelegate>
 
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffect;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
@@ -54,7 +54,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 @property (weak, nonatomic) IBOutlet UIButton *validateButton;
 @property (weak, nonatomic) IBOutlet UIButton *lostCodeButton;
 
-@property (nonatomic, strong) NSString *phoneNumberServerRepresentation;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 
@@ -144,14 +143,13 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 - (void)launchAuthentication {
     [SVProgressHUD show];
-    self.phoneNumberServerRepresentation = self.phoneTextField.text.phoneNumberServerRepresentation;
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
-    [[OTAuthService new] authWithPhone:self.phoneNumberServerRepresentation
+    [[OTAuthService new] authWithPhone:self.phoneTextField.text
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
                                success: ^(OTUser *user) {
                                    NSLog(@"User : %@ authenticated successfully", user.email);
-                                   user.phone = self.phoneNumberServerRepresentation;
+                                   user.phone = self.phoneTextField.text;
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil)
                                        loggedNumbers = [NSMutableArray new];
@@ -182,16 +180,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [self presentViewController:alert animated:YES completion:nil];
                                    
                                }];
-}
-
-/********************************************************************************/
-#pragma mark - UITextFieldDelegate
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    if (textField == self.phoneTextField) {
-        textField.text = [textField.text phoneNumberServerRepresentation];
-    }
-    return YES;
 }
 
 /********************************************************************************/

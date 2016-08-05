@@ -75,7 +75,7 @@
 - (void)doRegenerateCode {
     NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
     [SVProgressHUD show];
-    [[OTAuthService new] regenerateSecretCode:phone.phoneNumberServerRepresentation
+    [[OTAuthService new] regenerateSecretCode:phone
                                       success:^(OTUser *user) {
                                           [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
                                       }

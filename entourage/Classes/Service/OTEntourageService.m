@@ -326,9 +326,9 @@ NSString *const kEntourages = @"entourages";
      }];
 }
 
-- (void)inviteNumber:(NSString *)phoneNumber toEntourage:(OTEntourage *)entourage success:(void (^)())success failure:(void (^)(NSError *))failure {
+- (void)inviteNumbers:(NSArray *)phoneNumbers toEntourage:(OTEntourage *)entourage success:(void (^)())success failure:(void (^)(NSError *, NSArray *))failure {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_INVITE, entourage.uid, TOKEN];
-    NSDictionary *messageDictionary = @{@"invite" : @{@"mode": @"SMS", @"phone_number": phoneNumber}};
+    NSDictionary *messageDictionary = @{@"invite" : @{@"mode": @"SMS", @"phone_numbers": phoneNumbers}};
     [[OTHTTPRequestManager sharedInstance]
      POSTWithUrl:url
      andParameters:messageDictionary
@@ -339,8 +339,9 @@ NSString *const kEntourages = @"entourages";
      }
      andFailure:^(NSError *error)
      {
+#warning TODO - read phones that generated the error if they exist
          if (failure)
-             failure(error);
+             failure(error, nil);
      }];
 }
 
