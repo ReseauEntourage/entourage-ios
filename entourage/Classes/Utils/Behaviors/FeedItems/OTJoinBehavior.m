@@ -9,6 +9,7 @@
 #import "OTJoinBehavior.h"
 #import "OTFeedItemFactory.h"
 #import "SVProgressHUD.h"
+#import "OTConsts.h"
 
 @interface OTJoinBehavior ()
 
@@ -52,7 +53,7 @@
         [SVProgressHUD dismiss];
         [self.owner performSegueWithIdentifier:@"JoinRequestSegue" sender:self];
     } orFailure:^(NSError *error, BOOL isTour) {
-        [SVProgressHUD dismiss];
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
     }];
 }
 
