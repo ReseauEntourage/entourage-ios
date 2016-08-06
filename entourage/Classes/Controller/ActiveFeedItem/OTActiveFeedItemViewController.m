@@ -14,12 +14,18 @@
 #import "OTSummaryProviderBehavior.h"
 #import "OTSpeechBehavior.h"
 #import "OTInviteBehavior.h"
+#import "OTStatusChangedBehavior.h"
+#import "OTTourMessage.h"
+#import "OTConsts.h"
+#import "SVProgressHUD.h"
 
 @interface OTActiveFeedItemViewController ()
 
 @property (strong, nonatomic) IBOutlet OTSummaryProviderBehavior *summaryProvider;
 @property (strong, nonatomic) IBOutlet OTSpeechBehavior *speechBehavior;
 @property (strong, nonatomic) IBOutlet OTInviteBehavior *inviteBehavior;
+@property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
+@property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
 
 @end
@@ -32,6 +38,7 @@
     [self.summaryProvider configureWith:self.feedItem];
     [self.speechBehavior initialize];
     [self.inviteBehavior configureWith:self.feedItem];
+    [self.statusChangedBehavior configureWith:self.feedItem];
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];
@@ -44,7 +51,9 @@
 #pragma mark - navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    [self.inviteBehavior prepareSegueForInvite:segue];
+    if([self.inviteBehavior prepareSegueForInvite:segue])
+        return;
+    [self.statusChangedBehavior prepareSegueForNextStatus:segue];
 }
 
 #pragma mark - private methods
@@ -53,7 +62,7 @@
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
     if(![stateInfo canChangeEditState])
         return;
-    UIBarButtonItem *optionsButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self andAction:@selector(showOptions)];
+    UIBarButtonItem *optionsButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self.statusChangedBehavior andAction:@selector(startChangeStatus)];
     if([stateInfo canInvite]) {
         UIBarButtonItem *plusButton = [UIBarButtonItem createWithImageNamed:@"userPlus" withTarget:self.inviteBehavior andAction:@selector(startInvite)];
         [self.navigationItem setRightBarButtonItems:@[optionsButton, plusButton]];
@@ -62,8 +71,13 @@
         [self.navigationItem setRightBarButtonItems:@[optionsButton]];
 }
 
-- (void)showOptions {
-    
+- (IBAction)sendMessage {
+    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.txtChat.text withSuccess:^(OTTourMessage *message) {
+        self.txtChat.text = @"";
+        [self.speechBehavior updateRecordButton];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
+    }];
 }
 
 @end

@@ -63,16 +63,21 @@
 }
 
 #pragma mark - Actions
+
 - (IBAction)doFreezeFeedItem {
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
         [self dismissViewControllerAnimated:NO completion:nil];
         [self.delegate feedItemFrozen:self.feedItem];
-    } orFailure:nil];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
+    }];
 }
 
 - (IBAction)doCloseFeedItem {
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] stopWithSuccess:^() {
         [self.delegate promptToCloseFeedItem];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];
 }
 
@@ -80,6 +85,8 @@
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [self.delegate feedItemFrozen:self.feedItem];
         [self dismissViewControllerAnimated:YES completion:nil];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];
 }
 

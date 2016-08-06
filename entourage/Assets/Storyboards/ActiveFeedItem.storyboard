@@ -12,6 +12,10 @@
         <mutableArray key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
         </mutableArray>
+        <mutableArray key="SF-UI-Text-Semibold.otf">
+            <string>SFUIText-Semibold</string>
+            <string>SFUIText-Semibold</string>
+        </mutableArray>
     </customFonts>
     <scenes>
         <!--Active Feed Item-->
@@ -83,7 +87,7 @@
                                 </constraints>
                                 <state key="normal" image="plus"/>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rhM-ov-Zou">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rhM-ov-Zou" userLabel="Txt Chat">
                                 <rect key="frame" x="48" y="529" width="220" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -131,12 +135,15 @@
                     <connections>
                         <outlet property="inviteBehavior" destination="jhq-UT-Ztj" id="0wU-XK-4VB"/>
                         <outlet property="speechBehavior" destination="V85-WF-Xew" id="cHZ-0p-I5t"/>
+                        <outlet property="statusChangedBehavior" destination="Fee-TQ-8bL" id="bXO-iZ-TDz"/>
                         <outlet property="summaryProvider" destination="gwK-Pi-4zD" id="gmy-1f-Rax"/>
                         <outlet property="tblChat" destination="EIv-33-TLG" id="p86-YJ-oZX"/>
+                        <outlet property="txtChat" destination="rhM-ov-Zou" id="8WP-EZ-Bgr"/>
                         <segue destination="RBx-qN-1lJ" kind="presentation" identifier="SegueInviteSource" id="ffc-Pt-QuG"/>
                         <segue destination="e7P-HA-iRZ" kind="show" identifier="SegueInviteFromAddressBook" id="nan-zV-dem"/>
                         <segue destination="eKG-vw-p09" kind="show" identifier="SegueInvitePhoneNumber" id="zFK-Fj-hWR"/>
                         <segue destination="7N5-l9-cEp" kind="presentation" identifier="SegueInviteSuccess" id="TAD-d7-tmZ"/>
+                        <segue destination="jJ9-Y9-aoE" kind="presentation" identifier="SegueChangeState" id="9ff-pE-XzN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riw-B5-uYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -148,6 +155,7 @@
                 </customObject>
                 <customObject id="V85-WF-Xew" customClass="OTSpeechBehavior">
                     <connections>
+                        <action selector="sendMessage" destination="DlM-nw-VLS" eventType="valueChanged" id="0X9-hY-Ayg"/>
                         <outlet property="btnRecord" destination="6Ww-FX-DdI" id="KWs-hE-tcZ"/>
                         <outlet property="txtOutput" destination="rhM-ov-Zou" id="ktY-Ey-oLq"/>
                     </connections>
@@ -155,6 +163,11 @@
                 <customObject id="jhq-UT-Ztj" customClass="OTInviteBehavior">
                     <connections>
                         <outlet property="owner" destination="DlM-nw-VLS" id="kAh-e5-2rJ"/>
+                    </connections>
+                </customObject>
+                <customObject id="Fee-TQ-8bL" customClass="OTStatusChangedBehavior">
+                    <connections>
+                        <outlet property="owner" destination="DlM-nw-VLS" id="XUm-OC-aAb"/>
                     </connections>
                 </customObject>
             </objects>
@@ -202,10 +215,10 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="52r-u2-hPA"/>
                                                 <exclude reference="KdJ-oP-rad"/>
                                                 <exclude reference="YXQ-yf-6Ol"/>
                                                 <exclude reference="m30-IM-bV6"/>
-                                                <exclude reference="52r-u2-hPA"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -228,10 +241,10 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="yET-uY-2P7"/>
+                                                <exclude reference="121-F6-pYR"/>
                                                 <exclude reference="QWi-Sm-hbA"/>
                                                 <exclude reference="gpj-IB-xc5"/>
-                                                <exclude reference="121-F6-pYR"/>
+                                                <exclude reference="yET-uY-2P7"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -261,10 +274,10 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="dJL-0g-ded"/>
-                                                <exclude reference="py1-8z-aMe"/>
                                                 <exclude reference="JFc-Ao-qjt"/>
                                                 <exclude reference="Uaj-bR-p8w"/>
+                                                <exclude reference="dJL-0g-ded"/>
+                                                <exclude reference="py1-8z-aMe"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -374,7 +387,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="483C7588-E3A6-4AC2-9DCC-5D7D2948B7F7" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="7C6A61DD-F7D6-4AC9-8ADB-D54C88EE1ADB" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
@@ -523,6 +536,79 @@
             </objects>
             <point key="canvasLocation" x="566" y="1095"/>
         </scene>
+        <!--Change State-->
+        <scene sceneID="wIf-Yq-Kns">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="jJ9-Y9-aoE" userLabel="Change State" customClass="OTChangeStateViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wia-KE-0eY"/>
+                        <viewControllerLayoutGuide type="bottom" id="cdb-te-X7I"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9ki-jc-XeD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Azb-MQ-5Av" userLabel="Change State Feed Item Button">
+                                <rect key="frame" x="6" y="438" width="308" height="57"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="rDG-E8-kI6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                <state key="normal" title="Quiter">
+                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfP-OM-FQd" userLabel="Cancel Feed Item Button">
+                                <rect key="frame" x="6" y="503" width="308" height="57"/>
+                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="vql-HD-ffs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                <state key="normal" title="Annuler">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="close:" destination="jJ9-Y9-aoE" eventType="touchUpInside" id="KOc-ki-vjK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="0.75" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="gfP-OM-FQd" secondAttribute="trailing" constant="-10" id="Gh0-mv-BFa"/>
+                            <constraint firstItem="cdb-te-X7I" firstAttribute="top" secondItem="gfP-OM-FQd" secondAttribute="bottom" constant="8" id="IHB-38-kJN"/>
+                            <constraint firstItem="Azb-MQ-5Av" firstAttribute="leading" secondItem="9ki-jc-XeD" secondAttribute="leadingMargin" constant="-10" id="IPT-BY-H6H"/>
+                            <constraint firstItem="gfP-OM-FQd" firstAttribute="top" secondItem="Azb-MQ-5Av" secondAttribute="bottom" constant="8" id="JYM-ze-1k8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Azb-MQ-5Av" secondAttribute="trailing" constant="-10" id="OXF-5P-938"/>
+                            <constraint firstItem="gfP-OM-FQd" firstAttribute="leading" secondItem="9ki-jc-XeD" secondAttribute="leadingMargin" constant="-10" id="XCS-lT-hEp"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="nextStatusBehavior" destination="B7n-mN-3FZ" id="5Qz-Np-CGL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gMO-A3-gJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="B7n-mN-3FZ" userLabel="Next Status Button" customClass="OTNextStatusButtonBehavior">
+                    <connections>
+                        <outlet property="btnNextState" destination="Azb-MQ-5Av" id="r6l-Wa-hDP"/>
+                        <outlet property="owner" destination="jJ9-Y9-aoE" id="uVH-vh-RBc"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="823" y="-388"/>
+        </scene>
         <!--Invite Success View Controller-->
         <scene sceneID="bHm-5e-0Nb">
             <objects>
@@ -592,7 +678,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="483C7588-E3A6-4AC2-9DCC-5D7D2948B7F7" width="48" height="48">
+        <image name="7C6A61DD-F7D6-4AC9-8ADB-D54C88EE1ADB" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

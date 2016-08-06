@@ -1103,7 +1103,7 @@ static bool isShowingOptions = NO;
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;
     
-    if([feedItem.author.uID isEqual:[NSUserDefaults standardUserDefaults].currentUser.sid])
+    if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive])
         [self performSegueWithIdentifier:@"ActiveFeedItemDetailsSegue" sender:self];
     else
         [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];

@@ -11,6 +11,6 @@
 
 @interface OTActiveFeedItemViewController : UIViewController
 
-@property (nonatomic, weak) OTFeedItem *feedItem;
+@property (nonatomic, strong) OTFeedItem *feedItem;
 
 @end

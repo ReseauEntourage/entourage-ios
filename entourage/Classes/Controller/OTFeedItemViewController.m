@@ -358,7 +358,6 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (IBAction)sendMessage {
-    [self.chatTextView resignFirstResponder];
     [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.chatTextView.text withSuccess:^(OTTourMessage *message) {
         self.chatTextView.text = @"";
         [self updateTableViewAddingTimelinePoints:@[message]];

@@ -64,8 +64,10 @@
 }
 
 - (void)toggleRecording {
-    if (!self.twoState && self.txtOutput.text.length)
+    if (!self.twoState && self.txtOutput.text.length) {
+        [self.txtOutput resignFirstResponder];
         [self sendActionsForControlEvents:UIControlEventValueChanged];
+    }
     else {
         [self.btnRecord setEnabled:NO];
         if (!self.isRecording)
