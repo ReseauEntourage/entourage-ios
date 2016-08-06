@@ -62,7 +62,7 @@
 
 - (void)loadMessages {
     [SVProgressHUD show];
-    [[OTMessagingService new] readWithResultBlock:^(NSArray *results) {
+    [[OTMessagingService new] readFor:self.feedItem withResultBlock:^(NSArray *results) {
         [self.dataSource updateItems:results];
         [self.tblChat reloadData];
         [SVProgressHUD dismiss];
@@ -98,7 +98,9 @@
 }
 
 - (IBAction)sendMessage {
+    [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.txtChat.text withSuccess:^(OTFeedItemMessage *message) {
+        [SVProgressHUD dismiss];
         self.txtChat.text = @"";
         [self.speechBehavior updateRecordButton];
     } orFailure:^(NSError *error) {

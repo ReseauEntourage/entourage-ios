@@ -39,4 +39,16 @@
     }];
 }
 
+- (void)getMessagesWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    [[OTTourService new] tourMessages:self.tour success:^(NSArray *items) {
+        NSLog(@"GET TOUR MESSAGES");
+        if(success)
+            success(items);
+    } failure:^(NSError *error) {
+        NSLog(@"GET TOUR MESSAGESErr: %@", error.description);
+        if(failure)
+            failure(error);
+    }];
+}
+
 @end

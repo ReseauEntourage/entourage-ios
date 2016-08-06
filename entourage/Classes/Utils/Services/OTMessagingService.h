@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTFeedItem.h"
 
 @interface OTMessagingService : NSObject
 
-- (void)readWithResultBlock:(void (^)(NSArray *))result;
+- (void)readFor:(OTFeedItem *)feedItem withResultBlock:(void (^)(NSArray *))result;
 
 @end

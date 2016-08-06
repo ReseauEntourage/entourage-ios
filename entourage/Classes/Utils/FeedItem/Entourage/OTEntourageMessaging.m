@@ -47,4 +47,16 @@
     }];
 }
 
+- (void)getMessagesWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    [[OTEntourageService new] entourageMessagesForEntourage:self.entourage.uid WithSuccess:^(NSArray *items) {
+        NSLog(@"GET ENTOURAGE MESSAGES");
+        if(success)
+            success(items);
+    } failure:^(NSError *error) {
+        NSLog(@"GET ENTOURAGE MESSAGESErr: %@", error.description);
+        if(failure)
+            failure(error);
+    }];
+}
+
 @end
