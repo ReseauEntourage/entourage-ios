@@ -16,6 +16,8 @@
 #import "OTInviteBehavior.h"
 #import "OTStatusChangedBehavior.h"
 #import "OTTapViewBehavior.h"
+#import "OTDataSourceBehavior.h"
+#import "OTTableDataSourceBehavior.h"
 #import "OTTourMessage.h"
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
@@ -28,6 +30,8 @@
 @property (strong, nonatomic) IBOutlet OTInviteBehavior *inviteBehavior;
 @property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
 @property (strong, nonatomic) IBOutlet OTTapViewBehavior *titleTapBehavior;
+@property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
+@property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
 
@@ -43,13 +47,25 @@
     [self.inviteBehavior configureWith:self.feedItem];
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.titleTapBehavior initialize];
+    [self.dataSource initialize];
+    [self.tableDataSource initialize];
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];
+    [self loadMessages];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+}
+
+- (void)loadMessages {
+    [SVProgressHUD show];
+    /*[[OTAddressBookService new] readWithResultBlock:^(NSArray *results) {
+        [self.dataSource updateItems:results];
+        [self.tblContacts reloadData];
+        [SVProgressHUD dismiss];
+    }];*/
 }
 
 #pragma mark - navigation

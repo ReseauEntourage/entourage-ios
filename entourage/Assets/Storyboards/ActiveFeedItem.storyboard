@@ -134,10 +134,12 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="dataSource" destination="1dX-UW-k7J" id="wyt-aY-4y7"/>
                         <outlet property="inviteBehavior" destination="jhq-UT-Ztj" id="0wU-XK-4VB"/>
                         <outlet property="speechBehavior" destination="V85-WF-Xew" id="cHZ-0p-I5t"/>
                         <outlet property="statusChangedBehavior" destination="Fee-TQ-8bL" id="bXO-iZ-TDz"/>
                         <outlet property="summaryProvider" destination="gwK-Pi-4zD" id="gmy-1f-Rax"/>
+                        <outlet property="tableDataSource" destination="YIT-7d-Uwv" id="0yj-BG-pfm"/>
                         <outlet property="tblChat" destination="EIv-33-TLG" id="p86-YJ-oZX"/>
                         <outlet property="titleTapBehavior" destination="gL3-aq-uay" id="UWY-L9-ed5"/>
                         <outlet property="txtChat" destination="rhM-ov-Zou" id="8WP-EZ-Bgr"/>
@@ -156,19 +158,19 @@
                         <outlet property="lblTitle" destination="9g9-2e-KCk" id="OGm-mR-za8"/>
                     </connections>
                 </customObject>
-                <customObject id="V85-WF-Xew" customClass="OTSpeechBehavior">
+                <customObject id="V85-WF-Xew" userLabel="Speech" customClass="OTSpeechBehavior">
                     <connections>
                         <action selector="sendMessage" destination="DlM-nw-VLS" eventType="valueChanged" id="0X9-hY-Ayg"/>
                         <outlet property="btnRecord" destination="6Ww-FX-DdI" id="KWs-hE-tcZ"/>
                         <outlet property="txtOutput" destination="rhM-ov-Zou" id="ktY-Ey-oLq"/>
                     </connections>
                 </customObject>
-                <customObject id="jhq-UT-Ztj" customClass="OTInviteBehavior">
+                <customObject id="jhq-UT-Ztj" userLabel="Invite" customClass="OTInviteBehavior">
                     <connections>
                         <outlet property="owner" destination="DlM-nw-VLS" id="kAh-e5-2rJ"/>
                     </connections>
                 </customObject>
-                <customObject id="Fee-TQ-8bL" customClass="OTStatusChangedBehavior">
+                <customObject id="Fee-TQ-8bL" userLabel="Status Changed" customClass="OTStatusChangedBehavior">
                     <connections>
                         <outlet property="owner" destination="DlM-nw-VLS" id="XUm-OC-aAb"/>
                     </connections>
@@ -177,6 +179,23 @@
                     <connections>
                         <action selector="showMap" destination="DlM-nw-VLS" eventType="valueChanged" id="w11-aU-gv5"/>
                         <outlet property="tapView" destination="YdS-k8-CWq" id="Vhh-nE-Es9"/>
+                    </connections>
+                </customObject>
+                <customObject id="1dX-UW-k7J" userLabel="Message Data Source" customClass="OTMessageDataSourceBehavior">
+                    <connections>
+                        <outlet property="tableDataSource" destination="YIT-7d-Uwv" id="NKa-C6-dyi"/>
+                        <outlet property="tableView" destination="EIv-33-TLG" id="Wl5-3C-YMV"/>
+                    </connections>
+                </customObject>
+                <customObject id="YIT-7d-Uwv" userLabel="Message Table Data Source" customClass="OTMessageTableDataSourceBehavior">
+                    <connections>
+                        <outlet property="cellProvider" destination="w85-97-pWi" id="7BD-Do-PGQ"/>
+                        <outlet property="dataSource" destination="1dX-UW-k7J" id="ZAJ-dn-7SU"/>
+                    </connections>
+                </customObject>
+                <customObject id="w85-97-pWi" userLabel="Message Table Cell Provider" customClass="OTMessageTableCellProviderBehavior">
+                    <connections>
+                        <outlet property="tableDataSource" destination="YIT-7d-Uwv" id="lU1-0d-pun"/>
                     </connections>
                 </customObject>
             </objects>
@@ -475,7 +494,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="77586534-78B5-4D1E-8329-F9201755F4D9" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="32C5D124-2892-4384-B7D1-360F5B9582A8" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
@@ -766,7 +785,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="77586534-78B5-4D1E-8329-F9201755F4D9" width="48" height="48">
+        <image name="32C5D124-2892-4384-B7D1-360F5B9582A8" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

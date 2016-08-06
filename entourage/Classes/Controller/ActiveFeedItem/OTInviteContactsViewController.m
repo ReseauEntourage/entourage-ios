@@ -15,9 +15,13 @@
 #import "UIColor+entourage.h"
 #import "OTFeedItemFactory.h"
 #import "NSString+Validators.h"
+#import "OTDataSourceBehavior.h"
+#import "OTTableDataSourceBehavior.h"
 
 @interface OTInviteContactsViewController () <UITableViewDelegate>
 
+@property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
+@property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 @property (weak, nonatomic) IBOutlet UITableView *tblContacts;
 @property (nonatomic, strong) UIBarButtonItem *btnSave;
 

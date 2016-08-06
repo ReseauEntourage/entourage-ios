@@ -47,6 +47,9 @@
 		1E0972C01D55541E006E1FAD /* OTInviteSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972BC1D55541E006E1FAD /* OTInviteSuccessViewController.m */; };
 		1E0972C31D555586006E1FAD /* OTInviteBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972C21D555586006E1FAD /* OTInviteBehavior.m */; };
 		1E2232CB1D568B4C004CD5E8 /* OTTapViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232CA1D568B4C004CD5E8 /* OTTapViewBehavior.m */; };
+		1E2232CF1D569691004CD5E8 /* OTMessageDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232CE1D569691004CD5E8 /* OTMessageDataSourceBehavior.m */; };
+		1E2232D21D569744004CD5E8 /* OTMessageTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232D11D569744004CD5E8 /* OTMessageTableDataSourceBehavior.m */; };
+		1E2232D51D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232D41D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m */; };
 		1E2F29051D4BC25C00ABC68A /* OTSpeechBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F29041D4BC25C00ABC68A /* OTSpeechBehavior.m */; };
 		1E2F29081D4BC26600ABC68A /* OTPhotoPickerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F29071D4BC26600ABC68A /* OTPhotoPickerBehavior.m */; };
 		1E2F290C1D4BC2A000ABC68A /* OTCloseKeyboardOnTapBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F290B1D4BC2A000ABC68A /* OTCloseKeyboardOnTapBehavior.m */; };
@@ -310,6 +313,12 @@
 		1E0972C21D555586006E1FAD /* OTInviteBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTInviteBehavior.m; path = Behaviors/FeedItems/OTInviteBehavior.m; sourceTree = "<group>"; };
 		1E2232C91D568B4C004CD5E8 /* OTTapViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTTapViewBehavior.h; path = Behaviors/Touch/OTTapViewBehavior.h; sourceTree = "<group>"; };
 		1E2232CA1D568B4C004CD5E8 /* OTTapViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTTapViewBehavior.m; path = Behaviors/Touch/OTTapViewBehavior.m; sourceTree = "<group>"; };
+		1E2232CD1D569691004CD5E8 /* OTMessageDataSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMessageDataSourceBehavior.h; path = Behaviors/UITableView/FeedItemMessages/OTMessageDataSourceBehavior.h; sourceTree = "<group>"; };
+		1E2232CE1D569691004CD5E8 /* OTMessageDataSourceBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMessageDataSourceBehavior.m; path = Behaviors/UITableView/FeedItemMessages/OTMessageDataSourceBehavior.m; sourceTree = "<group>"; };
+		1E2232D01D569744004CD5E8 /* OTMessageTableDataSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMessageTableDataSourceBehavior.h; path = Behaviors/UITableView/FeedItemMessages/OTMessageTableDataSourceBehavior.h; sourceTree = "<group>"; };
+		1E2232D11D569744004CD5E8 /* OTMessageTableDataSourceBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMessageTableDataSourceBehavior.m; path = Behaviors/UITableView/FeedItemMessages/OTMessageTableDataSourceBehavior.m; sourceTree = "<group>"; };
+		1E2232D31D569787004CD5E8 /* OTMessageTableCellProviderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMessageTableCellProviderBehavior.h; path = Behaviors/UITableView/FeedItemMessages/OTMessageTableCellProviderBehavior.h; sourceTree = "<group>"; };
+		1E2232D41D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMessageTableCellProviderBehavior.m; path = Behaviors/UITableView/FeedItemMessages/OTMessageTableCellProviderBehavior.m; sourceTree = "<group>"; };
 		1E2F29031D4BC25C00ABC68A /* OTSpeechBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSpeechBehavior.h; path = Behaviors/Speech/OTSpeechBehavior.h; sourceTree = "<group>"; };
 		1E2F29041D4BC25C00ABC68A /* OTSpeechBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSpeechBehavior.m; path = Behaviors/Speech/OTSpeechBehavior.m; sourceTree = "<group>"; };
 		1E2F29061D4BC26600ABC68A /* OTPhotoPickerBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPhotoPickerBehavior.h; path = Behaviors/Photo/OTPhotoPickerBehavior.h; sourceTree = "<group>"; };
@@ -719,6 +728,19 @@
 			name = Touch;
 			sourceTree = "<group>";
 		};
+		1E2232CC1D56964F004CD5E8 /* FeedItemMessages */ = {
+			isa = PBXGroup;
+			children = (
+				1E2232CD1D569691004CD5E8 /* OTMessageDataSourceBehavior.h */,
+				1E2232CE1D569691004CD5E8 /* OTMessageDataSourceBehavior.m */,
+				1E2232D01D569744004CD5E8 /* OTMessageTableDataSourceBehavior.h */,
+				1E2232D11D569744004CD5E8 /* OTMessageTableDataSourceBehavior.m */,
+				1E2232D31D569787004CD5E8 /* OTMessageTableCellProviderBehavior.h */,
+				1E2232D41D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m */,
+			);
+			name = FeedItemMessages;
+			sourceTree = "<group>";
+		};
 		1E2F29011D4BC24900ABC68A /* Photo */ = {
 			isa = PBXGroup;
 			children = (
@@ -749,6 +771,7 @@
 		1E2F290D1D4BC6A200ABC68A /* UITableView */ = {
 			isa = PBXGroup;
 			children = (
+				1E2232CC1D56964F004CD5E8 /* FeedItemMessages */,
 				1E2F29251D4BF49200ABC68A /* Contacts */,
 				1E2F29221D4BF0DF00ABC68A /* OTTableDataSourceBehavior.h */,
 				1E2F29231D4BF0DF00ABC68A /* OTTableDataSourceBehavior.m */,
@@ -1903,6 +1926,7 @@
 				45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */,
 				1EC6F3C71D53DBEF0026766D /* OTActiveFeedItemViewController.m in Sources */,
 				2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */,
+				1E2232D21D569744004CD5E8 /* OTMessageTableDataSourceBehavior.m in Sources */,
 				45FD17B71CFC4F3E0037270B /* OTOptionsViewController.m in Sources */,
 				2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */,
 				45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */,
@@ -1958,6 +1982,7 @@
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
 				1E2F29081D4BC26600ABC68A /* OTPhotoPickerBehavior.m in Sources */,
 				1E2F292B1D4BF4CD00ABC68A /* OTContactsGroupedTableDataSourceBehavior.m in Sources */,
+				1E2232CF1D569691004CD5E8 /* OTMessageDataSourceBehavior.m in Sources */,
 				0A213C491BA0306300202D7B /* OTGuideViewController.m in Sources */,
 				1E76AE471D144D1F00C496BA /* OTTourStateInfo.m in Sources */,
 				1E0972BE1D55541E006E1FAD /* OTInviteContactsViewController.m in Sources */,
@@ -1991,6 +2016,7 @@
 				453117A41CD251C200C00BA8 /* MKMapView+entourage.m in Sources */,
 				1ECDBC6C1D3D363600DD87B2 /* OTEntourageMessaging.m in Sources */,
 				1E40A3441D4A9058009E2D73 /* OTAddressBookService.m in Sources */,
+				1E2232D51D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m in Sources */,
 				2E5B0EBC1CF0603D0078454F /* OTEntourageFilter.m in Sources */,
 				2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */,
 				1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */,
