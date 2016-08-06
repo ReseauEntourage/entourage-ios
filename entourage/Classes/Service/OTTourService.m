@@ -12,8 +12,8 @@
 #import "OTTourPoint.h"
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
-#import "OTTourJoiner.h"
-#import "OTTourMessage.h"
+#import "OTFeedItemJoiner.h"
+#import "OTFeedItemMessage.h"
 #import "OTEncounter.h"
 #import "NSDictionary+Parsing.h"
 #import "OTAPIConsts.h"
@@ -190,7 +190,7 @@ NSString *const kTourPoints = @"tour_points";
 
 - (void)sendMessage:(NSString *)message
              onTour:(OTTour *)tour
-            success:(void(^)(OTTourMessage *))success
+            success:(void(^)(OTFeedItemMessage *))success
             failure:(void (^)(NSError *)) failure
 {
     
@@ -206,7 +206,7 @@ NSString *const kTourPoints = @"tour_points";
          {
              NSDictionary *data = responseObject;
              NSDictionary *messageDictionary = [data objectForKey:@"chat_message"];
-             OTTourMessage *message = [self messageFromDictionary:messageDictionary];
+             OTFeedItemMessage *message = [self messageFromDictionary:messageDictionary];
              
              if (success)
              {
@@ -371,7 +371,7 @@ NSString *const kTourPoints = @"tour_points";
 }
 
 - (void)joinTour:(OTTour *)tour
-         success:(void(^)(OTTourJoiner *))success
+         success:(void(^)(OTFeedItemJoiner *))success
          failure:(void (^)(NSError *)) failure {
     
     NSString *url = [NSString stringWithFormat:API_URL_TOUR_JOIN_REQUEST, tour.uid, TOKEN];
@@ -384,7 +384,7 @@ NSString *const kTourPoints = @"tour_points";
          {
              NSDictionary *data = responseObject;
              NSDictionary *joinerDictionary = [data objectForKey:@"user"];
-             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
+             OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc] initWithDictionary:joinerDictionary];
              
              if (success)
              {
@@ -403,7 +403,7 @@ NSString *const kTourPoints = @"tour_points";
 
 - (void)joinMessageTour:(OTTour*)tour
                 message:(NSString*)message
-                success:(void(^)(OTTourJoiner *))success
+                success:(void(^)(OTFeedItemJoiner *))success
                 failure:(void (^)(NSError *)) failure {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     NSString *url = [NSString stringWithFormat:API_URL_TOUR_JOIN_MESSAGE, tour.uid, currentUser.sid, TOKEN];
@@ -417,8 +417,7 @@ NSString *const kTourPoints = @"tour_points";
          {
              NSDictionary *data = responseObject;
              NSDictionary *joinerDictionary = [data objectForKey:@"user"];
-             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
-             
+             OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc] initWithDictionary:joinerDictionary];
              if (success)
              {
                  success(joiner);
@@ -555,16 +554,15 @@ NSString *const kTourPoints = @"tour_points";
     NSArray *joinersDictionaries = [data objectForKey:kUsers];
     for (NSDictionary *joinerDictionary in joinersDictionaries)
     {
-        OTTourJoiner *joiner = [[OTTourJoiner alloc] initWithDictionary:joinerDictionary];
+        OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc] initWithDictionary:joinerDictionary];
         [joiners addObject:joiner];
     }
     return joiners;
 }
 
-- (OTTourJoiner *)joinerFromDictionary:(NSDictionary *)dictionary
+- (OTFeedItemJoiner *)joinerFromDictionary:(NSDictionary *)dictionary
 {
-    OTTourJoiner *joiner = [[OTTourJoiner alloc] initWithDictionary:dictionary];
-    return joiner;
+    return [[OTFeedItemJoiner alloc] initWithDictionary:dictionary];
 }
 
 #pragma mark Chat Messages
@@ -575,16 +573,15 @@ NSString *const kTourPoints = @"tour_points";
     NSArray *messagesDictionaries = [data objectForKey:kMessages];
     for (NSDictionary *messageDictionary in messagesDictionaries)
     {
-        OTTourMessage *message = [[OTTourMessage alloc] initWithDictionary:messageDictionary];
+        OTFeedItemMessage *message = [[OTFeedItemMessage alloc] initWithDictionary:messageDictionary];
         [messages addObject:message];
     }
     return messages;
 }
 
-- (OTTourMessage *)messageFromDictionary:(NSDictionary *)dictionary
+- (OTFeedItemMessage *)messageFromDictionary:(NSDictionary *)dictionary
 {
-    OTTourMessage *message = [[OTTourMessage alloc] initWithDictionary:dictionary];
-    return message;
+    return [[OTFeedItemMessage alloc] initWithDictionary:dictionary];
 }
 
 #pragma mark Encounters

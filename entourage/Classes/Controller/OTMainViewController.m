@@ -1122,7 +1122,7 @@ static bool isShowingOptions = NO;
 
 - (void)sendJoinRequest:(OTFeedItem*)feedItem {
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:feedItem] getStateTransition] sendJoinRequest:^(OTTourJoiner *joiner) {
+    [[[OTFeedItemFactory createFor:feedItem] getStateTransition] sendJoinRequest:^(OTFeedItemJoiner *joiner) {
         [SVProgressHUD dismiss];
         feedItem.joinStatus = JOIN_PENDING;
         [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];

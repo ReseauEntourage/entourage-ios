@@ -1,5 +1,5 @@
 //
-//  OTTourTimelinePoint.h
+//  OTFeedItemTimelinePoint.h
 //  entourage
 //
 //  Created by Ciprian Habuc on 09/03/16.
@@ -15,11 +15,12 @@ typedef NS_ENUM(long) {
     TimelinePointTagMessage
 } TimelinePointTag;
 
-@interface OTTourTimelinePoint : NSObject
+@interface OTFeedItemTimelinePoint : NSObject
 
 @property (strong, nonatomic) NSDate *date;
 @property (nonatomic) NSInteger tag;
+@property (strong, nonatomic) NSNumber *tID;
 
-- (NSComparisonResult)compare:(OTTourTimelinePoint *)otherObject;
+- (NSComparisonResult)compare:(OTFeedItemTimelinePoint *)otherObject;
 
 @end

@@ -60,7 +60,7 @@
     if (!message)
         message = @"";
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] sendJoinMessage:message success:^(OTTourJoiner *joiner) {
+    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] sendJoinMessage:message success:^(OTFeedItemJoiner *joiner) {
         [SVProgressHUD dismiss];
     } failure:^(NSError *error) {
         [SVProgressHUD dismiss];

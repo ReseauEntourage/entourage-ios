@@ -11,8 +11,8 @@
 
 @implementation OTTourMessaging
 
-- (void)send:(NSString *)message withSuccess:(void (^)(OTTourMessage *))success orFailure:(void (^)(NSError *))failure {
-    [[OTTourService new] sendMessage:message onTour:self.tour success:^(OTTourMessage * tourMessage) {
+- (void)send:(NSString *)message withSuccess:(void (^)(OTFeedItemMessage *))success orFailure:(void (^)(NSError *))failure {
+    [[OTTourService new] sendMessage:message onTour:self.tour success:^(OTFeedItemMessage * tourMessage) {
             NSLog(@"CHAT %@", message);
             if(success)
                 success(tourMessage);
@@ -27,8 +27,8 @@
     // NOT IN THS VERSION (maybe 2.0)
 }
 
-- (void)sendJoinMessage:(NSString *)message success:(void (^)(OTTourJoiner *))success failure:(void (^)(NSError *))failure {
-    [[OTTourService new] joinMessageTour:self.tour message:message success:^(OTTourJoiner *joiner) {
+- (void)sendJoinMessage:(NSString *)message success:(void (^)(OTFeedItemJoiner *))success failure:(void (^)(NSError *))failure {
+    [[OTTourService new] joinMessageTour:self.tour message:message success:^(OTFeedItemJoiner *joiner) {
             NSLog(@"JOIN MESSAGE %@", message);
             if(success)
                 success(joiner);

@@ -1,16 +1,16 @@
 //
-//  OTTourTimelinePoint.m
+//  OTFeedItemTimelinePoint.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 09/03/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTTourTimelinePoint.h"
+#import "OTFeedItemTimelinePoint.h"
 
-@implementation OTTourTimelinePoint
+@implementation OTFeedItemTimelinePoint
 
-- (NSComparisonResult)compare:(OTTourTimelinePoint *)otherObject {
+- (NSComparisonResult)compare:(OTFeedItemTimelinePoint *)otherObject {
     return [self.date compare:otherObject.date];
 }
 

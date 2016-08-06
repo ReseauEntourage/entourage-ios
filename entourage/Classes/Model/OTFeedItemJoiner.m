@@ -1,20 +1,18 @@
 //
-//  OTTourJoiner.m
-//  entourage
+//  OTFeedItemJoiner.m
 //
 //  Created by Ciprian Habuc on 09/03/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTTourJoiner.h"
+#import "OTFeedItemJoiner.h"
 #import "NSDictionary+Parsing.h"
 
 #define kWSKeyID @"id"
 #define kWSKeyDisplayName @"display_name"
 #define kWSKeyRequestedAt @"requested_at"
 
-@implementation OTTourJoiner
-
+@implementation OTFeedItemJoiner
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {

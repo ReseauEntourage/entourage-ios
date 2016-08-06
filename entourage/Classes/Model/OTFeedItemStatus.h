@@ -1,23 +1,22 @@
 //
-//  OTTourStatus.h
-//  entourage
+//  OTFeedItemStatus.h
 //
 //  Created by Ciprian Habuc on 11/03/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTTourTimelinePoint.h"
+#import "OTFeedItemTimelinePoint.h"
 
 typedef NS_ENUM(NSInteger) {
-    OTTourStatusStart,
-    OTTourStatusEnd
-} OTTourStatusType;
+    OTFeedItemStatusStart,
+    OTFeedItemStatusEnd
+} OTFeedItemStatusType;
 
-@interface OTTourStatus : OTTourTimelinePoint
+@interface OTFeedItemStatus : OTFeedItemTimelinePoint
 
 @property(nonatomic, strong) NSString *status;
 @property(nonatomic) NSTimeInterval duration;
 @property(nonatomic) CGFloat distance;
-@property(nonatomic) OTTourStatusType type;
+@property(nonatomic) OTFeedItemStatusType type;
 
 @end

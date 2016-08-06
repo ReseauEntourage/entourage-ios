@@ -48,7 +48,7 @@
 
 - (void)startJoin {
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] sendJoinRequest:^(OTTourJoiner *joiner) {
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] sendJoinRequest:^(OTFeedItemJoiner *joiner) {
         [self sendActionsForControlEvents:UIControlEventValueChanged];
         [SVProgressHUD dismiss];
         [self.owner performSegueWithIdentifier:@"JoinRequestSegue" sender:self];

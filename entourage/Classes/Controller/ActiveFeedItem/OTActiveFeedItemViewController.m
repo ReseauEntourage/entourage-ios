@@ -18,7 +18,7 @@
 #import "OTTapViewBehavior.h"
 #import "OTDataSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
-#import "OTTourMessage.h"
+#import "OTFeedItemMessage.h"
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
 #import "OTMapViewController.h"
@@ -98,7 +98,7 @@
 }
 
 - (IBAction)sendMessage {
-    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.txtChat.text withSuccess:^(OTTourMessage *message) {
+    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.txtChat.text withSuccess:^(OTFeedItemMessage *message) {
         self.txtChat.text = @"";
         [self.speechBehavior updateRecordButton];
     } orFailure:^(NSError *error) {

@@ -1,15 +1,14 @@
 //
-//  OTTourJoiner.h
-//  entourage
+//  OTFeedItemJoiner.h
 //
 //  Created by Ciprian Habuc on 09/03/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "OTTourTimelinePoint.h"
+#import "OTFeedItemTimelinePoint.h"
 
-@interface OTTourJoiner : OTTourTimelinePoint
+@interface OTFeedItemJoiner : OTFeedItemTimelinePoint
 
 @property (strong, nonatomic) NSNumber *uID;
 @property (strong, nonatomic) NSString *displayName;

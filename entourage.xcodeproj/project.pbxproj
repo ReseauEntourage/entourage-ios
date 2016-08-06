@@ -191,10 +191,10 @@
 		45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6FE151CAE44EA00505660 /* OTUserEditViewController.m */; };
 		45EB70DA1CE5F0CC00EB2CD1 /* OTEntourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */; };
 		45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F24A3C1CEDB1490003BF9E /* OTFeedItem.m */; };
-		45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443381C9080E900DDEBE1 /* OTTourJoiner.m */; };
-		45F4433C1C90B40400DDEBE1 /* OTTourTimelinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F4433B1C90B40400DDEBE1 /* OTTourTimelinePoint.m */; };
-		45F443441C90BCB700DDEBE1 /* OTTourMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443431C90BCB700DDEBE1 /* OTTourMessage.m */; };
-		45F443471C9314A800DDEBE1 /* OTTourStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443461C9314A800DDEBE1 /* OTTourStatus.m */; };
+		45F443391C9080E900DDEBE1 /* OTFeedItemJoiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443381C9080E900DDEBE1 /* OTFeedItemJoiner.m */; };
+		45F4433C1C90B40400DDEBE1 /* OTFeedItemTimelinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F4433B1C90B40400DDEBE1 /* OTFeedItemTimelinePoint.m */; };
+		45F443441C90BCB700DDEBE1 /* OTFeedItemMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443431C90BCB700DDEBE1 /* OTFeedItemMessage.m */; };
+		45F443471C9314A800DDEBE1 /* OTFeedItemStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443461C9314A800DDEBE1 /* OTFeedItemStatus.m */; };
 		45FD17B71CFC4F3E0037270B /* OTOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FD17B61CFC4F3E0037270B /* OTOptionsViewController.m */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
 		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
@@ -573,14 +573,14 @@
 		45F24A3B1CEDB1490003BF9E /* OTFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItem.h; sourceTree = "<group>"; };
 		45F24A3C1CEDB1490003BF9E /* OTFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItem.m; sourceTree = "<group>"; };
 		45F24A3F1CEDB3E70003BF9E /* OTAPIKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAPIKeys.h; sourceTree = "<group>"; };
-		45F443371C9080E900DDEBE1 /* OTTourJoiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourJoiner.h; sourceTree = "<group>"; };
-		45F443381C9080E900DDEBE1 /* OTTourJoiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoiner.m; sourceTree = "<group>"; };
-		45F4433A1C90B40400DDEBE1 /* OTTourTimelinePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourTimelinePoint.h; sourceTree = "<group>"; };
-		45F4433B1C90B40400DDEBE1 /* OTTourTimelinePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourTimelinePoint.m; sourceTree = "<group>"; };
-		45F443421C90BCB700DDEBE1 /* OTTourMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourMessage.h; sourceTree = "<group>"; };
-		45F443431C90BCB700DDEBE1 /* OTTourMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourMessage.m; sourceTree = "<group>"; };
-		45F443451C9314A800DDEBE1 /* OTTourStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourStatus.h; sourceTree = "<group>"; };
-		45F443461C9314A800DDEBE1 /* OTTourStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourStatus.m; sourceTree = "<group>"; };
+		45F443371C9080E900DDEBE1 /* OTFeedItemJoiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemJoiner.h; sourceTree = "<group>"; };
+		45F443381C9080E900DDEBE1 /* OTFeedItemJoiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemJoiner.m; sourceTree = "<group>"; };
+		45F4433A1C90B40400DDEBE1 /* OTFeedItemTimelinePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemTimelinePoint.h; sourceTree = "<group>"; };
+		45F4433B1C90B40400DDEBE1 /* OTFeedItemTimelinePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemTimelinePoint.m; sourceTree = "<group>"; };
+		45F443421C90BCB700DDEBE1 /* OTFeedItemMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemMessage.h; sourceTree = "<group>"; };
+		45F443431C90BCB700DDEBE1 /* OTFeedItemMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemMessage.m; sourceTree = "<group>"; };
+		45F443451C9314A800DDEBE1 /* OTFeedItemStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemStatus.h; sourceTree = "<group>"; };
+		45F443461C9314A800DDEBE1 /* OTFeedItemStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemStatus.m; sourceTree = "<group>"; };
 		45FD17B51CFC4F3E0037270B /* OTOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOptionsViewController.h; sourceTree = "<group>"; };
 		45FD17B61CFC4F3E0037270B /* OTOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOptionsViewController.m; sourceTree = "<group>"; };
 		6B1A846F19E811210020FB93 /* OTPoiService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiService.h; sourceTree = "<group>"; };
@@ -753,6 +753,21 @@
 				1E2232DB1D5699AD004CD5E8 /* OTMessagingService.m */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		1E2232DD1D569CE8004CD5E8 /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				45F4433A1C90B40400DDEBE1 /* OTFeedItemTimelinePoint.h */,
+				45F4433B1C90B40400DDEBE1 /* OTFeedItemTimelinePoint.m */,
+				45F443421C90BCB700DDEBE1 /* OTFeedItemMessage.h */,
+				45F443431C90BCB700DDEBE1 /* OTFeedItemMessage.m */,
+				45F443371C9080E900DDEBE1 /* OTFeedItemJoiner.h */,
+				45F443381C9080E900DDEBE1 /* OTFeedItemJoiner.m */,
+				45F443451C9314A800DDEBE1 /* OTFeedItemStatus.h */,
+				45F443461C9314A800DDEBE1 /* OTFeedItemStatus.m */,
+			);
+			name = Timeline;
 			sourceTree = "<group>";
 		};
 		1E2F29011D4BC24900ABC68A /* Photo */ = {
@@ -1229,8 +1244,6 @@
 			children = (
 				45EB70D81CE5F0CC00EB2CD1 /* OTEntourage.h */,
 				45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */,
-				1E40A33E1D4A81C3009E2D73 /* OTAddressBookItem.h */,
-				1E40A33F1D4A81C3009E2D73 /* OTAddressBookItem.m */,
 			);
 			name = Entourage;
 			sourceTree = "<group>";
@@ -1238,6 +1251,7 @@
 		45F4433D1C90B40D00DDEBE1 /* Feeds */ = {
 			isa = PBXGroup;
 			children = (
+				1E2232DD1D569CE8004CD5E8 /* Timeline */,
 				45F24A3B1CEDB1490003BF9E /* OTFeedItem.h */,
 				45F24A3C1CEDB1490003BF9E /* OTFeedItem.m */,
 				45D6B82E1D116A2C00357FEF /* OTFeedItemsPagination.h */,
@@ -1274,27 +1288,11 @@
 			name = POI;
 			sourceTree = "<group>";
 		};
-		45F443401C90B92200DDEBE1 /* Timeline */ = {
-			isa = PBXGroup;
-			children = (
-				45F4433A1C90B40400DDEBE1 /* OTTourTimelinePoint.h */,
-				45F4433B1C90B40400DDEBE1 /* OTTourTimelinePoint.m */,
-				45F443371C9080E900DDEBE1 /* OTTourJoiner.h */,
-				45F443381C9080E900DDEBE1 /* OTTourJoiner.m */,
-				45F443421C90BCB700DDEBE1 /* OTTourMessage.h */,
-				45F443431C90BCB700DDEBE1 /* OTTourMessage.m */,
-				45F443451C9314A800DDEBE1 /* OTTourStatus.h */,
-				45F443461C9314A800DDEBE1 /* OTTourStatus.m */,
-			);
-			name = Timeline;
-			sourceTree = "<group>";
-		};
 		45F443411C90B93900DDEBE1 /* Tour */ = {
 			isa = PBXGroup;
 			children = (
 				0A94B4FE1B8CC64300402AF3 /* OTTour.h */,
 				0A94B4FF1B8CC66100402AF3 /* OTTour.m */,
-				45F443401C90B92200DDEBE1 /* Timeline */,
 				0A94B53C1B8F185500402AF3 /* OTTourPoint.h */,
 				0A94B53D1B8F194700402AF3 /* OTTourPoint.m */,
 				45B3F8F41C74F40A00DCF2EC /* OTTourAuthor.h */,
@@ -1419,6 +1417,8 @@
 				45F4433F1C90B78100DDEBE1 /* POI */,
 				4536FC5C1CC64E55000BF620 /* OTSpeechKitManager.h */,
 				4536FC5D1CC64E55000BF620 /* OTSpeechKitManager.m */,
+				1E40A33E1D4A81C3009E2D73 /* OTAddressBookItem.h */,
+				1E40A33F1D4A81C3009E2D73 /* OTAddressBookItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1902,7 +1902,7 @@
 				1E2F292A1D4BF4CD00ABC68A /* OTContactsFilteredDataSourceBehavior.m in Sources */,
 				45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */,
 				A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */,
-				45F443471C9314A800DDEBE1 /* OTTourStatus.m in Sources */,
+				45F443471C9314A800DDEBE1 /* OTFeedItemStatus.m in Sources */,
 				0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */,
 				1E0972B41D54B797006E1FAD /* OTJoinBehavior.m in Sources */,
 				0A70FA181BFDD69C0080E8EC /* OTToursTableViewController.m in Sources */,
@@ -1911,7 +1911,7 @@
 				452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */,
 				1E69CABD1D37B3CC00118E33 /* NSError+message.m in Sources */,
 				1E2F291B1D4BDE9600ABC68A /* OTFilteredDataSourceBehavior.m in Sources */,
-				45F443441C90BCB700DDEBE1 /* OTTourMessage.m in Sources */,
+				45F443441C90BCB700DDEBE1 /* OTFeedItemMessage.m in Sources */,
 				4541EDF11D09AB4C00589ECB /* OTDisclaimerViewController.m in Sources */,
 				2EDFADD71CAE810800B66026 /* OTAboutTableViewCell.m in Sources */,
 				6B4930CD19A773C500DA7EE0 /* OTMainViewController.m in Sources */,
@@ -1983,7 +1983,7 @@
 				1E0972C31D555586006E1FAD /* OTInviteBehavior.m in Sources */,
 				45B3F8F61C74F40B00DCF2EC /* OTTourAuthor.m in Sources */,
 				2EC77E4F1CEDE4BC0031BB67 /* OTEntourageService.m in Sources */,
-				45F4433C1C90B40400DDEBE1 /* OTTourTimelinePoint.m in Sources */,
+				45F4433C1C90B40400DDEBE1 /* OTFeedItemTimelinePoint.m in Sources */,
 				1E0972BD1D55541E006E1FAD /* OTInviteByPhoneViewController.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
 				1E2232DC1D5699AD004CD5E8 /* OTMessagingService.m in Sources */,
@@ -2031,7 +2031,7 @@
 				1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */,
 				1EC184B71D1420D800E29D96 /* OTEntourageAnnotationView.m in Sources */,
 				2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */,
-				45F443391C9080E900DDEBE1 /* OTTourJoiner.m in Sources */,
+				45F443391C9080E900DDEBE1 /* OTFeedItemJoiner.m in Sources */,
 				4559405E1C5F6D480099A8EE /* OTRequestOperationManager.m in Sources */,
 				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,
 				2EDA5F031CB3F84300849172 /* OTGuideDetailsViewController.m in Sources */,

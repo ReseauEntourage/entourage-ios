@@ -27,10 +27,10 @@
 #import "OTTour.h"
 #import "OTTourPoint.h"
 #import "OTOrganization.h"
-#import "OTTourJoiner.h"
+#import "OTFeedItemJoiner.h"
 #import "OTEncounter.h"
-#import "OTTourMessage.h"
-#import "OTTourStatus.h"
+#import "OTFeedItemMessage.h"
+#import "OTFeedItemStatus.h"
 #import "OTUser.h"
 #import "OTFeedItemFactory.h"
 #import "OTStateInfoDelegate.h"
@@ -104,10 +104,10 @@ typedef NS_ENUM(unsigned) {
     self.feedSummaryView.delegate = self;
     self.infoView.delegate = self;
     
-    self.timelineCardsClassesCellsIDs = @{@"OTTourJoiner": @"TourJoinerCell",
-                                          @"OTTourMessage": @"TourMessageCell",
+    self.timelineCardsClassesCellsIDs = @{@"OTFeedItemJoiner": @"TourJoinerCell",
+                                          @"OTFeedItemMessage": @"TourMessageCell",
                                           @"OTEncounter": @"TourEncounterCell",
-                                          @"OTTourStatus": @"TourStatusCell"};
+                                          @"OTFeedItemStatus": @"TourStatusCell"};
     
     if (IS_ACCEPTED) {
         [self initializeTimelinePoints];
@@ -203,9 +203,9 @@ typedef NS_ENUM(unsigned) {
 - (void)initializeTimelinePoints {
     self.timelinePoints = [NSMutableArray new];
     
-    OTTourStatus *tourStartStatus = [[OTTourStatus alloc] init];
+    OTFeedItemStatus *tourStartStatus = [[OTFeedItemStatus alloc] init];
     tourStartStatus.date = self.feedItem.creationDate;
-    tourStartStatus.type = OTTourStatusStart;
+    tourStartStatus.type = OTFeedItemStatusStart;
     
     tourStartStatus.status = [NSString stringWithFormat: OTLocalizedString(@"formatter_tour_status_ongoing"), [[[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle] uppercaseString]];
     NSDate *now = [NSDate date];
@@ -219,9 +219,9 @@ typedef NS_ENUM(unsigned) {
         OTTour *tour = (OTTour*)self.feedItem;
         
         if (tour.endTime) {
-            OTTourStatus *tourEndStatus = [[OTTourStatus alloc] init];
+            OTFeedItemStatus *tourEndStatus = [[OTFeedItemStatus alloc] init];
             tourEndStatus.date = tour.endTime;
-            tourStartStatus.type = OTTourStatusEnd;
+            tourStartStatus.type = OTFeedItemStatusEnd;
             tourEndStatus.status = OTLocalizedString(@"tour_status_completed");
             tourEndStatus.duration = [tour.endTime timeIntervalSinceDate:tour.creationDate];
             tourEndStatus.distance = tour.distance.doubleValue;
@@ -310,7 +310,7 @@ typedef NS_ENUM(unsigned) {
                                     //NSLog(@"USERS: %@", tourUsers);
                                     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
                                     NSMutableArray *users = [NSMutableArray new];
-                                    for (OTTourJoiner *joiner  in tourUsers) {
+                                    for (OTFeedItemJoiner *joiner  in tourUsers) {
                                         if ([joiner.uID isEqualToValue:currentUser.sid]) {
                                             continue;
                                         }
@@ -358,7 +358,7 @@ typedef NS_ENUM(unsigned) {
 }
 
 - (IBAction)sendMessage {
-    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.chatTextView.text withSuccess:^(OTTourMessage *message) {
+    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.chatTextView.text withSuccess:^(OTFeedItemMessage *message) {
         self.chatTextView.text = @"";
         [self updateTableViewAddingTimelinePoints:@[message]];
         [self.chatSpeechBehavior updateRecordButton];
@@ -440,18 +440,18 @@ typedef NS_ENUM(unsigned) {
 
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
-    switch (((OTTourTimelinePoint *)self.timelinePoints[indexPath.row]).tag) {
+    switch (((OTFeedItemTimelinePoint *)self.timelinePoints[indexPath.row]).tag) {
         case TimelinePointTagEncounter:
             [self setupEncounterCell:cell withEncounter:((OTEncounter *)self.timelinePoints[indexPath.row])];
             break;
         case TimelinePointTagJoiner:
-            [self setupJoinerCell:cell withJoiner:((OTTourJoiner *)self.timelinePoints[indexPath.row])];
+            [self setupJoinerCell:cell withJoiner:((OTFeedItemJoiner *)self.timelinePoints[indexPath.row])];
             break;
         case TimelinePointTagMessage:
-            [self setupMessageCell:cell withMessage:((OTTourMessage *)self.timelinePoints[indexPath.row])];
+            [self setupMessageCell:cell withMessage:((OTFeedItemMessage *)self.timelinePoints[indexPath.row])];
             break;
         case TimelinePointTagStatus:
-            [self setupStatusCell:cell withStatus:((OTTourStatus *)self.timelinePoints[indexPath.row])];
+            [self setupStatusCell:cell withStatus:((OTFeedItemStatus *)self.timelinePoints[indexPath.row])];
             break;
             
         default:
@@ -495,7 +495,7 @@ typedef NS_ENUM(unsigned) {
     encounterLabel.attributedText = typeByNameAttrString;
 }
 
-- (void)setupJoinerCell:(UITableViewCell *)cell withJoiner:(OTTourJoiner *)joiner {
+- (void)setupJoinerCell:(UITableViewCell *)cell withJoiner:(OTFeedItemJoiner *)joiner {
     
     NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
     NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold],
@@ -508,7 +508,7 @@ typedef NS_ENUM(unsigned) {
     joinerLabel.attributedText = typeByNameAttrString;
 }
 
-- (void)setupMessageCell:(UITableViewCell *)cell withMessage:(OTTourMessage *)message {
+- (void)setupMessageCell:(UITableViewCell *)cell withMessage:(OTFeedItemMessage *)message {
     
     UIView *messageOtherContainer = [cell viewWithTag:TIMELINE_MESSAGE_OTHER_CONTENT_TAG];
     UIView *messageMeContainer = [cell viewWithTag:TIMELINE_MESSAGE_ME_CONTENT_TAG];
@@ -546,10 +546,10 @@ typedef NS_ENUM(unsigned) {
     messageBackgroundImageView.image = backgroundImage;
 }
 
-- (void)setupStatusCell:(UITableViewCell *)cell withStatus:(OTTourStatus *)statusPoint {
+- (void)setupStatusCell:(UITableViewCell *)cell withStatus:(OTFeedItemStatus *)statusPoint {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *snapshotFormat = statusPoint.type == OTTourStatusStart ? @SNAPSHOT_START : @SNAPSHOT_STOP;
+    NSString *snapshotFormat = statusPoint.type == OTFeedItemStatusStart ? @SNAPSHOT_START : @SNAPSHOT_STOP;
     NSString *snapshotStartFilename = [NSString stringWithFormat:snapshotFormat, self.feedItem.uid.intValue];
     NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:snapshotStartFilename];
     UIImage *image = [UIImage imageWithContentsOfFile:filePath];
@@ -594,20 +594,20 @@ typedef NS_ENUM(unsigned) {
         case SectionTypeHeader:
             return CELLHEIGHT_HEADER;
         case SectionTypeTimeline: {
-            OTTourTimelinePoint *timelinePoint = self.timelinePoints[indexPath.row];
-            if ([timelinePoint isKindOfClass:[OTTourJoiner class]])
+            OTFeedItemTimelinePoint *timelinePoint = self.timelinePoints[indexPath.row];
+            if ([timelinePoint isKindOfClass:[OTFeedItemJoiner class]])
                 return CELLHEIGHT_JOINER;
             if ([timelinePoint isKindOfClass:[OTEncounter class]])
                 return CELLHEIGHT_ENCOUNTER;
-            if ([timelinePoint isKindOfClass:[OTTourMessage class]]) {
+            if ([timelinePoint isKindOfClass:[OTFeedItemMessage class]]) {
                 OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-                OTTourMessage *message = (OTTourMessage*)timelinePoint;
+                OTFeedItemMessage *message = (OTFeedItemMessage*)timelinePoint;
                 CGFloat otherUserDelta = PADDING;
                 if ([currentUser.sid intValue] != [message.uID intValue])
                     otherUserDelta = 2*PADDING;
                 return otherUserDelta + [self messageHeightForText:message.text];
             }
-            if ([timelinePoint isKindOfClass:[OTTourStatus class]])
+            if ([timelinePoint isKindOfClass:[OTFeedItemStatus class]])
                 return CELLHEIGHT_STATUS;
         }
         default:
@@ -632,11 +632,11 @@ typedef NS_ENUM(unsigned) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == SectionTypeTimeline) {
-        OTTourTimelinePoint *timelinePoint = self.timelinePoints[indexPath.row];
+        OTFeedItemTimelinePoint *timelinePoint = self.timelinePoints[indexPath.row];
         switch (timelinePoint.tag) {
             case TimelinePointTagJoiner:
                 {
-                    OTTourJoiner *joinerPoint = (OTTourJoiner *)timelinePoint;
+                    OTFeedItemJoiner *joinerPoint = (OTFeedItemJoiner *)timelinePoint;
                     [self performSegueWithIdentifier:@"OTUserProfileSegue" sender:joinerPoint.uID];
                 }
                 break;

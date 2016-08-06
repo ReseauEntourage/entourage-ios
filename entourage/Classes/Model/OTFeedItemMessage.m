@@ -1,12 +1,12 @@
 //
-//  OTTourMessage.m
+//  OTFeedItemMessage.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 09/03/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTTourMessage.h"
+#import "OTFeedItemMessage.h"
 #import "NSDictionary+Parsing.h"
 
 
@@ -17,18 +17,17 @@
 #define kWSAvatarURL @"avatar_url"
 #define kWSID @"id"
 
-@implementation OTTourMessage
+@implementation OTFeedItemMessage
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
+        self.tID = [dictionary valueForKey:kWSID];
         self.tag = TimelinePointTagMessage;
         self.date = [dictionary dateForKey:kWSKeyCreatedAt format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
         if (self.date == nil)
-        {
             // Objective-C format : "2015-11-20 09:28:52 +0000"
             self.date = [dictionary dateForKey:kWSKeyCreatedAt format:@"yyyy-MM-dd HH:mm:ss Z"];
-        }
         self.text = [dictionary valueForKey:kWSKeyContent];
         NSDictionary *user;
         if ((user = [dictionary objectForKey:kWSUser])) {

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OTTourTimelinePoint.h"
+#import "OTFeedItemTimelinePoint.h"
 
-@interface OTEncounter : OTTourTimelinePoint
+@interface OTEncounter : OTFeedItemTimelinePoint
 
 @property (strong, nonatomic) NSNumber *sid;
 @property (nonatomic) double longitude;

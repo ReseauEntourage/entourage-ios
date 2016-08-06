@@ -1,14 +1,13 @@
 //
-//  OTTourStatus.m
-//  entourage
+//  OTFeedItemStatus.m
 //
 //  Created by Ciprian Habuc on 11/03/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTTourStatus.h"
+#import "OTFeedItemStatus.h"
 
-@implementation OTTourStatus
+@implementation OTFeedItemStatus
 
 - (instancetype)init {
     self = [super init];

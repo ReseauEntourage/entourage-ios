@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@class OTTour, OTTourMessage, OTTourJoiner;
+@class OTTour, OTFeedItemMessage, OTFeedItemJoiner;
 
 extern NSString *const kAPITourRoute;
 
@@ -39,12 +39,12 @@ extern NSString *const kAPITourRoute;
                              failure:(void (^)(NSError *error))failure;
 
 - (void)joinTour:(OTTour *)tour
-         success:(void(^)(OTTourJoiner *))success
+         success:(void(^)(OTFeedItemJoiner *))success
          failure:(void (^)(NSError *)) failure;
 
 - (void)joinMessageTour:(OTTour*)tour
                 message:(NSString*)message
-                success:(void(^)(OTTourJoiner *))success
+                success:(void(^)(OTFeedItemJoiner *))success
                 failure:(void (^)(NSError *)) failure;
 
 - (void)updateTourJoinRequestStatus:(NSString *)status
@@ -69,7 +69,7 @@ extern NSString *const kAPITourRoute;
 
 - (void)sendMessage:(NSString *)message
              onTour:(OTTour *)tour
-            success:(void(^)(OTTourMessage *))success
+            success:(void(^)(OTFeedItemMessage *))success
             failure:(void (^)(NSError *)) failure;
 
 - (void)tourMessages:(OTTour *)tour

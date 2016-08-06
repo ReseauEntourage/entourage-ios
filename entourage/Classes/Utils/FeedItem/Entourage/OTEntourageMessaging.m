@@ -11,8 +11,8 @@
 
 @implementation OTEntourageMessaging
 
-- (void)send:(NSString *)message withSuccess:(void (^)(OTTourMessage *))success orFailure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] sendMessage:message onEntourage:self.entourage success:^(OTTourMessage * tourMessage) {
+- (void)send:(NSString *)message withSuccess:(void (^)(OTFeedItemMessage *))success orFailure:(void (^)(NSError *))failure {
+    [[OTEntourageService new] sendMessage:message onEntourage:self.entourage success:^(OTFeedItemMessage * tourMessage) {
             NSLog(@"CHAT %@", message);
             if(success)
                 success(tourMessage);
@@ -35,8 +35,8 @@
     }];
 }
 
-- (void)sendJoinMessage:(NSString *)message success:(void (^)(OTTourJoiner *))success failure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] joinMessageEntourage:self.entourage message:message success:^(OTTourJoiner *joiner) {
+- (void)sendJoinMessage:(NSString *)message success:(void (^)(OTFeedItemJoiner *))success failure:(void (^)(NSError *))failure {
+    [[OTEntourageService new] joinMessageEntourage:self.entourage message:message success:^(OTFeedItemJoiner *joiner) {
         NSLog(@"JOIN MESSAGE %@", message);
         if(success)
             success(joiner);

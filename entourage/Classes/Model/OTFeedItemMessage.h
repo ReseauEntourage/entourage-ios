@@ -1,5 +1,5 @@
 //
-//  OTTourMessage.h
+//  OTFeedItemMessage.h
 //  entourage
 //
 //  Created by Ciprian Habuc on 09/03/16.
@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OTTourTimelinePoint.h"
+#import "OTFeedItemTimelinePoint.h"
 
-@interface OTTourMessage : OTTourTimelinePoint
+@interface OTFeedItemMessage : OTFeedItemTimelinePoint
 
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSString *userName;
