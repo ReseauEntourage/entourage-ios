@@ -14,7 +14,7 @@
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 
 - (void)configureWith:(OTFeedItem *)feedItem;
-- (void)startChangeStatus;
+- (IBAction)startChangeStatus;
 - (BOOL)prepareSegueForNextStatus:(UIStoryboardSegue *)segue;
 
 @end

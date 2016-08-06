@@ -15,6 +15,7 @@
         <mutableArray key="SF-UI-Text-Semibold.otf">
             <string>SFUIText-Semibold</string>
             <string>SFUIText-Semibold</string>
+            <string>SFUIText-Semibold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -138,12 +139,14 @@
                         <outlet property="statusChangedBehavior" destination="Fee-TQ-8bL" id="bXO-iZ-TDz"/>
                         <outlet property="summaryProvider" destination="gwK-Pi-4zD" id="gmy-1f-Rax"/>
                         <outlet property="tblChat" destination="EIv-33-TLG" id="p86-YJ-oZX"/>
+                        <outlet property="titleTapBehavior" destination="gL3-aq-uay" id="UWY-L9-ed5"/>
                         <outlet property="txtChat" destination="rhM-ov-Zou" id="8WP-EZ-Bgr"/>
                         <segue destination="RBx-qN-1lJ" kind="presentation" identifier="SegueInviteSource" id="ffc-Pt-QuG"/>
                         <segue destination="e7P-HA-iRZ" kind="show" identifier="SegueInviteFromAddressBook" id="nan-zV-dem"/>
                         <segue destination="eKG-vw-p09" kind="show" identifier="SegueInvitePhoneNumber" id="zFK-Fj-hWR"/>
                         <segue destination="7N5-l9-cEp" kind="presentation" identifier="SegueInviteSuccess" id="TAD-d7-tmZ"/>
                         <segue destination="jJ9-Y9-aoE" kind="presentation" identifier="SegueChangeState" id="9ff-pE-XzN"/>
+                        <segue destination="9Ay-63-LSU" kind="show" identifier="SegueMap" id="pa2-NI-OJP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riw-B5-uYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -170,8 +173,93 @@
                         <outlet property="owner" destination="DlM-nw-VLS" id="XUm-OC-aAb"/>
                     </connections>
                 </customObject>
+                <customObject id="gL3-aq-uay" userLabel="Tap View" customClass="OTTapViewBehavior">
+                    <connections>
+                        <action selector="showMap" destination="DlM-nw-VLS" eventType="valueChanged" id="w11-aU-gv5"/>
+                        <outlet property="tapView" destination="YdS-k8-CWq" id="Vhh-nE-Es9"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="389" y="316"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="3o6-mJ-kIj">
+            <objects>
+                <viewController id="9Ay-63-LSU" userLabel="Map" customClass="OTMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UfM-2C-fic"/>
+                        <viewControllerLayoutGuide type="bottom" id="32h-xk-vQO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KEz-HF-mA6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GK5-WC-86M">
+                                <rect key="frame" x="-4" y="20" width="328" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="tHL-X5-y7V"/>
+                                </constraints>
+                            </mapView>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NU5-Uy-6si">
+                                <rect key="frame" x="11" y="514" width="298" height="1"/>
+                                <color key="backgroundColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="to8-Cw-kHZ"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Nq-hr-vcX">
+                                <rect key="frame" x="138" y="492" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="a9e-w3-Txg"/>
+                                    <constraint firstAttribute="height" constant="45" id="yvt-fj-jCN"/>
+                                </constraints>
+                                <state key="normal" image="activeButton"/>
+                                <connections>
+                                    <action selector="startChangeStatus" destination="AI5-tH-KvZ" eventType="touchUpInside" id="eZR-jY-Djq"/>
+                                    <segue destination="jJ9-Y9-aoE" kind="presentation" identifier="SegueChangeState" id="Ng8-fn-6NV"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8E-Oc-tLF">
+                                <rect key="frame" x="16" y="537" width="288" height="16"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="13"/>
+                                <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="32h-xk-vQO" firstAttribute="top" secondItem="m8E-Oc-tLF" secondAttribute="bottom" constant="15" id="3mK-ch-pUm"/>
+                            <constraint firstItem="7Nq-hr-vcX" firstAttribute="centerX" secondItem="KEz-HF-mA6" secondAttribute="centerX" id="7CX-DZ-0SA"/>
+                            <constraint firstItem="GK5-WC-86M" firstAttribute="leading" secondItem="KEz-HF-mA6" secondAttribute="leadingMargin" constant="-20" id="7FM-Lm-3Xm"/>
+                            <constraint firstItem="m8E-Oc-tLF" firstAttribute="leading" secondItem="KEz-HF-mA6" secondAttribute="leadingMargin" id="GT0-9q-Yay"/>
+                            <constraint firstItem="NU5-Uy-6si" firstAttribute="leading" secondItem="KEz-HF-mA6" secondAttribute="leadingMargin" constant="-5" id="Kv7-XH-Zi0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GK5-WC-86M" secondAttribute="trailing" constant="-20" id="Oys-2s-UJU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="m8E-Oc-tLF" secondAttribute="trailing" id="Uh4-MT-lQB"/>
+                            <constraint firstItem="GK5-WC-86M" firstAttribute="top" secondItem="UfM-2C-fic" secondAttribute="bottom" id="WHz-WH-Vwr"/>
+                            <constraint firstItem="7Nq-hr-vcX" firstAttribute="centerY" secondItem="NU5-Uy-6si" secondAttribute="centerY" id="aJJ-Zt-OdP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NU5-Uy-6si" secondAttribute="trailing" constant="-5" id="g3h-Qc-qLe"/>
+                            <constraint firstItem="m8E-Oc-tLF" firstAttribute="top" secondItem="NU5-Uy-6si" secondAttribute="bottom" constant="22" id="gOk-GO-JyM"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="annotationProvider" destination="Mb6-Jg-13f" id="Y3C-B9-kBr"/>
+                        <outlet property="statusChangedBehavior" destination="AI5-tH-KvZ" id="G1d-6r-PLi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WOD-on-iIR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Mb6-Jg-13f" userLabel="Map Annotation Provider" customClass="OTMapAnnotationProviderBehavior">
+                    <connections>
+                        <outlet property="map" destination="GK5-WC-86M" id="Ufm-eI-GWs"/>
+                    </connections>
+                </customObject>
+                <customObject id="AI5-tH-KvZ" userLabel="Status Changed" customClass="OTStatusChangedBehavior">
+                    <connections>
+                        <outlet property="owner" destination="9Ay-63-LSU" id="NVj-OF-ww7"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="863" y="-354"/>
         </scene>
         <!--Invite Source View Controller-->
         <scene sceneID="Yuw-kg-6Q1">
@@ -387,7 +475,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="7C6A61DD-F7D6-4AC9-8ADB-D54C88EE1ADB" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="77586534-78B5-4D1E-8329-F9201755F4D9" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
@@ -607,7 +695,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="823" y="-388"/>
+            <point key="canvasLocation" x="863" y="316"/>
         </scene>
         <!--Invite Success View Controller-->
         <scene sceneID="bHm-5e-0Nb">
@@ -678,7 +766,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7C6A61DD-F7D6-4AC9-8ADB-D54C88EE1ADB" width="48" height="48">
+        <image name="77586534-78B5-4D1E-8329-F9201755F4D9" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -841,7 +929,7 @@ AAAAAAAAAAAADgEAAAMAAAABADAAAAEBAAMAAAABADAAAAECAAMAAAAEAAAktgEDAAMAAAABAAEAAAEG
 AAMAAAABAAIAAAERAAQAAAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAQAAAEWAAMAAAABADAAAAEX
 AAQAAAABAAAkAAEcAAMAAAABAAEAAAFSAAMAAAABAAIAAAFTAAMAAAAEAAAkvodzAAcAAAxIAAAkxgAA
 AAAACAAIAAgACAABAAEAAQABAAAMSExpbm8CEAAAbW50clJHQiBYWVogB84AAgAJAAYAMQAAYWNzcE1T
-RlQAAAAASUVDIHNSR0IAAAAAAAAAAAAAAAEAAPbWAAEAAAAA0y1IUCAgAAAAAAAAAAAAAAAAAAAAAAAA
+RlQAAAAASUVDIHNSR0IAAAAAAAAAAAAAAAAAAPbWAAEAAAAA0y1IUCAgAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARY3BydAAAAVAAAAAzZGVzYwAAAYQAAABsd3RwdAAA
 AfAAAAAUYmtwdAAAAgQAAAAUclhZWgAAAhgAAAAUZ1hZWgAAAiwAAAAUYlhZWgAAAkAAAAAUZG1uZAAA
 AlQAAABwZG1kZAAAAsQAAACIdnVlZAAAA0wAAACGdmlldwAAA9QAAAAkbHVtaQAAA/gAAAAUbWVhcwAA
@@ -901,6 +989,7 @@ pACmAKgArQDEAMYAyDHaMd8x6jHzMgYyCjIVMh4yIzIrMi4yMzJCMkYyTTJVMmIyZzJpMmsycDJ4Mnsy
 gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
 </mutableData>
         </image>
+        <image name="activeButton" width="45" height="45"/>
         <image name="addressBookSquare" width="22" height="22"/>
         <image name="arrowGrey" width="12" height="21"/>
         <image name="invitationSquare" width="56" height="56"/>
@@ -909,4 +998,7 @@ gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
         <image name="plus" width="22" height="22"/>
         <image name="whiteClose" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ng8-fn-6NV"/>
+    </inferredMetricsTieBreakers>
 </document>

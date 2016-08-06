@@ -37,6 +37,7 @@
 		1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */; };
 		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
 		1E0669561D5630F500EB58B7 /* OTChangeStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0669551D5630F500EB58B7 /* OTChangeStateViewController.m */; };
+		1E066CF41D5687ED00E5C8BE /* OTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E066CF31D5687ED00E5C8BE /* OTMapViewController.m */; };
 		1E07AD611D565C1F00466FB7 /* OTNextStatusButtonBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E07AD601D565C1F00466FB7 /* OTNextStatusButtonBehavior.m */; };
 		1E07AD641D5667E400466FB7 /* OTStatusChangedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E07AD631D5667E400466FB7 /* OTStatusChangedBehavior.m */; };
 		1E0972B41D54B797006E1FAD /* OTJoinBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972B31D54B797006E1FAD /* OTJoinBehavior.m */; };
@@ -45,6 +46,7 @@
 		1E0972BF1D55541E006E1FAD /* OTInviteSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972BA1D55541E006E1FAD /* OTInviteSourceViewController.m */; };
 		1E0972C01D55541E006E1FAD /* OTInviteSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972BC1D55541E006E1FAD /* OTInviteSuccessViewController.m */; };
 		1E0972C31D555586006E1FAD /* OTInviteBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972C21D555586006E1FAD /* OTInviteBehavior.m */; };
+		1E2232CB1D568B4C004CD5E8 /* OTTapViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232CA1D568B4C004CD5E8 /* OTTapViewBehavior.m */; };
 		1E2F29051D4BC25C00ABC68A /* OTSpeechBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F29041D4BC25C00ABC68A /* OTSpeechBehavior.m */; };
 		1E2F29081D4BC26600ABC68A /* OTPhotoPickerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F29071D4BC26600ABC68A /* OTPhotoPickerBehavior.m */; };
 		1E2F290C1D4BC2A000ABC68A /* OTCloseKeyboardOnTapBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F290B1D4BC2A000ABC68A /* OTCloseKeyboardOnTapBehavior.m */; };
@@ -288,6 +290,8 @@
 		1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCreateMeetingViewController.m; sourceTree = "<group>"; };
 		1E0669541D5630F500EB58B7 /* OTChangeStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTChangeStateViewController.h; path = ActiveFeedItem/OTChangeStateViewController.h; sourceTree = "<group>"; };
 		1E0669551D5630F500EB58B7 /* OTChangeStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTChangeStateViewController.m; path = ActiveFeedItem/OTChangeStateViewController.m; sourceTree = "<group>"; };
+		1E066CF21D5687ED00E5C8BE /* OTMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMapViewController.h; path = ActiveFeedItem/OTMapViewController.h; sourceTree = "<group>"; };
+		1E066CF31D5687ED00E5C8BE /* OTMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMapViewController.m; path = ActiveFeedItem/OTMapViewController.m; sourceTree = "<group>"; };
 		1E07AD5F1D565C1F00466FB7 /* OTNextStatusButtonBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTNextStatusButtonBehavior.h; path = Behaviors/FeedItems/OTNextStatusButtonBehavior.h; sourceTree = "<group>"; };
 		1E07AD601D565C1F00466FB7 /* OTNextStatusButtonBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTNextStatusButtonBehavior.m; path = Behaviors/FeedItems/OTNextStatusButtonBehavior.m; sourceTree = "<group>"; };
 		1E07AD621D5667E400466FB7 /* OTStatusChangedBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTStatusChangedBehavior.h; path = Behaviors/FeedItems/OTStatusChangedBehavior.h; sourceTree = "<group>"; };
@@ -304,6 +308,8 @@
 		1E0972BC1D55541E006E1FAD /* OTInviteSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTInviteSuccessViewController.m; path = ActiveFeedItem/OTInviteSuccessViewController.m; sourceTree = "<group>"; };
 		1E0972C11D555586006E1FAD /* OTInviteBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTInviteBehavior.h; path = Behaviors/FeedItems/OTInviteBehavior.h; sourceTree = "<group>"; };
 		1E0972C21D555586006E1FAD /* OTInviteBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTInviteBehavior.m; path = Behaviors/FeedItems/OTInviteBehavior.m; sourceTree = "<group>"; };
+		1E2232C91D568B4C004CD5E8 /* OTTapViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTTapViewBehavior.h; path = Behaviors/Touch/OTTapViewBehavior.h; sourceTree = "<group>"; };
+		1E2232CA1D568B4C004CD5E8 /* OTTapViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTTapViewBehavior.m; path = Behaviors/Touch/OTTapViewBehavior.m; sourceTree = "<group>"; };
 		1E2F29031D4BC25C00ABC68A /* OTSpeechBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSpeechBehavior.h; path = Behaviors/Speech/OTSpeechBehavior.h; sourceTree = "<group>"; };
 		1E2F29041D4BC25C00ABC68A /* OTSpeechBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSpeechBehavior.m; path = Behaviors/Speech/OTSpeechBehavior.m; sourceTree = "<group>"; };
 		1E2F29061D4BC26600ABC68A /* OTPhotoPickerBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPhotoPickerBehavior.h; path = Behaviors/Photo/OTPhotoPickerBehavior.h; sourceTree = "<group>"; };
@@ -704,6 +710,15 @@
 			name = Helper;
 			sourceTree = "<group>";
 		};
+		1E2232C81D568B0D004CD5E8 /* Touch */ = {
+			isa = PBXGroup;
+			children = (
+				1E2232C91D568B4C004CD5E8 /* OTTapViewBehavior.h */,
+				1E2232CA1D568B4C004CD5E8 /* OTTapViewBehavior.m */,
+			);
+			name = Touch;
+			sourceTree = "<group>";
+		};
 		1E2F29011D4BC24900ABC68A /* Photo */ = {
 			isa = PBXGroup;
 			children = (
@@ -893,6 +908,7 @@
 		1E9003661D34FA90004E18BC /* Behaviors */ = {
 			isa = PBXGroup;
 			children = (
+				1E2232C81D568B0D004CD5E8 /* Touch */,
 				1ECFB3621D52525C00722DAC /* Map */,
 				1E78B7AB1D512E3A0008C00E /* FeedItems */,
 				1E7C49C11D4E2456004D414D /* NewsFeed */,
@@ -994,6 +1010,8 @@
 				1EC6F3C61D53DBEF0026766D /* OTActiveFeedItemViewController.m */,
 				1E0669541D5630F500EB58B7 /* OTChangeStateViewController.h */,
 				1E0669551D5630F500EB58B7 /* OTChangeStateViewController.m */,
+				1E066CF21D5687ED00E5C8BE /* OTMapViewController.h */,
+				1E066CF31D5687ED00E5C8BE /* OTMapViewController.m */,
 			);
 			name = ActiveFeedItem;
 			sourceTree = "<group>";
@@ -1910,6 +1928,7 @@
 				0A4769381BFCC4EB006EA73A /* OTOrganization.m in Sources */,
 				454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */,
 				454C8F581C501B31001362B2 /* UIView+entourage.m in Sources */,
+				1E066CF41D5687ED00E5C8BE /* OTMapViewController.m in Sources */,
 				2EDA5F0E1CB67FFE00849172 /* OTToursMapDelegate.m in Sources */,
 				1E76AE4A1D144D9900C496BA /* OTEntourageStateInfo.m in Sources */,
 				0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */,
@@ -1923,6 +1942,7 @@
 				1EACE4191D11515200F3A2A6 /* OTTourFactory.m in Sources */,
 				455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */,
 				1EACE4181D11515200F3A2A6 /* OTFeedItemFactory.m in Sources */,
+				1E2232CB1D568B4C004CD5E8 /* OTTapViewBehavior.m in Sources */,
 				45E37E531CEE1F7D005C3175 /* OTFeedsService.m in Sources */,
 				1E78B7F01D513F0F0008C00E /* OTEntourageUI.m in Sources */,
 				1E2F291E1D4BDF3600ABC68A /* OTDataSourceBehavior.m in Sources */,

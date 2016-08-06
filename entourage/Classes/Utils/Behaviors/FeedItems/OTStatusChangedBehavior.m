@@ -10,6 +10,7 @@
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
 #import "OTChangeStateViewController.h"
+#import "OTMainViewController.h"
 
 @interface OTStatusChangedBehavior ()
 
@@ -23,7 +24,7 @@
     self.feedItem = feedItem;
 }
 
-- (void)startChangeStatus {
+- (IBAction)startChangeStatus {
     [self.owner performSegueWithIdentifier:@"SegueChangeState" sender:self];
 }
 
@@ -41,17 +42,26 @@
 
 
 - (void)stoppedFeedItem {
-    [self.owner.navigationController popViewControllerAnimated:YES];
+    [self popToMainController];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"stoppedItem")];
     });
 }
 
 - (void)closedFeedItem {
-    [self.owner.navigationController popViewControllerAnimated:YES];
+    [self popToMainController];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closedItem")];
     });
+}
+
+- (void)popToMainController {
+    for (UIViewController* viewController in self.owner.navigationController.viewControllers) {
+        if ([viewController isKindOfClass:[OTMainViewController class]]) {
+            [self.owner.navigationController popToViewController:viewController animated:YES];
+            break;
+        }
+    }
 }
 
 @end

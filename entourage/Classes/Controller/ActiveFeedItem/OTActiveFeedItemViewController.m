@@ -15,9 +15,11 @@
 #import "OTSpeechBehavior.h"
 #import "OTInviteBehavior.h"
 #import "OTStatusChangedBehavior.h"
+#import "OTTapViewBehavior.h"
 #import "OTTourMessage.h"
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
+#import "OTMapViewController.h"
 
 @interface OTActiveFeedItemViewController ()
 
@@ -25,6 +27,7 @@
 @property (strong, nonatomic) IBOutlet OTSpeechBehavior *speechBehavior;
 @property (strong, nonatomic) IBOutlet OTInviteBehavior *inviteBehavior;
 @property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
+@property (strong, nonatomic) IBOutlet OTTapViewBehavior *titleTapBehavior;
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
 
@@ -39,6 +42,7 @@
     [self.speechBehavior initialize];
     [self.inviteBehavior configureWith:self.feedItem];
     [self.statusChangedBehavior configureWith:self.feedItem];
+    [self.titleTapBehavior initialize];
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];
@@ -53,7 +57,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.inviteBehavior prepareSegueForInvite:segue])
         return;
-    [self.statusChangedBehavior prepareSegueForNextStatus:segue];
+    if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
+        return;
+    if([segue.identifier isEqualToString:@"SegueMap"]) {
+        OTMapViewController *controller = (OTMapViewController *)segue.destinationViewController;
+        controller.feedItem = self.feedItem;
+    }
 }
 
 #pragma mark - private methods
@@ -78,6 +87,10 @@
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];
+}
+
+- (IBAction)showMap {
+    [self performSegueWithIdentifier:@"SegueMap" sender:self];
 }
 
 @end
