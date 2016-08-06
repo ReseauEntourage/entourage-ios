@@ -22,6 +22,7 @@
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
 #import "OTMapViewController.h"
+#import "OTMessagingService.h"
 
 @interface OTActiveFeedItemViewController ()
 
@@ -61,11 +62,11 @@
 
 - (void)loadMessages {
     [SVProgressHUD show];
-    /*[[OTAddressBookService new] readWithResultBlock:^(NSArray *results) {
+    [[OTMessagingService new] readWithResultBlock:^(NSArray *results) {
         [self.dataSource updateItems:results];
-        [self.tblContacts reloadData];
+        [self.tblChat reloadData];
         [SVProgressHUD dismiss];
-    }];*/
+    }];
 }
 
 #pragma mark - navigation
