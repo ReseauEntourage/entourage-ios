@@ -9,6 +9,11 @@
 #import "OTMessagingService.h"
 #import "OTFeedItemFactory.h"
 #import "OTMessagingDelegate.h"
+//testing
+#import "OTFeedItemMessage.h"
+#import "OTFeedItemJoiner.h"
+#import "NSUserDefaults+OT.h"
+#import "OTUser.h"
 
 @implementation OTMessagingService
 

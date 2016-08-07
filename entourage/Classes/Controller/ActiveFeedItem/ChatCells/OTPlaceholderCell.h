@@ -1,13 +1,13 @@
 //
-//  OTMessageDataSourceBehavior.m
+//  OTPlaceholderCell.h
 //  entourage
 //
 //  Created by sergiu buceac on 8/7/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTMessageDataSourceBehavior.h"
+#import "OTChatCellBase.h"
 
-@implementation OTMessageDataSourceBehavior
+@interface OTPlaceholderCell : OTChatCellBase
 
 @end
