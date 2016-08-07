@@ -61,8 +61,7 @@
             NSArray *allExceptCurrentUser = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
                 return ![item.uID isEqual:currentUserId];
             }]];
-#warning replace items with allExceptCurrentUser, kept only for testing since i can't join with simulators
-            success(items);
+            success(allExceptCurrentUser);
         }
     } failure:^(NSError *error) {
         NSLog(@"GET TOUR JOINSErr: %@", error.description);
