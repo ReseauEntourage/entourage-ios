@@ -10,15 +10,21 @@
 #import "OTDataSourceBehavior.h"
 #import "OTFeedItemTimelinePoint.h"
 #import "OTFeedItemMessage.h"
+#import "OTFeedItemJoiner.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
+#import "OTFeedItem.h"
 
+#define MESSAGE_FONT_REGULAR_DESCRIPTION @"SFUIText-Regular"
+#define MESSAGE_FONT_SIZE 17
+#define JOIN_REQUESTED_CELL_HEIGHT 295
+#define JOIN_ACCEPTED_CELL_HEIGHT 290
+#define JOIN_REFUSED_CELL_HEIGHT 290
+// Sergiu: sorry for these next terrible hardcoded constants
 #define MESSAGE_CELL_SENT_HORIZONTAL_MARGINS 111.0f
 #define MESSAGE_CELL_SENT_VERTICAL_MARGINS 43.0f
 #define MESSAGE_CELL_RECEIVED_HORIZONTAL_MARGINS 158.0f
 #define MESSAGE_CELL_RECEIVED_VERTICAL_MARGINS 54.0f
-#define MESSAGE_FONT_REGULAR_DESCRIPTION @"SFUIText-Regular"
-#define MESSAGE_FONT_SIZE 17
 
 @interface OTMessageTableDataSourceBehavior () <UITableViewDelegate>
 
@@ -42,6 +48,8 @@
     OTFeedItemTimelinePoint *item = (OTFeedItemTimelinePoint *)[self getItemAtIndexPath:indexPath];
     if([item class] == [OTFeedItemMessage class])
         return [self heightForMessageCell:(OTFeedItemMessage *)item];
+    else if([item class] == [OTFeedItemJoiner class])
+        return [self heightForJoinerCell:(OTFeedItemJoiner *)item];
     return 60;
 }
 
@@ -56,6 +64,12 @@
     CGFloat verticalMargins = [self.currentUser.sid isEqual:message.uID] ? MESSAGE_CELL_SENT_VERTICAL_MARGINS : MESSAGE_CELL_RECEIVED_VERTICAL_MARGINS;
     height += verticalMargins;
     return height;
+}
+
+- (CGFloat)heightForJoinerCell:(OTFeedItemJoiner *)joiner {
+    //if([joiner.status isEqualToString:JOIN_PENDING])
+        return 290;
+    return 60;
 }
 
 @end

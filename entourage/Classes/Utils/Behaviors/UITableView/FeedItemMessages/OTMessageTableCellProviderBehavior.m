@@ -11,6 +11,7 @@
 #import "OTFeedItemTimelinePoint.h"
 #import "OTChatCellBase.h"
 #import "OTFeedItemMessage.h"
+#import "OTFeedItemJoiner.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 
@@ -33,6 +34,8 @@
         OTFeedItemMessage *msgTimeline = (OTFeedItemMessage *)timelinePoint;
         return [msgTimeline.uID isEqual:userId] ? @"MessageSentCell" : @"MessageReceivedCell";
     }
+    else if ([timelinePoint class] == [OTFeedItemJoiner class])
+        return @"JoinRequestedCell";
     return @"PlaceholderCell";
 }
 
