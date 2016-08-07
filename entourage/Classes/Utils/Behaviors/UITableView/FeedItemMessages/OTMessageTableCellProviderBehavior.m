@@ -8,12 +8,10 @@
 
 #import "OTMessageTableCellProviderBehavior.h"
 #import "OTDataSourceBehavior.h"
+#import "OTMessageTableDataSourceBehavior.h"
 #import "OTFeedItemTimelinePoint.h"
 #import "OTChatCellBase.h"
-#import "OTFeedItemMessage.h"
-#import "OTFeedItemJoiner.h"
-#import "NSUserDefaults+OT.h"
-#import "OTUser.h"
+#import "MessageCellType.h"
 
 @implementation OTMessageTableCellProviderBehavior
 
@@ -29,14 +27,17 @@
 #pragma mark - private methods
 
 - (NSString *)getReuseIdentifier:(OTFeedItemTimelinePoint *)timelinePoint {
-    NSNumber *userId = [NSUserDefaults standardUserDefaults].currentUser.sid;
-    if([timelinePoint class] == [OTFeedItemMessage class]) {
-        OTFeedItemMessage *msgTimeline = (OTFeedItemMessage *)timelinePoint;
-        return [msgTimeline.uID isEqual:userId] ? @"MessageSentCell" : @"MessageReceivedCell";
+    MessageCellType cellType = [(OTMessageTableDataSourceBehavior *)self.tableDataSource getCellType:timelinePoint];
+    switch (cellType) {
+        case MessageCellTypeSent:
+            return @"MessageSentCell";
+        case MessageCellTypeReceived:
+            return @"MessageReceivedCell";
+        case MessageCellTypeJoinRequested:
+            return @"JoinRequestedCell";
+        default:
+            return @"PlaceholderCell";
     }
-    else if ([timelinePoint class] == [OTFeedItemJoiner class])
-        return @"JoinRequestedCell";
-    return @"PlaceholderCell";
 }
 
 @end

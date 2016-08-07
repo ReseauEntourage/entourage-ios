@@ -18,6 +18,7 @@
 #import "OTTapViewBehavior.h"
 #import "OTDataSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
+#import "OTMessageTableDelegateBehavior.h"
 #import "OTFeedItemMessage.h"
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
@@ -33,6 +34,7 @@
 @property (strong, nonatomic) IBOutlet OTTapViewBehavior *titleTapBehavior;
 @property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
+@property (strong, nonatomic) IBOutlet OTMessageTableDelegateBehavior *tableDelegate;
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
 
@@ -50,6 +52,7 @@
     [self.titleTapBehavior initialize];
     [self.dataSource initialize];
     [self.tableDataSource initialize];
+    [self.tableDelegate initialize];
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];

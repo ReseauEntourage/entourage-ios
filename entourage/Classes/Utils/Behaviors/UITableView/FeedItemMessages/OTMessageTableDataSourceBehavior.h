@@ -7,7 +7,11 @@
 //
 
 #import "OTTableDataSourceBehavior.h"
+#import "MessageCellType.h"
+#import "OTFeedItemTimelinePoint.h"
 
 @interface OTMessageTableDataSourceBehavior : OTTableDataSourceBehavior
+
+- (MessageCellType)getCellType:(OTFeedItemTimelinePoint *)timelinePoint;
 
 @end

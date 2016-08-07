@@ -11,7 +11,7 @@
 @implementation OTPlaceholderCell
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
-    self.textLabel.text = [NSString stringWithFormat:@"%@", timelinePoint.date];
+    self.textLabel.text = @"Invalid";
 }
 
 @end
