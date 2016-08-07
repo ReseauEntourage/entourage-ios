@@ -7,7 +7,18 @@
 //
 
 #import "OTMessageTableCellProviderBehavior.h"
+#import "OTMessageDataSourceBehavior.h"
+#import "OTFeedItemTimelinePoint.h"
 
 @implementation OTMessageTableCellProviderBehavior
+
+- (UITableViewCell *)getTableViewCellForPath:(NSIndexPath *)indexPath {
+    OTFeedItemTimelinePoint *timelinePoint = [self.tableDataSource getItemAtIndexPath:indexPath];
+
+    UITableViewCell *cell = [self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", timelinePoint.date];
+    
+    return cell;
+}
 
 @end

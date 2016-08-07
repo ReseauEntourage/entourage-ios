@@ -8,6 +8,8 @@
 
 #import "OTTourMessaging.h"
 #import "OTTourService.h"
+#import "NSUserDefaults+OT.h"
+#import "OTUser.h"
 
 @implementation OTTourMessaging
 
@@ -46,6 +48,36 @@
             success(items);
     } failure:^(NSError *error) {
         NSLog(@"GET TOUR MESSAGESErr: %@", error.description);
+        if(failure)
+            failure(error);
+    }];
+}
+
+- (void)getJoinRequestsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    [[OTTourService new] tourUsersJoins:self.tour success:^(NSArray *items) {
+        NSLog(@"GET TOUR JOINS");
+        if(success) {
+            NSNumber *currentUserId = [NSUserDefaults standardUserDefaults].currentUser.sid;
+            NSArray *allExceptCurrentUser = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
+                return ![item.uID isEqual:currentUserId];
+            }]];
+#warning replace items with allExceptCurrentUser, kept only for testing since i can't join with simulators
+            success(items);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"GET TOUR JOINSErr: %@", error.description);
+        if(failure)
+            failure(error);
+    }];
+}
+
+- (void)getEncountersWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    [[OTTourService new] tourEncounters:self.tour success:^(NSArray *items) {
+        NSLog(@"GET TOUR ENCOUNTERS");
+        if(success)
+            success(items);
+    } failure:^(NSError *error) {
+        NSLog(@"GET TOUR ENCOUNTERSErr: %@", error.description);
         if(failure)
             failure(error);
     }];

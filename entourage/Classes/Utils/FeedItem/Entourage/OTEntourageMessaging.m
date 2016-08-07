@@ -59,4 +59,14 @@
     }];
 }
 
+- (void)getJoinRequestsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    if(success)
+        success([NSArray new]);
+}
+
+- (void)getEncountersWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    if(success)
+        success([NSArray new]);
+}
+
 @end

@@ -15,5 +15,7 @@
 - (void)invitePhones:(NSArray *)phones withSuccess:(void (^)())success orFailure:(void (^)(NSError *, NSArray *failedNumbers))failure;
 - (void)sendJoinMessage:(NSString *)message success:(void(^)(OTFeedItemJoiner *))success failure:(void (^)(NSError *)) failure;
 - (void)getMessagesWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
+- (void)getJoinRequestsWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
+- (void)getEncountersWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
 
 @end

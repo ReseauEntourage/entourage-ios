@@ -8,6 +8,7 @@
 
 #import "OTMessagingService.h"
 #import "OTFeedItemFactory.h"
+#import "OTMessagingDelegate.h"
 
 @implementation OTMessagingService
 
@@ -22,14 +23,36 @@
         NSMutableArray *allItems = [NSMutableArray new];
         
         dispatch_group_enter(group);
+        dispatch_group_enter(group);
+        dispatch_group_enter(group);
         
         dispatch_group_notify(group, queue, ^ {
             dispatch_async(dispatch_get_main_queue(), ^{
-                result([allItems sortedArrayUsingSelector:@selector(compare:)]);
+                NSArray *sortedItems = [allItems sortedArrayUsingSelector:@selector(compare:)];
+                result(sortedItems);
             });
         });
         
-        [[[OTFeedItemFactory createFor:feedItem] getMessaging] getMessagesWithSuccess:^(NSArray *items) {
+        id<OTMessagingDelegate> messaging = [[OTFeedItemFactory createFor:feedItem] getMessaging];
+        [messaging getMessagesWithSuccess:^(NSArray *items) {
+            @synchronized (allItems) {
+                [allItems addObjectsFromArray:items];
+            }
+            dispatch_group_leave(group);
+        } failure:^(NSError *error) {
+            dispatch_group_leave(group);
+        }];
+
+        [messaging getJoinRequestsWithSuccess:^(NSArray *items) {
+            @synchronized (allItems) {
+                [allItems addObjectsFromArray:items];
+            }
+            dispatch_group_leave(group);
+        } failure:^(NSError *error) {
+            dispatch_group_leave(group);
+        }];
+
+        [messaging getEncountersWithSuccess:^(NSArray *items) {
             @synchronized (allItems) {
                 [allItems addObjectsFromArray:items];
             }
