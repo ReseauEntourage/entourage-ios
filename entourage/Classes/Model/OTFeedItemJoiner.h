@@ -13,6 +13,8 @@
 @property (strong, nonatomic) NSNumber *uID;
 @property (strong, nonatomic) NSString *displayName;
 @property (strong, nonatomic) NSString *status;
+@property (strong, nonatomic) NSString *message;
+@property (strong, nonatomic) NSString *avatarUrl;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

@@ -11,6 +11,9 @@
 #define kWSKeyID @"id"
 #define kWSKeyDisplayName @"display_name"
 #define kWSKeyRequestedAt @"requested_at"
+#define kWSKeyStatus @"status"
+#define kWSKeyMessage @"message"
+#define kWSKeyAvatarUrl @"avatar_url"
 
 @implementation OTFeedItemJoiner
 
@@ -20,8 +23,11 @@
     if (self)
     {
         self.tag = TimelinePointTagJoiner;
-        _uID = [dictionary valueForKey:kWSKeyID];
-        _displayName = [dictionary valueForKey:kWSKeyDisplayName];
+        self.uID = [dictionary valueForKey:kWSKeyID];
+        self.displayName = [dictionary valueForKey:kWSKeyDisplayName];
+        self.status = [dictionary objectForKey:kWSKeyStatus];
+        self.message = [dictionary objectForKey:kWSKeyMessage];
+        self.avatarUrl = [dictionary objectForKey:kWSKeyAvatarUrl];
         //Java format
         self.date = [dictionary dateForKey:kWSKeyRequestedAt format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
         if (self.date == nil)

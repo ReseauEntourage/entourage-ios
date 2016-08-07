@@ -25,7 +25,9 @@
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
     OTFeedItemJoiner *joiner = (OTFeedItemJoiner *)timelinePoint;
-    [self.btnAvatar setupAsProfilePictureFromUrl:nil withPlaceholder:@"user"];
+    [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl withPlaceholder:@"user"];
+    self.lblUserName.text = joiner.displayName;
+    self.lblMessage.text = joiner.message;
 }
 
 @end

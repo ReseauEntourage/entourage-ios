@@ -12,6 +12,8 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *btnAvatar;
 @property (nonatomic, weak) IBOutlet UIButton *btnIgnore;
+@property (nonatomic, weak) IBOutlet UILabel *lblUserName;
+@property (nonatomic, weak) IBOutlet UILabel *lblMessage;
 @property (nonatomic, weak) IBOutlet UITableView *table;
 
 @end
