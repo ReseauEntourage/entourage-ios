@@ -10,6 +10,8 @@
 
 @interface OTJoinRequestedCell : OTChatCellBase
 
+@property (nonatomic, weak) IBOutlet UIButton *btnAvatar;
 @property (nonatomic, weak) IBOutlet UIButton *btnIgnore;
+@property (nonatomic, weak) IBOutlet UITableView *table;
 
 @end

@@ -14,6 +14,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTFeedItem.h"
+#import "OTChatCellBase.h"
 
 #define MESSAGE_FONT_REGULAR_DESCRIPTION @"SFUIText-Regular"
 #define MESSAGE_FONT_SIZE 17

@@ -197,29 +197,27 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-pG-Yas">
                                                             <rect key="frame" x="0.0" y="0.0" width="188" height="185"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userSmall" translatesAutoresizingMaskIntoConstraints="NO" id="3Wf-Ya-8hQ">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTG-yP-khP">
                                                                     <rect key="frame" x="64" y="15" width="60" height="60"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="60" id="Bbj-Wq-ACh"/>
-                                                                        <constraint firstAttribute="width" constant="60" id="GLg-HP-FY1"/>
+                                                                        <constraint firstAttribute="width" constant="60" id="LsM-OJ-nyx"/>
+                                                                        <constraint firstAttribute="height" constant="60" id="x7q-P9-jc9"/>
                                                                     </constraints>
+                                                                    <state key="normal" image="user"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                             <integer key="value" value="30"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <integer key="value" value="1"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
-                                                                </imageView>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstItem="3Wf-Ya-8hQ" firstAttribute="top" secondItem="ehS-pG-Yas" secondAttribute="top" constant="15" id="56L-Hy-ogS"/>
-                                                                <constraint firstItem="3Wf-Ya-8hQ" firstAttribute="centerX" secondItem="ehS-pG-Yas" secondAttribute="centerX" id="veu-Hv-ipM"/>
+                                                                <constraint firstItem="LTG-yP-khP" firstAttribute="centerX" secondItem="ehS-pG-Yas" secondAttribute="centerX" id="Onl-0A-6wH"/>
+                                                                <constraint firstItem="LTG-yP-khP" firstAttribute="top" secondItem="ehS-pG-Yas" secondAttribute="top" constant="15" id="ycI-iM-MWD"/>
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3e-X4-SM1">
@@ -275,7 +273,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="btnAvatar" destination="LTG-yP-khP" id="T9A-rL-jb0"/>
                                             <outlet property="btnIgnore" destination="AIs-Hp-qgV" id="fIt-Mj-883"/>
+                                            <outlet property="table" destination="EIv-33-TLG" id="Mo1-gs-IgQ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaceholderCell" textLabel="5XE-Aa-Koi" rowHeight="70" style="IBUITableViewCellStyleDefault" id="fT2-EN-znl" customClass="OTPlaceholderCell">
@@ -721,7 +721,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="14BB09D8-F388-4DA5-8986-DA94043DEF2B" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="8EFC149C-BF0D-4A9D-B5D2-271A9378F7F8" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
@@ -1012,7 +1012,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="14BB09D8-F388-4DA5-8986-DA94043DEF2B" width="48" height="48">
+        <image name="8EFC149C-BF0D-4A9D-B5D2-271A9378F7F8" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1242,6 +1242,7 @@ gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
         <image name="mic" width="26" height="26"/>
         <image name="phoneSquare" width="22" height="22"/>
         <image name="plus" width="22" height="22"/>
+        <image name="user" width="100" height="100"/>
         <image name="userSmall" width="35" height="35"/>
         <image name="whiteClose" width="22" height="22"/>
     </resources>
