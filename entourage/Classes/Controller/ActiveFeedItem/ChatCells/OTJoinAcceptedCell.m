@@ -22,7 +22,7 @@
 
 - (NSAttributedString *)getLabelText:(NSString *)userName {
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:userName attributes:@{NSForegroundColorAttributeName: [UIColor appOrangeColor]}];
-    NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:OTLocalizedString(@"join_user_message") attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
+    NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:OTLocalizedString(@"user_joined_tour") attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
     NSMutableAttributedString *nameInfoAttrString = nameAttrString.mutableCopy;
     [nameInfoAttrString appendAttributedString:infoAttrString];
     return nameInfoAttrString;

@@ -39,6 +39,8 @@
             return @"JoinRequestedCell";
         case MessageCellTypeStatus:
             return @"StatusCell";
+        case MessageCellTypeEncounter:
+            return @"EncounterCell";
         default:
             return @"PlaceholderCell";
     }
