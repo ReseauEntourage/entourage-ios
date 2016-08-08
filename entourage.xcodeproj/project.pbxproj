@@ -49,6 +49,7 @@
 		1E06FDD51D578B2600370F4F /* OTJoinRequestedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E06FDD41D578B2600370F4F /* OTJoinRequestedCell.m */; };
 		1E07AD611D565C1F00466FB7 /* OTNextStatusButtonBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E07AD601D565C1F00466FB7 /* OTNextStatusButtonBehavior.m */; };
 		1E07AD641D5667E400466FB7 /* OTStatusChangedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E07AD631D5667E400466FB7 /* OTStatusChangedBehavior.m */; };
+		1E07DA361D58FB9A003119CC /* OTMessageDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E07DA351D58FB9A003119CC /* OTMessageDataSourceBehavior.m */; };
 		1E0972B41D54B797006E1FAD /* OTJoinBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972B31D54B797006E1FAD /* OTJoinBehavior.m */; };
 		1E0972BD1D55541E006E1FAD /* OTInviteByPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972B61D55541E006E1FAD /* OTInviteByPhoneViewController.m */; };
 		1E0972BE1D55541E006E1FAD /* OTInviteContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972B81D55541E006E1FAD /* OTInviteContactsViewController.m */; };
@@ -327,6 +328,8 @@
 		1E07AD601D565C1F00466FB7 /* OTNextStatusButtonBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTNextStatusButtonBehavior.m; path = Behaviors/FeedItems/OTNextStatusButtonBehavior.m; sourceTree = "<group>"; };
 		1E07AD621D5667E400466FB7 /* OTStatusChangedBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTStatusChangedBehavior.h; path = Behaviors/FeedItems/OTStatusChangedBehavior.h; sourceTree = "<group>"; };
 		1E07AD631D5667E400466FB7 /* OTStatusChangedBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTStatusChangedBehavior.m; path = Behaviors/FeedItems/OTStatusChangedBehavior.m; sourceTree = "<group>"; };
+		1E07DA341D58FB9A003119CC /* OTMessageDataSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMessageDataSourceBehavior.h; path = Behaviors/UITableView/FeedItemMessages/OTMessageDataSourceBehavior.h; sourceTree = "<group>"; };
+		1E07DA351D58FB9A003119CC /* OTMessageDataSourceBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMessageDataSourceBehavior.m; path = Behaviors/UITableView/FeedItemMessages/OTMessageDataSourceBehavior.m; sourceTree = "<group>"; };
 		1E0972B21D54B797006E1FAD /* OTJoinBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTJoinBehavior.h; path = Behaviors/FeedItems/OTJoinBehavior.h; sourceTree = "<group>"; };
 		1E0972B31D54B797006E1FAD /* OTJoinBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTJoinBehavior.m; path = Behaviors/FeedItems/OTJoinBehavior.m; sourceTree = "<group>"; };
 		1E0972B51D55541E006E1FAD /* OTInviteByPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTInviteByPhoneViewController.h; path = ActiveFeedItem/OTInviteByPhoneViewController.h; sourceTree = "<group>"; };
@@ -792,6 +795,8 @@
 				1E0991421D57EA72000A19CA /* MessageCellType.h */,
 				1E0991431D57EDF9000A19CA /* OTMessageTableDelegateBehavior.h */,
 				1E0991441D57EDF9000A19CA /* OTMessageTableDelegateBehavior.m */,
+				1E07DA341D58FB9A003119CC /* OTMessageDataSourceBehavior.h */,
+				1E07DA351D58FB9A003119CC /* OTMessageDataSourceBehavior.m */,
 			);
 			name = FeedItemMessages;
 			sourceTree = "<group>";
@@ -1977,6 +1982,7 @@
 				1E0669561D5630F500EB58B7 /* OTChangeStateViewController.m in Sources */,
 				1E06B8EB1D58B8C6008B20F4 /* OTJoinAcceptedCell.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
+				1E07DA361D58FB9A003119CC /* OTMessageDataSourceBehavior.m in Sources */,
 				1E488E201D4FBA4D00A2E5B0 /* OTUserPictureViewController.m in Sources */,
 				1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */,
 				45E37E5F1CEF4D60005C3175 /* OTFeedItemSummaryView.m in Sources */,

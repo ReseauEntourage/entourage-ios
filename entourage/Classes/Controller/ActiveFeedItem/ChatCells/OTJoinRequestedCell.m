@@ -9,6 +9,7 @@
 #import "OTJoinRequestedCell.h"
 #import "OTFeedItemJoiner.h"
 #import "UIButton+entourage.h"
+#import "OTTableDataSourceBehavior.h"
 
 // Sergiu : again apologies for magic numbers (i hate ios tables with autolayout)
 #define BUTTON_MARGIN 144
@@ -17,7 +18,7 @@
 
 - (void)awakeFromNib {
     CAShapeLayer * maskLayer = [CAShapeLayer layer];
-    CGRect bounds = CGRectMake(0, 0, self.table.contentSize.width - BUTTON_MARGIN, self.btnIgnore.bounds.size.height);
+    CGRect bounds = CGRectMake(0, 0, self.dataSource.tableView.contentSize.width - BUTTON_MARGIN, self.btnIgnore.bounds.size.height);
     maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: bounds byRoundingCorners: UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii: (CGSize){7.0, 7.0}].CGPath;
     self.btnIgnore.layer.mask = maskLayer;
     self.btnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -28,6 +29,23 @@
     [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl withPlaceholder:@"user"];
     self.lblUserName.text = joiner.displayName;
     self.lblMessage.text = joiner.message;
+}
+
+- (IBAction)acceptJoin {
+    OTFeedItemJoiner *joiner = [self getJoiner];
+    [self.dataSource acceptJoin:joiner];
+}
+
+- (IBAction)rejectJoin {
+    OTFeedItemJoiner *joiner = [self getJoiner];
+    [self.dataSource rejectJoin:joiner];
+}
+
+#pragma mark - private methods
+
+- (OTFeedItemJoiner *)getJoiner {
+    NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
+    return [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
 }
 
 @end
