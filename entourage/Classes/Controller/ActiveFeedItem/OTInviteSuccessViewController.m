@@ -16,7 +16,7 @@
     [self performSelector:@selector(close) withObject:nil afterDelay:5];
 }
 
-- (IBAction)close {
+- (void)close {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

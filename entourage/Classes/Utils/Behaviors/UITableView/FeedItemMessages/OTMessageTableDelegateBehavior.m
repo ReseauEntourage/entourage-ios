@@ -41,6 +41,7 @@
             return [self heightForSentMessageCell:(OTFeedItemMessage *)item];
         case MessageCellTypeReceived:
             return [self heightForReceivedMessageCell:(OTFeedItemMessage *)item];
+        case MessageCellTypeJoinAccepted:
         case MessageCellTypeJoinRequested:
             return 290;
         default:

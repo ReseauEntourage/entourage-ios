@@ -33,6 +33,7 @@
             return @"MessageSentCell";
         case MessageCellTypeReceived:
             return @"MessageReceivedCell";
+        case MessageCellTypeJoinAccepted:
         case MessageCellTypeJoinRequested:
             return @"JoinRequestedCell";
         default:
