@@ -197,7 +197,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="L2Y-m3-WnX" kind="show" id="97z-hL-YL1"/>
+                                    <segue destination="8Pa-2W-O1j" kind="show" id="Ero-QB-FZZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwv-HX-aYM">
@@ -307,7 +307,7 @@
                 <viewControllerPlaceholder storyboardName="Onboarding" id="L2Y-m3-WnX" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8wo-ND-4Se" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-222.5" y="-2071"/>
+            <point key="canvasLocation" x="92.5" y="-1785"/>
         </scene>
         <!--UserProfileDetails-->
         <scene sceneID="ET2-x3-THH">
@@ -710,10 +710,118 @@ saisissez votre numéro de portable.</string>
             </objects>
             <point key="canvasLocation" x="1037" y="-2471"/>
         </scene>
+        <!--Welcome View Controller-->
+        <scene sceneID="Jxm-X1-QSd">
+            <objects>
+                <viewController id="8Pa-2W-O1j" customClass="OTWelcomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UIV-Pr-4Jl"/>
+                        <viewControllerLayoutGuide type="bottom" id="b9i-3f-AXD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UBK-61-6SC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vj-nj-f39">
+                                <rect key="frame" x="8" y="502" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="3Rr-Dv-wJQ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="5YA-hm-50D"/>
+                                    <constraint firstAttribute="height" constant="50" id="gJu-o6-9Id"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Commencer">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5YA-hm-50D"/>
+                                        <exclude reference="3Rr-Dv-wJQ"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <segue destination="L2Y-m3-WnX" kind="show" id="odA-o2-sLF"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhiteEntourage" translatesAutoresizingMaskIntoConstraints="NO" id="3bR-VB-ndO">
+                                <rect key="frame" x="12" y="40" width="56" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="Gkr-wf-kKF"/>
+                                    <constraint firstAttribute="width" constant="56" id="gfc-8b-6ES"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEZ-Ma-DdB">
+                                <rect key="frame" x="12" y="112" width="225" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="QBu-os-BWi"/>
+                                    <constraint firstAttribute="width" constant="225" id="aXm-Gp-NSQ"/>
+                                </constraints>
+                                <string key="text">Bienvenue
+sur Entourage.</string>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <webView contentMode="scaleToFill" allowsInlineMediaPlayback="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5g-y1-uZm">
+                                <rect key="frame" x="8" y="192" width="304" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="Lbs-tb-gYn"/>
+                                </constraints>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8Pa-2W-O1j" id="ScT-6L-zWD"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="6go-Mk-4bj"/>
+                            <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="CSS-GK-sBy"/>
+                            <constraint firstItem="z5g-y1-uZm" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="GQk-g8-bXy"/>
+                            <constraint firstItem="3bR-VB-ndO" firstAttribute="top" secondItem="UIV-Pr-4Jl" secondAttribute="bottom" constant="20" id="H6V-od-O8V"/>
+                            <constraint firstItem="eEZ-Ma-DdB" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-4" id="Mw2-fa-gi8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="NLy-4P-qnF"/>
+                            <constraint firstItem="eEZ-Ma-DdB" firstAttribute="top" secondItem="3bR-VB-ndO" secondAttribute="bottom" constant="16" id="UXb-Bi-SHI"/>
+                            <constraint firstItem="b9i-3f-AXD" firstAttribute="top" secondItem="8vj-nj-f39" secondAttribute="bottom" constant="16" id="Uqf-gC-b3e"/>
+                            <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="bat-wy-8tV"/>
+                            <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="de5-df-YMd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="epV-sA-DPi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="z5g-y1-uZm" secondAttribute="trailing" constant="-8" id="f9D-HU-8EE"/>
+                            <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="fWs-Tx-8bC"/>
+                            <constraint firstItem="3bR-VB-ndO" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-4" id="o5d-uy-4s9"/>
+                            <constraint firstItem="z5g-y1-uZm" firstAttribute="top" secondItem="eEZ-Ma-DdB" secondAttribute="bottom" constant="8" id="oZP-Eh-UQB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="tLT-p6-FQf"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="CSS-GK-sBy"/>
+                                <exclude reference="6go-Mk-4bj"/>
+                                <exclude reference="fWs-Tx-8bC"/>
+                                <exclude reference="NLy-4P-qnF"/>
+                                <exclude reference="tLT-p6-FQf"/>
+                                <exclude reference="de5-df-YMd"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="3Xs-Xs-bSI"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="startButton" destination="8vj-nj-f39" id="VvH-Ku-awV"/>
+                        <outlet property="webView" destination="z5g-y1-uZm" id="MpR-ku-ydz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KCo-dz-5Yp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-223" y="-1785"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bg" width="166" height="296"/>
         <image name="entourageLogo" width="75" height="75"/>
+        <image name="logoWhiteEntourage" width="56" height="56"/>
         <image name="whitePhone" width="56" height="57"/>
     </resources>
 </document>

@@ -45,11 +45,18 @@
                                              selector:@selector(showKeyboard:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
+    [self loadCurrentData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.emailTextField becomeFirstResponder];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+
+- (void)loadCurrentData {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if(currentUser)
+        self.emailTextField.text = currentUser.email;
 }
 
 - (IBAction)doContinue {
