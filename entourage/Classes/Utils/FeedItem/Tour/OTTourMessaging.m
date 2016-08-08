@@ -31,18 +31,6 @@
     // NOT IN THS VERSION (maybe 2.0)
 }
 
-- (void)sendJoinMessage:(NSString *)message success:(void (^)(OTFeedItemJoiner *))success failure:(void (^)(NSError *))failure {
-    [[OTTourService new] joinMessageTour:self.tour message:message success:^(OTFeedItemJoiner *joiner) {
-            NSLog(@"JOIN MESSAGE %@", message);
-            if(success)
-                success(joiner);
-        } failure:^(NSError *error) {
-            NSLog(@"JOIN MESSAGEerr: %@", error.description);
-            if(failure)
-                failure(error);
-    }];
-}
-
 - (void)getMessagesWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
     [[OTTourService new] tourMessages:self.tour success:^(NSArray *items) {
         NSLog(@"GET TOUR MESSAGES");

@@ -35,6 +35,8 @@
         [messaging getJoinRequestsWithSuccess:^(NSArray *items) {
             if([items count] > 0)
                 @synchronized (allItems) {
+                    for(OTFeedItemJoiner *joiner in items)
+                        joiner.feedItem = feedItem;
                     [allItems addObjectsFromArray:items];
                     [self sendItems:allItems toSource:dataSource];
                 }

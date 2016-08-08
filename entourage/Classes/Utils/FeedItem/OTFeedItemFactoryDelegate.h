@@ -13,6 +13,7 @@
 #import "OTMessagingDelegate.h"
 #import "OTUIDelegate.h"
 #import "OTMapHandlerDelegate.h"
+#import "OTJoinerDelegate.h"
 
 @protocol OTFeedItemFactoryDelegate <NSObject>
 
@@ -22,5 +23,6 @@
 - (id<OTMessagingDelegate>)getMessaging;
 - (id<OTUIDelegate>)getUI;
 - (id<OTMapHandlerDelegate>)getMapHandler;
+- (id<OTJoinerDelegate>)getJoiner;
 
 @end

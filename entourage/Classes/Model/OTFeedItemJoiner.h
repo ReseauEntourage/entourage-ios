@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "OTFeedItemTimelinePoint.h"
+#import "OTFeedItem.h"
 
 @interface OTFeedItemJoiner : OTFeedItemTimelinePoint
 
@@ -15,6 +16,7 @@
 @property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) NSString *message;
 @property (strong, nonatomic) NSString *avatarUrl;
+@property (strong, nonatomic) OTFeedItem *feedItem;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)arrayForWebservice:(NSArray *)joiners;

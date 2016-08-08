@@ -39,18 +39,6 @@
     }];
 }
 
-- (void)sendJoinMessage:(NSString *)message success:(void (^)(OTFeedItemJoiner *))success failure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] joinMessageEntourage:self.entourage message:message success:^(OTFeedItemJoiner *joiner) {
-        NSLog(@"JOIN MESSAGE %@", message);
-        if(success)
-            success(joiner);
-    } failure:^(NSError *error) {
-        NSLog(@"JOIN MESSAGEerr: %@", error.description);
-        if(failure)
-            failure(error);
-    }];
-}
-
 - (void)getMessagesWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
     [[OTEntourageService new] entourageMessagesForEntourage:self.entourage.uid WithSuccess:^(NSArray *items) {
         NSLog(@"GET ENTOURAGE MESSAGES");

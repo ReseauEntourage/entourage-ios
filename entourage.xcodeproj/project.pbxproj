@@ -50,6 +50,8 @@
 		1E07AD611D565C1F00466FB7 /* OTNextStatusButtonBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E07AD601D565C1F00466FB7 /* OTNextStatusButtonBehavior.m */; };
 		1E07AD641D5667E400466FB7 /* OTStatusChangedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E07AD631D5667E400466FB7 /* OTStatusChangedBehavior.m */; };
 		1E07DA361D58FB9A003119CC /* OTMessageDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E07DA351D58FB9A003119CC /* OTMessageDataSourceBehavior.m */; };
+		1E07DA3E1D590410003119CC /* OTTourJoinerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E07DA3D1D590410003119CC /* OTTourJoinerDelegate.m */; };
+		1E07DA411D590433003119CC /* OTEntourageJoinerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E07DA401D590433003119CC /* OTEntourageJoinerDelegate.m */; };
 		1E0972B41D54B797006E1FAD /* OTJoinBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972B31D54B797006E1FAD /* OTJoinBehavior.m */; };
 		1E0972BD1D55541E006E1FAD /* OTInviteByPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972B61D55541E006E1FAD /* OTInviteByPhoneViewController.m */; };
 		1E0972BE1D55541E006E1FAD /* OTInviteContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972B81D55541E006E1FAD /* OTInviteContactsViewController.m */; };
@@ -330,6 +332,11 @@
 		1E07AD631D5667E400466FB7 /* OTStatusChangedBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTStatusChangedBehavior.m; path = Behaviors/FeedItems/OTStatusChangedBehavior.m; sourceTree = "<group>"; };
 		1E07DA341D58FB9A003119CC /* OTMessageDataSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMessageDataSourceBehavior.h; path = Behaviors/UITableView/FeedItemMessages/OTMessageDataSourceBehavior.h; sourceTree = "<group>"; };
 		1E07DA351D58FB9A003119CC /* OTMessageDataSourceBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMessageDataSourceBehavior.m; path = Behaviors/UITableView/FeedItemMessages/OTMessageDataSourceBehavior.m; sourceTree = "<group>"; };
+		1E07DA3B1D59038E003119CC /* OTJoinerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTJoinerDelegate.h; sourceTree = "<group>"; };
+		1E07DA3C1D590410003119CC /* OTTourJoinerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourJoinerDelegate.h; sourceTree = "<group>"; };
+		1E07DA3D1D590410003119CC /* OTTourJoinerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourJoinerDelegate.m; sourceTree = "<group>"; };
+		1E07DA3F1D590433003119CC /* OTEntourageJoinerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageJoinerDelegate.h; sourceTree = "<group>"; };
+		1E07DA401D590433003119CC /* OTEntourageJoinerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageJoinerDelegate.m; sourceTree = "<group>"; };
 		1E0972B21D54B797006E1FAD /* OTJoinBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTJoinBehavior.h; path = Behaviors/FeedItems/OTJoinBehavior.h; sourceTree = "<group>"; };
 		1E0972B31D54B797006E1FAD /* OTJoinBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTJoinBehavior.m; path = Behaviors/FeedItems/OTJoinBehavior.m; sourceTree = "<group>"; };
 		1E0972B51D55541E006E1FAD /* OTInviteByPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTInviteByPhoneViewController.h; path = ActiveFeedItem/OTInviteByPhoneViewController.h; sourceTree = "<group>"; };
@@ -1044,6 +1051,7 @@
 				1ECDBC661D3D354000DD87B2 /* OTMessagingDelegate.h */,
 				1E78B7EA1D513DE10008C00E /* OTUIDelegate.h */,
 				1ECFB3661D52569800722DAC /* OTMapHandlerDelegate.h */,
+				1E07DA3B1D59038E003119CC /* OTJoinerDelegate.h */,
 			);
 			path = FeedItem;
 			sourceTree = "<group>";
@@ -1063,6 +1071,8 @@
 				1E78B7EF1D513F0F0008C00E /* OTEntourageUI.m */,
 				1ECFB36A1D52578400722DAC /* OTEntourageMapHandler.h */,
 				1ECFB36B1D52578400722DAC /* OTEntourageMapHandler.m */,
+				1E07DA3F1D590433003119CC /* OTEntourageJoinerDelegate.h */,
+				1E07DA401D590433003119CC /* OTEntourageJoinerDelegate.m */,
 			);
 			path = Entourage;
 			sourceTree = "<group>";
@@ -1082,6 +1092,8 @@
 				1E78B7EC1D513ECA0008C00E /* OTTourUI.m */,
 				1ECFB3671D52570900722DAC /* OTTourMapHandler.h */,
 				1ECFB3681D52570900722DAC /* OTTourMapHandler.m */,
+				1E07DA3C1D590410003119CC /* OTTourJoinerDelegate.h */,
+				1E07DA3D1D590410003119CC /* OTTourJoinerDelegate.m */,
 			);
 			path = Tour;
 			sourceTree = "<group>";
@@ -1972,6 +1984,7 @@
 				1E07AD611D565C1F00466FB7 /* OTNextStatusButtonBehavior.m in Sources */,
 				1E0972C01D55541E006E1FAD /* OTInviteSuccessViewController.m in Sources */,
 				452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */,
+				1E07DA3E1D590410003119CC /* OTTourJoinerDelegate.m in Sources */,
 				1E69CABD1D37B3CC00118E33 /* NSError+message.m in Sources */,
 				1E2F291B1D4BDE9600ABC68A /* OTFilteredDataSourceBehavior.m in Sources */,
 				1E06FDD51D578B2600370F4F /* OTJoinRequestedCell.m in Sources */,
@@ -2049,6 +2062,7 @@
 				1E0991451D57EDF9000A19CA /* OTMessageTableDelegateBehavior.m in Sources */,
 				1E0972C31D555586006E1FAD /* OTInviteBehavior.m in Sources */,
 				45B3F8F61C74F40B00DCF2EC /* OTTourAuthor.m in Sources */,
+				1E07DA411D590433003119CC /* OTEntourageJoinerDelegate.m in Sources */,
 				2EC77E4F1CEDE4BC0031BB67 /* OTEntourageService.m in Sources */,
 				45F4433C1C90B40400DDEBE1 /* OTFeedItemTimelinePoint.m in Sources */,
 				1E0972BD1D55541E006E1FAD /* OTInviteByPhoneViewController.m in Sources */,
