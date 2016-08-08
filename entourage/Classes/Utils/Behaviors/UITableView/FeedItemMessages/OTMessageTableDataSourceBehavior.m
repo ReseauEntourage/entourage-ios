@@ -36,12 +36,7 @@
         return [self.currentUser.sid isEqual:tMessage.uID] ? MessageCellTypeSent : MessageCellTypeReceived;
     } else if([timelinePoint class] == [OTFeedItemJoiner class]) {
         OTFeedItemJoiner * tJoiner = (OTFeedItemJoiner *)timelinePoint;
-        if([tJoiner.status isEqualToString:JOIN_ACCEPTED])
-            return MessageCellTypeJoinAccepted;
-        else if([tJoiner.status isEqualToString:JOIN_REJECTED])
-            return MessageCellTypeJoinRefused;
-        else
-            return MessageCellTypeJoinRequested;
+        return [tJoiner.status isEqualToString:JOIN_ACCEPTED] ? MessageCellTypeJoinAccepted : MessageCellTypeJoinRequested;
     } else if([timelinePoint class] == [OTFeedItemJoiner class])
         return MessageCellTypeEncounter;
     else if([timelinePoint class] == [OTFeedItemStatus class])

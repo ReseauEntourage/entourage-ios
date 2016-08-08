@@ -12,7 +12,6 @@ typedef NS_ENUM(long) {
     MessageCellTypeReceived,
     MessageCellTypeJoinRequested,
     MessageCellTypeJoinAccepted,
-    MessageCellTypeJoinRefused,
     MessageCellTypeEncounter,
     MessageCellTypeStatus
 } MessageCellType;

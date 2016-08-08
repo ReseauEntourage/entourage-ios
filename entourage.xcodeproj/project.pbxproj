@@ -39,6 +39,7 @@
 		1E0669561D5630F500EB58B7 /* OTChangeStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0669551D5630F500EB58B7 /* OTChangeStateViewController.m */; };
 		1E066CF41D5687ED00E5C8BE /* OTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E066CF31D5687ED00E5C8BE /* OTMapViewController.m */; };
 		1E06B8E81D588F63008B20F4 /* OTStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E06B8E71D588F63008B20F4 /* OTStatusCell.m */; };
+		1E06B8EB1D58B8C6008B20F4 /* OTJoinAcceptedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E06B8EA1D58B8C6008B20F4 /* OTJoinAcceptedCell.m */; };
 		1E06FDC61D574D9800370F4F /* OTChatCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E06FDC51D574D9800370F4F /* OTChatCellBase.m */; };
 		1E06FDC91D574E1C00370F4F /* OTMessageSentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E06FDC81D574E1C00370F4F /* OTMessageSentCell.m */; };
 		1E06FDCC1D574EE800370F4F /* OTPaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E06FDCB1D574EE800370F4F /* OTPaddedLabel.m */; };
@@ -305,6 +306,8 @@
 		1E066CF31D5687ED00E5C8BE /* OTMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMapViewController.m; path = ActiveFeedItem/OTMapViewController.m; sourceTree = "<group>"; };
 		1E06B8E61D588F63008B20F4 /* OTStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTStatusCell.h; path = ActiveFeedItem/ChatCells/OTStatusCell.h; sourceTree = "<group>"; };
 		1E06B8E71D588F63008B20F4 /* OTStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTStatusCell.m; path = ActiveFeedItem/ChatCells/OTStatusCell.m; sourceTree = "<group>"; };
+		1E06B8E91D58B8C6008B20F4 /* OTJoinAcceptedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTJoinAcceptedCell.h; path = ActiveFeedItem/ChatCells/OTJoinAcceptedCell.h; sourceTree = "<group>"; };
+		1E06B8EA1D58B8C6008B20F4 /* OTJoinAcceptedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTJoinAcceptedCell.m; path = ActiveFeedItem/ChatCells/OTJoinAcceptedCell.m; sourceTree = "<group>"; };
 		1E06FDC41D574D9800370F4F /* OTChatCellBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTChatCellBase.h; path = ActiveFeedItem/ChatCells/OTChatCellBase.h; sourceTree = "<group>"; };
 		1E06FDC51D574D9800370F4F /* OTChatCellBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTChatCellBase.m; path = ActiveFeedItem/ChatCells/OTChatCellBase.m; sourceTree = "<group>"; };
 		1E06FDC71D574E1C00370F4F /* OTMessageSentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMessageSentCell.h; path = ActiveFeedItem/ChatCells/OTMessageSentCell.h; sourceTree = "<group>"; };
@@ -759,6 +762,8 @@
 				1E06FDD41D578B2600370F4F /* OTJoinRequestedCell.m */,
 				1E06B8E61D588F63008B20F4 /* OTStatusCell.h */,
 				1E06B8E71D588F63008B20F4 /* OTStatusCell.m */,
+				1E06B8E91D58B8C6008B20F4 /* OTJoinAcceptedCell.h */,
+				1E06B8EA1D58B8C6008B20F4 /* OTJoinAcceptedCell.m */,
 			);
 			name = ChatCells;
 			sourceTree = "<group>";
@@ -1965,6 +1970,7 @@
 				2EDFADD71CAE810800B66026 /* OTAboutTableViewCell.m in Sources */,
 				6B4930CD19A773C500DA7EE0 /* OTMainViewController.m in Sources */,
 				1E0669561D5630F500EB58B7 /* OTChangeStateViewController.m in Sources */,
+				1E06B8EB1D58B8C6008B20F4 /* OTJoinAcceptedCell.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
 				1E488E201D4FBA4D00A2E5B0 /* OTUserPictureViewController.m in Sources */,
 				1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */,

@@ -34,6 +34,7 @@
         case MessageCellTypeReceived:
             return @"MessageReceivedCell";
         case MessageCellTypeJoinAccepted:
+            return @"JoinAcceptedCell";
         case MessageCellTypeJoinRequested:
             return @"JoinRequestedCell";
         case MessageCellTypeStatus:

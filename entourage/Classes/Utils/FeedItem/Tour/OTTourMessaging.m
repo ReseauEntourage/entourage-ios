@@ -60,10 +60,10 @@
         NSLog(@"GET TOUR JOINS");
         if(success) {
             NSNumber *currentUserId = [NSUserDefaults standardUserDefaults].currentUser.sid;
-            NSArray *allExceptCurrentUser = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
-                return ![item.uID isEqual:currentUserId];
+            NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
+                return ![item.uID isEqual:currentUserId] && ![item.status isEqualToString:JOIN_REJECTED];
             }]];
-            success(items);
+            success(filteredItems);
         }
     } failure:^(NSError *error) {
         NSLog(@"GET TOUR JOINSErr: %@", error.description);

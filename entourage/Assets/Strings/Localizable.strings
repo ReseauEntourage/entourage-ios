@@ -75,6 +75,7 @@
 "join_to_join" = "Je rejoins";
 "closedItem" = "!Item closed";
 "stoppedItem" = "!Item stopped";
+"join_user_message" = " a rejoint votre maraude.";
 
 // Tour
 "tour_type_bare_hands" = "barehands";
