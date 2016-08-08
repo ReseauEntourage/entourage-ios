@@ -10,6 +10,8 @@
 #import "OTEntourageService.h"
 #import "OTFeedItemStatus.h"
 #import "OTConsts.h"
+#import "NSUserDefaults+OT.h"
+#import "OTUser.h"
 
 @implementation OTEntourageMessaging
 
@@ -62,8 +64,20 @@
 }
 
 - (void)getJoinRequestsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
-    if(success)
-        success([NSArray new]);
+    [[OTEntourageService new] entourageUsersJoins:self.entourage success:^(NSArray *items) {
+        NSLog(@"GET ENTOURAGE JOINS");
+        if(success) {
+            NSNumber *currentUserId = [NSUserDefaults standardUserDefaults].currentUser.sid;
+            NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
+                return ![item.uID isEqual:currentUserId] && ![item.status isEqualToString:JOIN_REJECTED];
+            }]];
+            success(filteredItems);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"GET ENTOURAGE JOINSErr: %@", error.description);
+        if(failure)
+            failure(error);
+    }];
 }
 
 - (void)getEncountersWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {

@@ -17,5 +17,6 @@
 @property (strong, nonatomic) NSString *avatarUrl;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
++ (NSArray *)arrayForWebservice:(NSArray *)joiners;
 
 @end

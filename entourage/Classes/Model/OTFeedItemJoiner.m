@@ -39,4 +39,14 @@
     return self;
 }
 
++ (NSArray *)arrayForWebservice:(NSArray *)joiners {
+    NSMutableArray *result = [NSMutableArray new];
+    for (NSDictionary *joinerDictionary in joiners)
+    {
+        OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc] initWithDictionary:joinerDictionary];
+        [result addObject:joiner];
+    }
+    return result;
+}
+
 @end

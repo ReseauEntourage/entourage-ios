@@ -64,4 +64,8 @@
               success:(void (^)())success
               failure:(void (^)(NSError *error, NSArray *failedNumbers))failure;
 
+- (void)entourageUsersJoins:(OTEntourage *)entourage
+               success:(void (^)(NSArray *))success
+               failure:(void (^)(NSError *))failure;
+
 @end

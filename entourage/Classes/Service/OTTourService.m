@@ -228,27 +228,21 @@ NSString *const kTourPoints = @"tour_points";
                failure:(void (^)(NSError *))failure
 {
 
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
-    
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_feed_item_users", @""), kTours, tour.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
     [[OTHTTPRequestManager sharedInstance]
              GETWithUrl:url
              andParameters:nil
              andSuccess:^(id responseObject)
              {
                  NSDictionary *data = responseObject;
-                 NSArray *joiners = [self usersFromDictionary:data];
-                 
+                 NSArray *joiners = [data objectForKey:kUsers];
                  if (success)
-                 {
-                     success(joiners);
-                 }
+                     success([OTFeedItemJoiner arrayForWebservice:joiners]);
              }
              andFailure:^(NSError *error)
              {
                  if (failure)
-                 {
                      failure(error);
-                 }
              }
      ];
 }
@@ -542,27 +536,6 @@ NSString *const kTourPoints = @"tour_points";
         }
     }
     return tours;
-}
-
-
-
-#pragma mark User Joins
-
-- (NSArray *)usersFromDictionary:(NSDictionary *)data
-{
-    NSMutableArray *joiners = [[NSMutableArray alloc] init];
-    NSArray *joinersDictionaries = [data objectForKey:kUsers];
-    for (NSDictionary *joinerDictionary in joinersDictionaries)
-    {
-        OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc] initWithDictionary:joinerDictionary];
-        [joiners addObject:joiner];
-    }
-    return joiners;
-}
-
-- (OTFeedItemJoiner *)joinerFromDictionary:(NSDictionary *)dictionary
-{
-    return [[OTFeedItemJoiner alloc] initWithDictionary:dictionary];
 }
 
 #pragma mark Chat Messages

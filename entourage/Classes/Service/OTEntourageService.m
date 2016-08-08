@@ -24,6 +24,7 @@
 #pragma mark - Constants
 
 NSString *const kEntourages = @"entourages";
+extern NSString *kUsers;
 
 @implementation OTEntourageService
 
@@ -342,6 +343,25 @@ NSString *const kEntourages = @"entourages";
 #warning TODO - read phones that generated the error if they exist
          if (failure)
              failure(error, nil);
+     }];
+}
+
+- (void)entourageUsersJoins:(OTEntourage *)entourage success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_feed_item_users", @""), kEntourages, entourage.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         NSArray *joiners = [data objectForKey:kUsers];
+         if (success)
+             success([OTFeedItemJoiner arrayForWebservice:joiners]);
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+             failure(error);
      }];
 }
 
