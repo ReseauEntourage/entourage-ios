@@ -10,6 +10,8 @@
 #import "OTTourService.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
+#import "OTFeedItemStatus.h"
+#import "OTConsts.h"
 
 @implementation OTTourMessaging
 
@@ -80,6 +82,25 @@
         if(failure)
             failure(error);
     }];
+}
+
+- (NSArray *)getTimelineStatusMessages {
+    OTFeedItemStatus *start = [OTFeedItemStatus new];
+    start.date = self.tour.creationDate;
+    start.type = OTFeedItemStatusStart;
+    start.status = [NSString stringWithFormat: OTLocalizedString(@"formatter_feed_item_status_ongoing"), [[[OTFeedItemFactory createFor:self.tour] getUI] navigationTitle]];
+    NSDate *now = [NSDate date];
+    start.duration = [now timeIntervalSinceDate:self.tour.creationDate];
+    start.distance = 0;
+    
+    OTFeedItemStatus *end = [OTFeedItemStatus new];
+    end.date = self.tour.endTime;
+    end.type = OTFeedItemStatusEnd;
+    end.status = OTLocalizedString(@"tour_status_completed");
+    end.duration = [self.tour.endTime timeIntervalSinceDate:self.tour.creationDate];
+    end.distance = self.tour.distance.doubleValue;
+    
+    return @[start, end];
 }
 
 @end

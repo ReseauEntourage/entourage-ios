@@ -99,7 +99,7 @@
 "send" = "Envoyer";
 
 "formatter_tour_by" = "Mauraude %@ par ";
-"formatter_tour_status_ongoing" = "%@ en cours";
+"formatter_feed_item_status_ongoing" = "%@ en cours";
 
 "tour_ongoing" = "Maraude en cours";
 "stop" = "Stop";

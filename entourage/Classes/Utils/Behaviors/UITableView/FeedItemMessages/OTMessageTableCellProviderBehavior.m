@@ -36,6 +36,8 @@
         case MessageCellTypeJoinAccepted:
         case MessageCellTypeJoinRequested:
             return @"JoinRequestedCell";
+        case MessageCellTypeStatus:
+            return @"StatusCell";
         default:
             return @"PlaceholderCell";
     }

@@ -38,6 +38,7 @@
 		1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF661DA19E98AAD00045310 /* OTCreateMeetingViewController.m */; };
 		1E0669561D5630F500EB58B7 /* OTChangeStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0669551D5630F500EB58B7 /* OTChangeStateViewController.m */; };
 		1E066CF41D5687ED00E5C8BE /* OTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E066CF31D5687ED00E5C8BE /* OTMapViewController.m */; };
+		1E06B8E81D588F63008B20F4 /* OTStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E06B8E71D588F63008B20F4 /* OTStatusCell.m */; };
 		1E06FDC61D574D9800370F4F /* OTChatCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E06FDC51D574D9800370F4F /* OTChatCellBase.m */; };
 		1E06FDC91D574E1C00370F4F /* OTMessageSentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E06FDC81D574E1C00370F4F /* OTMessageSentCell.m */; };
 		1E06FDCC1D574EE800370F4F /* OTPaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E06FDCB1D574EE800370F4F /* OTPaddedLabel.m */; };
@@ -302,6 +303,8 @@
 		1E0669551D5630F500EB58B7 /* OTChangeStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTChangeStateViewController.m; path = ActiveFeedItem/OTChangeStateViewController.m; sourceTree = "<group>"; };
 		1E066CF21D5687ED00E5C8BE /* OTMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMapViewController.h; path = ActiveFeedItem/OTMapViewController.h; sourceTree = "<group>"; };
 		1E066CF31D5687ED00E5C8BE /* OTMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMapViewController.m; path = ActiveFeedItem/OTMapViewController.m; sourceTree = "<group>"; };
+		1E06B8E61D588F63008B20F4 /* OTStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTStatusCell.h; path = ActiveFeedItem/ChatCells/OTStatusCell.h; sourceTree = "<group>"; };
+		1E06B8E71D588F63008B20F4 /* OTStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTStatusCell.m; path = ActiveFeedItem/ChatCells/OTStatusCell.m; sourceTree = "<group>"; };
 		1E06FDC41D574D9800370F4F /* OTChatCellBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTChatCellBase.h; path = ActiveFeedItem/ChatCells/OTChatCellBase.h; sourceTree = "<group>"; };
 		1E06FDC51D574D9800370F4F /* OTChatCellBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTChatCellBase.m; path = ActiveFeedItem/ChatCells/OTChatCellBase.m; sourceTree = "<group>"; };
 		1E06FDC71D574E1C00370F4F /* OTMessageSentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMessageSentCell.h; path = ActiveFeedItem/ChatCells/OTMessageSentCell.h; sourceTree = "<group>"; };
@@ -754,6 +757,8 @@
 				1E06FDD11D575D6C00370F4F /* OTMessageReceivedCell.m */,
 				1E06FDD31D578B2600370F4F /* OTJoinRequestedCell.h */,
 				1E06FDD41D578B2600370F4F /* OTJoinRequestedCell.m */,
+				1E06B8E61D588F63008B20F4 /* OTStatusCell.h */,
+				1E06B8E71D588F63008B20F4 /* OTStatusCell.m */,
 			);
 			name = ChatCells;
 			sourceTree = "<group>";
@@ -1948,6 +1953,7 @@
 				0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */,
 				1E0972B41D54B797006E1FAD /* OTJoinBehavior.m in Sources */,
 				0A70FA181BFDD69C0080E8EC /* OTToursTableViewController.m in Sources */,
+				1E06B8E81D588F63008B20F4 /* OTStatusCell.m in Sources */,
 				1E07AD611D565C1F00466FB7 /* OTNextStatusButtonBehavior.m in Sources */,
 				1E0972C01D55541E006E1FAD /* OTInviteSuccessViewController.m in Sources */,
 				452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */,

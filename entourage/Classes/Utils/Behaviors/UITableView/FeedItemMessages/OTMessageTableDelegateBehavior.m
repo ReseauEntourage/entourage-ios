@@ -14,7 +14,7 @@
 #define MESSAGE_FONT_SIZE 17
 // Sergiu: sorry for these next terrible hardcoded constants (autolayout ios sucks for cells)
 #define MESSAGE_CELL_SENT_HORIZONTAL_MARGINS 111.0f
-#define MESSAGE_CELL_SENT_VERTICAL_MARGINS 43.0f
+#define MESSAGE_CELL_SENT_VERTICAL_MARGINS 33.0f
 #define MESSAGE_CELL_RECEIVED_HORIZONTAL_MARGINS 158.0f
 #define MESSAGE_CELL_RECEIVED_VERTICAL_MARGINS 54.0f
 
@@ -44,6 +44,8 @@
         case MessageCellTypeJoinAccepted:
         case MessageCellTypeJoinRequested:
             return 290;
+        case MessageCellTypeStatus:
+            return 99;
         default:
             return 60;
     }

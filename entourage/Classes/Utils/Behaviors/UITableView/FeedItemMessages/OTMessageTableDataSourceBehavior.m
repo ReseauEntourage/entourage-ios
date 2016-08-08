@@ -11,6 +11,7 @@
 #import "OTFeedItemTimelinePoint.h"
 #import "OTFeedItemMessage.h"
 #import "OTFeedItemJoiner.h"
+#import "OTFeedItemStatus.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTFeedItem.h"
@@ -43,6 +44,8 @@
             return MessageCellTypeJoinRequested;
     } else if([timelinePoint class] == [OTFeedItemJoiner class])
         return MessageCellTypeEncounter;
+    else if([timelinePoint class] == [OTFeedItemStatus class])
+        return MessageCellTypeStatus;
     return MessageCellTypeNone;
 }
 

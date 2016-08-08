@@ -207,7 +207,7 @@ typedef NS_ENUM(unsigned) {
     tourStartStatus.date = self.feedItem.creationDate;
     tourStartStatus.type = OTFeedItemStatusStart;
     
-    tourStartStatus.status = [NSString stringWithFormat: OTLocalizedString(@"formatter_tour_status_ongoing"), [[[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle] uppercaseString]];
+    tourStartStatus.status = [NSString stringWithFormat: OTLocalizedString(@"formatter_feed_item_status_ongoing"), [[[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle] uppercaseString]];
     NSDate *now = [NSDate date];
     tourStartStatus.duration = [now timeIntervalSinceDate:self.feedItem.creationDate];
     tourStartStatus.distance = 0;

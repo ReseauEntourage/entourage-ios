@@ -17,5 +17,6 @@
 - (void)getMessagesWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
 - (void)getJoinRequestsWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
 - (void)getEncountersWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
+- (NSArray *)getTimelineStatusMessages;
 
 @end

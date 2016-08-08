@@ -8,6 +8,8 @@
 
 #import "OTEntourageMessaging.h"
 #import "OTEntourageService.h"
+#import "OTFeedItemStatus.h"
+#import "OTConsts.h"
 
 @implementation OTEntourageMessaging
 
@@ -67,6 +69,18 @@
 - (void)getEncountersWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
     if(success)
         success([NSArray new]);
+}
+
+- (NSArray *)getTimelineStatusMessages {
+    OTFeedItemStatus *status = [OTFeedItemStatus new];
+    status.date = self.entourage.creationDate;
+    status.type = OTFeedItemStatusStart;
+    status.status = [NSString stringWithFormat: OTLocalizedString(@"formatter_feed_item_status_ongoing"), [[[OTFeedItemFactory createFor:self.entourage] getUI] navigationTitle]];
+    NSDate *now = [NSDate date];
+    status.duration = [now timeIntervalSinceDate:self.entourage.creationDate];
+    status.distance = 0;
+    
+    return @[status];
 }
 
 @end

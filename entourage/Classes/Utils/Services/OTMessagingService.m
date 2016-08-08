@@ -25,7 +25,10 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     dispatch_group_async(group, queue, ^() {
+        id<OTMessagingDelegate> messaging = [[OTFeedItemFactory createFor:feedItem] getMessaging];
+
         NSMutableArray *allItems = [NSMutableArray new];
+        [allItems addObjectsFromArray:[messaging getTimelineStatusMessages]];
         
         dispatch_group_enter(group);
         dispatch_group_enter(group);
@@ -38,7 +41,6 @@
             });
         });
         
-        id<OTMessagingDelegate> messaging = [[OTFeedItemFactory createFor:feedItem] getMessaging];
         [messaging getMessagesWithSuccess:^(NSArray *items) {
             @synchronized (allItems) {
                 [allItems addObjectsFromArray:items];
