@@ -13,7 +13,7 @@
 @implementation OTEntourageStateInfo
 
 - (FeedItemState)getState {
-    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if ([currentUser.sid intValue] == [self.entourage.author.uID intValue]) {
         if ([ENTOURAGE_STATUS_OPEN isEqualToString:self.entourage.status])
             return FeedItemStateOpen;
@@ -34,7 +34,7 @@
 }
 
 - (BOOL)canChangeEditState {
-    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if ([currentUser.sid intValue] == [self.entourage.author.uID intValue])
         return ![self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED];
     else
@@ -48,6 +48,12 @@
 
 - (BOOL)isActive {
     return [self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN];
+}
+
+- (BOOL)isPublic {
+    if([self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED])
+        return YES;
+    return ![self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
 }
 
 @end

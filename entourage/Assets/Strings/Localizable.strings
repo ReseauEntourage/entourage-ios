@@ -73,8 +73,9 @@
 "join_pending" = "Demande en attente";
 "join_rejected" = "Demande rejetée";
 "join_to_join" = "Je rejoins";
-"closedItem" = "!Item closed";
-"stoppedItem" = "!Item stopped";
+"closed_item" = "!Item closed";
+"stopped_item" = "!Item stopped";
+"join_item_failed" = "!Could not join entourage.";
 
 // Tour
 "tour_type_bare_hands" = "barehands";

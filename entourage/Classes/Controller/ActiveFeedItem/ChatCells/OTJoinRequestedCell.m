@@ -32,20 +32,15 @@
 }
 
 - (IBAction)acceptJoin {
-    OTFeedItemJoiner *joiner = [self getJoiner];
-    [self.dataSource acceptJoin:joiner];
+    NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
+    OTFeedItemJoiner *joiner = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
+    [self.dataSource acceptJoin:joiner atPath:indexPath];
 }
 
 - (IBAction)rejectJoin {
-    OTFeedItemJoiner *joiner = [self getJoiner];
-    [self.dataSource rejectJoin:joiner];
-}
-
-#pragma mark - private methods
-
-- (OTFeedItemJoiner *)getJoiner {
     NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
-    return [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
+    OTFeedItemJoiner *joiner = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
+    [self.dataSource rejectJoin:joiner atPath:indexPath];
 }
 
 @end

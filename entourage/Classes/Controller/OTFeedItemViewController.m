@@ -411,7 +411,7 @@ typedef NS_ENUM(unsigned) {
 
 - (void)feedItemFrozen:(OTFeedItem *)item {
     [self dismissViewControllerAnimated:NO completion:^() {
-        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closedItem")];
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closed_item")];
     }];
 }
 

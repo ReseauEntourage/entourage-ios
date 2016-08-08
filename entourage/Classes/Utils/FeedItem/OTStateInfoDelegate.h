@@ -26,5 +26,6 @@ typedef enum {
 - (BOOL)canChangeEditState;
 - (BOOL)canInvite;
 - (BOOL)isActive;
+- (BOOL)isPublic;
 
 @end

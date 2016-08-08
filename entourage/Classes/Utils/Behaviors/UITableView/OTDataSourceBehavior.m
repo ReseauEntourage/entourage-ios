@@ -10,14 +10,14 @@
 
 @interface OTDataSourceBehavior ()
 
-@property (nonatomic, strong) NSArray* items;
+@property (nonatomic, strong) NSMutableArray* items;
 
 @end
 
 @implementation OTDataSourceBehavior
 
 - (void)updateItems:(NSArray *)items {
-    self.items = items;
+    self.items = [NSMutableArray arrayWithArray:items];
 }
 
 @end

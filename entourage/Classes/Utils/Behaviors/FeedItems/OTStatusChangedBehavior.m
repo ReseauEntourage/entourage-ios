@@ -44,14 +44,14 @@
 - (void)stoppedFeedItem {
     [self popToMainController];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"stoppedItem")];
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"stopped_item")];
     });
 }
 
 - (void)closedFeedItem {
     [self popToMainController];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closedItem")];
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closed_item")];
     });
 }
 

@@ -11,7 +11,7 @@
 
 @interface OTMessageDataSourceBehavior : OTDataSourceBehavior
 
-- (void)acceptJoin:(OTFeedItemJoiner *)joiner;
-- (void)rejectJoin:(OTFeedItemJoiner *)joiner;
+- (void)acceptJoin:(OTFeedItemJoiner *)joiner atPath:(NSIndexPath *)path;
+- (void)rejectJoin:(OTFeedItemJoiner *)joiner atPath:(NSIndexPath *)path;
 
 @end

@@ -1103,10 +1103,10 @@ static bool isShowingOptions = NO;
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;
     
-    if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive])
-        [self performSegueWithIdentifier:@"ActiveFeedItemDetailsSegue" sender:self];
-    else
+    if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic])
         [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
+    else
+        [self performSegueWithIdentifier:@"ActiveFeedItemDetailsSegue" sender:self];
 }
 
 - (void)showUserProfile:(NSNumber*)userId {
