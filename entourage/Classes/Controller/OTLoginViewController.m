@@ -83,40 +83,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.validateButton setupHalfRoundedCorners];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-#if DEBUG
-    // Ciprian Public - Staging
-    //self.phoneTextField.text = @"+40723199641";
-//    self.phoneTextField.text = @"+40724591114";
-//    self.phoneTextField.text = @"+40723199642";
-//    self.phoneTextField.text = @"+40724591112";
-    
-    // Ciprian Pro - Prod
-    //self.phoneTextField.text = @"+40740884267";
-    // Br
-    self.phoneTextField.text = @"+40722300942";
-    
-    //Vincent
-    //self.phoneTextField.text = @"0651502173";
-
-    // Ciprian + Mihai
-    // self.phoneTextField.text = @"0623456789";
-
-    // Vasile Pro - Prod
-    //self.phoneTextField.text = @"+40723199641";
-    
-    
-    // Vincent PRO
-    //self.phoneTextField.text = @"+33651502173";
-    
-    // Public Staging
-    //self.phoneTextField.text = @"+40723199642";
-    
-    // JM
-    //self.phoneTextField.text = @"0783601123";
-    self.passwordTextField.text = @"123456";
-    
-#endif
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
 }
 

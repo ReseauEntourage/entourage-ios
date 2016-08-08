@@ -45,9 +45,6 @@
                                              selector:@selector(showKeyboard:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
-#if DEBUG //TARGET_IPHONE_SIMULATOR
-    self.emailTextField.text = @"brindusa.duma@tecknoworks.com";
-#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated {
