@@ -92,14 +92,16 @@
     NSDate *now = [NSDate date];
     start.duration = [now timeIntervalSinceDate:self.tour.creationDate];
     start.distance = 0;
-    
+    start.uID = self.tour.uid;
+
     OTFeedItemStatus *end = [OTFeedItemStatus new];
     end.date = self.tour.endTime;
     end.type = OTFeedItemStatusEnd;
     end.status = OTLocalizedString(@"tour_status_completed");
     end.duration = [self.tour.endTime timeIntervalSinceDate:self.tour.creationDate];
     end.distance = self.tour.distance.doubleValue;
-    
+    end.uID = self.tour.uid;
+
     return @[start, end];
 }
 

@@ -79,6 +79,7 @@
     NSDate *now = [NSDate date];
     status.duration = [now timeIntervalSinceDate:self.entourage.creationDate];
     status.distance = 0;
+    status.uID = self.entourage.uid;
     
     return @[status];
 }

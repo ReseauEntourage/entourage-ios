@@ -18,5 +18,6 @@ typedef NS_ENUM(NSInteger) {
 @property(nonatomic) NSTimeInterval duration;
 @property(nonatomic) CGFloat distance;
 @property(nonatomic) OTFeedItemStatusType type;
+@property(nonatomic, strong) NSNumber *uID;
 
 @end
