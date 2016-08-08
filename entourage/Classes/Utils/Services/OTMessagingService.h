@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "OTFeedItem.h"
+#import "OTDataSourceBehavior.h"
 
 @interface OTMessagingService : NSObject
 
-- (void)readFor:(OTFeedItem *)feedItem withResultBlock:(void (^)(NSArray *))result;
+- (void)readFor:(OTFeedItem *)feedItem onDataSource:(OTDataSourceBehavior *)dataSource;
 
 @end

@@ -9,64 +9,56 @@
 #import "OTMessagingService.h"
 #import "OTFeedItemFactory.h"
 #import "OTMessagingDelegate.h"
-//testing
-#import "OTFeedItemMessage.h"
-#import "OTFeedItemJoiner.h"
-#import "NSUserDefaults+OT.h"
-#import "OTUser.h"
 
 @implementation OTMessagingService
 
-- (void)readFor:(OTFeedItem *)feedItem withResultBlock:(void (^)(NSArray *))result {
-    if(!result)
+- (void)readFor:(OTFeedItem *)feedItem onDataSource:(OTDataSourceBehavior *)dataSource {
+    if(!dataSource)
         return;
     
-    dispatch_group_t group = dispatch_group_create();
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    
-    dispatch_group_async(group, queue, ^() {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         id<OTMessagingDelegate> messaging = [[OTFeedItemFactory createFor:feedItem] getMessaging];
 
         NSMutableArray *allItems = [NSMutableArray new];
         [allItems addObjectsFromArray:[messaging getTimelineStatusMessages]];
-        
-        dispatch_group_enter(group);
-        dispatch_group_enter(group);
-        dispatch_group_enter(group);
-        
-        dispatch_group_notify(group, queue, ^ {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSArray *sortedItems = [allItems sortedArrayUsingSelector:@selector(compare:)];
-                result(sortedItems);
-            });
-        });
+        [self sendItems:allItems toSource:dataSource];
         
         [messaging getMessagesWithSuccess:^(NSArray *items) {
-            @synchronized (allItems) {
-                [allItems addObjectsFromArray:items];
-            }
-            dispatch_group_leave(group);
+            if([items count] > 0)
+                @synchronized (allItems) {
+                    [allItems addObjectsFromArray:items];
+                    [self sendItems:allItems toSource:dataSource];
+                }
         } failure:^(NSError *error) {
-            dispatch_group_leave(group);
         }];
 
         [messaging getJoinRequestsWithSuccess:^(NSArray *items) {
-            @synchronized (allItems) {
-                [allItems addObjectsFromArray:items];
-            }
-            dispatch_group_leave(group);
+            if([items count] > 0)
+                @synchronized (allItems) {
+                    [allItems addObjectsFromArray:items];
+                    [self sendItems:allItems toSource:dataSource];
+                }
         } failure:^(NSError *error) {
-            dispatch_group_leave(group);
         }];
 
         [messaging getEncountersWithSuccess:^(NSArray *items) {
-            @synchronized (allItems) {
-                [allItems addObjectsFromArray:items];
-            }
-            dispatch_group_leave(group);
+            if([items count] > 0)
+                @synchronized (allItems) {
+                    [allItems addObjectsFromArray:items];
+                    [self sendItems:allItems toSource:dataSource];
+                }
         } failure:^(NSError *error) {
-            dispatch_group_leave(group);
         }];
+    });
+}
+
+#pragma mark - private methods
+
+- (void)sendItems:(NSArray *)items toSource:(OTDataSourceBehavior *)source {
+    NSArray *sortedItems = [items sortedArrayUsingSelector:@selector(compare:)];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [source updateItems:sortedItems];
+        [source.tableView reloadData];
     });
 }
 
