@@ -101,13 +101,59 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sIZ-hk-qpn">
+                                <rect key="frame" x="-4" y="135" width="328" height="391"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6O-su-Iph">
+                                <rect key="frame" x="-4" y="526" width="328" height="42"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G53-uu-geo">
+                                        <rect key="frame" x="15" y="11" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="epO-6a-JDX"/>
+                                            <constraint firstAttribute="width" constant="20" id="tOj-Cp-lvk"/>
+                                        </constraints>
+                                        <state key="normal" image="filters"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="3Zk-dT-2bQ"/>
+                                    <constraint firstItem="G53-uu-geo" firstAttribute="centerY" secondItem="N6O-su-Iph" secondAttribute="centerY" id="7Hn-5h-1lg"/>
+                                    <constraint firstItem="G53-uu-geo" firstAttribute="leading" secondItem="N6O-su-Iph" secondAttribute="leading" constant="15" id="fM3-tg-rDs"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qG-8g-Me3">
+                                <rect key="frame" x="234" y="494" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="9Wx-Yq-He0"/>
+                                    <constraint firstAttribute="height" constant="62" id="sTC-W7-ikv"/>
+                                </constraints>
+                                <state key="normal" image="create"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="HbN-lj-jrZ" firstAttribute="leading" secondItem="1km-6s-G4Q" secondAttribute="leadingMargin" constant="-20" id="1iq-aN-XKN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0qG-8g-Me3" secondAttribute="trailing" constant="8" id="2o2-gA-CPf"/>
                             <constraint firstItem="HbN-lj-jrZ" firstAttribute="top" secondItem="hCo-dZ-Q9I" secondAttribute="bottom" id="7uJ-8m-OYp"/>
+                            <constraint firstItem="N6O-su-Iph" firstAttribute="top" secondItem="sIZ-hk-qpn" secondAttribute="bottom" id="AqN-yH-8O5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="N6O-su-Iph" secondAttribute="trailing" constant="-20" id="Jms-Ln-EEN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sIZ-hk-qpn" secondAttribute="trailing" constant="-20" id="KbX-Lb-UYc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HbN-lj-jrZ" secondAttribute="trailing" constant="-20" id="Rq9-bb-ZF2"/>
+                            <constraint firstItem="Ph8-ss-CHi" firstAttribute="top" secondItem="sIZ-hk-qpn" secondAttribute="bottom" constant="50" id="Tuh-BI-nZ8"/>
+                            <constraint firstItem="sIZ-hk-qpn" firstAttribute="leading" secondItem="1km-6s-G4Q" secondAttribute="leadingMargin" constant="-20" id="VWb-9s-plB"/>
+                            <constraint firstItem="sIZ-hk-qpn" firstAttribute="top" secondItem="HbN-lj-jrZ" secondAttribute="bottom" id="Vty-Dp-6el"/>
+                            <constraint firstItem="Ph8-ss-CHi" firstAttribute="top" secondItem="N6O-su-Iph" secondAttribute="bottom" id="ZPp-Ia-0Ps"/>
+                            <constraint firstItem="N6O-su-Iph" firstAttribute="leading" secondItem="1km-6s-G4Q" secondAttribute="leadingMargin" constant="-20" id="ZhN-jN-Oqi"/>
+                            <constraint firstItem="Ph8-ss-CHi" firstAttribute="top" secondItem="0qG-8g-Me3" secondAttribute="bottom" constant="12" id="rtg-s4-Dgt"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Tuh-BI-nZ8"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -137,6 +183,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="create" width="62" height="62"/>
+        <image name="filters" width="22" height="22"/>
         <image name="invitationSquare" width="56" height="56"/>
     </resources>
 </document>
