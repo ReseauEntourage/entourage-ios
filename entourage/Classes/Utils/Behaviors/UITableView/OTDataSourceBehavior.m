@@ -20,4 +20,7 @@
     self.items = [NSMutableArray arrayWithArray:items];
 }
 
+- (void)loadData {
+}
+
 @end

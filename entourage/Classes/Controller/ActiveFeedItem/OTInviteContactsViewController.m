@@ -9,7 +9,6 @@
 #import "OTInviteContactsViewController.h"
 #import "SVProgressHUD.h"
 #import "OTAddressBookItem.h"
-#import "OTAddressBookService.h"
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"
 #import "UIColor+entourage.h"
@@ -39,20 +38,11 @@
     [self.navigationItem setRightBarButtonItem:self.btnSave];
     self.tblContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tblContacts.sectionIndexColor = [UIColor appOrangeColor];
-    [self loadContacts];
+    [self.dataSource loadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-}
-
-- (void)loadContacts {
-    [SVProgressHUD show];
-    [[OTAddressBookService new] readWithResultBlock:^(NSArray *results) {
-        [self.dataSource updateItems:results];
-        [self.tblContacts reloadData];
-        [SVProgressHUD dismiss];
-    }];
 }
 
 #pragma mark - Contacts table view delegate implementation

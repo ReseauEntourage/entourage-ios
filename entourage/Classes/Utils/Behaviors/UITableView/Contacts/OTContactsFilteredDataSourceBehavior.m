@@ -9,6 +9,8 @@
 #import "OTContactsFilteredDataSourceBehavior.h"
 #import "OTAddressBookItem.h"
 #import "OTTableDataSourceBehavior.h"
+#import "SVProgressHUD.h"
+#import "OTAddressBookService.h"
 
 @implementation OTContactsFilteredDataSourceBehavior
 
@@ -27,6 +29,15 @@
 - (void)updateItems:(NSArray *)items {
     [super updateItems:items];
     [self.tableDataSource refresh];
+}
+
+- (void)loadData {
+    [SVProgressHUD show];
+    [[OTAddressBookService new] readWithResultBlock:^(NSArray *results) {
+        [self updateItems:results];
+        [self.tableView reloadData];
+        [SVProgressHUD dismiss];
+    }];
 }
 
 @end

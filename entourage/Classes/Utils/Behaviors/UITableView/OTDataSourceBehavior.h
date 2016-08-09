@@ -16,5 +16,6 @@
 @property (nonatomic, strong, readonly) NSMutableArray* items;
 
 - (void)updateItems:(NSArray *)items;
+- (void)loadData;
 
 @end
