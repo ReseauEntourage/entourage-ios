@@ -8,12 +8,15 @@
 
 #import "OTEntourageInvitation.h"
 
+#define kInviter @"inviter"
+
 @implementation OTEntourageInvitation
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self)
     {
+        self.inviter = [[OTUser alloc] initWithDictionary:dictionary[kInviter]];
     }
     return self;
 }

@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTEntourageInvitation.h"
 
 @interface OTMyEntouragesCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *lblUserName;
+
+- (void)configureWith:(OTEntourageInvitation *)invitation;
 
 @end

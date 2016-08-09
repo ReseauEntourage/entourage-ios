@@ -10,4 +10,8 @@
 
 @implementation OTMyEntouragesCollectionViewCell
 
+-(void)configureWith:(OTEntourageInvitation *)invitation {
+    self.lblUserName.text = invitation.inviter.displayName;
+}
+
 @end

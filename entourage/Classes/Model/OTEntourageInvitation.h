@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTUser.h"
 
 @interface OTEntourageInvitation : NSObject
+
+@property (nonatomic, strong) OTUser *inviter;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)arrayForWebservice:(NSArray *)joiners;
