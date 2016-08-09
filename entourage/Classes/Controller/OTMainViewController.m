@@ -363,7 +363,8 @@
 }
 
 - (void)showEntourages {
-    [self performSegueWithIdentifier:@"EntouragesSegue" sender:self];
+    //[self performSegueWithIdentifier:@"EntouragesSegue" sender:self];
+    [self performSegueWithIdentifier:@"MyEntouragesSegue" sender:self];
 }
 
 - (void)registerObserver {
@@ -516,7 +517,7 @@ static BOOL didGetAnyData = NO;
                                          @"tour_types": [entourageFilter getTourTypes],
                                          @"entourage_types": [entourageFilter getEntourageTypes],
                                          @"show_tours": showTours ? @"true" : @"false",
-                                         @"show_my_entourages_only" : myEntouragesOnly ? @"true" : @"false",
+                                         //@"show_my_entourages_only" : myEntouragesOnly ? @"true" : @"false",
                                          @"time_range" : [entourageFilter valueForFilter:kEntourageFilterTimeframe]
                                          };
     

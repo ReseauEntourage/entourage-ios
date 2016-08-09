@@ -11,7 +11,7 @@
 @implementation OTTableCellProviderBehavior
 
 - (UITableViewCell *)getTableViewCellForPath:(NSIndexPath *)indexPath {
-    @throw @"Don't use base data provider directly";
+    @throw @"Don't use base cell provider directly";
 }
 
 @end

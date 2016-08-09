@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MH3-uF-0WG">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SF-UI-Text-Light.otf">
+            <string>SFUIText-Light</string>
+        </mutableArray>
+        <mutableArray key="SF-UI-Text-Medium.otf">
+            <string>SFUIText-Medium</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--My Entourages View Controller-->
+        <scene sceneID="YRj-3L-CT0">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="MH3-uF-0WG" customClass="OTMyEntouragesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hCo-dZ-Q9I"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ph8-ss-CHi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1km-6s-G4Q">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HbN-lj-jrZ">
+                                <rect key="frame" x="-4" y="20" width="328" height="115"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="115" id="ftk-Ft-YCo"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="7" id="MjB-BN-QvB">
+                                    <size key="itemSize" width="346" height="101"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InviteCell" id="FX1-l0-Nix" customClass="OTMyEntouragesCollectionViewCell">
+                                        <rect key="frame" x="8" y="7" width="346" height="101"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="346" height="101"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gg7-Uc-SdV">
+                                                    <rect key="frame" x="8" y="8" width="330" height="85"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="invitationSquare" translatesAutoresizingMaskIntoConstraints="NO" id="Qad-5V-b9H">
+                                                            <rect key="frame" x="14" y="2" width="56" height="56"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="56" id="IHD-pp-NSC"/>
+                                                                <constraint firstAttribute="width" constant="56" id="lov-zY-Aqq"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 nouvelle invitation à rejoindre un entourage" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96I-vm-H4c">
+                                                            <rect key="frame" x="85" y="13" width="228" height="36"/>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xM1-jm-R5e">
+                                                            <rect key="frame" x="85" y="52" width="33" height="18"/>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Qad-5V-b9H" firstAttribute="top" secondItem="Gg7-Uc-SdV" secondAttribute="top" constant="2" id="1EH-F2-TFN"/>
+                                                        <constraint firstItem="96I-vm-H4c" firstAttribute="top" secondItem="Gg7-Uc-SdV" secondAttribute="top" constant="13" id="EUA-Zq-Bg7"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xM1-jm-R5e" secondAttribute="trailing" constant="15" id="SYJ-o0-gNZ"/>
+                                                        <constraint firstItem="96I-vm-H4c" firstAttribute="leading" secondItem="Qad-5V-b9H" secondAttribute="trailing" constant="15" id="VuL-o7-okV"/>
+                                                        <constraint firstItem="xM1-jm-R5e" firstAttribute="leading" secondItem="96I-vm-H4c" secondAttribute="leading" id="lo6-ck-6Va"/>
+                                                        <constraint firstAttribute="bottom" secondItem="xM1-jm-R5e" secondAttribute="bottom" constant="15" id="u5u-eP-DvS"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="96I-vm-H4c" secondAttribute="trailing" constant="15" id="u8o-oe-4rW"/>
+                                                        <constraint firstItem="Qad-5V-b9H" firstAttribute="leading" secondItem="Gg7-Uc-SdV" secondAttribute="leading" constant="14" id="vL7-OP-pKC"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="Gg7-Uc-SdV" secondAttribute="trailing" id="O2r-xh-Xx2"/>
+                                            <constraint firstItem="Gg7-Uc-SdV" firstAttribute="leading" secondItem="FX1-l0-Nix" secondAttribute="leadingMargin" id="hlq-ML-Ujr"/>
+                                            <constraint firstItem="Gg7-Uc-SdV" firstAttribute="bottom" secondItem="FX1-l0-Nix" secondAttribute="bottomMargin" id="jb7-44-s7R"/>
+                                            <constraint firstItem="Gg7-Uc-SdV" firstAttribute="top" secondItem="FX1-l0-Nix" secondAttribute="topMargin" id="mcJ-GG-e2U"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="lblUserName" destination="xM1-jm-R5e" id="z7N-Ue-o46"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="HbN-lj-jrZ" firstAttribute="leading" secondItem="1km-6s-G4Q" secondAttribute="leadingMargin" constant="-20" id="1iq-aN-XKN"/>
+                            <constraint firstItem="HbN-lj-jrZ" firstAttribute="top" secondItem="hCo-dZ-Q9I" secondAttribute="bottom" id="7uJ-8m-OYp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HbN-lj-jrZ" secondAttribute="trailing" constant="-20" id="Rq9-bb-ZF2"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="collectionDataSource" destination="XtX-Fl-5hO" id="IQ2-lQ-mxi"/>
+                        <outlet property="dataSource" destination="pYl-y1-57D" id="a5g-Gi-eIf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fUU-LI-bnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="pYl-y1-57D" userLabel="Collection Source" customClass="OTCollectionSourceBehavior">
+                    <connections>
+                        <outlet property="collectionView" destination="HbN-lj-jrZ" id="lcj-Wp-g2A"/>
+                    </connections>
+                </customObject>
+                <customObject id="XtX-Fl-5hO" userLabel="Collection View Data Source" customClass="OTCollectionViewDataSourceBehavior">
+                    <connections>
+                        <outlet property="cellProvider" destination="CHc-Tq-418" id="fyy-WG-nNm"/>
+                        <outlet property="dataSource" destination="pYl-y1-57D" id="Z9E-v4-tHS"/>
+                    </connections>
+                </customObject>
+                <customObject id="CHc-Tq-418" userLabel="My Entourages Cell Provider" customClass="OTMyEntouragesCellProviderBehavior">
+                    <connections>
+                        <outlet property="collectionDataSource" destination="XtX-Fl-5hO" id="2Q5-iD-vBY"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="700" y="-49"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="invitationSquare" width="56" height="56"/>
+    </resources>
+</document>

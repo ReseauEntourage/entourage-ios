@@ -736,8 +736,8 @@ saisissez votre numéro de portable.</string>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="5YA-hm-50D"/>
                                         <exclude reference="3Rr-Dv-wJQ"/>
+                                        <exclude reference="5YA-hm-50D"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -797,12 +797,12 @@ sur Entourage.</string>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="CSS-GK-sBy"/>
                                 <exclude reference="6go-Mk-4bj"/>
-                                <exclude reference="fWs-Tx-8bC"/>
+                                <exclude reference="CSS-GK-sBy"/>
                                 <exclude reference="NLy-4P-qnF"/>
-                                <exclude reference="tLT-p6-FQf"/>
                                 <exclude reference="de5-df-YMd"/>
+                                <exclude reference="fWs-Tx-8bC"/>
+                                <exclude reference="tLT-p6-FQf"/>
                             </mask>
                         </variation>
                     </view>

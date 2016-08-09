@@ -50,7 +50,6 @@
     [self.inviteBehavior configureWith:self.feedItem];
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.titleTapBehavior initialize];
-    [self.dataSource initialize];
     [self.tableDataSource initialize];
     [self.tableDelegate initialize];
 

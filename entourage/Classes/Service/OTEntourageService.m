@@ -14,16 +14,18 @@
 #import "OTUser.h"
 #import "OTEntourage.h"
 #import "OTFeedItemJoiner.h"
-
+#import "OTEntourageInvitation.h"
 
 // Helpers
 #import "NSUserDefaults+OT.h"
 #import "NSDictionary+Parsing.h"
 
+
 /**************************************************************************************************/
 #pragma mark - Constants
 
 NSString *const kEntourages = @"entourages";
+NSString *const kInvitations = @"invitations";
 extern NSString *kUsers;
 
 @implementation OTEntourageService
@@ -347,7 +349,7 @@ extern NSString *kUsers;
 }
 
 - (void)entourageUsersJoins:(OTEntourage *)entourage success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_feed_item_users", @""), kEntourages, entourage.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_feed_item_users", @""), kEntourages, entourage.uid,  TOKEN];
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
      andParameters:nil
@@ -357,6 +359,25 @@ extern NSString *kUsers;
          NSArray *joiners = [data objectForKey:kUsers];
          if (success)
              success([OTFeedItemJoiner arrayForWebservice:joiners]);
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+             failure(error);
+     }];
+}
+
+- (void)entourageGetInvitationsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_GET_INVITES, TOKEN];
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         NSArray *invitations = [data objectForKey:kInvitations];
+         if (success)
+             success([OTEntourageInvitation arrayForWebservice:invitations]);
      }
      andFailure:^(NSError *error)
      {

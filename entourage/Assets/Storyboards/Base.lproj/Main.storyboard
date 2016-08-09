@@ -496,6 +496,7 @@
                         <segue destination="0av-Qe-fFs" kind="modal" identifier="FiltersSegue" id="22w-GJ-qhb"/>
                         <segue destination="4jA-Gt-JYo" kind="push" identifier="PublicFeedItemDetailsSegue" id="wzY-Lz-9e9"/>
                         <segue destination="b7J-bU-8VV" kind="push" identifier="ActiveFeedItemDetailsSegue" id="5Vn-Sd-WAu"/>
+                        <segue destination="7EQ-Wv-dUJ" kind="push" identifier="MyEntouragesSegue" id="Hj6-Bk-Yxd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -977,6 +978,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Na-ZL-zg3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1368.5" y="621"/>
+        </scene>
+        <!--MyEntourages-->
+        <scene sceneID="IjM-Me-8VV">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MyEntourages" id="7EQ-Wv-dUJ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="MSQ-AD-CVV"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dmb-Mg-GeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1339.5" y="-13"/>
         </scene>
         <!--Entourages-->
         <scene sceneID="Rbc-LK-Bav">

@@ -51,7 +51,7 @@
 }
 
 - (BOOL)isPublic {
-    if([self.tour.status isEqualToString:FEEDITEM_STATUS_CLOSED])
+    if([self.tour.status isEqualToString:TOUR_STATUS_FREEZED])
         return YES;
     return ![self.tour.joinStatus isEqualToString:JOIN_ACCEPTED];
 }

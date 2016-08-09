@@ -68,4 +68,7 @@
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure;
 
+- (void)entourageGetInvitationsWithSuccess:(void (^)(NSArray *))success
+                    failure:(void (^)(NSError *))failure;
+
 @end

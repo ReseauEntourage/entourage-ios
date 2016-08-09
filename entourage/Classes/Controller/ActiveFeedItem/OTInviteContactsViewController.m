@@ -32,7 +32,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.dataSource initialize];
     [self.tableDataSource initialize];
     self.title = OTLocalizedString(@"contacts").uppercaseString;
     self.btnSave = [UIBarButtonItem createWithTitle:OTLocalizedString(@"send") withTarget:self andAction:@selector(save) colored:[UIColor appOrangeColor]];
