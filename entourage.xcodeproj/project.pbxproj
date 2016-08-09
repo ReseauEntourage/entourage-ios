@@ -139,6 +139,7 @@
 		1ECDBC6C1D3D363600DD87B2 /* OTEntourageMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECDBC6B1D3D363600DD87B2 /* OTEntourageMessaging.m */; };
 		1ECFB3691D52570900722DAC /* OTTourMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECFB3681D52570900722DAC /* OTTourMapHandler.m */; };
 		1ECFB36C1D52578400722DAC /* OTEntourageMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECFB36B1D52578400722DAC /* OTEntourageMapHandler.m */; };
+		1ED2506D1D5A70EB005C9736 /* OTMoveUpOnViewHiddenBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED2506C1D5A70EB005C9736 /* OTMoveUpOnViewHiddenBehavior.m */; };
 		2E5B0EBC1CF0603D0078454F /* OTEntourageFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EBB1CF0603D0078454F /* OTEntourageFilter.m */; };
 		2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EBF1CF06CE50078454F /* OTFilterRadioButton.m */; };
 		2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EC21CF070DD0078454F /* OTFilterCellTableViewCell.m */; };
@@ -507,6 +508,8 @@
 		1ECFB3681D52570900722DAC /* OTTourMapHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourMapHandler.m; sourceTree = "<group>"; };
 		1ECFB36A1D52578400722DAC /* OTEntourageMapHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageMapHandler.h; sourceTree = "<group>"; };
 		1ECFB36B1D52578400722DAC /* OTEntourageMapHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageMapHandler.m; sourceTree = "<group>"; };
+		1ED2506B1D5A70EB005C9736 /* OTMoveUpOnViewHiddenBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMoveUpOnViewHiddenBehavior.h; path = Behaviors/UI/OTMoveUpOnViewHiddenBehavior.h; sourceTree = "<group>"; };
+		1ED2506C1D5A70EB005C9736 /* OTMoveUpOnViewHiddenBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMoveUpOnViewHiddenBehavior.m; path = Behaviors/UI/OTMoveUpOnViewHiddenBehavior.m; sourceTree = "<group>"; };
 		2E5B0EBA1CF0603D0078454F /* OTEntourageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFilter.h; sourceTree = "<group>"; };
 		2E5B0EBB1CF0603D0078454F /* OTEntourageFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageFilter.m; sourceTree = "<group>"; };
 		2E5B0EBE1CF06CE50078454F /* OTFilterRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFilterRadioButton.h; sourceTree = "<group>"; };
@@ -1077,9 +1080,19 @@
 			name = MyEntouragesCells;
 			sourceTree = "<group>";
 		};
+		1E8E16EA1D5A6EE2005C42ED /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1ED2506B1D5A70EB005C9736 /* OTMoveUpOnViewHiddenBehavior.h */,
+				1ED2506C1D5A70EB005C9736 /* OTMoveUpOnViewHiddenBehavior.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		1E9003661D34FA90004E18BC /* Behaviors */ = {
 			isa = PBXGroup;
 			children = (
+				1E8E16EA1D5A6EE2005C42ED /* UI */,
 				1E5F79851D5A12160005003C /* UICollectionView */,
 				1E2232C81D568B0D004CD5E8 /* Touch */,
 				1ECFB3621D52525C00722DAC /* Map */,
@@ -2196,6 +2209,7 @@
 				45F443391C9080E900DDEBE1 /* OTFeedItemJoiner.m in Sources */,
 				4559405E1C5F6D480099A8EE /* OTRequestOperationManager.m in Sources */,
 				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,
+				1ED2506D1D5A70EB005C9736 /* OTMoveUpOnViewHiddenBehavior.m in Sources */,
 				2EDA5F031CB3F84300849172 /* OTGuideDetailsViewController.m in Sources */,
 				45EB70DA1CE5F0CC00EB2CD1 /* OTEntourage.m in Sources */,
 				1E488E211D4FBA4D00A2E5B0 /* OTPicturePreviewViewController.m in Sources */,

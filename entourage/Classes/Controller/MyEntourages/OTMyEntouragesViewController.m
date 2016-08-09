@@ -9,6 +9,7 @@
 #import "OTMyEntouragesViewController.h"
 #import "OTCollectionSourceBehavior.h"
 #import "OTCollectionViewDataSourceBehavior.h"
+#import "OTMoveUpOnViewHiddenBehavior.h"
 #import "OTEntourageService.h"
 #import "SVProgressHUD.h"
 
@@ -16,7 +17,7 @@
 
 @property (strong, nonatomic) IBOutlet OTCollectionSourceBehavior *dataSource;
 @property (strong, nonatomic) IBOutlet OTCollectionViewDataSourceBehavior *collectionDataSource;
-
+@property (strong, nonatomic) IBOutlet OTMoveUpOnViewHiddenBehavior *toggleCollectionView;
 
 @end
 
@@ -26,21 +27,21 @@
     [super viewDidLoad];
     
     [self.collectionDataSource initialize];
-
+    [self.toggleCollectionView initialize];
+    
+    [self.toggleCollectionView toggle:NO animated:NO];
+    
     [self loadInvitations];
 }
 
 #pragma mark - private methods
 
 - (void)loadInvitations {
-    [SVProgressHUD show];
     [[OTEntourageService new] entourageGetInvitationsWithSuccess:^(NSArray *items) {
-        [SVProgressHUD dismiss];
+        [self.toggleCollectionView toggle:[items count] > 0 animated:YES];
         [self.dataSource updateItems:items];
         [self.collectionDataSource refresh];
-    } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"Error loading invitations."];
-    }];
+    } failure:nil];
 }
 
 @end
