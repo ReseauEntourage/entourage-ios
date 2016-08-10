@@ -1,5 +1,5 @@
 //
-//  OTMyEntouragesCollectionViewCell.h
+//  OTInvitationsCollectionViewCell.h
 //  entourage
 //
 //  Created by sergiu buceac on 8/9/16.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "OTEntourageInvitation.h"
 
-@interface OTMyEntouragesCollectionViewCell : UICollectionViewCell
+@interface OTInvitationsCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *lblUserName;
 

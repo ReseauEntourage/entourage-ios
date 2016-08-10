@@ -122,7 +122,7 @@
 		1E78B7ED1D513ECA0008C00E /* OTTourUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E78B7EC1D513ECA0008C00E /* OTTourUI.m */; };
 		1E78B7F01D513F0F0008C00E /* OTEntourageUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E78B7EF1D513F0F0008C00E /* OTEntourageUI.m */; };
 		1E78B7F41D515E240008C00E /* NSDate+ui.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E78B7F31D515E240008C00E /* NSDate+ui.m */; };
-		1E8E16E61D5A354C005C42ED /* OTMyEntouragesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E16E51D5A354C005C42ED /* OTMyEntouragesCollectionViewCell.m */; };
+		1E8E16E61D5A354C005C42ED /* OTInvitationsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E16E51D5A354C005C42ED /* OTInvitationsCollectionViewCell.m */; };
 		1E8E16E91D5A3814005C42ED /* OTEntourageInvitation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E16E81D5A3814005C42ED /* OTEntourageInvitation.m */; };
 		1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9003681D34FAAB004E18BC /* OTBehavior.m */; };
 		1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E90036D1D352C0B004E18BC /* UserPicture.storyboard */; };
@@ -469,8 +469,8 @@
 		1E78B7EF1D513F0F0008C00E /* OTEntourageUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageUI.m; sourceTree = "<group>"; };
 		1E78B7F21D515E240008C00E /* NSDate+ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+ui.h"; path = "Helper/NSDate+ui.h"; sourceTree = "<group>"; };
 		1E78B7F31D515E240008C00E /* NSDate+ui.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+ui.m"; path = "Helper/NSDate+ui.m"; sourceTree = "<group>"; };
-		1E8E16E41D5A354C005C42ED /* OTMyEntouragesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesCollectionViewCell.h; path = MyEntourages/MyEntouragesCells/OTMyEntouragesCollectionViewCell.h; sourceTree = "<group>"; };
-		1E8E16E51D5A354C005C42ED /* OTMyEntouragesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesCollectionViewCell.m; path = MyEntourages/MyEntouragesCells/OTMyEntouragesCollectionViewCell.m; sourceTree = "<group>"; };
+		1E8E16E41D5A354C005C42ED /* OTInvitationsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTInvitationsCollectionViewCell.h; path = MyEntourages/MyEntouragesCells/OTInvitationsCollectionViewCell.h; sourceTree = "<group>"; };
+		1E8E16E51D5A354C005C42ED /* OTInvitationsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTInvitationsCollectionViewCell.m; path = MyEntourages/MyEntouragesCells/OTInvitationsCollectionViewCell.m; sourceTree = "<group>"; };
 		1E8E16E71D5A3814005C42ED /* OTEntourageInvitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageInvitation.h; sourceTree = "<group>"; };
 		1E8E16E81D5A3814005C42ED /* OTEntourageInvitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageInvitation.m; sourceTree = "<group>"; };
 		1E9003671D34FAAB004E18BC /* OTBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTBehavior.h; path = Behaviors/OTBehavior.h; sourceTree = "<group>"; };
@@ -1074,8 +1074,8 @@
 		1E8E16E31D5A351D005C42ED /* MyEntouragesCells */ = {
 			isa = PBXGroup;
 			children = (
-				1E8E16E41D5A354C005C42ED /* OTMyEntouragesCollectionViewCell.h */,
-				1E8E16E51D5A354C005C42ED /* OTMyEntouragesCollectionViewCell.m */,
+				1E8E16E41D5A354C005C42ED /* OTInvitationsCollectionViewCell.h */,
+				1E8E16E51D5A354C005C42ED /* OTInvitationsCollectionViewCell.m */,
 			);
 			name = MyEntouragesCells;
 			sourceTree = "<group>";
@@ -2133,7 +2133,7 @@
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,
-				1E8E16E61D5A354C005C42ED /* OTMyEntouragesCollectionViewCell.m in Sources */,
+				1E8E16E61D5A354C005C42ED /* OTInvitationsCollectionViewCell.m in Sources */,
 				4525EB3A1CA5EE1C006784E6 /* OTEntouragesViewController.m in Sources */,
 				1EACE4191D11515200F3A2A6 /* OTTourFactory.m in Sources */,
 				455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */,

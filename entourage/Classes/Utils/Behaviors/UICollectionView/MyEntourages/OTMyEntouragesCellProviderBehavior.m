@@ -9,7 +9,7 @@
 #import "OTMyEntouragesCellProviderBehavior.h"
 #import "OTCollectionViewDataSourceBehavior.h"
 #import "OTCollectionSourceBehavior.h"
-#import "OTMyEntouragesCollectionViewCell.h"
+#import "OTInvitationsCollectionViewCell.h"
 #import "OTEntourageInvitation.h"
 
 @implementation OTMyEntouragesCellProviderBehavior
@@ -17,7 +17,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     OTEntourageInvitation *invitation = (OTEntourageInvitation *)[self.collectionDataSource getItemAtIndexPath:indexPath];
     
-    OTMyEntouragesCollectionViewCell *cell = (OTMyEntouragesCollectionViewCell *)[self.collectionDataSource.dataSource.collectionView dequeueReusableCellWithReuseIdentifier:@"InviteCell" forIndexPath:indexPath];
+    OTInvitationsCollectionViewCell *cell = (OTInvitationsCollectionViewCell *)[self.collectionDataSource.dataSource.collectionView dequeueReusableCellWithReuseIdentifier:@"InviteCell" forIndexPath:indexPath];
     [cell configureWith:invitation];
     return cell;
 }

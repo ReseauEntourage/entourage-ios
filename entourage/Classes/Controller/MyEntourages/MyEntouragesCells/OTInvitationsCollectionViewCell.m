@@ -1,14 +1,14 @@
 //
-//  OTMyEntouragesCollectionViewCell.m
+//  OTInvitationsCollectionViewCell.m
 //  entourage
 //
 //  Created by sergiu buceac on 8/9/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTMyEntouragesCollectionViewCell.h"
+#import "OTInvitationsCollectionViewCell.h"
 
-@implementation OTMyEntouragesCollectionViewCell
+@implementation OTInvitationsCollectionViewCell
 
 -(void)configureWith:(OTEntourageInvitation *)invitation {
     self.lblUserName.text = invitation.inviter.displayName;
