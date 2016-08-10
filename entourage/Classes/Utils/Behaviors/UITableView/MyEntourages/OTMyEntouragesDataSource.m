@@ -32,9 +32,6 @@
 }
 
 - (void)loadNextPage {
-    if(self.items.count < DATA_PAGE_SIZE)
-        return;
-    
     self.pageNumber++;
     [self requestDataWithSuccess:^(NSArray *items) {
         if([items count] == 0)
