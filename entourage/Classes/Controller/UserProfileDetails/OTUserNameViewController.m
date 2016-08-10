@@ -60,8 +60,10 @@
 
 - (void)loadData {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    self.firstNameTextField.text = currentUser.firstName;
-    self.lastNameTextField.text = currentUser.lastName;
+    if(currentUser) {
+        self.firstNameTextField.text = currentUser.firstName;
+        self.lastNameTextField.text = currentUser.lastName;
+    }
 }
 
 - (IBAction)doContinue {

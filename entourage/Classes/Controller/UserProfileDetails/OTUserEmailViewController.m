@@ -54,7 +54,9 @@
 }
 
 - (void)loadData {
-    self.emailTextField.text = [NSUserDefaults standardUserDefaults].currentUser.email;
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if(currentUser)
+        self.emailTextField.text = currentUser.email;
 }
 
 - (IBAction)doContinue {
