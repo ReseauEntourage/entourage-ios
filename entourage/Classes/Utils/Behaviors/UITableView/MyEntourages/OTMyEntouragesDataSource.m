@@ -25,6 +25,7 @@
 - (void)initialize {
     self.currentFilter = [OTMyEntouragesFilter new];
     [self updateItems:[NSArray new]];
+    self.pageNumber = 1;
 }
 
 - (void)loadData {
@@ -34,10 +35,16 @@
 - (void)loadNextPage {
     self.pageNumber++;
     [self requestDataWithSuccess:^(NSArray *items) {
-        if([items count] == 0)
-            self.pageNumber--;
-        else
-            [self.tableDataSource refresh];
+        if([items count] == 0) {
+            if(self.pageNumber > 1)
+                self.pageNumber--;
+        }
+        else {
+            NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.items.count - items.count, items.count)];
+            [self.tableView beginUpdates];
+            [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView endUpdates];
+        }
     } orFailure:^() {
         self.pageNumber--;
     }];
@@ -48,7 +55,7 @@
 - (void)filterChanged:(OTMyEntouragesFilter *)filter {
     self.currentFilter = filter;
     [self.items removeAllObjects];
-    self.pageNumber = 0;
+    self.pageNumber = 1;
     [self requestDataWithSuccess:^(NSArray *items) {
         [self.tableDataSource refresh];
     } orFailure:nil];

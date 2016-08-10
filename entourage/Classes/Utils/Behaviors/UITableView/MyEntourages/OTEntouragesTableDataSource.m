@@ -36,7 +36,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.cellProvider getTableViewCellForPath:indexPath];
+    UITableViewCell * cell = [self.cellProvider getTableViewCellForPath:indexPath];
+    if(indexPath.section == self.dataSource.items.count - 1)
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            [((OTMyEntouragesDataSource *)self.dataSource) loadNextPage];
+        });
+    return cell;
 }
 
 #pragma mark - UITableViewDelegate
@@ -53,11 +58,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 15;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == self.dataSource.items.count - 1)
-        [((OTMyEntouragesDataSource *)self.dataSource) loadNextPage];
 }
 
 @end
