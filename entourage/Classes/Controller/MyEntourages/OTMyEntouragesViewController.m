@@ -10,14 +10,18 @@
 #import "OTCollectionSourceBehavior.h"
 #import "OTCollectionViewDataSourceBehavior.h"
 #import "OTMoveUpOnViewHiddenBehavior.h"
+#import "OTMyEntouragesDataSource.h"
+#import "OTTableDataSourceBehavior.h"
 #import "OTEntourageService.h"
 #import "SVProgressHUD.h"
 
 @interface OTMyEntouragesViewController ()
 
-@property (strong, nonatomic) IBOutlet OTCollectionSourceBehavior *dataSource;
-@property (strong, nonatomic) IBOutlet OTCollectionViewDataSourceBehavior *collectionDataSource;
+@property (strong, nonatomic) IBOutlet OTCollectionSourceBehavior *invitationsDataSource;
+@property (strong, nonatomic) IBOutlet OTCollectionViewDataSourceBehavior *invitationsCollectionDataSource;
 @property (strong, nonatomic) IBOutlet OTMoveUpOnViewHiddenBehavior *toggleCollectionView;
+@property (strong, nonatomic) IBOutlet OTMyEntouragesDataSource *entouragesDataSource;
+@property (strong, nonatomic) IBOutlet OTTableDataSourceBehavior *entouragesTableDataSource;
 
 @end
 
@@ -26,12 +30,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.collectionDataSource initialize];
+    [self.invitationsCollectionDataSource initialize];
+    [self.entouragesTableDataSource initialize];
     [self.toggleCollectionView initialize];
     
     [self.toggleCollectionView toggle:NO animated:NO];
     
     [self loadInvitations];
+    [self.entouragesDataSource loadData];
 }
 
 #pragma mark - private methods
@@ -39,8 +45,8 @@
 - (void)loadInvitations {
     [[OTEntourageService new] entourageGetInvitationsWithSuccess:^(NSArray *items) {
         [self.toggleCollectionView toggle:[items count] > 0 animated:YES];
-        [self.dataSource updateItems:items];
-        [self.collectionDataSource refresh];
+        [self.invitationsDataSource updateItems:items];
+        [self.invitationsCollectionDataSource refresh];
     } failure:nil];
 }
 

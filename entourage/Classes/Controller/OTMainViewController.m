@@ -87,7 +87,7 @@
 #define MIN_ENTOURAGE_HEATZONE 500.0f // m
 
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
-#define TOURS_REQUEST_DISTANCE_KM 10
+#define FEEDS_REQUEST_DISTANCE_KM 10
 #define LOCATION_MIN_DISTANCE 5.f //m
 
 #define LONGPRESS_DELTA 65.0f
@@ -404,7 +404,7 @@ static BOOL didGetAnyData = NO;
     
     // check if we need to make a new request
     CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.requestedToursCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
-    if (moveDistance < TOURS_REQUEST_DISTANCE_KM / 4) {
+    if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
     //NSLog(@"Main: position did change = > getFeeds");
@@ -448,7 +448,7 @@ static BOOL didGetAnyData = NO;
                                        @"before" : [[NSDate date] dateByAddingTimeInterval:10],
                                        @"latitude": @(self.requestedToursCoordinate.latitude),
                                        @"longitude": @(self.requestedToursCoordinate.longitude),
-                                       @"distance": @TOURS_REQUEST_DISTANCE_KM,
+                                       @"distance": @FEEDS_REQUEST_DISTANCE_KM,
                                        @"tour_types": [entourageFilter getTourTypes],
                                        @"entourage_types": [entourageFilter getEntourageTypes],
                                        @"show_tours": showTours ? @"true" : @"false",
@@ -513,7 +513,7 @@ static BOOL didGetAnyData = NO;
                                          @"before" : self.currentPagination.beforeDate,
                                          @"latitude": @(self.requestedToursCoordinate.latitude),
                                          @"longitude": @(self.requestedToursCoordinate.longitude),
-                                         @"distance": @TOURS_REQUEST_DISTANCE_KM,
+                                         @"distance": @FEEDS_REQUEST_DISTANCE_KM,
                                          @"tour_types": [entourageFilter getTourTypes],
                                          @"entourage_types": [entourageFilter getEntourageTypes],
                                          @"show_tours": showTours ? @"true" : @"false",

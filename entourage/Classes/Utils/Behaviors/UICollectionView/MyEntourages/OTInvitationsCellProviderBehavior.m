@@ -1,18 +1,18 @@
 //
-//  OTMyEntouragesCellProviderBehavior.m
+//  OTInvitationsCellProviderBehavior.m
 //  entourage
 //
 //  Created by sergiu buceac on 8/9/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTMyEntouragesCellProviderBehavior.h"
+#import "OTInvitationsCellProviderBehavior.h"
 #import "OTCollectionViewDataSourceBehavior.h"
 #import "OTCollectionSourceBehavior.h"
 #import "OTInvitationsCollectionViewCell.h"
 #import "OTEntourageInvitation.h"
 
-@implementation OTMyEntouragesCellProviderBehavior
+@implementation OTInvitationsCellProviderBehavior
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     OTEntourageInvitation *invitation = (OTEntourageInvitation *)[self.collectionDataSource getItemAtIndexPath:indexPath];

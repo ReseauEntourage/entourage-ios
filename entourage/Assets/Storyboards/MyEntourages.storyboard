@@ -101,11 +101,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sIZ-hk-qpn">
-                                <rect key="frame" x="-4" y="135" width="328" height="391"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6O-su-Iph">
                                 <rect key="frame" x="-4" y="526" width="328" height="42"/>
                                 <subviews>
@@ -125,6 +120,47 @@
                                     <constraint firstItem="G53-uu-geo" firstAttribute="leading" secondItem="N6O-su-Iph" secondAttribute="leading" constant="15" id="fM3-tg-rDs"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="70" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="sIZ-hk-qpn">
+                                <rect key="frame" x="-4" y="135" width="328" height="391"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="EntourageCell" id="Mx8-LP-dfy" customClass="OTEntouragesTableViewCell">
+                                        <rect key="frame" x="0.0" y="1" width="328" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mx8-LP-dfy" id="4WQ-zO-R6y">
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSm-Ro-7g4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="328" height="70"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQS-bH-KKy">
+                                                            <rect key="frame" x="8" y="25" width="42" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="bQS-bH-KKy" firstAttribute="centerY" secondItem="hSm-Ro-7g4" secondAttribute="centerY" id="OX3-vH-jeX"/>
+                                                        <constraint firstItem="bQS-bH-KKy" firstAttribute="leading" secondItem="hSm-Ro-7g4" secondAttribute="leading" constant="8" id="nPi-A6-gt0"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="hSm-Ro-7g4" secondAttribute="bottom" id="DDK-sg-5Lw"/>
+                                                <constraint firstAttribute="trailing" secondItem="hSm-Ro-7g4" secondAttribute="trailing" id="M3Y-gy-s6j"/>
+                                                <constraint firstItem="hSm-Ro-7g4" firstAttribute="leading" secondItem="4WQ-zO-R6y" secondAttribute="leading" id="ReH-Nj-wpJ"/>
+                                                <constraint firstItem="hSm-Ro-7g4" firstAttribute="top" secondItem="4WQ-zO-R6y" secondAttribute="top" id="d2s-uB-CyJ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qG-8g-Me3">
                                 <rect key="frame" x="234" y="494" width="62" height="62"/>
                                 <constraints>
@@ -158,31 +194,50 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="collectionDataSource" destination="XtX-Fl-5hO" id="IQ2-lQ-mxi"/>
-                        <outlet property="dataSource" destination="pYl-y1-57D" id="a5g-Gi-eIf"/>
+                        <outlet property="entouragesDataSource" destination="0Sx-gI-2Ez" id="dmb-Oh-Xj7"/>
+                        <outlet property="entouragesTableDataSource" destination="2Il-nd-24e" id="nLX-KD-4ty"/>
+                        <outlet property="invitationsCollectionDataSource" destination="XtX-Fl-5hO" id="hxO-Ca-fRe"/>
+                        <outlet property="invitationsDataSource" destination="pYl-y1-57D" id="55N-Qd-5BS"/>
                         <outlet property="toggleCollectionView" destination="ntM-qh-ECK" id="tng-qQ-9aF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fUU-LI-bnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="pYl-y1-57D" userLabel="Collection Source" customClass="OTCollectionSourceBehavior">
+                <customObject id="pYl-y1-57D" userLabel="Invitation Collection Source" customClass="OTCollectionSourceBehavior">
                     <connections>
-                        <outlet property="collectionView" destination="HbN-lj-jrZ" id="lcj-Wp-g2A"/>
+                        <outlet property="collectionView" destination="HbN-lj-jrZ" id="S0T-zg-ek4"/>
                     </connections>
                 </customObject>
-                <customObject id="XtX-Fl-5hO" userLabel="Collection View Data Source" customClass="OTCollectionViewDataSourceBehavior">
+                <customObject id="XtX-Fl-5hO" userLabel="Invitation Collection View Data Source" customClass="OTCollectionViewDataSourceBehavior">
                     <connections>
-                        <outlet property="cellProvider" destination="CHc-Tq-418" id="fyy-WG-nNm"/>
-                        <outlet property="dataSource" destination="pYl-y1-57D" id="Z9E-v4-tHS"/>
+                        <outlet property="cellProvider" destination="CHc-Tq-418" id="LDF-sg-CBX"/>
+                        <outlet property="dataSource" destination="pYl-y1-57D" id="syV-Ng-LTu"/>
                     </connections>
                 </customObject>
-                <customObject id="CHc-Tq-418" userLabel="My Entourages Cell Provider" customClass="OTMyEntouragesCellProviderBehavior">
+                <customObject id="CHc-Tq-418" userLabel="Invitation Cell Provider" customClass="OTInvitationsCellProviderBehavior">
                     <connections>
-                        <outlet property="collectionDataSource" destination="XtX-Fl-5hO" id="2Q5-iD-vBY"/>
+                        <outlet property="collectionDataSource" destination="XtX-Fl-5hO" id="dn5-ZD-hy9"/>
                     </connections>
                 </customObject>
                 <customObject id="ntM-qh-ECK" customClass="OTMoveUpOnViewHiddenBehavior">
                     <connections>
                         <outlet property="toggleView" destination="HbN-lj-jrZ" id="oWQ-St-m2W"/>
+                    </connections>
+                </customObject>
+                <customObject id="0Sx-gI-2Ez" userLabel="Entourage Data Source" customClass="OTMyEntouragesDataSource">
+                    <connections>
+                        <outlet property="tableDataSource" destination="2Il-nd-24e" id="0vI-AC-Wt2"/>
+                        <outlet property="tableView" destination="sIZ-hk-qpn" id="hul-Ri-ThE"/>
+                    </connections>
+                </customObject>
+                <customObject id="xfP-Fm-twJ" userLabel="Entourage Cell Provider" customClass="OTEntouragesCellProvider">
+                    <connections>
+                        <outlet property="tableDataSource" destination="2Il-nd-24e" id="hRO-d3-BET"/>
+                    </connections>
+                </customObject>
+                <customObject id="2Il-nd-24e" userLabel="Entourage Table Data Source" customClass="OTEntouragesTableDataSource">
+                    <connections>
+                        <outlet property="cellProvider" destination="xfP-Fm-twJ" id="GoR-aT-LWq"/>
+                        <outlet property="dataSource" destination="0Sx-gI-2Ez" id="nRl-nP-aDe"/>
                     </connections>
                 </customObject>
             </objects>

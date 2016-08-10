@@ -131,7 +131,7 @@ typedef NS_ENUM(NSInteger){
     __block NSInteger requestedStatus = entourageStatus;
     [self.indicatorView startAnimating];
     NSLog(@"Getting data ...");
-    [[OTFeedsService new] getMyFeedsWithStatus:statusString
+    /*[[OTFeedsService new] getMyFeedsWithStatus:statusString
                                  andPageNumber:@(page)
                               andNumberPerPage:@FEEDITEMS_PER_PAGE
                                        success:^(NSMutableArray *userFeedItems) {
@@ -169,7 +169,7 @@ typedef NS_ENUM(NSInteger){
                                                    break;
                                            }
 
-                                       }];
+                                       }];*/
 }
 
 - (IBAction)changedSegmentedControlSelection:(UISegmentedControl *)segControl {

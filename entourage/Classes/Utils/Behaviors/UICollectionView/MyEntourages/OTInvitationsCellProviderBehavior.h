@@ -1,5 +1,5 @@
 //
-//  OTMyEntouragesCellProviderBehavior.h
+//  OTInvitationsCellProviderBehavior.h
 //  entourage
 //
 //  Created by sergiu buceac on 8/9/16.
@@ -8,6 +8,6 @@
 
 #import "OTCollectionCellProviderBehavior.h"
 
-@interface OTMyEntouragesCellProviderBehavior : OTCollectionCellProviderBehavior
+@interface OTInvitationsCellProviderBehavior : OTCollectionCellProviderBehavior
 
 @end

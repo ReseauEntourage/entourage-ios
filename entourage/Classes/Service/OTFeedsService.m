@@ -45,19 +45,9 @@
      ];
 }
 
-- (void)getMyFeedsWithStatus:(NSString *)status
-               andPageNumber:(NSNumber *)pageNumber
-            andNumberPerPage:(NSNumber *)per
-                     success:(void (^)(NSMutableArray *userTours))success
-                     failure:(void (^)(NSError *error))failure
+- (void)getMyFeedsWithParameters:(NSDictionary*)parameters success:(void (^)(NSArray *entourages))success failure:(void (^)(NSError *error))failure
 {
     NSString *url = [NSString stringWithFormat:API_URL_MYFEEDS, TOKEN];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{ @"page" : pageNumber,
-                                                                                       @"per" : per }];
-    if (status != nil) {
-        [parameters setObject:status forKey:@"status"];
-    }
-    
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
      andParameters:parameters
@@ -65,18 +55,13 @@
      {
          NSDictionary *data = responseObject;
          NSMutableArray *myFeeds = [self feedItemsFromDictionary:data];
-         
          if (success)
-         {
              success(myFeeds);
-         }
      }
      andFailure:^(NSError *error)
      {
          if (failure)
-         {
              failure(error);
-         }
      }];
 }
 
@@ -84,19 +69,16 @@
 - (NSMutableArray *)feedItemsFromDictionary:(NSDictionary *)dictionary {
     NSMutableArray *feedItems = [[NSMutableArray alloc] init];
     NSArray *feedsDictionaries = [dictionary objectForKey:kWSKeyFeeds];
-    
     for (NSDictionary *dictionary in feedsDictionaries) {
         NSString *feedType = [dictionary valueForKey:kWSKeyType];
-        //NSLog(@"Feed %@", feedType);
         NSDictionary *feedItemDictionary = [dictionary objectForKey:kWSKeyData];
         OTFeedItem *feedItem;
-        if ([feedType isEqualToString:@"Entourage"]) {
+        if ([feedType isEqualToString:@"Entourage"])
             feedItem = [[OTEntourage alloc] initWithDictionary:feedItemDictionary];
-            
-        } else if ([feedType isEqualToString:@"Tour"]) {
+        else if ([feedType isEqualToString:@"Tour"])
             feedItem = [[OTTour alloc] initWithDictionary:feedItemDictionary];
-        }
-        [feedItems addObject:feedItem];
+        if(feedItem)
+            [feedItems addObject:feedItem];
     }
     return feedItems;
 }
