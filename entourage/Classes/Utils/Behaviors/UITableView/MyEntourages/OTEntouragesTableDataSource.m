@@ -7,7 +7,7 @@
 //
 
 #import "OTEntouragesTableDataSource.h"
-#import "OTDataSourceBehavior.h"
+#import "OTMyEntouragesDataSource.h"
 #import "OTTableCellProviderBehavior.h"
 
 @interface OTEntouragesTableDataSource () <UITableViewDelegate>
@@ -53,6 +53,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 15;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section == self.dataSource.items.count - 1)
+        [((OTMyEntouragesDataSource *)self.dataSource) loadNextPage];
 }
 
 @end
