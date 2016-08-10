@@ -788,7 +788,8 @@ sur Entourage.</string>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wF4-5f-khB">
                                 <rect key="frame" x="12" y="198" width="351" height="388"/>
                                 <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <string key="text">Vous allez rejoindre une communauté de citoyens qui collaborent pour lutter contre l’exclusion sociale! 
+                                <string key="text">Vous allez rejoindre une communauté de citoyens qui collaborent pour lutter contre l’exclusion sociale!
+
 En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
