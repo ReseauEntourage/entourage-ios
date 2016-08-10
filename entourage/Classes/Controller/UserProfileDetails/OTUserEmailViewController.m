@@ -45,14 +45,16 @@
                                              selector:@selector(showKeyboard:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
-#if DEBUG //TARGET_IPHONE_SIMULATOR
-    self.emailTextField.text = @"brindusa.duma@tecknoworks.com";
-#endif
+    [self loadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.emailTextField becomeFirstResponder];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+
+- (void)loadData {
+    self.emailTextField.text = [NSUserDefaults standardUserDefaults].currentUser.email;
 }
 
 - (IBAction)doContinue {

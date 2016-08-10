@@ -50,6 +50,7 @@
                                              selector:@selector(showKeyboard:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
+    [self loadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -57,9 +58,10 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)loadData {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    self.firstNameTextField.text = currentUser.firstName;
+    self.lastNameTextField.text = currentUser.lastName;
 }
 
 - (IBAction)doContinue {

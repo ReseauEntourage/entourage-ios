@@ -20,6 +20,7 @@
 #import "NSString+Validators.h"
 #import "UIBarButtonItem+factory.h"
 #import "NSError+message.h"
+#import "UIStoryboard+entourage.h"
 
 @interface OTCodeViewController ()
 
@@ -106,7 +107,10 @@
                                    [SVProgressHUD dismiss];
                                    [NSUserDefaults standardUserDefaults].currentUser = user;
                                    [NSUserDefaults standardUserDefaults].temporaryUser = nil;
-                                   [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:self];
+                                   if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
+                                       [UIStoryboard showSWRevealController];
+                                   else
+                                       [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:self];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
                                }];
