@@ -13,7 +13,10 @@
 @implementation OTMyEntouragesCellProvider
 
 - (UITableViewCell *)getTableViewCellForPath:(NSIndexPath *)indexPath {
+    OTFeedItem *item = (OTFeedItem *)[self.tableDataSource getItemAtIndexPath:indexPath];
+    
     OTEntouragesTableViewCell *cell = (OTEntouragesTableViewCell *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:@"EntourageCell"];
+    [cell configureWith:item];
     return cell;
 }
 

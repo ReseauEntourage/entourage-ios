@@ -25,6 +25,7 @@ typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTyp
 @property (nonatomic, strong) NSMutableArray *tourPoints;
 @property (nonatomic, strong) NSString *organizationName;
 @property (nonatomic, strong) NSString *organizationDesc;
+@property (nonatomic, strong) NSDate *startTime;
 @property (nonatomic, strong) NSDate *endTime;
 @property (nonatomic, strong) NSNumber *distance;
 @property (nonatomic, strong) NSNumber *noMessages;

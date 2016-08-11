@@ -52,6 +52,7 @@
     self = [super initWithDictionary:dictionary];
     if (self) {
         self.creationDate = [dictionary dateForKey:kWSKeyStartDate];
+        self.startTime = [dictionary dateForKey:kWSKeyStartDate];
         self.endTime = [dictionary dateForKey:kWSKeyEndDate];
         self.type = [dictionary valueForKey:kWSKeyTourType];
         self.distance = [dictionary numberForKey:kWSKeyDistance];

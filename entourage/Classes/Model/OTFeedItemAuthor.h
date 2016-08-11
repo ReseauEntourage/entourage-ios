@@ -1,5 +1,5 @@
 //
-//  OTTourAuthor.h
+//  OTFeedItemAuthor.h
 //  entourage
 //
 //  Created by Ciprian Habuc on 17/02/16.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface OTTourAuthor : NSObject
+@interface OTFeedItemAuthor : NSObject
 
 @property (strong, nonatomic) NSNumber *uID;
 @property (strong, nonatomic) NSString *avatarUrl;

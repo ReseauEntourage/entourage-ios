@@ -10,7 +10,8 @@
 
 @implementation OTEntouragesTableViewCell
 
-- (void)awakeFromNib {
+- (void)configureWith:(OTFeedItem *)item {
+    
 }
 
 @end

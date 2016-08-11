@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "OTAPIKeys.h"
 #import "NSDictionary+Parsing.h"
-#import "OTTourAuthor.h"
+#import "OTFeedItemAuthor.h"
 
 #define FEEDITEM_STATUS_ACTIVE @"active"
 #define FEEDITEM_STATUS_CLOSED @"closed"
@@ -22,7 +22,7 @@
 @interface OTFeedItem : NSObject
 
 @property (nonatomic, strong) NSNumber *uid;
-@property (nonatomic, strong) OTTourAuthor *author;
+@property (nonatomic, strong) OTFeedItemAuthor *author;
 @property (nonatomic, strong) NSDate *creationDate;
 @property (nonatomic, strong) NSDate *updatedDate;
 @property (nonatomic, strong) NSString *joinStatus;

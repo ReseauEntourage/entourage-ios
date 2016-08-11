@@ -1,12 +1,12 @@
 //
-//  OTTourAuthor.m
+//  OTFeedItemAuthor.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 17/02/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTTourAuthor.h"
+#import "OTFeedItemAuthor.h"
 #import "NSDictionary+Parsing.h"
 
 #define kWSuid @"id"
@@ -15,14 +15,13 @@
 
 
 
-@implementation OTTourAuthor
+@implementation OTFeedItemAuthor
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary {
     self = [super init];
     if (self) {
         self.uID = [dictionary valueForKey:kWSuid];
         NSString *dnameVal = [dictionary valueForKey:kWDisplayName];
-       
         self.displayName = [dnameVal isKindOfClass:[NSNull class]] ? @"" : dnameVal;
         self.avatarUrl = [dictionary valueForKey:kWSAvatar_URL];
     }

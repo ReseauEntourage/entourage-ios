@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTFeedItem.h"
 
 @interface OTEntouragesTableViewCell : UITableViewCell
+
+- (void)configureWith:(OTFeedItem *)item;
 
 @end

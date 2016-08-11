@@ -7,7 +7,7 @@
 //
 
 #import "UILabel+entourage.h"
-#import "OTTourAuthor.h"
+#import "OTFeedItemAuthor.h"
 #import "OTTourPoint.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "TTTLocationFormatter.h"
