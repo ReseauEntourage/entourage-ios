@@ -161,15 +161,16 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gox-Ma-Kkr">
-                                                            <rect key="frame" x="245" y="16" width="36" height="36"/>
+                                                            <rect key="frame" x="250" y="16" width="36" height="36"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="36" id="Ykv-r2-hDs"/>
                                                                 <constraint firstAttribute="width" constant="36" id="aGh-Qd-7q4"/>
                                                             </constraints>
                                                             <state key="normal" image="userSmall"/>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcN-Lm-fLl">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcN-Lm-fLl">
                                                             <rect key="frame" x="276" y="16" width="36" height="36"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="36" id="7p4-0n-RmE"/>
                                                                 <constraint firstAttribute="height" constant="36" id="x6U-RE-9B9"/>
@@ -194,9 +195,9 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kF-t9-s6d">
-                                                            <rect key="frame" x="15" y="97" width="298" height="36"/>
+                                                            <rect key="frame" x="15" y="95" width="298" height="45"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="36" id="fWC-Cm-lh3"/>
+                                                                <constraint firstAttribute="height" constant="45" id="fWC-Cm-lh3"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -212,7 +213,7 @@
                                                         <constraint firstItem="gox-Ma-Kkr" firstAttribute="centerY" secondItem="EcN-Lm-fLl" secondAttribute="centerY" id="I53-gs-c04"/>
                                                         <constraint firstItem="Ddh-Li-8k9" firstAttribute="top" secondItem="hSm-Ro-7g4" secondAttribute="top" constant="15" id="IhS-Wo-dhk"/>
                                                         <constraint firstAttribute="trailing" secondItem="0kF-t9-s6d" secondAttribute="trailing" constant="15" id="Qhv-Eh-RPI"/>
-                                                        <constraint firstItem="EcN-Lm-fLl" firstAttribute="leading" secondItem="gox-Ma-Kkr" secondAttribute="trailing" constant="-5" id="Qq4-Ba-KL4"/>
+                                                        <constraint firstItem="EcN-Lm-fLl" firstAttribute="leading" secondItem="gox-Ma-Kkr" secondAttribute="trailing" constant="-10" id="Qq4-Ba-KL4"/>
                                                         <constraint firstItem="wbO-nh-0Vs" firstAttribute="top" secondItem="Ddh-Li-8k9" secondAttribute="bottom" id="Sj7-ep-2u5"/>
                                                         <constraint firstItem="dLz-jv-s7t" firstAttribute="top" secondItem="AQt-0Y-ep7" secondAttribute="bottom" constant="15" id="SmB-Ij-beq"/>
                                                         <constraint firstItem="dLz-jv-s7t" firstAttribute="leading" secondItem="hSm-Ro-7g4" secondAttribute="leading" constant="15" id="UAw-L4-nsB"/>
@@ -221,7 +222,7 @@
                                                         <constraint firstItem="AQt-0Y-ep7" firstAttribute="leading" secondItem="Ddh-Li-8k9" secondAttribute="leading" id="kxB-i1-hGR"/>
                                                         <constraint firstItem="AQt-0Y-ep7" firstAttribute="top" secondItem="wbO-nh-0Vs" secondAttribute="bottom" constant="9" id="n4o-6Y-KJN"/>
                                                         <constraint firstItem="Ddh-Li-8k9" firstAttribute="leading" secondItem="hSm-Ro-7g4" secondAttribute="leading" constant="15" id="tLw-oV-qX0"/>
-                                                        <constraint firstItem="0kF-t9-s6d" firstAttribute="top" secondItem="dLz-jv-s7t" secondAttribute="bottom" constant="2" id="tRE-n4-9v0"/>
+                                                        <constraint firstItem="0kF-t9-s6d" firstAttribute="top" secondItem="dLz-jv-s7t" secondAttribute="bottom" id="tRE-n4-9v0"/>
                                                         <constraint firstItem="wbO-nh-0Vs" firstAttribute="leading" secondItem="Ddh-Li-8k9" secondAttribute="leading" id="v7n-Y1-G5F"/>
                                                     </constraints>
                                                 </view>
@@ -235,6 +236,15 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="btnProfilePicture" destination="gox-Ma-Kkr" id="utq-MN-h91"/>
+                                            <outlet property="lblDescription" destination="wbO-nh-0Vs" id="orW-HG-BgR"/>
+                                            <outlet property="lblLastMessage" destination="0kF-t9-s6d" id="kY3-NC-5Sk"/>
+                                            <outlet property="lblNumberOfUsers" destination="EcN-Lm-fLl" id="DWd-au-A78"/>
+                                            <outlet property="lblTimeDistance" destination="AQt-0Y-ep7" id="UYL-ey-qAg"/>
+                                            <outlet property="lblTitle" destination="Ddh-Li-8k9" id="pmg-t4-hjg"/>
+                                            <outlet property="summaryProvider" destination="eFa-KF-lmI" id="LYj-wd-o7p"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -317,6 +327,7 @@
                         <outlet property="dataSource" destination="0Sx-gI-2Ez" id="nRl-nP-aDe"/>
                     </connections>
                 </customObject>
+                <customObject id="eFa-KF-lmI" customClass="OTSummaryProviderBehavior"/>
             </objects>
             <point key="canvasLocation" x="700" y="-49"/>
         </scene>
