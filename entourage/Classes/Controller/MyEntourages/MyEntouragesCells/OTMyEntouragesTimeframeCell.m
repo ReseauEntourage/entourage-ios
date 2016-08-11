@@ -10,6 +10,10 @@
 #import "OTDataSourceBehavior.h"
 #import "OTMyEntourageTimeframeFilter.h"
 
+#define TIMEFRAME_FONT_SIZE 15
+#define TIMEFRAME_ACTIVE_FONT [UIFont fontWithName:@"SFUIText-Medium" size:TIMEFRAME_FONT_SIZE]
+#define TIMEFRAME_INACTIVE_FONT [UIFont fontWithName:@"SFUIText-Light" size:TIMEFRAME_FONT_SIZE]
+
 @implementation OTMyEntouragesTimeframeCell
 
 - (void)configureWith:(OTMyEntourageFilter *)filter {
@@ -40,6 +44,9 @@
         filter.timeframeInHours = 48;
     else
         filter.timeframeInHours = 24;
+    self.btn1Day.titleLabel.font = self.btn1Day == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
+    self.btn2Days.titleLabel.font = self.btn2Days == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
+    self.btn3Days.titleLabel.font = self.btn3Days == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
 }
 
 @end
