@@ -12,5 +12,6 @@
 @protocol OTMyEntouragesFilterDelegate <NSObject>
 
 - (void)filterChanged:(OTMyEntouragesFilter *)filter;
+@property (nonatomic, strong, readonly) OTMyEntouragesFilter *currentFilter;
 
 @end

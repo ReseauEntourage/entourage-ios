@@ -11,13 +11,24 @@
 #import "UIViewController+menu.h"
 #import "UIBarButtonItem+factory.h"
 #import "UIColor+entourage.h"
+#import "OTMyEntouragesFiltersTableDataSource.h"
+
+@interface OTMyEntouragesFiltersViewController ()
+
+@property (strong, nonatomic) IBOutlet OTMyEntouragesFiltersTableDataSource *tableDataSource;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@end
 
 @implementation OTMyEntouragesFiltersViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.tableDataSource initializeWith:self.filterDelegate.currentFilter];
+    
     self.title =  OTLocalizedString(@"filters").uppercaseString;
+    self.tableView.tableFooterView = [UIView new];
     [self setupToolbarButtons];
 }
 
@@ -30,7 +41,10 @@
 }
 
 - (void)saveFilters {
-    
+    OTMyEntouragesFilter *currentFilter = [self.tableDataSource readCurrentFilter];
+    [self dismissViewControllerAnimated:YES completion:^() {
+        [self.filterDelegate filterChanged:currentFilter];
+    }];
 }
 
 @end

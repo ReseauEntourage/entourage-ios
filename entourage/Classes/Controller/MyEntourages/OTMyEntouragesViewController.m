@@ -16,6 +16,7 @@
 #import "SVProgressHUD.h"
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
+#import "OTMyEntouragesFiltersViewController.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -44,6 +45,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"MyEntouragesFiltersSegue"]) {
+        UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
+        OTMyEntouragesFiltersViewController *filtersController = (OTMyEntouragesFiltersViewController *)controller.topViewController;
+        filtersController.filterDelegate = self.entouragesDataSource;
+    }
 }
 
 #pragma mark - private methods

@@ -16,9 +16,6 @@
     return [items objectAtIndex:indexPath.row];
 }
 
-- (void)refresh {
-}
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

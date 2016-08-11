@@ -142,6 +142,10 @@
 		1ECFB3691D52570900722DAC /* OTTourMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECFB3681D52570900722DAC /* OTTourMapHandler.m */; };
 		1ECFB36C1D52578400722DAC /* OTEntourageMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECFB36B1D52578400722DAC /* OTEntourageMapHandler.m */; };
 		1ED2506D1D5A70EB005C9736 /* OTMoveUpOnViewHiddenBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED2506C1D5A70EB005C9736 /* OTMoveUpOnViewHiddenBehavior.m */; };
+		1EE9E5F51D5CDA770045904A /* OTMyEntourageFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9E5F41D5CDA770045904A /* OTMyEntourageFilter.m */; };
+		1EE9E5F91D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9E5F81D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.m */; };
+		1EE9E5FC1D5CE5780045904A /* OTMyEntouragesFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9E5FB1D5CE5780045904A /* OTMyEntouragesFilterCell.m */; };
+		1EE9E5FF1D5CE7190045904A /* OTMyEntouragesFiltersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9E5FE1D5CE7190045904A /* OTMyEntouragesFiltersCellProvider.m */; };
 		1EF25E0D1D5B2A1500BFC3BC /* OTEntouragesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF25E0C1D5B2A1500BFC3BC /* OTEntouragesTableViewCell.m */; };
 		1EF25E111D5B2F4A00BFC3BC /* OTMyEntouragesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF25E101D5B2F4A00BFC3BC /* OTMyEntouragesDataSource.m */; };
 		1EF25E151D5B3EFE00BFC3BC /* OTMyEntouragesFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF25E141D5B3EFE00BFC3BC /* OTMyEntouragesFilter.m */; };
@@ -520,6 +524,14 @@
 		1ECFB36B1D52578400722DAC /* OTEntourageMapHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageMapHandler.m; sourceTree = "<group>"; };
 		1ED2506B1D5A70EB005C9736 /* OTMoveUpOnViewHiddenBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMoveUpOnViewHiddenBehavior.h; path = Behaviors/UI/OTMoveUpOnViewHiddenBehavior.h; sourceTree = "<group>"; };
 		1ED2506C1D5A70EB005C9736 /* OTMoveUpOnViewHiddenBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMoveUpOnViewHiddenBehavior.m; path = Behaviors/UI/OTMoveUpOnViewHiddenBehavior.m; sourceTree = "<group>"; };
+		1EE9E5F31D5CDA770045904A /* OTMyEntourageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMyEntourageFilter.h; sourceTree = "<group>"; };
+		1EE9E5F41D5CDA770045904A /* OTMyEntourageFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMyEntourageFilter.m; sourceTree = "<group>"; };
+		1EE9E5F71D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesFiltersTableDataSource.h; path = Behaviors/UITableView/MyEntouragesFilters/OTMyEntouragesFiltersTableDataSource.h; sourceTree = "<group>"; };
+		1EE9E5F81D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesFiltersTableDataSource.m; path = Behaviors/UITableView/MyEntouragesFilters/OTMyEntouragesFiltersTableDataSource.m; sourceTree = "<group>"; };
+		1EE9E5FA1D5CE5780045904A /* OTMyEntouragesFilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesFilterCell.h; path = MyEntourages/MyEntouragesCells/OTMyEntouragesFilterCell.h; sourceTree = "<group>"; };
+		1EE9E5FB1D5CE5780045904A /* OTMyEntouragesFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesFilterCell.m; path = MyEntourages/MyEntouragesCells/OTMyEntouragesFilterCell.m; sourceTree = "<group>"; };
+		1EE9E5FD1D5CE7190045904A /* OTMyEntouragesFiltersCellProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesFiltersCellProvider.h; path = Behaviors/UITableView/MyEntouragesFilters/OTMyEntouragesFiltersCellProvider.h; sourceTree = "<group>"; };
+		1EE9E5FE1D5CE7190045904A /* OTMyEntouragesFiltersCellProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesFiltersCellProvider.m; path = Behaviors/UITableView/MyEntouragesFilters/OTMyEntouragesFiltersCellProvider.m; sourceTree = "<group>"; };
 		1EF25E0B1D5B2A1500BFC3BC /* OTEntouragesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTEntouragesTableViewCell.h; path = MyEntourages/MyEntouragesCells/OTEntouragesTableViewCell.h; sourceTree = "<group>"; };
 		1EF25E0C1D5B2A1500BFC3BC /* OTEntouragesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTEntouragesTableViewCell.m; path = MyEntourages/MyEntouragesCells/OTEntouragesTableViewCell.m; sourceTree = "<group>"; };
 		1EF25E0F1D5B2F4A00BFC3BC /* OTMyEntouragesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesDataSource.h; path = Behaviors/UITableView/MyEntourages/OTMyEntouragesDataSource.h; sourceTree = "<group>"; };
@@ -909,6 +921,7 @@
 		1E2F290D1D4BC6A200ABC68A /* UITableView */ = {
 			isa = PBXGroup;
 			children = (
+				1EE9E5F61D5CE0A70045904A /* MyEntouragesFilters */,
 				1EF25E0E1D5B2ED500BFC3BC /* MyEntourages */,
 				1E2232CC1D56964F004CD5E8 /* FeedItemMessages */,
 				1E2F29251D4BF49200ABC68A /* Contacts */,
@@ -1100,6 +1113,8 @@
 				1E8E16E51D5A354C005C42ED /* OTInvitationsCollectionViewCell.m */,
 				1EF25E0B1D5B2A1500BFC3BC /* OTEntouragesTableViewCell.h */,
 				1EF25E0C1D5B2A1500BFC3BC /* OTEntouragesTableViewCell.m */,
+				1EE9E5FA1D5CE5780045904A /* OTMyEntouragesFilterCell.h */,
+				1EE9E5FB1D5CE5780045904A /* OTMyEntouragesFilterCell.m */,
 			);
 			name = MyEntouragesCells;
 			sourceTree = "<group>";
@@ -1239,6 +1254,17 @@
 				1E5EBCEB1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.m */,
 			);
 			name = Map;
+			sourceTree = "<group>";
+		};
+		1EE9E5F61D5CE0A70045904A /* MyEntouragesFilters */ = {
+			isa = PBXGroup;
+			children = (
+				1EE9E5F71D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.h */,
+				1EE9E5F81D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.m */,
+				1EE9E5FD1D5CE7190045904A /* OTMyEntouragesFiltersCellProvider.h */,
+				1EE9E5FE1D5CE7190045904A /* OTMyEntouragesFiltersCellProvider.m */,
+			);
+			name = MyEntouragesFilters;
 			sourceTree = "<group>";
 		};
 		1EF25E0E1D5B2ED500BFC3BC /* MyEntourages */ = {
@@ -1454,6 +1480,8 @@
 				45F443411C90B93900DDEBE1 /* Tour */,
 				2E5B0EBA1CF0603D0078454F /* OTEntourageFilter.h */,
 				2E5B0EBB1CF0603D0078454F /* OTEntourageFilter.m */,
+				1EE9E5F31D5CDA770045904A /* OTMyEntourageFilter.h */,
+				1EE9E5F41D5CDA770045904A /* OTMyEntourageFilter.m */,
 			);
 			name = Feeds;
 			sourceTree = "<group>";
@@ -2143,6 +2171,7 @@
 				2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */,
 				45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */,
 				1E2232D91D56998E004CD5E8 /* OTAddressBookService.m in Sources */,
+				1EE9E5FF1D5CE7190045904A /* OTMyEntouragesFiltersCellProvider.m in Sources */,
 				0A70FA321BFF32AD0080E8EC /* OTFeedItemViewController.m in Sources */,
 				1E40A3401D4A81C3009E2D73 /* OTAddressBookItem.m in Sources */,
 				1E78B7F41D515E240008C00E /* NSDate+ui.m in Sources */,
@@ -2165,6 +2194,7 @@
 				0A4769381BFCC4EB006EA73A /* OTOrganization.m in Sources */,
 				454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */,
 				1E5F79921D5A16DE0005003C /* OTInvitationsCellProviderBehavior.m in Sources */,
+				1EE9E5FC1D5CE5780045904A /* OTMyEntouragesFilterCell.m in Sources */,
 				454C8F581C501B31001362B2 /* UIView+entourage.m in Sources */,
 				1E066CF41D5687ED00E5C8BE /* OTMapViewController.m in Sources */,
 				2EDA5F0E1CB67FFE00849172 /* OTToursMapDelegate.m in Sources */,
@@ -2240,6 +2270,7 @@
 				1E06FDC91D574E1C00370F4F /* OTMessageSentCell.m in Sources */,
 				45BC9BD11CE363D5000065B7 /* OTTextView.m in Sources */,
 				453117A41CD251C200C00BA8 /* MKMapView+entourage.m in Sources */,
+				1EE9E5F91D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.m in Sources */,
 				1ECDBC6C1D3D363600DD87B2 /* OTEntourageMessaging.m in Sources */,
 				1E2232D51D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m in Sources */,
 				2E5B0EBC1CF0603D0078454F /* OTEntourageFilter.m in Sources */,
@@ -2247,6 +2278,7 @@
 				1E06FDC61D574D9800370F4F /* OTChatCellBase.m in Sources */,
 				1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,
+				1EE9E5F51D5CDA770045904A /* OTMyEntourageFilter.m in Sources */,
 				45D6B8301D116A2C00357FEF /* OTFeedItemsPagination.m in Sources */,
 				1E5F79881D5A12560005003C /* OTCollectionSourceBehavior.m in Sources */,
 				1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */,

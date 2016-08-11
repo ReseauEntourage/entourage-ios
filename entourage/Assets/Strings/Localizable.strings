@@ -139,6 +139,9 @@
 "entourageQuitted" = "Entourage clôturée.";
 "addressBookDenied" = "!!Permission to access address book denied. You can reenable it from application settings.";
 "inviteByPhoneFailed" = "!!Failed to invite user by phone.";
+"invitations" = "Invitations";
+"organiser" = "Organisateur";
+"closed" = "Passé";
 
 // Feed Item details
 "item_option_close" = "Arrêter";

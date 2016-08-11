@@ -10,6 +10,7 @@
             <string>SFUIText-Light</string>
             <string>SFUIText-Light</string>
             <string>SFUIText-Light</string>
+            <string>SFUIText-Light</string>
         </mutableArray>
         <mutableArray key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
@@ -339,11 +340,81 @@
                     <view key="view" contentMode="scaleToFill" id="jGL-P4-agG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="10" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="45" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ndx-lJ-IKw">
+                                <rect key="frame" x="-4" y="64" width="328" height="504"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyEntouragesFilterCell" id="pYZ-lo-w0I" customClass="OTMyEntouragesFilterCell">
+                                        <rect key="frame" x="0.0" y="45" width="328" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pYZ-lo-w0I" id="tHc-QX-4Yy">
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFC-tG-nyI">
+                                                    <rect key="frame" x="15" y="13" width="31" height="18"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q80-6e-uuX">
+                                                    <rect key="frame" x="264" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="changeActive:" destination="pYZ-lo-w0I" eventType="valueChanged" id="jS0-2O-WGr"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="q80-6e-uuX" secondAttribute="trailing" constant="7" id="hBY-sc-xBz"/>
+                                                <constraint firstItem="q80-6e-uuX" firstAttribute="centerY" secondItem="tHc-QX-4Yy" secondAttribute="centerY" id="iAl-oP-3F9"/>
+                                                <constraint firstItem="EFC-tG-nyI" firstAttribute="centerY" secondItem="tHc-QX-4Yy" secondAttribute="centerY" id="jkc-rE-Ocb"/>
+                                                <constraint firstItem="EFC-tG-nyI" firstAttribute="leading" secondItem="tHc-QX-4Yy" secondAttribute="leadingMargin" constant="7" id="mrm-lH-fEL"/>
+                                                <constraint firstItem="q80-6e-uuX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EFC-tG-nyI" secondAttribute="trailing" constant="5" id="q7a-Et-RVJ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lblTitle" destination="EFC-tG-nyI" id="bxd-RS-qhq"/>
+                                            <outlet property="swtActive" destination="q80-6e-uuX" id="Au5-FL-U7B"/>
+                                            <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="GKf-Sn-r1N"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ndx-lJ-IKw" firstAttribute="leading" secondItem="jGL-P4-agG" secondAttribute="leadingMargin" constant="-20" id="5ts-Db-JyV"/>
+                            <constraint firstItem="WXr-um-izc" firstAttribute="top" secondItem="Ndx-lJ-IKw" secondAttribute="bottom" id="P6d-MQ-TZY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ndx-lJ-IKw" secondAttribute="trailing" constant="-20" id="xVa-2M-0aT"/>
+                            <constraint firstItem="Ndx-lJ-IKw" firstAttribute="top" secondItem="aDX-qa-hH3" secondAttribute="bottom" id="yrw-XL-Vmg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cna-cZ-4Nm"/>
+                    <connections>
+                        <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="0Vq-6H-pRf"/>
+                        <outlet property="tableView" destination="Ndx-lJ-IKw" id="KBO-Je-c6X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sgK-8L-c1G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="hjO-Jk-sXF" userLabel="Data Source" customClass="OTDataSourceBehavior">
+                    <connections>
+                        <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="M6p-sS-NHc"/>
+                        <outlet property="tableView" destination="Ndx-lJ-IKw" id="DXt-Hl-qpq"/>
+                    </connections>
+                </customObject>
+                <customObject id="sJe-Pn-K9b" userLabel="Table Data Source" customClass="OTMyEntouragesFiltersTableDataSource">
+                    <connections>
+                        <outlet property="cellProvider" destination="1Mw-Us-cuQ" id="hhX-91-yJW"/>
+                        <outlet property="dataSource" destination="hjO-Jk-sXF" id="5Sa-ig-raT"/>
+                    </connections>
+                </customObject>
+                <customObject id="1Mw-Us-cuQ" userLabel="Cell Provider" customClass="OTMyEntouragesFiltersCellProvider">
+                    <connections>
+                        <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="MTy-2A-3Rg"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1195" y="-47"/>
         </scene>
