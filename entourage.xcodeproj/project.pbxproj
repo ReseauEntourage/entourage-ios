@@ -144,7 +144,7 @@
 		1EF25E0D1D5B2A1500BFC3BC /* OTEntouragesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF25E0C1D5B2A1500BFC3BC /* OTEntouragesTableViewCell.m */; };
 		1EF25E111D5B2F4A00BFC3BC /* OTMyEntouragesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF25E101D5B2F4A00BFC3BC /* OTMyEntouragesDataSource.m */; };
 		1EF25E151D5B3EFE00BFC3BC /* OTMyEntouragesFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF25E141D5B3EFE00BFC3BC /* OTMyEntouragesFilter.m */; };
-		1EF25E181D5B65B400BFC3BC /* OTEntouragesCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF25E171D5B65B400BFC3BC /* OTEntouragesCellProvider.m */; };
+		1EF25E181D5B65B400BFC3BC /* OTMyEntouragesCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF25E171D5B65B400BFC3BC /* OTMyEntouragesCellProvider.m */; };
 		2E5B0EBC1CF0603D0078454F /* OTEntourageFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EBB1CF0603D0078454F /* OTEntourageFilter.m */; };
 		2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EBF1CF06CE50078454F /* OTFilterRadioButton.m */; };
 		2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EC21CF070DD0078454F /* OTFilterCellTableViewCell.m */; };
@@ -525,7 +525,7 @@
 		1EF25E131D5B3EFE00BFC3BC /* OTMyEntouragesFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesFilter.h; path = Behaviors/UITableView/MyEntourages/OTMyEntouragesFilter.h; sourceTree = "<group>"; };
 		1EF25E141D5B3EFE00BFC3BC /* OTMyEntouragesFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesFilter.m; path = Behaviors/UITableView/MyEntourages/OTMyEntouragesFilter.m; sourceTree = "<group>"; };
 		1EF25E161D5B65B400BFC3BC /* OTMyEntouragesCellProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesCellProvider.h; path = Behaviors/UITableView/MyEntourages/OTMyEntouragesCellProvider.h; sourceTree = "<group>"; };
-		1EF25E171D5B65B400BFC3BC /* OTEntouragesCellProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTEntouragesCellProvider.m; path = Behaviors/UITableView/MyEntourages/OTEntouragesCellProvider.m; sourceTree = "<group>"; };
+		1EF25E171D5B65B400BFC3BC /* OTMyEntouragesCellProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesCellProvider.m; path = Behaviors/UITableView/MyEntourages/OTMyEntouragesCellProvider.m; sourceTree = "<group>"; };
 		2E5B0EBA1CF0603D0078454F /* OTEntourageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFilter.h; sourceTree = "<group>"; };
 		2E5B0EBB1CF0603D0078454F /* OTEntourageFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageFilter.m; sourceTree = "<group>"; };
 		2E5B0EBE1CF06CE50078454F /* OTFilterRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFilterRadioButton.h; sourceTree = "<group>"; };
@@ -1245,7 +1245,7 @@
 				1EF25E131D5B3EFE00BFC3BC /* OTMyEntouragesFilter.h */,
 				1EF25E141D5B3EFE00BFC3BC /* OTMyEntouragesFilter.m */,
 				1EF25E161D5B65B400BFC3BC /* OTMyEntouragesCellProvider.h */,
-				1EF25E171D5B65B400BFC3BC /* OTEntouragesCellProvider.m */,
+				1EF25E171D5B65B400BFC3BC /* OTMyEntouragesCellProvider.m */,
 				1E68E1131D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.h */,
 				1E68E1141D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m */,
 			);
@@ -2106,7 +2106,7 @@
 				1E0972C01D55541E006E1FAD /* OTInviteSuccessViewController.m in Sources */,
 				452FA6301C6A50BF00D5D56D /* UIStoryboard+entourage.m in Sources */,
 				1EF25E0D1D5B2A1500BFC3BC /* OTEntouragesTableViewCell.m in Sources */,
-				1EF25E181D5B65B400BFC3BC /* OTEntouragesCellProvider.m in Sources */,
+				1EF25E181D5B65B400BFC3BC /* OTMyEntouragesCellProvider.m in Sources */,
 				1E07DA3E1D590410003119CC /* OTTourJoinerDelegate.m in Sources */,
 				1E69CABD1D37B3CC00118E33 /* NSError+message.m in Sources */,
 				1E2F291B1D4BDE9600ABC68A /* OTFilteredDataSourceBehavior.m in Sources */,
