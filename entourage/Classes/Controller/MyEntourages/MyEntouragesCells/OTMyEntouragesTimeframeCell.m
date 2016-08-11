@@ -34,7 +34,7 @@
 
 #pragma mark - private methods
 
-- (IBAction)activateButton:(UIButton *)sender withFilter:(OTMyEntourageTimeframeFilter *)filter {
+- (void)activateButton:(UIButton *)sender withFilter:(OTMyEntourageTimeframeFilter *)filter {
     [self.btn1Day setSelected:self.btn1Day == sender];
     [self.btn2Days setSelected:self.btn2Days == sender];
     [self.btn3Days setSelected:self.btn3Days == sender];
