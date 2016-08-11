@@ -14,6 +14,8 @@
 #import "OTTableDataSourceBehavior.h"
 #import "OTEntourageService.h"
 #import "SVProgressHUD.h"
+#import "UIColor+entourage.h"
+#import "OTConsts.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -33,11 +35,15 @@
     [self.invitationsCollectionDataSource initialize];
     [self.entouragesTableDataSource initialize];
     [self.toggleCollectionView initialize];
-    
     [self.toggleCollectionView toggle:NO animated:NO];
     
+    self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
     [self.entouragesDataSource loadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }
 
 #pragma mark - private methods
