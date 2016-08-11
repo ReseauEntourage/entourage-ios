@@ -77,7 +77,7 @@
 
 #pragma mark - private methods
 
--(void)setupToolbarButtons {
+- (void)setupToolbarButtons {
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
     if(![stateInfo canChangeEditState])
         return;

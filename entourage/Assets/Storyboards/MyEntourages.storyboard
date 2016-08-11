@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MH3-uF-0WG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="MH3-uF-0WG">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -119,7 +119,7 @@
                                         </constraints>
                                         <state key="normal" image="filters"/>
                                         <connections>
-                                            <segue destination="ILh-4A-ZY1" kind="presentation" id="Tnw-Iq-n8Q"/>
+                                            <segue destination="9ZL-Sm-id7" kind="modal" identifier="MyEntouragesFiltersSegue" id="gs2-HL-sp5"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -269,18 +269,12 @@
                             <constraint firstAttribute="trailingMargin" secondItem="N6O-su-Iph" secondAttribute="trailing" constant="-20" id="Jms-Ln-EEN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sIZ-hk-qpn" secondAttribute="trailing" constant="-20" id="KbX-Lb-UYc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HbN-lj-jrZ" secondAttribute="trailing" constant="-20" id="Rq9-bb-ZF2"/>
-                            <constraint firstItem="Ph8-ss-CHi" firstAttribute="top" secondItem="sIZ-hk-qpn" secondAttribute="bottom" constant="50" id="Tuh-BI-nZ8"/>
                             <constraint firstItem="sIZ-hk-qpn" firstAttribute="leading" secondItem="1km-6s-G4Q" secondAttribute="leadingMargin" constant="-20" id="VWb-9s-plB"/>
                             <constraint firstItem="sIZ-hk-qpn" firstAttribute="top" secondItem="HbN-lj-jrZ" secondAttribute="bottom" id="Vty-Dp-6el"/>
                             <constraint firstItem="Ph8-ss-CHi" firstAttribute="top" secondItem="N6O-su-Iph" secondAttribute="bottom" id="ZPp-Ia-0Ps"/>
                             <constraint firstItem="N6O-su-Iph" firstAttribute="leading" secondItem="1km-6s-G4Q" secondAttribute="leadingMargin" constant="-20" id="ZhN-jN-Oqi"/>
                             <constraint firstItem="Ph8-ss-CHi" firstAttribute="top" secondItem="0qG-8g-Me3" secondAttribute="bottom" constant="12" id="rtg-s4-Dgt"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Tuh-BI-nZ8"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -332,12 +326,12 @@
                 </customObject>
                 <customObject id="eFa-KF-lmI" customClass="OTSummaryProviderBehavior"/>
             </objects>
-            <point key="canvasLocation" x="700" y="-49"/>
+            <point key="canvasLocation" x="373.33333333333331" y="-46.386666666666663"/>
         </scene>
         <!--My Entourages Filters-->
         <scene sceneID="TnJ-4g-kwJ">
             <objects>
-                <viewController id="ILh-4A-ZY1" userLabel="My Entourages Filters" customClass="MyEntouragesFiltersViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ILh-4A-ZY1" userLabel="My Entourages Filters" customClass="OTMyEntouragesFiltersViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aDX-qa-hH3"/>
                         <viewControllerLayoutGuide type="bottom" id="WXr-um-izc"/>
@@ -347,11 +341,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationItem key="navigationItem" id="cna-cZ-4Nm"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sgK-8L-c1G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1127" y="-49"/>
+            <point key="canvasLocation" x="1195" y="-47"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RMD-kO-ygR">
+            <objects>
+                <navigationController id="9ZL-Sm-id7" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oEU-eT-ttB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ILh-4A-ZY1" kind="relationship" relationship="rootViewController" id="KcE-6x-Bcu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O4n-AX-xye" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="783" y="-47"/>
         </scene>
     </scenes>
     <resources>

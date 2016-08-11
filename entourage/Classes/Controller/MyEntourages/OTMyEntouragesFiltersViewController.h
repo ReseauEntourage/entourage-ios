@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTMyEntouragesFilterDelegate.h"
 
 @interface OTMyEntouragesFiltersViewController : UIViewController
+
+@property (nonatomic, weak) id<OTMyEntouragesFilterDelegate> filterDelegate;
 
 @end
