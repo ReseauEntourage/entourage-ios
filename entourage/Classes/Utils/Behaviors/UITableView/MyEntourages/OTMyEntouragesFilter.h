@@ -17,6 +17,8 @@
 @property (nonatomic) BOOL showDemand;
 @property (nonatomic) BOOL showContribution;
 @property (nonatomic) BOOL showTours;
+@property (nonatomic) BOOL showOnlyMyEntourages;
+@property (nonatomic) int timeframeInHours;
 
 - (NSMutableDictionary *)toDictionaryWithPageNumber:(int)pageNumber andSize:(int)pageSize;
 

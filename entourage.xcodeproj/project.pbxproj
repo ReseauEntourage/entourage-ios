@@ -135,6 +135,10 @@
 		1EACE4191D11515200F3A2A6 /* OTTourFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4101D11515200F3A2A6 /* OTTourFactory.m */; };
 		1EACE41A1D11515200F3A2A6 /* OTTourStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4121D11515200F3A2A6 /* OTTourStateTransition.m */; };
 		1EACE41B1D11515200F3A2A6 /* OTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4151D11515200F3A2A6 /* OTLocationManager.m */; };
+		1EB660E31D5D27560051CBA7 /* OTMyEntouragesOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EB660E21D5D27560051CBA7 /* OTMyEntouragesOptionsViewController.m */; };
+		1EB660E61D5D29540051CBA7 /* OTMyEntourageTimeframeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EB660E51D5D29540051CBA7 /* OTMyEntourageTimeframeFilter.m */; };
+		1EB660E91D5D32880051CBA7 /* OTMyEntouragesFilterCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EB660E81D5D32880051CBA7 /* OTMyEntouragesFilterCellBase.m */; };
+		1EB660EC1D5D32EC0051CBA7 /* OTMyEntouragesTimeframeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EB660EB1D5D32EC0051CBA7 /* OTMyEntouragesTimeframeCell.m */; };
 		1EC184B71D1420D800E29D96 /* OTEntourageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC184B61D1420D800E29D96 /* OTEntourageAnnotationView.m */; };
 		1EC6F3C71D53DBEF0026766D /* OTActiveFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC6F3C61D53DBEF0026766D /* OTActiveFeedItemViewController.m */; };
 		1ECDBC691D3D35C300DD87B2 /* OTTourMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECDBC681D3D35C300DD87B2 /* OTTourMessaging.m */; };
@@ -507,6 +511,14 @@
 		1EACE4121D11515200F3A2A6 /* OTTourStateTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourStateTransition.m; sourceTree = "<group>"; };
 		1EACE4141D11515200F3A2A6 /* OTLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLocationManager.h; sourceTree = "<group>"; };
 		1EACE4151D11515200F3A2A6 /* OTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLocationManager.m; sourceTree = "<group>"; };
+		1EB660E11D5D27560051CBA7 /* OTMyEntouragesOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesOptionsViewController.h; path = MyEntourages/OTMyEntouragesOptionsViewController.h; sourceTree = "<group>"; };
+		1EB660E21D5D27560051CBA7 /* OTMyEntouragesOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesOptionsViewController.m; path = MyEntourages/OTMyEntouragesOptionsViewController.m; sourceTree = "<group>"; };
+		1EB660E41D5D29540051CBA7 /* OTMyEntourageTimeframeFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMyEntourageTimeframeFilter.h; sourceTree = "<group>"; };
+		1EB660E51D5D29540051CBA7 /* OTMyEntourageTimeframeFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMyEntourageTimeframeFilter.m; sourceTree = "<group>"; };
+		1EB660E71D5D32880051CBA7 /* OTMyEntouragesFilterCellBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesFilterCellBase.h; path = MyEntourages/MyEntouragesCells/OTMyEntouragesFilterCellBase.h; sourceTree = "<group>"; };
+		1EB660E81D5D32880051CBA7 /* OTMyEntouragesFilterCellBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesFilterCellBase.m; path = MyEntourages/MyEntouragesCells/OTMyEntouragesFilterCellBase.m; sourceTree = "<group>"; };
+		1EB660EA1D5D32EC0051CBA7 /* OTMyEntouragesTimeframeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesTimeframeCell.h; path = MyEntourages/MyEntouragesCells/OTMyEntouragesTimeframeCell.h; sourceTree = "<group>"; };
+		1EB660EB1D5D32EC0051CBA7 /* OTMyEntouragesTimeframeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesTimeframeCell.m; path = MyEntourages/MyEntouragesCells/OTMyEntouragesTimeframeCell.m; sourceTree = "<group>"; };
 		1EBEEBFE1D56709900E5F54C /* OTStatusChangedProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTStatusChangedProtocol.h; path = Behaviors/FeedItems/OTStatusChangedProtocol.h; sourceTree = "<group>"; };
 		1EC184B51D1420D800E29D96 /* OTEntourageAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageAnnotationView.h; sourceTree = "<group>"; };
 		1EC184B61D1420D800E29D96 /* OTEntourageAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageAnnotationView.m; sourceTree = "<group>"; };
@@ -1006,6 +1018,8 @@
 				1E5F79811D5A0E040005003C /* OTMyEntouragesViewController.m */,
 				1E5BB4081D5CC4CA00F36DAE /* OTMyEntouragesFiltersViewController.h */,
 				1E5BB4091D5CC4CA00F36DAE /* OTMyEntouragesFiltersViewController.m */,
+				1EB660E11D5D27560051CBA7 /* OTMyEntouragesOptionsViewController.h */,
+				1EB660E21D5D27560051CBA7 /* OTMyEntouragesOptionsViewController.m */,
 			);
 			name = MyEntourages;
 			sourceTree = "<group>";
@@ -1115,6 +1129,10 @@
 				1EF25E0C1D5B2A1500BFC3BC /* OTEntouragesTableViewCell.m */,
 				1EE9E5FA1D5CE5780045904A /* OTMyEntouragesFilterCell.h */,
 				1EE9E5FB1D5CE5780045904A /* OTMyEntouragesFilterCell.m */,
+				1EB660E71D5D32880051CBA7 /* OTMyEntouragesFilterCellBase.h */,
+				1EB660E81D5D32880051CBA7 /* OTMyEntouragesFilterCellBase.m */,
+				1EB660EA1D5D32EC0051CBA7 /* OTMyEntouragesTimeframeCell.h */,
+				1EB660EB1D5D32EC0051CBA7 /* OTMyEntouragesTimeframeCell.m */,
 			);
 			name = MyEntouragesCells;
 			sourceTree = "<group>";
@@ -1482,6 +1500,8 @@
 				2E5B0EBB1CF0603D0078454F /* OTEntourageFilter.m */,
 				1EE9E5F31D5CDA770045904A /* OTMyEntourageFilter.h */,
 				1EE9E5F41D5CDA770045904A /* OTMyEntourageFilter.m */,
+				1EB660E41D5D29540051CBA7 /* OTMyEntourageTimeframeFilter.h */,
+				1EB660E51D5D29540051CBA7 /* OTMyEntourageTimeframeFilter.m */,
 			);
 			name = Feeds;
 			sourceTree = "<group>";
@@ -2106,6 +2126,7 @@
 				1E78B7AA1D512DB10008C00E /* OTPublicFeedItemViewController.m in Sources */,
 				4551708C1CF0D54100962369 /* OTFeedItemInfoView.m in Sources */,
 				19BA509519E9587800342A36 /* OTEncounterAnnotation.m in Sources */,
+				1EB660E31D5D27560051CBA7 /* OTMyEntouragesOptionsViewController.m in Sources */,
 				191FE92819E945F200C56BCA /* OTEncounter.m in Sources */,
 				454C8F5B1C510304001362B2 /* UINavigationController+entourage.m in Sources */,
 				191FE92419E943D900C56BCA /* OTAuthService.m in Sources */,
@@ -2126,6 +2147,7 @@
 				1EACE4171D11515200F3A2A6 /* OTEntourageStateTransition.m in Sources */,
 				0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */,
 				1EF25E111D5B2F4A00BFC3BC /* OTMyEntouragesDataSource.m in Sources */,
+				1EB660EC1D5D32EC0051CBA7 /* OTMyEntouragesTimeframeCell.m in Sources */,
 				DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */,
 				1E2F292A1D4BF4CD00ABC68A /* OTContactsFilteredDataSourceBehavior.m in Sources */,
 				45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */,
@@ -2211,6 +2233,7 @@
 				1EACE4191D11515200F3A2A6 /* OTTourFactory.m in Sources */,
 				455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */,
 				1EACE4181D11515200F3A2A6 /* OTFeedItemFactory.m in Sources */,
+				1EB660E91D5D32880051CBA7 /* OTMyEntouragesFilterCellBase.m in Sources */,
 				1E2232CB1D568B4C004CD5E8 /* OTTapViewBehavior.m in Sources */,
 				45E37E531CEE1F7D005C3175 /* OTFeedsService.m in Sources */,
 				1E78B7F01D513F0F0008C00E /* OTEntourageUI.m in Sources */,
@@ -2228,6 +2251,7 @@
 				45F4433C1C90B40400DDEBE1 /* OTFeedItemTimelinePoint.m in Sources */,
 				1E0972BD1D55541E006E1FAD /* OTInviteByPhoneViewController.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
+				1EB660E61D5D29540051CBA7 /* OTMyEntourageTimeframeFilter.m in Sources */,
 				1EF25E151D5B3EFE00BFC3BC /* OTMyEntouragesFilter.m in Sources */,
 				1E2232DC1D5699AD004CD5E8 /* OTMessagingService.m in Sources */,
 				1E2F29081D4BC26600ABC68A /* OTPhotoPickerBehavior.m in Sources */,

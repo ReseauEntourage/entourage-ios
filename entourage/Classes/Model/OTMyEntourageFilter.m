@@ -42,6 +42,9 @@
         case MyEntourageFilterKeyTour:
             filter.showTours = self.active;
             break;
+        case MyEntourageFilterKeyOnlyMyEntourages:
+            filter.showOnlyMyEntourages = self.active;
+            break;
         default:
             break;
     }
@@ -65,6 +68,8 @@
             return OTLocalizedString(@"contribution");
         case MyEntourageFilterKeyTour:
             return OTLocalizedString(@"filter_entourage_show_tours");
+        case MyEntourageFilterKeyOnlyMyEntourages:
+            return OTLocalizedString(@"filter_entourage_only_my_entourages");
         default:
             return @"";
     }

@@ -19,6 +19,13 @@
 #define ALL_STATUS_STRING @"all"
 #define PAGE_NUMBER_KEY @"page"
 #define PAGE_SIZE_KEY @"per"
+#define TIMEFRAME_KEY @"time_range"
+
+@interface OTMyEntouragesFilter ()
+
+@property (nonatomic, strong) OTUser *currentUser;
+
+@end
 
 @implementation OTMyEntouragesFilter
 
@@ -32,6 +39,8 @@
         self.showDemand = YES;
         self.showContribution = YES;
         self.showTours = YES;
+        self.timeframeInHours = 24;
+        self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     }
     return self;
 }
@@ -43,6 +52,10 @@
     [result setObject:[self getStatus] forKey:FILTER_STATUS_KEY];
     [result setObject:@(pageNumber) forKey:PAGE_NUMBER_KEY];
     [result setObject:@(pageSize) forKey:PAGE_SIZE_KEY];
+    if([self.currentUser.type isEqualToString:USER_TYPE_PUBLIC]) {
+        [result setObject:@(self.timeframeInHours) forKey:TIMEFRAME_KEY];
+#warning TODO handle only my entourages
+    }
     return result;
 }
 
@@ -50,7 +63,7 @@
 
 - (NSString *)getTourTypes {
     NSArray *types = @[TOUR_MEDICAL, TOUR_SOCIAL, TOUR_DISTRIBUTIVE];
-    if(self.showTours && [[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(self.showTours && [self.currentUser.type isEqualToString:USER_TYPE_PRO])
         [types componentsJoinedByString:@","];
     return @"";
 }
@@ -65,6 +78,7 @@
 }
 
 - (NSString *)getStatus {
+#warning TODO will need more statuses then just active,closed,all
     if(self.isActive)
         return self.isClosed ? ALL_STATUS_STRING : ENTOURAGE_STATUS_OPEN;
     if(self.isClosed)

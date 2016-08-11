@@ -11,6 +11,9 @@
             <string>SFUIText-Light</string>
             <string>SFUIText-Light</string>
             <string>SFUIText-Light</string>
+            <string>SFUIText-Light</string>
+            <string>SFUIText-Light</string>
+            <string>SFUIText-Light</string>
         </mutableArray>
         <mutableArray key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
@@ -22,10 +25,10 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--My Entourages View Controller-->
+        <!--My Entourages-->
         <scene sceneID="YRj-3L-CT0">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="MH3-uF-0WG" customClass="OTMyEntouragesViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="MH3-uF-0WG" userLabel="My Entourages" customClass="OTMyEntouragesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hCo-dZ-Q9I"/>
                         <viewControllerLayoutGuide type="bottom" id="Ph8-ss-CHi"/>
@@ -120,7 +123,7 @@
                                         </constraints>
                                         <state key="normal" image="filters"/>
                                         <connections>
-                                            <segue destination="9ZL-Sm-id7" kind="modal" identifier="MyEntouragesFiltersSegue" id="gs2-HL-sp5"/>
+                                            <segue destination="9ZL-Sm-id7" kind="modal" identifier="FiltersSegue" id="gs2-HL-sp5"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -259,6 +262,9 @@
                                     <constraint firstAttribute="height" constant="62" id="sTC-W7-ikv"/>
                                 </constraints>
                                 <state key="normal" image="create"/>
+                                <connections>
+                                    <segue destination="AHM-70-RwU" kind="modal" identifier="OptionsSegue" id="kyH-GS-ona"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
@@ -329,6 +335,24 @@
             </objects>
             <point key="canvasLocation" x="373.33333333333331" y="-46.386666666666663"/>
         </scene>
+        <!--My Entourages Options-->
+        <scene sceneID="Um8-xG-z9g">
+            <objects>
+                <viewController modalPresentationStyle="currentContext" id="AHM-70-RwU" userLabel="My Entourages Options" customClass="OTMyEntouragesOptionsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MwT-gd-9mv"/>
+                        <viewControllerLayoutGuide type="bottom" id="d1I-T4-DjN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="epM-Ug-OBl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BsL-UY-oVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="373" y="624"/>
+        </scene>
         <!--My Entourages Filters-->
         <scene sceneID="TnJ-4g-kwJ">
             <objects>
@@ -346,7 +370,7 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyEntouragesFilterCell" id="pYZ-lo-w0I" customClass="OTMyEntouragesFilterCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FilterCell" rowHeight="44" id="pYZ-lo-w0I" customClass="OTMyEntouragesFilterCell">
                                         <rect key="frame" x="0.0" y="45" width="328" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pYZ-lo-w0I" id="tHc-QX-4Yy">
@@ -378,6 +402,98 @@
                                             <outlet property="lblTitle" destination="EFC-tG-nyI" id="bxd-RS-qhq"/>
                                             <outlet property="swtActive" destination="q80-6e-uuX" id="Au5-FL-U7B"/>
                                             <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="GKf-Sn-r1N"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="TimeframeCell" rowHeight="90" id="OBR-vC-47z" customClass="OTMyEntouragesTimeframeCell">
+                                        <rect key="frame" x="0.0" y="89" width="328" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OBR-vC-47z" id="vJ3-It-mrZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="89"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3p-eK-vbE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="328" height="89"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FbF-pI-Vfv">
+                                                            <rect key="frame" x="47" y="22" width="46" height="46"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="46" id="1GX-8g-jiM"/>
+                                                                <constraint firstAttribute="width" constant="46" id="mgb-nb-7sh"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                                            <state key="normal" title="24H" backgroundImage="24HInactive">
+                                                                <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <state key="selected" title="24H" backgroundImage="24HActive">
+                                                                <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="activateButton:" destination="OBR-vC-47z" eventType="touchUpInside" id="1Pj-3c-AtK"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRI-Or-rfy">
+                                                            <rect key="frame" x="141" y="22" width="46" height="46"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="46" id="U4z-7H-NQ8"/>
+                                                                <constraint firstAttribute="width" constant="46" id="kz6-lu-ncC"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                                            <state key="normal" title="2J" backgroundImage="24HInactive">
+                                                                <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <state key="selected" title="2J" backgroundImage="24HActive">
+                                                                <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="activateButton:" destination="OBR-vC-47z" eventType="touchUpInside" id="UuP-Th-NzY"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKH-mZ-wT2">
+                                                            <rect key="frame" x="235" y="22" width="46" height="46"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="46" id="BvT-IK-gSX"/>
+                                                                <constraint firstAttribute="width" constant="46" id="plU-MD-okZ"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                                            <state key="normal" title="3J" backgroundImage="24HInactive">
+                                                                <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <state key="selected" title="3J" backgroundImage="24HActive">
+                                                                <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="activateButton:" destination="OBR-vC-47z" eventType="touchUpInside" id="d3j-HH-YkP"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="tKH-mZ-wT2" firstAttribute="leading" secondItem="SRI-Or-rfy" secondAttribute="trailing" priority="999" constant="48" id="1uR-xt-Bph"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tKH-mZ-wT2" secondAttribute="trailing" constant="15" id="5Tg-go-WCK"/>
+                                                        <constraint firstItem="SRI-Or-rfy" firstAttribute="centerY" secondItem="S3p-eK-vbE" secondAttribute="centerY" id="CGc-Oy-53V"/>
+                                                        <constraint firstItem="SRI-Or-rfy" firstAttribute="centerX" secondItem="S3p-eK-vbE" secondAttribute="centerX" id="ERI-oI-kBt"/>
+                                                        <constraint firstItem="FbF-pI-Vfv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="S3p-eK-vbE" secondAttribute="leading" constant="15" id="GDF-hf-fHF"/>
+                                                        <constraint firstItem="tKH-mZ-wT2" firstAttribute="centerY" secondItem="SRI-Or-rfy" secondAttribute="centerY" id="LVk-MC-wlz"/>
+                                                        <constraint firstItem="FbF-pI-Vfv" firstAttribute="centerY" secondItem="SRI-Or-rfy" secondAttribute="centerY" id="PvI-Q9-AUT"/>
+                                                        <constraint firstItem="SRI-Or-rfy" firstAttribute="leading" secondItem="FbF-pI-Vfv" secondAttribute="trailing" priority="999" constant="48" id="bbl-7Z-QHJ"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="S3p-eK-vbE" secondAttribute="trailing" id="CtI-FX-hDE"/>
+                                                <constraint firstItem="S3p-eK-vbE" firstAttribute="top" secondItem="vJ3-It-mrZ" secondAttribute="top" id="VMH-PU-3sj"/>
+                                                <constraint firstItem="S3p-eK-vbE" firstAttribute="leading" secondItem="vJ3-It-mrZ" secondAttribute="leading" id="eon-NB-pd7"/>
+                                                <constraint firstAttribute="bottom" secondItem="S3p-eK-vbE" secondAttribute="bottom" id="x8y-Oe-6SA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="btn1Day" destination="FbF-pI-Vfv" id="ceV-Rh-JWE"/>
+                                            <outlet property="btn2Days" destination="SRI-Or-rfy" id="GeJ-F2-nb7"/>
+                                            <outlet property="btn3Days" destination="tKH-mZ-wT2" id="RFf-nN-YGA"/>
+                                            <outlet property="summaryProvider" destination="eFa-KF-lmI" id="KjJ-d8-7aU"/>
+                                            <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="5zA-sV-1af"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -436,6 +552,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="24HActive" width="48" height="48"/>
+        <image name="24HInactive" width="48" height="48"/>
         <image name="create" width="62" height="62"/>
         <image name="filters" width="22" height="22"/>
         <image name="invitationSquare" width="56" height="56"/>

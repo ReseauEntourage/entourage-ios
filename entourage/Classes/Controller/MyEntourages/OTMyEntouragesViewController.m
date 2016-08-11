@@ -48,7 +48,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"MyEntouragesFiltersSegue"]) {
+    if([segue.identifier isEqualToString:@"FiltersSegue"]) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTMyEntouragesFiltersViewController *filtersController = (OTMyEntouragesFiltersViewController *)controller.topViewController;
         filtersController.filterDelegate = self.entouragesDataSource;

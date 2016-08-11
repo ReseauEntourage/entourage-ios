@@ -9,13 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "OTMyEntourageFilter.h"
 #import "OTMyEntouragesFiltersTableDataSource.h"
+#import "OTMyEntouragesFilterCellBase.h"
 
-@interface OTMyEntouragesFilterCell : UITableViewCell
+@interface OTMyEntouragesFilterCell : OTMyEntouragesFilterCellBase
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UISwitch *swtActive;
-@property (nonatomic, weak) IBOutlet OTMyEntouragesFiltersTableDataSource* tableDataSource;
-
-- (void)configureWith:(OTMyEntourageFilter *)filter;
 
 @end

@@ -8,14 +8,15 @@
 
 #import "OTMyEntouragesFiltersCellProvider.h"
 #import "OTDataSourceBehavior.h"
-#import "OTMyEntouragesFilterCell.h"
+#import "OTMyEntouragesFilterCellBase.h"
 #import "OTMyEntourageFilter.h"
 
 @implementation OTMyEntouragesFiltersCellProvider
 
 - (UITableViewCell *)getTableViewCellForPath:(NSIndexPath *)indexPath {
     OTMyEntourageFilter *filterItem = [self.tableDataSource getItemAtIndexPath:indexPath];
-    OTMyEntouragesFilterCell *cell = (OTMyEntouragesFilterCell *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:@"MyEntouragesFilterCell"];
+    NSString *identifier = filterItem.key == MyEntourageFilterKeyTimeframe ? @"TimeframeCell" : @"FilterCell";
+    OTMyEntouragesFilterCellBase *cell = (OTMyEntouragesFilterCellBase *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:identifier];
     [cell configureWith:filterItem];
     return cell;
 }

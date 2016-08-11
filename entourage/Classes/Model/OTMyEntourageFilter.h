@@ -16,7 +16,9 @@ typedef enum {
     MyEntourageFilterKeyClosed,
     MyEntourageFilterKeyDemand,
     MyEntourageFilterKeyContribution,
-    MyEntourageFilterKeyTour
+    MyEntourageFilterKeyTour,
+    MyEntourageFilterKeyOnlyMyEntourages,
+    MyEntourageFilterKeyTimeframe
 } MyEntourageFilterKey;
 
 @interface OTMyEntourageFilter : NSObject
