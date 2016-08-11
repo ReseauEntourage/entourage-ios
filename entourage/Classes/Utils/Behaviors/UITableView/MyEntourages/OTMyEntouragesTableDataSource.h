@@ -1,5 +1,5 @@
 //
-//  OTEntouragesTableDataSource.h
+//  OTMyEntouragesTableDataSource.h
 //  entourage
 //
 //  Created by sergiu buceac on 8/10/16.
@@ -8,6 +8,6 @@
 
 #import "OTTableDataSourceBehavior.h"
 
-@interface OTEntouragesTableDataSource : OTTableDataSourceBehavior
+@interface OTMyEntouragesTableDataSource : OTTableDataSourceBehavior
 
 @end

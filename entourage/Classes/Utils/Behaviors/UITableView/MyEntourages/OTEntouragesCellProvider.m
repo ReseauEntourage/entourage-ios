@@ -1,16 +1,16 @@
 //
-//  OTEntouragesCellProvider.m
+//  OTMyEntouragesCellProvider.m
 //  entourage
 //
 //  Created by sergiu buceac on 8/10/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTEntouragesCellProvider.h"
+#import "OTMyEntouragesCellProvider.h"
 #import "OTEntouragesTableViewCell.h"
 #import "OTDataSourceBehavior.h"
 
-@implementation OTEntouragesCellProvider
+@implementation OTMyEntouragesCellProvider
 
 - (UITableViewCell *)getTableViewCellForPath:(NSIndexPath *)indexPath {
     OTEntouragesTableViewCell *cell = (OTEntouragesTableViewCell *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:@"EntourageCell"];

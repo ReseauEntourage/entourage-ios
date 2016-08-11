@@ -229,12 +229,12 @@
                         <outlet property="tableView" destination="sIZ-hk-qpn" id="hul-Ri-ThE"/>
                     </connections>
                 </customObject>
-                <customObject id="xfP-Fm-twJ" userLabel="Entourage Cell Provider" customClass="OTEntouragesCellProvider">
+                <customObject id="xfP-Fm-twJ" userLabel="Entourage Cell Provider" customClass="OTMyEntouragesCellProvider">
                     <connections>
                         <outlet property="tableDataSource" destination="2Il-nd-24e" id="hRO-d3-BET"/>
                     </connections>
                 </customObject>
-                <customObject id="2Il-nd-24e" userLabel="Entourage Table Data Source" customClass="OTEntouragesTableDataSource">
+                <customObject id="2Il-nd-24e" userLabel="Entourage Table Data Source" customClass="OTMyEntouragesTableDataSource">
                     <connections>
                         <outlet property="cellProvider" destination="xfP-Fm-twJ" id="GoR-aT-LWq"/>
                         <outlet property="dataSource" destination="0Sx-gI-2Ez" id="nRl-nP-aDe"/>

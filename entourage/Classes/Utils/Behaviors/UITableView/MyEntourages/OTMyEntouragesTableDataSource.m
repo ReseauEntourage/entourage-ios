@@ -1,20 +1,22 @@
 //
-//  OTEntouragesTableDataSource.m
+//  OTMyEntouragesTableDataSource.m
 //  entourage
 //
 //  Created by sergiu buceac on 8/10/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTEntouragesTableDataSource.h"
+#import "OTMyEntouragesTableDataSource.h"
 #import "OTMyEntouragesDataSource.h"
 #import "OTTableCellProviderBehavior.h"
 
-@interface OTEntouragesTableDataSource () <UITableViewDelegate>
+#define LOAD_MORE_DRAG_OFFSET 50
+
+@interface OTMyEntouragesTableDataSource () <UITableViewDelegate>
 
 @end
 
-@implementation OTEntouragesTableDataSource
+@implementation OTMyEntouragesTableDataSource
 
 - (void)initialize {
     [super initialize];
@@ -36,12 +38,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell * cell = [self.cellProvider getTableViewCellForPath:indexPath];
-    if(indexPath.section == self.dataSource.items.count - 1)
-        dispatch_async(dispatch_get_main_queue(), ^() {
-            [((OTMyEntouragesDataSource *)self.dataSource) loadNextPage];
-        });
-    return cell;
+    return [self.cellProvider getTableViewCellForPath:indexPath];
 }
 
 #pragma mark - UITableViewDelegate
@@ -58,6 +55,21 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 15;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    CGPoint offset = scrollView.contentOffset;
+    CGRect bounds = scrollView.bounds;
+    CGSize size = scrollView.contentSize;
+    UIEdgeInsets inset = scrollView.contentInset;
+    float y = offset.y + bounds.size.height - inset.bottom;
+    float h = size.height;
+    float reload_distance = LOAD_MORE_DRAG_OFFSET;
+    if(y > h + reload_distance) {
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            [((OTMyEntouragesDataSource *)self.dataSource) loadNextPage];
+        });
+    }
 }
 
 @end
