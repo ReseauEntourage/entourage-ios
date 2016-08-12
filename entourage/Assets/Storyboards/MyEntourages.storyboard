@@ -292,7 +292,9 @@
                         <outlet property="entouragesTableDataSource" destination="2Il-nd-24e" id="nLX-KD-4ty"/>
                         <outlet property="invitationsCollectionDataSource" destination="XtX-Fl-5hO" id="hxO-Ca-fRe"/>
                         <outlet property="invitationsDataSource" destination="pYl-y1-57D" id="55N-Qd-5BS"/>
+                        <outlet property="optionsBehavior" destination="omB-rY-1vt" id="qbi-OW-VpU"/>
                         <outlet property="toggleCollectionView" destination="ntM-qh-ECK" id="tng-qQ-9aF"/>
+                        <segue destination="6JK-OI-tTh" kind="modal" identifier="EntourageCreateSegue" id="ujP-hf-Ybz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fUU-LI-bnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -336,6 +338,12 @@
                     </connections>
                 </customObject>
                 <customObject id="eFa-KF-lmI" customClass="OTSummaryProviderBehavior"/>
+                <customObject id="omB-rY-1vt" userLabel="My Entourages Options" customClass="OTMyEntouragesOptionsBehavior">
+                    <connections>
+                        <action selector="changedEntourages:" destination="MH3-uF-0WG" eventType="valueChanged" id="DJi-Tf-SKp"/>
+                        <outlet property="owner" destination="MH3-uF-0WG" id="0Qx-MZ-ASd"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="373.33333333333331" y="-46.386666666666663"/>
         </scene>
@@ -369,6 +377,9 @@
                                     <constraint firstAttribute="height" constant="48" id="bKS-fu-JbP"/>
                                 </constraints>
                                 <state key="normal" image="createMaraude"/>
+                                <connections>
+                                    <action selector="createTour" destination="AHM-70-RwU" eventType="touchUpInside" id="Fpj-es-i5n"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvB-c0-z8T">
                                 <rect key="frame" x="241" y="382" width="48" height="48"/>
@@ -377,6 +388,9 @@
                                     <constraint firstAttribute="width" constant="48" id="Rhy-IT-RcD"/>
                                 </constraints>
                                 <state key="normal" image="megaphone"/>
+                                <connections>
+                                    <action selector="createDemand" destination="AHM-70-RwU" eventType="touchUpInside" id="sQ8-jq-6jZ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zC8-Kg-Hs3">
                                 <rect key="frame" x="241" y="326" width="48" height="48"/>
@@ -385,6 +399,9 @@
                                     <constraint firstAttribute="height" constant="48" id="r8a-NU-Ilm"/>
                                 </constraints>
                                 <state key="normal" image="heart"/>
+                                <connections>
+                                    <action selector="createContribution" destination="AHM-70-RwU" eventType="touchUpInside" id="8ON-gq-nbA"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une maraude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dF-YR-3ps">
                                 <rect key="frame" x="92" y="453" width="139" height="18"/>
@@ -438,6 +455,16 @@
                 </customObject>
             </objects>
             <point key="canvasLocation" x="373" y="624"/>
+        </scene>
+        <!--EntourageCreator-->
+        <scene sceneID="wT3-h3-3eW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EntourageCreator" id="6JK-OI-tTh" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Iwg-P9-UDp"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OyM-hd-yPO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="717" y="-409"/>
         </scene>
         <!--My Entourages Filters-->
         <scene sceneID="TnJ-4g-kwJ">

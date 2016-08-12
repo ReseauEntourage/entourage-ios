@@ -17,6 +17,7 @@
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 #import "OTMyEntouragesFiltersViewController.h"
+#import "OTMyEntouragesOptionsBehavior.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -25,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet OTToggleVisibleBehavior *toggleCollectionView;
 @property (strong, nonatomic) IBOutlet OTMyEntouragesDataSource *entouragesDataSource;
 @property (strong, nonatomic) IBOutlet OTTableDataSourceBehavior *entouragesTableDataSource;
+@property (strong, nonatomic) IBOutlet OTMyEntouragesOptionsBehavior *optionsBehavior;
 
 @end
 
@@ -37,6 +39,7 @@
     [self.entouragesTableDataSource initialize];
     [self.toggleCollectionView initialize];
     [self.toggleCollectionView toggle:NO animated:NO];
+    [self.optionsBehavior configureWith:self.optionsDelegate];
     
     self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
@@ -48,11 +51,17 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([self.optionsBehavior prepareSegueForOptions:segue])
+        return;
     if([segue.identifier isEqualToString:@"FiltersSegue"]) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTMyEntouragesFiltersViewController *filtersController = (OTMyEntouragesFiltersViewController *)controller.topViewController;
         filtersController.filterDelegate = self.entouragesDataSource;
     }
+}
+
+- (IBAction)changedEntourages:(id)sender {
+    [self.entouragesDataSource loadData];
 }
 
 #pragma mark - private methods

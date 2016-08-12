@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTOptionsViewController.h"
 
 @interface OTMyEntouragesViewController : UIViewController
+
+@property (nonatomic, weak) id<OTOptionsDelegate> optionsDelegate;
 
 @end

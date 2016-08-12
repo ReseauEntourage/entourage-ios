@@ -123,6 +123,7 @@
 		1E78B7F01D513F0F0008C00E /* OTEntourageUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E78B7EF1D513F0F0008C00E /* OTEntourageUI.m */; };
 		1E78B7F41D515E240008C00E /* NSDate+ui.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E78B7F31D515E240008C00E /* NSDate+ui.m */; };
 		1E8845921D5DC91800747223 /* OTToggleGroupViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8845911D5DC91800747223 /* OTToggleGroupViewBehavior.m */; };
+		1E8845971D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8845961D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.m */; };
 		1E8E16E61D5A354C005C42ED /* OTInvitationsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E16E51D5A354C005C42ED /* OTInvitationsCollectionViewCell.m */; };
 		1E8E16E91D5A3814005C42ED /* OTEntourageInvitation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E16E81D5A3814005C42ED /* OTEntourageInvitation.m */; };
 		1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9003681D34FAAB004E18BC /* OTBehavior.m */; };
@@ -480,6 +481,9 @@
 		1E78B7F31D515E240008C00E /* NSDate+ui.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+ui.m"; path = "Helper/NSDate+ui.m"; sourceTree = "<group>"; };
 		1E8845901D5DC91800747223 /* OTToggleGroupViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTToggleGroupViewBehavior.h; path = Behaviors/UI/OTToggleGroupViewBehavior.h; sourceTree = "<group>"; };
 		1E8845911D5DC91800747223 /* OTToggleGroupViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTToggleGroupViewBehavior.m; path = Behaviors/UI/OTToggleGroupViewBehavior.m; sourceTree = "<group>"; };
+		1E8845941D5DDAE700747223 /* OTMyEntouragesOptionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesOptionsDelegate.h; path = Behaviors/MyEntourages/OTMyEntouragesOptionsDelegate.h; sourceTree = "<group>"; };
+		1E8845951D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesOptionsBehavior.h; path = Behaviors/MyEntourages/OTMyEntouragesOptionsBehavior.h; sourceTree = "<group>"; };
+		1E8845961D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesOptionsBehavior.m; path = Behaviors/MyEntourages/OTMyEntouragesOptionsBehavior.m; sourceTree = "<group>"; };
 		1E8E16E41D5A354C005C42ED /* OTInvitationsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTInvitationsCollectionViewCell.h; path = MyEntourages/MyEntouragesCells/OTInvitationsCollectionViewCell.h; sourceTree = "<group>"; };
 		1E8E16E51D5A354C005C42ED /* OTInvitationsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTInvitationsCollectionViewCell.m; path = MyEntourages/MyEntouragesCells/OTInvitationsCollectionViewCell.m; sourceTree = "<group>"; };
 		1E8E16E71D5A3814005C42ED /* OTEntourageInvitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageInvitation.h; sourceTree = "<group>"; };
@@ -1105,6 +1109,16 @@
 			name = NewsFeed;
 			sourceTree = "<group>";
 		};
+		1E8845931D5DDAB900747223 /* MyEntourages */ = {
+			isa = PBXGroup;
+			children = (
+				1E8845941D5DDAE700747223 /* OTMyEntouragesOptionsDelegate.h */,
+				1E8845951D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.h */,
+				1E8845961D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.m */,
+			);
+			name = MyEntourages;
+			sourceTree = "<group>";
+		};
 		1E8E16E31D5A351D005C42ED /* MyEntouragesCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1136,6 +1150,7 @@
 		1E9003661D34FA90004E18BC /* Behaviors */ = {
 			isa = PBXGroup;
 			children = (
+				1E8845931D5DDAB900747223 /* MyEntourages */,
 				1E8E16EA1D5A6EE2005C42ED /* UI */,
 				1E5F79851D5A12160005003C /* UICollectionView */,
 				1E2232C81D568B0D004CD5E8 /* Touch */,
@@ -2162,6 +2177,7 @@
 				2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */,
 				0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */,
 				45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */,
+				1E8845971D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.m in Sources */,
 				1EC6F3C71D53DBEF0026766D /* OTActiveFeedItemViewController.m in Sources */,
 				2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */,
 				1E2232D21D569744004CD5E8 /* OTMessageTableDataSourceBehavior.m in Sources */,

@@ -25,6 +25,7 @@
 #import "OTFeedItemsPagination.h"
 #import "OTPublicFeedItemViewController.h"
 #import "OTActiveFeedItemViewController.h"
+#import "OTMyEntouragesViewController.h"
 
 #import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
@@ -962,13 +963,17 @@ static bool isShowingOptions = NO;
 #pragma mark - OTOptionsDelegate
 
 - (void)createTour {
-    [self dismissViewControllerAnimated:NO completion:^{
+    void(^createBlock)() = ^() {
         if (self.toursMapDelegate.isActive) {
             [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
         } else {
             [self showAlert:OTLocalizedString(@"poi_create_tour_alert") withSegue:@"TourCreatorSegue"];
         }
-    }];
+    };
+    if([self.presentedViewController isKindOfClass:[OTMapOptionsViewController class]])
+        [self dismissViewControllerAnimated:YES completion:createBlock];
+    else
+        createBlock();
 }
 
 - (void)createEncounter {
@@ -1346,6 +1351,10 @@ static bool isShowingOptions = NO;
     else if([segue.identifier isEqualToString:@"ActiveFeedItemDetailsSegue"]) {
         OTActiveFeedItemViewController *controller = (OTActiveFeedItemViewController *)destinationViewController;
         controller.feedItem = self.selectedFeedItem;
+    }
+    else if([segue.identifier isEqualToString:@"MyEntouragesSegue"]) {
+        OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
+        controller.optionsDelegate = self;
     }
 }
 

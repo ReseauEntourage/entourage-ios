@@ -26,6 +26,24 @@
     [self.toggleMaraude toggle:[[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO]];
 }
 
+- (IBAction)createDemand {
+    [self dismissViewControllerAnimated:YES completion:^() {
+        [self.delegate createDemand];
+    }];
+}
+
+- (IBAction)createContribution {
+    [self dismissViewControllerAnimated:YES completion:^() {
+        [self.delegate createContribution];
+    }];
+}
+
+- (IBAction)createTour {
+    [self dismissViewControllerAnimated:YES completion:^() {
+        [self.delegate createTour];
+    }];
+}
+
 - (IBAction)close {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

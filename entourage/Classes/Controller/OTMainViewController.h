@@ -18,7 +18,6 @@
 
 @interface OTMainViewController : UIViewController <OTMeetingCalloutViewControllerDelegate, OTCreateMeetingViewControllerDelegate, OTConfirmationViewControllerDelegate>
 
-
 // tour properties
 @property BOOL isTourRunning;
 @property NSString *currentTourType;
