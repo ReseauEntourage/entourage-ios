@@ -10,12 +10,10 @@
 #import "OTMainViewController.h"
 #import "UIViewController+menu.h"
 #import "OTCreateMeetingViewController.h"
-#import "OTToursTableViewController.h"
 #import "OTCalloutViewController.h"
 #import "OTMapOptionsViewController.h"
 #import "OTTourOptionsViewController.h"
 #import "OTFeedItemJoinRequestViewController.h"
-#import "OTFeedItemViewController.h"
 #import "OTQuitFeedItemViewController.h"
 #import "OTGuideViewController.h"
 #import "UIView+entourage.h"
@@ -23,7 +21,6 @@
 #import "OTGuideDetailsViewController.h"
 #import "OTTourCreatorViewController.h"
 #import "OTEntourageCreatorViewController.h"
-#import "OTEntouragesViewController.h"
 #import "OTFiltersViewController.h"
 #import "OTFeedItemsPagination.h"
 #import "OTPublicFeedItemViewController.h"
@@ -97,7 +94,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTFeedItemJoinRequestDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, OTTourTimelineDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
+@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTFeedItemJoinRequestDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
@@ -363,7 +360,6 @@
 }
 
 - (void)showEntourages {
-    //[self performSegueWithIdentifier:@"EntouragesSegue" sender:self];
     [self performSegueWithIdentifier:@"MyEntouragesSegue" sender:self];
 }
 
@@ -1050,15 +1046,6 @@ static bool isShowingOptions = NO;
 }
 
 /**************************************************************************************************/
-#pragma mark - OTTourDetailsOptionsDelegate
-
-- (void)promptToCloseTour {
-    [self dismissViewControllerAnimated:NO completion:^{
-        [self stopTour:nil];
-    }];
-}
-
-/**************************************************************************************************/
 #pragma mark - OTFiltersViewControllerDelegate
 
 - (void)filterChanged {
@@ -1285,11 +1272,6 @@ static bool isShowingOptions = NO;
         [controller configureWithTour:self.tour
                    andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]];
     }
-    else if([segue.identifier isEqualToString:@"OTSelectedTour"]) {
-        UINavigationController *navController = (UINavigationController*)destinationViewController;
-        OTFeedItemViewController *controller = (OTFeedItemViewController *)navController.topViewController;
-        controller.feedItem = (OTFeedItem*)self.selectedFeedItem;
-    }
     else if([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
         OTTourOptionsViewController *controller = (OTTourOptionsViewController *)destinationViewController;
         controller.optionsDelegate = self;
@@ -1349,11 +1331,6 @@ static bool isShowingOptions = NO;
                                                           longitude:lon];
         controller.location = location;
         controller.entourageCreatorDelegate = self;
-    }
-    else if([segue.identifier isEqualToString:@"EntouragesSegue"]) {
-        UINavigationController *navController = (UINavigationController*)destinationViewController;
-        OTEntouragesViewController *controller = (OTEntouragesViewController*)navController.topViewController;
-        controller.mainViewController = self;
     }
     else if([segue.identifier isEqualToString:@"FiltersSegue"]) {
         UINavigationController *navController = (UINavigationController*)destinationViewController;

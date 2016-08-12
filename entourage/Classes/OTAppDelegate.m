@@ -12,8 +12,8 @@
 #import "OTMessageViewController.h"
 #import "OTLoginViewController.h"
 #import "OTStartupViewController.h"
-#import "OTFeedItemViewController.h"
 #import "SWRevealViewController.h"
+#import "OTActiveFeedItemViewController.h"
 
 // Pods
 #import "SimpleKeychain.h"
@@ -198,8 +198,8 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
             if ([rootVC.presentedViewController isKindOfClass:[UINavigationController class]]) {
                 UINavigationController *navC = (UINavigationController*)rootVC.presentedViewController;
                 UIViewController *topVC = navC.viewControllers.firstObject;
-                if ([topVC isKindOfClass:[OTFeedItemViewController class]]) {
-                    OTFeedItemViewController *feedItemVC = (OTFeedItemViewController*)topVC;
+                if ([topVC isKindOfClass:[OTActiveFeedItemViewController class]]) {
+                    OTActiveFeedItemViewController *feedItemVC = (OTActiveFeedItemViewController*)topVC;
                     if (feedItemVC.feedItem.uid.intValue == joinableId.intValue) {
                         self.shouldShowNotificationAlert = NO;
                         [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationNewMessage object:nil userInfo:apnContent];
@@ -326,7 +326,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
                                                                                           UIViewController *rootVC = app.windows.firstObject.rootViewController;
                                                                                           [rootVC dismissViewControllerAnimated:YES completion:nil];
                                                                                           UINavigationController *navC = [[UIStoryboard tourStoryboard] instantiateInitialViewController];
-                                                                                          OTFeedItemViewController *tourVC = navC.viewControllers.firstObject;
+                                                                                          OTActiveFeedItemViewController *tourVC = navC.viewControllers.firstObject;
                                                                                           tourVC.feedItem = (OTFeedItem*)tour;
                                                                                           [rootVC presentViewController:navC animated:YES completion:^{
                                                                                               NSLog(@"showing tour vc");
@@ -349,7 +349,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
                                                                                               UIViewController *rootVC = app.windows.firstObject.rootViewController;
                                                                                               [rootVC dismissViewControllerAnimated:YES completion:nil];
                                                                                               UINavigationController *navC = [[UIStoryboard tourStoryboard] instantiateInitialViewController];
-                                                                                              OTFeedItemViewController *feedVC = navC.viewControllers.firstObject;
+                                                                                              OTActiveFeedItemViewController *feedVC = navC.viewControllers.firstObject;
                                                                                               feedVC.feedItem = (OTFeedItem*)entourage;
                                                                                               [rootVC presentViewController:navC animated:YES completion:^{
                                                                                                   NSLog(@"showing entourage vc");

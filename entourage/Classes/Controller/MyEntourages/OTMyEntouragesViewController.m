@@ -9,7 +9,7 @@
 #import "OTMyEntouragesViewController.h"
 #import "OTCollectionSourceBehavior.h"
 #import "OTCollectionViewDataSourceBehavior.h"
-#import "OTMoveUpOnViewHiddenBehavior.h"
+#import "OTToggleVisibleBehavior.h"
 #import "OTMyEntouragesDataSource.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTEntourageService.h"
@@ -22,7 +22,7 @@
 
 @property (strong, nonatomic) IBOutlet OTCollectionSourceBehavior *invitationsDataSource;
 @property (strong, nonatomic) IBOutlet OTCollectionViewDataSourceBehavior *invitationsCollectionDataSource;
-@property (strong, nonatomic) IBOutlet OTMoveUpOnViewHiddenBehavior *toggleCollectionView;
+@property (strong, nonatomic) IBOutlet OTToggleVisibleBehavior *toggleCollectionView;
 @property (strong, nonatomic) IBOutlet OTMyEntouragesDataSource *entouragesDataSource;
 @property (strong, nonatomic) IBOutlet OTTableDataSourceBehavior *entouragesTableDataSource;
 

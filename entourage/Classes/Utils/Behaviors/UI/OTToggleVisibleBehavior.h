@@ -1,5 +1,5 @@
 //
-//  OTMoveUpOnViewHiddenBehavior.h
+//  OTToggleVisibleBehavior.h
 //  entourage
 //
 //  Created by sergiu buceac on 8/9/16.
@@ -8,8 +8,9 @@
 
 #import "OTBehavior.h"
 
-@interface OTMoveUpOnViewHiddenBehavior : OTBehavior
+@interface OTToggleVisibleBehavior : OTBehavior
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *heightConstraint;
 @property (nonatomic, weak) IBOutlet UIView *toggleView;
 
 - (void)toggle:(BOOL)visible animated:(BOOL)animated;

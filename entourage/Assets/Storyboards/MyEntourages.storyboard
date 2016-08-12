@@ -19,6 +19,9 @@
             <string>SFUIText-Medium</string>
             <string>SFUIText-Medium</string>
             <string>SFUIText-Medium</string>
+            <string>SFUIText-Medium</string>
+            <string>SFUIText-Medium</string>
+            <string>SFUIText-Medium</string>
         </mutableArray>
         <mutableArray key="SF-UI-Text-Regular.otf">
             <string>SFUIText-Regular</string>
@@ -158,7 +161,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="wbO-nh-0Vs">
                                                             <rect key="frame" x="15" y="36" width="81" height="18"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time - Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQt-0Y-ep7">
@@ -207,7 +210,7 @@
                                                                 <constraint firstAttribute="height" constant="45" id="fWC-Cm-lh3"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -263,7 +266,7 @@
                                 </constraints>
                                 <state key="normal" image="create"/>
                                 <connections>
-                                    <segue destination="AHM-70-RwU" kind="modal" identifier="OptionsSegue" id="kyH-GS-ona"/>
+                                    <segue destination="AHM-70-RwU" kind="modal" identifier="OptionsSegue" animates="NO" id="kyH-GS-ona"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -309,8 +312,9 @@
                         <outlet property="collectionDataSource" destination="XtX-Fl-5hO" id="dn5-ZD-hy9"/>
                     </connections>
                 </customObject>
-                <customObject id="ntM-qh-ECK" customClass="OTMoveUpOnViewHiddenBehavior">
+                <customObject id="ntM-qh-ECK" customClass="OTToggleVisibleBehavior">
                     <connections>
+                        <outlet property="heightConstraint" destination="ftk-Ft-YCo" id="BkN-4H-Hyh"/>
                         <outlet property="toggleView" destination="HbN-lj-jrZ" id="oWQ-St-m2W"/>
                     </connections>
                 </customObject>
@@ -346,10 +350,92 @@
                     <view key="view" contentMode="scaleToFill" id="epM-Ug-OBl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufj-T9-kGS">
+                                <rect key="frame" x="232" y="496" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="Fg3-9E-dcV"/>
+                                    <constraint firstAttribute="height" constant="62" id="J2Z-Mg-kIA"/>
+                                </constraints>
+                                <state key="normal" image="closeShadow"/>
+                                <connections>
+                                    <action selector="close" destination="AHM-70-RwU" eventType="touchUpInside" id="l1o-wa-Roc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SlE-io-2Jv">
+                                <rect key="frame" x="239" y="440" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="2lz-a6-gtM"/>
+                                    <constraint firstAttribute="height" constant="48" id="bKS-fu-JbP"/>
+                                </constraints>
+                                <state key="normal" image="createMaraude"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvB-c0-z8T">
+                                <rect key="frame" x="239" y="384" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="151-n2-Mde"/>
+                                    <constraint firstAttribute="width" constant="48" id="Rhy-IT-RcD"/>
+                                </constraints>
+                                <state key="normal" image="megaphone"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zC8-Kg-Hs3">
+                                <rect key="frame" x="239" y="328" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="njM-TM-hRk"/>
+                                    <constraint firstAttribute="height" constant="48" id="r8a-NU-Ilm"/>
+                                </constraints>
+                                <state key="normal" image="heart"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une maraude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dF-YR-3ps">
+                                <rect key="frame" x="90" y="455" width="139" height="18"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
+                                <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une demande" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EkJ-0D-MNj">
+                                <rect key="frame" x="86" y="399" width="143" height="18"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
+                                <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une contribution" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yE5-7O-s3J">
+                                <rect key="frame" x="65" y="343" width="164" height="18"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
+                                <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="SlE-io-2Jv" firstAttribute="leading" secondItem="9dF-YR-3ps" secondAttribute="trailing" constant="10" id="1Lo-Vg-mP8"/>
+                            <constraint firstItem="9dF-YR-3ps" firstAttribute="centerY" secondItem="SlE-io-2Jv" secondAttribute="centerY" id="9zA-1t-SlJ"/>
+                            <constraint firstItem="SlE-io-2Jv" firstAttribute="top" secondItem="wvB-c0-z8T" secondAttribute="bottom" constant="8" id="BGi-zg-R32"/>
+                            <constraint firstItem="zC8-Kg-Hs3" firstAttribute="centerX" secondItem="ufj-T9-kGS" secondAttribute="centerX" id="BLD-Lg-yuG"/>
+                            <constraint firstItem="yE5-7O-s3J" firstAttribute="centerY" secondItem="zC8-Kg-Hs3" secondAttribute="centerY" id="Bsy-eW-Rsf"/>
+                            <constraint firstItem="ufj-T9-kGS" firstAttribute="top" secondItem="SlE-io-2Jv" secondAttribute="bottom" constant="8" id="Esb-c4-BiF"/>
+                            <constraint firstItem="wvB-c0-z8T" firstAttribute="top" secondItem="zC8-Kg-Hs3" secondAttribute="bottom" constant="8" id="Idg-k5-eWR"/>
+                            <constraint firstItem="zC8-Kg-Hs3" firstAttribute="leading" secondItem="yE5-7O-s3J" secondAttribute="trailing" constant="10" id="O5h-s9-gvr"/>
+                            <constraint firstItem="EkJ-0D-MNj" firstAttribute="centerY" secondItem="wvB-c0-z8T" secondAttribute="centerY" id="Ogy-Jh-qNl"/>
+                            <constraint firstItem="d1I-T4-DjN" firstAttribute="top" secondItem="ufj-T9-kGS" secondAttribute="bottom" constant="10" id="QSo-Yq-T9o"/>
+                            <constraint firstItem="wvB-c0-z8T" firstAttribute="centerX" secondItem="ufj-T9-kGS" secondAttribute="centerX" id="jk0-sF-mKo"/>
+                            <constraint firstItem="wvB-c0-z8T" firstAttribute="leading" secondItem="EkJ-0D-MNj" secondAttribute="trailing" constant="10" id="k0F-1b-e4j"/>
+                            <constraint firstItem="SlE-io-2Jv" firstAttribute="centerX" secondItem="ufj-T9-kGS" secondAttribute="centerX" id="kJq-aw-rMm"/>
+                            <constraint firstItem="ufj-T9-kGS" firstAttribute="trailing" secondItem="epM-Ug-OBl" secondAttribute="trailingMargin" constant="-10" id="tp5-1w-ggh"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="toggleMaraude" destination="svH-FM-Vkv" id="TRh-3t-bR7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BsL-UY-oVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="svH-FM-Vkv" userLabel="Toggle Group View" customClass="OTToggleGroupViewBehavior">
+                    <connections>
+                        <outlet property="heightConstraint" destination="bKS-fu-JbP" id="nIF-2r-g7b"/>
+                        <outlet property="marginConstraint" destination="Esb-c4-BiF" id="OC7-wU-wsY"/>
+                        <outletCollection property="relatedViews" destination="9dF-YR-3ps" id="GLf-Xh-x3b"/>
+                        <outletCollection property="relatedViews" destination="SlE-io-2Jv" id="yYP-cR-1BD"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="373" y="624"/>
         </scene>
@@ -380,7 +466,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFC-tG-nyI">
                                                     <rect key="frame" x="15" y="13" width="31" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q80-6e-uuX">
@@ -554,9 +640,13 @@
     <resources>
         <image name="24HActive" width="48" height="48"/>
         <image name="24HInactive" width="48" height="48"/>
+        <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>
+        <image name="createMaraude" width="48" height="48"/>
         <image name="filters" width="22" height="22"/>
+        <image name="heart" width="48" height="48"/>
         <image name="invitationSquare" width="56" height="56"/>
+        <image name="megaphone" width="48" height="48"/>
         <image name="userSmall" width="35" height="35"/>
     </resources>
 </document>

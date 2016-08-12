@@ -209,7 +209,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FuL-C2-u9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="950.5" y="-379"/>
+            <point key="canvasLocation" x="1342.5" y="-63"/>
         </scene>
         <!--PublicFeedItem-->
         <scene sceneID="R5i-fD-RJi">
@@ -219,7 +219,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJ8-7h-blf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972.5" y="-338"/>
+            <point key="canvasLocation" x="1343" y="-3"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -484,11 +484,9 @@
                         <outlet property="tableView" destination="oHF-Vi-LCk" id="0vC-Rv-h6R"/>
                         <segue destination="cVp-EA-m5M" kind="modal" identifier="OTConfirmationPopup" id="Qf1-vA-gd6"/>
                         <segue destination="alD-dM-t4k" kind="modal" identifier="OTCreateMeeting" id="b08-id-ZFb"/>
-                        <segue destination="8mK-2Y-fe2" kind="modal" identifier="OTSelectedTour" id="qik-GS-fOD"/>
                         <segue destination="GHS-CJ-wmd" kind="modal" identifier="OTTourJoinRequestSegue" id="a8P-lF-ebs"/>
                         <segue destination="cEE-ZD-h1d" kind="modal" identifier="UserProfileSegue" id="b42-UE-vP1"/>
                         <segue destination="R63-9E-dkT" kind="modal" identifier="QuitFeedItemSegue" id="QCV-ym-9OZ"/>
-                        <segue destination="ntx-AK-ysq" kind="modal" identifier="EntouragesSegue" id="NTA-1a-2nr"/>
                         <segue destination="Yq0-qf-lgm" kind="modal" identifier="OTGuideDetailsSegue" id="x8u-KE-dPr"/>
                         <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" animates="NO" id="Gfi-xi-1Da"/>
                         <segue destination="cUF-7c-FT1" kind="modal" identifier="TourCreatorSegue" id="giF-18-m0W"/>
@@ -955,14 +953,6 @@
             </objects>
             <point key="canvasLocation" x="1329.5" y="-766"/>
         </scene>
-        <!--FeedItem-->
-        <scene sceneID="PAQ-uG-ulc">
-            <objects>
-                <viewControllerPlaceholder storyboardName="FeedItem" id="8mK-2Y-fe2" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ibw-S6-kmB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1368" y="487"/>
-        </scene>
         <!--QuitFeedItem-->
         <scene sceneID="BFl-vb-SXz">
             <objects>
@@ -987,15 +977,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dmb-Mg-GeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1339.5" y="-13"/>
-        </scene>
-        <!--Entourages-->
-        <scene sceneID="Rbc-LK-Bav">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Entourages" id="ntx-AK-ysq" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gq7-I2-Nbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1358.5" y="45"/>
+            <point key="canvasLocation" x="1339.5" y="55"/>
         </scene>
         <!--GuideSolidarity-->
         <scene sceneID="xOp-2g-pfi">
