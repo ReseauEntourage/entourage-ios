@@ -12,7 +12,7 @@
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *heightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *marginConstraint;
-@property (nonatomic, weak) IBOutletCollection(UIView) NSArray *relatedViews;
+@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *relatedViews;
 
 - (void)toggle:(BOOL)visible;
 

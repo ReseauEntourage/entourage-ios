@@ -342,17 +342,17 @@
         <!--My Entourages Options-->
         <scene sceneID="Um8-xG-z9g">
             <objects>
-                <viewController modalPresentationStyle="currentContext" id="AHM-70-RwU" userLabel="My Entourages Options" customClass="OTMyEntouragesOptionsViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overCurrentContext" id="AHM-70-RwU" userLabel="My Entourages Options" customClass="OTMyEntouragesOptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MwT-gd-9mv"/>
                         <viewControllerLayoutGuide type="bottom" id="d1I-T4-DjN"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="epM-Ug-OBl">
+                    <view key="view" alpha="0.88" contentMode="scaleToFill" id="epM-Ug-OBl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufj-T9-kGS">
-                                <rect key="frame" x="232" y="496" width="62" height="62"/>
+                                <rect key="frame" x="234" y="494" width="62" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="62" id="Fg3-9E-dcV"/>
                                     <constraint firstAttribute="height" constant="62" id="J2Z-Mg-kIA"/>
@@ -363,7 +363,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SlE-io-2Jv">
-                                <rect key="frame" x="239" y="440" width="48" height="48"/>
+                                <rect key="frame" x="241" y="438" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="2lz-a6-gtM"/>
                                     <constraint firstAttribute="height" constant="48" id="bKS-fu-JbP"/>
@@ -371,7 +371,7 @@
                                 <state key="normal" image="createMaraude"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvB-c0-z8T">
-                                <rect key="frame" x="239" y="384" width="48" height="48"/>
+                                <rect key="frame" x="241" y="382" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="151-n2-Mde"/>
                                     <constraint firstAttribute="width" constant="48" id="Rhy-IT-RcD"/>
@@ -379,7 +379,7 @@
                                 <state key="normal" image="megaphone"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zC8-Kg-Hs3">
-                                <rect key="frame" x="239" y="328" width="48" height="48"/>
+                                <rect key="frame" x="241" y="326" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="njM-TM-hRk"/>
                                     <constraint firstAttribute="height" constant="48" id="r8a-NU-Ilm"/>
@@ -387,25 +387,25 @@
                                 <state key="normal" image="heart"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une maraude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dF-YR-3ps">
-                                <rect key="frame" x="90" y="455" width="139" height="18"/>
+                                <rect key="frame" x="92" y="453" width="139" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                 <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une demande" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EkJ-0D-MNj">
-                                <rect key="frame" x="86" y="399" width="143" height="18"/>
+                                <rect key="frame" x="88" y="397" width="143" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                 <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une contribution" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yE5-7O-s3J">
-                                <rect key="frame" x="65" y="343" width="164" height="18"/>
+                                <rect key="frame" x="67" y="341" width="164" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                 <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="SlE-io-2Jv" firstAttribute="leading" secondItem="9dF-YR-3ps" secondAttribute="trailing" constant="10" id="1Lo-Vg-mP8"/>
                             <constraint firstItem="9dF-YR-3ps" firstAttribute="centerY" secondItem="SlE-io-2Jv" secondAttribute="centerY" id="9zA-1t-SlJ"/>
@@ -416,11 +416,11 @@
                             <constraint firstItem="wvB-c0-z8T" firstAttribute="top" secondItem="zC8-Kg-Hs3" secondAttribute="bottom" constant="8" id="Idg-k5-eWR"/>
                             <constraint firstItem="zC8-Kg-Hs3" firstAttribute="leading" secondItem="yE5-7O-s3J" secondAttribute="trailing" constant="10" id="O5h-s9-gvr"/>
                             <constraint firstItem="EkJ-0D-MNj" firstAttribute="centerY" secondItem="wvB-c0-z8T" secondAttribute="centerY" id="Ogy-Jh-qNl"/>
-                            <constraint firstItem="d1I-T4-DjN" firstAttribute="top" secondItem="ufj-T9-kGS" secondAttribute="bottom" constant="10" id="QSo-Yq-T9o"/>
+                            <constraint firstItem="d1I-T4-DjN" firstAttribute="top" secondItem="ufj-T9-kGS" secondAttribute="bottom" constant="12" id="QSo-Yq-T9o"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ufj-T9-kGS" secondAttribute="trailing" constant="8" id="gLj-Nd-Thz"/>
                             <constraint firstItem="wvB-c0-z8T" firstAttribute="centerX" secondItem="ufj-T9-kGS" secondAttribute="centerX" id="jk0-sF-mKo"/>
                             <constraint firstItem="wvB-c0-z8T" firstAttribute="leading" secondItem="EkJ-0D-MNj" secondAttribute="trailing" constant="10" id="k0F-1b-e4j"/>
                             <constraint firstItem="SlE-io-2Jv" firstAttribute="centerX" secondItem="ufj-T9-kGS" secondAttribute="centerX" id="kJq-aw-rMm"/>
-                            <constraint firstItem="ufj-T9-kGS" firstAttribute="trailing" secondItem="epM-Ug-OBl" secondAttribute="trailingMargin" constant="-10" id="tp5-1w-ggh"/>
                         </constraints>
                     </view>
                     <connections>
@@ -433,7 +433,7 @@
                         <outlet property="heightConstraint" destination="bKS-fu-JbP" id="nIF-2r-g7b"/>
                         <outlet property="marginConstraint" destination="Esb-c4-BiF" id="OC7-wU-wsY"/>
                         <outletCollection property="relatedViews" destination="9dF-YR-3ps" id="GLf-Xh-x3b"/>
-                        <outletCollection property="relatedViews" destination="SlE-io-2Jv" id="yYP-cR-1BD"/>
+                        <outletCollection property="relatedViews" destination="SlE-io-2Jv" id="QnO-fu-oLH"/>
                     </connections>
                 </customObject>
             </objects>

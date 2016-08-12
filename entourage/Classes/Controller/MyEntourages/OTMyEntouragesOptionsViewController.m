@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.toggleMaraude initialize];
     [self.toggleMaraude toggle:[[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO]];
 }
 
