@@ -10,10 +10,15 @@
 #import "UIButton+entourage.h"
 #import "OTFeedItemFactory.h"
 #import "OTUIDelegate.h"
+#import "OTConsts.h"
+#import "NSUserDefaults+OT.h"
+#import "OTUser.h"
+#import "UIButton+entourage.h"
 
 @implementation OTSummaryProviderBehavior
 
 - (void)awakeFromNib {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     if(!self.fontSize)
         self.fontSize = [NSNumber numberWithFloat:DEFAULT_DESCRIPTION_SIZE];
 }
@@ -34,6 +39,17 @@
             self.lblTimeDistance.text = result;
         }];
     }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - private methods
+
+- (void)profilePictureUpdated:(NSNotification *)notification {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    [self.btnAvatar setupAsProfilePictureFromUrl:currentUser.avatarURL withPlaceholder:@"user"];
 }
 
 @end
