@@ -23,12 +23,17 @@
     self.feedItem = feedItem;
 }
 
-- (void)prepareSegueForMessage:(UIStoryboardSegue *)segue {
-    OTFeedItemJoinRequestViewController *controller = (OTFeedItemJoinRequestViewController *)segue.destinationViewController;
-    controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
-    [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    controller.feedItem = self.feedItem;
-    controller.feedItemJoinRequestDelegate = self;
+- (BOOL)prepareSegueForMessage:(UIStoryboardSegue *)segue {
+    if ([segue.identifier isEqualToString:@"JoinRequestSegue"]) {
+        OTFeedItemJoinRequestViewController *controller = (OTFeedItemJoinRequestViewController *)segue.destinationViewController;
+        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
+        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        controller.feedItem = self.feedItem;
+        controller.feedItemJoinRequestDelegate = self;
+    }
+    else
+        return NO;
+    return YES;
 }
 
 - (void)joinFeedItem {

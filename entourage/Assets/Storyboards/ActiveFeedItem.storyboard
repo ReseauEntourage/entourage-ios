@@ -35,6 +35,14 @@
         </mutableArray>
     </customFonts>
     <scenes>
+        <!--UserProfile-->
+        <scene sceneID="SeZ-tE-0AK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserProfile" id="nZu-ch-wHg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CJt-YK-hyA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="389.5" y="739"/>
+        </scene>
         <!--Active Feed Item-->
         <scene sceneID="sn3-Dx-6AT">
             <objects>
@@ -195,7 +203,7 @@
                                             <outlet property="lblMessage" destination="qOy-7v-BxF" id="Nz1-vH-wnH"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageReceivedCell" rowHeight="60" id="sIU-F5-kvQ" customClass="OTMessageReceivedCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageReceivedCell" rowHeight="60" id="sIU-F5-kvQ" customClass="OTMessageReceivedCell">
                                         <rect key="frame" x="0.0" y="177" width="328" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sIU-F5-kvQ" id="hOu-1X-myU">
@@ -215,6 +223,9 @@
                                                         <constraint firstAttribute="width" constant="35" id="zpn-jU-EzB"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="userSmall"/>
+                                                    <connections>
+                                                        <action selector="showUserDetails:" destination="sIU-F5-kvQ" eventType="touchUpInside" id="gWI-Tc-8od"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Received message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RU3-Cj-X3P" customClass="OTPaddedLabel">
                                                     <rect key="frame" x="70" y="30" width="150" height="22"/>
@@ -260,8 +271,10 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="btnAvatar" destination="OMx-YJ-B2e" id="Vyi-4E-LG2"/>
+                                            <outlet property="dataSource" destination="1dX-UW-k7J" id="IQZ-hy-una"/>
                                             <outlet property="lblMessage" destination="RU3-Cj-X3P" id="CSq-EQ-qua"/>
                                             <outlet property="lblUserName" destination="Fl9-qI-cr1" id="mKQ-dm-pPq"/>
+                                            <outlet property="userProfile" destination="Qyp-hb-7rI" id="CXm-NE-yv5"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="JoinAcceptedCell" rowHeight="44" id="UUM-gh-eAX" customClass="OTJoinAcceptedCell">
@@ -322,6 +335,9 @@
                                                                             <integer key="value" value="1"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="showUserDetails:" destination="1dN-Of-Xcg" eventType="touchUpInside" id="Qfj-5E-qk3"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7L-pV-Coz">
                                                                     <rect key="frame" x="55" y="90" width="78" height="18"/>
@@ -459,6 +475,7 @@
                                             <outlet property="dataSource" destination="1dX-UW-k7J" id="pAp-7R-3PH"/>
                                             <outlet property="lblMessage" destination="j8e-Uc-J4v" id="IOi-IY-ukZ"/>
                                             <outlet property="lblUserName" destination="R7L-pV-Coz" id="X1x-R5-MGk"/>
+                                            <outlet property="userProfile" destination="Qyp-hb-7rI" id="f2a-As-YcV"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EncounterCell" rowHeight="44" id="G2p-zP-CoV" customClass="OTEncounterCell">
@@ -521,6 +538,9 @@
                                     <constraint firstAttribute="width" constant="22" id="nkl-VZ-YvV"/>
                                 </constraints>
                                 <state key="normal" image="plus"/>
+                                <connections>
+                                    <action selector="sendMessage" destination="DlM-nw-VLS" eventType="touchUpInside" id="ADq-aB-3cP"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rhM-ov-Zou" userLabel="Txt Chat">
                                 <rect key="frame" x="48" y="529" width="220" height="30"/>
@@ -578,12 +598,14 @@
                         <outlet property="tblChat" destination="EIv-33-TLG" id="p86-YJ-oZX"/>
                         <outlet property="titleTapBehavior" destination="gL3-aq-uay" id="UWY-L9-ed5"/>
                         <outlet property="txtChat" destination="rhM-ov-Zou" id="8WP-EZ-Bgr"/>
+                        <outlet property="userProfileBehavior" destination="Qyp-hb-7rI" id="euQ-HA-fvL"/>
                         <segue destination="RBx-qN-1lJ" kind="presentation" identifier="SegueInviteSource" id="ffc-Pt-QuG"/>
                         <segue destination="e7P-HA-iRZ" kind="show" identifier="SegueInviteFromAddressBook" id="nan-zV-dem"/>
                         <segue destination="eKG-vw-p09" kind="show" identifier="SegueInvitePhoneNumber" id="zFK-Fj-hWR"/>
                         <segue destination="7N5-l9-cEp" kind="presentation" identifier="SegueInviteSuccess" id="TAD-d7-tmZ"/>
                         <segue destination="jJ9-Y9-aoE" kind="presentation" identifier="SegueChangeState" id="9ff-pE-XzN"/>
                         <segue destination="9Ay-63-LSU" kind="show" identifier="SegueMap" id="pa2-NI-OJP"/>
+                        <segue destination="nZu-ch-wHg" kind="presentation" identifier="UserProfileSegue" id="5BX-au-xTN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riw-B5-uYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -636,6 +658,11 @@
                 <customObject id="SeF-8a-uGf" customClass="OTMessageTableDelegateBehavior">
                     <connections>
                         <outlet property="tableDataSource" destination="YIT-7d-Uwv" id="mbU-7C-CkV"/>
+                    </connections>
+                </customObject>
+                <customObject id="Qyp-hb-7rI" customClass="OTUserProfileBehavior">
+                    <connections>
+                        <outlet property="owner" destination="DlM-nw-VLS" id="w04-fH-ymC"/>
                     </connections>
                 </customObject>
             </objects>
@@ -934,7 +961,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="F0A91E98-E00F-4034-9C30-EFCE94EBCA0C" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="45FE505E-FA0F-42B8-AC70-0F3554845E66" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
@@ -1220,7 +1247,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="F0A91E98-E00F-4034-9C30-EFCE94EBCA0C" width="48" height="48">
+        <image name="45FE505E-FA0F-42B8-AC70-0F3554845E66" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

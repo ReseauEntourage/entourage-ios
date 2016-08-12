@@ -74,6 +74,9 @@
                                             <constraint firstAttribute="width" constant="35" id="yug-cM-xOd"/>
                                         </constraints>
                                         <state key="normal" image="userSmall"/>
+                                        <connections>
+                                            <action selector="showUserProfile:" destination="fid-Iu-R1a" eventType="touchUpInside" id="51f-9f-EmS"/>
+                                        </connections>
                                     </button>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IvY-Fu-Kho">
                                         <rect key="frame" x="-20" y="97" width="368" height="128"/>
@@ -150,7 +153,9 @@
                         <outlet property="mapAnnotationProvider" destination="ZXV-cG-4Hc" id="8yu-i1-7Zu"/>
                         <outlet property="statusBehavior" destination="fgE-8v-az0" id="HgB-v3-Bi3"/>
                         <outlet property="summaryProvider" destination="dGI-3e-zqZ" id="18h-cY-5YP"/>
+                        <outlet property="userProfileBehavior" destination="tZB-wv-d8L" id="kwr-QM-w45"/>
                         <segue destination="cpn-kw-7GN" kind="modal" identifier="JoinRequestSegue" id="YTg-Ni-VC1"/>
+                        <segue destination="ZQc-ut-eal" kind="modal" identifier="UserProfileSegue" id="WdI-aW-aNA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jpu-8v-Jpr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -180,6 +185,11 @@
                         <outlet property="owner" destination="fid-Iu-R1a" id="402-lY-Prx"/>
                     </connections>
                 </customObject>
+                <customObject id="tZB-wv-d8L" customClass="OTUserProfileBehavior">
+                    <connections>
+                        <outlet property="owner" destination="fid-Iu-R1a" id="Vz9-Pr-WKd"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="332.80000000000001" y="325.65333333333331"/>
         </scene>
@@ -189,7 +199,15 @@
                 <viewControllerPlaceholder storyboardName="FeedItemJoinRequest" id="cpn-kw-7GN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nx-5x-nQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="332" y="699"/>
+            <point key="canvasLocation" x="480" y="770"/>
+        </scene>
+        <!--UserProfile-->
+        <scene sceneID="HXT-ke-fcz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserProfile" id="ZQc-ut-eal" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NDE-Wf-ZQI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="173.5" y="770"/>
         </scene>
     </scenes>
     <resources>

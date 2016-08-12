@@ -9,6 +9,7 @@
 #import "OTMessageReceivedCell.h"
 #import "OTFeedItemMessage.h"
 #import "UIButton+entourage.h"
+#import "OTTableDataSourceBehavior.h"
 
 @implementation OTMessageReceivedCell
 
@@ -21,6 +22,12 @@
     self.lblUserName.text = msgData.userName;
     [self.btnAvatar setupAsProfilePictureFromUrl:msgData.userAvatarURL];
     self.lblMessage.text = msgData.text;
+}
+
+- (IBAction)showUserDetails:(id)sender {
+    NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
+    OTFeedItemMessage *message = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
+    [self.userProfile showProfile:message.uID];
 }
 
 @end

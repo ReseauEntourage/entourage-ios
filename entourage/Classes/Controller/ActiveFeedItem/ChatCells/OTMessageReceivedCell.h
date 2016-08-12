@@ -8,11 +8,15 @@
 
 #import "OTChatCellBase.h"
 #import "OTPaddedLabel.h"
+#import "OTMessageDataSourceBehavior.h"
+#import "OTUserProfileBehavior.h"
 
 @interface OTMessageReceivedCell : OTChatCellBase
 
 @property (nonatomic, weak) IBOutlet UILabel *lblUserName;
 @property (nonatomic, weak) IBOutlet UIButton *btnAvatar;
 @property (nonatomic, weak) IBOutlet OTPaddedLabel *lblMessage;
+@property (nonatomic, weak) IBOutlet OTMessageDataSourceBehavior *dataSource;
+@property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;
 
 @end

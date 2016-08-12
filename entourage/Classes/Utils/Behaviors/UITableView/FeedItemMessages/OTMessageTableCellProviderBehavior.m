@@ -18,7 +18,6 @@
 - (UITableViewCell *)getTableViewCellForPath:(NSIndexPath *)indexPath {
     OTFeedItemTimelinePoint *timelinePoint = [self.tableDataSource getItemAtIndexPath:indexPath];
     NSString *reuseIdentifier = [self getReuseIdentifier:timelinePoint];
-
     OTChatCellBase *cell = (OTChatCellBase *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     [cell configureWithTimelinePoint:timelinePoint];
     return cell;

@@ -8,6 +8,7 @@
 
 #import "OTChatCellBase.h"
 #import "OTMessageDataSourceBehavior.h"
+#import "OTUserProfileBehavior.h"
 
 @interface OTJoinRequestedCell : OTChatCellBase
 
@@ -16,5 +17,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblUserName;
 @property (nonatomic, weak) IBOutlet UILabel *lblMessage;
 @property (nonatomic, weak) IBOutlet OTMessageDataSourceBehavior *dataSource;
+@property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;
 
 @end

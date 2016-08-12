@@ -19,6 +19,7 @@
 #import "OTDataSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTMessageTableDelegateBehavior.h"
+#import "OTUserProfileBehavior.h"
 #import "OTFeedItemMessage.h"
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
@@ -37,6 +38,7 @@
 @property (strong, nonatomic) IBOutlet OTMessageTableDelegateBehavior *tableDelegate;
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
+@property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 
 @end
 
@@ -69,6 +71,8 @@
         return;
     if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
+    if([self.userProfileBehavior prepareSegueForUserProfile:segue])
+        return;
     if([segue.identifier isEqualToString:@"SegueMap"]) {
         OTMapViewController *controller = (OTMapViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
@@ -96,6 +100,7 @@
         [SVProgressHUD dismiss];
         self.txtChat.text = @"";
         [self.speechBehavior updateRecordButton];
+        [[OTMessagingService new] readFor:self.feedItem onDataSource:self.dataSource];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];

@@ -16,6 +16,7 @@
 #import "OTStatusBehavior.h"
 #import "OTJoinBehavior.h"
 #import "SVProgressHUD.h"
+#import "OTUserProfileBehavior.h"
 
 @interface OTPublicFeedItemViewController ()
 
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet OTMapAnnotationProviderBehavior *mapAnnotationProvider;
 @property (strong, nonatomic) IBOutlet OTStatusBehavior *statusBehavior;
 @property (strong, nonatomic) IBOutlet OTJoinBehavior *joinBehavior;
+@property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 
 @end
 
@@ -50,11 +52,17 @@
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }
 
+- (IBAction)showUserProfile:(id)sender {
+    [self.userProfileBehavior showProfile:self.feedItem.author.uID];
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"JoinRequestSegue"])
-        [self.joinBehavior prepareSegueForMessage:segue];
+    if([self.joinBehavior prepareSegueForMessage:segue])
+        return;
+    if([self.userProfileBehavior prepareSegueForUserProfile:segue])
+        return;
 }
 
 #pragma mark - private methods

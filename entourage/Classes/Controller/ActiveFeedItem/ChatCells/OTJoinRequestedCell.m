@@ -31,6 +31,12 @@
     self.lblMessage.text = joiner.message;
 }
 
+- (IBAction)showUserDetails:(id)sender {
+    NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
+    OTFeedItemJoiner *joiner = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
+    [self.userProfile showProfile:joiner.uID];
+}
+
 - (IBAction)acceptJoin {
     NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
     OTFeedItemJoiner *joiner = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];

@@ -16,6 +16,7 @@
     if(!dataSource)
         return;
     
+    [dataSource.items removeAllObjects];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         id<OTMessagingDelegate> messaging = [[OTFeedItemFactory createFor:feedItem] getMessaging];
 
