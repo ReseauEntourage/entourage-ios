@@ -20,6 +20,8 @@
 #define PAGE_NUMBER_KEY @"page"
 #define PAGE_SIZE_KEY @"per"
 #define TIMEFRAME_KEY @"time_range"
+#define ORGANISER_KEY @"created_by_me"
+#define INVITED_KEY @"accepted_invitation"
 
 @interface OTMyEntouragesFilter ()
 
@@ -49,13 +51,19 @@
     NSMutableDictionary *result = [NSMutableDictionary new];
     [result setObject:[self getTourTypes] forKey:FILTER_TOUR_TYPES_KEY];
     [result setObject:[self getEntourageTypes] forKey:FILTER_ENTOURAGE_TYPES_KEY];
-    [result setObject:[self getStatus] forKey:FILTER_STATUS_KEY];
+    NSString *status = [self getStatus];
+    if(status)
+        [result setObject:[self getStatus] forKey:FILTER_STATUS_KEY];
     [result setObject:@(pageNumber) forKey:PAGE_NUMBER_KEY];
     [result setObject:@(pageSize) forKey:PAGE_SIZE_KEY];
     if([self.currentUser.type isEqualToString:USER_TYPE_PUBLIC]) {
         [result setObject:@(self.timeframeInHours) forKey:TIMEFRAME_KEY];
 #warning TODO handle only my entourages
     }
+    if(self.isOrganiser)
+        [result setObject:@"true" forKey:ORGANISER_KEY];
+    if(self.isInvited)
+        [result setObject:@"true" forKey:INVITED_KEY];
     return result;
 }
 
@@ -78,12 +86,15 @@
 }
 
 - (NSString *)getStatus {
-#warning TODO will need more statuses then just active,closed,all
     if(self.isActive)
-        return self.isClosed ? ALL_STATUS_STRING : ENTOURAGE_STATUS_OPEN;
+        return self.isClosed ? ALL_STATUS_STRING : FEEDITEM_STATUS_ACTIVE;
     if(self.isClosed)
         return FEEDITEM_STATUS_CLOSED;
-    return ALL_STATUS_STRING;
+    return nil;
+}
+
+- (NSString *)getOnlyMyEntourages {
+    return self.showOnlyMyEntourages ? FEEDITEM_STATUS_ACTIVE : ALL_STATUS_STRING;
 }
 
 @end
