@@ -51,19 +51,22 @@
     NSMutableDictionary *result = [NSMutableDictionary new];
     [result setObject:[self getTourTypes] forKey:FILTER_TOUR_TYPES_KEY];
     [result setObject:[self getEntourageTypes] forKey:FILTER_ENTOURAGE_TYPES_KEY];
-    NSString *status = [self getStatus];
-    if(status)
-        [result setObject:[self getStatus] forKey:FILTER_STATUS_KEY];
     [result setObject:@(pageNumber) forKey:PAGE_NUMBER_KEY];
     [result setObject:@(pageSize) forKey:PAGE_SIZE_KEY];
-    if([self.currentUser.type isEqualToString:USER_TYPE_PUBLIC]) {
-        [result setObject:@(self.timeframeInHours) forKey:TIMEFRAME_KEY];
-#warning TODO handle only my entourages
-    }
     if(self.isOrganiser)
         [result setObject:@"true" forKey:ORGANISER_KEY];
     if(self.isInvited)
         [result setObject:@"true" forKey:INVITED_KEY];
+    if([self.currentUser.type isEqualToString:USER_TYPE_PUBLIC]) {
+        [result setObject:@(self.timeframeInHours) forKey:TIMEFRAME_KEY];
+        [result setObject:[self getOnlyMyEntourages] forKey:FILTER_STATUS_KEY];
+    }
+    else
+    {
+        NSString *status = [self getStatus];
+        if(status)
+            [result setObject:[self getStatus] forKey:FILTER_STATUS_KEY];
+    }
     return result;
 }
 
