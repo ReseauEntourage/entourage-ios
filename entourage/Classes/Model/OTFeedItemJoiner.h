@@ -20,5 +20,6 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)arrayForWebservice:(NSArray *)joiners;
++ (OTFeedItemJoiner *)fromPushNotifiationsData:(NSDictionary *)data;
 
 @end

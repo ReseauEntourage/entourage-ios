@@ -40,12 +40,12 @@
 
 #import "OTPictureUploadService.h"
 #import "OTDeepLinkService.h"
+#import "OTFeedItemFactory.h"
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
 #define APNOTIFICATION_REQUEST_ACCEPTED "JOIN_REQUEST_ACCEPTED"
 
-/**************************************************************************************************/
 #pragma mark - OTAppDelegate
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
@@ -66,7 +66,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 
 @implementation OTAppDelegate
 
-/**************************************************************************************************/
 #pragma mark - Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -76,24 +75,12 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"EMA.log"];
     freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
     
-    // start flurry
 	[Flurry setCrashReportingEnabled:YES];
 	[Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
     [IQKeyboardManager sharedManager].enable = YES;
-      // register for push notifications
-//    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
-//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
-//    [application registerUserNotificationSettings:settings];
-//    [[UIApplication sharedApplication] registerForRemoteNotifications];
-    
-    // configure appearence
     [self configureUIAppearance];
     
-    // add notification observer for 401 error trigger
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(popToLogin:)
-                                                 name:[kLoginFailureNotification copy]
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
     
     if ([NSUserDefaults standardUserDefaults].currentUser) {
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
@@ -107,14 +94,13 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         [UIStoryboard showStartup];
     }
     
-    if ([[NSUserDefaults standardUserDefaults] currentUser].token) {
+    if ([[NSUserDefaults standardUserDefaults] currentUser].token)
         [[OTAuthService new] sendAppInfoWithSuccess:^() {
             NSLog(@"Application info sent!");
         }
-                                            failure:^(NSError * error) {
+        failure:^(NSError * error) {
             NSLog(@"ApplicationsERR: %@", error.description);
         }];
-    }
     [OTPictureUploadService configure];
     
 	return YES;
@@ -124,7 +110,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     NSLog(@"APP WILL TERMINATE.");
 }
 
-/**************************************************************************************************/
 #pragma mark - Private methods
 
 - (void)popToLogin:(NSNotification *)notification {
@@ -139,7 +124,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [UIStoryboard showStartup];
 }
 
-/**************************************************************************************************/
 #pragma mark - Configure push notifications
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -166,10 +150,9 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 }
 
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler
+{
     NSLog(@"Push notification received: %@", userInfo);
-    
-    // Building the notification
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive) {
         self.shouldShowNotificationAlert =  YES;
@@ -177,20 +160,13 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         NSDictionary *apnExtra = [apnContent objectForKey:kUserInfoExtraMessage];
         NSString *apnType = [apnExtra valueForKey:kAPNType];
         NSNumber *joinableId = [apnExtra numberForKey:@"joinable_id"];
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender]
-                                                                       message:[userInfo objectForKey:kUserInfoObject]
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-
-        if ([apnType isEqualToString:@APNOTIFICATION_JOIN_REQUEST]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender] message:[userInfo objectForKey:kUserInfoObject] preferredStyle:UIAlertControllerStyleAlert];
+        if ([apnType isEqualToString:@APNOTIFICATION_JOIN_REQUEST])
             [self handleJoinRequestNotification:userInfo showingAlert:alert];
-        } else {
-            if ([apnType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE]) {
+        else {
+            if ([apnType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE])
                 [self handleChatNotification:userInfo showingAlert:alert];
-            }
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert")
-                                                            style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * _Nonnull action) {}];
-    
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
             [alert addAction:defaultAction];
         }
         
@@ -207,12 +183,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
                     }
                 }
             }
-            
             if (self.shouldShowNotificationAlert)
                 [rootVC.presentedViewController presentViewController:alert animated:YES completion:nil];
-        } else {
+        } else
             [rootVC presentViewController:alert animated:YES completion:nil];
-        }
         
         //Refreshing the newsfeed when a push notification is received
         if ([rootVC isKindOfClass:[SWRevealViewController class]]) {
@@ -225,83 +199,26 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
                 }
             }
         }
-        //End refreshing
     }
-    
-    // Set icon badge number to zero
     application.applicationIconBadgeNumber = 0;
 }
 
-- (void)handleJoinRequestNotification:(NSDictionary *)notificationDictionary
-                         showingAlert:(UIAlertController*)alert
+- (void)handleJoinRequestNotification:(NSDictionary *)notificationDictionary showingAlert:(UIAlertController*)alert
 {
     NSDictionary *apnContent = [notificationDictionary objectForKey:kUserInfoMessage];
     NSDictionary *apnExtra = [apnContent objectForKey:kUserInfoExtraMessage];
     
-    NSString *joinableType = [apnExtra valueForKey:@"joinable_type"];
-    NSNumber *joinableId = [apnExtra numberForKey:@"joinable_id"];
-    NSNumber *userId = [apnExtra numberForKey:@"user_id"];
-
-    NSNumber *tourId;
-    if ([@"Tour" isEqualToString:joinableType]) {
-        tourId = joinableId;
-    }
-
-    // Reject join
-    void(^rejectBlock)(UIAlertAction * _Nonnull action) = ^void(UIAlertAction * _Nonnull action) {
-        if ([@"Tour" isEqualToString:joinableType]) {
-            [[OTTourService new] rejectTourJoinRequestForUser:userId
-                                                      forTour:joinableId
-                                                  withSuccess:^() {
-                                                      NSLog(@"Rejected user's join request.");
-                                                  } failure:^(NSError *error) {
-                                                      NSLog(@"Something went wrong on user rejection: %@", error.description);
-                                                  }];
-        }
-        else if ([@"Entourage" isEqualToString:joinableType]) {
-            [[OTEntourageService new] rejectEntourageJoinRequestForUser:userId
-                                                           forEntourage:joinableId
-                                                            withSuccess:^{
-                                                                NSLog(@"Rejected user's join request to entourage.");
-                                                            } failure:^(NSError *error) {
-                                                                NSLog(@"Something went wrong on user rejection: %@", error.description);
-                                                            }];
-        }
-    };
+    OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:apnExtra];
     
-    UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert")
-                                                                      style:UIAlertActionStyleDefault
-                                                                    handler:rejectBlock
-                                              ];
-    
-    // Accept join
-    void(^acceptBlock)(UIAlertAction * _Nonnull action) = ^void(UIAlertAction * _Nonnull action) {
-        if ([@"Tour" isEqualToString:joinableType]) {
-            [[OTTourService new] updateTourJoinRequestStatus:@"accepted"
-                                                     forUser:userId
-                                                     forTour:joinableId
-                                                 withSuccess:^{
-                                                     NSLog(@"Accepted user's join request.");                                                                                                                 }
-                                                     failure:^(NSError * error) {
-                                                         NSLog(@"Something went wrong on user acceptance: %@", error.description);
-                                                     }];
-        }
-        else if ([@"Entourage" isEqualToString:joinableType]) {
-            [[OTEntourageService new] updateEntourageJoinRequestStatus:@"accepted"
-                                                               forUser:userId
-                                                          forEntourage:joinableId
-                                                           withSuccess:^{
-                                                               NSLog(@"Accepted user's entourage join request.");
-                                                           } failure:^(NSError *error) {
-                                                               NSLog(@"Something went wrong on user acceptance: %@", error.description);
-                                                           }];
-        }
+    NSString *feedItemType = [apnExtra valueForKey:@"joinable_type"];
+    NSNumber *feedItemId = [apnExtra numberForKey:@"joinable_id"];
 
-    };
-    UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert")
-                                                                      style:UIAlertActionStyleDefault
-                                                                    handler:acceptBlock
-                                              ];
+    UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [[[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getJoiner] reject:joiner success:nil failure:nil];
+    }];
+    UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [[[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getJoiner] accept:joiner success:nil failure:nil];
+    }];
     [alert addAction:refuseJoinRequestAction];
     [alert addAction:acceptJoinRequestAction];
 }
@@ -321,33 +238,22 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    // Retrieving the data
     NSDictionary *userInfo = notification.userInfo;
     NSLog(@"Local notification received: %@", userInfo);
-    // Building the notification
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive) {
-        
         UIApplication *app = [UIApplication sharedApplication];
         UIViewController *rootVC = app.windows.firstObject.rootViewController;
 
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender]
-                                                                       message:[userInfo objectForKey:kUserInfoObject]
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert")
-                                                                style:UIAlertActionStyleDefault
-                                                              handler:^(UIAlertAction * _Nonnull action) {}];
-        
-        UIAlertAction *openAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"showAlert")
-                                                             style:UIAlertActionStyleDefault
-                                                           handler:^(UIAlertAction * _Nonnull action) {
-                                                                    [rootVC dismissViewControllerAnimated:YES completion:nil];
-                                                                   if ([rootVC isKindOfClass:[SWRevealViewController class]]) {
-                                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationLocalTourConfirmation object:nil];
-                                                                   } else {
-                                                                       [UIStoryboard showSWRevealController];
-                                                                   }
-                                                }];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[userInfo objectForKey:kUserInfoSender] message:[userInfo objectForKey:kUserInfoObject] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        UIAlertAction *openAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [rootVC dismissViewControllerAnimated:YES completion:nil];
+                if ([rootVC isKindOfClass:[SWRevealViewController class]])
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationLocalTourConfirmation object:nil];
+                else
+                    [UIStoryboard showSWRevealController];
+        }];
         [alert addAction:defaultAction];
         [alert addAction:openAction];
         
@@ -359,12 +265,9 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         } else
             [rootVC presentViewController:alert animated:YES completion:nil];
     }
-    
-    // Set icon badge number to zero
     application.applicationIconBadgeNumber = 0;
 }
 
-/**************************************************************************************************/
 #pragma mark - Configure UIAppearance
 
 - (void)configureUIAppearance {

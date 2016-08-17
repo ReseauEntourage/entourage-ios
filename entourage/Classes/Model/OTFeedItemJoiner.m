@@ -49,4 +49,10 @@
     return result;
 }
 
++ (OTFeedItemJoiner *)fromPushNotifiationsData:(NSDictionary *)data {
+    OTFeedItemJoiner *joiner = [OTFeedItemJoiner new];
+    joiner.uID = [data numberForKey:@"user_id"];
+    return joiner;
+}
+
 @end

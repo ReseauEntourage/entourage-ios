@@ -27,6 +27,6 @@ typedef enum {
 - (BOOL)canInvite;
 - (BOOL)isActive;
 - (BOOL)isPublic;
-- (void)loadById:(NSNumber *)feedItemId withSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure;
+- (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure;
 
 @end

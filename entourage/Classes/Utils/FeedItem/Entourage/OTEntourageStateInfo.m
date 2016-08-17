@@ -57,8 +57,8 @@
     return ![self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
 }
 
-- (void)loadById:(NSNumber *)feedItemId withSuccess:(void (^)(OTFeedItem *))success error:(void (^)(NSError *))failure {
-    [[OTEntourageService new] getEntourageWithId:feedItemId withSuccess:^(OTEntourage *entourage) {
+- (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
+    [[OTEntourageService new] getEntourageWithId:self.entourage.uid withSuccess:^(OTEntourage *entourage) {
        if(success)
            success(entourage);
     } failure:^(NSError *error) {

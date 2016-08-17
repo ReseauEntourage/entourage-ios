@@ -57,8 +57,8 @@
     return ![self.tour.joinStatus isEqualToString:JOIN_ACCEPTED];
 }
 
-- (void)loadById:(NSNumber *)feedItemId withSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
-    [[OTTourService new] getTourWithId:feedItemId withSuccess:^(OTTour *tour) {
+- (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
+    [[OTTourService new] getTourWithId:self.tour.uid withSuccess:^(OTTour *tour) {
         if(success)
             success(tour);
     } failure:^(NSError *error) {
