@@ -19,6 +19,8 @@
 #define JOIN_NOT_REQUESTED @"not_requested"
 #define JOIN_REJECTED @"rejected"
 
+#define TOUR_TYPE_NAME @"Tour"
+
 @interface OTFeedItem : NSObject
 
 @property (nonatomic, strong) NSNumber *uid;

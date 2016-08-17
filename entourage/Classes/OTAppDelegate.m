@@ -39,6 +39,7 @@
 #import "NSDictionary+Parsing.h"
 
 #import "OTPictureUploadService.h"
+#import "OTDeepLinkService.h"
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
@@ -305,63 +306,18 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [alert addAction:acceptJoinRequestAction];
 }
 
-- (void)handleChatNotification:(NSDictionary *)notificationDictionary
-                         showingAlert:(UIAlertController*)alert
+- (void)handleChatNotification:(NSDictionary *)notificationDictionary showingAlert:(UIAlertController*)alert
 {
     NSDictionary *apnContent = [notificationDictionary objectForKey:kUserInfoMessage];
     NSDictionary *apnExtra = [apnContent objectForKey:kUserInfoExtraMessage];
     
     NSNumber *joinableId = [apnExtra numberForKey:@"joinable_id"];
     NSString *type = [apnExtra valueForKey:@"joinable_type"];
-
-    if ([@"Tour" isEqualToString:type]) {
-        UIAlertAction *openTourAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert")//@"Afficher"
-                                                             style:UIAlertActionStyleDefault
-                                                           handler:^(UIAlertAction * _Nonnull action) {
-                                                               [[OTTourService new] getTourWithId:joinableId
-                                                                                      withSuccess:^(OTTour *tour) {
-                                                                                          NSLog(@"got tour info");
-                                                                                          //open timeline
-                                                                                          UIApplication *app = [UIApplication sharedApplication];
-                                                                                          UIViewController *rootVC = app.windows.firstObject.rootViewController;
-                                                                                          [rootVC dismissViewControllerAnimated:YES completion:nil];
-                                                                                          UINavigationController *navC = [[UIStoryboard tourStoryboard] instantiateInitialViewController];
-                                                                                          OTActiveFeedItemViewController *tourVC = navC.viewControllers.firstObject;
-                                                                                          tourVC.feedItem = (OTFeedItem*)tour;
-                                                                                          [rootVC presentViewController:navC animated:YES completion:^{
-                                                                                              NSLog(@"showing tour vc");
-                                                                                          }];
-                                                                                          
-                                                                                      } failure:^(NSError *error) {
-                                                                                          NSLog(@"something went wrong on getting tour info for tourId %@", joinableId);
-                                                                                      }];
-                                                           }];
-        [alert addAction:openTourAction];
-    } else {
-        UIAlertAction *openEntourageAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"showAlert")
-                                                                 style:UIAlertActionStyleDefault
-                                                               handler:^(UIAlertAction * _Nonnull action) {
-                                                                   [[OTEntourageService new] getEntourageWithId:joinableId
-                                                                                          withSuccess:^(OTEntourage *entourage) {
-                                                                                              NSLog(@"got entourage info");
-                                                                                              //open timeline
-                                                                                              UIApplication *app = [UIApplication sharedApplication];
-                                                                                              UIViewController *rootVC = app.windows.firstObject.rootViewController;
-                                                                                              [rootVC dismissViewControllerAnimated:YES completion:nil];
-                                                                                              UINavigationController *navC = [[UIStoryboard tourStoryboard] instantiateInitialViewController];
-                                                                                              OTActiveFeedItemViewController *feedVC = navC.viewControllers.firstObject;
-                                                                                              feedVC.feedItem = (OTFeedItem*)entourage;
-                                                                                              [rootVC presentViewController:navC animated:YES completion:^{
-                                                                                                  NSLog(@"showing entourage vc");
-                                                                                              }];
-                                                                                              
-                                                                                          } failure:^(NSError *error) {
-                                                                                              NSLog(@"something went wrong on getting entourage info for entourageId %@", joinableId);
-                                                                                          }];
-                                                               }];
-        [alert addAction:openEntourageAction];
-        
-    }
+    
+    UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[OTDeepLinkService new] navigateTo:joinableId withType:type];
+    }];
+    [alert addAction:openAction];
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {

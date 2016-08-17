@@ -9,7 +9,6 @@
 #import "OTFeedItem.h"
 #import "OTFeedItemAuthor.h"
 
-
 @implementation OTFeedItem
 
 - (instancetype)init {

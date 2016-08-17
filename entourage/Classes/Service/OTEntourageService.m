@@ -25,7 +25,6 @@
 #pragma mark - Constants
 
 NSString *const kEntourages = @"entourages";
-NSString *const kInvitations = @"invitations";
 extern NSString *kUsers;
 
 @implementation OTEntourageService
@@ -329,25 +328,6 @@ extern NSString *kUsers;
      }];
 }
 
-- (void)inviteNumbers:(NSArray *)phoneNumbers toEntourage:(OTEntourage *)entourage success:(void (^)())success failure:(void (^)(NSError *, NSArray *))failure {
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_INVITE, entourage.uid, TOKEN];
-    NSDictionary *messageDictionary = @{@"invite" : @{@"mode": @"SMS", @"phone_numbers": phoneNumbers}};
-    [[OTHTTPRequestManager sharedInstance]
-     POSTWithUrl:url
-     andParameters:messageDictionary
-     andSuccess:^(id responseObject)
-     {
-         if (success)
-             success();
-     }
-     andFailure:^(NSError *error)
-     {
-#warning TODO - read phones that generated the error if they exist
-         if (failure)
-             failure(error, nil);
-     }];
-}
-
 - (void)entourageUsersJoins:(OTEntourage *)entourage success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_feed_item_users", @""), kEntourages, entourage.uid,  TOKEN];
     [[OTHTTPRequestManager sharedInstance]
@@ -359,25 +339,6 @@ extern NSString *kUsers;
          NSArray *joiners = [data objectForKey:kUsers];
          if (success)
              success([OTFeedItemJoiner arrayForWebservice:joiners]);
-     }
-     andFailure:^(NSError *error)
-     {
-         if (failure)
-             failure(error);
-     }];
-}
-
-- (void)entourageGetInvitationsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_GET_INVITES, TOKEN];
-    [[OTHTTPRequestManager sharedInstance]
-     GETWithUrl:url
-     andParameters:nil
-     andSuccess:^(id responseObject)
-     {
-         NSDictionary *data = responseObject;
-         NSArray *invitations = [data objectForKey:kInvitations];
-         if (success)
-             success([OTEntourageInvitation arrayForWebservice:invitations]);
      }
      andFailure:^(NSError *error)
      {

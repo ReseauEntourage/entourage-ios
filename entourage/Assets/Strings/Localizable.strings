@@ -29,6 +29,9 @@
 "doRegenerateCode" = "Redemander un code";
 "doIgnore" = "Ignorer";
 "alreadyRegisteredMessage" = "Le numéro est déjà enregistré. Vous avez dû recevoir le code pas SMS.";
+"automaticJoinFailedMessage" = "!!Failed to join entourage automatically. Check my entourages invitations list and try again.";
+"joiningEntouragesMessage" = "!!Joining entourages";
+
 
 // MenuItems
 "menu_amis" = "Amis";

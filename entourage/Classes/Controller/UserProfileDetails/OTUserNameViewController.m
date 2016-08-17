@@ -21,8 +21,6 @@
 #import "OTUserPictureViewController.h"
 #import "NSError+message.h"
 
-#define ADD_PICTURE_SEGUE @"AddPictureSegue"
-
 @interface OTUserNameViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
@@ -78,7 +76,7 @@
                                                    user.phone = currentUser.phone;
                                                    [NSUserDefaults standardUserDefaults].currentUser = user;
                                                    [SVProgressHUD dismiss];
-                                                   [self performSegueWithIdentifier:ADD_PICTURE_SEGUE sender:self];
+                                                   [self performSegueWithIdentifier:@"AddPictureSegue" sender:self];
                                                }
                                                failure:^(NSError *error) {
                                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];

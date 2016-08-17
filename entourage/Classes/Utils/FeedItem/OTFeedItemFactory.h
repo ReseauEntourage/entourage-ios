@@ -15,5 +15,6 @@
 - (id)initWithFeedItem:(OTFeedItem *)feedItem;
 
 + (id<OTFeedItemFactoryDelegate>)createFor:(OTFeedItem *)item;
++ (id<OTFeedItemFactoryDelegate>)createForType:(NSString *)feedItemType;
 
 @end

@@ -37,4 +37,12 @@
         return [[OTTourFactory alloc] initWithTour:(OTTour *)item];
 }
 
++ (id<OTFeedItemFactoryDelegate>)createForType:(NSString *)feedItemType {
+    BOOL isTour = [feedItemType isEqualToString:TOUR_TYPE_NAME];
+    if(isTour)
+        return [[OTTourFactory alloc] initWithTour:nil];
+    else
+        return [[OTEntourageFactory alloc] initWithEntourage:nil];
+}
+
 @end

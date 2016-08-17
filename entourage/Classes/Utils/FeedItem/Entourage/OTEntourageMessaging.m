@@ -8,6 +8,7 @@
 
 #import "OTEntourageMessaging.h"
 #import "OTEntourageService.h"
+#import "OTInvitationsService.h"
 #import "OTFeedItemStatus.h"
 #import "OTConsts.h"
 #import "NSUserDefaults+OT.h"
@@ -28,7 +29,7 @@
 }
 
 - (void)invitePhones:(NSArray *)phones withSuccess:(void (^)())success orFailure:(void (^)(NSError *, NSArray *))failure {
-    [[OTEntourageService new] inviteNumbers:phones toEntourage:self.entourage success:^() {
+    [[OTInvitationsService new] inviteNumbers:phones toEntourage:self.entourage success:^() {
         NSLog(@"INVITE BY PHONES");
         if(success)
             success();

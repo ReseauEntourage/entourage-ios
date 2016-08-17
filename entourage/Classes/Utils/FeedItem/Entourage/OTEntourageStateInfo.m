@@ -9,6 +9,7 @@
 #import "OTEntourageStateInfo.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
+#import "OTEntourageService.h"
 
 @implementation OTEntourageStateInfo
 
@@ -54,6 +55,16 @@
     if([self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED])
         return YES;
     return ![self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
+}
+
+- (void)loadById:(NSNumber *)feedItemId withSuccess:(void (^)(OTFeedItem *))success error:(void (^)(NSError *))failure {
+    [[OTEntourageService new] getEntourageWithId:feedItemId withSuccess:^(OTEntourage *entourage) {
+       if(success)
+           success(entourage);
+    } failure:^(NSError *error) {
+        if(failure)
+            failure(error);
+    }];
 }
 
 @end

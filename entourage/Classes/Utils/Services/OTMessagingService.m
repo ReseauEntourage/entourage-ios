@@ -30,8 +30,7 @@
                     [allItems addObjectsFromArray:items];
                     [self sendItems:allItems toSource:dataSource];
                 }
-        } failure:^(NSError *error) {
-        }];
+        } failure:nil];
 
         [messaging getJoinRequestsWithSuccess:^(NSArray *items) {
             if([items count] > 0)
@@ -41,8 +40,7 @@
                     [allItems addObjectsFromArray:items];
                     [self sendItems:allItems toSource:dataSource];
                 }
-        } failure:^(NSError *error) {
-        }];
+        } failure:nil];
 
         [messaging getEncountersWithSuccess:^(NSArray *items) {
             if([items count] > 0)
@@ -50,8 +48,7 @@
                     [allItems addObjectsFromArray:items];
                     [self sendItems:allItems toSource:dataSource];
                 }
-        } failure:^(NSError *error) {
-        }];
+        } failure:nil];
     });
 }
 

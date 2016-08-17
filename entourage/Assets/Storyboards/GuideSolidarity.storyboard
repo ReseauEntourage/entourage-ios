@@ -131,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="2225.5" y="-1556"/>
         </scene>
-        <!--OTMapView-->
+        <!--MainNavController-->
         <scene sceneID="mBw-PB-iJd">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="OTMapView" id="VKG-VN-nl9" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="MainNavController" id="VKG-VN-nl9" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="9g7-NZ-ott"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFf-ME-AKo" userLabel="First Responder" sceneMemberID="firstResponder"/>

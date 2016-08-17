@@ -60,15 +60,8 @@
          success:(void (^)())success
          failure:(void (^)(NSError *error))failure;
 
-- (void)inviteNumbers:(NSArray *)phoneNumbers toEntourage:(OTEntourage *)entourage
-              success:(void (^)())success
-              failure:(void (^)(NSError *error, NSArray *failedNumbers))failure;
-
 - (void)entourageUsersJoins:(OTEntourage *)entourage
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure;
-
-- (void)entourageGetInvitationsWithSuccess:(void (^)(NSArray *))success
-                    failure:(void (^)(NSError *))failure;
 
 @end

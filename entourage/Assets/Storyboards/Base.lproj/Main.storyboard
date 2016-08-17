@@ -172,7 +172,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Lst-Gh-Xmp">
             <objects>
-                <navigationController id="EYq-GT-Cxt" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MenuNavController" id="EYq-GT-Cxt" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AaL-F7-3Uz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -188,7 +188,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Uum-1n-6o1">
             <objects>
-                <navigationController storyboardIdentifier="OTMapView" id="UcL-62-xea" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavController" id="UcL-62-xea" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qfe-Me-3AD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

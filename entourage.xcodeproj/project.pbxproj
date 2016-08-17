@@ -130,6 +130,7 @@
 		1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9003681D34FAAB004E18BC /* OTBehavior.m */; };
 		1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E90036D1D352C0B004E18BC /* UserPicture.storyboard */; };
 		1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */; };
+		1EACCAC31D64CD720027D1ED /* OTDeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACCAC21D64CD720027D1ED /* OTDeepLinkService.m */; };
 		1EACE4161D11515200F3A2A6 /* OTEntourageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */; };
 		1EACE4171D11515200F3A2A6 /* OTEntourageStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4091D11515200F3A2A6 /* OTEntourageStateTransition.m */; };
 		1EACE4181D11515200F3A2A6 /* OTFeedItemFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE40B1D11515200F3A2A6 /* OTFeedItemFactory.m */; };
@@ -142,6 +143,8 @@
 		1EB660EC1D5D32EC0051CBA7 /* OTMyEntouragesTimeframeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EB660EB1D5D32EC0051CBA7 /* OTMyEntouragesTimeframeCell.m */; };
 		1EC184B71D1420D800E29D96 /* OTEntourageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC184B61D1420D800E29D96 /* OTEntourageAnnotationView.m */; };
 		1EC6F3C71D53DBEF0026766D /* OTActiveFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC6F3C61D53DBEF0026766D /* OTActiveFeedItemViewController.m */; };
+		1EC9D67F1D644F7700C6E9AA /* OTOnboardingJoinService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9D67E1D644F7700C6E9AA /* OTOnboardingJoinService.m */; };
+		1EC9D6821D6468A800C6E9AA /* OTInvitationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9D6811D6468A800C6E9AA /* OTInvitationsService.m */; };
 		1ECDBC691D3D35C300DD87B2 /* OTTourMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECDBC681D3D35C300DD87B2 /* OTTourMessaging.m */; };
 		1ECDBC6C1D3D363600DD87B2 /* OTEntourageMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECDBC6B1D3D363600DD87B2 /* OTEntourageMessaging.m */; };
 		1ECFB3691D52570900722DAC /* OTTourMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECFB3681D52570900722DAC /* OTTourMapHandler.m */; };
@@ -497,6 +500,8 @@
 		1EA51FCB1D366F6B00350255 /* OTPictureUploadService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPictureUploadService.h; path = Amazon/OTPictureUploadService.h; sourceTree = "<group>"; };
 		1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTPictureUploadService.m; path = Amazon/OTPictureUploadService.m; sourceTree = "<group>"; };
 		1EA51FCE1D368AD800350255 /* OTAmazonConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
+		1EACCAC11D64CD720027D1ED /* OTDeepLinkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTDeepLinkService.h; path = Services/OTDeepLinkService.h; sourceTree = "<group>"; };
+		1EACCAC21D64CD720027D1ED /* OTDeepLinkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTDeepLinkService.m; path = Services/OTDeepLinkService.m; sourceTree = "<group>"; };
 		1EACE4061D11515200F3A2A6 /* OTEntourageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFactory.h; sourceTree = "<group>"; };
 		1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageFactory.m; sourceTree = "<group>"; };
 		1EACE4081D11515200F3A2A6 /* OTEntourageStateTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageStateTransition.h; sourceTree = "<group>"; };
@@ -524,6 +529,10 @@
 		1EC184B61D1420D800E29D96 /* OTEntourageAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageAnnotationView.m; sourceTree = "<group>"; };
 		1EC6F3C51D53DBEF0026766D /* OTActiveFeedItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTActiveFeedItemViewController.h; path = ActiveFeedItem/OTActiveFeedItemViewController.h; sourceTree = "<group>"; };
 		1EC6F3C61D53DBEF0026766D /* OTActiveFeedItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTActiveFeedItemViewController.m; path = ActiveFeedItem/OTActiveFeedItemViewController.m; sourceTree = "<group>"; };
+		1EC9D67D1D644F7700C6E9AA /* OTOnboardingJoinService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTOnboardingJoinService.h; path = Services/OTOnboardingJoinService.h; sourceTree = "<group>"; };
+		1EC9D67E1D644F7700C6E9AA /* OTOnboardingJoinService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTOnboardingJoinService.m; path = Services/OTOnboardingJoinService.m; sourceTree = "<group>"; };
+		1EC9D6801D6468A800C6E9AA /* OTInvitationsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTInvitationsService.h; sourceTree = "<group>"; };
+		1EC9D6811D6468A800C6E9AA /* OTInvitationsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTInvitationsService.m; sourceTree = "<group>"; };
 		1ECDBC661D3D354000DD87B2 /* OTMessagingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMessagingDelegate.h; sourceTree = "<group>"; };
 		1ECDBC671D3D35C300DD87B2 /* OTTourMessaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourMessaging.h; sourceTree = "<group>"; };
 		1ECDBC681D3D35C300DD87B2 /* OTTourMessaging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourMessaging.m; sourceTree = "<group>"; };
@@ -876,6 +885,10 @@
 				1E2232D81D56998E004CD5E8 /* OTAddressBookService.m */,
 				1E2232DA1D5699AD004CD5E8 /* OTMessagingService.h */,
 				1E2232DB1D5699AD004CD5E8 /* OTMessagingService.m */,
+				1EC9D67D1D644F7700C6E9AA /* OTOnboardingJoinService.h */,
+				1EC9D67E1D644F7700C6E9AA /* OTOnboardingJoinService.m */,
+				1EACCAC11D64CD720027D1ED /* OTDeepLinkService.h */,
+				1EACCAC21D64CD720027D1ED /* OTDeepLinkService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1562,6 +1575,8 @@
 				1D962C7019E9277D00547687 /* OTAuthService.m */,
 				6B1A846F19E811210020FB93 /* OTPoiService.h */,
 				6B1A847019E811210020FB93 /* OTPoiService.m */,
+				1EC9D6801D6468A800C6E9AA /* OTInvitationsService.h */,
+				1EC9D6811D6468A800C6E9AA /* OTInvitationsService.m */,
 			);
 			name = WebService;
 			path = Service;
@@ -2179,6 +2194,7 @@
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
 				1E488E121D4FB81700A2E5B0 /* OTPhoneViewController.m in Sources */,
+				1EC9D67F1D644F7700C6E9AA /* OTOnboardingJoinService.m in Sources */,
 				2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */,
 				0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */,
 				45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */,
@@ -2205,6 +2221,7 @@
 				2EDFADDA1CAE84D000B66026 /* OTAboutItem.m in Sources */,
 				1ECFB36C1D52578400722DAC /* OTEntourageMapHandler.m in Sources */,
 				1E07AD641D5667E400466FB7 /* OTStatusChangedBehavior.m in Sources */,
+				1EACCAC31D64CD720027D1ED /* OTDeepLinkService.m in Sources */,
 				0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */,
 				0A94B5001B8CC66100402AF3 /* OTTour.m in Sources */,
 				1EACE41B1D11515200F3A2A6 /* OTLocationManager.m in Sources */,
@@ -2275,6 +2292,7 @@
 				1E5EBCEF1D53CECF006695F1 /* OTStatusBehavior.m in Sources */,
 				1E488E1B1D4FB99300A2E5B0 /* OTNotificationsRightsViewController.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
+				1EC9D6821D6468A800C6E9AA /* OTInvitationsService.m in Sources */,
 				45ADCACF1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m in Sources */,
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
 				45E267821C860239004D14EB /* OTFeedItemJoinRequestViewController.m in Sources */,

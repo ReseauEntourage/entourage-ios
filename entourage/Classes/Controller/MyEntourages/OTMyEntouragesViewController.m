@@ -12,7 +12,7 @@
 #import "OTToggleVisibleBehavior.h"
 #import "OTMyEntouragesDataSource.h"
 #import "OTTableDataSourceBehavior.h"
-#import "OTEntourageService.h"
+#import "OTInvitationsService.h"
 #import "SVProgressHUD.h"
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
@@ -67,7 +67,7 @@
 #pragma mark - private methods
 
 - (void)loadInvitations {
-    [[OTEntourageService new] entourageGetInvitationsWithSuccess:^(NSArray *items) {
+    [[OTInvitationsService new] entourageGetInvitationsWithSuccess:^(NSArray *items) {
         [self.toggleCollectionView toggle:[items count] > 0 animated:YES];
         [self.invitationsDataSource updateItems:items];
         [self.invitationsCollectionDataSource refresh];

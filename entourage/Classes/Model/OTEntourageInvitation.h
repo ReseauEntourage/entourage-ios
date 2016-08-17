@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "OTUser.h"
 
+#define INVITATION_ACCEPTED @"accepted"
+
 @interface OTEntourageInvitation : NSObject
 
+@property (nonatomic, strong) NSNumber *iid;
 @property (nonatomic, strong) OTUser *inviter;
+@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSNumber *entourageId;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)arrayForWebservice:(NSArray *)joiners;

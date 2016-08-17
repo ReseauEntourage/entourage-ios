@@ -9,6 +9,7 @@
 #import "OTTourStateInfo.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
+#import "OTTourService.h"
 
 @implementation OTTourStateInfo
 
@@ -54,6 +55,16 @@
     if([self.tour.status isEqualToString:TOUR_STATUS_FREEZED])
         return YES;
     return ![self.tour.joinStatus isEqualToString:JOIN_ACCEPTED];
+}
+
+- (void)loadById:(NSNumber *)feedItemId withSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
+    [[OTTourService new] getTourWithId:feedItemId withSuccess:^(OTTour *tour) {
+        if(success)
+            success(tour);
+    } failure:^(NSError *error) {
+        if(failure)
+            failure(error);
+    }];
 }
 
 @end
