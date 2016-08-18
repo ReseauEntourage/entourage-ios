@@ -27,23 +27,30 @@
 }
 
 - (void)prepareControllers:(OTFeedItem *)feedItem {
+    OTSWRevealViewController *revealController = [self setupRevealController];
+    UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
+    UIStoryboard *activeFeedItemStorybard = [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];
+    OTActiveFeedItemViewController *activeFeedItemController = (OTActiveFeedItemViewController *)[activeFeedItemStorybard instantiateInitialViewController];
+    activeFeedItemController.feedItem = feedItem;
+    [mainController setViewControllers:@[mainController.topViewController, activeFeedItemController]];
+    [self updateAppWindow:revealController];
+}
+
+- (OTSWRevealViewController *)setupRevealController {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     OTSWRevealViewController *revealController = [mainStoryboard instantiateInitialViewController];
     UIViewController *menuController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MenuNavController"];
     UINavigationController *mainController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainNavController"];
     revealController.frontViewController = mainController;
     revealController.rearViewController = menuController;
-    
-    UIStoryboard *activeFeedItemStorybard = [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];
-    OTActiveFeedItemViewController *activeFeedItemController = (OTActiveFeedItemViewController *)[activeFeedItemStorybard instantiateInitialViewController];
-    activeFeedItemController.feedItem = feedItem;
-    [mainController setViewControllers:@[mainController.topViewController, activeFeedItemController]];
-    
+    return revealController;
+}
+
+- (void)updateAppWindow:(OTSWRevealViewController *)revealController {
     OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIWindow *window = [appDelegate window];
     window.rootViewController = revealController;
     [window makeKeyAndVisible];
-
 }
 
 @end
