@@ -747,11 +747,6 @@ static BOOL didGetAnyData = NO;
                     coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
                     coords[1] = newLocation.coordinate;
                     [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
-                    
-                    //recenter map because tour is ongoing
-                    MKCoordinateRegion region = self.mapView.region;
-                    region.center = newLocation.coordinate;
-                    [self.mapView setRegion:region animated:YES];
                 }
             }
             
