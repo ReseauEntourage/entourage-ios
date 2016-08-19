@@ -35,8 +35,8 @@
     self = [super init];
     if(self) {
         self.isActive = YES;
-        self.isInvited = YES;
-        self.isOrganiser = YES;
+        self.isInvited = NO;
+        self.isOrganiser = NO;
         self.isClosed = YES;
         self.showDemand = YES;
         self.showContribution = YES;
@@ -75,7 +75,7 @@
 - (NSString *)getTourTypes {
     NSArray *types = @[TOUR_MEDICAL, TOUR_SOCIAL, TOUR_DISTRIBUTIVE];
     if(self.showTours && [self.currentUser.type isEqualToString:USER_TYPE_PRO])
-        [types componentsJoinedByString:@","];
+        return [types componentsJoinedByString:@","];
     return @"";
 }
 
