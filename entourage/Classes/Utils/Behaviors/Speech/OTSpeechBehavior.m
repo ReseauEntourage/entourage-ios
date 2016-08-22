@@ -10,7 +10,7 @@
 #import "OTConsts.h"
 #import "OTTextView.h"
 
-@interface OTSpeechBehavior () <SKRecognizerDelegate>
+@interface OTSpeechBehavior () <SKRecognizerDelegate, UITextViewDelegate>
 
 @property (nonatomic) BOOL isRecording;
 @property (nonatomic, strong) NSLayoutConstraint *widthConstraint;
@@ -29,6 +29,8 @@
 }
 
 - (void)initialize {
+    self.txtOutput.delegate = self;
+    
     // to be removed on 1.9
     [OTSpeechKitManager setup];
     for(NSLayoutConstraint *constraint in self.btnRecord.constraints) {
@@ -112,6 +114,12 @@
 - (void)recognizerDidFinishRecording:(SKRecognizer *)recognizer {
     [self.btnRecord setEnabled:YES];
     self.isRecording = NO;
+    [self updateRecordButton];
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidChange:(UITextView *)textView {
     [self updateRecordButton];
 }
 
