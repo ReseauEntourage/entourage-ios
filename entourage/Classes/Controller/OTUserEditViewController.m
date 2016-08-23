@@ -363,24 +363,22 @@ typedef NS_ENUM(NSInteger) {
                                                                   handler:^(UIAlertAction * _Nonnull action) {}];
             
             [alert addAction:defaultAction];
-            UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"yes")
-                                                                    style:UIAlertActionStyleDestructive
-                                                                  handler:^(UIAlertAction * _Nonnull action) {
-                                                                      NSLog(@"deleting account ...");
-                                                                      [[OTAuthService new] deleteAccountForUser:0
-                                                                                                        success:^{
-                                                                                                            NSLog(@"deleted account.");
-                                                                                                            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFY_LOGOUT object:self];
-                                                                                                        } failure:^(NSError *error) {
-                                                                                                            NSLog(@"Something went wrong");
-                                                                                                            [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"user_edit_saved_ok")];
-                                                                                                        }];
-                                                                  }];
-            
+            UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"yes") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                    [[OTAuthService new] deleteAccountForUser:0 success:^{
+                        NSLog(@"deleted account.");
+                        NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+                        [loggedNumbers removeObject:[NSUserDefaults standardUserDefaults].currentUser.phone];
+                        [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFY_LOGOUT object:self];
+                    } failure:^(NSError *error) {
+                        NSLog(@"Something went wrong");
+                        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"user_edit_saved_ok")];
+                    }];
+                }];
             [alert addAction:deleteAction];
             [self presentViewController:alert animated:YES completion:nil];
-
-            }
+        }
             break;
         default:
             break;
