@@ -24,6 +24,10 @@
     return self.tour.organizationName;
 }
 
+- (NSString *)feedItemDescription {
+    return @"";
+}
+
 - (NSString *)navigationTitle {
     return OTLocalizedString(@"tour");
 }

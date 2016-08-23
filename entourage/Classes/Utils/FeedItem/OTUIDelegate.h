@@ -16,6 +16,7 @@
 
 - (NSAttributedString *) descriptionWithSize:(CGFloat)size;
 - (NSString *)summary;
+- (NSString *)feedItemDescription;
 - (NSString *)navigationTitle;
 - (void)timeDataWithCompletion:(void(^)(NSString *))completion;
 

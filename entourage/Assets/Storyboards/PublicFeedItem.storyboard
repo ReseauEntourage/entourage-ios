@@ -9,6 +9,7 @@
         <mutableArray key="SF-UI-Text-Light.otf">
             <string>SFUIText-Light</string>
             <string>SFUIText-Light</string>
+            <string>SFUIText-Light</string>
         </mutableArray>
         <mutableArray key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
@@ -79,9 +80,9 @@
                                         </connections>
                                     </button>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IvY-Fu-Kho">
-                                        <rect key="frame" x="-20" y="97" width="368" height="128"/>
+                                        <rect key="frame" x="-20" y="97" width="368" height="170"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="128" id="3pU-j9-8bf"/>
+                                            <constraint firstAttribute="height" constant="170" id="3pU-j9-8bf"/>
                                         </constraints>
                                     </mapView>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FuU-fG-ePR">
@@ -108,6 +109,12 @@
                                         <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed item description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwa-Bm-pV4">
+                                        <rect key="frame" x="15" y="282" width="293" height="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -122,6 +129,9 @@
                                     <constraint firstAttribute="bottom" secondItem="nU0-h0-mOV" secondAttribute="bottom" constant="15" id="DPt-4o-Utg"/>
                                     <constraint firstItem="IvY-Fu-Kho" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="-20" id="FVs-sa-fzs"/>
                                     <constraint firstItem="FuU-fG-ePR" firstAttribute="leading" secondItem="KaD-Co-GmI" secondAttribute="leading" id="Hei-To-zTe"/>
+                                    <constraint firstAttribute="trailing" secondItem="Rwa-Bm-pV4" secondAttribute="trailing" constant="20" id="HiW-Vg-7EA"/>
+                                    <constraint firstItem="Rwa-Bm-pV4" firstAttribute="top" secondItem="IvY-Fu-Kho" secondAttribute="bottom" constant="15" id="Ibw-bp-IsH"/>
+                                    <constraint firstItem="fJK-hn-36o" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Rwa-Bm-pV4" secondAttribute="bottom" constant="15" id="JAU-5b-BP1"/>
                                     <constraint firstItem="4QV-vH-V9y" firstAttribute="trailing" secondItem="RcA-br-gXo" secondAttribute="trailing" id="MKP-sc-G4w"/>
                                     <constraint firstItem="KaD-Co-GmI" firstAttribute="top" secondItem="0Ms-j8-jfY" secondAttribute="top" constant="15" id="QbM-4e-HP5"/>
                                     <constraint firstItem="nU0-h0-mOV" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" id="RQS-5W-jTP"/>
@@ -135,6 +145,7 @@
                                     <constraint firstItem="IvY-Fu-Kho" firstAttribute="top" secondItem="xDt-dA-Asj" secondAttribute="bottom" constant="17" id="wjV-Rc-kCA"/>
                                     <constraint firstItem="nU0-h0-mOV" firstAttribute="top" secondItem="FuU-fG-ePR" secondAttribute="bottom" constant="22" id="wsE-v6-s9s"/>
                                     <constraint firstItem="ZOB-K8-3My" firstAttribute="top" secondItem="KaD-Co-GmI" secondAttribute="bottom" id="xJx-Rq-DU7"/>
+                                    <constraint firstItem="Rwa-Bm-pV4" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="15" id="yYc-yv-agL"/>
                                     <constraint firstItem="fJK-hn-36o" firstAttribute="centerY" secondItem="FuU-fG-ePR" secondAttribute="centerY" id="zCn-bW-xEE"/>
                                 </constraints>
                             </view>
@@ -163,6 +174,7 @@
                     <connections>
                         <outlet property="btnAvatar" destination="RcA-br-gXo" id="C9e-qc-4fh"/>
                         <outlet property="lblDescription" destination="ZOB-K8-3My" id="0Ud-M2-BqT"/>
+                        <outlet property="lblFeedItemDescription" destination="Rwa-Bm-pV4" id="8nc-uM-BeO"/>
                         <outlet property="lblTimeDistance" destination="xDt-dA-Asj" id="dGy-Hj-0F1"/>
                         <outlet property="lblTitle" destination="KaD-Co-GmI" id="Cfo-Bc-WCB"/>
                         <outlet property="lblUserCount" destination="4QV-vH-V9y" id="xQV-zT-36c"/>

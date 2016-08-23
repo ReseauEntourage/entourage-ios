@@ -24,6 +24,10 @@
     return self.entourage.title;
 }
 
+- (NSString *)feedItemDescription {
+    return self.entourage.desc;
+}
+
 - (NSString *)navigationTitle {
     return OTLocalizedString([self displayType]);
 }

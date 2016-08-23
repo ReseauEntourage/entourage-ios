@@ -33,6 +33,8 @@
         [self.btnAvatar setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];
     if(self.lblDescription)
         [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+    if(self.lblFeedItemDescription)
+        self.lblFeedItemDescription.text = [uiDelegate feedItemDescription];
     if(self.lblTimeDistance) {
     self.lblTimeDistance.text = @"";
         [uiDelegate timeDataWithCompletion:^(NSString *result) {
