@@ -11,6 +11,8 @@
 
 @interface OTMembersDataSource : OTDataSourceBehavior
 
+@property (nonatomic, weak) IBOutlet UILabel *lblMemberCount;
+
 - (void)loadDataFor:(OTFeedItem *)feedItem;
 
 @end
