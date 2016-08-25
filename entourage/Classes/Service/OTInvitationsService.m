@@ -43,7 +43,7 @@ NSString *const kKeyFailedNumbers = @"failed_numbers";
      }];
 }
 
-- (void)entourageGetInvitationsWithStatus:(NSString *)status success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+- (void)getInvitationsWithStatus:(NSString *)status success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_GET_INVITES, TOKEN];
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
@@ -73,6 +73,23 @@ NSString *const kKeyFailedNumbers = @"failed_numbers";
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_HANDLE_INVITE, invitation.iid, TOKEN];
     [[OTHTTPRequestManager sharedInstance]
      PUTWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+             success();
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+             failure(error);
+     }];
+}
+
+- (void)rejectInvitation:(OTEntourageInvitation *)invitation withSuccess:(void (^)())success failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_HANDLE_INVITE, invitation.iid, TOKEN];
+    [[OTHTTPRequestManager sharedInstance]
+     DELETEWithUrl:url
      andParameters:nil
      andSuccess:^(id responseObject)
      {

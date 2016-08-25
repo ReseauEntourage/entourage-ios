@@ -13,7 +13,7 @@
 @implementation OTOnboardingJoinService
 
 - (void)checkForJoins:(void (^)(OTEntourageInvitation *))success withError:(void (^)(NSError *))failure {
-    [[OTInvitationsService new] entourageGetInvitationsWithStatus:INVITATION_PENDING success:^(NSArray *invitations) {
+    [[OTInvitationsService new] getInvitationsWithStatus:INVITATION_PENDING success:^(NSArray *invitations) {
         if(invitations.count == 0) {
             if(success)
                 success(nil);

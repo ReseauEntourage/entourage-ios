@@ -19,6 +19,7 @@
 #import "OTMyEntouragesFiltersViewController.h"
 #import "OTMyEntouragesOptionsBehavior.h"
 #import "OTFeedItemDetailsBehavior.h"
+#import "OTManageInvitationBehavior.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -29,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet OTTableDataSourceBehavior *entouragesTableDataSource;
 @property (strong, nonatomic) IBOutlet OTMyEntouragesOptionsBehavior *optionsBehavior;
 @property (strong, nonatomic) IBOutlet OTFeedItemDetailsBehavior *feedItemDetailsBehavior;
+@property (nonatomic, strong) IBOutlet OTManageInvitationBehavior* manageInvitation;
 
 @end
 
@@ -57,6 +59,8 @@
         return;
     if([self.feedItemDetailsBehavior prepareSegueForDetails:segue])
         return;
+    if([self.manageInvitation prepareSegueForManage:segue])
+        return;
     if([segue.identifier isEqualToString:@"FiltersSegue"]) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTMyEntouragesFiltersViewController *filtersController = (OTMyEntouragesFiltersViewController *)controller.topViewController;
@@ -71,7 +75,7 @@
 #pragma mark - private methods
 
 - (void)loadInvitations {
-    [[OTInvitationsService new] entourageGetInvitationsWithStatus:INVITATION_PENDING success:^(NSArray *items) {
+    [[OTInvitationsService new] getInvitationsWithStatus:INVITATION_PENDING success:^(NSArray *items) {
         [self.toggleCollectionView toggle:[items count] > 0 animated:YES];
         [self.invitationsDataSource updateItems:items];
         [self.invitationsCollectionDataSource refresh];
