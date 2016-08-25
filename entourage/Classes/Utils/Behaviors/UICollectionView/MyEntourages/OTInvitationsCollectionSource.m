@@ -8,6 +8,7 @@
 
 #import "OTInvitationsCollectionSource.h"
 #import "OTCollectionSourceBehavior.h"
+#import "OTManageInvitationBehavior.h"
 
 @interface OTInvitationsCollectionSource () <UICollectionViewDelegate>
 
@@ -18,6 +19,12 @@
 - (void)initialize {
     [super initialize];
     self.dataSource.collectionView.delegate = self;
+}
+
+- (void)removeInvitation:(OTEntourageInvitation *)invitation {
+    NSUInteger row = [self.dataSource.items indexOfObject:invitation];
+    [self.dataSource.items removeObject:invitation];
+    [self.dataSource.collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]]];
 }
 
 #pragma mark - UICollectionViewDelegate

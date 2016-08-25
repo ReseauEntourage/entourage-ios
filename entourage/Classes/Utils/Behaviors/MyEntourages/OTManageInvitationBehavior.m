@@ -16,10 +16,15 @@
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, strong) OTEntourageInvitation *invitation;
+@property (nonatomic, weak) OTInvitationsCollectionSource *collectionDataSource;
 
 @end
 
 @implementation OTManageInvitationBehavior
+
+- (void)configureWith:(OTInvitationsCollectionSource *)collectionDataSource {
+    self.collectionDataSource = collectionDataSource;
+}
 
 - (void)showFor:(OTEntourageInvitation *)invitation {
     self.invitation = invitation;
@@ -38,6 +43,7 @@
         OTManageInvitationViewController *controller = (OTManageInvitationViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
         controller.invitation = self.invitation;
+        controller.pendingInvitationsChangedDelegate = self.owner;
     }
     else
         return NO;

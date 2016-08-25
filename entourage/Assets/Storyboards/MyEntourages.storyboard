@@ -368,6 +368,11 @@
                         <outlet property="owner" destination="MH3-uF-0WG" id="WTo-2L-Prg"/>
                     </connections>
                 </customObject>
+                <customObject id="Ldj-3E-rTX" userLabel="Manage Invitation" customClass="OTManageInvitationBehavior">
+                    <connections>
+                        <outlet property="owner" destination="MH3-uF-0WG" id="zpU-FV-zWu"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="373.33333333333331" y="-46.386666666666663"/>
         </scene>
@@ -789,6 +794,9 @@
                                                         <integer key="value" value="15"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="ignore" destination="DIz-eG-Bls" eventType="touchUpInside" id="WRc-oA-Rn6"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xw-ak-fW4">
                                                 <rect key="frame" x="172" y="41" width="114" height="29"/>
@@ -806,6 +814,9 @@
                                                         <integer key="value" value="15"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="accept" destination="DIz-eG-Bls" eventType="touchUpInside" id="cwQ-fU-kZm"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -859,6 +870,7 @@
                     <connections>
                         <outlet property="annotationProvider" destination="Nb6-SJ-tYP" id="Aa3-L8-aeT"/>
                         <outlet property="btnIgnore" destination="DdY-Cy-ps4" id="Eov-Cj-QKC"/>
+                        <outlet property="invitationChangedBehavior" destination="d2a-SV-Ak8" id="PTK-3k-3Qp"/>
                         <outlet property="summaryProviderBehavior" destination="FYQ-Aj-2fj" id="HRY-Vi-r7y"/>
                         <outlet property="userProfileBehavior" destination="dKp-93-TX2" id="3xf-ro-1W5"/>
                         <segue destination="a4v-Jl-77s" kind="modal" identifier="UserProfileSegue" id="Cxg-Wu-Kzs"/>
@@ -883,6 +895,7 @@
                         <outlet property="lblTitle" destination="eLL-UT-mXU" id="u6R-7A-6EQ"/>
                     </connections>
                 </customObject>
+                <customObject id="d2a-SV-Ak8" userLabel="Invitation Changed" customClass="OTInvitationChangedBehavior"/>
             </objects>
             <point key="canvasLocation" x="783" y="-718"/>
         </scene>

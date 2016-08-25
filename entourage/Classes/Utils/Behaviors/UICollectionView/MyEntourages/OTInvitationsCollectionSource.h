@@ -7,10 +7,13 @@
 //
 
 #import "OTCollectionViewDataSourceBehavior.h"
-#import "OTManageInvitationBehavior.h"
+#import "OTEntourageInvitation.h"
+@class OTManageInvitationBehavior;
 
 @interface OTInvitationsCollectionSource : OTCollectionViewDataSourceBehavior
 
 @property (nonatomic, weak) IBOutlet OTManageInvitationBehavior* manageInvitations;
+
+- (void)removeInvitation:(OTEntourageInvitation *)invitation;
 
 @end

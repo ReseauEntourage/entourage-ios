@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "OTFeedItem.h"
 #import "OTEntourageInvitation.h"
+#import "OTPendingInvitationsChangedDelegate.h"
 
 @interface OTManageInvitationViewController : UIViewController
+
+@property (nonatomic, weak) id<OTPendingInvitationsChangedDelegate> pendingInvitationsChangedDelegate;
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, strong) OTEntourageInvitation *invitation;

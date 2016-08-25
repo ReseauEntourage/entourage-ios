@@ -17,7 +17,7 @@
         Class class = [self class];
         
         SEL originalSelector = @selector(viewDidLoad);
-        SEL swizzledSelector = @selector(mob_viewDidLoad);
+        SEL swizzledSelector = @selector(ot_viewDidLoad);
         
         Method originalMethod = class_getInstanceMethod(class, originalSelector);
         Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
@@ -34,8 +34,8 @@
 
 #pragma mark - Method Swizzling
 
-- (void)mob_viewDidLoad {
-    [self mob_viewDidLoad];
+- (void)ot_viewDidLoad {
+    [self ot_viewDidLoad];
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self.navigationItem setBackBarButtonItem:backButtonItem];
 }

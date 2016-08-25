@@ -8,7 +8,7 @@
 
 #import "OTMyEntouragesViewController.h"
 #import "OTCollectionSourceBehavior.h"
-#import "OTCollectionViewDataSourceBehavior.h"
+#import "OTInvitationsCollectionSource.h"
 #import "OTToggleVisibleBehavior.h"
 #import "OTMyEntouragesDataSource.h"
 #import "OTTableDataSourceBehavior.h"
@@ -24,7 +24,7 @@
 @interface OTMyEntouragesViewController ()
 
 @property (strong, nonatomic) IBOutlet OTCollectionSourceBehavior *invitationsDataSource;
-@property (strong, nonatomic) IBOutlet OTCollectionViewDataSourceBehavior *invitationsCollectionDataSource;
+@property (strong, nonatomic) IBOutlet OTInvitationsCollectionSource *invitationsCollectionDataSource;
 @property (strong, nonatomic) IBOutlet OTToggleVisibleBehavior *toggleCollectionView;
 @property (strong, nonatomic) IBOutlet OTMyEntouragesDataSource *entouragesDataSource;
 @property (strong, nonatomic) IBOutlet OTTableDataSourceBehavior *entouragesTableDataSource;
@@ -44,6 +44,7 @@
     [self.toggleCollectionView initialize];
     [self.toggleCollectionView toggle:NO animated:NO];
     [self.optionsBehavior configureWith:self.optionsDelegate];
+    [self.manageInvitation configureWith:self.invitationsCollectionDataSource];
     
     self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
@@ -69,6 +70,15 @@
 }
 
 - (IBAction)changedEntourages:(id)sender {
+    [self.entouragesDataSource loadData];
+}
+
+#pragma mark - OTPendingInvitationsChangedDelegate
+
+- (void)noLongerPending:(OTEntourageInvitation *)invitation {
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.invitationsCollectionDataSource removeInvitation:invitation];
+    [self.toggleCollectionView toggle:[self.invitationsDataSource.items count] > 0 animated:YES];
     [self.entouragesDataSource loadData];
 }
 

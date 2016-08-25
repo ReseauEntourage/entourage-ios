@@ -31,6 +31,8 @@
 "alreadyRegisteredMessage" = "Le numéro est déjà enregistré. Vous avez dû recevoir le code pas SMS.";
 "automaticJoinFailedMessage" = "!!Failed to join entourage automatically. Check my entourages invitations list and try again.";
 "joiningEntouragesMessage" = "!!Joining entourages";
+"acceptJoinFailed" = "!!Failed to accept entourage invitation.";
+"ignoreJoinFailed" = "!!Failed to ignore entourage invitation";
 
 
 // MenuItems

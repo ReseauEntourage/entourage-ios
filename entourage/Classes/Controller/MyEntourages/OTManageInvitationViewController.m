@@ -12,12 +12,14 @@
 #import "OTSummaryProviderBehavior.h"
 #import "OTUserProfileBehavior.h"
 #import "OTFeedItemFactory.h"
+#import "OTInvitationChangedBehavior.h"
 
 @interface OTManageInvitationViewController ()
 
 @property (strong, nonatomic) IBOutlet OTMapAnnotationProviderBehavior *annotationProvider;
 @property (strong, nonatomic) IBOutlet OTSummaryProviderBehavior *summaryProviderBehavior;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
+@property (strong, nonatomic) IBOutlet OTInvitationChangedBehavior *invitationChangedBehavior;
 @property (strong, nonatomic) IBOutlet UIButton *btnIgnore;
 
 @end
@@ -31,6 +33,8 @@
     [self.annotationProvider configureWith:self.feedItem];
     [self.annotationProvider addStartPoint];
     [self.annotationProvider drawData];
+    self.invitationChangedBehavior.pendingInvitationChangedDelegate = self.pendingInvitationsChangedDelegate;
+    
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     self.btnIgnore.layer.borderColor = [UIColor whiteColor].CGColor;
     self.btnIgnore.layer.borderWidth = 1.0f;
@@ -42,6 +46,14 @@
 
 - (IBAction)showProfile {
     [self.userProfileBehavior showProfile:self.feedItem.author.uID];
+}
+
+- (IBAction)accept {
+    [self.invitationChangedBehavior accept:self.invitation];
+}
+
+- (IBAction)ignore {
+    [self.invitationChangedBehavior ignore:self.invitation];
 }
 
 #pragma mark - navigation

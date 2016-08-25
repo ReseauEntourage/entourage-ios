@@ -98,6 +98,7 @@
 		1E5C302D1D6F85F900E10770 /* OTManageInvitationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C302C1D6F85F900E10770 /* OTManageInvitationBehavior.m */; };
 		1E5C30331D6F89D300E10770 /* OTInvitationsCollectionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30321D6F89D300E10770 /* OTInvitationsCollectionSource.m */; };
 		1E5C30361D6F94DD00E10770 /* UIViewController+OTEmptyBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30351D6F94DD00E10770 /* UIViewController+OTEmptyBackButton.m */; };
+		1E5C30391D6F971D00E10770 /* OTInvitationChangedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30381D6F971D00E10770 /* OTInvitationChangedBehavior.m */; };
 		1E5EBCEC1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5EBCEB1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.m */; };
 		1E5EBCEF1D53CECF006695F1 /* OTStatusBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5EBCEE1D53CECF006695F1 /* OTStatusBehavior.m */; };
 		1E5F79821D5A0E040005003C /* OTMyEntouragesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F79811D5A0E040005003C /* OTMyEntouragesViewController.m */; };
@@ -459,6 +460,9 @@
 		1E5C30321D6F89D300E10770 /* OTInvitationsCollectionSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTInvitationsCollectionSource.m; path = Behaviors/UICollectionView/MyEntourages/OTInvitationsCollectionSource.m; sourceTree = "<group>"; };
 		1E5C30341D6F94DD00E10770 /* UIViewController+OTEmptyBackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+OTEmptyBackButton.h"; sourceTree = "<group>"; };
 		1E5C30351D6F94DD00E10770 /* UIViewController+OTEmptyBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+OTEmptyBackButton.m"; sourceTree = "<group>"; };
+		1E5C30371D6F971D00E10770 /* OTInvitationChangedBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTInvitationChangedBehavior.h; path = Behaviors/MyEntourages/OTInvitationChangedBehavior.h; sourceTree = "<group>"; };
+		1E5C30381D6F971D00E10770 /* OTInvitationChangedBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTInvitationChangedBehavior.m; path = Behaviors/MyEntourages/OTInvitationChangedBehavior.m; sourceTree = "<group>"; };
+		1E5C303A1D6F990E00E10770 /* OTPendingInvitationsChangedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPendingInvitationsChangedDelegate.h; path = Behaviors/MyEntourages/OTPendingInvitationsChangedDelegate.h; sourceTree = "<group>"; };
 		1E5EBCEA1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMapAnnotationProviderBehavior.h; path = Behaviors/Maps/OTMapAnnotationProviderBehavior.h; sourceTree = "<group>"; };
 		1E5EBCEB1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMapAnnotationProviderBehavior.m; path = Behaviors/Maps/OTMapAnnotationProviderBehavior.m; sourceTree = "<group>"; };
 		1E5EBCED1D53CECF006695F1 /* OTStatusBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTStatusBehavior.h; path = Behaviors/FeedItems/OTStatusBehavior.h; sourceTree = "<group>"; };
@@ -1191,6 +1195,9 @@
 				1E8845961D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.m */,
 				1E5C302B1D6F85F900E10770 /* OTManageInvitationBehavior.h */,
 				1E5C302C1D6F85F900E10770 /* OTManageInvitationBehavior.m */,
+				1E5C30371D6F971D00E10770 /* OTInvitationChangedBehavior.h */,
+				1E5C30381D6F971D00E10770 /* OTInvitationChangedBehavior.m */,
+				1E5C303A1D6F990E00E10770 /* OTPendingInvitationsChangedDelegate.h */,
 			);
 			name = MyEntourages;
 			sourceTree = "<group>";
@@ -2314,6 +2321,7 @@
 				1EACE4181D11515200F3A2A6 /* OTFeedItemFactory.m in Sources */,
 				1EB660E91D5D32880051CBA7 /* OTMyEntouragesFilterCellBase.m in Sources */,
 				1E2232CB1D568B4C004CD5E8 /* OTTapViewBehavior.m in Sources */,
+				1E5C30391D6F971D00E10770 /* OTInvitationChangedBehavior.m in Sources */,
 				45E37E531CEE1F7D005C3175 /* OTFeedsService.m in Sources */,
 				1E78B7F01D513F0F0008C00E /* OTEntourageUI.m in Sources */,
 				1E2F291E1D4BDF3600ABC68A /* OTDataSourceBehavior.m in Sources */,
