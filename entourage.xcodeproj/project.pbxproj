@@ -93,6 +93,7 @@
 		1E5C301E1D6F671200E10770 /* OTMembersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C301D1D6F671200E10770 /* OTMembersDataSource.m */; };
 		1E5C30211D6F683C00E10770 /* OTMembersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30201D6F683C00E10770 /* OTMembersCellProvider.m */; };
 		1E5C30241D6F6CE100E10770 /* OTMembersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30231D6F6CE100E10770 /* OTMembersTableDataSource.m */; };
+		1E5C30271D6F740C00E10770 /* OTFeedItemDetailsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30261D6F740C00E10770 /* OTFeedItemDetailsBehavior.m */; };
 		1E5EBCEC1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5EBCEB1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.m */; };
 		1E5EBCEF1D53CECF006695F1 /* OTStatusBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5EBCEE1D53CECF006695F1 /* OTStatusBehavior.m */; };
 		1E5F79821D5A0E040005003C /* OTMyEntouragesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F79811D5A0E040005003C /* OTMyEntouragesViewController.m */; };
@@ -444,6 +445,8 @@
 		1E5C30201D6F683C00E10770 /* OTMembersCellProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMembersCellProvider.m; path = Behaviors/UITableView/Members/OTMembersCellProvider.m; sourceTree = "<group>"; };
 		1E5C30221D6F6CE100E10770 /* OTMembersTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMembersTableDataSource.h; path = Behaviors/UITableView/Members/OTMembersTableDataSource.h; sourceTree = "<group>"; };
 		1E5C30231D6F6CE100E10770 /* OTMembersTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMembersTableDataSource.m; path = Behaviors/UITableView/Members/OTMembersTableDataSource.m; sourceTree = "<group>"; };
+		1E5C30251D6F740C00E10770 /* OTFeedItemDetailsBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTFeedItemDetailsBehavior.h; path = Behaviors/NewsFeed/OTFeedItemDetailsBehavior.h; sourceTree = "<group>"; };
+		1E5C30261D6F740C00E10770 /* OTFeedItemDetailsBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTFeedItemDetailsBehavior.m; path = Behaviors/NewsFeed/OTFeedItemDetailsBehavior.m; sourceTree = "<group>"; };
 		1E5EBCEA1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMapAnnotationProviderBehavior.h; path = Behaviors/Maps/OTMapAnnotationProviderBehavior.h; sourceTree = "<group>"; };
 		1E5EBCEB1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMapAnnotationProviderBehavior.m; path = Behaviors/Maps/OTMapAnnotationProviderBehavior.m; sourceTree = "<group>"; };
 		1E5EBCED1D53CECF006695F1 /* OTStatusBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTStatusBehavior.h; path = Behaviors/FeedItems/OTStatusBehavior.h; sourceTree = "<group>"; };
@@ -1158,6 +1161,8 @@
 		1E7C49C11D4E2456004D414D /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				1E5C30251D6F740C00E10770 /* OTFeedItemDetailsBehavior.h */,
+				1E5C30261D6F740C00E10770 /* OTFeedItemDetailsBehavior.m */,
 			);
 			name = NewsFeed;
 			sourceTree = "<group>";
@@ -2352,6 +2357,7 @@
 				1E2232D51D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m in Sources */,
 				2E5B0EBC1CF0603D0078454F /* OTEntourageFilter.m in Sources */,
 				2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */,
+				1E5C30271D6F740C00E10770 /* OTFeedItemDetailsBehavior.m in Sources */,
 				1E06FDC61D574D9800370F4F /* OTChatCellBase.m in Sources */,
 				1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,

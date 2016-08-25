@@ -10,6 +10,7 @@
 #import "OTUser.h"
 
 #define INVITATION_ACCEPTED @"accepted"
+#define INVITATION_PENDING @"pending"
 
 @interface OTEntourageInvitation : NSObject
 

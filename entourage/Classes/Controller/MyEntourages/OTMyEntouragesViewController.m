@@ -18,6 +18,7 @@
 #import "OTConsts.h"
 #import "OTMyEntouragesFiltersViewController.h"
 #import "OTMyEntouragesOptionsBehavior.h"
+#import "OTFeedItemDetailsBehavior.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -27,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet OTMyEntouragesDataSource *entouragesDataSource;
 @property (strong, nonatomic) IBOutlet OTTableDataSourceBehavior *entouragesTableDataSource;
 @property (strong, nonatomic) IBOutlet OTMyEntouragesOptionsBehavior *optionsBehavior;
+@property (strong, nonatomic) IBOutlet OTFeedItemDetailsBehavior *feedItemDetailsBehavior;
 
 @end
 
@@ -53,6 +55,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.optionsBehavior prepareSegueForOptions:segue])
         return;
+    if([self.feedItemDetailsBehavior prepareSegueForDetails:segue])
+        return;
     if([segue.identifier isEqualToString:@"FiltersSegue"]) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTMyEntouragesFiltersViewController *filtersController = (OTMyEntouragesFiltersViewController *)controller.topViewController;
@@ -67,7 +71,7 @@
 #pragma mark - private methods
 
 - (void)loadInvitations {
-    [[OTInvitationsService new] entourageGetInvitationsWithSuccess:^(NSArray *items) {
+    [[OTInvitationsService new] entourageGetInvitationsWithStatus:INVITATION_PENDING success:^(NSArray *items) {
         [self.toggleCollectionView toggle:[items count] > 0 animated:YES];
         [self.invitationsDataSource updateItems:items];
         [self.invitationsCollectionDataSource refresh];

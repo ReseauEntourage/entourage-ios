@@ -9,6 +9,7 @@
 #import "OTMyEntouragesTableDataSource.h"
 #import "OTMyEntouragesDataSource.h"
 #import "OTTableCellProviderBehavior.h"
+#import "OTFeedItem.h"
 
 #define LOAD_MORE_DRAG_OFFSET 50
 
@@ -70,6 +71,11 @@
             [((OTMyEntouragesDataSource *)self.dataSource) loadNextPage];
         });
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    OTFeedItem *feedItem = (OTFeedItem *)[self getItemAtIndexPath:indexPath];
+    [self.detailsBehavior showDetails:feedItem];
 }
 
 @end

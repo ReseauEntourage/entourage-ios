@@ -13,17 +13,13 @@
 @implementation OTOnboardingJoinService
 
 - (void)checkForJoins:(void (^)(OTEntourageInvitation *))success withError:(void (^)(NSError *))failure {
-    [[OTInvitationsService new] entourageGetInvitationsWithSuccess:^(NSArray *invitations) {
-        NSArray *notAccepted = [invitations filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTEntourageInvitation *item, NSDictionary *bindings) {
-            return ![item.status isEqualToString:INVITATION_ACCEPTED];
-        }]];
-        if(notAccepted.count == 0) {
+    [[OTInvitationsService new] entourageGetInvitationsWithStatus:INVITATION_PENDING success:^(NSArray *invitations) {
+        if(invitations.count == 0) {
             if(success)
                 success(nil);
         }
-        else {
-            [self doJoin:notAccepted withSuccess:success andError:failure];
-        }
+        else
+            [self doJoin:invitations withSuccess:success andError:failure];
     } failure:^(NSError *error) {
         if(failure)
             failure(error);

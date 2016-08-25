@@ -7,7 +7,10 @@
 //
 
 #import "OTTableDataSourceBehavior.h"
+#import "OTFeedItemDetailsBehavior.h"
 
 @interface OTMyEntouragesTableDataSource : OTTableDataSourceBehavior
+
+@property (nonatomic, weak) IBOutlet OTFeedItemDetailsBehavior* detailsBehavior;
 
 @end

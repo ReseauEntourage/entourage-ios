@@ -43,16 +43,24 @@ NSString *const kKeyFailedNumbers = @"failed_numbers";
      }];
 }
 
-- (void)entourageGetInvitationsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+- (void)entourageGetInvitationsWithStatus:(NSString *)status success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_GET_INVITES, TOKEN];
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
      andParameters:nil
      andSuccess:^(id responseObject)
      {
-         NSArray *invitations = [responseObject objectForKey:kInvitations];
-         if (success)
-             success([OTEntourageInvitation arrayForWebservice:invitations]);
+         if(success) {
+             NSArray *invitations = [OTEntourageInvitation arrayForWebservice:[responseObject objectForKey:kInvitations]];
+             if(!status) {
+                 success(invitations);
+                 return;
+             }
+             NSArray *filteredItems = [invitations filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTEntourageInvitation *item, NSDictionary *bindings) {
+                 return [item.status isEqualToString:status];
+             }]];
+             success(filteredItems);
+         }
      }
      andFailure:^(NSError *error)
      {

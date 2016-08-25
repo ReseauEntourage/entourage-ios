@@ -137,7 +137,7 @@
                                     <constraint firstItem="G53-uu-geo" firstAttribute="leading" secondItem="N6O-su-Iph" secondAttribute="leading" constant="15" id="fM3-tg-rDs"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="140" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="sIZ-hk-qpn">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="140" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="sIZ-hk-qpn">
                                 <rect key="frame" x="-4" y="135" width="328" height="391"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -290,11 +290,14 @@
                     <connections>
                         <outlet property="entouragesDataSource" destination="0Sx-gI-2Ez" id="dmb-Oh-Xj7"/>
                         <outlet property="entouragesTableDataSource" destination="2Il-nd-24e" id="nLX-KD-4ty"/>
+                        <outlet property="feedItemDetailsBehavior" destination="xow-65-QxG" id="fgB-zO-5Yu"/>
                         <outlet property="invitationsCollectionDataSource" destination="XtX-Fl-5hO" id="hxO-Ca-fRe"/>
                         <outlet property="invitationsDataSource" destination="pYl-y1-57D" id="55N-Qd-5BS"/>
                         <outlet property="optionsBehavior" destination="omB-rY-1vt" id="qbi-OW-VpU"/>
                         <outlet property="toggleCollectionView" destination="ntM-qh-ECK" id="tng-qQ-9aF"/>
                         <segue destination="6JK-OI-tTh" kind="modal" identifier="EntourageCreateSegue" id="ujP-hf-Ybz"/>
+                        <segue destination="173-pU-UII" kind="push" identifier="PublicFeedItemDetailsSegue" id="9Hp-Vb-Z1Y"/>
+                        <segue destination="su2-g2-6je" kind="push" identifier="ActiveFeedItemDetailsSegue" id="SGD-mP-pLc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fUU-LI-bnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -335,6 +338,7 @@
                     <connections>
                         <outlet property="cellProvider" destination="xfP-Fm-twJ" id="GoR-aT-LWq"/>
                         <outlet property="dataSource" destination="0Sx-gI-2Ez" id="nRl-nP-aDe"/>
+                        <outlet property="detailsBehavior" destination="xow-65-QxG" id="P5E-DT-nga"/>
                     </connections>
                 </customObject>
                 <customObject id="eFa-KF-lmI" customClass="OTSummaryProviderBehavior"/>
@@ -342,6 +346,11 @@
                     <connections>
                         <action selector="changedEntourages:" destination="MH3-uF-0WG" eventType="valueChanged" id="DJi-Tf-SKp"/>
                         <outlet property="owner" destination="MH3-uF-0WG" id="0Qx-MZ-ASd"/>
+                    </connections>
+                </customObject>
+                <customObject id="xow-65-QxG" userLabel="Feed Item Details" customClass="OTFeedItemDetailsBehavior">
+                    <connections>
+                        <outlet property="owner" destination="MH3-uF-0WG" id="WTo-2L-Prg"/>
                     </connections>
                 </customObject>
             </objects>
@@ -454,7 +463,27 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="373" y="624"/>
+            <point key="canvasLocation" x="783" y="698"/>
+        </scene>
+        <!--ActiveFeedItem-->
+        <scene sceneID="3n1-zu-l0R">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ActiveFeedItem" id="su2-g2-6je" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ynx-wu-E2X"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1JQ-8K-39C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="256.5" y="445"/>
+        </scene>
+        <!--PublicFeedItem-->
+        <scene sceneID="6gJ-Ye-SJd">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PublicFeedItem" id="173-pU-UII" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="N1x-4e-ZbY"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l6t-W4-VPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="445"/>
         </scene>
         <!--EntourageCreator-->
         <scene sceneID="wT3-h3-3eW">
@@ -464,7 +493,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OyM-hd-yPO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="-409"/>
+            <point key="canvasLocation" x="436" y="445"/>
         </scene>
         <!--My Entourages Filters-->
         <scene sceneID="TnJ-4g-kwJ">
