@@ -52,13 +52,17 @@
     }];
 }
 
-- (void)getJoinRequestsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] entourageUsersJoins:self.entourage success:^(NSArray *items) {
+- (void)getFeedItemUsersWithStatus:(NSString *)status success:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure {
+    [[OTEntourageService new] entourageUsers:self.entourage success:^(NSArray *items) {
         NSLog(@"GET ENTOURAGE JOINS");
         if(success) {
+            if(!status) {
+                success(items);
+                return;
+            }
             NSNumber *currentUserId = [NSUserDefaults standardUserDefaults].currentUser.sid;
             NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
-                return ![item.uID isEqual:currentUserId] && ![item.status isEqualToString:JOIN_REJECTED];
+                return ![item.uID isEqual:currentUserId] && [item.status isEqualToString:status];
             }]];
             success(filteredItems);
         }

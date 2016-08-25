@@ -14,7 +14,7 @@
 - (void)send:(NSString *)message withSuccess:(void (^)(OTFeedItemMessage *))success orFailure:(void (^)(NSError *))failure;
 - (void)invitePhones:(NSArray *)phones withSuccess:(void (^)())success orFailure:(void (^)(NSError *, NSArray *failedNumbers))failure;
 - (void)getMessagesWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
-- (void)getJoinRequestsWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
+- (void)getFeedItemUsersWithStatus:(NSString *)status success:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
 - (void)getEncountersWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
 - (NSArray *)getTimelineStatusMessages;
 

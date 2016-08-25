@@ -270,7 +270,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="btQ-5Y-yf0"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="8C3-0y-HVH" id="4Rf-Gt-8w0"/>
                         <segue destination="62l-06-625" kind="presentation" identifier="EditProfileSegue" animates="NO" id="pXR-yC-dMJ"/>
@@ -284,6 +283,7 @@
         <scene sceneID="M5j-4s-qmF">
             <objects>
                 <navigationController id="Th9-id-j6L" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fW5-G3-hQ3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -294,7 +294,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="abc-6D-Qga" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2540.625" y="-809.15492957746471"/>
+            <point key="canvasLocation" x="2696" y="-826"/>
         </scene>
         <!--User Edit View Controller-->
         <scene sceneID="mMt-C6-6Sg">
@@ -305,11 +305,11 @@
                         <viewControllerLayoutGuide type="bottom" id="WFO-bS-A50"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="df5-9E-sOe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="668"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Auw-kh-iqH">
-                                <rect key="frame" x="-4" y="64" width="328" height="604"/>
+                                <rect key="frame" x="-4" y="64" width="328" height="504"/>
                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <prototypes>
@@ -615,8 +615,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UUn-a4-zT1"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="668"/>
                     <connections>
                         <outlet property="tableView" destination="Auw-kh-iqH" id="k1n-RG-LFg"/>
                         <segue destination="JY3-Ti-PBi" kind="presentation" identifier="EditPasswordSegue" id="uE9-pz-j86"/>
@@ -624,7 +622,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VaY-Ee-nZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3991" y="-776"/>
+            <point key="canvasLocation" x="3963" y="-826"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="U66-ZG-q0z">
@@ -826,7 +824,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggk-z7-icI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3991" y="-296"/>
+            <point key="canvasLocation" x="3963" y="-372"/>
         </scene>
     </scenes>
     <resources>

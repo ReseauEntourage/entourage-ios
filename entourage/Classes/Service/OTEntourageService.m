@@ -328,7 +328,7 @@ extern NSString *kUsers;
      }];
 }
 
-- (void)entourageUsersJoins:(OTEntourage *)entourage success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+- (void)entourageUsers:(OTEntourage *)entourage success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
     NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_feed_item_users", @""), kEntourages, entourage.uid,  TOKEN];
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url

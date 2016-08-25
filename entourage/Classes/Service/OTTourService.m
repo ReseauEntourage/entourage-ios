@@ -222,7 +222,7 @@ NSString *const kTourPoints = @"tour_points";
      ];
 }
 
-- (void)tourUsersJoins:(OTTour *)tour
+- (void)tourUsers:(OTTour *)tour
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure
 {

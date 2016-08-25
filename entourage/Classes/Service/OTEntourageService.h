@@ -60,7 +60,7 @@
          success:(void (^)())success
          failure:(void (^)(NSError *error))failure;
 
-- (void)entourageUsersJoins:(OTEntourage *)entourage
+- (void)entourageUsers:(OTEntourage *)entourage
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure;
 

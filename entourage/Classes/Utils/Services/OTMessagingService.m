@@ -32,7 +32,7 @@
                 }
         } failure:nil];
 
-        [messaging getJoinRequestsWithSuccess:^(NSArray *items) {
+        [messaging getFeedItemUsersWithStatus:nil success:^(NSArray *items) {
             if([items count] > 0)
                 @synchronized (allItems) {
                     for(OTFeedItemJoiner *joiner in items)
