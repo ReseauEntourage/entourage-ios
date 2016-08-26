@@ -300,7 +300,7 @@
                         <outlet property="feedItemDetailsBehavior" destination="xow-65-QxG" id="fgB-zO-5Yu"/>
                         <outlet property="invitationsCollectionDataSource" destination="XtX-Fl-5hO" id="hxO-Ca-fRe"/>
                         <outlet property="invitationsDataSource" destination="pYl-y1-57D" id="55N-Qd-5BS"/>
-                        <outlet property="manageInvitation" destination="ApZ-Xi-jrT" id="Xgg-fT-rOL"/>
+                        <outlet property="manageInvitation" destination="Ldj-3E-rTX" id="3Ku-c0-iH2"/>
                         <outlet property="optionsBehavior" destination="omB-rY-1vt" id="qbi-OW-VpU"/>
                         <outlet property="toggleCollectionView" destination="ntM-qh-ECK" id="tng-qQ-9aF"/>
                         <segue destination="6JK-OI-tTh" kind="modal" identifier="EntourageCreateSegue" id="ujP-hf-Ybz"/>
@@ -319,17 +319,12 @@
                     <connections>
                         <outlet property="cellProvider" destination="CHc-Tq-418" id="LDF-sg-CBX"/>
                         <outlet property="dataSource" destination="pYl-y1-57D" id="syV-Ng-LTu"/>
-                        <outlet property="manageInvitations" destination="ApZ-Xi-jrT" id="LaC-vF-Rzd"/>
+                        <outlet property="manageInvitations" destination="Ldj-3E-rTX" id="2Gc-ug-vo1"/>
                     </connections>
                 </customObject>
                 <customObject id="CHc-Tq-418" userLabel="Invitation Cell Provider" customClass="OTInvitationsCellProviderBehavior">
                     <connections>
                         <outlet property="collectionDataSource" destination="XtX-Fl-5hO" id="dn5-ZD-hy9"/>
-                    </connections>
-                </customObject>
-                <customObject id="ApZ-Xi-jrT" customClass="OTManageInvitationBehavior">
-                    <connections>
-                        <outlet property="owner" destination="MH3-uF-0WG" id="Ibb-Ol-iaY"/>
                     </connections>
                 </customObject>
                 <customObject id="ntM-qh-ECK" customClass="OTToggleVisibleBehavior">
@@ -370,7 +365,10 @@
                 </customObject>
                 <customObject id="Ldj-3E-rTX" userLabel="Manage Invitation" customClass="OTManageInvitationBehavior">
                     <connections>
+                        <outlet property="entouragesDataSource" destination="0Sx-gI-2Ez" id="7Ow-cw-W4y"/>
+                        <outlet property="invitationsCollectionSource" destination="XtX-Fl-5hO" id="TNT-4F-gbk"/>
                         <outlet property="owner" destination="MH3-uF-0WG" id="zpU-FV-zWu"/>
+                        <outlet property="toggleCollectionView" destination="ntM-qh-ECK" id="dPp-og-Lfw"/>
                     </connections>
                 </customObject>
             </objects>
@@ -715,7 +713,6 @@
         <!--Manage Invitation-->
         <scene sceneID="AIp-LF-9gP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LGS-aZ-e80" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="DIz-eG-Bls" userLabel="Manage Invitation" customClass="OTManageInvitationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aa5-ZQ-vBd"/>
@@ -876,6 +873,7 @@
                         <segue destination="a4v-Jl-77s" kind="modal" identifier="UserProfileSegue" id="Cxg-Wu-Kzs"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LGS-aZ-e80" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="Nb6-SJ-tYP" userLabel="Map Annotation Provider" customClass="OTMapAnnotationProviderBehavior">
                     <connections>
                         <outlet property="map" destination="Y5V-SI-9ZA" id="h5d-fq-WNX"/>

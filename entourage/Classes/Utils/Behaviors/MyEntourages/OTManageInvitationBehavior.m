@@ -11,20 +11,19 @@
 #import "OTFeedItemFactory.h"
 #import "SVProgressHUD.h"
 #import "OTManageInvitationViewController.h"
+#import "OTInvitationsCollectionSource.h"
+#import "OTPendingInvitationsChangedDelegate.h"
+#import "OTMyEntouragesDataSource.h"
+#import "OTCollectionSourceBehavior.h"
 
-@interface OTManageInvitationBehavior ()
+@interface OTManageInvitationBehavior () <OTPendingInvitationsChangedDelegate>
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, strong) OTEntourageInvitation *invitation;
-@property (nonatomic, weak) OTInvitationsCollectionSource *collectionDataSource;
 
 @end
 
 @implementation OTManageInvitationBehavior
-
-- (void)configureWith:(OTInvitationsCollectionSource *)collectionDataSource {
-    self.collectionDataSource = collectionDataSource;
-}
 
 - (void)showFor:(OTEntourageInvitation *)invitation {
     self.invitation = invitation;
@@ -43,11 +42,20 @@
         OTManageInvitationViewController *controller = (OTManageInvitationViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
         controller.invitation = self.invitation;
-        controller.pendingInvitationsChangedDelegate = self.owner;
+        controller.pendingInvitationsChangedDelegate = self;
     }
     else
         return NO;
     return YES;
+}
+
+#pragma mark - OTPendingInvitationsChangedDelegate
+
+- (void)noLongerPending:(OTEntourageInvitation *)invitation {
+    [self.owner.navigationController popViewControllerAnimated:YES];
+    [self.invitationsCollectionSource removeInvitation:invitation];
+    [self.toggleCollectionView toggle:[self.invitationsCollectionSource.dataSource.items count] > 0 animated:YES];
+    [self.entouragesDataSource loadData];
 }
 
 @end

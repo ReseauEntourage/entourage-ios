@@ -8,14 +8,17 @@
 
 #import "OTBehavior.h"
 #import "OTEntourageInvitation.h"
-#import "OTInvitationsCollectionSource.h"
-#import "OTMyEntouragesViewController.h"
+#import "OTToggleVisibleBehavior.h"
+@class OTInvitationsCollectionSource;
+@class OTMyEntouragesDataSource;
 
 @interface OTManageInvitationBehavior : OTBehavior
 
-@property (nonatomic, weak) IBOutlet OTMyEntouragesViewController *owner;
+@property (nonatomic, weak) IBOutlet UIViewController *owner;
+@property (nonatomic, weak) IBOutlet OTInvitationsCollectionSource *invitationsCollectionSource;
+@property (nonatomic, weak) IBOutlet OTMyEntouragesDataSource *entouragesDataSource;
+@property (nonatomic, weak) IBOutlet OTToggleVisibleBehavior *toggleCollectionView;
 
-- (void)configureWith:(OTInvitationsCollectionSource *)collectionDataSource;
 - (BOOL)prepareSegueForManage:(UIStoryboardSegue *)segue;
 - (void)showFor:(OTEntourageInvitation *)invitation;
 

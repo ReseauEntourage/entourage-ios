@@ -44,7 +44,6 @@
     [self.toggleCollectionView initialize];
     [self.toggleCollectionView toggle:NO animated:NO];
     [self.optionsBehavior configureWith:self.optionsDelegate];
-    [self.manageInvitation configureWith:self.invitationsCollectionDataSource];
     
     self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
@@ -70,15 +69,6 @@
 }
 
 - (IBAction)changedEntourages:(id)sender {
-    [self.entouragesDataSource loadData];
-}
-
-#pragma mark - OTPendingInvitationsChangedDelegate
-
-- (void)noLongerPending:(OTEntourageInvitation *)invitation {
-    [self.navigationController popViewControllerAnimated:YES];
-    [self.invitationsCollectionDataSource removeInvitation:invitation];
-    [self.toggleCollectionView toggle:[self.invitationsDataSource.items count] > 0 animated:YES];
     [self.entouragesDataSource loadData];
 }
 

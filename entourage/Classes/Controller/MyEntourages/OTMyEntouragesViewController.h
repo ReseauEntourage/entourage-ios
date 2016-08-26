@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "OTOptionsViewController.h"
-#import "OTPendingInvitationsCHangedDelegate.h"
 
-@interface OTMyEntouragesViewController : UIViewController<OTPendingInvitationsChangedDelegate>
+@interface OTMyEntouragesViewController : UIViewController
 
 @property (nonatomic, weak) id<OTOptionsDelegate> optionsDelegate;
 
