@@ -55,6 +55,7 @@
 - (void)filterChanged:(OTMyEntouragesFilter *)filter {
     self.currentFilter = filter;
     [self.items removeAllObjects];
+    [self.tableView reloadData];
     self.pageNumber = 1;
     [self requestDataWithSuccess:^(NSArray *items) {
         [self.tableDataSource refresh];
