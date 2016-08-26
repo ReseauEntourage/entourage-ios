@@ -39,7 +39,6 @@
 #define kNotificationShowFilters "NotificationShowFilter"
 #define kNotificationShowCurrentLocation "NotificationCurrentLocation"
 
-#define kNotificationNewMessage "NotificationNewMessage"
 #define kNotificationProfilePictureUpdated "NotificationProfilePictureUpdated"
 
 

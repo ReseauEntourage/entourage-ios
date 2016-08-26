@@ -12,5 +12,6 @@
 @interface OTActiveFeedItemViewController : UIViewController
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
+- (void)reloadMessages;
 
 @end

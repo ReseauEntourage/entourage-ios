@@ -57,11 +57,15 @@
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];
-    [[OTMessagingService new] readFor:self.feedItem onDataSource:self.dataSource];
+    [self reloadMessages];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+}
+
+- (void)reloadMessages {
+    [[OTMessagingService new] readFor:self.feedItem onDataSource:self.dataSource];
 }
 
 #pragma mark - navigation
