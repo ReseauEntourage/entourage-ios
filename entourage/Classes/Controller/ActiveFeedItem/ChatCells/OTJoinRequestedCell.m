@@ -28,7 +28,9 @@
     OTFeedItemJoiner *joiner = (OTFeedItemJoiner *)timelinePoint;
     [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl withPlaceholder:@"user"];
     self.lblUserName.text = joiner.displayName;
-    self.lblMessage.text = joiner.message;
+    self.lblMessage.text = @"";
+    if(![joiner.message isKindOfClass:[NSNull class]])
+        self.lblMessage.text = joiner.message;
 }
 
 - (IBAction)showUserDetails:(id)sender {

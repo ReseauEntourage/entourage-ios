@@ -811,6 +811,7 @@ sur Entourage.</string>
                     <connections>
                         <outlet property="startButton" destination="8vj-nj-f39" id="VvH-Ku-awV"/>
                         <outlet property="webView" destination="z5g-y1-uZm" id="MpR-ku-ydz"/>
+                        <segue destination="Gt1-cc-4DI" kind="show" identifier="WelcomeLoginSegue" id="GFk-L8-2yS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KCo-dz-5Yp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -824,4 +825,7 @@ sur Entourage.</string>
         <image name="logoWhiteEntourage" width="56" height="56"/>
         <image name="whitePhone" width="56" height="57"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="GFk-L8-2yS"/>
+    </inferredMetricsTieBreakers>
 </document>
