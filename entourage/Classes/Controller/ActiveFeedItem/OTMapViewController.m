@@ -83,17 +83,8 @@
     if([stateInfo canInvite]) {
         UIBarButtonItem *plusButton = [UIBarButtonItem createWithImageNamed:@"userPlus" withTarget:self.inviteBehavior andAction:@selector(startInvite)];
         [rightButtons addObject:plusButton];
-        [self.navigationItem setRightBarButtonItems:@[optionsButton, plusButton]];
-    }
-    if([stateInfo canEdit]) {
-        UIBarButtonItem *editButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(edit)];
-        [rightButtons addObject:editButton];
     }
     [self.navigationItem setRightBarButtonItems:rightButtons];
-}
-
-- (void)edit {
-    [self.editEntourageBehavior doEdit:(OTEntourage *)self.feedItem];
 }
 
 @end

@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "OTFeedItem.h"
 #import "OTNextStatusButtonBehavior.h"
+#import "OTEditEntourageBehavior.h"
 
 @interface OTChangeStateViewController : UIViewController
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
+@property (nonatomic, strong) OTEditEntourageBehavior *editEntourageBehavior;
 @property (nonatomic, weak) id<OTStatusChangedProtocol> delegate;
 
 @end

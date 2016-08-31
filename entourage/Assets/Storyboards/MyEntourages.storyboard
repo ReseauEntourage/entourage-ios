@@ -328,6 +328,11 @@
                     </connections>
                 </customObject>
                 <customObject id="ntM-qh-ECK" customClass="OTToggleVisibleBehavior">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="animationDuration">
+                            <real key="value" value="0.25"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="heightConstraint" destination="ftk-Ft-YCo" id="BkN-4H-Hyh"/>
                         <outlet property="toggleView" destination="HbN-lj-jrZ" id="oWQ-St-m2W"/>

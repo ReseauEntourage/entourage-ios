@@ -57,11 +57,6 @@
     return ![self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
 }
 
-- (BOOL)canEdit {
-    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    return [self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN] && [currentUser.sid intValue] == [self.entourage.author.uID intValue];
-}
-
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
     [[OTEntourageService new] getEntourageWithId:self.entourage.uid withSuccess:^(OTEntourage *entourage) {
        if(success)

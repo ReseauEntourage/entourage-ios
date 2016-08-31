@@ -57,10 +57,6 @@
     return ![self.tour.joinStatus isEqualToString:JOIN_ACCEPTED];
 }
 
-- (BOOL)canEdit {
-    return NO;
-}
-
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
     [[OTTourService new] getTourWithId:self.tour.uid withSuccess:^(OTTour *tour) {
         if(success)

@@ -20,6 +20,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "OTMessageTableDelegateBehavior.h"
 #import "OTUserProfileBehavior.h"
+#import "OTEditEntourageBehavior.h"
 #import "OTFeedItemMessage.h"
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
@@ -36,6 +37,7 @@
 @property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 @property (strong, nonatomic) IBOutlet OTMessageTableDelegateBehavior *tableDelegate;
+@property (nonatomic, weak) IBOutlet OTEditEntourageBehavior *editEntourageBehavior;
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
@@ -76,6 +78,8 @@
     if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
     if([self.userProfileBehavior prepareSegueForUserProfile:segue])
+        return;
+    if([self.editEntourageBehavior prepareSegue:segue])
         return;
     if([segue.identifier isEqualToString:@"SegueMap"]) {
         OTMapViewController *controller = (OTMapViewController *)segue.destinationViewController;

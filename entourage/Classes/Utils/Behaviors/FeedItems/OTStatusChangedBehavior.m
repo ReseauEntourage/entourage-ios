@@ -33,6 +33,7 @@
         OTChangeStateViewController *controller = (OTChangeStateViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
         controller.delegate = self;
+        controller.editEntourageBehavior = self.editEntourageBehavior;
     } else
         return NO;
     return YES;

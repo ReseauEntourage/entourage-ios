@@ -10,7 +10,7 @@
 
 @interface OTChangeStateViewController ()
 
-@property (strong, nonatomic) IBOutlet OTNextStatusButtonBehavior *nextStatusBehavior;
+@property (nonatomic, strong) IBOutlet OTNextStatusButtonBehavior *nextStatusBehavior;
 
 @end
 
@@ -24,6 +24,12 @@
 
 - (IBAction)close:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)edit:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.editEntourageBehavior doEdit:(OTEntourage *)self.feedItem];
+    }];
 }
 
 @end

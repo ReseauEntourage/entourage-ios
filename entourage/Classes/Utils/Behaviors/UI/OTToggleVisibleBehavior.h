@@ -11,8 +11,11 @@
 @interface OTToggleVisibleBehavior : OTBehavior
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *heightConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *marginConstraint;
 @property (nonatomic, weak) IBOutlet UIView *toggleView;
 
 - (void)toggle:(BOOL)visible animated:(BOOL)animated;
+
+@property (nonatomic, strong) NSNumber *animationDuration;
 
 @end

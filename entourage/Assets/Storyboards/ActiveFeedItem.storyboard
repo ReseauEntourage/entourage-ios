@@ -35,6 +35,7 @@
             <string>SFUIText-Semibold</string>
             <string>SFUIText-Semibold</string>
             <string>SFUIText-Semibold</string>
+            <string>SFUIText-Semibold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -616,6 +617,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="dataSource" destination="1dX-UW-k7J" id="wyt-aY-4y7"/>
+                        <outlet property="editEntourageBehavior" destination="fgv-V1-G2W" id="UCh-fX-1Nd"/>
                         <outlet property="inviteBehavior" destination="jhq-UT-Ztj" id="0wU-XK-4VB"/>
                         <outlet property="speechBehavior" destination="V85-WF-Xew" id="cHZ-0p-I5t"/>
                         <outlet property="statusChangedBehavior" destination="Fee-TQ-8bL" id="bXO-iZ-TDz"/>
@@ -633,6 +635,7 @@
                         <segue destination="jJ9-Y9-aoE" kind="presentation" identifier="SegueChangeState" id="9ff-pE-XzN"/>
                         <segue destination="9Ay-63-LSU" kind="show" identifier="SegueMap" id="pa2-NI-OJP"/>
                         <segue destination="nZu-ch-wHg" kind="presentation" identifier="UserProfileSegue" id="5BX-au-xTN"/>
+                        <segue destination="hfH-zI-I2L" kind="presentation" identifier="EntourageEditorSegue" id="8gM-o4-A6h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riw-B5-uYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -656,6 +659,7 @@
                 </customObject>
                 <customObject id="Fee-TQ-8bL" userLabel="Status Changed" customClass="OTStatusChangedBehavior">
                     <connections>
+                        <outlet property="editEntourageBehavior" destination="fgv-V1-G2W" id="frN-05-xEv"/>
                         <outlet property="owner" destination="DlM-nw-VLS" id="XUm-OC-aAb"/>
                     </connections>
                 </customObject>
@@ -690,6 +694,11 @@
                 <customObject id="Qyp-hb-7rI" customClass="OTUserProfileBehavior">
                     <connections>
                         <outlet property="owner" destination="DlM-nw-VLS" id="w04-fH-ymC"/>
+                    </connections>
+                </customObject>
+                <customObject id="fgv-V1-G2W" customClass="OTEditEntourageBehavior">
+                    <connections>
+                        <outlet property="owner" destination="DlM-nw-VLS" id="0Wl-He-v3h"/>
                     </connections>
                 </customObject>
             </objects>
@@ -825,7 +834,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="annotationProvider" destination="Mb6-Jg-13f" id="Y3C-B9-kBr"/>
-                        <outlet property="editEntourageBehavior" destination="UhM-xn-QGm" id="DGq-Bq-jE6"/>
+                        <outlet property="editEntourageBehavior" destination="wEV-k5-DKd" id="oId-hc-Uh8"/>
                         <outlet property="inviteBehavior" destination="Wa5-cU-lsc" id="RoX-G8-uXr"/>
                         <outlet property="membersDataSource" destination="1ju-xM-ggw" id="nuG-MY-aMg"/>
                         <outlet property="membersTableSource" destination="JLe-13-48r" id="cuY-bh-RKU"/>
@@ -837,7 +846,7 @@
                         <segue destination="e7P-HA-iRZ" kind="show" identifier="SegueInviteFromAddressBook" id="TWk-BX-Lb1"/>
                         <segue destination="eKG-vw-p09" kind="show" identifier="SegueInvitePhoneNumber" id="qbj-7b-m5F"/>
                         <segue destination="7N5-l9-cEp" kind="presentation" identifier="SegueInviteSuccess" id="fUf-PJ-SgA"/>
-                        <segue destination="hfH-zI-I2L" kind="presentation" identifier="EntourageEditorSegue" id="Akq-GM-Xwx"/>
+                        <segue destination="hfH-zI-I2L" kind="presentation" identifier="EntourageEditorSegue" id="DLP-On-QzP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WOD-on-iIR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -860,6 +869,7 @@
                 </customObject>
                 <customObject id="AI5-tH-KvZ" userLabel="Status Changed" customClass="OTStatusChangedBehavior">
                     <connections>
+                        <outlet property="editEntourageBehavior" destination="wEV-k5-DKd" id="p6K-dW-owI"/>
                         <outlet property="owner" destination="9Ay-63-LSU" id="NVj-OF-ww7"/>
                     </connections>
                 </customObject>
@@ -886,9 +896,9 @@
                         <outlet property="tableDataSource" destination="JLe-13-48r" id="IT8-jg-gfv"/>
                     </connections>
                 </customObject>
-                <customObject id="UhM-xn-QGm" customClass="OTEditEntourageBehavior">
+                <customObject id="wEV-k5-DKd" customClass="OTEditEntourageBehavior">
                     <connections>
-                        <outlet property="owner" destination="9Ay-63-LSU" id="s0L-et-7aL"/>
+                        <outlet property="owner" destination="9Ay-63-LSU" id="1kZ-9s-SEr"/>
                     </connections>
                 </customObject>
             </objects>
@@ -900,7 +910,7 @@
                 <viewControllerPlaceholder storyboardName="EntourageEditor" id="hfH-zI-I2L" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nqH-va-cUx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1188.5" y="244"/>
+            <point key="canvasLocation" x="495.5" y="433"/>
         </scene>
         <!--Invite Source-->
         <scene sceneID="Yuw-kg-6Q1">
@@ -1116,7 +1126,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A8B217AB-ED71-405C-A09D-4DEC9325F5BC" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="25BB5727-FBEA-4B5A-ADD1-ED753C1D61D9" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
@@ -1279,7 +1289,7 @@
                                     <constraint firstAttribute="height" constant="57" id="rDG-E8-kI6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
-                                <state key="normal" title="Quiter">
+                                <state key="normal" title="Editer">
                                     <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1287,6 +1297,9 @@
                                         <integer key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="edit:" destination="jJ9-Y9-aoE" eventType="touchUpInside" id="ps3-y4-KHc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfP-OM-FQd" userLabel="Cancel Feed Item Button">
                                 <rect key="frame" x="6" y="503" width="308" height="57"/>
@@ -1307,14 +1320,33 @@
                                     <action selector="close:" destination="jJ9-Y9-aoE" eventType="touchUpInside" id="KOc-ki-vjK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuG-rJ-75I" userLabel="Change State Feed Item Button">
+                                <rect key="frame" x="6" y="373" width="308" height="57"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="tla-M6-5Qy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                <state key="normal" title="Quiter">
+                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="0.75" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Azb-MQ-5Av" firstAttribute="top" secondItem="HuG-rJ-75I" secondAttribute="bottom" constant="8" id="6w3-ra-NZv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gfP-OM-FQd" secondAttribute="trailing" constant="-10" id="Gh0-mv-BFa"/>
                             <constraint firstItem="cdb-te-X7I" firstAttribute="top" secondItem="gfP-OM-FQd" secondAttribute="bottom" constant="8" id="IHB-38-kJN"/>
                             <constraint firstItem="Azb-MQ-5Av" firstAttribute="leading" secondItem="9ki-jc-XeD" secondAttribute="leadingMargin" constant="-10" id="IPT-BY-H6H"/>
                             <constraint firstItem="gfP-OM-FQd" firstAttribute="top" secondItem="Azb-MQ-5Av" secondAttribute="bottom" constant="8" id="JYM-ze-1k8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HuG-rJ-75I" secondAttribute="trailing" constant="-10" id="NMt-mD-eIl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Azb-MQ-5Av" secondAttribute="trailing" constant="-10" id="OXF-5P-938"/>
+                            <constraint firstItem="HuG-rJ-75I" firstAttribute="leading" secondItem="9ki-jc-XeD" secondAttribute="leadingMargin" constant="-10" id="UdE-tL-THA"/>
                             <constraint firstItem="gfP-OM-FQd" firstAttribute="leading" secondItem="9ki-jc-XeD" secondAttribute="leadingMargin" constant="-10" id="XCS-lT-hEp"/>
                         </constraints>
                     </view>
@@ -1326,7 +1358,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gMO-A3-gJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="B7n-mN-3FZ" userLabel="Next Status Button" customClass="OTNextStatusButtonBehavior">
                     <connections>
-                        <outlet property="btnNextState" destination="Azb-MQ-5Av" id="r6l-Wa-hDP"/>
+                        <outlet property="btnNextState" destination="HuG-rJ-75I" id="T9A-Xm-g65"/>
                         <outlet property="owner" destination="jJ9-Y9-aoE" id="uVH-vh-RBc"/>
                     </connections>
                 </customObject>
@@ -1402,7 +1434,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="A8B217AB-ED71-405C-A09D-4DEC9325F5BC" width="48" height="48">
+        <image name="25BB5727-FBEA-4B5A-ADD1-ED753C1D61D9" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1640,7 +1672,8 @@ gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
         <segue reference="Rwq-4K-0sd"/>
         <segue reference="Cgj-Wq-qez"/>
         <segue reference="qbj-7b-m5F"/>
-        <segue reference="TWk-BX-Lb1"/>
         <segue reference="fUf-PJ-SgA"/>
+        <segue reference="DLP-On-QzP"/>
+        <segue reference="TWk-BX-Lb1"/>
     </inferredMetricsTieBreakers>
 </document>

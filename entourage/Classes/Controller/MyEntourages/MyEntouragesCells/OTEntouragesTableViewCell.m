@@ -22,9 +22,9 @@
     self.summaryProvider.btnAvatar = self.btnProfilePicture;
     self.summaryProvider.lblTimeDistance = self.lblTimeDistance;
     [self.summaryProvider configureWith:item];
+    [self.summaryProvider clearConfiguration];
     self.lblNumberOfUsers.text = [@"+" stringByAppendingString:self.lblNumberOfUsers.text];
     self.lblLastMessage.text = @"To do (no API yet)";
-    [self.summaryProvider clearConfiguration];
 }
 
 @end
