@@ -30,6 +30,7 @@
 #define kWSKeyEntourageType @"entourage_type"
 
 #define kWSKeyTitle @"title"
+#define kWSKeyName @"name"
 #define kWSKeyDescription @"description"
 
 // Tour

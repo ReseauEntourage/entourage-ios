@@ -164,7 +164,6 @@ extern NSString *kUsers;
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_UPDATE, entourage.uid, TOKEN];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[@"entourage"] = [entourage dictionaryForWebService];
-    
     [[OTHTTPRequestManager sharedInstance]
          PUTWithUrl:url
          andParameters:parameters

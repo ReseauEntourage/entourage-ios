@@ -20,7 +20,7 @@
 #import "OTUserViewController.h"
 #import "OTGuideDetailsViewController.h"
 #import "OTTourCreatorViewController.h"
-#import "OTEntourageCreatorViewController.h"
+#import "OTEntourageEditorViewController.h"
 #import "OTFiltersViewController.h"
 #import "OTFeedItemsPagination.h"
 #import "OTPublicFeedItemViewController.h"
@@ -95,7 +95,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTFeedItemJoinRequestDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageCreatorDelegate, OTFiltersViewControllerDelegate>
+@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTFeedItemJoinRequestDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFiltersViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
@@ -1021,9 +1021,9 @@ static bool isShowingOptions = NO;
 }
 
 /********************************************************************************/
-#pragma mark - EntourageCreatorDelegate
+#pragma mark - EntourageEditorDelegate
 
-- (void)didCreateEntourage {
+- (void)didEditEntourage:(OTEntourage *)entourage {
     [self dismissViewControllerAnimated:YES completion:^{
        [self forceGetNewData];
     }];
@@ -1323,16 +1323,16 @@ static bool isShowingOptions = NO;
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.tourCreatorDelegate = self;
     }
-    else if([segue.identifier isEqualToString:@"EntourageCreator"]) {
+    else if([segue.identifier isEqualToString:@"EntourageEditor"]) {
         UINavigationController *navController = (UINavigationController*)destinationViewController;
-        OTEntourageCreatorViewController *controller = (OTEntourageCreatorViewController *)navController.childViewControllers[0];
+        OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.childViewControllers[0];
         controller.type = self.entourageType;
         CLLocationDegrees lat = self.mapView.userLocation.coordinate.latitude;
         CLLocationDegrees lon = self.mapView.userLocation.coordinate.longitude;
         CLLocation *location = [[CLLocation alloc] initWithLatitude: lat
                                                           longitude:lon];
         controller.location = location;
-        controller.entourageCreatorDelegate = self;
+        controller.entourageEditorDelegate = self;
     }
     else if([segue.identifier isEqualToString:@"FiltersSegue"]) {
         UINavigationController *navController = (UINavigationController*)destinationViewController;

@@ -15,13 +15,11 @@
 
 @end
 
-
 @protocol LocationSelectionDelegate <NSObject>
 
 - (void)didSelectLocation:(CLLocation *)location;
 
 @end
-
 
 @interface OTLocationSelectorViewController : UIViewController<HandleMapSearch>
 

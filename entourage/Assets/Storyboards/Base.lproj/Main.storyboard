@@ -490,7 +490,7 @@
                         <segue destination="Yq0-qf-lgm" kind="modal" identifier="OTGuideDetailsSegue" id="x8u-KE-dPr"/>
                         <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" animates="NO" id="Gfi-xi-1Da"/>
                         <segue destination="cUF-7c-FT1" kind="modal" identifier="TourCreatorSegue" id="giF-18-m0W"/>
-                        <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageCreator" id="dno-Ju-GCg"/>
+                        <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageEditor" id="dno-Ju-GCg"/>
                         <segue destination="0av-Qe-fFs" kind="modal" identifier="FiltersSegue" id="22w-GJ-qhb"/>
                         <segue destination="4jA-Gt-JYo" kind="push" identifier="PublicFeedItemDetailsSegue" id="wzY-Lz-9e9"/>
                         <segue destination="b7J-bU-8VV" kind="push" identifier="ActiveFeedItemDetailsSegue" id="5Vn-Sd-WAu"/>
@@ -1021,10 +1021,10 @@
             </objects>
             <point key="canvasLocation" x="866.5" y="938"/>
         </scene>
-        <!--EntourageCreator-->
+        <!--EntourageEditor-->
         <scene sceneID="zTc-vn-arv">
             <objects>
-                <viewControllerPlaceholder storyboardName="EntourageCreator" id="OHs-Ag-wCJ" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="EntourageEditor" id="OHs-Ag-wCJ" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Wd5-ZJ-ll5"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1y-5B-KU8" userLabel="First Responder" sceneMemberID="firstResponder"/>

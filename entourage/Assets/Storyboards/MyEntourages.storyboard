@@ -303,7 +303,7 @@
                         <outlet property="manageInvitation" destination="Ldj-3E-rTX" id="3Ku-c0-iH2"/>
                         <outlet property="optionsBehavior" destination="omB-rY-1vt" id="qbi-OW-VpU"/>
                         <outlet property="toggleCollectionView" destination="ntM-qh-ECK" id="tng-qQ-9aF"/>
-                        <segue destination="6JK-OI-tTh" kind="modal" identifier="EntourageCreateSegue" id="ujP-hf-Ybz"/>
+                        <segue destination="6JK-OI-tTh" kind="modal" identifier="EntourageEditorSegue" id="ujP-hf-Ybz"/>
                         <segue destination="173-pU-UII" kind="push" identifier="PublicFeedItemDetailsSegue" id="9Hp-Vb-Z1Y"/>
                         <segue destination="su2-g2-6je" kind="push" identifier="ActiveFeedItemDetailsSegue" id="SGD-mP-pLc"/>
                         <segue destination="DIz-eG-Bls" kind="push" identifier="ManageInvitationSegue" id="wQK-gk-y6m"/>
@@ -503,10 +503,10 @@
             </objects>
             <point key="canvasLocation" x="75" y="445"/>
         </scene>
-        <!--EntourageCreator-->
+        <!--EntourageEditor-->
         <scene sceneID="wT3-h3-3eW">
             <objects>
-                <viewControllerPlaceholder storyboardName="EntourageCreator" id="6JK-OI-tTh" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="EntourageEditor" id="6JK-OI-tTh" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Iwg-P9-UDp"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OyM-hd-yPO" userLabel="First Responder" sceneMemberID="firstResponder"/>

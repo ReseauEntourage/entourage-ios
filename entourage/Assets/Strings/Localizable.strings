@@ -141,6 +141,8 @@
 "formater_by" = "%@ par ";
 "entourageCreated" = "Entourage créée";
 "entourageNotCreated" = "Echec de la création de entourage";
+"entourageUpdated" = "!!Entourage updated";
+"entourageNotUpdated" = "!!Failed to update entourage";
 "entourageQuitted" = "Entourage clôturée.";
 "addressBookDenied" = "!!Permission to access address book denied. You can reenable it from application settings.";
 "inviteByPhoneFailed" = "!!Failed to invite user by phone.";

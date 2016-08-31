@@ -23,5 +23,6 @@
 
 - (instancetype) initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *) dictionaryForWebService;
+- (NSDictionary *) updateDictionaryForWebService;
 
 @end

@@ -25,9 +25,9 @@
     [self showInitialViewControllerFromStoryboardNamed:@"Main" addingNavigation:NO];
 }
 
-+ (UIStoryboard*)entourageCreatorStoryboard {
-    UIStoryboard *tourStoryboard = [UIStoryboard storyboardWithName:@"EntourageCreator" bundle:nil];
-    return tourStoryboard;
++ (UIStoryboard*)entourageEditorStoryboard {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"EntourageEditor" bundle:nil];
+    return storyboard;
 }
 
 #pragma mark - Private

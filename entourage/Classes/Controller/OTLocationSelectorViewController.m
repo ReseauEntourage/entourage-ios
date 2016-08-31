@@ -13,7 +13,7 @@
 #import "MKMapView+entourage.h"
 #import "OTLocationSearchTableViewController.h"
 #import "UIStoryboard+entourage.h"
-#import "OTEntourageCreatorViewController.h"
+#import "OTEntourageEditorViewController.h"
 #import "OTLocationManager.h"
 #import "NSNotification+entourage.h"
 
@@ -41,7 +41,7 @@
     [self.footerToolbar setupDefault];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
     
-    self.locationSearchTable = [[UIStoryboard entourageCreatorStoryboard] instantiateViewControllerWithIdentifier:@"OTLocationSearchTableViewController"];
+    self.locationSearchTable = [[UIStoryboard entourageEditorStoryboard] instantiateViewControllerWithIdentifier:@"OTLocationSearchTableViewController"];
     self.resultSearchController = [[UISearchController alloc] initWithSearchResultsController:self.locationSearchTable];
     self.resultSearchController.searchResultsUpdater = self.locationSearchTable;
 
@@ -136,21 +136,18 @@
 - (void)dropPinZoomIn:(MKPlacemark *)placemark {
     self.selectedLocation = placemark.location;
     [self updateSelectedLocation:self.selectedLocation];
-    [self dismissViewControllerAnimated:YES
-                             completion:^{
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        MKPointAnnotation *annotation = [MKPointAnnotation new];
+        annotation.coordinate = placemark.coordinate;
+        annotation.title = placemark.name;
+        [self.mapView addAnnotation:annotation];
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
                                  
-                                 [self.mapView removeAnnotations:self.mapView.annotations];
-                                 MKPointAnnotation *annotation = [MKPointAnnotation new];
-                                 annotation.coordinate = placemark.coordinate;
-                                 annotation.title = placemark.name;
-                                 [self.mapView addAnnotation:annotation];
-                                 MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
-                                 
-                                 [self.mapView setRegion:region];
-                                 
-                                 [self.footerToolbar setTitle:placemark.name];
-                                 [self.footerToolbar setupDefault];
-                             }];
+        [self.mapView setRegion:region];
+        [self.footerToolbar setTitle:placemark.name];
+        [self.footerToolbar setupDefault];
+    }];
 }
 
 #pragma mark - MKMapViewDelegate

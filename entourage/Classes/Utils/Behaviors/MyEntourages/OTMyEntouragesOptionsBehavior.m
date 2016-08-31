@@ -8,12 +8,12 @@
 
 #import "OTMyEntouragesOptionsBehavior.h"
 #import "OTEntourage.h"
-#import "OTEntourageCreatorViewController.h"
+#import "OTEntourageEditorViewController.h"
 #import "OTLocationManager.h"
 #import "OTMyEntouragesOptionsViewController.h"
 #import "OTMyEntouragesOptionsDelegate.h"
 
-@interface OTMyEntouragesOptionsBehavior () <EntourageCreatorDelegate, OTMyEntouragesOptionsDelegate>
+@interface OTMyEntouragesOptionsBehavior () <EntourageEditorDelegate, OTMyEntouragesOptionsDelegate>
 
 @property (nonatomic, weak) id<OTOptionsDelegate> optionsDelegate;
 @property (nonatomic, strong) NSString *entourageType;
@@ -25,10 +25,10 @@
 - (BOOL)prepareSegueForOptions:(UIStoryboardSegue *)segue {
     if([segue.identifier isEqualToString:@"EntourageCreateSegue"]) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
-        OTEntourageCreatorViewController *creatorController = (OTEntourageCreatorViewController *)controller.topViewController;
+        OTEntourageEditorViewController *creatorController = (OTEntourageEditorViewController *)controller.topViewController;
         creatorController.type = self.entourageType;
         creatorController.location = [OTLocationManager sharedInstance].currentLocation;
-        creatorController.entourageCreatorDelegate = self;
+        creatorController.entourageEditorDelegate = self;
     }
     else if([segue.identifier isEqualToString:@"OptionsSegue"]) {
         OTMyEntouragesOptionsViewController *controller = (OTMyEntouragesOptionsViewController *)segue.destinationViewController;
@@ -47,12 +47,12 @@
 
 - (void)createDemand {
     self.entourageType = ENTOURAGE_DEMANDE;
-    [self.owner performSegueWithIdentifier:@"EntourageCreateSegue" sender:self];
+    [self.owner performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
 }
 
 - (void)createContribution {
     self.entourageType = ENTOURAGE_CONTRIBUTION;
-    [self.owner performSegueWithIdentifier:@"EntourageCreateSegue" sender:self];
+    [self.owner performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
 }
 
 - (void)createTour {
@@ -60,9 +60,9 @@
     [self.optionsDelegate createTour];
 }
 
-#pragma mark - EntourageCreatorDelegate
+#pragma mark - EntourageEditorDelegate
 
-- (void)didCreateEntourage {
+- (void)didEditEntourage:(OTEntourage *)entourage {
     [self.owner dismissViewControllerAnimated:YES completion:^() {
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     }];

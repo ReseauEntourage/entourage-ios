@@ -13,6 +13,6 @@
 + (void)showStartup;
 + (void)showUserProfileDetails;
 + (void)showSWRevealController;
-+ (UIStoryboard*)entourageCreatorStoryboard;
++ (UIStoryboard*)entourageEditorStoryboard;
 
 @end
