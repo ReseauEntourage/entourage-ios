@@ -243,6 +243,7 @@
     if (self.isTourListDisplayed) {
         [self showToursList];
     }
+    [self.footerToolbar setupWithFilters];
     [self.footerToolbar setTitle:OTLocalizedString(@"entourages")];
 }
 
@@ -253,6 +254,7 @@
     [self clearMap];
     [self showToursMap];
     [self.guideMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
+    [self.footerToolbar setupDefault];
     [self.footerToolbar setTitle:OTLocalizedString(@"guideTitle")];
 }
 
