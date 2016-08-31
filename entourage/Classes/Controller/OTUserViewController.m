@@ -9,22 +9,15 @@
 #import "OTUserViewController.h"
 #import "OTConsts.h"
 
-// Controller
 #import "UIViewController+menu.h"
-
-// Service
 #import "OTAuthService.h"
-
-
-// Helper
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
 #import "UIColor+entourage.h"
 #import "UIButton+entourage.h"
 #import "UIBarButtonItem+factory.h"
-
-// View
 #import "SVProgressHUD.h"
+#import "UIButton+AFNetworking.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -32,7 +25,6 @@ typedef NS_ENUM(NSInteger) {
     SectionTypeEntourages,
     SectionTypeAssociations
 } SectionType;
-
 
 @interface OTUserViewController ()
 
@@ -42,7 +34,6 @@ typedef NS_ENUM(NSInteger) {
 
 @implementation OTUserViewController
 
-/********************************************************************************/
 #pragma mark - Life cycle
 
 - (void)viewDidLoad {
@@ -68,7 +59,6 @@ typedef NS_ENUM(NSInteger) {
     }
 }
 
-/**************************************************************************************************/
 #pragma mark - Private
 
 - (void)showEditButton {
@@ -83,23 +73,22 @@ typedef NS_ENUM(NSInteger) {
 - (void)loadUser {
     if (self.userId != nil) {
         [SVProgressHUD show];
-        [[OTAuthService new] getDetailsForUser:self.userId
-                                       success:^(OTUser *user) {
-                                           [SVProgressHUD dismiss];
-                                           self.user = user;
-                                           [self.tableView reloadData];
-                                       } failure:^(NSError *error) {
-                                           [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_profile_error")];
-                                           NSLog(@"@fails getting user %@", error.description);
-                                       }];
+        [[OTAuthService new] getDetailsForUser:self.userId success:^(OTUser *user) {
+            [SVProgressHUD dismiss];
+            self.user = user;
+            [self.tableView reloadData];
+        } failure:^(NSError *error) {
+            [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_profile_error")];
+        }];
     }
 }
 
-/**************************************************************************************************/
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.user != nil ? 4 : 0;
+    if(self.user == nil)
+        return 0;
+    return [self.user.type isEqualToString:USER_TYPE_PRO] ? 4 : 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -122,14 +111,11 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-   
     return (section == 0) ? 0.0f : 15.0f;
-    
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
     return .5f;
-    
 }
 
 #define CELLHEIGHT_SUMMARY 237.0f
@@ -158,7 +144,6 @@ typedef NS_ENUM(NSInteger) {
             else
                 return CELLHEIGHT_ENTOURAGES;
         }
-        
         default:
             return CELLHEIGHT_DEFAULT;;
     }
@@ -225,16 +210,13 @@ typedef NS_ENUM(NSInteger) {
             if (indexPath.row == 0)
                 [self setupTitleProfileCell:cell withTitle:OTLocalizedString(@"organizations")];
             else
-                [self setupAssociationProfileCell:cell
-                             withAssociationTitle:self.user.organization.name
-                            andAssociationLogoUrl:nil];
+                [self setupAssociationProfileCell:cell withAssociationTitle:self.user.organization.name andAssociationLogoUrl:self.user.organization.logoUrl];
             break;
         }
-        
     }
-    
     return cell;
 }
+
 #define SUMMARY_AVATAR 1
 #define SUMMARY_AVATAR_SHADOW 10
 #define SUMMARY_NAME 2
@@ -251,9 +233,7 @@ typedef NS_ENUM(NSInteger) {
 #define ASSOCIATION_TITLE 1
 #define ASSOCIATION_IMAGE 2
 
-
 - (void)setupSummaryProfileCell:(UITableViewCell *)cell {
-    
     UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
     [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];
     [avatarShadow.layer setShadowOpacity:0.5];
@@ -279,7 +259,6 @@ typedef NS_ENUM(NSInteger) {
 - (void)setupTitleProfileCell:(UITableViewCell *)cell withTitle:(NSString *)title {
     UILabel *titleLabel = [cell viewWithTag:SUMMARY_TITLE];
     titleLabel.text = title;
-    
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }
 
@@ -306,7 +285,9 @@ typedef NS_ENUM(NSInteger) {
 {
     UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE];
     titleLabel.text = title;
-    
-    //UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE];
+    UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE];
+    [associationImageButton setImage:nil forState:UIControlStateNormal];
+    if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0)
+        [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
 }
 @end
