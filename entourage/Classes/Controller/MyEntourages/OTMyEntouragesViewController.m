@@ -23,13 +23,13 @@
 
 @interface OTMyEntouragesViewController ()
 
-@property (strong, nonatomic) IBOutlet OTCollectionSourceBehavior *invitationsDataSource;
-@property (strong, nonatomic) IBOutlet OTInvitationsCollectionSource *invitationsCollectionDataSource;
-@property (strong, nonatomic) IBOutlet OTToggleVisibleBehavior *toggleCollectionView;
-@property (strong, nonatomic) IBOutlet OTMyEntouragesDataSource *entouragesDataSource;
-@property (strong, nonatomic) IBOutlet OTTableDataSourceBehavior *entouragesTableDataSource;
-@property (strong, nonatomic) IBOutlet OTMyEntouragesOptionsBehavior *optionsBehavior;
-@property (strong, nonatomic) IBOutlet OTFeedItemDetailsBehavior *feedItemDetailsBehavior;
+@property (nonatomic, strong) IBOutlet OTCollectionSourceBehavior *invitationsDataSource;
+@property (nonatomic, strong) IBOutlet OTInvitationsCollectionSource *invitationsCollectionDataSource;
+@property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior *toggleCollectionView;
+@property (nonatomic, strong) IBOutlet OTMyEntouragesDataSource *entouragesDataSource;
+@property (nonatomic, strong) IBOutlet OTTableDataSourceBehavior *entouragesTableDataSource;
+@property (nonatomic, strong) IBOutlet OTMyEntouragesOptionsBehavior *optionsBehavior;
+@property (nonatomic, strong) IBOutlet OTFeedItemDetailsBehavior *feedItemDetailsBehavior;
 @property (nonatomic, strong) IBOutlet OTManageInvitationBehavior* manageInvitation;
 
 @end

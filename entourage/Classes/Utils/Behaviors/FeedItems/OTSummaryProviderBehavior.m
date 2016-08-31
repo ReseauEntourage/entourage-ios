@@ -44,11 +44,20 @@
     if(self.lblFeedItemDescription)
         self.lblFeedItemDescription.text = [uiDelegate feedItemDescription];
     if(self.lblTimeDistance) {
-    self.lblTimeDistance.text = @"";
+        self.lblTimeDistance.text = @"";
         [uiDelegate timeDataWithCompletion:^(NSString *result) {
             self.lblTimeDistance.text = result;
         }];
     }
+}
+
+- (void)clearConfiguration {
+    self.lblTitle = nil;
+    self.lblDescription = nil;
+    self.lblUserCount = nil;
+    self.btnAvatar = nil;
+    self.lblTimeDistance = nil;
+    [self configureWith:nil];
 }
 
 - (void)dealloc {

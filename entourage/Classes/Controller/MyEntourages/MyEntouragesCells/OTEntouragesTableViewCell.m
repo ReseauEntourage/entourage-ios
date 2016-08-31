@@ -24,6 +24,7 @@
     [self.summaryProvider configureWith:item];
     self.lblNumberOfUsers.text = [@"+" stringByAppendingString:self.lblNumberOfUsers.text];
     self.lblLastMessage.text = @"To do (no API yet)";
+    [self.summaryProvider clearConfiguration];
 }
 
 @end

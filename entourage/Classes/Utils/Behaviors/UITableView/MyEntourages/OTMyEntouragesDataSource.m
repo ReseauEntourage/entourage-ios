@@ -10,6 +10,7 @@
 #import "OTFeedsService.h"
 #import "SVProgressHUD.h"
 #import "OTTableDataSourceBehavior.h"
+#import "OTConsts.h"
 
 @interface OTMyEntouragesDataSource ()
 
@@ -21,6 +22,14 @@
 #define DATA_PAGE_SIZE 20
 
 @implementation OTMyEntouragesDataSource
+
+- (void)awakeFromNib {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageUpdated:) name:kNotificationEntourageChanged object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)initialize {
     self.currentFilter = [OTMyEntouragesFilter new];
@@ -76,6 +85,10 @@
         if(failure)
             failure();
     }];
+}
+
+- (void)entourageUpdated:(NSNotification *)notification {
+    [self.tableDataSource refresh];
 }
 
 @end
