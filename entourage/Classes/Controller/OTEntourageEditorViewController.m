@@ -57,12 +57,6 @@
 #pragma mark - Private
 
 - (void)setupUI {
-    if(self.entourage) {
-        self.type = self.entourage.type;
-        self.location = self.entourage.location;
-        self.titleTextView.text = self.entourage.title;
-        self.descriptionTextView.text = self.entourage.description;
-    }
     [self.titleTextView setTextContainerInset:UIEdgeInsetsMake(TEXTVIEW_PADDING_TOP, TEXTVIEW_PADDING, TEXTVIEW_PADDING_BOTTOM, 2*TEXTVIEW_PADDING)];
     [self.descriptionTextView setTextContainerInset:UIEdgeInsetsMake(TEXTVIEW_PADDING_TOP, TEXTVIEW_PADDING, TEXTVIEW_PADDING_BOTTOM, 2*TEXTVIEW_PADDING)];
     NSString *typeString = [self.type isEqualToString: ENTOURAGE_DEMANDE] ? OTLocalizedString(@"demande") : OTLocalizedString(@"contribution");
@@ -70,6 +64,18 @@
     [self.titleTextView setPlaceholder:titlePlaceholder];
     [self.titleTextView showCharCount];
     [self.descriptionTextView setPlaceholder:OTLocalizedString(@"detailedDescription")];
+    if(self.entourage) {
+        self.type = self.entourage.type;
+        self.location = self.entourage.location;
+        if(self.entourage.title.length > 0) {
+            self.titleTextView.text = self.entourage.title;
+            [self.titleTextView updateAfterSpeech];
+        }
+        if(self.entourage.desc.length > 0) {
+            self.descriptionTextView.text = self.entourage.desc;
+            [self.descriptionTextView updateAfterSpeech];
+        }
+    }
     [self updateLocationTitle];
 }
 
@@ -111,7 +117,7 @@
 
 - (void)createEntourage:(UIButton *)sender {
     sender.enabled = NO;
-    __block OTEntourage *entourage = [[OTEntourage alloc] init];
+    __block OTEntourage *entourage = [OTEntourage new];
     entourage.type = self.type;
     entourage.location = self.location;
     entourage.title = self.titleTextView.text;
@@ -129,10 +135,13 @@
 
 - (void)updateEntourage:(UIButton *)sender {
     sender.enabled = NO;
-    __block OTEntourage *entourage = [self.entourage mutableCopy];
+    __block OTEntourage *entourage = [OTEntourage new];
+    entourage.uid = self.entourage.uid;
+    entourage.type = self.type;
     entourage.location = self.location;
     entourage.title = self.titleTextView.text;
     entourage.desc = self.descriptionTextView.text;
+    entourage.status = self.entourage.status;
     [SVProgressHUD show];
     [[OTEncounterService new] updateEntourage:entourage withSuccess:^(OTEntourage *sentEntourage) {
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageUpdated")];

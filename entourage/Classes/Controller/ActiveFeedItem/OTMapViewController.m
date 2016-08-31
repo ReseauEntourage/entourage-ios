@@ -17,6 +17,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "OTMembersDataSource.h"
 #import "OTTableDataSourceBehavior.h"
+#import "OTEntourageEditorViewController.h"
 
 @interface OTMapViewController ()
 
@@ -65,6 +66,11 @@
         return;
     if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
+    if([segue.identifier isEqualToString:@"EntourageEditorSegue"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.topViewController;
+        controller.entourage = (OTEntourage *)self.feedItem;
+    }
 }
 
 #pragma mark - private methods
@@ -73,13 +79,23 @@
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
     if(![stateInfo canChangeEditState])
         return;
+    NSMutableArray *rightButtons = [NSMutableArray new];
     UIBarButtonItem *optionsButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self.statusChangedBehavior andAction:@selector(startChangeStatus)];
+    [rightButtons addObject:optionsButton];
     if([stateInfo canInvite]) {
         UIBarButtonItem *plusButton = [UIBarButtonItem createWithImageNamed:@"userPlus" withTarget:self.inviteBehavior andAction:@selector(startInvite)];
+        [rightButtons addObject:plusButton];
         [self.navigationItem setRightBarButtonItems:@[optionsButton, plusButton]];
     }
-    else
-        [self.navigationItem setRightBarButtonItems:@[optionsButton]];
+    if([stateInfo canEdit]) {
+        UIBarButtonItem *editButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(edit)];
+        [rightButtons addObject:editButton];
+    }
+    [self.navigationItem setRightBarButtonItems:rightButtons];
+}
+
+- (void)edit {
+    [self performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
 }
 
 @end
