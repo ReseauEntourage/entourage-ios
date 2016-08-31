@@ -131,18 +131,14 @@ typedef NS_ENUM(NSInteger) {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     int mappedSection = [[self.sections objectAtIndex:section] intValue];
     switch (mappedSection) {
-        case SectionTypeSummary: {
+        case SectionTypeSummary:
             return 3;
-        }
-        case SectionTypeInfoPrivate: {
+        case SectionTypeInfoPrivate:
             return 3;
-        }
-        case SectionTypeInfoPublic: {
+        case SectionTypeInfoPublic:
             return 1;
-        }
-        case SectionTypeAssociations: {
+        case SectionTypeAssociations:
             return self.user.organization == nil ? 0 : 1;
-        }
         default:
             return 1;
     }
@@ -180,21 +176,17 @@ typedef NS_ENUM(NSInteger) {
 {
     int mappedSection = [[self.sections objectAtIndex:indexPath.section] intValue];
     switch (mappedSection) {
-        case SectionTypeSummary: {
+        case SectionTypeSummary:
             if (indexPath.row == 0)
                 return CELLHEIGHT_SUMMARY;
             else
                 return CELLHEIGHT_DEFAULT;
-        }
-        case SectionTypeInfoPrivate: {
+        case SectionTypeInfoPrivate:
             return CELLHEIGHT_DEFAULT;
-        }
-        case SectionTypeInfoPublic: {
+        case SectionTypeInfoPublic:
             return CELLHEIGHT_DEFAULT;
-        }
-        case SectionTypeAssociations: {
+        case SectionTypeAssociations:
             return CELLHEIGHT_ENTOURAGES;
-        }
         default:
             return CELLHEIGHT_DEFAULT;;
     }
@@ -289,9 +281,6 @@ typedef NS_ENUM(NSInteger) {
             switch (indexPath.row) {
                 case 0:
                     [self setupInfoCell:cell withTitle:OTLocalizedString(@"user_edit_email") withTextField:nil andText:self.user.email];
-                    break;
-                case 1:
-                    //nothing
                     break;
                 case 2:
                     [self setupPhoneCell:cell withPhone:self.user.phone];
@@ -421,9 +410,8 @@ typedef NS_ENUM(NSInteger) {
              withPhone:(NSString *)phone
 {
     UILabel *phoneLabel = [cell viewWithTag:PHONE_LABEL_TAG];
-    if (phoneLabel != nil) {
+    if (phoneLabel != nil)
         phoneLabel.text = phone;
-    }
 }
 
 #pragma mark - OTUserEditPasswordProtocol

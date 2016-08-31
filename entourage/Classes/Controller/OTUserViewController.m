@@ -54,9 +54,8 @@ typedef NS_ENUM(NSInteger) {
             [self.tableView reloadData];
         }
     }
-    else {
+    else
         [self loadUser];
-    }
 }
 
 #pragma mark - Private
@@ -93,18 +92,14 @@ typedef NS_ENUM(NSInteger) {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case SectionTypeSummary: {
+        case SectionTypeSummary:
             return 1;
-        }
-        case SectionTypeVerification: {
+        case SectionTypeVerification:
             return 3;
-        }
-        case SectionTypeEntourages: {
+        case SectionTypeEntourages:
             return 1;
-        }
-        case SectionTypeAssociations: {
+        case SectionTypeAssociations:
             return 2;
-        }
         default:
             return 0;
     }
@@ -126,18 +121,15 @@ typedef NS_ENUM(NSInteger) {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case SectionTypeSummary: {
+        case SectionTypeSummary:
             return CELLHEIGHT_SUMMARY;
-        }
-        case SectionTypeVerification: {
+        case SectionTypeVerification:
             if (indexPath.row == 0)
                 return CELLHEIGHT_TITLE;
             else
                 return CELLHEIGHT_DEFAULT;
-            }
-        case SectionTypeEntourages: {
+        case SectionTypeEntourages:
             return CELLHEIGHT_DEFAULT;
-        }
         case SectionTypeAssociations: {
             if (indexPath.row == 0)
                 return CELLHEIGHT_TITLE;
@@ -179,7 +171,6 @@ typedef NS_ENUM(NSInteger) {
         default:
             break;
     }
-    NSLog(@"cell id: %@", cellID);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     switch (indexPath.section) {
         case SectionTypeSummary: {
@@ -192,13 +183,9 @@ typedef NS_ENUM(NSInteger) {
             else {
                 if (indexPath.row == 1)
                     //TODO: Ask Vincent for status
-                    [self setupVerificationProfileCell:cell
-                                             withCheck:OTLocalizedString(@"user_email_address")
-                                             andStatus:YES];
+                    [self setupVerificationProfileCell:cell withCheck:OTLocalizedString(@"user_email_address") andStatus:YES];
                 else
-                    [self setupVerificationProfileCell:cell
-                                             withCheck:OTLocalizedString(@"user_phone_number")
-                                             andStatus:YES];
+                    [self setupVerificationProfileCell:cell withCheck:OTLocalizedString(@"user_phone_number") andStatus:YES];
             }
             break;
         }
@@ -262,13 +249,10 @@ typedef NS_ENUM(NSInteger) {
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }
 
-- (void)setupVerificationProfileCell:(UITableViewCell *)cell
-                           withCheck:(NSString *)checkString
-                           andStatus:(BOOL)isChecked
+- (void)setupVerificationProfileCell:(UITableViewCell *)cell withCheck:(NSString *)checkString andStatus:(BOOL)isChecked
 {
     UILabel *checkLabel = [cell viewWithTag:VERIFICATION_LABEL];
     checkLabel.text = checkString;
-    
     UIButton *statusButton = [cell viewWithTag:VERIFICATION_STATUS];
     NSString *statusImage = isChecked ? @"verified" : @"notVerified";
     [statusButton setImage:[UIImage imageNamed: statusImage] forState:UIControlStateNormal];
@@ -279,9 +263,7 @@ typedef NS_ENUM(NSInteger) {
     noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.tourCount.intValue];
 }
 
-- (void)setupAssociationProfileCell:(UITableViewCell *)cell
-               withAssociationTitle:(NSString *)title
-                andAssociationLogoUrl:(NSString *)imageURL
+- (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationLogoUrl:(NSString *)imageURL
 {
     UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE];
     titleLabel.text = title;
@@ -290,4 +272,5 @@ typedef NS_ENUM(NSInteger) {
     if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0)
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
 }
+
 @end
