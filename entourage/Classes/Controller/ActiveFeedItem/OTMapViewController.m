@@ -17,17 +17,18 @@
 #import "UIBarButtonItem+factory.h"
 #import "OTMembersDataSource.h"
 #import "OTTableDataSourceBehavior.h"
-#import "OTEntourageEditorViewController.h"
+#import "OTEditEntourageBehavior.h"
 
 @interface OTMapViewController ()
 
-@property (strong, nonatomic) IBOutlet OTMapAnnotationProviderBehavior *annotationProvider;
-@property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
-@property (strong, nonatomic) IBOutlet OTSummaryProviderBehavior *summaryProviderBehavior;
-@property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
-@property (strong, nonatomic) IBOutlet OTInviteBehavior *inviteBehavior;
-@property (strong, nonatomic) IBOutlet OTMembersDataSource *membersDataSource;
-@property (strong, nonatomic) IBOutlet OTTableDataSourceBehavior *membersTableSource;
+@property (nonatomic, weak) IBOutlet OTMapAnnotationProviderBehavior *annotationProvider;
+@property (nonatomic, weak) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
+@property (nonatomic, weak) IBOutlet OTSummaryProviderBehavior *summaryProviderBehavior;
+@property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfileBehavior;
+@property (nonatomic, weak) IBOutlet OTInviteBehavior *inviteBehavior;
+@property (nonatomic, weak) IBOutlet OTMembersDataSource *membersDataSource;
+@property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *membersTableSource;
+@property (nonatomic, weak) IBOutlet OTEditEntourageBehavior *editEntourageBehavior;
 
 @end
 
@@ -66,11 +67,8 @@
         return;
     if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
-    if([segue.identifier isEqualToString:@"EntourageEditorSegue"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.topViewController;
-        controller.entourage = (OTEntourage *)self.feedItem;
-    }
+    if([self.editEntourageBehavior prepareSegue:segue])
+        return;
 }
 
 #pragma mark - private methods
@@ -95,7 +93,7 @@
 }
 
 - (void)edit {
-    [self performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
+    [self.editEntourageBehavior doEdit:(OTEntourage *)self.feedItem];
 }
 
 @end

@@ -14,6 +14,7 @@
 #import "OTUIDelegate.h"
 #import "OTMapHandlerDelegate.h"
 #import "OTJoinerDelegate.h"
+#import "OTChangedHandlerDelegate.h"
 
 @protocol OTFeedItemFactoryDelegate <NSObject>
 
@@ -24,5 +25,6 @@
 - (id<OTUIDelegate>)getUI;
 - (id<OTMapHandlerDelegate>)getMapHandler;
 - (id<OTJoinerDelegate>)getJoiner;
+- (id<OTChangedHandlerDelegate>)getChangedHandler;
 
 @end

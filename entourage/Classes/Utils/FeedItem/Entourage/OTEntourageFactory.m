@@ -13,6 +13,7 @@
 #import "OTEntourageUI.h"
 #import "OTEntourageMapHandler.h"
 #import "OTEntourageJoinerDelegate.h"
+#import "OTEntourageChangedHandler.h"
 
 @implementation OTEntourageFactory
 
@@ -51,6 +52,10 @@
 
 - (id<OTJoinerDelegate>)getJoiner {
     return [[OTEntourageJoinerDelegate alloc] initWithEntourage:self.entourage];
+}
+
+- (id<OTChangedHandlerDelegate>)getChangedHandler {
+    return [[OTEntourageChangedHandler alloc] initWithEntourage:self.entourage];
 }
 
 @end

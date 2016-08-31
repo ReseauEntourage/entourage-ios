@@ -49,17 +49,4 @@
     };
 }
 
-- (NSDictionary *)updateDictionaryForWebService {
-    return @{
-        kWSKeyName: self.title,
-        kWSKeyEntourageType: self.type,
-        kWSDescription: self.desc,
-        kWSKeyStatus: self.status,
-        kWSKeyLocation: @{
-            kWSKeyLatitude: @(self.location.coordinate.latitude),
-            kWSKeyLongitude: @(self.location.coordinate.longitude)
-        }
-    };
-}
-
 @end

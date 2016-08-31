@@ -19,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblFeedItemDescription;
 
 - (void)configureWith:(OTFeedItem *)feedItem;
+- (void)updateWith:(OTFeedItem *)feedItem;
 
 @property (nonatomic, strong) NSNumber *fontSize;
 

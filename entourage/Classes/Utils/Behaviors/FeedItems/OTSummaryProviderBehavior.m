@@ -15,15 +15,23 @@
 #import "OTUser.h"
 #import "UIButton+entourage.h"
 
+@interface OTSummaryProviderBehavior ()
+
+@property (nonatomic, strong) OTFeedItem *feedItem;
+
+@end
+
 @implementation OTSummaryProviderBehavior
 
 - (void)awakeFromNib {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageUpdated:) name:kNotificationEntourageChanged object:nil];
     if(!self.fontSize)
         self.fontSize = [NSNumber numberWithFloat:DEFAULT_DESCRIPTION_SIZE];
 }
 
 - (void)configureWith:(OTFeedItem *)feedItem {
+    self.feedItem = feedItem;
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:feedItem] getUI];
     if(self.lblTitle)
         self.lblTitle.text = [uiDelegate summary];
@@ -52,6 +60,12 @@
 - (void)profilePictureUpdated:(NSNotification *)notification {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     [self.btnAvatar setupAsProfilePictureFromUrl:currentUser.avatarURL withPlaceholder:@"user"];
+}
+
+- (void)entourageUpdated:(NSNotification *)notification {
+    OTFeedItem *feedItem = (OTFeedItem *)[notification.userInfo objectForKey:kNotificationEntourageChangedEntourageKey];
+    [[[OTFeedItemFactory createFor:self.feedItem] getChangedHandler] updateWith:feedItem];
+    [self configureWith:self.feedItem];
 }
 
 @end

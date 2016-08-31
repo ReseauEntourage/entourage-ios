@@ -40,6 +40,8 @@
 #define kNotificationShowCurrentLocation "NotificationCurrentLocation"
 
 #define kNotificationProfilePictureUpdated "NotificationProfilePictureUpdated"
+#define kNotificationEntourageChanged @"NotificationEntourageChanged"
+#define kNotificationEntourageChangedEntourageKey @"NotificationEntourageChangedEntourageKey"
 
 
 #define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"

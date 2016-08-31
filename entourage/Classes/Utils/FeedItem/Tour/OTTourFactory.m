@@ -13,6 +13,7 @@
 #import "OTTourUI.h"
 #import "OTTourMapHandler.h"
 #import "OTTourJoinerDelegate.h"
+#import "OTTourChangedHandler.h"
 
 @implementation OTTourFactory
 
@@ -51,6 +52,10 @@
 
 - (id<OTJoinerDelegate>)getJoiner {
     return [[OTTourJoinerDelegate alloc] initWithTour:self.tour];
+}
+
+- (id<OTChangedHandlerDelegate>)getChangedHandler {
+    return [[OTTourChangedHandler alloc] initWithTour:self.tour];
 }
 
 @end

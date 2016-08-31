@@ -84,7 +84,7 @@ NSString *const kEncounter = @"encounter";
 - (void)updateEntourage:(OTEntourage *)entourage withSuccess:(void (^)(OTEntourage *))success failure:(void (^)(NSError *))failure {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_UPDATE, entourage.uid, TOKEN];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
-    parameters[@"entourage"] = [entourage updateDictionaryForWebService];
+    parameters[@"entourage"] = [entourage dictionaryForWebService];
     [[OTHTTPRequestManager sharedInstance]
      PATCHWithUrl:url
      andParameters:parameters
