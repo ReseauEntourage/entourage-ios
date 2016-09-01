@@ -19,6 +19,7 @@
 #import "OTFeedItemFactory.h"
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"
+#import "OTDeepLinkService.h"
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
@@ -119,23 +120,10 @@
     [alert addAction:openAction];
 }
 
-- (UIViewController *)getTopViewController {
-    UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
-    if ([result isKindOfClass:[SWRevealViewController class]]) {
-        SWRevealViewController *revealController = (SWRevealViewController*)result;
-        result = revealController.frontViewController;
-    }
-    if([result isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *navController = (UINavigationController*)result;
-        result = navController.topViewController;
-    }
-    return result;
-}
-
 - (void)showAlert:(UIAlertController *)alert withPresentingBlock:(void(^)(UIViewController *, UIViewController *))presentingBlock {
     UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
     if (rootVC.presentedViewController) {
-        UIViewController *topController = [self getTopViewController];
+        UIViewController *topController = [[OTDeepLinkService new] getTopViewController];
         if(presentingBlock)
             presentingBlock(topController, rootVC.presentedViewController);
     } else

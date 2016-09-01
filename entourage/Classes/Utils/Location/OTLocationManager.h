@@ -23,5 +23,6 @@
 + (OTLocationManager *)sharedInstance;
 
 - (void)startLocationUpdates;
+- (void)stopLocationUpdates;
 
 @end

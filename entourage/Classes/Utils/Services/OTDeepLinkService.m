@@ -26,6 +26,19 @@
     }];
 }
 
+- (UIViewController *)getTopViewController {
+    UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([result isKindOfClass:[SWRevealViewController class]]) {
+        SWRevealViewController *revealController = (SWRevealViewController*)result;
+        result = revealController.frontViewController;
+    }
+    if([result isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController*)result;
+        result = navController.topViewController;
+    }
+    return result;
+}
+
 - (void)prepareControllers:(OTFeedItem *)feedItem {
     OTSWRevealViewController *revealController = [self setupRevealController];
     UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;

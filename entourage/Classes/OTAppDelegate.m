@@ -17,6 +17,8 @@
 #import "OTPushNotificationsService.h"
 #import "OTPictureUploadService.h"
 #import "OTAuthService.h"
+#import "OTDeepLinkService.h"
+#import "OTMainViewController.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -62,6 +64,21 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [OTPictureUploadService configure];
     
 	return YES;
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    if ([NSUserDefaults standardUserDefaults].currentUser)
+        [[OTLocationManager sharedInstance] startLocationUpdates];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    UIViewController *topController = [[OTDeepLinkService new] getTopViewController];
+    if([topController isKindOfClass:[OTMainViewController class]]) {
+        OTMainViewController *controller = (OTMainViewController *)topController;
+        if(controller.isTourRunning)
+            return;
+    }
+    [[OTLocationManager sharedInstance] stopLocationUpdates];
 }
 
 #pragma mark - Private methods

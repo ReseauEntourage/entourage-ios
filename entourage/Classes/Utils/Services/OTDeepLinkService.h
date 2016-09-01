@@ -11,5 +11,6 @@
 @interface OTDeepLinkService : NSObject
 
 - (void)navigateTo:(NSNumber *)feedItemId withType:(NSString *)feedItemType;
+- (UIViewController *)getTopViewController;
 
 @end
