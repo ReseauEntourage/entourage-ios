@@ -28,42 +28,23 @@
 - (void)addStartPoint {
     id<OTMapHandlerDelegate> mapHandler = [[OTFeedItemFactory createFor:self.feedItem] getMapHandler];
     CLLocationCoordinate2D startPoint = [mapHandler startPoint];
-    [self.map addAnnotation:[mapHandler annotationFor:startPoint]];
+    id<MKAnnotation> startAnnotation = [mapHandler annotationFor:startPoint];
+    if(startAnnotation)
+        [self.map addAnnotation:[mapHandler annotationFor:startPoint]];
     [self.map setRegion:MKCoordinateRegionMakeWithDistance(startPoint, 1000, 1000)];
 }
 
 - (void)drawData {
     id<OTMapHandlerDelegate> mapHandler = [[OTFeedItemFactory createFor:self.feedItem] getMapHandler];
-    MKPolyline *polyline = [mapHandler lineData];
-    if(polyline)
-        [self.map addOverlay:polyline];
+    id<MKOverlay> overlay = [mapHandler newsFeedOverlayData];
+    if(overlay)
+        [self.map addOverlay:overlay];
 }
 
 #pragma mark - MKMapViewDelegate
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(nonnull id<MKAnnotation>)annotation {
-    if ([annotation isKindOfClass:[OTEntourageAnnotation class]]) {
-        OTEntourageAnnotation *entAnnotation = (OTEntourageAnnotation*)annotation;
-        MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kEntourageAnnotationIdentifier];
-        if(annotationView ) {
-            OTEntourageAnnotationView *entAnnotationView = (OTEntourageAnnotationView *)annotationView;
-            entAnnotationView.annotation = entAnnotation;
-            [entAnnotationView updateScale:entAnnotation.scale];
-        }
-        else
-            annotationView = [[OTEntourageAnnotationView alloc] initWithAnnotation:entAnnotation reuseIdentifier:kEntourageAnnotationIdentifier andScale:entAnnotation.scale];
-        return annotationView;
-    } else {
-        return nil;
-    }
-}
-
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
-    if ([overlay isKindOfClass:[MKPolyline class]]) {
-        MKPolyline *polyline = (MKPolyline *) overlay;
-        return [[[OTFeedItemFactory createFor:self.feedItem] getMapHandler] rendererFor:polyline];
-    }
-    return nil;
+    return [[[OTFeedItemFactory createFor:self.feedItem] getMapHandler] newsFeedOverlayRenderer:overlay];
 }
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import "OTEntourageMapHandler.h"
-#import "OTEntourageAnnotation.h"
+#import "OTEntourageRenderer.h"
+
+#define ENTOURAGE_RADIUS 500
+#define ENTOURAGE_RADIUS_FACTOR 1.3f
 
 @implementation OTEntourageMapHandler
 
@@ -16,15 +19,16 @@
 }
 
 - (id<MKAnnotation>)annotationFor:(CLLocationCoordinate2D)coordinate {
-    return [[OTEntourageAnnotation alloc] initWithEntourage:self.entourage];
-}
-
-- (MKPolyline *)lineData {
     return nil;
 }
 
-- (MKOverlayRenderer *)rendererFor:(MKPolyline *)line {
-    return nil;
+- (id<MKOverlay>)newsFeedOverlayData {
+    return [MKCircle circleWithCenterCoordinate:self.entourage.location.coordinate radius:ENTOURAGE_RADIUS * ENTOURAGE_RADIUS_FACTOR];
 }
 
+- (MKOverlayRenderer *)newsFeedOverlayRenderer:(id<MKOverlay>)overlay {
+    if(![overlay isKindOfClass:[MKCircle class]])
+        return nil;
+    return [[OTEntourageRenderer alloc] initWithOverlay:overlay];
+}
 @end

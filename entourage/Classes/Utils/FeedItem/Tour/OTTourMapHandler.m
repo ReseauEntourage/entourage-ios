@@ -28,7 +28,7 @@
     return annotation;
 }
 
-- (MKPolyline *)lineData {
+- (id<MKOverlay>)newsFeedOverlayData {
     if([self.tour.tourPoints count] < 1)
         return nil;
     CLLocationCoordinate2D coords[self.tour.tourPoints.count];
@@ -36,10 +36,12 @@
     for (OTTourPoint *point in self.tour.tourPoints)
         coords[count++] = point.toLocation.coordinate;
     return [MKPolyline polylineWithCoordinates:coords count:self.tour.tourPoints.count];
-
 }
 
-- (MKOverlayRenderer *)rendererFor:(MKPolyline *)line {
+- (MKOverlayRenderer *)newsFeedOverlayRenderer:(id<MKOverlay>)overlay {
+    if(![overlay isKindOfClass:[MKPolyline class]])
+        return nil;
+    MKPolyline *line = (MKPolyline *)overlay;
     MKPolylineRenderer *aRenderer = [[MKPolylineRenderer alloc] initWithPolyline:line];
     aRenderer.strokeColor = [OTTour colorForTourType:self.tour.type];
     aRenderer.lineWidth = MAP_TOUR_LINE_WIDTH;

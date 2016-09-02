@@ -165,6 +165,7 @@
 		1ECFB3691D52570900722DAC /* OTTourMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECFB3681D52570900722DAC /* OTTourMapHandler.m */; };
 		1ECFB36C1D52578400722DAC /* OTEntourageMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECFB36B1D52578400722DAC /* OTEntourageMapHandler.m */; };
 		1ED2506D1D5A70EB005C9736 /* OTToggleVisibleBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED2506C1D5A70EB005C9736 /* OTToggleVisibleBehavior.m */; };
+		1EE817601D79F36D0003133D /* OTEntourageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE8175F1D79F36D0003133D /* OTEntourageRenderer.m */; };
 		1EE9E5F51D5CDA770045904A /* OTMyEntourageFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9E5F41D5CDA770045904A /* OTMyEntourageFilter.m */; };
 		1EE9E5F91D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9E5F81D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.m */; };
 		1EE9E5FC1D5CE5780045904A /* OTMyEntouragesFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9E5FB1D5CE5780045904A /* OTMyEntouragesFilterCell.m */; };
@@ -592,6 +593,8 @@
 		1ECFB36B1D52578400722DAC /* OTEntourageMapHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageMapHandler.m; sourceTree = "<group>"; };
 		1ED2506B1D5A70EB005C9736 /* OTToggleVisibleBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTToggleVisibleBehavior.h; path = Behaviors/UI/OTToggleVisibleBehavior.h; sourceTree = "<group>"; };
 		1ED2506C1D5A70EB005C9736 /* OTToggleVisibleBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTToggleVisibleBehavior.m; path = Behaviors/UI/OTToggleVisibleBehavior.m; sourceTree = "<group>"; };
+		1EE8175E1D79F36D0003133D /* OTEntourageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTEntourageRenderer.h; path = Behaviors/Maps/Renderers/OTEntourageRenderer.h; sourceTree = "<group>"; };
+		1EE8175F1D79F36D0003133D /* OTEntourageRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTEntourageRenderer.m; path = Behaviors/Maps/Renderers/OTEntourageRenderer.m; sourceTree = "<group>"; };
 		1EE9E5F31D5CDA770045904A /* OTMyEntourageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMyEntourageFilter.h; sourceTree = "<group>"; };
 		1EE9E5F41D5CDA770045904A /* OTMyEntourageFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMyEntourageFilter.m; sourceTree = "<group>"; };
 		1EE9E5F71D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesFiltersTableDataSource.h; path = Behaviors/UITableView/MyEntouragesFilters/OTMyEntouragesFiltersTableDataSource.h; sourceTree = "<group>"; };
@@ -1389,10 +1392,20 @@
 		1ECFB3621D52525C00722DAC /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				1EE8175D1D79F3440003133D /* Renderers */,
 				1E5EBCEA1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.h */,
 				1E5EBCEB1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.m */,
 			);
 			name = Map;
+			sourceTree = "<group>";
+		};
+		1EE8175D1D79F3440003133D /* Renderers */ = {
+			isa = PBXGroup;
+			children = (
+				1EE8175E1D79F36D0003133D /* OTEntourageRenderer.h */,
+				1EE8175F1D79F36D0003133D /* OTEntourageRenderer.m */,
+			);
+			name = Renderers;
 			sourceTree = "<group>";
 		};
 		1EE9E5F61D5CE0A70045904A /* MyEntouragesFilters */ = {
@@ -2404,6 +2417,7 @@
 				1E5C301E1D6F671200E10770 /* OTMembersDataSource.m in Sources */,
 				2EDA5F071CB50CEE00849172 /* OTFeedItemsTableView.m in Sources */,
 				1E5EBCEF1D53CECF006695F1 /* OTStatusBehavior.m in Sources */,
+				1EE817601D79F36D0003133D /* OTEntourageRenderer.m in Sources */,
 				1E488E1B1D4FB99300A2E5B0 /* OTNotificationsRightsViewController.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				1EC9D6821D6468A800C6E9AA /* OTInvitationsService.m in Sources */,

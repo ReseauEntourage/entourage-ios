@@ -13,7 +13,7 @@
 
 - (CLLocationCoordinate2D)startPoint;
 - (id<MKAnnotation>)annotationFor:(CLLocationCoordinate2D)coordinate;
-- (MKPolyline *)lineData;
-- (MKOverlayRenderer *)rendererFor:(MKPolyline *)line;
+- (id<MKOverlay>)newsFeedOverlayData;
+- (MKOverlayRenderer *)newsFeedOverlayRenderer:(id<MKOverlay>)overlay;
 
 @end
