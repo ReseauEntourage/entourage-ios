@@ -217,8 +217,8 @@
 
 "filter_timeframe_title" = "Affichage des entourages";
 "filter_timeframe_days_1" = "24H";
-"filter_timeframe_days_2" = "2J";
-"filter_timeframe_days_3" = "3J";
+"filter_timeframe_days_2" = "8J";
+"filter_timeframe_days_3" = "30J";
 
 // API
 "url_send_tour" = "%@.json?token=%@";

@@ -39,11 +39,11 @@
     [self.btn2Days setSelected:self.btn2Days == sender];
     [self.btn3Days setSelected:self.btn3Days == sender];
     if(self.btn3Days.isSelected)
-        filter.timeframeInHours = 72;
-    else if(self.btn2Days.isSelected)
-        filter.timeframeInHours = 48;
-    else
+        filter.timeframeInHours = 30*24;
+    else if(self.btn1Days.isSelected)
         filter.timeframeInHours = 24;
+    else
+        filter.timeframeInHours = 8*24;
     self.btn1Day.titleLabel.font = self.btn1Day == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
     self.btn2Days.titleLabel.font = self.btn2Days == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
     self.btn3Days.titleLabel.font = self.btn3Days == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
