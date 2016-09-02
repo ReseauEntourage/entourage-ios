@@ -29,11 +29,10 @@
 "doRegenerateCode" = "Redemander un code";
 "doIgnore" = "Ignorer";
 "alreadyRegisteredMessage" = "Le numéro est déjà enregistré. Vous avez dû recevoir le code pas SMS.";
-"automaticJoinFailedMessage" = "!!Failed to join entourage automatically. Check my entourages invitations list and try again.";
-"joiningEntouragesMessage" = "!!Joining entourages";
-"acceptJoinFailed" = "!!Failed to accept entourage invitation.";
-"ignoreJoinFailed" = "!!Failed to ignore entourage invitation";
-
+"automaticJoinFailedMessage" = "Impossible de rejoindre l’entourage. Verifiez la liste des invitations et réessayez.";
+"joiningEntouragesMessage" = "Invitations en cours";
+"acceptJoinFailed" = "Impossible d’accepter l’invitation.";
+"ignoreJoinFailed" = "Impossible de refuser l’invitation.";
 
 // MenuItems
 "menu_amis" = "Amis";
@@ -139,13 +138,13 @@
 "myLocation" = "Ma position";
 "searchLocationPlaceholder" = "Chercher ou déplacer la carte";
 "formater_by" = "%@ par ";
-"entourageCreated" = "Entourage créée";
-"entourageNotCreated" = "Echec de la création de entourage";
-"entourageUpdated" = "!!Entourage updated";
-"entourageNotUpdated" = "!!Failed to update entourage";
-"entourageQuitted" = "Entourage clôturée.";
-"addressBookDenied" = "!!Permission to access address book denied. You can reenable it from application settings.";
-"inviteByPhoneFailed" = "!!Failed to invite user by phone.";
+"entourageCreated" = "Entourage créé";
+"entourageNotCreated" = "Echec de la création de l’entourage";
+"entourageUpdated" = "Entourage mis à jour";
+"entourageNotUpdated" = "Impossible de mettre à jour l’entourage";
+"entourageQuitted" = "Entourage clôturé.";
+"addressBookDenied" = "Impossible d’accéder au carnet d’adresses. Vous devez activer la permission depuis les paramètres.";
+"inviteByPhoneFailed" = "Impossible d’inviter ce numéro de téléphone.";
 "invitations" = "Invitations";
 "organiser" = "Organisateur";
 "closed" = "Passé";
@@ -165,7 +164,7 @@
 
 // POI
 "poi_create_contribution_alert" = "Si vous désirez créer une contribution, vouz devez quitter le guide de solidarité";
-"poi_create_demande_alert" = "Si vous désirez créer une demande, vouz devez quitter le guide de solidarité";
+"poi_create_demande_alert" = "Si vous désirez créer une demande, vous devez quitter le guide de solidarité";
 "poi_create_encounter_alert" = "Si vous désirez créer une rencontre, vouz devez quitter le guide de solidarité";
 "poi_create_tour_alert" = "Si vous désirez créer une maraude, vouz devez quitter le guide de solidarité";
 
