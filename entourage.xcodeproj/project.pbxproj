@@ -167,6 +167,7 @@
 		1ED2506D1D5A70EB005C9736 /* OTToggleVisibleBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED2506C1D5A70EB005C9736 /* OTToggleVisibleBehavior.m */; };
 		1EE817601D79F36D0003133D /* OTEntourageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE8175F1D79F36D0003133D /* OTEntourageRenderer.m */; };
 		1EE817631D7A052C0003133D /* OTOngoingTourService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE817621D7A052C0003133D /* OTOngoingTourService.m */; };
+		1EE8176A1D7A1BBE0003133D /* OTOnboardingNavigationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE817691D7A1BBE0003133D /* OTOnboardingNavigationBehavior.m */; };
 		1EE9E5F51D5CDA770045904A /* OTMyEntourageFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9E5F41D5CDA770045904A /* OTMyEntourageFilter.m */; };
 		1EE9E5F91D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9E5F81D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.m */; };
 		1EE9E5FC1D5CE5780045904A /* OTMyEntouragesFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9E5FB1D5CE5780045904A /* OTMyEntouragesFilterCell.m */; };
@@ -598,6 +599,8 @@
 		1EE8175F1D79F36D0003133D /* OTEntourageRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTEntourageRenderer.m; path = Behaviors/Maps/Renderers/OTEntourageRenderer.m; sourceTree = "<group>"; };
 		1EE817611D7A052C0003133D /* OTOngoingTourService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTOngoingTourService.h; path = Services/OTOngoingTourService.h; sourceTree = "<group>"; };
 		1EE817621D7A052C0003133D /* OTOngoingTourService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTOngoingTourService.m; path = Services/OTOngoingTourService.m; sourceTree = "<group>"; };
+		1EE817681D7A1BBE0003133D /* OTOnboardingNavigationBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTOnboardingNavigationBehavior.h; path = Behaviors/Onboarding/OTOnboardingNavigationBehavior.h; sourceTree = "<group>"; };
+		1EE817691D7A1BBE0003133D /* OTOnboardingNavigationBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTOnboardingNavigationBehavior.m; path = Behaviors/Onboarding/OTOnboardingNavigationBehavior.m; sourceTree = "<group>"; };
 		1EE9E5F31D5CDA770045904A /* OTMyEntourageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMyEntourageFilter.h; sourceTree = "<group>"; };
 		1EE9E5F41D5CDA770045904A /* OTMyEntourageFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMyEntourageFilter.m; sourceTree = "<group>"; };
 		1EE9E5F71D5CE1080045904A /* OTMyEntouragesFiltersTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesFiltersTableDataSource.h; path = Behaviors/UITableView/MyEntouragesFilters/OTMyEntouragesFiltersTableDataSource.h; sourceTree = "<group>"; };
@@ -1271,6 +1274,7 @@
 		1E9003661D34FA90004E18BC /* Behaviors */ = {
 			isa = PBXGroup;
 			children = (
+				1EE817671D7A1B810003133D /* Onboarding */,
 				1E8845931D5DDAB900747223 /* MyEntourages */,
 				1E8E16EA1D5A6EE2005C42ED /* UI */,
 				1E5F79851D5A12160005003C /* UICollectionView */,
@@ -1411,6 +1415,15 @@
 				1EE8175F1D79F36D0003133D /* OTEntourageRenderer.m */,
 			);
 			name = Renderers;
+			sourceTree = "<group>";
+		};
+		1EE817671D7A1B810003133D /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				1EE817681D7A1BBE0003133D /* OTOnboardingNavigationBehavior.h */,
+				1EE817691D7A1BBE0003133D /* OTOnboardingNavigationBehavior.m */,
+			);
+			name = Onboarding;
 			sourceTree = "<group>";
 		};
 		1EE9E5F61D5CE0A70045904A /* MyEntouragesFilters */ = {
@@ -2425,6 +2438,7 @@
 				1E5EBCEF1D53CECF006695F1 /* OTStatusBehavior.m in Sources */,
 				1EE817601D79F36D0003133D /* OTEntourageRenderer.m in Sources */,
 				1E488E1B1D4FB99300A2E5B0 /* OTNotificationsRightsViewController.m in Sources */,
+				1EE8176A1D7A1BBE0003133D /* OTOnboardingNavigationBehavior.m in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				1EC9D6821D6468A800C6E9AA /* OTInvitationsService.m in Sources */,
 				45ADCACF1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m in Sources */,

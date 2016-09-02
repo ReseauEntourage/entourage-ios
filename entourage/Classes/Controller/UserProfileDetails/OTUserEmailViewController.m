@@ -20,6 +20,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
 #import "NSError+message.h"
+#import "OTOnboardingNavigationBehavior.h"
 
 @interface OTUserEmailViewController ()
 
@@ -27,6 +28,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+@property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 
 @end
 
@@ -74,7 +76,7 @@
                                                    [[NSUserDefaults standardUserDefaults] synchronize];
 
                                                    [SVProgressHUD dismiss];
-                                                   [self performSegueWithIdentifier:@"EmailToNameSegue" sender:self];
+                                                   [self.onboardingNavigation nextFromEmail];
                                                }
                                                failure:^(NSError *error) {
                                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];

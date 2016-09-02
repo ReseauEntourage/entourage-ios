@@ -35,6 +35,7 @@
 
 // View
 #import "SVProgressHUD.h"
+#import "OTOnboardingNavigationBehavior.h"
 
 /********************************************************************************/
 #pragma mark - Constants
@@ -56,6 +57,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+
+@property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 
 @end
 
@@ -125,7 +128,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid)
                                        [UIStoryboard showSWRevealController];
                                    else
-                                       [self performSegueWithIdentifier:@"UserProfileDetailsSegue" sender:self];
+                                       [self.onboardingNavigation nextFromLogin];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    NSString *alertTitle = OTLocalizedString(@"error");

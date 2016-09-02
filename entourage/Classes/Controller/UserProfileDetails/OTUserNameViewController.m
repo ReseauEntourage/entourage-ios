@@ -20,6 +20,7 @@
 #import "OTAuthService.h"
 #import "OTUserPictureViewController.h"
 #import "NSError+message.h"
+#import "OTOnboardingNavigationBehavior.h"
 
 @interface OTUserNameViewController ()
 
@@ -28,6 +29,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+@property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 
 @end
 
@@ -76,7 +78,7 @@
                                                    user.phone = currentUser.phone;
                                                    [NSUserDefaults standardUserDefaults].currentUser = user;
                                                    [SVProgressHUD dismiss];
-                                                   [self performSegueWithIdentifier:@"AddPictureSegue" sender:self];
+                                                   [self.onboardingNavigation nextFromName];
                                                }
                                                failure:^(NSError *error) {
                                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];

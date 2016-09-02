@@ -21,6 +21,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "NSError+message.h"
 #import "UIStoryboard+entourage.h"
+#import "OTOnboardingNavigationBehavior.h"
 
 @interface OTCodeViewController ()
 
@@ -28,6 +29,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+@property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 
 @end
 
@@ -110,7 +112,7 @@
                                    if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
                                        [UIStoryboard showSWRevealController];
                                    else
-                                       [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:self];
+                                       [self.onboardingNavigation nextFromLogin];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
                                }];

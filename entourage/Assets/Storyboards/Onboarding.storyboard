@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BbA-ED-vfm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BbA-ED-vfm">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -164,10 +164,10 @@ numéro de portable? </string>
             </objects>
             <point key="canvasLocation" x="762" y="-2471"/>
         </scene>
-        <!--Code View Controller-->
+        <!--Code-->
         <scene sceneID="GTN-Qj-BwU">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ay8-4Z-lNJ" customClass="OTCodeViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ay8-4Z-lNJ" userLabel="Code" customClass="OTCodeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZQ0-HI-xvJ"/>
                         <viewControllerLayoutGuide type="bottom" id="yeR-N2-sFF"/>
@@ -341,12 +341,18 @@ vérification</string>
                     <connections>
                         <outlet property="codeTextField" destination="pvY-e5-lmP" id="jpA-hJ-ZDP"/>
                         <outlet property="heightContraint" destination="apC-Kc-icw" id="h6e-pA-KVC"/>
+                        <outlet property="onboardingNavigation" destination="13E-al-jIm" id="bin-ft-ga6"/>
                         <outlet property="scrollView" destination="GL7-KN-5la" id="pQv-r2-Yis"/>
                         <outlet property="validateButton" destination="ZH7-Ij-WiF" id="caZ-eL-9TI"/>
                         <segue destination="WWp-Jk-pyc" kind="show" identifier="CodeToEmailSegue" id="el8-oc-xQX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esw-lb-Cqw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="13E-al-jIm" userLabel="Onboarding Navigation" customClass="OTOnboardingNavigationBehavior">
+                    <connections>
+                        <outlet property="owner" destination="ay8-4Z-lNJ" id="pFF-0E-jMY"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1158" y="-2471"/>
         </scene>
