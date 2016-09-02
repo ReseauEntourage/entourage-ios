@@ -18,10 +18,10 @@
 
 - (void)configureWith:(OTMyEntourageFilter *)filter {
     OTMyEntourageTimeframeFilter *item = (OTMyEntourageTimeframeFilter *)filter;
-    if(item.timeframeInHours == 72)
-        [self activateButton:self.btn3Days withFilter:item];
-    else if(item.timeframeInHours == 48)
-        [self activateButton:self.btn2Days withFilter:item];
+    if(item.timeframeInHours == 30 * 24)
+        [self activateButton:self.btn30Days withFilter:item];
+    else if(item.timeframeInHours == 8 * 24)
+        [self activateButton:self.btn8Days withFilter:item];
     else
         [self activateButton:self.btn1Day withFilter:item];
 }
@@ -36,17 +36,17 @@
 
 - (void)activateButton:(UIButton *)sender withFilter:(OTMyEntourageTimeframeFilter *)filter {
     [self.btn1Day setSelected:self.btn1Day == sender];
-    [self.btn2Days setSelected:self.btn2Days == sender];
-    [self.btn3Days setSelected:self.btn3Days == sender];
-    if(self.btn3Days.isSelected)
-        filter.timeframeInHours = 30*24;
-    else if(self.btn1Days.isSelected)
-        filter.timeframeInHours = 24;
+    [self.btn8Days setSelected:self.btn8Days == sender];
+    [self.btn30Days setSelected:self.btn30Days == sender];
+    if(self.btn30Days.isSelected)
+        filter.timeframeInHours = 30 * 24;
+    else if(self.btn8Days.isSelected)
+        filter.timeframeInHours = 8 * 24;
     else
-        filter.timeframeInHours = 8*24;
+        filter.timeframeInHours = 24;
     self.btn1Day.titleLabel.font = self.btn1Day == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
-    self.btn2Days.titleLabel.font = self.btn2Days == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
-    self.btn3Days.titleLabel.font = self.btn3Days == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
+    self.btn8Days.titleLabel.font = self.btn8Days == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
+    self.btn30Days.titleLabel.font = self.btn30Days == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
 }
 
 @end

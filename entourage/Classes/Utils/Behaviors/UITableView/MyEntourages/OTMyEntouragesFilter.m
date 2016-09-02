@@ -41,7 +41,7 @@
         self.showDemand = YES;
         self.showContribution = YES;
         self.showTours = YES;
-        self.timeframeInHours = 8*24;
+        self.timeframeInHours = 8 * 24;
         self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     }
     return self;

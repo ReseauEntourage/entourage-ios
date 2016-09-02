@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="MH3-uF-0WG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="MH3-uF-0WG">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -603,7 +603,7 @@
                                                                 <constraint firstAttribute="width" constant="46" id="kz6-lu-ncC"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                                            <state key="normal" title="2J" backgroundImage="24HInactive">
+                                                            <state key="normal" title="8J" backgroundImage="24HInactive">
                                                                 <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             </state>
                                                             <state key="selected" title="2J" backgroundImage="24HActive">
@@ -620,7 +620,7 @@
                                                                 <constraint firstAttribute="width" constant="46" id="plU-MD-okZ"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                                            <state key="normal" title="3J" backgroundImage="24HInactive">
+                                                            <state key="normal" title="30J" backgroundImage="24HInactive">
                                                                 <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             </state>
                                                             <state key="selected" title="3J" backgroundImage="24HActive">
@@ -655,8 +655,8 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="btn1Day" destination="FbF-pI-Vfv" id="ceV-Rh-JWE"/>
-                                            <outlet property="btn2Days" destination="SRI-Or-rfy" id="GeJ-F2-nb7"/>
-                                            <outlet property="btn3Days" destination="tKH-mZ-wT2" id="RFf-nN-YGA"/>
+                                            <outlet property="btn30Days" destination="tKH-mZ-wT2" id="Y0Q-e5-QB7"/>
+                                            <outlet property="btn8Days" destination="SRI-Or-rfy" id="nbp-2B-Du6"/>
                                             <outlet property="summaryProvider" destination="eFa-KF-lmI" id="KjJ-d8-7aU"/>
                                             <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="5zA-sV-1af"/>
                                         </connections>

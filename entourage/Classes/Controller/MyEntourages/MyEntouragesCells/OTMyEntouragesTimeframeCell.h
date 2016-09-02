@@ -11,7 +11,7 @@
 @interface OTMyEntouragesTimeframeCell : OTMyEntouragesFilterCellBase
 
 @property (nonatomic, weak) IBOutlet UIButton *btn1Day;
-@property (nonatomic, weak) IBOutlet UIButton *btn2Days;
-@property (nonatomic, weak) IBOutlet UIButton *btn3Days;
+@property (nonatomic, weak) IBOutlet UIButton *btn8Days;
+@property (nonatomic, weak) IBOutlet UIButton *btn30Days;
 
 @end
