@@ -18,6 +18,7 @@
 #import "UIColor+entourage.h"
 #import "OTEntourageAnnotationView.h"
 #import "OTConsts.h"
+#import "OTOngoingTourService.h"
 
 @interface OTToursMapDelegate ()
 
@@ -147,7 +148,7 @@
 
         OTTour *tour = [self.drawnTours objectForKey:polyline];
         aRenderer.strokeColor = [OTTour colorForTourType:tour.type];
-        if (self.mapController.isTourRunning && tour == nil) {
+        if ([OTOngoingTourService sharedInstance].isOngoing && tour == nil) {
             aRenderer.strokeColor = [OTTour colorForTourType:self.mapController.currentTourType];
         }
         aRenderer.lineWidth = MAP_TOUR_LINE_WIDTH;

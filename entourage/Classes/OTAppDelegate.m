@@ -19,6 +19,7 @@
 #import "OTAuthService.h"
 #import "OTDeepLinkService.h"
 #import "OTMainViewController.h"
+#import "OTOngoingTourService.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -72,12 +73,8 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    UIViewController *topController = [[OTDeepLinkService new] getTopViewController];
-    if([topController isKindOfClass:[OTMainViewController class]]) {
-        OTMainViewController *controller = (OTMainViewController *)topController;
-        if(controller.isTourRunning)
-            return;
-    }
+    if([OTOngoingTourService sharedInstance].isOngoing)
+        return;
     [[OTLocationManager sharedInstance] stopLocationUpdates];
 }
 

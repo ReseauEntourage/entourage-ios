@@ -80,6 +80,8 @@
 #import "NSNotification+entourage.h"
 #import "OTFeedItemFactory.h"
 
+#import "OTOngoingTourService.h"
+
 #define MAPVIEW_HEIGHT 160.f
 
 #define MIN_ENTOURAGE_HEATZONE 500.0f // m
@@ -183,7 +185,7 @@
     
     self.mapSegmentedControl.layer.cornerRadius = 5;
     [self switchToNewsfeed];
-    if (self.isTourRunning) {
+    if ([OTOngoingTourService sharedInstance].isOngoing) {
         [self showNewTourOnGoing];
     } else {
         [self showToursMap];
@@ -191,7 +193,7 @@
     
     [self clearMap];
     
-    if (self.isTourRunning) {
+    if ([OTOngoingTourService sharedInstance].isOngoing) {
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = NO;
         self.stopButton.hidden = NO;
@@ -311,7 +313,7 @@
     
     self.mapPoint = touchPoint;
     
-    if (self.isTourRunning) {
+    if ([OTOngoingTourService sharedInstance].isOngoing) {
         CLLocationCoordinate2D whereTap = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
         CLLocation *location = [[CLLocation alloc] initWithLatitude:whereTap.latitude longitude:whereTap.longitude];
         CLLocation *userLocation = [[CLLocation alloc]
@@ -351,7 +353,7 @@
 - (void)appWillEnterBackground:(NSNotification*)note {
     NSLog(@">>>>>>>>>>>>>>>>>>>>> APP ENTERS BACKGROUND!!!");
     [self.refreshTimer invalidate];
-    if (self.isTourRunning) {
+    if ([OTOngoingTourService sharedInstance].isOngoing) {
         [self createLocalNotificationForTour:self.tour.uid];
     } else {
         //[self.locationManager stopUpdatingLocation];
@@ -742,7 +744,7 @@ static BOOL didGetAnyData = NO;
         
         if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20 && fabs(distance) > LOCATION_MIN_DISTANCE) {
             
-            if (self.locations.count > 0 && self.isTourRunning) {
+            if (self.locations.count > 0 && [OTOngoingTourService sharedInstance].isOngoing) {
                 [self addTourPointFromLocation:newLocation];
                 if (self.toursMapDelegate.isActive) {
                     // draw tour line
@@ -820,7 +822,7 @@ static bool isShowingOptions = NO;
              
              OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:self.mapView.userLocation.location];
              [self.pointsToSend addObject:tourPoint];
-             self.isTourRunning = YES;
+             [OTOngoingTourService sharedInstance].isOngoing = YES;
              self.launcherButton.enabled = YES;
              
              if ([self.pointsToSend count] > 0) {
@@ -914,7 +916,7 @@ static bool isShowingOptions = NO;
     self.launcherButton.hidden = NO;
     self.stopButton.hidden = YES;
     self.createEncounterButton.hidden = YES;
-    self.isTourRunning = NO;
+    [OTOngoingTourService sharedInstance].isOngoing = NO;
     self.requestedToursCoordinate = CLLocationCoordinate2DMake(0.0f, 0.0f);
     [self clearMap];
     [self forceGetNewData];
@@ -926,7 +928,7 @@ static bool isShowingOptions = NO;
 }
 
 - (void)resumeTour {
-    self.isTourRunning = YES;
+    [OTOngoingTourService sharedInstance].isOngoing = YES;
     self.stopButton.hidden = NO;
     self.createEncounterButton.hidden = NO;
 }
@@ -1015,7 +1017,7 @@ static bool isShowingOptions = NO;
 
 - (void)dismissOptions {
     [self dismissViewControllerAnimated:YES completion:^{
-        if (self.isTourRunning) {
+        if ([OTOngoingTourService sharedInstance].isOngoing) {
             [self showNewTourOnGoing];
         }
     }];
@@ -1142,7 +1144,7 @@ static bool isShowingOptions = NO;
             [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
             break;
         case FeedItemStateOngoing:
-            if (self.isTourRunning && feedItem.uid.intValue == self.tour.uid.intValue)
+            if ([OTOngoingTourService sharedInstance].isOngoing && feedItem.uid.intValue == self.tour.uid.intValue)
                 [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
             break;
         case FeedItemStateOpen:
@@ -1223,7 +1225,7 @@ static bool isShowingOptions = NO;
 }
 
 - (void)showTourConfirmation {
-    if(self.isTourRunning)
+    if([OTOngoingTourService sharedInstance].isOngoing)
         [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
 }
 
@@ -1271,7 +1273,7 @@ static bool isShowingOptions = NO;
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.view.backgroundColor = [UIColor appModalBackgroundColor];
         controller.delegate = self;
-        self.isTourRunning = NO;
+        [OTOngoingTourService sharedInstance].isOngoing = NO;
         [controller configureWithTour:self.tour
                    andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]];
     }
@@ -1310,7 +1312,7 @@ static bool isShowingOptions = NO;
     else if([segue.identifier isEqualToString:@"GuideSegue"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTGuideViewController *controller = (OTGuideViewController *)navController.childViewControllers[0];
-        [controller setIsTourRunning:self.isTourRunning];
+        [controller setIsTourRunning:[OTOngoingTourService sharedInstance].isOngoing];
     }
     else if([segue.identifier isEqualToString:@"OTGuideDetailsSegue"]) {
         UINavigationController *navController = (UINavigationController*)destinationViewController;
