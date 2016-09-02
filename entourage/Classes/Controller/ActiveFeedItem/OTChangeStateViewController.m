@@ -7,10 +7,13 @@
 //
 
 #import "OTChangeStateViewController.h"
+#import "OTToggleVisibleBehavior.h"
+#import "OTFeedItemFactory.h"
 
 @interface OTChangeStateViewController ()
 
 @property (nonatomic, strong) IBOutlet OTNextStatusButtonBehavior *nextStatusBehavior;
+@property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior *toggleEditBehavior;
 
 @end
 
@@ -19,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.toggleEditBehavior initialize];
+    [self.toggleEditBehavior toggle:[[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canEdit] animated:NO];
     [self.nextStatusBehavior configureWith:self.feedItem andProtocol:self.delegate];
 }
 

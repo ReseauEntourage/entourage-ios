@@ -57,6 +57,10 @@
     return ![self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
 }
 
+- (BOOL)canEdit {
+    return YES;
+}
+
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
     [[OTEntourageService new] getEntourageWithId:self.entourage.uid withSuccess:^(OTEntourage *entourage) {
        if(success)
