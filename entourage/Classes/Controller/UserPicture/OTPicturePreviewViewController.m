@@ -39,14 +39,9 @@
     self.scrollView.layer.borderColor = [UIColor whiteColor].CGColor;
 }
 
-static BOOL wasShown = YES;
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    if (wasShown) {
-        [self updateMinZoomScaleForSize:self.view.bounds.size];
-    } else {
-        //wasShown = YES;
-    }
+    [self updateMinZoomScaleForSize:self.view.bounds.size];
 }
 
 - (IBAction)doContinue {
@@ -99,7 +94,6 @@ static BOOL wasShown = YES;
 - (UIImage*)imageByCropping:(UIImage *)myImage toRect:(CGRect)cropToArea{
     CGImageRef cropImageRef = CGImageCreateWithImageInRect(myImage.CGImage, cropToArea);
     UIImage* cropped = [UIImage imageWithCGImage:cropImageRef];
-    
     CGImageRelease(cropImageRef);
     return cropped;
 }
@@ -117,7 +111,6 @@ static BOOL wasShown = YES;
     CGFloat maxScale = MAX(widthScale, heightScale);
     self.scrollView.minimumZoomScale = minScale;
     self.scrollView.zoomScale = minScale;
-
     
     UIImage *image = self.imageView.image;
     if (image.imageOrientation != UIImageOrientationLeft && image.imageOrientation != UIImageOrientationRight)

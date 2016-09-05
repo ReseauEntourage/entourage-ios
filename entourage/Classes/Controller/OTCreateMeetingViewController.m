@@ -63,16 +63,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
-    
-    
     self.isRecording = NO;
-    
     [self setupUI];
-    
     [OTSpeechKitManager setup];
-    
-    if (![NSUserDefaults wasDisclaimerAccepted])
+    //if (![NSUserDefaults wasDisclaimerAccepted])
         [self performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
 }
 
@@ -116,17 +112,15 @@
     encounter.latitude = self.location.latitude;
     encounter.longitude = self.location.longitude;
     [SVProgressHUD show];
-    [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId
-                                withSuccess:^(OTEncounter *sentEncounter) {
-                                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
-                                    [self.encounters addObject:encounter];
-                                    [self.delegate encounterSent:encounter];
-                                    //[self.navigationController popViewControllerAnimated:YES];
-                                }
-                                failure:^(NSError *error) {
-                                    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
-                                    sender.enabled = YES;
-                                }];
+    [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId withSuccess:^(OTEncounter *sentEncounter) {
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
+        [self.encounters addObject:encounter];
+        [self.delegate encounterSent:encounter];
+    }
+    failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
+        sender.enabled = YES;
+    }];
 }
 
 /**************************************************************************************************/
@@ -225,14 +219,12 @@
 - (void)disclaimerWasAccepted {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDisclaimer];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)disclaimerWasRejected {
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kDisclaimer];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
     [self dismissViewControllerAnimated:YES completion:^{
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
@@ -243,12 +235,10 @@
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     UINavigationController *navigationViewController = segue.destinationViewController;
     UIViewController *destinationViewController = navigationViewController.topViewController;
-    if ([destinationViewController isKindOfClass:[OTDisclaimerViewController class]]) {
+    if ([destinationViewController isKindOfClass:[OTDisclaimerViewController class]])
         ((OTDisclaimerViewController*)destinationViewController).disclaimerDelegate = self;
-    }
 }
 
 @end
