@@ -59,6 +59,7 @@ static BOOL wasShown = YES;
             // TODO phone is not in response so need to restore it manually
             user.phone = currentUser.phone;
             [NSUserDefaults standardUserDefaults].currentUser = user;
+            self.scrollView.delegate = nil;
             if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
                 [self popToProfile];
             else
