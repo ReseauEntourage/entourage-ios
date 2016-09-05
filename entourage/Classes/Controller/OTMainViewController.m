@@ -1144,8 +1144,9 @@ static bool isShowingOptions = NO;
             [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
             break;
         case FeedItemStateOngoing:
-            if ([OTOngoingTourService sharedInstance].isOngoing && feedItem.uid.intValue == self.tour.uid.intValue)
-                [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
+            self.tour = (OTTour *)feedItem;
+            [OTOngoingTourService sharedInstance].isOngoing = YES;
+            [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
             break;
         case FeedItemStateOpen:
         case FeedItemStateClosed: {
