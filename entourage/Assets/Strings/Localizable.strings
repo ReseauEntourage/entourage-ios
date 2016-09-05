@@ -83,7 +83,7 @@
 
 // Disclaimer
 "encounter_disclaimer" = "Bonjour,\n\nNous vous rappelons qu'en vertu de la charte d'Entourage (http://entourage.social/cgu), vous devez vous assurer que les personnes que vous rencontrerez consentent à ce que des données sur vos échanges soient stockées et échangées au sein de votre association.";
-"entourage_disclaimer" = "Bonjour,\n\nnous vous rappelons qu\'en vertu de la charte d\'Entourage (http://entourage.social/cgu), vous devez vous assurer que les personnes que vous rencontrerez consentent à ce que des données sur vos échanges soient stockées et échangées au sein de votre association.\nNous vous rappellons que la position précise des entourages restera privée et ne sera pas diffusée.";
+"entourage_disclaimer" = "Bonjour,\n\nNous vous rappelons qu\'en vertu de la charte d\'Entourage (http://entourage.social/cgu), vous devez vous assurer que les personnes que vous rencontrerez consentent à ce que des données sur vos échanges soient stockées et échangées au sein de votre association.\nNous vous rappellons que la position précise des entourages restera privée et ne sera pas diffusée.";
 
 // Tour
 "tour_type_bare_hands" = "barehands";

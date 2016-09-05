@@ -56,13 +56,9 @@
     [[OTEntourageService new] entourageUsers:self.entourage success:^(NSArray *items) {
         NSLog(@"GET ENTOURAGE JOINS");
         if(success) {
-            if(!status) {
-                success(items);
-                return;
-            }
             NSNumber *currentUserId = [NSUserDefaults standardUserDefaults].currentUser.sid;
             NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
-                return ![item.uID isEqual:currentUserId] && [item.status isEqualToString:status];
+                return ![item.uID isEqual:currentUserId] && (!status || [item.status isEqualToString:status]);
             }]];
             success(filteredItems);
         }
@@ -79,16 +75,7 @@
 }
 
 - (NSArray *)getTimelineStatusMessages {
-    OTFeedItemStatus *status = [OTFeedItemStatus new];
-    status.date = self.entourage.creationDate;
-    status.type = OTFeedItemStatusStart;
-    status.status = [NSString stringWithFormat: OTLocalizedString(@"formatter_feed_item_status_ongoing"), [[[OTFeedItemFactory createFor:self.entourage] getUI] navigationTitle]];
-    NSDate *now = [NSDate date];
-    status.duration = [now timeIntervalSinceDate:self.entourage.creationDate];
-    status.distance = 0;
-    status.uID = self.entourage.uid;
-    
-    return @[status];
+    return [NSArray new];
 }
 
 @end
