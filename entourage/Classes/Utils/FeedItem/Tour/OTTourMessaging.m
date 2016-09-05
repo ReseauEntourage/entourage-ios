@@ -47,13 +47,9 @@
     [[OTTourService new] tourUsers:self.tour success:^(NSArray *items) {
         NSLog(@"GET TOUR JOINS");
         if(success) {
-            if(!status) {
-                success(items);
-                return;
-            }
             NSNumber *currentUserId = [NSUserDefaults standardUserDefaults].currentUser.sid;
             NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
-                return ![item.uID isEqual:currentUserId] && [item.status isEqualToString:status];
+                return ![item.uID isEqual:currentUserId] && (!status || [item.status isEqualToString:status]);
             }]];
             success(filteredItems);
         }
