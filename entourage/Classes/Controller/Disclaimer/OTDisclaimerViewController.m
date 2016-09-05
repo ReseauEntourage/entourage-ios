@@ -12,31 +12,19 @@
 
 @interface OTDisclaimerViewController ()
 
+@property (nonatomic, weak) IBOutlet UITextView *txtMessage;
+
 @end
 
 @implementation OTDisclaimerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    self.txtMessage.text = self.disclaimerText;
     UIBarButtonItem *rejectDisclaimerButton =  [self setupCloseModal];
     [rejectDisclaimerButton setAction:@selector(doRejectDisclaimer)];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)doAcceptDisclaimer {
     
@@ -47,7 +35,6 @@
 - (void)doRejectDisclaimer {
     if ([self.disclaimerDelegate respondsToSelector:@selector(disclaimerWasRejected)])
         [self.disclaimerDelegate disclaimerWasRejected];
-
 }
 
 @end

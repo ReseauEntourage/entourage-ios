@@ -23,6 +23,7 @@
 
 // Progress HUD
 #import "SVProgressHUD.h"
+#import "OTEntourageDisclaimerBehavior.h"
 
 @interface OTEntourageEditorViewController() <LocationSelectionDelegate>
 
@@ -32,6 +33,7 @@
 
 @property (nonatomic, weak) IBOutlet OTSpeechBehavior *titleSpeechBehavior;
 @property (nonatomic, weak) IBOutlet OTSpeechBehavior *descriptionSpeechBehavior;
+@property (nonatomic, weak) IBOutlet OTEntourageDisclaimerBehavior *disclaimer;
 
 @end
 
@@ -47,6 +49,7 @@
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEntourage:) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
     [self setupUI];
+    [self.disclaimer showDisclaimer];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -162,6 +165,9 @@
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([self.disclaimer prepareSegue:segue])
+        return;
+    
     UIViewController *destinationViewController = segue.destinationViewController;
     if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]])
         ((OTLocationSelectorViewController*)destinationViewController).locationSelectionDelegate = self;

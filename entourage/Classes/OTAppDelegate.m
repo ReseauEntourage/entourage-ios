@@ -83,7 +83,8 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 - (void)popToLogin:(NSNotification *)notification {
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"device_token"];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kDisclaimer];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kEncounterDisclaimer];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kEntourageDisclaimer];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];

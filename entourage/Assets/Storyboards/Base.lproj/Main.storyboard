@@ -501,10 +501,10 @@
             </objects>
             <point key="canvasLocation" x="827" y="45"/>
         </scene>
-        <!--Create Meeting View Controller-->
+        <!--Create Meeting-->
         <scene sceneID="NWf-ex-TvX">
             <objects>
-                <viewController storyboardIdentifier="OTCreateMeetingViewController" id="b2A-wG-Mz4" customClass="OTCreateMeetingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTCreateMeetingViewController" id="b2A-wG-Mz4" userLabel="Create Meeting" customClass="OTCreateMeetingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Ke-cm-KmY"/>
                         <viewControllerLayoutGuide type="bottom" id="LVP-zg-cRX"/>
@@ -618,17 +618,37 @@
                     <navigationItem key="navigationItem" id="W6d-Ku-j18"/>
                     <connections>
                         <outlet property="dateLabel" destination="2uf-2Y-z5H" id="b2A-nh-SMK"/>
+                        <outlet property="disclaimer" destination="ddg-Dy-Uuq" id="jF2-Xs-8Tz"/>
                         <outlet property="firstLabel" destination="KDZ-i8-4OP" id="1uL-Bh-XUo"/>
                         <outlet property="messageTextView" destination="Ial-X5-VCO" id="ilC-Qg-MDD"/>
                         <outlet property="nameTextField" destination="a5N-Kb-CX4" id="gpj-ZW-kua"/>
-                        <outlet property="recordButton" destination="Qot-mm-bch" id="obm-nd-SjT"/>
                         <outlet property="recordingLoader" destination="Qvq-t4-y7g" id="Nwc-dt-IkA"/>
-                        <segue destination="9dY-SB-iaF" kind="modal" identifier="DisclaimerSegue" id="kmM-Ah-gnZ"/>
+                        <outlet property="speechBehavior" destination="UaS-lC-hUC" id="hJF-qN-9YY"/>
+                        <segue destination="8IU-nr-TCd" kind="modal" identifier="DisclaimerSegue" id="p9T-Ew-O9g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zCS-BA-fyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="ddg-Dy-Uuq" userLabel="Encounter Disclaimer" customClass="OTEncounterDisclaimerBehavior">
+                    <connections>
+                        <outlet property="owner" destination="b2A-wG-Mz4" id="7th-vp-Oci"/>
+                    </connections>
+                </customObject>
+                <customObject id="UaS-lC-hUC" userLabel="Speech" customClass="OTSpeechBehavior">
+                    <connections>
+                        <outlet property="btnRecord" destination="Qot-mm-bch" id="0s9-6u-b70"/>
+                        <outlet property="txtOutput" destination="Ial-X5-VCO" id="Hru-BV-jdc"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="-112" y="1490"/>
+        </scene>
+        <!--Disclaimer-->
+        <scene sceneID="yDO-BU-eCK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Disclaimer" id="8IU-nr-TCd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5rP-dk-Txa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="191" y="1490"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="CD4-Ww-qZf">
@@ -1038,77 +1058,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f44-Ea-6he" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="541" y="965"/>
-        </scene>
-        <!--Disclaimer View Controller-->
-        <scene sceneID="2C6-y0-nAz">
-            <objects>
-                <viewController id="zDc-da-doR" customClass="OTDisclaimerViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="wtM-uy-cwT"/>
-                        <viewControllerLayoutGuide type="bottom" id="ESU-9c-38g"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lIC-lT-L5B">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zse-oR-8BS">
-                                <rect key="frame" x="12" y="64" width="296" height="447"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <string key="text">Bonjour, 
-
-Nous vous rappelons qu'en vertu de la charte d'Entourage (http://entourage.social/cgu), vous devez vous assurer que les personnes que vous rencontrerez consentent à ce que des données sur vos échanges soient stockées et échangées au sein de votre association.</string>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES" calendarEvent="YES"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OtU-nq-qE1">
-                                <rect key="frame" x="-4" y="511" width="328" height="57"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="57" id="3Sk-1e-qXO"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="J'ai lu et j'accepte">
-                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="doAcceptDisclaimer" destination="zDc-da-doR" eventType="touchUpInside" id="l2Y-fw-wRN"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="Zse-oR-8BS" firstAttribute="top" secondItem="wtM-uy-cwT" secondAttribute="bottom" id="J9B-Ul-GpM"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Zse-oR-8BS" secondAttribute="trailing" constant="-4" id="OIi-oW-Efi"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="OtU-nq-qE1" secondAttribute="trailing" constant="-20" id="e1c-kT-C70"/>
-                            <constraint firstItem="OtU-nq-qE1" firstAttribute="leading" secondItem="lIC-lT-L5B" secondAttribute="leadingMargin" constant="-20" id="hZl-xP-Vhq"/>
-                            <constraint firstItem="OtU-nq-qE1" firstAttribute="top" secondItem="Zse-oR-8BS" secondAttribute="bottom" id="s18-6H-gcQ"/>
-                            <constraint firstItem="ESU-9c-38g" firstAttribute="top" secondItem="OtU-nq-qE1" secondAttribute="bottom" id="tC1-1b-syb"/>
-                            <constraint firstItem="Zse-oR-8BS" firstAttribute="leading" secondItem="lIC-lT-L5B" secondAttribute="leadingMargin" constant="-4" id="tMH-DV-Eqa"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="04C-A8-PBS"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MZ0-4A-UO9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="690" y="1490"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="m97-MD-k5D">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="41G-Vd-9R6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9dY-SB-iaF" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sgn-4F-2CA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="zDc-da-doR" kind="relationship" relationship="rootViewController" id="f5Y-Cw-hd1"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="289" y="1490"/>
         </scene>
     </scenes>
     <resources>

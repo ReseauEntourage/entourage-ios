@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QW3-Z2-faC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QW3-Z2-faC">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Entourage Editor View Controller-->
+        <!--Entourage Editor-->
         <scene sceneID="1KP-Ao-jAx">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="UEB-Je-c5t" customClass="OTEntourageEditorViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="UEB-Je-c5t" userLabel="Entourage Editor" customClass="OTEntourageEditorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dEQ-Bo-9Bm"/>
                         <viewControllerLayoutGuide type="bottom" id="Ysa-oq-h9F"/>
@@ -165,9 +165,11 @@
                     <connections>
                         <outlet property="descriptionSpeechBehavior" destination="WHP-f1-Giq" id="bqz-13-pop"/>
                         <outlet property="descriptionTextView" destination="HZx-CX-XAj" id="lqv-yn-ewZ"/>
+                        <outlet property="disclaimer" destination="wTf-Kj-drU" id="QPW-FK-jXB"/>
                         <outlet property="locationButton" destination="TMq-vF-SkB" id="mAT-hP-ehE"/>
                         <outlet property="titleSpeechBehavior" destination="E8P-ny-BW9" id="uGc-17-YT1"/>
                         <outlet property="titleTextView" destination="zAO-qi-LuA" id="zJ9-Kb-Xpx"/>
+                        <segue destination="Ymp-mL-8r9" kind="modal" identifier="DisclaimerSegue" id="KGd-gj-kcs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S0x-1A-brf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -189,8 +191,21 @@
                         <outlet property="txtOutput" destination="HZx-CX-XAj" id="X3r-tK-CQA"/>
                     </connections>
                 </customObject>
+                <customObject id="wTf-Kj-drU" customClass="OTEntourageDisclaimerBehavior">
+                    <connections>
+                        <outlet property="owner" destination="UEB-Je-c5t" id="AXD-gu-ml7"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="821" y="1490"/>
+        </scene>
+        <!--Disclaimer-->
+        <scene sceneID="eez-DQ-Rzy">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Disclaimer" id="Ymp-mL-8r9" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DdM-0f-4nq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="821" y="1906"/>
         </scene>
         <!--Location Selector View Controller-->
         <scene sceneID="B4W-mf-Ptt">
@@ -294,7 +309,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y0v-3B-7BI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1553" y="1489"/>
+            <point key="canvasLocation" x="1647" y="1488"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZVz-al-EeJ">
@@ -312,7 +327,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3i-sO-LDU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="364" y="1490"/>
+            <point key="canvasLocation" x="432" y="1490"/>
         </scene>
     </scenes>
     <resources>

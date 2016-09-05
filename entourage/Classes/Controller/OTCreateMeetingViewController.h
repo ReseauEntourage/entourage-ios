@@ -9,12 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MKMapView.h>
 
-// Frameworks
-#import <AudioToolbox/AudioToolbox.h>
-#import <AVFoundation/AVFoundation.h>
-#import <SpeechKit/SpeechKit.h>
-#import "OTSpeechKitManager.h"
-
 @class OTEncounter;
 
 @protocol OTCreateMeetingViewControllerDelegate <NSObject>
@@ -23,14 +17,11 @@
 
 @end
 
-@interface OTCreateMeetingViewController : UIViewController <SpeechKitDelegate, SKRecognizerDelegate>
+@interface OTCreateMeetingViewController : UIViewController
 
 @property (nonatomic, weak) id<OTCreateMeetingViewControllerDelegate> delegate;
-@property (nonatomic, strong) SKRecognizer *recognizer;
 @property (nonatomic, strong) NSMutableArray *encounters;
 
-
-- (void)configureWithTourId:(NSNumber *)currentTourId
-                andLocation:(CLLocationCoordinate2D)location;
+- (void)configureWithTourId:(NSNumber *)currentTourId andLocation:(CLLocationCoordinate2D)location;
 
 @end

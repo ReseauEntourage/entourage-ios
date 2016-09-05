@@ -4,7 +4,8 @@
 
 @class OTUser;
 
-static NSString *const kDisclaimer   = @"kDisclaimer";
+static NSString *const kEncounterDisclaimer = @"kEncounterDisclaimer";
+static NSString *const kEntourageDisclaimer = @"kEntourgageDisclaimer";
 extern NSString *const kTutorialDone;
 
 @interface NSUserDefaults (OT)
@@ -12,8 +13,8 @@ extern NSString *const kTutorialDone;
 @property (nonatomic, strong) OTUser *currentUser;
 @property (nonatomic, strong) OTUser *temporaryUser;
 
-+ (BOOL)wasDisclaimerAccepted;
-
++ (BOOL)wasEncounterDisclaimerAccepted;
++ (BOOL)wasEntourageDisclaimerAccepted;
 - (BOOL)isTutorialCompleted;
 
 @end
