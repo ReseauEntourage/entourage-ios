@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "OTUser.h"
+#import "OTPushNotificationsData.h"
 
 #define INVITATION_ACCEPTED @"accepted"
 #define INVITATION_PENDING @"pending"
@@ -21,5 +22,6 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)arrayForWebservice:(NSArray *)joiners;
++ (OTEntourageInvitation *)fromPushNotifiationsData:(OTPushNotificationsData *)data;
 
 @end

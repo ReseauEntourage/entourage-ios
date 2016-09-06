@@ -37,4 +37,10 @@
     return result;
 }
 
++ (OTEntourageInvitation *)fromPushNotifiationsData:(OTPushNotificationsData *)data {
+    OTEntourageInvitation *result = [OTEntourageInvitation new];
+    result.iid = data.invitationId;
+    return result;
+}
+
 @end

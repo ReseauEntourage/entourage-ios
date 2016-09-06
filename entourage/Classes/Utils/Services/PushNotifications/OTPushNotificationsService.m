@@ -20,10 +20,14 @@
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"
 #import "OTDeepLinkService.h"
+#import "OTEntourageInvitation.h"
+#import "OTInvitationsService.h"
+#import "SVProgressHUD.h"
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
 #define APNOTIFICATION_REQUEST_ACCEPTED "JOIN_REQUEST_ACCEPTED"
+#define APNOTIFICATION_INVITE_REQUEST "ENTOURAGE_INVITATION"
 
 @implementation OTPushNotificationsService
 
@@ -54,6 +58,8 @@
         [self handleJoinRequestNotification:pnData showingAlert:alert];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE])
         [self handleChatNotification:pnData showingAlert:alert];
+    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_INVITE_REQUEST])
+        [self handleInviteRequestNotification:pnData showingAlert:alert];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:defaultAction];
 
@@ -118,6 +124,30 @@
         [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
     }];
     [alert addAction:openAction];
+}
+
+- (void)handleInviteRequestNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
+{
+    OTEntourageInvitation *invitation = [OTEntourageInvitation fromPushNotifiationsData:pnData];
+    UIAlertAction *refuseInviteRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [SVProgressHUD show];
+        [[OTInvitationsService new] rejectInvitation:invitation withSuccess:^() {
+            [SVProgressHUD dismiss];
+        } failure:^(NSError *error) {
+            [SVProgressHUD showWithStatus:OTLocalizedString(@"ignoreJoinFailed")];
+        }];
+    }];
+    UIAlertAction *acceptInviteRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [SVProgressHUD show];
+        [[OTInvitationsService new] acceptInvitation:invitation withSuccess:^() {
+            [SVProgressHUD dismiss];
+            [[OTDeepLinkService new] navigateTo:pnData.entourageId withType:nil];
+        } failure:^(NSError *error) {
+            [SVProgressHUD showWithStatus:OTLocalizedString(@"acceptJoinFailed")];
+        }];
+    }];
+    [alert addAction:refuseInviteRequestAction];
+    [alert addAction:acceptInviteRequestAction];
 }
 
 - (void)showAlert:(UIAlertController *)alert withPresentingBlock:(void(^)(UIViewController *, UIViewController *))presentingBlock {

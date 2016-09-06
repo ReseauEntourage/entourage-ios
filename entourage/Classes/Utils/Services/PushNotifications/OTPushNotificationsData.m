@@ -16,6 +16,11 @@
 #define kAPNType @"type"
 #define kAPNJoinableId @"joinable_id"
 #define kAPNJoinableType @"joinable_type"
+#define kAPNEntourageId @"entourage_id"
+#define kAPNInvitationId @"invitation_id"
+#define kAPNInviteeId @"invitee_id"
+#define kAPNInviterId @"inviter_id"
+
 
 @implementation OTPushNotificationsData
 
@@ -30,6 +35,10 @@
     result.notificationType = [result.extra valueForKey:kAPNType];
     result.joinableId = [result.extra numberForKey:kAPNJoinableId];
     result.joinableType = [result.extra valueForKey:kAPNJoinableType];
+    result.entourageId = [result.extra numberForKey:kAPNEntourageId];
+    result.invitationId = [result.extra numberForKey:kAPNInvitationId];
+    result.inviteeId = [result.extra numberForKey:kAPNInviteeId];
+    result.inviterId = [result.extra numberForKey:kAPNInviterId];
     
     return result;
 }

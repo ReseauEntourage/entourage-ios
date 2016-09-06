@@ -15,6 +15,10 @@
 @property (nonatomic, strong) NSString *notificationType;
 @property (nonatomic, strong) NSNumber *joinableId;
 @property (nonatomic, strong) NSString *joinableType;
+@property (nonatomic, strong) NSNumber *entourageId;
+@property (nonatomic, strong) NSNumber *invitationId;
+@property (nonatomic, strong) NSNumber *inviteeId;
+@property (nonatomic, strong) NSNumber *inviterId;
 
 @property (nonatomic, strong) NSDictionary *content;
 @property (nonatomic, strong) NSDictionary *extra;
