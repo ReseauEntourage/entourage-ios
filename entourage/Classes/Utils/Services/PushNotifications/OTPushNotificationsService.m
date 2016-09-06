@@ -56,6 +56,8 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:pnData.sender message:pnData.message preferredStyle:UIAlertControllerStyleAlert];
     if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST])
         [self handleJoinRequestNotification:pnData showingAlert:alert];
+    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_REQUEST_ACCEPTED])
+        [self handleAcceptJoinNotification:pnData showingAlert:alert];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE])
         [self handleChatNotification:pnData showingAlert:alert];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_INVITE_REQUEST])
@@ -116,6 +118,14 @@
     }];
     [alert addAction:refuseJoinRequestAction];
     [alert addAction:acceptJoinRequestAction];
+}
+
+- (void)handleAcceptJoinNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
+{
+    UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
+    }];
+    [alert addAction:openAction];
 }
 
 - (void)handleChatNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
