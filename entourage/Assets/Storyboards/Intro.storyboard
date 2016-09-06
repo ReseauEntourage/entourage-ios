@@ -568,77 +568,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vjl-bA-khw">
-                                <rect key="frame" x="-4" y="244" width="328" height="146"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Numéro de portable" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uq2-ES-ZKc">
-                                        <rect key="frame" x="20" y="15" width="288" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="9Pu-Om-rNR"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="296" id="dWK-45-CiF"/>
-                                        </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
-                                                <color key="value" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="dWK-45-CiF"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <outlet property="delegate" destination="Gt1-cc-4DI" id="BHp-zl-aTd"/>
-                                        </connections>
-                                    </textField>
-                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9IG-g9-SLx">
-                                        <rect key="frame" x="18" y="65" width="298" height="1"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="DUy-F9-IH7"/>
-                                            <constraint firstAttribute="width" constant="296" id="Krh-bO-b1M"/>
-                                            <constraint firstAttribute="height" constant="1" id="OOb-Gm-LqB"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="DUy-F9-IH7"/>
-                                                <exclude reference="Krh-bO-b1M"/>
-                                            </mask>
-                                        </variation>
-                                    </view>
-                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCU-K5-2FS">
-                                        <rect key="frame" x="15" y="81" width="298" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="SWB-Yw-jGR"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Recevoir mon code">
-                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="regenerateButtonDidTap:" destination="PnQ-mU-85i" eventType="touchUpInside" id="5cX-Li-jyw"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="tCU-K5-2FS" firstAttribute="leading" secondItem="vjl-bA-khw" secondAttribute="leading" constant="15" id="6VF-IS-RRz"/>
-                                    <constraint firstAttribute="trailing" secondItem="uq2-ES-ZKc" secondAttribute="trailing" constant="20" id="8T6-UM-Vs3"/>
-                                    <constraint firstItem="uq2-ES-ZKc" firstAttribute="top" secondItem="vjl-bA-khw" secondAttribute="top" constant="15" id="AoV-mi-8CV"/>
-                                    <constraint firstItem="9IG-g9-SLx" firstAttribute="leading" secondItem="vjl-bA-khw" secondAttribute="leading" constant="18" id="Qld-3b-h0p"/>
-                                    <constraint firstAttribute="height" constant="146" id="mgs-cP-0ta"/>
-                                    <constraint firstAttribute="trailing" secondItem="tCU-K5-2FS" secondAttribute="trailing" constant="15" id="prv-nN-W5L"/>
-                                    <constraint firstItem="uq2-ES-ZKc" firstAttribute="leading" secondItem="vjl-bA-khw" secondAttribute="leading" constant="20" id="srl-Hd-uJC"/>
-                                    <constraint firstItem="tCU-K5-2FS" firstAttribute="top" secondItem="9IG-g9-SLx" secondAttribute="bottom" constant="15" id="vHC-8n-d9i"/>
-                                    <constraint firstItem="9IG-g9-SLx" firstAttribute="top" secondItem="uq2-ES-ZKc" secondAttribute="bottom" id="xMN-eo-3RI"/>
-                                    <constraint firstAttribute="trailing" secondItem="9IG-g9-SLx" secondAttribute="trailing" constant="12" id="xYe-ac-NCp"/>
-                                </constraints>
-                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xu0-Cx-fNT">
                                 <rect key="frame" x="-4" y="20" width="328" height="224"/>
                                 <subviews>
@@ -722,6 +651,77 @@ saisissez votre numéro de portable.</string>
                                     </mask>
                                 </variation>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vjl-bA-khw">
+                                <rect key="frame" x="-4" y="244" width="328" height="146"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Numéro de portable" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uq2-ES-ZKc">
+                                        <rect key="frame" x="20" y="15" width="288" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="9Pu-Om-rNR"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="296" id="dWK-45-CiF"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
+                                                <color key="value" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="dWK-45-CiF"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <outlet property="delegate" destination="Gt1-cc-4DI" id="BHp-zl-aTd"/>
+                                        </connections>
+                                    </textField>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9IG-g9-SLx">
+                                        <rect key="frame" x="18" y="65" width="298" height="1"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="DUy-F9-IH7"/>
+                                            <constraint firstAttribute="width" constant="296" id="Krh-bO-b1M"/>
+                                            <constraint firstAttribute="height" constant="1" id="OOb-Gm-LqB"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="DUy-F9-IH7"/>
+                                                <exclude reference="Krh-bO-b1M"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCU-K5-2FS">
+                                        <rect key="frame" x="15" y="81" width="298" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="SWB-Yw-jGR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <state key="normal" title="Recevoir mon code">
+                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="regenerateButtonDidTap:" destination="PnQ-mU-85i" eventType="touchUpInside" id="5cX-Li-jyw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="tCU-K5-2FS" firstAttribute="leading" secondItem="vjl-bA-khw" secondAttribute="leading" constant="15" id="6VF-IS-RRz"/>
+                                    <constraint firstAttribute="trailing" secondItem="uq2-ES-ZKc" secondAttribute="trailing" constant="20" id="8T6-UM-Vs3"/>
+                                    <constraint firstItem="uq2-ES-ZKc" firstAttribute="top" secondItem="vjl-bA-khw" secondAttribute="top" constant="15" id="AoV-mi-8CV"/>
+                                    <constraint firstItem="9IG-g9-SLx" firstAttribute="leading" secondItem="vjl-bA-khw" secondAttribute="leading" constant="18" id="Qld-3b-h0p"/>
+                                    <constraint firstAttribute="height" constant="146" id="mgs-cP-0ta"/>
+                                    <constraint firstAttribute="trailing" secondItem="tCU-K5-2FS" secondAttribute="trailing" constant="15" id="prv-nN-W5L"/>
+                                    <constraint firstItem="uq2-ES-ZKc" firstAttribute="leading" secondItem="vjl-bA-khw" secondAttribute="leading" constant="20" id="srl-Hd-uJC"/>
+                                    <constraint firstItem="tCU-K5-2FS" firstAttribute="top" secondItem="9IG-g9-SLx" secondAttribute="bottom" constant="15" id="vHC-8n-d9i"/>
+                                    <constraint firstItem="9IG-g9-SLx" firstAttribute="top" secondItem="uq2-ES-ZKc" secondAttribute="bottom" id="xMN-eo-3RI"/>
+                                    <constraint firstAttribute="trailing" secondItem="9IG-g9-SLx" secondAttribute="trailing" constant="12" id="xYe-ac-NCp"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
