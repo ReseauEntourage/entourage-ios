@@ -56,9 +56,9 @@
     [[OTEntourageService new] entourageUsers:self.entourage success:^(NSArray *items) {
         NSLog(@"GET ENTOURAGE JOINS");
         if(success) {
-            NSNumber *currentUserId = [NSUserDefaults standardUserDefaults].currentUser.sid;
+            NSNumber *authorId = self.entourage.author.uID;
             NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
-                return ![item.uID isEqual:currentUserId] && (!status || [item.status isEqualToString:status]);
+                return ![item.uID isEqual:authorId] && (!status || [item.status isEqualToString:status]);
             }]];
             success(filteredItems);
         }
