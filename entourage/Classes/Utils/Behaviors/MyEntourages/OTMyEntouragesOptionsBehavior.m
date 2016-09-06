@@ -23,7 +23,7 @@
 @implementation OTMyEntouragesOptionsBehavior
 
 - (BOOL)prepareSegueForOptions:(UIStoryboardSegue *)segue {
-    if([segue.identifier isEqualToString:@"EntourageCreateSegue"]) {
+    if([segue.identifier isEqualToString:@"EntourageEditorSegue"]) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTEntourageEditorViewController *creatorController = (OTEntourageEditorViewController *)controller.topViewController;
         creatorController.type = self.entourageType;
