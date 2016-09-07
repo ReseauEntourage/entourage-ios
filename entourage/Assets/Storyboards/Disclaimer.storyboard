@@ -20,7 +20,7 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Disclaimer text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="43l-Br-w05">
                                 <rect key="frame" x="12" y="64" width="296" height="447"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES" calendarEvent="YES"/>
@@ -62,7 +62,6 @@
         <!--Navigation Controller-->
         <scene sceneID="APu-BG-IN3">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QTa-xK-eBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TId-I3-uOn" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -75,6 +74,7 @@
                         <segue destination="kdW-Yk-xSz" kind="relationship" relationship="rootViewController" id="Uo8-Bg-8gB"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QTa-xK-eBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="289" y="1490"/>
         </scene>

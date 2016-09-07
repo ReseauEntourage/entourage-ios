@@ -22,12 +22,16 @@
     [super viewDidLoad];
 
     self.txtMessage.text = self.disclaimerText;
-    UIBarButtonItem *rejectDisclaimerButton =  [self setupCloseModal];
+    
+    //resolution to issue http://www.openradar.me/24435091
+    self.txtMessage.scrollEnabled = NO;
+    self.txtMessage.scrollEnabled = YES;
+    
+    UIBarButtonItem *rejectDisclaimerButton = [self setupCloseModal];
     [rejectDisclaimerButton setAction:@selector(doRejectDisclaimer)];
 }
 
 - (IBAction)doAcceptDisclaimer {
-    
     if ([self.disclaimerDelegate respondsToSelector:@selector(disclaimerWasAccepted)])
         [self.disclaimerDelegate disclaimerWasAccepted];
 }
