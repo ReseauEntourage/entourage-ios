@@ -20,8 +20,8 @@
 #define kAPNInvitationId @"invitation_id"
 #define kAPNInviteeId @"invitee_id"
 #define kAPNInviterId @"inviter_id"
-#define kAPNInvitableId @"invitable_id"
-#define kAPNInvitableType @"invitable_type"
+#define kAPNFeedId @"feed_id"
+#define kAPNFeedType @"feed_type"
 #define kAPNInvitationAccepted @"accepted"
 
 @implementation OTPushNotificationsData
@@ -41,8 +41,8 @@
     result.invitationId = [result.extra numberForKey:kAPNInvitationId];
     result.inviteeId = [result.extra numberForKey:kAPNInviteeId];
     result.inviterId = [result.extra numberForKey:kAPNInviterId];
-    result.invitableId = [result.extra numberForKey:kAPNInvitableId];
-    result.invitableType = [result.extra stringForKey:kAPNInvitableType];
+    result.feedId = [result.extra numberForKey:kAPNFeedId];
+    result.feedType = [result.extra stringForKey:kAPNFeedType];
     result.invitationAccepted = [result.extra numberForKey:kAPNInvitationAccepted];
     
     return result;

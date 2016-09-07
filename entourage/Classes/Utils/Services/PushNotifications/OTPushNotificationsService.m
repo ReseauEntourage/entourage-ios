@@ -171,7 +171,7 @@
 - (void)handleInviteStatusNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
 {
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[OTDeepLinkService new] navigateTo:pnData.invitableId withType:pnData.invitableType];
+        [[OTDeepLinkService new] navigateTo:pnData.feedId withType:pnData.feedType];
     }];
     [alert addAction:openAction];
 }
