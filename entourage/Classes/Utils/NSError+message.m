@@ -9,6 +9,9 @@
 #import "NSError+message.h"
 #import "OTConsts.h"
 
+#define UNAUTHORIZED_CODE @"UNAUTHORIZED"
+#define ALREADY_EXISTS_CODE @"PHONE_ALREADY_EXIST"
+
 @implementation NSError (message)
 
 - (NSString *)userUpdateMessage {
@@ -16,8 +19,10 @@
     NSString *errorMessage = @"";
     NSDictionary *errorDictionary = [userInfo objectForKey:@"NSLocalizedDescription"];
     NSString *code = [errorDictionary valueForKey:@"code"];
-    if([code caseInsensitiveCompare:@"UNAUTHORIZED"] == NSOrderedSame)
+    if([code caseInsensitiveCompare:UNAUTHORIZED_CODE] == NSOrderedSame)
         return OTLocalizedString(@"invalidCode");
+    else if([code caseInsensitiveCompare:ALREADY_EXISTS_CODE] == NSOrderedSame)
+        return nil;
     if (errorDictionary)
         errorMessage = ((NSArray*)[errorDictionary valueForKey:@"message"]).firstObject;
     return errorMessage;

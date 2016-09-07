@@ -38,10 +38,7 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.continueButton setupHalfRoundedCorners];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showKeyboard:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -63,15 +60,14 @@
             [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
             NSString *errorMessage = [error userUpdateMessage];
-#warning Create special message(code) on server-side
-            if ([errorMessage isEqualToString:@"Phone n'est pas disponible"]) {
+            if (errorMessage) {
+                [SVProgressHUD showErrorWithStatus:errorMessage];
+                NSLog(@"ERR: something went wrong on onboarding user phone: %@", error.description);
+            } else {
                 [NSUserDefaults standardUserDefaults].temporaryUser = temporaryUser;
                 [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"alreadyRegisteredMessage")];
                 [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
-            } else {
-                [SVProgressHUD showErrorWithStatus:errorMessage];
             }
-            NSLog(@"ERR: something went wrong on onboarding user phone: %@", error.description);
         }];
 }
 
