@@ -97,7 +97,7 @@
 - (IBAction)doContinue {
     NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
     NSString *code = self.codeTextField.text;
-    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
+    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     [SVProgressHUD show];
     
     [[OTAuthService new] authWithPhone:phone

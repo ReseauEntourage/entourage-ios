@@ -23,6 +23,7 @@
 // Model
 #import "OTUser.h"
 #import "OTOrganization.h"
+#import "OTConsts.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
@@ -103,7 +104,6 @@ NSString *const kKeychainPassword = @"entourage_user_password";
 
 }
 
-
 - (void)getDetailsForUser:(NSNumber *)userID
               success:(void (^)(OTUser *))success
               failure:(void (^)(NSError *))failure
@@ -135,7 +135,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
 - (void)sendAppInfoWithSuccess:(void (^)())success
                        failure:(void (^)(NSError *))failure
 {
-    NSString *pushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
+    NSString *pushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     if (!pushToken)
         return;
 

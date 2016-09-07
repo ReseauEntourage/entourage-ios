@@ -36,6 +36,7 @@
 // View
 #import "SVProgressHUD.h"
 #import "OTOnboardingNavigationBehavior.h"
+#import "OTPushNotificationsService.h"
 
 /********************************************************************************/
 #pragma mark - Constants
@@ -112,7 +113,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 - (void)launchAuthentication {
     [SVProgressHUD show];
-    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
+    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     [[OTAuthService new] authWithPhone:self.phoneTextField.text
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
@@ -125,8 +126,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [SVProgressHUD dismiss];
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    [NSUserDefaults standardUserDefaults].currentUser = user;
-                                   if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid)
+                                   [[NSUserDefaults standardUserDefaults] synchronize];
+                                   if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
+                                       [[OTPushNotificationsService new] promptUserForPushNotifications];
                                        [UIStoryboard showSWRevealController];
+                                   }
                                    else
                                        [self.onboardingNavigation nextFromLogin];
                                } failure: ^(NSError *error) {

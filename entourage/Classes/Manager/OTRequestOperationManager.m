@@ -170,7 +170,7 @@
 {
     NSString *phone = [[A0SimpleKeychain keychain] stringForKey:kKeychainPhone];
     NSString *password = [[A0SimpleKeychain keychain] stringForKey:kKeychainPassword];
-    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
+    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     
     if (phone != nil && password != nil) {
         NSDictionary *params = @{ @"phone": phone,

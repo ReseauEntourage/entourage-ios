@@ -18,6 +18,7 @@
 #import "OTOnboardingJoinService.h"
 #import "SVProgressHUD.h"
 #import "OTDeepLinkService.h"
+#import "OTPushNotificationsService.h"
 
 @interface OTNotificationsRightsViewController()
 
@@ -44,13 +45,6 @@
 
 #pragma mark - Private
 
-- (void)promptUserForPushNotifications {
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
-}
-
 - (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {
     NSLog(@"received kNotificationPushStatusChanged");
     [self doShowNext];
@@ -64,7 +58,7 @@
 }
 
 - (IBAction)doContinue {
-    [self promptUserForPushNotifications];
+    [[OTPushNotificationsService new] promptUserForPushNotifications];
 }
 
 #pragma mark - private methods

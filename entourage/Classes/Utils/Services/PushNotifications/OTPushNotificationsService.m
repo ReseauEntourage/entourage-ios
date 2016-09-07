@@ -32,23 +32,28 @@
 @implementation OTPushNotificationsService
 
 - (void)sendAppInfo {
-    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:@"device_token"];
-    if (!token)
-        return;
-    [[OTAuthService new] sendAppInfoWithSuccess:^() {
-        NSLog(@"Application info sent!");
-    }
-    failure:^(NSError * error) {
-        NSLog(@"ApplicationsERR: %@", error.description);
-    }];
+    [self sendAppInfoWithSuccess:nil orFailure:nil];
 }
 
 - (void)saveToken:(NSData *)tokenData {
     NSString *token = [[tokenData description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"device_token"];
+    [[NSUserDefaults standardUserDefaults] setObject:token forKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self sendAppInfo];
+}
+
+- (void)clearTokenWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@DEVICE_TOKEN_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self sendAppInfoWithSuccess:success orFailure:failure];
+}
+
+- (void)promptUserForPushNotifications {
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
 }
 
 - (void)handleRemoteNotification:(NSDictionary *)userInfo {
@@ -168,6 +173,19 @@
             presentingBlock(topController, rootVC.presentedViewController);
     } else
         [rootVC presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)sendAppInfoWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+    [[OTAuthService new] sendAppInfoWithSuccess:^() {
+        NSLog(@"Application info sent!");
+        if(success)
+            success();
+    }
+    failure:^(NSError * error) {
+        NSLog(@"ApplicationsERR: %@", error.description);
+        if(failure)
+            failure(error);
+    }];
 }
 
 @end

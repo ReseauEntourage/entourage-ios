@@ -18,6 +18,7 @@
 #endif
 
 #define API_KEY @"91f908e8f674fc9dfc5c1dba"
+#define DEVICE_TOKEN_KEY "device_token"
 
 #define PARIS_LAT 48.856578
 #define PARIS_LON  2.351828

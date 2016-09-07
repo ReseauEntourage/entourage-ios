@@ -20,6 +20,7 @@
 #import "OTDeepLinkService.h"
 #import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
+#import "SVProgressHUD.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -46,9 +47,12 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [IQKeyboardManager sharedManager].enable = YES;
     [self configureUIAppearance];
     
+    self.pnService = [OTPushNotificationsService new];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
     
     if ([NSUserDefaults standardUserDefaults].currentUser) {
+        [self.pnService promptUserForPushNotifications];
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
             [[OTLocationManager sharedInstance] startLocationUpdates];
         else
@@ -60,10 +64,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         [UIStoryboard showStartup];
     }
     
-    self.pnService = [OTPushNotificationsService new];
-    [self.pnService sendAppInfo];
     [OTPictureUploadService configure];
-    
 	return YES;
 }
 
@@ -81,15 +82,26 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 #pragma mark - Private methods
 
 - (void)popToLogin:(NSNotification *)notification {
+    [SVProgressHUD show];
+    [self.pnService clearTokenWithSuccess:^() {
+        [SVProgressHUD dismiss];
+        [self clearUserData];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD dismiss];
+        [self clearUserData];
+    }];
+}
+
+- (void)clearUserData {
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"device_token"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kEncounterDisclaimer];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kEntourageDisclaimer];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPassword];
-    
+
     [UIStoryboard showStartup];
 }
 

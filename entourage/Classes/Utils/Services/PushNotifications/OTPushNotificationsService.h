@@ -12,6 +12,8 @@
 
 - (void)sendAppInfo;
 - (void)saveToken:(NSData *)tokenData;
+- (void)promptUserForPushNotifications;
+- (void)clearTokenWithSuccess:(void (^)())success orFailure:(void (^)(NSError*))failure;
 - (void)handleRemoteNotification:(NSDictionary *)userInfo;
 - (void)handleLocalNotification:(NSDictionary *)userInfo;
 
