@@ -28,6 +28,7 @@
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
 #define APNOTIFICATION_REQUEST_ACCEPTED "JOIN_REQUEST_ACCEPTED"
 #define APNOTIFICATION_INVITE_REQUEST "ENTOURAGE_INVITATION"
+#define APNOTIFICATION_INVITE_STATUS "INVITATION_STATUS"
 
 @implementation OTPushNotificationsService
 
@@ -67,6 +68,8 @@
         [self handleChatNotification:pnData showingAlert:alert];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_INVITE_REQUEST])
         [self handleInviteRequestNotification:pnData showingAlert:alert];
+    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_INVITE_STATUS])
+        [self handleInviteStatusNotification:pnData showingAlert:alert];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:defaultAction];
 
@@ -163,6 +166,14 @@
     }];
     [alert addAction:refuseInviteRequestAction];
     [alert addAction:acceptInviteRequestAction];
+}
+
+- (void)handleInviteStatusNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
+{
+    UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[OTDeepLinkService new] navigateTo:pnData.invitableId withType:pnData.invitableType];
+    }];
+    [alert addAction:openAction];
 }
 
 - (void)showAlert:(UIAlertController *)alert withPresentingBlock:(void(^)(UIViewController *, UIViewController *))presentingBlock {

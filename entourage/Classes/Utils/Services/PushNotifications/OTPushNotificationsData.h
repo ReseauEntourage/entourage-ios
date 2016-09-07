@@ -19,6 +19,9 @@
 @property (nonatomic, strong) NSNumber *invitationId;
 @property (nonatomic, strong) NSNumber *inviteeId;
 @property (nonatomic, strong) NSNumber *inviterId;
+@property (nonatomic, strong) NSNumber *invitableId;
+@property (nonatomic, strong) NSString *invitableType;
+@property (nonatomic, strong) NSNumber *invitationAccepted;
 
 @property (nonatomic, strong) NSDictionary *content;
 @property (nonatomic, strong) NSDictionary *extra;

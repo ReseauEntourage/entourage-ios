@@ -20,7 +20,9 @@
 #define kAPNInvitationId @"invitation_id"
 #define kAPNInviteeId @"invitee_id"
 #define kAPNInviterId @"inviter_id"
-
+#define kAPNInvitableId @"invitable_id"
+#define kAPNInvitableType @"invitable_type"
+#define kAPNInvitationAccepted @"accepted"
 
 @implementation OTPushNotificationsData
 
@@ -32,13 +34,16 @@
     
     result.message = [userInfo stringForKey:kUserInfoObject];
     result.sender = [userInfo stringForKey:kUserInfoSender];
-    result.notificationType = [result.extra valueForKey:kAPNType];
+    result.notificationType = [result.extra stringForKey:kAPNType];
     result.joinableId = [result.extra numberForKey:kAPNJoinableId];
-    result.joinableType = [result.extra valueForKey:kAPNJoinableType];
+    result.joinableType = [result.extra stringForKey:kAPNJoinableType];
     result.entourageId = [result.extra numberForKey:kAPNEntourageId];
     result.invitationId = [result.extra numberForKey:kAPNInvitationId];
     result.inviteeId = [result.extra numberForKey:kAPNInviteeId];
     result.inviterId = [result.extra numberForKey:kAPNInviterId];
+    result.invitableId = [result.extra numberForKey:kAPNInvitableId];
+    result.invitableType = [result.extra stringForKey:kAPNInvitableType];
+    result.invitationAccepted = [result.extra numberForKey:kAPNInvitationAccepted];
     
     return result;
 }
