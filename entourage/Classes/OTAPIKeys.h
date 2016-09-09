@@ -23,6 +23,7 @@
 #define kWSKeyLocation @"location"
 #define kWSKeyLatitude @"latitude"
 #define kWSKeyLongitude @"longitude"
+#define kWSKeyLastMessage @"last_message"
 
 //Entourage
 #define kWSKeyEntourage @"entourage"

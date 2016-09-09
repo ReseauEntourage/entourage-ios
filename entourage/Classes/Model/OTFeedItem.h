@@ -10,6 +10,7 @@
 #import "OTAPIKeys.h"
 #import "NSDictionary+Parsing.h"
 #import "OTFeedItemAuthor.h"
+#import "OTMyFeedMessage.h"
 
 #define FEEDITEM_STATUS_ACTIVE @"active"
 #define FEEDITEM_STATUS_CLOSED @"closed"
@@ -31,6 +32,7 @@
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSNumber *noPeople;
+@property (nonatomic, strong) OTMyFeedMessage *lastMessage;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

@@ -58,6 +58,7 @@
 		1E0972C01D55541E006E1FAD /* OTInviteSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972BC1D55541E006E1FAD /* OTInviteSuccessViewController.m */; };
 		1E0972C31D555586006E1FAD /* OTInviteBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972C21D555586006E1FAD /* OTInviteBehavior.m */; };
 		1E0991451D57EDF9000A19CA /* OTMessageTableDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0991441D57EDF9000A19CA /* OTMessageTableDelegateBehavior.m */; };
+		1E1BA6AC1D82FC0E00A7F1FF /* OTMyFeedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1BA6AB1D82FC0E00A7F1FF /* OTMyFeedMessage.m */; };
 		1E2232CB1D568B4C004CD5E8 /* OTTapViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232CA1D568B4C004CD5E8 /* OTTapViewBehavior.m */; };
 		1E2232D21D569744004CD5E8 /* OTMessageTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232D11D569744004CD5E8 /* OTMessageTableDataSourceBehavior.m */; };
 		1E2232D51D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232D41D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m */; };
@@ -396,6 +397,8 @@
 		1E0991421D57EA72000A19CA /* MessageCellType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MessageCellType.h; path = Behaviors/UITableView/FeedItemMessages/MessageCellType.h; sourceTree = "<group>"; };
 		1E0991431D57EDF9000A19CA /* OTMessageTableDelegateBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMessageTableDelegateBehavior.h; path = Behaviors/UITableView/FeedItemMessages/OTMessageTableDelegateBehavior.h; sourceTree = "<group>"; };
 		1E0991441D57EDF9000A19CA /* OTMessageTableDelegateBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMessageTableDelegateBehavior.m; path = Behaviors/UITableView/FeedItemMessages/OTMessageTableDelegateBehavior.m; sourceTree = "<group>"; };
+		1E1BA6AA1D82FC0E00A7F1FF /* OTMyFeedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyFeedMessage.h; path = Feeds/OTMyFeedMessage.h; sourceTree = "<group>"; };
+		1E1BA6AB1D82FC0E00A7F1FF /* OTMyFeedMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyFeedMessage.m; path = Feeds/OTMyFeedMessage.m; sourceTree = "<group>"; };
 		1E2232C91D568B4C004CD5E8 /* OTTapViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTTapViewBehavior.h; path = Behaviors/Touch/OTTapViewBehavior.h; sourceTree = "<group>"; };
 		1E2232CA1D568B4C004CD5E8 /* OTTapViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTTapViewBehavior.m; path = Behaviors/Touch/OTTapViewBehavior.m; sourceTree = "<group>"; };
 		1E2232D01D569744004CD5E8 /* OTMessageTableDataSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMessageTableDataSourceBehavior.h; path = Behaviors/UITableView/FeedItemMessages/OTMessageTableDataSourceBehavior.h; sourceTree = "<group>"; };
@@ -1684,6 +1687,8 @@
 				1EE9E5F41D5CDA770045904A /* OTMyEntourageFilter.m */,
 				1EB660E41D5D29540051CBA7 /* OTMyEntourageTimeframeFilter.h */,
 				1EB660E51D5D29540051CBA7 /* OTMyEntourageTimeframeFilter.m */,
+				1E1BA6AA1D82FC0E00A7F1FF /* OTMyFeedMessage.h */,
+				1E1BA6AB1D82FC0E00A7F1FF /* OTMyFeedMessage.m */,
 			);
 			name = Feeds;
 			sourceTree = "<group>";
@@ -2332,6 +2337,7 @@
 				1E80F8A41D775B840041CC11 /* OTEditEntourageBehavior.m in Sources */,
 				1E06FDD21D575D6C00370F4F /* OTMessageReceivedCell.m in Sources */,
 				456ABD801CA18416004A81D6 /* UILabel+entourage.m in Sources */,
+				1E1BA6AC1D82FC0E00A7F1FF /* OTMyFeedMessage.m in Sources */,
 				1E2C600F1D775FCF004B195A /* OTTourChangedHandler.m in Sources */,
 				1EACE4171D11515200F3A2A6 /* OTEntourageStateTransition.m in Sources */,
 				0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */,

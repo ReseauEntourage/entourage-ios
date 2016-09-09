@@ -13,8 +13,6 @@
 #define kWDisplayName @"display_name"
 #define kWSAvatar_URL @"avatar_url"
 
-
-
 @implementation OTFeedItemAuthor
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary {
