@@ -15,7 +15,6 @@
 
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
-#import "IQKeyboardManager.h"
 
 @interface OTFeedItemJoinRequestViewController ()
 
