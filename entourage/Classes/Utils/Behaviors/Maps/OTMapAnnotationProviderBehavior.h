@@ -6,11 +6,11 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTBehavior.h"
+#import "OTMapDelegateBehavior.h"
 #import <MapKit/MapKit.h>
 #import "OTFeedItem.h"
 
-@interface OTMapAnnotationProviderBehavior : OTBehavior
+@interface OTMapAnnotationProviderBehavior : OTMapDelegateBehavior
 
 @property (nonatomic, weak) IBOutlet MKMapView *map;
 

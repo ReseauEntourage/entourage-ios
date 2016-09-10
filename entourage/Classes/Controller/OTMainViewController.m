@@ -35,7 +35,6 @@
 #import "JSBadgeView.h"
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
-#import "OTEntourageAnnotation.h"
 
 #import "OTConsts.h"
 
@@ -82,6 +81,8 @@
 
 #import "OTOngoingTourService.h"
 
+#import "OTMapDelegateProxyBehavior.h"
+
 #define MAPVIEW_HEIGHT 160.f
 
 #define MIN_ENTOURAGE_HEATZONE 500.0f // m
@@ -105,6 +106,7 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *mapSegmentedControl;
 @property (nonatomic, weak) IBOutlet OTFeedItemsTableView *tableView;
+@property (nonatomic, weak) IBOutlet OTMapDelegateProxyBehavior* mapDelegateProxy;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic) CLLocationCoordinate2D encounterLocation;
@@ -165,6 +167,9 @@
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
     self.markers = [NSMutableArray new];
+    
+    [self.mapDelegateProxy initialize];
+    [self.mapDelegateProxy.delegates addObject:self];
     
     self.entourageScale = 1.0;
     self.toursMapDelegate = [[OTToursMapDelegate alloc] initWithMapController:self];

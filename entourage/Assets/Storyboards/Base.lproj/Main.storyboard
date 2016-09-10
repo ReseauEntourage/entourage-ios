@@ -221,10 +221,10 @@
             </objects>
             <point key="canvasLocation" x="1343" y="-3"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Main-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="OTMainViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" userLabel="Main" customClass="OTMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -498,6 +498,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <customObject id="N0A-Lo-wcg" userLabel="Map Delegate Proxy" customClass="OTMapDelegateProxyBehavior"/>
             </objects>
             <point key="canvasLocation" x="827" y="45"/>
         </scene>
