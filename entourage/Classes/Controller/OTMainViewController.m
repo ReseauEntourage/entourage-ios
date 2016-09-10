@@ -475,7 +475,8 @@ static BOOL didGetAnyData = NO;
                                                     CGRect cellRect = [self.tableView rectForRowAtIndexPath:firstIndexPath];
                                                     BOOL completelyVisible = CGRectContainsRect(self.tableView.bounds, cellRect);
                                                     if (!completelyVisible)
-                                                        self.nouveauxFeedItemsButton.hidden = NO;
+#warning hide per francois request
+                                                        ;//self.nouveauxFeedItemsButton.hidden = NO;
                                                 }
                                                 self.feeds = [[self.tableView items] mutableCopy];
                                                 [self feedMapWithFeedItems];
