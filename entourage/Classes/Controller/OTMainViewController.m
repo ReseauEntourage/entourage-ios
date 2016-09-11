@@ -525,14 +525,11 @@ static BOOL didGetAnyData = NO;
                                                     [self showToursList];
                                                     didGetAnyData = YES;
                                                 }
-                                                
+                                                [self.indicatorView setHidden:YES];
                                                 if (!feeds.count) {
                                                     self.currentPagination.isLoading = NO;
                                                     return;
                                                 }
-                                                
-                                                [self.indicatorView setHidden:YES];
-                                                
                                                 OTFeedItem *lastFeed = self.feeds.lastObject;
                                                 NSLog(@"%@ > %@", lastFeed.creationDate, self.currentPagination.beforeDate);
                                                 if ([lastFeed.creationDate compare:self.currentPagination.beforeDate] != NSOrderedDescending) {
