@@ -81,6 +81,7 @@
 
 #import "OTMapDelegateProxyBehavior.h"
 #import "OTOverlayFeederBehavior.h"
+#import "OTTapEntourageBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -108,6 +109,7 @@
 
 @property (nonatomic, weak) IBOutlet OTMapDelegateProxyBehavior* mapDelegateProxy;
 @property (nonatomic, weak) IBOutlet OTOverlayFeederBehavior* overlayFeeder;
+@property (nonatomic, weak) IBOutlet OTTapEntourageBehavior* tapEntourage;
 
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
@@ -174,6 +176,7 @@
     self.mapDelegateProxy.mapView = self.mapView;
     self.overlayFeeder.mapView = self.mapView;
     [self.mapDelegateProxy initialize];
+    self.tapEntourage.mapView = self.mapView;
     
     self.toursMapDelegate = [[OTToursMapDelegate alloc] initWithMapController:self];
     self.guideMapDelegate = [[OTGuideMapDelegate alloc] initWithMapController:self];
@@ -897,7 +900,10 @@ static bool isShowingOptions = NO;
 
 - (void)handleTap:(UITapGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateEnded) {
-        [self showToursMap];
+        if([self.tapEntourage hasTappedEntourage:sender])
+            [self showToursList];
+        else
+            [self showToursMap];
     }
 }
 
@@ -1136,7 +1142,6 @@ static bool isShowingOptions = NO;
 #pragma mark - "Screens"
 
 - (void)showToursList {
-    
     self.isTourListDisplayed = YES;
     
     [UIView animateWithDuration:0.2 animations:^(void) {

@@ -115,6 +115,7 @@
 		1E5F798B1D5A13930005003C /* OTCollectionViewDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F798A1D5A13930005003C /* OTCollectionViewDataSourceBehavior.m */; };
 		1E5F798E1D5A14E60005003C /* OTCollectionCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F798D1D5A14E60005003C /* OTCollectionCellProviderBehavior.m */; };
 		1E5F79921D5A16DE0005003C /* OTInvitationsCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F79911D5A16DE0005003C /* OTInvitationsCellProviderBehavior.m */; };
+		1E66936C1D85DEEB00F9C03D /* OTTapEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E66936B1D85DEEB00F9C03D /* OTTapEntourageBehavior.m */; };
 		1E68E1151D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E68E1141D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m */; };
 		1E69CABD1D37B3CC00118E33 /* NSError+message.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E69CABC1D37B3CC00118E33 /* NSError+message.m */; };
 		1E6E550A1D707FE3002845D0 /* OTPushNotificationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E55091D707FE3002845D0 /* OTPushNotificationsService.m */; };
@@ -507,6 +508,8 @@
 		1E5F798D1D5A14E60005003C /* OTCollectionCellProviderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTCollectionCellProviderBehavior.m; path = Behaviors/UICollectionView/OTCollectionCellProviderBehavior.m; sourceTree = "<group>"; };
 		1E5F79901D5A16DE0005003C /* OTInvitationsCellProviderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTInvitationsCellProviderBehavior.h; path = Behaviors/UICollectionView/MyEntourages/OTInvitationsCellProviderBehavior.h; sourceTree = "<group>"; };
 		1E5F79911D5A16DE0005003C /* OTInvitationsCellProviderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTInvitationsCellProviderBehavior.m; path = Behaviors/UICollectionView/MyEntourages/OTInvitationsCellProviderBehavior.m; sourceTree = "<group>"; };
+		1E66936A1D85DEEB00F9C03D /* OTTapEntourageBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTTapEntourageBehavior.h; path = Behaviors/NewsFeed/OTTapEntourageBehavior.h; sourceTree = "<group>"; };
+		1E66936B1D85DEEB00F9C03D /* OTTapEntourageBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTTapEntourageBehavior.m; path = Behaviors/NewsFeed/OTTapEntourageBehavior.m; sourceTree = "<group>"; };
 		1E68E1131D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesTableDataSource.h; path = Behaviors/UITableView/MyEntourages/OTMyEntouragesTableDataSource.h; sourceTree = "<group>"; };
 		1E68E1141D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesTableDataSource.m; path = Behaviors/UITableView/MyEntourages/OTMyEntouragesTableDataSource.m; sourceTree = "<group>"; };
 		1E69CABB1D37B3CC00118E33 /* NSError+message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+message.h"; sourceTree = "<group>"; };
@@ -1262,6 +1265,8 @@
 				1EC75C081D849E4800887F6F /* OTOverlayFeederBehavior.m */,
 				1E5C30251D6F740C00E10770 /* OTFeedItemDetailsBehavior.h */,
 				1E5C30261D6F740C00E10770 /* OTFeedItemDetailsBehavior.m */,
+				1E66936A1D85DEEB00F9C03D /* OTTapEntourageBehavior.h */,
+				1E66936B1D85DEEB00F9C03D /* OTTapEntourageBehavior.m */,
 			);
 			name = NewsFeed;
 			sourceTree = "<group>";
@@ -2523,6 +2528,7 @@
 				DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */,
 				1ED2506D1D5A70EB005C9736 /* OTToggleVisibleBehavior.m in Sources */,
 				2EDA5F031CB3F84300849172 /* OTGuideDetailsViewController.m in Sources */,
+				1E66936C1D85DEEB00F9C03D /* OTTapEntourageBehavior.m in Sources */,
 				45EB70DA1CE5F0CC00EB2CD1 /* OTEntourage.m in Sources */,
 				1E488E211D4FBA4D00A2E5B0 /* OTPicturePreviewViewController.m in Sources */,
 			);

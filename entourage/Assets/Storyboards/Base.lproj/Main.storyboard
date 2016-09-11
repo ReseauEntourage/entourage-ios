@@ -484,6 +484,7 @@
                         <outlet property="overlayFeeder" destination="hnO-wK-gKw" id="DRj-hp-QRc"/>
                         <outlet property="stopButton" destination="oVf-Bh-vdD" id="gnm-Su-d3g"/>
                         <outlet property="tableView" destination="oHF-Vi-LCk" id="0vC-Rv-h6R"/>
+                        <outlet property="tapEntourage" destination="rKY-F0-13f" id="alM-Ui-hC8"/>
                         <segue destination="cVp-EA-m5M" kind="modal" identifier="OTConfirmationPopup" id="Qf1-vA-gd6"/>
                         <segue destination="alD-dM-t4k" kind="modal" identifier="OTCreateMeeting" id="b08-id-ZFb"/>
                         <segue destination="GHS-CJ-wmd" kind="modal" identifier="OTTourJoinRequestSegue" id="a8P-lF-ebs"/>
@@ -506,6 +507,7 @@
                     </connections>
                 </customObject>
                 <customObject id="hnO-wK-gKw" userLabel="Overlay Feeder" customClass="OTOverlayFeederBehavior"/>
+                <customObject id="rKY-F0-13f" userLabel="Tap Entourage" customClass="OTTapEntourageBehavior"/>
             </objects>
             <point key="canvasLocation" x="827" y="45"/>
         </scene>
