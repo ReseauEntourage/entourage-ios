@@ -30,8 +30,6 @@
 #import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
 
-#import "KPAnnotation.h"
-#import "KPClusteringController.h"
 #import "JSBadgeView.h"
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
@@ -82,6 +80,7 @@
 #import "OTOngoingTourService.h"
 
 #import "OTMapDelegateProxyBehavior.h"
+#import "OTOverlayFeederBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -106,7 +105,10 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *mapSegmentedControl;
 @property (nonatomic, weak) IBOutlet OTFeedItemsTableView *tableView;
+
 @property (nonatomic, weak) IBOutlet OTMapDelegateProxyBehavior* mapDelegateProxy;
+@property (nonatomic, weak) IBOutlet OTOverlayFeederBehavior* overlayFeeder;
+
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic) CLLocationCoordinate2D encounterLocation;
@@ -168,10 +170,11 @@
     self.encounters = [NSMutableArray new];
     self.markers = [NSMutableArray new];
     
+    self.mapView = [[MKMapView alloc] init];
+    self.mapDelegateProxy.mapView = self.mapView;
+    self.overlayFeeder.mapView = self.mapView;
     [self.mapDelegateProxy initialize];
-    [self.mapDelegateProxy.delegates addObject:self];
     
-    self.entourageScale = 1.0;
     self.toursMapDelegate = [[OTToursMapDelegate alloc] initWithMapController:self];
     self.guideMapDelegate = [[OTGuideMapDelegate alloc] initWithMapController:self];
     
@@ -182,7 +185,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFilters) name:@kNotificationShowFilters object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
     
-    self.mapView = [[MKMapView alloc] init];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
     self.currentPagination = [OTFeedItemsPagination new];
@@ -242,7 +244,8 @@
 - (void)switchToNewsfeed {
     self.toursMapDelegate.isActive = YES;
     self.guideMapDelegate.isActive = NO;
-    self.mapView.delegate = self.toursMapDelegate;
+    [self.mapDelegateProxy.delegates addObject:self.toursMapDelegate];
+    [self.mapDelegateProxy.delegates removeObject:self.guideMapDelegate];
     self.mapSegmentedControl.hidden = NO;
     [self clearMap];
     [self feedMapWithFeedItems];
@@ -257,7 +260,8 @@
 - (void)switchToGuide {
     self.toursMapDelegate.isActive = NO;
     self.guideMapDelegate.isActive = YES;
-    self.mapView.delegate = self.guideMapDelegate;
+    [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
+    [self.mapDelegateProxy.delegates addObject:self.guideMapDelegate];
     [self clearMap];
     [self showToursMap];
     [self.guideMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
@@ -279,8 +283,6 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
     
     [self.mapView setRegion:region animated:YES];
-    
-    self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
@@ -394,20 +396,11 @@ static BOOL didGetAnyData = NO;
 
 
 - (void)didChangePosition {
-    CLLocationDistance distance = [self mapWidthInMeters];
-    
-    // image width without transparent border ~70%
-    double imageWidth = [UIImage imageNamed:@"heatZone"].size.width * 0.7;
-    double screenWidth = [UIScreen mainScreen].bounds.size.width;
-    double scale500 = (500* screenWidth)/(imageWidth *distance)  ;
-
-    self.entourageScale = scale500;
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self feedMapWithFeedItems];
     
-    if (![self.mapView showsUserLocation]) {
+    if (![self.mapView showsUserLocation])
         [self zoomToCurrentLocation:nil];
-    }
     
     // check if we need to make a new request
     CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.requestedToursCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
@@ -417,13 +410,6 @@ static BOOL didGetAnyData = NO;
     //NSLog(@"Main: position did change = > getFeeds");
     self.currentPagination.beforeDate = [NSDate date];
     [self getFeeds];
-}
-
-
-- (CLLocationDistance)mapWidthInMeters {
-    CLLocationDegrees deltaLongitude = self.mapView.region.span.longitudeDelta;
-    CGFloat latitudeCircumference = 40075160 * cos(self.mapView.region.center.latitude * M_PI / 180);
-    return deltaLongitude * latitudeCircumference/360;
 }
 
 - (void)forceGetNewData {
@@ -590,45 +576,27 @@ static BOOL didGetAnyData = NO;
 
 - (void)feedMapWithFeedItems {
     if (self.toursMapDelegate.isActive) {
-        self.toursMapDelegate.drawnTours = [[NSMapTable alloc] init];
-        NSMutableArray *annotations = [NSMutableArray new];
-        
-        //draw entoruages first
-        for (OTFeedItem *feedItem in self.feeds) {
-            if ([feedItem isKindOfClass:[OTEntourage class]]) {
-                OTEntourageAnnotation *pointAnnotation = [[OTEntourageAnnotation alloc] initWithEntourage:(OTEntourage*)feedItem
-                                                                                                 andScale:self.entourageScale];
-                [annotations addObject:pointAnnotation];
-            }
-        }
-        // draw tours
-        for (OTFeedItem *feedItem in self.feeds) {
-            if ([feedItem isKindOfClass:[OTTour class]])
-                [self drawTour:(OTTour*)feedItem];
-        }
-        
+        [self.overlayFeeder updateOverlays:self.feeds];
         // draw encounters
+        NSMutableArray *annotations = [NSMutableArray new];
         for (OTEncounter *encounter in self.encounters) {
             OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
             [annotations addObject:pointAnnotation];
         }
-        
-        [self.clusteringController setAnnotations:annotations];
-        [self.clusteringController refresh:YES force:YES];
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        [self.mapView addAnnotations:annotations];
     }
 }
 
 - (void)feedMapViewWithEncounters {
     if (self.toursMapDelegate.isActive) {
         NSMutableArray *annotations = [NSMutableArray new];
-        
         for (OTEncounter *encounter in self.encounters) {
             OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
             [annotations addObject:pointAnnotation];
         }
-        
-        [self.clusteringController setAnnotations:annotations];
-        [self.clusteringController refresh:YES force:YES];
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        [self.mapView addAnnotations:annotations];
     }
 }
 
@@ -640,19 +608,9 @@ static BOOL didGetAnyData = NO;
                 [self.markers addObject:annotation];
             }
         }
-        [self.clusteringController setAnnotations:self.markers];
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        [self.mapView addAnnotations:self.markers];
     }
-}
-
-- (void)drawTour:(OTTour *)tour {
-    CLLocationCoordinate2D coords[[tour.tourPoints count]];
-    int count = 0;
-    for (OTTourPoint *point in tour.tourPoints) {
-        coords[count++] = point.toLocation.coordinate;
-    }
-    MKPolyline *polyline = [MKPolyline polylineWithCoordinates:coords count:[tour.tourPoints count]];
-    [self.toursMapDelegate.drawnTours setObject:tour forKey:polyline];
-    [self.mapView addOverlay:polyline];
 }
 
 - (NSString *)encounterAnnotationToString:(OTEncounterAnnotation *)annotation {
@@ -676,15 +634,9 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)displayPoiDetails:(MKAnnotationView *)view {
-    KPAnnotation *kpAnnotation = view.annotation;
-    __block OTCustomAnnotation *annotation = nil;
-    [[kpAnnotation annotations] enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[OTCustomAnnotation class]]) {
-            annotation = obj;
-            *stop = YES;
-        }
-    }];
-    
+    OTCustomAnnotation *annotation = nil;
+    if([view.annotation isKindOfClass:[OTCustomAnnotation class]])
+        annotation = (OTCustomAnnotation *)view.annotation;
     if (annotation == nil) return;
     
     [Flurry logEvent:@"Open_POI_From_Map" withParameters:@{ @"poi_id" : annotation.poi.sid }];

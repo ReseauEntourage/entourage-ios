@@ -23,9 +23,6 @@
 @property (nonatomic, strong) OTTour *tour;
 @property (nonatomic, strong) OTFeedItem *selectedFeedItem;
 
-@property (nonatomic, strong) KPClusteringController *clusteringController;
-@property (nonatomic) double entourageScale;
-
 
 - (void)zoomToCurrentLocation:(id)sender;
 - (void)didChangePosition;

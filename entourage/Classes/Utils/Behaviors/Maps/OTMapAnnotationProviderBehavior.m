@@ -7,8 +7,6 @@
 //
 
 #import "OTMapAnnotationProviderBehavior.h"
-#import "OTEntourageAnnotation.h"
-#import "OTEntourageAnnotationView.h"
 #import "OTFeedItemFactory.h"
 #import "OTMapHandlerDelegate.h"
 

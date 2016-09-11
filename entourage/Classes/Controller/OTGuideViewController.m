@@ -33,7 +33,6 @@
 #import <MapKit/MapKit.h>
 #import <MapKit/MKMapView.h>
 #import <WYPopoverController/WYPopoverController.h>
-#import <kingpin/kingpin.h>
 
 // User
 #import "NSUserDefaults+OT.h"
@@ -56,7 +55,6 @@
 @property (nonatomic, strong) NSArray *pois;
 
 @property (nonatomic, strong) WYPopoverController *popover;
-@property (nonatomic, strong) KPClusteringController *clusteringController;
 
 @property (nonatomic) BOOL isRegionSetted;
 @property (nonatomic, strong) NSMutableArray *markers;
@@ -79,7 +77,6 @@
     
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
-    self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     [self zoomToCurrentLocation:nil];
     [self createMenuButton];
     [self configureView];
@@ -161,19 +158,14 @@
             [self.markers addObject:annotation];
         }
     }
-    [self.clusteringController setAnnotations:self.markers];
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    [self.mapView addAnnotations:self.markers];
 }
 
 - (void)displayPoiDetails:(MKAnnotationView *)view {
-    KPAnnotation *kpAnnotation = view.annotation;
-    __block OTCustomAnnotation *annotation = nil;
-    [[kpAnnotation annotations] enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[OTCustomAnnotation class]]) {
-            annotation = obj;
-            *stop = YES;
-        }
-    }];
-    
+    OTCustomAnnotation *annotation = nil;
+    if([view.annotation isKindOfClass:[OTCustomAnnotation class]])
+        annotation = (OTCustomAnnotation *)view.annotation;
     if (annotation == nil) return;
     
     [Flurry logEvent:@"Open_POI_From_Map" withParameters:@{ @"poi_id" : annotation.poi.sid }];
@@ -186,58 +178,17 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation> )annotation {
     MKAnnotationView *annotationView = nil;
-    MKZoomScale currentZoomScale = mapView.bounds.size.width / mapView.visibleMapRect.size.width;
-    
-    if ([annotation isKindOfClass:[KPAnnotation class]]) {
-        KPAnnotation *kingPinAnnotation = (KPAnnotation *)annotation;
-        
-        if (currentZoomScale < 0.244113 && kingPinAnnotation.isCluster) {
-            annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"cluster"];
-            if (annotationView == nil) {
-                annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingPinAnnotation reuseIdentifier:@"cluster"];
-                annotationView.image = [UIImage imageNamed:@"poi_cluster"];
-                kingPinAnnotation.title = [NSString stringWithFormat:@"%lu", (unsigned long)kingPinAnnotation.annotations.count];
-            }
-        }
-        else {
-            OTCustomAnnotation *customAnnotation = (OTCustomAnnotation *)kingPinAnnotation.annotations.anyObject;
+    if ([annotation isKindOfClass:[OTCustomAnnotation class]]) {
+            OTCustomAnnotation *customAnnotation = (OTCustomAnnotation *)annotation;
             annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:customAnnotation.annotationIdentifier];
-            
-            if (!annotationView) {
+            if (!annotationView)
                 annotationView = customAnnotation.annotationView;
-            }
             annotationView.annotation = annotation;
-        }
     }
-    
     return annotationView;
 }
 
-- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
-    for (MKAnnotationView *view in views) {
-        id<MKAnnotation> annotation = [view annotation];
-        if ([annotation isKindOfClass:[KPAnnotation class]]) {
-            KPAnnotation *kpAnnotation = (KPAnnotation *)annotation;
-            if (kpAnnotation.isCluster) {
-                if ([view subviews].count != 0) {
-                    UIView *subview = [[view subviews] objectAtIndex:0];
-                    [subview removeFromSuperview];
-                }
-                CGRect viewRect = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
-                UILabel *count = [[UILabel alloc] initWithFrame:viewRect];
-                count.text = [NSString stringWithFormat:@"%lu", (unsigned long)kpAnnotation.annotations.count];
-                count.textColor = [UIColor whiteColor];
-                count.textAlignment = NSTextAlignmentCenter;
-                [view addSubview:count];
-            }
-        }
-    }
-    [mapView setNeedsDisplay];
-}
-
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    [self.clusteringController refresh:animated];
-    
     CLLocationDistance distance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(_currentMapCenter), MKMapPointForCoordinate(mapView.centerCoordinate))) / 1000.0f;
     if (distance > [self mapHeight]) {
         [self refreshMap];
@@ -247,15 +198,8 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     [mapView deselectAnnotation:view.annotation animated:NO];
-    MKZoomScale currentZoomScale = mapView.bounds.size.width / mapView.visibleMapRect.size.width;
-    
-    KPAnnotation *kpAnnotation = view.annotation;
-    if (currentZoomScale > 0.244113) {
+    if([view.annotation isKindOfClass:[OTCustomAnnotation class]])
         [self displayPoiDetails:view];
-    }
-    else if (!kpAnnotation.isCluster) {
-        [self displayPoiDetails:view];
-    }
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
