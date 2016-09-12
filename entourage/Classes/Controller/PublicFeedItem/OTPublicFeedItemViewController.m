@@ -12,7 +12,7 @@
 #import "UIColor+entourage.h"
 #import "OTFeedItemFactory.h"
 #import "UIBarButtonItem+factory.h"
-#import "OTFeedItemJoinRequestViewController.h"
+#import "OTFeedItemJoinMessageController.h"
 #import "OTStatusBehavior.h"
 #import "OTJoinBehavior.h"
 #import "SVProgressHUD.h"
@@ -39,7 +39,6 @@
     [self.mapAnnotationProvider drawData];
     [self.statusBehavior initialize];
     [self.statusBehavior updateWith:self.feedItem];
-    [self.joinBehavior configureWith:self.feedItem];
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     if(FeedItemStateJoinNotRequested == [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState]) {
@@ -68,7 +67,7 @@
 #pragma mark - private methods
 
 - (IBAction)joinFeedItem:(id)sender {
-    [self.joinBehavior joinFeedItem];
+    [self.joinBehavior join:self.feedItem];
 }
 
 - (IBAction)updateStatusToPending {

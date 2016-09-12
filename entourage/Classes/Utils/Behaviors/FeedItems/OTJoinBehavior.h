@@ -8,14 +8,13 @@
 
 #import "OTBehavior.h"
 #import "OTFeedItem.h"
-#import "OTFeedItemJoinRequestViewController.h"
+#import "OTJoinDelegate.h"
 
-@interface OTJoinBehavior : OTBehavior<OTFeedItemJoinRequestDelegate>
+@interface OTJoinBehavior : OTBehavior<OTJoinDelegate>
 
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 
-- (void)configureWith:(OTFeedItem *)feedItem;
+- (void)join:(OTFeedItem *)item;
 - (BOOL)prepareSegueForMessage:(UIStoryboardSegue *)segue;
-- (void)joinFeedItem;
 
 @end

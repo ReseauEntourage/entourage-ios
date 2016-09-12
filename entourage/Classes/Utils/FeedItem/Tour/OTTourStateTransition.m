@@ -55,12 +55,15 @@
 }
 
 - (void)sendJoinRequest:(void (^)(OTFeedItemJoiner *))success orFailure:(void (^)(NSError *, BOOL))failure {
+    NSString *oldJoinState = self.tour.joinStatus;
+    self.tour.joinStatus = JOIN_PENDING;
     [[OTTourService new] joinTour:self.tour
         success:^(OTFeedItemJoiner *joiner) {
             NSLog(@"Sent tour join request: %@", self.tour.uid);
             success(joiner);
         } failure:^(NSError *error) {
             NSLog(@"Send tour join request error: %@", error.description);
+            self.tour.joinStatus = oldJoinState;
             failure(error, YES);
         }];
 }

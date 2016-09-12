@@ -1,12 +1,12 @@
 //
-//  OTFeedItemJoinRequestViewController.m
+//  OTFeedItemJoinMessageController.m
 //  entourage
 //
 //  Created by Ciprian Habuc on 01/03/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTFeedItemJoinRequestViewController.h"
+#import "OTFeedItemJoinMessageController.h"
 #import "OTTourService.h"
 #import "OTEntourageService.h"
 #import "OTTour.h"
@@ -16,14 +16,14 @@
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
 
-@interface OTFeedItemJoinRequestViewController ()
+@interface OTFeedItemJoinMessageController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *greetingLabel;
 @property (nonatomic, weak) IBOutlet UITextView *greetingMessage;
 
 @end
 
-@implementation OTFeedItemJoinRequestViewController
+@implementation OTFeedItemJoinMessageController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,9 +49,8 @@
     [self.greetingLabel setAttributedText:greetingAttrString];
 }
 
-- (IBAction)doDismiss {
-    if ([self.feedItemJoinRequestDelegate respondsToSelector:@selector(dismissFeedItemJoinRequestController)])
-        [self.feedItemJoinRequestDelegate dismissFeedItemJoinRequestController];
+- (IBAction)close {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)doSendRequest {
@@ -64,9 +63,7 @@
     } failure:^(NSError *error) {
         [SVProgressHUD dismiss];
     }];
-    if ([self.feedItemJoinRequestDelegate respondsToSelector:@selector(dismissFeedItemJoinRequestController)]) {
-        [self.feedItemJoinRequestDelegate dismissFeedItemJoinRequestController];
-    }
+    [self close];
 }
 
 @end

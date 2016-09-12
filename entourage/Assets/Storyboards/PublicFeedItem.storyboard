@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fid-Iu-R1a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fid-Iu-R1a">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -205,10 +205,10 @@
             </objects>
             <point key="canvasLocation" x="332.80000000000001" y="325.65333333333331"/>
         </scene>
-        <!--FeedItemJoinRequest-->
+        <!--JoinFeedItem-->
         <scene sceneID="yHN-uK-5aw">
             <objects>
-                <viewControllerPlaceholder storyboardName="FeedItemJoinRequest" id="cpn-kw-7GN" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="JoinFeedItem" id="cpn-kw-7GN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nx-5x-nQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="480" y="770"/>

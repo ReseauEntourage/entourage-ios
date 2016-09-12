@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Et1-lq-jQo">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -16,7 +17,7 @@
         <!--Join Message-->
         <scene sceneID="QK8-h7-B6P">
             <objects>
-                <viewController storyboardIdentifier="JoinMessage" id="NTX-qP-dnX" userLabel="Join Message" customClass="OTFeedItemJoinMessageController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JoinMessage" modalPresentationStyle="overCurrentContext" id="NTX-qP-dnX" userLabel="Join Message" customClass="OTFeedItemJoinMessageController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bmj-G7-2n6"/>
                         <viewControllerLayoutGuide type="bottom" id="n9e-dq-pRt"/>
@@ -114,6 +115,7 @@ transmise au créateur.
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="ebf-9i-RUc" firstAttribute="leading" secondItem="0fs-Xb-uMD" secondAttribute="leading" constant="16" id="11p-F3-lhB"/>
                                     <constraint firstItem="ebf-9i-RUc" firstAttribute="top" secondItem="0fs-Xb-uMD" secondAttribute="top" constant="24" id="DVe-z6-er2"/>
@@ -124,7 +126,7 @@ transmise au créateur.
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="0fs-Xb-uMD" firstAttribute="leading" secondItem="vaq-BA-fcK" secondAttribute="leadingMargin" constant="-20" id="4u9-P9-44W"/>
                             <constraint firstItem="0fs-Xb-uMD" firstAttribute="top" secondItem="vaq-BA-fcK" secondAttribute="topMargin" id="JIU-94-01H"/>
@@ -152,8 +154,8 @@ transmise au créateur.
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxU-kb-rBX">
-                                <rect key="frame" x="16" y="59" width="288" height="450"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IxU-kb-rBX">
+                                <rect key="frame" x="16" y="65" width="288" height="440"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKu-4R-ztc">
                                         <rect key="frame" x="10" y="10" width="30" height="30"/>
@@ -204,13 +206,13 @@ transmise au créateur.
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="0NR-0y-u5a"/>
+                                                <exclude reference="wll-J7-wwM"/>
                                                 <exclude reference="V4b-Rw-72H"/>
                                                 <exclude reference="vNs-28-VtS"/>
-                                                <exclude reference="wll-J7-wwM"/>
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="inviteContacts:" destination="Et1-lq-jQo" eventType="touchUpInside" id="18x-DA-EHL"/>
+                                            <action selector="addMessage:" destination="Et1-lq-jQo" eventType="touchUpInside" id="sgH-ly-z9J"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzl-9S-VFF">
@@ -229,8 +231,8 @@ transmise au créateur.
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="1n3-i2-oiR"/>
                                                 <exclude reference="7kj-8G-Acb"/>
+                                                <exclude reference="1n3-i2-oiR"/>
                                                 <exclude reference="LVh-WK-DuW"/>
                                                 <exclude reference="Sec-QZ-iSs"/>
                                             </mask>
@@ -253,7 +255,7 @@ transmise au créateur.
                                     <constraint firstAttribute="trailing" secondItem="fzl-9S-VFF" secondAttribute="trailing" constant="10" id="ayF-h8-je3"/>
                                     <constraint firstItem="TzB-NC-pwc" firstAttribute="top" secondItem="6gx-OQ-FAY" secondAttribute="bottom" constant="10" id="e06-hW-5HT"/>
                                     <constraint firstItem="bMi-oc-27z" firstAttribute="leading" secondItem="IxU-kb-rBX" secondAttribute="leading" constant="10" id="ef1-wA-KT9"/>
-                                    <constraint firstAttribute="height" constant="450" id="i9R-YC-yJe"/>
+                                    <constraint firstAttribute="height" constant="440" id="i9R-YC-yJe"/>
                                     <constraint firstAttribute="trailing" secondItem="TzB-NC-pwc" secondAttribute="trailing" constant="5" id="iR9-cJ-PAt"/>
                                     <constraint firstItem="bMi-oc-27z" firstAttribute="top" secondItem="TzB-NC-pwc" secondAttribute="bottom" constant="20" id="mGj-MI-Gnz"/>
                                     <constraint firstItem="cKu-4R-ztc" firstAttribute="leading" secondItem="IxU-kb-rBX" secondAttribute="leading" constant="10" id="nR9-j7-0tm"/>
@@ -277,7 +279,7 @@ transmise au créateur.
                     <navigationItem key="navigationItem" id="Zmo-do-eBv"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="btnInviteContacts" destination="bMi-oc-27z" id="0eg-FR-MPa"/>
+                        <outlet property="btnAddMessage" destination="bMi-oc-27z" id="Yr7-Ag-2vv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jjf-eF-DN4" userLabel="First Responder" sceneMemberID="firstResponder"/>

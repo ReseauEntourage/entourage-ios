@@ -10,6 +10,8 @@
 #import "OTFeedItemFactory.h"
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
+#import "OTFeedItemJoinOptionsViewController.h"
+#import "OTFeedItemJoinMessageController.h"
 
 @interface OTJoinBehavior ()
 
@@ -19,34 +21,33 @@
 
 @implementation OTJoinBehavior
 
-- (void)configureWith:(OTFeedItem *)feedItem {
-    self.feedItem = feedItem;
-}
-
-- (BOOL)prepareSegueForMessage:(UIStoryboardSegue *)segue {
-    if ([segue.identifier isEqualToString:@"JoinRequestSegue"]) {
-        OTFeedItemJoinRequestViewController *controller = (OTFeedItemJoinRequestViewController *)segue.destinationViewController;
-        controller.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
-        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        controller.feedItem = self.feedItem;
-        controller.feedItemJoinRequestDelegate = self;
-    }
-    else
-        return NO;
-    return YES;
-}
-
-- (void)joinFeedItem {
+- (void)join:(OTFeedItem *)item {
+    self.feedItem = item;
     FeedItemState state = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
     if(state != FeedItemStateJoinNotRequested)
         return;
     [self startJoin];
 }
 
-#pragma mark - OTFeedItemJoinRequestDelegate
+- (BOOL)prepareSegueForMessage:(UIStoryboardSegue *)segue {
+    if ([segue.identifier isEqualToString:@"JoinRequestSegue"]) {
+        OTFeedItemJoinOptionsViewController *controller = (OTFeedItemJoinOptionsViewController *)segue.destinationViewController;
+        controller.joinDelegate = self;
+    }
+    else
+        return NO;
+    return YES;
+}
 
-- (void)dismissFeedItemJoinRequestController {
-    [self.owner dismissViewControllerAnimated:YES completion:nil];
+#pragma mark - OTJoinDelegate
+
+- (void)addMessage {
+    [self.owner dismissViewControllerAnimated:YES completion:^() {
+        UIStoryboard *joinStoryboard = [UIStoryboard storyboardWithName:@"JoinFeedItem" bundle:nil];
+        OTFeedItemJoinMessageController *controller = [joinStoryboard instantiateViewControllerWithIdentifier:@"JoinMessage"];
+        controller.feedItem = self.feedItem;
+        [self.owner presentViewController:controller animated:YES completion:nil];
+    }];
 }
 
 #pragma mark - private methods

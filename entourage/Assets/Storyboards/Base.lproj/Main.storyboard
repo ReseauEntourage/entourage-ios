@@ -477,6 +477,7 @@
                         <outlet property="createEncounterButton" destination="Kc9-kH-YQ7" id="q2Y-Ck-e7b"/>
                         <outlet property="footerToolbar" destination="2EG-u9-ELx" id="eNS-jR-fWV"/>
                         <outlet property="indicatorView" destination="FLr-cF-t8Z" id="LUz-Z1-DVR"/>
+                        <outlet property="joinBehavior" destination="0l0-bs-S95" id="eTw-ea-fNI"/>
                         <outlet property="launcherButton" destination="uRg-cj-T9Q" id="oSp-ac-Y8Q"/>
                         <outlet property="mapDelegateProxy" destination="N0A-Lo-wcg" id="mXR-gi-O5J"/>
                         <outlet property="mapSegmentedControl" destination="gsB-s5-FKP" id="Vvs-3z-462"/>
@@ -487,7 +488,7 @@
                         <outlet property="tapEntourage" destination="rKY-F0-13f" id="alM-Ui-hC8"/>
                         <segue destination="cVp-EA-m5M" kind="modal" identifier="OTConfirmationPopup" id="Qf1-vA-gd6"/>
                         <segue destination="alD-dM-t4k" kind="modal" identifier="OTCreateMeeting" id="b08-id-ZFb"/>
-                        <segue destination="GHS-CJ-wmd" kind="modal" identifier="OTTourJoinRequestSegue" id="a8P-lF-ebs"/>
+                        <segue destination="GHS-CJ-wmd" kind="modal" identifier="JoinRequestSegue" id="a8P-lF-ebs"/>
                         <segue destination="cEE-ZD-h1d" kind="modal" identifier="UserProfileSegue" id="b42-UE-vP1"/>
                         <segue destination="R63-9E-dkT" kind="modal" identifier="QuitFeedItemSegue" id="QCV-ym-9OZ"/>
                         <segue destination="Yq0-qf-lgm" kind="modal" identifier="OTGuideDetailsSegue" id="x8u-KE-dPr"/>
@@ -508,6 +509,12 @@
                 </customObject>
                 <customObject id="hnO-wK-gKw" userLabel="Overlay Feeder" customClass="OTOverlayFeederBehavior"/>
                 <customObject id="rKY-F0-13f" userLabel="Tap Entourage" customClass="OTTapEntourageBehavior"/>
+                <customObject id="0l0-bs-S95" userLabel="Join Feed Item" customClass="OTJoinBehavior">
+                    <connections>
+                        <action selector="dismissFeedItemJoinRequestController" destination="vXZ-lx-hvc" eventType="valueChanged" id="uDB-Dt-gol"/>
+                        <outlet property="owner" destination="vXZ-lx-hvc" id="5T9-yu-2gZ"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="827" y="45"/>
         </scene>
@@ -1043,10 +1050,10 @@
             </objects>
             <point key="canvasLocation" x="1346" y="333"/>
         </scene>
-        <!--FeedItemJoinRequest-->
+        <!--JoinFeedItem-->
         <scene sceneID="JPP-j5-gm1">
             <objects>
-                <viewControllerPlaceholder storyboardName="FeedItemJoinRequest" id="GHS-CJ-wmd" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="JoinFeedItem" id="GHS-CJ-wmd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ny-Mu-RyI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="866.5" y="938"/>

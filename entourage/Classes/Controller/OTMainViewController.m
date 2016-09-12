@@ -13,7 +13,6 @@
 #import "OTCalloutViewController.h"
 #import "OTMapOptionsViewController.h"
 #import "OTTourOptionsViewController.h"
-#import "OTFeedItemJoinRequestViewController.h"
 #import "OTQuitFeedItemViewController.h"
 #import "OTGuideViewController.h"
 #import "UIView+entourage.h"
@@ -82,6 +81,7 @@
 #import "OTMapDelegateProxyBehavior.h"
 #import "OTOverlayFeederBehavior.h"
 #import "OTTapEntourageBehavior.h"
+#import "OTJoinBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -98,7 +98,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTFeedItemJoinRequestDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFiltersViewControllerDelegate>
+@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFiltersViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
@@ -110,6 +110,7 @@
 @property (nonatomic, weak) IBOutlet OTMapDelegateProxyBehavior* mapDelegateProxy;
 @property (nonatomic, weak) IBOutlet OTOverlayFeederBehavior* overlayFeeder;
 @property (nonatomic, weak) IBOutlet OTTapEntourageBehavior* tapEntourage;
+@property (nonatomic, weak) IBOutlet OTJoinBehavior* joinBehavior;
 
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
@@ -242,6 +243,10 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [self getData];
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
+}
+
+- (IBAction)dismissFeedItemJoinRequestController {
+    [self.tableView reloadData];
 }
 
 - (void)switchToNewsfeed {
@@ -994,15 +999,6 @@ static bool isShowingOptions = NO;
 }
 
 /********************************************************************************/
-#pragma mark - OTFeedItemJoinRequestDelegate
-
-- (void)dismissFeedItemJoinRequestController {
-    [self dismissViewControllerAnimated:YES completion:^{
-        [self.tableView reloadData];
-    }];
-}
-
-/********************************************************************************/
 #pragma mark - OTFeedItemQuitDelegate
 
 - (void)didQuitFeedItem:(OTFeedItem *)item {
@@ -1075,20 +1071,7 @@ static bool isShowingOptions = NO;
 }
 
 - (void)sendJoinRequest:(OTFeedItem*)feedItem {
-    [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:feedItem] getStateTransition] sendJoinRequest:^(OTFeedItemJoiner *joiner) {
-        [SVProgressHUD dismiss];
-        feedItem.joinStatus = JOIN_PENDING;
-        [self performSegueWithIdentifier:@"OTTourJoinRequestSegue" sender:nil];
-        [self.tableView reloadData];
-    } orFailure:^(NSError *error, BOOL isTour) {
-        NSLog(@"Error sending tour join request: %@", error.description);
-        [SVProgressHUD dismiss];
-        if(!isTour)
-            [self dismissViewControllerAnimated:YES completion:^{
-                [SVProgressHUD showErrorWithStatus:[error.userInfo valueForKey:@"JSONResponseSerializerWithDataKey"]];
-            }];
-    }];
+    [self.joinBehavior join:feedItem];
 }
 
 - (void)doJoinRequest:(OTFeedItem*)feedItem {
@@ -1215,6 +1198,9 @@ static bool isShowingOptions = NO;
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([self.joinBehavior prepareSegueForMessage:segue])
+        return;
+    
     UIViewController *destinationViewController = segue.destinationViewController;
     if([segue.identifier isEqualToString:@"UserProfileSegue"]) {
         UINavigationController *navController = (UINavigationController*)destinationViewController;
@@ -1255,13 +1241,6 @@ static bool isShowingOptions = NO;
         }
         controller.optionsDelegate = self;
         [controller setIsPOIVisible:self.guideMapDelegate.isActive];
-    }
-    else if([segue.identifier isEqualToString:@"OTTourJoinRequestSegue"]) {
-        OTFeedItemJoinRequestViewController *controller = (OTFeedItemJoinRequestViewController *)destinationViewController;
-        controller.view.backgroundColor = [UIColor appModalBackgroundColor];
-        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        controller.feedItem = self.selectedFeedItem;
-        controller.feedItemJoinRequestDelegate = self;
     }
     else if([segue.identifier isEqualToString:@"QuitFeedItemSegue"]) {
         OTQuitFeedItemViewController *controller = (OTQuitFeedItemViewController *)destinationViewController;

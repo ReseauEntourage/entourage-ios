@@ -48,12 +48,15 @@
 }
 
 - (void)sendJoinRequest:(void (^)(OTFeedItemJoiner *))success orFailure:(void (^)(NSError *, BOOL))failure {
+    NSString *oldJoinState = self.entourage.joinStatus;
+    self.entourage.joinStatus = JOIN_PENDING;
     [[OTEntourageService new] joinEntourage:self.entourage
         success:^(OTFeedItemJoiner *joiner) {
             NSLog(@"Sent entourage join request: %@", self.entourage.uid);
             success(joiner);
         } failure:^(NSError *error) {
             NSLog(@"Send entourage join request error: %@", error.description);
+            self.entourage.joinStatus = oldJoinState;
             failure(error, NO);
         }];
 }
