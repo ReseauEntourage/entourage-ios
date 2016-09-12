@@ -606,7 +606,7 @@
                                                             <state key="normal" title="8J" backgroundImage="24HInactive">
                                                                 <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             </state>
-                                                            <state key="selected" title="2J" backgroundImage="24HActive">
+                                                            <state key="selected" title="8J" backgroundImage="24HActive">
                                                                 <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             </state>
                                                             <connections>
@@ -623,7 +623,7 @@
                                                             <state key="normal" title="30J" backgroundImage="24HInactive">
                                                                 <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             </state>
-                                                            <state key="selected" title="3J" backgroundImage="24HActive">
+                                                            <state key="selected" title="30J" backgroundImage="24HActive">
                                                                 <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             </state>
                                                             <connections>
