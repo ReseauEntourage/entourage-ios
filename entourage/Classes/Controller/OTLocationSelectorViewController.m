@@ -56,10 +56,7 @@
     self.definesPresentationContext = YES;
     self.locationSearchTable.mapView = self.mapView;
     self.locationSearchTable.pinDelegate = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(zoomToCurrentLocation:)
-                                                 name:@kNotificationShowCurrentLocation
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
 }
 
 - (void)dealloc {
@@ -81,9 +78,12 @@
 }
 
 - (void)zoomToCurrentLocation:(id)sender {
-    if (self.mapView.userLocation.location != nil) {
-        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( self.mapView.userLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+    CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
+    if (currentLocation) {
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
         [self.mapView setRegion:region animated:YES];
+        [self updateMapPin:currentLocation];
+        [self.activityIndicator stopAnimating];
     }
 }
 
@@ -93,27 +93,13 @@
     NSArray *locations = [notification readLocations];
     if(!locations.count)
         return;
-    
     CLLocation *location = locations.firstObject;
-    if (!self.activityIndicator.isHidden) {
-        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil];
-        
-        [self.mapView removeAnnotations:self.mapView.annotations];
-        MKPointAnnotation *annotation = [MKPointAnnotation new];
-        annotation.coordinate = placemark.coordinate;
-        annotation.title = placemark.name;
-        [self.mapView addAnnotation:annotation];
-        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( location.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
-        [self.mapView setRegion:region animated:YES];
-        [self.activityIndicator stopAnimating];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowCurrentLocation object:nil];
-        [self updateSelectedLocation:location];
-    }
+    if (!self.activityIndicator.isHidden)
+        [self updateMapPin:location];
 }
 
 - (void)updateSelectedLocation:(CLLocation *) location {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error) {
             NSLog(@"error: %@", error.description);
@@ -147,6 +133,7 @@
         [self.mapView setRegion:region];
         [self.footerToolbar setTitle:placemark.name];
         [self.footerToolbar setupDefault];
+        [self.activityIndicator stopAnimating];
     }];
 }
 
@@ -155,13 +142,10 @@
 - (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id) annotation {
     if([annotation isKindOfClass: [MKUserLocation class]])
         return nil;
-    
     MKPinAnnotationView *pin = (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier: @"myPin"];
-    if (pin == nil) {
-        pin = [[MKPinAnnotationView alloc] initWithAnnotation: annotation reuseIdentifier: @"myPin"];
-    } else {
-        pin.annotation = annotation;
-    }
+    if (pin == nil)
+        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: @"myPin"];
+    pin.annotation = annotation;
     pin.animatesDrop = YES;
     pin.draggable = YES;
     
@@ -182,6 +166,21 @@
         CLLocation *location = [[CLLocation alloc] initWithLatitude:droppedAt.latitude longitude:droppedAt.longitude];
         [self updateSelectedLocation:location];
     }
+}
+
+#pragma mark - private methods
+
+- (void)updateMapPin:(CLLocation *)location {
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil];
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    MKPointAnnotation *annotation = [MKPointAnnotation new];
+    annotation.coordinate = placemark.coordinate;
+    annotation.title = placemark.name;
+    [self.mapView addAnnotation:annotation];
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( location.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+    [self.mapView setRegion:region animated:YES];
+    [self.activityIndicator stopAnimating];
+    [self updateSelectedLocation:location];
 }
 
 @end
