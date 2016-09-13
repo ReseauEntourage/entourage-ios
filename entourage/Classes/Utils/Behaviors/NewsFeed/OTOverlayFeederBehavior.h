@@ -7,6 +7,7 @@
 //
 
 #import "OTMapDelegateBehavior.h"
+#import "OTFeedItem.h"
 
 @interface OTOverlayFeederBehavior : OTMapDelegateBehavior
 
@@ -14,5 +15,6 @@
 
 - (void)addOverlays:(NSArray *)items;
 - (void)updateOverlays:(NSArray *)items;
+- (void)updateOverlayFor:(OTFeedItem *)item;
 
 @end

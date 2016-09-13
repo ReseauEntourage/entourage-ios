@@ -808,6 +808,7 @@ static bool isShowingOptions = NO;
     [self.tour.tourPoints addObject:tourPoint];
     [self.pointsToSend addObject:tourPoint];
     [self sendTourPoints:self.pointsToSend];
+    [self.overlayFeeder updateOverlayFor:self.tour];
     
     NSLog(@"Added point (%.6f, %.6f)", tourPoint.latitude, tourPoint.longitude);
 }
@@ -825,6 +826,7 @@ static bool isShowingOptions = NO;
                                NSLog(@"Sent %lu tour point(s)", (unsigned long)tourPoints.count);
                                [self.pointsToSend removeObjectsInArray:sentPoints];
                                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                               [self.overlayFeeder updateOverlayFor:self.tour];
                            }
                                failure:^(NSError *error) {
                                    NSLog(@"%@",[error localizedDescription]);
