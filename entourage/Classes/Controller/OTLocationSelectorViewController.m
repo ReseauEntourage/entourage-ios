@@ -77,26 +77,6 @@
     }
 }
 
-#pragma mark - Location notifications
-
-- (void)updateSelectedLocation:(CLLocation *) location {
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"error: %@", error.description);
-        }
-        CLPlacemark *placemark = placemarks.firstObject;
-        if (placemark.thoroughfare !=  nil)
-            [self.footerToolbar setTitle:placemark.thoroughfare ];
-        else
-            [self.footerToolbar setTitle:placemark.locality ];
-    }];
-    self.selectedLocation = location;
-    if ([self.locationSelectionDelegate respondsToSelector:@selector(didSelectLocation:)]) {
-        [self.locationSelectionDelegate didSelectLocation:location];
-    }
-}
-
 #pragma mark - HandleMapSearch
 
 - (void)dropPinZoomIn:(MKPlacemark *)placemark {
@@ -142,6 +122,24 @@
 }
 
 #pragma mark - private methods
+
+- (void)updateSelectedLocation:(CLLocation *) location {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"error: %@", error.description);
+        }
+        CLPlacemark *placemark = placemarks.firstObject;
+        if (placemark.thoroughfare !=  nil)
+            [self.footerToolbar setTitle:placemark.thoroughfare ];
+        else
+            [self.footerToolbar setTitle:placemark.locality ];
+    }];
+    self.selectedLocation = location;
+    if ([self.locationSelectionDelegate respondsToSelector:@selector(didSelectLocation:)]) {
+        [self.locationSelectionDelegate didSelectLocation:location];
+    }
+}
 
 - (void)updateMapPin:(CLLocation *)location {
     MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil];
