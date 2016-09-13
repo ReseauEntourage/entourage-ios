@@ -7,14 +7,12 @@
 //
 
 #import "OTUser.h"
-
+#import "OTApiKeys.h"
 #import "NSDictionary+Parsing.h"
 
 NSString *const kKeySid = @"id";
 NSString *const kKeyType = @"user_type";
 NSString *const kKeyEmail = @"email";
-NSString *const kKeyFirstname = @"first_name";
-NSString *const kKeyLastname = @"last_name";
 NSString *const kKeyDisplayName = @"display_name";
 NSString *const kKeyUserPhone = @"phone";
 NSString *const kKeyPassword = @"sms_code";
@@ -37,8 +35,8 @@ NSString *const kKeyOrganization = @"organization";
         _type = [dictionary stringForKey:kKeyType];
 		_email = [dictionary stringForKey:kKeyEmail];
         _avatarURL = [dictionary stringForKey:kKeyAvatarURL];
-        _firstName = [dictionary stringForKey:kKeyFirstname];
-        _lastName = [dictionary stringForKey:kKeyLastname];
+        _firstName = [dictionary stringForKey:kWSKeyFirstname];
+        _lastName = [dictionary stringForKey:kWSKeyLastname];
         _displayName = [dictionary stringForKey:kKeyDisplayName];
         _phone = [dictionary stringForKey:kKeyUserPhone];
 		_token = [dictionary stringForKey:kKeyToken];
@@ -53,10 +51,10 @@ NSString *const kKeyOrganization = @"organization";
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     if (self.firstName != nil) {
-        [dictionary setObject:self.firstName forKey:kKeyFirstname];
+        [dictionary setObject:self.firstName forKey:kWSKeyFirstname];
     }
     if (self.lastName != nil) {
-        [dictionary setObject:self.lastName forKey:kKeyLastname];
+        [dictionary setObject:self.lastName forKey:kWSKeyLastname];
     }
     if (self.email != nil) {
         [dictionary setObject:self.email forKey:kKeyEmail];
@@ -77,8 +75,8 @@ NSString *const kKeyOrganization = @"organization";
     [encoder encodeObject:self.type forKey:kKeyType];
 	[encoder encodeObject:self.email forKey:kKeyEmail];
     [encoder encodeObject:self.avatarURL forKey:kKeyAvatarURL];
-    [encoder encodeObject:self.firstName forKey:kKeyFirstname];
-    [encoder encodeObject:self.lastName forKey:kKeyLastname];
+    [encoder encodeObject:self.firstName forKey:kWSKeyFirstname];
+    [encoder encodeObject:self.lastName forKey:kWSKeyLastname];
     [encoder encodeObject:self.displayName forKey:kKeyDisplayName];
     [encoder encodeObject:self.phone forKey:kKeyUserPhone];
 	[encoder encodeObject:self.token forKey:kKeyToken];
@@ -95,8 +93,8 @@ NSString *const kKeyOrganization = @"organization";
         self.type = [decoder decodeObjectForKey:kKeyType];
 		self.email = [decoder decodeObjectForKey:kKeyEmail];
         self.avatarURL = [decoder decodeObjectForKey:kKeyAvatarURL];
-        self.firstName = [decoder decodeObjectForKey:kKeyFirstname];
-        self.lastName = [decoder decodeObjectForKey:kKeyLastname];
+        self.firstName = [decoder decodeObjectForKey:kWSKeyFirstname];
+        self.lastName = [decoder decodeObjectForKey:kWSKeyLastname];
         self.displayName = [decoder decodeObjectForKey:kKeyDisplayName];
         self.phone = [decoder decodeObjectForKey:kKeyUserPhone];
         self.token = [decoder decodeObjectForKey:kKeyToken];

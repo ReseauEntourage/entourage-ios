@@ -8,6 +8,7 @@
 
 #import "OTMyFeedMessage.h"
 #import "NSDictionary+Parsing.h"
+#import "OTApiKeys.h"
 
 #define kWSText @"text"
 
@@ -17,6 +18,16 @@
     self = [super init];
     if (self) {
         self.text = [dictionary valueForKey:kWSText];
+        id author = [dictionary objectForKey:kWSKeyAuthor];
+        if(author && ![author isKindOfClass:[NSNull class]] && [author isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *authorDict = author;
+            self.firstName = [authorDict valueForKey:kWSKeyFirstname];
+            self.lastName = [authorDict valueForKey:kWSKeyLastname];
+        }
+        if(!self.firstName || [self.firstName isKindOfClass:[NSNull class]])
+            self.firstName = @"";
+        if(!self.lastName || [self.lastName isKindOfClass:[NSNull class]])
+            self.lastName = @"";
     }
     return self;
 }

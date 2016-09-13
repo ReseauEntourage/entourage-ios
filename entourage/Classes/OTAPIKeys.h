@@ -57,6 +57,8 @@
 #define kWSKeyAuthor @"author"
 #define kWSKeyAvatarUrl @"avatar_url"
 #define kWSKeyDisplayName @"display_name"
+#define kWSKeyFirstname @"first_name"
+#define kWSKeyLastname @"last_name"
 
 
 

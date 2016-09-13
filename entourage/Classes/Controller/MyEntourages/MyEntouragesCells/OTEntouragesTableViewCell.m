@@ -24,7 +24,22 @@
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
     self.lblNumberOfUsers.text = [@"+" stringByAppendingString:self.lblNumberOfUsers.text];
-    self.lblLastMessage.text = item.lastMessage.text;
+    self.lblLastMessage.text = [self getAuthorTextFor:item.lastMessage];
+}
+
+#pragma mark - private methods
+
+- (NSString *)getAuthorTextFor:(OTMyFeedMessage *)lastMessage {
+    NSMutableString *result = [NSMutableString new];
+    if(lastMessage.firstName.length > 0)
+        [result appendString:lastMessage.firstName];
+    if(lastMessage.lastName.length > 0)
+        [result appendFormat:@" %@", [lastMessage.lastName substringToIndex:1]];
+    if(result.length > 0)
+        [result appendString:@": "];
+    if(lastMessage.text)
+        [result appendString:lastMessage.text];
+    return result;
 }
 
 @end

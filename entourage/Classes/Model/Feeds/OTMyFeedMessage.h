@@ -11,6 +11,8 @@
 @interface OTMyFeedMessage : NSObject
 
 @property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, strong) NSString *lastName;
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 
