@@ -65,16 +65,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [self zoomToCurrentLocation:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationLocationUpdated object:nil];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)zoomToCurrentLocation:(id)sender {
@@ -89,15 +79,6 @@
 
 #pragma mark - Location notifications
 
-- (void)locationUpdated:(NSNotification *)notification {
-    NSArray *locations = [notification readLocations];
-    if(!locations.count)
-        return;
-    CLLocation *location = locations.firstObject;
-    if (!self.activityIndicator.isHidden)
-        [self updateMapPin:location];
-}
-
 - (void)updateSelectedLocation:(CLLocation *) location {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
@@ -105,11 +86,10 @@
             NSLog(@"error: %@", error.description);
         }
         CLPlacemark *placemark = placemarks.firstObject;
-        if (placemark.thoroughfare !=  nil) {
+        if (placemark.thoroughfare !=  nil)
             [self.footerToolbar setTitle:placemark.thoroughfare ];
-        } else {
+        else
             [self.footerToolbar setTitle:placemark.locality ];
-        }
     }];
     self.selectedLocation = location;
     if ([self.locationSelectionDelegate respondsToSelector:@selector(didSelectLocation:)]) {
@@ -152,17 +132,10 @@
     return pin;
 }
 
-- (void)mapView:(MKMapView *)mapView
- annotationView:(MKAnnotationView *)annotationView
-    didChangeDragState:(MKAnnotationViewDragState)newState
-    fromOldState:(MKAnnotationViewDragState)oldState
-{
-    if (newState == MKAnnotationViewDragStateEnding)
-    {
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
+    if (newState == MKAnnotationViewDragStateEnding) {
         CLLocationCoordinate2D droppedAt = annotationView.annotation.coordinate;
         [annotationView.annotation setCoordinate:droppedAt];
-        
-        NSLog(@"Pin dropped at %f,%f", droppedAt.latitude, droppedAt.longitude);
         CLLocation *location = [[CLLocation alloc] initWithLatitude:droppedAt.latitude longitude:droppedAt.longitude];
         [self updateSelectedLocation:location];
     }

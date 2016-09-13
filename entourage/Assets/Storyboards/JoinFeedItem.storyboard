@@ -206,9 +206,9 @@ transmise au créateur.
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="0NR-0y-u5a"/>
-                                                <exclude reference="wll-J7-wwM"/>
                                                 <exclude reference="V4b-Rw-72H"/>
                                                 <exclude reference="vNs-28-VtS"/>
+                                                <exclude reference="wll-J7-wwM"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -231,8 +231,8 @@ transmise au créateur.
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="7kj-8G-Acb"/>
                                                 <exclude reference="1n3-i2-oiR"/>
+                                                <exclude reference="7kj-8G-Acb"/>
                                                 <exclude reference="LVh-WK-DuW"/>
                                                 <exclude reference="Sec-QZ-iSs"/>
                                             </mask>
