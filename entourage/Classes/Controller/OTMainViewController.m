@@ -290,7 +290,7 @@
     
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
     
-    [self.mapView setRegion:region animated:YES];
+    [self.mapView setRegion:region animated:NO];
     
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
@@ -331,9 +331,7 @@
     if ([OTOngoingTourService sharedInstance].isOngoing) {
         CLLocationCoordinate2D whereTap = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
         CLLocation *location = [[CLLocation alloc] initWithLatitude:whereTap.latitude longitude:whereTap.longitude];
-        CLLocation *userLocation = [[CLLocation alloc]
-                                    initWithLatitude:self.mapView.userLocation.coordinate.latitude
-                                    longitude:self.mapView.userLocation.coordinate.longitude];
+        CLLocation *userLocation = [OTLocationManager sharedInstance].currentLocation;
         
         CLLocationDistance distance = [location distanceFromLocation:userLocation];
         if (distance <=  MAX_DISTANCE) {
@@ -748,9 +746,6 @@ static bool isShowingOptions = NO;
     self.currentTourType = tourType;
     self.tour = [[OTTour alloc] initWithTourType:tourType];
     [self.pointsToSend removeAllObjects];
-    
-    //    if (self.locations.count == 0)
-    //        [self.locations addObject:self.mapView.userLocation];
     if (self.locations.count > 0) {
         OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:self.locations.lastObject];
         [self.tour.tourPoints addObject:tourPoint];
@@ -781,9 +776,8 @@ static bool isShowingOptions = NO;
              [self showNewTourOnGoing];
              
              self.locations = [NSMutableArray new];
-             //[self.locations addObject:self.mapView.userLocation];
              
-             OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:self.mapView.userLocation.location];
+             OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:[OTLocationManager sharedInstance].currentLocation];
              [self.pointsToSend addObject:tourPoint];
              [OTOngoingTourService sharedInstance].isOngoing = YES;
              self.launcherButton.enabled = YES;
@@ -1272,11 +1266,8 @@ static bool isShowingOptions = NO;
         UINavigationController *navController = (UINavigationController*)destinationViewController;
         OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.childViewControllers[0];
         controller.type = self.entourageType;
-        CLLocationDegrees lat = self.mapView.userLocation.coordinate.latitude;
-        CLLocationDegrees lon = self.mapView.userLocation.coordinate.longitude;
-        CLLocation *location = [[CLLocation alloc] initWithLatitude: lat
-                                                          longitude:lon];
-        controller.location = location;
+        CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
+        controller.location = currentLocation;
         controller.entourageEditorDelegate = self;
     }
     else if([segue.identifier isEqualToString:@"FiltersSegue"]) {
