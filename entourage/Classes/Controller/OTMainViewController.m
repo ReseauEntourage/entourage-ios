@@ -1026,11 +1026,11 @@ static bool isShowingOptions = NO;
 }
 
 - (void)zoomToCurrentLocation:(id)sender {
-    
-    if (self.mapView.userLocation.location != nil) {
-        CLLocationDistance distance = MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.mapView.centerCoordinate), MKMapPointForCoordinate(self.mapView.userLocation.coordinate));
+    CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
+    if (currentLocation) {
+        CLLocationDistance distance = MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.mapView.centerCoordinate), MKMapPointForCoordinate(currentLocation.coordinate));
         BOOL animatedSetCenter = (distance < MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS);
-        [self.mapView setCenterCoordinate:self.mapView.userLocation.coordinate animated:animatedSetCenter];
+        [self.mapView setCenterCoordinate:currentLocation.coordinate animated:animatedSetCenter];
     }
 }
 
