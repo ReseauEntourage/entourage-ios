@@ -8,21 +8,22 @@
 
 #import "OTJoinAcceptedCell.h"
 #import "OTFeedItemJoiner.h"
-#import "OTConsts.h"
 #import "UIColor+entourage.h"
+#import "OTFeedItemFactory.h"
 
 @implementation OTJoinAcceptedCell
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
     OTFeedItemJoiner *joiner = (OTFeedItemJoiner *)timelinePoint;
-    [self.lblInfo setAttributedText:[self getLabelText:joiner.displayName]];
+    [self.lblInfo setAttributedText:[self getLabelText:joiner.displayName forItem:joiner.feedItem]];
 }
 
 #pragma mark - private methods
 
-- (NSAttributedString *)getLabelText:(NSString *)userName {
+- (NSAttributedString *)getLabelText:(NSString *)userName forItem:(OTFeedItem *)feedItem {
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:userName attributes:@{NSForegroundColorAttributeName: [UIColor appOrangeColor]}];
-    NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:OTLocalizedString(@"user_joined_tour") attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
+    NSString *joinText = [[[OTFeedItemFactory createFor:feedItem] getUI] joinAcceptedText];
+    NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:joinText attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
     NSMutableAttributedString *nameInfoAttrString = nameAttrString.mutableCopy;
     [nameInfoAttrString appendAttributedString:infoAttrString];
     return nameInfoAttrString;

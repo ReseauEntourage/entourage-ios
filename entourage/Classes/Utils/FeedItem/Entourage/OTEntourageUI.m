@@ -32,6 +32,10 @@
     return OTLocalizedString([self displayType]);
 }
 
+- (NSString *)joinAcceptedText {
+    return OTLocalizedString(@"user_joined_entourage");
+}
+
 - (void)timeDataWithCompletion:(void (^)(NSString *))completion {
     if(!self.entourage.location || !completion) {
         completion(@"");

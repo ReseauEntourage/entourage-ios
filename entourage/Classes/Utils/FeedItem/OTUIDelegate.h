@@ -18,6 +18,7 @@
 - (NSString *)summary;
 - (NSString *)feedItemDescription;
 - (NSString *)navigationTitle;
+- (NSString *)joinAcceptedText;
 - (void)timeDataWithCompletion:(void(^)(NSString *))completion;
 
 @end
