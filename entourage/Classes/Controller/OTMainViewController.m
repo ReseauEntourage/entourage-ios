@@ -433,7 +433,7 @@ static BOOL didGetAnyData = NO;
 
     // need to add time in the future because of wrong time difference
     NSDictionary *filterDictionary = @{
-                                       @"before" : [[NSDate date] dateByAddingTimeInterval:10],
+                                       @"before" : [NSDate date],
                                        @"latitude": @(self.requestedToursCoordinate.latitude),
                                        @"longitude": @(self.requestedToursCoordinate.longitude),
                                        @"distance": @FEEDS_REQUEST_DISTANCE_KM,
@@ -1031,7 +1031,7 @@ static bool isShowingOptions = NO;
 
 - (void)loadMoreData {
     // add -1 seconds to prevent getting the same item over and over again
-    self.currentPagination.beforeDate = [((OTFeedItem*)self.feeds.lastObject).creationDate dateByAddingTimeInterval:-1];
+    self.currentPagination.beforeDate = ((OTFeedItem*)self.feeds.lastObject).creationDate;
     [self getData];
 }
 
