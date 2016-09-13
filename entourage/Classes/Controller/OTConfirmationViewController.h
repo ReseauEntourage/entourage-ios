@@ -12,8 +12,10 @@
 
 @protocol OTConfirmationViewControllerDelegate <NSObject>
 
-- (void)tourSent;
+- (void)tourSent:(OTTour*)tour;
+@optional
 - (void)resumeTour;
+- (void)tourCloseError;
 
 @end
 
@@ -22,7 +24,6 @@
 @property(nonatomic, weak) id<OTConfirmationViewControllerDelegate> delegate;
 
 - (void)configureWithTour:(OTTour *)currentTour
-       andEncountersCount:(NSNumber *)encountersCount
-              andDuration:(NSTimeInterval)duration;
+       andEncountersCount:(NSNumber *)encountersCount;
 
 @end

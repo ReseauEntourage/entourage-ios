@@ -14,5 +14,10 @@
 #pragma mark - Configure
 
 - (UIBarButtonItem *)createMenuButton;
+- (UIBarButtonItem *)createBackFrontMenuButton;
+- (UIBarButtonItem *)setupChatsButton;
+- (UIBarButtonItem *)setupCloseModal;
+- (UIBarButtonItem *)setupCloseModalTransparent;
+- (UIImage*)setupLogoImage;
 
 @end

@@ -9,6 +9,7 @@
 #import "OTMenuTableViewCell.h"
 
 NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier";
+NSString *const OTMenuLogoutTableViewCellIdentifier = @"OTMenuLogoutTableViewCellIdentifier";
 
 @implementation OTMenuTableViewCell
 

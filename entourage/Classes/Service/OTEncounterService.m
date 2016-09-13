@@ -9,6 +9,7 @@
 #import "OTEncounterService.h"
 #import "OTHTTPRequestManager.h"
 #import "OTEncounter.h"
+#import "OTConsts.h"
 #import "OTTourService.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
@@ -30,25 +31,58 @@ NSString *const kEncounter = @"encounter";
           withSuccess:(void (^)(OTEncounter *receivedEncounter))success
               failure:(void (^)(NSError *error))failure
 {
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_send_encounter", @""), kAPITourRoute, tourId, kAPIEncounterRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:OTLocalizedString(@"url_send_encounter"), kAPITourRoute, tourId, kAPIEncounterRoute, [[NSUserDefaults standardUserDefaults] currentUser].token];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
-    parameters[kEncounter] = [encounter dictionaryForWebservice];
-    [[OTHTTPRequestManager sharedInstance] POST:url
-                                     parameters:parameters
-                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                            if (success) {
-                                                OTEncounter *receivedEncounter = [self encounterFromDictionary:responseObject];
-                                                success(receivedEncounter);
-                                            }
-                                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                            if (failure) {
-                                                failure(error);
-                                            }
-                                        }];
+    parameters[kEncounter] = [encounter dictionaryForWebService];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success) {
+             OTEncounter *receivedEncounter = [self encounterFromDictionary:responseObject];
+             success(receivedEncounter);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure) {
+             failure(error);
+         }
+     }];
 }
 
+- (void)sendEntourage:(OTEntourage *)entourage
+          withSuccess:(void (^)(OTEntourage *updatedEntourage))success
+              failure:(void (^)(NSError *error))failure
+{
+    NSString *url = OTLocalizedString(@"url_send_entourage");
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    parameters[@"entourage"] = [entourage dictionaryForWebService];
+    
+    [[OTHTTPRequestManager sharedInstance]
+         POSTWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
+         {
+             if (success) {
+                 NSDictionary *entourageDictionary = [(NSDictionary*)responseObject objectForKey:kWSKeyEntourage];
+                 OTEntourage *updatedEntourage = [[OTEntourage alloc] initWithDictionary:entourageDictionary];
+                 success(updatedEntourage);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure) {
+                 failure(error);
+             }
+         }];
+}
+
+
 /**************************************************************************************************/
-#pragma mark - Private methods
+#pragma mark -  methods
 
 - (OTEncounter *)encounterFromDictionary:(NSDictionary *)data
 {

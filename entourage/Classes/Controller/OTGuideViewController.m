@@ -9,7 +9,12 @@
 // Controller
 #import "OTGuideViewController.h"
 #import "UIViewController+menu.h"
+#import "OTGuideDetailsViewController.h"
 #import "OTCalloutViewController.h"
+#import "OTMapOptionsViewController.h"
+#import "OTTourOptionsViewController.h"
+#import "OTSWRevealViewController.h"
+#import "OTConsts.h"
 
 // View
 #import "OTCustomAnnotation.h"
@@ -17,14 +22,16 @@
 
 // Model
 #import "OTPoi.h"
+#import "OTPoiCategory.h"
 
 // Service
 #import "OTPoiService.h"
+#import "OTLocationManager.h"
+#import "NSNotification+entourage.h"
 
 // Framework
 #import <MapKit/MapKit.h>
 #import <MapKit/MKMapView.h>
-#import <CoreLocation/CoreLocation.h>
 #import <WYPopoverController/WYPopoverController.h>
 #import <kingpin/kingpin.h>
 
@@ -34,15 +41,14 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, CLLocationManagerDelegate>
+@interface OTGuideViewController () <MKMapViewDelegate, OTCalloutViewControllerDelegate, OTOptionsDelegate>
 
-@property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffectView;
 
 // map
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (nonatomic)CLLocationCoordinate2D currentMapCenter;
 
 // markers
 
@@ -55,6 +61,12 @@
 @property (nonatomic) BOOL isRegionSetted;
 @property (nonatomic, strong) NSMutableArray *markers;
 
+// tour options
+
+@property (nonatomic, weak) IBOutlet UIButton *mapOptionsButton;
+@property (nonatomic, weak) IBOutlet UIButton *tourOptionsButton;
+@property (nonatomic) BOOL isTourRunning;
+
 @end
 
 @implementation OTGuideViewController
@@ -65,25 +77,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _locationManager = [[CLLocationManager alloc] init];
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
-    [self.locationManager startUpdatingLocation];
-    
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     [self zoomToCurrentLocation:nil];
     [self createMenuButton];
     [self configureView];
+    [self updateOptionsButtons];
     
     self.markers = [NSMutableArray new];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self startLocationUpdates];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationLocationUpdated object:nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -95,7 +106,15 @@
 #pragma mark - Private methods
 
 - (void)configureView {
-    self.title = NSLocalizedString(@"guideviewcontroller_title", @"");
+    [self setupLogoImage];
+    UIBarButtonItem *chatButton = [self setupChatsButton];
+    [chatButton setTarget:self];
+    [chatButton setAction:@selector(showEntourages)];
+    //self.title = NSLocalizedString(@"guideviewcontroller_title", @"");
+}
+
+- (void)showEntourages {
+    [self performSegueWithIdentifier:@"EntouragesSegue" sender:nil];
 }
 
 - (void)registerObserver {
@@ -155,32 +174,11 @@
         }
     }];
     
-    // Start up our view controller from a Storyboard
-    OTCalloutViewController *controller = (OTCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTCalloutViewController"];
-    controller.delegate = self;
+    if (annotation == nil) return;
     
-    UIView *popView = [controller view];
-    
-    popView.frame = CGRectOffset(view.frame, .0f, CGRectGetHeight(popView.frame) + 10000.f);
-    
-    [UIView animateWithDuration:.3f
-                     animations: ^
-     {
-         popView.frame = CGRectOffset(popView.frame, .0f, -CGRectGetHeight(popView.frame));
-     }];
-    [controller configureWithPoi:annotation.poi];
-    
-    self.popover = [[WYPopoverController alloc] initWithContentViewController:controller];
-    [self.popover setTheme:[WYPopoverTheme themeForIOS7]];
-    
-    [self.popover presentPopoverFromRect:view.bounds
-                                  inView:view
-                permittedArrowDirections:WYPopoverArrowDirectionNone
-                                animated:YES
-                                 options:WYPopoverAnimationOptionFadeWithScale];
     [Flurry logEvent:@"Open_POI_From_Map" withParameters:@{ @"poi_id" : annotation.poi.sid }];
     
-    self.blurEffectView.hidden = NO;
+    [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation];
 }
 
 /********************************************************************************/
@@ -239,7 +237,12 @@
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     [self.clusteringController refresh:animated];
-    [self refreshMap];
+    
+    CLLocationDistance distance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(_currentMapCenter), MKMapPointForCoordinate(mapView.centerCoordinate))) / 1000.0f;
+    if (distance > [self mapHeight]) {
+        [self refreshMap];
+        self.currentMapCenter = mapView.centerCoordinate;
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
@@ -262,26 +265,11 @@
     }
 }
 
-- (void)startLocationUpdates {
-    if (self.locationManager == nil) {
-        self.locationManager = [[CLLocationManager alloc] init];
-    }
-    
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.activityType = CLActivityTypeFitness;
-    
-    self.locationManager.distanceFilter = 5;
-    
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+- (void)locationUpdated:(NSNotification *)notification {
+    NSArray *locations = [notification readLocations];
     for (CLLocation *newLocation in locations) {
-        
         NSDate *eventDate = newLocation.timestamp;
         NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-        
         if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20) {
             MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500);
             [self.mapView setRegion:region animated:YES];
@@ -289,16 +277,28 @@
     }
 }
 
+- (OTPoiCategory*)categoryById:(NSNumber*)sid {
+    if (sid == nil) return nil;
+    for (OTPoiCategory* category in self.categories) {
+        if (category.sid != nil) {
+            if ([category.sid isEqualToNumber:sid]) {
+                return category;
+            }
+        }
+    }
+    return nil;
+}
+
 /********************************************************************************/
 #pragma mark - OTCalloutViewControllerDelegate
 
 - (void)dismissPopover {
-    self.blurEffectView.hidden = YES;
     [self.popover dismissPopoverAnimated:YES];
 }
 
 /**************************************************************************************************/
 #pragma mark - Actions
+
 
 - (IBAction)zoomToCurrentLocation:(id)sender {
     float spanX = 0.01;
@@ -315,6 +315,105 @@
     region.span.latitudeDelta = spanX;
     region.span.longitudeDelta = spanY;
     [self.mapView setRegion:region animated:YES];
+}
+
+/********************************************************************************/
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"OTMapOptionsSegue"]) {
+        OTMapOptionsViewController *controller = (OTMapOptionsViewController *)segue.destinationViewController;
+        controller.optionsDelegate = self;
+        [controller setIsPOIVisible:YES];
+    } else if([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
+        OTTourOptionsViewController *controller = (OTTourOptionsViewController *)segue.destinationViewController;
+        controller.optionsDelegate = self;
+        [controller setIsPOIVisible:YES];
+    } else if ([segue.identifier isEqualToString:@"OTGuideDetailsSegue"]) {
+        UINavigationController *navController = (UINavigationController*)segue.destinationViewController;
+        OTGuideDetailsViewController *controller = navController.childViewControllers[0];
+        controller.poi = ((OTCustomAnnotation*)sender).poi;
+        controller.category = [self categoryById:controller.poi.categoryId];
+    }
+}
+
+/********************************************************************************/
+#pragma mark - OTOptionsDelegate
+
+- (void)createTour {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self showCreateFeedItemAlertWithText:OTLocalizedString(@"poi_create_tour_alert")];
+
+    }];
+}
+
+- (void)createDemande {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self showCreateFeedItemAlertWithText:OTLocalizedString(@"poi_create_demande_alert")];
+    }];
+}
+
+- (void)createContribution {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self showCreateFeedItemAlertWithText:OTLocalizedString(@"poi_create_contribution_alert")];
+    }];
+}
+
+- (void)showCreateFeedItemAlertWithText:(NSString *)text {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:text preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"cancelAlert") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:cancelAction];
+    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"quitAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self performSegueWithIdentifier:@"OTMapViewSegue" sender:nil];
+    }];
+    [alert addAction:quitAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+-(void)togglePOI {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self performSegueWithIdentifier:@"OTMapViewSegue" sender:nil];
+    }];
+}
+
+-(void)dismissOptions {
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+/********************************************************************************/
+#pragma mark - OTOptionsDelegate - tours
+
+- (void)createEncounter {
+    [self dismissViewControllerAnimated:NO completion:^{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"poi_create_encounter_alert", @"") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"cancelAlert") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:cancelAction];
+        UIAlertAction *quitAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"quitAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self performSegueWithIdentifier:@"OTMapViewSegue" sender:nil];
+        }];
+        [alert addAction:quitAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }];
+}
+
+/********************************************************************************/
+#pragma mark - Tour Handling
+
+-(void) setIsTourRunning:(BOOL)isTourRunning {
+    _isTourRunning = isTourRunning;
+    if (self.isViewLoaded) {
+        [self updateOptionsButtons];
+    }
+}
+
+- (void)updateOptionsButtons {
+    self.mapOptionsButton.hidden = self.isTourRunning;
+    self.tourOptionsButton.hidden = !self.isTourRunning;
 }
 
 @end

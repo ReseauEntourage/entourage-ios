@@ -22,6 +22,7 @@ NSString *const kPOIDetails = @"description";
 NSString *const kPOIWebsite = @"website";
 NSString *const kPOIEmail = @"email";
 NSString *const kImagePrefixName = @"poi_category-%d";
+NSString *const kPOITransparentImagePrefix = @"poi_transparent_category-%d";
 NSString *const kImageDefaultName = @"poi_category-0";
 
 @implementation OTPoi

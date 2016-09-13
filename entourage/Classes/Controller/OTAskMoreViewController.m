@@ -7,13 +7,14 @@
 //
 
 #import "OTAskMoreViewController.h"
-
+#import "OTConsts.h"
 // Service
 #import "OTAuthService.h"
 
 // Helper
 #import "NSString+Validators.h"
 #import "NSDictionary+Parsing.h"
+#import "UIViewController+menu.h"
 
 // View
 #import "SVProgressHUD.h"
@@ -38,6 +39,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = OTLocalizedString(@"discoverEntourage");
+    self.navigationController.navigationBarHidden = NO;
+    [self setupCloseModal];
 }
 
 /********************************************************************************/
@@ -47,6 +51,7 @@
     if ([self.delegate respondsToSelector:@selector(hideBlurEffect)]) {
         [self.delegate hideBlurEffect];
     }
+    [self.emailField resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -75,22 +80,24 @@
                                                     success:^(BOOL active) {
                                                         NSLog(active ? @"Newsletter subscription success" : @"Newsletter subscription failure");
                                                         if (active) {
-                                                            [SVProgressHUD showSuccessWithStatus:@"Demande envoyée"];
+                                                            [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent") ];
                                                             [self dismissViewControllerAnimated:YES completion:nil];
+                                                           
                                                         }
                                                     } failure:^(NSError *error) {
-                                                        [SVProgressHUD showErrorWithStatus:@"Demande non envoyée"];
+                                                        [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"requestNotSent")];
                                                         NSLog(@"%@", error);
                                                     }];
     } else {
         [[[UIAlertView alloc]
-          initWithTitle:@"Demande impossible"
-          message:@"Veuillez renseigner une adresse email valide"
+          initWithTitle:OTLocalizedString(@"requestImposible")
+          message:OTLocalizedString(@"needValidEmail")
           delegate:nil
           cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
+          otherButtonTitles:@"Ok",
           nil] show];
     }
 }
+
 
 @end

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="mpV-Sz-lXL">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tour Options View Controller-->
+        <scene sceneID="TLF-3I-8Si">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="mpV-Sz-lXL" customClass="OTTourOptionsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uky-FJ-Jo8"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fqo-er-23H"/>
+                    </layoutGuides>
+                    <view key="view" alpha="0.88" contentMode="scaleToFill" id="yHN-0I-uCY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdb-7x-qlW">
+                                <rect key="frame" x="257" y="440" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="64J-Nf-Ayn"/>
+                                    <constraint firstAttribute="height" constant="48" id="hQC-GI-ha6"/>
+                                </constraints>
+                                <state key="normal" image="report"/>
+                                <connections>
+                                    <action selector="doCreateEncounter:" destination="mpV-Sz-lXL" eventType="touchUpInside" id="3nE-1l-SD5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qlo-Hm-BSG">
+                                <rect key="frame" x="250" y="496" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="AKD-6H-Og5"/>
+                                    <constraint firstAttribute="height" constant="62" id="BKb-de-NE6"/>
+                                </constraints>
+                                <state key="normal" image="closeShadow"/>
+                                <connections>
+                                    <action selector="doDismiss:" destination="mpV-Sz-lXL" eventType="touchUpInside" id="GXg-H2-ToC"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une rencontre" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhw-r6-g45">
+                                <rect key="frame" x="39" y="453" width="210" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="1fJ-JE-qCM"/>
+                                    <constraint firstAttribute="height" constant="21" id="Qzp-ey-Od6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upg-Fe-YLk" userLabel="POI Button">
+                                <rect key="frame" x="257" y="384" width="48" height="48"/>
+                                <state key="normal" image="solidarity"/>
+                                <connections>
+                                    <action selector="doShowPOI:" destination="mpV-Sz-lXL" eventType="touchUpInside" id="NUu-Dq-29c"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Afficher le guide de solidarité" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2yT-Pg-ZcZ" userLabel="POI Label">
+                                <rect key="frame" x="43" y="399" width="206" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <color key="textColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="xdb-7x-qlW" secondAttribute="trailing" constant="-1" id="5C3-4r-lLf"/>
+                            <constraint firstItem="Upg-Fe-YLk" firstAttribute="trailing" secondItem="yHN-0I-uCY" secondAttribute="trailingMargin" constant="1" id="BNa-FK-qwB"/>
+                            <constraint firstItem="qlo-Hm-BSG" firstAttribute="trailing" secondItem="yHN-0I-uCY" secondAttribute="trailingMargin" constant="8" id="IeK-Xb-s8t"/>
+                            <constraint firstItem="Upg-Fe-YLk" firstAttribute="bottom" secondItem="xdb-7x-qlW" secondAttribute="top" constant="-8" id="Lx3-IK-Mfk"/>
+                            <constraint firstItem="xdb-7x-qlW" firstAttribute="centerY" secondItem="zhw-r6-g45" secondAttribute="centerY" id="XlL-ty-XOC"/>
+                            <constraint firstItem="2yT-Pg-ZcZ" firstAttribute="centerY" secondItem="Upg-Fe-YLk" secondAttribute="centerY" id="ePA-Td-aNT"/>
+                            <constraint firstItem="Fqo-er-23H" firstAttribute="top" secondItem="qlo-Hm-BSG" secondAttribute="bottom" constant="10" id="qsf-p6-3kX"/>
+                            <constraint firstItem="qlo-Hm-BSG" firstAttribute="top" secondItem="xdb-7x-qlW" secondAttribute="bottom" constant="8" id="sLn-57-ZwP"/>
+                            <constraint firstItem="2yT-Pg-ZcZ" firstAttribute="trailing" secondItem="Upg-Fe-YLk" secondAttribute="leading" constant="-8" id="t2p-vC-c6f"/>
+                            <constraint firstItem="xdb-7x-qlW" firstAttribute="leading" secondItem="zhw-r6-g45" secondAttribute="trailing" constant="8" id="vUM-it-FBj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="createButton" destination="xdb-7x-qlW" id="Dh6-gc-hr9"/>
+                        <outlet property="createLabel" destination="zhw-r6-g45" id="BWL-Kv-G8m"/>
+                        <outlet property="togglePOIButton" destination="Upg-Fe-YLk" id="WEj-CJ-NB9"/>
+                        <outlet property="togglePOILabel" destination="2yT-Pg-ZcZ" id="who-sY-0hw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="66X-IN-NwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="364" y="1538"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="closeShadow" width="62" height="62"/>
+        <image name="report" width="48" height="48"/>
+        <image name="solidarity" width="48" height="48"/>
+    </resources>
+</document>

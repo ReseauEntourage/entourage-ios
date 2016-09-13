@@ -8,7 +8,10 @@
 
 #import "OTUser.h"
 
+extern NSString *const kAPILogin;
 extern NSString *const kAPIUserRoute;
+extern NSString *const kKeychainPhone;
+extern NSString *const kKeychainPassword;
 
 @interface OTAuthService : NSObject
 
@@ -17,6 +20,17 @@ extern NSString *const kAPIUserRoute;
              deviceId:(NSString *)deviceId
               success:(void (^)(OTUser *user))success
               failure:(void (^)(NSError *error))failure;
+
+- (void)getDetailsForUser:(NSNumber *)userID
+                  success:(void (^)(OTUser *))success
+                  failure:(void (^)(NSError *))failure;
+
+- (void)deleteAccountForUser:(NSNumber *)userID
+                  success:(void (^)())success
+                  failure:(void (^)(NSError *))failure;
+
+- (void)sendAppInfoWithSuccess:(void (^)())success
+                       failure:(void (^)(NSError *))failure;
 
 - (void)regenerateSecretCode:(NSString *)phone
                      success:(void (^)(OTUser *))success
@@ -27,6 +41,10 @@ extern NSString *const kAPIUserRoute;
                             andSmsCode:(NSString *)smsCode
                                success:(void (^)(NSString *user))success
                                failure:(void (^)(NSError *error))failure;
+
+- (void)updateUserInformationWithUser:(OTUser *)user
+                              success:(void (^)(OTUser *user))success
+                              failure:(void (^)(NSError *error))failure;
 
 - (void)subscribeToNewsletterWithEmail:(NSString *)email
                                success:(void (^)(BOOL))success

@@ -7,6 +7,7 @@
 //
 
 #import "OTHTTPRequestManager.h"
+#import "OTJSONResponseSerializer.h"
 
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
@@ -18,25 +19,27 @@
 #pragma mark - Singleton
 
 + (AFHTTPRequestOperationManager *)sharedInstance {
-	static AFHTTPRequestOperationManager *requestManager = nil;
+	static OTRequestOperationManager *requestManager = nil;
 
 	if (requestManager == nil) {
-		requestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_API_URL]];
-		requestManager.responseSerializer = [AFJSONResponseSerializer serializer];
+		requestManager = [[OTRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_API_URL]];
+        
+		requestManager.responseSerializer = [OTJSONResponseSerializer serializer];
 		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [requestManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [requestManager.requestSerializer setValue:@"(required, string, `b05e6d0d2be8`)" forHTTPHeaderField:@"X-API-Key"];
+        //[requestManager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        
+        //TODO api key should be changed after each release
+        [requestManager.requestSerializer setValue:API_KEY forHTTPHeaderField:@"X-API-KEY"];
 	}
-
+    //NSLog(@"HTTP %@", requestManager.requestSerializer.HTTPRequestHeaders);
 	return requestManager;
 }
 
 + (NSDictionary*)commonParameters
 {
-    OTUser *user = [[NSUserDefaults standardUserDefaults] currentUser];
-
+    OTUser *user =[NSUserDefaults standardUserDefaults].currentUser;
     return user ? @{ @"token" : user.token } : nil;
 }
-
 
 @end

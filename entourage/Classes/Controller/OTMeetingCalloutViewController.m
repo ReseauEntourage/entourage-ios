@@ -7,6 +7,7 @@
 //
 
 #import "OTMeetingCalloutViewController.h"
+#import "OTConsts.h"
 
 // Model
 #import "OTUser.h"
@@ -14,17 +15,20 @@
 
 // Helper
 #import "NSUserDefaults+OT.h"
+#import "UIViewController+menu.h"
 
 // Progress HUD
 #import "MBProgressHUD.h"
 
 #import <Social/Social.h>
 
+
+#define PADDING 15.0f
+
 @interface OTMeetingCalloutViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (strong, nonatomic) OTEncounter *encounter;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 
 @end
 
@@ -32,9 +36,16 @@
 
 /********************************************************************************/
 #pragma mark - lifecycle
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = OTLocalizedString(@"meetingTitle");
+    [self setupCloseModal];
+    [self.textView setTextContainerInset:UIEdgeInsetsMake(PADDING, PADDING, PADDING, PADDING)];
+    [self configureWithEncouter:self.encounter];
+}
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
 
@@ -49,17 +60,19 @@
 
 	NSString *date = [formatter stringFromDate:encounter.date];
 
-	NSString *title = [NSString stringWithFormat:@"%@ %@ %@ %@, le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, NSLocalizedString(@"has_encountered", @""), encounter.streetPersonName, NSLocalizedString(@"here", @""), date];
+	NSString *title = [NSString stringWithFormat:@"%@ %@ %@ %@, le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, OTLocalizedString(@"has_encountered"), encounter.streetPersonName, OTLocalizedString(@"here"), date];
 
-	self.titleLabel.text = title;
-    NSString *body = @"";
+    NSString *bodyText = title;
 
 	if (encounter.message.length != 0) {
-		body = [NSString stringWithFormat:@"%@ :\n %@", NSLocalizedString(@"their_message", @""), encounter.message];
+		bodyText = [NSString stringWithFormat:@"%@ \n\n%@", bodyText, encounter.message];
 	}
 
-	self.textView.text = body;
+	[self.textView setText: bodyText];
+    CGSize sizeThatFitsTextView = [self.textView sizeThatFits:CGSizeMake([UIScreen mainScreen].bounds.size.width, MAXFLOAT)];
+    self.textViewHeightConstraint.constant = sizeThatFitsTextView.height;
 }
+
 
 /********************************************************************************/
 #pragma mark - Private Methods

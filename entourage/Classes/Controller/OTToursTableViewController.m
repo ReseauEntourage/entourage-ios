@@ -8,7 +8,7 @@
 
 // Controller
 #import "OTToursTableViewController.h"
-#import "OTTourViewController.h"
+#import "OTFeedItemViewController.h"
 
 // Model
 #import "OTTour.h"
@@ -41,8 +41,8 @@
 - (void)configureWithTours:(NSMutableArray *)closeTours {
     self.tableData = closeTours;
     self.tableData = (NSMutableArray *)[self.tableData sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        NSDate *first = [[[(OTTour *)a tourPoints] objectAtIndex:0] passingTime];
-        NSDate *second = [[[(OTTour *)b tourPoints] objectAtIndex:0] passingTime];
+        NSDate *first = [(OTTour *)a creationDate];
+        NSDate *second = [(OTTour *)b creationDate];
         return [second compare:first];
     }];
 }
@@ -67,20 +67,20 @@
     
     cell.textLabel.text = tour.organizationName;
     NSString *type;
-    if ([tour.tourType isEqualToString:@"barehands"]) {
+    if ([tour.type isEqualToString:@"barehands"]) {
         cell.imageView.image = [UIImage imageNamed:@"ic_bare_hands.png"];
         type = @"A mains nues";
     }
-    else if ([tour.tourType isEqualToString:@"medical"]) {
+    else if ([tour.type isEqualToString:@"medical"]) {
         cell.imageView.image = [UIImage imageNamed:@"ic_medical.png"];
         type = @"Médical";
     }
-    else if ([tour.tourType isEqualToString:@"alimentary"]) {
+    else if ([tour.type isEqualToString:@"alimentary"]) {
         cell.imageView.image = [UIImage imageNamed:@"ic_alimentary.png"];
         type = @"Alimentaire";
     }
-    if ([tour.tourPoints count] != 0) {
-        NSString *date = [self formatDateForDisplay:[(OTTourPoint *)[tour.tourPoints objectAtIndex:0] passingTime]];
+    if (tour.creationDate != nil) {
+        NSString *date = [self formatDateForDisplay:tour.creationDate];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", date, type];
     } else {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@  -  %@", @"--/--/---", type];
@@ -99,7 +99,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"OTSelectedTour"]) {
-        OTTourViewController *controller = (OTTourViewController *)segue.destinationViewController;
+        OTFeedItemViewController *controller = (OTFeedItemViewController *)segue.destinationViewController;
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         [controller configureWithTour:self.selectedTour];

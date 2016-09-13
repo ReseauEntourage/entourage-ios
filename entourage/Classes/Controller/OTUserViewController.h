@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+// Model
+#import "OTUser.h"
 
 @interface OTUserViewController : UIViewController
+
+@property (nonatomic, strong) OTUser *user;
+@property (nonatomic, strong) NSNumber *userId;
 
 @end

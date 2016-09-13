@@ -63,7 +63,7 @@ NSString *const kEncounterClusterAnnotationIdentifier = @"OTEncounterClusterAnno
                                                                     reuseIdentifier:kEncounterAnnotationIdentifier];
     
     annotationView.canShowCallout = NO;
-    annotationView.image = [UIImage imageNamed:@"rencontre.png"];
+    annotationView.image = [UIImage imageNamed:@"report"];
     
     return annotationView;
 }

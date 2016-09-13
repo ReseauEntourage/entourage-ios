@@ -15,6 +15,7 @@ extern NSString *const kCategoryName;
 
 @property (strong, nonatomic) NSNumber *sid;
 @property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) UIColor *color;
 
 + (OTPoiCategory *)categoryWithJSONDictionary:(NSDictionary *)dictionary;
 @end

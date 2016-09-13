@@ -9,122 +9,151 @@
 #import "OTTour.h"
 #import "OTTourPoint.h"
 #import "OTUser.h"
+#import "OTConsts.h"
 
-#import "NSDictionary+Parsing.h"
 #import "NSUserDefaults+OT.h"
+#import "UIColor+entourage.h"
 
-NSString *const kTourId = @"id";
-NSString *const kTourUserId = @"user_id";
-NSString *const kTourType = @"tour_type";
-NSString *const kTourVehicle = @"vehicle_type";
-NSString *const kTourStatus = @"status";
-NSString *const kTourTourPoints = @"tour_points";
-NSString *const kTourStats = @"stats";
-NSString *const kTourOrganizationName = @"organization_name";
-NSString *const kTourOrganizationDesc = @"organization_description";
-NSString *const kTourStartTime = @"start_time";
-NSString *const ktourEndTime = @"end_time";
-NSString *const kTourDistance = @"distance";
-
-NSString *const kToursCount = @"tour_count";
-NSString *const kEncountersCount = @"encounter_count";
+#define TOUR_COLOR_MEDICAL [UIColor colorWithRed:1 green:153.0/255.0 blue:153.0/255.0 alpha:1]
+#define TOUR_COLOR_SOCIAL [UIColor colorWithRed:151.0/255.0 green:215.0/255.0 blue:145.0/255.0 alpha:1]
+#define TOUR_COLOR_DISTRIBUTIVE [UIColor colorWithRed:1 green:197.0/255.0 blue:127.0/255.0 alpha:1]
 
 @implementation OTTour
 
 /********************************************************************************/
 #pragma mark - Birth & Death
 
-- (id)init
-{
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        //self.status = TOUR_STATUS_ONGOING;
+    }
+    return self;
+}
+
+- (id)initWithTourType:(NSString *)tourType {
     self = [super init];
     if (self)
     {
         OTUser *user = [[NSUserDefaults standardUserDefaults] currentUser];
         
-        self.tourType = NSLocalizedString(@"tour_type_type", @"");
-        self.vehicleType = NSLocalizedString(@"tour_vehicle_feet", @"");
-        self.status = NSLocalizedString(@"tour_status_ongoing", @"");
+        self.type = tourType;
+        self.status = OTLocalizedString(@"tour_status_ongoing");
         self.tourPoints = [NSMutableArray new];
-        self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
         self.organizationName = user.organization.name;
         self.organizationDesc = user.organization.description;
-        self.distance = 0.0;
+        self.distance = @0.0;
+        self.creationDate = [NSDate date];
     }
     return self;
 }
 
-- (id)initWithTourType:(NSString *)tourType andVehicleType:(NSString *)vehicleType
-{
-    self = [super init];
-    if (self)
-    {
-        OTUser *user = [[NSUserDefaults standardUserDefaults] currentUser];
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
+    self = [super initWithDictionary:dictionary];
+    if (self) {
+        self.creationDate = [dictionary dateForKey:kWSKeyStartDate];
+        self.endTime = [dictionary dateForKey:kWSKeyEndDate];
+        self.type = [dictionary valueForKey:kWSKeyTourType];
+        self.distance = [dictionary numberForKey:kWSKeyDistance];
+        self.organizationName = [dictionary valueForKey:kWSKeyOrganizationName];
+        self.organizationDesc = [dictionary valueForKey:kWSKeyOrganizationDescription];
+        self.tourPoints = [OTTourPoint tourPointsWithJSONDictionary:dictionary andKey:kWSKeyTourPoints];
+        self.noMessages = [dictionary valueForKey:kWSNoUnreadMessages];
         
-        self.tourType = tourType;
-        self.vehicleType = vehicleType;
-        self.status = NSLocalizedString(@"tour_status_ongoing", @"");
-        self.tourPoints = [NSMutableArray new];
-        self.stats = [NSMutableDictionary dictionaryWithDictionary:@{kToursCount : @0, kEncountersCount : @0}];
-        self.organizationName = user.organization.name;
-        self.organizationDesc = user.organization.description;
-        self.distance = 0.0;
+        if (self.distance == nil || self.distance.doubleValue == 0) {
+            [self computeDistance];
+        }
     }
     return self;
 }
 
-+ (OTTour *)tourWithJSONDictionary:(NSDictionary *)dictionary
-{
-    OTTour *tour = nil;
+- (NSDictionary *)dictionaryForWebService {
+    NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
-    if ([dictionary isKindOfClass:[NSDictionary class]])
-    {
-        tour = [[OTTour alloc] init];
-        
-        tour.sid = [dictionary numberForKey:kTourId];
-        tour.userId = [dictionary numberForKey:kTourUserId];
-        tour.tourType = [dictionary stringForKey:kTourType];
-        tour.vehicleType = [dictionary stringForKey:kTourVehicle];
-        tour.status = [dictionary stringForKey:kTourStatus];
-        tour.tourPoints = [OTTourPoint tourPointsWithJSONDictionary:dictionary andKey:kTourTourPoints];
-        tour.organizationName = [dictionary stringForKey:kTourOrganizationName];
-        tour.organizationDesc = [dictionary stringForKey:kTourOrganizationDesc];
-        tour.distance = [[dictionary numberForKey:kTourDistance] floatValue];
-        
-        // Java format : "2015-09-09T08:56:48.065+02:00"
-        tour.startTime = [dictionary dateForKey:kTourStartTime format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
-        if (tour.startTime == nil) {
-            // Objective-C format : "2015-11-20 09:28:52 +0000"
-            tour.startTime = [dictionary dateForKey:kTourStartTime format:@"yyyy-MM-dd HH:mm:ss Z"];
-        }
-        
-        // Java format : "2015-09-09T08:56:48.065+02:00"
-        tour.endTime = [dictionary dateForKey:ktourEndTime format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
-        if (tour.endTime == nil) {
-            // Objective-C format : "2015-11-20 09:28:52 +0000"
-            tour.endTime = [dictionary dateForKey:ktourEndTime format:@"yyyy-MM-dd HH:mm:ss Z"];
-        }
+    dictionary[kWSKeyTourType] = self.type;
+    dictionary[kWSKeyStatus] = self.status;
+    dictionary[kWSKeyDistance] = self.distance;
+    dictionary[kWSKeyStartDate] = self.creationDate;
+    dictionary[kWSKeyTourPoints] = [OTTourPoint arrayForWebservice:self.tourPoints];
+    if (self.endTime != nil) {
+        dictionary[kWSKeyEndDate] = self.endTime;
     }
     
-    return tour;
-}
-
-- (NSDictionary *)dictionaryForWebserviceTour
-{
-    NSMutableDictionary *dictionary = [NSMutableDictionary new];
-    
-    dictionary[kTourType] = self.tourType;
-    dictionary[kTourVehicle] = self.vehicleType;
-    dictionary[kTourStatus] = self.status;
-    dictionary[kTourDistance] = @(self.distance);
-    
     return dictionary;
 }
 
-- (NSDictionary *)dictionaryForWebserviceTourPoints
-{
-    NSMutableDictionary *dictionary = [NSMutableDictionary new];
++ (UIColor *)colorForTourType:(NSString*)tourType {
+    UIColor *color = [UIColor appOrangeColor];
     
-    return dictionary;
+    if ([tourType isEqualToString:@"medical"]) {
+        color = TOUR_COLOR_MEDICAL;
+    }
+    else if ([tourType isEqualToString:@"barehands"]) {
+        color = TOUR_COLOR_SOCIAL;
+    }
+    else if ([tourType isEqualToString:@"alimentary"])
+    {
+        color = TOUR_COLOR_DISTRIBUTIVE;
+    }
+    return color;
+}
+
+- (NSString *)debugDescription {
+    NSString *emaDescription = [NSString stringWithFormat:@"Tour %d with %lu points", self.uid.intValue, (unsigned long)_tourPoints.count];
+    return emaDescription;
+}
+
+- (NSString *)navigationTitle {
+    return OTLocalizedString(@"tour");
+}
+
+- (NSString *)summary {
+    return self.organizationName;
+}
+
+- (NSString *)displayType {
+    NSString *tourType;
+    if ([self.type isEqualToString:@"barehands"]) {
+        tourType = OTLocalizedString(@"tour_type_display_social");
+    } else     if ([self.type isEqualToString:@"medical"]) {
+        tourType = OTLocalizedString(@"tour_type_display_medical");
+    } else if ([self.type isEqualToString:@"alimentary"]) {
+        tourType = OTLocalizedString(@"tour_type_display_distributive");
+    }
+    return tourType;
+}
+
+- (NSAttributedString *)typeByNameAttributedString {
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_tour_by"), [self displayType]]
+                                                                         attributes:ATTR_LIGHT_15];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:self.author.displayName
+                                                                         attributes:ATTR_SEMIBOLD_15];
+    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+    [typeByNameAttrString appendAttributedString:nameAttrString];
+    
+    return typeByNameAttrString;
+}
+
+- (void)computeDistance {
+    // We need at least two points to compute the distance
+    if (self.tourPoints == nil || self.tourPoints.count < 2) return;
+    self.distance = @0.0;
+    CLLocation *firstLocation = ((OTTourPoint*)self.tourPoints[0]).toLocation;
+    for (NSUInteger i = 1; i < self.tourPoints.count; i++) {
+        CLLocation *secondLocation = ((OTTourPoint*)self.tourPoints[i]).toLocation;
+        self.distance = @(self.distance.doubleValue + [secondLocation distanceFromLocation:firstLocation]);
+        firstLocation = ((OTTourPoint*)self.tourPoints[i]).toLocation;
+    }
+}
+
+- (NSString *)newsfeedStatus {
+    //OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    //if (self.author.uID.intValue == currentUser.sid.intValue)
+    {
+        if ([self.status isEqualToString:TOUR_STATUS_ONGOING] || [self.status isEqualToString:FEEDITEM_STATUS_CLOSED])
+            return FEEDITEM_STATUS_ACTIVE;
+    }
+    return self.joinStatus;
 }
 
 @end

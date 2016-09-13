@@ -15,6 +15,7 @@ NSString *const kTourPointLatitude = @"latitude";
 NSString *const kTourPointLongitude = @"longitude";
 NSString *const kTourPointPassingTime = @"passing_time";
 
+
 @implementation OTTourPoint
 
 /********************************************************************************/
@@ -29,7 +30,6 @@ NSString *const kTourPointPassingTime = @"passing_time";
         tourPoint = [[OTTourPoint alloc] init];
         tourPoint.latitude = [[dictionary numberForKey:kTourPointLatitude] doubleValue];
         tourPoint.longitude = [[dictionary numberForKey:kTourPointLongitude] doubleValue];
-        
         // Java format : "2015-09-09T08:56:48.065+02:00"
         tourPoint.passingTime = [dictionary dateForKey:kTourPointPassingTime format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
         if (tourPoint.passingTime == nil) {
@@ -47,7 +47,7 @@ NSString *const kTourPointPassingTime = @"passing_time";
     if (self) {
         _latitude = location.coordinate.latitude;
         _longitude = location.coordinate.longitude;
-        _passingTime = location.timestamp;
+        _passingTime = [NSDate date];
     }
     return self;
 }
@@ -61,6 +61,18 @@ NSString *const kTourPointPassingTime = @"passing_time";
     dictionary[kTourPointPassingTime] = self.passingTime;
     
     return dictionary;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[OTTourPoint class]]) {
+        OTTourPoint *compare = (OTTourPoint *) object;
+        return (_latitude == compare.latitude &&
+                _longitude == compare.longitude &&
+                [_passingTime isEqualToDate:compare.passingTime]);
+    } else {
+        return false;
+    }
+    
 }
 
 /********************************************************************************/

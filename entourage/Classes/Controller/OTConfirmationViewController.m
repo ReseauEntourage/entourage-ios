@@ -8,7 +8,8 @@
 
 // Controller
 #import "OTConfirmationViewController.h"
-#import "OTMapViewController.h"
+#import "OTMainViewController.h"
+#import "OTConsts.h"
 
 // Service
 #import "OTTourService.h"
@@ -42,9 +43,9 @@
 #pragma mark - Life cycle
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.encountersLabel.text = [NSString stringWithFormat:@"%@ personnes rencontrées", self.encountersCount];
-    self.distanceLabel.text = [NSString stringWithFormat:@"%@ km parcourus", [self stringFromFloatDistance:(self.tour.distance)]];
-    self.durationLabel.text = [NSString stringWithFormat:@"%@ passées dans la rue", [self stringFromTimeInterval:(self.duration)]];
+    self.encountersLabel.text = [NSString stringWithFormat:@"%@", self.encountersCount];
+    self.distanceLabel.text = [self stringFromFloatDistance:(self.tour.distance.floatValue)];
+    self.durationLabel.text = [self stringFromTimeInterval:(self.duration)];
 }
 
 - (void)viewDidLoad {
@@ -54,25 +55,32 @@
 /**************************************************************************************************/
 #pragma mark - Public Methods
 
-- (void)configureWithTour:(OTTour *)currentTour andEncountersCount:(NSNumber *)encountersCount andDuration:(NSTimeInterval)duration {
+- (void)configureWithTour:(OTTour *)currentTour andEncountersCount:(NSNumber *)encountersCount {
     self.tour = currentTour;
     self.encountersCount = encountersCount;
-    self.duration = duration;
+    self.duration = [[NSDate date] timeIntervalSinceDate:self.tour.creationDate];
 }
 
 /**************************************************************************************************/
 #pragma mark - Private methods
 
 - (void)closeTour {
-    [[OTTourService new] closeTour:self.tour withSuccess:^(OTTour *closedTour) {
-        if ([self.delegate respondsToSelector:@selector(tourSent)]) {
-            [self.delegate tourSent];
-        }
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"Erreur de fermeture de la maraude"];
-        NSLog(@"%@",[error localizedDescription]);
-    }];
+    self.tour.status = FEEDITEM_STATUS_CLOSED;
+    self.tour.endTime = [NSDate date];
+    [[OTTourService new]
+        closeTour:self.tour
+        withSuccess:^(OTTour *closedTour) {
+            [SVProgressHUD dismiss];
+            if ([self.delegate respondsToSelector:@selector(tourSent:)])
+                [self.delegate tourSent:self.tour];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } failure:^(NSError *error) {
+            [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"tour_close_error")];
+            if ([self.delegate respondsToSelector:@selector(tourCloseError)])
+                [self.delegate tourCloseError];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            NSLog(@"%@",[error localizedDescription]);
+        }];
 }
 
 /**************************************************************************************************/
@@ -87,7 +95,6 @@
 
 - (IBAction)finishTour:(id)sender {
     [SVProgressHUD show];
-    self.tour.status = NSLocalizedString(@"tour_status_closed", @"");
     [self closeTour];
 }
 

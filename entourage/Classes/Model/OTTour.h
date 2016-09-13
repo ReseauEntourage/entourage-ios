@@ -7,37 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTFeedItem.h"
 
 typedef enum { OTVehiclesFeet=0, OTVehiclesCar=1 } OTVehicles;
 typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTypes;
 
-@interface OTTour : NSObject
+#define TOUR_STATUS_ONGOING @"ongoing"
+#define TOUR_STATUS_FREEZED @"freezed"
 
-/********************************************************************************/
-#pragma mark - Getters and Setters
+@interface OTTour : OTFeedItem
 
-@property (strong, nonatomic) NSNumber *sid;
-@property (strong, nonatomic) NSNumber *userId;
-@property (strong, nonatomic) NSString *tourType;
-@property (strong, nonatomic) NSString *vehicleType;
-@property (strong, nonatomic) NSString *status;
-@property (strong, nonatomic) NSMutableArray *tourPoints;
-@property (strong, nonatomic) NSMutableDictionary *stats;
-@property (strong, nonatomic) NSString *organizationName;
-@property (strong, nonatomic) NSString *organizationDesc;
-@property (strong, nonatomic) NSDate *startTime;
-@property (strong, nonatomic) NSDate *endTime;
-@property (nonatomic) float distance;
+@property (nonatomic, strong) NSMutableArray *tourPoints;
+@property (nonatomic, strong) NSString *organizationName;
+@property (nonatomic, strong) NSString *organizationDesc;
+@property (nonatomic, strong) NSDate *endTime;
+@property (nonatomic, strong) NSNumber *distance;
+@property (nonatomic, strong) NSNumber *noMessages;
 
-/********************************************************************************/
-#pragma mark - Birth & Death
+- (instancetype)initWithTourType:(NSString *)tourType;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)dictionaryForWebService;
 
-- (id)initWithTourType:(NSString *)tourType andVehicleType:(NSString *)vehicleType;
-+ (OTTour *)tourWithJSONDictionary:(NSDictionary *)dictionary;
-- (NSDictionary *)dictionaryForWebserviceTour;
-- (NSDictionary *)dictionaryForWebserviceTourPoints;
-
-/********************************************************************************/
-#pragma mark - Utils
++ (UIColor *)colorForTourType:(NSString*)tourType;
 
 @end

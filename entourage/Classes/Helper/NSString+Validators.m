@@ -9,14 +9,18 @@
 
 - (BOOL)isValidEmail
 {
-    NSString *stricterFilterString = @"^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,4})$";
-    
+    NSString *stricterFilterString = @"^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,10})$";
     return [self matchesRegularExpression:stricterFilterString];
 }
 
 - (BOOL)isValidPhoneNumber
 {
-    return [self matchesRegularExpression:@"^((\\+|00)33\\s?|0)[67](\\s?\\d{2}){4}$"];
+    NSString *regex = @"^(\\+[0-9]+[\\- \\.]*)?(\\([0-9]+\\)[\\- \\.]*)?([0-9][0-9\\- \\.]+[0-9])$";
+    return [self matchesRegularExpression:regex];
+}
+
+- (BOOL)isValidCode {
+    return [self matchesRegularExpression:@"^\\d*$"];
 }
 
 - (BOOL)isNotEmpty
@@ -41,16 +45,6 @@
 	NSDecimal decimal = [[formatter numberFromString:text] decimalValue];
 	NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:decimal];
 	return amount;
-}
-
-- (NSString *) phoneNumberServerRepresentation
-{
-    if ([self matchesRegularExpression:@"^(0)[67](\\s?\\d{2}){4}$"])
-    {
-        NSRange range = NSMakeRange(0, 1);
-        return [[self stringByReplacingCharactersInRange:range withString:@"+33"] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    }
-    return self;
 }
 
 /********************************************************************************/

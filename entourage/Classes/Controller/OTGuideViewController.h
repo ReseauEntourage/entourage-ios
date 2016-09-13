@@ -10,4 +10,6 @@
 
 @interface OTGuideViewController : UIViewController
 
+-(void) setIsTourRunning:(BOOL)isTourRunning;
+
 @end

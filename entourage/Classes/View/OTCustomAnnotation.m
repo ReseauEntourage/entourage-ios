@@ -74,7 +74,11 @@ NSString *const kAnnotationIdentifier = @"OTAnnotationIdentifier";
 - (BOOL)isEqual:(id)object {
     if ([object isKindOfClass:[OTCustomAnnotation class]]) {
         OTCustomAnnotation *compare = (OTCustomAnnotation *) object;
-        return _poi.sid == compare.poi.sid;
+        if (_poi.sid != nil && compare.poi.sid != nil) {
+            return _poi.sid.longValue == compare.poi.sid.longValue;
+        } else {
+            return false;
+        }
     } else {
         return false;
     }

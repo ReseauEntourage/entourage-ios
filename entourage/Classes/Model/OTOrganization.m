@@ -22,12 +22,13 @@ NSString *const kKeyLogoUrl = @"logo_url";
     self = [super init];
     if (self)
     {
-        _name = [dictionary stringForKey:kKeyName];
-        _desc = [dictionary stringForKey:kKeyDesc];
-        _phone = [dictionary stringForKey:kKeyPhone];
-        _address = [dictionary stringForKey:kKeyAddress];
-        _logoUrl = [dictionary stringForKey:kKeyLogoUrl];
-        
+        if ([dictionary isKindOfClass:[NSDictionary class]]) {
+            _name = [dictionary stringForKey:kKeyName];
+            _desc = [dictionary stringForKey:kKeyDesc];
+            _phone = [dictionary stringForKey:kKeyPhone];
+            _address = [dictionary stringForKey:kKeyAddress];
+            _logoUrl = [dictionary stringForKey:kKeyLogoUrl];
+        }
     }
     return self;
 }

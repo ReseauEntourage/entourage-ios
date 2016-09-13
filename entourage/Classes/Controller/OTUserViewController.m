@@ -7,6 +7,7 @@
 //
 
 #import "OTUserViewController.h"
+#import "OTConsts.h"
 
 // Controller
 #import "UIViewController+menu.h"
@@ -14,38 +15,28 @@
 // Service
 #import "OTAuthService.h"
 
-// Model
-#import "OTUser.h"
 
 // Helper
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
+#import "UIColor+entourage.h"
+#import "UIButton+entourage.h"
+#import "UIBarButtonItem+factory.h"
 
 // View
 #import "SVProgressHUD.h"
 
-/********************************************************************************/
-#pragma mark - OTMapViewController
+typedef NS_ENUM(NSInteger) {
+    SectionTypeSummary,
+    SectionTypeVerification,
+    SectionTypeEntourages,
+    SectionTypeAssociations
+} SectionType;
+
 
 @interface OTUserViewController ()
 
-@property (nonatomic, strong) OTUser *currentUser;
-
-@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (nonatomic, weak) IBOutlet UILabel *emailLabel;
-@property (nonatomic, weak) IBOutlet UILabel *toursLabel;
-@property (nonatomic, weak) IBOutlet UILabel *encountersLabel;
-@property (nonatomic, weak) IBOutlet UILabel *organizationLabel;
-
-@property (nonatomic, weak) IBOutlet UITextField *emailField;
-@property (nonatomic, weak) IBOutlet UITextField *accessCodeField;
-@property (nonatomic, weak) IBOutlet UITextField *confirmationField;
-
-@property (nonatomic, weak) IBOutlet UIButton *updateButton;
-@property (nonatomic, weak) IBOutlet UIButton *unsubscribeButton;
-@property (nonatomic, weak) IBOutlet UIButton *termsAndConditionsButton;
-
-@property (weak, nonatomic) IBOutlet UISwitch *myToursSwitch;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
 
@@ -56,88 +47,266 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self createMenuButton];
+    self.title = OTLocalizedString(@"profil").uppercaseString;
+    [self setupCloseModal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", [self.currentUser firstName], [self.currentUser lastName]];
-    if (self.currentUser.email != nil) {
-        self.emailLabel.text = self.currentUser.email;
-        self.emailField.text = self.currentUser.email;
-    }
-    self.toursLabel.text = [NSString stringWithFormat:@"%@ maraudes réalisées", [self.currentUser tourCount]];
-    self.encountersLabel.text = [NSString stringWithFormat:@"%@ personnes rencontrées", [self.currentUser encounterCount]];
-    self.organizationLabel.text = self.currentUser.organization.name;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"user_tours_only"]) {
-        [self.myToursSwitch setOn:YES];
-    } else {
-        [self.myToursSwitch setOn:NO];
-    }
-    self.title = NSLocalizedString(@"userviewcontroller_title", @"");
-}
-
-/********************************************************************************/
-#pragma mark - Private methods
-
-- (BOOL)validateForm {
-    return (![self.emailField.text isEqualToString:@""] &&
-            ![self.accessCodeField.text isEqualToString:@""] &&
-            ![self.confirmationField.text isEqualToString:@""] &&
-            [self.emailField.text isValidEmail] &&
-            [self.accessCodeField.text isNumeric] &&
-            [self.confirmationField.text isNumeric] &&
-            [self.accessCodeField.text isEqualToString:self.confirmationField.text]);
-}
-
-- (void)emptyForm {
-    self.accessCodeField.text = @"";
-    self.confirmationField.text = @"";
-}
-
-/********************************************************************************/
-#pragma mark - Actions
-
-- (IBAction)displayUserToursOnly:(id)sender {
-    if ([self.myToursSwitch isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"user_tours_only"];
+    [super viewWillAppear:animated];
+    
+    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    if (self.user != nil) {
+        if (self.user.sid.intValue == currentUser.sid.intValue)
+        {
+            self.user = currentUser;
+            [self showEditButton];
+            [self.tableView reloadData];
+        }
     }
     else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
+        [self loadUser];
     }
 }
 
-- (IBAction)updateUserInformation:(id)sender {
-    if (self.validateForm) {
+/**************************************************************************************************/
+#pragma mark - Private
+
+- (void)showEditButton {
+    UIBarButtonItem *chatButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"edit") withTarget:self andAction:@selector(showEditView) colored:[UIColor appOrangeColor]];
+    [self.navigationItem setRightBarButtonItem:chatButton];
+}
+
+- (void)showEditView {
+    [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
+}
+
+- (void)loadUser {
+    if (self.userId != nil) {
         [SVProgressHUD show];
-        [[OTAuthService new] updateUserInformationWithEmail:self.emailField.text
-                                                 andSmsCode:self.accessCodeField.text
-                                                    success:^(NSString *email) {
-                                                        [SVProgressHUD showSuccessWithStatus:@"Informations mises à jour"];
-                                                        self.currentUser.email = email;
-                                                        [[NSUserDefaults standardUserDefaults] setCurrentUser:self.currentUser];
-                                                        self.emailLabel.text = email;
-                                                        self.emailField.text = email;
-                                                        [self emptyForm];
-                                                    } failure:^(NSError *error) {
-                                                        [SVProgressHUD showSuccessWithStatus:@"Informations non mises à jour"];
-                                                    } ];
+        [[OTAuthService new] getDetailsForUser:self.userId
+                                       success:^(OTUser *user) {
+                                           [SVProgressHUD dismiss];
+                                           self.user = user;
+                                           [self.tableView reloadData];
+                                       } failure:^(NSError *error) {
+                                           [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_profile_error")];
+                                           NSLog(@"@fails getting user %@", error.description);
+                                       }];
     }
 }
 
-- (IBAction)unsubscribe:(id)sender {
-    
+/**************************************************************************************************/
+#pragma mark - Table View
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.user != nil ? 4 : 0;
 }
 
-- (IBAction)termsAndConditionsDidTap:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.entourage.social/cgu"]];
-    
-    NSURL *tacURL = [NSURL URLWithString:@"http://www.entourage.social/cgu"];
-    if ([[UIApplication sharedApplication] canOpenURL:tacURL]) {
-        [[UIApplication sharedApplication] openURL:tacURL];
-    } else {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.entourage.social/cgu"]];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
+        case SectionTypeSummary: {
+            return 1;
+        }
+        case SectionTypeVerification: {
+            return 3;
+        }
+        case SectionTypeEntourages: {
+            return 1;
+        }
+        case SectionTypeAssociations: {
+            return 2;
+        }
+        default:
+            return 0;
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+   
+    return (section == 0) ? 0.0f : 15.0f;
+    
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    return .5f;
+    
+}
+
+#define CELLHEIGHT_SUMMARY 237.0f
+#define CELLHEIGHT_TITLE    33.0f
+#define CELLHEIGHT_ENTOURAGES  80.0f
+#define CELLHEIGHT_DEFAULT  48.0f
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case SectionTypeSummary: {
+            return CELLHEIGHT_SUMMARY;
+        }
+        case SectionTypeVerification: {
+            if (indexPath.row == 0)
+                return CELLHEIGHT_TITLE;
+            else
+                return CELLHEIGHT_DEFAULT;
+            }
+        case SectionTypeEntourages: {
+            return CELLHEIGHT_DEFAULT;
+        }
+        case SectionTypeAssociations: {
+            if (indexPath.row == 0)
+                return CELLHEIGHT_TITLE;
+            else
+                return CELLHEIGHT_ENTOURAGES;
+        }
+        
+        default:
+            return CELLHEIGHT_DEFAULT;;
+    }
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 15)];
+    headerView.backgroundColor = [UIColor appPaleGreyColor];
+    return headerView;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellID;
+    switch (indexPath.section) {
+        case SectionTypeSummary: {
+            cellID = @"SummaryProfileCell";
+            break;
+        }
+        case SectionTypeVerification: {
+            cellID = indexPath.row == 0 ? @"TitleProfileCell" : @"VerificationProfileCell";
+            break;
+        }
+        case SectionTypeEntourages: {
+            cellID = @"EntouragesProfileCell";
+            break;
+        }
+        case SectionTypeAssociations: {
+            cellID = indexPath.row == 0 ? @"TitleProfileCell" : @"AssociationProfileCell";
+            break;
+        }
+        default:
+            break;
+    }
+    NSLog(@"cell id: %@", cellID);
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    switch (indexPath.section) {
+        case SectionTypeSummary: {
+            [self setupSummaryProfileCell:cell];
+            break;
+        }
+        case SectionTypeVerification: {
+            if (indexPath.row == 0)
+                [self setupTitleProfileCell:cell withTitle:OTLocalizedString(@"user_verified")];
+            else {
+                if (indexPath.row == 1)
+                    //TODO: Ask Vincent for status
+                    [self setupVerificationProfileCell:cell
+                                             withCheck:OTLocalizedString(@"user_email_address")
+                                             andStatus:YES];
+                else
+                    [self setupVerificationProfileCell:cell
+                                             withCheck:OTLocalizedString(@"user_phone_number")
+                                             andStatus:YES];
+            }
+            break;
+        }
+        case SectionTypeEntourages: {
+            [self setupEntouragesProfileCell:cell];
+            break;
+        }
+        case SectionTypeAssociations: {
+            if (indexPath.row == 0)
+                [self setupTitleProfileCell:cell withTitle:OTLocalizedString(@"organizations")];
+            else
+                [self setupAssociationProfileCell:cell
+                             withAssociationTitle:self.user.organization.name
+                            andAssociationLogoUrl:nil];
+            break;
+        }
+        
+    }
+    
+    return cell;
+}
+#define SUMMARY_AVATAR 1
+#define SUMMARY_AVATAR_SHADOW 10
+#define SUMMARY_NAME 2
+#define SUMMARY_ROLE 3
+#define SUMMARY_DATE 4
+#define SUMMARY_ADDRESS 5
+#define SUMMARY_TITLE 6
+
+#define VERIFICATION_LABEL 1
+#define VERIFICATION_STATUS 2
+
+#define NOENTOURAGES 1
+
+#define ASSOCIATION_TITLE 1
+#define ASSOCIATION_IMAGE 2
+
+
+- (void)setupSummaryProfileCell:(UITableViewCell *)cell {
+    
+    UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
+    [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];
+    [avatarShadow.layer setShadowOpacity:0.5];
+    [avatarShadow.layer setShadowRadius:4.0];
+    [avatarShadow.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
+    UIButton *avatarButton = [cell viewWithTag:SUMMARY_AVATAR];
+    avatarButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    [avatarButton setupAsProfilePictureFromUrl:self.user.avatarURL withPlaceholder:@"user"];
+    
+    UILabel *nameLabel = [cell viewWithTag:SUMMARY_NAME];
+    nameLabel.text = self.user.displayName;
+    
+    UILabel *roleLabel = [cell viewWithTag:SUMMARY_ROLE];
+    roleLabel.text = @"";//self.currentUser.role;
+    
+    UILabel *dateLabel = [cell viewWithTag:SUMMARY_DATE];
+    dateLabel.text = @"";//self.currentUser.joinDate;
+
+    UILabel *addressLabel = [cell viewWithTag:SUMMARY_ADDRESS];
+    addressLabel.text = @"";//self.currentUser.address;
+}
+
+- (void)setupTitleProfileCell:(UITableViewCell *)cell withTitle:(NSString *)title {
+    UILabel *titleLabel = [cell viewWithTag:SUMMARY_TITLE];
+    titleLabel.text = title;
+    
+    cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
+}
+
+- (void)setupVerificationProfileCell:(UITableViewCell *)cell
+                           withCheck:(NSString *)checkString
+                           andStatus:(BOOL)isChecked
+{
+    UILabel *checkLabel = [cell viewWithTag:VERIFICATION_LABEL];
+    checkLabel.text = checkString;
+    
+    UIButton *statusButton = [cell viewWithTag:VERIFICATION_STATUS];
+    NSString *statusImage = isChecked ? @"verified" : @"notVerified";
+    [statusButton setImage:[UIImage imageNamed: statusImage] forState:UIControlStateNormal];
+}
+
+- (void)setupEntouragesProfileCell:(UITableViewCell *)cell {
+    UILabel *noEntouragesLabel = [cell viewWithTag:NOENTOURAGES];
+    noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.tourCount.intValue];
+}
+
+- (void)setupAssociationProfileCell:(UITableViewCell *)cell
+               withAssociationTitle:(NSString *)title
+                andAssociationLogoUrl:(NSString *)imageURL
+{
+    UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE];
+    titleLabel.text = title;
+    
+    //UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE];
+}
 @end

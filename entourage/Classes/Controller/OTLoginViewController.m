@@ -10,24 +10,40 @@
 
 // Controller
 #import "OTLostCodeViewController.h"
+#import "OTConsts.h"
+#import "IQKeyboardManager.h"
+#import "OTUserEmailViewController.h"
 
 // Service
 #import "OTAuthService.h"
+#import "OTJSONResponseSerializer.h"
+
+// Utils
+#import "UITextField+indentation.h"
+#import "UIStoryboard+entourage.h"
 
 // Helper
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
-
+#import "UINavigationController+entourage.h"
+#import "UIView+entourage.h"
+#import "UIScrollView+entourage.h"
+#import "UITextField+indentation.h"
 // Model
 #import "OTUser.h"
+#import "UIColor+entourage.h"
 
 // View
 #import "SVProgressHUD.h"
 
 /********************************************************************************/
+#pragma mark - Constants
+NSString *const kTutorialDone = @"has_done_tutorial";
+
+/********************************************************************************/
 #pragma mark - OTLoginViewController
 
-@interface OTLoginViewController () <UITextFieldDelegate>
+@interface OTLoginViewController () <LostCodeDelegate>
 
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffect;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
@@ -38,6 +54,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *validateButton;
 @property (weak, nonatomic) IBOutlet UIButton *lostCodeButton;
 
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+
 @end
 
 @implementation OTLoginViewController
@@ -47,12 +66,33 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+    self.title = @"";
+    
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
 	self.whiteBackground.layer.cornerRadius = 5;
 	self.whiteBackground.layer.masksToBounds = YES;
+    
+    [self.phoneTextField indentRight];
+    [self.passwordTextField indentRight];
+    [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    [self.validateButton setupHalfRoundedCorners];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.phoneTextField becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
+    UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
 }
 
 /********************************************************************************/
@@ -69,29 +109,42 @@
 
 - (void)launchAuthentication {
     [SVProgressHUD show];
-    [[OTAuthService new] authWithPhone:self.phoneTextField.text.phoneNumberServerRepresentation
+    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
+    [[OTAuthService new] authWithPhone:self.phoneTextField.text
                               password:self.passwordTextField.text
-                              deviceId:[[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"]
+                              deviceId:deviceAPNSid
                                success: ^(OTUser *user) {
                                    NSLog(@"User : %@ authenticated successfully", user.email);
+                                   user.phone = self.phoneTextField.text;
+                                   NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+                                   if (loggedNumbers == nil)
+                                       loggedNumbers = [NSMutableArray new];
                                    [SVProgressHUD dismiss];
-                                   [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
-                                   
-                                   if ([[NSUserDefaults standardUserDefaults] boolForKey:@"has_done_tutorial"]) {
-                                       [self dismissViewControllerAnimated:YES completion:nil];
-                                   } else {
-                                       [self performSegueWithIdentifier:@"OTTutorial" sender:self];
-                                   }
+                                   [NSUserDefaults standardUserDefaults].currentUser = user;
+                                   if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid)
+                                       [UIStoryboard showSWRevealController];
+                                   else
+                                       [self performSegueWithIdentifier:@"UserProfileDetailsSegue" sender:self];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
-                                   [[[UIAlertView alloc]
-                                     initWithTitle:@"Erreur"
-                                     message:@"Echec de la connexion"
-                                     delegate:nil
-                                     cancelButtonTitle:nil
-                                     otherButtonTitles:@"ok",
-                                     nil] show];
+                                   NSString *alertTitle = OTLocalizedString(@"error");
+                                   NSString *alertText = OTLocalizedString(@"connection_error");
+                                   NSString *buttonTitle = @"ok";
+                                   if ([[error.userInfo valueForKey:JSONResponseSerializerWithDataKey] isEqualToString:@"unauthorized"]) {
+                                       alertTitle = OTLocalizedString(@"tryAgain");
+                                       alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");
+                                       buttonTitle = OTLocalizedString(@"tryAgain_short");
+                                   }
+                                   UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
+                                                                                                  message:alertText
+                                                                                           preferredStyle:UIAlertControllerStyleAlert];
+                                   UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle
+                                                                                           style:UIAlertActionStyleDefault
+                                                                                         handler:^(UIAlertAction * _Nonnull action) {}];
+                                   [alert addAction: defaultAction];
+                                   [self presentViewController:alert animated:YES completion:nil];
+                                   
                                }];
 }
 
@@ -111,6 +164,10 @@
     if ([segue.identifier isEqualToString:@"OTAskMore"]) {
         OTAskMoreViewController *controller = (OTAskMoreViewController *)segue.destinationViewController;
         controller.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"OTLostCode"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTLostCodeViewController *controller = (OTLostCodeViewController *)navController.viewControllers.firstObject;
+        controller.codeDelegate = self;
     }
 }
 
@@ -125,28 +182,42 @@
     [self performSegueWithIdentifier:@"OTAskMore" sender:self];
 }
 
-- (IBAction)validateButtonDidTad:(UIButton *)sender {
+- (IBAction)validateButtonDidTad {
     if (self.phoneTextField.text.length == 0) {
         [[[UIAlertView alloc]
-          initWithTitle:@"Connexion impossible"
-          message:@"Veuillez renseigner un numéro de téléphone"
+          initWithTitle:OTLocalizedString(@"connection_imposible")
+          message:OTLocalizedString(@"retryPhone")
           delegate:nil
           cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
+          otherButtonTitles:@"Ok",
           nil] show];
     }
     else if (!self.validateForm) {
         [[[UIAlertView alloc]
-          initWithTitle:@"Connexion impossible"
-          message:@"Numéro de téléphone invalide"
+          initWithTitle:OTLocalizedString(@"connection_imposible")
+          message:OTLocalizedString(@"invalidPhoneNumber")
           delegate:nil
           cancelButtonTitle:nil
-          otherButtonTitles:@"ok",
+          otherButtonTitles:@"Ok",
           nil] show];
     }
     else {
         [self launchAuthentication];
     }
+}
+
+/********************************************************************************/
+#pragma mark - LostCodeDelegate
+
+- (void)loginWithNewCode:(NSString *)code {
+    [self dismissViewControllerAnimated:YES completion:^() {
+        self.passwordTextField.text = code;
+        [self validateButtonDidTad];
+    }];
+}
+
+- (void)showKeyboard:(NSNotification*)notification {
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint andMarker:self.phoneTextField];
 }
 
 @end

@@ -19,6 +19,7 @@
 @interface OTMeetingCalloutViewController : UIViewController
 
 @property (weak, nonatomic) id<OTMeetingCalloutViewControllerDelegate> delegate;
+@property (strong, nonatomic) OTEncounter *encounter;
 
 - (void)configureWithEncouter:(OTEncounter *)encounter;
 
