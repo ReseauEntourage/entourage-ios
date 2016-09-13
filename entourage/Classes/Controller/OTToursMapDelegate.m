@@ -16,25 +16,7 @@
 #import "OTConsts.h"
 #import "OTOngoingTourService.h"
 
-@interface OTToursMapDelegate ()
-
-@property (nonatomic) BOOL mapWasCenteredOnUserLocation;
-
-@end
-
 @implementation OTToursMapDelegate
-
-#pragma mark - Lifecycle
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.mapWasCenteredOnUserLocation = NO;
-        self.isActive = NO;
-    }
-    return self;
-}
 
 #pragma mark - MKMapViewDelegate
 
@@ -52,13 +34,6 @@
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     [self.mapController didChangePosition];
-}
-
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    if (!self.mapWasCenteredOnUserLocation) {
-        [self.mapController zoomToCurrentLocation:nil];
-        self.mapWasCenteredOnUserLocation = YES;
-    }
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {

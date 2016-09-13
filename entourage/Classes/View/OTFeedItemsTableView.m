@@ -27,7 +27,7 @@
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
-#define LOAD_MORE_CELLS_DELTA 4
+#define LOAD_MORE_DRAG_OFFSET 50
 
 #define MAPVIEW_HEIGHT 160.f
 #define MAPVIEW_REGION_SPAN_X_METERS 500
@@ -242,13 +242,6 @@
     [statusButton setupAsStatusButtonForFeedItem:item];
     [statusLabel setupAsStatusButtonForFeedItem:item];
 
-    //check if we need to load more data
-     if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
-        if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {
-            [self.feedItemsDelegate loadMoreData];
-        }
-    }
-    
     return cell;
 }
 
@@ -259,6 +252,22 @@
         [self.feedItemsDelegate showFeedInfo:selectedFeedItem];
     }
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    CGPoint offset = scrollView.contentOffset;
+    CGRect bounds = scrollView.bounds;
+    CGSize size = scrollView.contentSize;
+    UIEdgeInsets inset = scrollView.contentInset;
+    float y = offset.y + bounds.size.height - inset.bottom;
+    float h = size.height;
+    float reload_distance = LOAD_MORE_DRAG_OFFSET;
+    if(y > h + reload_distance) {
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)])
+                [self.feedItemsDelegate loadMoreData];
+        });
+    }
 }
 
 #define kMapHeaderOffsetY 0.0

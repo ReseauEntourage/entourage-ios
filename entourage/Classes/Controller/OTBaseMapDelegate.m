@@ -7,6 +7,14 @@
 //
 
 #import "OTBaseMapDelegate.h"
+#import "OTLocationManager.h"
+#import "NSNotification+entourage.h"
+
+@interface OTBaseMapDelegate ()
+
+@property (nonatomic) BOOL mapWasCenteredOnUserLocation;
+
+@end
 
 @implementation OTBaseMapDelegate
 
@@ -14,8 +22,13 @@
     self = [super init];
     if (self) {
         self.mapController = mapController;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (CLLocationDistance)mapHeight:(MKMapView *)mapView {
@@ -28,6 +41,19 @@
     CLLocationDistance vDist = MKMetersBetweenMapPoints(mpTopRight, mpBottomRight) / 1000.f;
     
     return vDist;
+}
+
+#pragma mark - private methods
+
+- (void)locationUpdated:(NSNotification *)notification {
+    if (!self.mapWasCenteredOnUserLocation) {
+        NSArray *locations = [notification readLocations];
+        if(locations.count > 0) {
+            [self.mapController zoomToCurrentLocation:nil];
+            self.mapWasCenteredOnUserLocation = YES;
+            [self.mapController didChangePosition];
+        }
+    }
 }
 
 @end

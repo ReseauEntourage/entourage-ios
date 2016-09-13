@@ -12,7 +12,6 @@
 @interface OTGuideMapDelegate ()
 
 @property (nonatomic) CLLocationCoordinate2D currentMapCenter;
-@property (nonatomic) BOOL mapWasCenteredOnUserLocation;
 
 @end
 
@@ -63,13 +62,6 @@
     [mapView deselectAnnotation:view.annotation animated:NO];
     if([view.annotation isKindOfClass:[OTCustomAnnotation class]])
         [self.mapController displayPoiDetails:view];
-}
-
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    if (!self.mapWasCenteredOnUserLocation) {
-        [self.mapController zoomToCurrentLocation:nil];
-        self.mapWasCenteredOnUserLocation = YES;
-    }
 }
 
 @end

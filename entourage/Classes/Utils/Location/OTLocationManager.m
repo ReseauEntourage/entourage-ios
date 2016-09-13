@@ -64,7 +64,7 @@
     if([locations count] > 0)
         self.currentLocation = [locations objectAtIndex:0];
     NSDictionary *info = @{ kNotificationLocationUpdatedInfoKey: locations };
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationUpdated object:self userInfo:info];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationUpdated object:nil userInfo:info];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
@@ -73,7 +73,7 @@
     
     self.started = status == kCLAuthorizationStatusAuthorizedAlways;
     NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:self.started] };
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationAuthorizationChanged object:self userInfo:info];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationAuthorizationChanged object:nil userInfo:info];
 }
 
 

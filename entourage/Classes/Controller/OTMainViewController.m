@@ -287,23 +287,16 @@
 
 - (void)configureMapView {
     self.mapView.showsPointsOfInterest = NO;
-    
+   	self.mapView.showsUserLocation = YES;
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
-    
     [self.mapView setRegion:region animated:NO];
-    
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
-    
-   	self.mapView.showsUserLocation = YES;
-    [self zoomToCurrentLocation:nil];
-    
     for(UIView *view in self.mapView.subviews)
         for(UIGestureRecognizer *recognizer in view.gestureRecognizers) {
             if([recognizer class] == [UILongPressGestureRecognizer class])
                 [view removeGestureRecognizer:recognizer];
         }
-
     UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
     [self.mapView addGestureRecognizer:longPressMapGesture];
 }
@@ -405,15 +398,11 @@ static BOOL didGetAnyData = NO;
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self feedMapWithFeedItems];
     
-    if (![self.mapView showsUserLocation])
-        [self zoomToCurrentLocation:nil];
-    
     // check if we need to make a new request
     CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.requestedToursCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
     if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4) {
         return;
     }
-    //NSLog(@"Main: position did change = > getFeeds");
     self.currentPagination.beforeDate = [NSDate date];
     [self getFeeds];
 }
