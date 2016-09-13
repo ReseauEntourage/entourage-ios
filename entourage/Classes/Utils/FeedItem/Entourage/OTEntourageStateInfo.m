@@ -58,7 +58,8 @@
 }
 
 - (BOOL)canEdit {
-    return YES;
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    return [currentUser.sid intValue] == [self.entourage.author.uID intValue];
 }
 
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {

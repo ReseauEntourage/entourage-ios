@@ -44,7 +44,7 @@
             break;
         case FeedItemStateJoinAccepted:
             title = OTLocalizedString(@"item_option_quit");
-            selector = @selector(doCloseFeedItem);
+            selector = @selector(doQuitFeedItem);
             break;
         default:
             self.btnNextState.hidden = YES;
