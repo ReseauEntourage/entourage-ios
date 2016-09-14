@@ -375,7 +375,11 @@
                                     <constraint firstAttribute="height" constant="44" id="yjx-J2-NFV"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem image="filters" id="Pkv-Fp-SD3"/>
+                                    <barButtonItem image="filters" id="Pkv-Fp-SD3">
+                                        <connections>
+                                            <segue destination="0av-Qe-fFs" kind="modal" id="7Du-UG-Q5g"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem image="geoloc" style="done" id="Tmd-7k-imW"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Rvz-lj-J2G"/>
                                     <barButtonItem title="Entourages" id="dU5-SW-p8f">
@@ -495,7 +499,6 @@
                         <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" animates="NO" id="Gfi-xi-1Da"/>
                         <segue destination="cUF-7c-FT1" kind="modal" identifier="TourCreatorSegue" id="giF-18-m0W"/>
                         <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageEditor" id="dno-Ju-GCg"/>
-                        <segue destination="0av-Qe-fFs" kind="modal" identifier="FiltersSegue" id="22w-GJ-qhb"/>
                         <segue destination="4jA-Gt-JYo" kind="push" identifier="PublicFeedItemDetailsSegue" id="wzY-Lz-9e9"/>
                         <segue destination="b7J-bU-8VV" kind="push" identifier="ActiveFeedItemDetailsSegue" id="5Vn-Sd-WAu"/>
                         <segue destination="7EQ-Wv-dUJ" kind="push" identifier="MyEntouragesSegue" id="Hj6-Bk-Yxd"/>
@@ -1068,13 +1071,13 @@
             </objects>
             <point key="canvasLocation" x="354" y="595"/>
         </scene>
-        <!--Filters-->
+        <!--FeedItemFilters-->
         <scene sceneID="N4j-rM-ZJb">
             <objects>
-                <viewControllerPlaceholder storyboardName="Filters" id="0av-Qe-fFs" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="FeedItemFilters" id="0av-Qe-fFs" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f44-Ea-6he" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="541" y="965"/>
+            <point key="canvasLocation" x="575.5" y="690"/>
         </scene>
     </scenes>
     <resources>

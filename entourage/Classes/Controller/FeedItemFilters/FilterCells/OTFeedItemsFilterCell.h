@@ -1,5 +1,5 @@
 //
-//  OTMyEntouragesFilterCell.h
+//  OTFeedItemsFilterCell.h
 //  entourage
 //
 //  Created by sergiu buceac on 8/11/16.
@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OTMyEntourageFilter.h"
-#import "OTMyEntouragesFiltersTableDataSource.h"
-#import "OTMyEntouragesFilterCellBase.h"
+#import "OTFeedItemsFilterCellBase.h"
 
-@interface OTMyEntouragesFilterCell : OTMyEntouragesFilterCellBase
+@interface OTFeedItemsFilterCell : OTFeedItemsFilterCellBase
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UISwitch *swtActive;

@@ -16,7 +16,7 @@
 #import "SVProgressHUD.h"
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
-#import "OTMyEntouragesFiltersViewController.h"
+#import "OTFeedItemFiltersViewController.h"
 #import "OTMyEntouragesOptionsBehavior.h"
 #import "OTFeedItemDetailsBehavior.h"
 #import "OTManageInvitationBehavior.h"
@@ -63,7 +63,7 @@
         return;
     if([segue.identifier isEqualToString:@"FiltersSegue"]) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
-        OTMyEntouragesFiltersViewController *filtersController = (OTMyEntouragesFiltersViewController *)controller.topViewController;
+        OTFeedItemFiltersViewController *filtersController = (OTFeedItemFiltersViewController *)controller.topViewController;
         filtersController.filterDelegate = self.entouragesDataSource;
     }
 }

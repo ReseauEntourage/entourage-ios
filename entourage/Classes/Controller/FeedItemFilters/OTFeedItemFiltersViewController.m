@@ -1,26 +1,26 @@
 //
-//  OTMyEntouragesFiltersViewController.m
+//  OTFeedItemFiltersViewController.m
 //  entourage
 //
 //  Created by sergiu buceac on 8/11/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTMyEntouragesFiltersViewController.h"
+#import "OTFeedItemFiltersViewController.h"
 #import "OTConsts.h"
 #import "UIViewController+menu.h"
 #import "UIBarButtonItem+factory.h"
 #import "UIColor+entourage.h"
-#import "OTMyEntouragesFiltersTableDataSource.h"
+#import "OTFeedItemsFiltersTableDataSource.h"
 
-@interface OTMyEntouragesFiltersViewController ()
+@interface OTFeedItemFiltersViewController ()
 
-@property (strong, nonatomic) IBOutlet OTMyEntouragesFiltersTableDataSource *tableDataSource;
+@property (strong, nonatomic) IBOutlet OTFeedItemsFiltersTableDataSource *tableDataSource;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
-@implementation OTMyEntouragesFiltersViewController
+@implementation OTFeedItemFiltersViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,7 +41,7 @@
 }
 
 - (void)saveFilters {
-    OTMyEntouragesFilter *currentFilter = [self.tableDataSource readCurrentFilter];
+    OTFeedItemFilters *currentFilter = [self.tableDataSource readCurrentFilter];
     [self dismissViewControllerAnimated:YES completion:^() {
         [self.filterDelegate filterChanged:currentFilter];
     }];

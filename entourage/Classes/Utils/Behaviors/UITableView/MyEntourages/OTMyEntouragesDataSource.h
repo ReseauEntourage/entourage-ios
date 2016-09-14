@@ -7,9 +7,9 @@
 //
 
 #import "OTDataSourceBehavior.h"
-#import "OTMyEntouragesFilterDelegate.h"
+#import "OTFeedItemsFilterDelegate.h"
 
-@interface OTMyEntouragesDataSource : OTDataSourceBehavior <OTMyEntouragesFilterDelegate>
+@interface OTMyEntouragesDataSource : OTDataSourceBehavior <OTFeedItemsFilterDelegate>
 
 - (void)loadNextPage;
 

@@ -11,29 +11,27 @@
 @implementation OTGroupedTableDataSourceBehavior
 
 - (id)getItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *key = [self.quickJumpList objectAtIndex:indexPath.section];
-    NSArray *items = [self.groupedSource objectForKey:key];
+    NSArray *items = self.groupedSource[indexPath.section];
     return [items objectAtIndex:indexPath.row];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.quickJumpList count];
+    return [self.groupHeaders count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSString *key = [self.quickJumpList objectAtIndex:section];
-    NSArray *items = [self.groupedSource objectForKey:key];
+    NSArray *items = self.groupedSource[section];
     return [items count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.quickJumpList objectAtIndex:section];
+    return [self.groupHeaders objectAtIndex:section];
 }
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return self.quickJumpList;
+    return self.groupHeaders;
 }
 
 @end

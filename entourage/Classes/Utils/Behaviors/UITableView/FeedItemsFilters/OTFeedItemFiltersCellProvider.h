@@ -1,5 +1,5 @@
 //
-//  OTMyEntouragesFiltersCellProvider.h
+//  OTFeedItemFiltersCellProvider.h
 //  entourage
 //
 //  Created by sergiu buceac on 8/11/16.
@@ -8,6 +8,6 @@
 
 #import "OTTableCellProviderBehavior.h"
 
-@interface OTMyEntouragesFiltersCellProvider : OTTableCellProviderBehavior
+@interface OTFeedItemFiltersCellProvider : OTTableCellProviderBehavior
 
 @end

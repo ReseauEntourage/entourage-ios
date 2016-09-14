@@ -11,6 +11,7 @@
 #import "SVProgressHUD.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTConsts.h"
+#import "OTMyEntouragesFilter.h"
 
 @interface OTMyEntouragesDataSource ()
 
@@ -59,7 +60,7 @@
     }];
 }
 
-#pragma mark - OTMyEntouragesFilterDelegate
+#pragma mark - OTFeedItemsFilterDelegate
 
 - (void)filterChanged:(OTMyEntouragesFilter *)filter {
     self.currentFilter = filter;

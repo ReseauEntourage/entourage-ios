@@ -12,10 +12,6 @@
             <string>SFUIText-Light</string>
             <string>SFUIText-Light</string>
             <string>SFUIText-Light</string>
-            <string>SFUIText-Light</string>
-            <string>SFUIText-Light</string>
-            <string>SFUIText-Light</string>
-            <string>SFUIText-Light</string>
         </mutableArray>
         <mutableArray key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
@@ -133,7 +129,7 @@
                                         </constraints>
                                         <state key="normal" image="filters"/>
                                         <connections>
-                                            <segue destination="9ZL-Sm-id7" kind="modal" identifier="FiltersSegue" id="gs2-HL-sp5"/>
+                                            <segue destination="Tys-aE-4fn" kind="modal" identifier="FiltersSegue" id="yA9-tW-pDD"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -379,6 +375,14 @@
             </objects>
             <point key="canvasLocation" x="373.33333333333331" y="-46.386666666666663"/>
         </scene>
+        <!--FeedItemFilters-->
+        <scene sceneID="mT5-zt-Joc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FeedItemFilters" id="Tys-aE-4fn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ixK-Tr-06n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="740.5" y="-22"/>
+        </scene>
         <!--My Entourages Options-->
         <scene sceneID="Um8-xG-z9g">
             <objects>
@@ -517,203 +521,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OyM-hd-yPO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="436" y="445"/>
-        </scene>
-        <!--My Entourages Filters-->
-        <scene sceneID="TnJ-4g-kwJ">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ILh-4A-ZY1" userLabel="My Entourages Filters" customClass="OTMyEntouragesFiltersViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="aDX-qa-hH3"/>
-                        <viewControllerLayoutGuide type="bottom" id="WXr-um-izc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="jGL-P4-agG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="10" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="45" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ndx-lJ-IKw">
-                                <rect key="frame" x="-4" y="64" width="328" height="504"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FilterCell" rowHeight="44" id="pYZ-lo-w0I" customClass="OTMyEntouragesFilterCell">
-                                        <rect key="frame" x="0.0" y="45" width="328" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pYZ-lo-w0I" id="tHc-QX-4Yy">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFC-tG-nyI">
-                                                    <rect key="frame" x="15" y="13" width="31" height="18"/>
-                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q80-6e-uuX">
-                                                    <rect key="frame" x="264" y="6" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="changeActive:" destination="pYZ-lo-w0I" eventType="valueChanged" id="jS0-2O-WGr"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="q80-6e-uuX" secondAttribute="trailing" constant="7" id="hBY-sc-xBz"/>
-                                                <constraint firstItem="q80-6e-uuX" firstAttribute="centerY" secondItem="tHc-QX-4Yy" secondAttribute="centerY" id="iAl-oP-3F9"/>
-                                                <constraint firstItem="EFC-tG-nyI" firstAttribute="centerY" secondItem="tHc-QX-4Yy" secondAttribute="centerY" id="jkc-rE-Ocb"/>
-                                                <constraint firstItem="EFC-tG-nyI" firstAttribute="leading" secondItem="tHc-QX-4Yy" secondAttribute="leadingMargin" constant="7" id="mrm-lH-fEL"/>
-                                                <constraint firstItem="q80-6e-uuX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EFC-tG-nyI" secondAttribute="trailing" constant="5" id="q7a-Et-RVJ"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="lblTitle" destination="EFC-tG-nyI" id="bxd-RS-qhq"/>
-                                            <outlet property="swtActive" destination="q80-6e-uuX" id="Au5-FL-U7B"/>
-                                            <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="GKf-Sn-r1N"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="TimeframeCell" rowHeight="90" id="OBR-vC-47z" customClass="OTMyEntouragesTimeframeCell">
-                                        <rect key="frame" x="0.0" y="89" width="328" height="90"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OBR-vC-47z" id="vJ3-It-mrZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="89"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3p-eK-vbE">
-                                                    <rect key="frame" x="0.0" y="0.0" width="328" height="89"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FbF-pI-Vfv">
-                                                            <rect key="frame" x="47" y="22" width="46" height="46"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="46" id="1GX-8g-jiM"/>
-                                                                <constraint firstAttribute="width" constant="46" id="mgb-nb-7sh"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                                            <state key="normal" title="24H" backgroundImage="24HInactive">
-                                                                <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                            </state>
-                                                            <state key="selected" title="24H" backgroundImage="24HActive">
-                                                                <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="activateButton:" destination="OBR-vC-47z" eventType="touchUpInside" id="1Pj-3c-AtK"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRI-Or-rfy">
-                                                            <rect key="frame" x="141" y="22" width="46" height="46"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="46" id="U4z-7H-NQ8"/>
-                                                                <constraint firstAttribute="width" constant="46" id="kz6-lu-ncC"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                                            <state key="normal" title="8J" backgroundImage="24HInactive">
-                                                                <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                            </state>
-                                                            <state key="selected" title="8J" backgroundImage="24HActive">
-                                                                <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="activateButton:" destination="OBR-vC-47z" eventType="touchUpInside" id="UuP-Th-NzY"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKH-mZ-wT2">
-                                                            <rect key="frame" x="235" y="22" width="46" height="46"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="46" id="BvT-IK-gSX"/>
-                                                                <constraint firstAttribute="width" constant="46" id="plU-MD-okZ"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                                            <state key="normal" title="30J" backgroundImage="24HInactive">
-                                                                <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                            </state>
-                                                            <state key="selected" title="30J" backgroundImage="24HActive">
-                                                                <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="activateButton:" destination="OBR-vC-47z" eventType="touchUpInside" id="d3j-HH-YkP"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstItem="tKH-mZ-wT2" firstAttribute="leading" secondItem="SRI-Or-rfy" secondAttribute="trailing" priority="999" constant="48" id="1uR-xt-Bph"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tKH-mZ-wT2" secondAttribute="trailing" constant="15" id="5Tg-go-WCK"/>
-                                                        <constraint firstItem="SRI-Or-rfy" firstAttribute="centerY" secondItem="S3p-eK-vbE" secondAttribute="centerY" id="CGc-Oy-53V"/>
-                                                        <constraint firstItem="SRI-Or-rfy" firstAttribute="centerX" secondItem="S3p-eK-vbE" secondAttribute="centerX" id="ERI-oI-kBt"/>
-                                                        <constraint firstItem="FbF-pI-Vfv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="S3p-eK-vbE" secondAttribute="leading" constant="15" id="GDF-hf-fHF"/>
-                                                        <constraint firstItem="tKH-mZ-wT2" firstAttribute="centerY" secondItem="SRI-Or-rfy" secondAttribute="centerY" id="LVk-MC-wlz"/>
-                                                        <constraint firstItem="FbF-pI-Vfv" firstAttribute="centerY" secondItem="SRI-Or-rfy" secondAttribute="centerY" id="PvI-Q9-AUT"/>
-                                                        <constraint firstItem="SRI-Or-rfy" firstAttribute="leading" secondItem="FbF-pI-Vfv" secondAttribute="trailing" priority="999" constant="48" id="bbl-7Z-QHJ"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="S3p-eK-vbE" secondAttribute="trailing" id="CtI-FX-hDE"/>
-                                                <constraint firstItem="S3p-eK-vbE" firstAttribute="top" secondItem="vJ3-It-mrZ" secondAttribute="top" id="VMH-PU-3sj"/>
-                                                <constraint firstItem="S3p-eK-vbE" firstAttribute="leading" secondItem="vJ3-It-mrZ" secondAttribute="leading" id="eon-NB-pd7"/>
-                                                <constraint firstAttribute="bottom" secondItem="S3p-eK-vbE" secondAttribute="bottom" id="x8y-Oe-6SA"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="btn1Day" destination="FbF-pI-Vfv" id="ceV-Rh-JWE"/>
-                                            <outlet property="btn30Days" destination="tKH-mZ-wT2" id="Y0Q-e5-QB7"/>
-                                            <outlet property="btn8Days" destination="SRI-Or-rfy" id="nbp-2B-Du6"/>
-                                            <outlet property="summaryProvider" destination="eFa-KF-lmI" id="KjJ-d8-7aU"/>
-                                            <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="5zA-sV-1af"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="Ndx-lJ-IKw" firstAttribute="leading" secondItem="jGL-P4-agG" secondAttribute="leadingMargin" constant="-20" id="5ts-Db-JyV"/>
-                            <constraint firstItem="WXr-um-izc" firstAttribute="top" secondItem="Ndx-lJ-IKw" secondAttribute="bottom" id="P6d-MQ-TZY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ndx-lJ-IKw" secondAttribute="trailing" constant="-20" id="xVa-2M-0aT"/>
-                            <constraint firstItem="Ndx-lJ-IKw" firstAttribute="top" secondItem="aDX-qa-hH3" secondAttribute="bottom" id="yrw-XL-Vmg"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="cna-cZ-4Nm"/>
-                    <connections>
-                        <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="0Vq-6H-pRf"/>
-                        <outlet property="tableView" destination="Ndx-lJ-IKw" id="KBO-Je-c6X"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sgK-8L-c1G" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="hjO-Jk-sXF" userLabel="Data Source" customClass="OTDataSourceBehavior">
-                    <connections>
-                        <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="M6p-sS-NHc"/>
-                        <outlet property="tableView" destination="Ndx-lJ-IKw" id="DXt-Hl-qpq"/>
-                    </connections>
-                </customObject>
-                <customObject id="sJe-Pn-K9b" userLabel="Table Data Source" customClass="OTMyEntouragesFiltersTableDataSource">
-                    <connections>
-                        <outlet property="cellProvider" destination="1Mw-Us-cuQ" id="hhX-91-yJW"/>
-                        <outlet property="dataSource" destination="hjO-Jk-sXF" id="5Sa-ig-raT"/>
-                    </connections>
-                </customObject>
-                <customObject id="1Mw-Us-cuQ" userLabel="Cell Provider" customClass="OTMyEntouragesFiltersCellProvider">
-                    <connections>
-                        <outlet property="tableDataSource" destination="sJe-Pn-K9b" id="MTy-2A-3Rg"/>
-                    </connections>
-                </customObject>
-            </objects>
-            <point key="canvasLocation" x="1195" y="-47"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="RMD-kO-ygR">
-            <objects>
-                <navigationController id="9ZL-Sm-id7" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oEU-eT-ttB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="ILh-4A-ZY1" kind="relationship" relationship="rootViewController" id="KcE-6x-Bcu"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="O4n-AX-xye" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="783" y="-47"/>
         </scene>
         <!--Manage Invitation-->
         <scene sceneID="AIp-LF-9gP">
@@ -912,8 +719,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="24HActive" width="48" height="48"/>
-        <image name="24HInactive" width="48" height="48"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>
         <image name="createMaraude" width="48" height="48"/>

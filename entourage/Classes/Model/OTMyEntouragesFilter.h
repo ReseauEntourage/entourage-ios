@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTFeedItemFilters.h"
 
-@interface OTMyEntouragesFilter : NSObject
+@interface OTMyEntouragesFilter : OTFeedItemFilters
 
 @property (nonatomic) BOOL isActive;
 @property (nonatomic) BOOL isInvited;
@@ -19,7 +20,5 @@
 @property (nonatomic) BOOL showTours;
 @property (nonatomic) BOOL showOnlyMyEntourages;
 @property (nonatomic) int timeframeInHours;
-
-- (NSMutableDictionary *)toDictionaryWithPageNumber:(int)pageNumber andSize:(int)pageSize;
 
 @end
