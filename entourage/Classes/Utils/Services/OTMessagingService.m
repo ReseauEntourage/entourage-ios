@@ -59,6 +59,10 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [source updateItems:sortedItems];
         [source.tableView reloadData];
+        if(source.items.count > 0) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:source.items.count - 1 inSection:0];
+            [source.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        }
     });
 }
 

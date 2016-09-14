@@ -64,8 +64,12 @@
         [self handleJoinRequestNotification:pnData showingAlert:alert];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_REQUEST_ACCEPTED])
         [self handleAcceptJoinNotification:pnData showingAlert:alert];
-    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE])
-        [self handleChatNotification:pnData showingAlert:alert];
+    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE]) {
+        if([self canHandleChatNotificationInPlace:pnData])
+            return;
+        else
+            [self handleChatNotification:pnData showingAlert:alert];
+    }
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_INVITE_REQUEST])
         [self handleInviteRequestNotification:pnData showingAlert:alert];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_INVITE_STATUS])
@@ -134,6 +138,18 @@
         [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
     }];
     [alert addAction:openAction];
+}
+
+- (BOOL)canHandleChatNotificationInPlace:(OTPushNotificationsData *)pnData {
+    UIViewController *topController = [[OTDeepLinkService new] getTopViewController];
+    if([topController isKindOfClass:[OTActiveFeedItemViewController class]]) {
+        OTActiveFeedItemViewController *feedItemVC = (OTActiveFeedItemViewController*)topController;
+        if ([feedItemVC.feedItem.uid isEqual:pnData.joinableId]) {
+            [feedItemVC reloadMessages];
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (void)handleChatNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
