@@ -13,10 +13,7 @@
 #import "OTFeedItemTimeframeFilter.h"
 #import "OTConsts.h"
 
-#define FILTER_STATUS_KEY @"status"
 #define ALL_STATUS_STRING @"all"
-#define ORGANISER_KEY @"created_by_me"
-#define INVITED_KEY @"accepted_invitation"
 
 @implementation OTMyEntouragesFilter
 
@@ -72,23 +69,23 @@
 
 - (NSMutableDictionary *)toDictionaryWithPageNumber:(int)pageNumber andSize:(int)pageSize {
     NSMutableDictionary *result = [NSMutableDictionary new];
-    [result setObject:[self getTourTypes] forKey:FILTER_TOUR_TYPES_KEY];
-    [result setObject:[self getEntourageTypes] forKey:FILTER_ENTOURAGE_TYPES_KEY];
-    [result setObject:@(pageNumber) forKey:PAGE_NUMBER_KEY];
-    [result setObject:@(pageSize) forKey:PAGE_SIZE_KEY];
+    [result setObject:[self getTourTypes] forKey:@"tour_types"];
+    [result setObject:[self getEntourageTypes] forKey:@"entourage_types"];
+    [result setObject:@(pageNumber) forKey:@"page"];
+    [result setObject:@(pageSize) forKey:@"per"];
     if(self.isOrganiser)
-        [result setObject:@"true" forKey:ORGANISER_KEY];
+        [result setObject:@"true" forKey:@"created_by_me"];
     if(self.isInvited)
-        [result setObject:@"true" forKey:INVITED_KEY];
+        [result setObject:@"true" forKey:@"accepted_invitation"];
     if([self.currentUser.type isEqualToString:USER_TYPE_PUBLIC]) {
-        [result setObject:@(self.timeframeInHours) forKey:TIMEFRAME_KEY];
-        [result setObject:[self getOnlyMyEntourages] forKey:FILTER_STATUS_KEY];
+        [result setObject:@(self.timeframeInHours) forKey:@"time_range"];
+        [result setObject:[self getOnlyMyEntourages] forKey:@"status"];
     }
     else
     {
         NSString *status = [self getStatus];
         if(status)
-            [result setObject:[self getStatus] forKey:FILTER_STATUS_KEY];
+            [result setObject:[self getStatus] forKey:@"status"];
     }
     return result;
 }

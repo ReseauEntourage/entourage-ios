@@ -20,7 +20,7 @@
 #import "OTGuideDetailsViewController.h"
 #import "OTTourCreatorViewController.h"
 #import "OTEntourageEditorViewController.h"
-#import "OTFiltersViewController.h"
+#import "OTFeedItemFiltersViewController.h"
 #import "OTFeedItemsPagination.h"
 #import "OTPublicFeedItemViewController.h"
 #import "OTActiveFeedItemViewController.h"
@@ -46,7 +46,6 @@
 #import "OTTourPoint.h"
 #import "OTEncounter.h"
 #import "OTPOI.h"
-#import "OTEntourageFilter.h"
 
 // Service
 #import "OTTourService.h"
@@ -82,6 +81,7 @@
 #import "OTOverlayFeederBehavior.h"
 #import "OTTapEntourageBehavior.h"
 #import "OTJoinBehavior.h"
+#import "OTNewsFeedsFilter.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -98,7 +98,7 @@
 /********************************************************************************/
 #pragma mark - OTMapViewController
 
-@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFiltersViewControllerDelegate>
+@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFeedItemsFilterDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
@@ -153,6 +153,7 @@
 @property (nonatomic) OTFeedItemsPagination *currentPagination;
 @property (nonatomic) BOOL isRefreshing;
 @property (nonatomic, weak) IBOutlet UIButton *nouveauxFeedItemsButton;
+@property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
 
 @end
 
@@ -167,6 +168,8 @@
     [super viewDidLoad];
     [self configureNavigationBar];
     [self.footerToolbar setupWithFilters];
+    
+    self.currentFilter = [OTNewsFeedsFilter new];
     
     self.locations = [NSMutableArray new];
     self.pointsToSend = [NSMutableArray new];
@@ -426,23 +429,7 @@ static BOOL didGetAnyData = NO;
     self.requestedToursCoordinate = self.mapView.centerCoordinate;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    OTEntourageFilter *entourageFilter = [OTEntourageFilter sharedInstance];
-    
-    BOOL showTours = [[entourageFilter valueForFilter:kEntourageFilterEntourageShowTours] boolValue];
-    BOOL myEntouragesOnly = [[entourageFilter valueForFilter:kEntourageFilterEntourageOnlyMyEntourages] boolValue];
-
-    // need to add time in the future because of wrong time difference
-    NSDictionary *filterDictionary = @{
-                                       @"before" : [NSDate date],
-                                       @"latitude": @(self.requestedToursCoordinate.latitude),
-                                       @"longitude": @(self.requestedToursCoordinate.longitude),
-                                       @"distance": @FEEDS_REQUEST_DISTANCE_KM,
-                                       @"tour_types": [entourageFilter getTourTypes],
-                                       @"entourage_types": [entourageFilter getEntourageTypes],
-                                       @"show_tours": showTours ? @"true" : @"false",
-                                       @"show_my_entourages_only" : myEntouragesOnly ? @"true" : @"false",
-                                       @"time_range" : [entourageFilter valueForFilter:kEntourageFilterTimeframe]
-                                       };
+    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:[NSDate date] andLocation:self.requestedToursCoordinate];
     NSLog(@"Getting new data ...");
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
@@ -490,27 +477,11 @@ static BOOL didGetAnyData = NO;
     self.requestedToursCoordinate = self.mapView.centerCoordinate;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    OTEntourageFilter *entourageFilter = [OTEntourageFilter sharedInstance];
-    
-    BOOL showTours = [[entourageFilter valueForFilter:kEntourageFilterEntourageShowTours] boolValue];
-    BOOL myEntouragesOnly = [[entourageFilter valueForFilter:kEntourageFilterEntourageOnlyMyEntourages] boolValue];
     if (!self.currentPagination.beforeDate)
         self.currentPagination.beforeDate = [NSDate date];
     
-    NSDictionary *filterDictionary = @{  //@"page": @(self.currentPagination.page),
-                                         //@"per": @20,//FEEDITEMS_PER_PAGE,
-                                         @"before" : self.currentPagination.beforeDate,
-                                         @"latitude": @(self.requestedToursCoordinate.latitude),
-                                         @"longitude": @(self.requestedToursCoordinate.longitude),
-                                         @"distance": @FEEDS_REQUEST_DISTANCE_KM,
-                                         @"tour_types": [entourageFilter getTourTypes],
-                                         @"entourage_types": [entourageFilter getEntourageTypes],
-                                         @"show_tours": showTours ? @"true" : @"false",
-                                         @"show_my_entourages_only" : myEntouragesOnly ? @"true" : @"false",
-                                         @"time_range" : [entourageFilter valueForFilter:kEntourageFilterTimeframe]
-                                         };
-    
-        [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
+    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:self.currentPagination.beforeDate andLocation:self.requestedToursCoordinate];
+    [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
                                             success:^(NSMutableArray *feeds) {
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                 if (feeds.count && !didGetAnyData) {
@@ -974,7 +945,6 @@ static bool isShowingOptions = NO;
     }];
 }
 
-/********************************************************************************/
 #pragma mark - EntourageEditorDelegate
 
 - (void)didEditEntourage:(OTEntourage *)entourage {
@@ -983,7 +953,6 @@ static bool isShowingOptions = NO;
     }];
 }
 
-/********************************************************************************/
 #pragma mark - OTFeedItemQuitDelegate
 
 - (void)didQuitFeedItem:(OTFeedItem *)item {
@@ -992,10 +961,10 @@ static bool isShowingOptions = NO;
     }];
 }
 
-/**************************************************************************************************/
-#pragma mark - OTFiltersViewControllerDelegate
+#pragma mark - OTFeedItemsFilterDelegate
 
-- (void)filterChanged {
+- (void)filterChanged:(OTNewsFeedsFilter *)filter {
+    self.currentFilter = filter;
     self.currentPagination.beforeDate = nil;
     self.feeds = [NSMutableArray new];
     [self.tableView removeAll];
@@ -1003,7 +972,6 @@ static bool isShowingOptions = NO;
     [self getData];
 }
 
-/**************************************************************************************************/
 #pragma mark - Actions
 
 - (void)showFilters {
@@ -1261,10 +1229,8 @@ static bool isShowingOptions = NO;
     }
     else if([segue.identifier isEqualToString:@"FiltersSegue"]) {
         UINavigationController *navController = (UINavigationController*)destinationViewController;
-        OTFiltersViewController *controller = (OTFiltersViewController*)navController.topViewController;
-        OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-        controller.isProUser = [currentUser.type isEqualToString:USER_TYPE_PRO];
-        controller.delegate = self;
+        OTFeedItemFiltersViewController *controller = (OTFeedItemFiltersViewController*)navController.topViewController;
+        controller.filterDelegate = self;
     }
     else if([segue.identifier isEqualToString:@"PublicFeedItemDetailsSegue"]) {
         OTPublicFeedItemViewController *controller = (OTPublicFeedItemViewController *)destinationViewController;

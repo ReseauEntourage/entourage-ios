@@ -209,7 +209,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FuL-C2-u9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1342.5" y="-63"/>
+            <point key="canvasLocation" x="1277.5" y="-81"/>
         </scene>
         <!--PublicFeedItem-->
         <scene sceneID="R5i-fD-RJi">
@@ -219,7 +219,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJ8-7h-blf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1343" y="-3"/>
+            <point key="canvasLocation" x="1294" y="-15"/>
         </scene>
         <!--Main-->
         <scene sceneID="ufC-wZ-h7g">
@@ -375,11 +375,7 @@
                                     <constraint firstAttribute="height" constant="44" id="yjx-J2-NFV"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem image="filters" id="Pkv-Fp-SD3">
-                                        <connections>
-                                            <segue destination="0av-Qe-fFs" kind="modal" id="7Du-UG-Q5g"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem image="filters" id="Pkv-Fp-SD3"/>
                                     <barButtonItem image="geoloc" style="done" id="Tmd-7k-imW"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Rvz-lj-J2G"/>
                                     <barButtonItem title="Entourages" id="dU5-SW-p8f">
@@ -502,6 +498,7 @@
                         <segue destination="4jA-Gt-JYo" kind="push" identifier="PublicFeedItemDetailsSegue" id="wzY-Lz-9e9"/>
                         <segue destination="b7J-bU-8VV" kind="push" identifier="ActiveFeedItemDetailsSegue" id="5Vn-Sd-WAu"/>
                         <segue destination="7EQ-Wv-dUJ" kind="push" identifier="MyEntouragesSegue" id="Hj6-Bk-Yxd"/>
+                        <segue destination="0av-Qe-fFs" kind="modal" identifier="FiltersSegue" id="8PW-rz-Idk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -660,7 +657,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="-112" y="1490"/>
+            <point key="canvasLocation" x="702" y="996"/>
         </scene>
         <!--Disclaimer-->
         <scene sceneID="yDO-BU-eCK">
@@ -668,7 +665,7 @@
                 <viewControllerPlaceholder storyboardName="Disclaimer" id="8IU-nr-TCd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5rP-dk-Txa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="191" y="1490"/>
+            <point key="canvasLocation" x="1005" y="996"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="CD4-Ww-qZf">
@@ -959,7 +956,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uC2-Gx-JX2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-112" y="793"/>
+            <point key="canvasLocation" x="270" y="783"/>
         </scene>
         <!--UserProfile-->
         <scene sceneID="3wX-ro-rCQ">
@@ -967,7 +964,7 @@
                 <viewControllerPlaceholder storyboardName="UserProfile" id="cEE-ZD-h1d" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GQc-Cn-XSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1345.5" y="-616"/>
+            <point key="canvasLocation" x="1151.5" y="-482"/>
         </scene>
         <!--GuideSolidarity-->
         <scene sceneID="XZH-jY-19l">
@@ -975,7 +972,7 @@
                 <viewControllerPlaceholder storyboardName="GuideSolidarity" id="Qnh-OU-tAM" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RD6-Zw-vCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1358" y="-964"/>
+            <point key="canvasLocation" x="1198" y="-946"/>
         </scene>
         <!--Settings-->
         <scene sceneID="fPx-Ql-9QZ">
@@ -983,7 +980,7 @@
                 <viewControllerPlaceholder storyboardName="Settings" id="pnd-2e-8CK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eCX-aO-hQ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1336.5" y="-867"/>
+            <point key="canvasLocation" x="1211.5" y="-863"/>
         </scene>
         <!--About-->
         <scene sceneID="Uk4-cL-jvE">
@@ -991,7 +988,7 @@
                 <viewControllerPlaceholder storyboardName="About" id="vTa-22-9U0" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I5w-SE-tsq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1329.5" y="-766"/>
+            <point key="canvasLocation" x="1218.5" y="-766"/>
         </scene>
         <!--QuitFeedItem-->
         <scene sceneID="BFl-vb-SXz">
@@ -999,7 +996,7 @@
                 <viewControllerPlaceholder storyboardName="QuitFeedItem" id="R63-9E-dkT" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSm-UU-MOh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1368.5" y="793"/>
+            <point key="canvasLocation" x="1049" y="523"/>
         </scene>
         <!--TourOptions-->
         <scene sceneID="ciU-xC-Yox">
@@ -1007,7 +1004,7 @@
                 <viewControllerPlaceholder storyboardName="TourOptions" id="odF-HL-m84" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Na-ZL-zg3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1368.5" y="621"/>
+            <point key="canvasLocation" x="1160.5" y="481"/>
         </scene>
         <!--MyEntourages-->
         <scene sceneID="IjM-Me-8VV">
@@ -1017,7 +1014,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dmb-Mg-GeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1339.5" y="55"/>
+            <point key="canvasLocation" x="1277.5" y="59"/>
         </scene>
         <!--GuideSolidarity-->
         <scene sceneID="xOp-2g-pfi">
@@ -1027,7 +1024,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1g-iK-4ez" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1346" y="132"/>
+            <point key="canvasLocation" x="1266" y="162"/>
         </scene>
         <!--MapOptions-->
         <scene sceneID="z5A-ht-Zxe">
@@ -1035,7 +1032,7 @@
                 <viewControllerPlaceholder storyboardName="MapOptions" id="IB2-iq-b6s" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ic-Nb-Z9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1358" y="218"/>
+            <point key="canvasLocation" x="1218" y="234"/>
         </scene>
         <!--TourConfirmation-->
         <scene sceneID="sBV-v5-LFD">
@@ -1043,7 +1040,7 @@
                 <viewControllerPlaceholder storyboardName="TourConfirmation" id="cVp-EA-m5M" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j4z-UC-U37" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1224.5" y="874"/>
+            <point key="canvasLocation" x="941.5" y="569"/>
         </scene>
         <!--TourCreator-->
         <scene sceneID="kKI-xW-1CW">
@@ -1051,7 +1048,7 @@
                 <viewControllerPlaceholder storyboardName="TourCreator" id="cUF-7c-FT1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zj4-HN-Fub" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1346" y="333"/>
+            <point key="canvasLocation" x="1182" y="315"/>
         </scene>
         <!--JoinFeedItem-->
         <scene sceneID="JPP-j5-gm1">
@@ -1059,7 +1056,7 @@
                 <viewControllerPlaceholder storyboardName="JoinFeedItem" id="GHS-CJ-wmd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ny-Mu-RyI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="866.5" y="938"/>
+            <point key="canvasLocation" x="798" y="569"/>
         </scene>
         <!--EntourageEditor-->
         <scene sceneID="zTc-vn-arv">
@@ -1069,7 +1066,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1y-5B-KU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="354" y="595"/>
+            <point key="canvasLocation" x="529.5" y="569"/>
         </scene>
         <!--FeedItemFilters-->
         <scene sceneID="N4j-rM-ZJb">
@@ -1077,7 +1074,7 @@
                 <viewControllerPlaceholder storyboardName="FeedItemFilters" id="0av-Qe-fFs" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f44-Ea-6he" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="575.5" y="690"/>
+            <point key="canvasLocation" x="667.5" y="569"/>
         </scene>
     </scenes>
     <resources>

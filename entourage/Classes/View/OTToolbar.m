@@ -47,10 +47,7 @@
 }
 
 - (UIBarButtonItem*)filtersBarButtonItem {
-    UIBarButtonItem *filtersBBI = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"filters"]
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(showFilters)];
+    UIBarButtonItem *filtersBBI = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"filters"] style:UIBarButtonItemStylePlain target:self action:@selector(showFilters)];
     return filtersBBI;
 }
 
