@@ -169,8 +169,11 @@
         return;
     
     UIViewController *destinationViewController = segue.destinationViewController;
-    if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]])
-        ((OTLocationSelectorViewController*)destinationViewController).locationSelectionDelegate = self;
+    if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]]) {
+        OTLocationSelectorViewController* controller = (OTLocationSelectorViewController *)destinationViewController;
+        controller.locationSelectionDelegate = self;
+        controller.selectedLocation = self.location;
+    }
 }
 
 @end

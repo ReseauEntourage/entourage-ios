@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-nw-VLS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-nw-VLS">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -847,6 +847,7 @@
                         <segue destination="eKG-vw-p09" kind="show" identifier="SegueInvitePhoneNumber" id="qbj-7b-m5F"/>
                         <segue destination="7N5-l9-cEp" kind="presentation" identifier="SegueInviteSuccess" id="fUf-PJ-SgA"/>
                         <segue destination="hfH-zI-I2L" kind="presentation" identifier="EntourageEditorSegue" id="DLP-On-QzP"/>
+                        <segue destination="jJ9-Y9-aoE" kind="presentation" identifier="SegueChangeState" id="g5z-E6-bfA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WOD-on-iIR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1126,7 +1127,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="02ECD09A-7A3F-47FA-B03E-8AF041FAEA2F" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="32A28620-730B-45F6-B369-6C7F4498E0AD" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
@@ -1468,7 +1469,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="02ECD09A-7A3F-47FA-B03E-8AF041FAEA2F" width="48" height="48">
+        <image name="32A28620-730B-45F6-B369-6C7F4498E0AD" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1703,11 +1704,12 @@ gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nan-zV-dem"/>
-        <segue reference="zFK-Fj-hWR"/>
-        <segue reference="ffc-Pt-QuG"/>
-        <segue reference="5BX-au-xTN"/>
-        <segue reference="TAD-d7-tmZ"/>
-        <segue reference="8gM-o4-A6h"/>
+        <segue reference="qbj-7b-m5F"/>
+        <segue reference="DLP-On-QzP"/>
+        <segue reference="g5z-E6-bfA"/>
+        <segue reference="TWk-BX-Lb1"/>
+        <segue reference="fUf-PJ-SgA"/>
+        <segue reference="Rwq-4K-0sd"/>
+        <segue reference="Cgj-Wq-qez"/>
     </inferredMetricsTieBreakers>
 </document>

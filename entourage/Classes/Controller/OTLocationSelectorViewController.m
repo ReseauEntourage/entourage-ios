@@ -68,11 +68,12 @@
 }
 
 - (void)zoomToCurrentLocation:(id)sender {
-    CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
-    if (currentLocation) {
-        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+    if(!self.selectedLocation)
+        self.selectedLocation = [OTLocationManager sharedInstance].currentLocation;
+    if (self.selectedLocation) {
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.selectedLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
         [self.mapView setRegion:region animated:YES];
-        [self updateMapPin:currentLocation];
+        [self updateMapPin:self.selectedLocation];
         [self.activityIndicator stopAnimating];
     }
 }
