@@ -27,7 +27,7 @@
         self.showContribution = YES;
         self.showTours = YES;
         self.showOnlyMyEntourages = NO;
-        self.timeframeInHours = 24;
+        self.timeframeInHours = 8 * 24;
     }
     return self;
 }
@@ -117,7 +117,7 @@
 }
 
 - (NSArray *)timeframes {
-    return @[@(24), @(2*24), @(3*24)];
+    return @[@(24), @(8*24), @(30*24)];
 }
 
 - (NSString *)description {
