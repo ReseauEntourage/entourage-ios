@@ -7,6 +7,9 @@
 //
 
 #import "OTTapEntourageBehavior.h"
+#import "OTConsts.h"
+
+#define ENTOURAGE_RADIUS_OFFSET 30
 
 @implementation OTTapEntourageBehavior
 
@@ -21,15 +24,17 @@
         return NO;
     CGPoint tapPoint = [recognizer locationInView:self.mapView];
     CLLocationCoordinate2D tapCoordinate = [self.mapView convertPoint:tapPoint toCoordinateFromView:self.mapView];
-    MKMapPoint point = MKMapPointForCoordinate(tapCoordinate);
     for (id<MKOverlay> overlay in self.mapView.overlays)
         if ([overlay isKindOfClass:[MKCircle class]])
         {
             MKCircle *circle = overlay;
-            MKCircleRenderer *circleRenderer = (MKCircleRenderer *)[self.mapView rendererForOverlay:circle];
-            CGPoint datapoint = [circleRenderer pointForMapPoint:point];
-            [circleRenderer invalidatePath];
-            if (CGPathContainsPoint(circleRenderer.path, nil, datapoint, false)) {
+            CLLocationDistance distance = DBL_MAX;
+            @autoreleasepool {
+                CLLocation *first = [[CLLocation alloc] initWithLatitude:tapCoordinate.latitude longitude:tapCoordinate.longitude];
+                CLLocation *second = [[CLLocation alloc] initWithLatitude:circle.coordinate.latitude longitude:circle.coordinate.longitude];
+                distance = [first distanceFromLocation:second];
+            }
+            if(distance < ENTOURAGE_RADIUS - ENTOURAGE_RADIUS_OFFSET) {
                 [self sendActionsForControlEvents:UIControlEventValueChanged];
                 return YES;
             }

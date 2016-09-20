@@ -8,9 +8,7 @@
 
 #import "OTEntourageMapHandler.h"
 #import "OTEntourageRenderer.h"
-
-#define ENTOURAGE_RADIUS 500
-#define ENTOURAGE_RADIUS_FACTOR 1.3f
+#import "OTConsts.h"
 
 @implementation OTEntourageMapHandler
 
