@@ -44,6 +44,8 @@
     [self.toggleCollectionView initialize];
     [self.toggleCollectionView toggle:NO animated:NO];
     [self.optionsBehavior configureWith:self.optionsDelegate];
+    self.entouragesDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.entouragesDataSource.tableView.estimatedRowHeight = 200;
     
     self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
