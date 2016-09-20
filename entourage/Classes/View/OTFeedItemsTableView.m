@@ -81,6 +81,8 @@
 - (void)_init {
     self.dataSource = self;
     self.delegate = self;
+    self.rowHeight = UITableViewAutomaticDimension;
+    self.estimatedRowHeight = 300;
 }
 
 - (NSArray *)items {
