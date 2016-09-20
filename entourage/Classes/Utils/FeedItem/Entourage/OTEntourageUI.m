@@ -36,11 +36,9 @@
     return OTLocalizedString(@"user_joined_entourage");
 }
 
-- (void)timeDataWithCompletion:(void (^)(NSString *))completion {
-    if(!self.entourage.location || !completion) {
-        completion(@"");
+- (void)timeDataFor:(UILabel *)label {
+    if(!self.entourage.location)
         return;
-    }
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:self.entourage.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
@@ -49,7 +47,7 @@
         }
         CLPlacemark *placemark = placemarks.firstObject;
         if (placemark.locality)
-            completion([NSString stringWithFormat:OTLocalizedString(@"entourage_time_data"), [self.entourage.creationDate sinceNow], placemark.locality]);
+            label.text = [NSString stringWithFormat:OTLocalizedString(@"entourage_time_data"), [self.entourage.creationDate sinceNow], placemark.locality];
     }];
 }
 

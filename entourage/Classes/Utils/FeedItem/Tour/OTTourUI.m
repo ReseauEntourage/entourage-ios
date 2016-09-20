@@ -36,8 +36,8 @@
     return OTLocalizedString(@"user_joined_tour");
 }
 
-- (void)timeDataWithCompletion:(void (^)(NSString *))completion {
-    completion([NSString stringWithFormat:OTLocalizedString(@"tour_time_data"), [self.tour.creationDate sinceNow], self.tour.distance]);
+- (void)timeDataFor:(UILabel *)label {
+    label.text = [NSString stringWithFormat:OTLocalizedString(@"tour_time_data"), [self.tour.creationDate sinceNow], self.tour.distance];
 }
 
 - (NSString *)displayType {

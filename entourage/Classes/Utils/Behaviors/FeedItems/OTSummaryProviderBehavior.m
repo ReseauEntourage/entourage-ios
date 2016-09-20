@@ -45,9 +45,7 @@
         self.lblFeedItemDescription.text = [uiDelegate feedItemDescription];
     if(self.lblTimeDistance) {
         self.lblTimeDistance.text = @"";
-        [uiDelegate timeDataWithCompletion:^(NSString *result) {
-            self.lblTimeDistance.text = result;
-        }];
+        [uiDelegate timeDataFor:self.lblTimeDistance];
     }
 }
 
