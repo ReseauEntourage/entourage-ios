@@ -21,8 +21,8 @@
     self = [super init];
     if(self) {
         self.isActive = YES;
-        self.isInvited = NO;
-        self.isOrganiser = NO;
+        self.isInvited = YES;
+        self.isOrganiser = YES;
         self.isClosed = YES;
         self.showDemand = YES;
         self.showContribution = YES;
