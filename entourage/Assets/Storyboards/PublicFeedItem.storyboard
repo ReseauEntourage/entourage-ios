@@ -37,8 +37,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ms-j8-jfY">
                                 <rect key="frame" x="-4" y="35" width="328" height="533"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="KaD-Co-GmI">
-                                        <rect key="frame" x="15" y="15" width="37" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaD-Co-GmI">
+                                        <rect key="frame" x="15" y="15" width="258" height="21"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -124,7 +124,7 @@
                                     <constraint firstItem="ZOB-K8-3My" firstAttribute="leading" secondItem="KaD-Co-GmI" secondAttribute="leading" id="91W-Ie-Na1"/>
                                     <constraint firstItem="xDt-dA-Asj" firstAttribute="centerY" secondItem="4QV-vH-V9y" secondAttribute="centerY" id="Bau-Cf-Ul0"/>
                                     <constraint firstItem="xDt-dA-Asj" firstAttribute="leading" secondItem="KaD-Co-GmI" secondAttribute="leading" id="CMu-td-PHd"/>
-                                    <constraint firstItem="RcA-br-gXo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KaD-Co-GmI" secondAttribute="trailing" constant="5" id="Cwb-7T-THt"/>
+                                    <constraint firstItem="RcA-br-gXo" firstAttribute="leading" secondItem="KaD-Co-GmI" secondAttribute="trailing" constant="5" id="Cwb-7T-THt"/>
                                     <constraint firstAttribute="bottom" secondItem="nU0-h0-mOV" secondAttribute="bottom" constant="15" id="DPt-4o-Utg"/>
                                     <constraint firstItem="IvY-Fu-Kho" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="-20" id="FVs-sa-fzs"/>
                                     <constraint firstItem="FuU-fG-ePR" firstAttribute="leading" secondItem="KaD-Co-GmI" secondAttribute="leading" id="Hei-To-zTe"/>
