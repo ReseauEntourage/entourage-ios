@@ -923,9 +923,9 @@ static bool isShowingOptions = NO;
     self.entourageType = entourageType;
     [self dismissViewControllerAnimated:NO completion:^{
         if (self.toursMapDelegate.isActive) {
-            [self performSegueWithIdentifier:@"EntourageEditorSegue" sender:nil];
+            [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
         } else {
-            [self showAlert:message withSegue:@"EntourageEditorSegue"];
+            [self showAlert:message withSegue:@"EntourageEditor"];
         }
     }];
 }

@@ -509,6 +509,7 @@
                         <segue destination="7EQ-Wv-dUJ" kind="push" identifier="MyEntouragesSegue" id="Hj6-Bk-Yxd"/>
                         <segue destination="0av-Qe-fFs" kind="modal" identifier="FiltersSegue" id="8PW-rz-Idk"/>
                         <segue destination="BuG-7M-jBg" kind="modal" identifier="SegueChangeState" id="qGU-Ml-Nja"/>
+                        <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageEditor" id="6F4-O6-aKT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -1117,5 +1118,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="xSV-rR-wZy"/>
         <segue reference="b42-UE-vP1"/>
+        <segue reference="6F4-O6-aKT"/>
     </inferredMetricsTieBreakers>
 </document>
