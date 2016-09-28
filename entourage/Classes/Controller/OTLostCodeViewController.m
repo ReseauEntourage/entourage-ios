@@ -63,8 +63,13 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [IQKeyboardManager sharedManager].enable = NO;
     [super viewDidAppear:animated];
     [self.phoneTextField becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [IQKeyboardManager sharedManager].enable = YES;
 }
 
 #pragma mark - Public Methods
