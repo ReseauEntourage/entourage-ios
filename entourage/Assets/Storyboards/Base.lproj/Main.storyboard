@@ -214,6 +214,14 @@
             </objects>
             <point key="canvasLocation" x="364" y="45"/>
         </scene>
+        <!--FeedChangeOptions-->
+        <scene sceneID="3Yl-X6-YNn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FeedChangeOptions" id="BuG-7M-jBg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="osO-mj-V4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1271.5" y="-152"/>
+        </scene>
         <!--ActiveFeedItem-->
         <scene sceneID="19F-zf-hvr">
             <objects>
@@ -474,6 +482,7 @@
                     <navigationItem key="navigationItem" id="OWf-3U-PgN"/>
                     <connections>
                         <outlet property="createEncounterButton" destination="Kc9-kH-YQ7" id="q2Y-Ck-e7b"/>
+                        <outlet property="editEntourgeBehavior" destination="pws-Pw-Myy" id="Pig-kn-RgM"/>
                         <outlet property="footerToolbar" destination="2EG-u9-ELx" id="eNS-jR-fWV"/>
                         <outlet property="indicatorView" destination="FLr-cF-t8Z" id="LUz-Z1-DVR"/>
                         <outlet property="joinBehavior" destination="0l0-bs-S95" id="eTw-ea-fNI"/>
@@ -482,6 +491,7 @@
                         <outlet property="mapSegmentedControl" destination="gsB-s5-FKP" id="Vvs-3z-462"/>
                         <outlet property="nouveauxFeedItemsButton" destination="ONo-TH-dyX" id="PCe-XJ-apW"/>
                         <outlet property="overlayFeeder" destination="hnO-wK-gKw" id="DRj-hp-QRc"/>
+                        <outlet property="statusChangedBehavior" destination="rYj-lX-rXg" id="dJG-9t-lQH"/>
                         <outlet property="stopButton" destination="oVf-Bh-vdD" id="gnm-Su-d3g"/>
                         <outlet property="tableView" destination="oHF-Vi-LCk" id="0vC-Rv-h6R"/>
                         <outlet property="tapEntourage" destination="rKY-F0-13f" id="alM-Ui-hC8"/>
@@ -493,11 +503,12 @@
                         <segue destination="Yq0-qf-lgm" kind="modal" identifier="OTGuideDetailsSegue" id="x8u-KE-dPr"/>
                         <segue destination="IB2-iq-b6s" kind="modal" identifier="OTMapOptionsSegue" animates="NO" id="Gfi-xi-1Da"/>
                         <segue destination="cUF-7c-FT1" kind="modal" identifier="TourCreatorSegue" id="giF-18-m0W"/>
-                        <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageEditor" id="dno-Ju-GCg"/>
+                        <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageEditorSegue" id="dno-Ju-GCg"/>
                         <segue destination="4jA-Gt-JYo" kind="push" identifier="PublicFeedItemDetailsSegue" id="wzY-Lz-9e9"/>
                         <segue destination="b7J-bU-8VV" kind="push" identifier="ActiveFeedItemDetailsSegue" id="5Vn-Sd-WAu"/>
                         <segue destination="7EQ-Wv-dUJ" kind="push" identifier="MyEntouragesSegue" id="Hj6-Bk-Yxd"/>
                         <segue destination="0av-Qe-fFs" kind="modal" identifier="FiltersSegue" id="8PW-rz-Idk"/>
+                        <segue destination="BuG-7M-jBg" kind="modal" identifier="SegueChangeState" id="qGU-Ml-Nja"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -512,6 +523,18 @@
                     <connections>
                         <action selector="dismissFeedItemJoinRequestController" destination="vXZ-lx-hvc" eventType="valueChanged" id="uDB-Dt-gol"/>
                         <outlet property="owner" destination="vXZ-lx-hvc" id="5T9-yu-2gZ"/>
+                    </connections>
+                </customObject>
+                <customObject id="rYj-lX-rXg" userLabel="Status Changed" customClass="OTStatusChangedBehavior">
+                    <connections>
+                        <action selector="forceGetNewData" destination="vXZ-lx-hvc" eventType="valueChanged" id="Z1Y-rn-4WQ"/>
+                        <outlet property="editEntourageBehavior" destination="pws-Pw-Myy" id="gPO-fm-00U"/>
+                        <outlet property="owner" destination="vXZ-lx-hvc" id="zXx-Cz-ZPC"/>
+                    </connections>
+                </customObject>
+                <customObject id="pws-Pw-Myy" userLabel="Edit Entourage" customClass="OTEditEntourageBehavior">
+                    <connections>
+                        <outlet property="owner" destination="vXZ-lx-hvc" id="NaW-O1-Ewa"/>
                     </connections>
                 </customObject>
             </objects>

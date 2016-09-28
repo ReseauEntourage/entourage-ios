@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="HRX-sY-Prk">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SF-UI-Text-Semibold.otf">
+            <string>SFUIText-Semibold</string>
+            <string>SFUIText-Semibold</string>
+            <string>SFUIText-Semibold</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--Change State-->
+        <scene sceneID="Jjq-Sv-9Dq">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="HRX-sY-Prk" userLabel="Change State" customClass="OTChangeStateViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MK0-Wj-qtP"/>
+                        <viewControllerLayoutGuide type="bottom" id="RkC-KR-FVc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vMo-fp-eFQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xzs-5T-W8m" userLabel="Change State Feed Item Button">
+                                <rect key="frame" x="6" y="438" width="308" height="57"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="dZA-Tf-4QY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                <state key="normal" title="Editer">
+                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="edit:" destination="HRX-sY-Prk" eventType="touchUpInside" id="iTp-AI-5HG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CA0-nS-LA9" userLabel="Cancel Feed Item Button">
+                                <rect key="frame" x="6" y="503" width="308" height="57"/>
+                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="90k-fe-fh1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                <state key="normal" title="Annuler">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="close:" destination="HRX-sY-Prk" eventType="touchUpInside" id="wKF-67-okf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o29-6E-Xay" userLabel="Change State Feed Item Button">
+                                <rect key="frame" x="6" y="380" width="308" height="57"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="fum-Tk-VPE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                <state key="normal" title="Quiter">
+                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="0.75" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Xzs-5T-W8m" firstAttribute="top" secondItem="o29-6E-Xay" secondAttribute="bottom" constant="1" id="Fx9-Cp-Zy7"/>
+                            <constraint firstItem="Xzs-5T-W8m" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="S7U-Wp-alb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="o29-6E-Xay" secondAttribute="trailing" constant="-10" id="gqS-3j-U9r"/>
+                            <constraint firstItem="CA0-nS-LA9" firstAttribute="top" secondItem="Xzs-5T-W8m" secondAttribute="bottom" constant="8" id="hGV-iS-zF4"/>
+                            <constraint firstItem="o29-6E-Xay" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="m3B-EB-Yxy"/>
+                            <constraint firstItem="RkC-KR-FVc" firstAttribute="top" secondItem="CA0-nS-LA9" secondAttribute="bottom" constant="8" id="n2M-lE-7rF"/>
+                            <constraint firstItem="CA0-nS-LA9" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="nwf-hh-pY1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Xzs-5T-W8m" secondAttribute="trailing" constant="-10" id="pZX-Li-hUl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CA0-nS-LA9" secondAttribute="trailing" constant="-10" id="yxo-Kh-KYa"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="nextStatusBehavior" destination="6Py-dS-mI1" id="dXj-05-i95"/>
+                        <outlet property="toggleEditBehavior" destination="W7b-U8-i9L" id="eIO-NN-gN5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6a5-yq-Ahc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="6Py-dS-mI1" userLabel="Next Status Button" customClass="OTNextStatusButtonBehavior">
+                    <connections>
+                        <outlet property="btnNextState" destination="o29-6E-Xay" id="Cjl-sd-92L"/>
+                        <outlet property="owner" destination="HRX-sY-Prk" id="86w-AZ-Xqx"/>
+                    </connections>
+                </customObject>
+                <customObject id="W7b-U8-i9L" userLabel="Toggle Visible" customClass="OTToggleVisibleBehavior">
+                    <connections>
+                        <outlet property="heightConstraint" destination="dZA-Tf-4QY" id="e1H-b7-Wlf"/>
+                        <outlet property="marginConstraint" destination="hGV-iS-zF4" id="O70-wf-mle"/>
+                        <outlet property="toggleView" destination="Xzs-5T-W8m" id="3RR-3B-gAN"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="859" y="-416"/>
+        </scene>
+    </scenes>
+</document>

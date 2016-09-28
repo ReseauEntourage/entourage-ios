@@ -33,9 +33,6 @@
         </mutableArray>
         <mutableArray key="SF-UI-Text-Semibold.otf">
             <string>SFUIText-Semibold</string>
-            <string>SFUIText-Semibold</string>
-            <string>SFUIText-Semibold</string>
-            <string>SFUIText-Semibold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -633,10 +630,10 @@
                         <segue destination="e7P-HA-iRZ" kind="show" identifier="SegueInviteFromAddressBook" id="nan-zV-dem"/>
                         <segue destination="eKG-vw-p09" kind="show" identifier="SegueInvitePhoneNumber" id="zFK-Fj-hWR"/>
                         <segue destination="7N5-l9-cEp" kind="presentation" identifier="SegueInviteSuccess" id="TAD-d7-tmZ"/>
-                        <segue destination="jJ9-Y9-aoE" kind="presentation" identifier="SegueChangeState" id="9ff-pE-XzN"/>
                         <segue destination="9Ay-63-LSU" kind="show" identifier="SegueMap" id="pa2-NI-OJP"/>
                         <segue destination="nZu-ch-wHg" kind="presentation" identifier="UserProfileSegue" id="5BX-au-xTN"/>
                         <segue destination="hfH-zI-I2L" kind="presentation" identifier="EntourageEditorSegue" id="8gM-o4-A6h"/>
+                        <segue destination="j0M-T7-4eG" kind="presentation" identifier="SegueChangeState" id="r9m-eb-lob"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riw-B5-uYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -704,6 +701,14 @@
                 </customObject>
             </objects>
             <point key="canvasLocation" x="111" y="244"/>
+        </scene>
+        <!--FeedChangeOptions-->
+        <scene sceneID="b9A-F3-CVt">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FeedChangeOptions" id="j0M-T7-4eG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qGD-P1-NEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1209.5" y="-99"/>
         </scene>
         <!--Map-->
         <scene sceneID="3o6-mJ-kIj">
@@ -848,7 +853,7 @@
                         <segue destination="eKG-vw-p09" kind="show" identifier="SegueInvitePhoneNumber" id="qbj-7b-m5F"/>
                         <segue destination="7N5-l9-cEp" kind="presentation" identifier="SegueInviteSuccess" id="fUf-PJ-SgA"/>
                         <segue destination="hfH-zI-I2L" kind="presentation" identifier="EntourageEditorSegue" id="DLP-On-QzP"/>
-                        <segue destination="jJ9-Y9-aoE" kind="presentation" identifier="SegueChangeState" id="g5z-E6-bfA"/>
+                        <segue destination="j0M-T7-4eG" kind="presentation" identifier="SegueChangeState" id="0Fj-Nh-lj4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WOD-on-iIR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1128,7 +1133,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="E56D9F07-2D69-430B-88B3-1CBC2F3A03B1" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="56BEEB61-DA3A-4814-B8A5-E08C5DAC4112" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <rect key="frame" x="287" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
@@ -1298,109 +1303,6 @@
             </objects>
             <point key="canvasLocation" x="694" y="1095"/>
         </scene>
-        <!--Change State-->
-        <scene sceneID="wIf-Yq-Kns">
-            <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="jJ9-Y9-aoE" userLabel="Change State" customClass="OTChangeStateViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Wia-KE-0eY"/>
-                        <viewControllerLayoutGuide type="bottom" id="cdb-te-X7I"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9ki-jc-XeD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Azb-MQ-5Av" userLabel="Change State Feed Item Button">
-                                <rect key="frame" x="6" y="438" width="308" height="57"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="57" id="rDG-E8-kI6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
-                                <state key="normal" title="Editer">
-                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="edit:" destination="jJ9-Y9-aoE" eventType="touchUpInside" id="ps3-y4-KHc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfP-OM-FQd" userLabel="Cancel Feed Item Button">
-                                <rect key="frame" x="6" y="503" width="308" height="57"/>
-                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="57" id="vql-HD-ffs"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
-                                <state key="normal" title="Annuler">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="close:" destination="jJ9-Y9-aoE" eventType="touchUpInside" id="KOc-ki-vjK"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuG-rJ-75I" userLabel="Change State Feed Item Button">
-                                <rect key="frame" x="6" y="373" width="308" height="57"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="57" id="tla-M6-5Qy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
-                                <state key="normal" title="Quiter">
-                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="0.75" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="Azb-MQ-5Av" firstAttribute="top" secondItem="HuG-rJ-75I" secondAttribute="bottom" constant="8" id="6w3-ra-NZv"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gfP-OM-FQd" secondAttribute="trailing" constant="-10" id="Gh0-mv-BFa"/>
-                            <constraint firstItem="cdb-te-X7I" firstAttribute="top" secondItem="gfP-OM-FQd" secondAttribute="bottom" constant="8" id="IHB-38-kJN"/>
-                            <constraint firstItem="Azb-MQ-5Av" firstAttribute="leading" secondItem="9ki-jc-XeD" secondAttribute="leadingMargin" constant="-10" id="IPT-BY-H6H"/>
-                            <constraint firstItem="gfP-OM-FQd" firstAttribute="top" secondItem="Azb-MQ-5Av" secondAttribute="bottom" constant="8" id="JYM-ze-1k8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="HuG-rJ-75I" secondAttribute="trailing" constant="-10" id="NMt-mD-eIl"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Azb-MQ-5Av" secondAttribute="trailing" constant="-10" id="OXF-5P-938"/>
-                            <constraint firstItem="HuG-rJ-75I" firstAttribute="leading" secondItem="9ki-jc-XeD" secondAttribute="leadingMargin" constant="-10" id="UdE-tL-THA"/>
-                            <constraint firstItem="gfP-OM-FQd" firstAttribute="leading" secondItem="9ki-jc-XeD" secondAttribute="leadingMargin" constant="-10" id="XCS-lT-hEp"/>
-                        </constraints>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="nextStatusBehavior" destination="B7n-mN-3FZ" id="5Qz-Np-CGL"/>
-                        <outlet property="toggleEditBehavior" destination="RSD-y1-mgX" id="0Rn-US-PGI"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gMO-A3-gJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="B7n-mN-3FZ" userLabel="Next Status Button" customClass="OTNextStatusButtonBehavior">
-                    <connections>
-                        <outlet property="btnNextState" destination="HuG-rJ-75I" id="T9A-Xm-g65"/>
-                        <outlet property="owner" destination="jJ9-Y9-aoE" id="uVH-vh-RBc"/>
-                    </connections>
-                </customObject>
-                <customObject id="RSD-y1-mgX" userLabel="Toggle Visible" customClass="OTToggleVisibleBehavior">
-                    <connections>
-                        <outlet property="heightConstraint" destination="rDG-E8-kI6" id="x8t-Jf-R17"/>
-                        <outlet property="marginConstraint" destination="JYM-ze-1k8" id="eI0-GL-vQE"/>
-                        <outlet property="toggleView" destination="Azb-MQ-5Av" id="umb-r4-LEr"/>
-                    </connections>
-                </customObject>
-            </objects>
-            <point key="canvasLocation" x="859" y="-416"/>
-        </scene>
         <!--Invite Success-->
         <scene sceneID="bHm-5e-0Nb">
             <objects>
@@ -1470,7 +1372,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="E56D9F07-2D69-430B-88B3-1CBC2F3A03B1" width="48" height="48">
+        <image name="56BEEB61-DA3A-4814-B8A5-E08C5DAC4112" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1633,7 +1535,7 @@ AAAAAAAAAAAADgEAAAMAAAABADAAAAEBAAMAAAABADAAAAECAAMAAAAEAAAktgEDAAMAAAABAAEAAAEG
 AAMAAAABAAIAAAERAAQAAAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAQAAAEWAAMAAAABADAAAAEX
 AAQAAAABAAAkAAEcAAMAAAABAAEAAAFSAAMAAAABAAIAAAFTAAMAAAAEAAAkvodzAAcAAAxIAAAkxgAA
 AAAACAAIAAgACAABAAEAAQABAAAMSExpbm8CEAAAbW50clJHQiBYWVogB84AAgAJAAYAMQAAYWNzcE1T
-RlQAAAAASUVDIHNSR0IAAAAAAAAAAAAAAAAAAPbWAAEAAAAA0y1IUCAgAAAAAAAAAAAAAAAAAAAAAAAA
+RlQAAAAASUVDIHNSR0IAAAAAAAAAAAAAAAEAAPbWAAEAAAAA0y1IUCAgAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARY3BydAAAAVAAAAAzZGVzYwAAAYQAAABsd3RwdAAA
 AfAAAAAUYmtwdAAAAgQAAAAUclhZWgAAAhgAAAAUZ1hZWgAAAiwAAAAUYlhZWgAAAkAAAAAUZG1uZAAA
 AlQAAABwZG1kZAAAAsQAAACIdnVlZAAAA0wAAACGdmlldwAAA9QAAAAkbHVtaQAAA/gAAAAUbWVhcwAA
@@ -1705,12 +1607,12 @@ gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ffc-Pt-QuG"/>
-        <segue reference="5BX-au-xTN"/>
-        <segue reference="8gM-o4-A6h"/>
-        <segue reference="9ff-pE-XzN"/>
-        <segue reference="zFK-Fj-hWR"/>
-        <segue reference="TAD-d7-tmZ"/>
-        <segue reference="nan-zV-dem"/>
+        <segue reference="0Fj-Nh-lj4"/>
+        <segue reference="TWk-BX-Lb1"/>
+        <segue reference="Rwq-4K-0sd"/>
+        <segue reference="qbj-7b-m5F"/>
+        <segue reference="fUf-PJ-SgA"/>
+        <segue reference="DLP-On-QzP"/>
+        <segue reference="Cgj-Wq-qez"/>
     </inferredMetricsTieBreakers>
 </document>

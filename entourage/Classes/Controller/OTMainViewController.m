@@ -82,6 +82,8 @@
 #import "OTTapEntourageBehavior.h"
 #import "OTJoinBehavior.h"
 #import "OTNewsFeedsFilter.h"
+#import "OTStatusChangedBehavior.h"
+#import "OTEditEntourageBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -111,6 +113,8 @@
 @property (nonatomic, weak) IBOutlet OTOverlayFeederBehavior* overlayFeeder;
 @property (nonatomic, weak) IBOutlet OTTapEntourageBehavior* tapEntourage;
 @property (nonatomic, weak) IBOutlet OTJoinBehavior* joinBehavior;
+@property (nonatomic, weak) IBOutlet OTStatusChangedBehavior* statusChangedBehavior;
+@property (nonatomic, weak) IBOutlet OTEditEntourageBehavior* editEntourgeBehavior;
 
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
@@ -410,7 +414,7 @@ static BOOL didGetAnyData = NO;
     [self getFeeds];
 }
 
-- (void)forceGetNewData {
+- (IBAction)forceGetNewData {
     NSLog(@"Forcing get new data.");
     self.isRefreshing = NO;
     [self getNewFeeds];
@@ -1031,9 +1035,6 @@ static bool isShowingOptions = NO;
     self.selectedFeedItem = feedItem;
     FeedItemState currentState = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] getState];
     switch (currentState) {
-        case FeedItemStateJoinAccepted:
-            [self performSegueWithIdentifier:@"QuitFeedItemSegue" sender:self];
-            break;
         case FeedItemStateJoinNotRequested:
             [self sendJoinRequest:feedItem];
             break;
@@ -1045,19 +1046,12 @@ static bool isShowingOptions = NO;
             [OTOngoingTourService sharedInstance].isOngoing = YES;
             [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
             break;
+        case FeedItemStateJoinAccepted:
         case FeedItemStateOpen:
-        case FeedItemStateClosed: {
-            [[[OTFeedItemFactory createFor:feedItem] getStateTransition]
-                closeWithSuccess:^(BOOL isTour) {
-                    [self.tableView reloadData];
-                    NSString* messageKey = isTour ? @"tour_quitted" : @"entourageQuitted";
-                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(messageKey)];
-                } orFailure:^(NSError *error) {
-                    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
-                    NSLog(@"%@",[error localizedDescription]);
-                }
-             ];
-        } break;
+        case FeedItemStateClosed:
+            [self.statusChangedBehavior configureWith:feedItem];
+            [self.statusChangedBehavior startChangeStatus];
+            break;
         default:
             break;
     }
@@ -1152,6 +1146,10 @@ static bool isShowingOptions = NO;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.joinBehavior prepareSegueForMessage:segue])
+        return;
+    if([self.editEntourgeBehavior prepareSegue:segue])
+        return;
+    if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
     
     UIViewController *destinationViewController = segue.destinationViewController;

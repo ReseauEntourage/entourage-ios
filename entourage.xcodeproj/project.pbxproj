@@ -164,6 +164,7 @@
 		1EC75C051D849AE800887F6F /* OTMapDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC75C021D849AE800887F6F /* OTMapDelegateBehavior.m */; };
 		1EC75C061D849AE800887F6F /* OTMapDelegateProxyBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC75C041D849AE800887F6F /* OTMapDelegateProxyBehavior.m */; };
 		1EC75C091D849E4800887F6F /* OTOverlayFeederBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC75C081D849E4800887F6F /* OTOverlayFeederBehavior.m */; };
+		1EC816961D9BB1150084BADB /* FeedChangeOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EC816951D9BB1150084BADB /* FeedChangeOptions.storyboard */; };
 		1EC9D67F1D644F7700C6E9AA /* OTOnboardingJoinService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9D67E1D644F7700C6E9AA /* OTOnboardingJoinService.m */; };
 		1EC9D6821D6468A800C6E9AA /* OTInvitationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9D6811D6468A800C6E9AA /* OTInvitationsService.m */; };
 		1ECDBC691D3D35C300DD87B2 /* OTTourMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECDBC681D3D35C300DD87B2 /* OTTourMessaging.m */; };
@@ -599,6 +600,7 @@
 		1EC75C041D849AE800887F6F /* OTMapDelegateProxyBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMapDelegateProxyBehavior.m; path = Behaviors/Maps/OTMapDelegateProxyBehavior.m; sourceTree = "<group>"; };
 		1EC75C071D849E4800887F6F /* OTOverlayFeederBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTOverlayFeederBehavior.h; path = Behaviors/NewsFeed/OTOverlayFeederBehavior.h; sourceTree = "<group>"; };
 		1EC75C081D849E4800887F6F /* OTOverlayFeederBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTOverlayFeederBehavior.m; path = Behaviors/NewsFeed/OTOverlayFeederBehavior.m; sourceTree = "<group>"; };
+		1EC816951D9BB1150084BADB /* FeedChangeOptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedChangeOptions.storyboard; sourceTree = "<group>"; };
 		1EC9D67D1D644F7700C6E9AA /* OTOnboardingJoinService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTOnboardingJoinService.h; path = Services/OTOnboardingJoinService.h; sourceTree = "<group>"; };
 		1EC9D67E1D644F7700C6E9AA /* OTOnboardingJoinService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTOnboardingJoinService.m; path = Services/OTOnboardingJoinService.m; sourceTree = "<group>"; };
 		1EC9D6801D6468A800C6E9AA /* OTInvitationsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTInvitationsService.h; sourceTree = "<group>"; };
@@ -1643,6 +1645,7 @@
 		45CE5A621C5242FC00F68C24 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				1EC816951D9BB1150084BADB /* FeedChangeOptions.storyboard */,
 				1EFAC0C61D89242D00BE396F /* FeedItemFilters.storyboard */,
 				45CE5A711C56961500F68C24 /* Intro.storyboard */,
 				45CE5A631C5242FC00F68C24 /* Main.storyboard */,
@@ -2200,6 +2203,7 @@
 				452FE3ED1CAD54F800063334 /* About.storyboard in Resources */,
 				1E3174911D10299400027824 /* QuitFeedItem.storyboard in Resources */,
 				1E78B7E71D5134D20008C00E /* SF-UI-Text-SemiboldItalic.otf in Resources */,
+				1EC816961D9BB1150084BADB /* FeedChangeOptions.storyboard in Resources */,
 				45CE5A601C5241AA00F68C24 /* Localizable.strings in Resources */,
 				1E78B7DE1D5134D20008C00E /* SF-UI-Text-Heavy.otf in Resources */,
 				2E7064EE1CB273120034C55A /* MapOptions.storyboard in Resources */,

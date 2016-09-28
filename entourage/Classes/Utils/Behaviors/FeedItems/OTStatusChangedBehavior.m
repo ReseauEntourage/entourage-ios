@@ -46,6 +46,7 @@
     [self popToMainController];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"stopped_item")];
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
     });
 }
 
@@ -53,6 +54,7 @@
     [self popToMainController];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closed_item")];
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
     });
 }
 
