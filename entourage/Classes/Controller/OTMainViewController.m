@@ -1038,9 +1038,6 @@ static bool isShowingOptions = NO;
         case FeedItemStateJoinNotRequested:
             [self sendJoinRequest:feedItem];
             break;
-        case FeedItemStateJoinPending:
-            [self performSegueWithIdentifier:@"OTSelectedTour" sender:self];
-            break;
         case FeedItemStateOngoing:
             self.tour = (OTTour *)feedItem;
             [OTOngoingTourService sharedInstance].isOngoing = YES;
