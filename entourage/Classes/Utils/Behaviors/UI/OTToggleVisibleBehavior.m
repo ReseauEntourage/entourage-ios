@@ -18,6 +18,7 @@
 @implementation OTToggleVisibleBehavior
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     if(!self.animationDuration)
         self.animationDuration = @(0);
 }

@@ -17,6 +17,7 @@
 @implementation OTFeedItemsTimeframeCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     NSArray *timeframes = self.tableDataSource.currentFilter.timeframes;
     [self setTextForTimeframe:timeframes[0] andButton:self.btnFirst];
     [self setTextForTimeframe:timeframes[1] andButton:self.btnSecond];

@@ -12,6 +12,7 @@
 @implementation OTEntouragesTableViewCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.lblNumberOfUsers.layer.borderColor = [UIColor appGreyishColor].CGColor;
 }
 

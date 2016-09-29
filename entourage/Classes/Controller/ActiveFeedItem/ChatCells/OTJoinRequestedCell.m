@@ -17,6 +17,7 @@
 @implementation OTJoinRequestedCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     CAShapeLayer * maskLayer = [CAShapeLayer layer];
     CGRect bounds = CGRectMake(0, 0, self.dataSource.tableView.contentSize.width - BUTTON_MARGIN, self.btnIgnore.bounds.size.height);
     maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: bounds byRoundingCorners: UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii: (CGSize){7.0, 7.0}].CGPath;

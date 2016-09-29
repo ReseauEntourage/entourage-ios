@@ -21,6 +21,7 @@
 @implementation OTUserProfileBehavior
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
 }
 

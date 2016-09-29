@@ -12,6 +12,7 @@
 @implementation OTMessageSentCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.lblMessage.edgeInsets = UIEdgeInsetsMake(8, 17, 8, 17);
 }
 

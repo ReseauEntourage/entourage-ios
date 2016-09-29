@@ -617,6 +617,7 @@
 		1ECFB36B1D52578400722DAC /* OTEntourageMapHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageMapHandler.m; sourceTree = "<group>"; };
 		1ED2506B1D5A70EB005C9736 /* OTToggleVisibleBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTToggleVisibleBehavior.h; path = Behaviors/UI/OTToggleVisibleBehavior.h; sourceTree = "<group>"; };
 		1ED2506C1D5A70EB005C9736 /* OTToggleVisibleBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTToggleVisibleBehavior.m; path = Behaviors/UI/OTToggleVisibleBehavior.m; sourceTree = "<group>"; };
+		1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = entourage.entitlements; sourceTree = "<group>"; };
 		1EE8175E1D79F36D0003133D /* OTEntourageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTEntourageRenderer.h; path = Behaviors/Maps/Renderers/OTEntourageRenderer.h; sourceTree = "<group>"; };
 		1EE8175F1D79F36D0003133D /* OTEntourageRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTEntourageRenderer.m; path = Behaviors/Maps/Renderers/OTEntourageRenderer.m; sourceTree = "<group>"; };
 		1EE817611D7A052C0003133D /* OTOngoingTourService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTOngoingTourService.h; path = Services/OTOngoingTourService.h; sourceTree = "<group>"; };
@@ -1934,6 +1935,7 @@
 		6B92CAA719A7461C004E8C9B /* entourage */ = {
 			isa = PBXGroup;
 			children = (
+				1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */,
 				6B4930C419A773C500DA7EE0 /* Classes */,
 				6B4930C319A773C500DA7EE0 /* Assets */,
 				6B92CAA819A7461C004E8C9B /* Supporting Files */,
@@ -2156,6 +2158,9 @@
 						DevelopmentTeam = RT7X9LLTN6;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
 								enabled = 1;
 							};
 							com.apple.Push = {
@@ -2737,6 +2742,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2769,8 +2775,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2788,7 +2796,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "abc05160-7bb2-483d-b7af-ecb121bf542a";
+				PROVISIONING_PROFILE_SPECIFIER = "Entourage AppS";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};

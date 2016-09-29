@@ -25,6 +25,7 @@
 @implementation OTMyEntouragesDataSource
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageUpdated:) name:kNotificationEntourageChanged object:nil];
 }
 
