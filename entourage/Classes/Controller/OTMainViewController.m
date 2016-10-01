@@ -235,13 +235,6 @@
     [self.refreshTimer fire];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    if (self.toursMapDelegate.isActive) {
-        [self zoomToCurrentLocation:nil];
-    }
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.refreshTimer invalidate];
@@ -470,7 +463,6 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)getFeeds {
-    
     if (self.currentPagination.isLoading)
         return;
     self.currentPagination.isLoading = YES;
@@ -988,6 +980,11 @@ static bool isShowingOptions = NO;
         CLLocationDistance distance = MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.mapView.centerCoordinate), MKMapPointForCoordinate(currentLocation.coordinate));
         BOOL animatedSetCenter = (distance < MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS);
         [self.mapView setCenterCoordinate:currentLocation.coordinate animated:animatedSetCenter];
+        if(self.toursMapDelegate.isActive && !self.isRegionSetted) {
+            self.isRegionSetted = YES;
+            self.currentPagination.isLoading = NO;
+            [self.toursMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
+        }
     }
 }
 
