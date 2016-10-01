@@ -1,17 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Et1-lq-jQo">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="Et1-lq-jQo">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="SF-UI-Text-Regular.otf">
+        <array key="SF-UI-Text-Regular.otf">
             <string>SFUIText-Regular</string>
-        </mutableArray>
-        <mutableArray key="SF-UI-Text-Semibold.otf">
+        </array>
+        <array key="SF-UI-Text-Semibold.otf">
             <string>SFUIText-Semibold</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <scenes>
         <!--Join Message-->
@@ -23,17 +24,14 @@
                         <viewControllerLayoutGuide type="bottom" id="n9e-dq-pRt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vaq-BA-fcK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fs-Xb-uMD">
-                                <rect key="frame" x="-4" y="0.0" width="328" height="456"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebf-9i-RUc">
-                                        <rect key="frame" x="16" y="24" width="296" height="412"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mL-Hm-Tfj">
-                                                <rect key="frame" x="0.0" y="10" width="296" height="163"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="163" id="duF-Lb-3SM"/>
                                                 </constraints>
@@ -44,12 +42,11 @@ votre demande a été
 transmise au créateur.
 </string>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vqF-aU-QYR">
-                                                <rect key="frame" x="0.0" y="195" width="296" height="160"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="160" id="4eB-rE-mNN"/>
                                                 </constraints>
@@ -57,15 +54,13 @@ transmise au créateur.
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLs-yj-9pC">
-                                                <rect key="frame" x="10" y="338" width="276" height="1"/>
-                                                <color key="backgroundColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="ab5-k4-D2R"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="yFL-K5-tDd"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hlO-9h-j72">
-                                                <rect key="frame" x="10" y="10" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="4Bu-zQ-cBZ"/>
                                                     <constraint firstAttribute="width" constant="22" id="vgd-lB-nKW"/>
@@ -76,21 +71,20 @@ transmise au créateur.
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRA-Ya-fwq">
-                                                <rect key="frame" x="0.0" y="355" width="296" height="57"/>
-                                                <color key="backgroundColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="57" id="MC7-XD-qqo"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <state key="normal" title="Envoyer">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="doSendRequest" destination="NTX-qP-dnX" eventType="touchUpInside" id="B51-60-pAS"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="hlO-9h-j72" firstAttribute="top" secondItem="ebf-9i-RUc" secondAttribute="top" constant="10" id="6Le-rX-4PS"/>
                                             <constraint firstItem="bRA-Ya-fwq" firstAttribute="leading" secondItem="ebf-9i-RUc" secondAttribute="leading" id="7AS-Jf-ks2"/>
@@ -115,7 +109,7 @@ transmise au créateur.
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="ebf-9i-RUc" firstAttribute="leading" secondItem="0fs-Xb-uMD" secondAttribute="leading" constant="16" id="11p-F3-lhB"/>
                                     <constraint firstItem="ebf-9i-RUc" firstAttribute="top" secondItem="0fs-Xb-uMD" secondAttribute="top" constant="24" id="DVe-z6-er2"/>
@@ -126,7 +120,7 @@ transmise au créateur.
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0fs-Xb-uMD" firstAttribute="leading" secondItem="vaq-BA-fcK" secondAttribute="leadingMargin" constant="-20" id="4u9-P9-44W"/>
                             <constraint firstItem="0fs-Xb-uMD" firstAttribute="top" secondItem="vaq-BA-fcK" secondAttribute="topMargin" id="JIU-94-01H"/>
@@ -151,14 +145,12 @@ transmise au créateur.
                         <viewControllerLayoutGuide type="bottom" id="8tf-LU-HJW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5dV-fc-Wk6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxU-kb-rBX">
-                                <rect key="frame" x="16" y="64" width="288" height="440"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKu-4R-ztc">
-                                        <rect key="frame" x="10" y="10" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="JYo-qy-tEP"/>
                                             <constraint firstAttribute="width" constant="30" id="rdL-QK-qXj"/>
@@ -169,29 +161,25 @@ transmise au créateur.
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhiteEntourage" translatesAutoresizingMaskIntoConstraints="NO" id="ywH-iH-lax">
-                                        <rect key="frame" x="10" y="55" width="56" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="56" id="69Z-N3-oSX"/>
                                             <constraint firstAttribute="height" constant="56" id="JvZ-HG-LpG"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Merci pour votre chaleur humaine." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="6gx-OQ-FAY">
-                                        <rect key="frame" x="10" y="126" width="273" height="72"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="30"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="TzB-NC-pwc">
-                                        <rect key="frame" x="10" y="208" width="273" height="108"/>
                                         <string key="text">Votre demande a été transmise et vous allez bientôt recevoir une réponse !
  Vous pouvez préciser votre démarche dans un message bienveillant.</string>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMi-oc-27z">
-                                        <rect key="frame" x="10" y="336" width="268" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="296" id="0NR-0y-u5a"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="V4b-Rw-72H"/>
@@ -201,7 +189,7 @@ transmise au créateur.
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Envoyer un message">
-                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -216,8 +204,7 @@ transmise au créateur.
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzl-9S-VFF">
-                                        <rect key="frame" x="10" y="394" width="268" height="50"/>
-                                        <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="304" id="1n3-i2-oiR"/>
                                             <constraint firstAttribute="width" constant="210" id="7kj-8G-Acb"/>
@@ -227,7 +214,7 @@ transmise au créateur.
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Fermer">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -242,7 +229,7 @@ transmise au créateur.
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="fzl-9S-VFF" firstAttribute="top" secondItem="bMi-oc-27z" secondAttribute="bottom" constant="8" id="11m-We-4x8"/>
                                     <constraint firstItem="6gx-OQ-FAY" firstAttribute="top" secondItem="ywH-iH-lax" secondAttribute="bottom" constant="15" id="4Zx-17-FNK"/>
@@ -269,7 +256,7 @@ transmise au créateur.
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="IxU-kb-rBX" firstAttribute="centerY" secondItem="5dV-fc-Wk6" secondAttribute="centerY" id="ATw-vj-kXt"/>
                             <constraint firstItem="IxU-kb-rBX" firstAttribute="leading" secondItem="5dV-fc-Wk6" secondAttribute="leadingMargin" id="dHC-Xq-2jU"/>
@@ -277,7 +264,6 @@ transmise au créateur.
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zmo-do-eBv"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnAddMessage" destination="bMi-oc-27z" id="Yr7-Ag-2vv"/>
                     </connections>
@@ -292,4 +278,9 @@ transmise au créateur.
         <image name="logoWhiteEntourage" width="56" height="56"/>
         <image name="whiteClose" width="22" height="22"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

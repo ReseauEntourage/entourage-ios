@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bha-JG-S7n">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bha-JG-S7n">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--User Edit Picture-->
@@ -16,25 +17,23 @@
                         <viewControllerLayoutGuide type="bottom" id="kX1-rt-rX1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DYE-Bz-b0j">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraSquare" translatesAutoresizingMaskIntoConstraints="NO" id="VCD-Ez-jrk">
-                                <rect key="frame" x="12" y="40" width="56" height="56"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="FH5-J7-nFd"/>
                                     <constraint firstAttribute="width" constant="56" id="vi1-fQ-iU0"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ajouter une photo ?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="811-zf-BIU">
-                                <rect key="frame" x="12" y="116" width="296" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="TT4-Bf-VKO"/>
                                     <constraint firstAttribute="width" constant="280" id="h0s-gY-c6e"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -43,13 +42,12 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avec une photo, c’est tout de suite plus sympa. Montrez-nous votre sourire le plus chaleureux." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="vBy-8m-m47">
-                                <rect key="frame" x="12" y="160" width="296" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="Zgg-Co-nQB"/>
                                     <constraint firstAttribute="width" constant="280" id="pZa-8O-8Ma"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -59,8 +57,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ma1-OC-ZEH">
-                                <rect key="frame" x="8" y="440" width="304" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="ZYB-ag-xPG"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="hkR-TM-2Lo"/>
@@ -68,7 +65,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Choisir une photo">
-                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -81,8 +78,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBY-w9-wlD">
-                                <rect key="frame" x="8" y="502" width="304" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="MXz-Vz-P5J"/>
                                     <constraint firstAttribute="height" constant="50" id="agW-cI-vXG"/>
@@ -90,7 +86,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Prendre une photo">
-                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -103,7 +99,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="811-zf-BIU" firstAttribute="leading" secondItem="VCD-Ez-jrk" secondAttribute="leading" id="AKX-2N-BkR"/>
                             <constraint firstItem="vBy-8m-m47" firstAttribute="trailing" secondItem="811-zf-BIU" secondAttribute="trailing" id="EOG-8V-icI"/>
@@ -122,7 +118,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="I8k-tV-cnv"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnFromGallery" destination="ma1-OC-ZEH" id="gMy-2R-MiY"/>
                         <outlet property="btnTakePicture" destination="XBY-w9-wlD" id="XPc-eL-EAL"/>
@@ -139,7 +134,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="4584" y="-44"/>
+            <point key="canvasLocation" x="4194" y="-45"/>
         </scene>
         <!--Picture Preview View Controller-->
         <scene sceneID="hRq-c8-az9">
@@ -150,11 +145,10 @@
                         <viewControllerLayoutGuide type="bottom" id="qzZ-lL-4Ao"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bq0-9o-4Id">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Déplacer et zoomer pour ajuster la photo de profil." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="IxH-xR-j7Q">
-                                <rect key="frame" x="8" y="28" width="304" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="Z8t-c4-3Ei"/>
                                     <constraint firstAttribute="height" constant="36" id="f0o-wm-uAQ"/>
@@ -162,7 +156,7 @@
                                     <constraint firstAttribute="width" constant="296" id="yAF-9L-dPH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -173,20 +167,19 @@
                                 </variation>
                             </label>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layer" translatesAutoresizingMaskIntoConstraints="NO" id="vq9-7x-SXS">
-                                <rect key="frame" x="11" y="120" width="298" height="298"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vq9-7x-SXS" secondAttribute="height" multiplier="1:1" id="dxE-Cx-vP1"/>
                                 </constraints>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29I-VR-dA4">
-                                <rect key="frame" x="11" y="120" width="298" height="298"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29I-VR-dA4">
+                                <frame key="frameInset" minX="11" minY="120" width="298" height="298"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TpG-O0-eKf">
                                         <rect key="frame" x="0.0" y="0.0" width="298" height="298"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="TpG-O0-eKf" firstAttribute="top" secondItem="29I-VR-dA4" secondAttribute="top" id="3gH-Qz-8vQ"/>
                                     <constraint firstAttribute="height" constant="298" id="88W-Lf-0rJ"/>
@@ -200,8 +193,7 @@
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fot-wr-6TS">
-                                <rect key="frame" x="12" y="497" width="296" height="56"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="296" id="HXC-sY-0y9"/>
                                     <constraint firstAttribute="width" constant="56" id="IH1-G0-e1a"/>
@@ -211,7 +203,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="oE3-92-Ki7"/>
                                 </constraints>
                                 <state key="normal" image="nextFull">
-                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -227,7 +219,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="29I-VR-dA4" firstAttribute="leading" secondItem="bq0-9o-4Id" secondAttribute="leadingMargin" constant="-9" id="09v-9w-R5M"/>
                             <constraint firstItem="29I-VR-dA4" firstAttribute="trailing" secondItem="vq9-7x-SXS" secondAttribute="trailing" id="38A-J5-HBH"/>
@@ -297,15 +289,15 @@
                 <viewControllerPlaceholder storyboardName="Rights" id="tKv-lS-TmP" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ELD-hb-UOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4784.5" y="403"/>
+            <point key="canvasLocation" x="4582" y="405"/>
         </scene>
     </scenes>
     <resources>
         <image name="cameraSquare" width="56" height="56"/>
-        <image name="layer" width="346" height="345"/>
+        <image name="layer" width="345" height="345"/>
         <image name="nextFull" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7Aa-Ot-sEG"/>
+        <segue reference="k7U-3x-y4I"/>
     </inferredMetricsTieBreakers>
 </document>
