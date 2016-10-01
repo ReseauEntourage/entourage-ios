@@ -30,6 +30,11 @@
                                 <state key="normal" title="Oui, je l’active">
                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="28"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="Xjl-Ye-Uox"/>
@@ -111,7 +116,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="5FM-3S-kdS"/>
                     <connections>
-                        <outlet property="activateButton" destination="UXJ-eW-gG2" id="jmS-y1-TTX"/>
                         <segue destination="gUz-vW-h1c" kind="show" identifier="GeoToNotificationsSegue" id="X8W-6a-Kl5"/>
                     </connections>
                 </viewController>
@@ -142,6 +146,11 @@
                                 <state key="normal" title="Oui, je les active">
                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="28"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="QcI-NV-ldj"/>
@@ -222,9 +231,6 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="aw7-FF-05m"/>
-                    <connections>
-                        <outlet property="activateButton" destination="wEJ-eh-I02" id="8m0-tZ-FvK"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fhm-Wi-4x8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

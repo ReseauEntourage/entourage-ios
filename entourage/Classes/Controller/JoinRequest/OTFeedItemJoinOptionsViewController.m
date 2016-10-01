@@ -9,19 +9,7 @@
 #import "OTFeedItemJoinOptionsViewController.h"
 #import "UIView+entourage.h"
 
-@interface OTFeedItemJoinOptionsViewController ()
-
-@property (weak, nonatomic) IBOutlet UIButton *btnAddMessage;
-
-@end
-
 @implementation OTFeedItemJoinOptionsViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    [self.btnAddMessage setupHalfRoundedCorners];
-}
 
 - (IBAction)addMessage:(id)sender {
     [self.joinDelegate addMessage];

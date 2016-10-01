@@ -44,8 +44,6 @@
     [self.codeTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [self.validateButton setupHalfRoundedCorners];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(showKeyboard:)
                                                  name:UIKeyboardDidShowNotification

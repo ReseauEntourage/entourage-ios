@@ -20,12 +20,6 @@
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsService.h"
 
-@interface OTNotificationsRightsViewController()
-
-@property (nonatomic, weak) IBOutlet UIButton *activateButton;
-
-@end
-
 @implementation OTNotificationsRightsViewController
 
 - (void)viewDidLoad {
@@ -33,7 +27,6 @@
 
     self.title = @"";
     [self addIgnoreButton];
-    [self.activateButton setupHalfRoundedCorners];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationAuthorizationChanged:) name:kNotificationPushStatusChanged object:nil];
 }

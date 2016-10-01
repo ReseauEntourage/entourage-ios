@@ -47,18 +47,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 @interface OTLoginViewController () <LostCodeDelegate>
 
-@property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffect;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
-@property (weak, nonatomic) IBOutlet UIView *whiteBackground;
-@property (weak, nonatomic) IBOutlet UIButton *askMoreButton;
-@property (weak, nonatomic) IBOutlet UIButton *validateButton;
 @property (weak, nonatomic) IBOutlet UIButton *lostCodeButton;
-
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
-
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 
 @end
@@ -71,22 +64,15 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.title = @"";
-    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
-	self.whiteBackground.layer.cornerRadius = 5;
-	self.whiteBackground.layer.masksToBounds = YES;
-    
     [self.phoneTextField indentRight];
     [self.passwordTextField indentRight];
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    [self.validateButton setupHalfRoundedCorners];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
 }
 
@@ -155,16 +141,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                }];
 }
 
-/********************************************************************************/
-#pragma mark - OTAskMoreViewControllerDelegate
-
-- (void)hideBlurEffect {
-    [UIView animateWithDuration:0.5 animations:^(void) {
-        [self.blurEffect setAlpha:0.0];
-    }];
-}
-
-/********************************************************************************/
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -180,14 +156,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 /********************************************************************************/
 #pragma mark - Actions
-
-- (IBAction)displayAskMoreModal:(id)sender {
-    [self.blurEffect setHidden:NO];
-    [UIView animateWithDuration:0.5 animations:^(void) {
-        [self.blurEffect setAlpha:0.7];
-    }];
-    [self performSegueWithIdentifier:@"OTAskMore" sender:self];
-}
 
 - (IBAction)validateButtonDidTad {
     if (self.phoneTextField.text.length == 0) {

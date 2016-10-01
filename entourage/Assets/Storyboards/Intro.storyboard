@@ -144,7 +144,7 @@
         <scene sceneID="oPo-Hd-wrW">
             <objects>
                 <navigationController storyboardIdentifier="OTStartupNavigationViewControllerIdentifier" navigationBarHidden="YES" id="qeH-DW-jd0" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="caT-Hp-ZzG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="caT-Hp-ZzG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.91372549020000005" green="0.30980392159999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -182,6 +182,11 @@
                                 <state key="normal" title="S’inscrire sur Entourage">
                                     <color key="titleColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="HuL-dl-84D"/>
@@ -200,6 +205,11 @@
                                 <state key="normal" title="Connexion">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="Dka-8E-FDM"/>
@@ -279,9 +289,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="oc7-iw-O1J"/>
                     <connections>
-                        <outlet property="facebookButton" destination="H1V-0f-AM4" id="W1U-Ob-ef3"/>
                         <outlet property="loginButton" destination="mwv-HX-aYM" id="nPa-jz-z55"/>
-                        <outlet property="registerButton" destination="1oI-JN-xF6" id="GZX-Dl-Kc5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nCX-hY-Cs0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -397,9 +405,8 @@
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="5"/>
+                                                        <integer key="value" value="28"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="validateButtonDidTad" destination="Gt1-cc-4DI" eventType="touchUpInside" id="c9M-mp-1xA"/>
@@ -446,9 +453,9 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="S7J-CN-xeG"/>
                                                 <exclude reference="b52-cq-a69"/>
                                                 <exclude reference="viI-I5-g7Y"/>
+                                                <exclude reference="S7J-CN-xeG"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -470,9 +477,9 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="33I-EQ-p47"/>
                                         <exclude reference="u1p-bU-vmF"/>
                                         <exclude reference="wLs-GV-wTB"/>
+                                        <exclude reference="33I-EQ-p47"/>
                                     </mask>
                                 </variation>
                             </scrollView>
@@ -501,8 +508,6 @@
                         <outlet property="passwordTextField" destination="3Ei-2m-MZj" id="jr9-Z1-8VF"/>
                         <outlet property="phoneTextField" destination="dhy-dj-PYm" id="WS8-PO-wZJ"/>
                         <outlet property="scrollView" destination="Ddv-uC-bkv" id="zPI-M0-0qw"/>
-                        <outlet property="validateButton" destination="fqc-ms-rKq" id="evW-HB-3JW"/>
-                        <outlet property="whiteBackground" destination="OgF-9U-Zl4" id="aDb-cj-feu"/>
                         <segue destination="vT5-aZ-dNG" kind="show" identifier="UserProfileDetailsSegue" id="mDK-wu-FNZ"/>
                     </connections>
                 </viewController>
@@ -520,7 +525,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uQ4-e4-eq2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jb6-3O-aIx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jb6-3O-aIx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -840,6 +845,6 @@ sur Entourage.</string>
         <image name="whitePhone" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GFk-L8-2yS"/>
+        <segue reference="duu-Hd-nsS"/>
     </inferredMetricsTieBreakers>
 </document>

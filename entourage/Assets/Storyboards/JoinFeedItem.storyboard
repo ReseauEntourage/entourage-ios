@@ -191,6 +191,11 @@ transmise au créateur.
                                         <state key="normal" title="Envoyer un message">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="0NR-0y-u5a"/>
@@ -264,9 +269,6 @@ transmise au créateur.
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zmo-do-eBv"/>
-                    <connections>
-                        <outlet property="btnAddMessage" destination="bMi-oc-27z" id="Yr7-Ag-2vv"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jjf-eF-DN4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

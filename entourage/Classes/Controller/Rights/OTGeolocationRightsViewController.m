@@ -14,12 +14,6 @@
 #import "UINavigationController+entourage.h"
 #import "UIBarButtonItem+factory.h"
 
-@interface OTGeolocationRightsViewController()
-
-@property (nonatomic, weak) IBOutlet UIButton *activateButton;
-
-@end
-
 @implementation OTGeolocationRightsViewController
 
 - (void)viewDidLoad {
@@ -28,14 +22,7 @@
     [self addIgnoreButton];
     [self.navigationController presentTransparentNavigationBar];
     
-    [self.activateButton setupHalfRoundedCorners];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(locationAuthorizationChanged:)
-                                                 name:kNotificationLocationAuthorizationChanged
-                                               object:nil];
-
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationAuthorizationChanged:) name: kNotificationLocationAuthorizationChanged object:nil];
 }
 
 - (void)addIgnoreButton {

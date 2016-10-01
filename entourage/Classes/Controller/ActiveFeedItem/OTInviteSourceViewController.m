@@ -9,21 +9,7 @@
 #import "OTInviteSourceViewController.h"
 #import "UIView+entourage.h"
 
-@interface OTInviteSourceViewController ()
-
-@property (weak, nonatomic) IBOutlet UIButton *btnInviteContacts;
-@property (weak, nonatomic) IBOutlet UIButton *btnInviteByPhone;
-
-@end
-
 @implementation OTInviteSourceViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    [self.btnInviteContacts setupHalfRoundedCorners];
-    [self.btnInviteByPhone setupHalfRoundedCorners];
-}
 
 - (IBAction)close:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
