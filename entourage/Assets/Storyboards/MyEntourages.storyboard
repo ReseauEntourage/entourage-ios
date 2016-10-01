@@ -182,12 +182,17 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gox-Ma-Kkr">
+                                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gox-Ma-Kkr">
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="36" id="Ykv-r2-hDs"/>
                                                                 <constraint firstAttribute="width" constant="36" id="aGh-Qd-7q4"/>
                                                             </constraints>
                                                             <state key="normal" image="userSmall"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="18"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -502,7 +507,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KSx-2b-czt">
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLL-UT-mXU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLL-UT-mXU">
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -512,12 +517,17 @@
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qT-m6-25v">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qT-m6-25v">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="HHw-1q-nPe"/>
                                             <constraint firstAttribute="width" constant="35" id="UBu-R3-Woq"/>
                                         </constraints>
                                         <state key="normal" image="userSmall"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="17"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="showProfile" destination="DIz-eG-Bls" eventType="touchUpInside" id="yIk-df-CKU"/>
                                         </connections>
@@ -544,7 +554,7 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdY-Cy-ps4">
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdY-Cy-ps4">
                                                 <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="114" id="6Bi-Wj-pPb"/>
@@ -563,7 +573,7 @@
                                                     <action selector="ignore" destination="DIz-eG-Bls" eventType="touchUpInside" id="WRc-oA-Rn6"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xw-ak-fW4">
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xw-ak-fW4">
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="114" id="MFW-rv-VVv"/>
@@ -607,7 +617,7 @@
                                     <constraint firstItem="Y5V-SI-9ZA" firstAttribute="leading" secondItem="KSx-2b-czt" secondAttribute="leading" id="PUg-8I-IA3"/>
                                     <constraint firstItem="YQY-Es-0iZ" firstAttribute="leading" secondItem="KSx-2b-czt" secondAttribute="leading" id="RAN-wQ-eqH"/>
                                     <constraint firstAttribute="trailing" secondItem="YQY-Es-0iZ" secondAttribute="trailing" id="YPW-KX-Bgg"/>
-                                    <constraint firstItem="0qT-m6-25v" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eLL-UT-mXU" secondAttribute="trailing" constant="5" id="cXq-1f-Vue"/>
+                                    <constraint firstItem="0qT-m6-25v" firstAttribute="leading" secondItem="eLL-UT-mXU" secondAttribute="trailing" constant="5" id="cXq-1f-Vue"/>
                                     <constraint firstItem="hdE-Qs-5qr" firstAttribute="leading" secondItem="eLL-UT-mXU" secondAttribute="leading" id="dRb-jG-KGe"/>
                                     <constraint firstItem="hdE-Qs-5qr" firstAttribute="top" secondItem="eLL-UT-mXU" secondAttribute="bottom" id="hSF-ID-UW3"/>
                                     <constraint firstItem="eLL-UT-mXU" firstAttribute="leading" secondItem="KSx-2b-czt" secondAttribute="leading" constant="15" id="hdi-PQ-9um"/>

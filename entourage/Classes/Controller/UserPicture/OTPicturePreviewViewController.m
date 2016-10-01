@@ -32,13 +32,13 @@
     [super viewDidLoad];
     self.title = @"";
     [self.imageView setImage:self.image];
-    self.scrollView.layer.cornerRadius = self.scrollView.bounds.size.height / 2.0f;
     self.scrollView.layer.borderWidth = 2.0f;
     self.scrollView.layer.borderColor = [UIColor whiteColor].CGColor;
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    self.scrollView.layer.cornerRadius = self.scrollView.bounds.size.height / 2.0f;
     [self updateMinZoomScaleForSize:self.view.bounds.size];
 }
 

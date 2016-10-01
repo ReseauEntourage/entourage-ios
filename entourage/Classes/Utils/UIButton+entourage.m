@@ -31,8 +31,6 @@
                      withPlaceholder:(NSString *)placeholder
 {
     __weak UIButton *userImageButton = self;
-    userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
-    userImageButton.clipsToBounds = YES;
     UIImage *placeholderImage = [UIImage imageNamed:placeholder];
     if (avatarURLString != nil && [avatarURLString class] != [NSNull class] && avatarURLString.length > 0) {
         NSURL *url = [NSURL URLWithString:avatarURLString];
