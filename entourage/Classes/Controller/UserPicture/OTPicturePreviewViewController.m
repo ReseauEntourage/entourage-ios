@@ -32,14 +32,7 @@
     [super viewDidLoad];
     self.title = @"";
     [self.imageView setImage:self.image];
-    self.scrollView.layer.borderWidth = 2.0f;
-    self.scrollView.layer.borderColor = [UIColor whiteColor].CGColor;
-}
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    self.scrollView.layer.cornerRadius = self.scrollView.bounds.size.height / 2.0f;
-    [self updateMinZoomScaleForSize:self.view.bounds.size];
+    self.scrollView.maximumZoomScale = 10;
 }
 
 - (IBAction)doContinue {
@@ -80,11 +73,11 @@
 - (UIImage*)cropVisibleArea {
     //Calculate the required area from the scrollview
     CGRect visibleRect;
-    float scale = 1.0/self.scrollView.zoomScale;
-    visibleRect.origin.x = self.scrollView.contentOffset.x * scale;
-    visibleRect.origin.y = self.scrollView.contentOffset.y * scale;
-    visibleRect.size.width = self.scrollView.bounds.size.width * scale;
-    visibleRect.size.height = self.scrollView.bounds.size.height * scale;
+    float scale = 1.0 / self.scrollView.zoomScale;
+    visibleRect.origin.x = self.scrollView.contentOffset.x / self.scrollView.contentSize.width * self.image.size.width;
+    visibleRect.origin.y = self.scrollView.contentOffset.y / self.scrollView.contentSize.height * self.image.size.height;
+    visibleRect.size.width = self.image.size.width * scale;
+    visibleRect.size.height = self.image.size.height * scale;
     UIImage *image = [self imageByCropping:self.imageView.image toRect:visibleRect];
     return image;
 }
@@ -100,19 +93,6 @@
 
 - (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.imageView;
-}
-
-- (void)updateMinZoomScaleForSize:(CGSize)size {
-    CGFloat widthScale = size.width / self.imageView.bounds.size.width;
-    CGFloat heightScale = size.height / self.imageView.bounds.size.height;
-    CGFloat minScale = MIN(widthScale, heightScale);
-    CGFloat maxScale = MAX(widthScale, heightScale);
-    self.scrollView.minimumZoomScale = minScale;
-    self.scrollView.zoomScale = minScale;
-    
-    UIImage *image = self.imageView.image;
-    if (image.imageOrientation != UIImageOrientationLeft && image.imageOrientation != UIImageOrientationRight)
-        self.scrollView.zoomScale = maxScale;
 }
 
 @end

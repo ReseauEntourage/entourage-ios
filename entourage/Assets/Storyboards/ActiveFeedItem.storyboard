@@ -195,7 +195,7 @@
                                                                     <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMx-YJ-B2e">
+                                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMx-YJ-B2e">
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="35" id="gIy-F0-IXh"/>
                                                                         <constraint firstAttribute="width" constant="35" id="zpn-jU-EzB"/>
@@ -298,7 +298,7 @@
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehS-pG-Yas">
                                                                             <subviews>
-                                                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTG-yP-khP">
+                                                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTG-yP-khP">
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="60" id="LsM-OJ-nyx"/>
                                                                                         <constraint firstAttribute="height" constant="60" id="x7q-P9-jc9"/>
@@ -677,7 +677,7 @@
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFA-PY-ygL">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFA-PY-ygL">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="6TF-36-fbd"/>
                                     <constraint firstAttribute="width" constant="35" id="fso-cd-WKX"/>
@@ -1066,7 +1066,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="F8DBC029-600D-49D2-8B79-B69D7004B708" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4D9B9B2F-1731-4BA2-9E8D-CA295BD3C267" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
                                                         <constraint firstAttribute="height" constant="25" id="ayO-tA-95R"/>
@@ -1291,7 +1291,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="F8DBC029-600D-49D2-8B79-B69D7004B708" width="48" height="48">
+        <image name="4D9B9B2F-1731-4BA2-9E8D-CA295BD3C267" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1525,12 +1525,12 @@ gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Rwq-4K-0sd"/>
-        <segue reference="TWk-BX-Lb1"/>
-        <segue reference="qbj-7b-m5F"/>
-        <segue reference="0Fj-Nh-lj4"/>
-        <segue reference="fUf-PJ-SgA"/>
-        <segue reference="DLP-On-QzP"/>
-        <segue reference="Cgj-Wq-qez"/>
+        <segue reference="zFK-Fj-hWR"/>
+        <segue reference="ffc-Pt-QuG"/>
+        <segue reference="5BX-au-xTN"/>
+        <segue reference="TAD-d7-tmZ"/>
+        <segue reference="r9m-eb-lob"/>
+        <segue reference="nan-zV-dem"/>
+        <segue reference="8gM-o4-A6h"/>
     </inferredMetricsTieBreakers>
 </document>
