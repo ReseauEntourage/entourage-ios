@@ -25,7 +25,6 @@
 @interface OTUserEmailViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
-@property (nonatomic, weak) IBOutlet UIButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
@@ -41,8 +40,6 @@
     [self.emailTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [self.validateButton setupHalfRoundedCorners];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(showKeyboard:)
                                                  name:UIKeyboardDidShowNotification

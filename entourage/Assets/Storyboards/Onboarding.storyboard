@@ -99,6 +99,11 @@ numéro de portable? </string>
                                         <state key="normal" title="Continuer">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="doContinue" destination="BbA-ED-vfm" eventType="touchUpInside" id="hhV-sU-bD9"/>
                                         </connections>
@@ -136,7 +141,6 @@ numéro de portable? </string>
                     </view>
                     <navigationItem key="navigationItem" id="cSh-dG-zfC"/>
                     <connections>
-                        <outlet property="continueButton" destination="Bpk-JJ-QTl" id="6b6-we-zOI"/>
                         <outlet property="heightContraint" destination="Wg4-Ig-Fqk" id="LIS-Ti-430"/>
                         <outlet property="phoneTextField" destination="8h5-LL-TYs" id="Yfa-sb-k8C"/>
                         <outlet property="scrollView" destination="ZKP-h6-GEA" id="0nk-qH-HWC"/>
@@ -290,12 +294,12 @@ vérification</string>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="EYU-Pa-dfK"/>
+                                        <exclude reference="3Ec-T6-Upt"/>
+                                        <exclude reference="6qx-JO-NB6"/>
                                         <exclude reference="1As-fy-DKf"/>
                                         <exclude reference="D6y-dn-Tei"/>
                                         <exclude reference="od2-iw-Jgm"/>
-                                        <exclude reference="3Ec-T6-Upt"/>
-                                        <exclude reference="6qx-JO-NB6"/>
+                                        <exclude reference="EYU-Pa-dfK"/>
                                     </mask>
                                 </variation>
                             </scrollView>

@@ -48,9 +48,6 @@
 #pragma mark - Actions
 
 - (IBAction)closeModal:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(hideBlurEffect)]) {
-        [self.delegate hideBlurEffect];
-    }
     [self.emailField resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

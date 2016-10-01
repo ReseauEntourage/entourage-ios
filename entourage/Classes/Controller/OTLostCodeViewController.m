@@ -35,7 +35,6 @@
 @interface OTLostCodeViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
-@property (weak, nonatomic) IBOutlet UIButton *regenerateCodeButton;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
 
 @end
@@ -57,8 +56,6 @@
     [self.phoneTextField indentRight];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.navigationController presentTransparentNavigationBar];
-    
-    [self.regenerateCodeButton setupHalfRoundedCorners];
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
 }
 

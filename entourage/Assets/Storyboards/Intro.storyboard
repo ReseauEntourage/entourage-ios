@@ -302,7 +302,7 @@
                 <viewControllerPlaceholder storyboardName="Onboarding" id="L2Y-m3-WnX" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8wo-ND-4Se" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="329" y="-1682"/>
+            <point key="canvasLocation" x="317" y="-1689"/>
         </scene>
         <!--UserProfileDetails-->
         <scene sceneID="ET2-x3-THH">
@@ -503,7 +503,6 @@
                     <navigationItem key="navigationItem" id="s68-PV-7yo"/>
                     <connections>
                         <outlet property="heightContraint" destination="skE-g0-pyY" id="zfW-Ui-X3q"/>
-                        <outlet property="lostCodeButton" destination="v59-br-8WY" id="PZc-OS-8kY"/>
                         <outlet property="onboardingNavigation" destination="2bs-ya-BoZ" id="Uhs-f7-QJh"/>
                         <outlet property="passwordTextField" destination="3Ei-2m-MZj" id="jr9-Z1-8VF"/>
                         <outlet property="phoneTextField" destination="dhy-dj-PYm" id="WS8-PO-wZJ"/>
@@ -676,6 +675,11 @@ saisissez votre numéro de portable.</string>
                                         <state key="normal" title="Recevoir mon code">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="regenerateButtonDidTap:" destination="PnQ-mU-85i" eventType="touchUpInside" id="5cX-Li-jyw"/>
                                         </connections>
@@ -718,7 +722,6 @@ saisissez votre numéro de portable.</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="phoneTextField" destination="uq2-ES-ZKc" id="kL6-Ss-0OQ"/>
-                        <outlet property="regenerateCodeButton" destination="tCU-K5-2FS" id="eFo-PY-FOm"/>
                         <outlet property="scrollBehavior" destination="Owz-Rl-UwJ" id="ufj-1N-Ywr"/>
                     </connections>
                 </viewController>
@@ -757,6 +760,11 @@ saisissez votre numéro de portable.</string>
                                 <state key="normal" title="Commencer">
                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="3Rr-Dv-wJQ"/>
@@ -828,7 +836,6 @@ sur Entourage.</string>
                     </view>
                     <navigationItem key="navigationItem" id="3Xs-Xs-bSI"/>
                     <connections>
-                        <outlet property="startButton" destination="8vj-nj-f39" id="VvH-Ku-awV"/>
                         <outlet property="webView" destination="z5g-y1-uZm" id="MpR-ku-ydz"/>
                         <segue destination="Gt1-cc-4DI" kind="show" identifier="WelcomeLoginSegue" id="GFk-L8-2yS"/>
                     </connections>
@@ -845,6 +852,6 @@ sur Entourage.</string>
         <image name="whitePhone" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="duu-Hd-nsS"/>
+        <segue reference="GFk-L8-2yS"/>
     </inferredMetricsTieBreakers>
 </document>

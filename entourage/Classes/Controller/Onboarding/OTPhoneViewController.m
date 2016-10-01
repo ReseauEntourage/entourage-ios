@@ -21,7 +21,6 @@
 @interface OTPhoneViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *phoneTextField;
-@property (nonatomic, weak) IBOutlet UIButton *continueButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 
@@ -36,8 +35,6 @@
     
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [self.continueButton setupHalfRoundedCorners];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
 }
 

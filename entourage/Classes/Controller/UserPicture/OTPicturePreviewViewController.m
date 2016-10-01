@@ -21,7 +21,6 @@
 
 @interface OTPicturePreviewViewController ()
 
-@property (nonatomic, weak) IBOutlet UIButton *btnDone;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
@@ -32,7 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    [self.btnDone setupHalfRoundedCorners];
     [self.imageView setImage:self.image];
     self.scrollView.layer.cornerRadius = self.scrollView.bounds.size.height / 2.0f;
     self.scrollView.layer.borderWidth = 2.0f;

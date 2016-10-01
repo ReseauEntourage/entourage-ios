@@ -26,7 +26,6 @@
 
 @property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
 @property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;
-@property (nonatomic, weak) IBOutlet UIButton *validateButton;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
 
@@ -42,7 +41,6 @@
     [self.firstNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.lastNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [self.validateButton setupHalfRoundedCorners];
     [self loadCurrentData];
 }
 

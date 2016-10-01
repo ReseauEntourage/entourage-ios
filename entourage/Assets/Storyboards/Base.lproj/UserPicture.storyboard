@@ -67,6 +67,11 @@
                                 <state key="normal" title="Choisir une photo">
                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="ZYB-ag-xPG"/>
@@ -88,6 +93,11 @@
                                 <state key="normal" title="Prendre une photo">
                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="MXz-Vz-P5J"/>
@@ -119,8 +129,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="I8k-tV-cnv"/>
                     <connections>
-                        <outlet property="btnFromGallery" destination="ma1-OC-ZEH" id="gMy-2R-MiY"/>
-                        <outlet property="btnTakePicture" destination="XBY-w9-wlD" id="XPc-eL-EAL"/>
                         <outlet property="photoPickerBehavior" destination="aO6-e6-oYq" id="sZZ-zL-6n7"/>
                         <segue destination="xml-Uv-sbT" kind="show" identifier="PreviewPictureSegue" id="9bG-Kh-Ax2"/>
                         <segue destination="tKv-lS-TmP" kind="show" identifier="SkipPreviewSegue" id="k7U-3x-y4I"/>
@@ -205,6 +213,11 @@
                                 <state key="normal" image="nextFull">
                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="28"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="HXC-sY-0y9"/>
@@ -273,7 +286,6 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="btnDone" destination="Fot-wr-6TS" id="DH3-O9-fJo"/>
                         <outlet property="imageView" destination="TpG-O0-eKf" id="hRl-Oq-9SU"/>
                         <outlet property="scrollView" destination="29I-VR-dA4" id="e9U-kh-UDx"/>
                         <segue destination="tKv-lS-TmP" kind="show" identifier="PreviewToGeoSegue" id="7Aa-Ot-sEG"/>

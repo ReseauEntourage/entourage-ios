@@ -37,6 +37,7 @@
 #import "SVProgressHUD.h"
 #import "OTOnboardingNavigationBehavior.h"
 #import "OTPushNotificationsService.h"
+#import "OTAskMoreViewController.h"
 
 /********************************************************************************/
 #pragma mark - Constants
@@ -49,7 +50,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UIButton *lostCodeButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
@@ -144,10 +144,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"OTAskMore"]) {
-        OTAskMoreViewController *controller = (OTAskMoreViewController *)segue.destinationViewController;
-        controller.delegate = self;
-    } else if ([segue.identifier isEqualToString:@"OTLostCode"]) {
+    if ([segue.identifier isEqualToString:@"OTLostCode"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTLostCodeViewController *controller = (OTLostCodeViewController *)navController.viewControllers.firstObject;
         controller.codeDelegate = self;

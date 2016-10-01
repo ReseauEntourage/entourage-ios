@@ -116,6 +116,11 @@
                                         <state key="normal" image="nextOpacity70">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="28"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="4rK-S7-MlQ"/>
@@ -167,7 +172,6 @@
                         <outlet property="heightContraint" destination="Vm4-MX-7za" id="vpQ-W3-pu4"/>
                         <outlet property="onboardingNavigation" destination="jcL-ET-Bed" id="w6q-zH-Eck"/>
                         <outlet property="scrollView" destination="7HB-dM-9Y5" id="KpQ-Z7-jj4"/>
-                        <outlet property="validateButton" destination="low-DP-9YO" id="MAD-9U-Cf8"/>
                         <segue destination="arx-da-V22" kind="show" identifier="EmailToNameSegue" id="C4G-qA-LhK"/>
                     </connections>
                 </viewController>
@@ -299,6 +303,11 @@
                                         <state key="normal" image="nextOpacity70">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="28"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="doContinue" destination="arx-da-V22" eventType="touchUpInside" id="RxO-vd-99J"/>
                                         </connections>
@@ -354,7 +363,6 @@
                         <outlet property="lastNameTextField" destination="WdG-RU-kzQ" id="rG4-yE-i1i"/>
                         <outlet property="onboardingNavigation" destination="oQM-Cw-LaS" id="hSw-KJ-ycw"/>
                         <outlet property="scrollBehavior" destination="wei-p9-gEA" id="Jrq-bU-g3s"/>
-                        <outlet property="validateButton" destination="tRX-Ut-nfY" id="wcG-5d-6FH"/>
                         <segue destination="B20-iY-AIh" kind="show" identifier="AddPictureSegue" id="MFj-gH-GXL"/>
                     </connections>
                 </viewController>
