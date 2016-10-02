@@ -7,7 +7,6 @@
 //
 
 #import "OTChatCellBase.h"
-#import "OTPaddedLabel.h"
 #import "OTMessageDataSourceBehavior.h"
 #import "OTUserProfileBehavior.h"
 

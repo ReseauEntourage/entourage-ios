@@ -7,7 +7,6 @@
 //
 
 #import "OTChatCellBase.h"
-#import "OTPaddedLabel.h"
 
 @interface OTMessageSentCell : OTChatCellBase
 
