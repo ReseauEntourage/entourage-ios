@@ -963,6 +963,8 @@ static bool isShowingOptions = NO;
     self.currentFilter = filter;
     self.currentPagination.beforeDate = nil;
     self.feeds = [NSMutableArray new];
+    [self.mapView removeOverlays:self.mapView.overlays];
+    [self.mapView removeAnnotations:self.mapView.annotations];
     [self.tableView removeAll];
     [self.tableView reloadData];
     [self getData];
