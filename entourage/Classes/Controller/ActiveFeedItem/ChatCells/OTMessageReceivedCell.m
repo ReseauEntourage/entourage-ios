@@ -13,11 +13,6 @@
 
 @implementation OTMessageReceivedCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    self.lblMessage.edgeInsets = UIEdgeInsetsMake(8, 17, 8, 17);
-}
-
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
     OTFeedItemMessage *msgData = (OTFeedItemMessage *)timelinePoint;
     self.lblUserName.text = msgData.userName;

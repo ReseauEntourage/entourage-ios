@@ -11,6 +11,6 @@
 
 @interface OTMessageSentCell : OTChatCellBase
 
-@property (nonatomic, weak) IBOutlet OTPaddedLabel *lblMessage;
+@property (nonatomic, weak) IBOutlet UILabel *lblMessage;
 
 @end

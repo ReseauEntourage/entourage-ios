@@ -18,7 +18,6 @@
 #import "OTTapViewBehavior.h"
 #import "OTDataSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
-#import "OTMessageTableDelegateBehavior.h"
 #import "OTUserProfileBehavior.h"
 #import "OTEditEntourageBehavior.h"
 #import "OTFeedItemMessage.h"
@@ -36,7 +35,6 @@
 @property (strong, nonatomic) IBOutlet OTTapViewBehavior *titleTapBehavior;
 @property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
-@property (strong, nonatomic) IBOutlet OTMessageTableDelegateBehavior *tableDelegate;
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior *editEntourageBehavior;
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
@@ -55,7 +53,8 @@
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.titleTapBehavior initialize];
     [self.tableDataSource initialize];
-    [self.tableDelegate initialize];
+    self.dataSource.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.dataSource.tableView.estimatedRowHeight = 1000;
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];

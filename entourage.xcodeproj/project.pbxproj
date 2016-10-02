@@ -57,7 +57,6 @@
 		1E0972BF1D55541E006E1FAD /* OTInviteSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972BA1D55541E006E1FAD /* OTInviteSourceViewController.m */; };
 		1E0972C01D55541E006E1FAD /* OTInviteSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972BC1D55541E006E1FAD /* OTInviteSuccessViewController.m */; };
 		1E0972C31D555586006E1FAD /* OTInviteBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0972C21D555586006E1FAD /* OTInviteBehavior.m */; };
-		1E0991451D57EDF9000A19CA /* OTMessageTableDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0991441D57EDF9000A19CA /* OTMessageTableDelegateBehavior.m */; };
 		1E1BA6AC1D82FC0E00A7F1FF /* OTMyFeedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1BA6AB1D82FC0E00A7F1FF /* OTMyFeedMessage.m */; };
 		1E2232CB1D568B4C004CD5E8 /* OTTapViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232CA1D568B4C004CD5E8 /* OTTapViewBehavior.m */; };
 		1E2232D21D569744004CD5E8 /* OTMessageTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232D11D569744004CD5E8 /* OTMessageTableDataSourceBehavior.m */; };
@@ -398,8 +397,6 @@
 		1E0972C11D555586006E1FAD /* OTInviteBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTInviteBehavior.h; path = Behaviors/FeedItems/OTInviteBehavior.h; sourceTree = "<group>"; };
 		1E0972C21D555586006E1FAD /* OTInviteBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTInviteBehavior.m; path = Behaviors/FeedItems/OTInviteBehavior.m; sourceTree = "<group>"; };
 		1E0991421D57EA72000A19CA /* MessageCellType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MessageCellType.h; path = Behaviors/UITableView/FeedItemMessages/MessageCellType.h; sourceTree = "<group>"; };
-		1E0991431D57EDF9000A19CA /* OTMessageTableDelegateBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMessageTableDelegateBehavior.h; path = Behaviors/UITableView/FeedItemMessages/OTMessageTableDelegateBehavior.h; sourceTree = "<group>"; };
-		1E0991441D57EDF9000A19CA /* OTMessageTableDelegateBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMessageTableDelegateBehavior.m; path = Behaviors/UITableView/FeedItemMessages/OTMessageTableDelegateBehavior.m; sourceTree = "<group>"; };
 		1E1BA6AA1D82FC0E00A7F1FF /* OTMyFeedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyFeedMessage.h; path = Feeds/OTMyFeedMessage.h; sourceTree = "<group>"; };
 		1E1BA6AB1D82FC0E00A7F1FF /* OTMyFeedMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyFeedMessage.m; path = Feeds/OTMyFeedMessage.m; sourceTree = "<group>"; };
 		1E2232C91D568B4C004CD5E8 /* OTTapViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTTapViewBehavior.h; path = Behaviors/Touch/OTTapViewBehavior.h; sourceTree = "<group>"; };
@@ -953,8 +950,6 @@
 				1E2232D31D569787004CD5E8 /* OTMessageTableCellProviderBehavior.h */,
 				1E2232D41D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m */,
 				1E0991421D57EA72000A19CA /* MessageCellType.h */,
-				1E0991431D57EDF9000A19CA /* OTMessageTableDelegateBehavior.h */,
-				1E0991441D57EDF9000A19CA /* OTMessageTableDelegateBehavior.m */,
 				1E07DA341D58FB9A003119CC /* OTMessageDataSourceBehavior.h */,
 				1E07DA351D58FB9A003119CC /* OTMessageDataSourceBehavior.m */,
 			);
@@ -2488,7 +2483,6 @@
 				1E2F290C1D4BC2A000ABC68A /* OTCloseKeyboardOnTapBehavior.m in Sources */,
 				1EC75C061D849AE800887F6F /* OTMapDelegateProxyBehavior.m in Sources */,
 				1E78B7ED1D513ECA0008C00E /* OTTourUI.m in Sources */,
-				1E0991451D57EDF9000A19CA /* OTMessageTableDelegateBehavior.m in Sources */,
 				1E0972C31D555586006E1FAD /* OTInviteBehavior.m in Sources */,
 				45B3F8F61C74F40B00DCF2EC /* OTFeedItemAuthor.m in Sources */,
 				1E07DA411D590433003119CC /* OTEntourageJoinerDelegate.m in Sources */,
