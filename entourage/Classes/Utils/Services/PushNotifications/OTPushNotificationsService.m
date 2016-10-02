@@ -121,15 +121,19 @@
 
 - (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
 {
-    OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
-    UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] reject:joiner success:nil failure:nil];
-    }];
-    UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] accept:joiner success:nil failure:nil];
-    }];
-    [alert addAction:refuseJoinRequestAction];
-    [alert addAction:acceptJoinRequestAction];
+    [[[OTFeedItemFactory createForType:pnData.feedType andId:pnData.feedId] getStateInfo] loadWithSuccess:^(OTFeedItem *item) {
+        if([item.joinStatus isEqualToString:JOIN_ACCEPTED] || [item.joinStatus isEqualToString:JOIN_REJECTED])
+            return;
+        OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
+        UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] reject:joiner success:nil failure:nil];
+        }];
+        UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] accept:joiner success:nil failure:nil];
+        }];
+        [alert addAction:refuseJoinRequestAction];
+        [alert addAction:acceptJoinRequestAction];
+    } error:nil];
 }
 
 - (void)handleAcceptJoinNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
