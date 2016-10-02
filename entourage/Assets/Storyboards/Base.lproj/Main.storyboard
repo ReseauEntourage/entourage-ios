@@ -183,7 +183,7 @@
         <scene sceneID="Lst-Gh-Xmp">
             <objects>
                 <navigationController storyboardIdentifier="MenuNavController" id="EYq-GT-Cxt" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AaL-F7-3Uz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AaL-F7-3Uz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -199,7 +199,7 @@
         <scene sceneID="Uum-1n-6o1">
             <objects>
                 <navigationController storyboardIdentifier="MainNavController" id="UcL-62-xea" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qfe-Me-3AD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qfe-Me-3AD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -569,7 +569,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
-                                    <outlet property="delegate" destination="b2A-wG-Mz4" id="Xq6-eX-xoq"/>
+                                    <outlet property="delegate" destination="t6J-hI-Hka" id="jiG-Ob-5AH"/>
                                 </connections>
                             </textView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qot-mm-bch">
@@ -646,6 +646,12 @@
                 <customObject id="ddg-Dy-Uuq" userLabel="Encounter Disclaimer" customClass="OTEncounterDisclaimerBehavior">
                     <connections>
                         <outlet property="owner" destination="b2A-wG-Mz4" id="7th-vp-Oci"/>
+                    </connections>
+                </customObject>
+                <customObject id="t6J-hI-Hka" userLabel="Distributed Delegate" customClass="OTDistributedDelegateBehavior">
+                    <connections>
+                        <outletCollection property="delegates" destination="UaS-lC-hUC" id="LFd-LJ-dGi"/>
+                        <outletCollection property="delegates" destination="b2A-wG-Mz4" id="SLS-8Y-7FF"/>
                     </connections>
                 </customObject>
                 <customObject id="UaS-lC-hUC" userLabel="Speech" customClass="OTSpeechBehavior">
@@ -932,7 +938,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="alD-dM-t4k" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EdH-DI-xEI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EdH-DI-xEI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -29,7 +29,8 @@
 }
 
 - (void)initialize {
-    self.txtOutput.delegate = self;
+    if(!self.txtOutput.delegate)
+        self.txtOutput.delegate = self;
     
     // to be removed on 1.9
     [OTSpeechKitManager setup];

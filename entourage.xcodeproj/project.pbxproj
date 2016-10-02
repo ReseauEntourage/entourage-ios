@@ -149,6 +149,7 @@
 		1E8E16E91D5A3814005C42ED /* OTEntourageInvitation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E16E81D5A3814005C42ED /* OTEntourageInvitation.m */; };
 		1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9003681D34FAAB004E18BC /* OTBehavior.m */; };
 		1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E90036D1D352C0B004E18BC /* UserPicture.storyboard */; };
+		1EA4F3091DA199A300A3321C /* OTDistributedDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA4F3081DA199A300A3321C /* OTDistributedDelegateBehavior.m */; };
 		1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */; };
 		1EACCAC31D64CD720027D1ED /* OTDeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACCAC21D64CD720027D1ED /* OTDeepLinkService.m */; };
 		1EACE4161D11515200F3A2A6 /* OTEntourageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */; };
@@ -563,6 +564,8 @@
 		1E9003671D34FAAB004E18BC /* OTBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTBehavior.h; path = Behaviors/OTBehavior.h; sourceTree = "<group>"; };
 		1E9003681D34FAAB004E18BC /* OTBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTBehavior.m; path = Behaviors/OTBehavior.m; sourceTree = "<group>"; };
 		1E90036E1D352C0B004E18BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserPicture.storyboard; sourceTree = "<group>"; };
+		1EA4F3071DA199A300A3321C /* OTDistributedDelegateBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTDistributedDelegateBehavior.h; path = Behaviors/OTDistributedDelegateBehavior.h; sourceTree = "<group>"; };
+		1EA4F3081DA199A300A3321C /* OTDistributedDelegateBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTDistributedDelegateBehavior.m; path = Behaviors/OTDistributedDelegateBehavior.m; sourceTree = "<group>"; };
 		1EA51FCB1D366F6B00350255 /* OTPictureUploadService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPictureUploadService.h; path = Amazon/OTPictureUploadService.h; sourceTree = "<group>"; };
 		1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTPictureUploadService.m; path = Amazon/OTPictureUploadService.m; sourceTree = "<group>"; };
 		1EA51FCE1D368AD800350255 /* OTAmazonConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
@@ -1329,6 +1332,8 @@
 				1E2F29011D4BC24900ABC68A /* Photo */,
 				1E9003671D34FAAB004E18BC /* OTBehavior.h */,
 				1E9003681D34FAAB004E18BC /* OTBehavior.m */,
+				1EA4F3071DA199A300A3321C /* OTDistributedDelegateBehavior.h */,
+				1EA4F3081DA199A300A3321C /* OTDistributedDelegateBehavior.m */,
 			);
 			name = Behaviors;
 			sourceTree = "<group>";
@@ -2508,6 +2513,7 @@
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				1E5C301E1D6F671200E10770 /* OTMembersDataSource.m in Sources */,
 				2EDA5F071CB50CEE00849172 /* OTFeedItemsTableView.m in Sources */,
+				1EA4F3091DA199A300A3321C /* OTDistributedDelegateBehavior.m in Sources */,
 				1E5EBCEF1D53CECF006695F1 /* OTStatusBehavior.m in Sources */,
 				1EE817601D79F36D0003133D /* OTEntourageRenderer.m in Sources */,
 				1E488E1B1D4FB99300A2E5B0 /* OTNotificationsRightsViewController.m in Sources */,
