@@ -10,10 +10,12 @@
 #import "OTToggleGroupViewBehavior.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
+#import "OTOngoingTourService.h"
 
 @interface OTMyEntouragesOptionsViewController ()
 
 @property (strong, nonatomic) IBOutlet OTToggleGroupViewBehavior *toggleMaraude;
+@property (strong, nonatomic) IBOutlet OTToggleGroupViewBehavior *toggleEncounter;
 
 @end
 
@@ -23,7 +25,15 @@
     [super viewDidLoad];
     
     [self.toggleMaraude initialize];
-    [self.toggleMaraude toggle:[[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO]];
+    [self.toggleEncounter initialize];
+    [self.toggleMaraude toggle:NO];
+    [self.toggleEncounter toggle:NO];
+    if([[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO]) {
+        if([OTOngoingTourService sharedInstance].isOngoing)
+            [self.toggleEncounter toggle:YES];
+        else
+            [self.toggleMaraude toggle:YES];
+    }
 }
 
 - (IBAction)createDemand {
@@ -42,6 +52,10 @@
     [self dismissViewControllerAnimated:YES completion:^() {
         [self.delegate createTour];
     }];
+}
+
+- (IBAction)createEncounter {
+    ge[self.delegate createEncounter];
 }
 
 - (IBAction)close {

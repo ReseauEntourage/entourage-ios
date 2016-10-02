@@ -13,7 +13,7 @@
 
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 
-- (BOOL)prepareSegueForOptions:(UIStoryboardSegue *)segue;
 - (void)configureWith:(id<OTOptionsDelegate>)optionsDelegate;
+- (BOOL)prepareSegueForOptions:(UIStoryboardSegue *)segue;
 
 @end

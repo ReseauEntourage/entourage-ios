@@ -13,5 +13,6 @@
 - (void)createDemand;
 - (void)createContribution;
 - (void)createTour;
+- (void)createEncounter;
 
 @end

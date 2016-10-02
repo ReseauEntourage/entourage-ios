@@ -22,6 +22,10 @@
 
 @implementation OTMyEntouragesOptionsBehavior
 
+- (void)configureWith:(id<OTOptionsDelegate>)optionsDelegate {
+    self.optionsDelegate = optionsDelegate;
+}
+
 - (BOOL)prepareSegueForOptions:(UIStoryboardSegue *)segue {
     if([segue.identifier isEqualToString:@"EntourageEditorSegue"]) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
@@ -39,10 +43,6 @@
     return YES;
 }
 
-- (void)configureWith:(id<OTOptionsDelegate>)optionsDelegate {
-    self.optionsDelegate = optionsDelegate;
-}
-
 #pragma  mark - OTMyEntouragesOptionsDelegate
 
 - (void)createDemand {
@@ -58,6 +58,11 @@
 - (void)createTour {
     [self.owner.navigationController popViewControllerAnimated:NO];
     [self.optionsDelegate createTour];
+}
+
+- (void)createEncounter {
+    [self.owner.navigationController popViewControllerAnimated:NO];
+    [self.optionsDelegate createEncounter];
 }
 
 #pragma mark - EntourageEditorDelegate
