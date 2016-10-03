@@ -23,6 +23,7 @@
 #import "OTEntourageInvitation.h"
 #import "OTInvitationsService.h"
 #import "SVProgressHUD.h"
+#import "OTBadgeNumberService.h"
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
@@ -101,6 +102,7 @@
 
 - (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData
 {
+    [[OTBadgeNumberService sharedInstance] updateItem:pnData.joinableId];
     OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
     UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] reject:joiner success:nil failure:nil];
@@ -133,6 +135,7 @@
 
 - (void)handleChatNotification:(OTPushNotificationsData *)pnData
 {
+    [[OTBadgeNumberService sharedInstance] updateItem:pnData.joinableId];
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
     }];
@@ -141,6 +144,7 @@
 
 - (void)handleInviteRequestNotification:(OTPushNotificationsData *)pnData
 {
+    [[OTBadgeNumberService sharedInstance] updateItem:pnData.entourageId];
     OTEntourageInvitation *invitation = [OTEntourageInvitation fromPushNotifiationsData:pnData];
     UIAlertAction *refuseInviteRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [SVProgressHUD show];
@@ -164,6 +168,7 @@
 
 - (void)handleInviteStatusNotification:(OTPushNotificationsData *)pnData
 {
+    [[OTBadgeNumberService sharedInstance] updateItem:pnData.feedId];
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OTDeepLinkService new] navigateTo:pnData.feedId withType:pnData.feedType];
     }];

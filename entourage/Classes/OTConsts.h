@@ -47,6 +47,7 @@
 #define kNotificationEntourageChanged @"NotificationEntourageChanged"
 #define kNotificationEntourageChangedEntourageKey @"NotificationEntourageChangedEntourageKey"
 
+#define kNotificationPushReceived "NotificationPushReceived"
 
 #define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"

@@ -104,7 +104,6 @@
                 <customObject id="W7b-U8-i9L" userLabel="Toggle Visible" customClass="OTToggleVisibleBehavior">
                     <connections>
                         <outlet property="heightConstraint" destination="dZA-Tf-4QY" id="e1H-b7-Wlf"/>
-                        <outlet property="marginConstraint" destination="hGV-iS-zF4" id="O70-wf-mle"/>
                         <outlet property="toggleView" destination="Xzs-5T-W8m" id="3RR-3B-gAN"/>
                     </connections>
                 </customObject>

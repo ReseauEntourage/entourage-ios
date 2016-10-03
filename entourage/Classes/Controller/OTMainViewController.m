@@ -84,6 +84,8 @@
 #import "OTNewsFeedsFilter.h"
 #import "OTStatusChangedBehavior.h"
 #import "OTEditEntourageBehavior.h"
+#import "OTBadgeNumberService.h"
+#import "UIBarButtonItem+Badge.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -192,9 +194,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTourConfirmation) name:@kNotificationLocalTourConfirmation object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFilters) name:@kNotificationShowFilters object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushReceived) name:@kNotificationPushReceived object:nil];
     
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
@@ -304,12 +306,9 @@
 - (void)configureNavigationBar {
     //status bar
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
-    
     //navigation bar
     [self createMenuButton];
-    UIBarButtonItem *chatButton = [self setupChatsButton];
-    [chatButton setTarget:self];
-    [chatButton setAction:@selector(showEntourages)];
+    [self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
     [self setupLogoImage];
 }
 
@@ -995,6 +994,9 @@ static bool isShowingOptions = NO;
     [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
+- (void)pushReceived {
+    self.navigationItem.rightBarButtonItem.badgeValue = [OTBadgeNumberService sharedInstance].badgeCount.stringValue;
+}
 
 /**************************************************************************************************/
 #pragma mark - Feeds Table View Delegate

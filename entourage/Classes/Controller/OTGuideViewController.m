@@ -36,6 +36,8 @@
 
 // User
 #import "NSUserDefaults+OT.h"
+#import "UIBarButtonItem+Badge.h"
+#import "OTBadgeNumberService.h"
 
 /********************************************************************************/
 #pragma mark - OTMapViewController
@@ -88,10 +90,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushReceived) name:@kNotificationPushReceived object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationLocationUpdated object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -104,10 +107,7 @@
 
 - (void)configureView {
     [self setupLogoImage];
-    UIBarButtonItem *chatButton = [self setupChatsButton];
-    [chatButton setTarget:self];
-    [chatButton setAction:@selector(showEntourages)];
-    //self.title = NSLocalizedString(@"guideviewcontroller_title", @"");
+    [self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
 }
 
 - (void)showEntourages {
@@ -358,6 +358,10 @@
 - (void)updateOptionsButtons {
     self.mapOptionsButton.hidden = self.isTourRunning;
     self.tourOptionsButton.hidden = !self.isTourRunning;
+}
+
+- (void)pushReceived {
+    self.navigationController.navigationItem.rightBarButtonItem.badgeValue = [OTBadgeNumberService sharedInstance].badgeCount.stringValue;
 }
 
 @end

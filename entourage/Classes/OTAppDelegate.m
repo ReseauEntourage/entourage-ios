@@ -21,6 +21,7 @@
 #import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
 #import "SVProgressHUD.h"
+#import "OTBadgeNumberService.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -93,6 +94,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 }
 
 - (void)clearUserData {
+    [[OTBadgeNumberService sharedInstance] clearData];
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kEncounterDisclaimer];

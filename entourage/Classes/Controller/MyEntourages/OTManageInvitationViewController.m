@@ -13,6 +13,7 @@
 #import "OTUserProfileBehavior.h"
 #import "OTFeedItemFactory.h"
 #import "OTInvitationChangedBehavior.h"
+#import "OTBadgeNumberService.h"
 
 @interface OTManageInvitationViewController ()
 
@@ -41,6 +42,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [[OTBadgeNumberService sharedInstance] readItem:self.feedItem.uid];
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }
 

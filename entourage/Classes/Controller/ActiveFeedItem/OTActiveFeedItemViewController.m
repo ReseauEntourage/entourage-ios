@@ -25,6 +25,7 @@
 #import "SVProgressHUD.h"
 #import "OTMapViewController.h"
 #import "OTMessagingService.h"
+#import "OTBadgeNumberService.h"
 
 @interface OTActiveFeedItemViewController ()
 
@@ -62,6 +63,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [[OTBadgeNumberService sharedInstance] readItem:self.feedItem.uid];
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }
 
