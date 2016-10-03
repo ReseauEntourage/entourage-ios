@@ -8,6 +8,7 @@
 
 #import "OTEntouragesTableViewCell.h"
 #import "UIColor+entourage.h"
+#import "OTBadgeNumberService.h"
 
 @implementation OTEntouragesTableViewCell
 
@@ -25,6 +26,10 @@
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
     self.lblNumberOfUsers.text = [@"+" stringByAppendingString:self.lblNumberOfUsers.text];
+    if([[OTBadgeNumberService sharedInstance] hasUnread:item.uid])
+        self.lblLastMessage.textColor = [UIColor blackColor];
+    else
+        self.lblLastMessage.textColor = [UIColor appGreyishColor];
     self.lblLastMessage.text = [self getAuthorTextFor:item.lastMessage];
 }
 

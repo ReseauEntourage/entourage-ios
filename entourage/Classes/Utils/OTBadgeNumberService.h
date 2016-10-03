@@ -16,5 +16,6 @@
 - (void)updateItem:(NSNumber *)itemId;
 - (void)readItem:(NSNumber *)itemId;
 - (void)clearData;
+- (BOOL)hasUnread:(NSNumber *)itemId;
 
 @end

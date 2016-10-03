@@ -67,6 +67,11 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:BadgeKey];
 }
 
+- (BOOL)hasUnread:(NSNumber *)itemId {
+    NSNumber *value = [self.badgeData objectForKey:itemId];
+    return value && value.intValue > 0;
+}
+
 #pragma mark - private methods
 
 - (void)updateUserDefaults {
