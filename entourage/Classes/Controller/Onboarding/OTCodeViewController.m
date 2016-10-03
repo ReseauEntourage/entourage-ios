@@ -40,22 +40,21 @@
 
     self.title = @"";
     [self addRegenerateBarButton];
-    
     [self.codeTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showKeyboard:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     if([NSUserDefaults standardUserDefaults].currentUser) {
         [NSUserDefaults standardUserDefaults].temporaryUser = [NSUserDefaults standardUserDefaults].currentUser;
         [NSUserDefaults standardUserDefaults].currentUser = nil;
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
 }
 
 #pragma mark - Private
@@ -114,11 +113,6 @@
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
                                }];
-}
-
-- (void)showKeyboard:(NSNotification*)notification {
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification
-                                         andHeightContraint:self.heightContraint];
 }
 
 @end
