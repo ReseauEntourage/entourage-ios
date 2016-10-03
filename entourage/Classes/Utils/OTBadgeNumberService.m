@@ -23,10 +23,14 @@
     self = [super init];
     if(self) {
         NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:BadgeKey];
-        if(data)
-            self.badgeData = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
-        else
-            self.badgeData = [NSMutableDictionary new];
+        if([data isKindOfClass:[NSDictionary class]])
+            self.badgeData = [[NSMutableDictionary alloc] initWithDictionary:(NSDictionary *)data];
+        else {
+            if(data)
+                self.badgeData = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
+            else
+                self.badgeData = [NSMutableDictionary new];
+        }
     }
     return self;
 }
