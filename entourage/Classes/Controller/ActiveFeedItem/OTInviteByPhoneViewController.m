@@ -15,6 +15,7 @@
 #import "OTFeedItemFactory.h"
 #import "SVProgressHUD.h"
 #import "IQKeyboardManager.h"
+#import "UIScrollView+entourage.h"
 
 @interface OTInviteByPhoneViewController ()
 
@@ -36,13 +37,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 70;
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     [self.txtPhone becomeFirstResponder];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
 }
 
 - (IBAction)txtPhone_EditingChanged:(id)sender {
