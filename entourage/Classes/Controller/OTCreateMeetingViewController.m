@@ -49,11 +49,8 @@
 @property (nonatomic, strong) IBOutlet UITextView *messageTextView;
 @property (weak, nonatomic) IBOutlet UILabel *firstLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *recordingLoader;
 @property (strong, nonatomic) IBOutlet OTSpeechBehavior *speechBehavior;
 @property (strong, nonatomic) IBOutlet OTEncounterDisclaimerBehavior *disclaimer;
-
-@property (nonatomic) BOOL isRecording;
 
 @end
 
@@ -65,7 +62,6 @@
     [super viewDidLoad];
     
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
-    self.isRecording = NO;
     [self setupUI];
     [self.speechBehavior initialize];
     [self.disclaimer showDisclaimer];
@@ -120,7 +116,13 @@
     }];
 }
 
+- (IBAction)speechBehavior_TextChanged:(id)sender {
+    if([self.messageTextView.text hasPrefix:PLACEHOLDER])
+        self.messageTextView.text = [self.messageTextView.text substringFromIndex:PLACEHOLDER.length];
+}
+
 #pragma mark - UITextViewDelegate
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     if ([textView.text isEqualToString:PLACEHOLDER]) {

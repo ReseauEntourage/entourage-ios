@@ -578,11 +578,7 @@
                                     <constraint firstAttribute="width" constant="26" id="gRR-q1-r6f"/>
                                 </constraints>
                                 <state key="normal" image="mic"/>
-                                <connections>
-                                    <action selector="startStopRecording:" destination="b2A-wG-Mz4" eventType="touchUpInside" id="UR0-IC-pHK"/>
-                                </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Qvq-t4-y7g"/>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8V-gv-7gG">
                                 <color key="backgroundColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -607,7 +603,6 @@
                         <constraints>
                             <constraint firstItem="5v5-0Z-Aga" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" constant="-5" id="5Me-9x-fOe"/>
                             <constraint firstItem="Q8V-gv-7gG" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leadingMargin" constant="-20" id="AjN-VM-xLh"/>
-                            <constraint firstItem="Qvq-t4-y7g" firstAttribute="centerX" secondItem="feS-ZD-ocn" secondAttribute="centerX" id="C7h-AC-tTB"/>
                             <constraint firstItem="2uf-2Y-z5H" firstAttribute="top" secondItem="a5N-Kb-CX4" secondAttribute="bottom" constant="15" id="ERc-sF-f7z"/>
                             <constraint firstItem="LVP-zg-cRX" firstAttribute="top" secondItem="Q8V-gv-7gG" secondAttribute="bottom" id="Hue-5P-hRh"/>
                             <constraint firstItem="Qot-mm-bch" firstAttribute="top" secondItem="2uf-2Y-z5H" secondAttribute="bottom" constant="24" id="IKh-9I-mru"/>
@@ -622,7 +617,6 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Q8V-gv-7gG" secondAttribute="trailing" constant="-20" id="Vzv-iF-PEz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ial-X5-VCO" secondAttribute="trailing" constant="-20" id="XDv-Ux-M3q"/>
                             <constraint firstItem="KDZ-i8-4OP" firstAttribute="leading" secondItem="feS-ZD-ocn" secondAttribute="leading" constant="20" id="XeA-WW-Swa"/>
-                            <constraint firstItem="Qvq-t4-y7g" firstAttribute="top" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="8" id="g8e-Ip-g7i"/>
                             <constraint firstAttribute="trailing" secondItem="a5N-Kb-CX4" secondAttribute="trailing" id="icM-TM-3SK"/>
                             <constraint firstItem="5v5-0Z-Aga" firstAttribute="bottom" secondItem="Ial-X5-VCO" secondAttribute="bottom" constant="-15" id="oAz-mu-OvQ"/>
                             <constraint firstAttribute="trailing" secondItem="KDZ-i8-4OP" secondAttribute="trailing" constant="20" id="pwP-Ha-ILd"/>
@@ -637,7 +631,6 @@
                         <outlet property="firstLabel" destination="KDZ-i8-4OP" id="1uL-Bh-XUo"/>
                         <outlet property="messageTextView" destination="Ial-X5-VCO" id="ilC-Qg-MDD"/>
                         <outlet property="nameTextField" destination="a5N-Kb-CX4" id="gpj-ZW-kua"/>
-                        <outlet property="recordingLoader" destination="Qvq-t4-y7g" id="Nwc-dt-IkA"/>
                         <outlet property="speechBehavior" destination="UaS-lC-hUC" id="hJF-qN-9YY"/>
                         <segue destination="8IU-nr-TCd" kind="modal" identifier="DisclaimerSegue" id="p9T-Ew-O9g"/>
                     </connections>
@@ -655,7 +648,11 @@
                     </connections>
                 </customObject>
                 <customObject id="UaS-lC-hUC" userLabel="Speech" customClass="OTSpeechBehavior">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="twoState" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
+                        <action selector="speechBehavior_TextChanged:" destination="b2A-wG-Mz4" eventType="valueChanged" id="Q2L-ra-8pz"/>
                         <outlet property="btnRecord" destination="Qot-mm-bch" id="0s9-6u-b70"/>
                         <outlet property="txtOutput" destination="Ial-X5-VCO" id="Hru-BV-jdc"/>
                     </connections>

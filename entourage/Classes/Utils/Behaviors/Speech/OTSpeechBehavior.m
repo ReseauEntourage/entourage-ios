@@ -98,6 +98,7 @@
             [self.txtOutput setText:[NSString stringWithFormat:@"%@ %@", text, [result lowercaseString]]];
         if([self.txtOutput class] == [OTTextView class])
             [((OTTextView *)self.txtOutput) updateAfterSpeech];
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
     [self updateRecordButton];
 }
