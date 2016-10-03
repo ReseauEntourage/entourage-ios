@@ -59,40 +59,20 @@
 
 - (void)handleRemoteNotification:(NSDictionary *)userInfo {
     OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:pnData.sender message:pnData.message preferredStyle:UIAlertControllerStyleAlert];
     if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST])
-        [self handleJoinRequestNotification:pnData showingAlert:alert];
+        [self handleJoinRequestNotification:pnData];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_REQUEST_ACCEPTED])
-        [self handleAcceptJoinNotification:pnData showingAlert:alert];
+        [self handleAcceptJoinNotification:pnData];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE]) {
         if([self canHandleChatNotificationInPlace:pnData])
             return;
         else
-            [self handleChatNotification:pnData showingAlert:alert];
+            [self handleChatNotification:pnData];
     }
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_INVITE_REQUEST])
-        [self handleInviteRequestNotification:pnData showingAlert:alert];
+        [self handleInviteRequestNotification:pnData];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_INVITE_STATUS])
-        [self handleInviteStatusNotification:pnData showingAlert:alert];
-    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-    [alert addAction:defaultAction];
-
-    [self showAlert:alert withPresentingBlock:^(UIViewController *topController, UIViewController *presentedViewController) {
-        BOOL showMessage = YES;
-        if ([topController isKindOfClass:[OTActiveFeedItemViewController class]]) {
-            OTActiveFeedItemViewController *feedItemVC = (OTActiveFeedItemViewController*)topController;
-            if ([feedItemVC.feedItem.uid isEqual:pnData.joinableId]) {
-                showMessage = NO;
-                [feedItemVC reloadMessages];
-            }
-        }
-        if ([topController isKindOfClass:[OTMainViewController class]]) {
-            OTMainViewController *mainController = (OTMainViewController*)topController;
-            [mainController getData];
-        }
-        if(showMessage)
-            [presentedViewController presentViewController:alert animated:YES completion:nil];
-    }];
+        [self handleInviteStatusNotification:pnData];
 }
 
 - (void)handleLocalNotification:(NSDictionary *)userInfo {
@@ -119,29 +99,24 @@
 
 #pragma mark - private methods
 
-- (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
+- (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData
 {
-    [[[OTFeedItemFactory createForType:pnData.feedType andId:pnData.feedId] getStateInfo] loadWithSuccess:^(OTFeedItem *item) {
-        if(![item.joinStatus isEqualToString:JOIN_PENDING])
-            return;
-        OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
-        UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
+    UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] reject:joiner success:nil failure:nil];
-        }];
-        UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    }];
+    UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] accept:joiner success:nil failure:nil];
-        }];
-        [alert addAction:refuseJoinRequestAction];
-        [alert addAction:acceptJoinRequestAction];
-    } error:nil];
+    }];
+    [self displayAlertWithActions:@[refuseJoinRequestAction, acceptJoinRequestAction] forPushData:pnData];
 }
 
-- (void)handleAcceptJoinNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
+- (void)handleAcceptJoinNotification:(OTPushNotificationsData *)pnData
 {
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
     }];
-    [alert addAction:openAction];
+    [self displayAlertWithActions:@[openAction] forPushData:pnData];
 }
 
 - (BOOL)canHandleChatNotificationInPlace:(OTPushNotificationsData *)pnData {
@@ -156,15 +131,15 @@
     return NO;
 }
 
-- (void)handleChatNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
+- (void)handleChatNotification:(OTPushNotificationsData *)pnData
 {
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
     }];
-    [alert addAction:openAction];
+    [self displayAlertWithActions:@[openAction] forPushData:pnData];
 }
 
-- (void)handleInviteRequestNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
+- (void)handleInviteRequestNotification:(OTPushNotificationsData *)pnData
 {
     OTEntourageInvitation *invitation = [OTEntourageInvitation fromPushNotifiationsData:pnData];
     UIAlertAction *refuseInviteRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -184,26 +159,15 @@
             [SVProgressHUD showWithStatus:OTLocalizedString(@"acceptJoinFailed")];
         }];
     }];
-    [alert addAction:refuseInviteRequestAction];
-    [alert addAction:acceptInviteRequestAction];
+    [self displayAlertWithActions:@[refuseInviteRequestAction, acceptInviteRequestAction] forPushData:pnData];
 }
 
-- (void)handleInviteStatusNotification:(OTPushNotificationsData *)pnData showingAlert:(UIAlertController*)alert
+- (void)handleInviteStatusNotification:(OTPushNotificationsData *)pnData
 {
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OTDeepLinkService new] navigateTo:pnData.feedId withType:pnData.feedType];
     }];
-    [alert addAction:openAction];
-}
-
-- (void)showAlert:(UIAlertController *)alert withPresentingBlock:(void(^)(UIViewController *, UIViewController *))presentingBlock {
-    UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
-    if (rootVC.presentedViewController) {
-        UIViewController *topController = [[OTDeepLinkService new] getTopViewController];
-        if(presentingBlock)
-            presentingBlock(topController, rootVC.presentedViewController);
-    } else
-        [rootVC presentViewController:alert animated:YES completion:nil];
+    [self displayAlertWithActions:@[openAction] forPushData:pnData];
 }
 
 - (void)sendAppInfoWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
@@ -217,6 +181,40 @@
         if(failure)
             failure(error);
     }];
+}
+
+- (void)displayAlertWithActions:(NSArray<UIAlertAction*> *)actions forPushData:(OTPushNotificationsData *)pnData  {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:pnData.sender message:pnData.message preferredStyle:UIAlertControllerStyleAlert];
+    for(UIAlertAction *action in actions)
+        [alert addAction:action];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    [alert addAction:defaultAction];
+    [self showAlert:alert withPresentingBlock:^(UIViewController *topController, UIViewController *presentedViewController) {
+        BOOL showMessage = YES;
+        if ([topController isKindOfClass:[OTActiveFeedItemViewController class]]) {
+            OTActiveFeedItemViewController *feedItemVC = (OTActiveFeedItemViewController*)topController;
+            if ([feedItemVC.feedItem.uid isEqual:pnData.joinableId]) {
+                showMessage = NO;
+                [feedItemVC reloadMessages];
+            }
+        }
+        if ([topController isKindOfClass:[OTMainViewController class]]) {
+            OTMainViewController *mainController = (OTMainViewController*)topController;
+            [mainController getData];
+        }
+        if(showMessage)
+            [presentedViewController presentViewController:alert animated:YES completion:nil];
+    }];
+}
+
+- (void)showAlert:(UIAlertController *)alert withPresentingBlock:(void(^)(UIViewController *, UIViewController *))presentingBlock {
+    UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (rootVC.presentedViewController) {
+        UIViewController *topController = [[OTDeepLinkService new] getTopViewController];
+        if(presentingBlock)
+            presentingBlock(topController, rootVC.presentedViewController);
+    } else
+        [rootVC presentViewController:alert animated:YES completion:nil];
 }
 
 @end

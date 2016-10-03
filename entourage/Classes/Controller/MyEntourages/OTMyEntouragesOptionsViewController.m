@@ -55,7 +55,7 @@
 }
 
 - (IBAction)createEncounter {
-    ge[self.delegate createEncounter];
+    [self.delegate createEncounter];
 }
 
 - (IBAction)close {

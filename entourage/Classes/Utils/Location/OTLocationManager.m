@@ -27,25 +27,20 @@
 }
 
 - (void)startLocationUpdates {
-    if (self.locationManager == nil) {
+    if (self.locationManager == nil)
         self.locationManager = [[CLLocationManager alloc] init];
-        //iOS 8+
-        if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-            [self.locationManager requestAlwaysAuthorization];
-        }
-        //iOS 9+
-        if ([self.locationManager respondsToSelector:@selector(allowsBackgroundLocationUpdates)]) {
-            self.locationManager.allowsBackgroundLocationUpdates = YES;
-        }
-    }
+    //iOS 8+
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [self.locationManager requestAlwaysAuthorization];
+    //iOS 9+
+    if ([self.locationManager respondsToSelector:@selector(allowsBackgroundLocationUpdates)])
+        self.locationManager.allowsBackgroundLocationUpdates = YES;
     
     self.locationManager.pausesLocationUpdatesAutomatically = NO;
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.activityType = CLActivityTypeFitness;
-    
     self.locationManager.distanceFilter = 10; // meters
-    
     [self.locationManager startUpdatingLocation];
 }
 
