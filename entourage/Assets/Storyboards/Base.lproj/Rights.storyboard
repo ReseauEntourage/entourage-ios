@@ -236,8 +236,89 @@
             </objects>
             <point key="canvasLocation" x="5894" y="-44"/>
         </scene>
+        <!--Rights View Controller-->
+        <scene sceneID="h0D-Sa-iJd">
+            <objects>
+                <viewController id="evb-jd-QBs" customClass="OTRightsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kAO-nG-hah"/>
+                        <viewControllerLayoutGuide type="bottom" id="qfP-1j-fFF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wfa-yT-nOy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="ZAK-ei-4qC">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y5g-nI-qNv">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="k7Q-3y-7Fq"/>
+                                    <constraint firstAttribute="width" constant="280" id="oyE-Eg-eGj"/>
+                                </constraints>
+                                <string key="text">Afin de vous suggérer
+des maraudes, des
+demandes et des contributions.
+Entourage doit connaître
+votre position.
+
+Allez dans :
+
+Réglages &gt; Confidentialité
+Services de localisation  et activez Entourage</string>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="21"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="k7Q-3y-7Fq"/>
+                                        <exclude reference="oyE-Eg-eGj"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entourageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="6e2-gd-bHF">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="JLh-ex-9R0"/>
+                                    <constraint firstAttribute="width" constant="75" id="oXr-0C-9yf"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="zMi-h0-yrU"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="zmF-yC-tiM"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZAK-ei-4qC" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" constant="-24" id="9qO-rW-Awm"/>
+                            <constraint firstItem="Y5g-nI-qNv" firstAttribute="top" secondItem="6e2-gd-bHF" secondAttribute="bottom" constant="15" id="Du9-nw-JSD"/>
+                            <constraint firstItem="ZAK-ei-4qC" firstAttribute="top" secondItem="Wfa-yT-nOy" secondAttribute="topMargin" id="Fob-yf-Vq3"/>
+                            <constraint firstItem="qfP-1j-fFF" firstAttribute="top" secondItem="ZAK-ei-4qC" secondAttribute="bottom" id="JRO-xQ-Kfi"/>
+                            <constraint firstItem="6e2-gd-bHF" firstAttribute="centerX" secondItem="Wfa-yT-nOy" secondAttribute="centerX" id="MTg-eI-8GU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZAK-ei-4qC" secondAttribute="trailing" constant="-24" id="Sdl-8y-v64"/>
+                            <constraint firstItem="Y5g-nI-qNv" firstAttribute="top" secondItem="6e2-gd-bHF" secondAttribute="bottom" constant="15" id="UAR-Qf-G5v"/>
+                            <constraint firstItem="qfP-1j-fFF" firstAttribute="top" secondItem="Y5g-nI-qNv" secondAttribute="bottom" constant="68" id="WHJ-s2-INu"/>
+                            <constraint firstItem="Y5g-nI-qNv" firstAttribute="trailing" secondItem="Wfa-yT-nOy" secondAttribute="trailingMargin" id="Zcg-UM-aci"/>
+                            <constraint firstItem="Y5g-nI-qNv" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" id="jZR-Zf-yLi"/>
+                            <constraint firstItem="Y5g-nI-qNv" firstAttribute="centerX" secondItem="Wfa-yT-nOy" secondAttribute="centerX" id="tH1-9x-8Pq"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Du9-nw-JSD"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="ZAK-ei-4qC" id="OvW-pw-bgQ"/>
+                        <outlet property="explanationLabel" destination="Y5g-nI-qNv" id="VeK-uH-7Ye"/>
+                        <outlet property="logoImageView" destination="6e2-gd-bHF" id="DGN-FB-Z1p"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AWh-bJ-aSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5495" y="667"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="bg" width="166" height="296"/>
+        <image name="entourageLogo" width="75" height="75"/>
         <image name="mapPinSquare" width="56" height="56"/>
         <image name="notificationsSquare" width="56" height="56"/>
     </resources>
