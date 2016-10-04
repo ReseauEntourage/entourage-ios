@@ -117,6 +117,7 @@
                     <navigationItem key="navigationItem" id="5FM-3S-kdS"/>
                     <connections>
                         <segue destination="gUz-vW-h1c" kind="show" identifier="GeoToNotificationsSegue" id="X8W-6a-Kl5"/>
+                        <segue destination="evb-jd-QBs" kind="show" identifier="NoLocationRightsSegue" id="MOn-Od-XM1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZkO-Iy-APf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -234,12 +235,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fhm-Wi-4x8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5894" y="-44"/>
+            <point key="canvasLocation" x="5892" y="-45"/>
         </scene>
-        <!--Rights View Controller-->
+        <!--Geolocation Denied-->
         <scene sceneID="h0D-Sa-iJd">
             <objects>
-                <viewController id="evb-jd-QBs" customClass="OTRightsViewController" sceneMemberID="viewController">
+                <viewController id="evb-jd-QBs" userLabel="Geolocation Denied" customClass="OTGeolocationDeniedViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kAO-nG-hah"/>
                         <viewControllerLayoutGuide type="bottom" id="qfP-1j-fFF"/>
@@ -306,14 +307,12 @@ Services de localisation  et activez Entourage</string>
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="backgroundImageView" destination="ZAK-ei-4qC" id="OvW-pw-bgQ"/>
-                        <outlet property="explanationLabel" destination="Y5g-nI-qNv" id="VeK-uH-7Ye"/>
-                        <outlet property="logoImageView" destination="6e2-gd-bHF" id="DGN-FB-Z1p"/>
+                        <segue destination="gUz-vW-h1c" kind="show" identifier="GrantedGeoSegue" id="c2y-uN-gYU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AWh-bJ-aSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5495" y="667"/>
+            <point key="canvasLocation" x="5084" y="682"/>
         </scene>
     </scenes>
     <resources>
@@ -322,4 +321,7 @@ Services de localisation  et activez Entourage</string>
         <image name="mapPinSquare" width="56" height="56"/>
         <image name="notificationsSquare" width="56" height="56"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="c2y-uN-gYU"/>
+    </inferredMetricsTieBreakers>
 </document>

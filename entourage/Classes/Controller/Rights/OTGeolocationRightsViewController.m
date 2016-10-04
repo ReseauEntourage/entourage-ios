@@ -18,15 +18,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.title = @"";
     [self addIgnoreButton];
     [self.navigationController presentTransparentNavigationBar];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationAuthorizationChanged:) name: kNotificationLocationAuthorizationChanged object:nil];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)addIgnoreButton {
-    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString withTarget:self andAction:@selector(goToNotifications) colored:[UIColor whiteColor]];
+    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString withTarget:self andAction:@selector(ignore) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:ignoreButton];
 }
 
@@ -42,19 +51,21 @@
 #pragma mark - App authorization notifications
 
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
-    NSLog(@"received kNotificationLocationAuthorizationChanged");
     BOOL allowed = [notification readAllowedLocation];
     if (allowed)
         [self goToNotifications];
     else
-#warning What to show?
-        ;
+        [self performSegueWithIdentifier:@"NoLocationRightsSegue" sender:self];
 }
 
 #pragma mark - IBAction
 
 - (void)goToNotifications {
     [self performSegueWithIdentifier:@"GeoToNotificationsSegue" sender:self];
+}
+
+- (void)ignore {
+    [[OTLocationManager sharedInstance] startLocationUpdates];
 }
 
 - (IBAction)doContinue {

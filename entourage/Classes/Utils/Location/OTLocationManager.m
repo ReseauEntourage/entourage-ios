@@ -11,6 +11,7 @@
 @interface OTLocationManager () <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic) CLAuthorizationStatus status;
 
 @end
 
@@ -27,6 +28,11 @@
 }
 
 - (void)startLocationUpdates {
+    if(self.status == kCLAuthorizationStatusDenied) {
+        [self notifyStatus];
+        return;
+    }
+    
     if (self.locationManager == nil)
         self.locationManager = [[CLLocationManager alloc] init];
     //iOS 8+
@@ -41,6 +47,7 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.activityType = CLActivityTypeFitness;
     self.locationManager.distanceFilter = 10; // meters
+    
     [self.locationManager startUpdatingLocation];
 }
 
@@ -63,13 +70,14 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    if (status == kCLAuthorizationStatusNotDetermined)
-        return;
-    
-    self.started = status == kCLAuthorizationStatusAuthorizedAlways;
+    self.status = status;
+    [self notifyStatus];
+}
+
+- (void)notifyStatus {
+    self.started = self.status == kCLAuthorizationStatusAuthorizedAlways;
     NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:self.started] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationAuthorizationChanged object:nil userInfo:info];
 }
-
 
 @end
