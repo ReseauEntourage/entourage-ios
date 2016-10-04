@@ -61,7 +61,7 @@
                                             <constraint firstAttribute="height" constant="19" id="azt-gf-rtm"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RcA-br-gXo">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RcA-br-gXo">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="ne3-GZ-O2F"/>
                                             <constraint firstAttribute="width" constant="35" id="yug-cM-xOd"/>

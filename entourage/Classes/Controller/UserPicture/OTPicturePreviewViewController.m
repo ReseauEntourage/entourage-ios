@@ -74,8 +74,9 @@
     //Calculate the required area from the scrollview
     CGRect visibleRect;
     float scale = 1.0 / self.scrollView.zoomScale;
-    visibleRect.origin.x = self.scrollView.contentOffset.x / self.scrollView.contentSize.width * self.image.size.width;
-    visibleRect.origin.y = self.scrollView.contentOffset.y / self.scrollView.contentSize.height * self.image.size.height;
+    float max = self.image.size.width > self.image.size.height ? self.image.size.width : self.image.size.height;
+    visibleRect.origin.x = self.scrollView.contentOffset.x / self.scrollView.contentSize.width * max;
+    visibleRect.origin.y = self.scrollView.contentOffset.y / self.scrollView.contentSize.height * max;
     visibleRect.size.width = self.image.size.width * scale;
     visibleRect.size.height = self.image.size.height * scale;
     UIImage *image = [self imageByCropping:self.imageView.image toRect:visibleRect];
