@@ -12,6 +12,7 @@
 #import "OTFeedItemFactory.h"
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
+#import "OTTour.h"
 
 #define BUTTON_NOTREQUESTED @"joinButton"
 #define BUTTON_PENDING      @"pendingRequestButton"
@@ -59,7 +60,10 @@
 
 - (void)updateLabel {
     if (self.feedItem.author.uID.intValue == self.currentUser.sid.intValue)
-        [self updateLabelWithText:OTLocalizedString(@"join_active") andColor:[UIColor appOrangeColor]];
+        if([self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
+            [self updateLabelWithText:OTLocalizedString(@"ongoing") andColor:[UIColor appOrangeColor]];
+        else
+            [self updateLabelWithText:OTLocalizedString(@"join_active") andColor:[UIColor appOrangeColor]];
     else {
         if ([JOIN_ACCEPTED isEqualToString:self.feedItem.joinStatus])
             [self updateLabelWithText:OTLocalizedString(@"join_active") andColor:[UIColor appOrangeColor]];

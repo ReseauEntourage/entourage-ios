@@ -57,8 +57,10 @@
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
-        //
-        [self setText:OTLocalizedString(@"join_active")];
+        if([feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
+            [self setText:OTLocalizedString(@"ongoing")];
+        else
+            [self setText:OTLocalizedString(@"join_active")];
         [self setTextColor:[UIColor appOrangeColor]];
     } else {
         if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
