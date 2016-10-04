@@ -21,7 +21,7 @@
     self = [super init];
     if(self) {
         self.isActive = YES;
-        self.isInvited = YES;
+        self.isInvited = NO;
         self.isOrganiser = YES;
         self.isClosed = YES;
         self.showDemand = YES;
@@ -44,7 +44,7 @@
         return @[
                     @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyActive active:self.isActive],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyInvitation active:self.isInvited],
+                        //[OTFeedItemFilter createFor:FeedItemFilterKeyInvitation active:self.isInvited],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyOrganiser active:self.isOrganiser],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyClosed active:self.isClosed]
                     ],

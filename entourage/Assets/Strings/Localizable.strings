@@ -153,6 +153,7 @@
 "invitations" = "Invitations";
 "organiser" = "Organisateur";
 "closed" = "Passé";
+"created_by_me_unique" = "Créés par moi uniquement";
 
 // Feed Item details
 "item_option_close" = "Arrêter";

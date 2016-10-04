@@ -34,7 +34,7 @@
         case FeedItemFilterKeyInvitation:
             return OTLocalizedString(@"invitations");
         case FeedItemFilterKeyOrganiser:
-            return OTLocalizedString(@"organiser");
+            return OTLocalizedString(@"created_by_me_unique");
         case FeedItemFilterKeyClosed:
             return OTLocalizedString(@"closed");
         case FeedItemFilterKeyDemand:
