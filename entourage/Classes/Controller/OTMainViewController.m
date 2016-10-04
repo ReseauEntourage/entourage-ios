@@ -290,6 +290,7 @@
 - (void)configureMapView {
     self.mapView.showsPointsOfInterest = NO;
    	self.mapView.showsUserLocation = YES;
+    self.mapView.pitchEnabled = NO;
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
     [self.mapView setRegion:region animated:NO];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
