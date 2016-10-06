@@ -9,6 +9,7 @@
 #import "OTEntouragesTableViewCell.h"
 #import "UIColor+entourage.h"
 #import "OTBadgeNumberService.h"
+#import "OTTableDataSourceBehavior.h"
 
 @implementation OTEntouragesTableViewCell
 
@@ -31,6 +32,13 @@
     else
         self.lblLastMessage.textColor = [UIColor appGreyishColor];
     self.lblLastMessage.text = [self getAuthorTextFor:item.lastMessage];
+}
+
+- (IBAction)showUserDetails:(id)sender {
+    [Flurry logEvent:@"UserProfileClick"];
+    NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
+    OTFeedItem *feedItem = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
+    [self.userProfile showProfile:feedItem.author.uID];
 }
 
 #pragma mark - private methods

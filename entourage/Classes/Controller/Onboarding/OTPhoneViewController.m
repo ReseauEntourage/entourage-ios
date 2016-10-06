@@ -44,6 +44,7 @@
 }
 
 - (IBAction)doContinue {
+    [Flurry logEvent:@"TelephoneSubmit"];
     OTUser *temporaryUser = [OTUser new];
     NSString *phone = self.phoneTextField.text;
     temporaryUser.phone = phone;
@@ -58,6 +59,7 @@
         } failure:^(NSError *error) {
             NSString *errorMessage = [error userUpdateMessage];
             if (errorMessage) {
+                [Flurry logEvent:@"TelephoneSubmitFail"];
                 [SVProgressHUD showErrorWithStatus:errorMessage];
                 NSLog(@"ERR: something went wrong on onboarding user phone: %@", error.description);
             } else {

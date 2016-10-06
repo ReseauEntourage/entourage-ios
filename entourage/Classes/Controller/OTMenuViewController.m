@@ -9,32 +9,21 @@
 #import "OTAppDelegate.h"
 #import "OTMenuViewController.h"
 #import "OTConsts.h"
-
-// Controller
 #import "SWRevealViewController.h"
 #import "OTLoginViewController.h"
 #import "UIViewController+menu.h"
 #import "OTSettingsViewController.h"
 #import "OTUserViewController.h"
-
 #import "NSUserDefaults+OT.h"
-
-
-// Model
 #import "OTMenuItem.h"
 #import "OTUser.h"
-
-// View
 #import "OTMenuTableViewCell.h"
 #import "SVProgressHUD.h"
-
-// Utils
 #import "UIButton+AFNetworking.h"
 #import "UIButton+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "NSBundle+entourage.h"
 @import MessageUI;
-
 
 /* MenuItem identifiers */
 NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuIdentifierForMap";
@@ -90,6 +79,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [Flurry logEvent:@"OpenMenu"];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
 }
@@ -126,14 +116,8 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
 	else {
-//        if (indexPath.row == 1) {
-//            [self sendDebugEmail];
-//        } else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
 		[self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
-
-		[Flurry logEvent:@"Open_Screen_From_Menu" withParameters:@{ @"screen" : menuItem.segueIdentifier }];
-        //}
 	}
     [[tableView cellForRowAtIndexPath:indexPath]setSelected:NO];
 }
@@ -142,23 +126,10 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 #pragma mark - Actions
 
 - (IBAction)showProfile {
-    //[self openControllerWithSegueIdentifier:@"OTUserProfile"];
-//    SWRevealViewController *revealViewController = self.revealViewController;
-    //[revealViewController revealToggle:self];
+    [Flurry logEvent:@"TapMyProfilePhoto"];
     [self performSegueWithIdentifier:@"segueMenuIdentifierForProfile" sender:self];
-    //[revealViewController performSegueWithIdentifier:@"RevealProfileSegue" sender:self];
 }
 
-/**
- * Method which opens the controller according to segueIdentifier.
- * This method has a particuler implementation.
- * - if the controller is not instanciated, we load it by the segue in Main.Storyboard
- * - if the controller is instanciated and isn't the current frontViewController, we push the new controller
- * - if the controller is instanciated and is the current frontViewController, we do only a revealToggle in order to avoid the effect of disappearance and  appearance
- *
- * @param segueIdentifier
- * The identifier of a segue
- */
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier {
 	UIViewController *nextViewController = [self.controllersDictionary objectForKey:segueIdentifier];
 
@@ -180,71 +151,21 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 #pragma mark - Storyboard
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuAboutIdentifier])
+        [Flurry logEvent:@"AboutClick"];
+    else if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuDisconnectIdentifier])
+        [Flurry logEvent:@"LogOut"];
     if (![self.controllersDictionary objectForKey:segue.identifier] && [segue.identifier isEqualToString:@"segueMenuIdentifierForProfile"]) {
-       // [self.controllersDictionary setObject:segue.destinationViewController forKey:segue.identifier];
-            UINavigationController *navController = segue.destinationViewController;
-            OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
-            controller.user = [[NSUserDefaults standardUserDefaults] currentUser];
-        
+        UINavigationController *navController = segue.destinationViewController;
+        OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
+        controller.user = [[NSUserDefaults standardUserDefaults] currentUser];
     }
 }
 
-/*
-- (void)sendDebugEmail {
-    //Email
-    if (![MFMailComposeViewController canSendMail]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
-                                                                       message:OTLocalizedString(@"about_email_notavailable")
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        [self presentViewController:alert animated:YES completion:nil];
-        
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
-                                                                style:UIAlertActionStyleDefault
-                                                              handler:^(UIAlertAction * _Nonnull action) {}];
-        
-        [alert addAction:defaultAction];
-        return;
-    }
-    MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
-    composeVC.mailComposeDelegate = self;
-    
-    // Configure the fields of the interface.
-    [composeVC setToRecipients:@[@"ciprian.habuc@tecknoworks.com"]];
-    [composeVC setSubject:@"EMA - debug info"];
-    [composeVC setMessageBody:@"" isHTML:NO];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"EMA.log"];
-    NSData *fileData = [NSData dataWithContentsOfFile:logPath];
-    
-    [composeVC addAttachmentData:fileData mimeType:@"text/text" fileName:@"EMA.log"];
-    
-    // Present the view controller modally.
-    [self presentViewController:composeVC animated:YES completion:nil];
 
-}
- */
 
-/*
-#pragma mark - MFMailComposerDelegate
-
--(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-*/
-
-/**************************************************************************************************/
 #pragma mark - Private methods
 
-/**
- * Method which configure controllersDictionary with the first controller displayed by Main.storyboard.
- * According to the storyboard, this first controller is the Map
- * This method should be called in viewDidLoad
- *
- * @see OTMenuViewController - viewDidLoad
- */
 - (void)configureControllersDictionary {
 	UIViewController *frontViewController = self.revealViewController.frontViewController;
 

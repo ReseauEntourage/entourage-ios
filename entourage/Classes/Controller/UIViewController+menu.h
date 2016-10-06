@@ -19,5 +19,6 @@
 - (UIBarButtonItem *)setupCloseModal;
 - (UIBarButtonItem *)setupCloseModalTransparent;
 - (UIImage*)setupLogoImage;
+- (UIBarButtonItem *)setupCloseModalWithTarget:(id)target andSelector:(SEL)action;
 
 @end

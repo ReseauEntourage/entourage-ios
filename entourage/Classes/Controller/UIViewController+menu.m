@@ -90,6 +90,10 @@
     return [self setupCloseModalWithImageNamed:@"close.png"];
 }
 
+- (UIBarButtonItem *)setupCloseModalWithTarget:(id)target andSelector:(SEL)action {
+    return [self setupCloseModalWithImageNamed:@"close.png" target:target andSelector:action];
+}
+
 - (UIBarButtonItem *)setupCloseModalTransparent {
     return [self setupCloseModalWithImageNamed:@"whiteClose.png"];
 }
@@ -106,4 +110,12 @@
 - (void)dismissModal {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (UIBarButtonItem *)setupCloseModalWithImageNamed:(NSString *)imageName target:(id)target andSelector:(SEL)action {
+    UIBarButtonItem *menuButton = [self setupCloseModalWithImageNamed:imageName];
+    [menuButton setTarget:target];
+    [menuButton setAction:action];
+    return  menuButton;
+}
+
 @end

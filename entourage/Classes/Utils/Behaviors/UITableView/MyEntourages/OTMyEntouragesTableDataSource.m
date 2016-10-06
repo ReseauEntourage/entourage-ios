@@ -74,6 +74,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [Flurry logEvent:@"MessageOpen"];
     OTFeedItem *feedItem = (OTFeedItem *)[self getItemAtIndexPath:indexPath];
     [self.detailsBehavior showDetails:feedItem];
 }

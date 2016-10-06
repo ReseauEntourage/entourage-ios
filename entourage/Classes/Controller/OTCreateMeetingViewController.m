@@ -97,6 +97,7 @@
 }
 
 - (IBAction)sendEncounter:(UIBarButtonItem*)sender {
+    [Flurry logEvent:@"ValidateEncounterClick"];
     sender.enabled = NO;
     __block OTEncounter *encounter = [OTEncounter new];
     encounter.date = [NSDate date];

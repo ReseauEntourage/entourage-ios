@@ -14,6 +14,7 @@
 #import "NSUserDefaults+OT.h"
 
 #define SHOW_LOGIN_SEGUE @"WelcomeLoginSegue"
+#define CONTINUE_ONBOARDING_SEGUE @"SegueOnboarding"
 
 @interface OTWelcomeViewController() <UIWebViewDelegate>
 
@@ -51,6 +52,11 @@
 
 - (void)doLogin {
     [self performSegueWithIdentifier:SHOW_LOGIN_SEGUE sender:self];
+}
+
+- (IBAction)continueOnboarding:(id)sender {
+    [Flurry logEvent:@"WelcomeScreenContinue"];
+    [self performSegueWithIdentifier:CONTINUE_ONBOARDING_SEGUE sender:self];
 }
 
 #pragma mark - UIWebView

@@ -167,9 +167,7 @@
     if([view.annotation isKindOfClass:[OTCustomAnnotation class]])
         annotation = (OTCustomAnnotation *)view.annotation;
     if (annotation == nil) return;
-    
-    [Flurry logEvent:@"Open_POI_From_Map" withParameters:@{ @"poi_id" : annotation.poi.sid }];
-    
+    [Flurry logEvent:@"POIView"];
     [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation];
 }
 

@@ -21,10 +21,12 @@
 }
 
 - (void)pickFromGallery:(UIButton *)sender {
+    [Flurry logEvent:@"PhotoUploadSubmit"];
     [self pickPhotoFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
 }
 
 - (void)pickPhotoFromSource:(UIImagePickerControllerSourceType)sourceType {
+    [Flurry logEvent:@"PhotoTakeSubmit"];
     UIImagePickerController *controller = [UIImagePickerController new];
     controller.modalPresentationStyle = UIModalPresentationCurrentContext;
     controller.sourceType = sourceType;

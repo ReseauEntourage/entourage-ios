@@ -22,6 +22,45 @@
     OTFeedItemFilter *item = (OTFeedItemFilter *)[self.tableDataSource getItemAtIndexPath:indexPath];
     UISwitch *swtControl = (UISwitch *)sender;
     item.active = swtControl.isOn;
+    NSString *message = @"";
+    switch (item.key) {
+        case FeedItemFilterKeyMedical:
+            message = @"ShowOnlyMedicalToursClick";
+            break;
+        case FeedItemFilterKeySocial:
+            message = @"ShowOnlySocialToursClick";
+            break;
+        case FeedItemFilterKeyDistributive:
+            message = @"ShowOnlyDistributionToursClick";
+            break;
+        case FeedItemFilterKeyDemand:
+            message = @"ShowOnlyAsksClick";
+            break;
+        case FeedItemFilterKeyContribution:
+            message = @"ShowOnlyOffersClick";
+            break;
+        case FeedItemFilterKeyTour:
+            message = @"ShowToursOnlyFilterKey";
+            break;
+        case FeedItemFilterKeyOnlyMyEntourages:
+            message = @"ShowOnlyMineFilter";
+            break;
+        case FeedItemFilterKeyActive:
+            message = @"ActiveMessagesFilter";
+            break;
+        case FeedItemFilterKeyInvitation:
+            message = @"InvitationsFilter";
+            break;
+        case FeedItemFilterKeyOrganiser:
+            message = @"OrganizerFilter";
+            break;
+        case FeedItemFilterKeyClosed:
+            message = @"PastFilter";
+            break;
+        default:
+            break;
+    }
+    [Flurry logEvent:message];
 }
 
 @end

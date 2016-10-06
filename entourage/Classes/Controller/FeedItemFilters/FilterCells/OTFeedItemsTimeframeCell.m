@@ -48,12 +48,18 @@
     [self.btnSecond setSelected:self.btnSecond == sender];
     [self.btnThird setSelected:self.btnThird == sender];
     NSArray *timeframes = self.tableDataSource.currentFilter.timeframes;
-    if(self.btnFirst.isSelected)
+    if(self.btnFirst.isSelected) {
+        [Flurry logEvent:@"ClickFilter1Value"];
         filter.timeframeInHours = [timeframes[0] intValue];
-    else if(self.btnSecond.isSelected)
+    }
+    else if(self.btnSecond.isSelected) {
+        [Flurry logEvent:@"ClickFilter2Value"];
         filter.timeframeInHours = [timeframes[1] intValue];
-    else
+    }
+    else {
+        [Flurry logEvent:@"ClickFilter3Value"];
         filter.timeframeInHours = [timeframes[2] intValue];
+    }
     self.btnFirst.titleLabel.font = self.btnFirst == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
     self.btnSecond.titleLabel.font = self.btnSecond == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
     self.btnThird.titleLabel.font = self.btnThird == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;

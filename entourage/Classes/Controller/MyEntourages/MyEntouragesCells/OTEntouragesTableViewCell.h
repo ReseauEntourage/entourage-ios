@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "OTFeedItem.h"
 #import "OTSummaryProviderBehavior.h"
+#import "OTUserProfileBehavior.h"
+#import "OTDataSourceBehavior.h"
 
 @interface OTEntouragesTableViewCell : UITableViewCell
 
@@ -19,6 +21,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *btnProfilePicture;
 @property (nonatomic, weak) IBOutlet UILabel *lblLastMessage;
 @property (nonatomic, weak) IBOutlet OTSummaryProviderBehavior *summaryProvider;
+@property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;
+@property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
 
 - (void)configureWith:(OTFeedItem *)item;
 

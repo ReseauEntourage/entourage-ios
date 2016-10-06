@@ -41,6 +41,7 @@
 }
 
 - (IBAction)doContinue {
+    [Flurry logEvent:@"SubmitInstantPhoto"];
     [SVProgressHUD show];
     UIImage *finalImage = [self cropVisibleArea];
     finalImage = [finalImage resizeTo:CGSizeMake(MaxImageSize, MaxImageSize)];

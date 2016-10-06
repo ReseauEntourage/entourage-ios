@@ -104,6 +104,7 @@
 }
 
 - (IBAction)sendMessage {
+    [Flurry logEvent:@"AddContentToMessage"];
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.txtChat.text withSuccess:^(OTFeedItemMessage *message) {
         [SVProgressHUD dismiss];
@@ -116,6 +117,7 @@
 }
 
 - (IBAction)showMap {
+    [Flurry logEvent:@"EntouragePublicPageViewFromMessages"];
     [self performSegueWithIdentifier:@"SegueMap" sender:self];
 }
 

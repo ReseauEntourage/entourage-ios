@@ -73,13 +73,15 @@
     }
     else {
         [self.btnRecord setEnabled:NO];
-        if (!self.isRecording)
+        if (!self.isRecording) {
+            [Flurry logEvent:@"SpeechRecognitionMessage"];
             [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
                 if (granted)
                     self.speechRecognizer = [[SKRecognizer alloc] initWithType:SKSearchRecognizerType detection:SKShortEndOfSpeechDetection language:@"fra-FRA" delegate:self];
                 else
                     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"microphoneNotEnabled", nil) message:NSLocalizedString(@"promptForMicrophone", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             }];
+        }
         else
             [self.speechRecognizer stopRecording];
     }
@@ -122,6 +124,7 @@
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {
+    [Flurry logEvent:@"WriteMessage"];
     [self updateRecordButton];
 }
 
