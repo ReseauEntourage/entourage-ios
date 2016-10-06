@@ -63,6 +63,10 @@
 		1E2232D91D56998E004CD5E8 /* OTAddressBookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232D81D56998E004CD5E8 /* OTAddressBookService.m */; };
 		1E2232DC1D5699AD004CD5E8 /* OTMessagingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232DB1D5699AD004CD5E8 /* OTMessagingService.m */; };
 		1E2432B81DA6BED3000EF74F /* libFlurry_7.6.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E2432B71DA6BED3000EF74F /* libFlurry_7.6.6.a */; };
+		1E2432BE1DA6CC8B000EF74F /* OTAddressBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2432BB1DA6CC8B000EF74F /* OTAddressBookItem.m */; };
+		1E2432BF1DA6CC8B000EF74F /* OTAddressBookPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2432BD1DA6CC8B000EF74F /* OTAddressBookPhone.m */; };
+		1E2432C51DA6CCE1000EF74F /* OTContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2432C21DA6CCE1000EF74F /* OTContactInfoCell.m */; };
+		1E2432C61DA6CCE1000EF74F /* OTContactPhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2432C41DA6CCE1000EF74F /* OTContactPhoneCell.m */; };
 		1E29E4EE1DA3D09300501F99 /* OTGeolocationDeniedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E29E4ED1DA3D09300501F99 /* OTGeolocationDeniedViewController.m */; };
 		1E2C600C1D775F92004B195A /* OTEntourageChangedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2C600B1D775F92004B195A /* OTEntourageChangedHandler.m */; };
 		1E2C600F1D775FCF004B195A /* OTTourChangedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2C600E1D775FCF004B195A /* OTTourChangedHandler.m */; };
@@ -79,7 +83,6 @@
 		1E2F292E1D4BF5FF00ABC68A /* OTContactsTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F292D1D4BF5FF00ABC68A /* OTContactsTableCellProviderBehavior.m */; };
 		1E3174911D10299400027824 /* QuitFeedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E3174901D10299400027824 /* QuitFeedItem.storyboard */; };
 		1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E40A3331D4A2A10009E2D73 /* UIBarButtonItem+factory.m */; };
-		1E40A3401D4A81C3009E2D73 /* OTAddressBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E40A33F1D4A81C3009E2D73 /* OTAddressBookItem.m */; };
 		1E488E001D4FAF8B00A2E5B0 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E488DFF1D4FAF8B00A2E5B0 /* Onboarding.storyboard */; };
 		1E488E021D4FAFA600A2E5B0 /* UserProfileDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E488E011D4FAFA600A2E5B0 /* UserProfileDetails.storyboard */; };
 		1E488E091D4FB67200A2E5B0 /* OTUserEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E488E061D4FB67200A2E5B0 /* OTUserEmailViewController.m */; };
@@ -413,6 +416,14 @@
 		1E2232DB1D5699AD004CD5E8 /* OTMessagingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMessagingService.m; path = Services/OTMessagingService.m; sourceTree = "<group>"; };
 		1E2432B61DA6BED3000EF74F /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		1E2432B71DA6BED3000EF74F /* libFlurry_7.6.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.6.6.a; sourceTree = "<group>"; };
+		1E2432BA1DA6CC8B000EF74F /* OTAddressBookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAddressBookItem.h; path = AddressBook/OTAddressBookItem.h; sourceTree = "<group>"; };
+		1E2432BB1DA6CC8B000EF74F /* OTAddressBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAddressBookItem.m; path = AddressBook/OTAddressBookItem.m; sourceTree = "<group>"; };
+		1E2432BC1DA6CC8B000EF74F /* OTAddressBookPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAddressBookPhone.h; path = AddressBook/OTAddressBookPhone.h; sourceTree = "<group>"; };
+		1E2432BD1DA6CC8B000EF74F /* OTAddressBookPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAddressBookPhone.m; path = AddressBook/OTAddressBookPhone.m; sourceTree = "<group>"; };
+		1E2432C11DA6CCE1000EF74F /* OTContactInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTContactInfoCell.h; path = ActiveFeedItem/AddressBookCells/OTContactInfoCell.h; sourceTree = "<group>"; };
+		1E2432C21DA6CCE1000EF74F /* OTContactInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTContactInfoCell.m; path = ActiveFeedItem/AddressBookCells/OTContactInfoCell.m; sourceTree = "<group>"; };
+		1E2432C31DA6CCE1000EF74F /* OTContactPhoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTContactPhoneCell.h; path = ActiveFeedItem/AddressBookCells/OTContactPhoneCell.h; sourceTree = "<group>"; };
+		1E2432C41DA6CCE1000EF74F /* OTContactPhoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTContactPhoneCell.m; path = ActiveFeedItem/AddressBookCells/OTContactPhoneCell.m; sourceTree = "<group>"; };
 		1E29E4EC1DA3D09300501F99 /* OTGeolocationDeniedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTGeolocationDeniedViewController.h; path = Rights/OTGeolocationDeniedViewController.h; sourceTree = "<group>"; };
 		1E29E4ED1DA3D09300501F99 /* OTGeolocationDeniedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTGeolocationDeniedViewController.m; path = Rights/OTGeolocationDeniedViewController.m; sourceTree = "<group>"; };
 		1E2C60091D775F1F004B195A /* OTChangedHandlerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTChangedHandlerDelegate.h; sourceTree = "<group>"; };
@@ -445,8 +456,6 @@
 		1E3174901D10299400027824 /* QuitFeedItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QuitFeedItem.storyboard; sourceTree = "<group>"; };
 		1E40A3321D4A2A10009E2D73 /* UIBarButtonItem+factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+factory.h"; sourceTree = "<group>"; };
 		1E40A3331D4A2A10009E2D73 /* UIBarButtonItem+factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+factory.m"; sourceTree = "<group>"; };
-		1E40A33E1D4A81C3009E2D73 /* OTAddressBookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAddressBookItem.h; sourceTree = "<group>"; };
-		1E40A33F1D4A81C3009E2D73 /* OTAddressBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAddressBookItem.m; sourceTree = "<group>"; };
 		1E488DFF1D4FAF8B00A2E5B0 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		1E488E011D4FAFA600A2E5B0 /* UserProfileDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfileDetails.storyboard; sourceTree = "<group>"; };
 		1E488E051D4FB67200A2E5B0 /* OTUserEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUserEmailViewController.h; path = UserProfileDetails/OTUserEmailViewController.h; sourceTree = "<group>"; };
@@ -1003,6 +1012,28 @@
 			name = Timeline;
 			sourceTree = "<group>";
 		};
+		1E2432B91DA6CC80000EF74F /* AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				1E2432BA1DA6CC8B000EF74F /* OTAddressBookItem.h */,
+				1E2432BB1DA6CC8B000EF74F /* OTAddressBookItem.m */,
+				1E2432BC1DA6CC8B000EF74F /* OTAddressBookPhone.h */,
+				1E2432BD1DA6CC8B000EF74F /* OTAddressBookPhone.m */,
+			);
+			name = AddressBook;
+			sourceTree = "<group>";
+		};
+		1E2432C01DA6CCD5000EF74F /* AddressBookCells */ = {
+			isa = PBXGroup;
+			children = (
+				1E2432C11DA6CCE1000EF74F /* OTContactInfoCell.h */,
+				1E2432C21DA6CCE1000EF74F /* OTContactInfoCell.m */,
+				1E2432C31DA6CCE1000EF74F /* OTContactPhoneCell.h */,
+				1E2432C41DA6CCE1000EF74F /* OTContactPhoneCell.m */,
+			);
+			name = AddressBookCells;
+			sourceTree = "<group>";
+		};
 		1E2F29011D4BC24900ABC68A /* Photo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1440,6 +1471,7 @@
 		1EC6F3C41D53DBC90026766D /* ActiveFeedItem */ = {
 			isa = PBXGroup;
 			children = (
+				1E2432C01DA6CCD5000EF74F /* AddressBookCells */,
 				1E5C30171D6F616D00E10770 /* InfoCells */,
 				1E06FDC31D574D5800370F4F /* ChatCells */,
 				1E0972B51D55541E006E1FAD /* OTInviteByPhoneViewController.h */,
@@ -1892,14 +1924,13 @@
 		6B4930E019A77DFE00DA7EE0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1E2432B91DA6CC80000EF74F /* AddressBook */,
 				45F4433E1C90B76D00DDEBE1 /* User */,
 				45F4433D1C90B40D00DDEBE1 /* Feeds */,
 				DBBE8ADA19E8655B00FA218E /* Menu */,
 				45F4433F1C90B78100DDEBE1 /* POI */,
 				4536FC5C1CC64E55000BF620 /* OTSpeechKitManager.h */,
 				4536FC5D1CC64E55000BF620 /* OTSpeechKitManager.m */,
-				1E40A33E1D4A81C3009E2D73 /* OTAddressBookItem.h */,
-				1E40A33F1D4A81C3009E2D73 /* OTAddressBookItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2427,12 +2458,14 @@
 				1E06B8EB1D58B8C6008B20F4 /* OTJoinAcceptedCell.m in Sources */,
 				DBE9EF2C19E7D73300031144 /* OTMenuViewController.m in Sources */,
 				1E07DA361D58FB9A003119CC /* OTMessageDataSourceBehavior.m in Sources */,
+				1E2432BF1DA6CC8B000EF74F /* OTAddressBookPhone.m in Sources */,
 				1E488E201D4FBA4D00A2E5B0 /* OTUserPictureViewController.m in Sources */,
 				1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */,
 				1E2F292E1D4BF5FF00ABC68A /* OTContactsTableCellProviderBehavior.m in Sources */,
 				1E488E1A1D4FB99300A2E5B0 /* OTGeolocationRightsViewController.m in Sources */,
 				1E5EBCEC1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
+				1E2432C61DA6CCE1000EF74F /* OTContactPhoneCell.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
 				1E488E121D4FB81700A2E5B0 /* OTPhoneViewController.m in Sources */,
 				1EFAC0E61D89252600BE396F /* OTFeedItemFiltersCellProvider.m in Sources */,
@@ -2450,7 +2483,6 @@
 				1E701CED1DA2A5090041DD9D /* OTBadgeNumberService.m in Sources */,
 				1E2232D91D56998E004CD5E8 /* OTAddressBookService.m in Sources */,
 				1EFAC0EA1D8928D700BE396F /* OTFeedItemFilter.m in Sources */,
-				1E40A3401D4A81C3009E2D73 /* OTAddressBookItem.m in Sources */,
 				1E78B7F41D515E240008C00E /* NSDate+ui.m in Sources */,
 				454062A31D06ADB600B0D756 /* OTLocationSelectorViewController.m in Sources */,
 				45BC9BC91CE26E83000065B7 /* OTEntourageEditorViewController.m in Sources */,
@@ -2498,6 +2530,7 @@
 				1E5C30391D6F971D00E10770 /* OTInvitationChangedBehavior.m in Sources */,
 				45E37E531CEE1F7D005C3175 /* OTFeedsService.m in Sources */,
 				1E78B7F01D513F0F0008C00E /* OTEntourageUI.m in Sources */,
+				1E2432C51DA6CCE1000EF74F /* OTContactInfoCell.m in Sources */,
 				1E2F291E1D4BDF3600ABC68A /* OTDataSourceBehavior.m in Sources */,
 				4525EB311CA46082006784E6 /* OTSettingsViewController.m in Sources */,
 				1E2F29101D4BD3C600ABC68A /* OTGroupedTableDataSourceBehavior.m in Sources */,
@@ -2588,6 +2621,7 @@
 				1EFAC0D81D89248100BE396F /* OTFeedItemFiltersViewController.m in Sources */,
 				45EB70DA1CE5F0CC00EB2CD1 /* OTEntourage.m in Sources */,
 				1E488E211D4FBA4D00A2E5B0 /* OTPicturePreviewViewController.m in Sources */,
+				1E2432BE1DA6CC8B000EF74F /* OTAddressBookItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

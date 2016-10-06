@@ -11,7 +11,6 @@
 @interface OTAddressBookItem : NSObject
 
 @property (nonatomic, strong) NSString *fullName;
-@property (nonatomic, strong) NSString *telephone;
-@property (nonatomic) BOOL selected;
+@property (nonatomic, strong) NSArray *phoneNumbers;
 
 @end

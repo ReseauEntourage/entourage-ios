@@ -8,6 +8,7 @@
 
 #import "OTContactsGroupedTableDataSourceBehavior.h"
 #import "OTAddressBookItem.h"
+#import "OTAddressBookPhone.h"
 #import "OTDataSourceBehavior.h"
 
 @implementation OTContactsGroupedTableDataSourceBehavior
@@ -17,13 +18,16 @@
     NSMutableArray *headers = [NSMutableArray new];
     NSString *index = nil;
     NSUInteger section = -1;
-    for (OTAddressBookItem *item in self.dataSource.items) {
-        NSString *currentIndex = [item.fullName substringToIndex:1];
-        if(!index || ![index isEqualToString:currentIndex]) {
-            [headers addObject:currentIndex];
-            [sections addObject:[NSMutableArray new]];
-            index = currentIndex;
-            section++;
+    for (id item in self.dataSource.items) {
+        if([item isKindOfClass:[OTAddressBookItem class]]) {
+            OTAddressBookItem *infoItem = (OTAddressBookItem *)item;
+            NSString *currentIndex = [infoItem.fullName substringToIndex:1];
+            if(!index || ![index isEqualToString:currentIndex]) {
+                [headers addObject:currentIndex];
+                [sections addObject:[NSMutableArray new]];
+                index = currentIndex;
+                section++;
+            }
         }
         NSMutableArray *array = sections[section];
         [array addObject:item];
