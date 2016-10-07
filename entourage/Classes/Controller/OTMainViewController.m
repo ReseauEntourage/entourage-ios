@@ -145,37 +145,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self configureNavigationBar];
     [self.footerToolbar setupWithFilters];
-    
     self.currentFilter = [OTNewsFeedsFilter new];
-    
     self.locations = [NSMutableArray new];
     self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
     self.markers = [NSMutableArray new];
-    
     self.mapView = [[MKMapView alloc] init];
     self.mapDelegateProxy.mapView = self.mapView;
     self.overlayFeeder.mapView = self.mapView;
     [self.mapDelegateProxy initialize];
     self.tapEntourage.mapView = self.mapView;
-    
     self.toursMapDelegate = [[OTToursMapDelegate alloc] initWithMapController:self];
     self.guideMapDelegate = [[OTGuideMapDelegate alloc] initWithMapController:self];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTourConfirmation) name:@kNotificationLocalTourConfirmation object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFilters) name:@kNotificationShowFilters object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushReceived) name:@kNotificationPushReceived object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
-
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
     self.currentPagination = [OTFeedItemsPagination new];
     [self configureMapView];
-    
     self.mapSegmentedControl.layer.cornerRadius = 5;
     [self switchToNewsfeed];
     if ([OTOngoingTourService sharedInstance].isOngoing)
@@ -183,7 +177,6 @@
     else
         [self showToursMap];
     [self clearMap];
-    
     if ([OTOngoingTourService sharedInstance].isOngoing) {
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = NO;
@@ -482,7 +475,6 @@ static BOOL didGetAnyData = NO;
 - (void)feedMapWithFeedItems {
     if (self.toursMapDelegate.isActive) {
         [self.overlayFeeder updateOverlays:self.feeds];
-        // draw encounters
         NSMutableArray *annotations = [NSMutableArray new];
         for (OTEncounter *encounter in self.encounters) {
             OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];

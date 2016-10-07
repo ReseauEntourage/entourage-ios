@@ -20,7 +20,8 @@ static char kAssociatedObjectKey;
 }
 
 - (void)updateOverlays:(NSArray *)items {
-    [self.mapView removeOverlays:self.mapView.overlays];
+    if(self.mapView && self.mapView.overlays)
+        [self.mapView removeOverlays:self.mapView.overlays];
     [self addOverlaysToMap:items];
 }
 
@@ -29,7 +30,6 @@ static char kAssociatedObjectKey;
     if(!newOverlay)
         return;
     objc_setAssociatedObject(newOverlay, &kAssociatedObjectKey, item, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-
     id<MKOverlay> foundOverlay = nil;
     for(id<MKOverlay> overlay in self.mapView.overlays) {
         if([overlay isKindOfClass:[MKCircle class]])
