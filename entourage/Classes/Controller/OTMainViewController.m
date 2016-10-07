@@ -554,6 +554,8 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)createLocalNotificationForTour:(NSNumber*)tourId {
+    if(!tourId)
+        return;
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
     localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:2];
     localNotification.alertBody = OTLocalizedString(@"tour_ongoing");
