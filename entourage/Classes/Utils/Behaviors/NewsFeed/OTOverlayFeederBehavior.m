@@ -61,7 +61,7 @@ static char kAssociatedObjectKey;
 - (void)addOverlaysToMap:(NSArray *)items {
     for(OTFeedItem *item in items) {
         id<MKOverlay> overlay = [[[OTFeedItemFactory createFor:item] getMapHandler] newsFeedOverlayData];
-        if(!overlay)
+        if(!overlay || [overlay isKindOfClass:[NSNull class]])
             return;
         objc_setAssociatedObject(overlay, &kAssociatedObjectKey, item, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         if([overlay isKindOfClass:[MKCircle class]])
