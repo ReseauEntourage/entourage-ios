@@ -20,8 +20,4 @@
     return [(NSNumber *)[self.userInfo objectForKey:kNotificationLocationAuthorizationChangedKey] boolValue];
 }
 
-- (BOOL)readAllowedPushNotifications {
-    return [(NSNumber *)[self.userInfo objectForKey:kNotificationPushStatusChangedStatusKey] boolValue];
-}
-
 @end
