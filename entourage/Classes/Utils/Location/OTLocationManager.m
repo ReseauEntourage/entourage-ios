@@ -71,6 +71,8 @@
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     self.status = status;
+    if(status == kCLAuthorizationStatusNotDetermined)
+        return;
     [self notifyStatus];
 }
 
