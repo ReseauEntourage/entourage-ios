@@ -25,58 +25,41 @@
 #import "OTPublicFeedItemViewController.h"
 #import "OTActiveFeedItemViewController.h"
 #import "OTMyEntouragesViewController.h"
-
 #import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
-
 #import "JSBadgeView.h"
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
-
 #import "OTConsts.h"
-
-// View
 #import "SVProgressHUD.h"
 #import "OTFeedItemsTableView.h"
 #import "OTToolbar.h"
-
-// Model
 #import "OTUser.h"
 #import "OTTour.h"
 #import "OTTourPoint.h"
 #import "OTEncounter.h"
 #import "OTPOI.h"
-
-// Service
 #import "OTTourService.h"
 #import "OTAuthService.h"
 #import "OTPOIService.h"
 #import "OTFeedsService.h"
 #import "OTEntourageService.h"
-
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
 #import "UILabel+entourage.h"
 #import "MKMapView+entourage.h"
-
-// Framework
 #import <UIKit/UIKit.h>
 #import <WYPopoverController/WYPopoverController.h>
 #import <QuartzCore/QuartzCore.h>
 #import "TTTTimeIntervalFormatter.h"
 #import "TTTLocationFormatter.h"
 #import <AudioToolbox/AudioServices.h>
-
-// User
 #import "NSUserDefaults+OT.h"
 #import "NSDictionary+Parsing.h"
-
 #import "OTLocationManager.h"
 #import "NSNotification+entourage.h"
 #import "OTFeedItemFactory.h"
-
 #import "OTOngoingTourService.h"
-
 #import "OTMapDelegateProxyBehavior.h"
 #import "OTOverlayFeederBehavior.h"
 #import "OTTapEntourageBehavior.h"
@@ -89,8 +72,6 @@
 
 #define MAPVIEW_HEIGHT 160.f
 
-#define MIN_ENTOURAGE_HEATZONE 500.0f // m
-
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define FEEDS_REQUEST_DISTANCE_KM 10
 #define LOCATION_MIN_DISTANCE 5.f //m
@@ -98,15 +79,10 @@
 #define LONGPRESS_DELTA 65.0f
 #define MAX_DISTANCE 250.0 //meters
 
-
-/********************************************************************************/
-#pragma mark - OTMapViewController
-
 @interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFeedItemsFilterDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
-// map
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *mapSegmentedControl;
 @property (nonatomic, weak) IBOutlet OTFeedItemsTableView *tableView;
@@ -167,9 +143,6 @@
     BOOL encounterFromTap;
 }
 
-/**************************************************************************************************/
-#pragma mark - Life cycle
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureNavigationBar];
@@ -192,12 +165,12 @@
     self.guideMapDelegate = [[OTGuideMapDelegate alloc] initWithMapController:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTourConfirmation) name:@kNotificationLocalTourConfirmation object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFilters) name:@kNotificationShowFilters object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushReceived) name:@kNotificationPushReceived object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
+
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
     self.currentPagination = [OTFeedItemsPagination new];
@@ -205,12 +178,10 @@
     
     self.mapSegmentedControl.layer.cornerRadius = 5;
     [self switchToNewsfeed];
-    if ([OTOngoingTourService sharedInstance].isOngoing) {
+    if ([OTOngoingTourService sharedInstance].isOngoing)
         [self showNewTourOnGoing];
-    } else {
+    else
         [self showToursMap];
-    }
-    
     [self clearMap];
     
     if ([OTOngoingTourService sharedInstance].isOngoing) {
@@ -224,7 +195,6 @@
         self.stopButton.hidden = YES;
         self.createEncounterButton.hidden = YES;
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
 }
 
 - (void)dealloc {
@@ -291,23 +261,24 @@
     self.mapView.showsPointsOfInterest = NO;
    	self.mapView.showsUserLocation = YES;
     self.mapView.pitchEnabled = NO;
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+    MKCoordinateRegion region;
+    if([OTLocationManager sharedInstance].currentLocation)
+        region = MKCoordinateRegionMakeWithDistance([OTLocationManager sharedInstance].currentLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+    else
+        region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
     [self.mapView setRegion:region animated:NO];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
     for(UIView *view in self.mapView.subviews)
-        for(UIGestureRecognizer *recognizer in view.gestureRecognizers) {
+        for(UIGestureRecognizer *recognizer in view.gestureRecognizers)
             if([recognizer class] == [UILongPressGestureRecognizer class])
                 [view removeGestureRecognizer:recognizer];
-        }
     UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
     [self.mapView addGestureRecognizer:longPressMapGesture];
 }
 
 - (void)configureNavigationBar {
-    //status bar
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
-    //navigation bar
     [self createMenuButton];
     [self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
     [self setupLogoImage];
@@ -357,18 +328,9 @@
 }
 
 - (void)appWillEnterBackground:(NSNotification*)note {
-    NSLog(@">>>>>>>>>>>>>>>>>>>>> APP ENTERS BACKGROUND!!!");
     [self.refreshTimer invalidate];
-    if ([OTOngoingTourService sharedInstance].isOngoing) {
+    if ([OTOngoingTourService sharedInstance].isOngoing)
         [self createLocalNotificationForTour:self.tour.uid];
-    } else {
-        //[self.locationManager stopUpdatingLocation];
-    }
-}
-
-- (void)appWillEnterForeground:(NSNotification*)note {
-    NSLog(@"<<<<<<<<<<<<<<<<<<<<< APP COMES FOREGROUND!!!");
-    //[self.locationManager startUpdatingLocation];
 }
 
 - (void)showEntourages {
@@ -376,13 +338,8 @@
 }
 
 - (void)registerObserver {
-    [[NSUserDefaults standardUserDefaults] addObserver:self
-                                            forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")
-                                               options:NSKeyValueObservingOptionNew
-                                               context:nil];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"") options:NSKeyValueObservingOptionNew context:nil];
 }
-
-
 
 static BOOL didGetAnyData = NO;
 - (void)getData {
@@ -393,16 +350,12 @@ static BOOL didGetAnyData = NO;
     }
 }
 
-
 - (void)didChangePosition {
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self feedMapWithFeedItems];
-    
-    // check if we need to make a new request
     CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.requestedToursCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
-    if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4) {
+    if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4)
         return;
-    }
     self.currentPagination.beforeDate = [NSDate date];
     [self getFeeds];
 }
@@ -414,8 +367,6 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)getNewFeeds {
-//#warning
-    //NSLog(@"Attempt to getNewFeeds.\n\n");
     if (self.isRefreshing)
         return;
     self.isRefreshing = YES;
@@ -515,22 +466,17 @@ static BOOL didGetAnyData = NO;
 }
 
 - (void)getPOIList {
-    [[OTPoiService new] poisAroundCoordinate:self.mapView.centerCoordinate
-                                    distance:[self mapHeight]
-                                     success:^(NSArray *categories, NSArray *pois)
-     {
-         [self.indicatorView setHidden:YES];
-         
-         self.categories = categories;
-         self.pois = pois;
-         
-         [self feedMapViewWithPoiArray:pois];
-     }
-                                     failure:^(NSError *error) {
-                                         [self registerObserver];
-                                         [self.indicatorView setHidden:YES];
-                                         NSLog(@"Err getting POI %@", error.description);
-                                     }];
+    [[OTPoiService new] poisAroundCoordinate:self.mapView.centerCoordinate distance:[self mapHeight] success:^(NSArray *categories, NSArray *pois)
+        {
+            [self.indicatorView setHidden:YES];
+            self.categories = categories;
+            self.pois = pois;
+            [self feedMapViewWithPoiArray:pois];
+        } failure:^(NSError *error) {
+            [self registerObserver];
+            [self.indicatorView setHidden:YES];
+            NSLog(@"Err getting POI %@", error.description);
+    }];
 }
 
 - (void)feedMapWithFeedItems {
@@ -1003,14 +949,12 @@ static bool isShowingOptions = NO;
 #pragma mark - Feeds Table View Delegate
 
 - (void)loadMoreData {
-    // add -1 seconds to prevent getting the same item over and over again
     self.currentPagination.beforeDate = ((OTFeedItem*)self.feeds.lastObject).creationDate;
     [self getData];
 }
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;
-    
     if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic])
         [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
     else
@@ -1018,14 +962,11 @@ static bool isShowingOptions = NO;
 }
 
 - (void)showUserProfile:(NSNumber*)userId {
-    [[OTAuthService new] getDetailsForUser:userId
-                                   success:^(OTUser *user) {
-                                       [self performSegueWithIdentifier:@"UserProfileSegue" sender:user];
-                                       
-                                   } failure:^(NSError *error) {
-                                       NSLog(@"@fails getting user %@", error.description);
-                                   }];
-    
+    [[OTAuthService new] getDetailsForUser:userId success:^(OTUser *user) {
+        [self performSegueWithIdentifier:@"UserProfileSegue" sender:user];
+    } failure:^(NSError *error) {
+        NSLog(@"@fails getting user %@", error.description);
+    }];
 }
 
 - (void)sendJoinRequest:(OTFeedItem*)feedItem {
