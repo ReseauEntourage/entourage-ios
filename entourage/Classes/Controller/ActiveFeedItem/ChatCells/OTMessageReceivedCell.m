@@ -17,7 +17,7 @@
     OTFeedItemMessage *msgData = (OTFeedItemMessage *)timelinePoint;
     self.lblUserName.text = msgData.userName;
     [self.btnAvatar setupAsProfilePictureFromUrl:msgData.userAvatarURL];
-    self.lblMessage.text = msgData.text;
+    self.txtMessage.text = msgData.text;
 }
 
 - (IBAction)showUserDetails:(id)sender {

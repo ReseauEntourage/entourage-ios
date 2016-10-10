@@ -97,19 +97,22 @@
                                         <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed item description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwa-Bm-pV4">
-                                        <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IvY-Fu-Kho">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="170" id="3pU-j9-8bf"/>
                                         </constraints>
                                     </mapView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Feed item description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0pG-BU-ago">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="0pG-BU-ago" secondAttribute="trailing" constant="20" id="0X6-Op-8Lk"/>
                                     <constraint firstItem="RcA-br-gXo" firstAttribute="bottom" secondItem="KaD-Co-GmI" secondAttribute="bottom" constant="17" id="3nN-cL-T23"/>
                                     <constraint firstItem="KaD-Co-GmI" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="15" id="4Gz-DE-FSS"/>
                                     <constraint firstAttribute="trailing" secondItem="RcA-br-gXo" secondAttribute="trailing" constant="15" id="4JK-Pc-rnM"/>
@@ -120,16 +123,16 @@
                                     <constraint firstAttribute="bottom" secondItem="nU0-h0-mOV" secondAttribute="bottom" constant="15" id="DPt-4o-Utg"/>
                                     <constraint firstItem="IvY-Fu-Kho" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="-20" id="FVs-sa-fzs"/>
                                     <constraint firstItem="FuU-fG-ePR" firstAttribute="leading" secondItem="KaD-Co-GmI" secondAttribute="leading" id="Hei-To-zTe"/>
-                                    <constraint firstAttribute="trailing" secondItem="Rwa-Bm-pV4" secondAttribute="trailing" constant="20" id="HiW-Vg-7EA"/>
-                                    <constraint firstItem="Rwa-Bm-pV4" firstAttribute="top" secondItem="IvY-Fu-Kho" secondAttribute="bottom" constant="15" id="Ibw-bp-IsH"/>
-                                    <constraint firstItem="fJK-hn-36o" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Rwa-Bm-pV4" secondAttribute="bottom" constant="15" id="JAU-5b-BP1"/>
                                     <constraint firstItem="4QV-vH-V9y" firstAttribute="trailing" secondItem="RcA-br-gXo" secondAttribute="trailing" id="MKP-sc-G4w"/>
                                     <constraint firstItem="Q8P-B0-Gly" firstAttribute="centerY" secondItem="4QV-vH-V9y" secondAttribute="centerY" id="PJw-Pg-kY8"/>
+                                    <constraint firstItem="0pG-BU-ago" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="15" id="PLF-Cs-oe9"/>
                                     <constraint firstItem="KaD-Co-GmI" firstAttribute="top" secondItem="0Ms-j8-jfY" secondAttribute="top" constant="15" id="QbM-4e-HP5"/>
                                     <constraint firstItem="nU0-h0-mOV" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" id="RQS-5W-jTP"/>
                                     <constraint firstItem="4QV-vH-V9y" firstAttribute="top" secondItem="RcA-br-gXo" secondAttribute="bottom" constant="10" id="VTk-Ny-zl6"/>
                                     <constraint firstAttribute="trailing" secondItem="IvY-Fu-Kho" secondAttribute="trailing" constant="-20" id="Z7R-ne-A5w"/>
                                     <constraint firstItem="fJK-hn-36o" firstAttribute="centerX" secondItem="0Ms-j8-jfY" secondAttribute="centerX" id="dT9-58-8m0"/>
+                                    <constraint firstItem="0pG-BU-ago" firstAttribute="top" secondItem="IvY-Fu-Kho" secondAttribute="bottom" constant="15" id="fkB-b5-ItL"/>
+                                    <constraint firstItem="fJK-hn-36o" firstAttribute="top" secondItem="0pG-BU-ago" secondAttribute="bottom" constant="5" id="hLc-cn-O9W"/>
                                     <constraint firstItem="IvY-Fu-Kho" firstAttribute="top" secondItem="4QV-vH-V9y" secondAttribute="bottom" constant="16" id="hvf-iv-PkB"/>
                                     <constraint firstItem="FuU-fG-ePR" firstAttribute="trailing" secondItem="RcA-br-gXo" secondAttribute="trailing" id="jlI-9l-J45"/>
                                     <constraint firstItem="Q8P-B0-Gly" firstAttribute="leading" secondItem="RcA-br-gXo" secondAttribute="leading" id="rEf-Qf-cY9"/>
@@ -137,7 +140,6 @@
                                     <constraint firstItem="RcA-br-gXo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZOB-K8-3My" secondAttribute="trailing" constant="5" id="vJx-3l-8mJ"/>
                                     <constraint firstItem="nU0-h0-mOV" firstAttribute="top" secondItem="FuU-fG-ePR" secondAttribute="bottom" constant="22" id="wsE-v6-s9s"/>
                                     <constraint firstItem="ZOB-K8-3My" firstAttribute="top" secondItem="KaD-Co-GmI" secondAttribute="bottom" id="xJx-Rq-DU7"/>
-                                    <constraint firstItem="Rwa-Bm-pV4" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="15" id="yYc-yv-agL"/>
                                     <constraint firstItem="fJK-hn-36o" firstAttribute="centerY" secondItem="FuU-fG-ePR" secondAttribute="centerY" id="zCn-bW-xEE"/>
                                 </constraints>
                             </view>
@@ -165,10 +167,10 @@
                     <connections>
                         <outlet property="btnAvatar" destination="RcA-br-gXo" id="C9e-qc-4fh"/>
                         <outlet property="lblDescription" destination="ZOB-K8-3My" id="0Ud-M2-BqT"/>
-                        <outlet property="lblFeedItemDescription" destination="Rwa-Bm-pV4" id="8nc-uM-BeO"/>
                         <outlet property="lblTimeDistance" destination="xDt-dA-Asj" id="dGy-Hj-0F1"/>
                         <outlet property="lblTitle" destination="KaD-Co-GmI" id="Cfo-Bc-WCB"/>
                         <outlet property="lblUserCount" destination="4QV-vH-V9y" id="xQV-zT-36c"/>
+                        <outlet property="txtFeedItemDescription" destination="0pG-BU-ago" id="X40-Ad-wFH"/>
                     </connections>
                 </customObject>
                 <customObject id="ZXV-cG-4Hc" userLabel="Map Annotation Provider" customClass="OTMapAnnotationProviderBehavior">

@@ -16,7 +16,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblTimeDistance;
 @property (nonatomic, weak) IBOutlet UIButton *btnAvatar;
 @property (nonatomic, weak) IBOutlet UILabel *lblUserCount;
-@property (nonatomic, weak) IBOutlet UILabel *lblFeedItemDescription;
+@property (nonatomic, weak) IBOutlet UITextView *txtFeedItemDescription;
 
 - (void)configureWith:(OTFeedItem *)feedItem;
 - (void)clearConfiguration;
