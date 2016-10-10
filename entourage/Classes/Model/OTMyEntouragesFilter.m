@@ -80,7 +80,7 @@
     if(self.isInvited)
         [result setObject:@"true" forKey:@"accepted_invitation"];
     if([self.currentUser.type isEqualToString:USER_TYPE_PUBLIC]) {
-        [result setObject:@(self.timeframeInHours) forKey:@"time_range"];
+        //[result setObject:@(self.timeframeInHours) forKey:@"time_range"];
         [result setObject:[self getOnlyMyEntourages] forKey:@"status"];
     }
     else
