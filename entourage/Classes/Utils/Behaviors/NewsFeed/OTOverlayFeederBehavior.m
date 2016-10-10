@@ -20,7 +20,8 @@ static char kAssociatedObjectKey;
 }
 
 - (void)updateOverlays:(NSArray *)items {
-    [self.mapView removeOverlays:self.mapView.overlays];
+    if(self.mapView && self.mapView.overlays)
+        [self.mapView removeOverlays:self.mapView.overlays];
     [self addOverlaysToMap:items];
 }
 
@@ -29,7 +30,6 @@ static char kAssociatedObjectKey;
     if(!newOverlay)
         return;
     objc_setAssociatedObject(newOverlay, &kAssociatedObjectKey, item, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-
     id<MKOverlay> foundOverlay = nil;
     for(id<MKOverlay> overlay in self.mapView.overlays) {
         if([overlay isKindOfClass:[MKCircle class]])
@@ -61,7 +61,7 @@ static char kAssociatedObjectKey;
 - (void)addOverlaysToMap:(NSArray *)items {
     for(OTFeedItem *item in items) {
         id<MKOverlay> overlay = [[[OTFeedItemFactory createFor:item] getMapHandler] newsFeedOverlayData];
-        if(!overlay)
+        if(!overlay || [overlay isKindOfClass:[NSNull class]])
             return;
         objc_setAssociatedObject(overlay, &kAssociatedObjectKey, item, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         if([overlay isKindOfClass:[MKCircle class]])

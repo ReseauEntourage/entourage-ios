@@ -12,6 +12,5 @@
 
 - (NSArray *)readLocations;
 - (BOOL)readAllowedLocation;
-- (BOOL)readAllowedPushNotifications;
 
 @end

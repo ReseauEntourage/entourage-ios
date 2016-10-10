@@ -22,7 +22,7 @@
     if(self) {
         self.isActive = YES;
         self.isInvited = NO;
-        self.isOrganiser = YES;
+        self.isOrganiser = NO;
         self.isClosed = YES;
         self.showDemand = YES;
         self.showContribution = YES;
@@ -57,13 +57,15 @@
     else
         return @[
                     @[
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyActive active:self.isActive],
+                        //[OTFeedItemFilter createFor:FeedItemFilterKeyInvitation active:self.isInvited],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganiser active:self.isOrganiser],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyClosed active:self.isClosed]
+                     ],
+                    @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOnlyMyEntourages active:self.showOnlyMyEntourages]
-                    ],
-                    @[
-                        [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
-                    ]
+                     ]
                 ];
 }
 
