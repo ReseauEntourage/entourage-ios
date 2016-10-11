@@ -18,7 +18,7 @@
 /**************************************************************************************************/
 #pragma mark - Singleton
 
-+ (AFHTTPRequestOperationManager *)sharedInstance {
++ (AFHTTPSessionManager *)sharedInstance {
 	static OTRequestOperationManager *requestManager = nil;
 
 	if (requestManager == nil) {
@@ -27,12 +27,9 @@
 		requestManager.responseSerializer = [OTJSONResponseSerializer serializer];
 		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [requestManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        //[requestManager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-        
         //TODO api key should be changed after each release
         [requestManager.requestSerializer setValue:API_KEY forHTTPHeaderField:@"X-API-KEY"];
 	}
-    //NSLog(@"HTTP %@", requestManager.requestSerializer.HTTPRequestHeaders);
 	return requestManager;
 }
 
