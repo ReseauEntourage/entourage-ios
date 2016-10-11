@@ -23,14 +23,14 @@
         NSMutableDictionary *userInfo = [(*error).userInfo mutableCopy];
         if (data == nil) {
             userInfo[JSONResponseSerializerWithDataKey] = @"";
+            userInfo[JSONResponseSerializerFullKey] = @"";
         } else {
             NSString* dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"response data: %@", dataString);
+            userInfo[JSONResponseSerializerFullKey] = dataString;
             NSString *errorMessage = [JSONObject valueForKey:@"message"];
-            if (errorMessage != nil) {
+            if (errorMessage != nil)
                 userInfo[JSONResponseSerializerWithDataKey] = errorMessage;
-            }
-            //NSLog(@"--->\nERR %@\n\n+++>JSON %@", userInfo, JSONObject);
         }
         NSError *newError = [NSError errorWithDomain:(*error).domain code:(*error).code userInfo:userInfo];
         (*error) = newError;

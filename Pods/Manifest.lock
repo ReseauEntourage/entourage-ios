@@ -1,27 +1,18 @@
 PODS:
-  - AFNetworkActivityLogger (2.0.4):
-    - AFNetworking/NSURLConnection (~> 2.0)
-    - AFNetworking/NSURLSession (~> 2.0)
-  - AFNetworking (2.6.1):
-    - AFNetworking/NSURLConnection (= 2.6.1)
-    - AFNetworking/NSURLSession (= 2.6.1)
-    - AFNetworking/Reachability (= 2.6.1)
-    - AFNetworking/Security (= 2.6.1)
-    - AFNetworking/Serialization (= 2.6.1)
-    - AFNetworking/UIKit (= 2.6.1)
-  - AFNetworking/NSURLConnection (2.6.1):
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.1)
-  - AFNetworking/Security (2.6.1)
-  - AFNetworking/Serialization (2.6.1)
-  - AFNetworking/UIKit (2.6.1):
-    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - AWSAutoScaling (2.4.3):
     - AWSCore (= 2.4.3)
@@ -117,8 +108,7 @@ PODS:
   - WYPopoverController (0.3.8)
 
 DEPENDENCIES:
-  - AFNetworkActivityLogger
-  - AFNetworking (= 2.6.1)
+  - AFNetworking (= 3.1.0)
   - AWSiOSSDKv2 (~> 2.4)
   - FormatterKit
   - IQKeyboardManager (= 3.3.4)
@@ -131,8 +121,7 @@ DEPENDENCIES:
   - WYPopoverController (= 0.3.8)
 
 SPEC CHECKSUMS:
-  AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
-  AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AWSAutoScaling: e851257779e5004c40ea307ad54521f008027e84
   AWSCloudWatch: d617f2c7d794f8fd80e397377f673ba778b579a2
   AWSCore: 1b1edbf65f948804c9d522f1c49e29f51f72c6d8
@@ -157,6 +146,6 @@ SPEC CHECKSUMS:
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   WYPopoverController: dda54780e1bef186464ae5a10ab9b4998c279e89
 
-PODFILE CHECKSUM: d9e387b1a1092d87ef18c5266c67102766cc45c7
+PODFILE CHECKSUM: a98ac273f379f2b9abd1c1bdec0eb4ca54d2c199
 
 COCOAPODS: 1.0.1
