@@ -52,6 +52,7 @@
     self = [super initWithDictionary:dictionary];
     if (self) {
         self.creationDate = [dictionary dateForKey:kWSKeyStartDate];
+        self.startTime = [dictionary dateForKey:kWSKeyStartDate];
         self.endTime = [dictionary dateForKey:kWSKeyEndDate];
         self.type = [dictionary valueForKey:kWSKeyTourType];
         self.distance = [dictionary numberForKey:kWSKeyDistance];
@@ -59,6 +60,7 @@
         self.organizationDesc = [dictionary valueForKey:kWSKeyOrganizationDescription];
         self.tourPoints = [OTTourPoint tourPointsWithJSONDictionary:dictionary andKey:kWSKeyTourPoints];
         self.noMessages = [dictionary valueForKey:kWSNoUnreadMessages];
+        self.noPeople = [dictionary valueForKey:kWSNoPeople];
         
         if (self.distance == nil || self.distance.doubleValue == 0) {
             [self computeDistance];
@@ -98,42 +100,6 @@
     return color;
 }
 
-- (NSString *)debugDescription {
-    NSString *emaDescription = [NSString stringWithFormat:@"Tour %d with %lu points", self.uid.intValue, (unsigned long)_tourPoints.count];
-    return emaDescription;
-}
-
-- (NSString *)navigationTitle {
-    return OTLocalizedString(@"tour");
-}
-
-- (NSString *)summary {
-    return self.organizationName;
-}
-
-- (NSString *)displayType {
-    NSString *tourType;
-    if ([self.type isEqualToString:@"barehands"]) {
-        tourType = OTLocalizedString(@"tour_type_display_social");
-    } else     if ([self.type isEqualToString:@"medical"]) {
-        tourType = OTLocalizedString(@"tour_type_display_medical");
-    } else if ([self.type isEqualToString:@"alimentary"]) {
-        tourType = OTLocalizedString(@"tour_type_display_distributive");
-    }
-    return tourType;
-}
-
-- (NSAttributedString *)typeByNameAttributedString {
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_tour_by"), [self displayType]]
-                                                                         attributes:ATTR_LIGHT_15];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:self.author.displayName
-                                                                         attributes:ATTR_SEMIBOLD_15];
-    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
-    [typeByNameAttrString appendAttributedString:nameAttrString];
-    
-    return typeByNameAttrString;
-}
-
 - (void)computeDistance {
     // We need at least two points to compute the distance
     if (self.tourPoints == nil || self.tourPoints.count < 2) return;
@@ -144,16 +110,6 @@
         self.distance = @(self.distance.doubleValue + [secondLocation distanceFromLocation:firstLocation]);
         firstLocation = ((OTTourPoint*)self.tourPoints[i]).toLocation;
     }
-}
-
-- (NSString *)newsfeedStatus {
-    //OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    //if (self.author.uID.intValue == currentUser.sid.intValue)
-    {
-        if ([self.status isEqualToString:TOUR_STATUS_ONGOING] || [self.status isEqualToString:FEEDITEM_STATUS_CLOSED])
-            return FEEDITEM_STATUS_ACTIVE;
-    }
-    return self.joinStatus;
 }
 
 @end

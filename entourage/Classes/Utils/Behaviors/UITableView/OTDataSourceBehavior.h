@@ -13,8 +13,9 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
-@property (nonatomic, strong, readonly) NSArray* items;
+@property (nonatomic, strong, readonly) NSMutableArray* items;
 
 - (void)updateItems:(NSArray *)items;
+- (void)loadData;
 
 @end

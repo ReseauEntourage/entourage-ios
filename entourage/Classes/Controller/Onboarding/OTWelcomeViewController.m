@@ -17,7 +17,6 @@
 
 @interface OTWelcomeViewController() <UIWebViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UIButton *startButton;
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
 @end
 
@@ -29,7 +28,6 @@
     self.title = @"";
     if(![NSUserDefaults standardUserDefaults].currentUser)
         [self addLoginBarButton];
-    [self.startButton setupHalfRoundedCorners];
     [self setupWebView];
     
 }

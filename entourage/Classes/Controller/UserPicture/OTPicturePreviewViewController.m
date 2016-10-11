@@ -18,10 +18,12 @@
 #import "NSUserDefaults+OT.h"
 #import "NSError+message.h"
 #import "NSUserDefaults+OT.h"
+#import "UIImage+processing.h"
+
+#define MaxImageSize 300
 
 @interface OTPicturePreviewViewController ()
 
-@property (nonatomic, weak) IBOutlet UIButton *btnDone;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
@@ -32,31 +34,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    [self.btnDone setupHalfRoundedCorners];
+    
+    self.image = [self.image toSquare];
     [self.imageView setImage:self.image];
-    self.scrollView.layer.cornerRadius = self.scrollView.bounds.size.height / 2.0f;
-    self.scrollView.layer.borderWidth = 2.0f;
-    self.scrollView.layer.borderColor = [UIColor whiteColor].CGColor;
-}
-
-static BOOL wasShown = YES;
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    if (wasShown) {
-        [self updateMinZoomScaleForSize:self.view.bounds.size];
-    } else {
-        //wasShown = YES;
-    }
+    self.scrollView.maximumZoomScale = 10;
 }
 
 - (IBAction)doContinue {
-    UIImage *finalImage = [self cropVisibleArea];
     [SVProgressHUD show];
+    UIImage *finalImage = [self cropVisibleArea];
+    finalImage = [finalImage resizeTo:CGSizeMake(MaxImageSize, MaxImageSize)];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"tiny.png"];
+    [UIImagePNGRepresentation(finalImage) writeToFile:filePath atomically:YES];
+    
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     [[OTPictureUploadService new] uploadPicture:finalImage withSuccess:^(NSString *pictureName) {
         currentUser.avatarKey = pictureName;
         [[OTAuthService new] updateUserInformationWithUser:currentUser success:^(OTUser *user) {
+            // TODO phone is not in response so need to restore it manually
+            user.phone = currentUser.phone;
             [NSUserDefaults standardUserDefaults].currentUser = user;
+            self.scrollView.delegate = nil;
             if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
                 [self popToProfile];
             else
@@ -84,11 +84,11 @@ static BOOL wasShown = YES;
 - (UIImage*)cropVisibleArea {
     //Calculate the required area from the scrollview
     CGRect visibleRect;
-    float scale = 1.0/self.scrollView.zoomScale;
-    visibleRect.origin.x = self.scrollView.contentOffset.x * scale;
-    visibleRect.origin.y = self.scrollView.contentOffset.y * scale;
-    visibleRect.size.width = self.scrollView.bounds.size.width * scale;
-    visibleRect.size.height = self.scrollView.bounds.size.height * scale;
+    float scale = 1.0 / self.scrollView.zoomScale;
+    visibleRect.origin.x = self.scrollView.contentOffset.x / self.scrollView.contentSize.width * self.image.size.width;
+    visibleRect.origin.y = self.scrollView.contentOffset.y / self.scrollView.contentSize.height * self.image.size.height;
+    visibleRect.size.width = self.image.size.width * scale;
+    visibleRect.size.height = self.image.size.height * scale;
     UIImage *image = [self imageByCropping:self.imageView.image toRect:visibleRect];
     return image;
 }
@@ -96,7 +96,6 @@ static BOOL wasShown = YES;
 - (UIImage*)imageByCropping:(UIImage *)myImage toRect:(CGRect)cropToArea{
     CGImageRef cropImageRef = CGImageCreateWithImageInRect(myImage.CGImage, cropToArea);
     UIImage* cropped = [UIImage imageWithCGImage:cropImageRef];
-    
     CGImageRelease(cropImageRef);
     return cropped;
 }
@@ -105,20 +104,6 @@ static BOOL wasShown = YES;
 
 - (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.imageView;
-}
-
-- (void)updateMinZoomScaleForSize:(CGSize)size {
-    CGFloat widthScale = size.width / self.imageView.bounds.size.width;
-    CGFloat heightScale = size.height / self.imageView.bounds.size.height;
-    CGFloat minScale = MIN(widthScale, heightScale);
-    CGFloat maxScale = MAX(widthScale, heightScale);
-    self.scrollView.minimumZoomScale = minScale;
-    self.scrollView.zoomScale = minScale;
-
-    
-    UIImage *image = self.imageView.image;
-    if (image.imageOrientation != UIImageOrientationLeft && image.imageOrientation != UIImageOrientationRight)
-        self.scrollView.zoomScale = maxScale;
 }
 
 @end

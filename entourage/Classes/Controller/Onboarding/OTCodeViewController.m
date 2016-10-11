@@ -21,6 +21,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "NSError+message.h"
 #import "UIStoryboard+entourage.h"
+#import "OTOnboardingNavigationBehavior.h"
 
 @interface OTCodeViewController ()
 
@@ -28,6 +29,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+@property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 
 @end
 
@@ -38,24 +40,21 @@
 
     self.title = @"";
     [self addRegenerateBarButton];
-    
     [self.codeTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [self.validateButton setupHalfRoundedCorners];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showKeyboard:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     if([NSUserDefaults standardUserDefaults].currentUser) {
         [NSUserDefaults standardUserDefaults].temporaryUser = [NSUserDefaults standardUserDefaults].currentUser;
         [NSUserDefaults standardUserDefaults].currentUser = nil;
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
 }
 
 #pragma mark - Private
@@ -95,9 +94,9 @@
 - (IBAction)doContinue {
     NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
     NSString *code = self.codeTextField.text;
-    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
+    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     [SVProgressHUD show];
-    
+
     [[OTAuthService new] authWithPhone:phone
                               password:code
                               deviceId:deviceAPNSid
@@ -110,15 +109,10 @@
                                    if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
                                        [UIStoryboard showSWRevealController];
                                    else
-                                       [self performSegueWithIdentifier:@"CodeToEmailSegue" sender:self];
+                                       [self.onboardingNavigation nextFromLogin];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
                                }];
-}
-
-- (void)showKeyboard:(NSNotification*)notification {
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification
-                                         andHeightContraint:self.heightContraint];
 }
 
 @end

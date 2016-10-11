@@ -20,13 +20,14 @@
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
 #import "NSError+message.h"
+#import "OTOnboardingNavigationBehavior.h"
 
 @interface OTUserEmailViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
-@property (nonatomic, weak) IBOutlet UIButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+@property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 
 @end
 
@@ -37,15 +38,13 @@
     // Do any additional setup after loading the view.
     self.title = @"";
     [self.emailTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    
+
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [self.validateButton setupHalfRoundedCorners];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(showKeyboard:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
-    [self loadData];
+    [self loadCurrentData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -53,7 +52,7 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
-- (void)loadData {
+- (void)loadCurrentData {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if(currentUser)
         self.emailTextField.text = currentUser.email;
@@ -74,7 +73,7 @@
                                                    [[NSUserDefaults standardUserDefaults] synchronize];
 
                                                    [SVProgressHUD dismiss];
-                                                   [self performSegueWithIdentifier:@"EmailToNameSegue" sender:self];
+                                                   [self.onboardingNavigation nextFromEmail];
                                                }
                                                failure:^(NSError *error) {
                                                    [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];

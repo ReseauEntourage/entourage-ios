@@ -14,62 +14,69 @@
 #import "UIBarButtonItem+factory.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
-
-@interface OTNotificationsRightsViewController()
-
-@property (nonatomic, weak) IBOutlet UIButton *activateButton;
-
-@end
+#import "OTEntourageInvitation.h"
+#import "OTOnboardingJoinService.h"
+#import "SVProgressHUD.h"
+#import "OTDeepLinkService.h"
+#import "OTPushNotificationsService.h"
 
 @implementation OTNotificationsRightsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.title = @"";
     [self addIgnoreButton];
     
-    [self.activateButton setupHalfRoundedCorners];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(pushNotificationAuthorizationChanged:)
-                                                 name:kNotificationPushStatusChanged
-                                               object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationAuthorizationChanged:) name:kNotificationPushStatusChanged object:nil];
 }
 
 - (void)addIgnoreButton {
-    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore") withTarget:self andAction:@selector(doShowNewsFeeds) colored:[UIColor whiteColor]];
+    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore") withTarget:self andAction:@selector(doShowNext) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:ignoreButton];
 }
 
 #pragma mark - Private
 
-- (void)promptUserForPushNotifications {
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
-}
-
 - (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {
     NSLog(@"received kNotificationPushStatusChanged");
-    [self doShowNewsFeeds];
+    [self doShowNext];
 }
 
 #pragma mark - IBAction
 
-- (void)doShowNewsFeeds {
+- (void)doShowNext {
+    [self setTutorialCompleted];
+    [self checkInvitationsToJoin];
+}
+
+- (IBAction)doContinue {
+    [[OTPushNotificationsService new] promptUserForPushNotifications];
+}
+
+#pragma mark - private methods
+
+- (void)setTutorialCompleted {
     NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
     if (loggedNumbers == nil)
         loggedNumbers = [NSMutableArray new];
     [loggedNumbers addObject:[NSUserDefaults standardUserDefaults].currentUser.phone];
     [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [UIStoryboard showSWRevealController];
 }
 
-- (IBAction)doContinue {
-    [self promptUserForPushNotifications];
+- (void)checkInvitationsToJoin {
+    [SVProgressHUD showWithStatus:OTLocalizedString(@"joiningEntouragesMessage")];
+    [[OTOnboardingJoinService new] checkForJoins:^(OTEntourageInvitation *joinedInvitation) {
+        [SVProgressHUD dismiss];
+        if(joinedInvitation)
+            [[OTDeepLinkService new] navigateTo:joinedInvitation.entourageId withType:nil];
+        else
+            [UIStoryboard showSWRevealController];
+    } withError:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"automaticJoinFailedMessage")];
+        [UIStoryboard showSWRevealController];
+    }];
 }
 
 @end

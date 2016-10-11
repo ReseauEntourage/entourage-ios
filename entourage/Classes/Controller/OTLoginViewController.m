@@ -35,6 +35,9 @@
 
 // View
 #import "SVProgressHUD.h"
+#import "OTOnboardingNavigationBehavior.h"
+#import "OTPushNotificationsService.h"
+#import "OTAskMoreViewController.h"
 
 /********************************************************************************/
 #pragma mark - Constants
@@ -45,17 +48,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 @interface OTLoginViewController () <LostCodeDelegate>
 
-@property (weak, nonatomic) IBOutlet UIVisualEffectView *blurEffect;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
-@property (weak, nonatomic) IBOutlet UIView *whiteBackground;
-@property (weak, nonatomic) IBOutlet UIButton *askMoreButton;
-@property (weak, nonatomic) IBOutlet UIButton *validateButton;
-@property (weak, nonatomic) IBOutlet UIButton *lostCodeButton;
-
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+@property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 
 @end
 
@@ -67,22 +64,15 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.title = @"";
-    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
-	self.whiteBackground.layer.cornerRadius = 5;
-	self.whiteBackground.layer.masksToBounds = YES;
-    
     [self.phoneTextField indentRight];
     [self.passwordTextField indentRight];
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    [self.validateButton setupHalfRoundedCorners];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
 }
 
@@ -109,7 +99,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 - (void)launchAuthentication {
     [SVProgressHUD show];
-    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@"device_token"];
+    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     [[OTAuthService new] authWithPhone:self.phoneTextField.text
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
@@ -122,10 +112,13 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [SVProgressHUD dismiss];
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    [NSUserDefaults standardUserDefaults].currentUser = user;
-                                   if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid)
+                                   [[NSUserDefaults standardUserDefaults] synchronize];
+                                   if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
+                                       [[OTPushNotificationsService new] promptUserForPushNotifications];
                                        [UIStoryboard showSWRevealController];
+                                   }
                                    else
-                                       [self performSegueWithIdentifier:@"UserProfileDetailsSegue" sender:self];
+                                       [self.onboardingNavigation nextFromLogin];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    NSString *alertTitle = OTLocalizedString(@"error");
@@ -144,27 +137,14 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                                                                          handler:^(UIAlertAction * _Nonnull action) {}];
                                    [alert addAction: defaultAction];
                                    [self presentViewController:alert animated:YES completion:nil];
-                                   
+
                                }];
 }
 
-/********************************************************************************/
-#pragma mark - OTAskMoreViewControllerDelegate
-
-- (void)hideBlurEffect {
-    [UIView animateWithDuration:0.5 animations:^(void) {
-        [self.blurEffect setAlpha:0.0];
-    }];
-}
-
-/********************************************************************************/
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"OTAskMore"]) {
-        OTAskMoreViewController *controller = (OTAskMoreViewController *)segue.destinationViewController;
-        controller.delegate = self;
-    } else if ([segue.identifier isEqualToString:@"OTLostCode"]) {
+    if ([segue.identifier isEqualToString:@"OTLostCode"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTLostCodeViewController *controller = (OTLostCodeViewController *)navController.viewControllers.firstObject;
         controller.codeDelegate = self;
@@ -173,14 +153,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 /********************************************************************************/
 #pragma mark - Actions
-
-- (IBAction)displayAskMoreModal:(id)sender {
-    [self.blurEffect setHidden:NO];
-    [UIView animateWithDuration:0.5 animations:^(void) {
-        [self.blurEffect setAlpha:0.7];
-    }];
-    [self performSegueWithIdentifier:@"OTAskMore" sender:self];
-}
 
 - (IBAction)validateButtonDidTad {
     if (self.phoneTextField.text.length == 0) {

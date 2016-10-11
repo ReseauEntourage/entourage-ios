@@ -18,22 +18,23 @@
 #endif
 
 #define API_KEY @"91f908e8f674fc9dfc5c1dba"
+#define DEVICE_TOKEN_KEY "device_token"
 
 #define PARIS_LAT 48.856578
 #define PARIS_LON  2.351828
 #define MAPVIEW_REGION_SPAN_X_METERS 500
 #define MAPVIEW_REGION_SPAN_Y_METERS 500
 
-#define ATTR_LIGHT_15       @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]}
-#define ATTR_SEMIBOLD_15    @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]}
-
 #define DATA_REFRESH_RATE 60.0 //seconds
+
+#define ENTOURAGE_RADIUS 500
+#define ENTOURAGE_RADIUS_FACTOR 1.3f
 
 #define TEXTVIEW_PADDING 10.0f
 #define TEXTVIEW_PADDING_TOP 12.0f
 #define TEXTVIEW_PADDING_BOTTOM 23.0f
 
-
+#define MAP_TOUR_LINE_WIDTH 4.0f
 
 #define kNotificationPushStatusChanged @"NotificationAPNSStatusChanged"
 #define kNotificationPushStatusChangedStatusKey @"NotificationAPNSStatusChangedStatusKey"
@@ -42,9 +43,11 @@
 #define kNotificationShowFilters "NotificationShowFilter"
 #define kNotificationShowCurrentLocation "NotificationCurrentLocation"
 
-#define kNotificationNewMessage "NotificationNewMessage"
 #define kNotificationProfilePictureUpdated "NotificationProfilePictureUpdated"
+#define kNotificationEntourageChanged @"NotificationEntourageChanged"
+#define kNotificationEntourageChangedEntourageKey @"NotificationEntourageChangedEntourageKey"
 
+#define kNotificationPushReceived "NotificationPushReceived"
 
 #define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"

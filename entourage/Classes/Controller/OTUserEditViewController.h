@@ -11,6 +11,4 @@
 
 @interface OTUserEditViewController : UIViewController
 
-@property (nonatomic, strong) OTUser *user;
-
 @end

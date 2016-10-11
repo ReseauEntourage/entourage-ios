@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "OTAPIKeys.h"
 #import "NSDictionary+Parsing.h"
-#import "OTTourAuthor.h"
+#import "OTFeedItemAuthor.h"
+#import "OTMyFeedMessage.h"
 
 #define FEEDITEM_STATUS_ACTIVE @"active"
 #define FEEDITEM_STATUS_CLOSED @"closed"
@@ -19,21 +20,20 @@
 #define JOIN_NOT_REQUESTED @"not_requested"
 #define JOIN_REJECTED @"rejected"
 
+#define TOUR_TYPE_NAME @"Tour"
+
 @interface OTFeedItem : NSObject
 
 @property (nonatomic, strong) NSNumber *uid;
-@property (nonatomic, strong) OTTourAuthor *author;
+@property (nonatomic, strong) OTFeedItemAuthor *author;
 @property (nonatomic, strong) NSDate *creationDate;
 @property (nonatomic, strong) NSDate *updatedDate;
 @property (nonatomic, strong) NSString *joinStatus;
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSNumber *noPeople;
+@property (nonatomic, strong) OTMyFeedMessage *lastMessage;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
-- (NSString *)navigationTitle;
-- (NSString *)summary;
-- (NSAttributedString *)typeByNameAttributedString;
-- (NSString *)newsfeedStatus;
 
 @end

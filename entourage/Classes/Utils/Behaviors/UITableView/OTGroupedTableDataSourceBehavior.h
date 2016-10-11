@@ -11,7 +11,7 @@
 
 @interface OTGroupedTableDataSourceBehavior : OTTableDataSourceBehavior
 
-@property (nonatomic, strong) NSDictionary *groupedSource;
-@property (nonatomic, strong) NSArray *quickJumpList;
+@property (nonatomic, strong) NSArray *groupedSource;
+@property (nonatomic, strong) NSArray *groupHeaders;
 
 @end

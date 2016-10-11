@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BbA-ED-vfm">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BbA-ED-vfm">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Phone View Controller-->
@@ -15,44 +16,30 @@
                         <viewControllerLayoutGuide type="bottom" id="pTB-3p-Tq2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ciX-Vp-oKV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKP-h6-GEA">
-                                <rect key="frame" x="-4" y="20" width="328" height="379"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whitePhone" translatesAutoresizingMaskIntoConstraints="NO" id="PrG-vs-KDz">
-                                        <rect key="frame" x="12" y="20" width="56" height="56"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="56" id="MGd-8K-44p"/>
                                             <constraint firstAttribute="height" constant="56" id="a7r-QD-0JQ"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VlY-L9-3QR">
-                                        <rect key="frame" x="12" y="106" width="296" height="72"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="296" id="1Sf-jD-hlG"/>
-                                            <constraint firstAttribute="width" constant="296" id="NgL-b1-u9I"/>
                                             <constraint firstAttribute="width" constant="296" id="gYy-vd-gV0"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="72" id="uaN-2R-opd"/>
                                             <constraint firstAttribute="height" constant="72" id="xf2-TS-pSL"/>
                                         </constraints>
                                         <string key="text">Quel est votre
 numéro de portable? </string>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="1Sf-jD-hlG"/>
-                                                <exclude reference="NgL-b1-u9I"/>
-                                                <exclude reference="uaN-2R-opd"/>
-                                            </mask>
-                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entourage vous envoie un SMS afin de vérifier votre numéro de portable." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyk-fh-2ns">
-                                        <rect key="frame" x="12" y="182" width="296" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="AwM-59-tiy"/>
                                             <constraint firstAttribute="width" constant="296" id="Gba-No-ok7"/>
@@ -60,7 +47,7 @@ numéro de portable? </string>
                                             <constraint firstAttribute="width" constant="296" id="tuf-dD-sd1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -70,18 +57,17 @@ numéro de portable? </string>
                                         </variation>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Numéro de portable" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8h5-LL-TYs">
-                                        <rect key="frame" x="12" y="233" width="304" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="296" id="18M-71-MBq"/>
                                             <constraint firstAttribute="height" constant="50" id="fCE-wv-9Mj"/>
                                         </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
-                                                <color key="value" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="default">
@@ -91,8 +77,7 @@ numéro de portable? </string>
                                         </variation>
                                     </textField>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qYh-lK-z5d">
-                                        <rect key="frame" x="12" y="283" width="304" height="1"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="SQ2-oj-3Vx"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="oTt-ov-A0k"/>
@@ -106,21 +91,25 @@ numéro de portable? </string>
                                         </variation>
                                     </view>
                                     <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpk-JJ-QTl">
-                                        <rect key="frame" x="12" y="314" width="304" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="9xk-kY-67f"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Continuer">
-                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="doContinue" destination="BbA-ED-vfm" eventType="touchUpInside" id="hhV-sU-bD9"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="qYh-lK-z5d" firstAttribute="leading" secondItem="ZKP-h6-GEA" secondAttribute="leading" constant="12" id="0O2-B7-fa6"/>
                                     <constraint firstItem="Bpk-JJ-QTl" firstAttribute="leading" secondItem="ZKP-h6-GEA" secondAttribute="leading" constant="12" id="3eD-sj-aZq"/>
@@ -143,7 +132,7 @@ numéro de portable? </string>
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ZKP-h6-GEA" firstAttribute="leading" secondItem="ciX-Vp-oKV" secondAttribute="leadingMargin" constant="-20" id="JtO-qF-AMZ"/>
                             <constraint firstItem="ZKP-h6-GEA" firstAttribute="top" secondItem="dEw-T0-guo" secondAttribute="bottom" id="QJa-xp-Jma"/>
@@ -151,9 +140,7 @@ numéro de portable? </string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cSh-dG-zfC"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="continueButton" destination="Bpk-JJ-QTl" id="6b6-we-zOI"/>
                         <outlet property="heightContraint" destination="Wg4-Ig-Fqk" id="LIS-Ti-430"/>
                         <outlet property="phoneTextField" destination="8h5-LL-TYs" id="Yfa-sb-k8C"/>
                         <outlet property="scrollView" destination="ZKP-h6-GEA" id="0nk-qH-HWC"/>
@@ -164,53 +151,39 @@ numéro de portable? </string>
             </objects>
             <point key="canvasLocation" x="762" y="-2471"/>
         </scene>
-        <!--Code View Controller-->
+        <!--Code-->
         <scene sceneID="GTN-Qj-BwU">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ay8-4Z-lNJ" customClass="OTCodeViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ay8-4Z-lNJ" userLabel="Code" customClass="OTCodeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZQ0-HI-xvJ"/>
                         <viewControllerLayoutGuide type="bottom" id="yeR-N2-sFF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oIj-1W-a8G">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GL7-KN-5la">
-                                <rect key="frame" x="-4" y="20" width="328" height="379"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="code" translatesAutoresizingMaskIntoConstraints="NO" id="NGL-BN-ZjP">
-                                        <rect key="frame" x="12" y="20" width="56" height="56"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="56" id="Qua-XM-BDf"/>
                                             <constraint firstAttribute="height" constant="56" id="b90-SZ-vKI"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCt-6F-DVv">
-                                        <rect key="frame" x="12" y="106" width="296" height="72"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="296" id="5BD-UQ-zcj"/>
-                                            <constraint firstAttribute="width" constant="296" id="5k9-8i-vOB"/>
                                             <constraint firstAttribute="height" constant="72" id="6Dy-EO-OY3"/>
                                             <constraint firstAttribute="width" constant="296" id="MH6-MY-HwN"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="72" id="sWx-KD-4W4"/>
                                         </constraints>
                                         <string key="text">Code de
 vérification</string>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="5BD-UQ-zcj"/>
-                                                <exclude reference="5k9-8i-vOB"/>
-                                                <exclude reference="sWx-KD-4W4"/>
-                                            </mask>
-                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Veuillez saisir le code reçu par SMS. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2V-xB-zfa">
-                                        <rect key="frame" x="12" y="182" width="296" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="296" id="VBp-kI-gHY"/>
                                             <constraint firstAttribute="width" constant="296" id="Wdy-XV-VRt"/>
@@ -218,7 +191,7 @@ vérification</string>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="oQj-Ec-gnW"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -228,18 +201,17 @@ vérification</string>
                                         </variation>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pvY-e5-lmP">
-                                        <rect key="frame" x="12" y="233" width="304" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="296" id="IoI-EN-8P4"/>
                                             <constraint firstAttribute="height" constant="50" id="vxj-qn-sUH"/>
                                         </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
-                                                <color key="value" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="default">
@@ -249,8 +221,7 @@ vérification</string>
                                         </variation>
                                     </textField>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8f-fn-OPr">
-                                        <rect key="frame" x="12" y="283" width="304" height="1"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="296" id="8eh-bM-kaa"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="X7g-5W-7LZ"/>
@@ -264,8 +235,7 @@ vérification</string>
                                         </variation>
                                     </view>
                                     <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH7-Ij-WiF">
-                                        <rect key="frame" x="12" y="314" width="304" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="0eh-TJ-r93"/>
                                             <constraint firstAttribute="width" constant="296" id="4eX-br-TBN"/>
@@ -275,8 +245,13 @@ vérification</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Valider">
-                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="0eh-TJ-r93"/>
@@ -290,7 +265,7 @@ vérification</string>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="m2V-xB-zfa" secondAttribute="trailing" constant="12" id="1As-fy-DKf"/>
                                     <constraint firstItem="m2V-xB-zfa" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="12" id="3DH-Ef-S2z"/>
@@ -319,17 +294,17 @@ vérification</string>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="EYU-Pa-dfK"/>
+                                        <exclude reference="3Ec-T6-Upt"/>
+                                        <exclude reference="6qx-JO-NB6"/>
                                         <exclude reference="1As-fy-DKf"/>
                                         <exclude reference="D6y-dn-Tei"/>
                                         <exclude reference="od2-iw-Jgm"/>
-                                        <exclude reference="3Ec-T6-Upt"/>
-                                        <exclude reference="6qx-JO-NB6"/>
+                                        <exclude reference="EYU-Pa-dfK"/>
                                     </mask>
                                 </variation>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="GL7-KN-5la" secondAttribute="trailing" constant="-20" id="4Ow-bc-dUX"/>
                             <constraint firstItem="GL7-KN-5la" firstAttribute="leading" secondItem="oIj-1W-a8G" secondAttribute="leadingMargin" constant="-20" id="nsM-yN-tlc"/>
@@ -337,18 +312,23 @@ vérification</string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="A1c-OM-a9i"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="codeTextField" destination="pvY-e5-lmP" id="jpA-hJ-ZDP"/>
                         <outlet property="heightContraint" destination="apC-Kc-icw" id="h6e-pA-KVC"/>
+                        <outlet property="onboardingNavigation" destination="13E-al-jIm" id="bin-ft-ga6"/>
                         <outlet property="scrollView" destination="GL7-KN-5la" id="pQv-r2-Yis"/>
                         <outlet property="validateButton" destination="ZH7-Ij-WiF" id="caZ-eL-9TI"/>
                         <segue destination="WWp-Jk-pyc" kind="show" identifier="CodeToEmailSegue" id="el8-oc-xQX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esw-lb-Cqw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="13E-al-jIm" userLabel="Onboarding Navigation" customClass="OTOnboardingNavigationBehavior">
+                    <connections>
+                        <outlet property="owner" destination="ay8-4Z-lNJ" id="pFF-0E-jMY"/>
+                    </connections>
+                </customObject>
             </objects>
-            <point key="canvasLocation" x="1158" y="-2471"/>
+            <point key="canvasLocation" x="1527" y="-2472"/>
         </scene>
         <!--UserProfileDetails-->
         <scene sceneID="kC6-xB-GPy">
@@ -356,11 +336,11 @@ vérification</string>
                 <viewControllerPlaceholder storyboardName="UserProfileDetails" id="WWp-Jk-pyc" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W8P-gR-W2h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1480.5" y="-2471"/>
+            <point key="canvasLocation" x="2118" y="-2472"/>
         </scene>
     </scenes>
     <resources>
-        <image name="code" width="56" height="57"/>
-        <image name="whitePhone" width="56" height="57"/>
+        <image name="code" width="56" height="56"/>
+        <image name="whitePhone" width="56" height="56"/>
     </resources>
 </document>

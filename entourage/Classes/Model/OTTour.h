@@ -12,6 +12,11 @@
 typedef enum { OTVehiclesFeet=0, OTVehiclesCar=1 } OTVehicles;
 typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTypes;
 
+#define TOUR_MEDICAL @"medical"
+#define TOUR_SOCIAL @"social"
+#define TOUR_DISTRIBUTIVE @"distributive"
+
+
 #define TOUR_STATUS_ONGOING @"ongoing"
 #define TOUR_STATUS_FREEZED @"freezed"
 
@@ -20,6 +25,7 @@ typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTyp
 @property (nonatomic, strong) NSMutableArray *tourPoints;
 @property (nonatomic, strong) NSString *organizationName;
 @property (nonatomic, strong) NSString *organizationDesc;
+@property (nonatomic, strong) NSDate *startTime;
 @property (nonatomic, strong) NSDate *endTime;
 @property (nonatomic, strong) NSNumber *distance;
 @property (nonatomic, strong) NSNumber *noMessages;

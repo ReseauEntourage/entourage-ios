@@ -10,6 +10,7 @@
 #import "UIButton+AFNetworking.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
+#import "OTFeedItemFactory.h"
 
 #define DEFAULT_IMAGE @"userSmall"
 
@@ -30,8 +31,6 @@
                      withPlaceholder:(NSString *)placeholder
 {
     __weak UIButton *userImageButton = self;
-    userImageButton.layer.cornerRadius = userImageButton.bounds.size.height/2.f;
-    userImageButton.clipsToBounds = YES;
     UIImage *placeholderImage = [UIImage imageNamed:placeholder];
     if (avatarURLString != nil && [avatarURLString class] != [NSNull class] && avatarURLString.length > 0) {
         NSURL *url = [NSURL URLWithString:avatarURLString];
@@ -44,7 +43,7 @@
 }
 
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {
-    self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:[feedItem newsfeedStatus]];
+    self.hidden = ![[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (feedItem.author.uID.intValue == currentUser.sid.intValue) {

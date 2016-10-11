@@ -12,8 +12,8 @@
 #import "OTTourPoint.h"
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
-#import "OTTourJoiner.h"
-#import "OTTourMessage.h"
+#import "OTFeedItemJoiner.h"
+#import "OTFeedItemMessage.h"
 #import "OTEncounter.h"
 #import "NSDictionary+Parsing.h"
 #import "OTAPIConsts.h"
@@ -31,7 +31,6 @@ NSString *const kUsers = @"users";
 NSString *const kMessages = @"chat_messages";
 NSString *const kWSKeyEncounters = @"encounters";
 NSString *const kTourPoints = @"tour_points";
-
 
 @implementation  OTTourService
 
@@ -190,7 +189,7 @@ NSString *const kTourPoints = @"tour_points";
 
 - (void)sendMessage:(NSString *)message
              onTour:(OTTour *)tour
-            success:(void(^)(OTTourMessage *))success
+            success:(void(^)(OTFeedItemMessage *))success
             failure:(void (^)(NSError *)) failure
 {
     
@@ -206,7 +205,7 @@ NSString *const kTourPoints = @"tour_points";
          {
              NSDictionary *data = responseObject;
              NSDictionary *messageDictionary = [data objectForKey:@"chat_message"];
-             OTTourMessage *message = [self messageFromDictionary:messageDictionary];
+             OTFeedItemMessage *message = [self messageFromDictionary:messageDictionary];
              
              if (success)
              {
@@ -223,32 +222,26 @@ NSString *const kTourPoints = @"tour_points";
      ];
 }
 
-- (void)tourUsersJoins:(OTTour *)tour
+- (void)tourUsers:(OTTour *)tour
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure
 {
 
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_tour_users", @""), kTours, tour.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
-    
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_feed_item_users", @""), kTours, tour.uid,  [[NSUserDefaults standardUserDefaults] currentUser].token];
     [[OTHTTPRequestManager sharedInstance]
              GETWithUrl:url
              andParameters:nil
              andSuccess:^(id responseObject)
              {
                  NSDictionary *data = responseObject;
-                 NSArray *joiners = [self usersFromDictionary:data];
-                 
+                 NSArray *joiners = [data objectForKey:kUsers];
                  if (success)
-                 {
-                     success(joiners);
-                 }
+                     success([OTFeedItemJoiner arrayForWebservice:joiners]);
              }
              andFailure:^(NSError *error)
              {
                  if (failure)
-                 {
                      failure(error);
-                 }
              }
      ];
 }
@@ -371,7 +364,7 @@ NSString *const kTourPoints = @"tour_points";
 }
 
 - (void)joinTour:(OTTour *)tour
-         success:(void(^)(OTTourJoiner *))success
+         success:(void(^)(OTFeedItemJoiner *))success
          failure:(void (^)(NSError *)) failure {
     
     NSString *url = [NSString stringWithFormat:API_URL_TOUR_JOIN_REQUEST, tour.uid, TOKEN];
@@ -384,7 +377,7 @@ NSString *const kTourPoints = @"tour_points";
          {
              NSDictionary *data = responseObject;
              NSDictionary *joinerDictionary = [data objectForKey:@"user"];
-             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
+             OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc] initWithDictionary:joinerDictionary];
              
              if (success)
              {
@@ -403,7 +396,7 @@ NSString *const kTourPoints = @"tour_points";
 
 - (void)joinMessageTour:(OTTour*)tour
                 message:(NSString*)message
-                success:(void(^)(OTTourJoiner *))success
+                success:(void(^)(OTFeedItemJoiner *))success
                 failure:(void (^)(NSError *)) failure {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     NSString *url = [NSString stringWithFormat:API_URL_TOUR_JOIN_MESSAGE, tour.uid, currentUser.sid, TOKEN];
@@ -417,8 +410,7 @@ NSString *const kTourPoints = @"tour_points";
          {
              NSDictionary *data = responseObject;
              NSDictionary *joinerDictionary = [data objectForKey:@"user"];
-             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
-             
+             OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc] initWithDictionary:joinerDictionary];
              if (success)
              {
                  success(joiner);
@@ -545,28 +537,6 @@ NSString *const kTourPoints = @"tour_points";
     return tours;
 }
 
-
-
-#pragma mark User Joins
-
-- (NSArray *)usersFromDictionary:(NSDictionary *)data
-{
-    NSMutableArray *joiners = [[NSMutableArray alloc] init];
-    NSArray *joinersDictionaries = [data objectForKey:kUsers];
-    for (NSDictionary *joinerDictionary in joinersDictionaries)
-    {
-        OTTourJoiner *joiner = [[OTTourJoiner alloc] initWithDictionary:joinerDictionary];
-        [joiners addObject:joiner];
-    }
-    return joiners;
-}
-
-- (OTTourJoiner *)joinerFromDictionary:(NSDictionary *)dictionary
-{
-    OTTourJoiner *joiner = [[OTTourJoiner alloc] initWithDictionary:dictionary];
-    return joiner;
-}
-
 #pragma mark Chat Messages
 
 - (NSArray *)messagesFromDictionary:(NSDictionary *)data
@@ -575,16 +545,15 @@ NSString *const kTourPoints = @"tour_points";
     NSArray *messagesDictionaries = [data objectForKey:kMessages];
     for (NSDictionary *messageDictionary in messagesDictionaries)
     {
-        OTTourMessage *message = [[OTTourMessage alloc] initWithDictionary:messageDictionary];
+        OTFeedItemMessage *message = [[OTFeedItemMessage alloc] initWithDictionary:messageDictionary];
         [messages addObject:message];
     }
     return messages;
 }
 
-- (OTTourMessage *)messageFromDictionary:(NSDictionary *)dictionary
+- (OTFeedItemMessage *)messageFromDictionary:(NSDictionary *)dictionary
 {
-    OTTourMessage *message = [[OTTourMessage alloc] initWithDictionary:dictionary];
-    return message;
+    return [[OTFeedItemMessage alloc] initWithDictionary:dictionary];
 }
 
 #pragma mark Encounters

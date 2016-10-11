@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.10</string>
+	<string>2.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>26</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -33,8 +33,35 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Pour réaliser votre photo de profil.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Pour envoyer des invitations au réseau Entourage</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Pour afficher les POIs, vos rencontres, etc....</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Pour afficher les POIs, vos rencontres, etc....</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Pour saisir la description des entourages</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Pour afficher votre photo de profil.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SF-UI-Text-Bold.otf</string>
+		<string>SF-UI-Text-BoldItalic.otf</string>
+		<string>SF-UI-Text-Heavy.otf</string>
+		<string>SF-UI-Text-HeavyItalic.otf</string>
+		<string>SF-UI-Text-Light.otf</string>
+		<string>SF-UI-Text-LightItalic.otf</string>
+		<string>SF-UI-Text-Medium.otf</string>
+		<string>SF-UI-Text-MediumItalic.otf</string>
+		<string>SF-UI-Text-Regular.otf</string>
+		<string>SF-UI-Text-RegularItalic.otf</string>
+		<string>SF-UI-Text-Semibold.otf</string>
+		<string>SF-UI-Text-SemiboldItalic.otf</string>
+		<string>SF-UI-Text-Ultrathin.otf</string>
+		<string>SF-UI-Text-UltrathinItalic.otf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
@@ -49,7 +76,7 @@
 		<string>armv7</string>
 	</array>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
+	<string>UIStatusBarStyleBlackOpaque</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -72,15 +72,15 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	self.menuItems = [OTMenuViewController createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
-    
     self.title = OTLocalizedString(@"myProfile").capitalizedString;
     [self createBackFrontMenuButton];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-
-    [self.profileButton setupAsProfilePictureFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
+}
+
+- (void)viewDidLayoutSubviews {
+    [self.profileButton setupAsProfilePictureFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
 }
 
 - (void)dealloc {

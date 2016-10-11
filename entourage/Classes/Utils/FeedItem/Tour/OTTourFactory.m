@@ -10,6 +10,10 @@
 #import "OTTourStateTransition.h"
 #import "OTTourStateInfo.h"
 #import "OTTourMessaging.h"
+#import "OTTourUI.h"
+#import "OTTourMapHandler.h"
+#import "OTTourJoinerDelegate.h"
+#import "OTTourChangedHandler.h"
 
 @implementation OTTourFactory
 
@@ -22,6 +26,10 @@
     return self;
 }
 
+- (BOOL)isTour {
+    return YES;
+}
+
 - (id<OTStateTransitionDelegate>)getStateTransition {
     return [[OTTourStateTransition alloc] initWithTour:self.tour];
 }
@@ -32,6 +40,22 @@
 
 - (id<OTMessagingDelegate>)getMessaging {
     return [[OTTourMessaging alloc] initWithTour:self.tour];
+}
+
+- (id<OTUIDelegate>)getUI {
+    return [[OTTourUI alloc] initWithTour:self.tour];
+}
+
+- (id<OTMapHandlerDelegate>)getMapHandler {
+    return [[OTTourMapHandler alloc] initWithTour:self.tour];
+}
+
+- (id<OTJoinerDelegate>)getJoiner {
+    return [[OTTourJoinerDelegate alloc] initWithTour:self.tour];
+}
+
+- (id<OTChangedHandlerDelegate>)getChangedHandler {
+    return [[OTTourChangedHandler alloc] initWithTour:self.tour];
 }
 
 @end

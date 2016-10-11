@@ -25,5 +25,9 @@ typedef enum {
 - (FeedItemState)getState;
 - (BOOL)canChangeEditState;
 - (BOOL)canInvite;
+- (BOOL)isActive;
+- (BOOL)isPublic;
+- (BOOL)canEdit;
+- (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure;
 
 @end

@@ -10,7 +10,7 @@
 #import "OTConsts.h"
 #import "OTTextView.h"
 
-@interface OTSpeechBehavior () <SKRecognizerDelegate>
+@interface OTSpeechBehavior () <SKRecognizerDelegate, UITextViewDelegate>
 
 @property (nonatomic) BOOL isRecording;
 @property (nonatomic, strong) NSLayoutConstraint *widthConstraint;
@@ -29,6 +29,9 @@
 }
 
 - (void)initialize {
+    if(!self.txtOutput.delegate)
+        self.txtOutput.delegate = self;
+    
     // to be removed on 1.9
     [OTSpeechKitManager setup];
     for(NSLayoutConstraint *constraint in self.btnRecord.constraints) {
@@ -64,8 +67,10 @@
 }
 
 - (void)toggleRecording {
-    if (!self.twoState && self.txtOutput.text.length)
+    if (!self.twoState && self.txtOutput.text.length) {
+        [self.txtOutput resignFirstResponder];
         [self sendActionsForControlEvents:UIControlEventValueChanged];
+    }
     else {
         [self.btnRecord setEnabled:NO];
         if (!self.isRecording)
@@ -83,38 +88,40 @@
 #pragma mark - Voice recognition methods
 
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithResults:(SKRecognition *)results {
-    NSLog(@"%@", @"Finish with results");
     if (results.results.count != 0) {
         self.txtOutput.textColor = [UIColor blackColor];
         NSString *text = self.txtOutput.text;
         NSString *result = [results.results objectAtIndex:0];
-        if (text.length == 0) {
+        if (text.length == 0)
             [self.txtOutput setText:result];
-        } else {
+        else
             [self.txtOutput setText:[NSString stringWithFormat:@"%@ %@", text, [result lowercaseString]]];
-        }
         if([self.txtOutput class] == [OTTextView class])
             [((OTTextView *)self.txtOutput) updateAfterSpeech];
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
     [self updateRecordButton];
 }
 
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion {
-    NSLog( @"Finish with error %@. Suggestion: %@", error.description, suggestion);
     [self updateRecordButton];
 }
 
 - (void)recognizerDidBeginRecording:(SKRecognizer *)recognizer {
-    NSLog(@"%@", @"Begin recording");
     [self.btnRecord setEnabled:YES];
     self.isRecording = YES;
     [self updateRecordButton];
 }
 
 - (void)recognizerDidFinishRecording:(SKRecognizer *)recognizer {
-    NSLog(@"%@", @"Finish recording");
     [self.btnRecord setEnabled:YES];
     self.isRecording = NO;
+    [self updateRecordButton];
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidChange:(UITextView *)textView {
     [self updateRecordButton];
 }
 

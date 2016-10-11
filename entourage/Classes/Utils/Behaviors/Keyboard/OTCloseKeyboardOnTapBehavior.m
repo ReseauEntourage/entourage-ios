@@ -17,6 +17,7 @@
 @implementation OTCloseKeyboardOnTapBehavior
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self.owner.view addGestureRecognizer:self.tapRecognizer];
 }

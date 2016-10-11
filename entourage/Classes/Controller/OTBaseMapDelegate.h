@@ -10,8 +10,6 @@
 
 #import "OTMainViewController.h"
 
-#define MAP_TOUR_LINE_WIDTH 4.0f
-
 @interface OTBaseMapDelegate : NSObject
 
 @property (nonatomic, weak) OTMainViewController* mapController;

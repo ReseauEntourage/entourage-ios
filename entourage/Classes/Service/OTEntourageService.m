@@ -13,17 +13,19 @@
 // Models
 #import "OTUser.h"
 #import "OTEntourage.h"
-#import "OTTourJoiner.h"
-
+#import "OTFeedItemJoiner.h"
+#import "OTEntourageInvitation.h"
 
 // Helpers
 #import "NSUserDefaults+OT.h"
 #import "NSDictionary+Parsing.h"
 
+
 /**************************************************************************************************/
 #pragma mark - Constants
 
 NSString *const kEntourages = @"entourages";
+extern NSString *kUsers;
 
 @implementation OTEntourageService
 
@@ -91,7 +93,7 @@ NSString *const kEntourages = @"entourages";
 
 
 - (void)joinEntourage:(OTEntourage *)entourage
-              success:(void(^)(OTTourJoiner *))success
+              success:(void(^)(OTFeedItemJoiner *))success
               failure:(void (^)(NSError *)) failure
 {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_REQUEST, entourage.uid, TOKEN];
@@ -104,7 +106,7 @@ NSString *const kEntourages = @"entourages";
      {
          NSDictionary *data = responseObject;
          NSDictionary *joinerDictionary = [data objectForKey:@"user"];
-         OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
+         OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc ]initWithDictionary:joinerDictionary];
          
          if (success)
          {
@@ -123,7 +125,7 @@ NSString *const kEntourages = @"entourages";
 
 - (void)joinMessageEntourage:(OTEntourage *)entourage
                      message:(NSString *)message
-              success:(void(^)(OTTourJoiner *))success
+              success:(void(^)(OTFeedItemJoiner *))success
               failure:(void (^)(NSError *)) failure
 {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
@@ -138,7 +140,7 @@ NSString *const kEntourages = @"entourages";
          {
              NSDictionary *data = responseObject;
              NSDictionary *joinerDictionary = [data objectForKey:@"user"];
-             OTTourJoiner *joiner = [[OTTourJoiner alloc ]initWithDictionary:joinerDictionary];
+             OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc ]initWithDictionary:joinerDictionary];
              
              if (success)
              {
@@ -162,7 +164,6 @@ NSString *const kEntourages = @"entourages";
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_UPDATE, entourage.uid, TOKEN];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[@"entourage"] = [entourage dictionaryForWebService];
-    
     [[OTHTTPRequestManager sharedInstance]
          PUTWithUrl:url
          andParameters:parameters
@@ -274,7 +275,7 @@ NSString *const kEntourages = @"entourages";
 
 - (void)sendMessage:(NSString *)message
         onEntourage:(OTEntourage *)entourage
-            success:(void(^)(OTTourMessage *))success
+            success:(void(^)(OTFeedItemMessage *))success
             failure:(void (^)(NSError *)) failure
 {
     
@@ -290,7 +291,7 @@ NSString *const kEntourages = @"entourages";
      {
          NSDictionary *data = responseObject;
          NSDictionary *messageDictionary = [data objectForKey:@"chat_message"];
-         OTTourMessage *message = [[OTTourMessage alloc] initWithDictionary:messageDictionary];
+         OTFeedItemMessage *message = [[OTFeedItemMessage alloc] initWithDictionary:messageDictionary];
          
          if (success)
          {
@@ -326,22 +327,22 @@ NSString *const kEntourages = @"entourages";
      }];
 }
 
-- (void)inviteNumbers:(NSArray *)phoneNumbers toEntourage:(OTEntourage *)entourage success:(void (^)())success failure:(void (^)(NSError *, NSArray *))failure {
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_INVITE, entourage.uid, TOKEN];
-    NSDictionary *messageDictionary = @{@"invite" : @{@"mode": @"SMS", @"phone_numbers": phoneNumbers}};
+- (void)entourageUsers:(OTEntourage *)entourage success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_feed_item_users", @""), kEntourages, entourage.uid,  TOKEN];
     [[OTHTTPRequestManager sharedInstance]
-     POSTWithUrl:url
-     andParameters:messageDictionary
+     GETWithUrl:url
+     andParameters:nil
      andSuccess:^(id responseObject)
      {
+         NSDictionary *data = responseObject;
+         NSArray *joiners = [data objectForKey:kUsers];
          if (success)
-             success();
+             success([OTFeedItemJoiner arrayForWebservice:joiners]);
      }
      andFailure:^(NSError *error)
      {
-#warning TODO - read phones that generated the error if they exist
          if (failure)
-             failure(error, nil);
+             failure(error);
      }];
 }
 
@@ -354,7 +355,7 @@ NSString *const kEntourages = @"entourages";
     NSArray *messagesDictionaries = [data objectForKey:@"chat_messages"];
     for (NSDictionary *messageDictionary in messagesDictionaries)
     {
-        OTTourMessage *message = [[OTTourMessage alloc] initWithDictionary:messageDictionary];
+        OTFeedItemMessage *message = [[OTFeedItemMessage alloc] initWithDictionary:messageDictionary];
         [messages addObject:message];
     }
     return messages;

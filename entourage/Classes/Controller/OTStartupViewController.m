@@ -9,14 +9,10 @@
 #import "OTStartupViewController.h"
 #import "UIView+entourage.h"
 #import "NSUserDefaults+OT.h"
-
-//Helper
 #import "UINavigationController+entourage.h"
 
-
 @interface OTStartupViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
-@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @end
@@ -32,12 +28,8 @@
 
     self.title = @"";
     
-    [self.registerButton setupHalfRoundedCorners];
-    [self.loginButton setupHalfRoundedCorners];
     self.loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.loginButton.layer.borderWidth = 1.5f;
-    
-    [self.facebookButton setupHalfRoundedCorners];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -7,8 +7,7 @@
 //
 
 #import "OTFeedItem.h"
-#import "OTTourAuthor.h"
-
+#import "OTFeedItemAuthor.h"
 
 @implementation OTFeedItem
 
@@ -26,12 +25,15 @@
     if (self) {
         self.uid = [dictionary numberForKey:kWSKeyID];
         NSDictionary *authorDictionary = [dictionary objectForKey:kWSKeyAuthor];
-        self.author = [[OTTourAuthor alloc] initWithDictionary:authorDictionary];
+        self.author = [[OTFeedItemAuthor alloc] initWithDictionary:authorDictionary];
         self.status = [dictionary valueForKey:kWSKeyStatus];
         self.joinStatus = [dictionary valueForKey:kWSKeyJoinStatus];
         self.noPeople = [dictionary numberForKey:kWSKeyNoPeople];
         self.type = [dictionary valueForKey:kWSKeyType];
         self.updatedDate = [dictionary dateForKey:kWSUpdatedDate];
+        NSDictionary *lastMessageDictionary = [dictionary objectForKey:kWSKeyLastMessage];
+        if([lastMessageDictionary class] != [NSNull class])
+            self.lastMessage = [[OTMyFeedMessage alloc] initWithDictionary:lastMessageDictionary];
     }
     return self;
 }
@@ -44,22 +46,6 @@
         }
     }
     return false;
-}
-
-- (NSString *)navigationTitle {
-    return nil;
-}
-
-- (NSString *)summary {
-    return nil;
-}
-
-- (NSAttributedString *)typeByNameAttributedString {
-    return nil;
-}
-
-- (NSString *)newsfeedStatus {
-    return self.status;
 }
 
 @end

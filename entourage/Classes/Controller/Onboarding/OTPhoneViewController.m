@@ -21,7 +21,6 @@
 @interface OTPhoneViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *phoneTextField;
-@property (nonatomic, weak) IBOutlet UIButton *continueButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 
@@ -33,15 +32,10 @@
     [super viewDidLoad];
 
     self.title = @"";
-    
+
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [self.continueButton setupHalfRoundedCorners];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showKeyboard:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -53,7 +47,7 @@
     OTUser *temporaryUser = [OTUser new];
     NSString *phone = self.phoneTextField.text;
     temporaryUser.phone = phone;
-    
+
     [SVProgressHUD show];
     [[OTOnboardingService new] setupNewUserWithPhone:phone
         success:^(OTUser *onboardUser) {
@@ -63,15 +57,14 @@
             [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
             NSString *errorMessage = [error userUpdateMessage];
-#warning Create special message(code) on server-side
-            if ([errorMessage isEqualToString:@"Phone n'est pas disponible"]) {
+            if (errorMessage) {
+                [SVProgressHUD showErrorWithStatus:errorMessage];
+                NSLog(@"ERR: something went wrong on onboarding user phone: %@", error.description);
+            } else {
                 [NSUserDefaults standardUserDefaults].temporaryUser = temporaryUser;
                 [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"alreadyRegisteredMessage")];
                 [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
-            } else {
-                [SVProgressHUD showErrorWithStatus:errorMessage];
             }
-            NSLog(@"ERR: something went wrong on onboarding user phone: %@", error.description);
         }];
 }
 

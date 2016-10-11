@@ -9,12 +9,16 @@
 #import "OTQuitFeedItemViewController.h"
 #import "OTTourService.h"
 #import "OTFeedItemFactory.h"
+#import "SVProgressHUD.h"
+#import "OTConsts.h"
 
 @implementation OTQuitFeedItemViewController
 
 - (IBAction)doQuitFeedItem {
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [self.feedItemQuitDelegate didQuitFeedItem:self.feedItem];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];
 }
 

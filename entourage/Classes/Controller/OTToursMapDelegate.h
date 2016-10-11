@@ -11,6 +11,4 @@
 
 @interface OTToursMapDelegate : OTBaseMapDelegate <MKMapViewDelegate>
 
-@property (nonatomic, strong) NSMapTable *drawnTours;
-
 @end

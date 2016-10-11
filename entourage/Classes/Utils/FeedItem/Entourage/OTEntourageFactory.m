@@ -10,6 +10,10 @@
 #import "OTEntourageStateTransition.h"
 #import "OTEntourageStateInfo.h"
 #import "OTEntourageMessaging.h"
+#import "OTEntourageUI.h"
+#import "OTEntourageMapHandler.h"
+#import "OTEntourageJoinerDelegate.h"
+#import "OTEntourageChangedHandler.h"
 
 @implementation OTEntourageFactory
 
@@ -22,6 +26,10 @@
     return self;
 }
 
+- (BOOL)isTour {
+    return NO;
+}
+
 - (id<OTStateTransitionDelegate>)getStateTransition {
     return [[OTEntourageStateTransition alloc] initWithEntourage:self.entourage];
 }
@@ -32,6 +40,22 @@
 
 - (id<OTMessagingDelegate>)getMessaging {
     return [[OTEntourageMessaging alloc] initWithEntourage:self.entourage];
+}
+
+- (id<OTUIDelegate>)getUI {
+    return [[OTEntourageUI alloc] initWithEntourage:self.entourage];
+}
+
+- (id<OTMapHandlerDelegate>)getMapHandler {
+    return [[OTEntourageMapHandler alloc] initWithEntourage:self.entourage];
+}
+
+- (id<OTJoinerDelegate>)getJoiner {
+    return [[OTEntourageJoinerDelegate alloc] initWithEntourage:self.entourage];
+}
+
+- (id<OTChangedHandlerDelegate>)getChangedHandler {
+    return [[OTEntourageChangedHandler alloc] initWithEntourage:self.entourage];
 }
 
 @end

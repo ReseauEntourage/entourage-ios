@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TId-I3-uOn">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Disclaimer View Controller-->
+        <scene sceneID="ial-ZR-AYf">
+            <objects>
+                <viewController id="kdW-Yk-xSz" customClass="OTDisclaimerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LMH-4A-aaU"/>
+                        <viewControllerLayoutGuide type="bottom" id="xi6-DQ-jxQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="miW-CP-3WS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Disclaimer text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="43l-Br-w05">
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES" calendarEvent="YES"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gow-eN-XXT">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="yuJ-bm-Yt9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="J'ai lu et j'accepte">
+                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="doAcceptDisclaimer" destination="kdW-Yk-xSz" eventType="touchUpInside" id="UJ0-sI-oBx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="43l-Br-w05" secondAttribute="trailing" constant="-4" id="48w-rj-561"/>
+                            <constraint firstItem="gow-eN-XXT" firstAttribute="top" secondItem="43l-Br-w05" secondAttribute="bottom" id="6Jj-AS-hWR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gow-eN-XXT" secondAttribute="trailing" constant="-20" id="7gE-wP-EMd"/>
+                            <constraint firstItem="43l-Br-w05" firstAttribute="top" secondItem="LMH-4A-aaU" secondAttribute="bottom" id="aea-Mp-Yaj"/>
+                            <constraint firstItem="gow-eN-XXT" firstAttribute="leading" secondItem="miW-CP-3WS" secondAttribute="leadingMargin" constant="-20" id="dnl-ma-Z3t"/>
+                            <constraint firstItem="43l-Br-w05" firstAttribute="leading" secondItem="miW-CP-3WS" secondAttribute="leadingMargin" constant="-4" id="kNr-SK-7H7"/>
+                            <constraint firstItem="xi6-DQ-jxQ" firstAttribute="top" secondItem="gow-eN-XXT" secondAttribute="bottom" id="lyo-qL-LaM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="XrN-Ad-hgf"/>
+                    <connections>
+                        <outlet property="txtMessage" destination="43l-Br-w05" id="FoX-Fa-fdD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zfE-lE-Bz6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="690" y="1490"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="APu-BG-IN3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TId-I3-uOn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2n1-DM-mol">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kdW-Yk-xSz" kind="relationship" relationship="rootViewController" id="Uo8-Bg-8gB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QTa-xK-eBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-54" y="1489"/>
+        </scene>
+    </scenes>
+</document>

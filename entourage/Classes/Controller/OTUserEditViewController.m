@@ -6,21 +6,14 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-
 #import "OTAppDelegate.h"
 #import "OTConsts.h"
-
-// Controllers
 #import "OTUserEditViewController.h"
 #import "UIViewController+menu.h"
 #import "OTUserEditPasswordViewController.h"
 #import "OTUserPictureViewController.h"
 #import "UIButton+entourage.h"
-
-// Service
 #import "OTAuthService.h"
-
-// Helpers
 #import "UIColor+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "UIButton+AFNetworking.h"
@@ -32,7 +25,6 @@
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
     SectionTypeInfoPrivate,
-    
     SectionTypeAssociations,
     SectionTypeDelete,
     SectionTypeInfoPublic// to be the 3rd in version 1.2
@@ -49,10 +41,12 @@ typedef NS_ENUM(NSInteger) {
 @property (nonatomic, strong) UITextField *firstNameTextField;
 @property (nonatomic, strong) UITextField *lastNameTextField;
 
+@property (nonatomic, strong) OTUser *user;
+@property (nonatomic, strong) NSArray *sections;
+
 @end
 
 @implementation OTUserEditViewController
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,6 +55,10 @@ typedef NS_ENUM(NSInteger) {
     [self showSaveButton];
     
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
+    if([self.user.type isEqualToString:USER_TYPE_PRO])
+        self.sections = @[@(SectionTypeSummary), @(SectionTypeInfoPrivate), @(SectionTypeAssociations), @(SectionTypeDelete)];
+    else
+        self.sections = @[@(SectionTypeSummary), @(SectionTypeInfoPrivate), @(SectionTypeDelete)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
 }
 
@@ -76,7 +74,6 @@ typedef NS_ENUM(NSInteger) {
     }
 }
 
-/**************************************************************************************************/
 #pragma mark - Private
 
 - (void)profilePictureUpdated:(NSNotification *)notification {
@@ -92,9 +89,7 @@ typedef NS_ENUM(NSInteger) {
 - (void)updateUser {
     NSString *firstName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeSummary]];
     NSString *lastName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:SectionTypeSummary]];
-
     NSString *email = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeInfoPrivate]];
-
     NSString *warning = nil;
     if (![email isValidEmail])
         warning = OTLocalizedString(@"invalidEmail");
@@ -102,18 +97,9 @@ typedef NS_ENUM(NSInteger) {
         warning =  OTLocalizedString(@"invalidLastName");
     if (firstName.length < 2)
         warning =  OTLocalizedString(@"invalidFirstName");
-
-
     if (warning != nil) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                       message:warning
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        
-        
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"close")
-                                                                style:UIAlertActionStyleCancel
-                                                              handler:^(UIAlertAction * _Nonnull action) {}];
-        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:warning preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"close") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
         return;
@@ -122,56 +108,46 @@ typedef NS_ENUM(NSInteger) {
     self.user.firstName = firstName;
     self.user.lastName = lastName;
     self.user.email = email;
-    
     [SVProgressHUD showWithStatus:OTLocalizedString(@"user_edit_saving")];
-    [[OTAuthService new] updateUserInformationWithUser:self.user
-                                               success:^(OTUser *user) {
+    [[OTAuthService new] updateUserInformationWithUser:self.user success:^(OTUser *user) {
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"user_edit_saved_ok")];
         [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
         if (self.user.password != nil) {
             [[A0SimpleKeychain keychain] setString:self.user.password forKey:kKeychainPassword];
         }
-       [self dismissViewControllerAnimated:YES completion:^{
-           
-       }];
-                                                
-        
+        [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_edit_saved_error")];
         NSLog(@"%@", [error description]);
     }];
 }
 
-/**************************************************************************************************/
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4; //5 in version 1.2
+    return self.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case SectionTypeSummary: {
+    int mappedSection = [[self.sections objectAtIndex:section] intValue];
+    switch (mappedSection) {
+        case SectionTypeSummary:
             return 3;
-        }
-        case SectionTypeInfoPrivate: {
+        case SectionTypeInfoPrivate:
             return 3;
-        }
-        case SectionTypeInfoPublic: {
+        case SectionTypeInfoPublic:
             return 1;
-        }
-        case SectionTypeAssociations: {
+        case SectionTypeAssociations:
             return self.user.organization == nil ? 0 : 1;
-        }
         default:
             return 1;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
+    int mappedSection = [[self.sections objectAtIndex:section] intValue];
     CGFloat height = 0.0f;
-    switch (section) {
+    switch (mappedSection) {
         case SectionTypeInfoPrivate:
         case SectionTypeInfoPublic:
             height = 45.0f;
@@ -185,13 +161,10 @@ typedef NS_ENUM(NSInteger) {
             break;
     }
     return height;
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
     return .5f;
-    
 }
 
 #define CELLHEIGHT_SUMMARY 135.0f
@@ -201,24 +174,19 @@ typedef NS_ENUM(NSInteger) {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.section) {
-        case SectionTypeSummary: {
-            
+    int mappedSection = [[self.sections objectAtIndex:indexPath.section] intValue];
+    switch (mappedSection) {
+        case SectionTypeSummary:
             if (indexPath.row == 0)
                 return CELLHEIGHT_SUMMARY;
             else
                 return CELLHEIGHT_DEFAULT;
-        }
-        case SectionTypeInfoPrivate: {
+        case SectionTypeInfoPrivate:
             return CELLHEIGHT_DEFAULT;
-        }
-        case SectionTypeInfoPublic: {
+        case SectionTypeInfoPublic:
             return CELLHEIGHT_DEFAULT;
-        }
-        case SectionTypeAssociations: {
+        case SectionTypeAssociations:
             return CELLHEIGHT_ENTOURAGES;
-        }
-            
         default:
             return CELLHEIGHT_DEFAULT;;
     }
@@ -226,27 +194,24 @@ typedef NS_ENUM(NSInteger) {
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    int mappedSection = [[self.sections objectAtIndex:section] intValue];
     NSString *title = @"";
-    switch (section) {
+    switch (mappedSection) {
         case SectionTypeInfoPrivate: {
             title = OTLocalizedString(@"privateInfo");
             break;
         }
         case SectionTypeInfoPublic: {
             title =  OTLocalizedString(@"publicInfo");
-
             break;
         }
         case SectionTypeAssociations: {
             title =  OTLocalizedString(@"organizations");
-
             break;
         }
-            
         default:
             title = @"";
     }
-
     
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 15)];
     headerView.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
@@ -260,7 +225,8 @@ typedef NS_ENUM(NSInteger) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *cellID;
-    switch (indexPath.section) {
+    int mappedSection = [[self.sections objectAtIndex:indexPath.section] intValue];
+    switch (mappedSection) {
         case SectionTypeSummary: {
             cellID = indexPath.row == 0 ? @"SummaryProfileCell" : @"EditProfileCell";
             break;
@@ -296,9 +262,8 @@ typedef NS_ENUM(NSInteger) {
         default:
             break;
     }
-    //NSLog(@"cell id: %@ at %@", cellID, indexPath.description);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
-    switch (indexPath.section) {
+    switch (mappedSection) {
         case SectionTypeSummary: {
             if (indexPath.row == 0) {
                 [self setupSummaryProfileCell:cell];
@@ -317,9 +282,6 @@ typedef NS_ENUM(NSInteger) {
                 case 0:
                     [self setupInfoCell:cell withTitle:OTLocalizedString(@"user_edit_email") withTextField:nil andText:self.user.email];
                     break;
-                case 1:
-                    //nothing
-                    break;
                 case 2:
                     [self setupPhoneCell:cell withPhone:self.user.phone];
                     break;
@@ -334,62 +296,51 @@ typedef NS_ENUM(NSInteger) {
         }
         case SectionTypeAssociations: {
             if (self.user.organization != nil) {
-                [self setupAssociationProfileCell:cell
-                             withAssociationTitle:self.user.organization.name
-                              andAssociationImage:self.user.organization.logoUrl];
+                [self setupAssociationProfileCell:cell withAssociationTitle:self.user.organization.name andAssociationImage:self.user.organization.logoUrl];
             }
             break;
         }
             
     }
-    
     return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.section) {
+    int mappedSection = [[self.sections objectAtIndex:indexPath.section] intValue];
+    switch (mappedSection) {
         case SectionTypeInfoPrivate:
             if (indexPath.row == 1) {
                 [self performSegueWithIdentifier:EDIT_PASSWORD_SEGUE sender:nil];
             }
             break;
         case SectionTypeDelete: {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                           message:OTLocalizedString(@"user_edit_delete")                                                                   preferredStyle:UIAlertControllerStyleAlert];
-
-
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert")                                                                    style:UIAlertActionStyleCancel
-                                                                  handler:^(UIAlertAction * _Nonnull action) {}];
-            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:OTLocalizedString(@"user_edit_delete") preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert")                                                                    style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
             [alert addAction:defaultAction];
-            UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"yes")
-                                                                    style:UIAlertActionStyleDestructive
-                                                                  handler:^(UIAlertAction * _Nonnull action) {
-                                                                      NSLog(@"deleting account ...");
-                                                                      [[OTAuthService new] deleteAccountForUser:0
-                                                                                                        success:^{
-                                                                                                            NSLog(@"deleted account.");
-                                                                                                            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFY_LOGOUT object:self];
-                                                                                                        } failure:^(NSError *error) {
-                                                                                                            NSLog(@"Something went wrong");
-                                                                                                            [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"user_edit_saved_ok")];
-                                                                                                        }];
-                                                                  }];
-            
+            UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"yes") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                    [[OTAuthService new] deleteAccountForUser:0 success:^{
+                        NSLog(@"deleted account.");
+                        NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+                        [loggedNumbers removeObject:[NSUserDefaults standardUserDefaults].currentUser.phone];
+                        [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFY_LOGOUT object:self];
+                    } failure:^(NSError *error) {
+                        NSLog(@"Something went wrong");
+                        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"user_edit_saved_ok")];
+                    }];
+                }];
             [alert addAction:deleteAction];
             [self presentViewController:alert animated:YES completion:nil];
-
-            }
+        }
             break;
         default:
             break;
     }
-    
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }
 
-/**************************************************************************************************/
 #pragma mark - TableViewCells Setup
 
 #define SUMMARY_AVATAR 1
@@ -411,7 +362,6 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)setupSummaryProfileCell:(UITableViewCell *)cell
 {
-    
     UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
     [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];
     [avatarShadow.layer setShadowOpacity:0.5];
@@ -420,26 +370,19 @@ typedef NS_ENUM(NSInteger) {
     UIButton *avatarButton = [cell viewWithTag:SUMMARY_AVATAR];
     avatarButton.layer.borderColor = [UIColor whiteColor].CGColor;
     [avatarButton setupAsProfilePictureFromUrl:self.user.avatarURL withPlaceholder:@"user"];
-    
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }
 
 - (void)setupTitleProfileCell:(UITableViewCell *)cell withTitle:(NSString *)title {
     UILabel *titleLabel = [cell viewWithTag:CELL_TITLE_TAG];
     titleLabel.text = title;
-    
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }
 
-- (void)setupInfoCell:(UITableViewCell *)cell
-            withTitle:(NSString *)title
-        withTextField:(UITextField *)myTextField
-              andText:(NSString *)text
+- (void)setupInfoCell:(UITableViewCell *)cell withTitle:(NSString *)title withTextField:(UITextField *)myTextField andText:(NSString *)text
 {
     UILabel *titleLabel = [cell viewWithTag:CELL_TITLE_TAG];
     titleLabel.text = title;
-    
-    
     UITextField *nameTextField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
     myTextField = nameTextField;
     nameTextField.text = text;
@@ -449,44 +392,34 @@ typedef NS_ENUM(NSInteger) {
 {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     UITextField * textField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
-    if (textField != nil && [textField isKindOfClass:[UITextField class]]) {
+    if (textField != nil && [textField isKindOfClass:[UITextField class]])
         return textField.text;
-    }
     return nil;
 }
 
-
-- (void)setupAssociationProfileCell:(UITableViewCell *)cell
-               withAssociationTitle:(NSString *)title
-                andAssociationImage:(NSString *)imageURL
+- (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationImage:(NSString *)imageURL
 {
     UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
     titleLabel.text = title;
-    
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE_TAG];
-    if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0) {
+    if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0)
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
-    }
 }
 
 - (void)setupPhoneCell:(UITableViewCell *)cell
              withPhone:(NSString *)phone
 {
     UILabel *phoneLabel = [cell viewWithTag:PHONE_LABEL_TAG];
-    if (phoneLabel != nil) {
+    if (phoneLabel != nil)
         phoneLabel.text = phone;
-    }
 }
 
-/**************************************************************************************************/
 #pragma mark - OTUserEditPasswordProtocol
 
 - (void)setNewPassword:(NSString *)password
 {
     self.user.password = password;
-    
-    [self dismissViewControllerAnimated:YES completion:^{
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

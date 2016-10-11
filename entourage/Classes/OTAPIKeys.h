@@ -23,6 +23,7 @@
 #define kWSKeyLocation @"location"
 #define kWSKeyLatitude @"latitude"
 #define kWSKeyLongitude @"longitude"
+#define kWSKeyLastMessage @"last_message"
 
 //Entourage
 #define kWSKeyEntourage @"entourage"
@@ -30,6 +31,7 @@
 #define kWSKeyEntourageType @"entourage_type"
 
 #define kWSKeyTitle @"title"
+#define kWSKeyName @"name"
 #define kWSKeyDescription @"description"
 
 // Tour
@@ -55,6 +57,8 @@
 #define kWSKeyAuthor @"author"
 #define kWSKeyAvatarUrl @"avatar_url"
 #define kWSKeyDisplayName @"display_name"
+#define kWSKeyFirstname @"first_name"
+#define kWSKeyLastname @"last_name"
 
 
 

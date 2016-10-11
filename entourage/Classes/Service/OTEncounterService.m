@@ -13,6 +13,7 @@
 #import "OTTourService.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
+#import "OTAPIConsts.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
@@ -80,6 +81,28 @@ NSString *const kEncounter = @"encounter";
          }];
 }
 
+- (void)updateEntourage:(OTEntourage *)entourage withSuccess:(void (^)(OTEntourage *))success failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_UPDATE, entourage.uid, TOKEN];
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    parameters[@"entourage"] = [entourage dictionaryForWebService];
+    [[OTHTTPRequestManager sharedInstance]
+     PATCHWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             NSDictionary *entourageDictionary = [(NSDictionary *)responseObject objectForKey:kWSKeyEntourage];
+             OTEntourage *updatedEntourage = [[OTEntourage alloc] initWithDictionary:entourageDictionary];
+             success(updatedEntourage);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+             failure(error);
+     }];
+}
 
 /**************************************************************************************************/
 #pragma mark -  methods

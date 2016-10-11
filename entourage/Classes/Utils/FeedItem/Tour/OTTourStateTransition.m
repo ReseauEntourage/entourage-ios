@@ -12,13 +12,15 @@
 
 @implementation OTTourStateTransition
 
-- (void)stopWithSuccess:(void (^)())success {
+- (void)stopWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
     [[OTTourService new] closeTour:self.tour
                        withSuccess:^(OTTour *updatedTour) {
                            NSLog(@"Closed tour: %@", updatedTour.uid);
                            success();
                        } failure:^(NSError *error) {
                            NSLog(@"CLOSEerr %@", error.description);
+                           if(failure)
+                               failure(error);
                        }];
 }
 
@@ -37,7 +39,7 @@
                        }];
 }
 
-- (void)quitWithSuccess:(void (^)())success {
+- (void)quitWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
     NSString *oldJoinState = self.tour.joinStatus;
     self.tour.joinStatus = JOIN_NOT_REQUESTED;
     [[OTTourService new] quitTour:self.tour
@@ -47,16 +49,21 @@
                           } failure:^(NSError *error) {
                               NSLog(@"QUITerr %@", error.description);
                               self.tour.joinStatus = oldJoinState;
+                              if(failure)
+                                  failure(error);
                           }];
 }
 
-- (void)sendJoinRequest:(void (^)(OTTourJoiner *))success orFailure:(void (^)(NSError *, BOOL))failure {
+- (void)sendJoinRequest:(void (^)(OTFeedItemJoiner *))success orFailure:(void (^)(NSError *, BOOL))failure {
+    NSString *oldJoinState = self.tour.joinStatus;
+    self.tour.joinStatus = JOIN_PENDING;
     [[OTTourService new] joinTour:self.tour
-        success:^(OTTourJoiner *joiner) {
+        success:^(OTFeedItemJoiner *joiner) {
             NSLog(@"Sent tour join request: %@", self.tour.uid);
             success(joiner);
         } failure:^(NSError *error) {
             NSLog(@"Send tour join request error: %@", error.description);
+            self.tour.joinStatus = oldJoinState;
             failure(error, YES);
         }];
 }

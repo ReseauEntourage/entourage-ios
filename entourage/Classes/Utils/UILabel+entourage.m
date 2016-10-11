@@ -7,7 +7,7 @@
 //
 
 #import "UILabel+entourage.h"
-#import "OTTourAuthor.h"
+#import "OTFeedItemAuthor.h"
 #import "OTTourPoint.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "TTTLocationFormatter.h"
@@ -16,41 +16,10 @@
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "OTFeedItem.h"
+#import "OTFeedItemFactory.h"
 
 
 @implementation UILabel (entourage)
-
-- (void)setupWithTypeAndAuthorOfTour:(OTTour*)tour {
-    OTTourAuthor *author = tour.author;
-    
-    NSString *tourType = tour.type;
-    if ([tourType isEqualToString:@"barehands"]) {
-        tourType = OTLocalizedString(@"tour_type_display_social");
-    } else     if ([tourType isEqualToString:@"medical"]) {
-        tourType = OTLocalizedString(@"tour_type_display_medical");
-    } else if ([tourType isEqualToString:@"alimentary"]) {
-        tourType = OTLocalizedString(@"tour_type_display_distributive");;
-    }
-    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
-    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_tour_by"), tourType] attributes:lightAttrs];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:author.displayName attributes:boldAttrs];
-    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
-    [typeByNameAttrString appendAttributedString:nameAttrString];
-    self.attributedText = typeByNameAttrString;
-}
-
-- (void)setupAsTypeByNameFromEntourage:(OTEntourage*)ent {
-    NSString *authorName = ent.author.displayName;
-    
-    NSDictionary *lightAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightLight]};
-    NSDictionary *boldAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]};
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formater_by"), [ent displayType].capitalizedString] attributes:lightAttrs];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:authorName attributes:boldAttrs];
-    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
-    [typeByNameAttrString appendAttributedString:nameAttrString];
-    self.attributedText = typeByNameAttrString;
-}
 
 - (void)setupWithTime:(NSDate*)date andLocation:(CLLocation*)location {
     // dateString - location
@@ -62,7 +31,6 @@
         [timeIntervalFormatter setLocale:frLocale];
         
         NSTimeInterval timeInterval = [date timeIntervalSinceDate:[NSDate date]];
-        //[timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
         dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
         self.text = dateString;
     }
@@ -85,12 +53,14 @@
 }
 
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {
-    self.hidden = ![FEEDITEM_STATUS_ACTIVE isEqualToString:[feedItem newsfeedStatus]];
+    self.hidden = ![[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
-        //
-        [self setText:OTLocalizedString(@"join_active")];
+        if([feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
+            [self setText:OTLocalizedString(@"ongoing")];
+        else
+            [self setText:OTLocalizedString(@"join_active")];
         [self setTextColor:[UIColor appOrangeColor]];
     } else {
         if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {

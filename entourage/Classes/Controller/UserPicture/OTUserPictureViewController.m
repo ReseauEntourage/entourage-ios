@@ -20,8 +20,6 @@
 
 @interface OTUserPictureViewController ()
 
-@property (nonatomic, weak) IBOutlet UIButton *btnFromGallery;
-@property (nonatomic, weak) IBOutlet UIButton *btnTakePicture;
 @property (nonatomic, strong) UIImage *image;
 @property (strong, nonatomic) IBOutlet OTPhotoPickerBehavior *photoPickerBehavior;
 
@@ -34,8 +32,6 @@
     self.title = @"";
     if (![NSUserDefaults standardUserDefaults].isTutorialCompleted)
         [self addIgnoreButton];
-    [self.btnFromGallery setupHalfRoundedCorners];
-    [self.btnTakePicture setupHalfRoundedCorners];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-#import "OTTourMessage.h" 
+#import "OTFeedItemMessage.h"
 
-@class OTEntourage, OTTourJoiner;
+@class OTEntourage, OTFeedItemJoiner;
 
 @interface OTEntourageService : NSObject
 
@@ -24,12 +24,12 @@
               failure:(void (^)(NSError *))failure;
 
 - (void)joinEntourage:(OTEntourage *)entourage
-              success:(void(^)(OTTourJoiner *))success
+              success:(void(^)(OTFeedItemJoiner *))success
               failure:(void (^)(NSError *)) failure;
 
 - (void)joinMessageEntourage:(OTEntourage *)entourage
                      message:(NSString *)message
-                     success:(void(^)(OTTourJoiner *))success
+                     success:(void(^)(OTFeedItemJoiner *))success
                      failure:(void (^)(NSError *)) failure;
 
 - (void)closeEntourage:(OTEntourage *)entourage
@@ -49,7 +49,7 @@
 
 - (void)sendMessage:(NSString *)message
         onEntourage:(OTEntourage *)entourage
-            success:(void(^)(OTTourMessage *))success
+            success:(void(^)(OTFeedItemMessage *))success
             failure:(void (^)(NSError *)) failure;
 
 - (void)entourageMessagesForEntourage:(NSNumber *)entourageID
@@ -60,8 +60,8 @@
          success:(void (^)())success
          failure:(void (^)(NSError *error))failure;
 
-- (void)inviteNumbers:(NSArray *)phoneNumbers toEntourage:(OTEntourage *)entourage
-              success:(void (^)())success
-              failure:(void (^)(NSError *error, NSArray *failedNumbers))failure;
+- (void)entourageUsers:(OTEntourage *)entourage
+               success:(void (^)(NSArray *))success
+               failure:(void (^)(NSError *))failure;
 
 @end

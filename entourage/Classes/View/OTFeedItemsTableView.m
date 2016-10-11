@@ -14,6 +14,8 @@
 #import "UIColor+entourage.h"
 #import "UILabel+entourage.h"
 #import "OTTourPoint.h"
+#import "OTFeedItemFactory.h"
+#import "OTUIDelegate.h"
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -25,13 +27,13 @@
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
-#define LOAD_MORE_CELLS_DELTA 4
+#define LOAD_MORE_DRAG_OFFSET 50
 
 #define MAPVIEW_HEIGHT 160.f
 #define MAPVIEW_REGION_SPAN_X_METERS 500
 #define MAPVIEW_REGION_SPAN_Y_METERS 500
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
-#define TOURS_REQUEST_DISTANCE_KM 10
+#define FEEDS_REQUEST_DISTANCE_KM 10
 #define LOCATION_MIN_DISTANCE 5.f
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
@@ -79,6 +81,8 @@
 - (void)_init {
     self.dataSource = self;
     self.delegate = self;
+    self.rowHeight = UITableViewAutomaticDimension;
+    self.estimatedRowHeight = 300;
 }
 
 - (NSArray *)items {
@@ -210,7 +214,6 @@
     OTFeedItem *item = self.feedItems[indexPath.section];
     NSLog(@">> %ld: %@", (long)indexPath.section, [item isKindOfClass:[OTTour class]] ? ((OTTour*)item).organizationName : ((OTEntourage*)item).title);
     
-
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
     UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
     UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
@@ -220,36 +223,27 @@
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     
+    id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
+    CLLocation *startPointLocation = nil;
     if ([item isKindOfClass:[OTTour class]]) {
         OTTour *tour = (OTTour *)item;
-        organizationLabel.text = tour.organizationName;
-        [typeByNameLabel setupWithTypeAndAuthorOfTour:tour];
-        
         // dateString - location
         OTTourPoint *startPoint = tour.tourPoints.firstObject;
-        CLLocation *startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
-        [timeLocationLabel setupWithTime:tour.creationDate andLocation:startPointLocation];
+        startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
     } else {
         OTEntourage *ent = (OTEntourage*)item;
-        
-        organizationLabel.text = ent.title;
-        [typeByNameLabel setupAsTypeByNameFromEntourage:ent];
-        CLLocation *startPointLocation = ent.location;
-        [timeLocationLabel setupWithTime:ent.creationDate andLocation:startPointLocation];
+        startPointLocation = ent.location;
     }
+    typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];
+    organizationLabel.text = [uiDelegate summary];
+    [timeLocationLabel setupWithTime:item.creationDate andLocation:startPointLocation];
+
     [userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
     noPeopleLabel.text = [NSString stringWithFormat:@"%d", item.noPeople.intValue];
     [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
     [statusButton setupAsStatusButtonForFeedItem:item];
     [statusLabel setupAsStatusButtonForFeedItem:item];
 
-    //check if we need to load more data
-     if (indexPath.section + LOAD_MORE_CELLS_DELTA >= self.feedItems.count) {
-        if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {
-            [self.feedItemsDelegate loadMoreData];
-        }
-    }
-    
     return cell;
 }
 
@@ -260,6 +254,22 @@
         [self.feedItemsDelegate showFeedInfo:selectedFeedItem];
     }
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    CGPoint offset = scrollView.contentOffset;
+    CGRect bounds = scrollView.bounds;
+    CGSize size = scrollView.contentSize;
+    UIEdgeInsets inset = scrollView.contentInset;
+    float y = offset.y + bounds.size.height - inset.bottom;
+    float h = size.height;
+    float reload_distance = LOAD_MORE_DRAG_OFFSET;
+    if(y > h + reload_distance) {
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)])
+                [self.feedItemsDelegate loadMoreData];
+        });
+    }
 }
 
 #define kMapHeaderOffsetY 0.0

@@ -25,14 +25,9 @@
     [self showInitialViewControllerFromStoryboardNamed:@"Main" addingNavigation:NO];
 }
 
-+ (UIStoryboard*)tourStoryboard {
-    UIStoryboard *tourStoryboard = [UIStoryboard storyboardWithName:@"FeedItem" bundle:nil];
-    return tourStoryboard;
-}
-
-+ (UIStoryboard*)entourageCreatorStoryboard {
-    UIStoryboard *tourStoryboard = [UIStoryboard storyboardWithName:@"EntourageCreator" bundle:nil];
-    return tourStoryboard;
++ (UIStoryboard*)entourageEditorStoryboard {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"EntourageEditor" bundle:nil];
+    return storyboard;
 }
 
 #pragma mark - Private
@@ -40,7 +35,6 @@
 + (void)showInitialViewControllerFromStoryboardNamed:(NSString *)storyboardName addingNavigation:(BOOL)addNavigation {
     NSLog(@"showing %@.storyboard=============================", storyboardName);
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
-    
     OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIWindow *window = [appDelegate window];
     UIViewController *viewController = [storyboard instantiateInitialViewController];

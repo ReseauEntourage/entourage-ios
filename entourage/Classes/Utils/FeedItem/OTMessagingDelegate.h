@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OTTourMessage.h"
+#import "OTFeedItemMessage.h"
 
 @protocol OTMessagingDelegate <NSObject>
 
-- (void)send:(NSString *)message withSuccess:(void (^)(OTTourMessage *))success orFailure:(void (^)(NSError *))failure;
+- (void)send:(NSString *)message withSuccess:(void (^)(OTFeedItemMessage *))success orFailure:(void (^)(NSError *))failure;
 - (void)invitePhones:(NSArray *)phones withSuccess:(void (^)())success orFailure:(void (^)(NSError *, NSArray *failedNumbers))failure;
+- (void)getMessagesWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
+- (void)getFeedItemUsersWithStatus:(NSString *)status success:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
+- (void)getEncountersWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
+- (NSArray *)getTimelineStatusMessages;
 
 @end

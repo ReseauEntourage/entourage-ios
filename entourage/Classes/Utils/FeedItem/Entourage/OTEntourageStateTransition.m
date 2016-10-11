@@ -13,7 +13,7 @@
 
 @implementation OTEntourageStateTransition
 
-- (void)stopWithSuccess:(void (^)())success {
+- (void)stopWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
     success();
 }
 
@@ -32,7 +32,7 @@
                                  }];
 }
 
-- (void)quitWithSuccess:(void (^)())success {
+- (void)quitWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
     NSString *oldJoinState = self.entourage.joinStatus;
     self.entourage.joinStatus = JOIN_NOT_REQUESTED;
     [[OTEntourageService new] quitEntourage:self.entourage
@@ -42,16 +42,21 @@
                           } failure:^(NSError *error) {
                               NSLog(@"QUITerr %@", error.description);
                               self.entourage.joinStatus = oldJoinState;
+                              if(failure)
+                                  failure(error);
                           }];
 }
 
-- (void)sendJoinRequest:(void (^)(OTTourJoiner *))success orFailure:(void (^)(NSError *, BOOL))failure {
+- (void)sendJoinRequest:(void (^)(OTFeedItemJoiner *))success orFailure:(void (^)(NSError *, BOOL))failure {
+    NSString *oldJoinState = self.entourage.joinStatus;
+    self.entourage.joinStatus = JOIN_PENDING;
     [[OTEntourageService new] joinEntourage:self.entourage
-        success:^(OTTourJoiner *joiner) {
+        success:^(OTFeedItemJoiner *joiner) {
             NSLog(@"Sent entourage join request: %@", self.entourage.uid);
             success(joiner);
         } failure:^(NSError *error) {
             NSLog(@"Send entourage join request error: %@", error.description);
+            self.entourage.joinStatus = oldJoinState;
             failure(error, NO);
         }];
 }

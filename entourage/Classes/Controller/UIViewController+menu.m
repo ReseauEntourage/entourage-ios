@@ -7,6 +7,8 @@
 //
 
 #import "UIViewController+menu.h"
+#import "UIBarButtonItem+Badge.h"
+#import "OTBadgeNumberService.h"
 
 // Controller
 #import "SWRevealViewController.h"
@@ -43,7 +45,6 @@
 
 - (UIBarButtonItem *)createBackFrontMenuButton {
     UIBarButtonItem *menuButton = nil;
-    
     SWRevealViewController *revealViewController = self.revealViewController;
     if (revealViewController)
     {
@@ -57,18 +58,18 @@
         [self.navigationItem setRightBarButtonItem:menuButton];
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     }
-    
     return menuButton;
-
 }
 
-- (UIBarButtonItem *)setupChatsButton {
+- (UIBarButtonItem *)setupChatsButtonWithTarget:(id)target andSelector:(SEL)selector {
     UIImage *chatsImage = [[UIImage imageNamed:@"discussion"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] init];
-    [chatButton setImage:chatsImage];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0,0,chatsImage.size.width, chatsImage.size.height);
+    [button setBackgroundImage:chatsImage forState:UIControlStateNormal];
+    [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     [self.navigationItem setRightBarButtonItem:chatButton];
-    
+    self.navigationItem.rightBarButtonItem.badgeValue = [OTBadgeNumberService sharedInstance].badgeCount.stringValue;
     return chatButton;
 }
 

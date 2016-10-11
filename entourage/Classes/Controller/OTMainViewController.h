@@ -18,15 +18,10 @@
 
 @interface OTMainViewController : UIViewController <OTMeetingCalloutViewControllerDelegate, OTCreateMeetingViewControllerDelegate, OTConfirmationViewControllerDelegate>
 
-
 // tour properties
-@property BOOL isTourRunning;
 @property NSString *currentTourType;
 @property (nonatomic, strong) OTTour *tour;
 @property (nonatomic, strong) OTFeedItem *selectedFeedItem;
-
-@property (nonatomic, strong) KPClusteringController *clusteringController;
-@property (nonatomic) double entourageScale;
 
 
 - (void)zoomToCurrentLocation:(id)sender;

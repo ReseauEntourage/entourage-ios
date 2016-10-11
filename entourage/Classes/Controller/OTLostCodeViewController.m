@@ -12,7 +12,7 @@
 // Service
 #import "OTAuthService.h"
 #import "IQKeyboardManager.h"
-
+#import "OTScrollPinBehavior.h"
 #import "UIViewController+menu.h"
 
 // Helper
@@ -21,7 +21,6 @@
 #import "UITextField+indentation.h"
 #import "UINavigationController+entourage.h"
 #import "UIView+entourage.h"
-#import "UIScrollView+entourage.h"
 #import "UIColor+entourage.h"
 
 // Model
@@ -36,14 +35,7 @@
 @interface OTLostCodeViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
-@property (weak, nonatomic) IBOutlet UIButton *regenerateCodeButton;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIView *inputContainerView;
-@property (weak, nonatomic) IBOutlet UIView *numberNotFoundContainerView;
-@property (weak, nonatomic) IBOutlet UIView *smsContainerView;
-@property (weak, nonatomic) IBOutlet UIImageView *actionIcon;
-@property (weak, nonatomic) IBOutlet UITextField *smsTextField;
-@property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+@property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
 
 @end
 
@@ -55,81 +47,41 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    [self.scrollBehavior initialize];
+
     self.navigationController.navigationBarHidden = NO;
     self.title = @"";
     [self setupCloseModalTransparent];
     [self.phoneTextField indentRight];
-    //[self showPhoneInput];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.navigationController presentTransparentNavigationBar];
-    
-    [self.regenerateCodeButton setupHalfRoundedCorners];
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showKeyboard:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [IQKeyboardManager sharedManager].enable = NO;
     [super viewDidAppear:animated];
-    
     [self.phoneTextField becomeFirstResponder];
 }
 
-#pragma mark - Private
-
-
-- (void)showNumberNotFoundContainer {
-    [self.phoneTextField resignFirstResponder];
-    self.inputContainerView.hidden = YES;
-    self.numberNotFoundContainerView.hidden = NO;
-    self.smsContainerView.hidden = YES;
-    self.actionIcon.image = [UIImage imageNamed:@"phone"];
+- (void)viewWillDisappear:(BOOL)animated {
+    [IQKeyboardManager sharedManager].enable = YES;
 }
 
-- (void)showSMSContainer {
-    [self.phoneTextField resignFirstResponder];
-    
-    self.inputContainerView.hidden = YES;
-    self.numberNotFoundContainerView.hidden = YES;
-    self.smsContainerView.hidden = NO;
-    self.actionIcon.image = [UIImage imageNamed:@"sms"];
-}
-
-/********************************************************************************/
 #pragma mark - Public Methods
 
 - (void)regenerateSecretCode {
     [SVProgressHUD show];
-    [[OTAuthService new] regenerateSecretCode:self.phoneTextField.text
-                                      success:^(OTUser *user) {
-                                          [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
-                                          [self showSMSContainer];
-                                      }
-                                      failure:^(NSError *error) {
-                                          [SVProgressHUD dismiss];
-                                          if ([error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"Not Found"]) {
-                                              [self showNumberNotFoundContainer];
-                                              //test SMS without really resetting code
-                                              //[self showSMSContainer];
-                                          }
-                                          else
-                                          {
-                                              [[[UIAlertView alloc]
-                                                initWithTitle:OTLocalizedString(@"error") //@"Erreur"
-                                                message:OTLocalizedString(@"requestNotSent")// @"Echec lors de la demande"
-                                                delegate:nil
-                                                cancelButtonTitle:nil
-                                                otherButtonTitles:@"Ok",
-                                                nil] show];
-                                          }
-                                      }];
+    [[OTAuthService new] regenerateSecretCode:self.phoneTextField.text success:^(OTUser *user) {
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
+    }
+    failure:^(NSError *error) {
+        [SVProgressHUD dismiss];
+        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"requestNotSent") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+    }];
 }
 
-/********************************************************************************/
 #pragma mark - Actions
 
 - (IBAction)regenerateButtonDidTap:(id)sender {
@@ -155,48 +107,6 @@
         [self.phoneTextField setSelected:NO];
         [self regenerateSecretCode];
     }
-}
-
-- (IBAction)sendSMSButtonDidTap:(id)sender {
-
-    if (self.smsTextField.text.length == 0) {
-        [[[UIAlertView alloc]
-          initWithTitle:OTLocalizedString(@"requestImposible")
-          message:OTLocalizedString(@"mustAddCode")
-          delegate:nil
-          cancelButtonTitle:nil
-          otherButtonTitles:@"Ok",
-          nil] show];
-    }
-    else if (![self.smsTextField.text isValidCode]) {
-        [[[UIAlertView alloc]
-          initWithTitle:OTLocalizedString(@"requestImposible")
-          message:OTLocalizedString(@"invalidCode")
-          delegate:nil
-          cancelButtonTitle:nil
-          otherButtonTitles:@"Ok",
-          nil] show];
-    }
-    else {
-        if ([self.codeDelegate respondsToSelector:@selector(loginWithNewCode:)]) {
-            //[self dismissViewControllerAnimated:YES completion:nil];
-            NSLog(@"New code: %@", self.smsTextField.text);
-            [self.codeDelegate loginWithNewCode:self.smsTextField.text];
-        }
-        
-    }
-}
-
-- (IBAction)showPhoneInput {
-    [self.phoneTextField becomeFirstResponder];
-    self.inputContainerView.hidden = NO;
-    self.numberNotFoundContainerView.hidden = YES;
-    self.smsContainerView.hidden = YES;
-    self.actionIcon.image = [UIImage imageNamed:@"phone"];
-}
-
-- (void)showKeyboard:(NSNotification*)notification {
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
 }
 
 @end

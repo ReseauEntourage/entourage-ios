@@ -11,11 +11,20 @@
 #import "OTStateTransitionDelegate.h"
 #import "OTStateInfoDelegate.h"
 #import "OTMessagingDelegate.h"
+#import "OTUIDelegate.h"
+#import "OTMapHandlerDelegate.h"
+#import "OTJoinerDelegate.h"
+#import "OTChangedHandlerDelegate.h"
 
 @protocol OTFeedItemFactoryDelegate <NSObject>
 
+- (BOOL)isTour;
 - (id<OTStateTransitionDelegate>)getStateTransition;
 - (id<OTStateInfoDelegate>)getStateInfo;
 - (id<OTMessagingDelegate>)getMessaging;
+- (id<OTUIDelegate>)getUI;
+- (id<OTMapHandlerDelegate>)getMapHandler;
+- (id<OTJoinerDelegate>)getJoiner;
+- (id<OTChangedHandlerDelegate>)getChangedHandler;
 
 @end
