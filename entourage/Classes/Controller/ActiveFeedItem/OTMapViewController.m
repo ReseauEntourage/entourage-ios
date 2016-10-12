@@ -44,6 +44,8 @@
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.inviteBehavior configureWith:self.feedItem];
     [self.membersTableSource initialize];
+    self.membersDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.membersDataSource.tableView.estimatedRowHeight = 1000;
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];

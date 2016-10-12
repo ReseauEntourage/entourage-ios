@@ -10,14 +10,11 @@
 #import "OTFeedItemJoiner.h"
 #import "OTUserProfileBehavior.h"
 #import "OTDataSourceBehavior.h"
+#import "OTBaseInfoCell.h"
 
-@interface OTMembersCell : UITableViewCell
+@interface OTMembersCell : OTBaseInfoCell
 
 @property (nonatomic, weak) IBOutlet UIButton *btnProfile;
 @property (nonatomic, weak) IBOutlet UILabel *lblDisplayName;
-@property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;
-@property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
-
-- (void)configureWith:(OTFeedItemJoiner *)member;
 
 @end

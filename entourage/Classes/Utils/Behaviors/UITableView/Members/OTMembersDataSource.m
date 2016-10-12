@@ -11,19 +11,34 @@
 #import "SVProgressHUD.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTConsts.h"
+#import "OTFeedItemFactory.h"
 
 @implementation OTMembersDataSource
 
 - (void)loadDataFor:(OTFeedItem *)feedItem {
     [SVProgressHUD show];
+    NSMutableArray *newItems = [NSMutableArray new];
+    [newItems addObject:feedItem];
+    NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
+    if([description length] > 0)
+        [newItems addObject:description];
+    [newItems addObject:feedItem];
+    [self refreshTable:newItems];
     [[[OTFeedItemFactory createFor:feedItem] getMessaging] getFeedItemUsersWithStatus:JOIN_ACCEPTED success:^(NSArray *items) {
-        self.lblMemberCount.text = [NSString stringWithFormat:OTLocalizedString(@"member_count"), items.count];
-        [self updateItems:items];
-        [self.tableDataSource refresh];
+        [newItems addObjectsFromArray:items];
+        [self refreshTable:newItems];
         [SVProgressHUD dismiss];
     } failure:^(NSError *failure) {
         [SVProgressHUD dismiss];
     }];
+}
+
+#pragma mark - private methods
+
+- (void)refreshTable:(NSArray *)newItems {
+    [self updateItems:newItems];
+    [self.tableDataSource refresh];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 @end
