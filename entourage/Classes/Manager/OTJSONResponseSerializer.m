@@ -21,16 +21,12 @@
     id JSONObject = [super responseObjectForResponse:response data:data error:error];
     if (*error != nil) {
         NSMutableDictionary *userInfo = [(*error).userInfo mutableCopy];
-        if (data == nil) {
-            userInfo[JSONResponseSerializerWithDataKey] = @"";
+        if (data == nil)
             userInfo[JSONResponseSerializerFullKey] = @"";
-        } else {
+        else {
             NSString* dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"response data: %@", dataString);
             userInfo[JSONResponseSerializerFullKey] = dataString;
-            NSString *errorMessage = [JSONObject valueForKey:@"message"];
-            if (errorMessage != nil)
-                userInfo[JSONResponseSerializerWithDataKey] = errorMessage;
         }
         NSError *newError = [NSError errorWithDomain:(*error).domain code:(*error).code userInfo:userInfo];
         (*error) = newError;

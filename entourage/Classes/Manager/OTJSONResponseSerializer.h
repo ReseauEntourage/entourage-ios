@@ -8,8 +8,8 @@
 
 #import "AFURLResponseSerialization.h"
 
-static NSString * const JSONResponseSerializerWithDataKey = @"JSONResponseSerializerWithDataKey";
 static NSString * const JSONResponseSerializerFullKey = @"JSONResponseSerializerFullKey";
+static NSString * const JSONResponseSerializerErrorKey = @"JSONResponseSerializerErrorKey";
 
 @interface OTJSONResponseSerializer : AFJSONResponseSerializer
 

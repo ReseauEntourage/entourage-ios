@@ -104,6 +104,7 @@
                                     </mapView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Feed item description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0pG-BU-ago">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -157,6 +158,7 @@
                         <outlet property="mapAnnotationProvider" destination="ZXV-cG-4Hc" id="8yu-i1-7Zu"/>
                         <outlet property="statusBehavior" destination="fgE-8v-az0" id="HgB-v3-Bi3"/>
                         <outlet property="summaryProvider" destination="dGI-3e-zqZ" id="18h-cY-5YP"/>
+                        <outlet property="txtDescription" destination="0pG-BU-ago" id="Vhx-QK-reS"/>
                         <outlet property="userProfileBehavior" destination="tZB-wv-d8L" id="kwr-QM-w45"/>
                         <segue destination="cpn-kw-7GN" kind="modal" identifier="JoinRequestSegue" id="YTg-Ni-VC1"/>
                         <segue destination="ZQc-ut-eal" kind="modal" identifier="UserProfileSegue" id="WdI-aW-aNA"/>

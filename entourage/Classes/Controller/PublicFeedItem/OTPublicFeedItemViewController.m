@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet OTStatusBehavior *statusBehavior;
 @property (strong, nonatomic) IBOutlet OTJoinBehavior *joinBehavior;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
+@property (strong, nonatomic) IBOutlet UITextView *txtDescription;
 
 @end
 
@@ -33,6 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.txtDescription.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor appGreyishBrownColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
     [self.summaryProvider configureWith:self.feedItem];
     [self.mapAnnotationProvider configureWith:self.feedItem];
     [self.mapAnnotationProvider addStartPoint];

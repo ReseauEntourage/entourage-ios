@@ -124,7 +124,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    NSString *alertTitle = OTLocalizedString(@"error");
                                    NSString *alertText = OTLocalizedString(@"connection_error");
                                    NSString *buttonTitle = @"ok";
-                                   if ([[error.userInfo valueForKey:JSONResponseSerializerWithDataKey] isEqualToString:@"unauthorized"]) {
+                                   NSDictionary *errorDict = [error.userInfo objectForKey:JSONResponseSerializerErrorKey];
+                                   if ([[errorDict objectForKey:@"code"] isEqualToString:@"UNAUTHORIZED"]) {
                                        alertTitle = OTLocalizedString(@"tryAgain");
                                        alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");
                                        buttonTitle = OTLocalizedString(@"tryAgain_short");

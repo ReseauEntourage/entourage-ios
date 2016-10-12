@@ -201,16 +201,22 @@
             if ([jsonObject isKindOfClass:[NSDictionary class]] && [jsonObject objectForKey:@"error"]) {
                 NSString *errorString = @"";
                 id errorValue = [jsonObject objectForKey:@"error"];
-                if ([errorValue isKindOfClass:[NSDictionary class]] && [errorValue objectForKey:@"message"])
+                NSDictionary *errorDict = @{};
+                if ([errorValue isKindOfClass:[NSDictionary class]] && [errorValue objectForKey:@"message"]) {
+                    errorDict = errorValue;
                     errorString = [errorValue objectForKey:@"message"];
+                }
                 else
                     errorString = errorValue;
-                actualError = [NSError errorWithDomain:error.domain code:error.code userInfo:@{ NSLocalizedDescriptionKey:errorString }];
+                NSDictionary *copy = [actualError.userInfo mutableCopy];
+                [copy setValue:errorString forKey:NSLocalizedDescriptionKey];
+                [copy setValue:errorDict forKey:JSONResponseSerializerErrorKey];
+                actualError = [NSError errorWithDomain:actualError.domain code:actualError.code userInfo:[copy copy]];
             }
         }
         else {
             NSString *genericErrorMessage = OTLocalizedString(@"generic_error");
-            actualError = [NSError errorWithDomain:error.domain code:error.code userInfo:@{ NSLocalizedDescriptionKey:genericErrorMessage }];
+            actualError = [NSError errorWithDomain:actualError.domain code:actualError.code userInfo:@{ NSLocalizedDescriptionKey:genericErrorMessage }];
         }
         return actualError;
     }
