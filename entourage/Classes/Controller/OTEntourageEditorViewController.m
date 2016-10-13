@@ -48,8 +48,11 @@
     
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEntourage:) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
-    [self setupUI];
     [self.disclaimer showDisclaimer];
+}
+
+- (void)viewDidLayoutSubviews {
+    [self setupUI];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -62,11 +65,10 @@
 - (void)setupUI {
     [self.titleTextView setTextContainerInset:UIEdgeInsetsMake(TEXTVIEW_PADDING_TOP, TEXTVIEW_PADDING, TEXTVIEW_PADDING_BOTTOM, 2*TEXTVIEW_PADDING)];
     [self.descriptionTextView setTextContainerInset:UIEdgeInsetsMake(TEXTVIEW_PADDING_TOP, TEXTVIEW_PADDING, TEXTVIEW_PADDING_BOTTOM, 2*TEXTVIEW_PADDING)];
-    NSString *typeString = [self.type isEqualToString: ENTOURAGE_DEMANDE] ? OTLocalizedString(@"demande") : OTLocalizedString(@"contribution");
-    NSString *titlePlaceholder = [NSString stringWithFormat:OTLocalizedString(@"entourageTitle"), typeString.lowercaseString];
-    [self.titleTextView setPlaceholder:titlePlaceholder];
+    BOOL isDemand = [self.type isEqualToString: ENTOURAGE_DEMANDE];
+    [self.titleTextView setPlaceholder:OTLocalizedString(isDemand ? @"edit_demand_title" : @"edit_contribution_title")];
     [self.titleTextView showCharCount];
-    [self.descriptionTextView setPlaceholder:OTLocalizedString(@"detailedDescription")];
+    [self.descriptionTextView setPlaceholder:OTLocalizedString(isDemand ? @"edit_demand_desc" : @"edit_contribution_desc")];
     if(self.entourage) {
         self.type = self.entourage.type;
         self.location = self.entourage.location;

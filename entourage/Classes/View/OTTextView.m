@@ -12,8 +12,6 @@
 
 #define MAX_LENGTH 150
 #define CHARCOUNT_FRAME CGRectMake(15.0f, self.bounds.size.height - 19.0f, 200.0f, 15.0f)
-#define PLACEHOLDER_LARGE_FRAME CGRectMake(15.0f, TEXTVIEW_PADDING_TOP, 200.0f, 18.0f)
-#define PLACEHOLDER_SMALL_FRAME CGRectMake(15.0f,  1.0, 200.0f, 10.0f)
 
 #define PLACEHOLDER_LARGE_COLOR [UIColor appGreyishColor]
 #define PLACEHOLDER_SMALL_COLOR [UIColor appOrangeColor]
@@ -107,8 +105,8 @@
 }
 
 - (void)setPlaceholder:(NSString *)placeholder {
-    
-    self.placeholderLabel = [[UILabel  alloc] initWithFrame:PLACEHOLDER_LARGE_FRAME];
+    self.placeholderLabel = [[UILabel  alloc] initWithFrame:self.frame];
+    self.placeholderLabel.numberOfLines = 0;
     self.placeholderLabel.text = placeholder;
     self.placeholderLabel.font = PLACEHOLDER_LARGE_FONT;
     self.placeholderLabel.textColor = PLACEHOLDER_LARGE_COLOR;
@@ -146,8 +144,7 @@
 - (void)showSmallPlaceholder {
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         self.placeholderLabel.textColor = PLACEHOLDER_SMALL_COLOR;
-
-        self.placeholderLabel.frame = PLACEHOLDER_SMALL_FRAME;
+        self.placeholderLabel.frame = self.frame;
         self.placeholderLabel.font = PLACEHOLDER_SMALL_FONT;
     } completion:^(BOOL finished) {
         
@@ -157,8 +154,7 @@
 - (void)showLargePlaceholder {
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         self.placeholderLabel.textColor = PLACEHOLDER_LARGE_COLOR;
-        
-        self.placeholderLabel.frame = PLACEHOLDER_LARGE_FRAME;
+        self.placeholderLabel.frame = self.frame;
         self.placeholderLabel.font = PLACEHOLDER_LARGE_FONT;
     } completion:^(BOOL finished) {
         

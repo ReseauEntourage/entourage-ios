@@ -117,11 +117,18 @@
 "tour_quitted" = "Maraude clôturée.";
 
 // Encounters
+
+
 "formatter_has_meet" = "%@ a rencontré %@";
 "has_encountered" = "a rencontré";
 "here" = "ici";
 "their_message" = "Notes";
-"entourageTitle" = "Titre de votre %@*";
+"edit_demand_title" = "Paire de gants pour Gilles";
+"edit_contribution_title" = "Titre de votre contribution*";
+"edit_demand_desc" = "Gilles passe la journée dehors la main tendue. Avec ce froid, il a les doigts tout engourdis. Qui aurait une paire de gants à donner ?
+(Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes)";
+"edit_contribution_desc" = "Je suis ancien employé de mairie et je peux aider dans des démarches administratives.
+(Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes.)";
 "invalidTitle" = "Titre invalide";
 "demande" = "Demande";
 "ask_for_help" = "Demande";
