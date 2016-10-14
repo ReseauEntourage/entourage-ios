@@ -61,54 +61,33 @@
                                             <constraint firstAttribute="bottom" secondItem="TMq-vF-SkB" secondAttribute="bottom" id="vR7-Xh-yQv"/>
                                         </constraints>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAO-qi-LuA" customClass="OTTextView">
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="IoX-bs-Exl"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8s-NE-WXH">
-                                        <color key="backgroundColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="71i-mL-7wj"/>
-                                        </constraints>
-                                    </view>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/150" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIU-a5-GrK">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="42" id="gqm-Zz-zXC"/>
-                                            <constraint firstAttribute="height" constant="15" id="i0u-th-rP6"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                                        <color key="textColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FdR-ZT-8EC">
-                                        <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZx-CX-XAj" customClass="OTTextView">
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
-                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ntm-E3-Q3a">
-                                                <color key="backgroundColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="wT3-nu-VKy"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wqv-Jw-6OX" customClass="OTTextWithCount">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="184" id="8CH-H2-NnR"/>
-                                            <constraint firstItem="Ntm-E3-Q3a" firstAttribute="leading" secondItem="FdR-ZT-8EC" secondAttribute="leading" constant="15" id="HxQ-Gn-oXd"/>
-                                            <constraint firstItem="Ntm-E3-Q3a" firstAttribute="top" secondItem="HZx-CX-XAj" secondAttribute="bottom" id="IjO-tZ-Ks8"/>
-                                            <constraint firstItem="HZx-CX-XAj" firstAttribute="top" secondItem="FdR-ZT-8EC" secondAttribute="top" id="WIc-3v-S6I"/>
-                                            <constraint firstAttribute="bottom" secondItem="HZx-CX-XAj" secondAttribute="bottom" constant="24" id="gqC-6o-lZP"/>
-                                            <constraint firstAttribute="trailing" secondItem="Ntm-E3-Q3a" secondAttribute="trailing" constant="15" id="nJ1-Ve-fWZ"/>
-                                            <constraint firstItem="HZx-CX-XAj" firstAttribute="leading" secondItem="FdR-ZT-8EC" secondAttribute="leading" id="uo5-BE-Pyi"/>
-                                            <constraint firstAttribute="trailing" secondItem="HZx-CX-XAj" secondAttribute="trailing" id="yfE-fI-DcC"/>
+                                            <constraint firstAttribute="height" constant="100" id="TPW-84-ARK"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderSmallColor">
+                                                <color key="value" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderLargeColor">
+                                                <color key="value" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DQu-fZ-3qK" customClass="OTTextWithCount">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="w44-b6-PaK"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderLargeColor">
+                                                <color key="value" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderSmallColor">
+                                                <color key="value" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaS-cA-NpN">
                                         <constraints>
@@ -128,24 +107,19 @@
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="CQF-gw-8gY" secondAttribute="trailing" id="6Ks-MP-LPa"/>
+                                    <constraint firstItem="Wqv-Jw-6OX" firstAttribute="top" secondItem="CQF-gw-8gY" secondAttribute="bottom" constant="15" id="6oX-TO-tE6"/>
                                     <constraint firstAttribute="bottom" secondItem="CQF-gw-8gY" secondAttribute="bottom" constant="377" id="DwI-uQ-JY3"/>
                                     <constraint firstAttribute="trailing" secondItem="iaS-cA-NpN" secondAttribute="trailing" constant="12" id="G3P-zf-feR"/>
                                     <constraint firstItem="CQF-gw-8gY" firstAttribute="top" secondItem="6z5-qg-bZE" secondAttribute="top" constant="15" id="GEF-S2-cnd"/>
-                                    <constraint firstItem="TIU-a5-GrK" firstAttribute="leading" secondItem="6z5-qg-bZE" secondAttribute="leading" constant="15" id="GW1-V8-gkB"/>
-                                    <constraint firstItem="TIU-a5-GrK" firstAttribute="top" secondItem="b8s-NE-WXH" secondAttribute="bottom" constant="4" id="Kom-yh-3PM"/>
-                                    <constraint firstItem="b8s-NE-WXH" firstAttribute="leading" secondItem="6z5-qg-bZE" secondAttribute="leading" constant="15" id="LXN-VJ-x2O"/>
-                                    <constraint firstItem="iaS-cA-NpN" firstAttribute="top" secondItem="CQF-gw-8gY" secondAttribute="bottom" constant="25" id="PFK-oH-c3w"/>
-                                    <constraint firstItem="FdR-ZT-8EC" firstAttribute="top" secondItem="zAO-qi-LuA" secondAttribute="bottom" constant="15" id="PPV-QF-LzI"/>
-                                    <constraint firstItem="zAO-qi-LuA" firstAttribute="top" secondItem="CQF-gw-8gY" secondAttribute="bottom" constant="15" id="SI6-Ov-dwl"/>
-                                    <constraint firstItem="b8s-NE-WXH" firstAttribute="bottom" secondItem="zAO-qi-LuA" secondAttribute="bottom" constant="-23" id="UX7-AC-bNN"/>
-                                    <constraint firstAttribute="trailing" secondItem="b8s-NE-WXH" secondAttribute="trailing" constant="15" id="Uss-JR-Inf"/>
-                                    <constraint firstItem="FdR-ZT-8EC" firstAttribute="leading" secondItem="6z5-qg-bZE" secondAttribute="leading" id="ZdK-1k-H56"/>
-                                    <constraint firstAttribute="trailing" secondItem="FdR-ZT-8EC" secondAttribute="trailing" id="eIa-m5-Eqb"/>
-                                    <constraint firstItem="ff7-J0-M6b" firstAttribute="top" secondItem="zAO-qi-LuA" secondAttribute="bottom" constant="24" id="fcY-hi-Jnv"/>
+                                    <constraint firstItem="Wqv-Jw-6OX" firstAttribute="leading" secondItem="6z5-qg-bZE" secondAttribute="leading" id="L1w-eO-fG3"/>
+                                    <constraint firstAttribute="trailing" secondItem="DQu-fZ-3qK" secondAttribute="trailing" id="U16-ZV-ifC"/>
+                                    <constraint firstItem="iaS-cA-NpN" firstAttribute="top" secondItem="Wqv-Jw-6OX" secondAttribute="top" constant="12" id="ZdN-d2-YzO"/>
+                                    <constraint firstItem="ff7-J0-M6b" firstAttribute="top" secondItem="DQu-fZ-3qK" secondAttribute="top" constant="12" id="c2I-rh-q4e"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wqv-Jw-6OX" secondAttribute="trailing" id="dfy-K3-E8V"/>
                                     <constraint firstItem="CQF-gw-8gY" firstAttribute="leading" secondItem="6z5-qg-bZE" secondAttribute="leading" id="jG9-Ir-58A"/>
                                     <constraint firstAttribute="trailing" secondItem="ff7-J0-M6b" secondAttribute="trailing" constant="12" id="nRb-5h-RAD"/>
-                                    <constraint firstItem="zAO-qi-LuA" firstAttribute="leading" secondItem="6z5-qg-bZE" secondAttribute="leading" id="qr1-oT-FJR"/>
-                                    <constraint firstAttribute="trailing" secondItem="zAO-qi-LuA" secondAttribute="trailing" id="ryr-b3-COI"/>
+                                    <constraint firstItem="DQu-fZ-3qK" firstAttribute="leading" secondItem="6z5-qg-bZE" secondAttribute="leading" id="pFn-Ae-7It"/>
+                                    <constraint firstItem="DQu-fZ-3qK" firstAttribute="top" secondItem="Wqv-Jw-6OX" secondAttribute="bottom" constant="15" id="wsI-pv-Irj"/>
                                     <constraint firstItem="CQF-gw-8gY" firstAttribute="centerX" secondItem="6z5-qg-bZE" secondAttribute="centerX" id="zAd-n2-Ci7"/>
                                 </constraints>
                             </scrollView>
@@ -162,31 +136,31 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="descriptionSpeechBehavior" destination="WHP-f1-Giq" id="bqz-13-pop"/>
-                        <outlet property="descriptionTextView" destination="HZx-CX-XAj" id="lqv-yn-ewZ"/>
+                        <outlet property="descriptionTextView" destination="DQu-fZ-3qK" id="ggD-tM-Qq4"/>
                         <outlet property="disclaimer" destination="wTf-Kj-drU" id="QPW-FK-jXB"/>
                         <outlet property="locationButton" destination="TMq-vF-SkB" id="mAT-hP-ehE"/>
                         <outlet property="titleSpeechBehavior" destination="E8P-ny-BW9" id="uGc-17-YT1"/>
-                        <outlet property="titleTextView" destination="zAO-qi-LuA" id="zJ9-Kb-Xpx"/>
+                        <outlet property="titleTextView" destination="Wqv-Jw-6OX" id="ZWk-lL-eww"/>
                         <segue destination="Ymp-mL-8r9" kind="modal" identifier="DisclaimerSegue" id="KGd-gj-kcs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S0x-1A-brf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="E8P-ny-BW9" userLabel="Title Speech Behavior" customClass="OTSpeechBehavior">
+                <customObject id="E8P-ny-BW9" userLabel="Title Speech Behavior" customClass="OTCountSpeechBehavior">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="twoState" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="btnRecord" destination="iaS-cA-NpN" id="AMP-p2-Gkq"/>
-                        <outlet property="txtOutput" destination="zAO-qi-LuA" id="2F7-ZT-XBT"/>
+                        <outlet property="txtOutput" destination="Wqv-Jw-6OX" id="UY5-O7-ACU"/>
                     </connections>
                 </customObject>
-                <customObject id="WHP-f1-Giq" userLabel="Description Speech Behavior" customClass="OTSpeechBehavior">
+                <customObject id="WHP-f1-Giq" userLabel="Description Speech Behavior" customClass="OTCountSpeechBehavior">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="twoState" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="btnRecord" destination="ff7-J0-M6b" id="e2x-XZ-HVN"/>
-                        <outlet property="txtOutput" destination="HZx-CX-XAj" id="X3r-tK-CQA"/>
+                        <outlet property="txtOutput" destination="DQu-fZ-3qK" id="DXl-xa-KJe"/>
                     </connections>
                 </customObject>
                 <customObject id="wTf-Kj-drU" customClass="OTEntourageDisclaimerBehavior">
@@ -195,7 +169,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="529" y="1490"/>
+            <point key="canvasLocation" x="528.5" y="1489.5"/>
         </scene>
         <!--Disclaimer-->
         <scene sceneID="eez-DQ-Rzy">
@@ -311,7 +285,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QW3-Z2-faC" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hTu-zA-fKa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hTu-zA-fKa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
