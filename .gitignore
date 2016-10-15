@@ -5,6 +5,13 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+*.p12
+*.cer
+*.pem
+*.mobileprovision
+*.certSigningRequest
+*.pkey
+
 ## Build generated
 build/
 DerivedData
