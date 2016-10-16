@@ -91,7 +91,7 @@
 - (void)updateLabelCount {
     if(!self.showCount)
         return;
-    self.charCountLabel.text = [NSString stringWithFormat:@"%lu/%d", self.textView.text.length, self.maxLength];
+    self.charCountLabel.text = [NSString stringWithFormat:@"%lu/%u", self.textView.text.length, self.maxLength];
 }
 
 #pragma mark - UITextViewDelegate

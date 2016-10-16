@@ -43,7 +43,8 @@
     [self.statusBehavior updateWith:self.feedItem];
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
-    if(FeedItemStateJoinNotRequested == [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState]) {
+    FeedItemState state = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
+    if(FeedItemStateJoinNotRequested == state) {
         UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(joinFeedItem:)];
         [self.navigationItem setRightBarButtonItem:joinButton];
     }

@@ -15,25 +15,24 @@
 
 - (FeedItemState)getState {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if ([currentUser.sid intValue] == [self.tour.author.uID intValue]) {
-        if ([TOUR_STATUS_ONGOING isEqualToString:self.tour.status])
-            return FeedItemStateOngoing;
-        else if ([TOUR_STATUS_FREEZED isEqualToString:self.tour.status])
-            return FeedItemStateFrozen;
-        else
-            return FeedItemStateClosed;
-    }
-    else {
+    FeedItemState result = FeedItemStateNone;
+    if ([TOUR_STATUS_ONGOING isEqualToString:self.tour.status])
+        result = FeedItemStateOngoing;
+    else if ([TOUR_STATUS_FREEZED isEqualToString:self.tour.status])
+        result = FeedItemStateFrozen;
+    else
+        return FeedItemStateClosed;
+    if ([currentUser.sid intValue] != [self.tour.author.uID intValue]) {
         if([JOIN_NOT_REQUESTED isEqualToString:self.tour.joinStatus])
-            return FeedItemStateJoinNotRequested;
+            result = FeedItemStateJoinNotRequested;
         else if([JOIN_ACCEPTED isEqualToString:self.tour.joinStatus])
-            return FeedItemStateJoinAccepted;
+            result = FeedItemStateJoinAccepted;
         else if([JOIN_PENDING isEqualToString:self.tour.joinStatus])
-            return FeedItemStateJoinPending;
+            result = FeedItemStateJoinPending;
         else if([JOIN_REJECTED isEqualToString:self.tour.joinStatus])
-            return FeedItemStateJoinRejected;
+            result = FeedItemStateJoinRejected;
     }
-    return FeedItemStateNone;
+    return result;
 }
 
 - (BOOL)canChangeEditState {
