@@ -256,7 +256,16 @@
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
     [self createMenuButton];
     [self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
-    [self setupLogoImage];
+    [self setupLogoImageWithTarget:self andSelector:@selector(logoTapped)];
+}
+
+- (void)logoTapped {
+    if(self.toursMapDelegate.isActive)
+       [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+    else {
+        self.isTourListDisplayed = YES;
+        [self switchToNewsfeed];
+    }
 }
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
