@@ -62,12 +62,11 @@
 
 - (NSString *)readFullName:(ABRecordRef)record {
     NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(record, kABPersonFirstNameProperty);
-    if(!firstName || firstName.length == 0)
-        return nil;
     NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(record, kABPersonLastNameProperty);
-    if(!lastName || lastName.length == 0)
+    NSString *fullName = [NSString stringWithFormat:@"%@ %@", firstName ? firstName : @"", lastName ? lastName : @""];
+    if(!fullName || [fullName stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length == 0)
         return nil;
-    return [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+    return fullName;
 }
 
 - (NSArray *)readPhones:(ABRecordRef)record {
@@ -78,8 +77,6 @@
 #warning Sergiu : check if this should be kept after i see the design
         //NSString *mobileLabel = (__bridge NSString*)ABMultiValueCopyLabelAtIndex(phones, phoneIndex);
         readPhone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, phoneIndex);
-        if(![readPhone isValidPhoneNumber])
-            continue;
         OTAddressBookPhone *phoneItem = [OTAddressBookPhone new];
         phoneItem.telephone = readPhone;
         [result addObject:phoneItem];
