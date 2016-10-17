@@ -12,6 +12,7 @@
 #import "OTSWRevealViewController.h"
 #import "SVProgressHUD.h"
 #import "OTFeedItemFactory.h"
+#import "OTUserViewController.h"
 
 @implementation OTDeepLinkService
 
@@ -37,6 +38,15 @@
         result = navController.topViewController;
     }
     return result;
+}
+
+- (void)showProfileFromAnywhereForUser:(NSNumber *)userId {
+    UIStoryboard *userProfileStorybard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
+    UINavigationController *rootUserProfileController = (UINavigationController *)[userProfileStorybard instantiateInitialViewController];
+    OTUserViewController *userController = (OTUserViewController *)rootUserProfileController.topViewController;
+    userController.userId = userId;
+    UIViewController *currentController = [self getTopViewController];
+    [currentController presentViewController:rootUserProfileController animated:YES completion:nil];
 }
 
 - (void)prepareControllers:(OTFeedItem *)feedItem {

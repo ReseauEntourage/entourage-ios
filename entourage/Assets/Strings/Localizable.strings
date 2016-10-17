@@ -216,6 +216,7 @@
 "user_profile_error" = "Erreur lors de la récupération du profil";
 "user_edit_email" = "E-mail";
 "user_edit_quartier" = "Quartier";
+"profile" = "Profil";
 
 // Filter
 "filter_maraudes_title" = "Types de maraude";
