@@ -19,9 +19,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     CAShapeLayer * maskLayer = [CAShapeLayer layer];
-    CGRect bounds = CGRectMake(0, 0, self.dataSource.tableView.contentSize.width - BUTTON_MARGIN, self.btnIgnore.bounds.size.height);
+    CGRect bounds = CGRectMake(0, 0, self.dataSource.tableView.contentSize.width - BUTTON_MARGIN, self.btnLast.bounds.size.height);
     maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: bounds byRoundingCorners: UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii: (CGSize){7.0, 7.0}].CGPath;
-    self.btnIgnore.layer.mask = maskLayer;
+    self.btnLast.layer.mask = maskLayer;
     self.btnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
 }
 

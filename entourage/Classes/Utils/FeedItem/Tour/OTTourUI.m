@@ -9,6 +9,7 @@
 #import "OTTourUI.h"
 #import "OTConsts.h"
 #import "OTLocationManager.h"
+#import "OTTourPoint.h"
 
 @implementation OTTourUI
 
@@ -44,7 +45,9 @@
     if(!currentLocation)
         return -1;
     
-    return [currentLocation distanceFromLocation:self.tour.tourPoints[0]];
+    OTTourPoint *first = self.tour.tourPoints[0];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:first.latitude longitude:first.longitude];
+    return [currentLocation distanceFromLocation:location];
 }
 
 - (NSString *)displayType {

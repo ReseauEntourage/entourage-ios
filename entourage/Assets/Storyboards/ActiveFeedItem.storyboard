@@ -293,11 +293,11 @@
                                                             <outlet property="lblInfo" destination="oDv-L9-1he" id="zNH-H8-PrW"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="JoinRequestedCell" rowHeight="295" id="1dN-Of-Xcg" customClass="OTJoinRequestedCell">
-                                                        <rect key="frame" x="0.0" y="326" width="383" height="295"/>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="JoinRequestedCell" rowHeight="331" id="1dN-Of-Xcg" customClass="OTJoinRequestedCell">
+                                                        <rect key="frame" x="0.0" y="326" width="383" height="331"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1dN-Of-Xcg" id="08g-4v-X9M">
-                                                            <frame key="frameInset" width="383" height="295"/>
+                                                            <frame key="frameInset" width="383" height="331"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entourage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cvh-Sq-5tA">
@@ -413,6 +413,19 @@
                                                                                 <action selector="rejectJoin" destination="1dN-Of-Xcg" eventType="touchUpInside" id="2zg-fR-SIA"/>
                                                                             </connections>
                                                                         </button>
+                                                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIq-iK-EkW">
+                                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="34" id="7WE-xX-qE0"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
+                                                                            <state key="normal" title="Profil">
+                                                                                <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            </state>
+                                                                            <connections>
+                                                                                <action selector="showUserDetails:" destination="1dN-Of-Xcg" eventType="touchUpInside" id="hXv-6C-IzQ"/>
+                                                                            </connections>
+                                                                        </button>
                                                                     </subviews>
                                                                     <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
@@ -420,10 +433,13 @@
                                                                         <constraint firstAttribute="trailing" secondItem="AIs-Hp-qgV" secondAttribute="trailing" constant="2" id="6Wz-i7-0jI"/>
                                                                         <constraint firstItem="ehS-pG-Yas" firstAttribute="top" secondItem="S7e-86-F8S" secondAttribute="top" id="9jH-Zn-mx8"/>
                                                                         <constraint firstItem="AIs-Hp-qgV" firstAttribute="top" secondItem="h3e-X4-SM1" secondAttribute="bottom" constant="2" id="EhD-am-xVh"/>
+                                                                        <constraint firstItem="BIq-iK-EkW" firstAttribute="leading" secondItem="S7e-86-F8S" secondAttribute="leading" constant="2" id="FAC-iG-3Na"/>
                                                                         <constraint firstItem="ehS-pG-Yas" firstAttribute="leading" secondItem="S7e-86-F8S" secondAttribute="leading" id="Kic-RP-106"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="AIs-Hp-qgV" secondAttribute="bottom" constant="2" id="LFj-cS-1BY"/>
                                                                         <constraint firstItem="h3e-X4-SM1" firstAttribute="top" secondItem="ehS-pG-Yas" secondAttribute="bottom" id="Tkb-Ja-HFM"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="BIq-iK-EkW" secondAttribute="bottom" constant="2" id="X2Z-fG-kVZ"/>
                                                                         <constraint firstItem="h3e-X4-SM1" firstAttribute="leading" secondItem="S7e-86-F8S" secondAttribute="leading" constant="2" id="frJ-cf-C4P"/>
+                                                                        <constraint firstItem="BIq-iK-EkW" firstAttribute="top" secondItem="AIs-Hp-qgV" secondAttribute="bottom" constant="2" id="hci-tS-SEp"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="BIq-iK-EkW" secondAttribute="trailing" constant="2" id="s8S-J9-pad"/>
                                                                         <constraint firstAttribute="trailing" secondItem="h3e-X4-SM1" secondAttribute="trailing" constant="2" id="sdm-F9-CQC"/>
                                                                         <constraint firstItem="AIs-Hp-qgV" firstAttribute="leading" secondItem="S7e-86-F8S" secondAttribute="leading" constant="2" id="yYr-N7-DEJ"/>
                                                                     </constraints>
@@ -453,7 +469,7 @@
                                                         </tableViewCellContentView>
                                                         <connections>
                                                             <outlet property="btnAvatar" destination="LTG-yP-khP" id="T9A-rL-jb0"/>
-                                                            <outlet property="btnIgnore" destination="AIs-Hp-qgV" id="fIt-Mj-883"/>
+                                                            <outlet property="btnLast" destination="BIq-iK-EkW" id="ARz-HU-M0r"/>
                                                             <outlet property="dataSource" destination="1dX-UW-k7J" id="pAp-7R-3PH"/>
                                                             <outlet property="lblMessage" destination="j8e-Uc-J4v" id="IOi-IY-ukZ"/>
                                                             <outlet property="lblUserName" destination="R7L-pV-Coz" id="X1x-R5-MGk"/>
@@ -461,7 +477,7 @@
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EncounterCell" rowHeight="44" id="G2p-zP-CoV" customClass="OTEncounterCell">
-                                                        <rect key="frame" x="0.0" y="621" width="383" height="44"/>
+                                                        <rect key="frame" x="0.0" y="657" width="383" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G2p-zP-CoV" id="gkp-1r-kpf">
                                                             <frame key="frameInset" width="383" height="44"/>
@@ -484,7 +500,7 @@
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaceholderCell" textLabel="e2p-aY-pYA" rowHeight="70" style="IBUITableViewCellStyleDefault" id="z6P-3h-PpM" customClass="OTPlaceholderCell">
-                                                        <rect key="frame" x="0.0" y="665" width="383" height="70"/>
+                                                        <rect key="frame" x="0.0" y="701" width="383" height="70"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z6P-3h-PpM" id="0FF-ru-cK3">
                                                             <frame key="frameInset" width="383" height="70"/>
@@ -1157,7 +1173,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DCACC5F3-8D4C-447E-8FAB-5CF70B69DBDD" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AC3AF299-7B4A-4F19-94B2-9B300DBEA462" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
                                                         <constraint firstAttribute="height" constant="25" id="ayO-tA-95R"/>
@@ -1188,7 +1204,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1246D2BA-084B-43BC-A32A-D87F009DA332" translatesAutoresizingMaskIntoConstraints="NO" id="Hs3-2H-Kbn">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0AA0ECC4-2F63-4ABE-86B1-B97D728C23A8" translatesAutoresizingMaskIntoConstraints="NO" id="Hs3-2H-Kbn">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="0KW-WY-JpJ"/>
                                                         <constraint firstAttribute="width" constant="25" id="dUs-pz-iZZ"/>
@@ -1393,7 +1409,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1246D2BA-084B-43BC-A32A-D87F009DA332" width="48" height="48">
+        <image name="0AA0ECC4-2F63-4ABE-86B1-B97D728C23A8" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1616,7 +1632,7 @@ pACmAKgArQDEAMYAyDHaMd8x6jHzMgYyCjIVMh4yIzIrMi4yMzJCMkYyTTJVMmIyZzJpMmsycDJ4Mnsy
 gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
 </mutableData>
         </image>
-        <image name="DCACC5F3-8D4C-447E-8FAB-5CF70B69DBDD" width="48" height="48">
+        <image name="AC3AF299-7B4A-4F19-94B2-9B300DBEA462" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1850,12 +1866,12 @@ gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qbj-7b-m5F"/>
-        <segue reference="0Fj-Nh-lj4"/>
-        <segue reference="DLP-On-QzP"/>
-        <segue reference="TWk-BX-Lb1"/>
-        <segue reference="fUf-PJ-SgA"/>
-        <segue reference="Cgj-Wq-qez"/>
-        <segue reference="Rwq-4K-0sd"/>
+        <segue reference="ffc-Pt-QuG"/>
+        <segue reference="r9m-eb-lob"/>
+        <segue reference="zFK-Fj-hWR"/>
+        <segue reference="TAD-d7-tmZ"/>
+        <segue reference="nan-zV-dem"/>
+        <segue reference="8gM-o4-A6h"/>
+        <segue reference="5BX-au-xTN"/>
     </inferredMetricsTieBreakers>
 </document>
