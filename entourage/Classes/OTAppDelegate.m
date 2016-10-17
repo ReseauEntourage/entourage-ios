@@ -44,9 +44,11 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"EMA.log"];
     freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
     
+#if !DEBUG
     [Flurry setAppVersion:[OTVersionInfo currentVersion]];
 	[Flurry setCrashReportingEnabled:YES];
 	[Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
+#endif
     [IQKeyboardManager sharedManager].enable = YES;
     [self configureUIAppearance];
     
