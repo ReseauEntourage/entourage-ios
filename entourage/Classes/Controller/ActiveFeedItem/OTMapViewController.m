@@ -9,7 +9,6 @@
 #import "OTMapViewController.h"
 #import "UIColor+entourage.h"
 #import "OTFeedItemFactory.h"
-#import "OTMapAnnotationProviderBehavior.h"
 #import "OTStatusChangedBehavior.h"
 #import "OTSummaryProviderBehavior.h"
 #import "OTUserProfileBehavior.h"
@@ -21,7 +20,6 @@
 
 @interface OTMapViewController ()
 
-@property (nonatomic, weak) IBOutlet OTMapAnnotationProviderBehavior *annotationProvider;
 @property (nonatomic, weak) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
 @property (nonatomic, weak) IBOutlet OTSummaryProviderBehavior *summaryProviderBehavior;
 @property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfileBehavior;
@@ -38,9 +36,6 @@
     [super viewDidLoad];
     
     [self.summaryProviderBehavior configureWith:self.feedItem];
-    [self.annotationProvider configureWith:self.feedItem];
-    [self.annotationProvider addStartPoint];
-    [self.annotationProvider drawData];
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.inviteBehavior configureWith:self.feedItem];
     [self.membersTableSource initialize];

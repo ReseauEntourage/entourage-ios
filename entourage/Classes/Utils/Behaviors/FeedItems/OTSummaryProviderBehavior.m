@@ -14,6 +14,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "UIButton+entourage.h"
+#import "NSDate+ui.h"
 
 @interface OTSummaryProviderBehavior ()
 
@@ -45,8 +46,8 @@
     if(self.txtFeedItemDescription)
         self.txtFeedItemDescription.text = [uiDelegate feedItemDescription];
     if(self.lblTimeDistance) {
-        self.lblTimeDistance.text = @"";
-        [uiDelegate timeDataFor:self.lblTimeDistance];
+        double distance = [uiDelegate distance];
+        self.lblTimeDistance.text = [self getDistance:distance with:feedItem.creationDate];
     }
 }
 
@@ -74,6 +75,27 @@
     OTFeedItem *feedItem = (OTFeedItem *)[notification.userInfo objectForKey:kNotificationEntourageChangedEntourageKey];
     [[[OTFeedItemFactory createFor:self.feedItem] getChangedHandler] updateWith:feedItem];
     [self configureWith:self.feedItem];
+}
+
+- (NSString *)getDistance:(double)distance with:(NSDate *)creationDate {
+    NSString *fromDate = [creationDate sinceNow];
+    if(distance < 0)
+        return fromDate;
+    int distanceAmount = [self getDistance:distance];
+    NSString *distanceQualifier = [self getDistanceQualifier:distance];
+    return [NSString stringWithFormat:OTLocalizedString(@"entourage_time_data"), fromDate, distanceAmount, distanceQualifier];
+}
+
+- (int)getDistance:(double)from {
+    if(from < 1000)
+        return 500;
+    return round(from / 1000);
+}
+
+- (NSString *)getDistanceQualifier:(double)from {
+    if(from < 1000)
+        return @"m";
+    return @"km";
 }
 
 @end

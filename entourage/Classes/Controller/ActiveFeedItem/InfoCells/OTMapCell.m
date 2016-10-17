@@ -13,6 +13,8 @@
 - (void)configureWith:(OTFeedItem *)item {
     self.annotationProvider.map = self.map;
     [self.annotationProvider configureWith:item];
+    [self.annotationProvider addStartPoint];
+    [self.annotationProvider drawData];
 }
 
 @end

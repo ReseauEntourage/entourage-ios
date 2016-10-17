@@ -16,6 +16,7 @@
 #import "OTTourPoint.h"
 #import "OTFeedItemFactory.h"
 #import "OTUIDelegate.h"
+#import "OTSummaryProviderBehavior.h"
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2

@@ -875,7 +875,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="annotationProvider" destination="Mb6-Jg-13f" id="Y3C-B9-kBr"/>
                         <outlet property="editEntourageBehavior" destination="wEV-k5-DKd" id="oId-hc-Uh8"/>
                         <outlet property="inviteBehavior" destination="Wa5-cU-lsc" id="RoX-G8-uXr"/>
                         <outlet property="membersDataSource" destination="1ju-xM-ggw" id="nuG-MY-aMg"/>
@@ -1158,7 +1157,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="E9B3C222-5BC7-47AC-AD7A-E29010D6A219" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DCACC5F3-8D4C-447E-8FAB-5CF70B69DBDD" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
                                                         <constraint firstAttribute="height" constant="25" id="ayO-tA-95R"/>
@@ -1189,7 +1188,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="B6C01A17-D195-432E-9C31-204BF81D2A4C" translatesAutoresizingMaskIntoConstraints="NO" id="Hs3-2H-Kbn">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1246D2BA-084B-43BC-A32A-D87F009DA332" translatesAutoresizingMaskIntoConstraints="NO" id="Hs3-2H-Kbn">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="0KW-WY-JpJ"/>
                                                         <constraint firstAttribute="width" constant="25" id="dUs-pz-iZZ"/>
@@ -1394,7 +1393,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="B6C01A17-D195-432E-9C31-204BF81D2A4C" width="48" height="48">
+        <image name="1246D2BA-084B-43BC-A32A-D87F009DA332" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1617,7 +1616,7 @@ pACmAKgArQDEAMYAyDHaMd8x6jHzMgYyCjIVMh4yIzIrMi4yMzJCMkYyTTJVMmIyZzJpMmsycDJ4Mnsy
 gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
 </mutableData>
         </image>
-        <image name="E9B3C222-5BC7-47AC-AD7A-E29010D6A219" width="48" height="48">
+        <image name="DCACC5F3-8D4C-447E-8FAB-5CF70B69DBDD" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

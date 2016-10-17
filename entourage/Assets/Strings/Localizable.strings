@@ -168,8 +168,7 @@
 "item_option_close" = "Arrêter";
 "item_option_freeze" = "Clôturer";
 "item_option_quit" = "Quitter";
-"tour_time_data" = "%@ - à %@ m";
-"entourage_time_data" = "%@ - %@";
+"entourage_time_data" = "%@ - à %d%@";
 "member_count" = "Membres (%d)";
 
 // Tutorial
