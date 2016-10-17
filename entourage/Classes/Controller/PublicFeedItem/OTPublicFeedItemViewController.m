@@ -36,9 +36,6 @@
 
     self.txtDescription.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor appGreyishBrownColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
     [self.summaryProvider configureWith:self.feedItem];
-    [self.mapAnnotationProvider configureWith:self.feedItem];
-    [self.mapAnnotationProvider addStartPoint];
-    [self.mapAnnotationProvider drawData];
     [self.statusBehavior initialize];
     [self.statusBehavior updateWith:self.feedItem];
 
@@ -48,6 +45,12 @@
         UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(joinFeedItem:)];
         [self.navigationItem setRightBarButtonItem:joinButton];
     }
+}
+
+- (void)viewDidLayoutSubviews {
+    [self.mapAnnotationProvider configureWith:self.feedItem];
+    [self.mapAnnotationProvider addStartPoint];
+    [self.mapAnnotationProvider drawData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
