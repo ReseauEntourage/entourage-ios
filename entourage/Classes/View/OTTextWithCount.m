@@ -120,6 +120,7 @@
 #pragma mark - placeholder management
 
 - (void)showSmallPlaceholder {
+    self.placeholderLabel.text = self.editingPlaceholder;
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         self.placeholderLabel.font = SMALL_PLACEHOLDER_FONT;
         self.placeholderLabel.textColor = self.placeholderSmallColor;
@@ -129,6 +130,7 @@
 }
 
 - (void)showLargePlaceholder {
+    self.placeholderLabel.text = self.placeholder;
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         self.placeholderLabel.font = LARGE_PLACEHOLDER_FONT;
         self.placeholderLabel.textColor = self.placeholderLargeColor;
@@ -155,7 +157,7 @@
     self.largePlaceholderFrame = CGRectMake(LARGE_PLACEHOLDER_INSETS, LARGE_PLACEHOLDER_INSETS, insetedWidth, largeMaxSize.size.height);
     self.largeTextviewFrame = CGRectMake(LARGE_PLACEHOLDER_INSETS, LARGE_PLACEHOLDER_INSETS, insetedWidth, self.frame.size.height - LARGE_PLACEHOLDER_INSETS - COUNT_LABEL_OFFSET);
     
-    CGRect smallMaxSize = [self.placeholder boundingRectWithSize:maxAvailableEditing.size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: SMALL_PLACEHOLDER_FONT} context:nil];
+    CGRect smallMaxSize = [self.editingPlaceholder boundingRectWithSize:maxAvailableEditing.size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: SMALL_PLACEHOLDER_FONT} context:nil];
     self.smallPlaceholderFrame = CGRectMake(LARGE_PLACEHOLDER_INSETS, SMALL_PLACEHOLDER_INSETS, insetedWidth, smallMaxSize.size.height);
     self.smallTextviewFrame = CGRectMake(LARGE_PLACEHOLDER_INSETS, 2 * SMALL_PLACEHOLDER_INSETS + smallMaxSize.size.height, insetedWidth, self.frame.size.height - 2 * SMALL_PLACEHOLDER_INSETS - smallMaxSize.size.height - COUNT_LABEL_OFFSET);
     

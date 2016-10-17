@@ -125,6 +125,7 @@
 "their_message" = "Notes";
 "edit_demand_title" = "Paire de gants pour Gilles";
 "edit_contribution_title" = "Titre de votre contribution*";
+"edit_entourage_title" = "Titre de votre %@*";
 "edit_demand_desc" = "Gilles passe la journée dehors la main tendue. Avec ce froid, il a les doigts tout engourdis. Qui aurait une paire de gants à donner ?
 (Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes)";
 "edit_contribution_desc" = "Je suis ancien employé de mairie et je peux aider dans des démarches administratives.

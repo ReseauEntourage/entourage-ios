@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong, nullable) UITextView *textView;
 @property (nonatomic, strong, nullable) NSString *placeholder;
+@property (nonatomic, strong, nullable) NSString *editingPlaceholder;
 @property (nonatomic, assign) int maxLength;
 @property (nonatomic, strong, nullable) IBInspectable UIColor *placeholderLargeColor;
 @property (nonatomic, strong, nullable) IBInspectable UIColor *placeholderSmallColor;

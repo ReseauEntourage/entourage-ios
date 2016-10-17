@@ -61,9 +61,11 @@
 
 - (void)setupUI {
     BOOL isDemand = [self.type isEqualToString: ENTOURAGE_DEMANDE];
-    self.titleTextView.placeholder = OTLocalizedString(isDemand ? @"edit_demand_title" : @"edit_contribution_title");
     self.titleTextView.maxLength = 150;
+    self.titleTextView.placeholder = OTLocalizedString(isDemand ? @"edit_demand_title" : @"edit_contribution_title");
+    self.titleTextView.editingPlaceholder = [NSString stringWithFormat:OTLocalizedString(@"edit_entourage_title"), [OTLocalizedString(isDemand ? @"demande" : @"contribution") lowercaseString]];
     self.descriptionTextView.placeholder = OTLocalizedString(isDemand ? @"edit_demand_desc" : @"edit_contribution_desc");
+    self.descriptionTextView.editingPlaceholder = OTLocalizedString(@"detailedDescription");
     if(self.entourage) {
         self.type = self.entourage.type;
         self.location = self.entourage.location;
