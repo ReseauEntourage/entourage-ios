@@ -206,6 +206,10 @@
                     errorString = [errorValue objectForKey:@"message"];
                 else
                     errorString = errorValue;
+                if([errorString isKindOfClass:[NSArray class]]) {
+                    NSArray *errorArray = (NSArray *)errorString;
+                    errorString = errorArray.count > 0 ? errorArray[0] : OTLocalizedString(@"generic_error");
+                }
                 NSDictionary *copy = [actualError.userInfo mutableCopy];
                 [copy setValue:errorString forKey:NSLocalizedDescriptionKey];
                 [copy setValue:jsonObject forKey:JSONResponseSerializerFullDictKey];

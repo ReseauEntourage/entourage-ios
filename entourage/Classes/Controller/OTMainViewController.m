@@ -420,7 +420,6 @@ static BOOL didGetAnyData = NO;
 
         [self.tableView addFeedItems:feeds];
         [self feedMapWithFeedItems];
-          //[self feedMapViewWithEncounters];
         [self.tableView reloadData];
         self.currentPagination.isLoading = NO;
     } failure:^(NSError *error) {
@@ -428,8 +427,8 @@ static BOOL didGetAnyData = NO;
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.requestedToursCoordinate = oldRequestedCoordinate;
         [self registerObserver];
-        [self.indicatorView setHidden:YES];
         self.currentPagination.isLoading = NO;
+        [self.indicatorView setHidden:YES];
     }];
 }
 

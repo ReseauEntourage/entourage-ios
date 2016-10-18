@@ -130,7 +130,6 @@
 		1E5F79921D5A16DE0005003C /* OTInvitationsCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F79911D5A16DE0005003C /* OTInvitationsCellProviderBehavior.m */; };
 		1E66936C1D85DEEB00F9C03D /* OTTapEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E66936B1D85DEEB00F9C03D /* OTTapEntourageBehavior.m */; };
 		1E68E1151D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E68E1141D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m */; };
-		1E69CABD1D37B3CC00118E33 /* NSError+message.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E69CABC1D37B3CC00118E33 /* NSError+message.m */; };
 		1E6E550A1D707FE3002845D0 /* OTPushNotificationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E55091D707FE3002845D0 /* OTPushNotificationsService.m */; };
 		1E6E550D1D708726002845D0 /* OTPushNotificationsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E550C1D708726002845D0 /* OTPushNotificationsData.m */; };
 		1E701CEA1DA29FE30041DD9D /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E701CE91DA29FE30041DD9D /* UIBarButtonItem+Badge.m */; };
@@ -555,8 +554,6 @@
 		1E66936B1D85DEEB00F9C03D /* OTTapEntourageBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTTapEntourageBehavior.m; path = Behaviors/NewsFeed/OTTapEntourageBehavior.m; sourceTree = "<group>"; };
 		1E68E1131D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesTableDataSource.h; path = Behaviors/UITableView/MyEntourages/OTMyEntouragesTableDataSource.h; sourceTree = "<group>"; };
 		1E68E1141D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMyEntouragesTableDataSource.m; path = Behaviors/UITableView/MyEntourages/OTMyEntouragesTableDataSource.m; sourceTree = "<group>"; };
-		1E69CABB1D37B3CC00118E33 /* NSError+message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+message.h"; sourceTree = "<group>"; };
-		1E69CABC1D37B3CC00118E33 /* NSError+message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+message.m"; sourceTree = "<group>"; };
 		1E6E55081D707FE3002845D0 /* OTPushNotificationsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPushNotificationsService.h; path = Services/PushNotifications/OTPushNotificationsService.h; sourceTree = "<group>"; };
 		1E6E55091D707FE3002845D0 /* OTPushNotificationsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTPushNotificationsService.m; path = Services/PushNotifications/OTPushNotificationsService.m; sourceTree = "<group>"; };
 		1E6E550B1D708726002845D0 /* OTPushNotificationsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPushNotificationsData.h; path = Services/PushNotifications/OTPushNotificationsData.h; sourceTree = "<group>"; };
@@ -2096,8 +2093,6 @@
 				1E71E6521D108790001F3777 /* NSNotification+entourage.m */,
 				45D789191D2FFC3E005EBACC /* UIScrollView+entourage.h */,
 				45D7891A1D2FFC3E005EBACC /* UIScrollView+entourage.m */,
-				1E69CABB1D37B3CC00118E33 /* NSError+message.h */,
-				1E69CABC1D37B3CC00118E33 /* NSError+message.m */,
 				1E40A3321D4A2A10009E2D73 /* UIBarButtonItem+factory.h */,
 				1E40A3331D4A2A10009E2D73 /* UIBarButtonItem+factory.m */,
 				1E5C30341D6F94DD00E10770 /* UIViewController+OTEmptyBackButton.h */,
@@ -2500,7 +2495,6 @@
 				1EF25E0D1D5B2A1500BFC3BC /* OTEntouragesTableViewCell.m in Sources */,
 				1EF25E181D5B65B400BFC3BC /* OTMyEntouragesCellProvider.m in Sources */,
 				1E07DA3E1D590410003119CC /* OTTourJoinerDelegate.m in Sources */,
-				1E69CABD1D37B3CC00118E33 /* NSError+message.m in Sources */,
 				1E2C600C1D775F92004B195A /* OTEntourageChangedHandler.m in Sources */,
 				1E2F291B1D4BDE9600ABC68A /* OTFilteredDataSourceBehavior.m in Sources */,
 				1E06FDD51D578B2600370F4F /* OTJoinRequestedCell.m in Sources */,

@@ -16,7 +16,6 @@
 #import "OTConsts.h"
 #import "OTAuthService.h"
 #import "NSUserDefaults+OT.h"
-#import "NSError+message.h"
 #import "NSUserDefaults+OT.h"
 #import "UIImage+processing.h"
 
@@ -67,7 +66,7 @@
         }
         failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];
-            NSLog(@"ERR: something went wrong on user picture: %@", error.description);
+            NSLog(@"ERR: something went wrong on user picture: %@", error.localizedDescription);
         }];
     } orError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];

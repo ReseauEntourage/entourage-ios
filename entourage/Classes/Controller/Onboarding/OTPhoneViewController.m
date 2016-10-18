@@ -15,7 +15,6 @@
 #import "OTConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "UIScrollView+entourage.h"
-#import "NSError+message.h"
 #import "UIColor+entourage.h"
 
 @interface OTPhoneViewController ()
@@ -57,7 +56,7 @@
             [NSUserDefaults standardUserDefaults].temporaryUser = onboardUser;
             [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
-            NSString *errorMessage = [error userUpdateMessage];
+            NSString *errorMessage = error.localizedDescription;
             if (errorMessage) {
                 [Flurry logEvent:@"TelephoneSubmitFail"];
                 [SVProgressHUD showErrorWithStatus:errorMessage];
