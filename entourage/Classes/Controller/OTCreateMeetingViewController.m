@@ -8,37 +8,27 @@
 
 #import "OTCreateMeetingViewController.h"
 #import "OTMainViewController.h"
-
-// Model
 #import "OTEncounter.h"
 #import "OTUser.h"
 #import "OTConsts.h"
-
-// Services
 #import "OTPoiService.h"
 #import "OTEncounterService.h"
-
-// Helpers
 #import "NSUserDefaults+OT.h"
 #import "UITextField+indentation.h"
 #import "UIViewController+menu.h"
 #import "UIColor+entourage.h"
 #import "UIBarButtonItem+factory.h"
-
-// Progress HUD
 #import "MBProgressHUD.h"
 #import "SVProgressHUD.h"
-
-// Frameworks
 #import <Social/Social.h>
 #import "OTSpeechBehavior.h"
 #import "OTEncounterDisclaimerBehavior.h"
-
+#import "OTTextWithCount.h"
+#import "OTLocationSelectorViewController.h"
 
 #define PADDING 20.0f
-#define PLACEHOLDER OTLocalizedString(@"detailEncounter")
 
-@interface OTCreateMeetingViewController () <UITextViewDelegate>
+@interface OTCreateMeetingViewController () <LocationSelectionDelegate>
 
 @property (strong, nonatomic) NSNumber *currentTourId;
 @property (strong, nonatomic) NSString *lmPath;
@@ -46,17 +36,16 @@
 @property (nonatomic) CLLocationCoordinate2D location;
 
 @property (nonatomic, strong) IBOutlet UITextField *nameTextField;
-@property (nonatomic, strong) IBOutlet UITextView *messageTextView;
+@property (nonatomic, strong) IBOutlet OTTextWithCount *messageTextView;
 @property (weak, nonatomic) IBOutlet UILabel *firstLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet OTSpeechBehavior *speechBehavior;
 @property (strong, nonatomic) IBOutlet OTEncounterDisclaimerBehavior *disclaimer;
+@property (nonatomic, weak) IBOutlet UIButton *locationButton;
 
 @end
 
 @implementation OTCreateMeetingViewController
-
-#pragma mark - Life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -85,10 +74,25 @@
     
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     self.dateLabel.text = [NSString stringWithFormat:OTLocalizedString(@"formater_meetEncounter"), dateString];
-    [self.messageTextView setTextContainerInset:UIEdgeInsetsMake(PADDING, PADDING, PADDING, 2*PADDING)];
     
-    self.messageTextView.text = PLACEHOLDER;
-    self.messageTextView.textColor = [UIColor lightGrayColor];
+    self.messageTextView.placeholder = OTLocalizedString(@"detailEncounter");
+    self.messageTextView.editingPlaceholder = self.messageTextView.placeholder;
+
+    [self updateLocationTitle];
+}
+
+- (void)updateLocationTitle {
+    CLGeocoder *geocoder = [CLGeocoder new];
+    CLLocation *current = [[CLLocation alloc] initWithLatitude:self.location.latitude longitude:self.location.longitude];
+    [geocoder reverseGeocodeLocation:current completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error)
+            NSLog(@"error: %@", error.description);
+        CLPlacemark *placemark = placemarks.firstObject;
+        if (placemark.thoroughfare !=  nil)
+            [self.locationButton setTitle:placemark.thoroughfare forState:UIControlStateNormal];
+        else
+            [self.locationButton setTitle:placemark.locality forState:UIControlStateNormal];
+    }];
 }
 
 - (void)configureWithTourId:(NSNumber *)currentTourId andLocation:(CLLocationCoordinate2D)location {
@@ -101,7 +105,7 @@
     sender.enabled = NO;
     __block OTEncounter *encounter = [OTEncounter new];
     encounter.date = [NSDate date];
-    encounter.message = [self.messageTextView.text isEqualToString:PLACEHOLDER] ? @"" : self.messageTextView.text;
+    encounter.message = self.messageTextView.textView.text;
     encounter.streetPersonName =  self.nameTextField.text;
     encounter.latitude = self.location.latitude;
     encounter.longitude = self.location.longitude;
@@ -117,29 +121,11 @@
     }];
 }
 
-- (IBAction)speechBehavior_TextChanged:(id)sender {
-    if([self.messageTextView.text hasPrefix:PLACEHOLDER])
-        self.messageTextView.text = [self.messageTextView.text substringFromIndex:PLACEHOLDER.length];
-}
+#pragma mark - LocationSelectionDelegate
 
-#pragma mark - UITextViewDelegate
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    if ([textView.text isEqualToString:PLACEHOLDER]) {
-        self.messageTextView.text = @"";
-        self.messageTextView.textColor = [UIColor blackColor];
-    }
-    [self.messageTextView becomeFirstResponder];
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    if ([self.messageTextView.text isEqualToString:@""]) {
-        self.messageTextView.text = PLACEHOLDER;
-        self.messageTextView.textColor = [UIColor appGreyishColor];
-    }
-    [self.messageTextView resignFirstResponder];
+- (void)didSelectLocation:(CLLocation *)selectedLocation {
+    self.location = selectedLocation.coordinate;
+    [self updateLocationTitle];
 }
 
 #pragma mark - Segue
@@ -147,6 +133,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.disclaimer prepareSegue:segue])
         return;
+    
+    UIViewController *destinationViewController = segue.destinationViewController;
+    if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]]) {
+        [Flurry logEvent:@"ChangeLocationClick"];
+        OTLocationSelectorViewController* controller = (OTLocationSelectorViewController *)destinationViewController;
+        controller.locationSelectionDelegate = self;
+        CLLocation *current = [[CLLocation alloc] initWithLatitude:self.location.latitude longitude:self.location.longitude];
+        controller.selectedLocation = current;
+    }
 }
 
 @end

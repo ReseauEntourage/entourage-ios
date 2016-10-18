@@ -13,15 +13,10 @@
 #import "OTLocationSelectorViewController.h"
 #import "OTEncounterService.h"
 #import "UIColor+entourage.h"
-
-// Helpers
 #import "UIViewController+menu.h"
 #import "UITextField+indentation.h"
 #import "UIBarButtonItem+factory.h"
-
 #import "OTCountSpeechBehavior.h"
-
-// Progress HUD
 #import "SVProgressHUD.h"
 #import "OTEntourageDisclaimerBehavior.h"
 

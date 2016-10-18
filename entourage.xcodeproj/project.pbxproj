@@ -107,6 +107,9 @@
 		1E49BCC11D7D914F0024EDC1 /* OTDisclaimerBaseBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E49BCC01D7D914F0024EDC1 /* OTDisclaimerBaseBehavior.m */; };
 		1E49BCC41D7D93DA0024EDC1 /* OTEntourageDisclaimerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E49BCC31D7D93DA0024EDC1 /* OTEntourageDisclaimerBehavior.m */; };
 		1E4F56191DB63BE900AD0CAC /* NSError+OTErrorData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F56181DB63BE900AD0CAC /* NSError+OTErrorData.m */; };
+		1E4F561B1DB64BCE00AD0CAC /* LocationSelection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E4F561A1DB64BCE00AD0CAC /* LocationSelection.storyboard */; };
+		1E4F56211DB64C9100AD0CAC /* OTLocationSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F561E1DB64C9100AD0CAC /* OTLocationSearchTableViewController.m */; };
+		1E4F56221DB64C9100AD0CAC /* OTLocationSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F56201DB64C9100AD0CAC /* OTLocationSelectorViewController.m */; };
 		1E5C301A1D6F61A400E10770 /* OTMembersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30191D6F61A400E10770 /* OTMembersCell.m */; };
 		1E5C301E1D6F671200E10770 /* OTMembersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C301D1D6F671200E10770 /* OTMembersDataSource.m */; };
 		1E5C30211D6F683C00E10770 /* OTMembersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30201D6F683C00E10770 /* OTMembersCellProvider.m */; };
@@ -238,8 +241,6 @@
 		453117A41CD251C200C00BA8 /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 453117A31CD251C200C00BA8 /* MKMapView+entourage.m */; };
 		4536FC5E1CC64E55000BF620 /* OTSpeechKitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4536FC5D1CC64E55000BF620 /* OTSpeechKitManager.m */; };
 		453BB3371D2E2831002F9255 /* OTOnboardingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 453BB3361D2E2831002F9255 /* OTOnboardingService.m */; };
-		454062A31D06ADB600B0D756 /* OTLocationSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454062A21D06ADB600B0D756 /* OTLocationSelectorViewController.m */; };
-		4541EDEE1D07197700589ECB /* OTLocationSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4541EDED1D07197700589ECB /* OTLocationSearchTableViewController.m */; };
 		454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */; };
 		454C8F501C4F4C45001362B2 /* UITextField+indentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F4F1C4F4C45001362B2 /* UITextField+indentation.m */; };
 		454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454C8F521C500FE2001362B2 /* OTStartupViewController.m */; };
@@ -509,6 +510,11 @@
 		1E49BCC31D7D93DA0024EDC1 /* OTEntourageDisclaimerBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTEntourageDisclaimerBehavior.m; path = Behaviors/Disclaimer/OTEntourageDisclaimerBehavior.m; sourceTree = "<group>"; };
 		1E4F56171DB63BE900AD0CAC /* NSError+OTErrorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+OTErrorData.h"; path = "Helper/NSError+OTErrorData.h"; sourceTree = "<group>"; };
 		1E4F56181DB63BE900AD0CAC /* NSError+OTErrorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+OTErrorData.m"; path = "Helper/NSError+OTErrorData.m"; sourceTree = "<group>"; };
+		1E4F561A1DB64BCE00AD0CAC /* LocationSelection.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LocationSelection.storyboard; sourceTree = "<group>"; };
+		1E4F561D1DB64C9100AD0CAC /* OTLocationSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTLocationSearchTableViewController.h; path = LocationSelection/OTLocationSearchTableViewController.h; sourceTree = "<group>"; };
+		1E4F561E1DB64C9100AD0CAC /* OTLocationSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTLocationSearchTableViewController.m; path = LocationSelection/OTLocationSearchTableViewController.m; sourceTree = "<group>"; };
+		1E4F561F1DB64C9100AD0CAC /* OTLocationSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTLocationSelectorViewController.h; path = LocationSelection/OTLocationSelectorViewController.h; sourceTree = "<group>"; };
+		1E4F56201DB64C9100AD0CAC /* OTLocationSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTLocationSelectorViewController.m; path = LocationSelection/OTLocationSelectorViewController.m; sourceTree = "<group>"; };
 		1E5C30181D6F61A400E10770 /* OTMembersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMembersCell.h; path = ActiveFeedItem/InfoCells/OTMembersCell.h; sourceTree = "<group>"; };
 		1E5C30191D6F61A400E10770 /* OTMembersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMembersCell.m; path = ActiveFeedItem/InfoCells/OTMembersCell.m; sourceTree = "<group>"; };
 		1E5C301C1D6F671200E10770 /* OTMembersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMembersDataSource.h; path = Behaviors/UITableView/Members/OTMembersDataSource.h; sourceTree = "<group>"; };
@@ -757,10 +763,6 @@
 		4536FC5D1CC64E55000BF620 /* OTSpeechKitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSpeechKitManager.m; sourceTree = "<group>"; };
 		453BB3351D2E2831002F9255 /* OTOnboardingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOnboardingService.h; sourceTree = "<group>"; };
 		453BB3361D2E2831002F9255 /* OTOnboardingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOnboardingService.m; sourceTree = "<group>"; };
-		454062A11D06ADB600B0D756 /* OTLocationSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLocationSelectorViewController.h; sourceTree = "<group>"; };
-		454062A21D06ADB600B0D756 /* OTLocationSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLocationSelectorViewController.m; sourceTree = "<group>"; };
-		4541EDEC1D07197700589ECB /* OTLocationSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLocationSearchTableViewController.h; sourceTree = "<group>"; };
-		4541EDED1D07197700589ECB /* OTLocationSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLocationSearchTableViewController.m; sourceTree = "<group>"; };
 		454C8F4B1C4D20EA001362B2 /* UIColor+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+entourage.h"; sourceTree = "<group>"; };
 		454C8F4C1C4D20EA001362B2 /* UIColor+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+entourage.m"; sourceTree = "<group>"; };
 		454C8F4E1C4F4C45001362B2 /* UITextField+indentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+indentation.h"; sourceTree = "<group>"; };
@@ -1196,6 +1198,17 @@
 				1E49BCC31D7D93DA0024EDC1 /* OTEntourageDisclaimerBehavior.m */,
 			);
 			name = Disclaimer;
+			sourceTree = "<group>";
+		};
+		1E4F561C1DB64C1300AD0CAC /* LocationSelection */ = {
+			isa = PBXGroup;
+			children = (
+				1E4F561D1DB64C9100AD0CAC /* OTLocationSearchTableViewController.h */,
+				1E4F561E1DB64C9100AD0CAC /* OTLocationSearchTableViewController.m */,
+				1E4F561F1DB64C9100AD0CAC /* OTLocationSelectorViewController.h */,
+				1E4F56201DB64C9100AD0CAC /* OTLocationSelectorViewController.m */,
+			);
+			name = LocationSelection;
 			sourceTree = "<group>";
 		};
 		1E5C30171D6F616D00E10770 /* InfoCells */ = {
@@ -1697,10 +1710,6 @@
 			children = (
 				45BC9BC71CE26E83000065B7 /* OTEntourageEditorViewController.h */,
 				45BC9BC81CE26E83000065B7 /* OTEntourageEditorViewController.m */,
-				454062A11D06ADB600B0D756 /* OTLocationSelectorViewController.h */,
-				454062A21D06ADB600B0D756 /* OTLocationSelectorViewController.m */,
-				4541EDEC1D07197700589ECB /* OTLocationSearchTableViewController.h */,
-				4541EDED1D07197700589ECB /* OTLocationSearchTableViewController.m */,
 			);
 			name = Entourage;
 			sourceTree = "<group>";
@@ -1755,6 +1764,7 @@
 				1E78B7A51D5108BE0008C00E /* ActiveFeedItem.storyboard */,
 				1E5F79831D5A0E6A0005003C /* MyEntourages.storyboard */,
 				1E49BCB51D7D8B790024EDC1 /* Disclaimer.storyboard */,
+				1E4F561A1DB64BCE00AD0CAC /* LocationSelection.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1910,6 +1920,7 @@
 		6B4930C719A773C500DA7EE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1E4F561C1DB64C1300AD0CAC /* LocationSelection */,
 				1EFAC0D91D89249A00BE396F /* JoinRequest */,
 				1EFAC0C81D89246000BE396F /* FeedItemFilters */,
 				1E49BCB71D7D8BC00024EDC1 /* Disclaimer */,
@@ -2305,6 +2316,7 @@
 				1E78B7E91D5134D20008C00E /* SF-UI-Text-UltrathinItalic.otf in Resources */,
 				45CE5A611C5241AA00F68C24 /* Images.xcassets in Resources */,
 				4507017E1CCF494800432548 /* JoinFeedItem.storyboard in Resources */,
+				1E4F561B1DB64BCE00AD0CAC /* LocationSelection.storyboard in Resources */,
 				1E488E001D4FAF8B00A2E5B0 /* Onboarding.storyboard in Resources */,
 				1E78B7E01D5134D20008C00E /* SF-UI-Text-Light.otf in Resources */,
 				45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */,
@@ -2452,6 +2464,7 @@
 				6B4930DF19A77C2F00DA7EE0 /* OTHTTPRequestManager.m in Sources */,
 				1E488E111D4FB81700A2E5B0 /* OTCodeViewController.m in Sources */,
 				6B1A847119E811210020FB93 /* OTPoiService.m in Sources */,
+				1E4F56221DB64C9100AD0CAC /* OTLocationSelectorViewController.m in Sources */,
 				1E2F29181D4BDAEF00ABC68A /* OTTableCellProviderBehavior.m in Sources */,
 				DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */,
 				4500115E1CCE5BD2004754DF /* OTTourCreatorViewController.m in Sources */,
@@ -2528,7 +2541,6 @@
 				1E2232D91D56998E004CD5E8 /* OTAddressBookService.m in Sources */,
 				1EFAC0EA1D8928D700BE396F /* OTFeedItemFilter.m in Sources */,
 				1E78B7F41D515E240008C00E /* NSDate+ui.m in Sources */,
-				454062A31D06ADB600B0D756 /* OTLocationSelectorViewController.m in Sources */,
 				45BC9BC91CE26E83000065B7 /* OTEntourageEditorViewController.m in Sources */,
 				1E5C302D1D6F85F900E10770 /* OTManageInvitationBehavior.m in Sources */,
 				1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */,
@@ -2567,6 +2579,7 @@
 				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,
 				1E5C30241D6F6CE100E10770 /* OTMembersTableDataSource.m in Sources */,
 				1E08A3331D5E06B900D96B05 /* OTUserProfileBehavior.m in Sources */,
+				1E4F56211DB64C9100AD0CAC /* OTLocationSearchTableViewController.m in Sources */,
 				1E8E16E61D5A354C005C42ED /* OTInvitationsCollectionViewCell.m in Sources */,
 				1EACE4191D11515200F3A2A6 /* OTTourFactory.m in Sources */,
 				455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */,
@@ -2604,7 +2617,6 @@
 				1E68E1151D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m in Sources */,
 				1E488E131D4FB81700A2E5B0 /* OTWelcomeViewController.m in Sources */,
 				1ECFB3691D52570900722DAC /* OTTourMapHandler.m in Sources */,
-				4541EDEE1D07197700589ECB /* OTLocationSearchTableViewController.m in Sources */,
 				1E78B7AE1D512E710008C00E /* OTSummaryProviderBehavior.m in Sources */,
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,
 				1E06B8EE1D58BDFA008B20F4 /* OTEncounterCell.m in Sources */,

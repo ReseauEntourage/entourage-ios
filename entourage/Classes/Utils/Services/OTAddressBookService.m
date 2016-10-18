@@ -74,9 +74,7 @@
     ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(record, kABPersonPhoneProperty));
     NSString *readPhone = nil;
     for(CFIndex phoneIndex = 0; phoneIndex < ABMultiValueGetCount(phones); phoneIndex++) {
-#warning Sergiu : check if this should be kept after i see the design
-        //NSString *mobileLabel = (__bridge NSString*)ABMultiValueCopyLabelAtIndex(phones, phoneIndex);
-        readPhone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, phoneIndex);
+    readPhone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, phoneIndex);
         OTAddressBookPhone *phoneItem = [OTAddressBookPhone new];
         phoneItem.telephone = readPhone;
         [result addObject:phoneItem];
