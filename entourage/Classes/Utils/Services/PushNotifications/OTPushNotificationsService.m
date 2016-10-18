@@ -104,7 +104,7 @@
 {
     [[OTBadgeNumberService sharedInstance] updateItem:pnData.joinableId];
     OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
-    UIAlertAction *viewProfileAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *viewProfileAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [Flurry logEvent:@"UserProfileClick"];
         [[OTDeepLinkService new] showProfileFromAnywhereForUser:joiner.uID];
     }];
@@ -116,7 +116,7 @@
             [Flurry logEvent:@"AcceptJoinRequest"];
             [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] accept:joiner success:nil failure:nil];
     }];
-    [self displayAlertWithActions:@[viewProfileAction, refuseJoinRequestAction, acceptJoinRequestAction] forPushData:pnData];
+    [self displayAlertWithActions:@[refuseJoinRequestAction, acceptJoinRequestAction, viewProfileAction] forPushData:pnData];
 }
 
 - (void)handleAcceptJoinNotification:(OTPushNotificationsData *)pnData

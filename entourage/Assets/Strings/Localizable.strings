@@ -186,6 +186,7 @@
 "firstName" = "Prénom";
 "lastName" = "Nom";
 "profile" = "profil";
+"view_profile" = "Voir Profil";
 "save" = "Enregistrer";
 "invalidEmail" = "Email invalide";
 "invalidFirstName" = "Prénom invalide";

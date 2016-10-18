@@ -46,6 +46,8 @@
     OTUserViewController *userController = (OTUserViewController *)rootUserProfileController.topViewController;
     userController.userId = userId;
     UIViewController *currentController = [self getTopViewController];
+    while(currentController.presentedViewController)
+        currentController = currentController.presentedViewController;
     [currentController presentViewController:rootUserProfileController animated:YES completion:nil];
 }
 
