@@ -130,12 +130,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                        alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");
                                        buttonTitle = OTLocalizedString(@"tryAgain_short");
                                    }
-                                   UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
-                                                                                                  message:alertText
-                                                                                           preferredStyle:UIAlertControllerStyleAlert];
-                                   UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle
-                                                                                           style:UIAlertActionStyleDefault
-                                                                                         handler:^(UIAlertAction * _Nonnull action) {}];
+                                   UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertText preferredStyle:UIAlertControllerStyleAlert];
+                                   UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
                                    [alert addAction: defaultAction];
                                    [self presentViewController:alert animated:YES completion:nil];
                                    

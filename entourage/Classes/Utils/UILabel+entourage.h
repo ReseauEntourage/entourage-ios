@@ -13,7 +13,6 @@
 
 @interface UILabel (entourage)
 
-- (void)setupWithTime:(NSDate*)date andLocation:(CLLocation*)location;
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem;
 
 @end

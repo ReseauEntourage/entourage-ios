@@ -224,20 +224,13 @@
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     
+    OTSummaryProviderBehavior *summaryBehavior = [OTSummaryProviderBehavior new];
+    summaryBehavior.lblTimeDistance = timeLocationLabel;
+    [summaryBehavior configureWith:item];
+    
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
-    CLLocation *startPointLocation = nil;
-    if ([item isKindOfClass:[OTTour class]]) {
-        OTTour *tour = (OTTour *)item;
-        // dateString - location
-        OTTourPoint *startPoint = tour.tourPoints.firstObject;
-        startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
-    } else {
-        OTEntourage *ent = (OTEntourage*)item;
-        startPointLocation = ent.location;
-    }
     typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];
     organizationLabel.text = [uiDelegate summary];
-    [timeLocationLabel setupWithTime:item.creationDate andLocation:startPointLocation];
 
     [userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
     noPeopleLabel.text = [NSString stringWithFormat:@"%d", item.noPeople.intValue];

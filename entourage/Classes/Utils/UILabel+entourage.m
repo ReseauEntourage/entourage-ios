@@ -21,37 +21,6 @@
 
 @implementation UILabel (entourage)
 
-- (void)setupWithTime:(NSDate*)date andLocation:(CLLocation*)location {
-    // dateString - location
-    NSString *dateString = nil;
-    if (date != nil) {
-        TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
-        timeIntervalFormatter.usesIdiomaticDeicticExpressions = YES;
-        NSLocale *frLocale = [NSLocale localeWithLocaleIdentifier:@"fr"];
-        [timeIntervalFormatter setLocale:frLocale];
-        
-        NSTimeInterval timeInterval = [date timeIntervalSinceDate:[NSDate date]];
-        dateString = [timeIntervalFormatter stringForTimeInterval:timeInterval];
-        self.text = dateString;
-    }
-    
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"error: %@", error.description);
-        }
-        CLPlacemark *placemark = placemarks.firstObject;
-        if (placemark.locality !=  nil) {
-            if (dateString != nil) {
-                self.text = [NSString stringWithFormat:@"%@ - %@", dateString, placemark.locality];
-            } else {
-                self.text = placemark.locality;
-            }
-        }
-    }];
-
-}
-
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {
     self.hidden = ![[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
     
