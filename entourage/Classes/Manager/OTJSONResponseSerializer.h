@@ -9,7 +9,7 @@
 #import "AFURLResponseSerialization.h"
 
 static NSString * const JSONResponseSerializerFullKey = @"JSONResponseSerializerFullKey";
-static NSString * const JSONResponseSerializerErrorKey = @"JSONResponseSerializerErrorKey";
+static NSString * const JSONResponseSerializerFullDictKey = @"JSONResponseSerializerFullDictKey";
 
 @interface OTJSONResponseSerializer : AFJSONResponseSerializer
 

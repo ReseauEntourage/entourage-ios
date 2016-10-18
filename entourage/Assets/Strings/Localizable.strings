@@ -218,6 +218,9 @@
 "user_edit_email" = "E-mail";
 "user_edit_quartier" = "Quartier";
 "profile" = "Profil";
+"lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit: créez un compte
+
+Membres d'une association utilisatrice d'Entourage, contactez associations@entourage.social";
 
 // Filter
 "filter_maraudes_title" = "Types de maraude";

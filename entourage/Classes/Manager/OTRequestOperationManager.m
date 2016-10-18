@@ -194,31 +194,29 @@
 - (NSError *)errorFromTask:(NSURLSessionDataTask *)sessionDataTask andError:(NSError *)error {
     NSError *actualError = error;
     @synchronized (actualError) {
+        NSError *mappedError = nil;
         NSString *responseString = error.userInfo[JSONResponseSerializerFullKey];
         if (responseString.length > 0) {
-            NSError *error;
-            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
-            if ([jsonObject isKindOfClass:[NSDictionary class]] && [jsonObject objectForKey:@"error"]) {
+            NSError *parseError = nil;
+            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&parseError];
+            if(!parseError) {
                 NSString *errorString = @"";
                 id errorValue = [jsonObject objectForKey:@"error"];
-                NSDictionary *errorDict = @{};
-                if ([errorValue isKindOfClass:[NSDictionary class]] && [errorValue objectForKey:@"message"]) {
-                    errorDict = errorValue;
+                if ([errorValue isKindOfClass:[NSDictionary class]] && [errorValue objectForKey:@"message"])
                     errorString = [errorValue objectForKey:@"message"];
-                }
                 else
                     errorString = errorValue;
                 NSDictionary *copy = [actualError.userInfo mutableCopy];
                 [copy setValue:errorString forKey:NSLocalizedDescriptionKey];
-                [copy setValue:errorDict forKey:JSONResponseSerializerErrorKey];
-                actualError = [NSError errorWithDomain:actualError.domain code:actualError.code userInfo:[copy copy]];
+                [copy setValue:jsonObject forKey:JSONResponseSerializerFullDictKey];
+                mappedError = [NSError errorWithDomain:actualError.domain code:actualError.code userInfo:[copy copy]];
             }
         }
-        else {
+        if(!mappedError) {
             NSString *genericErrorMessage = OTLocalizedString(@"generic_error");
-            actualError = [NSError errorWithDomain:actualError.domain code:actualError.code userInfo:@{ NSLocalizedDescriptionKey:genericErrorMessage }];
+            mappedError = [NSError errorWithDomain:actualError.domain code:actualError.code userInfo:@{ NSLocalizedDescriptionKey:genericErrorMessage, JSONResponseSerializerFullDictKey: @{}}];
         }
-        return actualError;
+        return mappedError;
     }
 }
 
