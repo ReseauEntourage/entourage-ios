@@ -119,6 +119,7 @@
 @property (nonatomic) BOOL isRefreshing;
 @property (nonatomic, weak) IBOutlet UIButton *nouveauxFeedItemsButton;
 @property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
+@property (nonatomic, weak) IBOutlet UILabel *lblFeedsTableViewDesc;
 
 @end
 
@@ -359,6 +360,7 @@ static BOOL didGetAnyData = NO;
         self.isRefreshing = NO;
         if (!feeds.count || !didGetAnyData)
             return;
+        [self showReceivedData];
         NSUInteger existingItemsCount = [self.tableView itemsCount];
         [self.tableView addFeedItems:feeds];
         NSUInteger updatedItemsCount = [self.tableView itemsCount];
@@ -375,6 +377,8 @@ static BOOL didGetAnyData = NO;
         [self.tableView reloadData];
     } failure:^(NSError *error) {
         NSLog(@"Error getting feeds: %@", error.description);
+        if(error.code == NSURLErrorNotConnectedToInternet)
+            [self showNoInternetConnexion];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.requestedToursCoordinate = oldRequestedCoordinate;
         [self registerObserver];
@@ -401,14 +405,17 @@ static BOOL didGetAnyData = NO;
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary success:^(NSMutableArray *feeds) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         if (feeds.count && !didGetAnyData) {
+            self.tableView.hidden = NO;
             [self showToursList];
             didGetAnyData = YES;
         }
         [self.indicatorView setHidden:YES];
         if (!feeds.count) {
+            [self showNoData];
             self.currentPagination.isLoading = NO;
             return;
         }
+        [self showReceivedData];
         OTFeedItem *lastFeed = self.feeds.lastObject;
         NSLog(@"%@ > %@", lastFeed.creationDate, self.currentPagination.beforeDate);
         if ([lastFeed.creationDate compare:self.currentPagination.beforeDate] != NSOrderedDescending) {
@@ -424,6 +431,8 @@ static BOOL didGetAnyData = NO;
         self.currentPagination.isLoading = NO;
     } failure:^(NSError *error) {
         NSLog(@"Error getting feeds: %@", error.description);
+        if(error.code == NSURLErrorNotConnectedToInternet)
+            [self showNoInternetConnexion];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.requestedToursCoordinate = oldRequestedCoordinate;
         [self registerObserver];
@@ -1103,6 +1112,22 @@ static BOOL didGetAnyData = NO;
         OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
         controller.optionsDelegate = self;
     }
+}
+
+- (void)showNoInternetConnexion {
+    self.lblFeedsTableViewDesc.text = OTLocalizedString(@"no_internet_connexion");
+    [self showToursList];
+    self.lblFeedsTableViewDesc.hidden = NO;
+}
+
+- (void)showNoData {
+    self.lblFeedsTableViewDesc.text = OTLocalizedString(@"no_feeds_received");
+    [self showToursList];
+    self.lblFeedsTableViewDesc.hidden = NO;
+}
+
+- (void)showReceivedData {
+    self.lblFeedsTableViewDesc.hidden = YES;
 }
 
 @end

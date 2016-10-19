@@ -291,3 +291,6 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 
 // User profile
 "user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";
+
+"no_feeds_received" = "!!No entourages at this location";
+"no_internet_connexion" = "!!Check your internet connexion then try again";
