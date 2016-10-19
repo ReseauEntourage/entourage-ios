@@ -31,9 +31,10 @@
 - (void)addFeedItem:(OTFeedItem*)feedItem;
 - (void)removeFeedItem:(OTFeedItem*)feedItem;
 - (void)removeAll;
+- (void)loadBegun;
+- (void)setNoConnection;
 
 - (NSArray *)items;
-
 - (NSUInteger)itemsCount;
 
 @end

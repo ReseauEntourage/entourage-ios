@@ -9,7 +9,6 @@
 #import "OTFeedItemsTableView.h"
 #import "OTTour.h"
 #import "OTEntourage.h"
-
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
 #import "UILabel+entourage.h"
@@ -17,6 +16,7 @@
 #import "OTFeedItemFactory.h"
 #import "OTUIDelegate.h"
 #import "OTSummaryProviderBehavior.h"
+#import "OTConsts.h"
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -44,31 +44,11 @@
 @interface OTFeedItemsTableView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *feedItems;
+@property (nonatomic, strong) UILabel *lblEmptyTableReason;
 
 @end
 
 @implementation OTFeedItemsTableView
-
-/********************************************************************************/
-#pragma mark - Life Cycle
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self _init];
-    }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self _init];
-    }
-    return self;
-}
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -84,12 +64,21 @@
     self.delegate = self;
     self.rowHeight = UITableViewAutomaticDimension;
     self.estimatedRowHeight = 300;
+    self.lblEmptyTableReason = [UILabel new];
+    self.lblEmptyTableReason.font = [UIFont fontWithName:@"SFUItext-Semibold" size:17];
+    self.lblEmptyTableReason.textAlignment = NSTextAlignmentCenter;
+    self.lblEmptyTableReason.numberOfLines = 0;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.lblEmptyTableReason.frame = self.frame;
 }
 
 - (NSArray *)items {
     return self.feedItems;
 }
-
 
 - (void)configureWithMapView:(MKMapView *)mapView {
     
@@ -131,6 +120,14 @@
     mapView.center = headerView.center;
         
     self.tableHeaderView = headerView;
+}
+
+- (void)loadBegun {
+    self.lblEmptyTableReason.text = OTLocalizedString(@"no_feeds_received");
+}
+
+- (void)setNoConnection {
+    self.lblEmptyTableReason.text = OTLocalizedString(@"no_internet_connexion");
 }
 
 
@@ -192,6 +189,10 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if(self.feedItems.count == 0)
+        self.backgroundView = self.lblEmptyTableReason;
+    else
+        self.backgroundView = nil;
     return self.feedItems.count;
 }
 
