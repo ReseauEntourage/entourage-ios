@@ -16,7 +16,7 @@
 #import "OTConsts.h"
 #import "OTAuthService.h"
 #import "NSUserDefaults+OT.h"
-#import "NSError+message.h"
+#import "NSError+OTErrorData.h"
 #import "NSUserDefaults+OT.h"
 #import "UIImage+processing.h"
 

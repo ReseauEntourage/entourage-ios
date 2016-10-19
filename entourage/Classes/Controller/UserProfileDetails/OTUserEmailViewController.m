@@ -19,7 +19,7 @@
 #import "UIScrollView+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
-#import "NSError+message.h"
+#import "NSError+OTErrorData.h"
 #import "OTOnboardingNavigationBehavior.h"
 
 @interface OTUserEmailViewController ()
@@ -76,7 +76,7 @@
                                                    [self.onboardingNavigation nextFromEmail];
                                                }
                                                failure:^(NSError *error) {
-                                                   [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
+                                                   [SVProgressHUD showErrorWithStatus:error.localizedDescription];
                                                    NSLog(@"ERR: something went wrong on onboarding user email: %@", error.description);
                                                }];
 }
