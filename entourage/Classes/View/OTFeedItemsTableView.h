@@ -33,6 +33,7 @@
 - (void)removeAll;
 - (void)loadBegun;
 - (void)setNoConnection;
+- (void)setNoFeeds;
 
 - (NSArray *)items;
 - (NSUInteger)itemsCount;

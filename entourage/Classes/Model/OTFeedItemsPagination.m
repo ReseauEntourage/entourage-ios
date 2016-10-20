@@ -13,7 +13,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.page = 1;
         self.feedItems = [NSMutableArray new];
         self.isLoading = NO;
         self.beforeDate = [NSDate date];
@@ -23,10 +22,8 @@
 
 - (void)addFeedItems:(NSArray*)feedItems {
     self.isLoading = NO;
-    if (feedItems != nil && feedItems.count > 0) {
-        self.page++;
+    if (feedItems != nil && feedItems.count > 0)
         [self.feedItems addObjectsFromArray:feedItems];
-    }
 }
 
 @end
