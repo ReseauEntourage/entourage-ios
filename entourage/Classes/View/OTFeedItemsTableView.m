@@ -123,13 +123,16 @@
 }
 
 - (void)loadBegun {
-    self.lblEmptyTableReason.text = OTLocalizedString(@"no_feeds_received");
+    self.lblEmptyTableReason.text = @"";
 }
 
 - (void)setNoConnection {
     self.lblEmptyTableReason.text = OTLocalizedString(@"no_internet_connexion");
 }
 
+- (void)setNoFeeds {
+    self.lblEmptyTableReason.text = OTLocalizedString(@"no_feeds_received");
+}
 
 /********************************************************************************/
 #pragma mark - Tour list handlind

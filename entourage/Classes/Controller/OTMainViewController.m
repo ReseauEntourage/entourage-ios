@@ -119,6 +119,7 @@
 @property (nonatomic) BOOL isRefreshing;
 @property (nonatomic, weak) IBOutlet UIButton *nouveauxFeedItemsButton;
 @property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
+@property (nonatomic) BOOL isFirstLoad;
 
 @end
 
@@ -129,6 +130,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isFirstLoad = YES;
     [self configureNavigationBar];
     [self.footerToolbar setupWithFilters];
     self.currentFilter = [OTNewsFeedsFilter new];
@@ -189,7 +191,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    [self getData];
+    [self getData:NO];
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
 }
 
@@ -234,7 +236,7 @@
 
 - (void)configureMapView {
     self.mapView.showsPointsOfInterest = NO;
-   	self.mapView.showsUserLocation = YES;
+   	self.mapView.showsUserLocation = NO;
     self.mapView.pitchEnabled = NO;
     MKCoordinateRegion region;
     if([OTLocationManager sharedInstance].currentLocation)
@@ -317,10 +319,9 @@
     [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"") options:NSKeyValueObservingOptionNew context:nil];
 }
 
-static BOOL didGetAnyData = NO;
-- (void)getData {
+- (void)getData:(BOOL)moreFeeds {
     if (self.toursMapDelegate.isActive)
-        [self getFeeds];
+        [self getFeeds:moreFeeds];
     else
         [self getPOIList];
 }
@@ -332,7 +333,7 @@ static BOOL didGetAnyData = NO;
     if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4)
         return;
     self.currentPagination.beforeDate = [NSDate date];
-    [self getFeeds];
+    [self getFeeds:NO];
 }
 
 - (IBAction)forceGetNewData {
@@ -358,7 +359,7 @@ static BOOL didGetAnyData = NO;
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary success:^(NSMutableArray *feeds) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.isRefreshing = NO;
-        if (!feeds.count || !didGetAnyData)
+        if (!feeds.count)
             return;
         NSUInteger existingItemsCount = [self.tableView itemsCount];
         [self.tableView addFeedItems:feeds];
@@ -386,7 +387,7 @@ static BOOL didGetAnyData = NO;
     }];
 }
 
-- (void)getFeeds {
+- (void)getFeeds:(BOOL)moreFeeds {
     if (self.currentPagination.isLoading)
         return;
     self.currentPagination.isLoading = YES;
@@ -396,39 +397,37 @@ static BOOL didGetAnyData = NO;
     oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
     self.requestedToursCoordinate = self.mapView.centerCoordinate;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
     if (!self.currentPagination.beforeDate)
         self.currentPagination.beforeDate = [NSDate date];
-    
     NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:self.currentPagination.beforeDate andLocation:self.requestedToursCoordinate];
     [self.tableView loadBegun];
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary success:^(NSMutableArray *feeds) {
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        if (feeds.count && !didGetAnyData) {
-            self.tableView.hidden = NO;
-            [self showToursList];
-            didGetAnyData = YES;
-        }
-        [self.indicatorView setHidden:YES];
-        if (!feeds.count) {
-            self.currentPagination.isLoading = NO;
-            return;
-        }
-        OTFeedItem *lastFeed = self.feeds.lastObject;
-        NSLog(@"%@ > %@", lastFeed.creationDate, self.currentPagination.beforeDate);
-        if ([lastFeed.creationDate compare:self.currentPagination.beforeDate] != NSOrderedDescending) {
-            self.feeds = feeds;
-            [self.tableView removeAll];
-        } else {
-            [self.feeds addObjectsFromArray:feeds];
-        }
-
-        [self.tableView addFeedItems:feeds];
-        [self feedMapWithFeedItems];
-        [self.tableView reloadData];
         self.currentPagination.isLoading = NO;
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        if (feeds.count && self.isFirstLoad) {
+            self.isFirstLoad = NO;
+            [self showToursList];
+        }
+        if(!moreFeeds) {
+            [self.tableView removeAll];
+            [self.feeds removeAllObjects];
+            [self.overlayFeeder updateOverlays:@[]];
+        }
+        [self.feeds addObjectsFromArray:feeds];
+        [self.tableView addFeedItems:feeds];
+        [self.tableView reloadData];
+        if(self.tableView.items.count == 0)
+            [self.tableView setNoFeeds];
+        [self feedMapWithFeedItems];
+        [self.indicatorView setHidden:YES];
     } failure:^(NSError *error) {
-        NSLog(@"Error getting feeds: %@", error.description);
+        if(!moreFeeds) {
+            [self.tableView removeAll];
+            [self.feeds removeAllObjects];
+            [self.overlayFeeder updateOverlays:@[]];
+            [self.tableView reloadData];
+            [self.tableView setNoFeeds];
+        }
         if(error.code == NSURLErrorNotConnectedToInternet)
            [self.tableView setNoConnection];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -842,7 +841,7 @@ static BOOL didGetAnyData = NO;
     [self clearMap];
     [self.tableView removeAll];
     [self.tableView reloadData];
-    [self getData];
+    [self getData:NO];
 }
 
 #pragma mark - Actions
@@ -881,7 +880,7 @@ static BOOL didGetAnyData = NO;
 - (void)loadMoreData {
     [Flurry logEvent:@"RefreshListPage"];
     self.currentPagination.beforeDate = ((OTFeedItem*)self.feeds.lastObject).creationDate;
-    [self getData];
+    [self getData:YES];
 }
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {

@@ -211,7 +211,7 @@
         }
         if ([topController isKindOfClass:[OTMainViewController class]]) {
             OTMainViewController *mainController = (OTMainViewController*)topController;
-            [mainController getData];
+            [mainController getData:NO];
         }
         if(showMessage)
             [presentedViewController presentViewController:alert animated:YES completion:nil];
