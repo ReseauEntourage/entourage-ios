@@ -131,6 +131,7 @@
     [super viewDidLoad];
     
     self.isFirstLoad = YES;
+    self.feeds = [NSMutableArray new];
     [self configureNavigationBar];
     [self.footerToolbar setupWithFilters];
     self.currentFilter = [OTNewsFeedsFilter new];
@@ -327,11 +328,11 @@
 }
 
 - (void)didChangePosition {
-    [self.mapView removeAnnotations:self.mapView.annotations];
-    [self feedMapWithFeedItems];
     CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.requestedToursCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
     if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4)
         return;
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    [self feedMapWithFeedItems];
     self.currentPagination.beforeDate = [NSDate date];
     [self getFeeds:NO];
 }

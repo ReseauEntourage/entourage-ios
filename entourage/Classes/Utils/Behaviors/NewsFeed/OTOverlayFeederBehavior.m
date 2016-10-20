@@ -23,7 +23,7 @@ static char kAssociatedObjectKey;
     @try {
         [self.mapView removeOverlays:self.mapView.overlays];
     } @catch (NSException *exception) {
-        [Flurry logEvent:@"CLEAR_OVERLAY_ERROR"];
+        [Flurry logEvent:@"CLEAR_OVERLAY_ERROR\n"];
     } @finally {
         [self addOverlaysToMap:items];
     }
