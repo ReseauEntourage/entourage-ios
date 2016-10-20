@@ -236,7 +236,7 @@
 
 - (void)configureMapView {
     self.mapView.showsPointsOfInterest = NO;
-   	self.mapView.showsUserLocation = NO;
+   	self.mapView.showsUserLocation = YES;
     self.mapView.pitchEnabled = NO;
     MKCoordinateRegion region;
     if([OTLocationManager sharedInstance].currentLocation)
