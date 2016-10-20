@@ -20,8 +20,16 @@ static char kAssociatedObjectKey;
 }
 
 - (void)updateOverlays:(NSArray *)items {
-    if(self.mapView && self.mapView.overlays)
-        [self.mapView removeOverlays:self.mapView.overlays];
+    @synchronized (self.mapView) {
+        NSArray *overlays = self.mapView.overlays;
+        for(id<MKOverlay> overlay in overlays) {
+            if(!overlay || [overlay isKindOfClass:[NSNull class]])
+                continue;
+            if([overlay isKindOfClass:[MKUserLocation class]])
+                continue;
+            [self.mapView removeOverlay:overlay];
+        }
+    }
     [self addOverlaysToMap:items];
 }
 
