@@ -170,6 +170,7 @@
 "item_option_quit" = "Quitter";
 "entourage_time_data" = "%@ - à %d%@";
 "member_count" = "Membres (%d)";
+"item_closed" = "Clôturé";
 
 // Tutorial
 "emailNotSent" = "Echec de la mise à jour de l'email";
