@@ -11,5 +11,7 @@
 @interface OTSpeechBehavior : OTSpeechBehaviorBase <UITextViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITextView *txtOutput;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *heightConstraint;
+@property (nonatomic, assign) BOOL autoHeight;
 
 @end

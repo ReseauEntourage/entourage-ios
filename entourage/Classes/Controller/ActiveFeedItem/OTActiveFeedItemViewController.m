@@ -121,4 +121,8 @@
     [self performSegueWithIdentifier:@"SegueMap" sender:self];
 }
 
+- (IBAction)scrollToBottomWhileEditing {
+    [self.dataSource.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.items.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
 @end
