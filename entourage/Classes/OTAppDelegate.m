@@ -22,6 +22,7 @@
 #import "OTOngoingTourService.h"
 #import "SVProgressHUD.h"
 #import "OTBadgeNumberService.h"
+#import "Flurry.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -37,6 +38,8 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 #pragma mark - Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"environment": @"prod"}];
+
     //logger
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -146,6 +149,11 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
 	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
         NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
+
+#if BETA
+    UINavigationBar.appearance.barTintColor = [UIColor redColor];
+    UINavigationBar.appearance.backgroundColor = [UIColor redColor];
+#endif
 }
 
 @end

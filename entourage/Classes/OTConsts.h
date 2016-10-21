@@ -6,17 +6,6 @@
 //  Copyright (c) 2015 OCTO Technology. All rights reserved.
 //
 
-#if DEBUG
-// PREPROD - Staging
-#define BASE_API_URL @"https://entourage-back-preprod.herokuapp.com/api/v1/"
-
-#else
-// PROD
-#define BASE_API_URL @"https://api.entourage.social/api/v1/"
-
-#endif
-
-#define API_KEY @"91f908e8f674fc9dfc5c1dba"
 #define DEVICE_TOKEN_KEY "device_token"
 
 #define PARIS_LAT 48.856578

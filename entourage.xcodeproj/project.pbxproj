@@ -22,6 +22,11 @@
 		0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */; };
 		0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */; };
 		0EFF83D8D43A3E2E9F8A9E52 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31872915271F48F60EECA4C2 /* libPods-entourageTests.a */; };
+		1151E390B42372A35A6F2B32 /* Root.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1151E97661A4098002F7D819 /* Root.strings */; };
+		1151E8BE0D3CA27508364B9B /* Root.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1151EFA125A1BAF8A1B99583 /* Root.plist */; };
+		1151EA79DB6CC425661BE0F7 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1151E65A0473E33EA7477511 /* prod.plist */; };
+		1151EE1685B7C17024C250CF /* Root.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1151E24449EA45F0F66E6CB0 /* Root.strings */; };
+		1151EFEFBD3FEAC342F17466 /* Root.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1151EF20AEA7D2BA81235504 /* Root.plist */; };
 		1326182E58098BE9019F3879 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0873042019DFF62732713E7 /* libPods-entourage.a */; };
 		191FE92419E943D900C56BCA /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
 		191FE92819E945F200C56BCA /* OTEncounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE92719E945F200C56BCA /* OTEncounter.m */; };
@@ -284,9 +289,10 @@
 		6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFE639319E7E85400C661AB /* OTPoiCategory.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
+		A815528A1DBA20A100E2517A /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1151EDBB3AA8F6FC8C67C66C /* staging.plist */; };
+		A815528F1DBA211C00E2517A /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A815528E1DBA211C00E2517A /* ConfigurationManager.swift */; };
 		A87D6AF319E84683007ACA29 /* OTCustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */; };
 		A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */; };
-		A8B1330E1DB129FD0000750B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8B133071DB119D30000750B /* Settings.bundle */; };
 		A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682C819E7D097007BD4BC /* OTLoginViewController.m */; };
 		DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8ACD19E857A800FA218E /* OTMenuItem.m */; };
 		DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */; };
@@ -331,6 +337,12 @@
 		0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAskMoreViewController.m; sourceTree = "<group>"; };
 		0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterService.h; sourceTree = "<group>"; };
 		0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounterService.m; sourceTree = "<group>"; };
+		1151E65A0473E33EA7477511 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = prod.plist; sourceTree = "<group>"; };
+		1151E7666C7D47579B7EAA83 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Root.strings; sourceTree = "<group>"; };
+		1151ECE4104453C75B687719 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Root.strings; sourceTree = "<group>"; };
+		1151EDBB3AA8F6FC8C67C66C /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = staging.plist; sourceTree = "<group>"; };
+		1151EF20AEA7D2BA81235504 /* Root.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Root.plist; sourceTree = "<group>"; };
+		1151EFA125A1BAF8A1B99583 /* Root.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Root.plist; sourceTree = "<group>"; };
 		143551A9A6ED152DD5F655B3 /* Pods-entourageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.release.xcconfig"; sourceTree = "<group>"; };
 		15EC20D970ACDA904DB58803 /* Pods-entourageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.debug.xcconfig"; sourceTree = "<group>"; };
 		191FE92619E945F200C56BCA /* OTEncounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounter.h; sourceTree = "<group>"; };
@@ -590,7 +602,6 @@
 		1EA4F3081DA199A300A3321C /* OTDistributedDelegateBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTDistributedDelegateBehavior.m; path = Behaviors/OTDistributedDelegateBehavior.m; sourceTree = "<group>"; };
 		1EA51FCB1D366F6B00350255 /* OTPictureUploadService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPictureUploadService.h; path = Amazon/OTPictureUploadService.h; sourceTree = "<group>"; };
 		1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTPictureUploadService.m; path = Amazon/OTPictureUploadService.m; sourceTree = "<group>"; };
-		1EA51FCE1D368AD800350255 /* OTAmazonConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
 		1EACCAC11D64CD720027D1ED /* OTDeepLinkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTDeepLinkService.h; path = Services/OTDeepLinkService.h; sourceTree = "<group>"; };
 		1EACCAC21D64CD720027D1ED /* OTDeepLinkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTDeepLinkService.m; path = Services/OTDeepLinkService.m; sourceTree = "<group>"; };
 		1EACE4061D11515200F3A2A6 /* OTEntourageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFactory.h; sourceTree = "<group>"; };
@@ -812,7 +823,7 @@
 		6B4930E119A77E1D00DA7EE0 /* OTPoi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoi.h; sourceTree = "<group>"; };
 		6B4930E219A77E1D00DA7EE0 /* OTPoi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoi.m; sourceTree = "<group>"; };
 		6B89EF9E19E7E8B6008F2600 /* poi_category_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi_category_mock.json; sourceTree = "<group>"; };
-		6B92CA9E19A7461C004E8C9B /* entourage-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "entourage-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B92CA9E19A7461C004E8C9B /* Ent-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ent-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B92CAA119A7461C004E8C9B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6B92CAA519A7461C004E8C9B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -829,10 +840,10 @@
 		A0873042019DFF62732713E7 /* libPods-entourage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A815528D1DBA211B00E2517A /* entourage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "entourage-Bridging-Header.h"; sourceTree = "<group>"; };
+		A815528E1DBA211C00E2517A /* ConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationManager.swift; sourceTree = "<group>"; };
 		A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCalloutViewController.h; sourceTree = "<group>"; };
 		A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCalloutViewController.m; sourceTree = "<group>"; };
-		A8B133071DB119D30000750B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Settings/Store/Settings.bundle; sourceTree = "<group>"; };
-		A8B1330A1DB119F90000750B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Settings/Beta/Settings.bundle; sourceTree = "<group>"; };
 		A8E10FAC19E82A4800DF4A01 /* OTCustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCustomAnnotation.h; sourceTree = "<group>"; };
 		A8E10FAD19E82A4800DF4A01 /* OTCustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCustomAnnotation.m; sourceTree = "<group>"; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
@@ -898,6 +909,77 @@
 				0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */,
 			);
 			name = Tour;
+			sourceTree = "<group>";
+		};
+		1151E0742ADBA935DD0D892F /* Beta */ = {
+			isa = PBXGroup;
+			children = (
+				1151E58B883103E9A9D856B9 /* Settings.bundle */,
+			);
+			path = Beta;
+			sourceTree = "<group>";
+		};
+		1151E3B39C332E9816C8BCC0 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				1151E65A0473E33EA7477511 /* prod.plist */,
+				1151EDBB3AA8F6FC8C67C66C /* staging.plist */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		1151E4019CE056293EAA29C1 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				1151E5A3A76D6AB1FFBBB581 /* Settings.bundle */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		1151E48E76645559D855AE36 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A815528E1DBA211C00E2517A /* ConfigurationManager.swift */,
+				1151E0742ADBA935DD0D892F /* Beta */,
+				1151E4019CE056293EAA29C1 /* Store */,
+				1151E3B39C332E9816C8BCC0 /* Environment */,
+				A815528D1DBA211B00E2517A /* entourage-Bridging-Header.h */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		1151E58B883103E9A9D856B9 /* Settings.bundle */ = {
+			isa = PBXGroup;
+			children = (
+				1151E5D3AB839C670383F4AA /* en.lproj */,
+				1151EF20AEA7D2BA81235504 /* Root.plist */,
+			);
+			path = Settings.bundle;
+			sourceTree = "<group>";
+		};
+		1151E5A3A76D6AB1FFBBB581 /* Settings.bundle */ = {
+			isa = PBXGroup;
+			children = (
+				1151EB27C78B4826C57AD0F6 /* en.lproj */,
+				1151EFA125A1BAF8A1B99583 /* Root.plist */,
+			);
+			path = Settings.bundle;
+			sourceTree = "<group>";
+		};
+		1151E5D3AB839C670383F4AA /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				1151E97661A4098002F7D819 /* Root.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		1151EB27C78B4826C57AD0F6 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				1151E24449EA45F0F66E6CB0 /* Root.strings */,
+			);
+			path = en.lproj;
 			sourceTree = "<group>";
 		};
 		1D962C7219E9280800547687 /* Login */ = {
@@ -1867,7 +1949,6 @@
 				1D2CC3471A8BBC5400E42AE4 /* OTConsts.h */,
 				45EB70DB1CEA08F900EB2CD1 /* OTAPIConsts.h */,
 				45F24A3F1CEDB3E70003BF9E /* OTAPIKeys.h */,
-				1EA51FCE1D368AD800350255 /* OTAmazonConsts.h */,
 				6B4930E019A77DFE00DA7EE0 /* Model */,
 				A8E10FAB19E82A1500DF4A01 /* View */,
 				6B4930C719A773C500DA7EE0 /* Controller */,
@@ -1961,7 +2042,7 @@
 		6B92CA9F19A7461C004E8C9B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6B92CA9E19A7461C004E8C9B /* entourage-Beta.app */,
+				6B92CA9E19A7461C004E8C9B /* Ent-Beta.app */,
 				6B92CABF19A7461C004E8C9B /* entourageTests.xctest */,
 			);
 			name = Products;
@@ -1990,11 +2071,11 @@
 		6B92CAA719A7461C004E8C9B /* entourage */ = {
 			isa = PBXGroup;
 			children = (
-				A8B133041DB119600000750B /* Settings */,
 				1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */,
 				6B4930C419A773C500DA7EE0 /* Classes */,
 				6B4930C319A773C500DA7EE0 /* Assets */,
 				6B92CAA819A7461C004E8C9B /* Supporting Files */,
+				1151E48E76645559D855AE36 /* Settings */,
 			);
 			path = entourage;
 			sourceTree = "<group>";
@@ -2076,31 +2157,6 @@
 				1E2432B71DA6BED3000EF74F /* libFlurry_7.6.6.a */,
 			);
 			path = Flurry;
-			sourceTree = "<group>";
-		};
-		A8B133041DB119600000750B /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				A8B133061DB119810000750B /* Store */,
-				A8B133051DB119680000750B /* Beta */,
-			);
-			name = Settings;
-			sourceTree = "<group>";
-		};
-		A8B133051DB119680000750B /* Beta */ = {
-			isa = PBXGroup;
-			children = (
-				A8B1330A1DB119F90000750B /* Settings.bundle */,
-			);
-			name = Beta;
-			sourceTree = "<group>";
-		};
-		A8B133061DB119810000750B /* Store */ = {
-			isa = PBXGroup;
-			children = (
-				A8B133071DB119D30000750B /* Settings.bundle */,
-			);
-			name = Store;
 			sourceTree = "<group>";
 		};
 		A8E10FAB19E82A1500DF4A01 /* View */ = {
@@ -2204,7 +2260,7 @@
 			);
 			name = entourage;
 			productName = entourage;
-			productReference = 6B92CA9E19A7461C004E8C9B /* entourage-Beta.app */;
+			productReference = 6B92CA9E19A7461C004E8C9B /* Ent-Beta.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6B92CABE19A7461C004E8C9B /* entourageTests */ = {
@@ -2240,6 +2296,8 @@
 				TargetAttributes = {
 					6B92CA9D19A7461C004E8C9B = {
 						DevelopmentTeam = RT7X9LLTN6;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2281,6 +2339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A815528A1DBA20A100E2517A /* staging.plist in Resources */,
 				452FE3EB1CAD54CE00063334 /* Settings.storyboard in Resources */,
 				45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */,
 				1E78B7E11D5134D20008C00E /* SF-UI-Text-LightItalic.otf in Resources */,
@@ -2315,7 +2374,6 @@
 				1E78B7DF1D5134D20008C00E /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				1E488E021D4FAFA600A2E5B0 /* UserProfileDetails.storyboard in Resources */,
 				1E78B7DD1D5134D20008C00E /* SF-UI-Text-BoldItalic.otf in Resources */,
-				A8B1330E1DB129FD0000750B /* Settings.bundle in Resources */,
 				45BC9BCE1CE32AE1000065B7 /* EntourageEditor.storyboard in Resources */,
 				452FE3E81CAD549200063334 /* GuideSolidarity.storyboard in Resources */,
 				1E78B7E31D5134D20008C00E /* SF-UI-Text-MediumItalic.otf in Resources */,
@@ -2323,6 +2381,11 @@
 				1E78B7E61D5134D20008C00E /* SF-UI-Text-Semibold.otf in Resources */,
 				1EFAC0C71D89242D00BE396F /* FeedItemFilters.storyboard in Resources */,
 				1E78B7A61D5108BE0008C00E /* ActiveFeedItem.storyboard in Resources */,
+				1151E390B42372A35A6F2B32 /* Root.strings in Resources */,
+				1151EFEFBD3FEAC342F17466 /* Root.plist in Resources */,
+				1151EE1685B7C17024C250CF /* Root.strings in Resources */,
+				1151E8BE0D3CA27508364B9B /* Root.plist in Resources */,
+				1151EA79DB6CC425661BE0F7 /* prod.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2486,6 +2549,7 @@
 				1E6E550D1D708726002845D0 /* OTPushNotificationsData.m in Sources */,
 				45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */,
 				A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */,
+				A815528F1DBA211C00E2517A /* ConfigurationManager.swift in Sources */,
 				1E5C30331D6F89D300E10770 /* OTInvitationsCollectionSource.m in Sources */,
 				45F443471C9314A800DDEBE1 /* OTFeedItemStatus.m in Sources */,
 				1EFAC0F61D89384E00BE396F /* OTNewsFeedsFilter.m in Sources */,
@@ -2697,6 +2761,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1151E24449EA45F0F66E6CB0 /* Root.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1151E7666C7D47579B7EAA83 /* en */,
+			);
+			name = Root.strings;
+			sourceTree = "<group>";
+		};
+		1151E97661A4098002F7D819 /* Root.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1151ECE4104453C75B687719 /* en */,
+			);
+			name = Root.strings;
+			sourceTree = "<group>";
+		};
 		1E90036D1D352C0B004E18BC /* UserPicture.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2806,6 +2886,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2843,6 +2924,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Store;
@@ -2853,6 +2935,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .beta;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2865,20 +2948,29 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"BETA=1",
+				);
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios$(BUNDLE_ID_SUFFIX)";
-				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
-				PRODUCT_NAME_SUFFIX = "-Beta";
-				PROVISIONING_PROFILE = "d5840aec-b1c9-47db-9ca2-e319de707206";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
+				PRODUCT_NAME = "Ent-Beta";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
@@ -2891,10 +2983,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = "";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2903,20 +2996,27 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios$(BUNDLE_ID_SUFFIX)";
-				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
-				PRODUCT_NAME_SUFFIX = "";
-				PROVISIONING_PROFILE = "78073984-9536-4be1-bb01-154326c30abb";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
@@ -2927,6 +3027,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15EC20D970ACDA904DB58803 /* Pods-entourageTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2950,6 +3051,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 79016BE7EDCE7EC3FA1F7032 /* Pods-entourageTests.store.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -3007,6 +3109,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Beta;
 		};
@@ -3016,10 +3119,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .beta;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3028,20 +3132,29 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"BETA=1",
+				);
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios$(BUNDLE_ID_SUFFIX)";
-				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
-				PRODUCT_NAME_SUFFIX = "-Beta";
-				PROVISIONING_PROFILE = "056ad63c-21a2-4b19-9034-e49f4ab07c71";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
+				PRODUCT_NAME = "Ent-Beta";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
@@ -3052,6 +3165,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E869ABEB0224DAD93339CB1B /* Pods-entourageTests.beta.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
