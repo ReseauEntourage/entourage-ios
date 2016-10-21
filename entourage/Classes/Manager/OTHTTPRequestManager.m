@@ -24,7 +24,8 @@
 	static OTRequestOperationManager *requestManager = nil;
 
 	if (requestManager == nil) {
-		requestManager = [[OTRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_API_URL]];
+        NSString *apiBaseUrl = [[ConfigurationManager shared] APIHostURL];
+		requestManager = [[OTRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:apiBaseUrl]];
         
 		requestManager.responseSerializer = [OTJSONResponseSerializer serializer];
 		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -41,7 +42,7 @@
 
 + (NSDictionary*)commonParameters
 {
-    OTUser *user =[NSUserDefaults standardUserDefaults].currentUser;
+    OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
     return user ? @{ @"token" : user.token } : nil;
 }
 

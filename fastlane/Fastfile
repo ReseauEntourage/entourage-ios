@@ -32,6 +32,13 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   lane :beta do |options|
     increment_build_number
+    cert(
+     username: "apple@entourage.social"
+    )
+    sigh(
+     app_identifier: "social.entourage.entourageios.beta",
+     username: "apple@entourage.social"
+    )
     badge(
       dark: true
     )
