@@ -56,8 +56,6 @@
     [super viewDidLayoutSubviews];
     
     if(self.entourage) {
-        self.type = self.entourage.type;
-        self.location = self.entourage.location;
         if(self.entourage.title.length > 0) {
             self.titleTextView.textView.text = self.entourage.title;
             [self.titleTextView updateAfterSpeech];
@@ -72,6 +70,10 @@
 #pragma mark - Private
 
 - (void)setupUI {
+    if(self.entourage) {
+        self.type = self.entourage.type;
+        self.location = self.entourage.location;
+    }
     BOOL isDemand = [self.type isEqualToString: ENTOURAGE_DEMANDE];
     self.titleTextView.maxLength = 150;
     self.titleTextView.placeholder = OTLocalizedString(isDemand ? @"edit_demand_title" : @"edit_contribution_title");
