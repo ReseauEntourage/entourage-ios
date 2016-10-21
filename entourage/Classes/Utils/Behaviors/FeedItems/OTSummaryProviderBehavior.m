@@ -88,7 +88,7 @@
 
 - (int)getDistance:(double)from {
     if(from < 1000)
-        return 500;
+        return round(from);
     return round(from / 1000);
 }
 
