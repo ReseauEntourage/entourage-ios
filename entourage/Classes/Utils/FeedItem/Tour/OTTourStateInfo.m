@@ -19,9 +19,9 @@
     if ([TOUR_STATUS_ONGOING isEqualToString:self.tour.status])
         result = FeedItemStateOngoing;
     else if ([TOUR_STATUS_FREEZED isEqualToString:self.tour.status])
-        result = FeedItemStateFrozen;
+        return FeedItemStateFrozen;
     else
-        return FeedItemStateClosed;
+        result = FeedItemStateClosed;
     if ([currentUser.sid intValue] != [self.tour.author.uID intValue]) {
         if([JOIN_NOT_REQUESTED isEqualToString:self.tour.joinStatus])
             result = FeedItemStateJoinNotRequested;
