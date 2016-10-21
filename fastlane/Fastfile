@@ -31,11 +31,10 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do |options|
+    increment_build_number
     badge(
       dark: true
-      )
-    increment_build_number
-    clear_derived_data
+    )
     gym(
       clean: true,
       scheme: "EntourageBeta"
@@ -48,15 +47,6 @@ platform :ios do
 
     # sh "your_script.sh"
     # You can also use other beta testing services here (run `fastlane actions`)
-  end
-
-  desc "Deploy a new version to the App Store"
-  lane :prerelease do
-    increment_build_number
-    sigh
-    gym # Build your app - more options available
-    
-    # frameit
   end
 
   # You can define as many lanes as you want
