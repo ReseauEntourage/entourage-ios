@@ -21,7 +21,7 @@
     if(timeInterval < 24)
         return [NSString stringWithFormat:@"%dh", (int)timeInterval];
     timeInterval /= 24;
-    return [NSString stringWithFormat:@"%dd", (int)timeInterval];
+    return [NSString stringWithFormat:@"%dj", (int)timeInterval];
 }
 
 @end
