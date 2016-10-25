@@ -16,6 +16,8 @@
 #import "NSUserDefaults+OT.h"
 #import "UIScrollView+entourage.h"
 #import "UIColor+entourage.h"
+#import "NSError+OTErrorData.h"
+#import "OTConsts.h"
 
 @interface OTPhoneViewController ()
 
@@ -57,6 +59,9 @@
             [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
             NSString *errorMessage = error.localizedDescription;
+            NSString *errorCode = [error readErrorCode];
+            if([errorCode isEqualToString:INVALID_PHONE_FORMAT])
+                errorMessage = OTLocalizedString(@"invalidPhoneNumberFormat");
             if (errorMessage) {
                 [Flurry logEvent:@"TelephoneSubmitFail"];
                 [SVProgressHUD showErrorWithStatus:errorMessage];

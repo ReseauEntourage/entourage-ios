@@ -62,3 +62,6 @@
 
 #define SNAPSHOT_START "snapshot_start_%d.png"
 #define SNAPSHOT_STOP "snapshot_end_%d.png"
+
+#define INVALID_PHONE_FORMAT @"INVALID_PHONE_FORMAT"
+#define UNAUTHORIZED @"UNAUTHORIZED"

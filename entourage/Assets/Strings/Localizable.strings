@@ -196,7 +196,7 @@
 "invalidPhoneNumber" = "Numéro de téléphone invalide";
 "invalidPhoneNumberOrCode" = "Le numéro de téléphone et ce code d’accès ne correspondent pas.";
 "mustAddCode" = "Veuillez renseigner un code de vérification";
-"invalidPhoneNumberFormat" = "Phone devrait être au format +33... ou 06...";
+"invalidPhoneNumberFormat" = "Votre téléphone doit être au format +33, 06 ou 07...";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
 "close" = "Fermer";

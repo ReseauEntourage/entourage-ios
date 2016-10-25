@@ -107,12 +107,12 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    NSString *alertText = OTLocalizedString(@"connection_error");
                                    NSString *buttonTitle = @"ok";
                                    NSString *errorCode = [error readErrorCode];
-                                   if ([errorCode isEqualToString:@"UNAUTHORIZED"]) {
+                                   if ([errorCode isEqualToString:UNAUTHORIZED]) {
                                        alertTitle = OTLocalizedString(@"tryAgain");
                                        alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");
                                        buttonTitle = OTLocalizedString(@"tryAgain_short");
                                    }
-                                   else if([errorCode isEqualToString:@"INVALID_PHONE_FORMAT"]) {
+                                   else if([errorCode isEqualToString:INVALID_PHONE_FORMAT]) {
                                        alertTitle = OTLocalizedString(@"tryAgain");
                                        alertText = OTLocalizedString(@"invalidPhoneNumberFormat");
                                        buttonTitle = OTLocalizedString(@"tryAgain_short");
