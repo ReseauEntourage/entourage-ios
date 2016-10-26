@@ -1181,7 +1181,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="9473E1A6-1BFB-4C2D-9DD8-63C818FA5392" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="145ABD0A-8AF5-4FED-8E42-122E59A5BBEA" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
                                                         <constraint firstAttribute="height" constant="25" id="ayO-tA-95R"/>
@@ -1212,7 +1212,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A1DF0B26-3979-4593-85A2-EB5FB77188DE" translatesAutoresizingMaskIntoConstraints="NO" id="Hs3-2H-Kbn">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="9BCDDC6F-24DC-481D-AB73-06FA42E99D44" translatesAutoresizingMaskIntoConstraints="NO" id="Hs3-2H-Kbn">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="0KW-WY-JpJ"/>
                                                         <constraint firstAttribute="width" constant="25" id="dUs-pz-iZZ"/>
@@ -1417,7 +1417,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="9473E1A6-1BFB-4C2D-9DD8-63C818FA5392" width="48" height="48">
+        <image name="145ABD0A-8AF5-4FED-8E42-122E59A5BBEA" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1640,7 +1640,7 @@ pACmAKgArQDEAMYAyDHaMd8x6jHzMgYyCjIVMh4yIzIrMi4yMzJCMkYyTTJVMmIyZzJpMmsycDJ4Mnsy
 gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
 </mutableData>
         </image>
-        <image name="A1DF0B26-3979-4593-85A2-EB5FB77188DE" width="48" height="48">
+        <image name="9BCDDC6F-24DC-481D-AB73-06FA42E99D44" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

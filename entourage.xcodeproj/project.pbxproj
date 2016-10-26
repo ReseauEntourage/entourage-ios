@@ -85,6 +85,10 @@
 		1E2F292B1D4BF4CD00ABC68A /* OTContactsGroupedTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F29291D4BF4CD00ABC68A /* OTContactsGroupedTableDataSourceBehavior.m */; };
 		1E2F292E1D4BF5FF00ABC68A /* OTContactsTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F292D1D4BF5FF00ABC68A /* OTContactsTableCellProviderBehavior.m */; };
 		1E3174911D10299400027824 /* QuitFeedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E3174901D10299400027824 /* QuitFeedItem.storyboard */; };
+		1E37C3271DC0DB7700477090 /* OTStatusButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E37C3261DC0DB7700477090 /* OTStatusButtonCell.m */; };
+		1E37C32B1DC0E67D00477090 /* OTPublicInfoDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E37C32A1DC0E67D00477090 /* OTPublicInfoDataSource.m */; };
+		1E37C32E1DC0E78100477090 /* OTPublicInfoTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E37C32D1DC0E78100477090 /* OTPublicInfoTableDataSource.m */; };
+		1E37C3311DC0E7E700477090 /* OTPublicInfoCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E37C3301DC0E7E700477090 /* OTPublicInfoCellProvider.m */; };
 		1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E40A3331D4A2A10009E2D73 /* UIBarButtonItem+factory.m */; };
 		1E46617D1DAE6CF900ED0CD0 /* OTMemberCountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E46617C1DAE6CF900ED0CD0 /* OTMemberCountCell.m */; };
 		1E4661801DAE6D1100ED0CD0 /* OTMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E46617F1DAE6D1100ED0CD0 /* OTMapCell.m */; };
@@ -468,6 +472,14 @@
 		1E2F292C1D4BF5FF00ABC68A /* OTContactsTableCellProviderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTContactsTableCellProviderBehavior.h; path = Behaviors/UITableView/Contacts/OTContactsTableCellProviderBehavior.h; sourceTree = "<group>"; };
 		1E2F292D1D4BF5FF00ABC68A /* OTContactsTableCellProviderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTContactsTableCellProviderBehavior.m; path = Behaviors/UITableView/Contacts/OTContactsTableCellProviderBehavior.m; sourceTree = "<group>"; };
 		1E3174901D10299400027824 /* QuitFeedItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QuitFeedItem.storyboard; sourceTree = "<group>"; };
+		1E37C3251DC0DB7700477090 /* OTStatusButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTStatusButtonCell.h; path = PublicFeedItem/DetailCells/OTStatusButtonCell.h; sourceTree = "<group>"; };
+		1E37C3261DC0DB7700477090 /* OTStatusButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTStatusButtonCell.m; path = PublicFeedItem/DetailCells/OTStatusButtonCell.m; sourceTree = "<group>"; };
+		1E37C3291DC0E67D00477090 /* OTPublicInfoDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPublicInfoDataSource.h; path = Behaviors/UITableView/PublicInfo/OTPublicInfoDataSource.h; sourceTree = "<group>"; };
+		1E37C32A1DC0E67D00477090 /* OTPublicInfoDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTPublicInfoDataSource.m; path = Behaviors/UITableView/PublicInfo/OTPublicInfoDataSource.m; sourceTree = "<group>"; };
+		1E37C32C1DC0E78100477090 /* OTPublicInfoTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPublicInfoTableDataSource.h; sourceTree = "<group>"; };
+		1E37C32D1DC0E78100477090 /* OTPublicInfoTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPublicInfoTableDataSource.m; sourceTree = "<group>"; };
+		1E37C32F1DC0E7E700477090 /* OTPublicInfoCellProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPublicInfoCellProvider.h; sourceTree = "<group>"; };
+		1E37C3301DC0E7E700477090 /* OTPublicInfoCellProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPublicInfoCellProvider.m; sourceTree = "<group>"; };
 		1E40A3321D4A2A10009E2D73 /* UIBarButtonItem+factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+factory.h"; sourceTree = "<group>"; };
 		1E40A3331D4A2A10009E2D73 /* UIBarButtonItem+factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+factory.m"; sourceTree = "<group>"; };
 		1E46617B1DAE6CF900ED0CD0 /* OTMemberCountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMemberCountCell.h; path = ActiveFeedItem/InfoCells/OTMemberCountCell.h; sourceTree = "<group>"; };
@@ -1095,6 +1107,7 @@
 		1E2F290D1D4BC6A200ABC68A /* UITableView */ = {
 			isa = PBXGroup;
 			children = (
+				1E37C3281DC0E3B000477090 /* PublicInfo */,
 				1EFAC0E01D89251800BE396F /* FeedItemsFilters */,
 				1E5C301B1D6F62AA00E10770 /* Members */,
 				1EF25E0E1D5B2ED500BFC3BC /* MyEntourages */,
@@ -1125,6 +1138,28 @@
 				1E2F292D1D4BF5FF00ABC68A /* OTContactsTableCellProviderBehavior.m */,
 			);
 			name = Contacts;
+			sourceTree = "<group>";
+		};
+		1E37C3241DC0DB3000477090 /* DetailCells */ = {
+			isa = PBXGroup;
+			children = (
+				1E37C3251DC0DB7700477090 /* OTStatusButtonCell.h */,
+				1E37C3261DC0DB7700477090 /* OTStatusButtonCell.m */,
+			);
+			name = DetailCells;
+			sourceTree = "<group>";
+		};
+		1E37C3281DC0E3B000477090 /* PublicInfo */ = {
+			isa = PBXGroup;
+			children = (
+				1E37C3291DC0E67D00477090 /* OTPublicInfoDataSource.h */,
+				1E37C32A1DC0E67D00477090 /* OTPublicInfoDataSource.m */,
+				1E37C32C1DC0E78100477090 /* OTPublicInfoTableDataSource.h */,
+				1E37C32D1DC0E78100477090 /* OTPublicInfoTableDataSource.m */,
+				1E37C32F1DC0E7E700477090 /* OTPublicInfoCellProvider.h */,
+				1E37C3301DC0E7E700477090 /* OTPublicInfoCellProvider.m */,
+			);
+			name = PublicInfo;
 			sourceTree = "<group>";
 		};
 		1E488E031D4FB60E00A2E5B0 /* Onboarding */ = {
@@ -1291,6 +1326,7 @@
 		1E78B7A71D512D950008C00E /* PublicFeedItem */ = {
 			isa = PBXGroup;
 			children = (
+				1E37C3241DC0DB3000477090 /* DetailCells */,
 				1E78B7A81D512DB10008C00E /* OTPublicFeedItemViewController.h */,
 				1E78B7A91D512DB10008C00E /* OTPublicFeedItemViewController.m */,
 			);
@@ -2482,6 +2518,7 @@
 				1E6E550D1D708726002845D0 /* OTPushNotificationsData.m in Sources */,
 				45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */,
 				A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */,
+				1E37C3311DC0E7E700477090 /* OTPublicInfoCellProvider.m in Sources */,
 				1E5C30331D6F89D300E10770 /* OTInvitationsCollectionSource.m in Sources */,
 				45F443471C9314A800DDEBE1 /* OTFeedItemStatus.m in Sources */,
 				1EFAC0F61D89384E00BE396F /* OTNewsFeedsFilter.m in Sources */,
@@ -2549,6 +2586,7 @@
 				1ECFB36C1D52578400722DAC /* OTEntourageMapHandler.m in Sources */,
 				1E07AD641D5667E400466FB7 /* OTStatusChangedBehavior.m in Sources */,
 				1EACCAC31D64CD720027D1ED /* OTDeepLinkService.m in Sources */,
+				1E37C3271DC0DB7700477090 /* OTStatusButtonCell.m in Sources */,
 				0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */,
 				0A94B5001B8CC66100402AF3 /* OTTour.m in Sources */,
 				1E5C302A1D6F7D5D00E10770 /* OTManageInvitationViewController.m in Sources */,
@@ -2565,6 +2603,7 @@
 				2EDA5F0E1CB67FFE00849172 /* OTToursMapDelegate.m in Sources */,
 				1E76AE4A1D144D9900C496BA /* OTEntourageStateInfo.m in Sources */,
 				0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */,
+				1E37C32B1DC0E67D00477090 /* OTPublicInfoDataSource.m in Sources */,
 				1E2F29241D4BF0DF00ABC68A /* OTTableDataSourceBehavior.m in Sources */,
 				2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */,
 				453BB3371D2E2831002F9255 /* OTOnboardingService.m in Sources */,
@@ -2590,6 +2629,7 @@
 				1EC75C061D849AE800887F6F /* OTMapDelegateProxyBehavior.m in Sources */,
 				1E78B7ED1D513ECA0008C00E /* OTTourUI.m in Sources */,
 				1E0972C31D555586006E1FAD /* OTInviteBehavior.m in Sources */,
+				1E37C32E1DC0E78100477090 /* OTPublicInfoTableDataSource.m in Sources */,
 				45B3F8F61C74F40B00DCF2EC /* OTFeedItemAuthor.m in Sources */,
 				1E07DA411D590433003119CC /* OTEntourageJoinerDelegate.m in Sources */,
 				2EC77E4F1CEDE4BC0031BB67 /* OTEntourageService.m in Sources */,
