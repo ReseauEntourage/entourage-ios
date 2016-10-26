@@ -46,10 +46,11 @@
         UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(joinFeedItem:)];
         [self.navigationItem setRightBarButtonItem:joinButton];
     }
+    [self.dataSource loadDataFor:self.feedItem];
 }
 
 - (void)viewDidLayoutSubviews {
-    [self.dataSource loadDataFor:self.feedItem];
+    [self.tableDataSource refresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
