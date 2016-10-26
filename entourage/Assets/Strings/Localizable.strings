@@ -33,6 +33,7 @@
 "joiningEntouragesMessage" = "Invitations en cours";
 "acceptJoinFailed" = "Impossible d’accepter l’invitation.";
 "ignoreJoinFailed" = "Impossible de refuser l’invitation.";
+"phoneAlreadyExits" = "Ce téléphone n'est pas disponible";
 
 // MenuItems
 "menu_amis" = "Amis";

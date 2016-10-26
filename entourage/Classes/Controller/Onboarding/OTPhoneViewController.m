@@ -62,6 +62,8 @@
             NSString *errorCode = [error readErrorCode];
             if([errorCode isEqualToString:INVALID_PHONE_FORMAT])
                 errorMessage = OTLocalizedString(@"invalidPhoneNumberFormat");
+            else if([errorCode isEqualToString:PHONE_ALREADY_EXIST])
+                errorMessage = OTLocalizedString(@"phoneAlreadyExits");
             if (errorMessage) {
                 [Flurry logEvent:@"TelephoneSubmitFail"];
                 [SVProgressHUD showErrorWithStatus:errorMessage];
