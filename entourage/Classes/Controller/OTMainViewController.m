@@ -611,7 +611,6 @@
         [self.feeds addObject:sentTour];
         [self.tableView addFeedItems:@[sentTour]];
         [self.tableView reloadData];
-        [SVProgressHUD dismiss];
         self.tour.uid = sentTour.uid;
         self.tour.distance = @0.0;
         self.stopButton.hidden = NO;
@@ -620,13 +619,16 @@
         [self.mapView takeSnapshotToFile:snapshotStartFilename];
         [self showNewTourOnGoing];
         self.locations = [NSMutableArray new];
-        OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:[OTLocationManager sharedInstance].currentLocation];
+        CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
+        OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:currentLocation];
         [self.pointsToSend addObject:tourPoint];
+        [self.locations addObject:currentLocation];
         [OTOngoingTourService sharedInstance].isOngoing = YES;
         self.launcherButton.enabled = YES;
         if ([self.pointsToSend count] > 0)
             [self performSelector:@selector(sendTourPoints:) withObject:self.pointsToSend afterDelay:0.0];
         [self.footerToolbar setTitle:OTLocalizedString(@"tour_ongoing")];
+        [SVProgressHUD dismiss];
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"tour_create_error", @"")];
         NSLog(@"%@",[error localizedDescription]);
