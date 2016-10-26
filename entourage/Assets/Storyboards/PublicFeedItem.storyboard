@@ -102,7 +102,7 @@
                                             <constraint firstAttribute="height" constant="170" id="3pU-j9-8bf"/>
                                         </constraints>
                                     </mapView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Feed item description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0pG-BU-ago">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Feed item description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0pG-BU-ago">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -133,7 +133,6 @@
                                     <constraint firstAttribute="trailing" secondItem="IvY-Fu-Kho" secondAttribute="trailing" constant="-20" id="Z7R-ne-A5w"/>
                                     <constraint firstItem="fJK-hn-36o" firstAttribute="centerX" secondItem="0Ms-j8-jfY" secondAttribute="centerX" id="dT9-58-8m0"/>
                                     <constraint firstItem="0pG-BU-ago" firstAttribute="top" secondItem="IvY-Fu-Kho" secondAttribute="bottom" constant="15" id="fkB-b5-ItL"/>
-                                    <constraint firstItem="fJK-hn-36o" firstAttribute="top" secondItem="0pG-BU-ago" secondAttribute="bottom" constant="5" id="hLc-cn-O9W"/>
                                     <constraint firstItem="IvY-Fu-Kho" firstAttribute="top" secondItem="4QV-vH-V9y" secondAttribute="bottom" constant="16" id="hvf-iv-PkB"/>
                                     <constraint firstItem="FuU-fG-ePR" firstAttribute="trailing" secondItem="RcA-br-gXo" secondAttribute="trailing" id="jlI-9l-J45"/>
                                     <constraint firstItem="Q8P-B0-Gly" firstAttribute="leading" secondItem="RcA-br-gXo" secondAttribute="leading" id="rEf-Qf-cY9"/>

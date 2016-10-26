@@ -362,15 +362,15 @@
         self.isRefreshing = NO;
         if (!feeds.count)
             return;
-        NSUInteger existingItemsCount = [self.tableView itemsCount];
+        //NSUInteger existingItemsCount = [self.tableView itemsCount];
         [self.tableView addFeedItems:feeds];
-        NSUInteger updatedItemsCount = [self.tableView itemsCount];
-        if (updatedItemsCount > existingItemsCount) {
+#warning hide per francois request
+        //NSUInteger updatedItemsCount = [self.tableView itemsCount];
+        if (false) { //updatedItemsCount > existingItemsCount) {
             NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
             CGRect cellRect = [self.tableView rectForRowAtIndexPath:firstIndexPath];
             BOOL completelyVisible = CGRectContainsRect(self.tableView.bounds, cellRect);
             if (!completelyVisible)
-#warning hide per francois request
                 ;//self.nouveauxFeedItemsButton.hidden = NO;
         }
         self.feeds = [[self.tableView items] mutableCopy];
@@ -566,17 +566,9 @@
             distance = [newLocation distanceFromLocation:previousLocation];
         }
         if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20 && fabs(distance) > LOCATION_MIN_DISTANCE) {
-            if (self.locations.count > 0 && [OTOngoingTourService sharedInstance].isOngoing) {
-                [self addTourPointFromLocation:newLocation];
-                if (self.toursMapDelegate.isActive) {
-                    // draw tour line
-                    CLLocationCoordinate2D coords[2];
-                    coords[0] = ((CLLocation *)self.locations.lastObject).coordinate;
-                    coords[1] = newLocation.coordinate;
-                    [self.mapView addOverlay:[MKPolyline polylineWithCoordinates:coords count:2]];
-                }
-            }
             [self.locations addObject:newLocation];
+            if (self.locations.count > 0 && [OTOngoingTourService sharedInstance].isOngoing)
+                [self addTourPointFromLocation:newLocation];
         }
     }
 }
@@ -650,7 +642,6 @@
     [self.pointsToSend addObject:tourPoint];
     [self sendTourPoints:self.pointsToSend];
     [self.overlayFeeder updateOverlayFor:self.tour];
-    NSLog(@"Added point (%.6f, %.6f)", tourPoint.latitude, tourPoint.longitude);
 }
 
 - (void)sendTourPoints:(NSMutableArray *)tourPoints {

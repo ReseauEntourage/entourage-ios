@@ -43,14 +43,14 @@ static char kAssociatedObjectKey;
                 break;
             }
         }
-        if(foundOverlay)
-            @try {
+        @try {
+            if(foundOverlay)
                 [self.mapView removeOverlay:foundOverlay];
-            } @catch (NSException *exception) {
-                [Flurry logEvent:@"CLEAR_OVERLAY_ERROR"];
-            } @finally {
-                [self.mapView addOverlay:newOverlay];
-            }
+        } @catch (NSException *exception) {
+            [Flurry logEvent:@"CLEAR_OVERLAY_ERROR"];
+        } @finally {
+            [self.mapView addOverlay:newOverlay];
+        }
     }
 }
 
