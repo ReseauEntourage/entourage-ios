@@ -723,9 +723,13 @@
             [Flurry logEvent:@"MapClick"];
             [self showToursMap];
         }
-        else if([self.tapEntourage hasTappedEntourage:sender]) {
-            [Flurry logEvent:@"HeatzoneMapClick"];
-            [self showToursList];
+        else {
+            if([self.tapEntourage hasTappedEntourage:sender]) {
+                [Flurry logEvent:@"HeatzoneMapClick"];
+                [self showToursList];
+            }
+            else
+                [self showToursMap];
         }
     }
 }
