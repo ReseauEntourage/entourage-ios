@@ -26,9 +26,9 @@
 
 - (NSString *)cellIdentifierAtPath:(NSIndexPath *)indexPath forItem:(id)item {
     if(indexPath.row == 0)
+        return @"SummaryCell";
+    else if(indexPath.row == 1)
         return @"MapCell";
-    else if(indexPath.row == self.tableDataSource.dataSource.items.count - 1)
-        return @"StatusCell";
     else
         return @"DescriptionCell";
 }

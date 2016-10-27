@@ -35,8 +35,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.summaryProvider configureWith:self.feedItem];
     [self.tableDataSource initialize];
+    [self.statusBehavior initialize];
+    [self.statusBehavior updateWith:self.feedItem];
     self.dataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.dataSource.tableView.estimatedRowHeight = 1000;
 
@@ -82,7 +83,6 @@
     self.feedItem.joinStatus = JOIN_PENDING;
     [self.statusBehavior updateWith:self.feedItem];
     [self.navigationItem setRightBarButtonItem:nil];
-    [self.dataSource.tableView reloadData];
 }
 
 @end

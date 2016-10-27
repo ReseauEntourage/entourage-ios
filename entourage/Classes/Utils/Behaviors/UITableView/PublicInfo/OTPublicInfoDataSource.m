@@ -12,11 +12,10 @@
 @implementation OTPublicInfoDataSource
 
 - (void)loadDataFor:(OTFeedItem *)feedItem {
-    NSMutableArray *items = [NSMutableArray arrayWithArray:@[feedItem]];
+    NSMutableArray *items = [NSMutableArray arrayWithArray:@[feedItem, feedItem]];
     NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
     if([description length] > 0)
         [items addObject:description];
-    [items addObject:feedItem];
     [self updateItems:items];
 }
 
