@@ -15,6 +15,9 @@
 ## Build generated
 build/
 DerivedData
+.idea/
+Gemfile
+Gemfile.lock
 
 ## Various settings
 *.pbxuser

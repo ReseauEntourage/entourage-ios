@@ -32,6 +32,10 @@ struct UserStorageKey {
     self.prodPlist = prodPlist
   }
 
+  var environment: NSString {
+    return UserDefaults.standard.string(forKey: "environment")! as NSString //UserStorageKey.environment.userPreferences as NSString
+  }
+  
   var amazonAccessKey: NSString {
     return configuration(forKey: UserStorageKey.amazonAccessKey)
   }
