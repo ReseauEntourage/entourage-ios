@@ -13,6 +13,8 @@
 #import "NSUserDefaults+OT.h"
 #import "OTConsts.h"
 
+#import "entourage-Swift.h"
+
 @implementation OTHTTPRequestManager
 
 /**************************************************************************************************/
@@ -22,20 +24,22 @@
 	static OTRequestOperationManager *requestManager = nil;
 
 	if (requestManager == nil) {
-		requestManager = [[OTRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:BASE_API_URL]];
+        NSString *apiBaseUrl = [[ConfigurationManager shared] APIHostURL];
+		requestManager = [[OTRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:apiBaseUrl]];
         
 		requestManager.responseSerializer = [OTJSONResponseSerializer serializer];
 		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [requestManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         //TODO api key should be changed after each release
-        [requestManager.requestSerializer setValue:API_KEY forHTTPHeaderField:@"X-API-KEY"];
+        NSString *apiKey = [[ConfigurationManager shared] APIKey];
+        [requestManager.requestSerializer setValue:apiKey forHTTPHeaderField:@"X-API-KEY"];
 	}
 	return requestManager;
 }
 
 + (NSDictionary*)commonParameters
 {
-    OTUser *user =[NSUserDefaults standardUserDefaults].currentUser;
+    OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
     return user ? @{ @"token" : user.token } : nil;
 }
 

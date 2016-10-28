@@ -14,7 +14,8 @@
 #import "OTApiConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
-#import "OTAmazonConsts.h"
+
+#import "entourage-Swift.h"
 
 #define PICTURE_FOLDER_PREFIX @"300x300/"
 #define PICTURE_BUCKET @"entourage-avatars-production-thumb"
@@ -22,7 +23,10 @@
 @implementation OTPictureUploadService
 
 + (void)configure {
-    AWSStaticCredentialsProvider *staticProvider = [[AWSStaticCredentialsProvider alloc] initWithAccessKey:AMAZON_ACCESS_KEY secretKey:AMAZON_SECRET_KEY];
+    NSString *amazonAccessKey = [[ConfigurationManager shared] amazonAccessKey];
+    NSString *amazonSecretKey = [[ConfigurationManager shared] amazonSecretKey];
+    AWSStaticCredentialsProvider *staticProvider = [[AWSStaticCredentialsProvider alloc] initWithAccessKey:amazonAccessKey
+                                                                                                 secretKey:amazonSecretKey];
     AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionEUWest1 credentialsProvider:staticProvider];
     AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
 }

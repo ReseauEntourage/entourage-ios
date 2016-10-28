@@ -23,12 +23,6 @@ case "${TARGETED_DEVICE_FAMILY}" in
     ;;
 esac
 
-realpath() {
-  DIRECTORY="$(cd "${1%/*}" && pwd)"
-  FILENAME="${1##*/}"
-  echo "$DIRECTORY/$FILENAME"
-}
-
 install_resource()
 {
   if [[ "$1" = /* ]] ; then
@@ -70,7 +64,7 @@ EOM
       xcrun mapc "$RESOURCE_PATH" "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename "$RESOURCE_PATH" .xcmappingmodel`.cdm"
       ;;
     *.xcassets)
-      ABSOLUTE_XCASSET_FILE=$(realpath "$RESOURCE_PATH")
+      ABSOLUTE_XCASSET_FILE="$RESOURCE_PATH"
       XCASSET_FILES+=("$ABSOLUTE_XCASSET_FILE")
       ;;
     *)
@@ -109,7 +103,37 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "$PODS_CONFIGURATION_BUILD_DIR/JSBadgeView/JSBadgeView.bundle"
   install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
 fi
-if [[ "$CONFIGURATION" == "Release" ]]; then
+if [[ "$CONFIGURATION" == "Beta" ]]; then
+  install_resource "FormatterKit/Localizations/ca.lproj"
+  install_resource "FormatterKit/Localizations/cs.lproj"
+  install_resource "FormatterKit/Localizations/da.lproj"
+  install_resource "FormatterKit/Localizations/de.lproj"
+  install_resource "FormatterKit/Localizations/el.lproj"
+  install_resource "FormatterKit/Localizations/en.lproj"
+  install_resource "FormatterKit/Localizations/es.lproj"
+  install_resource "FormatterKit/Localizations/fr.lproj"
+  install_resource "FormatterKit/Localizations/id.lproj"
+  install_resource "FormatterKit/Localizations/it.lproj"
+  install_resource "FormatterKit/Localizations/ja.lproj"
+  install_resource "FormatterKit/Localizations/ko.lproj"
+  install_resource "FormatterKit/Localizations/nb.lproj"
+  install_resource "FormatterKit/Localizations/nl.lproj"
+  install_resource "FormatterKit/Localizations/nn.lproj"
+  install_resource "FormatterKit/Localizations/pl.lproj"
+  install_resource "FormatterKit/Localizations/pt.lproj"
+  install_resource "FormatterKit/Localizations/pt_BR.lproj"
+  install_resource "FormatterKit/Localizations/ru.lproj"
+  install_resource "FormatterKit/Localizations/sv.lproj"
+  install_resource "FormatterKit/Localizations/tr.lproj"
+  install_resource "FormatterKit/Localizations/uk.lproj"
+  install_resource "FormatterKit/Localizations/vi.lproj"
+  install_resource "FormatterKit/Localizations/zh-Hans.lproj"
+  install_resource "FormatterKit/Localizations/zh-Hant.lproj"
+  install_resource "IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle"
+  install_resource "$PODS_CONFIGURATION_BUILD_DIR/JSBadgeView/JSBadgeView.bundle"
+  install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
+fi
+if [[ "$CONFIGURATION" == "Store" ]]; then
   install_resource "FormatterKit/Localizations/ca.lproj"
   install_resource "FormatterKit/Localizations/cs.lproj"
   install_resource "FormatterKit/Localizations/da.lproj"
@@ -153,7 +177,7 @@ then
   # Find all other xcassets (this unfortunately includes those of path pods and other targets).
   OTHER_XCASSETS=$(find "$PWD" -iname "*.xcassets" -type d)
   while read line; do
-    if [[ $line != "`realpath $PODS_ROOT`*" ]]; then
+    if [[ $line != "${PODS_ROOT}*" ]]; then
       XCASSET_FILES+=("$line")
     fi
   done <<<"$OTHER_XCASSETS"

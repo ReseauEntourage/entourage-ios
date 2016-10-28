@@ -10,10 +10,12 @@
 #import "UIView+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "UINavigationController+entourage.h"
+#import "entourage-Swift.h"
 
 @interface OTStartupViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIButton *betaButton;
 
 @end
 
@@ -35,6 +37,25 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [NSUserDefaults standardUserDefaults].temporaryUser = nil;
+
+#if BETA
+  self.betaButton.hidden = false;
+  NSString *env = [[ConfigurationManager shared] environment];
+  NSString *title = [NSString stringWithFormat:@"Vous êtes sur %@.\n(Tappez pour changer)", env];
+  self.betaButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+  self.betaButton.titleLabel.numberOfLines = 2;
+  [self.betaButton setTitle:title forState:UIControlStateNormal];
+#endif
+}
+
+- (IBAction)tapOnBetaButton {
+  [self openSettings];
+}
+
+- (void)openSettings
+{
+  NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 @end
