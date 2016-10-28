@@ -38,7 +38,8 @@ platform :ios do
     sigh(
      app_identifier: "social.entourage.entourageios.beta",
      username: "apple@entourage.social",
-     adhoc: true
+     adhoc: true,
+     force: true
     )
     badge(
       dark: true
@@ -50,7 +51,8 @@ platform :ios do
     appaloosa(
       api_token: options[:appaloosa_api_key],
       store_id: options[:appaloosa_store_id],
-      screenshots: ""
+      screenshots: "",
+      group_ids: "13446"
       )
 
     # sh "your_script.sh"
