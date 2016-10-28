@@ -131,6 +131,7 @@
 		1E5F798B1D5A13930005003C /* OTCollectionViewDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F798A1D5A13930005003C /* OTCollectionViewDataSourceBehavior.m */; };
 		1E5F798E1D5A14E60005003C /* OTCollectionCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F798D1D5A14E60005003C /* OTCollectionCellProviderBehavior.m */; };
 		1E5F79921D5A16DE0005003C /* OTInvitationsCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F79911D5A16DE0005003C /* OTInvitationsCellProviderBehavior.m */; };
+		1E62AE621DC387650080C705 /* OTNewsFeedsSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E62AE611DC387650080C705 /* OTNewsFeedsSourceBehavior.m */; };
 		1E66936C1D85DEEB00F9C03D /* OTTapEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E66936B1D85DEEB00F9C03D /* OTTapEntourageBehavior.m */; };
 		1E68E1151D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E68E1141D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m */; };
 		1E6E550A1D707FE3002845D0 /* OTPushNotificationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E55091D707FE3002845D0 /* OTPushNotificationsService.m */; };
@@ -560,6 +561,9 @@
 		1E5F798D1D5A14E60005003C /* OTCollectionCellProviderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTCollectionCellProviderBehavior.m; path = Behaviors/UICollectionView/OTCollectionCellProviderBehavior.m; sourceTree = "<group>"; };
 		1E5F79901D5A16DE0005003C /* OTInvitationsCellProviderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTInvitationsCellProviderBehavior.h; path = Behaviors/UICollectionView/MyEntourages/OTInvitationsCellProviderBehavior.h; sourceTree = "<group>"; };
 		1E5F79911D5A16DE0005003C /* OTInvitationsCellProviderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTInvitationsCellProviderBehavior.m; path = Behaviors/UICollectionView/MyEntourages/OTInvitationsCellProviderBehavior.m; sourceTree = "<group>"; };
+		1E62AE601DC387650080C705 /* OTNewsFeedsSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTNewsFeedsSourceBehavior.h; sourceTree = "<group>"; };
+		1E62AE611DC387650080C705 /* OTNewsFeedsSourceBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTNewsFeedsSourceBehavior.m; sourceTree = "<group>"; };
+		1E62AE631DC388220080C705 /* OTNewsFeedsSourceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTNewsFeedsSourceDelegate.h; sourceTree = "<group>"; };
 		1E66936A1D85DEEB00F9C03D /* OTTapEntourageBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTTapEntourageBehavior.h; path = Behaviors/NewsFeed/OTTapEntourageBehavior.h; sourceTree = "<group>"; };
 		1E66936B1D85DEEB00F9C03D /* OTTapEntourageBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTTapEntourageBehavior.m; path = Behaviors/NewsFeed/OTTapEntourageBehavior.m; sourceTree = "<group>"; };
 		1E68E1131D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesTableDataSource.h; path = Behaviors/UITableView/MyEntourages/OTMyEntouragesTableDataSource.h; sourceTree = "<group>"; };
@@ -1404,6 +1408,9 @@
 				1E5C30261D6F740C00E10770 /* OTFeedItemDetailsBehavior.m */,
 				1E66936A1D85DEEB00F9C03D /* OTTapEntourageBehavior.h */,
 				1E66936B1D85DEEB00F9C03D /* OTTapEntourageBehavior.m */,
+				1E62AE601DC387650080C705 /* OTNewsFeedsSourceBehavior.h */,
+				1E62AE611DC387650080C705 /* OTNewsFeedsSourceBehavior.m */,
+				1E62AE631DC388220080C705 /* OTNewsFeedsSourceDelegate.h */,
 			);
 			name = NewsFeed;
 			sourceTree = "<group>";
@@ -2552,6 +2559,7 @@
 				1E5EBCEC1D53CE9A006695F1 /* OTMapAnnotationProviderBehavior.m in Sources */,
 				6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */,
 				1E2432C61DA6CCE1000EF74F /* OTContactPhoneCell.m in Sources */,
+				1E62AE621DC387650080C705 /* OTNewsFeedsSourceBehavior.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
 				1E09E0831DB0DD6600ABBBA1 /* OTSpeechBehaviorBase.m in Sources */,
 				1E09E0801DB0DD5300ABBBA1 /* OTCountSpeechBehavior.m in Sources */,
