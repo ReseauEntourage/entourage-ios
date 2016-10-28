@@ -8,7 +8,7 @@
 
 #import <AFNetworking/AFNetworking.h>
 
-@interface OTRequestOperationManager : AFHTTPRequestOperationManager
+@interface OTRequestOperationManager : AFHTTPSessionManager
 
 - (void)GETWithUrl:(NSString *)url
      andParameters:(NSDictionary *)parameters

@@ -18,7 +18,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
 #import "OTUserPictureViewController.h"
-#import "NSError+message.h"
+#import "NSError+OTErrorData.h"
 #import "OTOnboardingNavigationBehavior.h"
 #import "OTScrollPinBehavior.h"
 
@@ -75,8 +75,7 @@
         [SVProgressHUD dismiss];
         [self.onboardingNavigation nextFromName];
     } failure:^(NSError *error) {
-        [Flurry logEvent:@"NameSubmitError"];
-        [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         NSLog(@"ERR: something went wrong on onboarding user name: %@", error.description);
     }];
 }
