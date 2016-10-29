@@ -24,7 +24,8 @@
 	static OTRequestOperationManager *requestManager = nil;
 
 	if (requestManager == nil) {
-        NSString *apiBaseUrl = [[ConfigurationManager shared] APIHostURL];
+    NSString *apiBaseUrl = [[ConfigurationManager shared] APIHostURL];
+
 		requestManager = [[OTRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:apiBaseUrl]];
         
 		requestManager.responseSerializer = [OTJSONResponseSerializer serializer];
