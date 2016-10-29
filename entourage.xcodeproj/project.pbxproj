@@ -265,7 +265,6 @@
 		45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A631C5242FC00F68C24 /* Main.storyboard */; };
 		45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */; };
 		45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A711C56961500F68C24 /* Intro.storyboard */; };
-		45D6B8301D116A2C00357FEF /* OTFeedItemsPagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D6B82F1D116A2C00357FEF /* OTFeedItemsPagination.m */; };
 		45D7891B1D2FFC3E005EBACC /* UIScrollView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D7891A1D2FFC3E005EBACC /* UIScrollView+entourage.m */; };
 		45E37E531CEE1F7D005C3175 /* OTFeedsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E521CEE1F7D005C3175 /* OTFeedsService.m */; };
 		45E37E561CEE5C3F005C3175 /* OTToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E551CEE5C3F005C3175 /* OTToolbar.m */; };
@@ -808,8 +807,6 @@
 		45CE5A641C5242FC00F68C24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		45CE5A711C56961500F68C24 /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
-		45D6B82E1D116A2C00357FEF /* OTFeedItemsPagination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemsPagination.h; sourceTree = "<group>"; };
-		45D6B82F1D116A2C00357FEF /* OTFeedItemsPagination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemsPagination.m; sourceTree = "<group>"; };
 		45D789191D2FFC3E005EBACC /* UIScrollView+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+entourage.h"; sourceTree = "<group>"; };
 		45D7891A1D2FFC3E005EBACC /* UIScrollView+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+entourage.m"; sourceTree = "<group>"; };
 		45E37E511CEE1F7D005C3175 /* OTFeedsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedsService.h; sourceTree = "<group>"; };
@@ -1853,8 +1850,6 @@
 				45F24A3C1CEDB1490003BF9E /* OTFeedItem.m */,
 				45B3F8F41C74F40A00DCF2EC /* OTFeedItemAuthor.h */,
 				45B3F8F51C74F40A00DCF2EC /* OTFeedItemAuthor.m */,
-				45D6B82E1D116A2C00357FEF /* OTFeedItemsPagination.h */,
-				45D6B82F1D116A2C00357FEF /* OTFeedItemsPagination.m */,
 				45F24A3E1CEDB1880003BF9E /* Entourage */,
 				45F443411C90B93900DDEBE1 /* Tour */,
 				1E1BA6AA1D82FC0E00A7F1FF /* OTMyFeedMessage.h */,
@@ -2706,7 +2701,6 @@
 				1EFAC0D31D89247900BE396F /* OTFeedItemsFilterCellBase.m in Sources */,
 				1EFAC0ED1D8928E200BE396F /* OTMyEntouragesFilter.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,
-				45D6B8301D116A2C00357FEF /* OTFeedItemsPagination.m in Sources */,
 				1E5F79881D5A12560005003C /* OTCollectionSourceBehavior.m in Sources */,
 				1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */,
 				2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */,

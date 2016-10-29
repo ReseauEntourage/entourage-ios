@@ -10,7 +10,7 @@
 #import "OTFeedItemFilters.h"
 #import <MapKit/MapKit.h>
 
-@interface OTNewsFeedsFilter : OTFeedItemFilters
+@interface OTNewsFeedsFilter : OTFeedItemFilters<NSCopying>
 
 @property (nonatomic) BOOL showMedical;
 @property (nonatomic) BOOL showSocial;

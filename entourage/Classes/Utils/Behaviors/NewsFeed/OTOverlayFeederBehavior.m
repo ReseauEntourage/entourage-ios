@@ -65,6 +65,10 @@ static char kAssociatedObjectKey;
     return nil;
 }
 
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    // Sergiu 30.10.2016 : It seems forward invocation does not work on other delegates if this is not present in all of them (don't know why yet)
+}
+
 #pragma mark - private methods
 
 - (void)addOverlaysToMap:(NSArray *)items {

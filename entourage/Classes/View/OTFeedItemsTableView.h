@@ -26,16 +26,9 @@
 @property (nonatomic, weak) id<OTFeedItemsTableViewDelegate> feedItemsDelegate;
 
 - (void)configureWithMapView:(MKMapView *)mapView;
-
-- (void)addFeedItems:(NSArray*)feedItems;
-- (void)addFeedItem:(OTFeedItem*)feedItem;
-- (void)removeFeedItem:(OTFeedItem*)feedItem;
-- (void)removeAll;
+- (void)updateItems:(NSArray *)items;
 - (void)loadBegun;
 - (void)setNoConnection;
 - (void)setNoFeeds;
-
-- (NSArray *)items;
-- (NSUInteger)itemsCount;
 
 @end

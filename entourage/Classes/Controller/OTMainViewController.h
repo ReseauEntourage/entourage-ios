@@ -26,7 +26,8 @@
 
 - (void)zoomToCurrentLocation:(id)sender;
 - (void)didChangePosition;
-- (void)getData:(BOOL)moreFeeds;
+- (void)reloadPois;
+- (void)reloadFeeds;
 
 - (void)displayEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view;
 - (void)displayPoiDetails:(MKAnnotationView *)view;

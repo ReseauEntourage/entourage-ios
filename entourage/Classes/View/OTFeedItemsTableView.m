@@ -43,8 +43,8 @@
 
 @interface OTFeedItemsTableView () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *feedItems;
 @property (nonatomic, strong) UILabel *lblEmptyTableReason;
+@property (nonatomic, strong) NSArray *items;
 
 @end
 
@@ -72,12 +72,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
     self.lblEmptyTableReason.frame = self.frame;
-}
-
-- (NSArray *)items {
-    return self.feedItems;
 }
 
 - (void)configureWithMapView:(MKMapView *)mapView {
@@ -122,6 +117,11 @@
     self.tableHeaderView = headerView;
 }
 
+- (void)updateItems:(NSArray *)items {
+    self.items = items;
+    [self reloadData];
+}
+
 - (void)loadBegun {
     self.lblEmptyTableReason.text = @"";
 }
@@ -135,68 +135,14 @@
 }
 
 /********************************************************************************/
-#pragma mark - Tour list handlind
-
-- (NSMutableArray*)feedItems {
-    if (_feedItems == nil) {
-        _feedItems = [[NSMutableArray alloc] init];
-    }
-    return _feedItems;
-}
-
-- (void)addFeedItems:(NSArray*)feedItems {
-    for (OTFeedItem* feedItem in feedItems) {
-        [self addFeedItem:feedItem];
-    }
-}
-
-- (void)addFeedItem:(OTFeedItem *)feedItem {
-    NSUInteger oldFeedIndex = [self.feedItems indexOfObject:feedItem];
-    if (oldFeedIndex != NSNotFound) {
-        [self.feedItems replaceObjectAtIndex:oldFeedIndex withObject:feedItem];
-        return;
-    }
-    
-    if (feedItem.creationDate != nil) {
-        for (NSUInteger i = 0; i < [self.feedItems count]; i++) {
-            OTFeedItem* internalFeedItem = self.feedItems[i];
-            if (internalFeedItem.creationDate != nil) {
-                if ([internalFeedItem.creationDate compare:feedItem.creationDate] == NSOrderedAscending) {
-                    [self.feedItems insertObject:feedItem atIndex:i];
-                    return;
-                }
-            }
-        }
-    }
-    [self.feedItems addObject:feedItem];
-}
-
-- (void)removeFeedItem:(OTFeedItem*)feedItem; {
-    for (OTFeedItem* internalFeedItem in self.feedItems) {
-        if ([internalFeedItem.uid isEqualToNumber:feedItem.uid] && [internalFeedItem.type isEqualToString:feedItem.type]) {
-            [self.feedItems removeObject:internalFeedItem];
-            return;
-        }
-    }
-}
-
-- (void)removeAll {
-    [self.feedItems removeAllObjects];
-}
-
-- (NSUInteger)itemsCount {
-    return [self.feedItems count];
-}
-
-/********************************************************************************/
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if(self.feedItems.count == 0)
+    if(self.items.count == 0)
         self.backgroundView = self.lblEmptyTableReason;
     else
         self.backgroundView = nil;
-    return self.feedItems.count;
+    return self.items.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -216,7 +162,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
     
-    OTFeedItem *item = self.feedItems[indexPath.section];
+    OTFeedItem *item = self.items[indexPath.section];
     NSLog(@">> %ld: %@", (long)indexPath.section, [item isKindOfClass:[OTTour class]] ? ((OTTour*)item).organizationName : ((OTEntourage*)item).title);
     
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
@@ -246,8 +192,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    id selectedFeedItem = self.feedItems[indexPath.section];
-
+    id selectedFeedItem = self.items[indexPath.section];
     if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)]) {
         [self.feedItemsDelegate showFeedInfo:selectedFeedItem];
     }
@@ -298,8 +243,7 @@
     [Flurry logEvent:@"UserProfileClick"];
     UITableViewCell *cell = (UITableViewCell*)userButton.superview.superview;
     NSInteger index = [self indexPathForCell:cell].section;
-    OTFeedItem *selectedFeedItem = self.feedItems[index];
-    
+    OTFeedItem *selectedFeedItem = self.items[index];
     if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showUserProfile:)]) {
         [self.feedItemsDelegate showUserProfile:selectedFeedItem.author.uID];
     }
@@ -308,8 +252,7 @@
 - (void)doJoinRequest:(UIButton*)statusButton {
     UITableViewCell *cell = (UITableViewCell*)statusButton.superview.superview;
     NSInteger index = [self indexPathForCell:cell].section;
-    OTFeedItem *selectedFeedItem = self.feedItems[index];
-    
+    OTFeedItem *selectedFeedItem = self.items[index];
     if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(doJoinRequest:)]) {
         [self.feedItemsDelegate doJoinRequest:selectedFeedItem];
     }

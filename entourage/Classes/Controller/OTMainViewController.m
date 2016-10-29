@@ -21,7 +21,6 @@
 #import "OTTourCreatorViewController.h"
 #import "OTEntourageEditorViewController.h"
 #import "OTFeedItemFiltersViewController.h"
-#import "OTFeedItemsPagination.h"
 #import "OTPublicFeedItemViewController.h"
 #import "OTActiveFeedItemViewController.h"
 #import "OTMyEntouragesViewController.h"
@@ -81,7 +80,7 @@
 #define LONGPRESS_DELTA 65.0f
 #define MAX_DISTANCE 250.0 //meters
 
-@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFeedItemsFilterDelegate>
+@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFeedItemsFilterDelegate, OTNewsFeedsSourceDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
@@ -112,14 +111,9 @@
 @property (nonatomic, weak) IBOutlet UIButton *launcherButton;
 @property (nonatomic, weak) IBOutlet UIButton *stopButton;
 @property (nonatomic, weak) IBOutlet UIButton *createEncounterButton;
-@property (nonatomic, strong) NSMutableArray *feeds;
-@property (nonatomic) CLLocationCoordinate2D requestedToursCoordinate;
-@property (nonatomic, strong) NSTimer *refreshTimer;
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSArray *pois;
 @property (nonatomic, strong) NSMutableArray *markers;
-@property (nonatomic) OTFeedItemsPagination *currentPagination;
-@property (nonatomic) BOOL isRefreshing;
 @property (nonatomic, weak) IBOutlet UIButton *nouveauxFeedItemsButton;
 @property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
 @property (nonatomic) BOOL isFirstLoad;
@@ -135,7 +129,7 @@
     
     self.isFirstLoad = YES;
     [self.newsFeedsSourceBehavior initialize];
-    self.feeds = [NSMutableArray new];
+    self.newsFeedsSourceBehavior.delegate = self;
     [self configureNavigationBar];
     [self.footerToolbar setupWithFilters];
     self.currentFilter = [OTNewsFeedsFilter new];
@@ -158,10 +152,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
-    self.currentPagination = [OTFeedItemsPagination new];
     [self configureMapView];
     self.mapSegmentedControl.layer.cornerRadius = 5;
     [self switchToNewsfeed];
+    [self reloadFeeds];
     if ([OTOngoingTourService sharedInstance].isOngoing)
         [self showNewTourOnGoing];
     else
@@ -186,17 +180,19 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getNewFeeds) userInfo:nil repeats:YES];
-    [self.refreshTimer fire];
+    [self.newsFeedsSourceBehavior resume];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.refreshTimer invalidate];
+    [self.newsFeedsSourceBehavior pause];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    [self getData:NO];
+    if(self.toursMapDelegate.isActive)
+        [self reloadFeeds];
+    else
+        [self reloadPois];
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
 }
 
@@ -212,7 +208,6 @@
     self.mapSegmentedControl.hidden = NO;
     [self clearMap];
     [self feedMapWithFeedItems];
-    [self.toursMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
     if (self.isTourListDisplayed)
         [self showToursList];
     [self.footerToolbar setupWithFilters];
@@ -226,7 +221,7 @@
     [self.mapDelegateProxy.delegates addObject:self.guideMapDelegate];
     [self clearMap];
     [self showToursMap];
-    [self.guideMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
+    [self reloadPois];
     [self.footerToolbar setupDefault];
     [self.footerToolbar setTitle:OTLocalizedString(@"guideTitle")];
 }
@@ -310,7 +305,7 @@
 }
 
 - (void)appWillEnterBackground:(NSNotification*)note {
-    [self.refreshTimer invalidate];
+    [self.newsFeedsSourceBehavior pause];
     if ([OTOngoingTourService sharedInstance].isOngoing)
         [self createLocalNotificationForTour:self.tour.uid];
 }
@@ -324,123 +319,60 @@
     [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"") options:NSKeyValueObservingOptionNew context:nil];
 }
 
-- (void)getData:(BOOL)moreFeeds {
-    if (self.toursMapDelegate.isActive)
-        [self getFeeds:moreFeeds];
-    else
-        [self getPOIList];
+- (void)reloadFeeds {
+    [self.indicatorView setHidden:NO];
+    [self.tableView loadBegun];
+    [self.tableView updateItems:@[]];
+    [self clearMap];
+    [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter];
+}
+
+- (void)reloadPois {
+    [self getPOIList];
 }
 
 - (void)didChangePosition {
-    CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.requestedToursCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
+    CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.newsFeedsSourceBehavior.lastOkCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
     if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4)
         return;
-    [self.mapView removeAnnotations:self.mapView.annotations];
-    [self feedMapWithFeedItems];
-    self.currentPagination.beforeDate = [NSDate date];
-    [self getFeeds:NO];
+    [self reloadFeeds];
 }
 
 - (IBAction)forceGetNewData {
     NSLog(@"Forcing get new data.");
-    self.isRefreshing = NO;
-    [self getNewFeeds];
+    [self.indicatorView setHidden:NO];
+    [self.newsFeedsSourceBehavior getNewItems];
 }
 
-- (void)getNewFeeds {
-    if (self.isRefreshing)
-        return;
-    self.isRefreshing = YES;
-    
-    __block CLLocationCoordinate2D oldRequestedCoordinate;
-    oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
-    oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
-    self.requestedToursCoordinate = self.mapView.centerCoordinate;
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:[NSDate date] andLocation:self.requestedToursCoordinate];
-    NSLog(@"Getting new data ...");
-    [self.tableView loadBegun];
-    [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary success:^(NSMutableArray *feeds) {
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        self.isRefreshing = NO;
-        if (!feeds.count)
-            return;
-        //NSUInteger existingItemsCount = [self.tableView itemsCount];
-        [self.tableView addFeedItems:feeds];
-#warning hide per francois request
-        //NSUInteger updatedItemsCount = [self.tableView itemsCount];
-        if (false) { //updatedItemsCount > existingItemsCount) {
-            NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-            CGRect cellRect = [self.tableView rectForRowAtIndexPath:firstIndexPath];
-            BOOL completelyVisible = CGRectContainsRect(self.tableView.bounds, cellRect);
-            if (!completelyVisible)
-                ;//self.nouveauxFeedItemsButton.hidden = NO;
-        }
-        self.feeds = [[self.tableView items] mutableCopy];
-        [self feedMapWithFeedItems];
-        [self.tableView reloadData];
-    } failure:^(NSError *error) {
-        NSLog(@"Error getting feeds: %@", error.description);
-        if(error.code == NSURLErrorNotConnectedToInternet)
-            [self.tableView setNoConnection];
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        self.requestedToursCoordinate = oldRequestedCoordinate;
-        [self registerObserver];
-        [self.indicatorView setHidden:YES];
-        self.isRefreshing = NO;
-    }];
+#pragma mark - OTNewsFeedsSourceDelegate
+
+- (void)itemsUpdated {
+    if (self.newsFeedsSourceBehavior.feedItems.count && self.isFirstLoad) {
+        self.isFirstLoad = NO;
+        [self showToursList];
+    }
+    if(self.newsFeedsSourceBehavior.feedItems.count == 0)
+        [self.tableView setNoFeeds];
+    [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
+    [self feedMapWithFeedItems];
+    [self.indicatorView setHidden:YES];
 }
 
-- (void)getFeeds:(BOOL)moreFeeds {
-    if (self.currentPagination.isLoading)
-        return;
-    self.currentPagination.isLoading = YES;
+- (void)errorLoadingFeedItems:(NSError *)error {
+    if(error.code == NSURLErrorNotConnectedToInternet)
+        [self.tableView setNoConnection];
+    else
+        [self.tableView setNoFeeds];
+    [self.indicatorView setHidden:YES];
+}
 
-    __block CLLocationCoordinate2D oldRequestedCoordinate;
-    oldRequestedCoordinate.latitude = self.requestedToursCoordinate.latitude;
-    oldRequestedCoordinate.longitude = self.requestedToursCoordinate.longitude;
-    self.requestedToursCoordinate = self.mapView.centerCoordinate;
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    if (!self.currentPagination.beforeDate)
-        self.currentPagination.beforeDate = [NSDate date];
-    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:self.currentPagination.beforeDate andLocation:self.requestedToursCoordinate];
-    [self.tableView loadBegun];
-    [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary success:^(NSMutableArray *feeds) {
-        self.currentPagination.isLoading = NO;
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        if (feeds.count && self.isFirstLoad) {
-            self.isFirstLoad = NO;
-            [self showToursList];
-        }
-        if(!moreFeeds) {
-            [self.tableView removeAll];
-            [self.feeds removeAllObjects];
-            [self.overlayFeeder updateOverlays:@[]];
-        }
-        [self.feeds addObjectsFromArray:feeds];
-        [self.tableView addFeedItems:feeds];
-        [self.tableView reloadData];
-        if(self.tableView.items.count == 0)
-            [self.tableView setNoFeeds];
-        [self feedMapWithFeedItems];
-        [self.indicatorView setHidden:YES];
-    } failure:^(NSError *error) {
-        if(!moreFeeds) {
-            [self.tableView removeAll];
-            [self.feeds removeAllObjects];
-            [self.overlayFeeder updateOverlays:@[]];
-            [self.tableView reloadData];
-            [self.tableView setNoFeeds];
-        }
-        if(error.code == NSURLErrorNotConnectedToInternet)
-           [self.tableView setNoConnection];
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        self.requestedToursCoordinate = oldRequestedCoordinate;
-        [self registerObserver];
-        self.currentPagination.isLoading = NO;
-        [self.indicatorView setHidden:YES];
-    }];
+- (void)errorLoadingNewFeedItems:(NSError *)error {
+    if(error.code == NSURLErrorNotConnectedToInternet)
+        [self.tableView setNoConnection];
+    else
+        [self.tableView setNoFeeds];
+    [self registerObserver];
+    [self.indicatorView setHidden:YES];
 }
 
 - (void)getPOIList {
@@ -459,7 +391,7 @@
 
 - (void)feedMapWithFeedItems {
     if (self.toursMapDelegate.isActive) {
-        [self.overlayFeeder updateOverlays:self.feeds];
+        [self.overlayFeeder updateOverlays:self.newsFeedsSourceBehavior.feedItems];
         NSMutableArray *annotations = [NSMutableArray new];
         for (OTEncounter *encounter in self.encounters) {
             OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
@@ -612,8 +544,7 @@
     [SVProgressHUD showWithStatus:OTLocalizedString(@"tour_create_sending")];
     self.launcherButton.enabled = NO;
     [[OTTourService new] sendTour:self.tour withSuccess:^(OTTour *sentTour) {
-        [self.feeds addObject:sentTour];
-        [self.tableView addFeedItems:@[sentTour]];
+        [self.newsFeedsSourceBehavior.feedItems insertObject:sentTour atIndex:0];
         [self.tableView reloadData];
         self.tour.uid = sentTour.uid;
         self.tour.distance = @0.0;
@@ -703,7 +634,6 @@
     self.stopButton.hidden = YES;
     self.createEncounterButton.hidden = YES;
     [OTOngoingTourService sharedInstance].isOngoing = NO;
-    self.requestedToursCoordinate = CLLocationCoordinate2DMake(0.0f, 0.0f);
     [self clearMap];
     [self forceGetNewData];
 }
@@ -838,12 +768,7 @@
 
 - (void)filterChanged:(OTNewsFeedsFilter *)filter {
     self.currentFilter = filter;
-    self.currentPagination.beforeDate = nil;
-    self.feeds = [NSMutableArray new];
-    [self clearMap];
-    [self.tableView removeAll];
-    [self.tableView reloadData];
-    [self getData:NO];
+    [self reloadFeeds];
 }
 
 #pragma mark - Actions
@@ -860,8 +785,7 @@
         [self.mapView setCenterCoordinate:currentLocation.coordinate animated:animatedSetCenter];
         if(self.toursMapDelegate.isActive && !self.isRegionSetted) {
             self.isRegionSetted = YES;
-            self.currentPagination.isLoading = NO;
-            [self.toursMapDelegate mapView:self.mapView regionDidChangeAnimated:YES];
+            [self reloadFeeds];
         }
     }
 }
@@ -881,8 +805,7 @@
 
 - (void)loadMoreData {
     [Flurry logEvent:@"RefreshListPage"];
-    self.currentPagination.beforeDate = ((OTFeedItem*)self.feeds.lastObject).creationDate;
-    [self getData:YES];
+    [self.newsFeedsSourceBehavior loadMoreItems];
 }
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {

@@ -15,7 +15,6 @@
 
 @property (nonatomic, strong) NSTimer *refreshTimer;
 @property (nonatomic, assign) CLLocationCoordinate2D currentCoordinate;
-@property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
 
 @end
 
@@ -26,16 +25,28 @@
 }
 
 - (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
-    printf("ME - reloadItemsAt");
+    printf("\nME - reloadItemsAt");
+    filter.location = coordinate;
+    if([self.currentFilter.description isEqualToString:filter.description])
+        return;
     self.currentCoordinate = coordinate;
     @synchronized (self.currentFilter) {
-        self.currentFilter = filter;
+        self.currentFilter = [filter copy];
+        self.currentFilter.location = coordinate;
     }
-    [self reloadItems];
+    [self.feedItems removeAllObjects];
+    [self.delegate itemsUpdated];
+    NSDate *beforeDate = [NSDate date];
+    [self requestData:beforeDate withSuccess:^(NSArray *items) {
+        [self.feedItems addObjectsFromArray:[self sortItems:items]];
+        [self.delegate itemsUpdated];
+    } orError:^(NSError *error) {
+        [self.delegate errorLoadingFeedItems:error];
+    }];
 }
 
 - (void)loadMoreItems {
-    printf("ME - loadMoreItems");
+    printf("\nME - loadMoreItems");
     NSDate *beforeDate = [NSDate date];
     if(self.feedItems.count > 0)
         beforeDate = [self.feedItems.lastObject updatedDate];
@@ -43,41 +54,19 @@
         [self.feedItems addObjectsFromArray:[self sortItems:items]];
         [self.delegate itemsUpdated];
     } orError:^(NSError *error) {
-        [self.delegate errorLoadingFeedItems];
-    }];
-}
-
-- (void)pause {
-    printf("ME - pause");
-    [self.refreshTimer invalidate];
-}
-
-- (void)resume {
-    printf("ME - resume");
-    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getNewItems) userInfo:nil repeats:YES];
-}
-
-#pragma mark - private methods
-
-- (void)reloadItems {
-    [self.feedItems removeAllObjects];
-    NSDate *beforeDate = [NSDate date];
-    [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        [self.feedItems addObjectsFromArray:[self sortItems:items]];
-        [self.delegate itemsUpdated];
-        [self resume];
-    } orError:^(NSError *error) {
-        [self.delegate errorLoadingFeedItems];
-        [self resume];
+        [self.delegate errorLoadingFeedItems:error];
     }];
 }
 
 - (void)getNewItems {
+    printf("\nME - get new items");
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
+        if(items.count == 0)
+            return;
         NSArray *sortedNewItems = [self sortItems:items];
         if(self.feedItems.count == 0)
-           [self.feedItems addObjectsFromArray:sortedNewItems];
+            [self.feedItems addObjectsFromArray:sortedNewItems];
         else {
             NSDate *newestDate = [self.feedItems.firstObject updatedDate];
             int index = 0;
@@ -90,27 +79,45 @@
         }
         [self.delegate itemsUpdated];
     } orError:^(NSError *error) {
-        [self.delegate errorLoadingNewFeedItems];
+        [self.delegate errorLoadingNewFeedItems:error];
     }];
 }
 
+- (void)pause {
+    printf("\nME - pause");
+    [self.refreshTimer invalidate];
+}
+
+- (void)resume {
+    printf("\nME - resume");
+    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getNewItems) userInfo:nil repeats:YES];
+}
+
+#pragma mark - private methods
+
 - (void)requestData:(NSDate *)beforeDate withSuccess:(void(^)(NSArray *items))success orError:(void(^)(NSError *))failure {
-    printf("ME - requestData");
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    printf("\nME - requestData");
     NSString *loadFilterString = self.currentFilter.description;
     NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:beforeDate andLocation:self.currentCoordinate];
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary success:^(NSMutableArray *feeds) {
+        printf("\nME - requestData ok");
+        self.lastOkCoordinate = self.currentCoordinate;
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         @synchronized (self.currentFilter) {
             if(![self.currentFilter.description isEqualToString:loadFilterString]) {
-                printf("ME - filter changed ignoring data");
+                printf("\nME - filter changed ignoring data");
                 return;
             }
         }
         if(success)
             success(feeds);
     } failure:^(NSError *error) {
+        printf("\nME - requestData fail");
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         @synchronized (self.currentFilter) {
             if(![self.currentFilter.description isEqualToString:loadFilterString]) {
-                printf("ME - filter changed ignoring data");
+                printf("\nME - filter changed ignoring this data");
                 return;
             }
         }

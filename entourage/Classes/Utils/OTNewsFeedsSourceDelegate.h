@@ -11,7 +11,7 @@
 @protocol OTNewsFeedsSourceDelegate <NSObject>
 
 - (void)itemsUpdated;
-- (void)errorLoadingFeedItems;
-- (void)errorLoadingNewFeedItems;
+- (void)errorLoadingFeedItems:(NSError *)error;
+- (void)errorLoadingNewFeedItems:(NSError *)error;
 
 @end
