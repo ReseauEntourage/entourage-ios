@@ -320,11 +320,13 @@
 }
 
 - (void)reloadFeeds {
-    [self.indicatorView setHidden:NO];
-    [self.tableView loadBegun];
-    [self.tableView updateItems:@[]];
-    [self clearMap];
-    [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter];
+    BOOL willLoad = [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter];
+    if(willLoad) {
+        [self.indicatorView setHidden:NO];
+        [self.tableView loadBegun];
+        [self.tableView updateItems:@[]];
+        [self clearMap];
+    }
 }
 
 - (void)reloadPois {

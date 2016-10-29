@@ -24,11 +24,11 @@
     self.feedItems = [NSMutableArray new];
 }
 
-- (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
+- (BOOL)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
     printf("\nME - reloadItemsAt");
     filter.location = coordinate;
     if([self.currentFilter.description isEqualToString:filter.description])
-        return;
+        return NO;
     self.currentCoordinate = coordinate;
     @synchronized (self.currentFilter) {
         self.currentFilter = [filter copy];
@@ -43,6 +43,7 @@
     } orError:^(NSError *error) {
         [self.delegate errorLoadingFeedItems:error];
     }];
+    return YES;
 }
 
 - (void)loadMoreItems {
