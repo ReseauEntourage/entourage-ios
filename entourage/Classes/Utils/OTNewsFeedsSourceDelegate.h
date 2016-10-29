@@ -10,13 +10,8 @@
 
 @protocol OTNewsFeedsSourceDelegate <NSObject>
 
-- (void)clearData;
-- (void)feedItemsLoaded:(NSArray *)feedItems;
-- (void)newFeedItemsReceived:(NSArray *)newFeedItems;
-
-@optional
-
+- (void)itemsUpdated;
 - (void)errorLoadingFeedItems;
-- (void)errorGettingNewFeedItems;
+- (void)errorLoadingNewFeedItems;
 
 @end

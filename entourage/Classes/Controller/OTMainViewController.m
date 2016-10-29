@@ -69,6 +69,8 @@
 #import "OTEditEntourageBehavior.h"
 #import "OTBadgeNumberService.h"
 #import "UIBarButtonItem+Badge.h"
+#import "OTNewsFeedsSourceDelegate.h"
+#import "OTNewsFeedsSourceBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -91,6 +93,7 @@
 @property (nonatomic, weak) IBOutlet OTJoinBehavior* joinBehavior;
 @property (nonatomic, weak) IBOutlet OTStatusChangedBehavior* statusChangedBehavior;
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior* editEntourgeBehavior;
+@property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior* newsFeedsSourceBehavior;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic) CLLocationCoordinate2D encounterLocation;
@@ -131,6 +134,7 @@
     [super viewDidLoad];
     
     self.isFirstLoad = YES;
+    [self.newsFeedsSourceBehavior initialize];
     self.feeds = [NSMutableArray new];
     [self configureNavigationBar];
     [self.footerToolbar setupWithFilters];
