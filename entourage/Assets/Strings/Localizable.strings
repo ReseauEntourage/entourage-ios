@@ -94,6 +94,8 @@
 "tour_type_display_social" = "sociale";
 "tour_type_display_medical" = "médicale";
 "tour_type_display_distributive" = "distributive";
+"failed_tour_start_no_location" = "!!Cannot start tour because no gps locaiton was found.";
+"failed_send_tour_points_to_server" = "!!Could not send tour data to server. Please try again later.";
 
 "tour_status_closed" = "closed";
 "tour_create_sending" = "Création de la maraude";

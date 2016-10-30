@@ -70,17 +70,18 @@
 #import "UIBarButtonItem+Badge.h"
 #import "OTNewsFeedsSourceDelegate.h"
 #import "OTNewsFeedsSourceBehavior.h"
+#import "OTTourCreatorBehavior.h"
+#import "OTTourCreatorBehaviorDelegate.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define FEEDS_REQUEST_DISTANCE_KM 10
-#define LOCATION_MIN_DISTANCE 5.f //m
 
 #define LONGPRESS_DELTA 65.0f
 #define MAX_DISTANCE 250.0 //meters
 
-@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFeedItemsFilterDelegate, OTNewsFeedsSourceDelegate>
+@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFeedItemsFilterDelegate, OTNewsFeedsSourceDelegate, OTTourCreatorBehaviorDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *mapSegmentedControl;
@@ -92,6 +93,7 @@
 @property (nonatomic, weak) IBOutlet OTStatusChangedBehavior* statusChangedBehavior;
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior* editEntourgeBehavior;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior* newsFeedsSourceBehavior;
+@property (nonatomic, weak) IBOutlet OTTourCreatorBehavior *tourCreatorBehavior;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic) CLLocationCoordinate2D encounterLocation;
@@ -102,9 +104,6 @@
 @property (nonatomic, strong) WYPopoverController *popover;
 @property (nonatomic) BOOL isRegionSetted;
 @property (nonatomic, assign) CGPoint mapPoint;
-@property (nonatomic, strong) NSMutableArray *locations;
-@property (nonatomic, strong) NSMutableArray *pointsToSend;
-@property (nonatomic, strong) NSDate *start;
 @property (nonatomic) BOOL isTourListDisplayed;
 @property (nonatomic, weak) IBOutlet UIButton *launcherButton;
 @property (nonatomic, weak) IBOutlet UIButton *stopButton;
@@ -128,11 +127,11 @@
     self.isFirstLoad = YES;
     [self.newsFeedsSourceBehavior initialize];
     self.newsFeedsSourceBehavior.delegate = self;
+    [self.tourCreatorBehavior initialize];
+    self.tourCreatorBehavior.delegate = self;
     [self configureNavigationBar];
     [self.footerToolbar setupWithFilters];
     self.currentFilter = [OTNewsFeedsFilter new];
-    self.locations = [NSMutableArray new];
-    self.pointsToSend = [NSMutableArray new];
     self.encounters = [NSMutableArray new];
     self.markers = [NSMutableArray new];
     self.mapView = [[MKMapView alloc] init];
@@ -305,7 +304,7 @@
 - (void)appWillEnterBackground:(NSNotification*)note {
     [self.newsFeedsSourceBehavior pause];
     if ([OTOngoingTourService sharedInstance].isOngoing)
-        [self createLocalNotificationForTour:self.tour.uid];
+        [self createLocalNotificationForTour: self.tourCreatorBehavior.tour.uid];
 }
 
 - (void)showEntourages {
@@ -455,18 +454,6 @@
     for (CLLocation *newLocation in locations) {
         if (!encounterFromTap)
             self.encounterLocation = newLocation.coordinate;
-        NSDate *eventDate = newLocation.timestamp;
-        NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-        double distance = 100.0f;
-        if ([self.locations count] > 0) {
-            CLLocation *previousLocation = self.locations.lastObject;
-            distance = [newLocation distanceFromLocation:previousLocation];
-        }
-        if (fabs(howRecent) < 10.0 && newLocation.horizontalAccuracy < 20 && fabs(distance) > LOCATION_MIN_DISTANCE) {
-            [self.locations addObject:newLocation];
-            if (self.locations.count > 0 && [OTOngoingTourService sharedInstance].isOngoing)
-                [self addTourPointFromLocation:newLocation];
-        }
     }
 }
 
@@ -505,94 +492,30 @@
     [self registerObserver];
 }
 
-#pragma mark - FEED ITEMS
+#pragma mark - OTTourCreatorBehaviorDelegate
 
-- (IBAction)doShowLaunchingOptions:(UIButton *)sender {
-    NSString *eventName = @"PlusOnTourClick";
-    if(![OTOngoingTourService sharedInstance].isOngoing)
-        eventName = self.toursMapDelegate.isActive ? @"PlusFromFeedClick" : @"PlusFromGDSClick";
-    [Flurry logEvent:eventName];
-    [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
+- (void)tourStarted {
+    [self.newsFeedsSourceBehavior.feedItems insertObject:self.tourCreatorBehavior.tour atIndex:0];
+    [self.tableView reloadData];
+    self.stopButton.hidden = NO;
+    self.createEncounterButton.hidden = NO;
+    NSString *snapshotStartFilename = [NSString stringWithFormat:@SNAPSHOT_START, self.tourCreatorBehavior.tour.uid.intValue];
+    [self.mapView takeSnapshotToFile:snapshotStartFilename];
+    [self showNewTourOnGoing];
+    [OTOngoingTourService sharedInstance].isOngoing = YES;
+    self.launcherButton.enabled = YES;
+    [self.footerToolbar setTitle:OTLocalizedString(@"tour_ongoing")];
 }
 
-#pragma mark  OTTourCreatorDelegate
-
-- (void)createTour:(NSString*)tourType {
-    [self dismissViewControllerAnimated:NO completion:nil];
-    [self zoomToCurrentLocation:nil];
-    self.currentTourType = tourType;
-    self.tour = [[OTTour alloc] initWithTourType:tourType];
-    [self.pointsToSend removeAllObjects];
-    if (self.locations.count > 0) {
-        OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:self.locations.lastObject];
-        [self.tour.tourPoints addObject:tourPoint];
-        [self.pointsToSend addObject:tourPoint];
-    }
-    [self sendTour];
+- (void)failedToStartTour {
+    self.launcherButton.enabled = YES;
 }
 
-- (void)sendTour {
-    [SVProgressHUD showWithStatus:OTLocalizedString(@"tour_create_sending")];
-    self.launcherButton.enabled = NO;
-    [[OTTourService new] sendTour:self.tour withSuccess:^(OTTour *sentTour) {
-        [self.newsFeedsSourceBehavior.feedItems insertObject:sentTour atIndex:0];
-        [self.tableView reloadData];
-        self.tour.uid = sentTour.uid;
-        self.tour.distance = @0.0;
-        self.stopButton.hidden = NO;
-        self.createEncounterButton.hidden = NO;
-        NSString *snapshotStartFilename = [NSString stringWithFormat:@SNAPSHOT_START, sentTour.uid.intValue];
-        [self.mapView takeSnapshotToFile:snapshotStartFilename];
-        [self showNewTourOnGoing];
-        self.locations = [NSMutableArray new];
-        CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
-        OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:currentLocation];
-        [self.pointsToSend addObject:tourPoint];
-        [self.locations addObject:currentLocation];
-        [OTOngoingTourService sharedInstance].isOngoing = YES;
-        self.launcherButton.enabled = YES;
-        if ([self.pointsToSend count] > 0)
-            [self performSelector:@selector(sendTourPoints:) withObject:self.pointsToSend afterDelay:0.0];
-        [self.footerToolbar setTitle:OTLocalizedString(@"tour_ongoing")];
-        [SVProgressHUD dismiss];
-    } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"tour_create_error", @"")];
-        NSLog(@"%@",[error localizedDescription]);
-        self.launcherButton.enabled = YES;
-    }];
+- (void)tourDataUpdated {
+    [self.overlayFeeder updateOverlayFor:self.tourCreatorBehavior.tour];
 }
 
-- (void)addTourPointFromLocation:(CLLocation *)location {
-    CLLocation *lastLocation = self.locations.lastObject;
-    self.tour.distance = @(self.tour.distance.doubleValue + [location distanceFromLocation:lastLocation]);
-    OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:location];
-    [self.tour.tourPoints addObject:tourPoint];
-    [self.pointsToSend addObject:tourPoint];
-    [self sendTourPoints:self.pointsToSend];
-    [self.overlayFeeder updateOverlayFor:self.tour];
-}
-
-- (void)sendTourPoints:(NSMutableArray *)tourPoints {
-    if (!tourPoints.count)
-        return;
-    __block NSArray *sentPoints = [NSArray arrayWithArray:tourPoints];
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[OTTourService new] sendTourPoint:tourPoints withTourId:self.tour.uid withSuccess:^(OTTour *updatedTour) {
-        NSLog(@"Sent %lu tour point(s)", (unsigned long)tourPoints.count);
-        [self.pointsToSend removeObjectsInArray:sentPoints];
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        [self.overlayFeeder updateOverlayFor:self.tour];
-    } failure:^(NSError *error) {
-        NSLog(@"%@",[error localizedDescription]);
-        NSLog(@"NOT Sent %lu tour point(s).", (unsigned long)tourPoints.count);
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    }];
-}
-
-- (IBAction)stopTour:(id)sender {
-    [Flurry logEvent:@"SuspendTourClick"];
-    if (self.pointsToSend.count)
-        [self sendTourPoints:self.pointsToSend];
+- (void)flushedPointsToServer {
     [UIView animateWithDuration:0.5 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
@@ -603,23 +526,50 @@
         self.mapSegmentedControl.hidden = YES;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
-    NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tour.uid.intValue];
+    NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tourCreatorBehavior.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotEndFilename];
-    [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:sender];
+    [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:self];
 }
 
-#pragma mark  OTConfirmationViewControllerDelegate
+- (void)failedToFlushTourPointsToServer {
+    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"failed_send_tour_points_to_server")];
+}
+
+#pragma mark - FEED ITEMS
+
+- (IBAction)doShowLaunchingOptions:(UIButton *)sender {
+    NSString *eventName = @"PlusOnTourClick";
+    if(![OTOngoingTourService sharedInstance].isOngoing)
+        eventName = self.toursMapDelegate.isActive ? @"PlusFromFeedClick" : @"PlusFromGDSClick";
+    [Flurry logEvent:eventName];
+    [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
+}
+
+#pragma mark - OTTourCreatorDelegate
+
+- (void)createTour:(NSString*)tourType {
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self zoomToCurrentLocation:nil];
+    self.launcherButton.enabled = NO;
+    [self.tourCreatorBehavior startTour:tourType];
+}
+
+- (IBAction)stopTour:(id)sender {
+    [Flurry logEvent:@"SuspendTourClick"];
+    [self.tourCreatorBehavior flushPointsToServer];
+}
+
+#pragma mark - OTConfirmationViewControllerDelegate
 
 - (void)tourSent:(OTTour*)tour {
-    if (self.tour == nil)
+    if (self.tourCreatorBehavior.tour == nil)
         return;
     if (tour != nil && tour.uid != nil)
-        if (self.tour.uid == nil || ![tour.uid isEqualToNumber:self.tour.uid])
+        if (self.tourCreatorBehavior.tour.uid == nil || ![tour.uid isEqualToNumber:self.tourCreatorBehavior.tour.uid])
             return;
     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_status_completed")];
     [self.footerToolbar setTitle:OTLocalizedString(@"entourages")];
-    self.tour = nil;
-    [self.pointsToSend removeAllObjects];
+    self.tourCreatorBehavior.tour = nil;
     [self.encounters removeAllObjects];
     self.launcherButton.hidden = NO;
     self.stopButton.hidden = YES;
@@ -835,7 +785,7 @@
             [Flurry logEvent:@"PendingRequestOverlay"];
             break;
         case FeedItemStateOngoing:
-            self.tour = (OTTour *)feedItem;
+            self.tourCreatorBehavior.tour = (OTTour *)feedItem;
             [OTOngoingTourService sharedInstance].isOngoing = YES;
             [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
             break;
@@ -946,7 +896,7 @@
         UINavigationController *navController = (UINavigationController*)destinationViewController;
         OTCreateMeetingViewController *controller = (OTCreateMeetingViewController*)navController.topViewController;
         controller.delegate = self;
-        [controller configureWithTourId:self.tour.uid andLocation:self.encounterLocation];
+        [controller configureWithTourId:self.tourCreatorBehavior.tour.uid andLocation:self.encounterLocation];
         controller.encounters = self.encounters;
         encounterFromTap = NO;
     }
@@ -956,7 +906,7 @@
         controller.view.backgroundColor = [UIColor appModalBackgroundColor];
         controller.delegate = self;
         [OTOngoingTourService sharedInstance].isOngoing = NO;
-        [controller configureWithTour:self.tour andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]];
+        [controller configureWithTour:self.tourCreatorBehavior.tour andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]];
     }
     else if([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
         OTTourOptionsViewController *controller = (OTTourOptionsViewController *)destinationViewController;

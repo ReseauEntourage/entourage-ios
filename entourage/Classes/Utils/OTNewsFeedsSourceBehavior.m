@@ -25,7 +25,6 @@
 }
 
 - (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
-    printf("\nME - reloadItemsAt");
     filter.location = coordinate;
     if([self.currentFilter.description isEqualToString:filter.description])
         return;
@@ -43,7 +42,6 @@
 }
 
 - (void)loadMoreItems {
-    printf("\nME - loadMoreItems");
     NSDate *beforeDate = [NSDate date];
     if(self.feedItems.count > 0)
         beforeDate = [self.feedItems.lastObject updatedDate];
@@ -56,7 +54,6 @@
 }
 
 - (void)getNewItems {
-    printf("\nME - get new items");
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         if(items.count == 0)
@@ -81,12 +78,10 @@
 }
 
 - (void)pause {
-    printf("\nME - pause");
     [self.refreshTimer invalidate];
 }
 
 - (void)resume {
-    printf("\nME - resume");
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getNewItems) userInfo:nil repeats:YES];
 }
 
@@ -96,27 +91,20 @@
     NSString *loadFilterString = self.currentFilter.description;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     self.indicatorView.hidden = NO;
-    printf("\nME - requestData");
     NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:beforeDate andLocation:self.currentCoordinate];
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary success:^(NSMutableArray *feeds) {
-        printf("\nME - requestData ok");
         self.lastOkCoordinate = self.currentCoordinate;
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.indicatorView.hidden = YES;
-        if(![self.currentFilter.description isEqualToString:loadFilterString]) {
-            printf("\nME - filter changed ignoring data");
+        if(![self.currentFilter.description isEqualToString:loadFilterString])
             return;
-        }
         if(success)
             success(feeds);
     } failure:^(NSError *error) {
-        printf("\nME - requestData fail");
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.indicatorView.hidden = YES;
-        if(![self.currentFilter.description isEqualToString:loadFilterString]) {
-            printf("\nME - filter changed ignoring this data");
+        if(![self.currentFilter.description isEqualToString:loadFilterString])
             return;
-        }
         if(failure)
             failure(error);
     }];

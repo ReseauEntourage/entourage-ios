@@ -436,7 +436,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="stopTour:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Zi7-4z-uHY"/>
+                                    <action selector="stopTour:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="BcM-lh-EiI"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc9-kH-YQ7">
@@ -506,6 +506,7 @@
                         <outlet property="stopButton" destination="oVf-Bh-vdD" id="gnm-Su-d3g"/>
                         <outlet property="tableView" destination="oHF-Vi-LCk" id="0vC-Rv-h6R"/>
                         <outlet property="tapEntourage" destination="rKY-F0-13f" id="alM-Ui-hC8"/>
+                        <outlet property="tourCreatorBehavior" destination="avG-kv-nxt" id="bgS-2V-TBF"/>
                         <segue destination="cVp-EA-m5M" kind="modal" identifier="OTConfirmationPopup" id="Qf1-vA-gd6"/>
                         <segue destination="alD-dM-t4k" kind="modal" identifier="OTCreateMeeting" id="b08-id-ZFb"/>
                         <segue destination="GHS-CJ-wmd" kind="modal" identifier="JoinRequestSegue" id="a8P-lF-ebs"/>
@@ -554,6 +555,7 @@
                         <outlet property="indicatorView" destination="FLr-cF-t8Z" id="awb-d8-SLd"/>
                     </connections>
                 </customObject>
+                <customObject id="avG-kv-nxt" userLabel="Tour Creator" customClass="OTTourCreatorBehavior"/>
             </objects>
             <point key="canvasLocation" x="792" y="45"/>
         </scene>

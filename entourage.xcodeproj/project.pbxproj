@@ -727,6 +727,7 @@
 		1EFAC0F51D89384E00BE396F /* OTNewsFeedsFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTNewsFeedsFilter.m; sourceTree = "<group>"; };
 		1EFC614F1DC6223700C97640 /* OTTourCreatorBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourCreatorBehavior.h; sourceTree = "<group>"; };
 		1EFC61501DC6223700C97640 /* OTTourCreatorBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourCreatorBehavior.m; sourceTree = "<group>"; };
+		1EFC61521DC69BB200C97640 /* OTTourCreatorBehaviorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourCreatorBehaviorDelegate.h; sourceTree = "<group>"; };
 		2E5B0EBE1CF06CE50078454F /* OTFilterRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFilterRadioButton.h; sourceTree = "<group>"; };
 		2E5B0EBF1CF06CE50078454F /* OTFilterRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFilterRadioButton.m; sourceTree = "<group>"; };
 		2E5B0EC11CF070DD0078454F /* OTFilterCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFilterCellTableViewCell.h; sourceTree = "<group>"; };
@@ -1413,6 +1414,7 @@
 				1E62AE631DC388220080C705 /* OTNewsFeedsSourceDelegate.h */,
 				1EFC614F1DC6223700C97640 /* OTTourCreatorBehavior.h */,
 				1EFC61501DC6223700C97640 /* OTTourCreatorBehavior.m */,
+				1EFC61521DC69BB200C97640 /* OTTourCreatorBehaviorDelegate.h */,
 			);
 			name = NewsFeed;
 			sourceTree = "<group>";

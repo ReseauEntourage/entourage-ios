@@ -7,7 +7,14 @@
 //
 
 #import "OTBehavior.h"
+#import "OTTourCreatorBehaviorDelegate.h"
 
 @interface OTTourCreatorBehavior : OTBehavior
+
+@property (nonatomic, strong) OTTour *tour;
+@property (nonatomic, weak) id<OTTourCreatorBehaviorDelegate> delegate;
+
+- (void)startTour:(NSString*)tourType;
+- (void)flushPointsToServer;
 
 @end
