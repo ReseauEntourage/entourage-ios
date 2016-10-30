@@ -83,7 +83,6 @@
 @interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFeedItemsFilterDelegate, OTNewsFeedsSourceDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
-@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *mapSegmentedControl;
 @property (nonatomic, weak) IBOutlet OTFeedItemsTableView *tableView;
 @property (nonatomic, weak) IBOutlet OTMapDelegateProxyBehavior* mapDelegateProxy;
@@ -321,9 +320,7 @@
 
 - (void)reloadFeeds {
     [self.tableView loadBegun];
-    BOOL willLoad = [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter];
-    if(willLoad)
-        [self.indicatorView setHidden:NO];
+    [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter];
 }
 
 - (void)reloadPois {
@@ -339,53 +336,17 @@
 
 - (IBAction)forceGetNewData {
     NSLog(@"Forcing get new data.");
-    [self.indicatorView setHidden:NO];
     [self.newsFeedsSourceBehavior getNewItems];
-}
-
-#pragma mark - OTNewsFeedsSourceDelegate
-
-- (void)itemsUpdated {
-    if (self.newsFeedsSourceBehavior.feedItems.count && self.isFirstLoad) {
-        self.isFirstLoad = NO;
-        [self showToursList];
-    }
-    if(self.newsFeedsSourceBehavior.feedItems.count == 0)
-        [self.tableView setNoFeeds];
-    [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
-    [self feedMapWithFeedItems];
-    [self.indicatorView setHidden:YES];
-}
-
-- (void)errorLoadingFeedItems:(NSError *)error {
-    if(error.code == NSURLErrorNotConnectedToInternet)
-        [self.tableView setNoConnection];
-    else
-        [self.tableView setNoFeeds];
-    [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
-    [self feedMapWithFeedItems];
-    [self.indicatorView setHidden:YES];
-}
-
-- (void)errorLoadingNewFeedItems:(NSError *)error {
-    if(error.code == NSURLErrorNotConnectedToInternet)
-        [self.tableView setNoConnection];
-    else
-        [self.tableView setNoFeeds];
-    [self registerObserver];
-    [self.indicatorView setHidden:YES];
 }
 
 - (void)getPOIList {
     [[OTPoiService new] poisAroundCoordinate:self.mapView.centerCoordinate distance:[self mapHeight] success:^(NSArray *categories, NSArray *pois)
         {
-            [self.indicatorView setHidden:YES];
             self.categories = categories;
             self.pois = pois;
             [self feedMapViewWithPoiArray:pois];
         } failure:^(NSError *error) {
             [self registerObserver];
-            [self.indicatorView setHidden:YES];
             NSLog(@"Err getting POI %@", error.description);
     }];
 }
@@ -513,6 +474,36 @@
 - (void)clearMap {
     [self.mapView removeAnnotations:[self.mapView annotations]];
     [self.mapView removeOverlays:[self.mapView overlays]];
+}
+
+#pragma mark - OTNewsFeedsSourceDelegate
+
+- (void)itemsUpdated {
+    if (self.newsFeedsSourceBehavior.feedItems.count && self.isFirstLoad) {
+        self.isFirstLoad = NO;
+        [self showToursList];
+    }
+    if(self.newsFeedsSourceBehavior.feedItems.count == 0)
+        [self.tableView setNoFeeds];
+    [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
+    [self feedMapWithFeedItems];
+}
+
+- (void)errorLoadingFeedItems:(NSError *)error {
+    if(error.code == NSURLErrorNotConnectedToInternet)
+        [self.tableView setNoConnection];
+    else
+        [self.tableView setNoFeeds];
+    [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
+    [self feedMapWithFeedItems];
+}
+
+- (void)errorLoadingNewFeedItems:(NSError *)error {
+    if(error.code == NSURLErrorNotConnectedToInternet)
+        [self.tableView setNoConnection];
+    else
+        [self.tableView setNoFeeds];
+    [self registerObserver];
 }
 
 #pragma mark - FEED ITEMS

@@ -216,6 +216,7 @@
 		1EFAC0F01D89292500BE396F /* OTFeedItemFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAC0EF1D89292500BE396F /* OTFeedItemFilters.m */; };
 		1EFAC0F31D89294F00BE396F /* OTFeedItemTimeframeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAC0F21D89294F00BE396F /* OTFeedItemTimeframeFilter.m */; };
 		1EFAC0F61D89384E00BE396F /* OTNewsFeedsFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAC0F51D89384E00BE396F /* OTNewsFeedsFilter.m */; };
+		1EFC61511DC6223700C97640 /* OTTourCreatorBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFC61501DC6223700C97640 /* OTTourCreatorBehavior.m */; };
 		2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EBF1CF06CE50078454F /* OTFilterRadioButton.m */; };
 		2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EC21CF070DD0078454F /* OTFilterCellTableViewCell.m */; };
 		2E7064EE1CB273120034C55A /* MapOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E7064ED1CB273120034C55A /* MapOptions.storyboard */; };
@@ -724,6 +725,8 @@
 		1EFAC0F21D89294F00BE396F /* OTFeedItemTimeframeFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTFeedItemTimeframeFilter.m; path = Feeds/OTFeedItemTimeframeFilter.m; sourceTree = "<group>"; };
 		1EFAC0F41D89384E00BE396F /* OTNewsFeedsFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTNewsFeedsFilter.h; sourceTree = "<group>"; };
 		1EFAC0F51D89384E00BE396F /* OTNewsFeedsFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTNewsFeedsFilter.m; sourceTree = "<group>"; };
+		1EFC614F1DC6223700C97640 /* OTTourCreatorBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourCreatorBehavior.h; sourceTree = "<group>"; };
+		1EFC61501DC6223700C97640 /* OTTourCreatorBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourCreatorBehavior.m; sourceTree = "<group>"; };
 		2E5B0EBE1CF06CE50078454F /* OTFilterRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFilterRadioButton.h; sourceTree = "<group>"; };
 		2E5B0EBF1CF06CE50078454F /* OTFilterRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFilterRadioButton.m; sourceTree = "<group>"; };
 		2E5B0EC11CF070DD0078454F /* OTFilterCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFilterCellTableViewCell.h; sourceTree = "<group>"; };
@@ -1408,6 +1411,8 @@
 				1E62AE601DC387650080C705 /* OTNewsFeedsSourceBehavior.h */,
 				1E62AE611DC387650080C705 /* OTNewsFeedsSourceBehavior.m */,
 				1E62AE631DC388220080C705 /* OTNewsFeedsSourceDelegate.h */,
+				1EFC614F1DC6223700C97640 /* OTTourCreatorBehavior.h */,
+				1EFC61501DC6223700C97640 /* OTTourCreatorBehavior.m */,
 			);
 			name = NewsFeed;
 			sourceTree = "<group>";
@@ -2499,6 +2504,7 @@
 				6B1A847119E811210020FB93 /* OTPoiService.m in Sources */,
 				1E4F56221DB64C9100AD0CAC /* OTLocationSelectorViewController.m in Sources */,
 				1E2F29181D4BDAEF00ABC68A /* OTTableCellProviderBehavior.m in Sources */,
+				1EFC61511DC6223700C97640 /* OTTourCreatorBehavior.m in Sources */,
 				DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */,
 				4500115E1CCE5BD2004754DF /* OTTourCreatorViewController.m in Sources */,
 				1EFAC0F01D89292500BE396F /* OTFeedItemFilters.m in Sources */,

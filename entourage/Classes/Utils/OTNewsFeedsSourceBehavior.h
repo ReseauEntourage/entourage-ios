@@ -13,13 +13,15 @@
 
 @interface OTNewsFeedsSourceBehavior : OTBehavior
 
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
+
 @property (nonatomic, weak) id<OTNewsFeedsSourceDelegate> delegate;
 
 @property (nonatomic, strong) NSMutableArray *feedItems;
 @property (nonatomic, assign) CLLocationCoordinate2D lastOkCoordinate;
 @property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
 
-- (BOOL)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter;
+- (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter;
 - (void)loadMoreItems;
 - (void)getNewItems;
 - (void)pause;
