@@ -123,7 +123,7 @@
 }
 
 - (NSArray *)sortItems:(NSArray *)array {
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"updatedDate" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
     return [array sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 

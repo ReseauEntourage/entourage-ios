@@ -104,7 +104,6 @@
 @property (nonatomic, assign) CGPoint mapPoint;
 @property (nonatomic, strong) NSMutableArray *locations;
 @property (nonatomic, strong) NSMutableArray *pointsToSend;
-@property (nonatomic, strong) NSMutableArray *closeTours;
 @property (nonatomic, strong) NSDate *start;
 @property (nonatomic) BOOL isTourListDisplayed;
 @property (nonatomic, weak) IBOutlet UIButton *launcherButton;
