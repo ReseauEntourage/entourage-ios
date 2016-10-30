@@ -320,13 +320,10 @@
 }
 
 - (void)reloadFeeds {
+    [self.tableView loadBegun];
     BOOL willLoad = [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter];
-    if(willLoad) {
+    if(willLoad)
         [self.indicatorView setHidden:NO];
-        [self.tableView loadBegun];
-        [self.tableView updateItems:@[]];
-        [self clearMap];
-    }
 }
 
 - (void)reloadPois {
@@ -365,6 +362,8 @@
         [self.tableView setNoConnection];
     else
         [self.tableView setNoFeeds];
+    [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
+    [self feedMapWithFeedItems];
     [self.indicatorView setHidden:YES];
 }
 
