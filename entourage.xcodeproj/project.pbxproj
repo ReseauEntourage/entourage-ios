@@ -104,6 +104,7 @@
 		1E488E1B1D4FB99300A2E5B0 /* OTNotificationsRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E488E191D4FB99300A2E5B0 /* OTNotificationsRightsViewController.m */; };
 		1E488E201D4FBA4D00A2E5B0 /* OTUserPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E488E1D1D4FBA4D00A2E5B0 /* OTUserPictureViewController.m */; };
 		1E488E211D4FBA4D00A2E5B0 /* OTPicturePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E488E1F1D4FBA4D00A2E5B0 /* OTPicturePreviewViewController.m */; };
+		1E4937201DC74FFA001D4954 /* OTDebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E49371F1DC74FFA001D4954 /* OTDebugLog.m */; };
 		1E49BCB61D7D8B790024EDC1 /* Disclaimer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E49BCB51D7D8B790024EDC1 /* Disclaimer.storyboard */; };
 		1E49BCBA1D7D8C0C0024EDC1 /* OTDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E49BCB91D7D8C0C0024EDC1 /* OTDisclaimerViewController.m */; };
 		1E49BCBE1D7D8F0F0024EDC1 /* OTEncounterDisclaimerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E49BCBD1D7D8F0F0024EDC1 /* OTEncounterDisclaimerBehavior.m */; };
@@ -509,6 +510,8 @@
 		1E488E1D1D4FBA4D00A2E5B0 /* OTUserPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUserPictureViewController.m; path = UserPicture/OTUserPictureViewController.m; sourceTree = "<group>"; };
 		1E488E1E1D4FBA4D00A2E5B0 /* OTPicturePreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPicturePreviewViewController.h; path = UserPicture/OTPicturePreviewViewController.h; sourceTree = "<group>"; };
 		1E488E1F1D4FBA4D00A2E5B0 /* OTPicturePreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTPicturePreviewViewController.m; path = UserPicture/OTPicturePreviewViewController.m; sourceTree = "<group>"; };
+		1E49371E1DC74FFA001D4954 /* OTDebugLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTDebugLog.h; path = DebugLog/OTDebugLog.h; sourceTree = "<group>"; };
+		1E49371F1DC74FFA001D4954 /* OTDebugLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTDebugLog.m; path = DebugLog/OTDebugLog.m; sourceTree = "<group>"; };
 		1E49BCB51D7D8B790024EDC1 /* Disclaimer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Disclaimer.storyboard; sourceTree = "<group>"; };
 		1E49BCB81D7D8C010024EDC1 /* OTDisclaimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTDisclaimerViewController.h; path = Disclaimer/OTDisclaimerViewController.h; sourceTree = "<group>"; };
 		1E49BCB91D7D8C0C0024EDC1 /* OTDisclaimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTDisclaimerViewController.m; path = Disclaimer/OTDisclaimerViewController.m; sourceTree = "<group>"; };
@@ -1213,6 +1216,15 @@
 				1E488E1F1D4FBA4D00A2E5B0 /* OTPicturePreviewViewController.m */,
 			);
 			name = UserPicture;
+			sourceTree = "<group>";
+		};
+		1E49371A1DC74FAA001D4954 /* DebugLog */ = {
+			isa = PBXGroup;
+			children = (
+				1E49371E1DC74FFA001D4954 /* OTDebugLog.h */,
+				1E49371F1DC74FFA001D4954 /* OTDebugLog.m */,
+			);
+			name = DebugLog;
 			sourceTree = "<group>";
 		};
 		1E49BCB71D7D8BC00024EDC1 /* Disclaimer */ = {
@@ -2111,6 +2123,7 @@
 		6BFE639519E7E85D00C661AB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1E49371A1DC74FAA001D4954 /* DebugLog */,
 				1E2232D61D569981004CD5E8 /* Services */,
 				1EA51FCA1D366F0F00350255 /* Amazon */,
 				1E9003661D34FA90004E18BC /* Behaviors */,
@@ -2618,6 +2631,7 @@
 				2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */,
 				453BB3371D2E2831002F9255 /* OTOnboardingService.m in Sources */,
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
+				1E4937201DC74FFA001D4954 /* OTDebugLog.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,
 				1E5C30241D6F6CE100E10770 /* OTMembersTableDataSource.m in Sources */,
