@@ -15,6 +15,7 @@
 @property (nonatomic, weak) id<OTTourCreatorBehaviorDelegate> delegate;
 
 - (void)startTour:(NSString*)tourType;
-- (void)flushPointsToServer;
+- (void)stopTour;
+- (void)endOngoing;
 
 @end

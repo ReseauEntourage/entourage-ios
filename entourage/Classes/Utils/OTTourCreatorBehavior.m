@@ -51,6 +51,7 @@
     [[OTTourService new] sendTour:self.tour withSuccess:^(OTTour *sentTour) {
         self.tour = sentTour;
         self.tour.distance = @0.0;
+        [self.tour.tourPoints addObject:startPoint];
         [self.delegate tourStarted];
         [SVProgressHUD dismiss];
     } failure:^(NSError *error) {
@@ -61,18 +62,30 @@
     }];
 }
 
-- (void)flushPointsToServer {
-    CLLocation *lastLocationToSend = [self locationFromTourPoint:self.tourPointsToSend.lastObject];
+- (void)stopTour {
+    if(self.tourPointsToSend.count == 0) {
+        [self.delegate stoppedTour];
+        return;
+    }
+    OTTourPoint *lastTourPoint = self.tour.tourPoints.lastObject;
+    if(self.tourPointsToSend.count > 0)
+        lastTourPoint = self.tourPointsToSend.lastObject;
+    CLLocation *lastLocationToSend = [self locationFromTourPoint:lastTourPoint];
     OTTourPoint *lastPoint = [self addTourPointFromLocation:self.lastLocation toLastLocation:lastLocationToSend];
     [self updateTourPointsToSendIfNeeded:lastPoint];
     [SVProgressHUD show];
     [self sendTourPointsWithSuccess:^() {
         [SVProgressHUD dismiss];
-        [self.delegate flushedPointsToServer];
+        [self.delegate stoppedTour];
     } orFailure:^(NSError *error) {
         [SVProgressHUD dismiss];
-        [self.delegate failedToFlushTourPointsToServer];
+        [self.delegate failedToStopTour];
     }];
+}
+
+- (void)endOngoing {
+    self.tour = nil;
+    [self.tourPointsToSend removeAllObjects];
 }
 
 #pragma mark - private methods

@@ -14,7 +14,7 @@
 - (void)tourStarted;
 - (void)failedToStartTour;
 - (void)tourDataUpdated;
-- (void)flushedPointsToServer;
-- (void)failedToFlushTourPointsToServer;
+- (void)stoppedTour;
+- (void)failedToStopTour;
 
 @end

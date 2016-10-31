@@ -515,7 +515,7 @@
     [self.overlayFeeder updateOverlayFor:self.tourCreatorBehavior.tour];
 }
 
-- (void)flushedPointsToServer {
+- (void)stoppedTour {
     [UIView animateWithDuration:0.5 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
@@ -531,7 +531,7 @@
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:self];
 }
 
-- (void)failedToFlushTourPointsToServer {
+- (void)failedToStopTour {
     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"failed_send_tour_points_to_server")];
 }
 
@@ -556,7 +556,7 @@
 
 - (IBAction)stopTour:(id)sender {
     [Flurry logEvent:@"SuspendTourClick"];
-    [self.tourCreatorBehavior flushPointsToServer];
+    [self.tourCreatorBehavior stopTour];
 }
 
 #pragma mark - OTConfirmationViewControllerDelegate
@@ -575,6 +575,7 @@
     self.stopButton.hidden = YES;
     self.createEncounterButton.hidden = YES;
     [OTOngoingTourService sharedInstance].isOngoing = NO;
+    [self.tourCreatorBehavior endOngoing];
     [self clearMap];
     [self forceGetNewData];
 }
