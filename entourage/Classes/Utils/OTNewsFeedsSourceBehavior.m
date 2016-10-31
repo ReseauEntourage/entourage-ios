@@ -44,7 +44,7 @@
 - (void)loadMoreItems {
     NSDate *beforeDate = [NSDate date];
     if(self.feedItems.count > 0)
-        beforeDate = [self.feedItems.lastObject updatedDate];
+        beforeDate = [self.feedItems.lastObject creationDate];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         [self.feedItems addObjectsFromArray:[self sortItems:items]];
         [self.delegate itemsUpdated];
@@ -56,21 +56,8 @@
 - (void)getNewItems {
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        if(items.count == 0)
-            return;
-        NSArray *sortedNewItems = [self sortItems:items];
-        if(self.feedItems.count == 0)
-            [self.feedItems addObjectsFromArray:sortedNewItems];
-        else {
-            NSDate *newestDate = [self.feedItems.firstObject updatedDate];
-            int index = 0;
-            for(OTFeedItem *item in sortedNewItems) {
-                if([item.updatedDate compare:newestDate] != NSOrderedDescending)
-                    break;
-                [self.feedItems insertObject:item atIndex:index];
-                index++;
-            }
-        }
+        for(OTFeedItem *item in items)
+            [self addFeedItem:item];
         [self.delegate itemsUpdated];
     } orError:^(NSError *error) {
         [self.delegate errorLoadingNewFeedItems:error];
@@ -113,6 +100,22 @@
 - (NSArray *)sortItems:(NSArray *)array {
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
     return [array sortedArrayUsingDescriptors:@[sortDescriptor]];
+}
+
+- (void)addFeedItem:(OTFeedItem *)feedItem {
+    NSUInteger oldFeedIndex = [self.feedItems indexOfObject:feedItem];
+    if (oldFeedIndex != NSNotFound) {
+        [self.feedItems replaceObjectAtIndex:oldFeedIndex withObject:feedItem];
+        return;
+    }
+    for (NSUInteger i = 0; i < [self.feedItems count]; i++) {
+        OTFeedItem* internalFeedItem = self.feedItems[i];
+        if ([internalFeedItem.creationDate compare:feedItem.creationDate] == NSOrderedAscending) {
+            [self.feedItems insertObject:feedItem atIndex:i];
+            return;
+        }
+    }
+    [self.feedItems addObject:feedItem];
 }
 
 @end
