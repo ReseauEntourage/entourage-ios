@@ -50,7 +50,7 @@
 - (void)loadMoreItems {
     NSDate *beforeDate = [NSDate date];
     if(self.feedItems.count > 0)
-        beforeDate = [self.feedItems.lastObject creationDate];
+        beforeDate = [self.feedItems.lastObject updatedDate];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         [self.feedItems addObjectsFromArray:[self sortItems:items]];
         [self.delegate itemsUpdated];
@@ -115,7 +115,7 @@
 }
 
 - (NSArray *)sortItems:(NSArray *)array {
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"updatedDate" ascending:NO];
     return [array sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
@@ -127,7 +127,7 @@
     }
     for (NSUInteger i = 0; i < [self.feedItems count]; i++) {
         OTFeedItem* internalFeedItem = self.feedItems[i];
-        if ([internalFeedItem.creationDate compare:feedItem.creationDate] == NSOrderedAscending) {
+        if ([internalFeedItem.updatedDate compare:feedItem.updatedDate] == NSOrderedAscending) {
             [self.feedItems insertObject:feedItem atIndex:i];
             return;
         }
