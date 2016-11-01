@@ -20,12 +20,13 @@
 - (instancetype)init {
     self = [super init];
     if(self) {
-        self.showMedical = YES;
-        self.showSocial = YES;
-        self.showDistributive = YES;
-        self.showDemand = YES;
-        self.showContribution = YES;
-        self.showTours = YES;
+        BOOL isPro = [self.currentUser.type isEqualToString:USER_TYPE_PRO];
+        self.showMedical = isPro;
+        self.showSocial = isPro;
+        self.showDistributive = isPro;
+        self.showDemand = !isPro;
+        self.showContribution = !isPro;
+        self.showTours = isPro;
         self.showOnlyMyEntourages = NO;
         self.timeframeInHours = 8 * 24;
     }
