@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */; };
-		0A213C491BA0306300202D7B /* OTGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A213C481BA0306300202D7B /* OTGuideViewController.m */; };
 		0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */; };
 		0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4769341BFB9F07006EA73A /* OTUserViewController.m */; };
 		0A4769381BFCC4EB006EA73A /* OTOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4769371BFCC4EB006EA73A /* OTOrganization.m */; };
@@ -329,8 +328,6 @@
 /* Begin PBXFileReference section */
 		0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLostCodeViewController.h; sourceTree = "<group>"; };
 		0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLostCodeViewController.m; sourceTree = "<group>"; };
-		0A213C471BA0306300202D7B /* OTGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGuideViewController.h; sourceTree = "<group>"; };
-		0A213C481BA0306300202D7B /* OTGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGuideViewController.m; sourceTree = "<group>"; };
 		0A35F2B61BFA3AC2002301C3 /* OTConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTConfirmationViewController.h; sourceTree = "<group>"; };
 		0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTConfirmationViewController.m; sourceTree = "<group>"; };
 		0A4769331BFB9F07006EA73A /* OTUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUserViewController.h; sourceTree = "<group>"; };
@@ -1845,8 +1842,6 @@
 		455170861CF0BCFC00962369 /* Guide de solidarite */ = {
 			isa = PBXGroup;
 			children = (
-				0A213C471BA0306300202D7B /* OTGuideViewController.h */,
-				0A213C481BA0306300202D7B /* OTGuideViewController.m */,
 				2EDA5F011CB3F84300849172 /* OTGuideDetailsViewController.h */,
 				2EDA5F021CB3F84300849172 /* OTGuideDetailsViewController.m */,
 				A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */,
@@ -2787,7 +2782,6 @@
 				1E2232DC1D5699AD004CD5E8 /* OTMessagingService.m in Sources */,
 				1E2F29081D4BC26600ABC68A /* OTPhotoPickerBehavior.m in Sources */,
 				1E2F292B1D4BF4CD00ABC68A /* OTContactsGroupedTableDataSourceBehavior.m in Sources */,
-				0A213C491BA0306300202D7B /* OTGuideViewController.m in Sources */,
 				1E8E16E91D5A3814005C42ED /* OTEntourageInvitation.m in Sources */,
 				1E76AE471D144D1F00C496BA /* OTTourStateInfo.m in Sources */,
 				1E5F798E1D5A14E60005003C /* OTCollectionCellProviderBehavior.m in Sources */,

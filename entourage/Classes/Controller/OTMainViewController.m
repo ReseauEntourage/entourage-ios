@@ -14,7 +14,6 @@
 #import "OTMapOptionsViewController.h"
 #import "OTTourOptionsViewController.h"
 #import "OTQuitFeedItemViewController.h"
-#import "OTGuideViewController.h"
 #import "UIView+entourage.h"
 #import "OTUserViewController.h"
 #import "OTGuideDetailsViewController.h"
@@ -631,10 +630,8 @@
 
 - (void)createTour {
     void(^createBlock)() = ^() {
-        if (self.toursMapDelegate.isActive)
-            [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
-        else
-            [self showAlert:OTLocalizedString(@"poi_create_tour_alert") withSegue:@"TourCreatorSegue"];
+        [self switchToNewsfeed];
+        [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
     };
     if([self.presentedViewController isKindOfClass:[OTMapOptionsViewController class]])
         [self dismissViewControllerAnimated:YES completion:createBlock];
@@ -644,10 +641,8 @@
 
 - (void)createEncounter {
     [self dismissViewControllerAnimated:NO completion:^{
-        if (self.toursMapDelegate.isActive)
-            [self performSegueWithIdentifier:@"OTCreateMeeting" sender:nil];
-        else
-            [self showAlert:OTLocalizedString(@"poi_create_encounter_alert") withSegue:nil];
+        [self switchToNewsfeed];
+        [self performSegueWithIdentifier:@"OTCreateMeeting" sender:nil];
     }];
 }
 
@@ -662,11 +657,8 @@
 - (void) createEntourageOfType:(NSString *)entourageType withAlertMessage:(NSString *)message {
     self.entourageType = entourageType;
     [self dismissViewControllerAnimated:NO completion:^{
-        if (self.toursMapDelegate.isActive) {
-            [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
-        } else {
-            [self showAlert:message withSegue:@"EntourageEditor"];
-        }
+        [self switchToNewsfeed];
+        [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
     }];
 }
 
@@ -866,21 +858,6 @@
         [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
 }
 
-#pragma mark - Guide
-
-- (void)showAlert:(NSString *)feedItemAlertMessage withSegue:(NSString *)segueID {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:feedItemAlertMessage preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"cancelAlert") style:UIAlertActionStyleCancel handler:nil];
-    [alert addAction:cancelAction];
-    UIAlertAction *quitAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"quitAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self switchToNewsfeed];
-        if([segueID class] != [NSNull class])
-            [self performSegueWithIdentifier:segueID sender:nil];
-    }];
-    [alert addAction:quitAction];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -936,11 +913,6 @@
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.feedItem = self.selectedFeedItem;
         controller.feedItemQuitDelegate = self;
-    }
-    else if([segue.identifier isEqualToString:@"GuideSegue"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        OTGuideViewController *controller = (OTGuideViewController *)navController.childViewControllers[0];
-        [controller setIsTourRunning:[OTOngoingTourService sharedInstance].isOngoing];
     }
     else if([segue.identifier isEqualToString:@"OTGuideDetailsSegue"]) {
         UINavigationController *navController = (UINavigationController*)destinationViewController;
