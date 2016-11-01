@@ -23,6 +23,7 @@
 #import "UIButton+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "NSBundle+entourage.h"
+#import "OTOngoingTourService.h"
 @import MessageUI;
 
 /* MenuItem identifiers */
@@ -113,6 +114,8 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 	if (indexPath.section == 1) {
+        [Flurry logEvent:@"LogOut"];
+        [OTOngoingTourService sharedInstance].isOngoing = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
 	else {
@@ -153,8 +156,10 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuAboutIdentifier])
         [Flurry logEvent:@"AboutClick"];
-    else if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuDisconnectIdentifier])
+    else if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuDisconnectIdentifier]) {
         [Flurry logEvent:@"LogOut"];
+        [OTOngoingTourService sharedInstance].isOngoing = NO;
+    }
     if (![self.controllersDictionary objectForKey:segue.identifier] && [segue.identifier isEqualToString:@"segueMenuIdentifierForProfile"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTUserViewController *controller = (OTUserViewController*)navController.topViewController;

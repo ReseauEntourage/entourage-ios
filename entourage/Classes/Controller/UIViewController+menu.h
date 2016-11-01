@@ -18,7 +18,7 @@
 - (UIBarButtonItem *)setupChatsButtonWithTarget:(id)target andSelector:(SEL)selector;
 - (UIBarButtonItem *)setupCloseModal;
 - (UIBarButtonItem *)setupCloseModalTransparent;
-- (UIImage*)setupLogoImage;
+- (void)setupLogoImageWithTarget:(id)target andSelector:(SEL)action;
 - (UIBarButtonItem *)setupCloseModalWithTarget:(id)target andSelector:(SEL)action;
 
 @end

@@ -5,6 +5,9 @@
       location = "group:Oradea.gpx">
    </FileRef>
    <FileRef
+      location = "group:Nowhere.gpx">
+   </FileRef>
+   <FileRef
       location = "group:Bucharest.gpx">
    </FileRef>
    <FileRef

@@ -9,13 +9,14 @@
 #import "OTFeedItemsTableView.h"
 #import "OTTour.h"
 #import "OTEntourage.h"
-
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
 #import "UILabel+entourage.h"
 #import "OTTourPoint.h"
 #import "OTFeedItemFactory.h"
 #import "OTUIDelegate.h"
+#import "OTSummaryProviderBehavior.h"
+#import "OTConsts.h"
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -34,7 +35,6 @@
 #define MAPVIEW_REGION_SPAN_Y_METERS 500
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define FEEDS_REQUEST_DISTANCE_KM 10
-#define LOCATION_MIN_DISTANCE 5.f
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 #define TABLEVIEW_BOTTOM_INSET 86.0f
@@ -42,32 +42,12 @@
 
 @interface OTFeedItemsTableView () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *feedItems;
+@property (nonatomic, strong) UILabel *lblEmptyTableReason;
+@property (nonatomic, strong) NSArray *items;
 
 @end
 
 @implementation OTFeedItemsTableView
-
-/********************************************************************************/
-#pragma mark - Life Cycle
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self _init];
-    }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self _init];
-    }
-    return self;
-}
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -83,12 +63,16 @@
     self.delegate = self;
     self.rowHeight = UITableViewAutomaticDimension;
     self.estimatedRowHeight = 300;
+    self.lblEmptyTableReason = [UILabel new];
+    self.lblEmptyTableReason.font = [UIFont fontWithName:@"SFUItext-Semibold" size:17];
+    self.lblEmptyTableReason.textAlignment = NSTextAlignmentCenter;
+    self.lblEmptyTableReason.numberOfLines = 0;
 }
 
-- (NSArray *)items {
-    return self.feedItems;
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.lblEmptyTableReason.frame = self.frame;
 }
-
 
 - (void)configureWithMapView:(MKMapView *)mapView {
     
@@ -132,66 +116,32 @@
     self.tableHeaderView = headerView;
 }
 
-
-/********************************************************************************/
-#pragma mark - Tour list handlind
-
-- (NSMutableArray*)feedItems {
-    if (_feedItems == nil) {
-        _feedItems = [[NSMutableArray alloc] init];
-    }
-    return _feedItems;
+- (void)updateItems:(NSArray *)items {
+    self.items = items;
+    [self reloadData];
 }
 
-- (void)addFeedItems:(NSArray*)feedItems {
-    for (OTFeedItem* feedItem in feedItems) {
-        [self addFeedItem:feedItem];
-    }
+- (void)loadBegun {
+    self.lblEmptyTableReason.text = @"";
 }
 
-- (void)addFeedItem:(OTFeedItem *)feedItem {
-    NSUInteger oldFeedIndex = [self.feedItems indexOfObject:feedItem];
-    if (oldFeedIndex != NSNotFound) {
-        [self.feedItems replaceObjectAtIndex:oldFeedIndex withObject:feedItem];
-        return;
-    }
-    
-    if (feedItem.creationDate != nil) {
-        for (NSUInteger i = 0; i < [self.feedItems count]; i++) {
-            OTFeedItem* internalFeedItem = self.feedItems[i];
-            if (internalFeedItem.creationDate != nil) {
-                if ([internalFeedItem.creationDate compare:feedItem.creationDate] == NSOrderedAscending) {
-                    [self.feedItems insertObject:feedItem atIndex:i];
-                    return;
-                }
-            }
-        }
-    }
-    [self.feedItems addObject:feedItem];
+- (void)setNoConnection {
+    self.lblEmptyTableReason.text = OTLocalizedString(@"no_internet_connexion");
 }
 
-- (void)removeFeedItem:(OTFeedItem*)feedItem; {
-    for (OTFeedItem* internalFeedItem in self.feedItems) {
-        if ([internalFeedItem.uid isEqualToNumber:feedItem.uid] && [internalFeedItem.type isEqualToString:feedItem.type]) {
-            [self.feedItems removeObject:internalFeedItem];
-            return;
-        }
-    }
-}
-
-- (void)removeAll {
-    [self.feedItems removeAllObjects];
-}
-
-- (NSUInteger)itemsCount {
-    return [self.feedItems count];
+- (void)setNoFeeds {
+    self.lblEmptyTableReason.text = OTLocalizedString(@"no_feeds_received");
 }
 
 /********************************************************************************/
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.feedItems.count;
+    if(self.items.count == 0)
+        self.backgroundView = self.lblEmptyTableReason;
+    else
+        self.backgroundView = nil;
+    return self.items.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -211,7 +161,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
     
-    OTFeedItem *item = self.feedItems[indexPath.section];
+    OTFeedItem *item = self.items[indexPath.section];
     NSLog(@">> %ld: %@", (long)indexPath.section, [item isKindOfClass:[OTTour class]] ? ((OTTour*)item).organizationName : ((OTEntourage*)item).title);
     
     UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
@@ -223,20 +173,13 @@
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     
+    OTSummaryProviderBehavior *summaryBehavior = [OTSummaryProviderBehavior new];
+    summaryBehavior.lblTimeDistance = timeLocationLabel;
+    [summaryBehavior configureWith:item];
+    
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
-    CLLocation *startPointLocation = nil;
-    if ([item isKindOfClass:[OTTour class]]) {
-        OTTour *tour = (OTTour *)item;
-        // dateString - location
-        OTTourPoint *startPoint = tour.tourPoints.firstObject;
-        startPointLocation = [[CLLocation alloc] initWithLatitude:startPoint.latitude longitude:startPoint.longitude];
-    } else {
-        OTEntourage *ent = (OTEntourage*)item;
-        startPointLocation = ent.location;
-    }
     typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];
     organizationLabel.text = [uiDelegate summary];
-    [timeLocationLabel setupWithTime:item.creationDate andLocation:startPointLocation];
 
     [userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
     noPeopleLabel.text = [NSString stringWithFormat:@"%d", item.noPeople.intValue];
@@ -248,8 +191,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    id selectedFeedItem = self.feedItems[indexPath.section];
-
+    id selectedFeedItem = self.items[indexPath.section];
     if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)]) {
         [self.feedItemsDelegate showFeedInfo:selectedFeedItem];
     }
@@ -300,8 +242,7 @@
     [Flurry logEvent:@"UserProfileClick"];
     UITableViewCell *cell = (UITableViewCell*)userButton.superview.superview;
     NSInteger index = [self indexPathForCell:cell].section;
-    OTFeedItem *selectedFeedItem = self.feedItems[index];
-    
+    OTFeedItem *selectedFeedItem = self.items[index];
     if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showUserProfile:)]) {
         [self.feedItemsDelegate showUserProfile:selectedFeedItem.author.uID];
     }
@@ -310,8 +251,7 @@
 - (void)doJoinRequest:(UIButton*)statusButton {
     UITableViewCell *cell = (UITableViewCell*)statusButton.superview.superview;
     NSInteger index = [self indexPathForCell:cell].section;
-    OTFeedItem *selectedFeedItem = self.feedItems[index];
-    
+    OTFeedItem *selectedFeedItem = self.items[index];
     if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(doJoinRequest:)]) {
         [self.feedItemsDelegate doJoinRequest:selectedFeedItem];
     }

@@ -106,7 +106,7 @@
 #pragma mark - Private methods
 
 - (void)configureView {
-    [self setupLogoImage];
+    [self setupLogoImageWithTarget:nil andSelector:nil];
     [self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
 }
 

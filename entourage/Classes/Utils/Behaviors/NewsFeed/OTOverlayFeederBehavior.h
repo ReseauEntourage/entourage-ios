@@ -13,7 +13,6 @@
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 
-- (void)addOverlays:(NSArray *)items;
 - (void)updateOverlays:(NSArray *)items;
 - (void)updateOverlayFor:(OTFeedItem *)item;
 

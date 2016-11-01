@@ -13,7 +13,7 @@
 @interface OTJoinRequestedCell : OTChatCellBase
 
 @property (nonatomic, weak) IBOutlet UIButton *btnAvatar;
-@property (nonatomic, weak) IBOutlet UIButton *btnIgnore;
+@property (nonatomic, weak) IBOutlet UIButton *btnLast;
 @property (nonatomic, weak) IBOutlet UILabel *lblUserName;
 @property (nonatomic, weak) IBOutlet UILabel *lblMessage;
 @property (nonatomic, weak) IBOutlet OTMessageDataSourceBehavior *dataSource;

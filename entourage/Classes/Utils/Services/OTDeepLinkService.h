@@ -12,5 +12,6 @@
 
 - (void)navigateTo:(NSNumber *)feedItemId withType:(NSString *)feedItemType;
 - (UIViewController *)getTopViewController;
+- (void)showProfileFromAnywhereForUser:(NSNumber *)userId;
 
 @end

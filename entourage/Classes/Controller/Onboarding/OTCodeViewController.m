@@ -19,7 +19,6 @@
 #import "UIScrollView+entourage.h"
 #import "NSString+Validators.h"
 #import "UIBarButtonItem+factory.h"
-#import "NSError+OTErrorData.h"
 #import "UIStoryboard+entourage.h"
 #import "OTOnboardingNavigationBehavior.h"
 
