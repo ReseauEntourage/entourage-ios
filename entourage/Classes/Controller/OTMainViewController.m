@@ -532,7 +532,10 @@
 }
 
 - (void)failedToStopTour {
-    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"failed_send_tour_points_to_server")];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:OTLocalizedString(@"failed_send_tour_points_to_server") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - FEED ITEMS
