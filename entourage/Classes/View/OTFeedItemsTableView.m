@@ -242,18 +242,20 @@
     [Flurry logEvent:@"UserProfileClick"];
     UITableViewCell *cell = (UITableViewCell*)userButton.superview.superview;
     NSInteger index = [self indexPathForCell:cell].section;
-    OTFeedItem *selectedFeedItem = self.items[index];
-    if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showUserProfile:)]) {
-        [self.feedItemsDelegate showUserProfile:selectedFeedItem.author.uID];
+    if(self.items.count > index) {
+        OTFeedItem *selectedFeedItem = self.items[index];
+        if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showUserProfile:)])
+            [self.feedItemsDelegate showUserProfile:selectedFeedItem.author.uID];
     }
 }
 
 - (void)doJoinRequest:(UIButton*)statusButton {
     UITableViewCell *cell = (UITableViewCell*)statusButton.superview.superview;
     NSInteger index = [self indexPathForCell:cell].section;
-    OTFeedItem *selectedFeedItem = self.items[index];
-    if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(doJoinRequest:)]) {
-        [self.feedItemsDelegate doJoinRequest:selectedFeedItem];
+    if(self.items.count > index) {
+        OTFeedItem *selectedFeedItem = self.items[index];
+        if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(doJoinRequest:)])
+            [self.feedItemsDelegate doJoinRequest:selectedFeedItem];
     }
 }
 
