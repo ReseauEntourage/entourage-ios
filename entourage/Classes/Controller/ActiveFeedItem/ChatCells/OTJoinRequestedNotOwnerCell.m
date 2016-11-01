@@ -1,20 +1,18 @@
 //
-//  OTJoinRequestedCell.m
+//  OTJoinRequestedNotOwnerCell.m
 //  entourage
 //
-//  Created by sergiu buceac on 8/7/16.
+//  Created by sergiu buceac on 11/1/16.
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTJoinRequestedCell.h"
-#import "OTFeedItemJoiner.h"
+#import "OTJoinRequestedNotOwnerCell.h"
 #import "UIButton+entourage.h"
 #import "OTTableDataSourceBehavior.h"
 
-// Sergiu : again apologies for magic numbers (i hate ios tables with autolayout)
-#define BUTTON_MARGIN 144
+#define BUTTON_MARGIN 72
 
-@implementation OTJoinRequestedCell
+@implementation OTJoinRequestedNotOwnerCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -41,18 +39,6 @@
     NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
     OTFeedItemJoiner *joiner = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
     [self.userProfile showProfile:joiner.uID];
-}
-
-- (IBAction)acceptJoin {
-    NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
-    OTFeedItemJoiner *joiner = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
-    [self.dataSource acceptJoin:joiner atPath:indexPath];
-}
-
-- (IBAction)rejectJoin {
-    NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
-    OTFeedItemJoiner *joiner = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
-    [self.dataSource rejectJoin:joiner atPath:indexPath];
 }
 
 @end

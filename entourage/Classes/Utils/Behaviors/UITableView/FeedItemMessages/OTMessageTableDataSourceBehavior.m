@@ -14,9 +14,9 @@
 #import "OTFeedItemStatus.h"
 #import "OTEncounter.h"
 #import "NSUserDefaults+OT.h"
-#import "OTUser.h"
 #import "OTFeedItem.h"
 #import "OTChatCellBase.h"
+#import "OTUser.h"
 
 @interface OTMessageTableDataSourceBehavior ()
 
@@ -37,7 +37,10 @@
         return [self.currentUser.sid isEqual:tMessage.uID] ? MessageCellTypeSent : MessageCellTypeReceived;
     } else if([timelinePoint class] == [OTFeedItemJoiner class]) {
         OTFeedItemJoiner * tJoiner = (OTFeedItemJoiner *)timelinePoint;
-        return [tJoiner.status isEqualToString:JOIN_ACCEPTED] ? MessageCellTypeJoinAccepted : MessageCellTypeJoinRequested;
+        if([tJoiner.status isEqualToString:JOIN_ACCEPTED])
+            return MessageCellTypeJoinAccepted;
+        else
+            return [tJoiner.feedItem.author.uID isEqualToNumber:self.currentUser.sid] ? MessageCellTypeJoinRequested : MessageCellTypeJoinRequestedNotOwner;
     } else if([timelinePoint class] == [OTFeedItemJoiner class])
         return MessageCellTypeEncounter;
     else if([timelinePoint class] == [OTFeedItemStatus class])
