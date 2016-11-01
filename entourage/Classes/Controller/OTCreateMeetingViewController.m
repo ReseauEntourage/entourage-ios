@@ -25,6 +25,8 @@
 #import "OTEncounterDisclaimerBehavior.h"
 #import "OTTextWithCount.h"
 #import "OTLocationSelectorViewController.h"
+#import "NSError+OTErrorData.h"
+#import "OTJSONResponseSerializer.h"
 
 #define PADDING 20.0f
 
@@ -116,7 +118,11 @@
         [self.delegate encounterSent:encounter];
     }
     failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
+        NSString *message = OTLocalizedString(@"meetingNotCreated");
+        NSString *reason = [self readReason:error];
+        if(reason && reason.length > 0)
+            message = reason;
+        [SVProgressHUD showErrorWithStatus:message];
         sender.enabled = YES;
     }];
 }
@@ -142,6 +148,21 @@
         CLLocation *current = [[CLLocation alloc] initWithLatitude:self.location.latitude longitude:self.location.longitude];
         controller.selectedLocation = current;
     }
+}
+
+#pragma mark - error read
+
+- (NSString *)readReason:(NSError *)error {
+    id fullContent = [error.userInfo objectForKey:JSONResponseSerializerFullDictKey];
+    if([fullContent isKindOfClass:[NSDictionary class]]) {
+        id reasons = [fullContent objectForKey:@"reasons"];
+        if([reasons isKindOfClass:[NSArray class]]) {
+            NSArray *reasonsArray = (NSArray *)reasons;
+            if(reasonsArray.count > 0)
+                return reasonsArray[0];
+        }
+    }
+    return @"";
 }
 
 @end
