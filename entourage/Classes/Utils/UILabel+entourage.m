@@ -53,4 +53,9 @@
     }
 }
 
+- (void)underline {
+    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    self.attributedText = [[NSAttributedString alloc] initWithString:self.text attributes:underlineAttribute];
+}
+
 @end

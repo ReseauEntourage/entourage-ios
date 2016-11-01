@@ -24,6 +24,8 @@
 #import "NSUserDefaults+OT.h"
 #import "NSBundle+entourage.h"
 #import "OTOngoingTourService.h"
+#import "UILabel+entourage.h"
+#import "OTTapViewBehavior.h"
 @import MessageUI;
 
 /* MenuItem identifiers */
@@ -42,7 +44,10 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 // UI
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *modifyLabel;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
+@property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapNameBehavior;
+@property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapModifyBehavior;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -59,11 +64,14 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
+    [self.tapNameBehavior initialize];
+    [self.tapModifyBehavior initialize];
 	self.menuItems = [OTMenuViewController createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
     self.title = OTLocalizedString(@"myProfile").capitalizedString;
     [self createBackFrontMenuButton];
+    [self.modifyLabel underline];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];

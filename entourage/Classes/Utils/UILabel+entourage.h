@@ -14,5 +14,6 @@
 @interface UILabel (entourage)
 
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem;
+- (void)underline;
 
 @end

@@ -16,6 +16,9 @@
         <array key="SF-UI-Text-Light.otf">
             <string>SFUIText-Light</string>
         </array>
+        <array key="SF-UI-Text-LightItalic.otf">
+            <string>SFUIText-LightItalic</string>
+        </array>
         <array key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
         </array>
@@ -62,7 +65,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="52" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EiD-PN-iyE">
-                                <rect key="frame" x="-4" y="258" width="383" height="409"/>
+                                <rect key="frame" x="-4" y="272" width="383" height="395"/>
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="81" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -132,7 +135,13 @@
                                     <outlet property="delegate" destination="0J6-b7-p0H" id="8IY-4K-OLz"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prenom Nom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZg-OL-qCe">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
+                                <rect key="frame" x="121.5" y="233" width="133" height="18"/>
+                                <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prenom Nom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZg-OL-qCe">
                                 <rect key="frame" x="48" y="212" width="280" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="0t1-aN-am2"/>
@@ -161,22 +170,27 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="EiD-PN-iyE" firstAttribute="top" secondItem="tvQ-n3-1AQ" secondAttribute="bottom" constant="21" id="0RI-cc-owX"/>
                             <constraint firstItem="hU9-Dq-Xg8" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="No1-Gp-qXl"/>
                             <constraint firstItem="gZg-OL-qCe" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="TUJ-yt-314"/>
+                            <constraint firstItem="tvQ-n3-1AQ" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="U2R-tG-Slz"/>
                             <constraint firstItem="EiD-PN-iyE" firstAttribute="leading" secondItem="ljo-QP-YxJ" secondAttribute="leadingMargin" constant="-20" id="W0l-aH-tXM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EiD-PN-iyE" secondAttribute="trailing" constant="-20" id="aFF-pJ-c2w"/>
                             <constraint firstItem="hU9-Dq-Xg8" firstAttribute="top" secondItem="slD-Bf-Od0" secondAttribute="bottom" constant="32" id="cYs-tz-XCE"/>
-                            <constraint firstItem="EiD-PN-iyE" firstAttribute="top" secondItem="gZg-OL-qCe" secondAttribute="bottom" constant="25" id="j5z-qu-cC3"/>
                             <constraint firstItem="2Xh-aG-0Ck" firstAttribute="top" secondItem="EiD-PN-iyE" secondAttribute="bottom" id="jYd-tt-tU7"/>
+                            <constraint firstItem="tvQ-n3-1AQ" firstAttribute="top" secondItem="gZg-OL-qCe" secondAttribute="bottom" id="kW1-yl-GvL"/>
                             <constraint firstItem="gZg-OL-qCe" firstAttribute="top" secondItem="hU9-Dq-Xg8" secondAttribute="bottom" constant="16" id="tfD-aq-AN2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="a9Y-2c-snz"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="modifyLabel" destination="tvQ-n3-1AQ" id="4lt-vt-6VX"/>
                         <outlet property="nameLabel" destination="gZg-OL-qCe" id="zeh-G7-D9m"/>
                         <outlet property="profileButton" destination="hU9-Dq-Xg8" id="7ln-AG-5Qf"/>
                         <outlet property="tableView" destination="EiD-PN-iyE" id="CgG-Ii-UXP"/>
+                        <outlet property="tapModifyBehavior" destination="2zc-lP-Ytb" id="Eig-CL-5KA"/>
+                        <outlet property="tapNameBehavior" destination="WYy-d6-RrV" id="W0B-9Y-URq"/>
                         <segue destination="UcL-62-xea" kind="custom" identifier="segueMenuIdentifierForMap" customClass="SWRevealViewControllerSeguePushController" id="xSV-rR-wZy"/>
                         <segue destination="Qnh-OU-tAM" kind="custom" identifier="segueMenuIdentifierForGuide" customClass="SWRevealViewControllerSeguePushController" id="cE5-Dw-CbA"/>
                         <segue destination="cEE-ZD-h1d" kind="modal" identifier="segueMenuIdentifierForProfile" modalTransitionStyle="coverVertical" id="ZNZ-ec-dR4"/>
@@ -185,6 +199,18 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tAy-vt-yhu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="WYy-d6-RrV" userLabel="Tap Name" customClass="OTTapViewBehavior">
+                    <connections>
+                        <action selector="showProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="NTf-l8-Dlg"/>
+                        <outlet property="tapView" destination="gZg-OL-qCe" id="QaK-n1-7IJ"/>
+                    </connections>
+                </customObject>
+                <customObject id="2zc-lP-Ytb" userLabel="Tap Modify" customClass="OTTapViewBehavior">
+                    <connections>
+                        <action selector="showProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="Xwc-gl-jYY"/>
+                        <outlet property="tapView" destination="tvQ-n3-1AQ" id="QTp-p4-Wny"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="792" y="-768"/>
         </scene>
@@ -327,13 +353,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0LW-Iw-vb2">
-                                                    <rect key="frame" x="350" y="59" width="10" height="18"/>
+                                                    <rect key="frame" x="350.5" y="59" width="9.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="users" translatesAutoresizingMaskIntoConstraints="NO" id="N3C-ev-en1">
-                                                    <rect key="frame" x="326" y="57" width="22" height="22"/>
+                                                    <rect key="frame" x="326.5" y="57" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="GmJ-W3-IPV"/>
                                                         <constraint firstAttribute="height" constant="22" id="Y5G-32-JU0"/>
@@ -1191,8 +1217,8 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Dfo-uz-6se"/>
-        <segue reference="6F4-O6-aKT"/>
         <segue reference="ZNZ-ec-dR4"/>
+        <segue reference="xSV-rR-wZy"/>
+        <segue reference="6F4-O6-aKT"/>
     </inferredMetricsTieBreakers>
 </document>
