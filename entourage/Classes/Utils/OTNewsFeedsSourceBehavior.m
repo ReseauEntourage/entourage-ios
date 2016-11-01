@@ -22,6 +22,12 @@
 
 - (void)initialize {
     self.feedItems = [NSMutableArray new];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
@@ -70,6 +76,17 @@
 
 - (void)resume {
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:DATA_REFRESH_RATE target:self selector:@selector(getNewItems) userInfo:nil repeats:YES];
+}
+
+#pragma mark - background notifications
+
+- (void)willEnterForeground {
+    [self getNewItems];
+    [self resume];
+}
+
+- (void)didEnterBackground {
+    [self pause];
 }
 
 #pragma mark - private methods

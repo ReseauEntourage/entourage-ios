@@ -15,10 +15,10 @@
 #import "NSNotification+entourage.h"
 #import "OTOngoingTourService.h"
 #import "OTTourPoint.h"
-#import "OTDebugLog.h"
 
 #define REQUIRED_ACCURACY 20
 #define MIN_POINTS_TO_SEND 3
+#define HOW_RECENT_THRESHOLD 10
 
 @interface OTTourCreatorBehavior ()
 
@@ -50,14 +50,12 @@
     OTTourPoint *startPoint = [self addTourPointFromLocation:self.lastLocation toLastLocation:self.lastLocation];
     [self updateTourPointsToSendIfNeeded:startPoint];
     [[OTTourService new] sendTour:self.tour withSuccess:^(OTTour *sentTour) {
-        [[OTDebugLog sharedInstance] log:@"starting tour"];
         self.tour = sentTour;
         self.tour.distance = @0.0;
         [self.tour.tourPoints addObject:startPoint];
         [self.delegate tourStarted];
         [SVProgressHUD dismiss];
     } failure:^(NSError *error) {
-        [[OTDebugLog sharedInstance] log:@"failed to start tour"];
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"tour_create_error", @"")];
         NSLog(@"%@",[error localizedDescription]);
         self.tour = nil;
@@ -78,11 +76,9 @@
     [self updateTourPointsToSendIfNeeded:lastPoint];
     [SVProgressHUD show];
     [self sendTourPointsWithSuccess:^() {
-        [[OTDebugLog sharedInstance] log:@"sent points on stop"];
         [SVProgressHUD dismiss];
         [self.delegate stoppedTour];
     } orFailure:^(NSError *error) {
-        [[OTDebugLog sharedInstance] log:@"failed to send points on stop"];
         [SVProgressHUD dismiss];
         [self.delegate failedToStopTour];
     }];
@@ -91,7 +87,6 @@
 - (void)endOngoing {
     self.tour = nil;
     [self.tourPointsToSend removeAllObjects];
-    [[OTDebugLog sharedInstance] sendEmail];
 }
 
 #pragma mark - private methods
@@ -99,6 +94,10 @@
 - (void)locationUpdated:(NSNotification *)notification {
     NSArray *locations = [notification readLocations];
     for (CLLocation *newLocation in locations) {
+        NSDate *eventDate = newLocation.timestamp;
+        NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+        if (fabs(howRecent) > HOW_RECENT_THRESHOLD)
+            continue;
         if (newLocation.horizontalAccuracy < REQUIRED_ACCURACY)
             self.lastLocation = newLocation;
         else
@@ -132,14 +131,11 @@
     NSArray *sentPoints = [NSArray arrayWithArray:self.tourPointsToSend];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[OTTourService new] sendTourPoint:self.tourPointsToSend withTourId:self.tour.uid withSuccess:^(OTTour *updatedTour) {
-        for(OTTourPoint *point in sentPoints)
-            [[OTDebugLog sharedInstance] log:[NSString stringWithFormat:@"sending point at %f,%f", point.latitude, point.longitude]];
         [self.tourPointsToSend removeObjectsInArray:sentPoints];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         if(success)
             success();
     } failure:^(NSError *error) {
-        [[OTDebugLog sharedInstance] log:@"failed to send tour points"];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         if(failure)
             failure(error);
