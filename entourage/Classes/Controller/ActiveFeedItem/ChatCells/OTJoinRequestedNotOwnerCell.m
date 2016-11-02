@@ -10,7 +10,7 @@
 #import "UIButton+entourage.h"
 #import "OTTableDataSourceBehavior.h"
 
-#define BUTTON_MARGIN 72
+#define BUTTON_MARGIN 144
 
 @implementation OTJoinRequestedNotOwnerCell
 
