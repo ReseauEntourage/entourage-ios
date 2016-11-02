@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, strong) OTUser *currentUser;
+@property (nonatomic, assign) BOOL isActive;
 
 @end
 
@@ -33,12 +34,13 @@
 }
 
 - (void)updateWith:(OTFeedItem *)feedItem {
+    self.isActive = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isActive];
     self.feedItem = feedItem;
-    self.btnStatus.hidden = self.lblStatus.hidden = ![[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isActive];
+    self.btnStatus.hidden = !self.isActive;
+    [self updateLabel];
     if(self.btnStatus.hidden)
         return;
     [self updateButton];
-    [self updateLabel];
 }
 
 #pragma mark - private methods
@@ -59,21 +61,25 @@
 }
 
 - (void)updateLabel {
-    if (self.feedItem.author.uID.intValue == self.currentUser.sid.intValue)
-        if([self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
-            [self updateLabelWithText:OTLocalizedString(@"ongoing") andColor:[UIColor appOrangeColor]];
-        else
-            [self updateLabelWithText:OTLocalizedString(@"join_active") andColor:[UIColor appOrangeColor]];
-    else {
-        if ([JOIN_ACCEPTED isEqualToString:self.feedItem.joinStatus])
-            [self updateLabelWithText:OTLocalizedString(@"join_active") andColor:[UIColor appOrangeColor]];
-        else if ([JOIN_PENDING isEqualToString:self.feedItem.joinStatus])
-            [self updateLabelWithText:OTLocalizedString(@"join_pending") andColor:[UIColor appOrangeColor]];
-        else if ([JOIN_REJECTED isEqualToString:self.feedItem.joinStatus])
-            [self updateLabelWithText:OTLocalizedString(@"join_rejected") andColor:[UIColor appTomatoColor]];
-        else
-            [self updateLabelWithText:OTLocalizedString(@"join_to_join") andColor:[UIColor appGreyishColor]];
+    if(self.isActive) {
+        if (self.feedItem.author.uID.intValue == self.currentUser.sid.intValue)
+            if([self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
+                [self updateLabelWithText:OTLocalizedString(@"ongoing") andColor:[UIColor appOrangeColor]];
+            else
+                [self updateLabelWithText:OTLocalizedString(@"join_active") andColor:[UIColor appOrangeColor]];
+        else {
+            if ([JOIN_ACCEPTED isEqualToString:self.feedItem.joinStatus])
+                [self updateLabelWithText:OTLocalizedString(@"join_active") andColor:[UIColor appOrangeColor]];
+            else if ([JOIN_PENDING isEqualToString:self.feedItem.joinStatus])
+                [self updateLabelWithText:OTLocalizedString(@"join_pending") andColor:[UIColor appOrangeColor]];
+            else if ([JOIN_REJECTED isEqualToString:self.feedItem.joinStatus])
+                [self updateLabelWithText:OTLocalizedString(@"join_rejected") andColor:[UIColor appTomatoColor]];
+            else
+                [self updateLabelWithText:OTLocalizedString(@"join_to_join") andColor:[UIColor appGreyishColor]];
+        }
     }
+    else
+        [self updateLabelWithText:OTLocalizedString(@"item_closed") andColor:[UIColor appGreyishColor]];
 }
 
 - (void)updateLabelWithText:(NSString *)text andColor:(UIColor *)color {
