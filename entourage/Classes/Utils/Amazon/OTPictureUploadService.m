@@ -17,12 +17,12 @@
 
 #import "entourage-Swift.h"
 
-#define PICTURE_FOLDER_PREFIX @"300x300/"
 #if DEBUG
-#define PICTURE_BUCKET @"entourage-avatars-development-thumb"
+#define PICTURE_FOLDER_PREFIX @"staging/300x300/"
 #else
-#define PICTURE_BUCKET @"entourage-avatars-production-thumb"
+#define PICTURE_FOLDER_PREFIX @"300x300/"
 #endif
+#define PICTURE_BUCKET @"entourage-avatars-production-thumb"
 
 @implementation OTPictureUploadService
 
