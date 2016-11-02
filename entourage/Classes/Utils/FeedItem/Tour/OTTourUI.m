@@ -37,6 +37,10 @@
     return OTLocalizedString(@"user_joined_tour");
 }
 
+- (NSString *)joinRejectedText {
+    return OTLocalizedString(@"user_join_reject_tour");
+}
+
 - (double)distance {
     if(self.tour.tourPoints.count == 0)
         return -1;

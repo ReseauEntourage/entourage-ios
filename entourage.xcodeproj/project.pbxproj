@@ -91,6 +91,7 @@
 		1E37C32B1DC0E67D00477090 /* OTPublicInfoDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E37C32A1DC0E67D00477090 /* OTPublicInfoDataSource.m */; };
 		1E37C32E1DC0E78100477090 /* OTPublicInfoTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E37C32D1DC0E78100477090 /* OTPublicInfoTableDataSource.m */; };
 		1E37C3311DC0E7E700477090 /* OTPublicInfoCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E37C3301DC0E7E700477090 /* OTPublicInfoCellProvider.m */; };
+		1E3E280D1DC9F4A900E0576D /* OTJoinRejectedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E280C1DC9F4A900E0576D /* OTJoinRejectedCell.m */; };
 		1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E40A3331D4A2A10009E2D73 /* UIBarButtonItem+factory.m */; };
 		1E46617D1DAE6CF900ED0CD0 /* OTMemberCountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E46617C1DAE6CF900ED0CD0 /* OTMemberCountCell.m */; };
 		1E4661801DAE6D1100ED0CD0 /* OTMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E46617F1DAE6D1100ED0CD0 /* OTMapCell.m */; };
@@ -490,6 +491,8 @@
 		1E37C32D1DC0E78100477090 /* OTPublicInfoTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPublicInfoTableDataSource.m; sourceTree = "<group>"; };
 		1E37C32F1DC0E7E700477090 /* OTPublicInfoCellProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPublicInfoCellProvider.h; sourceTree = "<group>"; };
 		1E37C3301DC0E7E700477090 /* OTPublicInfoCellProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPublicInfoCellProvider.m; sourceTree = "<group>"; };
+		1E3E280B1DC9F4A900E0576D /* OTJoinRejectedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTJoinRejectedCell.h; path = ActiveFeedItem/ChatCells/OTJoinRejectedCell.h; sourceTree = "<group>"; };
+		1E3E280C1DC9F4A900E0576D /* OTJoinRejectedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTJoinRejectedCell.m; path = ActiveFeedItem/ChatCells/OTJoinRejectedCell.m; sourceTree = "<group>"; };
 		1E40A3321D4A2A10009E2D73 /* UIBarButtonItem+factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+factory.h"; sourceTree = "<group>"; };
 		1E40A3331D4A2A10009E2D73 /* UIBarButtonItem+factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+factory.m"; sourceTree = "<group>"; };
 		1E46617B1DAE6CF900ED0CD0 /* OTMemberCountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMemberCountCell.h; path = ActiveFeedItem/InfoCells/OTMemberCountCell.h; sourceTree = "<group>"; };
@@ -1093,6 +1096,8 @@
 				1E06B8ED1D58BDFA008B20F4 /* OTEncounterCell.m */,
 				1EB4A5451DC943740057993E /* OTJoinRequestedNotOwnerCell.h */,
 				1EB4A5461DC943740057993E /* OTJoinRequestedNotOwnerCell.m */,
+				1E3E280B1DC9F4A900E0576D /* OTJoinRejectedCell.h */,
+				1E3E280C1DC9F4A900E0576D /* OTJoinRejectedCell.m */,
 			);
 			name = ChatCells;
 			sourceTree = "<group>";
@@ -2844,6 +2849,7 @@
 				1E6E550A1D707FE3002845D0 /* OTPushNotificationsService.m in Sources */,
 				1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */,
 				1EFAC0D31D89247900BE396F /* OTFeedItemsFilterCellBase.m in Sources */,
+				1E3E280D1DC9F4A900E0576D /* OTJoinRejectedCell.m in Sources */,
 				1EFAC0ED1D8928E200BE396F /* OTMyEntouragesFilter.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,
 				1E5F79881D5A12560005003C /* OTCollectionSourceBehavior.m in Sources */,

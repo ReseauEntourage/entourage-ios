@@ -19,6 +19,7 @@
 - (NSString *)feedItemDescription;
 - (NSString *)navigationTitle;
 - (NSString *)joinAcceptedText;
+- (NSString *)joinRejectedText;
 - (double)distance;
 
 @end

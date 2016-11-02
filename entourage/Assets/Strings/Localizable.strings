@@ -142,6 +142,8 @@
 "formatter_encounter_and_user_meet" = " et %@ se sont rencontrés ici.";
 "user_joined_tour" = " a rejoint la maraude.";
 "user_joined_entourage" = " a rejoint l’entourage.";
+"user_join_reject_tour" = " deny tour.";
+"user_join_reject_entourage" = " deny entourage.";
 "meetingCreated" = "Rencontre créée";
 "meetingNotCreated" = "Echec de la création de rencontre";
 "contacts" = "Contacts";

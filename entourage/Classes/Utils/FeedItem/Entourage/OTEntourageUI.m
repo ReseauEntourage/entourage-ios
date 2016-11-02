@@ -36,6 +36,10 @@
     return OTLocalizedString(@"user_joined_entourage");
 }
 
+- (NSString *)joinRejectedText {
+    return OTLocalizedString(@"user_join_reject_entourage");
+}
+
 - (double)distance {
     if(!self.entourage.location)
         return -1;
