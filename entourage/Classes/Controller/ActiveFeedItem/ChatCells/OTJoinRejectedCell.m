@@ -8,6 +8,8 @@
 
 #import "OTJoinRejectedCell.h"
 #import "OTFeedItemJoiner.h"
+#import "UIColor+entourage.h"
+#import "OTConsts.h"
 
 @implementation OTJoinRejectedCell
 
@@ -20,8 +22,7 @@
 
 - (NSAttributedString *)getLabelText:(NSString *)userName forItem:(OTFeedItem *)feedItem {
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:userName attributes:@{NSForegroundColorAttributeName: [UIColor appOrangeColor]}];
-    NSString *joinText = [[[OTFeedItemFactory createFor:feedItem] getUI] joinRejectedText];
-    NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:joinText attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
+    NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:OTLocalizedString(@"user_join_reject") attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
     NSMutableAttributedString *nameInfoAttrString = nameAttrString.mutableCopy;
     [nameInfoAttrString appendAttributedString:infoAttrString];
     return nameInfoAttrString;
