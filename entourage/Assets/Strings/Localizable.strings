@@ -252,6 +252,7 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "url_delete_account" = "users/me?token=%@";
 "url_regenerate_code" = "%@/%@/%@.json";
 "url_send_entourage" = "entourages";
+"encounter_enter_name_of_met_person" = "Vous devez donner un titre à votre rencontre";
 
 // Titles
 "aboutTitle" = "À propos";

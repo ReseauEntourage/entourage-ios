@@ -104,6 +104,10 @@
 
 - (IBAction)sendEncounter:(UIBarButtonItem*)sender {
     [Flurry logEvent:@"ValidateEncounterClick"];
+    if(self.nameTextField.text.length == 0) {
+        [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_enter_name_of_met_person") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
+        return;
+    }
     sender.enabled = NO;
     __block OTEncounter *encounter = [OTEncounter new];
     encounter.date = [NSDate date];
@@ -118,11 +122,7 @@
         [self.delegate encounterSent:encounter];
     }
     failure:^(NSError *error) {
-        NSString *message = OTLocalizedString(@"meetingNotCreated");
-        NSString *reason = [self readReason:error];
-        if(reason && reason.length > 0)
-            message = reason;
-        [SVProgressHUD showErrorWithStatus:message];
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
         sender.enabled = YES;
     }];
 }
@@ -148,21 +148,6 @@
         CLLocation *current = [[CLLocation alloc] initWithLatitude:self.location.latitude longitude:self.location.longitude];
         controller.selectedLocation = current;
     }
-}
-
-#pragma mark - error read
-
-- (NSString *)readReason:(NSError *)error {
-    id fullContent = [error.userInfo objectForKey:JSONResponseSerializerFullDictKey];
-    if([fullContent isKindOfClass:[NSDictionary class]]) {
-        id reasons = [fullContent objectForKey:@"reasons"];
-        if([reasons isKindOfClass:[NSArray class]]) {
-            NSArray *reasonsArray = (NSArray *)reasons;
-            if(reasonsArray.count > 0)
-                return reasonsArray[0];
-        }
-    }
-    return @"";
 }
 
 @end
