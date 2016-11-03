@@ -95,7 +95,7 @@
 "tour_type_display_medical" = "médicale";
 "tour_type_display_distributive" = "distributive";
 "failed_tour_start_no_location" = "Impossible de démarrer la maraude : aucune position détectée.";
-"failed_send_tour_points_to_server" = "Impossible d'envoyer les données de la maraude au serveur. Veuillez réessayer plus tard.";
+"failed_send_tour_points_to_server" = "Impossible d’envoyer les données de la maraude au serveur. Veuillez réessayer plus tard.";
 
 "tour_status_closed" = "closed";
 "tour_create_sending" = "Création de la maraude";
