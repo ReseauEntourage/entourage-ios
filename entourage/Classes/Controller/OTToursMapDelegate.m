@@ -36,6 +36,10 @@
     [self.mapController didChangePosition];
 }
 
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
+    [self.mapController willChangePosition];
+}
+
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     [mapView deselectAnnotation:view.annotation animated:NO];
     if ([view.annotation isKindOfClass:[OTEncounterAnnotation class]])

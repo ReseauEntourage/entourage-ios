@@ -136,7 +136,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                                <rect key="frame" x="122" y="233" width="133" height="18"/>
+                                <rect key="frame" x="121" y="233" width="133" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -353,13 +353,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0LW-Iw-vb2">
-                                                    <rect key="frame" x="350.5" y="59" width="9.5" height="18"/>
+                                                    <rect key="frame" x="350" y="59" width="10" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="users" translatesAutoresizingMaskIntoConstraints="NO" id="N3C-ev-en1">
-                                                    <rect key="frame" x="326.5" y="57" width="22" height="22"/>
+                                                    <rect key="frame" x="326" y="57" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="GmJ-W3-IPV"/>
                                                         <constraint firstAttribute="height" constant="22" id="Y5G-32-JU0"/>
@@ -493,6 +493,42 @@
                                     <action selector="doShowNewFeedItems:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Nrf-YQ-0Vh"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fyj-qg-Gvf">
+                                <rect key="frame" x="70" y="120" width="235" height="209.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TgR-1n-ufy">
+                                        <rect key="frame" x="8" y="8" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="22" id="HIL-yF-zUC"/>
+                                            <constraint firstAttribute="height" constant="22" id="Qzn-zb-cEM"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="close"/>
+                                        <connections>
+                                            <action selector="closeNoEntouragesPopup:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="SVA-dC-rqR"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeZ-My-nGS">
+                                        <rect key="frame" x="15" y="33" width="205" height="161.5"/>
+                                        <string key="text">On dirait que c'est calme ici! 
+
+Déplacez la carte pour trouver des entourages crées par le réseau
+
+Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
+                                        <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="TgR-1n-ufy" firstAttribute="top" secondItem="fyj-qg-Gvf" secondAttribute="top" constant="8" id="C3A-R4-KEv"/>
+                                    <constraint firstItem="TgR-1n-ufy" firstAttribute="leading" secondItem="fyj-qg-Gvf" secondAttribute="leading" constant="8" id="Ekm-DM-3DN"/>
+                                    <constraint firstAttribute="trailing" secondItem="YeZ-My-nGS" secondAttribute="trailing" constant="15" id="Mj7-DN-dNP"/>
+                                    <constraint firstItem="YeZ-My-nGS" firstAttribute="leading" secondItem="fyj-qg-Gvf" secondAttribute="leading" constant="15" id="at4-Mt-1tJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="YeZ-My-nGS" secondAttribute="bottom" constant="15" id="dUW-QR-qmF"/>
+                                    <constraint firstItem="YeZ-My-nGS" firstAttribute="top" secondItem="TgR-1n-ufy" secondAttribute="bottom" constant="3" id="zgA-ST-gbd"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="01M-L0-iJE"/>
@@ -507,12 +543,15 @@
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="VLV-3h-yeI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uRg-cj-T9Q" secondAttribute="trailing" constant="-8" id="ZT2-9H-lNi"/>
                             <constraint firstItem="ONo-TH-dyX" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="11" id="aiz-r6-FV1"/>
+                            <constraint firstItem="fyj-qg-Gvf" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="120" id="c4W-Ie-q6o"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fyj-qg-Gvf" secondAttribute="trailing" constant="54" id="dG3-4Y-gfd"/>
                             <constraint firstItem="ONo-TH-dyX" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="fBr-Xx-Gff"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="centerX" secondItem="oVf-Bh-vdD" secondAttribute="centerX" id="hB3-UZ-01t"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="2EG-u9-ELx" secondAttribute="bottom" id="mi6-0M-xlF"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="10" id="puD-5n-gle"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="64" id="sQA-pi-JcK"/>
                             <constraint firstItem="gsB-s5-FKP" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="16" id="t6b-Vu-ZMD"/>
+                            <constraint firstItem="fyj-qg-Gvf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="54" id="wAG-gu-d45"/>
                             <constraint firstItem="2EG-u9-ELx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="y4I-N7-Bd9"/>
                         </constraints>
                     </view>
@@ -526,6 +565,7 @@
                         <outlet property="mapDelegateProxy" destination="N0A-Lo-wcg" id="mXR-gi-O5J"/>
                         <outlet property="mapSegmentedControl" destination="gsB-s5-FKP" id="Vvs-3z-462"/>
                         <outlet property="newsFeedsSourceBehavior" destination="atf-P9-vVx" id="GPG-HR-dXj"/>
+                        <outlet property="noEntouragesPopup" destination="fyj-qg-Gvf" id="xCM-s5-Hzj"/>
                         <outlet property="nouveauxFeedItemsButton" destination="ONo-TH-dyX" id="PCe-XJ-apW"/>
                         <outlet property="overlayFeeder" destination="hnO-wK-gKw" id="DRj-hp-QRc"/>
                         <outlet property="statusChangedBehavior" destination="rYj-lX-rXg" id="dJG-9t-lQH"/>
@@ -1198,6 +1238,7 @@
     <resources>
         <image name="activeButton" width="45" height="45"/>
         <image name="arrowNewEntourages" width="12" height="22"/>
+        <image name="close" width="22" height="22"/>
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>
@@ -1217,8 +1258,8 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ZNZ-ec-dR4"/>
         <segue reference="xSV-rR-wZy"/>
         <segue reference="6F4-O6-aKT"/>
+        <segue reference="b42-UE-vP1"/>
     </inferredMetricsTieBreakers>
 </document>

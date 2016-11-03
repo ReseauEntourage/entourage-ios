@@ -113,6 +113,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *nouveauxFeedItemsButton;
 @property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
 @property (nonatomic) BOOL isFirstLoad;
+@property (nonatomic) BOOL wasLoadedOnce;
+@property (nonatomic, weak) IBOutlet UIView *noEntouragesPopup;
 
 @end
 
@@ -324,6 +326,10 @@
     [self getPOIList];
 }
 
+- (void)willChangePosition {
+    [self toggleNoEntourageView:YES];
+}
+
 - (void)didChangePosition {
     CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.newsFeedsSourceBehavior.lastOkCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
     if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4)
@@ -464,6 +470,7 @@
 #pragma mark - OTNewsFeedsSourceDelegate
 
 - (void)itemsUpdated {
+    self.wasLoadedOnce = YES;
     if (self.newsFeedsSourceBehavior.feedItems.count && self.isFirstLoad) {
         self.isFirstLoad = NO;
         [self showToursList];
@@ -472,6 +479,7 @@
         [self.tableView setNoFeeds];
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self feedMapWithFeedItems];
+    [self toggleNoEntourageView:self.isTourListDisplayed || self.newsFeedsSourceBehavior.feedItems.count > 0];
 }
 
 - (void)errorLoadingFeedItems:(NSError *)error {
@@ -811,6 +819,7 @@
 #pragma mark - "Screens"
 
 - (void)showToursList {
+    [self toggleNoEntourageView:YES];
     self.isTourListDisplayed = YES;
     [UIView animateWithDuration:0.2 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
@@ -823,6 +832,7 @@
 }
 
 - (void)showToursMap {
+    [self toggleNoEntourageView:!self.wasLoadedOnce || self.newsFeedsSourceBehavior.feedItems.count > 0];
     self.nouveauxFeedItemsButton.hidden = YES;
     if (self.toursMapDelegate.isActive)
         self.isTourListDisplayed = NO;
@@ -951,6 +961,16 @@
         OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
         controller.optionsDelegate = self;
     }
+}
+
+#pragma mark - no entourages popup
+
+- (IBAction)closeNoEntouragesPopup:(id)sender {
+    [self toggleNoEntourageView:YES];
+}
+
+- (void)toggleNoEntourageView:(BOOL)closed {
+    self.noEntouragesPopup.hidden = !self.toursMapDelegate.isActive || closed;
 }
 
 @end
