@@ -14,14 +14,8 @@
 #import "OTApiConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
-
 #import "entourage-Swift.h"
 
-#if DEBUG
-#define PICTURE_FOLDER_PREFIX @"staging/300x300/"
-#else
-#define PICTURE_FOLDER_PREFIX @"300x300/"
-#endif
 #define PICTURE_BUCKET @"entourage-avatars-production-thumb"
 
 @implementation OTPictureUploadService
@@ -53,7 +47,7 @@
 - (AWSS3TransferManagerUploadRequest *)buildUploadRequestFor:(NSURL *)fileUri withName:(NSString *)fileName {
     AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
     uploadRequest.bucket = PICTURE_BUCKET;
-    uploadRequest.key = [PICTURE_FOLDER_PREFIX stringByAppendingString:fileName];
+    uploadRequest.key = [[ConfigurationManager shared].amazonPictureFolder stringByAppendingString:fileName];
     uploadRequest.body = fileUri;
     uploadRequest.contentType = @"image/jpeg";
     return uploadRequest;

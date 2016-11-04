@@ -13,6 +13,7 @@ struct UserStorageKey {
   static let APIKey = "ApiKey"
   static let amazonAccessKey = "AmazonAccessKey"
   static let amazonSecretKey = "AmazonSecretKey"
+  static let amazonPictureFolder = "AmazonPictureFolder"
   static let flurryAPIKey = "FlurryApiKey"
   static let nuanceHostAddress = "NuanceHostAddress"
   static let nuanceAppId = "NuanceAPIKey"
@@ -42,6 +43,10 @@ struct UserStorageKey {
 
   var amazonSecretKey: NSString {
     return configuration(forKey: UserStorageKey.amazonSecretKey)
+  }
+
+  var amazonPictureFolder: NSString {
+    return configuration(forKey: UserStorageKey.amazonPictureFolder)
   }
 
   var APIHostURL: NSString {
