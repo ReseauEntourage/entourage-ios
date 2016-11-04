@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qeH-DW-jd0">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qeH-DW-jd0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -869,7 +869,7 @@ En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez
                             <constraint firstItem="wF4-5f-khB" firstAttribute="top" secondItem="eEZ-Ma-DdB" secondAttribute="bottom" id="Mb3-qm-R0B"/>
                             <constraint firstItem="eEZ-Ma-DdB" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-4" id="Mw2-fa-gi8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="NLy-4P-qnF"/>
-                            <constraint firstItem="eEZ-Ma-DdB" firstAttribute="top" secondItem="3bR-VB-ndO" secondAttribute="bottom" constant="16" id="UXb-Bi-SHI"/>
+                            <constraint firstItem="eEZ-Ma-DdB" firstAttribute="top" secondItem="3bR-VB-ndO" secondAttribute="bottom" constant="30" id="UXb-Bi-SHI"/>
                             <constraint firstItem="b9i-3f-AXD" firstAttribute="top" secondItem="8vj-nj-f39" secondAttribute="bottom" constant="16" id="Uqf-gC-b3e"/>
                             <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="bat-wy-8tV"/>
                             <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="de5-df-YMd"/>
