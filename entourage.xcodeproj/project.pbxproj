@@ -3087,7 +3087,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3111,10 +3111,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios$(BUNDLE_ID_SUFFIX)";
+				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "0b98ae48-9f2e-404a-b7f2-ef68b953259d";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
+				PROVISIONING_PROFILE = "d5840aec-b1c9-47db-9ca2-e319de707206";
+				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3158,7 +3158,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios$(BUNDLE_ID_SUFFIX)";
+				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "78073984-9536-4be1-bb01-154326c30abb";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
@@ -3295,9 +3295,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios$(BUNDLE_ID_SUFFIX)";
+				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "0b98ae48-9f2e-404a-b7f2-ef68b953259d";
+				PROVISIONING_PROFILE = "3a17a4ee-979a-436c-a6c6-b14adc5e3b11";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";

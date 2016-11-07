@@ -12,8 +12,8 @@
 
 @implementation OTEncounterDisclaimerBehavior
 
-- (NSString *)disclaimerText {
-    return OTLocalizedString(@"encounter_disclaimer");
+- (NSAttributedString *)disclaimerText {
+    return [self buildDisclaimerWithLink:OTLocalizedString(@"encounter_disclaimer")];
 }
 
 - (BOOL)wasDisclaimerAccepted {

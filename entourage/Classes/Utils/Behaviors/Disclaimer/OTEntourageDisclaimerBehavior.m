@@ -12,8 +12,8 @@
 
 @implementation OTEntourageDisclaimerBehavior
 
-- (NSString *)disclaimerText {
-    return OTLocalizedString(@"entourage_disclaimer");
+- (NSAttributedString *)disclaimerText {
+    return [self buildDisclaimerWithLink:OTLocalizedString(@"entourage_disclaimer")];
 }
 
 - (BOOL)wasDisclaimerAccepted {

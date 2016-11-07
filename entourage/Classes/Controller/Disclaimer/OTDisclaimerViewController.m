@@ -9,6 +9,7 @@
 #import "OTDisclaimerViewController.h"
 #import <WebKit/WebKit.h>
 #import "UIViewController+menu.h"
+#import "UIColor+entourage.h"
 
 @interface OTDisclaimerViewController ()
 
@@ -21,7 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.txtMessage.text = self.disclaimerText;
+    self.txtMessage.attributedText = self.disclaimerText;
+    self.txtMessage.linkTextAttributes = @{NSForegroundColorAttributeName:[UIColor appOrangeColor]};
     
     //resolution to issue http://www.openradar.me/24435091
     self.txtMessage.scrollEnabled = NO;
