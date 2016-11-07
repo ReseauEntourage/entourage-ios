@@ -71,6 +71,7 @@
 #import "OTNewsFeedsSourceBehavior.h"
 #import "OTTourCreatorBehavior.h"
 #import "OTTourCreatorBehaviorDelegate.h"
+#import "OTStartTourAnnotation.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -361,6 +362,13 @@
         for (OTEncounter *encounter in self.encounters) {
             OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
             [annotations addObject:pointAnnotation];
+        }
+        for(OTFeedItem *item in self.newsFeedsSourceBehavior.feedItems) {
+            if([item isKindOfClass:[OTTour class]]) {
+                OTStartTourAnnotation *startAnnotation = [[OTStartTourAnnotation alloc] initWithTour:(OTTour *)item];
+                if(startAnnotation)
+                   [annotations addObject:startAnnotation];
+            }
         }
         [self.mapView removeAnnotations:self.mapView.annotations];
         [self.mapView addAnnotations:annotations];
