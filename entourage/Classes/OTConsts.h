@@ -55,3 +55,6 @@
 #define INVALID_PHONE_FORMAT @"INVALID_PHONE_FORMAT"
 #define UNAUTHORIZED @"UNAUTHORIZED"
 #define PHONE_ALREADY_EXIST @"PHONE_ALREADY_EXIST"
+
+#define PUBLIC_ENTOURAGE_CREATION_CHART @"http://www.entourage.social/chartes/grand-public.html"
+#define PRO_ENTOURAGE_CREATION_CHART @"http://www.entourage.social/chartes/pro.html"

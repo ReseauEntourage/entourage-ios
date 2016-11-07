@@ -16,7 +16,7 @@ struct UserStorageKey {
   static let amazonPictureFolder = "AmazonPictureFolder"
   static let flurryAPIKey = "FlurryApiKey"
   static let nuanceHostAddress = "NuanceHostAddress"
-  static let nuanceAppId = "NuanceAPIKey"
+  static let nuanceAppId = "NuanceAppId"
 }
 
 @objc class ConfigurationManager: NSObject {

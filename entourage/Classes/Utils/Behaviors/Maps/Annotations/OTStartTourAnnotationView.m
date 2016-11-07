@@ -55,19 +55,20 @@
 - (void)setAnnotation:(id<MKAnnotation>)annotation {
     [super setAnnotation:annotation];
     self.lblData.text = ((OTStartTourAnnotation *)annotation).tour.organizationName;
-    if(self.lblData)
-        [self updateFrames];
+    [self updateFrames];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
     [self updateFrames];
 }
 
 #pragma mark - private methods
 
 - (void)updateFrames {
+    if(!self.lblData)
+        return;
+    
     CGSize textSize = [self.lblData.text sizeWithAttributes:@{NSFontAttributeName:self.lblData.font}];
     CGRect lblFrame = CGRectMake(0, 0, textSize.width + 2 * LabelPaddings, textSize.height + 2 * LabelPaddings);
     lblFrame.origin = CGPointMake(-lblFrame.size.width - TriangleSize.width / 2, -lblFrame.size.height - TriangleSize.height / 2);
