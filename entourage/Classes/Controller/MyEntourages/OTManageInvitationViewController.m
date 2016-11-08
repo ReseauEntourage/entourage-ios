@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 @property (strong, nonatomic) IBOutlet OTInvitationChangedBehavior *invitationChangedBehavior;
 @property (strong, nonatomic) IBOutlet UIButton *btnIgnore;
+@property (strong, nonatomic) IBOutlet UITextView *txtDescription;
 
 @end
 
@@ -30,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.txtDescription.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor appGreyishBrownColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
     [self.summaryProviderBehavior configureWith:self.feedItem];
     [self.annotationProvider configureWith:self.feedItem];
     [self.annotationProvider addStartPoint];

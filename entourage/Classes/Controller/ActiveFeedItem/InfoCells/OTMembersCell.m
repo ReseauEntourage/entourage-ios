@@ -12,16 +12,9 @@
 
 @implementation OTMembersCell
 
-- (void)configureWith:(OTFeedItemJoiner *)member {
-    self.lblDisplayName.text = member.displayName;
-    [self.btnProfile setupAsProfilePictureFromUrl:member.avatarUrl];
-}
-
-- (IBAction)showProfile:(id)sender {
-    [Flurry logEvent:@"UserProfileClick"];
-    NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
-    OTFeedItemJoiner *joiner = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
-    [self.userProfile showProfile:joiner.uID];
+- (void)configureWith:(OTFeedItemJoiner *)item {
+    self.lblDisplayName.text = item.displayName;
+    [self.btnProfile setupAsProfilePictureFromUrl:item.avatarUrl];
 }
 
 @end

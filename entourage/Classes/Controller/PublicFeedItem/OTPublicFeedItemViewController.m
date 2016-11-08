@@ -8,7 +8,6 @@
 
 #import "OTPublicFeedItemViewController.h"
 #import "OTSummaryProviderBehavior.h"
-#import "OTMapAnnotationProviderBehavior.h"
 #import "UIColor+entourage.h"
 #import "OTFeedItemFactory.h"
 #import "UIBarButtonItem+factory.h"
@@ -17,14 +16,17 @@
 #import "OTJoinBehavior.h"
 #import "SVProgressHUD.h"
 #import "OTUserProfileBehavior.h"
+#import "OTPublicInfoDataSource.h"
+#import "OTTableDataSourceBehavior.h"
 
 @interface OTPublicFeedItemViewController ()
 
 @property (strong, nonatomic) IBOutlet OTSummaryProviderBehavior *summaryProvider;
-@property (strong, nonatomic) IBOutlet OTMapAnnotationProviderBehavior *mapAnnotationProvider;
 @property (strong, nonatomic) IBOutlet OTStatusBehavior *statusBehavior;
 @property (strong, nonatomic) IBOutlet OTJoinBehavior *joinBehavior;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
+@property (strong, nonatomic) IBOutlet OTPublicInfoDataSource *dataSource;
+@property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 
 @end
 
@@ -33,18 +35,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.summaryProvider configureWith:self.feedItem];
-    [self.mapAnnotationProvider configureWith:self.feedItem];
-    [self.mapAnnotationProvider addStartPoint];
-    [self.mapAnnotationProvider drawData];
+    [self.tableDataSource initialize];
     [self.statusBehavior initialize];
     [self.statusBehavior updateWith:self.feedItem];
+    self.dataSource.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.dataSource.tableView.estimatedRowHeight = 1000;
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
-    if(FeedItemStateJoinNotRequested == [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState]) {
+    FeedItemState state = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
+    if(FeedItemStateJoinNotRequested == state) {
         UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(joinFeedItem:)];
         [self.navigationItem setRightBarButtonItem:joinButton];
     }
+    [self.dataSource loadDataFor:self.feedItem];
+}
+
+- (void)viewDidLayoutSubviews {
+    [self.tableDataSource refresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

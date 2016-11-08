@@ -19,7 +19,6 @@
 #import "UIScrollView+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
-#import "NSError+OTErrorData.h"
 #import "OTOnboardingNavigationBehavior.h"
 
 @interface OTUserEmailViewController ()
@@ -38,7 +37,7 @@
     // Do any additional setup after loading the view.
     self.title = @"";
     [self.emailTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    
+
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(showKeyboard:)

@@ -98,13 +98,13 @@
     return [self setupCloseModalWithImageNamed:@"whiteClose.png"];
 }
 
-- (UIImage*)setupLogoImage {
+- (void)setupLogoImageWithTarget:(id)target andSelector:(SEL)action {
     UIImage *image = [UIImage imageNamed:@"logo"];
-    UIImageView *img = [[UIImageView alloc] initWithImage:image];
-    img.frame = CGRectMake(0, 0, image.size.width, image.size.height);
-    img.contentMode = UIViewContentModeScaleAspectFit;
-    self.navigationItem.titleView = img;
-    return image;
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0,0,image.size.width, image.size.height);
+    [button setBackgroundImage:image forState:UIControlStateNormal];
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.titleView = button;
 }
 
 - (void)dismissModal {

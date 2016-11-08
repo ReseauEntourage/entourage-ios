@@ -19,7 +19,6 @@
 #define JOINBUTTON_ACCEPTED     @"activeButton"
 #define JOINBUTTON_REJECTED     @"refusedRequestButton"
 
-
 @implementation UIButton (entourage)
 
 - (void)setupAsProfilePictureFromUrl:(NSString *)avatarURLString

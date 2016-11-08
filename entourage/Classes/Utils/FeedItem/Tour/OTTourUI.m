@@ -8,7 +8,8 @@
 
 #import "OTTourUI.h"
 #import "OTConsts.h"
-#import "NSDate+ui.h"
+#import "OTLocationManager.h"
+#import "OTTourPoint.h"
 
 @implementation OTTourUI
 
@@ -36,8 +37,17 @@
     return OTLocalizedString(@"user_joined_tour");
 }
 
-- (void)timeDataFor:(UILabel *)label {
-    label.text = [NSString stringWithFormat:OTLocalizedString(@"tour_time_data"), [self.tour.creationDate sinceNow], self.tour.distance];
+- (double)distance {
+    if(self.tour.tourPoints.count == 0)
+        return -1;
+    
+    CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
+    if(!currentLocation)
+        return -1;
+    
+    OTTourPoint *first = self.tour.tourPoints[0];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:first.latitude longitude:first.longitude];
+    return [currentLocation distanceFromLocation:location];
 }
 
 - (NSString *)displayType {

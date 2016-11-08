@@ -7,45 +7,28 @@
 //
 
 #import "OTLoginViewController.h"
-
-// Controller
 #import "OTLostCodeViewController.h"
 #import "OTConsts.h"
 #import "IQKeyboardManager.h"
 #import "OTUserEmailViewController.h"
-
-// Service
 #import "OTAuthService.h"
-#import "OTJSONResponseSerializer.h"
-
-// Utils
 #import "UITextField+indentation.h"
 #import "UIStoryboard+entourage.h"
-
-// Helper
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
 #import "UINavigationController+entourage.h"
 #import "UIView+entourage.h"
 #import "UIScrollView+entourage.h"
 #import "UITextField+indentation.h"
-// Model
 #import "OTUser.h"
 #import "UIColor+entourage.h"
-
-// View
 #import "SVProgressHUD.h"
 #import "OTOnboardingNavigationBehavior.h"
 #import "OTPushNotificationsService.h"
 #import "OTAskMoreViewController.h"
 #import "NSError+OTErrorData.h"
 
-/********************************************************************************/
-#pragma mark - Constants
 NSString *const kTutorialDone = @"has_done_tutorial";
-
-/********************************************************************************/
-#pragma mark - OTLoginViewController
 
 @interface OTLoginViewController () <LostCodeDelegate>
 
@@ -59,7 +42,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 @implementation OTLoginViewController
 
-/********************************************************************************/
 #pragma mark - Lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -86,7 +68,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
 }
 
-/********************************************************************************/
 #pragma mark - Public Methods
 
 - (BOOL)validateForm {
@@ -125,21 +106,22 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    NSString *alertTitle = OTLocalizedString(@"error");
                                    NSString *alertText = OTLocalizedString(@"connection_error");
                                    NSString *buttonTitle = @"ok";
-                                   NSString *code = [error readErrorCode];
-                                   if ([code isEqualToString:@"UNAUTHORIZED"]) {
+                                   NSString *errorCode = [error readErrorCode];
+                                   if ([errorCode isEqualToString:UNAUTHORIZED]) {
                                        alertTitle = OTLocalizedString(@"tryAgain");
                                        alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");
                                        buttonTitle = OTLocalizedString(@"tryAgain_short");
                                    }
-                                   UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
-                                                                                                  message:alertText
-                                                                                           preferredStyle:UIAlertControllerStyleAlert];
-                                   UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle
-                                                                                           style:UIAlertActionStyleDefault
-                                                                                         handler:^(UIAlertAction * _Nonnull action) {}];
+                                   else if([errorCode isEqualToString:INVALID_PHONE_FORMAT]) {
+                                       alertTitle = OTLocalizedString(@"tryAgain");
+                                       alertText = OTLocalizedString(@"invalidPhoneNumberFormat");
+                                       buttonTitle = OTLocalizedString(@"tryAgain_short");
+                                   }
+                                   UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertText preferredStyle:UIAlertControllerStyleAlert];
+                                   UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
                                    [alert addAction: defaultAction];
                                    [self presentViewController:alert animated:YES completion:nil];
-                                   
+
                                }];
 }
 

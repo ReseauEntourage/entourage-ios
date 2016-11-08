@@ -7,30 +7,20 @@
 //
 
 #import "OTLostCodeViewController.h"
-
 #import "OTConsts.h"
-// Service
 #import "OTAuthService.h"
 #import "IQKeyboardManager.h"
 #import "OTScrollPinBehavior.h"
 #import "UIViewController+menu.h"
-
-// Helper
 #import "NSUserDefaults+OT.h"
 #import "NSString+Validators.h"
 #import "UITextField+indentation.h"
 #import "UINavigationController+entourage.h"
 #import "UIView+entourage.h"
 #import "UIColor+entourage.h"
-
-// Model
 #import "OTUser.h"
-
-// View
 #import "SVProgressHUD.h"
-
-/********************************************************************************/
-#pragma mark - OTLostCodeViewController
+#import "NSError+OTErrorData.h"
 
 @interface OTLostCodeViewController ()
 
@@ -40,9 +30,6 @@
 @end
 
 @implementation OTLostCodeViewController
-
-/********************************************************************************/
-#pragma mark - Lifecycle
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -78,7 +65,14 @@
     }
     failure:^(NSError *error) {
         [SVProgressHUD dismiss];
-        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"requestNotSent") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+        NSString *alertTitle = OTLocalizedString(@"error");
+        NSString *alertMessage = OTLocalizedString(@"requestNotSent");
+        NSString *status = [error readErrorStatus];
+        if ([status isEqualToString:@"404"]) {
+            alertTitle = @"";
+            alertMessage = OTLocalizedString(@"lost_code_phone_does_not_exist");
+        }
+        [[[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
     }];
 }
 

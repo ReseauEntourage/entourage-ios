@@ -19,7 +19,6 @@
 #import "UIScrollView+entourage.h"
 #import "NSString+Validators.h"
 #import "UIBarButtonItem+factory.h"
-#import "NSError+OTErrorData.h"
 #import "UIStoryboard+entourage.h"
 #import "OTOnboardingNavigationBehavior.h"
 
@@ -96,7 +95,7 @@
     NSString *code = self.codeTextField.text;
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     [SVProgressHUD show];
-    
+
     [[OTAuthService new] authWithPhone:phone
                               password:code
                               deviceId:deviceAPNSid

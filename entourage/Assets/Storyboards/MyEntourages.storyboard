@@ -575,11 +575,13 @@
                                         <color key="textColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed item description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJ0-Xs-XFU">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Feed item description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LDp-4W-3dr">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
-                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                                    </textView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YQY-Es-0iZ">
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous êtes invité à rejoindre cet entourage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Cc2-qa-gxH">
@@ -647,14 +649,16 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="0qT-m6-25v" secondAttribute="trailing" constant="15" id="2FI-GX-g4B"/>
-                                    <constraint firstItem="gJ0-Xs-XFU" firstAttribute="trailing" secondItem="0qT-m6-25v" secondAttribute="trailing" id="4RD-Yb-Dqq"/>
+                                    <constraint firstItem="LDp-4W-3dr" firstAttribute="trailing" secondItem="0qT-m6-25v" secondAttribute="trailing" id="2mo-Ad-6KM"/>
                                     <constraint firstItem="Y5V-SI-9ZA" firstAttribute="top" secondItem="m33-Fm-Dfo" secondAttribute="bottom" constant="18" id="FV7-JD-THj"/>
                                     <constraint firstItem="0qT-m6-25v" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hdE-Qs-5qr" secondAttribute="trailing" constant="5" id="GCG-nA-MhM"/>
-                                    <constraint firstItem="YQY-Es-0iZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gJ0-Xs-XFU" secondAttribute="bottom" id="GhM-s6-oct"/>
+                                    <constraint firstItem="LDp-4W-3dr" firstAttribute="top" secondItem="Y5V-SI-9ZA" secondAttribute="bottom" constant="13" id="JdJ-Yd-8m8"/>
+                                    <constraint firstItem="YQY-Es-0iZ" firstAttribute="top" secondItem="LDp-4W-3dr" secondAttribute="bottom" constant="5" id="KI8-Ri-Hg5"/>
                                     <constraint firstItem="0qT-m6-25v" firstAttribute="bottom" secondItem="eLL-UT-mXU" secondAttribute="bottom" constant="17" id="O9B-KH-eb9"/>
                                     <constraint firstItem="Y5V-SI-9ZA" firstAttribute="leading" secondItem="KSx-2b-czt" secondAttribute="leading" id="PUg-8I-IA3"/>
                                     <constraint firstItem="YQY-Es-0iZ" firstAttribute="leading" secondItem="KSx-2b-czt" secondAttribute="leading" id="RAN-wQ-eqH"/>
                                     <constraint firstAttribute="trailing" secondItem="YQY-Es-0iZ" secondAttribute="trailing" id="YPW-KX-Bgg"/>
+                                    <constraint firstItem="LDp-4W-3dr" firstAttribute="leading" secondItem="eLL-UT-mXU" secondAttribute="leading" id="bBI-Oq-qji"/>
                                     <constraint firstItem="0qT-m6-25v" firstAttribute="leading" secondItem="eLL-UT-mXU" secondAttribute="trailing" constant="5" id="cXq-1f-Vue"/>
                                     <constraint firstItem="hdE-Qs-5qr" firstAttribute="leading" secondItem="eLL-UT-mXU" secondAttribute="leading" id="dRb-jG-KGe"/>
                                     <constraint firstItem="hdE-Qs-5qr" firstAttribute="top" secondItem="eLL-UT-mXU" secondAttribute="bottom" id="hSF-ID-UW3"/>
@@ -664,8 +668,6 @@
                                     <constraint firstItem="m33-Fm-Dfo" firstAttribute="leading" secondItem="eLL-UT-mXU" secondAttribute="leading" id="kD6-Qu-VTn"/>
                                     <constraint firstAttribute="trailing" secondItem="Y5V-SI-9ZA" secondAttribute="trailing" id="on4-40-bNM"/>
                                     <constraint firstItem="m33-Fm-Dfo" firstAttribute="top" secondItem="hdE-Qs-5qr" secondAttribute="bottom" constant="9" id="pQM-KH-ZIh"/>
-                                    <constraint firstItem="gJ0-Xs-XFU" firstAttribute="leading" secondItem="eLL-UT-mXU" secondAttribute="leading" id="twL-Q9-v5X"/>
-                                    <constraint firstItem="gJ0-Xs-XFU" firstAttribute="top" secondItem="Y5V-SI-9ZA" secondAttribute="bottom" constant="13" id="u36-Ta-Bk9"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -683,6 +685,7 @@
                         <outlet property="btnIgnore" destination="DdY-Cy-ps4" id="Eov-Cj-QKC"/>
                         <outlet property="invitationChangedBehavior" destination="d2a-SV-Ak8" id="PTK-3k-3Qp"/>
                         <outlet property="summaryProviderBehavior" destination="FYQ-Aj-2fj" id="HRY-Vi-r7y"/>
+                        <outlet property="txtDescription" destination="LDp-4W-3dr" id="DOm-sP-F28"/>
                         <outlet property="userProfileBehavior" destination="dKp-93-TX2" id="3xf-ro-1W5"/>
                         <segue destination="a4v-Jl-77s" kind="modal" identifier="UserProfileSegue" id="Cxg-Wu-Kzs"/>
                     </connections>
@@ -702,9 +705,9 @@
                     <connections>
                         <outlet property="btnAvatar" destination="0qT-m6-25v" id="h8M-Yd-r4X"/>
                         <outlet property="lblDescription" destination="hdE-Qs-5qr" id="CLp-EC-dho"/>
-                        <outlet property="lblFeedItemDescription" destination="gJ0-Xs-XFU" id="sJX-cs-2aH"/>
                         <outlet property="lblTimeDistance" destination="m33-Fm-Dfo" id="shu-oW-euj"/>
                         <outlet property="lblTitle" destination="eLL-UT-mXU" id="u6R-7A-6EQ"/>
+                        <outlet property="txtFeedItemDescription" destination="LDp-4W-3dr" id="cLd-lE-eWE"/>
                     </connections>
                 </customObject>
                 <customObject id="d2a-SV-Ak8" userLabel="Invitation Changed" customClass="OTInvitationChangedBehavior"/>

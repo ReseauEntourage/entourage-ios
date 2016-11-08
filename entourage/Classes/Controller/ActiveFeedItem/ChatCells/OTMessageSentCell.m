@@ -11,6 +11,11 @@
 
 @implementation OTMessageSentCell
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.txtMessage.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+}
+
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
     OTFeedItemMessage *msgData = (OTFeedItemMessage *)timelinePoint;
     self.txtMessage.text = msgData.text;
