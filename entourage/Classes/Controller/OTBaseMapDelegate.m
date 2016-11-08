@@ -49,9 +49,8 @@
     if (!self.mapWasCenteredOnUserLocation) {
         NSArray *locations = [notification readLocations];
         if(locations.count > 0) {
-            [self.mapController zoomToCurrentLocation:nil];
             self.mapWasCenteredOnUserLocation = YES;
-            [self.mapController didChangePosition];
+            [self.mapController zoomToCurrentLocation:nil];
         }
     }
 }

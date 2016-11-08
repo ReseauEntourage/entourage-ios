@@ -7,19 +7,30 @@
 //
 
 #import "OTMembersCellProvider.h"
-#import "OTFeedItemJoiner.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTDataSourceBehavior.h"
-#import "OTMembersCell.h"
+#import "OTBaseInfoCell.h"
+#import "OTFeedItemJoiner.h"
 
 @implementation OTMembersCellProvider
 
 - (UITableViewCell *)getTableViewCellForPath:(NSIndexPath *)indexPath {
-    OTFeedItemJoiner *item = (OTFeedItemJoiner *)[self.tableDataSource getItemAtIndexPath:indexPath];
-    
-    OTMembersCell *cell = (OTMembersCell *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:@"MemberCell"];
+    id item = [self.tableDataSource getItemAtIndexPath:indexPath];
+    NSString *identifier = [self cellIdentifierAtPath:indexPath forItem:item];
+    OTBaseInfoCell *cell = (OTBaseInfoCell *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:identifier];
     [cell configureWith:item];
     return cell;
+}
+
+#pragma mark - private methods
+
+- (NSString *)cellIdentifierAtPath:(NSIndexPath *)indexPath forItem:(id)item {
+    if([item isKindOfClass:[NSString class]])
+        return @"DescriptionCell";
+    else if([item isKindOfClass:[OTFeedItemJoiner class]])
+        return @"MemberCell";
+    else
+        return indexPath.row == 0 ? @"MapCell" : @"MemberCountCell";
 }
 
 @end

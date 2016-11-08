@@ -22,6 +22,8 @@
 #import "OTOngoingTourService.h"
 #import "SVProgressHUD.h"
 #import "OTBadgeNumberService.h"
+#import "OTVersionInfo.h"
+#import "OTDebugLog.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -43,8 +45,14 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"EMA.log"];
     freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
 
-	[Flurry setCrashReportingEnabled:YES];
-	[Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
+    [[OTDebugLog sharedInstance] setConsoleOutput];
+
+#if !DEBUG
+    [Flurry setAppVersion:[OTVersionInfo currentVersion]];
+  	[Flurry setCrashReportingEnabled:YES];
+  	[Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
+#endif
+
     [IQKeyboardManager sharedManager].enable = YES;
     [self configureUIAppearance];
 
@@ -131,7 +139,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     UIApplicationState state = [application applicationState];
-    if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive)
+    if (state == UIApplicationStateActive || state == UIApplicationStateBackground || state == UIApplicationStateInactive)
         [self.pnService handleLocalNotification:userInfo];
     application.applicationIconBadgeNumber = 0;
 }

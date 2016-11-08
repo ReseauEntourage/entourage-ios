@@ -6,19 +6,12 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "OTBehavior.h"
-#include <SpeechKit/SpeechKit.h>
-#import <AudioToolbox/AudioToolbox.h>
-#import <AVFoundation/AVFoundation.h>
-#import "OTSpeechKitManager.h"
+#import "OTSpeechBehaviorBase.h"
 
-@interface OTSpeechBehavior : OTBehavior
+@interface OTSpeechBehavior : OTSpeechBehaviorBase <UITextViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UIButton *btnRecord;
 @property (nonatomic, weak) IBOutlet UITextView *txtOutput;
-@property (nonatomic, strong) SKRecognizer *speechRecognizer;
-@property (nonatomic) BOOL twoState;
-
-- (void)updateRecordButton;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *heightConstraint;
+@property (nonatomic, assign) BOOL autoHeight;
 
 @end

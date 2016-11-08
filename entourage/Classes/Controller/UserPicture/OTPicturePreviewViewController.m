@@ -16,7 +16,6 @@
 #import "OTConsts.h"
 #import "OTAuthService.h"
 #import "NSUserDefaults+OT.h"
-#import "NSError+OTErrorData.h"
 #import "NSUserDefaults+OT.h"
 #import "UIImage+processing.h"
 
@@ -34,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    
+
     self.image = [self.image toSquare];
     [self.imageView setImage:self.image];
     self.scrollView.maximumZoomScale = 10;
@@ -45,11 +44,11 @@
     [SVProgressHUD show];
     UIImage *finalImage = [self cropVisibleArea];
     finalImage = [finalImage resizeTo:CGSizeMake(MaxImageSize, MaxImageSize)];
-    
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"tiny.png"];
     [UIImagePNGRepresentation(finalImage) writeToFile:filePath atomically:YES];
-    
+
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     [[OTPictureUploadService new] uploadPicture:finalImage withSuccess:^(NSString *pictureName) {
         currentUser.avatarKey = pictureName;
@@ -67,7 +66,7 @@
         }
         failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];
-            NSLog(@"ERR: something went wrong on user picture: %@", error.description);
+            NSLog(@"ERR: something went wrong on user picture: %@", error.localizedDescription);
         }];
     } orError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];

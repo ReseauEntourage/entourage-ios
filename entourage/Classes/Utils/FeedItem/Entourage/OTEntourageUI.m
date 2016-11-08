@@ -8,7 +8,7 @@
 
 #import "OTEntourageUI.h"
 #import "OTConsts.h"
-#import "NSDate+ui.h"
+#import "OTLocationManager.h"
 
 @implementation OTEntourageUI
 
@@ -36,19 +36,15 @@
     return OTLocalizedString(@"user_joined_entourage");
 }
 
-- (void)timeDataFor:(UILabel *)label {
+- (double)distance {
     if(!self.entourage.location)
-        return;
+        return -1;
+
+    CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
+    if(!currentLocation)
+        return -1;
     
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:self.entourage.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"error: %@", error.description);
-        }
-        CLPlacemark *placemark = placemarks.firstObject;
-        if (placemark.locality)
-            label.text = [NSString stringWithFormat:OTLocalizedString(@"entourage_time_data"), [self.entourage.creationDate sinceNow], placemark.locality];
-    }];
+    return [currentLocation distanceFromLocation:self.entourage.location];
 }
 
 - (NSString *)displayType {

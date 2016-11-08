@@ -7,7 +7,10 @@
 //
 
 #import "OTTableDataSourceBehavior.h"
+#import "OTUserProfileBehavior.h"
 
 @interface OTMembersTableDataSource : OTTableDataSourceBehavior
+
+@property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 
 @end

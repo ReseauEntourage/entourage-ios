@@ -84,7 +84,6 @@
     }];
 }
 
-
 - (void)updateValue:(OTFeedItemFilter *)filter {
     switch (filter.key) {
         case FeedItemFilterKeyMedical:
@@ -144,6 +143,20 @@
     if(self.showContribution)
         [types addObject:ENTOURAGE_CONTRIBUTION];
     return [types componentsJoinedByString:@","];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    OTNewsFeedsFilter *copy = [OTNewsFeedsFilter new];
+    copy.showMedical = self.showMedical;
+    copy.showSocial = self.showSocial;
+    copy.showDistributive = self.showDistributive;
+    copy.showDemand = self.showDemand;
+    copy.showContribution = self.showContribution;
+    copy.showTours = self.showTours;
+    copy.showOnlyMyEntourages = self.showOnlyMyEntourages;
+    copy.timeframeInHours = self.timeframeInHours;
+    copy.location = CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude);
+    return copy;
 }
 
 @end

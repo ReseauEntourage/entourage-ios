@@ -15,34 +15,43 @@ static char kAssociatedObjectKey;
 
 @implementation OTOverlayFeederBehavior
 
-- (void)addOverlays:(NSArray *)items {
-    [self addOverlaysToMap:items];
-}
-
 - (void)updateOverlays:(NSArray *)items {
-    if(self.mapView && self.mapView.overlays)
-        [self.mapView removeOverlays:self.mapView.overlays];
-    [self addOverlaysToMap:items];
+    @synchronized (self) {
+        @try {
+            [self.mapView removeOverlays:self.mapView.overlays];
+        } @catch (NSException *exception) {
+            [Flurry logEvent:@"CLEAR_OVERLAY_ERROR"];
+        } @finally {
+            [self addOverlaysToMap:items];
+        }
+    }
 }
 
 - (void)updateOverlayFor:(OTFeedItem *)item {
-    id<MKOverlay> newOverlay = [[[OTFeedItemFactory createFor:item] getMapHandler] newsFeedOverlayData];
-    if(!newOverlay)
-        return;
-    objc_setAssociatedObject(newOverlay, &kAssociatedObjectKey, item, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    id<MKOverlay> foundOverlay = nil;
-    for(id<MKOverlay> overlay in self.mapView.overlays) {
-        if([overlay isKindOfClass:[MKCircle class]])
-            continue;
-        id object = objc_getAssociatedObject(overlay, &kAssociatedObjectKey);
-        if([object isEqual:item]) {
-            foundOverlay = overlay;
-            break;
+    @synchronized (self) {
+        id<MKOverlay> newOverlay = [[[OTFeedItemFactory createFor:item] getMapHandler] newsFeedOverlayData];
+        if(!newOverlay)
+            return;
+        objc_setAssociatedObject(newOverlay, &kAssociatedObjectKey, item, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        id<MKOverlay> foundOverlay = nil;
+        for(id<MKOverlay> overlay in self.mapView.overlays) {
+            if([overlay isKindOfClass:[MKCircle class]])
+                continue;
+            id object = objc_getAssociatedObject(overlay, &kAssociatedObjectKey);
+            if([object isEqual:item]) {
+                foundOverlay = overlay;
+                break;
+            }
+        }
+        @try {
+            if(foundOverlay)
+                [self.mapView removeOverlay:foundOverlay];
+        } @catch (NSException *exception) {
+            [Flurry logEvent:@"CLEAR_OVERLAY_ERROR"];
+        } @finally {
+            [self.mapView addOverlay:newOverlay];
         }
     }
-    if(foundOverlay)
-       [self.mapView removeOverlay:foundOverlay];
-    [self.mapView addOverlay:newOverlay];
 }
 
 #pragma mark - MKMapViewDelegate
@@ -54,6 +63,10 @@ static char kAssociatedObjectKey;
         return [[[OTFeedItemFactory createFor:item] getMapHandler] newsFeedOverlayRenderer:overlay];
     }
     return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    // Sergiu 30.10.2016 : It seems forward invocation does not work on other delegates if this is not present in all of them (don't know why yet)
 }
 
 #pragma mark - private methods

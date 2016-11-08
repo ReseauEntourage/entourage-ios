@@ -53,7 +53,7 @@
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     CLLocationDistance distance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(_currentMapCenter), MKMapPointForCoordinate(mapView.centerCoordinate))) / 1000.0f;
     if (distance > [self mapHeight:mapView]) {
-        [self.mapController getData];
+        [self.mapController reloadPois];
         self.currentMapCenter = mapView.centerCoordinate;
     }
 }

@@ -33,6 +33,7 @@
 "joiningEntouragesMessage" = "Invitations en cours";
 "acceptJoinFailed" = "Impossible d’accepter l’invitation.";
 "ignoreJoinFailed" = "Impossible de refuser l’invitation.";
+"phoneAlreadyExits" = "Ce téléphone n'est pas disponible";
 
 // MenuItems
 "menu_amis" = "Amis";
@@ -59,7 +60,7 @@
 "about_rateus" = "Notez-nous dans l’App Store";
 "about_facebook" = "Aimer notre page Facebook";
 "about_cgu" = "Conditions générales d’utilisation";
-"about_website" = "Entourage.social";
+"about_website" = "Site web d'Entourage";
 "about_email" = "Contactez Entourage";
 "about_email_notavailable" = "Email introuvable";
 
@@ -93,6 +94,8 @@
 "tour_type_display_social" = "sociale";
 "tour_type_display_medical" = "médicale";
 "tour_type_display_distributive" = "distributive";
+"failed_tour_start_no_location" = "Impossible de démarrer la maraude : aucune position détectée.";
+"failed_send_tour_points_to_server" = "Impossible d’envoyer les données de la maraude au serveur. Veuillez réessayer plus tard.";
 
 "tour_status_closed" = "closed";
 "tour_create_sending" = "Création de la maraude";
@@ -117,11 +120,19 @@
 "tour_quitted" = "Maraude clôturée.";
 
 // Encounters
+
+
 "formatter_has_meet" = "%@ a rencontré %@";
 "has_encountered" = "a rencontré";
 "here" = "ici";
 "their_message" = "Notes";
-"entourageTitle" = "Titre de votre %@*";
+"edit_demand_title" = "Paire de gants pour Gilles";
+"edit_contribution_title" = "Titre de votre contribution*";
+"edit_entourage_title" = "Titre de votre %@*";
+"edit_demand_desc" = "Gilles passe la journée dehors la main tendue. Avec ce froid, il a les doigts tout engourdis. Qui aurait une paire de gants à donner ?
+(Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes)";
+"edit_contribution_desc" = "Je suis ancien employé de mairie et je peux aider dans des démarches administratives.
+(Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes.)";
 "invalidTitle" = "Titre invalide";
 "demande" = "Demande";
 "ask_for_help" = "Demande";
@@ -160,9 +171,9 @@
 "item_option_close" = "Arrêter";
 "item_option_freeze" = "Clôturer";
 "item_option_quit" = "Quitter";
-"tour_time_data" = "%@ - à %@ m";
-"entourage_time_data" = "%@ - %@";
+"entourage_time_data" = "%@ - à %d%@";
 "member_count" = "Membres (%d)";
+"item_closed" = "Clôturé";
 
 // Tutorial
 "emailNotSent" = "Echec de la mise à jour de l'email";
@@ -179,6 +190,7 @@
 "firstName" = "Prénom";
 "lastName" = "Nom";
 "profile" = "profil";
+"view_profile" = "Voir Profil";
 "save" = "Enregistrer";
 "invalidEmail" = "Email invalide";
 "invalidFirstName" = "Prénom invalide";
@@ -187,6 +199,7 @@
 "invalidPhoneNumber" = "Numéro de téléphone invalide";
 "invalidPhoneNumberOrCode" = "Le numéro de téléphone et ce code d’accès ne correspondent pas.";
 "mustAddCode" = "Veuillez renseigner un code de vérification";
+"invalidPhoneNumberFormat" = "Votre téléphone doit être au format +33, 06 ou 07...";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
 "close" = "Fermer";
@@ -209,6 +222,10 @@
 "user_profile_error" = "Erreur lors de la récupération du profil";
 "user_edit_email" = "E-mail";
 "user_edit_quartier" = "Quartier";
+"profile" = "Profil";
+"lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit: créez un compte
+
+Membres d'une association utilisatrice d'Entourage, contactez associations@entourage.social";
 
 // Filter
 "filter_maraudes_title" = "Types de maraude";
@@ -279,3 +296,6 @@
 
 // User profile
 "user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";
+
+"no_feeds_received" = "Aucun entourage près de cette position";
+"no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";

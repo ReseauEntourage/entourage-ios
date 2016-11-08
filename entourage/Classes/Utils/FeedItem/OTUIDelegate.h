@@ -19,6 +19,6 @@
 - (NSString *)feedItemDescription;
 - (NSString *)navigationTitle;
 - (NSString *)joinAcceptedText;
-- (void)timeDataFor:(UILabel *)label;
+- (double)distance;
 
 @end

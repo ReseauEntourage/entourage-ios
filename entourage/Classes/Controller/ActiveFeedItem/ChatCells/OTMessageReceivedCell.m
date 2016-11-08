@@ -13,6 +13,11 @@
 
 @implementation OTMessageReceivedCell
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.txtMessage.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+}
+
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
     OTFeedItemMessage *msgData = (OTFeedItemMessage *)timelinePoint;
     self.lblUserName.text = msgData.userName;

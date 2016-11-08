@@ -19,14 +19,13 @@
 @interface OTMainViewController : UIViewController <OTMeetingCalloutViewControllerDelegate, OTCreateMeetingViewControllerDelegate, OTConfirmationViewControllerDelegate>
 
 // tour properties
-@property NSString *currentTourType;
-@property (nonatomic, strong) OTTour *tour;
 @property (nonatomic, strong) OTFeedItem *selectedFeedItem;
 
 
 - (void)zoomToCurrentLocation:(id)sender;
 - (void)didChangePosition;
-- (void)getData;
+- (void)reloadPois;
+- (void)reloadFeeds;
 
 - (void)displayEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view;
 - (void)displayPoiDetails:(MKAnnotationView *)view;

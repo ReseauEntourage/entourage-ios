@@ -16,7 +16,11 @@
 #import "OTUser.h"
 #import "OTAmazonConsts.h"
 
+#if DEBUG
+#define PICTURE_FOLDER_PREFIX @"staging/300x300/"
+#else
 #define PICTURE_FOLDER_PREFIX @"300x300/"
+#endif
 #define PICTURE_BUCKET @"entourage-avatars-production-thumb"
 
 @implementation OTPictureUploadService
