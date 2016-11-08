@@ -58,6 +58,7 @@
 #pragma mark - state transitions
 
 - (void)doStopFeedItem {
+    [Flurry logEvent:@"StopEntourageConfirm"];
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] stopWithSuccess:^() {
         [SVProgressHUD dismiss];
@@ -71,6 +72,7 @@
 }
 
 - (void)doCloseFeedItem {
+    [Flurry logEvent:@"CloseEntourageConfirm"];
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
         [SVProgressHUD dismiss];
@@ -84,6 +86,7 @@
 }
 
 - (void)doQuitFeedItem {
+    [Flurry logEvent:@"ExitEntourageConfirm"];
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [SVProgressHUD dismiss];

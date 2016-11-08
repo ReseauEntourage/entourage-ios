@@ -105,9 +105,11 @@
     [[OTBadgeNumberService sharedInstance] updateItem:pnData.joinableId];
     OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
     UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [Flurry logEvent:@"RejectJoinRequest"];
             [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] reject:joiner success:nil failure:nil];
     }];
     UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [Flurry logEvent:@"AcceptJoinRequest"];
             [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] accept:joiner success:nil failure:nil];
     }];
     [self displayAlertWithActions:@[refuseJoinRequestAction, acceptJoinRequestAction] forPushData:pnData];

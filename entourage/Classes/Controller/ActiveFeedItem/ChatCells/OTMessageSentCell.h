@@ -10,6 +10,6 @@
 
 @interface OTMessageSentCell : OTChatCellBase
 
-@property (nonatomic, weak) IBOutlet UILabel *lblMessage;
+@property (nonatomic, weak) IBOutlet UITextView *txtMessage;
 
 @end

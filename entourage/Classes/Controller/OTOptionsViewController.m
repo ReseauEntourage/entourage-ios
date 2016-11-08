@@ -97,24 +97,28 @@
 #pragma mark - Actions
 
 - (IBAction)doCreateTour:(id)sender {
+    [Flurry logEvent:@"TourCreateClick"];
     if ([self.optionsDelegate respondsToSelector:@selector(createTour)]) {
         [self.optionsDelegate performSelector:@selector(createTour) withObject:nil];
     }
 }
 
 - (IBAction)doCreateEncounter:(id)sender {
+    [Flurry logEvent:@"CreateEncounterClick"];
     if ([self.optionsDelegate respondsToSelector:@selector(createEncounter)]) {
         [self.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
     }
 }
 
 - (IBAction)doCreateDemande:(id)sender {
+    [Flurry logEvent:@"AskCreateClick"];
     if ([self.optionsDelegate respondsToSelector:@selector(createDemande)]) {
         [self.optionsDelegate performSelector:@selector(createDemande) withObject:nil];
     }
 }
 
 - (IBAction)doCreateContribution:(id)sender {
+    [Flurry logEvent:@"OfferCreateClick"];
     if ([self.optionsDelegate respondsToSelector:@selector(createContribution)]) {
         [self.optionsDelegate performSelector:@selector(createContribution) withObject:nil];
     }

@@ -54,10 +54,27 @@
 - (IBAction)typeButtonDidTap:(UIView *)sender {
     for (UIButton *button in self.typeButtons) {
         button.selected = (button == sender);
+        if(button.selected) {
+            NSInteger selectedType = button.tag;
+            NSString *message = @"";
+            switch (selectedType) {
+                case OTTypesBareHands:
+                    message = @"SocialTourChoose";
+                    break;
+                case OTTypesMedical:
+                    message = @"MedicalTourChoose";
+                    break;
+                case OTTypesAlimentary:
+                    message = @"DistributionTourChoose";
+                    break;
+            }
+            [Flurry logEvent:message];
+        }
     }
 }
 
 - (IBAction)createTour:(id)sender {
+    [Flurry logEvent:@"StartTourClick"];
     NSString *tourType = [self selectedTourType];
     if ([self.tourCreatorDelegate respondsToSelector:@selector(createTour:)]) {
         [self.tourCreatorDelegate createTour:tourType];

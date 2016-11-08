@@ -87,6 +87,7 @@
 #pragma mark - Actions
 
 - (IBAction)resumeTour:(id)sender {
+    [Flurry logEvent:@"TourRestart"];
     if ([self.delegate respondsToSelector:@selector(resumeTour)]) {
         [self.delegate resumeTour];
     }
@@ -94,6 +95,7 @@
 }
 
 - (IBAction)finishTour:(id)sender {
+    [Flurry logEvent:@"TourStop"];
     [SVProgressHUD show];
     [self closeTour];
 }

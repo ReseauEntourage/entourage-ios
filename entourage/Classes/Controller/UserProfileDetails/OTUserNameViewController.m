@@ -18,7 +18,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
 #import "OTUserPictureViewController.h"
-#import "NSError+message.h"
+#import "NSError+OTErrorData.h"
 #import "OTOnboardingNavigationBehavior.h"
 #import "OTScrollPinBehavior.h"
 
@@ -63,6 +63,7 @@
 }
 
 - (IBAction)doContinue {
+    [Flurry logEvent:@"NameSubmit"];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     currentUser.firstName = self.firstNameTextField.text;
     currentUser.lastName = self.lastNameTextField.text;
@@ -74,9 +75,13 @@
         [SVProgressHUD dismiss];
         [self.onboardingNavigation nextFromName];
     } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         NSLog(@"ERR: something went wrong on onboarding user name: %@", error.description);
     }];
+}
+
+- (IBAction)textChanged:(id)sender {
+    [Flurry logEvent:@"NameType"];
 }
 
 @end

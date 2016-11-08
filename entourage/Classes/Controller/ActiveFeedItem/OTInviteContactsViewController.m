@@ -8,18 +8,19 @@
 
 #import "OTInviteContactsViewController.h"
 #import "SVProgressHUD.h"
-#import "OTAddressBookItem.h"
+#import "OTAddressBookPhone.h"
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"
 #import "UIColor+entourage.h"
 #import "OTFeedItemFactory.h"
 #import "NSString+Validators.h"
-#import "OTDataSourceBehavior.h"
+#import "OTContactsFilteredDataSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
+#import "OTContactPhoneCell.h"
 
 @interface OTInviteContactsViewController () <UITableViewDelegate>
 
-@property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
+@property (nonatomic, weak) IBOutlet OTContactsFilteredDataSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 @property (weak, nonatomic) IBOutlet UITableView *tblContacts;
 @property (nonatomic, strong) UIBarButtonItem *btnSave;
@@ -48,24 +49,24 @@
 #pragma mark - Contacts table view delegate implementation
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    OTAddressBookItem *item = [self.tableDataSource getItemAtIndexPath:indexPath];
-    item.selected = !item.selected;
-    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    if(item.selected)
-        [self.btnSave changeEnabled:YES];
-    else
-        [self checkIfDisable];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if([cell isKindOfClass:[OTContactPhoneCell class]]) {
+        OTAddressBookPhone *item = [self.tableDataSource getItemAtIndexPath:indexPath];
+        item.selected = !item.selected;
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        if(item.selected)
+            [self.btnSave changeEnabled:YES];
+        else
+            [self checkIfDisable];
+    }
 }
 
 #pragma mark - private members
 
 - (void)save {
     [SVProgressHUD show];
-    NSArray *selectedItems = [self selectedItems];
-    NSMutableArray *phones = [NSMutableArray new];
-    for(OTAddressBookItem *item in selectedItems)
-        [phones addObject:item.telephone];
-    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] invitePhones:phones withSuccess:^() {
+    NSArray *selectedPhones = [self selectedItems];
+    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] invitePhones:selectedPhones withSuccess:^() {
         [SVProgressHUD dismiss];
         [self.navigationController popViewControllerAnimated:YES];
         if(self.delegate)
@@ -83,7 +84,15 @@
 }
 
 - (NSArray *)selectedItems {
-    return [self.dataSource.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(selected == YES)"]];
+    NSMutableArray *result = [NSMutableArray new];
+    for(id item in self.dataSource.items) {
+        if(![item isKindOfClass:[OTAddressBookPhone class]])
+            continue;
+        OTAddressBookPhone *phone = (OTAddressBookPhone *)item;
+        if(phone.selected)
+            [result addObject:phone.telephone];
+    }
+    return result;
 }
 
 @end

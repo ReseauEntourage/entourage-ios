@@ -8,14 +8,9 @@
 
 #import "OTAppDelegate.h"
 #import "OTConsts.h"
-
-// Pods
+#import "OTJSONResponseSerializer.h"
 #import "SimpleKeychain.h"
-
-// Manager
 #import "OTRequestOperationManager.h"
-
-// Service
 #import "OTAuthService.h"
 
 @implementation OTRequestOperationManager
@@ -25,23 +20,17 @@
         andSuccess:(void (^)(id responseObject))success
         andFailure:(void (^)(NSError *error))failure
 {
-    [self GET:url parameters:parameters
-    success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-    {
-        if (success) {
+    [self GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull sessionDataTask, id  _Nonnull responseObject) {
+        if (success)
             success(responseObject);
-        }
-    }
-    failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
-    {
-        if ([operation.response statusCode] == 401) {
+    } failure:^(NSURLSessionDataTask * _Nonnull sessionDataTask, NSError * _Nonnull error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)sessionDataTask.response;
+        if ([httpResponse statusCode] == 401)
             [self askForNewTokenWithMethod:@"GET" andUrl:url andParameters:parameters andSuccess:success andFailure:failure];
-        }
         else {
-            NSError *actualError = [self errorFromOperation:operation andError:error];
-            if (failure) {
+            NSError *actualError = [self errorFromTask:sessionDataTask andError:error];
+            if (failure)
                 failure(actualError);
-            }
         }
     }];
 }
@@ -51,20 +40,21 @@
          andSuccess:(void (^)(id responseObject))success
          andFailure:(void (^)(NSError *error))failure
 {
-    [self   POST:url
-            parameters:parameters
-            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [self POST:url
+    parameters:parameters progress:nil
+            success:^(NSURLSessionDataTask * _Nonnull sessionDataTask, id  _Nonnull responseObject) {
                 if (success) {
                     success(responseObject);
                 }
             }
-            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                if ([operation.response statusCode] == 401) {
+            failure:^(NSURLSessionDataTask * _Nonnull sessionDataTask, NSError * _Nonnull error) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)sessionDataTask.response;
+                if ([httpResponse statusCode] == 401) {
                     if (![url isEqualToString:kAPILogin]) {
                         [self askForNewTokenWithMethod:@"POST" andUrl:url andParameters:parameters andSuccess:success andFailure:failure];
                     }
                     else {
-                        NSError *actualError = [self errorFromOperation:operation andError:error];
+                        NSError *actualError = [self errorFromTask:sessionDataTask andError:error];
                         if (failure) {
                             failure(actualError);
                         }
@@ -72,7 +62,7 @@
                     
                 }
                 else {
-                    NSError *actualError = [self errorFromOperation:operation andError:error];
+                    NSError *actualError = [self errorFromTask:sessionDataTask andError:error];
                     if (failure) {
                         failure(actualError);
                     }
@@ -87,19 +77,20 @@
 {
     [self PUT:url
    parameters:parameters
-      success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+      success:^(NSURLSessionDataTask * _Nonnull sessionDataTask, id  _Nonnull responseObject)
         {
             if (success) {
                 success(responseObject);
             }
         }
-      failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+      failure:^(NSURLSessionDataTask * _Nonnull sessionDataTask, NSError * _Nonnull error)
         {
-            if ([operation.response statusCode] == 401) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)sessionDataTask.response;
+            if ([httpResponse statusCode] == 401) {
                 [self askForNewTokenWithMethod:@"PUT" andUrl:url andParameters:parameters andSuccess:success andFailure:failure];
             }
             else {
-                NSError *actualError = [self errorFromOperation:operation andError:error];
+                NSError *actualError = [self errorFromTask:sessionDataTask andError:error];
                 if (failure) {
                     failure(actualError);
                 }
@@ -113,19 +104,20 @@
           andFailure:(void (^)(NSError *error))failure
 {
     [self PATCH:url parameters:parameters
-    success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    success:^(NSURLSessionDataTask * _Nonnull sessionDataTask, id  _Nonnull responseObject)
     {
         if (success) {
             success(responseObject);
         }
     }
-    failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+    failure:^(NSURLSessionDataTask * _Nonnull sessionDataTask, NSError * _Nonnull error)
     {
-        if ([operation.response statusCode] == 401) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)sessionDataTask.response;
+        if ([httpResponse statusCode] == 401) {
             [self askForNewTokenWithMethod:@"PATCH" andUrl:url andParameters:parameters andSuccess:success andFailure:failure];
         }
         else {
-            NSError *actualError = [self errorFromOperation:operation andError:error];
+            NSError *actualError = [self errorFromTask:sessionDataTask andError:error];
             if (failure) {
                 failure(actualError);
             }
@@ -140,19 +132,20 @@
 {
     [self DELETE:url
       parameters:parameters
-        success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+        success:^(NSURLSessionDataTask * _Nonnull sessionDataTask, id  _Nonnull responseObject)
          {
              if (success) {
                  success(responseObject);
              }
          }
-        failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+        failure:^(NSURLSessionDataTask * _Nonnull sessionDataTask, NSError * _Nonnull error)
          {
-             if ([operation.response statusCode] == 401) {
+             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)sessionDataTask.response;
+             if ([httpResponse statusCode] == 401) {
                  [self askForNewTokenWithMethod:@"DELETE" andUrl:url andParameters:parameters andSuccess:success andFailure:failure];
              }
              else {
-                 NSError *actualError = [self errorFromOperation:operation andError:error];
+                 NSError *actualError = [self errorFromTask:sessionDataTask andError:error];
                  if (failure) {
                      failure(actualError);
                  }
@@ -198,26 +191,36 @@
     }
 }
 
-- (NSError *)errorFromOperation:(AFHTTPRequestOperation *)operation andError:(NSError *)error {
+- (NSError *)errorFromTask:(NSURLSessionDataTask *)sessionDataTask andError:(NSError *)error {
     NSError *actualError = error;
     @synchronized (actualError) {
-        if ([operation responseString]) {
-            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[[operation responseString] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
-            if ([jsonObject isKindOfClass:[NSDictionary class]] && [jsonObject objectForKey:@"error"]) {
+        NSError *mappedError = nil;
+        NSString *responseString = error.userInfo[JSONResponseSerializerFullKey];
+        if (responseString.length > 0) {
+            NSError *parseError = nil;
+            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&parseError];
+            if(!parseError) {
                 NSString *errorString = @"";
                 id errorValue = [jsonObject objectForKey:@"error"];
                 if ([errorValue isKindOfClass:[NSDictionary class]] && [errorValue objectForKey:@"message"])
                     errorString = [errorValue objectForKey:@"message"];
                 else
                     errorString = errorValue;
-                actualError = [NSError errorWithDomain:error.domain code:error.code userInfo:@{ NSLocalizedDescriptionKey:errorString }];
+                if([errorString isKindOfClass:[NSArray class]]) {
+                    NSArray *errorArray = (NSArray *)errorString;
+                    errorString = errorArray.count > 0 ? errorArray[0] : OTLocalizedString(@"generic_error");
+                }
+                NSDictionary *copy = [actualError.userInfo mutableCopy];
+                [copy setValue:errorString forKey:NSLocalizedDescriptionKey];
+                [copy setValue:jsonObject forKey:JSONResponseSerializerFullDictKey];
+                mappedError = [NSError errorWithDomain:actualError.domain code:actualError.code userInfo:[copy copy]];
             }
         }
-        else {
+        if(!mappedError) {
             NSString *genericErrorMessage = OTLocalizedString(@"generic_error");
-            actualError = [NSError errorWithDomain:error.domain code:error.code userInfo:@{ NSLocalizedDescriptionKey:genericErrorMessage }];
+            mappedError = [NSError errorWithDomain:actualError.domain code:actualError.code userInfo:@{ NSLocalizedDescriptionKey:genericErrorMessage, JSONResponseSerializerFullDictKey: @{}}];
         }
-        return actualError;
+        return mappedError;
     }
 }
 

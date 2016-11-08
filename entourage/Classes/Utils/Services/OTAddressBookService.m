@@ -8,6 +8,7 @@
 
 #import "OTAddressBookService.h"
 #import "OTAddressBookItem.h"
+#import "OTAddressBookPhone.h"
 #import "NSString+Validators.h"
 @import AddressBook;
 
@@ -50,37 +51,40 @@
 
 - (OTAddressBookItem *)mapRecordToItem:(ABRecordRef)record {
     OTAddressBookItem *addressBookItem = [OTAddressBookItem new];
+    addressBookItem.phoneNumbers = [self readPhones:record];
+    if(addressBookItem.phoneNumbers.count == 0)
+        return nil;
     addressBookItem.fullName = [self readFullName:record];
-    addressBookItem.telephone = [self readPhone:record];
-    if(!addressBookItem.fullName || !addressBookItem.telephone)
+    if(!addressBookItem.fullName || addressBookItem.fullName.length == 0)
         return nil;
     return addressBookItem;
 }
 
 - (NSString *)readFullName:(ABRecordRef)record {
     NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(record, kABPersonFirstNameProperty);
-    if(!firstName || [firstName isEqualToString:@""])
+    if(!firstName || firstName.length == 0)
         return nil;
     NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(record, kABPersonLastNameProperty);
-    if(!lastName || [lastName isEqualToString:@""])
+    if(!lastName || lastName.length == 0)
         return nil;
     return [NSString stringWithFormat:@"%@ %@", firstName, lastName];
 }
 
-- (NSString *)readPhone:(ABRecordRef)record {
-    NSString *phone = @"";
+- (NSArray *)readPhones:(ABRecordRef)record {
+    NSMutableArray *result = [NSMutableArray new];
     ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(record, kABPersonPhoneProperty));
     NSString *readPhone = nil;
     for(CFIndex phoneIndex = 0; phoneIndex < ABMultiValueGetCount(phones); phoneIndex++) {
-        NSString *mobileLabel = (__bridge NSString*)ABMultiValueCopyLabelAtIndex(phones, phoneIndex);
+#warning Sergiu : check if this should be kept after i see the design
+        //NSString *mobileLabel = (__bridge NSString*)ABMultiValueCopyLabelAtIndex(phones, phoneIndex);
         readPhone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, phoneIndex);
         if(![readPhone isValidPhoneNumber])
             continue;
-        phone = readPhone;
-        if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
-            break;
+        OTAddressBookPhone *phoneItem = [OTAddressBookPhone new];
+        phoneItem.telephone = readPhone;
+        [result addObject:phoneItem];
     }
-    return phone;
+    return result;
 }
 
 @end

@@ -80,10 +80,12 @@
 }
 
 - (void)showFilters {
+    [Flurry logEvent:@"FeedFiltersPress"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowFilters object:nil];
 }
 
 - (void)showCurrentLocation {
+    [Flurry logEvent:@"RecenterMapClick"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowCurrentLocation object:nil];
 }
 

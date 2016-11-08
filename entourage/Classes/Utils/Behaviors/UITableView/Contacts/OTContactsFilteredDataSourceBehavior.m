@@ -12,13 +12,22 @@
 #import "SVProgressHUD.h"
 #import "OTAddressBookService.h"
 
+@interface OTContactsFilteredDataSourceBehavior ()
+
+@property (nonatomic, strong) NSMutableArray* items;
+- (void)updateWithExpand:(NSArray *)colapsedItems;
+
+@end
+
 @implementation OTContactsFilteredDataSourceBehavior
+
+@synthesize items;
 
 - (void)filterItemsByString:(NSString *)searchString {
     if([searchString length] == 0)
-        [self updateItems:self.allItems];
+        [self updateWithExpand:self.allItems];
     else
-        [self updateItems:[self.allItems filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(OTAddressBookItem *item, NSDictionary * bndings) {
+        [self updateWithExpand:[self.allItems filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(OTAddressBookItem *item, NSDictionary * bndings) {
             NSRange rangeValue = [item.fullName rangeOfString:searchString options:NSCaseInsensitiveSearch];
             BOOL contains = rangeValue.length > 0;
             return contains;
@@ -26,15 +35,21 @@
     [self.tableDataSource refresh];
 }
 
-- (void)updateItems:(NSArray *)items {
-    [super updateItems:items];
+- (void)updateWithExpand:(NSArray *)colapsedItems {
+    [super updateItems:colapsedItems];
+    NSMutableArray *expandedItems = [NSMutableArray new];
+    for(OTAddressBookItem *item in colapsedItems) {
+        [expandedItems addObject:item];
+        [expandedItems addObjectsFromArray:item.phoneNumbers];
+    }
+    self.items = expandedItems;
     [self.tableDataSource refresh];
 }
 
 - (void)loadData {
     [SVProgressHUD show];
     [[OTAddressBookService new] readWithResultBlock:^(NSArray *results) {
-        [self updateItems:results];
+        [self updateWithExpand:results];
         [self.tableView reloadData];
         [SVProgressHUD dismiss];
     }];

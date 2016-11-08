@@ -294,6 +294,7 @@
         if (distance <=  MAX_DISTANCE) {
             encounterFromTap = YES;
             self.encounterLocation = whereTap;
+            [Flurry logEvent:@"HiddenButtonsOverlayPress"];
             [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
         } else {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
@@ -327,6 +328,7 @@
 }
 
 - (void)showEntourages {
+    [Flurry logEvent:@"GoToMessages"];
     [self performSegueWithIdentifier:@"MyEntouragesSegue" sender:self];
 }
 
@@ -535,9 +537,7 @@ static BOOL didGetAnyData = NO;
     if([view.annotation isKindOfClass:[OTCustomAnnotation class]])
         annotation = (OTCustomAnnotation *)view.annotation;
     if (annotation == nil) return;
-    
-    [Flurry logEvent:@"Open_POI_From_Map" withParameters:@{ @"poi_id" : annotation.poi.sid }];
-    
+    [Flurry logEvent:@"POIView"];
     [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation];
 }
 
@@ -625,9 +625,11 @@ static BOOL didGetAnyData = NO;
 /********************************************************************************/
 #pragma mark - FEED ITEMS
 
-static bool isShowingOptions = NO;
 - (IBAction)doShowLaunchingOptions:(UIButton *)sender {
-    isShowingOptions = !isShowingOptions;
+    NSString *eventName = @"PlusOnTourClick";
+    if(![OTOngoingTourService sharedInstance].isOngoing)
+        eventName = self.toursMapDelegate.isActive ? @"PlusFromFeedClick" : @"PlusFromGDSClick";
+    [Flurry logEvent:eventName];
     [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
 }
 
@@ -727,10 +729,9 @@ static bool isShowingOptions = NO;
 }
 
 - (IBAction)stopTour:(id)sender {
-    if (self.pointsToSend.count) {
+    [Flurry logEvent:@"SuspendTourClick"];
+    if (self.pointsToSend.count)
         [self sendTourPoints:self.pointsToSend];
-    }
-    
     [UIView animateWithDuration:0.5 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
@@ -740,7 +741,6 @@ static bool isShowingOptions = NO;
         self.createEncounterButton.hidden = YES;
         self.mapSegmentedControl.hidden = YES;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-        
     }];
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotEndFilename];
@@ -794,10 +794,13 @@ static bool isShowingOptions = NO;
 
 - (void)handleTap:(UITapGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateEnded) {
-        if([self.tapEntourage hasTappedEntourage:sender])
+        if([self.tapEntourage hasTappedEntourage:sender]) {
+            [Flurry logEvent:@"HeatzoneMapClick"];
             [self showToursList];
-        else
+        } else {
+            [Flurry logEvent:@"MapClick"];
             [self showToursMap];
+        }
     }
 }
 
@@ -863,14 +866,18 @@ static bool isShowingOptions = NO;
 }
 
 - (void)togglePOI {
-    [self dismissViewControllerAnimated:NO
-                             completion:^{
-                                 if (self.toursMapDelegate.isActive) {
-                                     [self switchToGuide];
-                                 } else {
-                                     [self switchToNewsfeed];
-                                 }
-                             }];
+    NSString *message = @"";
+    if([OTOngoingTourService sharedInstance].isOngoing)
+        message = self.toursMapDelegate.isActive ? @"OnTourShowGuide" : @"OnTourHideGuide";
+    else
+        message = self.toursMapDelegate.isActive ? @"GDSViewClick" : @"MaskGDSClick";
+    [Flurry logEvent:message];
+    [self dismissViewControllerAnimated:NO completion:^{
+        if (self.toursMapDelegate.isActive)
+            [self switchToGuide];
+        else
+            [self switchToNewsfeed];
+    }];
 }
 
 - (void)dismissOptions {
@@ -930,6 +937,7 @@ static bool isShowingOptions = NO;
 }
 
 - (IBAction)doShowNewFeedItems:(UIButton*)sender {
+    [Flurry logEvent:@"ScrollListPage"];
     self.nouveauxFeedItemsButton.hidden = YES;
     [self.tableView reloadData];
     [self.tableView setContentOffset:CGPointZero animated:YES];
@@ -943,16 +951,22 @@ static bool isShowingOptions = NO;
 #pragma mark - Feeds Table View Delegate
 
 - (void)loadMoreData {
+    [Flurry logEvent:@"RefreshListPage"];
     self.currentPagination.beforeDate = ((OTFeedItem*)self.feeds.lastObject).creationDate;
     [self getData];
 }
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;
-    if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic])
+    
+    if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
+        [Flurry logEvent:@"OpenEntouragePublicPage"];
         [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
-    else
+    }
+    else {
+        [Flurry logEvent:@"OpenEntourageActivePage"];
         [self performSegueWithIdentifier:@"ActiveFeedItemDetailsSegue" sender:self];
+    }
 }
 
 - (void)showUserProfile:(NSNumber*)userId {
@@ -972,7 +986,11 @@ static bool isShowingOptions = NO;
     FeedItemState currentState = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] getState];
     switch (currentState) {
         case FeedItemStateJoinNotRequested:
+            [Flurry logEvent:@"OpenEnterInContact"];
             [self sendJoinRequest:feedItem];
+            break;
+        case FeedItemStateJoinPending:
+            [Flurry logEvent:@"PendingRequestOverlay"];
             break;
         case FeedItemStateOngoing:
             self.tour = (OTTour *)feedItem;
@@ -982,6 +1000,7 @@ static bool isShowingOptions = NO;
         case FeedItemStateJoinAccepted:
         case FeedItemStateOpen:
         case FeedItemStateClosed:
+            [Flurry logEvent:@"OpenActiveCloseOverlay"];
             [self.statusChangedBehavior configureWith:feedItem];
             [self.statusChangedBehavior startChangeStatus];
             break;
@@ -994,8 +1013,11 @@ static bool isShowingOptions = NO;
 #pragma mark - Segmented control
 - (IBAction)changedSegmentedControlValue:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == 1) {
+        [Flurry logEvent:@"ListViewClick"];
         [self showToursList];
     }
+    else
+        [Flurry logEvent:@"MapViewClick"];
 }
 
 /**************************************************************************************************/

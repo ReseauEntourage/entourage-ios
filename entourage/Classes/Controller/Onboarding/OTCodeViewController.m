@@ -19,7 +19,7 @@
 #import "UIScrollView+entourage.h"
 #import "NSString+Validators.h"
 #import "UIBarButtonItem+factory.h"
-#import "NSError+message.h"
+#import "NSError+OTErrorData.h"
 #import "UIStoryboard+entourage.h"
 #import "OTOnboardingNavigationBehavior.h"
 
@@ -111,7 +111,7 @@
                                    else
                                        [self.onboardingNavigation nextFromLogin];
                                } failure: ^(NSError *error) {
-                                   [SVProgressHUD showErrorWithStatus:[error userUpdateMessage]];
+                                   [SVProgressHUD showErrorWithStatus:error.localizedDescription];
                                }];
 }
 

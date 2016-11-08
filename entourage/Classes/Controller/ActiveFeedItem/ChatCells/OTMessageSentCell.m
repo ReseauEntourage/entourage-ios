@@ -13,7 +13,7 @@
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
     OTFeedItemMessage *msgData = (OTFeedItemMessage *)timelinePoint;
-    self.lblMessage.text = msgData.text;
+    self.txtMessage.text = msgData.text;
 }
 
 @end

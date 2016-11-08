@@ -25,6 +25,7 @@
 }
 
 - (void)startInvite {
+    [Flurry logEvent:@"InviteFriendsClick"];
     [self.owner performSegueWithIdentifier:@"SegueInviteSource" sender:nil];
 }
 

@@ -297,6 +297,7 @@
 #pragma mark - Tour Cell Handling
 
 - (void)doShowProfile:(UIButton*)userButton {
+    [Flurry logEvent:@"UserProfileClick"];
     UITableViewCell *cell = (UITableViewCell*)userButton.superview.superview;
     NSInteger index = [self indexPathForCell:cell].section;
     OTFeedItem *selectedFeedItem = self.feedItems[index];

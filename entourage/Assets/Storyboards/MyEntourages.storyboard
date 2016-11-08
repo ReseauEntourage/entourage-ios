@@ -193,6 +193,9 @@
                                                                     <integer key="value" value="18"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="showUserDetails:" destination="Mx8-LP-dfy" eventType="touchUpInside" id="0ze-UR-VAY"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -231,12 +234,14 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="btnProfilePicture" destination="gox-Ma-Kkr" id="utq-MN-h91"/>
+                                            <outlet property="dataSource" destination="0Sx-gI-2Ez" id="5JW-a1-U3I"/>
                                             <outlet property="lblDescription" destination="wbO-nh-0Vs" id="orW-HG-BgR"/>
                                             <outlet property="lblLastMessage" destination="0kF-t9-s6d" id="kY3-NC-5Sk"/>
                                             <outlet property="lblNumberOfUsers" destination="EcN-Lm-fLl" id="DWd-au-A78"/>
                                             <outlet property="lblTimeDistance" destination="AQt-0Y-ep7" id="aaE-WD-CAu"/>
                                             <outlet property="lblTitle" destination="Ddh-Li-8k9" id="pmg-t4-hjg"/>
                                             <outlet property="summaryProvider" destination="eFa-KF-lmI" id="LYj-wd-o7p"/>
+                                            <outlet property="userProfile" destination="fQD-YM-3to" id="f21-oB-M8J"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -348,6 +353,11 @@
                         <outlet property="invitationsCollectionSource" destination="XtX-Fl-5hO" id="TNT-4F-gbk"/>
                         <outlet property="owner" destination="MH3-uF-0WG" id="zpU-FV-zWu"/>
                         <outlet property="toggleCollectionView" destination="ntM-qh-ECK" id="dPp-og-Lfw"/>
+                    </connections>
+                </customObject>
+                <customObject id="fQD-YM-3to" userLabel="User Profile" customClass="OTUserProfileBehavior">
+                    <connections>
+                        <outlet property="owner" destination="MH3-uF-0WG" id="la8-gy-To5"/>
                     </connections>
                 </customObject>
             </objects>
@@ -565,11 +575,6 @@
                                         <color key="textColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Y5V-SI-9ZA">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="170" id="LET-go-XWe"/>
-                                        </constraints>
-                                    </mapView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed item description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJ0-Xs-XFU">
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -633,6 +638,11 @@
                                             <constraint firstItem="Cc2-qa-gxH" firstAttribute="top" secondItem="YQY-Es-0iZ" secondAttribute="top" constant="11" id="ofO-EF-JwN"/>
                                         </constraints>
                                     </view>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Y5V-SI-9ZA">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="170" id="LET-go-XWe"/>
+                                        </constraints>
+                                    </mapView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>

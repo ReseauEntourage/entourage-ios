@@ -17,10 +17,11 @@
     OTFeedItemMessage *msgData = (OTFeedItemMessage *)timelinePoint;
     self.lblUserName.text = msgData.userName;
     [self.btnAvatar setupAsProfilePictureFromUrl:msgData.userAvatarURL];
-    self.lblMessage.text = msgData.text;
+    self.txtMessage.text = msgData.text;
 }
 
 - (IBAction)showUserDetails:(id)sender {
+    [Flurry logEvent:@"UserProfileClick"];
     NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
     OTFeedItemMessage *message = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
     [self.userProfile showProfile:message.uID];

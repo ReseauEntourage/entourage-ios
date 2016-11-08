@@ -16,7 +16,7 @@
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
 
-@interface OTFeedItemJoinMessageController ()
+@interface OTFeedItemJoinMessageController () <UITextViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *greetingLabel;
 @property (nonatomic, weak) IBOutlet UITextView *greetingMessage;
@@ -54,6 +54,7 @@
 }
 
 - (IBAction)doSendRequest {
+    [Flurry logEvent:@"SubmitJoinMessage"];
     NSString *message = self.greetingMessage.text;
     if (!message)
         message = @"";
@@ -64,6 +65,12 @@
         [SVProgressHUD dismiss];
     }];
     [self close];
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidChange:(UITextView *)textView {
+    [Flurry logEvent:@"StartJoinMessage"];
 }
 
 @end

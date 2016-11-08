@@ -41,6 +41,11 @@
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    if(self.isMovingFromParentViewController)
+        [Flurry logEvent:@"BackFromPhoto1"];
+}
+
 - (IBAction)pictureSelected:(id)sender {
     self.image = self.photoPickerBehavior.selectedImage;
     [self performSegueWithIdentifier:PREVIEW_PICTURE_SEGUE sender:self];
@@ -63,6 +68,7 @@
 }
 
 - (void)ignore {
+    [Flurry logEvent:@"IgnorePhoto"];
     [self performSegueWithIdentifier:@"SkipPreviewSegue" sender:self];
 }
 

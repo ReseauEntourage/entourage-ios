@@ -8,23 +8,43 @@
 
 #import "OTContactsTableCellProviderBehavior.h"
 #import "OTAddressBookItem.h"
+#import "OTAddressBookPhone.h"
+#import "OTContactInfoCell.h"
+#import "OTContactPhoneCell.h"
 #import "OTDataSourceBehavior.h"
-
-#define FULLNAME_CELL_TAG 1
-#define SELECTED_IMAGE_CELL_TAG 2
-#define SELECTED_IMAGE @"24HSelected"
-#define UNSELECTED_IMAGE @"24HInactive"
 
 @implementation OTContactsTableCellProviderBehavior
 
 - (UITableViewCell *)getTableViewCellForPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:@"ContactCell"];
-    OTAddressBookItem *addressBookItem = [self.tableDataSource getItemAtIndexPath:indexPath];
-    UILabel *lblFullName = [cell viewWithTag:FULLNAME_CELL_TAG];
-    lblFullName.text = addressBookItem.fullName;
-    UIImageView *imgSelected = [cell viewWithTag:SELECTED_IMAGE_CELL_TAG];
-    imgSelected.image = [[UIImage imageNamed:(addressBookItem.selected ? SELECTED_IMAGE : UNSELECTED_IMAGE)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    id item = [self.tableDataSource getItemAtIndexPath:indexPath];
+    NSString *identifier = [self getCellIdentifier:item];
+    UITableViewCell *cell = [self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:identifier];
+    [self configureCell:cell withItem:item];
     return cell;
+}
+
+#pragma mark - private methods
+
+- (NSString *)getCellIdentifier:(id)item {
+    if([self isContactInfo:item])
+        return @"ContactCell";
+    return @"PhoneCell";
+}
+
+- (void)configureCell:(UITableViewCell *)cell withItem:(id)item {
+    if([self isContactInfo:item]) {
+        OTContactInfoCell *contactCell = (OTContactInfoCell *)cell;
+        [contactCell configureWith:(OTAddressBookItem *)item];
+    }
+    else {
+        OTContactPhoneCell *phoneCell = (OTContactPhoneCell *)cell;
+        [phoneCell configureWith:(OTAddressBookPhone *)item];
+    }
+    
+}
+
+- (BOOL)isContactInfo:(id)item {
+    return [item isKindOfClass:[OTAddressBookItem class]];
 }
 
 @end

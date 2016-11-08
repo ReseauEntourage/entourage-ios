@@ -61,14 +61,22 @@
     [self.entouragesDataSource.tableView reloadRowsAtIndexPaths:[self.entouragesDataSource.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    if(self.isMovingFromParentViewController)
+        [Flurry logEvent:@"BackToFeedClick"];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.optionsBehavior prepareSegueForOptions:segue])
+    if([self.optionsBehavior prepareSegueForOptions:segue]) {
+        [Flurry logEvent:@"PlusOnMessagesPageClick"];
         return;
+    }
     if([self.feedItemDetailsBehavior prepareSegueForDetails:segue])
         return;
     if([self.manageInvitation prepareSegueForManage:segue])
         return;
     if([segue.identifier isEqualToString:@"FiltersSegue"]) {
+        [Flurry logEvent:@"MessagesFilterClick"];
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTFeedItemFiltersViewController *filtersController = (OTFeedItemFiltersViewController *)controller.topViewController;
         filtersController.filterDelegate = self.entouragesDataSource;

@@ -133,7 +133,7 @@
 "formater_meetEncounter" = "se sont rencontrés ici le %@";
 "formatter_encounter_and_user_meet" = " et %@ se sont rencontrés ici.";
 "user_joined_tour" = " a rejoint la maraude.";
-"user_joined_entourage" = " a rejoint le entourage.";
+"user_joined_entourage" = " a rejoint l’entourage.";
 "meetingCreated" = "Rencontre créée";
 "meetingNotCreated" = "Echec de la création de rencontre";
 "contacts" = "Contacts";
