@@ -39,6 +39,9 @@
 }
 
 - (void)startTour:(NSString*)tourType {
+    if(![[OTLocationManager sharedInstance] checkPermissionsWithMessage:OTLocalizedString(@"ask_permission_location_create_tour")]) {
+        return;
+    }
     if(!self.lastLocation) {
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"failed_tour_start_no_location", @"")];
         [self.delegate failedToStartTour];

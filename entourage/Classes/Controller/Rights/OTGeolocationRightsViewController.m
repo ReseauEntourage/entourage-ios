@@ -42,7 +42,7 @@
 #pragma mark - Private
 
 - (void)promptUserForLocationUsage {
-    if ([OTLocationManager sharedInstance].started)
+    if ([OTLocationManager sharedInstance].isAuthorized)
         [self goToNotifications];
     else
         [[OTLocationManager sharedInstance] startLocationUpdates];

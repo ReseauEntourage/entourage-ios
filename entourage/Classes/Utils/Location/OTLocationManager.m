@@ -7,6 +7,8 @@
 //
 
 #import "OTLocationManager.h"
+#import "OTDeepLinkService.h"
+#import "OTConsts.h"
 
 @interface OTLocationManager () <CLLocationManagerDelegate>
 
@@ -22,7 +24,7 @@
     static dispatch_once_t entourageFilterToken;
     dispatch_once(&entourageFilterToken, ^{
         sharedInstance = [self new];
-        sharedInstance.started = NO;
+        sharedInstance.isAuthorized = NO;
     });
     return sharedInstance;
 }
@@ -55,6 +57,22 @@
     [self.locationManager stopUpdatingLocation];
 }
 
+- (BOOL)checkPermissionsWithMessage:(NSString *)message {
+    if(self.isAuthorized)
+        return YES;
+    [Flurry logEvent:@"ActivateGeolocFromCreateTourPopup"];
+    UIViewController *rootController = [[OTDeepLinkService new] getTopViewController];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [alert addAction:defaultAction];
+    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"activate") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }];
+    [alert addAction:settingsAction];
+    [rootController presentViewController:alert animated:YES completion:nil];
+    return NO;
+}
+
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -77,8 +95,8 @@
 }
 
 - (void)notifyStatus {
-    self.started = self.status == kCLAuthorizationStatusAuthorizedAlways;
-    NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:self.started] };
+    self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedAlways;
+    NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:self.isAuthorized] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationAuthorizationChanged object:nil userInfo:info];
 }
 

@@ -17,12 +17,13 @@
 
 @interface OTLocationManager : NSObject
 
-@property (nonatomic, assign) BOOL started;
+@property (nonatomic, assign) BOOL isAuthorized;
 @property (nonatomic, strong) CLLocation *currentLocation;
 
 + (OTLocationManager *)sharedInstance;
 
 - (void)startLocationUpdates;
 - (void)stopLocationUpdates;
+- (BOOL)checkPermissionsWithMessage:(NSString *)message;
 
 @end

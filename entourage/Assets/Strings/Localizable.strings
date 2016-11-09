@@ -20,6 +20,9 @@
 
 "distance_250" = "La rencontre est trop éloignée de la maraude";
 "yes" = "Oui";
+"ask_permission_location_create_tour" = "Pour créer une maraude, vous devez activer la géolocalisation";
+"ask_permission_location_recenter_map" = "Pour recentrer autour de vous, vous devez activer la géolocalisation";
+"activate" = "Activer";
 
 // Onboarding
 "doLogin" = "Se connecter";
