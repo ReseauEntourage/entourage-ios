@@ -40,8 +40,6 @@
 }
 
 - (void)customizeSlideOutMenu {
-    // INITIAL APPEARANCE: Configure the initial position of the menu and content views
-    self.frontViewPosition = FrontViewPositionLeft; // FrontViewPositionLeft (only content), FrontViewPositionRight(menu and content), FrontViewPositionRightMost(only menu), see others at library documentation...
     self.rearViewRevealWidth = [UIScreen mainScreen].bounds.size.width + self.frontViewShadowRadius; // how much of the menu is shown (default 260.0)
     
     // TOGGLING OVERDRAW: Configure the overdraw appearance of the content view while dragging it
