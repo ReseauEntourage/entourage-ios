@@ -19,8 +19,7 @@
 @implementation OTDisclaimerBaseBehavior
 
 - (void)showDisclaimer {
-    if (!self.wasDisclaimerAccepted)
-        [self.owner performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
+    [self.owner performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
 }
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
@@ -42,14 +41,6 @@
     return @"";
 }
 
-- (BOOL)wasDisclaimerAccepted {
-    return NO;
-}
-
-- (NSString *)disclaimerStorageKey {
-    return nil;
-}
-
 - (NSAttributedString *)buildDisclaimerWithLink:(NSString *)originalString {
     NSString *stringToMakeInLink = OTLocalizedString(@"disclaimer_link_text");
     NSRange range = [originalString rangeOfString:stringToMakeInLink];
@@ -64,13 +55,11 @@
 #pragma mark - DisclaimerDelegate
 
 - (void)disclaimerWasAccepted {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:self.disclaimerStorageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.owner dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)disclaimerWasRejected {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:self.disclaimerStorageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.owner dismissViewControllerAnimated:YES completion:^{
         [self.owner dismissViewControllerAnimated:YES completion:nil];

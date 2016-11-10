@@ -16,12 +16,4 @@
     return [self buildDisclaimerWithLink:OTLocalizedString(@"encounter_disclaimer")];
 }
 
-- (BOOL)wasDisclaimerAccepted {
-    return [NSUserDefaults wasEncounterDisclaimerAccepted];
-}
-
-- (NSString *)disclaimerStorageKey {
-    return kEncounterDisclaimer;
-}
-
 @end

@@ -16,12 +16,4 @@
     return [self buildDisclaimerWithLink:OTLocalizedString(@"entourage_disclaimer")];
 }
 
-- (BOOL)wasDisclaimerAccepted {
-    return [NSUserDefaults wasEntourageDisclaimerAccepted];
-}
-
-- (NSString *)disclaimerStorageKey {
-    return kEntourageDisclaimer;
-}
-
 @end

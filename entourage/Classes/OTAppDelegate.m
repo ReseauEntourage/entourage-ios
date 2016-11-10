@@ -101,8 +101,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [[OTBadgeNumberService sharedInstance] clearData];
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kEncounterDisclaimer];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kEntourageDisclaimer];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
