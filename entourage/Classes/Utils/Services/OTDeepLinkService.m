@@ -18,7 +18,6 @@
 
 - (void)navigateTo:(NSNumber *)feedItemId withType:(NSString *)feedItemType {
     [SVProgressHUD show];
-    
     [[[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getStateInfo] loadWithSuccess:^(OTFeedItem *feedItem) {
         [SVProgressHUD dismiss];
         [self prepareControllers:feedItem];
@@ -49,6 +48,13 @@
     while(currentController.presentedViewController)
         currentController = currentController.presentedViewController;
     [currentController presentViewController:rootUserProfileController animated:YES completion:nil];
+}
+
+- (void)navigateToLogin {
+    UIStoryboard *introStorybard = [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
+    UIViewController *loginController = [introStorybard instantiateViewControllerWithIdentifier:@"OTLoginViewControllerIdentifier"];
+    UIViewController *currentController = [self getTopViewController];
+    [currentController showViewController:loginController sender:self];
 }
 
 - (void)prepareControllers:(OTFeedItem *)feedItem {

@@ -18,6 +18,7 @@
 #import "UIColor+entourage.h"
 #import "NSError+OTErrorData.h"
 #import "OTConsts.h"
+#import "OTDeepLinkService.h"
 
 @interface OTPhoneViewController ()
 
@@ -58,16 +59,28 @@
             [NSUserDefaults standardUserDefaults].temporaryUser = onboardUser;
             [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
+            [SVProgressHUD dismiss];
             NSString *errorMessage = error.localizedDescription;
             NSString *errorCode = [error readErrorCode];
-            if([errorCode isEqualToString:INVALID_PHONE_FORMAT])
-                errorMessage = OTLocalizedString(@"invalidPhoneNumberFormat");
-            else if([errorCode isEqualToString:PHONE_ALREADY_EXIST])
+            BOOL showErrorHUD = YES;
+            if([errorCode isEqualToString:INVALID_PHONE_FORMAT]) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:OTLocalizedString(@"invalidPhoneNumberFormat") preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"close") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+                [alert addAction:defaultAction];
+                UIAlertAction *openLoginAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"already_subscribed") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[OTDeepLinkService new] navigateToLogin];
+                }];
+                [alert addAction:openLoginAction];
+                [self presentViewController:alert animated:YES completion:nil];
+                showErrorHUD = NO;
+            }
+            else if([errorCode isEqualToString:PHONE_ALREADY_EXIST]) {
                 errorMessage = OTLocalizedString(@"phoneAlreadyExits");
+            }
             if (errorMessage) {
                 [Flurry logEvent:@"TelephoneSubmitFail"];
-                [SVProgressHUD showErrorWithStatus:errorMessage];
-                NSLog(@"ERR: something went wrong on onboarding user phone: %@", error.description);
+                if(showErrorHUD)
+                    [SVProgressHUD showErrorWithStatus:errorMessage];
             } else {
                 [NSUserDefaults standardUserDefaults].temporaryUser = temporaryUser;
                 [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"alreadyRegisteredMessage")];

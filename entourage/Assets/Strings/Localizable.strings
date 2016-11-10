@@ -34,6 +34,7 @@
 "acceptJoinFailed" = "Impossible d’accepter l’invitation.";
 "ignoreJoinFailed" = "Impossible de refuser l’invitation.";
 "phoneAlreadyExits" = "Ce téléphone n'est pas disponible";
+"already_subscribed" = "Déjà inscrit";
 
 // MenuItems
 "menu_amis" = "Amis";
@@ -197,7 +198,7 @@
 "invalidPhoneNumber" = "Numéro de téléphone invalide";
 "invalidPhoneNumberOrCode" = "Le numéro de téléphone et ce code d’accès ne correspondent pas.";
 "mustAddCode" = "Veuillez renseigner un code de vérification";
-"invalidPhoneNumberFormat" = "Votre téléphone doit être au format +33, 06 ou 07...";
+"invalidPhoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
 "close" = "Fermer";
