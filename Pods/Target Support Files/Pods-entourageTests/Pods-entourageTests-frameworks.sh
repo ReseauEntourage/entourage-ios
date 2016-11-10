@@ -82,3 +82,13 @@ strip_invalid_archs() {
   fi
 }
 
+
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/OCMock/OCMock.framework"
+fi
+if [[ "$CONFIGURATION" == "Beta" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/OCMock/OCMock.framework"
+fi
+if [[ "$CONFIGURATION" == "Store" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/OCMock/OCMock.framework"
+fi

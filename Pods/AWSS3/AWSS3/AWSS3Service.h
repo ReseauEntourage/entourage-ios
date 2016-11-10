@@ -222,6 +222,31 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)completeMultipartUpload:(AWSS3CompleteMultipartUploadRequest *)request completionHandler:(void (^ _Nullable)(AWSS3CompleteMultipartUploadOutput * _Nullable response, NSError * _Nullable error))completionHandler;
 
 /**
+ Creates a copy of an object that is already stored in Amazon S3.
+ 
+ @param request A container for the necessary parameters to execute the CopyObject service method.
+
+ @return An instance of `AWSTask`. On successful execution, `task.result` will contain an instance of `AWSS3ReplicateObjectOutput`. On failed execution, `task.error` may contain an `NSError` with `AWSS3ErrorDomain` domain and the following error code: `AWSS3ErrorObjectNotInActiveTier`.
+ 
+ @see AWSS3ReplicateObjectRequest
+ @see AWSS3ReplicateObjectOutput
+ */
+- (AWSTask<AWSS3ReplicateObjectOutput *> *)replicateObject:(AWSS3ReplicateObjectRequest *)request;
+
+/**
+ Creates a copy of an object that is already stored in Amazon S3.
+ 
+ @param request A container for the necessary parameters to execute the CopyObject service method.
+ @param completionHandler The completion handler to call when the load request is complete.
+                          `response` - A response object, or `nil` if the request failed.
+                          `error` - An error object that indicates why the request failed, or `nil` if the request was successful. On failed execution, `error` may contain an `NSError` with `AWSS3ErrorDomain` domain and the following error code: `AWSS3ErrorObjectNotInActiveTier`.
+ 
+ @see AWSS3ReplicateObjectRequest
+ @see AWSS3ReplicateObjectOutput
+ */
+- (void)replicateObject:(AWSS3ReplicateObjectRequest *)request completionHandler:(void (^ _Nullable)(AWSS3ReplicateObjectOutput * _Nullable response, NSError * _Nullable error))completionHandler;
+
+/**
  Creates a new bucket.
  
  @param request A container for the necessary parameters to execute the CreateBucket service method.
@@ -726,7 +751,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getBucketPolicy:(AWSS3GetBucketPolicyRequest *)request completionHandler:(void (^ _Nullable)(AWSS3GetBucketPolicyOutput * _Nullable response, NSError * _Nullable error))completionHandler;
 
 /**
- Deprecated, see the GetBucketReplicationConfiguration operation.
+ Returns the replication configuration of a bucket.
  
  @param request A container for the necessary parameters to execute the GetBucketReplication service method.
 
@@ -738,7 +763,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (AWSTask<AWSS3GetBucketReplicationOutput *> *)getBucketReplication:(AWSS3GetBucketReplicationRequest *)request;
 
 /**
- Deprecated, see the GetBucketReplicationConfiguration operation.
+ Returns the replication configuration of a bucket.
  
  @param request A container for the necessary parameters to execute the GetBucketReplication service method.
  @param completionHandler The completion handler to call when the load request is complete.
@@ -1479,31 +1504,6 @@ NS_ASSUME_NONNULL_BEGIN
  @see AWSS3PutObjectAclOutput
  */
 - (void)putObjectAcl:(AWSS3PutObjectAclRequest *)request completionHandler:(void (^ _Nullable)(AWSS3PutObjectAclOutput * _Nullable response, NSError * _Nullable error))completionHandler;
-
-/**
- Creates a copy of an object that is already stored in Amazon S3.
- 
- @param request A container for the necessary parameters to execute the ReplicateObject service method.
-
- @return An instance of `AWSTask`. On successful execution, `task.result` will contain an instance of `AWSS3ReplicateObjectOutput`. On failed execution, `task.error` may contain an `NSError` with `AWSS3ErrorDomain` domain and the following error code: `AWSS3ErrorObjectNotInActiveTier`.
- 
- @see AWSS3ReplicateObjectRequest
- @see AWSS3ReplicateObjectOutput
- */
-- (AWSTask<AWSS3ReplicateObjectOutput *> *)replicateObject:(AWSS3ReplicateObjectRequest *)request;
-
-/**
- Creates a copy of an object that is already stored in Amazon S3.
- 
- @param request A container for the necessary parameters to execute the ReplicateObject service method.
- @param completionHandler The completion handler to call when the load request is complete.
-                          `response` - A response object, or `nil` if the request failed.
-                          `error` - An error object that indicates why the request failed, or `nil` if the request was successful. On failed execution, `error` may contain an `NSError` with `AWSS3ErrorDomain` domain and the following error code: `AWSS3ErrorObjectNotInActiveTier`.
- 
- @see AWSS3ReplicateObjectRequest
- @see AWSS3ReplicateObjectOutput
- */
-- (void)replicateObject:(AWSS3ReplicateObjectRequest *)request completionHandler:(void (^ _Nullable)(AWSS3ReplicateObjectOutput * _Nullable response, NSError * _Nullable error))completionHandler;
 
 /**
  Restores an archived copy of an object back into Amazon S3

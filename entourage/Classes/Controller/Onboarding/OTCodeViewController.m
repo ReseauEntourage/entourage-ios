@@ -21,11 +21,12 @@
 #import "UIBarButtonItem+factory.h"
 #import "UIStoryboard+entourage.h"
 #import "OTOnboardingNavigationBehavior.h"
+#import "entourage-Swift.h"
 
 @interface OTCodeViewController ()
 
-@property (nonatomic, weak) IBOutlet UITextField *codeTextField;
-@property (nonatomic, weak) IBOutlet UIButton *validateButton;
+@property (nonatomic, weak) IBOutlet OnBoardingCodeTextField *codeTextField;
+@property (nonatomic, weak) IBOutlet OnBoardingButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
@@ -39,7 +40,13 @@
 
     self.title = @"";
     [self addRegenerateBarButton];
-    [self.codeTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+
+    self.codeTextField.inputValidationChanged = ^(BOOL isValid) {
+        self.validateButton.enabled = isValid;
+    };
+
+    //[self.codeTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]
+     //                                     andFont:[UIColor appTextFieldPlaceholderFont]];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
@@ -97,6 +104,11 @@
     NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
     NSString *code = self.codeTextField.text;
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
+
+
+    [self.onboardingNavigation nextFromLogin];
+    return;
+
     [SVProgressHUD show];
     
     [[OTAuthService new] authWithPhone:phone

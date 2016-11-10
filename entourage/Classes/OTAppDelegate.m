@@ -156,6 +156,8 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     UINavigationBar.appearance.barTintColor = [UIColor redColor];
     UINavigationBar.appearance.backgroundColor = [UIColor redColor];
 #endif
+
+    UITextField.appearance.tintColor = [UIColor whiteColor];
 }
 
 @end

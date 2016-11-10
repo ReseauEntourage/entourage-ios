@@ -69,6 +69,8 @@ static NSString * const kTTTOrdinalNumberFormatterDefaultOrdinalIndicator = @"."
         return [self zhHansOrdinalIndicatorStringFromNumber:number];
     } else if ([languageCode isEqualToString:@"ca"]) {
         return [self caOrdinalIndicatorStringFromNumber:number];
+    } else if ([languageCode isEqualToString:@"sv"]) {
+        return [self svOrdinalIndicatorStringFromNumber:number];
     } else {
         return kTTTOrdinalNumberFormatterDefaultOrdinalIndicator;
     }
@@ -110,10 +112,6 @@ static NSString * const kTTTOrdinalNumberFormatterDefaultOrdinalIndicator = @"."
             }
         }
     }
-}
-
-- (NSString *)deOrdinalIndicatorStringFromNumber:(__unused NSNumber *)number {
-	return @".";
 }
 
 - (NSString *)enOrdinalIndicatorStringFromNumber:(NSNumber *)number {
@@ -213,6 +211,23 @@ static NSString * const kTTTOrdinalNumberFormatterDefaultOrdinalIndicator = @"."
     return @"\u7B2C"; // Unicode Han Character 'sequence, number; grade, degree'
 }
 
+- (NSString *)svOrdinalIndicatorStringFromNumber:(NSNumber *)number {
+    // If number % 100 is 11 or 12, ordinals are 11:e and 12:e.
+    if (NSLocationInRange([number integerValue] % 100, NSMakeRange(11, 2))) {
+        return @":e";
+    }
+    
+    // 1:a, 2:a, 3:e, 4:e and so on. Also, 21:a, 22:a, 23:e ...
+    switch ([number integerValue] % 10) {
+        case 1:
+            return @":a";
+        case 2:
+            return @":a";
+        default:
+            return @":e";
+    }
+}
+
 #pragma mark - NSFormatter
 
 - (NSString *)stringForObjectValue:(id)anObject {
@@ -257,7 +272,7 @@ static NSString * const kTTTOrdinalNumberFormatterDefaultOrdinalIndicator = @"."
         return YES;
     }
 
-    *error = NSLocalizedStringFromTable(@"String did not contain a valid ordinal number", @"FormatterKit", nil);
+    *error = NSLocalizedStringFromTableInBundle(@"String did not contain a valid ordinal number", @"FormatterKit", [NSBundle bundleForClass:[self class]], nil);
 
     return NO;
 }

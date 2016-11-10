@@ -20,12 +20,10 @@
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
 		0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */; };
 		0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */; };
-		0EFF83D8D43A3E2E9F8A9E52 /* libPods-entourageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31872915271F48F60EECA4C2 /* libPods-entourageTests.a */; };
 		1151E390B42372A35A6F2B32 /* Root.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1151E97661A4098002F7D819 /* Root.strings */; };
 		1151E8BE0D3CA27508364B9B /* Root.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1151EFA125A1BAF8A1B99583 /* Root.plist */; };
 		1151EE1685B7C17024C250CF /* Root.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1151E24449EA45F0F66E6CB0 /* Root.strings */; };
 		1151EFEFBD3FEAC342F17466 /* Root.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1151EF20AEA7D2BA81235504 /* Root.plist */; };
-		1326182E58098BE9019F3879 /* libPods-entourage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0873042019DFF62732713E7 /* libPods-entourage.a */; };
 		191FE92419E943D900C56BCA /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
 		191FE92819E945F200C56BCA /* OTEncounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE92719E945F200C56BCA /* OTEncounter.m */; };
 		1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */; };
@@ -197,6 +195,7 @@
 		1EC816961D9BB1150084BADB /* FeedChangeOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EC816951D9BB1150084BADB /* FeedChangeOptions.storyboard */; };
 		1EC9D67F1D644F7700C6E9AA /* OTOnboardingJoinService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9D67E1D644F7700C6E9AA /* OTOnboardingJoinService.m */; };
 		1EC9D6821D6468A800C6E9AA /* OTInvitationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9D6811D6468A800C6E9AA /* OTInvitationsService.m */; };
+		1ECCA8ADF8F11C290527E9DC /* Pods_entourageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1FE7C1E296A4FD392A8A39 /* Pods_entourageTests.framework */; };
 		1ECDBC691D3D35C300DD87B2 /* OTTourMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECDBC681D3D35C300DD87B2 /* OTTourMessaging.m */; };
 		1ECDBC6C1D3D363600DD87B2 /* OTEntourageMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECDBC6B1D3D363600DD87B2 /* OTEntourageMessaging.m */; };
 		1ECFB3691D52570900722DAC /* OTTourMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECFB3681D52570900722DAC /* OTTourMapHandler.m */; };
@@ -292,6 +291,7 @@
 		45F443441C90BCB700DDEBE1 /* OTFeedItemMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443431C90BCB700DDEBE1 /* OTFeedItemMessage.m */; };
 		45F443471C9314A800DDEBE1 /* OTFeedItemStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443461C9314A800DDEBE1 /* OTFeedItemStatus.m */; };
 		45FD17B71CFC4F3E0037270B /* OTOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FD17B61CFC4F3E0037270B /* OTOptionsViewController.m */; };
+		6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
 		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
@@ -312,6 +312,7 @@
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
 		A815528F1DBA211C00E2517A /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A815528E1DBA211C00E2517A /* ConfigurationManager.swift */; };
+		A82B95A11DCD045200332305 /* OnBoardingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82B95A01DCD045200332305 /* OnBoardingTextField.swift */; };
 		A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */; };
 		A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682C819E7D097007BD4BC /* OTLoginViewController.m */; };
 		DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8ACD19E857A800FA218E /* OTMenuItem.m */; };
@@ -793,7 +794,7 @@
 		2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutTableViewCell.m; sourceTree = "<group>"; };
 		2EDFADD81CAE84D000B66026 /* OTAboutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutItem.h; sourceTree = "<group>"; };
 		2EDFADD91CAE84D000B66026 /* OTAboutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutItem.m; sourceTree = "<group>"; };
-		31872915271F48F60EECA4C2 /* libPods-entourageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4500115C1CCE5BD2004754DF /* OTTourCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourCreatorViewController.h; sourceTree = "<group>"; };
 		4500115D1CCE5BD2004754DF /* OTTourCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourCreatorViewController.m; sourceTree = "<group>"; };
 		4507017B1CCF459B00432548 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TourCreator.storyboard; sourceTree = "<group>"; };
@@ -902,12 +903,13 @@
 		6BFE639219E7E85400C661AB /* OTPoiCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiCategory.h; sourceTree = "<group>"; };
 		6BFE639319E7E85400C661AB /* OTPoiCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiCategory.m; sourceTree = "<group>"; };
 		6DE4A491763D292ADECF1896 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
+		6E1FE7C1E296A4FD392A8A39 /* Pods_entourageTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourageTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79016BE7EDCE7EC3FA1F7032 /* Pods-entourageTests.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.store.xcconfig"; sourceTree = "<group>"; };
-		A0873042019DFF62732713E7 /* libPods-entourage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-entourage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A815528D1DBA211B00E2517A /* entourage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A815528E1DBA211C00E2517A /* ConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationManager.swift; sourceTree = "<group>"; };
+		A82B95A01DCD045200332305 /* OnBoardingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingTextField.swift; sourceTree = "<group>"; };
 		A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCalloutViewController.h; sourceTree = "<group>"; };
 		A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCalloutViewController.m; sourceTree = "<group>"; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
@@ -938,8 +940,8 @@
 				0A9FEBC21C22B8A0009943D2 /* SpeechKit.framework in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
-				1326182E58098BE9019F3879 /* libPods-entourage.a in Frameworks */,
 				1E2432B81DA6BED3000EF74F /* libFlurry_7.6.6.a in Frameworks */,
+				6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,7 +952,7 @@
 				6B92CAC119A7461C004E8C9B /* XCTest.framework in Frameworks */,
 				6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */,
-				0EFF83D8D43A3E2E9F8A9E52 /* libPods-entourageTests.a in Frameworks */,
+				1ECCA8ADF8F11C290527E9DC /* Pods_entourageTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2231,8 +2233,8 @@
 				6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */,
 				6B92CAA519A7461C004E8C9B /* UIKit.framework */,
 				6B92CAC019A7461C004E8C9B /* XCTest.framework */,
-				A0873042019DFF62732713E7 /* libPods-entourage.a */,
-				31872915271F48F60EECA4C2 /* libPods-entourageTests.a */,
+				43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */,
+				6E1FE7C1E296A4FD392A8A39 /* Pods_entourageTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2362,6 +2364,7 @@
 				DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */,
 				2EDFADD51CAE810800B66026 /* OTAboutTableViewCell.h */,
 				2EDFADD61CAE810800B66026 /* OTAboutTableViewCell.m */,
+				A82B95A01DCD045200332305 /* OnBoardingTextField.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -2624,7 +2627,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9B95D715EC2077A1D3EEB380 /* [CP] Embed Pods Frameworks */ = {
@@ -2682,7 +2685,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2915,6 +2918,7 @@
 				1E46617D1DAE6CF900ED0CD0 /* OTMemberCountCell.m in Sources */,
 				1E06FDC61D574D9800370F4F /* OTChatCellBase.m in Sources */,
 				1E6E550A1D707FE3002845D0 /* OTPushNotificationsService.m in Sources */,
+				A82B95A11DCD045200332305 /* OnBoardingTextField.swift in Sources */,
 				1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */,
 				1EFAC0D31D89247900BE396F /* OTFeedItemsFilterCellBase.m in Sources */,
 				1E3E280D1DC9F4A900E0576D /* OTJoinRejectedCell.m in Sources */,
@@ -3195,10 +3199,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"COCOAPODS=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) COCOAPODS=1";
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;

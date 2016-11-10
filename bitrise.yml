@@ -1,0 +1,55 @@
+---
+format_version: 1.2.0
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+trigger_map:
+- push_branch: v2.2
+  workflow: beta
+- pull_request_source_branch: "*"
+  workflow: beta
+workflows:
+  beta:
+    steps:
+    - activate-ssh-key@3.1.1:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@3.4.0: {}
+    - certificate-and-profile-installer@1.8.1: {}
+    - script@1.1.3:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            echo "Download Amazon credentials"
+
+            staging_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/staging.plist
+            prod_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/prod.plist
+
+            # download the file
+            #wget -O "$staging_file_local_path" "$BITRISEIO_STAGING_PLIST_URL"
+            #wget -O "$prod_file_local_path" "$BITRISEIO_PROD_PLIST_URL"
+
+            gem install badge
+    - fastlane@2.2.0:
+        inputs:
+        - lane: beta appaloosa_api_key:$APPALOOSA_API_KEY appaloosa_store_id:$APPALOOSA_STORE_ID
+    - deploy-to-bitrise-io@1.2.5: {}
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: entourage.xcworkspace
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: entourage
+  - opts:
+      is_expand: true
+    APPALOOSA_STORE_ID: '3949'
+  - opts:
+      is_expand: true
+    APPALOOSA_API_KEY: fhyk78ldv01r2yazk1h91949wvhopo
+  - opts:
+      is_expand: true
+    FASTLANE_PASSWORD: Entourage95

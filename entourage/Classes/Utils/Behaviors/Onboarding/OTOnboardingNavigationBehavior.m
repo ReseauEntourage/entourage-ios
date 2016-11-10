@@ -32,24 +32,25 @@
 }
 
 - (void)nextFromEmail {
-    if(self.currentUser.firstName.length > 0 && self.currentUser.lastName.length > 0)
-        [self nextFromName];
-    else
-        [self gotoName];
-}
-
-- (void)nextFromName {
     if(self.currentUser.avatarURL.length > 0)
         [self gotoRights];
     else
         [self gotoPicture];
 }
 
+- (void)nextFromName {
+    self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if(self.currentUser.email.length > 0)
+        [self nextFromEmail];
+    else
+        [self gotoEmail];
+}
+
 #pragma mark - private methods
 
 - (void)gotoEmail {
     UIStoryboard *profileDetailsStoryboard = [UIStoryboard storyboardWithName:@"UserProfileDetails" bundle:nil];
-    UIViewController *emailViewController = [profileDetailsStoryboard instantiateInitialViewController];
+    UIViewController *emailViewController = [profileDetailsStoryboard instantiateViewControllerWithIdentifier:@"EmailScene"];
     [self.owner.navigationController pushViewController:emailViewController animated:YES];
 }
 

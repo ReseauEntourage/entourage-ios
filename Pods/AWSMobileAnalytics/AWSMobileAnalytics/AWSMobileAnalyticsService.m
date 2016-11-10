@@ -80,6 +80,12 @@ static AWSSynchronizedMutableDictionary *_mobileAnalyticsForAppNamespace = nil;
                          completionBlock:nil];
 }
 
++ (instancetype)mobileAnalyticsForAppId:(NSString *)appId configuration:(AWSMobileAnalyticsConfiguration *)configuration{
+    return [self mobileAnalyticsForAppId:appId
+                           configuration:configuration
+                         completionBlock:nil];
+}
+
 + (instancetype)mobileAnalyticsForAppId:(NSString *)appId
                          identityPoolId:(NSString *)identityPoolId
                         completionBlock:(AWSInitializationCompletionBlock)completionBlock {
@@ -111,10 +117,11 @@ static AWSSynchronizedMutableDictionary *_mobileAnalyticsForAppNamespace = nil;
 
     @synchronized(_mobileAnalyticsForAppNamespace) {
         if (![_mobileAnalyticsForAppNamespace objectForKey:appId]) {
+            NSDictionary *settings = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:configuration.maxStorageSize], AWSKeyMaxStorageSize, nil];
             AWSMobileAnalytics *mobileAnalytics = [[AWSMobileAnalytics alloc] initWithAppId:appId
                                                                          insightsPrivateKey:nil
                                                                               configuration:configuration
-                                                                                   settings:nil
+                                                                                   settings:settings
                                                                             completionBlock:completionBlock];
             if (mobileAnalytics) {
                 [_mobileAnalyticsForAppNamespace setObject:mobileAnalytics
@@ -151,10 +158,11 @@ static AWSSynchronizedMutableDictionary *_mobileAnalyticsForAppNamespace = nil;
 
     @synchronized(_mobileAnalyticsForAppNamespace) {
         if (![_mobileAnalyticsForAppNamespace objectForKey:appId]) {
+            NSDictionary *settings = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:configuration.maxStorageSize], AWSKeyMaxStorageSize, nil];
             AWSMobileAnalytics *mobileAnalytics = [[AWSMobileAnalytics alloc] initWithAppId:appId
                                                                          insightsPrivateKey:insightsPrivateKey
                                                                               configuration:configuration
-                                                                                   settings:nil
+                                                                                   settings:settings
                                                                             completionBlock:completionBlock];
             if (mobileAnalytics) {
                 [_mobileAnalyticsForAppNamespace setObject:mobileAnalytics

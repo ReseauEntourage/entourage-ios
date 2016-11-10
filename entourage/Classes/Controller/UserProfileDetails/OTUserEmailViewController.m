@@ -20,6 +20,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
 #import "OTOnboardingNavigationBehavior.h"
+#import "UIBarButtonItem+factory.h"
 
 @interface OTUserEmailViewController ()
 
@@ -44,7 +45,18 @@
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
     [self loadCurrentData];
+
+    [self addIgnoreButton];
 }
+
+- (void)addIgnoreButton {
+    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString
+                                                          withTarget:self
+                                                           andAction:@selector(doIgnore)
+                                                             colored:[UIColor whiteColor]];
+    [self.navigationItem setRightBarButtonItem:ignoreButton];
+}
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -81,6 +93,11 @@
                                                    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
                                                    NSLog(@"ERR: something went wrong on onboarding user email: %@", error.description);
                                                }];
+}
+
+- (void)doIgnore {
+    [SVProgressHUD dismiss];
+    [self.onboardingNavigation nextFromEmail];
 }
 
 - (void)showKeyboard:(NSNotification*)notification {

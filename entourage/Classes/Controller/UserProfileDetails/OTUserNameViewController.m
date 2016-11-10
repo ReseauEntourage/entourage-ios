@@ -68,7 +68,10 @@
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     currentUser.firstName = self.firstNameTextField.text;
     currentUser.lastName = self.lastNameTextField.text;
+    [self.onboardingNavigation nextFromName];
+    return;
     [SVProgressHUD show];
+
     [[OTAuthService new] updateUserInformationWithUser:currentUser success:^(OTUser *user) {
         // TODO phone is not in response so need to restore it manually
         user.phone = currentUser.phone;

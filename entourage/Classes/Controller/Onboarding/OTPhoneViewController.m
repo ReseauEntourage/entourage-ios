@@ -19,12 +19,14 @@
 #import "NSError+OTErrorData.h"
 #import "OTConsts.h"
 #import "OTDeepLinkService.h"
+#import "entourage-Swift.h"
 
-@interface OTPhoneViewController ()
+@interface OTPhoneViewController () <UITextFieldDelegate>
 
-@property (nonatomic, weak) IBOutlet UITextField *phoneTextField;
+@property (nonatomic, weak) IBOutlet OnBoardingNumberTextField *phoneTextField;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+@property (nonatomic, weak) IBOutlet OnBoardingButton *validateButton;
 
 @end
 
@@ -38,6 +40,10 @@
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
+
+    self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
+        self.validateButton.enabled = isValid;
+    };
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -91,7 +97,12 @@
 }
 
 - (void)showKeyboard:(NSNotification*)notification {
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+//    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
 }
+
+/********************************************************************************/
+#pragma mark - UITextFieldDelegate
+
+
 
 @end
