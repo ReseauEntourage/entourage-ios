@@ -18,6 +18,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "SVProgressHUD.h"
 #import "UIButton+AFNetworking.h"
+#import "OTTapViewBehavior.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -29,6 +30,7 @@ typedef NS_ENUM(NSInteger) {
 @interface OTUserViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet OTTapViewBehavior *tapToEditBehavior;
 
 @end
 
@@ -38,6 +40,8 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.tapToEditBehavior initialize];
     self.title = OTLocalizedString(@"profil").uppercaseString;
     [self setupCloseModal];
 }
@@ -65,7 +69,7 @@ typedef NS_ENUM(NSInteger) {
     [self.navigationItem setRightBarButtonItem:chatButton];
 }
 
-- (void)showEditView {
+- (IBAction)showEditView {
     [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
 }
 
