@@ -39,6 +39,8 @@
 "menu_amis" = "Amis";
 "myProfile" = "Mon compte";
 "parameters" = "Parameters";
+"menu_blog" = "Comment franchir le pas ?";
+"menu_chart" = "Charte éthique";
 
 "menu_guide" = "Guide de solidarité";
 "menu_param" = "Paramètres de l'application";
