@@ -34,8 +34,8 @@
 }
 
 - (void)updateWith:(OTFeedItem *)feedItem {
-    self.isActive = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isActive];
     self.feedItem = feedItem;
+    self.isActive = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isActive];
     self.btnStatus.hidden = !self.isActive;
     [self updateLabel];
     if(self.btnStatus.hidden)
