@@ -87,7 +87,11 @@
 
 - (void)showCurrentLocation {
     [Flurry logEvent:@"RecenterMapClick"];
-    if([[OTLocationManager sharedInstance] checkPermissionsWithMessage:OTLocalizedString(@"ask_permission_location_recenter_map")])
+    if(![OTLocationManager sharedInstance].isAuthorized)
+       [[OTLocationManager sharedInstance] showGeoLocationNotAllowedMessage:OTLocalizedString(@"ask_permission_location_recenter_map")];
+    else if(![OTLocationManager sharedInstance].currentLocation)
+        [[OTLocationManager sharedInstance] showLocationNotFoundMessage:OTLocalizedString(@"no_location_recenter_map")];
+    else
         [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowCurrentLocation object:nil];
 }
 

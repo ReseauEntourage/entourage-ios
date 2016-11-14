@@ -24,6 +24,7 @@
 
 - (void)startLocationUpdates;
 - (void)stopLocationUpdates;
-- (BOOL)checkPermissionsWithMessage:(NSString *)message;
+- (void)showGeoLocationNotAllowedMessage:(NSString *)message;
+- (void)showLocationNotFoundMessage:(NSString *)message;
 
 @end

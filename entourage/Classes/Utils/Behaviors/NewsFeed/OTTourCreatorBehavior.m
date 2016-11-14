@@ -39,12 +39,12 @@
 }
 
 - (void)startTour:(NSString*)tourType {
-    if(![[OTLocationManager sharedInstance] checkPermissionsWithMessage:OTLocalizedString(@"ask_permission_location_create_tour")]) {
+    if(![OTLocationManager sharedInstance].isAuthorized) {
+        [[OTLocationManager sharedInstance] showGeoLocationNotAllowedMessage:OTLocalizedString(@"ask_permission_location_create_tour")];
         return;
     }
-    if(!self.lastLocation) {
-        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"failed_tour_start_no_location", @"")];
-        [self.delegate failedToStartTour];
+    else if(!self.lastLocation) {
+        [[OTLocationManager sharedInstance] showLocationNotFoundMessage:OTLocalizedString(@"no_location_create_tour")];
         return;
     }
     [SVProgressHUD showWithStatus:OTLocalizedString(@"tour_create_sending")];
