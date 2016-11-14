@@ -16,9 +16,10 @@
 #define SHOW_LOGIN_SEGUE @"WelcomeLoginSegue"
 #define CONTINUE_ONBOARDING_SEGUE @"SegueOnboarding"
 
-@interface OTWelcomeViewController() <UIWebViewDelegate>
+@interface OTWelcomeViewController ()
 
-@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UITextView *txtTerms;
+
 @end
 
 @implementation OTWelcomeViewController 
@@ -29,8 +30,8 @@
     self.title = @"";
     if(![NSUserDefaults standardUserDefaults].currentUser)
         [self addLoginBarButton];
-    [self setupWebView];
-    
+    self.txtTerms.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+    self.txtTerms.attributedText = [self buildTermsWithLink];
 }
 
 #pragma mark - Private
@@ -40,12 +41,17 @@
     [self.navigationItem setRightBarButtonItem:loginButton];
 }
 
-- (void)setupWebView {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"welcome" ofType:@"html"];
-    NSString *html = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    
-    // Tell the web view to load it
-    [self.webView loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
+- (NSAttributedString *)buildTermsWithLink {
+    NSString *stringToMakeInLink = OTLocalizedString(@"terms_and_conditions_for_onboarding");
+    NSRange range = [self.txtTerms.text rangeOfString:stringToMakeInLink];
+    if(range.location == NSNotFound)
+        return [[NSAttributedString alloc] initWithString:self.txtTerms.text];
+    NSRange fullRange = NSMakeRange(0, self.txtTerms.text.length);
+    NSMutableAttributedString *source = [[NSMutableAttributedString alloc] initWithString:self.txtTerms.text];
+    [source addAttribute:NSLinkAttributeName value:ABOUT_CGU_URL range:range];
+    [source addAttribute:NSFontAttributeName value:self.txtTerms.font range:fullRange];
+    [source addAttribute:NSForegroundColorAttributeName value:self.txtTerms.textColor range:fullRange];
+    return source;
 }
 
 #pragma mark - IBActions
@@ -57,17 +63,6 @@
 - (IBAction)continueOnboarding:(id)sender {
     [Flurry logEvent:@"WelcomeScreenContinue"];
     [self performSegueWithIdentifier:CONTINUE_ONBOARDING_SEGUE sender:self];
-}
-
-#pragma mark - UIWebView
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
-        [[UIApplication sharedApplication] openURL:[request URL]];
-        return NO;
-    }
-    
-    return YES;
 }
 
 @end

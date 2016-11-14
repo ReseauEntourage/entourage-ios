@@ -9,6 +9,11 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Text-Regular.otf">
+            <string>SFUIText-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Ask More View Controller-->
         <scene sceneID="1Kh-V1-hZ9">
@@ -267,7 +272,7 @@
                                 </variation>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nj7-QE-W4r">
-                                <rect key="frame" x="-8" y="328" width="391" height="36"/>
+                                <rect key="frame" x="-7.5" y="328" width="390" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Environnment = Prod (tapper pour changer)">
                                     <color key="titleColor" red="1" green="0.0" blue="0.041492548699985754" alpha="1" colorSpace="calibratedRGB"/>
@@ -843,21 +848,25 @@ sur Entourage.</string>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <webView contentMode="scaleToFill" allowsInlineMediaPlayback="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5g-y1-uZm">
-                                <rect key="frame" x="8" y="192" width="359" height="394"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="8Pa-2W-O1j" id="ScT-6L-zWD"/>
-                                </connections>
-                            </webView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wF4-5f-khB">
+                                <rect key="frame" x="12" y="184" width="351" height="402"/>
+                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <string key="text">Vous allez rejoindre une communauté de citoyens qui collaborent pour lutter contre l’exclusion sociale! 
+En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="wF4-5f-khB" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-4" id="6Tm-4Q-gvF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="6go-Mk-4bj"/>
                             <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="CSS-GK-sBy"/>
-                            <constraint firstItem="z5g-y1-uZm" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="GQk-g8-bXy"/>
+                            <constraint firstItem="8vj-nj-f39" firstAttribute="top" secondItem="wF4-5f-khB" secondAttribute="bottom" constant="15" id="Djz-hO-Nad"/>
                             <constraint firstItem="3bR-VB-ndO" firstAttribute="top" secondItem="UIV-Pr-4Jl" secondAttribute="bottom" constant="20" id="H6V-od-O8V"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wF4-5f-khB" secondAttribute="trailing" constant="-4" id="JjY-YD-fdS"/>
+                            <constraint firstItem="wF4-5f-khB" firstAttribute="top" secondItem="eEZ-Ma-DdB" secondAttribute="bottom" id="Mb3-qm-R0B"/>
                             <constraint firstItem="eEZ-Ma-DdB" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-4" id="Mw2-fa-gi8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="NLy-4P-qnF"/>
                             <constraint firstItem="eEZ-Ma-DdB" firstAttribute="top" secondItem="3bR-VB-ndO" secondAttribute="bottom" constant="16" id="UXb-Bi-SHI"/>
@@ -865,12 +874,9 @@ sur Entourage.</string>
                             <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="bat-wy-8tV"/>
                             <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="de5-df-YMd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="epV-sA-DPi"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="z5g-y1-uZm" secondAttribute="trailing" constant="-8" id="f9D-HU-8EE"/>
                             <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="fWs-Tx-8bC"/>
                             <constraint firstItem="3bR-VB-ndO" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-4" id="o5d-uy-4s9"/>
-                            <constraint firstItem="z5g-y1-uZm" firstAttribute="top" secondItem="eEZ-Ma-DdB" secondAttribute="bottom" constant="8" id="oZP-Eh-UQB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="tLT-p6-FQf"/>
-                            <constraint firstItem="8vj-nj-f39" firstAttribute="top" secondItem="z5g-y1-uZm" secondAttribute="bottom" constant="15" id="zr0-BG-CiV"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -885,7 +891,7 @@ sur Entourage.</string>
                     </view>
                     <navigationItem key="navigationItem" id="3Xs-Xs-bSI"/>
                     <connections>
-                        <outlet property="webView" destination="z5g-y1-uZm" id="MpR-ku-ydz"/>
+                        <outlet property="txtTerms" destination="wF4-5f-khB" id="Zjt-g3-JHE"/>
                         <segue destination="Gt1-cc-4DI" kind="show" identifier="WelcomeLoginSegue" id="GFk-L8-2yS"/>
                         <segue destination="L2Y-m3-WnX" kind="show" identifier="SegueOnboarding" id="YvZ-rG-WF2"/>
                     </connections>
