@@ -25,6 +25,8 @@
         self.tag = TimelinePointTagJoiner;
         self.uID = [dictionary valueForKey:kWSKeyID];
         self.displayName = [dictionary valueForKey:kWSKeyDisplayName];
+        if([self.displayName isKindOfClass:[NSNull class]])
+            self.displayName = @"";
         self.status = [dictionary objectForKey:kWSKeyStatus];
         self.message = [dictionary objectForKey:kWSKeyMessage];
         self.avatarUrl = [dictionary objectForKey:kWSKeyAvatarUrl];
