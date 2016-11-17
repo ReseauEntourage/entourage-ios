@@ -20,6 +20,7 @@
 #import "OTMyEntouragesOptionsBehavior.h"
 #import "OTFeedItemDetailsBehavior.h"
 #import "OTManageInvitationBehavior.h"
+#import "OTUserProfileBehavior.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -31,6 +32,7 @@
 @property (nonatomic, strong) IBOutlet OTMyEntouragesOptionsBehavior *optionsBehavior;
 @property (nonatomic, strong) IBOutlet OTFeedItemDetailsBehavior *feedItemDetailsBehavior;
 @property (nonatomic, strong) IBOutlet OTManageInvitationBehavior* manageInvitation;
+@property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 
 @end
 
@@ -74,6 +76,8 @@
     if([self.feedItemDetailsBehavior prepareSegueForDetails:segue])
         return;
     if([self.manageInvitation prepareSegueForManage:segue])
+        return;
+    if ([self.userProfileBehavior prepareSegueForUserProfile:segue])
         return;
     if([segue.identifier isEqualToString:@"FiltersSegue"]) {
         [Flurry logEvent:@"MessagesFilterClick"];
