@@ -20,20 +20,27 @@
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, strong) OTEntourageInvitation *invitation;
+@property (nonatomic) BOOL isLoadingFeedItem;
 
 @end
 
 @implementation OTManageInvitationBehavior
 
 - (void)showFor:(OTEntourageInvitation *)invitation {
+    if (self.isLoadingFeedItem) return;
+    self.isLoadingFeedItem = YES;
     self.invitation = invitation;
     [SVProgressHUD show];
     [[[OTFeedItemFactory createForType:nil andId:invitation.entourageId] getStateInfo] loadWithSuccess:^(OTFeedItem *feedItem) {
         self.feedItem = feedItem;
         [SVProgressHUD dismiss];
-        [self.owner performSegueWithIdentifier:@"ManageInvitationSegue" sender:self];
+        if (self.owner != nil && self.owner.parentViewController != nil) {
+            [self.owner performSegueWithIdentifier:@"ManageInvitationSegue" sender:self];
+        }
+        self.isLoadingFeedItem = NO;
     } error:^(NSError *error) {
         [SVProgressHUD dismiss];
+        self.isLoadingFeedItem = NO;
     }];
 }
 
