@@ -260,7 +260,12 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)setupEntouragesProfileCell:(UITableViewCell *)cell {
     UILabel *noEntouragesLabel = [cell viewWithTag:NOENTOURAGES];
-    noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.tourCount.intValue];
+    if ([self.user isPro]) {
+        noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.tourCount.intValue];
+    }
+    else {
+        noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.entourageCount.intValue];
+    }
 }
 
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationLogoUrl:(NSString *)imageURL
