@@ -21,6 +21,7 @@ NSString *const kKeyAvatarKey = @"avatar_key";
 NSString *const kKeyToken = @"token";
 NSString *const kKeyStats = @"stats";
 NSString *const kKeyTourCount = @"tour_count";
+NSString *const kKeyEntourageCount = @"entourage_count";
 NSString *const kKeyEncounterCount = @"encounter_count";
 NSString *const kKeyOrganization = @"organization";
 
@@ -41,6 +42,7 @@ NSString *const kKeyOrganization = @"organization";
     _phone = [dictionary stringForKey:kKeyUserPhone];
     _token = [dictionary stringForKey:kKeyToken];
     _tourCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyTourCount defaultValue:0];
+    _entourageCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEntourageCount defaultValue:0];
     _encounterCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEncounterCount];
     _organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
   }
@@ -71,18 +73,19 @@ NSString *const kKeyOrganization = @"organization";
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-  [encoder encodeObject:self.sid forKey:kKeySid];
-  [encoder encodeObject:self.type forKey:kKeyType];
-  [encoder encodeObject:self.email forKey:kKeyEmail];
-  [encoder encodeObject:self.avatarURL forKey:kKeyAvatarURL];
-  [encoder encodeObject:self.firstName forKey:kWSKeyFirstname];
-  [encoder encodeObject:self.lastName forKey:kWSKeyLastname];
-  [encoder encodeObject:self.displayName forKey:kKeyDisplayName];
-  [encoder encodeObject:self.phone forKey:kKeyUserPhone];
-  [encoder encodeObject:self.token forKey:kKeyToken];
-  [encoder encodeObject:self.tourCount forKey:kKeyTourCount];
-  [encoder encodeObject:self.encounterCount forKey:kKeyEncounterCount];
-  [encoder encodeObject:self.organization forKey:kKeyOrganization];
+    [encoder encodeObject:self.sid forKey:kKeySid];
+    [encoder encodeObject:self.type forKey:kKeyType];
+    [encoder encodeObject:self.email forKey:kKeyEmail];
+    [encoder encodeObject:self.avatarURL forKey:kKeyAvatarURL];
+    [encoder encodeObject:self.firstName forKey:kWSKeyFirstname];
+    [encoder encodeObject:self.lastName forKey:kWSKeyLastname];
+    [encoder encodeObject:self.displayName forKey:kKeyDisplayName];
+    [encoder encodeObject:self.phone forKey:kKeyUserPhone];
+    [encoder encodeObject:self.token forKey:kKeyToken];
+    [encoder encodeObject:self.tourCount forKey:kKeyTourCount];
+    [encoder encodeObject:self.entourageCount forKey:kKeyEntourageCount];
+    [encoder encodeObject:self.encounterCount forKey:kKeyEncounterCount];
+    [encoder encodeObject:self.organization forKey:kKeyOrganization];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -99,10 +102,18 @@ NSString *const kKeyOrganization = @"organization";
     self.phone = [decoder decodeObjectForKey:kKeyUserPhone];
     self.token = [decoder decodeObjectForKey:kKeyToken];
     self.tourCount = [decoder decodeObjectForKey:kKeyTourCount];
+    self.entourageCount = [decoder decodeObjectForKey:kKeyEntourageCount];
     self.encounterCount = [decoder decodeObjectForKey:kKeyEncounterCount];
     self.organization = [decoder decodeObjectForKey:kKeyOrganization];
   }
   return self;
+}
+
+#pragma mark - Helper functions
+
+- (BOOL)isPro
+{
+    return [USER_TYPE_PRO isEqualToString:self.type];
 }
 
 @end
