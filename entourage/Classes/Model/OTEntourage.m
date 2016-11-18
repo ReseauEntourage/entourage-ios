@@ -25,13 +25,13 @@
     self = [super initWithDictionary:dictionary];
     if (self) {
         self.creationDate = [dictionary dateForKey:kWSKeyCreateDate];
-        self.title = [dictionary valueForKey:kWSKeyTitle];
+        self.title = [dictionary stringForKey:kWSKeyTitle];
         self.location = [dictionary locationForKey:kWSKeyLocation
                                    withLatitudeKey:kWSKeyLatitude
                                    andLongitudeKey:kWSKeyLongitude];
-        self.desc = [dictionary valueForKey:kWSKeyDescription];
-        self.type = [dictionary valueForKey:kWSKeyEntourageType];
-        self.noPeople = [dictionary valueForKey:kWSNoPeople];
+        self.desc = [dictionary stringForKey:kWSKeyDescription];
+        self.type = [dictionary stringForKey:kWSKeyEntourageType];
+        self.noPeople = [dictionary numberForKey:kWSNoPeople];
     }
     return self;
 }

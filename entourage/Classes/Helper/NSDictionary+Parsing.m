@@ -79,6 +79,12 @@ static NSDateFormatter * dateFormatter;
 	return result;
 }
 
+/**
+ * Returns the string associated with a given key
+ * @param key 
+ * the key in the dictionary
+ * @return the string associated with the key, or an empty string if key not found or not a string
+ */
 - (NSString *)stringForKey:(NSString *)key
 {
 	return [self stringForKey:key defaultValue:@""];

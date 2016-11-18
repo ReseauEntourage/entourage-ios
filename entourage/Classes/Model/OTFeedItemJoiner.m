@@ -23,13 +23,13 @@
     if (self)
     {
         self.tag = TimelinePointTagJoiner;
-        self.uID = [dictionary valueForKey:kWSKeyID];
-        self.displayName = [dictionary valueForKey:kWSKeyDisplayName];
+        self.uID = [dictionary numberForKey:kWSKeyID];
+        self.displayName = [dictionary stringForKey:kWSKeyDisplayName];
         if([self.displayName isKindOfClass:[NSNull class]])
             self.displayName = @"";
-        self.status = [dictionary objectForKey:kWSKeyStatus];
-        self.message = [dictionary objectForKey:kWSKeyMessage];
-        self.avatarUrl = [dictionary objectForKey:kWSKeyAvatarUrl];
+        self.status = [dictionary stringForKey:kWSKeyStatus];
+        self.message = [dictionary stringForKey:kWSKeyMessage];
+        self.avatarUrl = [dictionary stringForKey:kWSKeyAvatarUrl];
         //Java format
         self.date = [dictionary dateForKey:kWSKeyRequestedAt format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
         if (self.date == nil)
