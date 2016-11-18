@@ -25,10 +25,10 @@
 
 - (void)nextFromLogin {
     self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if(self.currentUser.email.length > 0)
+    if(self.currentUser.lastName.length > 0 && self.currentUser.firstName.length > 0)
         [self nextFromEmail];
     else
-        [self gotoEmail];
+        [self gotoName];
 }
 
 - (void)nextFromEmail {

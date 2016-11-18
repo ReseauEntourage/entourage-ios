@@ -150,6 +150,7 @@ numéro de portable? </string>
                     </view>
                     <navigationItem key="navigationItem" id="cSh-dG-zfC"/>
                     <connections>
+                        <outlet property="heightContraint" destination="AoC-eX-VD9" id="3RE-xF-D89"/>
                         <outlet property="phoneTextField" destination="8h5-LL-TYs" id="Yfa-sb-k8C"/>
                         <outlet property="scrollView" destination="ZKP-h6-GEA" id="0nk-qH-HWC"/>
                         <outlet property="validateButton" destination="Bpk-JJ-QTl" id="a49-hZ-U5R"/>
@@ -175,16 +176,15 @@ numéro de portable? </string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GL7-KN-5la">
                                 <rect key="frame" x="0.0" y="20" width="375" height="379"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="code" translatesAutoresizingMaskIntoConstraints="NO" id="NGL-BN-ZjP">
-                                        <rect key="frame" x="12" y="20" width="56" height="56"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="code" translatesAutoresizingMaskIntoConstraints="NO" id="NGL-BN-ZjP">
+                                        <rect key="frame" x="15" y="20" width="56" height="56"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="56" id="Qua-XM-BDf"/>
                                             <constraint firstAttribute="height" constant="56" id="b90-SZ-vKI"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCt-6F-DVv">
-                                        <rect key="frame" x="15" y="106" width="296" height="72"/>
+                                        <rect key="frame" x="15" y="87" width="296" height="72"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="72" id="6Dy-EO-OY3"/>
                                             <constraint firstAttribute="width" constant="296" id="MH6-MY-HwN"/>
@@ -196,29 +196,20 @@ vérification</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Veuillez saisir le code reçu par SMS. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2V-xB-zfa">
-                                        <rect key="frame" x="15" y="182" width="296" height="36"/>
+                                        <rect key="frame" x="15" y="184" width="296" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="296" id="VBp-kI-gHY"/>
-                                            <constraint firstAttribute="width" constant="296" id="Wdy-XV-VRt"/>
                                             <constraint firstAttribute="height" constant="36" id="iq0-ca-C6h"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="oQj-Ec-gnW"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="Wdy-XV-VRt"/>
-                                                <exclude reference="oQj-Ec-gnW"/>
-                                            </mask>
-                                        </variation>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pvY-e5-lmP" customClass="OnBoardingCodeTextField" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="18" y="233" width="339" height="50"/>
+                                        <rect key="frame" x="15" y="228" width="345" height="53"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="296" id="IoI-EN-8P4"/>
-                                            <constraint firstAttribute="height" constant="50" id="vxj-qn-sUH"/>
+                                            <constraint firstAttribute="height" constant="53" id="vxj-qn-sUH"/>
                                         </constraints>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
@@ -228,28 +219,19 @@ vérification</string>
                                                 <color key="value" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="IoI-EN-8P4"/>
-                                            </mask>
-                                        </variation>
                                     </textField>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8f-fn-OPr">
-                                        <rect key="frame" x="18" y="280.5" width="339" height="1"/>
+                                        <rect key="frame" x="18" y="278" width="339" height="1"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="p38-L1-X0Q"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH7-Ij-WiF" customClass="OnBoardingButton" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="301.5" width="345" height="50"/>
+                                        <rect key="frame" x="15" y="309" width="345" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="0eh-TJ-r93"/>
-                                            <constraint firstAttribute="width" constant="296" id="4eX-br-TBN"/>
                                             <constraint firstAttribute="height" constant="50" id="GcX-1m-hTj"/>
-                                            <constraint firstAttribute="width" constant="210" id="X3U-Bm-69i"/>
-                                            <constraint firstAttribute="width" constant="304" id="oVl-nZ-5xQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Valider">
@@ -260,14 +242,6 @@ vérification</string>
                                                 <integer key="value" value="25"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="0eh-TJ-r93"/>
-                                                <exclude reference="4eX-br-TBN"/>
-                                                <exclude reference="X3U-Bm-69i"/>
-                                                <exclude reference="oVl-nZ-5xQ"/>
-                                            </mask>
-                                        </variation>
                                         <connections>
                                             <action selector="doContinue" destination="ay8-4Z-lNJ" eventType="touchUpInside" id="i4j-bq-eR0"/>
                                         </connections>
@@ -275,41 +249,25 @@ vérification</string>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="m2V-xB-zfa" secondAttribute="trailing" constant="12" id="1As-fy-DKf"/>
                                     <constraint firstItem="m2V-xB-zfa" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="3DH-Ef-S2z"/>
-                                    <constraint firstItem="ZH7-Ij-WiF" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="8" id="3Ec-T6-Upt"/>
                                     <constraint firstItem="ZH7-Ij-WiF" firstAttribute="centerX" secondItem="GL7-KN-5la" secondAttribute="centerX" id="4W4-WK-7gr"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZH7-Ij-WiF" secondAttribute="trailing" constant="8" id="6qx-JO-NB6"/>
                                     <constraint firstAttribute="trailing" secondItem="ZH7-Ij-WiF" secondAttribute="trailing" constant="15" id="8CM-Jb-Z5F"/>
-                                    <constraint firstItem="m2V-xB-zfa" firstAttribute="top" secondItem="sCt-6F-DVv" secondAttribute="bottom" constant="4" id="8Wr-PY-L9v"/>
-                                    <constraint firstItem="pvY-e5-lmP" firstAttribute="top" secondItem="m2V-xB-zfa" secondAttribute="bottom" constant="15" id="98s-sS-FuG"/>
-                                    <constraint firstItem="pvY-e5-lmP" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="12" id="D6y-dn-Tei"/>
-                                    <constraint firstAttribute="trailing" secondItem="sCt-6F-DVv" secondAttribute="trailing" constant="12" id="EYU-Pa-dfK"/>
+                                    <constraint firstItem="m2V-xB-zfa" firstAttribute="top" secondItem="sCt-6F-DVv" secondAttribute="bottom" constant="25" id="8Wr-PY-L9v"/>
+                                    <constraint firstItem="pvY-e5-lmP" firstAttribute="top" secondItem="m2V-xB-zfa" secondAttribute="bottom" constant="8" id="98s-sS-FuG"/>
                                     <constraint firstAttribute="trailing" secondItem="M8f-fn-OPr" secondAttribute="trailing" constant="18" id="Mr0-0c-V6A"/>
-                                    <constraint firstItem="ZH7-Ij-WiF" firstAttribute="top" secondItem="M8f-fn-OPr" secondAttribute="bottom" constant="20" id="Smg-CV-5qR"/>
-                                    <constraint firstItem="pvY-e5-lmP" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="18" id="Xmj-0m-6bq"/>
+                                    <constraint firstItem="ZH7-Ij-WiF" firstAttribute="top" secondItem="M8f-fn-OPr" secondAttribute="bottom" constant="30" id="Smg-CV-5qR"/>
+                                    <constraint firstItem="pvY-e5-lmP" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="Xmj-0m-6bq"/>
                                     <constraint firstItem="ZH7-Ij-WiF" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="aFe-Zl-3UG"/>
                                     <constraint firstAttribute="height" constant="379" id="apC-Kc-icw"/>
-                                    <constraint firstAttribute="trailing" secondItem="pvY-e5-lmP" secondAttribute="trailing" constant="18" id="cQS-7h-Sfw"/>
+                                    <constraint firstAttribute="trailing" secondItem="pvY-e5-lmP" secondAttribute="trailing" constant="15" id="cQS-7h-Sfw"/>
                                     <constraint firstItem="M8f-fn-OPr" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="18" id="gh9-1d-BDZ"/>
-                                    <constraint firstItem="sCt-6F-DVv" firstAttribute="top" secondItem="NGL-BN-ZjP" secondAttribute="bottom" constant="30" id="h8U-Um-CBB"/>
+                                    <constraint firstItem="sCt-6F-DVv" firstAttribute="top" secondItem="NGL-BN-ZjP" secondAttribute="bottom" constant="11" id="h8U-Um-CBB"/>
                                     <constraint firstItem="M8f-fn-OPr" firstAttribute="top" secondItem="pvY-e5-lmP" secondAttribute="baseline" constant="15" id="ioH-nK-s9l"/>
-                                    <constraint firstAttribute="trailing" secondItem="pvY-e5-lmP" secondAttribute="trailing" constant="12" id="od2-iw-Jgm"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZH7-Ij-WiF" secondAttribute="bottom" constant="15" id="pml-u7-Fsz"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZH7-Ij-WiF" secondAttribute="bottom" constant="20" id="pml-u7-Fsz"/>
                                     <constraint firstItem="NGL-BN-ZjP" firstAttribute="top" secondItem="GL7-KN-5la" secondAttribute="top" constant="20" id="tJ5-vD-TGt"/>
                                     <constraint firstItem="sCt-6F-DVv" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="uoj-k6-UCg"/>
-                                    <constraint firstItem="NGL-BN-ZjP" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="12" id="ydd-HL-CmO"/>
+                                    <constraint firstItem="NGL-BN-ZjP" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="ydd-HL-CmO"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="EYU-Pa-dfK"/>
-                                        <exclude reference="1As-fy-DKf"/>
-                                        <exclude reference="D6y-dn-Tei"/>
-                                        <exclude reference="od2-iw-Jgm"/>
-                                        <exclude reference="3Ec-T6-Upt"/>
-                                        <exclude reference="6qx-JO-NB6"/>
-                                    </mask>
-                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -326,7 +284,7 @@ vérification</string>
                         <outlet property="onboardingNavigation" destination="13E-al-jIm" id="bin-ft-ga6"/>
                         <outlet property="scrollView" destination="GL7-KN-5la" id="pQv-r2-Yis"/>
                         <outlet property="validateButton" destination="ZH7-Ij-WiF" id="caZ-eL-9TI"/>
-                        <segue destination="WWp-Jk-pyc" kind="show" identifier="CodeToEmailSegue" id="el8-oc-xQX"/>
+                        <segue destination="WWp-Jk-pyc" kind="show" identifier="CodeToNameSegue" id="el8-oc-xQX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esw-lb-Cqw" userLabel="First Responder" sceneMemberID="firstResponder"/>

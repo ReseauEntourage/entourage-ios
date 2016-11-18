@@ -21,7 +21,7 @@
 #import "OTDeepLinkService.h"
 #import "entourage-Swift.h"
 
-@interface OTPhoneViewController () <UITextFieldDelegate>
+@interface OTPhoneViewController ()
 
 @property (nonatomic, weak) IBOutlet OnBoardingNumberTextField *phoneTextField;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
@@ -50,6 +50,13 @@
     [super viewDidAppear:animated];
     [self.phoneTextField becomeFirstResponder];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
+    [[IQKeyboardManager sharedManager] setEnable:true];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
 }
 
 - (IBAction)doContinue {
@@ -97,12 +104,7 @@
 }
 
 - (void)showKeyboard:(NSNotification*)notification {
-//    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
 }
-
-/********************************************************************************/
-#pragma mark - UITextFieldDelegate
-
-
 
 @end

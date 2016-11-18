@@ -44,15 +44,11 @@
     self.codeTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
     };
-
-    //[self.codeTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]
-     //                                     andFont:[UIColor appTextFieldPlaceholderFont]];
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     if([NSUserDefaults standardUserDefaults].currentUser) {
         [NSUserDefaults standardUserDefaults].temporaryUser = [NSUserDefaults standardUserDefaults].currentUser;
@@ -62,7 +58,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
 }
 
 #pragma mark - Private

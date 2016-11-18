@@ -3,7 +3,9 @@ import libPhoneNumber_iOS
 import JVFloatLabeledTextField
 
 class OnBoardingTextField: JVFloatLabeledTextField, Validable {
-    @objc var inputIsValid: (String?) -> (Bool) = { _ in return true }
+    @objc var inputIsValid: (String?) -> (Bool) = { text in
+        return text != nil && !(text!.isEmpty)
+    }
     @objc var inputValidationChanged: ((Bool) -> (Void))?
 
     override func awakeFromNib() {
@@ -15,6 +17,7 @@ class OnBoardingTextField: JVFloatLabeledTextField, Validable {
             attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
         }
         registerForNotifications()
+        floatingLabelTextColor = tintColor
     }
 
     deinit {
