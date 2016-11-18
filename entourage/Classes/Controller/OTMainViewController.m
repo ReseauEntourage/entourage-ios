@@ -104,6 +104,7 @@
 @property (nonatomic, strong) WYPopoverController *popover;
 @property (nonatomic) BOOL isRegionSetted;
 @property (nonatomic, assign) CGPoint mapPoint;
+@property (nonatomic, strong) CLLocation *tappedLocation;
 @property (nonatomic) BOOL isTourListDisplayed;
 @property (nonatomic, weak) IBOutlet UIButton *launcherButton;
 @property (nonatomic, weak) IBOutlet UIButton *stopButton;
@@ -272,11 +273,12 @@
     if (self.presentedViewController)
         return;
     self.mapPoint = touchPoint;
+    CLLocationCoordinate2D whereTap = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+    self.tappedLocation = [[CLLocation alloc] initWithLatitude:whereTap.latitude longitude:whereTap.longitude];
+
     if ([OTOngoingTourService sharedInstance].isOngoing) {
-        CLLocationCoordinate2D whereTap = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
-        CLLocation *location = [[CLLocation alloc] initWithLatitude:whereTap.latitude longitude:whereTap.longitude];
         CLLocation *userLocation = [OTLocationManager sharedInstance].currentLocation;
-        CLLocationDistance distance = [location distanceFromLocation:userLocation];
+        CLLocationDistance distance = [self.tappedLocation distanceFromLocation:userLocation];
         if (distance <=  MAX_DISTANCE) {
             encounterFromTap = YES;
             self.encounterLocation = whereTap;
@@ -962,7 +964,7 @@
         UINavigationController *navController = (UINavigationController*)destinationViewController;
         OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.childViewControllers[0];
         controller.type = self.entourageType;
-        CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
+        CLLocation *currentLocation = self.tappedLocation ? self.tappedLocation : [OTLocationManager sharedInstance].currentLocation;
         controller.location = currentLocation;
         controller.entourageEditorDelegate = self;
     }
