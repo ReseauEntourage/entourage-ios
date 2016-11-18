@@ -77,8 +77,6 @@
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     currentUser.firstName = self.firstNameTextField.text;
     currentUser.lastName = self.lastNameTextField.text;
-    [self.onboardingNavigation nextFromName];
-    return;
     [SVProgressHUD show];
 
     [[OTAuthService new] updateUserInformationWithUser:currentUser success:^(OTUser *user) {

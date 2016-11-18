@@ -101,10 +101,6 @@
     NSString *code = self.codeTextField.text;
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
 
-
-    [self.onboardingNavigation nextFromLogin];
-    return;
-
     [SVProgressHUD show];
     
     [[OTAuthService new] authWithPhone:phone
