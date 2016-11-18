@@ -464,6 +464,10 @@
 
 #pragma mark - OTNewsFeedsSourceDelegate
 
+- (void)itemsRemoved {
+    [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
+}
+
 - (void)itemsUpdated {
     if (self.newsFeedsSourceBehavior.feedItems.count && self.isFirstLoad) {
         self.isFirstLoad = NO;

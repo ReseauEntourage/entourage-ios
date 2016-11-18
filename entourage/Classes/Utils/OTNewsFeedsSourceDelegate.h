@@ -10,6 +10,7 @@
 
 @protocol OTNewsFeedsSourceDelegate <NSObject>
 
+- (void)itemsRemoved;
 - (void)itemsUpdated;
 - (void)errorLoadingFeedItems:(NSError *)error;
 - (void)errorLoadingNewFeedItems:(NSError *)error;

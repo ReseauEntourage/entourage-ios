@@ -38,6 +38,7 @@
     self.currentFilter = [filter copy];
     self.currentFilter.location = coordinate;
     [self.feedItems removeAllObjects];
+    [self.delegate itemsRemoved];
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         [self.feedItems addObjectsFromArray:[self sortItems:items]];
