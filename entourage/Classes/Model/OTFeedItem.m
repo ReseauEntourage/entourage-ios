@@ -26,10 +26,10 @@
         self.uid = [dictionary numberForKey:kWSKeyID];
         NSDictionary *authorDictionary = [dictionary objectForKey:kWSKeyAuthor];
         self.author = [[OTFeedItemAuthor alloc] initWithDictionary:authorDictionary];
-        self.status = [dictionary valueForKey:kWSKeyStatus];
-        self.joinStatus = [dictionary valueForKey:kWSKeyJoinStatus];
+        self.status = [dictionary stringForKey:kWSKeyStatus];
+        self.joinStatus = [dictionary stringForKey:kWSKeyJoinStatus];
         self.noPeople = [dictionary numberForKey:kWSKeyNoPeople];
-        self.type = [dictionary valueForKey:kWSKeyType];
+        self.type = [dictionary stringForKey:kWSKeyType];
         self.updatedDate = [dictionary dateForKey:kWSUpdatedDate];
         NSDictionary *lastMessageDictionary = [dictionary objectForKey:kWSKeyLastMessage];
         if([lastMessageDictionary class] != [NSNull class])
