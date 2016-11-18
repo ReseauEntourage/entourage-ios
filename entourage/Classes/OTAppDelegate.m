@@ -24,6 +24,9 @@
 #import "OTBadgeNumberService.h"
 #import "OTVersionInfo.h"
 #import "OTDebugLog.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -41,12 +44,12 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[OTDebugLog sharedInstance] setConsoleOutput];
 
-#if !DEBUG
+//#if !DEBUG
     [Flurry setAppVersion:[OTVersionInfo currentVersion]];
-	[Flurry setCrashReportingEnabled:YES];
 	[Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
-#endif
-    
+    [Fabric with:@[[Crashlytics class]]];
+//#endif
+
     [IQKeyboardManager sharedManager].enable = YES;
     [self configureUIAppearance];
     

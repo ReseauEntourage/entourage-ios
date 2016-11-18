@@ -15,6 +15,8 @@ target "entourage" do
     pod 'SimpleKeychain', '~> 0.7'
     pod 'FormatterKit'
     pod 'AWSiOSSDKv2', '~> 2.4'
+    pod 'Fabric'
+    pod 'Crashlytics'
 end
 
 target "entourageTests" do

@@ -28,6 +28,7 @@
 #import "OTAskMoreViewController.h"
 #import "NSError+OTErrorData.h"
 
+
 NSString *const kTutorialDone = @"has_done_tutorial";
 
 @interface OTLoginViewController () <LostCodeDelegate>
@@ -78,6 +79,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [textField resignFirstResponder];
     return YES;
 }
+
 
 - (void)launchAuthentication {
     [SVProgressHUD show];
