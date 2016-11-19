@@ -17,6 +17,4 @@
 
 - (instancetype)initWithMapController:(OTMainViewController *)mapController;
 
-- (CLLocationDistance)mapHeight:(MKMapView *)mapView;
-
 @end

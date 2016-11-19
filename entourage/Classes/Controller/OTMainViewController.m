@@ -72,6 +72,7 @@
 #import "OTTourCreatorBehavior.h"
 #import "OTTourCreatorBehaviorDelegate.h"
 #import "OTStartTourAnnotation.h"
+#import "OTNoDataBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -115,7 +116,7 @@
 @property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
 @property (nonatomic) BOOL isFirstLoad;
 @property (nonatomic) BOOL wasLoadedOnce;
-@property (nonatomic, weak) IBOutlet UIView *noEntouragesPopup;
+@property (nonatomic, weak) IBOutlet OTNoDataBehavior *noDataBehavior;
 
 @end
 
@@ -127,6 +128,7 @@
     [super viewDidLoad];
     
     self.isFirstLoad = YES;
+    [self.noDataBehavior initialize];
     [self.newsFeedsSourceBehavior initialize];
     self.newsFeedsSourceBehavior.delegate = self;
     [self.tourCreatorBehavior initialize];
@@ -200,6 +202,7 @@
 }
 
 - (void)switchToNewsfeed {
+    [self.noDataBehavior switchedToNewsfeeds];
     self.toursMapDelegate.isActive = YES;
     self.guideMapDelegate.isActive = NO;
     [self.mapDelegateProxy.delegates addObject:self.toursMapDelegate];
@@ -214,6 +217,7 @@
 }
 
 - (void)switchToGuide {
+    [self.noDataBehavior switchedToGuide];
     self.toursMapDelegate.isActive = NO;
     self.guideMapDelegate.isActive = YES;
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
@@ -328,14 +332,17 @@
 }
 
 - (void)willChangePosition {
-    [self toggleNoEntourageView:YES];
+    [self.noDataBehavior hideNoData];
 }
 
 - (void)didChangePosition {
     CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.newsFeedsSourceBehavior.lastOkCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
     if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4)
         return;
-    [self reloadFeeds];
+    if(self.toursMapDelegate.isActive)
+        [self reloadFeeds];
+    else
+        [self reloadPois];
 }
 
 - (IBAction)forceGetNewData {
@@ -344,14 +351,20 @@
 }
 
 - (void)getPOIList {
+    [self.noDataBehavior hideNoData];
     [[OTPoiService new] poisAroundCoordinate:self.mapView.centerCoordinate distance:[self mapHeight] success:^(NSArray *categories, NSArray *pois)
         {
             self.categories = categories;
             self.pois = pois;
             [self feedMapViewWithPoiArray:pois];
+            if(self.pois.count == 0)
+                [self.noDataBehavior showNoData];
+               
         } failure:^(NSError *error) {
             [self registerObserver];
             NSLog(@"Err getting POI %@", error.description);
+            if(self.pois.count == 0)
+                [self.noDataBehavior showNoData];
     }];
 }
 
@@ -487,7 +500,12 @@
         [self.tableView setNoFeeds];
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self feedMapWithFeedItems];
-    [self toggleNoEntourageView:self.isTourListDisplayed || self.newsFeedsSourceBehavior.feedItems.count > 0];
+    if(self.toursMapDelegate.isActive) {
+        if(!self.isTourListDisplayed && self.newsFeedsSourceBehavior.feedItems.count == 0)
+            [self.noDataBehavior showNoData];
+        else
+            [self.noDataBehavior hideNoData];
+    }
 }
 
 - (void)errorLoadingFeedItems:(NSError *)error {
@@ -827,7 +845,7 @@
 #pragma mark - "Screens"
 
 - (void)showToursList {
-    [self toggleNoEntourageView:YES];
+    [self.noDataBehavior hideNoData];
     self.isTourListDisplayed = YES;
     [UIView animateWithDuration:0.2 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
@@ -840,7 +858,8 @@
 }
 
 - (void)showToursMap {
-    [self toggleNoEntourageView:!self.wasLoadedOnce || self.newsFeedsSourceBehavior.feedItems.count > 0];
+    if(self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0)
+        [self.noDataBehavior showNoData];
     self.nouveauxFeedItemsButton.hidden = YES;
     if (self.toursMapDelegate.isActive)
         self.isTourListDisplayed = NO;
@@ -969,16 +988,6 @@
         OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
         controller.optionsDelegate = self;
     }
-}
-
-#pragma mark - no entourages popup
-
-- (IBAction)closeNoEntouragesPopup:(id)sender {
-    [self toggleNoEntourageView:YES];
-}
-
-- (void)toggleNoEntourageView:(BOOL)closed {
-    self.noEntouragesPopup.hidden = !self.toursMapDelegate.isActive || closed;
 }
 
 @end

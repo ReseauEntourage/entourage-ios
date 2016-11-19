@@ -170,6 +170,8 @@
 		1E8E16E91D5A3814005C42ED /* OTEntourageInvitation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E16E81D5A3814005C42ED /* OTEntourageInvitation.m */; };
 		1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9003681D34FAAB004E18BC /* OTBehavior.m */; };
 		1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E90036D1D352C0B004E18BC /* UserPicture.storyboard */; };
+		1E993BFC1DDB514300621770 /* OTNoDataBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E993BFB1DDB514300621770 /* OTNoDataBehavior.m */; };
+		1E993BFF1DDB532E00621770 /* NSAttributedString+OTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E993BFE1DDB532E00621770 /* NSAttributedString+OTBuilder.m */; };
 		1E9B386E1DC88290000F9F3F /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386D1DC88290000F9F3F /* staging.plist */; };
 		1E9B38701DC882A1000F9F3F /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386F1DC882A1000F9F3F /* prod.plist */; };
 		1EA47A7F1DC1F4F300680858 /* OTSummaryInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA47A7E1DC1F4F300680858 /* OTSummaryInfoCell.m */; };
@@ -633,6 +635,10 @@
 		1E9003671D34FAAB004E18BC /* OTBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTBehavior.h; path = Behaviors/OTBehavior.h; sourceTree = "<group>"; };
 		1E9003681D34FAAB004E18BC /* OTBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTBehavior.m; path = Behaviors/OTBehavior.m; sourceTree = "<group>"; };
 		1E90036E1D352C0B004E18BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserPicture.storyboard; sourceTree = "<group>"; };
+		1E993BFA1DDB514300621770 /* OTNoDataBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTNoDataBehavior.h; path = Behaviors/NewsFeed/OTNoDataBehavior.h; sourceTree = "<group>"; };
+		1E993BFB1DDB514300621770 /* OTNoDataBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTNoDataBehavior.m; path = Behaviors/NewsFeed/OTNoDataBehavior.m; sourceTree = "<group>"; };
+		1E993BFD1DDB532E00621770 /* NSAttributedString+OTBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSAttributedString+OTBuilder.h"; path = "Helper/NSAttributedString+OTBuilder.h"; sourceTree = "<group>"; };
+		1E993BFE1DDB532E00621770 /* NSAttributedString+OTBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSAttributedString+OTBuilder.m"; path = "Helper/NSAttributedString+OTBuilder.m"; sourceTree = "<group>"; };
 		1E9B386D1DC88290000F9F3F /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
 		1E9B386F1DC882A1000F9F3F /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
 		1EA47A7D1DC1F4F300680858 /* OTSummaryInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSummaryInfoCell.h; sourceTree = "<group>"; };
@@ -1074,6 +1080,8 @@
 				1EB7F02E1DB41E8900F006A7 /* OTVersionInfo.m */,
 				1E4F56171DB63BE900AD0CAC /* NSError+OTErrorData.h */,
 				1E4F56181DB63BE900AD0CAC /* NSError+OTErrorData.m */,
+				1E993BFD1DDB532E00621770 /* NSAttributedString+OTBuilder.h */,
+				1E993BFE1DDB532E00621770 /* NSAttributedString+OTBuilder.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1531,6 +1539,8 @@
 				1E5C30261D6F740C00E10770 /* OTFeedItemDetailsBehavior.m */,
 				1E66936A1D85DEEB00F9C03D /* OTTapEntourageBehavior.h */,
 				1E66936B1D85DEEB00F9C03D /* OTTapEntourageBehavior.m */,
+				1E993BFA1DDB514300621770 /* OTNoDataBehavior.h */,
+				1E993BFB1DDB514300621770 /* OTNoDataBehavior.m */,
 			);
 			name = NewsFeed;
 			sourceTree = "<group>";
@@ -2671,6 +2681,7 @@
 				1EFAC0DF1D8924B100BE396F /* OTFeedItemJoinOptionsViewController.m in Sources */,
 				1E2C600F1D775FCF004B195A /* OTTourChangedHandler.m in Sources */,
 				1EACE4171D11515200F3A2A6 /* OTEntourageStateTransition.m in Sources */,
+				1E993BFF1DDB532E00621770 /* NSAttributedString+OTBuilder.m in Sources */,
 				0A4D160A1C21B3AB0066394C /* OTMessageViewController.m in Sources */,
 				1EE817631D7A052C0003133D /* OTOngoingTourService.m in Sources */,
 				1EF25E111D5B2F4A00BFC3BC /* OTMyEntouragesDataSource.m in Sources */,
@@ -2832,6 +2843,7 @@
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				1E49BCBA1D7D8C0C0024EDC1 /* OTDisclaimerViewController.m in Sources */,
 				1EC9D6821D6468A800C6E9AA /* OTInvitationsService.m in Sources */,
+				1E993BFC1DDB514300621770 /* OTNoDataBehavior.m in Sources */,
 				1EF23E301DD093C600E71BB7 /* OTStartTourAnnotationView.m in Sources */,
 				45ADCACF1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m in Sources */,
 				1EB7F02F1DB41E8900F006A7 /* OTVersionInfo.m in Sources */,

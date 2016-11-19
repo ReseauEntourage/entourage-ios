@@ -88,6 +88,19 @@
 "stopped_item" = "Maraude arrêtée";
 "join_item_failed" = "Impossible de rejoindre l’entourage.";
 "ongoing" = "En cours";
+"no_data_entourages" = "On dirait que c'est calme ici!
+
+Déplacez la carte pour trouver des entourages crées par le réseau.
+
+Vous aussi, vous pouvez créer un entourage: appuyez sur +";
+"no_data_guide" = "On dirait que c'est calme ici!
+
+Déplacez la carte
+pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…
+
+Une structure manque sur la carte?
+Proposez une structure";
+"no_data_guide_link" = "Proposez une structure";
 
 // Disclaimer
 "encounter_disclaimer" = "Bonjour,\n\nNous vous rappelons qu'en vertu de la charte d'Entourage, vous devez avertir le bénéficiaire qu’un compte-rendu sera réalisé sur vos échanges et pourra être stocké par vous ou par votre association.";
@@ -126,8 +139,6 @@
 "tour_quitted" = "Maraude clôturée.";
 
 // Encounters
-
-
 "formatter_has_meet" = "%@ a rencontré %@";
 "has_encountered" = "a rencontré";
 "here" = "ici";
