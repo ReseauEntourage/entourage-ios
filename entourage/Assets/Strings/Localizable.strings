@@ -318,3 +318,5 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "ok" = "OK";
 
 "mail_not_configured" = "!!No email client found.";
+"mail_sent" = "!!Mail sent.";
+"mail_send_failure" = "!!Failed to send mail.";

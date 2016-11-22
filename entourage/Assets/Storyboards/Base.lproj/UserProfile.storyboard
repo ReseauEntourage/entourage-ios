@@ -311,10 +311,10 @@
             </objects>
             <point key="canvasLocation" x="2134" y="-826"/>
         </scene>
-        <!--User Edit View Controller-->
+        <!--User Edit-->
         <scene sceneID="mMt-C6-6Sg">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="TKj-HF-OVy" customClass="OTUserEditViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="TKj-HF-OVy" userLabel="User Edit" customClass="OTUserEditViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qdv-GV-i05"/>
                         <viewControllerLayoutGuide type="bottom" id="WFO-bS-A50"/>
@@ -421,7 +421,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-lj-j5B">
-                                                    <rect key="frame" x="15" y="17" width="76" height="18"/>
+                                                    <rect key="frame" x="15" y="17" width="76" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -661,11 +661,17 @@ Contactez associations@entourage.social pour avoir accès aux fonctionnalités d
                     </view>
                     <navigationItem key="navigationItem" id="UUn-a4-zT1"/>
                     <connections>
+                        <outlet property="checkMailBehavior" destination="TBM-pn-Kze" id="acD-rw-Ojl"/>
                         <outlet property="tableView" destination="Auw-kh-iqH" id="k1n-RG-LFg"/>
                         <segue destination="JY3-Ti-PBi" kind="presentation" identifier="EditPasswordSegue" id="uE9-pz-j86"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VaY-Ee-nZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="TBM-pn-Kze" userLabel="Mail Text Check" customClass="OTMailTextCheckBehavior">
+                    <connections>
+                        <outlet property="owner" destination="TKj-HF-OVy" id="Gq7-mR-o4Q"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="4492" y="-826"/>
         </scene>

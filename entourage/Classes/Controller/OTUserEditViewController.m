@@ -21,7 +21,7 @@
 #import "A0SimpleKeychain.h"
 #import "NSString+Validators.h"
 #import "UIBarButtonItem+factory.h"
-#import <MessageUI/MFMailComposeViewController.h>
+#import "OTMailTextCheckBehavior.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -36,9 +36,10 @@ typedef NS_ENUM(NSInteger) {
 #define EDIT_PASSWORD_SEGUE @"EditPasswordSegue"
 #define NOTIFY_LOGOUT @"loginFailureNotification"
 
-@interface OTUserEditViewController() <UITableViewDelegate, UITableViewDataSource, OTUserEditPasswordProtocol>
+@interface OTUserEditViewController() <UITableViewDelegate, UITableViewDataSource, OTUserEditPasswordProtocol, UITextViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet OTMailTextCheckBehavior *checkMailBehavior;
 
 @property (nonatomic, strong) UITextField *firstNameTextField;
 @property (nonatomic, strong) UITextField *lastNameTextField;
@@ -341,8 +342,7 @@ typedef NS_ENUM(NSInteger) {
 
 #define PUBLIC_ASSOCIATION_TEXT_TAG 1
 
-- (void)setupSummaryProfileCell:(UITableViewCell *)cell
-{
+- (void)setupSummaryProfileCell:(UITableViewCell *)cell {
     UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
     [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];
     [avatarShadow.layer setShadowOpacity:0.5];
@@ -360,8 +360,7 @@ typedef NS_ENUM(NSInteger) {
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }
 
-- (void)setupInfoCell:(UITableViewCell *)cell withTitle:(NSString *)title withTextField:(UITextField *)myTextField andText:(NSString *)text
-{
+- (void)setupInfoCell:(UITableViewCell *)cell withTitle:(NSString *)title withTextField:(UITextField *)myTextField andText:(NSString *)text {
     UILabel *titleLabel = [cell viewWithTag:CELL_TITLE_TAG];
     titleLabel.text = title;
     UITextField *nameTextField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
@@ -369,8 +368,7 @@ typedef NS_ENUM(NSInteger) {
     nameTextField.text = text;
 }
 
-- (NSString *)editedTextAtIndexPath:(NSIndexPath *)indexPath
-{
+- (NSString *)editedTextAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     UITextField * textField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
     if (textField != nil && [textField isKindOfClass:[UITextField class]])
@@ -378,8 +376,7 @@ typedef NS_ENUM(NSInteger) {
     return nil;
 }
 
-- (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationImage:(NSString *)imageURL
-{
+- (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationImage:(NSString *)imageURL {
     UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
     titleLabel.text = title;
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE_TAG];
@@ -387,9 +384,7 @@ typedef NS_ENUM(NSInteger) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
 }
 
-- (void)setupPhoneCell:(UITableViewCell *)cell
-             withPhone:(NSString *)phone
-{
+- (void)setupPhoneCell:(UITableViewCell *)cell withPhone:(NSString *)phone {
     UILabel *phoneLabel = [cell viewWithTag:PHONE_LABEL_TAG];
     if (phoneLabel != nil)
         phoneLabel.text = phone;
@@ -397,13 +392,14 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)setupPublicAssociationCell:(UITableViewCell *)cell {
     UITextView *txt = [cell viewWithTag:PUBLIC_ASSOCIATION_TEXT_TAG];
+    self.checkMailBehavior.txtWithEmailLinks = txt;
+    [self.checkMailBehavior initialize];
     txt.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor appOrangeColor]};
 }
 
 #pragma mark - OTUserEditPasswordProtocol
 
-- (void)setNewPassword:(NSString *)password
-{
+- (void)setNewPassword:(NSString *)password {
     self.user.password = password;
     [self dismissViewControllerAnimated:YES completion:nil];
 }

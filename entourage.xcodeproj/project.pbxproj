@@ -72,6 +72,7 @@
 		1E2432C51DA6CCE1000EF74F /* OTContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2432C21DA6CCE1000EF74F /* OTContactInfoCell.m */; };
 		1E2432C61DA6CCE1000EF74F /* OTContactPhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2432C41DA6CCE1000EF74F /* OTContactPhoneCell.m */; };
 		1E29E4EE1DA3D09300501F99 /* OTGeolocationDeniedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E29E4ED1DA3D09300501F99 /* OTGeolocationDeniedViewController.m */; };
+		1E2AE6A01DE466DC00FA9F70 /* OTMailTextCheckBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2AE69F1DE466DC00FA9F70 /* OTMailTextCheckBehavior.m */; };
 		1E2C600C1D775F92004B195A /* OTEntourageChangedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2C600B1D775F92004B195A /* OTEntourageChangedHandler.m */; };
 		1E2C600F1D775FCF004B195A /* OTTourChangedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2C600E1D775FCF004B195A /* OTTourChangedHandler.m */; };
 		1E2F29051D4BC25C00ABC68A /* OTSpeechBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F29041D4BC25C00ABC68A /* OTSpeechBehavior.m */; };
@@ -455,6 +456,8 @@
 		1E2432C41DA6CCE1000EF74F /* OTContactPhoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTContactPhoneCell.m; path = ActiveFeedItem/AddressBookCells/OTContactPhoneCell.m; sourceTree = "<group>"; };
 		1E29E4EC1DA3D09300501F99 /* OTGeolocationDeniedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTGeolocationDeniedViewController.h; path = Rights/OTGeolocationDeniedViewController.h; sourceTree = "<group>"; };
 		1E29E4ED1DA3D09300501F99 /* OTGeolocationDeniedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTGeolocationDeniedViewController.m; path = Rights/OTGeolocationDeniedViewController.m; sourceTree = "<group>"; };
+		1E2AE69E1DE466DC00FA9F70 /* OTMailTextCheckBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMailTextCheckBehavior.h; path = Behaviors/Email/OTMailTextCheckBehavior.h; sourceTree = "<group>"; };
+		1E2AE69F1DE466DC00FA9F70 /* OTMailTextCheckBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMailTextCheckBehavior.m; path = Behaviors/Email/OTMailTextCheckBehavior.m; sourceTree = "<group>"; };
 		1E2C60091D775F1F004B195A /* OTChangedHandlerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTChangedHandlerDelegate.h; sourceTree = "<group>"; };
 		1E2C600A1D775F92004B195A /* OTEntourageChangedHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageChangedHandler.h; sourceTree = "<group>"; };
 		1E2C600B1D775F92004B195A /* OTEntourageChangedHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageChangedHandler.m; sourceTree = "<group>"; };
@@ -1193,6 +1196,15 @@
 			name = AddressBookCells;
 			sourceTree = "<group>";
 		};
+		1E2AE69D1DE4668900FA9F70 /* Email */ = {
+			isa = PBXGroup;
+			children = (
+				1E2AE69E1DE466DC00FA9F70 /* OTMailTextCheckBehavior.h */,
+				1E2AE69F1DE466DC00FA9F70 /* OTMailTextCheckBehavior.m */,
+			);
+			name = Email;
+			sourceTree = "<group>";
+		};
 		1E2F29011D4BC24900ABC68A /* Photo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1587,6 +1599,7 @@
 		1E9003661D34FA90004E18BC /* Behaviors */ = {
 			isa = PBXGroup;
 			children = (
+				1E2AE69D1DE4668900FA9F70 /* Email */,
 				1E49BCBB1D7D8E780024EDC1 /* Disclaimer */,
 				1EE817671D7A1B810003133D /* Onboarding */,
 				1E8845931D5DDAB900747223 /* MyEntourages */,
@@ -2808,6 +2821,7 @@
 				1E78B7F01D513F0F0008C00E /* OTEntourageUI.m in Sources */,
 				1E2432C51DA6CCE1000EF74F /* OTContactInfoCell.m in Sources */,
 				1E2F291E1D4BDF3600ABC68A /* OTDataSourceBehavior.m in Sources */,
+				1E2AE6A01DE466DC00FA9F70 /* OTMailTextCheckBehavior.m in Sources */,
 				4525EB311CA46082006784E6 /* OTSettingsViewController.m in Sources */,
 				1E2F29101D4BD3C600ABC68A /* OTGroupedTableDataSourceBehavior.m in Sources */,
 				1E2F290C1D4BC2A000ABC68A /* OTCloseKeyboardOnTapBehavior.m in Sources */,
