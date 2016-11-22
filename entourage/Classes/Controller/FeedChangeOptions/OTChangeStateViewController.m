@@ -12,12 +12,15 @@
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
+#import "OTSignalEntourageBehavior.h"
+#import "OTEntourage.h"
 
 @interface OTChangeStateViewController ()
 
 @property (nonatomic, strong) IBOutlet OTNextStatusButtonBehavior *nextStatusBehavior;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior *toggleEditBehavior;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior *toggleSignalEntourageBehavior;
+@property (nonatomic, strong) IBOutlet OTSignalEntourageBehavior* singalEntourageBehavior;
 
 @end
 
@@ -30,7 +33,7 @@
     [self.toggleEditBehavior initialize];
     [self.toggleEditBehavior toggle:[[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canEdit] animated:NO];
     [self.toggleSignalEntourageBehavior initialize];
-    [self.toggleSignalEntourageBehavior toggle:![[NSUserDefaults standardUserDefaults].currentUser.sid isEqualToNumber:self.feedItem.author.uID] animated:NO];
+    [self.toggleSignalEntourageBehavior toggle:[self.feedItem isKindOfClass:[OTEntourage class]] && ![[NSUserDefaults standardUserDefaults].currentUser.sid isEqualToNumber:self.feedItem.author.uID] animated:NO];
     [self.nextStatusBehavior configureWith:self.feedItem andProtocol:self.delegate];
 }
 
@@ -46,6 +49,8 @@
 }
 
 - (IBAction)signalEntourage:(id)sender {
+    if([self.feedItem isKindOfClass:[OTEntourage class]])
+        [self.singalEntourageBehavior sendMailFor:(OTEntourage *)self.feedItem];
 }
 
 #pragma mark - private methods

@@ -34,7 +34,7 @@
     [self.owner.presentedViewController dismissViewControllerAnimated:YES completion:nil];
     if(result == MFMailComposeResultSent)
         [SVProgressHUD showInfoWithStatus:OTLocalizedString(@"mail_sent")];
-    else
+    else if(result != MFMailComposeResultCancelled)
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"mail_send_failure")];
 }
 

@@ -128,6 +128,7 @@
                     </view>
                     <connections>
                         <outlet property="nextStatusBehavior" destination="6Py-dS-mI1" id="dXj-05-i95"/>
+                        <outlet property="singalEntourageBehavior" destination="XjL-XT-NEm" id="0eA-6D-2AG"/>
                         <outlet property="toggleEditBehavior" destination="W7b-U8-i9L" id="eIO-NN-gN5"/>
                         <outlet property="toggleSignalEntourageBehavior" destination="QOJ-Nb-eoQ" id="ai6-I5-2sO"/>
                         <outletCollection property="buttonsWithBorder" destination="Xzs-5T-W8m" id="6e5-SB-jXV"/>
@@ -154,6 +155,11 @@
                         <outlet property="heightConstraint" destination="gPI-1F-BbF" id="XLy-he-wmT"/>
                         <outlet property="marginConstraint" destination="ViY-NN-prt" id="lFq-z5-dk4"/>
                         <outlet property="toggleView" destination="cCa-JH-ipu" id="lkJ-Hd-K7D"/>
+                    </connections>
+                </customObject>
+                <customObject id="XjL-XT-NEm" userLabel="Signal Entourage" customClass="OTSignalEntourageBehavior">
+                    <connections>
+                        <outlet property="owner" destination="HRX-sY-Prk" id="MzZ-4r-XUj"/>
                     </connections>
                 </customObject>
             </objects>

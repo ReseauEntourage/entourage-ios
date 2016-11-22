@@ -73,6 +73,7 @@
 		1E2432C61DA6CCE1000EF74F /* OTContactPhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2432C41DA6CCE1000EF74F /* OTContactPhoneCell.m */; };
 		1E29E4EE1DA3D09300501F99 /* OTGeolocationDeniedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E29E4ED1DA3D09300501F99 /* OTGeolocationDeniedViewController.m */; };
 		1E2AE6A01DE466DC00FA9F70 /* OTMailTextCheckBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2AE69F1DE466DC00FA9F70 /* OTMailTextCheckBehavior.m */; };
+		1E2AE6A31DE48A5D00FA9F70 /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2AE6A21DE48A5D00FA9F70 /* OTSignalEntourageBehavior.m */; };
 		1E2C600C1D775F92004B195A /* OTEntourageChangedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2C600B1D775F92004B195A /* OTEntourageChangedHandler.m */; };
 		1E2C600F1D775FCF004B195A /* OTTourChangedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2C600E1D775FCF004B195A /* OTTourChangedHandler.m */; };
 		1E2F29051D4BC25C00ABC68A /* OTSpeechBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F29041D4BC25C00ABC68A /* OTSpeechBehavior.m */; };
@@ -458,6 +459,8 @@
 		1E29E4ED1DA3D09300501F99 /* OTGeolocationDeniedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTGeolocationDeniedViewController.m; path = Rights/OTGeolocationDeniedViewController.m; sourceTree = "<group>"; };
 		1E2AE69E1DE466DC00FA9F70 /* OTMailTextCheckBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMailTextCheckBehavior.h; path = Behaviors/Email/OTMailTextCheckBehavior.h; sourceTree = "<group>"; };
 		1E2AE69F1DE466DC00FA9F70 /* OTMailTextCheckBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMailTextCheckBehavior.m; path = Behaviors/Email/OTMailTextCheckBehavior.m; sourceTree = "<group>"; };
+		1E2AE6A11DE48A5D00FA9F70 /* OTSignalEntourageBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSignalEntourageBehavior.h; path = Behaviors/Email/OTSignalEntourageBehavior.h; sourceTree = "<group>"; };
+		1E2AE6A21DE48A5D00FA9F70 /* OTSignalEntourageBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSignalEntourageBehavior.m; path = Behaviors/Email/OTSignalEntourageBehavior.m; sourceTree = "<group>"; };
 		1E2C60091D775F1F004B195A /* OTChangedHandlerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTChangedHandlerDelegate.h; sourceTree = "<group>"; };
 		1E2C600A1D775F92004B195A /* OTEntourageChangedHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageChangedHandler.h; sourceTree = "<group>"; };
 		1E2C600B1D775F92004B195A /* OTEntourageChangedHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageChangedHandler.m; sourceTree = "<group>"; };
@@ -1201,6 +1204,8 @@
 			children = (
 				1E2AE69E1DE466DC00FA9F70 /* OTMailTextCheckBehavior.h */,
 				1E2AE69F1DE466DC00FA9F70 /* OTMailTextCheckBehavior.m */,
+				1E2AE6A11DE48A5D00FA9F70 /* OTSignalEntourageBehavior.h */,
+				1E2AE6A21DE48A5D00FA9F70 /* OTSignalEntourageBehavior.m */,
 			);
 			name = Email;
 			sourceTree = "<group>";
@@ -2759,6 +2764,7 @@
 				1EC6F3C71D53DBEF0026766D /* OTActiveFeedItemViewController.m in Sources */,
 				2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */,
 				1E2232D21D569744004CD5E8 /* OTMessageTableDataSourceBehavior.m in Sources */,
+				1E2AE6A31DE48A5D00FA9F70 /* OTSignalEntourageBehavior.m in Sources */,
 				45FD17B71CFC4F3E0037270B /* OTOptionsViewController.m in Sources */,
 				2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */,
 				45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */,
