@@ -16,5 +16,6 @@
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, strong) OTEditEntourageBehavior *editEntourageBehavior;
 @property (nonatomic, weak) id<OTStatusChangedProtocol> delegate;
+@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *buttonsWithBorder;
 
 @end

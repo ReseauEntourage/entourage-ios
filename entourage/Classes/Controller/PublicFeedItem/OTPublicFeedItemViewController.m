@@ -18,6 +18,7 @@
 #import "OTUserProfileBehavior.h"
 #import "OTPublicInfoDataSource.h"
 #import "OTTableDataSourceBehavior.h"
+#import "OTStatusChangedBehavior.h"
 
 @interface OTPublicFeedItemViewController ()
 
@@ -27,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 @property (strong, nonatomic) IBOutlet OTPublicInfoDataSource *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
+@property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
 
 @end
 
@@ -37,16 +39,14 @@
 
     [self.tableDataSource initialize];
     [self.statusBehavior initialize];
+    [self.statusChangedBehavior configureWith:self.feedItem];
     [self.statusBehavior updateWith:self.feedItem];
     self.dataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.dataSource.tableView.estimatedRowHeight = 1000;
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
-    FeedItemState state = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
-    if(FeedItemStateJoinNotRequested == state) {
-        UIBarButtonItem *joinButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self andAction:@selector(joinFeedItem:)];
-        [self.navigationItem setRightBarButtonItem:joinButton];
-    }
+    UIBarButtonItem *moreButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self.statusChangedBehavior andAction:@selector(startChangeStatus)];
+    [self.navigationItem setRightBarButtonItem:moreButton];
     [self.dataSource loadDataFor:self.feedItem];
 }
 
@@ -70,6 +70,8 @@
         return;
     if([self.userProfileBehavior prepareSegueForUserProfile:segue])
         return;
+    if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
+        return;
 }
 
 #pragma mark - private methods
@@ -82,7 +84,6 @@
 - (IBAction)updateStatusToPending {
     self.feedItem.joinStatus = JOIN_PENDING;
     [self.statusBehavior updateWith:self.feedItem];
-    [self.navigationItem setRightBarButtonItem:nil];
 }
 
 @end

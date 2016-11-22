@@ -10,6 +10,7 @@
 
 @protocol OTStatusChangedProtocol <NSObject>
 
+- (void)joinFeedItem;
 - (void)stoppedFeedItem;
 - (void)closedFeedItem;
 

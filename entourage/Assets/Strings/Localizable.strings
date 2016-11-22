@@ -25,6 +25,7 @@
 "no_location_create_tour" = "La géolocalisation  de votre maraude a recontré une erreur.";
 "no_location_recenter_map" = "La géolocalisation a recontré une erreur.";
 "activate" = "Activer";
+"join" = "Rejoindre";
 
 // Onboarding
 "doLogin" = "Se connecter";
@@ -315,3 +316,5 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "no_feeds_received" = "Aucun entourage près de cette position";
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
 "ok" = "OK";
+
+"mail_not_configured" = "!!No email client found.";
