@@ -32,7 +32,7 @@
     [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl withPlaceholder:@"user"];
     self.lblUserName.text = joiner.displayName;
     self.lblMessage.text = @"";
-    if(![joiner.message isKindOfClass:[NSNull class]])
+    if(joiner.message.length > 0)
         self.lblMessage.text = [NSString stringWithFormat:@"\"%@\"", joiner.message];
 }
 
