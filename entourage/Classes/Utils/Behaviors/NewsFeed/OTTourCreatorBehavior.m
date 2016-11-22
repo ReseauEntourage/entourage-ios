@@ -41,10 +41,12 @@
 - (void)startTour:(NSString*)tourType {
     if(![OTLocationManager sharedInstance].isAuthorized) {
         [[OTLocationManager sharedInstance] showGeoLocationNotAllowedMessage:OTLocalizedString(@"ask_permission_location_create_tour")];
+        [self.delegate failedToStartTour];
         return;
     }
     else if(!self.lastLocation) {
         [[OTLocationManager sharedInstance] showLocationNotFoundMessage:OTLocalizedString(@"no_location_create_tour")];
+        [self.delegate failedToStartTour];
         return;
     }
     [SVProgressHUD showWithStatus:OTLocalizedString(@"tour_create_sending")];
