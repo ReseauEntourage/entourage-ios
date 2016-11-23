@@ -11,6 +11,8 @@
 
 @interface OTSpeechBehaviorBase () <SKRecognizerDelegate>
 
+@property (nonatomic, assign) BOOL speechKitInitialised;
+
 @end
 
 @implementation OTSpeechBehaviorBase
@@ -25,7 +27,7 @@
 
 - (void)initialize {
     // to be removed on 1.9
-    [OTSpeechKitManager setup];
+    self.speechKitInitialised = [OTSpeechKitManager setup];
     for(NSLayoutConstraint *constraint in self.btnRecord.constraints) {
         if(constraint.firstAttribute == NSLayoutAttributeWidth && constraint.secondAttribute == NSLayoutAttributeNotAnAttribute) {
             self.widthConstraint = constraint;
@@ -38,7 +40,8 @@
     self.widthDynamicConstraint.active = NO;
     [self.btnRecord addConstraint:self.widthDynamicConstraint];
     self.isRecording = NO;
-    [self.btnRecord addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
+    if(self.speechKitInitialised)
+        [self.btnRecord addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)updateRecordButton {

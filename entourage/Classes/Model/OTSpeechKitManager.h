@@ -11,6 +11,6 @@
 
 @interface OTSpeechKitManager: SpeechKit
 
-+ (void)setup;
++ (BOOL)setup;
 
 @end

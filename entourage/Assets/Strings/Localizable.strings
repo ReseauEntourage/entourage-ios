@@ -299,3 +299,4 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 
 "no_feeds_received" = "Aucun entourage près de cette position";
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
+"speech_kit_initialise_error" = "!!Could not initialize speechkit. Speach to text will not work.";
