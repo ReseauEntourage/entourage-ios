@@ -33,7 +33,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
         [SpeechKit setupWithID:NUANCE_APP_ID host:NUANCE_HOST_ADDRESS port:NUANCE_HOST_PORT useSSL:YES delegate:nil];
         return YES;
     } @catch (NSException *exception) {
-        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"")];
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"speech_kit_initialise_error")];
         return NO;
     }
 }
