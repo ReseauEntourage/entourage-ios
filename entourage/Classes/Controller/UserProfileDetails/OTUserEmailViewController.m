@@ -47,6 +47,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.emailTextField becomeFirstResponder];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }

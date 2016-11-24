@@ -364,7 +364,6 @@ typedef NS_ENUM(NSInteger) {
     UILabel *titleLabel = [cell viewWithTag:CELL_TITLE_TAG];
     titleLabel.text = title;
     UITextField *nameTextField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
-    myTextField = nameTextField;
     nameTextField.text = text;
 }
 

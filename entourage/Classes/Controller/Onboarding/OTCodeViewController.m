@@ -44,6 +44,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     if([NSUserDefaults standardUserDefaults].currentUser) {
@@ -53,6 +54,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
 }
 
@@ -64,6 +66,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.codeTextField becomeFirstResponder];
 }
 

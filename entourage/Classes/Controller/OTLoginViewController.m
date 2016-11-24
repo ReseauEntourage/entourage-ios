@@ -61,10 +61,12 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.phoneTextField becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
     UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
 }

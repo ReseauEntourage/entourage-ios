@@ -55,6 +55,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }
 
@@ -64,6 +65,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     if(self.isMovingFromParentViewController)
         [Flurry logEvent:@"BackToFeedClick"];
 }

@@ -44,12 +44,14 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [IQKeyboardManager sharedManager].enable = NO;
     [self.firstNameTextField becomeFirstResponder];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [IQKeyboardManager sharedManager].enable = YES;
 }
 

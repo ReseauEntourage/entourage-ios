@@ -35,6 +35,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     if ([NSUserDefaults standardUserDefaults].isTutorialCompleted)
         self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     else
@@ -42,6 +43,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     if(self.isMovingFromParentViewController)
         [Flurry logEvent:@"BackFromPhoto1"];
 }

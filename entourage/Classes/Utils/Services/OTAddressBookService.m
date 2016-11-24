@@ -27,9 +27,14 @@
 - (NSArray *)readContacts {
     CFErrorRef error = NULL;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-    if(error)
-        return [NSArray new];
+    if(error) {
+        if(addressBook != nil)
+            CFRelease(addressBook);
+        return @[];
+    }
     NSArray *allAddressBookItems = [self mapContacts:addressBook];
+    if(addressBook != nil)
+        CFRelease(addressBook);
     return [allAddressBookItems sortedArrayUsingComparator:^(OTAddressBookItem *first, OTAddressBookItem *second) {
         return [first.fullName localizedCaseInsensitiveCompare:second.fullName];
     }];
@@ -74,11 +79,15 @@
     ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(record, kABPersonPhoneProperty));
     NSString *readPhone = nil;
     for(CFIndex phoneIndex = 0; phoneIndex < ABMultiValueGetCount(phones); phoneIndex++) {
-    readPhone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, phoneIndex);
+        CFTypeRef ref = ABMultiValueCopyValueAtIndex(phones, phoneIndex);
+        readPhone = (__bridge NSString*)ref;
         OTAddressBookPhone *phoneItem = [OTAddressBookPhone new];
         phoneItem.telephone = readPhone;
         [result addObject:phoneItem];
+        if(ref != nil)
+            CFRelease(ref);
     }
+    CFRelease(phones);
     return result;
 }
 
