@@ -304,6 +304,7 @@
             self.launcherButton.hidden = NO;
             [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
         } else {
+            self.mapPoint = CGPointZero;
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
         }
     }
