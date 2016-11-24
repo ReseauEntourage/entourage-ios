@@ -25,6 +25,8 @@
 #import "OTOrganization.h"
 #import "OTConsts.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 /**************************************************************************************************/
 #pragma mark - Constants
 
@@ -73,6 +75,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
          }
          andFailure:^(NSError *error)
          {
+             [[Crashlytics sharedInstance] recordError:error withAdditionalUserInfo:parameters];
              NSLog(@"Failed with error %@", error);
              if (failure) {
                  failure(error);

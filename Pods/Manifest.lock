@@ -79,6 +79,9 @@ PODS:
     - AWSCore (= 2.4.3)
   - AWSSQS (2.4.3):
     - AWSCore (= 2.4.3)
+  - Crashlytics (3.8.3):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
     - FormatterKit/ArrayFormatter (= 1.8.0)
@@ -110,6 +113,8 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (= 3.1.0)
   - AWSiOSSDKv2 (~> 2.4)
+  - Crashlytics
+  - Fabric
   - FormatterKit
   - IQKeyboardManager (= 3.3.4)
   - JSBadgeView (= 1.4.1)
@@ -136,6 +141,8 @@ SPEC CHECKSUMS:
   AWSSimpleDB: 3a8733e34a349c55527e37249296b897a6b30711
   AWSSNS: 4dde743fe01ad3f1581bb1005dbb7fb59b518c1e
   AWSSQS: 9a50f2c73d6c92a82a40ff0caec1f42db433145c
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   IQKeyboardManager: ac803e61e5b50efae6b3aeedd95a02c7c7d3b2b3
   JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
@@ -146,6 +153,6 @@ SPEC CHECKSUMS:
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   WYPopoverController: dda54780e1bef186464ae5a10ab9b4998c279e89
 
-PODFILE CHECKSUM: a98ac273f379f2b9abd1c1bdec0eb4ca54d2c199
+PODFILE CHECKSUM: f8e9662c098c66796b65506fe9af0122ad942eb6
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.0.1

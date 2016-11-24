@@ -321,3 +321,4 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "mail_sent" = "!!Mail sent.";
 "mail_send_failure" = "!!Failed to send mail.";
 "mail_signal_subject" = "Signalement d’un entourage qui pose problème: \"%@\"";
+"speech_kit_initialise_error" = "Problème avec Speechkit. La reconnaisance vocale n'est pas disponible";

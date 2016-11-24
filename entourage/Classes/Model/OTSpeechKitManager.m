@@ -7,6 +7,8 @@
 //
 
 #import "OTSpeechKitManager.h"
+#import "SVProgressHUD.h"
+#import "OTConsts.h"
 #import "entourage-Swift.h"
 
 #if DEBUG
@@ -23,8 +25,14 @@ const unsigned char SpeechKitApplicationKey[] = {0x7f, 0x91, 0xf8, 0xff, 0x2e, 0
 
 @implementation OTSpeechKitManager
 
-+ (void)setup {
-    [SpeechKit setupWithID:[ConfigurationManager shared].nuanceAppId host:[ConfigurationManager shared].nuanceHostAddress port:NUANCE_HOST_PORT useSSL:YES delegate:nil];
++ (BOOL)setup {
+    @try {
+        [SpeechKit setupWithID:[ConfigurationManager shared].nuanceAppId host:[ConfigurationManager shared].nuanceHostAddress port:NUANCE_HOST_PORT useSSL:YES delegate:nil];
+        return YES;
+    } @catch (NSException *exception) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"speech_kit_initialise_error")];
+        return NO;
+    }
 }
 
 @end
