@@ -347,7 +347,7 @@
       },\
       \"input\":{\"shape\":\"GetBucketReplicationRequest\"},\
       \"output\":{\"shape\":\"GetBucketReplicationOutput\"},\
-      \"documentation\":\"Deprecated, see the GetBucketReplicationConfiguration operation.\"\
+      \"documentation\":\"Returns the replication configuration of a bucket.\"\
     },\
     \"GetBucketRequestPayment\":{\
       \"name\":\"GetBucketRequestPayment\",\
@@ -881,19 +881,21 @@
     \"BucketLocationConstraint\":{\
       \"type\":\"string\",\
       \"enum\":[\
+        \"\",\
         \"EU\",\
         \"eu-west-1\",\
+        \"us-east-2\",\
         \"us-west-1\",\
         \"us-west-2\",\
+        \"ap-south-1\",\
         \"ap-southeast-1\",\
         \"ap-southeast-2\",\
         \"ap-northeast-1\",\
         \"ap-northeast-2\",\
         \"sa-east-1\",\
-        \"eu-central-1\",\
-        \"\",\
         \"cn-north-1\",\
-        \"us-gov-west-1\"\
+        \"us-gov-west-1\",\
+        \"eu-central-1\"\
       ]\
     },\
     \"BucketLoggingStatus\":{\
@@ -1124,7 +1126,7 @@
     \"ContentDisposition\":{\"type\":\"string\"},\
     \"ContentEncoding\":{\"type\":\"string\"},\
     \"ContentLanguage\":{\"type\":\"string\"},\
-    \"ContentLength\":{\"type\":\"integer\"},\
+    \"ContentLength\":{\"type\":\"long\"},\
     \"ContentMD5\":{\"type\":\"string\"},\
     \"ContentRange\":{\"type\":\"string\"},\
     \"ContentType\":{\"type\":\"string\"},\
@@ -1333,7 +1335,7 @@
         },\
         \"SSECustomerKey\":{\
           \"shape\":\"SSECustomerKey\",\
-          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.\",\
+          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-sideâ-encryptionâ-customer-algorithm header.\",\
           \"location\":\"header\",\
           \"locationName\":\"x-amz-server-side-encryption-customer-key\"\
         },\
@@ -1656,7 +1658,7 @@
         },\
         \"SSECustomerKey\":{\
           \"shape\":\"SSECustomerKey\",\
-          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.\",\
+          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-sideâ-encryptionâ-customer-algorithm header.\",\
           \"location\":\"header\",\
           \"locationName\":\"x-amz-server-side-encryption-customer-key\"\
         },\
@@ -2503,6 +2505,12 @@
           \"shape\":\"ReplicationStatus\",\
           \"location\":\"header\",\
           \"locationName\":\"x-amz-replication-status\"\
+        },\
+        \"PartsCount\":{\
+          \"shape\":\"PartsCount\",\
+          \"documentation\":\"The count of parts this object has.\",\
+          \"location\":\"header\",\
+          \"locationName\":\"x-amz-mp-parts-count\"\
         }\
       },\
       \"payload\":\"Body\"\
@@ -2604,7 +2612,7 @@
         },\
         \"SSECustomerKey\":{\
           \"shape\":\"SSECustomerKey\",\
-          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.\",\
+          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-sideâ-encryptionâ-customer-algorithm header.\",\
           \"location\":\"header\",\
           \"locationName\":\"x-amz-server-side-encryption-customer-key\"\
         },\
@@ -2618,6 +2626,12 @@
           \"shape\":\"RequestPayer\",\
           \"location\":\"header\",\
           \"locationName\":\"x-amz-request-payer\"\
+        },\
+        \"PartNumber\":{\
+          \"shape\":\"PartNumber\",\
+          \"documentation\":\"Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' GET request for the part specified. Useful for downloading just a part of an object.\",\
+          \"location\":\"querystring\",\
+          \"locationName\":\"partNumber\"\
         }\
       }\
     },\
@@ -2867,6 +2881,12 @@
           \"shape\":\"ReplicationStatus\",\
           \"location\":\"header\",\
           \"locationName\":\"x-amz-replication-status\"\
+        },\
+        \"PartsCount\":{\
+          \"shape\":\"PartsCount\",\
+          \"documentation\":\"The count of parts this object has.\",\
+          \"location\":\"header\",\
+          \"locationName\":\"x-amz-mp-parts-count\"\
         }\
       }\
     },\
@@ -2931,7 +2951,7 @@
         },\
         \"SSECustomerKey\":{\
           \"shape\":\"SSECustomerKey\",\
-          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.\",\
+          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-sideâ-encryptionâ-customer-algorithm header.\",\
           \"location\":\"header\",\
           \"locationName\":\"x-amz-server-side-encryption-customer-key\"\
         },\
@@ -2945,6 +2965,12 @@
           \"shape\":\"RequestPayer\",\
           \"location\":\"header\",\
           \"locationName\":\"x-amz-request-payer\"\
+        },\
+        \"PartNumber\":{\
+          \"shape\":\"PartNumber\",\
+          \"documentation\":\"Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' HEAD request for the part specified. Useful querying about the size of the part and the number of parts in this object.\",\
+          \"location\":\"querystring\",\
+          \"locationName\":\"partNumber\"\
         }\
       }\
     },\
@@ -3323,6 +3349,12 @@
           \"documentation\":\"Limits the response to keys that begin with the specified prefix.\",\
           \"location\":\"querystring\",\
           \"locationName\":\"prefix\"\
+        },\
+        \"RequestPayer\":{\
+          \"shape\":\"RequestPayer\",\
+          \"documentation\":\"Confirms that the requester knows that she or he will be charged for the list objects request. Bucket owners need not specify this parameter in their requests.\",\
+          \"location\":\"header\",\
+          \"locationName\":\"x-amz-request-payer\"\
         }\
       }\
     },\
@@ -3333,8 +3365,14 @@
           \"shape\":\"IsTruncated\",\
           \"documentation\":\"A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.\"\
         },\
-        \"Contents\":{\"shape\":\"ObjectList\"},\
-        \"Name\":{\"shape\":\"BucketName\"},\
+        \"Contents\":{\
+          \"shape\":\"ObjectList\",\
+          \"documentation\":\"Metadata about each object returned.\"\
+        },\
+        \"Name\":{\
+          \"shape\":\"BucketName\",\
+          \"documentation\":\"Name of the bucket to list.\"\
+        },\
         \"Prefix\":{\
           \"shape\":\"Prefix\",\
           \"documentation\":\"Limits the response to keys that begin with the specified prefix.\"\
@@ -3347,7 +3385,10 @@
           \"shape\":\"MaxKeys\",\
           \"documentation\":\"Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.\"\
         },\
-        \"CommonPrefixes\":{\"shape\":\"CommonPrefixList\"},\
+        \"CommonPrefixes\":{\
+          \"shape\":\"CommonPrefixList\",\
+          \"documentation\":\"CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by delimiter\"\
+        },\
         \"EncodingType\":{\
           \"shape\":\"EncodingType\",\
           \"documentation\":\"Encoding type used by Amazon S3 to encode object keys in the response.\"\
@@ -3376,6 +3417,7 @@
       \"members\":{\
         \"Bucket\":{\
           \"shape\":\"BucketName\",\
+          \"documentation\":\"Name of the bucket to list.\",\
           \"location\":\"uri\",\
           \"locationName\":\"Bucket\"\
         },\
@@ -3419,7 +3461,13 @@
           \"shape\":\"StartAfter\",\
           \"documentation\":\"StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket\",\
           \"location\":\"querystring\",\
-          \"locationName\":\"start-key\"\
+          \"locationName\":\"start-after\"\
+        },\
+        \"RequestPayer\":{\
+          \"shape\":\"RequestPayer\",\
+          \"documentation\":\"Confirms that the requester knows that she or he will be charged for the list objects request in V2 style. Bucket owners need not specify this parameter in their requests.\",\
+          \"location\":\"header\",\
+          \"locationName\":\"x-amz-request-payer\"\
         }\
       }\
     },\
@@ -3644,7 +3692,7 @@
       \"members\":{\
         \"NoncurrentDays\":{\
           \"shape\":\"Days\",\
-          \"documentation\":\"Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href=\\\"/AmazonS3/latest/dev/s3-access-control.html\\\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.\"\
+          \"documentation\":\"Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href=\\\"http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\\\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.\"\
         }\
       },\
       \"documentation\":\"Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object's lifetime.\"\
@@ -3654,7 +3702,7 @@
       \"members\":{\
         \"NoncurrentDays\":{\
           \"shape\":\"Days\",\
-          \"documentation\":\"Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href=\\\"/AmazonS3/latest/dev/s3-access-control.html\\\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.\"\
+          \"documentation\":\"Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href=\\\"http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\\\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.\"\
         },\
         \"StorageClass\":{\
           \"shape\":\"TransitionStorageClass\",\
@@ -3860,6 +3908,7 @@
       \"member\":{\"shape\":\"Part\"},\
       \"flattened\":true\
     },\
+    \"PartsCount\":{\"type\":\"integer\"},\
     \"Payer\":{\
       \"type\":\"string\",\
       \"enum\":[\
@@ -4528,7 +4577,7 @@
         },\
         \"SSECustomerKey\":{\
           \"shape\":\"SSECustomerKey\",\
-          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.\",\
+          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-sideâ-encryptionâ-customer-algorithm header.\",\
           \"location\":\"header\",\
           \"locationName\":\"x-amz-server-side-encryption-customer-key\"\
         },\
@@ -5127,7 +5176,7 @@
         },\
         \"SSECustomerKey\":{\
           \"shape\":\"SSECustomerKey\",\
-          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.\",\
+          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-sideâ-encryptionâ-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.\",\
           \"location\":\"header\",\
           \"locationName\":\"x-amz-server-side-encryption-customer-key\"\
         },\
@@ -5260,7 +5309,7 @@
         },\
         \"SSECustomerKey\":{\
           \"shape\":\"SSECustomerKey\",\
-          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.\",\
+          \"documentation\":\"Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-sideâ-encryptionâ-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.\",\
           \"location\":\"header\",\
           \"locationName\":\"x-amz-server-side-encryption-customer-key\"\
         },\
@@ -5305,8 +5354,7 @@
     },\
     \"WebsiteRedirectLocation\":{\"type\":\"string\"}\
   }\
-}\
-";
+}";
 }
 
 @end

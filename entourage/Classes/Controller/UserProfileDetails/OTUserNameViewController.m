@@ -20,13 +20,15 @@
 #import "OTUserPictureViewController.h"
 #import "OTOnboardingNavigationBehavior.h"
 #import "OTScrollPinBehavior.h"
+#import "entourage-Swift.h"
 
 @interface OTUserNameViewController ()
 
-@property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
-@property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;
+@property (nonatomic, weak) IBOutlet OnBoardingTextField *firstNameTextField;
+@property (nonatomic, weak) IBOutlet OnBoardingTextField *lastNameTextField;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
+@property (weak, nonatomic) IBOutlet OnBoardingButton *continueButton;
 
 @end
 
@@ -41,6 +43,13 @@
     [self.lastNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self loadCurrentData];
+
+    self.firstNameTextField.inputValidationChanged = ^(BOOL isValid) {
+        self.continueButton.enabled = [self formIsValid];
+    };
+    self.lastNameTextField.inputValidationChanged = ^(BOOL isValid) {
+        self.continueButton.enabled = [self formIsValid];
+    };
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -69,6 +78,7 @@
     currentUser.firstName = self.firstNameTextField.text;
     currentUser.lastName = self.lastNameTextField.text;
     [SVProgressHUD show];
+
     [[OTAuthService new] updateUserInformationWithUser:currentUser success:^(OTUser *user) {
         // TODO phone is not in response so need to restore it manually
         user.phone = currentUser.phone;
@@ -85,5 +95,13 @@
 - (IBAction)textChanged:(id)sender {
     [Flurry logEvent:@"NameType"];
 }
+
+/********************************************************************************/
+#pragma mark - Private
+
+- (BOOL)formIsValid {
+    return (self.firstNameTextField.text.length > 0 && self.lastNameTextField.text.length > 0);
+}
+
 
 @end

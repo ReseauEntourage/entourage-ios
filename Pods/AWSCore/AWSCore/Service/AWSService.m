@@ -21,7 +21,7 @@
 #import "AWSLogging.h"
 #import "AWSCategory.h"
 
-NSString *const AWSiOSSDKVersion = @"2.4.3";
+NSString *const AWSiOSSDKVersion = @"2.4.12";
 NSString *const AWSServiceErrorDomain = @"com.amazonaws.AWSServiceErrorDomain";
 
 static NSString *const AWSServiceConfigurationUnknown = @"Unknown";
@@ -85,6 +85,7 @@ static NSString *const AWSServiceConfigurationUnknown = @"Unknown";
 - (instancetype)init {
     if ( self = [super init]) {
         _dictionary = [AWSSynchronizedMutableDictionary new];
+        
     }
     return self;
 }
@@ -124,6 +125,16 @@ static NSString *const AWSServiceConfigurationUnknown = @"Unknown";
         _credentialsProvider = credentialsProvider;
     }
 
+    return self;
+}
+
+- (instancetype)initWithRegion:(AWSRegionType)regionType
+                      endpoint:(AWSEndpoint *)endpoint
+           credentialsProvider:(id<AWSCredentialsProvider>)credentialsProvider{
+    if(self = [self initWithRegion:regionType credentialsProvider:credentialsProvider]){
+        _endpoint = endpoint;
+    }
+    
     return self;
 }
 
@@ -197,6 +208,7 @@ static NSMutableArray *_globalUserAgentPrefixes = nil;
     configuration.regionType = self.regionType;
     configuration.credentialsProvider = self.credentialsProvider;
     configuration.userAgentProductTokens = self.userAgentProductTokens;
+    configuration.endpoint = self.endpoint;
     
     return configuration;
 }
@@ -206,6 +218,7 @@ static NSMutableArray *_globalUserAgentPrefixes = nil;
 #pragma mark - AWSEndpoint
 
 static NSString *const AWSRegionNameUSEast1 = @"us-east-1";
+static NSString *const AWSRegionNameUSEast2 = @"us-east-2";
 static NSString *const AWSRegionNameUSWest2 = @"us-west-2";
 static NSString *const AWSRegionNameUSWest1 = @"us-west-1";
 static NSString *const AWSRegionNameEUWest1 = @"eu-west-1";
@@ -214,6 +227,7 @@ static NSString *const AWSRegionNameAPSoutheast1 = @"ap-southeast-1";
 static NSString *const AWSRegionNameAPNortheast1 = @"ap-northeast-1";
 static NSString *const AWSRegionNameAPNortheast2 = @"ap-northeast-2";
 static NSString *const AWSRegionNameAPSoutheast2 = @"ap-southeast-2";
+static NSString *const AWSRegionNameAPSouth1 = @"ap-south-1";
 static NSString *const AWSRegionNameSAEast1 = @"sa-east-1";
 static NSString *const AWSRegionNameCNNorth1 = @"cn-north-1";
 static NSString *const AWSRegionNameUSGovWest1 = @"us-gov-west-1";
@@ -240,6 +254,13 @@ static NSString *const AWSServiceNameSimpleDB = @"sdb";
 static NSString *const AWSServiceNameSNS = @"sns";
 static NSString *const AWSServiceNameSQS = @"sqs";
 static NSString *const AWSServiceNameSTS = @"sts";
+
+@interface AWSEndpoint()
+
+- (void) setRegion:(AWSRegionType)regionType service:(AWSServiceType)serviceType;
+
+@end
+
 
 @implementation AWSEndpoint
 
@@ -295,10 +316,36 @@ static NSString *const AWSServiceNameSTS = @"sts";
     return self;
 }
 
+- (instancetype)initWithURL:(NSURL *)URL{
+    if (self = [super init]) {
+        _URL = URL;
+        _hostName = [_URL host];
+        if ([[_URL scheme].lowercaseString isEqualToString:@"https"]) {
+            _useUnsafeURL = NO;
+        }else{
+            _useUnsafeURL = YES;
+        }
+    }
+    return self;
+}
+
+- (instancetype)initWithURLString:(NSString *)URLString{
+    return [self initWithURL:[[NSURL alloc] initWithString:URLString]];
+}
+
+- (void) setRegion:(AWSRegionType)regionType service:(AWSServiceType)serviceType{
+    _regionType = regionType;
+    _serviceType = serviceType;
+    _regionName = [self regionNameFromType:regionType];
+    _serviceName = [self serviceNameFromType:serviceType];
+}
+
 - (NSString *)regionNameFromType:(AWSRegionType)regionType {
     switch (regionType) {
         case AWSRegionUSEast1:
             return AWSRegionNameUSEast1;
+        case AWSRegionUSEast2:
+            return AWSRegionNameUSEast2;
         case AWSRegionUSWest2:
             return AWSRegionNameUSWest2;
         case AWSRegionUSWest1:
@@ -315,6 +362,8 @@ static NSString *const AWSServiceNameSTS = @"sts";
             return AWSRegionNameAPNortheast1;
         case AWSRegionAPNortheast2:
             return AWSRegionNameAPNortheast2;
+        case AWSRegionAPSouth1:
+            return AWSRegionNameAPSouth1;
         case AWSRegionSAEast1:
             return AWSRegionNameSAEast1;
         case AWSRegionCNNorth1:
@@ -394,6 +443,7 @@ static NSString *const AWSServiceNameSTS = @"sts";
             || regionType == AWSRegionAPNortheast1
             || regionType == AWSRegionAPNortheast2
             || regionType == AWSRegionAPSoutheast2
+            || regionType == AWSRegionAPSouth1
             || regionType == AWSRegionSAEast1
             || regionType == AWSRegionUSGovWest1)) {
             separator = @"-";

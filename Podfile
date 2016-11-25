@@ -1,7 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 inhibit_all_warnings!
-
+use_frameworks!
 platform :ios, '8.0'
 
 target "entourage" do
@@ -17,6 +17,8 @@ target "entourage" do
     pod 'AWSiOSSDKv2', '~> 2.4'
     pod 'Fabric'
     pod 'Crashlytics'
+    pod 'JVFloatLabeledTextField'
+    pod 'libPhoneNumber-iOS'
 end
 
 target "entourageTests" do

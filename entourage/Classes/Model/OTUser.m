@@ -58,7 +58,7 @@ NSString *const kKeyOrganization = @"organization";
   if (self.lastName != nil) {
     [dictionary setObject:self.lastName forKey:kWSKeyLastname];
   }
-  if (self.email != nil) {
+  if (self.email != nil && self.email.length > 0) {
     [dictionary setObject:self.email forKey:kKeyEmail];
   }
   if (self.password != nil) {

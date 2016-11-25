@@ -20,13 +20,16 @@
 #import "NSUserDefaults+OT.h"
 #import "OTAuthService.h"
 #import "OTOnboardingNavigationBehavior.h"
+#import "UIBarButtonItem+factory.h"
+#import "entourage-Swift.h"
+#import "NSString+Validators.h"
 
 @interface OTUserEmailViewController ()
 
-@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
+@property (nonatomic, weak) IBOutlet OnBoardingTextField *emailTextField;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
+@property (nonatomic, weak) IBOutlet OnBoardingButton *continueButton;
 
 @end
 
@@ -34,17 +37,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.title = @"";
     [self.emailTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showKeyboard:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
+
+    self.emailTextField.inputValidationChanged = ^(BOOL isValid) {
+        self.continueButton.enabled = [self.emailTextField.text isValidEmail];
+    };
+
     [self loadCurrentData];
+    [self addIgnoreButton];
 }
+
+- (void)addIgnoreButton {
+    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString
+                                                          withTarget:self
+                                                           andAction:@selector(doIgnore)
+                                                             colored:[UIColor whiteColor]];
+    [self.navigationItem setRightBarButtonItem:ignoreButton];
+}
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -83,9 +96,9 @@
                                                }];
 }
 
-- (void)showKeyboard:(NSNotification*)notification {
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification
-                                         andHeightContraint:self.heightContraint];
+- (void)doIgnore {
+    [SVProgressHUD dismiss];
+    [self.onboardingNavigation nextFromEmail];
 }
 
 @end

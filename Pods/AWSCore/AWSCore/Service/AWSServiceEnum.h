@@ -32,6 +32,10 @@ typedef NS_ENUM(NSInteger, AWSRegionType) {
      */
     AWSRegionUSEast1,
     /**
+     *  US East (Ohio)
+     */
+    AWSRegionUSEast2,
+    /**
      *  US West (N. California)
      */
     AWSRegionUSWest1,
@@ -63,6 +67,10 @@ typedef NS_ENUM(NSInteger, AWSRegionType) {
      *  Asia Pacific (Sydney)
      */
     AWSRegionAPSoutheast2,
+    /**
+     *  Asia Pacific (Mumbai)
+     */
+    AWSRegionAPSouth1,
     /**
      *  South America (Sao Paulo)
      */

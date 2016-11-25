@@ -21,21 +21,21 @@
 #pragma mark - Singleton
 
 + (AFHTTPSessionManager *)sharedInstance {
-	static OTRequestOperationManager *requestManager = nil;
+    static OTRequestOperationManager *requestManager = nil;
 
-	if (requestManager == nil) {
-    NSString *apiBaseUrl = [[ConfigurationManager shared] APIHostURL];
+    if (requestManager == nil) {
+        NSString *apiBaseUrl = [[ConfigurationManager shared] APIHostURL];
 
-		requestManager = [[OTRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:apiBaseUrl]];
-        
-		requestManager.responseSerializer = [OTJSONResponseSerializer serializer];
-		requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        requestManager = [[OTRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:apiBaseUrl]];
+
+        requestManager.responseSerializer = [OTJSONResponseSerializer serializer];
+        requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [requestManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         //TODO api key should be changed after each release
         NSString *apiKey = [[ConfigurationManager shared] APIKey];
         [requestManager.requestSerializer setValue:apiKey forHTTPHeaderField:@"X-API-KEY"];
-	}
-	return requestManager;
+    }
+    return requestManager;
 }
 
 + (NSDictionary*)commonParameters

@@ -19,12 +19,14 @@
 #import "NSError+OTErrorData.h"
 #import "OTConsts.h"
 #import "OTDeepLinkService.h"
+#import "entourage-Swift.h"
 
 @interface OTPhoneViewController ()
 
-@property (nonatomic, weak) IBOutlet UITextField *phoneTextField;
+@property (nonatomic, weak) IBOutlet OnBoardingNumberTextField *phoneTextField;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+@property (nonatomic, weak) IBOutlet OnBoardingButton *validateButton;
 
 @end
 
@@ -36,14 +38,22 @@
     self.title = @"";
     
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
+    self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
+        self.validateButton.enabled = isValid;
+    };
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self.phoneTextField becomeFirstResponder];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
 - (IBAction)doContinue {

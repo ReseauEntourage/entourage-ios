@@ -38,6 +38,9 @@
     return [UIColor colorWithWhite:1 alpha:.7];
 }
 
++ (UIFont *)appTextFieldPlaceholderFont {
+    return [UIFont fontWithName:@"SFUIText-Light" size:17];
+}
 
 + (UIColor *)poiCategory0 {
     return [UIColor blackColor];

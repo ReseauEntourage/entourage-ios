@@ -7,10 +7,7 @@
 //
 
 #import "OTPictureUploadService.h"
-#import "AWSCore.h"
-#import "AWSS3.h"
-#import "AWSServiceEnum.h"
-#import "AWSS3Service.h"
+#import <AWSS3/AWSS3.h>
 #import "OTApiConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"

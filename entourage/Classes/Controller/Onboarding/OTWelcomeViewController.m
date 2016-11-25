@@ -23,15 +23,19 @@
 
 @end
 
-@implementation OTWelcomeViewController 
+@implementation OTWelcomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.title = @"";
-    if(![NSUserDefaults standardUserDefaults].currentUser)
+    if(![NSUserDefaults standardUserDefaults].currentUser) {
         [self addLoginBarButton];
-    [NSAttributedString applyLinkOnTextView:self.txtTerms withText:self.txtTerms.text toLinkText:OTLocalizedString(@"terms_and_conditions_for_onboarding") withLink:ABOUT_CGU_URL];
+        [NSAttributedString applyLinkOnTextView:self.txtTerms 
+            withText:self.txtTerms.text 
+            toLinkText:OTLocalizedString(@"terms_and_conditions_for_onboarding") 
+            withLink:ABOUT_CGU_URL];
+    }
 }
 
 #pragma mark - Private
