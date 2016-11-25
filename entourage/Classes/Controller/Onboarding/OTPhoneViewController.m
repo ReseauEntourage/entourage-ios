@@ -38,9 +38,6 @@
     self.title = @"";
     
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
-
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
     };
@@ -54,9 +51,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
-    [[IQKeyboardManager sharedManager] setEnable:true];
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:false];
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
 - (IBAction)doContinue {

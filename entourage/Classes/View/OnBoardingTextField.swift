@@ -18,6 +18,8 @@ class OnBoardingTextField: JVFloatLabeledTextField, Validable {
         }
         registerForNotifications()
         floatingLabelTextColor = tintColor
+        autocorrectionType = .no
+        autocapitalizationType = .none
     }
 
     deinit {
