@@ -11,11 +11,10 @@
 #import "OTConsts.h"
 #import "OTAboutTableViewCell.h"
 #import "OTAboutItem.h"
-
-@import MessageUI;
-
 #import "NSBundle+entourage.h"
 #import "UIColor+entourage.h"
+#import "entourage-Swift.h"
+@import MessageUI;
 
 @interface OTAboutViewController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
 
@@ -68,12 +67,10 @@
     if (aboutItem != nil) {
         cell.titleLabel.text = aboutItem.title;
         if (indexPath.row == 0) {
-            //Add the version number on first item
-#if DEBUG
-            cell.extraLabel.text = [NSString stringWithFormat:@"v%@",[NSBundle fullCurrentVersion]];
-#else
-            cell.extraLabel.text = [NSString stringWithFormat:@"v%@",[NSBundle currentVersion]];
-#endif
+            if([[ConfigurationManager shared].environment isEqualToString:@"staging"])
+                cell.extraLabel.text = [NSString stringWithFormat:@"v%@",[NSBundle fullCurrentVersion]];
+            else
+                cell.extraLabel.text = [NSString stringWithFormat:@"v%@",[NSBundle currentVersion]];
         }
     }
     return cell;

@@ -43,6 +43,7 @@
 #pragma mark - Life cycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.encountersLabel.text = [NSString stringWithFormat:@"%@", self.encountersCount];
     self.distanceLabel.text = [self stringFromFloatDistance:(self.tour.distance.floatValue)];
     self.durationLabel.text = [self stringFromTimeInterval:(self.duration)];

@@ -10,29 +10,23 @@
 
 @implementation OTMenuItem
 
-/**************************************************************************************************/
-#pragma mark - Birth and Death
-
-/**
- * Init OTMenuItem with title and segueIdentifier
- *
- * @param title
- * The title to display in menu
- *
- * @param segueIdentifier
- * The segueIdentifier corresponding to Main.storyboard to naviguate in different items menu
- *
- * @return OTMenuItem
- * The new instance.
- */
 - (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName segueIdentifier:(NSString *)segueIdentifier
 {
     self = [super init];
-    if (self)
-    {
-        _title = title;
-        _iconName = iconName;
-        _segueIdentifier = segueIdentifier;
+    if (self) {
+        self.title = title;
+        self.iconName = iconName;
+        self.segueIdentifier = segueIdentifier;
+    }
+    return self;
+}
+
+- (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName url:(NSString *)url {
+    self = [super init];
+    if (self) {
+        self.title = title;
+        self.iconName = iconName;
+        self.url = url;
     }
     return self;
 }

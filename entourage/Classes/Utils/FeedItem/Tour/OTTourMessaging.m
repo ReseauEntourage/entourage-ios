@@ -49,7 +49,7 @@
         if(success) {
             NSNumber *authorId = self.tour.author.uID;
             NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
-                return ![item.uID isEqual:authorId] && ![item.status isEqualToString:JOIN_REJECTED] && (!status || [item.status isEqualToString:status]);
+                return ![item.uID isEqual:authorId] && (!status || [item.status isEqualToString:status]);
             }]];
             success(filteredItems);
         }

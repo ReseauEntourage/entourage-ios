@@ -24,6 +24,8 @@
 #import "NSUserDefaults+OT.h"
 #import "NSBundle+entourage.h"
 #import "OTOngoingTourService.h"
+#import "UILabel+entourage.h"
+#import "OTTapViewBehavior.h"
 @import MessageUI;
 
 /* MenuItem identifiers */
@@ -42,7 +44,10 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 // UI
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *modifyLabel;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
+@property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapNameBehavior;
+@property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapModifyBehavior;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -59,13 +64,16 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	self.menuItems = [OTMenuViewController createMenuItems];
+    [self.tapNameBehavior initialize];
+    [self.tapModifyBehavior initialize];
+    self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+	self.menuItems = [self createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
     self.title = OTLocalizedString(@"myProfile").capitalizedString;
     [self createBackFrontMenuButton];
+    [self.modifyLabel underline];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
 }
 
@@ -120,7 +128,10 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	}
 	else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
-		[self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
+        if(menuItem.segueIdentifier)
+            [self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
+        else
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.url]];
 	}
     [[tableView cellForRowAtIndexPath:indexPath]setSelected:NO];
 }
@@ -135,7 +146,6 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier {
 	UIViewController *nextViewController = [self.controllersDictionary objectForKey:segueIdentifier];
-
 	if (nextViewController) {
 		SWRevealViewController *revealViewController = self.revealViewController;
 		if (nextViewController != self.revealViewController.frontViewController) {
@@ -173,61 +183,30 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (void)configureControllersDictionary {
 	UIViewController *frontViewController = self.revealViewController.frontViewController;
-
-	if (frontViewController) {
-		[self.controllersDictionary setObject:frontViewController
-		                               forKey:OTMenuViewControllerSegueMenuMapIdentifier];
-	}
+	if (frontViewController)
+		[self.controllersDictionary setObject:frontViewController forKey:OTMenuViewControllerSegueMenuMapIdentifier];
 }
 
-/**
- * Method which creates all MenuItems in expected order for Menu
- *
- * @return NSArray<OTMenuItem>
- * All expected MenuItems
- */
-+ (NSArray *)createMenuItems {
+- (NSArray *)createMenuItems {
 	NSMutableArray *menuItems = [NSMutableArray array];
-        
-    OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_about")
-                                                     iconName: @"about"
-                                              segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
+    OTMenuItem *itemBlog = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_blog") iconName: @"blog" url:MENU_BLOG_URL];
+    [menuItems addObject:itemBlog];
+    NSString *chartUrl = [self.currentUser.type isEqualToString:USER_TYPE_PRO] ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
+    OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart") iconName: @"chart" url:chartUrl];
+    [menuItems addObject:itemChart];
+    OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_about") iconName: @"about" segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
     [menuItems addObject:itemAbout];
-
-//    OTMenuItem *itemDebug = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"Mail logs")
-//                                                     iconName: @"plus"
-//                                              segueIdentifier:nil];
-//    [menuItems addObject:itemDebug];
-
-    
-    // Disconnect
-    OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
-                                                          iconName: nil
-                                                   segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
+    OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"") iconName: nil segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
     [menuItems addObject:itemDisconnect];
-    
 	return menuItems;
 }
 
-/**
- * Method which returns MenuItem according an indexpath
- *
- * @param indexPath
- * The indexPath to find the corresponding MenuItem in MenuItems
- *
- * @return OTMenuItem
- * The MenuItem according the indexpath
- */
 - (OTMenuItem *)menuItemsAtIndexPath:(NSIndexPath *)indexPath {
 	OTMenuItem *menuItem = nil;
-
-	if (indexPath && (indexPath.row < self.menuItems.count)) {
+	if (indexPath && (indexPath.row < self.menuItems.count))
 		menuItem = [self.menuItems objectAtIndex:indexPath.row];
-	}
-    if (indexPath.section == 1) {
+    if (indexPath.section == 1)
         menuItem = [self.menuItems lastObject];
-    }
-
 	return menuItem;
 }
 

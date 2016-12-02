@@ -18,12 +18,15 @@
 #import "UIColor+entourage.h"
 #import "NSError+OTErrorData.h"
 #import "OTConsts.h"
+#import "OTDeepLinkService.h"
+#import "entourage-Swift.h"
 
 @interface OTPhoneViewController ()
 
-@property (nonatomic, weak) IBOutlet UITextField *phoneTextField;
+@property (nonatomic, weak) IBOutlet OnBoardingNumberTextField *phoneTextField;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
+@property (nonatomic, weak) IBOutlet OnBoardingButton *validateButton;
 
 @end
 
@@ -35,13 +38,22 @@
     self.title = @"";
 
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
+    self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
+        self.validateButton.enabled = isValid;
+    };
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.phoneTextField becomeFirstResponder];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
 - (IBAction)doContinue {
@@ -58,16 +70,28 @@
             [NSUserDefaults standardUserDefaults].temporaryUser = onboardUser;
             [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
+            [SVProgressHUD dismiss];
             NSString *errorMessage = error.localizedDescription;
             NSString *errorCode = [error readErrorCode];
-            if([errorCode isEqualToString:INVALID_PHONE_FORMAT])
-                errorMessage = OTLocalizedString(@"invalidPhoneNumberFormat");
-            else if([errorCode isEqualToString:PHONE_ALREADY_EXIST])
+            BOOL showErrorHUD = YES;
+            if([errorCode isEqualToString:INVALID_PHONE_FORMAT]) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:OTLocalizedString(@"invalidPhoneNumberFormat") preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"close") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+                [alert addAction:defaultAction];
+                UIAlertAction *openLoginAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"already_subscribed") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[OTDeepLinkService new] navigateToLogin];
+                }];
+                [alert addAction:openLoginAction];
+                [self presentViewController:alert animated:YES completion:nil];
+                showErrorHUD = NO;
+            }
+            else if([errorCode isEqualToString:PHONE_ALREADY_EXIST]) {
                 errorMessage = OTLocalizedString(@"phoneAlreadyExits");
+            }
             if (errorMessage) {
                 [Flurry logEvent:@"TelephoneSubmitFail"];
-                [SVProgressHUD showErrorWithStatus:errorMessage];
-                NSLog(@"ERR: something went wrong on onboarding user phone: %@", error.description);
+                if(showErrorHUD)
+                    [SVProgressHUD showErrorWithStatus:errorMessage];
             } else {
                 [NSUserDefaults standardUserDefaults].temporaryUser = temporaryUser;
                 [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"alreadyRegisteredMessage")];

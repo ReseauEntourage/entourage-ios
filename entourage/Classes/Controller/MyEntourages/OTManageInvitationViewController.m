@@ -44,6 +44,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[OTBadgeNumberService sharedInstance] readItem:self.feedItem.uid];
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }

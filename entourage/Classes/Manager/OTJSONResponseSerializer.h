@@ -6,7 +6,7 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import "AFURLResponseSerialization.h"
+#import <AFNetworking/AFURLResponseSerialization.h>
 
 static NSString * const JSONResponseSerializerFullKey = @"JSONResponseSerializerFullKey";
 static NSString * const JSONResponseSerializerFullDictKey = @"JSONResponseSerializerFullDictKey";

@@ -10,16 +10,12 @@
 
 @interface OTMenuItem : NSObject
 
-/**************************************************************************************************/
-#pragma mark - Getters and Setters
-
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *iconName;
 @property (nonatomic, strong) NSString *segueIdentifier;
-
-/**************************************************************************************************/
-#pragma mark - Birth and Death
+@property (nonatomic, strong) NSString *url;
 
 - (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName segueIdentifier:(NSString *)segueIdentifier;
+- (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName url:(NSString *)url;
 
 @end

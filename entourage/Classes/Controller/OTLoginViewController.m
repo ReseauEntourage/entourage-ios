@@ -27,16 +27,20 @@
 #import "OTPushNotificationsService.h"
 #import "OTAskMoreViewController.h"
 #import "NSError+OTErrorData.h"
+#import "entourage-Swift.h"
 
 NSString *const kTutorialDone = @"has_done_tutorial";
 
 @interface OTLoginViewController () <LostCodeDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet OnBoardingNumberTextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet OnBoardingCodeTextField *passwordTextField;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
+@property (nonatomic, weak) IBOutlet OnBoardingButton *continueButton;
+
+@property (nonatomic, assign) BOOL phoneIsValid;
 
 @end
 
@@ -53,17 +57,31 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     }
     [self.phoneTextField indentRight];
     [self.passwordTextField indentRight];
+
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
+
+    self.phoneIsValid = NO;
+    self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
+        self.phoneIsValid = YES;
+        self.continueButton.enabled = [self validateForm];
+    };
+    self.passwordTextField.inputValidationChanged = ^(BOOL isValid) {
+        self.continueButton.enabled = [self validateForm];
+    };
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.phoneTextField becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
     UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
 }
@@ -71,13 +89,14 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - Public Methods
 
 - (BOOL)validateForm {
-    return [self.phoneTextField.text isValidPhoneNumber];
+    return self.phoneIsValid && (self.passwordTextField.text.length == 6);
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
 }
+
 
 - (void)launchAuthentication {
     [SVProgressHUD show];
@@ -139,27 +158,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - Actions
 
 - (IBAction)validateButtonDidTad {
-    if (self.phoneTextField.text.length == 0) {
-        [[[UIAlertView alloc]
-          initWithTitle:OTLocalizedString(@"connection_imposible")
-          message:OTLocalizedString(@"retryPhone")
-          delegate:nil
-          cancelButtonTitle:nil
-          otherButtonTitles:@"Ok",
-          nil] show];
-    }
-    else if (!self.validateForm) {
-        [[[UIAlertView alloc]
-          initWithTitle:OTLocalizedString(@"connection_imposible")
-          message:OTLocalizedString(@"invalidPhoneNumber")
-          delegate:nil
-          cancelButtonTitle:nil
-          otherButtonTitles:@"Ok",
-          nil] show];
-    }
-    else {
-        [self launchAuthentication];
-    }
+    [self launchAuthentication];
 }
 
 /********************************************************************************/

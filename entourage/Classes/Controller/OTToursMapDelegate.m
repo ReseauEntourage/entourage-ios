@@ -15,6 +15,7 @@
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 #import "OTOngoingTourService.h"
+#import "OTStartTourAnnotation.h"
 
 @implementation OTToursMapDelegate
 
@@ -27,13 +28,24 @@
         if (!annotationView)
             annotationView = ((OTEncounterAnnotation *)annotation).annotationView;
         annotationView.annotation = annotation;
+        annotationView.canShowCallout = YES;
     }
-    annotationView.canShowCallout = YES;
+    else if ([annotation isKindOfClass:[OTStartTourAnnotation class]]) {
+        annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kStartTourAnnotationIdentifier];
+        if (!annotationView)
+            annotationView = ((OTStartTourAnnotation *)annotation).annotationView;
+        annotationView.annotation = annotation;
+        annotationView.canShowCallout = NO;
+    }
     return annotationView;
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     [self.mapController didChangePosition];
+}
+
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
+    [self.mapController willChangePosition];
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {

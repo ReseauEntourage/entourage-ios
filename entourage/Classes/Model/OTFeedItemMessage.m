@@ -22,18 +22,18 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        self.tID = [dictionary valueForKey:kWSID];
+        self.tID = [dictionary numberForKey:kWSID];
         self.tag = TimelinePointTagMessage;
         self.date = [dictionary dateForKey:kWSKeyCreatedAt format:@"yyyy-MM-dd'T'HH:mm:ss.SSSXXX"];
         if (self.date == nil)
             // Objective-C format : "2015-11-20 09:28:52 +0000"
             self.date = [dictionary dateForKey:kWSKeyCreatedAt format:@"yyyy-MM-dd HH:mm:ss Z"];
-        self.text = [dictionary valueForKey:kWSKeyContent];
+        self.text = [dictionary stringForKey:kWSKeyContent];
         NSDictionary *user;
         if ((user = [dictionary objectForKey:kWSUser])) {
-            self.userAvatarURL = [user valueForKey:kWSAvatarURL];
-            self.uID = [user valueForKey:kWSID];
-            self.userName = [user valueForKey:kWSUserName];
+            self.userAvatarURL = [user stringForKey:kWSAvatarURL];
+            self.uID = [user numberForKey:kWSID];
+            self.userName = [user stringForKey:kWSUserName];
         }
     }
     return self;

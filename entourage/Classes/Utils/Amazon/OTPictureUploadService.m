@@ -7,26 +7,21 @@
 //
 
 #import "OTPictureUploadService.h"
-#import "AWSCore.h"
-#import "AWSS3.h"
-#import "AWSServiceEnum.h"
-#import "AWSS3Service.h"
+#import <AWSS3/AWSS3.h>
 #import "OTApiConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
-#import "OTAmazonConsts.h"
+#import "entourage-Swift.h"
 
-#if DEBUG
-#define PICTURE_FOLDER_PREFIX @"staging/300x300/"
-#else
-#define PICTURE_FOLDER_PREFIX @"300x300/"
-#endif
 #define PICTURE_BUCKET @"entourage-avatars-production-thumb"
 
 @implementation OTPictureUploadService
 
 + (void)configure {
-    AWSStaticCredentialsProvider *staticProvider = [[AWSStaticCredentialsProvider alloc] initWithAccessKey:AMAZON_ACCESS_KEY secretKey:AMAZON_SECRET_KEY];
+    NSString *amazonAccessKey = [[ConfigurationManager shared] amazonAccessKey];
+    NSString *amazonSecretKey = [[ConfigurationManager shared] amazonSecretKey];
+    AWSStaticCredentialsProvider *staticProvider = [[AWSStaticCredentialsProvider alloc] initWithAccessKey:amazonAccessKey
+                                                                                                 secretKey:amazonSecretKey];
     AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionEUWest1 credentialsProvider:staticProvider];
     AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
 }
@@ -49,7 +44,7 @@
 - (AWSS3TransferManagerUploadRequest *)buildUploadRequestFor:(NSURL *)fileUri withName:(NSString *)fileName {
     AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
     uploadRequest.bucket = PICTURE_BUCKET;
-    uploadRequest.key = [PICTURE_FOLDER_PREFIX stringByAppendingString:fileName];
+    uploadRequest.key = [[ConfigurationManager shared].amazonPictureFolder stringByAppendingString:fileName];
     uploadRequest.body = fileUri;
     uploadRequest.contentType = @"image/jpeg";
     return uploadRequest;

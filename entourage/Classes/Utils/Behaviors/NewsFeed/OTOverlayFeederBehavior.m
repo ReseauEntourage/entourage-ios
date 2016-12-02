@@ -62,7 +62,7 @@ static char kAssociatedObjectKey;
         OTFeedItem *item = (OTFeedItem *)object;
         return [[[OTFeedItemFactory createFor:item] getMapHandler] newsFeedOverlayRenderer:overlay];
     }
-    return nil;
+    return [self.mapView rendererForOverlay:overlay];
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {

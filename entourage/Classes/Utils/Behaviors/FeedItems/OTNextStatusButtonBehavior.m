@@ -10,6 +10,7 @@
 #import "OTFeedItemFactory.h"
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
+#import "OTTour.h"
 
 @interface OTNextStatusButtonBehavior ()
 
@@ -32,23 +33,35 @@
     FeedItemState currentState = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
     NSString *title = nil;
     SEL selector = nil;
+    self.btnNextState.hidden = YES;
     switch (currentState) {
         case FeedItemStateOngoing:
             title = OTLocalizedString(@"item_option_close");
             selector = @selector(doStopFeedItem);
+            self.btnNextState.hidden = NO;
             break;
         case FeedItemStateOpen:
-        case FeedItemStateClosed:
             title = OTLocalizedString(@"item_option_freeze");
-            selector = @selector(doCloseFeedItem);
+            self.btnNextState.hidden = NO;
+            break;
+        case FeedItemStateClosed:
+            if([self.feedItem isKindOfClass:[OTTour class]]) {
+                title = OTLocalizedString(@"item_option_freeze");
+                selector = @selector(doCloseFeedItem);
+                self.btnNextState.hidden = NO;
+            }
             break;
         case FeedItemStateJoinAccepted:
             title = OTLocalizedString(@"item_option_quit");
             selector = @selector(doQuitFeedItem);
+            self.btnNextState.hidden = NO;
+            break;
+        case FeedItemStateJoinNotRequested:
+            title = OTLocalizedString(@"join");
+            selector = @selector(doJoinFeedItem);
+            self.btnNextState.hidden = NO;
             break;
         default:
-            self.btnNextState.hidden = YES;
-            selector = @selector(doStopFeedItem);
             break;
     }
     [self.btnNextState addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
@@ -97,6 +110,11 @@
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];
+}
+
+- (void)doJoinFeedItem {
+    if(self.delegate)
+        [self.delegate joinFeedItem];
 }
 
 @end

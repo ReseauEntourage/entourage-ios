@@ -56,12 +56,4 @@ static NSString *const kTemporaryUser = @"kTemporaryUser";
     return [loggedNumbers containsObject:[self.currentUser phone]];
 }
 
-+ (BOOL)wasEncounterDisclaimerAccepted {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kEncounterDisclaimer];
-}
-
-+ (BOOL)wasEntourageDisclaimerAccepted {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kEntourageDisclaimer];
-}
-
 @end

@@ -1,4 +1,4 @@
-# FormatterKit
+# FormatterKit [![Build Status](https://travis-ci.org/mattt/FormatterKit.svg?branch=master)](https://travis-ci.org/mattt/FormatterKit) [![CocoaPods compatible](https://img.shields.io/cocoapods/v/FormatterKit.svg)](https://cocoapods.org/pods/FormatterKit) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 `FormatterKit` is a collection of well-crafted `NSFormatter` subclasses for things like units of information, distance, and relative time intervals. Each formatter abstracts away the complex business logic of their respective domain, so that you can focus on the more important aspects of your application.
 
@@ -27,9 +27,11 @@ FormatterKit comes fully internationalized, with `.strings` files for the follow
 - Danish (`da`)
 - Dutch (`nl`)
 - English (`en`)
+- French (`fr`)
 - German (`de`)
 - Greek (`el`)
-- French (`fr`)
+- Hebrew (`he`)
+- Hungarian (`hu`)
 - Indonesian (`id`)
 - Italian (`it`)
 - Korean (`ko`)
@@ -52,14 +54,7 @@ Because the App Store automatically attempts to determine supported locales, and
 
         $ find "$TARGET_BUILD_DIR" -maxdepth 8 -type f -name "FormatterKit.strings" -execdir rm -r -v {} \;
 
-If you are using CocoaPods, you may want to remove unwanted localizations using the pre install script below. Modify the supported_locales array to match your supported locales and paste it into your Podfile.
-
-```ruby
-prepare_command = <<-CMD
-    SUPPORTED_LOCALES="['base', 'da', 'en']"
-    find . -type d ! -name "*$SUPPORTED_LOCALES.lproj" | grep .lproj | xargs rm -rf
-CMD
-```
+If you are using CocoaPods, a seprate localization bundle will be created for the pod. Therefore, App Store won't pick up the extraneous localizations.
 
 ## Demo
 
@@ -191,7 +186,7 @@ NSLog(@"%@", japaneseName);
 
 A naïve implementation might be as simple as throwing the one's place in a switch statement and appending "-st", "-nd", etc. But what if you want to support French, which appends "-er", "-ère", and "-eme" in various contexts? How about Spanish? Japanese?
 
-`TTTOrdinalNumberFormatter` supports English, Spanish, French, German, Irish, Italian, Japanese, Dutch, Portuguese, and Simplified Chinese. For other languages, you can use the standard default, or override it with your own. For languages whose ordinal indicator depends upon the grammatical properties of the predicate, `TTTOrdinalNumberFormatter` can format according to a specified gender and/or plurality.
+`TTTOrdinalNumberFormatter` supports English, Spanish, French, German, Irish, Italian, Japanese, Dutch, Portuguese, Simplified Chinese and Swedish. For other languages, you can use the standard default, or override it with your own. For languages whose ordinal indicator depends upon the grammatical properties of the predicate, `TTTOrdinalNumberFormatter` can format according to a specified gender and/or plurality.
 
 ### Example Usage
 
@@ -281,14 +276,6 @@ NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL U
     curl -X POST "https://www.example.com/" -H "Accept: text/html"
 
 ---
-
-## Contact
-
-Mattt Thompson
-
-- http://github.com/mattt
-- http://twitter.com/mattt
-- m@mattt.me
 
 ## License
 

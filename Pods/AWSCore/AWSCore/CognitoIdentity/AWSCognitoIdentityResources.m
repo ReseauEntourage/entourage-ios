@@ -14,7 +14,7 @@
 //
 
 #import "AWSCognitoIdentityResources.h"
-#import "AWSLogging.h"
+#import <AWSCore/AWSLogging.h>
 
 @interface AWSCognitoIdentityResources ()
 
@@ -474,7 +474,8 @@
         \"CognitoIdentityProviders\":{\
           \"shape\":\"CognitoIdentityProviderList\",\
           \"documentation\":\"<p>A list representing a Cognito User Identity Pool and its client ID.</p>\"\
-        }\
+        },\
+        \"SamlProviderARNs\":{\"shape\":\"SAMLProviderList\"}\
       },\
       \"documentation\":\"<p>Input to the CreateIdentityPool action.</p>\"\
     },\
@@ -611,7 +612,8 @@
         \"Logins\":{\
           \"shape\":\"LoginsMap\",\
           \"documentation\":\"<p>A set of optional name-value pairs that map provider names to provider tokens.</p>\"\
-        }\
+        },\
+        \"CustomRoleArn\":{\"shape\":\"ARNString\"}\
       },\
       \"documentation\":\"<p>Input to the <code>GetCredentialsForIdentity</code> action.</p>\"\
     },\
@@ -826,7 +828,8 @@
         \"CognitoIdentityProviders\":{\
           \"shape\":\"CognitoIdentityProviderList\",\
           \"documentation\":\"<p>A list representing a Cognito User Identity Pool and its client ID.</p>\"\
-        }\
+        },\
+        \"SamlProviderARNs\":{\"shape\":\"SAMLProviderList\"}\
       },\
       \"documentation\":\"An object representing a Cognito identity pool.\"\
     },\
@@ -870,14 +873,12 @@
     \"IdentityProviderName\":{\
       \"type\":\"string\",\
       \"max\":128,\
-      \"min\":1,\
-      \"pattern\":\"[\\\\w._/:-]+\"\
+      \"min\":1\
     },\
     \"IdentityProviderToken\":{\
       \"type\":\"string\",\
-      \"max\":2048,\
-      \"min\":1,\
-      \"pattern\":\"[\\\\S]+\"\
+      \"max\":50000,\
+      \"min\":1\
     },\
     \"IdentityProviders\":{\
       \"type\":\"map\",\
@@ -1153,6 +1154,10 @@
       \"key\":{\"shape\":\"RoleType\"},\
       \"value\":{\"shape\":\"ARNString\"},\
       \"max\":2\
+    },\
+    \"SAMLProviderList\":{\
+      \"type\":\"list\",\
+      \"member\":{\"shape\":\"ARNString\"}\
     },\
     \"SecretKeyString\":{\"type\":\"string\"},\
     \"SessionTokenString\":{\"type\":\"string\"},\

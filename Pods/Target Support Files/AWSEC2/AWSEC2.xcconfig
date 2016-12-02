@@ -1,7 +1,7 @@
 CONFIGURATION_BUILD_DIR = $PODS_CONFIGURATION_BUILD_DIR/AWSEC2
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/AWSCore"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/AWSEC2" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/AWSAutoScaling" "${PODS_ROOT}/Headers/Public/AWSCloudWatch" "${PODS_ROOT}/Headers/Public/AWSCore" "${PODS_ROOT}/Headers/Public/AWSDynamoDB" "${PODS_ROOT}/Headers/Public/AWSEC2" "${PODS_ROOT}/Headers/Public/AWSElasticLoadBalancing" "${PODS_ROOT}/Headers/Public/AWSKinesis" "${PODS_ROOT}/Headers/Public/AWSMobileAnalytics" "${PODS_ROOT}/Headers/Public/AWSS3" "${PODS_ROOT}/Headers/Public/AWSSES" "${PODS_ROOT}/Headers/Public/AWSSNS" "${PODS_ROOT}/Headers/Public/AWSSQS" "${PODS_ROOT}/Headers/Public/AWSSimpleDB" "${PODS_ROOT}/Headers/Public/AWSiOSSDKv2" "${PODS_ROOT}/Headers/Public/FormatterKit" "${PODS_ROOT}/Headers/Public/IQKeyboardManager" "${PODS_ROOT}/Headers/Public/JSBadgeView" "${PODS_ROOT}/Headers/Public/MBProgressHUD" "${PODS_ROOT}/Headers/Public/OCMock" "${PODS_ROOT}/Headers/Public/SVProgressHUD" "${PODS_ROOT}/Headers/Public/SWRevealViewController" "${PODS_ROOT}/Headers/Public/SimpleKeychain" "${PODS_ROOT}/Headers/Public/WYPopoverController"
-LIBRARY_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/AWSCore"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AWSiOSSDKv2" "${PODS_ROOT}/Headers/Public/Crashlytics" "${PODS_ROOT}/Headers/Public/Fabric"
 PODS_BUILD_DIR = $BUILD_DIR
 PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}

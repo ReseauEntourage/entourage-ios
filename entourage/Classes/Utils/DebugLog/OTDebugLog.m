@@ -7,9 +7,10 @@
 //
 
 #import "OTDebugLog.h"
-@import MessageUI;
 #import "SVProgressHUD.h"
 #import "OTDeepLinkService.h"
+#import "entourage-Swift.h"
+@import MessageUI;
 
 @interface OTDebugLog () <MFMailComposeViewControllerDelegate>
 
@@ -43,13 +44,14 @@
 }
 
 - (void)setConsoleOutput {
-#if DEBUG
-    freopen([self.logPath cStringUsingEncoding:NSASCIIStringEncoding], "a+", stderr);
-#endif
+    if([[ConfigurationManager shared].environment isEqualToString:@"staging"])
+        freopen([self.logPath cStringUsingEncoding:NSASCIIStringEncoding], "a+", stderr);
 }
 
 - (void)sendEmail {
-#if DEBUG
+    if(![[ConfigurationManager shared].environment isEqualToString:@"staging"])
+        return;
+
     if(![MFMailComposeViewController canSendMail]) {
         [SVProgressHUD showErrorWithStatus:@"No mail client to send mail with"];
         return;
@@ -68,7 +70,6 @@
     
     UIViewController *topVC = [[OTDeepLinkService new] getTopViewController];
     [topVC presentViewController:mailer animated:YES completion:NULL];
-#endif
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate

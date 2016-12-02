@@ -35,14 +35,17 @@
 }
 
 - (void)addIgnoreButton {
-    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString withTarget:self andAction:@selector(ignore) colored:[UIColor whiteColor]];
+    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString
+                                                          withTarget:self
+                                                           andAction:@selector(ignore)
+                                                             colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:ignoreButton];
 }
 
 #pragma mark - Private
 
 - (void)promptUserForLocationUsage {
-    if ([OTLocationManager sharedInstance].started)
+    if ([OTLocationManager sharedInstance].isAuthorized)
         [self goToNotifications];
     else
         [[OTLocationManager sharedInstance] startLocationUpdates];

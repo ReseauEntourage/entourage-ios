@@ -23,10 +23,6 @@
 
 #pragma mark - Utils
 
-- (void)viewDidLoad {
-    
-}
-
 - (NSString *)selectedTourType {
     NSInteger selectedType = 0;
     for (UIButton *button in self.typeButtons) {

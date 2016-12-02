@@ -12,25 +12,30 @@
 #import "UIView+entourage.h"
 #import "UIBarButtonItem+factory.h"
 #import "NSUserDefaults+OT.h"
+#import "NSAttributedString+OTBuilder.h"
 
 #define SHOW_LOGIN_SEGUE @"WelcomeLoginSegue"
 #define CONTINUE_ONBOARDING_SEGUE @"SegueOnboarding"
 
-@interface OTWelcomeViewController() <UIWebViewDelegate>
+@interface OTWelcomeViewController ()
 
-@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UITextView *txtTerms;
+
 @end
 
-@implementation OTWelcomeViewController 
+@implementation OTWelcomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.title = @"";
-    if(![NSUserDefaults standardUserDefaults].currentUser)
+    if(![NSUserDefaults standardUserDefaults].currentUser) {
         [self addLoginBarButton];
-    [self setupWebView];
-    
+        [NSAttributedString applyLinkOnTextView:self.txtTerms 
+            withText:self.txtTerms.text 
+            toLinkText:OTLocalizedString(@"terms_and_conditions_for_onboarding") 
+            withLink:ABOUT_CGU_URL];
+    }
 }
 
 #pragma mark - Private
@@ -38,14 +43,6 @@
 - (void)addLoginBarButton {
     UIBarButtonItem *loginButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doLogin") withTarget:self andAction:@selector(doLogin) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:loginButton];
-}
-
-- (void)setupWebView {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"welcome" ofType:@"html"];
-    NSString *html = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    
-    // Tell the web view to load it
-    [self.webView loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
 }
 
 #pragma mark - IBActions
@@ -57,17 +54,6 @@
 - (IBAction)continueOnboarding:(id)sender {
     [Flurry logEvent:@"WelcomeScreenContinue"];
     [self performSegueWithIdentifier:CONTINUE_ONBOARDING_SEGUE sender:self];
-}
-
-#pragma mark - UIWebView
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
-        [[UIApplication sharedApplication] openURL:[request URL]];
-        return NO;
-    }
-    
-    return YES;
 }
 
 @end

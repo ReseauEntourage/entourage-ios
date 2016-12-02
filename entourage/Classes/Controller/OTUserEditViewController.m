@@ -21,22 +21,25 @@
 #import "A0SimpleKeychain.h"
 #import "NSString+Validators.h"
 #import "UIBarButtonItem+factory.h"
+#import "OTMailTextCheckBehavior.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
     SectionTypeInfoPrivate,
     SectionTypeAssociations,
     SectionTypeDelete,
-    SectionTypeInfoPublic// to be the 3rd in version 1.2
+    SectionTypeInfoPublic,
+    SectionTypePublicAssociation
 } SectionType;
 
 #define EDIT_PICTURE_SEGUE @"EditPictureSegue"
 #define EDIT_PASSWORD_SEGUE @"EditPasswordSegue"
 #define NOTIFY_LOGOUT @"loginFailureNotification"
 
-@interface OTUserEditViewController() <UITableViewDelegate, UITableViewDataSource, OTUserEditPasswordProtocol>
+@interface OTUserEditViewController() <UITableViewDelegate, UITableViewDataSource, OTUserEditPasswordProtocol, UITextViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet OTMailTextCheckBehavior *checkMailBehavior;
 
 @property (nonatomic, strong) UITextField *firstNameTextField;
 @property (nonatomic, strong) UITextField *lastNameTextField;
@@ -51,14 +54,15 @@ typedef NS_ENUM(NSInteger) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = OTLocalizedString(@"profile").uppercaseString;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 1000;
     [self setupCloseModal];
     [self showSaveButton];
-    
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
     if([self.user.type isEqualToString:USER_TYPE_PRO])
         self.sections = @[@(SectionTypeSummary), @(SectionTypeInfoPrivate), @(SectionTypeAssociations), @(SectionTypeDelete)];
     else
-        self.sections = @[@(SectionTypeSummary), @(SectionTypeInfoPrivate), @(SectionTypeDelete)];
+        self.sections = @[@(SectionTypeSummary), @(SectionTypeInfoPrivate), @(SectionTypePublicAssociation), @(SectionTypeDelete)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
 }
 
@@ -135,8 +139,6 @@ typedef NS_ENUM(NSInteger) {
             return 3;
         case SectionTypeInfoPrivate:
             return 3;
-        case SectionTypeInfoPublic:
-            return 1;
         case SectionTypeAssociations:
             return self.user.organization == nil ? 0 : 1;
         default:
@@ -150,13 +152,15 @@ typedef NS_ENUM(NSInteger) {
     switch (mappedSection) {
         case SectionTypeInfoPrivate:
         case SectionTypeInfoPublic:
-            height = 45.0f;
+        case SectionTypePublicAssociation:
+            height = 46.0f;
             break;
         case SectionTypeAssociations:
-            height = self.user.organization == nil ? 0.0f : 45.0f;
+            height = self.user.organization == nil ? 0.0f : 46.0f;
             break;
         case SectionTypeDelete:
-            height = 45.0f;
+            height = 23.0f;
+            break;
         default:
             break;
     }
@@ -165,31 +169,6 @@ typedef NS_ENUM(NSInteger) {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return .5f;
-}
-
-#define CELLHEIGHT_SUMMARY 135.0f
-#define CELLHEIGHT_TITLE    33.0f
-#define CELLHEIGHT_ENTOURAGES  80.0f
-#define CELLHEIGHT_DEFAULT  51.0f
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    int mappedSection = [[self.sections objectAtIndex:indexPath.section] intValue];
-    switch (mappedSection) {
-        case SectionTypeSummary:
-            if (indexPath.row == 0)
-                return CELLHEIGHT_SUMMARY;
-            else
-                return CELLHEIGHT_DEFAULT;
-        case SectionTypeInfoPrivate:
-            return CELLHEIGHT_DEFAULT;
-        case SectionTypeInfoPublic:
-            return CELLHEIGHT_DEFAULT;
-        case SectionTypeAssociations:
-            return CELLHEIGHT_ENTOURAGES;
-        default:
-            return CELLHEIGHT_DEFAULT;;
-    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -207,6 +186,10 @@ typedef NS_ENUM(NSInteger) {
         }
         case SectionTypeAssociations: {
             title =  OTLocalizedString(@"organizations");
+            break;
+        }
+        case SectionTypePublicAssociation: {
+            title =  OTLocalizedString(@"association");
             break;
         }
         default:
@@ -227,11 +210,10 @@ typedef NS_ENUM(NSInteger) {
     NSString *cellID;
     int mappedSection = [[self.sections objectAtIndex:indexPath.section] intValue];
     switch (mappedSection) {
-        case SectionTypeSummary: {
+        case SectionTypeSummary:
             cellID = indexPath.row == 0 ? @"SummaryProfileCell" : @"EditProfileCell";
             break;
-        }
-        case SectionTypeInfoPrivate: {
+        case SectionTypeInfoPrivate:
             switch (indexPath.row) {
                 case 0:
                     cellID = @"EditProfileCell";
@@ -246,19 +228,18 @@ typedef NS_ENUM(NSInteger) {
                     break;
             }
             break;
-        }
-        case SectionTypeInfoPublic: {
+        case SectionTypeInfoPublic:
             cellID = @"EditProfileCell";
             break;
-        }
-        case SectionTypeAssociations: {
+        case SectionTypeAssociations:
             cellID = @"AssociationProfileCell";
             break;
-        }
-        case SectionTypeDelete: {
+        case SectionTypeDelete:
             cellID = @"DeleteProfileCell";
             break;
-        }
+        case SectionTypePublicAssociation:
+            cellID = @"PublicAssociationCell";
+            break;
         default:
             break;
     }
@@ -267,7 +248,6 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeSummary: {
             if (indexPath.row == 0) {
                 [self setupSummaryProfileCell:cell];
-                
             } else {
                 NSString *title = indexPath.row == 1 ? OTLocalizedString(@"firstName") : OTLocalizedString(@"lastName");
                 NSString *text = indexPath.row == 1 ? self.user.firstName : self.user.lastName;
@@ -300,19 +280,20 @@ typedef NS_ENUM(NSInteger) {
             }
             break;
         }
+        case SectionTypePublicAssociation:
+            [self setupPublicAssociationCell:cell];
+            break;
             
     }
     return cell;
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     int mappedSection = [[self.sections objectAtIndex:indexPath.section] intValue];
     switch (mappedSection) {
         case SectionTypeInfoPrivate:
-            if (indexPath.row == 1) {
+            if (indexPath.row == 1)
                 [self performSegueWithIdentifier:EDIT_PASSWORD_SEGUE sender:nil];
-            }
             break;
         case SectionTypeDelete: {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:OTLocalizedString(@"user_edit_delete") preferredStyle:UIAlertControllerStyleAlert];
@@ -359,9 +340,9 @@ typedef NS_ENUM(NSInteger) {
 #define ASSOCIATION_TITLE_TAG 1
 #define ASSOCIATION_IMAGE_TAG 2
 
+#define PUBLIC_ASSOCIATION_TEXT_TAG 1
 
-- (void)setupSummaryProfileCell:(UITableViewCell *)cell
-{
+- (void)setupSummaryProfileCell:(UITableViewCell *)cell {
     UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
     [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];
     [avatarShadow.layer setShadowOpacity:0.5];
@@ -379,17 +360,14 @@ typedef NS_ENUM(NSInteger) {
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }
 
-- (void)setupInfoCell:(UITableViewCell *)cell withTitle:(NSString *)title withTextField:(UITextField *)myTextField andText:(NSString *)text
-{
+- (void)setupInfoCell:(UITableViewCell *)cell withTitle:(NSString *)title withTextField:(UITextField *)myTextField andText:(NSString *)text {
     UILabel *titleLabel = [cell viewWithTag:CELL_TITLE_TAG];
     titleLabel.text = title;
     UITextField *nameTextField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
-    myTextField = nameTextField;
     nameTextField.text = text;
 }
 
-- (NSString *)editedTextAtIndexPath:(NSIndexPath *)indexPath
-{
+- (NSString *)editedTextAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     UITextField * textField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
     if (textField != nil && [textField isKindOfClass:[UITextField class]])
@@ -397,8 +375,7 @@ typedef NS_ENUM(NSInteger) {
     return nil;
 }
 
-- (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationImage:(NSString *)imageURL
-{
+- (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationImage:(NSString *)imageURL {
     UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
     titleLabel.text = title;
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE_TAG];
@@ -406,18 +383,22 @@ typedef NS_ENUM(NSInteger) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
 }
 
-- (void)setupPhoneCell:(UITableViewCell *)cell
-             withPhone:(NSString *)phone
-{
+- (void)setupPhoneCell:(UITableViewCell *)cell withPhone:(NSString *)phone {
     UILabel *phoneLabel = [cell viewWithTag:PHONE_LABEL_TAG];
     if (phoneLabel != nil)
         phoneLabel.text = phone;
 }
 
+- (void)setupPublicAssociationCell:(UITableViewCell *)cell {
+    UITextView *txt = [cell viewWithTag:PUBLIC_ASSOCIATION_TEXT_TAG];
+    self.checkMailBehavior.txtWithEmailLinks = txt;
+    [self.checkMailBehavior initialize];
+    txt.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor appOrangeColor]};
+}
+
 #pragma mark - OTUserEditPasswordProtocol
 
-- (void)setNewPassword:(NSString *)password
-{
+- (void)setNewPassword:(NSString *)password {
     self.user.password = password;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
