@@ -42,12 +42,14 @@
 }
 
 - (NSAttributedString *)buildDisclaimerWithLink:(NSString *)originalString {
+    NSDictionary *attributes = @{ NSFontAttributeName: [UIFont fontWithName:@"SFUIText-Light" size:17]};
+
     NSString *stringToMakeInLink = OTLocalizedString(@"disclaimer_link_text");
     NSRange range = [originalString rangeOfString:stringToMakeInLink];
     if(range.location == NSNotFound)
-        return [[NSAttributedString alloc] initWithString:originalString];
+        return [[NSAttributedString alloc] initWithString:originalString attributes:attributes];
     NSString *url = [[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO] ? PRO_ENTOURAGE_CREATION_CHART : PUBLIC_ENTOURAGE_CREATION_CHART;
-    NSMutableAttributedString *source = [[NSMutableAttributedString alloc] initWithString:originalString];
+    NSMutableAttributedString *source = [[NSMutableAttributedString alloc] initWithString:originalString attributes:attributes];
     [source addAttribute:NSLinkAttributeName value:url range:range];
     return source;
 }
