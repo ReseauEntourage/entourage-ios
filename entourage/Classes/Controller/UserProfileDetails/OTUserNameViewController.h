@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol OTUserNameViewControllerDelegate <NSObject>
+
+- (void)userNameDidChange;
+
+@end
+
 @interface OTUserNameViewController : UIViewController
+
+@property (assign, nonatomic) id<OTUserNameViewControllerDelegate> delegate;
 
 @end

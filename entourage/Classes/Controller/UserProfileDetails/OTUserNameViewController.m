@@ -44,6 +44,7 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self loadCurrentData];
 
+    self.continueButton.enabled = [self formIsValid];
     self.firstNameTextField.inputValidationChanged = ^(BOOL isValid) {
         self.continueButton.enabled = [self formIsValid];
     };
@@ -84,7 +85,12 @@
         user.phone = currentUser.phone;
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [SVProgressHUD dismiss];
-        [self.onboardingNavigation nextFromName];
+
+        if ([self.delegate respondsToSelector:@selector(userNameDidChange)]) {
+            [self.delegate userNameDidChange];
+        } else {
+            [self.onboardingNavigation nextFromName];
+        }
     } failure:^(NSError *error) {
         [Flurry logEvent:@"NameSubmitError"];
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];

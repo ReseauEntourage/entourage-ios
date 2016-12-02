@@ -114,9 +114,10 @@
                                             <constraint firstAttribute="height" constant="56" id="8PY-sj-5ki"/>
                                             <constraint firstAttribute="width" constant="56" id="b1h-No-usB"/>
                                         </constraints>
-                                        <state key="normal" image="nextOpacity70">
+                                        <state key="normal" image="nextFull">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <state key="disabled" image="nextOpacity70"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="28"/>
@@ -282,9 +283,10 @@
                                             <constraint firstAttribute="height" constant="56" id="PM4-tl-mGm"/>
                                             <constraint firstAttribute="width" constant="56" id="k7W-2L-MWz"/>
                                         </constraints>
-                                        <state key="normal" image="nextOpacity70">
+                                        <state key="normal" image="nextFull">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <state key="disabled" image="nextOpacity70"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="28"/>
@@ -391,6 +393,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="nextFull" width="56" height="56"/>
         <image name="nextOpacity70" width="56" height="56"/>
         <image name="whiteUser" width="56" height="56"/>
     </resources>

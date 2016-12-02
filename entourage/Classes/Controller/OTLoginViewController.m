@@ -28,11 +28,12 @@
 #import "OTAskMoreViewController.h"
 #import "NSError+OTErrorData.h"
 #import "OTLocationManager.h"
+#import "OTUserNameViewController.h"
 #import "entourage-Swift.h"
 
 NSString *const kTutorialDone = @"has_done_tutorial";
 
-@interface OTLoginViewController () <LostCodeDelegate>
+@interface OTLoginViewController () <LostCodeDelegate, OTUserNameViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet OnBoardingNumberTextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet OnBoardingCodeTextField *passwordTextField;
@@ -105,7 +106,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [[OTAuthService new] authWithPhone:self.phoneTextField.text
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
-                               success: ^(OTUser *user) {
+                               success: ^(OTUser *user) {;
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    user.phone = self.phoneTextField.text;
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
@@ -115,13 +116,15 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    [NSUserDefaults standardUserDefaults].currentUser = user;
                                    [[NSUserDefaults standardUserDefaults] synchronize];
-                                   if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
+
+                                   if ([self shallDisplayUserNameForm:user]) {
+                                       [self displayUserNameForm];
+                                   }
+                                   else if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
                                        [[OTPushNotificationsService new] promptUserForPushNotifications];
                                        [UIStoryboard showSWRevealController];
                                    }
-                                   else
-                                       [self.onboardingNavigation nextFromLogin];
-                                 [[OTLocationManager sharedInstance] startLocationUpdates];
+                                   [[OTLocationManager sharedInstance] startLocationUpdates];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    NSString *alertTitle = OTLocalizedString(@"error");
@@ -157,6 +160,29 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 }
 
 /********************************************************************************/
+#pragma mark - Private
+
+- (BOOL)shallDisplayUserNameForm:(OTUser*)user {
+
+    user.firstName = [[user.firstName lowercaseString] isEqualToString:@"inconnu"] ? @"" : user.firstName;
+    user.lastName = [[user.lastName lowercaseString] isEqualToString:@"xxx"] ? @"" : user.lastName;
+    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+
+    if(user.lastName.length > 0 && user.firstName.length > 0) {
+        return NO;
+    }
+
+    return YES;
+}
+
+- (void)displayUserNameForm {
+    UIStoryboard *profileDetailsStoryboard = [UIStoryboard storyboardWithName:@"UserProfileDetails" bundle:nil];
+    OTUserNameViewController *nameController = (OTUserNameViewController*)[profileDetailsStoryboard instantiateViewControllerWithIdentifier:@"NameScene"];
+    nameController.delegate = self;
+    [self.navigationController pushViewController:nameController animated:YES];
+}
+
+/********************************************************************************/
 #pragma mark - Actions
 
 - (IBAction)validateButtonDidTad {
@@ -175,6 +201,13 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 - (void)showKeyboard:(NSNotification*)notification {
     [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint andMarker:self.phoneTextField];
+}
+
+/********************************************************************************/
+#pragma mark - OTUserNameViewController
+
+- (void)userNameDidChange {
+    [UIStoryboard showSWRevealController];
 }
 
 @end
