@@ -46,11 +46,11 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"environment": @"staging"}];
     [[OTDebugLog sharedInstance] setConsoleOutput];
 
-//#if !DEBUG
+#if !DEBUG
     [Flurry setAppVersion:[OTVersionInfo currentVersion]];
-	[Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
+    [Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
     [Fabric with:@[[Crashlytics class]]];
-//#endif
+#endif
 
     [IQKeyboardManager sharedManager].enable = YES;
     [self configureUIAppearance];

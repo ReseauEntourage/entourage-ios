@@ -49,7 +49,7 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.activityType = CLActivityTypeFitness;
     self.locationManager.distanceFilter = 10; // meters
-    
+
     [self.locationManager startUpdatingLocation];
 }
 

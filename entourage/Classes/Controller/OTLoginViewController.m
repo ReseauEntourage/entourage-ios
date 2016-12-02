@@ -27,6 +27,7 @@
 #import "OTPushNotificationsService.h"
 #import "OTAskMoreViewController.h"
 #import "NSError+OTErrorData.h"
+#import "OTLocationManager.h"
 #import "entourage-Swift.h"
 
 NSString *const kTutorialDone = @"has_done_tutorial";
@@ -120,6 +121,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    }
                                    else
                                        [self.onboardingNavigation nextFromLogin];
+                                 [[OTLocationManager sharedInstance] startLocationUpdates];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    NSString *alertTitle = OTLocalizedString(@"error");
