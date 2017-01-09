@@ -13,7 +13,7 @@ class OnBoardingTextField: JVFloatLabeledTextField, Validable {
 
     if let placeholder = placeholder {
       let attributes = [NSForegroundColorAttributeName: UIColor.appTextFieldPlaceholder(),
-                        NSFontAttributeName: UIColor.appTextFieldPlaceholderFont()]
+                        NSFontAttributeName: UIColor.appTextFieldPlaceholderFont()] as [String : Any]
       attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
     }
     registerForNotifications()
@@ -52,7 +52,7 @@ class OnBoardingNumberTextField: NBTextField {
 
     if let placeholder = placeholder {
       let attributes = [NSForegroundColorAttributeName: UIColor.appTextFieldPlaceholder(),
-                        NSFontAttributeName: UIColor.appTextFieldPlaceholderFont()]
+                        NSFontAttributeName: UIColor.appTextFieldPlaceholderFont()] as [String : Any]
       attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
     }
   }
