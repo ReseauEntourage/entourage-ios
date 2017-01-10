@@ -117,12 +117,12 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [NSUserDefaults standardUserDefaults].currentUser = user;
                                    [[NSUserDefaults standardUserDefaults] synchronize];
 
-                                   if ([self shallDisplayUserNameForm:user]) {
-                                       [self displayUserNameForm];
-                                   }
-                                   else if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
+                                   if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
                                        [[OTPushNotificationsService new] promptUserForPushNotifications];
                                        [UIStoryboard showSWRevealController];
+                                   }
+                                   else {
+                                       [self.onboardingNavigation nextFromLogin];
                                    }
                                    [[OTLocationManager sharedInstance] startLocationUpdates];
                                } failure: ^(NSError *error) {
@@ -157,29 +157,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
         OTLostCodeViewController *controller = (OTLostCodeViewController *)navController.viewControllers.firstObject;
         controller.codeDelegate = self;
     }
-}
-
-/********************************************************************************/
-#pragma mark - Private
-
-- (BOOL)shallDisplayUserNameForm:(OTUser*)user {
-
-    user.firstName = [[user.firstName lowercaseString] isEqualToString:@"inconnu"] ? @"" : user.firstName;
-    user.lastName = [[user.lastName lowercaseString] isEqualToString:@"xxx"] ? @"" : user.lastName;
-    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-
-    if(user.lastName.length > 0 && user.firstName.length > 0) {
-        return NO;
-    }
-
-    return YES;
-}
-
-- (void)displayUserNameForm {
-    UIStoryboard *profileDetailsStoryboard = [UIStoryboard storyboardWithName:@"UserProfileDetails" bundle:nil];
-    OTUserNameViewController *nameController = (OTUserNameViewController*)[profileDetailsStoryboard instantiateViewControllerWithIdentifier:@"NameScene"];
-    nameController.delegate = self;
-    [self.navigationController pushViewController:nameController animated:YES];
 }
 
 /********************************************************************************/
