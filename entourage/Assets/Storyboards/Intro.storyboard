@@ -609,7 +609,6 @@ saisissez votre numéro de portable.</string>
                                             <constraint firstItem="U3A-N6-hPD" firstAttribute="top" secondItem="1i4-EK-cIM" secondAttribute="bottom" constant="30" id="JqV-kX-Hdk"/>
                                             <constraint firstItem="U3A-N6-hPD" firstAttribute="leading" secondItem="1i4-EK-cIM" secondAttribute="leading" id="U3x-s7-mWc"/>
                                             <constraint firstAttribute="height" constant="244" id="V2J-Mv-Eaf"/>
-                                            <constraint firstAttribute="bottom" secondItem="pQB-UV-B6P" secondAttribute="bottom" constant="15" id="aFG-MQ-iTM"/>
                                             <constraint firstItem="pQB-UV-B6P" firstAttribute="leading" secondItem="1i4-EK-cIM" secondAttribute="leading" id="oET-f1-92O"/>
                                             <constraint firstItem="1i4-EK-cIM" firstAttribute="leading" secondItem="GZz-od-Jky" secondAttribute="leading" constant="15" id="qcl-6i-bRq"/>
                                             <constraint firstAttribute="trailing" secondItem="pQB-UV-B6P" secondAttribute="trailing" constant="15" id="vRa-d4-bZA"/>
@@ -622,11 +621,11 @@ saisissez votre numéro de portable.</string>
                                     <constraint firstItem="GZz-od-Jky" firstAttribute="top" secondItem="Xu0-Cx-fNT" secondAttribute="top" id="Bxl-wH-qre"/>
                                     <constraint firstItem="GZz-od-Jky" firstAttribute="centerX" secondItem="Xu0-Cx-fNT" secondAttribute="centerX" id="Pv3-QB-9HD"/>
                                     <constraint firstItem="GZz-od-Jky" firstAttribute="leading" secondItem="Xu0-Cx-fNT" secondAttribute="leading" id="rUt-FH-1q1"/>
-                                    <constraint firstAttribute="height" constant="224" id="wLV-5F-ROz"/>
+                                    <constraint firstAttribute="height" constant="230" id="wLV-5F-ROz"/>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vjl-bA-khw">
-                                <rect key="frame" x="15" y="244" width="345" height="146"/>
+                                <rect key="frame" x="15" y="250" width="345" height="146"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Numéro de portable" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uq2-ES-ZKc" customClass="OnBoardingNumberTextField" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="15" y="15" width="315" height="50"/>
