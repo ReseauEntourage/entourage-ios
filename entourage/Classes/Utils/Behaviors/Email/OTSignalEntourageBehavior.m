@@ -22,7 +22,7 @@
 @implementation OTSignalEntourageBehavior
 
 - (void)sendMailFor:(OTEntourage *)entourage {
-    NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"mail_signal_subject"), entourage.title];
+    NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"mail_signal_subject"), entourage.title, entourage.author.displayName];
     [self sendMailWithSubject:subject];
 }
 
