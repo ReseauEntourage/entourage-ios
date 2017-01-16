@@ -28,8 +28,7 @@ typedef NS_ENUM(NSInteger) {
     SectionTypeInfoPrivate,
     SectionTypeAssociations,
     SectionTypeDelete,
-    SectionTypeInfoPublic,
-    SectionTypePublicAssociation
+    SectionTypeInfoPublic
 } SectionType;
 
 #define EDIT_PICTURE_SEGUE @"EditPictureSegue"
@@ -47,6 +46,8 @@ typedef NS_ENUM(NSInteger) {
 @property (nonatomic, strong) OTUser *user;
 @property (nonatomic, strong) NSArray *sections;
 
+@property (nonatomic, assign) BOOL showCurrentAssociation;
+
 @end
 
 @implementation OTUserEditViewController
@@ -59,10 +60,10 @@ typedef NS_ENUM(NSInteger) {
     [self setupCloseModal];
     [self showSaveButton];
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
+    self.sections = @[@(SectionTypeSummary), @(SectionTypeInfoPrivate), @(SectionTypeAssociations), @(SectionTypeDelete)];
+    self.showCurrentAssociation = NO;
     if([self.user.type isEqualToString:USER_TYPE_PRO])
-        self.sections = @[@(SectionTypeSummary), @(SectionTypeInfoPrivate), @(SectionTypeAssociations), @(SectionTypeDelete)];
-    else
-        self.sections = @[@(SectionTypeSummary), @(SectionTypeInfoPrivate), @(SectionTypePublicAssociation), @(SectionTypeDelete)];
+        self.showCurrentAssociation = self.user.organization != nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
 }
 
@@ -140,7 +141,7 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeInfoPrivate:
             return 3;
         case SectionTypeAssociations:
-            return self.user.organization == nil ? 0 : 1;
+            return self.showCurrentAssociation ? 2 : 1;
         default:
             return 1;
     }
@@ -152,11 +153,8 @@ typedef NS_ENUM(NSInteger) {
     switch (mappedSection) {
         case SectionTypeInfoPrivate:
         case SectionTypeInfoPublic:
-        case SectionTypePublicAssociation:
-            height = 46.0f;
-            break;
         case SectionTypeAssociations:
-            height = self.user.organization == nil ? 0.0f : 46.0f;
+            height = 46.0f;
             break;
         case SectionTypeDelete:
             height = 23.0f;
@@ -186,10 +184,6 @@ typedef NS_ENUM(NSInteger) {
         }
         case SectionTypeAssociations: {
             title =  OTLocalizedString(@"organizations");
-            break;
-        }
-        case SectionTypePublicAssociation: {
-            title =  OTLocalizedString(@"association");
             break;
         }
         default:
@@ -232,13 +226,10 @@ typedef NS_ENUM(NSInteger) {
             cellID = @"EditProfileCell";
             break;
         case SectionTypeAssociations:
-            cellID = @"AssociationProfileCell";
+            cellID = self.showCurrentAssociation && indexPath.row == 0 ? @"AssociationProfileCell" : @"SupportAssociationCell";
             break;
         case SectionTypeDelete:
             cellID = @"DeleteProfileCell";
-            break;
-        case SectionTypePublicAssociation:
-            cellID = @"PublicAssociationCell";
             break;
         default:
             break;
@@ -275,15 +266,10 @@ typedef NS_ENUM(NSInteger) {
             break;
         }
         case SectionTypeAssociations: {
-            if (self.user.organization != nil) {
+            if(self.showCurrentAssociation && indexPath.row == 0)
                 [self setupAssociationProfileCell:cell withAssociationTitle:self.user.organization.name andAssociationImage:self.user.organization.logoUrl];
-            }
             break;
         }
-        case SectionTypePublicAssociation:
-            [self setupPublicAssociationCell:cell];
-            break;
-            
     }
     return cell;
 }
@@ -387,13 +373,6 @@ typedef NS_ENUM(NSInteger) {
     UILabel *phoneLabel = [cell viewWithTag:PHONE_LABEL_TAG];
     if (phoneLabel != nil)
         phoneLabel.text = phone;
-}
-
-- (void)setupPublicAssociationCell:(UITableViewCell *)cell {
-    UITextView *txt = [cell viewWithTag:PUBLIC_ASSOCIATION_TEXT_TAG];
-    self.checkMailBehavior.txtWithEmailLinks = txt;
-    [self.checkMailBehavior initialize];
-    txt.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor appOrangeColor]};
 }
 
 #pragma mark - OTUserEditPasswordProtocol

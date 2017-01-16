@@ -164,6 +164,7 @@
 		1E993BFC1DDB514300621770 /* OTNoDataBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E993BFB1DDB514300621770 /* OTNoDataBehavior.m */; };
 		1E993BFF1DDB532E00621770 /* NSAttributedString+OTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E993BFE1DDB532E00621770 /* NSAttributedString+OTBuilder.m */; };
 		1E9B38701DC882A1000F9F3F /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386F1DC882A1000F9F3F /* prod.plist */; };
+		1EA12BFF1E2CF649009EAF97 /* OTSelectAssociationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA12BFE1E2CF649009EAF97 /* OTSelectAssociationViewController.m */; };
 		1EA47A7F1DC1F4F300680858 /* OTSummaryInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA47A7E1DC1F4F300680858 /* OTSummaryInfoCell.m */; };
 		1EA4F3091DA199A300A3321C /* OTDistributedDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA4F3081DA199A300A3321C /* OTDistributedDelegateBehavior.m */; };
 		1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */; };
@@ -628,6 +629,8 @@
 		1E993BFE1DDB532E00621770 /* NSAttributedString+OTBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSAttributedString+OTBuilder.m"; path = "Helper/NSAttributedString+OTBuilder.m"; sourceTree = "<group>"; };
 		1E9B386D1DC88290000F9F3F /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
 		1E9B386F1DC882A1000F9F3F /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
+		1EA12BFD1E2CF649009EAF97 /* OTSelectAssociationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSelectAssociationViewController.h; sourceTree = "<group>"; };
+		1EA12BFE1E2CF649009EAF97 /* OTSelectAssociationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSelectAssociationViewController.m; sourceTree = "<group>"; };
 		1EA47A7D1DC1F4F300680858 /* OTSummaryInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSummaryInfoCell.h; sourceTree = "<group>"; };
 		1EA47A7E1DC1F4F300680858 /* OTSummaryInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSummaryInfoCell.m; sourceTree = "<group>"; };
 		1EA4F3071DA199A300A3321C /* OTDistributedDelegateBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTDistributedDelegateBehavior.h; path = Behaviors/OTDistributedDelegateBehavior.h; sourceTree = "<group>"; };
@@ -999,6 +1002,8 @@
 				0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */,
 				0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */,
 				0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */,
+				1EA12BFD1E2CF649009EAF97 /* OTSelectAssociationViewController.h */,
+				1EA12BFE1E2CF649009EAF97 /* OTSelectAssociationViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -2760,6 +2765,7 @@
 				45E37E531CEE1F7D005C3175 /* OTFeedsService.m in Sources */,
 				1E78B7F01D513F0F0008C00E /* OTEntourageUI.m in Sources */,
 				1E2432C51DA6CCE1000EF74F /* OTContactInfoCell.m in Sources */,
+				1EA12BFF1E2CF649009EAF97 /* OTSelectAssociationViewController.m in Sources */,
 				1E2F291E1D4BDF3600ABC68A /* OTDataSourceBehavior.m in Sources */,
 				1E2AE6A01DE466DC00FA9F70 /* OTMailTextCheckBehavior.m in Sources */,
 				4525EB311CA46082006784E6 /* OTSettingsViewController.m in Sources */,
