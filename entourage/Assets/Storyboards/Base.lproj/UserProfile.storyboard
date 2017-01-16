@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Th9-id-j6L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Th9-id-j6L">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="SF-UI-Text-Regular.otf">
-            <string>SFUIText-Regular</string>
+        <array key="SF-UI-Text-Medium.otf">
+            <string>SFUIText-Medium</string>
         </array>
     </customFonts>
     <scenes>
@@ -326,7 +326,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Auw-kh-iqH">
                                 <rect key="frame" x="-4" y="64" width="383" height="603"/>
                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SummaryProfileCell" rowHeight="135" id="PU1-og-KOJ">
                                         <rect key="frame" x="0.0" y="28" width="383" height="135"/>
@@ -593,34 +593,52 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PublicAssociationCell" rowHeight="110" id="Jrl-1G-9k1">
-                                        <rect key="frame" x="0.0" y="463" width="383" height="110"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SupportAssociationCell" rowHeight="150" id="Jrl-1G-9k1">
+                                        <rect key="frame" x="0.0" y="463" width="383" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jrl-1G-9k1" id="BqH-eb-4nL">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="109"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SNf-Xg-g9Y">
-                                                    <rect key="frame" x="15" y="17" width="353" height="75"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <string key="text">Membre d’une association qui utilise Entourage pour ses maraudes? 
-Contactez associations@entourage.social pour avoir accès aux fonctionnalités d’Entourage pour les membres d’associations</string>
-                                                    <color key="textColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                                                </textView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Affichez sur votre profil l’association dont vous vous sentez proche !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IuY-Ra-o54">
+                                                    <rect key="frame" x="23" y="23" width="337" height="55.5"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
+                                                    <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dn-gl-QLO">
+                                                    <rect key="frame" x="96" y="93.5" width="191" height="33"/>
+                                                    <color key="backgroundColor" red="0.94509803921568625" green="0.40392156862745099" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="33" id="Vi4-9i-ZVi"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                                    <state key="normal" title="Afficher une association">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <segue destination="2Re-2N-5px" kind="show" id="oj6-vE-Szp"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="SNf-Xg-g9Y" firstAttribute="leading" secondItem="BqH-eb-4nL" secondAttribute="leading" constant="15" id="KK2-wH-U1n"/>
-                                                <constraint firstAttribute="trailing" secondItem="SNf-Xg-g9Y" secondAttribute="trailing" constant="15" id="LiL-0i-7gz"/>
-                                                <constraint firstItem="SNf-Xg-g9Y" firstAttribute="top" secondItem="BqH-eb-4nL" secondAttribute="top" constant="17" id="hqd-QI-S1f"/>
-                                                <constraint firstAttribute="bottom" secondItem="SNf-Xg-g9Y" secondAttribute="bottom" constant="17" id="rrH-sX-am3"/>
+                                                <constraint firstItem="1dn-gl-QLO" firstAttribute="top" secondItem="IuY-Ra-o54" secondAttribute="bottom" constant="15" id="0yG-VW-cPi"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="IuY-Ra-o54" secondAttribute="trailing" constant="15" id="1Lf-TZ-aB4"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="1dn-gl-QLO" secondAttribute="bottom" constant="15" id="2iZ-jE-DWL"/>
+                                                <constraint firstItem="IuY-Ra-o54" firstAttribute="top" secondItem="BqH-eb-4nL" secondAttribute="topMargin" constant="15" id="7zy-0D-Sif"/>
+                                                <constraint firstItem="IuY-Ra-o54" firstAttribute="leading" secondItem="BqH-eb-4nL" secondAttribute="leadingMargin" constant="15" id="kkP-4y-okp"/>
+                                                <constraint firstItem="1dn-gl-QLO" firstAttribute="centerX" secondItem="BqH-eb-4nL" secondAttribute="centerX" id="v5F-xh-dvH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DeleteProfileCell" rowHeight="51" id="xvl-bA-nB0">
-                                        <rect key="frame" x="0.0" y="573" width="383" height="51"/>
+                                        <rect key="frame" x="0.0" y="613" width="383" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xvl-bA-nB0" id="EF0-Yg-4Ql">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="50"/>
@@ -673,7 +691,7 @@ Contactez associations@entourage.social pour avoir accès aux fonctionnalités d
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="4492" y="-826"/>
+            <point key="canvasLocation" x="4492" y="-826.23688155922048"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="U66-ZG-q0z">
@@ -876,6 +894,24 @@ Contactez associations@entourage.social pour avoir accès aux fonctionnalités d
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggk-z7-icI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4491" y="-384"/>
+        </scene>
+        <!--Select Association Controller-->
+        <scene sceneID="gXh-vf-4uI">
+            <objects>
+                <viewController id="2Re-2N-5px" userLabel="Select Association Controller" customClass="OTSelectAssociationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="77D-sG-9nG"/>
+                        <viewControllerLayoutGuide type="bottom" id="nh2-wz-Jsg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fkb-Cz-PII">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xWu-Ea-jGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4490" y="-1512"/>
         </scene>
     </scenes>
     <resources>
