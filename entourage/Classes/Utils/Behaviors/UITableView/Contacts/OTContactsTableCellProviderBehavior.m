@@ -40,7 +40,6 @@
         OTContactPhoneCell *phoneCell = (OTContactPhoneCell *)cell;
         [phoneCell configureWith:(OTAddressBookPhone *)item];
     }
-    
 }
 
 - (BOOL)isContactInfo:(id)item {
