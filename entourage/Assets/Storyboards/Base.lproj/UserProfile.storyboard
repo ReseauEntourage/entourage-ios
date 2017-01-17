@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="SF-UI-Text-Light.otf">
+            <string>SFUIText-Light</string>
+        </array>
         <array key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
         </array>
@@ -601,13 +604,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Affichez sur votre profil l’association dont vous vous sentez proche !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IuY-Ra-o54">
-                                                    <rect key="frame" x="23" y="23" width="337" height="55.5"/>
+                                                    <rect key="frame" x="23" y="23" width="337" height="55"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dn-gl-QLO">
-                                                    <rect key="frame" x="96" y="93.5" width="191" height="33"/>
+                                                    <rect key="frame" x="96" y="93" width="191" height="33"/>
                                                     <color key="backgroundColor" red="0.94509803921568625" green="0.40392156862745099" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="33" id="Vi4-9i-ZVi"/>
@@ -906,15 +909,107 @@
                     <view key="view" contentMode="scaleToFill" id="fkb-Cz-PII">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Rechercher une association" translatesAutoresizingMaskIntoConstraints="NO" id="0VD-bM-o8I">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u76-x4-ccK">
+                                <rect key="frame" x="-4" y="108" width="383" height="559"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AssociationCell" rowHeight="45" id="svV-74-Waz" customClass="OTAssociationTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="383" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="svV-74-Waz" id="AiP-yn-Kh7">
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8dj-OL-akE">
+                                                    <rect key="frame" x="24" y="5" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="E7y-V6-BAG"/>
+                                                        <constraint firstAttribute="width" constant="35" id="peb-AK-H0c"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Org name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkE-4a-EjB">
+                                                    <rect key="frame" x="77" y="13.5" width="233" height="18"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                                    <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="24HInactive" translatesAutoresizingMaskIntoConstraints="NO" id="Cit-2R-tmJ">
+                                                    <rect key="frame" x="325" y="10" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="NXs-mf-eZI"/>
+                                                        <constraint firstAttribute="width" constant="25" id="q6G-xg-ceY"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8dj-OL-akE" firstAttribute="leading" secondItem="AiP-yn-Kh7" secondAttribute="leading" constant="23.5" id="53M-yC-T39"/>
+                                                <constraint firstItem="OkE-4a-EjB" firstAttribute="leading" secondItem="8dj-OL-akE" secondAttribute="trailing" constant="18" id="8AQ-wR-YO7"/>
+                                                <constraint firstItem="OkE-4a-EjB" firstAttribute="centerY" secondItem="AiP-yn-Kh7" secondAttribute="centerY" id="Tin-ku-0TB"/>
+                                                <constraint firstItem="Cit-2R-tmJ" firstAttribute="centerY" secondItem="AiP-yn-Kh7" secondAttribute="centerY" id="Wmj-Bl-P84"/>
+                                                <constraint firstItem="Cit-2R-tmJ" firstAttribute="leading" secondItem="OkE-4a-EjB" secondAttribute="trailing" constant="15" id="ifK-M5-LCN"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Cit-2R-tmJ" secondAttribute="trailing" constant="25" id="rbV-wm-HOG"/>
+                                                <constraint firstItem="8dj-OL-akE" firstAttribute="centerY" secondItem="AiP-yn-Kh7" secondAttribute="centerY" id="uEK-Fk-Hiq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgLogo" destination="8dj-OL-akE" id="sJc-fQ-Mld"/>
+                                            <outlet property="imgSelected" destination="Cit-2R-tmJ" id="3JA-sU-w4R"/>
+                                            <outlet property="lblName" destination="OkE-4a-EjB" id="zXu-Be-0rH"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="delegate" destination="2Re-2N-5px" id="pJC-ch-yWe"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="u76-x4-ccK" firstAttribute="top" secondItem="0VD-bM-o8I" secondAttribute="bottom" id="87U-a1-KbS"/>
+                            <constraint firstItem="nh2-wz-Jsg" firstAttribute="top" secondItem="u76-x4-ccK" secondAttribute="bottom" id="91h-9W-wEw"/>
+                            <constraint firstItem="u76-x4-ccK" firstAttribute="leading" secondItem="fkb-Cz-PII" secondAttribute="leadingMargin" constant="-20" id="ERL-xd-0fe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="u76-x4-ccK" secondAttribute="trailing" constant="-20" id="LHU-uo-zzE"/>
+                            <constraint firstItem="0VD-bM-o8I" firstAttribute="leading" secondItem="fkb-Cz-PII" secondAttribute="leading" id="RAD-le-ReU"/>
+                            <constraint firstAttribute="trailing" secondItem="0VD-bM-o8I" secondAttribute="trailing" id="eXE-uy-ZDu"/>
+                            <constraint firstItem="0VD-bM-o8I" firstAttribute="top" secondItem="77D-sG-9nG" secondAttribute="bottom" id="taV-Wn-bt1"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dataSource" destination="qLf-w4-aB9" id="Fyl-dV-21d"/>
+                        <outlet property="tableDataSource" destination="1wW-fq-Bwa" id="os0-WZ-Get"/>
+                        <outlet property="tblAssociations" destination="u76-x4-ccK" id="fcg-fg-Ms1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xWu-Ea-jGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="qLf-w4-aB9" userLabel="Associations Data Source" customClass="OTAssociationsSourceBehavior">
+                    <connections>
+                        <outlet property="tableDataSource" destination="1wW-fq-Bwa" id="3bv-Fi-TKc"/>
+                        <outlet property="tableView" destination="u76-x4-ccK" id="n26-Ys-P0X"/>
+                    </connections>
+                </customObject>
+                <customObject id="1wW-fq-Bwa" userLabel="Associations Table Source" customClass="OTTableDataSourceBehavior">
+                    <connections>
+                        <outlet property="cellProvider" destination="kah-3v-5DJ" id="cVe-AS-6cJ"/>
+                        <outlet property="dataSource" destination="qLf-w4-aB9" id="DTr-Jz-Odu"/>
+                    </connections>
+                </customObject>
+                <customObject id="kah-3v-5DJ" userLabel="Associations Cell Provider" customClass="OTAssociationsCellProviderBehavior">
+                    <connections>
+                        <outlet property="tableDataSource" destination="1wW-fq-Bwa" id="3II-fa-3XM"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="4490" y="-1512"/>
         </scene>
     </scenes>
     <resources>
+        <image name="24HInactive" width="48" height="48"/>
         <image name="cameraSquare" width="56" height="56"/>
         <image name="password" width="100" height="100"/>
         <image name="user" width="100" height="100"/>

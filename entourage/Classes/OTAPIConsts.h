@@ -24,7 +24,8 @@
 #define API_URL_TOUR_JOIN_REQUEST @"tours/%@/users?token=%@"
 #define API_URL_TOUR_JOIN_MESSAGE @"tours/%@/users/%@?token=%@"
 
-
+//Associations
+#define API_URL_GET_ALL_ASSOCIATIONS @"partners?token=%@"
 
 // Entourages
 #define API_URL_ENTOURAGES @"entourages?token=%@"
