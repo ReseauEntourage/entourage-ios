@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTAssociation.h"
 
 @interface OTAssociationsService : NSObject
 
 - (void)getAllAssociationsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
+- (void)updateAssociation:(OTAssociation *)association isDefault:(BOOL)isDefault withSuccess:(void (^)(OTAssociation *))success failure:(void (^)(NSError *))failure;
 
 @end
