@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="fid-Iu-R1a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="fid-Iu-R1a">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -90,6 +90,19 @@
                                                                 <action selector="showUserProfile:" destination="fid-Iu-R1a" eventType="touchUpInside" id="51f-9f-EmS"/>
                                                             </connections>
                                                         </button>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9v3-h8-xcy">
+                                                            <rect key="frame" x="342" y="31" width="20" height="20"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="20" id="JiN-bc-rxA"/>
+                                                                <constraint firstAttribute="height" constant="20" id="mg7-hx-kd8"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="10"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="users" translatesAutoresizingMaskIntoConstraints="NO" id="Q8P-B0-Gly">
                                                             <rect key="frame" x="321.5" y="55.5" width="22" height="19"/>
                                                             <constraints>
@@ -101,8 +114,10 @@
                                                     <constraints>
                                                         <constraint firstItem="KaD-Co-GmI" firstAttribute="top" secondItem="A2q-7C-D6N" secondAttribute="top" constant="11" id="2ye-0y-TQB"/>
                                                         <constraint firstItem="xDt-dA-Asj" firstAttribute="top" secondItem="ZOB-K8-3My" secondAttribute="bottom" constant="10" id="8Pi-UP-aTA"/>
+                                                        <constraint firstItem="9v3-h8-xcy" firstAttribute="trailing" secondItem="RcA-br-gXo" secondAttribute="trailing" constant="2" id="CKI-AN-JSm"/>
                                                         <constraint firstItem="ZOB-K8-3My" firstAttribute="top" secondItem="KaD-Co-GmI" secondAttribute="bottom" id="FP7-Jm-tp3"/>
                                                         <constraint firstItem="KaD-Co-GmI" firstAttribute="leading" secondItem="A2q-7C-D6N" secondAttribute="leading" constant="15" id="IrF-aT-aBM"/>
+                                                        <constraint firstItem="9v3-h8-xcy" firstAttribute="bottom" secondItem="RcA-br-gXo" secondAttribute="bottom" constant="2" id="KbN-AP-tTj"/>
                                                         <constraint firstAttribute="bottom" secondItem="xDt-dA-Asj" secondAttribute="bottom" constant="15" id="TQj-mb-rae"/>
                                                         <constraint firstItem="4QV-vH-V9y" firstAttribute="top" secondItem="RcA-br-gXo" secondAttribute="bottom" constant="7" id="Z34-1x-6eA"/>
                                                         <constraint firstItem="RcA-br-gXo" firstAttribute="bottom" secondItem="KaD-Co-GmI" secondAttribute="bottom" constant="17" id="ZAc-Kw-vlP"/>
@@ -119,6 +134,7 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="btnAvatar" destination="RcA-br-gXo" id="Jla-1l-pmz"/>
+                                                    <outlet property="imgAssociation" destination="9v3-h8-xcy" id="iqw-bn-jW5"/>
                                                     <outlet property="lblDescription" destination="ZOB-K8-3My" id="An9-v1-JzT"/>
                                                     <outlet property="lblTimeDistance" destination="xDt-dA-Asj" id="4pP-vT-Ozq"/>
                                                     <outlet property="lblTitle" destination="KaD-Co-GmI" id="o9E-s3-19Z"/>
@@ -201,7 +217,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je rejoins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nU0-h0-mOV">
-                                        <rect key="frame" x="161.5" y="607" width="62" height="16"/>
+                                        <rect key="frame" x="161" y="607" width="62" height="16"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="13"/>
                                         <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
