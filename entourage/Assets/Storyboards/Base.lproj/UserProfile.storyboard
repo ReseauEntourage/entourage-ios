@@ -79,6 +79,19 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qs8-jY-ziV">
+                                                    <rect key="frame" x="199" y="80" width="48" height="48"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="48" id="WSl-AQ-1yg"/>
+                                                        <constraint firstAttribute="height" constant="48" id="bnf-Tr-NsC"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="24"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chip Do" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igZ-LQ-DoQ">
                                                     <rect key="frame" x="8" y="137" width="367" height="26"/>
                                                     <constraints>
@@ -133,7 +146,9 @@
                                                 <constraint firstItem="igZ-LQ-DoQ" firstAttribute="leading" secondItem="SYZ-Vm-z0D" secondAttribute="leadingMargin" id="d57-Dg-7Ts"/>
                                                 <constraint firstItem="I1Y-hz-M5o" firstAttribute="trailing" secondItem="SYZ-Vm-z0D" secondAttribute="trailingMargin" id="d7P-Vk-vgI"/>
                                                 <constraint firstItem="igZ-LQ-DoQ" firstAttribute="top" secondItem="Qfk-EF-iCu" secondAttribute="bottom" constant="13" id="dmD-Vf-bRR"/>
+                                                <constraint firstItem="qs8-jY-ziV" firstAttribute="trailing" secondItem="Qfk-EF-iCu" secondAttribute="trailing" constant="4" id="kmW-uA-zAM"/>
                                                 <constraint firstItem="igZ-LQ-DoQ" firstAttribute="trailing" secondItem="SYZ-Vm-z0D" secondAttribute="trailingMargin" id="lYI-Dd-ppz"/>
+                                                <constraint firstItem="qs8-jY-ziV" firstAttribute="bottom" secondItem="Qfk-EF-iCu" secondAttribute="bottom" constant="4" id="seA-BO-lEE"/>
                                                 <constraint firstItem="Qfk-EF-iCu" firstAttribute="centerX" secondItem="4j2-AX-ByI" secondAttribute="centerX" id="soP-Nh-WNq"/>
                                                 <constraint firstItem="6EW-vk-LFT" firstAttribute="trailing" secondItem="SYZ-Vm-z0D" secondAttribute="trailingMargin" id="spJ-HW-Wfc"/>
                                             </constraints>
@@ -380,6 +395,19 @@
                                                         <segue destination="paK-dN-ukL" kind="show" id="3vM-Q3-i8Z"/>
                                                     </connections>
                                                 </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e5X-Kw-lpd">
+                                                    <rect key="frame" x="199" y="80" width="48" height="48"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="48" id="HmB-oB-plI"/>
+                                                        <constraint firstAttribute="height" constant="48" id="psz-uK-yQP"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="24"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weG-53-exw">
                                                     <rect key="frame" x="167" y="74" width="50" height="50"/>
                                                     <constraints>
@@ -394,8 +422,10 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="e5X-Kw-lpd" firstAttribute="trailing" secondItem="crj-0T-hSo" secondAttribute="trailing" constant="4" id="CIB-W7-org"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="d7V-87-SCI" secondAttribute="bottom" constant="2" id="ECx-6I-dmB"/>
                                                 <constraint firstItem="crj-0T-hSo" firstAttribute="centerX" secondItem="d7V-87-SCI" secondAttribute="centerX" id="XCM-4E-mGo"/>
+                                                <constraint firstItem="e5X-Kw-lpd" firstAttribute="bottom" secondItem="crj-0T-hSo" secondAttribute="bottom" constant="4" id="Y9c-T7-SF0"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="5mT-xf-eHP" secondAttribute="trailing" constant="-8" id="ZHK-KR-9ht"/>
                                                 <constraint firstItem="5mT-xf-eHP" firstAttribute="top" secondItem="tV6-cF-ayN" secondAttribute="topMargin" constant="-8" id="iG2-DA-phK"/>
                                                 <constraint firstItem="crj-0T-hSo" firstAttribute="centerX" secondItem="tV6-cF-ayN" secondAttribute="centerX" id="jNH-uN-1wE"/>

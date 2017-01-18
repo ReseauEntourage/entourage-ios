@@ -17,6 +17,7 @@
 #import "OTUIDelegate.h"
 #import "OTSummaryProviderBehavior.h"
 #import "OTConsts.h"
+#import "UIImageView+entourage.h"
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -172,6 +173,12 @@
     UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
+    
+#warning TODO remove this (just for testing)
+    UIImageView *imgAssociation = [cell viewWithTag:99];
+    //self.imgAssociation.hidden = YES;
+    [imgAssociation setupFromUrl:item.author.avatarUrl withPlaceholder:@"user"];
+
     
     OTSummaryProviderBehavior *summaryBehavior = [OTSummaryProviderBehavior new];
     summaryBehavior.lblTimeDistance = timeLocationLabel;
