@@ -15,9 +15,7 @@
 @implementation OTAssociationTableViewCell
 
 - (void)configureWith:(OTAssociation *)association {
-#warning TODO uncomment for correct url
-    //[self.imgLogo setupFromUrl:association.logoUrl withPlaceholder:nil];
-    [self.imgLogo setupFromUrl:@"http://icons.iconarchive.com/icons/pelfusion/flat-file-type/128/jpg-icon.png" withPlaceholder:nil];
+    [self.imgLogo setupFromUrl:association.largeLogoUrl withPlaceholder:nil];
     self.lblName.text = association.name;
     self.imgSelected.image = [[UIImage imageNamed:(association.isDefault ? SELECTED_IMAGE : UNSELECTED_IMAGE)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 }
