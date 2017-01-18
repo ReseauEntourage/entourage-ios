@@ -58,7 +58,7 @@
 }
 
 - (void)saveAssociation {
-#warning TODO
+    [self.dataSource updateAssociation];
 }
 
 @end
