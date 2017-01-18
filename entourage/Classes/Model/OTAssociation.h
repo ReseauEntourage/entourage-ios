@@ -12,7 +12,8 @@
 
 @property (strong, nonatomic) NSNumber *aid;
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *logoUrl;
+@property (strong, nonatomic) NSString *largeLogoUrl;
+@property (strong, nonatomic) NSString *smallLogoUrl;
 @property (assign, nonatomic) BOOL isDefault;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;

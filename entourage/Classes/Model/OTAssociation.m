@@ -11,7 +11,8 @@
 
 NSString *const kKeyId = @"id";
 NSString *const kKeyAssociationName = @"name";
-NSString *const kKeyAssociationLogoUrl = @"logo_url";
+NSString *const kKeyAssociationSmallLogoUrl = @"small_logo_url";
+NSString *const kKeyAssociationLargeLogoUrl = @"large_logo_url";
 NSString *const kKeyDefault = @"default";
 
 @implementation OTAssociation
@@ -23,7 +24,8 @@ NSString *const kKeyDefault = @"default";
         if ([dictionary isKindOfClass:[NSDictionary class]]) {
             self.aid = [dictionary numberForKey:kKeyId];
             self.name = [dictionary stringForKey:kKeyAssociationName];
-            self.logoUrl = [dictionary stringForKey:kKeyAssociationLogoUrl];
+            self.smallLogoUrl = [dictionary stringForKey:kKeyAssociationSmallLogoUrl];
+            self.largeLogoUrl = [dictionary stringForKey:kKeyAssociationLargeLogoUrl];
             self.isDefault = [dictionary boolForKey:kKeyDefault];
         }
     }
