@@ -19,6 +19,7 @@
 #import "SVProgressHUD.h"
 #import "UIButton+AFNetworking.h"
 #import "OTTapViewBehavior.h"
+#import "UIImageView+entourage.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -225,6 +226,12 @@ typedef NS_ENUM(NSInteger) {
 #define ASSOCIATION_IMAGE 2
 
 - (void)setupSummaryProfileCell:(UITableViewCell *)cell {
+#warning TODO remove this (just for testing)
+    UIImageView *imgAssociation = [cell viewWithTag:99];
+    //self.imgAssociation.hidden = YES;
+    [imgAssociation setupFromUrl:[NSUserDefaults standardUserDefaults].currentUser.avatarURL withPlaceholder:@"user"];
+
+    
     UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
     [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];
     [avatarShadow.layer setShadowOpacity:0.5];

@@ -22,6 +22,7 @@
 #import "NSString+Validators.h"
 #import "UIBarButtonItem+factory.h"
 #import "OTMailTextCheckBehavior.h"
+#import "UIImageView+entourage.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -329,6 +330,12 @@ typedef NS_ENUM(NSInteger) {
 #define PUBLIC_ASSOCIATION_TEXT_TAG 1
 
 - (void)setupSummaryProfileCell:(UITableViewCell *)cell {
+#warning TODO remove this (just for testing)
+    UIImageView *imgAssociation = [cell viewWithTag:99];
+    //self.imgAssociation.hidden = YES;
+    [imgAssociation setupFromUrl:[NSUserDefaults standardUserDefaults].currentUser.avatarURL withPlaceholder:@"user"];
+
+    
     UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
     [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];
     [avatarShadow.layer setShadowOpacity:0.5];
