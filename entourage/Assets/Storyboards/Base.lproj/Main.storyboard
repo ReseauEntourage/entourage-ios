@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="bGF-q3-B8f">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="bGF-q3-B8f">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -167,16 +167,31 @@
                                     <action selector="showProfile" destination="0J6-b7-p0H" eventType="touchUpInside" id="ynk-Rg-oNF"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HU2-ql-0PL">
+                                <rect key="frame" x="194" y="152" width="48" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="doy-2p-8dZ"/>
+                                    <constraint firstAttribute="width" constant="48" id="rdC-wE-mEK"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="24"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EiD-PN-iyE" firstAttribute="top" secondItem="tvQ-n3-1AQ" secondAttribute="bottom" constant="21" id="0RI-cc-owX"/>
                             <constraint firstItem="hU9-Dq-Xg8" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="No1-Gp-qXl"/>
                             <constraint firstItem="gZg-OL-qCe" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="TUJ-yt-314"/>
+                            <constraint firstItem="HU2-ql-0PL" firstAttribute="bottom" secondItem="hU9-Dq-Xg8" secondAttribute="bottom" constant="4" id="Tf6-6d-IaV"/>
                             <constraint firstItem="tvQ-n3-1AQ" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="U2R-tG-Slz"/>
                             <constraint firstItem="EiD-PN-iyE" firstAttribute="leading" secondItem="ljo-QP-YxJ" secondAttribute="leadingMargin" constant="-20" id="W0l-aH-tXM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EiD-PN-iyE" secondAttribute="trailing" constant="-20" id="aFF-pJ-c2w"/>
                             <constraint firstItem="hU9-Dq-Xg8" firstAttribute="top" secondItem="slD-Bf-Od0" secondAttribute="bottom" constant="32" id="cYs-tz-XCE"/>
+                            <constraint firstItem="HU2-ql-0PL" firstAttribute="trailing" secondItem="hU9-Dq-Xg8" secondAttribute="trailing" constant="4" id="ihR-uX-9Ph"/>
                             <constraint firstItem="2Xh-aG-0Ck" firstAttribute="top" secondItem="EiD-PN-iyE" secondAttribute="bottom" id="jYd-tt-tU7"/>
                             <constraint firstItem="tvQ-n3-1AQ" firstAttribute="top" secondItem="gZg-OL-qCe" secondAttribute="bottom" id="kW1-yl-GvL"/>
                             <constraint firstItem="gZg-OL-qCe" firstAttribute="top" secondItem="hU9-Dq-Xg8" secondAttribute="bottom" constant="16" id="tfD-aq-AN2"/>
@@ -185,10 +200,12 @@
                     <navigationItem key="navigationItem" id="a9Y-2c-snz"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="imgAssociation" destination="HU2-ql-0PL" id="mP3-DC-2uK"/>
                         <outlet property="modifyLabel" destination="tvQ-n3-1AQ" id="4lt-vt-6VX"/>
                         <outlet property="nameLabel" destination="gZg-OL-qCe" id="zeh-G7-D9m"/>
                         <outlet property="profileButton" destination="hU9-Dq-Xg8" id="7ln-AG-5Qf"/>
                         <outlet property="tableView" destination="EiD-PN-iyE" id="CgG-Ii-UXP"/>
+                        <outlet property="tapAssociation" destination="mv0-mz-7N8" id="SLy-WD-Ks1"/>
                         <outlet property="tapModifyBehavior" destination="2zc-lP-Ytb" id="Eig-CL-5KA"/>
                         <outlet property="tapNameBehavior" destination="WYy-d6-RrV" id="W0B-9Y-URq"/>
                         <segue destination="UcL-62-xea" kind="custom" identifier="segueMenuIdentifierForMap" customClass="SWRevealViewControllerSeguePushController" id="xSV-rR-wZy"/>
@@ -209,6 +226,12 @@
                     <connections>
                         <action selector="showProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="Xwc-gl-jYY"/>
                         <outlet property="tapView" destination="tvQ-n3-1AQ" id="QTp-p4-Wny"/>
+                    </connections>
+                </customObject>
+                <customObject id="mv0-mz-7N8" userLabel="Tap Association" customClass="OTTapViewBehavior">
+                    <connections>
+                        <action selector="showProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="nI9-nf-KTN"/>
+                        <outlet property="tapView" destination="HU2-ql-0PL" id="9vJ-nZ-DGG"/>
                     </connections>
                 </customObject>
             </objects>
@@ -1249,7 +1272,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="xSV-rR-wZy"/>
+        <segue reference="ZNZ-ec-dR4"/>
         <segue reference="6F4-O6-aKT"/>
-        <segue reference="b42-UE-vP1"/>
     </inferredMetricsTieBreakers>
 </document>
