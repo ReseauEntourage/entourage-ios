@@ -26,6 +26,7 @@
 #import "OTOngoingTourService.h"
 #import "UILabel+entourage.h"
 #import "OTTapViewBehavior.h"
+#import "UIImageView+entourage.h"
 @import MessageUI;
 
 /* MenuItem identifiers */
@@ -48,6 +49,8 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapNameBehavior;
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapModifyBehavior;
+@property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapAssociation;
+@property (weak, nonatomic) IBOutlet UIImageView *imgAssociation;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -66,6 +69,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
     [self.tapNameBehavior initialize];
     [self.tapModifyBehavior initialize];
+    [self.tapAssociation initialize];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
 	self.menuItems = [self createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
@@ -79,6 +83,9 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (void)viewDidLayoutSubviews {
     [self.profileButton setupAsProfilePictureFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
+#warning TODO remove this (just for testing)
+    //self.imgAssociation.hidden = YES;
+    [self.imgAssociation setupFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
 }
 
 - (void)dealloc {
