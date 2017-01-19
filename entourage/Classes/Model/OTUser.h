@@ -28,10 +28,16 @@ extern NSString *const kKeyToken;
 @property (strong, nonatomic) NSString *avatarKey;
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSNumber *tourCount;
+@property (strong, nonatomic) NSNumber *entourageCount;
 @property (strong, nonatomic) NSNumber *encounterCount;
 @property (strong, nonatomic) OTOrganization *organization;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;
+
+/*
+ * Returns true if it's a pro user
+ */
+- (BOOL)isPro;
 
 @end

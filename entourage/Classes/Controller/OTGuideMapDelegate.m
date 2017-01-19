@@ -9,32 +9,7 @@
 #import "OTGuideMapDelegate.h"
 #import "OTCustomAnnotation.h"
 
-@interface OTGuideMapDelegate ()
-
-@property (nonatomic) CLLocationCoordinate2D currentMapCenter;
-
-@end
-
 @implementation OTGuideMapDelegate
-
-#pragma mark - Lifecycle
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
-
-- (void)setIsActive:(BOOL)isActive
-{
-    [super setIsActive:isActive];
-    if (isActive) {
-        self.currentMapCenter = CLLocationCoordinate2DMake(0, 0);
-    }
-}
 
 #pragma mark - MKMapViewDelegate
 
@@ -50,12 +25,12 @@
     return annotationView;
 }
 
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
+    [self.mapController willChangePosition];
+}
+
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    CLLocationDistance distance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(_currentMapCenter), MKMapPointForCoordinate(mapView.centerCoordinate))) / 1000.0f;
-    if (distance > [self mapHeight:mapView]) {
-        [self.mapController reloadPois];
-        self.currentMapCenter = mapView.centerCoordinate;
-    }
+    [self.mapController didChangePosition];
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {

@@ -26,6 +26,9 @@
 - (void)addStartPoint {
     id<OTMapHandlerDelegate> mapHandler = [[OTFeedItemFactory createFor:self.feedItem] getMapHandler];
     CLLocationCoordinate2D startPoint = [mapHandler startPoint];
+    if (!CLLocationCoordinate2DIsValid(startPoint)) {
+        return;
+    }
     id<MKAnnotation> startAnnotation = [mapHandler annotationFor:startPoint];
     if(startAnnotation)
         [self.map addAnnotation:[mapHandler annotationFor:startPoint]];

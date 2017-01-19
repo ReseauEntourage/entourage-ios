@@ -5,9 +5,19 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+*.p12
+*.cer
+*.pem
+*.mobileprovision
+*.certSigningRequest
+*.pkey
+
 ## Build generated
 build/
 DerivedData
+.idea/
+Gemfile
+Gemfile.lock
 
 ## Various settings
 *.pbxuser
@@ -119,4 +129,8 @@ Temporary Items
 
 # Hide Amazon data
 OTAmazonConsts.h
+
+#hide plists for environments
+staging.plist
+prod.plist
 

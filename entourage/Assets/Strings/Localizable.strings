@@ -7,9 +7,6 @@
 */
 
 // Keys
-"FLURRY_API_KEY" = "B7KH4H9T4HCY5PCR5P45";
-"APPALOOSA_STORE_TOKEN" = "ypt4d26acetzxivf5ynjeeqfisr9p7dr";
-"APPALOOSA_STORE_ID" = "3949";
 "CURRENT_USER" = "currentUser";
 
 // User prompted
@@ -23,6 +20,12 @@
 
 "distance_250" = "La rencontre est trop éloignée de la maraude";
 "yes" = "Oui";
+"ask_permission_location_create_tour" = "Pour créer une maraude, vous devez activer la géolocalisation";
+"ask_permission_location_recenter_map" = "Pour recentrer autour de vous, vous devez activer la géolocalisation";
+"no_location_create_tour" = "La géolocalisation  de votre maraude a recontré une erreur.";
+"no_location_recenter_map" = "La géolocalisation a recontré une erreur.";
+"activate" = "Activer";
+"join" = "Rejoindre";
 
 // Onboarding
 "doLogin" = "Se connecter";
@@ -34,11 +37,14 @@
 "acceptJoinFailed" = "Impossible d’accepter l’invitation.";
 "ignoreJoinFailed" = "Impossible de refuser l’invitation.";
 "phoneAlreadyExits" = "Ce téléphone n'est pas disponible";
+"already_subscribed" = "Déjà inscrit";
 
 // MenuItems
 "menu_amis" = "Amis";
 "myProfile" = "Mon compte";
 "parameters" = "Parameters";
+"menu_blog" = "Comment franchir le pas ?";
+"menu_chart" = "Charte éthique";
 
 "menu_guide" = "Guide de solidarité";
 "menu_param" = "Paramètres de l'application";
@@ -58,11 +64,12 @@
 
 // AboutItems
 "about_rateus" = "Notez-nous dans l’App Store";
-"about_facebook" = "Aimer notre page Facebook";
+"about_facebook" = "Aimez notre page Facebook";
 "about_cgu" = "Conditions générales d’utilisation";
 "about_website" = "Site web d'Entourage";
 "about_email" = "Contactez Entourage";
 "about_email_notavailable" = "Email introuvable";
+"terms_and_conditions_for_onboarding" = "conditions d’utilisation";
 
 // Map Options
 "create_tour" = "Créer une maraude";
@@ -82,10 +89,24 @@
 "stopped_item" = "Maraude arrêtée";
 "join_item_failed" = "Impossible de rejoindre l’entourage.";
 "ongoing" = "En cours";
+"no_data_entourages" = "On dirait que c'est calme ici!
+
+Déplacez la carte pour trouver des entourages crées par le réseau.
+
+Vous aussi, vous pouvez créer un entourage: appuyez sur +";
+"no_data_guide" = "On dirait que c'est calme ici!
+
+Déplacez la carte
+pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…
+
+Une structure manque sur la carte?
+Proposez une structure";
+"no_data_guide_link" = "Proposez une structure";
 
 // Disclaimer
 "encounter_disclaimer" = "Bonjour,\n\nNous vous rappelons qu'en vertu de la charte d'Entourage, vous devez avertir le bénéficiaire qu’un compte-rendu sera réalisé sur vos échanges et pourra être stocké par vous ou par votre association.";
 "entourage_disclaimer" = "En vertu de la charte d'Entourage:\n\n- Vous devez recueillir le consentement des personnes concernées avant de créer un entourage\n- La description de l’entourage ne doit pas contenir de données permettant d’identifier ou de localiser les personnes concernées.\n\nNous vous rappelons que la position précise des entourages ne sera pas diffusée.";
+"disclaimer_link_text" = "charte d'Entourage";
 
 // Tour
 "tour_type_bare_hands" = "barehands";
@@ -94,7 +115,6 @@
 "tour_type_display_social" = "sociale";
 "tour_type_display_medical" = "médicale";
 "tour_type_display_distributive" = "distributive";
-"failed_tour_start_no_location" = "Impossible de démarrer la maraude : aucune position détectée.";
 "failed_send_tour_points_to_server" = "Impossible d’envoyer les données de la maraude au serveur. Veuillez réessayer plus tard.";
 
 "tour_status_closed" = "closed";
@@ -120,8 +140,6 @@
 "tour_quitted" = "Maraude clôturée.";
 
 // Encounters
-
-
 "formatter_has_meet" = "%@ a rencontré %@";
 "has_encountered" = "a rencontré";
 "here" = "ici";
@@ -145,6 +163,7 @@
 "formatter_encounter_and_user_meet" = " et %@ se sont rencontrés ici.";
 "user_joined_tour" = " a rejoint la maraude.";
 "user_joined_entourage" = " a rejoint l’entourage.";
+"user_join_reject" = " a reçu une notification du rejet de sa demande.";
 "meetingCreated" = "Rencontre créée";
 "meetingNotCreated" = "Echec de la création de rencontre";
 "contacts" = "Contacts";
@@ -180,12 +199,6 @@
 "impossibleValidation" = "Validation impossible";
 "mustAddEmail" = "Veuillez renseigner une adresse email";
 
-// POI
-"poi_create_contribution_alert" = "Si vous désirez créer une contribution, vouz devez quitter le guide de solidarité";
-"poi_create_demande_alert" = "Si vous désirez créer une demande, vous devez quitter le guide de solidarité";
-"poi_create_encounter_alert" = "Si vous désirez créer une rencontre, vouz devez quitter le guide de solidarité";
-"poi_create_tour_alert" = "Si vous désirez créer une maraude, vouz devez quitter le guide de solidarité";
-
 // User
 "firstName" = "Prénom";
 "lastName" = "Nom";
@@ -199,7 +212,7 @@
 "invalidPhoneNumber" = "Numéro de téléphone invalide";
 "invalidPhoneNumberOrCode" = "Le numéro de téléphone et ce code d’accès ne correspondent pas.";
 "mustAddCode" = "Veuillez renseigner un code de vérification";
-"invalidPhoneNumberFormat" = "Votre téléphone doit être au format +33, 06 ou 07...";
+"invalidPhoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
 "close" = "Fermer";
@@ -226,6 +239,7 @@
 "lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit: créez un compte
 
 Membres d'une association utilisatrice d'Entourage, contactez associations@entourage.social";
+"association" = "Association";
 
 // Filter
 "filter_maraudes_title" = "Types de maraude";
@@ -260,6 +274,7 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "url_delete_account" = "users/me?token=%@";
 "url_regenerate_code" = "%@/%@/%@.json";
 "url_send_entourage" = "entourages";
+"encounter_enter_name_of_met_person" = "Vous devez donner un titre à votre rencontre";
 
 // Titles
 "aboutTitle" = "À propos";
@@ -293,9 +308,17 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 // Navigation Bar Buttons
 "validate" = "Valider";
 "edit" = "Editer";
+"modify" = "Modifier";
 
 // User profile
 "user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";
 
 "no_feeds_received" = "Aucun entourage près de cette position";
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
+"ok" = "OK";
+
+"mail_not_configured" = "Vous devez configurer votre messagerie email";
+"mail_sent" = "Mail envoyé";
+"mail_send_failure" = "Le mail n’a pu être envoyé";
+"mail_signal_subject" = "Signalement d’un entourage qui pose problème: \"%@\" créé par %@";
+"speech_kit_initialise_error" = "Problème avec Speechkit. La reconnaisance vocale n'est pas disponible";

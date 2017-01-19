@@ -9,6 +9,7 @@
 #import "OTToolbar.h"
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
+#import "OTLocationManager.h"
 
 @interface OTToolbar()
 
@@ -86,7 +87,12 @@
 
 - (void)showCurrentLocation {
     [Flurry logEvent:@"RecenterMapClick"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowCurrentLocation object:nil];
+    if(![OTLocationManager sharedInstance].isAuthorized)
+       [[OTLocationManager sharedInstance] showGeoLocationNotAllowedMessage:OTLocalizedString(@"ask_permission_location_recenter_map")];
+    else if(![OTLocationManager sharedInstance].currentLocation)
+        [[OTLocationManager sharedInstance] showLocationNotFoundMessage:OTLocalizedString(@"no_location_recenter_map")];
+    else
+        [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowCurrentLocation object:nil];
 }
 
 @end

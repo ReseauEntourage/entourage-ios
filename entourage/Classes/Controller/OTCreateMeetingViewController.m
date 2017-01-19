@@ -25,6 +25,8 @@
 #import "OTEncounterDisclaimerBehavior.h"
 #import "OTTextWithCount.h"
 #import "OTLocationSelectorViewController.h"
+#import "NSError+OTErrorData.h"
+#import "OTJSONResponseSerializer.h"
 
 #define PADDING 20.0f
 
@@ -102,6 +104,10 @@
 
 - (IBAction)sendEncounter:(UIBarButtonItem*)sender {
     [Flurry logEvent:@"ValidateEncounterClick"];
+    if(self.nameTextField.text.length == 0) {
+        [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_enter_name_of_met_person") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
+        return;
+    }
     sender.enabled = NO;
     __block OTEncounter *encounter = [OTEncounter new];
     encounter.date = [NSDate date];

@@ -18,6 +18,6 @@
 @interface OTDisclaimerViewController : UIViewController
 
 @property (nonatomic, weak) id<DisclaimerDelegate> disclaimerDelegate;
-@property (nonatomic, strong) NSString *disclaimerText;
+@property (nonatomic, strong) NSAttributedString *disclaimerText;
 
 @end

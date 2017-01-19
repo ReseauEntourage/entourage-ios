@@ -6,18 +6,6 @@
 //  Copyright (c) 2015 OCTO Technology. All rights reserved.
 //
 
-#if DEBUG
-// PREPROD - Staging
-#define BASE_API_URL @"https://entourage-back-preprod.herokuapp.com/api/v1/"
-//#define BASE_API_URL @"https://api.entourage.social/api/v1/"
-
-#else
-// PROD
-#define BASE_API_URL @"https://api.entourage.social/api/v1/"
-
-#endif
-
-#define API_KEY @"91f908e8f674fc9dfc5c1dba"
 #define DEVICE_TOKEN_KEY "device_token"
 
 #define PARIS_LAT 48.856578
@@ -52,14 +40,12 @@
 
 #define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"
-#define ABOUT_CGU_URL @"https://api.entourage.social/cgu"
+#define ABOUT_CGU_URL @"http://www.entourage.social/cgu/index.html"
 #define ABOUT_CGU_URL_OLD @"https://s3-eu-west-1.amazonaws.com/entourage-ressources/charte.pdf"
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
 
 #define OTLocalizedString(key) [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
-
-
 
 #define SNAPSHOT_START "snapshot_start_%d.png"
 #define SNAPSHOT_STOP "snapshot_end_%d.png"
@@ -67,3 +53,12 @@
 #define INVALID_PHONE_FORMAT @"INVALID_PHONE_FORMAT"
 #define UNAUTHORIZED @"UNAUTHORIZED"
 #define PHONE_ALREADY_EXIST @"PHONE_ALREADY_EXIST"
+
+#define PUBLIC_ENTOURAGE_CREATION_CHART @"http://www.entourage.social/chartes/grand-public.html"
+#define PRO_ENTOURAGE_CREATION_CHART @"http://www.entourage.social/chartes/pro.html"
+
+#define MENU_BLOG_URL @"https://blog.entourage.social/category/franchir-le-pas/"
+#define PRO_MENU_CHART_URL @"http://www.entourage.social/chartes/pro.html"
+#define PUBLIC_MENU_CHART_URL @"http://www.entourage.social/chartes/grand-public.html"
+
+#define NO_GIUDE_DATA_LINK @"https://goo.gl/jD5uIQ"

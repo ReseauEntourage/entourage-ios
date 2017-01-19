@@ -18,6 +18,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "SVProgressHUD.h"
 #import "UIButton+AFNetworking.h"
+#import "OTTapViewBehavior.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -29,6 +30,7 @@ typedef NS_ENUM(NSInteger) {
 @interface OTUserViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet OTTapViewBehavior *tapToEditBehavior;
 
 @end
 
@@ -38,6 +40,8 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.tapToEditBehavior initialize];
     self.title = OTLocalizedString(@"profil").uppercaseString;
     [self setupCloseModal];
 }
@@ -61,11 +65,11 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Private
 
 - (void)showEditButton {
-    UIBarButtonItem *chatButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"edit") withTarget:self andAction:@selector(showEditView) colored:[UIColor appOrangeColor]];
+    UIBarButtonItem *chatButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"modify") withTarget:self andAction:@selector(showEditView) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:chatButton];
 }
 
-- (void)showEditView {
+- (IBAction)showEditView {
     [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
 }
 
@@ -260,7 +264,12 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)setupEntouragesProfileCell:(UITableViewCell *)cell {
     UILabel *noEntouragesLabel = [cell viewWithTag:NOENTOURAGES];
-    noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.tourCount.intValue];
+    if ([self.user isPro]) {
+        noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.tourCount.intValue];
+    }
+    else {
+        noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.entourageCount.intValue];
+    }
 }
 
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationLogoUrl:(NSString *)imageURL

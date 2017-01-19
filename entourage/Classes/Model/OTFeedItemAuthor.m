@@ -21,7 +21,7 @@
         self.uID = [dictionary valueForKey:kWSuid];
         NSString *dnameVal = [dictionary valueForKey:kWDisplayName];
         self.displayName = [dnameVal isKindOfClass:[NSNull class]] ? @"" : dnameVal;
-        self.avatarUrl = [dictionary valueForKey:kWSAvatar_URL];
+        self.avatarUrl = [dictionary stringForKey:kWSAvatar_URL];
     }
     return self;
 }

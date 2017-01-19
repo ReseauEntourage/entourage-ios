@@ -28,8 +28,8 @@
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:joiner.feedItem] getJoiner] reject:joiner success:^() {
         [SVProgressHUD dismiss];
-        [self.items removeObject:joiner];
-        [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
+        joiner.status = JOIN_REJECTED;
+        [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationRight];
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"join_item_failed")];
     }];

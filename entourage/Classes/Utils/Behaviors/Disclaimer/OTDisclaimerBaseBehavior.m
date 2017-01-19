@@ -9,6 +9,8 @@
 #import "OTDisclaimerBaseBehavior.h"
 #import "OTDisclaimerViewController.h"
 #import "NSUserDefaults+OT.h"
+#import "OTUser.h"
+#import "OTConsts.h"
 
 @interface OTDisclaimerBaseBehavior () <DisclaimerDelegate>
 
@@ -17,8 +19,7 @@
 @implementation OTDisclaimerBaseBehavior
 
 - (void)showDisclaimer {
-    if (!self.wasDisclaimerAccepted)
-        [self.owner performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
+    [self.owner performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
 }
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
@@ -40,24 +41,27 @@
     return @"";
 }
 
-- (BOOL)wasDisclaimerAccepted {
-    return NO;
-}
+- (NSAttributedString *)buildDisclaimerWithLink:(NSString *)originalString {
+    NSDictionary *attributes = @{ NSFontAttributeName: [UIFont fontWithName:@"SFUIText-Light" size:17]};
 
-- (NSString *)disclaimerStorageKey {
-    return nil;
+    NSString *stringToMakeInLink = OTLocalizedString(@"disclaimer_link_text");
+    NSRange range = [originalString rangeOfString:stringToMakeInLink];
+    if(range.location == NSNotFound)
+        return [[NSAttributedString alloc] initWithString:originalString attributes:attributes];
+    NSString *url = [[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO] ? PRO_ENTOURAGE_CREATION_CHART : PUBLIC_ENTOURAGE_CREATION_CHART;
+    NSMutableAttributedString *source = [[NSMutableAttributedString alloc] initWithString:originalString attributes:attributes];
+    [source addAttribute:NSLinkAttributeName value:url range:range];
+    return source;
 }
 
 #pragma mark - DisclaimerDelegate
 
 - (void)disclaimerWasAccepted {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:self.disclaimerStorageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.owner dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)disclaimerWasRejected {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:self.disclaimerStorageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.owner dismissViewControllerAnimated:YES completion:^{
         [self.owner dismissViewControllerAnimated:YES completion:nil];

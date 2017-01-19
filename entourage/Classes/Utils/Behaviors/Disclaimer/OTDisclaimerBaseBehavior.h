@@ -14,9 +14,7 @@
 
 - (void)showDisclaimer;
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue;
-
-- (NSString *)disclaimerText;
-- (NSString *)disclaimerStorageKey;
-- (BOOL)wasDisclaimerAccepted;
+- (NSAttributedString *)disclaimerText;
+- (NSAttributedString *)buildDisclaimerWithLink:(NSString *)originalString;
 
 @end

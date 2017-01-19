@@ -7,6 +7,8 @@
 //
 
 #import "OTLocationManager.h"
+#import "OTDeepLinkService.h"
+#import "OTConsts.h"
 
 @interface OTLocationManager () <CLLocationManagerDelegate>
 
@@ -22,7 +24,7 @@
     static dispatch_once_t entourageFilterToken;
     dispatch_once(&entourageFilterToken, ^{
         sharedInstance = [self new];
-        sharedInstance.started = NO;
+        sharedInstance.isAuthorized = NO;
     });
     return sharedInstance;
 }
@@ -47,12 +49,33 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.activityType = CLActivityTypeFitness;
     self.locationManager.distanceFilter = 10; // meters
-    
+
     [self.locationManager startUpdatingLocation];
 }
 
 - (void)stopLocationUpdates {
     [self.locationManager stopUpdatingLocation];
+}
+
+- (void)showGeoLocationNotAllowedMessage:(NSString *)message {
+    [Flurry logEvent:@"ActivateGeolocFromCreateTourPopup"];
+    UIViewController *rootController = [[OTDeepLinkService new] getTopViewController];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [alert addAction:defaultAction];
+    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"activate") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }];
+    [alert addAction:settingsAction];
+    [rootController presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)showLocationNotFoundMessage:(NSString *)message {
+    UIViewController *rootController = [[OTDeepLinkService new] getTopViewController];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"tryAgain") message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"ok") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [alert addAction:defaultAction];
+    [rootController presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -77,8 +100,8 @@
 }
 
 - (void)notifyStatus {
-    self.started = self.status == kCLAuthorizationStatusAuthorizedAlways;
-    NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:self.started] };
+    self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedAlways;
+    NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:self.isAuthorized] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationAuthorizationChanged object:nil userInfo:info];
 }
 

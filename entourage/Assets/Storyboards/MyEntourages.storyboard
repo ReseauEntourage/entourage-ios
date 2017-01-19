@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="MH3-uF-0WG">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="MH3-uF-0WG">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -282,10 +282,12 @@
                         <outlet property="manageInvitation" destination="Ldj-3E-rTX" id="3Ku-c0-iH2"/>
                         <outlet property="optionsBehavior" destination="omB-rY-1vt" id="qbi-OW-VpU"/>
                         <outlet property="toggleCollectionView" destination="ntM-qh-ECK" id="tng-qQ-9aF"/>
+                        <outlet property="userProfileBehavior" destination="fQD-YM-3to" id="RRL-t8-kzM"/>
                         <segue destination="6JK-OI-tTh" kind="modal" identifier="EntourageEditorSegue" id="ujP-hf-Ybz"/>
                         <segue destination="173-pU-UII" kind="push" identifier="PublicFeedItemDetailsSegue" id="9Hp-Vb-Z1Y"/>
                         <segue destination="su2-g2-6je" kind="push" identifier="ActiveFeedItemDetailsSegue" id="SGD-mP-pLc"/>
                         <segue destination="DIz-eG-Bls" kind="push" identifier="ManageInvitationSegue" id="wQK-gk-y6m"/>
+                        <segue destination="szE-AB-kQJ" kind="modal" identifier="UserProfileSegue" id="XI1-G4-tAJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fUU-LI-bnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -370,6 +372,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ixK-Tr-06n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="740.5" y="-22"/>
+        </scene>
+        <!--UserProfile-->
+        <scene sceneID="tch-qo-EKM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserProfile" id="szE-AB-kQJ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="fW5-ex-ape"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hia-Se-03s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="728" y="146"/>
         </scene>
         <!--My Entourages Options-->
         <scene sceneID="Um8-xG-z9g">
@@ -575,7 +587,8 @@
                                         <color key="textColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Feed item description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LDp-4W-3dr">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" text="Feed item description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LDp-4W-3dr">
+                                        <frame key="frameInset" width="1000" height="1000"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
@@ -640,7 +653,8 @@
                                             <constraint firstItem="Cc2-qa-gxH" firstAttribute="top" secondItem="YQY-Es-0iZ" secondAttribute="top" constant="11" id="ofO-EF-JwN"/>
                                         </constraints>
                                     </view>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Y5V-SI-9ZA">
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Y5V-SI-9ZA">
+                                        <frame key="frameInset" width="1000" height="1000"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="170" id="LET-go-XWe"/>
                                         </constraints>

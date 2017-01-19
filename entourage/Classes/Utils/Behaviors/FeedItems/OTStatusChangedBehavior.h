@@ -9,11 +9,13 @@
 #import "OTBehavior.h"
 #import "OTNextStatusButtonBehavior.h"
 #import "OTEditEntourageBehavior.h"
+#import "OTJoinBehavior.h"
 
 @interface OTStatusChangedBehavior : OTBehavior <OTStatusChangedProtocol>
 
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior *editEntourageBehavior;
+@property (nonatomic, weak) IBOutlet OTJoinBehavior *joinBehavior;
 
 - (void)configureWith:(OTFeedItem *)feedItem;
 - (IBAction)startChangeStatus;

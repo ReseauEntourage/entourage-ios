@@ -19,10 +19,10 @@
 }
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
-    OTFeedItemMessage *msgData = (OTFeedItemMessage *)timelinePoint;
-    self.lblUserName.text = msgData.userName;
-    [self.btnAvatar setupAsProfilePictureFromUrl:msgData.userAvatarURL];
-    self.txtMessage.text = msgData.text;
+    if([timelinePoint isKindOfClass:[OTFeedItemJoiner class]])
+        [self configureWithJoin:(OTFeedItemJoiner *)timelinePoint];
+    else
+        [self configureWithMessage:(OTFeedItemMessage *)timelinePoint];
 }
 
 - (IBAction)showUserDetails:(id)sender {
@@ -30,6 +30,20 @@
     NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
     OTFeedItemMessage *message = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
     [self.userProfile showProfile:message.uID];
+}
+
+#pragma mark - private methods
+
+- (void)configureWithMessage:(OTFeedItemMessage *)message {
+    self.lblUserName.text = message.userName;
+    [self.btnAvatar setupAsProfilePictureFromUrl:message.userAvatarURL];
+    self.txtMessage.text = message.text;
+}
+
+- (void)configureWithJoin:(OTFeedItemJoiner *)joiner {
+    self.lblUserName.text = joiner.displayName;
+    [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl];
+    self.txtMessage.text = [NSString stringWithFormat:@"\"%@\"", joiner.message];
 }
 
 @end

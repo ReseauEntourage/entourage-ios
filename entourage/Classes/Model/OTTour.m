@@ -56,11 +56,11 @@
         self.endTime = [dictionary dateForKey:kWSKeyEndDate];
         self.type = [dictionary valueForKey:kWSKeyTourType];
         self.distance = [dictionary numberForKey:kWSKeyDistance];
-        self.organizationName = [dictionary valueForKey:kWSKeyOrganizationName];
-        self.organizationDesc = [dictionary valueForKey:kWSKeyOrganizationDescription];
+        self.organizationName = [dictionary stringForKey:kWSKeyOrganizationName];
+        self.organizationDesc = [dictionary stringForKey:kWSKeyOrganizationDescription];
         self.tourPoints = [OTTourPoint tourPointsWithJSONDictionary:dictionary andKey:kWSKeyTourPoints];
-        self.noMessages = [dictionary valueForKey:kWSNoUnreadMessages];
-        self.noPeople = [dictionary valueForKey:kWSNoPeople];
+        self.noMessages = [dictionary numberForKey:kWSNoUnreadMessages];
+        self.noPeople = [dictionary numberForKey:kWSNoPeople];
         
         if (self.distance == nil || self.distance.doubleValue == 0) {
             [self computeDistance];

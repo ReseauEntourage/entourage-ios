@@ -34,8 +34,12 @@
             return @"MessageReceivedCell";
         case MessageCellTypeJoinAccepted:
             return @"JoinAcceptedCell";
+        case MessageCellTypeJoinRejected:
+            return @"JoinRejectedCell";
         case MessageCellTypeJoinRequested:
             return @"JoinRequestedCell";
+        case MessageCellTypeJoinRequestedNotOwner:
+            return @"JoinRequestedNotOwnerCell";
         case MessageCellTypeStatus:
             return @"StatusCell";
         case MessageCellTypeEncounter:

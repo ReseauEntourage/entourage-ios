@@ -15,11 +15,20 @@
 NSString *const kInvitations = @"invitations";
 NSString *const kKeyFailedNumbers = @"failed_numbers";
 
+
 @implementation OTInvitationsService
 
 - (void)inviteNumbers:(NSArray *)phoneNumbers toEntourage:(OTEntourage *)entourage success:(void (^)())success failure:(void (^)(NSError *, NSArray *))failure {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_INVITE, entourage.uid, TOKEN];
-    NSDictionary *messageDictionary = @{@"invite" : @{@"mode": @"SMS", @"phone_numbers": phoneNumbers}};
+
+    NSMutableArray *phonesArray = [NSMutableArray array];
+
+    for (NSString *phone in phoneNumbers) {
+        NSArray* numbers = [phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSString* nospacestring = [numbers componentsJoinedByString:@""];
+        [phonesArray addObject:nospacestring];
+    }
+    NSDictionary *messageDictionary = @{@"invite" : @{@"mode": @"SMS", @"phone_numbers": phonesArray}};
     [[OTHTTPRequestManager sharedInstance]
      POSTWithUrl:url
      andParameters:messageDictionary

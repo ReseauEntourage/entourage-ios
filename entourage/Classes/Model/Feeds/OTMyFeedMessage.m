@@ -17,17 +17,13 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        self.text = [dictionary valueForKey:kWSText];
+        self.text = [dictionary stringForKey:kWSText];
         id author = [dictionary objectForKey:kWSKeyAuthor];
         if(author && ![author isKindOfClass:[NSNull class]] && [author isKindOfClass:[NSDictionary class]]) {
             NSDictionary *authorDict = author;
-            self.firstName = [authorDict valueForKey:kWSKeyFirstname];
-            self.lastName = [authorDict valueForKey:kWSKeyLastname];
+            self.firstName = [authorDict stringForKey:kWSKeyFirstname];
+            self.lastName = [authorDict stringForKey:kWSKeyLastname];
         }
-        if(!self.firstName || [self.firstName isKindOfClass:[NSNull class]])
-            self.firstName = @"";
-        if(!self.lastName || [self.lastName isKindOfClass:[NSNull class]])
-            self.lastName = @"";
     }
     return self;
 }

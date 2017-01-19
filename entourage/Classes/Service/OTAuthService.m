@@ -25,6 +25,8 @@
 #import "OTOrganization.h"
 #import "OTConsts.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 /**************************************************************************************************/
 #pragma mark - Constants
 
@@ -49,6 +51,12 @@ NSString *const kKeychainPassword = @"entourage_user_password";
               success:(void (^)(OTUser *))success
               failure:(void (^)(NSError *))failure
 {
+    if (phone == nil || password == nil) {
+        if (failure) {
+            NSDictionary *userInfo = @{NSLocalizedDescriptionKey: OTLocalizedString(@"generic_error")};
+            failure([NSError errorWithDomain:@"entourageError" code:-1 userInfo:userInfo]);
+        }
+    }
     NSDictionary *parameters = @{@"user": @{@"phone": phone, @"sms_code": password}};
     OTRequestOperationManager *requestManager = [OTHTTPRequestManager sharedInstance];
     [requestManager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
@@ -73,6 +81,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
          }
          andFailure:^(NSError *error)
          {
+             [[Crashlytics sharedInstance] recordError:error withAdditionalUserInfo:parameters];
              NSLog(@"Failed with error %@", error);
              if (failure) {
                  failure(error);

@@ -22,8 +22,12 @@
 #import "OTOngoingTourService.h"
 #import "SVProgressHUD.h"
 #import "OTBadgeNumberService.h"
+#import "Flurry.h"
 #import "OTVersionInfo.h"
 #import "OTDebugLog.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -39,18 +43,13 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 #pragma mark - Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    //logger
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"EMA.log"];
-    freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
-
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"environment": @"prod"}];
     [[OTDebugLog sharedInstance] setConsoleOutput];
 
 #if !DEBUG
     [Flurry setAppVersion:[OTVersionInfo currentVersion]];
-  	[Flurry setCrashReportingEnabled:YES];
-  	[Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
+    [Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
+    [Fabric with:@[[Crashlytics class]]];
 #endif
 
     [IQKeyboardManager sharedManager].enable = YES;
@@ -105,8 +104,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [[OTBadgeNumberService sharedInstance] clearData];
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kEncounterDisclaimer];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kEntourageDisclaimer];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
@@ -154,6 +151,13 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
 	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
         NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
+
+#if BETA
+    UINavigationBar.appearance.barTintColor = [UIColor redColor];
+    UINavigationBar.appearance.backgroundColor = [UIColor redColor];
+#endif
+
+    UITextField.appearance.tintColor = [UIColor whiteColor];
 }
 
 @end

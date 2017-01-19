@@ -23,6 +23,7 @@
 
 
 - (void)zoomToCurrentLocation:(id)sender;
+- (void)willChangePosition;
 - (void)didChangePosition;
 - (void)reloadPois;
 - (void)reloadFeeds;
