@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblUserName;
 @property (nonatomic, weak) IBOutlet UIButton *btnAvatar;
 @property (nonatomic, weak) IBOutlet UITextView *txtMessage;
+@property (nonatomic, weak) IBOutlet UIImageView *imgAssociation;
 @property (nonatomic, weak) IBOutlet OTMessageDataSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;
 
