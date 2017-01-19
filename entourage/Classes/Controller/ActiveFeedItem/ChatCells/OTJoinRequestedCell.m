@@ -11,6 +11,7 @@
 #import "UIButton+entourage.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTConsts.h"
+#import "UIImageView+entourage.h"
 
 // Sergiu : again apologies for magic numbers (i hate ios tables with autolayout)
 #define BUTTON_MARGIN 144
@@ -30,6 +31,10 @@
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
     OTFeedItemJoiner *joiner = (OTFeedItemJoiner *)timelinePoint;
+
+#warning TODO remove this (just for testing)
+    [self.imgAssociation setupFromUrl:joiner.avatarUrl withPlaceholder:@"user"];
+
     [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl withPlaceholder:@"user"];
     self.lblUserName.text = joiner.displayName;
     self.lblMessage.text = @"";
