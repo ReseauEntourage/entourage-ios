@@ -14,29 +14,44 @@
 
 @property (nonatomic, strong) NSAttributedString *noDataGuideText;
 @property (nonatomic, strong) NSAttributedString *noDataEntourageText;
+@property (nonatomic, assign) BOOL isGuide;
 
 @end
 
 @implementation OTNoDataBehavior
 
+static bool guideClosed = NO;
+static bool entourageClosed = NO;
+
 - (void)initialize {
+    self.isGuide = NO;
     [self loadNoDataTexts];
     self.txtNoData.attributedText = self.noDataEntourageText;
 }
 
 - (void)closePopup:(id)sender {
+    if(self.isGuide)
+        guideClosed = YES;
+    else
+        entourageClosed = YES;
     [self togglePopupOpen:NO];
 }
 
 - (void)switchedToNewsfeeds {
+    self.isGuide = NO;
     self.txtNoData.attributedText = self.noDataEntourageText;
 }
 
 - (void)switchedToGuide {
+    self.isGuide = YES;
     self.txtNoData.attributedText = self.noDataGuideText;
 }
 
 - (void)showNoData {
+    if(self.isGuide && guideClosed)
+        return;
+    if(!self.isGuide && entourageClosed)
+        return;
     [self togglePopupOpen:YES];
 }
 
