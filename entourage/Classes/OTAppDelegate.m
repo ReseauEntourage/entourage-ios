@@ -43,7 +43,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 #pragma mark - Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"environment": @"staging"}];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"environment": @"prod"}];
     [[OTDebugLog sharedInstance] setConsoleOutput];
 
 #if !DEBUG
