@@ -28,7 +28,7 @@ platform :ios do
     scan
   end
 
-  desc "Submit a new Beta Build to Apple TestFlight"
+  desc "Submit a new Beta Build to appaloosa"
   desc "This will also make sure the profile is up to date"
   lane :beta do |options|
     increment_version_number
@@ -55,9 +55,29 @@ platform :ios do
       screenshots: "",
       group_ids: "13446"
       )
+    git_commit(path: "entourage/entourage-Info.plist", message: "Automatically bump version from fastlane [skip ci]")
+    push_to_git_remote
+  end
 
-    # sh "your_script.sh"
-    # You can also use other beta testing services here (run `fastlane actions`)
+  desc "Submit a new Beta Build to appaloosa"
+  desc "This will also make sure the profile is up to date"
+  lane :deploy_to_TestFlight do |options|
+    #cert(
+    # username: "apple@entourage.social"
+    #)
+    sigh(
+     app_identifier: "social.entourage.entourageios",
+     username: "apple@entourage.social",
+     adhoc: false,
+     force: true
+    )
+    gym(
+      clean: true,
+      scheme: "EntourageStore"
+      )
+    pilot(
+      skip_waiting_for_build_processing: true
+      )
   end
 
   # You can define as many lanes as you want
@@ -68,8 +88,6 @@ platform :ios do
     # slack(
     #   message: "Successfully deployed new App Update."
     # )
-    git_commit(path: "entourage/entourage-Info.plist", message: "Automatically bump version from fastlane [skip ci]")
-    push_to_git_remote
   end
 
   error do |lane, exception|
@@ -79,10 +97,3 @@ platform :ios do
     # )
   end
 end
-
-
-# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
-# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
-
-# fastlane reports which actions are used
-# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer
