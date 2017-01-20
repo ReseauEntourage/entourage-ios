@@ -6,9 +6,9 @@
 //  Copyright © 2017 OCTO Technology. All rights reserved.
 //
 
-#import "OTDataSourceBehavior.h"
+#import "OTFilteredDataSourceBehavior.h"
 
-@interface OTAssociationsSourceBehavior : OTDataSourceBehavior
+@interface OTAssociationsSourceBehavior : OTFilteredDataSourceBehavior
 
 - (void)updateAssociation;
 
