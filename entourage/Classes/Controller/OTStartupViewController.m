@@ -29,7 +29,7 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
     self.title = @"";
-    
+
     self.loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.loginButton.layer.borderWidth = 1.5f;
 }
@@ -39,12 +39,14 @@
     [NSUserDefaults standardUserDefaults].temporaryUser = nil;
 
 #if BETA
-  self.betaButton.hidden = false;
+  self.betaButton.hidden = NO;
   NSString *env = [[ConfigurationManager shared] environment];
-  NSString *title = [NSString stringWithFormat:@"Vous êtes sur %@.\n(Tappez pour changer)", env];
+  NSString *title = [NSString stringWithFormat:@"Vous êtes sur %@.\n(Tapez pour changer)", env];
   self.betaButton.titleLabel.textAlignment = NSTextAlignmentCenter;
   self.betaButton.titleLabel.numberOfLines = 2;
   [self.betaButton setTitle:title forState:UIControlStateNormal];
+#else
+  self.betaButton.hidden = YES;
 #endif
 }
 
