@@ -9,10 +9,14 @@
 #import "OTMembersCell.h"
 #import "UIButton+entourage.h"
 #import "OTTableDataSourceBehavior.h"
+#import "UIImageView+entourage.h"
 
 @implementation OTMembersCell
 
 - (void)configureWith:(OTFeedItemJoiner *)item {
+#warning TODO remove this (just for testing)
+    [self.imgAssociation setupFromUrl:item.avatarUrl withPlaceholder:@"user"];
+    
     self.lblDisplayName.text = item.displayName;
     [self.btnProfile setupAsProfilePictureFromUrl:item.avatarUrl];
 }
