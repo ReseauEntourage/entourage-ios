@@ -3143,7 +3143,7 @@
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3166,7 +3166,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios$(BUNDLE_ID_SUFFIX)";
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "21c6dc99-4144-44e8-9ac7-97c0c8a714dd";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
@@ -3191,18 +3191,15 @@
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"COCOAPODS=1",
-				);
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
@@ -3213,12 +3210,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios$(BUNDLE_ID_SUFFIX)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a80f050f-f365-4939-af4e-b46068bbeabd";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AppStore";
+				PROVISIONING_PROFILE = "9e061729-2d59-435f-9411-d760924e213d";
+				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3327,7 +3325,7 @@
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3350,7 +3348,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios$(BUNDLE_ID_SUFFIX)";
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "0b98ae48-9f2e-404a-b7f2-ef68b953259d";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
