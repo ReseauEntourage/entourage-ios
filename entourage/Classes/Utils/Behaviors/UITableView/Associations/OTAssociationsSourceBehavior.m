@@ -15,17 +15,33 @@
 
 @interface OTAssociationsSourceBehavior ()
 
+@property (nonatomic, strong) NSArray* items;
 @property (nonatomic, strong) OTAssociation *originalAssociation;
 
 @end
 
 @implementation OTAssociationsSourceBehavior
 
+@synthesize items;
+
+- (void)filterItemsByString:(NSString *)searchString {
+    if([searchString length] == 0)
+        self.items = self.allItems;
+    else
+        self.items = [self.allItems filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(OTAssociation *item, NSDictionary * bindings) {
+            NSRange rangeValue = [item.name rangeOfString:searchString options:NSCaseInsensitiveSearch];
+            BOOL contains = rangeValue.length > 0;
+            return contains;
+        }]];
+    [self.tableDataSource refresh];
+}
+
 - (void)loadData {
     [SVProgressHUD show];
-    [[OTAssociationsService new] getAllAssociationsWithSuccess:^(NSArray *items) {
+    [[OTAssociationsService new] getAllAssociationsWithSuccess:^(NSArray *associationItems) {
         [SVProgressHUD dismiss];
-        [self updateItems:items];
+        [super updateItems:associationItems];
+        self.items = associationItems;
         [self storeOriginalSuppportedAssociation];
         [self.tableView reloadData];
     } failure:^(NSError *error) {

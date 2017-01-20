@@ -1019,6 +1019,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xWu-Ea-jGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="qLf-w4-aB9" userLabel="Associations Data Source" customClass="OTAssociationsSourceBehavior">
                     <connections>
+                        <outlet property="searchBar" destination="0VD-bM-o8I" id="F85-ht-35H"/>
                         <outlet property="tableDataSource" destination="1wW-fq-Bwa" id="3bv-Fi-TKc"/>
                         <outlet property="tableView" destination="u76-x4-ccK" id="n26-Ys-P0X"/>
                     </connections>
