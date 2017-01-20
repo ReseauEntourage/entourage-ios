@@ -17,9 +17,11 @@
 #import "OTMembersDataSource.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTEditEntourageBehavior.h"
+#import "UIImageView+entourage.h"
 
 @interface OTMapViewController ()
 
+@property (nonatomic, weak) IBOutlet UIImageView *imgAssociation;
 @property (nonatomic, weak) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
 @property (nonatomic, weak) IBOutlet OTSummaryProviderBehavior *summaryProviderBehavior;
 @property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfileBehavior;
@@ -35,6 +37,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+#warning TODO remove this (just for testing)
+    [self.imgAssociation setupFromUrl:self.feedItem.author.avatarUrl withPlaceholder:@"user"];
+
     [self.summaryProviderBehavior configureWith:self.feedItem];
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.inviteBehavior configureWith:self.feedItem];
