@@ -102,6 +102,8 @@ pour trouver des structures d’assistance: restaurants solidaires, douches publ
 Une structure manque sur la carte?
 Proposez une structure";
 "no_data_guide_link" = "Proposez une structure";
+"want_to_join_tour" = "veut rejoindre votre maraude.";
+"want_to_join_entourage" = "veut rejoindre votre entourage.";
 
 // Disclaimer
 "encounter_disclaimer" = "Bonjour,\n\nNous vous rappelons qu'en vertu de la charte d'Entourage, vous devez avertir le bénéficiaire qu’un compte-rendu sera réalisé sur vos échanges et pourra être stocké par vous ou par votre association.";
