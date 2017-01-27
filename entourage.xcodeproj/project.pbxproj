@@ -1,4 +1,4 @@
-// !$*UTF8*$!
+w<<// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -317,7 +317,6 @@
 		A8DA9E1B1E3B4BF30041ADB6 /* FlurryEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DA9E161E3B4BF30041ADB6 /* FlurryEmpty.m */; };
 		A8DA9E1C1E3B4BF30041ADB6 /* FlurryWatchEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */; };
 		A8DA9E1D1E3B4BF30041ADB6 /* libFlurry_7.9.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */; };
-		A8FD766E1E42FE9200063C5F /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386D1DC88290000F9F3F /* staging.plist */; };
 		DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8ACD19E857A800FA218E /* OTMenuItem.m */; };
 		DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */; };
 		DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD519E85EA400FA218E /* OTMyMeetingsViewController.m */; };
@@ -2298,8 +2297,12 @@
 		A809BAA219E97E2400A45AC9 /* Flurry */ = {
 			isa = PBXGroup;
 			children = (
-				1E75AB5F1E3B42930055613E /* libFlurry_7.9.2.a */,
-				1E2432B61DA6BED3000EF74F /* Flurry.h */,
+				A8DA9E151E3B4BF30041ADB6 /* Flurry.h */,
+				A8DA9E161E3B4BF30041ADB6 /* FlurryEmpty.m */,
+				A8DA9E171E3B4BF30041ADB6 /* FlurrySessionBuilder.h */,
+				A8DA9E181E3B4BF30041ADB6 /* FlurryWatch.h */,
+				A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */,
+				A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */,
 			);
 			path = Flurry;
 			sourceTree = "<group>";
