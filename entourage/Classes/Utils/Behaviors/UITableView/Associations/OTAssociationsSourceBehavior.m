@@ -68,6 +68,12 @@
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"update_association_error")];
         }];
     }
+    else if(currentAssociation != nil)
+        [[OTAssociationsService new] updateAssociation:currentAssociation isDefault:YES withSuccess:^(OTAssociation *nUpdated) {
+            [SVProgressHUD dismiss];
+        } failure:^(NSError *error) {
+            [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"update_association_error")];
+        }];
 }
 
 #pragma mark - private methods
