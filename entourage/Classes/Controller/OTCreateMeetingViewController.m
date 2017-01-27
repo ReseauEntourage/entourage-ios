@@ -21,7 +21,6 @@
 #import "MBProgressHUD.h"
 #import "SVProgressHUD.h"
 #import <Social/Social.h>
-#import "OTSpeechBehavior.h"
 #import "OTEncounterDisclaimerBehavior.h"
 #import "OTTextWithCount.h"
 #import "OTLocationSelectorViewController.h"
@@ -41,7 +40,6 @@
 @property (nonatomic, strong) IBOutlet OTTextWithCount *messageTextView;
 @property (weak, nonatomic) IBOutlet UILabel *firstLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (strong, nonatomic) IBOutlet OTSpeechBehavior *speechBehavior;
 @property (strong, nonatomic) IBOutlet OTEncounterDisclaimerBehavior *disclaimer;
 @property (nonatomic, weak) IBOutlet UIButton *locationButton;
 
@@ -54,7 +52,6 @@
     
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
     [self setupUI];
-    [self.speechBehavior initialize];
     [self.disclaimer showDisclaimer];
 }
 

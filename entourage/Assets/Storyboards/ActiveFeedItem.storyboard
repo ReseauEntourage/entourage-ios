@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DlM-nw-VLS">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DlM-nw-VLS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -426,7 +426,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gDf-jH-qfI">
-                                                                                    <rect key="frame" x="19.5" y="108" width="206" height="18"/>
+                                                                                    <rect key="frame" x="19" y="108" width="206" height="18"/>
                                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -601,7 +601,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="npE-Su-q4O">
-                                                                                    <rect key="frame" x="19.5" y="108" width="206" height="18"/>
+                                                                                    <rect key="frame" x="19" y="108" width="206" height="18"/>
                                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -704,7 +704,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Encounter info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="j3k-C6-7oU">
-                                                                    <rect key="frame" x="139.5" y="13" width="105.5" height="18"/>
+                                                                    <rect key="frame" x="139" y="13" width="105.5" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -739,18 +739,8 @@
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ww-FX-DdI">
-                                                <rect key="frame" x="342" y="610" width="26" height="26"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="26" id="GpY-cN-qEB"/>
-                                                    <constraint firstAttribute="height" constant="26" id="NXA-v4-ksh"/>
-                                                </constraints>
-                                                <state key="normal" image="mic">
-                                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                            </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rhM-ov-Zou" userLabel="Txt Chat">
-                                                <rect key="frame" x="15" y="605" width="312" height="33"/>
+                                                <rect key="frame" x="15" y="605" width="353" height="33"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="33" id="yN6-gM-O1V"/>
@@ -772,11 +762,9 @@
                                             <constraint firstAttribute="bottom" secondItem="rhM-ov-Zou" secondAttribute="bottom" constant="9" id="642-6l-prx"/>
                                             <constraint firstItem="EIv-33-TLG" firstAttribute="leading" secondItem="EUH-Tu-IQL" secondAttribute="leading" id="Aje-fL-ruo"/>
                                             <constraint firstAttribute="trailing" secondItem="EIv-33-TLG" secondAttribute="trailing" id="Je0-Cw-G6q"/>
-                                            <constraint firstItem="6Ww-FX-DdI" firstAttribute="leading" secondItem="rhM-ov-Zou" secondAttribute="trailing" constant="15" id="LZ6-di-DKm"/>
-                                            <constraint firstItem="6Ww-FX-DdI" firstAttribute="bottom" secondItem="rhM-ov-Zou" secondAttribute="bottom" constant="-2" id="Ngj-l4-Zbl"/>
+                                            <constraint firstItem="rhM-ov-Zou" firstAttribute="centerX" secondItem="EUH-Tu-IQL" secondAttribute="centerX" id="OHM-rH-5li"/>
                                             <constraint firstItem="YdS-k8-CWq" firstAttribute="top" secondItem="EUH-Tu-IQL" secondAttribute="top" id="QFn-oJ-gYZ"/>
                                             <constraint firstItem="YdS-k8-CWq" firstAttribute="leading" secondItem="EUH-Tu-IQL" secondAttribute="leading" id="X2n-7i-hgQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="6Ww-FX-DdI" secondAttribute="trailing" constant="15" id="b3S-vW-wIk"/>
                                             <constraint firstItem="rhM-ov-Zou" firstAttribute="leading" secondItem="EUH-Tu-IQL" secondAttribute="leading" constant="15" id="j4S-1f-Cro"/>
                                             <constraint firstAttribute="trailing" secondItem="YdS-k8-CWq" secondAttribute="trailing" id="kdn-br-lyf"/>
                                             <constraint firstItem="rhM-ov-Zou" firstAttribute="top" secondItem="EIv-33-TLG" secondAttribute="bottom" constant="9" id="pGz-7S-ltB"/>
@@ -807,7 +795,6 @@
                         <outlet property="dataSource" destination="1dX-UW-k7J" id="wyt-aY-4y7"/>
                         <outlet property="editEntourageBehavior" destination="fgv-V1-G2W" id="UCh-fX-1Nd"/>
                         <outlet property="inviteBehavior" destination="jhq-UT-Ztj" id="0wU-XK-4VB"/>
-                        <outlet property="speechBehavior" destination="V85-WF-Xew" id="cHZ-0p-I5t"/>
                         <outlet property="statusChangedBehavior" destination="Fee-TQ-8bL" id="bXO-iZ-TDz"/>
                         <outlet property="summaryProvider" destination="gwK-Pi-4zD" id="gmy-1f-Rax"/>
                         <outlet property="tableDataSource" destination="YIT-7d-Uwv" id="0yj-BG-pfm"/>
@@ -874,18 +861,6 @@
                     <connections>
                         <outlet property="lblDescription" destination="b5m-CD-APm" id="Bem-w1-MDT"/>
                         <outlet property="lblTitle" destination="9g9-2e-KCk" id="OGm-mR-za8"/>
-                    </connections>
-                </customObject>
-                <customObject id="V85-WF-Xew" userLabel="Speech" customClass="OTSpeechBehavior">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="autoHeight" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="scrollToBottomWhileEditing" destination="DlM-nw-VLS" eventType="editingChanged" id="KfH-oJ-mXs"/>
-                        <action selector="sendMessage" destination="DlM-nw-VLS" eventType="valueChanged" id="0X9-hY-Ayg"/>
-                        <outlet property="btnRecord" destination="6Ww-FX-DdI" id="KWs-hE-tcZ"/>
-                        <outlet property="heightConstraint" destination="yN6-gM-O1V" id="agS-I3-Qh0"/>
-                        <outlet property="txtOutput" destination="rhM-ov-Zou" id="ktY-Ey-oLq"/>
                     </connections>
                 </customObject>
                 <customObject id="jhq-UT-Ztj" userLabel="Invite" customClass="OTInviteBehavior">
@@ -962,7 +937,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0co-Uz-ZRF">
-                                <rect key="frame" x="11" y="55" width="80.5" height="18"/>
+                                <rect key="frame" x="11" y="55" width="76.5" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1427,7 +1402,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A6EA7DD1-30B6-4081-9489-4662E78882E4" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3C3B9F79-CCE1-4072-AC29-88D342390AF7" translatesAutoresizingMaskIntoConstraints="NO" id="iof-P5-ONA">
                                                     <rect key="frame" x="342" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="HpG-Uz-o0t"/>
@@ -1460,7 +1435,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="E8CFA1EC-4AD5-4335-B58F-4D7758B5B292" translatesAutoresizingMaskIntoConstraints="NO" id="Hs3-2H-Kbn">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="718C717C-E06A-48BA-ACE3-E40A9C9A9E70" translatesAutoresizingMaskIntoConstraints="NO" id="Hs3-2H-Kbn">
                                                     <rect key="frame" x="342" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="0KW-WY-JpJ"/>
@@ -1674,7 +1649,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="A6EA7DD1-30B6-4081-9489-4662E78882E4" width="48" height="48">
+        <image name="3C3B9F79-CCE1-4072-AC29-88D342390AF7" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1897,7 +1872,7 @@ pACmAKgArQDEAMYAyDHaMd8x6jHzMgYyCjIVMh4yIzIrMi4yMzJCMkYyTTJVMmIyZzJpMmsycDJ4Mnsy
 gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
 </mutableData>
         </image>
-        <image name="E8CFA1EC-4AD5-4335-B58F-4D7758B5B292" width="48" height="48">
+        <image name="718C717C-E06A-48BA-ACE3-E40A9C9A9E70" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -2124,7 +2099,6 @@ gDKIMosynTKgMqUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAAypw
         <image name="arrowGrey" width="12" height="21"/>
         <image name="botEntourage" width="36" height="36"/>
         <image name="invitationSquare" width="56" height="56"/>
-        <image name="mic" width="26" height="26"/>
         <image name="phoneSquare" width="22" height="22"/>
         <image name="user" width="100" height="100"/>
         <image name="userSmall" width="35" height="35"/>
