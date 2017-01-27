@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <SpeechKit/SpeechKit.h>
 
 extern NSString *const kLoginFailureNotification;
 
