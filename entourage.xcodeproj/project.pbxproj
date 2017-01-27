@@ -1,4 +1,4 @@
-// !$*UTF8*$!
+w<<// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -315,6 +315,9 @@
 		A82B95A11DCD045200332305 /* OnBoardingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82B95A01DCD045200332305 /* OnBoardingTextField.swift */; };
 		A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */; };
 		A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682C819E7D097007BD4BC /* OTLoginViewController.m */; };
+		A8DA9E1B1E3B4BF30041ADB6 /* FlurryEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DA9E161E3B4BF30041ADB6 /* FlurryEmpty.m */; };
+		A8DA9E1C1E3B4BF30041ADB6 /* FlurryWatchEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */; };
+		A8DA9E1D1E3B4BF30041ADB6 /* libFlurry_7.9.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */; };
 		DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8ACD19E857A800FA218E /* OTMenuItem.m */; };
 		DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */; };
 		DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD519E85EA400FA218E /* OTMyMeetingsViewController.m */; };
@@ -446,7 +449,6 @@
 		1E2232D81D56998E004CD5E8 /* OTAddressBookService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAddressBookService.m; path = Services/OTAddressBookService.m; sourceTree = "<group>"; };
 		1E2232DA1D5699AD004CD5E8 /* OTMessagingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMessagingService.h; path = Services/OTMessagingService.h; sourceTree = "<group>"; };
 		1E2232DB1D5699AD004CD5E8 /* OTMessagingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMessagingService.m; path = Services/OTMessagingService.m; sourceTree = "<group>"; };
-		1E2432B61DA6BED3000EF74F /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		1E2432BA1DA6CC8B000EF74F /* OTAddressBookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAddressBookItem.h; path = AddressBook/OTAddressBookItem.h; sourceTree = "<group>"; };
 		1E2432BB1DA6CC8B000EF74F /* OTAddressBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAddressBookItem.m; path = AddressBook/OTAddressBookItem.m; sourceTree = "<group>"; };
 		1E2432BC1DA6CC8B000EF74F /* OTAddressBookPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAddressBookPhone.h; path = AddressBook/OTAddressBookPhone.h; sourceTree = "<group>"; };
@@ -912,6 +914,12 @@
 		A82B95A01DCD045200332305 /* OnBoardingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingTextField.swift; sourceTree = "<group>"; };
 		A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCalloutViewController.h; sourceTree = "<group>"; };
 		A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCalloutViewController.m; sourceTree = "<group>"; };
+		A8DA9E151E3B4BF30041ADB6 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		A8DA9E161E3B4BF30041ADB6 /* FlurryEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryEmpty.m; sourceTree = "<group>"; };
+		A8DA9E171E3B4BF30041ADB6 /* FlurrySessionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurrySessionBuilder.h; sourceTree = "<group>"; };
+		A8DA9E181E3B4BF30041ADB6 /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
+		A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryWatchEmpty.m; sourceTree = "<group>"; };
+		A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.9.2.a; sourceTree = "<group>"; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		DBBE8ACC19E857A800FA218E /* OTMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMenuItem.h; sourceTree = "<group>"; };
 		DBBE8ACD19E857A800FA218E /* OTMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuItem.m; sourceTree = "<group>"; };
@@ -935,6 +943,7 @@
 				0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */,
 				A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */,
 				A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */,
+				A8DA9E1D1E3B4BF30041ADB6 /* libFlurry_7.9.2.a in Frameworks */,
 				6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */,
 				6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */,
 				0A9FEBC21C22B8A0009943D2 /* SpeechKit.framework in Frameworks */,
@@ -2323,8 +2332,12 @@
 		A809BAA219E97E2400A45AC9 /* Flurry */ = {
 			isa = PBXGroup;
 			children = (
-				1E75AB5F1E3B42930055613E /* libFlurry_7.9.2.a */,
-				1E2432B61DA6BED3000EF74F /* Flurry.h */,
+				A8DA9E151E3B4BF30041ADB6 /* Flurry.h */,
+				A8DA9E161E3B4BF30041ADB6 /* FlurryEmpty.m */,
+				A8DA9E171E3B4BF30041ADB6 /* FlurrySessionBuilder.h */,
+				A8DA9E181E3B4BF30041ADB6 /* FlurryWatch.h */,
+				A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */,
+				A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */,
 			);
 			path = Flurry;
 			sourceTree = "<group>";
@@ -2777,6 +2790,7 @@
 				2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */,
 				0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */,
 				45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */,
+				A8DA9E1B1E3B4BF30041ADB6 /* FlurryEmpty.m in Sources */,
 				1E8845971D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.m in Sources */,
 				1EC6F3C71D53DBEF0026766D /* OTActiveFeedItemViewController.m in Sources */,
 				2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */,
@@ -2849,6 +2863,7 @@
 				1E2F29101D4BD3C600ABC68A /* OTGroupedTableDataSourceBehavior.m in Sources */,
 				1E2F290C1D4BC2A000ABC68A /* OTCloseKeyboardOnTapBehavior.m in Sources */,
 				1EC75C061D849AE800887F6F /* OTMapDelegateProxyBehavior.m in Sources */,
+				A8DA9E1C1E3B4BF30041ADB6 /* FlurryWatchEmpty.m in Sources */,
 				1E78B7ED1D513ECA0008C00E /* OTTourUI.m in Sources */,
 				1E0972C31D555586006E1FAD /* OTInviteBehavior.m in Sources */,
 				45B3F8F61C74F40B00DCF2EC /* OTFeedItemAuthor.m in Sources */,
