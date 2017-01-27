@@ -443,7 +443,6 @@
 		1E22727C1E2E25270053365E /* OTAssociationsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAssociationsService.h; sourceTree = "<group>"; };
 		1E22727D1E2E25270053365E /* OTAssociationsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAssociationsService.m; sourceTree = "<group>"; };
 		1E2432B61DA6BED3000EF74F /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		1E2432B71DA6BED3000EF74F /* libFlurry_7.6.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.6.6.a; sourceTree = "<group>"; };
 		1E2432BA1DA6CC8B000EF74F /* OTAddressBookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAddressBookItem.h; path = AddressBook/OTAddressBookItem.h; sourceTree = "<group>"; };
 		1E2432BB1DA6CC8B000EF74F /* OTAddressBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAddressBookItem.m; path = AddressBook/OTAddressBookItem.m; sourceTree = "<group>"; };
 		1E2432BC1DA6CC8B000EF74F /* OTAddressBookPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAddressBookPhone.h; path = AddressBook/OTAddressBookPhone.h; sourceTree = "<group>"; };
@@ -2299,12 +2298,8 @@
 		A809BAA219E97E2400A45AC9 /* Flurry */ = {
 			isa = PBXGroup;
 			children = (
-				A8DA9E151E3B4BF30041ADB6 /* Flurry.h */,
-				A8DA9E161E3B4BF30041ADB6 /* FlurryEmpty.m */,
-				A8DA9E171E3B4BF30041ADB6 /* FlurrySessionBuilder.h */,
-				A8DA9E181E3B4BF30041ADB6 /* FlurryWatch.h */,
-				A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */,
-				A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */,
+				1E75AB5F1E3B42930055613E /* libFlurry_7.9.2.a */,
+				1E2432B61DA6BED3000EF74F /* Flurry.h */,
 			);
 			path = Flurry;
 			sourceTree = "<group>";
