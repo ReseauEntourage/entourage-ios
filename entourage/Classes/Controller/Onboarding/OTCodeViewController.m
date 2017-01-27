@@ -64,7 +64,7 @@
 #pragma mark - Private
 
 - (void)addRegenerateBarButton {
-    UIBarButtonItem *regenerateButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doRegenerateCode").capitalizedString withTarget:self andAction:@selector(doRegenerateCode) colored:[UIColor whiteColor]];
+    UIBarButtonItem *regenerateButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doRegenerateCode") withTarget:self andAction:@selector(doRegenerateCode) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:regenerateButton];
 }
 
