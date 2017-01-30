@@ -12,6 +12,7 @@
 @interface OTAssociationsService : NSObject
 
 - (void)getAllAssociationsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
-- (void)updateAssociation:(OTAssociation *)association isDefault:(BOOL)isDefault withSuccess:(void (^)(OTAssociation *))success failure:(void (^)(NSError *))failure;
+- (void)addAssociation:(OTAssociation *)association withSuccess:(void (^)(OTAssociation *))success failure:(void (^)(NSError *))failure;
+- (void)deleteAssociation:(OTAssociation *)association withSuccess:(void (^)(OTAssociation *))success failure:(void (^)(NSError *))failure;
 
 @end
