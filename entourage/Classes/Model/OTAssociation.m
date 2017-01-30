@@ -32,4 +32,24 @@ NSString *const kKeyDefault = @"default";
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:self.aid forKey:kKeyId];
+    [encoder encodeObject:self.name forKey:kKeyAssociationName];
+    [encoder encodeObject:self.smallLogoUrl forKey:kKeyAssociationSmallLogoUrl];
+    [encoder encodeObject:self.largeLogoUrl forKey:kKeyAssociationLargeLogoUrl];
+    [encoder encodeBool:self.isDefault forKey:kKeyDefault];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init]))
+    {
+        self.aid = [decoder decodeObjectForKey:kKeyId];
+        self.name = [decoder decodeObjectForKey:kKeyAssociationName];
+        self.smallLogoUrl = [decoder decodeObjectForKey:kKeyAssociationSmallLogoUrl];
+        self.largeLogoUrl = [decoder decodeObjectForKey:kKeyAssociationLargeLogoUrl];
+        self.isDefault = [decoder decodeBoolForKey:kKeyDefault];
+    }
+    return self;
+}
+
 @end

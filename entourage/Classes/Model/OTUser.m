@@ -24,6 +24,7 @@ NSString *const kKeyTourCount = @"tour_count";
 NSString *const kKeyEntourageCount = @"entourage_count";
 NSString *const kKeyEncounterCount = @"encounter_count";
 NSString *const kKeyOrganization = @"organization";
+NSString *const kKeyPartner = @"partner";
 
 @implementation OTUser
 
@@ -45,6 +46,7 @@ NSString *const kKeyOrganization = @"organization";
     _entourageCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEntourageCount defaultValue:0];
     _encounterCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEncounterCount];
     _organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
+    _partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kKeyPartner]];
   }
   return self;
 }
@@ -86,6 +88,7 @@ NSString *const kKeyOrganization = @"organization";
     [encoder encodeObject:self.entourageCount forKey:kKeyEntourageCount];
     [encoder encodeObject:self.encounterCount forKey:kKeyEncounterCount];
     [encoder encodeObject:self.organization forKey:kKeyOrganization];
+    [encoder encodeObject:self.partner forKey:kKeyPartner];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -105,6 +108,7 @@ NSString *const kKeyOrganization = @"organization";
     self.entourageCount = [decoder decodeObjectForKey:kKeyEntourageCount];
     self.encounterCount = [decoder decodeObjectForKey:kKeyEncounterCount];
     self.organization = [decoder decodeObjectForKey:kKeyOrganization];
+    self.partner = [decoder decodeObjectForKey:kKeyPartner];
   }
   return self;
 }
