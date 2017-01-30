@@ -42,6 +42,7 @@
             break;
         case FeedItemStateOpen:
             title = OTLocalizedString(@"item_option_freeze");
+            selector = @selector(doCloseFeedItem);
             self.btnNextState.hidden = NO;
             break;
         case FeedItemStateClosed:
