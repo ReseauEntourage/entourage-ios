@@ -33,10 +33,23 @@ NSString *const kAssociations = @"partners";
      }];
 }
 
-- (void)updateAssociation:(OTAssociation *)association isDefault:(BOOL)isDefault withSuccess:(void (^)(OTAssociation *))success failure:(void (^)(NSError *))failure {
-        NSString *url = [NSString stringWithFormat:API_URL_UPDATE_DEFAULT, [[NSUserDefaults standardUserDefaults] currentUser].sid, association.aid, [[NSUserDefaults standardUserDefaults] currentUser].token];
-    NSDictionary *parameters = @{ @"partner": @{ @"default": @(isDefault) } };
-    [[OTHTTPRequestManager sharedInstance] PUTWithUrl:url andParameters:parameters andSuccess:^(id responseObject) {
+- (void)addAssociation:(OTAssociation *)association withSuccess:(void (^)(OTAssociation *))success failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat:API_URL_ADD_PARTNER, [[NSUserDefaults standardUserDefaults] currentUser].sid, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSDictionary *parameters = @{ @"partner": @{ @"id": association.aid } };
+    [[OTHTTPRequestManager sharedInstance] POSTWithUrl:url andParameters:parameters andSuccess:^(id responseObject) {
+        NSDictionary *data = responseObject;
+        OTAssociation *updated = [[OTAssociation alloc] initWithDictionary:data];
+        if (success)
+            success(updated);
+    } andFailure:^(NSError *error) {
+        if (failure)
+            failure(error);
+    }];
+}
+
+- (void)deleteAssociation:(OTAssociation *)association withSuccess:(void (^)(OTAssociation *))success failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat:API_URL_DELETE_PARTNER, [[NSUserDefaults standardUserDefaults] currentUser].sid, association.aid, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    [[OTHTTPRequestManager sharedInstance] DELETEWithUrl:url andParameters:nil andSuccess:^(id responseObject) {
         NSDictionary *data = responseObject;
         OTAssociation *updated = [[OTAssociation alloc] initWithDictionary:data];
         if (success)

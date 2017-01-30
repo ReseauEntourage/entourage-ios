@@ -55,11 +55,11 @@
         return;
     [SVProgressHUD show];
     if(self.originalAssociation) {
-        [[OTAssociationsService new] updateAssociation:self.originalAssociation isDefault:NO withSuccess:^(OTAssociation *updated) {
+        [[OTAssociationsService new] deleteAssociation:self.originalAssociation withSuccess:^(OTAssociation *updated) {
             if(currentAssociation == nil)
                 [SVProgressHUD dismiss];
             else
-                [[OTAssociationsService new] updateAssociation:currentAssociation isDefault:YES withSuccess:^(OTAssociation *nUpdated) {
+                [[OTAssociationsService new] addAssociation:currentAssociation withSuccess:^(OTAssociation *nUpdated) {
                     [SVProgressHUD dismiss];
                 } failure:^(NSError *error) {
                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"update_association_error")];
@@ -69,7 +69,7 @@
         }];
     }
     else if(currentAssociation != nil)
-        [[OTAssociationsService new] updateAssociation:currentAssociation isDefault:YES withSuccess:^(OTAssociation *nUpdated) {
+        [[OTAssociationsService new] addAssociation:currentAssociation withSuccess:^(OTAssociation *nUpdated) {
             [SVProgressHUD dismiss];
         } failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"update_association_error")];
