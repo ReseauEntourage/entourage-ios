@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "OTOrganization.h"
+#import "OTAssociation.h"
 
 extern NSString *const kKeyToken;
 
@@ -31,6 +32,7 @@ extern NSString *const kKeyToken;
 @property (strong, nonatomic) NSNumber *entourageCount;
 @property (strong, nonatomic) NSNumber *encounterCount;
 @property (strong, nonatomic) OTOrganization *organization;
+@property (strong, nonatomic) OTAssociation *partner;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;

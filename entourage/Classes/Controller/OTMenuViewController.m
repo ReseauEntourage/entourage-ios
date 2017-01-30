@@ -83,9 +83,8 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (void)viewDidLayoutSubviews {
     [self.profileButton setupAsProfilePictureFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
-#warning TODO remove this (just for testing)
-    //self.imgAssociation.hidden = YES;
-    [self.imgAssociation setupFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
+    self.imgAssociation.hidden = self.currentUser.partner == nil;
+    [self.imgAssociation setupFromUrl:self.currentUser.partner.smallLogoUrl withPlaceholder:@"user"];
 }
 
 - (void)dealloc {
