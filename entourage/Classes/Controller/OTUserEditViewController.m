@@ -332,7 +332,7 @@ typedef NS_ENUM(NSInteger) {
 - (void)setupSummaryProfileCell:(UITableViewCell *)cell {
     UIImageView *imgAssociation = [cell viewWithTag:99];
     imgAssociation.hidden = self.user.partner == nil;
-    [imgAssociation setupFromUrl:self.user.partner.smallLogoUrl withPlaceholder:@"user"];
+    [imgAssociation setupFromUrl:self.user.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     
     UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
     [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];

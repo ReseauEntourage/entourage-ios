@@ -224,7 +224,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 - (void)updateSupportedPartner:(NSNotification *)notification {
     self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     self.imgAssociation.hidden = self.currentUser.partner == nil;
-    [self.imgAssociation setupFromUrl:self.currentUser.partner.smallLogoUrl withPlaceholder:@"user"];
+    [self.imgAssociation setupFromUrl:self.currentUser.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
 }
 
 @end

@@ -38,7 +38,7 @@
 - (void)configureWithMessage:(OTFeedItemMessage *)message {
     self.lblUserName.text = message.userName;
     self.imgAssociation.hidden = message.partner == nil;
-    [self.imgAssociation setupFromUrl:message.partner.smallLogoUrl withPlaceholder:@"user"];
+    [self.imgAssociation setupFromUrl:message.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     [self.btnAvatar setupAsProfilePictureFromUrl:message.userAvatarURL];
     self.txtMessage.text = message.text;
 }
@@ -46,7 +46,7 @@
 - (void)configureWithJoin:(OTFeedItemJoiner *)joiner {
     self.lblUserName.text = joiner.displayName;
     self.imgAssociation.hidden = joiner.partner == nil;
-    [self.imgAssociation setupFromUrl:joiner.partner.smallLogoUrl withPlaceholder:@"user"];
+    [self.imgAssociation setupFromUrl:joiner.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl];
     self.txtMessage.text = [NSString stringWithFormat:@"\"%@\"", joiner.message];
 }

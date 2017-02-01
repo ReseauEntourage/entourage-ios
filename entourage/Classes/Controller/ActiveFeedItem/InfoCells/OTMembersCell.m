@@ -15,7 +15,7 @@
 
 - (void)configureWith:(OTFeedItemJoiner *)item {
     self.imgAssociation.hidden = item.partner == nil;
-    [self.imgAssociation setupFromUrl:item.partner.smallLogoUrl withPlaceholder:@"user"];
+    [self.imgAssociation setupFromUrl:item.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     self.lblDisplayName.text = item.displayName;
     [self.btnProfile setupAsProfilePictureFromUrl:item.avatarUrl];
 }
