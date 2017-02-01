@@ -33,6 +33,7 @@
 #define kNotificationShowCurrentLocation "NotificationCurrentLocation"
 
 #define kNotificationProfilePictureUpdated "NotificationProfilePictureUpdated"
+#define kNotificationSupportedPartnerUpdated "NotificationSupportedPartnerUpdated"
 #define kNotificationEntourageChanged @"NotificationEntourageChanged"
 #define kNotificationEntourageChangedEntourageKey @"NotificationEntourageChangedEntourageKey"
 

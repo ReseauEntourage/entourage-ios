@@ -12,6 +12,8 @@
 #import "OTTableDataSourceBehavior.h"
 #import "OTAssociation.h"
 #import "OTConsts.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTAssociationsSourceBehavior ()
 
@@ -49,18 +51,28 @@
     }];
 }
 
-- (void)updateAssociation {
+- (void)updateAssociation:(void (^)())success {
     OTAssociation *currentAssociation = [self getCurrentAssociation];
-    if(currentAssociation == self.originalAssociation)
+    if(currentAssociation == self.originalAssociation) {
+        if(success)
+            success();
         return;
+    }
     [SVProgressHUD show];
     if(self.originalAssociation) {
         [[OTAssociationsService new] deleteAssociation:self.originalAssociation withSuccess:^(OTAssociation *updated) {
-            if(currentAssociation == nil)
+            [self updateUserAssociation:nil];
+            if(currentAssociation == nil) {
                 [SVProgressHUD dismiss];
+                if(success)
+                    success();
+            }
             else
                 [[OTAssociationsService new] addAssociation:currentAssociation withSuccess:^(OTAssociation *nUpdated) {
+                    [self updateUserAssociation:currentAssociation];
                     [SVProgressHUD dismiss];
+                    if(success)
+                        success();
                 } failure:^(NSError *error) {
                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"update_association_error")];
                 }];
@@ -70,7 +82,10 @@
     }
     else if(currentAssociation != nil)
         [[OTAssociationsService new] addAssociation:currentAssociation withSuccess:^(OTAssociation *nUpdated) {
+            [self updateUserAssociation:currentAssociation];
             [SVProgressHUD dismiss];
+            if(success)
+                success();
         } failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"update_association_error")];
         }];
@@ -89,6 +104,15 @@
 - (OTAssociation *)getCurrentAssociation {
     NSArray *defaultAssociations = [self.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isDefault==1"]];
     return defaultAssociations.count > 0 ? defaultAssociations.firstObject : nil;
+}
+
+- (void)updateUserAssociation:(OTAssociation *)association {
+    self.originalAssociation = association;
+    OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
+    user.partner = association;
+    [NSUserDefaults standardUserDefaults].currentUser = user;
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationSupportedPartnerUpdated object:self];
 }
 
 @end

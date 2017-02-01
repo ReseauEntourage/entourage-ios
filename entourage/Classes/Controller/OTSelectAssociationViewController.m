@@ -58,7 +58,9 @@
 }
 
 - (void)saveAssociation {
-    [self.dataSource updateAssociation];
+    [self.dataSource updateAssociation:^() {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
 
 @end
