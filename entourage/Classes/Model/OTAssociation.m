@@ -18,6 +18,8 @@ NSString *const kKeyDefault = @"default";
 @implementation OTAssociation
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
+    if(dictionary == nil || [dictionary isKindOfClass:[NSNull class]])
+        return nil;
     self = [super init];
     if (self)
     {

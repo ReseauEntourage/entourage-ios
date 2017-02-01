@@ -37,9 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-#warning TODO remove this (just for testing)
-    [self.imgAssociation setupFromUrl:self.feedItem.author.avatarUrl withPlaceholder:@"user"];
-
+    self.imgAssociation.hidden = self.feedItem.author.partner == nil;
+    [self.imgAssociation setupFromUrl:self.feedItem.author.partner.smallLogoUrl withPlaceholder:@"user"];
     [self.summaryProviderBehavior configureWith:self.feedItem];
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.inviteBehavior configureWith:self.feedItem];

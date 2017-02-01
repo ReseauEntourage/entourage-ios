@@ -16,6 +16,7 @@
 #define kWSUserName @"display_name"
 #define kWSAvatarURL @"avatar_url"
 #define kWSID @"id"
+#define kWSPartner @"partner"
 
 @implementation OTFeedItemMessage
 
@@ -34,6 +35,7 @@
             self.userAvatarURL = [user stringForKey:kWSAvatarURL];
             self.uID = [user numberForKey:kWSID];
             self.userName = [user stringForKey:kWSUserName];
+            self.partner = [[OTAssociation alloc] initWithDictionary:[user objectForKey:kWSPartner]];
         }
     }
     return self;

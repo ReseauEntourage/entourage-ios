@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "OTFeedItemTimelinePoint.h"
+#import "OTAssociation.h"
 
 @interface OTFeedItemMessage : OTFeedItemTimelinePoint
 
@@ -15,6 +16,7 @@
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *userAvatarURL;
 @property (nonatomic, strong) NSNumber *uID;
+@property (nonatomic, strong) OTAssociation *partner;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

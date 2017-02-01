@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTAssociation.h"
 
 @interface OTFeedItemAuthor : NSObject
 
 @property (strong, nonatomic) NSNumber *uID;
 @property (strong, nonatomic) NSString *avatarUrl;
 @property (strong, nonatomic) NSString *displayName;
+@property (strong, nonatomic) OTAssociation *partner;
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 
