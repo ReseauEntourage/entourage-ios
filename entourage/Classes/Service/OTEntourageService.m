@@ -256,11 +256,8 @@ extern NSString *kUsers;
      {
          NSDictionary *data = responseObject;
          NSArray *messages = [self messagesFromDictionary:data];
-         
          if (success)
-         {
              success(messages);
-         }
      }
      andFailure:^(NSError *error)
      {

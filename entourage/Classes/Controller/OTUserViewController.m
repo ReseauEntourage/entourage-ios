@@ -226,11 +226,9 @@ typedef NS_ENUM(NSInteger) {
 #define ASSOCIATION_IMAGE 2
 
 - (void)setupSummaryProfileCell:(UITableViewCell *)cell {
-#warning TODO remove this (just for testing)
     UIImageView *imgAssociation = [cell viewWithTag:99];
-    //self.imgAssociation.hidden = YES;
-    [imgAssociation setupFromUrl:[NSUserDefaults standardUserDefaults].currentUser.avatarURL withPlaceholder:@"user"];
-
+    imgAssociation.hidden = self.user.partner == nil;
+    [imgAssociation setupFromUrl:self.user.partner.smallLogoUrl withPlaceholder:@"user"];
     
     UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
     [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];

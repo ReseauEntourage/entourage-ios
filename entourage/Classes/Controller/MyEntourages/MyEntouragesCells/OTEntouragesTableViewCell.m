@@ -10,7 +10,6 @@
 #import "UIColor+entourage.h"
 #import "OTBadgeNumberService.h"
 #import "OTTableDataSourceBehavior.h"
-#import "UIImageView+entourage.h"
 
 @implementation OTEntouragesTableViewCell
 
@@ -20,14 +19,12 @@
 }
 
 - (void)configureWith:(OTFeedItem *)item {
-#warning TODO remove this (just for testing)
-    [self.imgAssociation setupFromUrl:item.author.avatarUrl withPlaceholder:@"user"];
-    
     self.summaryProvider.lblTitle = self.lblTitle;
     self.summaryProvider.lblDescription = self.lblDescription;
     self.summaryProvider.lblUserCount = self.lblNumberOfUsers;
     self.summaryProvider.btnAvatar = self.btnProfilePicture;
     self.summaryProvider.lblTimeDistance = self.lblTimeDistance;
+    self.summaryProvider.imgAssociation = self.imgAssociation;
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
     self.lblNumberOfUsers.text = [@"+" stringByAppendingString:self.lblNumberOfUsers.text];

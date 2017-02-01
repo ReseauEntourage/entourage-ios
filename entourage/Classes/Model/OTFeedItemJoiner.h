@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "OTFeedItemTimelinePoint.h"
 #import "OTFeedItem.h"
+#import "OTAssociation.h"
 
 @interface OTFeedItemJoiner : OTFeedItemTimelinePoint
 
@@ -17,6 +18,7 @@
 @property (strong, nonatomic) NSString *message;
 @property (strong, nonatomic) NSString *avatarUrl;
 @property (strong, nonatomic) OTFeedItem *feedItem;
+@property (strong, nonatomic) OTAssociation *partner;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)arrayForWebservice:(NSArray *)joiners;

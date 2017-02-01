@@ -14,9 +14,8 @@
 @implementation OTMembersCell
 
 - (void)configureWith:(OTFeedItemJoiner *)item {
-#warning TODO remove this (just for testing)
-    [self.imgAssociation setupFromUrl:item.avatarUrl withPlaceholder:@"user"];
-    
+    self.imgAssociation.hidden = item.partner == nil;
+    [self.imgAssociation setupFromUrl:item.partner.smallLogoUrl withPlaceholder:@"user"];
     self.lblDisplayName.text = item.displayName;
     [self.btnProfile setupAsProfilePictureFromUrl:item.avatarUrl];
 }

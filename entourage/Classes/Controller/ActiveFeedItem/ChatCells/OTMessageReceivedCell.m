@@ -37,20 +37,16 @@
 
 - (void)configureWithMessage:(OTFeedItemMessage *)message {
     self.lblUserName.text = message.userName;
-    
-#warning TODO remove this (just for testing)
-    [self.imgAssociation setupFromUrl:message.userAvatarURL withPlaceholder:@"user"];
-    
+    self.imgAssociation.hidden = message.partner == nil;
+    [self.imgAssociation setupFromUrl:message.partner.smallLogoUrl withPlaceholder:@"user"];
     [self.btnAvatar setupAsProfilePictureFromUrl:message.userAvatarURL];
     self.txtMessage.text = message.text;
 }
 
 - (void)configureWithJoin:(OTFeedItemJoiner *)joiner {
     self.lblUserName.text = joiner.displayName;
-    
-#warning TODO remove this (just for testing)
-    [self.imgAssociation setupFromUrl:joiner.avatarUrl withPlaceholder:@"user"];
-    
+    self.imgAssociation.hidden = joiner.partner == nil;
+    [self.imgAssociation setupFromUrl:joiner.partner.smallLogoUrl withPlaceholder:@"user"];
     [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl];
     self.txtMessage.text = [NSString stringWithFormat:@"\"%@\"", joiner.message];
 }

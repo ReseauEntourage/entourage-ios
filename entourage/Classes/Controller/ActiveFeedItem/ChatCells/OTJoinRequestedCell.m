@@ -31,10 +31,8 @@
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
     OTFeedItemJoiner *joiner = (OTFeedItemJoiner *)timelinePoint;
-
-#warning TODO remove this (just for testing)
-    [self.imgAssociation setupFromUrl:joiner.avatarUrl withPlaceholder:@"user"];
-
+    self.imgAssociation.hidden = joiner.partner == nil;
+    [self.imgAssociation setupFromUrl:joiner.partner.smallLogoUrl withPlaceholder:@"user"];
     [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl withPlaceholder:@"user"];
     self.lblUserName.text = joiner.displayName;
     self.lblMessage.text = @"";

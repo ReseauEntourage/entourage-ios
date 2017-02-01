@@ -173,15 +173,11 @@
     UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
-    
-#warning TODO remove this (just for testing)
     UIImageView *imgAssociation = [cell viewWithTag:99];
-    //self.imgAssociation.hidden = YES;
-    [imgAssociation setupFromUrl:item.author.avatarUrl withPlaceholder:@"user"];
-
     
     OTSummaryProviderBehavior *summaryBehavior = [OTSummaryProviderBehavior new];
     summaryBehavior.lblTimeDistance = timeLocationLabel;
+    summaryBehavior.imgAssociation = imgAssociation;
     [summaryBehavior configureWith:item];
     
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];

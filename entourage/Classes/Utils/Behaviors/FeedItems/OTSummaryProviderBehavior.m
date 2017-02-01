@@ -15,6 +15,7 @@
 #import "OTUser.h"
 #import "UIButton+entourage.h"
 #import "NSDate+ui.h"
+#import "UIImageView+entourage.h"
 
 @interface OTSummaryProviderBehavior ()
 
@@ -49,6 +50,8 @@
         double distance = [uiDelegate distance];
         self.lblTimeDistance.text = [self getDistance:distance with:feedItem.creationDate];
     }
+    self.imgAssociation.hidden = feedItem.author.partner == nil;
+    [self.imgAssociation setupFromUrl:feedItem.author.partner.smallLogoUrl withPlaceholder:@"user"];
 }
 
 - (void)clearConfiguration {
@@ -57,6 +60,7 @@
     self.lblUserCount = nil;
     self.btnAvatar = nil;
     self.lblTimeDistance = nil;
+    self.imgAssociation = nil;
     [self configureWith:nil];
 }
 
