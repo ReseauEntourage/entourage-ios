@@ -16,7 +16,6 @@
 #import "UIViewController+menu.h"
 #import "UITextField+indentation.h"
 #import "UIBarButtonItem+factory.h"
-#import "OTCountSpeechBehavior.h"
 #import "SVProgressHUD.h"
 #import "OTEntourageDisclaimerBehavior.h"
 
@@ -26,8 +25,6 @@
 @property (nonatomic, weak) IBOutlet OTTextWithCount *titleTextView;
 @property (nonatomic, weak) IBOutlet OTTextWithCount *descriptionTextView;
 
-@property (nonatomic, weak) IBOutlet OTCountSpeechBehavior *titleSpeechBehavior;
-@property (nonatomic, weak) IBOutlet OTCountSpeechBehavior *descriptionSpeechBehavior;
 @property (nonatomic, weak) IBOutlet OTEntourageDisclaimerBehavior *disclaimer;
 
 @end
@@ -38,8 +35,6 @@
     [super viewDidLoad];
     
     [self setupUI];
-    [self.titleSpeechBehavior initialize];
-    [self.descriptionSpeechBehavior initialize];
     [self setupCloseModal];
     
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEntourage:) colored:[UIColor appOrangeColor]];

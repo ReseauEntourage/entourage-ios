@@ -12,7 +12,6 @@
 #import "UIColor+entourage.h"
 #import "OTStateInfoDelegate.h"
 #import "OTSummaryProviderBehavior.h"
-#import "OTSpeechBehavior.h"
 #import "OTInviteBehavior.h"
 #import "OTStatusChangedBehavior.h"
 #import "OTTapViewBehavior.h"
@@ -30,7 +29,6 @@
 @interface OTActiveFeedItemViewController ()
 
 @property (strong, nonatomic) IBOutlet OTSummaryProviderBehavior *summaryProvider;
-@property (strong, nonatomic) IBOutlet OTSpeechBehavior *speechBehavior;
 @property (strong, nonatomic) IBOutlet OTInviteBehavior *inviteBehavior;
 @property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
 @property (strong, nonatomic) IBOutlet OTTapViewBehavior *titleTapBehavior;
@@ -49,7 +47,6 @@
     [super viewDidLoad];
     
     [self.summaryProvider configureWith:self.feedItem];
-    [self.speechBehavior initialize];
     [self.inviteBehavior configureWith:self.feedItem];
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.titleTapBehavior initialize];
@@ -110,7 +107,6 @@
     [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.txtChat.text withSuccess:^(OTFeedItemMessage *message) {
         [SVProgressHUD dismiss];
         self.txtChat.text = @"";
-        [self.speechBehavior updateRecordButton];
         [[OTMessagingService new] readFor:self.feedItem onDataSource:self.dataSource];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];

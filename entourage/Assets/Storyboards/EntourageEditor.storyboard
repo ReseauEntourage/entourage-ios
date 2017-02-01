@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QW3-Z2-faC">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QW3-Z2-faC">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,16 +23,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6z5-qg-bZE">
+                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQF-gw-8gY">
+                                        <rect key="frame" x="0.0" y="15" width="383" height="48"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="87m-MA-zx8">
+                                                <rect key="frame" x="12" y="13" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="22" id="Hnr-hh-lse"/>
                                                     <constraint firstAttribute="height" constant="22" id="Ou7-4Y-4k4"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ma position" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DA7-nI-rbo">
+                                                <rect key="frame" x="42" y="15" width="80" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="VTn-5S-KdL"/>
                                                     <constraint firstAttribute="width" constant="80" id="kbi-Rq-74G"/>
@@ -39,6 +46,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TMq-vF-SkB">
+                                                <rect key="frame" x="130" y="0.0" width="237" height="48"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                 <state key="normal">
                                                     <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -62,6 +70,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wqv-Jw-6OX" customClass="OTTextWithCount">
+                                        <rect key="frame" x="0.0" y="78" width="383" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="TPW-84-ARK"/>
@@ -76,6 +85,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DQu-fZ-3qK" customClass="OTTextWithCount">
+                                        <rect key="frame" x="0.0" y="193" width="383" height="184"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="184" id="w44-b6-PaK"/>
@@ -89,35 +99,17 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaS-cA-NpN">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="Erz-dj-X0D"/>
-                                            <constraint firstAttribute="width" constant="26" id="c7n-zJ-pKt"/>
-                                        </constraints>
-                                        <state key="normal" image="mic"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ff7-J0-M6b">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="3UG-xY-EyU"/>
-                                            <constraint firstAttribute="width" constant="26" id="7pQ-Di-kKQ"/>
-                                        </constraints>
-                                        <state key="normal" image="mic"/>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="CQF-gw-8gY" secondAttribute="trailing" id="6Ks-MP-LPa"/>
                                     <constraint firstItem="Wqv-Jw-6OX" firstAttribute="top" secondItem="CQF-gw-8gY" secondAttribute="bottom" constant="15" id="6oX-TO-tE6"/>
                                     <constraint firstAttribute="bottom" secondItem="CQF-gw-8gY" secondAttribute="bottom" priority="999" constant="377" id="DwI-uQ-JY3"/>
-                                    <constraint firstAttribute="trailing" secondItem="iaS-cA-NpN" secondAttribute="trailing" constant="12" id="G3P-zf-feR"/>
                                     <constraint firstItem="CQF-gw-8gY" firstAttribute="top" secondItem="6z5-qg-bZE" secondAttribute="top" constant="15" id="GEF-S2-cnd"/>
                                     <constraint firstItem="Wqv-Jw-6OX" firstAttribute="leading" secondItem="6z5-qg-bZE" secondAttribute="leading" id="L1w-eO-fG3"/>
                                     <constraint firstAttribute="trailing" secondItem="DQu-fZ-3qK" secondAttribute="trailing" id="U16-ZV-ifC"/>
-                                    <constraint firstItem="iaS-cA-NpN" firstAttribute="top" secondItem="Wqv-Jw-6OX" secondAttribute="top" constant="12" id="ZdN-d2-YzO"/>
-                                    <constraint firstItem="ff7-J0-M6b" firstAttribute="top" secondItem="DQu-fZ-3qK" secondAttribute="top" constant="12" id="c2I-rh-q4e"/>
                                     <constraint firstAttribute="trailing" secondItem="Wqv-Jw-6OX" secondAttribute="trailing" id="dfy-K3-E8V"/>
                                     <constraint firstItem="CQF-gw-8gY" firstAttribute="leading" secondItem="6z5-qg-bZE" secondAttribute="leading" id="jG9-Ir-58A"/>
-                                    <constraint firstAttribute="trailing" secondItem="ff7-J0-M6b" secondAttribute="trailing" constant="12" id="nRb-5h-RAD"/>
                                     <constraint firstItem="DQu-fZ-3qK" firstAttribute="leading" secondItem="6z5-qg-bZE" secondAttribute="leading" id="pFn-Ae-7It"/>
                                     <constraint firstItem="DQu-fZ-3qK" firstAttribute="top" secondItem="Wqv-Jw-6OX" secondAttribute="bottom" constant="15" id="wsI-pv-Irj"/>
                                     <constraint firstItem="CQF-gw-8gY" firstAttribute="centerX" secondItem="6z5-qg-bZE" secondAttribute="centerX" id="zAd-n2-Ci7"/>
@@ -135,34 +127,14 @@
                     <navigationItem key="navigationItem" id="6a8-wr-eGG"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="descriptionSpeechBehavior" destination="WHP-f1-Giq" id="bqz-13-pop"/>
                         <outlet property="descriptionTextView" destination="DQu-fZ-3qK" id="ggD-tM-Qq4"/>
                         <outlet property="disclaimer" destination="wTf-Kj-drU" id="QPW-FK-jXB"/>
                         <outlet property="locationButton" destination="TMq-vF-SkB" id="mAT-hP-ehE"/>
-                        <outlet property="titleSpeechBehavior" destination="E8P-ny-BW9" id="uGc-17-YT1"/>
                         <outlet property="titleTextView" destination="Wqv-Jw-6OX" id="ZWk-lL-eww"/>
                         <segue destination="Ymp-mL-8r9" kind="modal" identifier="DisclaimerSegue" id="KGd-gj-kcs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S0x-1A-brf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="E8P-ny-BW9" userLabel="Title Speech Behavior" customClass="OTCountSpeechBehavior">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="twoState" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <outlet property="btnRecord" destination="iaS-cA-NpN" id="AMP-p2-Gkq"/>
-                        <outlet property="txtOutput" destination="Wqv-Jw-6OX" id="UY5-O7-ACU"/>
-                    </connections>
-                </customObject>
-                <customObject id="WHP-f1-Giq" userLabel="Description Speech Behavior" customClass="OTCountSpeechBehavior">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="twoState" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <outlet property="btnRecord" destination="ff7-J0-M6b" id="e2x-XZ-HVN"/>
-                        <outlet property="txtOutput" destination="DQu-fZ-3qK" id="DXl-xa-KJe"/>
-                    </connections>
-                </customObject>
                 <customObject id="wTf-Kj-drU" customClass="OTEntourageDisclaimerBehavior">
                     <connections>
                         <outlet property="owner" destination="UEB-Je-c5t" id="AXD-gu-ml7"/>
@@ -194,7 +166,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QW3-Z2-faC" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hTu-zA-fKa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hTu-zA-fKa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -210,7 +182,6 @@
     </scenes>
     <resources>
         <image name="location" width="22" height="22"/>
-        <image name="mic" width="26" height="26"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

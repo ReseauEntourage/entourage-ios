@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="bGF-q3-B8f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="bGF-q3-B8f">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -136,7 +136,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                                <rect key="frame" x="124.5" y="233" width="126.5" height="18"/>
+                                <rect key="frame" x="121" y="233" width="133" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -738,21 +738,12 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qot-mm-bch">
-                                        <rect key="frame" x="334" y="222" width="26" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="HSi-zf-52z"/>
-                                            <constraint firstAttribute="width" constant="26" id="gRR-q1-r6f"/>
-                                        </constraints>
-                                        <state key="normal" image="mic"/>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="X2z-tq-equ" firstAttribute="leading" secondItem="Ptp-Pd-KU9" secondAttribute="leading" id="58y-hH-o5p"/>
                                     <constraint firstItem="KDZ-i8-4OP" firstAttribute="top" secondItem="X2z-tq-equ" secondAttribute="bottom" constant="15" id="69g-yh-RfH"/>
                                     <constraint firstItem="aZI-Uj-f65" firstAttribute="leading" secondItem="Ptp-Pd-KU9" secondAttribute="leading" id="6u5-xY-K5J"/>
                                     <constraint firstItem="2uf-2Y-z5H" firstAttribute="leading" secondItem="Ptp-Pd-KU9" secondAttribute="leading" constant="20" id="9RQ-I6-1hE"/>
-                                    <constraint firstItem="Qot-mm-bch" firstAttribute="top" secondItem="aZI-Uj-f65" secondAttribute="top" constant="15" id="FBd-Q0-coZ"/>
                                     <constraint firstAttribute="trailing" secondItem="aZI-Uj-f65" secondAttribute="trailing" id="FGn-mT-K73"/>
                                     <constraint firstItem="KDZ-i8-4OP" firstAttribute="centerX" secondItem="Ptp-Pd-KU9" secondAttribute="centerX" id="JRW-LR-lin"/>
                                     <constraint firstItem="KDZ-i8-4OP" firstAttribute="leading" secondItem="Ptp-Pd-KU9" secondAttribute="leading" constant="20" id="NOM-QN-PXj"/>
@@ -761,7 +752,6 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                     <constraint firstItem="a5N-Kb-CX4" firstAttribute="top" secondItem="KDZ-i8-4OP" secondAttribute="bottom" constant="15" id="UeL-ou-iiV"/>
                                     <constraint firstItem="a5N-Kb-CX4" firstAttribute="centerX" secondItem="Ptp-Pd-KU9" secondAttribute="centerX" id="UkO-Ls-QiW"/>
                                     <constraint firstAttribute="trailing" secondItem="a5N-Kb-CX4" secondAttribute="trailing" id="VnU-Qz-uEZ"/>
-                                    <constraint firstItem="Qot-mm-bch" firstAttribute="trailing" secondItem="aZI-Uj-f65" secondAttribute="trailing" constant="-15" id="Xa9-ib-RTo"/>
                                     <constraint firstAttribute="trailing" secondItem="X2z-tq-equ" secondAttribute="trailing" id="Z68-GO-Xda"/>
                                     <constraint firstItem="a5N-Kb-CX4" firstAttribute="leading" secondItem="Ptp-Pd-KU9" secondAttribute="leading" id="ZDp-fK-iQF"/>
                                     <constraint firstAttribute="trailing" secondItem="2uf-2Y-z5H" secondAttribute="trailing" constant="20" id="df1-vw-V5p"/>
@@ -791,7 +781,6 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                         <outlet property="locationButton" destination="gMv-MJ-BFQ" id="tyb-Gh-gv7"/>
                         <outlet property="messageTextView" destination="aZI-Uj-f65" id="jdc-zX-44f"/>
                         <outlet property="nameTextField" destination="a5N-Kb-CX4" id="gpj-ZW-kua"/>
-                        <outlet property="speechBehavior" destination="UaS-lC-hUC" id="hJF-qN-9YY"/>
                         <segue destination="8IU-nr-TCd" kind="modal" identifier="DisclaimerSegue" id="p9T-Ew-O9g"/>
                     </connections>
                 </viewController>
@@ -803,17 +792,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 </customObject>
                 <customObject id="t6J-hI-Hka" userLabel="Distributed Delegate" customClass="OTDistributedDelegateBehavior">
                     <connections>
-                        <outletCollection property="delegates" destination="UaS-lC-hUC" id="LFd-LJ-dGi"/>
                         <outletCollection property="delegates" destination="b2A-wG-Mz4" id="SLS-8Y-7FF"/>
-                    </connections>
-                </customObject>
-                <customObject id="UaS-lC-hUC" userLabel="Speech" customClass="OTCountSpeechBehavior">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="twoState" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <outlet property="btnRecord" destination="Qot-mm-bch" id="0s9-6u-b70"/>
-                        <outlet property="txtOutput" destination="aZI-Uj-f65" id="jP6-cf-gU1"/>
                     </connections>
                 </customObject>
             </objects>
@@ -1256,7 +1235,6 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
         <image name="filters" width="22" height="22"/>
         <image name="geoloc" width="22" height="22"/>
         <image name="location" width="22" height="22"/>
-        <image name="mic" width="26" height="26"/>
         <image name="newEntourages" width="180" height="39"/>
         <image name="pause" width="62" height="62"/>
         <image name="user" width="100" height="100"/>
