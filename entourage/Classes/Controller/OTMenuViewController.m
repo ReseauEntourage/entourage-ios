@@ -79,12 +79,12 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     [self.modifyLabel underline];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSupportedPartner:) name:@kNotificationSupportedPartnerUpdated object:nil];
 }
 
 - (void)viewDidLayoutSubviews {
     [self.profileButton setupAsProfilePictureFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
-    self.imgAssociation.hidden = self.currentUser.partner == nil;
-    [self.imgAssociation setupFromUrl:self.currentUser.partner.smallLogoUrl withPlaceholder:@"user"];
+    [self updateSupportedPartner:nil];
 }
 
 - (void)dealloc {
@@ -219,6 +219,12 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 - (void)profilePictureUpdated:(NSNotification *)notification {
     self.currentUser.avatarURL = [[[NSUserDefaults standardUserDefaults] currentUser] avatarURL];
     [self.profileButton setupAsProfilePictureFromUrl:self.currentUser.avatarURL withPlaceholder:@"user"];
+}
+
+- (void)updateSupportedPartner:(NSNotification *)notification {
+    self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    self.imgAssociation.hidden = self.currentUser.partner == nil;
+    [self.imgAssociation setupFromUrl:self.currentUser.partner.smallLogoUrl withPlaceholder:@"user"];
 }
 
 @end
