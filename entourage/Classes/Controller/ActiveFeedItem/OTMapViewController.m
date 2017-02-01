@@ -38,7 +38,7 @@
     [super viewDidLoad];
     
     self.imgAssociation.hidden = self.feedItem.author.partner == nil;
-    [self.imgAssociation setupFromUrl:self.feedItem.author.partner.smallLogoUrl withPlaceholder:@"user"];
+    [self.imgAssociation setupFromUrl:self.feedItem.author.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     [self.summaryProviderBehavior configureWith:self.feedItem];
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.inviteBehavior configureWith:self.feedItem];
