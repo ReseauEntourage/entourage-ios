@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qeH-DW-jd0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qeH-DW-jd0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -237,7 +238,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un peu de chaleur humaine." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPF-Wr-lQ0">
-                                <rect key="frame" x="48" y="257.5" width="280" height="58"/>
+                                <rect key="frame" x="48" y="255.5" width="280" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="fz7-U9-CWf"/>
                                     <constraint firstAttribute="width" constant="280" id="xZd-ZE-XbC"/>
@@ -247,7 +248,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entourageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Yl-vAI">
-                                <rect key="frame" x="150" y="167.5" width="75" height="75"/>
+                                <rect key="frame" x="150" y="165.5" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="Cf9-2C-NxO"/>
                                     <constraint firstAttribute="width" constant="75" id="FAX-3S-fc3"/>
@@ -271,29 +272,16 @@
                                     </mask>
                                 </variation>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nj7-QE-W4r">
-                                <rect key="frame" x="47" y="335.5" width="281" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Environnment = Prod (tapper pour changer)">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.041492548699985754" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="tapOnBetaButton" destination="d0v-Fd-fA9" eventType="touchUpInside" id="wEo-mO-ZTd"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tPf-h7-A0x" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-24" id="2Vp-D5-FqE"/>
-                            <constraint firstItem="1oI-JN-xF6" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="2aa-j0-ZQc"/>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="top" secondItem="H1V-0f-AM4" secondAttribute="bottom" constant="16" id="3UX-Fi-EuG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1oI-JN-xF6" secondAttribute="trailing" constant="-4" id="3mL-Se-1CC"/>
                             <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="tPf-h7-A0x" secondAttribute="bottom" id="3xU-2j-Y2K"/>
                             <constraint firstItem="H1V-0f-AM4" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="8s3-HQ-c36"/>
-                            <constraint firstItem="Nj7-QE-W4r" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="986-ds-H6k"/>
                             <constraint firstAttribute="trailingMargin" secondItem="H1V-0f-AM4" secondAttribute="trailing" constant="-4" id="Csv-YN-Mdp"/>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="D3N-XI-gkf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mwv-HX-aYM" secondAttribute="trailing" constant="-4" id="GLW-d3-S2n"/>
+                            <constraint firstItem="bPF-Wr-lQ0" firstAttribute="bottom" secondItem="60w-tv-tKx" secondAttribute="centerY" constant="-20" id="Hxe-we-Y2Z"/>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="I3C-ND-duB"/>
                             <constraint firstItem="tPf-h7-A0x" firstAttribute="top" secondItem="60w-tv-tKx" secondAttribute="topMargin" id="JXO-0O-Xrx"/>
                             <constraint firstItem="bPF-Wr-lQ0" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="Myk-g9-Wav"/>
@@ -303,26 +291,13 @@
                             <constraint firstItem="gln-Yl-vAI" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="bZY-KF-103"/>
                             <constraint firstItem="bPF-Wr-lQ0" firstAttribute="top" secondItem="gln-Yl-vAI" secondAttribute="bottom" constant="15" id="foC-Ie-EJD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwv-HX-aYM" secondAttribute="trailing" constant="-4" id="jBT-Ve-tb9"/>
-                            <constraint firstItem="Nj7-QE-W4r" firstAttribute="top" secondItem="bPF-Wr-lQ0" secondAttribute="bottom" constant="20" id="nXX-ig-9gb"/>
-                            <constraint firstItem="mwv-HX-aYM" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="pEF-SE-wlI"/>
-                            <constraint firstItem="bPF-Wr-lQ0" firstAttribute="trailing" secondItem="Nj7-QE-W4r" secondAttribute="trailing" id="qJL-qs-JgB"/>
-                            <constraint firstItem="Nj7-QE-W4r" firstAttribute="centerY" secondItem="60w-tv-tKx" secondAttribute="centerY" constant="20" id="qT2-dj-Sb5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1oI-JN-xF6" secondAttribute="trailing" constant="-4" id="tml-dp-994"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tPf-h7-A0x" secondAttribute="trailing" constant="-24" id="uiF-mg-U8H"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="xue-aD-E7N"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="2aa-j0-ZQc"/>
-                                <exclude reference="3mL-Se-1CC"/>
-                                <exclude reference="GLW-d3-S2n"/>
-                                <exclude reference="pEF-SE-wlI"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="oc7-iw-O1J"/>
                     <connections>
-                        <outlet property="betaButton" destination="Nj7-QE-W4r" id="R2H-cV-tkk"/>
                         <outlet property="loginButton" destination="mwv-HX-aYM" id="nPa-jz-z55"/>
                     </connections>
                 </viewController>

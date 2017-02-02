@@ -23,18 +23,21 @@ struct UserStorageKey {
 
   static let shared = ConfigurationManager()
   private var plist: NSDictionary?
-  private var prodPlist: NSDictionary
 
   private override init() {
-    guard let prodPlist = ConfigurationManager.plist(name: "prod") else {
-      fatalError("prod plist option not found")
-    }
-    self.plist = ConfigurationManager.plist(name: UserStorageKey.environment.userPreferences)
-    self.prodPlist = prodPlist
+    self.plist = ConfigurationManager.plist(name: ConfigurationManager.plistFileName)
+  }
+
+  private static var plistFileName: String {
+    #if BETA
+      return "staging"
+    #else
+      return "prod"
+    #endif
   }
 
   var environment: NSString {
-    return UserStorageKey.environment.userPreferences as NSString
+    return ConfigurationManager.plistFileName as NSString
   }
   
   var amazonAccessKey: NSString {
@@ -70,10 +73,7 @@ struct UserStorageKey {
   }
 
   private func configuration(forKey: String) -> NSString {
-    guard let api = plist?[forKey] as? NSString else {
-      return prodPlist[forKey] as! NSString
-    }
-    return api
+    return plist![forKey] as! NSString
   }
 
   private static func plist(name: String) -> NSDictionary? {
