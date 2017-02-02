@@ -20,10 +20,6 @@
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
 		0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */; };
 		0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */; };
-		1151E390B42372A35A6F2B32 /* Root.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1151E97661A4098002F7D819 /* Root.strings */; };
-		1151E8BE0D3CA27508364B9B /* Root.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1151EFA125A1BAF8A1B99583 /* Root.plist */; };
-		1151EE1685B7C17024C250CF /* Root.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1151E24449EA45F0F66E6CB0 /* Root.strings */; };
-		1151EFEFBD3FEAC342F17466 /* Root.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1151EF20AEA7D2BA81235504 /* Root.plist */; };
 		191FE92419E943D900C56BCA /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D962C7019E9277D00547687 /* OTAuthService.m */; };
 		191FE92819E945F200C56BCA /* OTEncounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 191FE92719E945F200C56BCA /* OTEncounter.m */; };
 		1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3BD36B19E964FC001687F9 /* OTMeetingCalloutViewController.m */; };
@@ -171,7 +167,6 @@
 		1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E90036D1D352C0B004E18BC /* UserPicture.storyboard */; };
 		1E993BFC1DDB514300621770 /* OTNoDataBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E993BFB1DDB514300621770 /* OTNoDataBehavior.m */; };
 		1E993BFF1DDB532E00621770 /* NSAttributedString+OTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E993BFE1DDB532E00621770 /* NSAttributedString+OTBuilder.m */; };
-		1E9B386E1DC88290000F9F3F /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386D1DC88290000F9F3F /* staging.plist */; };
 		1E9B38701DC882A1000F9F3F /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386F1DC882A1000F9F3F /* prod.plist */; };
 		1EA47A7F1DC1F4F300680858 /* OTSummaryInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA47A7E1DC1F4F300680858 /* OTSummaryInfoCell.m */; };
 		1EA4F3091DA199A300A3321C /* OTDistributedDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA4F3081DA199A300A3321C /* OTDistributedDelegateBehavior.m */; };
@@ -318,6 +313,7 @@
 		A8DA9E1B1E3B4BF30041ADB6 /* FlurryEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DA9E161E3B4BF30041ADB6 /* FlurryEmpty.m */; };
 		A8DA9E1C1E3B4BF30041ADB6 /* FlurryWatchEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */; };
 		A8DA9E1D1E3B4BF30041ADB6 /* libFlurry_7.9.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */; };
+		A8FD766E1E42FE9200063C5F /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386D1DC88290000F9F3F /* staging.plist */; };
 		DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8ACD19E857A800FA218E /* OTMenuItem.m */; };
 		DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */; };
 		DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD519E85EA400FA218E /* OTMyMeetingsViewController.m */; };
@@ -359,10 +355,6 @@
 		0AA4C0731C17283800DBBE11 /* OTAskMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAskMoreViewController.m; sourceTree = "<group>"; };
 		0ABD5F8B1B9EFF7E0069750D /* OTEncounterService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterService.h; sourceTree = "<group>"; };
 		0ABD5F8C1B9EFF960069750D /* OTEncounterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounterService.m; sourceTree = "<group>"; };
-		1151E7666C7D47579B7EAA83 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Root.strings; sourceTree = "<group>"; };
-		1151ECE4104453C75B687719 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Root.strings; sourceTree = "<group>"; };
-		1151EF20AEA7D2BA81235504 /* Root.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Root.plist; sourceTree = "<group>"; };
-		1151EFA125A1BAF8A1B99583 /* Root.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Root.plist; sourceTree = "<group>"; };
 		143551A9A6ED152DD5F655B3 /* Pods-entourageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.release.xcconfig"; sourceTree = "<group>"; };
 		15EC20D970ACDA904DB58803 /* Pods-entourageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.debug.xcconfig"; sourceTree = "<group>"; };
 		191FE92619E945F200C56BCA /* OTEncounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounter.h; sourceTree = "<group>"; };
@@ -986,14 +978,6 @@
 			name = Tour;
 			sourceTree = "<group>";
 		};
-		1151E0742ADBA935DD0D892F /* Beta */ = {
-			isa = PBXGroup;
-			children = (
-				1151E58B883103E9A9D856B9 /* Settings.bundle */,
-			);
-			path = Beta;
-			sourceTree = "<group>";
-		};
 		1151E3B39C332E9816C8BCC0 /* Environment */ = {
 			isa = PBXGroup;
 			children = (
@@ -1003,58 +987,14 @@
 			path = Environment;
 			sourceTree = "<group>";
 		};
-		1151E4019CE056293EAA29C1 /* Store */ = {
-			isa = PBXGroup;
-			children = (
-				1151E5A3A76D6AB1FFBBB581 /* Settings.bundle */,
-			);
-			path = Store;
-			sourceTree = "<group>";
-		};
 		1151E48E76645559D855AE36 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				A815528E1DBA211C00E2517A /* ConfigurationManager.swift */,
-				1151E0742ADBA935DD0D892F /* Beta */,
-				1151E4019CE056293EAA29C1 /* Store */,
-				1151E3B39C332E9816C8BCC0 /* Environment */,
 				A815528D1DBA211B00E2517A /* entourage-Bridging-Header.h */,
+				A815528E1DBA211C00E2517A /* ConfigurationManager.swift */,
+				1151E3B39C332E9816C8BCC0 /* Environment */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		1151E58B883103E9A9D856B9 /* Settings.bundle */ = {
-			isa = PBXGroup;
-			children = (
-				1151E5D3AB839C670383F4AA /* en.lproj */,
-				1151EF20AEA7D2BA81235504 /* Root.plist */,
-			);
-			path = Settings.bundle;
-			sourceTree = "<group>";
-		};
-		1151E5A3A76D6AB1FFBBB581 /* Settings.bundle */ = {
-			isa = PBXGroup;
-			children = (
-				1151EB27C78B4826C57AD0F6 /* en.lproj */,
-				1151EFA125A1BAF8A1B99583 /* Root.plist */,
-			);
-			path = Settings.bundle;
-			sourceTree = "<group>";
-		};
-		1151E5D3AB839C670383F4AA /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				1151E97661A4098002F7D819 /* Root.strings */,
-			);
-			path = en.lproj;
-			sourceTree = "<group>";
-		};
-		1151EB27C78B4826C57AD0F6 /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				1151E24449EA45F0F66E6CB0 /* Root.strings */,
-			);
-			path = en.lproj;
 			sourceTree = "<group>";
 		};
 		1D962C7219E9280800547687 /* Login */ = {
@@ -2430,7 +2370,6 @@
 				6B92CA9A19A7461C004E8C9B /* Sources */,
 				6B92CA9B19A7461C004E8C9B /* Frameworks */,
 				6B92CA9C19A7461C004E8C9B /* Resources */,
-				A8B1330D1DB129790000750B /* Copy Settings.bundle */,
 				34A63FBA43859415DF1BB474 /* [CP] Embed Pods Frameworks */,
 				03E4165EBDB7F78C344C0C78 /* [CP] Copy Pods Resources */,
 				A816301D1DDF1C9D0087E716 /* Fabric */,
@@ -2538,7 +2477,6 @@
 				45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */,
 				1E49BCB61D7D8B790024EDC1 /* Disclaimer.storyboard in Resources */,
 				1E78B7E91D5134D20008C00E /* SF-UI-Text-UltrathinItalic.otf in Resources */,
-				1E9B386E1DC88290000F9F3F /* staging.plist in Resources */,
 				45CE5A611C5241AA00F68C24 /* Images.xcassets in Resources */,
 				4507017E1CCF494800432548 /* JoinFeedItem.storyboard in Resources */,
 				1E4F561B1DB64BCE00AD0CAC /* LocationSelection.storyboard in Resources */,
@@ -2557,15 +2495,12 @@
 				1E78B7DD1D5134D20008C00E /* SF-UI-Text-BoldItalic.otf in Resources */,
 				45BC9BCE1CE32AE1000065B7 /* EntourageEditor.storyboard in Resources */,
 				452FE3E81CAD549200063334 /* GuideSolidarity.storyboard in Resources */,
+				A8FD766E1E42FE9200063C5F /* staging.plist in Resources */,
 				1E78B7E31D5134D20008C00E /* SF-UI-Text-MediumItalic.otf in Resources */,
 				1E78B7A41D5108B20008C00E /* PublicFeedItem.storyboard in Resources */,
 				1E78B7E61D5134D20008C00E /* SF-UI-Text-Semibold.otf in Resources */,
 				1EFAC0C71D89242D00BE396F /* FeedItemFilters.storyboard in Resources */,
 				1E78B7A61D5108BE0008C00E /* ActiveFeedItem.storyboard in Resources */,
-				1151E390B42372A35A6F2B32 /* Root.strings in Resources */,
-				1151EFEFBD3FEAC342F17466 /* Root.plist in Resources */,
-				1151EE1685B7C17024C250CF /* Root.strings in Resources */,
-				1151E8BE0D3CA27508364B9B /* Root.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2670,20 +2605,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 2eca3faf46139913c216b9ee9cf8bee49e70fe20 1bfceded38224045396fd555bbf83b4146920c7cd7dac463bb365c70fe9c6b78";
-		};
-		A8B1330D1DB129790000750B /* Copy Settings.bundle */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Settings.bundle";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" != \"Store\" ]; then\n  echo \"Will Copy Settings.bundle for Advanced settings\"\n  cp -r ${PROJECT_DIR}/entourage/Settings/Beta/Settings.bundle ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\nfi\n";
 		};
 		C35D400466E62235DE9A01F4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2978,22 +2899,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1151E24449EA45F0F66E6CB0 /* Root.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1151E7666C7D47579B7EAA83 /* en */,
-			);
-			name = Root.strings;
-			sourceTree = "<group>";
-		};
-		1151E97661A4098002F7D819 /* Root.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1151ECE4104453C75B687719 /* en */,
-			);
-			name = Root.strings;
-			sourceTree = "<group>";
-		};
 		1E90036D1D352C0B004E18BC /* UserPicture.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3102,6 +3007,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DBETA";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 			};
@@ -3168,7 +3074,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					"BETA=1",
+					BETA,
 				);
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
@@ -3184,6 +3090,7 @@
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3323,6 +3230,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DBETA";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 			};
@@ -3350,7 +3258,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					"BETA=1",
+					BETA,
 				);
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
@@ -3366,6 +3274,7 @@
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "0b98ae48-9f2e-404a-b7f2-ef68b953259d";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

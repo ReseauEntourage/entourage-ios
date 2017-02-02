@@ -27,6 +27,7 @@
 #import "OTDebugLog.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "entourage-Swift.h"
 
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
@@ -43,7 +44,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 #pragma mark - Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"environment": @"prod"}];
     [[OTDebugLog sharedInstance] setConsoleOutput];
 
 #if !DEBUG

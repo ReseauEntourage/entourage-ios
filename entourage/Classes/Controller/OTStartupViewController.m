@@ -38,26 +38,13 @@
     [super viewWillAppear:animated];
     [NSUserDefaults standardUserDefaults].temporaryUser = nil;
 
-#if BETA
   self.betaButton.hidden = NO;
   NSString *env = [[ConfigurationManager shared] environment];
   NSString *title = [NSString stringWithFormat:@"Vous êtes sur %@.\n(Tapez pour changer)", env];
   self.betaButton.titleLabel.textAlignment = NSTextAlignmentCenter;
   self.betaButton.titleLabel.numberOfLines = 2;
   [self.betaButton setTitle:title forState:UIControlStateNormal];
-#else
   self.betaButton.hidden = YES;
-#endif
-}
-
-- (IBAction)tapOnBetaButton {
-  [self openSettings];
-}
-
-- (void)openSettings
-{
-  NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-    [[UIApplication sharedApplication] openURL:url];
 }
 
 @end
