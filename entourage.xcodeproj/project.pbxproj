@@ -3178,8 +3178,8 @@ w<<// !$*UTF8*$!
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios$(BUNDLE_ID_SUFFIX)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "8caf6f14-0dad-49a1-a9d9-1a52a61f8b8e";
+				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3290,9 +3290,9 @@ w<<// !$*UTF8*$!
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 45;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
