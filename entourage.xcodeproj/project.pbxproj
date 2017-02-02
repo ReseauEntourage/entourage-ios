@@ -3236,8 +3236,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios$(BUNDLE_ID_SUFFIX)";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "0b98ae48-9f2e-404a-b7f2-ef68b953259d";
+				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
