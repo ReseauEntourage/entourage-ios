@@ -23,6 +23,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "OTMailTextCheckBehavior.h"
 #import "UIImageView+entourage.h"
+#import "OTUserTableConfigurator.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -46,8 +47,7 @@ typedef NS_ENUM(NSInteger) {
 
 @property (nonatomic, strong) OTUser *user;
 @property (nonatomic, strong) NSArray *sections;
-
-@property (nonatomic, assign) BOOL showCurrentAssociation;
+@property (nonatomic, strong) NSArray *associationRows;
 
 @end
 
@@ -61,10 +61,8 @@ typedef NS_ENUM(NSInteger) {
     [self setupCloseModal];
     [self showSaveButton];
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
-    self.sections = @[@(SectionTypeSummary), @(SectionTypeInfoPrivate), @(SectionTypeAssociations), @(SectionTypeDelete)];
-    self.showCurrentAssociation = NO;
-    if([self.user.type isEqualToString:USER_TYPE_PRO])
-        self.showCurrentAssociation = self.user.organization != nil;
+    self.sections = @[@(SectionTypeSummary), @(SectionTypeAssociations), @(SectionTypeInfoPrivate), @(SectionTypeDelete)];
+    self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
 }
 
@@ -142,7 +140,7 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeInfoPrivate:
             return 3;
         case SectionTypeAssociations:
-            return self.showCurrentAssociation ? 2 : 1;
+            return self.associationRows.count;
         default:
             return 1;
     }
@@ -190,7 +188,6 @@ typedef NS_ENUM(NSInteger) {
         default:
             title = @"";
     }
-    
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 15)];
     headerView.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
     headerView.textColor = [UIColor appGreyishBrownColor];
@@ -227,7 +224,14 @@ typedef NS_ENUM(NSInteger) {
             cellID = @"EditProfileCell";
             break;
         case SectionTypeAssociations:
-            cellID = self.showCurrentAssociation && indexPath.row == 0 ? @"AssociationProfileCell" : @"SupportAssociationCell";
+            switch ([self.associationRows[indexPath.row] intValue]) {
+                case AssociationRowTypePartnerSelect:
+                    cellID = @"SupportAssociationCell";
+                    break;
+                default:
+                    cellID = @"AssociationProfileCell";
+                    break;
+            }
             break;
         case SectionTypeDelete:
             cellID = @"DeleteProfileCell";
@@ -267,8 +271,16 @@ typedef NS_ENUM(NSInteger) {
             break;
         }
         case SectionTypeAssociations: {
-            if(self.showCurrentAssociation && indexPath.row == 0)
-                [self setupAssociationProfileCell:cell withAssociationTitle:self.user.organization.name andAssociationImage:self.user.organization.logoUrl];
+            switch ([self.associationRows[indexPath.row] intValue]) {
+                case AssociationRowTypePartner:
+                    [self setupAssociationPartnerCell:cell withPartner:self.user.partner];
+                    break;
+                case AssociationRowTypeOrganisation:
+                    [self setupAssociationProfileCell:cell withAssociationTitle:self.user.organization.name andAssociationImage:self.user.organization.logoUrl];
+                    break;
+                default:
+                    break;
+            }
             break;
         }
     }
@@ -326,6 +338,7 @@ typedef NS_ENUM(NSInteger) {
 
 #define ASSOCIATION_TITLE_TAG 1
 #define ASSOCIATION_IMAGE_TAG 2
+#define ASSOCIATION_SUPPORT_TYPE 3
 
 #define PUBLIC_ASSOCIATION_TEXT_TAG 1
 
@@ -372,6 +385,20 @@ typedef NS_ENUM(NSInteger) {
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE_TAG];
     if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0)
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
+    UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
+    lblSupportType.text = OTLocalizedString(@"marauder");
+}
+
+- (void)setupAssociationPartnerCell:(UITableViewCell *)cell withPartner:(OTAssociation *)partner {
+    UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
+    titleLabel.text = partner.name;
+    UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE_TAG];
+    [associationImageButton setImage:nil forState:UIControlStateNormal];
+    NSString *imageUrl = partner.largeLogoUrl;
+    if (associationImageButton != nil && [imageUrl class] != [NSNull class] && imageUrl.length > 0)
+        [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageUrl]];
+    UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
+    lblSupportType.text = OTLocalizedString(@"sympathizant");
 }
 
 - (void)setupPhoneCell:(UITableViewCell *)cell withPhone:(NSString *)phone {

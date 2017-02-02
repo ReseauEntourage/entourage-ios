@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Th9-id-j6L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Th9-id-j6L">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -255,11 +255,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Association" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u99-10-ZmY">
-                                                    <rect key="frame" x="15" y="29" width="279" height="21"/>
+                                                    <rect key="frame" x="15" y="17" width="279" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="45p-3J-Pei"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maraudeur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8B-i0-KXx">
+                                                    <rect key="frame" x="15" y="43" width="279" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="iNw-sa-Mgz"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                     <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -274,10 +283,13 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="U3O-fj-1LU" secondAttribute="trailing" constant="15" id="80h-ql-b4N"/>
-                                                <constraint firstItem="u99-10-ZmY" firstAttribute="centerY" secondItem="caT-Ob-ccl" secondAttribute="centerY" id="BJq-OF-tbw"/>
+                                                <constraint firstItem="u99-10-ZmY" firstAttribute="centerY" secondItem="caT-Ob-ccl" secondAttribute="centerY" constant="-13" id="BJq-OF-tbw"/>
                                                 <constraint firstItem="U3O-fj-1LU" firstAttribute="centerY" secondItem="caT-Ob-ccl" secondAttribute="centerY" id="Bh5-XL-zHv"/>
+                                                <constraint firstItem="B8B-i0-KXx" firstAttribute="leading" secondItem="u99-10-ZmY" secondAttribute="leading" id="DCI-Mv-sKt"/>
                                                 <constraint firstItem="u99-10-ZmY" firstAttribute="leading" secondItem="caT-Ob-ccl" secondAttribute="leadingMargin" constant="7" id="naa-H4-ctl"/>
                                                 <constraint firstItem="U3O-fj-1LU" firstAttribute="leading" secondItem="u99-10-ZmY" secondAttribute="trailing" constant="16" id="of2-Uj-BhM"/>
+                                                <constraint firstItem="B8B-i0-KXx" firstAttribute="trailing" secondItem="u99-10-ZmY" secondAttribute="trailing" id="xJ2-YB-b02"/>
+                                                <constraint firstItem="B8B-i0-KXx" firstAttribute="centerY" secondItem="caT-Ob-ccl" secondAttribute="centerY" constant="13" id="ziR-rf-zQ8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -317,7 +329,7 @@
         <scene sceneID="M5j-4s-qmF">
             <objects>
                 <navigationController id="Th9-id-j6L" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fW5-G3-hQ3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fW5-G3-hQ3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -599,11 +611,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Association" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSt-0s-S70">
-                                                    <rect key="frame" x="15" y="29" width="279" height="21"/>
+                                                    <rect key="frame" x="15" y="17" width="279" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Wqo-86-gvi"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -615,14 +627,26 @@
                                                         <constraint firstAttribute="height" constant="50" id="hfz-u7-AZE"/>
                                                     </constraints>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maraudeur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JrY-kF-xz7">
+                                                    <rect key="frame" x="15" y="42" width="279" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="fZP-5R-FGS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                                    <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="RSt-0s-S70" firstAttribute="centerY" secondItem="ryE-h8-JHP" secondAttribute="centerY" id="876-SB-2nm"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="bVt-Iv-VWB" secondAttribute="bottom" constant="6.5" id="MdC-fG-enJ"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="bVt-Iv-VWB" secondAttribute="trailing" constant="15" id="NOx-IP-Sj6"/>
                                                 <constraint firstItem="bVt-Iv-VWB" firstAttribute="top" secondItem="ryE-h8-JHP" secondAttribute="topMargin" constant="7" id="O7n-jZ-Fth"/>
+                                                <constraint firstItem="RSt-0s-S70" firstAttribute="centerY" secondItem="ryE-h8-JHP" secondAttribute="centerY" constant="-13" id="TWw-jS-DQw"/>
+                                                <constraint firstItem="JrY-kF-xz7" firstAttribute="centerY" secondItem="ryE-h8-JHP" secondAttribute="centerY" constant="13" id="UZ5-X3-iEj"/>
                                                 <constraint firstItem="bVt-Iv-VWB" firstAttribute="leading" secondItem="RSt-0s-S70" secondAttribute="trailing" constant="16" id="nf8-q4-kHL"/>
                                                 <constraint firstItem="RSt-0s-S70" firstAttribute="leading" secondItem="ryE-h8-JHP" secondAttribute="leadingMargin" constant="7" id="tU0-nZ-Dxw"/>
+                                                <constraint firstItem="JrY-kF-xz7" firstAttribute="leading" secondItem="RSt-0s-S70" secondAttribute="leading" id="vMJ-Wn-K6y"/>
+                                                <constraint firstItem="JrY-kF-xz7" firstAttribute="trailing" secondItem="RSt-0s-S70" secondAttribute="trailing" id="z3d-RW-fZQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -730,7 +754,7 @@
         <scene sceneID="U66-ZG-q0z">
             <objects>
                 <navigationController id="JY3-Ti-PBi" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ivf-eh-h7N">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ivf-eh-h7N">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -905,7 +929,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="62l-06-625" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RBg-dA-hRE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RBg-dA-hRE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -964,7 +988,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Org name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkE-4a-EjB">
-                                                    <rect key="frame" x="77" y="14" width="233" height="18"/>
+                                                    <rect key="frame" x="77" y="13" width="233" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
