@@ -16,6 +16,9 @@
         <array key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
         </array>
+        <array key="SF-UI-Text-Regular.otf">
+            <string>SFUIText-Regular</string>
+        </array>
     </customFonts>
     <scenes>
         <!--User View Controller-->
@@ -329,7 +332,7 @@
         <scene sceneID="M5j-4s-qmF">
             <objects>
                 <navigationController id="Th9-id-j6L" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fW5-G3-hQ3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fW5-G3-hQ3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -611,7 +614,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Association" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSt-0s-S70">
-                                                    <rect key="frame" x="15" y="17" width="279" height="21"/>
+                                                    <rect key="frame" x="15" y="16" width="279" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Wqo-86-gvi"/>
                                                     </constraints>
@@ -754,7 +757,7 @@
         <scene sceneID="U66-ZG-q0z">
             <objects>
                 <navigationController id="JY3-Ti-PBi" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ivf-eh-h7N">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ivf-eh-h7N">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -929,7 +932,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="62l-06-625" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RBg-dA-hRE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RBg-dA-hRE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -969,8 +972,8 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="u76-x4-ccK">
-                                <rect key="frame" x="-4" y="108" width="383" height="559"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="-4" y="108" width="383" height="479"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AssociationCell" rowHeight="45" id="svV-74-Waz" customClass="OTAssociationTableViewCell">
@@ -1022,22 +1025,41 @@
                                     <outlet property="delegate" destination="2Re-2N-5px" id="pJC-ch-yWe"/>
                                 </connections>
                             </tableView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3TA-VV-3z5">
+                                <rect key="frame" x="-4" y="587" width="383" height="80"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="PNp-TU-fg6"/>
+                                </constraints>
+                                <string key="text">Vous ne trouvez pas votre association ?
+Ecrivez à associations@entourage.social
+pour nous demander de l’ajouter !</string>
+                                <color key="textColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="u76-x4-ccK" firstAttribute="top" secondItem="0VD-bM-o8I" secondAttribute="bottom" id="87U-a1-KbS"/>
-                            <constraint firstItem="nh2-wz-Jsg" firstAttribute="top" secondItem="u76-x4-ccK" secondAttribute="bottom" id="91h-9W-wEw"/>
                             <constraint firstItem="u76-x4-ccK" firstAttribute="leading" secondItem="fkb-Cz-PII" secondAttribute="leadingMargin" constant="-20" id="ERL-xd-0fe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="u76-x4-ccK" secondAttribute="trailing" constant="-20" id="LHU-uo-zzE"/>
+                            <constraint firstItem="3TA-VV-3z5" firstAttribute="top" secondItem="u76-x4-ccK" secondAttribute="bottom" id="QLW-iM-Fzh"/>
                             <constraint firstItem="0VD-bM-o8I" firstAttribute="leading" secondItem="fkb-Cz-PII" secondAttribute="leading" id="RAD-le-ReU"/>
+                            <constraint firstItem="3TA-VV-3z5" firstAttribute="leading" secondItem="u76-x4-ccK" secondAttribute="leading" id="RXX-4h-aUO"/>
                             <constraint firstAttribute="trailing" secondItem="0VD-bM-o8I" secondAttribute="trailing" id="eXE-uy-ZDu"/>
+                            <constraint firstItem="3TA-VV-3z5" firstAttribute="trailing" secondItem="u76-x4-ccK" secondAttribute="trailing" id="gEh-92-7xn"/>
+                            <constraint firstItem="nh2-wz-Jsg" firstAttribute="top" secondItem="3TA-VV-3z5" secondAttribute="bottom" id="nWB-Bs-Z5x"/>
                             <constraint firstItem="0VD-bM-o8I" firstAttribute="top" secondItem="77D-sG-9nG" secondAttribute="bottom" id="taV-Wn-bt1"/>
+                            <constraint firstItem="3TA-VV-3z5" firstAttribute="top" secondItem="u76-x4-ccK" secondAttribute="bottom" id="xFw-zk-alI"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="dataSource" destination="qLf-w4-aB9" id="Fyl-dV-21d"/>
                         <outlet property="tableDataSource" destination="1wW-fq-Bwa" id="os0-WZ-Get"/>
                         <outlet property="tblAssociations" destination="u76-x4-ccK" id="fcg-fg-Ms1"/>
+                        <outlet property="txtAssociationMissing" destination="3TA-VV-3z5" id="K0I-ir-Ao2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xWu-Ea-jGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1060,7 +1082,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="4490" y="-1512"/>
+            <point key="canvasLocation" x="4488.8000000000002" y="-1512.5937031484259"/>
         </scene>
     </scenes>
     <resources>

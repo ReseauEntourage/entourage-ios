@@ -19,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UITableView *tblAssociations;
 @property (nonatomic, weak) IBOutlet OTAssociationsSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
+@property (nonatomic, weak) IBOutlet UITextView *txtAssociationMissing;
 
 @end
 
@@ -27,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.txtAssociationMissing.linkTextAttributes = @{NSForegroundColorAttributeName:[UIColor appOrangeColor]};
     [self.tableDataSource initialize];
     self.title = OTLocalizedString(@"select_association_title").uppercaseString;
     self.tblAssociations.tableFooterView = [UIView new];
