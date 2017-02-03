@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
+    switch ([self.sections[section] intValue]) {
         case SectionTypeSummary:
             return 1;
         case SectionTypeVerification:
@@ -129,7 +129,7 @@ typedef NS_ENUM(NSInteger) {
 #define CELLHEIGHT_DEFAULT  48.0f
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
+    switch ([self.sections[indexPath.section] intValue]) {
         case SectionTypeSummary:
             return CELLHEIGHT_SUMMARY;
         case SectionTypeVerification:
@@ -160,7 +160,7 @@ typedef NS_ENUM(NSInteger) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *cellID;
-    switch (indexPath.section) {
+    switch ([self.sections[indexPath.section] intValue]) {
         case SectionTypeSummary: {
             cellID = @"SummaryProfileCell";
             break;
@@ -181,7 +181,7 @@ typedef NS_ENUM(NSInteger) {
             break;
     }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
-    switch (indexPath.section) {
+    switch ([self.sections[indexPath.section] intValue]) {
         case SectionTypeSummary: {
             [self setupSummaryProfileCell:cell];
             break;
@@ -317,7 +317,7 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)configureSections {
     NSMutableArray *mSections = [NSMutableArray arrayWithObject:@(SectionTypeSummary)];
-    if(self.user.organization || self.user.partner)
+    if((self.user.organization && [self.user.type isEqualToString:USER_TYPE_PRO]) || self.user.partner)
        [mSections addObject:@(SectionTypeAssociations)];
     [mSections addObject:@(SectionTypeVerification)];
     if([self.user.type isEqualToString:USER_TYPE_PRO])

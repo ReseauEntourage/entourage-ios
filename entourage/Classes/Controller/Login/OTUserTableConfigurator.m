@@ -7,6 +7,8 @@
 //
 
 #import "OTUserTableConfigurator.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
 
 @implementation OTUserTableConfigurator
 
@@ -14,7 +16,7 @@
     NSMutableArray *mRows = [NSMutableArray arrayWithObject:@(AssociationRowTypeTitle)];
     if(user.partner)
         [mRows addObject:@(AssociationRowTypePartner)];
-    if(user.organization)
+    if(user.organization && [user.type isEqualToString:USER_TYPE_PRO])
         [mRows addObject:@(AssociationRowTypeOrganisation)];
     return mRows;
 }
@@ -23,7 +25,7 @@
     NSMutableArray *mRows = [NSMutableArray new];
     if(user.partner)
         [mRows addObject:@(AssociationRowTypePartner)];
-    if(user.organization)
+    if(user.organization && [user.type isEqualToString:USER_TYPE_PRO])
         [mRows addObject:@(AssociationRowTypeOrganisation)];
     [mRows addObject:@(AssociationRowTypePartnerSelect)];
     return mRows;
