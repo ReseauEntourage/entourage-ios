@@ -2335,13 +2335,13 @@
 			buildConfigurationList = 6B92CAD019A7461C004E8C9B /* Build configuration list for PBXNativeTarget "entourage" */;
 			buildPhases = (
 				C35D400466E62235DE9A01F4 /* [CP] Check Pods Manifest.lock */,
+				A8FD766F1E447ABD00063C5F /* Bump version */,
 				6B92CA9A19A7461C004E8C9B /* Sources */,
 				6B92CA9B19A7461C004E8C9B /* Frameworks */,
 				6B92CA9C19A7461C004E8C9B /* Resources */,
 				34A63FBA43859415DF1BB474 /* [CP] Embed Pods Frameworks */,
 				03E4165EBDB7F78C344C0C78 /* [CP] Copy Pods Resources */,
 				A816301D1DDF1C9D0087E716 /* Fabric */,
-				A8FD766F1E447ABD00063C5F /* Bump version */,
 			);
 			buildRules = (
 			);
@@ -3076,7 +3076,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
-				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3120,7 +3119,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
-				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Store;
@@ -3260,7 +3258,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
-				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Beta;
