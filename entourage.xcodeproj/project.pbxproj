@@ -2341,6 +2341,7 @@
 				34A63FBA43859415DF1BB474 /* [CP] Embed Pods Frameworks */,
 				03E4165EBDB7F78C344C0C78 /* [CP] Copy Pods Resources */,
 				A816301D1DDF1C9D0087E716 /* Fabric */,
+				A8FD766F1E447ABD00063C5F /* Bump version */,
 			);
 			buildRules = (
 			);
@@ -2574,6 +2575,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 2eca3faf46139913c216b9ee9cf8bee49e70fe20 1bfceded38224045396fd555bbf83b4146920c7cd7dac463bb365c70fe9c6b78";
+		};
+		A8FD766F1E447ABD00063C5F /* Bump version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bump version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ./Scripts/count_commit.sh;
 		};
 		C35D400466E62235DE9A01F4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
