@@ -36,7 +36,8 @@ platform :ios do
     )
     gym(
       clean: true,
-      scheme: "EntourageBeta"
+      scheme: "EntourageBeta",
+      output_directory: ENV["BITRISE_DEPLOY_DIR"]
       )
     appaloosa(
       api_token: options[:appaloosa_api_key],
