@@ -23,6 +23,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "entourage-Swift.h"
 #import "NSString+Validators.h"
+#import "OTScrollPinBehavior.h"
 
 @interface OTUserEmailViewController ()
 
@@ -30,6 +31,7 @@
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 @property (nonatomic, weak) IBOutlet OnBoardingButton *continueButton;
+@property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
 
 @end
 
@@ -37,32 +39,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.title = @"";
     [self.emailTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-
     self.emailTextField.inputValidationChanged = ^(BOOL isValid) {
         self.continueButton.enabled = [self.emailTextField.text isValidEmail];
     };
-
     [self loadCurrentData];
     [self addIgnoreButton];
 }
 
 - (void)addIgnoreButton {
-    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString
-                                                          withTarget:self
-                                                           andAction:@selector(doIgnore)
-                                                             colored:[UIColor whiteColor]];
+    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString withTarget:self andAction:@selector(doIgnore) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:ignoreButton];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self.scrollBehavior initialize];
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [IQKeyboardManager sharedManager].enable = NO;
     [self.emailTextField becomeFirstResponder];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].enable = YES;
 }
 
 - (void)loadCurrentData {
