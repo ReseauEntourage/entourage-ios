@@ -58,7 +58,6 @@
 		1E2232D91D56998E004CD5E8 /* OTAddressBookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232D81D56998E004CD5E8 /* OTAddressBookService.m */; };
 		1E2232DC1D5699AD004CD5E8 /* OTMessagingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2232DB1D5699AD004CD5E8 /* OTMessagingService.m */; };
 		1E22727E1E2E25270053365E /* OTAssociationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E22727D1E2E25270053365E /* OTAssociationsService.m */; };
-		1E2432B81DA6BED3000EF74F /* libFlurry_7.6.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E2432B71DA6BED3000EF74F /* libFlurry_7.6.6.a */; };
 		1E2432BE1DA6CC8B000EF74F /* OTAddressBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2432BB1DA6CC8B000EF74F /* OTAddressBookItem.m */; };
 		1E2432BF1DA6CC8B000EF74F /* OTAddressBookPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2432BD1DA6CC8B000EF74F /* OTAddressBookPhone.m */; };
 		1E2432C51DA6CCE1000EF74F /* OTContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2432C21DA6CCE1000EF74F /* OTContactInfoCell.m */; };
@@ -176,6 +175,7 @@
 		1EA47A7F1DC1F4F300680858 /* OTSummaryInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA47A7E1DC1F4F300680858 /* OTSummaryInfoCell.m */; };
 		1EA4F3091DA199A300A3321C /* OTDistributedDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA4F3081DA199A300A3321C /* OTDistributedDelegateBehavior.m */; };
 		1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */; };
+		1EA5C65B1E48AE7200891C9B /* OTAutoGrowTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5C65A1E48AE7200891C9B /* OTAutoGrowTextView.m */; };
 		1EACCAC31D64CD720027D1ED /* OTDeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACCAC21D64CD720027D1ED /* OTDeepLinkService.m */; };
 		1EACE4161D11515200F3A2A6 /* OTEntourageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4071D11515200F3A2A6 /* OTEntourageFactory.m */; };
 		1EACE4171D11515200F3A2A6 /* OTEntourageStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EACE4091D11515200F3A2A6 /* OTEntourageStateTransition.m */; };
@@ -442,7 +442,6 @@
 		1E2232DB1D5699AD004CD5E8 /* OTMessagingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMessagingService.m; path = Services/OTMessagingService.m; sourceTree = "<group>"; };
 		1E22727C1E2E25270053365E /* OTAssociationsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAssociationsService.h; sourceTree = "<group>"; };
 		1E22727D1E2E25270053365E /* OTAssociationsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAssociationsService.m; sourceTree = "<group>"; };
-		1E2432B61DA6BED3000EF74F /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		1E2432BA1DA6CC8B000EF74F /* OTAddressBookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAddressBookItem.h; path = AddressBook/OTAddressBookItem.h; sourceTree = "<group>"; };
 		1E2432BB1DA6CC8B000EF74F /* OTAddressBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAddressBookItem.m; path = AddressBook/OTAddressBookItem.m; sourceTree = "<group>"; };
 		1E2432BC1DA6CC8B000EF74F /* OTAddressBookPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAddressBookPhone.h; path = AddressBook/OTAddressBookPhone.h; sourceTree = "<group>"; };
@@ -660,6 +659,8 @@
 		1EA4F3081DA199A300A3321C /* OTDistributedDelegateBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTDistributedDelegateBehavior.m; path = Behaviors/OTDistributedDelegateBehavior.m; sourceTree = "<group>"; };
 		1EA51FCB1D366F6B00350255 /* OTPictureUploadService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTPictureUploadService.h; path = Amazon/OTPictureUploadService.h; sourceTree = "<group>"; };
 		1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTPictureUploadService.m; path = Amazon/OTPictureUploadService.m; sourceTree = "<group>"; };
+		1EA5C6591E48AE7200891C9B /* OTAutoGrowTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAutoGrowTextView.h; sourceTree = "<group>"; };
+		1EA5C65A1E48AE7200891C9B /* OTAutoGrowTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAutoGrowTextView.m; sourceTree = "<group>"; };
 		1EACCAC11D64CD720027D1ED /* OTDeepLinkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTDeepLinkService.h; path = Services/OTDeepLinkService.h; sourceTree = "<group>"; };
 		1EACCAC21D64CD720027D1ED /* OTDeepLinkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTDeepLinkService.m; path = Services/OTDeepLinkService.m; sourceTree = "<group>"; };
 		1EACE4061D11515200F3A2A6 /* OTEntourageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageFactory.h; sourceTree = "<group>"; };
@@ -2318,6 +2319,8 @@
 				45E37E551CEE5C3F005C3175 /* OTToolbar.m */,
 				1E09E07B1DB0B75000ABBBA1 /* OTTextWithCount.h */,
 				1E09E07C1DB0B75000ABBBA1 /* OTTextWithCount.m */,
+				1EA5C6591E48AE7200891C9B /* OTAutoGrowTextView.h */,
+				1EA5C65A1E48AE7200891C9B /* OTAutoGrowTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2838,6 +2841,7 @@
 				1E587F321E2E18A300FEBB67 /* UIImageView+entourage.m in Sources */,
 				1E587F251E2E14E900FEBB67 /* OTAssociationsSourceBehavior.m in Sources */,
 				1E0972BD1D55541E006E1FAD /* OTInviteByPhoneViewController.m in Sources */,
+				1EA5C65B1E48AE7200891C9B /* OTAutoGrowTextView.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
 				1E4661831DAE6D2F00ED0CD0 /* OTDescriptionCell.m in Sources */,
 				1E2232DC1D5699AD004CD5E8 /* OTMessagingService.m in Sources */,
