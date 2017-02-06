@@ -11,13 +11,23 @@
 @interface OTScrollPinBehavior ()
 
 @property (nonatomic) CGFloat originalHeight;
+@property (nonatomic) BOOL initialised;
+@property (nonatomic) CGFloat pinnedHeight;
+@property (nonatomic) CGFloat availableHeightNoKeyboard;
 
 @end
 
 @implementation OTScrollPinBehavior
 
 - (void)initialize {
+    if(self.initialised)
+        return;
+    self.initialised = YES;
     self.originalHeight = self.scrollHeightConstraint.constant;
+    self.pinnedHeight = 0;
+    for(UIView *view in self.pinnedViews)
+        self.pinnedHeight += view.frame.size.height;
+    self.availableHeightNoKeyboard = self.owner.view.frame.size.height - self.scrollView.frame.origin.y - self.originalHeight;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideKeyboard:) name:UIKeyboardDidHideNotification object:nil];
 }
@@ -30,15 +40,10 @@
 
 - (void)showKeyboard:(NSNotification*)notification {
     CGRect keyboardFrame = [self keyboardFrameFor:notification];
-    
-    CGFloat pinnedHeight = 0;
-    for(UIView *view in self.pinnedViews)
-        pinnedHeight += view.frame.size.height;
-    CGFloat availableHeight = self.owner.view.frame.size.height - self.scrollView.frame.origin.y - self.originalHeight - keyboardFrame.size.height;
-    if(availableHeight < pinnedHeight) {
-        CGFloat diff = pinnedHeight - availableHeight;
-        self.scrollHeightConstraint.constant = self.originalHeight - diff;
-        [self.scrollView setContentOffset:CGPointMake(0, diff) animated:YES];
+    CGFloat availableHeight = self.availableHeightNoKeyboard - keyboardFrame.size.height;
+    if(availableHeight < self.pinnedHeight) {
+        self.scrollHeightConstraint.constant = self.originalHeight - self.pinnedHeight + availableHeight;
+        [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - self.scrollHeightConstraint.constant) animated:YES];
         [UIView animateWithDuration:[self keyboardAnimationDurationFor:notification] animations:^{
             [self.owner.view layoutIfNeeded];
         }];
