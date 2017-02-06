@@ -102,6 +102,8 @@
 }
 
 - (IBAction)sendMessage {
+    if(self.txtChat.text.length == 0)
+        return;
     [Flurry logEvent:@"AddContentToMessage"];
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.txtChat.text withSuccess:^(OTFeedItemMessage *message) {
