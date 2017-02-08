@@ -53,15 +53,10 @@ typedef NS_ENUM(NSInteger) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     if (self.user != nil) {
-        if (self.user.sid.intValue == currentUser.sid.intValue)
-        {
-            self.user = currentUser;
-            [self configureTableSource];
-            [self showEditButton];
-            [self.tableView reloadData];
-        }
+        [self configureTableSource];
+        [self showEditButton];
+        [self.tableView reloadData];
     }
     else
         [self loadUser];
