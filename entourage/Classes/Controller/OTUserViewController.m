@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger) {
 @property (nonatomic, weak) IBOutlet OTTapViewBehavior *tapToEditBehavior;
 @property (nonatomic, strong) NSArray *sections;
 @property (nonatomic, strong) NSArray *associationRows;
+@property (nonatomic, strong) OTUser *currentUser;
 
 @end
 
@@ -45,7 +46,12 @@ typedef NS_ENUM(NSInteger) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tapToEditBehavior initialize];
+    self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    NSNumber *userId = self.userId;
+    if(!userId)
+        userId = self.user.sid;
+    if(userId.intValue == self.currentUser.sid.intValue)
+        [self.tapToEditBehavior initialize];
     self.title = OTLocalizedString(@"profil").uppercaseString;
     [self setupCloseModal];
 }
@@ -55,7 +61,8 @@ typedef NS_ENUM(NSInteger) {
     
     if (self.user != nil) {
         [self configureTableSource];
-        [self showEditButton];
+        if(self.user.sid.intValue == self.currentUser.sid.intValue)
+            [self showEditButton];
         [self.tableView reloadData];
     }
     else
