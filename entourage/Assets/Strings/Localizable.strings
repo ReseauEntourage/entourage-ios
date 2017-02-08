@@ -325,6 +325,6 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 
 // associations
 "select_association_title" = "SOUTENIR";
-"update_association_error" = "!!Could not update supported partner.";
+"update_association_error" = "L’association soutenue n’a pas pu être mise à jour";
 "marauder" = "Maraudeur";
 "sympathizant" = "Sympathisant";
