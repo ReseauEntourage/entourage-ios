@@ -61,8 +61,11 @@ typedef NS_ENUM(NSInteger) {
     
     if (self.user != nil) {
         [self configureTableSource];
-        if(self.user.sid.intValue == self.currentUser.sid.intValue)
+        if(self.user.sid.intValue == self.currentUser.sid.intValue) {
+            self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+            self.user = self.currentUser;
             [self showEditButton];
+        }
         [self.tableView reloadData];
     }
     else
