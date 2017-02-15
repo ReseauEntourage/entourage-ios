@@ -134,7 +134,8 @@ class NBTextField: JVFloatLabeledTextField, Validable {
     let numbersOnly = phoneNumberUtility.normalizePhoneNumber(text)
     //text = phoneNumberFormatter.inputStringAndRememberPosition(numbersOnly)
 
-    let isValid = inputIsValid(numbersOnly)
+    var isValid = inputIsValid(numbersOnly)
+    isValid = true
     inputValidationChanged?(isValid)
   }
 
