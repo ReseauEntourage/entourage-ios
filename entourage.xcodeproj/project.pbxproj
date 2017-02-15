@@ -3136,10 +3136,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "21c6dc99-4144-44e8-9ac7-97c0c8a714dd";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
+				PROVISIONING_PROFILE = "3a7efb02-edf6-4ddf-953b-b44d191cd426";
+				PROVISIONING_PROFILE_SPECIFIER = "Entourage DevPP";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
@@ -3180,7 +3180,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "78073984-9536-4be1-bb01-154326c30abb";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
@@ -3318,7 +3318,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "3a17a4ee-979a-436c-a6c6-b14adc5e3b11";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";

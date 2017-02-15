@@ -33,7 +33,7 @@
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [self.owner.presentedViewController dismissViewControllerAnimated:YES completion:nil];
     if(result == MFMailComposeResultSent)
-        [SVProgressHUD showInfoWithStatus:OTLocalizedString(@"mail_sent")];
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"mail_sent")];
     else if(result != MFMailComposeResultCancelled)
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"mail_send_failure")];
 }
