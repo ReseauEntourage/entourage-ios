@@ -48,7 +48,7 @@
     self.imgAssociation.hidden = joiner.partner == nil;
     [self.imgAssociation setupFromUrl:joiner.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl];
-    self.txtMessage.text = [NSString stringWithFormat:@"\"%@\"", joiner.message];
+    self.txtMessage.text = joiner.message;
 }
 
 @end
