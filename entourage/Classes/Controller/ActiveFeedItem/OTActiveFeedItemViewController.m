@@ -25,6 +25,8 @@
 #import "OTMapViewController.h"
 #import "OTMessagingService.h"
 #import "OTBadgeNumberService.h"
+#import "IQKeyboardManager.h"
+#import "OTBottomScrollBehavior.h"
 
 @interface OTActiveFeedItemViewController ()
 
@@ -38,7 +40,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
-
+@property (nonatomic, strong) IBOutlet OTBottomScrollBehavior *scrollBottomBehavior;
 @end
 
 @implementation OTActiveFeedItemViewController
@@ -46,6 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.scrollBottomBehavior initialize];
     [self.summaryProvider configureWith:self.feedItem];
     [self.inviteBehavior configureWith:self.feedItem];
     [self.statusChangedBehavior configureWith:self.feedItem];
@@ -57,6 +60,7 @@
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];
     [self reloadMessages];
+    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
