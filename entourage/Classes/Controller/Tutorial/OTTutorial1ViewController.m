@@ -9,10 +9,6 @@
 #import "OTTutorial1ViewController.h"
 #import "OTConsts.h"
 
-@interface OTTutorial1ViewController ()
-
-@end
-
 @implementation OTTutorial1ViewController
 
 - (IBAction)gotoBlog:(id)sender {

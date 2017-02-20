@@ -52,12 +52,12 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="XiS-Y9-YO4">
-                                <rect key="frame" x="16" y="227" width="343" height="213.5"/>
+                                <rect key="frame" x="16" y="217" width="343" height="234"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. OSEZ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-R3-XMU">
                                         <rect key="frame" x="20" y="0.0" width="303" height="29"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="24"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avec Entourage, allez à la rencontre des personnes sans-abri que vous croisez au quotidien." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEX-uO-THw">
@@ -67,13 +67,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour vous aider, consultez le guide :" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbk-iw-8hP">
-                                        <rect key="frame" x="20" y="126" width="303" height="20.5"/>
+                                        <rect key="frame" x="20" y="126" width="303" height="41"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="17"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-0s-0Wk">
-                                        <rect key="frame" x="20" y="181.5" width="259" height="32"/>
+                                        <rect key="frame" x="20" y="202" width="259" height="32"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="20"/>
                                         <state key="normal" title=" Simple comme bonjour" image="hands">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -114,10 +114,10 @@
             </objects>
             <point key="canvasLocation" x="838" y="130"/>
         </scene>
-        <!--View Controller-->
+        <!--Tutorial2 View Controller-->
         <scene sceneID="iNt-qx-I2M">
             <objects>
-                <viewController storyboardIdentifier="Tutorial2" id="UBP-wy-r73" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Tutorial2" id="UBP-wy-r73" customClass="OTTutorial2ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="W1f-7s-jVH"/>
                         <viewControllerLayoutGuide type="bottom" id="AcO-a9-JSJ"/>
@@ -126,20 +126,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="page 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtF-4t-f4U">
-                                <rect key="frame" x="36" y="323" width="303" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gy-L8-WBK">
+                                <rect key="frame" x="283" y="40" width="56" height="33"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
+                                <state key="normal" title="Passer">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="UBP-wy-r73" eventType="touchUpInside" id="M34-OO-tfX"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="6n7-JU-34j">
+                                <rect key="frame" x="16" y="142.5" width="343" height="383.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="nCv-Ol-zvA">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="140"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="140" id="AUx-a8-Pcm"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. REJOIGNEZ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1z-YS-BWf">
+                                        <rect key="frame" x="20" y="175" width="303" height="29"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="24"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxM-WP-ofF">
+                                        <rect key="frame" x="20" y="221" width="303" height="162.5"/>
+                                        <string key="text">Les zones orangées sur la carte, ou "entourages", 
+représentent les actions bienveillantes créées par
+vos voisins.
+
+Rejoignez-les pour donner du temps, des compétences, des conseils, etc.</string>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="xxM-WP-ofF" firstAttribute="trailing" secondItem="b1z-YS-BWf" secondAttribute="trailing" id="0yr-23-c3z"/>
+                                    <constraint firstAttribute="trailing" secondItem="nCv-Ol-zvA" secondAttribute="trailing" id="2mB-8X-uLy"/>
+                                    <constraint firstItem="nCv-Ol-zvA" firstAttribute="leading" secondItem="6n7-JU-34j" secondAttribute="leading" id="7yQ-cQ-Oov"/>
+                                    <constraint firstItem="xxM-WP-ofF" firstAttribute="top" secondItem="b1z-YS-BWf" secondAttribute="bottom" constant="17" id="9MG-W3-UuB"/>
+                                    <constraint firstAttribute="trailing" secondItem="b1z-YS-BWf" secondAttribute="trailing" constant="20" id="C7j-g1-0eG"/>
+                                    <constraint firstItem="nCv-Ol-zvA" firstAttribute="top" secondItem="6n7-JU-34j" secondAttribute="top" id="Osj-YV-Pzc"/>
+                                    <constraint firstItem="b1z-YS-BWf" firstAttribute="leading" secondItem="6n7-JU-34j" secondAttribute="leading" constant="20" id="Xk3-25-UYP"/>
+                                    <constraint firstItem="xxM-WP-ofF" firstAttribute="leading" secondItem="b1z-YS-BWf" secondAttribute="leading" id="YfH-7h-ILi"/>
+                                    <constraint firstAttribute="bottom" secondItem="xxM-WP-ofF" secondAttribute="bottom" id="adX-TU-nbo"/>
+                                    <constraint firstItem="b1z-YS-BWf" firstAttribute="top" secondItem="nCv-Ol-zvA" secondAttribute="bottom" constant="35" id="sT3-XC-EJ5"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="KtF-4t-f4U" secondAttribute="trailing" constant="20" id="9jr-bm-spJ"/>
-                            <constraint firstItem="KtF-4t-f4U" firstAttribute="centerY" secondItem="KNy-gp-gxb" secondAttribute="centerY" id="Qrs-ER-qF0"/>
-                            <constraint firstItem="KtF-4t-f4U" firstAttribute="leading" secondItem="KNy-gp-gxb" secondAttribute="leadingMargin" constant="20" id="T17-4Y-f0l"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6n7-JU-34j" secondAttribute="trailing" id="IIc-LA-2Ch"/>
+                            <constraint firstItem="6n7-JU-34j" firstAttribute="centerY" secondItem="KNy-gp-gxb" secondAttribute="centerY" id="Ic2-Wi-qAw"/>
+                            <constraint firstItem="6n7-JU-34j" firstAttribute="leading" secondItem="KNy-gp-gxb" secondAttribute="leadingMargin" id="nA2-Rq-fty"/>
+                            <constraint firstItem="9gy-L8-WBK" firstAttribute="top" secondItem="W1f-7s-jVH" secondAttribute="bottom" constant="20" id="ufB-js-ufY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9gy-L8-WBK" secondAttribute="trailing" constant="20" id="xQc-SE-p9F"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lblDetails" destination="xxM-WP-ofF" id="fjR-RZ-6NC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cjU-ea-oD0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -209,6 +259,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bg" width="166" height="296"/>
         <image name="hands" width="32" height="32"/>
     </resources>
 </document>

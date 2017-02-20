@@ -163,6 +163,7 @@
 		1E80E26B1D7DF60D0096B350 /* OTScrollPinBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E80E26A1D7DF60D0096B350 /* OTScrollPinBehavior.m */; };
 		1E80F8A41D775B840041CC11 /* OTEditEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E80F8A31D775B840041CC11 /* OTEditEntourageBehavior.m */; };
 		1E8767121E5ADD960080486A /* OTTutorial1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8767111E5ADD960080486A /* OTTutorial1ViewController.m */; };
+		1E8767151E5AE4660080486A /* OTTutorial2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8767141E5AE4660080486A /* OTTutorial2ViewController.m */; };
 		1E8845921D5DC91800747223 /* OTToggleGroupViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8845911D5DC91800747223 /* OTToggleGroupViewBehavior.m */; };
 		1E8845971D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8845961D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.m */; };
 		1E8E16E61D5A354C005C42ED /* OTInvitationsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E16E51D5A354C005C42ED /* OTInvitationsCollectionViewCell.m */; };
@@ -638,6 +639,8 @@
 		1E80F8A31D775B840041CC11 /* OTEditEntourageBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTEditEntourageBehavior.m; path = Behaviors/FeedItems/OTEditEntourageBehavior.m; sourceTree = "<group>"; };
 		1E8767101E5ADD960080486A /* OTTutorial1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTTutorial1ViewController.h; path = Tutorial/OTTutorial1ViewController.h; sourceTree = "<group>"; };
 		1E8767111E5ADD960080486A /* OTTutorial1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTTutorial1ViewController.m; path = Tutorial/OTTutorial1ViewController.m; sourceTree = "<group>"; };
+		1E8767131E5AE4660080486A /* OTTutorial2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTTutorial2ViewController.h; path = Tutorial/OTTutorial2ViewController.h; sourceTree = "<group>"; };
+		1E8767141E5AE4660080486A /* OTTutorial2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTTutorial2ViewController.m; path = Tutorial/OTTutorial2ViewController.m; sourceTree = "<group>"; };
 		1E8845901D5DC91800747223 /* OTToggleGroupViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTToggleGroupViewBehavior.h; path = Behaviors/UI/OTToggleGroupViewBehavior.h; sourceTree = "<group>"; };
 		1E8845911D5DC91800747223 /* OTToggleGroupViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTToggleGroupViewBehavior.m; path = Behaviors/UI/OTToggleGroupViewBehavior.m; sourceTree = "<group>"; };
 		1E8845941D5DDAE700747223 /* OTMyEntouragesOptionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMyEntouragesOptionsDelegate.h; path = Behaviors/MyEntourages/OTMyEntouragesOptionsDelegate.h; sourceTree = "<group>"; };
@@ -1835,6 +1838,8 @@
 		1EFBCFD91E56E56D008CEF30 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
+				1E8767131E5AE4660080486A /* OTTutorial2ViewController.h */,
+				1E8767141E5AE4660080486A /* OTTutorial2ViewController.m */,
 				1EFBCFDA1E56E59C008CEF30 /* OTTutorialViewController.h */,
 				1EFBCFDB1E56E59C008CEF30 /* OTTutorialViewController.m */,
 				1E8767101E5ADD960080486A /* OTTutorial1ViewController.h */,
@@ -2811,6 +2816,7 @@
 				1E5C302A1D6F7D5D00E10770 /* OTManageInvitationViewController.m in Sources */,
 				1EACE41B1D11515200F3A2A6 /* OTLocationManager.m in Sources */,
 				1E4661891DAE79D100ED0CD0 /* OTBaseInfoCell.m in Sources */,
+				1E8767151E5AE4660080486A /* OTTutorial2ViewController.m in Sources */,
 				4525EB341CA46582006784E6 /* OTAboutViewController.m in Sources */,
 				0A4769381BFCC4EB006EA73A /* OTOrganization.m in Sources */,
 				454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */,
