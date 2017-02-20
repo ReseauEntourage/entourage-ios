@@ -318,7 +318,8 @@
 
 - (void)showEntourages {
     [Flurry logEvent:@"GoToMessages"];
-    [self performSegueWithIdentifier:@"MyEntouragesSegue" sender:self];
+    //[self performSegueWithIdentifier:@"MyEntouragesSegue" sender:self];
+    [self performSegueWithIdentifier:@"TutorialSegue" sender:self];
 }
 
 - (void)registerObserver {
