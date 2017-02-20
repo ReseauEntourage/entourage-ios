@@ -195,10 +195,10 @@ Rejoignez-les pour donner du temps, des compétences, des conseils, etc.</string
             </objects>
             <point key="canvasLocation" x="1530" y="130"/>
         </scene>
-        <!--View Controller-->
+        <!--Tutorial3 View Controller-->
         <scene sceneID="hxB-RY-YEM">
             <objects>
-                <viewController storyboardIdentifier="Tutorial3" id="nU1-Wh-lLz" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Tutorial3" id="nU1-Wh-lLz" customClass="OTTutorial3ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kfi-4r-D6E"/>
                         <viewControllerLayoutGuide type="bottom" id="BrP-bG-WWB"/>
@@ -207,18 +207,63 @@ Rejoignez-les pour donner du temps, des compétences, des conseils, etc.</string
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="page 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C12-dL-hjT">
-                                <rect key="frame" x="36" y="323" width="303" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UD3-PF-V4r">
+                                <rect key="frame" x="283" y="40" width="56" height="33"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
+                                <state key="normal" title="Passer">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="nU1-Wh-lLz" eventType="touchUpInside" id="hku-Xe-uFq"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="uiK-sn-ik8">
+                                <rect key="frame" x="16" y="229.5" width="343" height="208.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Créez" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZr-tP-l4q">
+                                        <rect key="frame" x="20" y="0.0" width="303" height="29"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="24"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GM-jo-9aO">
+                                        <rect key="frame" x="20" y="46" width="303" height="162.5"/>
+                                        <string key="text">A votre tour, lancez vos propres initiatives solidaires  à tout moment en cliquant sur le bouton + en bas à droite.
+
+Vos voisins pourront vous rejoindre pour se coordonner et vous aider dans votre action !</string>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="3GM-jo-9aO" firstAttribute="trailing" secondItem="lZr-tP-l4q" secondAttribute="trailing" id="8Ug-yV-I0H"/>
+                                    <constraint firstItem="3GM-jo-9aO" firstAttribute="top" secondItem="lZr-tP-l4q" secondAttribute="bottom" constant="17" id="Ddl-L2-B8x"/>
+                                    <constraint firstItem="3GM-jo-9aO" firstAttribute="leading" secondItem="lZr-tP-l4q" secondAttribute="leading" id="MzI-9I-ezm"/>
+                                    <constraint firstItem="lZr-tP-l4q" firstAttribute="top" secondItem="uiK-sn-ik8" secondAttribute="top" id="PEB-zS-C5m"/>
+                                    <constraint firstItem="lZr-tP-l4q" firstAttribute="leading" secondItem="uiK-sn-ik8" secondAttribute="leading" constant="20" id="PhG-Bn-EHc"/>
+                                    <constraint firstAttribute="trailing" secondItem="lZr-tP-l4q" secondAttribute="trailing" constant="20" id="dhT-uD-MBL"/>
+                                    <constraint firstAttribute="bottom" secondItem="3GM-jo-9aO" secondAttribute="bottom" id="scF-fC-n26"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="createNoShadow" translatesAutoresizingMaskIntoConstraints="NO" id="gwf-K0-D8F">
+                                <rect key="frame" x="293" y="585" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="OOH-1K-Fbb"/>
+                                    <constraint firstAttribute="width" constant="62" id="bfE-hl-zbg"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="C12-dL-hjT" secondAttribute="trailing" constant="20" id="Vhm-Sm-rtD"/>
-                            <constraint firstItem="C12-dL-hjT" firstAttribute="centerY" secondItem="jcp-vd-CPw" secondAttribute="centerY" id="vrI-V9-xih"/>
-                            <constraint firstItem="C12-dL-hjT" firstAttribute="leading" secondItem="jcp-vd-CPw" secondAttribute="leadingMargin" constant="20" id="yc4-cN-grh"/>
+                            <constraint firstAttribute="trailing" secondItem="gwf-K0-D8F" secondAttribute="trailing" constant="20" id="036-cM-gFG"/>
+                            <constraint firstItem="UD3-PF-V4r" firstAttribute="top" secondItem="kfi-4r-D6E" secondAttribute="bottom" constant="20" id="3MT-1u-yDJ"/>
+                            <constraint firstItem="BrP-bG-WWB" firstAttribute="top" secondItem="gwf-K0-D8F" secondAttribute="bottom" constant="20" id="9eN-8I-gup"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UD3-PF-V4r" secondAttribute="trailing" constant="20" id="MdQ-mH-Vl4"/>
+                            <constraint firstItem="uiK-sn-ik8" firstAttribute="leading" secondItem="jcp-vd-CPw" secondAttribute="leadingMargin" id="UCA-pF-Xoe"/>
+                            <constraint firstItem="uiK-sn-ik8" firstAttribute="centerY" secondItem="jcp-vd-CPw" secondAttribute="centerY" id="cfS-9e-mya"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uiK-sn-ik8" secondAttribute="trailing" id="r0t-Yg-e5w"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -260,6 +305,7 @@ Rejoignez-les pour donner du temps, des compétences, des conseils, etc.</string
     </scenes>
     <resources>
         <image name="bg" width="166" height="296"/>
+        <image name="createNoShadow" width="62" height="62"/>
         <image name="hands" width="32" height="32"/>
     </resources>
 </document>
