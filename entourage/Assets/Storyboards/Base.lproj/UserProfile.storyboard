@@ -958,7 +958,7 @@
         <!--Select Association Controller-->
         <scene sceneID="gXh-vf-4uI">
             <objects>
-                <viewController id="2Re-2N-5px" userLabel="Select Association Controller" customClass="OTSelectAssociationViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectAssociation" id="2Re-2N-5px" userLabel="Select Association Controller" customClass="OTSelectAssociationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="77D-sG-9nG"/>
                         <viewControllerLayoutGuide type="bottom" id="nh2-wz-Jsg"/>
