@@ -16,15 +16,18 @@
 @implementation OTTutorialService
 
 - (void)showTutorial {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if([currentUser.type isEqualToString:USER_TYPE_PRO])
+        return;
     if([NSUserDefaults standardUserDefaults].autoTutorialShown)
         return;
+    [NSUserDefaults standardUserDefaults].autoTutorialShown = YES;
     [self performSelector:@selector(displayTutorial) withObject:self afterDelay:TUTORIAL_DELAY];
 }
 
 #pragma mark - private methods
 
 - (void)displayTutorial {
-    [NSUserDefaults standardUserDefaults].autoTutorialShown = YES;
     UIViewController *topController = [[OTDeepLinkService new] getTopViewController];
     UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
     UIViewController *tutorialController = [tutorialStoryboard instantiateInitialViewController];
