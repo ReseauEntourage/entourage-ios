@@ -18,9 +18,9 @@
 - (void)showTutorial {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if([currentUser.type isEqualToString:USER_TYPE_PRO])
-        ;//return;
+        return;
     if([NSUserDefaults standardUserDefaults].autoTutorialShown)
-        ;//return;
+        return;
     [NSUserDefaults standardUserDefaults].autoTutorialShown = YES;
     [self performSelector:@selector(displayTutorial) withObject:self afterDelay:TUTORIAL_DELAY];
 }
