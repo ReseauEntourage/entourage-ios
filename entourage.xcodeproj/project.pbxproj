@@ -173,6 +173,7 @@
 		1E993BFF1DDB532E00621770 /* NSAttributedString+OTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E993BFE1DDB532E00621770 /* NSAttributedString+OTBuilder.m */; };
 		1E9B38701DC882A1000F9F3F /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386F1DC882A1000F9F3F /* prod.plist */; };
 		1EA12BFF1E2CF649009EAF97 /* OTSelectAssociationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA12BFE1E2CF649009EAF97 /* OTSelectAssociationViewController.m */; };
+		1EA3B7091E5D7937003FF875 /* OTAssociationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3B7081E5D7937003FF875 /* OTAssociationDetailsViewController.m */; };
 		1EA47A7F1DC1F4F300680858 /* OTSummaryInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA47A7E1DC1F4F300680858 /* OTSummaryInfoCell.m */; };
 		1EA4F3091DA199A300A3321C /* OTDistributedDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA4F3081DA199A300A3321C /* OTDistributedDelegateBehavior.m */; };
 		1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */; };
@@ -656,6 +657,8 @@
 		1E9B386F1DC882A1000F9F3F /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
 		1EA12BFD1E2CF649009EAF97 /* OTSelectAssociationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSelectAssociationViewController.h; sourceTree = "<group>"; };
 		1EA12BFE1E2CF649009EAF97 /* OTSelectAssociationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSelectAssociationViewController.m; sourceTree = "<group>"; };
+		1EA3B7071E5D7937003FF875 /* OTAssociationDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAssociationDetailsViewController.h; path = Login/OTAssociationDetailsViewController.h; sourceTree = "<group>"; };
+		1EA3B7081E5D7937003FF875 /* OTAssociationDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAssociationDetailsViewController.m; path = Login/OTAssociationDetailsViewController.m; sourceTree = "<group>"; };
 		1EA47A7D1DC1F4F300680858 /* OTSummaryInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSummaryInfoCell.h; sourceTree = "<group>"; };
 		1EA47A7E1DC1F4F300680858 /* OTSummaryInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSummaryInfoCell.m; sourceTree = "<group>"; };
 		1EA4F3071DA199A300A3321C /* OTDistributedDelegateBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTDistributedDelegateBehavior.h; path = Behaviors/OTDistributedDelegateBehavior.h; sourceTree = "<group>"; };
@@ -1034,6 +1037,8 @@
 				1EA12BFE1E2CF649009EAF97 /* OTSelectAssociationViewController.m */,
 				1E4852AA1E4351230094FC13 /* OTUserTableConfigurator.h */,
 				1E4852AB1E4351230094FC13 /* OTUserTableConfigurator.m */,
+				1EA3B7071E5D7937003FF875 /* OTAssociationDetailsViewController.h */,
+				1EA3B7081E5D7937003FF875 /* OTAssociationDetailsViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -2842,6 +2847,7 @@
 				45B3F8F61C74F40B00DCF2EC /* OTFeedItemAuthor.m in Sources */,
 				1E07DA411D590433003119CC /* OTEntourageJoinerDelegate.m in Sources */,
 				2EC77E4F1CEDE4BC0031BB67 /* OTEntourageService.m in Sources */,
+				1EA3B7091E5D7937003FF875 /* OTAssociationDetailsViewController.m in Sources */,
 				1E5F798B1D5A13930005003C /* OTCollectionViewDataSourceBehavior.m in Sources */,
 				45F4433C1C90B40400DDEBE1 /* OTFeedItemTimelinePoint.m in Sources */,
 				1E587F321E2E18A300FEBB67 /* UIImageView+entourage.m in Sources */,
