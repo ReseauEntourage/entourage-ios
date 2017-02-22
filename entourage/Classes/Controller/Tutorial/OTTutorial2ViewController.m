@@ -28,7 +28,7 @@
 }
 
 - (IBAction)close:(id)sender {
-    [self.parentViewController.navigationController popViewControllerAnimated:YES];
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

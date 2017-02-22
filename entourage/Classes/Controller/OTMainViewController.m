@@ -73,6 +73,7 @@
 #import "OTTourCreatorBehaviorDelegate.h"
 #import "OTStartTourAnnotation.h"
 #import "OTNoDataBehavior.h"
+#import "OTTutorialService.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -174,6 +175,7 @@
         self.stopButton.hidden = YES;
         self.createEncounterButton.hidden = YES;
     }
+    [[OTTutorialService new] showTutorial];
 }
 
 - (void)dealloc {

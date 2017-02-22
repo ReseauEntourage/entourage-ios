@@ -7,11 +7,28 @@
 //
 
 #import "OTTutorialService.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
+#import "OTDeepLinkService.h"
+
+#define TUTORIAL_DELAY 2
 
 @implementation OTTutorialService
 
 - (void)showTutorial {
-    
+    if([NSUserDefaults standardUserDefaults].autoTutorialShown)
+        return;
+    [self performSelector:@selector(displayTutorial) withObject:self afterDelay:TUTORIAL_DELAY];
+}
+
+#pragma mark - private methods
+
+- (void)displayTutorial {
+    [NSUserDefaults standardUserDefaults].autoTutorialShown = YES;
+    UIViewController *topController = [[OTDeepLinkService new] getTopViewController];
+    UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
+    UIViewController *tutorialController = [tutorialStoryboard instantiateInitialViewController];
+    [topController presentViewController:tutorialController animated:YES completion:nil];
 }
 
 @end

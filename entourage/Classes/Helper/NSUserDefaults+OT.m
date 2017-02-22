@@ -53,12 +53,19 @@ static NSString *const kAutoTutorialComplete = @"kAutoTutorialComplete";
 }
 
 - (void)setAutoTutorialShown:(BOOL)autoTutorialShown {
-    [[NSUserDefaults standardUserDefaults] setObject:@(autoTutorialShown) forKey:kAutoTutorialComplete];
+    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kAutoTutorialComplete]];
+    BOOL hasPhoneInNumbers = [loggedNumbers containsObject:self.currentUser.phone];
+    if(hasPhoneInNumbers && !autoTutorialShown)
+       [loggedNumbers removeObject:self.currentUser.phone];
+    if(!hasPhoneInNumbers && autoTutorialShown)
+        [loggedNumbers addObject:self.currentUser.phone];
+    [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kAutoTutorialComplete];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BOOL)autoTutorialShown {
-    NSNumber *autoTutorial = [[NSUserDefaults standardUserDefaults] objectForKey:kAutoTutorialComplete];
-    return autoTutorial ? autoTutorial.boolValue : NO;
+    NSMutableArray *numbersWithTutorial = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kAutoTutorialComplete]];
+    return [numbersWithTutorial containsObject:self.currentUser.phone];
 }
 
 - (BOOL)isTutorialCompleted {

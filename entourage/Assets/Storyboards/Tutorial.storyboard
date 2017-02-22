@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ruQ-cW-vo9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nst-ed-x0I">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,10 +21,28 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Fgi-aR-yd4">
+            <objects>
+                <navigationController id="nst-ed-x0I" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="t1C-43-4BS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ruQ-cW-vo9" kind="relationship" relationship="rootViewController" id="boI-52-1Xf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NE0-cf-YfA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-718" y="130"/>
+        </scene>
         <!--Tutorial Controller-->
         <scene sceneID="eYD-hD-25D">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ruQ-cW-vo9" userLabel="Tutorial Controller" customClass="OTTutorialViewController" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ruQ-cW-vo9" userLabel="Tutorial Controller" customClass="OTTutorialViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="PYU-Kr-Qqc"/>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sci-TQ-f1s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="97" y="130"/>
@@ -52,7 +70,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="XiS-Y9-YO4">
-                                <rect key="frame" x="16" y="217" width="343" height="234"/>
+                                <rect key="frame" x="16" y="228" width="343" height="213"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. OSEZ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-R3-XMU">
                                         <rect key="frame" x="20" y="0.0" width="303" height="29"/>
@@ -67,13 +85,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour vous aider, consultez le guide :" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbk-iw-8hP">
-                                        <rect key="frame" x="20" y="126" width="303" height="41"/>
+                                        <rect key="frame" x="20" y="126" width="303" height="20"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="17"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-0s-0Wk">
-                                        <rect key="frame" x="20" y="202" width="259" height="32"/>
+                                        <rect key="frame" x="20" y="181" width="259" height="32"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="20"/>
                                         <state key="normal" title=" Simple comme bonjour" image="hands">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -137,7 +155,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="6n7-JU-34j">
-                                <rect key="frame" x="16" y="142" width="343" height="384"/>
+                                <rect key="frame" x="16" y="142.5" width="343" height="383.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="nCv-Ol-zvA">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="140"/>
@@ -152,7 +170,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxM-WP-ofF">
-                                        <rect key="frame" x="20" y="221" width="303" height="163"/>
+                                        <rect key="frame" x="20" y="221" width="303" height="162.5"/>
                                         <string key="text">Les zones orangées sur la carte, ou "entourages", 
 représentent les actions bienveillantes créées par
 vos voisins.
@@ -218,7 +236,7 @@ Rejoignez-les pour donner du temps, des compétences, des conseils, etc.</string
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="uiK-sn-ik8">
-                                <rect key="frame" x="16" y="229" width="343" height="209"/>
+                                <rect key="frame" x="16" y="229.5" width="343" height="208.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Créez" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZr-tP-l4q">
                                         <rect key="frame" x="20" y="0.0" width="303" height="29"/>
@@ -227,7 +245,7 @@ Rejoignez-les pour donner du temps, des compétences, des conseils, etc.</string
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GM-jo-9aO">
-                                        <rect key="frame" x="20" y="46" width="303" height="163"/>
+                                        <rect key="frame" x="20" y="46" width="303" height="162.5"/>
                                         <string key="text">A votre tour, lancez vos propres initiatives solidaires  à tout moment en cliquant sur le bouton + en bas à droite.
 
 Vos voisins pourront vous rejoindre pour se coordonner et vous aider dans votre action !</string>
