@@ -176,6 +176,7 @@
 		1E993BFF1DDB532E00621770 /* NSAttributedString+OTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E993BFE1DDB532E00621770 /* NSAttributedString+OTBuilder.m */; };
 		1E9B38701DC882A1000F9F3F /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386F1DC882A1000F9F3F /* prod.plist */; };
 		1EA12BFF1E2CF649009EAF97 /* OTSelectAssociationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA12BFE1E2CF649009EAF97 /* OTSelectAssociationViewController.m */; };
+		1EA3B70C1E5DB427003FF875 /* OTTutorialService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA3B70B1E5DB427003FF875 /* OTTutorialService.m */; };
 		1EA47A7F1DC1F4F300680858 /* OTSummaryInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA47A7E1DC1F4F300680858 /* OTSummaryInfoCell.m */; };
 		1EA4F3091DA199A300A3321C /* OTDistributedDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA4F3081DA199A300A3321C /* OTDistributedDelegateBehavior.m */; };
 		1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA51FCC1D366F6B00350255 /* OTPictureUploadService.m */; };
@@ -667,6 +668,8 @@
 		1E9B386F1DC882A1000F9F3F /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
 		1EA12BFD1E2CF649009EAF97 /* OTSelectAssociationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSelectAssociationViewController.h; sourceTree = "<group>"; };
 		1EA12BFE1E2CF649009EAF97 /* OTSelectAssociationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSelectAssociationViewController.m; sourceTree = "<group>"; };
+		1EA3B70A1E5DB427003FF875 /* OTTutorialService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTTutorialService.h; path = entourage/Classes/Service/OTTutorialService.h; sourceTree = SOURCE_ROOT; };
+		1EA3B70B1E5DB427003FF875 /* OTTutorialService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTTutorialService.m; path = entourage/Classes/Service/OTTutorialService.m; sourceTree = SOURCE_ROOT; };
 		1EA47A7D1DC1F4F300680858 /* OTSummaryInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSummaryInfoCell.h; sourceTree = "<group>"; };
 		1EA47A7E1DC1F4F300680858 /* OTSummaryInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSummaryInfoCell.m; sourceTree = "<group>"; };
 		1EA4F3071DA199A300A3321C /* OTDistributedDelegateBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTDistributedDelegateBehavior.h; path = Behaviors/OTDistributedDelegateBehavior.h; sourceTree = "<group>"; };
@@ -1143,6 +1146,8 @@
 				1EE817621D7A052C0003133D /* OTOngoingTourService.m */,
 				1E701CEB1DA2A5090041DD9D /* OTBadgeNumberService.h */,
 				1E701CEC1DA2A5090041DD9D /* OTBadgeNumberService.m */,
+				1EA3B70A1E5DB427003FF875 /* OTTutorialService.h */,
+				1EA3B70B1E5DB427003FF875 /* OTTutorialService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -2936,6 +2941,7 @@
 				453117A41CD251C200C00BA8 /* MKMapView+entourage.m in Sources */,
 				1E587F281E2E158100FEBB67 /* OTAssociationsCellProviderBehavior.m in Sources */,
 				1ECDBC6C1D3D363600DD87B2 /* OTEntourageMessaging.m in Sources */,
+				1EA3B70C1E5DB427003FF875 /* OTTutorialService.m in Sources */,
 				1EFAC0D21D89247900BE396F /* OTFeedItemsFilterCell.m in Sources */,
 				1E2232D51D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m in Sources */,
 				2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */,
