@@ -257,20 +257,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Association" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u99-10-ZmY">
-                                                    <rect key="frame" x="15" y="16" width="279" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="45p-3J-Pei"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddx-Qk-Uei">
+                                                    <rect key="frame" x="15" y="13" width="279" height="32"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
+                                                    <state key="normal" title="Association">
+                                                        <color key="titleColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maraudeur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8B-i0-KXx">
-                                                    <rect key="frame" x="15" y="42" width="279" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="iNw-sa-Mgz"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="15" y="45" width="279" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                     <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -285,13 +280,14 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="B8B-i0-KXx" firstAttribute="leading" secondItem="ddx-Qk-Uei" secondAttribute="leading" id="1A6-WD-1du"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="U3O-fj-1LU" secondAttribute="trailing" constant="15" id="80h-ql-b4N"/>
-                                                <constraint firstItem="u99-10-ZmY" firstAttribute="centerY" secondItem="caT-Ob-ccl" secondAttribute="centerY" constant="-13" id="BJq-OF-tbw"/>
                                                 <constraint firstItem="U3O-fj-1LU" firstAttribute="centerY" secondItem="caT-Ob-ccl" secondAttribute="centerY" id="Bh5-XL-zHv"/>
-                                                <constraint firstItem="B8B-i0-KXx" firstAttribute="leading" secondItem="u99-10-ZmY" secondAttribute="leading" id="DCI-Mv-sKt"/>
-                                                <constraint firstItem="u99-10-ZmY" firstAttribute="leading" secondItem="caT-Ob-ccl" secondAttribute="leadingMargin" constant="7" id="naa-H4-ctl"/>
-                                                <constraint firstItem="U3O-fj-1LU" firstAttribute="leading" secondItem="u99-10-ZmY" secondAttribute="trailing" constant="16" id="of2-Uj-BhM"/>
-                                                <constraint firstItem="B8B-i0-KXx" firstAttribute="trailing" secondItem="u99-10-ZmY" secondAttribute="trailing" id="xJ2-YB-b02"/>
+                                                <constraint firstItem="ddx-Qk-Uei" firstAttribute="leading" secondItem="caT-Ob-ccl" secondAttribute="leadingMargin" constant="7" id="Tmg-gy-hrs"/>
+                                                <constraint firstItem="B8B-i0-KXx" firstAttribute="top" secondItem="ddx-Qk-Uei" secondAttribute="bottom" id="hIC-nJ-gV2"/>
+                                                <constraint firstItem="ddx-Qk-Uei" firstAttribute="top" secondItem="caT-Ob-ccl" secondAttribute="topMargin" constant="5" id="qkB-7r-FaX"/>
+                                                <constraint firstItem="U3O-fj-1LU" firstAttribute="leading" secondItem="ddx-Qk-Uei" secondAttribute="trailing" constant="16" id="ryd-re-QXI"/>
+                                                <constraint firstItem="U3O-fj-1LU" firstAttribute="leading" secondItem="B8B-i0-KXx" secondAttribute="trailing" constant="16" id="uhF-7b-1vh"/>
                                                 <constraint firstItem="B8B-i0-KXx" firstAttribute="centerY" secondItem="caT-Ob-ccl" secondAttribute="centerY" constant="13" id="ziR-rf-zQ8"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -316,6 +312,7 @@
                         <outlet property="tableView" destination="8C3-0y-HVH" id="4Rf-Gt-8w0"/>
                         <outlet property="tapToEditBehavior" destination="auQ-gj-IRF" id="L7N-Rw-hjy"/>
                         <segue destination="62l-06-625" kind="presentation" identifier="EditProfileSegue" animates="NO" id="pXR-yC-dMJ"/>
+                        <segue destination="hxJ-pt-FFZ" kind="presentation" identifier="AssociationDetails" id="zJ0-oY-wSk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zYw-vN-Dix" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1216,13 +1213,13 @@ regard porté sur les plus pauvres.</string>
                                         <dataDetectorType key="dataDetectorTypes" address="YES"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Site web" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYN-cS-gwD">
-                                        <rect key="frame" x="15" y="605.5" width="60" height="18"/>
+                                        <rect key="frame" x="15" y="598" width="60" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="www.atd-quartmonde.fr" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="IYH-e4-CFr">
-                                        <rect key="frame" x="80" y="597.5" width="279" height="33"/>
+                                        <rect key="frame" x="80" y="590.5" width="279" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
@@ -1238,6 +1235,7 @@ regard porté sur les plus pauvres.</string>
                                     <constraint firstItem="ZTX-6z-OFK" firstAttribute="top" secondItem="asB-3D-2wa" secondAttribute="bottom" constant="18" id="9Gf-5N-f11"/>
                                     <constraint firstItem="xEd-6o-SEf" firstAttribute="top" secondItem="28x-LV-BDn" secondAttribute="top" id="Aeq-JD-RBv"/>
                                     <constraint firstItem="0eO-nF-XUZ" firstAttribute="centerY" secondItem="K2h-uc-N6u" secondAttribute="centerY" id="DUs-xf-Ekv"/>
+                                    <constraint firstItem="VbS-tn-dAu" firstAttribute="top" secondItem="0eO-nF-XUZ" secondAttribute="bottom" constant="5" id="Dd2-3Q-ElT"/>
                                     <constraint firstItem="At5-B7-hvD" firstAttribute="centerX" secondItem="28x-LV-BDn" secondAttribute="centerX" id="Dh0-LE-Ytb"/>
                                     <constraint firstAttribute="trailing" secondItem="asB-3D-2wa" secondAttribute="trailing" constant="15" id="ED8-ut-Xv4"/>
                                     <constraint firstItem="rpO-6j-oFB" firstAttribute="leading" secondItem="28x-LV-BDn" secondAttribute="leading" id="ESs-Y5-DwA"/>
@@ -1246,12 +1244,12 @@ regard porté sur les plus pauvres.</string>
                                     <constraint firstAttribute="trailing" secondItem="0eO-nF-XUZ" secondAttribute="trailing" constant="15" id="IAl-ZL-3aQ"/>
                                     <constraint firstItem="bYN-cS-gwD" firstAttribute="leading" secondItem="th9-9b-aov" secondAttribute="leading" id="JGw-3c-U9g"/>
                                     <constraint firstAttribute="bottom" secondItem="IYH-e4-CFr" secondAttribute="bottom" constant="17" id="KSd-9D-gAo"/>
+                                    <constraint firstItem="IYH-e4-CFr" firstAttribute="top" secondItem="VbS-tn-dAu" secondAttribute="bottom" constant="5" id="R2D-k0-hxX"/>
                                     <constraint firstItem="IYH-e4-CFr" firstAttribute="centerY" secondItem="bYN-cS-gwD" secondAttribute="centerY" id="UWd-eG-xNs"/>
                                     <constraint firstAttribute="trailing" secondItem="VbS-tn-dAu" secondAttribute="trailing" constant="15" id="V5g-mY-Vce"/>
                                     <constraint firstItem="rpO-6j-oFB" firstAttribute="top" secondItem="8UK-Kf-hWE" secondAttribute="bottom" constant="18" id="VWH-eb-qB6"/>
                                     <constraint firstAttribute="trailing" secondItem="xEd-6o-SEf" secondAttribute="trailing" id="WAN-zx-efc"/>
                                     <constraint firstItem="asB-3D-2wa" firstAttribute="leading" secondItem="28x-LV-BDn" secondAttribute="leading" constant="15" id="azt-RC-CBA"/>
-                                    <constraint firstItem="th9-9b-aov" firstAttribute="top" secondItem="K2h-uc-N6u" secondAttribute="bottom" constant="20" id="eCA-U7-cN5"/>
                                     <constraint firstItem="8UK-Kf-hWE" firstAttribute="leading" secondItem="28x-LV-BDn" secondAttribute="leading" id="hzK-ie-3VG"/>
                                     <constraint firstItem="ZTX-6z-OFK" firstAttribute="leading" secondItem="28x-LV-BDn" secondAttribute="leading" id="i1V-Hb-36h"/>
                                     <constraint firstItem="IYH-e4-CFr" firstAttribute="leading" secondItem="bYN-cS-gwD" secondAttribute="trailing" constant="5" id="icK-oL-9cj"/>
@@ -1262,7 +1260,6 @@ regard porté sur les plus pauvres.</string>
                                     <constraint firstAttribute="trailing" secondItem="rpO-6j-oFB" secondAttribute="trailing" id="qzr-Fd-XO2"/>
                                     <constraint firstItem="VbS-tn-dAu" firstAttribute="centerY" secondItem="th9-9b-aov" secondAttribute="centerY" id="s1m-0r-l3R"/>
                                     <constraint firstItem="VbS-tn-dAu" firstAttribute="leading" secondItem="th9-9b-aov" secondAttribute="trailing" constant="5" id="sae-uy-YYe"/>
-                                    <constraint firstItem="bYN-cS-gwD" firstAttribute="top" secondItem="VbS-tn-dAu" secondAttribute="bottom" constant="20" id="tPF-LM-Upp"/>
                                     <constraint firstAttribute="trailing" secondItem="8UK-Kf-hWE" secondAttribute="trailing" id="uXc-uZ-gWg"/>
                                     <constraint firstItem="xEd-6o-SEf" firstAttribute="leading" secondItem="28x-LV-BDn" secondAttribute="leading" id="vHx-qr-9PJ"/>
                                     <constraint firstAttribute="trailing" secondItem="IYH-e4-CFr" secondAttribute="trailing" constant="15" id="zOW-ij-2mi"/>
@@ -1302,7 +1299,7 @@ regard porté sur les plus pauvres.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggj-ze-Fy8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5326" y="-1513"/>
+            <point key="canvasLocation" x="5406" y="-1488"/>
         </scene>
     </scenes>
     <resources>
@@ -1314,6 +1311,7 @@ regard porté sur les plus pauvres.</string>
         <image name="user" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zJ0-oY-wSk"/>
         <segue reference="3vM-Q3-i8Z"/>
     </inferredMetricsTieBreakers>
 </document>
