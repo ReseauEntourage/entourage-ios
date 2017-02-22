@@ -7,6 +7,7 @@
 //
 
 #import "OTTutorialViewController.h"
+#import "UIColor+entourage.h"
 
 @interface OTTutorialViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource>
 
@@ -31,6 +32,11 @@
     
     self.dataSource = self;
     self.delegate = self;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self addBorderToPageControl];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,6 +82,18 @@
 - (UIViewController *)instantiateTutorial:(NSString *)identifier {
     UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
     return [tutorialStoryboard instantiateViewControllerWithIdentifier:identifier];
+}
+
+- (void)addBorderToPageControl {
+    for(UIView *view in self.view.subviews) {
+        if([view isKindOfClass:[UIPageControl class]]) {
+            for(UIView *subview in view.subviews) {
+                subview.layer.borderColor = [UIColor appGreyishBrownColor].CGColor;
+                subview.layer.borderWidth = 0.5;
+            }
+            break;
+        }
+    }
 }
 
 @end

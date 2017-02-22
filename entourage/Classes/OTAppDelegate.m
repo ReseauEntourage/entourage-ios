@@ -28,6 +28,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "entourage-Swift.h"
+#import "UIColor+entourage.h"
 
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
@@ -152,6 +153,9 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
         NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
 
+    UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
+    UIPageControl.appearance.currentPageIndicatorTintColor = [UIColor appGreyishBrownColor];
+    
 #if BETA
     UINavigationBar.appearance.barTintColor = [UIColor redColor];
     UINavigationBar.appearance.backgroundColor = [UIColor redColor];
