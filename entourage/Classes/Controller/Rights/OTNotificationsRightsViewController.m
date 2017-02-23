@@ -19,6 +19,7 @@
 #import "SVProgressHUD.h"
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsService.h"
+#import "OTTutorialService.h"
 
 @implementation OTNotificationsRightsViewController
 
@@ -69,8 +70,10 @@
     [SVProgressHUD showWithStatus:OTLocalizedString(@"joiningEntouragesMessage")];
     [[OTOnboardingJoinService new] checkForJoins:^(OTEntourageInvitation *joinedInvitation) {
         [SVProgressHUD dismiss];
-        if(joinedInvitation)
+        if(joinedInvitation) {
             [[OTDeepLinkService new] navigateTo:joinedInvitation.entourageId withType:nil];
+            [[OTTutorialService new] showTutorial];
+        }
         else
             [UIStoryboard showSWRevealController];
     } withError:^(NSError *error) {

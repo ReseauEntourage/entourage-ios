@@ -5,6 +5,7 @@
 
 static NSString *const kUser = @"kUser";
 static NSString *const kTemporaryUser = @"kTemporaryUser";
+static NSString *const kAutoTutorialComplete = @"kAutoTutorialComplete";
 
 @implementation NSUserDefaults (OT)
 
@@ -49,6 +50,22 @@ static NSString *const kTemporaryUser = @"kTemporaryUser";
     NSData *encodedObject = [self objectForKey:kTemporaryUser];
     OTUser *user = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
     return user;
+}
+
+- (void)setAutoTutorialShown:(BOOL)autoTutorialShown {
+    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kAutoTutorialComplete]];
+    BOOL hasPhoneInNumbers = [loggedNumbers containsObject:self.currentUser.phone];
+    if(hasPhoneInNumbers && !autoTutorialShown)
+       [loggedNumbers removeObject:self.currentUser.phone];
+    if(!hasPhoneInNumbers && autoTutorialShown)
+        [loggedNumbers addObject:self.currentUser.phone];
+    [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kAutoTutorialComplete];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)autoTutorialShown {
+    NSMutableArray *numbersWithTutorial = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kAutoTutorialComplete]];
+    return [numbersWithTutorial containsObject:self.currentUser.phone];
 }
 
 - (BOOL)isTutorialCompleted {

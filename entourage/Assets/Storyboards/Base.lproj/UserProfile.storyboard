@@ -952,10 +952,10 @@
             </objects>
             <point key="canvasLocation" x="4491" y="-384"/>
         </scene>
-        <!--Select Association-->
+        <!--Select Association Controller-->
         <scene sceneID="gXh-vf-4uI">
             <objects>
-                <viewController id="2Re-2N-5px" userLabel="Select Association" customClass="OTSelectAssociationViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectAssociation" id="2Re-2N-5px" userLabel="Select Association Controller" customClass="OTSelectAssociationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="77D-sG-9nG"/>
                         <viewControllerLayoutGuide type="bottom" id="nh2-wz-Jsg"/>
@@ -1128,13 +1128,13 @@ pour nous demander de l’ajouter !</string>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATD Quart Monde" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8UK-Kf-hWE">
-                                        <rect key="frame" x="0.0" y="137" width="374" height="27"/>
+                                        <rect key="frame" x="0.0" y="137" width="374" height="26"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="22"/>
                                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rpO-6j-oFB">
-                                        <rect key="frame" x="0.0" y="182" width="374" height="46"/>
+                                        <rect key="frame" x="0.0" y="181" width="374" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qui nous sommes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gD9-OZ-n7r">
                                                 <rect key="frame" x="0.0" y="20" width="374" height="18"/>
@@ -1152,7 +1152,7 @@ pour nous demander de l’ajouter !</string>
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="252" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="asB-3D-2wa">
-                                        <rect key="frame" x="15" y="246" width="344" height="195.5"/>
+                                        <rect key="frame" x="15" y="245" width="344" height="195.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <string key="text">ATD Quart Monde a pour but d’éradiquer la misère en agissant sur trois plans :
 – sur le terrain avec les personnes concernées pour obtenir l’application du droit pour tous
@@ -1166,7 +1166,7 @@ regard porté sur les plus pauvres.</string>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                     </textView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTX-6z-OFK">
-                                        <rect key="frame" x="0.0" y="459.5" width="374" height="46"/>
+                                        <rect key="frame" x="0.0" y="458.5" width="374" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Informations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2g-cu-egF">
                                                 <rect key="frame" x="0.0" y="20" width="374" height="18"/>
@@ -1185,13 +1185,13 @@ regard porté sur les plus pauvres.</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Numéro de téléphone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2h-uc-N6u">
-                                        <rect key="frame" x="15" y="521.5" width="152" height="18"/>
+                                        <rect key="frame" x="15" y="520.5" width="151.5" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="01 98 29 34 34" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="0eO-nF-XUZ">
-                                        <rect key="frame" x="172" y="514.5" width="187" height="33"/>
+                                        <rect key="frame" x="171.5" y="513.5" width="187.5" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
@@ -1199,13 +1199,13 @@ regard porté sur les plus pauvres.</string>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adresse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th9-9b-aov">
-                                        <rect key="frame" x="15" y="559.5" width="57" height="18"/>
+                                        <rect key="frame" x="15" y="558.5" width="57" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="7 rue de Paris, 75014" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="VbS-tn-dAu">
-                                        <rect key="frame" x="77" y="552.5" width="282" height="33"/>
+                                        <rect key="frame" x="77" y="551.5" width="282" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
@@ -1213,13 +1213,13 @@ regard porté sur les plus pauvres.</string>
                                         <dataDetectorType key="dataDetectorTypes" address="YES"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Site web" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYN-cS-gwD">
-                                        <rect key="frame" x="15" y="598" width="60" height="18"/>
+                                        <rect key="frame" x="15" y="597" width="60" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="www.atd-quartmonde.fr" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="IYH-e4-CFr">
-                                        <rect key="frame" x="80" y="590.5" width="279" height="33"/>
+                                        <rect key="frame" x="80" y="589.5" width="279" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
@@ -1283,7 +1283,7 @@ regard porté sur les plus pauvres.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8oN-vx-TP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6050" y="-1513"/>
+            <point key="canvasLocation" x="6146" y="-1488"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xFr-L3-WBG">

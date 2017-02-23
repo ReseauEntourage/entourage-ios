@@ -10,6 +10,7 @@ extern NSString *const kTutorialDone;
 
 @property (nonatomic, strong) OTUser *currentUser;
 @property (nonatomic, strong) OTUser *temporaryUser;
+@property (nonatomic, assign) BOOL autoTutorialShown;
 
 - (BOOL)isTutorialCompleted;
 
