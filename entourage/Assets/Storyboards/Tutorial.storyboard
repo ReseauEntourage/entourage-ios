@@ -25,7 +25,7 @@
         <scene sceneID="Fgi-aR-yd4">
             <objects>
                 <navigationController id="nst-ed-x0I" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="t1C-43-4BS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="t1C-43-4BS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="XiS-Y9-YO4">
-                                <rect key="frame" x="16" y="228" width="343" height="213"/>
+                                <rect key="frame" x="16" y="227.5" width="343" height="213"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. OSEZ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-R3-XMU">
                                         <rect key="frame" x="20" y="0.0" width="303" height="29"/>
@@ -157,7 +157,7 @@
                             <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="6n7-JU-34j">
                                 <rect key="frame" x="16" y="142.5" width="343" height="383.5"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="nCv-Ol-zvA">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapTutorial" translatesAutoresizingMaskIntoConstraints="NO" id="nCv-Ol-zvA">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="140"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="140" id="AUx-a8-Pcm"/>
@@ -236,7 +236,7 @@ Rejoignez-les pour donner du temps, des compétences, des conseils, etc.</string
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="uiK-sn-ik8">
-                                <rect key="frame" x="16" y="229.5" width="343" height="208.5"/>
+                                <rect key="frame" x="16" y="230" width="343" height="208.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Créez" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZr-tP-l4q">
                                         <rect key="frame" x="20" y="0.0" width="303" height="29"/>
@@ -265,11 +265,11 @@ Vos voisins pourront vous rejoindre pour se coordonner et vous aider dans votre 
                                     <constraint firstAttribute="bottom" secondItem="3GM-jo-9aO" secondAttribute="bottom" id="scF-fC-n26"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="createNoShadow" translatesAutoresizingMaskIntoConstraints="NO" id="gwf-K0-D8F">
-                                <rect key="frame" x="293" y="585" width="62" height="62"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plusWithCircle" translatesAutoresizingMaskIntoConstraints="NO" id="gwf-K0-D8F">
+                                <rect key="frame" x="274" y="566" width="81" height="81"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="OOH-1K-Fbb"/>
-                                    <constraint firstAttribute="width" constant="62" id="bfE-hl-zbg"/>
+                                    <constraint firstAttribute="height" constant="81" id="OOH-1K-Fbb"/>
+                                    <constraint firstAttribute="width" constant="81" id="bfE-hl-zbg"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -388,9 +388,9 @@ Vos voisins pourront vous rejoindre pour se coordonner et vous aider dans votre 
         </scene>
     </scenes>
     <resources>
-        <image name="bg" width="166" height="296"/>
-        <image name="createNoShadow" width="62" height="62"/>
         <image name="hands" width="32" height="32"/>
+        <image name="mapTutorial" width="375" height="157"/>
+        <image name="plusWithCircle" width="75" height="75"/>
         <image name="userWithBadge" width="123" height="119"/>
     </resources>
 </document>
