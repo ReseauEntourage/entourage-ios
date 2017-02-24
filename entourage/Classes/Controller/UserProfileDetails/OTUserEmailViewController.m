@@ -79,7 +79,7 @@
 }
 
 - (IBAction)doContinue {
-    [Flurry logEvent:@"EmailSubmit"];
+    [OTLogger logEvent:@"EmailSubmit"];
     NSString *email = self.emailTextField.text;
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     currentUser.email = email;
@@ -97,7 +97,7 @@
                                                    [self.onboardingNavigation nextFromEmail];
                                                }
                                                failure:^(NSError *error) {
-                                                   [Flurry logEvent:@"EmailSubmitError"];
+                                                   [OTLogger logEvent:@"EmailSubmitError"];
                                                    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
                                                    NSLog(@"ERR: something went wrong on onboarding user email: %@", error.description);
                                                }];

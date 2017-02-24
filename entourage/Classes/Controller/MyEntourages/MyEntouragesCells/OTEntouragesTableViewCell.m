@@ -36,7 +36,7 @@
 }
 
 - (IBAction)showUserDetails:(id)sender {
-    [Flurry logEvent:@"UserProfileClick"];
+    [OTLogger logEvent:@"UserProfileClick"];
     NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
     OTFeedItem *feedItem = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
     [self.userProfile showProfile:feedItem.author.uID];

@@ -14,7 +14,7 @@ struct UserStorageKey {
   static let amazonAccessKey = "AmazonAccessKey"
   static let amazonSecretKey = "AmazonSecretKey"
   static let amazonPictureFolder = "AmazonPictureFolder"
-  static let flurryAPIKey = "FlurryApiKey"
+  static let flurryAPIKey = "FlurryAPIKey"
   static let nuanceHostAddress = "NuanceHostAddress"
   static let nuanceAppId = "NuanceAppId"
 }

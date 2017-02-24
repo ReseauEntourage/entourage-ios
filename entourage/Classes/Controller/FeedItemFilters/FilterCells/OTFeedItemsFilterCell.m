@@ -60,7 +60,7 @@
         default:
             break;
     }
-    [Flurry logEvent:message];
+    [OTLogger logEvent:message];
 }
 
 @end

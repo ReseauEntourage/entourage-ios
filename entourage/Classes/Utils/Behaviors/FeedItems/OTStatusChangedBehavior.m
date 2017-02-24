@@ -25,7 +25,7 @@
 }
 
 - (IBAction)startChangeStatus {
-    [Flurry logEvent:@"OpenEntourageOptionsOverlay"];
+    [OTLogger logEvent:@"OpenEntourageOptionsOverlay"];
     [self.owner performSegueWithIdentifier:@"SegueChangeState" sender:self];
 }
 

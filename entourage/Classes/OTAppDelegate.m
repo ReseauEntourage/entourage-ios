@@ -48,9 +48,9 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [[OTDebugLog sharedInstance] setConsoleOutput];
 
 #if !DEBUG
-    [Flurry setAppVersion:[OTVersionInfo currentVersion]];
-    [Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
-    [Fabric with:@[[Crashlytics class]]];
+    [Flurry setBackgroundSessionEnabled:NO];
+    FlurrySessionBuilder *builder = [[[[FlurrySessionBuilder new] withLogLevel:FlurryLogLevelAll] withCrashReporting:YES] withAppVersion:[OTVersionInfo currentVersion]];
+    [Flurry startSession:[ConfigurationManager shared].flurryAPIKey withSessionBuilder:builder];
 #endif
 
     [IQKeyboardManager sharedManager].enable = YES;

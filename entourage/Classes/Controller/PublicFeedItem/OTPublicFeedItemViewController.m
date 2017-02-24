@@ -60,7 +60,7 @@
 }
 
 - (IBAction)showUserProfile:(id)sender {
-    [Flurry logEvent:@"UserProfileClick"];
+    [OTLogger logEvent:@"UserProfileClick"];
     [self.userProfileBehavior showProfile:self.feedItem.author.uID];
 }
 
@@ -78,7 +78,7 @@
 #pragma mark - private methods
 
 - (IBAction)joinFeedItem:(id)sender {
-    [Flurry logEvent:@"AskJoinFromPublicPage"];
+    [OTLogger logEvent:@"AskJoinFromPublicPage"];
     [self.joinBehavior join:self.feedItem];
 }
 

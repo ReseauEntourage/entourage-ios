@@ -78,7 +78,7 @@
 }
 
 - (IBAction)doContinue {
-    [Flurry logEvent:@"NameSubmit"];
+    [OTLogger logEvent:@"NameSubmit"];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     currentUser.firstName = self.firstNameTextField.text;
     currentUser.lastName = self.lastNameTextField.text;
@@ -96,14 +96,14 @@
             [self.onboardingNavigation nextFromName];
         }
     } failure:^(NSError *error) {
-        [Flurry logEvent:@"NameSubmitError"];
+        [OTLogger logEvent:@"NameSubmitError"];
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         NSLog(@"ERR: something went wrong on onboarding user name: %@", error.description);
     }];
 }
 
 - (IBAction)textChanged:(id)sender {
-    [Flurry logEvent:@"NameType"];
+    [OTLogger logEvent:@"NameType"];
 }
 
 /********************************************************************************/

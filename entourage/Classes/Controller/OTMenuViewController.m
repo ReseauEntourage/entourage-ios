@@ -94,7 +94,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [Flurry logEvent:@"OpenMenu"];
+    [OTLogger logEvent:@"OpenMenu"];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
 }
@@ -128,7 +128,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 	if (indexPath.section == 1) {
-        [Flurry logEvent:@"LogOut"];
+        [OTLogger logEvent:@"LogOut"];
         [OTOngoingTourService sharedInstance].isOngoing = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
@@ -146,7 +146,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 #pragma mark - Actions
 
 - (IBAction)showProfile {
-    [Flurry logEvent:@"TapMyProfilePhoto"];
+    [OTLogger logEvent:@"TapMyProfilePhoto"];
     [self performSegueWithIdentifier:@"segueMenuIdentifierForProfile" sender:self];
 }
 
@@ -171,9 +171,9 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuAboutIdentifier])
-        [Flurry logEvent:@"AboutClick"];
+        [OTLogger logEvent:@"AboutClick"];
     else if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuDisconnectIdentifier]) {
-        [Flurry logEvent:@"LogOut"];
+        [OTLogger logEvent:@"LogOut"];
         [OTOngoingTourService sharedInstance].isOngoing = NO;
     }
     if (![self.controllersDictionary objectForKey:segue.identifier] && [segue.identifier isEqualToString:@"segueMenuIdentifierForProfile"]) {

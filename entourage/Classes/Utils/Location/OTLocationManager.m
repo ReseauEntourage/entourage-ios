@@ -58,7 +58,7 @@
 }
 
 - (void)showGeoLocationNotAllowedMessage:(NSString *)message {
-    [Flurry logEvent:@"ActivateGeolocFromCreateTourPopup"];
+    [OTLogger logEvent:@"ActivateGeolocFromCreateTourPopup"];
     UIViewController *rootController = [[OTDeepLinkService new] getTopViewController];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];

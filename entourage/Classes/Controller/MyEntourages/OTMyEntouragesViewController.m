@@ -67,12 +67,12 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if(self.isMovingFromParentViewController)
-        [Flurry logEvent:@"BackToFeedClick"];
+        [OTLogger logEvent:@"BackToFeedClick"];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.optionsBehavior prepareSegueForOptions:segue]) {
-        [Flurry logEvent:@"PlusOnMessagesPageClick"];
+        [OTLogger logEvent:@"PlusOnMessagesPageClick"];
         return;
     }
     if([self.feedItemDetailsBehavior prepareSegueForDetails:segue])
@@ -82,7 +82,7 @@
     if ([self.userProfileBehavior prepareSegueForUserProfile:segue])
         return;
     if([segue.identifier isEqualToString:@"FiltersSegue"]) {
-        [Flurry logEvent:@"MessagesFilterClick"];
+        [OTLogger logEvent:@"MessagesFilterClick"];
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTFeedItemFiltersViewController *filtersController = (OTFeedItemFiltersViewController *)controller.topViewController;
         filtersController.filterDelegate = self.entouragesDataSource;

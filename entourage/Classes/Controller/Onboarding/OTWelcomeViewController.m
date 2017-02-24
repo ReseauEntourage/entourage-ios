@@ -52,7 +52,7 @@
 }
 
 - (IBAction)continueOnboarding:(id)sender {
-    [Flurry logEvent:@"WelcomeScreenContinue"];
+    [OTLogger logEvent:@"WelcomeScreenContinue"];
     [self performSegueWithIdentifier:CONTINUE_ONBOARDING_SEGUE sender:self];
 }
 

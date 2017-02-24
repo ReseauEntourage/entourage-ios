@@ -290,7 +290,7 @@
         if (distance <=  MAX_DISTANCE) {
             encounterFromTap = YES;
             self.encounterLocation = whereTap;
-            [Flurry logEvent:@"HiddenButtonsOverlayPress"];
+            [OTLogger logEvent:@"HiddenButtonsOverlayPress"];
             [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
         } else {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
@@ -319,7 +319,7 @@
 }
 
 - (void)showEntourages {
-    [Flurry logEvent:@"GoToMessages"];
+    [OTLogger logEvent:@"GoToMessages"];
     [self performSegueWithIdentifier:@"MyEntouragesSegue" sender:self];
 }
 
@@ -439,7 +439,7 @@
     if([view.annotation isKindOfClass:[OTCustomAnnotation class]])
         annotation = (OTCustomAnnotation *)view.annotation;
     if (annotation == nil) return;
-    [Flurry logEvent:@"POIView"];
+    [OTLogger logEvent:@"POIView"];
     [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation];
 }
 
@@ -586,7 +586,7 @@
     NSString *eventName = @"PlusOnTourClick";
     if(![OTOngoingTourService sharedInstance].isOngoing)
         eventName = self.toursMapDelegate.isActive ? @"PlusFromFeedClick" : @"PlusFromGDSClick";
-    [Flurry logEvent:eventName];
+    [OTLogger logEvent:eventName];
     [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
 }
 
@@ -600,7 +600,7 @@
 }
 
 - (IBAction)stopTour:(id)sender {
-    [Flurry logEvent:@"SuspendTourClick"];
+    [OTLogger logEvent:@"SuspendTourClick"];
     [self.tourCreatorBehavior stopTour];
 }
 
@@ -641,12 +641,12 @@
 - (void)handleTap:(UITapGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateEnded) {
         if(self.isTourListDisplayed) {
-            [Flurry logEvent:@"MapClick"];
+            [OTLogger logEvent:@"MapClick"];
             [self showToursMap];
         }
         else {
             if([self.tapEntourage hasTappedEntourage:sender]) {
-                [Flurry logEvent:@"HeatzoneMapClick"];
+                [OTLogger logEvent:@"HeatzoneMapClick"];
                 [self showToursList];
             }
             else
@@ -711,7 +711,7 @@
         message = self.toursMapDelegate.isActive ? @"OnTourShowGuide" : @"OnTourHideGuide";
     else
         message = self.toursMapDelegate.isActive ? @"GDSViewClick" : @"MaskGDSClick";
-    [Flurry logEvent:message];
+    [OTLogger logEvent:message];
     [self dismissViewControllerAnimated:NO completion:^{
         if (self.toursMapDelegate.isActive)
             [self switchToGuide];
@@ -771,7 +771,7 @@
 }
 
 - (IBAction)doShowNewFeedItems:(UIButton*)sender {
-    [Flurry logEvent:@"ScrollListPage"];
+    [OTLogger logEvent:@"ScrollListPage"];
     self.nouveauxFeedItemsButton.hidden = YES;
     [self.tableView reloadData];
     [self.tableView setContentOffset:CGPointZero animated:YES];
@@ -784,18 +784,18 @@
 #pragma mark - Feeds Table View Delegate
 
 - (void)loadMoreData {
-    [Flurry logEvent:@"RefreshListPage"];
+    [OTLogger logEvent:@"RefreshListPage"];
     [self.newsFeedsSourceBehavior loadMoreItems];
 }
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;
     if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
-        [Flurry logEvent:@"OpenEntouragePublicPage"];
+        [OTLogger logEvent:@"OpenEntouragePublicPage"];
         [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
     }
     else {
-        [Flurry logEvent:@"OpenEntourageActivePage"];
+        [OTLogger logEvent:@"OpenEntourageActivePage"];
         [self performSegueWithIdentifier:@"ActiveFeedItemDetailsSegue" sender:self];
     }
 }
@@ -817,11 +817,11 @@
     FeedItemState currentState = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] getState];
     switch (currentState) {
         case FeedItemStateJoinNotRequested:
-            [Flurry logEvent:@"OpenEnterInContact"];
+            [OTLogger logEvent:@"OpenEnterInContact"];
             [self sendJoinRequest:feedItem];
             break;
         case FeedItemStateJoinPending:
-            [Flurry logEvent:@"PendingRequestOverlay"];
+            [OTLogger logEvent:@"PendingRequestOverlay"];
             break;
         case FeedItemStateOngoing:
             self.tourCreatorBehavior.tour = (OTTour *)feedItem;
@@ -831,7 +831,7 @@
         case FeedItemStateJoinAccepted:
         case FeedItemStateOpen:
         case FeedItemStateClosed:
-            [Flurry logEvent:@"OpenActiveCloseOverlay"];
+            [OTLogger logEvent:@"OpenActiveCloseOverlay"];
             [self.statusChangedBehavior configureWith:feedItem];
             [self.statusChangedBehavior startChangeStatus];
             break;
@@ -844,11 +844,11 @@
 
 - (IBAction)changedSegmentedControlValue:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == 1) {
-        [Flurry logEvent:@"ListViewClick"];
+        [OTLogger logEvent:@"ListViewClick"];
         [self showToursList];
     }
     else
-        [Flurry logEvent:@"MapViewClick"];
+        [OTLogger logEvent:@"MapViewClick"];
 }
 
 #pragma mark - "Screens"

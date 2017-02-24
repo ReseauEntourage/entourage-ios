@@ -12,19 +12,19 @@
 @implementation OTInviteSourceViewController
 
 - (IBAction)close:(id)sender {
-    [Flurry logEvent:@"InviteFriendsClose"];
+    [OTLogger logEvent:@"InviteFriendsClose"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)inviteContacts:(id)sender {
-    [Flurry logEvent:@"InviteContacts"];
+    [OTLogger logEvent:@"InviteContacts"];
     [self dismissViewControllerAnimated:YES completion:nil];
     if(self.delegate)
         [self.delegate inviteContacts];
 }
 
 - (IBAction)inviteByPhone:(id)sender {
-    [Flurry logEvent:@"InviteByPhoneNumber"];
+    [OTLogger logEvent:@"InviteByPhoneNumber"];
     [self dismissViewControllerAnimated:YES completion:nil];
     if(self.delegate)
         [self.delegate inviteByPhone];

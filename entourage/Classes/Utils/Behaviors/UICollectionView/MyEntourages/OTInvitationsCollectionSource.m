@@ -30,7 +30,7 @@
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [Flurry logEvent:@"BannerMessageClick"];
+    [OTLogger logEvent:@"BannerMessageClick"];
     OTEntourageInvitation *invitation = (OTEntourageInvitation *)[self getItemAtIndexPath:indexPath];
     [self.manageInvitations showFor:invitation];
 }

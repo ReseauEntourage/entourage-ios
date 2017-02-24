@@ -167,7 +167,7 @@
     
     UIViewController *destinationViewController = segue.destinationViewController;
     if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]]) {
-        [Flurry logEvent:@"ChangeLocationClick"];
+        [OTLogger logEvent:@"ChangeLocationClick"];
         OTLocationSelectorViewController* controller = (OTLocationSelectorViewController *)destinationViewController;
         controller.locationSelectionDelegate = self;
         controller.selectedLocation = self.location;

@@ -100,7 +100,7 @@
 }
 
 - (IBAction)sendEncounter:(UIBarButtonItem*)sender {
-    [Flurry logEvent:@"ValidateEncounterClick"];
+    [OTLogger logEvent:@"ValidateEncounterClick"];
     if(self.nameTextField.text.length == 0) {
         [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_enter_name_of_met_person") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
         return;
@@ -139,7 +139,7 @@
     
     UIViewController *destinationViewController = segue.destinationViewController;
     if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]]) {
-        [Flurry logEvent:@"ChangeLocationClick"];
+        [OTLogger logEvent:@"ChangeLocationClick"];
         OTLocationSelectorViewController* controller = (OTLocationSelectorViewController *)destinationViewController;
         controller.locationSelectionDelegate = self;
         CLLocation *current = [[CLLocation alloc] initWithLatitude:self.location.latitude longitude:self.location.longitude];

@@ -81,12 +81,12 @@
 }
 
 - (void)showFilters {
-    [Flurry logEvent:@"FeedFiltersPress"];
+    [OTLogger logEvent:@"FeedFiltersPress"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowFilters object:nil];
 }
 
 - (void)showCurrentLocation {
-    [Flurry logEvent:@"RecenterMapClick"];
+    [OTLogger logEvent:@"RecenterMapClick"];
     if(![OTLocationManager sharedInstance].isAuthorized)
        [[OTLocationManager sharedInstance] showGeoLocationNotAllowedMessage:OTLocalizedString(@"ask_permission_location_recenter_map")];
     else if(![OTLocationManager sharedInstance].currentLocation)

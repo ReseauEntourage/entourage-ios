@@ -25,7 +25,7 @@
 }
 
 - (void)startInvite {
-    [Flurry logEvent:@"InviteFriendsClick"];
+    [OTLogger logEvent:@"InviteFriendsClick"];
     [self.owner performSegueWithIdentifier:@"SegueInviteSource" sender:nil];
 }
 

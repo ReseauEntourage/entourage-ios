@@ -42,7 +42,7 @@
 }
 
 - (IBAction)edit:(id)sender {
-    [Flurry logEvent:@"EditEntourageConfirm"];
+    [OTLogger logEvent:@"EditEntourageConfirm"];
     [self dismissViewControllerAnimated:YES completion:^{
         [self.editEntourageBehavior doEdit:(OTEntourage *)self.feedItem];
     }];

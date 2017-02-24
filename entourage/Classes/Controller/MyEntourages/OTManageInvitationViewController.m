@@ -50,7 +50,7 @@
 }
 
 - (IBAction)showProfile {
-    [Flurry logEvent:@"UserProfileClick"];
+    [OTLogger logEvent:@"UserProfileClick"];
     [self.userProfileBehavior showProfile:self.feedItem.author.uID];
 }
 

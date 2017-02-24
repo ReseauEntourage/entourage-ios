@@ -173,6 +173,7 @@
 		1E8E16E91D5A3814005C42ED /* OTEntourageInvitation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E16E81D5A3814005C42ED /* OTEntourageInvitation.m */; };
 		1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9003681D34FAAB004E18BC /* OTBehavior.m */; };
 		1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E90036D1D352C0B004E18BC /* UserPicture.storyboard */; };
+		1E9511321E601C5C00CF05BB /* OTLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9511311E601C5C00CF05BB /* OTLogger.m */; };
 		1E993BFC1DDB514300621770 /* OTNoDataBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E993BFB1DDB514300621770 /* OTNoDataBehavior.m */; };
 		1E993BFF1DDB532E00621770 /* NSAttributedString+OTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E993BFE1DDB532E00621770 /* NSAttributedString+OTBuilder.m */; };
 		1E9B38701DC882A1000F9F3F /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386F1DC882A1000F9F3F /* prod.plist */; };
@@ -664,6 +665,8 @@
 		1E9003671D34FAAB004E18BC /* OTBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTBehavior.h; path = Behaviors/OTBehavior.h; sourceTree = "<group>"; };
 		1E9003681D34FAAB004E18BC /* OTBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTBehavior.m; path = Behaviors/OTBehavior.m; sourceTree = "<group>"; };
 		1E90036E1D352C0B004E18BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserPicture.storyboard; sourceTree = "<group>"; };
+		1E9511301E601C5C00CF05BB /* OTLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTLogger.h; path = Services/OTLogger.h; sourceTree = "<group>"; };
+		1E9511311E601C5C00CF05BB /* OTLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTLogger.m; path = Services/OTLogger.m; sourceTree = "<group>"; };
 		1E993BFA1DDB514300621770 /* OTNoDataBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTNoDataBehavior.h; path = Behaviors/NewsFeed/OTNoDataBehavior.h; sourceTree = "<group>"; };
 		1E993BFB1DDB514300621770 /* OTNoDataBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTNoDataBehavior.m; path = Behaviors/NewsFeed/OTNoDataBehavior.m; sourceTree = "<group>"; };
 		1E993BFD1DDB532E00621770 /* NSAttributedString+OTBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSAttributedString+OTBuilder.h"; path = "Helper/NSAttributedString+OTBuilder.h"; sourceTree = "<group>"; };
@@ -1156,6 +1159,8 @@
 				1E701CEC1DA2A5090041DD9D /* OTBadgeNumberService.m */,
 				1EA3B70A1E5DB427003FF875 /* OTTutorialService.h */,
 				1EA3B70B1E5DB427003FF875 /* OTTutorialService.m */,
+				1E9511301E601C5C00CF05BB /* OTLogger.h */,
+				1E9511311E601C5C00CF05BB /* OTLogger.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -2839,6 +2844,7 @@
 				1E07AD641D5667E400466FB7 /* OTStatusChangedBehavior.m in Sources */,
 				1EACCAC31D64CD720027D1ED /* OTDeepLinkService.m in Sources */,
 				0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */,
+				1E9511321E601C5C00CF05BB /* OTLogger.m in Sources */,
 				0A94B5001B8CC66100402AF3 /* OTTour.m in Sources */,
 				1E5C302A1D6F7D5D00E10770 /* OTManageInvitationViewController.m in Sources */,
 				1EACE41B1D11515200F3A2A6 /* OTLocationManager.m in Sources */,

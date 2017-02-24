@@ -57,7 +57,7 @@
 }
 
 - (IBAction)doContinue {
-    [Flurry logEvent:@"TelephoneSubmit"];
+    [OTLogger logEvent:@"TelephoneSubmit"];
     OTUser *temporaryUser = [OTUser new];
     NSString *phone = self.phoneTextField.text;
     temporaryUser.phone = phone;
@@ -89,7 +89,7 @@
                 errorMessage = OTLocalizedString(@"phoneAlreadyExits");
             }
             if (errorMessage) {
-                [Flurry logEvent:@"TelephoneSubmitFail"];
+                [OTLogger logEvent:@"TelephoneSubmitFail"];
                 if(showErrorHUD)
                     [SVProgressHUD showErrorWithStatus:errorMessage];
             } else {

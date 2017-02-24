@@ -242,7 +242,7 @@
 #pragma mark - Tour Cell Handling
 
 - (void)doShowProfile:(UIButton*)userButton {
-    [Flurry logEvent:@"UserProfileClick"];
+    [OTLogger logEvent:@"UserProfileClick"];
     UITableViewCell *cell = (UITableViewCell*)userButton.superview.superview;
     NSInteger index = [self indexPathForCell:cell].section;
     if(self.items.count > index) {
