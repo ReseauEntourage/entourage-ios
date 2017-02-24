@@ -28,7 +28,7 @@
 #import "IQKeyboardManager.h"
 #import "OTBottomScrollBehavior.h"
 
-@interface OTActiveFeedItemViewController ()
+@interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet OTSummaryProviderBehavior *summaryProvider;
 @property (strong, nonatomic) IBOutlet OTInviteBehavior *inviteBehavior;
@@ -48,6 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.txtChat.delegate = self;
     [self.scrollBottomBehavior initialize];
     [self.summaryProvider configureWith:self.feedItem];
     [self.inviteBehavior configureWith:self.feedItem];
@@ -127,6 +128,12 @@
 - (IBAction)scrollToBottomWhileEditing {
     if(self.dataSource.items.count > 0)
         [self.dataSource.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.items.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    [OTLogger logEvent:@"WriteMessage"];
 }
 
 @end
