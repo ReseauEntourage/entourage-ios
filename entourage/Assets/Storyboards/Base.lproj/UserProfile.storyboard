@@ -329,7 +329,7 @@
         <scene sceneID="M5j-4s-qmF">
             <objects>
                 <navigationController id="Th9-id-j6L" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fW5-G3-hQ3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fW5-G3-hQ3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -754,7 +754,7 @@
         <scene sceneID="U66-ZG-q0z">
             <objects>
                 <navigationController id="JY3-Ti-PBi" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ivf-eh-h7N">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ivf-eh-h7N">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -929,7 +929,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="62l-06-625" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RBg-dA-hRE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RBg-dA-hRE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1114,27 +1114,37 @@ pour nous demander de l’ajouter !</string>
                                             <constraint firstAttribute="height" constant="73" id="akH-w3-aRd"/>
                                         </constraints>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="atdLogo" translatesAutoresizingMaskIntoConstraints="NO" id="At5-B7-hvD">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQz-uW-lOa">
                                         <rect key="frame" x="134" y="20" width="107" height="107"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="atdLogo" translatesAutoresizingMaskIntoConstraints="NO" id="At5-B7-hvD">
+                                                <rect key="frame" x="20" y="16" width="67" height="75"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </imageView>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="107" id="2TT-Tc-NsU"/>
-                                            <constraint firstAttribute="width" constant="107" id="aU6-ek-uBD"/>
+                                            <constraint firstAttribute="bottom" secondItem="At5-B7-hvD" secondAttribute="bottom" constant="16" id="5Vd-F9-Ggb"/>
+                                            <constraint firstAttribute="height" constant="107" id="KlS-pa-9jc"/>
+                                            <constraint firstItem="At5-B7-hvD" firstAttribute="leading" secondItem="zQz-uW-lOa" secondAttribute="leading" constant="20" id="WQj-Cm-Qcm"/>
+                                            <constraint firstAttribute="width" constant="107" id="hsz-sg-BR2"/>
+                                            <constraint firstItem="At5-B7-hvD" firstAttribute="top" secondItem="zQz-uW-lOa" secondAttribute="top" constant="16" id="pjz-4z-Pyd"/>
+                                            <constraint firstAttribute="trailing" secondItem="At5-B7-hvD" secondAttribute="trailing" constant="20" id="wYf-SP-BQy"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="54"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                    </imageView>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATD Quart Monde" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8UK-Kf-hWE">
-                                        <rect key="frame" x="0.0" y="137" width="374" height="26"/>
+                                        <rect key="frame" x="0.0" y="137" width="374" height="27"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="22"/>
                                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rpO-6j-oFB">
-                                        <rect key="frame" x="0.0" y="181" width="374" height="46"/>
+                                        <rect key="frame" x="0.0" y="182" width="374" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qui nous sommes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gD9-OZ-n7r">
                                                 <rect key="frame" x="0.0" y="20" width="374" height="18"/>
@@ -1152,7 +1162,7 @@ pour nous demander de l’ajouter !</string>
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="252" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="asB-3D-2wa">
-                                        <rect key="frame" x="15" y="245" width="344" height="195.5"/>
+                                        <rect key="frame" x="15" y="246" width="344" height="195.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <string key="text">ATD Quart Monde a pour but d’éradiquer la misère en agissant sur trois plans :
 – sur le terrain avec les personnes concernées pour obtenir l’application du droit pour tous
@@ -1166,7 +1176,7 @@ regard porté sur les plus pauvres.</string>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                     </textView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTX-6z-OFK">
-                                        <rect key="frame" x="0.0" y="458.5" width="374" height="46"/>
+                                        <rect key="frame" x="0.0" y="459.5" width="374" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Informations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2g-cu-egF">
                                                 <rect key="frame" x="0.0" y="20" width="374" height="18"/>
@@ -1185,13 +1195,13 @@ regard porté sur les plus pauvres.</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Numéro de téléphone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2h-uc-N6u">
-                                        <rect key="frame" x="15" y="520.5" width="151.5" height="18"/>
+                                        <rect key="frame" x="15" y="521.5" width="152" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="01 98 29 34 34" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="0eO-nF-XUZ">
-                                        <rect key="frame" x="171.5" y="513.5" width="187.5" height="33"/>
+                                        <rect key="frame" x="172" y="514.5" width="187" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
@@ -1199,13 +1209,13 @@ regard porté sur les plus pauvres.</string>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adresse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th9-9b-aov">
-                                        <rect key="frame" x="15" y="558.5" width="57" height="18"/>
+                                        <rect key="frame" x="15" y="559.5" width="57" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="7 rue de Paris, 75014" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="VbS-tn-dAu">
-                                        <rect key="frame" x="77" y="551.5" width="282" height="33"/>
+                                        <rect key="frame" x="77" y="552.5" width="282" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
@@ -1213,13 +1223,13 @@ regard porté sur les plus pauvres.</string>
                                         <dataDetectorType key="dataDetectorTypes" address="YES"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Site web" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYN-cS-gwD">
-                                        <rect key="frame" x="15" y="597" width="60" height="18"/>
+                                        <rect key="frame" x="15" y="598.5" width="60" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="www.atd-quartmonde.fr" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="IYH-e4-CFr">
-                                        <rect key="frame" x="80" y="589.5" width="279" height="33"/>
+                                        <rect key="frame" x="80" y="590.5" width="279" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
@@ -1229,6 +1239,7 @@ regard porté sur les plus pauvres.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="zQz-uW-lOa" firstAttribute="centerY" secondItem="xEd-6o-SEf" secondAttribute="centerY" constant="37" id="4Ol-de-sk0"/>
                                     <constraint firstAttribute="trailing" secondItem="ZTX-6z-OFK" secondAttribute="trailing" id="4bR-vW-DLU"/>
                                     <constraint firstItem="0eO-nF-XUZ" firstAttribute="leading" secondItem="K2h-uc-N6u" secondAttribute="trailing" constant="5" id="64B-D8-I0G"/>
                                     <constraint firstItem="K2h-uc-N6u" firstAttribute="leading" secondItem="28x-LV-BDn" secondAttribute="leading" constant="15" id="791-BF-eYC"/>
@@ -1236,10 +1247,8 @@ regard porté sur les plus pauvres.</string>
                                     <constraint firstItem="xEd-6o-SEf" firstAttribute="top" secondItem="28x-LV-BDn" secondAttribute="top" id="Aeq-JD-RBv"/>
                                     <constraint firstItem="0eO-nF-XUZ" firstAttribute="centerY" secondItem="K2h-uc-N6u" secondAttribute="centerY" id="DUs-xf-Ekv"/>
                                     <constraint firstItem="VbS-tn-dAu" firstAttribute="top" secondItem="0eO-nF-XUZ" secondAttribute="bottom" constant="5" id="Dd2-3Q-ElT"/>
-                                    <constraint firstItem="At5-B7-hvD" firstAttribute="centerX" secondItem="28x-LV-BDn" secondAttribute="centerX" id="Dh0-LE-Ytb"/>
                                     <constraint firstAttribute="trailing" secondItem="asB-3D-2wa" secondAttribute="trailing" constant="15" id="ED8-ut-Xv4"/>
                                     <constraint firstItem="rpO-6j-oFB" firstAttribute="leading" secondItem="28x-LV-BDn" secondAttribute="leading" id="ESs-Y5-DwA"/>
-                                    <constraint firstItem="At5-B7-hvD" firstAttribute="centerY" secondItem="xEd-6o-SEf" secondAttribute="centerY" constant="37" id="Era-ug-XsM"/>
                                     <constraint firstItem="th9-9b-aov" firstAttribute="leading" secondItem="K2h-uc-N6u" secondAttribute="leading" id="I5A-Za-PuP"/>
                                     <constraint firstAttribute="trailing" secondItem="0eO-nF-XUZ" secondAttribute="trailing" constant="15" id="IAl-ZL-3aQ"/>
                                     <constraint firstItem="bYN-cS-gwD" firstAttribute="leading" secondItem="th9-9b-aov" secondAttribute="leading" id="JGw-3c-U9g"/>
@@ -1249,11 +1258,12 @@ regard porté sur les plus pauvres.</string>
                                     <constraint firstAttribute="trailing" secondItem="VbS-tn-dAu" secondAttribute="trailing" constant="15" id="V5g-mY-Vce"/>
                                     <constraint firstItem="rpO-6j-oFB" firstAttribute="top" secondItem="8UK-Kf-hWE" secondAttribute="bottom" constant="18" id="VWH-eb-qB6"/>
                                     <constraint firstAttribute="trailing" secondItem="xEd-6o-SEf" secondAttribute="trailing" id="WAN-zx-efc"/>
+                                    <constraint firstItem="8UK-Kf-hWE" firstAttribute="top" secondItem="zQz-uW-lOa" secondAttribute="bottom" constant="10" id="Wyq-sx-Dmb"/>
                                     <constraint firstItem="asB-3D-2wa" firstAttribute="leading" secondItem="28x-LV-BDn" secondAttribute="leading" constant="15" id="azt-RC-CBA"/>
+                                    <constraint firstItem="zQz-uW-lOa" firstAttribute="centerX" secondItem="28x-LV-BDn" secondAttribute="centerX" id="eok-H9-awv"/>
                                     <constraint firstItem="8UK-Kf-hWE" firstAttribute="leading" secondItem="28x-LV-BDn" secondAttribute="leading" id="hzK-ie-3VG"/>
                                     <constraint firstItem="ZTX-6z-OFK" firstAttribute="leading" secondItem="28x-LV-BDn" secondAttribute="leading" id="i1V-Hb-36h"/>
                                     <constraint firstItem="IYH-e4-CFr" firstAttribute="leading" secondItem="bYN-cS-gwD" secondAttribute="trailing" constant="5" id="icK-oL-9cj"/>
-                                    <constraint firstItem="8UK-Kf-hWE" firstAttribute="top" secondItem="At5-B7-hvD" secondAttribute="bottom" constant="10" id="kPK-wW-giY"/>
                                     <constraint firstItem="K2h-uc-N6u" firstAttribute="top" secondItem="ZTX-6z-OFK" secondAttribute="bottom" constant="16" id="kva-yP-6e3"/>
                                     <constraint firstItem="xEd-6o-SEf" firstAttribute="centerX" secondItem="28x-LV-BDn" secondAttribute="centerX" id="o29-Rj-c3X"/>
                                     <constraint firstItem="asB-3D-2wa" firstAttribute="top" secondItem="rpO-6j-oFB" secondAttribute="bottom" constant="18" id="oY0-Z9-zn6"/>
@@ -1279,6 +1289,7 @@ regard porté sur les plus pauvres.</string>
                         <outlet property="txtAddress" destination="VbS-tn-dAu" id="pAc-rj-9I6"/>
                         <outlet property="txtSite" destination="IYH-e4-CFr" id="lvo-wx-wV2"/>
                         <outlet property="txtTelephone" destination="0eO-nF-XUZ" id="uD9-H7-7OE"/>
+                        <outlet property="viewImage" destination="zQz-uW-lOa" id="g6O-t6-FHo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8oN-vx-TP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1289,7 +1300,7 @@ regard porté sur les plus pauvres.</string>
         <scene sceneID="xFr-L3-WBG">
             <objects>
                 <navigationController id="hxJ-pt-FFZ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7Bf-CZ-han">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Bf-CZ-han">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
