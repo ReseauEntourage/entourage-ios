@@ -107,11 +107,12 @@
 }
 
 - (IBAction)sendMessage {
-    if(self.txtChat.text.length == 0)
+    NSString *message = [self.txtChat.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if(message.length == 0)
         return;
     [OTLogger logEvent:@"AddContentToMessage"];
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.txtChat.text withSuccess:^(OTFeedItemMessage *message) {
+    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:message withSuccess:^(OTFeedItemMessage *message) {
         [SVProgressHUD dismiss];
         self.txtChat.text = @"";
         [[OTMessagingService new] readFor:self.feedItem onDataSource:self.dataSource];
