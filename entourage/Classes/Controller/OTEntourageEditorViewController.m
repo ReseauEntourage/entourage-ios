@@ -164,7 +164,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.disclaimer prepareSegue:segue])
         return;
-    
     UIViewController *destinationViewController = segue.destinationViewController;
     if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]]) {
         [OTLogger logEvent:@"ChangeLocationClick"];

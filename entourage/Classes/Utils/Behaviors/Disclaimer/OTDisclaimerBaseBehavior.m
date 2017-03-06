@@ -11,6 +11,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTConsts.h"
+#import "OTEntourageDisclaimerViewController.h"
 
 @interface OTDisclaimerBaseBehavior () <DisclaimerDelegate>
 
@@ -30,6 +31,10 @@
             OTDisclaimerViewController *disclaimerViewController = (OTDisclaimerViewController *)destinationViewController;
             disclaimerViewController.disclaimerDelegate = self;
             disclaimerViewController.disclaimerText = self.disclaimerText;
+        }
+        if ([destinationViewController isKindOfClass:[OTEntourageDisclaimerViewController class]]) {
+            OTEntourageDisclaimerViewController *disclaimerViewController = (OTEntourageDisclaimerViewController *)destinationViewController;
+            disclaimerViewController.disclaimerDelegate = self;
         }
     }
     else

@@ -284,7 +284,6 @@
 		45BC9BC91CE26E83000065B7 /* OTEntourageEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BC9BC81CE26E83000065B7 /* OTEntourageEditorViewController.m */; };
 		45BC9BCE1CE32AE1000065B7 /* EntourageEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45BC9BCD1CE32AE1000065B7 /* EntourageEditor.storyboard */; };
 		45CE5A601C5241AA00F68C24 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A531C5241AA00F68C24 /* Localizable.strings */; };
-		45CE5A611C5241AA00F68C24 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A551C5241AA00F68C24 /* Images.xcassets */; };
 		45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A631C5242FC00F68C24 /* Main.storyboard */; };
 		45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */; };
 		45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A711C56961500F68C24 /* Intro.storyboard */; };
@@ -328,6 +327,8 @@
 		A8DA9E1C1E3B4BF30041ADB6 /* FlurryWatchEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */; };
 		A8DA9E1D1E3B4BF30041ADB6 /* libFlurry_7.9.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */; };
 		A8FD766E1E42FE9200063C5F /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386D1DC88290000F9F3F /* staging.plist */; };
+		D64C694A1E6D60E40075B706 /* OTEntourageDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */; };
+		D6EB4D4D1E6D6AA900CDC8A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6EB4D4C1E6D6AA900CDC8A4 /* Images.xcassets */; };
 		DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8ACD19E857A800FA218E /* OTMenuItem.m */; };
 		DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */; };
 		DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD519E85EA400FA218E /* OTMyMeetingsViewController.m */; };
@@ -883,7 +884,6 @@
 		45BC9BC81CE26E83000065B7 /* OTEntourageEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageEditorViewController.m; sourceTree = "<group>"; };
 		45BC9BCD1CE32AE1000065B7 /* EntourageEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EntourageEditor.storyboard; sourceTree = "<group>"; };
 		45CE5A531C5241AA00F68C24 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Strings/Localizable.strings; sourceTree = "<group>"; };
-		45CE5A551C5241AA00F68C24 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = XCAssets/Images.xcassets; sourceTree = "<group>"; };
 		45CE5A641C5242FC00F68C24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		45CE5A711C56961500F68C24 /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
@@ -954,6 +954,9 @@
 		A8DA9E181E3B4BF30041ADB6 /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
 		A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryWatchEmpty.m; sourceTree = "<group>"; };
 		A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.9.2.a; sourceTree = "<group>"; };
+		D64C69481E6D60E40075B706 /* OTEntourageDisclaimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageDisclaimerViewController.h; sourceTree = "<group>"; };
+		D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageDisclaimerViewController.m; sourceTree = "<group>"; };
+		D6EB4D4C1E6D6AA900CDC8A4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = XCAssets/Images.xcassets; sourceTree = "<group>"; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		DBBE8ACC19E857A800FA218E /* OTMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMenuItem.h; sourceTree = "<group>"; };
 		DBBE8ACD19E857A800FA218E /* OTMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMenuItem.m; sourceTree = "<group>"; };
@@ -1948,6 +1951,8 @@
 			children = (
 				45BC9BC71CE26E83000065B7 /* OTEntourageEditorViewController.h */,
 				45BC9BC81CE26E83000065B7 /* OTEntourageEditorViewController.m */,
+				D64C69481E6D60E40075B706 /* OTEntourageDisclaimerViewController.h */,
+				D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */,
 			);
 			name = Entourage;
 			sourceTree = "<group>";
@@ -2135,7 +2140,7 @@
 		6B4930C319A773C500DA7EE0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				45CE5A551C5241AA00F68C24 /* Images.xcassets */,
+				D6EB4D4C1E6D6AA900CDC8A4 /* Images.xcassets */,
 				45CE5A531C5241AA00F68C24 /* Localizable.strings */,
 				45CE5A621C5242FC00F68C24 /* Storyboards */,
 			);
@@ -2564,7 +2569,6 @@
 				45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */,
 				1E49BCB61D7D8B790024EDC1 /* Disclaimer.storyboard in Resources */,
 				1E78B7E91D5134D20008C00E /* SF-UI-Text-UltrathinItalic.otf in Resources */,
-				45CE5A611C5241AA00F68C24 /* Images.xcassets in Resources */,
 				4507017E1CCF494800432548 /* JoinFeedItem.storyboard in Resources */,
 				1E4F561B1DB64BCE00AD0CAC /* LocationSelection.storyboard in Resources */,
 				1E488E001D4FAF8B00A2E5B0 /* Onboarding.storyboard in Resources */,
@@ -2583,6 +2587,7 @@
 				45BC9BCE1CE32AE1000065B7 /* EntourageEditor.storyboard in Resources */,
 				452FE3E81CAD549200063334 /* GuideSolidarity.storyboard in Resources */,
 				A8FD766E1E42FE9200063C5F /* staging.plist in Resources */,
+				D6EB4D4D1E6D6AA900CDC8A4 /* Images.xcassets in Resources */,
 				1E78B7E31D5134D20008C00E /* SF-UI-Text-MediumItalic.otf in Resources */,
 				1E78B7A41D5108B20008C00E /* PublicFeedItem.storyboard in Resources */,
 				1E78B7E61D5134D20008C00E /* SF-UI-Text-Semibold.otf in Resources */,
@@ -2939,6 +2944,7 @@
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				1E49BCBA1D7D8C0C0024EDC1 /* OTDisclaimerViewController.m in Sources */,
 				1EC9D6821D6468A800C6E9AA /* OTInvitationsService.m in Sources */,
+				D64C694A1E6D60E40075B706 /* OTEntourageDisclaimerViewController.m in Sources */,
 				1E993BFC1DDB514300621770 /* OTNoDataBehavior.m in Sources */,
 				1EF23E301DD093C600E71BB7 /* OTStartTourAnnotationView.m in Sources */,
 				45ADCACF1CA2A27E0050EB96 /* OTQuitFeedItemViewController.m in Sources */,
