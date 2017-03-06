@@ -58,7 +58,8 @@
 #define PUBLIC_ENTOURAGE_CREATION_CHART @"http://www.entourage.social/chartes/grand-public.html"
 #define PRO_ENTOURAGE_CREATION_CHART @"http://www.entourage.social/chartes/pro.html"
 
-#define MENU_BLOG_URL @"https://blog.entourage.social/category/franchir-le-pas/"
+#define MENU_BLOG_URL @"https://blog.entourage.social/2016/10/28/franchir-le-pas/"
+
 #define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
 #define PRO_MENU_CHART_URL @"http://www.entourage.social/chartes/pro.html"
 #define PUBLIC_MENU_CHART_URL @"http://www.entourage.social/chartes/grand-public.html"
