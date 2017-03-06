@@ -27,7 +27,6 @@
     self.summaryProvider.imgAssociation = self.imgAssociation;
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
-    self.lblNumberOfUsers.text = [@"+" stringByAppendingString:self.lblNumberOfUsers.text];
     if([[OTBadgeNumberService sharedInstance] hasUnread:item.uid])
         self.lblLastMessage.textColor = [UIColor blackColor];
     else
