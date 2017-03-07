@@ -11,6 +11,7 @@ extern NSString *const kTutorialDone;
 @property (nonatomic, strong) OTUser *currentUser;
 @property (nonatomic, strong) OTUser *temporaryUser;
 @property (nonatomic, assign) BOOL autoTutorialShown;
+@property (nonatomic, assign) BOOL entourageFilterEnabled;
 
 - (BOOL)isTutorialCompleted;
 

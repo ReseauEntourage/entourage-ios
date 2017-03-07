@@ -22,6 +22,7 @@
 @property (nonatomic) int timeframeInHours;
 @property (nonatomic) CLLocationCoordinate2D location;
 
+- (BOOL)updateFilterOnEntourageCreated;
 - (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before andLocation:(CLLocationCoordinate2D)location;
 
 @end

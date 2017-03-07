@@ -125,6 +125,7 @@
     entourage.status = ENTOURAGE_STATUS_OPEN;
     [SVProgressHUD show];
     [[OTEncounterService new] sendEntourage:entourage withSuccess:^(OTEntourage *sentEntourage) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageCreated object:nil];
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
         if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
     } failure:^(NSError *error) {

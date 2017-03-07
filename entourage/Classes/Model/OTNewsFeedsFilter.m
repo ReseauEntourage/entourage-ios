@@ -12,21 +12,28 @@
 #import "OTFeedItemTimeframeFilter.h"
 #import "OTTour.h"
 #import "OTEntourage.h"
+#import "NSUserDefaults+OT.h"
 
 #define FEEDS_REQUEST_DISTANCE_KM 10
+
+@interface OTNewsFeedsFilter ()
+
+@property (nonatomic, assign) BOOL isPro;
+
+@end
 
 @implementation OTNewsFeedsFilter
 
 - (instancetype)init {
     self = [super init];
     if(self) {
-        BOOL isPro = [self.currentUser.type isEqualToString:USER_TYPE_PRO];
-        self.showMedical = isPro;
-        self.showSocial = isPro;
-        self.showDistributive = isPro;
-        self.showDemand = !isPro;
-        self.showContribution = !isPro;
-        self.showTours = isPro;
+        self.isPro = [self.currentUser.type isEqualToString:USER_TYPE_PRO];
+        self.showMedical = self.isPro;
+        self.showSocial = self.isPro;
+        self.showDistributive = self.isPro;
+        self.showDemand = !self.isPro || [NSUserDefaults standardUserDefaults].entourageFilterEnabled;
+        self.showContribution = !self.isPro || [NSUserDefaults standardUserDefaults].entourageFilterEnabled;
+        self.showTours = self.isPro;
         self.showOnlyMyEntourages = NO;
         self.timeframeInHours = 8 * 24;
     }
@@ -69,6 +76,14 @@
                         [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
                     ]
                 ];
+}
+
+- (BOOL)updateFilterOnEntourageCreated {
+    if(!self.isPro)
+        return NO;
+    self.showDemand = YES;
+    self.showContribution = YES;
+    return YES;
 }
 
 - (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before andLocation:(CLLocationCoordinate2D)location {

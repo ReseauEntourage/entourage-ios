@@ -153,6 +153,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushReceived) name:@kNotificationPushReceived object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageCreated:) name:kNotificationEntourageCreated object:nil];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
     [self configureMapView];
@@ -485,6 +486,13 @@
     for (CLLocation *newLocation in locations) {
         if (!encounterFromTap)
             self.encounterLocation = newLocation.coordinate;
+    }
+}
+
+- (void)entourageCreated:(NSNotification *)notification {
+    if([self.currentFilter updateFilterOnEntourageCreated]) {
+        [NSUserDefaults standardUserDefaults].entourageFilterEnabled = YES;
+        [self reloadFeeds];
     }
 }
 
