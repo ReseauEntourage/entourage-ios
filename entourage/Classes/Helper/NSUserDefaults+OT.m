@@ -70,12 +70,17 @@ static NSString *const kEntourageFilterEnabled = @"kEntourageFilterEnabled";
 }
 
 - (BOOL)entourageFilterEnabled {
-    NSNumber *enabled = [self objectForKey:kEntourageFilterEnabled];
-    return enabled == nil ? NO : enabled.boolValue;
+    NSMutableArray *numbersWithEnabled = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kEntourageFilterEnabled]];
+    return [numbersWithEnabled containsObject:self.currentUser.phone];
 }
 
 - (void)setEntourageFilterEnabled:(BOOL)entourageFilterEnabled {
-    [self setObject:[NSNumber numberWithBool:entourageFilterEnabled] forKey:kEntourageFilterEnabled];
+    NSMutableArray *numbersWithEnabled = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kEntourageFilterEnabled]];
+    if([numbersWithEnabled containsObject:self.currentUser.phone])
+        return;
+    [numbersWithEnabled addObject:self.currentUser.phone];
+    [self setObject:numbersWithEnabled forKey:kEntourageFilterEnabled];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BOOL)isTutorialCompleted {
