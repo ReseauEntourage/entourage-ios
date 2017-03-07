@@ -328,3 +328,7 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "update_association_error" = "L’association soutenue n’a pas pu être mise à jour";
 "marauder" = "Maraudeur";
 "sympathizant" = "Sympathisant";
+
+"confirm_entourage_create" = "Souhaitez-vous créer une rencontre avec une personne de la rue, ou créer une %@ visible de tous?";
+"continue" = "Continuer";
+"encounter" = "Rencontre";

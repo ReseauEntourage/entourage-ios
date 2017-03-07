@@ -7,8 +7,14 @@
 //
 
 #import "OTOptionsViewController.h"
+#import "OTOngoingTourService.h"
+#import "OTAlertViewBehavior.h"
+#import "SVProgressHUD.h"
 
 @interface OTOptionsViewController ()
+
+@property (strong, nonatomic) IBOutlet OTAlertViewBehavior *demandeAlert;
+@property (strong, nonatomic) IBOutlet OTAlertViewBehavior *contributionAlert;
 
 @end
 
@@ -23,16 +29,29 @@
     } else {
         [self setupOptionsAsList];
     }
-}
+    __weak typeof(self) weakSelf = self;
+    self.demandeAlert.title = OTLocalizedString(@"tour_ongoing");
+    self.demandeAlert.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), OTLocalizedString(@"demande")];
+    [self.demandeAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
+        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createDemande)])
+            [weakSelf.optionsDelegate performSelector:@selector(createDemande) withObject:nil];
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    }];
+    [self.demandeAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
+        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createEncounter)])
+            [weakSelf.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
+    }];
+    self.contributionAlert.title = OTLocalizedString(@"tour_ongoing");
+    self.contributionAlert.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), OTLocalizedString(@"contribution")];
+    [self.contributionAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
+        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createContribution)])
+            [weakSelf.optionsDelegate performSelector:@selector(createContribution) withObject:nil];
+    }];
+    [self.contributionAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
+        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createEncounter)])
+            [weakSelf.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
+    }];
 }
-
-//- (void)setIsPOIVisible:(BOOL)isPOIVisible {
-//    self.isPOIVisible = isPOIVisible;
-//}
 
 /*******************************************************************************/
 
@@ -105,23 +124,26 @@
 
 - (IBAction)doCreateEncounter:(id)sender {
     [OTLogger logEvent:@"CreateEncounterClick"];
-    if ([self.optionsDelegate respondsToSelector:@selector(createEncounter)]) {
+    if ([self.optionsDelegate respondsToSelector:@selector(createEncounter)])
         [self.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
-    }
 }
 
 - (IBAction)doCreateDemande:(id)sender {
     [OTLogger logEvent:@"AskCreateClick"];
-    if ([self.optionsDelegate respondsToSelector:@selector(createDemande)]) {
-        [self.optionsDelegate performSelector:@selector(createDemande) withObject:nil];
-    }
+    if ([OTOngoingTourService sharedInstance].isOngoing)
+        [self.demandeAlert show];
+    else
+        if ([self.optionsDelegate respondsToSelector:@selector(createDemande)])
+            [self.optionsDelegate performSelector:@selector(createDemande) withObject:nil];
 }
 
 - (IBAction)doCreateContribution:(id)sender {
     [OTLogger logEvent:@"OfferCreateClick"];
-    if ([self.optionsDelegate respondsToSelector:@selector(createContribution)]) {
-        [self.optionsDelegate performSelector:@selector(createContribution) withObject:nil];
-    }
+    if ([OTOngoingTourService sharedInstance].isOngoing)
+        [self.contributionAlert show];
+    else
+        if ([self.optionsDelegate respondsToSelector:@selector(createContribution)])
+            [self.optionsDelegate performSelector:@selector(createContribution) withObject:nil];
 }
 
 - (IBAction)doTogglePOI:(id)sender {

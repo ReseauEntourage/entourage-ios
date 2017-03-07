@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
 		0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */; };
 		0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */; };
 		0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4769341BFB9F07006EA73A /* OTUserViewController.m */; };
@@ -347,6 +348,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
+		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
 		0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLostCodeViewController.h; sourceTree = "<group>"; };
 		0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLostCodeViewController.m; sourceTree = "<group>"; };
 		0A35F2B61BFA3AC2002301C3 /* OTConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTConfirmationViewController.h; sourceTree = "<group>"; };
@@ -1613,6 +1616,8 @@
 				1E80E26A1D7DF60D0096B350 /* OTScrollPinBehavior.m */,
 				1E51E01C1E55A37F00D4EDA6 /* OTBottomScrollBehavior.h */,
 				1E51E01D1E55A37F00D4EDA6 /* OTBottomScrollBehavior.m */,
+				01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */,
+				01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -2840,6 +2845,7 @@
 				1ECDBC691D3D35C300DD87B2 /* OTTourMessaging.m in Sources */,
 				1E49BCC11D7D914F0024EDC1 /* OTDisclaimerBaseBehavior.m in Sources */,
 				0ABD5F8D1B9EFF960069750D /* OTEncounterService.m in Sources */,
+				01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */,
 				1E488E091D4FB67200A2E5B0 /* OTUserEmailViewController.m in Sources */,
 				1E51E01E1E55A37F00D4EDA6 /* OTBottomScrollBehavior.m in Sources */,
 				45D7891B1D2FFC3E005EBACC /* UIScrollView+entourage.m in Sources */,
