@@ -329,6 +329,7 @@
 		A8DA9E1D1E3B4BF30041ADB6 /* libFlurry_7.9.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */; };
 		A8FD766E1E42FE9200063C5F /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386D1DC88290000F9F3F /* staging.plist */; };
 		D64C694A1E6D60E40075B706 /* OTEntourageDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */; };
+		D65A95341E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A95331E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m */; };
 		D6EB4D4D1E6D6AA900CDC8A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6EB4D4C1E6D6AA900CDC8A4 /* Images.xcassets */; };
 		DBBE8ACE19E857A800FA218E /* OTMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8ACD19E857A800FA218E /* OTMenuItem.m */; };
 		DBBE8AD219E8580200FA218E /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBE8AD119E8580200FA218E /* OTMenuTableViewCell.m */; };
@@ -959,6 +960,8 @@
 		A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.9.2.a; sourceTree = "<group>"; };
 		D64C69481E6D60E40075B706 /* OTEntourageDisclaimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageDisclaimerViewController.h; sourceTree = "<group>"; };
 		D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageDisclaimerViewController.m; sourceTree = "<group>"; };
+		D65A95321E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTToggleVisibleWithConstraintsBehavior.h; path = Behaviors/UI/OTToggleVisibleWithConstraintsBehavior.h; sourceTree = "<group>"; };
+		D65A95331E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTToggleVisibleWithConstraintsBehavior.m; path = Behaviors/UI/OTToggleVisibleWithConstraintsBehavior.m; sourceTree = "<group>"; };
 		D6EB4D4C1E6D6AA900CDC8A4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = XCAssets/Images.xcassets; sourceTree = "<group>"; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		DBBE8ACC19E857A800FA218E /* OTMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMenuItem.h; sourceTree = "<group>"; };
@@ -1618,6 +1621,8 @@
 				1E51E01D1E55A37F00D4EDA6 /* OTBottomScrollBehavior.m */,
 				01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */,
 				01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */,
+				D65A95321E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.h */,
+				D65A95331E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -2864,6 +2869,7 @@
 				4525EB341CA46582006784E6 /* OTAboutViewController.m in Sources */,
 				0A4769381BFCC4EB006EA73A /* OTOrganization.m in Sources */,
 				454C8F531C500FE2001362B2 /* OTStartupViewController.m in Sources */,
+				D65A95341E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m in Sources */,
 				1E5F79921D5A16DE0005003C /* OTInvitationsCellProviderBehavior.m in Sources */,
 				1E701CEA1DA29FE30041DD9D /* UIBarButtonItem+Badge.m in Sources */,
 				454C8F581C501B31001362B2 /* UIView+entourage.m in Sources */,

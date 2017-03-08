@@ -37,7 +37,7 @@
     self.feedItem = feedItem;
     self.isActive = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isActive];
     self.btnStatus.hidden = !self.isActive;
-    [self updateLabel];
+    [self updateLabelAndJoin];
     if(self.btnStatus.hidden)
         return;
     [self updateButton];
@@ -60,7 +60,8 @@
     }
 }
 
-- (void)updateLabel {
+- (void)updateLabelAndJoin {
+    self.isJoinPossible = NO;
     if(self.isActive) {
         if (self.feedItem.author.uID.intValue == self.currentUser.sid.intValue)
             if([self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
@@ -74,8 +75,10 @@
                 [self updateLabelWithText:OTLocalizedString(@"join_pending") andColor:[UIColor appOrangeColor]];
             else if ([JOIN_REJECTED isEqualToString:self.feedItem.joinStatus])
                 [self updateLabelWithText:OTLocalizedString(@"join_rejected") andColor:[UIColor appTomatoColor]];
-            else
+            else {
                 [self updateLabelWithText:OTLocalizedString(@"join_to_join") andColor:[UIColor appGreyishColor]];
+                self.isJoinPossible = YES;
+            }
         }
     }
     else

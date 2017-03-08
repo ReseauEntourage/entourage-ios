@@ -19,6 +19,7 @@
 #import "OTPublicInfoDataSource.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTStatusChangedBehavior.h"
+#import "OTToggleVisibleWithConstraintsBehavior.h"
 
 @interface OTPublicFeedItemViewController ()
 
@@ -29,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet OTPublicInfoDataSource *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 @property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
+@property (nonatomic, strong) IBOutlet OTToggleVisibleWithConstraintsBehavior *toggleJoinViewBehavior;
 
 @end
 
@@ -41,6 +43,7 @@
     [self.statusBehavior initialize];
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.statusBehavior updateWith:self.feedItem];
+    [self.toggleJoinViewBehavior toggle:self.statusBehavior.isJoinPossible];
     self.dataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.dataSource.tableView.estimatedRowHeight = 1000;
 
@@ -85,6 +88,7 @@
 - (IBAction)updateStatusToPending {
     self.feedItem.joinStatus = JOIN_PENDING;
     [self.statusBehavior updateWith:self.feedItem];
+    [self.toggleJoinViewBehavior toggle:NO];
 }
 
 @end

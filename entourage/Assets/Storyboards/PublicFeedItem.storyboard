@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="fid-Iu-R1a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="fid-Iu-R1a">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -40,7 +40,7 @@
                                 <rect key="frame" x="-4" y="35" width="383" height="632"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="kkZ-NE-g9p">
-                                        <rect key="frame" x="0.0" y="0.0" width="383" height="562"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="383" height="544"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SummaryCell" rowHeight="91" id="Xwd-MU-j54" customClass="OTSummaryInfoCell">
@@ -63,13 +63,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIme - Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDt-dA-Asj">
-                                                            <rect key="frame" x="15" y="60" width="301.5" height="16"/>
+                                                            <rect key="frame" x="15" y="60" width="301" height="16"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="13"/>
                                                             <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QV-vH-V9y">
-                                                            <rect key="frame" x="345.5" y="56" width="9.5" height="18"/>
+                                                            <rect key="frame" x="345" y="56" width="10" height="18"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                             <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -104,7 +104,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="users" translatesAutoresizingMaskIntoConstraints="NO" id="Q8P-B0-Gly">
-                                                            <rect key="frame" x="321.5" y="55.5" width="22" height="19"/>
+                                                            <rect key="frame" x="321" y="56" width="22" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="22" id="0u0-VA-9zh"/>
                                                                 <constraint firstAttribute="height" constant="19" id="azt-gf-rtm"/>
@@ -199,14 +199,14 @@
                                         </prototypes>
                                     </tableView>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FuU-fG-ePR">
-                                        <rect key="frame" x="15" y="584" width="353" height="1"/>
+                                        <rect key="frame" x="15" y="566" width="353" height="1"/>
                                         <color key="backgroundColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="G1y-6N-RbD"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJK-hn-36o">
-                                        <rect key="frame" x="169" y="562" width="45" height="45"/>
+                                        <rect key="frame" x="169" y="544" width="45" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="7EP-Qx-Z5P"/>
                                             <constraint firstAttribute="width" constant="45" id="BVc-SJ-5iY"/>
@@ -217,24 +217,67 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je rejoins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nU0-h0-mOV">
-                                        <rect key="frame" x="161" y="607" width="62" height="16"/>
+                                        <rect key="frame" x="161" y="589" width="62" height="34"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="13"/>
                                         <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Pq-l3-WjF">
+                                        <rect key="frame" x="0.0" y="544" width="383" height="88"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On a besoin de vous !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKL-T6-WyZ">
+                                                <rect key="frame" x="115" y="10" width="153" height="18"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBP-Jr-1A0">
+                                                <rect key="frame" x="141" y="40" width="101" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="zUE-xh-h2u"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
+                                                <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                                <state key="normal" title="Rejoindre">
+                                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="joinFeedItem:" destination="fid-Iu-R1a" eventType="touchUpInside" id="Ghk-lY-8zd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="88" id="DDf-Ds-tlf"/>
+                                            <constraint firstItem="vKL-T6-WyZ" firstAttribute="centerX" secondItem="8Pq-l3-WjF" secondAttribute="centerX" id="KHh-GS-o9M"/>
+                                            <constraint firstItem="iBP-Jr-1A0" firstAttribute="centerX" secondItem="8Pq-l3-WjF" secondAttribute="centerX" id="eZC-rw-yqn"/>
+                                            <constraint firstItem="vKL-T6-WyZ" firstAttribute="top" secondItem="8Pq-l3-WjF" secondAttribute="top" constant="10" id="oGb-Lc-nko"/>
+                                            <constraint firstAttribute="bottom" secondItem="iBP-Jr-1A0" secondAttribute="bottom" constant="18" id="zpn-jk-But"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="8Pq-l3-WjF" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" id="2fu-zJ-z1S"/>
                                     <constraint firstAttribute="trailing" secondItem="kkZ-NE-g9p" secondAttribute="trailing" id="4n7-R4-nPS"/>
+                                    <constraint firstAttribute="trailing" secondItem="8Pq-l3-WjF" secondAttribute="trailing" id="98P-5J-xX8"/>
                                     <constraint firstItem="fJK-hn-36o" firstAttribute="centerX" secondItem="0Ms-j8-jfY" secondAttribute="centerX" id="BLq-FW-yOI"/>
                                     <constraint firstItem="kkZ-NE-g9p" firstAttribute="top" secondItem="0Ms-j8-jfY" secondAttribute="top" id="HfG-dx-yRv"/>
                                     <constraint firstItem="FuU-fG-ePR" firstAttribute="centerY" secondItem="fJK-hn-36o" secondAttribute="centerY" id="M1P-Bc-0iq"/>
                                     <constraint firstItem="nU0-h0-mOV" firstAttribute="top" secondItem="fJK-hn-36o" secondAttribute="bottom" id="SMl-qg-fxF"/>
                                     <constraint firstItem="fJK-hn-36o" firstAttribute="top" secondItem="kkZ-NE-g9p" secondAttribute="bottom" id="UCF-gE-ANb"/>
+                                    <constraint firstAttribute="bottom" secondItem="8Pq-l3-WjF" secondAttribute="bottom" id="W6T-hi-OZ3"/>
                                     <constraint firstItem="FuU-fG-ePR" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" constant="15" id="WPx-Bd-eeX"/>
                                     <constraint firstAttribute="bottom" secondItem="nU0-h0-mOV" secondAttribute="bottom" constant="9" id="YrA-5H-o9c"/>
                                     <constraint firstAttribute="trailing" secondItem="FuU-fG-ePR" secondAttribute="trailing" constant="15" id="ddi-nO-oA3"/>
                                     <constraint firstItem="nU0-h0-mOV" firstAttribute="centerX" secondItem="0Ms-j8-jfY" secondAttribute="centerX" id="hlM-f8-d0W"/>
+                                    <constraint firstItem="8Pq-l3-WjF" firstAttribute="top" secondItem="kkZ-NE-g9p" secondAttribute="bottom" id="mlL-XM-qIk"/>
                                     <constraint firstItem="kkZ-NE-g9p" firstAttribute="leading" secondItem="0Ms-j8-jfY" secondAttribute="leading" id="tZt-RS-li8"/>
                                 </constraints>
                             </view>
@@ -254,6 +297,7 @@
                         <outlet property="statusChangedBehavior" destination="R14-Fu-EI5" id="9zQ-ZR-fGz"/>
                         <outlet property="summaryProvider" destination="dGI-3e-zqZ" id="18h-cY-5YP"/>
                         <outlet property="tableDataSource" destination="Diz-4p-wq1" id="M79-h5-ekh"/>
+                        <outlet property="toggleJoinViewBehavior" destination="NZi-TT-bNx" id="bYg-xs-M01"/>
                         <outlet property="userProfileBehavior" destination="tZB-wv-d8L" id="kwr-QM-w45"/>
                         <segue destination="cpn-kw-7GN" kind="modal" identifier="JoinRequestSegue" id="YTg-Ni-VC1"/>
                         <segue destination="ZQc-ut-eal" kind="modal" identifier="UserProfileSegue" id="WdI-aW-aNA"/>
@@ -301,6 +345,13 @@
                     <connections>
                         <outlet property="joinBehavior" destination="3hI-5m-VDv" id="JJe-pe-6Xe"/>
                         <outlet property="owner" destination="fid-Iu-R1a" id="2zx-If-L7K"/>
+                    </connections>
+                </customObject>
+                <customObject id="NZi-TT-bNx" customClass="OTToggleVisibleWithConstraintsBehavior">
+                    <connections>
+                        <outlet property="toggledView" destination="8Pq-l3-WjF" id="tHB-5T-1m1"/>
+                        <outlet property="viewInvisibleConstraint" destination="UCF-gE-ANb" id="dtv-qj-Hbp"/>
+                        <outlet property="viewVisibleConstraint" destination="mlL-XM-qIk" id="0Bj-sn-AHl"/>
                     </connections>
                 </customObject>
             </objects>
