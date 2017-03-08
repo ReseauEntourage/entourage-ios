@@ -779,7 +779,6 @@
 }
 
 - (IBAction)doShowNewFeedItems:(UIButton*)sender {
-    [OTLogger logEvent:@"ScrollListPage"];
     self.nouveauxFeedItemsButton.hidden = YES;
     [self.tableView reloadData];
     [self.tableView setContentOffset:CGPointZero animated:YES];
@@ -792,7 +791,7 @@
 #pragma mark - Feeds Table View Delegate
 
 - (void)loadMoreData {
-    [OTLogger logEvent:@"RefreshListPage"];
+    [OTLogger logEvent:@"ScrollListPage"];
     [self.newsFeedsSourceBehavior loadMoreItems];
 }
 
