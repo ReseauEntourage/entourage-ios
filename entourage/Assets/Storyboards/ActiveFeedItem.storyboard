@@ -54,7 +54,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5m-CD-APm">
-                                        <rect key="frame" x="15" y="32" width="80.5" height="18"/>
+                                        <rect key="frame" x="15" y="32" width="76.5" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -80,7 +80,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rhM-ov-Zou" userLabel="Txt Chat" customClass="OTAutoGrowTextView">
-                                <rect key="frame" x="10" y="624" width="294" height="33"/>
+                                <rect key="frame" x="10" y="624" width="295" height="33"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="yN6-gM-O1V"/>
@@ -103,7 +103,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7un-ks-sBK">
-                                <rect key="frame" x="309" y="626" width="56" height="30"/>
+                                <rect key="frame" x="310" y="626" width="55" height="30"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                 <state key="normal" title="Envoyer">
                                     <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -341,38 +341,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBt-pp-HKI">
-                                                    <rect key="frame" x="100" y="0.0" width="175" height="1"/>
-                                                    <color key="backgroundColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="QCD-jb-WAQ"/>
-                                                    </constraints>
-                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join accepted" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="oDv-L9-1he">
                                                     <rect key="frame" x="15" y="16" width="345" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5GF-cb-jlz">
-                                                    <rect key="frame" x="100" y="49" width="175" height="1"/>
-                                                    <color key="backgroundColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="Egx-YW-Ds9"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="oDv-L9-1he" secondAttribute="bottom" constant="8" id="CSm-gT-LQg"/>
                                                 <constraint firstAttribute="trailing" secondItem="oDv-L9-1he" secondAttribute="trailing" constant="15" id="IV8-tj-D94"/>
-                                                <constraint firstItem="oDv-L9-1he" firstAttribute="top" secondItem="bBt-pp-HKI" secondAttribute="bottom" constant="15" id="OUM-BU-fTt"/>
-                                                <constraint firstAttribute="bottom" secondItem="5GF-cb-jlz" secondAttribute="bottom" id="Q2L-is-uKo"/>
-                                                <constraint firstAttribute="trailing" secondItem="bBt-pp-HKI" secondAttribute="trailing" constant="100" id="b7P-a7-1QT"/>
-                                                <constraint firstItem="bBt-pp-HKI" firstAttribute="top" secondItem="8ht-Oa-P58" secondAttribute="top" id="dw2-a2-AbN"/>
                                                 <constraint firstItem="oDv-L9-1he" firstAttribute="leading" secondItem="8ht-Oa-P58" secondAttribute="leading" constant="15" id="gUn-EC-YE7"/>
-                                                <constraint firstItem="5GF-cb-jlz" firstAttribute="top" secondItem="oDv-L9-1he" secondAttribute="bottom" constant="15" id="jbS-oR-5zc"/>
-                                                <constraint firstAttribute="trailing" secondItem="5GF-cb-jlz" secondAttribute="trailing" constant="100" id="lRW-V8-sRe"/>
-                                                <constraint firstItem="5GF-cb-jlz" firstAttribute="leading" secondItem="8ht-Oa-P58" secondAttribute="leading" constant="100" id="oQQ-qB-Hji"/>
-                                                <constraint firstItem="bBt-pp-HKI" firstAttribute="leading" secondItem="8ht-Oa-P58" secondAttribute="leading" constant="100" id="z0s-gC-Jww"/>
+                                                <constraint firstItem="oDv-L9-1he" firstAttribute="top" secondItem="8ht-Oa-P58" secondAttribute="topMargin" constant="8" id="vaA-CP-py6"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -386,38 +366,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edb-aH-XfS">
-                                                    <rect key="frame" x="100" y="0.0" width="175" height="1"/>
-                                                    <color key="backgroundColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="CC7-JW-WKl"/>
-                                                    </constraints>
-                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join rejected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="dUr-6R-XU4">
                                                     <rect key="frame" x="15" y="16" width="345" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qur-AO-Cgz">
-                                                    <rect key="frame" x="100" y="49" width="175" height="1"/>
-                                                    <color key="backgroundColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="aXo-cs-Sv2"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Edb-aH-XfS" secondAttribute="trailing" constant="100" id="21p-oi-zgj"/>
-                                                <constraint firstItem="Edb-aH-XfS" firstAttribute="top" secondItem="mEf-ke-pqw" secondAttribute="top" id="6A8-TB-Qh0"/>
-                                                <constraint firstItem="Qur-AO-Cgz" firstAttribute="leading" secondItem="mEf-ke-pqw" secondAttribute="leading" constant="100" id="HvD-sZ-NHP"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="dUr-6R-XU4" secondAttribute="bottom" constant="8" id="30t-aK-hd0"/>
+                                                <constraint firstItem="dUr-6R-XU4" firstAttribute="top" secondItem="mEf-ke-pqw" secondAttribute="topMargin" constant="8" id="IBo-xf-iTd"/>
                                                 <constraint firstItem="dUr-6R-XU4" firstAttribute="leading" secondItem="mEf-ke-pqw" secondAttribute="leading" constant="15" id="fT3-73-MJd"/>
-                                                <constraint firstItem="Qur-AO-Cgz" firstAttribute="top" secondItem="dUr-6R-XU4" secondAttribute="bottom" constant="15" id="qLY-gb-RqO"/>
-                                                <constraint firstAttribute="bottom" secondItem="Qur-AO-Cgz" secondAttribute="bottom" id="qjR-Ve-R5j"/>
                                                 <constraint firstAttribute="trailing" secondItem="dUr-6R-XU4" secondAttribute="trailing" constant="15" id="tmO-KC-wkY"/>
-                                                <constraint firstItem="dUr-6R-XU4" firstAttribute="top" secondItem="Edb-aH-XfS" secondAttribute="bottom" constant="15" id="vqq-aZ-Gnr"/>
-                                                <constraint firstItem="Edb-aH-XfS" firstAttribute="leading" secondItem="mEf-ke-pqw" secondAttribute="leading" constant="100" id="yn0-h7-SRn"/>
-                                                <constraint firstAttribute="trailing" secondItem="Qur-AO-Cgz" secondAttribute="trailing" constant="100" id="zU3-p9-PW2"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
