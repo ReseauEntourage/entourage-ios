@@ -86,7 +86,10 @@
                 showErrorHUD = NO;
             }
             else if([errorCode isEqualToString:PHONE_ALREADY_EXIST]) {
-                errorMessage = OTLocalizedString(@"phoneAlreadyExits");
+                [NSUserDefaults standardUserDefaults].temporaryUser = temporaryUser;
+                [SVProgressHUD dismiss];
+                [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
+                errorMessage = OTLocalizedString(@"alreadyRegisteredShortMessage");
             }
             if (errorMessage) {
                 [OTLogger logEvent:@"TelephoneSubmitFail"];

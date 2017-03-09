@@ -32,6 +32,7 @@
 "doRegenerateCode" = "Redemander un code";
 "doIgnore" = "Ignorer";
 "alreadyRegisteredMessage" = "Le numéro est déjà enregistré. Vous avez dû recevoir le code pas SMS.";
+"alreadyRegisteredShortMessage" = "Le numéro est déjà enregistré";
 "automaticJoinFailedMessage" = "Impossible de rejoindre l’entourage. Verifiez la liste des invitations et réessayez.";
 "joiningEntouragesMessage" = "Invitations en cours";
 "acceptJoinFailed" = "Impossible d’accepter l’invitation.";
