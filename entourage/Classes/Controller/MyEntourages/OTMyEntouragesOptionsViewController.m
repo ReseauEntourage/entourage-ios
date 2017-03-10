@@ -11,11 +11,15 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTOngoingTourService.h"
+#import "OTAlertViewBehavior.h"
+#import "OTConsts.h"
 
 @interface OTMyEntouragesOptionsViewController ()
 
 @property (strong, nonatomic) IBOutlet OTToggleGroupViewBehavior *toggleMaraude;
 @property (strong, nonatomic) IBOutlet OTToggleGroupViewBehavior *toggleEncounter;
+@property (strong, nonatomic) IBOutlet OTAlertViewBehavior *demandeAlert;
+@property (strong, nonatomic) IBOutlet OTAlertViewBehavior *contributionAlert;
 
 @end
 
@@ -34,18 +38,42 @@
         else
             [self.toggleMaraude toggle:YES];
     }
+    __weak typeof(self) weakSelf = self;
+    [OTAlertViewBehavior setupOngoingCreateEntourageWithDemand:self.demandeAlert andContribution:self.contributionAlert];
+    [self.demandeAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
+        if ([weakSelf.delegate respondsToSelector:@selector(createDemand)])
+            [weakSelf.delegate performSelector:@selector(createDemand) withObject:nil];
+    }];
+    [self.demandeAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
+        if ([weakSelf.delegate respondsToSelector:@selector(createEncounter)])
+            [weakSelf.delegate performSelector:@selector(createEncounter) withObject:nil];
+    }];
+    [self.contributionAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
+        if ([weakSelf.delegate respondsToSelector:@selector(createContribution)])
+            [weakSelf.delegate performSelector:@selector(createContribution) withObject:nil];
+    }];
+    [self.contributionAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
+        if ([weakSelf.delegate respondsToSelector:@selector(createEncounter)])
+            [weakSelf.delegate performSelector:@selector(createEncounter) withObject:nil];
+    }];
 }
 
 - (IBAction)createDemand {
-    [self dismissViewControllerAnimated:YES completion:^() {
-        [self.delegate createDemand];
-    }];
+    if ([OTOngoingTourService sharedInstance].isOngoing)
+        [self.demandeAlert show];
+    else
+        [self dismissViewControllerAnimated:YES completion:^() {
+            [self.delegate createDemand];
+        }];
 }
 
 - (IBAction)createContribution {
-    [self dismissViewControllerAnimated:YES completion:^() {
-        [self.delegate createContribution];
-    }];
+    if ([OTOngoingTourService sharedInstance].isOngoing)
+        [self.contributionAlert show];
+    else
+        [self dismissViewControllerAnimated:YES completion:^() {
+            [self.delegate createContribution];
+        }];
 }
 
 - (IBAction)createTour {

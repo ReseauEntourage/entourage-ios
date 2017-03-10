@@ -16,4 +16,6 @@
 - (void)addAction:(NSString *)title delegate:(void (^)())delegate;
 - (void)show;
 
++ (void)setupOngoingCreateEntourageWithDemand:(OTAlertViewBehavior *)demand andContribution:(OTAlertViewBehavior *)contribution;
+
 @end

@@ -29,19 +29,15 @@
         [self setupOptionsAsList];
     }
     __weak typeof(self) weakSelf = self;
-    self.demandeAlert.title = OTLocalizedString(@"tour_ongoing");
-    self.demandeAlert.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), OTLocalizedString(@"demande")];
+    [OTAlertViewBehavior setupOngoingCreateEntourageWithDemand:self.demandeAlert andContribution:self.contributionAlert];
     [self.demandeAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
         if ([weakSelf.optionsDelegate respondsToSelector:@selector(createDemande)])
             [weakSelf.optionsDelegate performSelector:@selector(createDemande) withObject:nil];
-
     }];
     [self.demandeAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
         if ([weakSelf.optionsDelegate respondsToSelector:@selector(createEncounter)])
             [weakSelf.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
     }];
-    self.contributionAlert.title = OTLocalizedString(@"tour_ongoing");
-    self.contributionAlert.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), OTLocalizedString(@"contribution")];
     [self.contributionAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
         if ([weakSelf.optionsDelegate respondsToSelector:@selector(createContribution)])
             [weakSelf.optionsDelegate performSelector:@selector(createContribution) withObject:nil];

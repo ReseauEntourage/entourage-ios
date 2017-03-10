@@ -7,6 +7,7 @@
 //
 
 #import "OTAlertViewBehavior.h"
+#import "OTConsts.h"
 
 @interface OTAlertViewBehavior () <UIAlertViewDelegate>
 
@@ -36,6 +37,13 @@
     for (int i = 0; i< self.buttonTitles.count; i++)
         [alert addButtonWithTitle:self.buttonTitles[i]];
     [alert show];
+}
+
++ (void)setupOngoingCreateEntourageWithDemand:(OTAlertViewBehavior *)demand andContribution:(OTAlertViewBehavior *)contribution {
+    demand.title = OTLocalizedString(@"tour_ongoing");
+    demand.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), OTLocalizedString(@"demande")];
+    contribution.title = OTLocalizedString(@"tour_ongoing");
+    contribution.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), OTLocalizedString(@"contribution")];
 }
 
 #pragma mark - UIAlertViewDelegate
