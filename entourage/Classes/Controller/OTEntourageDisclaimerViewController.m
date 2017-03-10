@@ -38,7 +38,7 @@
     [OTLogger logEvent:@"AcceptEthicsChartClick"];
     if (self.switchAccept.isOn) {
         self.rejectDisclaimerButton.enabled = NO;
-        [self performSelector:@selector(acceptDisclaimer) withObject:nil afterDelay:1];
+        [self performSelector:@selector(acceptDisclaimer) withObject:nil afterDelay:0.5];
     }
 }
 
