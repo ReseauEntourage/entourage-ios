@@ -369,6 +369,7 @@ typedef NS_ENUM(NSInteger) {
     titleLabel.text = title;
     UITextField *nameTextField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
     nameTextField.text = text;
+    nameTextField.tintColor = [UIColor appOrangeColor];
 }
 
 - (NSString *)editedTextAtIndexPath:(NSIndexPath *)indexPath withDefault:(NSString *)defaultValue {
