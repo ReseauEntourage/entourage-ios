@@ -15,6 +15,7 @@
 @interface OTEntourageDisclaimerViewController ()
 
 @property (nonatomic, weak) IBOutlet UISwitch *switchAccept;
+@property (nonatomic, strong) UIBarButtonItem *rejectDisclaimerButton;
 
 @end
 
@@ -23,8 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UIBarButtonItem *rejectDisclaimerButton = [self setupCloseModal];
-    [rejectDisclaimerButton setAction:@selector(doRejectDisclaimer)];
+    self.rejectDisclaimerButton = [self setupCloseModal];
+    [self.rejectDisclaimerButton setAction:@selector(doRejectDisclaimer)];
 }
 
 - (IBAction)showChart:(id)sender {
@@ -35,15 +36,21 @@
 
 - (IBAction)disclaimerAccepted:(id)sender {
     [OTLogger logEvent:@"AcceptEthicsChartClick"];
-    if(self.switchAccept.isOn)
-        if ([self.disclaimerDelegate respondsToSelector:@selector(disclaimerWasAccepted)])
-            [self.disclaimerDelegate disclaimerWasAccepted];
+    if (self.switchAccept.isOn) {
+        self.rejectDisclaimerButton.enabled = NO;
+        [self performSelector:@selector(acceptDisclaimer) withObject:nil afterDelay:1];
+    }
 }
 
 - (void)doRejectDisclaimer {
     [OTLogger logEvent:@"CloseEthicsPopupClick"];
     if ([self.disclaimerDelegate respondsToSelector:@selector(disclaimerWasRejected)])
         [self.disclaimerDelegate disclaimerWasRejected];
+}
+
+- (void)acceptDisclaimer {
+    if ([self.disclaimerDelegate respondsToSelector:@selector(disclaimerWasAccepted)])
+        [self.disclaimerDelegate disclaimerWasAccepted];
 }
 
 @end
