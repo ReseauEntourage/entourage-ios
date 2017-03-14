@@ -43,8 +43,6 @@
     if([self.currentUser.type isEqualToString:USER_TYPE_PRO])
         return @[
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyActive active:self.isActive],
-                        //[OTFeedItemFilter createFor:FeedItemFilterKeyInvitation active:self.isInvited],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyOrganiser active:self.isOrganiser],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyClosed active:self.isClosed]
                     ],
@@ -57,8 +55,6 @@
     else
         return @[
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyActive active:self.isActive],
-                        //[OTFeedItemFilter createFor:FeedItemFilterKeyInvitation active:self.isInvited],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyOrganiser active:self.isOrganiser],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyClosed active:self.isClosed]
                      ],
