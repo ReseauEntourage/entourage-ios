@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */; };
+		0130138E1E7968B300C2504C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */; };
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
 		0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */; };
 		0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */; };
@@ -349,6 +351,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		013013891E7965CE00C2504C /* OTUnreadMessageCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessageCount.h; path = Feeds/OTUnreadMessageCount.h; sourceTree = "<group>"; };
+		0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUnreadMessageCount.m; path = Feeds/OTUnreadMessageCount.m; sourceTree = "<group>"; };
+		0130138C1E7968B300C2504C /* OTUnreadMessagesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessagesService.h; path = Services/OTUnreadMessagesService.h; sourceTree = "<group>"; };
+		0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUnreadMessagesService.m; path = Services/OTUnreadMessagesService.m; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
 		0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLostCodeViewController.h; sourceTree = "<group>"; };
@@ -1170,6 +1176,8 @@
 				1EA3B70B1E5DB427003FF875 /* OTTutorialService.m */,
 				1E9511301E601C5C00CF05BB /* OTLogger.h */,
 				1E9511311E601C5C00CF05BB /* OTLogger.m */,
+				0130138C1E7968B300C2504C /* OTUnreadMessagesService.h */,
+				0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -2071,6 +2079,8 @@
 				45F443411C90B93900DDEBE1 /* Tour */,
 				1E1BA6AA1D82FC0E00A7F1FF /* OTMyFeedMessage.h */,
 				1E1BA6AB1D82FC0E00A7F1FF /* OTMyFeedMessage.m */,
+				013013891E7965CE00C2504C /* OTUnreadMessageCount.h */,
+				0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */,
 			);
 			name = Feeds;
 			sourceTree = "<group>";
@@ -2860,6 +2870,7 @@
 				1E07AD641D5667E400466FB7 /* OTStatusChangedBehavior.m in Sources */,
 				1EACCAC31D64CD720027D1ED /* OTDeepLinkService.m in Sources */,
 				0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */,
+				0130138E1E7968B300C2504C /* OTUnreadMessagesService.m in Sources */,
 				1E9511321E601C5C00CF05BB /* OTLogger.m in Sources */,
 				0A94B5001B8CC66100402AF3 /* OTTour.m in Sources */,
 				1E5C302A1D6F7D5D00E10770 /* OTManageInvitationViewController.m in Sources */,
@@ -2893,6 +2904,7 @@
 				1E4F56211DB64C9100AD0CAC /* OTLocationSearchTableViewController.m in Sources */,
 				1E8E16E61D5A354C005C42ED /* OTInvitationsCollectionViewCell.m in Sources */,
 				1EF23E2C1DD08D9100E71BB7 /* OTCustomAnnotation.m in Sources */,
+				0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */,
 				1EACE4191D11515200F3A2A6 /* OTTourFactory.m in Sources */,
 				455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */,
 				1EACE4181D11515200F3A2A6 /* OTFeedItemFactory.m in Sources */,

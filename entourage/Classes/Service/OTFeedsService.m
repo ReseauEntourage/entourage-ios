@@ -15,6 +15,7 @@
 #import "OTFeedItem.h"
 #import "OTEntourage.h"
 #import "OTTour.h"
+#import "OTUnreadMessagesService.h"
 
 @implementation OTFeedsService
 
@@ -30,6 +31,8 @@
          {
              NSDictionary *data = responseObject;
              NSMutableArray *feeds = [self feedItemsFromDictionary:data];
+             for(OTFeedItem *item in feeds)
+                 item.hasUnreadMessages = [[OTUnreadMessagesService sharedInstance] countUnreadMessages:item.uid] > 0;
              if (success)
              {
                  success(feeds);
@@ -55,6 +58,8 @@
      {
          NSDictionary *data = responseObject;
          NSMutableArray *myFeeds = [self feedItemsFromDictionary:data];
+         for(OTFeedItem *item in myFeeds)
+             item.hasUnreadMessages = [[OTUnreadMessagesService sharedInstance] countUnreadMessages:item.uid] > 0;
          if (success)
              success(myFeeds);
      }

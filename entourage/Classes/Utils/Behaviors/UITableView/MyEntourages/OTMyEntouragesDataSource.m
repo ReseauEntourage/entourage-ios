@@ -12,6 +12,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "OTConsts.h"
 #import "OTMyEntouragesFilter.h"
+#import "OTFeedItem.h"
 
 @interface OTMyEntouragesDataSource ()
 
@@ -79,8 +80,13 @@
     [SVProgressHUD show];
     NSMutableDictionary *parameters = [self.currentFilter toDictionaryWithPageNumber:self.pageNumber andSize:DATA_PAGE_SIZE];
     [[OTFeedsService new] getMyFeedsWithParameters:parameters success:^(NSArray *items) {
-        [SVProgressHUD dismiss];
+        if(self.currentFilter.isUnread) {
+           items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(OTFeedItem *item, NSDictionary * bindings) {
+                return item.hasUnreadMessages;
+            }]];
+        }
         [self.items addObjectsFromArray:items];
+        [SVProgressHUD dismiss];
         success(items);
     } failure:^(NSError *error) {
         [SVProgressHUD dismiss];

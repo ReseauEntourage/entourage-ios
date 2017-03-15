@@ -24,6 +24,7 @@
 #import "OTInvitationsService.h"
 #import "SVProgressHUD.h"
 #import "OTBadgeNumberService.h"
+#import "OTUnreadMessagesService.h"
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
@@ -103,6 +104,7 @@
 
 - (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData
 {
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.feedId];
     [[OTBadgeNumberService sharedInstance] updateItem:pnData.joinableId];
     OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
     UIAlertAction *viewProfileAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -142,6 +144,7 @@
 
 - (void)handleChatNotification:(OTPushNotificationsData *)pnData
 {
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.feedId];
     [[OTBadgeNumberService sharedInstance] updateItem:pnData.joinableId];
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];

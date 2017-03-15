@@ -27,6 +27,7 @@
 #import "OTBadgeNumberService.h"
 #import "IQKeyboardManager.h"
 #import "OTBottomScrollBehavior.h"
+#import "OTUnreadMessagesService.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -62,6 +63,7 @@
     [self setupToolbarButtons];
     [self reloadMessages];
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
+    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:self.feedItem.uid];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -58,8 +58,7 @@
                     @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyTour active:self.showTours],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOnlyMyEntourages active:self.showOnlyMyEntourages]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyTour active:self.showTours]
                     ],
                     @[
                         [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
@@ -69,8 +68,7 @@
         return @[
                     @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOnlyMyEntourages active:self.showOnlyMyEntourages]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution]
                     ],
                     @[
                         [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
@@ -119,9 +117,6 @@
             break;
         case FeedItemFilterKeyTour:
             self.showTours = filter.active;
-            break;
-        case FeedItemFilterKeyOnlyMyEntourages:
-            self.showOnlyMyEntourages = filter.active;
             break;
         case FeedItemFilterKeyTimeframe:
             self.timeframeInHours = ((OTFeedItemTimeframeFilter *)filter).timeframeInHours;

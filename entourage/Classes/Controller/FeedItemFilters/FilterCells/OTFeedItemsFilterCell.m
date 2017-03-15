@@ -42,19 +42,10 @@
         case FeedItemFilterKeyTour:
             message = @"ShowToursOnlyFilterKey";
             break;
-        case FeedItemFilterKeyOnlyMyEntourages:
-            message = @"ShowOnlyMineFilter";
-            break;
-        case FeedItemFilterKeyActive:
-            message = @"ActiveMessagesFilter";
-            break;
-        case FeedItemFilterKeyInvitation:
-            message = @"InvitationsFilter";
-            break;
-        case FeedItemFilterKeyOrganiser:
+        case FeedItemFilterKeyUnread:
             message = @"OrganizerFilter";
             break;
-        case FeedItemFilterKeyClosed:
+        case FeedItemFilterKeyIncludingClosed:
             message = @"PastFilter";
             break;
         default:
