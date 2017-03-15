@@ -187,7 +187,7 @@ Proposez une structure";
 "invitations" = "Invitations";
 "organiser" = "Organisateur";
 "closed" = "Inclure entourages clôturés";
-"created_by_me_unique" = "Créés par moi uniquement";
+"created_by_me_unique" = "Uniquement non lus";
 
 // Feed Item details
 "item_option_close" = "Arrêter";

@@ -27,10 +27,20 @@
     self.summaryProvider.imgAssociation = self.imgAssociation;
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
-    if([[OTBadgeNumberService sharedInstance] hasUnread:item.uid])
+    if([[OTBadgeNumberService sharedInstance] hasUnread:item.uid]){
         self.lblLastMessage.textColor = [UIColor blackColor];
+    }
     else
         self.lblLastMessage.textColor = [UIColor appGreyishColor];
+    
+    if(item.hasUnreadMessages){
+       self.lblLastMessage.font = [UIFont fontWithName:@"SFUIText-Medium" size:15];
+       self.lblLastMessage.textColor = [UIColor blackColor];
+    }
+    else{
+        self.lblLastMessage.font = [UIFont fontWithName:@"SFUIText-Light" size:15];
+        self.lblLastMessage.textColor = [UIColor appGreyishColor];
+}
     self.lblLastMessage.text = [self getAuthorTextFor:item.lastMessage];
 }
 

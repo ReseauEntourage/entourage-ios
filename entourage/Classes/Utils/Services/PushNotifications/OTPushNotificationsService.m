@@ -96,6 +96,7 @@
         if (![topController isKindOfClass:[OTCreateMeetingViewController class]])
             [presentedViewController presentViewController:alert animated:YES completion:nil];
     }];
+    
 }
 
 #pragma mark - private methods

@@ -23,6 +23,8 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
+        self.hasUnreadMessages = NO;
+
         self.uid = [dictionary numberForKey:kWSKeyID];
         NSDictionary *authorDictionary = [dictionary objectForKey:kWSKeyAuthor];
         self.author = [[OTFeedItemAuthor alloc] initWithDictionary:authorDictionary];
