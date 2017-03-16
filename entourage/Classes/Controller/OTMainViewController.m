@@ -65,7 +65,6 @@
 #import "OTNewsFeedsFilter.h"
 #import "OTStatusChangedBehavior.h"
 #import "OTEditEntourageBehavior.h"
-#import "OTBadgeNumberService.h"
 #import "UIBarButtonItem+Badge.h"
 #import "OTNewsFeedsSourceDelegate.h"
 #import "OTNewsFeedsSourceBehavior.h"
@@ -74,6 +73,7 @@
 #import "OTStartTourAnnotation.h"
 #import "OTNoDataBehavior.h"
 #import "OTTutorialService.h"
+#import "OTUnreadMessagesService.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -785,7 +785,7 @@
 }
 
 - (void)pushReceived {
-    self.navigationItem.rightBarButtonItem.badgeValue = [OTBadgeNumberService sharedInstance].badgeCount.stringValue;
+    self.navigationItem.rightBarButtonItem.badgeValue = [OTUnreadMessagesService sharedInstance].totalCount.stringValue;
 }
 
 #pragma mark - Feeds Table View Delegate

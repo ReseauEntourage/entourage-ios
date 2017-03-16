@@ -12,8 +12,9 @@
 
 + (OTUnreadMessagesService *)sharedInstance;
 
--(void)addUnreadMessage:(NSNumber *)feedId;
--(void)removeUnreadMessages:(NSNumber *)feedId;
--(NSNumber *)countUnreadMessages:(NSNumber *)feedId;
+- (void)addUnreadMessage:(NSNumber *)feedId;
+- (void)removeUnreadMessages:(NSNumber *)feedId;
+- (NSNumber *)countUnreadMessages:(NSNumber *)feedId;
+- (NSNumber *)totalCount;
 
 @end

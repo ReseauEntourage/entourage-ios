@@ -23,7 +23,6 @@
 #import "OTEntourageInvitation.h"
 #import "OTInvitationsService.h"
 #import "SVProgressHUD.h"
-#import "OTBadgeNumberService.h"
 #import "OTUnreadMessagesService.h"
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
@@ -104,8 +103,7 @@
 
 - (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.feedId];
-    [[OTBadgeNumberService sharedInstance] updateItem:pnData.joinableId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
     OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
     UIAlertAction *viewProfileAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [OTLogger logEvent:@"UserProfileClick"];
@@ -144,8 +142,7 @@
 
 - (void)handleChatNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.feedId];
-    [[OTBadgeNumberService sharedInstance] updateItem:pnData.joinableId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
     }];
@@ -154,7 +151,7 @@
 
 - (void)handleInviteRequestNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTBadgeNumberService sharedInstance] updateItem:pnData.entourageId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.entourageId];
     OTEntourageInvitation *invitation = [OTEntourageInvitation fromPushNotifiationsData:pnData];
     UIAlertAction *refuseInviteRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [SVProgressHUD show];
@@ -178,7 +175,7 @@
 
 - (void)handleInviteStatusNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTBadgeNumberService sharedInstance] updateItem:pnData.feedId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.feedId];
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OTDeepLinkService new] navigateTo:pnData.feedId withType:pnData.feedType];
     }];

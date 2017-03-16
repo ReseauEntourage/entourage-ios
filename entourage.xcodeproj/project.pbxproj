@@ -138,7 +138,6 @@
 		1E6E550A1D707FE3002845D0 /* OTPushNotificationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E55091D707FE3002845D0 /* OTPushNotificationsService.m */; };
 		1E6E550D1D708726002845D0 /* OTPushNotificationsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E550C1D708726002845D0 /* OTPushNotificationsData.m */; };
 		1E701CEA1DA29FE30041DD9D /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E701CE91DA29FE30041DD9D /* UIBarButtonItem+Badge.m */; };
-		1E701CED1DA2A5090041DD9D /* OTBadgeNumberService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E701CEC1DA2A5090041DD9D /* OTBadgeNumberService.m */; };
 		1E71E6531D108790001F3777 /* NSNotification+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E71E6521D108790001F3777 /* NSNotification+entourage.m */; };
 		1E75AB601E3B42930055613E /* libFlurry_7.9.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E75AB5F1E3B42930055613E /* libFlurry_7.9.2.a */; };
 		1E76AE471D144D1F00C496BA /* OTTourStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE461D144D1F00C496BA /* OTTourStateInfo.m */; };
@@ -615,8 +614,6 @@
 		1E6E550C1D708726002845D0 /* OTPushNotificationsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTPushNotificationsData.m; path = Services/PushNotifications/OTPushNotificationsData.m; sourceTree = "<group>"; };
 		1E701CE81DA29FE30041DD9D /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
 		1E701CE91DA29FE30041DD9D /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
-		1E701CEB1DA2A5090041DD9D /* OTBadgeNumberService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTBadgeNumberService.h; sourceTree = "<group>"; };
-		1E701CEC1DA2A5090041DD9D /* OTBadgeNumberService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTBadgeNumberService.m; sourceTree = "<group>"; };
 		1E71E6511D108790001F3777 /* NSNotification+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotification+entourage.h"; sourceTree = "<group>"; };
 		1E71E6521D108790001F3777 /* NSNotification+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotification+entourage.m"; sourceTree = "<group>"; };
 		1E75AB5F1E3B42930055613E /* libFlurry_7.9.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.9.2.a; sourceTree = "<group>"; };
@@ -1170,8 +1167,6 @@
 				1EACCAC21D64CD720027D1ED /* OTDeepLinkService.m */,
 				1EE817611D7A052C0003133D /* OTOngoingTourService.h */,
 				1EE817621D7A052C0003133D /* OTOngoingTourService.m */,
-				1E701CEB1DA2A5090041DD9D /* OTBadgeNumberService.h */,
-				1E701CEC1DA2A5090041DD9D /* OTBadgeNumberService.m */,
 				1EA3B70A1E5DB427003FF875 /* OTTutorialService.h */,
 				1EA3B70B1E5DB427003FF875 /* OTTutorialService.m */,
 				1E9511301E601C5C00CF05BB /* OTLogger.h */,
@@ -2847,7 +2842,6 @@
 				45FD17B71CFC4F3E0037270B /* OTOptionsViewController.m in Sources */,
 				2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */,
 				45F24A3D1CEDB1490003BF9E /* OTFeedItem.m in Sources */,
-				1E701CED1DA2A5090041DD9D /* OTBadgeNumberService.m in Sources */,
 				1E2232D91D56998E004CD5E8 /* OTAddressBookService.m in Sources */,
 				1EFAC0EA1D8928D700BE396F /* OTFeedItemFilter.m in Sources */,
 				1E78B7F41D515E240008C00E /* NSDate+ui.m in Sources */,

@@ -21,7 +21,6 @@
 #import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
 #import "SVProgressHUD.h"
-#import "OTBadgeNumberService.h"
 #import "Flurry.h"
 #import "OTVersionInfo.h"
 #import "OTDebugLog.h"
@@ -106,7 +105,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 }
 
 - (void)clearUserData {
-    [[OTBadgeNumberService sharedInstance] clearData];
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
