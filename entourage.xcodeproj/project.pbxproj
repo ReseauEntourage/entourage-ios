@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */; };
 		0130138E1E7968B300C2504C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */; };
+		013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */; };
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
 		0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */; };
 		0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */; };
@@ -354,6 +355,8 @@
 		0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUnreadMessageCount.m; path = Feeds/OTUnreadMessageCount.m; sourceTree = "<group>"; };
 		0130138C1E7968B300C2504C /* OTUnreadMessagesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessagesService.h; path = Services/OTUnreadMessagesService.h; sourceTree = "<group>"; };
 		0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUnreadMessagesService.m; path = Services/OTUnreadMessagesService.m; sourceTree = "<group>"; };
+		013013921E7AAA3B00C2504C /* OTConfirmCloseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTConfirmCloseViewController.h; sourceTree = "<group>"; };
+		013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTConfirmCloseViewController.m; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
 		0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLostCodeViewController.h; sourceTree = "<group>"; };
@@ -1740,6 +1743,8 @@
 		1EB775491DE39691001450CA /* FeedChangeOptions */ = {
 			isa = PBXGroup;
 			children = (
+				013013921E7AAA3B00C2504C /* OTConfirmCloseViewController.h */,
+				013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */,
 				1EB7754A1DE396DA001450CA /* OTChangeStateViewController.h */,
 				1EB7754B1DE396DA001450CA /* OTChangeStateViewController.m */,
 			);
@@ -2897,6 +2902,7 @@
 				1E08A3331D5E06B900D96B05 /* OTUserProfileBehavior.m in Sources */,
 				1E4F56211DB64C9100AD0CAC /* OTLocationSearchTableViewController.m in Sources */,
 				1E8E16E61D5A354C005C42ED /* OTInvitationsCollectionViewCell.m in Sources */,
+				013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */,
 				1EF23E2C1DD08D9100E71BB7 /* OTCustomAnnotation.m in Sources */,
 				0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */,
 				1EACE4191D11515200F3A2A6 /* OTTourFactory.m in Sources */,

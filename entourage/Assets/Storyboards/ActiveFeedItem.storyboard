@@ -1701,12 +1701,12 @@
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zFK-Fj-hWR"/>
-        <segue reference="ffc-Pt-QuG"/>
-        <segue reference="TAD-d7-tmZ"/>
         <segue reference="r9m-eb-lob"/>
-        <segue reference="nan-zV-dem"/>
-        <segue reference="8gM-o4-A6h"/>
         <segue reference="5BX-au-xTN"/>
+        <segue reference="zFK-Fj-hWR"/>
+        <segue reference="TAD-d7-tmZ"/>
+        <segue reference="nan-zV-dem"/>
+        <segue reference="DLP-On-QzP"/>
+        <segue reference="Cgj-Wq-qez"/>
     </inferredMetricsTieBreakers>
 </document>

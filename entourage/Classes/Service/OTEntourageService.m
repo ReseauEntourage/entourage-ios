@@ -19,6 +19,7 @@
 // Helpers
 #import "NSUserDefaults+OT.h"
 #import "NSDictionary+Parsing.h"
+#import "OTEntourageService.h"
 
 
 /**************************************************************************************************/

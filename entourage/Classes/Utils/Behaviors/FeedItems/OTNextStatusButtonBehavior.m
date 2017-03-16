@@ -93,6 +93,8 @@
 - (void)doCloseFeedItem {
     [OTLogger logEvent:@"CloseEntourageConfirm"];
     [SVProgressHUD show];
+//    [self.owner performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
+//    return;
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
         [SVProgressHUD dismiss];
         [self.owner dismissViewControllerAnimated:NO completion:^{
