@@ -28,6 +28,7 @@ typedef enum {
 - (BOOL)isActive;
 - (BOOL)isPublic;
 - (BOOL)canEdit;
+- (BOOL)canCancelJoinRequest;
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure;
 
 @end

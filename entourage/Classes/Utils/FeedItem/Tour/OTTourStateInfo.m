@@ -60,6 +60,13 @@
     return NO;
 }
 
+- (BOOL)canCancelJoinRequest {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if ([currentUser.sid intValue] != [self.tour.author.uID intValue])
+        return [self.tour.status isEqualToString:JOIN_PENDING];
+    return NO;
+}
+
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
     [[OTTourService new] getTourWithId:self.tour.uid withSuccess:^(OTTour *tour) {
         if(success)

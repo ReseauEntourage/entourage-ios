@@ -196,6 +196,7 @@ Proposez une structure";
 "entourage_time_data" = "%@ - à %d%@";
 "member_count" = "Membres (%d)";
 "item_closed" = "Clôturé";
+"item_cancel_join" = "Retirer ma demande";
 
 // Tutorial
 "emailNotSent" = "Echec de la mise à jour de l'email";

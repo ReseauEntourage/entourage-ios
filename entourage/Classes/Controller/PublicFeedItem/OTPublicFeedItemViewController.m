@@ -20,6 +20,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "OTStatusChangedBehavior.h"
 #import "OTToggleVisibleWithConstraintsBehavior.h"
+#import "OTConsts.h"
 
 @interface OTPublicFeedItemViewController ()
 
@@ -82,13 +83,19 @@
 
 - (IBAction)joinFeedItem:(id)sender {
     [OTLogger logEvent:@"AskJoinFromPublicPage"];
-    [self.joinBehavior join:self.feedItem];
+    if(![self.joinBehavior join:self.feedItem])
+       [self.statusChangedBehavior startChangeStatus];
 }
 
 - (IBAction)updateStatusToPending {
     self.feedItem.joinStatus = JOIN_PENDING;
     [self.statusBehavior updateWith:self.feedItem];
     [self.toggleJoinViewBehavior toggle:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
+}
+
+- (IBAction)feedItemStateChanged {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
 }
 
 @end

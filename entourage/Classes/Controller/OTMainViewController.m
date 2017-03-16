@@ -154,6 +154,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushReceived) name:@kNotificationPushReceived object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageCreated:) name:kNotificationEntourageCreated object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceGetNewData) name:@kNotificationReloadData object:nil];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
     [self configureMapView];
@@ -829,6 +830,8 @@
             break;
         case FeedItemStateJoinPending:
             [OTLogger logEvent:@"PendingRequestOverlay"];
+            [self.statusChangedBehavior configureWith:feedItem];
+            [self.statusChangedBehavior startChangeStatus];
             break;
         case FeedItemStateOngoing:
             self.tourCreatorBehavior.tour = (OTTour *)feedItem;

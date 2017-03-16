@@ -21,12 +21,13 @@
 
 @implementation OTJoinBehavior
 
-- (void)join:(OTFeedItem *)item {
+- (BOOL)join:(OTFeedItem *)item {
     self.feedItem = item;
     FeedItemState state = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
     if(state != FeedItemStateJoinNotRequested)
-        return;
+        return NO;
     [self startJoin];
+    return YES;
 }
 
 - (BOOL)prepareSegueForMessage:(UIStoryboardSegue *)segue {

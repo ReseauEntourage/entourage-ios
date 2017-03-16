@@ -31,9 +31,11 @@
     
     [self changeBorderColors];
     [self.toggleEditBehavior initialize];
-    [self.toggleEditBehavior toggle:[[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canEdit] animated:NO];
+    id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
+    BOOL canCancelJoin = [stateInfo canCancelJoinRequest];
+    [self.toggleEditBehavior toggle:[stateInfo canEdit] animated:NO];
     [self.toggleSignalEntourageBehavior initialize];
-    [self.toggleSignalEntourageBehavior toggle:[self.feedItem isKindOfClass:[OTEntourage class]] && ![[NSUserDefaults standardUserDefaults].currentUser.sid isEqualToNumber:self.feedItem.author.uID] animated:NO];
+    [self.toggleSignalEntourageBehavior toggle:[self.feedItem isKindOfClass:[OTEntourage class]] && ![[NSUserDefaults standardUserDefaults].currentUser.sid isEqualToNumber:self.feedItem.author.uID] && !canCancelJoin animated:NO];
     [self.nextStatusBehavior configureWith:self.feedItem andProtocol:self.delegate];
 }
 

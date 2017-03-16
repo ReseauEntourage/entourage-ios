@@ -62,6 +62,11 @@
             selector = @selector(doJoinFeedItem);
             self.btnNextState.hidden = NO;
             break;
+        case FeedItemStateJoinPending:
+            title = OTLocalizedString(@"item_cancel_join");
+            selector = @selector(doQuitFeedItem);
+            self.btnNextState.hidden = NO;
+            break;
         default:
             break;
     }
