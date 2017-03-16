@@ -30,7 +30,7 @@
 + (NSString *)stringForKey:(FeedItemFilterKey)key {
     switch (key) {
         case FeedItemFilterKeyUnread:
-            return OTLocalizedString(@"created_by_me_unique");
+            return OTLocalizedString(@"unique_unread");
         case FeedItemFilterKeyIncludingClosed:
             return OTLocalizedString(@"closed");
         case FeedItemFilterKeyDemand:

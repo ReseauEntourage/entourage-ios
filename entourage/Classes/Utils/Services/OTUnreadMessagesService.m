@@ -13,7 +13,6 @@
 
 #define UserKey @"UserKey"
 
-
 @implementation OTUnreadMessagesService
 
 + (OTUnreadMessagesService *)sharedInstance {
@@ -28,7 +27,7 @@
 - (void)addUnreadMessage:(NSNumber *)feedId {
     NSMutableArray *unreadMessages = [self getUnreadMessages];
     OTUnreadMessageCount *unreadMessageFound = [self findIn:unreadMessages byFeedId:feedId];
-    if(unreadMessageFound == nil){
+    if(unreadMessageFound == nil) {
         OTUnreadMessageCount *unread = [OTUnreadMessageCount new];
         unread.unreadMessagesCount = [NSNumber numberWithInt:1];
         unread.feedId = feedId;
@@ -44,13 +43,13 @@
 - (void)removeUnreadMessages:(NSNumber *)feedId {
     NSMutableArray *unreadMessages = [self getUnreadMessages];
     OTUnreadMessageCount *unreadMessageFound = [self findIn:unreadMessages byFeedId:feedId];
-    if( unreadMessageFound != nil){
+    if( unreadMessageFound != nil) {
         [unreadMessages removeObject:unreadMessageFound];
         [self saveUnreadMessages:unreadMessages];
     }
 }
 
-- (NSNumber *)countUnreadMessages:(NSNumber *)feedId{
+- (NSNumber *)countUnreadMessages:(NSNumber *)feedId {
     NSMutableArray *unreadMessages = [self getUnreadMessages];
     OTUnreadMessageCount *unreadMessageFound = [self findIn:unreadMessages byFeedId:feedId];
         return unreadMessageFound == nil ? @(0) : unreadMessageFound.unreadMessagesCount;
@@ -71,8 +70,8 @@
     return [UserKey stringByAppendingString:[NSUserDefaults standardUserDefaults].currentUser.sid.stringValue];
 }
 
-- (OTUnreadMessageCount *) findIn:(NSArray *)array byFeedId:(NSNumber *)feedId {
-    for(OTUnreadMessageCount *item in array){
+- (OTUnreadMessageCount *)findIn:(NSArray *)array byFeedId:(NSNumber *)feedId {
+    for(OTUnreadMessageCount *item in array) {
         if([item.feedId isEqualToNumber:feedId])
             return item;
     }
@@ -87,7 +86,7 @@
     return unreadMessages;
 }
 
-- (void)saveUnreadMessages: (NSMutableArray *) unreadMessages {
+- (void)saveUnreadMessages:(NSMutableArray *)unreadMessages {
     NSString *userKey = [self getUserKey];
     [[NSUserDefaults standardUserDefaults] setObject:unreadMessages forKey:userKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
