@@ -7,31 +7,51 @@
 //
 
 #import "OTConfirmCloseViewController.h"
-
-@interface OTConfirmCloseViewController ()
-
-@end
+#import "OTNextStatusButtonBehavior.h"
+#import "OTFeedItemFactory.h"
+#import "SVProgressHUD.h"
+#import "OTConsts.h"
 
 @implementation OTConfirmCloseViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+#pragma mark - User interaction
+
+- (IBAction)doSuccessfulClose {
+    [OTLogger logEvent:@"SuccessfulClosePopup"];
+    [self closeFeedItem];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)doBlockedClose {
+    [OTLogger logEvent:@"BlockedClosePopup"];
+    [self closeFeedItem];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)doHelpClose {
+    [OTLogger logEvent:@"HelpRequestOnClosePopup"];
+    [self closeFeedItem];
 }
-*/
+
+- (IBAction)doCancel {
+    [OTLogger logEvent:@"CancelClosePopup"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - private methods
+
+- (void)closeFeedItem {
+    [OTLogger logEvent:@"CloseEntourageConfirm"];
+    [SVProgressHUD show];
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
+        [SVProgressHUD dismiss];
+        [self dismissViewControllerAnimated:NO completion:^{
+            if (self.delegate)
+                [self.delegate closedFeedItem];
+            if (self.closeDelegate)
+                [self.closeDelegate feedItemClosed];
+        }];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
+    }];
+}
 
 @end

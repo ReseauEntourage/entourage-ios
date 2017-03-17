@@ -14,6 +14,10 @@
 #import "UIColor+entourage.h"
 #import "OTSignalEntourageBehavior.h"
 #import "OTEntourage.h"
+#import "OTConfirmCloseViewController.h"
+#import "SVProgressHUD.h"
+#import "OTConsts.h"
+
 
 @interface OTChangeStateViewController ()
 
@@ -39,6 +43,12 @@
     [self.nextStatusBehavior configureWith:self.feedItem andProtocol:self.delegate];
 }
 
+- (IBAction)doQuitter {
+    [OTLogger logEvent:@"CloseEntourageConfirm"];
+    [SVProgressHUD show];
+    [self performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
+}
+
 - (IBAction)close:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -53,6 +63,13 @@
 - (IBAction)signalEntourage:(id)sender {
     if([self.feedItem isKindOfClass:[OTEntourage class]])
         [self.singalEntourageBehavior sendMailFor:(OTEntourage *)self.feedItem];
+}
+
+#pragma mark - navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([self.nextStatusBehavior prepareForSegue:segue sender:sender])
+        return;
 }
 
 #pragma mark - private methods

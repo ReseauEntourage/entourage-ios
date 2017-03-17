@@ -18,6 +18,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "OTEditEntourageBehavior.h"
 #import "UIImageView+entourage.h"
+#import "OTConsts.h"
 
 @interface OTMapViewController ()
 

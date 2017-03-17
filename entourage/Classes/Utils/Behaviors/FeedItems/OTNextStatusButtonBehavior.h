@@ -16,5 +16,6 @@
 @property (nonatomic, weak) IBOutlet UIButton *btnNextState;
 
 - (void)configureWith:(OTFeedItem *)feedItem andProtocol:(id<OTStatusChangedProtocol>)protocol;
+- (BOOL)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;
 
 @end

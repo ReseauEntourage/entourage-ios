@@ -11,8 +11,9 @@
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
 #import "OTTour.h"
+#import "OTConfirmCloseViewController.h"
 
-@interface OTNextStatusButtonBehavior ()
+@interface OTNextStatusButtonBehavior () <OTConfirmCloseProtocol>
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, weak) id<OTStatusChangedProtocol> delegate;
@@ -21,7 +22,9 @@
 
 @implementation OTNextStatusButtonBehavior
 
-- (void)configureWith:(OTFeedItem *)feedItem andProtocol:(id<OTStatusChangedProtocol>)protocol {
+- (void)configureWith:(OTFeedItem *)feedItem
+          andProtocol:(id<OTStatusChangedProtocol>)protocol
+{
     self.feedItem = feedItem;
     self.delegate = protocol;
     [self updateButton];
@@ -46,7 +49,7 @@
             self.btnNextState.hidden = NO;
             break;
         case FeedItemStateClosed:
-            if([self.feedItem isKindOfClass:[OTTour class]]) {
+            if ([self.feedItem isKindOfClass:[OTTour class]]) {
                 title = OTLocalizedString(@"item_option_freeze");
                 selector = @selector(doCloseFeedItem);
                 self.btnNextState.hidden = NO;
@@ -74,6 +77,18 @@
     [self.btnNextState setTitle:title forState:UIControlStateNormal];
 }
 
+- (BOOL)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ConfirmCloseSegue"]) {
+        OTConfirmCloseViewController *confirmCloseVC = segue.destinationViewController;
+        confirmCloseVC.delegate = self.delegate;
+        confirmCloseVC.feedItem = self.feedItem;
+        confirmCloseVC.closeDelegate = self;
+    }
+    else
+        return NO;
+    return YES;
+}
+
 #pragma mark - state transitions
 
 - (void)doStopFeedItem {
@@ -91,19 +106,7 @@
 }
 
 - (void)doCloseFeedItem {
-    [OTLogger logEvent:@"CloseEntourageConfirm"];
-    [SVProgressHUD show];
-//    [self.owner performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
-//    return;
-    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
-        [SVProgressHUD dismiss];
-        [self.owner dismissViewControllerAnimated:NO completion:^{
-            if(self.delegate)
-                [self.delegate closedFeedItem];
-        }];
-    } orFailure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
-    }];
+    [self.owner performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
 }
 
 - (void)doQuitFeedItem {
@@ -123,6 +126,12 @@
 - (void)doJoinFeedItem {
     if(self.delegate)
         [self.delegate joinFeedItem];
+}
+
+#pragma mark - OTConfirmCloseProtocol
+
+- (void)feedItemClosed {
+    [self.owner dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
