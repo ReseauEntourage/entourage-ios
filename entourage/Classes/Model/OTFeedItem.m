@@ -16,6 +16,7 @@
     if (self) {
         self.creationDate = [NSDate date];
         self.updatedDate = [NSDate date];
+        self.unreadMessageCount = @(0);
     }
     return self;
 }
@@ -24,6 +25,7 @@
     self = [super init];
     if (self) {
         self.uid = [dictionary numberForKey:kWSKeyID];
+        self.unreadMessageCount = @(0);
         NSDictionary *authorDictionary = [dictionary objectForKey:kWSKeyAuthor];
         self.author = [[OTFeedItemAuthor alloc] initWithDictionary:authorDictionary];
         self.status = [dictionary stringForKey:kWSKeyStatus];

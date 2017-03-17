@@ -33,7 +33,7 @@
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSNumber *noPeople;
 @property (nonatomic, strong) OTMyFeedMessage *lastMessage;
-@property (nonatomic, assign) BOOL hasUnreadMessages;
+@property (nonatomic, assign) NSNumber *unreadMessageCount;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

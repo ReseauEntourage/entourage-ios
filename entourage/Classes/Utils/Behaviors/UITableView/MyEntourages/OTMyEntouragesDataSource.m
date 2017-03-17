@@ -82,7 +82,8 @@
     [[OTFeedsService new] getMyFeedsWithParameters:parameters success:^(NSArray *items) {
         if(self.currentFilter.isUnread) {
            items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(OTFeedItem *item, NSDictionary * bindings) {
-                return item.hasUnreadMessages;
+               BOOL hasUnread = item.unreadMessageCount.intValue > 0;
+               return hasUnread;
             }]];
         }
         [self.items addObjectsFromArray:items];
