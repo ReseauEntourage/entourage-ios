@@ -26,6 +26,7 @@
 #define TAG_TOURUSERSCOUNT 5
 #define TAG_STATUSBUTTON 6
 #define TAG_STATUSTEXT 7
+#define TAG_UNREADTEXT 8
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
@@ -173,6 +174,7 @@
     UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
+    UITextField *unreadCountText = [cell viewWithTag:TAG_UNREADTEXT];
     UIImageView *imgAssociation = [cell viewWithTag:99];
     
     OTSummaryProviderBehavior *summaryBehavior = [OTSummaryProviderBehavior new];
@@ -189,6 +191,9 @@
     [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
     [statusButton setupAsStatusButtonForFeedItem:item];
     [statusLabel setupAsStatusButtonForFeedItem:item];
+    
+    unreadCountText.hidden = item.unreadMessageCount.intValue == 0;
+    unreadCountText.text = item.unreadMessageCount.stringValue;
 
     return cell;
 }

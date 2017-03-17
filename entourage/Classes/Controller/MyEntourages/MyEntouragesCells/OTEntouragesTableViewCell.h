@@ -20,6 +20,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblNumberOfUsers;
 @property (nonatomic, weak) IBOutlet UIButton *btnProfilePicture;
 @property (nonatomic, weak) IBOutlet UILabel *lblLastMessage;
+@property (nonatomic, weak) IBOutlet UITextField *txtUnreadCount;
 @property (nonatomic, weak) IBOutlet UIImageView *imgAssociation;
 @property (nonatomic, weak) IBOutlet OTSummaryProviderBehavior *summaryProvider;
 @property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;

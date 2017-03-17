@@ -35,6 +35,8 @@
         self.lblLastMessage.textColor = [UIColor appGreyishColor];
     }
     self.lblLastMessage.text = [self getAuthorTextFor:item.lastMessage];
+    self.txtUnreadCount.hidden = item.unreadMessageCount.intValue == 0;
+    self.txtUnreadCount.text = item.unreadMessageCount.stringValue;
 }
 
 - (IBAction)showUserDetails:(id)sender {
