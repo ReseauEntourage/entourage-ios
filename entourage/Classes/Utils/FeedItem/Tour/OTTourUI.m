@@ -10,6 +10,8 @@
 #import "OTConsts.h"
 #import "OTLocationManager.h"
 #import "OTTourPoint.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
 
 @implementation OTTourUI
 
@@ -60,6 +62,15 @@
         tourType = OTLocalizedString(@"tour_type_display_distributive");
     }
     return tourType;
+}
+
+- (BOOL)isStatusBtnVisible {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if ([currentUser.sid intValue] == [self.tour.author.uID intValue])
+        return [self.tour.status isEqualToString:FEEDITEM_STATUS_CLOSED] || [self.tour.status isEqualToString:TOUR_STATUS_ONGOING];
+    else
+        return [self.tour.joinStatus isEqualToString:JOIN_ACCEPTED];
+    return NO;
 }
 
 @end

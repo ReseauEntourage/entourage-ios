@@ -83,9 +83,9 @@
 
 // Feed item
 "join_active" = "Actif";
-"join_pending" = "Demande en attente";
-"join_rejected" = "Demande rejetée";
-"join_to_join" = "Je rejoins";
+"join_pending" = "En attente";
+"join_rejected" = "Refusé";
+"join_to_join" = "Voir";
 "closed_item" = "Entourage clôturé";
 "stopped_item" = "Maraude arrêtée";
 "join_item_failed" = "Impossible de rejoindre l’entourage.";

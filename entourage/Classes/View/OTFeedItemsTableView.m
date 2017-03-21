@@ -27,6 +27,7 @@
 #define TAG_STATUSBUTTON 6
 #define TAG_STATUSTEXT 7
 #define TAG_UNREADTEXT 8
+#define TAG_STATUSMARKER 9
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
@@ -175,6 +176,7 @@
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
     UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
     UITextField *unreadCountText = [cell viewWithTag:TAG_UNREADTEXT];
+    UIView *statusLineMarker = [cell viewWithTag:TAG_STATUSMARKER];
     UIImageView *imgAssociation = [cell viewWithTag:99];
     
     OTSummaryProviderBehavior *summaryBehavior = [OTSummaryProviderBehavior new];
@@ -191,6 +193,7 @@
     [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
     [statusButton setupAsStatusButtonForFeedItem:item];
     [statusLabel setupAsStatusButtonForFeedItem:item];
+    [statusLineMarker setBackgroundColor:statusLabel.textColor];
     
     unreadCountText.hidden = item.unreadMessageCount.intValue == 0;
     unreadCountText.text = item.unreadMessageCount.stringValue;
