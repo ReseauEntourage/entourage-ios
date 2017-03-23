@@ -13,6 +13,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *btnStatus;
 @property (nonatomic, weak) IBOutlet UILabel *lblStatus;
+@property (nonatomic, weak) IBOutlet UIView *statusLineMarker;
 @property (nonatomic, assign) BOOL isJoinPossible;
 
 - (void)updateWith:(OTFeedItem *)feedItem;

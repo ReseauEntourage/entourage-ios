@@ -88,6 +88,7 @@
 - (void)updateLabelWithText:(NSString *)text andColor:(UIColor *)color {
     [self.lblStatus setText:text];
     [self.lblStatus setTextColor:color];
+    [self.statusLineMarker setBackgroundColor:color];
 }
 
 @end
