@@ -334,3 +334,19 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "confirm_entourage_create" = "Souhaitez-vous créer une rencontre avec une personne de la rue, ou créer une %@ visible de tous?";
 "continue" = "Continuer";
 "encounter" = "Rencontre";
+
+// Chat
+"yesterday" = "hier";
+"today" = "aujourd'hui";
+"month_1" = "jan.";
+"month_2" = "fév.";
+"month_3" = "mar.";
+"month_4" = "avr.";
+"month_5" = "mai";
+"month_6" = "juin";
+"month_7" = "juil.";
+"month_8" = "août";
+"month_9" = "sep.";
+"month_10" = "oct.";
+"month_11" = "nov.";
+"month_12" = "déc.";

@@ -10,6 +10,7 @@
 		0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */; };
 		0130138E1E7968B300C2504C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */; };
 		013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */; };
+		01360A921E83EEFE0009607A /* OTChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A911E83EEFE0009607A /* OTChatDateCell.m */; };
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
 		0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */; };
 		0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */; };
@@ -357,6 +358,8 @@
 		0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUnreadMessagesService.m; path = Services/OTUnreadMessagesService.m; sourceTree = "<group>"; };
 		013013921E7AAA3B00C2504C /* OTConfirmCloseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTConfirmCloseViewController.h; sourceTree = "<group>"; };
 		013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTConfirmCloseViewController.m; sourceTree = "<group>"; };
+		01360A901E83EEFE0009607A /* OTChatDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTChatDateCell.h; path = ActiveFeedItem/ChatCells/OTChatDateCell.h; sourceTree = "<group>"; };
+		01360A911E83EEFE0009607A /* OTChatDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTChatDateCell.m; path = ActiveFeedItem/ChatCells/OTChatDateCell.m; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
 		0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLostCodeViewController.h; sourceTree = "<group>"; };
@@ -1129,6 +1132,8 @@
 				1EB4A5461DC943740057993E /* OTJoinRequestedNotOwnerCell.m */,
 				1E3E280B1DC9F4A900E0576D /* OTJoinRejectedCell.h */,
 				1E3E280C1DC9F4A900E0576D /* OTJoinRejectedCell.m */,
+				01360A901E83EEFE0009607A /* OTChatDateCell.h */,
+				01360A911E83EEFE0009607A /* OTChatDateCell.m */,
 			);
 			name = ChatCells;
 			sourceTree = "<group>";
@@ -3002,6 +3007,7 @@
 				A82B95A11DCD045200332305 /* OnBoardingTextField.swift in Sources */,
 				1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */,
 				1EFAC0D31D89247900BE396F /* OTFeedItemsFilterCellBase.m in Sources */,
+				01360A921E83EEFE0009607A /* OTChatDateCell.m in Sources */,
 				1E3E280D1DC9F4A900E0576D /* OTJoinRejectedCell.m in Sources */,
 				1EFAC0ED1D8928E200BE396F /* OTMyEntouragesFilter.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,

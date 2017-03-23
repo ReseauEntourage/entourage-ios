@@ -43,12 +43,12 @@
             return MessageCellTypeJoinRejected;
         else
             return [tJoiner.feedItem.author.uID isEqualToNumber:self.currentUser.sid] ? MessageCellTypeJoinRequested : MessageCellTypeJoinRequestedNotOwner;
-    } else if([timelinePoint class] == [OTFeedItemJoiner class])
-        return MessageCellTypeEncounter;
-    else if([timelinePoint class] == [OTFeedItemStatus class])
+    } else if([timelinePoint class] == [OTFeedItemStatus class])
         return MessageCellTypeStatus;
     else if([timelinePoint class] == [OTEncounter class])
         return MessageCellTypeEncounter;
+    else if ([timelinePoint class] == [OTFeedItemTimelinePoint class])
+        return MessageCellTypeChatDate;
     return MessageCellTypeNone;
 }
 
