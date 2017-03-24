@@ -8,6 +8,7 @@
 
 #import "OTMessageSentCell.h"
 #import "OTFeedItemMessage.h"
+#import "NSDate+OTFormatter.h"
 
 @implementation OTMessageSentCell
 
@@ -19,17 +20,7 @@
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
     OTFeedItemMessage *msgData = (OTFeedItemMessage *)timelinePoint;
     self.txtMessage.text = msgData.text;
-    self.time.text = [self getTimeString:timelinePoint.date];
-}
-
-#pragma mark - private methods
-
-- (NSString *)getTimeString: (NSDate *)date {
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute fromDate:date];
-    NSInteger hour = [components hour];
-    NSInteger minute = [components minute];
-    
-    return [NSString stringWithFormat:@"%ldh%ld", (long)hour, (long)minute];
+    self.time.text = [timelinePoint.date toTimeString];
 }
 
 @end

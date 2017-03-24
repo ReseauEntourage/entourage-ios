@@ -11,6 +11,7 @@
 #import "UIButton+entourage.h"
 #import "OTTableDataSourceBehavior.h"
 #import "UIImageView+entourage.h"
+#import "NSDate+OTFormatter.h"
 
 @implementation OTMessageReceivedCell
 
@@ -41,7 +42,7 @@
     [self.imgAssociation setupFromUrl:message.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     [self.btnAvatar setupAsProfilePictureFromUrl:message.userAvatarURL];
     self.txtMessage.text = message.text;
-    self.time.text = [self getTimeString:message.date];
+    self.time.text = [message.date toTimeString];
 }
 
 - (void)configureWithJoin:(OTFeedItemJoiner *)joiner {
@@ -50,15 +51,7 @@
     [self.imgAssociation setupFromUrl:joiner.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl];
     self.txtMessage.text = joiner.message;
-    self.time.text = [self getTimeString:joiner.date];
-}
-
-- (NSString *)getTimeString: (NSDate *)date {
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute fromDate:date];
-    NSInteger hour = [components hour];
-    NSInteger minute = [components minute];
-    
-    return [NSString stringWithFormat:@"%ldh%ld", (long)hour, (long)minute];
+    self.time.text = [joiner.date toTimeString];
 }
 
 @end
