@@ -64,7 +64,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference
-         identifier = "../Oradea.gpx"
+         identifier = "../Platinia.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>
