@@ -11,5 +11,6 @@
 @interface OTMessageSentCell : OTChatCellBase
 
 @property (nonatomic, weak) IBOutlet UITextView *txtMessage;
+@property (nonatomic, weak) IBOutlet UILabel *time;
 
 @end
