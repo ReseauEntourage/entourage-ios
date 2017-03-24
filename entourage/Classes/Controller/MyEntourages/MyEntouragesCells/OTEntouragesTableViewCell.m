@@ -26,7 +26,7 @@
     self.summaryProvider.imgAssociation = self.imgAssociation;
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
-    if(item.unreadMessageCount > 0) {
+    if(item.unreadMessageCount.intValue > 0) {
        self.lblLastMessage.font = [UIFont fontWithName:@"SFUIText-Medium" size:self.lblLastMessage.font.pointSize];
        self.lblLastMessage.textColor = [UIColor blackColor];
     }
