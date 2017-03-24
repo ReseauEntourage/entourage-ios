@@ -21,7 +21,7 @@
     else
         return FeedItemStateClosed;
     if ([currentUser.sid intValue] != [self.entourage.author.uID intValue]) {
-        if([JOIN_NOT_REQUESTED isEqualToString:self.entourage.joinStatus])
+        if([JOIN_NOT_REQUESTED isEqualToString:self.entourage.joinStatus] || [JOIN_CANCELLED isEqualToString:self.entourage.joinStatus])
             result = FeedItemStateJoinNotRequested;
         else if([JOIN_ACCEPTED isEqualToString:self.entourage.joinStatus])
             result = FeedItemStateJoinAccepted;

@@ -23,7 +23,7 @@
     else
         result = FeedItemStateClosed;
     if ([currentUser.sid intValue] != [self.tour.author.uID intValue]) {
-        if([JOIN_NOT_REQUESTED isEqualToString:self.tour.joinStatus])
+        if([JOIN_NOT_REQUESTED isEqualToString:self.tour.joinStatus] || [JOIN_CANCELLED isEqualToString:self.tour.joinStatus])
             result = FeedItemStateJoinNotRequested;
         else if([JOIN_ACCEPTED isEqualToString:self.tour.joinStatus])
             result = FeedItemStateJoinAccepted;
@@ -53,7 +53,7 @@
 - (BOOL)isPublic {
     if([self.tour.status isEqualToString:TOUR_STATUS_FREEZED])
         return YES;
-    return ![self.tour.joinStatus isEqualToString:JOIN_ACCEPTED];
+    return ![JOIN_ACCEPTED isEqualToString:self.tour.joinStatus];
 }
 
 - (BOOL)canEdit {

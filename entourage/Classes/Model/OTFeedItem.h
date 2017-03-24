@@ -19,6 +19,7 @@
 #define JOIN_PENDING @"pending"
 #define JOIN_NOT_REQUESTED @"not_requested"
 #define JOIN_REJECTED @"rejected"
+#define JOIN_CANCELLED @"cancelled"
 
 #define TOUR_TYPE_NAME @"Tour"
 
