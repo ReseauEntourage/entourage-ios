@@ -19,7 +19,6 @@
 @interface OTConfirmCloseViewController : UIViewController
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
-@property (nonatomic, weak) id<OTStatusChangedProtocol> delegate;
 @property (nonatomic, weak) id<OTConfirmCloseProtocol> closeDelegate;
 
 @end

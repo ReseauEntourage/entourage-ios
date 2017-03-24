@@ -39,18 +39,9 @@
 #pragma mark - private methods
 
 - (void)closeFeedItem {
-    [OTLogger logEvent:@"CloseEntourageConfirm"];
-    [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
-        [SVProgressHUD dismiss];
-        [self dismissViewControllerAnimated:NO completion:^{
-            if (self.delegate)
-                [self.delegate closedFeedItem];
-            if (self.closeDelegate)
-                [self.closeDelegate feedItemClosed];
-        }];
-    } orFailure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
+    [self dismissViewControllerAnimated:NO completion:^{
+        if (self.closeDelegate)
+            [self.closeDelegate feedItemClosed];
     }];
 }
 
