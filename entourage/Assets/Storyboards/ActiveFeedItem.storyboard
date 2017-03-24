@@ -991,7 +991,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0co-Uz-ZRF">
-                                <rect key="frame" x="11" y="55" width="80.5" height="18"/>
+                                <rect key="frame" x="11" y="55" width="76.5" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1746,12 +1746,12 @@
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="r9m-eb-lob"/>
-        <segue reference="TAD-d7-tmZ"/>
-        <segue reference="5BX-au-xTN"/>
-        <segue reference="zFK-Fj-hWR"/>
-        <segue reference="8gM-o4-A6h"/>
         <segue reference="nan-zV-dem"/>
         <segue reference="ffc-Pt-QuG"/>
+        <segue reference="TAD-d7-tmZ"/>
+        <segue reference="zFK-Fj-hWR"/>
+        <segue reference="5BX-au-xTN"/>
+        <segue reference="0Fj-Nh-lj4"/>
+        <segue reference="DLP-On-QzP"/>
     </inferredMetricsTieBreakers>
 </document>

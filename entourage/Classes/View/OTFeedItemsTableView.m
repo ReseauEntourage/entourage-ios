@@ -261,8 +261,9 @@
 }
 
 - (void)doJoinRequest:(UIButton*)statusButton {
-    UITableViewCell *cell = (UITableViewCell*)statusButton.superview.superview;
-    NSInteger index = [self indexPathForCell:cell].section;
+    UITableViewCell *cell = (UITableViewCell*)statusButton.superview.superview.superview;
+    NSIndexPath *path = [self indexPathForCell:cell];
+    NSInteger index = path.section;
     if(self.items.count > index) {
         OTFeedItem *selectedFeedItem = self.items[index];
         if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(doJoinRequest:)])

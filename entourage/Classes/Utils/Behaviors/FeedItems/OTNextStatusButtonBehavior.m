@@ -106,7 +106,21 @@
 }
 
 - (void)doCloseFeedItem {
-    [self.owner performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
+    if([self.feedItem isKindOfClass:[OTTour class]]) {
+        [OTLogger logEvent:@"CloseEntourageConfirm"];
+        [SVProgressHUD show];
+        [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
+            [SVProgressHUD dismiss];
+            [self.owner dismissViewControllerAnimated:NO completion:^{
+                if(self.delegate)
+                    [self.delegate closedFeedItem];
+            }];
+        } orFailure:^(NSError *error) {
+            [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
+        }];
+    }
+    else
+        [self.owner performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
 }
 
 - (void)doQuitFeedItem {
