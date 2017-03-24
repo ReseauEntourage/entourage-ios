@@ -59,6 +59,15 @@
     });
 }
 
+- (void)cancelledJoinRequest {
+    [self popToMainController];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"cancelled_join_request")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
+    });
+}
+
 - (void)joinFeedItem {
     [self.owner dismissViewControllerAnimated:YES completion:^{
         [self.joinBehavior join:self.feedItem];

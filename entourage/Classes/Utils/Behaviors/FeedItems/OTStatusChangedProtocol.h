@@ -13,5 +13,6 @@
 - (void)joinFeedItem;
 - (void)stoppedFeedItem;
 - (void)closedFeedItem;
+- (void)cancelledJoinRequest;
 
 @end

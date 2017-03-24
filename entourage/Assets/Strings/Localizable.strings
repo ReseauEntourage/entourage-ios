@@ -90,6 +90,8 @@
 "stopped_item" = "Maraude arrêtée";
 "join_item_failed" = "Impossible de rejoindre l’entourage.";
 "ongoing" = "En cours";
+"cancelled_join_request" = "Demande annulée";
+
 "no_data_entourages" = "On dirait que c'est calme ici!
 
 Déplacez la carte pour trouver des entourages crées par le réseau.

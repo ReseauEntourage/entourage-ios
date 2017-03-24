@@ -67,7 +67,7 @@
             break;
         case FeedItemStateJoinPending:
             title = OTLocalizedString(@"item_cancel_join");
-            selector = @selector(doQuitFeedItem);
+            selector = @selector(doCancelJoinRequest);
             self.btnNextState.hidden = NO;
             break;
         default:
@@ -117,6 +117,20 @@
         [self.owner dismissViewControllerAnimated:NO completion:^{
             if(self.delegate)
                 [self.delegate closedFeedItem];
+        }];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
+    }];
+}
+
+- (void)doCancelJoinRequest {
+    [OTLogger logEvent:@"ExitEntourageConfirm"];
+    [SVProgressHUD show];
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
+        [SVProgressHUD dismiss];
+        [self.owner dismissViewControllerAnimated:NO completion:^{
+            if(self.delegate)
+                [self.delegate cancelledJoinRequest];
         }];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
