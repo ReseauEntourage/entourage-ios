@@ -242,7 +242,7 @@
                                                             <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                                         </textView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9U-zE-bhM">
-                                                            <rect key="frame" x="102.5" y="54" width="31" height="14.5"/>
+                                                            <rect key="frame" x="102.5" y="54" width="31" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -256,6 +256,7 @@
                                                         <constraint firstItem="Q9U-zE-bhM" firstAttribute="trailing" secondItem="q5Z-wn-Cm8" secondAttribute="trailing" id="XH6-Xv-oY4"/>
                                                         <constraint firstItem="Q9U-zE-bhM" firstAttribute="top" secondItem="q5Z-wn-Cm8" secondAttribute="bottom" id="dPj-Ts-FQV"/>
                                                         <constraint firstItem="q5Z-wn-Cm8" firstAttribute="top" secondItem="v4y-65-hVd" secondAttribute="top" constant="5" id="pRG-EF-xXc"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="95" id="z88-M8-DU2"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -323,7 +324,7 @@
                                                     <rect key="frame" x="70" y="29" width="179.5" height="63"/>
                                                     <subviews>
                                                         <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Received message" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4fG-K0-A4V">
-                                                            <rect key="frame" x="10" y="5" width="159.5" height="53"/>
+                                                            <rect key="frame" x="10" y="5" width="159.5" height="38"/>
                                                             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -331,12 +332,21 @@
                                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                             <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                                         </textView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xs-93-LcN">
+                                                            <rect key="frame" x="138.5" y="43" width="31" height="14.5"/>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
+                                                            <color key="textColor" red="0.46274509803921571" green="0.46274509803921571" blue="0.46274509803921571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="4fG-K0-A4V" secondAttribute="bottom" constant="5" id="ZXx-Gr-VI1"/>
+                                                        <constraint firstItem="5xs-93-LcN" firstAttribute="top" secondItem="4fG-K0-A4V" secondAttribute="bottom" id="Iv8-gi-4QO"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="95" id="QnZ-Q9-OhR"/>
+                                                        <constraint firstAttribute="bottom" secondItem="4fG-K0-A4V" secondAttribute="bottom" constant="20" id="ZXx-Gr-VI1"/>
                                                         <constraint firstItem="4fG-K0-A4V" firstAttribute="leading" secondItem="yaL-IA-Gjt" secondAttribute="leading" constant="10" id="egb-7D-v6f"/>
                                                         <constraint firstAttribute="trailing" secondItem="4fG-K0-A4V" secondAttribute="trailing" constant="10" id="fTh-1k-x2o"/>
+                                                        <constraint firstItem="5xs-93-LcN" firstAttribute="trailing" secondItem="4fG-K0-A4V" secondAttribute="trailing" id="ves-Qw-rDv"/>
                                                         <constraint firstItem="4fG-K0-A4V" firstAttribute="top" secondItem="yaL-IA-Gjt" secondAttribute="top" constant="5" id="xoj-w3-Kig"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -364,6 +374,7 @@
                                             <outlet property="dataSource" destination="1dX-UW-k7J" id="IQZ-hy-una"/>
                                             <outlet property="imgAssociation" destination="R48-Lb-yxM" id="KgX-Oj-Fod"/>
                                             <outlet property="lblUserName" destination="Fl9-qI-cr1" id="mKQ-dm-pPq"/>
+                                            <outlet property="time" destination="5xs-93-LcN" id="jf9-uK-hNK"/>
                                             <outlet property="txtMessage" destination="4fG-K0-A4V" id="BgF-U6-kjM"/>
                                             <outlet property="userProfile" destination="Qyp-hb-7rI" id="CXm-NE-yv5"/>
                                         </connections>
@@ -476,7 +487,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gDf-jH-qfI">
-                                                                    <rect key="frame" x="15.5" y="108" width="205" height="18"/>
+                                                                    <rect key="frame" x="15" y="108" width="205" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -667,7 +678,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="npE-Su-q4O">
-                                                                    <rect key="frame" x="15.5" y="108" width="205" height="18"/>
+                                                                    <rect key="frame" x="15" y="108" width="205" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -774,7 +785,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Encounter info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="j3k-C6-7oU">
-                                                    <rect key="frame" x="135.5" y="13" width="105.5" height="18"/>
+                                                    <rect key="frame" x="135" y="13" width="105.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

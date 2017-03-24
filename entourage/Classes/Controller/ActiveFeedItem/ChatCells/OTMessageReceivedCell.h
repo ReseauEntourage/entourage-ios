@@ -18,5 +18,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView *imgAssociation;
 @property (nonatomic, weak) IBOutlet OTMessageDataSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;
+@property (nonatomic, weak) IBOutlet UILabel *time;
 
 @end
