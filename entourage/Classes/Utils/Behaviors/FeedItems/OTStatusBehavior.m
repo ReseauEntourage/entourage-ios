@@ -13,6 +13,7 @@
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
 #import "OTTour.h"
+#import "OTStatusChangedBehavior.h"
 
 #define BUTTON_NOTREQUESTED @"joinButton"
 #define BUTTON_PENDING      @"pendingRequestButton"
@@ -37,7 +38,8 @@
     self.feedItem = feedItem;
     self.isActive = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isActive];
     //self.btnStatus.hidden = !self.isActive;
-    self.btnStatuss.enabled = !self.isActive;
+    self.btnStatuss.enabled = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canCancelJoinRequest];
+    [self.btnStatuss addTarget:self.statusChangedBehavior action:@selector(startChangeStatus) forControlEvents:UIControlEventTouchUpInside];
     [self updateLabelAndJoin];
 //    if(self.btnStatus.hidden)
 //        return;
