@@ -194,6 +194,7 @@
     [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
     [statusButton setupAsStatusButtonForFeedItem:item];
     [statusTextButton setupAsStatusTextButtonForFeedItem:item];
+    [statusTextButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
     [statusLineMarker setBackgroundColor:statusTextButton.currentTitleColor];
     
     unreadCountText.hidden = item.unreadMessageCount.intValue == 0;

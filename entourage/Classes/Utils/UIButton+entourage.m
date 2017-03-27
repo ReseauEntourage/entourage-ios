@@ -53,9 +53,11 @@
 
 - (void)setupAsStatusTextButtonForFeedItem:(OTFeedItem *)feedItem {
     bool isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
+    self.enabled = NO;
     if(isActive) {
         OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
         if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
+            self.enabled = YES;
             if([feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
                 [self setTitle:OTLocalizedString(@"ongoing") forState:UIControlStateNormal];
             else
@@ -66,6 +68,7 @@
                 [self setTitle:OTLocalizedString(@"join_active") forState:UIControlStateNormal];
                 [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
             } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
+                self.enabled = YES;
                 [self setTitle:OTLocalizedString(@"join_pending") forState:UIControlStateNormal];
                 [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
             } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
@@ -82,11 +85,6 @@
         [self setTitleColor:[UIColor appGreyishColor] forState:UIControlStateNormal];
     }
 }
-
-//- (void)underline {
-//    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-//    self.attributedText = [[NSAttributedString alloc] initWithString:self.text attributes:underlineAttribute];
-//}
 
 #pragma mark - private methods
 
