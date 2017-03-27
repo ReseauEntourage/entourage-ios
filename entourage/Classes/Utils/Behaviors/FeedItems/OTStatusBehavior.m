@@ -36,15 +36,16 @@
 - (void)updateWith:(OTFeedItem *)feedItem {
     self.feedItem = feedItem;
     self.isActive = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isActive];
-    self.btnStatus.hidden = !self.isActive;
+    //self.btnStatus.hidden = !self.isActive;
+    self.btnStatuss.enabled = !self.isActive;
     [self updateLabelAndJoin];
-    if(self.btnStatus.hidden)
-        return;
-    [self updateButton];
+//    if(self.btnStatus.hidden)
+//        return;
+//    [self updateButton];
 }
 
 #pragma mark - private methods
-
+/*
 - (void)updateButton {
     if (self.feedItem.author.uID.intValue == self.currentUser.sid.intValue)
         [self.btnStatus setImage:[UIImage imageNamed:@"activeButton"] forState:UIControlStateNormal];
@@ -59,6 +60,7 @@
             [self.btnStatus setImage:[UIImage imageNamed:@"joinButton"] forState:UIControlStateNormal];
     }
 }
+ */
 
 - (void)updateLabelAndJoin {
     self.isJoinPossible = NO;
@@ -86,8 +88,10 @@
 }
 
 - (void)updateLabelWithText:(NSString *)text andColor:(UIColor *)color {
-    [self.lblStatus setText:text];
-    [self.lblStatus setTextColor:color];
+//    [self.lblStatus setText:text];
+//    [self.lblStatus setTextColor:color];
+    [self.btnStatuss setTitle:text forState:UIControlStateNormal];
+    [self.btnStatuss setTitleColor:color forState:UIControlStateNormal];
     [self.statusLineMarker setBackgroundColor:color];
 }
 

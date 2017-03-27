@@ -18,6 +18,7 @@
 #import "OTSummaryProviderBehavior.h"
 #import "OTConsts.h"
 #import "UIImageView+entourage.h"
+#import "UIButton+entourage.h"
 
 #define TAG_ORGANIZATION 1
 #define TAG_TOURTYPE 2
@@ -174,7 +175,7 @@
     [userProfileImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
     UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
-    UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
+    UIButton *statusTextButton = [cell viewWithTag:TAG_STATUSTEXT];
     UITextField *unreadCountText = [cell viewWithTag:TAG_UNREADTEXT];
     UIView *statusLineMarker = [cell viewWithTag:TAG_STATUSMARKER];
     UIImageView *imgAssociation = [cell viewWithTag:99];
@@ -192,8 +193,8 @@
     noPeopleLabel.text = [NSString stringWithFormat:@"%d", item.noPeople.intValue];
     [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
     [statusButton setupAsStatusButtonForFeedItem:item];
-    [statusLabel setupAsStatusButtonForFeedItem:item];
-    [statusLineMarker setBackgroundColor:statusLabel.textColor];
+    [statusTextButton setupAsStatusTextButtonForFeedItem:item];
+    [statusLineMarker setBackgroundColor:statusTextButton.currentTitleColor];
     
     unreadCountText.hidden = item.unreadMessageCount.intValue == 0;
     unreadCountText.text = item.unreadMessageCount.stringValue;

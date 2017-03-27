@@ -18,4 +18,6 @@
 
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem;
 
+- (void)setupAsStatusTextButtonForFeedItem:(OTFeedItem *)feedItem;
+
 @end

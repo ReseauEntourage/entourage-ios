@@ -11,6 +11,8 @@
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "OTFeedItemFactory.h"
+#import "OTConsts.h"
+#import "UIColor+entourage.h"
 
 #define DEFAULT_IMAGE @"userSmall"
 
@@ -48,6 +50,43 @@
     [self resizeStatusButton];
     [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
 }
+
+- (void)setupAsStatusTextButtonForFeedItem:(OTFeedItem *)feedItem {
+    bool isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
+    if(isActive) {
+        OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+        if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
+            if([feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
+                [self setTitle:OTLocalizedString(@"ongoing") forState:UIControlStateNormal];
+            else
+                [self setTitle:OTLocalizedString(@"join_active") forState:UIControlStateNormal];
+            [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
+        } else {
+            if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
+                [self setTitle:OTLocalizedString(@"join_active") forState:UIControlStateNormal];
+                [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
+            } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
+                [self setTitle:OTLocalizedString(@"join_pending") forState:UIControlStateNormal];
+                [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
+            } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
+                [self setTitle:OTLocalizedString(@"join_rejected") forState:UIControlStateNormal];
+                [self setTitleColor:[UIColor appTomatoColor] forState:UIControlStateNormal];
+            } else {
+                [self setTitle:OTLocalizedString(@"join_to_join") forState:UIControlStateNormal];
+                [self setTitleColor:[UIColor appGreyishColor] forState:UIControlStateNormal];
+            }
+        }
+    }
+    else {
+        [self setTitle:OTLocalizedString(@"item_closed") forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor appGreyishColor] forState:UIControlStateNormal];
+    }
+}
+
+//- (void)underline {
+//    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+//    self.attributedText = [[NSAttributedString alloc] initWithString:self.text attributes:underlineAttribute];
+//}
 
 #pragma mark - private methods
 

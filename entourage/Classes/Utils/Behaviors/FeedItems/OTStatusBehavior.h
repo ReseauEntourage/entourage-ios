@@ -11,9 +11,10 @@
 
 @interface OTStatusBehavior : OTBehavior
 
-@property (nonatomic, weak) IBOutlet UIButton *btnStatus;
-@property (nonatomic, weak) IBOutlet UILabel *lblStatus;
+//@property (nonatomic, weak) IBOutlet UIButton *btnStatus;
+//@property (nonatomic, weak) IBOutlet UILabel *lblStatus;
 @property (nonatomic, weak) IBOutlet UIView *statusLineMarker;
+@property (nonatomic, weak) IBOutlet UIButton *btnStatuss;
 @property (nonatomic, assign) BOOL isJoinPossible;
 
 - (void)updateWith:(OTFeedItem *)feedItem;
