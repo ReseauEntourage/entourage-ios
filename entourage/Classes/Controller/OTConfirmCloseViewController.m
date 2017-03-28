@@ -11,6 +11,14 @@
 #import "OTFeedItemFactory.h"
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
+#import "OTMailSenderBehavior.h"
+#import "OTCloseReason.h"
+
+@interface OTConfirmCloseViewController ()
+
+@property (nonatomic, strong) IBOutlet OTMailSenderBehavior *sendMail;
+
+@end
 
 @implementation OTConfirmCloseViewController
 
@@ -18,17 +26,17 @@
 
 - (IBAction)doSuccessfulClose {
     [OTLogger logEvent:@"SuccessfulClosePopup"];
-    [self closeFeedItem];
+    [self closeFeedItemWithReason:SuccesClose];
 }
 
 - (IBAction)doBlockedClose {
     [OTLogger logEvent:@"BlockedClosePopup"];
-    [self closeFeedItem];
+    [self closeFeedItemWithReason:BlockedClose];
 }
 
 - (IBAction)doHelpClose {
     [OTLogger logEvent:@"HelpRequestOnClosePopup"];
-    [self closeFeedItem];
+    [self closeFeedItemWithReason:HelpClose];
 }
 
 - (IBAction)doCancel {
@@ -38,10 +46,10 @@
 
 #pragma mark - private methods
 
-- (void)closeFeedItem {
+- (void)closeFeedItemWithReason: (OTCloseReason) reason {
     [self dismissViewControllerAnimated:NO completion:^{
         if (self.closeDelegate)
-            [self.closeDelegate feedItemClosed];
+            [self.closeDelegate feedItemClosedWithReason: reason];
     }];
 }
 

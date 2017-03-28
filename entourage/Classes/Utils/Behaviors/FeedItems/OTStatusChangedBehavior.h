@@ -10,6 +10,7 @@
 #import "OTNextStatusButtonBehavior.h"
 #import "OTEditEntourageBehavior.h"
 #import "OTJoinBehavior.h"
+#import "OTMailSenderBehavior.h"
 
 @interface OTStatusChangedBehavior : OTBehavior <OTStatusChangedProtocol>
 

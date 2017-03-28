@@ -291,7 +291,7 @@
                 <customObject id="ZXV-cG-4Hc" userLabel="Map Annotation Provider" customClass="OTMapAnnotationProviderBehavior"/>
                 <customObject id="fgE-8v-az0" customClass="OTStatusBehavior">
                     <connections>
-                        <outlet property="btnStatuss" destination="3SM-Sg-qwg" id="aQm-US-wuC"/>
+                        <outlet property="btnStatus" destination="3SM-Sg-qwg" id="51R-5g-QrV"/>
                         <outlet property="statusChangedBehavior" destination="R14-Fu-EI5" id="PaA-W8-JS6"/>
                         <outlet property="statusLineMarker" destination="FuU-fG-ePR" id="lVk-84-APf"/>
                     </connections>

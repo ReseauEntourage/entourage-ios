@@ -11,6 +11,8 @@
 		0130138E1E7968B300C2504C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */; };
 		013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */; };
 		01360A921E83EEFE0009607A /* OTChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A911E83EEFE0009607A /* OTChatDateCell.m */; };
+		017C22D51E893CEF00B36AB5 /* OTMailSenderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C22D41E893CEF00B36AB5 /* OTMailSenderBehavior.m */; };
+		017C22D71E89454B00B36AB5 /* OTCloseReason.h in Sources */ = {isa = PBXBuildFile; fileRef = 017C22D61E89454B00B36AB5 /* OTCloseReason.h */; };
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
 		0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */; };
 		0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */; };
@@ -361,6 +363,9 @@
 		013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTConfirmCloseViewController.m; sourceTree = "<group>"; };
 		01360A901E83EEFE0009607A /* OTChatDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTChatDateCell.h; path = ActiveFeedItem/ChatCells/OTChatDateCell.h; sourceTree = "<group>"; };
 		01360A911E83EEFE0009607A /* OTChatDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTChatDateCell.m; path = ActiveFeedItem/ChatCells/OTChatDateCell.m; sourceTree = "<group>"; };
+		017C22D31E893CEF00B36AB5 /* OTMailSenderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMailSenderBehavior.h; path = Behaviors/Email/OTMailSenderBehavior.h; sourceTree = "<group>"; };
+		017C22D41E893CEF00B36AB5 /* OTMailSenderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMailSenderBehavior.m; path = Behaviors/Email/OTMailSenderBehavior.m; sourceTree = "<group>"; };
+		017C22D61E89454B00B36AB5 /* OTCloseReason.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTCloseReason.h; path = Feeds/OTCloseReason.h; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
 		0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLostCodeViewController.h; sourceTree = "<group>"; };
@@ -1234,6 +1239,8 @@
 				1E2AE69F1DE466DC00FA9F70 /* OTMailTextCheckBehavior.m */,
 				1E2AE6A11DE48A5D00FA9F70 /* OTSignalEntourageBehavior.h */,
 				1E2AE6A21DE48A5D00FA9F70 /* OTSignalEntourageBehavior.m */,
+				017C22D31E893CEF00B36AB5 /* OTMailSenderBehavior.h */,
+				017C22D41E893CEF00B36AB5 /* OTMailSenderBehavior.m */,
 			);
 			name = Email;
 			sourceTree = "<group>";
@@ -2091,6 +2098,7 @@
 				1E1BA6AB1D82FC0E00A7F1FF /* OTMyFeedMessage.m */,
 				013013891E7965CE00C2504C /* OTUnreadMessageCount.h */,
 				0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */,
+				017C22D61E89454B00B36AB5 /* OTCloseReason.h */,
 			);
 			name = Feeds;
 			sourceTree = "<group>";
@@ -2872,6 +2880,7 @@
 				01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */,
 				1E488E091D4FB67200A2E5B0 /* OTUserEmailViewController.m in Sources */,
 				1E51E01E1E55A37F00D4EDA6 /* OTBottomScrollBehavior.m in Sources */,
+				017C22D71E89454B00B36AB5 /* OTCloseReason.h in Sources */,
 				45D7891B1D2FFC3E005EBACC /* UIScrollView+entourage.m in Sources */,
 				0A94B53E1B8F194700402AF3 /* OTTourPoint.m in Sources */,
 				2EDFADDA1CAE84D000B66026 /* OTAboutItem.m in Sources */,
@@ -2957,6 +2966,7 @@
 				1E5F798E1D5A14E60005003C /* OTCollectionCellProviderBehavior.m in Sources */,
 				1E587F2F1E2E164800FEBB67 /* OTAssociation.m in Sources */,
 				1E0972BE1D55541E006E1FAD /* OTInviteContactsViewController.m in Sources */,
+				017C22D51E893CEF00B36AB5 /* OTMailSenderBehavior.m in Sources */,
 				1E80E26B1D7DF60D0096B350 /* OTScrollPinBehavior.m in Sources */,
 				1E68E1151D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m in Sources */,
 				1E488E131D4FB81700A2E5B0 /* OTWelcomeViewController.m in Sources */,

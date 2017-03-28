@@ -74,6 +74,7 @@
 #import "OTNoDataBehavior.h"
 #import "OTTutorialService.h"
 #import "OTUnreadMessagesService.h"
+#import "OTMailSenderBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -119,6 +120,7 @@
 @property (nonatomic) BOOL isFirstLoad;
 @property (nonatomic) BOOL wasLoadedOnce;
 @property (nonatomic, weak) IBOutlet OTNoDataBehavior *noDataBehavior;
+@property (nonatomic, weak) IBOutlet OTMailSenderBehavior *mailSender;
 
 @end
 
@@ -155,6 +157,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageCreated:) name:kNotificationEntourageCreated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceGetNewData) name:@kNotificationReloadData object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendCloseMail:) name:@kNotificationSendCloseMail object:nil];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
     [self configureMapView];
@@ -1007,6 +1010,12 @@
         OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
         controller.optionsDelegate = self;
     }
+}
+
+-(void) sendCloseMail: (NSNotification *)notification {
+    OTCloseReason reason = [[notification.userInfo objectForKey:@kNotificationSendReasonKey] intValue];
+    OTEntourage *feedItem = [notification.userInfo objectForKey:@kNotificationFeedItemKey];
+    [self.mailSender sendCloseMail:reason forItem:  feedItem];
 }
 
 @end

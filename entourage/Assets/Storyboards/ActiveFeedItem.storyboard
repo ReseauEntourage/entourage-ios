@@ -333,7 +333,7 @@
                                                             <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                                         </textView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xs-93-LcN">
-                                                            <rect key="frame" x="138.5" y="43" width="31" height="14.5"/>
+                                                            <rect key="frame" x="138.5" y="43" width="31" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                             <color key="textColor" red="0.46274509803921571" green="0.46274509803921571" blue="0.46274509803921571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -487,7 +487,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gDf-jH-qfI">
-                                                                    <rect key="frame" x="15" y="108" width="205" height="18"/>
+                                                                    <rect key="frame" x="15.5" y="108" width="205" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -678,7 +678,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="npE-Su-q4O">
-                                                                    <rect key="frame" x="15" y="108" width="205" height="18"/>
+                                                                    <rect key="frame" x="15.5" y="108" width="205" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -785,7 +785,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Encounter info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="j3k-C6-7oU">
-                                                    <rect key="frame" x="135" y="13" width="105.5" height="18"/>
+                                                    <rect key="frame" x="135.5" y="13" width="105.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -918,7 +918,7 @@
                 <customObject id="Fee-TQ-8bL" userLabel="Status Changed" customClass="OTStatusChangedBehavior">
                     <connections>
                         <outlet property="editEntourageBehavior" destination="fgv-V1-G2W" id="frN-05-xEv"/>
-                        <outlet property="owner" destination="DlM-nw-VLS" id="XUm-OC-aAb"/>
+                        <outlet property="owner" destination="DlM-nw-VLS" id="kfU-gU-fTh"/>
                     </connections>
                 </customObject>
                 <customObject id="gL3-aq-uay" userLabel="Tap View" customClass="OTTapViewBehavior">
@@ -991,7 +991,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0co-Uz-ZRF">
-                                <rect key="frame" x="11" y="55" width="76.5" height="18"/>
+                                <rect key="frame" x="11" y="55" width="80.5" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1227,7 +1227,7 @@
                 <customObject id="AI5-tH-KvZ" userLabel="Status Changed" customClass="OTStatusChangedBehavior">
                     <connections>
                         <outlet property="editEntourageBehavior" destination="wEV-k5-DKd" id="p6K-dW-owI"/>
-                        <outlet property="owner" destination="9Ay-63-LSU" id="NVj-OF-ww7"/>
+                        <outlet property="owner" destination="9Ay-63-LSU" id="mLM-yS-Gff"/>
                     </connections>
                 </customObject>
                 <customObject id="2Hm-sV-es8" userLabel="User Profile" customClass="OTUserProfileBehavior">
@@ -1746,12 +1746,12 @@
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nan-zV-dem"/>
-        <segue reference="ffc-Pt-QuG"/>
-        <segue reference="TAD-d7-tmZ"/>
         <segue reference="zFK-Fj-hWR"/>
+        <segue reference="nan-zV-dem"/>
+        <segue reference="TAD-d7-tmZ"/>
+        <segue reference="r9m-eb-lob"/>
+        <segue reference="ffc-Pt-QuG"/>
         <segue reference="5BX-au-xTN"/>
-        <segue reference="0Fj-Nh-lj4"/>
         <segue reference="DLP-On-QzP"/>
     </inferredMetricsTieBreakers>
 </document>

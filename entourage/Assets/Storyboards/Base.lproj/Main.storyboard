@@ -631,6 +631,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                         <outlet property="footerToolbar" destination="2EG-u9-ELx" id="eNS-jR-fWV"/>
                         <outlet property="joinBehavior" destination="0l0-bs-S95" id="eTw-ea-fNI"/>
                         <outlet property="launcherButton" destination="uRg-cj-T9Q" id="oSp-ac-Y8Q"/>
+                        <outlet property="mailSender" destination="dw9-WQ-EOn" id="riz-kQ-jLk"/>
                         <outlet property="mapDelegateProxy" destination="N0A-Lo-wcg" id="mXR-gi-O5J"/>
                         <outlet property="mapSegmentedControl" destination="gsB-s5-FKP" id="Vvs-3z-462"/>
                         <outlet property="newsFeedsSourceBehavior" destination="atf-P9-vVx" id="GPG-HR-dXj"/>
@@ -695,6 +696,11 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                     <connections>
                         <outlet property="noDataPopup" destination="fyj-qg-Gvf" id="Bro-8e-o2l"/>
                         <outlet property="txtNoData" destination="47x-yn-azj" id="Ima-MY-Szr"/>
+                    </connections>
+                </customObject>
+                <customObject id="dw9-WQ-EOn" userLabel="Mail Sender" customClass="OTMailSenderBehavior">
+                    <connections>
+                        <outlet property="owner" destination="vXZ-lx-hvc" id="hFE-WP-OBw"/>
                     </connections>
                 </customObject>
             </objects>

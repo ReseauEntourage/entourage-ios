@@ -12,6 +12,7 @@
 #import "SVProgressHUD.h"
 #import "OTTour.h"
 #import "OTConfirmCloseViewController.h"
+#import "OTCloseReason.h"
 
 @interface OTNextStatusButtonBehavior () <OTConfirmCloseProtocol>
 
@@ -45,19 +46,19 @@
             break;
         case FeedItemStateOpen:
             title = OTLocalizedString(@"item_option_freeze");
-            selector = @selector(doCloseFeedItem);
+            selector = @selector(doCloseFeedItemWithReason:);
             self.btnNextState.hidden = NO;
             break;
         case FeedItemStateClosed:
             if ([self.feedItem isKindOfClass:[OTTour class]]) {
                 title = OTLocalizedString(@"item_option_freeze");
-                selector = @selector(doCloseFeedItem);
+                selector = @selector(doCloseFeedItemWithReason:);
                 self.btnNextState.hidden = NO;
             }
             break;
         case FeedItemStateJoinAccepted:
             title = OTLocalizedString(@"item_option_quit");
-            selector = @selector(doQuitFeedItem);
+            selector = @selector(doQuitFeedItemWithReason:);
             self.btnNextState.hidden = NO;
             break;
         case FeedItemStateJoinNotRequested:
@@ -104,21 +105,21 @@
     }];
 }
 
-- (void)doCloseFeedItem {
+- (void)doCloseFeedItemWithReason: (OTCloseReason)reason {
     if([self.feedItem isKindOfClass:[OTTour class]])
-        [self feedItemClosed];
+        [self feedItemClosedWithReason:reason];
     else
         [self.owner performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
 }
 
-- (void)doQuitFeedItem {
+- (void)doQuitFeedItemWithReason: (OTCloseReason)reason {
     [OTLogger logEvent:@"ExitEntourageConfirm"];
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [SVProgressHUD dismiss];
         [self.owner dismissViewControllerAnimated:NO completion:^{
             if(self.delegate)
-                [self.delegate closedFeedItem];
+                [self.delegate closedFeedItemWithReason:reason];
         }];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
@@ -146,14 +147,14 @@
 
 #pragma mark - OTConfirmCloseProtocol
 
-- (void)feedItemClosed {
+- (void)feedItemClosedWithReason: (OTCloseReason) reason{
     [OTLogger logEvent:@"CloseEntourageConfirm"];
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
         [SVProgressHUD dismiss];
         [self.owner dismissViewControllerAnimated:NO completion:^{
             if(self.delegate)
-                [self.delegate closedFeedItem];
+                [self.delegate closedFeedItemWithReason: reason];
         }];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];

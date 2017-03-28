@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "OTFeedItem.h"
 #import "OTStatusChangedProtocol.h"
+#import "OTCloseReason.h"
 
 @protocol OTConfirmCloseProtocol <NSObject>
 
-- (void)feedItemClosed;
+- (void)feedItemClosedWithReason: (OTCloseReason)reason;
 
 @end
 

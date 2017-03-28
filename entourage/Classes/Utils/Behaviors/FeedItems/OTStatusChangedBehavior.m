@@ -11,6 +11,7 @@
 #import "OTConsts.h"
 #import "OTChangeStateViewController.h"
 #import "OTMainViewController.h"
+#import "OTCloseReason.h"
 
 @interface OTStatusChangedBehavior ()
 
@@ -50,13 +51,16 @@
     });
 }
 
-- (void)closedFeedItem {
+- (void)closedFeedItemWithReason: (OTCloseReason) reason {
     [self popToMainController];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closed_item")];
         [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
+        NSDictionary *userInfo =  @{ @kNotificationSendReasonKey: @(reason), @kNotificationFeedItemKey: self.feedItem};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationSendCloseMail object:nil userInfo:userInfo];
     });
+    
 }
 
 - (void)cancelledJoinRequest {
