@@ -50,21 +50,10 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 #pragma mark - Lifecycle
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
     self.title = @"";
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    if ([SVProgressHUD isVisible]) {
-        [SVProgressHUD dismiss];
-    }
-    [self.phoneTextField indentRight];
-    [self.passwordTextField indentRight];
-
-    [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-
-
     self.phoneIsValid = NO;
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.phoneIsValid = YES;
@@ -73,7 +62,19 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.passwordTextField.inputValidationChanged = ^(BOOL isValid) {
         self.continueButton.enabled = [self validateForm];
     };
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    [self.phoneTextField indentRight];
+    [self.passwordTextField indentRight];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD dismiss];
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
 }
 
