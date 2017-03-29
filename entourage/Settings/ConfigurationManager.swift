@@ -15,8 +15,6 @@ struct UserStorageKey {
   static let amazonSecretKey = "AmazonSecretKey"
   static let amazonPictureFolder = "AmazonPictureFolder"
   static let flurryAPIKey = "FlurryAPIKey"
-  static let nuanceHostAddress = "NuanceHostAddress"
-  static let nuanceAppId = "NuanceAppId"
 }
 
 @objc class ConfigurationManager: NSObject {
@@ -62,14 +60,6 @@ struct UserStorageKey {
 
   var flurryAPIKey: NSString {
     return configuration(forKey: UserStorageKey.flurryAPIKey)
-  }
-
-  var nuanceHostAddress: NSString {
-    return configuration(forKey: UserStorageKey.nuanceHostAddress)
-  }
-
-  var nuanceAppId: NSString {
-    return configuration(forKey: UserStorageKey.nuanceAppId)
   }
 
   private func configuration(forKey: String) -> NSString {
