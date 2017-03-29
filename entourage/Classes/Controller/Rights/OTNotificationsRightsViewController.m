@@ -52,6 +52,7 @@
 }
 
 - (IBAction)doContinue {
+    [OTLogger logEvent:@"AcceptNotifications"];
     [[OTPushNotificationsService new] promptUserForPushNotifications];
 }
 

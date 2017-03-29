@@ -14,6 +14,7 @@
 - (void)joinFeedItem;
 - (void)stoppedFeedItem;
 - (void)closedFeedItemWithReason: (OTCloseReason) reason;
+- (void)quitedFeedItem;
 - (void)cancelledJoinRequest;
 
 @end

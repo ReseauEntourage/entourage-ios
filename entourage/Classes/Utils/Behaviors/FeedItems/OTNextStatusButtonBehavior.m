@@ -58,7 +58,7 @@
             break;
         case FeedItemStateJoinAccepted:
             title = OTLocalizedString(@"item_option_quit");
-            selector = @selector(doQuitFeedItemWithReason:);
+            selector = @selector(doQuitFeedItem);
             self.btnNextState.hidden = NO;
             break;
         case FeedItemStateJoinNotRequested:
@@ -112,14 +112,14 @@
         [self.owner performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
 }
 
-- (void)doQuitFeedItemWithReason: (OTCloseReason)reason {
-    [OTLogger logEvent:@"ExitEntourageConfirm"];
+- (void)doQuitFeedItem {
+    [OTLogger logEvent:@"QuitFromFeed"];
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [SVProgressHUD dismiss];
         [self.owner dismissViewControllerAnimated:NO completion:^{
             if(self.delegate)
-                [self.delegate closedFeedItemWithReason:reason];
+                [self.delegate quitedFeedItem];
         }];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];

@@ -47,4 +47,14 @@
   self.betaButton.hidden = YES;
 }
 
+-(IBAction)showSignUp:(id)sender {
+    [OTLogger logEvent:@"SplashSignUp"];
+    [self performSegueWithIdentifier:@"SignUpSegue" sender:nil];
+}
+
+-(IBAction)showLogin:(id)sender {
+    [OTLogger logEvent:@"SplashLogIn"];
+    [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+}
+
 @end

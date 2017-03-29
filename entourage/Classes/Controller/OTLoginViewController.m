@@ -89,6 +89,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
 }
 
+-(IBAction)resendCode:(id)sender {
+    [OTLogger logEvent:@"SMSCodeRequest"];
+    [self performSegueWithIdentifier:@"ResendCodeSegue" sender:nil];
+}
+
 #pragma mark - Public Methods
 
 - (BOOL)validateForm {

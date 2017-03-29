@@ -159,7 +159,7 @@
         <scene sceneID="oPo-Hd-wrW">
             <objects>
                 <navigationController storyboardIdentifier="OTStartupNavigationViewControllerIdentifier" navigationBarHidden="YES" id="qeH-DW-jd0" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="caT-Hp-ZzG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="caT-Hp-ZzG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.91372549020000005" green="0.30980392159999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -210,7 +210,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="8Pa-2W-O1j" kind="show" id="Ero-QB-FZZ"/>
+                                    <action selector="showSignUp:" destination="d0v-Fd-fA9" eventType="touchUpInside" id="TkM-W0-9Kp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwv-HX-aYM">
@@ -234,11 +234,11 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="Gt1-cc-4DI" kind="show" id="duu-Hd-nsS"/>
+                                    <action selector="showLogin:" destination="d0v-Fd-fA9" eventType="touchUpInside" id="40K-Yy-Uvm"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un peu de chaleur humaine." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPF-Wr-lQ0">
-                                <rect key="frame" x="48" y="255.5" width="280" height="58"/>
+                                <rect key="frame" x="48" y="256" width="280" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="fz7-U9-CWf"/>
                                     <constraint firstAttribute="width" constant="280" id="xZd-ZE-XbC"/>
@@ -248,7 +248,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entourageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Yl-vAI">
-                                <rect key="frame" x="150" y="165.5" width="75" height="75"/>
+                                <rect key="frame" x="150" y="166" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="Cf9-2C-NxO"/>
                                     <constraint firstAttribute="width" constant="75" id="FAX-3S-fc3"/>
@@ -299,6 +299,8 @@
                     <navigationItem key="navigationItem" id="oc7-iw-O1J"/>
                     <connections>
                         <outlet property="loginButton" destination="mwv-HX-aYM" id="nPa-jz-z55"/>
+                        <segue destination="8Pa-2W-O1j" kind="show" identifier="SignUpSegue" id="UUz-OA-utW"/>
+                        <segue destination="Gt1-cc-4DI" kind="show" identifier="LoginSegue" id="usp-d3-u4q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nCX-hY-Cs0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -432,7 +434,7 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="uQ4-e4-eq2" kind="presentation" identifier="OTLostCode" id="K8j-wn-mEk"/>
+                                                    <action selector="resendCode:" destination="Gt1-cc-4DI" eventType="touchUpInside" id="kFI-3o-Sae"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -507,6 +509,7 @@
                         <outlet property="phoneTextField" destination="dhy-dj-PYm" id="WS8-PO-wZJ"/>
                         <outlet property="scrollView" destination="Ddv-uC-bkv" id="zPI-M0-0qw"/>
                         <segue destination="vT5-aZ-dNG" kind="show" identifier="UserProfileDetailsSegue" id="mDK-wu-FNZ"/>
+                        <segue destination="uQ4-e4-eq2" kind="presentation" identifier="ResendCodeSegue" id="Ze0-TE-k8E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5B5-Uo-Thh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -523,7 +526,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uQ4-e4-eq2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jb6-3O-aIx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jb6-3O-aIx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -810,7 +813,7 @@ En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KCo-dz-5Yp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-246" y="-1710"/>
+            <point key="canvasLocation" x="-245" y="-1631"/>
         </scene>
     </scenes>
     <resources>
@@ -820,6 +823,6 @@ En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez
         <image name="whitePhone" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="duu-Hd-nsS"/>
+        <segue reference="usp-d3-u4q"/>
     </inferredMetricsTieBreakers>
 </document>

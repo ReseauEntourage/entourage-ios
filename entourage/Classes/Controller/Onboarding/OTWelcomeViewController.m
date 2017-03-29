@@ -13,6 +13,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "NSUserDefaults+OT.h"
 #import "NSAttributedString+OTBuilder.h"
+#import "OTLogger.h"
 
 #define SHOW_LOGIN_SEGUE @"WelcomeLoginSegue"
 #define CONTINUE_ONBOARDING_SEGUE @"SegueOnboarding"

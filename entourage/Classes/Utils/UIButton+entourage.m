@@ -65,6 +65,7 @@
             [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
         } else {
             if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
+                 self.enabled = YES;
                 [self setTitle:OTLocalizedString(@"join_active") forState:UIControlStateNormal];
                 [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
             } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
