@@ -40,7 +40,7 @@
             message = @"ShowOnlyOffersClick";
             break;
         case FeedItemFilterKeyTour:
-            message = @"ShowToursOnlyFilterKey";
+            message = @"ShowOnlyToursFilterClick";
             break;
         case FeedItemFilterKeyUnread:
             message = @"OrganizerFilter";

@@ -237,6 +237,11 @@
     [self.footerToolbar setTitle:OTLocalizedString(@"guideTitle")];
 }
 
+- (IBAction)goToTourOptions:(id)sender {
+    [OTLogger logEvent:@"PlusOnTourClick"];
+    [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+}
+
 #pragma mark - Private methods
 
 - (NSString *)formatDateForDisplay:(NSDate *)date {
@@ -888,6 +893,7 @@
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
     [self.mapSegmentedControl setSelectedSegmentIndex:0];
+    [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.25 animations:^(void) {
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
@@ -902,6 +908,7 @@
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
     [self.mapSegmentedControl setSelectedSegmentIndex:0];
+    [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.5 animations:^(void) {
         self.mapSegmentedControl.hidden = NO;
         self.launcherButton.hidden = YES;

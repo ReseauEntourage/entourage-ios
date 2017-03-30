@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    Rate,
+    Facebook,
+    GeneralConditions,
+    Website
+} AboutItems;
+
 @interface OTAboutItem : NSObject
 
 /**************************************************************************************************/
@@ -15,6 +22,7 @@
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *url;
+@property (nonatomic, assign) AboutItems type;
 
 /**************************************************************************************************/
 #pragma mark - Birth and Death

@@ -80,6 +80,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (IBAction)showEditView {
+    [OTLogger logEvent:@"EditPhoto"];
     [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
 }
 

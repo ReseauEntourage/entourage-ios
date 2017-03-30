@@ -75,8 +75,10 @@
         [OTLogger logEvent:@"PlusOnMessagesPageClick"];
         return;
     }
-    if([self.feedItemDetailsBehavior prepareSegueForDetails:segue])
+    if([self.feedItemDetailsBehavior prepareSegueForDetails:segue]){
+        [OTLogger logEvent:@"DiscussionMembersListView"];
         return;
+    }
     if([self.manageInvitation prepareSegueForManage:segue])
         return;
     if ([self.userProfileBehavior prepareSegueForUserProfile:segue])
