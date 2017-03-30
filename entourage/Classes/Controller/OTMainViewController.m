@@ -233,7 +233,7 @@
     [self clearMap];
     [self showToursMap];
     [self reloadPois];
-    [self.footerToolbar setupDefault];
+    [self.footerToolbar setupWithFilters];
     [self.footerToolbar setTitle:OTLocalizedString(@"guideTitle")];
 }
 

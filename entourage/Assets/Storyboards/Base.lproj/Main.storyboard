@@ -241,7 +241,7 @@
         <scene sceneID="Lst-Gh-Xmp">
             <objects>
                 <navigationController storyboardIdentifier="MenuNavController" id="EYq-GT-Cxt" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AaL-F7-3Uz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AaL-F7-3Uz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -257,7 +257,7 @@
         <scene sceneID="Uum-1n-6o1">
             <objects>
                 <navigationController storyboardIdentifier="MainNavController" id="UcL-62-xea" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qfe-Me-3AD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qfe-Me-3AD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -659,6 +659,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                         <segue destination="BuG-7M-jBg" kind="modal" identifier="SegueChangeState" id="qGU-Ml-Nja"/>
                         <segue destination="OHs-Ag-wCJ" kind="modal" identifier="EntourageEditor" id="6F4-O6-aKT"/>
                         <segue destination="odF-HL-m84" kind="modal" identifier="OTTourOptionsSegue" id="J6i-IA-3bb"/>
+                        <segue destination="UzR-b4-49u" kind="modal" identifier="SolidarityGuideSegue" id="NKf-Cg-AGD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -1164,7 +1165,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="alD-dM-t4k" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EdH-DI-xEI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EdH-DI-xEI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1286,6 +1287,14 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1y-5B-KU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="455" y="509"/>
+        </scene>
+        <!--SolidarityGuideFilters-->
+        <scene sceneID="oY9-4S-Sbq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SolidarityGuideFilters" id="UzR-b4-49u" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nQ4-qQ-tSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="513" y="644"/>
         </scene>
         <!--FeedItemFilters-->
         <scene sceneID="N4j-rM-ZJb">
