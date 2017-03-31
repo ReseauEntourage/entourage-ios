@@ -19,7 +19,7 @@
         <scene sceneID="Lea-9j-lge">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jlY-Q5-7zm" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pzf-Rs-TNl">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pzf-Rs-TNl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -43,8 +43,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ntA-2H-Ywi">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="20" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N8B-i8-k8U">
-                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
+                                <rect key="frame" x="-4" y="108" width="383" height="559"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageFilterCell" rowHeight="44" id="LKm-aV-yBx" customClass="OTSolidarityGuideFilterCell">
@@ -96,10 +100,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ntA-2H-Ywi" firstAttribute="leading" secondItem="PnM-uQ-har" secondAttribute="leading" id="CdQ-JN-QkW"/>
                             <constraint firstItem="N8B-i8-k8U" firstAttribute="leading" secondItem="PnM-uQ-har" secondAttribute="leadingMargin" constant="-20" id="FXe-MI-ZTn"/>
+                            <constraint firstAttribute="trailing" secondItem="ntA-2H-Ywi" secondAttribute="trailing" id="QIu-ne-wi1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="N8B-i8-k8U" secondAttribute="trailing" constant="-20" id="S0M-rK-Y55"/>
-                            <constraint firstItem="N8B-i8-k8U" firstAttribute="top" secondItem="KwN-IO-kFC" secondAttribute="bottom" id="TDq-DC-DZn"/>
+                            <constraint firstItem="ntA-2H-Ywi" firstAttribute="top" secondItem="KwN-IO-kFC" secondAttribute="bottom" id="Wit-qb-D8p"/>
                             <constraint firstItem="eKM-yt-Kjm" firstAttribute="top" secondItem="N8B-i8-k8U" secondAttribute="bottom" id="XNZ-va-o9o"/>
+                            <constraint firstItem="N8B-i8-k8U" firstAttribute="top" secondItem="ntA-2H-Ywi" secondAttribute="bottom" id="xUp-cj-fkc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="U2u-ll-Hft"/>
@@ -109,8 +116,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PYG-5N-6mP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="peZ-K1-BSz" customClass="OTDataSourceBehavior">
+                <customObject id="peZ-K1-BSz" customClass="OTSolidarityGuideFilteredDataSource">
                     <connections>
+                        <outlet property="searchBar" destination="ntA-2H-Ywi" id="kEw-te-itd"/>
                         <outlet property="tableDataSource" destination="NxP-AB-4Ri" id="OTG-dm-1Cw"/>
                         <outlet property="tableView" destination="N8B-i8-k8U" id="C1B-a3-TzG"/>
                     </connections>

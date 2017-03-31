@@ -19,6 +19,7 @@
 		0188DF581E8D6427008311B6 /* OTSolidarityGuideFiltersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF571E8D6427008311B6 /* OTSolidarityGuideFiltersCellProvider.m */; };
 		0188DF621E8E345D008311B6 /* OTSolidarityGuideFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF611E8E345D008311B6 /* OTSolidarityGuideFilterCell.m */; };
 		0188DF681E8E48EA008311B6 /* OTSolidarityGuideFilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF671E8E48EA008311B6 /* OTSolidarityGuideFilterItem.m */; };
+		0188DF6B1E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF6A1E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.m */; };
 		01A6DA8A1E8D089300089DC5 /* SolidarityGuideFilters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */; };
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
 		0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */; };
@@ -386,6 +387,8 @@
 		0188DF611E8E345D008311B6 /* OTSolidarityGuideFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFilterCell.m; sourceTree = "<group>"; };
 		0188DF661E8E48EA008311B6 /* OTSolidarityGuideFilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFilterItem.h; sourceTree = "<group>"; };
 		0188DF671E8E48EA008311B6 /* OTSolidarityGuideFilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFilterItem.m; sourceTree = "<group>"; };
+		0188DF691E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSolidarityGuideFilteredDataSource.h; path = Behaviors/OTSolidarityGuideFilteredDataSource.h; sourceTree = "<group>"; };
+		0188DF6A1E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSolidarityGuideFilteredDataSource.m; path = Behaviors/OTSolidarityGuideFilteredDataSource.m; sourceTree = "<group>"; };
 		01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SolidarityGuideFilters.storyboard; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
@@ -1056,6 +1059,8 @@
 				0188DF541E8D52A1008311B6 /* OTSolidarityGuideFiltersTableDataSource.m */,
 				0188DF561E8D6427008311B6 /* OTSolidarityGuideFiltersCellProvider.h */,
 				0188DF571E8D6427008311B6 /* OTSolidarityGuideFiltersCellProvider.m */,
+				0188DF691E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.h */,
+				0188DF6A1E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.m */,
 			);
 			name = SolidarityGuideFilters;
 			sourceTree = "<group>";
@@ -3069,6 +3074,7 @@
 				1ECDBC6C1D3D363600DD87B2 /* OTEntourageMessaging.m in Sources */,
 				1EA3B70C1E5DB427003FF875 /* OTTutorialService.m in Sources */,
 				1EFAC0D21D89247900BE396F /* OTFeedItemsFilterCell.m in Sources */,
+				0188DF6B1E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.m in Sources */,
 				1E2232D51D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m in Sources */,
 				2EDA5F141CB7BE7200849172 /* OTUserEditPasswordViewController.m in Sources */,
 				1E29E4EE1DA3D09300501F99 /* OTGeolocationDeniedViewController.m in Sources */,

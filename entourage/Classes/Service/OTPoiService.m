@@ -49,19 +49,13 @@ NSString *const kAPIPoiRoute = @"map.json";
      }];
 }
 
-- (void)poisAroundCoordinate:(CLLocationCoordinate2D)coordinate
-                    distance:(CLLocationDistance)distance
-                     success:(void (^)(NSArray *, NSArray *))success
-                     failure:(void (^)(NSError *))failure
+- (void)poisWithParameters:(NSDictionary *)parameters success:(void (^)(NSArray *, NSArray *))success failure:(void (^)(NSError *))failure
 {
-    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
-    parameters[@"latitude"] = @(coordinate.latitude);
-    parameters[@"longitude"] = @(coordinate.longitude);
-    parameters[@"distance"] = @(distance);
-    
+    NSMutableDictionary *authParams = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    [authParams addEntriesFromDictionary:parameters];
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:kAPIPoiRoute
-     andParameters:parameters
+     andParameters:authParams
      andSuccess:^(id responseObject)
      {
          NSDictionary *data = responseObject;

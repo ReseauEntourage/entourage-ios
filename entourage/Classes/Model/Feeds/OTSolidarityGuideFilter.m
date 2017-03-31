@@ -33,7 +33,7 @@
 - (NSArray *)toGroupedArray {
     return @[
             @[
-                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyFood active:self.showFood withImage:@"filter_heal"],
+                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyFood active:self.showFood withImage:@"eat"],
                 [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyHousing active:self.showHousing withImage:@"filter_heal"],
                 [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyHeal active:self.showHeal withImage:@"filter_heal"],
                 [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyRefresh active:self.showRefresh withImage:@"filter_heal"],
@@ -44,8 +44,12 @@
             ];
 }
 
-- (NSMutableDictionary *)toDictionaryWithPageNumber:(int)pageNumber andSize:(int)pageSize {
-    return [NSMutableDictionary new];
+- (NSMutableDictionary *)toDictionaryWithDistance:(CLLocationDistance)distance andLocation:(CLLocationCoordinate2D)location {
+    return [NSMutableDictionary dictionaryWithDictionary: @{
+                                                            @"latitude": @(location.latitude),
+                                                            @"longitude": @(location.longitude),
+                                                            @"distance": @(distance),
+                                                            }];
 }
 
 - (void)updateValue:(OTSolidarityGuideFilterItem *)filter {

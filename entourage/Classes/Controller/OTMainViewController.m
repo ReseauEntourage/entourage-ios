@@ -371,7 +371,7 @@
 
 - (void)getPOIList {
     [self.noDataBehavior hideNoData];
-    [[OTPoiService new] poisAroundCoordinate:self.mapView.centerCoordinate distance:[self mapHeight] success:^(NSArray *categories, NSArray *pois)
+    [[OTPoiService new] poisWithParameters:[self.solidarityFilter toDictionaryWithDistance:[self mapHeight] andLocation:self.mapView.centerCoordinate] success:^(NSArray *categories, NSArray *pois)
         {
             self.categories = categories;
             self.pois = pois;
@@ -776,7 +776,7 @@
 
 - (void)solidarityFilterChanged:(OTSolidarityGuideFilter *)filter {
     self.solidarityFilter = filter;
-#warning reload feeds??
+    [self reloadPois];
 }
 
 #pragma mark - Actions
