@@ -16,5 +16,6 @@
 
 - (void)sendMailWithSubject:(NSString *)subject andRecipient: (NSString *)recipient;
 - (void)sendCloseMail: (OTCloseReason) reason forItem: (OTEntourage *) feedItem;
+- (void)sendStructureMail:(NSString *)subject;
 
 @end

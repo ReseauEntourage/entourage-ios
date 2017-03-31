@@ -14,7 +14,7 @@
 #import "OTMainViewController.h"
 
 #define CLOSE_EMAIL_RECIPIENT @"contact@entourage.social"
-
+#define STRUCTURE_EMAIL_RECIPIENT @"contact@entourage.social"
 
 @interface OTMailSenderBehavior () <MFMailComposeViewControllerDelegate>
 
@@ -52,6 +52,10 @@
         break;
     }
     [self sendMailWithSubject:subject andRecipient:CLOSE_EMAIL_RECIPIENT];
+}
+
+- (void)sendStructureMail:(NSString *)subject {
+    [self sendMailWithSubject:subject andRecipient:STRUCTURE_EMAIL_RECIPIENT];
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate
