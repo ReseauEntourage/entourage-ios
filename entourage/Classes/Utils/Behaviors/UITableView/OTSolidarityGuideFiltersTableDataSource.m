@@ -24,6 +24,7 @@
     self.dataSource.tableView.delegate = self;
     self.groupHeaders = [filter groupHeaders];
     self.groupedSource = [filter toGroupedArray];
+    [self.dataSource updateItems:self.groupedSource];
 }
 
 - (OTSolidarityGuideFilter *)readCurrentFilter {
@@ -31,6 +32,10 @@
         for(OTSolidarityGuideFilter *item in values)
             [self.currentFilter updateValue:item];
     return self.currentFilter;
+}
+
+- (void)refresh {
+    self.groupedSource = self.dataSource.items;
 }
 
 #pragma mark - UITableViewDelegate

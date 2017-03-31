@@ -62,6 +62,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="peb-P0-yS6">
                                                     <rect key="frame" x="319" y="6.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="changeActive:" destination="LKm-aV-yBx" eventType="valueChanged" id="tde-ZY-DfL"/>
+                                                    </connections>
                                                 </switch>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z8a-4i-T03">
                                                     <rect key="frame" x="7" y="2" width="40" height="40"/>
@@ -84,7 +87,7 @@
                                         <connections>
                                             <outlet property="image" destination="Z8a-4i-T03" id="sOT-hB-mWU"/>
                                             <outlet property="lblTitle" destination="XLv-p0-jco" id="pxL-bh-FtR"/>
-                                            <outlet property="swtActive" destination="peb-P0-yS6" id="Iq4-Ai-Wa3"/>
+                                            <outlet property="swtActive" destination="peb-P0-yS6" id="b8N-MV-pcx"/>
                                             <outlet property="tableDataSource" destination="NxP-AB-4Ri" id="n70-K8-RV8"/>
                                         </connections>
                                     </tableViewCell>

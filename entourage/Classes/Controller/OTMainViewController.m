@@ -777,7 +777,6 @@
 - (void)solidarityFilterChanged:(OTSolidarityGuideFilter *)filter {
     self.solidarityFilter = filter;
 #warning reload feeds??
-
 }
 
 #pragma mark - Actions
