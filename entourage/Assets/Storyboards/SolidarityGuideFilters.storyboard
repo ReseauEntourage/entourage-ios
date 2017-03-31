@@ -18,7 +18,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Lea-9j-lge">
             <objects>
-                <navigationController id="jlY-Q5-7zm" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jlY-Q5-7zm" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pzf-Rs-TNl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -34,7 +34,7 @@
         <!--Solidarity Guide Filters View Controller-->
         <scene sceneID="K1L-7t-NKZ">
             <objects>
-                <viewController id="wVC-Z3-VtQ" customClass="OTSolidarityGuideFiltersViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="wVC-Z3-VtQ" customClass="OTSolidarityGuideFiltersViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KwN-IO-kFC"/>
                         <viewControllerLayoutGuide type="bottom" id="eKM-yt-Kjm"/>
@@ -43,11 +43,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N8B-i8-k8U">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N8B-i8-k8U">
                                 <rect key="frame" x="-4" y="64" width="383" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageFilterCell" rowHeight="44" id="LKm-aV-yBx" customClass="OTImageFeedItemsFilterCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageFilterCell" rowHeight="44" id="LKm-aV-yBx" customClass="OTSolidarityGuideFilterCell">
                                         <rect key="frame" x="0.0" y="28" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LKm-aV-yBx" id="AQS-Ns-BTV">
@@ -62,9 +62,6 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="peb-P0-yS6">
                                                     <rect key="frame" x="319" y="6.5" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="changeActive:" destination="LKm-aV-yBx" eventType="valueChanged" id="OdD-7W-bwe"/>
-                                                    </connections>
                                                 </switch>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z8a-4i-T03">
                                                     <rect key="frame" x="7" y="2" width="40" height="40"/>
@@ -88,6 +85,7 @@
                                             <outlet property="image" destination="Z8a-4i-T03" id="sOT-hB-mWU"/>
                                             <outlet property="lblTitle" destination="XLv-p0-jco" id="pxL-bh-FtR"/>
                                             <outlet property="swtActive" destination="peb-P0-yS6" id="Iq4-Ai-Wa3"/>
+                                            <outlet property="tableDataSource" destination="NxP-AB-4Ri" id="n70-K8-RV8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -102,8 +100,29 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="U2u-ll-Hft"/>
+                    <connections>
+                        <outlet property="tableDataSource" destination="NxP-AB-4Ri" id="EUb-FK-GXb"/>
+                        <outlet property="tableView" destination="N8B-i8-k8U" id="JIs-uL-ecf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PYG-5N-6mP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="peZ-K1-BSz" customClass="OTDataSourceBehavior">
+                    <connections>
+                        <outlet property="tableDataSource" destination="NxP-AB-4Ri" id="OTG-dm-1Cw"/>
+                        <outlet property="tableView" destination="N8B-i8-k8U" id="C1B-a3-TzG"/>
+                    </connections>
+                </customObject>
+                <customObject id="NxP-AB-4Ri" customClass="OTSolidarityGuideFiltersTableDataSource">
+                    <connections>
+                        <outlet property="cellProvider" destination="Eun-FN-nwz" id="cjJ-My-uQd"/>
+                        <outlet property="dataSource" destination="peZ-K1-BSz" id="o4G-GH-Ezz"/>
+                    </connections>
+                </customObject>
+                <customObject id="Eun-FN-nwz" customClass="OTSolidarityGuideFiltersCellProvider">
+                    <connections>
+                        <outlet property="tableDataSource" destination="NxP-AB-4Ri" id="M73-8s-GRG"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="-122.40000000000001" y="165.96701649175412"/>
         </scene>

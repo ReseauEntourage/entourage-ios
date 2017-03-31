@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OTFeedItemFilters.h"
+#import "OTSolidarityGuideFilter.h"
 
-@protocol OTFeedItemsFilterDelegate <NSObject>
+@protocol OTSolidarityGuideFilterDelegate <NSObject>
 
-@property (nonatomic, strong, readonly) OTFeedItemFilters *currentFilter;
+@property (nonatomic, strong, readonly) OTSolidarityGuideFilter *solidarityFilter;
 
-- (void)filterChanged:(OTFeedItemFilters *)filter;
+- (void)solidarityFilterChanged:(OTSolidarityGuideFilter *)filter;
 
 @end

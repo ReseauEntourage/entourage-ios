@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OTFeedItemsFilterDelegate.h"
+#import "OTSolidarityGuideFilterDelegate.h"
 
 @interface OTSolidarityGuideFiltersViewController : UIViewController
 
-@property (nonatomic, weak) id<OTFeedItemsFilterDelegate> filterDelegate;
+@property (nonatomic, weak) id<OTSolidarityGuideFilterDelegate> filterDelegate;
 
 @end

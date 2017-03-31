@@ -14,7 +14,11 @@
 		017C22D51E893CEF00B36AB5 /* OTMailSenderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C22D41E893CEF00B36AB5 /* OTMailSenderBehavior.m */; };
 		017C22D71E89454B00B36AB5 /* OTCloseReason.h in Sources */ = {isa = PBXBuildFile; fileRef = 017C22D61E89454B00B36AB5 /* OTCloseReason.h */; };
 		0188DF4D1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF4C1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m */; };
-		0188DF521E8D3CBE008311B6 /* OTSolidarityGuideFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF511E8D3CBE008311B6 /* OTSolidarityGuideFilters.m */; };
+		0188DF521E8D3CBE008311B6 /* OTSolidarityGuideFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF511E8D3CBE008311B6 /* OTSolidarityGuideFilter.m */; };
+		0188DF551E8D52A1008311B6 /* OTSolidarityGuideFiltersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF541E8D52A1008311B6 /* OTSolidarityGuideFiltersTableDataSource.m */; };
+		0188DF581E8D6427008311B6 /* OTSolidarityGuideFiltersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF571E8D6427008311B6 /* OTSolidarityGuideFiltersCellProvider.m */; };
+		0188DF621E8E345D008311B6 /* OTSolidarityGuideFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF611E8E345D008311B6 /* OTSolidarityGuideFilterCell.m */; };
+		0188DF681E8E48EA008311B6 /* OTSolidarityGuideFilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF671E8E48EA008311B6 /* OTSolidarityGuideFilterItem.m */; };
 		01A6DA8A1E8D089300089DC5 /* SolidarityGuideFilters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */; };
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
 		0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */; };
@@ -372,8 +376,16 @@
 		0188DF4B1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFiltersViewController.h; sourceTree = "<group>"; };
 		0188DF4C1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFiltersViewController.m; sourceTree = "<group>"; };
 		0188DF4F1E8D3C25008311B6 /* OTSolidarityGuideFilterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OTSolidarityGuideFilterDelegate.h; path = Behaviors/UITableView/OTSolidarityGuideFilterDelegate.h; sourceTree = "<group>"; };
-		0188DF501E8D3CBE008311B6 /* OTSolidarityGuideFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSolidarityGuideFilters.h; path = Feeds/OTSolidarityGuideFilters.h; sourceTree = "<group>"; };
-		0188DF511E8D3CBE008311B6 /* OTSolidarityGuideFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSolidarityGuideFilters.m; path = Feeds/OTSolidarityGuideFilters.m; sourceTree = "<group>"; };
+		0188DF501E8D3CBE008311B6 /* OTSolidarityGuideFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSolidarityGuideFilter.h; path = Feeds/OTSolidarityGuideFilter.h; sourceTree = "<group>"; };
+		0188DF511E8D3CBE008311B6 /* OTSolidarityGuideFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSolidarityGuideFilter.m; path = Feeds/OTSolidarityGuideFilter.m; sourceTree = "<group>"; };
+		0188DF531E8D52A1008311B6 /* OTSolidarityGuideFiltersTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSolidarityGuideFiltersTableDataSource.h; path = Behaviors/UITableView/OTSolidarityGuideFiltersTableDataSource.h; sourceTree = "<group>"; };
+		0188DF541E8D52A1008311B6 /* OTSolidarityGuideFiltersTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSolidarityGuideFiltersTableDataSource.m; path = Behaviors/UITableView/OTSolidarityGuideFiltersTableDataSource.m; sourceTree = "<group>"; };
+		0188DF561E8D6427008311B6 /* OTSolidarityGuideFiltersCellProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSolidarityGuideFiltersCellProvider.h; path = Behaviors/UITableView/OTSolidarityGuideFiltersCellProvider.h; sourceTree = "<group>"; };
+		0188DF571E8D6427008311B6 /* OTSolidarityGuideFiltersCellProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSolidarityGuideFiltersCellProvider.m; path = Behaviors/UITableView/OTSolidarityGuideFiltersCellProvider.m; sourceTree = "<group>"; };
+		0188DF601E8E345D008311B6 /* OTSolidarityGuideFilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFilterCell.h; sourceTree = "<group>"; };
+		0188DF611E8E345D008311B6 /* OTSolidarityGuideFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFilterCell.m; sourceTree = "<group>"; };
+		0188DF661E8E48EA008311B6 /* OTSolidarityGuideFilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFilterItem.h; sourceTree = "<group>"; };
+		0188DF671E8E48EA008311B6 /* OTSolidarityGuideFilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFilterItem.m; sourceTree = "<group>"; };
 		01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SolidarityGuideFilters.storyboard; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
@@ -1040,6 +1052,21 @@
 			isa = PBXGroup;
 			children = (
 				0188DF4F1E8D3C25008311B6 /* OTSolidarityGuideFilterDelegate.h */,
+				0188DF531E8D52A1008311B6 /* OTSolidarityGuideFiltersTableDataSource.h */,
+				0188DF541E8D52A1008311B6 /* OTSolidarityGuideFiltersTableDataSource.m */,
+				0188DF561E8D6427008311B6 /* OTSolidarityGuideFiltersCellProvider.h */,
+				0188DF571E8D6427008311B6 /* OTSolidarityGuideFiltersCellProvider.m */,
+			);
+			name = SolidarityGuideFilters;
+			sourceTree = "<group>";
+		};
+		0188DF5F1E8E33D8008311B6 /* SolidarityGuideFilters */ = {
+			isa = PBXGroup;
+			children = (
+				0188DF601E8E345D008311B6 /* OTSolidarityGuideFilterCell.h */,
+				0188DF611E8E345D008311B6 /* OTSolidarityGuideFilterCell.m */,
+				0188DF4B1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.h */,
+				0188DF4C1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m */,
 			);
 			name = SolidarityGuideFilters;
 			sourceTree = "<group>";
@@ -2118,8 +2145,10 @@
 				013013891E7965CE00C2504C /* OTUnreadMessageCount.h */,
 				0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */,
 				017C22D61E89454B00B36AB5 /* OTCloseReason.h */,
-				0188DF501E8D3CBE008311B6 /* OTSolidarityGuideFilters.h */,
-				0188DF511E8D3CBE008311B6 /* OTSolidarityGuideFilters.m */,
+				0188DF501E8D3CBE008311B6 /* OTSolidarityGuideFilter.h */,
+				0188DF511E8D3CBE008311B6 /* OTSolidarityGuideFilter.m */,
+				0188DF661E8E48EA008311B6 /* OTSolidarityGuideFilterItem.h */,
+				0188DF671E8E48EA008311B6 /* OTSolidarityGuideFilterItem.m */,
 			);
 			name = Feeds;
 			sourceTree = "<group>";
@@ -2227,6 +2256,7 @@
 		6B4930C719A773C500DA7EE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0188DF5F1E8E33D8008311B6 /* SolidarityGuideFilters */,
 				1EFBCFD91E56E56D008CEF30 /* Tutorial */,
 				1EB775491DE39691001450CA /* FeedChangeOptions */,
 				1E4F561C1DB64C1300AD0CAC /* LocationSelection */,
@@ -2246,8 +2276,6 @@
 				0A70FA2F1BFF31E10080E8EC /* Tour */,
 				0A4D16071C21B3950066394C /* Message */,
 				DBBE8AD319E85E9000FA218E /* MyMeetings */,
-				0188DF4B1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.h */,
-				0188DF4C1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2824,6 +2852,7 @@
 				1EACE41A1D11515200F3A2A6 /* OTTourStateTransition.m in Sources */,
 				1E80F8A41D775B840041CC11 /* OTEditEntourageBehavior.m in Sources */,
 				1E06FDD21D575D6C00370F4F /* OTMessageReceivedCell.m in Sources */,
+				0188DF621E8E345D008311B6 /* OTSolidarityGuideFilterCell.m in Sources */,
 				456ABD801CA18416004A81D6 /* UILabel+entourage.m in Sources */,
 				1E1BA6AC1D82FC0E00A7F1FF /* OTMyFeedMessage.m in Sources */,
 				1EFAC0DF1D8924B100BE396F /* OTFeedItemJoinOptionsViewController.m in Sources */,
@@ -2843,6 +2872,7 @@
 				1E5C30331D6F89D300E10770 /* OTInvitationsCollectionSource.m in Sources */,
 				45F443471C9314A800DDEBE1 /* OTFeedItemStatus.m in Sources */,
 				1EFAC0F61D89384E00BE396F /* OTNewsFeedsFilter.m in Sources */,
+				0188DF581E8D6427008311B6 /* OTSolidarityGuideFiltersCellProvider.m in Sources */,
 				0A94B5B61B94811A00402AF3 /* OTTourService.m in Sources */,
 				1E0972B41D54B797006E1FAD /* OTJoinBehavior.m in Sources */,
 				1E06B8E81D588F63008B20F4 /* OTStatusCell.m in Sources */,
@@ -2996,6 +3026,7 @@
 				1E68E1151D5B6CE4000FBAE4 /* OTMyEntouragesTableDataSource.m in Sources */,
 				1E488E131D4FB81700A2E5B0 /* OTWelcomeViewController.m in Sources */,
 				1ECFB3691D52570900722DAC /* OTTourMapHandler.m in Sources */,
+				0188DF681E8E48EA008311B6 /* OTSolidarityGuideFilterItem.m in Sources */,
 				1E4852AC1E4351230094FC13 /* OTUserTableConfigurator.m in Sources */,
 				1E78B7AE1D512E710008C00E /* OTSummaryProviderBehavior.m in Sources */,
 				1DA682EC19E81483007BD4BC /* NSString+Validators.m in Sources */,
@@ -3022,7 +3053,7 @@
 				6B4930CE19A773C500DA7EE0 /* OTAppDelegate.m in Sources */,
 				1E06FDCF1D5753AE00370F4F /* OTPlaceholderCell.m in Sources */,
 				0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */,
-				0188DF521E8D3CBE008311B6 /* OTSolidarityGuideFilters.m in Sources */,
+				0188DF521E8D3CBE008311B6 /* OTSolidarityGuideFilter.m in Sources */,
 				1EC75C091D849E4800887F6F /* OTOverlayFeederBehavior.m in Sources */,
 				454C8F501C4F4C45001362B2 /* UITextField+indentation.m in Sources */,
 				1DF661DB19E98AAD00045310 /* OTCreateMeetingViewController.m in Sources */,
@@ -3048,6 +3079,7 @@
 				1E6E550A1D707FE3002845D0 /* OTPushNotificationsService.m in Sources */,
 				A82B95A11DCD045200332305 /* OnBoardingTextField.swift in Sources */,
 				1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */,
+				0188DF551E8D52A1008311B6 /* OTSolidarityGuideFiltersTableDataSource.m in Sources */,
 				1EFAC0D31D89247900BE396F /* OTFeedItemsFilterCellBase.m in Sources */,
 				01360A921E83EEFE0009607A /* OTChatDateCell.m in Sources */,
 				1E3E280D1DC9F4A900E0576D /* OTJoinRejectedCell.m in Sources */,

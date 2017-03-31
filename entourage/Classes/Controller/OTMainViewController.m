@@ -75,6 +75,8 @@
 #import "OTTutorialService.h"
 #import "OTUnreadMessagesService.h"
 #import "OTMailSenderBehavior.h"
+#import "OTSolidarityGuideFiltersViewController.h"
+#import "OTSolidarityGuideFilterDelegate.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -84,7 +86,7 @@
 #define LONGPRESS_DELTA 65.0f
 #define MAX_DISTANCE 250.0 //meters
 
-@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFeedItemsFilterDelegate, OTNewsFeedsSourceDelegate, OTTourCreatorBehaviorDelegate>
+@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFeedItemsFilterDelegate, OTSolidarityGuideFilterDelegate, OTNewsFeedsSourceDelegate, OTTourCreatorBehaviorDelegate>
 
 @property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *mapSegmentedControl;
@@ -117,6 +119,7 @@
 @property (nonatomic, strong) NSMutableArray *markers;
 @property (nonatomic, weak) IBOutlet UIButton *nouveauxFeedItemsButton;
 @property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
+@property (nonatomic, strong) OTSolidarityGuideFilter *solidarityFilter;
 @property (nonatomic) BOOL isFirstLoad;
 @property (nonatomic) BOOL wasLoadedOnce;
 @property (nonatomic, weak) IBOutlet OTNoDataBehavior *noDataBehavior;
@@ -140,6 +143,7 @@
     [self configureNavigationBar];
     [self.footerToolbar setupWithFilters];
     self.currentFilter = [OTNewsFeedsFilter new];
+    self.solidarityFilter = [OTSolidarityGuideFilter new];
     self.encounters = [NSMutableArray new];
     self.markers = [NSMutableArray new];
     self.mapView = [[MKMapView alloc] init];
@@ -768,10 +772,21 @@
     [self reloadFeeds];
 }
 
+#pragma mark - OTSolidarityGuideFilterDelegate
+
+- (void)solidarityFilterChanged:(OTSolidarityGuideFilter *)filter {
+    self.solidarityFilter = filter;
+#warning reload feeds??
+
+}
+
 #pragma mark - Actions
 
 - (void)showFilters {
-    [self performSegueWithIdentifier:@"FiltersSegue" sender:self];
+    if (self.guideMapDelegate.isActive)
+        [self performSegueWithIdentifier:@"SolidarityGuideSegue" sender:self];
+    else
+        [self performSegueWithIdentifier:@"FiltersSegue" sender:self];
 }
 
 - (void)zoomToCurrentLocation:(id)sender {
@@ -1003,6 +1018,11 @@
     else if([segue.identifier isEqualToString:@"FiltersSegue"]) {
         UINavigationController *navController = (UINavigationController*)destinationViewController;
         OTFeedItemFiltersViewController *controller = (OTFeedItemFiltersViewController*)navController.topViewController;
+        controller.filterDelegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"SolidarityGuideSegue"]) {
+        UINavigationController *navController = (UINavigationController *)destinationViewController;
+        OTSolidarityGuideFiltersViewController *controller = (OTSolidarityGuideFiltersViewController *)navController.topViewController;
         controller.filterDelegate = self;
     }
     else if([segue.identifier isEqualToString:@"PublicFeedItemDetailsSegue"]) {
