@@ -136,7 +136,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                                <rect key="frame" x="121.5" y="233" width="133" height="18"/>
+                                <rect key="frame" x="121" y="233" width="133" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -241,7 +241,7 @@
         <scene sceneID="Lst-Gh-Xmp">
             <objects>
                 <navigationController storyboardIdentifier="MenuNavController" id="EYq-GT-Cxt" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AaL-F7-3Uz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AaL-F7-3Uz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -257,7 +257,7 @@
         <scene sceneID="Uum-1n-6o1">
             <objects>
                 <navigationController storyboardIdentifier="MainNavController" id="UcL-62-xea" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qfe-Me-3AD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qfe-Me-3AD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -410,7 +410,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view tag="9" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZB-r5-50i">
-                                                    <rect key="frame" x="23" y="121" width="337" height="1"/>
+                                                    <rect key="frame" x="23" y="121.5" width="337" height="1"/>
                                                     <color key="backgroundColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="yYM-d9-2jP"/>
@@ -444,32 +444,45 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
-                                                <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yhd-jj-PWR">
+                                                <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yhd-jj-PWR">
                                                     <rect key="frame" x="149" y="99" width="86" height="45"/>
                                                     <subviews>
-                                                        <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCp-5f-3CE">
-                                                            <rect key="frame" x="50" y="8" width="30" height="28"/>
-                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="13"/>
-                                                            <state key="normal" title="Actif"/>
-                                                        </button>
-                                                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDi-G9-ea1">
-                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpo-98-G9E">
+                                                            <rect key="frame" x="5" y="0.0" width="76" height="45"/>
+                                                            <subviews>
+                                                                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDi-G9-ea1">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="45" identifier="width" id="OGH-bi-9Nx"/>
+                                                                        <constraint firstAttribute="height" constant="45" id="X0a-2t-KgR"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="activeButton"/>
+                                                                </button>
+                                                                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCp-5f-3CE">
+                                                                    <rect key="frame" x="45" y="9" width="31" height="28"/>
+                                                                    <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="13"/>
+                                                                    <state key="normal" title="Actif"/>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="45" identifier="width" id="OGH-bi-9Nx"/>
-                                                                <constraint firstAttribute="height" constant="45" id="X0a-2t-KgR"/>
+                                                                <constraint firstItem="uCp-5f-3CE" firstAttribute="centerY" secondItem="YDi-G9-ea1" secondAttribute="centerY" id="0eP-rL-zkB"/>
+                                                                <constraint firstAttribute="bottom" secondItem="YDi-G9-ea1" secondAttribute="bottom" id="5Xg-ig-k0l"/>
+                                                                <constraint firstItem="YDi-G9-ea1" firstAttribute="leading" secondItem="lpo-98-G9E" secondAttribute="leading" id="5lg-mb-EZV"/>
+                                                                <constraint firstItem="uCp-5f-3CE" firstAttribute="leading" secondItem="YDi-G9-ea1" secondAttribute="trailing" id="8yV-Q7-ump"/>
+                                                                <constraint firstAttribute="trailing" secondItem="uCp-5f-3CE" secondAttribute="trailing" id="GwH-Jh-hbo"/>
+                                                                <constraint firstItem="YDi-G9-ea1" firstAttribute="top" secondItem="lpo-98-G9E" secondAttribute="top" id="Osp-Od-lQ6"/>
+                                                                <constraint firstItem="uCp-5f-3CE" firstAttribute="centerY" secondItem="lpo-98-G9E" secondAttribute="centerY" id="Wgk-oi-Fhc"/>
                                                             </constraints>
-                                                            <state key="normal" image="activeButton"/>
-                                                        </button>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="YDi-G9-ea1" secondAttribute="bottom" id="0yh-SK-4Vy"/>
-                                                        <constraint firstItem="YDi-G9-ea1" firstAttribute="leading" secondItem="yhd-jj-PWR" secondAttribute="leading" id="LeL-sl-fU4"/>
-                                                        <constraint firstItem="YDi-G9-ea1" firstAttribute="top" secondItem="yhd-jj-PWR" secondAttribute="top" id="T8a-g8-FJh"/>
-                                                        <constraint firstItem="uCp-5f-3CE" firstAttribute="leading" secondItem="YDi-G9-ea1" secondAttribute="trailing" constant="5" id="rpM-Zr-sbW"/>
-                                                        <constraint firstItem="uCp-5f-3CE" firstAttribute="centerY" secondItem="YDi-G9-ea1" secondAttribute="centerY" id="v4j-Qj-VpN"/>
-                                                        <constraint firstAttribute="trailing" secondItem="uCp-5f-3CE" secondAttribute="trailing" constant="5" id="z5y-Y9-St7"/>
+                                                        <constraint firstAttribute="trailing" secondItem="lpo-98-G9E" secondAttribute="trailing" constant="5" id="9ZP-zj-fwL"/>
+                                                        <constraint firstItem="lpo-98-G9E" firstAttribute="leading" secondItem="yhd-jj-PWR" secondAttribute="leading" constant="5" id="LWH-12-zJV"/>
+                                                        <constraint firstAttribute="bottom" secondItem="lpo-98-G9E" secondAttribute="bottom" id="kin-Lb-haB"/>
+                                                        <constraint firstItem="lpo-98-G9E" firstAttribute="top" secondItem="yhd-jj-PWR" secondAttribute="top" id="sUv-SF-CYg"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -1165,7 +1178,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="alD-dM-t4k" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EdH-DI-xEI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EdH-DI-xEI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

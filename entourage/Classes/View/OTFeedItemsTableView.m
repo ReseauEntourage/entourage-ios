@@ -263,7 +263,7 @@
 }
 
 - (void)doJoinRequest:(UIButton*)statusButton {
-    UITableViewCell *cell = (UITableViewCell*)statusButton.superview.superview.superview;
+    UITableViewCell *cell = (UITableViewCell*)statusButton.superview.superview.superview.superview;
     NSIndexPath *path = [self indexPathForCell:cell];
     NSInteger index = path.section;
     if(self.items.count > index) {
