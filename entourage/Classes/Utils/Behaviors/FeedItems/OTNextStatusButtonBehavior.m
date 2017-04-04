@@ -149,15 +149,23 @@
 
 - (void)feedItemClosedWithReason: (OTCloseReason) reason{
     [OTLogger logEvent:@"CloseEntourageConfirm"];
+    if(reason == OTCloseReasonHelpClose) {
+        [self dismissOnClose:reason];
+        return;
+    }
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
         [SVProgressHUD dismiss];
-        [self.owner dismissViewControllerAnimated:NO completion:^{
-            if(self.delegate)
-                [self.delegate closedFeedItemWithReason: reason];
-        }];
+        [self dismissOnClose:reason];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
+    }];
+}
+
+- (void)dismissOnClose:(OTCloseReason) reason {
+    [self.owner dismissViewControllerAnimated:NO completion:^{
+        if(self.delegate)
+            [self.delegate closedFeedItemWithReason: reason];
     }];
 }
 

@@ -14,7 +14,7 @@
 @implementation OTTourMapHandler
 
 - (CLLocationCoordinate2D)startPoint {
-    CLLocationCoordinate2D coordinate;
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(0, 0);
     if (self.tour.tourPoints.count) {
         OTTourPoint *startPoint = self.tour.tourPoints[0];
         coordinate = CLLocationCoordinate2DMake(startPoint.latitude, startPoint.longitude);

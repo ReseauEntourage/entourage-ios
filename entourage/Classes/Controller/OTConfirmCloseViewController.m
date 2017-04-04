@@ -26,17 +26,17 @@
 
 - (IBAction)doSuccessfulClose {
     [OTLogger logEvent:@"SuccessfulClosePopup"];
-    [self closeFeedItemWithReason:SuccesClose];
+    [self closeFeedItemWithReason:OTCloseReasonSuccesClose];
 }
 
 - (IBAction)doBlockedClose {
     [OTLogger logEvent:@"BlockedClosePopup"];
-    [self closeFeedItemWithReason:BlockedClose];
+    [self closeFeedItemWithReason:OTCloseReasonBlockedClose];
 }
 
 - (IBAction)doHelpClose {
     [OTLogger logEvent:@"HelpRequestOnClosePopup"];
-    [self closeFeedItemWithReason:HelpClose];
+    [self closeFeedItemWithReason:OTCloseReasonHelpClose];
 }
 
 - (IBAction)doCancel {

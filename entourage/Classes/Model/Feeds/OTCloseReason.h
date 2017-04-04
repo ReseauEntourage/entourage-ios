@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    SuccesClose,
-    BlockedClose,
-    HelpClose
+    OTCloseReasonSuccesClose,
+    OTCloseReasonBlockedClose,
+    OTCloseReasonHelpClose
 } OTCloseReason;

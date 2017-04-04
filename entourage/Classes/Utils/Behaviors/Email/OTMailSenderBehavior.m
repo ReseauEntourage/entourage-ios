@@ -39,13 +39,13 @@
 - (void)sendCloseMail:(OTCloseReason)reason forItem:(OTEntourage *)feedItem{
     NSString *subject = [NSString new];
     switch (reason) {
-    case SuccesClose:
+    case OTCloseReasonSuccesClose:
             subject =[NSString stringWithFormat:OTLocalizedString(@"successful_close_mail"), feedItem.title];
         break;
-    case BlockedClose:
+    case OTCloseReasonBlockedClose:
             subject =[NSString stringWithFormat:OTLocalizedString(@"blocked_close_mail"), feedItem.title];
         break;
-    case HelpClose:
+    case OTCloseReasonHelpClose:
             subject =[NSString stringWithFormat:OTLocalizedString(@"help_close_mail"), feedItem.title];
         break;
     default:
