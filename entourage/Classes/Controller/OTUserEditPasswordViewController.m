@@ -11,6 +11,8 @@
 #import "OTConsts.h"
 #import "OTAuthService.h"
 #import "A0SimpleKeychain.h"
+#import "UIColor+entourage.h"
+#import "UIBarButtonItem+factory.h"
 
 #define MIN_PASSWORD_LENGTH 6
 #define MAX_PASSWORD_LENGTH 6
@@ -30,7 +32,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self setupToolbarButtons];
+}
+
+- (void)setupToolbarButtons {
     [self setupCloseModal];
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString withTarget:self andAction:@selector(doValidate:) colored:[UIColor appOrangeColor]];
+    [self.navigationItem setRightBarButtonItem:menuButton];
 }
 
 #pragma mark - IBActions

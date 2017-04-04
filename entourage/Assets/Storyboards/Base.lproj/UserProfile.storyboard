@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Th9-id-j6L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Th9-id-j6L">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -329,7 +329,7 @@
         <scene sceneID="M5j-4s-qmF">
             <objects>
                 <navigationController id="Th9-id-j6L" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fW5-G3-hQ3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fW5-G3-hQ3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -754,7 +754,7 @@
         <scene sceneID="U66-ZG-q0z">
             <objects>
                 <navigationController id="JY3-Ti-PBi" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ivf-eh-h7N">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ivf-eh-h7N">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -867,27 +867,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFW-Nw-9dW" userLabel="Confirm Button">
-                                <rect key="frame" x="0.0" y="372" width="375" height="57"/>
-                                <color key="backgroundColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="57" id="y7j-GU-SPv"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Valider"/>
-                                <connections>
-                                    <action selector="doValidate:" destination="gm8-SG-DLq" eventType="touchUpInside" id="g2x-g6-JfY"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lVL-eu-x67" firstAttribute="top" secondItem="el3-aj-P8i" secondAttribute="bottom" constant="20" id="2Hg-YA-Vub"/>
                             <constraint firstItem="EyI-aX-mGS" firstAttribute="centerY" secondItem="8ag-HU-HWb" secondAttribute="centerY" id="Acj-HX-BDb"/>
-                            <constraint firstItem="VFW-Nw-9dW" firstAttribute="leading" secondItem="LMY-vV-HrT" secondAttribute="leadingMargin" constant="-16" id="Ezk-Oh-gks"/>
                             <constraint firstItem="Mha-iT-FlL" firstAttribute="leading" secondItem="LMY-vV-HrT" secondAttribute="leadingMargin" constant="-16" id="FLX-yW-eWO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8ag-HU-HWb" secondAttribute="trailing" constant="-16" id="GZp-CC-m2X"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="VFW-Nw-9dW" secondAttribute="trailing" constant="-16" id="Goc-Fx-2cX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sjm-xj-kq2" secondAttribute="trailing" id="HbU-CU-Pnw"/>
                             <constraint firstItem="8ag-HU-HWb" firstAttribute="top" secondItem="dCy-L9-RbE" secondAttribute="bottom" constant="1" id="J6b-LR-jVe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="J3y-R3-SkU" secondAttribute="trailing" id="K2x-XO-LQX"/>
@@ -910,7 +896,6 @@
                             <constraint firstItem="lVL-eu-x67" firstAttribute="leading" secondItem="LMY-vV-HrT" secondAttribute="leadingMargin" constant="-16" id="qYi-Tm-jMf"/>
                             <constraint firstItem="fV6-1Y-pux" firstAttribute="centerY" secondItem="Mha-iT-FlL" secondAttribute="centerY" id="rkS-OH-brA"/>
                             <constraint firstItem="el3-aj-P8i" firstAttribute="centerX" secondItem="LMY-vV-HrT" secondAttribute="centerX" id="x4P-oX-Tbl"/>
-                            <constraint firstItem="VFW-Nw-9dW" firstAttribute="top" secondItem="sjm-xj-kq2" secondAttribute="bottom" constant="16" id="yUe-dm-Mll"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Mot de passe" id="pKk-fq-xDy"/>
@@ -929,7 +914,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="62l-06-625" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RBg-dA-hRE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RBg-dA-hRE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1162,7 +1147,7 @@ pour nous demander de l’ajouter !</string>
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="252" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="asB-3D-2wa">
-                                        <rect key="frame" x="15" y="245" width="344" height="195"/>
+                                        <rect key="frame" x="15" y="245" width="344" height="195.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <string key="text">ATD Quart Monde a pour but d’éradiquer la misère en agissant sur trois plans :
 – sur le terrain avec les personnes concernées pour obtenir l’application du droit pour tous
@@ -1176,7 +1161,7 @@ regard porté sur les plus pauvres.</string>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                     </textView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTX-6z-OFK">
-                                        <rect key="frame" x="0.0" y="458" width="374" height="46"/>
+                                        <rect key="frame" x="0.0" y="458.5" width="374" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Informations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2g-cu-egF">
                                                 <rect key="frame" x="0.0" y="20" width="374" height="18"/>
@@ -1195,13 +1180,13 @@ regard porté sur les plus pauvres.</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Numéro de téléphone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2h-uc-N6u">
-                                        <rect key="frame" x="15" y="520" width="145.5" height="18"/>
+                                        <rect key="frame" x="15" y="520.5" width="151.5" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="+33 (0) 1 42 46 81 95" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="0eO-nF-XUZ">
-                                        <rect key="frame" x="165.5" y="513" width="193.5" height="33"/>
+                                        <rect key="frame" x="171.5" y="513.5" width="187.5" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
@@ -1209,13 +1194,13 @@ regard porté sur les plus pauvres.</string>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adresse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th9-9b-aov">
-                                        <rect key="frame" x="15" y="558" width="54.5" height="18"/>
+                                        <rect key="frame" x="15" y="558.5" width="57" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="63 rue Beaumarchais 93100 Montreuil" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="VbS-tn-dAu">
-                                        <rect key="frame" x="74.5" y="551" width="284.5" height="33"/>
+                                        <rect key="frame" x="77" y="551.5" width="282" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
@@ -1223,13 +1208,13 @@ regard porté sur les plus pauvres.</string>
                                         <dataDetectorType key="dataDetectorTypes" address="YES"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Site web" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYN-cS-gwD">
-                                        <rect key="frame" x="15" y="597" width="58.5" height="18"/>
+                                        <rect key="frame" x="15" y="597.5" width="60" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="www.atd-quartmonde.fr" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="IYH-e4-CFr">
-                                        <rect key="frame" x="78.5" y="589" width="280.5" height="33"/>
+                                        <rect key="frame" x="80" y="589.5" width="279" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
@@ -1300,7 +1285,7 @@ regard porté sur les plus pauvres.</string>
         <scene sceneID="xFr-L3-WBG">
             <objects>
                 <navigationController id="hxJ-pt-FFZ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7Bf-CZ-han">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Bf-CZ-han">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
