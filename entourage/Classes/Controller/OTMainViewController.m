@@ -31,7 +31,6 @@
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
 #import "OTFeedItemsTableView.h"
-#import "OTToolbar.h"
 #import "OTUser.h"
 #import "OTTour.h"
 #import "OTTourPoint.h"
@@ -77,6 +76,7 @@
 #import "OTMailSenderBehavior.h"
 #import "OTSolidarityGuideFiltersViewController.h"
 #import "OTSolidarityGuideFilterDelegate.h"
+#import "OTCustomSegmentedBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -88,8 +88,6 @@
 
 @interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFeedItemsFilterDelegate, OTSolidarityGuideFilterDelegate, OTNewsFeedsSourceDelegate, OTTourCreatorBehaviorDelegate>
 
-@property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
-@property (nonatomic, weak) IBOutlet UISegmentedControl *mapSegmentedControl;
 @property (nonatomic, weak) IBOutlet OTFeedItemsTableView *tableView;
 @property (nonatomic, weak) IBOutlet OTMapDelegateProxyBehavior* mapDelegateProxy;
 @property (nonatomic, weak) IBOutlet OTOverlayFeederBehavior* overlayFeeder;
@@ -124,6 +122,7 @@
 @property (nonatomic) BOOL wasLoadedOnce;
 @property (nonatomic, weak) IBOutlet OTNoDataBehavior *noDataBehavior;
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior *mailSender;
+@property (nonatomic, weak) IBOutlet OTCustomSegmentedBehavior *customSegmentedBehavior;
 
 @end
 
@@ -137,11 +136,11 @@
     self.isFirstLoad = YES;
     [self.noDataBehavior initialize];
     [self.newsFeedsSourceBehavior initialize];
+    [self.customSegmentedBehavior initialize];
     self.newsFeedsSourceBehavior.delegate = self;
     [self.tourCreatorBehavior initialize];
     self.tourCreatorBehavior.delegate = self;
     [self configureNavigationBar];
-    [self.footerToolbar setupWithFilters];
     self.currentFilter = [OTNewsFeedsFilter new];
     self.solidarityFilter = [OTSolidarityGuideFilter new];
     self.encounters = [NSMutableArray new];
@@ -155,7 +154,6 @@
     self.guideMapDelegate = [[OTGuideMapDelegate alloc] initWithMapController:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTourConfirmation) name:@kNotificationLocalTourConfirmation object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFilters) name:@kNotificationShowFilters object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushReceived) name:@kNotificationPushReceived object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
@@ -165,7 +163,6 @@
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
     [self configureMapView];
-    self.mapSegmentedControl.layer.cornerRadius = 5;
     [self switchToNewsfeed];
     [self reloadFeeds];
     if ([OTOngoingTourService sharedInstance].isOngoing)
@@ -219,13 +216,11 @@
     self.guideMapDelegate.isActive = NO;
     [self.mapDelegateProxy.delegates addObject:self.toursMapDelegate];
     [self.mapDelegateProxy.delegates removeObject:self.guideMapDelegate];
-    self.mapSegmentedControl.hidden = NO;
+    [self.customSegmentedBehavior updateVisible:YES];
     [self clearMap];
     [self feedMapWithFeedItems];
     if (self.isTourListDisplayed)
         [self showToursList];
-    [self.footerToolbar setupWithFilters];
-    [self.footerToolbar setTitle:OTLocalizedString(@"entourages")];
 }
 
 - (void)switchToGuide {
@@ -237,8 +232,6 @@
     [self clearMap];
     [self showToursMap];
     [self reloadPois];
-    [self.footerToolbar setupWithFilters];
-    [self.footerToolbar setTitle:OTLocalizedString(@"guideTitle")];
 }
 
 - (IBAction)goToTourOptions:(id)sender {
@@ -567,7 +560,6 @@
     [self showNewTourOnGoing];
     [OTOngoingTourService sharedInstance].isOngoing = YES;
     self.launcherButton.enabled = YES;
-    [self.footerToolbar setTitle:OTLocalizedString(@"tour_ongoing")];
 }
 
 - (void)failedToStartTour {
@@ -586,7 +578,7 @@
         self.tableView.tableHeaderView.frame = mapFrame;
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = YES;
-        self.mapSegmentedControl.hidden = YES;
+        [self.customSegmentedBehavior updateVisible:NO];
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tourCreatorBehavior.tour.uid.intValue];
@@ -634,7 +626,6 @@
         if (self.tourCreatorBehavior.tour.uid == nil || ![tour.uid isEqualToNumber:self.tourCreatorBehavior.tour.uid])
             return;
     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_status_completed")];
-    [self.footerToolbar setTitle:OTLocalizedString(@"entourages")];
     self.tourCreatorBehavior.tour = nil;
     [self.encounters removeAllObjects];
     self.launcherButton.hidden = NO;
@@ -781,13 +772,6 @@
 
 #pragma mark - Actions
 
-- (void)showFilters {
-    if (self.guideMapDelegate.isActive)
-        [self performSegueWithIdentifier:@"SolidarityGuideSegue" sender:self];
-    else
-        [self performSegueWithIdentifier:@"FiltersSegue" sender:self];
-}
-
 - (void)zoomToCurrentLocation:(id)sender {
     CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
     if (currentLocation) {
@@ -874,13 +858,35 @@
 
 #pragma mark - Segmented control
 
-- (IBAction)changedSegmentedControlValue:(UISegmentedControl *)sender {
-    if (sender.selectedSegmentIndex == 1) {
+- (IBAction)segmentChanged {
+    if (self.customSegmentedBehavior.selectedIndex == 1) {
         [OTLogger logEvent:@"ListViewClick"];
         [self showToursList];
     }
-    else
+    else {
         [OTLogger logEvent:@"MapViewClick"];
+        [self showToursMap];
+    }
+}
+
+#pragma mark - Geo and filter buttons
+
+- (IBAction)showFilters {
+    [OTLogger logEvent:@"FeedFiltersPress"];
+    if (self.guideMapDelegate.isActive)
+        [self performSegueWithIdentifier:@"SolidarityGuideSegue" sender:self];
+    else
+        [self performSegueWithIdentifier:@"FiltersSegue" sender:self];
+}
+
+- (IBAction)showCurrentLocation {
+    [OTLogger logEvent:@"RecenterMapClick"];
+    if(![OTLocationManager sharedInstance].isAuthorized)
+        [[OTLocationManager sharedInstance] showGeoLocationNotAllowedMessage:OTLocalizedString(@"ask_permission_location_recenter_map")];
+    else if(![OTLocationManager sharedInstance].currentLocation)
+        [[OTLocationManager sharedInstance] showLocationNotFoundMessage:OTLocalizedString(@"no_location_recenter_map")];
+    else
+        [self zoomToCurrentLocation:self];
 }
 
 #pragma mark - "Screens"
@@ -888,12 +894,13 @@
 - (void)showToursList {
     [self.noDataBehavior hideNoData];
     self.isTourListDisplayed = YES;
+    self.customSegmentedBehavior.selectedIndex = 1;
     [UIView animateWithDuration:0.2 animations:^(void) {
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
-        self.mapSegmentedControl.hidden = YES;
+        [self.customSegmentedBehavior updateVisible:NO];
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
 }
@@ -906,12 +913,12 @@
         self.isTourListDisplayed = NO;
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
-    [self.mapSegmentedControl setSelectedSegmentIndex:0];
+    self.customSegmentedBehavior.selectedIndex = 0;
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.25 animations:^(void) {
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
-        self.mapSegmentedControl.hidden = self.guideMapDelegate.isActive;
+        [self.customSegmentedBehavior updateVisible:!self.guideMapDelegate.isActive];
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
 }
@@ -921,10 +928,10 @@
 - (void)showNewTourOnGoing {
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
-    [self.mapSegmentedControl setSelectedSegmentIndex:0];
+    self.customSegmentedBehavior.selectedIndex = 0;
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.5 animations:^(void) {
-        self.mapSegmentedControl.hidden = NO;
+        [self.customSegmentedBehavior updateVisible:YES];
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = NO;
         self.tableView.tableHeaderView.frame = mapFrame;

@@ -8,7 +8,6 @@
 
 #import "OTLocationSelectorViewController.h"
 #import "UIColor+entourage.h"
-#import "OTToolbar.h"
 #import "OTConsts.h"
 #import "MKMapView+entourage.h"
 #import "OTLocationSearchTableViewController.h"
@@ -23,7 +22,6 @@
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, weak) IBOutlet OTToolbar *footerToolbar;
 
 @property (nonatomic, strong)  UISearchBar *searchBar;
 
@@ -38,7 +36,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-    [self.footerToolbar setupDefault];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
     
     self.locationSearchTable = [[UIStoryboard entourageEditorStoryboard] instantiateViewControllerWithIdentifier:@"OTLocationSearchTableViewController"];
@@ -93,8 +90,6 @@
         MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
                                  
         [self.mapView setRegion:region];
-        [self.footerToolbar setTitle:placemark.name];
-        [self.footerToolbar setupDefault];
         [self.activityIndicator stopAnimating];
     }];
 }
@@ -131,11 +126,6 @@
         if (error) {
             NSLog(@"error: %@", error.description);
         }
-        CLPlacemark *placemark = placemarks.firstObject;
-        if (placemark.thoroughfare !=  nil)
-            [self.footerToolbar setTitle:placemark.thoroughfare ];
-        else
-            [self.footerToolbar setTitle:placemark.locality ];
     }];
     self.selectedLocation = location;
     if ([self.locationSelectionDelegate respondsToSelector:@selector(didSelectLocation:)]) {

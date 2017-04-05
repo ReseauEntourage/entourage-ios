@@ -518,37 +518,95 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <segmentedControl hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gsB-s5-FKP">
-                                <rect key="frame" x="139" y="80" width="97" height="29"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <segments>
-                                    <segment title="Carte"/>
-                                    <segment title="Liste"/>
-                                </segments>
-                                <color key="tintColor" red="0.64705884456634521" green="0.64705884456634521" blue="0.61176472902297974" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDS-Eg-kke">
+                                <rect key="frame" x="26" y="73" width="42" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="6ZX-Nb-0DX"/>
+                                    <constraint firstAttribute="width" constant="42" id="Aeq-T5-1nD"/>
+                                </constraints>
+                                <state key="normal" image="filters"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="21"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <real key="value" value="0.20000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="changedSegmentedControlValue:" destination="vXZ-lx-hvc" eventType="valueChanged" id="nIw-6r-9Fq"/>
+                                    <action selector="showFilters" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5tC-BZ-rkP"/>
                                 </connections>
-                            </segmentedControl>
+                            </button>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-MR-sA9">
+                                <rect key="frame" x="147" y="76.5" width="80" height="35"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QES-lt-CoV">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="PbZ-bZ-wVJ"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="filter_eat"/>
+                                        <state key="selected" backgroundImage="activeButton"/>
+                                        <connections>
+                                            <action selector="segmentTapped:" destination="lHT-Dq-5r8" eventType="touchUpInside" id="Naw-WU-k9d"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGx-mV-SAQ">
+                                        <rect key="frame" x="40" y="0.0" width="40" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="DRk-7y-1M9"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="filter_heal"/>
+                                        <state key="selected" backgroundImage="activeButton"/>
+                                        <connections>
+                                            <action selector="segmentTapped:" destination="lHT-Dq-5r8" eventType="touchUpInside" id="EaD-5a-FLf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="QES-lt-CoV" secondAttribute="bottom" id="AIe-5m-LWR"/>
+                                    <constraint firstAttribute="bottom" secondItem="mGx-mV-SAQ" secondAttribute="bottom" id="Nf9-kH-2Vt"/>
+                                    <constraint firstItem="mGx-mV-SAQ" firstAttribute="top" secondItem="aPq-MR-sA9" secondAttribute="top" id="Scw-O0-Mag"/>
+                                    <constraint firstItem="QES-lt-CoV" firstAttribute="top" secondItem="aPq-MR-sA9" secondAttribute="top" id="fUm-51-K1x"/>
+                                    <constraint firstItem="QES-lt-CoV" firstAttribute="leading" secondItem="aPq-MR-sA9" secondAttribute="leading" id="hO1-m6-ePi"/>
+                                    <constraint firstItem="mGx-mV-SAQ" firstAttribute="leading" secondItem="QES-lt-CoV" secondAttribute="trailing" id="lvb-fz-LNp"/>
+                                    <constraint firstAttribute="height" constant="35" id="nVJ-qP-krX"/>
+                                    <constraint firstAttribute="trailing" secondItem="mGx-mV-SAQ" secondAttribute="trailing" id="wsh-an-Zzs"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <real key="value" value="0.20000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTC-ba-e0E">
+                                <rect key="frame" x="307" y="73" width="42" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="Igv-gK-qub"/>
+                                    <constraint firstAttribute="width" constant="42" id="hbY-cr-cb0"/>
+                                </constraints>
+                                <state key="normal" image="geoloc"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="21"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <real key="value" value="0.20000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="showCurrentLocation" destination="vXZ-lx-hvc" eventType="touchUpInside" id="XzK-A6-dTj"/>
+                                </connections>
+                            </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FLr-cF-t8Z">
                                 <rect key="frame" x="178" y="324" width="20" height="20"/>
                             </activityIndicatorView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2EG-u9-ELx" customClass="OTToolbar">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="yjx-J2-NFV"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem image="filters" id="Pkv-Fp-SD3"/>
-                                    <barButtonItem image="geoloc" style="done" id="Tmd-7k-imW"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Rvz-lj-J2G"/>
-                                    <barButtonItem title="Entourages" id="dU5-SW-p8f">
-                                        <color key="tintColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GWP-Nm-YPn"/>
-                                </items>
-                            </toolbar>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRg-cj-T9Q">
                                 <rect key="frame" x="305" y="593" width="62" height="62"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -601,8 +659,8 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                     <action selector="goToTourOptions:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZeW-Yf-grz"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONo-TH-dyX">
-                                <rect key="frame" x="98" y="75" width="180" height="39"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONo-TH-dyX">
+                                <rect key="frame" x="98" y="175" width="180" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="03U-ex-oBx"/>
                                     <constraint firstAttribute="width" constant="180" id="dxb-5y-dlo"/>
@@ -617,36 +675,36 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                         </subviews>
                         <constraints>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="01M-L0-iJE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2EG-u9-ELx" secondAttribute="trailing" constant="-16" id="9IK-Pv-mXM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oHF-Vi-LCk" secondAttribute="trailing" constant="-20" id="9ho-oj-3FF"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="oHF-Vi-LCk" secondAttribute="bottom" id="CoI-BK-C8y"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Kc9-kH-YQ7" secondAttribute="bottom" constant="12" id="DuD-zc-Fd5"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="leading" secondItem="Kc9-kH-YQ7" secondAttribute="trailing" constant="-62" id="Kq0-ZY-fSh"/>
+                            <constraint firstItem="aPq-MR-sA9" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="QIf-iG-H2m"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uRg-cj-T9Q" secondAttribute="bottom" constant="12" id="TDA-nJ-u0d"/>
-                            <constraint firstItem="gsB-s5-FKP" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="TbH-ff-fPP"/>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="UhE-G3-aXJ"/>
+                            <constraint firstItem="mDS-Eg-kke" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="UkA-py-3qY"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="VLV-3h-yeI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uRg-cj-T9Q" secondAttribute="trailing" constant="-8" id="ZT2-9H-lNi"/>
                             <constraint firstItem="ONo-TH-dyX" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="11" id="aiz-r6-FV1"/>
+                            <constraint firstItem="CTC-ba-e0E" firstAttribute="centerY" secondItem="mDS-Eg-kke" secondAttribute="centerY" id="e7v-nE-MBP"/>
                             <constraint firstItem="ONo-TH-dyX" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="fBr-Xx-Gff"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="centerX" secondItem="oVf-Bh-vdD" secondAttribute="centerX" id="hB3-UZ-01t"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="2EG-u9-ELx" secondAttribute="bottom" id="mi6-0M-xlF"/>
+                            <constraint firstItem="aPq-MR-sA9" firstAttribute="centerY" secondItem="mDS-Eg-kke" secondAttribute="centerY" id="iCU-2i-V9x"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CTC-ba-e0E" secondAttribute="trailing" constant="10" id="k41-lB-TOD"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="10" id="puD-5n-gle"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="64" id="sQA-pi-JcK"/>
-                            <constraint firstItem="gsB-s5-FKP" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="16" id="t6b-Vu-ZMD"/>
-                            <constraint firstItem="2EG-u9-ELx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="y4I-N7-Bd9"/>
+                            <constraint firstItem="mDS-Eg-kke" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="9" id="zOY-X6-ZJ3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OWf-3U-PgN"/>
                     <connections>
                         <outlet property="createEncounterButton" destination="Kc9-kH-YQ7" id="q2Y-Ck-e7b"/>
+                        <outlet property="customSegmentedBehavior" destination="lHT-Dq-5r8" id="oM4-5S-fVp"/>
                         <outlet property="editEntourgeBehavior" destination="pws-Pw-Myy" id="Pig-kn-RgM"/>
-                        <outlet property="footerToolbar" destination="2EG-u9-ELx" id="eNS-jR-fWV"/>
                         <outlet property="joinBehavior" destination="0l0-bs-S95" id="eTw-ea-fNI"/>
                         <outlet property="launcherButton" destination="uRg-cj-T9Q" id="oSp-ac-Y8Q"/>
                         <outlet property="mailSender" destination="dw9-WQ-EOn" id="riz-kQ-jLk"/>
                         <outlet property="mapDelegateProxy" destination="N0A-Lo-wcg" id="mXR-gi-O5J"/>
-                        <outlet property="mapSegmentedControl" destination="gsB-s5-FKP" id="Vvs-3z-462"/>
                         <outlet property="newsFeedsSourceBehavior" destination="atf-P9-vVx" id="GPG-HR-dXj"/>
                         <outlet property="noDataBehavior" destination="oGT-t2-iTg" id="RLs-ni-gcZ"/>
                         <outlet property="nouveauxFeedItemsButton" destination="ONo-TH-dyX" id="PCe-XJ-apW"/>
@@ -716,6 +774,14 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <customObject id="dw9-WQ-EOn" userLabel="Mail Sender" customClass="OTMailSenderBehavior">
                     <connections>
                         <outlet property="owner" destination="vXZ-lx-hvc" id="hFE-WP-OBw"/>
+                    </connections>
+                </customObject>
+                <customObject id="lHT-Dq-5r8" userLabel="Custom Segment" customClass="OTCustomSegmentedBehavior">
+                    <connections>
+                        <action selector="segmentChanged" destination="vXZ-lx-hvc" eventType="valueChanged" id="aoY-4x-XjH"/>
+                        <outlet property="segmentedControl" destination="aPq-MR-sA9" id="taX-dD-o7V"/>
+                        <outletCollection property="segments" destination="QES-lt-CoV" id="bo2-7H-Dad"/>
+                        <outletCollection property="segments" destination="mGx-mV-SAQ" id="6mA-4z-djK"/>
                     </connections>
                 </customObject>
             </objects>
@@ -1324,8 +1390,10 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>
+        <image name="filter_eat" width="45" height="45"/>
+        <image name="filter_heal" width="45" height="45"/>
         <image name="filters" width="22" height="22"/>
-        <image name="geoloc" width="22" height="22"/>
+        <image name="geoloc" width="20" height="20"/>
         <image name="location" width="22" height="22"/>
         <image name="newEntourages" width="180" height="39"/>
         <image name="pause" width="62" height="62"/>
