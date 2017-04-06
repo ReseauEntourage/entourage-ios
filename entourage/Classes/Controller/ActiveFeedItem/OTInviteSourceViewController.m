@@ -30,4 +30,10 @@
         [self.delegate inviteByPhone];
 }
 
+- (IBAction)share:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    if(self.delegate)
+        [self.delegate share];
+}
+
 @end

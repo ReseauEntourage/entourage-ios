@@ -339,6 +339,7 @@
 		A8DA9E1C1E3B4BF30041ADB6 /* FlurryWatchEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */; };
 		A8DA9E1D1E3B4BF30041ADB6 /* libFlurry_7.9.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */; };
 		A8FD766E1E42FE9200063C5F /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386D1DC88290000F9F3F /* staging.plist */; };
+		D615B20C1E964036004277F6 /* OTShareFeedItemBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D615B20B1E964036004277F6 /* OTShareFeedItemBehavior.m */; };
 		D64C694A1E6D60E40075B706 /* OTEntourageDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */; };
 		D65A95341E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A95331E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m */; };
 		D6D064DA1E93BB440058A9EE /* OTCustomSegmentedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D064D91E93BB440058A9EE /* OTCustomSegmentedBehavior.m */; };
@@ -994,6 +995,8 @@
 		A8DA9E181E3B4BF30041ADB6 /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
 		A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryWatchEmpty.m; sourceTree = "<group>"; };
 		A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.9.2.a; sourceTree = "<group>"; };
+		D615B20A1E964036004277F6 /* OTShareFeedItemBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTShareFeedItemBehavior.h; path = Behaviors/UI/OTShareFeedItemBehavior.h; sourceTree = "<group>"; };
+		D615B20B1E964036004277F6 /* OTShareFeedItemBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTShareFeedItemBehavior.m; path = Behaviors/UI/OTShareFeedItemBehavior.m; sourceTree = "<group>"; };
 		D64C69481E6D60E40075B706 /* OTEntourageDisclaimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageDisclaimerViewController.h; sourceTree = "<group>"; };
 		D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageDisclaimerViewController.m; sourceTree = "<group>"; };
 		D65A95321E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTToggleVisibleWithConstraintsBehavior.h; path = Behaviors/UI/OTToggleVisibleWithConstraintsBehavior.h; sourceTree = "<group>"; };
@@ -1697,6 +1700,8 @@
 				D65A95331E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m */,
 				D6D064D81E93BB440058A9EE /* OTCustomSegmentedBehavior.h */,
 				D6D064D91E93BB440058A9EE /* OTCustomSegmentedBehavior.m */,
+				D615B20A1E964036004277F6 /* OTShareFeedItemBehavior.h */,
+				D615B20B1E964036004277F6 /* OTShareFeedItemBehavior.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -3015,6 +3020,7 @@
 				1EA5C65B1E48AE7200891C9B /* OTAutoGrowTextView.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
 				1E8767181E5AEA8B0080486A /* OTTutorial3ViewController.m in Sources */,
+				D615B20C1E964036004277F6 /* OTShareFeedItemBehavior.m in Sources */,
 				1E4661831DAE6D2F00ED0CD0 /* OTDescriptionCell.m in Sources */,
 				1E2232DC1D5699AD004CD5E8 /* OTMessagingService.m in Sources */,
 				1E2F29081D4BC26600ABC68A /* OTPhotoPickerBehavior.m in Sources */,

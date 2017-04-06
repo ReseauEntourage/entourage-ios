@@ -33,6 +33,7 @@
         self.noPeople = [dictionary numberForKey:kWSKeyNoPeople];
         self.type = [dictionary stringForKey:kWSKeyType];
         self.updatedDate = [dictionary dateForKey:kWSUpdatedDate];
+        self.shareUrl = [dictionary stringForKey:kWSKeyShareUrl];
         NSDictionary *lastMessageDictionary = [dictionary objectForKey:kWSKeyLastMessage];
         if([lastMessageDictionary class] != [NSNull class])
             self.lastMessage = [[OTMyFeedMessage alloc] initWithDictionary:lastMessageDictionary];

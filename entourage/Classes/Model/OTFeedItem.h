@@ -35,6 +35,7 @@
 @property (nonatomic, strong) NSNumber *noPeople;
 @property (nonatomic, strong) OTMyFeedMessage *lastMessage;
 @property (nonatomic, assign) NSNumber *unreadMessageCount;
+@property (nonatomic, strong) NSString *shareUrl;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

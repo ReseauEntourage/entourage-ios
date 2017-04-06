@@ -20,6 +20,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "OTStatusChangedBehavior.h"
 #import "OTToggleVisibleWithConstraintsBehavior.h"
+#import "OTShareFeedItemBehavior.h"
 #import "OTConsts.h"
 
 @interface OTPublicFeedItemViewController ()
@@ -32,6 +33,7 @@
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 @property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleWithConstraintsBehavior *toggleJoinViewBehavior;
+@property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareFeedItem;
 
 @end
 
@@ -40,6 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self.shareFeedItem configureWith:self.feedItem];
     [self.tableDataSource initialize];
     [self.statusBehavior initialize];
     [self.statusChangedBehavior configureWith:self.feedItem];
@@ -49,8 +52,9 @@
     self.dataSource.tableView.estimatedRowHeight = 1000;
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
-    UIBarButtonItem *moreButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self.statusChangedBehavior andAction:@selector(startChangeStatus)];
-    [self.navigationItem setRightBarButtonItem:moreButton];
+    UIBarButtonItem *moreButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self.statusChangedBehavior andAction:@selector(startChangeStatus)];
+    UIBarButtonItem *shareButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self.shareFeedItem andAction:@selector(sharePublic:)];
+    [self.navigationItem setRightBarButtonItems:@[moreButton, shareButton]];
     [self.dataSource loadDataFor:self.feedItem];
 }
 

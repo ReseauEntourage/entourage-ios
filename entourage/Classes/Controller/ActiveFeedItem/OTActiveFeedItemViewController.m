@@ -27,6 +27,7 @@
 #import "IQKeyboardManager.h"
 #import "OTBottomScrollBehavior.h"
 #import "OTUnreadMessagesService.h"
+#import "OTShareFeedItemBehavior.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -41,6 +42,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 @property (nonatomic, strong) IBOutlet OTBottomScrollBehavior *scrollBottomBehavior;
+@property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareBehavior;
+
 @end
 
 @implementation OTActiveFeedItemViewController
@@ -49,6 +52,7 @@
     [super viewDidLoad];
     
     self.txtChat.delegate = self;
+    [self.shareBehavior configureWith:self.feedItem];
     [self.scrollBottomBehavior initialize];
     [self.summaryProvider configureWith:self.feedItem];
     [self.inviteBehavior configureWith:self.feedItem];

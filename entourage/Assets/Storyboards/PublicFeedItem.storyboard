@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="fid-Iu-R1a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="fid-Iu-R1a">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,13 +60,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIme - Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDt-dA-Asj">
-                                                            <rect key="frame" x="15" y="60" width="301" height="16"/>
+                                                            <rect key="frame" x="15" y="60" width="301.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="13"/>
                                                             <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QV-vH-V9y">
-                                                            <rect key="frame" x="345" y="56" width="10" height="18"/>
+                                                            <rect key="frame" x="345.5" y="56" width="9.5" height="18"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                             <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -101,7 +101,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="users" translatesAutoresizingMaskIntoConstraints="NO" id="Q8P-B0-Gly">
-                                                            <rect key="frame" x="321" y="56" width="22" height="19"/>
+                                                            <rect key="frame" x="321.5" y="56" width="22" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="22" id="0u0-VA-9zh"/>
                                                                 <constraint firstAttribute="height" constant="19" id="azt-gf-rtm"/>
@@ -210,7 +210,7 @@
                                         <rect key="frame" x="0.0" y="544" width="383" height="88"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On a besoin de vous !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKL-T6-WyZ">
-                                                <rect key="frame" x="115" y="10" width="153" height="18"/>
+                                                <rect key="frame" x="115.5" y="10" width="152.5" height="18"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -275,6 +275,7 @@
                     <connections>
                         <outlet property="dataSource" destination="N75-cy-ly6" id="ZAj-fd-qjf"/>
                         <outlet property="joinBehavior" destination="3hI-5m-VDv" id="udZ-Hx-j8R"/>
+                        <outlet property="shareFeedItem" destination="63X-85-lRk" id="8A2-15-f6b"/>
                         <outlet property="statusBehavior" destination="fgE-8v-az0" id="HgB-v3-Bi3"/>
                         <outlet property="statusChangedBehavior" destination="R14-Fu-EI5" id="9zQ-ZR-fGz"/>
                         <outlet property="summaryProvider" destination="dGI-3e-zqZ" id="18h-cY-5YP"/>
@@ -331,11 +332,16 @@
                         <outlet property="owner" destination="fid-Iu-R1a" id="2zx-If-L7K"/>
                     </connections>
                 </customObject>
-                <customObject id="NZi-TT-bNx" customClass="OTToggleVisibleWithConstraintsBehavior">
+                <customObject id="NZi-TT-bNx" userLabel="Toggle Join View" customClass="OTToggleVisibleWithConstraintsBehavior">
                     <connections>
                         <outlet property="toggledView" destination="8Pq-l3-WjF" id="tHB-5T-1m1"/>
                         <outlet property="viewInvisibleConstraint" destination="zUR-7z-lvk" id="bKJ-jG-MVK"/>
                         <outlet property="viewVisibleConstraint" destination="mlL-XM-qIk" id="0Bj-sn-AHl"/>
+                    </connections>
+                </customObject>
+                <customObject id="63X-85-lRk" userLabel="Share Feed Item" customClass="OTShareFeedItemBehavior">
+                    <connections>
+                        <outlet property="owner" destination="fid-Iu-R1a" id="ZuZ-e4-eP6"/>
                     </connections>
                 </customObject>
             </objects>

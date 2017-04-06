@@ -70,6 +70,11 @@
     [self.owner performSegueWithIdentifier:@"SegueInvitePhoneNumber" sender:nil];
 }
 
+- (void)share {
+    [self.shareBehavior configureWith:self.feedItem];
+    [self.shareBehavior shareMember:nil];
+}
+
 #pragma mark - InviteSuccessDelegate implementation
 
 - (void)didInviteWithSuccess {
