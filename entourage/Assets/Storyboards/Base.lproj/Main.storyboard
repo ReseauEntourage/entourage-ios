@@ -136,7 +136,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                                <rect key="frame" x="121" y="233" width="133" height="18"/>
+                                <rect key="frame" x="121.5" y="233" width="133" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -541,13 +541,13 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-MR-sA9">
                                 <rect key="frame" x="147" y="76.5" width="80" height="35"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QES-lt-CoV">
+                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QES-lt-CoV">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="PbZ-bZ-wVJ"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="filter_eat"/>
-                                        <state key="selected" backgroundImage="activeButton"/>
+                                        <state key="normal" backgroundImage="carte_selected"/>
+                                        <state key="selected" backgroundImage="carte"/>
                                         <connections>
                                             <action selector="segmentTapped:" destination="lHT-Dq-5r8" eventType="touchUpInside" id="Naw-WU-k9d"/>
                                         </connections>
@@ -557,8 +557,8 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="DRk-7y-1M9"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="filter_heal"/>
-                                        <state key="selected" backgroundImage="activeButton"/>
+                                        <state key="normal" backgroundImage="list_selected"/>
+                                        <state key="selected" backgroundImage="list"/>
                                         <connections>
                                             <action selector="segmentTapped:" destination="lHT-Dq-5r8" eventType="touchUpInside" id="EaD-5a-FLf"/>
                                         </connections>
@@ -1387,13 +1387,15 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
     <resources>
         <image name="activeButton" width="45" height="45"/>
         <image name="arrowNewEntourages" width="12" height="22"/>
+        <image name="carte" width="40" height="35"/>
+        <image name="carte_selected" width="40" height="35"/>
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
         <image name="create" width="62" height="62"/>
-        <image name="filter_eat" width="45" height="45"/>
-        <image name="filter_heal" width="45" height="45"/>
         <image name="filters" width="22" height="22"/>
         <image name="geoloc" width="20" height="20"/>
+        <image name="list" width="40" height="35"/>
+        <image name="list_selected" width="40" height="35"/>
         <image name="location" width="22" height="22"/>
         <image name="newEntourages" width="180" height="39"/>
         <image name="pause" width="62" height="62"/>
