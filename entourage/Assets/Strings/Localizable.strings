@@ -87,6 +87,7 @@
 "join_rejected" = "Refusé";
 "join_to_join" = "Voir";
 "closed_item" = "Entourage clôturé";
+"quitted_item" = "Entourage quitté";
 "stopped_item" = "Maraude arrêtée";
 "join_item_failed" = "Impossible de rejoindre l’entourage.";
 "ongoing" = "En cours";

@@ -39,6 +39,11 @@
     self.scrollView.maximumZoomScale = 10;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [OTLogger logEvent:@"Screen09_9MovePhotoView"];
+}
+
 - (IBAction)doContinue {
     [OTLogger logEvent:@"SubmitInstantPhoto"];
     [SVProgressHUD show];

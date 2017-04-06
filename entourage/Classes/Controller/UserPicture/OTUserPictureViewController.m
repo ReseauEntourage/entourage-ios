@@ -36,6 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [OTLogger logEvent:@"Screen09_6ChoosePhotoView"];
     if ([NSUserDefaults standardUserDefaults].isTutorialCompleted)
         self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     else

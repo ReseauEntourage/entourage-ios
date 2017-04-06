@@ -16,6 +16,7 @@
 @implementation OTPhotoPickerBehavior
 
 - (void)pickFromCamera:(UIButton *)sender {
+    
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
         [self pickPhotoFromSource:UIImagePickerControllerSourceTypeCamera];
 }
