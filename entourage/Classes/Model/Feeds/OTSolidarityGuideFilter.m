@@ -33,13 +33,13 @@
 - (NSArray *)toGroupedArray {
     return @[
             @[
-                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyFood active:self.showFood withImage:@"poi_category-1"],
-                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyHousing active:self.showHousing withImage:@"poi_category-2"],
-                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyHeal active:self.showHeal withImage:@"poi_category-3"],
-                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyRefresh active:self.showRefresh withImage:@"poi_category-4"],
-                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyOrientation active:self.showOrientation withImage:@"poi_category-4"],
-                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyCaring active:self.showCaring withImage:@"poi_category-5"],
-                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyReinsertion active:self.showReinsertion withImage:@"poi_category-6"]
+                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyFood active:self.showFood withImage:@"eat"],
+                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyHousing active:self.showHousing withImage:@"housing"],
+                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyHeal active:self.showHeal withImage:@"heal"],
+                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyRefresh active:self.showRefresh withImage:@"water"],
+                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyOrientation active:self.showOrientation withImage:@"orientate"],
+                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyCaring active:self.showCaring withImage:@"lookAfterYourself"],
+                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyReinsertion active:self.showReinsertion withImage:@"social_sg"]
               ]
             ];
 }
