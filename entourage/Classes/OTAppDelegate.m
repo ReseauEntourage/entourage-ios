@@ -29,6 +29,10 @@
 #import "entourage-Swift.h"
 #import "UIColor+entourage.h"
 #import "OTUnreadMessagesService.h"
+#import "OTLoginViewController.h"
+#import "OTLostCodeViewController.h"
+#import "OTPhoneViewController.h"
+#import "OTCodeViewController.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -167,6 +171,9 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 
     UITextField.appearance.tintColor = [UIColor appOrangeColor];
     UITextView.appearance.tintColor = [UIColor appOrangeColor];
+    
+    [UITextField appearanceWhenContainedIn:[OTLoginViewController class], [OTLostCodeViewController class],
+        [OTPhoneViewController class], [OTCodeViewController class], nil].tintColor = [UIColor whiteColor];
 }
 
 @end
