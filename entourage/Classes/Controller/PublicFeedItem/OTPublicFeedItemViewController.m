@@ -22,6 +22,7 @@
 #import "OTToggleVisibleWithConstraintsBehavior.h"
 #import "OTShareFeedItemBehavior.h"
 #import "OTConsts.h"
+#import "OTEntourage.h"
 
 @interface OTPublicFeedItemViewController ()
 
@@ -52,9 +53,7 @@
     self.dataSource.tableView.estimatedRowHeight = 1000;
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
-    UIBarButtonItem *moreButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self.statusChangedBehavior andAction:@selector(startChangeStatus)];
-    UIBarButtonItem *shareButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self.shareFeedItem andAction:@selector(sharePublic:)];
-    [self.navigationItem setRightBarButtonItems:@[moreButton, shareButton]];
+    [self setupToolbarButtons];
     [self.dataSource loadDataFor:self.feedItem];
 }
 
@@ -84,6 +83,15 @@
 }
 
 #pragma mark - private methods
+
+- (void)setupToolbarButtons {
+    UIBarButtonItem *moreButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self.statusChangedBehavior andAction:@selector(startChangeStatus)];
+    [self.navigationItem setRightBarButtonItems:@[moreButton]];
+    if([self.feedItem isKindOfClass:[OTEntourage class]]) {
+        UIBarButtonItem *shareButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self.shareFeedItem andAction:@selector(sharePublic:)];
+        [self.navigationItem setRightBarButtonItems:@[moreButton, shareButton]];
+    }
+}
 
 - (IBAction)joinFeedItem:(id)sender {
     [OTLogger logEvent:@"AskJoinFromPublicPage"];
