@@ -73,6 +73,17 @@
         success([NSArray new]);
 }
 
+- (void)setMessagesAsRead:(void (^)())success orFailure:(void (^)(NSError *))failure {
+    [[OTEntourageService new] readEntourageMessages:self.entourage.uid success:^() {
+        if(success){
+            success();
+        }
+    } failure:^(NSError *error) {
+        if(failure)
+            failure(error);
+    }];
+}
+
 - (NSArray *)getTimelineStatusMessages {
     return [NSArray new];
 }

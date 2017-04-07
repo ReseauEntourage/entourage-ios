@@ -341,7 +341,32 @@ extern NSString *kUsers;
      {
          if (failure)
              failure(error);
-     }];
+     }];    
+}
+
+- (void)readEntourageMessages:(NSNumber *)entourageID
+                 success:(void (^)())success
+                 failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat: @API_URL_ENTOURAGE_SET_READ_MESSAGES, entourageID, TOKEN];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     PUTWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             success();
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }
+     ];
 }
 
 /**************************************************************************************************/

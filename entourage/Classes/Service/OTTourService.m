@@ -304,7 +304,6 @@ NSString *const kTourPoints = @"tour_points";
     ];
 }
 
-
 - (void)tourMessages:(OTTour *)tour
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure {
@@ -453,8 +452,6 @@ NSString *const kTourPoints = @"tour_points";
      ];
 }
 
-
-
 - (void)toursByUserId:(NSNumber *)userId
        withPageNumber:(NSNumber *)pageNumber
      andNumberPerPage:(NSNumber *)per
@@ -501,6 +498,31 @@ NSString *const kTourPoints = @"tour_points";
              failure(error);
          }
      }];
+}
+
+- (void)readTourMessages:(NSNumber *)tourID
+                 success:(void (^)())success
+                 failure:(void (^)(NSError *))failure {
+      NSString *url = [NSString stringWithFormat: @API_URL_TOUR_SET_READ_MESSAGES, tourID, TOKEN];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     PUTWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             success();
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }
+     ];
 }
 
 /**************************************************************************************************/

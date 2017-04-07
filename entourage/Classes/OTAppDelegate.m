@@ -87,10 +87,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [[OTLocationManager sharedInstance] stopLocationUpdates];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    application.applicationIconBadgeNumber = 0;
-}
-
 #pragma mark - Private methods
 
 - (void)popToLogin:(NSNotification *)notification {

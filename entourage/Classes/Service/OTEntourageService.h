@@ -64,4 +64,7 @@
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure;
 
+- (void)readEntourageMessages:(NSNumber *)entourageID
+                      success:(void (^)())success
+                      failure:(void (^)(NSError *))failure;
 @end

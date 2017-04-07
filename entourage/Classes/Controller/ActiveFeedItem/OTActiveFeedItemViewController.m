@@ -66,6 +66,16 @@
     [self setupToolbarButtons];
     [self reloadMessages];
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
+    
+    [SVProgressHUD show];
+    [[[OTFeedItemFactory createForType:self.feedItem.type andId:self.feedItem.uid] getMessaging] setMessagesAsRead:^{
+        [SVProgressHUD dismiss];
+        [[OTUnreadMessagesService new] removeUnreadMessages:self.feedItem.uid];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD dismiss];
+    }];
+
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -71,6 +71,16 @@
     }];
 }
 
+- (void)setMessagesAsRead:(void (^)())success orFailure:(void (^)(NSError *))failure {
+    [[OTTourService new] readTourMessages:self.tour.uid success:^(){
+        if(success)
+            success();
+    } failure:^(NSError *error) {
+        if (failure)
+            failure(error);
+    }];
+}
+
 - (NSArray *)getTimelineStatusMessages {
     OTFeedItemStatus *start = [OTFeedItemStatus new];
     start.date = self.tour.creationDate;

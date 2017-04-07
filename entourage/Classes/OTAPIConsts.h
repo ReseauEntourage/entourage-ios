@@ -42,4 +42,8 @@
 #define API_URL_ENTOURAGE_GET_INVITES @"invitations?token=%@"
 #define API_URL_ENTOURAGE_HANDLE_INVITE @"invitations/%@?token=%@"
 
+//Messages
+#define API_URL_TOUR_SET_READ_MESSAGES  "tours/%@/read?token=%@"
+#define API_URL_ENTOURAGE_SET_READ_MESSAGES "entourages/%@/read?token=%@"
+
 #endif /* OTAPIConsts_h */
