@@ -65,7 +65,7 @@
     [self zoomToCurrentLocation:nil];
 }
 
-- (void)zoomToCurrentLocation:(id)sender {
+- (IBAction)zoomToCurrentLocation:(id)sender {
     if(!self.selectedLocation)
         self.selectedLocation = [OTLocationManager sharedInstance].currentLocation;
     if (self.selectedLocation) {
