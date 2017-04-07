@@ -113,6 +113,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *launcherButton;
 @property (nonatomic, weak) IBOutlet UIButton *stopButton;
 @property (nonatomic, weak) IBOutlet UIButton *createEncounterButton;
+@property (nonatomic, weak) IBOutlet UIButton *backToNewsFeedsButton;
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSArray *pois;
 @property (nonatomic, strong) NSMutableArray *markers;
@@ -167,6 +168,8 @@
     [self configureMapView];
     [self switchToNewsfeed];
     [self reloadFeeds];
+    self.backToNewsFeedsButton.hidden = YES;
+    [self.backToNewsFeedsButton addTarget:self action:@selector(leaveGuide) forControlEvents:UIControlEventTouchUpInside];
     if ([OTOngoingTourService sharedInstance].isOngoing)
         [self showNewTourOnGoing];
     else
@@ -216,6 +219,7 @@
     [self.noDataBehavior switchedToNewsfeeds];
     self.toursMapDelegate.isActive = YES;
     self.guideMapDelegate.isActive = NO;
+    self.backToNewsFeedsButton.hidden = YES;
     [self.mapDelegateProxy.delegates addObject:self.toursMapDelegate];
     [self.mapDelegateProxy.delegates removeObject:self.guideMapDelegate];
     [self.customSegmentedBehavior updateVisible:YES];
@@ -229,6 +233,7 @@
     [self.noDataBehavior switchedToGuide];
     self.toursMapDelegate.isActive = NO;
     self.guideMapDelegate.isActive = YES;
+    self.backToNewsFeedsButton.hidden = NO;
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
     [self.mapDelegateProxy.delegates addObject:self.guideMapDelegate];
     [self.customSegmentedBehavior updateVisible:NO];
@@ -285,6 +290,13 @@
         [self switchToNewsfeed];
     }
 }
+
+- (void)leaveGuide {
+    if(self.toursMapDelegate.isActive)
+        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+    else {
+        [self switchToNewsfeed];
+    }}
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
     CGPoint touchPoint = [longPressGesture locationInView:self.mapView];
