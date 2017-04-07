@@ -32,7 +32,7 @@
 }
 
 - (void)updateVisible:(BOOL)visible {
-    //self.segmentedControl.hidden = !visible;
+    self.segmentedControl.hidden = !visible;
 }
 
 - (void)segmentTapped:(id)sender {

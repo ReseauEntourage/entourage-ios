@@ -231,6 +231,7 @@
     self.guideMapDelegate.isActive = YES;
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
     [self.mapDelegateProxy.delegates addObject:self.guideMapDelegate];
+    [self.customSegmentedBehavior updateVisible:NO];
     [self clearMap];
     [self showToursMap];
     [self reloadPois];
@@ -580,7 +581,6 @@
         self.tableView.tableHeaderView.frame = mapFrame;
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = YES;
-        [self.customSegmentedBehavior updateVisible:NO];
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tourCreatorBehavior.tour.uid.intValue];
@@ -902,7 +902,6 @@
         mapFrame.size.height = MAPVIEW_HEIGHT;
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
-        [self.customSegmentedBehavior updateVisible:NO];
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
 }
@@ -920,7 +919,6 @@
     [UIView animateWithDuration:0.25 animations:^(void) {
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
-        [self.customSegmentedBehavior updateVisible:!self.guideMapDelegate.isActive];
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
 }
@@ -933,7 +931,6 @@
     self.customSegmentedBehavior.selectedIndex = 0;
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.5 animations:^(void) {
-        [self.customSegmentedBehavior updateVisible:YES];
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = NO;
         self.tableView.tableHeaderView.frame = mapFrame;
