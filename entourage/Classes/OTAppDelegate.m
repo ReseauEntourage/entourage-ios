@@ -28,10 +28,11 @@
 #import <Crashlytics/Crashlytics.h>
 #import "entourage-Swift.h"
 #import "UIColor+entourage.h"
-
+#import "OTUnreadMessagesService.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
+NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 
 @interface OTAppDelegate () <UIApplicationDelegate>
 
@@ -58,6 +59,7 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     self.pnService = [OTPushNotificationsService new];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     
     if ([NSUserDefaults standardUserDefaults].currentUser) {
         [self.pnService promptUserForPushNotifications];
@@ -98,6 +100,10 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
         [SVProgressHUD dismiss];
         [self clearUserData];
     }];
+}
+
+- (void)updateBadge {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[OTUnreadMessagesService new] totalCount].integerValue];
 }
 
 - (void)clearUserData {

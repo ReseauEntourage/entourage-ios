@@ -21,6 +21,8 @@
 #import "OTFeedItemDetailsBehavior.h"
 #import "OTManageInvitationBehavior.h"
 #import "OTUserProfileBehavior.h"
+#import "OTAppDelegate.h"
+#import "OTUnreadMessagesService.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -48,7 +50,7 @@
     [self.optionsBehavior configureWith:self.optionsDelegate];
     self.entouragesDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.entouragesDataSource.tableView.estimatedRowHeight = 200;
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
     [self.entouragesDataSource loadData];
@@ -96,6 +98,9 @@
 }
 
 #pragma mark - private methods
+- (void)updateBadge {
+    [self.entouragesDataSource loadData];
+}
 
 - (void)loadInvitations {
     [[OTInvitationsService new] getInvitationsWithStatus:INVITATION_PENDING success:^(NSArray *items) {

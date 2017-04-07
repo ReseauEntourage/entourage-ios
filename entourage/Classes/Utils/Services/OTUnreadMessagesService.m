@@ -10,6 +10,8 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTUnreadMessageCount.h"
+#import "OTConsts.h"
+#import "OTAppDelegate.h"
 
 #define UserKey @"UserKey"
 
@@ -38,6 +40,7 @@
         unreadMessageFound.unreadMessagesCount = @(value+1);
     }
     [self saveUnreadMessages:unreadMessages];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:self];
 }
 
 - (void)removeUnreadMessages:(NSNumber *)feedId {
@@ -47,6 +50,8 @@
         [unreadMessages removeObject:unreadMessageFound];
         [self saveUnreadMessages:unreadMessages];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:self];
+    
 }
 
 - (NSNumber *)countUnreadMessages:(NSNumber *)feedId {

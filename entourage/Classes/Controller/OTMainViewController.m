@@ -77,6 +77,7 @@
 #import "OTSolidarityGuideFiltersViewController.h"
 #import "OTSolidarityGuideFilterDelegate.h"
 #import "OTCustomSegmentedBehavior.h"
+#import "OTAppDelegate.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -160,6 +161,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageCreated:) name:kNotificationEntourageCreated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceGetNewData) name:@kNotificationReloadData object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendCloseMail:) name:@kNotificationSendCloseMail object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
     [self configureMapView];
@@ -1049,6 +1051,11 @@
     OTCloseReason reason = [[notification.userInfo objectForKey:@kNotificationSendReasonKey] intValue];
     OTEntourage *feedItem = [notification.userInfo objectForKey:@kNotificationFeedItemKey];
     [self.mailSender sendCloseMail:reason forItem:  feedItem];
+}
+
+- (void)updateBadge {
+    self.navigationItem.rightBarButtonItem.badgeValue = [OTUnreadMessagesService sharedInstance].totalCount.stringValue;
+    [self forceGetNewData];
 }
 
 @end
