@@ -35,6 +35,8 @@
 @property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleWithConstraintsBehavior *toggleJoinViewBehavior;
 @property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareFeedItem;
+@property (nonatomic, weak) IBOutlet UILabel *lblJoin;
+@property (nonatomic, weak) IBOutlet UIButton *btnJoin;
 
 @end
 
@@ -54,6 +56,7 @@
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];
+    [self setJoinLabelAndButtonForItem:self.feedItem];
     [self.dataSource loadDataFor:self.feedItem];
 }
 
@@ -108,6 +111,17 @@
 
 - (IBAction)feedItemStateChanged {
     [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
+}
+
+- (void)setJoinLabelAndButtonForItem: (OTFeedItem *)feedItem {
+    if([feedItem isKindOfClass:[OTEntourage class]]) {
+        [self.lblJoin setText: OTLocalizedString(@"join_entourage_lbl")];
+        [self.btnJoin setTitle: OTLocalizedString(@"join_entourage_btn") forState:UIControlStateNormal];
+    }
+    else {
+        [self.lblJoin setText: OTLocalizedString(@"join_tour_lbl")];
+        [self.btnJoin setTitle: OTLocalizedString(@"join_tour_btn") forState:UIControlStateNormal];
+    }
 }
 
 @end

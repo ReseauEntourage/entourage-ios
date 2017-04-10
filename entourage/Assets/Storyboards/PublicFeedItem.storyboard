@@ -273,8 +273,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnJoin" destination="iBP-Jr-1A0" id="J4N-r7-gCG"/>
                         <outlet property="dataSource" destination="N75-cy-ly6" id="ZAj-fd-qjf"/>
                         <outlet property="joinBehavior" destination="3hI-5m-VDv" id="udZ-Hx-j8R"/>
+                        <outlet property="lblJoin" destination="vKL-T6-WyZ" id="1v2-7I-bKe"/>
                         <outlet property="shareFeedItem" destination="63X-85-lRk" id="8A2-15-f6b"/>
                         <outlet property="statusBehavior" destination="fgE-8v-az0" id="HgB-v3-Bi3"/>
                         <outlet property="statusChangedBehavior" destination="R14-Fu-EI5" id="9zQ-ZR-fGz"/>

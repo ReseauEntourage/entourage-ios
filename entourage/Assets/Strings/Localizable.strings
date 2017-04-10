@@ -154,6 +154,9 @@ Proposez une structure";
 "tour_status_completed" = "Maraude terminée";
 "tour_quitted" = "Maraude clôturée.";
 
+"join_tour_lbl" = "Maraude voisine ? Coordonnez-vous";
+"join_tour_btn" = "Contacter";
+
 // Encounters
 "formatter_has_meet" = "%@ a rencontré %@";
 "has_encountered" = "a rencontré";
@@ -200,6 +203,8 @@ Proposez une structure";
 "organiser" = "Organisateur";
 "closed" = "Inclure entourages clôturés";
 "unique_unread" = "Uniquement non lus";
+"join_entourage_lbl" = "On a besoin de vous !";
+"join_entourage_btn" = "Rejoindre";
 
 // Feed Item details
 "item_option_close" = "Arrêter";
