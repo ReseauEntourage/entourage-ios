@@ -11,6 +11,7 @@
 #import "OTConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
+#import "OTAPIConsts.h"
 
 @interface OTEntourageDisclaimerViewController ()
 
@@ -30,7 +31,7 @@
 
 - (IBAction)showChart:(id)sender {
     [OTLogger logEvent:@"LinkToEthicsChartClick"];
-    NSString *url = [[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO] ? PRO_ENTOURAGE_CREATION_CHART : PUBLIC_ENTOURAGE_CREATION_CHART;
+    NSString *url = IS_PRO_USER ? PRO_ENTOURAGE_CREATION_CHART : PUBLIC_ENTOURAGE_CREATION_CHART;
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 

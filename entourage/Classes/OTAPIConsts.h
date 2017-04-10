@@ -11,6 +11,7 @@
 
 #define TOKEN [[NSUserDefaults standardUserDefaults] currentUser].token
 #define USER_ID [[NSUserDefaults standardUserDefaults] currentUser].sid
+#define IS_PRO_USER [[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO]
 
 // Onboarding
 #define API_URL_ONBOARD  @"users"

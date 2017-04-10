@@ -10,6 +10,7 @@
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "OTDeepLinkService.h"
+#import "OTAPIConsts.h"
 
 #define TUTORIAL_DELAY 2
 
@@ -17,7 +18,7 @@
 
 - (void)showTutorial {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if([currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(IS_PRO_USER)
         return;
     if([NSUserDefaults standardUserDefaults].autoTutorialShown)
         return;

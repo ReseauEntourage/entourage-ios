@@ -13,6 +13,7 @@
 #import "OTOngoingTourService.h"
 #import "OTAlertViewBehavior.h"
 #import "OTConsts.h"
+#import "OTAPIConsts.h"
 
 @interface OTMyEntouragesOptionsViewController ()
 
@@ -32,7 +33,7 @@
     [self.toggleEncounter initialize];
     [self.toggleMaraude toggle:NO];
     [self.toggleEncounter toggle:NO];
-    if([[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO]) {
+    if(IS_PRO_USER) {
         if([OTOngoingTourService sharedInstance].isOngoing)
             [self.toggleEncounter toggle:YES];
         else

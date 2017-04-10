@@ -12,6 +12,8 @@
 #import "OTFeedItem.h"
 #import "OTFeedItemTimeframeFilter.h"
 #import "OTConsts.h"
+#import "OTAPIConsts.h"
+#import "NSUserDefaults+OT.h"
 
 #define ALL_STATUS_STRING @"all"
 
@@ -31,14 +33,14 @@
 }
 
 - (NSArray *)groupHeaders {
-    if([self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(IS_PRO_USER)
         return @[OTLocalizedString(@"myEntouragesTitle"), OTLocalizedString(@"filter_entourages_title")];
     else
         return @[OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_timeframe_title")];
 }
 
 - (NSArray *)toGroupedArray {
-    if([self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(IS_PRO_USER)
         return @[
                     @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyUnread active:self.isUnread],
@@ -71,7 +73,7 @@
     [result setObject:@(pageSize) forKey:@"per"];
     if(self.isUnread)
         [result setObject:@"true" forKey:@"created_by_me"];
-    if([self.currentUser.type isEqualToString:USER_TYPE_PUBLIC]) {
+    if(!IS_PRO_USER) {
         [result setObject:@(self.timeframeInHours) forKey:@"time_range"];
     }
     NSString *status = [self getStatus];
@@ -113,7 +115,7 @@
 
 - (NSString *)getTourTypes {
     NSArray *types = @[TOUR_MEDICAL, TOUR_SOCIAL, TOUR_DISTRIBUTIVE];
-    if(self.showTours && [self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(self.showTours && IS_PRO_USER)
         return [types componentsJoinedByString:@","];
     return @"";
 }

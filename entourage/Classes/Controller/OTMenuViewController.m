@@ -27,6 +27,8 @@
 #import "UILabel+entourage.h"
 #import "OTTapViewBehavior.h"
 #import "UIImageView+entourage.h"
+#import "OTAPIConsts.h"
+
 @import MessageUI;
 
 /* MenuItem identifiers */
@@ -197,7 +199,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	NSMutableArray *menuItems = [NSMutableArray array];
     OTMenuItem *itemBlog = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_blog") iconName: @"blog" url:MENU_BLOG_URL];
     [menuItems addObject:itemBlog];
-    NSString *chartUrl = [self.currentUser.type isEqualToString:USER_TYPE_PRO] ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
+    NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
     OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart") iconName: @"chart" url:chartUrl];
     [menuItems addObject:itemChart];
     OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_about") iconName: @"about" segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];

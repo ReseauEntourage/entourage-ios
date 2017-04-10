@@ -11,6 +11,7 @@
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
+#import "OTAPIConsts.h"
 
 @interface OTMapOptionsViewController ()
 
@@ -48,8 +49,7 @@
     self.createTourLabel.hidden = YES;
     self.createTourButton.hidden = YES;
 
-    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    if ([currentUser.type isEqualToString:USER_TYPE_PRO]) {
+    if (IS_PRO_USER) {
         [self addOptionWithIcon:@"createMaraude" andAction:@selector(doCreateTour:) withTranslation:NORTH_WEST];
         [self addOptionWithIcon:@"megaphone" andAction:@selector(doCreateDemande:) withTranslation:NORTH];
         [self addOptionWithIcon:@"heart" andAction:@selector(doCreateContribution:) withTranslation:NORTH_EAST];
@@ -66,8 +66,7 @@
 - (void)setupOptionsAsList {
     [super setupOptionsAsList];
     
-    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    if ([currentUser.type isEqualToString:USER_TYPE_PRO]) {
+    if (IS_PRO_USER) {
         [self setupForProUser];
     } else {
         [self setupForPublicUser];

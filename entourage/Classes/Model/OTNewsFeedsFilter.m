@@ -14,6 +14,7 @@
 #import "OTEntourage.h"
 #import "NSUserDefaults+OT.h"
 #import "OTSavedFilter.h"
+#import "OTAPIConsts.h"
 
 #define FEEDS_REQUEST_DISTANCE_KM 10
 
@@ -22,7 +23,7 @@
 - (instancetype)init {
     self = [super init];
     if(self) {
-        self.isPro = [self.currentUser.type isEqualToString:USER_TYPE_PRO];
+        self.isPro = IS_PRO_USER;
         OTSavedFilter *savedFilter = [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter;
         self.showOnlyMyEntourages = NO;
         if(savedFilter) {
@@ -48,14 +49,14 @@
 }
 
 - (NSArray *)groupHeaders {
-    if([self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(IS_PRO_USER)
         return @[OTLocalizedString(@"filter_maraudes_title"), OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_timeframe_title")];
     else
         return @[OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_timeframe_title")];
 }
 
 - (NSArray *)toGroupedArray {
-    if([self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(IS_PRO_USER)
         return @[
                     @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyMedical active:self.showMedical withImage:@"filter_heal"],
@@ -141,7 +142,7 @@
         [types addObject:OTLocalizedString(@"tour_type_bare_hands")];
     if(self.showDistributive)
         [types addObject:OTLocalizedString(@"tour_type_alimentary")];
-    if(self.showTours && [self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(self.showTours && IS_PRO_USER)
         return [types componentsJoinedByString:@","];
     return @"";
 }
