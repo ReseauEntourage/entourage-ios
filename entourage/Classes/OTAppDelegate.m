@@ -55,6 +55,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [Flurry setBackgroundSessionEnabled:NO];
     FlurrySessionBuilder *builder = [[[[FlurrySessionBuilder new] withLogLevel:FlurryLogLevelAll] withCrashReporting:YES] withAppVersion:[OTVersionInfo currentVersion]];
     [Flurry startSession:[ConfigurationManager shared].flurryAPIKey withSessionBuilder:builder];
+    [Fabric with:@[[Crashlytics class]]];
 #endif
 
     [IQKeyboardManager sharedManager].enable = YES;
