@@ -15,6 +15,7 @@
 #import "OTEntourageEditorViewController.h"
 #import "OTLocationManager.h"
 #import "NSNotification+entourage.h"
+#import "UIBarButtonItem+factory.h"
 
 #define SEARCHBAR_FRAME CGRectMake(16, 80, [UIScreen mainScreen].bounds.size.width-32, 48)
 
@@ -37,7 +38,9 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
-    
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(saveNewLocation) colored:[UIColor appOrangeColor]];
+    [self.navigationItem setRightBarButtonItem:menuButton];
+
     self.locationSearchTable = [[UIStoryboard entourageEditorStoryboard] instantiateViewControllerWithIdentifier:@"OTLocationSearchTableViewController"];
     self.resultSearchController = [[UISearchController alloc] initWithSearchResultsController:self.locationSearchTable];
     self.resultSearchController.searchResultsUpdater = self.locationSearchTable;
@@ -128,9 +131,6 @@
         }
     }];
     self.selectedLocation = location;
-    if ([self.locationSelectionDelegate respondsToSelector:@selector(didSelectLocation:)]) {
-        [self.locationSelectionDelegate didSelectLocation:location];
-    }
 }
 
 - (void)updateMapPin:(CLLocation *)location {
@@ -144,6 +144,13 @@
     [self.mapView setRegion:region animated:YES];
     [self.activityIndicator stopAnimating];
     [self updateSelectedLocation:location];
+}
+
+- (void) saveNewLocation {
+    if ([self.locationSelectionDelegate respondsToSelector:@selector(didSelectLocation:)]) {
+        [self.locationSelectionDelegate didSelectLocation:self.selectedLocation];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
