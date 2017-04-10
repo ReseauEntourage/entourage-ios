@@ -17,6 +17,7 @@
 #import "OTConfirmCloseViewController.h"
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
+#import "OTAPIConsts.h"
 
 
 @interface OTChangeStateViewController ()
@@ -39,7 +40,7 @@
     BOOL canCancelJoin = [stateInfo canCancelJoinRequest];
     [self.toggleEditBehavior toggle:[stateInfo canEdit] animated:NO];
     [self.toggleSignalEntourageBehavior initialize];
-    [self.toggleSignalEntourageBehavior toggle:[self.feedItem isKindOfClass:[OTEntourage class]] && ![[NSUserDefaults standardUserDefaults].currentUser.sid isEqualToNumber:self.feedItem.author.uID] && !canCancelJoin animated:NO];
+    [self.toggleSignalEntourageBehavior toggle:[self.feedItem isKindOfClass:[OTEntourage class]] && ![USER_ID isEqualToNumber:self.feedItem.author.uID] && !canCancelJoin animated:NO];
     [self.nextStatusBehavior configureWith:self.feedItem andProtocol:self.delegate];
 }
 

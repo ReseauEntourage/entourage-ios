@@ -193,7 +193,7 @@ extern NSString *kUsers;
                                  failure:(void (^)(NSError *))failure
 {
     
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, entourageID, userID, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, entourageID, userID, TOKEN];
     NSDictionary *parameters = @{@"user":@{@"status":status}};
     
     [[OTHTTPRequestManager sharedInstance]
@@ -222,7 +222,7 @@ extern NSString *kUsers;
                                   failure:(void (^)(NSError *))failure
 {
     
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, entourageID, userID, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, entourageID, userID, TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
      DELETEWithUrl:url

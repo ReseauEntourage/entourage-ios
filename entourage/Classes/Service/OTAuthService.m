@@ -155,7 +155,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
     NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken, @"device_os" : deviceiOS, @"version" : version}};
                                     
     
-    NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, TOKEN];
     NSLog(@"Applications: %@\n%@", url, parameters);
     
     [[OTHTTPRequestManager sharedInstance]

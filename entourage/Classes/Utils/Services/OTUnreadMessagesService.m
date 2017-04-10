@@ -12,6 +12,7 @@
 #import "OTUnreadMessageCount.h"
 #import "OTConsts.h"
 #import "OTAppDelegate.h"
+#import "OTAPIConsts.h"
 
 #define UserKey @"UserKey"
 
@@ -72,7 +73,7 @@
 #pragma mark - private methods
 
 - (NSString *)getUserKey {
-    return [UserKey stringByAppendingString:[NSUserDefaults standardUserDefaults].currentUser.sid.stringValue];
+    return [UserKey stringByAppendingString:USER_ID.stringValue];
 }
 
 - (OTUnreadMessageCount *)findIn:(NSArray *)array byFeedId:(NSNumber *)feedId {
