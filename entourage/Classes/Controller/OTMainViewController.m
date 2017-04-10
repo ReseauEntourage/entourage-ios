@@ -78,6 +78,7 @@
 #import "OTSolidarityGuideFilterDelegate.h"
 #import "OTCustomSegmentedBehavior.h"
 #import "OTAppDelegate.h"
+#import "OTSavedFilter.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -511,8 +512,10 @@
 }
 
 - (void)entourageCreated:(NSNotification *)notification {
-    if([self.currentFilter updateFilterOnEntourageCreated]) {
-        [NSUserDefaults standardUserDefaults].entourageFilterEnabled = YES;
+    if(self.currentFilter.isPro) {
+        self.currentFilter.showDemand = YES;
+        self.currentFilter.showContribution = YES;
+        [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
         [self reloadFeeds];
     }
 }
@@ -774,6 +777,8 @@
 
 - (void)filterChanged:(OTNewsFeedsFilter *)filter {
     self.currentFilter = filter;
+    if(self.currentFilter.isPro)
+        [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
     [self reloadFeeds];
 }
 

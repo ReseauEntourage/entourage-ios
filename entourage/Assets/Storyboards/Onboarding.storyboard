@@ -60,6 +60,7 @@ numéro de portable? </string>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Numéro de portable" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8h5-LL-TYs" customClass="OnBoardingNumberTextField" customModule="Ent_Beta" customModuleProvider="target">
                                                 <rect key="frame" x="15" y="228" width="345" height="53"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="53" id="fCE-wv-9Mj"/>
                                                 </constraints>
@@ -208,6 +209,7 @@ vérification</string>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pvY-e5-lmP" customClass="OnBoardingCodeTextField" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="15" y="228" width="345" height="53"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="53" id="vxj-qn-sUH"/>
                                         </constraints>

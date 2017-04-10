@@ -458,6 +458,7 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="David" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hI2-GX-ilI">
                                                     <rect key="frame" x="95" y="10" width="273" height="30"/>
+                                                    <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="bQF-8F-zR6"/>
                                                     </constraints>
@@ -794,6 +795,7 @@
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir le code" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lVL-eu-x67" userLabel="Old Password Text Field">
                                 <rect key="frame" x="0.0" y="204" width="359" height="50"/>
+                                <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Zpd-ju-yLP"/>
                                 </constraints>
@@ -821,6 +823,7 @@
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir le code" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J3y-R3-SkU" userLabel="New Password Text Field">
                                 <rect key="frame" x="0.0" y="255" width="359" height="50"/>
+                                <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ITK-vh-zr1"/>
                                 </constraints>
@@ -849,6 +852,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir le code" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sjm-xj-kq2" userLabel="Confirm Password Text Field">
                                 <rect key="frame" x="0.0" y="306" width="359" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="CT2-Yq-NQG"/>
                                 </constraints>
@@ -951,6 +955,7 @@
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Rechercher une association" translatesAutoresizingMaskIntoConstraints="NO" id="0VD-bM-o8I">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="u76-x4-ccK">
@@ -1149,6 +1154,7 @@ pour nous demander de l’ajouter !</string>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="252" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="asB-3D-2wa">
                                         <rect key="frame" x="15" y="245" width="344" height="195.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <string key="text">ATD Quart Monde a pour but d’éradiquer la misère en agissant sur trois plans :
 – sur le terrain avec les personnes concernées pour obtenir l’application du droit pour tous
 – auprès des institutions et parlementaires, pour faire changer les lois (DALO, CMU,
@@ -1188,6 +1194,7 @@ regard porté sur les plus pauvres.</string>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="+33 (0) 1 42 46 81 95" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="0eO-nF-XUZ">
                                         <rect key="frame" x="171.5" y="513.5" width="187.5" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1202,6 +1209,7 @@ regard porté sur les plus pauvres.</string>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="63 rue Beaumarchais 93100 Montreuil" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="VbS-tn-dAu">
                                         <rect key="frame" x="77" y="551.5" width="282" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1216,6 +1224,7 @@ regard porté sur les plus pauvres.</string>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="www.atd-quartmonde.fr" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="IYH-e4-CFr">
                                         <rect key="frame" x="80" y="589.5" width="279" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1307,7 +1316,7 @@ regard porté sur les plus pauvres.</string>
         <image name="user" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zJ0-oY-wSk"/>
+        <segue reference="7zV-QF-6Lh"/>
         <segue reference="3vM-Q3-i8Z"/>
     </inferredMetricsTieBreakers>
 </document>

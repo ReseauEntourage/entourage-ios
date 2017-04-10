@@ -342,6 +342,7 @@
 		D615B20C1E964036004277F6 /* OTShareFeedItemBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D615B20B1E964036004277F6 /* OTShareFeedItemBehavior.m */; };
 		D64C694A1E6D60E40075B706 /* OTEntourageDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */; };
 		D65A95341E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A95331E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m */; };
+		D6BDA6D21E9B818800ED5F22 /* OTSavedFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6BDA6D11E9B818800ED5F22 /* OTSavedFilter.m */; };
 		D6D064DA1E93BB440058A9EE /* OTCustomSegmentedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D064D91E93BB440058A9EE /* OTCustomSegmentedBehavior.m */; };
 		D6D21C771E853D7D003E4D2D /* NSDate+OTFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D21C761E853D7D003E4D2D /* NSDate+OTFormatter.m */; };
 		D6EB4D4D1E6D6AA900CDC8A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6EB4D4C1E6D6AA900CDC8A4 /* Images.xcassets */; };
@@ -1001,6 +1002,8 @@
 		D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageDisclaimerViewController.m; sourceTree = "<group>"; };
 		D65A95321E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTToggleVisibleWithConstraintsBehavior.h; path = Behaviors/UI/OTToggleVisibleWithConstraintsBehavior.h; sourceTree = "<group>"; };
 		D65A95331E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTToggleVisibleWithConstraintsBehavior.m; path = Behaviors/UI/OTToggleVisibleWithConstraintsBehavior.m; sourceTree = "<group>"; };
+		D6BDA6D01E9B818800ED5F22 /* OTSavedFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSavedFilter.h; path = Feeds/OTSavedFilter.h; sourceTree = "<group>"; };
+		D6BDA6D11E9B818800ED5F22 /* OTSavedFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSavedFilter.m; path = Feeds/OTSavedFilter.m; sourceTree = "<group>"; };
 		D6D064D81E93BB440058A9EE /* OTCustomSegmentedBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTCustomSegmentedBehavior.h; path = Behaviors/UI/OTCustomSegmentedBehavior.h; sourceTree = "<group>"; };
 		D6D064D91E93BB440058A9EE /* OTCustomSegmentedBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTCustomSegmentedBehavior.m; path = Behaviors/UI/OTCustomSegmentedBehavior.m; sourceTree = "<group>"; };
 		D6D21C751E853D7D003E4D2D /* NSDate+OTFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+OTFormatter.h"; path = "Helper/NSDate+OTFormatter.h"; sourceTree = "<group>"; };
@@ -2138,6 +2141,8 @@
 			children = (
 				1EFAC0F41D89384E00BE396F /* OTNewsFeedsFilter.h */,
 				1EFAC0F51D89384E00BE396F /* OTNewsFeedsFilter.m */,
+				D6BDA6D01E9B818800ED5F22 /* OTSavedFilter.h */,
+				D6BDA6D11E9B818800ED5F22 /* OTSavedFilter.m */,
 				1EFAC0F11D89294F00BE396F /* OTFeedItemTimeframeFilter.h */,
 				1EFAC0F21D89294F00BE396F /* OTFeedItemTimeframeFilter.m */,
 				1EFAC0EE1D89292500BE396F /* OTFeedItemFilters.h */,
@@ -2976,6 +2981,7 @@
 				453BB3371D2E2831002F9255 /* OTOnboardingService.m in Sources */,
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				1EEFFE4B1DCB9D7B003A32A1 /* OTPublicInfoTableDataSource.m in Sources */,
+				D6BDA6D21E9B818800ED5F22 /* OTSavedFilter.m in Sources */,
 				1E4937201DC74FFA001D4954 /* OTDebugLog.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
 				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,

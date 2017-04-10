@@ -13,14 +13,9 @@
 #import "OTTour.h"
 #import "OTEntourage.h"
 #import "NSUserDefaults+OT.h"
+#import "OTSavedFilter.h"
 
 #define FEEDS_REQUEST_DISTANCE_KM 10
-
-@interface OTNewsFeedsFilter ()
-
-@property (nonatomic, assign) BOOL isPro;
-
-@end
 
 @implementation OTNewsFeedsFilter
 
@@ -28,14 +23,26 @@
     self = [super init];
     if(self) {
         self.isPro = [self.currentUser.type isEqualToString:USER_TYPE_PRO];
-        self.showMedical = self.isPro;
-        self.showSocial = self.isPro;
-        self.showDistributive = self.isPro;
-        self.showDemand = !self.isPro || [NSUserDefaults standardUserDefaults].entourageFilterEnabled;
-        self.showContribution = !self.isPro || [NSUserDefaults standardUserDefaults].entourageFilterEnabled;
-        self.showTours = self.isPro;
+        OTSavedFilter *savedFilter = [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter;
         self.showOnlyMyEntourages = NO;
-        self.timeframeInHours = 8 * 24;
+        if(savedFilter) {
+            self.showMedical = savedFilter.showMedical.boolValue;
+            self.showSocial = savedFilter.showSocial.boolValue;
+            self.showDistributive = savedFilter.showDistributive.boolValue;
+            self.showDemand = savedFilter.showDemand.boolValue;
+            self.showContribution = savedFilter.showContribution.boolValue;
+            self.showTours = savedFilter.showTours.boolValue;
+            self.timeframeInHours = savedFilter.timeframeInHours.intValue;
+        }
+        else {
+            self.showMedical = self.isPro;
+            self.showSocial = self.isPro;
+            self.showDistributive = self.isPro;
+            self.showDemand = !self.isPro;
+            self.showContribution = !self.isPro;
+            self.showTours = self.isPro;
+            self.timeframeInHours = 8 * 24;
+        }
     }
     return self;
 }
@@ -74,14 +81,6 @@
                         [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
                     ]
                 ];
-}
-
-- (BOOL)updateFilterOnEntourageCreated {
-    if(!self.isPro)
-        return NO;
-    self.showDemand = YES;
-    self.showContribution = YES;
-    return YES;
 }
 
 - (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before andLocation:(CLLocationCoordinate2D)location {

@@ -168,12 +168,6 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     UINavigationBar.appearance.barTintColor = [UIColor redColor];
     UINavigationBar.appearance.backgroundColor = [UIColor redColor];
 #endif
-
-    UITextField.appearance.tintColor = [UIColor appOrangeColor];
-    UITextView.appearance.tintColor = [UIColor appOrangeColor];
-    
-    [UITextField appearanceWhenContainedIn:[OTLoginViewController class], [OTLostCodeViewController class],
-        [OTPhoneViewController class], [OTCodeViewController class], nil].tintColor = [UIColor whiteColor];
 }
 
 @end

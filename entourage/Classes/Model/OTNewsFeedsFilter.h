@@ -12,6 +12,7 @@
 
 @interface OTNewsFeedsFilter : OTFeedItemFilters<NSCopying>
 
+@property (nonatomic, assign) BOOL isPro;
 @property (nonatomic) BOOL showMedical;
 @property (nonatomic) BOOL showSocial;
 @property (nonatomic) BOOL showDistributive;
@@ -22,7 +23,6 @@
 @property (nonatomic) int timeframeInHours;
 @property (nonatomic) CLLocationCoordinate2D location;
 
-- (BOOL)updateFilterOnEntourageCreated;
 - (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before andLocation:(CLLocationCoordinate2D)location;
 
 @end
