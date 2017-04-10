@@ -23,6 +23,19 @@
 // Tours
 #define API_URL_TOUR_JOIN_REQUEST @"tours/%@/users?token=%@"
 #define API_URL_TOUR_JOIN_MESSAGE @"tours/%@/users/%@?token=%@"
+#define API_URL_TOUR_SEND @"%@.json?token=%@"
+#define API_URL_TOUR_CLOSE @"%@/%@.json?token=%@"
+#define API_URL_TOUR_QUIT @"%@/%@/users/%@?token=%@"
+#define API_URL_TOUR_SEND_POINT @"%@/%@/%@.json?token=%@"
+#define API_URL_TOURs_AROUND @"%@.json?token=%@"
+#define API_URL_TOUR @"%@/%@?token=%@"
+#define API_URL_TOUR_FEED_ITEM_USERS @"%@/%@/users.json?token=%@"
+#define API_URL_TOUR_JOIN_REQUEST_RESPONSE @"tours/%@/users/%@?token=%@"
+#define API_URL_TOUR_MESSAGES @"%@/%@/chat_messages.json?token=%@"
+#define API_URL_TOUR_ENCOUNTERS @"%@/%@/encounters.json?token=%@"
+#define API_URL_TOURS_USER @"%@/%@/%@.json?token=%@"
+#define API_URL_TOUR_SEND_ENCOUNTER @"%@/%@/%@.json?token=%@"
+
 
 //Associations
 #define API_URL_GET_ALL_ASSOCIATIONS @"partners?token=%@"
@@ -41,9 +54,16 @@
 #define API_URL_ENTOURAGE_INVITE @"entourages/%@/invitations?token=%@"
 #define API_URL_ENTOURAGE_GET_INVITES @"invitations?token=%@"
 #define API_URL_ENTOURAGE_HANDLE_INVITE @"invitations/%@?token=%@"
+#define API_URL_ENTOURAGE_SEND @"entourages"
 
 //Messages
 #define API_URL_TOUR_SET_READ_MESSAGES  "tours/%@/read?token=%@"
 #define API_URL_ENTOURAGE_SET_READ_MESSAGES "entourages/%@/read?token=%@"
+
+//Profile
+#define API_URL_USER_DETAILS @"users/%@?token=%@"
+#define API_URL_UPDATE_USER @"%@/%@.json?token=%@"
+#define API_URL_DELETE_ACCOUNT @"users/me?token=%@"
+#define API_URL_REGENERATE_CODE @"%@/%@/%@.json"
 
 #endif /* OTAPIConsts_h */
