@@ -150,7 +150,6 @@
 		1E6E550D1D708726002845D0 /* OTPushNotificationsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E550C1D708726002845D0 /* OTPushNotificationsData.m */; };
 		1E701CEA1DA29FE30041DD9D /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E701CE91DA29FE30041DD9D /* UIBarButtonItem+Badge.m */; };
 		1E71E6531D108790001F3777 /* NSNotification+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E71E6521D108790001F3777 /* NSNotification+entourage.m */; };
-		1E75AB601E3B42930055613E /* libFlurry_7.9.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E75AB5F1E3B42930055613E /* libFlurry_7.9.2.a */; };
 		1E76AE471D144D1F00C496BA /* OTTourStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE461D144D1F00C496BA /* OTTourStateInfo.m */; };
 		1E76AE4A1D144D9900C496BA /* OTEntourageStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76AE491D144D9900C496BA /* OTEntourageStateInfo.m */; };
 		1E78B7A41D5108B20008C00E /* PublicFeedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E78B7A31D5108B20008C00E /* PublicFeedItem.storyboard */; };
@@ -335,9 +334,6 @@
 		A82B95A11DCD045200332305 /* OnBoardingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82B95A01DCD045200332305 /* OnBoardingTextField.swift */; };
 		A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */; };
 		A8B3825819E9466700CF7184 /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA682C819E7D097007BD4BC /* OTLoginViewController.m */; };
-		A8DA9E1B1E3B4BF30041ADB6 /* FlurryEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DA9E161E3B4BF30041ADB6 /* FlurryEmpty.m */; };
-		A8DA9E1C1E3B4BF30041ADB6 /* FlurryWatchEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */; };
-		A8DA9E1D1E3B4BF30041ADB6 /* libFlurry_7.9.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */; };
 		A8FD766E1E42FE9200063C5F /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E9B386D1DC88290000F9F3F /* staging.plist */; };
 		D615B20C1E964036004277F6 /* OTShareFeedItemBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D615B20B1E964036004277F6 /* OTShareFeedItemBehavior.m */; };
 		D64C694A1E6D60E40075B706 /* OTEntourageDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */; };
@@ -653,7 +649,6 @@
 		1E701CE91DA29FE30041DD9D /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
 		1E71E6511D108790001F3777 /* NSNotification+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotification+entourage.h"; sourceTree = "<group>"; };
 		1E71E6521D108790001F3777 /* NSNotification+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotification+entourage.m"; sourceTree = "<group>"; };
-		1E75AB5F1E3B42930055613E /* libFlurry_7.9.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.9.2.a; sourceTree = "<group>"; };
 		1E76AE441D144CEB00C496BA /* OTStateInfoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTStateInfoDelegate.h; sourceTree = "<group>"; };
 		1E76AE451D144D1F00C496BA /* OTTourStateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourStateInfo.h; sourceTree = "<group>"; };
 		1E76AE461D144D1F00C496BA /* OTTourStateInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourStateInfo.m; sourceTree = "<group>"; };
@@ -990,12 +985,6 @@
 		A82B95A01DCD045200332305 /* OnBoardingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingTextField.swift; sourceTree = "<group>"; };
 		A87D6AF419E8740E007ACA29 /* OTCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCalloutViewController.h; sourceTree = "<group>"; };
 		A87D6AF519E8740E007ACA29 /* OTCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCalloutViewController.m; sourceTree = "<group>"; };
-		A8DA9E151E3B4BF30041ADB6 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		A8DA9E161E3B4BF30041ADB6 /* FlurryEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryEmpty.m; sourceTree = "<group>"; };
-		A8DA9E171E3B4BF30041ADB6 /* FlurrySessionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurrySessionBuilder.h; sourceTree = "<group>"; };
-		A8DA9E181E3B4BF30041ADB6 /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
-		A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryWatchEmpty.m; sourceTree = "<group>"; };
-		A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.9.2.a; sourceTree = "<group>"; };
 		D615B20A1E964036004277F6 /* OTShareFeedItemBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTShareFeedItemBehavior.h; path = Behaviors/UI/OTShareFeedItemBehavior.h; sourceTree = "<group>"; };
 		D615B20B1E964036004277F6 /* OTShareFeedItemBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTShareFeedItemBehavior.m; path = Behaviors/UI/OTShareFeedItemBehavior.m; sourceTree = "<group>"; };
 		D64C69481E6D60E40075B706 /* OTEntourageDisclaimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageDisclaimerViewController.h; sourceTree = "<group>"; };
@@ -1032,13 +1021,11 @@
 				0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */,
 				A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */,
 				A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */,
-				A8DA9E1D1E3B4BF30041ADB6 /* libFlurry_7.9.2.a in Frameworks */,
 				6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */,
 				6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
 				6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */,
-				1E75AB601E3B42930055613E /* libFlurry_7.9.2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2367,7 +2354,6 @@
 				0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */,
 				A809BAA819E9803700A45AC9 /* Security.framework */,
 				A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */,
-				A809BAA219E97E2400A45AC9 /* Flurry */,
 				6B4930BD19A769EB00DA7EE0 /* MapKit.framework */,
 				6B92CAA119A7461C004E8C9B /* Foundation.framework */,
 				6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */,
@@ -2460,19 +2446,6 @@
 				1E587F311E2E18A300FEBB67 /* UIImageView+entourage.m */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		A809BAA219E97E2400A45AC9 /* Flurry */ = {
-			isa = PBXGroup;
-			children = (
-				A8DA9E151E3B4BF30041ADB6 /* Flurry.h */,
-				A8DA9E161E3B4BF30041ADB6 /* FlurryEmpty.m */,
-				A8DA9E171E3B4BF30041ADB6 /* FlurrySessionBuilder.h */,
-				A8DA9E181E3B4BF30041ADB6 /* FlurryWatch.h */,
-				A8DA9E191E3B4BF30041ADB6 /* FlurryWatchEmpty.m */,
-				A8DA9E1A1E3B4BF30041ADB6 /* libFlurry_7.9.2.a */,
-			);
-			path = Flurry;
 			sourceTree = "<group>";
 		};
 		A8E10FAB19E82A1500DF4A01 /* View */ = {
@@ -2923,7 +2896,6 @@
 				2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */,
 				0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */,
 				45E6FE161CAE44EA00505660 /* OTUserEditViewController.m in Sources */,
-				A8DA9E1B1E3B4BF30041ADB6 /* FlurryEmpty.m in Sources */,
 				1E8845971D5DDB1A00747223 /* OTMyEntouragesOptionsBehavior.m in Sources */,
 				1EC6F3C71D53DBEF0026766D /* OTActiveFeedItemViewController.m in Sources */,
 				2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */,
@@ -3010,7 +2982,6 @@
 				1E2F290C1D4BC2A000ABC68A /* OTCloseKeyboardOnTapBehavior.m in Sources */,
 				1E8767121E5ADD960080486A /* OTTutorial1ViewController.m in Sources */,
 				1EC75C061D849AE800887F6F /* OTMapDelegateProxyBehavior.m in Sources */,
-				A8DA9E1C1E3B4BF30041ADB6 /* FlurryWatchEmpty.m in Sources */,
 				1E78B7ED1D513ECA0008C00E /* OTTourUI.m in Sources */,
 				1E0972C31D555586006E1FAD /* OTInviteBehavior.m in Sources */,
 				45B3F8F61C74F40B00DCF2EC /* OTFeedItemAuthor.m in Sources */,
@@ -3327,6 +3298,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "Ent-Beta";
@@ -3371,6 +3343,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3509,6 +3482,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "Ent-Beta";

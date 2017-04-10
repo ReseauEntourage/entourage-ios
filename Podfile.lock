@@ -112,6 +112,7 @@ PODS:
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
+  - Flurry-iOS-SDK/FlurrySDK (7.10.0)
   - FormatterKit (1.8.1):
     - FormatterKit/AddressFormatter (= 1.8.1)
     - FormatterKit/ArrayFormatter (= 1.8.1)
@@ -158,6 +159,7 @@ DEPENDENCIES:
   - AWSiOSSDKv2 (~> 2.4)
   - Crashlytics
   - Fabric
+  - Flurry-iOS-SDK/FlurrySDK
   - FormatterKit
   - IQKeyboardManager (= 3.3.4)
   - JSBadgeView (= 1.4.1)
@@ -194,6 +196,7 @@ SPEC CHECKSUMS:
   AWSSQS: e460e57060ad208f44f6dab0b2c85787a5bd3f68
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  Flurry-iOS-SDK: e6975df9e57010d582bf9bed0f6312553cf24bc2
   FormatterKit: 11ad17b983200629246a5a466f6f1bfa2df823cb
   IQKeyboardManager: ac803e61e5b50efae6b3aeedd95a02c7c7d3b2b3
   JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
@@ -206,6 +209,6 @@ SPEC CHECKSUMS:
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   WYPopoverController: dda54780e1bef186464ae5a10ab9b4998c279e89
 
-PODFILE CHECKSUM: 5f00ea36a0d71f1eeb5dba5b526ae3e3db781394
+PODFILE CHECKSUM: 69c488d85bbc466034d0218ac44578b8464eb18c
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.2.0

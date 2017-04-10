@@ -19,6 +19,7 @@ target "entourage" do
     pod 'Crashlytics'
     pod 'JVFloatLabeledTextField'
     pod 'libPhoneNumber-iOS'
+    pod 'Flurry-iOS-SDK/FlurrySDK'
 end
 
 target "entourageTests" do
