@@ -11,7 +11,6 @@
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
 #import "OTFeedItemJoinOptionsViewController.h"
-#import "OTFeedItemJoinMessageController.h"
 
 @interface OTJoinBehavior ()
 
@@ -33,22 +32,11 @@
 - (BOOL)prepareSegueForMessage:(UIStoryboardSegue *)segue {
     if ([segue.identifier isEqualToString:@"JoinRequestSegue"]) {
         OTFeedItemJoinOptionsViewController *controller = (OTFeedItemJoinOptionsViewController *)segue.destinationViewController;
-        controller.joinDelegate = self;
+        controller.feedItem = self.feedItem;
     }
     else
         return NO;
     return YES;
-}
-
-#pragma mark - OTJoinDelegate
-
-- (void)addMessage {
-    [self.owner dismissViewControllerAnimated:YES completion:^() {
-        UIStoryboard *joinStoryboard = [UIStoryboard storyboardWithName:@"JoinFeedItem" bundle:nil];
-        OTFeedItemJoinMessageController *controller = [joinStoryboard instantiateViewControllerWithIdentifier:@"JoinMessage"];
-        controller.feedItem = self.feedItem;
-        [self.owner presentViewController:controller animated:YES completion:nil];
-    }];
 }
 
 #pragma mark - private methods

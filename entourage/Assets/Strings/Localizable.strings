@@ -156,6 +156,7 @@ Proposez une structure";
 
 "join_tour_lbl" = "Maraude voisine ? Coordonnez-vous";
 "join_tour_btn" = "Contacter";
+"join_tour_greeting_lbl" = "Que souhaitez-vous coordonner avec cette maraude ? Ajoutez un petit mot !";
 
 // Encounters
 "formatter_has_meet" = "%@ a rencontré %@";
@@ -205,6 +206,8 @@ Proposez une structure";
 "unique_unread" = "Uniquement non lus";
 "join_entourage_lbl" = "On a besoin de vous !";
 "join_entourage_btn" = "Rejoindre";
+"join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !
+Pourquoi rejoignez-vous cet entourage ? Ajoutez un petit mot !";
 
 // Feed Item details
 "item_option_close" = "Arrêter";

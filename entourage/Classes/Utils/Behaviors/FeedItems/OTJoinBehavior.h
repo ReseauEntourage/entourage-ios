@@ -8,9 +8,8 @@
 
 #import "OTBehavior.h"
 #import "OTFeedItem.h"
-#import "OTJoinDelegate.h"
 
-@interface OTJoinBehavior : OTBehavior<OTJoinDelegate>
+@interface OTJoinBehavior : OTBehavior
 
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 

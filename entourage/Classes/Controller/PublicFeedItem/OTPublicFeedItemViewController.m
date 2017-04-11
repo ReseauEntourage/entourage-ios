@@ -11,7 +11,6 @@
 #import "UIColor+entourage.h"
 #import "OTFeedItemFactory.h"
 #import "UIBarButtonItem+factory.h"
-#import "OTFeedItemJoinMessageController.h"
 #import "OTStatusBehavior.h"
 #import "OTJoinBehavior.h"
 #import "SVProgressHUD.h"
