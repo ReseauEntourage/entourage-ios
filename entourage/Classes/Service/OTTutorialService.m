@@ -17,7 +17,6 @@
 @implementation OTTutorialService
 
 - (void)showTutorial {
-    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if(IS_PRO_USER)
         return;
     if([NSUserDefaults standardUserDefaults].autoTutorialShown)
