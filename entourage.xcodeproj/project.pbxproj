@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011270621E9D1751006ADA79 /* OTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 011270611E9D1751006ADA79 /* OTTextView.m */; };
 		0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */; };
 		0130138E1E7968B300C2504C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */; };
 		013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */; };
@@ -360,6 +361,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		011270601E9D1751006ADA79 /* OTTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTextView.h; sourceTree = "<group>"; };
+		011270611E9D1751006ADA79 /* OTTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTextView.m; sourceTree = "<group>"; };
 		013013891E7965CE00C2504C /* OTUnreadMessageCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessageCount.h; path = Feeds/OTUnreadMessageCount.h; sourceTree = "<group>"; };
 		0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUnreadMessageCount.m; path = Feeds/OTUnreadMessageCount.m; sourceTree = "<group>"; };
 		0130138C1E7968B300C2504C /* OTUnreadMessagesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessagesService.h; path = Services/OTUnreadMessagesService.h; sourceTree = "<group>"; };
@@ -2456,6 +2459,8 @@
 				1E09E07C1DB0B75000ABBBA1 /* OTTextWithCount.m */,
 				1EA5C6591E48AE7200891C9B /* OTAutoGrowTextView.h */,
 				1EA5C65A1E48AE7200891C9B /* OTAutoGrowTextView.m */,
+				011270601E9D1751006ADA79 /* OTTextView.h */,
+				011270611E9D1751006ADA79 /* OTTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2819,6 +2824,7 @@
 				454C8F5B1C510304001362B2 /* UINavigationController+entourage.m in Sources */,
 				1EF23E2D1DD08D9100E71BB7 /* OTEncounterAnnotation.m in Sources */,
 				1EFBCFDC1E56E59C008CEF30 /* OTTutorialViewController.m in Sources */,
+				011270621E9D1751006ADA79 /* OTTextView.m in Sources */,
 				191FE92419E943D900C56BCA /* OTAuthService.m in Sources */,
 				1EFAC0D51D89247900BE396F /* OTImageFeedItemsFilterCell.m in Sources */,
 				1E49BCC41D7D93DA0024EDC1 /* OTEntourageDisclaimerBehavior.m in Sources */,

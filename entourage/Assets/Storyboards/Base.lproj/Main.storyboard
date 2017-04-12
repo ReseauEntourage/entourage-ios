@@ -136,7 +136,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                                <rect key="frame" x="121.5" y="233" width="133" height="18"/>
+                                <rect key="frame" x="121" y="233" width="133" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

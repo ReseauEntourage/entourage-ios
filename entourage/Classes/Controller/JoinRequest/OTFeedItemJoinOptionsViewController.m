@@ -12,23 +12,21 @@
 #import "SVProgressHUD.h"
 #import "OTEntourage.h"
 #import "OTConsts.h"
+#import "OTTextView.h"
 
 @interface OTFeedItemJoinOptionsViewController () <UITextViewDelegate>
-
-@property (nonatomic, weak) IBOutlet UILabel *greetingLabel;
-@property (nonatomic, weak) IBOutlet UITextView *greetingMessage;
 
 @end
 
 @implementation OTFeedItemJoinOptionsViewController
 
-//- (IBAction)addMessage:(id)sender {
-//    [self.joinDelegate addMessage];
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.greetingMessage.placeholder = OTLocalizedString(@"request_to_join_popup_placeholder");
+    self.greetingMessage.editingPlaceholder = @"";
+    self.greetingMessage.placeholderLargeColor = UIColor.grayColor;
     [self setupGreetingLabelForItem];
+    self.greetingMessage.forwardDelegate = self;
 }
 
 - (IBAction)close:(id)sender {

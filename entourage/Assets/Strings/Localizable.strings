@@ -217,6 +217,7 @@ Pourquoi rejoignez-vous cet entourage ? Ajoutez un petit mot !";
 "member_count" = "Membres (%d)";
 "item_closed" = "Clôturé";
 "item_cancel_join" = "Retirer ma demande";
+"request_to_join_popup_placeholder" = "Votre message…";
 
 // Tutorial
 "emailNotSent" = "Echec de la mise à jour de l'email";
