@@ -9,6 +9,9 @@
 #import "OTLocationManager.h"
 #import "OTDeepLinkService.h"
 #import "OTConsts.h"
+#import "OTAPIConsts.h"
+#import "NSUserDefaults+OT.h"
+#import "OTUser.h"
 
 @interface OTLocationManager () <CLLocationManagerDelegate>
 
@@ -38,8 +41,8 @@
     if (self.locationManager == nil)
         self.locationManager = [[CLLocationManager alloc] init];
     //iOS 8+
-    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
-        [self.locationManager requestAlwaysAuthorization];
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] || [self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        IS_PRO_USER ? [self.locationManager requestAlwaysAuthorization] : [self.locationManager requestWhenInUseAuthorization] ;
     //iOS 9+
     if ([self.locationManager respondsToSelector:@selector(allowsBackgroundLocationUpdates)])
         self.locationManager.allowsBackgroundLocationUpdates = YES;
@@ -100,7 +103,11 @@
 }
 
 - (void)notifyStatus {
-    self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedAlways;
+    if(IS_PRO_USER)
+        self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedAlways;
+    else
+        self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedWhenInUse;
+    
     NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:self.isAuthorized] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationAuthorizationChanged object:nil userInfo:info];
 }

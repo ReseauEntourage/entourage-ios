@@ -16,7 +16,7 @@
 #import "OTOngoingTourService.h"
 #import "OTTourPoint.h"
 
-#define REQUIRED_ACCURACY 20
+#define REQUIRED_ACCURACY 10
 #define MIN_POINTS_TO_SEND 3
 #define HOW_RECENT_THRESHOLD 120
 
@@ -103,10 +103,19 @@
         NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
         if (fabs(howRecent) > HOW_RECENT_THRESHOLD)
             continue;
-        if (newLocation.horizontalAccuracy < REQUIRED_ACCURACY)
-            self.lastLocation = newLocation;
-        else
-            continue;
+        if (newLocation.horizontalAccuracy >0) {
+            CLLocationDistance distance = DBL_MAX;
+            if(self.lastLocation == nil || self.lastLocation.horizontalAccuracy > newLocation.horizontalAccuracy)
+                self.lastLocation = newLocation;
+             distance = [newLocation distanceFromLocation: self.lastLocation];
+            if(distance >= newLocation.horizontalAccuracy *0.5)
+                self.lastLocation = newLocation;
+        }
+
+//        if (newLocation.horizontalAccuracy < REQUIRED_ACCURACY)
+//            self.lastLocation = newLocation;
+//        else
+//            continue;
         if([OTOngoingTourService sharedInstance].isOngoing) {
             CLLocation *lastDrawnTourLocation = [self locationFromTourPoint:self.tour.tourPoints.lastObject];
             OTTourPoint *addedPoint = [self addTourPointFromLocation:self.lastLocation toLastLocation:lastDrawnTourLocation];

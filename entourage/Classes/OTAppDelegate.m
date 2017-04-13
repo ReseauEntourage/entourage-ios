@@ -94,6 +94,11 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [[OTLocationManager sharedInstance] stopLocationUpdates];
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    if ([NSUserDefaults standardUserDefaults].currentUser)
+        [[OTLocationManager sharedInstance] startLocationUpdates];
+}
+
 #pragma mark - Private methods
 
 - (void)popToLogin:(NSNotification *)notification {

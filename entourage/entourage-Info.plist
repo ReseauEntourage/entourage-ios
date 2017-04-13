@@ -55,6 +55,8 @@
 	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Pour afficher les POIs, vos rencontres, etc....</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Pour afficher les entourages à proximité</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Pour saisir la description des entourages</string>
 	<key>NSPhotoLibraryUsageDescription</key>
