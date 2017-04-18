@@ -96,7 +96,8 @@
     NSString *loadFilterString = self.currentFilter.description;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     self.indicatorView.hidden = NO;
-    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:beforeDate andLocation:self.currentCoordinate];
+    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:beforeDate andLocation:self.currentCoordinate]
+    ;
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary success:^(NSMutableArray *feeds) {
         self.lastOkCoordinate = self.currentCoordinate;
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];

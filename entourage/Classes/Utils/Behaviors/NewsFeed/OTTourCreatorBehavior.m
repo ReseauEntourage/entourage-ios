@@ -101,29 +101,23 @@
     for (CLLocation *newLocation in locations) {
         NSDate *eventDate = newLocation.timestamp;
         NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+        
         if (fabs(howRecent) > HOW_RECENT_THRESHOLD)
             continue;
-        if (newLocation.horizontalAccuracy >0) {
-            CLLocationDistance distance = DBL_MAX;
-            if(self.lastLocation == nil || self.lastLocation.horizontalAccuracy > newLocation.horizontalAccuracy)
-                self.lastLocation = newLocation;
-             distance = [newLocation distanceFromLocation: self.lastLocation];
-            if(distance >= newLocation.horizontalAccuracy *0.5)
-                self.lastLocation = newLocation;
-        }
 
-//        if (newLocation.horizontalAccuracy < REQUIRED_ACCURACY)
-//            self.lastLocation = newLocation;
-//        else
-//            continue;
-        if([OTOngoingTourService sharedInstance].isOngoing) {
+        if (newLocation.horizontalAccuracy < REQUIRED_ACCURACY)
+            self.lastLocation = newLocation;
+        else
+            continue;
+        if ([OTOngoingTourService sharedInstance].isOngoing) {
             CLLocation *lastDrawnTourLocation = [self locationFromTourPoint:self.tour.tourPoints.lastObject];
-            OTTourPoint *addedPoint = [self addTourPointFromLocation:self.lastLocation toLastLocation:lastDrawnTourLocation];
+            OTTourPoint *addedPoint = [self addTourPointFromLocation:self.lastLocation
+                                                      toLastLocation:lastDrawnTourLocation];
             CLLocation *lastLocationToSend = [self locationFromTourPoint:self.tourPointsToSend.lastObject];
             double distance = [self.lastLocation distanceFromLocation:lastLocationToSend];
             if (fabs(distance) > LOCATION_MIN_DISTANCE)
                 [self updateTourPointsToSendIfNeeded:addedPoint];
-            if(self.tourPointsToSend.count > MIN_POINTS_TO_SEND)
+            if (self.tourPointsToSend.count > MIN_POINTS_TO_SEND)
                 [self sendTourPointsWithSuccess:nil orFailure:nil];
         }
     }
@@ -144,10 +138,12 @@
 - (void)sendTourPointsWithSuccess:(void(^)())success orFailure:(void(^)(NSError *))failure {
     NSArray *sentPoints = [NSArray arrayWithArray:self.tourPointsToSend];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[OTTourService new] sendTourPoint:self.tourPointsToSend withTourId:self.tour.uid withSuccess:^(OTTour *updatedTour) {
+    [[OTTourService new] sendTourPoint:self.tourPointsToSend
+                            withTourId:self.tour.uid
+                           withSuccess:^(OTTour *updatedTour) {
         [self.tourPointsToSend removeObjectsInArray:sentPoints];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        if(success)
+        if (success)
             success();
     } failure:^(NSError *error) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -157,7 +153,8 @@
 }
 
 - (CLLocation *)locationFromTourPoint:(OTTourPoint *)tourPoint {
-    return [[CLLocation alloc] initWithLatitude:tourPoint.latitude longitude:tourPoint.longitude];
+    return [[CLLocation alloc] initWithLatitude:tourPoint.latitude
+                                      longitude:tourPoint.longitude];
 }
 
 @end

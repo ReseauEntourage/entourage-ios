@@ -50,9 +50,15 @@
     return [self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN];
 }
 
+- (BOOL)isClosed {
+    return [self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED];
+}
+
 - (BOOL)isPublic {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if([self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED])
-        return YES;
+        return !([currentUser.sid intValue] == [self.entourage.author.uID intValue] ||
+                 [self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED]);
     return ![self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
 }
 

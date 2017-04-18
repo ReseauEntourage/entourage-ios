@@ -63,7 +63,9 @@
 - (void)showGeoLocationNotAllowedMessage:(NSString *)message {
     [OTLogger logEvent:@"ActivateGeolocFromCreateTourPopup"];
     UIViewController *rootController = [[OTDeepLinkService new] getTopViewController];
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:defaultAction];
     UIAlertAction *settingsAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"activate") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

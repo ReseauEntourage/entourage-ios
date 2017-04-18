@@ -43,17 +43,20 @@
         dispatch_group_leave(group);
     }];
 
-    [messaging getFeedItemUsersWithStatus:nil success:^(NSArray *items) {
-        if([items count] > 0)
-            @synchronized (allItems) {
-                for(OTFeedItemJoiner *joiner in items)
-                    joiner.feedItem = feedItem;
-                [allItems addObjectsFromArray:items];
-            }
+    if([feedItem.status isEqualToString:@"closed"])
         dispatch_group_leave(group);
-    } failure:^(NSError *error) {
-        dispatch_group_leave(group);
-    }];
+    else
+        [messaging getFeedItemUsersWithStatus:nil success:^(NSArray *items) {
+            if([items count] > 0)
+                @synchronized (allItems) {
+                    for(OTFeedItemJoiner *joiner in items)
+                        joiner.feedItem = feedItem;
+                    [allItems addObjectsFromArray:items];
+                }
+            dispatch_group_leave(group);
+        } failure:^(NSError *error) {
+            dispatch_group_leave(group);
+        }];
 
     [messaging getEncountersWithSuccess:^(NSArray *items) {
         if([items count] > 0)

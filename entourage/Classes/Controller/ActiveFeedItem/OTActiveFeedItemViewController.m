@@ -28,6 +28,8 @@
 #import "OTBottomScrollBehavior.h"
 #import "OTUnreadMessagesService.h"
 #import "OTShareFeedItemBehavior.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -40,6 +42,7 @@
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior *editEntourageBehavior;
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
+@property (weak, nonatomic) IBOutlet UIButton *btnSend;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 @property (nonatomic, strong) IBOutlet OTBottomScrollBehavior *scrollBottomBehavior;
 @property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareBehavior;
@@ -51,7 +54,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.txtChat.delegate = self;
+    if([self.feedItem.status isEqualToString:@"closed"] || [self.feedItem.status isEqualToString:@"freezed"]){
+        self.txtChat.hidden = YES;
+        self.btnSend.hidden = YES;
+        self.view.backgroundColor = self.tblChat.backgroundColor = [UIColor colorWithRed: 0xF8 / 255.0f
+                                                                                   green: 0xF8 / 255.0f
+                                                                                    blue: 0xF8 / 255.0f
+                                                                                   alpha: 1.0f];
+    } else {
+        self.btnSend.hidden = NO;
+        self.txtChat.hidden = NO;
+        self.txtChat.delegate = self;
+    }
     [self.shareBehavior configureWith:self.feedItem];
     [self.scrollBottomBehavior initialize];
     [self.summaryProvider configureWith:self.feedItem];
@@ -67,15 +81,14 @@
     [self reloadMessages];
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
     
-    [SVProgressHUD show];
-    [[[OTFeedItemFactory createForType:self.feedItem.type andId:self.feedItem.uid] getMessaging] setMessagesAsRead:^{
-        [SVProgressHUD dismiss];
-        [[OTUnreadMessagesService new] removeUnreadMessages:self.feedItem.uid];
-    } orFailure:^(NSError *error) {
-        [SVProgressHUD dismiss];
-    }];
-
-  
+        [SVProgressHUD show];
+        [[[OTFeedItemFactory createForType:self.feedItem.type andId:self.feedItem.uid] getMessaging] setMessagesAsRead:^{
+            [SVProgressHUD dismiss];
+            [[OTUnreadMessagesService new] removeUnreadMessages:self.feedItem.uid];
+        } orFailure:^(NSError *error) {
+            [SVProgressHUD dismiss];
+        }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

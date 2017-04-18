@@ -50,9 +50,15 @@
     return [self.tour.status isEqualToString:TOUR_STATUS_ONGOING] || [self.tour.status isEqualToString:FEEDITEM_STATUS_CLOSED];
 }
 
+- (BOOL)isClosed {
+    return [self.tour.status isEqualToString:TOUR_STATUS_FREEZED];
+}
+
 - (BOOL)isPublic {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if([self.tour.status isEqualToString:TOUR_STATUS_FREEZED])
-        return YES;
+        return !([currentUser.sid intValue] == [self.tour.author.uID intValue] ||
+                 [self.tour.joinStatus isEqualToString:JOIN_ACCEPTED]);
     return ![JOIN_ACCEPTED isEqualToString:self.tour.joinStatus];
 }
 
