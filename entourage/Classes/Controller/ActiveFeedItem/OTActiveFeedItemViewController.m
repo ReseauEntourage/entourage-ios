@@ -54,18 +54,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if([self.feedItem.status isEqualToString:@"closed"] || [self.feedItem.status isEqualToString:@"freezed"]){
-        self.txtChat.hidden = YES;
-        self.btnSend.hidden = YES;
-        self.view.backgroundColor = self.tblChat.backgroundColor = [UIColor colorWithRed: 0xF8 / 255.0f
-                                                                                   green: 0xF8 / 255.0f
-                                                                                    blue: 0xF8 / 255.0f
-                                                                                   alpha: 1.0f];
-    } else {
-        self.btnSend.hidden = NO;
-        self.txtChat.hidden = NO;
-        self.txtChat.delegate = self;
-    }
+    [self setUpUIForClosedItem];
     [self.shareBehavior configureWith:self.feedItem];
     [self.scrollBottomBehavior initialize];
     [self.summaryProvider configureWith:self.feedItem];
@@ -88,7 +77,6 @@
         } orFailure:^(NSError *error) {
             [SVProgressHUD dismiss];
         }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -119,6 +107,14 @@
 }
 
 #pragma mark - private methods
+
+- (void)setUpUIForClosedItem {
+    BOOL isClosed = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isClosed];
+    if(isClosed)
+        self.view.backgroundColor = self.tblChat.backgroundColor = CLOSED_ITEM_BACKGROUND_COLOR;
+    self.txtChat.hidden = self.btnSend.hidden = isClosed;
+    self.txtChat.delegate = self;
+}
 
 - (void)setupToolbarButtons {
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];

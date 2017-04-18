@@ -24,6 +24,7 @@
 #define TEXTVIEW_PADDING_BOTTOM 23.0f
 
 #define MAP_TOUR_LINE_WIDTH 4.0f
+#define CLOSED_ITEM_BACKGROUND_COLOR  [UIColor colorWithRed: 0xF8 / 255.0f green: 0xF8 / 255.0f blue: 0xF8 / 255.0f alpha: 1.0f]
 
 #define kNotificationPushStatusChanged @"NotificationAPNSStatusChanged"
 #define kNotificationPushStatusChangedStatusKey @"NotificationAPNSStatusChangedStatusKey"

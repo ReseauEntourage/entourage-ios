@@ -58,7 +58,7 @@
     if ([currentUser.sid intValue] == [self.entourage.author.uID intValue])
         return [self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN];
     else
-        return [self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
+        return [self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED] && [self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN];
     return NO;
 }
 
