@@ -365,3 +365,6 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "share_public" = "Ce projet solidaire sur Entourage a besoin de toi. Rejoins-le en téléchargeant l'app ici %@";
 "share_creator" = "J'ai créé ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
 "share_joiner" = "J'ai rejoint ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
+
+
+"feed_item_time_distance" = "Créée il y a ";

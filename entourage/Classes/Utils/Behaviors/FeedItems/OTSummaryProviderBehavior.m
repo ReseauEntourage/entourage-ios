@@ -48,7 +48,7 @@
         self.txtFeedItemDescription.text = [uiDelegate feedItemDescription];
     if(self.lblTimeDistance) {
         double distance = [uiDelegate distance];
-        self.lblTimeDistance.text = [self getDistance:distance with:feedItem.creationDate];
+        self.lblTimeDistance.text = [OTLocalizedString(@"feed_item_time_distance") stringByAppendingString: [self getDistance:distance with:feedItem.creationDate]];
     }
     self.imgAssociation.hidden = feedItem.author.partner == nil;
     [self.imgAssociation setupFromUrl:feedItem.author.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];

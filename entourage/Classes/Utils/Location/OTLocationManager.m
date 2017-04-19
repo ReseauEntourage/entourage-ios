@@ -33,10 +33,9 @@
 }
 
 - (void)startLocationUpdates {
-    if(self.status == kCLAuthorizationStatusDenied) {
-        [self notifyStatus];
+    [self notifyStatus];
+    if(self.status == kCLAuthorizationStatusDenied) 
         return;
-    }
     
     if (self.locationManager == nil)
         self.locationManager = [[CLLocationManager alloc] init];
@@ -108,7 +107,7 @@
     if(IS_PRO_USER)
         self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedAlways;
     else
-        self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedWhenInUse;
+        self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedWhenInUse || self.status == kCLAuthorizationStatusAuthorizedAlways;
     
     NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:self.isAuthorized] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationAuthorizationChanged object:nil userInfo:info];
