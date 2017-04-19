@@ -13,5 +13,7 @@
 @property (nonatomic, weak) IBOutlet UIView *infoPopup;
 
 - (IBAction)closePopup:(id)sender;
+- (void)show;
+- (void)hide;
 
 @end

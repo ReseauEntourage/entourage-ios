@@ -8,13 +8,22 @@
 
 #import "OTGuideInfoBehavior.h"
 
-
 @implementation OTGuideInfoBehavior
 
 static bool infoClosed = NO;
 
 - (void)closePopup:(id)sender {
     infoClosed = YES;
+    [self toggleInfoOpen:NO];
+}
+
+- (void)show {
+    if(infoClosed)
+        return;
+    [self toggleInfoOpen:YES];
+}
+
+- (void)hide {
     [self toggleInfoOpen:NO];
 }
 

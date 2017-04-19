@@ -220,6 +220,7 @@
 
 - (void)switchToNewsfeed {
     [self.noDataBehavior switchedToNewsfeeds];
+    [self.guideInfoBehavior hide];
     self.toursMapDelegate.isActive = YES;
     self.guideMapDelegate.isActive = NO;
     self.backToNewsFeedsButton.hidden = YES;
@@ -387,14 +388,12 @@
             self.categories = categories;
             self.pois = pois;
             [self feedMapViewWithPoiArray:pois];
-            if(self.pois.count == 0)
-                [self.noDataBehavior showNoData];
+            self.pois.count == 0 ? [self.noDataBehavior showNoData] : [self.guideInfoBehavior show];
                
         } failure:^(NSError *error) {
             [self registerObserver];
             NSLog(@"Err getting POI %@", error.description);
-            if(self.pois.count == 0)
-                [self.noDataBehavior showNoData];
+            self.pois.count == 0 ? [self.noDataBehavior showNoData] : [self.guideInfoBehavior show];
     }];
 }
 
