@@ -43,7 +43,7 @@
         dispatch_group_leave(group);
     }];
 
-    if([feedItem.status isEqualToString:@"closed"])
+    if([[[OTFeedItemFactory createFor: feedItem] getStateInfo] isClosed])
         dispatch_group_leave(group);
     else
         [messaging getFeedItemUsersWithStatus:nil success:^(NSArray *items) {

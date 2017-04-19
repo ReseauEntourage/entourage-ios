@@ -16,7 +16,7 @@
 #import "OTOngoingTourService.h"
 #import "OTTourPoint.h"
 
-#define REQUIRED_ACCURACY 10
+#define REQUIRED_ACCURACY 20
 #define MIN_POINTS_TO_SEND 3
 #define HOW_RECENT_THRESHOLD 120
 
