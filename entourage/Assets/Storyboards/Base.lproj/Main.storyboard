@@ -136,7 +136,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                                <rect key="frame" x="122" y="233" width="133" height="18"/>
+                                <rect key="frame" x="121.5" y="233" width="133" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -313,49 +313,6 @@
                                 <rect key="frame" x="-4" y="64" width="383" height="603"/>
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <view key="tableFooterView" hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="fyj-qg-Gvf">
-                                    <rect key="frame" x="0.0" y="184" width="383" height="230.5"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TgR-1n-ufy">
-                                            <rect key="frame" x="8" y="8" width="22" height="22"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="22" id="HIL-yF-zUC"/>
-                                                <constraint firstAttribute="height" constant="22" id="Qzn-zb-cEM"/>
-                                            </constraints>
-                                            <state key="normal" backgroundImage="whiteClose"/>
-                                            <connections>
-                                                <action selector="closePopup:" destination="oGT-t2-iTg" eventType="touchUpInside" id="aBV-Tl-FXm"/>
-                                            </connections>
-                                        </button>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="47x-yn-azj">
-                                            <rect key="frame" x="11" y="53" width="361" height="160"/>
-                                            <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <string key="text">On dirait que c'est calme ici!
-
-Déplacez la carte pour trouver des entourages crées par le réseau.
-
-Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="47x-yn-azj" secondAttribute="trailing" constant="11" id="BZc-Rz-X2k"/>
-                                        <constraint firstItem="TgR-1n-ufy" firstAttribute="top" secondItem="fyj-qg-Gvf" secondAttribute="top" constant="8" id="C3A-R4-KEv"/>
-                                        <constraint firstAttribute="bottom" secondItem="47x-yn-azj" secondAttribute="bottom" constant="18" id="Dgc-X5-Tjv"/>
-                                        <constraint firstItem="TgR-1n-ufy" firstAttribute="leading" secondItem="fyj-qg-Gvf" secondAttribute="leading" constant="8" id="Ekm-DM-3DN"/>
-                                        <constraint firstItem="47x-yn-azj" firstAttribute="top" secondItem="TgR-1n-ufy" secondAttribute="bottom" constant="23" id="lmL-eb-RaR"/>
-                                        <constraint firstItem="47x-yn-azj" firstAttribute="leading" secondItem="fyj-qg-Gvf" secondAttribute="leading" constant="11" id="wEB-Bc-zG0"/>
-                                    </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="10"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AllToursCell" rowHeight="156" id="KgN-kr-NT6">
                                         <rect key="frame" x="0.0" y="28" width="383" height="156"/>
@@ -684,6 +641,48 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
+                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fyj-qg-Gvf">
+                                <rect key="frame" x="20" y="227.5" width="335" height="212"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TgR-1n-ufy">
+                                        <rect key="frame" x="8" y="8" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="22" id="HIL-yF-zUC"/>
+                                            <constraint firstAttribute="height" constant="22" id="Qzn-zb-cEM"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="whiteClose"/>
+                                        <connections>
+                                            <action selector="closePopup:" destination="oGT-t2-iTg" eventType="touchUpInside" id="aBV-Tl-FXm"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="47x-yn-azj">
+                                        <rect key="frame" x="11" y="53" width="313" height="141.5"/>
+                                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <string key="text">On dirait que c'est calme ici!
+
+Déplacez la carte pour trouver des entourages crées par le réseau.
+
+Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="47x-yn-azj" secondAttribute="trailing" constant="11" id="BZc-Rz-X2k"/>
+                                    <constraint firstItem="TgR-1n-ufy" firstAttribute="top" secondItem="fyj-qg-Gvf" secondAttribute="top" constant="8" id="C3A-R4-KEv"/>
+                                    <constraint firstAttribute="bottom" secondItem="47x-yn-azj" secondAttribute="bottom" constant="18" id="Dgc-X5-Tjv"/>
+                                    <constraint firstItem="TgR-1n-ufy" firstAttribute="leading" secondItem="fyj-qg-Gvf" secondAttribute="leading" constant="8" id="Ekm-DM-3DN"/>
+                                    <constraint firstItem="47x-yn-azj" firstAttribute="top" secondItem="TgR-1n-ufy" secondAttribute="bottom" constant="23" id="lmL-eb-RaR"/>
+                                    <constraint firstItem="47x-yn-azj" firstAttribute="leading" secondItem="fyj-qg-Gvf" secondAttribute="leading" constant="11" id="wEB-Bc-zG0"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="01M-L0-iJE"/>
@@ -691,6 +690,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="oHF-Vi-LCk" secondAttribute="bottom" id="CoI-BK-C8y"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Kc9-kH-YQ7" secondAttribute="bottom" constant="12" id="DuD-zc-Fd5"/>
                             <constraint firstItem="8zL-iD-eto" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="H3B-oV-EPp"/>
+                            <constraint firstItem="fyj-qg-Gvf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="JEK-w9-aoe"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="leading" secondItem="Kc9-kH-YQ7" secondAttribute="trailing" constant="-62" id="Kq0-ZY-fSh"/>
                             <constraint firstItem="aPq-MR-sA9" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="QIf-iG-H2m"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uRg-cj-T9Q" secondAttribute="bottom" constant="12" id="TDA-nJ-u0d"/>
@@ -706,8 +706,10 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                             <constraint firstItem="aPq-MR-sA9" firstAttribute="centerY" secondItem="mDS-Eg-kke" secondAttribute="centerY" id="iCU-2i-V9x"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CTC-ba-e0E" secondAttribute="trailing" constant="10" id="k41-lB-TOD"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="8zL-iD-eto" secondAttribute="bottom" constant="12" id="kYQ-7P-wpY"/>
+                            <constraint firstItem="fyj-qg-Gvf" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="n1b-SP-eBD"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="10" id="puD-5n-gle"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="64" id="sQA-pi-JcK"/>
+                            <constraint firstAttribute="trailing" secondItem="fyj-qg-Gvf" secondAttribute="trailing" constant="20" id="saG-lm-Sc3"/>
                             <constraint firstItem="mDS-Eg-kke" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="9" id="zOY-X6-ZJ3"/>
                         </constraints>
                     </view>
