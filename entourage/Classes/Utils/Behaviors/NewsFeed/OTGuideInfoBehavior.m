@@ -1,0 +1,27 @@
+//
+//  OTGuideInfoBehavior.m
+//  entourage
+//
+//  Created by sergiu.buceac on 19/04/2017.
+//  Copyright © 2017 OCTO Technology. All rights reserved.
+//
+
+#import "OTGuideInfoBehavior.h"
+
+
+@implementation OTGuideInfoBehavior
+
+static bool infoClosed = NO;
+
+- (void)closePopup:(id)sender {
+    infoClosed = YES;
+    [self toggleInfoOpen:NO];
+}
+
+#pragma mark - private methods
+
+- (void)toggleInfoOpen:(BOOL)open {
+    self.infoPopup.hidden = !open;
+}
+
+@end

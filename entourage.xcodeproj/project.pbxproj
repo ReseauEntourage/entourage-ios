@@ -339,6 +339,7 @@
 		D615B20C1E964036004277F6 /* OTShareFeedItemBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D615B20B1E964036004277F6 /* OTShareFeedItemBehavior.m */; };
 		D64C694A1E6D60E40075B706 /* OTEntourageDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */; };
 		D65A95341E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D65A95331E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m */; };
+		D6B547711EA77E5700ED0324 /* OTGuideInfoBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B547701EA77E5700ED0324 /* OTGuideInfoBehavior.m */; };
 		D6BDA6D21E9B818800ED5F22 /* OTSavedFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6BDA6D11E9B818800ED5F22 /* OTSavedFilter.m */; };
 		D6D064DA1E93BB440058A9EE /* OTCustomSegmentedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D064D91E93BB440058A9EE /* OTCustomSegmentedBehavior.m */; };
 		D6D21C771E853D7D003E4D2D /* NSDate+OTFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D21C761E853D7D003E4D2D /* NSDate+OTFormatter.m */; };
@@ -993,6 +994,8 @@
 		D64C69491E6D60E40075B706 /* OTEntourageDisclaimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageDisclaimerViewController.m; sourceTree = "<group>"; };
 		D65A95321E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTToggleVisibleWithConstraintsBehavior.h; path = Behaviors/UI/OTToggleVisibleWithConstraintsBehavior.h; sourceTree = "<group>"; };
 		D65A95331E701C420096FFC3 /* OTToggleVisibleWithConstraintsBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTToggleVisibleWithConstraintsBehavior.m; path = Behaviors/UI/OTToggleVisibleWithConstraintsBehavior.m; sourceTree = "<group>"; };
+		D6B5476F1EA77E5700ED0324 /* OTGuideInfoBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTGuideInfoBehavior.h; path = Behaviors/NewsFeed/OTGuideInfoBehavior.h; sourceTree = "<group>"; };
+		D6B547701EA77E5700ED0324 /* OTGuideInfoBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTGuideInfoBehavior.m; path = Behaviors/NewsFeed/OTGuideInfoBehavior.m; sourceTree = "<group>"; };
 		D6BDA6D01E9B818800ED5F22 /* OTSavedFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSavedFilter.h; path = Feeds/OTSavedFilter.h; sourceTree = "<group>"; };
 		D6BDA6D11E9B818800ED5F22 /* OTSavedFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSavedFilter.m; path = Feeds/OTSavedFilter.m; sourceTree = "<group>"; };
 		D6D064D81E93BB440058A9EE /* OTCustomSegmentedBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTCustomSegmentedBehavior.h; path = Behaviors/UI/OTCustomSegmentedBehavior.h; sourceTree = "<group>"; };
@@ -1644,6 +1647,8 @@
 				1E66936B1D85DEEB00F9C03D /* OTTapEntourageBehavior.m */,
 				1E993BFA1DDB514300621770 /* OTNoDataBehavior.h */,
 				1E993BFB1DDB514300621770 /* OTNoDataBehavior.m */,
+				D6B5476F1EA77E5700ED0324 /* OTGuideInfoBehavior.h */,
+				D6B547701EA77E5700ED0324 /* OTGuideInfoBehavior.m */,
 			);
 			name = NewsFeed;
 			sourceTree = "<group>";
@@ -2964,6 +2969,7 @@
 				1E5C30241D6F6CE100E10770 /* OTMembersTableDataSource.m in Sources */,
 				1E08A3331D5E06B900D96B05 /* OTUserProfileBehavior.m in Sources */,
 				1E4F56211DB64C9100AD0CAC /* OTLocationSearchTableViewController.m in Sources */,
+				D6B547711EA77E5700ED0324 /* OTGuideInfoBehavior.m in Sources */,
 				1E8E16E61D5A354C005C42ED /* OTInvitationsCollectionViewCell.m in Sources */,
 				013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */,
 				1EF23E2C1DD08D9100E71BB7 /* OTCustomAnnotation.m in Sources */,

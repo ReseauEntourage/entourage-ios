@@ -79,6 +79,7 @@
 #import "OTCustomSegmentedBehavior.h"
 #import "OTAppDelegate.h"
 #import "OTSavedFilter.h"
+#import "OTGuideInfoBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -126,6 +127,7 @@
 @property (nonatomic, weak) IBOutlet OTNoDataBehavior *noDataBehavior;
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior *mailSender;
 @property (nonatomic, weak) IBOutlet OTCustomSegmentedBehavior *customSegmentedBehavior;
+@property (nonatomic, weak) IBOutlet OTGuideInfoBehavior *guideInfoBehavior;
 
 @end
 
