@@ -20,6 +20,7 @@
 #pragma mark - private methods
 
 - (BOOL)tapped:(UITapGestureRecognizer *)recognizer {
+    self.tappedEntourage = nil;
     if (self.mapView.overlays.count == 0)
         return NO;
     CGPoint tapPoint = [recognizer locationInView:self.mapView];
@@ -35,6 +36,7 @@
                 distance = [first distanceFromLocation:second];
             }
             if(distance < ENTOURAGE_RADIUS - ENTOURAGE_RADIUS_OFFSET) {
+                self.tappedEntourage = circle;
                 [self sendActionsForControlEvents:UIControlEventValueChanged];
                 return YES;
             }

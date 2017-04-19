@@ -676,6 +676,7 @@
         else {
             if([self.tapEntourage hasTappedEntourage:sender]) {
                 [OTLogger logEvent:@"HeatzoneMapClick"];
+                [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.tapEntourage.tappedEntourage.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
                 [self showToursList];
             }
             else
