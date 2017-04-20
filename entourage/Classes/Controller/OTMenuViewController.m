@@ -138,8 +138,13 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
         if(menuItem.segueIdentifier)
             [self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
-        else
+        else {
+            if([menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")])
+                [OTLogger logEvent:@"WhatActionsClick"];
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_application_usage")])
+                [OTLogger logEvent:@"AppFAQClick"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.url]];
+        }
 	}
     [[tableView cellForRowAtIndexPath:indexPath]setSelected:NO];
 }
@@ -199,9 +204,13 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	NSMutableArray *menuItems = [NSMutableArray array];
     OTMenuItem *itemBlog = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_blog") iconName: @"blog" url:MENU_BLOG_URL];
     [menuItems addObject:itemBlog];
+    OTMenuItem *itemEntourageActions = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_entourage_actions") iconName:@"goal" url:MENU_BLOG_ENTOURAGE_ACTIONS_URL];
+    [menuItems addObject:itemEntourageActions];
     NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
     OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart") iconName: @"chart" url:chartUrl];
     [menuItems addObject:itemChart];
+    OTMenuItem *itemApplicationUsage = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_application_usage") iconName:@"menu_phone" url:MENU_BLOG_APPLICATION_USAGE_URL];
+    [menuItems addObject:itemApplicationUsage];
     OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_about") iconName: @"about" segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
     [menuItems addObject:itemAbout];
     OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"") iconName: nil segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];

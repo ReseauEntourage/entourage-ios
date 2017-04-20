@@ -62,6 +62,8 @@
 "menu_yourOpinion_title" = "VOTRE AVIS";
 "menu_translate_title" = "TRADUIRE";
 "menu_disconnect_title" = "Déconnexion";
+"menu_entourage_actions" = "Quelles actions avec Entourage ?";
+"menu_application_usage" = "Utilisation de l'appli";
 
 // AboutItems
 "about_rateus" = "Notez-nous dans l’App Store";

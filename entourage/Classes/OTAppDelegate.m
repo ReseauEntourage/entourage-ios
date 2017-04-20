@@ -140,7 +140,6 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive)
         [self.pnService handleRemoteNotification:userInfo];
-    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
@@ -148,7 +147,6 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground || state == UIApplicationStateInactive)
         [self.pnService handleLocalNotification:userInfo];
-    application.applicationIconBadgeNumber = 0;
 }
 
 #pragma mark - Configure UIAppearance

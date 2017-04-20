@@ -85,8 +85,8 @@
 }
 
 - (NSMutableArray *)getUnreadMessages {
-    NSString *userKey = [self getUserKey];
-    NSMutableArray *unreadMessages = [[NSUserDefaults standardUserDefaults] objectForKey:userKey];
+    NSString *userKey = [self getUserKey];    
+    NSMutableArray *unreadMessages = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:userKey]];
     if(unreadMessages==nil)
         unreadMessages = [NSMutableArray new];
     return unreadMessages;
@@ -94,7 +94,8 @@
 
 - (void)saveUnreadMessages:(NSMutableArray *)unreadMessages {
     NSString *userKey = [self getUserKey];
-    [[NSUserDefaults standardUserDefaults] setObject:unreadMessages forKey:userKey];
+     NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:unreadMessages];
+    [[NSUserDefaults standardUserDefaults] setObject:encodedObject forKey:userKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
