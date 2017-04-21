@@ -103,21 +103,28 @@
 
 - (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
-    OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
-    UIAlertAction *viewProfileAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [OTLogger logEvent:@"UserProfileClick"];
-        [[OTDeepLinkService new] showProfileFromAnywhereForUser:joiner.uID];
-    }];
-    UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [OTLogger logEvent:@"RejectJoinRequest"];
-            [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] reject:joiner success:nil failure:nil];
-    }];
-    UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [OTLogger logEvent:@"AcceptJoinRequest"];
-            [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] accept:joiner success:nil failure:nil];
-    }];
-    [self displayAlertWithActions:@[refuseJoinRequestAction, acceptJoinRequestAction, viewProfileAction] forPushData:pnData];
+    [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getMessaging] getFeedItemUsersWithStatus:JOIN_PENDING success:^(NSArray *items){
+        for(OTFeedItemJoiner *item in items) {
+            if([item.displayName isEqualToString:pnData.sender]) {
+                [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
+                OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
+            
+                UIAlertAction *viewProfileAction = [UIAlertAction   actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [OTLogger logEvent:@"UserProfileClick"];
+                    [[OTDeepLinkService new] showProfileFromAnywhereForUser:joiner.uID];
+                }];
+                UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [OTLogger logEvent:@"RejectJoinRequest"];
+                    [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] reject:joiner success:nil failure:nil];
+                }];
+                UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [OTLogger logEvent:@"AcceptJoinRequest"];
+                    [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] accept:joiner success:nil failure:nil];
+                }];
+                [self displayAlertWithActions:@[refuseJoinRequestAction, acceptJoinRequestAction, viewProfileAction] forPushData:pnData];
+            }
+        }
+    } failure:nil];
 }
 
 - (void)handleAcceptJoinNotification:(OTPushNotificationsData *)pnData
