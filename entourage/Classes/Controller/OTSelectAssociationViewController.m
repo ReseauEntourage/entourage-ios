@@ -13,6 +13,7 @@
 #import "OTAssociationsSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTAssociation.h"
+#import "SVProgressHUD.h"
 
 @interface OTSelectAssociationViewController ()
 
@@ -61,8 +62,12 @@
 }
 
 - (void)saveAssociation {
+    BOOL hasAssociationSet = NO;
+    for(OTAssociation *association in self.dataSource.items)
+        hasAssociationSet = hasAssociationSet || association.isDefault;
     [self.dataSource updateAssociation:^() {
         [self dismissViewControllerAnimated:YES completion:nil];
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(hasAssociationSet ? @"association_set" : @"association_reset")];
     }];
 }
 

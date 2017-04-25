@@ -370,3 +370,6 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 
 
 "feed_item_time_distance" = "Créée il y a ";
+
+"association_set" = "Badge ajouté";
+"association_reset" = "Badge enlevé";
