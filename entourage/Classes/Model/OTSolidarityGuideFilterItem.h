@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    SolidarityGuideKeyFood,
-    SolidarityGuideKeyHousing,
-    SolidarityGuideKeyHeal,
-    SolidarityGuideKeyRefresh,
-    SolidarityGuideKeyOrientation,
-    SolidarityGuideKeyCaring,
-    SolidarityGuideKeyReinsertion
+    SolidarityGuideKeyFood = 1,
+    SolidarityGuideKeyHousing = 2,
+    SolidarityGuideKeyHeal = 3,
+    SolidarityGuideKeyRefresh = 4,
+    SolidarityGuideKeyOrientation = 5,
+    SolidarityGuideKeyCaring = 6,
+    SolidarityGuideKeyReinsertion = 7
 } SolidarityGuideFilters;
 
 @interface OTSolidarityGuideFilterItem : NSObject

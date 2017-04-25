@@ -16,8 +16,8 @@
     self = [super init];
     if(self) {
         self.showFood = YES;
-        self.showHousing = NO;
-        self.showHeal = NO;
+        self.showHousing = YES;
+        self.showHeal = YES;
         self.showRefresh = YES;
         self.showOrientation = YES;
         self.showCaring = YES;
@@ -44,11 +44,17 @@
             ];
 }
 
-- (NSMutableDictionary *)toDictionaryWithDistance:(CLLocationDistance)distance andLocation:(CLLocationCoordinate2D)location {
+- (NSMutableDictionary *)toDictionaryWithDistance:(CLLocationDistance)distance Location:(CLLocationCoordinate2D)location {
+    NSMutableArray *categoryIds = [NSMutableArray new];
+    for(NSArray *values in self.toGroupedArray)
+        for(OTSolidarityGuideFilterItem *item in values)
+            if(item.active)
+                [categoryIds addObject:[NSNumber numberWithInt:item.key]];
     return [NSMutableDictionary dictionaryWithDictionary: @{
                                                             @"latitude": @(location.latitude),
                                                             @"longitude": @(location.longitude),
                                                             @"distance": @(distance),
+                                                            @"category_ids": [categoryIds componentsJoinedByString: @","],
                                                             }];
 }
 

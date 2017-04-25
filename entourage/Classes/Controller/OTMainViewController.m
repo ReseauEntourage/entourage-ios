@@ -383,18 +383,22 @@
 
 - (void)getPOIList {
     [self.noDataBehavior hideNoData];
-    [[OTPoiService new] poisWithParameters:[self.solidarityFilter toDictionaryWithDistance:[self mapHeight] andLocation:self.mapView.centerCoordinate] success:^(NSArray *categories, NSArray *pois)
+    [SVProgressHUD show];
+    [[OTPoiService new] poisWithParameters:[self.solidarityFilter toDictionaryWithDistance:[self mapHeight] Location:self.mapView.centerCoordinate] success:^(NSArray *categories, NSArray *pois)
         {
             self.categories = categories;
             self.pois = pois;
             [self feedMapViewWithPoiArray:pois];
             self.pois.count == 0 ? [self.noDataBehavior showNoData] : [self.guideInfoBehavior show];
+            [SVProgressHUD dismiss];
                
         } failure:^(NSError *error) {
             [self registerObserver];
             NSLog(@"Err getting POI %@", error.description);
             self.pois.count == 0 ? [self.noDataBehavior showNoData] : [self.guideInfoBehavior show];
+            [SVProgressHUD dismiss];
     }];
+    
 }
 
 - (void)feedMapWithFeedItems {

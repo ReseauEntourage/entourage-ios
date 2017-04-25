@@ -27,6 +27,6 @@
 - (NSArray *)groupHeaders;
 - (NSArray *)toGroupedArray;
 - (void)updateValue:(OTSolidarityGuideFilter *)filter;
-- (NSMutableDictionary *)toDictionaryWithDistance:(CLLocationDistance)distance andLocation:(CLLocationCoordinate2D)location;
+- (NSMutableDictionary *)toDictionaryWithDistance:(CLLocationDistance)distance Location:(CLLocationCoordinate2D)location;
 
 @end

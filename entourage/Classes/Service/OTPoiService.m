@@ -54,7 +54,7 @@ NSString *const kAPIPoiRoute = @"map.json";
     NSMutableDictionary *authParams = [[OTHTTPRequestManager commonParameters] mutableCopy];
     [authParams addEntriesFromDictionary:parameters];
     [[OTHTTPRequestManager sharedInstance]
-     GETWithUrl:kAPIPoiRoute
+     GETWithUrl:kPOIs
      andParameters:authParams
      andSuccess:^(id responseObject)
      {
