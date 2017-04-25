@@ -435,11 +435,10 @@
 
 - (void)feedMapViewWithPoiArray:(NSArray *)array {
     if (self.guideMapDelegate.isActive) {
+        [self.markers removeAllObjects];
         for (OTPoi *poi in array) {
             OTCustomAnnotation *annotation = [[OTCustomAnnotation alloc] initWithPoi:poi];
-            if (![self.markers containsObject:annotation]) {
-                [self.markers addObject:annotation];
-            }
+            [self.markers addObject:annotation];
         }
         [self.mapView removeAnnotations:self.mapView.annotations];
         [self.mapView addAnnotations:self.markers];

@@ -50,11 +50,12 @@
         for(OTSolidarityGuideFilterItem *item in values)
             if(item.active)
                 [categoryIds addObject:[NSNumber numberWithInt:item.key]];
+    NSString *catValue = [categoryIds componentsJoinedByString: @","];
     return [NSMutableDictionary dictionaryWithDictionary: @{
                                                             @"latitude": @(location.latitude),
                                                             @"longitude": @(location.longitude),
+                                                            @"category_ids": catValue,
                                                             @"distance": @(distance),
-                                                            @"category_ids": [categoryIds componentsJoinedByString: @","],
                                                             }];
 }
 
