@@ -12,6 +12,7 @@
 #import "OTChangeStateViewController.h"
 #import "OTMainViewController.h"
 #import "OTCloseReason.h"
+#import "OTTour.h"
 
 @interface OTStatusChangedBehavior ()
 
@@ -55,8 +56,10 @@
     [self popToMainController];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        NSDictionary *userInfo =  @{ @kNotificationSendReasonKey: @(reason), @kNotificationFeedItemKey: self.feedItem};
-        [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationSendCloseMail object:nil userInfo:userInfo];
+        if(![self.feedItem isKindOfClass:[OTTour class]]) {
+            NSDictionary *userInfo =  @{ @kNotificationSendReasonKey: @(reason), @kNotificationFeedItemKey: self.feedItem};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationSendCloseMail object:nil userInfo:userInfo];
+        }
         if(reason == OTCloseReasonHelpClose)
             return;
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closed_item")];
