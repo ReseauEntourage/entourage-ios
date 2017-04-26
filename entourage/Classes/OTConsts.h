@@ -76,3 +76,5 @@
 #define PUBLIC_MENU_CHART_URL @"http://www.entourage.social/chartes/grand-public.html"
 
 #define NO_GIUDE_DATA_LINK @"https://goo.gl/jD5uIQ"
+
+#define PROPOSE_STRUCTURE_URL @"https://docs.google.com/forms/d/e/1FAIpQLSdcpYpAWz9zllF2TUS4USDQzu4T4ywu_XjXaD-ovsTS5eo1YA/viewform"

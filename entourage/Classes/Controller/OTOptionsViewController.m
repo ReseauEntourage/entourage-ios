@@ -147,6 +147,12 @@
     }
 }
 
+- (IBAction)proposeStructure:(id)sender {
+    if ([self.optionsDelegate respondsToSelector:@selector(proposeStructure)]) {
+        [self.optionsDelegate performSelector:@selector(proposeStructure) withObject:nil];
+    }
+}
+
 - (void)addOptionWithIcon:(NSString *)optionIcon
                 andAction:(SEL)selector
           withTranslation:(CGPoint)translationPoint

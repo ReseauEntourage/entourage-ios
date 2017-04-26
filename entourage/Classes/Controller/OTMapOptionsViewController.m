@@ -83,7 +83,7 @@
     [self addOption:OTLocalizedString(@"create_contribution") atIndex:self.buttonIndex++ withIcon:@"heart" andAction:@selector(doCreateContribution:)];
     
     if(self.isPOIVisible)
-        [self addOption:@"Do it" atIndex:self.buttonIndex++ withIcon:@"solidarity" andAction:nil];
+        [self addOption:OTLocalizedString(@"propose_structure") atIndex:self.buttonIndex++ withIcon:@"house" andAction:@selector(proposeStructure:)];
 
     NSString *poiTitle = self.isPOIVisible ? @"map_options_hide_poi" : @"map_options_show_poi";
     [self addOption:OTLocalizedString(poiTitle) atIndex:self.buttonIndex++ withIcon:@"solidarity" andAction:@selector(doTogglePOI:)];

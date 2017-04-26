@@ -762,6 +762,10 @@
     }];
 }
 
+- (void)proposeStructure {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROPOSE_STRUCTURE_URL]];
+}
+
 #pragma mark - EntourageEditorDelegate
 
 - (void)didEditEntourage:(OTEntourage *)entourage {
