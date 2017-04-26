@@ -24,38 +24,44 @@
 
 @implementation OTMailSenderBehavior
 
-- (void)sendMailWithSubject:(NSString *)subject andRecipient:(NSString *)recipient {
-    if([MFMailComposeViewController canSendMail]) {
+- (BOOL)sendMailWithSubject:(NSString *)subject andRecipient:(NSString *)recipient {
+    if([self checkCanSend]) {
         self.mailController = [MFMailComposeViewController new];
         [self.mailController setToRecipients:@[recipient]];
         [self.mailController setSubject:subject];
         self.mailController.mailComposeDelegate = self;
         [self.owner showViewController:self.mailController sender:self];
+        return YES;
     }
-    else
-        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"mail_not_configured")];
+    return NO;
 }
 
-- (void)sendCloseMail:(OTCloseReason)reason forItem:(OTEntourage *)feedItem{
-    NSString *subject = [NSString new];
-    switch (reason) {
-    case OTCloseReasonSuccesClose:
-            subject =[NSString stringWithFormat:OTLocalizedString(@"successful_close_mail"), feedItem.title];
-        break;
-    case OTCloseReasonBlockedClose:
-            subject =[NSString stringWithFormat:OTLocalizedString(@"blocked_close_mail"), feedItem.title];
-        break;
-    case OTCloseReasonHelpClose:
-            subject =[NSString stringWithFormat:OTLocalizedString(@"help_close_mail"), feedItem.title];
-        break;
-    default:
-        break;
+- (BOOL)sendCloseMail:(OTCloseReason)reason forItem:(OTEntourage *)feedItem{
+    if([self checkCanSend]) {
+        NSString *subject = [NSString new];
+        switch (reason) {
+            case OTCloseReasonSuccesClose:
+                subject = [NSString stringWithFormat:OTLocalizedString(@"successful_close_mail"), feedItem.title];
+                break;
+            case OTCloseReasonBlockedClose:
+                subject = [NSString stringWithFormat:OTLocalizedString(@"blocked_close_mail"), feedItem.title];
+                break;
+            case OTCloseReasonHelpClose:
+                subject = [NSString stringWithFormat:OTLocalizedString(@"help_close_mail"), feedItem.title];
+                break;
+            default:
+                break;
+        }
+        [self sendMailWithSubject:subject andRecipient:CLOSE_EMAIL_RECIPIENT];
     }
-    [self sendMailWithSubject:subject andRecipient:CLOSE_EMAIL_RECIPIENT];
+    return NO;
 }
 
-- (void)sendStructureMail:(NSString *)subject {
-    [self sendMailWithSubject:subject andRecipient:STRUCTURE_EMAIL_RECIPIENT];
+- (BOOL)sendStructureMail:(NSString *)subject {
+    if([self checkCanSend]) {
+        [self sendMailWithSubject:subject andRecipient:STRUCTURE_EMAIL_RECIPIENT];
+    }
+    return NO;
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate
@@ -67,6 +73,15 @@
         else if(result != MFMailComposeResultCancelled)
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"mail_send_failure")];
     }];
+}
+
+#pragma mark - private members
+
+- (BOOL)checkCanSend {
+    if([MFMailComposeViewController canSendMail])
+        return YES;
+    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"mail_not_configured")];
+    return NO;
 }
 
 @end

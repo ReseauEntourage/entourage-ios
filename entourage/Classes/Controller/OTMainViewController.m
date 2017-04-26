@@ -1066,10 +1066,10 @@
     }
 }
 
--(void) sendCloseMail: (NSNotification *)notification {
+- (void)sendCloseMail: (NSNotification *)notification {
     OTCloseReason reason = [[notification.userInfo objectForKey:@kNotificationSendReasonKey] intValue];
     OTEntourage *feedItem = [notification.userInfo objectForKey:@kNotificationFeedItemKey];
-    [self.mailSender sendCloseMail:reason forItem:  feedItem];
+    [self.mailSender sendCloseMail:reason forItem: feedItem];
 }
 
 - (void)updateBadge {
