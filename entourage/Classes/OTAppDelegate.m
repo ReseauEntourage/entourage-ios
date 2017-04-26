@@ -41,6 +41,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 @interface OTAppDelegate () <UIApplicationDelegate>
 
 @property (nonatomic, strong) OTPushNotificationsService *pnService;
+@property (nonatomic, assign) BOOL launchedFromNotifications;
 
 @end
 
@@ -68,8 +69,12 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     
     if ([NSUserDefaults standardUserDefaults].currentUser) {
         [self.pnService promptUserForPushNotifications];
-        if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
+        if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
+            NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+            if(pnData)
+                [self.pnService handleAppLaunchFromNotificationCenter:pnData];
+        }
         else
             [UIStoryboard showUserProfileDetails];
     }

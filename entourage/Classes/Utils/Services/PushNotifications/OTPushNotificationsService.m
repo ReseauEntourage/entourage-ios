@@ -17,7 +17,6 @@
 #import "UIStoryboard+entourage.h"
 #import "OTFeedItemJoiner.h"
 #import "OTFeedItemFactory.h"
-#import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"
 #import "OTDeepLinkService.h"
 #import "OTEntourageInvitation.h"
@@ -96,7 +95,12 @@
         if (![topController isKindOfClass:[OTCreateMeetingViewController class]])
             [presentedViewController presentViewController:alert animated:YES completion:nil];
     }];
-    
+}
+
+- (void)handleAppLaunchFromNotificationCenter:(NSDictionary *)userInfo {
+    OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
+    if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST])
+        [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
 }
 
 #pragma mark - private methods
@@ -104,8 +108,9 @@
 - (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData
 {
     [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getMessaging] getFeedItemUsersWithStatus:JOIN_PENDING success:^(NSArray *items){
+        NSNumber *userId = [pnData.extra numberForKey:@"user_id"];
         for(OTFeedItemJoiner *item in items) {
-            if([item.displayName isEqualToString:pnData.sender]) {
+            if([item.uID isEqualToNumber:userId] && [item.status isEqualToString:JOIN_PENDING]) {
                 [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
                 OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
             

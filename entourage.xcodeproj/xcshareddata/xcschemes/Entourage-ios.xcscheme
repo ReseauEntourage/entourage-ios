@@ -75,7 +75,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference
-         identifier = "../Paris.gpx"
+         identifier = "../Platinia.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>
