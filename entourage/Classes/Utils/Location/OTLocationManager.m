@@ -104,9 +104,6 @@
 }
 
 - (void)notifyStatus {
-    if(IS_PRO_USER)
-        self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedAlways;
-    else
         self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedWhenInUse || self.status == kCLAuthorizationStatusAuthorizedAlways;
     
     NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:self.isAuthorized] };
