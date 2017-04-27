@@ -10,4 +10,9 @@
 
 @interface OTSolidarityGuideCell : UITableViewCell
 
+@property(nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property(nonatomic, weak) IBOutlet UILabel *typeLabel;
+@property(nonatomic, weak) IBOutlet UILabel *addressLabel;
+@property(nonatomic, weak) IBOutlet UILabel *distanceLabel;
+
 @end

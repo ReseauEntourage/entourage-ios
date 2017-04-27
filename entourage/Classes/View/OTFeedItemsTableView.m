@@ -19,16 +19,7 @@
 #import "OTConsts.h"
 #import "UIImageView+entourage.h"
 #import "UIButton+entourage.h"
-
-#define TAG_ORGANIZATION 1
-#define TAG_TOURTYPE 2
-#define TAG_TIMELOCATION 3
-#define TAG_TOURUSERIMAGE 4
-#define TAG_TOURUSERSCOUNT 5
-#define TAG_STATUSBUTTON 6
-#define TAG_STATUSTEXT 7
-#define TAG_UNREADTEXT 8
-#define TAG_STATUSMARKER 9
+#import "OTNewsFeedCell.h"
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
@@ -168,37 +159,8 @@
     OTFeedItem *item = self.items[indexPath.section];
     NSLog(@">> %ld: %@", (long)indexPath.section, [item isKindOfClass:[OTTour class]] ? ((OTTour*)item).organizationName : ((OTEntourage*)item).title);
     
-    UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
-    UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
-    UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
-    UIButton *userProfileImageButton = [cell viewWithTag:TAG_TOURUSERIMAGE];
-    [userProfileImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
-    UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
-    UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
-    UIButton *statusTextButton = [cell viewWithTag:TAG_STATUSTEXT];
-    UITextField *unreadCountText = [cell viewWithTag:TAG_UNREADTEXT];
-    UIView *statusLineMarker = [cell viewWithTag:TAG_STATUSMARKER];
-    UIImageView *imgAssociation = [cell viewWithTag:99];
-    
-    OTSummaryProviderBehavior *summaryBehavior = [OTSummaryProviderBehavior new];
-    summaryBehavior.lblTimeDistance = timeLocationLabel;
-    summaryBehavior.imgAssociation = imgAssociation;
-    [summaryBehavior configureWith:item];
-    
-    id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
-    typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];
-    organizationLabel.text = [uiDelegate summary];
-
-    [userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
-    noPeopleLabel.text = [NSString stringWithFormat:@"%d", item.noPeople.intValue];
-    [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-    [statusButton setupAsStatusButtonForFeedItem:item];
-    [statusTextButton setupAsStatusTextButtonForFeedItem:item];
-    [statusTextButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-    [statusLineMarker setBackgroundColor:statusTextButton.currentTitleColor];
-    
-    unreadCountText.hidden = item.unreadMessageCount.intValue == 0;
-    unreadCountText.text = item.unreadMessageCount.stringValue;
+    OTNewsFeedCell *newsFeedCell = [OTNewsFeedCell new];
+    [newsFeedCell configureWith:item];
 
     return cell;
 }

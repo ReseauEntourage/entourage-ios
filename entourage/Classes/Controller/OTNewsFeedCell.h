@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTFeedItemsTableView.h"
 
 @interface OTNewsFeedCell : UITableViewCell
 
@@ -20,5 +21,9 @@
 @property(nonatomic, weak) IBOutlet UITextField *unreadCountText;
 @property(nonatomic, weak) IBOutlet UIView *statusLineMarker;
 @property(nonatomic, weak) IBOutlet UIImageView *imgAssociation;
+
+@property(nonatomic, weak) IBOutlet id<OTFeedItemsTableViewDelegate> tableViewDelegate;
+
+-(void)configureWith:(OTFeedItem *)item;
 
 @end

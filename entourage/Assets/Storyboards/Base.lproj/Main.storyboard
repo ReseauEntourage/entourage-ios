@@ -588,6 +588,9 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                                             <integer key="value" value="17"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="doShowProfile" destination="KgN-kr-NT6" eventType="touchUpInside" id="RGK-jO-7M4"/>
+                                                    </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MZv-9L-8Xu">
                                                     <rect key="frame" x="342" y="32" width="20" height="20"/>
@@ -663,11 +666,17 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                                                         <constraint firstAttribute="height" constant="45" id="X0a-2t-KgR"/>
                                                                     </constraints>
                                                                     <state key="normal" image="activeButton"/>
+                                                                    <connections>
+                                                                        <action selector="doJoinRequest" destination="KgN-kr-NT6" eventType="touchUpInside" id="Yrm-F6-KdR"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCp-5f-3CE">
                                                                     <rect key="frame" x="45" y="9" width="31" height="28"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="13"/>
                                                                     <state key="normal" title="Actif"/>
+                                                                    <connections>
+                                                                        <action selector="doJoinRequest" destination="KgN-kr-NT6" eventType="touchUpInside" id="tB5-d6-1Eo"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -802,6 +811,12 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                                 <constraint firstItem="UqF-aU-DDi" firstAttribute="centerY" secondItem="IFF-lI-a6R" secondAttribute="centerY" id="yJb-ls-uQH"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="addressLabel" destination="IFF-lI-a6R" id="Upm-bg-jXj"/>
+                                            <outlet property="distanceLabel" destination="OUP-yB-2hG" id="0W1-OG-0Uc"/>
+                                            <outlet property="titleLabel" destination="BkO-2p-6eq" id="Dj4-M4-wX7"/>
+                                            <outlet property="typeLabel" destination="9IY-Qx-72Q" id="7GI-8h-KNr"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
