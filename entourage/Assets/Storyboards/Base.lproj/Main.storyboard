@@ -241,7 +241,7 @@
         <scene sceneID="Lst-Gh-Xmp">
             <objects>
                 <navigationController storyboardIdentifier="MenuNavController" id="EYq-GT-Cxt" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AaL-F7-3Uz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AaL-F7-3Uz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -257,7 +257,7 @@
         <scene sceneID="Uum-1n-6o1">
             <objects>
                 <navigationController storyboardIdentifier="MainNavController" id="UcL-62-xea" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qfe-Me-3AD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qfe-Me-3AD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -495,45 +495,45 @@
                                             <outlet property="userProfileImageButton" destination="dDA-4F-GY6" id="Rfb-7r-MKl"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OTSolidarityGuideTableViewCellIdentifier" rowHeight="85" id="Rkl-sM-R4N" customClass="OTSolidarityGuideCell">
-                                        <rect key="frame" x="0.0" y="184" width="383" height="85"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OTSolidarityGuideTableViewCellIdentifier" rowHeight="90" id="Rkl-sM-R4N" customClass="OTSolidarityGuideCell">
+                                        <rect key="frame" x="0.0" y="184" width="383" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rkl-sM-R4N" id="PG3-14-YDK">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Organization name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BkO-2p-6eq">
-                                                    <rect key="frame" x="23" y="-2" width="154.5" height="20"/>
+                                                    <rect key="frame" x="23" y="10" width="267" height="21"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IY-Qx-72Q">
-                                                    <rect key="frame" x="23" y="18" width="80.5" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IY-Qx-72Q">
+                                                    <rect key="frame" x="23" y="31" width="80.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFF-lI-a6R">
-                                                    <rect key="frame" x="122" y="18" width="43" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" verticalHuggingPriority="251" text="Street" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFF-lI-a6R">
+                                                    <rect key="frame" x="122" y="31" width="168" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" verticalHuggingPriority="251" text="Time - distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUP-yB-2hG">
-                                                    <rect key="frame" x="23" y="46" width="95" height="16"/>
+                                                    <rect key="frame" x="23" y="59" width="95" height="16"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="13"/>
                                                     <color key="textColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqF-aU-DDi">
-                                                    <rect key="frame" x="109" y="18" width="8" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="•" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqF-aU-DDi">
+                                                    <rect key="frame" x="109" y="31" width="8" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueB-8n-gL2">
-                                                    <rect key="frame" x="295" y="-3" width="65" height="65"/>
+                                                    <rect key="frame" x="295" y="10" width="65" height="65"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="65" id="3gZ-MB-mmD"/>
                                                         <constraint firstAttribute="height" constant="65" id="eD0-b6-nDP"/>
@@ -547,20 +547,21 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="OUP-yB-2hG" firstAttribute="top" secondItem="9IY-Qx-72Q" secondAttribute="bottom" constant="10" id="22b-6e-2XL"/>
                                                 <constraint firstItem="9IY-Qx-72Q" firstAttribute="top" secondItem="BkO-2p-6eq" secondAttribute="bottom" id="2ky-Fi-Twp"/>
-                                                <constraint firstItem="ueB-8n-gL2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IFF-lI-a6R" secondAttribute="trailing" constant="5" id="6hg-5C-KXI"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="OUP-yB-2hG" secondAttribute="bottom" constant="15" id="Ihl-TG-Vfv"/>
+                                                <constraint firstItem="BkO-2p-6eq" firstAttribute="top" secondItem="PG3-14-YDK" secondAttribute="top" constant="10" id="4FS-wp-Xr3"/>
+                                                <constraint firstItem="ueB-8n-gL2" firstAttribute="leading" secondItem="IFF-lI-a6R" secondAttribute="trailing" constant="5" id="6hg-5C-KXI"/>
+                                                <constraint firstItem="IFF-lI-a6R" firstAttribute="top" secondItem="9IY-Qx-72Q" secondAttribute="top" id="HN2-Tv-ugc"/>
+                                                <constraint firstItem="ueB-8n-gL2" firstAttribute="leading" secondItem="BkO-2p-6eq" secondAttribute="trailing" constant="5" id="HvI-Ed-rbK"/>
                                                 <constraint firstItem="OUP-yB-2hG" firstAttribute="leading" secondItem="BkO-2p-6eq" secondAttribute="leading" id="Im3-yA-tx6"/>
+                                                <constraint firstItem="OUP-yB-2hG" firstAttribute="top" secondItem="IFF-lI-a6R" secondAttribute="bottom" constant="10" id="Kj6-dc-ph8"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="OUP-yB-2hG" secondAttribute="bottomMargin" constant="15" id="O10-e9-DrM"/>
                                                 <constraint firstItem="9IY-Qx-72Q" firstAttribute="centerY" secondItem="UqF-aU-DDi" secondAttribute="centerY" id="Q6I-2q-MSs"/>
                                                 <constraint firstItem="BkO-2p-6eq" firstAttribute="leading" secondItem="PG3-14-YDK" secondAttribute="leadingMargin" constant="15" id="Vfw-VH-0NB"/>
                                                 <constraint firstItem="IFF-lI-a6R" firstAttribute="leading" secondItem="UqF-aU-DDi" secondAttribute="trailing" constant="5" id="W1v-yv-kWj"/>
                                                 <constraint firstItem="UqF-aU-DDi" firstAttribute="leading" secondItem="9IY-Qx-72Q" secondAttribute="trailing" constant="5" id="WEI-St-0We"/>
-                                                <constraint firstAttribute="topMargin" secondItem="BkO-2p-6eq" secondAttribute="top" constant="10" id="ZQ0-yb-SvY"/>
                                                 <constraint firstItem="ueB-8n-gL2" firstAttribute="bottom" secondItem="OUP-yB-2hG" secondAttribute="bottom" id="gkt-35-ScY"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ueB-8n-gL2" secondAttribute="trailing" constant="15" id="j7z-6T-Zn6"/>
                                                 <constraint firstItem="9IY-Qx-72Q" firstAttribute="leading" secondItem="BkO-2p-6eq" secondAttribute="leading" id="uJY-Nr-vXh"/>
-                                                <constraint firstItem="UqF-aU-DDi" firstAttribute="centerY" secondItem="IFF-lI-a6R" secondAttribute="centerY" id="yJb-ls-uQH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1411,7 +1412,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="alD-dM-t4k" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EdH-DI-xEI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EdH-DI-xEI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

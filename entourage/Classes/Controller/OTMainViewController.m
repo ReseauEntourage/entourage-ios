@@ -219,6 +219,7 @@
 }
 
 - (void)switchToNewsfeed {
+    [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self.noDataBehavior switchedToNewsfeeds];
     [self.guideInfoBehavior hide];
     self.toursMapDelegate.isActive = YES;
@@ -234,6 +235,7 @@
 }
 
 - (void)switchToGuide {
+    [self.tableView updateItems:self.pois];
     [self.noDataBehavior switchedToGuide];
     self.toursMapDelegate.isActive = NO;
     self.guideMapDelegate.isActive = YES;
@@ -388,6 +390,7 @@
         {
             self.categories = categories;
             self.pois = pois;
+            [self.tableView updateItems:pois];
             [self feedMapViewWithPoiArray:pois];
             self.pois.count == 0 ? [self.noDataBehavior showNoData] : [self.guideInfoBehavior show];
             [SVProgressHUD dismiss];
@@ -536,6 +539,8 @@
 }
 
 - (void)itemsUpdated {
+    if(self.guideMapDelegate.isActive)
+        return;
     self.wasLoadedOnce = YES;
     if (self.newsFeedsSourceBehavior.feedItems.count && self.isFirstLoad) {
         self.isFirstLoad = NO;
