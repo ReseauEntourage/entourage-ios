@@ -154,14 +154,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:OTNewsFeedTableViewCellIdentifier forIndexPath:indexPath];
     
     OTFeedItem *item = self.items[indexPath.section];
     NSLog(@">> %ld: %@", (long)indexPath.section, [item isKindOfClass:[OTTour class]] ? ((OTTour*)item).organizationName : ((OTEntourage*)item).title);
     
-    OTNewsFeedCell *newsFeedCell = [OTNewsFeedCell new];
-    [newsFeedCell configureWith:item];
-
+    [(OTNewsFeedCell *)cell configureWith:item];
     return cell;
 }
 

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "OTFeedItemsTableView.h"
 
+extern NSString* const OTNewsFeedTableViewCellIdentifier;
+
 @interface OTNewsFeedCell : UITableViewCell
 
 @property(nonatomic, weak) IBOutlet UILabel *organizationLabel;

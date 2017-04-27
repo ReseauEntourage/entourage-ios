@@ -11,6 +11,8 @@
 #import "OTFeedItemFactory.h"
 #import "UIButton+entourage.h"
 
+NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIdentifier";
+
 @interface OTNewsFeedCell ()
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
