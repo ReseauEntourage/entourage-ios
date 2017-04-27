@@ -15,13 +15,25 @@
 
 NSString* const OTSolidarityGuideTableViewCellIdentifier = @"OTSolidarityGuideTableViewCellIdentifier";
 
+@interface OTSolidarityGuideCell ()
+
+@property(nonatomic, strong) OTPoi *poiItem;
+
+@end
+
 @implementation OTSolidarityGuideCell
 
 - (void)configureWith:(OTPoi *)poi {
+    self.poiItem = poi;
     self.titleLabel.text = poi.name;
     self.typeLabel.text = [OTSolidarityGuideFilterItem categoryStringForKey:poi.categoryId.intValue];
     self.addressLabel.text = poi.address;
     self.distanceLabel.text = [self getDistance:poi];
+}
+
+-(IBAction)callPhone {
+    NSString *phone = [self.poiItem.phone stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [[UIApplication sharedApplication] openURL: [NSURL URLWithString:[@"tel:" stringByAppendingString:phone]]];
 }
 
 #pragma mark - private methods
