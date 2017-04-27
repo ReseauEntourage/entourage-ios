@@ -215,7 +215,7 @@ Pourquoi rejoignez-vous cet entourage ? Ajoutez un petit mot !";
 "item_option_close" = "Arrêter";
 "item_option_freeze" = "Clôturer";
 "item_option_quit" = "Quitter";
-"entourage_time_data" = "%@ - à %d%@";
+"entourage_time_data" = "%@ - à %@";
 "member_count" = "Membres (%d)";
 "item_closed" = "Clôturé";
 "item_cancel_join" = "Retirer ma demande";

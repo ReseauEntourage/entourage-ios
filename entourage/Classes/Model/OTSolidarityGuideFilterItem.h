@@ -26,5 +26,7 @@ typedef enum {
 @property (nonatomic, strong) NSString* image;
 
 + (OTSolidarityGuideFilterItem *)createFor:(SolidarityGuideFilters)key active:(BOOL)active withImage:(NSString *)image;
++ (OTSolidarityGuideFilterItem *)createFor:(SolidarityGuideFilters)key;
++ (NSString *)categoryStringForKey:(SolidarityGuideFilters)key;
 
 @end

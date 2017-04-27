@@ -15,12 +15,19 @@
     OTSolidarityGuideFilterItem *result = [OTSolidarityGuideFilterItem new];
     result.key = key;
     result.active = active;
-    result.title = [self stringForKey:key];
+    result.title = [self categoryStringForKey:key];
     result.image = image;
     return result;
 }
 
-+ (NSString *)stringForKey:(SolidarityGuideFilters)key {
++ (OTSolidarityGuideFilterItem *)createFor:(SolidarityGuideFilters)key {
+    OTSolidarityGuideFilterItem *result = [OTSolidarityGuideFilterItem new];
+    result.key = key;
+    result.title = [self categoryStringForKey:key];
+    return result;
+}
+
++ (NSString *)categoryStringForKey:(SolidarityGuideFilters)key {
     switch (key) {
         case SolidarityGuideKeyFood:
             return OTLocalizedString(@"guide_display_feed");

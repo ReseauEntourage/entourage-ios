@@ -20,6 +20,8 @@
 #import "UIImageView+entourage.h"
 #import "UIButton+entourage.h"
 #import "OTNewsFeedCell.h"
+#import "OTSolidarityGuideCell.h"
+#import "OTPoi.h"
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
@@ -154,12 +156,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:OTNewsFeedTableViewCellIdentifier forIndexPath:indexPath];
-    
-    OTFeedItem *item = self.items[indexPath.section];
-    NSLog(@">> %ld: %@", (long)indexPath.section, [item isKindOfClass:[OTTour class]] ? ((OTTour*)item).organizationName : ((OTEntourage*)item).title);
-    
-    [(OTNewsFeedCell *)cell configureWith:item];
+    id item = self.items[indexPath.section];
+    NSString *identifier = [self getCellIdentifier:item];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    [self configureCell:cell withItem:item];
     return cell;
 }
 
@@ -230,6 +230,29 @@
         OTFeedItem *selectedFeedItem = self.items[index];
         if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(doJoinRequest:)])
             [self.feedItemsDelegate doJoinRequest:selectedFeedItem];
+    }
+}
+     
+#pragma mark - private methods
+     
+- (BOOL)isGuideItem:(id)item {
+    return [item isKindOfClass:[OTPoi class]];
+}
+     
+- (NSString *)getCellIdentifier:(id)item {
+    if([self isGuideItem:item])
+        return OTSolidarityGuideTableViewCellIdentifier;
+    return OTNewsFeedTableViewCellIdentifier;
+}
+     
+- (void)configureCell:(UITableViewCell *)cell withItem:(id)item {
+    if([self isGuideItem:item]) {
+        OTSolidarityGuideCell *guideCell = (OTSolidarityGuideCell *)cell;
+        [guideCell configureWith:(OTPoi *) item];
+    }
+    else {
+        OTNewsFeedCell *feedCell = (OTNewsFeedCell *)cell;
+        [feedCell configureWith:(OTFeedItem *)item];
     }
 }
 

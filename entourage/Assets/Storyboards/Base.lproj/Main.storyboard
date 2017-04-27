@@ -136,7 +136,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                                <rect key="frame" x="121" y="233" width="133" height="18"/>
+                                <rect key="frame" x="121.5" y="233" width="133" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -495,7 +495,7 @@
                                             <outlet property="userProfileImageButton" destination="dDA-4F-GY6" id="Rfb-7r-MKl"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="85" id="Rkl-sM-R4N" customClass="OTSolidarityGuideCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OTSolidarityGuideTableViewCellIdentifier" rowHeight="85" id="Rkl-sM-R4N" customClass="OTSolidarityGuideCell">
                                         <rect key="frame" x="0.0" y="184" width="383" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rkl-sM-R4N" id="PG3-14-YDK">
@@ -549,6 +549,7 @@
                                             <constraints>
                                                 <constraint firstItem="OUP-yB-2hG" firstAttribute="top" secondItem="9IY-Qx-72Q" secondAttribute="bottom" constant="10" id="22b-6e-2XL"/>
                                                 <constraint firstItem="9IY-Qx-72Q" firstAttribute="top" secondItem="BkO-2p-6eq" secondAttribute="bottom" id="2ky-Fi-Twp"/>
+                                                <constraint firstItem="ueB-8n-gL2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IFF-lI-a6R" secondAttribute="trailing" constant="5" id="6hg-5C-KXI"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="OUP-yB-2hG" secondAttribute="bottom" constant="15" id="Ihl-TG-Vfv"/>
                                                 <constraint firstItem="OUP-yB-2hG" firstAttribute="leading" secondItem="BkO-2p-6eq" secondAttribute="leading" id="Im3-yA-tx6"/>
                                                 <constraint firstItem="9IY-Qx-72Q" firstAttribute="centerY" secondItem="UqF-aU-DDi" secondAttribute="centerY" id="Q6I-2q-MSs"/>
@@ -737,8 +738,8 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fyj-qg-Gvf">
-                                <rect key="frame" x="20" y="227.5" width="335" height="212.5"/>
+                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fyj-qg-Gvf">
+                                <rect key="frame" x="20" y="227.5" width="335" height="0.0"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TgR-1n-ufy">
                                         <rect key="frame" x="8" y="8" width="22" height="22"/>
@@ -779,8 +780,8 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lzp-RD-PWj">
-                                <rect key="frame" x="20" y="191.5" width="335" height="284"/>
+                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lzp-RD-PWj">
+                                <rect key="frame" x="20" y="191.5" width="335" height="0.0"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zxu-GD-nzz">
                                         <rect key="frame" x="8" y="8" width="22" height="22"/>
