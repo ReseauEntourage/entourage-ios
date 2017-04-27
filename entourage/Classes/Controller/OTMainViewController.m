@@ -240,7 +240,7 @@
     self.backToNewsFeedsButton.hidden = NO;
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
     [self.mapDelegateProxy.delegates addObject:self.guideMapDelegate];
-    [self.customSegmentedBehavior updateVisible:NO];
+    [self.customSegmentedBehavior updateVisible:YES];
     [self clearMap];
     [self showToursMap];
     [self reloadPois];

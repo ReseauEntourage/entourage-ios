@@ -20,6 +20,8 @@
 		0188DF621E8E345D008311B6 /* OTSolidarityGuideFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF611E8E345D008311B6 /* OTSolidarityGuideFilterCell.m */; };
 		0188DF681E8E48EA008311B6 /* OTSolidarityGuideFilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF671E8E48EA008311B6 /* OTSolidarityGuideFilterItem.m */; };
 		0188DF6B1E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF6A1E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.m */; };
+		019AE49B1EB0C448007B244C /* OTSolidarityGuideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019AE49A1EB0C448007B244C /* OTSolidarityGuideCell.m */; };
+		019AE49E1EB0DD35007B244C /* OTNewsFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019AE49D1EB0DD35007B244C /* OTNewsFeedCell.m */; };
 		01A6DA8A1E8D089300089DC5 /* SolidarityGuideFilters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */; };
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
 		0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */; };
@@ -390,6 +392,10 @@
 		0188DF671E8E48EA008311B6 /* OTSolidarityGuideFilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFilterItem.m; sourceTree = "<group>"; };
 		0188DF691E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTSolidarityGuideFilteredDataSource.h; path = Behaviors/OTSolidarityGuideFilteredDataSource.h; sourceTree = "<group>"; };
 		0188DF6A1E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTSolidarityGuideFilteredDataSource.m; path = Behaviors/OTSolidarityGuideFilteredDataSource.m; sourceTree = "<group>"; };
+		019AE4991EB0C448007B244C /* OTSolidarityGuideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideCell.h; sourceTree = "<group>"; };
+		019AE49A1EB0C448007B244C /* OTSolidarityGuideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideCell.m; sourceTree = "<group>"; };
+		019AE49C1EB0DD35007B244C /* OTNewsFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTNewsFeedCell.h; sourceTree = "<group>"; };
+		019AE49D1EB0DD35007B244C /* OTNewsFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTNewsFeedCell.m; sourceTree = "<group>"; };
 		01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SolidarityGuideFilters.storyboard; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
@@ -1069,6 +1075,8 @@
 				0188DF611E8E345D008311B6 /* OTSolidarityGuideFilterCell.m */,
 				0188DF4B1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.h */,
 				0188DF4C1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m */,
+				019AE4991EB0C448007B244C /* OTSolidarityGuideCell.h */,
+				019AE49A1EB0C448007B244C /* OTSolidarityGuideCell.m */,
 			);
 			name = SolidarityGuideFilters;
 			sourceTree = "<group>";
@@ -2480,6 +2488,8 @@
 				2EDA5F0B1CB67F4000849172 /* MapDelegate */,
 				455170851CF0BCEA00962369 /* Feeds */,
 				455170861CF0BCFC00962369 /* Guide de solidarite */,
+				019AE49C1EB0DD35007B244C /* OTNewsFeedCell.h */,
+				019AE49D1EB0DD35007B244C /* OTNewsFeedCell.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -2921,6 +2931,7 @@
 				1E5C302D1D6F85F900E10770 /* OTManageInvitationBehavior.m in Sources */,
 				1D55D8D419E84E9B006A2184 /* OTUser.m in Sources */,
 				1E587F2C1E2E15C800FEBB67 /* OTAssociationTableViewCell.m in Sources */,
+				019AE49E1EB0DD35007B244C /* OTNewsFeedCell.m in Sources */,
 				1E488E0A1D4FB67200A2E5B0 /* OTUserNameViewController.m in Sources */,
 				1EEFFE451DCB9D45003A32A1 /* OTTourCreatorBehavior.m in Sources */,
 				1ECDBC691D3D35C300DD87B2 /* OTTourMessaging.m in Sources */,
@@ -3032,6 +3043,7 @@
 				456ABD831CA18DB5004A81D6 /* UIButton+entourage.m in Sources */,
 				A87D6AF619E8740E007ACA29 /* OTCalloutViewController.m in Sources */,
 				1E5C301E1D6F671200E10770 /* OTMembersDataSource.m in Sources */,
+				019AE49B1EB0C448007B244C /* OTSolidarityGuideCell.m in Sources */,
 				2EDA5F071CB50CEE00849172 /* OTFeedItemsTableView.m in Sources */,
 				1EA4F3091DA199A300A3321C /* OTDistributedDelegateBehavior.m in Sources */,
 				1E5EBCEF1D53CECF006695F1 /* OTStatusBehavior.m in Sources */,
