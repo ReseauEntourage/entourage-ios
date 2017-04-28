@@ -164,9 +164,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    id selectedFeedItem = self.items[indexPath.section];
-    if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)]) {
-        [self.feedItemsDelegate showFeedInfo:selectedFeedItem];
+    id selectedItem = self.items[indexPath.section];
+    if([self isGuideItem:selectedItem]) {
+        if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showPoiDetails:)])
+            [self.feedItemsDelegate showPoiDetails:selectedItem];
+    }
+    else {
+        if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)])
+            [self.feedItemsDelegate showFeedInfo:selectedItem];
     }
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }

@@ -470,7 +470,7 @@
         annotation = (OTCustomAnnotation *)view.annotation;
     if (annotation == nil) return;
     [OTLogger logEvent:@"POIView"];
-    [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation];
+    [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation.poi];
 }
 
 - (CLLocationDistance)mapHeight {
@@ -847,6 +847,10 @@
     }
 }
 
+- (void)showPoiDetails:(OTPoi *)poi {
+    [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:poi];
+}
+
 - (void)showUserProfile:(NSNumber*)userId {
     [[OTAuthService new] getDetailsForUser:userId success:^(OTUser *user) {
         [self performSegueWithIdentifier:@"UserProfileSegue" sender:user];
@@ -1034,7 +1038,7 @@
     else if([segue.identifier isEqualToString:@"OTGuideDetailsSegue"]) {
         UINavigationController *navController = (UINavigationController*)destinationViewController;
         OTGuideDetailsViewController *controller = navController.childViewControllers[0];
-        controller.poi = ((OTCustomAnnotation*)sender).poi;
+        controller.poi = (OTPoi *)sender;
         controller.category = [self categoryById:controller.poi.categoryId];
     }
     else if([segue.identifier isEqualToString:@"TourCreatorSegue"]) {

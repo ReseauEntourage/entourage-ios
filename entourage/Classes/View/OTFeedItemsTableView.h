@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "OTPoi.h"
 
 @class OTFeedItem;
 
 @protocol OTFeedItemsTableViewDelegate <NSObject>
 
 - (void)showFeedInfo:(OTFeedItem*)feedItem;
+- (void)showPoiDetails:(OTPoi*)poi;
 - (void)showUserProfile:(NSNumber*)userId;
 - (void)doJoinRequest:(OTFeedItem*)feedItem;
 @optional
