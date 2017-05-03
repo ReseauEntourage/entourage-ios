@@ -82,7 +82,7 @@
                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="highlightedColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wc1-BD-BQp">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wc1-BD-BQp">
                                                     <rect key="frame" x="32" y="10" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="j0D-Hk-KBa"/>
@@ -136,7 +136,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                                <rect key="frame" x="121" y="233" width="133" height="18"/>
+                                <rect key="frame" x="121.5" y="233" width="133" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1584,7 +1584,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="xSV-rR-wZy"/>
+        <segue reference="ZNZ-ec-dR4"/>
         <segue reference="6F4-O6-aKT"/>
-        <segue reference="b42-UE-vP1"/>
     </inferredMetricsTieBreakers>
 </document>

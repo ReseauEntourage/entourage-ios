@@ -206,6 +206,8 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     [menuItems addObject:itemBlog];
     OTMenuItem *itemEntourageActions = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_entourage_actions") iconName:@"goal" url:MENU_BLOG_ENTOURAGE_ACTIONS_URL];
     [menuItems addObject:itemEntourageActions];
+    OTMenuItem *itemAtd = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_atd_partner") iconName:@"atdLogo" url:MENU_ATD_PARTNERSHIP];
+    [menuItems addObject:itemAtd];
     NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
     OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart") iconName: @"chart" url:chartUrl];
     [menuItems addObject:itemChart];

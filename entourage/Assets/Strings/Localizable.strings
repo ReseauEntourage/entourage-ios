@@ -64,6 +64,7 @@
 "menu_disconnect_title" = "Déconnexion";
 "menu_entourage_actions" = "Quelles actions avec Entourage ?";
 "menu_application_usage" = "Utilisation de l'appli";
+"menu_atd_partner" = "Notre parteneriat avec ATD";
 
 // AboutItems
 "about_rateus" = "Notez-nous dans l’App Store";

@@ -70,6 +70,7 @@
 #define MENU_BLOG_URL @"https://blog.entourage.social/2016/10/28/franchir-le-pas/"
 #define MENU_BLOG_ENTOURAGE_ACTIONS_URL @"http://blog.entourage.social/quelles-actions-faire-avec-entourage"
 #define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
+#define MENU_ATD_PARTNERSHIP @"https://www.atd-quartmonde.fr/entourage/"
 
 #define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
 #define PRO_MENU_CHART_URL @"http://www.entourage.social/chartes/pro.html"
