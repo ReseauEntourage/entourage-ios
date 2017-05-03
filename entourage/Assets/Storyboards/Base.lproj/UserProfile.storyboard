@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Th9-id-j6L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Th9-id-j6L">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,10 +21,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--User View Controller-->
+        <!--User View-->
         <scene sceneID="h3T-Mc-iLw">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="imo-7q-aPw" customClass="OTUserViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="imo-7q-aPw" userLabel="User View" customClass="OTUserViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fik-cu-yTg"/>
                         <viewControllerLayoutGuide type="bottom" id="p86-Qk-tHN"/>
@@ -309,6 +309,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="btQ-5Y-yf0"/>
                     <connections>
+                        <outlet property="mailSender" destination="SOE-vz-seE" id="DbS-PU-wg8"/>
                         <outlet property="tableView" destination="8C3-0y-HVH" id="4Rf-Gt-8w0"/>
                         <outlet property="tapToEditBehavior" destination="auQ-gj-IRF" id="L7N-Rw-hjy"/>
                         <segue destination="62l-06-625" kind="presentation" identifier="EditProfileSegue" animates="NO" id="pXR-yC-dMJ"/>
@@ -322,6 +323,11 @@
                         <outlet property="tapView" destination="thV-Zl-uf3" id="aUY-4D-TIg"/>
                     </connections>
                 </customObject>
+                <customObject id="SOE-vz-seE" userLabel="Mail Sender" customClass="OTMailSenderBehavior">
+                    <connections>
+                        <outlet property="owner" destination="imo-7q-aPw" id="EIg-mM-PmM"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="2934" y="-826"/>
         </scene>
@@ -329,7 +335,7 @@
         <scene sceneID="M5j-4s-qmF">
             <objects>
                 <navigationController id="Th9-id-j6L" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fW5-G3-hQ3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fW5-G3-hQ3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -755,7 +761,7 @@
         <scene sceneID="U66-ZG-q0z">
             <objects>
                 <navigationController id="JY3-Ti-PBi" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ivf-eh-h7N">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ivf-eh-h7N">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -918,7 +924,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="62l-06-625" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RBg-dA-hRE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RBg-dA-hRE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1294,7 +1300,7 @@ regard porté sur les plus pauvres.</string>
         <scene sceneID="xFr-L3-WBG">
             <objects>
                 <navigationController id="hxJ-pt-FFZ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Bf-CZ-han">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7Bf-CZ-han">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1316,7 +1322,7 @@ regard porté sur les plus pauvres.</string>
         <image name="user" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7zV-QF-6Lh"/>
+        <segue reference="zJ0-oY-wSk"/>
         <segue reference="3vM-Q3-i8Z"/>
     </inferredMetricsTieBreakers>
 </document>
