@@ -91,7 +91,8 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)sendReportMail {
-    [self.mailSender sendMailWithSubject:@"" andRecipient:REPORT_EMAIL_ADDRESS];
+    NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"report_user_subject"), self.user.displayName];
+    [self.mailSender sendMailWithSubject:subject andRecipient:REPORT_EMAIL_ADDRESS];
 }
 
 - (IBAction)showEditView {
