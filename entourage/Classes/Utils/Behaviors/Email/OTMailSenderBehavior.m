@@ -24,6 +24,13 @@
 
 @implementation OTMailSenderBehavior
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    if(!self.successMessage)
+        self.successMessage = OTLocalizedString(@"mail_sent");
+}
+
 - (BOOL)sendMailWithSubject:(NSString *)subject andRecipient:(NSString *)recipient {
     if([self checkCanSend]) {
         self.mailController = [MFMailComposeViewController new];
@@ -69,7 +76,7 @@
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [self.mailController dismissViewControllerAnimated:YES completion:^() {
         if(result == MFMailComposeResultSent)
-            [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"mail_sent")];
+            [SVProgressHUD showSuccessWithStatus:self.successMessage];
         else if(result != MFMailComposeResultCancelled)
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"mail_send_failure")];
     }];

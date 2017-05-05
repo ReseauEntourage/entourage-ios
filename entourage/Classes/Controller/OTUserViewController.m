@@ -49,6 +49,7 @@ typedef NS_ENUM(NSInteger) {
     [super viewDidLoad];
     
     self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    self.mailSender.successMessage = OTLocalizedString(@"user_reported");
     NSNumber *userId = self.userId;
     if(!userId)
         userId = self.user.sid;

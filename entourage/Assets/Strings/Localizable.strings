@@ -377,3 +377,4 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "propose_structure" = "Proposer une structure";
 
 "report_user_subject" = "Signalement d'un utilisateur - %@";
+"user_reported" = "Utilisateur signalé";
