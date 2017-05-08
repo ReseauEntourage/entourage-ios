@@ -60,6 +60,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 #endif
 
     [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
     [self configureUIAppearance];
     
     self.pnService = [OTPushNotificationsService new];

@@ -13,8 +13,11 @@
 #import "OTEntourage.h"
 #import "OTConsts.h"
 #import "OTTextView.h"
+#import "OTTapViewBehavior.h"
 
 @interface OTFeedItemJoinOptionsViewController () <UITextViewDelegate>
+
+@property (nonatomic, weak) IBOutlet OTTapViewBehavior *tapBehavior;
 
 @end
 
@@ -22,6 +25,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.tapBehavior initialize];
     self.greetingMessage.placeholder = OTLocalizedString(@"request_to_join_popup_placeholder");
     self.greetingMessage.editingPlaceholder = @"";
     self.greetingMessage.placeholderLargeColor = UIColor.grayColor;
@@ -45,6 +50,10 @@
         [SVProgressHUD dismiss];
     }];
     [self close:self];
+}
+
+- (IBAction)popupTapped:(id)sender {
+    [self.greetingMessage resignFirstResponder];
 }
 
 #pragma mark - private methods
