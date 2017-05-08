@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="Et1-lq-jQo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="Et1-lq-jQo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -148,9 +148,16 @@
                     <connections>
                         <outlet property="greetingLabel" destination="TzB-NC-pwc" id="QMO-zt-sDT"/>
                         <outlet property="greetingMessage" destination="9u1-of-5of" id="sAu-4P-X0Y"/>
+                        <outlet property="tapBehavior" destination="crv-ss-J7c" id="rNq-Eb-B6B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jjf-eF-DN4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="crv-ss-J7c" userLabel="Tap View" customClass="OTTapViewBehavior">
+                    <connections>
+                        <action selector="popupTapped:" destination="Et1-lq-jQo" eventType="valueChanged" id="DtG-V4-BrG"/>
+                        <outlet property="tapView" destination="IxU-kb-rBX" id="cgd-Nt-bqN"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="-147" y="1095"/>
         </scene>

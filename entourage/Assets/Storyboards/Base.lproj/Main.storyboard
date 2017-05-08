@@ -33,7 +33,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="Jzq-cb-ZsT">
             <objects>
-                <viewController storyboardIdentifier="SWRevealViewControllerIdentifier" id="bGF-q3-B8f" customClass="OTSWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SWRevealViewControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="bGF-q3-B8f" customClass="OTSWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TA1-Lc-d6N"/>
                         <viewControllerLayoutGuide type="bottom" id="dFF-WN-VDv"/>
@@ -240,8 +240,8 @@
         <!--Navigation Controller-->
         <scene sceneID="Lst-Gh-Xmp">
             <objects>
-                <navigationController storyboardIdentifier="MenuNavController" id="EYq-GT-Cxt" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AaL-F7-3Uz">
+                <navigationController storyboardIdentifier="MenuNavController" automaticallyAdjustsScrollViewInsets="NO" id="EYq-GT-Cxt" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AaL-F7-3Uz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -256,7 +256,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Uum-1n-6o1">
             <objects>
-                <navigationController storyboardIdentifier="MainNavController" id="UcL-62-xea" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavController" automaticallyAdjustsScrollViewInsets="NO" id="UcL-62-xea" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qfe-Me-3AD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -958,7 +958,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
         <!--Create Meeting-->
         <scene sceneID="NWf-ex-TvX">
             <objects>
-                <viewController storyboardIdentifier="OTCreateMeetingViewController" id="b2A-wG-Mz4" userLabel="Create Meeting" customClass="OTCreateMeetingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTCreateMeetingViewController" automaticallyAdjustsScrollViewInsets="NO" id="b2A-wG-Mz4" userLabel="Create Meeting" customClass="OTCreateMeetingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Ke-cm-KmY"/>
                         <viewControllerLayoutGuide type="bottom" id="LVP-zg-cRX"/>
