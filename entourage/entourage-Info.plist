@@ -20,6 +20,8 @@
 	<string>3.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string></string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
