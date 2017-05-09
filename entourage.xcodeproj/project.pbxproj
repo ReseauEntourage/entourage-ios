@@ -2551,6 +2551,7 @@
 			buildConfigurationList = 6B92CAD019A7461C004E8C9B /* Build configuration list for PBXNativeTarget "entourage" */;
 			buildPhases = (
 				C35D400466E62235DE9A01F4 /* [CP] Check Pods Manifest.lock */,
+				D65701111EC1CD2C00B90327 /* Bump version */,
 				6B92CA9A19A7461C004E8C9B /* Sources */,
 				6B92CA9B19A7461C004E8C9B /* Frameworks */,
 				6B92CA9C19A7461C004E8C9B /* Resources */,
@@ -2807,6 +2808,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		D65701111EC1CD2C00B90327 /* Bump version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bump version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ./Scripts/count_commit.sh;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3307,7 +3322,7 @@
 					"$(PROJECT_DIR)/Flurry",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
+				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "1fe4debe-0efa-4c9c-bc7c-b667e665ced4";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
@@ -3352,10 +3367,10 @@
 					"$(PROJECT_DIR)/Flurry",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
+				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6a445d06-ad25-4088-81b6-abf5fcf17370";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
+				PROVISIONING_PROFILE = "af394213-cd6d-4f0a-a085-e2a86feb499a";
+				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3491,7 +3506,7 @@
 					"$(PROJECT_DIR)/Flurry",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
+				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "3a17a4ee-979a-436c-a6c6-b14adc5e3b11";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
