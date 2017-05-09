@@ -98,6 +98,7 @@
 }
 
 #pragma mark - private methods
+
 - (void)updateBadge {
     [self.entouragesDataSource loadData];
 }

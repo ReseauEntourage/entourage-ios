@@ -27,7 +27,6 @@
         self.showDemand = YES;
         self.showContribution = YES;
         self.showTours = YES;
-        self.timeframeInHours = 8 * 24;
     }
     return self;
 }
@@ -73,9 +72,6 @@
     [result setObject:@(pageSize) forKey:@"per"];
     if(self.isUnread)
         [result setObject:@"true" forKey:@"created_by_me"];
-    if(!IS_PRO_USER) {
-        [result setObject:@(self.timeframeInHours) forKey:@"time_range"];
-    }
     NSString *status = [self getStatus];
     if(status)
         [result setObject:[self getStatus] forKey:@"status"];
@@ -99,16 +95,9 @@
         case FeedItemFilterKeyTour:
             self.showTours = filter.active;
             break;
-        case FeedItemFilterKeyTimeframe:
-            self.timeframeInHours = ((OTFeedItemTimeframeFilter *)filter).timeframeInHours;
-            break;
         default:
             break;
     }
-}
-
-- (NSArray *)timeframes {
-    return @[@(24), @(8*24), @(30*24)];
 }
 
 #pragma mark - private methods

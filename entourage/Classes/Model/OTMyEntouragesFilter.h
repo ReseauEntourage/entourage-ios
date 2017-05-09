@@ -16,6 +16,5 @@
 @property (nonatomic) BOOL showDemand;
 @property (nonatomic) BOOL showContribution;
 @property (nonatomic) BOOL showTours;
-@property (nonatomic) int timeframeInHours;
 
 @end
