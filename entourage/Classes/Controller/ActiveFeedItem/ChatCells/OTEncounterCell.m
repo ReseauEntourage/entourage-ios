@@ -11,11 +11,22 @@
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 
+@interface OTEncounterCell ()
+
+@property (nonatomic, strong) OTEncounter *encounter;
+
+@end
+
 @implementation OTEncounterCell
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
-    OTEncounter *encounter = (OTEncounter *)timelinePoint;
-    [self.btnInfo setAttributedTitle:[self getLabelTextForUser:encounter.userName withStreetPersonName:encounter.streetPersonName] forState:UIControlStateNormal];
+    self.encounter =  (OTEncounter *)timelinePoint;
+    [self.btnInfo setAttributedTitle:[self getLabelTextForUser:self.encounter.userName withStreetPersonName:self.encounter.streetPersonName] forState:UIControlStateNormal];
+}
+
+- (void)doEditEncounter {
+    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(self.encounter.latitude, self.encounter.longitude);
+    [self.editEncounter doEdit:self.encounter forTour:self.encounter.tID andLocation: location];
 }
 
 #pragma mark - private methods

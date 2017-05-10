@@ -7,9 +7,13 @@
 //
 
 #import "OTChatCellBase.h"
+#import "OTEditEncounterBehavior.h"
 
 @interface OTEncounterCell : OTChatCellBase
 
 @property (nonatomic, weak) IBOutlet UIButton *btnInfo;
+@property (nonatomic, weak) IBOutlet OTEditEncounterBehavior *editEncounter;
+
+- (IBAction)doEditEncounter;
 
 @end

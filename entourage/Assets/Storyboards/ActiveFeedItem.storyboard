@@ -814,8 +814,7 @@
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
-                                                        <action selector="editEncounter" destination="DlM-nw-VLS" eventType="touchUpInside" id="jtx-cM-ijG"/>
-                                                        <segue destination="TSq-eS-Spi" kind="presentation" identifier="encounterEditorSegue" id="ksk-7D-dHP"/>
+                                                        <action selector="doEditEncounter" destination="G2p-zP-CoV" eventType="touchUpInside" id="QTf-JL-D0u"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -829,6 +828,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="btnInfo" destination="MZn-9Q-IvZ" id="jgS-gh-eRg"/>
+                                            <outlet property="editEncounter" destination="A8o-tS-vva" id="SrZ-sz-S90"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaceholderCell" textLabel="e2p-aY-pYA" rowHeight="30" style="IBUITableViewCellStyleDefault" id="z6P-3h-PpM" customClass="OTPlaceholderCell">
@@ -872,7 +872,7 @@
                     <connections>
                         <outlet property="btnSend" destination="7un-ks-sBK" id="Trg-Xe-Evb"/>
                         <outlet property="dataSource" destination="1dX-UW-k7J" id="wyt-aY-4y7"/>
-                        <outlet property="editEncounterBehavior" destination="A8o-tS-vva" id="cm9-Nr-bNY"/>
+                        <outlet property="editEncounterBehavior" destination="A8o-tS-vva" id="nvC-3h-KV5"/>
                         <outlet property="editEntourageBehavior" destination="fgv-V1-G2W" id="UCh-fX-1Nd"/>
                         <outlet property="inviteBehavior" destination="jhq-UT-Ztj" id="0wU-XK-4VB"/>
                         <outlet property="scrollBottomBehavior" destination="rXS-zd-ZbL" id="Va5-1O-n8B"/>
@@ -891,6 +891,7 @@
                         <segue destination="nZu-ch-wHg" kind="presentation" identifier="UserProfileSegue" id="5BX-au-xTN"/>
                         <segue destination="hfH-zI-I2L" kind="presentation" identifier="EntourageEditorSegue" id="8gM-o4-A6h"/>
                         <segue destination="j0M-T7-4eG" kind="presentation" identifier="SegueChangeState" id="r9m-eb-lob"/>
+                        <segue destination="TSq-eS-Spi" kind="presentation" identifier="OTCreateMeeting" id="FYG-QT-Krz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riw-B5-uYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -945,7 +946,12 @@
                         <outlet property="owner" destination="DlM-nw-VLS" id="0Wl-He-v3h"/>
                     </connections>
                 </customObject>
-                <customObject id="A8o-tS-vva" customClass="OTEditEncounterBehavior"/>
+                <customObject id="A8o-tS-vva" customClass="OTEditEncounterBehavior">
+                    <connections>
+                        <action selector="encounterChanged" destination="DlM-nw-VLS" eventType="valueChanged" id="lh5-mu-1hM"/>
+                        <outlet property="owner" destination="DlM-nw-VLS" id="kNS-qz-945"/>
+                    </connections>
+                </customObject>
                 <customObject id="rXS-zd-ZbL" userLabel="Bottom Scroll" customClass="OTBottomScrollBehavior">
                     <connections>
                         <outlet property="bottomConstraint" destination="ERp-dL-CX2" id="5dK-mk-kBO"/>
@@ -1793,7 +1799,7 @@
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0Fj-Nh-lj4"/>
+        <segue reference="r9m-eb-lob"/>
         <segue reference="nan-zV-dem"/>
         <segue reference="8gM-o4-A6h"/>
         <segue reference="5BX-au-xTN"/>

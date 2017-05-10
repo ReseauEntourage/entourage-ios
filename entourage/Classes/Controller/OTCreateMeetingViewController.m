@@ -52,7 +52,8 @@
     
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
     [self setupUI];
-    [self.disclaimer showDisclaimer];
+    if(!self.encounter)
+        [self.disclaimer showDisclaimer];
 }
 
 #pragma mark - Private methods
@@ -78,6 +79,12 @@
     self.messageTextView.editingPlaceholder = self.messageTextView.placeholder;
 
     [self updateLocationTitle];
+    
+    if(self.encounter) {
+        self.nameTextField.text = self.encounter.streetPersonName;
+        self.messageTextView.textView.text = self.encounter.message;
+        [self.messageTextView updateAfterSpeech];
+    }
 }
 
 - (void)updateLocationTitle {

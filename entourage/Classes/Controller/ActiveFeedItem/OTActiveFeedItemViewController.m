@@ -157,8 +157,8 @@
         [self.dataSource.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.items.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
-- (IBAction)editEncounter {
-    [self performSegueWithIdentifier:@"encounterEditorSegue" sender:self];
+- (IBAction)encounterChanged {
+    [self reloadMessages];
 }
 
 #pragma mark - UITextViewDelegate
