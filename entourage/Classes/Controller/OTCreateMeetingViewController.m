@@ -115,7 +115,6 @@
     [SVProgressHUD show];
     [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId withSuccess:^(OTEncounter *sentEncounter) {
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
-        [self.encounters addObject:encounter];
         [self.delegate encounterSent:encounter];
     }
     failure:^(NSError *error) {

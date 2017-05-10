@@ -20,7 +20,7 @@
 @interface OTCreateMeetingViewController : UIViewController
 
 @property (nonatomic, weak) id<OTCreateMeetingViewControllerDelegate> delegate;
-@property (nonatomic, strong) NSMutableArray *encounters;
+@property (nonatomic, strong) OTEncounter *encounter;
 
 - (void)configureWithTourId:(NSNumber *)currentTourId andLocation:(CLLocationCoordinate2D)location;
 

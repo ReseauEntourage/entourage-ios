@@ -15,7 +15,7 @@
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
     OTEncounter *encounter = (OTEncounter *)timelinePoint;
-    [self.lblInfo setAttributedText:[self getLabelTextForUser:encounter.userName withStreetPersonName:encounter.streetPersonName]];
+    [self.btnInfo setAttributedTitle:[self getLabelTextForUser:encounter.userName withStreetPersonName:encounter.streetPersonName] forState:UIControlStateNormal];
 }
 
 #pragma mark - private methods

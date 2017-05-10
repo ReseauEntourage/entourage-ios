@@ -10,6 +10,6 @@
 
 @interface OTEncounterCell : OTChatCellBase
 
-@property (nonatomic, weak) IBOutlet UILabel *lblInfo;
+@property (nonatomic, weak) IBOutlet UIButton *btnInfo;
 
 @end

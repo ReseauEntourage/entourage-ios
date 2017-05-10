@@ -11,6 +11,8 @@
 		0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */; };
 		0130138E1E7968B300C2504C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */; };
 		013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */; };
+		0135517C1EC30A4C00D99994 /* OTEditEncounterBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 0135517B1EC30A4C00D99994 /* OTEditEncounterBehavior.m */; };
+		0135517E1EC328BF00D99994 /* EncounterEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0135517D1EC328BF00D99994 /* EncounterEditor.storyboard */; };
 		01360A921E83EEFE0009607A /* OTChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A911E83EEFE0009607A /* OTChatDateCell.m */; };
 		017C22D51E893CEF00B36AB5 /* OTMailSenderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C22D41E893CEF00B36AB5 /* OTMailSenderBehavior.m */; };
 		0188DF4D1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF4C1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m */; };
@@ -372,6 +374,9 @@
 		0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUnreadMessagesService.m; path = Services/OTUnreadMessagesService.m; sourceTree = "<group>"; };
 		013013921E7AAA3B00C2504C /* OTConfirmCloseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTConfirmCloseViewController.h; sourceTree = "<group>"; };
 		013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTConfirmCloseViewController.m; sourceTree = "<group>"; };
+		0135517A1EC30A4C00D99994 /* OTEditEncounterBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTEditEncounterBehavior.h; path = FeedItem/Tour/OTEditEncounterBehavior.h; sourceTree = "<group>"; };
+		0135517B1EC30A4C00D99994 /* OTEditEncounterBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTEditEncounterBehavior.m; path = FeedItem/Tour/OTEditEncounterBehavior.m; sourceTree = "<group>"; };
+		0135517D1EC328BF00D99994 /* EncounterEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EncounterEditor.storyboard; sourceTree = "<group>"; };
 		01360A901E83EEFE0009607A /* OTChatDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTChatDateCell.h; path = ActiveFeedItem/ChatCells/OTChatDateCell.h; sourceTree = "<group>"; };
 		01360A911E83EEFE0009607A /* OTChatDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTChatDateCell.m; path = ActiveFeedItem/ChatCells/OTChatDateCell.m; sourceTree = "<group>"; };
 		017C22D31E893CEF00B36AB5 /* OTMailSenderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMailSenderBehavior.h; path = Behaviors/Email/OTMailSenderBehavior.h; sourceTree = "<group>"; };
@@ -1597,6 +1602,8 @@
 				1E08A3321D5E06B900D96B05 /* OTUserProfileBehavior.m */,
 				1E80F8A21D775B830041CC11 /* OTEditEntourageBehavior.h */,
 				1E80F8A31D775B840041CC11 /* OTEditEntourageBehavior.m */,
+				0135517A1EC30A4C00D99994 /* OTEditEncounterBehavior.h */,
+				0135517B1EC30A4C00D99994 /* OTEditEncounterBehavior.m */,
 			);
 			name = FeedItems;
 			sourceTree = "<group>";
@@ -2105,6 +2112,7 @@
 				1E4F561A1DB64BCE00AD0CAC /* LocationSelection.storyboard */,
 				1EFBCFD71E56E3A5008CEF30 /* Tutorial.storyboard */,
 				01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */,
+				0135517D1EC328BF00D99994 /* EncounterEditor.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2649,6 +2657,7 @@
 				1E78B7E11D5134D20008C00E /* SF-UI-Text-LightItalic.otf in Resources */,
 				452FE3E61CAD544F00063334 /* UserProfile.storyboard in Resources */,
 				454E42A21D36B6F60051FDFF /* Rights.storyboard in Resources */,
+				0135517E1EC328BF00D99994 /* EncounterEditor.storyboard in Resources */,
 				1E78B7E41D5134D20008C00E /* SF-UI-Text-Regular.otf in Resources */,
 				1E78B7E51D5134D20008C00E /* SF-UI-Text-RegularItalic.otf in Resources */,
 				452FE3ED1CAD54F800063334 /* About.storyboard in Resources */,
@@ -2965,6 +2974,7 @@
 				1E066CF41D5687ED00E5C8BE /* OTMapViewController.m in Sources */,
 				2EDA5F0E1CB67FFE00849172 /* OTToursMapDelegate.m in Sources */,
 				1E76AE4A1D144D9900C496BA /* OTEntourageStateInfo.m in Sources */,
+				0135517C1EC30A4C00D99994 /* OTEditEncounterBehavior.m in Sources */,
 				0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */,
 				1E37C32B1DC0E67D00477090 /* OTPublicInfoDataSource.m in Sources */,
 				1E22727E1E2E25270053365E /* OTAssociationsService.m in Sources */,

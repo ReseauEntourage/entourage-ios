@@ -80,6 +80,7 @@
 #import "OTAppDelegate.h"
 #import "OTSavedFilter.h"
 #import "OTGuideInfoBehavior.h"
+#import "OTEditEncounterBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -98,6 +99,7 @@
 @property (nonatomic, weak) IBOutlet OTJoinBehavior* joinBehavior;
 @property (nonatomic, weak) IBOutlet OTStatusChangedBehavior* statusChangedBehavior;
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior* editEntourgeBehavior;
+@property (nonatomic, weak) IBOutlet OTEditEncounterBehavior* editEncounterBehavior;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior* newsFeedsSourceBehavior;
 @property (nonatomic, weak) IBOutlet OTTourCreatorBehavior *tourCreatorBehavior;
 @property (nonatomic, strong) MKMapView *mapView;
@@ -128,6 +130,7 @@
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior *mailSender;
 @property (nonatomic, weak) IBOutlet OTCustomSegmentedBehavior *customSegmentedBehavior;
 @property (nonatomic, weak) IBOutlet OTGuideInfoBehavior *guideInfoBehavior;
+
 
 @end
 
@@ -700,14 +703,6 @@
     [self.popover dismissPopoverAnimated:YES];
 }
 
-#pragma mark - OTCreateMeetingViewControllerDelegate
-
-- (void)encounterSent:(OTEncounter *)encounter {
-    [self dismissViewControllerAnimated:YES completion:^{
-        [self feedMapViewWithEncounters];
-    }];
-}
-
 #pragma mark - OTOptionsDelegate
 
 - (void)createTour {
@@ -724,7 +719,7 @@
 - (void)createEncounter {
     [self dismissViewControllerAnimated:NO completion:^{
         [self switchToNewsfeed];
-        [self performSegueWithIdentifier:@"OTCreateMeeting" sender:nil];
+        [self.editEncounterBehavior doEdit:nil forTour:self.tourCreatorBehavior.tour.uid andLocation:self.encounterLocation];
     }];
 }
 
@@ -986,6 +981,10 @@
         return;
     if([self.editEntourgeBehavior prepareSegue:segue])
         return;
+    if([self.editEncounterBehavior prepareSegue:segue]) {
+        encounterFromTap = NO;
+        return;
+    }
     if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
     UIViewController *destinationViewController = segue.destinationViewController;
@@ -993,14 +992,6 @@
         UINavigationController *navController = (UINavigationController*)destinationViewController;
         OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
         controller.user = (OTUser*)sender;
-    }
-    else if([segue.identifier isEqualToString:@"OTCreateMeeting"]) {
-        UINavigationController *navController = (UINavigationController*)destinationViewController;
-        OTCreateMeetingViewController *controller = (OTCreateMeetingViewController*)navController.topViewController;
-        controller.delegate = self;
-        [controller configureWithTourId:self.tourCreatorBehavior.tour.uid andLocation:self.encounterLocation];
-        controller.encounters = self.encounters;
-        encounterFromTap = NO;
     }
     else if([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
         OTConfirmationViewController *controller = (OTConfirmationViewController *)destinationViewController;
@@ -1088,6 +1079,11 @@
 - (void)updateBadge {
     self.navigationItem.rightBarButtonItem.badgeValue = [OTUnreadMessagesService sharedInstance].totalCount.stringValue;
     [self forceGetNewData];
+}
+
+- (IBAction)encounterChanged {
+    [self.encounters addObject:self.editEncounterBehavior.encounter];
+    [self feedMapViewWithEncounters];
 }
 
 @end

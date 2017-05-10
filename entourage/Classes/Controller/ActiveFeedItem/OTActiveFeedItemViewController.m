@@ -30,6 +30,7 @@
 #import "OTShareFeedItemBehavior.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
+#import "OTEditEncounterBehavior.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -40,6 +41,7 @@
 @property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior *editEntourageBehavior;
+@property (nonatomic, weak) IBOutlet OTEditEncounterBehavior *editEncounterBehavior;
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
@@ -99,6 +101,8 @@
         return;
     if([self.editEntourageBehavior prepareSegue:segue])
         return;
+    if([self.editEncounterBehavior prepareSegue:segue])
+        return;
     if([segue.identifier isEqualToString:@"SegueMap"]) {
         OTMapViewController *controller = (OTMapViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
@@ -151,6 +155,10 @@
 - (IBAction)scrollToBottomWhileEditing {
     if(self.dataSource.items.count > 0)
         [self.dataSource.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.items.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (IBAction)editEncounter {
+    [self performSegueWithIdentifier:@"encounterEditorSegue" sender:self];
 }
 
 #pragma mark - UITextViewDelegate
