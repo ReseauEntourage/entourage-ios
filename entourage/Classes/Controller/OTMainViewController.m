@@ -544,6 +544,7 @@
 - (void)itemsUpdated {
     if(self.guideMapDelegate.isActive)
         return;
+    [self.tableView doneLoadingMoreItems];
     self.wasLoadedOnce = YES;
     if (self.newsFeedsSourceBehavior.feedItems.count && self.isFirstLoad) {
         self.isFirstLoad = NO;
@@ -562,6 +563,7 @@
 }
 
 - (void)errorLoadingFeedItems:(NSError *)error {
+    [self.tableView doneLoadingMoreItems];
     if(error.code == NSURLErrorNotConnectedToInternet)
         [self.tableView setNoConnection];
     else

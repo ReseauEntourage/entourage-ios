@@ -41,6 +41,7 @@
 
 @property (nonatomic, strong) UILabel *lblEmptyTableReason;
 @property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong) UIView *emptyFooterView;
 
 @end
 
@@ -72,10 +73,8 @@
 }
 
 - (void)configureWithMapView:(MKMapView *)mapView {
-    
-    self.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, -TABLEVIEW_FOOTER_HEIGHT, 0.0f);
-    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
-    self.tableFooterView = dummyView;
+    self.emptyFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
+    self.tableFooterView = self.emptyFooterView;
     
     //show map on table header
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, MAPVIEW_HEIGHT)];
@@ -185,6 +184,7 @@
     float h = size.height;
     float reload_distance = LOAD_MORE_DRAG_OFFSET;
     if(y > h + reload_distance) {
+        [self startedLoadingMoreItems];
         dispatch_async(dispatch_get_main_queue(), ^() {
             if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)])
                 [self.feedItemsDelegate loadMoreData];
@@ -236,6 +236,16 @@
         if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(doJoinRequest:)])
             [self.feedItemsDelegate doJoinRequest:selectedFeedItem];
     }
+}
+
+#pragma mark - load more methods
+
+- (void)startedLoadingMoreItems {
+    self.tableFooterView = self.loadingView;
+}
+
+- (void)doneLoadingMoreItems {
+    self.tableFooterView = self.emptyFooterView;
 }
      
 #pragma mark - private methods

@@ -27,10 +27,13 @@
 
 @property (nonatomic, weak) id<OTFeedItemsTableViewDelegate> feedItemsDelegate;
 
+@property (nonatomic, strong) IBOutlet UIView *loadingView;
+
 - (void)configureWithMapView:(MKMapView *)mapView;
 - (void)updateItems:(NSArray *)items;
 - (void)loadBegun;
 - (void)setNoConnection;
 - (void)setNoFeeds;
+- (void)doneLoadingMoreItems;
 
 @end
