@@ -188,6 +188,8 @@ Proposez une structure";
 "user_join_reject" = " a reçu une notification du rejet de sa demande.";
 "meetingCreated" = "Rencontre créée";
 "meetingNotCreated" = "Echec de la création de rencontre";
+"meetingUpdated" = "Rencontre modifiée";
+"meetingNotUpdated" = "La rencontre n’a pu être modifiée";
 "contacts" = "Contacts";
 "mobilePhone" = "Numero Portable";
 

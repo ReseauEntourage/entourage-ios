@@ -54,6 +54,31 @@ NSString *const kEncounter = @"encounter";
      }];
 }
 
+- (void)updateEncounter:(OTEncounter *)encounter
+            withSuccess:(void (^)(OTEncounter *))success
+                failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat:API_URL_ENCOUNTER_UPDATE, encounter.sid, TOKEN];
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    parameters[kEncounter] = [encounter dictionaryForWebService];
+    [[OTHTTPRequestManager sharedInstance]
+     PATCHWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             OTEncounter *updatedEncounter = [self encounterFromDictionary:responseObject];
+             success(updatedEncounter);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+             failure(error);
+     }];
+
+}
+
 - (void)sendEntourage:(OTEntourage *)entourage
           withSuccess:(void (^)(OTEntourage *updatedEntourage))success
               failure:(void (^)(NSError *error))failure
@@ -122,7 +147,6 @@ NSString *const kEncounter = @"encounter";
 - (NSMutableArray *)encountersFromDictionary:(NSDictionary *)data
 {
     NSMutableArray *encounters = [NSMutableArray array];
-    
     NSArray *jsonEncounters = data[kEncounters];
     
     if ([jsonEncounters isKindOfClass:[NSArray class]])

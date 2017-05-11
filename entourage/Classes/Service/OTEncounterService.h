@@ -17,6 +17,9 @@
 
 - (void)sendEncounter:(OTEncounter *)encounter withTourId:(NSNumber *)tourId withSuccess:(void (^)(OTEncounter *sentEncounter))success failure:(void (^)(NSError *error))failure;
 
+- (void)updateEncounter:(OTEncounter *)encounter withSuccess:(void (^)(OTEncounter *updatedEncounter))success failure:(void (^)(NSError *error))failure;
+
+
 - (void)sendEntourage:(OTEntourage *)entourage withSuccess:(void (^)(OTEntourage *updatedEntourage))success failure:(void (^)(NSError *error))failure;
 
 - (void)updateEntourage:(OTEntourage *)entourage withSuccess:(void (^)(OTEntourage *updatedEntourage))success failure:(void (^)(NSError *error))failure;

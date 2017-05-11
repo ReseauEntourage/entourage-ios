@@ -112,22 +112,10 @@
         [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_enter_name_of_met_person") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
         return;
     }
-    sender.enabled = NO;
-    __block OTEncounter *encounter = [OTEncounter new];
-    encounter.date = [NSDate date];
-    encounter.message = self.messageTextView.textView.text;
-    encounter.streetPersonName =  self.nameTextField.text;
-    encounter.latitude = self.location.latitude;
-    encounter.longitude = self.location.longitude;
-    [SVProgressHUD show];
-    [[OTEncounterService new] sendEncounter:encounter withTourId:self.currentTourId withSuccess:^(OTEncounter *sentEncounter) {
-        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
-        [self.delegate encounterSent:encounter];
-    }
-    failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
-        sender.enabled = YES;
-    }];
+    if(!self.encounter)
+        [self createEncounter:sender];
+    else
+        [self updateEncounter];
 }
 
 #pragma mark - LocationSelectionDelegate
@@ -151,6 +139,45 @@
         CLLocation *current = [[CLLocation alloc] initWithLatitude:self.location.latitude longitude:self.location.longitude];
         controller.selectedLocation = current;
     }
+}
+
+#pragma mark - private methods
+- (void)createEncounter:(UIBarButtonItem*)sender  {
+    sender.enabled = NO;
+    __block OTEncounter *encounter = [OTEncounter new];
+    encounter.date = [NSDate date];
+    encounter.message = self.messageTextView.textView.text;
+    encounter.streetPersonName =  self.nameTextField.text;
+    encounter.latitude = self.location.latitude;
+    encounter.longitude = self.location.longitude;
+    [SVProgressHUD show];
+    [[OTEncounterService new] sendEncounter:encounter
+                                 withTourId:self.currentTourId
+                                withSuccess:^(OTEncounter   *sentEncounter) {
+                                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
+                                    [self.delegate encounterSent:encounter];
+                                }
+                                    failure:^(NSError *error) {
+                                        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
+                                        sender.enabled = YES;
+                                    }];
+
+}
+
+- (void)updateEncounter {
+    self.encounter.streetPersonName = self.nameTextField.text;
+    self.encounter.message = self.messageTextView.textView.text;
+    self.encounter.latitude = self.location.latitude;
+    self.encounter.longitude = self.location.longitude;
+    [SVProgressHUD show];
+    [[OTEncounterService new] updateEncounter:self.encounter
+                                  withSuccess:^(OTEncounter *updatedEncounter) {
+                                      [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingUpdated")];
+                                      [self.delegate encounterSent:self.encounter];
+                                  }
+                                      failure:^(NSError *error) {
+                                          [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotUpdated")];
+                                      }];
 }
 
 @end

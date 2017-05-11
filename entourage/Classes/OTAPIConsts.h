@@ -36,6 +36,7 @@
 #define API_URL_TOUR_ENCOUNTERS @"%@/%@/encounters.json?token=%@"
 #define API_URL_TOURS_USER @"%@/%@/%@.json?token=%@"
 #define API_URL_TOUR_SEND_ENCOUNTER @"%@/%@/%@.json?token=%@"
+#define API_URL_ENCOUNTER_UPDATE @"encounters/%@?token=%@"
 
 
 //Associations
