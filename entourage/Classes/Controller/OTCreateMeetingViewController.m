@@ -120,7 +120,7 @@
     if(!self.encounter)
         [self createEncounter:sender];
     else
-        [self updateEncounter];
+        [self updateEncounter:sender];
 }
 
 #pragma mark - LocationSelectionDelegate
@@ -158,7 +158,7 @@
     [SVProgressHUD show];
     [[OTEncounterService new] sendEncounter:encounter
                                  withTourId:self.currentTourId
-                                withSuccess:^(OTEncounter   *sentEncounter) {
+                                withSuccess:^(OTEncounter *sentEncounter) {
                                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
                                     [self.delegate encounterSent:encounter];
                                 }
@@ -168,7 +168,8 @@
                                     }];
 }
 
-- (void)updateEncounter {
+- (void)updateEncounter:(UIBarButtonItem*)sender {
+    sender.enabled = NO;
     self.encounter.streetPersonName = self.nameTextField.text;
     self.encounter.message = self.messageTextView.textView.text;
     self.encounter.latitude = self.location.latitude;
@@ -181,6 +182,7 @@
                                   }
                                       failure:^(NSError *error) {
                                           [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotUpdated")];
+                                          sender.enabled = YES;
                                       }];
 }
 
