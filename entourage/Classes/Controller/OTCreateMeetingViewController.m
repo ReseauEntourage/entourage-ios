@@ -56,6 +56,16 @@
         [self.disclaimer showDisclaimer];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if(self.encounter) {
+        self.nameTextField.text = self.encounter.streetPersonName;
+        self.messageTextView.textView.text = self.encounter.message;
+        [self.messageTextView updateAfterSpeech];
+    }
+
+}
+
 #pragma mark - Private methods
 
 - (void)setupUI {
@@ -80,11 +90,6 @@
 
     [self updateLocationTitle];
     
-    if(self.encounter) {
-        self.nameTextField.text = self.encounter.streetPersonName;
-        self.messageTextView.textView.text = self.encounter.message;
-        [self.messageTextView updateAfterSpeech];
-    }
 }
 
 - (void)updateLocationTitle {
@@ -161,7 +166,6 @@
                                         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
                                         sender.enabled = YES;
                                     }];
-
 }
 
 - (void)updateEncounter {
