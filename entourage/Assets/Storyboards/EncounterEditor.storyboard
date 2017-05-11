@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PBj-UU-2Rc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PBj-UU-2Rc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -51,7 +51,7 @@
                                                     <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="FpG-3I-YWp" kind="push" id="dpI-k3-7U2"/>
+                                                    <segue destination="FpG-3I-YWp" kind="show" id="dpI-k3-7U2"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -155,7 +155,7 @@
                         <outlet property="locationButton" destination="QRS-rw-QeT" id="uAg-cQ-Mfz"/>
                         <outlet property="messageTextView" destination="41k-PI-3Dz" id="odL-bt-BYo"/>
                         <outlet property="nameTextField" destination="i1A-KD-mHy" id="LOp-xf-pvj"/>
-                        <segue destination="ZG9-uu-R4U" kind="modal" identifier="DisclaimerSegue" id="ULe-4a-8KK"/>
+                        <segue destination="ZG9-uu-R4U" kind="presentation" identifier="DisclaimerSegue" id="ULe-4a-8KK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Tn-6a-umW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -180,7 +180,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTT-Ca-6g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2250" y="1502"/>
+            <point key="canvasLocation" x="1170" y="1573"/>
         </scene>
         <!--Disclaimer-->
         <scene sceneID="lEh-TN-9Xq">
