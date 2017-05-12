@@ -48,7 +48,7 @@
     
     self.locationManager.pausesLocationUpdatesAutomatically = NO;
     self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     self.locationManager.activityType = CLActivityTypeFitness;
     self.locationManager.distanceFilter = 10; // meters
 
