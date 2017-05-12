@@ -8,7 +8,7 @@
 
 #import "UIViewController+menu.h"
 #import "UIBarButtonItem+Badge.h"
-#import "OTBadgeNumberService.h"
+#import "OTUnreadMessagesService.h"
 
 // Controller
 #import "SWRevealViewController.h"
@@ -69,7 +69,7 @@
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *chatButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     [self.navigationItem setRightBarButtonItem:chatButton];
-    self.navigationItem.rightBarButtonItem.badgeValue = [OTBadgeNumberService sharedInstance].badgeCount.stringValue;
+    self.navigationItem.rightBarButtonItem.badgeValue = [OTUnreadMessagesService sharedInstance].totalCount.stringValue;
     return chatButton;
 }
 

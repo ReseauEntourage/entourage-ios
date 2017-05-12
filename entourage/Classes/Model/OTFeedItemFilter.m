@@ -29,13 +29,9 @@
 
 + (NSString *)stringForKey:(FeedItemFilterKey)key {
     switch (key) {
-        case FeedItemFilterKeyActive:
-            return OTLocalizedString(@"join_active");
-        case FeedItemFilterKeyInvitation:
-            return OTLocalizedString(@"invitations");
-        case FeedItemFilterKeyOrganiser:
-            return OTLocalizedString(@"created_by_me_unique");
-        case FeedItemFilterKeyClosed:
+        case FeedItemFilterKeyUnread:
+            return OTLocalizedString(@"unique_unread");
+        case FeedItemFilterKeyIncludingClosed:
             return OTLocalizedString(@"closed");
         case FeedItemFilterKeyDemand:
             return OTLocalizedString(@"demande");
@@ -43,8 +39,6 @@
             return OTLocalizedString(@"contribution");
         case FeedItemFilterKeyTour:
             return OTLocalizedString(@"filter_entourage_show_tours");
-        case FeedItemFilterKeyOnlyMyEntourages:
-            return OTLocalizedString(@"filter_entourage_only_my_entourages");
         case FeedItemFilterKeyMedical:
             return OTLocalizedString(@"filter_maraude_medical");
         case FeedItemFilterKeySocial:

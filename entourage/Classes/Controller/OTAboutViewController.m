@@ -79,6 +79,24 @@
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OTAboutItem *item = [self aboutItemAtIndexPath:indexPath];
+    NSString *message = [NSString new];
+    switch (item.type) {
+        case Rate:
+            message = @"RatingClick";
+            break;
+        case Facebook:
+            message = @"FacebookPageClick";
+            break;
+        case GeneralConditions:
+            message = @"CGUClick";
+            break;
+        case Website:
+            message = @"WebsiteVisitClick";
+            break;
+        default:
+            break;
+    }
+    [OTLogger logEvent:message];
     if (indexPath.row == [self.aboutItems count]-1) {
         //Email
         if (![MFMailComposeViewController canSendMail]) {
@@ -119,18 +137,22 @@
     
     OTAboutItem *itemRate = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_rateus")
                                                            url:ABOUT_RATE_US_URL];
+    itemRate.type = Rate;
     [aboutItems addObject:itemRate];
     
     OTAboutItem *itemFacebook = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_facebook")
                                                                url:ABOUT_FACEBOOK_URL];
+    itemFacebook.type = Facebook;
     [aboutItems addObject:itemFacebook];
     
     OTAboutItem *itemCGU = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_cgu")
                                                           url:ABOUT_CGU_URL];
+    itemCGU.type = GeneralConditions;
     [aboutItems addObject:itemCGU];
     
     OTAboutItem *itemWebsite = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_website")
                                                               url:ABOUT_WEBSITE_URL];
+    itemWebsite.type = Website;
     [aboutItems addObject:itemWebsite];
     
     OTAboutItem *itemEmail = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_email")

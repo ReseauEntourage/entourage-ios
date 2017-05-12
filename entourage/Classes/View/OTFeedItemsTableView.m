@@ -18,14 +18,10 @@
 #import "OTSummaryProviderBehavior.h"
 #import "OTConsts.h"
 #import "UIImageView+entourage.h"
-
-#define TAG_ORGANIZATION 1
-#define TAG_TOURTYPE 2
-#define TAG_TIMELOCATION 3
-#define TAG_TOURUSERIMAGE 4
-#define TAG_TOURUSERSCOUNT 5
-#define TAG_STATUSBUTTON 6
-#define TAG_STATUSTEXT 7
+#import "UIButton+entourage.h"
+#import "OTNewsFeedCell.h"
+#import "OTSolidarityGuideCell.h"
+#import "OTPoi.h"
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
@@ -160,43 +156,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AllToursCell" forIndexPath:indexPath];
-    
-    OTFeedItem *item = self.items[indexPath.section];
-    NSLog(@">> %ld: %@", (long)indexPath.section, [item isKindOfClass:[OTTour class]] ? ((OTTour*)item).organizationName : ((OTEntourage*)item).title);
-    
-    UILabel *organizationLabel = [cell viewWithTag:TAG_ORGANIZATION];
-    UILabel *typeByNameLabel = [cell viewWithTag:TAG_TOURTYPE];
-    UILabel *timeLocationLabel = [cell viewWithTag:TAG_TIMELOCATION];
-    UIButton *userProfileImageButton = [cell viewWithTag:TAG_TOURUSERIMAGE];
-    [userProfileImageButton addTarget:self action:@selector(doShowProfile:) forControlEvents:UIControlEventTouchUpInside];
-    UILabel *noPeopleLabel = [cell viewWithTag:TAG_TOURUSERSCOUNT];
-    UIButton *statusButton = [cell viewWithTag:TAG_STATUSBUTTON];
-    UILabel *statusLabel = [cell viewWithTag:TAG_STATUSTEXT];
-    UIImageView *imgAssociation = [cell viewWithTag:99];
-    
-    OTSummaryProviderBehavior *summaryBehavior = [OTSummaryProviderBehavior new];
-    summaryBehavior.lblTimeDistance = timeLocationLabel;
-    summaryBehavior.imgAssociation = imgAssociation;
-    [summaryBehavior configureWith:item];
-    
-    id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
-    typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];
-    organizationLabel.text = [uiDelegate summary];
-
-    [userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
-    noPeopleLabel.text = [NSString stringWithFormat:@"%d", item.noPeople.intValue];
-    [statusButton addTarget:self action:@selector(doJoinRequest:) forControlEvents:UIControlEventTouchUpInside];
-    [statusButton setupAsStatusButtonForFeedItem:item];
-    [statusLabel setupAsStatusButtonForFeedItem:item];
-
+    id item = self.items[indexPath.section];
+    NSString *identifier = [self getCellIdentifier:item];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    [self configureCell:cell withItem:item];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    id selectedFeedItem = self.items[indexPath.section];
-    if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)]) {
-        [self.feedItemsDelegate showFeedInfo:selectedFeedItem];
+    id selectedItem = self.items[indexPath.section];
+    if([self isGuideItem:selectedItem]) {
+        if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showPoiDetails:)])
+            [self.feedItemsDelegate showPoiDetails:selectedItem];
+    }
+    else {
+        if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)])
+            [self.feedItemsDelegate showFeedInfo:selectedItem];
     }
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }
@@ -242,7 +217,7 @@
 #pragma mark - Tour Cell Handling
 
 - (void)doShowProfile:(UIButton*)userButton {
-    [Flurry logEvent:@"UserProfileClick"];
+    [OTLogger logEvent:@"UserProfileClick"];
     UITableViewCell *cell = (UITableViewCell*)userButton.superview.superview;
     NSInteger index = [self indexPathForCell:cell].section;
     if(self.items.count > index) {
@@ -253,12 +228,36 @@
 }
 
 - (void)doJoinRequest:(UIButton*)statusButton {
-    UITableViewCell *cell = (UITableViewCell*)statusButton.superview.superview;
-    NSInteger index = [self indexPathForCell:cell].section;
+    UITableViewCell *cell = (UITableViewCell*)statusButton.superview.superview.superview.superview;
+    NSIndexPath *path = [self indexPathForCell:cell];
+    NSInteger index = path.section;
     if(self.items.count > index) {
         OTFeedItem *selectedFeedItem = self.items[index];
         if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(doJoinRequest:)])
             [self.feedItemsDelegate doJoinRequest:selectedFeedItem];
+    }
+}
+     
+#pragma mark - private methods
+     
+- (BOOL)isGuideItem:(id)item {
+    return [item isKindOfClass:[OTPoi class]];
+}
+     
+- (NSString *)getCellIdentifier:(id)item {
+    if([self isGuideItem:item])
+        return OTSolidarityGuideTableViewCellIdentifier;
+    return OTNewsFeedTableViewCellIdentifier;
+}
+     
+- (void)configureCell:(UITableViewCell *)cell withItem:(id)item {
+    if([self isGuideItem:item]) {
+        OTSolidarityGuideCell *guideCell = (OTSolidarityGuideCell *)cell;
+        [guideCell configureWith:(OTPoi *) item];
+    }
+    else {
+        OTNewsFeedCell *feedCell = (OTNewsFeedCell *)cell;
+        [feedCell configureWith:(OTFeedItem *)item];
     }
 }
 

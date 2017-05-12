@@ -18,6 +18,6 @@ extern NSString *const kAPIPoiRoute;
 
 - (void)allPoisWithSuccess:(void (^)(NSArray *categories, NSArray *pois))success failure:(void (^)(NSError *error))failure;
 
-- (void)poisAroundCoordinate:(CLLocationCoordinate2D)coordinate2d distance:(CLLocationDistance)distance success:(void (^)(NSArray *categories, NSArray *pois))success failure:(void (^)(NSError *error))failure;
+- (void)poisWithParameters:(NSDictionary *)parameters success:(void (^)(NSArray *categories, NSArray *pois))success failure:(void (^)(NSError *error))failure;
 
 @end

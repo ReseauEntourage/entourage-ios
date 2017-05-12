@@ -32,6 +32,7 @@
 
 - (void)togglePOI;
 - (void)dismissOptions;
+- (void)proposeStructure;
 
 @end
 
@@ -67,5 +68,6 @@
 - (IBAction)doCreateDemande:(id)sender;
 - (IBAction)doCreateContribution:(id)sender;
 - (IBAction)doTogglePOI:(id)sender;
+- (IBAction)proposeStructure:(id)sender;
 
 @end

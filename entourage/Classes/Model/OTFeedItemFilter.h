@@ -9,14 +9,11 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    FeedItemFilterKeyActive,
-    FeedItemFilterKeyInvitation,
-    FeedItemFilterKeyOrganiser,
-    FeedItemFilterKeyClosed,
+    FeedItemFilterKeyUnread,
+    FeedItemFilterKeyIncludingClosed,
     FeedItemFilterKeyDemand,
     FeedItemFilterKeyContribution,
     FeedItemFilterKeyTour,
-    FeedItemFilterKeyOnlyMyEntourages,
     FeedItemFilterKeyTimeframe,
     FeedItemFilterKeyMedical,
     FeedItemFilterKeySocial,

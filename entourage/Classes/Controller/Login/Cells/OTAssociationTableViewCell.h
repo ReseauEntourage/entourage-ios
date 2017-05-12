@@ -11,7 +11,8 @@
 
 @interface OTAssociationTableViewCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UIImageView *imgLogo;
+@property (nonatomic, weak) IBOutlet UIViewController *owner;
+@property (nonatomic, weak) IBOutlet UIButton *btnLogo;
 @property (nonatomic, weak) IBOutlet UILabel *lblName;
 @property (nonatomic, weak) IBOutlet UIImageView *imgSelected;
 

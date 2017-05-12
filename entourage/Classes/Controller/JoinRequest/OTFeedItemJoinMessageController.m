@@ -27,7 +27,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setupUI];
 }
 
@@ -54,7 +53,7 @@
 }
 
 - (IBAction)doSendRequest {
-    [Flurry logEvent:@"SubmitJoinMessage"];
+    [OTLogger logEvent:@"SubmitJoinMessage"];
     NSString *message = self.greetingMessage.text;
     if (!message)
         message = @"";
@@ -70,7 +69,7 @@
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {
-    [Flurry logEvent:@"StartJoinMessage"];
+    [OTLogger logEvent:@"StartJoinMessage"];
 }
 
 @end

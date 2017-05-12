@@ -13,6 +13,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "NSUserDefaults+OT.h"
 #import "NSAttributedString+OTBuilder.h"
+#import "OTLogger.h"
 
 #define SHOW_LOGIN_SEGUE @"WelcomeLoginSegue"
 #define CONTINUE_ONBOARDING_SEGUE @"SegueOnboarding"
@@ -52,7 +53,7 @@
 }
 
 - (IBAction)continueOnboarding:(id)sender {
-    [Flurry logEvent:@"WelcomeScreenContinue"];
+    [OTLogger logEvent:@"WelcomeScreenContinue"];
     [self performSegueWithIdentifier:CONTINUE_ONBOARDING_SEGUE sender:self];
 }
 

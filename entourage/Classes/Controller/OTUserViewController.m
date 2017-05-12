@@ -61,8 +61,11 @@ typedef NS_ENUM(NSInteger) {
     
     if (self.user != nil) {
         [self configureTableSource];
-        if(self.user.sid.intValue == self.currentUser.sid.intValue)
+        if(self.user.sid.intValue == self.currentUser.sid.intValue) {
+            self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+            self.user = self.currentUser;
             [self showEditButton];
+        }
         [self.tableView reloadData];
     }
     else
@@ -77,6 +80,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (IBAction)showEditView {
+    [OTLogger logEvent:@"EditPhoto"];
     [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
 }
 
@@ -290,8 +294,8 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationLogoUrl:(NSString *)imageURL {
-    UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE];
-    titleLabel.text = title;
+    UIButton *titleBtn = [cell viewWithTag:ASSOCIATION_TITLE];
+    [titleBtn setTitle:title forState:UIControlStateNormal];
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE];
     [associationImageButton setImage:nil forState:UIControlStateNormal];
     if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0)
@@ -301,10 +305,12 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)setupAssociationPartnerCell:(UITableViewCell *)cell withPartner:(OTAssociation *)partner {
-    UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE];
-    titleLabel.text = partner.name;
+    UIButton *titleBtn = [cell viewWithTag:ASSOCIATION_TITLE];
+    [titleBtn setTitle:partner.name forState:UIControlStateNormal];
+    [titleBtn addTarget:self action:@selector(showPartnerDetails) forControlEvents:UIControlEventTouchUpInside];
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE];
     [associationImageButton setImage:nil forState:UIControlStateNormal];
+    [associationImageButton addTarget:self action:@selector(showPartnerDetails) forControlEvents:UIControlEventTouchUpInside];
     NSString *imageUrl = partner.largeLogoUrl;
     if (associationImageButton != nil && [imageUrl class] != [NSNull class] && imageUrl.length > 0)
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageUrl]];
@@ -325,6 +331,13 @@ typedef NS_ENUM(NSInteger) {
     if([self.user.type isEqualToString:USER_TYPE_PRO])
         [mSections addObject:@(SectionTypeEntourages)];
     self.sections = mSections;
+}
+
+- (void)showPartnerDetails {
+    if(self.user.sid.intValue == self.currentUser.sid.intValue)
+        [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
+    else
+        [self performSegueWithIdentifier:@"AssociationDetails" sender:self];
 }
 
 @end

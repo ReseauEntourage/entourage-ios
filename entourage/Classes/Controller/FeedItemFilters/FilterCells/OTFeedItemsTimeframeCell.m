@@ -49,15 +49,15 @@
     [self.btnThird setSelected:self.btnThird == sender];
     NSArray *timeframes = self.tableDataSource.currentFilter.timeframes;
     if(self.btnFirst.isSelected) {
-        [Flurry logEvent:@"ClickFilter1Value"];
+        [OTLogger logEvent:@"ClickFilter1Value"];
         filter.timeframeInHours = [timeframes[0] intValue];
     }
     else if(self.btnSecond.isSelected) {
-        [Flurry logEvent:@"ClickFilter2Value"];
+        [OTLogger logEvent:@"ClickFilter2Value"];
         filter.timeframeInHours = [timeframes[1] intValue];
     }
     else {
-        [Flurry logEvent:@"ClickFilter3Value"];
+        [OTLogger logEvent:@"ClickFilter3Value"];
         filter.timeframeInHours = [timeframes[2] intValue];
     }
     self.btnFirst.titleLabel.font = self.btnFirst == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;

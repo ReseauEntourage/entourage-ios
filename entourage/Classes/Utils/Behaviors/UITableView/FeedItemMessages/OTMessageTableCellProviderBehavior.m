@@ -44,6 +44,8 @@
             return @"StatusCell";
         case MessageCellTypeEncounter:
             return @"EncounterCell";
+        case MessageCellTypeChatDate:
+            return @"ChatDateCell";
         default:
             return @"PlaceholderCell";
     }

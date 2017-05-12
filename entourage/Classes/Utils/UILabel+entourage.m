@@ -21,38 +21,6 @@
 
 @implementation UILabel (entourage)
 
-- (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {
-    bool isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
-    if(isActive) {
-        OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-        if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
-            if([feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
-                [self setText:OTLocalizedString(@"ongoing")];
-            else
-                [self setText:OTLocalizedString(@"join_active")];
-            [self setTextColor:[UIColor appOrangeColor]];
-        } else {
-            if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
-                [self setText:OTLocalizedString(@"join_active")];
-                [self setTextColor:[UIColor appOrangeColor]];
-            } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
-                [self setText:OTLocalizedString(@"join_pending")];
-                [self setTextColor:[UIColor appOrangeColor]];
-            } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
-                [self setText:OTLocalizedString(@"join_rejected")];
-                [self setTextColor:[UIColor appTomatoColor]];
-            } else {
-                [self setText:OTLocalizedString(@"join_to_join")];
-                [self setTextColor:[UIColor appGreyishColor]];
-            }
-        }
-    }
-    else {
-        [self setText:OTLocalizedString(@"item_closed")];
-        [self setTextColor:[UIColor appGreyishColor]];
-    }
-}
-
 - (void)underline {
     NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
     self.attributedText = [[NSAttributedString alloc] initWithString:self.text attributes:underlineAttribute];

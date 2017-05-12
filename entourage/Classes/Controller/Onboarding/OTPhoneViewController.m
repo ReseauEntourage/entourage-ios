@@ -57,7 +57,7 @@
 }
 
 - (IBAction)doContinue {
-    [Flurry logEvent:@"TelephoneSubmit"];
+    [OTLogger logEvent:@"TelephoneSubmit"];
     OTUser *temporaryUser = [OTUser new];
     NSString *phone = self.phoneTextField.text;
     temporaryUser.phone = phone;
@@ -86,10 +86,13 @@
                 showErrorHUD = NO;
             }
             else if([errorCode isEqualToString:PHONE_ALREADY_EXIST]) {
-                errorMessage = OTLocalizedString(@"phoneAlreadyExits");
+                [NSUserDefaults standardUserDefaults].temporaryUser = temporaryUser;
+                [SVProgressHUD dismiss];
+                [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
+                errorMessage = OTLocalizedString(@"alreadyRegisteredShortMessage");
             }
             if (errorMessage) {
-                [Flurry logEvent:@"TelephoneSubmitFail"];
+                [OTLogger logEvent:@"TelephoneSubmitFail"];
                 if(showErrorHUD)
                     [SVProgressHUD showErrorWithStatus:errorMessage];
             } else {

@@ -39,8 +39,13 @@
     self.scrollView.maximumZoomScale = 10;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [OTLogger logEvent:@"Screen09_9MovePhotoView"];
+}
+
 - (IBAction)doContinue {
-    [Flurry logEvent:@"SubmitInstantPhoto"];
+    [OTLogger logEvent:@"SubmitInstantPhoto"];
     [SVProgressHUD show];
     UIImage *finalImage = [self cropVisibleArea];
     finalImage = [finalImage resizeTo:CGSizeMake(MaxImageSize, MaxImageSize)];

@@ -24,6 +24,7 @@
 #import "OTUser.h"
 #import "OTOrganization.h"
 #import "OTConsts.h"
+#import "OTAPIConsts.h"
 
 #import <Crashlytics/Crashlytics.h>
 
@@ -93,7 +94,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
                      success:(void (^)())success
                      failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_delete_account", @""), [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:API_URL_DELETE_ACCOUNT, TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
          DELETEWithUrl:url
@@ -118,7 +119,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
               failure:(void (^)(NSError *))failure
 {
     
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_user_details", @""), userID, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:API_URL_USER_DETAILS, userID, TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
          GETWithUrl:url
@@ -154,7 +155,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
     NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken, @"device_os" : deviceiOS, @"version" : version}};
                                     
     
-    NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, TOKEN];
     NSLog(@"Applications: %@\n%@", url, parameters);
     
     [[OTHTTPRequestManager sharedInstance]
@@ -178,7 +179,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
                      success:(void (^)(OTUser *))success
                      failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_regenerate_code", @""), kAPIUserRoute, kAPIMe, kAPICode];
+    NSString *url = [NSString stringWithFormat:API_URL_REGENERATE_CODE, kAPIUserRoute, kAPIMe, kAPICode];
     
     NSMutableDictionary *phoneDictionnary = [NSMutableDictionary new];
     phoneDictionnary[@"phone"] = phone;
@@ -214,7 +215,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
                                success:(void (^)(NSString *))success
                                failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_update_user", @""), kAPIUserRoute, kAPIMe, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:API_URL_UPDATE_USER, kAPIUserRoute, kAPIMe, TOKEN];
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     dictionary[@"email"] = email;
     dictionary[@"sms_code"] = smsCode;
@@ -244,7 +245,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
                               success:(void (^)(OTUser *user))success
                               failure:(void (^)(NSError *error))failure
 {
-    NSString *url = [NSString stringWithFormat:NSLocalizedString(@"url_update_user", @""), kAPIUserRoute, kAPIMe, [NSUserDefaults standardUserDefaults].currentUser.token];
+    NSString *url = [NSString stringWithFormat:API_URL_UPDATE_USER, kAPIUserRoute, kAPIMe, TOKEN];
     
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[@"user"] = [user dictionaryForWebservice];

@@ -72,6 +72,7 @@
 }
 
 - (IBAction)doContinue {
+    [OTLogger logEvent:@"AcceptGeoloc"];
     [self promptUserForLocationUsage];
 }
 

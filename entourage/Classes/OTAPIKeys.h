@@ -24,6 +24,7 @@
 #define kWSKeyLatitude @"latitude"
 #define kWSKeyLongitude @"longitude"
 #define kWSKeyLastMessage @"last_message"
+#define kWSKeyShareUrl @"share_url"
 
 //Entourage
 #define kWSKeyEntourage @"entourage"

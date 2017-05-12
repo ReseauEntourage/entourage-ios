@@ -9,6 +9,7 @@
 #import "OTGuideDetailsViewController.h"
 #import "UIViewController+menu.h"
 #import "OTConsts.h"
+#import "OTMailSenderBehavior.h"
 
 @import MessageUI;
 
@@ -22,6 +23,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *phoneButton;
 @property (nonatomic, weak) IBOutlet UIButton *emailButton;
 @property (nonatomic, weak) IBOutlet UIButton *webButton;
+@property (nonatomic, weak) IBOutlet UIButton *btnSendMail;
+@property (nonatomic, weak) IBOutlet OTMailSenderBehavior *mailSender;
 
 @end
 
@@ -30,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.mailSender initialize];
     self.title = OTLocalizedString(@"guideTitle");
     self.navigationController.navigationBarHidden = NO;
     [self setupCloseModal];
@@ -78,6 +82,7 @@
     } else {
         self.webButton.hidden = YES;
     }
+    self.btnSendMail.layer.borderColor = UIColor.whiteColor.CGColor;
 }
 
 /*
@@ -92,6 +97,10 @@
 
 /********************************************************************************/
 #pragma mark - Buttons handling
+
+- (IBAction)sendStructureMail:(id)sender {
+    [self.mailSender sendStructureMail:[NSString stringWithFormat:OTLocalizedString(@"structure_subject"), self.poi.name]];
+}
 
 - (IBAction)showAddress:(id)sender {
     NSString *mapString = [NSString stringWithFormat:@"http://maps.apple.com/?address=%@", [self.poi.address stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];

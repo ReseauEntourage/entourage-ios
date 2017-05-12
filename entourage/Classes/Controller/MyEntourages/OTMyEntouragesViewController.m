@@ -21,6 +21,8 @@
 #import "OTFeedItemDetailsBehavior.h"
 #import "OTManageInvitationBehavior.h"
 #import "OTUserProfileBehavior.h"
+#import "OTAppDelegate.h"
+#import "OTUnreadMessagesService.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -48,7 +50,7 @@
     [self.optionsBehavior configureWith:self.optionsDelegate];
     self.entouragesDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.entouragesDataSource.tableView.estimatedRowHeight = 200;
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
     [self.entouragesDataSource loadData];
@@ -67,22 +69,24 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if(self.isMovingFromParentViewController)
-        [Flurry logEvent:@"BackToFeedClick"];
+        [OTLogger logEvent:@"BackToFeedClick"];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.optionsBehavior prepareSegueForOptions:segue]) {
-        [Flurry logEvent:@"PlusOnMessagesPageClick"];
+        [OTLogger logEvent:@"PlusOnMessagesPageClick"];
         return;
     }
-    if([self.feedItemDetailsBehavior prepareSegueForDetails:segue])
+    if([self.feedItemDetailsBehavior prepareSegueForDetails:segue]){
+        [OTLogger logEvent:@"DiscussionMembersListView"];
         return;
+    }
     if([self.manageInvitation prepareSegueForManage:segue])
         return;
     if ([self.userProfileBehavior prepareSegueForUserProfile:segue])
         return;
     if([segue.identifier isEqualToString:@"FiltersSegue"]) {
-        [Flurry logEvent:@"MessagesFilterClick"];
+        [OTLogger logEvent:@"MessagesFilterClick"];
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTFeedItemFiltersViewController *filtersController = (OTFeedItemFiltersViewController *)controller.topViewController;
         filtersController.filterDelegate = self.entouragesDataSource;
@@ -94,6 +98,10 @@
 }
 
 #pragma mark - private methods
+
+- (void)updateBadge {
+    [self.entouragesDataSource loadData];
+}
 
 - (void)loadInvitations {
     [[OTInvitationsService new] getInvitationsWithStatus:INVITATION_PENDING success:^(NSArray *items) {

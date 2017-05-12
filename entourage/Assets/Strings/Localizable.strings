@@ -32,6 +32,7 @@
 "doRegenerateCode" = "Redemander un code";
 "doIgnore" = "Ignorer";
 "alreadyRegisteredMessage" = "Le numéro est déjà enregistré. Vous avez dû recevoir le code pas SMS.";
+"alreadyRegisteredShortMessage" = "Le numéro est déjà enregistré";
 "automaticJoinFailedMessage" = "Impossible de rejoindre l’entourage. Verifiez la liste des invitations et réessayez.";
 "joiningEntouragesMessage" = "Invitations en cours";
 "acceptJoinFailed" = "Impossible d’accepter l’invitation.";
@@ -41,7 +42,7 @@
 
 // MenuItems
 "menu_amis" = "Amis";
-"myProfile" = "Mon compte";
+"myProfile" = "MON COMPTE";
 "parameters" = "Parameters";
 "menu_blog" = "Comment franchir le pas ?";
 "menu_chart" = "Charte éthique";
@@ -61,6 +62,8 @@
 "menu_yourOpinion_title" = "VOTRE AVIS";
 "menu_translate_title" = "TRADUIRE";
 "menu_disconnect_title" = "Déconnexion";
+"menu_entourage_actions" = "Quelles actions avec Entourage ?";
+"menu_application_usage" = "Utilisation de l'appli";
 
 // AboutItems
 "about_rateus" = "Notez-nous dans l’App Store";
@@ -82,13 +85,16 @@
 
 // Feed item
 "join_active" = "Actif";
-"join_pending" = "Demande en attente";
-"join_rejected" = "Demande rejetée";
-"join_to_join" = "Je rejoins";
+"join_pending" = "En attente";
+"join_rejected" = "Refusé";
+"join_to_join" = "Voir";
 "closed_item" = "Entourage clôturé";
+"quitted_item" = "Entourage quitté";
 "stopped_item" = "Maraude arrêtée";
 "join_item_failed" = "Impossible de rejoindre l’entourage.";
 "ongoing" = "En cours";
+"cancelled_join_request" = "Demande annulée";
+
 "no_data_entourages" = "On dirait que c'est calme ici!
 
 Déplacez la carte pour trouver des entourages crées par le réseau.
@@ -109,6 +115,15 @@ Proposez une structure";
 "encounter_disclaimer" = "Bonjour,\n\nNous vous rappelons qu'en vertu de la charte d'Entourage, vous devez avertir le bénéficiaire qu’un compte-rendu sera réalisé sur vos échanges et pourra être stocké par vous ou par votre association.";
 "entourage_disclaimer" = "En vertu de la charte d'Entourage:\n\n- Vous devez recueillir le consentement des personnes concernées avant de créer un entourage\n- La description de l’entourage ne doit pas contenir de données permettant d’identifier ou de localiser les personnes concernées.\n\nNous vous rappelons que la position précise des entourages ne sera pas diffusée.";
 "disclaimer_link_text" = "charte d'Entourage";
+
+//Solidarity Guide
+"guide_display_feed" = "Se nourrir";
+"guide_display_housing" = "Se loger";
+"guide_display_heal" = "Se soigner";
+"guide_display_refresh" = "Se rafraîchir";
+"guide_display_orientation" = "S’orienter";
+"guide_display_caring" = "S’occuper de soi";
+"guide_display_reinsertion" = "Se réinsérer";
 
 // Tour
 "tour_type_bare_hands" = "barehands";
@@ -140,6 +155,10 @@ Proposez une structure";
 "stop" = "Stop";
 "tour_status_completed" = "Maraude terminée";
 "tour_quitted" = "Maraude clôturée.";
+
+"join_tour_lbl" = "Maraude voisine ? Coordonnez-vous";
+"join_tour_btn" = "Contacter";
+"join_tour_greeting_lbl" = "Que souhaitez-vous coordonner avec cette maraude ? Ajoutez un petit mot !";
 
 // Encounters
 "formatter_has_meet" = "%@ a rencontré %@";
@@ -185,16 +204,22 @@ Proposez une structure";
 "inviteByPhoneFailed" = "Impossible d’inviter ce numéro de téléphone.";
 "invitations" = "Invitations";
 "organiser" = "Organisateur";
-"closed" = "Passé";
-"created_by_me_unique" = "Créés par moi uniquement";
+"closed" = "Inclure entourages clôturés";
+"unique_unread" = "Uniquement non lus";
+"join_entourage_lbl" = "On a besoin de vous !";
+"join_entourage_btn" = "Rejoindre";
+"join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !
+Pourquoi rejoignez-vous cet entourage ? Ajoutez un petit mot !";
 
 // Feed Item details
 "item_option_close" = "Arrêter";
 "item_option_freeze" = "Clôturer";
 "item_option_quit" = "Quitter";
-"entourage_time_data" = "%@ - à %d%@";
+"entourage_time_data" = "%@ - à %@";
 "member_count" = "Membres (%d)";
 "item_closed" = "Clôturé";
+"item_cancel_join" = "Retirer ma demande";
+"request_to_join_popup_placeholder" = "Votre message…";
 
 // Tutorial
 "emailNotSent" = "Echec de la mise à jour de l'email";
@@ -254,27 +279,10 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "filter_entourage_show_tours" = "Maraudes";
 "filter_entourage_only_my_entourages" = "Ne visualiser que mes entourages";
 
+"filter_solidarity_guide_categories" = "Catégories";
+
 "filter_timeframe_title" = "Affichage des entourages";
 
-// API
-"url_send_tour" = "%@.json?token=%@";
-"url_close_tour" = "%@/%@.json?token=%@";
-"url_quit_tour" = "%@/%@/users/%@?token=%@";
-"url_send_point" = "%@/%@/%@.json?token=%@";
-"url_tours_around" = "%@.json?token=%@";
-"url_tour" = "%@/%@?token=%@";
-"url_feed_item_users" = "%@/%@/users.json?token=%@";
-"url_join_request_response" = "tours/%@/users/%@?token=%@";
-"url_tour_messages" = "%@/%@/chat_messages.json?token=%@";
-"url_entourages" = "entourages?token=%@&status=%@";
-"url_tour_encounters" = "%@/%@/encounters.json?token=%@";
-"url_user_details" = "users/%@?token=%@";
-"url_user_tours" = "%@/%@/%@.json?token=%@";
-"url_send_encounter" = "%@/%@/%@.json?token=%@";
-"url_update_user" = "%@/%@.json?token=%@";
-"url_delete_account" = "users/me?token=%@";
-"url_regenerate_code" = "%@/%@/%@.json";
-"url_send_entourage" = "entourages";
 "encounter_enter_name_of_met_person" = "Vous devez donner un titre à votre rencontre";
 
 // Titles
@@ -328,3 +336,42 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "update_association_error" = "L’association soutenue n’a pas pu être mise à jour";
 "marauder" = "Maraudeur";
 "sympathizant" = "Sympathisant";
+
+"confirm_entourage_create" = "Souhaitez-vous créer une rencontre avec une personne de la rue, ou créer une %@ visible de tous?";
+"continue" = "Continuer";
+"encounter" = "Rencontre";
+
+// Chat
+"yesterday" = "hier";
+"today" = "aujourd'hui";
+"month_1" = "jan.";
+"month_2" = "fév.";
+"month_3" = "mar.";
+"month_4" = "avr.";
+"month_5" = "mai";
+"month_6" = "juin";
+"month_7" = "juil.";
+"month_8" = "août";
+"month_9" = "sep.";
+"month_10" = "oct.";
+"month_11" = "nov.";
+"month_12" = "déc.";
+
+//email
+"successful_close_mail" = "Mes retours sur l'entourage %@ qui a été un succès";
+"blocked_close_mail" = "Mes retours sur l'entourage %@ qui n'a pas abouti";
+"help_close_mail" = "Aide pour l'entourage %@";
+"structure_subject" = "Information sur la structure '%@'";
+
+// Share
+"share_public" = "Ce projet solidaire sur Entourage a besoin de toi. Rejoins-le en téléchargeant l'app ici %@";
+"share_creator" = "J'ai créé ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
+"share_joiner" = "J'ai rejoint ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
+
+
+"feed_item_time_distance" = "Créée il y a ";
+
+"association_set" = "Badge ajouté";
+"association_reset" = "Badge enlevé";
+
+"propose_structure" = "Proposer une structure";

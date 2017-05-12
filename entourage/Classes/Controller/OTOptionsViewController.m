@@ -7,11 +7,16 @@
 //
 
 #import "OTOptionsViewController.h"
+#import "OTOngoingTourService.h"
+#import "OTAlertViewBehavior.h"
+#import "SVProgressHUD.h"
 
 @interface OTOptionsViewController ()
 
-@end
+@property (strong, nonatomic) IBOutlet OTAlertViewBehavior *demandeAlert;
+@property (strong, nonatomic) IBOutlet OTAlertViewBehavior *contributionAlert;
 
+@end
 
 @implementation OTOptionsViewController
 
@@ -23,16 +28,25 @@
     } else {
         [self setupOptionsAsList];
     }
+    __weak typeof(self) weakSelf = self;
+    [OTAlertViewBehavior setupOngoingCreateEntourageWithDemand:self.demandeAlert andContribution:self.contributionAlert];
+    [self.demandeAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
+        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createDemande)])
+            [weakSelf.optionsDelegate performSelector:@selector(createDemande) withObject:nil];
+    }];
+    [self.demandeAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
+        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createEncounter)])
+            [weakSelf.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
+    }];
+    [self.contributionAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
+        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createContribution)])
+            [weakSelf.optionsDelegate performSelector:@selector(createContribution) withObject:nil];
+    }];
+    [self.contributionAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
+        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createEncounter)])
+            [weakSelf.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
+    }];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-//- (void)setIsPOIVisible:(BOOL)isPOIVisible {
-//    self.isPOIVisible = isPOIVisible;
-//}
 
 /*******************************************************************************/
 
@@ -97,36 +111,45 @@
 #pragma mark - Actions
 
 - (IBAction)doCreateTour:(id)sender {
-    [Flurry logEvent:@"TourCreateClick"];
+    [OTLogger logEvent:@"TourCreateClick"];
     if ([self.optionsDelegate respondsToSelector:@selector(createTour)]) {
         [self.optionsDelegate performSelector:@selector(createTour) withObject:nil];
     }
 }
 
 - (IBAction)doCreateEncounter:(id)sender {
-    [Flurry logEvent:@"CreateEncounterClick"];
-    if ([self.optionsDelegate respondsToSelector:@selector(createEncounter)]) {
+    [OTLogger logEvent:@"CreateEncounterClick"];
+    if ([self.optionsDelegate respondsToSelector:@selector(createEncounter)])
         [self.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
-    }
 }
 
 - (IBAction)doCreateDemande:(id)sender {
-    [Flurry logEvent:@"AskCreateClick"];
-    if ([self.optionsDelegate respondsToSelector:@selector(createDemande)]) {
-        [self.optionsDelegate performSelector:@selector(createDemande) withObject:nil];
-    }
+    [OTLogger logEvent:@"AskCreateClick"];
+    if ([OTOngoingTourService sharedInstance].isOngoing)
+        [self.demandeAlert show];
+    else
+        if ([self.optionsDelegate respondsToSelector:@selector(createDemande)])
+            [self.optionsDelegate performSelector:@selector(createDemande) withObject:nil];
 }
 
 - (IBAction)doCreateContribution:(id)sender {
-    [Flurry logEvent:@"OfferCreateClick"];
-    if ([self.optionsDelegate respondsToSelector:@selector(createContribution)]) {
-        [self.optionsDelegate performSelector:@selector(createContribution) withObject:nil];
-    }
+    [OTLogger logEvent:@"OfferCreateClick"];
+    if ([OTOngoingTourService sharedInstance].isOngoing)
+        [self.contributionAlert show];
+    else
+        if ([self.optionsDelegate respondsToSelector:@selector(createContribution)])
+            [self.optionsDelegate performSelector:@selector(createContribution) withObject:nil];
 }
 
 - (IBAction)doTogglePOI:(id)sender {
     if ([self.optionsDelegate respondsToSelector:@selector(togglePOI)]) {
         [self.optionsDelegate performSelector:@selector(togglePOI) withObject:nil];
+    }
+}
+
+- (IBAction)proposeStructure:(id)sender {
+    if ([self.optionsDelegate respondsToSelector:@selector(proposeStructure)]) {
+        [self.optionsDelegate performSelector:@selector(proposeStructure) withObject:nil];
     }
 }
 

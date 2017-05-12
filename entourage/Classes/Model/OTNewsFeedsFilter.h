@@ -12,6 +12,7 @@
 
 @interface OTNewsFeedsFilter : OTFeedItemFilters<NSCopying>
 
+@property (nonatomic, assign) BOOL isPro;
 @property (nonatomic) BOOL showMedical;
 @property (nonatomic) BOOL showSocial;
 @property (nonatomic) BOOL showDistributive;

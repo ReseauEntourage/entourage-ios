@@ -16,17 +16,18 @@
 @implementation OTPhotoPickerBehavior
 
 - (void)pickFromCamera:(UIButton *)sender {
+    
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
         [self pickPhotoFromSource:UIImagePickerControllerSourceTypeCamera];
 }
 
 - (void)pickFromGallery:(UIButton *)sender {
-    [Flurry logEvent:@"PhotoUploadSubmit"];
+    [OTLogger logEvent:@"PhotoUploadSubmit"];
     [self pickPhotoFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
 }
 
 - (void)pickPhotoFromSource:(UIImagePickerControllerSourceType)sourceType {
-    [Flurry logEvent:@"PhotoTakeSubmit"];
+    [OTLogger logEvent:@"PhotoTakeSubmit"];
     UIImagePickerController *controller = [UIImagePickerController new];
     controller.modalPresentationStyle = UIModalPresentationCurrentContext;
     controller.sourceType = sourceType;

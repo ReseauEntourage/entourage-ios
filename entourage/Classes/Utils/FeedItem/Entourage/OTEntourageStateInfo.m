@@ -21,7 +21,7 @@
     else
         return FeedItemStateClosed;
     if ([currentUser.sid intValue] != [self.entourage.author.uID intValue]) {
-        if([JOIN_NOT_REQUESTED isEqualToString:self.entourage.joinStatus])
+        if([JOIN_NOT_REQUESTED isEqualToString:self.entourage.joinStatus] || [JOIN_CANCELLED isEqualToString:self.entourage.joinStatus])
             result = FeedItemStateJoinNotRequested;
         else if([JOIN_ACCEPTED isEqualToString:self.entourage.joinStatus])
             result = FeedItemStateJoinAccepted;
@@ -50,15 +50,28 @@
     return [self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN];
 }
 
+- (BOOL)isClosed {
+    return [self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED];
+}
+
 - (BOOL)isPublic {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if([self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED])
-        return YES;
+        return !([currentUser.sid intValue] == [self.entourage.author.uID intValue] ||
+                 [self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED]);
     return ![self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
 }
 
 - (BOOL)canEdit {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     return [currentUser.sid intValue] == [self.entourage.author.uID intValue];
+}
+
+- (BOOL)canCancelJoinRequest {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if ([currentUser.sid intValue] != [self.entourage.author.uID intValue])
+        return [self.entourage.joinStatus isEqualToString:JOIN_PENDING];
+    return NO;
 }
 
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {

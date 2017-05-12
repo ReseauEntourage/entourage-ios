@@ -93,7 +93,7 @@ typedef NS_ENUM(NSInteger) {
 - (void)updateUser {
     NSString *firstName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeSummary] withDefault:self.user.firstName];
     NSString *lastName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:SectionTypeSummary] withDefault:self.user.lastName];
-    NSString *email = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeInfoPrivate] withDefault:self.user.email];
+    NSString *email = [[self editedTextAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeInfoPrivate] withDefault:self.user.email] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *warning = nil;
     if (![email isValidEmail])
         warning = OTLocalizedString(@"invalidEmail");
@@ -369,6 +369,7 @@ typedef NS_ENUM(NSInteger) {
     titleLabel.text = title;
     UITextField *nameTextField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
     nameTextField.text = text;
+    nameTextField.tintColor = [UIColor appOrangeColor];
 }
 
 - (NSString *)editedTextAtIndexPath:(NSIndexPath *)indexPath withDefault:(NSString *)defaultValue {

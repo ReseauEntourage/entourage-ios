@@ -34,7 +34,7 @@ NSString *const kAssociations = @"partners";
 }
 
 - (void)addAssociation:(OTAssociation *)association withSuccess:(void (^)(OTAssociation *))success failure:(void (^)(NSError *))failure {
-    NSString *url = [NSString stringWithFormat:API_URL_ADD_PARTNER, [[NSUserDefaults standardUserDefaults] currentUser].sid, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:API_URL_ADD_PARTNER, USER_ID, TOKEN];
     NSDictionary *parameters = @{ @"partner": @{ @"id": association.aid } };
     [[OTHTTPRequestManager sharedInstance] POSTWithUrl:url andParameters:parameters andSuccess:^(id responseObject) {
         NSDictionary *data = responseObject;
@@ -48,7 +48,7 @@ NSString *const kAssociations = @"partners";
 }
 
 - (void)deleteAssociation:(OTAssociation *)association withSuccess:(void (^)(OTAssociation *))success failure:(void (^)(NSError *))failure {
-    NSString *url = [NSString stringWithFormat:API_URL_DELETE_PARTNER, [[NSUserDefaults standardUserDefaults] currentUser].sid, association.aid, [[NSUserDefaults standardUserDefaults] currentUser].token];
+    NSString *url = [NSString stringWithFormat:API_URL_DELETE_PARTNER, USER_ID, association.aid, TOKEN];
     [[OTHTTPRequestManager sharedInstance] DELETEWithUrl:url andParameters:nil andSuccess:^(id responseObject) {
         NSDictionary *data = responseObject;
         OTAssociation *updated = [[OTAssociation alloc] initWithDictionary:data];

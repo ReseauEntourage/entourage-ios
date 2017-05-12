@@ -64,13 +64,13 @@
                     message = @"DistributionTourChoose";
                     break;
             }
-            [Flurry logEvent:message];
+            [OTLogger logEvent:message];
         }
     }
 }
 
 - (IBAction)createTour:(id)sender {
-    [Flurry logEvent:@"StartTourClick"];
+    [OTLogger logEvent:@"StartTourClick"];
     NSString *tourType = [self selectedTourType];
     if ([self.tourCreatorDelegate respondsToSelector:@selector(createTour:)]) {
         [self.tourCreatorDelegate createTour:tourType];

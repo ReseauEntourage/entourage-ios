@@ -11,6 +11,8 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTConsts.h"
+#import "OTEntourageDisclaimerViewController.h"
+#import "OTAPIConsts.h"
 
 @interface OTDisclaimerBaseBehavior () <DisclaimerDelegate>
 
@@ -31,6 +33,10 @@
             disclaimerViewController.disclaimerDelegate = self;
             disclaimerViewController.disclaimerText = self.disclaimerText;
         }
+        if ([destinationViewController isKindOfClass:[OTEntourageDisclaimerViewController class]]) {
+            OTEntourageDisclaimerViewController *disclaimerViewController = (OTEntourageDisclaimerViewController *)destinationViewController;
+            disclaimerViewController.disclaimerDelegate = self;
+        }
     }
     else
         return NO;
@@ -48,7 +54,7 @@
     NSRange range = [originalString rangeOfString:stringToMakeInLink];
     if(range.location == NSNotFound)
         return [[NSAttributedString alloc] initWithString:originalString attributes:attributes];
-    NSString *url = [[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO] ? PRO_ENTOURAGE_CREATION_CHART : PUBLIC_ENTOURAGE_CREATION_CHART;
+    NSString *url = IS_PRO_USER ? PRO_ENTOURAGE_CREATION_CHART : PUBLIC_ENTOURAGE_CREATION_CHART;
     NSMutableAttributedString *source = [[NSMutableAttributedString alloc] initWithString:originalString attributes:attributes];
     [source addAttribute:NSLinkAttributeName value:url range:range];
     return source;

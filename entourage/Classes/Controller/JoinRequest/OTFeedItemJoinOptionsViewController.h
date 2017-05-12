@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OTJoinDelegate.h"
+#import "OTFeedItem.h"
+#import "OTTextView.h"
 
 @interface OTFeedItemJoinOptionsViewController : UIViewController
 
-@property (nonatomic, weak) id<OTJoinDelegate> joinDelegate;
+@property (nonatomic, strong) OTFeedItem *feedItem;
+@property (nonatomic, weak) IBOutlet UILabel *greetingLabel;
+@property (nonatomic, weak) IBOutlet OTTextView *greetingMessage;
 
 @end

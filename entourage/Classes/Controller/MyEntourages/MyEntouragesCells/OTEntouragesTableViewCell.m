@@ -8,7 +8,6 @@
 
 #import "OTEntouragesTableViewCell.h"
 #import "UIColor+entourage.h"
-#import "OTBadgeNumberService.h"
 #import "OTTableDataSourceBehavior.h"
 
 @implementation OTEntouragesTableViewCell
@@ -27,16 +26,21 @@
     self.summaryProvider.imgAssociation = self.imgAssociation;
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
-    self.lblNumberOfUsers.text = [@"+" stringByAppendingString:self.lblNumberOfUsers.text];
-    if([[OTBadgeNumberService sharedInstance] hasUnread:item.uid])
-        self.lblLastMessage.textColor = [UIColor blackColor];
-    else
+    if(item.unreadMessageCount.intValue > 0) {
+       self.lblLastMessage.font = [UIFont fontWithName:@"SFUIText-Medium" size:self.lblLastMessage.font.pointSize];
+       self.lblLastMessage.textColor = [UIColor blackColor];
+    }
+    else {
+        self.lblLastMessage.font = [UIFont fontWithName:@"SFUIText-Light" size:self.lblLastMessage.font.pointSize];
         self.lblLastMessage.textColor = [UIColor appGreyishColor];
+    }
     self.lblLastMessage.text = [self getAuthorTextFor:item.lastMessage];
+    self.txtUnreadCount.hidden = item.unreadMessageCount.intValue == 0;
+    self.txtUnreadCount.text = item.unreadMessageCount.stringValue;
 }
 
 - (IBAction)showUserDetails:(id)sender {
-    [Flurry logEvent:@"UserProfileClick"];
+    [OTLogger logEvent:@"UserProfileClick"];
     NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
     OTFeedItem *feedItem = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
     [self.userProfile showProfile:feedItem.author.uID];

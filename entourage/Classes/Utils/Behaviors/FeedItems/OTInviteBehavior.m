@@ -25,7 +25,7 @@
 }
 
 - (void)startInvite {
-    [Flurry logEvent:@"InviteFriendsClick"];
+    [OTLogger logEvent:@"InviteFriendsClick"];
     [self.owner performSegueWithIdentifier:@"SegueInviteSource" sender:nil];
 }
 
@@ -68,6 +68,11 @@
 
 - (void)inviteByPhone {
     [self.owner performSegueWithIdentifier:@"SegueInvitePhoneNumber" sender:nil];
+}
+
+- (void)share {
+    [self.shareBehavior configureWith:self.feedItem];
+    [self.shareBehavior shareMember:nil];
 }
 
 #pragma mark - InviteSuccessDelegate implementation

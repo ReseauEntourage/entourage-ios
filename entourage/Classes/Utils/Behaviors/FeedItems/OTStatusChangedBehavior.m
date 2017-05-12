@@ -11,6 +11,8 @@
 #import "OTConsts.h"
 #import "OTChangeStateViewController.h"
 #import "OTMainViewController.h"
+#import "OTCloseReason.h"
+#import "OTTour.h"
 
 @interface OTStatusChangedBehavior ()
 
@@ -25,7 +27,7 @@
 }
 
 - (IBAction)startChangeStatus {
-    [Flurry logEvent:@"OpenEntourageOptionsOverlay"];
+    [OTLogger logEvent:@"OpenEntourageOptionsOverlay"];
     [self.owner performSegueWithIdentifier:@"SegueChangeState" sender:self];
 }
 
@@ -44,17 +46,42 @@
 
 - (void)stoppedFeedItem {
     [self popToMainController];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"stopped_item")];
-        [self sendActionsForControlEvents:UIControlEventValueChanged];
     });
 }
 
-- (void)closedFeedItem {
+- (void)closedFeedItemWithReason: (OTCloseReason) reason {
     [self popToMainController];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closed_item")];
-        [self sendActionsForControlEvents:UIControlEventValueChanged];
+        if(![self.feedItem isKindOfClass:[OTTour class]]) {
+            NSDictionary *userInfo =  @{ @kNotificationSendReasonKey: @(reason), @kNotificationFeedItemKey: self.feedItem};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationSendCloseMail object:nil userInfo:userInfo];
+        }
+        if(reason == OTCloseReasonHelpClose)
+            return;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
+    });
+}
+
+- (void)quitedFeedItem {
+    [self popToMainController];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"quitted_item")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
+    });
+}
+
+- (void)cancelledJoinRequest {
+    [self popToMainController];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"cancelled_join_request")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
     });
 }
 

@@ -27,6 +27,8 @@
 #import "UILabel+entourage.h"
 #import "OTTapViewBehavior.h"
 #import "UIImageView+entourage.h"
+#import "OTAPIConsts.h"
+
 @import MessageUI;
 
 /* MenuItem identifiers */
@@ -74,7 +76,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	self.menuItems = [self createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
-    self.title = OTLocalizedString(@"myProfile").capitalizedString;
+    self.title = OTLocalizedString(@"myProfile");
     [self createBackFrontMenuButton];
     [self.modifyLabel underline];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -94,7 +96,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [Flurry logEvent:@"OpenMenu"];
+    [OTLogger logEvent:@"OpenMenu"];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
 }
@@ -128,7 +130,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 	if (indexPath.section == 1) {
-        [Flurry logEvent:@"LogOut"];
+        [OTLogger logEvent:@"LogOut"];
         [OTOngoingTourService sharedInstance].isOngoing = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
@@ -136,8 +138,13 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
         if(menuItem.segueIdentifier)
             [self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
-        else
+        else {
+            if([menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")])
+                [OTLogger logEvent:@"WhatActionsClick"];
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_application_usage")])
+                [OTLogger logEvent:@"AppFAQClick"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.url]];
+        }
 	}
     [[tableView cellForRowAtIndexPath:indexPath]setSelected:NO];
 }
@@ -146,7 +153,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 #pragma mark - Actions
 
 - (IBAction)showProfile {
-    [Flurry logEvent:@"TapMyProfilePhoto"];
+    [OTLogger logEvent:@"TapMyProfilePhoto"];
     [self performSegueWithIdentifier:@"segueMenuIdentifierForProfile" sender:self];
 }
 
@@ -171,9 +178,9 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuAboutIdentifier])
-        [Flurry logEvent:@"AboutClick"];
+        [OTLogger logEvent:@"AboutClick"];
     else if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuDisconnectIdentifier]) {
-        [Flurry logEvent:@"LogOut"];
+        [OTLogger logEvent:@"LogOut"];
         [OTOngoingTourService sharedInstance].isOngoing = NO;
     }
     if (![self.controllersDictionary objectForKey:segue.identifier] && [segue.identifier isEqualToString:@"segueMenuIdentifierForProfile"]) {
@@ -197,9 +204,13 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	NSMutableArray *menuItems = [NSMutableArray array];
     OTMenuItem *itemBlog = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_blog") iconName: @"blog" url:MENU_BLOG_URL];
     [menuItems addObject:itemBlog];
-    NSString *chartUrl = [self.currentUser.type isEqualToString:USER_TYPE_PRO] ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
+    OTMenuItem *itemEntourageActions = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_entourage_actions") iconName:@"goal" url:MENU_BLOG_ENTOURAGE_ACTIONS_URL];
+    [menuItems addObject:itemEntourageActions];
+    NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
     OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart") iconName: @"chart" url:chartUrl];
     [menuItems addObject:itemChart];
+    OTMenuItem *itemApplicationUsage = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_application_usage") iconName:@"menu_phone" url:MENU_BLOG_APPLICATION_USAGE_URL];
+    [menuItems addObject:itemApplicationUsage];
     OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_about") iconName: @"about" segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
     [menuItems addObject:itemAbout];
     OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"") iconName: nil segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];

@@ -40,7 +40,7 @@
 }
 
 - (void)saveFilters {
-    [Flurry logEvent:@"SubmitFilterPreferences"];
+    [OTLogger logEvent:@"SubmitFilterPreferences"];
     OTFeedItemFilters *currentFilter = [self.tableDataSource readCurrentFilter];
     [self dismissViewControllerAnimated:YES completion:^() {
         [self.filterDelegate filterChanged:currentFilter];
@@ -48,7 +48,7 @@
 }
 
 - (void)close {
-    [Flurry logEvent:@"CloseFilter"];
+    [OTLogger logEvent:@"CloseFilter"];
     [self dismissViewControllerAnimated:YES completion: nil];
 }
 

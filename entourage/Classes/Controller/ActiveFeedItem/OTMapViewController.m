@@ -18,6 +18,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "OTEditEntourageBehavior.h"
 #import "UIImageView+entourage.h"
+#import "OTConsts.h"
 
 @interface OTMapViewController ()
 
@@ -57,7 +58,7 @@
 }
 
 - (IBAction)showProfile {
-    [Flurry logEvent:@"UserProfileClick"];
+    [OTLogger logEvent:@"UserProfileClick"];
     [self.userProfileBehavior showProfile:self.feedItem.author.uID];
 }
 

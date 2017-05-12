@@ -10,6 +10,7 @@
 #import "UIButton+entourage.h"
 #import "OTTableDataSourceBehavior.h"
 #import "UIImageView+entourage.h"
+#import "OTConsts.h"
 
 #define BUTTON_MARGIN 144
 
@@ -35,10 +36,12 @@
     self.lblMessage.text = @"";
     if(joiner.message.length > 0)
         self.lblMessage.text = [NSString stringWithFormat:@"\"%@\"", joiner.message];
+    NSString *joinType = [joiner.feedItem isKindOfClass:[OTTour class]] ? @"want_to_join_tour" : @"want_to_join_entourage";
+    self.lblJoinType.text = OTLocalizedString(joinType);
 }
 
 - (IBAction)showUserDetails:(id)sender {
-    [Flurry logEvent:@"UserProfileClick"];
+    [OTLogger logEvent:@"UserProfileClick"];
     NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
     OTFeedItemJoiner *joiner = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
     [self.userProfile showProfile:joiner.uID];

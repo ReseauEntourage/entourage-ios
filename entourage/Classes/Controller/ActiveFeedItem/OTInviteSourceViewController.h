@@ -12,6 +12,7 @@
 
 - (void)inviteContacts;
 - (void)inviteByPhone;
+- (void)share;
 
 @end
 

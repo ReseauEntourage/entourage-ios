@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTCloseReason.h"
 
 @protocol OTStatusChangedProtocol <NSObject>
 
 - (void)joinFeedItem;
 - (void)stoppedFeedItem;
-- (void)closedFeedItem;
+- (void)closedFeedItemWithReason: (OTCloseReason) reason;
+- (void)quitedFeedItem;
+- (void)cancelledJoinRequest;
 
 @end

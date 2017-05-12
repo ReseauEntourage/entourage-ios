@@ -24,9 +24,14 @@
 #import "SVProgressHUD.h"
 #import "OTMapViewController.h"
 #import "OTMessagingService.h"
-#import "OTBadgeNumberService.h"
+#import "IQKeyboardManager.h"
+#import "OTBottomScrollBehavior.h"
+#import "OTUnreadMessagesService.h"
+#import "OTShareFeedItemBehavior.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
 
-@interface OTActiveFeedItemViewController ()
+@interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet OTSummaryProviderBehavior *summaryProvider;
 @property (strong, nonatomic) IBOutlet OTInviteBehavior *inviteBehavior;
@@ -37,7 +42,10 @@
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior *editEntourageBehavior;
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
+@property (weak, nonatomic) IBOutlet UIButton *btnSend;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
+@property (nonatomic, strong) IBOutlet OTBottomScrollBehavior *scrollBottomBehavior;
+@property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareBehavior;
 
 @end
 
@@ -46,6 +54,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setUpUIForClosedItem];
+    [self.shareBehavior configureWith:self.feedItem];
+    [self.scrollBottomBehavior initialize];
     [self.summaryProvider configureWith:self.feedItem];
     [self.inviteBehavior configureWith:self.feedItem];
     [self.statusChangedBehavior configureWith:self.feedItem];
@@ -57,11 +68,19 @@
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];
     [self reloadMessages];
+    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
+    
+    [SVProgressHUD show];
+    [[[OTFeedItemFactory createForType:self.feedItem.type andId:self.feedItem.uid] getMessaging] setMessagesAsRead:^{
+        [SVProgressHUD dismiss];
+        [[OTUnreadMessagesService new] removeUnreadMessages:self.feedItem.uid];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD dismiss];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[OTBadgeNumberService sharedInstance] readItem:self.feedItem.uid];
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }
 
@@ -88,6 +107,14 @@
 
 #pragma mark - private methods
 
+- (void)setUpUIForClosedItem {
+    BOOL isClosed = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isClosed];
+    if(isClosed)
+        self.view.backgroundColor = self.tblChat.backgroundColor = CLOSED_ITEM_BACKGROUND_COLOR;
+    self.txtChat.hidden = self.btnSend.hidden = isClosed;
+    self.txtChat.delegate = self;
+}
+
 - (void)setupToolbarButtons {
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
     if(![stateInfo canChangeEditState])
@@ -102,11 +129,12 @@
 }
 
 - (IBAction)sendMessage {
-    if(self.txtChat.text.length == 0)
+    NSString *message = [self.txtChat.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if(message.length == 0)
         return;
-    [Flurry logEvent:@"AddContentToMessage"];
+    [OTLogger logEvent:@"AddContentToMessage"];
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:self.txtChat.text withSuccess:^(OTFeedItemMessage *message) {
+    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:message withSuccess:^(OTFeedItemMessage *message) {
         [SVProgressHUD dismiss];
         self.txtChat.text = @"";
         [[OTMessagingService new] readFor:self.feedItem onDataSource:self.dataSource];
@@ -116,13 +144,19 @@
 }
 
 - (IBAction)showMap {
-    [Flurry logEvent:@"EntouragePublicPageViewFromMessages"];
+    [OTLogger logEvent:@"EntouragePublicPageViewFromMessages"];
     [self performSegueWithIdentifier:@"SegueMap" sender:self];
 }
 
 - (IBAction)scrollToBottomWhileEditing {
     if(self.dataSource.items.count > 0)
         [self.dataSource.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.items.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    [OTLogger logEvent:@"WriteMessage"];
 }
 
 @end

@@ -19,6 +19,7 @@
 #define JOIN_PENDING @"pending"
 #define JOIN_NOT_REQUESTED @"not_requested"
 #define JOIN_REJECTED @"rejected"
+#define JOIN_CANCELLED @"cancelled"
 
 #define TOUR_TYPE_NAME @"Tour"
 
@@ -33,6 +34,8 @@
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSNumber *noPeople;
 @property (nonatomic, strong) OTMyFeedMessage *lastMessage;
+@property (nonatomic, assign) NSNumber *unreadMessageCount;
+@property (nonatomic, strong) NSString *shareUrl;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

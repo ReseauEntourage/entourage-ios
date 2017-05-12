@@ -48,7 +48,7 @@
         self.txtFeedItemDescription.text = [uiDelegate feedItemDescription];
     if(self.lblTimeDistance) {
         double distance = [uiDelegate distance];
-        self.lblTimeDistance.text = [self getDistance:distance with:feedItem.creationDate];
+        self.lblTimeDistance.text = [OTLocalizedString(@"feed_item_time_distance") stringByAppendingString: [self getDistance:distance with:feedItem.creationDate]];
     }
     self.imgAssociation.hidden = feedItem.author.partner == nil;
     [self.imgAssociation setupFromUrl:feedItem.author.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
@@ -66,6 +66,12 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
++ (NSString *)toDistance:(double)distance {
+    int distanceAmount = [self getDistance:distance];
+    NSString *distanceQualifier = [self getDistanceQualifier:distance];
+    return [NSString stringWithFormat:@"%d%@", distanceAmount, distanceQualifier];
 }
 
 #pragma mark - private methods
@@ -86,18 +92,17 @@
     NSString *fromDate = [creationDate sinceNow];
     if(distance < 0)
         return fromDate;
-    int distanceAmount = [self getDistance:distance];
-    NSString *distanceQualifier = [self getDistanceQualifier:distance];
-    return [NSString stringWithFormat:OTLocalizedString(@"entourage_time_data"), fromDate, distanceAmount, distanceQualifier];
+    NSString *distanceString = [OTSummaryProviderBehavior toDistance:distance];
+    return [NSString stringWithFormat:OTLocalizedString(@"entourage_time_data"), fromDate, distanceString];
 }
 
-- (int)getDistance:(double)from {
++ (int)getDistance:(double)from {
     if(from < 1000)
         return round(from);
     return round(from / 1000);
 }
 
-- (NSString *)getDistanceQualifier:(double)from {
++ (NSString *)getDistanceQualifier:(double)from {
     if(from < 1000)
         return @"m";
     return @"km";

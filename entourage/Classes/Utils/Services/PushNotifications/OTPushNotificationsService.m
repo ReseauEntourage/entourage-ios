@@ -17,13 +17,12 @@
 #import "UIStoryboard+entourage.h"
 #import "OTFeedItemJoiner.h"
 #import "OTFeedItemFactory.h"
-#import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"
 #import "OTDeepLinkService.h"
 #import "OTEntourageInvitation.h"
 #import "OTInvitationsService.h"
 #import "SVProgressHUD.h"
-#import "OTBadgeNumberService.h"
+#import "OTUnreadMessagesService.h"
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
@@ -98,31 +97,50 @@
     }];
 }
 
+- (void)handleAppLaunchFromNotificationCenter:(NSDictionary *)userInfo {
+    OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
+    if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST])
+        [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
+}
+
 #pragma mark - private methods
 
 - (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTBadgeNumberService sharedInstance] updateItem:pnData.joinableId];
-    OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
-    UIAlertAction *viewProfileAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [Flurry logEvent:@"UserProfileClick"];
-        [[OTDeepLinkService new] showProfileFromAnywhereForUser:joiner.uID];
-    }];
-    UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [Flurry logEvent:@"RejectJoinRequest"];
-            [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] reject:joiner success:nil failure:nil];
-    }];
-    UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [Flurry logEvent:@"AcceptJoinRequest"];
-            [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] accept:joiner success:nil failure:nil];
-    }];
-    [self displayAlertWithActions:@[refuseJoinRequestAction, acceptJoinRequestAction, viewProfileAction] forPushData:pnData];
+    [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getMessaging] getFeedItemUsersWithStatus:JOIN_PENDING success:^(NSArray *items){
+        NSNumber *userId = [pnData.extra numberForKey:@"user_id"];
+        for(OTFeedItemJoiner *item in items) {
+            if([item.uID isEqualToNumber:userId] && [item.status isEqualToString:JOIN_PENDING]) {
+                [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
+                OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
+            
+                UIAlertAction *viewProfileAction = [UIAlertAction   actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [OTLogger logEvent:@"UserProfileClick"];
+                    [[OTDeepLinkService new] showProfileFromAnywhereForUser:joiner.uID];
+                }];
+                UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [OTLogger logEvent:@"RejectJoinRequest"];
+                    [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] reject:joiner success:^(){
+                        [self refreshMessages:pnData];
+                    }failure:nil];
+                }];
+                UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [OTLogger logEvent:@"AcceptJoinRequest"];
+                    [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] accept:joiner success:^(){
+                            [self refreshMessages:pnData];
+                    }failure:nil];
+                }];
+                [self displayAlertWithActions:@[refuseJoinRequestAction, acceptJoinRequestAction, viewProfileAction] forPushData:pnData];
+            }
+        }
+    } failure:nil];
 }
 
 - (void)handleAcceptJoinNotification:(OTPushNotificationsData *)pnData
 {
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
+
     }];
     [self displayAlertWithActions:@[openAction] forPushData:pnData];
 }
@@ -141,7 +159,7 @@
 
 - (void)handleChatNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTBadgeNumberService sharedInstance] updateItem:pnData.joinableId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
     }];
@@ -150,7 +168,7 @@
 
 - (void)handleInviteRequestNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTBadgeNumberService sharedInstance] updateItem:pnData.entourageId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.entourageId];
     OTEntourageInvitation *invitation = [OTEntourageInvitation fromPushNotifiationsData:pnData];
     UIAlertAction *refuseInviteRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [SVProgressHUD show];
@@ -174,7 +192,7 @@
 
 - (void)handleInviteStatusNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTBadgeNumberService sharedInstance] updateItem:pnData.feedId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.feedId];
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OTDeepLinkService new] navigateTo:pnData.feedId withType:pnData.feedType];
     }];
@@ -226,6 +244,17 @@
             presentingBlock(topController, rootVC.presentedViewController);
     } else
         [rootVC presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - private methods
+
+- (void) refreshMessages:(OTPushNotificationsData *)pnData {
+    UIViewController *topController = [[OTDeepLinkService new] getTopViewController];
+    if ([topController isKindOfClass:[OTActiveFeedItemViewController class]]) {
+        OTActiveFeedItemViewController *feedItemVC = (OTActiveFeedItemViewController*)topController;
+        if ([feedItemVC.feedItem.uid isEqual:pnData.joinableId])
+            [feedItemVC reloadMessages];
+    }
 }
 
 @end

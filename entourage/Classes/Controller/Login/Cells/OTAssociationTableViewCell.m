@@ -7,7 +7,7 @@
 //
 
 #import "OTAssociationTableViewCell.h"
-#import "UIImageView+entourage.h"
+#import "UIButton+entourage.h"
 
 #define SELECTED_IMAGE @"24HSelected"
 #define UNSELECTED_IMAGE @"24HInactive"
@@ -17,11 +17,15 @@
 @implementation OTAssociationTableViewCell
 
 - (void)configureWith:(OTAssociation *)association {
-    [self.imgLogo setupFromUrl:association.largeLogoUrl withPlaceholder:nil];
+    [self.btnLogo setupAsProfilePictureFromUrl:association.largeLogoUrl withPlaceholder:@"badgeDefault"];
     NSString *fontName = association.isDefault ? @"SFUIText-Bold" : @"SFUIText-Light";
     self.lblName.font = [UIFont fontWithName:fontName size:NAME_FONT_SIZE];
     self.lblName.text = association.name;
     self.imgSelected.image = [[UIImage imageNamed:(association.isDefault ? SELECTED_IMAGE : UNSELECTED_IMAGE)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+}
+
+- (IBAction)showAssociationDetails:(id)sender {
+    [self.owner performSegueWithIdentifier:@"AssociationDetails" sender:self];
 }
 
 @end

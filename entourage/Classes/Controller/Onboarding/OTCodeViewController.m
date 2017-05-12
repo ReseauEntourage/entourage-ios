@@ -76,52 +76,39 @@
     [self.codeTextField becomeFirstResponder];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 - (void)doRegenerateCode {
     NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
     [SVProgressHUD show];
-    [[OTAuthService new] regenerateSecretCode:phone
-                                      success:^(OTUser *user) {
-                                          [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
-                                      }
-                                      failure:^(NSError *error) {
-                                          [SVProgressHUD dismiss];
-                                          [[[UIAlertView alloc]
-                                            initWithTitle:OTLocalizedString(@"error") //@"Erreur"
-                                            message:OTLocalizedString(@"requestNotSent")// @"Echec lors de la demande"
-                                            delegate:nil
-                                            cancelButtonTitle:nil
-                                            otherButtonTitles:@"Ok",
-                                            nil] show];
-                                      }];
+    [[OTAuthService new] regenerateSecretCode:phone success:^(OTUser *user) {
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
+    } failure:^(NSError *error) {
+        [SVProgressHUD dismiss];
+        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"requestNotSent") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+    }];
 }
 
 - (IBAction)doContinue {
     NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
     NSString *code = self.codeTextField.text;
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
-
     [SVProgressHUD show];
-
-    [[OTAuthService new] authWithPhone:phone
-                              password:code
-                              deviceId:deviceAPNSid
-                               success: ^(OTUser *user) {
-                                   NSLog(@"User : %@ authenticated successfully", user.email);
-                                   user.phone = phone;
-                                   [SVProgressHUD dismiss];
-                                   [NSUserDefaults standardUserDefaults].currentUser = user;
-                                   [NSUserDefaults standardUserDefaults].temporaryUser = nil;
-                                   if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
-                                       [UIStoryboard showSWRevealController];
-                                   else
-                                       [self.onboardingNavigation nextFromLogin];
-                               } failure: ^(NSError *error) {
-                                   [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-                               }];
+    [[OTAuthService new] authWithPhone:phone password:code deviceId:deviceAPNSid success: ^(OTUser *user) {
+        NSLog(@"User : %@ authenticated successfully", user.email);
+        user.phone = phone;
+        [SVProgressHUD dismiss];
+        [NSUserDefaults standardUserDefaults].currentUser = user;
+        [NSUserDefaults standardUserDefaults].temporaryUser = nil;
+        if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
+            [UIStoryboard showSWRevealController];
+        else
+            [self.onboardingNavigation nextFromLogin];
+    } failure: ^(NSError *error) {
+        [SVProgressHUD dismiss];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"tryAgain") message:OTLocalizedString(@"invalidPhoneNumberOrCode") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"tryAgain_short") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction: defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }];
 }
 
 @end

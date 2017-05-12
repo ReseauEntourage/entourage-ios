@@ -9,6 +9,8 @@
 #import "OTEntourageUI.h"
 #import "OTConsts.h"
 #import "OTLocationManager.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
 
 @implementation OTEntourageUI
 
@@ -49,6 +51,15 @@
 
 - (NSString *)displayType {
     return OTLocalizedString(self.entourage.type);
+}
+
+- (BOOL)isStatusBtnVisible {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if ([currentUser.sid intValue] == [self.entourage.author.uID intValue])
+        return [self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN];
+    else
+        return [self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED] && [self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN];
+    return NO;
 }
 
 @end

@@ -1,0 +1,21 @@
+//
+//  OTMailSenderBehavior.h
+//  entourage
+//
+//  Created by veronica.gliga on 27/03/2017.
+//  Copyright © 2017 OCTO Technology. All rights reserved.
+//
+
+#import "OTBehavior.h"
+#import "OTCloseReason.h"
+#import "OTEntourage.h"
+
+@interface OTMailSenderBehavior : OTBehavior
+
+@property (nonatomic, weak) IBOutlet UIViewController *owner;
+
+- (BOOL)sendMailWithSubject:(NSString *)subject andRecipient: (NSString *)recipient;
+- (BOOL)sendCloseMail: (OTCloseReason) reason forItem: (OTEntourage *) feedItem;
+- (BOOL)sendStructureMail:(NSString *)subject;
+
+@end

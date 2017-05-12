@@ -13,7 +13,7 @@
 #import "OTUserProfileBehavior.h"
 #import "OTFeedItemFactory.h"
 #import "OTInvitationChangedBehavior.h"
-#import "OTBadgeNumberService.h"
+#import "OTUnreadMessagesService.h"
 
 @interface OTManageInvitationViewController ()
 
@@ -45,12 +45,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[OTBadgeNumberService sharedInstance] readItem:self.feedItem.uid];
+    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:self.feedItem.uid];
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }
 
 - (IBAction)showProfile {
-    [Flurry logEvent:@"UserProfileClick"];
+    [OTLogger logEvent:@"UserProfileClick"];
     [self.userProfileBehavior showProfile:self.feedItem.author.uID];
 }
 

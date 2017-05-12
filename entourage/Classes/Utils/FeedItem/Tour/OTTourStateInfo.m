@@ -23,7 +23,7 @@
     else
         result = FeedItemStateClosed;
     if ([currentUser.sid intValue] != [self.tour.author.uID intValue]) {
-        if([JOIN_NOT_REQUESTED isEqualToString:self.tour.joinStatus])
+        if([JOIN_NOT_REQUESTED isEqualToString:self.tour.joinStatus] || [JOIN_CANCELLED isEqualToString:self.tour.joinStatus])
             result = FeedItemStateJoinNotRequested;
         else if([JOIN_ACCEPTED isEqualToString:self.tour.joinStatus])
             result = FeedItemStateJoinAccepted;
@@ -50,13 +50,26 @@
     return [self.tour.status isEqualToString:TOUR_STATUS_ONGOING] || [self.tour.status isEqualToString:FEEDITEM_STATUS_CLOSED];
 }
 
+- (BOOL)isClosed {
+    return [self.tour.status isEqualToString:TOUR_STATUS_FREEZED];
+}
+
 - (BOOL)isPublic {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if([self.tour.status isEqualToString:TOUR_STATUS_FREEZED])
-        return YES;
-    return ![self.tour.joinStatus isEqualToString:JOIN_ACCEPTED];
+        return !([currentUser.sid intValue] == [self.tour.author.uID intValue] ||
+                 [self.tour.joinStatus isEqualToString:JOIN_ACCEPTED]);
+    return ![JOIN_ACCEPTED isEqualToString:self.tour.joinStatus];
 }
 
 - (BOOL)canEdit {
+    return NO;
+}
+
+- (BOOL)canCancelJoinRequest {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if ([currentUser.sid intValue] != [self.tour.author.uID intValue])
+        return [self.tour.status isEqualToString:JOIN_PENDING];
     return NO;
 }
 

@@ -16,6 +16,7 @@
 - (void)getMessagesWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
 - (void)getFeedItemUsersWithStatus:(NSString *)status success:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
 - (void)getEncountersWithSuccess:(void(^)(NSArray *))success failure:(void (^)(NSError *)) failure;
+- (void)setMessagesAsRead:(void (^)())success orFailure:(void (^)(NSError *)) failure;
 - (NSArray *)getTimelineStatusMessages;
 
 @end

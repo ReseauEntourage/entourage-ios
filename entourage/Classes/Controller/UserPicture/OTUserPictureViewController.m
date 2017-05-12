@@ -36,6 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [OTLogger logEvent:@"Screen09_6ChoosePhotoView"];
     if ([NSUserDefaults standardUserDefaults].isTutorialCompleted)
         self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     else
@@ -45,7 +46,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if(self.isMovingFromParentViewController)
-        [Flurry logEvent:@"BackFromPhoto1"];
+        [OTLogger logEvent:@"BackFromPhoto1"];
 }
 
 - (IBAction)pictureSelected:(id)sender {
@@ -73,7 +74,7 @@
 }
 
 - (void)ignore {
-    [Flurry logEvent:@"IgnorePhoto"];
+    [OTLogger logEvent:@"IgnorePhoto"];
     [self performSegueWithIdentifier:@"SkipPreviewSegue" sender:self];
 }
 

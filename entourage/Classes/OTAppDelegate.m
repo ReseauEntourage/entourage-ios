@@ -21,21 +21,27 @@
 #import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
 #import "SVProgressHUD.h"
-#import "OTBadgeNumberService.h"
 #import "Flurry.h"
 #import "OTVersionInfo.h"
 #import "OTDebugLog.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "entourage-Swift.h"
-
+#import "UIColor+entourage.h"
+#import "OTUnreadMessagesService.h"
+#import "OTLoginViewController.h"
+#import "OTLostCodeViewController.h"
+#import "OTPhoneViewController.h"
+#import "OTCodeViewController.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
+NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 
 @interface OTAppDelegate () <UIApplicationDelegate>
 
 @property (nonatomic, strong) OTPushNotificationsService *pnService;
+@property (nonatomic, assign) BOOL launchedFromNotifications;
 
 @end
 
@@ -47,22 +53,29 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     [[OTDebugLog sharedInstance] setConsoleOutput];
 
 #if !DEBUG
-    [Flurry setAppVersion:[OTVersionInfo currentVersion]];
-    [Flurry startSession:OTLocalizedString(@"FLURRY_API_KEY")];
     [Fabric with:@[[Crashlytics class]]];
+    [Flurry setBackgroundSessionEnabled:NO];
+    FlurrySessionBuilder *builder = [[[[FlurrySessionBuilder new] withLogLevel:FlurryLogLevelAll] withCrashReporting:YES] withAppVersion:[OTVersionInfo currentVersion]];
+    [Flurry startSession:[ConfigurationManager shared].flurryAPIKey withSessionBuilder:builder];
 #endif
 
     [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
     [self configureUIAppearance];
 
     self.pnService = [OTPushNotificationsService new];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
+    
     if ([NSUserDefaults standardUserDefaults].currentUser) {
         [self.pnService promptUserForPushNotifications];
-        if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
+        if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
+            NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+            if(pnData)
+                [self.pnService handleAppLaunchFromNotificationCenter:pnData];
+        }
         else
             [UIStoryboard showUserProfileDetails];
     }
@@ -100,8 +113,11 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     }];
 }
 
+- (void)updateBadge {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[OTUnreadMessagesService new] totalCount].integerValue];
+}
+
 - (void)clearUserData {
-    [[OTBadgeNumberService sharedInstance] clearData];
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -130,7 +146,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive)
         [self.pnService handleRemoteNotification:userInfo];
-    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
@@ -138,7 +153,6 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground || state == UIApplicationStateInactive)
         [self.pnService handleLocalNotification:userInfo];
-    application.applicationIconBadgeNumber = 0;
 }
 
 #pragma mark - Configure UIAppearance
@@ -152,12 +166,13 @@ NSString *const kLoginFailureNotification = @"loginFailureNotification";
 	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
         NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
 
+    UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
+    UIPageControl.appearance.currentPageIndicatorTintColor = [UIColor appGreyishBrownColor];
+    
 #if BETA
     UINavigationBar.appearance.barTintColor = [UIColor redColor];
     UINavigationBar.appearance.backgroundColor = [UIColor redColor];
 #endif
-
-    UITextField.appearance.tintColor = [UIColor whiteColor];
 }
 
 @end

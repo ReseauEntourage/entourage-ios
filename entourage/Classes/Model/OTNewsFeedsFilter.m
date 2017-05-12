@@ -12,6 +12,9 @@
 #import "OTFeedItemTimeframeFilter.h"
 #import "OTTour.h"
 #import "OTEntourage.h"
+#import "NSUserDefaults+OT.h"
+#import "OTSavedFilter.h"
+#import "OTAPIConsts.h"
 
 #define FEEDS_REQUEST_DISTANCE_KM 10
 
@@ -20,28 +23,40 @@
 - (instancetype)init {
     self = [super init];
     if(self) {
-        BOOL isPro = [self.currentUser.type isEqualToString:USER_TYPE_PRO];
-        self.showMedical = isPro;
-        self.showSocial = isPro;
-        self.showDistributive = isPro;
-        self.showDemand = !isPro;
-        self.showContribution = !isPro;
-        self.showTours = isPro;
+        self.isPro = IS_PRO_USER;
+        OTSavedFilter *savedFilter = [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter;
         self.showOnlyMyEntourages = NO;
-        self.timeframeInHours = 8 * 24;
+        if(savedFilter) {
+            self.showMedical = savedFilter.showMedical.boolValue;
+            self.showSocial = savedFilter.showSocial.boolValue;
+            self.showDistributive = savedFilter.showDistributive.boolValue;
+            self.showDemand = savedFilter.showDemand.boolValue;
+            self.showContribution = savedFilter.showContribution.boolValue;
+            self.showTours = savedFilter.showTours.boolValue;
+            self.timeframeInHours = savedFilter.timeframeInHours.intValue;
+        }
+        else {
+            self.showMedical = self.isPro;
+            self.showSocial = self.isPro;
+            self.showDistributive = self.isPro;
+            self.showDemand = !self.isPro;
+            self.showContribution = !self.isPro;
+            self.showTours = self.isPro;
+            self.timeframeInHours = 8 * 24;
+        }
     }
     return self;
 }
 
 - (NSArray *)groupHeaders {
-    if([self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(IS_PRO_USER)
         return @[OTLocalizedString(@"filter_maraudes_title"), OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_timeframe_title")];
     else
         return @[OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_timeframe_title")];
 }
 
 - (NSArray *)toGroupedArray {
-    if([self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(IS_PRO_USER)
         return @[
                     @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyMedical active:self.showMedical withImage:@"filter_heal"],
@@ -51,8 +66,7 @@
                     @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyTour active:self.showTours],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOnlyMyEntourages active:self.showOnlyMyEntourages]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyTour active:self.showTours]
                     ],
                     @[
                         [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
@@ -62,8 +76,7 @@
         return @[
                     @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOnlyMyEntourages active:self.showOnlyMyEntourages]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution]
                     ],
                     @[
                         [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
@@ -105,9 +118,6 @@
         case FeedItemFilterKeyTour:
             self.showTours = filter.active;
             break;
-        case FeedItemFilterKeyOnlyMyEntourages:
-            self.showOnlyMyEntourages = filter.active;
-            break;
         case FeedItemFilterKeyTimeframe:
             self.timeframeInHours = ((OTFeedItemTimeframeFilter *)filter).timeframeInHours;
             break;
@@ -132,7 +142,7 @@
         [types addObject:OTLocalizedString(@"tour_type_bare_hands")];
     if(self.showDistributive)
         [types addObject:OTLocalizedString(@"tour_type_alimentary")];
-    if(self.showTours && [self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(self.showTours && IS_PRO_USER)
         return [types componentsJoinedByString:@","];
     return @"";
 }

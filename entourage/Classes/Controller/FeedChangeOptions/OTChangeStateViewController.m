@@ -14,6 +14,11 @@
 #import "UIColor+entourage.h"
 #import "OTSignalEntourageBehavior.h"
 #import "OTEntourage.h"
+#import "OTConfirmCloseViewController.h"
+#import "SVProgressHUD.h"
+#import "OTConsts.h"
+#import "OTAPIConsts.h"
+
 
 @interface OTChangeStateViewController ()
 
@@ -31,10 +36,18 @@
     
     [self changeBorderColors];
     [self.toggleEditBehavior initialize];
-    [self.toggleEditBehavior toggle:[[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] canEdit] animated:NO];
+    id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
+    BOOL canCancelJoin = [stateInfo canCancelJoinRequest];
+    [self.toggleEditBehavior toggle:[stateInfo canEdit] animated:NO];
     [self.toggleSignalEntourageBehavior initialize];
-    [self.toggleSignalEntourageBehavior toggle:[self.feedItem isKindOfClass:[OTEntourage class]] && ![[NSUserDefaults standardUserDefaults].currentUser.sid isEqualToNumber:self.feedItem.author.uID] animated:NO];
+    [self.toggleSignalEntourageBehavior toggle:[self.feedItem isKindOfClass:[OTEntourage class]] && ![USER_ID isEqualToNumber:self.feedItem.author.uID] && !canCancelJoin animated:NO];
     [self.nextStatusBehavior configureWith:self.feedItem andProtocol:self.delegate];
+}
+
+- (IBAction)doQuitter {
+    [OTLogger logEvent:@"CloseEntourageConfirm"];
+    [SVProgressHUD show];
+    [self performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
 }
 
 - (IBAction)close:(id)sender {
@@ -42,7 +55,7 @@
 }
 
 - (IBAction)edit:(id)sender {
-    [Flurry logEvent:@"EditEntourageConfirm"];
+    [OTLogger logEvent:@"EditEntourageConfirm"];
     [self dismissViewControllerAnimated:YES completion:^{
         [self.editEntourageBehavior doEdit:(OTEntourage *)self.feedItem];
     }];
@@ -51,6 +64,13 @@
 - (IBAction)signalEntourage:(id)sender {
     if([self.feedItem isKindOfClass:[OTEntourage class]])
         [self.singalEntourageBehavior sendMailFor:(OTEntourage *)self.feedItem];
+}
+
+#pragma mark - navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([self.nextStatusBehavior prepareForSegue:segue sender:sender])
+        return;
 }
 
 #pragma mark - private methods

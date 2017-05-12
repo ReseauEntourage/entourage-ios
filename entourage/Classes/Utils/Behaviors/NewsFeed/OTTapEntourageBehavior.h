@@ -12,6 +12,7 @@
 @interface OTTapEntourageBehavior : OTBehavior
 
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong) MKCircle *tappedEntourage;
 
 - (BOOL)hasTappedEntourage:(UITapGestureRecognizer *)recognizer;
 

@@ -24,4 +24,6 @@
 
 @property (nonatomic, strong) NSNumber *fontSize;
 
++ (NSString *)toDistance:(double)distance;
+
 @end

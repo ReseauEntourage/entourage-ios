@@ -125,6 +125,7 @@
     entourage.status = ENTOURAGE_STATUS_OPEN;
     [SVProgressHUD show];
     [[OTEncounterService new] sendEntourage:entourage withSuccess:^(OTEntourage *sentEntourage) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageCreated object:nil];
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
         if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
     } failure:^(NSError *error) {
@@ -157,6 +158,7 @@
 - (void)didSelectLocation:(CLLocation *)selectedLocation {
     self.location = selectedLocation;
     [self updateLocationTitle];
+
 }
 
 #pragma mark - Segue
@@ -164,10 +166,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.disclaimer prepareSegue:segue])
         return;
-    
     UIViewController *destinationViewController = segue.destinationViewController;
     if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]]) {
-        [Flurry logEvent:@"ChangeLocationClick"];
+        [OTLogger logEvent:@"ChangeLocationClick"];
         OTLocationSelectorViewController* controller = (OTLocationSelectorViewController *)destinationViewController;
         controller.locationSelectionDelegate = self;
         controller.selectedLocation = self.location;

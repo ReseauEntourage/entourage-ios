@@ -12,6 +12,8 @@
 #import "OTFeedItem.h"
 #import "OTFeedItemTimeframeFilter.h"
 #import "OTConsts.h"
+#import "OTAPIConsts.h"
+#import "NSUserDefaults+OT.h"
 
 #define ALL_STATUS_STRING @"all"
 
@@ -20,33 +22,28 @@
 - (instancetype)init {
     self = [super init];
     if(self) {
-        self.isActive = YES;
-        self.isInvited = NO;
-        self.isOrganiser = NO;
-        self.isClosed = YES;
+        self.isUnread = NO;
+        self.isIncludingClosed = YES;
         self.showDemand = YES;
         self.showContribution = YES;
         self.showTours = YES;
-        self.timeframeInHours = 8 * 24;
     }
     return self;
 }
 
 - (NSArray *)groupHeaders {
-    if([self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(IS_PRO_USER)
         return @[OTLocalizedString(@"myEntouragesTitle"), OTLocalizedString(@"filter_entourages_title")];
     else
         return @[OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_timeframe_title")];
 }
 
 - (NSArray *)toGroupedArray {
-    if([self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(IS_PRO_USER)
         return @[
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyActive active:self.isActive],
-                        //[OTFeedItemFilter createFor:FeedItemFilterKeyInvitation active:self.isInvited],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganiser active:self.isOrganiser],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyClosed active:self.isClosed]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyUnread active:self.isUnread],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed active:self.isIncludingClosed]
                     ],
                     @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
@@ -57,10 +54,8 @@
     else
         return @[
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyActive active:self.isActive],
-                        //[OTFeedItemFilter createFor:FeedItemFilterKeyInvitation active:self.isInvited],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganiser active:self.isOrganiser],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyClosed active:self.isClosed]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyUnread active:self.isUnread],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed active:self.isIncludingClosed]
                      ],
                     @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
@@ -75,36 +70,21 @@
     [result setObject:[self getEntourageTypes] forKey:@"entourage_types"];
     [result setObject:@(pageNumber) forKey:@"page"];
     [result setObject:@(pageSize) forKey:@"per"];
-    if(self.isOrganiser)
+    if(self.isUnread)
         [result setObject:@"true" forKey:@"created_by_me"];
-    if(self.isInvited)
-        [result setObject:@"true" forKey:@"accepted_invitation"];
-    if([self.currentUser.type isEqualToString:USER_TYPE_PUBLIC]) {
-        //[result setObject:@(self.timeframeInHours) forKey:@"time_range"];
-        [result setObject:[self getOnlyMyEntourages] forKey:@"status"];
-    }
-    else
-    {
-        NSString *status = [self getStatus];
-        if(status)
-            [result setObject:[self getStatus] forKey:@"status"];
-    }
+    NSString *status = [self getStatus];
+    if(status)
+        [result setObject:[self getStatus] forKey:@"status"];
     return result;
 }
 
 - (void)updateValue:(OTFeedItemFilter *)filter {
     switch (filter.key) {
-        case FeedItemFilterKeyActive:
-            self.isActive = filter.active;
+        case FeedItemFilterKeyUnread:
+            self.isUnread = filter.active;
             break;
-        case FeedItemFilterKeyInvitation:
-            self.isInvited = filter.active;
-            break;
-        case FeedItemFilterKeyOrganiser:
-            self.isOrganiser = filter.active;
-            break;
-        case FeedItemFilterKeyClosed:
-            self.isClosed = filter.active;
+        case FeedItemFilterKeyIncludingClosed:
+            self.isIncludingClosed = filter.active;
             break;
         case FeedItemFilterKeyDemand:
             self.showDemand = filter.active;
@@ -115,26 +95,16 @@
         case FeedItemFilterKeyTour:
             self.showTours = filter.active;
             break;
-        case FeedItemFilterKeyOnlyMyEntourages:
-            self.showOnlyMyEntourages = filter.active;
-            break;
-        case FeedItemFilterKeyTimeframe:
-            self.timeframeInHours = ((OTFeedItemTimeframeFilter *)filter).timeframeInHours;
-            break;
         default:
             break;
     }
-}
-
-- (NSArray *)timeframes {
-    return @[@(24), @(8*24), @(30*24)];
 }
 
 #pragma mark - private methods
 
 - (NSString *)getTourTypes {
     NSArray *types = @[TOUR_MEDICAL, TOUR_SOCIAL, TOUR_DISTRIBUTIVE];
-    if(self.showTours && [self.currentUser.type isEqualToString:USER_TYPE_PRO])
+    if(self.showTours && IS_PRO_USER)
         return [types componentsJoinedByString:@","];
     return @"";
 }
@@ -149,15 +119,7 @@
 }
 
 - (NSString *)getStatus {
-    if(self.isActive)
-        return self.isClosed ? ALL_STATUS_STRING : FEEDITEM_STATUS_ACTIVE;
-    if(self.isClosed)
-        return FEEDITEM_STATUS_CLOSED;
-    return nil;
-}
-
-- (NSString *)getOnlyMyEntourages {
-    return self.showOnlyMyEntourages ? FEEDITEM_STATUS_ACTIVE : ALL_STATUS_STRING;
+    return self.isIncludingClosed ? ALL_STATUS_STRING : FEEDITEM_STATUS_ACTIVE;
 }
 
 @end

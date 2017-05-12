@@ -11,6 +11,8 @@
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "OTFeedItemFactory.h"
+#import "OTConsts.h"
+#import "UIColor+entourage.h"
 
 #define DEFAULT_IMAGE @"userSmall"
 
@@ -20,6 +22,8 @@
 #define JOINBUTTON_REJECTED     @"refusedRequestButton"
 
 @implementation UIButton (entourage)
+
+#define statusButtonWidth 45
 
 - (void)setupAsProfilePictureFromUrl:(NSString *)avatarURLString
 {
@@ -42,23 +46,53 @@
 }
 
 - (void)setupAsStatusButtonForFeedItem:(OTFeedItem *)feedItem {
-    self.hidden = ![[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
-    
-    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
-        //
-        [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
-    } else {
-        if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
-            [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
-        } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
-            [self setImage:[UIImage imageNamed:JOINBUTTON_PENDING] forState:UIControlStateNormal];
-        } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
-           [self setImage:[UIImage imageNamed:JOINBUTTON_REJECTED] forState:UIControlStateNormal];
+    self.hidden = ![[[OTFeedItemFactory createFor:feedItem] getUI] isStatusBtnVisible];
+    [self resizeStatusButton];
+    [self setImage:[UIImage imageNamed:JOINBUTTON_ACCEPTED] forState:UIControlStateNormal];
+}
+
+- (void)setupAsStatusTextButtonForFeedItem:(OTFeedItem *)feedItem {
+    bool isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
+    self.enabled = NO;
+    if(isActive) {
+        OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+        if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
+            self.enabled = YES;
+            if([feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
+                [self setTitle:OTLocalizedString(@"ongoing") forState:UIControlStateNormal];
+            else
+                [self setTitle:OTLocalizedString(@"join_active") forState:UIControlStateNormal];
+            [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
         } else {
-           [self setImage:[UIImage imageNamed:JOINBUTTON_NOTREQUESTED] forState:UIControlStateNormal];
+            if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
+                 self.enabled = YES;
+                [self setTitle:OTLocalizedString(@"join_active") forState:UIControlStateNormal];
+                [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
+            } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
+                self.enabled = YES;
+                [self setTitle:OTLocalizedString(@"join_pending") forState:UIControlStateNormal];
+                [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
+            } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
+                [self setTitle:OTLocalizedString(@"join_rejected") forState:UIControlStateNormal];
+                [self setTitleColor:[UIColor appTomatoColor] forState:UIControlStateNormal];
+            } else {
+                [self setTitle:OTLocalizedString(@"join_to_join") forState:UIControlStateNormal];
+                [self setTitleColor:[UIColor appGreyishColor] forState:UIControlStateNormal];
+            }
         }
     }
+    else {
+        [self setTitle:OTLocalizedString(@"item_closed") forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor appGreyishColor] forState:UIControlStateNormal];
+    }
+}
+
+#pragma mark - private methods
+
+- (void)resizeStatusButton {
+    for(NSLayoutConstraint *constraint in self.constraints)
+        if(constraint.firstAttribute == NSLayoutAttributeWidth)
+            constraint.constant = self.hidden ? 0 : statusButtonWidth;
 }
 
 @end

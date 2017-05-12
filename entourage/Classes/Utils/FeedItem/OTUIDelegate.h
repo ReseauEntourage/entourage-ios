@@ -20,5 +20,6 @@
 - (NSString *)navigationTitle;
 - (NSString *)joinAcceptedText;
 - (double)distance;
+- (BOOL)isStatusBtnVisible;
 
 @end

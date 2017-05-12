@@ -17,45 +17,62 @@
         return;
     
     [dataSource.items removeAllObjects];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
-        id<OTMessagingDelegate> messaging = [[OTFeedItemFactory createFor:feedItem] getMessaging];
+    id<OTMessagingDelegate> messaging = [[OTFeedItemFactory createFor:feedItem] getMessaging];
 
-        NSMutableArray *allItems = [NSMutableArray new];
-        [allItems addObjectsFromArray:[messaging getTimelineStatusMessages]];
+    NSMutableArray *allItems = [NSMutableArray new];
+    [allItems addObjectsFromArray:[messaging getTimelineStatusMessages]];
+    
+    dispatch_group_t group = dispatch_group_create();
+    
+    
+    dispatch_group_enter(group);
+    dispatch_group_enter(group);
+    dispatch_group_enter(group);
+
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         [self sendItems:allItems toSource:dataSource];
-        
-        [messaging getMessagesWithSuccess:^(NSArray *items) {
-            if([items count] > 0)
-                @synchronized (allItems) {
-                    [allItems addObjectsFromArray:items];
-                    [self sendItems:allItems toSource:dataSource];
-                }
-        } failure:nil];
+    });
 
+    [messaging getMessagesWithSuccess:^(NSArray *items) {
+        if([items count] > 0)
+            @synchronized (allItems) {
+                [allItems addObjectsFromArray:items];
+            }
+        dispatch_group_leave(group);
+    } failure:^(NSError *error) {
+        dispatch_group_leave(group);
+    }];
+
+    if([[[OTFeedItemFactory createFor: feedItem] getStateInfo] isClosed])
+        dispatch_group_leave(group);
+    else
         [messaging getFeedItemUsersWithStatus:nil success:^(NSArray *items) {
             if([items count] > 0)
                 @synchronized (allItems) {
                     for(OTFeedItemJoiner *joiner in items)
                         joiner.feedItem = feedItem;
                     [allItems addObjectsFromArray:items];
-                    [self sendItems:allItems toSource:dataSource];
                 }
-        } failure:nil];
+            dispatch_group_leave(group);
+        } failure:^(NSError *error) {
+            dispatch_group_leave(group);
+        }];
 
-        [messaging getEncountersWithSuccess:^(NSArray *items) {
-            if([items count] > 0)
-                @synchronized (allItems) {
-                    [allItems addObjectsFromArray:items];
-                    [self sendItems:allItems toSource:dataSource];
-                }
-        } failure:nil];
-    });
+    [messaging getEncountersWithSuccess:^(NSArray *items) {
+        if([items count] > 0)
+            @synchronized (allItems) {
+                [allItems addObjectsFromArray:items];
+            }
+        dispatch_group_leave(group);
+    } failure:^(NSError *error) {
+        dispatch_group_leave(group);
+    }];
 }
 
 #pragma mark - private methods
 
 - (void)sendItems:(NSArray *)items toSource:(OTDataSourceBehavior *)source {
-    NSArray *sortedItems = [items sortedArrayUsingSelector:@selector(compare:)];
+   NSArray *sortedItems = [self insertChatDates:items];
     dispatch_async(dispatch_get_main_queue(), ^{
         [source updateItems:sortedItems];
         [source.tableView reloadData];
@@ -64,6 +81,22 @@
             [source.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
         }
     });
+}
+
+- (NSArray *)insertChatDates:(NSArray *)items {
+    NSArray *sortedItems = [items sortedArrayUsingSelector:@selector(compare:)];
+    NSMutableArray *result = [NSMutableArray new];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
+    for(OTFeedItemTimelinePoint *item in sortedItems){
+        if(![[NSCalendar currentCalendar] isDate:item.date inSameDayAsDate:date]) {
+            date = item.date;
+            OTFeedItemTimelinePoint *chatPoint = [OTFeedItemTimelinePoint new];
+            chatPoint.date = date;
+            [result addObject:chatPoint];
+        }
+        [result addObject:item];
+    }
+    return result;
 }
 
 @end

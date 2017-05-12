@@ -47,9 +47,8 @@
     [[OTTourService new] tourUsers:self.tour success:^(NSArray *items) {
         NSLog(@"GET TOUR JOINS");
         if(success) {
-            NSNumber *authorId = self.tour.author.uID;
             NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
-                return ![item.uID isEqual:authorId] && (!status || [item.status isEqualToString:status]);
+                return !status || [item.status isEqualToString:status];
             }]];
             success(filteredItems);
         }
@@ -68,6 +67,16 @@
     } failure:^(NSError *error) {
         NSLog(@"GET TOUR ENCOUNTERSErr: %@", error.description);
         if(failure)
+            failure(error);
+    }];
+}
+
+- (void)setMessagesAsRead:(void (^)())success orFailure:(void (^)(NSError *))failure {
+    [[OTTourService new] readTourMessages:self.tour.uid success:^(){
+        if(success)
+            success();
+    } failure:^(NSError *error) {
+        if (failure)
             failure(error);
     }];
 }

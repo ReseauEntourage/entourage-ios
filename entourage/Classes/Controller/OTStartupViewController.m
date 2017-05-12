@@ -36,6 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [OTLogger logEvent:@"Screen01SplashVew"];
     [NSUserDefaults standardUserDefaults].temporaryUser = nil;
 
   self.betaButton.hidden = NO;
@@ -45,6 +46,16 @@
   self.betaButton.titleLabel.numberOfLines = 2;
   [self.betaButton setTitle:title forState:UIControlStateNormal];
   self.betaButton.hidden = YES;
+}
+
+-(IBAction)showSignUp:(id)sender {
+    [OTLogger logEvent:@"SplashSignUp"];
+    [self performSegueWithIdentifier:@"SignUpSegue" sender:nil];
+}
+
+-(IBAction)showLogin:(id)sender {
+    [OTLogger logEvent:@"SplashLogIn"];
+    [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
 }
 
 @end
