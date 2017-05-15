@@ -35,11 +35,15 @@
 #pragma mark - private methods
 
 - (NSAttributedString *)getLabelTextForUser:(NSString *)userName withStreetPersonName:(NSString *)streetPersonName {
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:userName attributes:@{NSForegroundColorAttributeName: [UIColor appOrangeColor], NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid)}];
-    NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_encounter_and_user_meet"), streetPersonName] attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor], NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid)}];
-    NSMutableAttributedString *nameInfoAttrString = nameAttrString.mutableCopy;
-    [nameInfoAttrString appendAttributedString:infoAttrString];
-    return nameInfoAttrString;
+    NSMutableAttributedString *nameAttrString = [[NSMutableAttributedString alloc] initWithString:userName attributes:@{NSForegroundColorAttributeName: [UIColor appOrangeColor]}];
+    NSMutableAttributedString *infoAttrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_encounter_and_user_meet"), streetPersonName] attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
+    
+    if([self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING]) {
+       [nameAttrString addAttribute: NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range: NSMakeRange(0, [nameAttrString length])];
+        [infoAttrString addAttribute: NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range: NSMakeRange(0, [infoAttrString length])];
+    }
+    [nameAttrString appendAttributedString:infoAttrString];
+    return nameAttrString;
 }
 
 @end
