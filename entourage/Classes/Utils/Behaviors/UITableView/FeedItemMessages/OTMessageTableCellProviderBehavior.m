@@ -12,6 +12,7 @@
 #import "OTFeedItemTimelinePoint.h"
 #import "OTChatCellBase.h"
 #import "MessageCellType.h"
+#import "OTEncounterCell.h"
 
 @implementation OTMessageTableCellProviderBehavior
 
@@ -19,6 +20,8 @@
     OTFeedItemTimelinePoint *timelinePoint = [self.tableDataSource getItemAtIndexPath:indexPath];
     NSString *reuseIdentifier = [self getReuseIdentifier:timelinePoint];
     OTChatCellBase *cell = (OTChatCellBase *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if([cell isKindOfClass:[OTEncounterCell class]])
+        ((OTEncounterCell *)cell).feedItem = self.feedItem;
     [cell configureWithTimelinePoint:timelinePoint];
     return cell;
 }

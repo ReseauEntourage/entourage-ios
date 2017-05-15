@@ -10,6 +10,8 @@
 #import "OTEncounter.h"
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
+#import "OTOngoingTourService.h"
+#import "OTTour.h"
 
 @interface OTEncounterCell ()
 
@@ -19,9 +21,10 @@
 
 @implementation OTEncounterCell
 
-- (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
+- (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint  {
     self.encounter =  (OTEncounter *)timelinePoint;
     [self.btnInfo setAttributedTitle:[self getLabelTextForUser:self.encounter.userName withStreetPersonName:self.encounter.streetPersonName] forState:UIControlStateNormal];
+   [self.btnInfo setEnabled: [self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING]];
 }
 
 - (void)doEditEncounter {

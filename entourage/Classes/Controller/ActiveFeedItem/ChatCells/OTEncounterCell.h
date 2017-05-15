@@ -8,11 +8,13 @@
 
 #import "OTChatCellBase.h"
 #import "OTEditEncounterBehavior.h"
+#import "OTFeedItem.h"
 
 @interface OTEncounterCell : OTChatCellBase
 
 @property (nonatomic, weak) IBOutlet UIButton *btnInfo;
 @property (nonatomic, weak) IBOutlet OTEditEncounterBehavior *editEncounter;
+@property (nonatomic, strong) OTFeedItem *feedItem;
 
 - (IBAction)doEditEncounter;
 

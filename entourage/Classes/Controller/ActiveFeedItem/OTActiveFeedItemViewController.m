@@ -31,6 +31,7 @@
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "OTEditEncounterBehavior.h"
+#import "OTMessageTableCellProviderBehavior.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -42,6 +43,7 @@
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior *editEntourageBehavior;
 @property (nonatomic, weak) IBOutlet OTEditEncounterBehavior *editEncounterBehavior;
+@property (nonatomic, weak) IBOutlet OTMessageTableCellProviderBehavior *cellProvider;
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
@@ -66,6 +68,7 @@
     [self.tableDataSource initialize];
     self.dataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.dataSource.tableView.estimatedRowHeight = 1000;
+    self.cellProvider.feedItem = self.feedItem;
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];

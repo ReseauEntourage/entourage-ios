@@ -872,6 +872,7 @@
                     </view>
                     <connections>
                         <outlet property="btnSend" destination="7un-ks-sBK" id="Trg-Xe-Evb"/>
+                        <outlet property="cellProvider" destination="w85-97-pWi" id="mHA-Y8-JWo"/>
                         <outlet property="dataSource" destination="1dX-UW-k7J" id="wyt-aY-4y7"/>
                         <outlet property="editEncounterBehavior" destination="A8o-tS-vva" id="nvC-3h-KV5"/>
                         <outlet property="editEntourageBehavior" destination="fgv-V1-G2W" id="UCh-fX-1Nd"/>
