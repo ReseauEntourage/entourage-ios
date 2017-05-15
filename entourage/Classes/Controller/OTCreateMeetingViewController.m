@@ -56,14 +56,13 @@
         [self.disclaimer showDisclaimer];
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     if(self.encounter) {
         self.nameTextField.text = self.encounter.streetPersonName;
         self.messageTextView.textView.text = self.encounter.message;
         [self.messageTextView updateAfterSpeech];
     }
-
 }
 
 #pragma mark - Private methods
