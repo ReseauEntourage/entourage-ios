@@ -147,6 +147,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                        alertText = OTLocalizedString(@"invalidPhoneNumberFormat");
                                        buttonTitle = OTLocalizedString(@"tryAgain_short");
                                    }
+                                   else if(error.code == NSURLErrorNotConnectedToInternet) {
+                                       alertTitle = OTLocalizedString(@"tryAgain");
+                                       buttonTitle = OTLocalizedString(@"tryAgain_short");
+                                       alertText = error.localizedDescription;
+                                   }
                                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertText preferredStyle:UIAlertControllerStyleAlert];
                                    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
                                    [alert addAction: defaultAction];
