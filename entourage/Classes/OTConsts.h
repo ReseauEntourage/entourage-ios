@@ -22,6 +22,9 @@
 #define ENTOURAGE_RADIUS 250
 #define ENTOURAGE_RADIUS_FACTOR 1.0f
 
+#define FEED_ITEMS_RADIUS_INCREASE 10
+#define FEED_ITEMS_MAX_RADIUS 20
+
 #define TEXTVIEW_PADDING 10.0f
 #define TEXTVIEW_PADDING_TOP 12.0f
 #define TEXTVIEW_PADDING_BOTTOM 23.0f
@@ -80,3 +83,5 @@
 #define NO_GIUDE_DATA_LINK @"https://goo.gl/jD5uIQ"
 
 #define PROPOSE_STRUCTURE_URL @"https://docs.google.com/forms/d/e/1FAIpQLSdcpYpAWz9zllF2TUS4USDQzu4T4ywu_XjXaD-ovsTS5eo1YA/viewform"
+
+

@@ -562,6 +562,10 @@
     }
 }
 
+- (void)itemsNotReceived {
+    [self.tableView doneUnsuccessfulLoadingMoreItems];
+}
+
 - (void)errorLoadingFeedItems:(NSError *)error {
     [self.tableView doneLoadingMoreItems];
     if(error.code == NSURLErrorNotConnectedToInternet)

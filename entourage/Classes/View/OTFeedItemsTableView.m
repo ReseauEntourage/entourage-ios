@@ -42,6 +42,9 @@
 @property (nonatomic, strong) UILabel *lblEmptyTableReason;
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, strong) UIView *emptyFooterView;
+@property (nonatomic, weak) IBOutlet UILabel *infoLabel;
+@property (nonatomic, weak) IBOutlet UIButton *furtherEntouragesBtn;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -128,6 +131,7 @@
 - (void)setNoFeeds {
     self.lblEmptyTableReason.text = OTLocalizedString(@"no_feeds_received");
 }
+
 
 /********************************************************************************/
 #pragma mark - UITableViewDataSource
@@ -241,11 +245,21 @@
 #pragma mark - load more methods
 
 - (void)startedLoadingMoreItems {
+    [self.infoLabel setHidden:YES];
+    [self.furtherEntouragesBtn setHidden:YES];
+    [self.activityIndicator setHidden:NO];
     self.tableFooterView = self.loadingView;
 }
 
 - (void)doneLoadingMoreItems {
     self.tableFooterView = self.emptyFooterView;
+}
+
+- (void)doneUnsuccessfulLoadingMoreItems {
+    [self.activityIndicator setHidden:YES];
+    [self.infoLabel setHidden:NO];
+    [self.furtherEntouragesBtn setHidden:NO];
+    self.tableFooterView = self.loadingView;
 }
      
 #pragma mark - private methods

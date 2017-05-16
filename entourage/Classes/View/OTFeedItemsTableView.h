@@ -35,5 +35,6 @@
 - (void)setNoConnection;
 - (void)setNoFeeds;
 - (void)doneLoadingMoreItems;
+- (void)doneUnsuccessfulLoadingMoreItems;
 
 @end

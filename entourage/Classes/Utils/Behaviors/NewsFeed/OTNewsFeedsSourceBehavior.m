@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) NSTimer *refreshTimer;
 @property (nonatomic, assign) CLLocationCoordinate2D currentCoordinate;
+@property (nonatomic, assign) int radius;
 
 @end
 
@@ -24,10 +25,20 @@
     self.feedItems = [NSMutableArray new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    self.radius = 10;
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (IBAction)increaseRadius {
+    if(self.radius != FEED_ITEMS_MAX_RADIUS) {
+        (self.radius += FEED_ITEMS_RADIUS_INCREASE);
+        [self loadMoreItems];
+    }
+    else
+        [self.delegate itemsUpdated];
 }
 
 - (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
@@ -40,12 +51,14 @@
     [self.feedItems removeAllObjects];
     [self.delegate itemsRemoved];
     NSDate *beforeDate = [NSDate date];
-    [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        [self.feedItems addObjectsFromArray:[self sortItems:items]];
-        [self.delegate itemsUpdated];
-    } orError:^(NSError *error) {
-        [self.delegate errorLoadingFeedItems:error];
-    }];
+    if(self.radius != FEED_ITEMS_MAX_RADIUS){
+        [self requestData:beforeDate withSuccess:^(NSArray *items) {
+            [self.feedItems addObjectsFromArray:[self sortItems:items]];
+            [self.delegate itemsUpdated];
+        } orError:^(NSError *error) {
+            [self.delegate errorLoadingFeedItems:error];
+        }];
+    }
 }
 
 - (void)loadMoreItems {
@@ -53,8 +66,12 @@
     if(self.feedItems.count > 0)
         beforeDate = [self.feedItems.lastObject updatedDate];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        [self.feedItems addObjectsFromArray:[self sortItems:items]];
-        [self.delegate itemsUpdated];
+        if(items.count > 0){
+            [self.feedItems addObjectsFromArray:[self sortItems:items]];
+            [self.delegate itemsUpdated];
+        }
+        else
+            [self.delegate itemsNotReceived];
     } orError:^(NSError *error) {
         [self.delegate errorLoadingFeedItems:error];
     }];
@@ -65,7 +82,6 @@
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         for(OTFeedItem *item in items)
             [self addFeedItem:item];
-        [self.delegate itemsUpdated];
     } orError:^(NSError *error) {
         [self.delegate errorLoadingNewFeedItems:error];
     }];

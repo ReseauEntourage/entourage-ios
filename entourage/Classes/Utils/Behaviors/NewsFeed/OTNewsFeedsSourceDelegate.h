@@ -12,6 +12,7 @@
 
 - (void)itemsRemoved;
 - (void)itemsUpdated;
+- (void)itemsNotReceived;
 - (void)errorLoadingFeedItems:(NSError *)error;
 - (void)errorLoadingNewFeedItems:(NSError *)error;
 
