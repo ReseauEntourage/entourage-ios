@@ -136,7 +136,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                                <rect key="frame" x="122" y="233" width="133" height="18"/>
+                                <rect key="frame" x="121.5" y="233" width="133" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -629,6 +629,8 @@
                                     <outlet property="furtherEntouragesBtn" destination="4ch-WZ-bWP" id="DWz-qO-mXz"/>
                                     <outlet property="infoLabel" destination="YZU-Bk-IjN" id="6ya-jJ-mfL"/>
                                     <outlet property="loadingView" destination="2tU-Ep-KF5" id="INE-OL-ed0"/>
+                                    <outlet property="tourOptionBottomContraint" destination="TDA-nJ-u0d" id="ZoD-TG-A6i"/>
+                                    <outlet property="tourOptionsBtn" destination="Kc9-kH-YQ7" id="Mpa-Fn-ehk"/>
                                 </connections>
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDS-Eg-kke">
@@ -1299,10 +1301,10 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
             </objects>
             <point key="canvasLocation" x="1151.5" y="-482"/>
         </scene>
-        <!--GuideSolidarity-->
+        <!--SolidarityGuideFilters-->
         <scene sceneID="XZH-jY-19l">
             <objects>
-                <viewControllerPlaceholder storyboardName="GuideSolidarity" id="Qnh-OU-tAM" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="SolidarityGuideFilters" id="Qnh-OU-tAM" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RD6-Zw-vCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1198" y="-946"/>
@@ -1453,8 +1455,8 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="b42-UE-vP1"/>
         <segue reference="xSV-rR-wZy"/>
         <segue reference="6F4-O6-aKT"/>
+        <segue reference="b42-UE-vP1"/>
     </inferredMetricsTieBreakers>
 </document>

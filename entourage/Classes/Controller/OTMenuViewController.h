@@ -13,6 +13,7 @@ FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuMapIdentifier;
 FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuGuideIdentifier;
 FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuProfileIdentifier;
 FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuViewControllerSeguewMenuSolidarityGuideIdentifier;
 
 /*
  FOUNDATION_EXPORT NSString *const OTMenuViewControllerSegueMenuMyMeetingsIdentifier;

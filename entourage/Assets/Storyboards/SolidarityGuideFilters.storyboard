@@ -19,7 +19,7 @@
         <scene sceneID="Lea-9j-lge">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jlY-Q5-7zm" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pzf-Rs-TNl">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pzf-Rs-TNl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

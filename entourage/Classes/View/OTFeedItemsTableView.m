@@ -45,6 +45,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *infoLabel;
 @property (nonatomic, weak) IBOutlet UIButton *furtherEntouragesBtn;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, weak) IBOutlet UIButton *tourOptionsBtn;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *tourOptionBottomContraint;
 
 @end
 
@@ -132,7 +134,6 @@
     self.lblEmptyTableReason.text = OTLocalizedString(@"no_feeds_received");
 }
 
-
 /********************************************************************************/
 #pragma mark - UITableViewDataSource
 
@@ -201,6 +202,10 @@
 #define kMapHeaderOffsetY 0.0
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.tableHeaderView == nil) return;
+    if(self.contentSize.height - scrollView.contentOffset.y <= scrollView.frame.size.height && self.tableFooterView != self.emptyFooterView)
+        self.tourOptionBottomContraint.constant = 12 + self.loadingView.frame.size.height;
+    else
+        self.tourOptionBottomContraint.constant = 12;
     
     CGFloat scrollOffset = scrollView.contentOffset.y;
     CGRect headerFrame = self.tableHeaderView.frame;//self.mapView.frame;
