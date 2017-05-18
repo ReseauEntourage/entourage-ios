@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(doneEdit) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];

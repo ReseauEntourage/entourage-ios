@@ -381,3 +381,5 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 
 "report_user_subject" = "Signalement d'un utilisateur - %@";
 "user_reported" = "Utilisateur signalé";
+
+"action" = "Action";

@@ -34,6 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = OTLocalizedString(@"action").uppercaseString;
     [self setupData];
     [self.editTableSource configureWith:self.entourage];
 

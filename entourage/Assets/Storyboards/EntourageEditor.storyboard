@@ -24,7 +24,7 @@
         <!--Entourage Editor-->
         <scene sceneID="1KP-Ao-jAx">
             <objects>
-                <viewController title="ACTION" automaticallyAdjustsScrollViewInsets="NO" id="UEB-Je-c5t" userLabel="Entourage Editor" customClass="OTEntourageEditorViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="UEB-Je-c5t" userLabel="Entourage Editor" customClass="OTEntourageEditorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dEQ-Bo-9Bm"/>
                         <viewControllerLayoutGuide type="bottom" id="Ysa-oq-h9F"/>
@@ -383,7 +383,7 @@
         <!--Edit Entourage Title-->
         <scene sceneID="JwU-bC-zCh">
             <objects>
-                <viewController title="TITRE" automaticallyAdjustsScrollViewInsets="NO" id="Xiu-q4-6Q3" userLabel="Edit Entourage Title" customClass="OTEditEntourageTitleViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Xiu-q4-6Q3" userLabel="Edit Entourage Title" customClass="OTEditEntourageTitleViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zb0-7g-yDs"/>
                         <viewControllerLayoutGuide type="bottom" id="zg1-d5-NpC"/>
