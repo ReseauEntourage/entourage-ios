@@ -15,7 +15,6 @@
 
 @property (nonatomic, strong) NSTimer *refreshTimer;
 @property (nonatomic, assign) CLLocationCoordinate2D currentCoordinate;
-@property (nonatomic, assign) int radius;
 
 @end
 

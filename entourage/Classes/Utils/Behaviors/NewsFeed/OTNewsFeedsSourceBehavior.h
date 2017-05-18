@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray *feedItems;
 @property (nonatomic, assign) CLLocationCoordinate2D lastOkCoordinate;
 @property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
+@property (nonatomic, assign) int radius;
 
 - (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter;
 - (void)loadMoreItems;

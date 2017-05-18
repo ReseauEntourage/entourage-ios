@@ -551,7 +551,7 @@
         [self showToursList];
     }
     if(self.newsFeedsSourceBehavior.feedItems.count == 0)
-        [self.tableView setNoFeeds];
+        (self.newsFeedsSourceBehavior.radius == FEED_ITEMS_MAX_RADIUS) ? [self.tableView setNoFeeds] : [self.tableView doneUnsuccessfulLoadingMoreItems];
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self feedMapWithFeedItems];
     if(self.toursMapDelegate.isActive) {

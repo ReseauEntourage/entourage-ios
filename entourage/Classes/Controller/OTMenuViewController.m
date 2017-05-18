@@ -198,7 +198,6 @@ NSString *const OTMenuViewControllerSeguewMenuSolidarityGuideIdentifier = @"segu
 }
 
 
-
 #pragma mark - Private methods
 
 - (void)configureControllersDictionary {
