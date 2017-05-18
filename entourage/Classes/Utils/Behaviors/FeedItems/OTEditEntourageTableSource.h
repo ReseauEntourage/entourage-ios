@@ -18,5 +18,6 @@
 
 - (void)configureWith:(OTEntourage *)entourage;
 - (void)updateLocationTitle;
+- (void)updateTexts;
 
 @end

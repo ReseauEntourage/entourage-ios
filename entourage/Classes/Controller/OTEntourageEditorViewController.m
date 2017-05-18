@@ -43,12 +43,6 @@
     [self.disclaimer showDisclaimer];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSString *typeString = [self.type isEqualToString: ENTOURAGE_DEMANDE] ? OTLocalizedString(@"demande") : OTLocalizedString(@"contribution");
-    self.title = typeString.uppercaseString;
-}
-
 #pragma mark - Private
 
 - (void)setupData {

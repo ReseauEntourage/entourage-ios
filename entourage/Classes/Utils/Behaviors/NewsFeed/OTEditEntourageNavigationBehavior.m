@@ -9,8 +9,10 @@
 #import "OTEditEntourageNavigationBehavior.h"
 #import "OTLocationSelectorViewController.h"
 #import "OTEditEntourageTableSource.h"
+#import "OTEditEntourageTitleViewController.h"
+#import "OTEditEntourageDescViewController.h"
 
-@interface OTEditEntourageNavigationBehavior () < LocationSelectionDelegate>
+@interface OTEditEntourageNavigationBehavior () < LocationSelectionDelegate, EditTitleDelegate, EditDescriptionDelegate>
 
 @property (nonatomic, strong) OTEntourage *entourage;
 
@@ -25,6 +27,19 @@
         OTLocationSelectorViewController* controller = (OTLocationSelectorViewController *)destinationViewController;
         controller.locationSelectionDelegate = self;
         controller.selectedLocation = self.entourage.location;
+        return YES;
+    }
+    if([segue.identifier isEqualToString:@"TitleEditSegue"]) {
+        OTEditEntourageTitleViewController* controller = (OTEditEntourageTitleViewController *)destinationViewController;
+        controller.delegate = self;
+        controller.currentTitle = self.entourage.title;
+        return YES;
+    }
+    if([segue.identifier isEqualToString:@"DescriptionEditSegue"]) {
+        OTEditEntourageDescViewController* controller = (OTEditEntourageDescViewController *)destinationViewController;
+        controller.delegate = self;
+        controller.currentDescription = self.entourage.desc;
+        return YES;
     }
     return NO;
 }
@@ -36,10 +51,14 @@
 
 - (void)editTitle:(OTEntourage *)entourage {
     self.entourage = entourage;
+    [self.owner performSegueWithIdentifier:@"TitleEditSegue" sender:self];
 }
 
 - (void)editDescription:(OTEntourage *)entourage {
     self.entourage = entourage;
+    
+    
+    [self.owner performSegueWithIdentifier:@"DescriptionEditSegue" sender:self];
 }
 
 #pragma mark - LocationSelectionDelegate
@@ -47,6 +66,20 @@
 - (void)didSelectLocation:(CLLocation *)selectedLocation {
     self.entourage.location = selectedLocation;
     [self.editEntourageSource updateLocationTitle];
+}
+
+#pragma mark - EditTitleDelegate
+
+- (void)titleEdited:(NSString *)title {
+    self.entourage.title = title;
+    [self.editEntourageSource updateTexts];
+}
+
+#pragma mark - EditDescriptionDelegate
+
+- (void)descriptionEdited:(NSString *)description {
+    self.entourage.desc = description;
+    [self.editEntourageSource updateTexts];
 }
 
 @end

@@ -43,6 +43,12 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    self.placeholderLabel.textColor = self.placeholderSmallColor;
+}
+
 - (void)initialize {
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
     [self addGestureRecognizer:self.tapGesture];

@@ -24,7 +24,7 @@
         <!--Entourage Editor-->
         <scene sceneID="1KP-Ao-jAx">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="UEB-Je-c5t" userLabel="Entourage Editor" customClass="OTEntourageEditorViewController" sceneMemberID="viewController">
+                <viewController title="ACTION" automaticallyAdjustsScrollViewInsets="NO" id="UEB-Je-c5t" userLabel="Entourage Editor" customClass="OTEntourageEditorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dEQ-Bo-9Bm"/>
                         <viewControllerLayoutGuide type="bottom" id="Ysa-oq-h9F"/>
@@ -135,6 +135,8 @@
                         <outlet property="editTableSource" destination="lA5-bm-MUk" id="qHh-vv-ur4"/>
                         <segue destination="fd3-Mx-0oI" kind="modal" identifier="DisclaimerSegue" id="t7x-Ui-H4l"/>
                         <segue destination="Yov-OH-fXT" kind="push" identifier="EditLocation" id="pF4-DN-1vY"/>
+                        <segue destination="Xiu-q4-6Q3" kind="push" identifier="TitleEditSegue" id="dYJ-m3-v3g"/>
+                        <segue destination="qia-Jx-nyR" kind="push" identifier="DescriptionEditSegue" id="pai-HW-0Qh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S0x-1A-brf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -166,7 +168,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wim-A3-Q8B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="959" y="1489"/>
+            <point key="canvasLocation" x="865" y="1489"/>
         </scene>
         <!--Entourage Disclaimer-->
         <scene sceneID="mes-9v-LI0">
@@ -378,6 +380,135 @@
             </objects>
             <point key="canvasLocation" x="529" y="2276"/>
         </scene>
+        <!--Edit Entourage Title-->
+        <scene sceneID="JwU-bC-zCh">
+            <objects>
+                <viewController title="TITRE" automaticallyAdjustsScrollViewInsets="NO" id="Xiu-q4-6Q3" userLabel="Edit Entourage Title" customClass="OTEditEntourageTitleViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zb0-7g-yDs"/>
+                        <viewControllerLayoutGuide type="bottom" id="zg1-d5-NpC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qfb-IN-COx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cop-uM-gXN" customClass="OTTextWithCount">
+                                <rect key="frame" x="0.0" y="80" width="375" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="3hc-Lg-fYr"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Exemple : Je suis disponible pour aide administrative pour l’accès au logement "/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLargeColor">
+                                        <color key="value" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderSmallColor">
+                                        <color key="value" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip" translatesAutoresizingMaskIntoConstraints="NO" id="1w6-cl-dxQ">
+                                <rect key="frame" x="15" y="190" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="UF4-y7-fHr"/>
+                                    <constraint firstAttribute="width" constant="22" id="ekF-B5-DMB"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Les actions avec un titre clair attirent plus de membres et ont plus de chances d’aboutir ! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9RJ-Nj-Xbt">
+                                <rect key="frame" x="45" y="190" width="315" height="36"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="9RJ-Nj-Xbt" secondAttribute="trailing" constant="15" id="9jL-OC-i9R"/>
+                            <constraint firstItem="1w6-cl-dxQ" firstAttribute="top" secondItem="Cop-uM-gXN" secondAttribute="bottom" constant="10" id="GCP-Gz-XyL"/>
+                            <constraint firstItem="1w6-cl-dxQ" firstAttribute="leading" secondItem="qfb-IN-COx" secondAttribute="leading" constant="15" id="IfW-ng-dOd"/>
+                            <constraint firstItem="9RJ-Nj-Xbt" firstAttribute="leading" secondItem="1w6-cl-dxQ" secondAttribute="trailing" constant="8" id="MyZ-1I-ZYj"/>
+                            <constraint firstItem="9RJ-Nj-Xbt" firstAttribute="top" secondItem="1w6-cl-dxQ" secondAttribute="top" id="R4j-P6-Gwc"/>
+                            <constraint firstItem="Cop-uM-gXN" firstAttribute="leading" secondItem="qfb-IN-COx" secondAttribute="leading" id="p1f-rS-eoL"/>
+                            <constraint firstItem="Cop-uM-gXN" firstAttribute="top" secondItem="zb0-7g-yDs" secondAttribute="bottom" constant="16" id="pko-8p-Puy"/>
+                            <constraint firstAttribute="trailing" secondItem="Cop-uM-gXN" secondAttribute="trailing" id="s7U-Fy-OmB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="1Vh-8u-ebC"/>
+                    <connections>
+                        <outlet property="txtTitle" destination="Cop-uM-gXN" id="1ZX-3G-P9o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="br7-gQ-kGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="178" y="565"/>
+        </scene>
+        <!--Edit Entourage Desc-->
+        <scene sceneID="L9S-zV-fck">
+            <objects>
+                <viewController id="qia-Jx-nyR" userLabel="Edit Entourage Desc" customClass="OTEditEntourageDescViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Re0-Ci-zyV"/>
+                        <viewControllerLayoutGuide type="bottom" id="NK3-DY-Z6P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FkK-0X-a3z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip" translatesAutoresizingMaskIntoConstraints="NO" id="vh0-0E-hZY">
+                                <rect key="frame" x="15" y="305" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="knh-3H-0ek"/>
+                                    <constraint firstAttribute="width" constant="22" id="nQW-cw-jZX"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Racontez votre histoire. Les actions avec une description claire attirent plus de membres et ont plus de chances d’aboutir !" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sek-5Z-dfE">
+                                <rect key="frame" x="45" y="305" width="315" height="54"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tqp-Pu-7oC" customClass="OTTextWithCount">
+                                <rect key="frame" x="0.0" y="80" width="375" height="215"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="215" id="voJ-ys-moh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLargeColor">
+                                        <color key="value" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderSmallColor">
+                                        <color key="value" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder">
+                                        <string key="value">Exemple : Je suis ancien employé de mairie et disponible pour aide administrative pour l’accès au logement. 
+Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café le weekend.</string>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="vh0-0E-hZY" firstAttribute="top" secondItem="Tqp-Pu-7oC" secondAttribute="bottom" constant="10" id="7b8-OL-LRb"/>
+                            <constraint firstAttribute="trailing" secondItem="Tqp-Pu-7oC" secondAttribute="trailing" id="86v-Lg-hxl"/>
+                            <constraint firstItem="vh0-0E-hZY" firstAttribute="leading" secondItem="FkK-0X-a3z" secondAttribute="leading" constant="15" id="Nsd-Tb-yJO"/>
+                            <constraint firstItem="sek-5Z-dfE" firstAttribute="leading" secondItem="vh0-0E-hZY" secondAttribute="trailing" constant="8" id="P0l-6i-2aE"/>
+                            <constraint firstItem="sek-5Z-dfE" firstAttribute="top" secondItem="vh0-0E-hZY" secondAttribute="top" id="VJi-93-OaC"/>
+                            <constraint firstItem="Tqp-Pu-7oC" firstAttribute="leading" secondItem="FkK-0X-a3z" secondAttribute="leading" id="YX4-nS-C1i"/>
+                            <constraint firstAttribute="trailing" secondItem="sek-5Z-dfE" secondAttribute="trailing" constant="15" id="s0h-2f-5T4"/>
+                            <constraint firstItem="Tqp-Pu-7oC" firstAttribute="top" secondItem="Re0-Ci-zyV" secondAttribute="bottom" constant="16" id="vIT-B7-dc8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qiX-QD-WFt"/>
+                    <connections>
+                        <outlet property="txtDescription" destination="Tqp-Pu-7oC" id="imm-Pf-4jD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oQR-bb-f0o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="690" y="561"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZVz-al-EeJ">
             <objects>
@@ -401,6 +532,7 @@
         <image name="location" width="22" height="22"/>
         <image name="password" width="100" height="100"/>
         <image name="slice" width="32" height="32"/>
+        <image name="tip" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

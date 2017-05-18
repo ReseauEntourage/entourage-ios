@@ -106,4 +106,8 @@ typedef enum {
     }];
 }
 
+- (void)updateTexts {
+    [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, 2)] withRowAnimation:UITableViewRowAnimationFade];
+}
+
 @end
