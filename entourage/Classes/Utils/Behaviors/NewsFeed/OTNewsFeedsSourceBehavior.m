@@ -41,6 +41,7 @@
 }
 
 - (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
+    self.radius = 10;
     filter.location = coordinate;
     if([self.currentFilter.description isEqualToString:filter.description])
         return;
@@ -50,29 +51,27 @@
     [self.feedItems removeAllObjects];
     [self.delegate itemsRemoved];
     NSDate *beforeDate = [NSDate date];
-    if(self.radius != FEED_ITEMS_MAX_RADIUS){
-        [self requestData:beforeDate withSuccess:^(NSArray *items) {
-            [self.feedItems addObjectsFromArray:[self sortItems:items]];
-            [self.delegate itemsUpdated];
-        } orError:^(NSError *error) {
-            [self.delegate errorLoadingFeedItems:error];
-        }];
-    }
+    [self requestData:beforeDate withSuccess:^(NSArray *items) {
+        [self.feedItems addObjectsFromArray:[self sortItems:items]];
+        [self.delegate itemsUpdated];
+        [self.tableDelegate finishUpdatingFeeds:items.count];
+    } orError:^(NSError *error) {
+        [self.delegate errorLoadingFeedItems:error];
+    }];
 }
 
 - (void)loadMoreItems {
     NSDate *beforeDate = [NSDate date];
     if(self.feedItems.count > 0)
         beforeDate = [self.feedItems.lastObject updatedDate];
+    [self.tableDelegate beginUpdatingFeeds];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        if(items.count > 0){
-            [self.feedItems addObjectsFromArray:[self sortItems:items]];
-            [self.delegate itemsUpdated];
-        }
-        else
-            [self.delegate itemsNotReceived];
+        [self.feedItems addObjectsFromArray:[self sortItems:items]];
+        [self.delegate itemsUpdated];
+        [self.tableDelegate finishUpdatingFeeds:items.count];
     } orError:^(NSError *error) {
         [self.delegate errorLoadingFeedItems:error];
+        [self.tableDelegate errorUpdatingFeeds];
     }];
 }
 
@@ -81,6 +80,7 @@
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         for(OTFeedItem *item in items)
             [self addFeedItem:item];
+        [self.delegate itemsUpdated];
     } orError:^(NSError *error) {
         [self.delegate errorLoadingNewFeedItems:error];
     }];

@@ -193,7 +193,6 @@ NSString *const OTMenuViewControllerSeguewMenuSolidarityGuideIdentifier = @"segu
     if([segue.identifier isEqualToString:@"SolidarityGuideSegue"]){
         UINavigationController *navController = segue.destinationViewController;
         OTSolidarityGuideFiltersViewController *controller = (OTSolidarityGuideFiltersViewController *)navController.topViewController;
-        controller.filterDelegate = self;
     }
 }
 

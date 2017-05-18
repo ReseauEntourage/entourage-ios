@@ -629,6 +629,7 @@
                                     <outlet property="furtherEntouragesBtn" destination="4ch-WZ-bWP" id="DWz-qO-mXz"/>
                                     <outlet property="infoLabel" destination="YZU-Bk-IjN" id="6ya-jJ-mfL"/>
                                     <outlet property="loadingView" destination="2tU-Ep-KF5" id="INE-OL-ed0"/>
+                                    <outlet property="sourceBehavior" destination="atf-P9-vVx" id="6FK-x9-TZI"/>
                                     <outlet property="tourOptionBottomContraint" destination="TDA-nJ-u0d" id="ZoD-TG-A6i"/>
                                     <outlet property="tourOptionsBtn" destination="Kc9-kH-YQ7" id="Mpa-Fn-ehk"/>
                                 </connections>

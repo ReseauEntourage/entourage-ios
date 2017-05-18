@@ -22,6 +22,7 @@
 #import "OTNewsFeedCell.h"
 #import "OTSolidarityGuideCell.h"
 #import "OTPoi.h"
+#import "OTNewsFeedsSourceBehavior.h"
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
@@ -47,6 +48,7 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, weak) IBOutlet UIButton *tourOptionsBtn;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *tourOptionBottomContraint;
+@property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior *sourceBehavior;
 
 @end
 
@@ -191,7 +193,6 @@
     float h = size.height;
     float reload_distance = LOAD_MORE_DRAG_OFFSET;
     if(y > h + reload_distance) {
-        [self startedLoadingMoreItems];
         dispatch_async(dispatch_get_main_queue(), ^() {
             if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)])
                 [self.feedItemsDelegate loadMoreData];
@@ -249,26 +250,32 @@
     }
 }
 
-#pragma mark - load more methods
+#pragma mark - OTNewsFeedTableDelegate
 
-- (void)startedLoadingMoreItems {
-    [self.infoLabel setHidden:YES];
-    [self.furtherEntouragesBtn setHidden:YES];
-    [self.activityIndicator setHidden:NO];
+- (void)beginUpdatingFeeds {
+    self.infoLabel.hidden = YES;
+    self.furtherEntouragesBtn.hidden = YES;
+    self.activityIndicator.hidden = NO;
     self.tableFooterView = self.loadingView;
 }
 
-- (void)doneLoadingMoreItems {
+- (void)finishUpdatingFeeds:(BOOL)withFeeds {
+    if(withFeeds){
+        self.tableFooterView = self.emptyFooterView;
+        return;
+    }
+    self.activityIndicator.hidden = YES;
+    self.infoLabel.hidden = NO;
+    BOOL isMaxRadius = self.sourceBehavior.radius == FEED_ITEMS_MAX_RADIUS;
+    self.furtherEntouragesBtn.hidden = isMaxRadius;
+    self.infoLabel.text = OTLocalizedString(isMaxRadius ? @"no_more_feeds" : @"increase_radius");
+    self.tableFooterView = self.loadingView;
+}
+
+- (void)errorUpdatingFeeds {
     self.tableFooterView = self.emptyFooterView;
 }
 
-- (void)doneUnsuccessfulLoadingMoreItems {
-    [self.activityIndicator setHidden:YES];
-    [self.infoLabel setHidden:NO];
-    [self.furtherEntouragesBtn setHidden:NO];
-    self.tableFooterView = self.loadingView;
-}
-     
 #pragma mark - private methods
      
 - (BOOL)isGuideItem:(id)item {

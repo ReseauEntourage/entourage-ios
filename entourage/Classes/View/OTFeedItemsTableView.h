@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "OTPoi.h"
+#import "OTNewsFeedTableDelegate.h"
 
 @class OTFeedItem;
 
@@ -23,7 +24,7 @@
 
 @end
 
-@interface OTFeedItemsTableView : UITableView
+@interface OTFeedItemsTableView : UITableView <OTNewsFeedTableDelegate>
 
 @property (nonatomic, weak) id<OTFeedItemsTableViewDelegate> feedItemsDelegate;
 
@@ -34,7 +35,5 @@
 - (void)loadBegun;
 - (void)setNoConnection;
 - (void)setNoFeeds;
-- (void)doneLoadingMoreItems;
-- (void)doneUnsuccessfulLoadingMoreItems;
 
 @end

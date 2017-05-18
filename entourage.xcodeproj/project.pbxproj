@@ -410,6 +410,7 @@
 		01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SolidarityGuideFilters.storyboard; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
+		01E5BD5B1ECDE62C006720AE /* OTNewsFeedTableDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OTNewsFeedTableDelegate.h; path = Behaviors/NewsFeed/OTNewsFeedTableDelegate.h; sourceTree = "<group>"; };
 		0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLostCodeViewController.h; sourceTree = "<group>"; };
 		0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLostCodeViewController.m; sourceTree = "<group>"; };
 		0A35F2B61BFA3AC2002301C3 /* OTConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTConfirmationViewController.h; sourceTree = "<group>"; };
@@ -1686,6 +1687,7 @@
 				1E993BFB1DDB514300621770 /* OTNoDataBehavior.m */,
 				D6B5476F1EA77E5700ED0324 /* OTGuideInfoBehavior.h */,
 				D6B547701EA77E5700ED0324 /* OTGuideInfoBehavior.m */,
+				01E5BD5B1ECDE62C006720AE /* OTNewsFeedTableDelegate.h */,
 			);
 			name = NewsFeed;
 			sourceTree = "<group>";

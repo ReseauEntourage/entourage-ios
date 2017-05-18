@@ -148,6 +148,7 @@
     self.newsFeedsSourceBehavior.delegate = self;
     [self.tourCreatorBehavior initialize];
     self.tourCreatorBehavior.delegate = self;
+    self.newsFeedsSourceBehavior.tableDelegate = self.tableView;
     [self configureNavigationBar];
     self.currentFilter = [OTNewsFeedsFilter new];
     self.solidarityFilter = [OTSolidarityGuideFilter new];
@@ -544,14 +545,11 @@
 - (void)itemsUpdated {
     if(self.guideMapDelegate.isActive)
         return;
-    [self.tableView doneLoadingMoreItems];
     self.wasLoadedOnce = YES;
     if (self.newsFeedsSourceBehavior.feedItems.count && self.isFirstLoad) {
         self.isFirstLoad = NO;
         [self showToursList];
     }
-    if(self.newsFeedsSourceBehavior.feedItems.count == 0)
-        (self.newsFeedsSourceBehavior.radius == FEED_ITEMS_MAX_RADIUS) ? [self.tableView setNoFeeds] : [self.tableView doneUnsuccessfulLoadingMoreItems];
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self feedMapWithFeedItems];
     if(self.toursMapDelegate.isActive) {
@@ -562,12 +560,7 @@
     }
 }
 
-- (void)itemsNotReceived {
-    [self.tableView doneUnsuccessfulLoadingMoreItems];
-}
-
 - (void)errorLoadingFeedItems:(NSError *)error {
-    [self.tableView doneLoadingMoreItems];
     if(error.code == NSURLErrorNotConnectedToInternet)
         [self.tableView setNoConnection];
     else

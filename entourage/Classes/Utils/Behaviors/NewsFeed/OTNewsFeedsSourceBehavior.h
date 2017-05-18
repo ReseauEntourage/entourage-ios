@@ -8,6 +8,7 @@
 
 #import "OTBehavior.h"
 #import "OTNewsFeedsSourceDelegate.h"
+#import "OTNewsFeedTableDelegate.h"
 #import "OTNewsFeedsFilter.h"
 #import <MapKit/MapKit.h>
 
@@ -16,6 +17,7 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
 
 @property (nonatomic, weak) id<OTNewsFeedsSourceDelegate> delegate;
+@property (nonatomic, weak) id<OTNewsFeedTableDelegate> tableDelegate;
 
 @property (nonatomic, strong) NSMutableArray *feedItems;
 @property (nonatomic, assign) CLLocationCoordinate2D lastOkCoordinate;
