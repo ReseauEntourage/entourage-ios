@@ -39,7 +39,6 @@ NSString *const OTMenuViewControllerSegueMenuProfileIdentifier = @"segueMenuIden
 NSString *const OTMenuViewControllerSegueMenuSettingsIdentifier = @"segueMenuIdentifierForSettings";
 NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
 NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdentifierForAbout";
-NSString *const OTMenuViewControllerSeguewMenuSolidarityGuideIdentifier = @"segueMenuIdentifierForGuide";
 
 @interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -190,10 +189,6 @@ NSString *const OTMenuViewControllerSeguewMenuSolidarityGuideIdentifier = @"segu
         OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
         controller.user = [[NSUserDefaults standardUserDefaults] currentUser];
     }
-    if([segue.identifier isEqualToString:@"SolidarityGuideSegue"]){
-        UINavigationController *navController = segue.destinationViewController;
-        OTSolidarityGuideFiltersViewController *controller = (OTSolidarityGuideFiltersViewController *)navController.topViewController;
-    }
 }
 
 
@@ -213,7 +208,7 @@ NSString *const OTMenuViewControllerSeguewMenuSolidarityGuideIdentifier = @"segu
     [menuItems addObject:itemEntourageActions];
     OTMenuItem *itemAtd = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_atd_partner") iconName:@"atdLogo" url:MENU_ATD_PARTNERSHIP];
     [menuItems addObject:itemAtd];
-    OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide") iconName:@"mapPin" segueIdentifier:OTMenuViewControllerSegueMenuGuideIdentifier];
+    OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide") iconName:@"mapPin"];
     [menuItems addObject:itemSolidarityGuide];
     
     NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
