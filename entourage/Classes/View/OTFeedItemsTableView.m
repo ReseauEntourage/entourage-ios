@@ -203,10 +203,13 @@
 #define kMapHeaderOffsetY 0.0
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.tableHeaderView == nil) return;
-    if(self.contentSize.height - scrollView.contentOffset.y <= scrollView.frame.size.height && self.tableFooterView != self.emptyFooterView)
-        self.tourOptionBottomContraint.constant = 12 + self.loadingView.frame.size.height;
-    else
-        self.tourOptionBottomContraint.constant = 12;
+    [UIView animateWithDuration:0.5 animations:^() {
+        if(self.contentSize.height - scrollView.contentOffset.y <= scrollView.frame.size.height && self.tableFooterView != self.emptyFooterView && self.contentSize.height > self.frame.size.height)
+            self.tourOptionBottomContraint.constant = 12 + self.loadingView.frame.size.height;
+        else
+            self.tourOptionBottomContraint.constant = 12;
+        [self.superview layoutIfNeeded];
+    }];
     
     CGFloat scrollOffset = scrollView.contentOffset.y;
     CGRect headerFrame = self.tableHeaderView.frame;//self.mapView.frame;
