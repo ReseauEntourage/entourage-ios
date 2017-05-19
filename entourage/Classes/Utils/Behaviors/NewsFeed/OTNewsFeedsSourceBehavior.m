@@ -11,6 +11,8 @@
 #import "OTFeedItem.h"
 #import "OTConsts.h"
 
+int const RADIUS_ARRAY[] = {2, 3, 10, 15, 20};
+
 @interface OTNewsFeedsSourceBehavior ()
 
 @property (nonatomic, strong) NSTimer *refreshTimer;
@@ -24,7 +26,8 @@
     self.feedItems = [NSMutableArray new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    self.radius = 10;
+    self.radius = 2;
+    self.index = 0;
 }
 
 - (void)dealloc {
@@ -32,16 +35,18 @@
 }
 
 - (IBAction)increaseRadius {
-    if(self.radius != FEED_ITEMS_MAX_RADIUS) {
-        (self.radius += FEED_ITEMS_RADIUS_INCREASE);
-        [self loadMoreItems];
+    if(self.radius != RADIUS_ARRAY[sizeof(RADIUS_ARRAY)/sizeof(int) - 1]) {
+        self.radius = RADIUS_ARRAY[self.index++];
+        [self reloadItemsAt:self.currentCoordinate withFilters:self.currentFilter];
     }
-    else
+    else{
         [self.delegate itemsUpdated];
+        [self.tableDelegate finishUpdatingFeeds:NO];
+    }
+
 }
 
 - (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
-    self.radius = 10;
     filter.location = coordinate;
     if([self.currentFilter.description isEqualToString:filter.description])
         return;

@@ -11,13 +11,18 @@
 #import "OTNewsFeedTableDelegate.h"
 #import "OTNewsFeedsFilter.h"
 #import <MapKit/MapKit.h>
+#import <Foundation/Foundation.h>
+
+extern int const RADIUS_ARRAY[];
 
 @interface OTNewsFeedsSourceBehavior : OTBehavior
+
 
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
 
 @property (nonatomic, weak) id<OTNewsFeedsSourceDelegate> delegate;
 @property (nonatomic, weak) id<OTNewsFeedTableDelegate> tableDelegate;
+@property (nonatomic, assign) int index;
 
 @property (nonatomic, strong) NSMutableArray *feedItems;
 @property (nonatomic, assign) CLLocationCoordinate2D lastOkCoordinate;
