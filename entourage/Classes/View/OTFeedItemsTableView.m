@@ -185,6 +185,8 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if([[self.items firstObject] isKindOfClass:[OTPoi class]])
         return;
+    if(self.tableFooterView != self.emptyFooterView)
+        return;
     CGPoint offset = scrollView.contentOffset;
     CGRect bounds = scrollView.bounds;
     CGSize size = scrollView.contentSize;
@@ -256,6 +258,7 @@
 #pragma mark - OTNewsFeedTableDelegate
 
 - (void)beginUpdatingFeeds {
+    NSLog(@"ALA_BALA - Start loading");
     self.infoLabel.hidden = YES;
     self.furtherEntouragesBtn.hidden = YES;
     self.activityIndicator.hidden = NO;
@@ -264,9 +267,11 @@
 
 - (void)finishUpdatingFeeds:(BOOL)withFeeds {
     if(withFeeds){
+        NSLog(@"ALA_BALA - Finish with feeds");
         self.tableFooterView = self.emptyFooterView;
         return;
     }
+    NSLog(@"ALA_BALA - Finish without feeds");
     self.activityIndicator.hidden = YES;
     self.infoLabel.hidden = NO;
     BOOL isMaxRadius = self.sourceBehavior.radius == FEED_ITEMS_MAX_RADIUS;

@@ -21,6 +21,7 @@
 @property (nonatomic) BOOL showTours;
 @property (nonatomic) BOOL showOnlyMyEntourages;
 @property (nonatomic) int timeframeInHours;
+@property (nonatomic) int distance;
 @property (nonatomic) CLLocationCoordinate2D location;
 
 - (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before andLocation:(CLLocationCoordinate2D)location;

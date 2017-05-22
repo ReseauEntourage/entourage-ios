@@ -11,12 +11,12 @@
 #import "OTFeedItem.h"
 #import "OTConsts.h"
 
-int const RADIUS_ARRAY[] = {2, 3, 10, 15, 20};
-
 @interface OTNewsFeedsSourceBehavior ()
+
 
 @property (nonatomic, strong) NSTimer *refreshTimer;
 @property (nonatomic, assign) CLLocationCoordinate2D currentCoordinate;
+@property (nonatomic, assign) int radiusIndex;
 
 @end
 
@@ -26,8 +26,11 @@ int const RADIUS_ARRAY[] = {2, 3, 10, 15, 20};
     self.feedItems = [NSMutableArray new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    self.radius = 2;
-    self.index = 0;
+    self.radiusIndex = 0;
+}
+
+- (int)radius {
+    return [RADIUS_ARRAY[self.radiusIndex] intValue];
 }
 
 - (void)dealloc {
@@ -35,9 +38,20 @@ int const RADIUS_ARRAY[] = {2, 3, 10, 15, 20};
 }
 
 - (IBAction)increaseRadius {
-    if(self.radius != RADIUS_ARRAY[sizeof(RADIUS_ARRAY)/sizeof(int) - 1]) {
-        self.radius = RADIUS_ARRAY[self.index++];
-        [self reloadItemsAt:self.currentCoordinate withFilters:self.currentFilter];
+    int sizeOfArray = (int)RADIUS_ARRAY.count;
+    if(self.radiusIndex < sizeOfArray - 1) {
+        self.radiusIndex++;
+        [self.feedItems removeAllObjects];
+        [self.delegate itemsRemoved];
+        [self.tableDelegate beginUpdatingFeeds];
+        NSDate *beforeDate = [NSDate date];
+        [self requestData:beforeDate withSuccess:^(NSArray *items) {
+            [self.feedItems addObjectsFromArray:[self sortItems:items]];
+            [self.delegate itemsUpdated];
+            [self.tableDelegate finishUpdatingFeeds:items.count];
+        } orError:^(NSError *error) {
+            [self.delegate errorLoadingFeedItems:error];
+        }];
     }
     else{
         [self.delegate itemsUpdated];
@@ -47,6 +61,8 @@ int const RADIUS_ARRAY[] = {2, 3, 10, 15, 20};
 }
 
 - (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
+    self.radiusIndex = 0;
+    filter.distance = self.radius;
     filter.location = coordinate;
     if([self.currentFilter.description isEqualToString:filter.description])
         return;
@@ -71,8 +87,11 @@ int const RADIUS_ARRAY[] = {2, 3, 10, 15, 20};
         beforeDate = [self.feedItems.lastObject updatedDate];
     [self.tableDelegate beginUpdatingFeeds];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        [self.feedItems addObjectsFromArray:[self sortItems:items]];
-        [self.delegate itemsUpdated];
+        if(items.count > 0) {
+            NSArray *sorted = [self sortItems:items];
+            [self.feedItems addObjectsFromArray:sorted];
+            [self.delegate itemsUpdated];
+        }
         [self.tableDelegate finishUpdatingFeeds:items.count];
     } orError:^(NSError *error) {
         [self.delegate errorLoadingFeedItems:error];
@@ -113,11 +132,14 @@ int const RADIUS_ARRAY[] = {2, 3, 10, 15, 20};
 #pragma mark - private methods
 
 - (void)requestData:(NSDate *)beforeDate withSuccess:(void(^)(NSArray *items))success orError:(void(^)(NSError *))failure {
+    self.currentFilter.distance = self.radius;
     NSString *loadFilterString = self.currentFilter.description;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     self.indicatorView.hidden = NO;
     NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:beforeDate andLocation:self.currentCoordinate]
     ;
+    NSLog(@"ALA_BALA - Calling with %@", filterDictionary);
+
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary success:^(NSMutableArray *feeds) {
         self.lastOkCoordinate = self.currentCoordinate;
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
