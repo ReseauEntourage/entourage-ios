@@ -135,7 +135,11 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         [OTOngoingTourService sharedInstance].isOngoing = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
-	else {
+    else if (indexPath.row == 3) {
+        [self.revealViewController revealToggle:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSolidarityGuideNotification object:self];
+    }
+    else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
         if(menuItem.segueIdentifier)
             [self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
@@ -209,6 +213,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     OTMenuItem *itemAtd = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_atd_partner") iconName:@"atdLogo" url:MENU_ATD_PARTNERSHIP];
     [menuItems addObject:itemAtd];
     OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide") iconName:@"mapPin"];
+    
     [menuItems addObject:itemSolidarityGuide];
     
     NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;

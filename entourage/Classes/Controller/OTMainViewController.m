@@ -169,6 +169,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageCreated:) name:kNotificationEntourageCreated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceGetNewData) name:@kNotificationReloadData object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendCloseMail:) name:@kNotificationSendCloseMail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToGuide) name:kSolidarityGuideNotification object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
@@ -250,6 +251,7 @@
     [self clearMap];
     [self showToursMap];
     [self reloadPois];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (IBAction)goToTourOptions:(id)sender {
@@ -405,7 +407,6 @@
             self.pois.count == 0 ? [self.noDataBehavior showNoData] : [self.guideInfoBehavior show];
             [SVProgressHUD dismiss];
     }];
-    
 }
 
 - (void)feedMapWithFeedItems {

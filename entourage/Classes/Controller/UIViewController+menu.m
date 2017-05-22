@@ -9,6 +9,7 @@
 #import "UIViewController+menu.h"
 #import "UIBarButtonItem+Badge.h"
 #import "OTUnreadMessagesService.h"
+#import "OTConsts.h"
 
 // Controller
 #import "SWRevealViewController.h"
@@ -24,6 +25,7 @@
  * @return UIBarButtonItem
  * The MenuButton instanciated
  */
+
 - (UIBarButtonItem *)createMenuButton {
     UIBarButtonItem *menuButton = nil;
     
