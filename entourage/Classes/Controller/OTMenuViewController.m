@@ -136,6 +136,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
     else if (indexPath.row == 3) {
+        [OTLogger logEvent:@"SolidarityGuideFrom07Menu"];
         [self.revealViewController revealToggle:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:kSolidarityGuideNotification object:self];
     }
