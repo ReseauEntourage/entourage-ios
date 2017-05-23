@@ -312,54 +312,6 @@
                                 <rect key="frame" x="-4" y="64" width="383" height="603"/>
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="2tU-Ep-KF5">
-                                    <rect key="frame" x="0.0" y="274" width="383" height="126"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="WW6-BB-MkA">
-                                            <rect key="frame" x="173" y="44.5" width="37" height="37"/>
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </activityIndicatorView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C’est tout pour les actions dans ce rayon autour de vous ! " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZU-Bk-IjN">
-                                            <rect key="frame" x="15" y="16" width="353" height="41"/>
-                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ch-WZ-bWP">
-                                            <rect key="frame" x="15" y="73" width="353" height="37"/>
-                                            <state key="normal">
-                                                <attributedString key="attributedTitle">
-                                                    <fragment content="Afficher les entourages plus lointains">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="17"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
-                                                            <integer key="NSUnderline" value="1"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                            </state>
-                                            <connections>
-                                                <action selector="increaseRadius" destination="atf-P9-vVx" eventType="touchUpInside" id="qgf-oy-aNA"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="4ch-WZ-bWP" secondAttribute="trailing" constant="15" id="5iB-og-nnk"/>
-                                        <constraint firstItem="YZU-Bk-IjN" firstAttribute="top" secondItem="2tU-Ep-KF5" secondAttribute="top" constant="16" id="EZy-Sb-580"/>
-                                        <constraint firstItem="YZU-Bk-IjN" firstAttribute="leading" secondItem="2tU-Ep-KF5" secondAttribute="leading" constant="15" id="Esp-xx-YcM"/>
-                                        <constraint firstAttribute="bottom" secondItem="4ch-WZ-bWP" secondAttribute="bottom" constant="16" id="K2d-a5-6He"/>
-                                        <constraint firstItem="WW6-BB-MkA" firstAttribute="centerY" secondItem="2tU-Ep-KF5" secondAttribute="centerY" id="PKV-0x-YiZ"/>
-                                        <constraint firstItem="WW6-BB-MkA" firstAttribute="centerX" secondItem="2tU-Ep-KF5" secondAttribute="centerX" id="Q2J-z1-kQB"/>
-                                        <constraint firstItem="YZU-Bk-IjN" firstAttribute="centerX" secondItem="2tU-Ep-KF5" secondAttribute="centerX" id="b4N-nq-PMS"/>
-                                        <constraint firstAttribute="trailing" secondItem="YZU-Bk-IjN" secondAttribute="trailing" constant="15" id="cgz-WZ-aT6"/>
-                                        <constraint firstItem="4ch-WZ-bWP" firstAttribute="leading" secondItem="2tU-Ep-KF5" secondAttribute="leading" constant="15" id="qD1-Se-qwO"/>
-                                        <constraint firstItem="4ch-WZ-bWP" firstAttribute="top" secondItem="YZU-Bk-IjN" secondAttribute="bottom" constant="16" id="qsg-do-ntN"/>
-                                    </constraints>
-                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OTNewsFeedTableViewCellIdentifier" rowHeight="156" id="KgN-kr-NT6" customClass="OTNewsFeedCell">
                                         <rect key="frame" x="0.0" y="28" width="383" height="156"/>
@@ -624,10 +576,6 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="activityIndicator" destination="WW6-BB-MkA" id="7Da-yL-cAo"/>
-                                    <outlet property="furtherEntouragesBtn" destination="4ch-WZ-bWP" id="DWz-qO-mXz"/>
-                                    <outlet property="infoLabel" destination="YZU-Bk-IjN" id="6ya-jJ-mfL"/>
-                                    <outlet property="loadingView" destination="2tU-Ep-KF5" id="INE-OL-ed0"/>
                                     <outlet property="sourceBehavior" destination="atf-P9-vVx" id="6FK-x9-TZI"/>
                                     <outlet property="tourOptionBottomContraint" destination="TDA-nJ-u0d" id="ZoD-TG-A6i"/>
                                     <outlet property="tourOptionsBtn" destination="Kc9-kH-YQ7" id="Mpa-Fn-ehk"/>
@@ -759,6 +707,18 @@
                                     <action selector="stopTour:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="BcM-lh-EiI"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zL-iD-eto" userLabel="BackButton">
+                                <rect key="frame" x="16" y="593" width="62" height="62"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="O99-Tc-qsu"/>
+                                    <constraint firstAttribute="width" constant="62" id="ceL-dL-Oup"/>
+                                </constraints>
+                                <state key="normal" image="leaveGuideButton">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONo-TH-dyX">
                                 <rect key="frame" x="98" y="75" width="180" height="39"/>
                                 <constraints>
@@ -772,18 +732,48 @@
                                     <action selector="doShowNewFeedItems:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Nrf-YQ-0Vh"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zL-iD-eto" userLabel="BackButton">
-                                <rect key="frame" x="16" y="593" width="62" height="62"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JfD-Ou-63N">
+                                <rect key="frame" x="18" y="610" width="173" height="48"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapPinWhite" translatesAutoresizingMaskIntoConstraints="NO" id="9mv-KH-vwy">
+                                        <rect key="frame" x="8" y="8" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="WTm-75-u6m"/>
+                                            <constraint firstAttribute="width" constant="32" id="avS-oA-tiV"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iek-sh-67W">
+                                        <rect key="frame" x="45" y="15" width="102" height="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowForMenu" translatesAutoresizingMaskIntoConstraints="NO" id="OUn-iw-fN0">
+                                        <rect key="frame" x="152" y="17.5" width="8" height="13"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="13" id="adG-9M-AKK"/>
+                                            <constraint firstAttribute="width" constant="8" id="bho-bp-dXO"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="O99-Tc-qsu"/>
-                                    <constraint firstAttribute="width" constant="62" id="ceL-dL-Oup"/>
+                                    <constraint firstItem="9mv-KH-vwy" firstAttribute="centerY" secondItem="JfD-Ou-63N" secondAttribute="centerY" id="5pv-JH-uDx"/>
+                                    <constraint firstAttribute="width" constant="173" id="Bz1-DX-zzC"/>
+                                    <constraint firstItem="9mv-KH-vwy" firstAttribute="leading" secondItem="JfD-Ou-63N" secondAttribute="leading" constant="8" id="Ige-eS-WUJ"/>
+                                    <constraint firstItem="Iek-sh-67W" firstAttribute="top" secondItem="JfD-Ou-63N" secondAttribute="top" constant="15" id="P5j-qw-Zmk"/>
+                                    <constraint firstItem="OUn-iw-fN0" firstAttribute="centerY" secondItem="JfD-Ou-63N" secondAttribute="centerY" id="TqG-qD-tTk"/>
+                                    <constraint firstItem="Iek-sh-67W" firstAttribute="leading" secondItem="9mv-KH-vwy" secondAttribute="trailing" constant="5" id="XM1-ee-P8U"/>
+                                    <constraint firstAttribute="trailing" secondItem="OUn-iw-fN0" secondAttribute="trailing" constant="13" id="Z0K-Ut-AJG"/>
+                                    <constraint firstItem="OUn-iw-fN0" firstAttribute="leading" secondItem="Iek-sh-67W" secondAttribute="trailing" constant="5" id="bjr-Fd-ZEg"/>
+                                    <constraint firstAttribute="bottom" secondItem="Iek-sh-67W" secondAttribute="bottom" constant="15" id="tl4-Ta-Rfr"/>
                                 </constraints>
-                                <state key="normal" image="leaveGuideButton">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fyj-qg-Gvf">
                                 <rect key="frame" x="20" y="227.5" width="335" height="0.0"/>
                                 <subviews>
@@ -886,11 +876,13 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="01M-L0-iJE"/>
                             <constraint firstAttribute="trailing" secondItem="Lzp-RD-PWj" secondAttribute="trailing" constant="20" id="1ny-vO-dCZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oHF-Vi-LCk" secondAttribute="trailing" constant="-20" id="9ho-oj-3FF"/>
+                            <constraint firstItem="JfD-Ou-63N" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="18" id="B7L-MV-tsW"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="oHF-Vi-LCk" secondAttribute="bottom" id="CoI-BK-C8y"/>
                             <constraint firstItem="Lzp-RD-PWj" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="DHf-kj-GXw"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Kc9-kH-YQ7" secondAttribute="bottom" constant="12" id="DuD-zc-Fd5"/>
                             <constraint firstItem="8zL-iD-eto" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="H3B-oV-EPp"/>
                             <constraint firstItem="fyj-qg-Gvf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="JEK-w9-aoe"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="JfD-Ou-63N" secondAttribute="bottom" constant="9" id="KDw-A2-wky"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="leading" secondItem="Kc9-kH-YQ7" secondAttribute="trailing" constant="-62" id="Kq0-ZY-fSh"/>
                             <constraint firstItem="aPq-MR-sA9" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="QIf-iG-H2m"/>
                             <constraint firstItem="Lzp-RD-PWj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="T4w-9f-t1L"/>
@@ -930,10 +922,13 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                         <outlet property="noDataBehavior" destination="oGT-t2-iTg" id="RLs-ni-gcZ"/>
                         <outlet property="nouveauxFeedItemsButton" destination="ONo-TH-dyX" id="PCe-XJ-apW"/>
                         <outlet property="overlayFeeder" destination="hnO-wK-gKw" id="DRj-hp-QRc"/>
+                        <outlet property="showSolidarityGuideView" destination="JfD-Ou-63N" id="EXP-dw-KZ6"/>
+                        <outlet property="solidarityGuideLabel" destination="Iek-sh-67W" id="b1x-7Q-caw"/>
                         <outlet property="statusChangedBehavior" destination="rYj-lX-rXg" id="dJG-9t-lQH"/>
                         <outlet property="stopButton" destination="oVf-Bh-vdD" id="gnm-Su-d3g"/>
                         <outlet property="tableView" destination="oHF-Vi-LCk" id="0vC-Rv-h6R"/>
                         <outlet property="tapEntourage" destination="rKY-F0-13f" id="alM-Ui-hC8"/>
+                        <outlet property="tapViewBehavior" destination="v1A-e6-uKA" id="jDC-Uo-ikT"/>
                         <outlet property="tourCreatorBehavior" destination="avG-kv-nxt" id="bgS-2V-TBF"/>
                         <segue destination="cVp-EA-m5M" kind="modal" identifier="OTConfirmationPopup" id="Qf1-vA-gd6"/>
                         <segue destination="GHS-CJ-wmd" kind="modal" identifier="JoinRequestSegue" id="a8P-lF-ebs"/>
@@ -961,6 +956,12 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                     </connections>
                 </customObject>
                 <customObject id="hnO-wK-gKw" userLabel="Overlay Feeder" customClass="OTOverlayFeederBehavior"/>
+                <customObject id="v1A-e6-uKA" userLabel="Tap View" customClass="OTTapViewBehavior">
+                    <connections>
+                        <action selector="showGuide" destination="vXZ-lx-hvc" eventType="valueChanged" id="s7k-sH-tyk"/>
+                        <outlet property="tapView" destination="JfD-Ou-63N" id="gLG-d9-0Ls"/>
+                    </connections>
+                </customObject>
                 <customObject id="rKY-F0-13f" userLabel="Tap Entourage" customClass="OTTapEntourageBehavior"/>
                 <customObject id="0l0-bs-S95" userLabel="Join Feed Item" customClass="OTJoinBehavior">
                     <connections>
@@ -1422,6 +1423,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
     </scenes>
     <resources>
         <image name="activeButton" width="45" height="45"/>
+        <image name="arrowForMenu" width="7" height="13"/>
         <image name="arrowNewEntourages" width="12" height="22"/>
         <image name="carte" width="40" height="35"/>
         <image name="carte_selected" width="40" height="35"/>
@@ -1433,6 +1435,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
         <image name="leaveGuideButton" width="58" height="58"/>
         <image name="list" width="40" height="35"/>
         <image name="list_selected" width="40" height="35"/>
+        <image name="mapPinWhite" width="32" height="32"/>
         <image name="newEntourages" width="180" height="39"/>
         <image name="pause" width="62" height="62"/>
         <image name="tel" width="25" height="25"/>

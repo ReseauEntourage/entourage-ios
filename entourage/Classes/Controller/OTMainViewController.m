@@ -81,6 +81,7 @@
 #import "OTSavedFilter.h"
 #import "OTGuideInfoBehavior.h"
 #import "OTEditEncounterBehavior.h"
+#import "OTTapViewBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -96,12 +97,15 @@
 @property (nonatomic, weak) IBOutlet OTMapDelegateProxyBehavior* mapDelegateProxy;
 @property (nonatomic, weak) IBOutlet OTOverlayFeederBehavior* overlayFeeder;
 @property (nonatomic, weak) IBOutlet OTTapEntourageBehavior* tapEntourage;
+@property(nonatomic, weak) IBOutlet OTTapViewBehavior *tapViewBehavior;
 @property (nonatomic, weak) IBOutlet OTJoinBehavior* joinBehavior;
 @property (nonatomic, weak) IBOutlet OTStatusChangedBehavior* statusChangedBehavior;
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior* editEntourgeBehavior;
 @property (nonatomic, weak) IBOutlet OTEditEncounterBehavior* editEncounterBehavior;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior* newsFeedsSourceBehavior;
 @property (nonatomic, weak) IBOutlet OTTourCreatorBehavior *tourCreatorBehavior;
+@property (nonatomic, weak) IBOutlet UIView *showSolidarityGuideView;
+@property (nonatomic, weak) IBOutlet UILabel *solidarityGuideLabel;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic) CLLocationCoordinate2D encounterLocation;
@@ -140,11 +144,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.solidarityGuideLabel.text = OTLocalizedString(@"map_options_show_guide");
     self.isFirstLoad = YES;
     [self.noDataBehavior initialize];
     [self.newsFeedsSourceBehavior initialize];
     [self.customSegmentedBehavior initialize];
+    [self.tapViewBehavior initialize];
     self.newsFeedsSourceBehavior.delegate = self;
     [self.tourCreatorBehavior initialize];
     self.tourCreatorBehavior.delegate = self;
@@ -235,6 +240,7 @@
     [self.customSegmentedBehavior updateVisible:YES];
     [self clearMap];
     [self feedMapWithFeedItems];
+    self.showSolidarityGuideView.hidden = NO;
     if (self.isTourListDisplayed)
         [self showToursList];
 }
@@ -924,6 +930,7 @@
 #pragma mark - "Screens"
 
 - (void)showToursList {
+    self.showSolidarityGuideView.hidden = YES;
     [self.noDataBehavior hideNoData];
     self.isTourListDisplayed = YES;
     self.customSegmentedBehavior.selectedIndex = 1;
@@ -937,6 +944,7 @@
 }
 
 - (void)showToursMap {
+    self.guideMapDelegate.isActive ? [self.showSolidarityGuideView setHidden:YES] : [self.showSolidarityGuideView setHidden:NO];
     if(self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0)
         [self.noDataBehavior showNoData];
     self.nouveauxFeedItemsButton.hidden = YES;
@@ -1087,4 +1095,9 @@
     [self feedMapViewWithEncounters];
 }
 
+- (IBAction)showGuide {
+    [OTLogger logEvent:@"SolidarityGuideFrom06Map"];
+    [self switchToGuide];
+}
+    
 @end
