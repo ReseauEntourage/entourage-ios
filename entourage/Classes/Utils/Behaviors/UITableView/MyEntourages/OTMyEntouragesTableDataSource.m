@@ -10,6 +10,7 @@
 #import "OTMyEntouragesDataSource.h"
 #import "OTTableCellProviderBehavior.h"
 #import "OTFeedItem.h"
+#import "OTConsts.h"
 
 #define LOAD_MORE_DRAG_OFFSET 50
 

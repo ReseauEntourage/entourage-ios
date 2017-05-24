@@ -22,5 +22,7 @@
 
 - (void)loadData {
 }
+- (void)updateData {
+}
 
 @end

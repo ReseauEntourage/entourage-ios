@@ -17,5 +17,6 @@
 
 - (void)updateItems:(NSArray *)items;
 - (void)loadData;
+- (void)updateData;
 
 @end
