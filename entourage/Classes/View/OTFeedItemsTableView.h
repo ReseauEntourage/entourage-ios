@@ -35,5 +35,7 @@
 - (void)loadBegun;
 - (void)setNoConnection;
 - (void)setNoFeeds;
+- (void)switchToGuide;
+- (void)switchToFeeds;
 
 @end

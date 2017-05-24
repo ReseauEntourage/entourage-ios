@@ -229,6 +229,7 @@
 }
 
 - (void)switchToNewsfeed {
+    [self.tableView switchToFeeds];
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self.noDataBehavior switchedToNewsfeeds];
     [self.guideInfoBehavior hide];
@@ -246,6 +247,7 @@
 }
 
 - (void)switchToGuide {
+    [self.tableView switchToGuide];
     [self.tableView updateItems:self.pois];
     [self.noDataBehavior switchedToGuide];
     self.toursMapDelegate.isActive = NO;

@@ -49,6 +49,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *tourOptionsBtn;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *tourOptionBottomContraint;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior *sourceBehavior;
+@property (nonatomic, strong) UIView *currentNewsfeedFooter;;
 
 @end
 
@@ -258,7 +259,6 @@
 #pragma mark - OTNewsFeedTableDelegate
 
 - (void)beginUpdatingFeeds {
-    NSLog(@"ALA_BALA - Start loading");
     self.infoLabel.hidden = YES;
     self.furtherEntouragesBtn.hidden = YES;
     self.activityIndicator.hidden = NO;
@@ -267,11 +267,9 @@
 
 - (void)finishUpdatingFeeds:(BOOL)withFeeds {
     if(withFeeds){
-        NSLog(@"ALA_BALA - Finish with feeds");
         self.tableFooterView = self.emptyFooterView;
         return;
     }
-    NSLog(@"ALA_BALA - Finish without feeds");
     self.activityIndicator.hidden = YES;
     self.infoLabel.hidden = NO;
     BOOL isMaxRadius = self.sourceBehavior.radius == FEED_ITEMS_MAX_RADIUS;
@@ -282,6 +280,15 @@
 
 - (void)errorUpdatingFeeds {
     self.tableFooterView = self.emptyFooterView;
+}
+
+- (void)switchToGuide {
+    self.currentNewsfeedFooter = self.tableFooterView;
+    self.tableFooterView = self.emptyFooterView;
+}
+
+- (void)switchToFeeds {
+    self.tableFooterView = self.currentNewsfeedFooter;
 }
 
 #pragma mark - private methods
