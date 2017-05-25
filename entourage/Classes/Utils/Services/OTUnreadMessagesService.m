@@ -41,7 +41,7 @@
         unreadMessageFound.unreadMessagesCount = @(value+1);
     }
     [self saveUnreadMessages:unreadMessages];
-    NSDictionary* notificationInfo = @{ kNotificationUpdateBadgeCountKey:unreadMessageFound.unreadMessagesCount, kNotificationUpdateBadgeCountKey2:unreadMessageFound.feedId};
+    NSDictionary* notificationInfo = @{ kNotificationUpdateBadgeCountKey:unreadMessageFound.unreadMessagesCount, kNotificationUpdateBadgeFeedIdKey:unreadMessageFound.feedId};
     [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:notificationInfo];
 }
 
@@ -52,7 +52,7 @@
         [unreadMessages removeObject:unreadMessageFound];
         [self saveUnreadMessages:unreadMessages];
     }
-    NSDictionary* notificationInfo = @{ kNotificationUpdateBadgeCountKey: @(unreadMessages.count), kNotificationUpdateBadgeCountKey2:feedId};
+    NSDictionary* notificationInfo = @{ kNotificationUpdateBadgeCountKey: @(unreadMessages.count), kNotificationUpdateBadgeFeedIdKey:feedId};
     [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:notificationInfo];
 }
 
