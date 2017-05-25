@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QW3-Z2-faC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QW3-Z2-faC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -368,7 +368,7 @@
         <scene sceneID="MN7-qb-xD3">
             <objects>
                 <navigationController id="fd3-Mx-0oI" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LFt-b3-2OX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LFt-b3-2OX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -408,34 +408,69 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip" translatesAutoresizingMaskIntoConstraints="NO" id="1w6-cl-dxQ">
-                                <rect key="frame" x="15" y="190" width="22" height="22"/>
+                            <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kuy-ys-seh">
+                                <rect key="frame" x="31" y="190" width="313" height="54"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votre titre doit faire moins de 100 caractères. Vous pourrez en dire plus dans la description. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71c-oY-BbZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="54"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                        <color key="textColor" red="0.81568627449999997" green="0.0039215686269999999" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="UF4-y7-fHr"/>
-                                    <constraint firstAttribute="width" constant="22" id="ekF-B5-DMB"/>
+                                    <constraint firstItem="71c-oY-BbZ" firstAttribute="top" secondItem="Kuy-ys-seh" secondAttribute="top" id="WHs-L5-lzo"/>
+                                    <constraint firstAttribute="bottom" secondItem="71c-oY-BbZ" secondAttribute="bottom" id="iGA-fK-4I8"/>
+                                    <constraint firstItem="71c-oY-BbZ" firstAttribute="leading" secondItem="Kuy-ys-seh" secondAttribute="leading" id="m3l-ra-n93"/>
+                                    <constraint firstAttribute="trailing" secondItem="71c-oY-BbZ" secondAttribute="trailing" id="mD6-g1-GRv"/>
                                 </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Les actions avec un titre clair attirent plus de membres et ont plus de chances d’aboutir ! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9RJ-Nj-Xbt">
-                                <rect key="frame" x="45" y="190" width="315" height="36"/>
-                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
+                            <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fSI-Pb-YgF">
+                                <rect key="frame" x="15" y="190" width="345" height="36"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip" translatesAutoresizingMaskIntoConstraints="NO" id="QAF-Ty-4QX">
+                                        <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="GGg-rF-3ZS"/>
+                                            <constraint firstAttribute="width" constant="22" id="m32-LO-OsN"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="749" text="Les actions avec un titre clair attirent plus de membres et ont plus de chances d’aboutir ! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbe-Bf-cSr">
+                                        <rect key="frame" x="30" y="0.0" width="315" height="36"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="lbe-Bf-cSr" firstAttribute="top" secondItem="QAF-Ty-4QX" secondAttribute="top" id="A7e-La-p44"/>
+                                    <constraint firstItem="lbe-Bf-cSr" firstAttribute="leading" secondItem="QAF-Ty-4QX" secondAttribute="trailing" constant="8" id="CUf-lx-Fri"/>
+                                    <constraint firstItem="QAF-Ty-4QX" firstAttribute="top" secondItem="fSI-Pb-YgF" secondAttribute="top" id="Xdj-pv-5S7"/>
+                                    <constraint firstAttribute="trailing" secondItem="lbe-Bf-cSr" secondAttribute="trailing" id="psn-31-mmj"/>
+                                    <constraint firstAttribute="bottom" secondItem="lbe-Bf-cSr" secondAttribute="bottom" id="stz-Wv-8qN"/>
+                                    <constraint firstItem="QAF-Ty-4QX" firstAttribute="leading" secondItem="fSI-Pb-YgF" secondAttribute="leading" id="tLs-lv-oj2"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="9RJ-Nj-Xbt" secondAttribute="trailing" constant="15" id="9jL-OC-i9R"/>
-                            <constraint firstItem="1w6-cl-dxQ" firstAttribute="top" secondItem="Cop-uM-gXN" secondAttribute="bottom" constant="10" id="GCP-Gz-XyL"/>
-                            <constraint firstItem="1w6-cl-dxQ" firstAttribute="leading" secondItem="qfb-IN-COx" secondAttribute="leading" constant="15" id="IfW-ng-dOd"/>
-                            <constraint firstItem="9RJ-Nj-Xbt" firstAttribute="leading" secondItem="1w6-cl-dxQ" secondAttribute="trailing" constant="8" id="MyZ-1I-ZYj"/>
-                            <constraint firstItem="9RJ-Nj-Xbt" firstAttribute="top" secondItem="1w6-cl-dxQ" secondAttribute="top" id="R4j-P6-Gwc"/>
+                            <constraint firstItem="Kuy-ys-seh" firstAttribute="leading" secondItem="qfb-IN-COx" secondAttribute="leadingMargin" constant="15" id="B78-lS-zw8"/>
+                            <constraint firstAttribute="trailing" secondItem="fSI-Pb-YgF" secondAttribute="trailing" constant="15" id="Ce3-2o-v8S"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Kuy-ys-seh" secondAttribute="trailing" constant="15" id="NEH-8e-1P4"/>
+                            <constraint firstItem="fSI-Pb-YgF" firstAttribute="top" secondItem="Cop-uM-gXN" secondAttribute="bottom" constant="10" id="iDx-Qv-VPq"/>
+                            <constraint firstItem="Kuy-ys-seh" firstAttribute="top" secondItem="Cop-uM-gXN" secondAttribute="bottom" constant="10" id="neK-77-tG6"/>
                             <constraint firstItem="Cop-uM-gXN" firstAttribute="leading" secondItem="qfb-IN-COx" secondAttribute="leading" id="p1f-rS-eoL"/>
                             <constraint firstItem="Cop-uM-gXN" firstAttribute="top" secondItem="zb0-7g-yDs" secondAttribute="bottom" constant="16" id="pko-8p-Puy"/>
                             <constraint firstAttribute="trailing" secondItem="Cop-uM-gXN" secondAttribute="trailing" id="s7U-Fy-OmB"/>
+                            <constraint firstItem="fSI-Pb-YgF" firstAttribute="leading" secondItem="qfb-IN-COx" secondAttribute="leading" constant="15" id="suf-hx-iT2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1Vh-8u-ebC"/>
                     <connections>
+                        <outlet property="hintView" destination="fSI-Pb-YgF" id="mtM-ao-dV1"/>
+                        <outlet property="maxLenghtReachedView" destination="Kuy-ys-seh" id="Y8D-PI-O4f"/>
                         <outlet property="txtTitle" destination="Cop-uM-gXN" id="1ZX-3G-P9o"/>
                     </connections>
                 </viewController>
@@ -446,7 +481,7 @@
         <!--Edit Entourage Desc-->
         <scene sceneID="L9S-zV-fck">
             <objects>
-                <viewController id="qia-Jx-nyR" userLabel="Edit Entourage Desc" customClass="OTEditEntourageDescViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="qia-Jx-nyR" userLabel="Edit Entourage Desc" customClass="OTEditEntourageDescViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Re0-Ci-zyV"/>
                         <viewControllerLayoutGuide type="bottom" id="NK3-DY-Z6P"/>
@@ -455,19 +490,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip" translatesAutoresizingMaskIntoConstraints="NO" id="vh0-0E-hZY">
-                                <rect key="frame" x="15" y="305" width="22" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="knh-3H-0ek"/>
-                                    <constraint firstAttribute="width" constant="22" id="nQW-cw-jZX"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Racontez votre histoire. Les actions avec une description claire attirent plus de membres et ont plus de chances d’aboutir !" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sek-5Z-dfE">
-                                <rect key="frame" x="45" y="305" width="315" height="54"/>
-                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tqp-Pu-7oC" customClass="OTTextWithCount">
                                 <rect key="frame" x="0.0" y="80" width="375" height="215"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -487,16 +509,41 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BN2-2Z-VOT">
+                                <rect key="frame" x="15" y="305" width="345" height="54"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip" translatesAutoresizingMaskIntoConstraints="NO" id="vh0-0E-hZY">
+                                        <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="knh-3H-0ek"/>
+                                            <constraint firstAttribute="width" constant="22" id="nQW-cw-jZX"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="749" text="Racontez votre histoire. Les actions avec une description claire attirent plus de membres et ont plus de chances d’aboutir !" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sek-5Z-dfE">
+                                        <rect key="frame" x="30" y="0.0" width="315" height="54"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="vh0-0E-hZY" firstAttribute="top" secondItem="BN2-2Z-VOT" secondAttribute="top" id="DCd-EV-w2q"/>
+                                    <constraint firstItem="sek-5Z-dfE" firstAttribute="leading" secondItem="vh0-0E-hZY" secondAttribute="trailing" constant="8" id="DRY-Nd-wJ5"/>
+                                    <constraint firstItem="sek-5Z-dfE" firstAttribute="top" secondItem="vh0-0E-hZY" secondAttribute="top" id="dKy-cz-870"/>
+                                    <constraint firstItem="vh0-0E-hZY" firstAttribute="leading" secondItem="BN2-2Z-VOT" secondAttribute="leading" id="glE-GU-Rwk"/>
+                                    <constraint firstAttribute="trailing" secondItem="sek-5Z-dfE" secondAttribute="trailing" id="ya7-Xe-qZB"/>
+                                    <constraint firstAttribute="bottom" secondItem="sek-5Z-dfE" secondAttribute="bottom" id="zfF-nx-qeR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="vh0-0E-hZY" firstAttribute="top" secondItem="Tqp-Pu-7oC" secondAttribute="bottom" constant="10" id="7b8-OL-LRb"/>
                             <constraint firstAttribute="trailing" secondItem="Tqp-Pu-7oC" secondAttribute="trailing" id="86v-Lg-hxl"/>
-                            <constraint firstItem="vh0-0E-hZY" firstAttribute="leading" secondItem="FkK-0X-a3z" secondAttribute="leading" constant="15" id="Nsd-Tb-yJO"/>
-                            <constraint firstItem="sek-5Z-dfE" firstAttribute="leading" secondItem="vh0-0E-hZY" secondAttribute="trailing" constant="8" id="P0l-6i-2aE"/>
-                            <constraint firstItem="sek-5Z-dfE" firstAttribute="top" secondItem="vh0-0E-hZY" secondAttribute="top" id="VJi-93-OaC"/>
+                            <constraint firstItem="BN2-2Z-VOT" firstAttribute="leading" secondItem="FkK-0X-a3z" secondAttribute="leading" constant="15" id="SUf-jK-vws"/>
                             <constraint firstItem="Tqp-Pu-7oC" firstAttribute="leading" secondItem="FkK-0X-a3z" secondAttribute="leading" id="YX4-nS-C1i"/>
-                            <constraint firstAttribute="trailing" secondItem="sek-5Z-dfE" secondAttribute="trailing" constant="15" id="s0h-2f-5T4"/>
+                            <constraint firstItem="BN2-2Z-VOT" firstAttribute="top" secondItem="Tqp-Pu-7oC" secondAttribute="bottom" constant="10" id="am2-Uu-6YD"/>
+                            <constraint firstAttribute="trailing" secondItem="BN2-2Z-VOT" secondAttribute="trailing" constant="15" id="gxq-X4-qYw"/>
                             <constraint firstItem="Tqp-Pu-7oC" firstAttribute="top" secondItem="Re0-Ci-zyV" secondAttribute="bottom" constant="16" id="vIT-B7-dc8"/>
                         </constraints>
                     </view>
@@ -514,7 +561,7 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QW3-Z2-faC" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hTu-zA-fKa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hTu-zA-fKa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

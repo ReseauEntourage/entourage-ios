@@ -98,6 +98,12 @@
     if(!self.showCount)
         return;
     self.charCountLabel.text = [NSString stringWithFormat:@"%u/%d", (int)self.textView.text.length, self.maxLength];
+    if(self.maxLength > 0) {
+        UIColor *current = self.maxLength <= self.textView.text.length ? UIColor.maxLenghtReachedColor : self.placeholderLargeColor;
+        self.charCountLabel.textColor = current;
+    }
+    if(self.delegate)
+        [self.delegate maxLengthReached:(self.maxLength <= self.textView.text.length)];
 }
 
 #pragma mark - UITextViewDelegate

@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TextWithCountDelegate <NSObject>
+
+- (void)maxLengthReached:(BOOL)reached;
+
+@end
+
 @interface OTTextWithCount : UIView
+
+@property (nullable, weak, nonatomic) id<TextWithCountDelegate> delegate;
 
 @property (nonatomic, strong, nullable) UITextView *textView;
 @property (nonatomic, strong, nullable) NSString *placeholder;
@@ -18,5 +26,6 @@
 @property (nonatomic, strong, nullable) IBInspectable UIColor *placeholderSmallColor;
 
 - (void)updateAfterSpeech;
+
 
 @end

@@ -27,5 +27,7 @@
 + (UIColor *)poiCategory6;
 + (UIColor *)poiCategory7;
 
++ (UIColor *)maxLenghtReachedColor;
+
 + (UIFont *)appTextFieldPlaceholderFont;
 @end

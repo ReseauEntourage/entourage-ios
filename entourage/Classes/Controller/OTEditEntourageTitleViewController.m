@@ -12,9 +12,11 @@
 #import "UIBarButtonItem+factory.h"
 #import "OTConsts.h"
 
-@interface OTEditEntourageTitleViewController ()
+@interface OTEditEntourageTitleViewController () <TextWithCountDelegate>
 
 @property (nonatomic, weak) IBOutlet OTTextWithCount *txtTitle;
+@property (nonatomic, weak) IBOutlet UIView *hintView;
+@property (nonatomic, weak) IBOutlet UIView *maxLenghtReachedView;
 
 @end
 
@@ -29,6 +31,7 @@
     [self.navigationItem setRightBarButtonItem:menuButton];
     self.txtTitle.maxLength = 100;
     self.txtTitle.textView.text = self.currentTitle;
+    self.txtTitle.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -41,6 +44,13 @@
 - (void)doneEdit {
     [self.delegate titleEdited:self.txtTitle.textView.text];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - TextWithCountDelegate
+
+- (void)maxLengthReached:(BOOL)reached {
+    self.hintView.hidden = reached;
+    self.maxLenghtReachedView.hidden = !reached;
 }
 
 @end

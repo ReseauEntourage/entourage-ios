@@ -33,7 +33,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if(self.currentDescription)
+    if(self.currentDescription.length > 0)
         [self.txtDescription updateAfterSpeech];
 }
 
