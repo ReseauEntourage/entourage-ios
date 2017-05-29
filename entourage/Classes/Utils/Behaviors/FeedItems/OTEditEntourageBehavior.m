@@ -42,7 +42,7 @@
     [[[OTFeedItemFactory createFor:self.entourage] getChangedHandler] updateWith:entourage];
     NSDictionary* notificationInfo = @{ kNotificationEntourageChangedEntourageKey: self.entourage };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageChanged object:nil userInfo:notificationInfo];
-    [self.owner dismissViewControllerAnimated:YES completion:nil];
+    [self.owner dismissViewControllerAnimated:NO completion:nil];
 }
 
 @end
