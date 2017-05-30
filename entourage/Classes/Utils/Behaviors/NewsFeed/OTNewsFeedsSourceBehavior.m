@@ -73,8 +73,10 @@
     [self.delegate itemsRemoved];
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        [self.feedItems addObjectsFromArray:[self sortItems:items]];
-        [self.delegate itemsUpdated];
+        if(items.count > 0) {
+            [self.feedItems addObjectsFromArray:[self sortItems:items]];
+            [self.delegate itemsUpdated];
+        }
         [self.tableDelegate finishUpdatingFeeds:items.count];
     } orError:^(NSError *error) {
         [self.delegate errorLoadingFeedItems:error];
@@ -102,9 +104,11 @@
 - (void)getNewItems {
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        for(OTFeedItem *item in items)
-            [self addFeedItem:item];
-        [self.delegate itemsUpdated];
+        if(items.count > 0) {
+            for(OTFeedItem *item in items)
+                [self addFeedItem:item];
+            [self.delegate itemsUpdated];
+        }
     } orError:^(NSError *error) {
         [self.delegate errorLoadingNewFeedItems:error];
     }];

@@ -329,6 +329,14 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";
 
 "increase_radius" = "C’est tout pour les actions dans ce rayon autour de vous ! ";
+"no_feeds_increase_radius" = "
+C’est plutôt calme par ici !
+
+On dirait bien qu’il n’y a aucun entourage à proximité… pour l’instant !
+
+Vous pouvez créer votre propre entourage en cliquant sur
+le + en bas à droite.
+";
 "no_feeds_received" = "Aucun entourage près de cette position";
 "no_more_feeds" = "Aucun autre entourage près de cette position";
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";

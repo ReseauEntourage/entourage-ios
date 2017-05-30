@@ -36,6 +36,8 @@
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 #define TABLEVIEW_BOTTOM_INSET 86.0f
+#define SMALL_FOOTER_HEIGHT 126
+#define BIG_FOOTER_HEIGHT 300
 
 
 @interface OTFeedItemsTableView () <UITableViewDataSource, UITableViewDelegate>
@@ -274,7 +276,14 @@
     self.infoLabel.hidden = NO;
     BOOL isMaxRadius = self.sourceBehavior.radius == [RADIUS_ARRAY[RADIUS_ARRAY.count - 1] intValue];
     self.furtherEntouragesBtn.hidden = isMaxRadius;
-    self.infoLabel.text = OTLocalizedString(isMaxRadius ? @"no_more_feeds" : @"increase_radius");
+    self.loadingView.frame = CGRectMake(0, 0, 1, SMALL_FOOTER_HEIGHT);
+    if(self.items.count > 0)
+        self.infoLabel.text = OTLocalizedString(isMaxRadius ? @"no_more_feeds" : @"increase_radius");
+    else {
+        if(!isMaxRadius)
+            self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
+        self.infoLabel.text = OTLocalizedString(isMaxRadius ? @"no_feeds_received" : @"no_feeds_increase_radius");
+    }
     self.tableFooterView = self.loadingView;
 }
 
