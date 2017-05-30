@@ -20,6 +20,7 @@
 #import "NSUserDefaults+OT.h"
 #import "NSDictionary+Parsing.h"
 #import "OTEntourageService.h"
+#import "OTLocationManager.h"
 
 
 /**************************************************************************************************/
@@ -99,10 +100,13 @@ extern NSString *kUsers;
 {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_REQUEST, entourage.uid, TOKEN];
     NSLog(@"Join entourage request: %@", url);
+    CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
+    CLLocationDistance distance = [currentLocation distanceFromLocation:entourage.location];
+    NSDictionary *parameteres = @{@"distance": @(distance)};
     
     [[OTHTTPRequestManager sharedInstance]
      POSTWithUrl:url
-     andParameters:nil
+     andParameters:parameteres
      andSuccess:^(id responseObject)
      {
          NSDictionary *data = responseObject;
