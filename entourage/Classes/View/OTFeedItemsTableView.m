@@ -272,7 +272,7 @@
     }
     self.activityIndicator.hidden = YES;
     self.infoLabel.hidden = NO;
-    BOOL isMaxRadius = self.sourceBehavior.radius == FEED_ITEMS_MAX_RADIUS;
+    BOOL isMaxRadius = self.sourceBehavior.radius == [RADIUS_ARRAY[RADIUS_ARRAY.count - 1] intValue];
     self.furtherEntouragesBtn.hidden = isMaxRadius;
     self.infoLabel.text = OTLocalizedString(isMaxRadius ? @"no_more_feeds" : @"increase_radius");
     self.tableFooterView = self.loadingView;
