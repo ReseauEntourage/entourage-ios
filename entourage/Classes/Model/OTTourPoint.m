@@ -72,7 +72,6 @@ NSString *const kTourPointPassingTime = @"passing_time";
     } else {
         return false;
     }
-    
 }
 
 /********************************************************************************/

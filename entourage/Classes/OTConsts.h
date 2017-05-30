@@ -23,7 +23,7 @@
 #define ENTOURAGE_RADIUS_FACTOR 1.0f
 
 #define FEED_ITEMS_MAX_RADIUS 20
-#define RADIUS_ARRAY @[@2, @3, @10, @15, @20]
+#define RADIUS_ARRAY @[@10, @20, @40]
 
 
 #define TEXTVIEW_PADDING 10.0f
