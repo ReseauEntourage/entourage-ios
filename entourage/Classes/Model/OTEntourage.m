@@ -41,7 +41,7 @@
     return @{
         kWSKeyTitle: self.title,
         kWSKeyEntourageType: self.type,
-        kWSDescription: self.desc ? self.status : @"",
+        kWSDescription: self.desc ? self.desc : @"",
         kWSKeyStatus: self.status,
         kWSKeyLocation: @{
             kWSKeyLatitude: @(self.location.coordinate.latitude),
