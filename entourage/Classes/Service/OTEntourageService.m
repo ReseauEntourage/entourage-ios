@@ -329,7 +329,9 @@ extern NSString *kUsers;
      }];
 }
 
-- (void)entourageUsers:(OTEntourage *)entourage success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+- (void)entourageUsers:(OTEntourage *)entourage
+               success:(void (^)(NSArray *))success
+               failure:(void (^)(NSError *))failure {
     NSString *url = [NSString stringWithFormat:API_URL_TOUR_FEED_ITEM_USERS, kEntourages, entourage.uid,  TOKEN];
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
@@ -372,6 +374,28 @@ extern NSString *kUsers;
      }
      ];
 }
+
+- (void)retrieveEntourage:(OTEntourage *)entourage
+                 fromRank:(NSNumber *)rank
+                  success:(void (^)())success
+                  failure:(void (^)(NSError *))failure {
+    CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
+    CLLocationDistance distance = [currentLocation distanceFromLocation:entourage.location];
+    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_RETRIEVE, entourage.uid, (int)distance/1000, [rank stringValue], TOKEN];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject) {
+         if(success)
+            success();
+     }
+     andFailure:^(NSError *error) {
+         if(failure)
+            failure(error);
+     }];
+}
+
 
 /**************************************************************************************************/
 #pragma mark - Private methods

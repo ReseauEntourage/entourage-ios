@@ -67,4 +67,9 @@
 - (void)readEntourageMessages:(NSNumber *)entourageID
                       success:(void (^)())success
                       failure:(void (^)(NSError *))failure;
+
+- (void)retrieveEntourage:(OTEntourage *)entourage
+                 fromRank:(NSNumber *)rank
+                  success:(void (^)())success
+                  failure:(void (^)(NSError *))failure;
 @end

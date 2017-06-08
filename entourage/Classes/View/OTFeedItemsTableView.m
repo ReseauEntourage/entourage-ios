@@ -23,6 +23,7 @@
 #import "OTSolidarityGuideCell.h"
 #import "OTPoi.h"
 #import "OTNewsFeedsSourceBehavior.h"
+#import "OTEntourageService.h"
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
@@ -181,6 +182,16 @@
     else {
         if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)])
             [self.feedItemsDelegate showFeedInfo:selectedItem];
+            if([selectedItem isKindOfClass:[OTEntourage class]]
+               && [[selectedItem joinStatus] isEqualToString:@"not_requested"])  {
+                NSNumber *rank = @(indexPath.section);
+                
+                [[OTEntourageService new] retrieveEntourage:(OTEntourage *)selectedItem
+                                                   fromRank:rank
+                                                    success:nil
+                                                    failure:nil];
+            }
+
     }
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }
