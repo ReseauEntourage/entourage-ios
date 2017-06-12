@@ -160,7 +160,11 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (IBAction)showProfile {
     [OTLogger logEvent:@"TapMyProfilePhoto"];
-    [self performSegueWithIdentifier:@"segueMenuIdentifierForProfile" sender:self];
+    [self performSegueWithIdentifier:OTMenuViewControllerSegueMenuProfileIdentifier sender:self];
+}
+
+- (IBAction)editProfile {
+    [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
 }
 
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier {

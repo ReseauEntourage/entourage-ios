@@ -136,7 +136,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                                <rect key="frame" x="121" y="233" width="133" height="18"/>
+                                <rect key="frame" x="122" y="233" width="133" height="18"/>
                                 <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -212,6 +212,7 @@
                         <segue destination="cEE-ZD-h1d" kind="modal" identifier="segueMenuIdentifierForProfile" modalTransitionStyle="coverVertical" id="ZNZ-ec-dR4"/>
                         <segue destination="pnd-2e-8CK" kind="modal" identifier="segueMenuIdentifierForSettings" id="9SM-98-Uj4"/>
                         <segue destination="vTa-22-9U0" kind="modal" identifier="segueMenuIdentifierForAbout" id="nHP-sl-eUN"/>
+                        <segue destination="UAH-w8-fk1" kind="modal" identifier="EditProfileSegue" id="V4Y-P9-4pi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tAy-vt-yhu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -223,7 +224,7 @@
                 </customObject>
                 <customObject id="2zc-lP-Ytb" userLabel="Tap Modify" customClass="OTTapViewBehavior">
                     <connections>
-                        <action selector="showProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="Xwc-gl-jYY"/>
+                        <action selector="editProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="uBu-cg-fzI"/>
                         <outlet property="tapView" destination="tvQ-n3-1AQ" id="QTp-p4-Wny"/>
                     </connections>
                 </customObject>
@@ -240,7 +241,7 @@
         <scene sceneID="Lst-Gh-Xmp">
             <objects>
                 <navigationController storyboardIdentifier="MenuNavController" automaticallyAdjustsScrollViewInsets="NO" id="EYq-GT-Cxt" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AaL-F7-3Uz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AaL-F7-3Uz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -256,7 +257,7 @@
         <scene sceneID="Uum-1n-6o1">
             <objects>
                 <navigationController storyboardIdentifier="MainNavController" automaticallyAdjustsScrollViewInsets="NO" id="UcL-62-xea" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qfe-Me-3AD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qfe-Me-3AD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1368,6 +1369,14 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
             </objects>
             <point key="canvasLocation" x="1218.5" y="-766"/>
         </scene>
+        <!--UserProfileEditor-->
+        <scene sceneID="Z6r-zn-ztw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserProfileEditor" id="UAH-w8-fk1" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hAn-9W-qGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1252" y="-621"/>
+        </scene>
         <!--QuitFeedItem-->
         <scene sceneID="BFl-vb-SXz">
             <objects>
@@ -1501,7 +1510,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="xSV-rR-wZy"/>
+        <segue reference="ZNZ-ec-dR4"/>
         <segue reference="6F4-O6-aKT"/>
-        <segue reference="b42-UE-vP1"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -26,6 +26,8 @@
 		019AE49E1EB0DD35007B244C /* OTNewsFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019AE49D1EB0DD35007B244C /* OTNewsFeedCell.m */; };
 		01A6DA8A1E8D089300089DC5 /* SolidarityGuideFilters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */; };
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
+		01DCFF101EEEAF9A007A0705 /* UserProfileEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01DCFF0F1EEEAF9A007A0705 /* UserProfileEditor.storyboard */; };
+		01E3AA421EEEADC5007FB282 /* AssociationDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E3AA411EEEADC5007FB282 /* AssociationDetails.storyboard */; };
 		0A011C1E1C3BB5B500DA6780 /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */; };
 		0A35F2B81BFA3AC2002301C3 /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A35F2B71BFA3AC2002301C3 /* OTConfirmationViewController.m */; };
 		0A4769351BFB9F07006EA73A /* OTUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4769341BFB9F07006EA73A /* OTUserViewController.m */; };
@@ -410,6 +412,8 @@
 		01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SolidarityGuideFilters.storyboard; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
+		01DCFF0F1EEEAF9A007A0705 /* UserProfileEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfileEditor.storyboard; sourceTree = "<group>"; };
+		01E3AA411EEEADC5007FB282 /* AssociationDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AssociationDetails.storyboard; sourceTree = "<group>"; };
 		01E5BD5B1ECDE62C006720AE /* OTNewsFeedTableDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OTNewsFeedTableDelegate.h; path = Behaviors/NewsFeed/OTNewsFeedTableDelegate.h; sourceTree = "<group>"; };
 		0A011C1C1C3BB5B400DA6780 /* OTLostCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLostCodeViewController.h; sourceTree = "<group>"; };
 		0A011C1D1C3BB5B400DA6780 /* OTLostCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLostCodeViewController.m; sourceTree = "<group>"; };
@@ -2142,6 +2146,8 @@
 				1EFBCFD71E56E3A5008CEF30 /* Tutorial.storyboard */,
 				01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */,
 				0135517D1EC328BF00D99994 /* EncounterEditor.storyboard */,
+				01E3AA411EEEADC5007FB282 /* AssociationDetails.storyboard */,
+				01DCFF0F1EEEAF9A007A0705 /* UserProfileEditor.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2709,6 +2715,7 @@
 				2E7064EE1CB273120034C55A /* MapOptions.storyboard in Resources */,
 				45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */,
 				452FE3F51CAD563F00063334 /* TourOptions.storyboard in Resources */,
+				01E3AA421EEEADC5007FB282 /* AssociationDetails.storyboard in Resources */,
 				45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */,
 				1E49BCB61D7D8B790024EDC1 /* Disclaimer.storyboard in Resources */,
 				1E78B7E91D5134D20008C00E /* SF-UI-Text-UltrathinItalic.otf in Resources */,
@@ -2733,6 +2740,7 @@
 				A8FD766E1E42FE9200063C5F /* staging.plist in Resources */,
 				D6EB4D4D1E6D6AA900CDC8A4 /* Images.xcassets in Resources */,
 				1E78B7E31D5134D20008C00E /* SF-UI-Text-MediumItalic.otf in Resources */,
+				01DCFF101EEEAF9A007A0705 /* UserProfileEditor.storyboard in Resources */,
 				1E78B7A41D5108B20008C00E /* PublicFeedItem.storyboard in Resources */,
 				1E78B7E61D5134D20008C00E /* SF-UI-Text-Semibold.otf in Resources */,
 				1EFAC0C71D89242D00BE396F /* FeedItemFilters.storyboard in Resources */,
