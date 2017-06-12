@@ -112,7 +112,6 @@
             [self.entouragesTableDataSource.dataSource.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
-        
     }
 }
 

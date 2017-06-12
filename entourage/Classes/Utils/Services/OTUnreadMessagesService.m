@@ -78,10 +78,11 @@
 }
 
 - (OTUnreadMessageCount *)findIn:(NSArray *)array byFeedId:(NSNumber *)feedId {
-    for(OTUnreadMessageCount *item in array) {
-        if([item.feedId isEqualToNumber:feedId])
-            return item;
-    }
+    if(array.count > 0)
+        for(OTUnreadMessageCount *item in array) {
+            if([item.feedId isEqualToNumber:feedId])
+                return item;
+        }
     return nil;
 }
 
