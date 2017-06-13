@@ -152,6 +152,7 @@
             return;
         if(success)
             success(feeds);
+     
     } failure:^(NSError *error) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.indicatorView.hidden = YES;

@@ -13,8 +13,8 @@ typedef enum { OTVehiclesFeet=0, OTVehiclesCar=1 } OTVehicles;
 typedef enum { OTTypesMedical=0, OTTypesBareHands=1, OTTypesAlimentary=2 } OTTypes;
 
 #define TOUR_MEDICAL @"medical"
-#define TOUR_SOCIAL @"social"
-#define TOUR_DISTRIBUTIVE @"distributive"
+#define TOUR_SOCIAL @"barehands"
+#define TOUR_DISTRIBUTIVE @"alimentary"
 
 
 #define TOUR_STATUS_ONGOING @"ongoing"
