@@ -20,6 +20,7 @@
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsService.h"
 #import "OTTutorialService.h"
+#import "OTLocationManager.h"
 
 @implementation OTNotificationsRightsViewController
 
@@ -35,6 +36,11 @@
 - (void)addIgnoreButton {
     UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore") withTarget:self andAction:@selector(doShowNext) colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:ignoreButton];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[OTLocationManager sharedInstance] startLocationUpdates];
 }
 
 #pragma mark - Private

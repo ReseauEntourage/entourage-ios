@@ -69,7 +69,6 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     
     if ([NSUserDefaults standardUserDefaults].currentUser) {
-        [self.pnService promptUserForPushNotifications];
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
             NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -90,8 +89,8 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    if ([NSUserDefaults standardUserDefaults].currentUser)
-        [[OTLocationManager sharedInstance] startLocationUpdates];
+//    if ([NSUserDefaults standardUserDefaults].currentUser)
+//        [[OTLocationManager sharedInstance] startLocationUpdates];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
