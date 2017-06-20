@@ -68,10 +68,11 @@
 }
 
 - (void)checkInvitationsToJoin {
-    [SVProgressHUD showWithStatus:OTLocalizedString(@"joiningEntouragesMessage")];
+    [SVProgressHUD show];
     [[OTOnboardingJoinService new] checkForJoins:^(OTEntourageInvitation *joinedInvitation) {
         [SVProgressHUD dismiss];
         if(joinedInvitation) {
+            [SVProgressHUD showWithStatus:OTLocalizedString(@"joiningEntouragesMessage")];
             [[OTDeepLinkService new] navigateTo:joinedInvitation.entourageId withType:nil];
             [[OTTutorialService new] showTutorial];
         }

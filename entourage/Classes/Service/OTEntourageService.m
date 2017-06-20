@@ -20,6 +20,7 @@
 #import "NSUserDefaults+OT.h"
 #import "NSDictionary+Parsing.h"
 #import "OTEntourageService.h"
+#import "OTLocationManager.h"
 
 
 /**************************************************************************************************/
@@ -99,10 +100,13 @@ extern NSString *kUsers;
 {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_REQUEST, entourage.uid, TOKEN];
     NSLog(@"Join entourage request: %@", url);
+    CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
+    CLLocationDistance distance = [currentLocation distanceFromLocation:entourage.location];
+    NSDictionary *parameteres = @{@"distance": @(distance)};
     
     [[OTHTTPRequestManager sharedInstance]
      POSTWithUrl:url
-     andParameters:nil
+     andParameters:parameteres
      andSuccess:^(id responseObject)
      {
          NSDictionary *data = responseObject;
@@ -325,7 +329,9 @@ extern NSString *kUsers;
      }];
 }
 
-- (void)entourageUsers:(OTEntourage *)entourage success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+- (void)entourageUsers:(OTEntourage *)entourage
+               success:(void (^)(NSArray *))success
+               failure:(void (^)(NSError *))failure {
     NSString *url = [NSString stringWithFormat:API_URL_TOUR_FEED_ITEM_USERS, kEntourages, entourage.uid,  TOKEN];
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
@@ -368,6 +374,28 @@ extern NSString *kUsers;
      }
      ];
 }
+
+- (void)retrieveEntourage:(OTEntourage *)entourage
+                 fromRank:(NSNumber *)rank
+                  success:(void (^)())success
+                  failure:(void (^)(NSError *))failure {
+    CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
+    CLLocationDistance distance = [currentLocation distanceFromLocation:entourage.location];
+    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_RETRIEVE, entourage.uid, (int)distance/1000, [rank stringValue], TOKEN];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject) {
+         if(success)
+            success();
+     }
+     andFailure:^(NSError *error) {
+         if(failure)
+            failure(error);
+     }];
+}
+
 
 /**************************************************************************************************/
 #pragma mark - Private methods

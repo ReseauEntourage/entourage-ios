@@ -22,6 +22,8 @@
 #import "OTNewsFeedCell.h"
 #import "OTSolidarityGuideCell.h"
 #import "OTPoi.h"
+#import "OTNewsFeedsSourceBehavior.h"
+#import "OTEntourageService.h"
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
@@ -35,12 +37,22 @@
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 #define TABLEVIEW_BOTTOM_INSET 86.0f
+#define SMALL_FOOTER_HEIGHT 126
+#define BIG_FOOTER_HEIGHT 300
 
 
 @interface OTFeedItemsTableView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UILabel *lblEmptyTableReason;
 @property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong) UIView *emptyFooterView;
+@property (nonatomic, weak) IBOutlet UILabel *infoLabel;
+@property (nonatomic, weak) IBOutlet UIButton *furtherEntouragesBtn;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, weak) IBOutlet UIButton *tourOptionsBtn;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *tourOptionBottomContraint;
+@property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior *sourceBehavior;
+@property (nonatomic, strong) UIView *currentNewsfeedFooter;;
 
 @end
 
@@ -72,10 +84,8 @@
 }
 
 - (void)configureWithMapView:(MKMapView *)mapView {
-    
-    self.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, -TABLEVIEW_FOOTER_HEIGHT, 0.0f);
-    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
-    self.tableFooterView = dummyView;
+    self.emptyFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
+    self.tableFooterView = self.emptyFooterView;
     
     //show map on table header
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, MAPVIEW_HEIGHT)];
@@ -172,11 +182,25 @@
     else {
         if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)])
             [self.feedItemsDelegate showFeedInfo:selectedItem];
+            if([selectedItem isKindOfClass:[OTEntourage class]]
+               && [[selectedItem joinStatus] isEqualToString:@"not_requested"])  {
+                NSNumber *rank = @(indexPath.section);
+                
+                [[OTEntourageService new] retrieveEntourage:(OTEntourage *)selectedItem
+                                                   fromRank:rank
+                                                    success:nil
+                                                    failure:nil];
+            }
+
     }
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if([[self.items firstObject] isKindOfClass:[OTPoi class]])
+        return;
+    if(self.tableFooterView != self.emptyFooterView)
+        return;
     CGPoint offset = scrollView.contentOffset;
     CGRect bounds = scrollView.bounds;
     CGSize size = scrollView.contentSize;
@@ -195,6 +219,13 @@
 #define kMapHeaderOffsetY 0.0
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.tableHeaderView == nil) return;
+    [UIView animateWithDuration:0.5 animations:^() {
+        if(self.contentSize.height - scrollView.contentOffset.y <= scrollView.frame.size.height && self.tableFooterView != self.emptyFooterView && self.contentSize.height > self.frame.size.height)
+            self.tourOptionBottomContraint.constant = 12 + self.loadingView.frame.size.height;
+        else
+            self.tourOptionBottomContraint.constant = 12;
+        [self.superview layoutIfNeeded];
+    }];
     
     CGFloat scrollOffset = scrollView.contentOffset.y;
     CGRect headerFrame = self.tableHeaderView.frame;//self.mapView.frame;
@@ -237,7 +268,49 @@
             [self.feedItemsDelegate doJoinRequest:selectedFeedItem];
     }
 }
-     
+
+#pragma mark - OTNewsFeedTableDelegate
+
+- (void)beginUpdatingFeeds {
+    self.infoLabel.hidden = YES;
+    self.furtherEntouragesBtn.hidden = YES;
+    self.activityIndicator.hidden = NO;
+    self.tableFooterView = self.loadingView;
+}
+
+- (void)finishUpdatingFeeds:(BOOL)withFeeds {
+    if(withFeeds){
+        self.tableFooterView = self.emptyFooterView;
+        return;
+    }
+    self.activityIndicator.hidden = YES;
+    self.infoLabel.hidden = NO;
+    BOOL isMaxRadius = self.sourceBehavior.radius == [RADIUS_ARRAY[RADIUS_ARRAY.count - 1] intValue];
+    self.furtherEntouragesBtn.hidden = isMaxRadius;
+    self.loadingView.frame = CGRectMake(0, 0, 1, SMALL_FOOTER_HEIGHT);
+    if(self.items.count > 0)
+        self.infoLabel.text = OTLocalizedString(isMaxRadius ? @"no_more_feeds" : @"increase_radius");
+    else {
+        if(!isMaxRadius)
+            self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
+        self.infoLabel.text = OTLocalizedString(isMaxRadius ? @"no_feeds_received" : @"no_feeds_increase_radius");
+    }
+    self.tableFooterView = self.loadingView;
+}
+
+- (void)errorUpdatingFeeds {
+    self.tableFooterView = self.emptyFooterView;
+}
+
+- (void)switchToGuide {
+    self.currentNewsfeedFooter = self.tableFooterView;
+    self.tableFooterView = self.emptyFooterView;
+}
+
+- (void)switchToFeeds {
+    self.tableFooterView = self.currentNewsfeedFooter;
+}
+
 #pragma mark - private methods
      
 - (BOOL)isGuideItem:(id)item {

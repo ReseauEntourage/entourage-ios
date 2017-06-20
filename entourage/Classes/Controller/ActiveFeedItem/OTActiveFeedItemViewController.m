@@ -30,6 +30,8 @@
 #import "OTShareFeedItemBehavior.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
+#import "OTEditEncounterBehavior.h"
+#import "OTMessageTableCellProviderBehavior.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -40,6 +42,8 @@
 @property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior *editEntourageBehavior;
+@property (nonatomic, weak) IBOutlet OTEditEncounterBehavior *editEncounterBehavior;
+@property (nonatomic, weak) IBOutlet OTMessageTableCellProviderBehavior *cellProvider;
 @property (weak, nonatomic) IBOutlet UITextView *txtChat;
 @property (weak, nonatomic) IBOutlet UITableView *tblChat;
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
@@ -64,6 +68,7 @@
     [self.tableDataSource initialize];
     self.dataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.dataSource.tableView.estimatedRowHeight = 1000;
+    self.cellProvider.feedItem = self.feedItem;
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
     [self setupToolbarButtons];
@@ -71,7 +76,8 @@
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
     
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createForType:self.feedItem.type andId:self.feedItem.uid] getMessaging] setMessagesAsRead:^{
+    [[[OTFeedItemFactory createFor:self.feedItem]
+      getMessaging] setMessagesAsRead:^{
         [SVProgressHUD dismiss];
         [[OTUnreadMessagesService new] removeUnreadMessages:self.feedItem.uid];
     } orFailure:^(NSError *error) {
@@ -82,6 +88,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    [self reloadMessages];
 }
 
 - (void)reloadMessages {
@@ -98,6 +105,8 @@
     if([self.userProfileBehavior prepareSegueForUserProfile:segue])
         return;
     if([self.editEntourageBehavior prepareSegue:segue])
+        return;
+    if([self.editEncounterBehavior prepareSegue:segue])
         return;
     if([segue.identifier isEqualToString:@"SegueMap"]) {
         OTMapViewController *controller = (OTMapViewController *)segue.destinationViewController;
@@ -151,6 +160,10 @@
 - (IBAction)scrollToBottomWhileEditing {
     if(self.dataSource.items.count > 0)
         [self.dataSource.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.items.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (IBAction)encounterChanged {
+    [self reloadMessages];
 }
 
 #pragma mark - UITextViewDelegate

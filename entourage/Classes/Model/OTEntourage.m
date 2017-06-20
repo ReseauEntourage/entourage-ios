@@ -37,10 +37,11 @@
 }
 
 - (NSDictionary *)dictionaryForWebService {
+    
     return @{
         kWSKeyTitle: self.title,
         kWSKeyEntourageType: self.type,
-        kWSDescription: self.desc,
+        kWSDescription: self.desc ? self.desc : @"",
         kWSKeyStatus: self.status,
         kWSKeyLocation: @{
             kWSKeyLatitude: @(self.location.coordinate.latitude),

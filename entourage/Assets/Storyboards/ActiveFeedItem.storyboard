@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DlM-nw-VLS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DlM-nw-VLS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,6 +31,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJt-YK-hyA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="495.5" y="577"/>
+        </scene>
+        <!--EncounterEditor-->
+        <scene sceneID="mxg-V9-Cqu">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EncounterEditor" id="TSq-eS-Spi" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8ZA-eF-RbS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1024" y="530"/>
         </scene>
         <!--Active Feed Item-->
         <scene sceneID="sn3-Dx-6AT">
@@ -794,30 +802,34 @@
                                             <outlet property="userProfile" destination="Qyp-hb-7rI" id="uRR-XT-HpA"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EncounterCell" rowHeight="44" id="G2p-zP-CoV" customClass="OTEncounterCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EncounterCell" rowHeight="44" id="G2p-zP-CoV" customClass="OTEncounterCell">
                                         <rect key="frame" x="0.0" y="1067" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G2p-zP-CoV" id="gkp-1r-kpf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Encounter info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="j3k-C6-7oU">
-                                                    <rect key="frame" x="135.5" y="13" width="105.5" height="18"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZn-9Q-IvZ">
+                                                    <rect key="frame" x="162.5" y="7" width="49" height="30"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
-                                                    <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="doEditEncounter" destination="G2p-zP-CoV" eventType="touchUpInside" id="QTf-JL-D0u"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="j3k-C6-7oU" firstAttribute="centerX" secondItem="gkp-1r-kpf" secondAttribute="centerX" id="0pP-uf-i2W"/>
-                                                <constraint firstItem="j3k-C6-7oU" firstAttribute="centerY" secondItem="gkp-1r-kpf" secondAttribute="centerY" id="JF8-fQ-yt3"/>
-                                                <constraint firstItem="j3k-C6-7oU" firstAttribute="width" relation="lessThanOrEqual" secondItem="gkp-1r-kpf" secondAttribute="width" constant="-30" id="yOt-dO-zeW"/>
+                                                <constraint firstItem="MZn-9Q-IvZ" firstAttribute="centerY" secondItem="gkp-1r-kpf" secondAttribute="centerY" id="2QL-OC-AxL"/>
+                                                <constraint firstItem="MZn-9Q-IvZ" firstAttribute="width" relation="lessThanOrEqual" secondItem="gkp-1r-kpf" secondAttribute="width" constant="-30" id="5w1-Fp-SUC"/>
+                                                <constraint firstItem="MZn-9Q-IvZ" firstAttribute="centerX" secondItem="gkp-1r-kpf" secondAttribute="centerX" id="d6v-eR-kKf"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="lblInfo" destination="j3k-C6-7oU" id="2Jg-Ud-jkm"/>
+                                            <outlet property="btnInfo" destination="MZn-9Q-IvZ" id="jgS-gh-eRg"/>
+                                            <outlet property="editEncounter" destination="A8o-tS-vva" id="SrZ-sz-S90"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaceholderCell" textLabel="e2p-aY-pYA" rowHeight="30" style="IBUITableViewCellStyleDefault" id="z6P-3h-PpM" customClass="OTPlaceholderCell">
@@ -860,7 +872,9 @@
                     </view>
                     <connections>
                         <outlet property="btnSend" destination="7un-ks-sBK" id="Trg-Xe-Evb"/>
+                        <outlet property="cellProvider" destination="w85-97-pWi" id="mHA-Y8-JWo"/>
                         <outlet property="dataSource" destination="1dX-UW-k7J" id="wyt-aY-4y7"/>
+                        <outlet property="editEncounterBehavior" destination="A8o-tS-vva" id="nvC-3h-KV5"/>
                         <outlet property="editEntourageBehavior" destination="fgv-V1-G2W" id="UCh-fX-1Nd"/>
                         <outlet property="inviteBehavior" destination="jhq-UT-Ztj" id="0wU-XK-4VB"/>
                         <outlet property="scrollBottomBehavior" destination="rXS-zd-ZbL" id="Va5-1O-n8B"/>
@@ -879,6 +893,7 @@
                         <segue destination="nZu-ch-wHg" kind="presentation" identifier="UserProfileSegue" id="5BX-au-xTN"/>
                         <segue destination="hfH-zI-I2L" kind="presentation" identifier="EntourageEditorSegue" id="8gM-o4-A6h"/>
                         <segue destination="j0M-T7-4eG" kind="presentation" identifier="SegueChangeState" id="r9m-eb-lob"/>
+                        <segue destination="TSq-eS-Spi" kind="presentation" identifier="OTCreateMeeting" id="FYG-QT-Krz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riw-B5-uYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -931,6 +946,12 @@
                 <customObject id="fgv-V1-G2W" customClass="OTEditEntourageBehavior">
                     <connections>
                         <outlet property="owner" destination="DlM-nw-VLS" id="0Wl-He-v3h"/>
+                    </connections>
+                </customObject>
+                <customObject id="A8o-tS-vva" customClass="OTEditEncounterBehavior">
+                    <connections>
+                        <action selector="encounterChanged" destination="DlM-nw-VLS" eventType="valueChanged" id="lh5-mu-1hM"/>
+                        <outlet property="owner" destination="DlM-nw-VLS" id="kNS-qz-945"/>
                     </connections>
                 </customObject>
                 <customObject id="rXS-zd-ZbL" userLabel="Bottom Scroll" customClass="OTBottomScrollBehavior">
@@ -1780,12 +1801,12 @@
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zFK-Fj-hWR"/>
-        <segue reference="8gM-o4-A6h"/>
-        <segue reference="r9m-eb-lob"/>
         <segue reference="ffc-Pt-QuG"/>
         <segue reference="5BX-au-xTN"/>
+        <segue reference="zFK-Fj-hWR"/>
         <segue reference="nan-zV-dem"/>
         <segue reference="TAD-d7-tmZ"/>
+        <segue reference="r9m-eb-lob"/>
+        <segue reference="8gM-o4-A6h"/>
     </inferredMetricsTieBreakers>
 </document>

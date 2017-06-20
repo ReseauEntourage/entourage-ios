@@ -16,7 +16,6 @@
 #import "OTOngoingTourService.h"
 #import "OTTourPoint.h"
 
-#define REQUIRED_ACCURACY 20
 #define MIN_POINTS_TO_SEND 3
 #define HOW_RECENT_THRESHOLD 120
 
@@ -105,10 +104,7 @@
         if (fabs(howRecent) > HOW_RECENT_THRESHOLD)
             continue;
 
-        if (newLocation.horizontalAccuracy < REQUIRED_ACCURACY)
-            self.lastLocation = newLocation;
-        else
-            continue;
+        self.lastLocation = newLocation;
         if ([OTOngoingTourService sharedInstance].isOngoing) {
             CLLocation *lastDrawnTourLocation = [self locationFromTourPoint:self.tour.tourPoints.lastObject];
             OTTourPoint *addedPoint = [self addTourPointFromLocation:self.lastLocation

@@ -80,6 +80,8 @@
 #import "OTAppDelegate.h"
 #import "OTSavedFilter.h"
 #import "OTGuideInfoBehavior.h"
+#import "OTEditEncounterBehavior.h"
+#import "OTTapViewBehavior.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -95,11 +97,15 @@
 @property (nonatomic, weak) IBOutlet OTMapDelegateProxyBehavior* mapDelegateProxy;
 @property (nonatomic, weak) IBOutlet OTOverlayFeederBehavior* overlayFeeder;
 @property (nonatomic, weak) IBOutlet OTTapEntourageBehavior* tapEntourage;
+@property(nonatomic, weak) IBOutlet OTTapViewBehavior *tapViewBehavior;
 @property (nonatomic, weak) IBOutlet OTJoinBehavior* joinBehavior;
 @property (nonatomic, weak) IBOutlet OTStatusChangedBehavior* statusChangedBehavior;
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior* editEntourgeBehavior;
+@property (nonatomic, weak) IBOutlet OTEditEncounterBehavior* editEncounterBehavior;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior* newsFeedsSourceBehavior;
 @property (nonatomic, weak) IBOutlet OTTourCreatorBehavior *tourCreatorBehavior;
+@property (nonatomic, weak) IBOutlet UIView *showSolidarityGuideView;
+@property (nonatomic, weak) IBOutlet UILabel *solidarityGuideLabel;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic) CLLocationCoordinate2D encounterLocation;
@@ -129,6 +135,7 @@
 @property (nonatomic, weak) IBOutlet OTCustomSegmentedBehavior *customSegmentedBehavior;
 @property (nonatomic, weak) IBOutlet OTGuideInfoBehavior *guideInfoBehavior;
 
+
 @end
 
 @implementation OTMainViewController {
@@ -137,14 +144,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.solidarityGuideLabel.text = OTLocalizedString(@"map_options_show_guide");
     self.isFirstLoad = YES;
     [self.noDataBehavior initialize];
     [self.newsFeedsSourceBehavior initialize];
     [self.customSegmentedBehavior initialize];
+    [self.tapViewBehavior initialize];
     self.newsFeedsSourceBehavior.delegate = self;
     [self.tourCreatorBehavior initialize];
     self.tourCreatorBehavior.delegate = self;
+    self.newsFeedsSourceBehavior.tableDelegate = self.tableView;
     [self configureNavigationBar];
     self.currentFilter = [OTNewsFeedsFilter new];
     self.solidarityFilter = [OTSolidarityGuideFilter new];
@@ -165,6 +174,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageCreated:) name:kNotificationEntourageCreated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceGetNewData) name:@kNotificationReloadData object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendCloseMail:) name:@kNotificationSendCloseMail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToGuide) name:kSolidarityGuideNotification object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
@@ -219,6 +229,7 @@
 }
 
 - (void)switchToNewsfeed {
+    [self.tableView switchToFeeds];
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self.noDataBehavior switchedToNewsfeeds];
     [self.guideInfoBehavior hide];
@@ -230,11 +241,13 @@
     [self.customSegmentedBehavior updateVisible:YES];
     [self clearMap];
     [self feedMapWithFeedItems];
+    self.showSolidarityGuideView.hidden = NO;
     if (self.isTourListDisplayed)
         [self showToursList];
 }
 
 - (void)switchToGuide {
+    [self.tableView switchToGuide];
     [self.tableView updateItems:self.pois];
     [self.noDataBehavior switchedToGuide];
     self.toursMapDelegate.isActive = NO;
@@ -246,6 +259,7 @@
     [self clearMap];
     [self showToursMap];
     [self reloadPois];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (IBAction)goToTourOptions:(id)sender {
@@ -401,7 +415,6 @@
             self.pois.count == 0 ? [self.noDataBehavior showNoData] : [self.guideInfoBehavior show];
             [SVProgressHUD dismiss];
     }];
-    
 }
 
 - (void)feedMapWithFeedItems {
@@ -546,8 +559,6 @@
         self.isFirstLoad = NO;
         [self showToursList];
     }
-    if(self.newsFeedsSourceBehavior.feedItems.count == 0)
-        [self.tableView setNoFeeds];
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self feedMapWithFeedItems];
     if(self.toursMapDelegate.isActive) {
@@ -700,14 +711,6 @@
     [self.popover dismissPopoverAnimated:YES];
 }
 
-#pragma mark - OTCreateMeetingViewControllerDelegate
-
-- (void)encounterSent:(OTEncounter *)encounter {
-    [self dismissViewControllerAnimated:YES completion:^{
-        [self feedMapViewWithEncounters];
-    }];
-}
-
 #pragma mark - OTOptionsDelegate
 
 - (void)createTour {
@@ -724,7 +727,7 @@
 - (void)createEncounter {
     [self dismissViewControllerAnimated:NO completion:^{
         [self switchToNewsfeed];
-        [self performSegueWithIdentifier:@"OTCreateMeeting" sender:nil];
+        [self.editEncounterBehavior doEdit:nil forTour:self.tourCreatorBehavior.tour.uid andLocation:self.encounterLocation];
     }];
 }
 
@@ -929,6 +932,7 @@
 #pragma mark - "Screens"
 
 - (void)showToursList {
+    self.showSolidarityGuideView.hidden = YES;
     [self.noDataBehavior hideNoData];
     self.isTourListDisplayed = YES;
     self.customSegmentedBehavior.selectedIndex = 1;
@@ -942,6 +946,7 @@
 }
 
 - (void)showToursMap {
+    self.guideMapDelegate.isActive ? [self.showSolidarityGuideView setHidden:YES] : [self.showSolidarityGuideView setHidden:NO];
     if(self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0)
         [self.noDataBehavior showNoData];
     self.nouveauxFeedItemsButton.hidden = YES;
@@ -955,6 +960,7 @@
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     }];
 }
 
@@ -986,6 +992,10 @@
         return;
     if([self.editEntourgeBehavior prepareSegue:segue])
         return;
+    if([self.editEncounterBehavior prepareSegue:segue]) {
+        encounterFromTap = NO;
+        return;
+    }
     if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
     UIViewController *destinationViewController = segue.destinationViewController;
@@ -993,14 +1003,6 @@
         UINavigationController *navController = (UINavigationController*)destinationViewController;
         OTUserViewController *controller = (OTUserViewController*)navController.topViewController;
         controller.user = (OTUser*)sender;
-    }
-    else if([segue.identifier isEqualToString:@"OTCreateMeeting"]) {
-        UINavigationController *navController = (UINavigationController*)destinationViewController;
-        OTCreateMeetingViewController *controller = (OTCreateMeetingViewController*)navController.topViewController;
-        controller.delegate = self;
-        [controller configureWithTourId:self.tourCreatorBehavior.tour.uid andLocation:self.encounterLocation];
-        controller.encounters = self.encounters;
-        encounterFromTap = NO;
     }
     else if([segue.identifier isEqualToString:@"OTConfirmationPopup"]) {
         OTConfirmationViewController *controller = (OTConfirmationViewController *)destinationViewController;
@@ -1090,4 +1092,14 @@
     [self forceGetNewData];
 }
 
+- (IBAction)encounterChanged {
+    [self.encounters addObject:self.editEncounterBehavior.encounter];
+    [self feedMapViewWithEncounters];
+}
+
+- (IBAction)showGuide {
+    [OTLogger logEvent:@"SolidarityGuideFrom06Map"];
+    [self switchToGuide];
+}
+    
 @end

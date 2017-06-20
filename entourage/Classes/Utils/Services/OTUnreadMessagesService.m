@@ -31,17 +31,18 @@
     NSMutableArray *unreadMessages = [self getUnreadMessages];
     OTUnreadMessageCount *unreadMessageFound = [self findIn:unreadMessages byFeedId:feedId];
     if(unreadMessageFound == nil) {
-        OTUnreadMessageCount *unread = [OTUnreadMessageCount new];
-        unread.unreadMessagesCount = [NSNumber numberWithInt:1];
-        unread.feedId = feedId;
-        [unreadMessages addObject:unread];
+        unreadMessageFound = [OTUnreadMessageCount new];
+        unreadMessageFound.unreadMessagesCount = [NSNumber numberWithInt:1];
+        unreadMessageFound.feedId = feedId;
+        [unreadMessages addObject:unreadMessageFound];
     }
     else{
         int value = [unreadMessageFound.unreadMessagesCount intValue];
         unreadMessageFound.unreadMessagesCount = @(value+1);
     }
     [self saveUnreadMessages:unreadMessages];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:self];
+    NSDictionary* notificationInfo = @{ kNotificationUpdateBadgeCountKey:unreadMessageFound.unreadMessagesCount, kNotificationUpdateBadgeFeedIdKey:unreadMessageFound.feedId};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:notificationInfo];
 }
 
 - (void)removeUnreadMessages:(NSNumber *)feedId {
@@ -51,8 +52,8 @@
         [unreadMessages removeObject:unreadMessageFound];
         [self saveUnreadMessages:unreadMessages];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:self];
-    
+    NSDictionary* notificationInfo = @{ kNotificationUpdateBadgeCountKey: @(unreadMessages.count), kNotificationUpdateBadgeFeedIdKey:feedId};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:notificationInfo];
 }
 
 - (NSNumber *)countUnreadMessages:(NSNumber *)feedId {
@@ -77,10 +78,11 @@
 }
 
 - (OTUnreadMessageCount *)findIn:(NSArray *)array byFeedId:(NSNumber *)feedId {
-    for(OTUnreadMessageCount *item in array) {
-        if([item.feedId isEqualToNumber:feedId])
-            return item;
-    }
+    if(array.count > 0)
+        for(OTUnreadMessageCount *item in array) {
+            if([item.feedId isEqualToNumber:feedId])
+                return item;
+        }
     return nil;
 }
 

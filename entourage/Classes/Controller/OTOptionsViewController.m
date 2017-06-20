@@ -25,7 +25,8 @@
     // Do any additional setup after loading the view.
     if (!CGPointEqualToPoint(self.fingerPoint, CGPointZero)) {
         [self setupOptionsAtFingerPoint];
-    } else {
+    }
+    else {
         [self setupOptionsAsList];
     }
     __weak typeof(self) weakSelf = self;
@@ -66,12 +67,6 @@
 #pragma mark - Show options as a list
 
 - (void)setupOptionsAsList {
-    
-    if (self.isPOIVisible) {
-        self.togglePOILabel.text = OTLocalizedString(@"map_options_hide_poi");
-    } else {
-        self.togglePOILabel.text = OTLocalizedString(@"map_options_show_poi");
-    }
     self.buttonIndex = 1;
 }
 /*

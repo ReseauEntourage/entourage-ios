@@ -39,7 +39,7 @@
                 [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyRefresh active:self.showRefresh withImage:@"water"],
                 [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyOrientation active:self.showOrientation withImage:@"orientate"],
                 [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyCaring active:self.showCaring withImage:@"lookAfterYourself"],
-                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyReinsertion active:self.showReinsertion withImage:@"social_sg"]
+                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyReinsertion active:self.showReinsertion withImage:@"reinsertYourself"]
               ]
             ];
 }

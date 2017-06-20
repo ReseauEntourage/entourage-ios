@@ -36,6 +36,7 @@
 #define API_URL_TOUR_ENCOUNTERS @"%@/%@/encounters.json?token=%@"
 #define API_URL_TOURS_USER @"%@/%@/%@.json?token=%@"
 #define API_URL_TOUR_SEND_ENCOUNTER @"%@/%@/%@.json?token=%@"
+#define API_URL_ENCOUNTER_UPDATE @"encounters/%@?token=%@"
 
 
 //Associations
@@ -56,6 +57,7 @@
 #define API_URL_ENTOURAGE_GET_INVITES @"invitations?token=%@"
 #define API_URL_ENTOURAGE_HANDLE_INVITE @"invitations/%@?token=%@"
 #define API_URL_ENTOURAGE_SEND @"entourages"
+#define API_URL_ENTOURAGE_RETRIEVE @"entourages/%@?distance=%d&feed_rank=%@&token=%@"
 
 //Messages
 #define API_URL_TOUR_SET_READ_MESSAGES  "tours/%@/read?token=%@"

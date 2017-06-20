@@ -89,7 +89,7 @@
         @"before" : before,
         @"latitude": @(location.latitude),
         @"longitude": @(location.longitude),
-        @"distance": @FEEDS_REQUEST_DISTANCE_KM,
+        @"distance": @(self.distance),
         @"tour_types": [self getTourTypes],
         @"entourage_types": [self getEntourageTypes],
         @"show_tours": self.showTours ? @"true" : @"false",
@@ -131,7 +131,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f", self.showMedical, self.showSocial, self.showDistributive, self.showDemand, self.showContribution, self.showTours, self.showOnlyMyEntourages, self.timeframeInHours, self.location.latitude, self.location.longitude];
+    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d", self.showMedical, self.showSocial, self.showDistributive, self.showDemand, self.showContribution, self.showTours, self.showOnlyMyEntourages, self.timeframeInHours, self.location.latitude, self.location.longitude, self.distance];
 }
 
 - (NSString *)getTourTypes {
@@ -167,6 +167,7 @@
     copy.showOnlyMyEntourages = self.showOnlyMyEntourages;
     copy.timeframeInHours = self.timeframeInHours;
     copy.location = CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude);
+    copy.distance = self.distance;
     return copy;
 }
 

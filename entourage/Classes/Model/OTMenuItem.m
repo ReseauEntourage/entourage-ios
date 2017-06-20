@@ -31,4 +31,13 @@
     return self;
 }
 
+- (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName {
+    self = [super init];
+    if (self) {
+        self.title = title;
+        self.iconName = iconName;
+    }
+    return self;
+}
+
 @end

@@ -17,5 +17,6 @@
 
 - (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName segueIdentifier:(NSString *)segueIdentifier;
 - (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName url:(NSString *)url;
+- (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName;
 
 @end

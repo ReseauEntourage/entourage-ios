@@ -62,8 +62,10 @@
 "menu_yourOpinion_title" = "VOTRE AVIS";
 "menu_translate_title" = "TRADUIRE";
 "menu_disconnect_title" = "Déconnexion";
-"menu_entourage_actions" = "Quelles actions avec Entourage ?";
+"menu_entourage_actions" = "Idées d'actions avec Entourage";
 "menu_application_usage" = "Utilisation de l'appli";
+"menu_atd_partner" = "Notre partenariat avec ATD";
+"menu_solidarity_guide" = "Carte des structures solidaires";
 
 // AboutItems
 "about_rateus" = "Notez-nous dans l’App Store";
@@ -81,6 +83,7 @@
 "create_contribution" = "Créer une contribution";
 "map_options_hide_poi" = "Masquer le guide de solidarité";
 "map_options_show_poi" = "Afficher le guide de solidarité";
+"map_options_show_guide" = "Voir les lieux solidaires";
 
 
 // Feed item
@@ -173,6 +176,7 @@ Proposez une structure";
 "edit_contribution_desc" = "Je suis ancien employé de mairie et je peux aider dans des démarches administratives.
 (Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes.)";
 "invalidTitle" = "Titre invalide";
+"title" = "Titre";
 "demande" = "Demande";
 "ask_for_help" = "Demande";
 "contribution" = "Contribution";
@@ -187,6 +191,8 @@ Proposez une structure";
 "user_join_reject" = " a reçu une notification du rejet de sa demande.";
 "meetingCreated" = "Rencontre créée";
 "meetingNotCreated" = "Echec de la création de rencontre";
+"meetingUpdated" = "Rencontre modifiée";
+"meetingNotUpdated" = "La rencontre n’a pu être modifiée";
 "contacts" = "Contacts";
 "mobilePhone" = "Numero Portable";
 
@@ -322,7 +328,17 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 // User profile
 "user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";
 
+"increase_radius" = "C’est tout pour les actions dans ce rayon autour de vous ! ";
+"no_feeds_increase_radius" = "
+C’est plutôt calme par ici !
+
+On dirait bien qu’il n’y a aucun entourage à proximité… pour l’instant !
+
+Vous pouvez créer votre propre entourage en cliquant sur
+le + en bas à droite.
+";
 "no_feeds_received" = "Aucun entourage près de cette position";
+"no_more_feeds" = "Aucun autre entourage près de cette position";
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
 "ok" = "OK";
 
@@ -368,10 +384,14 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "share_creator" = "J'ai créé ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
 "share_joiner" = "J'ai rejoint ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
 
-
 "feed_item_time_distance" = "Créée il y a ";
 
 "association_set" = "Badge ajouté";
 "association_reset" = "Badge enlevé";
 
 "propose_structure" = "Proposer une structure";
+
+"report_user_subject" = "Signalement d'un utilisateur - %@";
+"user_reported" = "Utilisateur signalé";
+
+"action" = "Action";

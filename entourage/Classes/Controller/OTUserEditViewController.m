@@ -64,6 +64,7 @@ typedef NS_ENUM(NSInteger) {
     self.sections = @[@(SectionTypeSummary), @(SectionTypeAssociations), @(SectionTypeInfoPrivate), @(SectionTypeDelete)];
     self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)dealloc {
@@ -76,6 +77,10 @@ typedef NS_ENUM(NSInteger) {
         OTUserEditPasswordViewController *controller = (OTUserEditPasswordViewController*)navController.topViewController;
         controller.delegate = self;
     }
+}
+
+- (void)appActive {
+    [self.tableView reloadData];
 }
 
 #pragma mark - Private
@@ -138,7 +143,7 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeSummary:
             return 3;
         case SectionTypeInfoPrivate:
-            return 3;
+            return 4;
         case SectionTypeAssociations:
             return self.associationRows.count;
         default:
@@ -216,6 +221,9 @@ typedef NS_ENUM(NSInteger) {
                 case 2:
                     cellID = @"PhoneCell";
                     break;
+                case 3:
+                    cellID = @"NotificationsCell";
+                    break;
                 default:
                     break;
             }
@@ -261,6 +269,9 @@ typedef NS_ENUM(NSInteger) {
                 case 2:
                     [self setupPhoneCell:cell withPhone:self.user.phone];
                     break;
+                case 3:
+                    [self setupNotificationCell:cell];
+                    break;
                 default:
                     break;
             }
@@ -291,8 +302,16 @@ typedef NS_ENUM(NSInteger) {
     int mappedSection = [[self.sections objectAtIndex:indexPath.section] intValue];
     switch (mappedSection) {
         case SectionTypeInfoPrivate:
-            if (indexPath.row == 1)
-                [self performSegueWithIdentifier:EDIT_PASSWORD_SEGUE sender:nil];
+            switch (indexPath.row) {
+                case 1:
+                    [self performSegueWithIdentifier:EDIT_PASSWORD_SEGUE sender:nil];
+                    break;
+                case 3:
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                    break;
+                default:
+                    break;
+            }
             break;
         case SectionTypeDelete: {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:OTLocalizedString(@"user_edit_delete") preferredStyle:UIAlertControllerStyleAlert];
@@ -330,6 +349,8 @@ typedef NS_ENUM(NSInteger) {
 #define CELL_TEXTFIELD_TAG 20
 
 #define PHONE_LABEL_TAG 1
+
+#define NOTIFICATION_STATUS_IMAGE_TAG 1
 
 #define VERIFICATION_LABEL_TAG 1
 #define VERIFICATION_STATUS_TAG 2
@@ -408,6 +429,12 @@ typedef NS_ENUM(NSInteger) {
     UILabel *phoneLabel = [cell viewWithTag:PHONE_LABEL_TAG];
     if (phoneLabel != nil)
         phoneLabel.text = phone;
+}
+
+- (void)setupNotificationCell:(UITableViewCell *)cell {
+    UIImageView *imgStatus = [cell viewWithTag:NOTIFICATION_STATUS_IMAGE_TAG];
+    BOOL disabledNotifications = [[UIApplication sharedApplication] currentUserNotificationSettings].types == UIUserNotificationTypeNone;
+    imgStatus.image = [UIImage imageNamed:(disabledNotifications ? @"notVerified" : @"verified")];
 }
 
 #pragma mark - OTUserEditPasswordProtocol

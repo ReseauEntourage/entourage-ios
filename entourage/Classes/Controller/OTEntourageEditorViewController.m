@@ -18,14 +18,14 @@
 #import "UIBarButtonItem+factory.h"
 #import "SVProgressHUD.h"
 #import "OTEntourageDisclaimerBehavior.h"
+#import "OTEditEntourageTableSource.h"
+#import "OTEditEntourageNavigationBehavior.h"
 
-@interface OTEntourageEditorViewController() <LocationSelectionDelegate>
+@interface OTEntourageEditorViewController()
 
-@property (nonatomic, weak) IBOutlet UIButton *locationButton;
-@property (nonatomic, weak) IBOutlet OTTextWithCount *titleTextView;
-@property (nonatomic, weak) IBOutlet OTTextWithCount *descriptionTextView;
-
+@property (nonatomic, weak) IBOutlet OTEditEntourageTableSource *editTableSource;
 @property (nonatomic, weak) IBOutlet OTEntourageDisclaimerBehavior *disclaimer;
+@property (nonatomic, weak) IBOutlet OTEditEntourageNavigationBehavior *editNavBehavior;
 
 @end
 
@@ -34,76 +34,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupUI];
+    self.title = OTLocalizedString(@"action").uppercaseString;
+    [self setupData];
+    [self.editTableSource configureWith:self.entourage];
+
     [self setupCloseModal];
-    
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEntourage:) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
     [self.disclaimer showDisclaimer];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSString *typeString = [self.type isEqualToString: ENTOURAGE_DEMANDE] ? OTLocalizedString(@"demande") : OTLocalizedString(@"contribution");
-    self.title =  typeString.uppercaseString;
-}
-
--(void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    
-    if(self.entourage) {
-        if(self.entourage.title.length > 0) {
-            self.titleTextView.textView.text = self.entourage.title;
-            [self.titleTextView updateAfterSpeech];
-        }
-        if(self.entourage.desc.length > 0) {
-            self.descriptionTextView.textView.text = self.entourage.desc;
-            [self.descriptionTextView updateAfterSpeech];
-        }
-    }
-}
-
 #pragma mark - Private
 
-- (void)setupUI {
+- (void)setupData {
     if(self.entourage) {
         self.type = self.entourage.type;
         self.location = self.entourage.location;
+    } else {
+        self.entourage = [OTEntourage new];
+        self.entourage.status = ENTOURAGE_STATUS_OPEN;
+        self.entourage.type = self.type;
+        self.entourage.location = self.location;
     }
-    BOOL isDemand = [self.type isEqualToString: ENTOURAGE_DEMANDE];
-    self.titleTextView.maxLength = 150;
-    self.titleTextView.placeholder = OTLocalizedString(isDemand ? @"edit_demand_title" : @"edit_contribution_title");
-    self.titleTextView.editingPlaceholder = [NSString stringWithFormat:OTLocalizedString(@"edit_entourage_title"), [OTLocalizedString(isDemand ? @"demande" : @"contribution") lowercaseString]];
-    self.descriptionTextView.placeholder = OTLocalizedString(isDemand ? @"edit_demand_desc" : @"edit_contribution_desc");
-    self.descriptionTextView.editingPlaceholder = OTLocalizedString(@"detailedDescription");
-    [self updateLocationTitle];
-}
-
-- (void)updateLocationTitle {
-    CLGeocoder *geocoder = [CLGeocoder new];
-    [geocoder reverseGeocodeLocation:self.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (error)
-            NSLog(@"error: %@", error.description);
-        CLPlacemark *placemark = placemarks.firstObject;
-        if (placemark.thoroughfare !=  nil)
-            [self.locationButton setTitle:placemark.thoroughfare forState:UIControlStateNormal];
-        else
-            [self.locationButton setTitle:placemark.locality forState:UIControlStateNormal];
-    }];
 }
 
 - (void)sendEntourage:(UIButton*)sender {
     if(![self isTitleValid])
         return;
-    
-    if(self.entourage)
+    if(self.entourage.uid)
         [self updateEntourage:sender];
     else
         [self createEntourage:sender];
 }
 
 - (BOOL)isTitleValid {
-    NSArray* words = [self.titleTextView.textView.text componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray* words = [self.editTableSource.entourage.title componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString* nospacestring = [words componentsJoinedByString:@""];
     if (!nospacestring.length) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"invalidTitle") message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -117,17 +82,13 @@
 
 - (void)createEntourage:(UIButton *)sender {
     sender.enabled = NO;
-    __block OTEntourage *entourage = [OTEntourage new];
-    entourage.type = self.type;
-    entourage.location = self.location;
-    entourage.title = self.titleTextView.textView.text;
-    entourage.desc = self.descriptionTextView.textView.text;
-    entourage.status = ENTOURAGE_STATUS_OPEN;
     [SVProgressHUD show];
-    [[OTEncounterService new] sendEntourage:entourage withSuccess:^(OTEntourage *sentEntourage) {
+    [[OTEncounterService new] sendEntourage:self.editTableSource.entourage withSuccess:^(OTEntourage *sentEntourage) {
+        self.entourage = sentEntourage;
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageCreated object:nil];
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
-        if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
+        if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)])
+            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotCreated")];
         sender.enabled = YES;
@@ -136,29 +97,16 @@
 
 - (void)updateEntourage:(UIButton *)sender {
     sender.enabled = NO;
-    __block OTEntourage *entourage = [OTEntourage new];
-    entourage.uid = self.entourage.uid;
-    entourage.type = self.type;
-    entourage.location = self.location;
-    entourage.title = self.titleTextView.textView.text;
-    entourage.desc = self.descriptionTextView.textView.text;
-    entourage.status = self.entourage.status;
     [SVProgressHUD show];
-    [[OTEncounterService new] updateEntourage:entourage withSuccess:^(OTEntourage *sentEntourage) {
+    [[OTEncounterService new] updateEntourage:self.editTableSource.entourage withSuccess:^(OTEntourage *sentEntourage) {
+        self.entourage = sentEntourage;
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageUpdated")];
-        if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
+        if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)])
+            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotUpdated")];
         sender.enabled = YES;
     }];
-}
-
-#pragma mark - LocationSelectionDelegate
-
-- (void)didSelectLocation:(CLLocation *)selectedLocation {
-    self.location = selectedLocation;
-    [self updateLocationTitle];
-
 }
 
 #pragma mark - Segue
@@ -166,13 +114,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.disclaimer prepareSegue:segue])
         return;
-    UIViewController *destinationViewController = segue.destinationViewController;
-    if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]]) {
-        [OTLogger logEvent:@"ChangeLocationClick"];
-        OTLocationSelectorViewController* controller = (OTLocationSelectorViewController *)destinationViewController;
-        controller.locationSelectionDelegate = self;
-        controller.selectedLocation = self.location;
-    }
+    if([self.editNavBehavior prepareSegue:segue])
+        return;
 }
 
 @end

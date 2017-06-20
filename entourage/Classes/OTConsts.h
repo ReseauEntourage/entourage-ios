@@ -22,6 +22,10 @@
 #define ENTOURAGE_RADIUS 250
 #define ENTOURAGE_RADIUS_FACTOR 1.0f
 
+#define FEED_ITEMS_MAX_RADIUS 20
+#define RADIUS_ARRAY @[@10, @20, @40]
+
+
 #define TEXTVIEW_PADDING 10.0f
 #define TEXTVIEW_PADDING_TOP 12.0f
 #define TEXTVIEW_PADDING_BOTTOM 23.0f
@@ -40,6 +44,8 @@
 #define kNotificationEntourageCreated @"NotificationEntourageCreated"
 #define kNotificationEntourageChanged @"NotificationEntourageChanged"
 #define kNotificationEntourageChangedEntourageKey @"NotificationEntourageChangedEntourageKey"
+#define kNotificationUpdateBadgeCountKey @"kUpdateBadgeCountKey"
+#define kNotificationUpdateBadgeFeedIdKey @"kUpdateBadgeCountFeedIdKey"
 
 #define kNotificationPushReceived "NotificationPushReceived"
 #define kNotificationReloadData "NotificationReloadData"
@@ -47,6 +53,8 @@
 #define kNotificationSendReasonKey "NotificationReasonKey"
 #define kNotificationFeedItemKey "NotificationFeedItemKey"
 #define kNotificationUpdateBadge @"NotificationUpdateBadge"
+#define kSolidarityGuideNotification @"NotificationSolidarityGuide"
+
 
 #define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"
@@ -54,6 +62,7 @@
 #define ABOUT_CGU_URL_OLD @"https://s3-eu-west-1.amazonaws.com/entourage-ressources/charte.pdf"
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
+#define REPORT_EMAIL_ADDRESS @"contact@entourage.social"
 
 #define OTLocalizedString(key) [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
 
@@ -70,6 +79,7 @@
 #define MENU_BLOG_URL @"https://blog.entourage.social/2016/10/28/franchir-le-pas/"
 #define MENU_BLOG_ENTOURAGE_ACTIONS_URL @"http://blog.entourage.social/quelles-actions-faire-avec-entourage"
 #define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
+#define MENU_ATD_PARTNERSHIP @"https://www.atd-quartmonde.fr/entourage/"
 
 #define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
 #define PRO_MENU_CHART_URL @"http://www.entourage.social/chartes/pro.html"
@@ -78,3 +88,5 @@
 #define NO_GIUDE_DATA_LINK @"https://goo.gl/jD5uIQ"
 
 #define PROPOSE_STRUCTURE_URL @"https://docs.google.com/forms/d/e/1FAIpQLSdcpYpAWz9zllF2TUS4USDQzu4T4ywu_XjXaD-ovsTS5eo1YA/viewform"
+
+

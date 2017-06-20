@@ -7,8 +7,10 @@
 //
 
 #import "OTBehavior.h"
+#import "OTTour.h"
 @class OTTableCellProviderBehavior;
 @class OTDataSourceBehavior;
+
 
 @interface OTTableDataSourceBehavior : OTBehavior <UITableViewDataSource>
 

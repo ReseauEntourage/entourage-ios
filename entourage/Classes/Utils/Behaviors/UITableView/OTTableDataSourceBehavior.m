@@ -36,7 +36,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.cellProvider getTableViewCellForPath:indexPath];
+     return [self.cellProvider getTableViewCellForPath:indexPath];
 }
 
 @end

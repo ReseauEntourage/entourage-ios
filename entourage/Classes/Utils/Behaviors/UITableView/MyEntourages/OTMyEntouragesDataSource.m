@@ -40,10 +40,16 @@
     self.pageNumber = 1;
 }
 
+- (void)updateData {
+    [self requestDataWithSuccess:^(NSArray *items) {
+        [self.tableDataSource refresh];
+    } orFailure:nil];
+}
+
 - (void)loadData {
     [self filterChanged:self.currentFilter];
 }
-
+    
 - (void)loadNextPage {
     self.pageNumber++;
     [self requestDataWithSuccess:^(NSArray *items) {

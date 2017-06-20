@@ -13,6 +13,7 @@
 @interface OTMailSenderBehavior : OTBehavior
 
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
+@property (nonatomic, strong) NSString *successMessage;
 
 - (BOOL)sendMailWithSubject:(NSString *)subject andRecipient: (NSString *)recipient;
 - (BOOL)sendCloseMail: (OTCloseReason) reason forItem: (OTEntourage *) feedItem;

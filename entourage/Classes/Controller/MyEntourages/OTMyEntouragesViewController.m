@@ -23,6 +23,8 @@
 #import "OTUserProfileBehavior.h"
 #import "OTAppDelegate.h"
 #import "OTUnreadMessagesService.h"
+#import "OTConsts.h"
+#import "OTFeedItemFactory.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -50,7 +52,7 @@
     [self.optionsBehavior configureWith:self.optionsDelegate];
     self.entouragesDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.entouragesDataSource.tableView.estimatedRowHeight = 200;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateBadgeCountNotification copy] object:nil];
     self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
     [self.entouragesDataSource loadData];
@@ -99,8 +101,18 @@
 
 #pragma mark - private methods
 
-- (void)updateBadge {
-    [self.entouragesDataSource loadData];
+- (void)updateBadge: (NSNotification *) notification {
+    NSNumber *unreadCount = (NSNumber *)[notification.object objectForKey:kNotificationUpdateBadgeCountKey];
+    NSNumber *feedId = (NSNumber *)[notification.object objectForKey:kNotificationUpdateBadgeFeedIdKey];
+    for(int i = 0; i<self.entouragesDataSource.items.count; i++){
+        OTFeedItem *item = self.entouragesDataSource.items[i];
+        if([item.uid isEqual:feedId]){
+            item.unreadMessageCount = unreadCount;
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:i];
+            [self.entouragesTableDataSource.dataSource.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            break;
+        }
+    }
 }
 
 - (void)loadInvitations {

@@ -21,6 +21,7 @@
 #import "OTTapViewBehavior.h"
 #import "UIImageView+entourage.h"
 #import "OTUserTableConfigurator.h"
+#import "OTMailSenderBehavior.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -36,6 +37,7 @@ typedef NS_ENUM(NSInteger) {
 @property (nonatomic, strong) NSArray *sections;
 @property (nonatomic, strong) NSArray *associationRows;
 @property (nonatomic, strong) OTUser *currentUser;
+@property (nonatomic, weak) IBOutlet OTMailSenderBehavior *mailSender;
 
 @end
 
@@ -47,6 +49,7 @@ typedef NS_ENUM(NSInteger) {
     [super viewDidLoad];
     
     self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    self.mailSender.successMessage = OTLocalizedString(@"user_reported");
     NSNumber *userId = self.userId;
     if(!userId)
         userId = self.user.sid;
@@ -58,18 +61,22 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     if (self.user != nil) {
+        self.userId = self.user.sid;
         [self configureTableSource];
         if(self.user.sid.intValue == self.currentUser.sid.intValue) {
             self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
             self.user = self.currentUser;
             [self showEditButton];
         }
+        else
+            [self showReportButton];
         [self.tableView reloadData];
     }
     else
         [self loadUser];
+    if(![self.userId isEqualToNumber:self.currentUser.sid])
+        [self showReportButton];
 }
 
 #pragma mark - Private
@@ -77,6 +84,16 @@ typedef NS_ENUM(NSInteger) {
 - (void)showEditButton {
     UIBarButtonItem *chatButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"modify") withTarget:self andAction:@selector(showEditView) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:chatButton];
+}
+
+- (void)showReportButton {
+    UIBarButtonItem *reportButton = [UIBarButtonItem createWithImageNamed:@"flag" withTarget:self andAction:@selector(sendReportMail)];
+    [self.navigationItem setRightBarButtonItem:reportButton];
+}
+
+- (void)sendReportMail {
+    NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"report_user_subject"), self.user.displayName];
+    [self.mailSender sendMailWithSubject:subject andRecipient:REPORT_EMAIL_ADDRESS];
 }
 
 - (IBAction)showEditView {

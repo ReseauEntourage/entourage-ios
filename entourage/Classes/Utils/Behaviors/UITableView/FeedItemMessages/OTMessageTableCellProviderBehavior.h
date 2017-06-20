@@ -10,4 +10,6 @@
 
 @interface OTMessageTableCellProviderBehavior : OTTableCellProviderBehavior
 
+@property (nonatomic, strong) OTFeedItem *feedItem;
+
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "OTPoi.h"
+#import "OTNewsFeedTableDelegate.h"
 
 @class OTFeedItem;
 
@@ -23,14 +24,18 @@
 
 @end
 
-@interface OTFeedItemsTableView : UITableView
+@interface OTFeedItemsTableView : UITableView <OTNewsFeedTableDelegate>
 
 @property (nonatomic, weak) id<OTFeedItemsTableViewDelegate> feedItemsDelegate;
+
+@property (nonatomic, strong) IBOutlet UIView *loadingView;
 
 - (void)configureWithMapView:(MKMapView *)mapView;
 - (void)updateItems:(NSArray *)items;
 - (void)loadBegun;
 - (void)setNoConnection;
 - (void)setNoFeeds;
+- (void)switchToGuide;
+- (void)switchToFeeds;
 
 @end

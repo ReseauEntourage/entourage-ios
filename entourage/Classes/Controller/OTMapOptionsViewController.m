@@ -84,9 +84,6 @@
     
     if(self.isPOIVisible)
         [self addOption:OTLocalizedString(@"propose_structure") atIndex:self.buttonIndex++ withIcon:@"house" andAction:@selector(proposeStructure:)];
-
-    NSString *poiTitle = self.isPOIVisible ? @"map_options_hide_poi" : @"map_options_show_poi";
-    [self addOption:OTLocalizedString(poiTitle) atIndex:self.buttonIndex++ withIcon:@"solidarity" andAction:@selector(doTogglePOI:)];
 }
 
 @end

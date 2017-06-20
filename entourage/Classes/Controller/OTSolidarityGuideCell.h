@@ -17,6 +17,7 @@ extern NSString* const OTSolidarityGuideTableViewCellIdentifier;
 @property(nonatomic, weak) IBOutlet UILabel *typeLabel;
 @property(nonatomic, weak) IBOutlet UILabel *addressLabel;
 @property(nonatomic, weak) IBOutlet UILabel *distanceLabel;
+@property(nonatomic, weak) IBOutlet UIButton *btnAppeler;
 
 - (void)configureWith:(OTPoi *)poi;
 
