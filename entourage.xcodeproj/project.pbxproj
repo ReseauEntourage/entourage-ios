@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		011270621E9D1751006ADA79 /* OTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 011270611E9D1751006ADA79 /* OTTextView.m */; };
 		011DC1E01EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */; };
+		011DC1E61EFA969A00B46C5F /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 011DC1E51EFA969A00B46C5F /* CountryList.csv */; };
 		0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */; };
 		0130138E1E7968B300C2504C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */; };
 		013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */; };
@@ -379,6 +380,7 @@
 		011270611E9D1751006ADA79 /* OTTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTextView.m; sourceTree = "<group>"; };
 		011DC1DE1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTCountryCodePickerViewDataSource.h; path = Behaviors/OTCountryCodePickerViewDataSource.h; sourceTree = "<group>"; };
 		011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTCountryCodePickerViewDataSource.m; path = Behaviors/OTCountryCodePickerViewDataSource.m; sourceTree = "<group>"; };
+		011DC1E51EFA969A00B46C5F /* CountryList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CountryList.csv; path = entourage/CountryList.csv; sourceTree = "<group>"; };
 		013013891E7965CE00C2504C /* OTUnreadMessageCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessageCount.h; path = Feeds/OTUnreadMessageCount.h; sourceTree = "<group>"; };
 		0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUnreadMessageCount.m; path = Feeds/OTUnreadMessageCount.m; sourceTree = "<group>"; };
 		0130138C1E7968B300C2504C /* OTUnreadMessagesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessagesService.h; path = Services/OTUnreadMessagesService.h; sourceTree = "<group>"; };
@@ -2399,6 +2401,7 @@
 		6B92CA9519A7461C004E8C9B = {
 			isa = PBXGroup;
 			children = (
+				011DC1E51EFA969A00B46C5F /* CountryList.csv */,
 				1E78B7AF1D5133970008C00E /* Resources */,
 				6B92CAA719A7461C004E8C9B /* entourage */,
 				6B92CAC619A7461C004E8C9B /* entourageTests */,
@@ -2758,6 +2761,7 @@
 				1E78B7E61D5134D20008C00E /* SF-UI-Text-Semibold.otf in Resources */,
 				1EFAC0C71D89242D00BE396F /* FeedItemFilters.storyboard in Resources */,
 				1EFBCFD81E56E3A5008CEF30 /* Tutorial.storyboard in Resources */,
+				011DC1E61EFA969A00B46C5F /* CountryList.csv in Resources */,
 				1E78B7A61D5108BE0008C00E /* ActiveFeedItem.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -32,6 +32,7 @@
 
 @property (nonatomic, strong) NSArray *array;
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
+@property (weak, nonatomic) NSString *codeCountry;
 
 @end
 
@@ -46,7 +47,6 @@
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
     };
-    self.array = @[@"FR", @"RO"];
     self.countryCodePicker.dataSource = self;
     self.countryCodePicker.delegate = self;
     self.countryCodeTxtField.delegate = self;
@@ -64,7 +64,6 @@
     [super viewWillAppear:animated];
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
     [[IQKeyboardManager sharedManager] setEnable:YES];
-//    [[IQKeyboardManager sharedManager] setShouldResignOnTouchOutside:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
@@ -72,7 +71,8 @@
     [OTLogger logEvent:@"TelephoneSubmit"];
     OTUser *temporaryUser = [OTUser new];
     NSString *phone = self.phoneTextField.text;
-    temporaryUser.phone = phone;
+    [self.codeCountry stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    temporaryUser.phone = [self.codeCountry stringByAppendingString:phone];
 
     [SVProgressHUD show];
     [[OTOnboardingService new] setupNewUserWithPhone:phone
@@ -130,36 +130,36 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.array.count;
+    NSMutableDictionary *b = [self sourceForPicker];
+    
+    return [b allKeys].count;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-   // [self.view endEditing:YES];
-    return self.array[row];
+    NSMutableDictionary *b = [self sourceForPicker];
+    
+    return [b allKeys][row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.countryCodeTxtField.text = self.array[row];
-    //self.countryCodePicker.hidden = YES;
+    NSMutableDictionary *b = [self sourceForPicker];
+    self.countryCodeTxtField.text = [b valueForKeyPath:[[b allKeys][row] stringByAppendingString:@".Code 2 char"]];
+    self.codeCountry = [b valueForKeyPath:[[b allKeys][row] stringByAppendingString:@".Number\r"]];
 }
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSString *title = self.array[row];
+    NSMutableDictionary *b = [self sourceForPicker];
+    NSString *title = [b allKeys][row];
     NSAttributedString *attString =
     [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     return attString;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (textField == self.countryCodeTxtField) {
-    
-    }
-}
-
 - (NSMutableDictionary *)sourceForPicker {
-    NSString *sourceFileString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CountryList.csv" ofType:@"csv"] encoding:NSUTF8StringEncoding error:nil];
+    NSString *sourceFileString = [NSString stringWithContentsOfFile:@"/Users/veronica.gliga/Downloads/CountryList.csv" encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"%@", sourceFileString);
     NSMutableArray *csvArray = [[NSMutableArray alloc] init];
     csvArray = [[sourceFileString componentsSeparatedByString:@"\n"] mutableCopy];
      NSString *keysString = [csvArray objectAtIndex:0];
