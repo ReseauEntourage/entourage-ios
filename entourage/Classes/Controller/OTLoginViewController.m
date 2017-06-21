@@ -33,7 +33,7 @@
 
 NSString *const kTutorialDone = @"has_done_tutorial";
 
-@interface OTLoginViewController () <LostCodeDelegate, OTUserNameViewControllerDelegate>
+@interface OTLoginViewController () <LostCodeDelegate, OTUserNameViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (weak, nonatomic) IBOutlet OnBoardingNumberTextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet OnBoardingCodeTextField *passwordTextField;
@@ -46,6 +46,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 @property (nonatomic, weak) IBOutlet UITextField *countryCodeTxtField;
 
 @property (nonatomic, assign) BOOL phoneIsValid;
+@property (nonatomic, weak) NSString *codeCountry;
 
 @end
 
@@ -83,7 +84,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.phoneTextField becomeFirstResponder];
+   // [self.phoneTextField becomeFirstResponder];
+    self.countryCodeTxtField.inputView = self.pickerView;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -112,12 +114,13 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)launchAuthentication {
     [SVProgressHUD show];
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
-    [[OTAuthService new] authWithPhone:self.phoneTextField.text
+    [[OTAuthService new] authWithPhone:[self.codeCountry stringByAppendingString:self.phoneTextField.text]
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
                                success: ^(OTUser *user) {;
                                    NSLog(@"User : %@ authenticated successfully", user.email);
-                                   user.phone = self.phoneTextField.text;
+                                   
+                                   user.phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil)
                                        loggedNumbers = [NSMutableArray new];
@@ -200,5 +203,60 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)userNameDidChange {
     [UIStoryboard showSWRevealController];
 }
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    NSMutableDictionary *b = [self sourceForPicker];
+    
+    return [b allKeys].count;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSMutableDictionary *b = [self sourceForPicker];
+    
+    return [b allKeys][row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSMutableDictionary *b = [self sourceForPicker];
+    self.countryCodeTxtField.text = [b valueForKeyPath:[[b allKeys][row] stringByAppendingString:@".Code 2 char"]];
+    self.codeCountry = [b valueForKeyPath:[[b allKeys][row] stringByAppendingString:@".Number\r"]];
+    self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length -2)];
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSMutableDictionary *b = [self sourceForPicker];
+    NSString *title = [b allKeys][row];
+    NSAttributedString *attString =
+    [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    return attString;
+}
+
+
+- (NSMutableDictionary *)sourceForPicker {
+    NSString *sourceFileString = [NSString stringWithContentsOfFile:@"/Users/veronica.gliga/Downloads/CountryList.csv" encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"%@", sourceFileString);
+    NSMutableArray *csvArray = [[NSMutableArray alloc] init];
+    csvArray = [[sourceFileString componentsSeparatedByString:@"\n"] mutableCopy];
+    NSString *keysString = [csvArray objectAtIndex:0];
+    NSArray *keysArray = [keysString componentsSeparatedByString:@","];
+    [csvArray removeObjectAtIndex:0];
+    NSMutableDictionary *outputDict = [[NSMutableDictionary alloc]init];
+    while (csvArray.count > 1)
+    {
+        NSString *tempString = [csvArray objectAtIndex:0];
+        NSArray *tempArray = [tempString componentsSeparatedByString:@","];
+        NSDictionary *tempDictionary = [[NSDictionary alloc]initWithObjects:tempArray forKeys:keysArray];
+        [outputDict setObject:tempDictionary forKey:[tempArray objectAtIndex:0]];
+        [csvArray removeObjectAtIndex:0];
+    }
+    return outputDict;
+}
+
 
 @end

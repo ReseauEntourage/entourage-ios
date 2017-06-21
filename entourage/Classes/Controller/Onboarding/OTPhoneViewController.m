@@ -70,7 +70,7 @@
 - (IBAction)doContinue {
     [OTLogger logEvent:@"TelephoneSubmit"];
     OTUser *temporaryUser = [OTUser new];
-    NSString *phone = self.phoneTextField.text;
+    NSString *phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
     [self.codeCountry stringByReplacingOccurrencesOfString:@"\r" withString:@""];
     temporaryUser.phone = [self.codeCountry stringByAppendingString:phone];
 
@@ -145,6 +145,7 @@
     NSMutableDictionary *b = [self sourceForPicker];
     self.countryCodeTxtField.text = [b valueForKeyPath:[[b allKeys][row] stringByAppendingString:@".Code 2 char"]];
     self.codeCountry = [b valueForKeyPath:[[b allKeys][row] stringByAppendingString:@".Number\r"]];
+    self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length -2)];
 }
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
