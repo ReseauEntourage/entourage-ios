@@ -11,6 +11,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="SF-UI-Text-Light.otf">
+            <string>SFUIText-Light</string>
+        </array>
         <array key="SF-UI-Text-Regular.otf">
             <string>SFUIText-Regular</string>
         </array>
@@ -160,7 +163,7 @@
         <scene sceneID="oPo-Hd-wrW">
             <objects>
                 <navigationController storyboardIdentifier="OTStartupNavigationViewControllerIdentifier" navigationBarHidden="YES" id="qeH-DW-jd0" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="caT-Hp-ZzG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="caT-Hp-ZzG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.91372549020000005" green="0.30980392159999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -353,7 +356,7 @@
                                         <rect key="frame" x="0.0" y="70" width="383" height="249"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Saisir numéro " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dhy-dj-PYm" customClass="OnBoardingNumberTextField" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="0.0" width="351" height="50"/>
+                                                <rect key="frame" x="70" y="0.0" width="297" height="50"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -372,7 +375,7 @@
                                                 </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Kt-fy-9q4">
-                                                <rect key="frame" x="16" y="50" width="351" height="1"/>
+                                                <rect key="frame" x="70" y="50" width="297" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Yn1-5a-vpJ"/>
@@ -438,26 +441,52 @@
                                                     <action selector="resendCode:" destination="Gt1-cc-4DI" eventType="touchUpInside" id="kFI-3o-Sae"/>
                                                 </connections>
                                             </button>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="FR" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="epu-ru-jWd">
+                                                <rect key="frame" x="15" y="0.0" width="44" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="Qek-BV-zMM"/>
+                                                </constraints>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Gt1-cc-4DI" id="l5Z-rE-67b"/>
+                                                </connections>
+                                            </textField>
+                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0W-w7-gis">
+                                                <rect key="frame" x="15" y="50" width="44" height="1"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="2cS-1q-fxP"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="fqc-ms-rKq" firstAttribute="leading" secondItem="OgF-9U-Zl4" secondAttribute="leading" constant="16" id="0iS-BZ-1bE"/>
                                             <constraint firstItem="v59-br-8WY" firstAttribute="centerX" secondItem="OgF-9U-Zl4" secondAttribute="centerX" id="2zJ-qe-6uT"/>
                                             <constraint firstItem="HBy-4E-HT1" firstAttribute="leading" secondItem="3Ei-2m-MZj" secondAttribute="leading" id="5RV-mf-g4C"/>
+                                            <constraint firstItem="epu-ru-jWd" firstAttribute="leading" secondItem="OgF-9U-Zl4" secondAttribute="leading" constant="15" id="6o9-Gy-1Ue"/>
+                                            <constraint firstItem="epu-ru-jWd" firstAttribute="height" secondItem="dhy-dj-PYm" secondAttribute="height" id="8pg-xm-IwC"/>
                                             <constraint firstItem="HBy-4E-HT1" firstAttribute="top" secondItem="3Ei-2m-MZj" secondAttribute="bottom" id="G4a-6T-rDO"/>
                                             <constraint firstItem="dhy-dj-PYm" firstAttribute="trailing" secondItem="6Kt-fy-9q4" secondAttribute="trailing" id="H8K-iU-63E"/>
                                             <constraint firstItem="3Ei-2m-MZj" firstAttribute="centerX" secondItem="OgF-9U-Zl4" secondAttribute="centerX" id="HTI-Lo-eqk"/>
+                                            <constraint firstItem="epu-ru-jWd" firstAttribute="centerY" secondItem="dhy-dj-PYm" secondAttribute="centerY" id="IX1-gl-ZgG"/>
                                             <constraint firstItem="3Ei-2m-MZj" firstAttribute="top" secondItem="6Kt-fy-9q4" secondAttribute="bottom" constant="5" id="L4h-Fa-aea"/>
                                             <constraint firstAttribute="trailing" secondItem="fqc-ms-rKq" secondAttribute="trailing" constant="16" id="Nhc-Ri-wlq"/>
-                                            <constraint firstItem="dhy-dj-PYm" firstAttribute="leading" secondItem="6Kt-fy-9q4" secondAttribute="leading" id="ObJ-9a-2d8"/>
+                                            <constraint firstItem="dhy-dj-PYm" firstAttribute="leading" secondItem="epu-ru-jWd" secondAttribute="trailing" constant="11" id="PUA-rT-Vqp"/>
                                             <constraint firstItem="v59-br-8WY" firstAttribute="top" secondItem="fqc-ms-rKq" secondAttribute="bottom" constant="15" id="RPH-2Z-yLB"/>
                                             <constraint firstAttribute="trailing" secondItem="dhy-dj-PYm" secondAttribute="trailing" id="S7J-CN-xeG"/>
                                             <constraint firstItem="6Kt-fy-9q4" firstAttribute="top" secondItem="dhy-dj-PYm" secondAttribute="bottom" id="SUa-mt-AQR"/>
-                                            <constraint firstItem="dhy-dj-PYm" firstAttribute="leading" secondItem="OgF-9U-Zl4" secondAttribute="leading" constant="16" id="Sn4-uv-0FZ"/>
                                             <constraint firstAttribute="trailing" secondItem="3Ei-2m-MZj" secondAttribute="trailing" constant="16" id="YWC-dv-pD9"/>
+                                            <constraint firstItem="6Kt-fy-9q4" firstAttribute="leading" secondItem="dhy-dj-PYm" secondAttribute="leading" id="Zij-Kb-viB"/>
                                             <constraint firstAttribute="trailing" secondItem="dhy-dj-PYm" secondAttribute="trailing" constant="16" id="aQ2-c2-Oaa"/>
                                             <constraint firstItem="HBy-4E-HT1" firstAttribute="leading" secondItem="OgF-9U-Zl4" secondAttribute="leading" id="b52-cq-a69"/>
+                                            <constraint firstItem="N0W-w7-gis" firstAttribute="trailing" secondItem="epu-ru-jWd" secondAttribute="trailing" id="c6o-dw-f3x"/>
                                             <constraint firstItem="HBy-4E-HT1" firstAttribute="trailing" secondItem="3Ei-2m-MZj" secondAttribute="trailing" id="chF-jI-gKA"/>
+                                            <constraint firstItem="N0W-w7-gis" firstAttribute="centerY" secondItem="6Kt-fy-9q4" secondAttribute="centerY" id="dNt-Ut-94S"/>
+                                            <constraint firstItem="N0W-w7-gis" firstAttribute="leading" secondItem="epu-ru-jWd" secondAttribute="leading" id="gAU-Tz-pBY"/>
                                             <constraint firstAttribute="height" constant="249" id="i7g-XV-UDS"/>
                                             <constraint firstItem="fqc-ms-rKq" firstAttribute="top" secondItem="HBy-4E-HT1" secondAttribute="bottom" constant="18" id="k6g-R5-W2M"/>
                                             <constraint firstItem="3Ei-2m-MZj" firstAttribute="leading" secondItem="OgF-9U-Zl4" secondAttribute="leading" constant="16" id="lZj-Qj-OKG"/>
@@ -505,15 +534,39 @@
                     <navigationItem key="navigationItem" id="s68-PV-7yo"/>
                     <connections>
                         <outlet property="continueButton" destination="fqc-ms-rKq" id="7E5-SL-QqH"/>
+                        <outlet property="countryCodePicker" destination="Csn-9k-gET" id="Crs-oF-4Lc"/>
+                        <outlet property="countryCodeTxtField" destination="epu-ru-jWd" id="TPZ-ar-UrP"/>
                         <outlet property="onboardingNavigation" destination="2bs-ya-BoZ" id="Uhs-f7-QJh"/>
                         <outlet property="passwordTextField" destination="3Ei-2m-MZj" id="jr9-Z1-8VF"/>
                         <outlet property="phoneTextField" destination="dhy-dj-PYm" id="WS8-PO-wZJ"/>
+                        <outlet property="pickerView" destination="uN2-4f-aFg" id="iy2-LY-qAW"/>
                         <outlet property="scrollView" destination="Ddv-uC-bkv" id="zPI-M0-0qw"/>
                         <segue destination="vT5-aZ-dNG" kind="show" identifier="UserProfileDetailsSegue" id="mDK-wu-FNZ"/>
                         <segue destination="uQ4-e4-eq2" kind="presentation" identifier="ResendCodeSegue" id="Ze0-TE-k8E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5B5-Uo-Thh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="uN2-4f-aFg">
+                    <rect key="frame" x="0.0" y="0.0" width="377" height="146"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Csn-9k-gET">
+                            <rect key="frame" x="0.0" y="0.0" width="377" height="146"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="Gt1-cc-4DI" id="7sV-ID-Brp"/>
+                                <outlet property="delegate" destination="Gt1-cc-4DI" id="0A0-XM-XZm"/>
+                            </connections>
+                        </pickerView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Csn-9k-gET" secondAttribute="trailing" id="LcW-ah-rMS"/>
+                        <constraint firstItem="Csn-9k-gET" firstAttribute="top" secondItem="uN2-4f-aFg" secondAttribute="top" id="YHX-8B-O9e"/>
+                        <constraint firstItem="Csn-9k-gET" firstAttribute="leading" secondItem="uN2-4f-aFg" secondAttribute="leading" id="fRi-7p-QfH"/>
+                        <constraint firstAttribute="bottom" secondItem="Csn-9k-gET" secondAttribute="bottom" id="kIC-OT-2VK"/>
+                    </constraints>
+                </view>
                 <customObject id="2bs-ya-BoZ" userLabel="Onboarding Navigation" customClass="OTOnboardingNavigationBehavior">
                     <connections>
                         <outlet property="owner" destination="Gt1-cc-4DI" id="dmr-BV-Rs9"/>
@@ -527,7 +580,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uQ4-e4-eq2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jb6-3O-aIx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jb6-3O-aIx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -589,6 +642,7 @@ saisissez votre numéro de portable.</string>
                                             <constraint firstItem="U3A-N6-hPD" firstAttribute="top" secondItem="1i4-EK-cIM" secondAttribute="bottom" constant="30" id="JqV-kX-Hdk"/>
                                             <constraint firstItem="U3A-N6-hPD" firstAttribute="leading" secondItem="1i4-EK-cIM" secondAttribute="leading" id="U3x-s7-mWc"/>
                                             <constraint firstAttribute="height" constant="244" id="V2J-Mv-Eaf"/>
+                                            <constraint firstAttribute="bottom" secondItem="pQB-UV-B6P" secondAttribute="bottom" constant="15" id="d5O-jS-2vn"/>
                                             <constraint firstItem="pQB-UV-B6P" firstAttribute="leading" secondItem="1i4-EK-cIM" secondAttribute="leading" id="oET-f1-92O"/>
                                             <constraint firstItem="1i4-EK-cIM" firstAttribute="leading" secondItem="GZz-od-Jky" secondAttribute="leading" constant="15" id="qcl-6i-bRq"/>
                                             <constraint firstAttribute="trailing" secondItem="pQB-UV-B6P" secondAttribute="trailing" constant="15" id="vRa-d4-bZA"/>

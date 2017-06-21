@@ -41,6 +41,9 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 @property (nonatomic, weak) IBOutlet OnBoardingButton *continueButton;
+@property (nonatomic, weak) IBOutlet UIView *pickerView;
+@property (nonatomic, weak) IBOutlet UIPickerView *countryCodePicker;
+@property (nonatomic, weak) IBOutlet UITextField *countryCodeTxtField;
 
 @property (nonatomic, assign) BOOL phoneIsValid;
 

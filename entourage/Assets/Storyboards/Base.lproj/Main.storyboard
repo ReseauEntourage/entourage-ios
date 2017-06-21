@@ -201,7 +201,7 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                            <rect key="frame" x="121.5" y="161" width="133" height="18"/>
+                            <rect key="frame" x="121" y="161" width="133" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="R2h-5U-huy"/>
                             </constraints>
@@ -1369,97 +1369,6 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GQc-Cn-XSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1151.5" y="-482"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="HIr-NE-0Pa">
-            <objects>
-                <viewController id="sTh-CU-oae" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Yal-FS-vKn"/>
-                        <viewControllerLayoutGuide type="bottom" id="rjN-4h-kDt"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MWt-jJ-k1I">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IbY-gw-vDt">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G5n-oX-7hQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                        <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fJA-VB-KuS">
-                                                <rect key="frame" x="0.0" y="169" width="375" height="498"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </tableView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="fJA-VB-KuS" firstAttribute="leading" secondItem="G5n-oX-7hQ" secondAttribute="leading" id="7w7-63-1FS"/>
-                                            <constraint firstAttribute="bottom" secondItem="fJA-VB-KuS" secondAttribute="bottom" id="Lri-ve-Zcw"/>
-                                            <constraint firstAttribute="trailing" secondItem="fJA-VB-KuS" secondAttribute="trailing" id="YQF-JQ-myI"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="G5n-oX-7hQ" firstAttribute="leading" secondItem="IbY-gw-vDt" secondAttribute="leading" id="7tl-dA-US5"/>
-                                    <constraint firstItem="G5n-oX-7hQ" firstAttribute="top" secondItem="IbY-gw-vDt" secondAttribute="top" id="DBz-2X-5bS"/>
-                                    <constraint firstAttribute="bottom" secondItem="G5n-oX-7hQ" secondAttribute="bottom" id="ak7-Xd-q2w"/>
-                                    <constraint firstAttribute="trailing" secondItem="G5n-oX-7hQ" secondAttribute="trailing" id="vQ4-db-taY"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="IbY-gw-vDt" secondAttribute="trailing" id="4xq-7Z-WUW"/>
-                            <constraint firstItem="IbY-gw-vDt" firstAttribute="top" secondItem="MWt-jJ-k1I" secondAttribute="top" id="Ab9-1g-loK"/>
-                            <constraint firstItem="rjN-4h-kDt" firstAttribute="top" secondItem="IbY-gw-vDt" secondAttribute="bottom" id="ngN-yA-jU4"/>
-                            <constraint firstItem="IbY-gw-vDt" firstAttribute="leading" secondItem="MWt-jJ-k1I" secondAttribute="leading" id="r5z-qb-2lU"/>
-                            <constraint firstItem="G5n-oX-7hQ" firstAttribute="width" secondItem="MWt-jJ-k1I" secondAttribute="width" id="vpk-fT-qQh"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oMu-8e-yGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="YBa-H6-tYh">
-                    <rect key="frame" x="0.0" y="0.0" width="360" height="197"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ap-5d-fIW">
-                            <rect key="frame" x="130" y="0.0" width="100" height="100"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="100" id="MBH-DB-OvA"/>
-                                <constraint firstAttribute="height" constant="100" id="mkw-aL-oqO"/>
-                            </constraints>
-                            <state key="normal" image="user"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="50"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="showProfile" destination="0J6-b7-p0H" eventType="touchUpInside" id="fA8-Qu-L2a"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Prenom Nom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZhH-1J-aib">
-                            <rect key="frame" x="40" y="108" width="280" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="280" id="Je5-qU-C7p"/>
-                                <constraint firstAttribute="height" constant="21" id="rEZ-kN-qUd"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="6Ap-5d-fIW" firstAttribute="top" secondItem="YBa-H6-tYh" secondAttribute="top" id="Hiw-SR-CAl"/>
-                        <constraint firstItem="ZhH-1J-aib" firstAttribute="centerX" secondItem="YBa-H6-tYh" secondAttribute="centerX" id="NHs-b4-KKy"/>
-                        <constraint firstItem="6Ap-5d-fIW" firstAttribute="centerX" secondItem="YBa-H6-tYh" secondAttribute="centerX" id="acW-DK-ru8"/>
-                    </constraints>
-                </view>
-            </objects>
-            <point key="canvasLocation" x="1327.5" y="-1165.5"/>
         </scene>
         <!--Settings-->
         <scene sceneID="fPx-Ql-9QZ">

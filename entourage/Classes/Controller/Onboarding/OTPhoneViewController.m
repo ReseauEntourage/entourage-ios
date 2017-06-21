@@ -21,12 +21,17 @@
 #import "OTDeepLinkService.h"
 #import "entourage-Swift.h"
 
-@interface OTPhoneViewController ()
+@interface OTPhoneViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 
 @property (nonatomic, weak) IBOutlet OnBoardingNumberTextField *phoneTextField;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, weak) IBOutlet OnBoardingButton *validateButton;
+@property (weak, nonatomic) IBOutlet UITextField *countryCodeTxtField;
+@property (weak, nonatomic) IBOutlet UIPickerView *countryCodePicker;
+
+@property (nonatomic, strong) NSArray *array;
+@property (weak, nonatomic) IBOutlet UIView *pickerView;
 
 @end
 
@@ -41,11 +46,17 @@
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
     };
+    self.array = @[@"FR", @"RO"];
+    self.countryCodePicker.dataSource = self;
+    self.countryCodePicker.delegate = self;
+    self.countryCodeTxtField.delegate = self;
+    self.phoneTextField.delegate = self;
+    [self sourceForPicker];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.phoneTextField becomeFirstResponder];
+    self.countryCodeTxtField.inputView = self.pickerView;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
@@ -53,6 +64,7 @@
     [super viewWillAppear:animated];
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
     [[IQKeyboardManager sharedManager] setEnable:YES];
+//    [[IQKeyboardManager sharedManager] setShouldResignOnTouchOutside:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
@@ -105,6 +117,64 @@
 
 - (void)showKeyboard:(NSNotification*)notification {
     [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+}
+
+#pragma mark - UIPickerViewDelegate
+
+
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return self.array.count;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+   // [self.view endEditing:YES];
+    return self.array[row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.countryCodeTxtField.text = self.array[row];
+    //self.countryCodePicker.hidden = YES;
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *title = self.array[row];
+    NSAttributedString *attString =
+    [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    return attString;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField == self.countryCodeTxtField) {
+    
+    }
+}
+
+- (NSMutableDictionary *)sourceForPicker {
+    NSString *sourceFileString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CountryList.csv" ofType:@"csv"] encoding:NSUTF8StringEncoding error:nil];
+    NSMutableArray *csvArray = [[NSMutableArray alloc] init];
+    csvArray = [[sourceFileString componentsSeparatedByString:@"\n"] mutableCopy];
+     NSString *keysString = [csvArray objectAtIndex:0];
+    NSArray *keysArray = [keysString componentsSeparatedByString:@","];
+    [csvArray removeObjectAtIndex:0];
+    NSMutableDictionary *outputDict = [[NSMutableDictionary alloc]init];
+    while (csvArray.count > 1)
+    {
+        NSString *tempString = [csvArray objectAtIndex:0];
+        NSArray *tempArray = [tempString componentsSeparatedByString:@","];
+        NSDictionary *tempDictionary = [[NSDictionary alloc]initWithObjects:tempArray forKeys:keysArray];
+        [outputDict setObject:tempDictionary forKey:[tempArray objectAtIndex:0]];
+        [csvArray removeObjectAtIndex:0];
+    }
+    return outputDict;
 }
 
 @end
