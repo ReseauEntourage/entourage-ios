@@ -8,7 +8,7 @@
 
 #import "OTBehavior.h"
 
-@interface OTCountryCodePickerViewDataSource : OTBehavior <UIPickerViewDataSource>
+@interface OTCountryCodePickerViewDataSource : OTBehavior
 
 + (NSDictionary *)getConstDictionary;
 

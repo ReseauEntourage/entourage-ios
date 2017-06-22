@@ -42,9 +42,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.title = @"";
-
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
@@ -73,9 +71,7 @@
     [OTLogger logEvent:@"TelephoneSubmit"];
     OTUser *temporaryUser = [OTUser new];
     NSString *phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
-    [self.codeCountry stringByReplacingOccurrencesOfString:@"\r" withString:@""];
     temporaryUser.phone = phone;
-
     [SVProgressHUD show];
     [[OTOnboardingService new] setupNewUserWithPhone:phone
         success:^(OTUser *onboardUser) {
