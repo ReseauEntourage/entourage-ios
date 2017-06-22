@@ -20,6 +20,7 @@
 #import "OTConsts.h"
 #import "OTDeepLinkService.h"
 #import "entourage-Swift.h"
+#import "OTCountryCodePickerViewDataSource.h"
 
 @interface OTPhoneViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 
@@ -33,6 +34,7 @@
 @property (nonatomic, strong) NSArray *array;
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
 @property (weak, nonatomic) NSString *codeCountry;
+@property (weak, nonatomic) NSDictionary *pickerSourceDictionary;
 
 @end
 
@@ -51,7 +53,7 @@
     self.countryCodePicker.delegate = self;
     self.countryCodeTxtField.delegate = self;
     self.phoneTextField.delegate = self;
-    [self sourceForPicker];
+    self.pickerSourceDictionary = [OTCountryCodePickerViewDataSource getConstDictionary];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -72,7 +74,7 @@
     OTUser *temporaryUser = [OTUser new];
     NSString *phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
     [self.codeCountry stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-    temporaryUser.phone = [self.codeCountry stringByAppendingString:phone];
+    temporaryUser.phone = phone;
 
     [SVProgressHUD show];
     [[OTOnboardingService new] setupNewUserWithPhone:phone
@@ -119,63 +121,34 @@
     [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
 }
 
-#pragma mark - UIPickerViewDelegate
-
-
-
 #pragma mark - UIPickerViewDataSource
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
+#pragma mark - UIPickerViewDelegate
+
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    NSMutableDictionary *b = [self sourceForPicker];
-    
-    return [b allKeys].count;
+    return [self.pickerSourceDictionary allKeys].count;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    NSMutableDictionary *b = [self sourceForPicker];
-    
-    return [b allKeys][row];
+    return [self.pickerSourceDictionary allKeys][row];;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSMutableDictionary *b = [self sourceForPicker];
-    self.countryCodeTxtField.text = [b valueForKeyPath:[[b allKeys][row] stringByAppendingString:@".Code 2 char"]];
-    self.codeCountry = [b valueForKeyPath:[[b allKeys][row] stringByAppendingString:@".Number\r"]];
-    self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length -2)];
+    NSString *key = [[self.pickerSourceDictionary allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)][row];
+    self.countryCodeTxtField.text = [self.pickerSourceDictionary valueForKeyPath:[key stringByAppendingString:@".Code 2 char"]];
+    self.codeCountry = [self.pickerSourceDictionary valueForKeyPath:[key stringByAppendingString:@".Number"]];
+    self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length -1)];
 }
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSMutableDictionary *b = [self sourceForPicker];
-    NSString *title = [b allKeys][row];
+    NSString *title = [[self.pickerSourceDictionary allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)][row];
     NSAttributedString *attString =
     [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
     return attString;
 }
-
-- (NSMutableDictionary *)sourceForPicker {
-    NSString *sourceFileString = [NSString stringWithContentsOfFile:@"/Users/veronica.gliga/Downloads/CountryList.csv" encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"%@", sourceFileString);
-    NSMutableArray *csvArray = [[NSMutableArray alloc] init];
-    csvArray = [[sourceFileString componentsSeparatedByString:@"\n"] mutableCopy];
-     NSString *keysString = [csvArray objectAtIndex:0];
-    NSArray *keysArray = [keysString componentsSeparatedByString:@","];
-    [csvArray removeObjectAtIndex:0];
-    NSMutableDictionary *outputDict = [[NSMutableDictionary alloc]init];
-    while (csvArray.count > 1)
-    {
-        NSString *tempString = [csvArray objectAtIndex:0];
-        NSArray *tempArray = [tempString componentsSeparatedByString:@","];
-        NSDictionary *tempDictionary = [[NSDictionary alloc]initWithObjects:tempArray forKeys:keysArray];
-        [outputDict setObject:tempDictionary forKey:[tempArray objectAtIndex:0]];
-        [csvArray removeObjectAtIndex:0];
-    }
-    return outputDict;
-}
-
 @end

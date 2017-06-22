@@ -10,6 +10,6 @@
 
 @interface OTCountryCodePickerViewDataSource : OTBehavior <UIPickerViewDataSource>
 
-@property (nonatomic, weak) NSArray *list;
++ (NSDictionary *)getConstDictionary;
 
 @end

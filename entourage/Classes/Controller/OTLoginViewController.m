@@ -30,6 +30,7 @@
 #import "OTLocationManager.h"
 #import "OTUserNameViewController.h"
 #import "entourage-Swift.h"
+#import "OTCountryCodePickerViewDataSource.h"
 
 NSString *const kTutorialDone = @"has_done_tutorial";
 
@@ -47,6 +48,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 @property (nonatomic, assign) BOOL phoneIsValid;
 @property (nonatomic, weak) NSString *codeCountry;
+@property (nonatomic, weak) NSDictionary *dict;
 
 @end
 
@@ -71,20 +73,21 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.phoneTextField indentRight];
     [self.passwordTextField indentRight];
+    self.dict = [OTCountryCodePickerViewDataSource getConstDictionary];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-   // [self.phoneTextField becomeFirstResponder];
     self.countryCodeTxtField.inputView = self.pickerView;
 }
 
@@ -109,7 +112,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [textField resignFirstResponder];
     return YES;
 }
-
 
 - (void)launchAuthentication {
     [SVProgressHUD show];
@@ -194,7 +196,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 }
 
 - (void)showKeyboard:(NSNotification*)notification {
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint andMarker:self.phoneTextField];
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
 }
 
 /********************************************************************************/
@@ -204,59 +206,35 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [UIStoryboard showSWRevealController];
 }
 
+#pragma mark - UIPickerViewDataSource
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    NSMutableDictionary *b = [self sourceForPicker];
-    
-    return [b allKeys].count;
+#pragma mark - UIPickerViewDelegate
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {    
+    return [self.dict allKeys].count;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    NSMutableDictionary *b = [self sourceForPicker];
-    
-    return [b allKeys][row];
+    return [self.dict allKeys][row];;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSMutableDictionary *b = [self sourceForPicker];
-    self.countryCodeTxtField.text = [b valueForKeyPath:[[b allKeys][row] stringByAppendingString:@".Code 2 char"]];
-    self.codeCountry = [b valueForKeyPath:[[b allKeys][row] stringByAppendingString:@".Number\r"]];
-    self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length -2)];
+    NSString *key = [[self.dict allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)][row];
+    self.countryCodeTxtField.text = [self.dict valueForKeyPath:[key stringByAppendingString:@".Code 2 char"]];
+    self.codeCountry = [self.dict valueForKeyPath:[key stringByAppendingString:@".Number"]];
+    self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length -1)];
 }
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSMutableDictionary *b = [self sourceForPicker];
-    NSString *title = [b allKeys][row];
+    NSString *title = [[self.dict allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)][row];
     NSAttributedString *attString =
     [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
     return attString;
 }
-
-
-- (NSMutableDictionary *)sourceForPicker {
-    NSString *sourceFileString = [NSString stringWithContentsOfFile:@"/Users/veronica.gliga/Downloads/CountryList.csv" encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"%@", sourceFileString);
-    NSMutableArray *csvArray = [[NSMutableArray alloc] init];
-    csvArray = [[sourceFileString componentsSeparatedByString:@"\n"] mutableCopy];
-    NSString *keysString = [csvArray objectAtIndex:0];
-    NSArray *keysArray = [keysString componentsSeparatedByString:@","];
-    [csvArray removeObjectAtIndex:0];
-    NSMutableDictionary *outputDict = [[NSMutableDictionary alloc]init];
-    while (csvArray.count > 1)
-    {
-        NSString *tempString = [csvArray objectAtIndex:0];
-        NSArray *tempArray = [tempString componentsSeparatedByString:@","];
-        NSDictionary *tempDictionary = [[NSDictionary alloc]initWithObjects:tempArray forKeys:keysArray];
-        [outputDict setObject:tempDictionary forKey:[tempArray objectAtIndex:0]];
-        [csvArray removeObjectAtIndex:0];
-    }
-    return outputDict;
-}
-
 
 @end
