@@ -21,11 +21,18 @@
 #import "OTUser.h"
 #import "SVProgressHUD.h"
 #import "NSError+OTErrorData.h"
+#import "OTCountryCodePickerViewDataSource.h"
 
-@interface OTLostCodeViewController ()
+@interface OTLostCodeViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
+@property (weak, nonatomic) IBOutlet UIView *pickerView;
+@property (weak, nonatomic) IBOutlet UITextField *countryCodeTextField;
+@property (weak, nonatomic) IBOutlet UIPickerView *countryPicker;
+
+@property (weak, nonatomic) NSDictionary *pickerSourceDictionary;
+@property (weak, nonatomic) NSString *codeCountry;
 
 @end
 
@@ -44,12 +51,14 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.navigationController presentTransparentNavigationBar];
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    self.pickerSourceDictionary = [OTCountryCodePickerViewDataSource getConstDictionary];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [IQKeyboardManager sharedManager].enable = NO;
     [super viewDidAppear:animated];
-    [self.phoneTextField becomeFirstResponder];
+    self.countryCodeTextField.inputView = self.pickerView;
+    //[self.phoneTextField becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -61,7 +70,8 @@
 
 - (void)regenerateSecretCode {
     [SVProgressHUD show];
-    [[OTAuthService new] regenerateSecretCode:self.phoneTextField.text success:^(OTUser *user) {
+    NSString *phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
+    [[OTAuthService new] regenerateSecretCode:phone success:^(OTUser *user) {
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
     }
     failure:^(NSError *error) {
@@ -80,7 +90,8 @@
 #pragma mark - Actions
 
 - (IBAction)regenerateButtonDidTap:(id)sender {
-    if (self.phoneTextField.text.length == 0) {
+    NSString *phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
+    if (phone.length == 0) {
         [[[UIAlertView alloc]
           initWithTitle: OTLocalizedString(@"requestImposible")
           message:OTLocalizedString(@"retryPhone")
@@ -89,7 +100,7 @@
           otherButtonTitles:@"Ok",
           nil] show];
     }
-    else if (![self.phoneTextField.text isValidPhoneNumber]) {
+    else if (![phone isValidPhoneNumber]) {
         [[[UIAlertView alloc]
           initWithTitle:OTLocalizedString(@"requestImposible")
           message:OTLocalizedString(@"invalidPhoneNumber")//@"Numéro de téléphone invalide"
@@ -102,6 +113,37 @@
         [self.phoneTextField setSelected:NO];
         [self regenerateSecretCode];
     }
+}
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+#pragma mark - UIPickerViewDelegate
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [self.pickerSourceDictionary allKeys].count;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [self.pickerSourceDictionary allKeys][row];;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSString *key = [[self.pickerSourceDictionary allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)][row];
+    self.countryCodeTextField.text = [self.pickerSourceDictionary valueForKeyPath:[key stringByAppendingString:@".Code 2 char"]];
+    self.codeCountry = [self.pickerSourceDictionary valueForKeyPath:[key stringByAppendingString:@".Number"]];
+    self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length -1)];
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *title = [[self.pickerSourceDictionary allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)][row];
+    NSAttributedString *attString =
+    [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    return attString;
 }
 
 @end
