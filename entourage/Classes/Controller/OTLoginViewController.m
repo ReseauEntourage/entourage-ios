@@ -73,6 +73,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.phoneTextField indentRight];
     [self.passwordTextField indentRight];
+    self.countryCodeTxtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"FR" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithWhite:1.0 alpha:0.5 ]}];
     self.dict = [OTCountryCodePickerViewDataSource getConstDictionary];
 }
 

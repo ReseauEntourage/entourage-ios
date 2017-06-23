@@ -51,6 +51,7 @@
     self.countryCodePicker.delegate = self;
     self.countryCodeTxtField.delegate = self;
     self.phoneTextField.delegate = self;
+    self.countryCodeTxtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"FR" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithWhite:1.0 alpha:0.5 ]}];
     self.pickerSourceDictionary = [OTCountryCodePickerViewDataSource getConstDictionary];
 }
 
