@@ -9,9 +9,11 @@
 #import "OTEncounterCell.h"
 #import "OTEncounter.h"
 #import "UIColor+entourage.h"
+#import "NSUserDefaults+OT.h"
 #import "OTConsts.h"
 #import "OTOngoingTourService.h"
 #import "OTTour.h"
+#import "OTUser.h"
 
 @interface OTEncounterCell ()
 
@@ -24,7 +26,7 @@
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint  {
     self.encounter =  (OTEncounter *)timelinePoint;
     [self.btnInfo setAttributedTitle:[self getLabelTextForUser:self.encounter.userName withStreetPersonName:self.encounter.streetPersonName] forState:UIControlStateNormal];
-   [self.btnInfo setEnabled: [self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING]];
+   [self.btnInfo setEnabled: [self canEditEncounter]];
 }
 
 - (void)doEditEncounter {
@@ -38,12 +40,24 @@
     NSMutableAttributedString *nameAttrString = [[NSMutableAttributedString alloc] initWithString:userName attributes:@{NSForegroundColorAttributeName: [UIColor appOrangeColor]}];
     NSMutableAttributedString *infoAttrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_encounter_and_user_meet"), streetPersonName] attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
     
-    if([self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING]) {
+    if ([self canEditEncounter]) {
        [nameAttrString addAttribute: NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range: NSMakeRange(0, [nameAttrString length])];
         [infoAttrString addAttribute: NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range: NSMakeRange(0, [infoAttrString length])];
     }
     [nameAttrString appendAttributedString:infoAttrString];
     return nameAttrString;
+}
+
+// An encounter can be edited only if the tour is ongoing and only by the tour author
+- (BOOL) canEditEncounter {
+    if ([self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING]) {
+        OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+        OTFeedItemAuthor *author = self.feedItem.author;
+        if (currentUser != nil && author != nil) {
+            return [currentUser.sid isEqualToNumber:author.uID];
+        }
+    }
+    return NO;
 }
 
 @end
