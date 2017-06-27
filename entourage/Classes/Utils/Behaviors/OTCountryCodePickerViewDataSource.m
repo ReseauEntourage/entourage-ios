@@ -708,7 +708,8 @@
                             @"Number" : @"+256",
                             },
                         @{
-                            @"Code 2 char" : @"Ouzbékistan",
+                            @"Code 2 char" : @"UZ",
+                            @"Final list" : @"Ouzbékistan",
                             @"Number" : @"+998",
                             },
                         @{
@@ -975,17 +976,23 @@
     return [self.source count];
 }
 
-- (NSString *)getCountryFullNameAtRow:(NSInteger)row {
+- (NSString *)getTitleForRow:(NSInteger)row {
+    NSDictionary *country = self.source[row];
+    
+    return [NSString stringWithFormat:@"%@ %@", [country objectForKey:@"Final list"], [country objectForKey:@"Number"]];
+}
+
+- (NSString *)getCountryFullNameForRow:(NSInteger)row {
     NSDictionary *country = self.source[row];
     return [country objectForKey:@"Final list"];
 }
 
-- (NSString *)getCountryShortNameAtRow:(NSInteger)row {
+- (NSString *)getCountryShortNameForRow:(NSInteger)row {
     NSDictionary *country = self.source[row];
     return [country objectForKey:@"Code 2 char"];
 }
 
-- (NSString *)getCountryCodeAtRow:(NSInteger)row {
+- (NSString *)getCountryCodeForRow:(NSInteger)row {
     NSDictionary *country = self.source[row];
     return [country objectForKey:@"Number"];
 }

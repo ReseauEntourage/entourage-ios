@@ -128,18 +128,18 @@
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [self.pickerDataSource getCountryFullNameAtRow:row];
+    return [self.pickerDataSource getTitleForRow:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.countryCodeTextField.text = [self.pickerDataSource getCountryShortNameAtRow:row];
-    self.codeCountry = [self.pickerDataSource getCountryCodeAtRow:row];
+    self.countryCodeTextField.text = [self.pickerDataSource getCountryShortNameForRow:row];
+    self.codeCountry = [self.pickerDataSource getCountryCodeForRow:row];
     self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length - 1)];
 }
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSString *title = [self.pickerDataSource getCountryFullNameAtRow:row];
+    NSString *title = [self.pickerDataSource getTitleForRow:row];
     NSAttributedString *attString =
     [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     return attString;

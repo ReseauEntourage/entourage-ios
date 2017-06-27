@@ -13,8 +13,11 @@
 + (OTCountryCodePickerViewDataSource *)sharedInstance;
 
 - (NSInteger)count;
-- (NSString *)getCountryFullNameAtRow:(NSInteger)row;
-- (NSString *)getCountryShortNameAtRow:(NSInteger)row;
-- (NSString *)getCountryCodeAtRow:(NSInteger)row;
+
+- (NSString *)getTitleForRow:(NSInteger)row;
+
+- (NSString *)getCountryFullNameForRow:(NSInteger)row;
+- (NSString *)getCountryShortNameForRow:(NSInteger)row;
+- (NSString *)getCountryCodeForRow:(NSInteger)row;
 
 @end
