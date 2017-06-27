@@ -49,7 +49,7 @@
                             },
                         @{
                             @"Code 2 char" : @"GP",
-                            @"Final list" : @"CanaGuadeloupeda",
+                            @"Final list" : @"Guadeloupe",
                             @"Number" : @"+590",
                             },
                         @{
@@ -386,11 +386,6 @@
                             @"Code 2 char" : @"GR",
                             @"Final list" : @"Grèce",
                             @"Number" : @"+30",
-                            },
-                        @{
-                            @"Code 2 char" : @"GP",
-                            @"Final list" : @"Guadeloupe",
-                            @"Number" : @"+590",
                             },
                         @{
                             @"Code 2 char" : @"GT",
