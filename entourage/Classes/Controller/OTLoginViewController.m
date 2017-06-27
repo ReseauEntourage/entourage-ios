@@ -79,7 +79,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.countryCodeTxtField.keepBaseline = YES;
     self.countryCodeTxtField.floatingLabelTextColor = [UIColor clearColor];
     self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];
-    self.pickerSourceDictionary = [OTCountryCodePickerViewDataSource getConstDictionary];
     self.countryCodeTxtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"FR" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithWhite:1.0 alpha:0.5 ]}];
     self.pickerDataSource = [OTCountryCodePickerViewDataSource sharedInstance];
 }
