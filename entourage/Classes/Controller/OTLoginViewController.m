@@ -31,10 +31,11 @@
 #import "OTUserNameViewController.h"
 #import "entourage-Swift.h"
 #import "OTCountryCodePickerViewDataSource.h"
+#import "UIColor+entourage.h"
 
 NSString *const kTutorialDone = @"has_done_tutorial";
 
-@interface OTLoginViewController () <LostCodeDelegate, OTUserNameViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface OTLoginViewController () <LostCodeDelegate, OTUserNameViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet OnBoardingNumberTextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet OnBoardingCodeTextField *passwordTextField;
@@ -44,7 +45,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 @property (nonatomic, weak) IBOutlet OnBoardingButton *continueButton;
 @property (nonatomic, weak) IBOutlet UIView *pickerView;
 @property (nonatomic, weak) IBOutlet UIPickerView *countryCodePicker;
-@property (nonatomic, weak) IBOutlet UITextField *countryCodeTxtField;
+@property (nonatomic, weak) IBOutlet JVFloatLabeledTextField *countryCodeTxtField;
 
 @property (nonatomic, assign) BOOL phoneIsValid;
 @property (nonatomic, weak) NSString *codeCountry;
@@ -73,7 +74,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.phoneTextField indentRight];
     [self.passwordTextField indentRight];
-    self.countryCodeTxtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"FR" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithWhite:1.0 alpha:0.5 ]}];
+    [self.countryCodeTxtField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    [self.countryCodeTxtField indentRight];
+    self.countryCodeTxtField.keepBaseline = YES;
+    self.countryCodeTxtField.floatingLabelTextColor = [UIColor clearColor];
+    self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];
     self.pickerSourceDictionary = [OTCountryCodePickerViewDataSource getConstDictionary];
 }
 
@@ -201,7 +206,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 }
 
 - (void)showKeyboard:(NSNotification*)notification {
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint andMarker:self.phoneTextField];
 }
 
 /********************************************************************************/

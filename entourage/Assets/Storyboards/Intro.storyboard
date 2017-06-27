@@ -431,14 +431,14 @@
                                                     <action selector="resendCode:" destination="Gt1-cc-4DI" eventType="touchUpInside" id="kFI-3o-Sae"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="FR" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="epu-ru-jWd">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="FR" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="epu-ru-jWd" customClass="JVFloatLabeledTextField">
                                                 <rect key="frame" x="15" y="50" width="44" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="Qek-BV-zMM"/>
                                                 </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="Gt1-cc-4DI" id="l5Z-rE-67b"/>
@@ -462,7 +462,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="fqc-ms-rKq" firstAttribute="leading" secondItem="OgF-9U-Zl4" secondAttribute="leading" constant="16" id="0iS-BZ-1bE"/>
                                             <constraint firstItem="v59-br-8WY" firstAttribute="centerX" secondItem="OgF-9U-Zl4" secondAttribute="centerX" id="2zJ-qe-6uT"/>
@@ -471,11 +471,11 @@
                                             <constraint firstItem="epu-ru-jWd" firstAttribute="height" secondItem="dhy-dj-PYm" secondAttribute="height" id="8pg-xm-IwC"/>
                                             <constraint firstItem="dhy-dj-PYm" firstAttribute="top" secondItem="XJU-fl-beR" secondAttribute="bottom" constant="15" id="Bja-dc-0KO"/>
                                             <constraint firstItem="HBy-4E-HT1" firstAttribute="top" secondItem="3Ei-2m-MZj" secondAttribute="bottom" id="G4a-6T-rDO"/>
-                                            <constraint firstAttribute="height" constant="299" id="H5M-TT-Ivr"/>
                                             <constraint firstItem="dhy-dj-PYm" firstAttribute="trailing" secondItem="6Kt-fy-9q4" secondAttribute="trailing" id="H8K-iU-63E"/>
                                             <constraint firstItem="3Ei-2m-MZj" firstAttribute="centerX" secondItem="OgF-9U-Zl4" secondAttribute="centerX" id="HTI-Lo-eqk"/>
                                             <constraint firstItem="epu-ru-jWd" firstAttribute="centerY" secondItem="dhy-dj-PYm" secondAttribute="centerY" id="IX1-gl-ZgG"/>
                                             <constraint firstItem="3Ei-2m-MZj" firstAttribute="top" secondItem="6Kt-fy-9q4" secondAttribute="bottom" constant="5" id="L4h-Fa-aea"/>
+                                            <constraint firstAttribute="height" constant="299" id="NGz-oo-fe2"/>
                                             <constraint firstAttribute="trailing" secondItem="fqc-ms-rKq" secondAttribute="trailing" constant="16" id="Nhc-Ri-wlq"/>
                                             <constraint firstItem="dhy-dj-PYm" firstAttribute="leading" secondItem="epu-ru-jWd" secondAttribute="trailing" constant="11" id="PUA-rT-Vqp"/>
                                             <constraint firstItem="v59-br-8WY" firstAttribute="top" secondItem="fqc-ms-rKq" secondAttribute="bottom" constant="15" id="RPH-2Z-yLB"/>
@@ -505,14 +505,14 @@
                                         </variation>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.1942003038" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="OgF-9U-Zl4" secondAttribute="bottom" id="6hM-D9-NYw"/>
-                                    <constraint firstItem="OgF-9U-Zl4" firstAttribute="height" secondItem="Ddv-uC-bkv" secondAttribute="height" id="8VG-bo-eqD"/>
+                                    <constraint firstItem="OgF-9U-Zl4" firstAttribute="top" secondItem="Ddv-uC-bkv" secondAttribute="top" id="7J3-IQ-KYf"/>
                                     <constraint firstItem="OgF-9U-Zl4" firstAttribute="leading" secondItem="Ddv-uC-bkv" secondAttribute="leading" id="8su-rm-W7f"/>
+                                    <constraint firstAttribute="height" secondItem="OgF-9U-Zl4" secondAttribute="height" id="TnK-14-K5e"/>
+                                    <constraint firstAttribute="bottom" secondItem="OgF-9U-Zl4" secondAttribute="bottom" id="Urr-1a-s1T"/>
                                     <constraint firstItem="OgF-9U-Zl4" firstAttribute="width" secondItem="Ddv-uC-bkv" secondAttribute="width" id="khQ-gf-Hds"/>
                                     <constraint firstAttribute="trailing" secondItem="OgF-9U-Zl4" secondAttribute="trailing" id="xPT-CE-AEV"/>
-                                    <constraint firstItem="OgF-9U-Zl4" firstAttribute="top" secondItem="Ddv-uC-bkv" secondAttribute="top" id="xdv-ir-9Je"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -535,7 +535,8 @@
                     <connections>
                         <outlet property="continueButton" destination="fqc-ms-rKq" id="7E5-SL-QqH"/>
                         <outlet property="countryCodePicker" destination="Csn-9k-gET" id="Crs-oF-4Lc"/>
-                        <outlet property="countryCodeTxtField" destination="epu-ru-jWd" id="TPZ-ar-UrP"/>
+                        <outlet property="countryCodeTxtField" destination="epu-ru-jWd" id="NIY-FR-cEK"/>
+                        <outlet property="heightContraint" destination="NGz-oo-fe2" id="jZf-y3-kHf"/>
                         <outlet property="onboardingNavigation" destination="2bs-ya-BoZ" id="Uhs-f7-QJh"/>
                         <outlet property="passwordTextField" destination="3Ei-2m-MZj" id="jr9-Z1-8VF"/>
                         <outlet property="phoneTextField" destination="dhy-dj-PYm" id="WS8-PO-wZJ"/>
