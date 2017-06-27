@@ -79,6 +79,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [OTLogger logEvent:@"Screen02OnboardingLoginView"];
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
@@ -100,6 +101,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 -(IBAction)resendCode:(id)sender {
     [OTLogger logEvent:@"SMSCodeRequest"];
+    [OTLogger logEvent:@"Screen03_1OnboardingCodeResendView"];
     [self performSegueWithIdentifier:@"ResendCodeSegue" sender:nil];
 }
 
@@ -142,6 +144,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [[OTLocationManager sharedInstance] startLocationUpdates];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
+                                   [OTLogger logEvent:@"TelephoneSubmitFail"];
                                    NSString *alertTitle = OTLocalizedString(@"error");
                                    NSString *alertText = OTLocalizedString(@"connection_error");
                                    NSString *buttonTitle = @"ok";
@@ -183,6 +186,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - Actions
 
 - (IBAction)validateButtonDidTad {
+    [OTLogger logEvent:@"TelephoneSubmit"];
     [self launchAuthentication];
 }
 

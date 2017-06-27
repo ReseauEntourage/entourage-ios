@@ -64,6 +64,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [OTLogger logEvent:@"Screen17_2MyMessagesView"];
     [super viewDidAppear:animated];
     [self.entouragesDataSource.tableView reloadRowsAtIndexPaths:[self.entouragesDataSource.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
 }

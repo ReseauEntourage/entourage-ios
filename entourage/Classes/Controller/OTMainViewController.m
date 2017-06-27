@@ -229,6 +229,7 @@
 }
 
 - (void)switchToNewsfeed {
+    [OTLogger logEvent:@"Screen06_1FeedView"];
     [self.tableView switchToFeeds];
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self.noDataBehavior switchedToNewsfeeds];

@@ -57,6 +57,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [OTLogger logEvent:@"Screen30_2InputPhoneView"];
     self.countryCodeTxtField.inputView = self.pickerView;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
@@ -97,6 +98,7 @@
                 showErrorHUD = NO;
             }
             else if([errorCode isEqualToString:PHONE_ALREADY_EXIST]) {
+                [OTLogger logEvent:@"Screen30_2PhoneAlreadyExistsError"];
                 [NSUserDefaults standardUserDefaults].temporaryUser = temporaryUser;
                 [SVProgressHUD dismiss];
                 [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];

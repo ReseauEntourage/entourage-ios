@@ -16,6 +16,10 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationAuthorizationChanged:) name: kNotificationLocationAuthorizationChanged object:nil];
 }
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTLogger logEvent:@"Screen04_2OnboardingGeolocView"];
+}
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -32,8 +36,10 @@
 
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
     BOOL allowed = [notification readAllowedLocation];
-    if(allowed)
+    if(allowed) {
+        [OTLogger logEvent:@"Screen04_GoEnableGeolocView"];
         [self performSegueWithIdentifier:@"GrantedGeoSegue" sender:self];
+    }
 }
 
 - (void)promptUserForLocationUsage {
