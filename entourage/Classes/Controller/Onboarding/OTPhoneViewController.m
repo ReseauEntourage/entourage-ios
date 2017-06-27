@@ -28,7 +28,7 @@
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, weak) IBOutlet OnBoardingButton *validateButton;
-@property (weak, nonatomic) IBOutlet UITextField *countryCodeTxtField;
+@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *countryCodeTxtField;
 @property (weak, nonatomic) IBOutlet UIPickerView *countryCodePicker;
 
 @property (nonatomic, strong) NSArray *array;
@@ -51,7 +51,11 @@
     self.countryCodePicker.delegate = self;
     self.countryCodeTxtField.delegate = self;
     self.phoneTextField.delegate = self;
-    self.countryCodeTxtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"FR" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithWhite:1.0 alpha:0.5 ]}];
+    [self.countryCodeTxtField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    [self.countryCodeTxtField indentRight];
+    self.countryCodeTxtField.keepBaseline = YES;
+    self.countryCodeTxtField.floatingLabelTextColor = [UIColor clearColor];
+    self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];
     self.pickerSourceDictionary = [OTCountryCodePickerViewDataSource getConstDictionary];
 }
 
