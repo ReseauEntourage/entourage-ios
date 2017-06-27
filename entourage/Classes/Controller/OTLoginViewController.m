@@ -49,7 +49,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 @property (nonatomic, assign) BOOL phoneIsValid;
 @property (nonatomic, weak) NSString *codeCountry;
-@property (nonatomic, weak) NSDictionary *pickerSourceDictionary;
+@property (nonatomic, weak) OTCountryCodePickerViewDataSource *pickerDataSource;
 
 @end
 
@@ -80,6 +80,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.countryCodeTxtField.floatingLabelTextColor = [UIColor clearColor];
     self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];
     self.pickerSourceDictionary = [OTCountryCodePickerViewDataSource getConstDictionary];
+    self.countryCodeTxtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"FR" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithWhite:1.0 alpha:0.5 ]}];
+    self.pickerDataSource = [OTCountryCodePickerViewDataSource sharedInstance];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -225,23 +227,22 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - UIPickerViewDelegate
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {    
-    return [self.pickerSourceDictionary allKeys].count;
+    return [self.pickerDataSource count];
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [self.pickerSourceDictionary allKeys][row];;
+    return [self.pickerDataSource getCountryFullNameAtRow:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSString *key = [[self.pickerSourceDictionary allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)][row];
-    self.countryCodeTxtField.text = [self.pickerSourceDictionary valueForKeyPath:[key stringByAppendingString:@".Code 2 char"]];
-    self.codeCountry = [self.pickerSourceDictionary valueForKeyPath:[key stringByAppendingString:@".Number"]];
-    self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length -1)];
+    self.countryCodeTxtField.text = [self.pickerDataSource getCountryShortNameAtRow:row];
+    self.codeCountry = [self.pickerDataSource getCountryCodeAtRow:row];
+    self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length - 1)];
 }
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSString *title = [[self.pickerSourceDictionary allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)][row];
+    NSString *title = [self.pickerDataSource getCountryFullNameAtRow:row];
     NSAttributedString *attString =
     [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     return attString;

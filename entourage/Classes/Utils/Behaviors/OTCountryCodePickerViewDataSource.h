@@ -10,6 +10,11 @@
 
 @interface OTCountryCodePickerViewDataSource : OTBehavior
 
-+ (NSDictionary *)getConstDictionary;
++ (OTCountryCodePickerViewDataSource *)sharedInstance;
+
+- (NSInteger)count;
+- (NSString *)getCountryFullNameAtRow:(NSInteger)row;
+- (NSString *)getCountryShortNameAtRow:(NSInteger)row;
+- (NSString *)getCountryCodeAtRow:(NSInteger)row;
 
 @end
