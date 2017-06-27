@@ -79,8 +79,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.countryCodeTxtField.keepBaseline = YES;
     self.countryCodeTxtField.floatingLabelTextColor = [UIColor clearColor];
     self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];
-    self.countryCodeTxtField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"FR" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithWhite:1.0 alpha:0.5 ]}];
     self.pickerDataSource = [OTCountryCodePickerViewDataSource sharedInstance];
+    self.codeCountry = @"+33";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -125,7 +125,10 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)launchAuthentication {
     [SVProgressHUD show];
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
-    [[OTAuthService new] authWithPhone:[self.codeCountry stringByAppendingString:self.phoneTextField.text]
+    NSString *phone = self.phoneTextField.text;
+    if([self.phoneTextField.text hasPrefix:@"0"])
+        phone = [self.phoneTextField.text substringFromIndex:1];
+    [[OTAuthService new] authWithPhone:[self.codeCountry stringByAppendingString: phone]
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
                                success: ^(OTUser *user) {;
@@ -236,7 +239,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.countryCodeTxtField.text = [self.pickerDataSource getCountryShortNameForRow:row];
     self.codeCountry = [self.pickerDataSource getCountryCodeForRow:row];
-    self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length - 1)];
 }
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
