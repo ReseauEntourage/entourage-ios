@@ -75,7 +75,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.phoneTextField indentRight];
     [self.passwordTextField indentRight];
     [self.countryCodeTxtField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    [self.countryCodeTxtField indentRight];
     self.countryCodeTxtField.keepBaseline = YES;
     self.countryCodeTxtField.floatingLabelTextColor = [UIColor clearColor];
     self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];

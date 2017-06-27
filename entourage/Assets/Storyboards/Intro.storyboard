@@ -330,7 +330,7 @@
         <!--Login-->
         <scene sceneID="CLK-Te-XOf">
             <objects>
-                <viewController storyboardIdentifier="OTLoginViewControllerIdentifier" id="Gt1-cc-4DI" userLabel="Login" customClass="OTLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTLoginViewControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="Gt1-cc-4DI" userLabel="Login" customClass="OTLoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wX3-SU-kbf"/>
                         <viewControllerLayoutGuide type="bottom" id="8IX-Sx-Dln"/>
@@ -339,7 +339,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ddv-uC-bkv">
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ddv-uC-bkv">
                                 <rect key="frame" x="-4" y="20" width="383" height="299"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OgF-9U-Zl4" userLabel="Black View">

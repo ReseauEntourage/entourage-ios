@@ -52,7 +52,6 @@
     self.countryCodeTxtField.delegate = self;
     self.phoneTextField.delegate = self;
     [self.countryCodeTxtField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    [self.countryCodeTxtField indentRight];
     self.countryCodeTxtField.keepBaseline = YES;
     self.countryCodeTxtField.floatingLabelTextColor = [UIColor clearColor];
     self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];
