@@ -62,6 +62,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [OTLogger logEvent:@"OTUserEmailViewController"];
     [IQKeyboardManager sharedManager].enable = NO;
     [self.emailTextField becomeFirstResponder];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];

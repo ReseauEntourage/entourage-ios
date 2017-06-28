@@ -14,11 +14,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationAuthorizationChanged:) name: kNotificationLocationAuthorizationChanged object:nil];
-}
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [OTLogger logEvent:@"Screen04_2OnboardingGeolocView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
