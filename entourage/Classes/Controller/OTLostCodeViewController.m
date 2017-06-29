@@ -22,13 +22,14 @@
 #import "SVProgressHUD.h"
 #import "NSError+OTErrorData.h"
 #import "OTCountryCodePickerViewDataSource.h"
+#import "JVFloatLabeledTextField.h"
 
 @interface OTLostCodeViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
-@property (weak, nonatomic) IBOutlet UITextField *countryCodeTextField;
+@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *countryCodeTextField;
 @property (weak, nonatomic) IBOutlet UIPickerView *countryPicker;
 
 @property (weak, nonatomic) OTCountryCodePickerViewDataSource *pickerDataSource;
@@ -51,6 +52,10 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.navigationController presentTransparentNavigationBar];
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    [self.countryCodeTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    self.countryCodeTextField.keepBaseline = YES;
+    self.countryCodeTextField.floatingLabelTextColor = [UIColor clearColor];
+    self.countryCodeTextField.floatingLabelActiveTextColor = [UIColor clearColor];
     self.pickerDataSource = [OTCountryCodePickerViewDataSource sharedInstance];
 }
 
@@ -58,7 +63,6 @@
     [IQKeyboardManager sharedManager].enable = NO;
     [super viewDidAppear:animated];
     self.countryCodeTextField.inputView = self.pickerView;
-    //[self.phoneTextField becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -70,7 +74,10 @@
 
 - (void)regenerateSecretCode {
     [SVProgressHUD show];
-    NSString *phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
+    NSString *phoneNumber = self.phoneTextField.text;
+    if([self.phoneTextField.text hasPrefix:@"0"])
+        phoneNumber = [self.phoneTextField.text substringFromIndex:1];
+    NSString *phone = [self.codeCountry stringByAppendingString:phoneNumber];
     [[OTAuthService new] regenerateSecretCode:phone success:^(OTUser *user) {
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
     }
@@ -134,7 +141,6 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.countryCodeTextField.text = [self.pickerDataSource getCountryShortNameForRow:row];
     self.codeCountry = [self.pickerDataSource getCountryCodeForRow:row];
-    self.codeCountry = [self.codeCountry substringToIndex:(self.codeCountry.length - 1)];
 }
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
