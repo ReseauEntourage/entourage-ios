@@ -151,6 +151,12 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
                 [OTLogger logEvent:@"WhatActionsClick"];
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_application_usage")])
                 [OTLogger logEvent:@"AppFAQClick"];
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_blog")])
+                [OTLogger logEvent:@"SimpleCommeBonjourClick"];
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_chart")])
+                [OTLogger logEvent:@"ViewEthicsChartClick"];
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_atd_partner")])
+                [OTLogger logEvent:@"ATDPartnershipView"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.url]];
         }
 	}

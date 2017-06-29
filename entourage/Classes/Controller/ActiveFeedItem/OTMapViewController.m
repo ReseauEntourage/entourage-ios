@@ -54,6 +54,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [OTLogger logEvent:@"Screen14_2PublicPageViewAsMemberOrCreator"];
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
 }
 
