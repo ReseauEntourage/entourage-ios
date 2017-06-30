@@ -1307,7 +1307,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vVL-xv-WKX">
-                                        <rect key="frame" x="15" y="153.99999999999997" width="344" height="50"/>
+                                        <rect key="frame" x="15" y="154.99999999999997" width="344" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="GlR-eb-Vvf"/>
@@ -1338,14 +1338,14 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_native" translatesAutoresizingMaskIntoConstraints="NO" id="9MO-C7-ZZc">
-                                        <rect key="frame" x="35" y="166.33333333333334" width="25" height="25"/>
+                                        <rect key="frame" x="35" y="167.33333333333334" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="jwJ-K0-xLK"/>
                                             <constraint firstAttribute="width" constant="25" id="wft-IN-sCc"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMd-P1-fFT">
-                                        <rect key="frame" x="15" y="218.99999999999997" width="344" height="50.000000000000028"/>
+                                        <rect key="frame" x="15" y="219.99999999999997" width="344" height="50.000000000000028"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="296" id="52r-u2-hPA"/>
@@ -1376,7 +1376,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Jq-r5-MKD">
-                                        <rect key="frame" x="15" y="284" width="344" height="50.000000000000057"/>
+                                        <rect key="frame" x="15" y="285" width="344" height="50.000000000000057"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="296" id="121-F6-pYR"/>
@@ -1407,14 +1407,14 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phoneSquare" translatesAutoresizingMaskIntoConstraints="NO" id="CMf-wW-xkH">
-                                        <rect key="frame" x="35" y="297" width="25" height="25"/>
+                                        <rect key="frame" x="35" y="298" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="R0Q-KA-CxM"/>
                                             <constraint firstAttribute="height" constant="25" id="aUg-Iz-Eu3"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addressBookSquare" translatesAutoresizingMaskIntoConstraints="NO" id="sSy-Yl-SG5">
-                                        <rect key="frame" x="35" y="231.33333333333334" width="25" height="25.000000000000028"/>
+                                        <rect key="frame" x="35" y="232.33333333333334" width="25" height="25.000000000000028"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="TeP-7b-PcN"/>
                                             <constraint firstAttribute="height" constant="25" id="qXY-9F-vc3"/>
@@ -1426,8 +1426,8 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="À rejoindre votre entourage." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzY-qf-TzX">
-                                        <rect key="frame" x="15" y="103.99999999999997" width="344" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="à rejoindre cet entourage." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzY-qf-TzX">
+                                        <rect key="frame" x="15" y="103.99999999999997" width="344" height="21"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
