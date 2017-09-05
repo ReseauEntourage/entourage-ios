@@ -3404,7 +3404,7 @@
 					"$(PROJECT_DIR)/Flurry",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios.beta${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "1fe4debe-0efa-4c9c-bc7c-b667e665ced4";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
@@ -3449,7 +3449,7 @@
 					"$(PROJECT_DIR)/Flurry",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios.beta${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "af394213-cd6d-4f0a-a085-e2a86feb499a";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AppStore";
@@ -3588,7 +3588,7 @@
 					"$(PROJECT_DIR)/Flurry",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios.beta${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "3a17a4ee-979a-436c-a6c6-b14adc5e3b11";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
