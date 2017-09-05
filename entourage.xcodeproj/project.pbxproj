@@ -3451,8 +3451,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "af394213-cd6d-4f0a-a085-e2a86feb499a";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AppStore";
+				PROVISIONING_PROFILE = "3b6f3395-91e7-4700-a4b2-68b4086df771";
+				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
