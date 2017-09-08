@@ -54,6 +54,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapModifyBehavior;
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapAssociation;
 @property (weak, nonatomic) IBOutlet UIImageView *imgAssociation;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -80,6 +81,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     self.title = OTLocalizedString(@"myProfile");
     [self createBackFrontMenuButton];
     [self.modifyLabel underline];
+    self.tableView.tableHeaderView = self.headerView;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSupportedPartner:) name:@kNotificationSupportedPartnerUpdated object:nil];
@@ -149,6 +151,12 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
                 [OTLogger logEvent:@"WhatActionsClick"];
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_application_usage")])
                 [OTLogger logEvent:@"AppFAQClick"];
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_blog")])
+                [OTLogger logEvent:@"SimpleCommeBonjourClick"];
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_chart")])
+                [OTLogger logEvent:@"ViewEthicsChartClick"];
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_atd_partner")])
+                [OTLogger logEvent:@"ATDPartnershipView"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.url]];
         }
 	}

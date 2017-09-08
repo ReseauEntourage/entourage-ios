@@ -1,5 +1,5 @@
 app_identifier "social.entourage.entourageios" # The bundle identifier of your app
-apple_id "guillaume.lagorce@gmail.com" # Your Apple email address
+apple_id "apple@entourage.social" # Your Apple email address
 
 team_id "RT7X9LLTN6"  # Developer Portal Team ID
 

@@ -14,6 +14,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationAuthorizationChanged:) name: kNotificationLocationAuthorizationChanged object:nil];
 }
 
@@ -22,12 +23,24 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (IBAction)activateGeolocation {
+    [OTLogger logEvent:@"ActivateGeolocFromScreen04_4UserBlocked"];
+    [self promptUserForLocationUsage];
+    [self performSegueWithIdentifier:@"GrantedGeoSegue" sender:self];
+}
+
 #pragma mark - private methods
 
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
     BOOL allowed = [notification readAllowedLocation];
-    if(allowed)
+    if(allowed) {
+        [OTLogger logEvent:@"Screen04_GoEnableGeolocView"];
         [self performSegueWithIdentifier:@"GrantedGeoSegue" sender:self];
+    }
+}
+
+- (void)promptUserForLocationUsage {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 
 @end

@@ -35,6 +35,11 @@
     [self setupToolbarButtons];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTLogger logEvent:@"Screen09_4EditPasswordView"];
+}
+
 - (void)setupToolbarButtons {
     [self setupCloseModal];
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString withTarget:self andAction:@selector(doValidate:) colored:[UIColor appOrangeColor]];
@@ -44,6 +49,7 @@
 #pragma mark - IBActions
 
 - (IBAction)doValidate:(id)sender {
+    [OTLogger logEvent:@"Screen09_4ChangePasswordSubmit"];
     NSString *currentPassword = self.currentPasswordTextField.text;
     NSString *newPassword = self.passwordTextField.text;
     NSString *confirmPassword = self.confirmPasswordTextField.text;

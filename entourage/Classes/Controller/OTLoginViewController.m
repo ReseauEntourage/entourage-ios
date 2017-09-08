@@ -30,10 +30,12 @@
 #import "OTLocationManager.h"
 #import "OTUserNameViewController.h"
 #import "entourage-Swift.h"
+#import "OTCountryCodePickerViewDataSource.h"
+#import "UIColor+entourage.h"
 
 NSString *const kTutorialDone = @"has_done_tutorial";
 
-@interface OTLoginViewController () <LostCodeDelegate, OTUserNameViewControllerDelegate>
+@interface OTLoginViewController () <LostCodeDelegate, OTUserNameViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet OnBoardingNumberTextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet OnBoardingCodeTextField *passwordTextField;
@@ -41,8 +43,13 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 @property (nonatomic, weak) IBOutlet OnBoardingButton *continueButton;
+@property (nonatomic, weak) IBOutlet UIView *pickerView;
+@property (nonatomic, weak) IBOutlet UIPickerView *countryCodePicker;
+@property (nonatomic, weak) IBOutlet JVFloatLabeledTextField *countryCodeTxtField;
 
 @property (nonatomic, assign) BOOL phoneIsValid;
+@property (nonatomic, weak) NSString *codeCountry;
+@property (nonatomic, weak) OTCountryCodePickerViewDataSource *pickerDataSource;
 
 @end
 
@@ -67,20 +74,28 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.phoneTextField indentRight];
     [self.passwordTextField indentRight];
+    [self.countryCodeTxtField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    self.countryCodeTxtField.keepBaseline = YES;
+    self.countryCodeTxtField.floatingLabelTextColor = [UIColor clearColor];
+    self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];
+    self.pickerDataSource = [OTCountryCodePickerViewDataSource sharedInstance];
+    self.codeCountry = @"+33";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [OTLogger logEvent:@"Screen02OnboardingLoginView"];
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyboard:) name:UIKeyboardDidShowNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.phoneTextField becomeFirstResponder];
+    self.countryCodeTxtField.inputView = self.pickerView;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -91,6 +106,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 -(IBAction)resendCode:(id)sender {
     [OTLogger logEvent:@"SMSCodeRequest"];
+    [OTLogger logEvent:@"Screen03_1OnboardingCodeResendView"];
     [self performSegueWithIdentifier:@"ResendCodeSegue" sender:nil];
 }
 
@@ -105,16 +121,19 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     return YES;
 }
 
-
 - (void)launchAuthentication {
     [SVProgressHUD show];
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
-    [[OTAuthService new] authWithPhone:self.phoneTextField.text
+    NSString *phone = self.phoneTextField.text;
+    if([self.phoneTextField.text hasPrefix:@"0"])
+        phone = [self.phoneTextField.text substringFromIndex:1];
+    [[OTAuthService new] authWithPhone:[self.codeCountry stringByAppendingString: phone]
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
                                success: ^(OTUser *user) {;
                                    NSLog(@"User : %@ authenticated successfully", user.email);
-                                   user.phone = self.phoneTextField.text;
+                                   
+                                   user.phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil)
                                        loggedNumbers = [NSMutableArray new];
@@ -133,6 +152,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [[OTLocationManager sharedInstance] startLocationUpdates];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
+                                   [OTLogger logEvent:@"TelephoneSubmitFail"];
                                    NSString *alertTitle = OTLocalizedString(@"error");
                                    NSString *alertText = OTLocalizedString(@"connection_error");
                                    NSString *buttonTitle = @"ok";
@@ -174,6 +194,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - Actions
 
 - (IBAction)validateButtonDidTad {
+    [OTLogger logEvent:@"TelephoneSubmit"];
     [self launchAuthentication];
 }
 
@@ -196,6 +217,35 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 - (void)userNameDidChange {
     [UIStoryboard showSWRevealController];
+}
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+#pragma mark - UIPickerViewDelegate
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {    
+    return [self.pickerDataSource count];
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [self.pickerDataSource getTitleForRow:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.countryCodeTxtField.text = [self.pickerDataSource getCountryShortNameForRow:row];
+    self.codeCountry = [self.pickerDataSource getCountryCodeForRow:row];
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *title = [self.pickerDataSource getTitleForRow:row];
+    NSAttributedString *attString =
+    [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    return attString;
 }
 
 @end

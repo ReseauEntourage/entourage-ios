@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		011270621E9D1751006ADA79 /* OTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 011270611E9D1751006ADA79 /* OTTextView.m */; };
+		011DC1E01EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */; };
+		011DC1E61EFA969A00B46C5F /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 011DC1E51EFA969A00B46C5F /* CountryList.csv */; };
 		0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */; };
 		0130138E1E7968B300C2504C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */; };
 		013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */; };
@@ -377,6 +379,9 @@
 /* Begin PBXFileReference section */
 		011270601E9D1751006ADA79 /* OTTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTextView.h; sourceTree = "<group>"; };
 		011270611E9D1751006ADA79 /* OTTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTextView.m; sourceTree = "<group>"; };
+		011DC1DE1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTCountryCodePickerViewDataSource.h; path = Behaviors/OTCountryCodePickerViewDataSource.h; sourceTree = "<group>"; };
+		011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTCountryCodePickerViewDataSource.m; path = Behaviors/OTCountryCodePickerViewDataSource.m; sourceTree = "<group>"; };
+		011DC1E51EFA969A00B46C5F /* CountryList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CountryList.csv; path = entourage/CountryList.csv; sourceTree = "<group>"; };
 		013013891E7965CE00C2504C /* OTUnreadMessageCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessageCount.h; path = Feeds/OTUnreadMessageCount.h; sourceTree = "<group>"; };
 		0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUnreadMessageCount.m; path = Feeds/OTUnreadMessageCount.m; sourceTree = "<group>"; };
 		0130138C1E7968B300C2504C /* OTUnreadMessagesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessagesService.h; path = Services/OTUnreadMessagesService.h; sourceTree = "<group>"; };
@@ -1086,6 +1091,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		011DC1E41EF7D6AD00B46C5F /* CountryCodePicker */ = {
+			isa = PBXGroup;
+			children = (
+				011DC1DE1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.h */,
+				011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */,
+			);
+			name = CountryCodePicker;
+			sourceTree = "<group>";
+		};
 		0188DF4E1E8D3B90008311B6 /* SolidarityGuideFilters */ = {
 			isa = PBXGroup;
 			children = (
@@ -1769,6 +1783,7 @@
 				1E9003681D34FAAB004E18BC /* OTBehavior.m */,
 				1EA4F3071DA199A300A3321C /* OTDistributedDelegateBehavior.h */,
 				1EA4F3081DA199A300A3321C /* OTDistributedDelegateBehavior.m */,
+				011DC1E41EF7D6AD00B46C5F /* CountryCodePicker */,
 			);
 			name = Behaviors;
 			sourceTree = "<group>";
@@ -2390,6 +2405,7 @@
 		6B92CA9519A7461C004E8C9B = {
 			isa = PBXGroup;
 			children = (
+				011DC1E51EFA969A00B46C5F /* CountryList.csv */,
 				1E78B7AF1D5133970008C00E /* Resources */,
 				6B92CAA719A7461C004E8C9B /* entourage */,
 				6B92CAC619A7461C004E8C9B /* entourageTests */,
@@ -2749,6 +2765,7 @@
 				1E78B7E61D5134D20008C00E /* SF-UI-Text-Semibold.otf in Resources */,
 				1EFAC0C71D89242D00BE396F /* FeedItemFilters.storyboard in Resources */,
 				1EFBCFD81E56E3A5008CEF30 /* Tutorial.storyboard in Resources */,
+				011DC1E61EFA969A00B46C5F /* CountryList.csv in Resources */,
 				1E78B7A61D5108BE0008C00E /* ActiveFeedItem.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3079,6 +3096,7 @@
 				2EC77E4F1CEDE4BC0031BB67 /* OTEntourageService.m in Sources */,
 				1EA3B7091E5D7937003FF875 /* OTAssociationDetailsViewController.m in Sources */,
 				0188DF4D1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m in Sources */,
+				011DC1E01EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m in Sources */,
 				1E5F798B1D5A13930005003C /* OTCollectionViewDataSourceBehavior.m in Sources */,
 				45F4433C1C90B40400DDEBE1 /* OTFeedItemTimelinePoint.m in Sources */,
 				1E587F321E2E18A300FEBB67 /* UIImageView+entourage.m in Sources */,
@@ -3392,7 +3410,7 @@
 					"$(PROJECT_DIR)/Flurry",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "1fe4debe-0efa-4c9c-bc7c-b667e665ced4";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
@@ -3437,10 +3455,10 @@
 					"$(PROJECT_DIR)/Flurry",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "af394213-cd6d-4f0a-a085-e2a86feb499a";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AppStore";
+				PROVISIONING_PROFILE = "3b6f3395-91e7-4700-a4b2-68b4086df771";
+				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3576,7 +3594,7 @@
 					"$(PROJECT_DIR)/Flurry",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "3a17a4ee-979a-436c-a6c6-b14adc5e3b11";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";

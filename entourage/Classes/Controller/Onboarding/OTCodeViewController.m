@@ -56,6 +56,12 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTLogger logEvent:@"Screen30_3InputPasscodeView"];
+    [self.codeTextField becomeFirstResponder];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[IQKeyboardManager sharedManager] setEnable:YES];
@@ -69,11 +75,6 @@
                                                                andAction:@selector(doRegenerateCode)
                                                                  colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:regenerateButton];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self.codeTextField becomeFirstResponder];
 }
 
 - (void)doRegenerateCode {

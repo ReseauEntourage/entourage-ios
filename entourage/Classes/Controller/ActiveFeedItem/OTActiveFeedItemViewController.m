@@ -87,6 +87,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [OTLogger logEvent:@"OTActiveFeedItemViewController"];
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     [self reloadMessages];
 }

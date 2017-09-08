@@ -16,9 +16,10 @@
 @implementation OTPhotoPickerBehavior
 
 - (void)pickFromCamera:(UIButton *)sender {
-    
+    [OTLogger logEvent:@"Screen09_7TakePhotoView"];
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
         [self pickPhotoFromSource:UIImagePickerControllerSourceTypeCamera];
+    
 }
 
 - (void)pickFromGallery:(UIButton *)sender {

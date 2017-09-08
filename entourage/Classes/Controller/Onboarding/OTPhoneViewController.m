@@ -20,13 +20,21 @@
 #import "OTConsts.h"
 #import "OTDeepLinkService.h"
 #import "entourage-Swift.h"
+#import "OTCountryCodePickerViewDataSource.h"
 
-@interface OTPhoneViewController ()
+@interface OTPhoneViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 
 @property (nonatomic, weak) IBOutlet OnBoardingNumberTextField *phoneTextField;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, weak) IBOutlet OnBoardingButton *validateButton;
+@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *countryCodeTxtField;
+@property (weak, nonatomic) IBOutlet UIPickerView *countryCodePicker;
+
+@property (nonatomic, strong) NSArray *array;
+@property (weak, nonatomic) IBOutlet UIView *pickerView;
+@property (weak, nonatomic) NSString *codeCountry;
+@property (weak, nonatomic) OTCountryCodePickerViewDataSource *pickerDataSource;
 
 @end
 
@@ -34,18 +42,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.title = @"";
-
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
     };
+    self.countryCodePicker.dataSource = self;
+    self.countryCodePicker.delegate = self;
+    self.countryCodeTxtField.delegate = self;
+    self.phoneTextField.delegate = self;
+    [self.countryCodeTxtField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    self.countryCodeTxtField.keepBaseline = YES;
+    self.countryCodeTxtField.floatingLabelTextColor = [UIColor clearColor];
+    self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];
+    self.pickerDataSource = [OTCountryCodePickerViewDataSource sharedInstance];
+    self.codeCountry = @"+33";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.phoneTextField becomeFirstResponder];
+    [OTLogger logEvent:@"Screen30_2InputPhoneView"];
+    self.countryCodeTxtField.inputView = self.pickerView;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
@@ -59,9 +76,11 @@
 - (IBAction)doContinue {
     [OTLogger logEvent:@"TelephoneSubmit"];
     OTUser *temporaryUser = [OTUser new];
-    NSString *phone = self.phoneTextField.text;
+    NSString *phoneNumber = self.phoneTextField.text;
+    if([self.phoneTextField.text hasPrefix:@"0"])
+        phoneNumber = [self.phoneTextField.text substringFromIndex:1];
+    NSString *phone = [self.codeCountry stringByAppendingString:phoneNumber];
     temporaryUser.phone = phone;
-
     [SVProgressHUD show];
     [[OTOnboardingService new] setupNewUserWithPhone:phone
         success:^(OTUser *onboardUser) {
@@ -86,6 +105,7 @@
                 showErrorHUD = NO;
             }
             else if([errorCode isEqualToString:PHONE_ALREADY_EXIST]) {
+                [OTLogger logEvent:@"Screen30_2PhoneAlreadyExistsError"];
                 [NSUserDefaults standardUserDefaults].temporaryUser = temporaryUser;
                 [SVProgressHUD dismiss];
                 [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
@@ -105,6 +125,35 @@
 
 - (void)showKeyboard:(NSNotification*)notification {
     [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+}
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+#pragma mark - UIPickerViewDelegate
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [self.pickerDataSource count];
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [self.pickerDataSource getTitleForRow:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.countryCodeTxtField.text = [self.pickerDataSource getCountryShortNameForRow:row];
+    self.codeCountry = [self.pickerDataSource getCountryCodeForRow:row];
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *title = [self.pickerDataSource getTitleForRow:row];
+    NSAttributedString *attString =
+    [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    return attString;
 }
 
 @end

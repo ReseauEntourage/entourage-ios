@@ -67,6 +67,11 @@ typedef NS_ENUM(NSInteger) {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTLogger logEvent:@"Screen09_2EditMyProfileView"];
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -96,6 +101,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)updateUser {
+    [OTLogger logEvent:@"SaveProfileEdits"];
     NSString *firstName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeSummary] withDefault:self.user.firstName];
     NSString *lastName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:SectionTypeSummary] withDefault:self.user.lastName];
     NSString *email = [[self editedTextAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeInfoPrivate] withDefault:self.user.email] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -307,6 +313,7 @@ typedef NS_ENUM(NSInteger) {
                     [self performSegueWithIdentifier:EDIT_PASSWORD_SEGUE sender:nil];
                     break;
                 case 3:
+                    [OTLogger logEvent:@"ToNotifications"];
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
                     break;
                 default:

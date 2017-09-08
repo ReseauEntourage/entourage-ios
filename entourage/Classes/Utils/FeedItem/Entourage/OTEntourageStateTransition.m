@@ -48,6 +48,7 @@
 }
 
 - (void)sendJoinRequest:(void (^)(OTFeedItemJoiner *))success orFailure:(void (^)(NSError *, BOOL))failure {
+    [OTLogger logEvent:@"OpenEnterInContact"];
     NSString *oldJoinState = self.entourage.joinStatus;
     self.entourage.joinStatus = JOIN_PENDING;
     [[OTEntourageService new] joinEntourage:self.entourage

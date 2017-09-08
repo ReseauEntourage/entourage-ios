@@ -39,6 +39,11 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTLogger logEvent:@"Screen30_1WelcomeView"];
+}
+
 #pragma mark - Private
 
 - (void)addLoginBarButton {

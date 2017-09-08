@@ -21,11 +21,19 @@
 #import "OTUser.h"
 #import "SVProgressHUD.h"
 #import "NSError+OTErrorData.h"
+#import "OTCountryCodePickerViewDataSource.h"
+#import "JVFloatLabeledTextField.h"
 
-@interface OTLostCodeViewController ()
+@interface OTLostCodeViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
+@property (weak, nonatomic) IBOutlet UIView *pickerView;
+@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *countryCodeTextField;
+@property (weak, nonatomic) IBOutlet UIPickerView *countryPicker;
+
+@property (weak, nonatomic) OTCountryCodePickerViewDataSource *pickerDataSource;
+@property (weak, nonatomic) NSString *codeCountry;
 
 @end
 
@@ -44,12 +52,17 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.navigationController presentTransparentNavigationBar];
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    [self.countryCodeTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    self.countryCodeTextField.keepBaseline = YES;
+    self.countryCodeTextField.floatingLabelTextColor = [UIColor clearColor];
+    self.countryCodeTextField.floatingLabelActiveTextColor = [UIColor clearColor];
+    self.pickerDataSource = [OTCountryCodePickerViewDataSource sharedInstance];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [IQKeyboardManager sharedManager].enable = NO;
     [super viewDidAppear:animated];
-    [self.phoneTextField becomeFirstResponder];
+    self.countryCodeTextField.inputView = self.pickerView;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -61,7 +74,11 @@
 
 - (void)regenerateSecretCode {
     [SVProgressHUD show];
-    [[OTAuthService new] regenerateSecretCode:self.phoneTextField.text success:^(OTUser *user) {
+    NSString *phoneNumber = self.phoneTextField.text;
+    if([self.phoneTextField.text hasPrefix:@"0"])
+        phoneNumber = [self.phoneTextField.text substringFromIndex:1];
+    NSString *phone = [self.codeCountry stringByAppendingString:phoneNumber];
+    [[OTAuthService new] regenerateSecretCode:phone success:^(OTUser *user) {
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
     }
     failure:^(NSError *error) {
@@ -80,7 +97,8 @@
 #pragma mark - Actions
 
 - (IBAction)regenerateButtonDidTap:(id)sender {
-    if (self.phoneTextField.text.length == 0) {
+    NSString *phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
+    if (phone.length == 0) {
         [[[UIAlertView alloc]
           initWithTitle: OTLocalizedString(@"requestImposible")
           message:OTLocalizedString(@"retryPhone")
@@ -89,7 +107,7 @@
           otherButtonTitles:@"Ok",
           nil] show];
     }
-    else if (![self.phoneTextField.text isValidPhoneNumber]) {
+    else if (![phone isValidPhoneNumber]) {
         [[[UIAlertView alloc]
           initWithTitle:OTLocalizedString(@"requestImposible")
           message:OTLocalizedString(@"invalidPhoneNumber")//@"Numéro de téléphone invalide"
@@ -102,6 +120,35 @@
         [self.phoneTextField setSelected:NO];
         [self regenerateSecretCode];
     }
+}
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+#pragma mark - UIPickerViewDelegate
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [self.pickerDataSource count];
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [self.pickerDataSource getTitleForRow:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.countryCodeTextField.text = [self.pickerDataSource getCountryShortNameForRow:row];
+    self.codeCountry = [self.pickerDataSource getCountryCodeForRow:row];
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *title = [self.pickerDataSource getTitleForRow:row];
+    NSAttributedString *attString =
+    [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    return attString;
 }
 
 @end

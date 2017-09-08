@@ -29,6 +29,7 @@
 #define APNOTIFICATION_REQUEST_ACCEPTED "JOIN_REQUEST_ACCEPTED"
 #define APNOTIFICATION_INVITE_REQUEST "ENTOURAGE_INVITATION"
 #define APNOTIFICATION_INVITE_STATUS "INVITATION_STATUS"
+#define APNOTIFICATION_JOIN_REQUEST_CANCELED "JOIN_REQUEST_CANCELED"
 
 @implementation OTPushNotificationsService
 
@@ -61,6 +62,8 @@
     OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
     if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST])
         [self handleJoinRequestNotification:pnData];
+    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST_CANCELED]) 
+        [self handleCancelJoinNotification:pnData];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_REQUEST_ACCEPTED])
         [self handleAcceptJoinNotification:pnData];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE]) {
@@ -134,6 +137,14 @@
             }
         }
     } failure:nil];
+}
+
+- (void)handleCancelJoinNotification:(OTPushNotificationsData *)pnData {
+    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:pnData.joinableId];
+    UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (rootVC.presentedViewController) {
+        [rootVC dismissViewControllerAnimated:NO completion:nil];
+    }
 }
 
 - (void)handleAcceptJoinNotification:(OTPushNotificationsData *)pnData
@@ -218,6 +229,7 @@
         [alert addAction:action];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:defaultAction];
+    
     [self showAlert:alert withPresentingBlock:^(UIViewController *topController, UIViewController *presentedViewController) {
         BOOL showMessage = YES;
         if ([topController isKindOfClass:[OTActiveFeedItemViewController class]]) {

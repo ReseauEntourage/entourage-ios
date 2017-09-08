@@ -75,8 +75,12 @@ typedef NS_ENUM(NSInteger) {
     }
     else
         [self loadUser];
-    if(![self.userId isEqualToNumber:self.currentUser.sid])
+    if(![self.userId isEqualToNumber:self.currentUser.sid]) {
+        [OTLogger logEvent:@"Screen09_1OtherUserProfileView"];
         [self showReportButton];
+    }
+    else
+        [OTLogger logEvent:@"Screen09_1MyProfileViewAsPublicView"];
 }
 
 #pragma mark - Private

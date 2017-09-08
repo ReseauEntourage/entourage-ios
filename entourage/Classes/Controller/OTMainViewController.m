@@ -229,6 +229,7 @@
 }
 
 - (void)switchToNewsfeed {
+    [OTLogger logEvent:@"Screen06_1FeedView"];
     [self.tableView switchToFeeds];
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self.noDataBehavior switchedToNewsfeeds];
@@ -932,6 +933,7 @@
 #pragma mark - "Screens"
 
 - (void)showToursList {
+    [OTLogger logEvent:@"Screen06_1FeedView"];
     self.showSolidarityGuideView.hidden = YES;
     [self.noDataBehavior hideNoData];
     self.isTourListDisplayed = YES;
@@ -946,7 +948,12 @@
 }
 
 - (void)showToursMap {
-    self.guideMapDelegate.isActive ? [self.showSolidarityGuideView setHidden:YES] : [self.showSolidarityGuideView setHidden:NO];
+    if(self.guideMapDelegate.isActive)
+        [self.showSolidarityGuideView setHidden:YES];
+    else {
+        [OTLogger logEvent:@"Screen06_2MapView"];
+         [self.showSolidarityGuideView setHidden:NO];
+    }
     if(self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0)
         [self.noDataBehavior showNoData];
     self.nouveauxFeedItemsButton.hidden = YES;
