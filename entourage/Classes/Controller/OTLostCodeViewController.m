@@ -39,6 +39,11 @@
 
 @implementation OTLostCodeViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.codeCountry = @"+33";
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
