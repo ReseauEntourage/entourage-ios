@@ -38,6 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.shareItem configureWith:self.feedItem];
     [self changeBorderColors];
     [self.toggleEditBehavior initialize];
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
