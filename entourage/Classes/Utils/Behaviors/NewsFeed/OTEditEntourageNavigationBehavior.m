@@ -33,12 +33,14 @@
         OTEditEntourageTitleViewController* controller = (OTEditEntourageTitleViewController *)destinationViewController;
         controller.delegate = self;
         controller.currentTitle = self.entourage.title;
+        controller.currentEntourage = self.entourage;
         return YES;
     }
     if([segue.identifier isEqualToString:@"DescriptionEditSegue"]) {
         OTEditEntourageDescViewController* controller = (OTEditEntourageDescViewController *)destinationViewController;
         controller.delegate = self;
         controller.currentDescription = self.entourage.desc;
+        controller.currentEntourage = self.entourage;
         return YES;
     }
     return NO;
@@ -56,8 +58,6 @@
 
 - (void)editDescription:(OTEntourage *)entourage {
     self.entourage = entourage;
-    
-    
     [self.owner performSegueWithIdentifier:@"DescriptionEditSegue" sender:self];
 }
 

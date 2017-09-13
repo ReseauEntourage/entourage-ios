@@ -168,11 +168,10 @@ Proposez une structure";
 "has_encountered" = "a rencontré";
 "here" = "ici";
 "their_message" = "Notes";
-"edit_demand_title" = "Paire de gants pour Gilles";
+"edit_demand_title" = "Qui veut aller au contact des personnes de la rue dans le quartier?";
 "edit_contribution_title" = "Titre de votre contribution*";
 "edit_entourage_title" = "Titre de votre %@*";
-"edit_demand_desc" = "Gilles passe la journée dehors la main tendue. Avec ce froid, il a les doigts tout engourdis. Qui aurait une paire de gants à donner ?
-(Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes)";
+"edit_demand_desc" = "Des voisins pourraient-ils m'aider à faire connaissance avec des personnes de la rue du quartier? Allons à leur rencontre ensemble pour leur offrir plus de chaleur humaine que n'en donne la météo !";
 "edit_contribution_desc" = "Je suis ancien employé de mairie et je peux aider dans des démarches administratives.
 (Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes.)";
 "invalidTitle" = "Titre invalide";

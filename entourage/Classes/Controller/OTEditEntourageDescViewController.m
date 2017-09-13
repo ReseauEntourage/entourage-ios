@@ -24,6 +24,10 @@
     [super viewDidLoad];
 
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
+    if([self.currentEntourage.type isEqualToString:@"ask_for_help"])
+        self.txtDescription.placeholder = OTLocalizedString(@"edit_demand_desc");
+    else
+        self.txtDescription.placeholder = OTLocalizedString(@"edit_contribution_desc");
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(doneEdit) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
