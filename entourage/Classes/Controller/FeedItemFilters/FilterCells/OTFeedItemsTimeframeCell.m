@@ -39,6 +39,15 @@
     NSIndexPath *indexPath = [self.tableDataSource.dataSource.tableView indexPathForCell:self];
     OTFeedItemTimeframeFilter *item = (OTFeedItemTimeframeFilter *)[self.tableDataSource getItemAtIndexPath:indexPath];
     [self activateButton:sender withFilter:item];
+    if(self.btnFirst.isSelected) {
+        [OTLogger logEvent:@"ClickFilter1Value"];
+    }
+    else if(self.btnSecond.isSelected) {
+        [OTLogger logEvent:@"ClickFilter2Value"];
+    }
+    else {
+        [OTLogger logEvent:@"ClickFilter3Value"];
+    }
 }
 
 #pragma mark - private methods
@@ -49,15 +58,12 @@
     [self.btnThird setSelected:self.btnThird == sender];
     NSArray *timeframes = self.tableDataSource.currentFilter.timeframes;
     if(self.btnFirst.isSelected) {
-        [OTLogger logEvent:@"ClickFilter1Value"];
         filter.timeframeInHours = [timeframes[0] intValue];
     }
     else if(self.btnSecond.isSelected) {
-        [OTLogger logEvent:@"ClickFilter2Value"];
         filter.timeframeInHours = [timeframes[1] intValue];
     }
     else {
-        [OTLogger logEvent:@"ClickFilter3Value"];
         filter.timeframeInHours = [timeframes[2] intValue];
     }
     self.btnFirst.titleLabel.font = self.btnFirst == sender ? TIMEFRAME_ACTIVE_FONT : TIMEFRAME_INACTIVE_FONT;
