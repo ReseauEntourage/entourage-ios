@@ -19,4 +19,5 @@
 
 - (void)configureWith:(OTSolidarityGuideFilterItem *)filter;
 
+
 @end
