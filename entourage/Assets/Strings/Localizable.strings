@@ -108,7 +108,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +";
 Déplacez la carte
 pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…
 
-Une structure manque sur la carte?
+Une structure manque sur la carte ?
 Proposez une structure";
 "no_data_guide_link" = "Proposez une structure";
 "want_to_join_tour" = "veut rejoindre votre maraude.";
@@ -168,10 +168,10 @@ Proposez une structure";
 "has_encountered" = "a rencontré";
 "here" = "ici";
 "their_message" = "Notes";
-"edit_demand_title" = "Qui veut aller au contact des personnes de la rue dans le quartier?";
+"edit_demand_title" = "Qui veut aller au contact des personnes de la rue dans le quartier ?";
 "edit_contribution_title" = "Titre de votre contribution*";
 "edit_entourage_title" = "Titre de votre %@*";
-"edit_demand_desc" = "Des voisins pourraient-ils m'aider à faire connaissance avec des personnes de la rue du quartier? Allons à leur rencontre ensemble pour leur offrir plus de chaleur humaine que n'en donne la météo !";
+"edit_demand_desc" = "Des voisins pourraient-ils m'aider à faire connaissance avec des personnes de la rue du quartier ? Allons à leur rencontre ensemble pour leur offrir plus de chaleur humaine que n'en donne la météo !";
 "edit_contribution_desc" = "Je suis ancien employé de mairie et je peux aider dans des démarches administratives.
 (Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes.)";
 "invalidTitle" = "Titre invalide";
@@ -262,7 +262,7 @@ Pourquoi rejoignez-vous cet entourage ? Ajoutez un petit mot !";
 "user_edit_saving" = "Sauvegarde en cours";
 "user_edit_saved_ok" = "Infos sauvegardées";
 "user_edit_saved_error" = "Erreur de sauvegarde";
-"user_edit_delete" = "Etes-vous sûr de vouloir supprimer votre compte?";
+"user_edit_delete" = "Etes-vous sûr de vouloir supprimer votre compte ?";
 "user_edit_delete_error" = "Erreur lors de la suppression du compte";
 "user_profile_error" = "Erreur lors de la récupération du profil";
 "user_edit_email" = "E-mail";
@@ -352,7 +352,7 @@ le + en bas à droite.
 "marauder" = "Maraudeur";
 "sympathizant" = "Sympathisant";
 
-"confirm_entourage_create" = "Souhaitez-vous créer une rencontre avec une personne de la rue, ou créer une %@ visible de tous?";
+"confirm_entourage_create" = "Souhaitez-vous créer une rencontre avec une personne de la rue, ou créer une %@ visible de tous ?";
 "continue" = "Continuer";
 "encounter" = "Rencontre";
 
