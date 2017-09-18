@@ -17,7 +17,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     OTEntourageInvitation *invitation = (OTEntourageInvitation *)[self.collectionDataSource getItemAtIndexPath:indexPath];
     
-    OTInvitationsCollectionViewCell *cell = (OTInvitationsCollectionViewCell *)[self.collectionDataSource.dataSource.collectionView dequeueReusableCellWithReuseIdentifier:@"InviteCell" forIndexPath:indexPath];
+    OTInvitationsCollectionViewCell *cell;
+    cell = (OTInvitationsCollectionViewCell *)[self.collectionDataSource.dataSource.collectionView dequeueReusableCellWithReuseIdentifier:@"InviteCell" forIndexPath:indexPath];
     [cell configureWith:invitation];
     return cell;
 }

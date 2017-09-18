@@ -82,6 +82,9 @@
 #import "OTGuideInfoBehavior.h"
 #import "OTEditEncounterBehavior.h"
 #import "OTTapViewBehavior.h"
+#import "OTToggleVisibleBehavior.h"
+#import "OTCollectionSourceBehavior.h"
+#import "OTHeatzonesCollectionSource.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -91,49 +94,66 @@
 #define LONGPRESS_DELTA 65.0f
 #define MAX_DISTANCE 250.0 //meters
 
-@interface OTMainViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate, OTOptionsDelegate, OTFeedItemsTableViewDelegate, OTTourCreatorDelegate, OTFeedItemQuitDelegate, EntourageEditorDelegate, OTFeedItemsFilterDelegate, OTSolidarityGuideFilterDelegate, OTNewsFeedsSourceDelegate, OTTourCreatorBehaviorDelegate>
+@interface OTMainViewController ()
+<
+    UIGestureRecognizerDelegate,
+    UIScrollViewDelegate,
+    OTOptionsDelegate,
+    OTFeedItemsTableViewDelegate,
+    OTTourCreatorDelegate,
+    OTFeedItemQuitDelegate,
+    EntourageEditorDelegate,
+    OTFeedItemsFilterDelegate,
+    OTSolidarityGuideFilterDelegate,
+    OTNewsFeedsSourceDelegate,
+    OTTourCreatorBehaviorDelegate,
+    OTHeatzonesCollectionViewDelegate
+>
 
-@property (nonatomic, weak) IBOutlet OTFeedItemsTableView *tableView;
-@property (nonatomic, weak) IBOutlet OTMapDelegateProxyBehavior* mapDelegateProxy;
-@property (nonatomic, weak) IBOutlet OTOverlayFeederBehavior* overlayFeeder;
-@property (nonatomic, weak) IBOutlet OTTapEntourageBehavior* tapEntourage;
-@property(nonatomic, weak) IBOutlet OTTapViewBehavior *tapViewBehavior;
-@property (nonatomic, weak) IBOutlet OTJoinBehavior* joinBehavior;
-@property (nonatomic, weak) IBOutlet OTStatusChangedBehavior* statusChangedBehavior;
-@property (nonatomic, weak) IBOutlet OTEditEntourageBehavior* editEntourgeBehavior;
-@property (nonatomic, weak) IBOutlet OTEditEncounterBehavior* editEncounterBehavior;
-@property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior* newsFeedsSourceBehavior;
-@property (nonatomic, weak) IBOutlet OTTourCreatorBehavior *tourCreatorBehavior;
-@property (nonatomic, weak) IBOutlet UIView *showSolidarityGuideView;
-@property (nonatomic, weak) IBOutlet UILabel *solidarityGuideLabel;
-@property (nonatomic, strong) MKMapView *mapView;
-@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
-@property (nonatomic) CLLocationCoordinate2D encounterLocation;
-@property (nonatomic, strong) OTToursMapDelegate *toursMapDelegate;
-@property (nonatomic, strong) OTGuideMapDelegate *guideMapDelegate;
-@property (nonatomic, strong) NSString *entourageType;
-@property (nonatomic, strong) NSMutableArray *encounters;
-@property (nonatomic, strong) WYPopoverController *popover;
-@property (nonatomic) BOOL isRegionSetted;
-@property (nonatomic, assign) CGPoint mapPoint;
-@property (nonatomic, strong) CLLocation *tappedLocation;
-@property (nonatomic) BOOL isTourListDisplayed;
-@property (nonatomic, weak) IBOutlet UIButton *launcherButton;
-@property (nonatomic, weak) IBOutlet UIButton *stopButton;
-@property (nonatomic, weak) IBOutlet UIButton *createEncounterButton;
-@property (nonatomic, weak) IBOutlet UIButton *backToNewsFeedsButton;
-@property (nonatomic, strong) NSArray *categories;
-@property (nonatomic, strong) NSArray *pois;
-@property (nonatomic, strong) NSMutableArray *markers;
-@property (nonatomic, weak) IBOutlet UIButton *nouveauxFeedItemsButton;
-@property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
-@property (nonatomic, strong) OTSolidarityGuideFilter *solidarityFilter;
-@property (nonatomic) BOOL isFirstLoad;
-@property (nonatomic) BOOL wasLoadedOnce;
-@property (nonatomic, weak) IBOutlet OTNoDataBehavior *noDataBehavior;
-@property (nonatomic, weak) IBOutlet OTMailSenderBehavior *mailSender;
-@property (nonatomic, weak) IBOutlet OTCustomSegmentedBehavior *customSegmentedBehavior;
-@property (nonatomic, weak) IBOutlet OTGuideInfoBehavior *guideInfoBehavior;
+@property (nonatomic, weak) IBOutlet OTFeedItemsTableView           *tableView;
+@property (nonatomic, weak) IBOutlet OTMapDelegateProxyBehavior     *mapDelegateProxy;
+@property (nonatomic, weak) IBOutlet OTOverlayFeederBehavior        *overlayFeeder;
+@property (nonatomic, weak) IBOutlet OTTapEntourageBehavior         *tapEntourage;
+@property (nonatomic, weak) IBOutlet OTTapViewBehavior              *tapViewBehavior;
+@property (nonatomic, weak) IBOutlet OTJoinBehavior                 *joinBehavior;
+@property (nonatomic, weak) IBOutlet OTStatusChangedBehavior        *statusChangedBehavior;
+@property (nonatomic, weak) IBOutlet OTEditEntourageBehavior        *editEntourgeBehavior;
+@property (nonatomic, weak) IBOutlet OTEditEncounterBehavior        *editEncounterBehavior;
+@property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior      *newsFeedsSourceBehavior;
+@property (nonatomic, weak) IBOutlet OTTourCreatorBehavior          *tourCreatorBehavior;
+@property (nonatomic, weak) IBOutlet UIView                         *showSolidarityGuideView;
+@property (nonatomic, weak) IBOutlet UILabel                        *solidarityGuideLabel;
+@property (nonatomic, strong) MKMapView                             *mapView;
+@property (nonatomic, strong) UITapGestureRecognizer                *tapGestureRecognizer;
+@property (nonatomic) CLLocationCoordinate2D                        encounterLocation;
+@property (nonatomic, strong) OTToursMapDelegate                    *toursMapDelegate;
+@property (nonatomic, strong) OTGuideMapDelegate                    *guideMapDelegate;
+@property (nonatomic, strong) NSString                              *entourageType;
+@property (nonatomic, strong) NSMutableArray                        *encounters;
+@property (nonatomic, strong) WYPopoverController                   *popover;
+@property (nonatomic) BOOL                                          isRegionSetted;
+@property (nonatomic, assign) CGPoint                               mapPoint;
+@property (nonatomic, strong) CLLocation                            *tappedLocation;
+@property (nonatomic) BOOL                                          isTourListDisplayed;
+@property (nonatomic, weak) IBOutlet UIButton                       *launcherButton;
+@property (nonatomic, weak) IBOutlet UIButton                       *stopButton;
+@property (nonatomic, weak) IBOutlet UIButton                       *createEncounterButton;
+@property (nonatomic, weak) IBOutlet UIButton                       *backToNewsFeedsButton;
+@property (nonatomic, strong) NSArray                               *categories;
+@property (nonatomic, strong) NSArray                               *pois;
+@property (nonatomic, strong) NSMutableArray                        *markers;
+@property (nonatomic, weak) IBOutlet UIButton                       *nouveauxFeedItemsButton;
+@property (nonatomic, strong) OTNewsFeedsFilter                     *currentFilter;
+@property (nonatomic, strong) OTSolidarityGuideFilter               *solidarityFilter;
+@property (nonatomic) BOOL                                          isFirstLoad;
+@property (nonatomic) BOOL                                          wasLoadedOnce;
+@property (nonatomic, weak) IBOutlet OTNoDataBehavior               *noDataBehavior;
+@property (nonatomic, weak) IBOutlet OTMailSenderBehavior           *mailSender;
+@property (nonatomic, weak) IBOutlet OTCustomSegmentedBehavior      *customSegmentedBehavior;
+@property (nonatomic, weak) IBOutlet OTGuideInfoBehavior            *guideInfoBehavior;
+@property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior      *toggleCollectionView;
+@property (nonatomic, strong) IBOutlet OTCollectionSourceBehavior   *heatzonesDataSource;
+@property (nonatomic, strong) IBOutlet OTHeatzonesCollectionSource  *heatzonesCollectionDataSource;
 
 
 @end
@@ -144,62 +164,112 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setup];
+    [[OTTutorialService new] showTutorial];
+}
+
+- (void)setup {
     self.solidarityGuideLabel.text = OTLocalizedString(@"map_options_show_guide");
     self.isFirstLoad = YES;
+    self.heatzonesCollectionDataSource.heatzonesDelegate = self;
+    [self.heatzonesCollectionDataSource initialize];
+    [self.toggleCollectionView initialize];
+    [self.toggleCollectionView toggle:NO animated:NO];
     [self.noDataBehavior initialize];
     [self.newsFeedsSourceBehavior initialize];
     [self.customSegmentedBehavior initialize];
     [self.tapViewBehavior initialize];
+    
     self.newsFeedsSourceBehavior.delegate = self;
     [self.tourCreatorBehavior initialize];
     self.tourCreatorBehavior.delegate = self;
     self.newsFeedsSourceBehavior.tableDelegate = self.tableView;
+    
     [self configureNavigationBar];
     self.currentFilter = [OTNewsFeedsFilter new];
     self.solidarityFilter = [OTSolidarityGuideFilter new];
     self.encounters = [NSMutableArray new];
     self.markers = [NSMutableArray new];
-    self.mapView = [[MKMapView alloc] init];
+    self.mapView = [MKMapView new];
     self.mapDelegateProxy.mapView = self.mapView;
     self.overlayFeeder.mapView = self.mapView;
     [self.mapDelegateProxy initialize];
     self.tapEntourage.mapView = self.mapView;
     self.toursMapDelegate = [[OTToursMapDelegate alloc] initWithMapController:self];
     self.guideMapDelegate = [[OTGuideMapDelegate alloc] initWithMapController:self];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTourConfirmation) name:@kNotificationLocalTourConfirmation object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushReceived) name:@kNotificationPushReceived object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageCreated:) name:kNotificationEntourageCreated object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceGetNewData) name:@kNotificationReloadData object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendCloseMail:) name:@kNotificationSendCloseMail object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToGuide) name:kSolidarityGuideNotification object:nil];
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
     [self configureMapView];
+    
     [self switchToNewsfeed];
     [self reloadFeeds];
+    
     self.backToNewsFeedsButton.hidden = YES;
-    [self.backToNewsFeedsButton addTarget:self action:@selector(leaveGuide) forControlEvents:UIControlEventTouchUpInside];
-    if ([OTOngoingTourService sharedInstance].isOngoing)
+    [self.backToNewsFeedsButton addTarget:self
+                                   action:@selector(leaveGuide)
+                         forControlEvents:UIControlEventTouchUpInside];
+    
+    if (OTSharedOngoingTour.isOngoing) {
         [self showNewTourOnGoing];
-    else
-        [self showToursMap];
-    [self clearMap];
-    if ([OTOngoingTourService sharedInstance].isOngoing) {
+        [self clearMap];
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = NO;
         self.stopButton.hidden = NO;
         [self feedMapViewWithEncounters];
-    }
-    else {
+    } else {
+        [self showToursMap];
+        [self clearMap];
         self.launcherButton.hidden = NO;
         self.stopButton.hidden = YES;
         self.createEncounterButton.hidden = YES;
     }
-    [[OTTutorialService new] showTutorial];
+    
+    [self addObservers];
+}
+
+- (void)addObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appWillEnterBackground:)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                            selector:@selector(showTourConfirmation) 
+                                                 name:@kNotificationLocalTourConfirmation 
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(zoomToCurrentLocation:) 
+                                                 name:@kNotificationShowCurrentLocation 
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pushReceived)
+                                                 name:@kNotificationPushReceived
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(locationUpdated:)
+                                                 name:kNotificationLocationUpdated
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(entourageCreated:)
+                                                 name:kNotificationEntourageCreated
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(forceGetNewData)
+                                                 name:@kNotificationReloadData
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(sendCloseMail:)
+                                                 name:@kNotificationSendCloseMail
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(switchToGuide)
+                                                 name:kSolidarityGuideNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateBadge)
+                                                 name:[kUpdateBadgeCountNotification copy]
+                                               object:nil];
+    
 }
 
 - (void)dealloc {
@@ -217,16 +287,30 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if(self.toursMapDelegate.isActive)
+    if (self.toursMapDelegate.isActive)
         [self reloadFeeds];
     else
         [self reloadPois];
-    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self
+                                               forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
 }
 
 - (IBAction)dismissFeedItemJoinRequestController {
     [self.tableView reloadData];
 }
+
+- (void)loadHeatzonesWithItems: (NSMutableArray *) itemsTapped {
+    NSMutableArray *feeds = [[NSMutableArray alloc] init];
+    for (OTEntourage *item in self.newsFeedsSourceBehavior.feedItems) {
+        for (CLLocation *coordinates in itemsTapped)
+            if(item.location.coordinate.latitude == coordinates.coordinate.latitude && item.location.coordinate.longitude == coordinates.coordinate.longitude)
+               [feeds addObject:item];
+    }
+    [self.toggleCollectionView toggle:[feeds count] > 0 animated:YES];
+    [self.heatzonesDataSource updateItems:feeds];
+    [self.heatzonesCollectionDataSource refresh];
+}
+
 
 - (void)switchToNewsfeed {
     [OTLogger logEvent:@"Screen06_1FeedView"];
@@ -243,8 +327,9 @@
     [self clearMap];
     [self feedMapWithFeedItems];
     self.showSolidarityGuideView.hidden = NO;
-    if (self.isTourListDisplayed)
+    if (self.isTourListDisplayed) {
         [self showToursList];
+    }
 }
 
 - (void)switchToGuide {
@@ -695,13 +780,17 @@
             [self showToursMap];
         }
         else {
-            if([self.tapEntourage hasTappedEntourage:sender]) {
+            if([self.tapEntourage hasTappedEntourage:sender].count > 0) {
                 [OTLogger logEvent:@"HeatzoneMapClick"];
                 [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.tapEntourage.tappedEntourage.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
-                [self showToursList];
+                if(!self.guideMapDelegate.isActive) {
+                    [self loadHeatzonesWithItems:[self.tapEntourage hasTappedEntourage:sender]];
+                }
             }
-            else
+            else {
+                [self.toggleCollectionView toggle:NO animated:YES];
                 [self showToursMap];
+            }
         }
     }
 }
