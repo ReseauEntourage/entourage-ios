@@ -1023,6 +1023,7 @@
 
 - (void)showToursList {
     [OTLogger logEvent:@"Screen06_1FeedView"];
+    [self.toggleCollectionView toggle:NO animated:NO];
     self.showSolidarityGuideView.hidden = YES;
     [self.noDataBehavior hideNoData];
     self.isTourListDisplayed = YES;
