@@ -81,6 +81,7 @@
 "create_encounter" = "Créer une rencontre";
 "create_demande" = "Créer une demande";
 "create_contribution" = "Créer une contribution";
+"create_action" = "Créer une action";
 "map_options_hide_poi" = "Masquer le guide de solidarité";
 "map_options_show_poi" = "Afficher le guide de solidarité";
 "map_options_show_guide" = "Voir les lieux solidaires";
