@@ -169,10 +169,12 @@
 
 - (void)updateEncounter:(UIBarButtonItem*)sender {
     sender.enabled = NO;
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     self.encounter.streetPersonName = self.nameTextField.text;
     self.encounter.message = self.messageTextView.textView.text;
     self.encounter.latitude = self.location.latitude;
     self.encounter.longitude = self.location.longitude;
+    self.encounter.sid = currentUser.sid;
     [SVProgressHUD show];
     [[OTEncounterService new] updateEncounter:self.encounter
                                   withSuccess:^(OTEncounter *updatedEncounter) {

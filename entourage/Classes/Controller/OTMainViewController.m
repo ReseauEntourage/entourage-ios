@@ -553,14 +553,10 @@
     return cellTitle;
 }
 
-- (void)displayEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view {
-    OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"OTMeetingCalloutViewController"];
-    controller.delegate = self;
-    OTEncounterAnnotation *encounterAnnotation = (OTEncounterAnnotation *)simpleAnnontation;
-    OTEncounter *encounter = encounterAnnotation.encounter;
-    [controller setEncounter:encounter];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-    [self presentViewController:navController animated:YES completion:nil];
+- (void)editEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view {
+    [self.editEncounterBehavior doEdit:simpleAnnontation.encounter
+                               forTour:self.tourCreatorBehavior.tour.uid
+                           andLocation:self.encounterLocation];
 }
 
 - (void)displayPoiDetails:(MKAnnotationView *)view {

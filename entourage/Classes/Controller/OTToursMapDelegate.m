@@ -51,7 +51,7 @@
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     [mapView deselectAnnotation:view.annotation animated:NO];
     if ([view.annotation isKindOfClass:[OTEncounterAnnotation class]])
-        [self.mapController displayEncounter:(OTEncounterAnnotation *)view.annotation withView:(MKAnnotationView *)view];
+        [self.mapController editEncounter:(OTEncounterAnnotation *)view.annotation withView:(MKAnnotationView *)view];
 }
 
 @end
