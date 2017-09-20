@@ -133,7 +133,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                success: ^(OTUser *user) {;
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    
-                                   user.phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
+                                   user.phone = [self.codeCountry stringByAppendingString:phone];
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil)
                                        loggedNumbers = [NSMutableArray new];
