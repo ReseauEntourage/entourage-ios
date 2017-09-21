@@ -34,6 +34,7 @@
 #define kWSKeyTitle @"title"
 #define kWSKeyName @"name"
 #define kWSKeyDescription @"description"
+#define kWSKeyCategory @"category"
 
 // Tour
 #define kWSKeyTour @"tour"

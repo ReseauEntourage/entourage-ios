@@ -10,6 +10,7 @@
 
 @interface OTEntourageEditItemCell : UITableViewCell
 
+@property (nonatomic, weak) IBOutlet UILabel *lblCategory;
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UILabel *lblDescription;
 

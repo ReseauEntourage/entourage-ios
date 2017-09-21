@@ -32,6 +32,7 @@
         self.desc = [dictionary stringForKey:kWSKeyDescription];
         self.type = [dictionary stringForKey:kWSKeyEntourageType];
         self.noPeople = [dictionary numberForKey:kWSNoPeople];
+        self.category = [dictionary stringForKey:kWSKeyCategory];
     }
     return self;
 }

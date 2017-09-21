@@ -42,6 +42,8 @@
         controller.currentDescription = self.entourage.desc;
         controller.currentEntourage = self.entourage;
         return YES;
+        
+        //TO DO Segue for category
     }
     return NO;
 }
@@ -59,6 +61,11 @@
 - (void)editDescription:(OTEntourage *)entourage {
     self.entourage = entourage;
     [self.owner performSegueWithIdentifier:@"DescriptionEditSegue" sender:self];
+}
+
+- (void)editCategory:(OTEntourage *)entourage {
+    self.entourage = entourage;
+   // [self.owner performSegueWithIdentifier:@"" sender:self];
 }
 
 #pragma mark - LocationSelectionDelegate

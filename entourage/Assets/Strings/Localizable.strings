@@ -199,6 +199,7 @@ Proposez une structure";
 // Entourage
 "entourages" = "Entourages";
 "myLocation" = "Ma position";
+"category" = "Catégorie";
 "searchLocationPlaceholder" = "Chercher ou déplacer la carte";
 "formater_by" = "%@ par ";
 "entourageCreated" = "Entourage créé";

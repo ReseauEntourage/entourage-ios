@@ -12,7 +12,8 @@
 #import "OTConsts.h"
 
 typedef enum {
-    EditEntourageItemTypeLocation = 0,
+    EditEntourageItemTypeCategory,
+    EditEntourageItemTypeLocation = 1,
     EditEntourageItemTypetitle,
     EditEntourageItemTypeDescription
 } EditEntourageItemType;
@@ -34,6 +35,7 @@ typedef enum {
     self.entourage.type = entourage.type;
     self.entourage.uid = entourage.uid;
     self.entourage.status = entourage.status;
+    self.entourage.category = entourage.category;
     [self updateLocationTitle];
     self.tblEditEntourage.dataSource = self;
     self.tblEditEntourage.delegate = self;
@@ -42,7 +44,7 @@ typedef enum {
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -50,17 +52,25 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *identifier = indexPath.section > 0 ? @"EntourageCell" : @"EntourageImageCell";
+    NSString *identifier = indexPath.section != 1  ? @"EntourageCell" : @"EntourageImageCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     switch (indexPath.section) {
         case 0:
-            [((OTEntourageEditItemImageCell*)cell) configureWith:OTLocalizedString(@"myLocation") andText:self.locationText andImageName:@"location"];
+            [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"category")
+                                                    andText:self.entourage.category];
             break;
         case 1:
-            [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"title") andText:self.entourage.title];
+            [((OTEntourageEditItemImageCell*)cell) configureWith:OTLocalizedString(@"myLocation")
+                                                         andText:self.locationText
+                                                    andImageName:@"location"];
             break;
         case 2:
-            [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"descriptionTitle") andText:self.entourage.desc];
+            [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"title")
+                                                    andText:self.entourage.title];
+            break;
+        case 3:
+            [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"descriptionTitle")
+                                                    andText:self.entourage.desc];
             break;
         default:
             break;
@@ -73,12 +83,15 @@ typedef enum {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0:
-            [self.editEntourageNavigation editLocation:self.entourage];
+            [self.editEntourageNavigation editCategory:self.entourage];
             break;
         case 1:
-            [self.editEntourageNavigation editTitle:self.entourage];
+            [self.editEntourageNavigation editLocation:self.entourage];
             break;
         case 2:
+            [self.editEntourageNavigation editTitle:self.entourage];
+            break;
+        case 3:
             [self.editEntourageNavigation editDescription:self.entourage];
             break;
         default:
@@ -102,12 +115,12 @@ typedef enum {
             self.locationText = placemark.thoroughfare;
         else
             self.locationText = placemark.locality;
-        [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
     }];
 }
 
 - (void)updateTexts {
-    [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, 2)] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, 3)] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end
