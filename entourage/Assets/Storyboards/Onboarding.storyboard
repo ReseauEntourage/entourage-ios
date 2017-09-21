@@ -15,7 +15,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Phone View Controller-->
+        <!--Owner-->
         <scene sceneID="qT4-XV-W5p">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="BbA-ED-vfm" customClass="OTPhoneViewController" sceneMemberID="viewController">
@@ -222,6 +222,12 @@ numéro de portable? </string>
                         <constraint firstAttribute="bottom" secondItem="w7j-ig-Zu8" secondAttribute="bottom" id="m5f-Qc-Qj3"/>
                     </constraints>
                 </view>
+                <customObject id="6kM-Sq-D23" customClass="OTCloseKeyboardOnTapBehavior">
+                    <connections>
+                        <outlet property="owner" destination="BbA-ED-vfm" id="061-Na-F85"/>
+                        <outletCollection property="inputViews" destination="8h5-LL-TYs" id="1Fv-06-cXS"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="760.5" y="-2472.5"/>
         </scene>
@@ -356,6 +362,12 @@ vérification</string>
                 <customObject id="13E-al-jIm" userLabel="Onboarding Navigation" customClass="OTOnboardingNavigationBehavior">
                     <connections>
                         <outlet property="owner" destination="ay8-4Z-lNJ" id="pFF-0E-jMY"/>
+                    </connections>
+                </customObject>
+                <customObject id="QD9-yl-4tv" customClass="OTCloseKeyboardOnTapBehavior">
+                    <connections>
+                        <outlet property="owner" destination="ay8-4Z-lNJ" id="7Tf-2j-vLz"/>
+                        <outletCollection property="inputViews" destination="pvY-e5-lmP" id="8vI-SG-AD6"/>
                     </connections>
                 </customObject>
             </objects>

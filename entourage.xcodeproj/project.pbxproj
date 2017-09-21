@@ -16,6 +16,7 @@
 		0135517C1EC30A4C00D99994 /* OTEditEncounterBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 0135517B1EC30A4C00D99994 /* OTEditEncounterBehavior.m */; };
 		0135517E1EC328BF00D99994 /* EncounterEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0135517D1EC328BF00D99994 /* EncounterEditor.storyboard */; };
 		01360A921E83EEFE0009607A /* OTChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A911E83EEFE0009607A /* OTChatDateCell.m */; };
+		0161DD0F1F729E470081AE71 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0161DD0E1F729E470081AE71 /* Intro.storyboard */; };
 		017C22D51E893CEF00B36AB5 /* OTMailSenderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C22D41E893CEF00B36AB5 /* OTMailSenderBehavior.m */; };
 		0188DF4D1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF4C1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m */; };
 		0188DF521E8D3CBE008311B6 /* OTSolidarityGuideFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF511E8D3CBE008311B6 /* OTSolidarityGuideFilter.m */; };
@@ -307,7 +308,6 @@
 		45CE5A601C5241AA00F68C24 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A531C5241AA00F68C24 /* Localizable.strings */; };
 		45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A631C5242FC00F68C24 /* Main.storyboard */; };
 		45CE5A671C5242FC00F68C24 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */; };
-		45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5A711C56961500F68C24 /* Intro.storyboard */; };
 		45D7891B1D2FFC3E005EBACC /* UIScrollView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D7891A1D2FFC3E005EBACC /* UIScrollView+entourage.m */; };
 		45E37E531CEE1F7D005C3175 /* OTFeedsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E37E521CEE1F7D005C3175 /* OTFeedsService.m */; };
 		45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E6FE111CAE42E700505660 /* TourConfirmation.storyboard */; };
@@ -395,6 +395,7 @@
 		0135517D1EC328BF00D99994 /* EncounterEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EncounterEditor.storyboard; sourceTree = "<group>"; };
 		01360A901E83EEFE0009607A /* OTChatDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTChatDateCell.h; path = ActiveFeedItem/ChatCells/OTChatDateCell.h; sourceTree = "<group>"; };
 		01360A911E83EEFE0009607A /* OTChatDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTChatDateCell.m; path = ActiveFeedItem/ChatCells/OTChatDateCell.m; sourceTree = "<group>"; };
+		0161DD0E1F729E470081AE71 /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
 		017C22D31E893CEF00B36AB5 /* OTMailSenderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMailSenderBehavior.h; path = Behaviors/Email/OTMailSenderBehavior.h; sourceTree = "<group>"; };
 		017C22D41E893CEF00B36AB5 /* OTMailSenderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMailSenderBehavior.m; path = Behaviors/Email/OTMailSenderBehavior.m; sourceTree = "<group>"; };
 		017C22D61E89454B00B36AB5 /* OTCloseReason.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTCloseReason.h; path = Feeds/OTCloseReason.h; sourceTree = "<group>"; };
@@ -958,7 +959,6 @@
 		45CE5A531C5241AA00F68C24 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Strings/Localizable.strings; sourceTree = "<group>"; };
 		45CE5A641C5242FC00F68C24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45CE5A651C5242FC00F68C24 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		45CE5A711C56961500F68C24 /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
 		45D789191D2FFC3E005EBACC /* UIScrollView+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+entourage.h"; sourceTree = "<group>"; };
 		45D7891A1D2FFC3E005EBACC /* UIScrollView+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+entourage.m"; sourceTree = "<group>"; };
 		45E37E511CEE1F7D005C3175 /* OTFeedsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedsService.h; sourceTree = "<group>"; };
@@ -2148,9 +2148,9 @@
 		45CE5A621C5242FC00F68C24 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				0161DD0E1F729E470081AE71 /* Intro.storyboard */,
 				1EC816951D9BB1150084BADB /* FeedChangeOptions.storyboard */,
 				1EFAC0C61D89242D00BE396F /* FeedItemFilters.storyboard */,
-				45CE5A711C56961500F68C24 /* Intro.storyboard */,
 				45CE5A631C5242FC00F68C24 /* Main.storyboard */,
 				1E3174901D10299400027824 /* QuitFeedItem.storyboard */,
 				45BC9BCD1CE32AE1000065B7 /* EntourageEditor.storyboard */,
@@ -2730,7 +2730,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				452FE3EB1CAD54CE00063334 /* Settings.storyboard in Resources */,
-				45CE5A721C56961500F68C24 /* Intro.storyboard in Resources */,
 				1E78B7E11D5134D20008C00E /* SF-UI-Text-LightItalic.otf in Resources */,
 				452FE3E61CAD544F00063334 /* UserProfile.storyboard in Resources */,
 				454E42A21D36B6F60051FDFF /* Rights.storyboard in Resources */,
@@ -2749,6 +2748,7 @@
 				01E3AA421EEEADC5007FB282 /* AssociationDetails.storyboard in Resources */,
 				45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */,
 				1E49BCB61D7D8B790024EDC1 /* Disclaimer.storyboard in Resources */,
+				0161DD0F1F729E470081AE71 /* Intro.storyboard in Resources */,
 				1E78B7E91D5134D20008C00E /* SF-UI-Text-UltrathinItalic.otf in Resources */,
 				4507017E1CCF494800432548 /* JoinFeedItem.storyboard in Resources */,
 				01A6DA8A1E8D089300089DC5 /* SolidarityGuideFilters.storyboard in Resources */,

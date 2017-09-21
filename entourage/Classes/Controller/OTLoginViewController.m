@@ -244,7 +244,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 {
     NSString *title = [self.pickerDataSource getTitleForRow:row];
     NSAttributedString *attString =
-    [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [[NSAttributedString alloc] initWithString:title
+                                    attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     return attString;
 }
 

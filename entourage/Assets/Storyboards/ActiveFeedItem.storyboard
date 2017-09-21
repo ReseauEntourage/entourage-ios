@@ -502,13 +502,13 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7L-pV-Coz">
-                                                                    <rect key="frame" x="98.333333333333343" y="90" width="78" height="18"/>
+                                                                    <rect key="frame" x="99" y="90" width="78" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gDf-jH-qfI">
-                                                                    <rect key="frame" x="34.666666666666686" y="108" width="206" height="18"/>
+                                                                    <rect key="frame" x="34.333333333333314" y="108" width="206" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -695,13 +695,13 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gES-5W-eoJ">
-                                                                    <rect key="frame" x="98.333333333333343" y="90" width="78" height="18"/>
+                                                                    <rect key="frame" x="99" y="90" width="78" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="npE-Su-q4O">
-                                                                    <rect key="frame" x="34.666666666666686" y="108" width="206" height="18"/>
+                                                                    <rect key="frame" x="34.333333333333314" y="108" width="206" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -810,7 +810,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZn-9Q-IvZ">
-                                                    <rect key="frame" x="183.33333333333334" y="7" width="49" height="30"/>
+                                                    <rect key="frame" x="183" y="7" width="49" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                     <state key="normal" title="Button"/>
@@ -1595,8 +1595,8 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oiF-fk-JqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="uEy-v0-8bg" userLabel="Close Keyboard On Tap" customClass="OTCloseKeyboardOnTapBehavior">
                     <connections>
-                        <outlet property="inputView" destination="uad-LQ-oUE" id="9r3-kr-MON"/>
                         <outlet property="owner" destination="e7P-HA-iRZ" id="Eod-4g-Dz1"/>
+                        <outletCollection property="inputViews" destination="uad-LQ-oUE" id="g4Q-Hm-SEJ"/>
                     </connections>
                 </customObject>
                 <customObject id="YeE-hv-RXH" userLabel="Contacts Table Cell Provider" customClass="OTContactsTableCellProviderBehavior">

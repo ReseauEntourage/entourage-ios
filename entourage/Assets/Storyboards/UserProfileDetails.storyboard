@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="arx-da-V22">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="arx-da-V22">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -161,6 +161,12 @@
                         <outlet property="scrollHeightConstraint" destination="xyu-yB-Jgx" id="fdF-2G-9V0"/>
                         <outlet property="scrollView" destination="7HB-dM-9Y5" id="AxB-A8-B6Z"/>
                         <outletCollection property="pinnedViews" destination="Isp-XB-Cj0" id="DSz-RZ-3gq"/>
+                    </connections>
+                </customObject>
+                <customObject id="m1j-IL-LAz" customClass="OTCloseKeyboardOnTapBehavior">
+                    <connections>
+                        <outlet property="owner" destination="xTS-x7-VFR" id="lLn-Eb-L2S"/>
+                        <outletCollection property="inputViews" destination="aSU-wJ-Ja3" id="jdc-It-At8"/>
                     </connections>
                 </customObject>
             </objects>
@@ -355,6 +361,13 @@
                         <outlet property="scrollHeightConstraint" destination="5UW-VA-I5s" id="ueP-7O-n59"/>
                         <outlet property="scrollView" destination="6F9-ol-rLc" id="vno-dP-Ku4"/>
                         <outletCollection property="pinnedViews" destination="g2M-ml-Dbj" id="iOz-Ok-Lph"/>
+                    </connections>
+                </customObject>
+                <customObject id="5AK-Re-7f0" customClass="OTCloseKeyboardOnTapBehavior">
+                    <connections>
+                        <outlet property="owner" destination="arx-da-V22" id="JRZ-7M-6iG"/>
+                        <outletCollection property="inputViews" destination="WdG-RU-kzQ" id="bVv-sE-eQc"/>
+                        <outletCollection property="inputViews" destination="2Jf-Al-b2c" id="A6m-jo-BrS"/>
                     </connections>
                 </customObject>
             </objects>
