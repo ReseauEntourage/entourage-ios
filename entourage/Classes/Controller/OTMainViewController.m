@@ -1034,11 +1034,12 @@
 }
 
 - (void)showToursMap {
-    if(self.guideMapDelegate.isActive)
+    if(self.guideMapDelegate.isActive) {
         [self.showSolidarityGuideView setHidden:YES];
-    else {
+        [self.toggleCollectionView toggle:NO animated:NO];
+    }else {
         [OTLogger logEvent:@"Screen06_2MapView"];
-         [self.showSolidarityGuideView setHidden:NO];
+        [self.showSolidarityGuideView setHidden:NO];
     }
     if(self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0)
         [self.noDataBehavior showNoData];

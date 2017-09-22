@@ -201,7 +201,7 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                            <rect key="frame" x="121" y="161" width="133" height="18"/>
+                            <rect key="frame" x="122" y="161" width="133" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="R2h-5U-huy"/>
                             </constraints>
@@ -843,10 +843,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xgS-MI-aio">
-                                <rect key="frame" x="16" y="483" width="343" height="90"/>
+                                <rect key="frame" x="16" y="478" width="343" height="95"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="hCg-42-f9c"/>
+                                    <constraint firstAttribute="height" constant="95" id="hCg-42-f9c"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cfl-WN-1iX">
                                     <size key="itemSize" width="323" height="83"/>
@@ -856,7 +856,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeatzoneCell" id="qkY-IH-s2c" customClass="OTHeatZoneCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="3.5" width="323" height="83"/>
+                                        <rect key="frame" x="0.0" y="6" width="323" height="83"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="323" height="83"/>
@@ -878,20 +878,20 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time - Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROt-f9-zNU">
-                                                            <rect key="frame" x="15" y="59" width="96.5" height="16"/>
+                                                            <rect key="frame" x="15" y="54" width="96.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="13"/>
                                                             <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="users" translatesAutoresizingMaskIntoConstraints="NO" id="W6f-lY-aNo">
-                                                            <rect key="frame" x="267" y="54.5" width="29" height="25"/>
+                                                            <rect key="frame" x="267" y="49.5" width="29" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="29" id="OVg-g4-088"/>
                                                                 <constraint firstAttribute="height" constant="25" id="Wo1-ao-1tv"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oef-Ka-s1w">
-                                                            <rect key="frame" x="298" y="58" width="10" height="18"/>
+                                                            <rect key="frame" x="298" y="53" width="10" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="UCX-Ek-iLa"/>
                                                                 <constraint firstAttribute="width" constant="10" id="m2T-Az-aeD"/>
@@ -907,7 +907,7 @@
                                                         <constraint firstItem="yTO-02-vnw" firstAttribute="top" secondItem="ckr-aN-4ol" secondAttribute="top" constant="13" id="A4C-RA-pmt"/>
                                                         <constraint firstItem="cW1-vi-3rp" firstAttribute="top" secondItem="yTO-02-vnw" secondAttribute="bottom" id="CNN-9x-6Zh"/>
                                                         <constraint firstItem="oef-Ka-s1w" firstAttribute="centerY" secondItem="W6f-lY-aNo" secondAttribute="centerY" id="Jrz-KU-DyU"/>
-                                                        <constraint firstAttribute="bottom" secondItem="ROt-f9-zNU" secondAttribute="bottom" constant="8" id="JvL-bs-mi3"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ROt-f9-zNU" secondAttribute="bottom" constant="13" id="JvL-bs-mi3"/>
                                                         <constraint firstItem="ROt-f9-zNU" firstAttribute="leading" secondItem="cW1-vi-3rp" secondAttribute="leading" id="MaS-iR-sSv"/>
                                                         <constraint firstItem="oef-Ka-s1w" firstAttribute="trailing" secondItem="cW1-vi-3rp" secondAttribute="trailing" id="S5I-Nz-hKF"/>
                                                         <constraint firstItem="cW1-vi-3rp" firstAttribute="trailing" secondItem="yTO-02-vnw" secondAttribute="trailing" id="Szb-Xb-H5O"/>
