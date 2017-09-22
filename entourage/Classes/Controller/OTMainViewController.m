@@ -458,6 +458,7 @@
 - (void)reloadFeeds {
     [self.tableView loadBegun];
     [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter];
+    [self.toggleCollectionView toggle:NO animated:NO];
 }
 
 - (void)reloadPois {
@@ -625,6 +626,7 @@
 - (void)clearMap {
     [self.mapView removeAnnotations:[self.mapView annotations]];
     [self.mapView removeOverlays:[self.mapView overlays]];
+    [self.toggleCollectionView toggle:NO animated:NO];
 }
 
 #pragma mark - OTNewsFeedsSourceDelegate
