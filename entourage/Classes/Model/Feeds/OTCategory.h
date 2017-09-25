@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *title_example;
 @property (nonatomic, strong) NSString *description_example;
+@property (nonatomic) BOOL isSelected;
 
 @end

@@ -10,16 +10,25 @@
 #import "OTCategory.h"
 #import "OTCategoryType.h"
 #import "OTCategoryFromJsonService.h"
+#import "OTCategoryEditCell.h"
+#import "OTCategoryDataSource.h"
 
 #define SECTION_HEIGHT 44.f
 #define CATEGORY_TITLE_TAG 1
 #define SUBCATEGORY_TITLE_TAG 2
 #define CATEGORY_ICON_TAG 3
+#define SELECTED_IMAGE_TAG 4
 
-@interface OTCategoryViewController () <UITableViewDelegate, UITableViewDataSource>
+#define SELECTED_IMAGE @"24HSelected"
+#define UNSELECTED_IMAGE @"24HInactive"
+
+
+@interface OTCategoryViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView *categoryTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+
+@property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
 
 @end
 
@@ -67,15 +76,32 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryCell"];
+    OTCategoryEditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryCell"];
     UILabel *titleLabel = [cell viewWithTag:SUBCATEGORY_TITLE_TAG];
     UIImageView *categoryIcon = [cell viewWithTag:CATEGORY_ICON_TAG];
     OTCategoryType * categoryType = self.dataSource[indexPath.section];
     OTCategory *category = categoryType.categories[indexPath.row];
     [titleLabel setText:category.title];
     [categoryIcon setImage:[UIImage imageNamed: [NSString stringWithFormat:@"%@_%@", categoryType.type, category.category]]];
+    [cell configureWith:category];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    OTCategoryType *item = self.dataSource[indexPath.section];
+    OTCategory *itemCategory = item.categories[indexPath.row];
+    itemCategory.isSelected = !itemCategory.isSelected;
+    for(OTCategoryType *categoryType in self.dataSource)
+        for(OTCategory *category in categoryType.categories)
+            if(category != itemCategory) {
+                category.isSelected = NO;
+            }
+    [tableView reloadData];
+
+}
+
+
+
 
 #pragma mark - UITableViewDataSource
 
@@ -87,6 +113,15 @@
     OTCategoryType *categoryType = self.dataSource[section];
     categoryType.isExpanded = !categoryType.isExpanded;
     [self.categoryTableView reloadData];
+}
+
+- (void)deselectOtherThan: (OTCategory *)categorySelected {
+    for(OTCategoryType *categoryType in self.dataSource) {
+        for(OTCategory *category in categoryType.categories) {
+            if(![categorySelected isEqual:category] && category.isSelected) 
+                category.isSelected = NO;
+        }
+    }
 }
 
 @end

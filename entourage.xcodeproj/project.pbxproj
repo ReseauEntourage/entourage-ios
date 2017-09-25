@@ -12,6 +12,9 @@
 		011DC1E61EFA969A00B46C5F /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 011DC1E51EFA969A00B46C5F /* CountryList.csv */; };
 		012DFB441F785B73002B85E8 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 012DFB431F785B73002B85E8 /* categories.json */; };
 		012DFB471F785F45002B85E8 /* categoryJson.json in Resources */ = {isa = PBXBuildFile; fileRef = 012DFB461F785F45002B85E8 /* categoryJson.json */; };
+		012DFB4B1F79293D002B85E8 /* OTCategoryEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 012DFB4A1F79293D002B85E8 /* OTCategoryEditCell.m */; };
+		012DFB4E1F796382002B85E8 /* OTCategoryCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 012DFB4D1F796382002B85E8 /* OTCategoryCellProvider.m */; };
+		012DFB511F7972FC002B85E8 /* OTCategoryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 012DFB501F7972FC002B85E8 /* OTCategoryDataSource.m */; };
 		0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */; };
 		0130138E1E7968B300C2504C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */; };
 		013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */; };
@@ -395,6 +398,12 @@
 		012DFB451F785BA9002B85E8 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = categories.json; path = Resources/categories.json; sourceTree = "<group>"; };
 		012DFB461F785F45002B85E8 /* categoryJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = categoryJson.json; path = Resources/categoryJson.json; sourceTree = "<group>"; };
 		012DFB481F785F7D002B85E8 /* categoryJson.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = categoryJson.json; path = Resources/categoryJson.json; sourceTree = "<group>"; };
+		012DFB491F79293D002B85E8 /* OTCategoryEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCategoryEditCell.h; sourceTree = "<group>"; };
+		012DFB4A1F79293D002B85E8 /* OTCategoryEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCategoryEditCell.m; sourceTree = "<group>"; };
+		012DFB4C1F796382002B85E8 /* OTCategoryCellProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCategoryCellProvider.h; sourceTree = "<group>"; };
+		012DFB4D1F796382002B85E8 /* OTCategoryCellProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCategoryCellProvider.m; sourceTree = "<group>"; };
+		012DFB4F1F7972FC002B85E8 /* OTCategoryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCategoryDataSource.h; sourceTree = "<group>"; };
+		012DFB501F7972FC002B85E8 /* OTCategoryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCategoryDataSource.m; sourceTree = "<group>"; };
 		013013891E7965CE00C2504C /* OTUnreadMessageCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessageCount.h; path = Feeds/OTUnreadMessageCount.h; sourceTree = "<group>"; };
 		0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUnreadMessageCount.m; path = Feeds/OTUnreadMessageCount.m; sourceTree = "<group>"; };
 		0130138C1E7968B300C2504C /* OTUnreadMessagesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessagesService.h; path = Services/OTUnreadMessagesService.h; sourceTree = "<group>"; };
@@ -1679,6 +1688,10 @@
 				D6C3409D1ECC5BBD006D0469 /* OTEditEntourageTableSource.m */,
 				D63E2D661ECD84E800EB571D /* OTEditEntourageNavigationBehavior.h */,
 				D63E2D671ECD84E800EB571D /* OTEditEntourageNavigationBehavior.m */,
+				012DFB4C1F796382002B85E8 /* OTCategoryCellProvider.h */,
+				012DFB4D1F796382002B85E8 /* OTCategoryCellProvider.m */,
+				012DFB4F1F7972FC002B85E8 /* OTCategoryDataSource.h */,
+				012DFB501F7972FC002B85E8 /* OTCategoryDataSource.m */,
 			);
 			name = FeedItems;
 			sourceTree = "<group>";
@@ -2591,6 +2604,8 @@
 				D6C340A11ECC5DA4006D0469 /* OTEntourageEditItemCell.m */,
 				D6C340A31ECC5E2A006D0469 /* OTEntourageEditItemImageCell.h */,
 				D6C340A41ECC5E2A006D0469 /* OTEntourageEditItemImageCell.m */,
+				012DFB491F79293D002B85E8 /* OTCategoryEditCell.h */,
+				012DFB4A1F79293D002B85E8 /* OTCategoryEditCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -3027,6 +3042,7 @@
 				1E09E07D1DB0B75000ABBBA1 /* OTTextWithCount.m in Sources */,
 				1E07DA361D58FB9A003119CC /* OTMessageDataSourceBehavior.m in Sources */,
 				1E2432BF1DA6CC8B000EF74F /* OTAddressBookPhone.m in Sources */,
+				012DFB4B1F79293D002B85E8 /* OTCategoryEditCell.m in Sources */,
 				1E488E201D4FBA4D00A2E5B0 /* OTUserPictureViewController.m in Sources */,
 				1EA51FCD1D366F6B00350255 /* OTPictureUploadService.m in Sources */,
 				1E2F292E1D4BF5FF00ABC68A /* OTContactsTableCellProviderBehavior.m in Sources */,
@@ -3108,6 +3124,7 @@
 				D6BDA6D21E9B818800ED5F22 /* OTSavedFilter.m in Sources */,
 				1E4937201DC74FFA001D4954 /* OTDebugLog.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
+				012DFB4E1F796382002B85E8 /* OTCategoryCellProvider.m in Sources */,
 				1D55D8D819E8514E006A2184 /* NSDictionary+Parsing.m in Sources */,
 				1E5C30241D6F6CE100E10770 /* OTMembersTableDataSource.m in Sources */,
 				1E08A3331D5E06B900D96B05 /* OTUserProfileBehavior.m in Sources */,
@@ -3232,6 +3249,7 @@
 				1EFAC0ED1D8928E200BE396F /* OTMyEntouragesFilter.m in Sources */,
 				454C8F4D1C4D20EA001362B2 /* UIColor+entourage.m in Sources */,
 				1E5F79881D5A12560005003C /* OTCollectionSourceBehavior.m in Sources */,
+				012DFB511F7972FC002B85E8 /* OTCategoryDataSource.m in Sources */,
 				1E9003691D34FAAB004E18BC /* OTBehavior.m in Sources */,
 				2EDA5F0A1CB67F3500849172 /* OTBaseMapDelegate.m in Sources */,
 				1EEFFE441DCB9D45003A32A1 /* OTNewsFeedsSourceBehavior.m in Sources */,
