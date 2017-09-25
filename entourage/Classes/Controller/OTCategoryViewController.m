@@ -7,11 +7,12 @@
 //
 
 #import "OTCategoryViewController.h"
-#import "OTCategory.h"
 #import "OTCategoryType.h"
 #import "OTCategoryFromJsonService.h"
 #import "OTCategoryEditCell.h"
-#import "OTCategoryDataSource.h"
+#import "UIColor+entourage.h"
+#import "OTConsts.h"
+#import "UIBarButtonItem+factory.h"
 
 #define SECTION_HEIGHT 44.f
 #define CATEGORY_TITLE_TAG 1
@@ -36,6 +37,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(saveNewCategory) colored:[UIColor appOrangeColor]];
+    [self.navigationItem setRightBarButtonItem:menuButton];
     self.dataSource = [OTCategoryFromJsonService getData];
     [self.categoryTableView reloadData];
 }
@@ -96,6 +100,7 @@
             if(category != itemCategory) {
                 category.isSelected = NO;
             }
+    self.selectedCategory = itemCategory;
     [tableView reloadData];
 
 }
@@ -115,13 +120,12 @@
     [self.categoryTableView reloadData];
 }
 
-- (void)deselectOtherThan: (OTCategory *)categorySelected {
-    for(OTCategoryType *categoryType in self.dataSource) {
-        for(OTCategory *category in categoryType.categories) {
-            if(![categorySelected isEqual:category] && category.isSelected) 
-                category.isSelected = NO;
-        }
+- (void)saveNewCategory {
+    if ([self.categorySelectionDelegate respondsToSelector:@selector(didSelectCategory:)]) {
+        [self.categorySelectionDelegate didSelectCategory:self.selectedCategory];
     }
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 @end

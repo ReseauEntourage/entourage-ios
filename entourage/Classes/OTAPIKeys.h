@@ -34,7 +34,7 @@
 #define kWSKeyTitle @"title"
 #define kWSKeyName @"name"
 #define kWSKeyDescription @"description"
-#define kWSKeyCategory @"category"
+#define kWSKeyCategory @"display_category"
 
 //Category
 #define kWSKeyEntourageCategory @"category"

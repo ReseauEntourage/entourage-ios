@@ -57,7 +57,7 @@ typedef enum {
     switch (indexPath.section) {
         case 0:
             [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"category")
-                                                    andText:self.entourage.category];
+                                                    andText:self.entourage.category.title];
             break;
         case 1:
             [((OTEntourageEditItemImageCell*)cell) configureWith:OTLocalizedString(@"myLocation")
@@ -120,7 +120,7 @@ typedef enum {
 }
 
 - (void)updateTexts {
-    [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, 3)] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end

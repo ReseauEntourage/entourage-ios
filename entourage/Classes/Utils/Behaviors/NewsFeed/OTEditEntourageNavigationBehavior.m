@@ -13,7 +13,13 @@
 #import "OTEditEntourageDescViewController.h"
 #import "OTCategoryViewController.h"
 
-@interface OTEditEntourageNavigationBehavior () < LocationSelectionDelegate, EditTitleDelegate, EditDescriptionDelegate>
+@interface OTEditEntourageNavigationBehavior ()
+<
+    LocationSelectionDelegate,
+    EditTitleDelegate,
+    EditDescriptionDelegate,
+    CategorySelectionDelegate
+>
 
 @property (nonatomic, strong) OTEntourage *entourage;
 
@@ -25,7 +31,8 @@
     UIViewController *destinationViewController = segue.destinationViewController;
     if([segue.identifier isEqualToString:@"CategoryEditSegue"]) {
         OTCategoryViewController* controller = (OTCategoryViewController *)destinationViewController;
-        
+        controller.categorySelectionDelegate = self;
+        controller.selectedCategory = self.entourage.category;
         return YES;
     }
     if([segue.identifier isEqualToString:@"EditLocation"]) {
@@ -68,7 +75,7 @@
 }
 
 - (void)editCategory:(OTEntourage *)entourage {
-    //self.entourage = entourage;
+    self.entourage = entourage;
     [self.owner performSegueWithIdentifier:@"CategoryEditSegue" sender:self];
 }
 
@@ -90,6 +97,13 @@
 
 - (void)descriptionEdited:(NSString *)description {
     self.entourage.desc = description;
+    [self.editEntourageSource updateTexts];
+}
+
+#pragma mark - CategorySelectionDelegate
+
+- (void)didSelectCategory:(OTCategory *)category {
+    self.entourage.category = category;
     [self.editEntourageSource updateTexts];
 }
 
