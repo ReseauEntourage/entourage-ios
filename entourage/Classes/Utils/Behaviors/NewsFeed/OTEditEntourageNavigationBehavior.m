@@ -11,6 +11,7 @@
 #import "OTEditEntourageTableSource.h"
 #import "OTEditEntourageTitleViewController.h"
 #import "OTEditEntourageDescViewController.h"
+#import "OTCategoryViewController.h"
 
 @interface OTEditEntourageNavigationBehavior () < LocationSelectionDelegate, EditTitleDelegate, EditDescriptionDelegate>
 
@@ -22,6 +23,11 @@
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
     UIViewController *destinationViewController = segue.destinationViewController;
+    if([segue.identifier isEqualToString:@"CategoryEditSegue"]) {
+        OTCategoryViewController* controller = (OTCategoryViewController *)destinationViewController;
+        
+        return YES;
+    }
     if([segue.identifier isEqualToString:@"EditLocation"]) {
         [OTLogger logEvent:@"ChangeLocationClick"];
         OTLocationSelectorViewController* controller = (OTLocationSelectorViewController *)destinationViewController;
@@ -42,8 +48,6 @@
         controller.currentDescription = self.entourage.desc;
         controller.currentEntourage = self.entourage;
         return YES;
-        
-        //TO DO Segue for category
     }
     return NO;
 }
@@ -64,8 +68,8 @@
 }
 
 - (void)editCategory:(OTEntourage *)entourage {
-    self.entourage = entourage;
-   // [self.owner performSegueWithIdentifier:@"" sender:self];
+    //self.entourage = entourage;
+    [self.owner performSegueWithIdentifier:@"CategoryEditSegue" sender:self];
 }
 
 #pragma mark - LocationSelectionDelegate

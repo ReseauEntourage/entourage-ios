@@ -10,6 +10,8 @@
 		011270621E9D1751006ADA79 /* OTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 011270611E9D1751006ADA79 /* OTTextView.m */; };
 		011DC1E01EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */; };
 		011DC1E61EFA969A00B46C5F /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 011DC1E51EFA969A00B46C5F /* CountryList.csv */; };
+		012DFB441F785B73002B85E8 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 012DFB431F785B73002B85E8 /* categories.json */; };
+		012DFB471F785F45002B85E8 /* categoryJson.json in Resources */ = {isa = PBXBuildFile; fileRef = 012DFB461F785F45002B85E8 /* categoryJson.json */; };
 		0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */; };
 		0130138E1E7968B300C2504C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */; };
 		013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013013931E7AAA3B00C2504C /* OTConfirmCloseViewController.m */; };
@@ -17,9 +19,10 @@
 		0135517E1EC328BF00D99994 /* EncounterEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0135517D1EC328BF00D99994 /* EncounterEditor.storyboard */; };
 		01360A921E83EEFE0009607A /* OTChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A911E83EEFE0009607A /* OTChatDateCell.m */; };
 		015CA75A1F74037100318F4C /* OTCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CA7591F74037100318F4C /* OTCategoryViewController.m */; };
-		015CA75D1F7403C700318F4C /* OTCategoryExpandableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CA75C1F7403C700318F4C /* OTCategoryExpandableCell.m */; };
-		015CA7601F7403DF00318F4C /* OTCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CA75F1F7403DF00318F4C /* OTCategoryCell.m */; };
 		0161DD0F1F729E470081AE71 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0161DD0E1F729E470081AE71 /* Intro.storyboard */; };
+		017845D21F78493E0046BD81 /* OTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 017845D11F78493E0046BD81 /* OTCategory.m */; };
+		017845D51F7849560046BD81 /* OTCategoryType.m in Sources */ = {isa = PBXBuildFile; fileRef = 017845D41F7849560046BD81 /* OTCategoryType.m */; };
+		017845D81F784C9D0046BD81 /* OTCategoryFromJsonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 017845D71F784C9D0046BD81 /* OTCategoryFromJsonService.m */; };
 		017C22D51E893CEF00B36AB5 /* OTMailSenderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C22D41E893CEF00B36AB5 /* OTMailSenderBehavior.m */; };
 		0188DF4D1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF4C1E8D39B7008311B6 /* OTSolidarityGuideFiltersViewController.m */; };
 		0188DF521E8D3CBE008311B6 /* OTSolidarityGuideFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF511E8D3CBE008311B6 /* OTSolidarityGuideFilter.m */; };
@@ -387,6 +390,11 @@
 		011DC1DE1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTCountryCodePickerViewDataSource.h; path = Behaviors/OTCountryCodePickerViewDataSource.h; sourceTree = "<group>"; };
 		011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTCountryCodePickerViewDataSource.m; path = Behaviors/OTCountryCodePickerViewDataSource.m; sourceTree = "<group>"; };
 		011DC1E51EFA969A00B46C5F /* CountryList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CountryList.csv; path = entourage/CountryList.csv; sourceTree = "<group>"; };
+		012DFB3F1F7855D2002B85E8 /* category.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = category.rtf; path = Resources/category.rtf; sourceTree = "<group>"; };
+		012DFB431F785B73002B85E8 /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = categories.json; path = Resources/categories.json; sourceTree = "<group>"; };
+		012DFB451F785BA9002B85E8 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = categories.json; path = Resources/categories.json; sourceTree = "<group>"; };
+		012DFB461F785F45002B85E8 /* categoryJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = categoryJson.json; path = Resources/categoryJson.json; sourceTree = "<group>"; };
+		012DFB481F785F7D002B85E8 /* categoryJson.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = categoryJson.json; path = Resources/categoryJson.json; sourceTree = "<group>"; };
 		013013891E7965CE00C2504C /* OTUnreadMessageCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessageCount.h; path = Feeds/OTUnreadMessageCount.h; sourceTree = "<group>"; };
 		0130138A1E7965CE00C2504C /* OTUnreadMessageCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTUnreadMessageCount.m; path = Feeds/OTUnreadMessageCount.m; sourceTree = "<group>"; };
 		0130138C1E7968B300C2504C /* OTUnreadMessagesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTUnreadMessagesService.h; path = Services/OTUnreadMessagesService.h; sourceTree = "<group>"; };
@@ -400,11 +408,13 @@
 		01360A911E83EEFE0009607A /* OTChatDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTChatDateCell.m; path = ActiveFeedItem/ChatCells/OTChatDateCell.m; sourceTree = "<group>"; };
 		015CA7581F74037100318F4C /* OTCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTCategoryViewController.h; sourceTree = "<group>"; };
 		015CA7591F74037100318F4C /* OTCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTCategoryViewController.m; sourceTree = "<group>"; };
-		015CA75B1F7403C700318F4C /* OTCategoryExpandableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTCategoryExpandableCell.h; sourceTree = "<group>"; };
-		015CA75C1F7403C700318F4C /* OTCategoryExpandableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTCategoryExpandableCell.m; sourceTree = "<group>"; };
-		015CA75E1F7403DF00318F4C /* OTCategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTCategoryCell.h; sourceTree = "<group>"; };
-		015CA75F1F7403DF00318F4C /* OTCategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTCategoryCell.m; sourceTree = "<group>"; };
 		0161DD0E1F729E470081AE71 /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
+		017845D01F78493E0046BD81 /* OTCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OTCategory.h; path = Feeds/OTCategory.h; sourceTree = "<group>"; };
+		017845D11F78493E0046BD81 /* OTCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = OTCategory.m; path = Feeds/OTCategory.m; sourceTree = "<group>"; };
+		017845D31F7849560046BD81 /* OTCategoryType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OTCategoryType.h; path = Feeds/OTCategoryType.h; sourceTree = "<group>"; };
+		017845D41F7849560046BD81 /* OTCategoryType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = OTCategoryType.m; path = Feeds/OTCategoryType.m; sourceTree = "<group>"; };
+		017845D61F784C9D0046BD81 /* OTCategoryFromJsonService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OTCategoryFromJsonService.h; path = Services/OTCategoryFromJsonService.h; sourceTree = "<group>"; };
+		017845D71F784C9D0046BD81 /* OTCategoryFromJsonService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = OTCategoryFromJsonService.m; path = Services/OTCategoryFromJsonService.m; sourceTree = "<group>"; };
 		017C22D31E893CEF00B36AB5 /* OTMailSenderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTMailSenderBehavior.h; path = Behaviors/Email/OTMailSenderBehavior.h; sourceTree = "<group>"; };
 		017C22D41E893CEF00B36AB5 /* OTMailSenderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTMailSenderBehavior.m; path = Behaviors/Email/OTMailSenderBehavior.m; sourceTree = "<group>"; };
 		017C22D61E89454B00B36AB5 /* OTCloseReason.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTCloseReason.h; path = Feeds/OTCloseReason.h; sourceTree = "<group>"; };
@@ -1305,6 +1315,8 @@
 				1E9511311E601C5C00CF05BB /* OTLogger.m */,
 				0130138C1E7968B300C2504C /* OTUnreadMessagesService.h */,
 				0130138D1E7968B300C2504C /* OTUnreadMessagesService.m */,
+				017845D61F784C9D0046BD81 /* OTCategoryFromJsonService.h */,
+				017845D71F784C9D0046BD81 /* OTCategoryFromJsonService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1674,7 +1686,9 @@
 		1E78B7AF1D5133970008C00E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				012DFB461F785F45002B85E8 /* categoryJson.json */,
 				1E78B7B01D51339E0008C00E /* Fonts */,
+				012DFB431F785B73002B85E8 /* categories.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2217,6 +2231,10 @@
 				45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */,
 				1E8E16E71D5A3814005C42ED /* OTEntourageInvitation.h */,
 				1E8E16E81D5A3814005C42ED /* OTEntourageInvitation.m */,
+				017845D01F78493E0046BD81 /* OTCategory.h */,
+				017845D11F78493E0046BD81 /* OTCategory.m */,
+				017845D31F7849560046BD81 /* OTCategoryType.h */,
+				017845D41F7849560046BD81 /* OTCategoryType.m */,
 			);
 			name = Entourage;
 			sourceTree = "<group>";
@@ -2427,6 +2445,9 @@
 		6B92CA9519A7461C004E8C9B = {
 			isa = PBXGroup;
 			children = (
+				012DFB481F785F7D002B85E8 /* categoryJson.json */,
+				012DFB451F785BA9002B85E8 /* categories.json */,
+				012DFB3F1F7855D2002B85E8 /* category.rtf */,
 				011DC1E51EFA969A00B46C5F /* CountryList.csv */,
 				1E78B7AF1D5133970008C00E /* Resources */,
 				6B92CAA719A7461C004E8C9B /* entourage */,
@@ -2570,10 +2591,6 @@
 				D6C340A11ECC5DA4006D0469 /* OTEntourageEditItemCell.m */,
 				D6C340A31ECC5E2A006D0469 /* OTEntourageEditItemImageCell.h */,
 				D6C340A41ECC5E2A006D0469 /* OTEntourageEditItemImageCell.m */,
-				015CA75B1F7403C700318F4C /* OTCategoryExpandableCell.h */,
-				015CA75C1F7403C700318F4C /* OTCategoryExpandableCell.m */,
-				015CA75E1F7403DF00318F4C /* OTCategoryCell.h */,
-				015CA75F1F7403DF00318F4C /* OTCategoryCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -2744,6 +2761,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				012DFB471F785F45002B85E8 /* categoryJson.json in Resources */,
+				012DFB441F785B73002B85E8 /* categories.json in Resources */,
 				452FE3EB1CAD54CE00063334 /* Settings.storyboard in Resources */,
 				1E78B7E11D5134D20008C00E /* SF-UI-Text-LightItalic.otf in Resources */,
 				452FE3E61CAD544F00063334 /* UserProfile.storyboard in Resources */,
@@ -2953,7 +2972,6 @@
 				1E4F56221DB64C9100AD0CAC /* OTLocationSelectorViewController.m in Sources */,
 				1E2F29181D4BDAEF00ABC68A /* OTTableCellProviderBehavior.m in Sources */,
 				DBBE8AD619E85EA400FA218E /* OTMyMeetingsViewController.m in Sources */,
-				015CA75D1F7403C700318F4C /* OTCategoryExpandableCell.m in Sources */,
 				1EEFFE4A1DCB9D7B003A32A1 /* OTPublicInfoCellProvider.m in Sources */,
 				1E87671B1E5AEFBA0080486A /* OTTutorial4ViewController.m in Sources */,
 				4500115E1CCE5BD2004754DF /* OTTourCreatorViewController.m in Sources */,
@@ -3050,7 +3068,6 @@
 				01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */,
 				1E488E091D4FB67200A2E5B0 /* OTUserEmailViewController.m in Sources */,
 				1E51E01E1E55A37F00D4EDA6 /* OTBottomScrollBehavior.m in Sources */,
-				015CA7601F7403DF00318F4C /* OTCategoryCell.m in Sources */,
 				45D7891B1D2FFC3E005EBACC /* UIScrollView+entourage.m in Sources */,
 				0A94B53E1B8F194700402AF3 /* OTTourPoint.m in Sources */,
 				2EDFADDA1CAE84D000B66026 /* OTAboutItem.m in Sources */,
@@ -3082,6 +3099,7 @@
 				1E37C32B1DC0E67D00477090 /* OTPublicInfoDataSource.m in Sources */,
 				1E22727E1E2E25270053365E /* OTAssociationsService.m in Sources */,
 				1E2F29241D4BF0DF00ABC68A /* OTTableDataSourceBehavior.m in Sources */,
+				017845D51F7849560046BD81 /* OTCategoryType.m in Sources */,
 				2EDA5F111CB68BE200849172 /* OTGuideMapDelegate.m in Sources */,
 				453BB3371D2E2831002F9255 /* OTOnboardingService.m in Sources */,
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
@@ -3112,6 +3130,7 @@
 				1EA12BFF1E2CF649009EAF97 /* OTSelectAssociationViewController.m in Sources */,
 				D6D21C771E853D7D003E4D2D /* NSDate+OTFormatter.m in Sources */,
 				1E2F291E1D4BDF3600ABC68A /* OTDataSourceBehavior.m in Sources */,
+				017845D81F784C9D0046BD81 /* OTCategoryFromJsonService.m in Sources */,
 				1E2AE6A01DE466DC00FA9F70 /* OTMailTextCheckBehavior.m in Sources */,
 				015CA75A1F74037100318F4C /* OTCategoryViewController.m in Sources */,
 				4525EB311CA46082006784E6 /* OTSettingsViewController.m in Sources */,
@@ -3228,6 +3247,7 @@
 				1E66936C1D85DEEB00F9C03D /* OTTapEntourageBehavior.m in Sources */,
 				1EFAC0D81D89248100BE396F /* OTFeedItemFiltersViewController.m in Sources */,
 				45EB70DA1CE5F0CC00EB2CD1 /* OTEntourage.m in Sources */,
+				017845D21F78493E0046BD81 /* OTCategory.m in Sources */,
 				1E488E211D4FBA4D00A2E5B0 /* OTPicturePreviewViewController.m in Sources */,
 				1E2432BE1DA6CC8B000EF74F /* OTAddressBookItem.m in Sources */,
 			);

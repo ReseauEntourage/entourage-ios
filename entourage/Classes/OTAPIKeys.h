@@ -36,6 +36,12 @@
 #define kWSKeyDescription @"description"
 #define kWSKeyCategory @"category"
 
+//Category
+#define kWSKeyEntourageCategory @"category"
+#define kWSKeyCategoryTitle @"title"
+#define kWSKeyCategoryExampleTitle @"title_example"
+#define kWSKeyCategoryExampleDescription @"description_example"
+
 // Tour
 #define kWSKeyTour @"tour"
 #define kWSKeyStartDate @"start_time"
