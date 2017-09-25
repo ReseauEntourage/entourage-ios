@@ -14,6 +14,7 @@
 #define SECTION_HEIGHT 44.f
 #define CATEGORY_TITLE_TAG 1
 #define SUBCATEGORY_TITLE_TAG 2
+#define CATEGORY_ICON_TAG 3
 
 @interface OTCategoryViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -51,6 +52,8 @@
     UIButton *sectionButton = [[UIButton alloc] initWithFrame:headerView.bounds];
     [sectionButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     sectionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [sectionButton.titleLabel setFont:[UIFont fontWithName:@"SFUIText-Semibold" size:15]];
+    [sectionButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 0.0)];
     [sectionButton setTitle:[categoryType.type isEqualToString:@"ask_for_help"] ? @"JE CHERCHE..." : @"JE ME PROPOSE DE…"
                    forState:UIControlStateNormal];
     sectionButton.tag = section;
@@ -66,11 +69,11 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryCell"];
     UILabel *titleLabel = [cell viewWithTag:SUBCATEGORY_TITLE_TAG];
-    
+    UIImageView *categoryIcon = [cell viewWithTag:CATEGORY_ICON_TAG];
     OTCategoryType * categoryType = self.dataSource[indexPath.section];
     OTCategory *category = categoryType.categories[indexPath.row];
     [titleLabel setText:category.title];
-    
+    [categoryIcon setImage:[UIImage imageNamed: [NSString stringWithFormat:@"%@_%@", categoryType.type, category.category]]];
     return cell;
 }
 
