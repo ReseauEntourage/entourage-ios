@@ -32,7 +32,15 @@
 }
 
 - (NSString *)categoryIconSource {
-    return @"";
+    NSString *source;
+    if ([self.tour.type isEqualToString:@"barehands"]) {
+        source = @"social_tour_icon";
+    } else if ([self.tour.type isEqualToString:@"medical"]) {
+        source = @"medical_tour_icon";
+    } else if ([self.tour.type isEqualToString:@"alimentary"]) {
+        source = @"distributive_tour_icon";
+    }
+    return source;
 }
 
 - (NSString *)navigationTitle {
