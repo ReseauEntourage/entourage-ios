@@ -105,11 +105,6 @@
 
 }
 
-
-
-
-#pragma mark - UITableViewDataSource
-
 #pragma mark - private methods
 
 - (void)tapCategory:(UIButton *)sender {
@@ -125,6 +120,10 @@
         [self.categorySelectionDelegate didSelectCategory:self.selectedCategory];
     }
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)openLink:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://blog.entourage.social/2017/04/28/quelles-actions-faire-avec-entourage/"]];
 }
 
 
