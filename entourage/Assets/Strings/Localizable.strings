@@ -176,6 +176,7 @@ Proposez une structure";
 "edit_contribution_desc" = "Je suis ancien employé de mairie et je peux aider dans des démarches administratives.
 (Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes.)";
 "invalidTitle" = "Titre invalide";
+"categoryNotSelected" = "Renseignez une catégorie pour votre action";
 "title" = "Titre";
 "demande" = "Demande";
 "ask_for_help" = "Demande";

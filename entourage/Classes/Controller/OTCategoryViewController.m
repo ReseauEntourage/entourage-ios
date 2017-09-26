@@ -29,8 +29,6 @@
 @property (nonatomic, weak) IBOutlet UITableView *categoryTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
-@property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
-
 @end
 
 @implementation OTCategoryViewController

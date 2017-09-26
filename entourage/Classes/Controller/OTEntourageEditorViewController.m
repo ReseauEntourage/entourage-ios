@@ -59,7 +59,7 @@
 }
 
 - (void)sendEntourage:(UIButton*)sender {
-    if(![self isTitleValid])
+    if(![self isTitleValid] && ![self isCategorySelected])
         return;
     if(self.entourage.uid)
         [self updateEntourage:sender];
@@ -75,6 +75,21 @@
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)isCategorySelected {
+    if (!self.editTableSource.entourage.category.length) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"categoryNotSelected")
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * _Nonnull action) {}];
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
         return NO;
     }
     return YES;
