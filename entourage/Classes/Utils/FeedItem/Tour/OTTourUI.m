@@ -31,6 +31,10 @@
     return @"";
 }
 
+- (NSString *)categoryIconSource {
+    return @"";
+}
+
 - (NSString *)navigationTitle {
     return OTLocalizedString(@"tour");
 }

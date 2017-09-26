@@ -18,6 +18,7 @@
     self.summaryProvider.btnAvatar = self.btnAvatar;
     self.summaryProvider.lblTimeDistance = self.lblTimeDistance;
     self.summaryProvider.imgAssociation = self.imgAssociation;
+    self.summaryProvider.imgCategory = self.imgCategory;
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
 }

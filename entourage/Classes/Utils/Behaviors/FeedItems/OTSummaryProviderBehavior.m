@@ -52,6 +52,8 @@
     }
     self.imgAssociation.hidden = feedItem.author.partner == nil;
     [self.imgAssociation setupFromUrl:feedItem.author.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
+    NSString *source = [uiDelegate categoryIconSource];
+    [self.imgCategory setImage:[UIImage imageNamed:source]];
 }
 
 - (void)clearConfiguration {
@@ -61,6 +63,8 @@
     self.btnAvatar = nil;
     self.lblTimeDistance = nil;
     self.imgAssociation = nil;
+    self.imgCategory = nil;
+    self.imgCategory = nil;
     [self configureWith:nil];
 }
 
