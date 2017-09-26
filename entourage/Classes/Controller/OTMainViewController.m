@@ -721,7 +721,10 @@
     if(![OTOngoingTourService sharedInstance].isOngoing)
         eventName = self.toursMapDelegate.isActive ? @"PlusFromFeedClick" : @"PlusFromGDSClick";
     [OTLogger logEvent:eventName];
-    [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
+    if(self.currentFilter.isPro)
+        [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
+    else
+        [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
 }
 
 #pragma mark - OTTourCreatorDelegate
@@ -815,16 +818,20 @@
 - (void)createEncounter {
     [self dismissViewControllerAnimated:NO completion:^{
         [self switchToNewsfeed];
-        [self.editEncounterBehavior doEdit:nil forTour:self.tourCreatorBehavior.tour.uid andLocation:self.encounterLocation];
+        [self.editEncounterBehavior doEdit:nil
+                                   forTour:self.tourCreatorBehavior.tour.uid
+                               andLocation:self.encounterLocation];
     }];
 }
 
 - (void)createDemande {
-    [self createEntourageOfType:ENTOURAGE_DEMANDE withAlertMessage:OTLocalizedString(@"poi_create_demande_alert")];
+    [self createEntourageOfType:ENTOURAGE_DEMANDE
+               withAlertMessage:OTLocalizedString(@"poi_create_demande_alert")];
 }
 
 - (void)createContribution {
-    [self createEntourageOfType:ENTOURAGE_CONTRIBUTION withAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
+    [self createEntourageOfType:ENTOURAGE_CONTRIBUTION
+               withAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
 }
 
 - (void) createEntourageOfType:(NSString *)entourageType withAlertMessage:(NSString *)message {
