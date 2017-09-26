@@ -59,8 +59,8 @@
 }
 
 - (void)sendEntourage:(UIButton*)sender {
-    if(![self isTitleValid] && ![self isCategorySelected])
-        return;
+    if(![self isCategorySelected] || ![self isTitleValid])
+            return;
     if(self.entourage.uid)
         [self updateEntourage:sender];
     else
