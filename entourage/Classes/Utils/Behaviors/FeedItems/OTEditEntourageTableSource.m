@@ -32,7 +32,7 @@ typedef enum {
     self.entourage.title = entourage.title;
     self.entourage.desc = entourage.desc;
     self.entourage.location = entourage.location;
-    self.entourage.type = entourage.type;
+    self.entourage.entourage_type = entourage.categoryObject.entourage_type;
     self.entourage.uid = entourage.uid;
     self.entourage.status = entourage.status;
     self.entourage.category = entourage.category;
@@ -57,7 +57,7 @@ typedef enum {
     switch (indexPath.section) {
         case 0:
             [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"category")
-                                                    andText:self.entourage.category.title];
+                                                    andText:self.entourage.categoryObject.title];
             break;
         case 1:
             [((OTEntourageEditItemImageCell*)cell) configureWith:OTLocalizedString(@"myLocation")

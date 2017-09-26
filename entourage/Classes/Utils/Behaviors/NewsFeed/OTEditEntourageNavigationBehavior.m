@@ -32,7 +32,7 @@
     if([segue.identifier isEqualToString:@"CategoryEditSegue"]) {
         OTCategoryViewController* controller = (OTCategoryViewController *)destinationViewController;
         controller.categorySelectionDelegate = self;
-        controller.selectedCategory = self.entourage.category;
+        controller.selectedCategory = self.entourage.categoryObject;
         return YES;
     }
     if([segue.identifier isEqualToString:@"EditLocation"]) {
@@ -103,7 +103,9 @@
 #pragma mark - CategorySelectionDelegate
 
 - (void)didSelectCategory:(OTCategory *)category {
-    self.entourage.category = category;
+    self.entourage.categoryObject = category;
+    self.entourage.category = category.category;
+    self.entourage.entourage_type = category.entourage_type;
     [self.editEntourageSource updateTexts];
 }
 

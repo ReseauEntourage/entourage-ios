@@ -21,7 +21,9 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) CLLocation *location;
-@property (nonatomic, strong) OTCategory *category;
+@property (nonatomic, strong) NSString *category;
+@property (nonatomic, strong) NSString *entourage_type;
+@property (nonatomic, strong) OTCategory *categoryObject;
 
 - (instancetype) initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *) dictionaryForWebService;

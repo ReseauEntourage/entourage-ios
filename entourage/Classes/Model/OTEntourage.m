@@ -31,6 +31,7 @@
                                    andLongitudeKey:kWSKeyLongitude];
         self.desc = [dictionary stringForKey:kWSKeyDescription];
         self.type = [dictionary stringForKey:kWSKeyEntourageType];
+        self.entourage_type = [dictionary stringForKey:kWSKeyEntourageType];
         self.noPeople = [dictionary numberForKey:kWSNoPeople];
         self.category = [dictionary stringForKey:kWSKeyCategory];
     }
@@ -41,10 +42,10 @@
     
     return @{
         kWSKeyTitle: self.title,
-        kWSKeyEntourageType: self.type,
+        kWSKeyEntourageType: self.categoryObject.entourage_type,
         kWSDescription: self.desc ? self.desc : @"",
         kWSKeyStatus: self.status,
-        kWSKeyCategory: self.category,
+        kWSKeyCategory: self.categoryObject.category,
         kWSKeyLocation: @{
             kWSKeyLatitude: @(self.location.coordinate.latitude),
             kWSKeyLongitude: @(self.location.coordinate.longitude)

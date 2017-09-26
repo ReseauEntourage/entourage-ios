@@ -14,7 +14,6 @@
 @implementation OTCategoryFromJsonService
 
 + (NSMutableArray *)getData {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"categoryJson"
                                                      ofType:@"json"];
     NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
@@ -58,6 +57,7 @@
             id object = [groupNames objectAtIndex:i];
             OTCategory *category = [[OTCategory alloc] init];
             categoryType.type = [object valueForKey:kWSKeyEntourageType];
+            category.entourage_type = [object valueForKey:kWSKeyEntourageType];
             category.category = [object valueForKey:kWSKeyEntourageCategory];
             category.title = [object valueForKey: kWSKeyCategoryTitle];
             category.title_example = [object valueForKey:kWSKeyCategoryExampleTitle];
