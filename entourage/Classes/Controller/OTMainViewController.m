@@ -724,7 +724,7 @@
     if(self.currentFilter.isPro)
         [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
     else
-        [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
+        [self performSegueWithIdentifier:@"EntourageEditorSegue" sender:nil];
 }
 
 #pragma mark - OTTourCreatorDelegate
