@@ -301,7 +301,6 @@
 
 - (void)loadHeatzonesWithItems: (NSMutableArray *) itemsTapped {
     NSMutableArray *feeds = [[NSMutableArray alloc] init];
-@try {
     for (CLLocation *coordinates in itemsTapped) {
         for (OTEntourage *item in self.newsFeedsSourceBehavior.feedItems) {
             if([item isKindOfClass:[OTEntourage class]])
@@ -310,16 +309,10 @@
                         [feeds addObject:item];
         }
     }
-    }
-        @catch(NSException *ex)
-    {
-        NSString *error = ex.reason;
-    }
     [self.toggleCollectionView toggle:[feeds count] > 0 animated:YES];
     [self.heatzonesDataSource updateItems:feeds];
     [self.heatzonesCollectionDataSource refresh];
 }
-
 
 - (void)switchToNewsfeed {
     [OTLogger logEvent:@"Screen06_1FeedView"];
