@@ -301,10 +301,19 @@
 
 - (void)loadHeatzonesWithItems: (NSMutableArray *) itemsTapped {
     NSMutableArray *feeds = [[NSMutableArray alloc] init];
-    for (OTEntourage *item in self.newsFeedsSourceBehavior.feedItems) {
-        for (CLLocation *coordinates in itemsTapped)
-            if(item.location.coordinate.latitude == coordinates.coordinate.latitude && item.location.coordinate.longitude == coordinates.coordinate.longitude)
-               [feeds addObject:item];
+@try {
+    for (CLLocation *coordinates in itemsTapped) {
+        for (OTEntourage *item in self.newsFeedsSourceBehavior.feedItems) {
+            if([item isKindOfClass:[OTEntourage class]])
+                if(item.location.coordinate.latitude == coordinates.coordinate.latitude &&
+                   item.location.coordinate.longitude == coordinates.coordinate.longitude)
+                        [feeds addObject:item];
+        }
+    }
+    }
+        @catch(NSException *ex)
+    {
+        NSString *error = ex.reason;
     }
     [self.toggleCollectionView toggle:[feeds count] > 0 animated:YES];
     [self.heatzonesDataSource updateItems:feeds];
@@ -525,7 +534,9 @@
 }
 
 - (void)feedMapViewWithEncounters {
-    if (self.toursMapDelegate.isActive) {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    OTFeedItemAuthor *author = self.tourCreatorBehavior.tour.author;
+    if (self.toursMapDelegate.isActive && [currentUser.sid isEqualToNumber:author.uID]) {
         NSMutableArray *annotations = [NSMutableArray new];
         for (OTEncounter *encounter in self.encounters) {
             OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
