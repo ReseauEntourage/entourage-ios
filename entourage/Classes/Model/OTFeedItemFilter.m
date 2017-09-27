@@ -45,6 +45,10 @@
             return OTLocalizedString(@"filter_maraude_bare_hands");
         case FeedItemFilterKeyDistributive:
             return OTLocalizedString(@"filter_maraude_alimentary");
+        case FeedItemFilterKeyOrganisation:
+            return OTLocalizedString(@"filter_entourage_from_sympathisants");
+        case FeedItemFilterKeyMyEntourages:
+            return OTLocalizedString(@"filter_entourage_my_entourages");
         default:
             return @"";
     }

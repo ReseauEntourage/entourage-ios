@@ -286,6 +286,9 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "filter_entourage_contribution" = "Contribution";
 "filter_entourage_show_tours" = "Maraudes";
 "filter_entourage_only_my_entourages" = "Ne visualiser que mes entourages";
+"filter_entourage_from_sympathisants_title" = "Montrer uniquement";
+"filter_entourage_from_sympathisants" = "Crées par les sympathisants de l’association que je soutiens";
+"filter_entourage_my_entourages" = "Mes entourages";
 
 "filter_solidarity_guide_categories" = "Catégories";
 

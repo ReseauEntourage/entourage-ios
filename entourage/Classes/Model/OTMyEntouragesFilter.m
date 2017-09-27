@@ -27,15 +27,17 @@
         self.showDemand = YES;
         self.showContribution = YES;
         self.showTours = YES;
+        self.showMyEntourages = YES;
+        self.showFromOrganisation = YES;
     }
     return self;
 }
 
 - (NSArray *)groupHeaders {
     if(IS_PRO_USER)
-        return @[OTLocalizedString(@"myEntouragesTitle"), OTLocalizedString(@"filter_entourages_title")];
+        return @[OTLocalizedString(@"myEntouragesTitle"), OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_entourage_from_sympathisants_title")];
     else
-        return @[OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_timeframe_title")];
+        return @[OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_timeframe_title"), OTLocalizedString(@"filter_entourage_from_sympathisants_title")];
 }
 
 - (NSArray *)toGroupedArray {
@@ -49,6 +51,10 @@
                         [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyTour active:self.showTours]
+                    ],
+                    @[
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showMyEntourages],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation active:self.showFromOrganisation]
                     ]
                 ];
     else
@@ -60,7 +66,11 @@
                     @[
                         [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution],
-                     ]
+                     ],
+                    @[
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showMyEntourages],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation active:self.showFromOrganisation]
+                    ]
                 ];
 }
 
