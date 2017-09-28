@@ -35,7 +35,7 @@
         OTCategoryType *categoryType = [[OTCategoryType alloc] init];
         categoryType.isExpanded = YES;
         categoryType.categories = [[NSMutableArray alloc] init];
-        for (int i = 0; i < groupNames.count - 1; i++)
+        for (int i = 0; i < groupNames.count; i++)
         {
             id object = [groupNames objectAtIndex:i];
             OTCategory *category = [[OTCategory alloc] init];
@@ -60,7 +60,7 @@
 
 + (NSString *)decodeSpecialCharactersForObject: (id)object andKey: (NSString *)key {
     NSString *objectValue = [object valueForKey:key];
-    if (objectValue != nil)
+    if (![objectValue isEqual:[NSNull null]])
         @try {
             return [NSString stringWithUTF8String:[objectValue cStringUsingEncoding:NSMacOSRomanStringEncoding]];
         }

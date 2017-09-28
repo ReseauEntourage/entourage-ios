@@ -224,6 +224,40 @@
                                             <outlet property="selectedImage" destination="S0R-0Y-9ue" id="8rr-22-ep0"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategorySectionCell" rowHeight="63" id="5Hs-45-xO0" customClass="OTCategorySectionCell">
+                                        <rect key="frame" x="0.0" y="78" width="375" height="63"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Hs-45-xO0" id="DBa-Lc-drn">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="62.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ptg-e8-RHd">
+                                                    <rect key="frame" x="25" y="22.5" width="317" height="18"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
+                                                    <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="arrowForMenu" translatesAutoresizingMaskIntoConstraints="NO" id="3fJ-FO-FIr">
+                                                    <rect key="frame" x="338" y="25" width="22" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="13" id="Ykh-5o-GtL"/>
+                                                        <constraint firstAttribute="width" constant="8" id="avB-fe-RR6"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Ptg-e8-RHd" firstAttribute="centerY" secondItem="DBa-Lc-drn" secondAttribute="centerY" id="J1r-OK-lh1"/>
+                                                <constraint firstItem="3fJ-FO-FIr" firstAttribute="centerY" secondItem="Ptg-e8-RHd" secondAttribute="centerY" id="ULg-Ot-sSo"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3fJ-FO-FIr" secondAttribute="trailing" constant="7" id="XSI-91-lNa"/>
+                                                <constraint firstItem="3fJ-FO-FIr" firstAttribute="leading" secondItem="Ptg-e8-RHd" secondAttribute="trailing" constant="10" id="bg4-hb-jYv"/>
+                                                <constraint firstItem="Ptg-e8-RHd" firstAttribute="leading" secondItem="DBa-Lc-drn" secondAttribute="leadingMargin" constant="17" id="p6g-pb-RM2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="expandedImg" destination="3fJ-FO-FIr" id="SWj-36-ZtL"/>
+                                            <outlet property="sectionTitleLbl" destination="Ptg-e8-RHd" id="aw4-HX-Dol"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="mD9-Vq-A6V" id="wXq-Qs-Qni"/>
@@ -680,6 +714,7 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
     </scenes>
     <resources>
         <image name="24HInactive" width="48" height="48"/>
+        <image name="arrowForMenu" width="7" height="13"/>
         <image name="location" width="22" height="22"/>
         <image name="password" width="100" height="100"/>
         <image name="slice" width="32" height="32"/>

@@ -26,8 +26,12 @@
     [super viewDidLoad];
 
     self.title = OTLocalizedString(@"title").uppercaseString;
-    if([self.currentEntourage.type isEqualToString:@"ask_for_help"])
-        self.txtTitle.placeholder = OTLocalizedString(@"edit_demand_title");
+    if(self.currentEntourage.categoryObject.title_example != nil) {
+        self.txtTitle.placeholder = self.currentEntourage.categoryObject.title_example;
+    } else {
+        if([self.currentEntourage.type isEqualToString:@"ask_for_help"])
+            self.txtTitle.placeholder = OTLocalizedString(@"edit_demand_title");
+    }
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(doneEdit) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
@@ -39,8 +43,8 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    if(self.currentTitle)
-        [self.txtTitle updateAfterSpeech];
+//    if(self.currentTitle)
+//        [self.txtTitle updateAfterSpeech];
 }
 
 - (void)doneEdit {
