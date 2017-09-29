@@ -10,10 +10,13 @@
 
 #define SELECTED_IMAGE @"24HSelected"
 #define UNSELECTED_IMAGE @"24HInactive"
+#define NAME_FONT_SIZE 15
 
 @implementation OTCategoryEditCell
 
 - (void)configureWith:(OTCategory *)category {
+    NSString *fontName = category.isSelected ? @"SFUIText-Bold" : @"SFUIText-Light";
+    self.lblTitle.font = [UIFont fontWithName:fontName size:NAME_FONT_SIZE];
     self.lblTitle.text = category.title;
     self.selectedImage.image = [[UIImage imageNamed:(category.isSelected ? SELECTED_IMAGE : UNSELECTED_IMAGE)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 }
