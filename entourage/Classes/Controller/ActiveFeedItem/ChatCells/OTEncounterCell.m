@@ -26,8 +26,11 @@
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint  {
     self.encounter =  (OTEncounter *)timelinePoint;
     if([self canEditEncounter]) {
+        [self.btnInfo setHidden:NO];
         [self.btnInfo setAttributedTitle:[self getLabelTextForUser:self.encounter.userName withStreetPersonName:self.encounter.streetPersonName] forState:UIControlStateNormal];
     }
+    else
+        [self.btnInfo setHidden:NO];
    [self.btnInfo setEnabled: [self canEditEncounter]];
 }
 
