@@ -77,8 +77,7 @@
         imageView.transform = CGAffineTransformMakeRotation(M_PI);
     }
     [sectionButton addSubview:imageView];
-    imageView.frame = CGRectMake(headerView.bounds.origin.x + sectionButton.bounds.size.width, headerView.bounds.origin.y + 22, 8.0, 8);
-    //[sectionButton setImage:imageView.image forState:UIControlStateNormal];
+    imageView.frame = CGRectMake(headerView.bounds.origin.x + sectionButton.bounds.size.width, headerView.bounds.origin.y + 22, 8.0, 8.0);
     sectionButton.tag = section;
     [sectionButton addTarget:self
                       action:@selector(tapCategory:)

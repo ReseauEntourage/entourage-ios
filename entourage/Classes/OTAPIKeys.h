@@ -38,8 +38,8 @@
 #define kWSKeyCategory @"display_category"
 
 //Category
-#define kWSKeyEntourageCategory @"category"
-#define kWSKeyCategoryTitle @"title"
+#define kWSKeyEntourageCategory @"display_category"
+#define kWSKeyCategoryTitle @"display_category_title"
 #define kWSKeyCategoryExampleTitle @"title_example"
 #define kWSKeyCategoryExampleDescription @"description_example"
 

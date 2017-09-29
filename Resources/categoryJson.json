@@ -1,100 +1,100 @@
-[
- {
- "entourage_type": "ask_for_help",
- "category": "social",
- "title": "Des voisins pour entourer une personne",
- "title_example": "Rencontrez Tatiana ! ",
- "description_example": "Tatiana est pleine d'humour ! Elle est tous les jours sur les Champs ElysÃ©es. Elle a notamment besoin de produits d'hygiÃ¨ne (et d'une valise de billets me dit elle en riant). Entourez-la!"
- },
- {
- "entourage_type": "ask_for_help",
- "category": "event",
- "title": "Des bénévoles pour un évènement",
- "title_example": "Appel aux bonnes volontÃ©s ðŸ˜ŠðŸ‘ðŸ»  pour la Collecte nationale des Restos du Coeur Ã  Ternes 75017",
- "description_example": "Besoin de bÃ©nÃ©voles pour la collecte nationale des Restos du Coeur pour l'Ã©quipe d'un Carrefour du quartier des Ternes \nSamedi  17h00 âž 21h00 âžœ 5 bÃ©nÃ©voles \nDimanche  10h30 âž 13h00 âžœ 2 bÃ©nÃ©voles \nNous avons besoin de vous pour faire de cette collecte un succÃ¨s pour aider ceux qui en ont vraiment besoin! Merci d'avance"
- },
- {
- "entourage_type": "ask_for_help",
- "category": "mat_help",
- "title": "Un don matériel",
- "title_example": "Gilles a besoin d'une paire de gants",
- "description_example": "Gilles passe la journÃ©e dehors la main tendue. Avec ce froid, il a les doigts tout engourdis. Qui aurait une paire de gants Ã  donner ? \n(Attention : n'incluez pas de donnÃ©es permettant de localiser ou d'identifier des personnes)\n\n (description existante)"
- },
- {
- "entourage_type": "ask_for_help",
- "category": "resource",
- "title": "Une ressource mise à disposition",
- "title_example": "Nathalie, prÃ¨s de la Gare de l'Est, aimerait l'aide d'un voisin pour laver et sÃ©cher ses vÃªtements.",
- "description_example": "J'ai rencontrÃ© Nathalie Ã  la Soupe Populaire. Elle a besoin d'aide pour son quotidien et aimerait retrouver de la propretÃ©. Elle n'a ni tÃ©lÃ©phone ni internet mais j'irai la revoir lundi. Le top serait de pouvoir lui donner votre numÃ©ro de tÃ©lÃ©phone pour qu'elle puisse laver ses vÃªtements. Elle vous appellera depuis une association."
- },
- {
- "entourage_type": "ask_for_help",
- "category": "info",
- "title": "Poser une question au réseau",
- "title_example": "Y a-t-il un foyer d'hÃ©bergement qui accepte les animaux, pour Laurent et son chat ?",
- "description_example": "Laurent prÃ©fÃ¨re dormir Ã  la rue actuellement car aucun centre d'hÃ©bergement n'accepterait son chat. Connaissez-vous une solution d'hÃ©bergement ?"
- },
- {
- "entourage_type": "ask_for_help",
- "category": "skill",
- "title": "Une compétence",
- "title_example": "Recherche quelqu'un pour parler polonais avec GrÃ©gory",
- "description_example": "GrÃ©gory est polonais et Ã  beaucoup de mal Ã  parler franÃ§ais. Si quelqu'un peut lui parler dans sa langue, ce serait top !"
- },
- {
- "entourage_type": "ask_for_help",
- "category": "other",
- "title": "Autre chose !",
- "title_example": null,
- "description_example": null
- },
- {
- "entourage_type": "contribution",
- "category": "social",
- "title": "Passer du temps avec une personne",
- "title_example": "Qui peut me faire rencontrer une personne de la rue dans le quartier ? ",
- "description_example": "Je ne suis jamais encore allÃ© Ã  la rencontre des personnes sans-abri du quartier. Qui peut me prÃ©senter Ã  une personne qu'il connait bien ?"
- },
- {
- "entourage_type": "contribution",
- "category": "event",
- "title": "Inviter à un évènement solidaire",
- "title_example": "L'association \"Entourage\" vous invite tous Ã  sa journÃ©e portes ouvertes samedi 20 mars !",
- "description_example": "Venez tous, voisins avec ou sans abri, Ã  nos Portes ouvertes le 20 mars de 12h Ã  18h. \nAu programme : \n- rencontrez les membres de la communautÃ© Entourage autour d'un buffet \n- contribuez Ã  nos ateliers de sensibilisation et d'Ã©changes sur le projet d'Entourage\n- rencontrez notre Ã©quipe pour trouver la forme de bÃ©nÃ©volat pour Entourage qui vous convient\n\nPas nÃ©cessaire de s'inscrire Ã  l'avance, mais vous pouvez rejoindre cette action pour nous informer de votre venue! "
- },
- {
- "entourage_type": "contribution",
- "category": "mat_help",
- "title": "Faire un don matériel",
- "title_example": "Je donne : 1 sac de couchage chaud",
- "description_example": "J'ai 1 sac de couchage en bon Ã©tat que je n'utilise pas. \nJe suis disponible pour le donner dans mon quartier, les soirs de semaine aprÃ¨s 18h."
- },
- {
- "entourage_type": "contribution",
- "category": "resource",
- "title": "Mettre à disposition une ressource",
- "title_example": "Je mets Ã  disposition ma machine Ã  laver pour des personnes de la rue",
- "description_example": "Le temps d'une soirÃ©e, on est une colocation sympa vous permettant de vous mettre au chaud quelques heures. Pendant que la machine Ã  laver fera son oeuvre, on serait heureux de partager un repas en ta compagnie. PossibilitÃ© aussi de s'occuper de formalitÃ©s administratives au besoin. Malheureusement pas de place pour la nuit..."
- },
- {
- "entourage_type": "contribution",
- "category": "info",
- "title": "Diffuser une information",
- "title_example": "Le saviez-vous ? De + en + de familles Ã  la rue",
- "description_example": "Les personnes seules reprÃ©sentent 65% des personnes SDF. 35% des personnes sans-abri vivent en couple et/ou avec des enfants. En 2012, il y avait 30 000 enfants Ã  la rue parmi les 141 500 SDF. (Source Insee 2012)"
- },
- {
- "entourage_type": "contribution",
- "category": "skill",
- "title": "Donner une compétence",
- "title_example": "Je peux vous aider dans vos dÃ©marches administratives \nJe donne des cours de franÃ§ais / d'informatique\nJe peux aider Ã  rÃ©parer votre vÃ©hicule \nJ'offre des visites mÃ©dicales Ã  mon cabinet",
- "description_example": "Je suis ancien employÃ© de mairie et (description existante). \nJe suis disponible en soirÃ©e et le samedi matin. Nous pouvons nous rencontrer dans un cafÃ© du quartier. "
- },
- {
- "entourage_type": "contribution",
- "category": "other",
- "title": "Aider à ma façon",
- "title_example": null,
- "description_example": null
- }
- ]
+ [
+  {
+  "entourage_type": "ask_for_help",
+  "display_category": "social",
+  "display_category_title": "Des voisins pour entourer une personne",
+  "title_example": "Rencontrez Tatiana ! ",
+  "description_example": "Tatiana sur les Champs Elysées est pleine d'humour ! Elle a besoin de produits d'hygiène (et d'une valise de billets me dit elle en riant). Entourez-la!\n\n(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  },
+  {
+  "entourage_type": "ask_for_help",
+  "display_category": "event",
+  "display_category_title": "Des bénévoles pour un évènement",
+  "title_example": "Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017",
+  "description_example": "Besoin de bénévoles pour la collecte nationale des Restos du Coeur dans notre équipe locale.\nSamedi de 17h à 21h ➜ 5 bénévoles \nDimanche de 10h à 13h ➜ 2 bénévoles \nEnsemble aidons ceux qui en ont vraiment besoin ! Merci d'avance"
+  },
+  {
+  "entourage_type": "ask_for_help",
+  "display_category": "mat_help",
+  "display_category_title": "Un don matériel",
+  "title_example": "Gilles a besoin d'une paire de gants",
+  "description_example": "Gilles passe la journée dehors la main tendue. Avec ce froid, il a les doigts tout engourdis. Qui aurait des gants à donner ? \n\n(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  },
+  {
+  "entourage_type": "ask_for_help",
+  "display_category": "resource",
+  "display_category_title": "Une ressource mise à disposition",
+  "title_example": "Nathalie aimerait l'aide d'un voisin pour laver et sécher ses vêtements.",
+  "description_example": "J'ai rencontré Nathalie à la Soupe Populaire. Elle tient à sa propreté. Le top serait de pouvoir lui donner votre contact pour qu'elle puisse laver ses vêtements.\n\n(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  },
+  {
+  "entourage_type": "ask_for_help",
+  "display_category": "info",
+  "display_category_title": "Poser une question au réseau",
+  "title_example": "Y a-t-il un foyer d'hébergement qui accepte les animaux, pour Laurent et son chat ?",
+  "description_example": "Laurent dort à la rue actuellement, avec son chat. Connaissez-vous une solution d'hébergement ?\n\n(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  },
+  {
+  "entourage_type": "ask_for_help",
+  "display_category": "skill",
+  "display_category_title": "Une compétence",
+  "title_example": "Recherche quelqu'un pour parler polonais avec Grégory",
+  "description_example": "Grégory est polonais et discuter dans sa langue lui manque. Si quelqu'un peut lui parler dans sa langue, ce serait top !\n\n(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  },
+  {
+  "entourage_type": "ask_for_help",
+  "display_category": "other",
+  "display_category_title": "Autre chose !",
+  "title_example": "Sarah a besoin de faire garder son chien pendant un RDV administratif",
+  "description_example": "(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  },
+  {
+  "entourage_type": "contribution",
+  "display_category": "social",
+  "display_category_title": "Passer du temps avec une personne",
+  "title_example": "Qui peut me faire rencontrer une personne de la rue dans le quartier ? ",
+  "description_example": "Je ne suis jamais allé à la rencontre de personnes sans-abri. Qui peut me présenter à une personne qu'il connait bien ?"
+  },
+  {
+  "entourage_type": "contribution",
+  "display_category": "event",
+  "display_category_title": "Inviter à un évènement solidaire",
+  "title_example": "Notre association vous invite à ses Portes ouvertes samedi 20 mars !",
+  "description_example": "Venez tous, voisins avec ou sans abri, à nos Portes ouvertes le 20 mars de 12h à 18h. \n- Rencontrez les membres de la communauté\n- Participez à nos ateliers \n- Trouvez la forme de bénévolat qui vous convient"
+  },
+  {
+  "entourage_type": "contribution",
+  "display_category": "mat_help",
+  "display_category_title": "Faire un don matériel",
+  "title_example": "Je donne : 1 sac de couchage chaud",
+  "description_example": "J'ai 1 sac de couchage en bon état que je n'utilise pas. \nJe suis disponible pour le donner dans mon quartier, les soirs de semaine après 18h."
+  },
+  {
+  "entourage_type": "contribution",
+  "display_category": "resource",
+  "display_category_title": "Mettre à disposition une ressource",
+  "title_example": "Je mets à disposition ma machine à laver et vous invite à ma table !",
+  "description_example": "Le temps d'une soirée, on est une colocation sympa vous permettant de vous mettre au chaud quelques heures. On serait heureux de partager un repas en ta compagnie. "
+  },
+  {
+  "entourage_type": "contribution",
+  "display_category": "info",
+  "display_category_title": "Diffuser une information",
+  "title_example": "Le saviez-vous ? De + en + de familles à la rue",
+  "description_example": "En 2012, il y avait 30 000 enfants parmi les 141 500 SDF. (Source Insee)"
+  },
+  {
+  "entourage_type": "contribution",
+  "display_category": "skill",
+  "display_category_title": "Donner une compétence",
+  "title_example": "Je peux vous aider dans vos démarches administratives ",
+  "description_example": "Je suis ancien employé de mairie et je peux aider dans des démarches administratives."
+  },
+  {
+  "entourage_type": "contribution",
+  "display_category": "other",
+  "display_category_title": "Aider à ma façon",
+  "title_example": "Je souhaite devenir bénévole pour une association qui lutte contre l'exclusion.",
+  "description_example": "(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  }
+  ]
