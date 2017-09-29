@@ -20,10 +20,6 @@
 #define CATEGORY_ICON_TAG 3
 #define SELECTED_IMAGE_TAG 4
 
-#define SELECTED_IMAGE @"24HSelected"
-#define UNSELECTED_IMAGE @"24HInactive"
-
-
 @interface OTCategoryViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView *categoryTableView;
@@ -59,10 +55,8 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     OTCategoryType * categoryType = self.dataSource[section];
-
     UIView *headerView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SECTION_HEIGHT)];
     [headerView setBackgroundColor:[UIColor whiteColor]];
-    
     UIButton *sectionButton = [[UIButton alloc] initWithFrame:CGRectMake(headerView.bounds.origin.x, headerView.bounds.origin.y, headerView.bounds.size.width - 15, headerView.bounds.size.height)];
     [sectionButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     sectionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -72,7 +66,6 @@
     [sectionButton setTitle:[categoryType.type isEqualToString:@"ask_for_help"] ? @"JE CHERCHE..." : @"JE ME PROPOSE DE…"
                    forState:UIControlStateNormal];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrowForExpandableMenu"]];
-    
     if(categoryType.isExpanded) {
         imageView.transform = CGAffineTransformMakeRotation(M_PI);
     }
@@ -93,6 +86,9 @@
     UIImageView *categoryIcon = [cell viewWithTag:CATEGORY_ICON_TAG];
     OTCategoryType * categoryType = self.dataSource[indexPath.section];
     OTCategory *category = categoryType.categories[indexPath.row];
+    if(self.selectedCategory != nil) {
+        category.isSelected = [self.selectedCategory.title isEqualToString:category.title];
+    }
     [titleLabel setText:category.title];
     [categoryIcon setImage:[UIImage imageNamed: [NSString stringWithFormat:@"%@_%@", categoryType.type, category.category]]];
     [cell configureWith:category];
@@ -110,7 +106,6 @@
             }
     self.selectedCategory = itemCategory;
     [tableView reloadData];
-
 }
 
 #pragma mark - private methods
@@ -132,6 +127,5 @@
 - (IBAction)openLink:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://blog.entourage.social/2017/04/28/quelles-actions-faire-avec-entourage/"]];
 }
-
 
 @end

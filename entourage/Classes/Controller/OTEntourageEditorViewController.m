@@ -33,11 +33,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = OTLocalizedString(@"action").uppercaseString;
     [self setupData];
     [self.editTableSource configureWith:self.entourage];
-
     [self setupCloseModal];
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEntourage:) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];

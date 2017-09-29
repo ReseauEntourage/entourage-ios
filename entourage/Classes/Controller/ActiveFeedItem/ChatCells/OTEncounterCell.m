@@ -30,7 +30,7 @@
         [self.btnInfo setAttributedTitle:[self getLabelTextForUser:self.encounter.userName withStreetPersonName:self.encounter.streetPersonName] forState:UIControlStateNormal];
     }
     else
-        [self.btnInfo setHidden:NO];
+        [self.btnInfo setHidden:YES];
    [self.btnInfo setEnabled: [self canEditEncounter]];
 }
 

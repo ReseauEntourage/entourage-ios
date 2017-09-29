@@ -16,11 +16,10 @@
 + (NSMutableArray *)getData {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"categoryJson"
                                                      ofType:@"json"];
-    NSData *error = nil;
     NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
     NSDictionary *categoryObject = [NSJSONSerialization JSONObjectWithData:jsonData
                                                                    options:0
-                                                                     error:&error];
+                                                                     error:nil];
     
     NSArray *jsonArray = (NSArray *)categoryObject;
     NSMutableArray *resultArray = [NSMutableArray new];
