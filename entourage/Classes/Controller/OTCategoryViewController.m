@@ -70,12 +70,14 @@
     [sectionButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, headerView.bounds.size.width - 30.0, 0.0, 7.0)];
     [sectionButton setTitle:[categoryType.type isEqualToString:@"ask_for_help"] ? @"JE CHERCHE..." : @"JE ME PROPOSE DE…"
                    forState:UIControlStateNormal];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrowForMenu"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrowForExpandableMenu"]];
+    
     if(categoryType.isExpanded) {
-        imageView.center = self.view.center;
         imageView.transform = CGAffineTransformMakeRotation(M_PI);
     }
-    [sectionButton setImage:imageView.image forState:UIControlStateNormal];
+    [sectionButton addSubview:imageView];
+    imageView.frame = CGRectMake(headerView.bounds.origin.x + sectionButton.bounds.size.width, headerView.bounds.origin.y + 22, 8.0, 8);
+    //[sectionButton setImage:imageView.image forState:UIControlStateNormal];
     sectionButton.tag = section;
     [sectionButton addTarget:self
                       action:@selector(tapCategory:)
