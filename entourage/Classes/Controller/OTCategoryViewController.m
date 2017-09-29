@@ -81,6 +81,7 @@
                       action:@selector(tapCategory:)
             forControlEvents:UIControlEventTouchUpInside];
     
+    
     [headerView addSubview:sectionButton];
     return headerView;
 }
