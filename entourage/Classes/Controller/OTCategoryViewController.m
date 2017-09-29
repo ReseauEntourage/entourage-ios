@@ -39,6 +39,7 @@
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(saveNewCategory) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
     self.dataSource = [OTCategoryFromJsonService getData];
+    self.categoryTableView.tableFooterView = [UIView new];
     self.categoryTableView.rowHeight = UITableViewAutomaticDimension;
     [self.categoryTableView reloadData];
 }
