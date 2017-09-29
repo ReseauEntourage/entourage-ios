@@ -16,11 +16,13 @@
 + (NSMutableArray *)getData {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"categoryJson"
                                                      ofType:@"json"];
-    NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
+    //NSString *jsonString = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     NSData *error = nil;
+    NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
     NSDictionary *categoryObject = [NSJSONSerialization JSONObjectWithData:jsonData
                                                                    options:0
                                                                      error:&error];
+    
     NSArray *jsonArray = (NSArray *)categoryObject;
     NSMutableArray *resultArray = [NSMutableArray new];
     NSArray *groups = [jsonArray valueForKeyPath:@"@distinctUnionOfObjects.entourage_type"];
@@ -33,10 +35,16 @@
         OTCategoryType *categoryType = [[OTCategoryType alloc] init];
         categoryType.isExpanded = YES;
         categoryType.categories = [[NSMutableArray alloc] init];
-        for (int i = 0; i < groupNames.count; i++)
+        for (int i = 0; i < groupNames.count - 1; i++)
         {
             id object = [groupNames objectAtIndex:i];
             OTCategory *category = [[OTCategory alloc] init];
+//            categoryType.type = [self decodeSpecialCharactersForObject:object andKey:kWSKeyEntourageType];
+//            category.entourage_type = [self decodeSpecialCharactersForObject:object andKey:kWSKeyEntourageType];
+//            category.category =[self decodeSpecialCharactersForObject:object andKey:kWSKeyEntourageCategory];
+//            category.title = [self decodeSpecialCharactersForObject:object andKey:kWSKeyCategoryTitle];
+//            category.title_example = [self decodeSpecialCharactersForObject:object andKey:kWSKeyCategoryExampleTitle];
+//            category.description_example = [self decodeSpecialCharactersForObject:object andKey:kWSKeyCategoryExampleDescription];
             categoryType.type = [object valueForKey:kWSKeyEntourageType];
             category.entourage_type = [object valueForKey:kWSKeyEntourageType];
             category.category = [object valueForKey:kWSKeyEntourageCategory];
@@ -47,8 +55,20 @@
         }
         [resultArray addObject:categoryType];
     }
-    
     return resultArray;
+}
+
++ (NSString *)decodeSpecialCharactersForObject: (id)object andKey: (NSString *)key {
+    NSString *objectValue = [object valueForKey:key];
+    if (objectValue != nil)
+        @try {
+            return [NSString stringWithUTF8String:[objectValue cStringUsingEncoding:NSMacOSRomanStringEncoding]];
+        }
+    @catch (NSException *ex) {
+        return [NSString stringWithCString:[objectValue cStringUsingEncoding:NSUTF8StringEncoding]
+                                  encoding:NSUTF8StringEncoding];
+    }
+    return @"";
 }
 
 @end

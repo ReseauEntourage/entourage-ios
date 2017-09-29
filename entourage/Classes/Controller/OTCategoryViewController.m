@@ -39,6 +39,7 @@
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(saveNewCategory) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
     self.dataSource = [OTCategoryFromJsonService getData];
+    self.categoryTableView.rowHeight = UITableViewAutomaticDimension;
     [self.categoryTableView reloadData];
 }
 
@@ -59,14 +60,22 @@
     OTCategoryType * categoryType = self.dataSource[section];
 
     UIView *headerView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SECTION_HEIGHT)];
+    [headerView setBackgroundColor:[UIColor whiteColor]];
     
     UIButton *sectionButton = [[UIButton alloc] initWithFrame:headerView.bounds];
     [sectionButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     sectionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [sectionButton.titleLabel setFont:[UIFont fontWithName:@"SFUIText-Semibold" size:15]];
-    [sectionButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 0.0)];
+    [sectionButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 17.0)];
+    [sectionButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, sectionButton.bounds.size.width - 27.0, 0.0, 7.0)];
     [sectionButton setTitle:[categoryType.type isEqualToString:@"ask_for_help"] ? @"JE CHERCHE..." : @"JE ME PROPOSE DE…"
                    forState:UIControlStateNormal];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrowForMenu"]];
+    if(categoryType.isExpanded) {
+        imageView.center = self.view.center;
+        imageView.transform = CGAffineTransformMakeRotation(M_PI);
+    }
+    [sectionButton setImage:imageView.image forState:UIControlStateNormal];
     sectionButton.tag = section;
     [sectionButton addTarget:self
                       action:@selector(tapCategory:)
