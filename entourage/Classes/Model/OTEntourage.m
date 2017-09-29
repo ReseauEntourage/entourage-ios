@@ -50,7 +50,7 @@
             kWSKeyLatitude: @(self.location.coordinate.latitude),
             kWSKeyLongitude: @(self.location.coordinate.longitude)
         }
-    };
+     };
 }
 
 @end

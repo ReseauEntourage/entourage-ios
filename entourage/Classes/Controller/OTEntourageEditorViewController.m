@@ -81,7 +81,7 @@
 }
 
 - (BOOL)isCategorySelected {
-    if (!self.editTableSource.entourage.category.length) {
+    if (!self.editTableSource.entourage.categoryObject.category.length) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"categoryNotSelected")
                                                                        message:nil
                                                                 preferredStyle:UIAlertControllerStyleAlert];
@@ -117,7 +117,7 @@
         self.entourage = sentEntourage;
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageUpdated")];
         if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)])
-            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
+            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject: self.editTableSource.entourage];
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotUpdated")];
         sender.enabled = YES;

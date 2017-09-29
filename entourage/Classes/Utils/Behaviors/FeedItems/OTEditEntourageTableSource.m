@@ -36,6 +36,7 @@ typedef enum {
     self.entourage.uid = entourage.uid;
     self.entourage.status = entourage.status;
     self.entourage.category = entourage.category;
+    self.entourage.categoryObject = entourage.categoryObject;
     [self updateLocationTitle];
     self.tblEditEntourage.dataSource = self;
     self.tblEditEntourage.delegate = self;
@@ -120,7 +121,7 @@ typedef enum {
 }
 
 - (void)updateTexts {
-    [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 4)] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end

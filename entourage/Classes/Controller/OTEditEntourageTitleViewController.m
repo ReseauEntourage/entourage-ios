@@ -43,8 +43,8 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-//    if(self.currentTitle)
-//        [self.txtTitle updateAfterSpeech];
+    if(self.currentTitle && ![self.currentTitle isEqualToString:@""])
+        [self.txtTitle updateAfterSpeech];
 }
 
 - (void)doneEdit {
