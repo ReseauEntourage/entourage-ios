@@ -25,6 +25,7 @@
 @property (nonatomic, weak) IBOutlet OTSummaryProviderBehavior *summaryProvider;
 @property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;
 @property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
+@property (nonatomic, weak) IBOutlet UIImageView *imgCategory;
 
 - (void)configureWith:(OTFeedItem *)item;
 

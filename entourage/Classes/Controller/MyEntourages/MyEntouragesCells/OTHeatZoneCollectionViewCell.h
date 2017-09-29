@@ -17,6 +17,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblTimeDistance;
 @property (nonatomic, weak) IBOutlet UILabel *lblNumberOfUsers;
 @property (nonatomic, weak) IBOutlet OTSummaryProviderBehavior *summaryProvider;
+@property (nonatomic, weak) IBOutlet UIImageView *imgCategory;
 
 - (void)configureWith:(OTFeedItem *)item;
 

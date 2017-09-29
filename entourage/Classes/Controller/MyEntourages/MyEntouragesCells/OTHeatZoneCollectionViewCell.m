@@ -15,6 +15,7 @@
     self.summaryProvider.lblDescription = self.lblUsername;
     self.summaryProvider.lblUserCount = self.lblNumberOfUsers;
     self.summaryProvider.lblTimeDistance = self.lblTimeDistance;
+    self.summaryProvider.imgCategory = self.imgCategory;
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
 }
