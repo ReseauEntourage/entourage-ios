@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "OTCategory.h"
 
+typedef enum {
+   OTContribution,
+    OTAskForHelp
+} OTCategoryTypes;
+
 @interface OTCategoryType : NSObject
 
 @property (nonatomic, strong) NSString *type;

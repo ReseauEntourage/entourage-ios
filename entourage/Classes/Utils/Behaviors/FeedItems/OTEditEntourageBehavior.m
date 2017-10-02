@@ -10,6 +10,9 @@
 #import "OTEntourageEditorViewController.h"
 #import "OTFeedItemFactory.h"
 #import "OTConsts.h"
+#import "OTCategoryFromJsonService.h"
+#import "OTCategoryType.h"
+#import "OTCategory.h"
 
 @interface OTEditEntourageBehavior () <EntourageEditorDelegate>
 
@@ -28,12 +31,27 @@
     if([segue.identifier isEqualToString:@"EntourageEditorSegue"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.topViewController;
+        [self setupCategory];
         controller.entourage = self.entourage;
         controller.entourageEditorDelegate = self;
     }
     else
         return NO;
     return YES;
+}
+
+- (void)setupCategory {
+    NSArray *categorySource = [OTCategoryFromJsonService getData];
+    OTCategoryType *categoryType;
+    NSDictionary *categoryDict = [OTCategory createDictionary];
+    if([self.entourage.entourage_type isEqualToString:@"contribution"]) {
+         categoryType = categorySource[OTContribution];
+    } else {
+        categoryType = categorySource[OTAskForHelp];
+    }
+    
+    NSNumber *indexNumber = [categoryDict valueForKey:self.entourage.category];
+    self.entourage.categoryObject = categoryType.categories[indexNumber.intValue];
 }
 
 #pragma mark - EntourageEditorDelegate

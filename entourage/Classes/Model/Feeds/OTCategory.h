@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    OTSocial,
+    OTEvent,
+    OTHelp,
+    OTResource,
+    OTInfo,
+    OTSkill,
+    OTOther
+} OTCategories;
+
 @interface OTCategory : NSObject
 
 @property (nonatomic, strong) NSString *entourage_type;
@@ -16,5 +26,7 @@
 @property (nonatomic, strong) NSString *title_example;
 @property (nonatomic, strong) NSString *description_example;
 @property (nonatomic) BOOL isSelected;
+
++ (NSDictionary *)createDictionary;
 
 @end

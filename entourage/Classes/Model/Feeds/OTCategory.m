@@ -10,4 +10,15 @@
 
 @implementation OTCategory
 
++ (NSDictionary *)createDictionary {
+    return  @{@"social":@(OTSocial),
+              @"event":@(OTEvent),
+              @"mat_help":@(OTHelp),
+              @"resource":@(OTResource),
+              @"info":@(OTInfo),
+              @"skill":@(OTSkill),
+              @"other":@(OTOther)
+              };
+}
+
 @end
