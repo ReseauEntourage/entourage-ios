@@ -18,7 +18,7 @@
 @property (nonatomic) NSNumber *showContribution;
 @property (nonatomic) NSNumber *showTours;
 @property (nonatomic) NSNumber *timeframeInHours;
-@property (nonatomic) NSNumber *showMyEntourages;
+@property (nonatomic) NSNumber *showOnlyMyEntourages;
 @property (nonatomic) NSNumber *showFromOrganisation;
 
 + (OTSavedFilter *)fromNewsFeedsFilter:(OTNewsFeedsFilter *)filter;

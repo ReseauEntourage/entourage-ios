@@ -35,7 +35,7 @@
             self.showTours = savedFilter.showTours.boolValue;
             self.timeframeInHours = savedFilter.timeframeInHours.intValue;
             self.showFromOrganisation = savedFilter.showFromOrganisation.intValue;
-            self.showOnlyMyEntourages = savedFilter.showMyEntourages.intValue;
+            self.showOnlyMyEntourages = savedFilter.showOnlyMyEntourages.intValue;
         }
         else {
             self.showMedical = self.isPro;
