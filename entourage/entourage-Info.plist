@@ -20,6 +20,17 @@
 	<string>3.6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>prefs</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string></string>
 	<key>Fabric</key>
@@ -51,6 +62,8 @@
 	<string>Pour réaliser votre photo de profil.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Pour envoyer des invitations au réseau Entourage</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>NSLocationUsageDescription</key>
