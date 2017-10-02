@@ -57,7 +57,7 @@
     OTCategoryType * categoryType = self.dataSource[section];
     UIView *headerView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SECTION_HEIGHT)];
     [headerView setBackgroundColor:[UIColor whiteColor]];
-    UIButton *sectionButton = [[UIButton alloc] initWithFrame:CGRectMake(headerView.bounds.origin.x, headerView.bounds.origin.y, headerView.bounds.size.width - 15, headerView.bounds.size.height)];
+    UIButton *sectionButton = [[UIButton alloc] initWithFrame:CGRectMake(headerView.bounds.origin.x, headerView.bounds.origin.y, headerView.bounds.size.width - 20, headerView.bounds.size.height)];
     [sectionButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     sectionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [sectionButton.titleLabel setFont:[UIFont fontWithName:@"SFUIText-Semibold" size:15]];
@@ -66,11 +66,11 @@
     [sectionButton setTitle:[categoryType.type isEqualToString:@"ask_for_help"] ? @"JE CHERCHE..." : @"JE ME PROPOSE DE…"
                    forState:UIControlStateNormal];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrowForExpandableMenu"]];
-    if(categoryType.isExpanded) {
+    if(!categoryType.isExpanded) {
         imageView.transform = CGAffineTransformMakeRotation(M_PI);
     }
     [sectionButton addSubview:imageView];
-    imageView.frame = CGRectMake(headerView.bounds.origin.x + sectionButton.bounds.size.width, headerView.bounds.origin.y + 22, 8.0, 8.0);
+    imageView.frame = CGRectMake(headerView.bounds.origin.x + sectionButton.bounds.size.width, headerView.bounds.origin.y + 22, 15.0, 10.0);
     sectionButton.tag = section;
     [sectionButton addTarget:self
                       action:@selector(tapCategory:)
