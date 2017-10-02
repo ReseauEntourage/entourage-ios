@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qeH-DW-jd0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qeH-DW-jd0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -339,7 +339,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ddv-uC-bkv">
-                                <rect key="frame" x="-4" y="40" width="383" height="299"/>
+                                <rect key="frame" x="-4" y="20" width="383" height="299"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OgF-9U-Zl4" userLabel="Black View">
                                         <rect key="frame" x="0.0" y="0.0" width="383" height="299"/>
@@ -744,7 +744,9 @@ saisissez votre numéro de portable.</string>
                     <navigationItem key="navigationItem" id="kYV-5U-zfM"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="countryCodeTextField" destination="fMp-TQ-cvd" id="PLo-rR-4WH"/>
                         <outlet property="countryPicker" destination="lMx-Rd-gIG" id="Aij-0v-s4Z"/>
+                        <outlet property="phoneTextField" destination="9pu-ww-5CV" id="aHD-Ur-6bi"/>
                         <outlet property="pickerView" destination="irv-Vs-U9a" id="gA9-0M-vtg"/>
                         <outlet property="scrollBehavior" destination="Owz-Rl-UwJ" id="ufj-1N-Ywr"/>
                     </connections>

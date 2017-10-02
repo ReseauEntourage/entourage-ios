@@ -41,6 +41,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.countryCodeTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    self.countryCodeTextField.keepBaseline = YES;
+    self.countryCodeTextField.floatingLabelTextColor = [UIColor clearColor];
+    self.countryCodeTextField.floatingLabelActiveTextColor = [UIColor clearColor];
     self.codeCountry = @"+33";
 }
 
