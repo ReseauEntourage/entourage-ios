@@ -412,6 +412,7 @@
 		015CA7581F74037100318F4C /* OTCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTCategoryViewController.h; sourceTree = "<group>"; };
 		015CA7591F74037100318F4C /* OTCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTCategoryViewController.m; sourceTree = "<group>"; };
 		0161DD0E1F729E470081AE71 /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
+		01745BFF1F83A59400EAFA33 /* OTAmazonConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
 		017845D01F78493E0046BD81 /* OTCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OTCategory.h; path = Feeds/OTCategory.h; sourceTree = "<group>"; };
 		017845D11F78493E0046BD81 /* OTCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = OTCategory.m; path = Feeds/OTCategory.m; sourceTree = "<group>"; };
 		017845D31F7849560046BD81 /* OTCategoryType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OTCategoryType.h; path = Feeds/OTCategoryType.h; sourceTree = "<group>"; };
@@ -1177,6 +1178,7 @@
 			children = (
 				1E9B386D1DC88290000F9F3F /* staging.plist */,
 				1E9B386F1DC882A1000F9F3F /* prod.plist */,
+				01745BFF1F83A59400EAFA33 /* OTAmazonConsts.h */,
 			);
 			path = Environment;
 			sourceTree = "<group>";

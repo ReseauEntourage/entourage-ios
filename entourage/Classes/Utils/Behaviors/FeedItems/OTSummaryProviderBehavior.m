@@ -82,8 +82,7 @@
 
 - (void)profilePictureUpdated:(NSNotification *)notification {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if([currentUser.sid isEqualToNumber:self.feedItem.author.uID])
-        [self.btnAvatar setupAsProfilePictureFromUrl:currentUser.avatarURL withPlaceholder:@"user"];
+    [self.btnAvatar setupAsProfilePictureFromUrl:currentUser.avatarURL withPlaceholder:@"user"];
 }
 
 - (void)entourageUpdated:(NSNotification *)notification {
