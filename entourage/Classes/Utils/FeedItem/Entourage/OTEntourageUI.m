@@ -27,11 +27,7 @@
 }
 
 - (NSString *)categoryIconSource {
-    if(![self.entourage.category isEqualToString:@""]) {
-        return [NSString stringWithFormat:@"%@_%@", self.entourage.entourage_type, self.entourage.category];
-    } else {
-        return [NSString stringWithFormat:@"%@_%@", self.entourage.entourage_type, @"other"];
-    }
+    return [NSString stringWithFormat:@"%@_%@", self.entourage.entourage_type, self.entourage.category];
 }
 
 - (NSString *)feedItemDescription {

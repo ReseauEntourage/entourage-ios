@@ -285,6 +285,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.newsFeedsSourceBehavior resume];
+    [self.heatzonesCollectionDataSource refresh];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -557,8 +558,6 @@
         
         [self.clusteringController setAnnotations:self.markers];
         [self.clusteringController refresh:YES force:YES];
-       // [self.mapView removeAnnotations:self.mapView.annotations];
-        //[self.mapView addAnnotations:self.markers];
     }
 }
 
