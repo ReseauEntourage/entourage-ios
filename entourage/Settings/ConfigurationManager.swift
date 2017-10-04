@@ -59,6 +59,18 @@ struct UserStorageKey {
   var flurryAPIKey: NSString {
     return configuration(forKey: UserStorageKey.flurryAPIKey)
   }
+    
+    var MixpanelToken : NSString {
+        return MIXPANEL_TOKEN as NSString;
+    }
+    
+    var MixpanelKey: NSString {
+        return MIXPANEL_KEY as NSString;
+    }
+    
+    var MixpanelSecretKey: NSString {
+        return MIXPANEL_SECRET_KEY as NSString;
+    }
 
   private func configuration(forKey: String) -> NSString {
     return plist![forKey] as! NSString

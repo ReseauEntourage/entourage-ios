@@ -4,3 +4,4 @@
 
 #import "UIColor+entourage.h"
 #import "OTAmazonConsts.h"
+#import "OTMixpanelConsts.h"

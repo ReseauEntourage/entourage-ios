@@ -33,6 +33,8 @@
 #import "OTLostCodeViewController.h"
 #import "OTPhoneViewController.h"
 #import "OTCodeViewController.h"
+#import "Mixpanel/Mixpanel.h"
+
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -58,7 +60,9 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     FlurrySessionBuilder *builder = [[[[FlurrySessionBuilder new] withLogLevel:FlurryLogLevelAll] withCrashReporting:YES] withAppVersion:[OTVersionInfo currentVersion]];
     [Flurry startSession:[ConfigurationManager shared].flurryAPIKey withSessionBuilder:builder];
 #endif
-
+    NSString *mixpanelToken = [ConfigurationManager shared].MixpanelToken;
+    [Mixpanel sharedInstanceWithToken:mixpanelToken];
+    [Mixpanel sharedInstance].enableLogging = YES;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
     [self configureUIAppearance];

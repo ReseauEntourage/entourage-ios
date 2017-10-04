@@ -129,4 +129,5 @@ Temporary Items
 
 # Hide Amazon data
 OTAmazonConsts.h
+OTMixpanelConsts.h
 
