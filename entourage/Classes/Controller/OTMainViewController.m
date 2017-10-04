@@ -85,6 +85,7 @@
 #import "OTToggleVisibleBehavior.h"
 #import "OTCollectionSourceBehavior.h"
 #import "OTHeatzonesCollectionSource.h"
+#import "KPClusteringController.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -155,6 +156,8 @@
 @property (nonatomic, strong) IBOutlet OTCollectionSourceBehavior   *heatzonesDataSource;
 @property (nonatomic, strong) IBOutlet OTHeatzonesCollectionSource  *heatzonesCollectionDataSource;
 
+@property (nonatomic, strong) KPClusteringController *clusteringController;
+@property (nonatomic) double entourageScale;
 
 @end
 
@@ -224,6 +227,9 @@
         self.stopButton.hidden = YES;
         self.createEncounterButton.hidden = YES;
     }
+    
+    [self.mapDelegateProxy.delegates addObject:self];
+    self.entourageScale = 1.0;
     
     [self addObservers];
 }
@@ -367,6 +373,7 @@
     self.mapView.showsPointsOfInterest = NO;
    	self.mapView.showsUserLocation = YES;
     self.mapView.pitchEnabled = NO;
+    self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     MKCoordinateRegion region;
     if([OTLocationManager sharedInstance].currentLocation)
         region = MKCoordinateRegionMakeWithDistance([OTLocationManager sharedInstance].currentLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
@@ -547,8 +554,11 @@
             OTCustomAnnotation *annotation = [[OTCustomAnnotation alloc] initWithPoi:poi];
             [self.markers addObject:annotation];
         }
-        [self.mapView removeAnnotations:self.mapView.annotations];
-        [self.mapView addAnnotations:self.markers];
+        
+        [self.clusteringController setAnnotations:self.markers];
+        [self.clusteringController refresh:YES force:YES];
+       // [self.mapView removeAnnotations:self.mapView.annotations];
+        //[self.mapView addAnnotations:self.markers];
     }
 }
 

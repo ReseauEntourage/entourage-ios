@@ -49,7 +49,6 @@
     } else {
         categoryType = categorySource[OTAskForHelp];
     }
-    
     NSNumber *indexNumber = [categoryDict valueForKey:self.entourage.category];
     self.entourage.categoryObject = categoryType.categories[indexNumber.intValue];
 }

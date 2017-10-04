@@ -119,6 +119,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SimpleKeychain/SimpleKeychain.framework"
   install_framework "$BUILT_PRODUCTS_DIR/WYPopoverController/WYPopoverController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/kingpin/kingpin.framework"
   install_framework "$BUILT_PRODUCTS_DIR/libPhoneNumber-iOS/libPhoneNumber_iOS.framework"
 fi
 if [[ "$CONFIGURATION" == "Beta" ]]; then
@@ -152,6 +153,7 @@ if [[ "$CONFIGURATION" == "Beta" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SimpleKeychain/SimpleKeychain.framework"
   install_framework "$BUILT_PRODUCTS_DIR/WYPopoverController/WYPopoverController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/kingpin/kingpin.framework"
   install_framework "$BUILT_PRODUCTS_DIR/libPhoneNumber-iOS/libPhoneNumber_iOS.framework"
 fi
 if [[ "$CONFIGURATION" == "Store" ]]; then
@@ -185,6 +187,7 @@ if [[ "$CONFIGURATION" == "Store" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SimpleKeychain/SimpleKeychain.framework"
   install_framework "$BUILT_PRODUCTS_DIR/WYPopoverController/WYPopoverController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/kingpin/kingpin.framework"
   install_framework "$BUILT_PRODUCTS_DIR/libPhoneNumber-iOS/libPhoneNumber_iOS.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
