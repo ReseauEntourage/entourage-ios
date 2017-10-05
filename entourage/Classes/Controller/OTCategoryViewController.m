@@ -65,13 +65,24 @@
     [sectionButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, headerView.bounds.size.width - 30.0, 0.0, 7.0)];
     [sectionButton setTitle:[categoryType.type isEqualToString:@"ask_for_help"] ? @"JE CHERCHE..." : @"JE ME PROPOSE DE…"
                    forState:UIControlStateNormal];
+    
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrowForExpandableMenu"]];
     if(!categoryType.isExpanded) {
         imageView.transform = CGAffineTransformMakeRotation(M_PI);
     }
-    [sectionButton addSubview:imageView];
-    imageView.frame = CGRectMake(headerView.bounds.origin.x + sectionButton.bounds.size.width, headerView.bounds.origin.y + 22, 15.0, 10.0);
+    
+    imageView.frame = CGRectMake(headerView.bounds.origin.x + sectionButton.bounds.size.width - 10, headerView.bounds.origin.y + 22, 15.0, 10.0);
+    imageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                action:@selector(tapImageView:)];
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.numberOfTouchesRequired = 1;
+    [imageView addGestureRecognizer:singleTap];
+
+
     sectionButton.tag = section;
+    imageView.tag = section;
+    [sectionButton addSubview:imageView];
     [sectionButton addTarget:self
                       action:@selector(tapCategory:)
             forControlEvents:UIControlEventTouchUpInside];
@@ -112,6 +123,13 @@
 
 - (void)tapCategory:(UIButton *)sender {
     NSInteger section = sender.tag;
+    OTCategoryType *categoryType = self.dataSource[section];
+    categoryType.isExpanded = !categoryType.isExpanded;
+    [self.categoryTableView reloadData];
+}
+
+- (void)tapImageView: (UIGestureRecognizer *)sender {
+    NSInteger section = sender.view.tag;
     OTCategoryType *categoryType = self.dataSource[section];
     categoryType.isExpanded = !categoryType.isExpanded;
     [self.categoryTableView reloadData];

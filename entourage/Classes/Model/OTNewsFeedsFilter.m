@@ -55,11 +55,13 @@
         return @[
                  OTLocalizedString(@"filter_maraudes_title"),
                  OTLocalizedString(@"filter_entourages_title"),
+                 OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
     else
         return @[
                  OTLocalizedString(@"filter_entourages_title"),
+                 OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
 }
