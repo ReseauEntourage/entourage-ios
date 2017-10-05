@@ -12,6 +12,7 @@
 #import "OTLocationManager.h"
 #import "OTMyEntouragesOptionsViewController.h"
 #import "OTMyEntouragesOptionsDelegate.h"
+#import "OTAPIConsts.h"
 
 @interface OTMyEntouragesOptionsBehavior () <EntourageEditorDelegate, OTMyEntouragesOptionsDelegate>
 
@@ -45,14 +46,8 @@
 
 #pragma  mark - OTMyEntouragesOptionsDelegate
 
-- (void)createDemand {
-    self.entourageType = ENTOURAGE_DEMANDE;
-    [self.owner performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
-}
-
-- (void)createContribution {
-    self.entourageType = ENTOURAGE_CONTRIBUTION;
-    [self.owner performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
+- (void)createAction {
+    [self.owner performSegueWithIdentifier:@"EntourageEditorSegue" sender:nil];
 }
 
 - (void)createTour {

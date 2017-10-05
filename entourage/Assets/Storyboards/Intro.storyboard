@@ -188,7 +188,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="tPf-h7-A0x">
-                                <rect key="frame" x="-8" y="0.0" width="391" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oI-JN-xF6">
@@ -278,7 +278,6 @@
                         </subviews>
                         <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="tPf-h7-A0x" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-24" id="2Vp-D5-FqE"/>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="top" secondItem="H1V-0f-AM4" secondAttribute="bottom" constant="16" id="3UX-Fi-EuG"/>
                             <constraint firstItem="H1V-0f-AM4" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="8s3-HQ-c36"/>
                             <constraint firstAttribute="bottom" secondItem="tPf-h7-A0x" secondAttribute="bottom" id="9s4-4M-lZ7"/>
@@ -286,16 +285,17 @@
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="D3N-XI-gkf"/>
                             <constraint firstItem="bPF-Wr-lQ0" firstAttribute="bottom" secondItem="60w-tv-tKx" secondAttribute="centerY" constant="-20" id="Hxe-we-Y2Z"/>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="I3C-ND-duB"/>
+                            <constraint firstItem="tPf-h7-A0x" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leading" id="KX8-Cv-XdY"/>
                             <constraint firstItem="bPF-Wr-lQ0" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="Myk-g9-Wav"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="top" secondItem="1oI-JN-xF6" secondAttribute="bottom" constant="16" id="Pvi-NW-Ow3"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="Q4k-a2-1L2"/>
                             <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="mwv-HX-aYM" secondAttribute="bottom" constant="15" id="WGz-P9-g6X"/>
+                            <constraint firstItem="tPf-h7-A0x" firstAttribute="width" secondItem="60w-tv-tKx" secondAttribute="width" id="XX3-wq-WT3"/>
                             <constraint firstItem="gln-Yl-vAI" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="bZY-KF-103"/>
                             <constraint firstItem="bPF-Wr-lQ0" firstAttribute="top" secondItem="gln-Yl-vAI" secondAttribute="bottom" constant="15" id="foC-Ie-EJD"/>
                             <constraint firstItem="tPf-h7-A0x" firstAttribute="top" secondItem="60w-tv-tKx" secondAttribute="top" id="gvD-Pn-zhi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwv-HX-aYM" secondAttribute="trailing" constant="-4" id="jBT-Ve-tb9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1oI-JN-xF6" secondAttribute="trailing" constant="-4" id="tml-dp-994"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="tPf-h7-A0x" secondAttribute="trailing" constant="-24" id="uiF-mg-U8H"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="xue-aD-E7N"/>
                         </constraints>
                     </view>
@@ -339,7 +339,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ddv-uC-bkv">
-                                <rect key="frame" x="-4" y="20" width="383" height="299"/>
+                                <rect key="frame" x="-4" y="40" width="383" height="299"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OgF-9U-Zl4" userLabel="Black View">
                                         <rect key="frame" x="0.0" y="0.0" width="383" height="299"/>

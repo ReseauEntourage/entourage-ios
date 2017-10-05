@@ -27,8 +27,7 @@
 
 - (void)createTour;
 - (void)createEncounter;
-- (void)createDemande;
-- (void)createContribution;
+- (void)createAction;
 
 - (void)togglePOI;
 - (void)dismissOptions;

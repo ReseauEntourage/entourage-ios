@@ -79,6 +79,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
     self.title = OTLocalizedString(@"myProfile");
+    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
     [self createBackFrontMenuButton];
     [self.modifyLabel underline];
     self.tableView.tableHeaderView = self.headerView;
