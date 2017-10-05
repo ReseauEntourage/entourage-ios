@@ -55,13 +55,11 @@
         return @[
                  OTLocalizedString(@"filter_maraudes_title"),
                  OTLocalizedString(@"filter_entourages_title"),
-                 OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
     else
         return @[
                  OTLocalizedString(@"filter_entourages_title"),
-                 OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
 }
@@ -80,8 +78,7 @@
                         [OTFeedItemFilter createFor:FeedItemFilterKeyTour active:self.showTours]
                     ],
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showOnlyMyEntourages],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation active:self.showFromOrganisation]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showOnlyMyEntourages]
                     ],
                     @[
                         [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
@@ -94,9 +91,7 @@
                         [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution]
                     ],
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showOnlyMyEntourages],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation active:self.showFromOrganisation]
-                    ],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showOnlyMyEntourages]                    ],
                     @[
                         [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
                     ]
@@ -143,9 +138,6 @@
             break;
         case FeedItemFilterKeyMyEntourages:
             self.showOnlyMyEntourages = filter.active;
-            break;
-        case FeedItemFilterKeyOrganisation:
-            self.showFromOrganisation = filter.active;
             break;
         default:
             break;

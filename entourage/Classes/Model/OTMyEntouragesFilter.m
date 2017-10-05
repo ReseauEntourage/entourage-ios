@@ -53,8 +53,7 @@
                         [OTFeedItemFilter createFor:FeedItemFilterKeyTour active:self.showTours]
                     ],
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showMyEntourages],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation active:self.showFromOrganisation]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showMyEntourages]
                     ]
                 ];
     else
@@ -68,8 +67,7 @@
                         [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution],
                      ],
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showMyEntourages],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation active:self.showFromOrganisation]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showMyEntourages]
                     ]
                 ];
 }
