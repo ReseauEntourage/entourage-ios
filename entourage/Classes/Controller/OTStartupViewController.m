@@ -26,7 +26,7 @@
     // Do any additional setup after loading the view.
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
     [self.navigationController presentTransparentNavigationBar];
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
     self.title = @"";
 

@@ -56,13 +56,13 @@
     [self popToMainController];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closed_item")];
         if(![self.feedItem isKindOfClass:[OTTour class]]) {
             NSDictionary *userInfo =  @{ @kNotificationSendReasonKey: @(reason), @kNotificationFeedItemKey: self.feedItem};
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationSendCloseMail object:nil userInfo:userInfo];
         }
         if(reason == OTCloseReasonHelpClose)
             return;
+        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closed_item")];
         [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
     });
 }

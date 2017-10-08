@@ -44,10 +44,10 @@
     
     return @{
         kWSKeyTitle: self.title,
-        kWSKeyEntourageType: self.categoryObject.entourage_type,
+        kWSKeyEntourageType: self.entourage_type,
         kWSDescription: self.desc ? self.desc : @"",
         kWSKeyStatus: self.status,
-        kWSKeyCategory: self.categoryObject.category,
+        kWSKeyCategory: self.category,
         kWSKeyLocation: @{
             kWSKeyLatitude: @(self.location.coordinate.latitude),
             kWSKeyLongitude: @(self.location.coordinate.longitude)

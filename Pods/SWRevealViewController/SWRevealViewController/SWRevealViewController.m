@@ -642,7 +642,7 @@ const int FrontViewPositionNone = 0xff;
     _frontViewShadowRadius = 2.5f;
     _frontViewShadowOffset = CGSizeMake(0.0f, 2.5f);
     _frontViewShadowOpacity = 1.0f;
-    _frontViewShadowColor = [UIColor blackColor];
+    _frontViewShadowColor = [UIColor clearColor];
     _userInteractionStore = YES;
     _animationQueue = [NSMutableArray array];
     _draggableBorderWidth = 0.0f;
@@ -702,7 +702,7 @@ const int FrontViewPositionNone = 0xff;
     self.view = _contentView;
     
     // Apple also tells us to do this:
-    _contentView.backgroundColor = [UIColor blackColor];
+    _contentView.backgroundColor = [UIColor clearColor];
     
     // we set the current frontViewPosition to none before seting the
     // desired initial position, this will force proper controller reload

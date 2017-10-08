@@ -32,7 +32,6 @@
 {
 	[super viewDidAppear:animated];
     [self customizeSlideOutMenu];
-    
 	if (![[NSUserDefaults standardUserDefaults] currentUser])
 	{
 		[UIStoryboard showStartup];
@@ -40,7 +39,7 @@
 }
 
 - (void)customizeSlideOutMenu {
-    self.rearViewRevealWidth = [UIScreen mainScreen].bounds.size.width + self.frontViewShadowRadius; // how much of the menu is shown (default 260.0)
+    self.rearViewRevealWidth = [UIScreen mainScreen].bounds.size.width; // how much of the menu is shown (default 260.0)
     
     // TOGGLING OVERDRAW: Configure the overdraw appearance of the content view while dragging it
     self.rearViewRevealOverdraw = 0.0f; // how much of an overdraw can occur when dragging further than 'rearViewRevealWidth' (default 60.0)
@@ -58,7 +57,9 @@
     //self.frontViewShadowRadius = 10.0f; // radius of the front view's shadow (default 2.5)
     //self.frontViewShadowOffset = CGSizeMake(0.0f, 2.5f); // radius of the front view's shadow offset (default {0.0f,2.5f})
     self.frontViewShadowOpacity = 0.8f; // front view's shadow opacity (default 1.0)
-    self.frontViewShadowColor = [UIColor darkGrayColor]; // front view's shadow color (default blackColor)
+    self.frontViewShadowColor = [UIColor clearColor]; // front view's shadow color (default blackColor)
+    [self.view setBackgroundColor:[UIColor clearColor]];
+    [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor clearColor];
 }
 
 @end
