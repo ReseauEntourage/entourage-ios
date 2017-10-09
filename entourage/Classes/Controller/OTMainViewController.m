@@ -88,7 +88,7 @@
 #import "KPClusteringController.h"
 #import "KPAnnotation.h"
 
-#define MAPVIEW_HEIGHT 160.f
+#define MAPVIEW_HEIGHT 224.f
 
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define FEEDS_REQUEST_DISTANCE_KM 10
