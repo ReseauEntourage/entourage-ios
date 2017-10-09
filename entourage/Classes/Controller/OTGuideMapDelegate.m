@@ -97,7 +97,7 @@
     [mapView deselectAnnotation:view.annotation animated:NO];
     MKZoomScale currentZoomScale = mapView.bounds.size.width / mapView.visibleMapRect.size.width;
        KPAnnotation *kpAnnotation = view.annotation;
-       if (currentZoomScale > 0.244113) {
+       if (currentZoomScale > 0.00244113) {
                [self.mapController displayPoiDetails:view];
            }
        else if (!kpAnnotation.isCluster) {

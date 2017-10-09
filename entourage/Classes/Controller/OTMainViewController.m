@@ -86,6 +86,7 @@
 #import "OTCollectionSourceBehavior.h"
 #import "OTHeatzonesCollectionSource.h"
 #import "KPClusteringController.h"
+#import "KPAnnotation.h"
 
 #define MAPVIEW_HEIGHT 160.f
 
@@ -574,9 +575,14 @@
 }
 
 - (void)displayPoiDetails:(MKAnnotationView *)view {
-    OTCustomAnnotation *annotation = nil;
-    if([view.annotation isKindOfClass:[OTCustomAnnotation class]])
-        annotation = (OTCustomAnnotation *)view.annotation;
+    KPAnnotation *kpAnnotation = (KPAnnotation *)view.annotation;
+    __block OTCustomAnnotation *annotation = nil;
+    [[kpAnnotation annotations] enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[OTCustomAnnotation class]]) {
+            annotation = obj;
+            *stop = YES;
+        }
+    }];
     if (annotation == nil) return;
     [OTLogger logEvent:@"POIView"];
     [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation.poi];

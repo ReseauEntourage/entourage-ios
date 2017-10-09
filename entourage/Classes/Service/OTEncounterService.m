@@ -67,6 +67,7 @@ NSString *const kEncounter = @"encounter";
      {
          if (success)
          {
+             
              OTEncounter *updatedEncounter = [self encounterFromDictionary:responseObject];
              success(updatedEncounter);
          }
