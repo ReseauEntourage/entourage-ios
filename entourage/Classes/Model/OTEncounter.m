@@ -16,6 +16,7 @@
 NSString *const kEncounterId = @"id";
 NSString *const kUserName = @"user_name";
 NSString *const kUserId = @"user_id";
+NSString *const kTourId = @"tourId";
 NSString *const kEncounterStreetPersonName = @"street_person_name";
 NSString *const kEncounterDate = @"date";
 NSString *const kEncounterLatitude = @"latitude";
@@ -53,7 +54,10 @@ NSString *const kEncounterMessage = @"message";
     if (self.message) {
         dictionary[kEncounterMessage] = self.message;
     }
-    
+    dictionary[kEncounterId] = self.sid;
+    dictionary[kUserId] = self.userId;
+    dictionary[kTourId] = @(0);
+    dictionary[kUserName] = self.userName;
 	return dictionary;
 }
 
