@@ -32,7 +32,7 @@
     if ([annotation isKindOfClass:[KPAnnotation class]]) {
                KPAnnotation *kingPinAnnotation = (KPAnnotation *)annotation;
         
-               if (currentZoomScale < 0.244113 && kingPinAnnotation.isCluster) {
+               if (currentZoomScale < 0.244113 && kingPinAnnotation.isCluster && kingPinAnnotation.annotations.count > 3) {
                        annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"cluster"];
                        if (annotationView == nil) {
                               annotationView = [[MKAnnotationView alloc] initWithAnnotation:kingPinAnnotation reuseIdentifier:@"cluster"];
@@ -49,14 +49,6 @@
                            }
                       annotationView.annotation = annotation;
                   }
-    
-//    if ([annotation isKindOfClass:[OTCustomAnnotation class]]) {
-//        OTCustomAnnotation *customAnnotation = (OTCustomAnnotation *)annotation;
-//        annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:customAnnotation.annotationIdentifier];
-//        if (!annotationView)
-//            annotationView = customAnnotation.annotationView;
-//        annotationView.annotation = annotation;
-//    }
     }
     return annotationView;
 }
@@ -97,6 +89,8 @@
     [mapView deselectAnnotation:view.annotation animated:NO];
     MKZoomScale currentZoomScale = mapView.bounds.size.width / mapView.visibleMapRect.size.width;
        KPAnnotation *kpAnnotation = view.annotation;
+        if ([kpAnnotation isKindOfClass:[MKUserLocation class]])
+            return;
        if (currentZoomScale > 0.00244113) {
                [self.mapController displayPoiDetails:view];
            }
