@@ -9,7 +9,7 @@
 // Controller
 #import "OTMainViewController.h"
 #import "UIViewController+menu.h"
-#import "OTCreateMeetingViewController.h"
+//#import "OTCreateMeetingViewController.h"
 #import "OTCalloutViewController.h"
 #import "OTMapOptionsViewController.h"
 #import "OTTourOptionsViewController.h"
@@ -162,9 +162,9 @@
 
 @end
 
-@implementation OTMainViewController {
+@implementation OTMainViewController
     BOOL encounterFromTap;
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -1084,6 +1084,7 @@
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
         [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     }];
+    
 }
 
 #pragma mark 15.2 New Tour - on going

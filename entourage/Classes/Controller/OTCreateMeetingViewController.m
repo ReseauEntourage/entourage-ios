@@ -93,7 +93,14 @@
 
 - (void)updateLocationTitle {
     CLGeocoder *geocoder = [CLGeocoder new];
-    CLLocation *current = [[CLLocation alloc] initWithLatitude:self.location.latitude longitude:self.location.longitude];
+    CLLocation *current;
+    if(self.encounter != nil) {
+        CLLocation *encounterLocation = [[CLLocation alloc] initWithLatitude:self.encounter.latitude
+                                                                   longitude:self.encounter.longitude];
+        self.location = encounterLocation.coordinate;
+    }
+        current = [[CLLocation alloc] initWithLatitude:self.location.latitude
+                                             longitude:self.location.longitude];
     [geocoder reverseGeocodeLocation:current completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error)
             NSLog(@"error: %@", error.description);
@@ -134,7 +141,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.disclaimer prepareSegue:segue])
         return;
-    
     UIViewController *destinationViewController = segue.destinationViewController;
     if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]]) {
         [OTLogger logEvent:@"ChangeLocationClick"];
@@ -159,7 +165,7 @@
                                  withTourId:self.currentTourId
                                 withSuccess:^(OTEncounter *sentEncounter) {
                                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
-                                    [self.delegate encounterSent:encounter];
+                                    [self.delegate encounterSent:sentEncounter];
                                 }
                                     failure:^(NSError *error) {
                                         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
@@ -173,6 +179,7 @@
     self.encounter.message = self.messageTextView.textView.text;
     self.encounter.latitude = self.location.latitude;
     self.encounter.longitude = self.location.longitude;
+   
     [SVProgressHUD show];
     [[OTEncounterService new] updateEncounter:self.encounter
                                   withSuccess:^(OTEncounter *updatedEncounter) {
