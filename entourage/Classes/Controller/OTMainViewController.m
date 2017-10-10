@@ -1075,8 +1075,7 @@
     if (self.toursMapDelegate.isActive)
         self.isTourListDisplayed = NO;
     CGRect mapFrame = self.mapView.frame;
-    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
-    self.customSegmentedBehavior.selectedIndex = 0;
+    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;    self.customSegmentedBehavior.selectedIndex = 0;
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.25 animations:^(void) {
         self.tableView.tableHeaderView.frame = mapFrame;
