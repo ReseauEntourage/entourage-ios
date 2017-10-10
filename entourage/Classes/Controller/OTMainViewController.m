@@ -318,7 +318,8 @@
         }
     }
     [self.toggleCollectionView toggle:[feeds count] > 0 animated:YES];
-    [self.heatzonesDataSource updateItems:feeds];
+    if(feeds.count > 0)
+        [self.heatzonesDataSource updateItems:feeds];
     [self.heatzonesCollectionDataSource refresh];
 }
 
