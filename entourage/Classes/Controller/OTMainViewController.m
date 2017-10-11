@@ -1232,9 +1232,12 @@
         for(OTEncounter *meeting in self.encounters) {
             if(meeting.sid == encounter.sid) {
                 [self.encounters replaceObjectAtIndex:i withObject:encounter];
+                break;
             }
             i++;
         }
+        if(self.encounters.count == i)
+            [self.encounters addObject: encounter];
     }
     [self feedMapViewWithEncounters];
 }
