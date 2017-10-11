@@ -58,12 +58,12 @@
           id<MKAnnotation> annotation = [view annotation];
            if ([annotation isKindOfClass:[KPAnnotation class]]) {
                       KPAnnotation *kpAnnotation = (KPAnnotation *)annotation;
-                      if (kpAnnotation.isCluster) {
+               if (kpAnnotation.isCluster && kpAnnotation.annotations.count > 3) {
                          if ([view subviews].count != 0) {
                                  UIView *subview = [[view subviews] objectAtIndex:0];
                                  [subview removeFromSuperview];
                              }
-                         CGRect viewRect = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+                            CGRect viewRect = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
                                UILabel *count = [[UILabel alloc] initWithFrame:viewRect];
                                count.text = [NSString stringWithFormat:@"%lu", (unsigned long)kpAnnotation.annotations.count];
                                count.textColor = [UIColor whiteColor];
