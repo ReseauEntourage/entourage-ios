@@ -86,20 +86,17 @@
     
     self.messageTextView.placeholder = OTLocalizedString(@"detailEncounter");
     self.messageTextView.editingPlaceholder = self.messageTextView.placeholder;
-
-    [self updateLocationTitle];
-    
-}
-
-- (void)updateLocationTitle {
-    CLGeocoder *geocoder = [CLGeocoder new];
-    CLLocation *current;
     if(self.encounter != nil) {
         CLLocation *encounterLocation = [[CLLocation alloc] initWithLatitude:self.encounter.latitude
                                                                    longitude:self.encounter.longitude];
         self.location = encounterLocation.coordinate;
     }
-        current = [[CLLocation alloc] initWithLatitude:self.location.latitude
+    [self updateLocationTitle];
+}
+
+- (void)updateLocationTitle {
+    CLGeocoder *geocoder = [CLGeocoder new];
+    CLLocation *current = [[CLLocation alloc] initWithLatitude:self.location.latitude
                                              longitude:self.location.longitude];
     [geocoder reverseGeocodeLocation:current completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error)

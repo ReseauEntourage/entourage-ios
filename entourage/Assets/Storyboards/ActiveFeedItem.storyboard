@@ -502,13 +502,13 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7L-pV-Coz">
-                                                                    <rect key="frame" x="94.333333333333343" y="90" width="73" height="18"/>
+                                                                    <rect key="frame" x="93.666666666666657" y="90" width="73" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gDf-jH-qfI">
-                                                                    <rect key="frame" x="32.000000000000014" y="108" width="196.33333333333337" height="18"/>
+                                                                    <rect key="frame" x="32.333333333333329" y="108" width="196.33333333333337" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -695,13 +695,13 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gES-5W-eoJ">
-                                                                    <rect key="frame" x="101.33333333333334" y="90" width="73" height="18"/>
+                                                                    <rect key="frame" x="100.66666666666666" y="90" width="73" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="npE-Su-q4O">
-                                                                    <rect key="frame" x="39.000000000000014" y="108" width="196.33333333333337" height="18"/>
+                                                                    <rect key="frame" x="39.333333333333329" y="108" width="196.33333333333337" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -810,7 +810,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZn-9Q-IvZ">
-                                                    <rect key="frame" x="184.33333333333334" y="7" width="46" height="30"/>
+                                                    <rect key="frame" x="184.66666666666666" y="7" width="46" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                     <state key="normal" title="Button"/>

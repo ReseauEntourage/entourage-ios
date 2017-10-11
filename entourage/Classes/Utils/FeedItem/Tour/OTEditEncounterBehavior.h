@@ -10,11 +10,14 @@
 #import "OTEncounter.h"
 #import <MapKit/MapKit.h>
 
+#define kNotificationEncounterEdited @"NotificationEncounterEdited"
+#define kNotificationEncounterEditedInfoKey @"NotificationEncounterEditedInfoKey"
+
 @interface OTEditEncounterBehavior : OTBehavior
 
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 
-@property (nonatomic, strong, readonly) OTEncounter *encounter;
+@property (nonatomic, strong, readwrite) OTEncounter *encounter;
 
 - (void)doEdit:(OTEncounter *)encounter forTour:(NSNumber *)tourId andLocation:(CLLocationCoordinate2D) location;
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue;

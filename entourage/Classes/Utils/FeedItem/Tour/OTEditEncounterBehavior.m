@@ -11,7 +11,6 @@
 
 @interface OTEditEncounterBehavior () <OTCreateMeetingViewControllerDelegate>
 
-@property (nonatomic, strong, readwrite) OTEncounter *encounter;
 @property (nonatomic, strong) NSNumber *tourId;
 @property (nonatomic, assign) CLLocationCoordinate2D location;
 
@@ -44,10 +43,19 @@
 #pragma mark - OTCreateMeetingViewControllerDelegate
 
 - (void)encounterSent:(OTEncounter *)encounter {
-    self.encounter = encounter;
-    [self.owner dismissViewControllerAnimated:YES completion:^{
-        [self sendActionsForControlEvents:UIControlEventValueChanged];
-    }];
+    if(self.encounter == nil) {
+        self.encounter = encounter;
+        [self.owner dismissViewControllerAnimated:YES completion:^{
+            [self sendActionsForControlEvents:UIControlEventValueChanged];
+        }];
+    } else {
+        self.encounter = encounter;
+        [self.owner dismissViewControllerAnimated:YES completion:^{
+            [self sendActionsForControlEvents:UIControlEventValueChanged];
+            NSDictionary *info = @{ kNotificationEncounterEditedInfoKey: encounter };
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEncounterEdited object:nil userInfo:info];
+        }];
+    }
 }
 
 @end

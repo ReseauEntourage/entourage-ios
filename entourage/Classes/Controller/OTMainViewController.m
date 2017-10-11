@@ -236,6 +236,10 @@
 
 - (void)addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(encounterEdited:)
+                                                 name:kNotificationEncounterEdited
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appWillEnterBackground:)
                                                  name:UIApplicationWillResignActiveNotification
                                                object:nil];
@@ -1075,7 +1079,8 @@
     if (self.toursMapDelegate.isActive)
         self.isTourListDisplayed = NO;
     CGRect mapFrame = self.mapView.frame;
-    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;    self.customSegmentedBehavior.selectedIndex = 0;
+    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
+    self.customSegmentedBehavior.selectedIndex = 0;
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.25 animations:^(void) {
         self.tableView.tableHeaderView.frame = mapFrame;
@@ -1214,9 +1219,28 @@
     [self forceGetNewData];
 }
 
-- (IBAction)encounterChanged {
-    [self.encounters addObject:self.editEncounterBehavior.encounter];
+- (void)encounterEdited: (NSNotification *)notification {
+    OTEncounter *encounter = [notification readEncounter];
+    [self updateEncounter:encounter];
+}
+
+- (void)updateEncounter: (OTEncounter *)encounter {
+    if(self.encounters.count == 0) {
+        [self.encounters addObject: encounter];
+    } else {
+        int i=0;
+        for(OTEncounter *meeting in self.encounters) {
+            if(meeting.sid == encounter.sid) {
+                [self.encounters replaceObjectAtIndex:i withObject:encounter];
+            }
+            i++;
+        }
+    }
     [self feedMapViewWithEncounters];
+}
+
+- (IBAction)encounterChanged {
+    [self updateEncounter: self.editEncounterBehavior.encounter];
 }
 
 - (IBAction)showGuide {
