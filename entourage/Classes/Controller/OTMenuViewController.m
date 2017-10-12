@@ -152,7 +152,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
                 [OTLogger logEvent:@"WhatActionsClick"];
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_application_usage")])
                 [OTLogger logEvent:@"AppFAQClick"];
-            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_blog")])
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")])
                 [OTLogger logEvent:@"SimpleCommeBonjourClick"];
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_chart")])
                 [OTLogger logEvent:@"ViewEthicsChartClick"];
@@ -220,7 +220,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (NSArray *)createMenuItems {
 	NSMutableArray *menuItems = [NSMutableArray array];
-    OTMenuItem *itemBlog = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_blog") iconName: @"blog" url:MENU_BLOG_URL];
+    OTMenuItem *itemBlog = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_scb") iconName: @"blog" url:MENU_SCB_URL];
     [menuItems addObject:itemBlog];
     OTMenuItem *itemEntourageActions = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_entourage_actions") iconName:@"goal" url:MENU_BLOG_ENTOURAGE_ACTIONS_URL];
     [menuItems addObject:itemEntourageActions];
