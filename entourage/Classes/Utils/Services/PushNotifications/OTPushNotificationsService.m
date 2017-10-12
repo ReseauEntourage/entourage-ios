@@ -46,7 +46,12 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self sendAppInfo];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    @try {
     [mixpanel.people addPushDeviceToken:token];
+    }
+    @catch (NSException *ex) {
+        
+    }
 }
 
 - (void)clearTokenWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {

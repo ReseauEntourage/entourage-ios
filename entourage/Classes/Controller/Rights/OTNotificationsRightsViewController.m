@@ -21,6 +21,7 @@
 #import "OTPushNotificationsService.h"
 #import "OTTutorialService.h"
 #import "OTLocationManager.h"
+#import "Mixpanel/Mixpanel.h"
 
 @implementation OTNotificationsRightsViewController
 
@@ -47,6 +48,8 @@
 
 - (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {
     NSLog(@"received kNotificationPushStatusChanged");
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people set:@{@"EntourageGeolocEnable": [NSNumber numberWithBool:YES]}];
     [self doShowNext];
 }
 
