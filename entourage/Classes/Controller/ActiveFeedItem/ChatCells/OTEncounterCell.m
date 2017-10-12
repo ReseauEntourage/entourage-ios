@@ -25,12 +25,12 @@
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint  {
     self.encounter =  (OTEncounter *)timelinePoint;
-    if([self canEditEncounter]) {
-        [self.btnInfo setHidden:NO];
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    OTFeedItemAuthor *author = self.feedItem.author;
+    if (currentUser != nil && author != nil) {
+        [self.btnInfo setHidden:![currentUser.sid isEqualToNumber:author.uID]];
         [self.btnInfo setAttributedTitle:[self getLabelTextForUser:self.encounter.userName withStreetPersonName:self.encounter.streetPersonName] forState:UIControlStateNormal];
     }
-    else
-        [self.btnInfo setHidden:YES];
    [self.btnInfo setEnabled: [self canEditEncounter]];
 }
 
