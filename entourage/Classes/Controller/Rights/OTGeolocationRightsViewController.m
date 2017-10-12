@@ -57,7 +57,7 @@
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     BOOL allowed = [notification readAllowedLocation];
-    [mixpanel.people set:@{@"EntourageGeolocEnable": [NSNumber numberWithBool:allowed]}];
+    [mixpanel.people set:@{@"EntourageGeolocEnable": allowed ? @"YES" : @"NO"}];
     if (allowed)
         [self goToNotifications];
     else

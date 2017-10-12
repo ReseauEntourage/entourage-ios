@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.notificationEnabled = @"NO";
     self.title = @"";
     [self addIgnoreButton];
     
@@ -48,14 +48,15 @@
 
 - (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {
     NSLog(@"received kNotificationPushStatusChanged");
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel.people set:@{@"EntourageGeolocEnable": [NSNumber numberWithBool:YES]}];
+    self.notificationEnabled = @"YES";
     [self doShowNext];
 }
 
 #pragma mark - IBAction
 
 - (void)doShowNext {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people set:@{@"EntourageNotifEnable": self.notificationEnabled}];
     [self setTutorialCompleted];
     [self checkInvitationsToJoin];
 }

@@ -183,15 +183,10 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 - (void)setupMixpanelWithUser: (OTUser *)user {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    @try{
     [mixpanel identify:[user.sid stringValue]];
-    [mixpanel.people set:@{@"$email": user.email}];
-    [mixpanel.people set:@{@"EntouragePartner": @""}];
+    [mixpanel.people set:@{@"$email": user.email != nil ? user.email : @""}];
+    [mixpanel.people set:@{@"EntouragePartner": user.partner != nil ? user.partner.name : @""}];
     [mixpanel.people set:@{@"EntourageUserType": user.type}];
-    }
-    @catch (NSException *ex) {
-        
-    }
 }
 
 #pragma mark - Segue
