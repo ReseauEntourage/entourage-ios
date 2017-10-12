@@ -57,7 +57,7 @@
     //self.frontViewShadowRadius = 10.0f; // radius of the front view's shadow (default 2.5)
     //self.frontViewShadowOffset = CGSizeMake(0.0f, 2.5f); // radius of the front view's shadow offset (default {0.0f,2.5f})
     self.frontViewShadowOpacity = 0.8f; // front view's shadow opacity (default 1.0)
-    self.frontViewShadowColor = [UIColor clearColor]; // front view's shadow color (default blackColor)
+    self.frontViewShadowColor = [UIColor lightGrayColor]; // front view's shadow color (default blackColor)
     [self.view setBackgroundColor:[UIColor clearColor]];
     [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor clearColor];
 }
