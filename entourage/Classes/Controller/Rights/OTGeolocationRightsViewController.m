@@ -13,6 +13,7 @@
 #import "NSNotification+entourage.h"
 #import "UINavigationController+entourage.h"
 #import "UIBarButtonItem+factory.h"
+#import "Mixpanel/Mixpanel.h"
 
 @implementation OTGeolocationRightsViewController
 
@@ -54,7 +55,9 @@
 #pragma mark - App authorization notifications
 
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
     BOOL allowed = [notification readAllowedLocation];
+    [mixpanel.people set:@{@"EntourageGeolocEnable": allowed ? @"YES" : @"NO"}];
     if (allowed)
         [self goToNotifications];
     else

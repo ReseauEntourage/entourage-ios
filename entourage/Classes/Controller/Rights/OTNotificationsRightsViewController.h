@@ -12,4 +12,6 @@ extern NSString *const kTutorialDone;
 
 @interface OTNotificationsRightsViewController : UIViewController
 
+@property (nonatomic, strong) NSString *notificationEnabled;
+
 @end
