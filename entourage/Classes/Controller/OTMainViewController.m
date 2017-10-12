@@ -1230,7 +1230,7 @@
     } else {
         int i=0;
         for(OTEncounter *meeting in self.encounters) {
-            if(meeting.sid == encounter.sid) {
+            if([meeting.sid isEqualToNumber: encounter.sid]) {
                 [self.encounters replaceObjectAtIndex:i withObject:encounter];
                 break;
             }
