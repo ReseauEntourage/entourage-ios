@@ -26,6 +26,8 @@
 #import "OTLocationSelectorViewController.h"
 #import "NSError+OTErrorData.h"
 #import "OTJSONResponseSerializer.h"
+#import "OTFeedItemFactory.h"
+#import "OTOngoingTourService.h"
 
 #define PADDING 20.0f
 
@@ -52,8 +54,14 @@
     
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
     [self setupUI];
-    if(!self.encounter)
+    if(!self.encounter) {
         [self.disclaimer showDisclaimer];
+        if(!OTSharedOngoingTour.isOngoing) {
+            [self.locationButton setEnabled:NO];
+            [self.nameTextField setEnabled:NO];
+            [self.messageTextView.textView setEditable:NO];
+        }
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -69,10 +77,15 @@
 
 - (void)setupUI {
     [self setupCloseModal];
-    
-    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEncounter:) colored:[UIColor appOrangeColor]];
-    [self.navigationItem setRightBarButtonItem:menuButton];
-    
+    if(!OTSharedOngoingTour.isOngoing) {
+        [self.locationButton setEnabled:NO];
+        [self.nameTextField setEnabled:NO];
+        [self.messageTextView.textView setEditable:NO];
+    }
+    else {
+        UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEncounter:) colored:[UIColor appOrangeColor]];
+        [self.navigationItem setRightBarButtonItem:menuButton];
+    }
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.firstLabel.text = [NSString stringWithFormat:OTLocalizedString(@"formater_encounterAnd"), currentUser.displayName];
     

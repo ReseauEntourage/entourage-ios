@@ -27,6 +27,7 @@
     self.encounter =  (OTEncounter *)timelinePoint;
     [self.btnInfo setAttributedTitle:[self getLabelTextForUser:self.encounter.userName withStreetPersonName:self.encounter.streetPersonName] forState:UIControlStateNormal];
    [self.btnInfo setEnabled: [self canEditEncounter]];
+    
 }
 
 - (void)doEditEncounter {
@@ -50,7 +51,7 @@
 
 // An encounter can be edited only if the tour is ongoing and only by the tour author
 - (BOOL) canEditEncounter {
-    if ([self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING]) {
+    if (![self.feedItem.status isEqualToString:TOUR_STATUS_FREEZED]) {
         OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
         OTFeedItemAuthor *author = self.feedItem.author;
         if (currentUser != nil && author != nil) {
