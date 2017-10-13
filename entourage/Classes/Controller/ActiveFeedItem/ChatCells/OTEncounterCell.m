@@ -45,6 +45,9 @@
        [nameAttrString addAttribute: NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range: NSMakeRange(0, [nameAttrString length])];
         [infoAttrString addAttribute: NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range: NSMakeRange(0, [infoAttrString length])];
     }
+    else {
+        self.btnInfo.backgroundColor = CLOSED_ITEM_BACKGROUND_COLOR;
+    }
     [nameAttrString appendAttributedString:infoAttrString];
     return nameAttrString;
 }
