@@ -25,9 +25,7 @@
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint  {
     self.encounter =  (OTEncounter *)timelinePoint;
-    [self.btnInfo setAttributedTitle:[self getLabelTextForUser:self.encounter.userName withStreetPersonName:self.encounter.streetPersonName] forState:UIControlStateNormal];
-   [self.btnInfo setEnabled: [self canEditEncounter]];
-    
+    [self.btnInfo setAttributedTitle:[self getLabelTextForUser:self.encounter.userName withStreetPersonName:self.encounter.streetPersonName] forState:UIControlStateNormal];    
 }
 
 - (void)doEditEncounter {
@@ -41,11 +39,9 @@
     NSMutableAttributedString *nameAttrString = [[NSMutableAttributedString alloc] initWithString:userName attributes:@{NSForegroundColorAttributeName: [UIColor appOrangeColor]}];
     NSMutableAttributedString *infoAttrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_encounter_and_user_meet"), streetPersonName] attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
     
-    if ([self canEditEncounter]) {
        [nameAttrString addAttribute: NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range: NSMakeRange(0, [nameAttrString length])];
         [infoAttrString addAttribute: NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range: NSMakeRange(0, [infoAttrString length])];
-    }
-    else {
+    if (![self canEditEncounter]) {
         self.btnInfo.backgroundColor = CLOSED_ITEM_BACKGROUND_COLOR;
     }
     [nameAttrString appendAttributedString:infoAttrString];
