@@ -8,8 +8,10 @@
 
 #import "OTEditEncounterBehavior.h"
 #import "OTCreateMeetingViewController.h"
+#import "OTOngoingTourService.h"
+#import "OTMeetingCalloutViewController.h"
 
-@interface OTEditEncounterBehavior () <OTCreateMeetingViewControllerDelegate>
+@interface OTEditEncounterBehavior () <OTCreateMeetingViewControllerDelegate, OTMeetingCalloutViewControllerDelegate>
 
 @property (nonatomic, strong) NSNumber *tourId;
 @property (nonatomic, assign) CLLocationCoordinate2D location;
@@ -24,7 +26,10 @@
     self.encounter = encounter;
     self.tourId = tourId;
     self.location = location;
-    [self.owner performSegueWithIdentifier:@"OTCreateMeeting" sender:self];
+    if(OTSharedOngoingTour.isOngoing)
+        [self.owner performSegueWithIdentifier:@"OTCreateMeeting" sender:self];
+    else
+        [self.owner performSegueWithIdentifier:@"OTDisplayMeeting" sender:self];
 }
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
@@ -35,6 +40,12 @@
         [controller configureWithTourId:self.tourId andLocation:self.location];
         controller.delegate = self;
     }
+    else if ([segue.identifier isEqualToString:@"OTDisplayMeeting"]) {
+            UIViewController *destinationViewController = segue.destinationViewController;
+            OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)destinationViewController;
+            controller.encounter = self.encounter;
+            controller.delegate = self;
+        }
     else
         return NO;
     return YES;

@@ -8,6 +8,7 @@
 
 #import "OTMeetingCalloutViewController.h"
 #import "OTConsts.h"
+#import <MapKit/MKMapView.h>
 
 // Model
 #import "OTUser.h"
@@ -21,6 +22,7 @@
 #import "MBProgressHUD.h"
 
 #import <Social/Social.h>
+#import "UIColor+entourage.h"
 
 
 #define PADDING 15.0f
@@ -29,6 +31,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
+@property (strong, nonatomic) NSString *locationName;
 
 @end
 
@@ -38,15 +41,17 @@
 #pragma mark - lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.locationName = @"";
     self.title = OTLocalizedString(@"meetingTitle");
-    [self setupCloseModal];
     [self.textView setTextContainerInset:UIEdgeInsetsMake(PADDING, PADDING, PADDING, PADDING)];
+    [self locationTitle];
     [self configureWithEncouter:self.encounter];
 }
 
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 /********************************************************************************/
@@ -60,7 +65,7 @@
 
 	NSString *date = [formatter stringFromDate:encounter.date];
 
-	NSString *title = [NSString stringWithFormat:@"%@ %@ %@ %@, le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, OTLocalizedString(@"has_encountered"), encounter.streetPersonName, OTLocalizedString(@"here"), date];
+    NSString *title = [NSString stringWithFormat:@"%@ et %@ se sont rencontrés à %@ le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, encounter.streetPersonName, self.locationName , date];
 
     NSString *bodyText = title;
 
@@ -76,6 +81,20 @@
 
 /********************************************************************************/
 #pragma mark - Private Methods
+
+- (void)locationTitle {
+    CLGeocoder *geocoder = [CLGeocoder new];
+     CLLocation *location = [[CLLocation alloc] initWithLatitude:self.encounter.latitude longitude:self.encounter.longitude];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error)
+            NSLog(@"error: %@", error.description);
+        CLPlacemark *placemark = placemarks.firstObject;
+        if (placemark.thoroughfare !=  nil)
+            self.locationName = placemark.thoroughfare;
+        else
+            self.locationName = placemark.locality;
+    }];
+}
 
 - (void)appendNotNilString:(NSString *)otherText toString:(NSMutableString *)text {
 	if (otherText) {

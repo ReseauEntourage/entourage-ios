@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Calibri.ttf">
+            <string>Calibri</string>
+        </array>
         <array key="SF-UI-Text-Light.otf">
             <string>SFUIText-Light</string>
         </array>
@@ -502,13 +505,13 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7L-pV-Coz">
-                                                                    <rect key="frame" x="101.33333333333334" y="90" width="73" height="18"/>
+                                                                    <rect key="frame" x="101" y="90" width="73" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gDf-jH-qfI">
-                                                                    <rect key="frame" x="39" y="108" width="196.33333333333331" height="18"/>
+                                                                    <rect key="frame" x="39.666666666666657" y="108" width="196.33333333333331" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -695,13 +698,13 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gES-5W-eoJ">
-                                                                    <rect key="frame" x="101.33333333333334" y="90" width="73" height="18"/>
+                                                                    <rect key="frame" x="101" y="90" width="73" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="npE-Su-q4O">
-                                                                    <rect key="frame" x="39" y="108" width="196.33333333333331" height="18"/>
+                                                                    <rect key="frame" x="39.666666666666657" y="108" width="196.33333333333331" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -896,6 +899,7 @@
                         <segue destination="hfH-zI-I2L" kind="presentation" identifier="EntourageEditorSegue" id="8gM-o4-A6h"/>
                         <segue destination="j0M-T7-4eG" kind="presentation" identifier="SegueChangeState" id="r9m-eb-lob"/>
                         <segue destination="TSq-eS-Spi" kind="presentation" identifier="OTCreateMeeting" id="FYG-QT-Krz"/>
+                        <segue destination="dyv-OE-bnb" kind="show" identifier="OTDisplayMeeting" id="qpv-hD-uti"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riw-B5-uYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1762,6 +1766,75 @@
             </objects>
             <point key="canvasLocation" x="1346" y="1188"/>
         </scene>
+        <!--Title-->
+        <scene sceneID="DoG-PZ-jfH">
+            <objects>
+                <viewController storyboardIdentifier="OTMeetingCalloutViewController" automaticallyAdjustsScrollViewInsets="NO" id="dyv-OE-bnb" customClass="OTMeetingCalloutViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wDw-AT-7OS"/>
+                        <viewControllerLayoutGuide type="bottom" id="2MH-TZ-cH9"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="h7J-YX-3x8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lkz-Sh-3NI">
+                                <rect key="frame" x="0.0" y="36" width="320" height="100"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="cPr-5w-YwW"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
+                                <color key="textColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                            </textView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFm-fZ-c3j">
+                                <rect key="frame" x="0.0" y="511" width="320" height="57"/>
+                                <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="XJU-ns-o9H"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="18"/>
+                                <state key="normal" title="FERMER">
+                                    <color key="titleColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="closeMe:" destination="dyv-OE-bnb" eventType="touchUpInside" id="yQ2-q7-9Ir"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="dFm-fZ-c3j" secondAttribute="trailing" constant="-16" id="6br-aA-b67"/>
+                            <constraint firstItem="dFm-fZ-c3j" firstAttribute="leading" secondItem="h7J-YX-3x8" secondAttribute="leadingMargin" constant="-16" id="TB2-Yp-78g"/>
+                            <constraint firstItem="Lkz-Sh-3NI" firstAttribute="top" secondItem="wDw-AT-7OS" secondAttribute="bottom" constant="16" id="Trg-2d-bo8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Lkz-Sh-3NI" secondAttribute="trailing" constant="-16" id="hg4-V6-QWD"/>
+                            <constraint firstItem="2MH-TZ-cH9" firstAttribute="top" secondItem="dFm-fZ-c3j" secondAttribute="bottom" id="kNC-B1-VBf"/>
+                            <constraint firstItem="Lkz-Sh-3NI" firstAttribute="leading" secondItem="h7J-YX-3x8" secondAttribute="leadingMargin" constant="-16" id="nFC-S1-TKc"/>
+                            <constraint firstAttribute="centerX" secondItem="dFm-fZ-c3j" secondAttribute="centerX" id="zkI-AV-20k"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="AiB-LP-HZV"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="textView" destination="Lkz-Sh-3NI" id="SB1-Jf-WfF"/>
+                        <outlet property="textViewHeightConstraint" destination="cPr-5w-YwW" id="de8-9R-8we"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6WP-yE-4uN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="372" y="-606"/>
+        </scene>
     </scenes>
     <resources>
         <image name="24HInactive" width="48" height="48"/>
@@ -1776,12 +1849,12 @@
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TAD-d7-tmZ"/>
-        <segue reference="zFK-Fj-hWR"/>
+        <segue reference="fUf-PJ-SgA"/>
+        <segue reference="qbj-7b-m5F"/>
         <segue reference="nan-zV-dem"/>
-        <segue reference="ffc-Pt-QuG"/>
-        <segue reference="8gM-o4-A6h"/>
-        <segue reference="r9m-eb-lob"/>
-        <segue reference="5BX-au-xTN"/>
+        <segue reference="Cgj-Wq-qez"/>
+        <segue reference="DLP-On-QzP"/>
+        <segue reference="0Fj-Nh-lj4"/>
+        <segue reference="Rwq-4K-0sd"/>
     </inferredMetricsTieBreakers>
 </document>
