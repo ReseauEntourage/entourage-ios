@@ -46,7 +46,7 @@
     else if(self.lastLocation == nil) {
             self.lastLocation = [OTLocationManager sharedInstance].currentLocation;
         }
-    else if(!self.lastLocation) {
+    if(!self.lastLocation) {
         [[OTLocationManager sharedInstance] showLocationNotFoundMessage:OTLocalizedString(@"no_location_create_tour")];
         [self.delegate failedToStartTour];
         return;
