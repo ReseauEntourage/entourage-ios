@@ -37,6 +37,7 @@
     self.dataSource = [OTCategoryFromJsonService getData];
     self.categoryTableView.tableFooterView = [UIView new];
     self.categoryTableView.rowHeight = UITableViewAutomaticDimension;
+    self.categoryTableView.estimatedRowHeight = 140;
     [self.categoryTableView reloadData];
 }
 
@@ -51,6 +52,12 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return SECTION_HEIGHT;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    return UITableViewAutomaticDimension;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -78,7 +85,6 @@
     singleTap.numberOfTapsRequired = 1;
     singleTap.numberOfTouchesRequired = 1;
     [imageView addGestureRecognizer:singleTap];
-
 
     sectionButton.tag = section;
     imageView.tag = section;

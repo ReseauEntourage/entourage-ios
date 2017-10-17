@@ -58,20 +58,15 @@
 - (void)configureWithEncouter:(OTEncounter *)encounter {
 	self.encounter = encounter;
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-
 	[formatter setDateFormat:@"dd/MM/yyyy à HH:mm"];
-
 	NSString *date = [formatter stringFromDate:encounter.date];
     if(self.locationName == nil)
         self.locationName = @"";
     NSString *title = [NSString stringWithFormat:@"%@ et %@ se sont rencontrés à %@ le %@", [[NSUserDefaults standardUserDefaults] currentUser].firstName, encounter.streetPersonName, self.locationName, date];
-
     NSString *bodyText = title;
-
 	if (encounter.message.length != 0) {
 		bodyText = [NSString stringWithFormat:@"%@ \n\n%@", bodyText, encounter.message];
 	}
-
 	[self.textView setText: bodyText];
     CGSize sizeThatFitsTextView = [self.textView sizeThatFits:CGSizeMake([UIScreen mainScreen].bounds.size.width, MAXFLOAT)];
     self.textViewHeightConstraint.constant = sizeThatFitsTextView.height;
@@ -86,7 +81,9 @@
     CLGeocoder *geocoder = [CLGeocoder new];
      CLLocation *location = [[CLLocation alloc] initWithLatitude:self.encounter.latitude longitude:self.encounter.longitude];
     dispatch_group_enter(group);
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+    [geocoder reverseGeocodeLocation:location
+                   completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks,
+                                                                  NSError * _Nullable error) {
         if (error)
             NSLog(@"error: %@", error.description);
         CLPlacemark *placemark = placemarks.firstObject;
@@ -114,9 +111,7 @@
 /********************************************************************************/
 #pragma mark - IBActions
 - (IBAction)shareOnTwitter:(id)sender {
-    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
 }
 
 - (IBAction)shareOnFacebook:(id)sender {
