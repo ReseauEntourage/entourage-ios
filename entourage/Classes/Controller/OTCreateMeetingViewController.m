@@ -51,7 +51,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
     [self setupUI];
     if(!self.encounter) {

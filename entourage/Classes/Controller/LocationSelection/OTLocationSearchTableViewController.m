@@ -53,6 +53,7 @@
     
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.pinDelegate respondsToSelector:@selector(dropPinZoomIn:)])
         [self.pinDelegate dropPinZoomIn:_matchingItems[indexPath.row].placemark];

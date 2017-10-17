@@ -388,12 +388,12 @@
     [self.mapView setRegion:region animated:NO];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
-    for(UIView *view in self.mapView.subviews)
-        for(UIGestureRecognizer *recognizer in view.gestureRecognizers)
-            if([recognizer class] == [UILongPressGestureRecognizer class])
-                [view removeGestureRecognizer:recognizer];
-    UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
-    [self.mapView addGestureRecognizer:longPressMapGesture];
+//    for(UIView *view in self.mapView.subviews)
+//        for(UIGestureRecognizer *recognizer in view.gestureRecognizers)
+//            if([recognizer class] == [UILongPressGestureRecognizer class])
+//                [view removeGestureRecognizer:recognizer];
+   // UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
+    //[self.mapView addGestureRecognizer:longPressMapGesture];
 }
 
 - (void)configureNavigationBar {
