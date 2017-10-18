@@ -33,7 +33,6 @@
     if (revealViewController)
     {
         UIImage *menuImage = [[UIImage imageNamed:@"menu.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
         menuButton = [[UIBarButtonItem alloc] init];
         [menuButton setImage:menuImage];
         [menuButton setTarget:self.revealViewController];
@@ -51,7 +50,6 @@
     if (revealViewController)
     {
         UIImage *menuImage = [[UIImage imageNamed:@"backArrow.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
         menuButton = [[UIBarButtonItem alloc] init];
         [menuButton setImage:menuImage];
         [menuButton setTarget:self.revealViewController];
@@ -76,7 +74,6 @@
 }
 
 - (UIBarButtonItem*)setupCloseModalWithImageNamed:(NSString *)imageName {
-    
     UIImage *menuImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
     [menuButton setImage:menuImage];

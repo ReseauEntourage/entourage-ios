@@ -30,6 +30,8 @@
 }
 
 - (void)sharePublic:(id)sender {
+    [OTLogger logEvent:@"OpenNativeShare"];
+    [OTLogger logEvent:@"ShareLinkAsNonMember"];
     NSString *content = [NSString stringWithFormat:OTLocalizedString(@"share_public"), self.feedItem.shareUrl];
     [self share:content];
 }

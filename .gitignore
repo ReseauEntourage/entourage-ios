@@ -129,8 +129,5 @@ Temporary Items
 
 # Hide Amazon data
 OTAmazonConsts.h
-
-#hide plists for environments
-staging.plist
-prod.plist
+OTMixpanelConsts.h
 

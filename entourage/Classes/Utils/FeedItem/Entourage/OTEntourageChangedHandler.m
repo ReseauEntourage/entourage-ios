@@ -12,6 +12,8 @@
 
 - (void)updateWith:(OTFeedItem *)feedItem {
     OTEntourage *entourage = (OTEntourage *)feedItem;
+    self.entourage.categoryObject = entourage.categoryObject;
+    self.entourage.category = entourage.category;
     self.entourage.title = entourage.title;
     self.entourage.desc = entourage.desc;
     self.entourage.location = entourage.location;

@@ -119,7 +119,6 @@ typedef NS_ENUM(NSInteger) {
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
-    
     self.user.firstName = firstName;
     self.user.lastName = lastName;
     self.user.email = email;

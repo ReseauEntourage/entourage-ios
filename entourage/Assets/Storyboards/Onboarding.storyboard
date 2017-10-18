@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BbA-ED-vfm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BbA-ED-vfm">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -15,7 +14,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Phone View Controller-->
+        <!--Owner-->
         <scene sceneID="qT4-XV-W5p">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="BbA-ED-vfm" customClass="OTPhoneViewController" sceneMemberID="viewController">
@@ -222,6 +221,12 @@ numéro de portable? </string>
                         <constraint firstAttribute="bottom" secondItem="w7j-ig-Zu8" secondAttribute="bottom" id="m5f-Qc-Qj3"/>
                     </constraints>
                 </view>
+                <customObject id="6kM-Sq-D23" customClass="OTCloseKeyboardOnTapBehavior">
+                    <connections>
+                        <outlet property="owner" destination="BbA-ED-vfm" id="061-Na-F85"/>
+                        <outletCollection property="inputViews" destination="8h5-LL-TYs" id="1Fv-06-cXS"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="760.5" y="-2472.5"/>
         </scene>
@@ -356,6 +361,12 @@ vérification</string>
                 <customObject id="13E-al-jIm" userLabel="Onboarding Navigation" customClass="OTOnboardingNavigationBehavior">
                     <connections>
                         <outlet property="owner" destination="ay8-4Z-lNJ" id="pFF-0E-jMY"/>
+                    </connections>
+                </customObject>
+                <customObject id="QD9-yl-4tv" customClass="OTCloseKeyboardOnTapBehavior">
+                    <connections>
+                        <outlet property="owner" destination="ay8-4Z-lNJ" id="7Tf-2j-vLz"/>
+                        <outletCollection property="inputViews" destination="pvY-e5-lmP" id="8vI-SG-AD6"/>
                     </connections>
                 </customObject>
             </objects>

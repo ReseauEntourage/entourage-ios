@@ -52,6 +52,8 @@
     }
     self.imgAssociation.hidden = feedItem.author.partner == nil;
     [self.imgAssociation setupFromUrl:feedItem.author.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
+    NSString *source = [uiDelegate categoryIconSource];
+    [self.imgCategory setImage:[UIImage imageNamed:source]];
 }
 
 - (void)clearConfiguration {
@@ -61,6 +63,8 @@
     self.btnAvatar = nil;
     self.lblTimeDistance = nil;
     self.imgAssociation = nil;
+    self.imgCategory = nil;
+    self.imgCategory = nil;
     [self configureWith:nil];
 }
 
@@ -78,8 +82,9 @@
 
 - (void)profilePictureUpdated:(NSNotification *)notification {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if([currentUser.sid isEqualToNumber:self.feedItem.author.uID])
-        [self.btnAvatar setupAsProfilePictureFromUrl:currentUser.avatarURL withPlaceholder:@"user"];
+    if(self.feedItem.author.uID != nil)
+        if([currentUser.sid isEqualToNumber:self.feedItem.author.uID])
+            [self.btnAvatar setupAsProfilePictureFromUrl:currentUser.avatarURL withPlaceholder:@"user"];
 }
 
 - (void)entourageUpdated:(NSNotification *)notification {

@@ -9,6 +9,9 @@
 #import "OTMessagingService.h"
 #import "OTFeedItemFactory.h"
 #import "OTMessagingDelegate.h"
+#import "OTUser.h"
+#import "OTFeedItemAuthor.h"
+#import "NSUserDefaults+OT.h"
 
 @implementation OTMessagingService
 
@@ -45,7 +48,7 @@
 
     if([[[OTFeedItemFactory createFor: feedItem] getStateInfo] isClosed])
         dispatch_group_leave(group);
-    else
+    else {
         [messaging getFeedItemUsersWithStatus:nil success:^(NSArray *items) {
             if([items count] > 0)
                 @synchronized (allItems) {
@@ -57,16 +60,25 @@
         } failure:^(NSError *error) {
             dispatch_group_leave(group);
         }];
-
-    [messaging getEncountersWithSuccess:^(NSArray *items) {
-        if([items count] > 0)
-            @synchronized (allItems) {
-                [allItems addObjectsFromArray:items];
-            }
-        dispatch_group_leave(group);
-    } failure:^(NSError *error) {
-        dispatch_group_leave(group);
-    }];
+    }
+    
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    OTFeedItemAuthor *author = feedItem.author;
+    if (currentUser != nil && author != nil) {
+        if([currentUser.sid isEqualToNumber:author.uID]) {
+            [messaging getEncountersWithSuccess:^(NSArray *items) {
+                if([items count] > 0)
+                    @synchronized (allItems) {
+                        [allItems addObjectsFromArray:items];
+                    }
+             dispatch_group_leave(group);
+             } failure:^(NSError *error) {
+                 dispatch_group_leave(group);
+             }];
+        } else {
+            dispatch_group_leave(group);
+        }
+    }
 }
 
 #pragma mark - private methods

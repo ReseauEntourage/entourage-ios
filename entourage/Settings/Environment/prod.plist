@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AmazonPictureFolder</key>
+	<string>300x300/</string>
+	<key>ApiBaseUrl</key>
+	<string>https://api.entourage.social/api/v1/</string>
+	<key>ApiKey</key>
+	<string>f4f59f359c6a8c7dc53064da</string>
+	<key>FlurryAPIKey</key>
+	<string>B7KH4H9T4HCY5PCR5P45</string>
+	<key>NuanceHostAddress</key>
+	<string>gcb.nmdp.nuancemobility.net</string>
+	<key>NuanceAppId</key>
+	<string>NMDPPRODUCTION_Fran__ois_Pellissier_Entourage_20160104053924</string>
+</dict>
+</plist>

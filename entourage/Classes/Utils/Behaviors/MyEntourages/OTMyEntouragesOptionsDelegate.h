@@ -10,8 +10,7 @@
 
 @protocol OTMyEntouragesOptionsDelegate <NSObject>
 
-- (void)createDemand;
-- (void)createContribution;
+- (void)createAction;
 - (void)createTour;
 - (void)createEncounter;
 

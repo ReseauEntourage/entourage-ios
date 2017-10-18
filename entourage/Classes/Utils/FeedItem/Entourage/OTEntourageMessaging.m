@@ -68,7 +68,8 @@
     }];
 }
 
-- (void)getEncountersWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+- (void)getEncountersWithSuccess:(void (^)(NSArray *))success
+                         failure:(void (^)(NSError *))failure {
     if(success)
         success([NSArray new]);
 }

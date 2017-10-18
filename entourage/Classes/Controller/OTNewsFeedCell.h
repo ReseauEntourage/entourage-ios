@@ -23,6 +23,7 @@ extern NSString* const OTNewsFeedTableViewCellIdentifier;
 @property(nonatomic, weak) IBOutlet UITextField *unreadCountText;
 @property(nonatomic, weak) IBOutlet UIView *statusLineMarker;
 @property(nonatomic, weak) IBOutlet UIImageView *imgAssociation;
+@property (nonatomic, weak) IBOutlet UIImageView *imgCategory;
 
 @property(nonatomic, weak) IBOutlet id<OTFeedItemsTableViewDelegate> tableViewDelegate;
 

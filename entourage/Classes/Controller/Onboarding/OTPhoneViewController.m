@@ -68,7 +68,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
@@ -124,7 +124,8 @@
 }
 
 - (void)showKeyboard:(NSNotification*)notification {
-    [self.scrollView scrollToBottomFromKeyboardNotification:notification andHeightContraint:self.heightContraint];
+    [self.scrollView scrollToBottomFromKeyboardNotification:notification
+                                         andHeightContraint:self.heightContraint];
 }
 
 #pragma mark - UIPickerViewDataSource

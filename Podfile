@@ -20,6 +20,8 @@ target "entourage" do
     pod 'JVFloatLabeledTextField'
     pod 'libPhoneNumber-iOS'
     pod 'Flurry-iOS-SDK/FlurrySDK'
+	pod 'Mixpanel'
+	pod 'kingpin', '0.3.1'
 end
 
 target "entourageTests" do

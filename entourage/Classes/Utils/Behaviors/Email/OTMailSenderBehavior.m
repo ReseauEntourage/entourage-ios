@@ -45,7 +45,7 @@
 
 - (BOOL)sendCloseMail:(OTCloseReason)reason forItem:(OTEntourage *)feedItem{
     if([self checkCanSend]) {
-        NSString *subject = [NSString new];
+        NSString *subject;
         switch (reason) {
             case OTCloseReasonSuccesClose:
                 subject = [NSString stringWithFormat:OTLocalizedString(@"successful_close_mail"), feedItem.title];

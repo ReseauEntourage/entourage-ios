@@ -90,7 +90,7 @@
     UIBarButtonItem *moreButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self.statusChangedBehavior andAction:@selector(startChangeStatus)];
     [self.navigationItem setRightBarButtonItems:@[moreButton]];
     if([self.feedItem isKindOfClass:[OTEntourage class]]) {
-        UIBarButtonItem *shareButton = [UIBarButtonItem createWithImageNamed:@"share" withTarget:self.shareFeedItem andAction:@selector(sharePublic:)];
+        UIBarButtonItem *shareButton = [UIBarButtonItem createWithImageNamed:@"share_native" withTarget:self.shareFeedItem andAction:@selector(sharePublic:)];
         [self.navigationItem setRightBarButtonItems:@[moreButton, shareButton]];
     }
 }

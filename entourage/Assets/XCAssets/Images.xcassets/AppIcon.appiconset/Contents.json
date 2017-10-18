@@ -45,6 +45,12 @@
       "idiom" : "iphone",
       "filename" : "logo180x180.png",
       "scale" : "3x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "logo1024x1024.png",
+      "scale" : "1x"
     }
   ],
   "info" : {

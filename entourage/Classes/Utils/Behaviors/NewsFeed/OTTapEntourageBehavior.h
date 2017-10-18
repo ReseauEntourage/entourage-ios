@@ -14,6 +14,6 @@
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) MKCircle *tappedEntourage;
 
-- (BOOL)hasTappedEntourage:(UITapGestureRecognizer *)recognizer;
+- (NSMutableArray *)hasTappedEntourage:(UITapGestureRecognizer *)recognizer;
 
 @end

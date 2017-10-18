@@ -20,6 +20,7 @@
 @property (nonatomic) BOOL showContribution;
 @property (nonatomic) BOOL showTours;
 @property (nonatomic) BOOL showOnlyMyEntourages;
+@property (nonatomic) BOOL showFromOrganisation;
 @property (nonatomic) int timeframeInHours;
 @property (nonatomic) int distance;
 @property (nonatomic) CLLocationCoordinate2D location;

@@ -18,6 +18,7 @@
 #import "SVProgressHUD.h"
 #import "OTConsts.h"
 #import "OTAPIConsts.h"
+#import "OTShareFeedItemBehavior.h"
 
 
 @interface OTChangeStateViewController ()
@@ -25,7 +26,10 @@
 @property (nonatomic, strong) IBOutlet OTNextStatusButtonBehavior *nextStatusBehavior;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior *toggleEditBehavior;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior *toggleSignalEntourageBehavior;
+@property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior *toggleShareEntourageBehavior;
 @property (nonatomic, strong) IBOutlet OTSignalEntourageBehavior* singalEntourageBehavior;
+@property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareItem;
+@property (nonatomic, weak) IBOutlet UIButton *shareBtn;
 
 @end
 
@@ -34,13 +38,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.shareItem configureWith:self.feedItem];
     [self changeBorderColors];
     [self.toggleEditBehavior initialize];
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
     BOOL canCancelJoin = [stateInfo canCancelJoinRequest];
     [self.toggleEditBehavior toggle:[stateInfo canEdit] animated:NO];
     [self.toggleSignalEntourageBehavior initialize];
+    [self.toggleShareEntourageBehavior initialize];
     [self.toggleSignalEntourageBehavior toggle:[self.feedItem isKindOfClass:[OTEntourage class]] && ![USER_ID isEqualToNumber:self.feedItem.author.uID] && !canCancelJoin animated:NO];
+    [self.toggleShareEntourageBehavior toggle:![self.feedItem.joinStatus isEqualToString:JOIN_ACCEPTED] animated:NO];
+    [self.shareBtn addTarget:self.shareItem action:@selector(sharePublic:) forControlEvents:UIControlEventTouchUpInside];
     [self.nextStatusBehavior configureWith:self.feedItem andProtocol:self.delegate];
 }
 

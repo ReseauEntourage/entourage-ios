@@ -43,11 +43,15 @@
         [self.delegate failedToStartTour];
         return;
     }
-    else if(!self.lastLocation) {
+    else if(self.lastLocation == nil) {
+            self.lastLocation = [OTLocationManager sharedInstance].currentLocation;
+        }
+    if(!self.lastLocation) {
         [[OTLocationManager sharedInstance] showLocationNotFoundMessage:OTLocalizedString(@"no_location_create_tour")];
         [self.delegate failedToStartTour];
         return;
     }
+    
     [SVProgressHUD showWithStatus:OTLocalizedString(@"tour_create_sending")];
     self.tour = [[OTTour alloc] initWithTourType:tourType];
     self.tour.distance = @0.0;

@@ -26,6 +26,10 @@
     return self.entourage.title;
 }
 
+- (NSString *)categoryIconSource {
+    return [NSString stringWithFormat:@"%@_%@", self.entourage.entourage_type, self.entourage.category];
+}
+
 - (NSString *)feedItemDescription {
     return self.entourage.desc;
 }

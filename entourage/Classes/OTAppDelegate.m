@@ -33,6 +33,8 @@
 #import "OTLostCodeViewController.h"
 #import "OTPhoneViewController.h"
 #import "OTCodeViewController.h"
+#import "Mixpanel/Mixpanel.h"
+
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -51,16 +53,22 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[OTDebugLog sharedInstance] setConsoleOutput];
-
 #if !DEBUG
     [Fabric with:@[[Crashlytics class]]];
     [Flurry setBackgroundSessionEnabled:NO];
     FlurrySessionBuilder *builder = [[[[FlurrySessionBuilder new] withLogLevel:FlurryLogLevelAll] withCrashReporting:YES] withAppVersion:[OTVersionInfo currentVersion]];
     [Flurry startSession:[ConfigurationManager shared].flurryAPIKey withSessionBuilder:builder];
 #endif
-
+    NSString *mixpanelToken = [ConfigurationManager shared].MixpanelToken;
+    [Mixpanel sharedInstanceWithToken:mixpanelToken];
+    [Mixpanel sharedInstance].enableLogging = YES;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    NSString *language = [[NSLocale preferredLanguages] firstObject];
+    [mixpanel.people set:@{@"EntourageLanguage": language}];
+    
     [self configureUIAppearance];
 
     self.pnService = [OTPushNotificationsService new];
@@ -132,7 +140,12 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:YES] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
+    @try {
     [self.pnService saveToken:deviceToken];
+    }
+    @catch (NSException *ex) {
+        
+    }
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {

@@ -20,5 +20,6 @@
 - (void)editLocation:(OTEntourage *)entourage;
 - (void)editTitle:(OTEntourage *)entourage;
 - (void)editDescription:(OTEntourage *)entourage;
+- (void)editCategory:(OTEntourage *)entourage;
 
 @end

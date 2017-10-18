@@ -40,7 +40,6 @@
 
     self.title = @"";
     [self addRegenerateBarButton];
-
     self.codeTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
     };
@@ -48,6 +47,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     if([NSUserDefaults standardUserDefaults].currentUser) {

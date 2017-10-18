@@ -33,11 +33,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = OTLocalizedString(@"action").uppercaseString;
     [self setupData];
     [self.editTableSource configureWith:self.entourage];
-
     [self setupCloseModal];
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEntourage:) colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
@@ -59,8 +57,8 @@
 }
 
 - (void)sendEntourage:(UIButton*)sender {
-    if(![self isTitleValid])
-        return;
+    if(![self isCategorySelected] || ![self isTitleValid])
+            return;
     if(self.entourage.uid)
         [self updateEntourage:sender];
     else
@@ -75,6 +73,21 @@
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)isCategorySelected {
+    if (!self.editTableSource.entourage.categoryObject.category.length) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"categoryNotSelected")
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * _Nonnull action) {}];
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
         return NO;
     }
     return YES;
@@ -102,7 +115,7 @@
         self.entourage = sentEntourage;
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageUpdated")];
         if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)])
-            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
+            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject: self.editTableSource.entourage];
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotUpdated")];
         sender.enabled = YES;

@@ -34,6 +34,8 @@
             self.showContribution = savedFilter.showContribution.boolValue;
             self.showTours = savedFilter.showTours.boolValue;
             self.timeframeInHours = savedFilter.timeframeInHours.intValue;
+            self.showFromOrganisation = savedFilter.showFromOrganisation.intValue;
+            self.showOnlyMyEntourages = savedFilter.showOnlyMyEntourages.intValue;
         }
         else {
             self.showMedical = self.isPro;
@@ -50,9 +52,18 @@
 
 - (NSArray *)groupHeaders {
     if(IS_PRO_USER)
-        return @[OTLocalizedString(@"filter_maraudes_title"), OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_timeframe_title")];
+        return @[
+                 OTLocalizedString(@"filter_maraudes_title"),
+                 OTLocalizedString(@"filter_entourages_title"),
+                 OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
+                 OTLocalizedString(@"filter_timeframe_title")
+                 ];
     else
-        return @[OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_timeframe_title")];
+        return @[
+                 OTLocalizedString(@"filter_entourages_title"),
+                 OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
+                 OTLocalizedString(@"filter_timeframe_title")
+                 ];
 }
 
 - (NSArray *)toGroupedArray {
@@ -69,6 +80,9 @@
                         [OTFeedItemFilter createFor:FeedItemFilterKeyTour active:self.showTours]
                     ],
                     @[
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showOnlyMyEntourages]
+                    ],
+                    @[
                         [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
                     ]
                 ];
@@ -78,6 +92,8 @@
                         [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
                         [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution]
                     ],
+                    @[
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showOnlyMyEntourages]                    ],
                     @[
                         [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
                     ]
@@ -94,6 +110,7 @@
         @"entourage_types": [self getEntourageTypes],
         @"show_tours": self.showTours ? @"true" : @"false",
         @"show_my_entourages_only" : self.showOnlyMyEntourages ? @"true" : @"false",
+        @"atd" : self.showFromOrganisation ? @"true" : @"false",
         @"time_range" : @(self.timeframeInHours)
     }];
 }
@@ -121,6 +138,9 @@
         case FeedItemFilterKeyTimeframe:
             self.timeframeInHours = ((OTFeedItemTimeframeFilter *)filter).timeframeInHours;
             break;
+        case FeedItemFilterKeyMyEntourages:
+            self.showOnlyMyEntourages = filter.active;
+            break;
         default:
             break;
     }
@@ -131,7 +151,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d", self.showMedical, self.showSocial, self.showDistributive, self.showDemand, self.showContribution, self.showTours, self.showOnlyMyEntourages, self.timeframeInHours, self.location.latitude, self.location.longitude, self.distance];
+    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d", self.showMedical, self.showSocial, self.showDistributive, self.showDemand, self.showContribution, self.showTours, self.showOnlyMyEntourages, self.timeframeInHours, self.location.latitude, self.location.longitude, self.distance, self.showFromOrganisation];
 }
 
 - (NSString *)getTourTypes {
@@ -168,6 +188,8 @@
     copy.timeframeInHours = self.timeframeInHours;
     copy.location = CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude);
     copy.distance = self.distance;
+    copy.showOnlyMyEntourages = self.showOnlyMyEntourages;
+    copy.showFromOrganisation = self.showFromOrganisation;
     return copy;
 }
 

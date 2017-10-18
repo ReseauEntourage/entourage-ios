@@ -29,7 +29,7 @@
 
 #define LOAD_MORE_DRAG_OFFSET 50
 
-#define MAPVIEW_HEIGHT 160.f
+#define MAPVIEW_HEIGHT 224.f
 #define MAPVIEW_REGION_SPAN_X_METERS 500
 #define MAPVIEW_REGION_SPAN_Y_METERS 500
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
@@ -233,7 +233,7 @@
     if (scrollOffset < 0)
     {
         headerFrame.origin.y = scrollOffset;// MIN(kMapHeaderOffsetY - ((scrollOffset / 3)), 0);
-        headerFrame.size.height = 160 - scrollOffset;
+        headerFrame.size.height = MAPVIEW_HEIGHT - scrollOffset;
         
     }
     else //scrolling up

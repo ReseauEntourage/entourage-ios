@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QW3-Z2-faC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QW3-Z2-faC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -137,6 +137,7 @@
                         <segue destination="Yov-OH-fXT" kind="push" identifier="EditLocation" id="pF4-DN-1vY"/>
                         <segue destination="Xiu-q4-6Q3" kind="push" identifier="TitleEditSegue" id="dYJ-m3-v3g"/>
                         <segue destination="qia-Jx-nyR" kind="push" identifier="DescriptionEditSegue" id="pai-HW-0Qh"/>
+                        <segue destination="mD9-Vq-A6V" kind="push" identifier="CategoryEditSegue" id="KxI-hF-Leb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S0x-1A-brf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -160,6 +161,113 @@
             </objects>
             <point key="canvasLocation" x="528.5" y="1489.5"/>
         </scene>
+        <!--Owner-->
+        <scene sceneID="nS0-PM-XjM">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mD9-Vq-A6V" customClass="OTCategoryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x3W-mp-vhg"/>
+                        <viewControllerLayoutGuide type="bottom" id="LTn-m9-Bmz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sNb-X5-EQV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X3h-qe-2aJ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="503"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="separatorInset" minX="55" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="50" id="zW1-Ik-akK" customClass="OTCategoryEditCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zW1-Ik-akK" id="uJI-Sb-lR8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EAu-yw-Eyh">
+                                                    <rect key="frame" x="24" y="14.5" width="22" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="22" id="eJh-Sc-hDh"/>
+                                                        <constraint firstAttribute="height" constant="22" id="vAy-66-4dn"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4XQ-dH-n0j">
+                                                    <rect key="frame" x="59" y="11" width="257" height="27.5"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                                    <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="24HInactive" translatesAutoresizingMaskIntoConstraints="NO" id="S0R-0Y-9ue">
+                                                    <rect key="frame" x="329" y="12.5" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="30s-Nf-jTZ"/>
+                                                        <constraint firstAttribute="height" constant="25" id="Rc2-2L-03x"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="4XQ-dH-n0j" secondAttribute="bottom" constant="3" id="3dZ-5x-YKT"/>
+                                                <constraint firstItem="4XQ-dH-n0j" firstAttribute="leading" secondItem="EAu-yw-Eyh" secondAttribute="trailing" constant="13" id="7jV-C4-sO7"/>
+                                                <constraint firstItem="4XQ-dH-n0j" firstAttribute="centerY" secondItem="EAu-yw-Eyh" secondAttribute="centerY" id="8bV-le-lyY"/>
+                                                <constraint firstItem="EAu-yw-Eyh" firstAttribute="leading" secondItem="uJI-Sb-lR8" secondAttribute="leadingMargin" constant="16" id="F3a-bi-s9Z"/>
+                                                <constraint firstItem="S0R-0Y-9ue" firstAttribute="leading" secondItem="4XQ-dH-n0j" secondAttribute="trailing" constant="13" id="O0m-N1-41W"/>
+                                                <constraint firstItem="S0R-0Y-9ue" firstAttribute="centerY" secondItem="4XQ-dH-n0j" secondAttribute="centerY" id="eVc-pe-ppC"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="S0R-0Y-9ue" secondAttribute="trailing" constant="13" id="k4W-sI-2dk"/>
+                                                <constraint firstItem="EAu-yw-Eyh" firstAttribute="centerY" secondItem="uJI-Sb-lR8" secondAttribute="centerY" id="oRS-D1-Qrc"/>
+                                                <constraint firstItem="4XQ-dH-n0j" firstAttribute="top" secondItem="uJI-Sb-lR8" secondAttribute="topMargin" constant="3" id="yX3-oa-fZp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lblTitle" destination="4XQ-dH-n0j" id="O3y-zI-t1x"/>
+                                            <outlet property="owner" destination="mD9-Vq-A6V" id="Jhh-pd-nrO"/>
+                                            <outlet property="selectedImage" destination="S0R-0Y-9ue" id="8rr-22-ep0"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="mD9-Vq-A6V" id="wXq-Qs-Qni"/>
+                                    <outlet property="delegate" destination="mD9-Vq-A6V" id="0WP-ne-8Bm"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v24-gN-OmL">
+                                <rect key="frame" x="105" y="587" width="166" height="60"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Besoin d'idées d'action?">
+                                            <attributes>
+                                                <color key="NSColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="15" name="SFUIText-Medium"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="openLink:" destination="mD9-Vq-A6V" eventType="touchUpInside" id="bcn-g4-DbN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="LTn-m9-Bmz" firstAttribute="top" secondItem="v24-gN-OmL" secondAttribute="bottom" constant="20" id="1hy-tA-eDq"/>
+                            <constraint firstItem="X3h-qe-2aJ" firstAttribute="top" secondItem="x3W-mp-vhg" secondAttribute="bottom" id="J0w-2S-KSY"/>
+                            <constraint firstItem="v24-gN-OmL" firstAttribute="top" secondItem="X3h-qe-2aJ" secondAttribute="bottom" constant="20" id="TiQ-ih-bf4"/>
+                            <constraint firstAttribute="trailing" secondItem="X3h-qe-2aJ" secondAttribute="trailing" id="XOD-MJ-ZQd"/>
+                            <constraint firstItem="X3h-qe-2aJ" firstAttribute="leading" secondItem="sNb-X5-EQV" secondAttribute="leading" id="jKZ-oo-Qsb"/>
+                            <constraint firstItem="LTn-m9-Bmz" firstAttribute="top" secondItem="X3h-qe-2aJ" secondAttribute="bottom" constant="100" id="ls5-Rt-cXy"/>
+                            <constraint firstItem="v24-gN-OmL" firstAttribute="centerX" secondItem="sNb-X5-EQV" secondAttribute="centerX" id="s7V-Ty-nwu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="onx-mV-0iS"/>
+                    <connections>
+                        <outlet property="categoryTableView" destination="X3h-qe-2aJ" id="Vqw-2x-3Ih"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qjO-Rf-UFO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1203.5" y="560.5"/>
+        </scene>
         <!--LocationSelection-->
         <scene sceneID="vEC-9X-5L7">
             <objects>
@@ -168,7 +276,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wim-A3-Q8B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="865" y="1489"/>
+            <point key="canvasLocation" x="1185" y="1489"/>
         </scene>
         <!--Entourage Disclaimer-->
         <scene sceneID="mes-9v-LI0">
@@ -186,7 +294,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="538"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Bw-O2-co1">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="466.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="461"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="En vertu de la" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHC-tz-FHv">
                                                 <rect key="frame" x="25" y="30" width="334" height="26"/>
@@ -195,7 +303,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPz-Aj-h8W">
-                                                <rect key="frame" x="25" y="56" width="207" height="39"/>
+                                                <rect key="frame" x="25" y="56" width="193" height="38"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="22"/>
                                                 <state key="normal" title="Charte d'Entourage">
                                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -205,58 +313,58 @@
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slice" translatesAutoresizingMaskIntoConstraints="NO" id="CyJ-Y1-UBt">
-                                                <rect key="frame" x="20" y="115" width="22" height="22"/>
+                                                <rect key="frame" x="20" y="114" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="22" id="XdZ-K1-K6u"/>
                                                     <constraint firstAttribute="height" constant="22" id="eP9-OF-4ox"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recueillir l’accord" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OaH-hX-1ZE">
-                                                <rect key="frame" x="47" y="113.5" width="312" height="26"/>
+                                                <rect key="frame" x="47" y="112.5" width="312" height="26"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="22"/>
                                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Je dois recueillir le consentement des personnes concernées avant de créer un entourage " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmF-BX-716">
-                                                <rect key="frame" x="47" y="141.5" width="312" height="61"/>
+                                                <rect key="frame" x="47" y="140.5" width="312" height="59.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="17"/>
                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password" translatesAutoresizingMaskIntoConstraints="NO" id="c7R-AG-qdk">
-                                                <rect key="frame" x="20" y="232.5" width="22" height="22"/>
+                                                <rect key="frame" x="20" y="230" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="UL0-vM-gPq"/>
                                                     <constraint firstAttribute="width" constant="22" id="XJX-rb-lJv"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sécurité" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfe-kE-oVN">
-                                                <rect key="frame" x="47" y="231" width="312" height="26"/>
+                                                <rect key="frame" x="47" y="228.5" width="312" height="26"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="22"/>
                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Je n’inclus aucune donnée permettant d'identifier ou de localiser les personnes concernées " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KeT-Gs-q6k">
-                                                <rect key="frame" x="47" y="259" width="312" height="61"/>
+                                                <rect key="frame" x="47" y="256.5" width="312" height="59.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="17"/>
                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="d1Y-l7-i7R">
-                                                <rect key="frame" x="20" y="350" width="22" height="22"/>
+                                                <rect key="frame" x="20" y="346" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="22" id="mI7-fd-HCD"/>
                                                     <constraint firstAttribute="height" constant="22" id="tCx-0q-1qF"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="La position précise des entourages ne sera pas diffusée : elle est remplacée par les zones oranges sur la carte" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldf-ST-9zL">
-                                                <rect key="frame" x="47" y="375.5" width="312" height="61"/>
+                                                <rect key="frame" x="47" y="371.5" width="312" height="59.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="17"/>
                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Géolocalisation ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBM-2v-iSz">
-                                                <rect key="frame" x="47" y="347.5" width="312" height="26"/>
+                                                <rect key="frame" x="47" y="343.5" width="312" height="26"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="22"/>
                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -310,16 +418,16 @@
                                 <rect key="frame" x="0.0" y="602" width="375" height="65"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QnT-ce-kPW">
-                                        <rect key="frame" x="83" y="0.0" width="209" height="65"/>
+                                        <rect key="frame" x="89" y="0.0" width="197" height="65"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J'ai lu et j'accepte " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiq-zD-Wyo">
-                                                <rect key="frame" x="0.0" y="22.5" width="155" height="20"/>
+                                                <rect key="frame" x="0.0" y="22.5" width="143" height="20"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="IQp-zC-bMv">
-                                                <rect key="frame" x="160" y="17" width="51" height="31"/>
+                                                <rect key="frame" x="148" y="17" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="disclaimerAccepted:" destination="gU7-mO-PR3" eventType="valueChanged" id="sqX-wd-4Yw"/>
                                                 </connections>
@@ -368,8 +476,8 @@
         <scene sceneID="MN7-qb-xD3">
             <objects>
                 <navigationController id="fd3-Mx-0oI" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LFt-b3-2OX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LFt-b3-2OX">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -409,10 +517,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kuy-ys-seh">
-                                <rect key="frame" x="31" y="190" width="313" height="54"/>
+                                <rect key="frame" x="31" y="190" width="313" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votre titre doit faire moins de 100 caractères. Vous pourrez en dire plus dans la description. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71c-oY-BbZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="54"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="35"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.81568627449999997" green="0.0039215686269999999" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -427,7 +535,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fSI-Pb-YgF">
-                                <rect key="frame" x="15" y="190" width="345" height="36"/>
+                                <rect key="frame" x="15" y="190" width="345" height="35"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip" translatesAutoresizingMaskIntoConstraints="NO" id="QAF-Ty-4QX">
                                         <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -437,7 +545,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="749" text="Les actions avec un titre clair attirent plus de membres et ont plus de chances d’aboutir ! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbe-Bf-cSr">
-                                        <rect key="frame" x="30" y="0.0" width="315" height="36"/>
+                                        <rect key="frame" x="30" y="0.0" width="315" height="35"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -510,7 +618,7 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BN2-2Z-VOT">
-                                <rect key="frame" x="15" y="305" width="345" height="54"/>
+                                <rect key="frame" x="15" y="305" width="345" height="52.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip" translatesAutoresizingMaskIntoConstraints="NO" id="vh0-0E-hZY">
                                         <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -520,7 +628,7 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="749" text="Racontez votre histoire. Les actions avec une description claire attirent plus de membres et ont plus de chances d’aboutir !" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sek-5Z-dfE">
-                                        <rect key="frame" x="30" y="0.0" width="315" height="54"/>
+                                        <rect key="frame" x="30" y="0.0" width="315" height="52.5"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -561,8 +669,8 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QW3-Z2-faC" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hTu-zA-fKa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hTu-zA-fKa">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -576,14 +684,10 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
         </scene>
     </scenes>
     <resources>
+        <image name="24HInactive" width="48" height="48"/>
         <image name="location" width="22" height="22"/>
         <image name="password" width="100" height="100"/>
         <image name="slice" width="32" height="32"/>
         <image name="tip" width="22" height="22"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>
