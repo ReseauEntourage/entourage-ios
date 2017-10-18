@@ -117,7 +117,7 @@ Proposez une structure";
 
 // Disclaimer
 "encounter_disclaimer" = "Bonjour,\n\nNous vous rappelons qu'en vertu de la charte d'Entourage, vous devez avertir le bénéficiaire qu’un compte-rendu sera réalisé sur vos échanges et pourra être stocké par vous ou par votre association.";
-"entourage_disclaimer" = "Je respecte la Charte d'Entourage:\n\n- Vous devez recueillir le consentement des personnes concernées avant de créer un entourage\n- La description de l’entourage ne doit pas contenir de données permettant d’identifier ou de localiser les personnes concernées.\n\nNous vous rappelons que la position précise des entourages ne sera pas diffusée.";
+"entourage_disclaimer" = "En vertu de la charte d'Entourage:\n\n- Vous devez recueillir le consentement des personnes concernées avant de créer un entourage\n- La description de l’entourage ne doit pas contenir de données permettant d’identifier ou de localiser les personnes concernées.\n\nNous vous rappelons que la position précise des entourages ne sera pas diffusée.";
 "disclaimer_link_text" = "charte d'Entourage";
 
 //Solidarity Guide
