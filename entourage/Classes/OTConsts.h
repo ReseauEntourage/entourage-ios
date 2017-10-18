@@ -73,7 +73,7 @@
 #define UNAUTHORIZED @"UNAUTHORIZED"
 #define PHONE_ALREADY_EXIST @"PHONE_ALREADY_EXIST"
 
-#define PUBLIC_ENTOURAGE_CREATION_CHART @"http://www.entourage.social/chartes/grand-public.html"
+#define PUBLIC_ENTOURAGE_CREATION_CHART @"https://blog.entourage.social/charte-ethique-grand-public/"
 #define PRO_ENTOURAGE_CREATION_CHART @"http://www.entourage.social/chartes/pro.html"
 
 #define MENU_BLOG_URL @"https://blog.entourage.social/2016/10/28/franchir-le-pas/"
