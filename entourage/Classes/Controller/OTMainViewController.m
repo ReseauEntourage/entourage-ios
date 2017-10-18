@@ -28,6 +28,7 @@
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
 #import "OTConsts.h"
+#import "OTAPIConsts.h"
 #import "SVProgressHUD.h"
 #import "OTFeedItemsTableView.h"
 #import "OTUser.h"
@@ -420,6 +421,10 @@
     }}
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
+    if(!IS_PRO_USER) {
+        [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
+        return;
+    }
     CGPoint touchPoint = [longPressGesture locationInView:self.mapView];
     if (self.presentedViewController)
         return;

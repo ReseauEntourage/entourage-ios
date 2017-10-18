@@ -49,12 +49,9 @@
     self.createTourLabel.hidden = YES;
     self.createTourButton.hidden = YES;
 
-    if (IS_PRO_USER) {
-        [self addOptionWithIcon:@"createMaraude" andAction:@selector(doCreateTour:) withTranslation:NORTH_WEST];
-        [self addOptionWithIcon:@"heart" andAction:@selector(doCreateAction:) withTranslation:NORTH_EAST];
-    } else {
-        [self addOptionWithIcon:@"heart" andAction:@selector(doCreateAction:) withTranslation:NORTH_EAST];
-    }
+    [self addOptionWithIcon:@"createMaraude" andAction:@selector(doCreateTour:) withTranslation:NORTH_WEST];
+    [self addOptionWithIcon:@"heart" andAction:@selector(doCreateAction:) withTranslation:NORTH_EAST];
+
 }
 
 /*******************************************************************************/
