@@ -31,7 +31,7 @@
 
 - (IBAction)showChart:(id)sender {
     [OTLogger logEvent:@"LinkToEthicsChartClick"];
-    NSString *url = IS_PRO_USER ? PRO_ENTOURAGE_CREATION_CHART : PUBLIC_ENTOURAGE_CREATION_CHART;
+    NSString *url = PUBLIC_ENTOURAGE_CREATION_CHART;
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
