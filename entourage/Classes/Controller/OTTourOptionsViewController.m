@@ -62,8 +62,7 @@
     self.createButton.hidden = YES;
 
     [self addOptionWithIcon:@"report" andAction:@selector(doCreateEncounter:) withTranslation:NORTH_WEST];
-    [self addOptionWithIcon:@"megaphone" andAction:@selector(doCreateDemande:) withTranslation:NORTH];
-    [self addOptionWithIcon:@"heart" andAction:@selector(doCreateContribution:) withTranslation:NORTH_EAST];
+    [self addOptionWithIcon:@"heart" andAction:@selector(doCreateAction:) withTranslation:NORTH_EAST];
 }
 
 /*******************************************************************************/
@@ -81,7 +80,7 @@
     [self addOption:OTLocalizedString(@"create_action")
             atIndex:self.buttonIndex++
            withIcon:@"heart"
-          andAction:@selector(doCreateContribution:)];
+          andAction:@selector(doCreateAction:)];
     
     if(self.isPOIVisible)
         [self addOption:OTLocalizedString(@"propose_structure") atIndex:self.buttonIndex++ withIcon:@"house" andAction:@selector(proposeStructure:)];

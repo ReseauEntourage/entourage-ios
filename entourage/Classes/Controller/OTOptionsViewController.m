@@ -13,8 +13,7 @@
 
 @interface OTOptionsViewController ()
 
-@property (strong, nonatomic) IBOutlet OTAlertViewBehavior *demandeAlert;
-@property (strong, nonatomic) IBOutlet OTAlertViewBehavior *contributionAlert;
+@property (strong, nonatomic) IBOutlet OTAlertViewBehavior *actionAlert;
 
 @end
 
@@ -30,20 +29,12 @@
         [self setupOptionsAsList];
     }
     __weak typeof(self) weakSelf = self;
-    [OTAlertViewBehavior setupOngoingCreateEntourageWithDemand:self.demandeAlert andContribution:self.contributionAlert];
-    [self.demandeAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
-        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createDemande)])
-            [weakSelf.optionsDelegate performSelector:@selector(createDemande) withObject:nil];
+    [OTAlertViewBehavior setupOngoingCreateEntourageWithAction:self.actionAlert];
+    [self.actionAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
+        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createAction)])
+            [weakSelf.optionsDelegate performSelector:@selector(createAction) withObject:nil];
     }];
-    [self.demandeAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
-        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createEncounter)])
-            [weakSelf.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
-    }];
-    [self.contributionAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
-        if ([weakSelf.optionsDelegate respondsToSelector:@selector(createContribution)])
-            [weakSelf.optionsDelegate performSelector:@selector(createContribution) withObject:nil];
-    }];
-    [self.contributionAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
+    [self.actionAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
         if ([weakSelf.optionsDelegate respondsToSelector:@selector(createEncounter)])
             [weakSelf.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
     }];
@@ -118,22 +109,13 @@
         [self.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
 }
 
-- (IBAction)doCreateDemande:(id)sender {
-    [OTLogger logEvent:@"AskCreateClick"];
-    if ([OTOngoingTourService sharedInstance].isOngoing)
-        [self.demandeAlert show];
-    else
-        if ([self.optionsDelegate respondsToSelector:@selector(createDemande)])
-            [self.optionsDelegate performSelector:@selector(createDemande) withObject:nil];
-}
-
-- (IBAction)doCreateContribution:(id)sender {
+- (IBAction)doCreateAction:(id)sender {
     [OTLogger logEvent:@"OfferCreateClick"];
     if ([OTOngoingTourService sharedInstance].isOngoing)
-        [self.contributionAlert show];
+        [self.actionAlert show];
     else
-        if ([self.optionsDelegate respondsToSelector:@selector(createContribution)])
-            [self.optionsDelegate performSelector:@selector(createContribution) withObject:nil];
+        if ([self.optionsDelegate respondsToSelector:@selector(createAction)])
+            [self.optionsDelegate performSelector:@selector(createAction) withObject:nil];
 }
 
 - (IBAction)doTogglePOI:(id)sender {

@@ -64,8 +64,7 @@
 
 - (IBAction)doCreateTour:(id)sender;
 - (IBAction)doCreateEncounter:(id)sender;
-- (IBAction)doCreateDemande:(id)sender;
-- (IBAction)doCreateContribution:(id)sender;
+- (IBAction)doCreateAction:(id)sender;
 - (IBAction)doTogglePOI:(id)sender;
 - (IBAction)proposeStructure:(id)sender;
 

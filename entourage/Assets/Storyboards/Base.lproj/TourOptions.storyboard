@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="mpV-Sz-lXL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="mpV-Sz-lXL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -83,17 +83,15 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contributionAlert" destination="JeF-Q2-1ox" id="G6l-XY-hOC"/>
+                        <outlet property="actionAlert" destination="z0P-Wa-8Xc" id="8ls-61-hdF"/>
                         <outlet property="createButton" destination="xdb-7x-qlW" id="Dh6-gc-hr9"/>
                         <outlet property="createLabel" destination="zhw-r6-g45" id="BWL-Kv-G8m"/>
-                        <outlet property="demandeAlert" destination="z0P-Wa-8Xc" id="gbO-43-QN5"/>
                         <outlet property="togglePOIButton" destination="Upg-Fe-YLk" id="WEj-CJ-NB9"/>
                         <outlet property="togglePOILabel" destination="2yT-Pg-ZcZ" id="who-sY-0hw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66X-IN-NwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="z0P-Wa-8Xc" userLabel="Demande Alert" customClass="OTAlertViewBehavior"/>
-                <customObject id="JeF-Q2-1ox" userLabel="Contribution Alert" customClass="OTAlertViewBehavior"/>
             </objects>
             <point key="canvasLocation" x="364" y="1538"/>
         </scene>
@@ -103,9 +101,4 @@
         <image name="report" width="48" height="48"/>
         <image name="solidarity" width="48" height="48"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>

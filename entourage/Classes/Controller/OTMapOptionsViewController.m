@@ -51,11 +51,9 @@
 
     if (IS_PRO_USER) {
         [self addOptionWithIcon:@"createMaraude" andAction:@selector(doCreateTour:) withTranslation:NORTH_WEST];
-        [self addOptionWithIcon:@"megaphone" andAction:@selector(doCreateDemande:) withTranslation:NORTH];
-        [self addOptionWithIcon:@"heart" andAction:@selector(doCreateContribution:) withTranslation:NORTH_EAST];
+        [self addOptionWithIcon:@"heart" andAction:@selector(doCreateAction:) withTranslation:NORTH_EAST];
     } else {
-        [self addOptionWithIcon:@"megaphone" andAction:@selector(doCreateDemande:) withTranslation:NORTH_WEST];
-        [self addOptionWithIcon:@"heart" andAction:@selector(doCreateContribution:) withTranslation:NORTH_EAST];
+        [self addOptionWithIcon:@"heart" andAction:@selector(doCreateAction:) withTranslation:NORTH_EAST];
     }
 }
 
@@ -79,7 +77,7 @@
 }
 
 - (void)setupForPublicUser {
-    [self addOption:OTLocalizedString(@"create_action") atIndex:self.buttonIndex++ withIcon:@"heart" andAction:@selector(doCreateContribution:)];
+    [self addOption:OTLocalizedString(@"create_action") atIndex:self.buttonIndex++ withIcon:@"heart" andAction:@selector(doCreateAction:)];
     
     if(self.isPOIVisible)
         [self addOption:OTLocalizedString(@"propose_structure") atIndex:self.buttonIndex++ withIcon:@"house" andAction:@selector(proposeStructure:)];

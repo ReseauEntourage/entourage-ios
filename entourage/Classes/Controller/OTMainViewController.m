@@ -388,12 +388,12 @@
     [self.mapView setRegion:region animated:NO];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
-//    for(UIView *view in self.mapView.subviews)
-//        for(UIGestureRecognizer *recognizer in view.gestureRecognizers)
-//            if([recognizer class] == [UILongPressGestureRecognizer class])
-//                [view removeGestureRecognizer:recognizer];
-   // UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
-    //[self.mapView addGestureRecognizer:longPressMapGesture];
+    for(UIView *view in self.mapView.subviews)
+        for(UIGestureRecognizer *recognizer in view.gestureRecognizers)
+            if([recognizer class] == [UILongPressGestureRecognizer class])
+                [view removeGestureRecognizer:recognizer];
+    UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
+    [self.mapView addGestureRecognizer:longPressMapGesture];
 }
 
 - (void)configureNavigationBar {
@@ -847,18 +847,11 @@
     }];
 }
 
-- (void)createDemande {
-    [self createEntourageOfType:ENTOURAGE_DEMANDE
-               withAlertMessage:OTLocalizedString(@"poi_create_demande_alert")];
+- (void)createAction {
+    [self createEntouragewithAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
 }
 
-- (void)createContribution {
-    [self createEntourageOfType:ENTOURAGE_CONTRIBUTION
-               withAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
-}
-
-- (void) createEntourageOfType:(NSString *)entourageType withAlertMessage:(NSString *)message {
-    self.entourageType = entourageType;
+- (void) createEntouragewithAlertMessage:(NSString *)message {
     [self dismissViewControllerAnimated:NO completion:^{
         [self switchToNewsfeed];
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];

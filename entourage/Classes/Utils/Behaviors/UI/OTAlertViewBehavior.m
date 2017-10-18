@@ -42,12 +42,9 @@
     [alert show];
 }
 
-+ (void)setupOngoingCreateEntourageWithDemand:(OTAlertViewBehavior *)demand
-                              andContribution:(OTAlertViewBehavior *)contribution {
-    demand.title = OTLocalizedString(@"tour_ongoing");
-    demand.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), OTLocalizedString(@"demande")];
-    contribution.title = OTLocalizedString(@"tour_ongoing");
-    contribution.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), OTLocalizedString(@"contribution")];
++ (void)setupOngoingCreateEntourageWithAction:(OTAlertViewBehavior *)action {
+    action.title = OTLocalizedString(@"tour_ongoing");
+    action.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), OTLocalizedString(@"action")];
 }
 
 #pragma mark - UIAlertViewDelegate

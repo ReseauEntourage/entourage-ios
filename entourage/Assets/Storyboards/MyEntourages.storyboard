@@ -551,8 +551,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contributionAlert" destination="sr2-ea-v7z" id="CXu-B3-ebQ"/>
-                        <outlet property="demandeAlert" destination="Va4-PX-urx" id="XVE-Hm-wvA"/>
+                        <outlet property="actionAlert" destination="Va4-PX-urx" id="3sw-xD-gh9"/>
                         <outlet property="toggleAction" destination="3Nn-YB-GMx" id="seD-oB-iLO"/>
                         <outlet property="toggleEncounter" destination="Eit-WD-atW" id="hEv-mf-Mfg"/>
                         <outlet property="toggleMaraude" destination="svH-FM-Vkv" id="TRh-3t-bR7"/>
@@ -584,7 +583,6 @@
                     </connections>
                 </customObject>
                 <customObject id="Va4-PX-urx" customClass="OTAlertViewBehavior"/>
-                <customObject id="sr2-ea-v7z" customClass="OTAlertViewBehavior"/>
             </objects>
             <point key="canvasLocation" x="865" y="765"/>
         </scene>
