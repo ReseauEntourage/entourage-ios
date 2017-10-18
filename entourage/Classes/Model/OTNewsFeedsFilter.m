@@ -70,32 +70,49 @@
     if(IS_PRO_USER)
         return @[
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMedical active:self.showMedical withImage:@"filter_heal"],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeySocial active:self.showSocial withImage:@"filter_social"],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive active:self.showDistributive withImage:@"filter_eat"]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMedical
+                                             active:self.showMedical withImage:@"filter_heal"],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeySocial
+                                             active:self.showSocial withImage:@"filter_social"],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
+                                             active:self.showDistributive withImage:@"filter_eat"]
                     ],
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyTour active:self.showTours]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                             active:self.showDemand],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                             active:self.showContribution],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyTour
+                                             active:self.showTours]
                     ],
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showOnlyMyEntourages]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
+                                             active:self.showOnlyMyEntourages],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
+                                             active:self.showFromOrganisation],
                     ],
                     @[
-                        [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
+                        [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
+                                            timeframeInHours:self.timeframeInHours]
                     ]
                 ];
     else
         return @[
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                             active:self.showDemand],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                             active:self.showContribution]
                     ],
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showOnlyMyEntourages]                    ],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
+                                             active:self.showOnlyMyEntourages],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
+                                             active:self.showFromOrganisation],
+                    ],
                     @[
-                        [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe timeframeInHours:self.timeframeInHours]
+                        [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
+                                            timeframeInHours:self.timeframeInHours]
                     ]
                 ];
 }
@@ -110,7 +127,7 @@
         @"entourage_types": [self getEntourageTypes],
         @"show_tours": self.showTours ? @"true" : @"false",
         @"show_my_entourages_only" : self.showOnlyMyEntourages ? @"true" : @"false",
-        @"atd" : self.showFromOrganisation ? @"true" : @"false",
+        @"show_my_partner_only" : self.showFromOrganisation ? @"true" : @"false",
         @"time_range" : @(self.timeframeInHours)
     }];
 }
@@ -140,6 +157,9 @@
             break;
         case FeedItemFilterKeyMyEntourages:
             self.showOnlyMyEntourages = filter.active;
+            break;
+        case FeedItemFilterKeyOrganisation:
+            self.showFromOrganisation = filter.active;
             break;
         default:
             break;

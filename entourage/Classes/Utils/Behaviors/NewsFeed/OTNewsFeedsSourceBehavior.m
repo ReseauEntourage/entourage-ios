@@ -139,7 +139,9 @@
 
 #pragma mark - private methods
 
-- (void)requestData:(NSDate *)beforeDate withSuccess:(void(^)(NSArray *items))success orError:(void(^)(NSError *))failure {
+- (void)requestData:(NSDate *)beforeDate
+        withSuccess:(void(^)(NSArray *items))success
+            orError:(void(^)(NSError *))failure {
     self.currentFilter.distance = self.radius;
     NSString *loadFilterString = self.currentFilter.description;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -148,7 +150,8 @@
     ;
     NSLog(@"ALA_BALA - Calling with %@", filterDictionary);
 
-    [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary success:^(NSMutableArray *feeds) {
+    [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
+                                            success:^(NSMutableArray *feeds) {
         self.lastOkCoordinate = self.currentCoordinate;
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.indicatorView.hidden = YES;

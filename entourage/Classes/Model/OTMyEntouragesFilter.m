@@ -44,30 +44,45 @@
     if(IS_PRO_USER)
         return @[
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyUnread active:self.isUnread],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed active:self.isIncludingClosed]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
+                                             active:self.isUnread],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
+                                             active:self.isIncludingClosed]
                     ],
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyTour active:self.showTours]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                             active:self.showDemand],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                             active:self.showContribution],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyTour
+                                             active:self.showTours]
                     ],
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showMyEntourages]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
+                                             active:self.showMyEntourages],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
+                                             active:self.showFromOrganisation]
                     ]
                 ];
     else
         return @[
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyUnread active:self.isUnread],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed active:self.isIncludingClosed]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
+                                             active:self.isUnread],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
+                                             active:self.isIncludingClosed]
                      ],
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyDemand active:self.showDemand],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution active:self.showContribution],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                             active:self.showDemand],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                             active:self.showContribution],
                      ],
                     @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages active:self.showMyEntourages]
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
+                                             active:self.showMyEntourages],
+                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
+                                             active:self.showFromOrganisation]
                     ]
                 ];
 }
