@@ -21,6 +21,14 @@
     OTHeatZoneCollectionViewCell *cell;
     cell = (OTHeatZoneCollectionViewCell *)[self.collectionDataSource.dataSource.collectionView dequeueReusableCellWithReuseIdentifier:@"HeatzoneCell" forIndexPath:indexPath];
     [cell configureWith:entourage];
+    cell.layer.shadowOffset = CGSizeMake(0, 1);
+    cell.layer.shadowColor = [[UIColor grayColor] CGColor];
+    cell.layer.shadowRadius = 3;
+    cell.layer.shadowOpacity = .8f;
+    CGRect shadowFrame = cell.layer.bounds;
+    CGPathRef shadowPath = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+    cell.layer.shadowPath = shadowPath;
+    [cell.layer setMasksToBounds:NO];
     return cell;
 }
 
