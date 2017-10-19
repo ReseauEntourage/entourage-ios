@@ -230,7 +230,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     
     [menuItems addObject:itemSolidarityGuide];
     
-    NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
+    NSString *chartUrl = PUBLIC_MENU_CHART_URL;
     OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart") iconName: @"chart" url:chartUrl];
     [menuItems addObject:itemChart];
     OTMenuItem *itemApplicationUsage = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_application_usage") iconName:@"menu_phone" url:MENU_BLOG_APPLICATION_USAGE_URL];
