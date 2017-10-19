@@ -438,6 +438,14 @@
         encounterFromTap = YES;
         self.encounterLocation = whereTap;
         [OTLogger logEvent:@"HiddenButtonsOverlayPress"];
+        if (touchPoint.x - LONGPRESS_DELTA < 0)
+            self.mapPoint = CGPointMake(touchPoint.x + LONGPRESS_DELTA, touchPoint.y);
+        if (touchPoint.x + LONGPRESS_DELTA > [UIScreen mainScreen].bounds.size.width)
+            self.mapPoint = CGPointMake(touchPoint.x - LONGPRESS_DELTA, touchPoint.y);
+        if (touchPoint.y + LONGPRESS_DELTA < 0 )
+            self.mapPoint = CGPointMake(touchPoint.x, touchPoint.y + LONGPRESS_DELTA + 10);
+        if (touchPoint.y + LONGPRESS_DELTA > [UIScreen mainScreen].bounds.size.height )
+            self.mapPoint = CGPointMake(touchPoint.x, touchPoint.y - LONGPRESS_DELTA - 10);
         [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
     } else {
         if (touchPoint.x - LONGPRESS_DELTA < 0)
