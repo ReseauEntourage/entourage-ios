@@ -421,6 +421,8 @@
     }}
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
+    if(self.isTourListDisplayed)
+        return;
     if(!IS_PRO_USER) {
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
         return;
