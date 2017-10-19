@@ -435,30 +435,21 @@
     self.tappedLocation = [[CLLocation alloc] initWithLatitude:whereTap.latitude longitude:whereTap.longitude];
 
     if ([OTOngoingTourService sharedInstance].isOngoing) {
-        CLLocation *userLocation = [OTLocationManager sharedInstance].currentLocation;
-        CLLocationDistance distance = [self.tappedLocation distanceFromLocation:userLocation];
-        if (distance <=  MAX_DISTANCE) {
-            encounterFromTap = YES;
-            self.encounterLocation = whereTap;
-            [OTLogger logEvent:@"HiddenButtonsOverlayPress"];
-            [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
-        } else {
-            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:OTLocalizedString(@"distance_250") preferredStyle:UIAlertControllerStyleAlert];
-            [self presentViewController:alert animated:YES completion:nil];
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-            [alert addAction:defaultAction];
-        }
+        encounterFromTap = YES;
+        self.encounterLocation = whereTap;
+        [OTLogger logEvent:@"HiddenButtonsOverlayPress"];
+        [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
     } else {
-        if (touchPoint.x - LONGPRESS_DELTA > 0 &&
-            touchPoint.x + LONGPRESS_DELTA < [UIScreen mainScreen].bounds.size.width)
-        {
-            self.launcherButton.hidden = NO;
-            [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
-        } else {
-            self.mapPoint = CGPointZero;
-            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
-        }
+        if (touchPoint.x - LONGPRESS_DELTA < 0)
+            self.mapPoint = CGPointMake(touchPoint.x + LONGPRESS_DELTA, touchPoint.y);
+        if (touchPoint.x + LONGPRESS_DELTA > [UIScreen mainScreen].bounds.size.width)
+            self.mapPoint = CGPointMake(touchPoint.x - LONGPRESS_DELTA, touchPoint.y);
+        if (touchPoint.y + LONGPRESS_DELTA < 0 )
+            self.mapPoint = CGPointMake(touchPoint.x, touchPoint.y + LONGPRESS_DELTA + 10);
+        if (touchPoint.y + LONGPRESS_DELTA > [UIScreen mainScreen].bounds.size.height )
+            self.mapPoint = CGPointMake(touchPoint.x, touchPoint.y - LONGPRESS_DELTA - 10);
+        self.launcherButton.hidden = NO;
+        [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
     }
 }
 
