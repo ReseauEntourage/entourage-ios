@@ -77,7 +77,6 @@
     if(!categoryType.isExpanded) {
         imageView.transform = CGAffineTransformMakeRotation(M_PI);
     }
-    
     imageView.frame = CGRectMake(headerView.bounds.origin.x + sectionButton.bounds.size.width - 20, headerView.bounds.origin.y + 22, 15.0, 10.0);
     imageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
