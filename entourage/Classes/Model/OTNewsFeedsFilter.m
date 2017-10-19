@@ -68,54 +68,111 @@
 
 - (NSArray *)toGroupedArray {
     if(IS_PRO_USER)
+        return [self groupForPro];
+    else
+        return [self groupForPublic];
+}
+
+- (NSArray *)groupForPro {
+    OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
+    if(user.partner == nil)
         return @[
-                    @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMedical
-                                             active:self.showMedical withImage:@"filter_heal"],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeySocial
-                                             active:self.showSocial withImage:@"filter_social"],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
-                                             active:self.showDistributive withImage:@"filter_eat"]
-                    ],
-                    @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
-                                             active:self.showDemand],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
-                                             active:self.showContribution],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyTour
-                                             active:self.showTours]
-                    ],
-                    @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
-                                             active:self.showOnlyMyEntourages],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
-                                             active:self.showFromOrganisation],
-                    ],
-                    @[
-                        [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
-                                            timeframeInHours:self.timeframeInHours]
-                    ]
-                ];
+                 @[
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMedical
+                                          active:self.showMedical withImage:@"filter_heal"],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeySocial
+                                          active:self.showSocial withImage:@"filter_social"],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
+                                          active:self.showDistributive withImage:@"filter_eat"]
+                     ],
+                 @[
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                          active:self.showDemand],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                          active:self.showContribution],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyTour
+                                          active:self.showTours]
+                     ],
+                 @[
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
+                                          active:self.showOnlyMyEntourages]
+                     ],
+                 @[
+                     [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
+                                         timeframeInHours:self.timeframeInHours]
+                     ]
+                 ];
     else
         return @[
-                    @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
-                                             active:self.showDemand],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
-                                             active:self.showContribution]
-                    ],
-                    @[
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
-                                             active:self.showOnlyMyEntourages],
-                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
-                                             active:self.showFromOrganisation],
-                    ],
-                    @[
-                        [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
-                                            timeframeInHours:self.timeframeInHours]
-                    ]
-                ];
+                 @[
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMedical
+                                          active:self.showMedical withImage:@"filter_heal"],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeySocial
+                                          active:self.showSocial withImage:@"filter_social"],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
+                                          active:self.showDistributive withImage:@"filter_eat"]
+                     ],
+                 @[
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                          active:self.showDemand],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                          active:self.showContribution],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyTour
+                                          active:self.showTours]
+                     ],
+                 @[
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
+                                          active:self.showOnlyMyEntourages],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
+                                          active:self.showFromOrganisation],
+                     ],
+                 @[
+                     [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
+                                         timeframeInHours:self.timeframeInHours]
+                     ]
+                 ];
 }
+
+- (NSArray *)groupForPublic {
+    OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
+    if(user.partner == nil)
+        return @[
+                 @[
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                          active:self.showDemand],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                          active:self.showContribution]
+                     ],
+                 @[
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
+                                          active:self.showOnlyMyEntourages]
+                     ],
+                 @[
+                     [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
+                                         timeframeInHours:self.timeframeInHours]
+                     ]
+                 ];
+    else
+        return @[
+                 @[
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                          active:self.showDemand],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                          active:self.showContribution]
+                     ],
+                 @[
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
+                                          active:self.showOnlyMyEntourages],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
+                                          active:self.showFromOrganisation],
+                     ],
+                 @[
+                     [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
+                                         timeframeInHours:self.timeframeInHours]
+                     ]
+                 ];
+}
+
 
 - (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before andLocation:(CLLocationCoordinate2D)location {
     return [NSMutableDictionary dictionaryWithDictionary: @{
