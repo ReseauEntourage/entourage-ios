@@ -1094,7 +1094,7 @@
 
 - (void)showNewTourOnGoing {
     CGRect mapFrame = self.mapView.frame;
-    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height - 64.f;
+    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
     self.customSegmentedBehavior.selectedIndex = 0;
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.5 animations:^(void) {
