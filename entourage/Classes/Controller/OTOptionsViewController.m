@@ -110,7 +110,7 @@
 }
 
 - (IBAction)doCreateAction:(id)sender {
-    [OTLogger logEvent:@"OfferCreateClick"];
+    [OTLogger logEvent:@"ActionCreateClick"];
     if ([OTOngoingTourService sharedInstance].isOngoing)
         [self.actionAlert show];
     else

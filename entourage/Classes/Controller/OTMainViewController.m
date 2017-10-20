@@ -722,15 +722,9 @@
 }
 
 - (void)stoppedTour {
-    [UIView animateWithDuration:0.5 animations:^(void) {
-        CGRect mapFrame = self.mapView.frame;
-        mapFrame.size.height = MAPVIEW_HEIGHT;
-        self.mapView.frame = mapFrame;
-        self.tableView.tableHeaderView.frame = mapFrame;
-        self.launcherButton.hidden = YES;
-        self.createEncounterButton.hidden = YES;
-        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-    }];
+    self.launcherButton.hidden = YES;
+    self.createEncounterButton.hidden = YES;
+    [self showToursList];
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tourCreatorBehavior.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotEndFilename];
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:self];
@@ -1096,6 +1090,7 @@
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
     self.customSegmentedBehavior.selectedIndex = 0;
+    self.isTourListDisplayed = NO;
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.5 animations:^(void) {
         self.launcherButton.hidden = YES;
