@@ -280,6 +280,10 @@
                                              selector:@selector(updateBadge)
                                                  name:[kUpdateBadgeCountNotification copy]
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(entourageUpdated:)
+                                                 name:kNotificationEntourageChanged
+                                               object:nil];
     
 }
 
@@ -1077,7 +1081,6 @@
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
         [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     }];
-    
 }
 
 #pragma mark 15.2 New Tour - on going
@@ -1234,6 +1237,13 @@
 
 - (IBAction)encounterChanged {
     [self updateEncounter: self.editEncounterBehavior.encounter];
+}
+
+- (void)entourageUpdated:(NSNotification *)notification {
+    [self.newsFeedsSourceBehavior.feedItems removeAllObjects];
+    [self.newsFeedsSourceBehavior getNewItems];
+    [self reloadFeeds];
+    [self feedMapWithFeedItems];
 }
 
 - (IBAction)showGuide {
