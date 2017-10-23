@@ -101,7 +101,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageCreated object:nil];
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
         if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)])
-            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
+            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:self.editTableSource.entourage];
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotCreated")];
         sender.enabled = YES;
