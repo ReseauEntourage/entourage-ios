@@ -34,7 +34,6 @@
         OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.topViewController;
         [self setupCategory];
         controller.entourage = self.entourage;
-        controller.location = [OTLocationManager sharedInstance].currentLocation;
         controller.entourageEditorDelegate = self;
     }
     else

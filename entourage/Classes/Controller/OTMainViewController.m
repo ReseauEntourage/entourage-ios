@@ -751,7 +751,7 @@
     if(self.currentFilter.isPro)
         [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
     else
-        [self performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
+        [self performSegueWithIdentifier:@"EntourageEditor" sender:self];
 }
 
 #pragma mark - OTTourCreatorDelegate
@@ -1210,6 +1210,13 @@
         OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
         controller.optionsDelegate = self;
     }
+    if([segue.identifier isEqualToString:@"EntourageEditor"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.topViewController;
+        controller.location = [OTLocationManager sharedInstance].currentLocation;
+        controller.entourageEditorDelegate = self;
+    }
+    
 }
 
 - (void)sendCloseMail: (NSNotification *)notification {
