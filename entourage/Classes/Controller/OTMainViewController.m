@@ -874,11 +874,7 @@
 }
 
 - (void)dismissOptions {
-    [self dismissViewControllerAnimated:YES completion:^{
-        if ([OTOngoingTourService sharedInstance].isOngoing) {
-            [self showNewTourOnGoing];
-        }
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)proposeStructure {
