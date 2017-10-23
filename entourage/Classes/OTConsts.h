@@ -83,7 +83,7 @@
 #define MENU_ATD_PARTNERSHIP @"https://www.atd-quartmonde.fr/entourage/"
 
 #define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
-#define PRO_MENU_CHART_URL @"http://www.entourage.social/chartes/pro.html"
+#define PRO_MENU_CHART_URL @"https://blog.entourage.social/charte-ethique/"
 #define PUBLIC_MENU_CHART_URL @"http://www.entourage.social/chartes/grand-public.html"
 
 #define NO_GIUDE_DATA_LINK @"https://goo.gl/jD5uIQ"
