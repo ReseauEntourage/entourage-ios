@@ -70,7 +70,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [mixpanel.people set:@{@"EntourageLanguage": language}];
     
     [self configureUIAppearance];
-
+    
     self.pnService = [OTPushNotificationsService new];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
@@ -91,7 +91,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
         self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         [UIStoryboard showStartup];
     }
-
+    
     [OTPictureUploadService configure];
 	return YES;
 }
@@ -128,7 +128,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
+    
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPassword];
 
