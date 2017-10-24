@@ -14,7 +14,7 @@ target "entourage" do
     pod 'SVProgressHUD'
     pod 'SimpleKeychain', '~> 0.7'
     pod 'FormatterKit'
-    pod 'AWSiOSSDKv2', '~> 2.4'
+    pod 'AWSS3', '~> 2.4'
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'JVFloatLabeledTextField'
