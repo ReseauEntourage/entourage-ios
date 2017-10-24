@@ -78,12 +78,7 @@
            withIcon:@"report"
           andAction:@selector(doCreateEncounter:)];
     
-    [self addOption:OTLocalizedString(@"create_demande")
-            atIndex:self.buttonIndex++
-           withIcon:@"megaphone"
-          andAction:@selector(doCreateDemande:)];
-    
-    [self addOption:OTLocalizedString(@"create_contribution")
+    [self addOption:OTLocalizedString(@"create_action")
             atIndex:self.buttonIndex++
            withIcon:@"heart"
           andAction:@selector(doCreateContribution:)];

@@ -23,6 +23,8 @@
 #import "OTInvitationsService.h"
 #import "SVProgressHUD.h"
 #import "OTUnreadMessagesService.h"
+#import "Mixpanel/Mixpanel.h"
+
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
@@ -43,6 +45,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:token forKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self sendAppInfo];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people addPushDeviceToken:tokenData];
 }
 
 - (void)clearTokenWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {

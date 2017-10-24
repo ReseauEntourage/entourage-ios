@@ -52,7 +52,7 @@
 
 - (void)hideKeyboard:(NSNotification*)notification {
     self.scrollHeightConstraint.constant = self.originalHeight;
-    [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [self.scrollView setContentOffset:CGPointMake(0, 30) animated:YES];
     [UIView animateWithDuration:[self keyboardAnimationDurationFor:notification] animations:^{
         [self.owner.view layoutIfNeeded];
     }];

@@ -68,7 +68,13 @@ platform :ios do
       )
   end
 
-  # You can define as many lanes as you want
+  desc "Submit dSYMs to Crashlytics"
+  lane :refresh_dsyms do
+    download_dsyms # Download dSYM files from iTC
+    upload_symbols_to_crashlytics # Upload them to Crashlytics
+    clean_build_artifacts # Delete the local dSYM files
+  end
+# You can define as many lanes as you want
 
   after_all do |lane|
     # This block is called, only if the executed lane was successful

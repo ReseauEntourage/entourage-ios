@@ -39,12 +39,19 @@
 
 @implementation OTLostCodeViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.countryCodeTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    self.countryCodeTextField.keepBaseline = YES;
+    self.countryCodeTextField.floatingLabelTextColor = [UIColor clearColor];
+    self.countryCodeTextField.floatingLabelActiveTextColor = [UIColor clearColor];
+    self.codeCountry = @"+33";
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    [self.scrollBehavior initialize];
-
+    //[self.scrollBehavior initialize];
     self.navigationController.navigationBarHidden = NO;
     self.title = @"";
     [self setupCloseModalTransparent];
@@ -60,8 +67,11 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [IQKeyboardManager sharedManager].enable = NO;
     [super viewDidAppear:animated];
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    [self.phoneTextField becomeFirstResponder];
     self.countryCodeTextField.inputView = self.pickerView;
 }
 

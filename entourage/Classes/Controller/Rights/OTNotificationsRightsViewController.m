@@ -21,12 +21,13 @@
 #import "OTPushNotificationsService.h"
 #import "OTTutorialService.h"
 #import "OTLocationManager.h"
+#import "Mixpanel/Mixpanel.h"
 
 @implementation OTNotificationsRightsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.notificationEnabled = @"NO";
     self.title = @"";
     [self addIgnoreButton];
     
@@ -47,12 +48,15 @@
 
 - (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {
     NSLog(@"received kNotificationPushStatusChanged");
+    self.notificationEnabled = @"YES";
     [self doShowNext];
 }
 
 #pragma mark - IBAction
 
 - (void)doShowNext {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people set:@{@"EntourageNotifEnable": self.notificationEnabled}];
     [self setTutorialCompleted];
     [self checkInvitationsToJoin];
 }

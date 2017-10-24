@@ -17,7 +17,9 @@ typedef enum {
     FeedItemFilterKeyTimeframe,
     FeedItemFilterKeyMedical,
     FeedItemFilterKeySocial,
-    FeedItemFilterKeyDistributive
+    FeedItemFilterKeyDistributive,
+    FeedItemFilterKeyOrganisation,
+    FeedItemFilterKeyMyEntourages
 } FeedItemFilterKey;
 
 @interface OTFeedItemFilter : NSObject

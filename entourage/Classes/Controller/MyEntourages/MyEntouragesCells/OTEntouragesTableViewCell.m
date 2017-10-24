@@ -24,6 +24,7 @@
     self.summaryProvider.btnAvatar = self.btnProfilePicture;
     self.summaryProvider.lblTimeDistance = self.lblTimeDistance;
     self.summaryProvider.imgAssociation = self.imgAssociation;
+    self.summaryProvider.imgCategory = self.imgCategory;
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
     if(item.unreadMessageCount.intValue > 0) {

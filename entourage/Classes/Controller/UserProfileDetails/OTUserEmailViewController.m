@@ -57,13 +57,15 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self.scrollBehavior initialize];
+    //[self.scrollBehavior initialize];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [OTLogger logEvent:@"OTUserEmailViewController"];
-    [IQKeyboardManager sharedManager].enable = NO;
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.emailTextField becomeFirstResponder];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }

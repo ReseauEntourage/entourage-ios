@@ -25,6 +25,7 @@
 #define kWSKeyLongitude @"longitude"
 #define kWSKeyLastMessage @"last_message"
 #define kWSKeyShareUrl @"share_url"
+#define kWSKeyCategoryObject @"categoryObject"
 
 //Entourage
 #define kWSKeyEntourage @"entourage"
@@ -34,6 +35,13 @@
 #define kWSKeyTitle @"title"
 #define kWSKeyName @"name"
 #define kWSKeyDescription @"description"
+#define kWSKeyCategory @"display_category"
+
+//Category
+#define kWSKeyEntourageCategory @"display_category"
+#define kWSKeyCategoryTitle @"display_category_title"
+#define kWSKeyCategoryExampleTitle @"title_example"
+#define kWSKeyCategoryExampleDescription @"description_example"
 
 // Tour
 #define kWSKeyTour @"tour"

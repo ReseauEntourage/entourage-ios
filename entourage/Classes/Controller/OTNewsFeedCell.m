@@ -26,6 +26,7 @@ NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIde
     OTSummaryProviderBehavior *summaryBehavior = [OTSummaryProviderBehavior new];
     summaryBehavior.lblTimeDistance = self.timeLocationLabel;
     summaryBehavior.imgAssociation = self.imgAssociation;
+    summaryBehavior.imgCategory = self.imgCategory;
     [summaryBehavior configureWith:item];
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
     self.typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];

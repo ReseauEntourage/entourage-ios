@@ -79,7 +79,7 @@
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OTAboutItem *item = [self aboutItemAtIndexPath:indexPath];
-    NSString *message = [NSString new];
+    NSString *message;
     switch (item.type) {
         case Rate:
             message = @"RatingClick";

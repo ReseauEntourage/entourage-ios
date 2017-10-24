@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTEncounter.h"
 
 @interface NSNotification (entourage)
 
 - (NSArray *)readLocations;
 - (BOOL)readAllowedLocation;
+- (OTEncounter *)readEncounter;
 
 @end

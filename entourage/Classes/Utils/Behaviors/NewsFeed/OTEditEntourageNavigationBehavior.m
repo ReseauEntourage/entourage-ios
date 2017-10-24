@@ -11,8 +11,15 @@
 #import "OTEditEntourageTableSource.h"
 #import "OTEditEntourageTitleViewController.h"
 #import "OTEditEntourageDescViewController.h"
+#import "OTCategoryViewController.h"
 
-@interface OTEditEntourageNavigationBehavior () < LocationSelectionDelegate, EditTitleDelegate, EditDescriptionDelegate>
+@interface OTEditEntourageNavigationBehavior ()
+<
+    LocationSelectionDelegate,
+    EditTitleDelegate,
+    EditDescriptionDelegate,
+    CategorySelectionDelegate
+>
 
 @property (nonatomic, strong) OTEntourage *entourage;
 
@@ -22,6 +29,12 @@
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
     UIViewController *destinationViewController = segue.destinationViewController;
+    if([segue.identifier isEqualToString:@"CategoryEditSegue"]) {
+        OTCategoryViewController* controller = (OTCategoryViewController *)destinationViewController;
+        controller.categorySelectionDelegate = self;
+        controller.selectedCategory = self.entourage.categoryObject;
+        return YES;
+    }
     if([segue.identifier isEqualToString:@"EditLocation"]) {
         [OTLogger logEvent:@"ChangeLocationClick"];
         OTLocationSelectorViewController* controller = (OTLocationSelectorViewController *)destinationViewController;
@@ -33,12 +46,14 @@
         OTEditEntourageTitleViewController* controller = (OTEditEntourageTitleViewController *)destinationViewController;
         controller.delegate = self;
         controller.currentTitle = self.entourage.title;
+        controller.currentEntourage = self.entourage;
         return YES;
     }
     if([segue.identifier isEqualToString:@"DescriptionEditSegue"]) {
         OTEditEntourageDescViewController* controller = (OTEditEntourageDescViewController *)destinationViewController;
         controller.delegate = self;
         controller.currentDescription = self.entourage.desc;
+        controller.currentEntourage = self.entourage;
         return YES;
     }
     return NO;
@@ -56,9 +71,12 @@
 
 - (void)editDescription:(OTEntourage *)entourage {
     self.entourage = entourage;
-    
-    
     [self.owner performSegueWithIdentifier:@"DescriptionEditSegue" sender:self];
+}
+
+- (void)editCategory:(OTEntourage *)entourage {
+    self.entourage = entourage;
+    [self.owner performSegueWithIdentifier:@"CategoryEditSegue" sender:self];
 }
 
 #pragma mark - LocationSelectionDelegate
@@ -79,6 +97,15 @@
 
 - (void)descriptionEdited:(NSString *)description {
     self.entourage.desc = description;
+    [self.editEntourageSource updateTexts];
+}
+
+#pragma mark - CategorySelectionDelegate
+
+- (void)didSelectCategory:(OTCategory *)category {
+    self.entourage.categoryObject = category;
+    self.entourage.category = category.category;
+    self.entourage.entourage_type = category.entourage_type;
     [self.editEntourageSource updateTexts];
 }
 

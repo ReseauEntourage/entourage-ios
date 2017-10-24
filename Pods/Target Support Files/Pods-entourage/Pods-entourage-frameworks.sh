@@ -115,10 +115,12 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/JSBadgeView/JSBadgeView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JVFloatLabeledTextField/JVFloatLabeledTextField.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Mixpanel/Mixpanel.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SimpleKeychain/SimpleKeychain.framework"
   install_framework "$BUILT_PRODUCTS_DIR/WYPopoverController/WYPopoverController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/kingpin/kingpin.framework"
   install_framework "$BUILT_PRODUCTS_DIR/libPhoneNumber-iOS/libPhoneNumber_iOS.framework"
 fi
 if [[ "$CONFIGURATION" == "Beta" ]]; then
@@ -148,10 +150,12 @@ if [[ "$CONFIGURATION" == "Beta" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/JSBadgeView/JSBadgeView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JVFloatLabeledTextField/JVFloatLabeledTextField.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Mixpanel/Mixpanel.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SimpleKeychain/SimpleKeychain.framework"
   install_framework "$BUILT_PRODUCTS_DIR/WYPopoverController/WYPopoverController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/kingpin/kingpin.framework"
   install_framework "$BUILT_PRODUCTS_DIR/libPhoneNumber-iOS/libPhoneNumber_iOS.framework"
 fi
 if [[ "$CONFIGURATION" == "Store" ]]; then
@@ -181,10 +185,12 @@ if [[ "$CONFIGURATION" == "Store" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/JSBadgeView/JSBadgeView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JVFloatLabeledTextField/JVFloatLabeledTextField.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Mixpanel/Mixpanel.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SimpleKeychain/SimpleKeychain.framework"
   install_framework "$BUILT_PRODUCTS_DIR/WYPopoverController/WYPopoverController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/kingpin/kingpin.framework"
   install_framework "$BUILT_PRODUCTS_DIR/libPhoneNumber-iOS/libPhoneNumber_iOS.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

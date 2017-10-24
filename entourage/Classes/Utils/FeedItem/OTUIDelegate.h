@@ -16,6 +16,7 @@
 
 - (NSAttributedString *) descriptionWithSize:(CGFloat)size;
 - (NSString *)summary;
+- (NSString *)categoryIconSource;
 - (NSString *)feedItemDescription;
 - (NSString *)navigationTitle;
 - (NSString *)joinAcceptedText;

@@ -59,7 +59,8 @@
     }];
 }
 
-- (void)getEncountersWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+- (void)getEncountersWithSuccess:(void (^)(NSArray *))success
+                         failure:(void (^)(NSError *))failure {
     [[OTTourService new] tourEncounters:self.tour success:^(NSArray *items) {
         NSLog(@"GET TOUR ENCOUNTERS");
         if(success)

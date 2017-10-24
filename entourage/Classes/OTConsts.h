@@ -77,6 +77,7 @@
 #define PRO_ENTOURAGE_CREATION_CHART @"http://www.entourage.social/chartes/pro.html"
 
 #define MENU_BLOG_URL @"https://blog.entourage.social/2016/10/28/franchir-le-pas/"
+#define MENU_SCB_URL @"http://www.simplecommebonjour.org/"
 #define MENU_BLOG_ENTOURAGE_ACTIONS_URL @"http://blog.entourage.social/quelles-actions-faire-avec-entourage"
 #define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
 #define MENU_ATD_PARTNERSHIP @"https://www.atd-quartmonde.fr/entourage/"
@@ -88,5 +89,3 @@
 #define NO_GIUDE_DATA_LINK @"https://goo.gl/jD5uIQ"
 
 #define PROPOSE_STRUCTURE_URL @"https://docs.google.com/forms/d/e/1FAIpQLSdcpYpAWz9zllF2TUS4USDQzu4T4ywu_XjXaD-ovsTS5eo1YA/viewform"
-
-

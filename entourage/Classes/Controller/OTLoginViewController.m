@@ -32,6 +32,7 @@
 #import "entourage-Swift.h"
 #import "OTCountryCodePickerViewDataSource.h"
 #import "UIColor+entourage.h"
+#import "Mixpanel/Mixpanel.h"
 
 NSString *const kTutorialDone = @"has_done_tutorial";
 
@@ -132,8 +133,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                               deviceId:deviceAPNSid
                                success: ^(OTUser *user) {;
                                    NSLog(@"User : %@ authenticated successfully", user.email);
-                                   
-                                   user.phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
+                                   [self setupMixpanelWithUser:user];
+                                   user.phone = [self.codeCountry stringByAppendingString:phone];
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil)
                                        loggedNumbers = [NSMutableArray new];
@@ -178,6 +179,14 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [self presentViewController:alert animated:YES completion:nil];
 
                                }];
+}
+
+- (void)setupMixpanelWithUser: (OTUser *)user {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel identify:[user.sid stringValue]];
+    [mixpanel.people set:@{@"$email": user.email != nil ? user.email : @""}];
+    [mixpanel.people set:@{@"EntouragePartner": user.partner != nil ? user.partner.name : @""}];
+    [mixpanel.people set:@{@"EntourageUserType": user.type}];
 }
 
 #pragma mark - Segue
@@ -244,7 +253,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 {
     NSString *title = [self.pickerDataSource getTitleForRow:row];
     NSAttributedString *attString =
-    [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [[NSAttributedString alloc] initWithString:title
+                                    attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     return attString;
 }
 

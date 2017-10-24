@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HRX-sY-Prk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HRX-sY-Prk">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -69,7 +69,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xzs-5T-W8m" userLabel="Change State Feed Item Button">
-                                <rect key="frame" x="6" y="507" width="363" height="44"/>
+                                <rect key="frame" x="6" y="453" width="363" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="dZA-Tf-4QY"/>
@@ -91,13 +91,32 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o29-6E-Xay" userLabel="Change State Feed Item Button">
-                                <rect key="frame" x="6" y="453" width="363" height="44"/>
+                                <rect key="frame" x="6" y="399" width="363" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="fum-Tk-VPE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
                                 <state key="normal" title="Quiter">
+                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4U-7V-yKD" userLabel="Change State Feed Item Button">
+                                <rect key="frame" x="6" y="507" width="363" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="UNs-Db-ADo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                <state key="normal" title="Partager">
                                     <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -116,24 +135,31 @@
                             <constraint firstItem="cCa-JH-ipu" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="Ky8-cY-aoJ"/>
                             <constraint firstItem="Xzs-5T-W8m" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="S7U-Wp-alb"/>
                             <constraint firstItem="CA0-nS-LA9" firstAttribute="top" secondItem="cCa-JH-ipu" secondAttribute="bottom" constant="10" id="ViY-NN-prt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="W4U-7V-yKD" secondAttribute="trailing" constant="-10" id="Wt0-Kg-2RI"/>
+                            <constraint firstItem="W4U-7V-yKD" firstAttribute="top" secondItem="Xzs-5T-W8m" secondAttribute="bottom" constant="10" id="YC8-jD-Zjx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cCa-JH-ipu" secondAttribute="trailing" constant="-10" id="ecl-xb-gMj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="o29-6E-Xay" secondAttribute="trailing" constant="-10" id="gqS-3j-U9r"/>
                             <constraint firstItem="o29-6E-Xay" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="m3B-EB-Yxy"/>
-                            <constraint firstItem="cCa-JH-ipu" firstAttribute="top" secondItem="Xzs-5T-W8m" secondAttribute="bottom" constant="10" id="mKl-sv-vtL"/>
                             <constraint firstItem="RkC-KR-FVc" firstAttribute="top" secondItem="CA0-nS-LA9" secondAttribute="bottom" constant="8" id="n2M-lE-7rF"/>
                             <constraint firstItem="CA0-nS-LA9" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="nwf-hh-pY1"/>
+                            <constraint firstItem="W4U-7V-yKD" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="o1H-aj-yYu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Xzs-5T-W8m" secondAttribute="trailing" constant="-10" id="pZX-Li-hUl"/>
+                            <constraint firstItem="cCa-JH-ipu" firstAttribute="top" secondItem="W4U-7V-yKD" secondAttribute="bottom" constant="10" id="sO7-zs-Vmn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CA0-nS-LA9" secondAttribute="trailing" constant="-10" id="yxo-Kh-KYa"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="nextStatusBehavior" destination="6Py-dS-mI1" id="dXj-05-i95"/>
+                        <outlet property="shareBtn" destination="W4U-7V-yKD" id="Qmy-IW-wYb"/>
+                        <outlet property="shareItem" destination="RWJ-VL-kwf" id="4oZ-bK-Ots"/>
                         <outlet property="singalEntourageBehavior" destination="XjL-XT-NEm" id="0eA-6D-2AG"/>
                         <outlet property="toggleEditBehavior" destination="W7b-U8-i9L" id="eIO-NN-gN5"/>
+                        <outlet property="toggleShareEntourageBehavior" destination="Jgg-JJ-HfA" id="Bj1-tZ-NgK"/>
                         <outlet property="toggleSignalEntourageBehavior" destination="QOJ-Nb-eoQ" id="ai6-I5-2sO"/>
                         <outletCollection property="buttonsWithBorder" destination="Xzs-5T-W8m" id="6e5-SB-jXV"/>
                         <outletCollection property="buttonsWithBorder" destination="o29-6E-Xay" id="hQI-LN-OAQ"/>
                         <outletCollection property="buttonsWithBorder" destination="cCa-JH-ipu" id="jiM-M6-tpc"/>
+                        <outletCollection property="buttonsWithBorder" destination="W4U-7V-yKD" id="Cnv-Fy-ovb"/>
                         <segue destination="eaO-Ez-K7B" kind="presentation" identifier="ConfirmCloseSegue" id="63d-oL-Tss"/>
                     </connections>
                 </viewController>
@@ -147,7 +173,7 @@
                 <customObject id="W7b-U8-i9L" userLabel="Toggle Visible Edit" customClass="OTToggleVisibleBehavior">
                     <connections>
                         <outlet property="heightConstraint" destination="dZA-Tf-4QY" id="e1H-b7-Wlf"/>
-                        <outlet property="marginConstraint" destination="mKl-sv-vtL" id="SX6-wJ-ynY"/>
+                        <outlet property="marginConstraint" destination="YC8-jD-Zjx" id="JhE-mQ-sMA"/>
                         <outlet property="toggleView" destination="Xzs-5T-W8m" id="3RR-3B-gAN"/>
                     </connections>
                 </customObject>
@@ -165,13 +191,25 @@
                         <outlet property="toggleView" destination="o29-6E-Xay" id="QEf-Mo-lQD"/>
                     </connections>
                 </customObject>
+                <customObject id="Jgg-JJ-HfA" customClass="OTToggleVisibleBehavior">
+                    <connections>
+                        <outlet property="heightConstraint" destination="UNs-Db-ADo" id="sDb-Pz-wSw"/>
+                        <outlet property="marginConstraint" destination="sO7-zs-Vmn" id="xXf-1d-NCw"/>
+                        <outlet property="toggleView" destination="W4U-7V-yKD" id="MJv-vK-hUG"/>
+                    </connections>
+                </customObject>
                 <customObject id="XjL-XT-NEm" userLabel="Signal Entourage" customClass="OTSignalEntourageBehavior">
                     <connections>
                         <outlet property="owner" destination="HRX-sY-Prk" id="MzZ-4r-XUj"/>
                     </connections>
                 </customObject>
+                <customObject id="RWJ-VL-kwf" customClass="OTShareFeedItemBehavior">
+                    <connections>
+                        <outlet property="owner" destination="HRX-sY-Prk" id="DdR-bb-g5T"/>
+                    </connections>
+                </customObject>
             </objects>
-            <point key="canvasLocation" x="859" y="-416"/>
+            <point key="canvasLocation" x="858.39999999999998" y="-416.0419790104948"/>
         </scene>
         <!--Confirm Close-->
         <scene sceneID="DOD-83-oql">

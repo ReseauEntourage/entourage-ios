@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define OTSharedOngoingTour [OTOngoingTourService sharedInstance]
+
 @interface OTOngoingTourService : NSObject
 
 + (OTOngoingTourService*) sharedInstance;

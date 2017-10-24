@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nst-ed-x0I">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nst-ed-x0I">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,7 +25,7 @@
         <scene sceneID="Fgi-aR-yd4">
             <objects>
                 <navigationController id="nst-ed-x0I" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="t1C-43-4BS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="t1C-43-4BS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -56,11 +56,11 @@
                         <viewControllerLayoutGuide type="bottom" id="tgI-gN-FcD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iOt-wx-3OG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3A7-3w-D7c">
-                                <rect key="frame" x="283" y="40" width="56" height="33"/>
+                                <rect key="frame" x="228" y="40" width="56" height="33"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                 <state key="normal" title="Passer">
                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -70,28 +70,28 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="XiS-Y9-YO4">
-                                <rect key="frame" x="16" y="227" width="343" height="213"/>
+                                <rect key="frame" x="16" y="167.5" width="288" height="233.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. OSEZ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-R3-XMU">
-                                        <rect key="frame" x="20" y="0.0" width="303" height="29"/>
+                                        <rect key="frame" x="20" y="0.0" width="248" height="29"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="24"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avec Entourage, allez à la rencontre des personnes sans-abri que vous croisez au quotidien." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEX-uO-THw">
-                                        <rect key="frame" x="20" y="47" width="303" height="61"/>
+                                        <rect key="frame" x="20" y="47" width="248" height="81.5"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour vous aider, consultez le guide :" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbk-iw-8hP">
-                                        <rect key="frame" x="20" y="126" width="303" height="20"/>
+                                        <rect key="frame" x="20" y="146.5" width="248" height="20"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="17"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-0s-0Wk">
-                                        <rect key="frame" x="20" y="181" width="259" height="32"/>
+                                        <rect key="frame" x="20" y="201.5" width="259" height="32"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="20"/>
                                         <state key="normal" title=" Simple comme bonjour" image="hands">
                                             <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -141,11 +141,11 @@
                         <viewControllerLayoutGuide type="bottom" id="AcO-a9-JSJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KNy-gp-gxb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gy-L8-WBK">
-                                <rect key="frame" x="283" y="40" width="56" height="33"/>
+                                <rect key="frame" x="228" y="40" width="56" height="33"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                 <state key="normal" title="Passer">
                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -155,22 +155,22 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="6n7-JU-34j">
-                                <rect key="frame" x="16" y="142.5" width="343" height="383.5"/>
+                                <rect key="frame" x="16" y="82" width="288" height="404"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapTutorial" translatesAutoresizingMaskIntoConstraints="NO" id="nCv-Ol-zvA">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="140"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapTutorial" translatesAutoresizingMaskIntoConstraints="NO" id="nCv-Ol-zvA">
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="140"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="140" id="AUx-a8-Pcm"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. REJOIGNEZ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1z-YS-BWf">
-                                        <rect key="frame" x="20" y="175" width="303" height="29"/>
+                                        <rect key="frame" x="20" y="175" width="248" height="29"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="24"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxM-WP-ofF">
-                                        <rect key="frame" x="20" y="221" width="303" height="162.5"/>
+                                        <rect key="frame" x="20" y="221" width="248" height="183"/>
                                         <string key="text">Les zones orangées sur la carte, ou "entourages", 
 représentent les actions bienveillantes créées par
 vos voisins.
@@ -198,6 +198,7 @@ Rejoignez-les pour donner du temps, des compétences, des conseils, etc.</string
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="6n7-JU-34j" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9gy-L8-WBK" secondAttribute="bottom" constant="4" id="3PX-bk-QvS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6n7-JU-34j" secondAttribute="trailing" id="IIc-LA-2Ch"/>
                             <constraint firstItem="6n7-JU-34j" firstAttribute="centerY" secondItem="KNy-gp-gxb" secondAttribute="centerY" id="Ic2-Wi-qAw"/>
                             <constraint firstItem="6n7-JU-34j" firstAttribute="leading" secondItem="KNy-gp-gxb" secondAttribute="leadingMargin" id="nA2-Rq-fty"/>
@@ -222,11 +223,11 @@ Rejoignez-les pour donner du temps, des compétences, des conseils, etc.</string
                         <viewControllerLayoutGuide type="bottom" id="BrP-bG-WWB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jcp-vd-CPw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UD3-PF-V4r">
-                                <rect key="frame" x="283" y="40" width="56" height="33"/>
+                                <rect key="frame" x="228" y="40" width="56" height="33"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                 <state key="normal" title="Passer">
                                     <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -236,16 +237,16 @@ Rejoignez-les pour donner du temps, des compétences, des conseils, etc.</string
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="uiK-sn-ik8">
-                                <rect key="frame" x="16" y="229.5" width="343" height="208.5"/>
+                                <rect key="frame" x="16" y="169.5" width="288" height="229"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. CRÉEZ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZr-tP-l4q">
-                                        <rect key="frame" x="20" y="0.0" width="303" height="29"/>
+                                        <rect key="frame" x="20" y="0.0" width="248" height="29"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="24"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GM-jo-9aO">
-                                        <rect key="frame" x="20" y="46" width="303" height="162.5"/>
+                                        <rect key="frame" x="20" y="46" width="248" height="183"/>
                                         <string key="text">A votre tour, lancez vos propres initiatives solidaires  à tout moment en cliquant sur le bouton + en bas à droite.
 
 Vos voisins pourront vous rejoindre pour se coordonner et vous aider dans votre action !</string>
@@ -266,7 +267,7 @@ Vos voisins pourront vous rejoindre pour se coordonner et vous aider dans votre 
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plusWithCircle" translatesAutoresizingMaskIntoConstraints="NO" id="gwf-K0-D8F">
-                                <rect key="frame" x="274" y="566" width="81" height="81"/>
+                                <rect key="frame" x="219" y="467" width="81" height="81"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="81" id="OOH-1K-Fbb"/>
                                     <constraint firstAttribute="width" constant="81" id="bfE-hl-zbg"/>
@@ -298,30 +299,30 @@ Vos voisins pourront vous rejoindre pour se coordonner et vous aider dans votre 
                         <viewControllerLayoutGuide type="bottom" id="3vb-qY-cYl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="W4d-6k-O8p">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userWithBadge" translatesAutoresizingMaskIntoConstraints="NO" id="4ZO-7X-3w1">
-                                <rect key="frame" x="128" y="70" width="118" height="118"/>
+                                <rect key="frame" x="101" y="70" width="118" height="118"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="118" id="0jP-DK-tCx"/>
                                     <constraint firstAttribute="height" constant="118" id="eFL-0u-HTo"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BONUS!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0R-uH-xHR">
-                                <rect key="frame" x="36" y="224" width="303" height="29"/>
+                                <rect key="frame" x="36" y="224" width="248" height="29"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="24"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous êtes membre ou sympathisant d’ATD Quart Monde ? Affichez son badge sur votre photo de profil !" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8O-yA-pWN">
-                                <rect key="frame" x="36" y="270" width="303" height="61"/>
+                                <rect key="frame" x="36" y="270" width="248" height="81.5"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mp1-M8-vja">
-                                <rect key="frame" x="162" y="437" width="51" height="36"/>
+                                <rect key="frame" x="134.5" y="457.5" width="51" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="ZD1-mB-Jg7"/>
                                 </constraints>
@@ -342,7 +343,7 @@ Vos voisins pourront vous rejoindre pour se coordonner et vous aider dans votre 
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7l-tk-Gue">
-                                <rect key="frame" x="112" y="371" width="151" height="36"/>
+                                <rect key="frame" x="84.5" y="391.5" width="151" height="36"/>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="IGq-Ur-hQg"/>

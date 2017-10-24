@@ -12,5 +12,6 @@
 
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 @property (nonatomic, weak) IBOutlet UIView *inputView;
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *inputViews;
 
 @end

@@ -28,7 +28,7 @@
 - (void)reloadPois;
 - (void)reloadFeeds;
 
-- (void)displayEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view;
+- (void)editEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view;
 - (void)displayPoiDetails:(MKAnnotationView *)view;
 
 @end

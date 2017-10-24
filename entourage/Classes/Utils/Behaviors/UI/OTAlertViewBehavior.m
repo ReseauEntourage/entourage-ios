@@ -20,7 +20,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
     self.buttonTitles = [NSMutableArray new];
     self.buttonActions = [NSMutableArray new];
 }
@@ -33,13 +32,18 @@
 - (void)show {
     if(self.buttonTitles.count == 0)
         return;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.title message:self.content delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.title
+                                                    message:self.content
+                                                   delegate:self
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles: nil];
     for (int i = 0; i< self.buttonTitles.count; i++)
         [alert addButtonWithTitle:self.buttonTitles[i]];
     [alert show];
 }
 
-+ (void)setupOngoingCreateEntourageWithDemand:(OTAlertViewBehavior *)demand andContribution:(OTAlertViewBehavior *)contribution {
++ (void)setupOngoingCreateEntourageWithDemand:(OTAlertViewBehavior *)demand
+                              andContribution:(OTAlertViewBehavior *)contribution {
     demand.title = OTLocalizedString(@"tour_ongoing");
     demand.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), OTLocalizedString(@"demande")];
     contribution.title = OTLocalizedString(@"tour_ongoing");

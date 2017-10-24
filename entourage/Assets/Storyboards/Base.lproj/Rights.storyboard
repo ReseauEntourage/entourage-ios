@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Cy0-zh-yFt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Cy0-zh-yFt">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -282,7 +282,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y5g-nI-qNv">
-                                        <rect key="frame" x="21" y="124.5" width="284" height="75.5"/>
+                                        <rect key="frame" x="21" y="124.5" width="284" height="122.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="58" id="k7Q-3y-7Fq"/>
                                             <constraint firstAttribute="width" constant="280" id="oyE-Eg-eGj"/>
@@ -301,7 +301,7 @@ votre position.</string>
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cef-68-9y9">
-                                        <rect key="frame" x="24" y="224" width="288" height="50"/>
+                                        <rect key="frame" x="24" y="271" width="288" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="z7B-u2-qyB"/>
@@ -320,7 +320,7 @@ votre position.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nous concoctons une alternative qui sera disponible prochainement !" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnj-T2-BzO">
-                                        <rect key="frame" x="21" y="399" width="284" height="25.5"/>
+                                        <rect key="frame" x="21" y="351" width="284" height="73.5"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -343,11 +343,11 @@ votre position.</string>
                         <constraints>
                             <constraint firstItem="ZAK-ei-4qC" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" constant="-24" id="9qO-rW-Awm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cef-68-9y9" secondAttribute="trailing" constant="-5" id="B5B-1b-ytl"/>
-                            <constraint firstItem="ZAK-ei-4qC" firstAttribute="top" secondItem="Wfa-yT-nOy" secondAttribute="topMargin" id="Fob-yf-Vq3"/>
                             <constraint firstItem="DBY-cw-2gO" firstAttribute="leading" secondItem="ZAK-ei-4qC" secondAttribute="leading" constant="5" id="Gsu-rU-YIK"/>
                             <constraint firstItem="qfP-1j-fFF" firstAttribute="top" secondItem="ZAK-ei-4qC" secondAttribute="bottom" id="JRO-xQ-Kfi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Y5g-nI-qNv" secondAttribute="trailing" constant="2" id="Kj1-ut-eZL"/>
                             <constraint firstItem="cef-68-9y9" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" constant="5" id="Puu-SH-tqM"/>
+                            <constraint firstItem="ZAK-ei-4qC" firstAttribute="top" secondItem="Wfa-yT-nOy" secondAttribute="top" id="RST-uE-aqp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZAK-ei-4qC" secondAttribute="trailing" constant="-24" id="Sdl-8y-v64"/>
                             <constraint firstItem="Y5g-nI-qNv" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" constant="2" id="VeQ-0d-RbQ"/>
                             <constraint firstItem="DBY-cw-2gO" firstAttribute="trailing" secondItem="ZAK-ei-4qC" secondAttribute="trailing" constant="5" id="Wla-Rw-sD5"/>

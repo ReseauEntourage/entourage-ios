@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) IBOutlet OTToggleGroupViewBehavior *toggleMaraude;
 @property (strong, nonatomic) IBOutlet OTToggleGroupViewBehavior *toggleEncounter;
+@property (strong, nonatomic) IBOutlet OTToggleGroupViewBehavior *toggleAction;
 @property (strong, nonatomic) IBOutlet OTAlertViewBehavior *demandeAlert;
 @property (strong, nonatomic) IBOutlet OTAlertViewBehavior *contributionAlert;
 
@@ -31,9 +32,12 @@
     
     [self.toggleMaraude initialize];
     [self.toggleEncounter initialize];
+    [self.toggleAction initialize];
     [self.toggleMaraude toggle:NO];
     [self.toggleEncounter toggle:NO];
+    [self.toggleAction toggle:NO];
     if(IS_PRO_USER) {
+        [self.toggleAction toggle:YES];
         if([OTOngoingTourService sharedInstance].isOngoing)
             [self.toggleEncounter toggle:YES];
         else
@@ -41,40 +45,26 @@
     }
     __weak typeof(self) weakSelf = self;
     [OTAlertViewBehavior setupOngoingCreateEntourageWithDemand:self.demandeAlert andContribution:self.contributionAlert];
-    [self.demandeAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
-        if ([weakSelf.delegate respondsToSelector:@selector(createDemand)])
-            [weakSelf.delegate performSelector:@selector(createDemand) withObject:nil];
-    }];
     [self.demandeAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
         if ([weakSelf.delegate respondsToSelector:@selector(createEncounter)])
             [weakSelf.delegate performSelector:@selector(createEncounter) withObject:nil];
-    }];
-    [self.contributionAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
-        if ([weakSelf.delegate respondsToSelector:@selector(createContribution)])
-            [weakSelf.delegate performSelector:@selector(createContribution) withObject:nil];
     }];
     [self.contributionAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
         if ([weakSelf.delegate respondsToSelector:@selector(createEncounter)])
             [weakSelf.delegate performSelector:@selector(createEncounter) withObject:nil];
     }];
+    if(!IS_PRO_USER) {
+        [self.delegate createAction];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
-
-- (IBAction)createDemand {
+- (IBAction)createAction {
     if ([OTOngoingTourService sharedInstance].isOngoing)
-        [self.demandeAlert show];
-    else
-        [self dismissViewControllerAnimated:YES completion:^() {
-            [self.delegate createDemand];
-        }];
-}
-
-- (IBAction)createContribution {
-    if ([OTOngoingTourService sharedInstance].isOngoing)
-        [self.contributionAlert show];
-    else
-        [self dismissViewControllerAnimated:YES completion:^() {
-            [self.delegate createContribution];
-        }];
+           [self.demandeAlert show];
+       else
+           [self dismissViewControllerAnimated:YES completion:^() {
+               [self.delegate createAction];
+           }];
 }
 
 - (IBAction)createTour {

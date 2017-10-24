@@ -26,6 +26,8 @@
 #import "OTLocationSelectorViewController.h"
 #import "NSError+OTErrorData.h"
 #import "OTJSONResponseSerializer.h"
+#import "OTFeedItemFactory.h"
+#import "OTOngoingTourService.h"
 
 #define PADDING 20.0f
 
@@ -49,11 +51,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
     [self setupUI];
-    if(!self.encounter)
+    if(!self.encounter) {
         [self.disclaimer showDisclaimer];
+        if(!OTSharedOngoingTour.isOngoing) {
+            [self.locationButton setEnabled:NO];
+            [self.nameTextField setEnabled:NO];
+            [self.messageTextView.textView setEditable:NO];
+        }
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -69,10 +77,15 @@
 
 - (void)setupUI {
     [self setupCloseModal];
-    
-    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEncounter:) colored:[UIColor appOrangeColor]];
-    [self.navigationItem setRightBarButtonItem:menuButton];
-    
+    if(!OTSharedOngoingTour.isOngoing) {
+        [self.locationButton setEnabled:NO];
+        [self.nameTextField setEnabled:NO];
+        [self.messageTextView.textView setEditable:NO];
+    }
+    else {
+        UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEncounter:) colored:[UIColor appOrangeColor]];
+        [self.navigationItem setRightBarButtonItem:menuButton];
+    }
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.firstLabel.text = [NSString stringWithFormat:OTLocalizedString(@"formater_encounterAnd"), currentUser.displayName];
     
@@ -86,14 +99,18 @@
     
     self.messageTextView.placeholder = OTLocalizedString(@"detailEncounter");
     self.messageTextView.editingPlaceholder = self.messageTextView.placeholder;
-
+    if(self.encounter != nil) {
+        CLLocation *encounterLocation = [[CLLocation alloc] initWithLatitude:self.encounter.latitude
+                                                                   longitude:self.encounter.longitude];
+        self.location = encounterLocation.coordinate;
+    }
     [self updateLocationTitle];
-    
 }
 
 - (void)updateLocationTitle {
     CLGeocoder *geocoder = [CLGeocoder new];
-    CLLocation *current = [[CLLocation alloc] initWithLatitude:self.location.latitude longitude:self.location.longitude];
+    CLLocation *current = [[CLLocation alloc] initWithLatitude:self.location.latitude
+                                             longitude:self.location.longitude];
     [geocoder reverseGeocodeLocation:current completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error)
             NSLog(@"error: %@", error.description);
@@ -134,7 +151,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.disclaimer prepareSegue:segue])
         return;
-    
     UIViewController *destinationViewController = segue.destinationViewController;
     if ([destinationViewController isKindOfClass:[OTLocationSelectorViewController class]]) {
         [OTLogger logEvent:@"ChangeLocationClick"];
@@ -159,7 +175,7 @@
                                  withTourId:self.currentTourId
                                 withSuccess:^(OTEncounter *sentEncounter) {
                                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"meetingCreated")];
-                                    [self.delegate encounterSent:encounter];
+                                    [self.delegate encounterSent:sentEncounter];
                                 }
                                     failure:^(NSError *error) {
                                         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"meetingNotCreated")];
@@ -173,6 +189,7 @@
     self.encounter.message = self.messageTextView.textView.text;
     self.encounter.latitude = self.location.latitude;
     self.encounter.longitude = self.location.longitude;
+   
     [SVProgressHUD show];
     [[OTEncounterService new] updateEncounter:self.encounter
                                   withSuccess:^(OTEncounter *updatedEncounter) {

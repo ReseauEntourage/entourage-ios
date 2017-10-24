@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTEntourage.h"
 
 @protocol EditTitleDelegate <NSObject>
 
@@ -17,6 +18,7 @@
 @interface OTEditEntourageTitleViewController : UIViewController
 
 @property (nonatomic, strong) NSString *currentTitle;
+@property (nonatomic, strong) OTEntourage *currentEntourage;
 @property (nonatomic, weak) id<EditTitleDelegate> delegate;
 
 @end
