@@ -14,100 +14,8 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AWSAPIGateway (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSAutoScaling (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSCloudWatch (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSCognito (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSCognitoIdentityProvider (2.4.12):
-    - AWSCore (= 2.4.12)
   - AWSCore (2.4.12)
-  - AWSDynamoDB (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSEC2 (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSElasticLoadBalancing (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSiOSSDKv2 (2.4.12):
-    - AWSiOSSDKv2/AutoScaling (= 2.4.12)
-    - AWSiOSSDKv2/AWSAPIGateway (= 2.4.12)
-    - AWSiOSSDKv2/AWSCognito (= 2.4.12)
-    - AWSiOSSDKv2/AWSCognitoIdentityProvider (= 2.4.12)
-    - AWSiOSSDKv2/AWSCore (= 2.4.12)
-    - AWSiOSSDKv2/AWSIoT (= 2.4.12)
-    - AWSiOSSDKv2/AWSLambda (= 2.4.12)
-    - AWSiOSSDKv2/AWSMachineLearning (= 2.4.12)
-    - AWSiOSSDKv2/CloudWatch (= 2.4.12)
-    - AWSiOSSDKv2/DynamoDB (= 2.4.12)
-    - AWSiOSSDKv2/EC2 (= 2.4.12)
-    - AWSiOSSDKv2/ElasticLoadBalancing (= 2.4.12)
-    - AWSiOSSDKv2/Kinesis (= 2.4.12)
-    - AWSiOSSDKv2/MobileAnalytics (= 2.4.12)
-    - AWSiOSSDKv2/S3 (= 2.4.12)
-    - AWSiOSSDKv2/SES (= 2.4.12)
-    - AWSiOSSDKv2/SimpleDB (= 2.4.12)
-    - AWSiOSSDKv2/SNS (= 2.4.12)
-    - AWSiOSSDKv2/SQS (= 2.4.12)
-  - AWSiOSSDKv2/AutoScaling (2.4.12):
-    - AWSAutoScaling (= 2.4.12)
-  - AWSiOSSDKv2/AWSAPIGateway (2.4.12):
-    - AWSAPIGateway (= 2.4.12)
-  - AWSiOSSDKv2/AWSCognito (2.4.12):
-    - AWSCognito (= 2.4.12)
-  - AWSiOSSDKv2/AWSCognitoIdentityProvider (2.4.12):
-    - AWSCognitoIdentityProvider (= 2.4.12)
-  - AWSiOSSDKv2/AWSCore (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSiOSSDKv2/AWSIoT (2.4.12):
-    - AWSIoT (= 2.4.12)
-  - AWSiOSSDKv2/AWSLambda (2.4.12):
-    - AWSLambda (= 2.4.12)
-  - AWSiOSSDKv2/AWSMachineLearning (2.4.12):
-    - AWSMachineLearning (= 2.4.12)
-  - AWSiOSSDKv2/CloudWatch (2.4.12):
-    - AWSCloudWatch (= 2.4.12)
-  - AWSiOSSDKv2/DynamoDB (2.4.12):
-    - AWSDynamoDB (= 2.4.12)
-  - AWSiOSSDKv2/EC2 (2.4.12):
-    - AWSEC2 (= 2.4.12)
-  - AWSiOSSDKv2/ElasticLoadBalancing (2.4.12):
-    - AWSElasticLoadBalancing (= 2.4.12)
-  - AWSiOSSDKv2/Kinesis (2.4.12):
-    - AWSKinesis (= 2.4.12)
-  - AWSiOSSDKv2/MobileAnalytics (2.4.12):
-    - AWSMobileAnalytics (= 2.4.12)
-  - AWSiOSSDKv2/S3 (2.4.12):
-    - AWSS3 (= 2.4.12)
-  - AWSiOSSDKv2/SES (2.4.12):
-    - AWSSES (= 2.4.12)
-  - AWSiOSSDKv2/SimpleDB (2.4.12):
-    - AWSSimpleDB (= 2.4.12)
-  - AWSiOSSDKv2/SNS (2.4.12):
-    - AWSSNS (= 2.4.12)
-  - AWSiOSSDKv2/SQS (2.4.12):
-    - AWSSQS (= 2.4.12)
-  - AWSIoT (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSKinesis (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSLambda (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSMachineLearning (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSMobileAnalytics (2.4.12):
-    - AWSCore (= 2.4.12)
   - AWSS3 (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSSES (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSSimpleDB (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSSNS (2.4.12):
-    - AWSCore (= 2.4.12)
-  - AWSSQS (2.4.12):
     - AWSCore (= 2.4.12)
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
@@ -158,7 +66,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (= 3.1.0)
-  - AWSiOSSDKv2 (~> 2.4)
+  - AWSS3 (~> 2.4)
   - Crashlytics
   - Fabric
   - Flurry-iOS-SDK/FlurrySDK
@@ -178,26 +86,8 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AWSAPIGateway: 1984bce6ad2843e46b06cb8c9589ebd39ae48c85
-  AWSAutoScaling: 9414a14d57e027794582e04769d222a26a630067
-  AWSCloudWatch: b2c61666bfd0bec33bd013ac36b4b825aee7aee2
-  AWSCognito: 3c897210f6bfbb04585332388dff2036a3f39540
-  AWSCognitoIdentityProvider: 219628dfb0110d9763e18a2f4d6895e9ad963382
   AWSCore: 8ee5b1dc06a0fd562429fe7120113ca93cbfbca6
-  AWSDynamoDB: f78e38016afa783c9c3d7d0f1c33c8c283eee8d9
-  AWSEC2: cc0ddaf1603f5294e9839b9684f23ec82a07a3f9
-  AWSElasticLoadBalancing: 6e1fa7e13575f58609ccfc458ba0871e26ea167a
-  AWSiOSSDKv2: fd527e53ae7fe12f8aa8a8ccb82cfd1bd32dfc8b
-  AWSIoT: f6cbc3b714b0ff7071b75f5a1089662f4df9469a
-  AWSKinesis: 0512591a00bd02cc28fb80f7b54eb78b0eb5a24f
-  AWSLambda: 39c628a20f48bcdb8d9ab469fbfe866236668a62
-  AWSMachineLearning: a8bed02141c23967f6f9ee02444951e8fecdf1df
-  AWSMobileAnalytics: 144bbdca22a1b44f5ea1e2d7296868cda6f875a9
   AWSS3: 7bb3e095a37ed8334a0b868bbca74ab574b37a4f
-  AWSSES: 952349296a41420aa4c7f7a2873e601bf08435ed
-  AWSSimpleDB: 9145d77573689d46843084c1f03618306b0a529a
-  AWSSNS: 758ecea491002c9064f3771a853ca9250b93ccc0
-  AWSSQS: e460e57060ad208f44f6dab0b2c85787a5bd3f68
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   Flurry-iOS-SDK: e6975df9e57010d582bf9bed0f6312553cf24bc2
