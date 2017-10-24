@@ -546,6 +546,9 @@
 - (void)feedMapViewWithEncounters {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     OTFeedItemAuthor *author = self.tourCreatorBehavior.tour.author;
+    if (currentUser.sid == nil && author.uID == nil) {
+        return;
+    }
     if (self.toursMapDelegate.isActive && [currentUser.sid isEqualToNumber:author.uID]) {
         NSMutableArray *annotations = [NSMutableArray new];
         for (OTEncounter *encounter in self.encounters) {
