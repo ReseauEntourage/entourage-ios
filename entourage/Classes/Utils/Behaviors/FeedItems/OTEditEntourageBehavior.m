@@ -13,6 +13,7 @@
 #import "OTCategoryFromJsonService.h"
 #import "OTCategoryType.h"
 #import "OTCategory.h"
+#import "OTLocationManager.h"
 
 @interface OTEditEntourageBehavior () <EntourageEditorDelegate>
 
@@ -57,7 +58,7 @@
 
 - (void)didEditEntourage:(OTEntourage *)entourage {
     [[[OTFeedItemFactory createFor:self.entourage] getChangedHandler] updateWith:entourage];
-    NSDictionary* notificationInfo = @{ kNotificationEntourageChangedEntourageKey: self.entourage };
+    NSDictionary* notificationInfo = @{ kNotificationEntourageChangedEntourageKey: entourage };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageChanged object:nil userInfo:notificationInfo];
     [self.owner dismissViewControllerAnimated:NO completion:nil];
 }

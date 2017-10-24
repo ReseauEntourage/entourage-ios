@@ -279,6 +279,10 @@
                                              selector:@selector(updateBadge)
                                                  name:[kUpdateBadgeCountNotification copy]
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(entourageUpdated:)
+                                                 name:kNotificationEntourageChanged
+                                               object:nil];
     
 }
 
@@ -747,7 +751,7 @@
     if(self.currentFilter.isPro)
         [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
     else
-        [self performSegueWithIdentifier:@"EntourageEditorSegue" sender:nil];
+        [self performSegueWithIdentifier:@"EntourageEditor" sender:self];
 }
 
 #pragma mark - OTTourCreatorDelegate
@@ -1206,6 +1210,13 @@
         OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
         controller.optionsDelegate = self;
     }
+    if([segue.identifier isEqualToString:@"EntourageEditor"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.topViewController;
+        controller.location = [OTLocationManager sharedInstance].currentLocation;
+        controller.entourageEditorDelegate = self;
+    }
+    
 }
 
 - (void)sendCloseMail: (NSNotification *)notification {
@@ -1244,6 +1255,13 @@
 
 - (IBAction)encounterChanged {
     [self updateEncounter: self.editEncounterBehavior.encounter];
+}
+
+- (void)entourageUpdated:(NSNotification *)notification {
+    [self.newsFeedsSourceBehavior.feedItems removeAllObjects];
+    [self.newsFeedsSourceBehavior getNewItems];
+    [self reloadFeeds];
+    [self feedMapWithFeedItems];
 }
 
 - (IBAction)showGuide {

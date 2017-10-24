@@ -10,8 +10,8 @@
 #import "OTCategory.h"
 
 typedef enum {
-   OTContribution,
-    OTAskForHelp
+    OTAskForHelp,
+    OTContribution
 } OTCategoryTypes;
 
 @interface OTCategoryType : NSObject
