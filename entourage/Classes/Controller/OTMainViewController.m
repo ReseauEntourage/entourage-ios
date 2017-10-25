@@ -666,6 +666,7 @@
 
 - (void)itemsRemoved {
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
+    [self feedMapWithFeedItems];
 }
 
 - (void)itemsUpdated {
