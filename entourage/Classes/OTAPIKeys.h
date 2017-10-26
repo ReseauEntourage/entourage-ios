@@ -68,6 +68,7 @@
 #define kWSKeyDisplayName @"display_name"
 #define kWSKeyFirstname @"first_name"
 #define kWSKeyLastname @"last_name"
+#define kWSKeyAboutMe @"about"
 
 
 

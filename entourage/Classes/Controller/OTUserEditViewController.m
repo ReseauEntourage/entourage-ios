@@ -24,9 +24,11 @@
 #import "OTMailTextCheckBehavior.h"
 #import "UIImageView+entourage.h"
 #import "OTUserTableConfigurator.h"
+#import "OTTextView.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
+    SectionTypeAbout,
     SectionTypeAssociations,
     SectionTypeInfoPrivate,
     SectionTypeDelete,
@@ -42,8 +44,10 @@ typedef NS_ENUM(NSInteger) {
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet OTMailTextCheckBehavior *checkMailBehavior;
 
+
 @property (nonatomic, strong) UITextField *firstNameTextField;
 @property (nonatomic, strong) UITextField *lastNameTextField;
+@property (nonatomic, strong) OTTextView *aboutMeTextView;
 
 @property (nonatomic, strong) OTUser *user;
 @property (nonatomic, strong) NSArray *sections;
@@ -61,9 +65,10 @@ typedef NS_ENUM(NSInteger) {
     [self setupCloseModal];
     [self showSaveButton];
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
-    self.sections = @[@(SectionTypeSummary), @(SectionTypeAssociations), @(SectionTypeInfoPrivate), @(SectionTypeDelete)];
+    self.sections = @[@(SectionTypeSummary), @(SectionTypeAbout), @(SectionTypeAssociations), @(SectionTypeInfoPrivate), @(SectionTypeDelete)];
     self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:@kNotificationAboutMeUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
@@ -105,6 +110,7 @@ typedef NS_ENUM(NSInteger) {
     NSString *firstName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeSummary] withDefault:self.user.firstName];
     NSString *lastName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:SectionTypeSummary] withDefault:self.user.lastName];
     NSString *email = [[self editedTextAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeInfoPrivate] withDefault:self.user.email] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *about = [self editedTextViewAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeAbout] withDefault:self.user.about];
     NSString *warning = nil;
     if (![email isValidEmail])
         warning = OTLocalizedString(@"invalidEmail");
@@ -122,6 +128,7 @@ typedef NS_ENUM(NSInteger) {
     self.user.firstName = firstName;
     self.user.lastName = lastName;
     self.user.email = email;
+    self.user.about = about;
     [SVProgressHUD showWithStatus:OTLocalizedString(@"user_edit_saving")];
     [[OTAuthService new] updateUserInformationWithUser:self.user success:^(OTUser *user) {
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"user_edit_saved_ok")];
@@ -162,6 +169,9 @@ typedef NS_ENUM(NSInteger) {
     switch (mappedSection) {
         case SectionTypeInfoPrivate:
         case SectionTypeInfoPublic:
+        case SectionTypeAbout:
+            height = 46.0f;
+            break;
         case SectionTypeAssociations:
             height = 46.0f;
             break;
@@ -193,6 +203,10 @@ typedef NS_ENUM(NSInteger) {
         }
         case SectionTypeAssociations: {
             title =  OTLocalizedString(@"organizations");
+            break;
+        }
+        case SectionTypeAbout: {
+            title = OTLocalizedString(@"about");
             break;
         }
         default:
@@ -246,6 +260,12 @@ typedef NS_ENUM(NSInteger) {
                     break;
             }
             break;
+        case SectionTypeAbout :
+            if([self.user.about isEqualToString: @""])
+                cellID = @"AboutMeCell";
+            else
+                cellID = @"AboutCell";
+            break;
         case SectionTypeDelete:
             cellID = @"DeleteProfileCell";
             break;
@@ -297,6 +317,10 @@ typedef NS_ENUM(NSInteger) {
                 default:
                     break;
             }
+            break;
+        }
+        case SectionTypeAbout : {
+            [self setupAboutMeCell:cell withText:self.user.about];
             break;
         }
     }
@@ -369,6 +393,8 @@ typedef NS_ENUM(NSInteger) {
 
 #define PUBLIC_ASSOCIATION_TEXT_TAG 1
 
+#define ABOUT_ME_TEXT 21
+
 - (void)setupSummaryProfileCell:(UITableViewCell *)cell {
     UIImageView *imgAssociation = [cell viewWithTag:99];
     imgAssociation.hidden = self.user.partner == nil;
@@ -409,6 +435,17 @@ typedef NS_ENUM(NSInteger) {
     return nil;
 }
 
+- (NSString *)editedTextViewAtIndexPath:(NSIndexPath *)indexPath withDefault:(NSString *)defaultValue {
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    if(!cell)
+        return defaultValue;
+    OTTextView * textView = [cell viewWithTag:ABOUT_ME_TEXT];
+    if (textView != nil && [textView isKindOfClass:[OTTextView class]])
+        return textView.text;
+    return nil;
+}
+
+
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationImage:(NSString *)imageURL {
     UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
     titleLabel.text = title;
@@ -429,6 +466,12 @@ typedef NS_ENUM(NSInteger) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageUrl]];
     UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
     lblSupportType.text = OTLocalizedString(@"sympathizant");
+}
+
+#warning  SETUP ABOUT ME CELL
+- (void)setupAboutMeCell:(UITableViewCell *)cell withText:(NSString *)aboutText {
+    UITextView *aboutMeTextView = [cell viewWithTag:ABOUT_ME_TEXT];
+    aboutMeTextView.text = aboutText;
 }
 
 - (void)setupPhoneCell:(UITableViewCell *)cell withPhone:(NSString *)phone {

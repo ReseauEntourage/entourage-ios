@@ -253,6 +253,7 @@ Pourquoi rejoignez-vous cet entourage ? Ajoutez un petit mot !";
 "close" = "Fermer";
 "privateInfo" = "Informations privées";
 "publicInfo" = "Informations publiques";
+"about" = "À propos de moi";
 "organizations" = "Association(s)";
 "user_verified" = "Identification vérifiée";
 "user_email_address" = "Adresse e-mail";

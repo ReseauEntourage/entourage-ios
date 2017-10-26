@@ -31,6 +31,7 @@ extern NSString *const kKeyToken;
 @property (strong, nonatomic) NSNumber *tourCount;
 @property (strong, nonatomic) NSNumber *entourageCount;
 @property (strong, nonatomic) NSNumber *encounterCount;
+@property (strong, nonatomic) NSString *about;
 @property (strong, nonatomic) OTOrganization *organization;
 @property (strong, nonatomic) OTAssociation *partner;
 

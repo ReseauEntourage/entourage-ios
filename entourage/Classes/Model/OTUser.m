@@ -39,6 +39,7 @@ NSString *const kKeyPartner = @"partner";
     _avatarURL = [dictionary stringForKey:kKeyAvatarURL];
     _firstName = [dictionary stringForKey:kWSKeyFirstname];
     _lastName = [dictionary stringForKey:kWSKeyLastname];
+    _about = [dictionary stringForKey:kWSKeyAboutMe];
     _displayName = [dictionary stringForKey:kKeyDisplayName];
     _phone = [dictionary stringForKey:kKeyUserPhone];
     _token = [dictionary stringForKey:kKeyToken];
@@ -60,6 +61,9 @@ NSString *const kKeyPartner = @"partner";
   if (self.lastName != nil) {
     [dictionary setObject:self.lastName forKey:kWSKeyLastname];
   }
+    if(self.about != nil) {
+        [dictionary setObject:self.about forKey:kWSKeyAboutMe];
+    }
   if (self.email != nil && self.email.length > 0) {
     [dictionary setObject:self.email forKey:kKeyEmail];
   }
@@ -81,6 +85,7 @@ NSString *const kKeyPartner = @"partner";
     [encoder encodeObject:self.avatarURL forKey:kKeyAvatarURL];
     [encoder encodeObject:self.firstName forKey:kWSKeyFirstname];
     [encoder encodeObject:self.lastName forKey:kWSKeyLastname];
+    [encoder encodeObject:self.about forKey:kWSKeyAboutMe];
     [encoder encodeObject:self.displayName forKey:kKeyDisplayName];
     [encoder encodeObject:self.phone forKey:kKeyUserPhone];
     [encoder encodeObject:self.token forKey:kKeyToken];
@@ -101,6 +106,7 @@ NSString *const kKeyPartner = @"partner";
     self.avatarURL = [decoder decodeObjectForKey:kKeyAvatarURL];
     self.firstName = [decoder decodeObjectForKey:kWSKeyFirstname];
     self.lastName = [decoder decodeObjectForKey:kWSKeyLastname];
+    self.about = [decoder decodeObjectForKey:kWSKeyAboutMe];
     self.displayName = [decoder decodeObjectForKey:kKeyDisplayName];
     self.phone = [decoder decodeObjectForKey:kKeyUserPhone];
     self.token = [decoder decodeObjectForKey:kKeyToken];
