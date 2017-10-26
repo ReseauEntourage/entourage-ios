@@ -83,10 +83,24 @@
     if(![stateInfo canChangeEditState])
         return;
     NSMutableArray *rightButtons = [NSMutableArray new];
-    UIBarButtonItem *optionsButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self.statusChangedBehavior andAction:@selector(startChangeStatus)];
+    UIButton *options = [UIButton buttonWithType:UIButtonTypeCustom];
+    [options setImage:[UIImage imageNamed:@"more"]
+             forState:UIControlStateNormal];
+    [options addTarget:self.statusChangedBehavior
+                action:@selector(startChangeStatus)
+      forControlEvents:UIControlEventTouchUpInside];
+    [options setFrame:CGRectMake(0, 0, 30, 30)];
+    UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:options];
     [rightButtons addObject:optionsButton];
     if([stateInfo canInvite]) {
-        UIBarButtonItem *plusButton = [UIBarButtonItem createWithImageNamed:@"userPlus" withTarget:self.inviteBehavior andAction:@selector(startInvite)];
+        UIButton *plus = [UIButton buttonWithType:UIButtonTypeCustom];
+        [plus setImage:[UIImage imageNamed:@"userPlus"]
+                 forState:UIControlStateNormal];
+        [plus addTarget:self.inviteBehavior
+                    action:@selector(startInvite)
+          forControlEvents:UIControlEventTouchUpInside];
+        [plus setFrame:CGRectMake(0, 0, 30, 30)];
+        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithCustomView:plus];
         [rightButtons addObject:plusButton];
     }
     [self.navigationItem setRightBarButtonItems:rightButtons];

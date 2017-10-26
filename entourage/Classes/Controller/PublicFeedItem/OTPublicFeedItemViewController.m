@@ -87,10 +87,25 @@
 #pragma mark - private methods
 
 - (void)setupToolbarButtons {
-    UIBarButtonItem *moreButton = [UIBarButtonItem createWithImageNamed:@"more" withTarget:self.statusChangedBehavior andAction:@selector(startChangeStatus)];
+    UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
+    [more setImage:[UIImage imageNamed:@"more"]
+          forState:UIControlStateNormal];
+    [more addTarget:self.statusChangedBehavior
+             action:@selector(startChangeStatus)
+   forControlEvents:UIControlEventTouchUpInside];
+    [more setFrame:CGRectMake(0, 0, 30, 30)];
+     UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] initWithCustomView:more];
     [self.navigationItem setRightBarButtonItems:@[moreButton]];
     if([self.feedItem isKindOfClass:[OTEntourage class]]) {
-        UIBarButtonItem *shareButton = [UIBarButtonItem createWithImageNamed:@"share_native" withTarget:self.shareFeedItem andAction:@selector(sharePublic:)];
+        UIButton *share = [UIButton buttonWithType:UIButtonTypeCustom];
+        [share setImage:[UIImage imageNamed:@"share_native"]
+               forState:UIControlStateNormal];
+        [share addTarget:self.shareFeedItem
+                  action:@selector(sharePublic:)
+        forControlEvents:UIControlEventTouchUpInside];
+        [share setFrame:CGRectMake(0, 0, 30, 30)];
+        
+        UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:share];
         [self.navigationItem setRightBarButtonItems:@[moreButton, shareButton]];
     }
 }
