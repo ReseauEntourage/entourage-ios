@@ -161,7 +161,6 @@
     
     if(!self.placeholder)
         return;
-    
     CGFloat insetedWidth = self.frame.size.width - 2 * LARGE_PLACEHOLDER_INSETS;
     CGRect maxAvailableEditing = CGRectMake(LARGE_PLACEHOLDER_INSETS, LARGE_PLACEHOLDER_INSETS, insetedWidth, self.frame.size.height - LARGE_PLACEHOLDER_INSETS - COUNT_LABEL_OFFSET);
     

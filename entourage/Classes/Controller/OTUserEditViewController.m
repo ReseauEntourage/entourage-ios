@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger) {
 
 @property (nonatomic, strong) UITextField *firstNameTextField;
 @property (nonatomic, strong) UITextField *lastNameTextField;
-@property (nonatomic, strong) OTTextView *aboutMeTextView;
+@property (nonatomic, strong) OTTextWithCount *aboutMeTextView;
 
 @property (nonatomic, strong) OTUser *user;
 @property (nonatomic, strong) NSArray *sections;
@@ -63,8 +63,9 @@ typedef NS_ENUM(NSInteger) {
     self.title = OTLocalizedString(@"profile").uppercaseString;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 1000;
-    //self.aboutMeTextView.maxLength = 200;
-    //self.aboutMeTextView.delegate = self;
+//    self.aboutMeTextView.placeholder = @"";
+//    self.aboutMeTextView.maxLength = 200;
+//    self.aboutMeTextView.textView.text = @"";
     [self setupCloseModal];
     [self showSaveButton];
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
@@ -78,6 +79,8 @@ typedef NS_ENUM(NSInteger) {
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [OTLogger logEvent:@"Screen09_2EditMyProfileView"];
+    if(self.user.about && ![self.user.about isEqualToString:@""])
+        [self.aboutMeTextView updateAfterSpeech];
 }
 
 - (void)dealloc {
@@ -446,9 +449,9 @@ typedef NS_ENUM(NSInteger) {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if(!cell)
         return defaultValue;
-    OTTextView * textView = [cell viewWithTag:ABOUT_ME_TEXT];
-    if (textView != nil && [textView isKindOfClass:[OTTextView class]])
-        return textView.text;
+    OTTextWithCount * textView = [cell viewWithTag:ABOUT_ME_TEXT];
+    if (textView != nil && [textView isKindOfClass:[OTTextWithCount class]])
+        return textView.textView.text;
     return nil;
 }
 
@@ -474,9 +477,15 @@ typedef NS_ENUM(NSInteger) {
     lblSupportType.text = OTLocalizedString(@"sympathizant");
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
+}
+
 - (void)setupAboutMeCell:(UITableViewCell *)cell withText:(NSString *)aboutText {
-    UITextView *aboutMeTextView = [cell viewWithTag:ABOUT_ME_TEXT];
-    aboutMeTextView.text = aboutText;
+    self.aboutMeTextView = [cell viewWithTag:ABOUT_ME_TEXT];
+    self.aboutMeTextView.placeholder = @"";
+    self.aboutMeTextView.maxLength = 200;
+    self.aboutMeTextView.textView.text = aboutText;
 }
 
 - (void)setupPhoneCell:(UITableViewCell *)cell withPhone:(NSString *)phone {

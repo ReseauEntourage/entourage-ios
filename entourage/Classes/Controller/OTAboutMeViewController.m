@@ -24,7 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.aboutMeMessage.maxLength = 200;
+    self.aboutMeMessage.placeholder = @"";
+    self.aboutMeMessage.maxLength = 200;
     // Do any additional setup after loading the view.
 }
 
@@ -33,7 +34,7 @@
 }
 
 - (IBAction)doSendDescription {
-    NSString *aboutMessage = self.aboutMeMessage.text;
+    NSString *aboutMessage = self.aboutMeMessage.textView.text;
     if (!aboutMessage)
         aboutMessage = @"";
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;

@@ -19,6 +19,6 @@
 @interface OTAboutMeViewController : UIViewController
 
 @property (nonatomic, weak) id<OTUserEditAboutProtocol> delegate;
-@property (nonatomic, weak) IBOutlet OTTextView *aboutMeMessage;
+@property (nonatomic, weak) IBOutlet OTTextWithCount *aboutMeMessage;
 
 @end
