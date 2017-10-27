@@ -284,7 +284,10 @@
                                              selector:@selector(entourageUpdated:)
                                                  name:kNotificationEntourageChanged
                                                object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(associationUpdated)
+                                                 name:kNotificationAssociationUpdated
+                                               object:nil];
 }
 
 - (void)dealloc {
@@ -1250,6 +1253,15 @@
 - (IBAction)showGuide {
     [OTLogger logEvent:@"SolidarityGuideFrom06Map"];
     [self switchToGuide];
+}
+
+- (void)associationUpdated {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if(currentUser.partner == nil) {
+        self.currentFilter.showFromOrganisation = NO;
+        [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
+    }
+    [self reloadFeeds];
 }
     
 @end

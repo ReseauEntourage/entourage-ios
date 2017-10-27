@@ -68,6 +68,7 @@
     [self.dataSource updateAssociation:^() {
         [self dismissViewControllerAnimated:YES completion:nil];
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(hasAssociationSet ? @"association_set" : @"association_reset")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationAssociationUpdated object:nil];
     }];
 }
 

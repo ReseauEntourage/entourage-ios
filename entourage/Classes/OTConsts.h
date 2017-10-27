@@ -47,6 +47,7 @@
 #define kNotificationEntourageChangedEntourageKey @"NotificationEntourageChangedEntourageKey"
 #define kNotificationUpdateBadgeCountKey @"kUpdateBadgeCountKey"
 #define kNotificationUpdateBadgeFeedIdKey @"kUpdateBadgeCountFeedIdKey"
+#define kNotificationAssociationUpdated @"NotificationAssociationUpdated"
 
 #define kNotificationPushReceived "NotificationPushReceived"
 #define kNotificationReloadData "NotificationReloadData"

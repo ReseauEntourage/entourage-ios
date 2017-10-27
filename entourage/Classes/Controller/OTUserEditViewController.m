@@ -63,9 +63,6 @@ typedef NS_ENUM(NSInteger) {
     self.title = OTLocalizedString(@"profile").uppercaseString;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 1000;
-//    self.aboutMeTextView.placeholder = @"";
-//    self.aboutMeTextView.maxLength = 200;
-//    self.aboutMeTextView.textView.text = @"";
     [self setupCloseModal];
     [self showSaveButton];
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
