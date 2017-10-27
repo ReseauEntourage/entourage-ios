@@ -24,7 +24,8 @@
 #import "OTMailTextCheckBehavior.h"
 #import "UIImageView+entourage.h"
 #import "OTUserTableConfigurator.h"
-#import "OTTextView.h"
+#import "OTTextWithCount.h"
+#import "OTAboutMeViewController.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -39,7 +40,7 @@ typedef NS_ENUM(NSInteger) {
 #define EDIT_PASSWORD_SEGUE @"EditPasswordSegue"
 #define NOTIFY_LOGOUT @"loginFailureNotification"
 
-@interface OTUserEditViewController() <UITableViewDelegate, UITableViewDataSource, OTUserEditPasswordProtocol, UITextViewDelegate>
+@interface OTUserEditViewController() <UITableViewDelegate, UITableViewDataSource, OTUserEditPasswordProtocol, OTUserEditAboutProtocol, UITextViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet OTMailTextCheckBehavior *checkMailBehavior;
@@ -62,6 +63,8 @@ typedef NS_ENUM(NSInteger) {
     self.title = OTLocalizedString(@"profile").uppercaseString;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 1000;
+    //self.aboutMeTextView.maxLength = 200;
+    //self.aboutMeTextView.delegate = self;
     [self setupCloseModal];
     [self showSaveButton];
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
@@ -85,6 +88,10 @@ typedef NS_ENUM(NSInteger) {
     if ([segue.identifier isEqualToString:EDIT_PASSWORD_SEGUE]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         OTUserEditPasswordViewController *controller = (OTUserEditPasswordViewController*)navController.topViewController;
+        controller.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"AboutMeSegue"]) {
+        OTAboutMeViewController *controller = (OTAboutMeViewController*)segue.destinationViewController;
         controller.delegate = self;
     }
 }
@@ -445,7 +452,6 @@ typedef NS_ENUM(NSInteger) {
     return nil;
 }
 
-
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationImage:(NSString *)imageURL {
     UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
     titleLabel.text = title;
@@ -468,7 +474,6 @@ typedef NS_ENUM(NSInteger) {
     lblSupportType.text = OTLocalizedString(@"sympathizant");
 }
 
-#warning  SETUP ABOUT ME CELL
 - (void)setupAboutMeCell:(UITableViewCell *)cell withText:(NSString *)aboutText {
     UITextView *aboutMeTextView = [cell viewWithTag:ABOUT_ME_TEXT];
     aboutMeTextView.text = aboutText;
@@ -491,6 +496,13 @@ typedef NS_ENUM(NSInteger) {
 - (void)setNewPassword:(NSString *)password {
     self.user.password = password;
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - OTUserEditAboutMeProtocol
+
+- (void)setNewAboutMe:(NSString *)aboutMe {
+    self.user.about = aboutMe;
+    [self appActive];
 }
 
 @end

@@ -179,7 +179,6 @@
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
-
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetStrokeColorWithColor(context, self.placeholderLargeColor.CGColor);
     CGContextSetLineWidth(context, 1.0f);

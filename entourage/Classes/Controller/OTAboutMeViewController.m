@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //self.aboutMeMessage.maxLength = 200;
     // Do any additional setup after loading the view.
 }
 
@@ -32,30 +33,15 @@
 }
 
 - (IBAction)doSendDescription {
-    
     NSString *aboutMessage = self.aboutMeMessage.text;
     if (!aboutMessage)
         aboutMessage = @"";
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     currentUser.about = aboutMessage;
-    [SVProgressHUD show];
     
-    [[OTAuthService new] updateUserInformationWithUser:currentUser
-                                               success:^(OTUser *user) {
-                                                   // TODO phone is not in response so need to restore it manually
-                                                   user.phone = currentUser.phone;
-                                                   [NSUserDefaults standardUserDefaults].currentUser = user;
-                                                   [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
-                                                   [[NSUserDefaults standardUserDefaults] synchronize];
-                                                   [SVProgressHUD dismiss];
-                                                   [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationAboutMeUpdated object:nil userInfo:nil];
-
-                                               }
-                                               failure:^(NSError *error) {
-                                                   [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-                                                   NSLog(@"ERR: something went wrong on onboarding user email: %@", error.description);
-                                               }];
-    
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(setNewAboutMe:)]) {
+        [self.delegate setNewAboutMe:aboutMessage];
+    }
     [self close:self];
 }
 
