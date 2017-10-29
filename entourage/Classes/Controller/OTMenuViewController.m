@@ -114,34 +114,35 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellID = (indexPath.row != 7) ?   OTMenuTableViewCellIdentifier :
-                                                    OTMenuLogoutTableViewCellIdentifier;
-    OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if(indexPath.row == 7) {
-        UIView *whiteRoundedView = [[UIView alloc] initWithFrame:CGRectMake(10, 8, self.view.frame.size.width, 200)];
-        whiteRoundedView.layer.backgroundColor =  [UIColor colorWithRed:24.0 green:24.0 blue:24.0 alpha:1].CGColor;
-        whiteRoundedView.layer.masksToBounds = false;
+    NSString *cellID;
+    if (indexPath.row == 7)
+        cellID = @"HeaderViewCell";
+    else if (indexPath.row == 8)
+        cellID = OTMenuLogoutTableViewCellIdentifier;
+    else
+        cellID = OTMenuTableViewCellIdentifier;
         
-        [cell.contentView addSubview:whiteRoundedView];
-        [cell.contentView sendSubviewToBack:whiteRoundedView];
-    }
+    OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
     if (menuItem.iconName != nil)
         cell.itemIcon.image = [UIImage imageNamed:menuItem.iconName];
-    cell.itemLabel.text = menuItem.title;
+    if (menuItem.title != nil)
+        cell.itemLabel.text = menuItem.title;
+    else
+        cell.contentView.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
+    if (indexPath.row == 7 || indexPath.row == 6)
+        cell.separatorInset = UIEdgeInsetsZero;
 	return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == 7)
-        return 100;
     return UITableViewAutomaticDimension;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-	if (indexPath.row == 7) {
+	if (indexPath.row == 8) {
         [OTLogger logEvent:@"LogOut"];
         [OTOngoingTourService sharedInstance].isOngoing = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
@@ -243,6 +244,8 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     [menuItems addObject:itemApplicationUsage];
     OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_about") iconName: @"about" segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
     [menuItems addObject:itemAbout];
+    OTMenuItem *itemNil = [[OTMenuItem alloc] initWithTitle:nil iconName: nil ];
+    [menuItems addObject:itemNil];
     OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"") iconName: nil segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
     [menuItems addObject:itemDisconnect];
 	return menuItems;
