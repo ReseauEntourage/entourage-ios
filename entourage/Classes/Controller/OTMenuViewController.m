@@ -82,6 +82,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
     [self createBackFrontMenuButton];
     [self.modifyLabel underline];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableHeaderView = self.headerView;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
@@ -107,22 +108,23 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 /**************************************************************************************************/
 #pragma mark - UITableViewDelegate & UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return (section == 0) ? 30.f : 1.f;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return (section == 0) ? self.menuItems.count - 1 : 1 ;
+    return self.menuItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellID = (indexPath.section == 0) ?   OTMenuTableViewCellIdentifier :
+    NSString *cellID = (indexPath.row != 7) ?   OTMenuTableViewCellIdentifier :
                                                     OTMenuLogoutTableViewCellIdentifier;
     OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if(indexPath.row == 7) {
+        UIView *whiteRoundedView = [[UIView alloc] initWithFrame:CGRectMake(10, 8, self.view.frame.size.width, 200)];
+        whiteRoundedView.layer.backgroundColor =  [UIColor colorWithRed:24.0 green:24.0 blue:24.0 alpha:1].CGColor;
+        whiteRoundedView.layer.masksToBounds = false;
+        
+        [cell.contentView addSubview:whiteRoundedView];
+        [cell.contentView sendSubviewToBack:whiteRoundedView];
+    }
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
     if (menuItem.iconName != nil)
         cell.itemIcon.image = [UIImage imageNamed:menuItem.iconName];
@@ -130,10 +132,16 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row == 7)
+        return 100;
+    return UITableViewAutomaticDimension;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-	if (indexPath.section == 1) {
+	if (indexPath.row == 7) {
         [OTLogger logEvent:@"LogOut"];
         [OTOngoingTourService sharedInstance].isOngoing = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
@@ -227,9 +235,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     OTMenuItem *itemAtd = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_atd_partner") iconName:@"atdLogo" url:MENU_ATD_PARTNERSHIP];
     [menuItems addObject:itemAtd];
     OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide") iconName:@"mapPin"];
-    
     [menuItems addObject:itemSolidarityGuide];
-    
     NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
     OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart") iconName: @"chart" url:chartUrl];
     [menuItems addObject:itemChart];
@@ -246,8 +252,8 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	OTMenuItem *menuItem = nil;
 	if (indexPath && (indexPath.row < self.menuItems.count))
 		menuItem = [self.menuItems objectAtIndex:indexPath.row];
-    if (indexPath.section == 1)
-        menuItem = [self.menuItems lastObject];
+//    if (indexPath.section == 1)
+//        menuItem = [self.menuItems lastObject];
 	return menuItem;
 }
 

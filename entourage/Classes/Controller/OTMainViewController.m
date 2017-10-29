@@ -149,6 +149,7 @@
 @property (nonatomic, strong) OTSolidarityGuideFilter               *solidarityFilter;
 @property (nonatomic) BOOL                                          isFirstLoad;
 @property (nonatomic) BOOL                                          wasLoadedOnce;
+@property (nonatomic) BOOL                                          noDataDisplayed;
 @property (nonatomic, weak) IBOutlet OTNoDataBehavior               *noDataBehavior;
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior           *mailSender;
 @property (nonatomic, weak) IBOutlet OTCustomSegmentedBehavior      *customSegmentedBehavior;
@@ -521,7 +522,15 @@
             self.pois = pois;
             [self.tableView updateItems:pois];
             [self feedMapViewWithPoiArray:pois];
-            self.pois.count == 0 ? [self.noDataBehavior showNoData] : [self.guideInfoBehavior show];
+            if(self.pois.count == 0) {
+                if(!self.noDataDisplayed) {
+                    [self.noDataBehavior showNoData];
+                    self.noDataDisplayed = YES;
+                }
+            }
+            else {
+                [self.guideInfoBehavior show];
+            }
             [SVProgressHUD dismiss];
                
         } failure:^(NSError *error) {

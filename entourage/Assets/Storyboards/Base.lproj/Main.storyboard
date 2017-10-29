@@ -104,24 +104,35 @@
                                             <outlet property="itemLabel" destination="XdS-73-BBy" id="oZk-iO-4I0"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OTMenuLogoutTableViewCellIdentifier" id="0Bk-lW-HXi" customClass="OTMenuTableViewCell">
-                                        <rect key="frame" x="0.0" y="74" width="395" height="52"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OTMenuLogoutTableViewCellIdentifier" rowHeight="76" id="0Bk-lW-HXi" customClass="OTMenuTableViewCell">
+                                        <rect key="frame" x="0.0" y="74" width="395" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="0Bk-lW-HXi" id="bPT-U6-cnQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="395" height="51.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="395" height="75.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxO-X4-Gtu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="395" height="46"/>
+                                                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="46" id="grp-ds-Ywh"/>
+                                                    </constraints>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logout" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzU-dN-mcx">
-                                                    <rect key="frame" x="15" y="17" width="365" height="18"/>
+                                                    <rect key="frame" x="0.0" y="54" width="395" height="11.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="highlightedColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="TzU-dN-mcx" firstAttribute="centerY" secondItem="bPT-U6-cnQ" secondAttribute="centerY" id="5FS-mB-bb4"/>
-                                                <constraint firstItem="TzU-dN-mcx" firstAttribute="trailing" secondItem="bPT-U6-cnQ" secondAttribute="trailingMargin" id="9XP-Lo-3Fm"/>
-                                                <constraint firstItem="TzU-dN-mcx" firstAttribute="centerX" secondItem="bPT-U6-cnQ" secondAttribute="centerX" id="9Yi-yH-zG6"/>
+                                                <constraint firstItem="TzU-dN-mcx" firstAttribute="leading" secondItem="bPT-U6-cnQ" secondAttribute="leading" id="1qe-Pi-o6k"/>
+                                                <constraint firstItem="hxO-X4-Gtu" firstAttribute="leading" secondItem="bPT-U6-cnQ" secondAttribute="leading" id="Gbf-qE-dfr"/>
+                                                <constraint firstItem="hxO-X4-Gtu" firstAttribute="top" secondItem="bPT-U6-cnQ" secondAttribute="top" id="LK6-yM-mpC"/>
+                                                <constraint firstItem="TzU-dN-mcx" firstAttribute="top" secondItem="hxO-X4-Gtu" secondAttribute="bottom" constant="8" id="VPw-qh-5U4"/>
+                                                <constraint firstAttribute="trailing" secondItem="TzU-dN-mcx" secondAttribute="trailing" id="bng-hR-V1v"/>
+                                                <constraint firstAttribute="trailing" secondItem="hxO-X4-Gtu" secondAttribute="trailing" id="eVm-VO-FAK"/>
+                                                <constraint firstAttribute="bottom" secondItem="TzU-dN-mcx" secondAttribute="bottom" constant="10" id="fT8-UX-mWx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -140,8 +151,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="EiD-PN-iyE" secondAttribute="trailing" constant="-20" id="585-kS-lyA"/>
                             <constraint firstItem="EiD-PN-iyE" firstAttribute="leading" secondItem="ljo-QP-YxJ" secondAttribute="leading" id="HSe-Sd-ZSw"/>
-                            <constraint firstItem="2Xh-aG-0Ck" firstAttribute="top" secondItem="EiD-PN-iyE" secondAttribute="bottom" id="OCt-07-fqC"/>
-                            <constraint firstItem="EiD-PN-iyE" firstAttribute="top" secondItem="slD-Bf-Od0" secondAttribute="bottom" id="T10-wT-kcY"/>
+                            <constraint firstItem="EiD-PN-iyE" firstAttribute="top" secondItem="slD-Bf-Od0" secondAttribute="bottom" id="LTL-JW-Ybz"/>
+                            <constraint firstItem="2Xh-aG-0Ck" firstAttribute="top" secondItem="EiD-PN-iyE" secondAttribute="bottom" id="fFC-Hi-GlY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="a9Y-2c-snz"/>
