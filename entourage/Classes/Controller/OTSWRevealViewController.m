@@ -39,7 +39,7 @@
 }
 
 - (void)customizeSlideOutMenu {
-    self.rearViewRevealWidth = [UIScreen mainScreen].bounds.size.width; // how much of the menu is shown (default 260.0)
+    self.rearViewRevealWidth = [UIScreen mainScreen].bounds.size.width + 10;// how much of the menu is shown (default 260.0)
     
     // TOGGLING OVERDRAW: Configure the overdraw appearance of the content view while dragging it
     self.rearViewRevealOverdraw = 0.0f; // how much of an overdraw can occur when dragging further than 'rearViewRevealWidth' (default 60.0)
