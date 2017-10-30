@@ -500,11 +500,11 @@
 
 - (void)didChangePosition {
     CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.newsFeedsSourceBehavior.lastOkCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
-    if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4)
-        return;
-    if(self.toursMapDelegate.isActive)
+    if(self.toursMapDelegate.isActive) {
+        if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4)
+            return;
         [self reloadFeeds];
-    else
+    } else
         [self reloadPois];
 }
 

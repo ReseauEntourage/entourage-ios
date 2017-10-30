@@ -85,8 +85,14 @@
 - (void)handleLocalNotification:(NSDictionary *)userInfo {
     UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
     OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
-
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:pnData.sender message:pnData.message preferredStyle:UIAlertControllerStyleAlert];
+    
+    if([pnData.sender isEqualToString:@""]) {
+        pnData.sender = pnData.message;
+        pnData.message = @"";
+    }
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:pnData.sender
+                                                                   message:pnData.message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     UIAlertAction *openAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [rootVC dismissViewControllerAnimated:YES completion:nil];
