@@ -14,6 +14,9 @@
 #import "OTFeedItemFactory.h"
 #import "OTUserViewController.h"
 #import "OTPublicFeedItemViewController.h"
+#import "OTAPIConsts.h"
+#import "NSUserDefaults+OT.h"
+#import "OTLoginViewController.h"
 
 @implementation OTDeepLinkService
 
@@ -29,12 +32,17 @@
 
 - (void)navigateTo: (NSString *)feedItemId {
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createForId:feedItemId] getStateInfo] loadWithSuccess2:^(OTFeedItem *feedItem) {
+    if(TOKEN) {
+        [[[OTFeedItemFactory createForId:feedItemId] getStateInfo] loadWithSuccess2:^(OTFeedItem *feedItem) {
         [SVProgressHUD dismiss];
         [self prepareControllers:feedItem];
-    } error:^(NSError *error) {
-        [SVProgressHUD dismiss];
-    }];
+        } error:^(NSError *error) {
+            [SVProgressHUD dismiss];
+        }];
+    }
+    else
+        [self navigateToLogin];
+        
 }
 
 - (UIViewController *)getTopViewController {
