@@ -40,9 +40,10 @@
             [SVProgressHUD dismiss];
         }];
     }
-    else
+    else {
         [self navigateToLogin];
-        
+        [SVProgressHUD dismiss];
+    }
 }
 
 - (UIViewController *)getTopViewController {

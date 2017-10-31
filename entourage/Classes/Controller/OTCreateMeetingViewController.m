@@ -62,15 +62,15 @@
             [self.messageTextView.textView setEditable:NO];
         }
     }
+    else {
+        self.nameTextField.text = self.encounter.streetPersonName;
+        self.messageTextView.textView.text = self.encounter.message;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if(self.encounter) {
-        self.nameTextField.text = self.encounter.streetPersonName;
-        self.messageTextView.textView.text = self.encounter.message;
-        [self.messageTextView updateAfterSpeech];
-    }
+    [self.messageTextView updateAfterSpeech];
 }
 
 #pragma mark - Private methods
