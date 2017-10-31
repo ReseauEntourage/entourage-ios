@@ -84,4 +84,14 @@
     }];
 }
 
+- (void)loadWithSuccess2:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
+    [[OTEntourageService new] getEntourageWithStringId:self.entourage.fid withSuccess:^(OTEntourage *entourage) {
+        if(success)
+            success(entourage);
+    } failure:^(NSError *error) {
+        if(failure)
+            failure(error);
+    }];
+}
+
 @end

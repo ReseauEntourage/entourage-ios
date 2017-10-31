@@ -26,6 +26,7 @@
 @interface OTFeedItem : NSObject
 
 @property (nonatomic, strong) NSNumber *uid;
+@property (nonatomic, strong) NSString *fid;
 @property (nonatomic, strong) OTFeedItemAuthor *author;
 @property (nonatomic, strong) NSDate *creationDate;
 @property (nonatomic, strong) NSDate *updatedDate;

@@ -53,8 +53,8 @@ extern NSString *const kAPITourRoute;
                         withSuccess:(void (^)())success
                             failure:(void (^)(NSError *))failure;
 
-- (void)rejectTourJoinRequestForUser:(NSNumber*)userID
-                              forTour:(NSNumber*)tourID
+- (void)rejectTourJoinRequestForUser:(NSNumber *)userID
+                              forTour:(NSNumber *)tourID
                           withSuccess:(void (^)())success
                               failure:(void (^)(NSError *))failure;
 

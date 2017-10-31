@@ -23,6 +23,10 @@
           withSuccess:(void(^)(OTEntourage *))success
               failure:(void (^)(NSError *))failure;
 
+- (void)getEntourageWithStringId:(NSString *)entourageId
+                     withSuccess:(void(^)(OTEntourage *))success
+                         failure:(void (^)(NSError *))failure;
+
 - (void)joinEntourage:(OTEntourage *)entourage
               success:(void(^)(OTFeedItemJoiner *))success
               failure:(void (^)(NSError *)) failure;

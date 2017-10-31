@@ -93,6 +93,33 @@ extern NSString *kUsers;
      }];
 }
 
+- (void)getEntourageWithStringId:(NSString *)entourageId
+               withSuccess:(void(^)(OTEntourage *))success
+                   failure:(void (^)(NSError *))failure
+{
+    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, entourageId, TOKEN];
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             NSDictionary *entDictionary = [(NSDictionary*)responseObject objectForKey:@"entourage"];
+             OTEntourage *ent = [[OTEntourage alloc] initWithDictionary:entDictionary];
+             success(ent);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }];
+}
 
 - (void)joinEntourage:(OTEntourage *)entourage
               success:(void(^)(OTFeedItemJoiner *))success
@@ -220,8 +247,8 @@ extern NSString *kUsers;
      ];
 }
 
-- (void)rejectEntourageJoinRequestForUser:(NSNumber*)userID
-                             forEntourage:(NSNumber*)entourageID
+- (void)rejectEntourageJoinRequestForUser:(NSNumber *)userID
+                             forEntourage:(NSNumber *)entourageID
                               withSuccess:(void (^)())success
                                   failure:(void (^)(NSError *))failure
 {

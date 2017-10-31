@@ -248,8 +248,8 @@ NSString *const kTourPoints = @"tour_points";
 }
 
 - (void)updateTourJoinRequestStatus:(NSString *)status
-                            forUser:(NSNumber*)userID
-                            forTour:(NSNumber*)tourID
+                            forUser:(NSNumber *)userID
+                            forTour:(NSNumber *)tourID
                         withSuccess:(void (^)())success
                             failure:(void (^)(NSError *))failure
 {

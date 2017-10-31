@@ -34,7 +34,7 @@
 #import "OTPhoneViewController.h"
 #import "OTCodeViewController.h"
 #import "Mixpanel/Mixpanel.h"
-
+#import "OTDeepLinkService.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -105,6 +105,21 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     if([OTOngoingTourService sharedInstance].isOngoing)
         return;
     [[OTLocationManager sharedInstance] stopLocationUpdates];
+}
+
+- (BOOL)application:(UIApplication *)application
+continueUserActivity:(NSUserActivity *)userActivity
+ restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+    
+    
+    if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+        NSURL *url = userActivity.webpageURL;
+        NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
+        NSString *entourageId = arrayWithStrings.lastObject;
+        [[OTDeepLinkService new] navigateTo:entourageId];
+    }
+    
+    return true;
 }
 
 #pragma mark - Private methods

@@ -13,12 +13,23 @@
 #import "SVProgressHUD.h"
 #import "OTFeedItemFactory.h"
 #import "OTUserViewController.h"
+#import "OTPublicFeedItemViewController.h"
 
 @implementation OTDeepLinkService
 
 - (void)navigateTo:(NSNumber *)feedItemId withType:(NSString *)feedItemType {
     [SVProgressHUD show];
     [[[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getStateInfo] loadWithSuccess:^(OTFeedItem *feedItem) {
+        [SVProgressHUD dismiss];
+        [self prepareControllers:feedItem];
+    } error:^(NSError *error) {
+        [SVProgressHUD dismiss];
+    }];
+}
+
+- (void)navigateTo: (NSString *)feedItemId {
+    [SVProgressHUD show];
+    [[[OTFeedItemFactory createForId:feedItemId] getStateInfo] loadWithSuccess2:^(OTFeedItem *feedItem) {
         [SVProgressHUD dismiss];
         [self prepareControllers:feedItem];
     } error:^(NSError *error) {
@@ -60,10 +71,18 @@
 - (void)prepareControllers:(OTFeedItem *)feedItem {
     OTSWRevealViewController *revealController = [self setupRevealController];
     UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
-    UIStoryboard *activeFeedItemStorybard = [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];
-    OTActiveFeedItemViewController *activeFeedItemController = (OTActiveFeedItemViewController *)[activeFeedItemStorybard instantiateInitialViewController];
-    activeFeedItemController.feedItem = feedItem;
-    [mainController setViewControllers:@[mainController.topViewController, activeFeedItemController]];
+    if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
+        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
+        OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+        publicFeedItemController.feedItem = feedItem;
+        [mainController setViewControllers:@[mainController.topViewController, publicFeedItemController]];
+    }
+    else {
+        UIStoryboard *activeFeedItemStorybard = [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];
+        OTActiveFeedItemViewController *activeFeedItemController = (OTActiveFeedItemViewController *)[activeFeedItemStorybard instantiateInitialViewController];
+        activeFeedItemController.feedItem = feedItem;
+        [mainController setViewControllers:@[mainController.topViewController, activeFeedItemController]];
+    }
     [self updateAppWindow:revealController];
 }
 
