@@ -47,9 +47,10 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     self.mailSender.successMessage = OTLocalizedString(@"user_reported");
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 1000;
     NSNumber *userId = self.userId;
     if(!userId)
         userId = self.user.sid;
@@ -155,33 +156,14 @@ typedef NS_ENUM(NSInteger) {
 #define CELLHEIGHT_ENTOURAGES  80.0f
 #define CELLHEIGHT_DEFAULT  48.0f
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch ([self.sections[indexPath.section] intValue]) {
-        case SectionTypeSummary:
-            return CELLHEIGHT_SUMMARY;
-        case SectionTypeVerification:
-            if (indexPath.row == 0)
-                return CELLHEIGHT_TITLE;
-            else
-                return CELLHEIGHT_DEFAULT;
-        case SectionTypeEntourages:
-            return CELLHEIGHT_DEFAULT;
-        case SectionTypeAssociations: {
-            if (indexPath.row == 0)
-                return CELLHEIGHT_TITLE;
-            else
-                return CELLHEIGHT_ENTOURAGES;
-        }
-        default:
-            return CELLHEIGHT_DEFAULT;;
-    }
-}
-
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 15)];
     headerView.backgroundColor = [UIColor appPaleGreyColor];
     return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -248,9 +230,7 @@ typedef NS_ENUM(NSInteger) {
 #define SUMMARY_AVATAR 1
 #define SUMMARY_AVATAR_SHADOW 10
 #define SUMMARY_NAME 2
-#define SUMMARY_ROLE 3
-#define SUMMARY_DATE 4
-#define SUMMARY_ADDRESS 5
+#define SUMMARY_DESCRIPTION 3
 #define SUMMARY_TITLE 6
 
 #define VERIFICATION_LABEL 1
@@ -279,14 +259,8 @@ typedef NS_ENUM(NSInteger) {
     UILabel *nameLabel = [cell viewWithTag:SUMMARY_NAME];
     nameLabel.text = self.user.displayName;
     
-    UILabel *roleLabel = [cell viewWithTag:SUMMARY_ROLE];
-    roleLabel.text = @"";//self.currentUser.role;
-    
-    UILabel *dateLabel = [cell viewWithTag:SUMMARY_DATE];
-    dateLabel.text = @"";//self.currentUser.joinDate;
-
-    UILabel *addressLabel = [cell viewWithTag:SUMMARY_ADDRESS];
-    addressLabel.text = @"";//self.currentUser.address;
+    UILabel *aboutMeLabel = [cell viewWithTag:SUMMARY_DESCRIPTION];
+    aboutMeLabel.text = self.user.about;
 }
 
 - (void)setupTitleProfileCell:(UITableViewCell *)cell withTitle:(NSString *)title {
