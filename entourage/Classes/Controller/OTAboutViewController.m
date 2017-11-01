@@ -150,6 +150,10 @@
     itemCGU.type = GeneralConditions;
     [aboutItems addObject:itemCGU];
     
+    OTAboutItem *itemApplicationUsage = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"menu_application_usage")
+                                                                       url:MENU_BLOG_APPLICATION_USAGE_URL];
+    [aboutItems addObject:itemApplicationUsage];
+    
     OTAboutItem *itemWebsite = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_website")
                                                               url:ABOUT_WEBSITE_URL];
     itemWebsite.type = Website;

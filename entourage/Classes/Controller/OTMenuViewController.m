@@ -30,6 +30,11 @@
 #import "OTAPIConsts.h"
 #import "OTSolidarityGuideFiltersViewController.h"
 
+
+#define HEADER_CELL_INDEX 7
+#define LOG_OUT_CELL_INDEX 8
+#define SOLIDARITY_GUIDE_INDEX 3
+
 @import MessageUI;
 
 /* MenuItem identifiers */
@@ -115,12 +120,15 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellID;
-    if (indexPath.row == 7)
+    if(indexPath.row == 2)
+        cellID = OTMenuMakeDonationTableViewCellIdentifier;
+    else if (indexPath.row == HEADER_CELL_INDEX)
         cellID = @"HeaderViewCell";
-    else if (indexPath.row == 8)
+    else if (indexPath.row == LOG_OUT_CELL_INDEX)
         cellID = OTMenuLogoutTableViewCellIdentifier;
     else
         cellID = OTMenuTableViewCellIdentifier;
+    
         
     OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
@@ -130,8 +138,10 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         cell.itemLabel.text = menuItem.title;
     else
         cell.contentView.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
-    if (indexPath.row == 7 || indexPath.row == 6)
+    if (indexPath.row == HEADER_CELL_INDEX || indexPath.row == LOG_OUT_CELL_INDEX)
         cell.separatorInset = UIEdgeInsetsZero;
+    if (indexPath.row == 2)
+        cell.contentView.backgroundColor = [UIColor colorWithRed:242 green:101 blue:33 alpha:1];
 	return cell;
 }
 
@@ -142,12 +152,12 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-	if (indexPath.row == 8) {
+	if (indexPath.row == LOG_OUT_CELL_INDEX) {
         [OTLogger logEvent:@"LogOut"];
         [OTOngoingTourService sharedInstance].isOngoing = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
-    else if (indexPath.row == 3) {
+    else if (indexPath.row == SOLIDARITY_GUIDE_INDEX) {
         [OTLogger logEvent:@"SolidarityGuideFrom07Menu"];
         [self.revealViewController revealToggle:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:kSolidarityGuideNotification object:self];
@@ -229,24 +239,50 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (NSArray *)createMenuItems {
 	NSMutableArray *menuItems = [NSMutableArray array];
-    OTMenuItem *itemBlog = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_scb") iconName: @"blog" url:MENU_SCB_URL];
+    OTMenuItem *itemBlog = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_scb")
+                                                    iconName: @"blog"
+                                                         url:MENU_SCB_URL];
     [menuItems addObject:itemBlog];
-    OTMenuItem *itemEntourageActions = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_entourage_actions") iconName:@"goal" url:MENU_BLOG_ENTOURAGE_ACTIONS_URL];
+    
+    OTMenuItem *itemEntourageActions = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_entourage_actions")
+                                                                iconName:@"goal"
+                                                                     url:MENU_BLOG_ENTOURAGE_ACTIONS_URL];
     [menuItems addObject:itemEntourageActions];
-    OTMenuItem *itemAtd = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_atd_partner") iconName:@"atdLogo" url:MENU_ATD_PARTNERSHIP];
-    [menuItems addObject:itemAtd];
-    OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide") iconName:@"mapPin"];
+    
+    
+    //add 3rd new one
+    OTMenuItem *itemDon = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_make_donation")
+                                                   iconName:@"heartNofillWhite"
+                                                        url:@""];
+    [menuItems addObject:itemDon];
+    
+    
+    OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide")
+                                                               iconName:@"mapPin"];
     [menuItems addObject:itemSolidarityGuide];
+    
+    OTMenuItem *itemAtd = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_atd_partner")
+                                                   iconName:@"atdLogo"
+                                                        url:MENU_ATD_PARTNERSHIP];
+    [menuItems addObject:itemAtd];
+    
     NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
-    OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart") iconName: @"chart" url:chartUrl];
+    OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart")
+                                                     iconName: @"chart"
+                                                          url:chartUrl];
     [menuItems addObject:itemChart];
-    OTMenuItem *itemApplicationUsage = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_application_usage") iconName:@"menu_phone" url:MENU_BLOG_APPLICATION_USAGE_URL];
-    [menuItems addObject:itemApplicationUsage];
-    OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_about") iconName: @"about" segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
+    
+    OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_about")
+                                                     iconName: @"about"
+                                              segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
     [menuItems addObject:itemAbout];
+    
     OTMenuItem *itemNil = [[OTMenuItem alloc] initWithTitle:nil iconName: nil ];
     [menuItems addObject:itemNil];
-    OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"") iconName: nil segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
+    
+    OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
+                                                          iconName: nil
+                                                   segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
     [menuItems addObject:itemDisconnect];
 	return menuItems;
 }

@@ -10,6 +10,7 @@
 
 NSString *const OTMenuTableViewCellIdentifier = @"OTMenuTableViewCellIdentifier";
 NSString *const OTMenuLogoutTableViewCellIdentifier = @"OTMenuLogoutTableViewCellIdentifier";
+NSString *const OTMenuMakeDonationTableViewCellIdentifier = @"makeDonationCellIdentifier";
 
 @implementation OTMenuTableViewCell
 

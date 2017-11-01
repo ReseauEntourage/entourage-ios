@@ -10,6 +10,7 @@
 
 FOUNDATION_EXPORT NSString *const OTMenuTableViewCellIdentifier;
 FOUNDATION_EXPORT NSString *const OTMenuLogoutTableViewCellIdentifier;
+FOUNDATION_EXPORT NSString *const OTMenuMakeDonationTableViewCellIdentifier;
 
 @interface OTMenuTableViewCell : UITableViewCell
 
