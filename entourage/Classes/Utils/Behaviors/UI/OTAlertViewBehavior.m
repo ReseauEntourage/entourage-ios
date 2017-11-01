@@ -44,7 +44,7 @@
 
 + (void)setupOngoingCreateEntourageWithAction:(OTAlertViewBehavior *)action {
     action.title = OTLocalizedString(@"tour_ongoing");
-    action.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), OTLocalizedString(@"action")];
+    action.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), [OTLocalizedString(@"action") lowercaseString]];
 }
 
 #pragma mark - UIAlertViewDelegate
