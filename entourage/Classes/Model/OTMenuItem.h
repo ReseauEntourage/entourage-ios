@@ -13,10 +13,10 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *iconName;
 @property (nonatomic, strong) NSString *segueIdentifier;
-@property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSString *identifier;
 
 - (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName segueIdentifier:(NSString *)segueIdentifier;
-- (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName url:(NSString *)url;
+- (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName identifier:(NSString *)identifier;
 - (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName;
 
 @end

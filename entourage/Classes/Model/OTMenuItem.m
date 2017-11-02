@@ -21,12 +21,12 @@
     return self;
 }
 
-- (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName url:(NSString *)url {
+- (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName identifier:(NSString *)identifier {
     self = [super init];
     if (self) {
         self.title = title;
         self.iconName = iconName;
-        self.url = url;
+        self.identifier = identifier;
     }
     return self;
 }

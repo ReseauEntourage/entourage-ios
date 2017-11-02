@@ -29,7 +29,7 @@
 #import "UIImageView+entourage.h"
 #import "OTAPIConsts.h"
 #import "OTSolidarityGuideFiltersViewController.h"
-
+#import "OTHTTPRequestManager.h"
 
 #define HEADER_CELL_INDEX 7
 #define LOG_OUT_CELL_INDEX 8
@@ -177,7 +177,9 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
                 [OTLogger logEvent:@"ViewEthicsChartClick"];
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_atd_partner")])
                 [OTLogger logEvent:@"ATDPartnershipView"];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.url]];
+            NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, menuItem.identifier, TOKEN];
+            NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
         }
 	}
     [[tableView cellForRowAtIndexPath:indexPath]setSelected:NO];
@@ -241,19 +243,19 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	NSMutableArray *menuItems = [NSMutableArray array];
     OTMenuItem *itemBlog = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_scb")
                                                     iconName: @"blog"
-                                                         url:MENU_SCB_URL];
+                                                         identifier:SCB_LINK_ID];
     [menuItems addObject:itemBlog];
     
     OTMenuItem *itemEntourageActions = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_entourage_actions")
                                                                 iconName:@"goal"
-                                                                     url:MENU_BLOG_ENTOURAGE_ACTIONS_URL];
+                                                                     identifier:GOAL_LINK_ID];
     [menuItems addObject:itemEntourageActions];
     
     
     //add 3rd new one
     OTMenuItem *itemDon = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_make_donation")
                                                    iconName:@"heartNofillWhite"
-                                                        url:@""];
+                                                        identifier:DONATE_LINK_ID];
     [menuItems addObject:itemDon];
     
     
@@ -263,13 +265,13 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     
     OTMenuItem *itemAtd = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_atd_partner")
                                                    iconName:@"atdLogo"
-                                                        url:MENU_ATD_PARTNERSHIP];
+                                                        identifier:ATD_LINK_ID];
     [menuItems addObject:itemAtd];
     
-    NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
+   // NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
     OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart")
                                                      iconName: @"chart"
-                                                          url:chartUrl];
+                                                   identifier:CHARTE_LINK_ID];
     [menuItems addObject:itemChart];
     
     OTMenuItem *itemAbout = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_about")

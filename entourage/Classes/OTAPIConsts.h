@@ -16,6 +16,8 @@
 // Onboarding
 #define API_URL_ONBOARD  @"users"
 
+//Menu
+#define API_URL_MENU_OPTIONS @"links/%@/redirect?token=%@"
 
 // Feeds
 #define API_URL_FEEDS    @"feeds?token=%@"

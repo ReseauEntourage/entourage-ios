@@ -77,13 +77,16 @@
 #define PUBLIC_ENTOURAGE_CREATION_CHART @"https://blog.entourage.social/charte-ethique-grand-public/"
 #define PRO_ENTOURAGE_CREATION_CHART @"https://blog.entourage.social/charte-ethique-maraudeur"
 
-#define MENU_BLOG_URL @"https://blog.entourage.social/2016/10/28/franchir-le-pas/"
-#define MENU_SCB_URL @"http://www.simplecommebonjour.org/"
-#define MENU_BLOG_ENTOURAGE_ACTIONS_URL @"http://blog.entourage.social/quelles-actions-faire-avec-entourage"
-#define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
-#define MENU_ATD_PARTNERSHIP @"https://www.atd-quartmonde.fr/entourage/"
+//Menu
+#define SCB_LINK_ID @"pedagogic-content"
+#define GOAL_LINK_ID @"action-examples"
+#define DONATE_LINK_ID @"donation"
+#define ATD_LINK_ID @"atd-partnership"
+#define CHARTE_LINK_ID @"ethics-charter"
+#define FAQ_LINK_ID @"faq"
 
-#define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
+
+#define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
 #define PRO_MENU_CHART_URL @"https://blog.entourage.social/charte-ethique/"
 #define PUBLIC_MENU_CHART_URL @"http://www.entourage.social/chartes/grand-public.html"
 
