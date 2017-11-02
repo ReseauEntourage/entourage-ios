@@ -448,7 +448,7 @@ typedef NS_ENUM(NSInteger) {
     textView.delegate = self;
     if (textView != nil && [textView isKindOfClass:[UITextView class]])
         return textView.text;
-    return nil;
+    return @"";
 }
 
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationImage:(NSString *)imageURL {
