@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger) {
 
 @property (nonatomic, strong) UITextField *firstNameTextField;
 @property (nonatomic, strong) UITextField *lastNameTextField;
-@property (nonatomic, strong) OTTextWithCount *aboutMeTextView;
+@property (nonatomic, strong) UITextView *aboutMeTextView;
 
 @property (nonatomic, strong) OTUser *user;
 @property (nonatomic, strong) NSArray *sections;
@@ -76,8 +76,6 @@ typedef NS_ENUM(NSInteger) {
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [OTLogger logEvent:@"Screen09_2EditMyProfileView"];
-    if(self.user.about && ![self.user.about isEqualToString:@""])
-        [self.aboutMeTextView updateAfterSpeech];
 }
 
 - (void)dealloc {
@@ -93,6 +91,7 @@ typedef NS_ENUM(NSInteger) {
     else if ([segue.identifier isEqualToString:@"AboutMeSegue"]) {
         OTAboutMeViewController *controller = (OTAboutMeViewController*)segue.destinationViewController;
         controller.delegate = self;
+        controller.aboutMeMessage = self.aboutMeTextView.text;
     }
 }
 
@@ -289,7 +288,6 @@ typedef NS_ENUM(NSInteger) {
                 NSString *text = indexPath.row == 1 ? self.user.firstName : self.user.lastName;
                 UITextField *textField = indexPath.row == 1 ? self.firstNameTextField : self.lastNameTextField;
                 [self setupInfoCell:cell withTitle:title withTextField:textField andText:text];
-
             }
             break;
         }
@@ -446,9 +444,10 @@ typedef NS_ENUM(NSInteger) {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if(!cell)
         return defaultValue;
-    OTTextWithCount * textView = [cell viewWithTag:ABOUT_ME_TEXT];
-    if (textView != nil && [textView isKindOfClass:[OTTextWithCount class]])
-        return textView.textView.text;
+    UITextView * textView = [cell viewWithTag:ABOUT_ME_TEXT];
+    textView.delegate = self;
+    if (textView != nil && [textView isKindOfClass:[UITextView class]])
+        return textView.text;
     return nil;
 }
 
@@ -480,9 +479,13 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)setupAboutMeCell:(UITableViewCell *)cell withText:(NSString *)aboutText {
     self.aboutMeTextView = [cell viewWithTag:ABOUT_ME_TEXT];
-    self.aboutMeTextView.placeholder = @"";
-    self.aboutMeTextView.maxLength = 200;
-    self.aboutMeTextView.textView.text = aboutText;
+    self.aboutMeTextView.delegate = self;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                action:@selector(addAboutMeDescription)];
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.numberOfTouchesRequired = 1;
+    [self.aboutMeTextView addGestureRecognizer:singleTap];
+    self.aboutMeTextView.text = aboutText;
 }
 
 - (void)setupPhoneCell:(UITableViewCell *)cell withPhone:(NSString *)phone {
@@ -509,6 +512,10 @@ typedef NS_ENUM(NSInteger) {
 - (void)setNewAboutMe:(NSString *)aboutMe {
     self.user.about = aboutMe;
     [self appActive];
+}
+
+- (void)addAboutMeDescription {
+    [self performSegueWithIdentifier:@"AboutMeSegue" sender:nil];
 }
 
 @end

@@ -24,9 +24,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.aboutMeMessage.placeholder = @"";
-    self.aboutMeMessage.maxLength = 200;
-    // Do any additional setup after loading the view.
+    self.aboutMeTextWithCount.placeholder = @"";
+    self.aboutMeTextWithCount.maxLength = 200;
+    self.aboutMeTextWithCount.textView.text = self.aboutMeMessage;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if(self.aboutMeMessage && ![self.aboutMeMessage isEqualToString:@""])
+        [self.aboutMeTextWithCount updateAfterSpeech];
 }
 
 - (IBAction)close:(id)sender {
@@ -34,7 +40,7 @@
 }
 
 - (IBAction)doSendDescription {
-    NSString *aboutMessage = self.aboutMeMessage.textView.text;
+    NSString *aboutMessage = self.aboutMeTextWithCount.textView.text;
     if (!aboutMessage)
         aboutMessage = @"";
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
