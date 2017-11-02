@@ -34,6 +34,7 @@
 #define HEADER_CELL_INDEX 7
 #define LOG_OUT_CELL_INDEX 8
 #define SOLIDARITY_GUIDE_INDEX 3
+#define DONATION_CELL_INDEX 2
 
 @import MessageUI;
 
@@ -138,9 +139,9 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         cell.itemLabel.text = menuItem.title;
     else
         cell.contentView.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
-    if (indexPath.row == HEADER_CELL_INDEX || indexPath.row == LOG_OUT_CELL_INDEX)
+    if (indexPath.row == HEADER_CELL_INDEX || indexPath.row == HEADER_CELL_INDEX - 1 || indexPath.row == LOG_OUT_CELL_INDEX || indexPath.row == DONATION_CELL_INDEX || indexPath.row == DONATION_CELL_INDEX - 1)
         cell.separatorInset = UIEdgeInsetsZero;
-    if (indexPath.row == 2)
+    if (indexPath.row == DONATION_CELL_INDEX)
         cell.contentView.backgroundColor = [UIColor colorWithRed:242 green:101 blue:33 alpha:1];
 	return cell;
 }
