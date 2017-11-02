@@ -70,7 +70,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.messageTextView updateAfterSpeech];
+    if (self.messageTextView.textView.text && ![self.messageTextView.textView.text isEqualToString: @""])
+        [self.messageTextView updateAfterSpeech];
 }
 
 #pragma mark - Private methods
