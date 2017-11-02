@@ -30,7 +30,7 @@
     }
     __weak typeof(self) weakSelf = self;
     [OTAlertViewBehavior setupOngoingCreateEntourageWithAction:self.actionAlert];
-    [self.actionAlert addAction:OTLocalizedString(@"continue") delegate: ^(){
+    [self.actionAlert addAction:OTLocalizedString(@"action") delegate: ^(){
         if ([weakSelf.optionsDelegate respondsToSelector:@selector(createAction)])
             [weakSelf.optionsDelegate performSelector:@selector(createAction) withObject:nil];
     }];
