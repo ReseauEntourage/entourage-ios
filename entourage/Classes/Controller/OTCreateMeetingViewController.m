@@ -130,11 +130,11 @@
 - (IBAction)sendEncounter:(UIBarButtonItem*)sender {
     [OTLogger logEvent:@"ValidateEncounterClick"];
     if(self.nameTextField.text.length == 0) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_enter_name_of_met_person") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_fill_all_fields") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
         return;
     }
     else if(self.messageTextView.textView.text.length == 0) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_enter_message") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_fill_all_fields") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
         return;
     }
     if(!self.encounter)

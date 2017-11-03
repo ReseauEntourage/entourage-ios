@@ -299,6 +299,9 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "encounter_enter_name_of_met_person" = "Vous devez donner un titre à votre rencontre";
 "encounter_enter_message" = "Vous devez donner une description à votre rencontre";
 
+"encounter_fill_all_fields" = "Veuillez remplir ce champ";
+
+
 // Titles
 "aboutTitle" = "À propos";
 "descriptionTitle" = "Description";
