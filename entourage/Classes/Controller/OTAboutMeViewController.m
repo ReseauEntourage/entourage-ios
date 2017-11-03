@@ -13,10 +13,13 @@
 #import "OTUser.h"
 #import "OTAuthService.h"
 #import "OTConsts.h"
+#import "IQKeyboardManager.h"
+#import "OTCloseKeyboardOnTapBehavior.h"
 
 @interface OTAboutMeViewController () <UITextViewDelegate>
 
 @property (nonatomic, weak) IBOutlet OTTapViewBehavior *tapBehavior;
+@property (nonatomic, weak) IBOutlet OTCloseKeyboardOnTapBehavior *closeKeyboardBehavior;
 
 @end
 
@@ -24,13 +27,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    self.closeKeyboardBehavior.inputViews = [NSArray arrayWithObjects:self.aboutMeTextWithCount.textView, nil];
     self.aboutMeTextWithCount.placeholder = @"";
     self.aboutMeTextWithCount.maxLength = 200;
-    self.aboutMeTextWithCount.textView.text = self.aboutMeMessage;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    [self.aboutMeTextWithCount.textView becomeFirstResponder];
+    self.aboutMeTextWithCount.textView.text = self.aboutMeMessage;
     if(self.aboutMeMessage && ![self.aboutMeMessage isEqualToString:@""])
         [self.aboutMeTextWithCount updateAfterSpeech];
 }

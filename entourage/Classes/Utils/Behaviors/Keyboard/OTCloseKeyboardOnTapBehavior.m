@@ -23,11 +23,12 @@
 }
 
 - (void)tapped:(UITapGestureRecognizer *)recognizer {
-    for(UIView *input in self.inputViews)
-    if([input isFirstResponder])
-        [input resignFirstResponder];
-    else
-        recognizer.cancelsTouchesInView = NO;
+    for(UIView *input in self.inputViews) {
+        if([input isFirstResponder])
+            [input resignFirstResponder];
+        else
+            recognizer.cancelsTouchesInView = NO;
+    }
 }
 
 @end
