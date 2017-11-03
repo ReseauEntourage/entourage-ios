@@ -14,6 +14,7 @@
 #import "OTConsts.h"
 #import "OTTextView.h"
 #import "OTTapViewBehavior.h"
+#import "IQKeyboardManager.h"
 
 @interface OTFeedItemJoinOptionsViewController () <UITextViewDelegate>
 
@@ -25,13 +26,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.tapBehavior initialize];
     self.greetingMessage.placeholder = OTLocalizedString(@"request_to_join_popup_placeholder");
     self.greetingMessage.editingPlaceholder = @"";
     self.greetingMessage.placeholderLargeColor = UIColor.grayColor;
     [self setupGreetingLabelForItem];
     self.greetingMessage.forwardDelegate = self;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
 - (IBAction)close:(id)sender {
