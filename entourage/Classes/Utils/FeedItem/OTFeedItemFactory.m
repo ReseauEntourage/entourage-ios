@@ -11,6 +11,8 @@
 #import "OTTour.h"
 #import "OTEntourageFactory.h"
 #import "OTTourFactory.h"
+#import "OTAnnouncement.h"
+#import "OTAnnouncementFactory.h"
 
 @interface OTFeedItemFactory()
 
@@ -31,8 +33,11 @@
 
 + (id<OTFeedItemFactoryDelegate>)createFor:(OTFeedItem *)item {
     BOOL isEntourage = [item class] == [OTEntourage class];
+    BOOL isAnnouncement = [item class] == [OTAnnouncement class];
     if(isEntourage)
         return [[OTEntourageFactory alloc] initWithEntourage:(OTEntourage *)item];
+    else if (isAnnouncement)
+        return [[OTAnnouncementFactory alloc] initWithAnnouncement:(OTAnnouncement *)item];
     else
         return [[OTTourFactory alloc] initWithTour:(OTTour *)item];
 }

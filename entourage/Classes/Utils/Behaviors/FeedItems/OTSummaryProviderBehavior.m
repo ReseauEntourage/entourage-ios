@@ -16,6 +16,7 @@
 #import "UIButton+entourage.h"
 #import "NSDate+ui.h"
 #import "UIImageView+entourage.h"
+#import "OTAnnouncement.h"
 
 @interface OTSummaryProviderBehavior ()
 
@@ -53,7 +54,13 @@
     self.imgAssociation.hidden = feedItem.author.partner == nil;
     [self.imgAssociation setupFromUrl:feedItem.author.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     NSString *source = [uiDelegate categoryIconSource];
-    [self.imgCategory setImage:[UIImage imageNamed:source]];
+    if ([feedItem isKindOfClass:[OTAnnouncement class]]) {
+        NSURL *urlSource = [[NSURL alloc] initWithString:source];
+        NSData *imageData = [NSData dataWithContentsOfURL:urlSource];
+         [self.imgCategory setImage:[UIImage imageWithData:imageData]];
+    }
+    else
+        [self.imgCategory setImage:[UIImage imageNamed:source]];
 }
 
 - (void)clearConfiguration {

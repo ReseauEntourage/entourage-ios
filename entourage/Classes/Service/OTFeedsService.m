@@ -15,6 +15,7 @@
 #import "OTFeedItem.h"
 #import "OTEntourage.h"
 #import "OTTour.h"
+#import "OTAnnouncement.h"
 #import "OTUnreadMessagesService.h"
 
 @implementation OTFeedsService
@@ -81,6 +82,8 @@
             feedItem = [[OTEntourage alloc] initWithDictionary:feedItemDictionary];
         else if ([feedType isEqualToString:@"Tour"])
             feedItem = [[OTTour alloc] initWithDictionary:feedItemDictionary];
+        else if ([feedType isEqualToString:@"Announcement"])
+            feedItem = [[OTAnnouncement alloc] initWithDictionary:feedItemDictionary];
         if(feedItem)
             [feedItems addObject:feedItem];
     }

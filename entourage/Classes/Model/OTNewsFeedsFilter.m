@@ -185,7 +185,8 @@
         @"show_tours": self.showTours ? @"true" : @"false",
         @"show_my_entourages_only" : self.showOnlyMyEntourages ? @"true" : @"false",
         @"show_my_partner_only" : self.showFromOrganisation ? @"true" : @"false",
-        @"time_range" : @(self.timeframeInHours)
+        @"time_range" : @(self.timeframeInHours),
+        @"announcements" : @"v1"
     }];
 }
 

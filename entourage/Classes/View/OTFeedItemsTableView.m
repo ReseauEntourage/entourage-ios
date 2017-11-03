@@ -24,6 +24,8 @@
 #import "OTPoi.h"
 #import "OTNewsFeedsSourceBehavior.h"
 #import "OTEntourageService.h"
+#import "OTAnnouncement.h"
+#import "OTAnnouncementCell.h"
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
@@ -179,6 +181,8 @@
         if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showPoiDetails:)])
             [self.feedItemsDelegate showPoiDetails:selectedItem];
     }
+    else if([self isAnnouncementItem:selectedItem])
+        return;
     else {
         if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)])
             [self.feedItemsDelegate showFeedInfo:selectedItem];
@@ -316,10 +320,16 @@
 - (BOOL)isGuideItem:(id)item {
     return [item isKindOfClass:[OTPoi class]];
 }
+
+- (BOOL)isAnnouncementItem:(id)item {
+    return [item isKindOfClass:[OTAnnouncement class]];
+}
      
 - (NSString *)getCellIdentifier:(id)item {
     if([self isGuideItem:item])
         return OTSolidarityGuideTableViewCellIdentifier;
+    else if ([self isAnnouncementItem:item])
+        return OTAnnouncementTableViewCellIdentifier;
     return OTNewsFeedTableViewCellIdentifier;
 }
      
@@ -327,6 +337,10 @@
     if([self isGuideItem:item]) {
         OTSolidarityGuideCell *guideCell = (OTSolidarityGuideCell *)cell;
         [guideCell configureWith:(OTPoi *) item];
+    }
+    else if ([self isAnnouncementItem:item]) {
+        OTAnnouncementCell *announcementCell = (OTAnnouncementCell *)cell;
+        [announcementCell configureWith:(OTAnnouncement *)item];
     }
     else {
         OTNewsFeedCell *feedCell = (OTNewsFeedCell *)cell;

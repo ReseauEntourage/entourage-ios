@@ -87,6 +87,7 @@
 #import "OTHeatzonesCollectionSource.h"
 #import "KPClusteringController.h"
 #import "KPAnnotation.h"
+#import "OTAnnouncement.h"
 
 #define MAPVIEW_HEIGHT 224.f
 
@@ -543,7 +544,13 @@
 
 - (void)feedMapWithFeedItems {
     if (self.toursMapDelegate.isActive) {
-        [self.overlayFeeder updateOverlays:self.newsFeedsSourceBehavior.feedItems];
+        NSMutableArray *feedItems = [[NSMutableArray alloc] init];
+        for(OTFeedItem *item in self.newsFeedsSourceBehavior.feedItems) {
+            if(![item isKindOfClass:[OTAnnouncement class]]) {
+                [feedItems addObject:item];
+            }
+        }
+        [self.overlayFeeder updateOverlays:feedItems];
         NSMutableArray *annotations = [NSMutableArray new];
         for (OTEncounter *encounter in self.encounters) {
             OTEncounterAnnotation *pointAnnotation = [[OTEncounterAnnotation alloc] initWithEncounter:encounter];
@@ -564,6 +571,9 @@
 - (void)feedMapViewWithEncounters {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     OTFeedItemAuthor *author = self.tourCreatorBehavior.tour.author;
+    if (currentUser.sid == nil || author.uID == nil) {
+        return;
+    }
     if (self.toursMapDelegate.isActive && [currentUser.sid isEqualToNumber:author.uID]) {
         NSMutableArray *annotations = [NSMutableArray new];
         for (OTEncounter *encounter in self.encounters) {

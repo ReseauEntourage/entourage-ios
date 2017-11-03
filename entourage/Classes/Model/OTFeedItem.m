@@ -27,7 +27,8 @@
         self.uid = [dictionary numberForKey:kWSKeyID];
         //self.unreadMessageCount = @(0);
         NSDictionary *authorDictionary = [dictionary objectForKey:kWSKeyAuthor];
-        self.author = [[OTFeedItemAuthor alloc] initWithDictionary:authorDictionary];
+        if ([authorDictionary class] != [NSNull class])
+          self.author = [[OTFeedItemAuthor alloc] initWithDictionary:authorDictionary];
         self.status = [dictionary stringForKey:kWSKeyStatus];
         self.joinStatus = [dictionary stringForKey:kWSKeyJoinStatus];
         self.noPeople = [dictionary numberForKey:kWSKeyNoPeople];

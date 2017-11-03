@@ -37,6 +37,11 @@
 #define kWSKeyDescription @"description"
 #define kWSKeyCategory @"display_category"
 
+#define kWSKeyBody @"body"
+#define kWSKeyAction @"action"
+#define kWSKeyUrl @"url"
+#define kWSKeyIconUrl @"icon_url"
+
 //Category
 #define kWSKeyEntourageCategory @"display_category"
 #define kWSKeyCategoryTitle @"display_category_title"

@@ -86,7 +86,7 @@
 - (void)loadMoreItems {
     NSDate *beforeDate = [NSDate date];
     if(self.feedItems.count > 0)
-        beforeDate = [self.feedItems.lastObject updatedDate];
+        beforeDate = [self.feedItems.lastObject updatedDate] ? [self.feedItems.lastObject updatedDate] : [self.feedItems objectAtIndex:self.feedItems.count - 2];
     [self.tableDelegate beginUpdatingFeeds];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         if(items.count > 0) {

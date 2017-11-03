@@ -19,6 +19,10 @@
 		0135517C1EC30A4C00D99994 /* OTEditEncounterBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 0135517B1EC30A4C00D99994 /* OTEditEncounterBehavior.m */; };
 		0135517E1EC328BF00D99994 /* EncounterEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0135517D1EC328BF00D99994 /* EncounterEditor.storyboard */; };
 		01360A921E83EEFE0009607A /* OTChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A911E83EEFE0009607A /* OTChatDateCell.m */; };
+		013E39DE1FAC6A98005F7549 /* OTAnnouncementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 013E39DC1FAC6A97005F7549 /* OTAnnouncementCell.m */; };
+		013E39E11FAC6AB8005F7549 /* OTAnnouncement.m in Sources */ = {isa = PBXBuildFile; fileRef = 013E39DF1FAC6AB8005F7549 /* OTAnnouncement.m */; };
+		013E39E41FAC75D4005F7549 /* OTAnnouncementFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 013E39E31FAC75D4005F7549 /* OTAnnouncementFactory.m */; };
+		013E39E81FAC78DE005F7549 /* OTAnnouncementUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 013E39E71FAC78DE005F7549 /* OTAnnouncementUI.m */; };
 		015CA75A1F74037100318F4C /* OTCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CA7591F74037100318F4C /* OTCategoryViewController.m */; };
 		0161DD0F1F729E470081AE71 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0161DD0E1F729E470081AE71 /* Intro.storyboard */; };
 		017845D21F78493E0046BD81 /* OTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 017845D11F78493E0046BD81 /* OTCategory.m */; };
@@ -410,6 +414,14 @@
 		0135517D1EC328BF00D99994 /* EncounterEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EncounterEditor.storyboard; sourceTree = "<group>"; };
 		01360A901E83EEFE0009607A /* OTChatDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTChatDateCell.h; path = ActiveFeedItem/ChatCells/OTChatDateCell.h; sourceTree = "<group>"; };
 		01360A911E83EEFE0009607A /* OTChatDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTChatDateCell.m; path = ActiveFeedItem/ChatCells/OTChatDateCell.m; sourceTree = "<group>"; };
+		013E39DC1FAC6A97005F7549 /* OTAnnouncementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAnnouncementCell.m; sourceTree = "<group>"; };
+		013E39DD1FAC6A97005F7549 /* OTAnnouncementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAnnouncementCell.h; sourceTree = "<group>"; };
+		013E39DF1FAC6AB8005F7549 /* OTAnnouncement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAnnouncement.m; sourceTree = "<group>"; };
+		013E39E01FAC6AB8005F7549 /* OTAnnouncement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAnnouncement.h; sourceTree = "<group>"; };
+		013E39E21FAC75D4005F7549 /* OTAnnouncementFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAnnouncementFactory.h; sourceTree = "<group>"; };
+		013E39E31FAC75D4005F7549 /* OTAnnouncementFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAnnouncementFactory.m; sourceTree = "<group>"; };
+		013E39E61FAC78DE005F7549 /* OTAnnouncementUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAnnouncementUI.h; sourceTree = "<group>"; };
+		013E39E71FAC78DE005F7549 /* OTAnnouncementUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAnnouncementUI.m; sourceTree = "<group>"; };
 		015CA7581F74037100318F4C /* OTCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTCategoryViewController.h; sourceTree = "<group>"; };
 		015CA7591F74037100318F4C /* OTCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTCategoryViewController.m; sourceTree = "<group>"; };
 		0161DD0E1F729E470081AE71 /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
@@ -1130,6 +1142,17 @@
 				011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */,
 			);
 			name = CountryCodePicker;
+			sourceTree = "<group>";
+		};
+		013E39E51FAC787D005F7549 /* Announcement */ = {
+			isa = PBXGroup;
+			children = (
+				013E39E21FAC75D4005F7549 /* OTAnnouncementFactory.h */,
+				013E39E31FAC75D4005F7549 /* OTAnnouncementFactory.m */,
+				013E39E61FAC78DE005F7549 /* OTAnnouncementUI.h */,
+				013E39E71FAC78DE005F7549 /* OTAnnouncementUI.m */,
+			);
+			path = Announcement;
 			sourceTree = "<group>";
 		};
 		0188DF4E1E8D3B90008311B6 /* SolidarityGuideFilters */ = {
@@ -1856,6 +1879,7 @@
 				1ECFB3661D52569800722DAC /* OTMapHandlerDelegate.h */,
 				1E07DA3B1D59038E003119CC /* OTJoinerDelegate.h */,
 				1E2C60091D775F1F004B195A /* OTChangedHandlerDelegate.h */,
+				013E39E51FAC787D005F7549 /* Announcement */,
 			);
 			path = FeedItem;
 			sourceTree = "<group>";
@@ -2252,6 +2276,8 @@
 		45F4433D1C90B40D00DDEBE1 /* Feeds */ = {
 			isa = PBXGroup;
 			children = (
+				013E39E01FAC6AB8005F7549 /* OTAnnouncement.h */,
+				013E39DF1FAC6AB8005F7549 /* OTAnnouncement.m */,
 				1EFAC0F41D89384E00BE396F /* OTNewsFeedsFilter.h */,
 				1EFAC0F51D89384E00BE396F /* OTNewsFeedsFilter.m */,
 				D6BDA6D01E9B818800ED5F22 /* OTSavedFilter.h */,
@@ -2385,6 +2411,8 @@
 		6B4930C719A773C500DA7EE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				013E39DD1FAC6A97005F7549 /* OTAnnouncementCell.h */,
+				013E39DC1FAC6A97005F7549 /* OTAnnouncementCell.m */,
 				0188DF5F1E8E33D8008311B6 /* SolidarityGuideFilters */,
 				1EFBCFD91E56E56D008CEF30 /* Tutorial */,
 				1EB775491DE39691001450CA /* FeedChangeOptions */,
@@ -3055,6 +3083,7 @@
 				1E2432C61DA6CCE1000EF74F /* OTContactPhoneCell.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
 				1E488E121D4FB81700A2E5B0 /* OTPhoneViewController.m in Sources */,
+				013E39DE1FAC6A98005F7549 /* OTAnnouncementCell.m in Sources */,
 				1EFAC0E61D89252600BE396F /* OTFeedItemFiltersCellProvider.m in Sources */,
 				1EC9D67F1D644F7700C6E9AA /* OTOnboardingJoinService.m in Sources */,
 				2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */,
@@ -3143,6 +3172,7 @@
 				1E2232CB1D568B4C004CD5E8 /* OTTapViewBehavior.m in Sources */,
 				1EF23E271DD08D4700E71BB7 /* OTStartTourAnnotation.m in Sources */,
 				1E5C30391D6F971D00E10770 /* OTInvitationChangedBehavior.m in Sources */,
+				013E39E41FAC75D4005F7549 /* OTAnnouncementFactory.m in Sources */,
 				45E37E531CEE1F7D005C3175 /* OTFeedsService.m in Sources */,
 				1E78B7F01D513F0F0008C00E /* OTEntourageUI.m in Sources */,
 				1E2432C51DA6CCE1000EF74F /* OTContactInfoCell.m in Sources */,
@@ -3200,6 +3230,7 @@
 				1E5C301E1D6F671200E10770 /* OTMembersDataSource.m in Sources */,
 				019AE49B1EB0C448007B244C /* OTSolidarityGuideCell.m in Sources */,
 				2EDA5F071CB50CEE00849172 /* OTFeedItemsTableView.m in Sources */,
+				013E39E81FAC78DE005F7549 /* OTAnnouncementUI.m in Sources */,
 				1EA4F3091DA199A300A3321C /* OTDistributedDelegateBehavior.m in Sources */,
 				1E5EBCEF1D53CECF006695F1 /* OTStatusBehavior.m in Sources */,
 				1EE817601D79F36D0003133D /* OTEntourageRenderer.m in Sources */,
@@ -3231,6 +3262,7 @@
 				1E587F281E2E158100FEBB67 /* OTAssociationsCellProviderBehavior.m in Sources */,
 				1ECDBC6C1D3D363600DD87B2 /* OTEntourageMessaging.m in Sources */,
 				1EA3B70C1E5DB427003FF875 /* OTTutorialService.m in Sources */,
+				013E39E11FAC6AB8005F7549 /* OTAnnouncement.m in Sources */,
 				1EFAC0D21D89247900BE396F /* OTFeedItemsFilterCell.m in Sources */,
 				0188DF6B1E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.m in Sources */,
 				1E2232D51D569787004CD5E8 /* OTMessageTableCellProviderBehavior.m in Sources */,
