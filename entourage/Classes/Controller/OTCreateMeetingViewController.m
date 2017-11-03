@@ -99,7 +99,6 @@
     self.dateLabel.text = [NSString stringWithFormat:OTLocalizedString(@"formater_meetEncounter"), dateString];
     
     self.messageTextView.placeholder = OTLocalizedString(@"detailEncounter");
-    self.messageTextView.editingPlaceholder = self.messageTextView.placeholder;
     if(self.encounter != nil) {
         CLLocation *encounterLocation = [[CLLocation alloc] initWithLatitude:self.encounter.latitude
                                                                    longitude:self.encounter.longitude];
