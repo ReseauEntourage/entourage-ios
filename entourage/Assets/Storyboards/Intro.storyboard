@@ -157,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1a-zz-qxR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-998" y="-1710"/>
+            <point key="canvasLocation" x="-997" y="-1632"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oPo-Hd-wrW">
@@ -316,7 +316,7 @@
                 <viewControllerPlaceholder storyboardName="Onboarding" id="L2Y-m3-WnX" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8wo-ND-4Se" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="316" y="-1711"/>
+            <point key="canvasLocation" x="191" y="-1632"/>
         </scene>
         <!--UserProfileDetails-->
         <scene sceneID="ET2-x3-THH">
@@ -324,7 +324,7 @@
                 <viewControllerPlaceholder storyboardName="UserProfileDetails" id="vT5-aZ-dNG" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YLp-J8-Gtk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="533" y="-2019"/>
+            <point key="canvasLocation" x="534" y="-1951"/>
         </scene>
         <!--Login-->
         <scene sceneID="CLK-Te-XOf">
@@ -413,7 +413,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="validateButtonDidTad" destination="Gt1-cc-4DI" eventType="touchUpInside" id="c9M-mp-1xA"/>
+                                                    <action selector="validateButtonDidTap" destination="Gt1-cc-4DI" eventType="touchUpInside" id="LVE-KT-4H7"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v59-br-8WY">
@@ -908,6 +908,6 @@ En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez
         <image name="whitePhone" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="usp-d3-u4q"/>
+        <segue reference="GFk-L8-2yS"/>
     </inferredMetricsTieBreakers>
 </document>

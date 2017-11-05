@@ -36,7 +36,14 @@
 
 NSString *const kTutorialDone = @"has_done_tutorial";
 
-@interface OTLoginViewController () <LostCodeDelegate, OTUserNameViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
+@interface OTLoginViewController ()
+<
+    LostCodeDelegate,
+    OTUserNameViewControllerDelegate,
+    UIPickerViewDelegate,
+    UIPickerViewDataSource,
+    UITextFieldDelegate
+>
 
 @property (weak, nonatomic) IBOutlet OnBoardingNumberTextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet OnBoardingCodeTextField *passwordTextField;
@@ -60,7 +67,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.title = @"";
     self.phoneIsValid = NO;
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
@@ -192,7 +198,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"OTLostCode"]) {
+    if ([segue.identifier isEqualToString:@"ResendCodeSegue"]) {
         UINavigationController *navController = segue.destinationViewController;
         OTLostCodeViewController *controller = (OTLostCodeViewController *)navController.viewControllers.firstObject;
         controller.codeDelegate = self;
@@ -202,7 +208,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 /********************************************************************************/
 #pragma mark - Actions
 
-- (IBAction)validateButtonDidTad {
+- (IBAction)validateButtonDidTap {
     [OTLogger logEvent:@"TelephoneSubmit"];
     [self launchAuthentication];
 }
@@ -213,7 +219,15 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)loginWithNewCode:(NSString *)code {
     [self dismissViewControllerAnimated:YES completion:^() {
         self.passwordTextField.text = code;
-        [self validateButtonDidTad];
+        [self validateButtonDidTap];
+    }];
+}
+
+- (void)loginWithCountryCode:(long)code andPhoneNumber:(NSString *)phone {
+    [self dismissViewControllerAnimated:YES completion:^() {
+        self.countryCodeTxtField.text = [self.pickerDataSource getCountryShortNameForRow:code];
+        self.codeCountry = [self.pickerDataSource getCountryCodeForRow:code];
+        self.phoneTextField.text = phone;
     }];
 }
 

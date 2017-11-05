@@ -85,10 +85,16 @@
 - (void)regenerateSecretCode {
     [SVProgressHUD show];
     NSString *phoneNumber = self.phoneTextField.text;
-    if([self.phoneTextField.text hasPrefix:@"0"])
+    if ([self.phoneTextField.text hasPrefix:@"0"])
         phoneNumber = [self.phoneTextField.text substringFromIndex:1];
     NSString *phone = [self.codeCountry stringByAppendingString:phoneNumber];
-    [[OTAuthService new] regenerateSecretCode:phone success:^(OTUser *user) {
+    [[OTAuthService new] regenerateSecretCode:phone
+                                      success:^(OTUser *user)
+    {
+        if (self.codeDelegate != nil && [self.codeDelegate respondsToSelector:@selector(loginWithCountryCode:andPhoneNumber:)]) {
+            [self.codeDelegate loginWithCountryCode:[self.countryPicker selectedRowInComponent:0]
+                                     andPhoneNumber:self.phoneTextField.text];
+        }
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
     }
     failure:^(NSError *error) {

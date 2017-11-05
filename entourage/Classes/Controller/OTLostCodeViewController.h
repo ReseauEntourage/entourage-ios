@@ -11,12 +11,12 @@
 @protocol LostCodeDelegate <NSObject>
 
 - (void)loginWithNewCode:(NSString*)code;
+- (void)loginWithCountryCode:(long)code andPhoneNumber: (NSString *)phone;
 
 @end
 
 @interface OTLostCodeViewController : UIViewController
 
-@property(nonatomic, weak) id<LostCodeDelegate> codeDelegate;
-
+@property (nonatomic, weak) id<LostCodeDelegate> codeDelegate;
 
 @end
