@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "OTPoi.h"
 #import "OTNewsFeedTableDelegate.h"
+#import "OTAnnouncement.h"
 
 @class OTFeedItem;
 
@@ -19,6 +20,7 @@
 - (void)showPoiDetails:(OTPoi*)poi;
 - (void)showUserProfile:(NSNumber*)userId;
 - (void)doJoinRequest:(OTFeedItem*)feedItem;
+- (void)showAnnouncementDetails:(OTAnnouncement *)feedItem;
 @optional
 - (void)loadMoreData;
 

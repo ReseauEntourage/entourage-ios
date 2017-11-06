@@ -182,14 +182,19 @@
             [self.feedItemsDelegate showPoiDetails:selectedItem];
     }
     else if([self isAnnouncementItem:selectedItem])
-        return;
-    else {
+    {
+        if (self.feedItemsDelegate != nil &&
+            [self.feedItemsDelegate respondsToSelector:@selector(showAnnouncementDetails:)])
+        {
+            [self.feedItemsDelegate showAnnouncementDetails:selectedItem];
+        }
+    } else {
         if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)])
             [self.feedItemsDelegate showFeedInfo:selectedItem];
             if([selectedItem isKindOfClass:[OTEntourage class]]
-               && [[selectedItem joinStatus] isEqualToString:@"not_requested"])  {
+               && [[selectedItem joinStatus] isEqualToString:@"not_requested"])
+            {
                 NSNumber *rank = @(indexPath.section);
-                
                 [[OTEntourageService new] retrieveEntourage:(OTEntourage *)selectedItem
                                                    fromRank:rank
                                                     success:nil

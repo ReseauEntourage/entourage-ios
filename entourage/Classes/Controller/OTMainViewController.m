@@ -988,6 +988,10 @@
     [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:poi];
 }
 
+- (void)showAnnouncementDetails:(OTAnnouncement *)feedItem {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedItem.url]];
+}
+
 - (void)showUserProfile:(NSNumber*)userId {
     [[OTAuthService new] getDetailsForUser:userId success:^(OTUser *user) {
         [self performSegueWithIdentifier:@"UserProfileSegue" sender:user];
