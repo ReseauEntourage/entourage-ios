@@ -16,7 +16,7 @@ target "entourage" do
     pod 'FormatterKit'
     pod 'AWSS3', '~> 2.4'
     pod 'Fabric'
-    pod 'Crashlytics'
+    pod 'Crashlytics', '~>  3.9'
     pod 'JVFloatLabeledTextField'
     pod 'libPhoneNumber-iOS'
     pod 'Flurry-iOS-SDK/FlurrySDK'
