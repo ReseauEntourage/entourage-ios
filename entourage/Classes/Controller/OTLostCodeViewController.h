@@ -6,7 +6,7 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@class JVFloatLabeledTextField;
 
 @protocol LostCodeDelegate <NSObject>
 
@@ -18,5 +18,10 @@
 @interface OTLostCodeViewController : UIViewController
 
 @property (nonatomic, weak) id<LostCodeDelegate> codeDelegate;
+@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *countryCodeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet UIPickerView *countryPicker;
+@property (weak, nonatomic) NSString *codeCountry;
+@property (assign, nonatomic) long rowCode;
 
 @end

@@ -77,9 +77,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
         self.continueButton.enabled = [self validateForm];
     };
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+   
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
-    [self.phoneTextField indentRight];
     [self.passwordTextField indentRight];
     [self.countryCodeTxtField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     self.countryCodeTxtField.keepBaseline = YES;
@@ -92,6 +91,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"Screen02OnboardingLoginView"];
+    [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    [self.phoneTextField indentRight];
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10;
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
@@ -202,6 +203,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
         UINavigationController *navController = segue.destinationViewController;
         OTLostCodeViewController *controller = (OTLostCodeViewController *)navController.viewControllers.firstObject;
         controller.codeDelegate = self;
+        long code = [self.countryCodePicker selectedRowInComponent:0];
+        controller.countryCodeTextField.text = [self.pickerDataSource getCountryShortNameForRow:code];
+        controller.codeCountry = [self.pickerDataSource getCountryCodeForRow:code];
+        controller.rowCode = code;
+        controller.phoneTextField.text = self.phoneTextField.text;
     }
 }
 

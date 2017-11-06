@@ -26,14 +26,10 @@
 
 @interface OTLostCodeViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
-@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *countryCodeTextField;
-@property (weak, nonatomic) IBOutlet UIPickerView *countryPicker;
 
 @property (weak, nonatomic) OTCountryCodePickerViewDataSource *pickerDataSource;
-@property (weak, nonatomic) NSString *codeCountry;
 
 @end
 
@@ -51,7 +47,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //[self.scrollBehavior initialize];
     self.navigationController.navigationBarHidden = NO;
     self.title = @"";
     [self setupCloseModalTransparent];
@@ -64,6 +59,8 @@
     self.countryCodeTextField.floatingLabelTextColor = [UIColor clearColor];
     self.countryCodeTextField.floatingLabelActiveTextColor = [UIColor clearColor];
     self.pickerDataSource = [OTCountryCodePickerViewDataSource sharedInstance];
+    if(self.rowCode)
+        [self.countryPicker selectRow:self.rowCode inComponent:0 animated:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -167,8 +164,8 @@
              attributedTitleForRow:(NSInteger)row
                       forComponent:(NSInteger)component {
     NSString *title = [self.pickerDataSource getTitleForRow:row];
-    NSAttributedString *attString =
-    [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title
+                                    attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     return attString;
 }
 
