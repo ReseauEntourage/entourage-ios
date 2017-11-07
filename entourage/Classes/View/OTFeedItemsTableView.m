@@ -183,11 +183,8 @@
     }
     else if([self isAnnouncementItem:selectedItem])
     {
-        if (self.feedItemsDelegate != nil &&
-            [self.feedItemsDelegate respondsToSelector:@selector(showAnnouncementDetails:)])
-        {
-            [self.feedItemsDelegate showAnnouncementDetails:selectedItem];
-        }
+        [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
+        return;
     } else {
         if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showFeedInfo:)])
             [self.feedItemsDelegate showFeedInfo:selectedItem];

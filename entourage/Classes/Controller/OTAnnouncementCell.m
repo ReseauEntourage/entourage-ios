@@ -40,4 +40,9 @@ NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableVie
         [self.tableViewDelegate showUserProfile:self.feedItem.author.uID];
 }
 
+- (IBAction)callToAction {
+    if (self.tableViewDelegate != nil && [self.tableViewDelegate respondsToSelector:@selector(showAnnouncementDetails:)])
+        [self.tableViewDelegate showAnnouncementDetails:(OTAnnouncement *)self.feedItem];
+}
+
 @end
