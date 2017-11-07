@@ -13,6 +13,7 @@
 #import "OTCategoryFromJsonService.h"
 #import "OTCategoryType.h"
 #import "OTCategory.h"
+#import "OTLocationManager.h"
 
 @interface OTEditEntourageBehavior () <EntourageEditorDelegate>
 

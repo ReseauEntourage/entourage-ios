@@ -30,7 +30,7 @@ typedef enum {
 - (void)configureWith:(OTEntourage *)entourage {
     self.entourage = [OTEntourage new];
     self.entourage.title = entourage.title;
-    self.entourage.desc = entourage.desc;
+    self.entourage.desc = entourage.desc == nil ? @"" : entourage.desc;
     self.entourage.location = entourage.location;
     self.entourage.entourage_type = entourage.categoryObject.entourage_type;
     self.entourage.uid = entourage.uid;
