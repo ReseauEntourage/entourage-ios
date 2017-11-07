@@ -270,7 +270,6 @@
 		1EFAC0F61D89384E00BE396F /* OTNewsFeedsFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAC0F51D89384E00BE396F /* OTNewsFeedsFilter.m */; };
 		1EFBCFD81E56E3A5008CEF30 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EFBCFD71E56E3A5008CEF30 /* Tutorial.storyboard */; };
 		1EFBCFDC1E56E59C008CEF30 /* OTTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFBCFDB1E56E59C008CEF30 /* OTTutorialViewController.m */; };
-		2E4595C31FB2116E00112C25 /* entourage-debug-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E4595C21FB2116E00112C25 /* entourage-debug-Info.plist */; };
 		2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EBF1CF06CE50078454F /* OTFilterRadioButton.m */; };
 		2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EC21CF070DD0078454F /* OTFilterCellTableViewCell.m */; };
 		2E7064EE1CB273120034C55A /* MapOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E7064ED1CB273120034C55A /* MapOptions.storyboard */; };
@@ -906,7 +905,6 @@
 		1EFBCFDA1E56E59C008CEF30 /* OTTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTTutorialViewController.h; path = Tutorial/OTTutorialViewController.h; sourceTree = "<group>"; };
 		1EFBCFDB1E56E59C008CEF30 /* OTTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTTutorialViewController.m; path = Tutorial/OTTutorialViewController.m; sourceTree = "<group>"; };
 		2A4E5B32B53E7E30C72258C3 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
-		2E4595C21FB2116E00112C25 /* entourage-debug-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "entourage-debug-Info.plist"; sourceTree = "<group>"; };
 		2E5B0EBE1CF06CE50078454F /* OTFilterRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFilterRadioButton.h; sourceTree = "<group>"; };
 		2E5B0EBF1CF06CE50078454F /* OTFilterRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFilterRadioButton.m; sourceTree = "<group>"; };
 		2E5B0EC11CF070DD0078454F /* OTFilterCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFilterCellTableViewCell.h; sourceTree = "<group>"; };
@@ -2509,7 +2507,6 @@
 		6B92CAA819A7461C004E8C9B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2E4595C21FB2116E00112C25 /* entourage-debug-Info.plist */,
 				6B92CAA919A7461C004E8C9B /* entourage-Info.plist */,
 				6B92CAAD19A7461C004E8C9B /* main.m */,
 				6B92CAAF19A7461C004E8C9B /* entourage-Prefix.pch */,
@@ -2792,7 +2789,6 @@
 				45E6FE131CAE42E700505660 /* TourConfirmation.storyboard in Resources */,
 				452FE3F51CAD563F00063334 /* TourOptions.storyboard in Resources */,
 				01E3AA421EEEADC5007FB282 /* AssociationDetails.storyboard in Resources */,
-				2E4595C31FB2116E00112C25 /* entourage-debug-Info.plist in Resources */,
 				45CE5A661C5242FC00F68C24 /* Main.storyboard in Resources */,
 				1E49BCB61D7D8B790024EDC1 /* Disclaimer.storyboard in Resources */,
 				0161DD0F1F729E470081AE71 /* Intro.storyboard in Resources */,
@@ -3532,6 +3528,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				FACEBOOK_ID = 276507866203529;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -3546,7 +3543,7 @@
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
-				INFOPLIST_FILE = "entourage/entourage-debug-Info.plist";
+				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -3581,6 +3578,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				FACEBOOK_ID = 280727035774134;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -3716,6 +3714,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				FACEBOOK_ID = 280727035774134;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

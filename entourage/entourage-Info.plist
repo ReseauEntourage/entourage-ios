@@ -54,7 +54,7 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>280727035774134</string>
+	<string>${FACEBOOK_ID}</string>
 	<key>FacebookDisplayName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
