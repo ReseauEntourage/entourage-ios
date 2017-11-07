@@ -11,6 +11,8 @@
 #import "OTAPIConsts.h"
 #import "OTAPIKeys.h"
 
+#import "FBSDKCoreKit.h"
+
 
 @implementation OTOnboardingService
 
@@ -34,6 +36,11 @@
              if (success) {
                  success(onboardedUser);
              }
+             // send a facebook event
+             NSDictionary *params = @{FBSDKAppEventParameterNameRegistrationMethod : @"entourage"};
+             [FBSDKAppEvents
+              logEvent:FBSDKAppEventNameCompletedRegistration
+              parameters:params];
          }
          andFailure:^(NSError *error) {
              if (failure) {

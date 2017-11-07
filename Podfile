@@ -22,6 +22,7 @@ target "entourage" do
     pod 'Flurry-iOS-SDK/FlurrySDK'
 	pod 'Mixpanel'
 	pod 'kingpin', '0.3.1'
+    pod 'FBSDKCoreKit'
 end
 
 target "entourageTests" do
