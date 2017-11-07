@@ -27,4 +27,8 @@
     return self.announcement.body;
 }
 
+- (NSString *)feedItemActionButton {
+    return self.announcement.action;
+}
+
 @end

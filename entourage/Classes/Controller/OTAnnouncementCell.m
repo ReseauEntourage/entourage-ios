@@ -31,6 +31,7 @@ NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableVie
     self.titleLabel.text = [uiDelegate summary];
     self.descriptionLabel.text = [uiDelegate feedItemDescription];
     [self.userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
+    [self.statusTextButton setTitle:[uiDelegate feedItemActionButton] forState:UIControlStateNormal];
 }
 
 - (IBAction)doShowProfile {
