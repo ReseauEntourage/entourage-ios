@@ -14,7 +14,7 @@
 NSString *const kTourPointLatitude = @"latitude";
 NSString *const kTourPointLongitude = @"longitude";
 NSString *const kTourPointPassingTime = @"passing_time";
-
+NSString *const kTourPointAccuracy = @"accuracy";
 
 @implementation OTTourPoint
 
@@ -36,6 +36,7 @@ NSString *const kTourPointPassingTime = @"passing_time";
             // Objective-C format : "2015-11-20 09:28:52 +0000"
             tourPoint.passingTime = [dictionary dateForKey:kTourPointPassingTime format:@"yyyy-MM-dd HH:mm:ss Z"];
         }
+        tourPoint.accuracy = [[dictionary numberForKey:kTourPointAccuracy] doubleValue];
     }
     
     return tourPoint;
@@ -47,6 +48,7 @@ NSString *const kTourPointPassingTime = @"passing_time";
     if (self) {
         _latitude = location.coordinate.latitude;
         _longitude = location.coordinate.longitude;
+        _accuracy = location.horizontalAccuracy;
         _passingTime = [NSDate date];
     }
     return self;
@@ -59,6 +61,7 @@ NSString *const kTourPointPassingTime = @"passing_time";
     dictionary[kTourPointLatitude] = [NSNumber numberWithDouble:self.latitude];
     dictionary[kTourPointLongitude] = [NSNumber numberWithDouble:self.longitude];
     dictionary[kTourPointPassingTime] = self.passingTime;
+    dictionary[kTourPointAccuracy] = [NSNumber numberWithDouble:self.accuracy];
     
     return dictionary;
 }
@@ -68,6 +71,7 @@ NSString *const kTourPointPassingTime = @"passing_time";
         OTTourPoint *compare = (OTTourPoint *) object;
         return (_latitude == compare.latitude &&
                 _longitude == compare.longitude &&
+                _accuracy == compare.accuracy &&
                 [_passingTime isEqualToDate:compare.passingTime]);
     } else {
         return false;
