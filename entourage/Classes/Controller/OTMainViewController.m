@@ -546,7 +546,7 @@
 - (void)feedMapViewWithEncounters {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     OTFeedItemAuthor *author = self.tourCreatorBehavior.tour.author;
-    if (currentUser.sid == nil && author.uID == nil) {
+    if (currentUser.sid == nil || author.uID == nil) {
         return;
     }
     if (self.toursMapDelegate.isActive && [currentUser.sid isEqualToNumber:author.uID]) {
