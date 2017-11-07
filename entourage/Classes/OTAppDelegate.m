@@ -122,6 +122,18 @@ continueUserActivity:(NSUserActivity *)userActivity
     return true;
 }
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    if ([[url scheme] isEqualToString:@"entourage"]) {
+        [[OTDeepLinkService new] handleFeedAndBadgeLinks:url.host];
+        return YES;
+    }
+    return NO;
+}
+
 #pragma mark - Private methods
 
 - (void)popToLogin:(NSNotification *)notification {

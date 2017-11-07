@@ -17,6 +17,8 @@
 #import "OTAPIConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTLoginViewController.h"
+#import "OTMainViewController.h"
+#import "OTSelectAssociationViewController.h"
 
 @implementation OTDeepLinkService
 
@@ -77,6 +79,24 @@
     [currentController showViewController:loginController sender:self];
 }
 
+- (void)handleFeedAndBadgeLinks: (NSString *)host {
+   
+    
+    if ([host isEqualToString:@"feed"]) {
+        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        OTMainViewController *publicFeedItemController = (OTMainViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+        [self updateAppWindow:publicFeedItemController];
+        
+    } else if ([host isEqualToString:@"badge"]) {
+        OTSWRevealViewController *revealController = [self setupRevealController];
+        UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
+        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"UserProfileEditor" bundle:nil];
+        OTSelectAssociationViewController *publicFeedItemController = (OTSelectAssociationViewController *)[publicFeedItemStorybard instantiateViewControllerWithIdentifier:@"SelectAssociation"];
+        [mainController setViewControllers:@[mainController.topViewController, publicFeedItemController]];
+        [self updateAppWindow:revealController];
+    }
+}
+
 - (void)prepareControllers:(OTFeedItem *)feedItem {
     OTSWRevealViewController *revealController = [self setupRevealController];
     UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
@@ -105,7 +125,7 @@
     return revealController;
 }
 
-- (void)updateAppWindow:(OTSWRevealViewController *)revealController {
+- (void)updateAppWindow:(UIViewController *)revealController {
     OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIWindow *window = [appDelegate window];
     window.rootViewController = revealController;

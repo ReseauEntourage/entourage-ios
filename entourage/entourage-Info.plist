@@ -30,6 +30,16 @@
 				<string>prefs</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>social.entourage.entourageios.beta</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>entourage</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string></string>
