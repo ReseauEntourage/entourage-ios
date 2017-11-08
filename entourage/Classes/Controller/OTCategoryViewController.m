@@ -14,11 +14,15 @@
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"
 
-#define SECTION_HEIGHT 44.f
+//#define SECTION_HEIGHT 44.f
 #define CATEGORY_TITLE_TAG 1
 #define SUBCATEGORY_TITLE_TAG 2
 #define CATEGORY_ICON_TAG 3
 #define SELECTED_IMAGE_TAG 4
+
+#define SECTION_BUTTON_TAG  1
+#define SECTION_EXPAND_TAG  5
+
 
 @interface OTCategoryViewController ()
 
@@ -50,10 +54,6 @@
     return categoryType.isExpanded ? categoryType.categories.count : 0;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return SECTION_HEIGHT;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -62,37 +62,31 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     OTCategoryType * categoryType = self.dataSource[section];
-    UIView *headerView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SECTION_HEIGHT)];
-    [headerView setBackgroundColor:[UIColor whiteColor]];
-    UIButton *sectionButton = [[UIButton alloc] initWithFrame:CGRectMake(headerView.bounds.origin.x, headerView.bounds.origin.y, headerView.bounds.size.width - 20, headerView.bounds.size.height)];
-    [sectionButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    sectionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [sectionButton.titleLabel setFont:[UIFont fontWithName:@"SFUIText-Semibold" size:15]];
-    [sectionButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 50.0)];
-    [sectionButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, headerView.bounds.size.width - 30.0, 0.0, 7.0)];
-    [sectionButton setTitle:[categoryType.type isEqualToString:@"ask_for_help"] ? @"JE CHERCHE..." : @"JE ME PROPOSE DE…"
-                   forState:UIControlStateNormal];
+    UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrowForExpandableMenu"]];
-    if(!categoryType.isExpanded) {
+    UIButton *sectionButton = [headerCell viewWithTag:SECTION_BUTTON_TAG];
+    sectionButton.tag = section;
+    NSString *buttonTitle = [categoryType.type isEqualToString:@"ask_for_help"] ?
+                                @"JE CHERCHE..." : @"JE ME PROPOSE DE…";
+    [sectionButton setTitle:buttonTitle
+                   forState:UIControlStateNormal];
+    [sectionButton addTarget:self
+                      action:@selector(tapCategory:)
+            forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImageView *imageView = [headerCell viewWithTag:SECTION_EXPAND_TAG];
+    imageView.tag = section;
+    if (!categoryType.isExpanded) {
         imageView.transform = CGAffineTransformMakeRotation(M_PI);
     }
-    imageView.frame = CGRectMake(headerView.bounds.origin.x + sectionButton.bounds.size.width - 20, headerView.bounds.origin.y + 22, 15.0, 10.0);
-    imageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                 action:@selector(tapImageView:)];
     singleTap.numberOfTapsRequired = 1;
     singleTap.numberOfTouchesRequired = 1;
     [imageView addGestureRecognizer:singleTap];
 
-    sectionButton.tag = section;
-    imageView.tag = section;
-    [sectionButton addSubview:imageView];
-    [sectionButton addTarget:self
-                      action:@selector(tapCategory:)
-            forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:sectionButton];
-    return headerView;
+    return headerCell;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
