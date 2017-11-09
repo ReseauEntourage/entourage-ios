@@ -51,7 +51,7 @@
                                                                               toItem:view.superview
                                                                            attribute:NSLayoutAttributeTrailing
                                                                           multiplier:1.0
-                                                                            constant:-8.0]];
+                                                                            constant:-3.0]];
                 applied = YES;
             }
             break;

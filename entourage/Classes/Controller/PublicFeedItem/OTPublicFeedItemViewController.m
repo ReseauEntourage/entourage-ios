@@ -133,11 +133,12 @@
     else
     {
         UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:NULL];
-        [space setWidth:-10];
+        [space setWidth:-13];
         
         NSArray *items = @[space];
+        items = [items arrayByAddingObjectsFromArray:views];
         
-        [self.navigationItem setRightBarButtonItems:[items arrayByAddingObjectsFromArray:views]];
+        [self.navigationItem setRightBarButtonItems:items];
     }
 }
 
