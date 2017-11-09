@@ -131,6 +131,8 @@
     if(![stateInfo canChangeEditState])
         return;
     
+    NSMutableArray *rightButtons = [NSMutableArray new];
+    
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
     [more setImage:[UIImage imageNamed:@"more"]
           forState:UIControlStateNormal];
@@ -144,6 +146,8 @@
     [moreBarBtnView addSubview:more];
     
     UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:moreBarBtnView];
+    
+    [rightButtons addObject:optionsButton];
     
     if([stateInfo canInvite]) {
         UIButton *plus = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -159,10 +163,26 @@
         [plusBarBtnView addSubview:plus];
         
         UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithCustomView:plusBarBtnView];
-        [self.navigationItem setRightBarButtonItems:@[optionsButton, plusButton]];
+        [rightButtons addObject:plusButton];
+    }
+    [self setRightBarButtonView:rightButtons];
+}
+
+- (void)setRightBarButtonView:(NSMutableArray *)views
+{
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 11)
+    {
+        [self.navigationItem setRightBarButtonItems:views];
     }
     else
-        [self.navigationItem setRightBarButtonItems:@[optionsButton]];
+    {
+        UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:NULL];
+        [space setWidth:-10];
+        
+        NSArray *items = @[space];
+        
+        [self.navigationItem setRightBarButtonItems:[items arrayByAddingObjectsFromArray:views]];
+    }
 }
 
 - (IBAction)sendMessage {

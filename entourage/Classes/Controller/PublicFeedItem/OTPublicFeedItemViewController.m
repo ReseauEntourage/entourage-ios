@@ -88,6 +88,8 @@
 #pragma mark - private methods
 
 - (void)setupToolbarButtons {
+    NSMutableArray *rightButtons = [NSMutableArray new];
+    
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
     [more setImage:[UIImage imageNamed:@"more"]
           forState:UIControlStateNormal];
@@ -101,7 +103,7 @@
     [moreBarBtnView addSubview:more];
     
     UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] initWithCustomView:moreBarBtnView];
-    [self.navigationItem setRightBarButtonItems:@[moreButton]];
+    [rightButtons addObject:moreButton];
     if([self.feedItem isKindOfClass:[OTEntourage class]]) {
         UIButton *share = [UIButton buttonWithType:UIButtonTypeCustom];
         [share setImage:[UIImage imageNamed:@"share_native"]
@@ -117,7 +119,25 @@
         
         UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:shareBarBtnView];
         
-        [self.navigationItem setRightBarButtonItems:@[moreButton, shareButton]];
+        [rightButtons addObject:shareButton];
+    }
+    [self setRightBarButtonView:rightButtons];
+}
+
+- (void)setRightBarButtonView:(NSMutableArray *)views
+{
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 11)
+    {
+        [self.navigationItem setRightBarButtonItems:views];
+    }
+    else
+    {
+        UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:NULL];
+        [space setWidth:-10];
+        
+        NSArray *items = @[space];
+        
+        [self.navigationItem setRightBarButtonItems:[items arrayByAddingObjectsFromArray:views]];
     }
 }
 

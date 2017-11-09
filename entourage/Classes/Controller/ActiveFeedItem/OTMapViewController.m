@@ -114,7 +114,25 @@
         UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithCustomView:plusBarBtnView];
         [rightButtons addObject:plusButton];
     }
-    [self.navigationItem setRightBarButtonItems:rightButtons];
+    [self setRightBarButtonView:rightButtons];
+    //[self.navigationItem setRightBarButtonItems:rightButtons];
+}
+
+- (void)setRightBarButtonView:(NSMutableArray *)views
+{
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 11)
+    {
+        [self.navigationItem setRightBarButtonItems:views];
+    }
+    else
+    {
+        UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:NULL];
+        [space setWidth:-10];
+        
+        NSArray *items = @[space];
+        
+        [self.navigationItem setRightBarButtonItems:[items arrayByAddingObjectsFromArray:views]];
+    }
 }
 
 @end
