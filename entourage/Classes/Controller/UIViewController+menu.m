@@ -50,10 +50,16 @@
     if (revealViewController)
     {
         UIImage *menuImage = [[UIImage imageNamed:@"backArrow.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        menuButton = [[UIBarButtonItem alloc] init];
-        [menuButton setImage:menuImage];
-        [menuButton setTarget:self.revealViewController];
-        [menuButton setAction:@selector(revealToggle:)];
+
+         UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
+         [back setImage:menuImage
+               forState:UIControlStateNormal];
+         [back addTarget:self.revealViewController
+                  action:@selector(revealToggle:)
+        forControlEvents:UIControlEventTouchUpInside];
+         [back setFrame:CGRectMake(0, 0, 20, 20)];
+         menuButton = [[UIBarButtonItem alloc] initWithCustomView:back];
+        
         [self.navigationController.navigationBar addGestureRecognizer:self.revealViewController.panGestureRecognizer];
         [self.navigationItem setRightBarButtonItem:menuButton];
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -110,7 +116,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (UIBarButtonItem *)setupCloseModalWithImageNamed:(NSString *)imageName target:(id)target andSelector:(SEL)action {
+- (UIBarButtonItem *)setupCloseModalWithImageNamed:(NSString *)imageName
+                                            target:(id)target
+                                       andSelector:(SEL)action {
     UIBarButtonItem *menuButton = [self setupCloseModalWithImageNamed:imageName];
     [menuButton setTarget:target];
     [menuButton setAction:action];

@@ -19,6 +19,7 @@
 #import "OTEditEntourageBehavior.h"
 #import "UIImageView+entourage.h"
 #import "OTConsts.h"
+#import "OTBarButtonView.h"
 
 @interface OTMapViewController ()
 
@@ -82,6 +83,7 @@
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
     if(![stateInfo canChangeEditState])
         return;
+    
     NSMutableArray *rightButtons = [NSMutableArray new];
     UIButton *options = [UIButton buttonWithType:UIButtonTypeCustom];
     [options setImage:[UIImage imageNamed:@"more"]
@@ -90,7 +92,12 @@
                 action:@selector(startChangeStatus)
       forControlEvents:UIControlEventTouchUpInside];
     [options setFrame:CGRectMake(0, 0, 30, 30)];
-    UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:options];
+    
+    OTBarButtonView *optionsBarBtnView = [[OTBarButtonView alloc] initWithFrame:options.frame];
+    [optionsBarBtnView setPosition:BarButtonViewPositionRight];
+    [optionsBarBtnView addSubview:options];
+    
+    UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:optionsBarBtnView];
     [rightButtons addObject:optionsButton];
     if([stateInfo canInvite]) {
         UIButton *plus = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -100,7 +107,11 @@
                     action:@selector(startInvite)
           forControlEvents:UIControlEventTouchUpInside];
         [plus setFrame:CGRectMake(0, 0, 30, 30)];
-        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithCustomView:plus];
+        
+        OTBarButtonView *plusBarBtnView = [[OTBarButtonView alloc] initWithFrame:plus.frame];
+        [plusBarBtnView setPosition:BarButtonViewPositionRight];
+        [plusBarBtnView addSubview:plus];
+        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithCustomView:plusBarBtnView];
         [rightButtons addObject:plusButton];
     }
     [self.navigationItem setRightBarButtonItems:rightButtons];

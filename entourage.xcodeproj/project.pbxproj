@@ -38,6 +38,7 @@
 		0188DF6B1E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188DF6A1E8E6B14008311B6 /* OTSolidarityGuideFilteredDataSource.m */; };
 		019AE49B1EB0C448007B244C /* OTSolidarityGuideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019AE49A1EB0C448007B244C /* OTSolidarityGuideCell.m */; };
 		019AE49E1EB0DD35007B244C /* OTNewsFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019AE49D1EB0DD35007B244C /* OTNewsFeedCell.m */; };
+		019B02E91FB480B600AD4825 /* OTBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 019B02E81FB480B600AD4825 /* OTBarButtonView.m */; };
 		01A6DA8A1E8D089300089DC5 /* SolidarityGuideFilters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */; };
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
 		01D191271FA21466008F6BFB /* OTAboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D191261FA21466008F6BFB /* OTAboutMeViewController.m */; };
@@ -454,6 +455,8 @@
 		019AE49A1EB0C448007B244C /* OTSolidarityGuideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideCell.m; sourceTree = "<group>"; };
 		019AE49C1EB0DD35007B244C /* OTNewsFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTNewsFeedCell.h; sourceTree = "<group>"; };
 		019AE49D1EB0DD35007B244C /* OTNewsFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTNewsFeedCell.m; sourceTree = "<group>"; };
+		019B02E71FB480B600AD4825 /* OTBarButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTBarButtonView.h; sourceTree = "<group>"; };
+		019B02E81FB480B600AD4825 /* OTBarButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTBarButtonView.m; sourceTree = "<group>"; };
 		01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SolidarityGuideFilters.storyboard; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
@@ -1968,6 +1971,8 @@
 				1EC6F3C61D53DBEF0026766D /* OTActiveFeedItemViewController.m */,
 				1E066CF21D5687ED00E5C8BE /* OTMapViewController.h */,
 				1E066CF31D5687ED00E5C8BE /* OTMapViewController.m */,
+				019B02E71FB480B600AD4825 /* OTBarButtonView.h */,
+				019B02E81FB480B600AD4825 /* OTBarButtonView.m */,
 			);
 			name = ActiveFeedItem;
 			sourceTree = "<group>";
@@ -3297,6 +3302,7 @@
 				2EDA5F031CB3F84300849172 /* OTGuideDetailsViewController.m in Sources */,
 				1E66936C1D85DEEB00F9C03D /* OTTapEntourageBehavior.m in Sources */,
 				1EFAC0D81D89248100BE396F /* OTFeedItemFiltersViewController.m in Sources */,
+				019B02E91FB480B600AD4825 /* OTBarButtonView.m in Sources */,
 				45EB70DA1CE5F0CC00EB2CD1 /* OTEntourage.m in Sources */,
 				017845D21F78493E0046BD81 /* OTCategory.m in Sources */,
 				1E488E211D4FBA4D00A2E5B0 /* OTPicturePreviewViewController.m in Sources */,

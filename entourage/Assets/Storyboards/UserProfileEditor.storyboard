@@ -893,7 +893,7 @@ pour nous demander de l’ajouter !</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDx-wc-7rF">
-                                <rect key="frame" x="20" y="174.33333333333334" width="374" height="388.66666666666663"/>
+                                <rect key="frame" x="20" y="174.66666666666666" width="374" height="388.66666666666674"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NbY-DB-wcE">
                                         <rect key="frame" x="10" y="10" width="30" height="30"/>

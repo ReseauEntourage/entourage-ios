@@ -22,6 +22,7 @@
 #import "OTShareFeedItemBehavior.h"
 #import "OTConsts.h"
 #import "OTEntourage.h"
+#import "OTBarButtonView.h"
 
 @interface OTPublicFeedItemViewController ()
 
@@ -94,7 +95,12 @@
              action:@selector(startChangeStatus)
    forControlEvents:UIControlEventTouchUpInside];
     [more setFrame:CGRectMake(0, 0, 30, 30)];
-     UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] initWithCustomView:more];
+    
+    OTBarButtonView *moreBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
+    [moreBarBtnView setPosition:BarButtonViewPositionRight];
+    [moreBarBtnView addSubview:more];
+    
+    UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] initWithCustomView:moreBarBtnView];
     [self.navigationItem setRightBarButtonItems:@[moreButton]];
     if([self.feedItem isKindOfClass:[OTEntourage class]]) {
         UIButton *share = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -105,7 +111,12 @@
         forControlEvents:UIControlEventTouchUpInside];
         [share setFrame:CGRectMake(0, 0, 30, 30)];
         
-        UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:share];
+        OTBarButtonView *shareBarBtnView = [[OTBarButtonView alloc] initWithFrame:share.frame];
+        [shareBarBtnView setPosition:BarButtonViewPositionRight];
+        [shareBarBtnView addSubview:share];
+        
+        UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:shareBarBtnView];
+        
         [self.navigationItem setRightBarButtonItems:@[moreButton, shareButton]];
     }
 }

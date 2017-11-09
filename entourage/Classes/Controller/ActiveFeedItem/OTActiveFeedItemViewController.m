@@ -32,6 +32,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTEditEncounterBehavior.h"
 #import "OTMessageTableCellProviderBehavior.h"
+#import "OTBarButtonView.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -137,7 +138,12 @@
              action:@selector(startChangeStatus)
    forControlEvents:UIControlEventTouchUpInside];
     [more setFrame:CGRectMake(0, 0, 30, 30)];
-    UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:more];
+    
+    OTBarButtonView *moreBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
+    [moreBarBtnView setPosition:BarButtonViewPositionRight];
+    [moreBarBtnView addSubview:more];
+    
+    UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:moreBarBtnView];
     
     if([stateInfo canInvite]) {
         UIButton *plus = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -147,8 +153,12 @@
                  action:@selector(startInvite)
        forControlEvents:UIControlEventTouchUpInside];
         [plus setFrame:CGRectMake(0, 0, 30, 30)];
-        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithCustomView:plus];
         
+        OTBarButtonView *plusBarBtnView = [[OTBarButtonView alloc] initWithFrame:plus.frame];
+        [plusBarBtnView setPosition:BarButtonViewPositionRight];
+        [plusBarBtnView addSubview:plus];
+        
+        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithCustomView:plusBarBtnView];
         [self.navigationItem setRightBarButtonItems:@[optionsButton, plusButton]];
     }
     else
