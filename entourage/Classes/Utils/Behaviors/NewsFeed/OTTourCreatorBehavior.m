@@ -61,6 +61,7 @@
         self.tour = sentTour;
         self.tour.distance = @0.0;
         [self.tour.tourPoints addObject:startPoint];
+        [self sendTourPointsWithSuccess:nil orFailure:nil];
         [self.delegate tourStarted];
         [SVProgressHUD dismiss];
     } failure:^(NSError *error) {
