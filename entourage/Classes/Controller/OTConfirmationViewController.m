@@ -10,6 +10,7 @@
 #import "OTConfirmationViewController.h"
 #import "OTMainViewController.h"
 #import "OTConsts.h"
+#import "NSUserDefaults+OT.h"
 
 // Service
 #import "OTTourService.h"
@@ -74,6 +75,7 @@
             [SVProgressHUD dismiss];
             if ([self.delegate respondsToSelector:@selector(tourSent:)])
                 [self.delegate tourSent:self.tour];
+            [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
         } failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"tour_close_error")];
