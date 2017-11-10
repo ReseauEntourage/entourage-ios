@@ -19,7 +19,6 @@
 #import "OTUser.h"
 #import "OTMenuTableViewCell.h"
 #import "SVProgressHUD.h"
-#import "UIButton+AFNetworking.h"
 #import "UIButton+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "NSBundle+entourage.h"
