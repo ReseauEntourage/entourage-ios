@@ -217,7 +217,7 @@ Proposez une structure";
 "join_entourage_lbl" = "On a besoin de vous !";
 "join_entourage_btn" = "Rejoindre";
 "join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !
-Pourquoi rejoignez-vous cet entourage ? Ajoutez un petit mot !";
+Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 
 // Feed Item details
 "item_option_close" = "Arrêter";
