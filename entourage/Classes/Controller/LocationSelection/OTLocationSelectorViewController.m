@@ -50,15 +50,15 @@
     _searchBar = self.resultSearchController.searchBar;
     
     if (@available(iOS 11.0, *)) {
-        [_searchBar setFrame:CGRectMake(0, 0, kScreenWidth - 2 * 44 - 2 * 15, 44)];
-        _searchBar.delegate = self;
-        UIView *wrapView = [[UIView alloc] initWithFrame:_searchBar.frame];
-        [wrapView addSubview:_searchBar];
-        self.navigationItem.titleView = wrapView;
+        [_searchBar setFrame:CGRectMake(0, 0, kScreenWidth - 2 * 44 - 2 * 10, 44)];
     }
     else {
-         self.navigationItem.titleView = self.resultSearchController.searchBar;
+        [_searchBar setFrame:CGRectMake(-16, 0, kScreenWidth - 2 * 44 - 2 * 16, 44)];
     }
+    _searchBar.delegate = self;
+    UIView *wrapView = [[UIView alloc] initWithFrame:_searchBar.frame];
+    [wrapView addSubview:_searchBar];
+    self.navigationItem.titleView = wrapView;
 
     _searchBar.searchBarStyle = UISearchBarStyleMinimal;
     _searchBar.placeholder = OTLocalizedString(@"searchLocationPlaceholder");
@@ -72,7 +72,12 @@
 
 #pragma mark - searchBar delegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    [_searchBar setFrame:CGRectMake(0, 0, kScreenWidth - 2 * 44 - 2 * 15, 44)];
+    if (@available(iOS 11.0, *)) {
+        [_searchBar setFrame:CGRectMake(0, 0, kScreenWidth - 2 * 44 - 2 * 10, 44)];
+    }
+    else {
+        [_searchBar setFrame:CGRectMake(-15, 0, kScreenWidth - 2 * 44 - 2 * 16, 44)];
+    }
     return YES;
 }
 
