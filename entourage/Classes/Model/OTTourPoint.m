@@ -66,6 +66,28 @@ NSString *const kTourPointAccuracy = @"accuracy";
     return dictionary;
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeDouble:self.latitude forKey:kTourPointLatitude];
+    [encoder encodeDouble:self.longitude forKey:kTourPointLongitude];
+    [encoder encodeObject:self.passingTime forKey:kTourPointPassingTime];
+    [encoder encodeDouble:self.accuracy forKey:kTourPointAccuracy];
+   
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [super init]))
+    {
+        
+        self.latitude = [decoder decodeDoubleForKey:kTourPointLatitude];
+        self.longitude = [decoder decodeDoubleForKey:kTourPointLongitude];
+        self.passingTime = [decoder decodeObjectForKey:kTourPointPassingTime];
+        self.accuracy = [decoder decodeDoubleForKey:kTourPointAccuracy];
+    }
+    return self;
+}
+
 - (BOOL)isEqual:(id)object {
     if ([object isKindOfClass:[OTTourPoint class]]) {
         OTTourPoint *compare = (OTTourPoint *) object;

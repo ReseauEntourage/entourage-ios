@@ -216,9 +216,11 @@
                                    action:@selector(leaveGuide)
                          forControlEvents:UIControlEventTouchUpInside];
     
-    if (OTSharedOngoingTour.isOngoing) {
+    if (OTSharedOngoingTour.isOngoing || [NSUserDefaults standardUserDefaults].currentOngoingTour != nil) {
         [self showNewTourOnGoing];
         [self clearMap];
+        self.tourCreatorBehavior.tour = [NSUserDefaults standardUserDefaults].currentOngoingTour;
+        self.
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = NO;
         self.stopButton.hidden = NO;
@@ -233,7 +235,6 @@
     
     [self.mapDelegateProxy.delegates addObject:self];
     self.entourageScale = 1.0;
-    
     [self addObservers];
 }
 
@@ -732,6 +733,7 @@
     [self.newsFeedsSourceBehavior.feedItems insertObject:self.tourCreatorBehavior.tour atIndex:0];
     [self.tableView reloadData];
     self.stopButton.hidden = NO;
+    [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:self.tourCreatorBehavior.tour];
     self.createEncounterButton.hidden = NO;
     NSString *snapshotStartFilename = [NSString stringWithFormat:@SNAPSHOT_START, self.tourCreatorBehavior.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotStartFilename];

@@ -28,4 +28,27 @@
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.uID forKey:kWSuid];
+    NSString *dnameVal = [NSString alloc];
+    [encoder encodeObject:self.displayName forKey:kWDisplayName];
+    //self.displayName = [dnameVal isKindOfClass:[NSNull class]] ? @"" : dnameVal;
+    [encoder encodeObject:self.avatarUrl forKey:kWSAvatar_URL];
+    [encoder encodeObject:self.partner forKey:kWSPartner];
+    
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [super init]))
+    {
+        self.uID = [decoder decodeObjectForKey:kWSuid];
+        self.displayName = [decoder decodeObjectForKey:kWDisplayName];
+        self.avatarUrl = [decoder decodeObjectForKey:kWSAvatar_URL];
+        self.partner = [decoder decodeObjectForKey:kWSPartner];
+    }
+    return self;
+}
+
 @end

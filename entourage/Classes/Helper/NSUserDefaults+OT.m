@@ -1,5 +1,6 @@
 
 #import "OTUser.h"
+#import "OTTour.h"
 
 #import "NSUserDefaults+OT.h"
 
@@ -7,6 +8,7 @@ static NSString *const kUser = @"kUser";
 static NSString *const kTemporaryUser = @"kTemporaryUser";
 static NSString *const kAutoTutorialComplete = @"kAutoTutorialComplete";
 static NSString *const kNewsfeedsFilter = @"kNewsfeedsFilter_";
+static NSString *const kTourOngoing = @"kTour";
 
 @implementation NSUserDefaults (OT)
 
@@ -27,11 +29,30 @@ static NSString *const kNewsfeedsFilter = @"kNewsfeedsFilter_";
 	[self synchronize];
 }
 
+- (void)setCurrentOngoingTour:(OTTour *)tour {
+    if (tour)
+    {
+        NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:tour];
+        [self setObject:encodedObject forKey:kTourOngoing];
+    }
+    else
+    {
+        [self removeObjectForKey:kTourOngoing];
+    }
+    [self synchronize];
+}
+
 - (OTUser *)currentUser
 {
 	NSData *encodedObject = [self objectForKey:kUser];
 	OTUser *user = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
 	return user;
+}
+
+- (OTTour *)currentOngoingTour {
+    NSData *encodedObject = [self objectForKey:kTourOngoing];
+    OTTour *tour = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+    return tour;
 }
 
 - (void)setTemporaryUser:(OTUser *)temporaryUser {
@@ -84,6 +105,10 @@ static NSString *const kNewsfeedsFilter = @"kNewsfeedsFilter_";
 
 - (NSString *)keyForSavedFilter {
     return [kNewsfeedsFilter stringByAppendingString:self.currentUser.sid.stringValue];
+}
+
+- (BOOL)isTourOngoing {
+    return YES;
 }
 
 - (BOOL)isTutorialCompleted {

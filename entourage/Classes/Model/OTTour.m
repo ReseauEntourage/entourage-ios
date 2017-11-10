@@ -69,6 +69,42 @@
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.creationDate forKey:kWSKeyStartDate];
+    [encoder encodeObject:self.startTime forKey:kWSKeyStartDate];
+    [encoder encodeObject:self.endTime forKey:kWSKeyEndDate];
+    [encoder encodeObject:self.type forKey:kWSKeyTourType];
+    [encoder encodeObject:self.distance forKey:kWSKeyDistance];
+    [encoder encodeObject:self.organizationName forKey:kWSKeyOrganizationName];
+    [encoder encodeObject:self.organizationDesc forKey:kWSKeyOrganizationDescription];
+    [encoder encodeObject:self.tourPoints forKey:kWSKeyTourPoints];
+    [encoder encodeObject:self.noMessages forKey:kWSNoUnreadMessages];
+    [encoder encodeObject:self.noPeople forKey:kWSNoPeople];
+    [encoder encodeObject:self.author forKey:kWSKeyAuthor];
+    [encoder encodeObject:self.uid forKey:kWSKeyID];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [super init]))
+    {
+        self.creationDate = [decoder decodeObjectForKey:kWSKeyStartDate];
+        self.startTime = [decoder decodeObjectForKey:kWSKeyStartDate];
+        self.endTime = [decoder decodeObjectForKey:kWSKeyEndDate];
+        self.type = [decoder decodeObjectForKey:kWSKeyTourType];
+        self.distance = [decoder decodeObjectForKey:kWSKeyDistance];
+        self.organizationName = [decoder decodeObjectForKey:kWSKeyOrganizationName];
+        self.organizationDesc = [decoder decodeObjectForKey:kWSKeyOrganizationDescription];
+        self.tourPoints = [decoder decodeObjectForKey:kWSKeyTourPoints];
+        self.noMessages = [decoder decodeObjectForKey:kWSNoUnreadMessages];
+        self.noPeople = [decoder decodeObjectForKey:kWSNoPeople];
+        self.author = [decoder decodeObjectForKey:kWSKeyAuthor];
+        self.uid = [decoder decodeObjectForKey:kWSKeyID];
+    }
+    return self;
+}
+
 - (NSDictionary *)dictionaryForWebService {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
