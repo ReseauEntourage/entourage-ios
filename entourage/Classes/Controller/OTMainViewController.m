@@ -224,6 +224,13 @@
         self.launcherButton.hidden = YES;
         self.createEncounterButton.hidden = NO;
         self.stopButton.hidden = NO;
+        [[OTTourService new] tourEncounters:self.tourCreatorBehavior.tour success:^(NSArray *items) {
+            NSLog(@"GET TOUR ENCOUNTERS");
+            self.encounters = [NSMutableArray arrayWithArray:items];
+        } failure:^(NSError *error) {
+            NSLog(@"GET TOUR ENCOUNTERSErr: %@", error.description);
+           
+        }];
         [self feedMapViewWithEncounters];
     } else {
         [self showToursMap];

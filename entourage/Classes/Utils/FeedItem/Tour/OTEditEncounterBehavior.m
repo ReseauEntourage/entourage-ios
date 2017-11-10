@@ -10,6 +10,7 @@
 #import "OTCreateMeetingViewController.h"
 #import "OTOngoingTourService.h"
 #import "OTMeetingCalloutViewController.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTEditEncounterBehavior () <OTCreateMeetingViewControllerDelegate, OTMeetingCalloutViewControllerDelegate>
 
@@ -26,7 +27,7 @@
     self.encounter = encounter;
     self.tourId = tourId;
     self.location = location;
-    if(OTSharedOngoingTour.isOngoing)
+    if(OTSharedOngoingTour.isOngoing || [NSUserDefaults standardUserDefaults].currentOngoingTour != nil)
         [self.owner performSegueWithIdentifier:@"OTCreateMeeting" sender:self];
     else
         [self.owner performSegueWithIdentifier:@"OTDisplayMeeting" sender:self];

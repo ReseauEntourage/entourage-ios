@@ -56,11 +56,6 @@
     [self setupUI];
     if(!self.encounter) {
         [self.disclaimer showDisclaimer];
-        if(!OTSharedOngoingTour.isOngoing) {
-            [self.locationButton setEnabled:NO];
-            [self.nameTextField setEnabled:NO];
-            [self.messageTextView.textView setEditable:NO];
-        }
     }
     else {
         self.nameTextField.text = self.encounter.streetPersonName;
@@ -78,15 +73,9 @@
 
 - (void)setupUI {
     [self setupCloseModal];
-    if(!OTSharedOngoingTour.isOngoing) {
-        [self.locationButton setEnabled:NO];
-        [self.nameTextField setEnabled:NO];
-        [self.messageTextView.textView setEditable:NO];
-    }
-    else {
         UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEncounter:) colored:[UIColor appOrangeColor]];
         [self.navigationItem setRightBarButtonItem:menuButton];
-    }
+    
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.firstLabel.text = [NSString stringWithFormat:OTLocalizedString(@"formater_encounterAnd"), currentUser.displayName];
     
