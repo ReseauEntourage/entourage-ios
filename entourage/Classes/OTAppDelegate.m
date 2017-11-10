@@ -35,6 +35,7 @@
 #import "OTCodeViewController.h"
 #import "Mixpanel/Mixpanel.h"
 #import "OTDeepLinkService.h"
+#import "FBSDKCoreKit.h"
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -94,6 +95,12 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     
     [OTPictureUploadService configure];
 	return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Call the 'activateApp' method to log an app event for use
+    // in analytics and advertising reporting.
+    [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
