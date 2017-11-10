@@ -18,8 +18,10 @@
 #import "UIBarButtonItem+factory.h"
 
 #define SEARCHBAR_FRAME CGRectMake(16, 80, [UIScreen mainScreen].bounds.size.width-32, 48)
+#define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
+#define kScreenHeight ([UIScreen mainScreen].bounds.size.height)
 
-@interface OTLocationSelectorViewController () <MKMapViewDelegate>
+@interface OTLocationSelectorViewController () <MKMapViewDelegate, UISearchBarDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -44,19 +46,34 @@
     self.locationSearchTable = [[UIStoryboard entourageEditorStoryboard] instantiateViewControllerWithIdentifier:@"OTLocationSearchTableViewController"];
     self.resultSearchController = [[UISearchController alloc] initWithSearchResultsController:self.locationSearchTable];
     self.resultSearchController.searchResultsUpdater = self.locationSearchTable;
+    
+    _searchBar = self.resultSearchController.searchBar;
+    
+    if (@available(iOS 11.0, *)) {
+        [_searchBar setFrame:CGRectMake(0, 0, kScreenWidth - 2 * 44 - 2 * 15, 44)];
+        _searchBar.delegate = self;
+        UIView *wrapView = [[UIView alloc] initWithFrame:_searchBar.frame];
+        [wrapView addSubview:_searchBar];
+        self.navigationItem.titleView = wrapView;
+    }
+    else {
+         self.navigationItem.titleView = self.resultSearchController.searchBar;
+    }
 
-    self.searchBar = self.resultSearchController.searchBar;
-    self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
-    self.searchBar.placeholder = OTLocalizedString(@"searchLocationPlaceholder");
-
-    self.navigationItem.titleView = self.resultSearchController.searchBar;
-    self.searchBar = self.resultSearchController.searchBar;
+    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    _searchBar.placeholder = OTLocalizedString(@"searchLocationPlaceholder");
     self.resultSearchController.hidesNavigationBarDuringPresentation = NO;
     self.resultSearchController.dimsBackgroundDuringPresentation = YES;
     self.definesPresentationContext = YES;
     self.locationSearchTable.mapView = self.mapView;
     self.locationSearchTable.pinDelegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
+}
+
+#pragma mark - searchBar delegate
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [_searchBar setFrame:CGRectMake(0, 0, kScreenWidth - 2 * 44 - 2 * 15, 44)];
+    return YES;
 }
 
 - (void)dealloc {
