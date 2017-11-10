@@ -80,20 +80,22 @@
 }
 
 - (void)handleFeedAndBadgeLinks: (NSString *)host {
-   
-    
-    if ([host isEqualToString:@"feed"]) {
-        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        OTMainViewController *publicFeedItemController = (OTMainViewController *)[publicFeedItemStorybard instantiateInitialViewController];
-        [self updateAppWindow:publicFeedItemController];
+    if(!TOKEN) {
+        [self navigateToLogin];
+    } else {
+        if ([host isEqualToString:@"feed"]) {
+            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            OTMainViewController *publicFeedItemController = (OTMainViewController *)[publicFeedItemStorybard   instantiateInitialViewController];
+            [self updateAppWindow:publicFeedItemController];
         
-    } else if ([host isEqualToString:@"badge"]) {
-        OTSWRevealViewController *revealController = [self setupRevealController];
-        UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
-        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"UserProfileEditor" bundle:nil];
-        OTSelectAssociationViewController *publicFeedItemController = (OTSelectAssociationViewController *)[publicFeedItemStorybard instantiateViewControllerWithIdentifier:@"SelectAssociation"];
-        [mainController setViewControllers:@[mainController.topViewController, publicFeedItemController]];
-        [self updateAppWindow:revealController];
+        } else if ([host isEqualToString:@"badge"]) {
+            OTSWRevealViewController *revealController = [self setupRevealController];
+            UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
+            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"UserProfileEditor" bundle:nil];
+            OTSelectAssociationViewController *publicFeedItemController = (OTSelectAssociationViewController *)[publicFeedItemStorybard instantiateViewControllerWithIdentifier:@"SelectAssociation"];
+            [mainController setViewControllers:@[mainController.topViewController, publicFeedItemController]];
+            [self updateAppWindow:revealController];
+        }
     }
 }
 
