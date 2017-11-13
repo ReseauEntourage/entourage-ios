@@ -30,7 +30,9 @@
 
 - (void)doEditEncounter {
     CLLocationCoordinate2D location = CLLocationCoordinate2DMake(self.encounter.latitude, self.encounter.longitude);
-    [self.editEncounter doEdit:self.encounter forTour:self.encounter.tID andLocation: location];
+    [self.editEncounter doEdit:self.encounter
+                       forTour:self.encounter.tID
+                   andLocation: location];
 }
 
 #pragma mark - private methods
