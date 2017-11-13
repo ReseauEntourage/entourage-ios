@@ -29,6 +29,12 @@
     [self.rejectDisclaimerButton setAction:@selector(doRejectDisclaimer)];
 }
 
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTLogger logEvent:@"Screen19_0EthicsPopupView"];
+}
+
 - (IBAction)showChart:(id)sender {
     [OTLogger logEvent:@"LinkToEthicsChartClick"];
     NSString *url = PUBLIC_ENTOURAGE_CREATION_CHART;

@@ -20,4 +20,14 @@
     return self;
 }
 
+- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier
+{
+    self = [super init];
+    if (self) {
+        self.title = title;
+        self.identifier = identifier;
+    }
+    return self;
+}
+
 @end

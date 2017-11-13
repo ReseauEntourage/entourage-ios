@@ -34,13 +34,16 @@
             message = @"ShowOnlyDistributionToursClick";
             break;
         case FeedItemFilterKeyDemand:
+            [OTLogger logEvent:@"AskMessagesFilter"];
             message = @"ShowOnlyAsksClick";
             break;
         case FeedItemFilterKeyContribution:
+            [OTLogger logEvent:@"OfferMessagesFilter"];
             message = @"ShowOnlyOffersClick";
             break;
         case FeedItemFilterKeyTour:
             message = @"ShowOnlyToursFilterClick";
+            [OTLogger logEvent:@"TourMessagesFilter"];
             break;
         case FeedItemFilterKeyUnread:
             message = @"OrganizerFilter";

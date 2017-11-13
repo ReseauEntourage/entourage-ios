@@ -131,6 +131,7 @@
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [SVProgressHUD dismiss];
+        [OTLogger logEvent:@"CancelJoinRequest"];
         [self.owner dismissViewControllerAnimated:NO completion:^{
             if(self.delegate)
                 [self.delegate cancelledJoinRequest];

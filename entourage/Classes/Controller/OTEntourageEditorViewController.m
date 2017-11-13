@@ -57,6 +57,7 @@
 }
 
 - (void)sendEntourage:(UIButton*)sender {
+    [OTLogger logEvent:@"ConfirmCreateEntourage"];
     if(![self isCategorySelected] || ![self isTitleValid])
             return;
     if(self.entourage.uid)
@@ -96,10 +97,13 @@
 - (void)createEntourage:(UIButton *)sender {
     sender.enabled = NO;
     [SVProgressHUD show];
-    [[OTEncounterService new] sendEntourage:self.editTableSource.entourage withSuccess:^(OTEntourage *sentEntourage) {
+    [[OTEncounterService new] sendEntourage:self.editTableSource.entourage
+                                withSuccess:^(OTEntourage *sentEntourage)
+     {
         self.entourage = sentEntourage;
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageCreated object:nil];
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
+        [OTLogger logEvent:@"CreateEntourageSuccess"];
         if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)])
             [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:self.editTableSource.entourage];
     } failure:^(NSError *error) {

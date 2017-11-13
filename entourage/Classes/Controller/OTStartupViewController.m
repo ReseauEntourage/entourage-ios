@@ -36,7 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [OTLogger logEvent:@"Screen01SplashVew"];
+    [OTLogger logEvent:@"Screen01SplashView"];
     [NSUserDefaults standardUserDefaults].temporaryUser = nil;
 
   self.betaButton.hidden = NO;

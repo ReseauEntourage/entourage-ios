@@ -9,12 +9,19 @@
 #import "OTAboutViewController.h"
 #import "UIViewController+menu.h"
 #import "OTConsts.h"
+#import "OTAPIConsts.h"
 #import "OTAboutTableViewCell.h"
 #import "OTAboutItem.h"
 #import "NSBundle+entourage.h"
 #import "UIColor+entourage.h"
 #import "entourage-Swift.h"
+#import "OTHTTPRequestManager.h"
+#import "NSUserDefaults+OT.h"
+#import "OTUser.h"
+
 @import MessageUI;
+
+#define FAQ_INDEXPATH 3
 
 @interface OTAboutViewController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
 
@@ -90,6 +97,9 @@
         case GeneralConditions:
             message = @"CGUClick";
             break;
+        case FAQ:
+            message = @"AppFAQClick";
+            break;
         case Website:
             message = @"WebsiteVisitClick";
             break;
@@ -123,6 +133,11 @@
         // Present the view controller modally.
         [self presentViewController:composeVC animated:YES completion:nil];
     }
+    else if (indexPath.row == FAQ_INDEXPATH) {
+        NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, item.identifier, TOKEN];
+        NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
     else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];
     }
@@ -151,7 +166,8 @@
     [aboutItems addObject:itemCGU];
     
     OTAboutItem *itemApplicationUsage = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"menu_application_usage")
-                                                                       url:MENU_BLOG_APPLICATION_USAGE_URL];
+                                                                identifier:FAQ_LINK_ID];
+    itemApplicationUsage.type = FAQ;
     [aboutItems addObject:itemApplicationUsage];
     
     OTAboutItem *itemWebsite = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_website")

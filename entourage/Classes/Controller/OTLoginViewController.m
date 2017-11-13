@@ -138,7 +138,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [[OTAuthService new] authWithPhone:[self.codeCountry stringByAppendingString: phone]
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
-                               success: ^(OTUser *user) {;
+                               success: ^(OTUser *user) {
+                                   [OTLogger logEvent:@"Login_Success"];
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    [self setupMixpanelWithUser:user];
                                    user.phone = [self.codeCountry stringByAppendingString:phone];
@@ -169,16 +170,21 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                        alertTitle = OTLocalizedString(@"tryAgain");
                                        alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");
                                        buttonTitle = OTLocalizedString(@"tryAgain_short");
+                                       [OTLogger logEvent:@"Login_Error"];
+                                       [OTLogger logEvent:@"TelephoneSubmitError"];
                                    }
                                    else if([errorCode isEqualToString:INVALID_PHONE_FORMAT]) {
                                        alertTitle = OTLocalizedString(@"tryAgain");
                                        alertText = OTLocalizedString(@"invalidPhoneNumberFormat");
                                        buttonTitle = OTLocalizedString(@"tryAgain_short");
+                                       [OTLogger logEvent:@"Login_Error"];
+                                       [OTLogger logEvent:@"TelephoneSubmitError"];
                                    }
                                    else if(error.code == NSURLErrorNotConnectedToInternet) {
                                        alertTitle = OTLocalizedString(@"tryAgain");
                                        buttonTitle = OTLocalizedString(@"tryAgain_short");
                                        alertText = error.localizedDescription;
+                                       [OTLogger logEvent:@"Login_Error"];
                                    }
                                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertText preferredStyle:UIAlertControllerStyleAlert];
                                    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];

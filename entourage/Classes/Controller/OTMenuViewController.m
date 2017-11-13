@@ -169,8 +169,6 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         else {
             if([menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")])
                 [OTLogger logEvent:@"WhatActionsClick"];
-            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_application_usage")])
-                [OTLogger logEvent:@"AppFAQClick"];
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")])
                 [OTLogger logEvent:@"SimpleCommeBonjourClick"];
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_chart")])
@@ -248,14 +246,14 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     
     OTMenuItem *itemEntourageActions = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_entourage_actions")
                                                                 iconName:@"goal"
-                                                                     identifier:GOAL_LINK_ID];
+                                                              identifier:GOAL_LINK_ID];
     [menuItems addObject:itemEntourageActions];
     
     
     //add 3rd new one
     OTMenuItem *itemDon = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_make_donation")
                                                    iconName:@"heartNofillWhite"
-                                                        identifier:DONATE_LINK_ID];
+                                                 identifier:DONATE_LINK_ID];
     [menuItems addObject:itemDon];
     
     
@@ -265,7 +263,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     
     OTMenuItem *itemAtd = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_atd_partner")
                                                    iconName:@"atdLogo"
-                                                        identifier:ATD_LINK_ID];
+                                                 identifier:ATD_LINK_ID];
     [menuItems addObject:itemAtd];
     
    // NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;

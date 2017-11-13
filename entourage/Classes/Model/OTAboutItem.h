@@ -12,6 +12,7 @@ typedef enum {
     Rate,
     Facebook,
     GeneralConditions,
+    FAQ,
     Website
 } AboutItems;
 
@@ -22,11 +23,13 @@ typedef enum {
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, assign) AboutItems type;
 
 /**************************************************************************************************/
 #pragma mark - Birth and Death
 
 - (instancetype)initWithTitle:(NSString *)title url:(NSString *)url;
+- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier;
 
 @end
