@@ -160,6 +160,7 @@ continueUserActivity:(NSUserActivity *)userActivity
 
 - (void)clearUserData {
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
+    [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

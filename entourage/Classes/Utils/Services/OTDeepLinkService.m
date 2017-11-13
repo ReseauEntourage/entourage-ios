@@ -20,6 +20,12 @@
 #import "OTMainViewController.h"
 #import "OTSelectAssociationViewController.h"
 
+@interface OTDeepLinkService ()
+
+@property (nonatomic, weak) NSString *link;
+
+@end
+
 @implementation OTDeepLinkService
 
 - (void)navigateTo:(NSNumber *)feedItemId withType:(NSString *)feedItemType {
@@ -74,12 +80,14 @@
 
 - (void)navigateToLogin {
     UIStoryboard *introStorybard = [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
-    UIViewController *loginController = [introStorybard instantiateViewControllerWithIdentifier:@"OTLoginViewControllerIdentifier"];
+    OTLoginViewController *loginController = [introStorybard instantiateViewControllerWithIdentifier:@"OTLoginViewControllerIdentifier"];
     UIViewController *currentController = [self getTopViewController];
+    loginController.fromLink = self.link;
     [currentController showViewController:loginController sender:self];
 }
 
 - (void)handleFeedAndBadgeLinks: (NSString *)host {
+    self.link = host;
     if(!TOKEN) {
         [self navigateToLogin];
     } else {

@@ -33,6 +33,7 @@
 #import "OTCountryCodePickerViewDataSource.h"
 #import "UIColor+entourage.h"
 #import "Mixpanel/Mixpanel.h"
+#import "OTDeepLinkService.h"
 
 NSString *const kTutorialDone = @"has_done_tutorial";
 
@@ -154,6 +155,10 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
                                        [[OTPushNotificationsService new] promptUserForPushNotifications];
                                        [UIStoryboard showSWRevealController];
+                                   }
+                                   if (self.fromLink && [self.fromLink isEqualToString:@"badge"]) {
+                                       [[OTDeepLinkService new] handleFeedAndBadgeLinks:self.fromLink];
+                                       self.fromLink = nil;
                                    }
                                    else {
                                        [self.onboardingNavigation nextFromLogin];
