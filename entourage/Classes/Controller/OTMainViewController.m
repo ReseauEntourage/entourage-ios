@@ -1196,6 +1196,8 @@
             controller.fingerPoint = self.mapPoint;
             self.mapPoint = CGPointZero;
         }
+        else
+            self.tappedLocation = nil;
         controller.optionsDelegate = self;
         [controller setIsPOIVisible:self.guideMapDelegate.isActive];
     }
@@ -1248,13 +1250,6 @@
         OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
         controller.optionsDelegate = self;
     }
-    if([segue.identifier isEqualToString:@"EntourageEditor"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.topViewController;
-        controller.location = [OTLocationManager sharedInstance].currentLocation;
-        controller.entourageEditorDelegate = self;
-    }
-    
 }
 
 - (void)sendCloseMail: (NSNotification *)notification {
