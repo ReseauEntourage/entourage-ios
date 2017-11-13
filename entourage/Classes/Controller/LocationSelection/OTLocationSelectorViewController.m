@@ -21,7 +21,7 @@
 #define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
 #define kScreenHeight ([UIScreen mainScreen].bounds.size.height)
 
-@interface OTLocationSelectorViewController () <MKMapViewDelegate, UISearchBarDelegate>
+@interface OTLocationSelectorViewController () <MKMapViewDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -50,16 +50,14 @@
     _searchBar = self.resultSearchController.searchBar;
     
     if (@available(iOS 11.0, *)) {
-        [_searchBar setFrame:CGRectMake(0, 0, kScreenWidth - 2 * 44 - 2 * 10, 44)];
+        self.title = OTLocalizedString(@"myLocation").uppercaseString;
+        self.navigationItem.searchController = self.resultSearchController;
     }
-    else {
-        [_searchBar setFrame:CGRectMake(-16, 0, kScreenWidth - 2 * 44 - 2 * 16, 44)];
+    else
+    {
+        self.navigationItem.titleView = self.resultSearchController.searchBar;
     }
-    _searchBar.delegate = self;
-    UIView *wrapView = [[UIView alloc] initWithFrame:_searchBar.frame];
-    [wrapView addSubview:_searchBar];
-    self.navigationItem.titleView = wrapView;
-
+    
     _searchBar.searchBarStyle = UISearchBarStyleMinimal;
     _searchBar.placeholder = OTLocalizedString(@"searchLocationPlaceholder");
     self.resultSearchController.hidesNavigationBarDuringPresentation = NO;
@@ -68,17 +66,6 @@
     self.locationSearchTable.mapView = self.mapView;
     self.locationSearchTable.pinDelegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
-}
-
-#pragma mark - searchBar delegate
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    if (@available(iOS 11.0, *)) {
-        [_searchBar setFrame:CGRectMake(0, 0, kScreenWidth - 2 * 44 - 2 * 10, 44)];
-    }
-    else {
-        [_searchBar setFrame:CGRectMake(-15, 0, kScreenWidth - 2 * 44 - 2 * 16, 44)];
-    }
-    return YES;
 }
 
 - (void)dealloc {
@@ -168,7 +155,8 @@
     [self updateSelectedLocation:location];
 }
 
-- (void) saveNewLocation {
+- (void)saveNewLocation {
+    [OTLogger logEvent:@"ValidateLocationChange"];
     if ([self.locationSelectionDelegate respondsToSelector:@selector(didSelectLocation:)]) {
         [self.locationSelectionDelegate didSelectLocation:self.selectedLocation];
     }
