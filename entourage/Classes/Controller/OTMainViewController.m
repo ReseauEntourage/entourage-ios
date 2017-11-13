@@ -151,6 +151,7 @@
 @property (nonatomic) BOOL                                          isFirstLoad;
 @property (nonatomic) BOOL                                          wasLoadedOnce;
 @property (nonatomic) BOOL                                          noDataDisplayed;
+@property (nonatomic) BOOL                                          poisDisplayed;
 @property (nonatomic, weak) IBOutlet OTNoDataBehavior               *noDataBehavior;
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior           *mailSender;
 @property (nonatomic, weak) IBOutlet OTCustomSegmentedBehavior      *customSegmentedBehavior;
@@ -541,7 +542,10 @@
                 }
             }
             else {
-                [self.guideInfoBehavior show];
+                if(!self.poisDisplayed) {
+                    [self.guideInfoBehavior show];
+                    self.poisDisplayed = YES;
+                }
             }
             [SVProgressHUD dismiss];
                
@@ -1086,6 +1090,7 @@
     [self.toggleCollectionView toggle:NO animated:NO];
     self.showSolidarityGuideView.hidden = YES;
     [self.noDataBehavior hideNoData];
+    [self.guideInfoBehavior hide];
     self.isTourListDisplayed = YES;
     self.customSegmentedBehavior.selectedIndex = 1;
     [UIView animateWithDuration:0.2 animations:^(void) {
