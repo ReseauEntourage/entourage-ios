@@ -61,7 +61,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [Flurry startSession:[ConfigurationManager shared].flurryAPIKey withSessionBuilder:builder];
 #endif
     NSString *mixpanelToken = [ConfigurationManager shared].MixpanelToken;
-    [Mixpanel sharedInstanceWithToken:mixpanelToken];
+    [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
     [Mixpanel sharedInstance].enableLogging = YES;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
