@@ -47,12 +47,8 @@ platform :ios do
       )
   end
 
-  desc "Submit a new Beta Build to appaloosa"
-  desc "This will also make sure the profile is up to date"
+  desc "Submit a new Beta Build to TestFlight"
   lane :deploy_to_TestFlight do |options|
-    #cert(
-    # username: "apple@entourage.social"
-    #)
     sigh(
      app_identifier: "social.entourage.entourageios",
      username: "apple@entourage.social",
