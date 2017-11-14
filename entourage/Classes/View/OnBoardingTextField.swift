@@ -41,7 +41,7 @@ class OnBoardingCodeTextField: OnBoardingTextField {
   override func awakeFromNib() {
     super.awakeFromNib()
     inputIsValid = { text in
-      return text?.characters.count == 6
+      return text?.count == 6
     }
   }
 }
@@ -113,8 +113,8 @@ class NBTextField: JVFloatLabeledTextField, Validable {
   // MARK: UITextField input managing
 
   override open func deleteBackward() {
-    if text?.characters.last == " " {
-      if let indexNumberWithWhiteSpace = text?.characters.index((text?.endIndex)!, offsetBy: -1) {
+    if text?.last == " " {
+      if let indexNumberWithWhiteSpace = text?.index((text?.endIndex)!, offsetBy: -1) {
         text = text?.substring(to: indexNumberWithWhiteSpace)
       }
       return

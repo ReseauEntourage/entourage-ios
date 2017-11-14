@@ -31,9 +31,7 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.uID forKey:kWSuid];
-    NSString *dnameVal = [NSString alloc];
     [encoder encodeObject:self.displayName forKey:kWDisplayName];
-    //self.displayName = [dnameVal isKindOfClass:[NSNull class]] ? @"" : dnameVal;
     [encoder encodeObject:self.avatarUrl forKey:kWSAvatar_URL];
     [encoder encodeObject:self.partner forKey:kWSPartner];
     

@@ -12,10 +12,11 @@
 #import "OTMeetingCalloutViewController.h"
 #import "NSUserDefaults+OT.h"
 
-@interface OTEditEncounterBehavior () <OTCreateMeetingViewControllerDelegate, OTMeetingCalloutViewControllerDelegate>
+@interface OTEditEncounterBehavior () <OTCreateMeetingViewControllerDelegate>
 
 @property (nonatomic, strong) NSNumber *tourId;
 @property (nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, weak) id<OTMeetingCalloutViewControllerDelegate> delegate;
 
 @end
 
@@ -45,7 +46,7 @@
             UIViewController *destinationViewController = segue.destinationViewController;
             OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)destinationViewController;
             controller.encounter = self.encounter;
-            controller.delegate = self;
+            controller.delegate = self.delegate;
         }
     else
         return NO;

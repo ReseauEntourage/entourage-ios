@@ -18,11 +18,13 @@
 
 @protocol OTFeedItemFactoryDelegate <NSObject>
 
+- (id<OTUIDelegate>)getUI;
+
+@optional
 - (BOOL)isTour;
 - (id<OTStateTransitionDelegate>)getStateTransition;
 - (id<OTStateInfoDelegate>)getStateInfo;
 - (id<OTMessagingDelegate>)getMessaging;
-- (id<OTUIDelegate>)getUI;
 - (id<OTMapHandlerDelegate>)getMapHandler;
 - (id<OTJoinerDelegate>)getJoiner;
 - (id<OTChangedHandlerDelegate>)getChangedHandler;

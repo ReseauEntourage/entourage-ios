@@ -18,13 +18,12 @@
 - (NSString *)summary;
 - (NSString *)categoryIconSource;
 - (NSString *)feedItemDescription;
+
+@optional
 - (NSString *)navigationTitle;
 - (NSString *)joinAcceptedText;
 - (double)distance;
 - (BOOL)isStatusBtnVisible;
-
-@optional
 - (NSString *)feedItemActionButton;
-
 
 @end

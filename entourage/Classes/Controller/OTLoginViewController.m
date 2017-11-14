@@ -156,12 +156,12 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                        [[OTPushNotificationsService new] promptUserForPushNotifications];
                                        [UIStoryboard showSWRevealController];
                                    }
+                                   else {
+                                       [self.onboardingNavigation nextFromLogin];
+                                   }
                                    if (self.fromLink && [self.fromLink isEqualToString:@"badge"]) {
                                        [[OTDeepLinkService new] handleFeedAndBadgeLinks:self.fromLink];
                                        self.fromLink = nil;
-                                   }
-                                   else {
-                                       [self.onboardingNavigation nextFromLogin];
                                    }
                                    [[OTLocationManager sharedInstance] startLocationUpdates];
                                } failure: ^(NSError *error) {

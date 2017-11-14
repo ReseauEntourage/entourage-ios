@@ -11,7 +11,7 @@
 
 @class OTEncounter;
 
-@protocol OTCreateMeetingViewControllerDelegate <NSObject>
+@protocol OTCreateMeetingViewControllerDelegate
 
 - (void)encounterSent:(OTEncounter *)encounter;
 
