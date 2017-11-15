@@ -855,7 +855,6 @@
             }
             else {
                 [self.toggleCollectionView toggle:NO animated:YES];
-                [self showToursMap];
             }
         }
     }
