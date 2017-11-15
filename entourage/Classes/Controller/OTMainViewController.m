@@ -855,7 +855,6 @@
             }
             else {
                 [self.toggleCollectionView toggle:NO animated:YES];
-                [self showToursMap];
             }
         }
     }
@@ -1124,7 +1123,7 @@
         
         MKCoordinateRegion region;
         region = MKCoordinateRegionMakeWithDistance(self.mapView.centerCoordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
-        [self.mapView setRegion:region animated:NO];
+        [self.mapView setRegion:region animated:YES];
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
         [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     }];
