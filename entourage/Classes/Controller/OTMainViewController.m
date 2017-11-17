@@ -88,6 +88,7 @@
 #import "KPClusteringController.h"
 #import "KPAnnotation.h"
 #import "OTAnnouncement.h"
+#import "OTWebViewController.h"
 
 #define MAPVIEW_HEIGHT 224.f
 
@@ -988,6 +989,7 @@
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;
+    //[self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
     if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
         [OTLogger logEvent:@"OpenEntouragePublicPage"];
         [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
@@ -1003,7 +1005,7 @@
 }
 
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedItem.url]];
+    [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
 }
 
 - (void)showUserProfile:(NSNumber*)userId {
@@ -1246,6 +1248,10 @@
     else if([segue.identifier isEqualToString:@"MyEntouragesSegue"]) {
         OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
         controller.optionsDelegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"OTWebViewSegue"]) {
+        OTWebViewController *controller = (OTWebViewController *)destinationViewController;
+        controller.urlString = @"http://www.simplecommebonjour.org";
     }
 }
 

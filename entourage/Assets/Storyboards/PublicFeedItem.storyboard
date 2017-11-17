@@ -60,13 +60,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIme - Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDt-dA-Asj">
-                                                            <rect key="frame" x="15" y="60" width="309.5" height="16"/>
+                                                            <rect key="frame" x="15" y="60" width="310.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="13"/>
                                                             <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QV-vH-V9y">
-                                                            <rect key="frame" x="353.5" y="56" width="9.5" height="18"/>
+                                                            <rect key="frame" x="354.5" y="56" width="8.5" height="18"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                             <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -101,7 +101,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="users" translatesAutoresizingMaskIntoConstraints="NO" id="Q8P-B0-Gly">
-                                                            <rect key="frame" x="329.5" y="56" width="22" height="19"/>
+                                                            <rect key="frame" x="330.5" y="56" width="22" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="22" id="0u0-VA-9zh"/>
                                                                 <constraint firstAttribute="height" constant="19" id="azt-gf-rtm"/>
@@ -210,13 +210,13 @@
                                         <rect key="frame" x="0.0" y="559" width="383" height="88"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On a besoin de vous !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKL-T6-WyZ">
-                                                <rect key="frame" x="115.5" y="10" width="152.5" height="18"/>
+                                                <rect key="frame" x="118.5" y="10" width="146.5" height="18"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBP-Jr-1A0">
-                                                <rect key="frame" x="141" y="40" width="101" height="30"/>
+                                                <rect key="frame" x="143.5" y="40" width="96" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="zUE-xh-h2u"/>

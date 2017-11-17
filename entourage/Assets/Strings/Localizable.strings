@@ -321,6 +321,10 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "refuseAlert" = "Refuser";
 "showAlert" = "Afficher";
 
+"open_in_browser" = "Ouvrir dans le navigateur";
+"copy_link" = "Copier le lien";
+"share" = "Partager";
+
 //
 "requestSent" = "Demande envoyée";
 "requestNotSent" = "Demande non envoyée";
