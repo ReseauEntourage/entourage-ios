@@ -86,22 +86,33 @@
     [currentController showViewController:loginController sender:self];
 }
 
-- (void)handleFeedAndBadgeLinks: (NSString *)host {
+- (void)handleFeedAndBadgeLinks: (NSURL *)url {
+    NSString *host = url.host;
+    NSString *query = url.query;
     self.link = host;
     if(!TOKEN) {
         [self navigateToLogin];
     } else {
         if ([host isEqualToString:@"feed"]) {
-            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            OTMainViewController *publicFeedItemController = (OTMainViewController *)[publicFeedItemStorybard   instantiateInitialViewController];
-            [self updateAppWindow:publicFeedItemController];
+            UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            OTMainViewController *mainController = (OTMainViewController *)[mainStorybard instantiateInitialViewController];
+            [self updateAppWindow:mainController];
         
         } else if ([host isEqualToString:@"badge"]) {
             OTSWRevealViewController *revealController = [self setupRevealController];
             UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
-            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"UserProfileEditor" bundle:nil];
-            OTSelectAssociationViewController *publicFeedItemController = (OTSelectAssociationViewController *)[publicFeedItemStorybard instantiateViewControllerWithIdentifier:@"SelectAssociation"];
+            UIStoryboard *selectAssociationStoryboard = [UIStoryboard storyboardWithName:@"UserProfileEditor" bundle:nil];
+            OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[selectAssociationStoryboard instantiateViewControllerWithIdentifier:@"SelectAssociation"];
+            [mainController setViewControllers:@[mainController.topViewController, selectAssociationController]];
+            [self updateAppWindow:revealController];
+        } else if ([host isEqualToString:@"webview"]) {
+            OTSWRevealViewController *revealController = [self setupRevealController];
+            UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
+            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            OTMainViewController *publicFeedItemController = (OTMainViewController *)[publicFeedItemStorybard instantiateViewControllerWithIdentifier:@"OTMain"];
             [mainController setViewControllers:@[mainController.topViewController, publicFeedItemController]];
+            NSArray *elts = [query componentsSeparatedByString:@"="];
+            publicFeedItemController.webview = elts[1];
             [self updateAppWindow:revealController];
         }
     }

@@ -111,7 +111,8 @@
     OTSolidarityGuideFilterDelegate,
     OTNewsFeedsSourceDelegate,
     OTTourCreatorBehaviorDelegate,
-    OTHeatzonesCollectionViewDelegate
+    OTHeatzonesCollectionViewDelegate,
+    OTWebViewDelegate
 >
 
 @property (nonatomic, weak) IBOutlet OTFeedItemsTableView           *tableView;
@@ -317,6 +318,13 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.newsFeedsSourceBehavior pause];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (self.webview) {
+        [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -923,6 +931,12 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROPOSE_STRUCTURE_URL]];
 }
 
+#pragma mark - OTWebViewDelegate
+
+- (void)webview:(NSString *)url {
+    self.webview = url;
+}
+
 #pragma mark - EntourageEditorDelegate
 
 - (void)didEditEntourage:(OTEntourage *)entourage {
@@ -989,7 +1003,6 @@
 
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;
-    //[self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
     if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
         [OTLogger logEvent:@"OpenEntouragePublicPage"];
         [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
@@ -1251,7 +1264,8 @@
     }
     else if ([segue.identifier isEqualToString:@"OTWebViewSegue"]) {
         OTWebViewController *controller = (OTWebViewController *)destinationViewController;
-        controller.urlString = @"http://www.simplecommebonjour.org";
+        controller.urlString = self.webview;
+        controller.webViewDelegate = self;
     }
 }
 

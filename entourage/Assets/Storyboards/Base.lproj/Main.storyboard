@@ -263,7 +263,7 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                            <rect key="frame" x="125" y="161" width="126.5" height="18"/>
+                            <rect key="frame" x="124.5" y="161" width="126.5" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="R2h-5U-huy"/>
                             </constraints>
@@ -427,7 +427,7 @@
         <!--Main-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" userLabel="Main" customClass="OTMainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTMain" automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" userLabel="Main" customClass="OTMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -676,7 +676,6 @@
                                             <outlet property="typeByNameLabel" destination="U4n-wk-MkE" id="8BZ-28-bW3"/>
                                             <outlet property="unreadCountText" destination="kDe-aC-drW" id="Ywc-x0-6UI"/>
                                             <outlet property="userProfileImageButton" destination="dDA-4F-GY6" id="Rfb-7r-MKl"/>
-                                            <segue destination="h0R-pH-Cwq" kind="modal" identifier="OTWebViewSegue" id="qvO-H7-cjC"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OTAnnouncementTableViewCellIdentifier" rowHeight="156" id="jhF-vm-O4y" customClass="OTAnnouncementCell">
@@ -1361,6 +1360,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                         <segue destination="odF-HL-m84" kind="modal" identifier="OTTourOptionsSegue" id="J6i-IA-3bb"/>
                         <segue destination="UzR-b4-49u" kind="modal" identifier="SolidarityGuideSegue" id="NKf-Cg-AGD"/>
                         <segue destination="Ry3-hZ-KaJ" kind="modal" identifier="OTCreateMeeting" id="ds2-Jp-hTM"/>
+                        <segue destination="h0R-pH-Cwq" kind="modal" identifier="OTWebViewSegue" id="Eos-gC-E7N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSURL *url = [NSURL URLWithString:self.urlString];
-    NSArray  *parts = [url.host componentsSeparatedByString:@"."];
+    NSArray  *parts = [url.absoluteString componentsSeparatedByString:@"."];
     NSString *justDomain = [NSString stringWithFormat:@"%@.%@",
                             parts[parts.count - 2], parts[parts.count - 1]];
     self.navigationItem.title = justDomain;
@@ -92,7 +92,10 @@
 }
 
 - (void)close {
-    [self dismissViewControllerAnimated:YES completion: nil];
+    [self dismissViewControllerAnimated:YES completion:^() {
+        if ([self.webViewDelegate respondsToSelector:@selector(webview:)])
+            [self.webViewDelegate performSelector:@selector(webview:) withObject:nil];
+    }];
 }
 
 - (void)showOptions {

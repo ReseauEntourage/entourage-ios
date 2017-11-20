@@ -135,7 +135,7 @@ continueUserActivity:(NSUserActivity *)userActivity
          annotation:(id)annotation
 {
     if ([[url scheme] isEqualToString:@"entourage"]) {
-        [[OTDeepLinkService new] handleFeedAndBadgeLinks:url.host];
+        [[OTDeepLinkService new] handleFeedAndBadgeLinks:url];
         return YES;
     }
     return NO;
