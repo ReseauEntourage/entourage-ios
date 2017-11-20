@@ -24,12 +24,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSURL *url = [NSURL URLWithString:self.urlString];
+    
+    NSURL *url = [NSURL URLWithString:[self.urlString stringByRemovingPercentEncoding]];
     NSArray  *parts = [url.absoluteString componentsSeparatedByString:@"."];
     NSString *justDomain = [NSString stringWithFormat:@"%@.%@",
                             parts[parts.count - 2], parts[parts.count - 1]];
     self.navigationItem.title = justDomain;
     [self configureUIBarButtonItems];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    [_webView loadRequest:urlRequest];
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                                     initWithTarget:self
                                                     action:@selector(moveViewWithGestureRecognizer:)];
@@ -37,8 +40,7 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    [_webView loadRequest:urlRequest];
+   
 }
 
 - (void)configureUIBarButtonItems {

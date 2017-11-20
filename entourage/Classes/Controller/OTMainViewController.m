@@ -935,6 +935,9 @@
 
 - (void)webview:(NSString *)url {
     self.webview = url;
+    if (self.webview) {
+        [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
+    }
 }
 
 #pragma mark - EntourageEditorDelegate
