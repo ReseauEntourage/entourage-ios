@@ -1021,6 +1021,7 @@
 }
 
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem {
+    self.webview = feedItem.url;
     [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
 }
 
