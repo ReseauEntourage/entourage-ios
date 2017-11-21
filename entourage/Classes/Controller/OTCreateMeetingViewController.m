@@ -33,11 +33,9 @@
 
 @interface OTCreateMeetingViewController () <LocationSelectionDelegate>
 
-@property (strong, nonatomic) NSNumber *currentTourId;
 @property (strong, nonatomic) NSString *lmPath;
 @property (strong, nonatomic) NSString *dicPath;
 @property (nonatomic) CLLocationCoordinate2D location;
-
 @property (nonatomic, strong) IBOutlet UITextField *nameTextField;
 @property (nonatomic, strong) IBOutlet OTTextWithCount *messageTextView;
 @property (weak, nonatomic) IBOutlet UILabel *firstLabel;
@@ -54,7 +52,7 @@
     [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
     [self setupUI];
-    if(!self.encounter) {
+    if(!self.encounter && self.displayedOnceForTour) {
         [self.disclaimer showDisclaimer];
     }
     else {

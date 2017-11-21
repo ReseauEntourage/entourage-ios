@@ -21,6 +21,8 @@
 
 @property (nonatomic, weak) id<OTCreateMeetingViewControllerDelegate> delegate;
 @property (nonatomic, strong) OTEncounter *encounter;
+@property (strong, nonatomic) NSNumber *currentTourId;
+@property (nonatomic) BOOL displayedOnceForTour;
 
 - (void)configureWithTourId:(NSNumber *)currentTourId andLocation:(CLLocationCoordinate2D)location;
 

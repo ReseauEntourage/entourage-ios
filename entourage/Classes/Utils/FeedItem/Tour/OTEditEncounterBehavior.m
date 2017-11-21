@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) NSNumber *tourId;
 @property (nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic) BOOL tourChanged;
 @property (nonatomic, weak) id<OTMeetingCalloutViewControllerDelegate> delegate;
 
 @end
@@ -26,6 +27,7 @@
        forTour:(NSNumber *)tourId
     andLocation:(CLLocationCoordinate2D) location {
     self.encounter = encounter;
+    self.tourChanged = ![self.tourId isEqualToNumber:tourId];
     self.tourId = tourId;
     self.location = location;
     if(OTSharedOngoingTour.isOngoing || [NSUserDefaults standardUserDefaults].currentOngoingTour != nil)
@@ -39,6 +41,7 @@
         UINavigationController *navController = segue.destinationViewController;
         OTCreateMeetingViewController *controller = (OTCreateMeetingViewController *)navController.topViewController;
         controller.encounter = self.encounter;
+        controller.displayedOnceForTour = self.tourChanged;
         [controller configureWithTourId:self.tourId andLocation:self.location];
         controller.delegate = self;
     }
