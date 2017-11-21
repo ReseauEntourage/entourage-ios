@@ -71,7 +71,11 @@
 
 - (void)setupUI {
     [self setupCloseModal];
-        UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEncounter:) colored:[UIColor appOrangeColor]];
+        UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
+                                                            withTarget:self
+                                                             andAction:@selector(sendEncounter:)
+                                                               andFont:@"SFUIText-Bold"
+                                                               colored:[UIColor appOrangeColor]];
         [self.navigationItem setRightBarButtonItem:menuButton];
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];

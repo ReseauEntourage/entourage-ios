@@ -40,7 +40,11 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
-    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(saveNewLocation) colored:[UIColor appOrangeColor]];
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
+                                                        withTarget:self
+                                                         andAction:@selector(saveNewLocation)
+                                                           andFont:@"SFUIText-Bold"
+                                                           colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
 
     self.locationSearchTable = [[UIStoryboard entourageEditorStoryboard] instantiateViewControllerWithIdentifier:@"OTLocationSearchTableViewController"];

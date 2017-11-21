@@ -107,7 +107,11 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)showSaveButton {
-    UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save") withTarget:self andAction:@selector(updateUser) colored:[UIColor appOrangeColor]];
+    UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save")
+                                                        withTarget:self
+                                                         andAction:@selector(updateUser)
+                                                           andFont:@"SFUIText-Bold"
+                                                           colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:saveButton];
 }
 

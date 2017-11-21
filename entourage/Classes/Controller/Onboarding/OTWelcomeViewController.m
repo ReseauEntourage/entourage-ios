@@ -47,7 +47,11 @@
 #pragma mark - Private
 
 - (void)addLoginBarButton {
-    UIBarButtonItem *loginButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doLogin") withTarget:self andAction:@selector(doLogin) colored:[UIColor whiteColor]];
+    UIBarButtonItem *loginButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doLogin")
+                                                         withTarget:self
+                                                          andAction:@selector(doLogin)
+                                                            andFont:@"SFUIText-Bold"
+                                                            colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:loginButton];
 }
 

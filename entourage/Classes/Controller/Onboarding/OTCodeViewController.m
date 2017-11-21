@@ -74,6 +74,7 @@
     UIBarButtonItem *regenerateButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doRegenerateCode")
                                                               withTarget:self
                                                                andAction:@selector(doRegenerateCode)
+                                                                 andFont:@"SFUIText-Bold"
                                                                  colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:regenerateButton];
 }

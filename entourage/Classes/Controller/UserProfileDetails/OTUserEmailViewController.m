@@ -51,7 +51,11 @@
 }
 
 - (void)addIgnoreButton {
-    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString withTarget:self andAction:@selector(doIgnore) colored:[UIColor whiteColor]];
+    UIBarButtonItem *ignoreButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doIgnore").capitalizedString
+                                                          withTarget:self
+                                                           andAction:@selector(doIgnore)
+                                                             andFont:@"SFUIText-Bold"
+                                                             colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:ignoreButton];
 }
 

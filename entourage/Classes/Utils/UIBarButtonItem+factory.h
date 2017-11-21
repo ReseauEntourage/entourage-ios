@@ -10,8 +10,14 @@
 
 @interface UIBarButtonItem (factory)
 
-+ (UIBarButtonItem *)createWithImageNamed:(NSString *)imageName withTarget:(id)target andAction:(SEL)action;
-+ (UIBarButtonItem *)createWithTitle:(NSString *)title withTarget:(id)target andAction:(SEL)action colored:(UIColor *)color;
++ (UIBarButtonItem *)createWithImageNamed:(NSString *)imageName
+                               withTarget:(id)target
+                                andAction:(SEL)action;
++ (UIBarButtonItem *)createWithTitle:(NSString *)title
+                          withTarget:(id)target
+                           andAction:(SEL)action
+                             andFont:(NSString *)font
+                             colored:(UIColor *)color;
 - (void)changeEnabled:(BOOL)enabled;
 
 @end

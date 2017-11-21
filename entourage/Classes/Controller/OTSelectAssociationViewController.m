@@ -57,7 +57,11 @@
 #pragma mark - private methods
 
 - (void)setupToolbarButtons {
-    UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString withTarget:self andAction:@selector(saveAssociation) colored:[UIColor appOrangeColor]];
+    UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
+                                                        withTarget:self
+                                                         andAction:@selector(saveAssociation)
+                                                           andFont:@"SFUIText-Bold"
+                                                           colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:saveButton];
 }
 

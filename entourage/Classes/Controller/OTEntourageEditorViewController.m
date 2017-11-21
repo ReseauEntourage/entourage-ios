@@ -37,7 +37,11 @@
     [self setupData];
     [self.editTableSource configureWith:self.entourage];
     [self setupCloseModal];
-    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(sendEntourage:) colored:[UIColor appOrangeColor]];
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
+                                                        withTarget:self
+                                                         andAction:@selector(sendEntourage:)
+                                                           andFont:@"SFUIText-Bold"
+                                                           colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
     [self.disclaimer showDisclaimer];
 }

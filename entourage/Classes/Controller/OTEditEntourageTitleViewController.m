@@ -33,7 +33,11 @@
             self.txtTitle.placeholder = OTLocalizedString(@"edit_demand_title");
     }
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(doneEdit) colored:[UIColor appOrangeColor]];
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
+                                                        withTarget:self
+                                                         andAction:@selector(doneEdit)
+                                                           andFont:@"SFUIText-Bold"
+                                                           colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
     self.txtTitle.maxLength = 100;
     self.txtTitle.textView.text = self.currentTitle;
