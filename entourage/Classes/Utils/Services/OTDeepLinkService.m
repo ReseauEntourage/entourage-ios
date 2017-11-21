@@ -110,6 +110,12 @@
     }
 }
 
+- (void)openWithWebView: (NSURL *)url {
+    OTMainViewController *publicFeedItemController = (OTMainViewController *)[self instatiateControllerWithStoryboardIdentifier:@"Main" andControllerIdentifier:@"OTMain"];
+    publicFeedItemController.webview = url.absoluteString;
+    [self showController:publicFeedItemController];
+}
+
 - (UIViewController *)instatiateControllerWithStoryboardIdentifier: (NSString *)storyboardId
                                            andControllerIdentifier: (NSString *)controllerId {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardId bundle:nil];

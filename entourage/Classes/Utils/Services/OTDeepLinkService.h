@@ -16,5 +16,6 @@
 - (void)showProfileFromAnywhereForUser:(NSNumber *)userId;
 - (void)navigateToLogin;
 - (void)handleFeedAndBadgeLinks:(NSURL *)url;
+- (void)openWithWebView: (NSURL *)url;
 
 @end

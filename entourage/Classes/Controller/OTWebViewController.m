@@ -11,10 +11,11 @@
 #import "UIColor+entourage.h"
 #import "UIViewController+menu.h"
 #import "OTConsts.h"
+#import "SVProgressHUD.h"
 
 #define DISTANCE_ABOVE_NAVIGATION_BAR 65
 
-@interface OTWebViewController ()
+@interface OTWebViewController () <UIWebViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UINavigationItem *navigationItem;
 
@@ -25,14 +26,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSURL *url = [NSURL URLWithString:[self.urlString stringByRemovingPercentEncoding]];
-    NSArray  *parts = [url.absoluteString componentsSeparatedByString:@"."];
-    NSString *justDomain = [NSString stringWithFormat:@"%@.%@",
-                            parts[parts.count - 2], parts[parts.count - 1]];
-    self.navigationItem.title = justDomain;
+    NSURL *url = [NSURL URLWithString: self.urlString];
     [self configureUIBarButtonItems];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    [_webView loadRequest:urlRequest];
+    
+    
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                                     initWithTarget:self
                                                     action:@selector(moveViewWithGestureRecognizer:)];
@@ -40,7 +38,24 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
-   
+    _webView.delegate = self;
+    [_webView loadRequest:urlRequest];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSURL *url = [webView.request mainDocumentURL];
+    NSString *host = url.host;
+    if ([url.host hasPrefix:@"www"])
+        host = [url.host substringFromIndex:4];
+    NSString *domain = [NSString stringWithFormat:@"%@%@",[[host substringToIndex:1] uppercaseString],[host substringFromIndex:1]];
+    self.navigationItem.title = domain;
+    [SVProgressHUD dismiss];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    [SVProgressHUD show];
+    return YES;
 }
 
 - (void)configureUIBarButtonItems {
