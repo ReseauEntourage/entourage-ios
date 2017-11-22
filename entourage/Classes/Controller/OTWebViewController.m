@@ -44,6 +44,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     NSURL *url = [webView.request mainDocumentURL];
+    self.urlString = url.absoluteString;
     NSString *host = url.host;
     if ([url.host hasPrefix:@"www"])
         host = [url.host substringFromIndex:4];
@@ -59,7 +60,7 @@
 }
 
 - (void)configureUIBarButtonItems {
-    UIImage *menuImage = [[UIImage imageNamed:@"close.png"]
+    UIImage *menuImage = [[UIImage imageNamed:@"back.png"]
                           imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
     [menuButton setImage:menuImage];
@@ -110,6 +111,7 @@
 
 - (void)close {
     [self dismissViewControllerAnimated:YES completion:^() {
+        [SVProgressHUD dismiss];
         if ([self.webViewDelegate respondsToSelector:@selector(webview:)])
             [self.webViewDelegate performSelector:@selector(webview:) withObject:nil];
     }];
@@ -158,14 +160,14 @@
 }
 
 - (void)moveViewWithGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer{
-    [UIView animateWithDuration:1.0 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         CGPoint translation = [panGestureRecognizer translationInView:self.view];
         CGRect frame = self.view.frame;
         frame.origin.y = translation.y;
         self.view.frame = frame;
     }];
     if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
-        [UIView animateWithDuration:1.0 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             CGPoint translation = [panGestureRecognizer translationInView:self.view];
             if(translation.y >= self.view.bounds.size.height/2)
                 [self close];
