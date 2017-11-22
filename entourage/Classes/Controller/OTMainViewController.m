@@ -1021,8 +1021,7 @@
 }
 
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem {
-    self.webview = feedItem.url;
-    [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedItem.url]];
 }
 
 - (void)showUserProfile:(NSNumber*)userId {
