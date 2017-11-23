@@ -22,6 +22,10 @@
     OTFeedItemFilter *item = (OTFeedItemFilter *)[self.tableDataSource getItemAtIndexPath:indexPath];
     UISwitch *swtControl = (UISwitch *)sender;
     item.active = swtControl.isOn;
+    for (OTFeedItemFilter *child in item.subItems) {
+        child.active = swtControl.isOn;
+    }
+    [self.tableDataSource.dataSource.tableView reloadData];
     NSString *message = @"";
     switch (item.key) {
         case FeedItemFilterKeyMedical:

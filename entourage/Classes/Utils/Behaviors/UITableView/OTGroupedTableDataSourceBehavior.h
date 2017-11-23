@@ -13,5 +13,6 @@
 
 @property (nonatomic, strong) NSArray *groupedSource;
 @property (nonatomic, strong) NSArray *groupHeaders;
+@property (nonatomic, strong) NSArray *parentArray;
 
 @end

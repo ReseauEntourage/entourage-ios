@@ -21,6 +21,22 @@
 @property (nonatomic) NSNumber *showOnlyMyEntourages;
 @property (nonatomic) NSNumber *showFromOrganisation;
 
+@property (nonatomic) NSNumber *showDemandeSocial;
+@property (nonatomic) NSNumber *showDemandeEvent;
+@property (nonatomic) NSNumber *showDemandeHelp;
+@property (nonatomic) NSNumber *showDemandeResource;
+@property (nonatomic) NSNumber *showDemandeInfo;
+@property (nonatomic) NSNumber *showDemandeSkill;
+@property (nonatomic) NSNumber *showDemandeOther;
+
+@property (nonatomic) NSNumber *showContributionSocial;
+@property (nonatomic) NSNumber *showContributionEvent;
+@property (nonatomic) NSNumber *showContributionHelp;
+@property (nonatomic) NSNumber *showContributionResource;
+@property (nonatomic) NSNumber *showContributionInfo;
+@property (nonatomic) NSNumber *showContributionSkill;
+@property (nonatomic) NSNumber *showContributionOther;
+
 + (OTSavedFilter *)fromNewsFeedsFilter:(OTNewsFeedsFilter *)filter;
 
 @end

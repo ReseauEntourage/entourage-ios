@@ -15,6 +15,7 @@
 
 @interface OTFeedItemFiltersViewController ()
 
+@property (nonatomic, strong) NSArray *parentArray;
 @property (strong, nonatomic) IBOutlet OTFeedItemsFiltersTableDataSource *tableDataSource;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -28,6 +29,7 @@
     [self.tableDataSource initializeWith:self.filterDelegate.currentFilter];
     self.title =  OTLocalizedString(@"filters").uppercaseString;
     self.tableView.tableFooterView = [UIView new];
+    self.parentArray = self.tableDataSource.parentArray;
     [self setupToolbarButtons];
 }
 

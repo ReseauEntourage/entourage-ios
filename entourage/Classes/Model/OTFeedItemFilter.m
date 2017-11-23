@@ -11,16 +11,33 @@
 
 @implementation OTFeedItemFilter
 
-+ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key active:(BOOL)active {
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
+                       children:(NSArray *)children {
     OTFeedItemFilter *result = [OTFeedItemFilter new];
     result.key = key;
     result.active = active;
     result.title = [OTFeedItemFilter stringForKey:key];
+    result.subItems = children;
     return result;
 }
 
-+ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key active:(BOOL)active withImage:(NSString *)image {
-    OTFeedItemFilter *result = [OTFeedItemFilter createFor:key active:active];
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
+                      withImage:(NSString *)image {
+    OTFeedItemFilter *result = [OTFeedItemFilter createFor:key active:active children:@[]];
+    result.image = image;
+    return result;
+}
+
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
+                      withImage:(NSString *)image
+                          title:(NSString *)title {
+    OTFeedItemFilter *result = [OTFeedItemFilter new];
+    result.key = key;
+    result.active = active;
+    result.title = title;
     result.image = image;
     return result;
 }
@@ -36,7 +53,7 @@
         case FeedItemFilterKeyDemand:
             return OTLocalizedString(@"demande");
         case FeedItemFilterKeyContribution:
-            return OTLocalizedString(@"contribution");
+            return OTLocalizedString(@"contribution_filter");
         case FeedItemFilterKeyTour:
             return OTLocalizedString(@"filter_entourage_show_tours");
         case FeedItemFilterKeyMedical:

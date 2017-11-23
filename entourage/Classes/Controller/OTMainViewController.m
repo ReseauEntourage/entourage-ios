@@ -960,8 +960,7 @@
 
 - (void)filterChanged:(OTNewsFeedsFilter *)filter {
     self.currentFilter = filter;
-    if(self.currentFilter.isPro)
-        [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
+    [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
     [self reloadFeeds];
 }
 

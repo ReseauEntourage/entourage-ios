@@ -35,9 +35,16 @@
 
 - (NSArray *)groupHeaders {
     if(IS_PRO_USER)
-        return @[OTLocalizedString(@"myEntouragesTitle"), OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_entourage_from_sympathisants_title")];
+        return @[
+                    OTLocalizedString(@"myEntouragesTitle"),
+                    OTLocalizedString(@"filter_entourages_title"),
+                    OTLocalizedString(@"filter_entourage_from_sympathisants_title")
+                 ];
     else
-        return @[OTLocalizedString(@"filter_entourages_title"), OTLocalizedString(@"filter_timeframe_title"), OTLocalizedString(@"filter_entourage_from_sympathisants_title")];
+        return @[
+                 OTLocalizedString(@"filter_entourages_title"),
+                 OTLocalizedString(@"filter_timeframe_title"),
+                 OTLocalizedString(@"filter_entourage_from_sympathisants_title")];
 }
 
 - (NSArray *)toGroupedArray {
@@ -53,44 +60,57 @@
         return @[
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
-                                          active:self.isUnread],
+                                          active:self.isUnread
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
-                                          active:self.isIncludingClosed]
+                                          active:self.isIncludingClosed
+                                        children:@[]]
                      ],
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
-                                          active:self.showDemand],
+                                          active:self.showDemand
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
-                                          active:self.showContribution],
+                                          active:self.showContribution
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyTour
-                                          active:self.showTours]
+                                          active:self.showTours
+                                        children:@[]]
                      ],
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
-                                          active:self.showMyEntourages]
+                                          active:self.showMyEntourages
+                                        children:@[]]
                      ]
                  ];
     else
         return @[
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
-                                          active:self.isUnread],
+                                          active:self.isUnread
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
-                                          active:self.isIncludingClosed]
+                                          active:self.isIncludingClosed
+                                        children:@[]]
                      ],
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
-                                          active:self.showDemand],
+                                          active:self.showDemand
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
-                                          active:self.showContribution],
+                                          active:self.showContribution
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyTour
-                                          active:self.showTours]
+                                          active:self.showTours
+                                        children:@[]]
                      ],
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
-                                          active:self.showMyEntourages],
+                                          active:self.showMyEntourages
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
-                                          active:self.showFromOrganisation]
+                                          active:self.showFromOrganisation
+                                        children:@[]]
                      ]
                  ];
 }
@@ -101,40 +121,51 @@
         return @[
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
-                                          active:self.isUnread],
+                                          active:self.isUnread
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
-                                          active:self.isIncludingClosed]
+                                          active:self.isIncludingClosed
+                                        children:@[]]
                      ],
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
-                                          active:self.showDemand],
+                                          active:self.showDemand
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
-                                          active:self.showContribution],
+                                          active:self.showContribution
+                                        children:@[]],
                      ],
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
-                                          active:self.showMyEntourages]
+                                          active:self.showMyEntourages
+                                        children:@[]]
                      ]
                  ];
     else
         return @[
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
-                                          active:self.isUnread],
+                                          active:self.isUnread
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
-                                          active:self.isIncludingClosed]
+                                          active:self.isIncludingClosed
+                                        children:@[]]
                      ],
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
-                                          active:self.showDemand],
+                                          active:self.showDemand
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
-                                          active:self.showContribution],
+                                          active:self.showContribution
+                                        children:@[]],
                      ],
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
-                                          active:self.showMyEntourages],
+                                          active:self.showMyEntourages
+                                        children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
-                                          active:self.showFromOrganisation]
+                                          active:self.showFromOrganisation
+                                        children:@[]]
                      ]
                  ];
 }

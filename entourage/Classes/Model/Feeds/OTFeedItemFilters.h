@@ -16,6 +16,7 @@
 
 - (NSArray *)toGroupedArray;
 - (NSArray *)groupHeaders;
+- (NSArray *)parentArray;
 - (NSMutableDictionary *)toDictionaryWithPageNumber:(int)pageNumber andSize:(int)pageSize;
 - (void)updateValue:(OTFeedItemFilter *)filter;
 - (NSArray *)timeframes;

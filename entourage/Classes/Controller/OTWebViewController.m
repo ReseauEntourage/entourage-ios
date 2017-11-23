@@ -67,13 +67,14 @@
     [menuButton setTarget:self];
     [menuButton setAction:@selector(close)];
     [self.navigationItem setLeftBarButtonItem:menuButton];
+    
     NSMutableArray *rightButtons = [NSMutableArray new];
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
     [more setImage:[UIImage imageNamed:@"more"]
           forState:UIControlStateNormal];
     [more addTarget:self
              action:@selector(showOptions)
-   forControlEvents:UIControlEventTouchUpInside];
+    forControlEvents:UIControlEventTouchUpInside];
     [more setFrame:CGRectMake(0, 0, 30, 30)];
     
     OTBarButtonView *moreBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];

@@ -26,6 +26,7 @@
     self.dataSource.tableView.delegate = self;
     self.groupHeaders = [filter groupHeaders];
     self.groupedSource = [filter toGroupedArray];
+    self.parentArray = [filter parentArray];
 }
 
 - (OTFeedItemFilters *)readCurrentFilter {

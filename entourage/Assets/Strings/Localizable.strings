@@ -178,9 +178,10 @@ Proposez une structure";
 "invalidTitle" = "Titre invalide";
 "categoryNotSelected" = "Renseignez une catégorie pour votre action";
 "title" = "Titre";
-"demande" = "Demande";
+"demande" = "Demandes: je cherche...";
 "ask_for_help" = "Demande";
 "contribution" = "Contribution";
+"contribution_filter" = "Contributions: je me propose de...";
 "detailedDescription" = "Description détaillée";
 "filters" = "filtres";
 "detailEncounter" = "Détaillez votre rencontre";
@@ -282,7 +283,7 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "filter_maraude_bare_hands" = "Sociale";
 "filter_maraude_alimentary" = "Distributive";
 
-"filter_entourages_title" = "Types d’entourage";
+"filter_entourages_title" = "Types d’action";
 "filter_entourage_demand" = "Demande";
 "filter_entourage_contribution" = "Contribution";
 "filter_entourage_show_tours" = "Maraudes";

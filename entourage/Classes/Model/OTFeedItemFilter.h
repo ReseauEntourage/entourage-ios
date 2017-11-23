@@ -9,10 +9,26 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
+    FeedItemFilterKeyContributionSocial,
+    FeedItemFilterKeyContributionEvent,
+    FeedItemFilterKeyContributionHelp,
+    FeedItemFilterKeyContributionResource,
+    FeedItemFilterKeyContributionInfo,
+    FeedItemFilterKeyContributionSkill,
+    FeedItemFilterKeyContributionOther,
+    
+    FeedItemFilterKeyDemandeSocial,
+    FeedItemFilterKeyDemandeEvent,
+    FeedItemFilterKeyDemandeHelp,
+    FeedItemFilterKeyDemandeResource,
+    FeedItemFilterKeyDemandeInfo,
+    FeedItemFilterKeyDemandeSkill,
+    FeedItemFilterKeyDemandeOther,
+    
     FeedItemFilterKeyUnread,
     FeedItemFilterKeyIncludingClosed,
-    FeedItemFilterKeyDemand,
-    FeedItemFilterKeyContribution,
+    FeedItemFilterKeyContribution = 17,
+    FeedItemFilterKeyDemand = 18,
     FeedItemFilterKeyTour,
     FeedItemFilterKeyTimeframe,
     FeedItemFilterKeyMedical,
@@ -28,8 +44,17 @@ typedef enum {
 @property (nonatomic) BOOL active;
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* image;
+@property (nonatomic, strong) NSArray<OTFeedItemFilter *> *subItems; 
 
-+ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key active:(BOOL)active;
-+ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key active:(BOOL)active withImage:(NSString *)image;
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
+                       children:(NSArray *)children;
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
+                      withImage:(NSString *)image;
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
+                      withImage:(NSString *)image
+                          title:(NSString *)title;
 
 @end
