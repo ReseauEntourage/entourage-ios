@@ -368,34 +368,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMH-HI-PA1">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                <items>
-                                    <navigationItem id="E1y-k2-fDC">
-                                        <barButtonItem key="backBarButtonItem" title="Back" id="UJV-aO-aMF"/>
-                                    </navigationItem>
-                                </items>
-                                <connections>
-                                    <outlet property="delegate" destination="2gM-Ps-qrY" id="siO-kM-Ko0"/>
-                                </connections>
-                            </navigationBar>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zp8-5a-Eze">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAP-Ac-6px">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMH-HI-PA1">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <items>
+                                            <navigationItem id="E1y-k2-fDC">
+                                                <barButtonItem key="backBarButtonItem" title="Back" id="UJV-aO-aMF"/>
+                                            </navigationItem>
+                                        </items>
+                                        <connections>
+                                            <outlet property="delegate" destination="2gM-Ps-qrY" id="siO-kM-Ko0"/>
+                                        </connections>
+                                    </navigationBar>
+                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zp8-5a-Eze">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="559"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </webView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="zp8-5a-Eze" firstAttribute="leading" secondItem="eAP-Ac-6px" secondAttribute="leading" id="3SQ-kY-t4f"/>
+                                    <constraint firstItem="zp8-5a-Eze" firstAttribute="top" secondItem="kMH-HI-PA1" secondAttribute="bottom" id="CZ5-oD-uKq"/>
+                                    <constraint firstAttribute="bottom" secondItem="zp8-5a-Eze" secondAttribute="bottom" id="MIf-Cu-GYe"/>
+                                    <constraint firstItem="kMH-HI-PA1" firstAttribute="leading" secondItem="eAP-Ac-6px" secondAttribute="leading" id="QxY-rX-iI5"/>
+                                    <constraint firstItem="zp8-5a-Eze" firstAttribute="top" secondItem="kMH-HI-PA1" secondAttribute="bottom" id="T5j-K3-Kg7"/>
+                                    <constraint firstAttribute="trailing" secondItem="zp8-5a-Eze" secondAttribute="trailing" id="dvV-mp-uG6"/>
+                                    <constraint firstItem="kMH-HI-PA1" firstAttribute="top" secondItem="eAP-Ac-6px" secondAttribute="top" id="e6w-MS-yiM"/>
+                                    <constraint firstAttribute="trailing" secondItem="kMH-HI-PA1" secondAttribute="trailing" id="eVH-VK-lUN"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="kMH-HI-PA1" secondAttribute="trailing" id="7AV-y4-qoM"/>
-                            <constraint firstItem="Vvu-fT-iGj" firstAttribute="top" secondItem="zp8-5a-Eze" secondAttribute="bottom" id="7Kl-hw-Z5D"/>
-                            <constraint firstItem="zp8-5a-Eze" firstAttribute="leading" secondItem="2gM-Ps-qrY" secondAttribute="leading" id="8Ps-a1-nqK"/>
-                            <constraint firstItem="kMH-HI-PA1" firstAttribute="top" secondItem="i4p-s6-ToZ" secondAttribute="bottom" constant="44" id="OxA-ma-4fj"/>
-                            <constraint firstAttribute="trailing" secondItem="zp8-5a-Eze" secondAttribute="trailing" id="Qkr-ik-x7f"/>
-                            <constraint firstItem="zp8-5a-Eze" firstAttribute="top" secondItem="kMH-HI-PA1" secondAttribute="bottom" id="WIj-6C-Vpd"/>
-                            <constraint firstItem="kMH-HI-PA1" firstAttribute="leading" secondItem="2gM-Ps-qrY" secondAttribute="leading" id="ozg-gy-eYL"/>
+                            <constraint firstItem="eAP-Ac-6px" firstAttribute="top" secondItem="i4p-s6-ToZ" secondAttribute="bottom" constant="44" id="5d7-P6-ICl"/>
+                            <constraint firstItem="Vvu-fT-iGj" firstAttribute="top" secondItem="eAP-Ac-6px" secondAttribute="bottom" id="I6L-eq-yK4"/>
+                            <constraint firstAttribute="trailing" secondItem="eAP-Ac-6px" secondAttribute="trailing" id="K56-TX-HeT"/>
+                            <constraint firstItem="eAP-Ac-6px" firstAttribute="leading" secondItem="2gM-Ps-qrY" secondAttribute="leading" id="kZz-lQ-S7W"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="animatedView" destination="eAP-Ac-6px" id="b0U-ha-Oof"/>
                         <outlet property="navigationItem" destination="E1y-k2-fDC" id="6Eo-Pm-9qN"/>
                         <outlet property="webView" destination="zp8-5a-Eze" id="OLk-Tk-G6S"/>
                     </connections>

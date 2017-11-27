@@ -18,6 +18,7 @@
 @interface OTWebViewController () <UIWebViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UINavigationItem *navigationItem;
+@property (nonatomic, weak) IBOutlet UIView *animatedView;
 
 @end
 
@@ -100,12 +101,11 @@
     else
     {
         UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                                                               target:nil
-                                                                               action:NULL];
+                                target:nil
+                                action:NULL];
         [space setWidth:-13];
-        
+
         NSArray *items = @[space];
-        
         [self.navigationItem setRightBarButtonItems:[items arrayByAddingObjectsFromArray:views]];
     }
 }
@@ -149,7 +149,6 @@
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:defaultAction];
-    
     [self presentViewController:alert animated:NO completion:nil];
 }
 
@@ -162,20 +161,20 @@
 
 - (void)moveViewWithGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer{
     [UIView animateWithDuration:0.5 animations:^{
-        CGPoint translation = [panGestureRecognizer translationInView:self.view];
-        CGRect frame = self.view.frame;
+        CGPoint translation = [panGestureRecognizer translationInView:self.animatedView];
+        CGRect frame = self.animatedView.frame;
         frame.origin.y = translation.y;
-        self.view.frame = frame;
+        self.animatedView.frame = frame;
     }];
     if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
         [UIView animateWithDuration:0.5 animations:^{
-            CGPoint translation = [panGestureRecognizer translationInView:self.view];
+            CGPoint translation = [panGestureRecognizer translationInView:self.animatedView];
             if(translation.y >= self.view.bounds.size.height/2)
                 [self close];
             else {
-                CGRect frame = self.view.frame;
-                frame.origin = CGPointMake(0, 0);
-                self.view.frame = frame;
+                CGRect frame = self.animatedView.frame;
+                frame.origin = CGPointMake(0, 64);
+                self.animatedView.frame = frame;
             }
         }];
     }
