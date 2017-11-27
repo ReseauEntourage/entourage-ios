@@ -48,7 +48,86 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     OTFeedItemFilter *item = (OTFeedItemFilter *)[self getItemAtIndexPath:indexPath];
-    return item.key == FeedItemFilterKeyTimeframe ? 90 : 44;
+    CGFloat size = 44;
+    [self readCurrentFilter];
+    NSArray<OTFeedItemFilter *> *parents = [self.currentFilter parentArray];
+    switch (item.key) {
+        case FeedItemFilterKeyDemandeSocial:
+            if (!parents[2].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyDemandeEvent:
+            if (!parents[2].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyDemandeHelp:
+            if (!parents[2].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyDemandeResource:
+            if (!parents[2].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyDemandeInfo:
+            if (!parents[2].active)
+               size = 0;
+            break;
+        case FeedItemFilterKeyDemandeSkill:
+            if (!parents[2].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyDemandeOther:
+            if (!parents[2].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyContributionSocial:
+            if (!parents[1].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyContributionEvent:
+            if (!parents[1].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyContributionHelp:
+            if (!parents[1].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyContributionInfo:
+            if (!parents[1].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyContributionResource:
+            if (!parents[1].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyContributionSkill:
+            if (!parents[1].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyContributionOther:
+            if (!parents[1].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyMedical:
+            if (!parents[0].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeySocial:
+            if (!parents[0].active)
+                size = 0;
+            break;
+        case FeedItemFilterKeyDistributive:
+            if (!parents[0].active)
+               size = 0;
+            break;
+        case FeedItemFilterKeyTimeframe:
+            return 90;
+            break;
+        default:
+            return 44;
+            break;
+    }
+    return item.key == FeedItemFilterKeyTimeframe ? 90 : size;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -56,6 +135,5 @@
     if(indexPath.row == itemsAtSection.count - 1)
         cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.size.width, 0, 0);
 }
-
 
 @end

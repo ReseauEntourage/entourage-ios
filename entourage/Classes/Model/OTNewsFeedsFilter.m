@@ -130,13 +130,40 @@
         return [self groupForPublic];
 }
 
+- (NSArray *)parentArray {
+    NSArray *data = [OTCategoryFromJsonService getData];
+    NSMutableArray *parentArray = [[NSMutableArray alloc] init];
+    NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
+                                                   active:self.showMedical
+                                                withImage:@"filter_heal"],
+                              [OTFeedItemFilter createFor:FeedItemFilterKeySocial
+                                                   active:self.showSocial
+                                                withImage:@"filter_social"],
+                              [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
+                                                   active:self.showDistributive
+                                                withImage:@"filter_eat"]];
+    [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyTour
+                                                active:self.showTours
+                                              children:tourChildren]];
+    NSArray *contributionArray = [self contributionCategory:data[0]];
+    [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                            active:self.showContribution
+                                          children:contributionArray]];
+    NSArray *demandeArray = [self demandCategory:data[1]];
+    [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                            active:self.showDemand
+                                          children:demandeArray]];
+    
+    return parentArray;
+}
+
 - (NSArray *)groupForPublic {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     [array addObject:[self groupActions]];
     [array addObject:[self groupUniquement]];
     NSArray *timeframe =  @[
-                            [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
-                                                timeframeInHours:self.timeframeInHours]
+                                [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
+                                                    timeframeInHours:self.timeframeInHours]
                             ];
     [array addObject:timeframe];
     return array;
@@ -169,27 +196,49 @@
     return array;
 }
 
+- (NSArray *)demandCategory: (OTCategoryType *)demande {
+    NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+    int index = 7;
+    for(OTCategory *category in demande.categories) {
+        NSString *value = [NSString stringWithFormat:@"%@_%@", demande.type, category.category];
+        [categoryArray addObject:[OTFeedItemFilter createFor:index
+                                                      active:[[self.categoryDictionary valueForKey:value] boolValue]
+                                                   withImage:value
+                                                       title:category.title]];
+        index++;
+    }
+    return categoryArray;
+}
+
+- (NSArray *)contributionCategory: (OTCategoryType *)contribution {
+    NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+    int index = 0;
+    for(OTCategory *category in contribution.categories) {
+        NSString *value = [NSString stringWithFormat:@"%@_%@", contribution.type, category.category];
+        [categoryArray addObject:[OTFeedItemFilter createFor:index
+                                                      active:[[self.categoryDictionary valueForKey:value] boolValue]
+                                                   withImage:value
+                                                       title:category.title]];
+        index++;
+    }
+    return categoryArray;
+}
+
 - (NSArray *)groupActions {
     NSArray *data = [OTCategoryFromJsonService getData];
     NSMutableArray *action = [[NSMutableArray alloc] init];
-    int index = 0;
-    int categoryTypeIndex = 16;
-    for(OTCategoryType *categoryType in data) {
-        categoryTypeIndex++;
-        NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
-        for(OTCategory *category in categoryType.categories) {
-            NSString *value = [NSString stringWithFormat:@"%@_%@", categoryType.type, category.category];
-            [categoryArray addObject:[OTFeedItemFilter createFor:index
-                                                          active:[[self.categoryDictionary valueForKey:value] boolValue]
-                                                       withImage:value
-                                                           title:category.title]];
-            index++;
-        }
-        [action addObject: [OTFeedItemFilter createFor:categoryTypeIndex
-                                                active:[[self.categoryDictionary valueForKey:categoryType.type] boolValue]
-                                              children:categoryArray]];
-        [action addObjectsFromArray:categoryArray];
-    }
+    OTCategoryType *contribution = data[0];
+    OTCategoryType *demande = data[1];
+    NSArray *contributionArray = [self contributionCategory:data[0]];
+    NSArray *demandeArray = [self demandCategory:data[1]];
+    [action addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                            active:[[self.categoryDictionary valueForKey:contribution.type] boolValue]
+                                          children:contributionArray]];
+    [action addObjectsFromArray:contributionArray];
+    [action addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                            active:[[self.categoryDictionary valueForKey:demande.type] boolValue]
+                                          children:demandeArray]];
+    [action addObjectsFromArray:demandeArray];
     return action;
 }
 

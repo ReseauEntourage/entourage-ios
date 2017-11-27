@@ -8,11 +8,12 @@
 
 #import "OTBehavior.h"
 #import "OTTableDataSourceBehavior.h"
+#import "OTFeedItemFilter.h"
 
 @interface OTGroupedTableDataSourceBehavior : OTTableDataSourceBehavior
 
 @property (nonatomic, strong) NSArray *groupedSource;
 @property (nonatomic, strong) NSArray *groupHeaders;
-@property (nonatomic, strong) NSArray *parentArray;
+@property (nonatomic, strong) NSArray<OTFeedItemFilter *> *parentArray;
 
 @end

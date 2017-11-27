@@ -9,12 +9,35 @@
 #import "OTFeedItemsFilterCell.h"
 #import "OTFeedItemFilter.h"
 #import "OTDataSourceBehavior.h"
+#import "OTConsts.h"
 
 @implementation OTFeedItemsFilterCell
 
 - (void)configureWith:(OTFeedItemFilter *)filter {
-    self.lblTitle.text = filter.title;
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:filter.title];
+    if([filter.title isEqualToString:OTLocalizedString(@"contribution_filter")]) {
+        title = [self attributedTitle:filter.title boldChars:13];
+    } else if([filter.title isEqualToString:OTLocalizedString(@"demande")]) {
+        title = [self attributedTitle:filter.title boldChars:8];
+    } else if ([filter.title isEqualToString:OTLocalizedString(@"filter_entourage_show_tours")]) {
+        title =[self attributedTitle:filter.title boldChars:filter.title.length];
+    }
+    self.lblTitle.attributedText = title;
     [self.swtActive setOn:filter.active animated:YES];
+}
+
+- (NSMutableAttributedString *) attributedTitle: (NSString *)title
+                                      boldChars: (NSUInteger)range {
+    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:title];
+    NSRange selectedRange = NSMakeRange(0, range);
+    [attributedTitle beginEditing];
+    
+    [attributedTitle addAttribute:NSFontAttributeName
+              value:[UIFont fontWithName:@"SFUIText-Bold" size:15.0]
+              range:selectedRange];
+    
+    [attributedTitle endEditing];
+    return attributedTitle;
 }
 
 - (IBAction)changeActive:(id)sender {
