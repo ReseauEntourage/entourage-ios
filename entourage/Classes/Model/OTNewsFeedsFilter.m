@@ -133,18 +133,20 @@
 - (NSArray *)parentArray {
     NSArray *data = [OTCategoryFromJsonService getData];
     NSMutableArray *parentArray = [[NSMutableArray alloc] init];
-    NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
-                                                   active:self.showMedical
-                                                withImage:@"filter_heal"],
-                              [OTFeedItemFilter createFor:FeedItemFilterKeySocial
-                                                   active:self.showSocial
-                                                withImage:@"filter_social"],
-                              [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
-                                                   active:self.showDistributive
-                                                withImage:@"filter_eat"]];
-    [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyTour
-                                                active:self.showTours
-                                              children:tourChildren]];
+    if(IS_PRO_USER) {
+        NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
+                                                       active:self.showMedical
+                                                    withImage:@"filter_heal"],
+                                  [OTFeedItemFilter createFor:FeedItemFilterKeySocial
+                                                       active:self.showSocial
+                                                    withImage:@"filter_social"],
+                                  [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
+                                                       active:self.showDistributive
+                                                    withImage:@"filter_eat"]];
+        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyTour
+                                                    active:self.showTours
+                                                  children:tourChildren]];
+    }
     NSArray *contributionArray = [self contributionCategory:data[0]];
     [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                             active:self.showContribution

@@ -12,6 +12,8 @@
 #import "OTFeedItemFilter.h"
 #import "OTDataSourceBehavior.h"
 #import "UIColor+entourage.h"
+#import "OTAPIConsts.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTFeedItemsFiltersTableDataSource () <UITableViewDelegate>
 
@@ -50,62 +52,72 @@
     OTFeedItemFilter *item = (OTFeedItemFilter *)[self getItemAtIndexPath:indexPath];
     CGFloat size = 44;
     [self readCurrentFilter];
+    OTFeedItemFilter *contribution;
+    OTFeedItemFilter *demande;
     NSArray<OTFeedItemFilter *> *parents = [self.currentFilter parentArray];
+    if (IS_PRO_USER) {
+        contribution = parents[1];
+        demande = parents[2];
+    }
+    else {
+        contribution = parents[0];
+        demande = parents[1];
+    }
     switch (item.key) {
         case FeedItemFilterKeyDemandeSocial:
-            if (!parents[2].active)
+            if (!demande.active)
                 size = 0;
             break;
         case FeedItemFilterKeyDemandeEvent:
-            if (!parents[2].active)
+            if (!demande.active)
                 size = 0;
             break;
         case FeedItemFilterKeyDemandeHelp:
-            if (!parents[2].active)
+            if (!demande.active)
                 size = 0;
             break;
         case FeedItemFilterKeyDemandeResource:
-            if (!parents[2].active)
+            if (!demande.active)
                 size = 0;
             break;
         case FeedItemFilterKeyDemandeInfo:
-            if (!parents[2].active)
+            if (!demande.active)
                size = 0;
             break;
         case FeedItemFilterKeyDemandeSkill:
-            if (!parents[2].active)
+            if (!demande.active)
                 size = 0;
             break;
         case FeedItemFilterKeyDemandeOther:
-            if (!parents[2].active)
+            if (!demande.active)
                 size = 0;
             break;
         case FeedItemFilterKeyContributionSocial:
-            if (!parents[1].active)
+            if (!contribution.active)
                 size = 0;
             break;
         case FeedItemFilterKeyContributionEvent:
-            if (!parents[1].active)
+            if (!contribution.active)
                 size = 0;
             break;
         case FeedItemFilterKeyContributionHelp:
-            if (!parents[1].active)
+            if (!contribution.active)
                 size = 0;
             break;
         case FeedItemFilterKeyContributionInfo:
-            if (!parents[1].active)
+            if (!contribution.active)
                 size = 0;
             break;
         case FeedItemFilterKeyContributionResource:
-            if (!parents[1].active)
+            if (!contribution.active)
                 size = 0;
             break;
         case FeedItemFilterKeyContributionSkill:
-            if (!parents[1].active)
+            if (!contribution.active)
                 size = 0;
             break;
         case FeedItemFilterKeyContributionOther:
-            if (!parents[1].active)
+            if (!contribution.active)
                 size = 0;
             break;
         case FeedItemFilterKeyMedical:
@@ -132,8 +144,8 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *itemsAtSection = (NSArray *)self.groupedSource[indexPath.section];
-    if(indexPath.row == itemsAtSection.count - 1)
-        cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.size.width, 0, 0);
+    if(itemsAtSection.count > 10 && indexPath.row == itemsAtSection.count / 2 - 1)
+        cell.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0);
 }
 
 @end
