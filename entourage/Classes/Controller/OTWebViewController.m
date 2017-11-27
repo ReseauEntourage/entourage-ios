@@ -26,12 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSURL *url = [NSURL URLWithString: self.urlString];
     [self configureUIBarButtonItems];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    
-    
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                                     initWithTarget:self
                                                     action:@selector(moveViewWithGestureRecognizer:)];
@@ -40,6 +35,14 @@
                                                                                            action:@selector(tap:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
     _webView.delegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    NSURL *url = [NSURL URLWithString: self.urlString];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    self.webView.scalesPageToFit = YES;
     [_webView loadRequest:urlRequest];
 }
 
@@ -87,11 +90,6 @@
     [self setRightBarButtonView:rightButtons];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-}
-
 - (void)setRightBarButtonView:(NSMutableArray *)views
 {
     if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 11)
@@ -111,11 +109,15 @@
 }
 
 - (void)close {
-    [self dismissViewControllerAnimated:YES completion:^() {
-        [SVProgressHUD dismiss];
-        if ([self.webViewDelegate respondsToSelector:@selector(webview:)])
-            [self.webViewDelegate performSelector:@selector(webview:) withObject:nil];
-    }];
+    if(self.webView.canGoBack)
+        [self.webView goBack];
+    else {
+        [self dismissViewControllerAnimated:NO completion:^() {
+            [SVProgressHUD dismiss];
+            if ([self.webViewDelegate respondsToSelector:@selector(webview:)])
+                [self.webViewDelegate performSelector:@selector(webview:) withObject:nil];
+        }];
+    }
 }
 
 - (void)showOptions {
