@@ -12,7 +12,6 @@
 #import "UIViewController+menu.h"
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
-#import "OTEmailItemProvider.h"
 
 #define DISTANCE_ABOVE_NAVIGATION_BAR 65
 
