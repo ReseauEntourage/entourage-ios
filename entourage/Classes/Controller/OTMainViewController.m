@@ -322,6 +322,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (self.webview) {
+        [self showToursList];
         [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
     }
 }
