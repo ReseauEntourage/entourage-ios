@@ -12,6 +12,7 @@
 #import "UIViewController+menu.h"
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
+#import "OTEmailItemProvider.h"
 
 #define DISTANCE_ABOVE_NAVIGATION_BAR 65
 
@@ -138,7 +139,7 @@
                                                     style:UIAlertActionStyleDefault
                                                   handler:^(UIAlertAction *action)
     {
-        [self share:self.urlString];
+        [self share];
     }];
     [self displayAlertWithActions:@[openInBorwser, copyLink, share]];
 }
@@ -154,8 +155,9 @@
     [self presentViewController:alert animated:NO completion:nil];
 }
 
-- (void)share:(NSString *)content {
-    NSArray *objectsToShare = @[content];
+- (void)share {
+    NSURL *url = [NSURL URLWithString:self.urlString];
+    NSArray *objectsToShare = @[url];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare
                                                                              applicationActivities:nil];
     [self presentViewController:activityVC animated:YES completion:nil];
