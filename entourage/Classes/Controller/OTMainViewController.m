@@ -322,7 +322,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (self.webview) {
-        [self showToursList];
         [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
     }
 }
@@ -1268,6 +1267,7 @@
     else if ([segue.identifier isEqualToString:@"OTWebViewSegue"]) {
         OTWebViewController *controller = (OTWebViewController *)destinationViewController;
         controller.urlString = self.webview;
+        [self showToursList];
         self.parentViewController.view.alpha = 0.4;
         controller.webViewDelegate = self;
     }
