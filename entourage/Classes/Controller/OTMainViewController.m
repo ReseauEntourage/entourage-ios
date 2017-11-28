@@ -245,7 +245,6 @@
         self.encounters = [NSMutableArray arrayWithArray:items];
     } failure:^(NSError *error) {
         NSLog(@"GET TOUR ENCOUNTERSErr: %@", error.description);
-        
     }];
     [self feedMapViewWithEncounters];
 }
@@ -935,8 +934,7 @@
 
 - (void)webview:(NSString *)url {
     self.webview = url;
-    self.navigationController.navigationBar.alpha = 100;
-    self.view.alpha = 100;
+    self.parentViewController.view.alpha = 100;
     if (self.webview) {
         [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
     }
@@ -1268,9 +1266,8 @@
     }
     else if ([segue.identifier isEqualToString:@"OTWebViewSegue"]) {
         OTWebViewController *controller = (OTWebViewController *)destinationViewController;
-        self.navigationController.navigationBar.alpha = 0.4;
-        self.view.alpha = 0.4;
         controller.urlString = self.webview;
+        self.parentViewController.view.alpha = 0.4;
         controller.webViewDelegate = self;
     }
 }
