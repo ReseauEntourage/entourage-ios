@@ -23,7 +23,7 @@
         title =[self attributedTitle:filter.title boldChars:filter.title.length];
     }
     self.lblTitle.attributedText = title;
-    [self.swtActive setOn:filter.active animated:YES];
+    [self.swtActive setOn:filter.active animated:NO];
 }
 
 - (NSMutableAttributedString *) attributedTitle: (NSString *)title
