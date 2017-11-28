@@ -233,14 +233,14 @@
     OTCategoryType *demande = data[1];
     NSArray *contributionArray = [self contributionCategory:data[0]];
     NSArray *demandeArray = [self demandCategory:data[1]];
-    [action addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
-                                            active:[[self.categoryDictionary valueForKey:contribution.type] boolValue]
-                                          children:contributionArray]];
-    [action addObjectsFromArray:contributionArray];
     [action addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
                                             active:[[self.categoryDictionary valueForKey:demande.type] boolValue]
                                           children:demandeArray]];
     [action addObjectsFromArray:demandeArray];
+    [action addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                            active:[[self.categoryDictionary valueForKey:contribution.type] boolValue]
+                                          children:contributionArray]];
+    [action addObjectsFromArray:contributionArray];
     return action;
 }
 
