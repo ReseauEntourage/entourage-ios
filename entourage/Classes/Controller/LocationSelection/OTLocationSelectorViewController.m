@@ -76,6 +76,18 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    for(UIView *subview in self.searchBar.subviews){
+        UITextField *textField = subview.subviews[1];
+        UIView *emptyView = [[UIView alloc] initWithFrame:CGRectMake(5, 0, 13, 13)];
+        textField.leftView = emptyView;
+        UIImageView *leftImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search.png"]];
+        [leftImage setFrame:CGRectMake(5, 0, 13, 13)];
+        [textField.leftView addSubview: leftImage];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self zoomToCurrentLocation:nil];
