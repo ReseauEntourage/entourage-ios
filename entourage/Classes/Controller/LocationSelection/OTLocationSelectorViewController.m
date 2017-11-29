@@ -52,7 +52,8 @@
     self.resultSearchController.searchResultsUpdater = self.locationSearchTable;
     
     _searchBar = self.resultSearchController.searchBar;
-    
+    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    _searchBar.placeholder = OTLocalizedString(@"searchLocationPlaceholder");
     if (@available(iOS 11.0, *)) {
         self.title = OTLocalizedString(@"myLocation").uppercaseString;
         self.navigationItem.searchController = self.resultSearchController;
@@ -60,10 +61,17 @@
     else
     {
         self.navigationItem.titleView = self.resultSearchController.searchBar;
+        for(UIView *subview in self.searchBar.subviews){
+            UITextField *textField = subview.subviews[1];
+            UIView *emptyView = [[UIView alloc] initWithFrame:CGRectMake(5, 0, 13, 13)];
+            textField.leftView = emptyView;
+            UIImageView *leftImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search.png"]];
+            [leftImage setFrame:CGRectMake(5, 0, 13, 13)];
+            leftImage.contentMode = UIViewContentModeCenter;
+            [textField.leftView addSubview: leftImage];
+        }
     }
     
-    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
-    _searchBar.placeholder = OTLocalizedString(@"searchLocationPlaceholder");
     self.resultSearchController.hidesNavigationBarDuringPresentation = NO;
     self.resultSearchController.dimsBackgroundDuringPresentation = YES;
     self.definesPresentationContext = YES;
@@ -74,19 +82,6 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    for(UIView *subview in self.searchBar.subviews){
-        UITextField *textField = subview.subviews[1];
-        UIView *emptyView = [[UIView alloc] initWithFrame:CGRectMake(5, 0, 13, 13)];
-        textField.leftView = emptyView;
-        UIImageView *leftImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search.png"]];
-        [leftImage setFrame:CGRectMake(5, 0, 13, 13)];
-        leftImage.contentMode = UIViewContentModeCenter;
-        [textField.leftView addSubview: leftImage];
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
