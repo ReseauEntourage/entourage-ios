@@ -84,6 +84,7 @@
         textField.leftView = emptyView;
         UIImageView *leftImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search.png"]];
         [leftImage setFrame:CGRectMake(5, 0, 13, 13)];
+        leftImage.contentMode = UIViewContentModeCenter;
         [textField.leftView addSubview: leftImage];
     }
 }
