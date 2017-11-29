@@ -218,6 +218,7 @@ continueUserActivity:(NSUserActivity *)userActivity
     
 #if BETA
     UINavigationBar.appearance.barTintColor = [UIColor redColor];
+    UINavigationBar.appearance.tintColor = [UIColor redColor];
     UINavigationBar.appearance.backgroundColor = [UIColor redColor];
 #endif
 }
