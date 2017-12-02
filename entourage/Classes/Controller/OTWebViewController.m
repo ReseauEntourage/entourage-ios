@@ -27,6 +27,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureUIBarButtonItems];
+    
+    self.animatedView.layer.borderWidth = 14;
+    CAShapeLayer * maskLayer = [CAShapeLayer layer];
+    maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.view.bounds
+                                           byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight
+                                                 cornerRadii: (CGSize){14, 14}].CGPath;
+    self.animatedView.layer.mask = maskLayer;
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                                     initWithTarget:self
                                                     action:@selector(moveViewWithGestureRecognizer:)];
