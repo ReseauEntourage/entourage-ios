@@ -241,6 +241,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "profile" = "profil";
 "view_profile" = "Voir Profil";
 "save" = "Enregistrer";
+"cancel" = "Annuler";
 "invalidEmail" = "Email invalide";
 "invalidFirstName" = "Prénom invalide";
 "invalidLastName" = "Nom invalide";
