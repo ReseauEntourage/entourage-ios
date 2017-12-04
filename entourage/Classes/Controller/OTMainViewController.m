@@ -934,7 +934,7 @@
 
 - (void)webview:(NSString *)url {
     self.webview = url;
-    self.parentViewController.view.alpha = 100;
+    [self.parentViewController.view.subviews.lastObject removeFromSuperview];
     if (self.webview) {
         [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
     }
@@ -1268,7 +1268,10 @@
         OTWebViewController *controller = (OTWebViewController *)destinationViewController;
         controller.urlString = self.webview;
         [self showToursList];
-        self.parentViewController.view.alpha = 0.4;
+        UIView *grayView = [[UIView alloc] initWithFrame:self.parentViewController.view.frame];
+        grayView.backgroundColor = [UIColor appGreyishColor];
+        grayView.alpha = 0.6;
+        [self.parentViewController.view addSubview:grayView];
         controller.webViewDelegate = self;
     }
 }
