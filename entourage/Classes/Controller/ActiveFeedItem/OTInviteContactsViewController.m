@@ -34,7 +34,11 @@
     
     [self.tableDataSource initialize];
     self.title = OTLocalizedString(@"contacts").uppercaseString;
-    self.btnSave = [UIBarButtonItem createWithTitle:OTLocalizedString(@"send") withTarget:self andAction:@selector(save) colored:[UIColor appOrangeColor]];
+    self.btnSave = [UIBarButtonItem createWithTitle:OTLocalizedString(@"send")
+                                         withTarget:self
+                                          andAction:@selector(save)
+                                            andFont:@"SFUIText-Bold"
+                                            colored:[UIColor appOrangeColor]];
     [self.btnSave changeEnabled:NO];
     [self.navigationItem setRightBarButtonItem:self.btnSave];
     self.tblContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

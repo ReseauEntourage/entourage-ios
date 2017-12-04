@@ -39,6 +39,7 @@
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
                                                         withTarget:self
                                                          andAction:@selector(saveFilters)
+                                                           andFont:@"SFUIText-Bold"
                                                            colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
 }

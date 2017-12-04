@@ -20,7 +20,7 @@
 
 // tour properties
 @property (nonatomic, strong) OTFeedItem *selectedFeedItem;
-
+@property (nonatomic, strong) NSString *webview;
 
 - (void)zoomToCurrentLocation:(id)sender;
 - (void)willChangePosition;

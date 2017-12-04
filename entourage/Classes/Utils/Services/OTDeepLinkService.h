@@ -15,6 +15,7 @@
 - (UIViewController *)getTopViewController;
 - (void)showProfileFromAnywhereForUser:(NSNumber *)userId;
 - (void)navigateToLogin;
-- (void)handleFeedAndBadgeLinks:(NSString *)host;
+- (void)handleFeedAndBadgeLinks:(NSURL *)url;
+- (void)openWithWebView: (NSURL *)url;
 
 @end

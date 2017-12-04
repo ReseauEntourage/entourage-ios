@@ -86,43 +86,63 @@
     [currentController showViewController:loginController sender:self];
 }
 
-- (void)handleFeedAndBadgeLinks: (NSString *)host {
+- (void)handleFeedAndBadgeLinks: (NSURL *)url {
+    NSString *host = url.host;
+    NSString *query = url.query;
     self.link = host;
     if(!TOKEN) {
         [self navigateToLogin];
     } else {
         if ([host isEqualToString:@"feed"]) {
-            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            OTMainViewController *publicFeedItemController = (OTMainViewController *)[publicFeedItemStorybard   instantiateInitialViewController];
-            [self updateAppWindow:publicFeedItemController];
-        
+            UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            OTMainViewController *mainController = (OTMainViewController *)[mainStorybard instantiateInitialViewController];
+            [self updateAppWindow:mainController];
         } else if ([host isEqualToString:@"badge"]) {
-            OTSWRevealViewController *revealController = [self setupRevealController];
-            UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
-            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"UserProfileEditor" bundle:nil];
-            OTSelectAssociationViewController *publicFeedItemController = (OTSelectAssociationViewController *)[publicFeedItemStorybard instantiateViewControllerWithIdentifier:@"SelectAssociation"];
-            [mainController setViewControllers:@[mainController.topViewController, publicFeedItemController]];
-            [self updateAppWindow:revealController];
+            OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[self instatiateControllerWithStoryboardIdentifier:@"UserProfileEditor" andControllerIdentifier:@"SelectAssociation"];
+            [self showController:selectAssociationController];
+        } else if ([host isEqualToString:@"webview"]) {
+            OTMainViewController *publicFeedItemController = (OTMainViewController *)[self instatiateControllerWithStoryboardIdentifier:@"Main"
+                                    andControllerIdentifier:@"OTMain"];
+            NSArray *elts = [query componentsSeparatedByString:@"="];
+            publicFeedItemController.webview = elts[1];
+            [self showController:publicFeedItemController];
         }
     }
 }
 
-- (void)prepareControllers:(OTFeedItem *)feedItem {
+- (void)openWithWebView: (NSURL *)url {
+    OTMainViewController *publicFeedItemController = (OTMainViewController *)[self instatiateControllerWithStoryboardIdentifier:@"Main" andControllerIdentifier:@"OTMain"];
+    publicFeedItemController.webview = url.absoluteString;
+    [self showController:publicFeedItemController];
+}
+
+- (UIViewController *)instatiateControllerWithStoryboardIdentifier: (NSString *)storyboardId
+                                           andControllerIdentifier: (NSString *)controllerId {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardId bundle:nil];
+    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:controllerId];
+    return controller;
+}
+
+- (void)showController: (UIViewController *)controller {
     OTSWRevealViewController *revealController = [self setupRevealController];
     UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
+    [mainController setViewControllers:@[mainController.topViewController, controller]];
+    [self updateAppWindow:revealController];
+}
+
+- (void)prepareControllers:(OTFeedItem *)feedItem {
     if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
         UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
         OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
         publicFeedItemController.feedItem = feedItem;
-        [mainController setViewControllers:@[mainController.topViewController, publicFeedItemController]];
+        [self showController:publicFeedItemController];
     }
     else {
         UIStoryboard *activeFeedItemStorybard = [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];
         OTActiveFeedItemViewController *activeFeedItemController = (OTActiveFeedItemViewController *)[activeFeedItemStorybard instantiateInitialViewController];
         activeFeedItemController.feedItem = feedItem;
-        [mainController setViewControllers:@[mainController.topViewController, activeFeedItemController]];
+        [self showController:activeFeedItemController];
     }
-    [self updateAppWindow:revealController];
 }
 
 - (OTSWRevealViewController *)setupRevealController {

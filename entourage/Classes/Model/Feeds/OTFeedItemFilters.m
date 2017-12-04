@@ -27,6 +27,10 @@
     return [NSArray new];
 }
 
+- (NSArray *)parentArray {
+    return [NSArray new];
+}
+
 - (NSMutableDictionary *)toDictionaryWithPageNumber:(int)pageNumber andSize:(int)pageSize {
     return [NSMutableDictionary new];
 }

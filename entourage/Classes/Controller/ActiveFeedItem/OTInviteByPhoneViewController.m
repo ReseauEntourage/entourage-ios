@@ -30,7 +30,11 @@
     [super viewDidLoad];
     
     self.title = OTLocalizedString(@"mobilePhone").uppercaseString;
-    self.btnSave = [UIBarButtonItem createWithTitle:OTLocalizedString(@"send") withTarget:self andAction:@selector(save) colored:[UIColor appOrangeColor]];
+    self.btnSave = [UIBarButtonItem createWithTitle:OTLocalizedString(@"send")
+                                         withTarget:self
+                                          andAction:@selector(save)
+                                            andFont:@"SFUIText-Bold"
+                                            colored:[UIColor appOrangeColor]];
     [self.btnSave changeEnabled:NO];
     [self.navigationItem setRightBarButtonItem:self.btnSave];
     [self.txtPhone setupWithPlaceholderColor:[UIColor appGreyishColor] andFont:[UIFont systemFontOfSize:17 weight:UIFontWeightLight]];

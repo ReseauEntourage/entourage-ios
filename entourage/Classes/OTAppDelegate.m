@@ -61,7 +61,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [Flurry startSession:[ConfigurationManager shared].flurryAPIKey withSessionBuilder:builder];
 #endif
     NSString *mixpanelToken = [ConfigurationManager shared].MixpanelToken;
-    [Mixpanel sharedInstanceWithToken:mixpanelToken];
+    [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
     [Mixpanel sharedInstance].enableLogging = YES;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
@@ -135,7 +135,7 @@ continueUserActivity:(NSUserActivity *)userActivity
          annotation:(id)annotation
 {
     if ([[url scheme] isEqualToString:@"entourage"]) {
-        [[OTDeepLinkService new] handleFeedAndBadgeLinks:url.host];
+        [[OTDeepLinkService new] handleFeedAndBadgeLinks:url];
         return YES;
     }
     return NO;
@@ -218,6 +218,7 @@ continueUserActivity:(NSUserActivity *)userActivity
     
 #if BETA
     UINavigationBar.appearance.barTintColor = [UIColor redColor];
+    UINavigationBar.appearance.tintColor = [UIColor redColor];
     UINavigationBar.appearance.backgroundColor = [UIColor redColor];
 #endif
 }

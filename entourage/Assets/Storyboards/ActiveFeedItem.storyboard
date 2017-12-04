@@ -505,13 +505,13 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7L-pV-Coz">
-                                                                    <rect key="frame" x="93.666666666666657" y="90" width="73" height="18"/>
+                                                                    <rect key="frame" x="94" y="90" width="73" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gDf-jH-qfI">
-                                                                    <rect key="frame" x="32.333333333333329" y="108" width="196.33333333333337" height="18"/>
+                                                                    <rect key="frame" x="32.666666666666671" y="108" width="196.33333333333331" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -698,13 +698,13 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gES-5W-eoJ">
-                                                                    <rect key="frame" x="100.66666666666666" y="90" width="73" height="18"/>
+                                                                    <rect key="frame" x="101" y="90" width="73" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="veut rejoindre votre maraude." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="npE-Su-q4O">
-                                                                    <rect key="frame" x="39.333333333333329" y="108" width="196.33333333333337" height="18"/>
+                                                                    <rect key="frame" x="39.666666666666671" y="108" width="196.33333333333331" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1848,12 +1848,12 @@
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fUf-PJ-SgA"/>
-        <segue reference="qbj-7b-m5F"/>
+        <segue reference="TAD-d7-tmZ"/>
+        <segue reference="zFK-Fj-hWR"/>
         <segue reference="nan-zV-dem"/>
-        <segue reference="Cgj-Wq-qez"/>
-        <segue reference="DLP-On-QzP"/>
-        <segue reference="0Fj-Nh-lj4"/>
-        <segue reference="Rwq-4K-0sd"/>
+        <segue reference="ffc-Pt-QuG"/>
+        <segue reference="8gM-o4-A6h"/>
+        <segue reference="r9m-eb-lob"/>
+        <segue reference="5BX-au-xTN"/>
     </inferredMetricsTieBreakers>
 </document>

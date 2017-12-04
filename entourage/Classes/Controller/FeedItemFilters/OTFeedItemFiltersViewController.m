@@ -15,6 +15,7 @@
 
 @interface OTFeedItemFiltersViewController ()
 
+@property (nonatomic, strong) NSArray *parentArray;
 @property (strong, nonatomic) IBOutlet OTFeedItemsFiltersTableDataSource *tableDataSource;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -28,6 +29,7 @@
     [self.tableDataSource initializeWith:self.filterDelegate.currentFilter];
     self.title =  OTLocalizedString(@"filters").uppercaseString;
     self.tableView.tableFooterView = [UIView new];
+    self.parentArray = self.tableDataSource.parentArray;
     [self setupToolbarButtons];
 }
 
@@ -35,7 +37,11 @@
 
 - (void)setupToolbarButtons {
     [self setupCloseModalWithTarget:self andSelector:@selector(close)];
-    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString withTarget:self andAction:@selector(saveFilters) colored:[UIColor appOrangeColor]];
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
+                                                        withTarget:self
+                                                         andAction:@selector(saveFilters)
+                                                           andFont:@"SFUIText-Bold"    
+                                                           colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
 }
 

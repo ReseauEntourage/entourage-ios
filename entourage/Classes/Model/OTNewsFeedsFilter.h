@@ -21,6 +21,23 @@
 @property (nonatomic) BOOL showTours;
 @property (nonatomic) BOOL showOnlyMyEntourages;
 @property (nonatomic) BOOL showFromOrganisation;
+
+@property (nonatomic) BOOL showDemandeSocial;
+@property (nonatomic) BOOL showDemandeEvent;
+@property (nonatomic) BOOL showDemandeHelp;
+@property (nonatomic) BOOL showDemandeResource;
+@property (nonatomic) BOOL showDemandeInfo;
+@property (nonatomic) BOOL showDemandeSkill;
+@property (nonatomic) BOOL showDemandeOther;
+
+@property (nonatomic) BOOL showContributionSocial;
+@property (nonatomic) BOOL showContributionEvent;
+@property (nonatomic) BOOL showContributionHelp;
+@property (nonatomic) BOOL showContributionResource;
+@property (nonatomic) BOOL showContributionInfo;
+@property (nonatomic) BOOL showContributionSkill;
+@property (nonatomic) BOOL showContributionOther;
+
 @property (nonatomic) int timeframeInHours;
 @property (nonatomic) int distance;
 @property (nonatomic) CLLocationCoordinate2D location;

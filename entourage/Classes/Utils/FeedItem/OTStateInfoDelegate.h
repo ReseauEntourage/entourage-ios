@@ -31,6 +31,8 @@ typedef enum {
 - (BOOL)canEdit;
 - (BOOL)canCancelJoinRequest;
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure;
+
+@optional
 - (void)loadWithSuccess2:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure;
 
 @end

@@ -19,9 +19,17 @@
     return btn;
 }
 
-+ (UIBarButtonItem *)createWithTitle:(NSString *)title withTarget:(id)target andAction:(SEL)action colored:(UIColor *)color {
-    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleDone target:target action:action];
-    [btn changeColor:color];
++ (UIBarButtonItem *)createWithTitle:(NSString *)title
+                          withTarget:(id)target
+                           andAction:(SEL)action
+                             andFont:(NSString *)font
+                             colored:(UIColor *)color {
+    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:title
+                                                            style:UIBarButtonItemStyleDone
+                                                           target:target
+                                                           action:action];
+    
+    [btn changeFont:font andColor:color];
     return btn;
 }
 
@@ -35,6 +43,15 @@
 - (void)changeColor:(UIColor *)color {
     [self setTintColor:color];
     [self setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: color, NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+}
+
+- (void)changeFont:(NSString *)font
+          andColor:(UIColor *)color {
+    [self setTitleTextAttributes:@{
+                                   NSFontAttributeName: [UIFont fontWithName:font size:17],
+                                   NSForegroundColorAttributeName: color
+                                   }
+                        forState:UIControlStateNormal];
 }
 
 @end

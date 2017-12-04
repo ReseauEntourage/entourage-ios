@@ -263,7 +263,7 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                            <rect key="frame" x="124.5" y="161" width="126.5" height="18"/>
+                            <rect key="frame" x="125" y="161" width="126.5" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="R2h-5U-huy"/>
                             </constraints>
@@ -356,6 +356,68 @@
             </objects>
             <point key="canvasLocation" x="1271.5" y="-152"/>
         </scene>
+        <!--Web View Controller-->
+        <scene sceneID="H9m-pk-iGX">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="h0R-pH-Cwq" customClass="OTWebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="i4p-s6-ToZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vvu-fT-iGj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2gM-Ps-qrY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAP-Ac-6px">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMH-HI-PA1">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <items>
+                                            <navigationItem id="E1y-k2-fDC">
+                                                <barButtonItem key="backBarButtonItem" title="Back" id="UJV-aO-aMF"/>
+                                            </navigationItem>
+                                        </items>
+                                        <connections>
+                                            <outlet property="delegate" destination="2gM-Ps-qrY" id="siO-kM-Ko0"/>
+                                        </connections>
+                                    </navigationBar>
+                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zp8-5a-Eze">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="559"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </webView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="zp8-5a-Eze" firstAttribute="leading" secondItem="eAP-Ac-6px" secondAttribute="leading" id="3SQ-kY-t4f"/>
+                                    <constraint firstItem="zp8-5a-Eze" firstAttribute="top" secondItem="kMH-HI-PA1" secondAttribute="bottom" id="CZ5-oD-uKq"/>
+                                    <constraint firstAttribute="bottom" secondItem="zp8-5a-Eze" secondAttribute="bottom" id="MIf-Cu-GYe"/>
+                                    <constraint firstItem="kMH-HI-PA1" firstAttribute="leading" secondItem="eAP-Ac-6px" secondAttribute="leading" id="QxY-rX-iI5"/>
+                                    <constraint firstItem="zp8-5a-Eze" firstAttribute="top" secondItem="kMH-HI-PA1" secondAttribute="bottom" id="T5j-K3-Kg7"/>
+                                    <constraint firstAttribute="trailing" secondItem="zp8-5a-Eze" secondAttribute="trailing" id="dvV-mp-uG6"/>
+                                    <constraint firstItem="kMH-HI-PA1" firstAttribute="top" secondItem="eAP-Ac-6px" secondAttribute="top" id="e6w-MS-yiM"/>
+                                    <constraint firstAttribute="trailing" secondItem="kMH-HI-PA1" secondAttribute="trailing" id="eVH-VK-lUN"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eAP-Ac-6px" firstAttribute="top" secondItem="i4p-s6-ToZ" secondAttribute="bottom" constant="44" id="5d7-P6-ICl"/>
+                            <constraint firstItem="Vvu-fT-iGj" firstAttribute="top" secondItem="eAP-Ac-6px" secondAttribute="bottom" id="I6L-eq-yK4"/>
+                            <constraint firstAttribute="trailing" secondItem="eAP-Ac-6px" secondAttribute="trailing" id="K56-TX-HeT"/>
+                            <constraint firstItem="eAP-Ac-6px" firstAttribute="leading" secondItem="2gM-Ps-qrY" secondAttribute="leading" id="kZz-lQ-S7W"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="animatedView" destination="eAP-Ac-6px" id="b0U-ha-Oof"/>
+                        <outlet property="navigationItem" destination="E1y-k2-fDC" id="6Eo-Pm-9qN"/>
+                        <outlet property="webView" destination="zp8-5a-Eze" id="OLk-Tk-G6S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WNn-77-d8m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2052" y="-15"/>
+        </scene>
         <!--ActiveFeedItem-->
         <scene sceneID="19F-zf-hvr">
             <objects>
@@ -379,7 +441,7 @@
         <!--Main-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" userLabel="Main" customClass="OTMainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTMain" automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" userLabel="Main" customClass="OTMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -1312,6 +1374,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                         <segue destination="odF-HL-m84" kind="modal" identifier="OTTourOptionsSegue" id="J6i-IA-3bb"/>
                         <segue destination="UzR-b4-49u" kind="modal" identifier="SolidarityGuideSegue" id="NKf-Cg-AGD"/>
                         <segue destination="Ry3-hZ-KaJ" kind="modal" identifier="OTCreateMeeting" id="ds2-Jp-hTM"/>
+                        <segue destination="h0R-pH-Cwq" kind="modal" identifier="OTWebViewSegue" id="Eos-gC-E7N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -1643,6 +1706,19 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAn-9W-qGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1252" y="-621"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zBr-fw-9rC">
+            <objects>
+                <navigationController id="SGQ-vt-M0a" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uEb-EE-AFW">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rbx-kT-TnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1612" y="829"/>
         </scene>
         <!--QuitFeedItem-->
         <scene sceneID="BFl-vb-SXz">

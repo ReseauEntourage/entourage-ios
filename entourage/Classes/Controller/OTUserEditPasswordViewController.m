@@ -42,7 +42,11 @@
 
 - (void)setupToolbarButtons {
     [self setupCloseModal];
-    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString withTarget:self andAction:@selector(doValidate:) colored:[UIColor appOrangeColor]];
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
+                                                        withTarget:self
+                                                         andAction:@selector(doValidate:)
+                                                           andFont:@"SFUIText-Bold"
+                                                           colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
 }
 

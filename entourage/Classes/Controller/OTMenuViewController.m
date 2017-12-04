@@ -29,6 +29,7 @@
 #import "OTAPIConsts.h"
 #import "OTSolidarityGuideFiltersViewController.h"
 #import "OTHTTPRequestManager.h"
+#import "OTDeepLinkService.h"
 
 #define HEADER_CELL_INDEX 7
 #define LOG_OUT_CELL_INDEX 8
@@ -175,9 +176,13 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
                 [OTLogger logEvent:@"ViewEthicsChartClick"];
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_atd_partner")])
                 [OTLogger logEvent:@"ATDPartnershipView"];
+            
             NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, menuItem.identifier, TOKEN];
             NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+            if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")])
+                [[OTDeepLinkService new] openWithWebView: [NSURL URLWithString:url]];
+            else
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
         }
 	}
     [[tableView cellForRowAtIndexPath:indexPath]setSelected:NO];

@@ -12,8 +12,8 @@
 
 - (void)configureWith:(OTFeedItemFilter *)filter {
     [super configureWith:filter];
-    
     self.image.image = [UIImage imageNamed:filter.image];
+    self.image.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
 @end

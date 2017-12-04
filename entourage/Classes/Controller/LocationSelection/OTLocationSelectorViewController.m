@@ -40,7 +40,11 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
-    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate") withTarget:self andAction:@selector(saveNewLocation) colored:[UIColor appOrangeColor]];
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
+                                                        withTarget:self
+                                                         andAction:@selector(saveNewLocation)
+                                                           andFont:@"SFUIText-Bold"
+                                                           colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
 
     self.locationSearchTable = [[UIStoryboard entourageEditorStoryboard] instantiateViewControllerWithIdentifier:@"OTLocationSearchTableViewController"];
@@ -48,7 +52,8 @@
     self.resultSearchController.searchResultsUpdater = self.locationSearchTable;
     
     _searchBar = self.resultSearchController.searchBar;
-    
+    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    _searchBar.placeholder = OTLocalizedString(@"searchLocationPlaceholder");
     if (@available(iOS 11.0, *)) {
         self.title = OTLocalizedString(@"myLocation").uppercaseString;
         self.navigationItem.searchController = self.resultSearchController;
@@ -56,10 +61,17 @@
     else
     {
         self.navigationItem.titleView = self.resultSearchController.searchBar;
+        for(UIView *subview in self.searchBar.subviews){
+            UITextField *textField = subview.subviews[1];
+            UIView *emptyView = [[UIView alloc] initWithFrame:CGRectMake(5, 0, 13, 13)];
+            textField.leftView = emptyView;
+            UIImageView *leftImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search.png"]];
+            [leftImage setFrame:CGRectMake(5, 0, 13, 13)];
+            leftImage.contentMode = UIViewContentModeCenter;
+            [textField.leftView addSubview: leftImage];
+        }
     }
     
-    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
-    _searchBar.placeholder = OTLocalizedString(@"searchLocationPlaceholder");
     self.resultSearchController.hidesNavigationBarDuringPresentation = NO;
     self.resultSearchController.dimsBackgroundDuringPresentation = YES;
     self.definesPresentationContext = YES;

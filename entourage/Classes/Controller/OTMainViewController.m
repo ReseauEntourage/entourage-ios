@@ -88,6 +88,7 @@
 #import "KPClusteringController.h"
 #import "KPAnnotation.h"
 #import "OTAnnouncement.h"
+#import "OTWebViewController.h"
 
 #define MAPVIEW_HEIGHT 224.f
 
@@ -110,7 +111,8 @@
     OTSolidarityGuideFilterDelegate,
     OTNewsFeedsSourceDelegate,
     OTTourCreatorBehaviorDelegate,
-    OTHeatzonesCollectionViewDelegate
+    OTHeatzonesCollectionViewDelegate,
+    OTWebViewDelegate
 >
 
 @property (nonatomic, weak) IBOutlet OTFeedItemsTableView           *tableView;
@@ -243,7 +245,6 @@
         self.encounters = [NSMutableArray arrayWithArray:items];
     } failure:^(NSError *error) {
         NSLog(@"GET TOUR ENCOUNTERSErr: %@", error.description);
-        
     }];
     [self feedMapViewWithEncounters];
 }
@@ -316,6 +317,13 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.newsFeedsSourceBehavior pause];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (self.webview) {
+        [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -922,6 +930,16 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROPOSE_STRUCTURE_URL]];
 }
 
+#pragma mark - OTWebViewDelegate
+
+- (void)webview:(NSString *)url {
+    self.webview = url;
+    self.parentViewController.view.alpha = 100;
+    if (self.webview) {
+        [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
+    }
+}
+
 #pragma mark - EntourageEditorDelegate
 
 - (void)didEditEntourage:(OTEntourage *)entourage {
@@ -942,8 +960,7 @@
 
 - (void)filterChanged:(OTNewsFeedsFilter *)filter {
     self.currentFilter = filter;
-    if(self.currentFilter.isPro)
-        [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
+    [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
     [self reloadFeeds];
 }
 
@@ -1123,7 +1140,7 @@
         
         MKCoordinateRegion region;
         region = MKCoordinateRegionMakeWithDistance(self.mapView.centerCoordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
-        [self.mapView setRegion:region animated:NO];
+        [self.mapView setRegion:region animated:YES];
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
         [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     }];
@@ -1246,6 +1263,13 @@
     else if([segue.identifier isEqualToString:@"MyEntouragesSegue"]) {
         OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
         controller.optionsDelegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"OTWebViewSegue"]) {
+        OTWebViewController *controller = (OTWebViewController *)destinationViewController;
+        controller.urlString = self.webview;
+        [self showToursList];
+        self.parentViewController.view.alpha = 0.4;
+        controller.webViewDelegate = self;
     }
 }
 
