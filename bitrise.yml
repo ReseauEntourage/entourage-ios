@@ -5,7 +5,7 @@ trigger_map:
 - push_branch: develop
   workflow: beta
 - tag: "*"
-  workflow: testflight
+  workflow: testflightFull
 workflows:
   beta:
     steps:
@@ -57,7 +57,156 @@ workflows:
         - lane: beta appaloosa_api_key:$APPALOOSA_API_KEY appaloosa_store_id:$APPALOOSA_STORE_ID
     - deploy-to-bitrise-io:
         is_always_run: false
-  beta2.1:
+    - slack:
+        inputs:
+        - channel: "#androiddev"
+        - from_username: 'Bitrise '
+        - from_username_on_error: Bitrise
+        - message: |-
+            New *DEV* android build is available: $BITRISE_BUILD_NUMBER  here:
+            $BITRISE_APP_URL
+        - message_on_error: Oups, build has failed for iOS...
+        - webhook_url: https://hooks.slack.com/services/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
+  testflightFull:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone:
+        inputs:
+        - commit: ''
+        - tag: ''
+    - cache-pull: {}
+    - certificate-and-profile-installer: {}
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            echo "Download Amazon credentials"
+
+            staging_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/staging.plist
+            prod_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/prod.plist
+            amazon_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTAmazonConsts.h
+            mixpanel_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTMixpanelConsts.h
+
+            # download the fileS
+            wget -O "$staging_file_local_path" "$BITRISEIO_STAGING_PLIST_URL"
+            wget -O "$prod_file_local_path" "$BITRISEIO_PRODUCTION_PLIST_URL"
+
+            wget -O "$amazon_consts_file" "$BITRISEIO_OTAMAZONCONSTS_URL"
+            wget -O "$mixpanel_consts_file" "$BITRISEIO_OTMIXPANELCONSTS_URL"
+
+            #gem install badge
+    - recursive-touch:
+        inputs:
+        - touch_time: '2017-10-25T15:00:00+00:00'
+    - fastlane:
+        inputs:
+        - lane: deploy_to_TestFlight
+    - fastlane:
+        inputs:
+        - lane: refresh_dsyms api_token:$CRASHLYTICS_API_TOKEN
+    - deploy-to-bitrise-io:
+        inputs:
+        - notify_email_list: antoine@entourage.social, gregoire@entourage.social,  vaite@entourage.social
+    - cache-push:
+        inputs:
+        - cache_paths: "~/Library/Developer/Xcode/DerivedData"
+        - ignore_check_on_paths: "~/Library/Developer/Xcode/DerivedData"
+  testflight:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone:
+        inputs:
+        - commit: ''
+        - tag: ''
+    - cache-pull: {}
+    - certificate-and-profile-installer: {}
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            #set -x
+
+            echo "Download Amazon credentials"
+
+            staging_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/staging.plist
+            prod_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/prod.plist
+            amazon_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTAmazonConsts.h
+            mixpanel_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTMixpanelConsts.h
+
+            # download the fileS
+            wget -O "$staging_file_local_path" "$BITRISEIO_STAGING_PLIST_URL"
+            wget -O "$prod_file_local_path" "$BITRISEIO_PRODUCTION_PLIST_URL"
+
+            wget -O "$amazon_consts_file" "$BITRISEIO_OTAMAZONCONSTS_URL"
+            wget -O "$mixpanel_consts_file" "$BITRISEIO_OTMIXPANELCONSTS_URL"
+
+            #gem install badge
+    - recursive-touch:
+        inputs:
+        - touch_time: '2017-10-25T15:00:00+00:00'
+    - fastlane:
+        inputs:
+        - lane: deploy_to_TestFlight
+    - deploy-to-bitrise-io:
+        inputs:
+        - notify_email_list: antoine@entourage.social, gregoire@entourage.social,
+            vaite@entourage.social
+    - cache-push:
+        inputs:
+        - cache_paths: "~/Library/Developer/Xcode/DerivedData"
+        - ignore_check_on_paths: "~/Library/Developer/Xcode/DerivedData"
+  WIPnewtfDEV:
+    steps:
+    - activate-ssh-key: {}
+    - git-clone: {}
+    - cache-pull: {}
+    - certificate-and-profile-installer: {}
+    - script:
+        inputs:
+        - content: |
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            echo "Download Amazon credentials"
+
+            staging_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/staging.plist
+            prod_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/prod.plist
+            amazon_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTAmazonConsts.h
+            mixpanel_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTMixpanelConsts.h
+
+            # download the files
+            wget -O "$staging_file_local_path" "$BITRISEIO_STAGING_PLIST_URL"
+            wget -O "$prod_file_local_path" "$BITRISEIO_PRODUCTION_PLIST_URL"
+
+            wget -O "$amazon_consts_file" "$BITRISEIO_OTAMAZONCONSTS_URL"
+            wget -O "$mixpanel_consts_file" "$BITRISEIO_OTMIXPANELCONSTS_URL"
+    - recreate-user-schemes:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+    - cocoapods-install: {}
+    - recursive-touch: {}
+    - xcode-archive:
+        inputs:
+        - export_method: app-store
+    - deploy-to-itunesconnect-deliver: {}
+    - deploy-to-bitrise-io:
+        inputs:
+        - notify_user_groups: owner
+    - cache-push: {}
+  WIPbDEV:
     steps:
     - activate-ssh-key@3.1.1:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
@@ -112,142 +261,6 @@ workflows:
         - changelog: ''
         - group_ids: '3446'
     - deploy-to-bitrise-io@1.2.5: {}
-  testflight:
-    steps:
-    - activate-ssh-key:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone:
-        inputs:
-        - commit: ''
-        - tag: ''
-    - cache-pull: {}
-    - certificate-and-profile-installer: {}
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            set -x
-
-            echo "Download Amazon credentials"
-
-            staging_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/staging.plist
-            prod_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/prod.plist
-            amazon_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTAmazonConsts.h
-            mixpanel_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTMixpanelConsts.h
-
-            # download the fileS
-            wget -O "$staging_file_local_path" "$BITRISEIO_STAGING_PLIST_URL"
-            wget -O "$prod_file_local_path" "$BITRISEIO_PRODUCTION_PLIST_URL"
-
-            wget -O "$amazon_consts_file" "$BITRISEIO_OTAMAZONCONSTS_URL"
-            wget -O "$mixpanel_consts_file" "$BITRISEIO_OTMIXPANELCONSTS_URL"
-
-            #gem install badge
-    - recursive-touch:
-        inputs:
-        - touch_time: '2017-10-25T15:00:00+00:00'
-    - fastlane:
-        inputs:
-        - lane: deploy_to_TestFlight
-    - fastlane:
-        inputs:
-        - lane: refresh_dsyms api_token:$CRASHLYTICS_API_TOKEN
-        - update_fastlane: 'false'
-    - deploy-to-bitrise-io: {}
-    - cache-push:
-        inputs:
-        - cache_paths: "~/Library/Developer/Xcode/DerivedData"
-        - ignore_check_on_paths: "~/Library/Developer/Xcode/DerivedData"
-  testflightLIGHT:
-    steps:
-    - activate-ssh-key:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone:
-        inputs:
-        - commit: ''
-        - tag: ''
-    - cache-pull@2.0.0: {}
-    - certificate-and-profile-installer: {}
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-
-            echo "Download Amazon credentials"
-
-            staging_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/staging.plist
-            prod_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/prod.plist
-            amazon_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTAmazonConsts.h
-            mixpanel_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTMixpanelConsts.h
-
-            # download the fileS
-            wget -O "$staging_file_local_path" "$BITRISEIO_STAGING_PLIST_URL"
-            wget -O "$prod_file_local_path" "$BITRISEIO_PRODUCTION_PLIST_URL"
-
-            wget -O "$amazon_consts_file" "$BITRISEIO_OTAMAZONCONSTS_URL"
-            wget -O "$mixpanel_consts_file" "$BITRISEIO_OTMIXPANELCONSTS_URL"
-
-            #gem install badge
-    - recursive-touch@0.9.0: {}
-    - fastlane:
-        inputs:
-        - lane: deploy_to_TestFlight
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_email_list: antoine@entourage.social, gregoire@entourage.social,
-            vaite@entourage.social
-    - cache-push@2.0.2:
-        inputs:
-        - cache_paths: "~/Library/Developer/Xcode/DerivedData"
-        - ignore_check_on_paths: "~/Library/Developer/Xcode/DerivedData"
-  newtestflightDEV:
-    steps:
-    - activate-ssh-key: {}
-    - git-clone: {}
-    - cache-pull: {}
-    - certificate-and-profile-installer: {}
-    - script:
-        inputs:
-        - content: |
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            set -x
-
-            echo "Download Amazon credentials"
-
-            staging_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/staging.plist
-            prod_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/prod.plist
-            amazon_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTAmazonConsts.h
-            mixpanel_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTMixpanelConsts.h
-
-            # download the files
-            wget -O "$staging_file_local_path" "$BITRISEIO_STAGING_PLIST_URL"
-            wget -O "$prod_file_local_path" "$BITRISEIO_PRODUCTION_PLIST_URL"
-
-            wget -O "$amazon_consts_file" "$BITRISEIO_OTAMAZONCONSTS_URL"
-            wget -O "$mixpanel_consts_file" "$BITRISEIO_OTMIXPANELCONSTS_URL"
-    - recreate-user-schemes:
-        inputs:
-        - project_path: "$BITRISE_PROJECT_PATH"
-    - cocoapods-install: {}
-    - recursive-touch: {}
-    - xcode-archive:
-        inputs:
-        - export_method: app-store
-    - deploy-to-itunesconnect-deliver: {}
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_user_groups: owner
-    - cache-push: {}
 app:
   envs:
   - opts:
