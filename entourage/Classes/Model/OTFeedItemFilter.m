@@ -24,6 +24,16 @@
 
 + (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
                          active:(BOOL)active
+                          title:(NSString *)title {
+    OTFeedItemFilter *result = [OTFeedItemFilter new];
+    result.key = key;
+    result.active = active;
+    result.title = title;
+    return result;
+}
+
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
                       withImage:(NSString *)image {
     OTFeedItemFilter *result = [OTFeedItemFilter createFor:key active:active children:@[]];
     result.image = image;

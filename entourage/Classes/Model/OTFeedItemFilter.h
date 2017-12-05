@@ -51,6 +51,9 @@ typedef enum {
                        children:(NSArray *)children;
 + (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
                          active:(BOOL)active
+                          title:(NSString *)title;
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
                       withImage:(NSString *)image;
 + (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
                          active:(BOOL)active
