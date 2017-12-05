@@ -946,7 +946,6 @@
     [self dismissViewControllerAnimated:YES completion:^{
         [self forceGetNewData];
     }];
-    [self showFeedInfo:self.newsFeedsSourceBehavior.feedItems.firstObject];
 }
 
 #pragma mark - OTFeedItemQuitDelegate
