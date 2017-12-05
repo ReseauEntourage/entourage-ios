@@ -241,6 +241,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "profile" = "profil";
 "view_profile" = "Voir Profil";
 "save" = "Enregistrer";
+"cancel" = "Annuler";
 "invalidEmail" = "Email invalide";
 "invalidFirstName" = "Prénom invalide";
 "invalidLastName" = "Nom invalide";
@@ -284,8 +285,8 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "filter_maraude_alimentary" = "Distributive";
 
 "filter_entourages_title" = "Types d’action";
-"filter_entourage_demand" = "Demande";
-"filter_entourage_contribution" = "Contribution";
+"filter_entourage_demand" = "Demandes";
+"filter_entourage_contribution" = "Contributions";
 "filter_entourage_show_tours" = "Maraudes";
 "filter_entourage_only_my_entourages" = "Ne visualiser que mes entourages";
 "filter_entourage_from_sympathisants_title" = "Montrer uniquement";

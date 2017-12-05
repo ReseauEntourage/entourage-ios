@@ -77,6 +77,9 @@
     self.definesPresentationContext = YES;
     self.locationSearchTable.mapView = self.mapView;
     self.locationSearchTable.pinDelegate = self;
+    UIBarButtonItem *cancelBtn = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    [cancelBtn setTitle:OTLocalizedString(@"cancel")];
+    [cancelBtn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"SFUItext-Bold" size:17], NSFontAttributeName, nil] forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
 }
 

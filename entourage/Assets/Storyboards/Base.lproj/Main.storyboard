@@ -263,7 +263,7 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                            <rect key="frame" x="125" y="161" width="126.5" height="18"/>
+                            <rect key="frame" x="124.5" y="161" width="126.5" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="R2h-5U-huy"/>
                             </constraints>
@@ -383,21 +383,36 @@
                                         </connections>
                                     </navigationBar>
                                     <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zp8-5a-Eze">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="559"/>
+                                        <rect key="frame" x="0.0" y="45" width="375" height="558"/>
                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </webView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLA-FM-huk">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="kGl-ey-Xn0"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="FLA-FM-huk" secondAttribute="trailing" id="2Gn-LF-kvo"/>
                                     <constraint firstItem="zp8-5a-Eze" firstAttribute="leading" secondItem="eAP-Ac-6px" secondAttribute="leading" id="3SQ-kY-t4f"/>
-                                    <constraint firstItem="zp8-5a-Eze" firstAttribute="top" secondItem="kMH-HI-PA1" secondAttribute="bottom" id="CZ5-oD-uKq"/>
+                                    <constraint firstItem="FLA-FM-huk" firstAttribute="top" secondItem="kMH-HI-PA1" secondAttribute="bottom" id="ABx-hg-X7k"/>
                                     <constraint firstAttribute="bottom" secondItem="zp8-5a-Eze" secondAttribute="bottom" id="MIf-Cu-GYe"/>
                                     <constraint firstItem="kMH-HI-PA1" firstAttribute="leading" secondItem="eAP-Ac-6px" secondAttribute="leading" id="QxY-rX-iI5"/>
-                                    <constraint firstItem="zp8-5a-Eze" firstAttribute="top" secondItem="kMH-HI-PA1" secondAttribute="bottom" id="T5j-K3-Kg7"/>
+                                    <constraint firstItem="zp8-5a-Eze" firstAttribute="top" secondItem="FLA-FM-huk" secondAttribute="bottom" id="SSJ-Oi-e9b"/>
                                     <constraint firstAttribute="trailing" secondItem="zp8-5a-Eze" secondAttribute="trailing" id="dvV-mp-uG6"/>
                                     <constraint firstItem="kMH-HI-PA1" firstAttribute="top" secondItem="eAP-Ac-6px" secondAttribute="top" id="e6w-MS-yiM"/>
                                     <constraint firstAttribute="trailing" secondItem="kMH-HI-PA1" secondAttribute="trailing" id="eVH-VK-lUN"/>
+                                    <constraint firstItem="FLA-FM-huk" firstAttribute="leading" secondItem="eAP-Ac-6px" secondAttribute="leading" id="uwy-zo-kBm"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

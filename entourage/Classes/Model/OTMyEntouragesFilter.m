@@ -69,10 +69,10 @@
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
                                           active:self.showDemand
-                                        children:@[]],
+                                           title:OTLocalizedString(@"filter_entourage_demand")],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                           active:self.showContribution
-                                        children:@[]],
+                                           title:OTLocalizedString(@"filter_entourage_contribution")],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyTour
                                           active:self.showTours
                                         children:@[]]
@@ -96,10 +96,10 @@
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
                                           active:self.showDemand
-                                        children:@[]],
+                                           title:OTLocalizedString(@"filter_entourage_demand")],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                           active:self.showContribution
-                                        children:@[]],
+                                           title:OTLocalizedString(@"filter_entourage_contribution")],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyTour
                                           active:self.showTours
                                         children:@[]]
@@ -130,10 +130,10 @@
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
                                           active:self.showDemand
-                                        children:@[]],
+                                           title:OTLocalizedString(@"filter_entourage_demand")],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                           active:self.showContribution
-                                        children:@[]],
+                                           title:OTLocalizedString(@"filter_entourage_contribution")],
                      ],
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
@@ -154,10 +154,10 @@
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
                                           active:self.showDemand
-                                        children:@[]],
+                                           title:OTLocalizedString(@"filter_entourage_demand")],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                           active:self.showContribution
-                                        children:@[]],
+                                        title:OTLocalizedString(@"filter_entourage_contribution")],
                      ],
                  @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages

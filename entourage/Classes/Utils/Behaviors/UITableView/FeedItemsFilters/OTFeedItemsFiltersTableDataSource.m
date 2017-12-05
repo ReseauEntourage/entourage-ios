@@ -55,89 +55,92 @@
     OTFeedItemFilter *contribution;
     OTFeedItemFilter *demande;
     NSArray<OTFeedItemFilter *> *parents = [self.currentFilter parentArray];
-    if (IS_PRO_USER) {
-        contribution = parents[1];
-        demande = parents[2];
+    if(parents.count > 0) {
+        if (IS_PRO_USER) {
+            contribution = parents[1];
+            demande = parents[2];
+        }
+        else {
+            contribution = parents[0];
+            demande = parents[1];
+        }
+        switch (item.key) {
+            case FeedItemFilterKeyDemandeSocial:
+                if (!demande.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyDemandeEvent:
+                if (!demande.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyDemandeHelp:
+                if (!demande.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyDemandeResource:
+                if (!demande.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyDemandeInfo:
+                if (!demande.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyDemandeSkill:
+                if (!demande.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyDemandeOther:
+                if (!demande.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyContributionSocial:
+                if (!contribution.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyContributionEvent:
+                if (!contribution.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyContributionHelp:
+                if (!contribution.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyContributionInfo:
+                if (!contribution.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyContributionResource:
+                if (!contribution.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyContributionSkill:
+                if (!contribution.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyContributionOther:
+                if (!contribution.active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyMedical:
+                if (!parents[0].active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeySocial:
+                if (!parents[0].active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyDistributive:
+                if (!parents[0].active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyTimeframe:
+                return 90;
+                break;
+            default:
+                return 44;
+                break;
     }
-    else {
-        contribution = parents[0];
-        demande = parents[1];
-    }
-    switch (item.key) {
-        case FeedItemFilterKeyDemandeSocial:
-            if (!demande.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyDemandeEvent:
-            if (!demande.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyDemandeHelp:
-            if (!demande.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyDemandeResource:
-            if (!demande.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyDemandeInfo:
-            if (!demande.active)
-               size = 0;
-            break;
-        case FeedItemFilterKeyDemandeSkill:
-            if (!demande.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyDemandeOther:
-            if (!demande.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyContributionSocial:
-            if (!contribution.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyContributionEvent:
-            if (!contribution.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyContributionHelp:
-            if (!contribution.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyContributionInfo:
-            if (!contribution.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyContributionResource:
-            if (!contribution.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyContributionSkill:
-            if (!contribution.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyContributionOther:
-            if (!contribution.active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyMedical:
-            if (!parents[0].active)
-                size = 0;
-            break;
-        case FeedItemFilterKeySocial:
-            if (!parents[0].active)
-                size = 0;
-            break;
-        case FeedItemFilterKeyDistributive:
-            if (!parents[0].active)
-               size = 0;
-            break;
-        case FeedItemFilterKeyTimeframe:
-            return 90;
-            break;
-        default:
-            return 44;
-            break;
+    
     }
     return item.key == FeedItemFilterKeyTimeframe ? 90 : size;
 }

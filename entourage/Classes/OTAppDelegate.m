@@ -118,15 +118,14 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 continueUserActivity:(NSUserActivity *)userActivity
  restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
     
-    
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
         NSURL *url = userActivity.webpageURL;
         NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
         NSString *entourageId = arrayWithStrings.lastObject;
         [[OTDeepLinkService new] navigateTo:entourageId];
     }
-    
     return true;
+
 }
 
 - (BOOL)application:(UIApplication *)application
