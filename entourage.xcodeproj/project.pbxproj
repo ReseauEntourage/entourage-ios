@@ -2771,7 +2771,7 @@
 					6B92CA9D19A7461C004E8C9B = {
 						DevelopmentTeam = RT7X9LLTN6;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -3545,8 +3545,9 @@
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 45;
-				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				DEVELOPMENT_TEAM = "";
 				FACEBOOK_ID = 276507866203529;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3571,8 +3572,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "1fe4debe-0efa-4c9c-bc7c-b667e665ced4";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
@@ -3593,9 +3594,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 45;
-				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				DEVELOPMENT_TEAM = "";
 				FACEBOOK_ID = 280727035774134;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3616,8 +3618,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3b6f3395-91e7-4700-a4b2-68b4086df771";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3728,9 +3730,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 45;
-				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				DEVELOPMENT_TEAM = "";
 				FACEBOOK_ID = 280727035774134;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3755,8 +3758,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "3a17a4ee-979a-436c-a6c6-b14adc5e3b11";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
