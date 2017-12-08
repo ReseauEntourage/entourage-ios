@@ -171,10 +171,19 @@
 
 - (void)moveViewWithGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer{
     [UIView animateWithDuration:0.5 animations:^{
+        CGPoint velocity = [panGestureRecognizer velocityInView:self.animatedView];
         CGPoint translation = [panGestureRecognizer translationInView:self.animatedView];
-        CGRect frame = self.animatedView.frame;
-        frame.origin.y = translation.y;
-        self.animatedView.frame = frame;
+        CGFloat finalY = translation.y + 0.2*velocity.y;
+        if(translation.y > 0) {
+            if (finalY < DISTANCE_ABOVE_NAVIGATION_BAR) { 
+                finalY = DISTANCE_ABOVE_NAVIGATION_BAR;
+            } else if (finalY > self.view.frame.size.height) {
+                finalY = self.view.frame.size.height;
+            }
+            CGRect frame = self.animatedView.frame;
+            frame.origin.y = finalY;
+            self.animatedView.frame = frame;
+        }
     }];
     if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
         [UIView animateWithDuration:0.5 animations:^{
@@ -183,7 +192,7 @@
                 [self close];
             else {
                 CGRect frame = self.animatedView.frame;
-                frame.origin = CGPointMake(0, 64);
+                frame.origin = CGPointMake(0, DISTANCE_ABOVE_NAVIGATION_BAR);
                 self.animatedView.frame = frame;
             }
         }];
