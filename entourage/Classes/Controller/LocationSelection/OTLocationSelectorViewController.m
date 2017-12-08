@@ -81,9 +81,11 @@
     [cancelBtn setTitle:OTLocalizedString(@"cancel")];
     [cancelBtn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"SFUItext-Bold" size:17], NSFontAttributeName, nil] forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
-    UIImageView *pin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map_pin.png"]];
-    pin.center = self.view.center;
-    [self.mapView addSubview:pin];
+    //UIImageView *pin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map_pin.png"]];
+    //pin.backgroundColor = [UIColor blueColor];
+    //pin.center = CGPointMake(self.view.bounds.size.width /2, self.view.bounds.size.height /2);
+    //pin.center = CGPointMake(self.mapView.visibleMapRect.size.width  / 2, self.mapView.visibleMapRect.size.height / 2);
+   // [self.mapView addSubview:pin];
 }
 
 - (void)dealloc {
@@ -133,7 +135,7 @@
     return pin;
 }
 
-- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     CLLocation *center = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
     
     [self updateSelectedLocation:center];

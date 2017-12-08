@@ -55,6 +55,13 @@
                                     <constraint firstAttribute="height" constant="37" id="eh9-VY-bt4"/>
                                 </constraints>
                             </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="I9t-dY-dwP">
+                                <rect key="frame" x="179.5" y="370.5" width="16" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="DFF-s2-TIl"/>
+                                    <constraint firstAttribute="height" constant="26" id="GDU-F3-ZHO"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -64,6 +71,8 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Fud-FW-Eox" secondAttribute="trailing" constant="10" id="S9u-96-5AR"/>
                             <constraint firstAttribute="bottom" secondItem="4Wd-d3-VgP" secondAttribute="bottom" id="Vbf-wO-upm"/>
                             <constraint firstItem="edJ-Lf-nrK" firstAttribute="centerX" secondItem="3I0-Hm-eFT" secondAttribute="centerX" id="Ycu-hg-XLR"/>
+                            <constraint firstItem="I9t-dY-dwP" firstAttribute="centerX" secondItem="3I0-Hm-eFT" secondAttribute="centerX" id="diB-p7-X5s"/>
+                            <constraint firstItem="I9t-dY-dwP" firstAttribute="centerY" secondItem="3I0-Hm-eFT" secondAttribute="centerY" constant="50" id="mm1-DF-wZn"/>
                             <constraint firstItem="edJ-Lf-nrK" firstAttribute="centerY" secondItem="3I0-Hm-eFT" secondAttribute="centerY" id="oKN-UH-bdQ"/>
                             <constraint firstItem="Fud-FW-Eox" firstAttribute="top" secondItem="y9U-0U-WIx" secondAttribute="bottom" constant="9" id="sGf-6C-4OL"/>
                         </constraints>
@@ -76,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oIO-Ze-0nN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077" y="1490"/>
+            <point key="canvasLocation" x="1076" y="1489.2053973013494"/>
         </scene>
         <!--Location Search Table View Controller-->
         <scene sceneID="gw6-KY-qup">
@@ -126,5 +135,6 @@
     </scenes>
     <resources>
         <image name="geoloc" width="20" height="20"/>
+        <image name="map_pin" width="16" height="26"/>
     </resources>
 </document>
