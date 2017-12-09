@@ -399,6 +399,7 @@ le + en bas à droite.
 "share_public" = "Ce projet solidaire sur Entourage a besoin de toi. Rejoins-le en téléchargeant l'app ici %@";
 "share_creator" = "J'ai créé ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
 "share_joiner" = "J'ai rejoint ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
+"share_webview" = "J'ai découvert le guide Simple Comme Bonjour pour aller à la rencontre des personnes sans-abri. C'est à découvrir ici : %@";
 
 "feed_item_time_distance" = "Créée il y a ";
 

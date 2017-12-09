@@ -12,6 +12,7 @@
 #import "UIViewController+menu.h"
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
+#import "OTActivityProvider.h"
 
 #define DISTANCE_ABOVE_NAVIGATION_BAR 65
 
@@ -163,7 +164,11 @@
 
 - (void)share {
     NSURL *url = [NSURL URLWithString:self.urlString];
-    NSArray *objectsToShare = @[url];
+    OTActivityProvider *activity = [[OTActivityProvider alloc] initWithPlaceholderItem:@{@"subject":@"", @"body":OTLocalizedString(@"share_webview"), @"url": url}];
+    activity.emailBody = [NSString stringWithFormat:OTLocalizedString(@"share_webview"), url];
+    activity.emailSubject = @"";
+    activity.url = url;
+    NSArray *objectsToShare = @[activity];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare
                                                                              applicationActivities:nil];
     [self presentViewController:activityVC animated:YES completion:nil];
