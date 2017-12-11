@@ -10,6 +10,7 @@
 #import "OTConsts.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
+#import "OTActivityProvider.h"
 
 @interface OTShareFeedItemBehavior ()
 
@@ -45,7 +46,12 @@
 #pragma mark - private methods
 
 - (void)share:(NSString *)content {
-    NSArray *objectsToShare = @[content];
+    NSURL *url = [NSURL URLWithString:self.feedItem.shareUrl];
+    OTActivityProvider *activity = [[OTActivityProvider alloc] initWithPlaceholderItem:@{@"body":content, @"url": url}];
+    activity.emailBody = content;
+    activity.emailSubject = @"";
+    activity.url = url;
+    NSArray *objectsToShare = @[activity];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
     [self.owner presentViewController:activityVC animated:YES completion:nil];
 }
