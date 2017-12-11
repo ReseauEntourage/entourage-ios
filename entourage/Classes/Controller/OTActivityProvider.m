@@ -29,18 +29,13 @@
         return @{@"body":self.emailBody};
     }
     else if ([activityType isEqualToString:@"com.google.Gmail.ShareExtension"])
-        return @{@"body":self.emailBody, @"subject":self.emailSubject, @"url":self.emailBody};
+        return @{@"body":self.emailBody, @"url":self.url};
     return self.emailBody;
 }
 
 - (NSString *)activityViewController:(UIActivityViewController *)activityViewController subjectForActivityType:(UIActivityType)activityType
 {
-    if ([activityType isEqualToString: UIActivityTypeMail]) {
-        return @"";
-    }
-    else if ([activityType isEqualToString:@"com.microsoft.Office.Outlook.compose-shareextension"])
-        return @"";
-    return self.emailSubject;
+    return @"";
 }
 
 @end

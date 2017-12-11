@@ -164,7 +164,7 @@
 
 - (void)share {
     NSURL *url = [NSURL URLWithString:self.urlString];
-    OTActivityProvider *activity = [[OTActivityProvider alloc] initWithPlaceholderItem:@{@"subject":@"", @"body":OTLocalizedString(@"share_webview"), @"url": url}];
+    OTActivityProvider *activity = [[OTActivityProvider alloc] initWithPlaceholderItem:@{@"body":OTLocalizedString(@"share_webview"), @"url": url}];
     activity.emailBody = [NSString stringWithFormat:OTLocalizedString(@"share_webview"), url];
     activity.emailSubject = @"";
     activity.url = url;
