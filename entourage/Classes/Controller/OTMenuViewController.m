@@ -162,6 +162,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         [OTLogger logEvent:@"SolidarityGuideFrom07Menu"];
         [self.revealViewController revealToggle:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:kSolidarityGuideNotification object:self];
+//        [self performSelector:@selector(testDeepLink) withObject:nil afterDelay:5];
     }
     else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
@@ -310,6 +311,10 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     self.imgAssociation.hidden = self.currentUser.partner == nil;
     [self.imgAssociation setupFromUrl:self.currentUser.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
+}
+
+- (void)testDeepLink {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"entourage://create-action"]];
 }
 
 @end
