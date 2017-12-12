@@ -798,8 +798,6 @@
         [self performSegueWithIdentifier:@"EntourageEditor" sender:self];
     else
         [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
-//    else
-//        [self performSegueWithIdentifier:@"EntourageEditor" sender:self];
 }
 
 #pragma mark - OTTourCreatorDelegate
@@ -904,7 +902,7 @@
 
 - (void) createEntouragewithAlertMessage:(NSString *)message {
     [self dismissViewControllerAnimated:NO completion:^{
-        [self switchToNewsfeed];
+        //[self switchToNewsfeed];
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
     }];
 }
