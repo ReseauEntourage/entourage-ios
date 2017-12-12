@@ -78,7 +78,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
         self.continueButton.enabled = [self validateForm];
     };
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-   
+
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.passwordTextField indentRight];
     [self.countryCodeTxtField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
@@ -205,6 +205,9 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [mixpanel.people set:@{@"$email": user.email != nil ? user.email : @""}];
     [mixpanel.people set:@{@"EntouragePartner": user.partner != nil ? user.partner.name : @""}];
     [mixpanel.people set:@{@"EntourageUserType": user.type}];
+    NSString *language = [[NSLocale preferredLanguages] firstObject];
+    [mixpanel.people set:@{@"EntourageLanguage": language}];
+
 }
 
 #pragma mark - Segue
@@ -267,7 +270,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 #pragma mark - UIPickerViewDelegate
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {    
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return [self.pickerDataSource count];
 }
 

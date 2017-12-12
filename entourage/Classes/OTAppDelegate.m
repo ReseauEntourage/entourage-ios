@@ -65,18 +65,14 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [Mixpanel sharedInstance].enableLogging = YES;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
-    
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    NSString *language = [[NSLocale preferredLanguages] firstObject];
-    [mixpanel.people set:@{@"EntourageLanguage": language}];
-    
+
     [self configureUIAppearance];
-    
+
     self.pnService = [OTPushNotificationsService new];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
-    
+
     if ([NSUserDefaults standardUserDefaults].currentUser) {
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
@@ -92,7 +88,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
         self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         [UIStoryboard showStartup];
     }
-    
+
     [OTPictureUploadService configure];
 	return YES;
 }
@@ -117,7 +113,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 - (BOOL)application:(UIApplication *)application
 continueUserActivity:(NSUserActivity *)userActivity
  restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
-    
+
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
         NSURL *url = userActivity.webpageURL;
         NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
@@ -162,7 +158,7 @@ continueUserActivity:(NSUserActivity *)userActivity
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPassword];
 
@@ -178,7 +174,7 @@ continueUserActivity:(NSUserActivity *)userActivity
     [self.pnService saveToken:deviceToken];
     }
     @catch (NSException *ex) {
-        
+
     }
 }
 
@@ -214,7 +210,7 @@ continueUserActivity:(NSUserActivity *)userActivity
 
     UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
     UIPageControl.appearance.currentPageIndicatorTintColor = [UIColor appGreyishBrownColor];
-    
+
 #if BETA
     UINavigationBar.appearance.barTintColor = [UIColor redColor];
     UINavigationBar.appearance.tintColor = [UIColor redColor];
