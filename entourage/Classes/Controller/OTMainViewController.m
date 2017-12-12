@@ -451,7 +451,7 @@
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
     if(self.isTourListDisplayed)
         return;
-    if(!IS_PRO_USER) {
+    if(!IS_PRO_USER && !self.guideMapDelegate.isActive) {
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
         return;
     }
@@ -794,10 +794,12 @@
     if(![OTOngoingTourService sharedInstance].isOngoing)
         eventName = self.toursMapDelegate.isActive ? @"PlusFromFeedClick" : @"PlusFromGDSClick";
     [OTLogger logEvent:eventName];
-    if(self.currentFilter.isPro)
-        [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
-    else
+    if(!IS_PRO_USER && !self.guideMapDelegate.isActive)
         [self performSegueWithIdentifier:@"EntourageEditor" sender:self];
+    else
+        [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
+//    else
+//        [self performSegueWithIdentifier:@"EntourageEditor" sender:self];
 }
 
 #pragma mark - OTTourCreatorDelegate
