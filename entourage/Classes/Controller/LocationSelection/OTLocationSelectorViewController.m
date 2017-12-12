@@ -71,12 +71,12 @@
             [textField.leftView addSubview: leftImage];
         }
     }
-    
     self.resultSearchController.hidesNavigationBarDuringPresentation = NO;
     self.resultSearchController.dimsBackgroundDuringPresentation = YES;
     self.definesPresentationContext = YES;
     self.locationSearchTable.mapView = self.mapView;
     self.locationSearchTable.pinDelegate = self;
+    [self zoomToCurrentLocation:nil];
     UIBarButtonItem *cancelBtn = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
     [cancelBtn setTitle:OTLocalizedString(@"cancel")];
     [cancelBtn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"SFUItext-Bold" size:17], NSFontAttributeName, nil] forState:UIControlStateNormal];
@@ -87,18 +87,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self zoomToCurrentLocation:nil];
-}
-
 - (IBAction)zoomToCurrentLocation:(id)sender {
     if(!self.selectedLocation)
         self.selectedLocation = [OTLocationManager sharedInstance].currentLocation;
     if (self.selectedLocation) {
         MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.selectedLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+        [self.mapView setRegion:region animated:NO];
         [self updateSelectedLocation:self.selectedLocation];
-        [self.mapView setRegion:region animated:YES];
         [self.activityIndicator stopAnimating];
     }
 }
@@ -132,7 +127,6 @@
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     CLLocation *center = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
-    
     [self updateSelectedLocation:center];
 }
 
