@@ -31,7 +31,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+#if BETA
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     [self setupToolbarButtons];
 }
 

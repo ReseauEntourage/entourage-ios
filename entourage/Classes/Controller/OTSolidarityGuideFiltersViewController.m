@@ -25,10 +25,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.tableDataSource initializeWith:self.filterDelegate.solidarityFilter];
     self.title =  OTLocalizedString(@"filters").uppercaseString;
     self.tableView.tableFooterView = [UIView new];
+#if BETA
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     [self setupToolbarButtons];
 }
 

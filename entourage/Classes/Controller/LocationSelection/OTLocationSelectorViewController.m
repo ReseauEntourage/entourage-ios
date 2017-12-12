@@ -37,9 +37,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
+#if BETA
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(saveNewLocation)

@@ -51,6 +51,9 @@
     [super viewDidLoad];
     [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
+#if BETA
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     [self setupUI];
     if(!self.encounter && self.displayedOnceForTour) {
         [self.disclaimer showDisclaimer];
