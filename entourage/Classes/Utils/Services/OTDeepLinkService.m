@@ -23,7 +23,7 @@
 
 @interface OTDeepLinkService ()
 
-@property (nonatomic, weak) NSString *link;
+@property (nonatomic, weak) NSURL *link;
 
 @end
 
@@ -87,7 +87,7 @@
 - (void)handleFeedAndBadgeLinks: (NSURL *)url {
     NSString *host = url.host;
     NSString *query = url.query;
-    self.link = host;
+    self.link = url;
     if(!TOKEN) {
         [self navigateToLogin];
     } else {

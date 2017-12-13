@@ -159,7 +159,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    else {
                                        [self.onboardingNavigation nextFromLogin];
                                    }
-                                   if (self.fromLink && [self.fromLink isEqualToString:@"badge"]) {
+                                   if (self.fromLink) {
                                        [[OTDeepLinkService new] handleFeedAndBadgeLinks:self.fromLink];
                                        self.fromLink = nil;
                                    }

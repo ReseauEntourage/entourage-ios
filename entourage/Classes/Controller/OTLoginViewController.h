@@ -10,6 +10,6 @@ extern NSString *const kTutorialDone;
 
 @interface OTLoginViewController : UIViewController
 
-@property (nonatomic, strong) NSString *fromLink;
+@property (nonatomic, strong) NSURL *fromLink;
 
 @end
