@@ -65,7 +65,10 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [Mixpanel sharedInstance].enableLogging = YES;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
-
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    NSString *language = [[NSLocale preferredLanguages] firstObject];
+    [mixpanel.people set:@{@"EntourageLanguage": language}];
     [self configureUIAppearance];
 
     self.pnService = [OTPushNotificationsService new];
@@ -74,6 +77,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
 
     if ([NSUserDefaults standardUserDefaults].currentUser) {
+        [mixpanel identify:[NSUserDefaults standardUserDefaults].currentUser.sid.stringValue];
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
             NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
