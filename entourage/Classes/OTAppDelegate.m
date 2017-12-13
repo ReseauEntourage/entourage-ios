@@ -66,18 +66,19 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
     
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    NSString *language = [[NSLocale preferredLanguages] firstObject];
-    [mixpanel.people set:@{@"EntourageLanguage": language}];
     [self configureUIAppearance];
 
     self.pnService = [OTPushNotificationsService new];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
-
-    if ([NSUserDefaults standardUserDefaults].currentUser) {
-        [mixpanel identify:[NSUserDefaults standardUserDefaults].currentUser.sid.stringValue];
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (currentUser) {
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel identify:currentUser.sid.stringValue];
+        [mixpanel.people set:@{@"$email": currentUser.email != nil ? currentUser.email : @""}];
+        [mixpanel.people set:@{@"EntouragePartner": currentUser.partner != nil ? currentUser.partner.name : @""}];
+        [mixpanel.people set:@{@"EntourageUserType": currentUser.type}];
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
             NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
