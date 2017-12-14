@@ -9,7 +9,8 @@
 #import "OTLogger.h"
 #import "OTConsts.h"
 #import "OTUser.h"
-#import "NSUserDefaults+OT.h"#import "Flurry.h"
+#import "NSUserDefaults+OT.h"
+#import "Flurry.h"
 #import "Mixpanel/Mixpanel.h"
 
 @implementation OTLogger
