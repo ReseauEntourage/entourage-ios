@@ -79,22 +79,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
-<<<<<<< HEAD
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        [mixpanel identify:currentUser.sid.stringValue];
-        [mixpanel.people set:@{@"$email": currentUser.email != nil ? currentUser.email : @""}];
-        [mixpanel.people set:@{@"EntouragePartner": currentUser.partner != nil ? currentUser.partner.name : @""}];
-        [mixpanel.people set:@{@"EntourageUserType": currentUser.type}];
-        NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
-        if(token) {
-            NSData *tokenData = [token dataUsingEncoding:NSUTF8StringEncoding];
-            [mixpanel.people addPushDeviceToken:tokenData];
-        }
-        NSString *language = [[NSLocale preferredLanguages] firstObject];
-        [mixpanel.people set:@{@"EntourageLanguage": language}];
-=======
         [OTLogger setupMixpanelWithUser:currentUser]
->>>>>>> chore(mixpanel) refactoring function setupMixpanelWithUser
         [[OTAuthService new] sendAppInfoWithSuccess:nil orFailure:nil];
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
