@@ -66,15 +66,15 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [Mixpanel sharedInstance].enableLogging = YES;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
-    
+
     [self configureUIAppearance];
-    
+
     if (@available(iOS 10.0, *)) {
         [UNUserNotificationCenter currentNotificationCenter].delegate = self;
     }
 
     self.pnService = [OTPushNotificationsService new];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
@@ -89,6 +89,9 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
             NSData *tokenData = [token dataUsingEncoding:NSUTF8StringEncoding];
             [mixpanel.people addPushDeviceToken:tokenData];
         }
+        NSString *language = [[NSLocale preferredLanguages] firstObject];
+        [mixpanel.people set:@{@"EntourageLanguage": language}];
+        [[OTAuthService new] sendAppInfoWithSuccess:nil orFailure:nil];
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
             NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
