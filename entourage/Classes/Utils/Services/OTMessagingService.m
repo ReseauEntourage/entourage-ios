@@ -19,14 +19,12 @@
     if(!dataSource)
         return;
     
-    [dataSource.items removeAllObjects];
     id<OTMessagingDelegate> messaging = [[OTFeedItemFactory createFor:feedItem] getMessaging];
 
     NSMutableArray *allItems = [NSMutableArray new];
     [allItems addObjectsFromArray:[messaging getTimelineStatusMessages]];
     
     dispatch_group_t group = dispatch_group_create();
-    
     
     dispatch_group_enter(group);
     dispatch_group_enter(group);
