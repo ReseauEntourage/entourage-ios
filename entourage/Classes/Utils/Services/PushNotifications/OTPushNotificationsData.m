@@ -24,10 +24,20 @@
 #define kAPNFeedType @"feed_type"
 #define kAPNInvitationAccepted @"accepted"
 
+#define kMixpanelCTA @"mp_cta"
+
 @implementation OTPushNotificationsData
 
 + (OTPushNotificationsData *)createFrom:(NSDictionary *)userInfo {
     OTPushNotificationsData *result = [OTPushNotificationsData new];
+    
+    if ([userInfo objectForKey:kMixpanelCTA] != nil) {
+        //Mixpanel notification
+        result.notificationType = kMixpanelCTA;
+        result.content = [NSDictionary dictionaryWithDictionary:userInfo];
+        
+        return result;
+    }
     
     result.content = [userInfo objectForKey:kUserInfoMessage];
     result.extra = [result.content objectForKey:kUserInfoExtraMessage];

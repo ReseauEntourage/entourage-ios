@@ -18,4 +18,6 @@
 - (void)handleLocalNotification:(NSDictionary *)userInfo;
 - (void)handleAppLaunchFromNotificationCenter:(NSDictionary *)userInfo;
 
+- (BOOL)isMixpanelDeepLinkNotification:(NSDictionary *)userInfo;
+
 @end

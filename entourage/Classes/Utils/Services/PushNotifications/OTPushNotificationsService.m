@@ -25,6 +25,8 @@
 #import "OTUnreadMessagesService.h"
 #import "Mixpanel/Mixpanel.h"
 
+#import <UserNotifications/UserNotifications.h>
+
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
@@ -32,6 +34,7 @@
 #define APNOTIFICATION_INVITE_REQUEST "ENTOURAGE_INVITATION"
 #define APNOTIFICATION_INVITE_STATUS "INVITATION_STATUS"
 #define APNOTIFICATION_JOIN_REQUEST_CANCELED "JOIN_REQUEST_CANCELED"
+#define APNOTIFICATION_MIXPANEL_DEEPLINK "mp_cta"
 
 @implementation OTPushNotificationsService
 
@@ -80,6 +83,8 @@
         [self handleInviteRequestNotification:pnData];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_INVITE_STATUS])
         [self handleInviteStatusNotification:pnData];
+    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_MIXPANEL_DEEPLINK])
+        [self handleMixpanelDeepLinkNotification:pnData];
 }
 
 - (void)handleLocalNotification:(NSDictionary *)userInfo {
@@ -114,6 +119,11 @@
     OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
     if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST])
         [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
+}
+
+- (BOOL)isMixpanelDeepLinkNotification:(NSDictionary *)userInfo {
+    OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
+    return [pnData.notificationType isEqualToString:@APNOTIFICATION_MIXPANEL_DEEPLINK];
 }
 
 #pragma mark - private methods
@@ -220,6 +230,26 @@
     [self displayAlertWithActions:@[openAction] forPushData:pnData];
 }
 
+- (void)handleMixpanelDeepLinkNotification:(OTPushNotificationsData *)pnData
+{
+    NSString *deeplink = (NSString *)[pnData.content objectForKey:@"mp_cta"];
+    if (deeplink != nil) {
+        NSURL *deeplinkURL = [NSURL URLWithString:deeplink];
+        if (@available(ios 10.0, *)) {
+            [[OTDeepLinkService new] handleFeedAndBadgeLinks:deeplinkURL];
+        } else {
+            //for ios 9 or less, display an alert
+            UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [[OTDeepLinkService new] handleFeedAndBadgeLinks:deeplinkURL];
+            }];
+            [self displayAlertWithActions:@[openAction]
+                                    title:@"Entourage"
+                                  message:[[pnData.content objectForKey:@"aps"] objectForKey:@"alert"]
+                              forPushData:pnData];
+        }
+    }
+}
+
 - (void)sendAppInfoWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
     [[OTAuthService new] sendAppInfoWithSuccess:^() {
         NSLog(@"Application info sent!");
@@ -234,7 +264,14 @@
 }
 
 - (void)displayAlertWithActions:(NSArray<UIAlertAction*> *)actions forPushData:(OTPushNotificationsData *)pnData  {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:pnData.sender message:pnData.message preferredStyle:UIAlertControllerStyleAlert];
+    [self displayAlertWithActions:actions
+                            title:pnData.sender
+                          message:pnData.message
+                      forPushData:pnData];
+}
+
+- (void)displayAlertWithActions:(NSArray<UIAlertAction*> *)actions title:(NSString *)title message:(NSString *)message forPushData:(OTPushNotificationsData *)pnData  {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     for(UIAlertAction *action in actions)
         [alert addAction:action];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
