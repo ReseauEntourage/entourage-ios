@@ -199,17 +199,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                }];
 }
 
-- (void)setupMixpanelWithUser: (OTUser *)user {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel identify:[user.sid stringValue]];
-    [mixpanel.people set:@{@"$email": user.email != nil ? user.email : @""}];
-    [mixpanel.people set:@{@"EntouragePartner": user.partner != nil ? user.partner.name : @""}];
-    [mixpanel.people set:@{@"EntourageUserType": user.type}];
-    NSString *language = [[NSLocale preferredLanguages] firstObject];
-    [mixpanel.people set:@{@"EntourageLanguage": language}];
-
-}
-
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
