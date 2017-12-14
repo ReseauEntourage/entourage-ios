@@ -87,6 +87,9 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Private
 
 - (void)showEditButton {
+#if BETA
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     UIBarButtonItem *chatButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"modify")
                                                         withTarget:self
                                                          andAction:@selector(showEditView)

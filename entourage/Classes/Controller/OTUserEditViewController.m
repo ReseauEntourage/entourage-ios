@@ -64,9 +64,6 @@ typedef NS_ENUM(NSInteger) {
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 1000;
     [self setupCloseModal];
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
     [self showSaveButton];
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
     self.sections = @[@(SectionTypeSummary), @(SectionTypeAbout), @(SectionTypeAssociations), @(SectionTypeInfoPrivate), @(SectionTypeDelete)];
@@ -110,6 +107,9 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)showSaveButton {
+#if BETA
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save")
                                                         withTarget:self
                                                          andAction:@selector(updateUser)
