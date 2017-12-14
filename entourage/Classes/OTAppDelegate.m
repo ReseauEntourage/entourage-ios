@@ -74,7 +74,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     }
 
     self.pnService = [OTPushNotificationsService new];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
@@ -84,6 +84,11 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
         [mixpanel.people set:@{@"$email": currentUser.email != nil ? currentUser.email : @""}];
         [mixpanel.people set:@{@"EntouragePartner": currentUser.partner != nil ? currentUser.partner.name : @""}];
         [mixpanel.people set:@{@"EntourageUserType": currentUser.type}];
+        NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
+        if(token) {
+            NSData *tokenData = [token dataUsingEncoding:NSUTF8StringEncoding];
+            [mixpanel.people addPushDeviceToken:tokenData];
+        }
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
             NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -98,7 +103,6 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
         self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         [UIStoryboard showStartup];
     }
-
     [OTPictureUploadService configure];
 	return YES;
 }
