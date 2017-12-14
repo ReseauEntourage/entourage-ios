@@ -56,6 +56,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self sendAppInfoWithSuccess:success orFailure:failure];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people removeAllPushDeviceTokens];
 }
 
 - (void)promptUserForPushNotifications {
@@ -69,7 +71,7 @@
     OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
     if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST])
         [self handleJoinRequestNotification:pnData];
-    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST_CANCELED]) 
+    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST_CANCELED])
         [self handleCancelJoinNotification:pnData];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_REQUEST_ACCEPTED])
         [self handleAcceptJoinNotification:pnData];
@@ -90,7 +92,7 @@
 - (void)handleLocalNotification:(NSDictionary *)userInfo {
     UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
     OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
-    
+
     if([pnData.sender isEqualToString:@""]) {
         pnData.sender = pnData.message;
         pnData.message = @"";
@@ -108,7 +110,7 @@
     }];
     [alert addAction:defaultAction];
     [alert addAction:openAction];
-    
+
     [self showAlert:alert withPresentingBlock:^(UIViewController *topController, UIViewController *presentedViewController) {
         if (![topController isKindOfClass:[OTCreateMeetingViewController class]])
             [presentedViewController presentViewController:alert animated:YES completion:nil];
@@ -136,7 +138,7 @@
             if([item.uID isEqualToNumber:userId] && [item.status isEqualToString:JOIN_PENDING]) {
                 [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
                 OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
-            
+
                 UIAlertAction *viewProfileAction = [UIAlertAction   actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [OTLogger logEvent:@"UserProfileClick"];
                     [[OTDeepLinkService new] showProfileFromAnywhereForUser:joiner.uID];
@@ -276,7 +278,7 @@
         [alert addAction:action];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:defaultAction];
-    
+
     [self showAlert:alert withPresentingBlock:^(UIViewController *topController, UIViewController *presentedViewController) {
         BOOL showMessage = YES;
         if ([topController isKindOfClass:[OTActiveFeedItemViewController class]]) {
