@@ -364,7 +364,7 @@
     self.toursMapDelegate.isActive = YES;
     self.guideMapDelegate.isActive = NO;
     self.backToNewsFeedsButton.hidden = YES;
-    [self.mapDelegateProxy.delegates addObject:self.toursMapDelegate];
+    if (self.toursMapDelegate) [self.mapDelegateProxy.delegates addObject:self.toursMapDelegate];
     [self.mapDelegateProxy.delegates removeObject:self.guideMapDelegate];
     [self.customSegmentedBehavior updateVisible:YES];
     [self clearMap];
@@ -383,7 +383,7 @@
     self.guideMapDelegate.isActive = YES;
     self.backToNewsFeedsButton.hidden = NO;
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
-    [self.mapDelegateProxy.delegates addObject:self.guideMapDelegate];
+    if (self.guideMapDelegate) [self.mapDelegateProxy.delegates addObject:self.guideMapDelegate];
     [self.customSegmentedBehavior updateVisible:YES];
     [self clearMap];
     [self showToursMap];

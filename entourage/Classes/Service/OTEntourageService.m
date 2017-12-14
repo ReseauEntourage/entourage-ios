@@ -97,7 +97,7 @@ extern NSString *kUsers;
                withSuccess:(void(^)(OTEntourage *))success
                    failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, entourageId, TOKEN];
+    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, entourageId];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     
     [[OTHTTPRequestManager sharedInstance]

@@ -162,7 +162,19 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         [OTLogger logEvent:@"SolidarityGuideFrom07Menu"];
         [self.revealViewController revealToggle:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:kSolidarityGuideNotification object:self];
-//        [self performSelector:@selector(testDeepLink) withObject:nil afterDelay:5];
+//        NSArray *deepLinks = @[
+//                               @"https://www.entourage.social/entourages/e0nEjytD9mU8",
+//                               @"https://www.entourage.social/deeplink/badge",
+//                               @"https://www.entourage.social/deeplink/feed",
+//                               @"https://www.entourage.social/deeplink/webview?url=https://www.google.ro",
+//                               @"https://www.entourage.social/deeplink/entourage/e0nEjytD9mU8"
+//                               ];
+//        NSTimeInterval delta = 10;
+//        NSTimeInterval delay = 5;
+//        for (NSString *deepLink in deepLinks) {
+//            [self performSelector:@selector(testDeepLink:) withObject:deepLink afterDelay:delay];
+//            delay += delta;
+//        }
     }
     else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
@@ -313,8 +325,9 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     [self.imgAssociation setupFromUrl:self.currentUser.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
 }
 
-- (void)testDeepLink {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"entourage://create-action"]];
+- (void)testDeepLink:(NSString *)deepLink {
+    //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"entourage://create-action"]];
+    [[OTDeepLinkService new] handleUniversalLink:[NSURL URLWithString:deepLink]];
 }
 
 @end

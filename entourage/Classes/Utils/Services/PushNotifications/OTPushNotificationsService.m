@@ -236,11 +236,11 @@
     if (deeplink != nil) {
         NSURL *deeplinkURL = [NSURL URLWithString:deeplink];
         if (@available(ios 10.0, *)) {
-            [[OTDeepLinkService new] handleFeedAndBadgeLinks:deeplinkURL];
+            [[OTDeepLinkService new] handleDeepLink:deeplinkURL];
         } else {
             //for ios 9 or less, display an alert
             UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [[OTDeepLinkService new] handleFeedAndBadgeLinks:deeplinkURL];
+                [[OTDeepLinkService new] handleDeepLink:deeplinkURL];
             }];
             [self displayAlertWithActions:@[openAction]
                                     title:@"Entourage"

@@ -48,7 +48,7 @@
 
 // Entourages
 #define API_URL_ENTOURAGES @"entourages?token=%@"
-#define API_URL_ENTOURAGE_BY_ID @"entourages/%@?token=%@"
+#define API_URL_ENTOURAGE_BY_ID @"entourages/%@"
 #define API_URL_ENTOURAGE_UPDATE @"entourages/%@?token=%@"
 #define API_URL_ENTOURAGE_QUIT @"entourages/%@/users/%@?token=%@"
 #define API_URL_ENTOURAGE_JOIN_REQUEST @"entourages/%@/users?token=%@"

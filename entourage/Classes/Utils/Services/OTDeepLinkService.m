@@ -84,48 +84,69 @@
     [currentController showViewController:loginController sender:self];
 }
 
-- (void)handleFeedAndBadgeLinks: (NSURL *)url {
+- (void)handleDeepLink: (NSURL *)url {
     NSString *host = url.host;
     NSString *query = url.query;
     self.link = url;
     if(!TOKEN) {
         [self navigateToLogin];
     } else {
-        if ([host isEqualToString:@"feed"]) {
-            OTMainViewController *mainViewController = [self popToMainViewController];
-            [mainViewController leaveGuide];
-//            UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//            OTMainViewController *mainController = (OTMainViewController *)[mainStorybard instantiateInitialViewController];
-//            [self updateAppWindow:mainController];
-            // "feed/filters"
-            NSArray *pathComponents = url.pathComponents;
-            if (pathComponents != nil && pathComponents.count >= 2) {
-                if ([pathComponents[1] isEqualToString:@"filters"]) {
-                    [mainViewController showFilters];
-                }
+        [self handleDeepLinkWithKey:host pathComponents:url.pathComponents andQuery:query];
+    }
+}
+
+- (void)handleUniversalLink:(NSURL *)url {
+    if (url.pathComponents == nil || url.pathComponents.count < 2) return;
+    NSMutableArray *pathComponents = [NSMutableArray arrayWithArray:url.pathComponents];
+    // remove the leading '/'
+    [pathComponents removeObjectAtIndex:0];
+    // handle the 'entourages/<extra>'
+    NSString *key = [pathComponents objectAtIndex:0];
+    if ([key isEqualToString:@"entourages"]) {
+        [self handleDeepLinkWithKey:key pathComponents:pathComponents andQuery:nil];
+    }
+    else if ([key isEqualToString:@"deeplink"]) {
+        // handle the 'deeplink/<key>/<extra>?<query>'
+        // remove the 'deeplink'
+        [pathComponents removeObjectAtIndex:0];
+        // handle the deep link
+        key = [pathComponents objectAtIndex:0];
+        [self handleDeepLinkWithKey:key pathComponents:pathComponents andQuery:url.query];
+    }
+}
+
+- (void)handleDeepLinkWithKey:(NSString *)key pathComponents:(NSArray *)pathComponents andQuery:(NSString *)query {
+    if ([key isEqualToString:@"feed"]) {
+        OTMainViewController *mainViewController = [self popToMainViewController];
+        [mainViewController leaveGuide];
+        //            UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        //            OTMainViewController *mainController = (OTMainViewController *)[mainStorybard instantiateInitialViewController];
+        //            [self updateAppWindow:mainController];
+        // "feed/filters"
+        if (pathComponents != nil && pathComponents.count >= 2) {
+            if ([pathComponents[1] isEqualToString:@"filters"]) {
+                [mainViewController showFilters];
             }
-        } else if ([host isEqualToString:@"badge"]) {
-            OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[self instatiateControllerWithStoryboardIdentifier:@"UserProfileEditor" andControllerIdentifier:@"SelectAssociation"];
-            [self showController:selectAssociationController];
-        } else if ([host isEqualToString:@"webview"]) {
-            OTMainViewController *publicFeedItemController = (OTMainViewController *)[self instatiateControllerWithStoryboardIdentifier:@"Main"
-                                    andControllerIdentifier:@"OTMain"];
-            NSArray *elts = [query componentsSeparatedByString:@"="];
-            publicFeedItemController.webview = elts[1];
-            [self showController:publicFeedItemController];
-        } else if ([host isEqualToString:@"profile"]) {
-            [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].sid];
-        } else if ([host isEqualToString:@"messages"]) {
-            OTMainViewController *mainViewController = [self popToMainViewController];
-            [mainViewController performSegueWithIdentifier:@"MyEntouragesSegue" sender:nil];
-        } else if ([host isEqualToString:@"create-action"]) {
-            OTMainViewController *mainViewController = [self popToMainViewController];
-            [mainViewController performSegueWithIdentifier:@"EntourageEditorSegue" sender:nil];
-        } else if ([host isEqualToString:@"entourage"]) {
-            NSArray *pathComponents = url.pathComponents;
-            if (pathComponents != nil && pathComponents.count >= 2) {
-                [self navigateTo:pathComponents[1]];
-            }
+        }
+    } else if ([key isEqualToString:@"badge"]) {
+        OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[self instatiateControllerWithStoryboardIdentifier:@"UserProfileEditor" andControllerIdentifier:@"SelectAssociation"];
+        [self showController:selectAssociationController];
+    } else if ([key isEqualToString:@"webview"]) {
+        OTMainViewController *publicFeedItemController = (OTMainViewController *)[self instatiateControllerWithStoryboardIdentifier:@"Main" andControllerIdentifier:@"OTMain"];
+        NSArray *elts = [query componentsSeparatedByString:@"="];
+        publicFeedItemController.webview = elts[1];
+        [self showController:publicFeedItemController];
+    } else if ([key isEqualToString:@"profile"]) {
+        [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].sid];
+    } else if ([key isEqualToString:@"messages"]) {
+        OTMainViewController *mainViewController = [self popToMainViewController];
+        [mainViewController performSegueWithIdentifier:@"MyEntouragesSegue" sender:nil];
+    } else if ([key isEqualToString:@"create-action"]) {
+        OTMainViewController *mainViewController = [self popToMainViewController];
+        [mainViewController performSegueWithIdentifier:@"EntourageEditorSegue" sender:nil];
+    } else if ([key isEqualToString:@"entourage"] || [key isEqualToString:@"entourages"]) {
+        if (pathComponents != nil && pathComponents.count >= 2) {
+            [self navigateTo:pathComponents[1]];
         }
     }
 }

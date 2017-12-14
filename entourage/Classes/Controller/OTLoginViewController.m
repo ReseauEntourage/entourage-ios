@@ -160,7 +160,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                        [self.onboardingNavigation nextFromLogin];
                                    }
                                    if (self.fromLink) {
-                                       [[OTDeepLinkService new] handleFeedAndBadgeLinks:self.fromLink];
+                                       [[OTDeepLinkService new] handleDeepLink:self.fromLink];
                                        self.fromLink = nil;
                                    }
                                    [[OTLocationManager sharedInstance] startLocationUpdates];

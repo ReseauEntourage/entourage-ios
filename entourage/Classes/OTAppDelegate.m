@@ -36,13 +36,12 @@
 #import "Mixpanel/Mixpanel.h"
 #import "OTDeepLinkService.h"
 #import "FBSDKCoreKit.h"
-#import <UserNotifications/UserNotifications.h>
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
 NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 
-@interface OTAppDelegate () <UIApplicationDelegate, UNUserNotificationCenterDelegate>
+@interface OTAppDelegate () <UIApplicationDelegate>
 
 @property (nonatomic, strong) OTPushNotificationsService *pnService;
 @property (nonatomic, assign) BOOL launchedFromNotifications;
@@ -68,10 +67,6 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
     
     [self configureUIAppearance];
-    
-    if (@available(iOS 10.0, *)) {
-        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-    }
 
     self.pnService = [OTPushNotificationsService new];
     
@@ -132,7 +127,8 @@ continueUserActivity:(NSUserActivity *)userActivity
         NSURL *url = userActivity.webpageURL;
         NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
         NSString *entourageId = arrayWithStrings.lastObject;
-        [[OTDeepLinkService new] navigateTo:entourageId];
+        //[[OTDeepLinkService new] navigateTo:entourageId];
+        [[OTDeepLinkService new] handleUniversalLink:url];
     }
     return true;
 
@@ -144,7 +140,7 @@ continueUserActivity:(NSUserActivity *)userActivity
          annotation:(id)annotation
 {
     if ([[url scheme] isEqualToString:@"entourage"]) {
-        [[OTDeepLinkService new] handleFeedAndBadgeLinks:url];
+        [[OTDeepLinkService new] handleDeepLink:url];
         return YES;
     }
     return NO;
@@ -179,7 +175,7 @@ continueUserActivity:(NSUserActivity *)userActivity
     [UIStoryboard showStartup];
 }
 
-#pragma mark - Push notifications
+#pragma mark - Configure push notifications
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:YES] };
@@ -209,17 +205,6 @@ continueUserActivity:(NSUserActivity *)userActivity
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground || state == UIApplicationStateInactive)
         [self.pnService handleLocalNotification:userInfo];
-}
-
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
-{
-    NSDictionary *userInfo = notification.request.content.userInfo;
-    if ([self.pnService isMixpanelDeepLinkNotification:userInfo]) {
-        //for mixpanel deeplinks, shows the push notification
-        completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
-    } else {
-        [self.pnService handleRemoteNotification:userInfo];
-    }
 }
 
 #pragma mark - Configure UIAppearance
