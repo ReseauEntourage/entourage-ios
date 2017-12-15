@@ -36,12 +36,13 @@
 #import "Mixpanel/Mixpanel.h"
 #import "OTDeepLinkService.h"
 #import "FBSDKCoreKit.h"
+#import <UserNotifications/UserNotifications.h>
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
 NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 
-@interface OTAppDelegate () <UIApplicationDelegate>
+@interface OTAppDelegate () <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 @property (nonatomic, strong) OTPushNotificationsService *pnService;
 @property (nonatomic, assign) BOOL launchedFromNotifications;
@@ -65,25 +66,21 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [Mixpanel sharedInstance].enableLogging = YES;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
-    
+
     [self configureUIAppearance];
 
+    if (@available(iOS 10.0, *)) {
+        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+    }
+
     self.pnService = [OTPushNotificationsService new];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        [mixpanel identify:currentUser.sid.stringValue];
-        [mixpanel.people set:@{@"$email": currentUser.email != nil ? currentUser.email : @""}];
-        [mixpanel.people set:@{@"EntouragePartner": currentUser.partner != nil ? currentUser.partner.name : @""}];
-        [mixpanel.people set:@{@"EntourageUserType": currentUser.type}];
-        NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
-        if(token) {
-            NSData *tokenData = [token dataUsingEncoding:NSUTF8StringEncoding];
-            [mixpanel.people addPushDeviceToken:tokenData];
-        }
+        [OTLogger setupMixpanelWithUser:currentUser];
+        [[OTAuthService new] sendAppInfoWithSuccess:nil failure:nil];
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
             NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -205,6 +202,17 @@ continueUserActivity:(NSUserActivity *)userActivity
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground || state == UIApplicationStateInactive)
         [self.pnService handleLocalNotification:userInfo];
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
+{
+    NSDictionary *userInfo = notification.request.content.userInfo;
+    if ([self.pnService isMixpanelDeepLinkNotification:userInfo]) {
+        //for mixpanel deeplinks, shows the push notification
+        completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
+    } else {
+        [self.pnService handleRemoteNotification:userInfo];
+    }
 }
 
 #pragma mark - Configure UIAppearance

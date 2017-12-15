@@ -142,7 +142,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                success: ^(OTUser *user) {
                                    [OTLogger logEvent:@"Login_Success"];
                                    NSLog(@"User : %@ authenticated successfully", user.email);
-                                   [self setupMixpanelWithUser:user];
+                                   [OTLogger setupMixpanelWithUser:user];
                                    user.phone = [self.codeCountry stringByAppendingString:phone];
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil)
@@ -197,17 +197,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [self presentViewController:alert animated:YES completion:nil];
 
                                }];
-}
-
-- (void)setupMixpanelWithUser: (OTUser *)user {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel identify:[user.sid stringValue]];
-    [mixpanel.people set:@{@"$email": user.email != nil ? user.email : @""}];
-    [mixpanel.people set:@{@"EntouragePartner": user.partner != nil ? user.partner.name : @""}];
-    [mixpanel.people set:@{@"EntourageUserType": user.type}];
-    NSString *language = [[NSLocale preferredLanguages] firstObject];
-    [mixpanel.people set:@{@"EntourageLanguage": language}];
-
 }
 
 #pragma mark - Segue
