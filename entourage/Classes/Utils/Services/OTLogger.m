@@ -21,7 +21,7 @@
     [mixpanel track:eventName];
 }
 
-- (void)setupMixpanelWithUser: (OTUser *)user {
++ (void)setupMixpanelWithUser: (OTUser *)user {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel identify:[user.sid stringValue]];
     [mixpanel.people set:@{@"$email": user.email != nil ? user.email : @""}];

@@ -79,8 +79,8 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
-        [OTLogger setupMixpanelWithUser:currentUser]
-        [[OTAuthService new] sendAppInfoWithSuccess:nil orFailure:nil];
+        [OTLogger setupMixpanelWithUser:currentUser];
+        [[OTAuthService new] sendAppInfoWithSuccess:nil failure:nil];
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
             NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];

@@ -142,7 +142,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                success: ^(OTUser *user) {
                                    [OTLogger logEvent:@"Login_Success"];
                                    NSLog(@"User : %@ authenticated successfully", user.email);
-                                   [self setupMixpanelWithUser:user];
+                                   [OTLogger setupMixpanelWithUser:user];
                                    user.phone = [self.codeCountry stringByAppendingString:phone];
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil)
