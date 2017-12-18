@@ -12,6 +12,8 @@
 #import "NSUserDefaults+OT.h"
 #import "Flurry.h"
 #import "Mixpanel/Mixpanel.h"
+#import "entourage-Swift.h"
+#import "OTMixpanelService.h"
 
 @implementation OTLogger
 
@@ -31,8 +33,13 @@
     [mixpanel.people set:@{@"EntourageLanguage": language}];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     if(token) {
-        NSData *tokenData = [token dataUsingEncoding:NSUTF8StringEncoding];
-        [mixpanel.people addPushDeviceToken:tokenData];
+        NSDictionary *mixpanelDict =    @{@"$distinct_id": [user.sid stringValue],
+                                                @"$token": [ConfigurationManager shared].MixpanelToken,
+                                                @"$union": @{
+                                                                @"$ios_devices" : @[token]
+                                                            }
+                                          };
+    [[OTMixpanelService new] sendTokenDataWithDictionary:mixpanelDict success:nil failure:nil];
     }
 }
 

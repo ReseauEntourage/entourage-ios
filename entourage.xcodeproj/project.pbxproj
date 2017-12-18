@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		011270621E9D1751006ADA79 /* OTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 011270611E9D1751006ADA79 /* OTTextView.m */; };
 		011718441FDB365C00743214 /* OTActivityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 011718431FDB365C00743214 /* OTActivityProvider.m */; };
+		011718471FE400D300743214 /* OTMixpanelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 011718461FE400D300743214 /* OTMixpanelService.m */; };
 		011DC1E01EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */; };
 		011DC1E61EFA969A00B46C5F /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 011DC1E51EFA969A00B46C5F /* CountryList.csv */; };
 		012DFB441F785B73002B85E8 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 012DFB431F785B73002B85E8 /* categories.json */; };
@@ -398,6 +399,8 @@
 		011270611E9D1751006ADA79 /* OTTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTextView.m; sourceTree = "<group>"; };
 		011718421FDB365C00743214 /* OTActivityProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTActivityProvider.h; sourceTree = "<group>"; };
 		011718431FDB365C00743214 /* OTActivityProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTActivityProvider.m; sourceTree = "<group>"; };
+		011718451FE400D300743214 /* OTMixpanelService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTMixpanelService.h; sourceTree = "<group>"; };
+		011718461FE400D300743214 /* OTMixpanelService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTMixpanelService.m; sourceTree = "<group>"; };
 		011DC1DE1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTCountryCodePickerViewDataSource.h; path = Behaviors/OTCountryCodePickerViewDataSource.h; sourceTree = "<group>"; };
 		011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTCountryCodePickerViewDataSource.m; path = Behaviors/OTCountryCodePickerViewDataSource.m; sourceTree = "<group>"; };
 		011DC1E51EFA969A00B46C5F /* CountryList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CountryList.csv; path = entourage/CountryList.csv; sourceTree = "<group>"; };
@@ -2386,6 +2389,8 @@
 				1EC9D6811D6468A800C6E9AA /* OTInvitationsService.m */,
 				1E22727C1E2E25270053365E /* OTAssociationsService.h */,
 				1E22727D1E2E25270053365E /* OTAssociationsService.m */,
+				011718451FE400D300743214 /* OTMixpanelService.h */,
+				011718461FE400D300743214 /* OTMixpanelService.m */,
 			);
 			name = WebService;
 			path = Service;
@@ -3335,6 +3340,7 @@
 				1EFAC0F31D89294F00BE396F /* OTFeedItemTimeframeFilter.m in Sources */,
 				1E46617D1DAE6CF900ED0CD0 /* OTMemberCountCell.m in Sources */,
 				1E06FDC61D574D9800370F4F /* OTChatCellBase.m in Sources */,
+				011718471FE400D300743214 /* OTMixpanelService.m in Sources */,
 				1E6E550A1D707FE3002845D0 /* OTPushNotificationsService.m in Sources */,
 				A82B95A11DCD045200332305 /* OnBoardingTextField.swift in Sources */,
 				1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */,
