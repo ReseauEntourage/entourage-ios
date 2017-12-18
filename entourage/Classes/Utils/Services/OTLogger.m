@@ -30,7 +30,7 @@
     [mixpanel.people set:@{@"EntouragePartner": user.partner != nil ? user.partner.name : @""}];
     [mixpanel.people set:@{@"EntourageUserType": user.type}];
     NSString *language = [[NSLocale preferredLanguages] firstObject];
-    [mixpanel.people set:@{@"EntourageLanguage": language}];
+    [mixpanel.people set:@{@"Language": language}];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     if(token) {
         NSDictionary *mixpanelDict =    @{@"$distinct_id": [user.sid stringValue],
