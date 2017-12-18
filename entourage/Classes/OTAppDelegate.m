@@ -136,10 +136,17 @@ continueUserActivity:(NSUserActivity *)userActivity
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
+#if BETA
+    if ([[url scheme] isEqualToString:@"entourage-staging"]) {
+        [[OTDeepLinkService new] handleDeepLink:url];
+        return YES;
+    }
+#else
     if ([[url scheme] isEqualToString:@"entourage"]) {
         [[OTDeepLinkService new] handleDeepLink:url];
         return YES;
     }
+#endif
     return NO;
 }
 
