@@ -33,8 +33,8 @@
 
 #define HEADER_CELL_INDEX 7
 #define LOG_OUT_CELL_INDEX 8
-#define SOLIDARITY_GUIDE_INDEX 3
-#define DONATION_CELL_INDEX 2
+#define SOLIDARITY_GUIDE_INDEX 2
+#define DONATION_CELL_INDEX 3
 
 @import MessageUI;
 
@@ -121,7 +121,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellID;
-    if(indexPath.row == 2)
+    if(indexPath.row == DONATION_CELL_INDEX)
         cellID = OTMenuMakeDonationTableViewCellIdentifier;
     else if (indexPath.row == HEADER_CELL_INDEX)
         cellID = @"HeaderViewCell";
@@ -269,16 +269,15 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     [menuItems addObject:itemEntourageActions];
     
     
-    //add 3rd new one
+   
+    OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide")
+                                                               iconName:@"mapPin"];
+    [menuItems addObject:itemSolidarityGuide];
+    
     OTMenuItem *itemDon = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_make_donation")
                                                    iconName:@"heartNofillWhite"
                                                  identifier:DONATE_LINK_ID];
     [menuItems addObject:itemDon];
-    
-    
-    OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide")
-                                                               iconName:@"mapPin"];
-    [menuItems addObject:itemSolidarityGuide];
     
     OTMenuItem *itemAtd = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_atd_partner")
                                                    iconName:@"atdLogo"
