@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = OTLocalizedString(@"").capitalizedString;
+    self.title = OTLocalizedString(@"socialTitle").capitalizedString;
     [self setupCloseModal];
     self.aboutItems = [OTSocialViewController createItems];
 }

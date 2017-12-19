@@ -44,6 +44,8 @@
 		01A6DA8A1E8D089300089DC5 /* SolidarityGuideFilters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */; };
 		01B210951FBC6647005AD5C3 /* OTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B210941FBC6647005AD5C3 /* OTWebViewController.m */; };
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
+		01C9A37A1FE96EBD009ACFE4 /* Social.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C9A3791FE96EBC009ACFE4 /* Social.storyboard */; };
+		01C9A37D1FE96ECB009ACFE4 /* OTSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C9A37C1FE96ECA009ACFE4 /* OTSocialViewController.m */; };
 		01D191271FA21466008F6BFB /* OTAboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D191261FA21466008F6BFB /* OTAboutMeViewController.m */; };
 		01DCFF101EEEAF9A007A0705 /* UserProfileEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01DCFF0F1EEEAF9A007A0705 /* UserProfileEditor.storyboard */; };
 		01E3AA421EEEADC5007FB282 /* AssociationDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E3AA411EEEADC5007FB282 /* AssociationDetails.storyboard */; };
@@ -470,6 +472,9 @@
 		01B210941FBC6647005AD5C3 /* OTWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTWebViewController.m; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
+		01C9A3791FE96EBC009ACFE4 /* Social.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Social.storyboard; sourceTree = "<group>"; };
+		01C9A37B1FE96ECA009ACFE4 /* OTSocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSocialViewController.h; sourceTree = "<group>"; };
+		01C9A37C1FE96ECA009ACFE4 /* OTSocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSocialViewController.m; sourceTree = "<group>"; };
 		01D191251FA21466008F6BFB /* OTAboutMeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAboutMeViewController.h; sourceTree = "<group>"; };
 		01D191261FA21466008F6BFB /* OTAboutMeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAboutMeViewController.m; sourceTree = "<group>"; };
 		01DCFF0F1EEEAF9A007A0705 /* UserProfileEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfileEditor.storyboard; sourceTree = "<group>"; };
@@ -2224,6 +2229,7 @@
 		45CE5A621C5242FC00F68C24 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				01C9A3791FE96EBC009ACFE4 /* Social.storyboard */,
 				0161DD0E1F729E470081AE71 /* Intro.storyboard */,
 				1EC816951D9BB1150084BADB /* FeedChangeOptions.storyboard */,
 				1EFAC0C61D89242D00BE396F /* FeedItemFilters.storyboard */,
@@ -2711,6 +2717,8 @@
 		DBE9EF2919E7D71C00031144 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				01C9A37B1FE96ECA009ACFE4 /* OTSocialViewController.h */,
+				01C9A37C1FE96ECA009ACFE4 /* OTSocialViewController.m */,
 				1DA682EF19E823C3007BD4BC /* OTSWRevealViewController.h */,
 				1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */,
 				DBE9EF3519E7DCCA00031144 /* UIViewController+menu.h */,
@@ -2866,6 +2874,7 @@
 				1E78B7E81D5134D20008C00E /* SF-UI-Text-Ultrathin.otf in Resources */,
 				1E78B7DC1D5134D20008C00E /* SF-UI-Text-Bold.otf in Resources */,
 				1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */,
+				01C9A37A1FE96EBD009ACFE4 /* Social.storyboard in Resources */,
 				1E5F79841D5A0E6A0005003C /* MyEntourages.storyboard in Resources */,
 				1E78B7DF1D5134D20008C00E /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				1E488E021D4FAFA600A2E5B0 /* UserProfileDetails.storyboard in Resources */,
@@ -3275,6 +3284,7 @@
 				1E587F251E2E14E900FEBB67 /* OTAssociationsSourceBehavior.m in Sources */,
 				1E0972BD1D55541E006E1FAD /* OTInviteByPhoneViewController.m in Sources */,
 				1EA5C65B1E48AE7200891C9B /* OTAutoGrowTextView.m in Sources */,
+				01C9A37D1FE96ECB009ACFE4 /* OTSocialViewController.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
 				1E8767181E5AEA8B0080486A /* OTTutorial3ViewController.m in Sources */,
 				D615B20C1E964036004277F6 /* OTShareFeedItemBehavior.m in Sources */,
