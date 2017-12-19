@@ -30,6 +30,7 @@
 #import "OTSolidarityGuideFiltersViewController.h"
 #import "OTHTTPRequestManager.h"
 #import "OTDeepLinkService.h"
+#import "OTAboutViewController.h"
 
 #define HEADER_CELL_INDEX 7
 #define LOG_OUT_CELL_INDEX 8
@@ -45,6 +46,7 @@ NSString *const OTMenuViewControllerSegueMenuProfileIdentifier = @"segueMenuIden
 NSString *const OTMenuViewControllerSegueMenuSettingsIdentifier = @"segueMenuIdentifierForSettings";
 NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
 NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdentifierForAbout";
+NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdentifierForSocial";
 
 @interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -234,9 +236,9 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 #pragma mark - Storyboard
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuAboutIdentifier])
+    if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuAboutIdentifier]) {
         [OTLogger logEvent:@"AboutClick"];
-    else if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuDisconnectIdentifier]) {
+    } else if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuDisconnectIdentifier]) {
         [OTLogger logEvent:@"LogOut"];
         [OTOngoingTourService sharedInstance].isOngoing = NO;
     }
@@ -281,7 +283,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     
     OTMenuItem *itemAtd = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_atd_partner")
                                                    iconName:@"atdLogo"
-                                                 identifier:ATD_LINK_ID];
+                                                 segueIdentifier:OTMenuViewControllerSegueMenuSocialIdentifier];
     [menuItems addObject:itemAtd];
     
    // NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;

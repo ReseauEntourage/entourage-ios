@@ -73,12 +73,6 @@
     OTAboutItem *aboutItem = [self aboutItemAtIndexPath:indexPath];
     if (aboutItem != nil) {
         cell.titleLabel.text = aboutItem.title;
-        if (indexPath.row == 0) {
-            if([[ConfigurationManager shared].environment isEqualToString:@"staging"])
-                cell.extraLabel.text = [NSString stringWithFormat:@"v%@",[NSBundle fullCurrentVersion]];
-            else
-                cell.extraLabel.text = [NSString stringWithFormat:@"v%@",[NSBundle currentVersion]];
-        }
     }
     return cell;
 }
@@ -149,16 +143,6 @@
 + (NSArray *)createAboutItems
 {
     NSMutableArray *aboutItems = [NSMutableArray array];
-    
-    OTAboutItem *itemRate = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_rateus")
-                                                           url:ABOUT_RATE_US_URL];
-    itemRate.type = Rate;
-    [aboutItems addObject:itemRate];
-    
-    OTAboutItem *itemFacebook = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_facebook")
-                                                               url:ABOUT_FACEBOOK_URL];
-    itemFacebook.type = Facebook;
-    [aboutItems addObject:itemFacebook];
     
     OTAboutItem *itemCGU = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_cgu")
                                                           url:ABOUT_CGU_URL];

@@ -76,6 +76,9 @@
 "about_email" = "Contactez Entourage";
 "about_email_notavailable" = "Email introuvable";
 "terms_and_conditions_for_onboarding" = "conditions d’utilisation";
+"about_twitter" = "Suivez-nous sur Twitter";
+"about_suggestions" = "Suggérer des améliorations";
+"about_join" = "Devenir bénévole - ambassadeur";
 
 // Map Options
 "create_tour" = "Créer une maraude";
@@ -308,6 +311,7 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 
 // Titles
 "aboutTitle" = "À propos";
+"socialTitle" = "AGIR AVEC ENTOURAGE";
 "descriptionTitle" = "Description";
 "discoverEntourage" = "Découvrez Entourage";
 "guideviewcontroller_title" = "GUIDE";

@@ -13,7 +13,10 @@ typedef enum {
     Facebook,
     GeneralConditions,
     FAQ,
-    Website
+    Website,
+    Twitter,
+    Suggestions,
+    Join
 } AboutItems;
 
 @interface OTAboutItem : NSObject
