@@ -148,6 +148,9 @@
         if (pathComponents != nil && pathComponents.count >= 2) {
             [self navigateTo:pathComponents[1]];
         }
+    } else if ([key isEqualToString:@"guide"]) {
+        OTMainViewController *mainViewController = [self popToMainViewController];
+        [mainViewController switchToGuide];
     }
 }
 

@@ -163,6 +163,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         [self.revealViewController revealToggle:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:kSolidarityGuideNotification object:self];
 //        NSArray *deepLinks = @[
+//                               @"https://www.entourage.social/deeplink/guide",
 //                               @"https://www.entourage.social/entourages/e0nEjytD9mU8",
 //                               @"https://www.entourage.social/deeplink/badge",
 //                               @"https://www.entourage.social/deeplink/feed",

@@ -122,8 +122,8 @@ continueUserActivity:(NSUserActivity *)userActivity
 
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
         NSURL *url = userActivity.webpageURL;
-        NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
-        NSString *entourageId = arrayWithStrings.lastObject;
+        //NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
+        //NSString *entourageId = arrayWithStrings.lastObject;
         //[[OTDeepLinkService new] navigateTo:entourageId];
         [[OTDeepLinkService new] handleUniversalLink:url];
     }
