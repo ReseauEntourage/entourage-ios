@@ -112,7 +112,7 @@ Déplacez la carte pour trouver des structures d’assistance: restaurants solid
 Une structure manque sur la carte ?
 Proposez une structure";
 "no_data_guide_link" = "Proposez une structure";
-"want_to_join_tour" = "veut rejoindre votre maraude.";
+"want_to_join_tour" = "veut entrer en contact avec vous.";
 "want_to_join_entourage" = "veut rejoindre votre entourage.";
 
 // Disclaimer
@@ -188,7 +188,7 @@ Proposez une structure";
 "formater_encounterAnd" = "%@ et";
 "formater_meetEncounter" = "se sont rencontrés ici le %@";
 "formatter_encounter_and_user_meet" = " et %@ se sont rencontrés ici.";
-"user_joined_tour" = " a rejoint la maraude.";
+"user_joined_tour" = " est entré(e) en contact avec %@";
 "user_joined_entourage" = " a rejoint l’entourage.";
 "user_join_reject" = " a reçu une notification du rejet de sa demande.";
 "meetingCreated" = "Rencontre créée";
