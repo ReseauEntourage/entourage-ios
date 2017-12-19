@@ -288,10 +288,13 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "filter_entourage_demand" = "Demandes";
 "filter_entourage_contribution" = "Contributions";
 "filter_entourage_show_tours" = "Maraudes";
-"filter_entourage_only_my_entourages" = "Ne visualiser que mes entourages";
-"filter_entourage_from_sympathisants_title" = "Montrer uniquement";
-"filter_entourage_from_sympathisants" = "Crées par les sympathisants de l’association que je soutiens";
+"filter_entourage_mine_title" = "Montrer";
+"filter_entourage_unread" = "Uniquement les messages non lus";
+"filter_entourage_only_my_entourages" = "Uniquement les actions que j'ai créées";
+"filter_entourage_from_sympathisants" = "Uniquement les actions créées par des sympathisants d'asso que je soutiens";
+"filter_entourage_include_closed" = "Inclure les actions clôturées";
 "filter_entourage_my_entourages" = "Mes entourages";
+"filter_entourage_from_sympathisants_title" = "Montrer uniquement";
 
 "filter_solidarity_guide_categories" = "Catégories";
 

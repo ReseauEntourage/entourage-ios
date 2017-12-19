@@ -13,6 +13,8 @@
 #import "OTConsts.h"
 #import "OTMyEntouragesFilter.h"
 #import "OTFeedItem.h"
+#import "OTSavedMyEntouragesFilter.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTMyEntouragesDataSource ()
 
@@ -72,6 +74,7 @@
 
 - (void)filterChanged:(OTMyEntouragesFilter *)filter {
     self.currentFilter = filter;
+    [NSUserDefaults standardUserDefaults].savedMyEntouragesFilter = [OTSavedMyEntouragesFilter fromMyEntouragesFilter:self.currentFilter];
     [self.items removeAllObjects];
     [self.tableView reloadData];
     self.pageNumber = 1;
