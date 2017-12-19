@@ -21,7 +21,7 @@
 
 @import MessageUI;
 
-#define FAQ_INDEXPATH 3
+#define FAQ_INDEXPATH 1
 
 @interface OTAboutViewController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
 
