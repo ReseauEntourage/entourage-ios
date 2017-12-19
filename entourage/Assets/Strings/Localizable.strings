@@ -49,7 +49,7 @@
 
 "menu_guide" = "Guide de solidarité";
 "menu_param" = "Paramètres de l'application";
-"menu_about" = "À propos";
+"menu_about" = "Aide & à propos";
 "menu_map_title" = "Maraudes";
 "menu_guide_title" = "Guide";
 "menu_profile_title" = "Profil";
@@ -62,10 +62,10 @@
 "menu_yourOpinion_title" = "VOTRE AVIS";
 "menu_translate_title" = "TRADUIRE";
 "menu_disconnect_title" = "Déconnexion";
-"menu_entourage_actions" = "Quelques idées d'actions";
+"menu_entourage_actions" = "Idées d''actions dans l'appli";
 "menu_make_donation" = "Faire un don";
 "menu_application_usage" = "Utilisation de l'appli";
-"menu_atd_partner" = "Notre partenariat avec ATD";
+"menu_atd_partner" = "Agir avec Entourage";
 "menu_solidarity_guide" = "Carte des structures solidaires";
 
 // AboutItems
