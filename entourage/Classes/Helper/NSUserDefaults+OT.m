@@ -105,7 +105,9 @@ static NSString *const kTourOngoing = @"kTour";
 }
 
 - (NSString *)keyForSavedFilter {
-    return [kNewsfeedsFilter stringByAppendingString:self.currentUser.sid.stringValue];
+    if (self.currentUser != nil)
+        return [kNewsfeedsFilter stringByAppendingString:self.currentUser.sid.stringValue];
+    return @"";
 }
 
 - (OTSavedMyEntouragesFilter *)savedMyEntouragesFilter {
