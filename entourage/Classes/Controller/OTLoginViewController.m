@@ -164,7 +164,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                        [[OTDeepLinkService new] handleDeepLink:self.fromLink];
                                        self.fromLink = nil;
                                    }
-                                   [[OTLocationManager sharedInstance] startLocationUpdates];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    [OTLogger logEvent:@"TelephoneSubmitFail"];
