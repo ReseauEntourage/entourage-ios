@@ -63,7 +63,7 @@
         }
         else {
             self.showMedical = self.isPro;
-            self.showSocial = !self.isPro;
+            self.showSocial = self.isPro;
             self.showDistributive = self.isPro;
             self.showDemand = YES;
             self.showContribution = YES;
