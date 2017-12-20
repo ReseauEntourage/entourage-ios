@@ -84,6 +84,8 @@
     } orFailure:^(NSError *error) {
         [SVProgressHUD dismiss];
     }];
+    if(self.inviteBehaviorTriggered)
+        [self performSegueWithIdentifier:@"SegueInviteSource" sender:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

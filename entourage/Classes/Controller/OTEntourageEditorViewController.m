@@ -112,7 +112,7 @@
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
         [OTLogger logEvent:@"CreateEntourageSuccess"];
         if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)])
-            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:self.editTableSource.entourage];
+            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotCreated")];
         sender.enabled = YES;

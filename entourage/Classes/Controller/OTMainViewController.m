@@ -154,6 +154,7 @@
 @property (nonatomic) BOOL                                          wasLoadedOnce;
 @property (nonatomic) BOOL                                          noDataDisplayed;
 @property (nonatomic) BOOL                                          poisDisplayed;
+@property (nonatomic) BOOL                                          inviteBehaviorTriggered;
 @property (nonatomic, weak) IBOutlet OTNoDataBehavior               *noDataBehavior;
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior           *mailSender;
 @property (nonatomic, weak) IBOutlet OTCustomSegmentedBehavior      *customSegmentedBehavior;
@@ -945,6 +946,8 @@
 - (void)didEditEntourage:(OTEntourage *)entourage {
     [self dismissViewControllerAnimated:YES completion:^{
         [self forceGetNewData];
+        self.inviteBehaviorTriggered = YES;
+        [self showFeedInfo:entourage];
     }];
 }
 
@@ -1259,6 +1262,8 @@
     else if([segue.identifier isEqualToString:@"ActiveFeedItemDetailsSegue"]) {
         OTActiveFeedItemViewController *controller = (OTActiveFeedItemViewController *)destinationViewController;
         controller.feedItem = self.selectedFeedItem;
+        controller.inviteBehaviorTriggered = self.inviteBehaviorTriggered;
+        self.inviteBehaviorTriggered = NO;
     }
     else if([segue.identifier isEqualToString:@"MyEntouragesSegue"]) {
         OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
