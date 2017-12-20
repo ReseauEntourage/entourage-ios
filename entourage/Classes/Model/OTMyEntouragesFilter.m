@@ -209,7 +209,7 @@
         case FeedItemFilterKeyMyEntouragesOnly:
             self.showMyEntouragesOnly = filter.active;
             break;
-        case FeedItemFilterKeyOrganisation:
+        case FeedItemFilterKeyMyOrganisationOnly:
             self.showFromOrganisationOnly = filter.active;
             break;
         case FeedItemFilterKeyIncludingClosed:
