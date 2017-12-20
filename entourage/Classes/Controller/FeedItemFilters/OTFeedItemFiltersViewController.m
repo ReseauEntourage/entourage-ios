@@ -57,7 +57,9 @@
 
 - (void)close {
     [OTLogger logEvent:@"CloseFilter"];
-    [self dismissViewControllerAnimated:YES completion: nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.filterDelegate filterChanged:nil];
+    }];
 }
 
 @end
