@@ -230,7 +230,7 @@ continueUserActivity:(NSUserActivity *)userActivity
     UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
 	UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
 	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
-	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
+	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0],
         NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
 
     UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
