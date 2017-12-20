@@ -46,6 +46,7 @@
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
 		01C9A37A1FE96EBD009ACFE4 /* Social.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C9A3791FE96EBC009ACFE4 /* Social.storyboard */; };
 		01C9A37D1FE96ECB009ACFE4 /* OTSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C9A37C1FE96ECA009ACFE4 /* OTSocialViewController.m */; };
+		01C9A3801FEA7D0D009ACFE4 /* OTMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C9A37F1FEA7D0D009ACFE4 /* OTMapView.m */; };
 		01D191271FA21466008F6BFB /* OTAboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D191261FA21466008F6BFB /* OTAboutMeViewController.m */; };
 		01DCFF101EEEAF9A007A0705 /* UserProfileEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01DCFF0F1EEEAF9A007A0705 /* UserProfileEditor.storyboard */; };
 		01E3AA421EEEADC5007FB282 /* AssociationDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E3AA411EEEADC5007FB282 /* AssociationDetails.storyboard */; };
@@ -475,6 +476,8 @@
 		01C9A3791FE96EBC009ACFE4 /* Social.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Social.storyboard; sourceTree = "<group>"; };
 		01C9A37B1FE96ECA009ACFE4 /* OTSocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSocialViewController.h; sourceTree = "<group>"; };
 		01C9A37C1FE96ECA009ACFE4 /* OTSocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSocialViewController.m; sourceTree = "<group>"; };
+		01C9A37E1FEA7D0C009ACFE4 /* OTMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMapView.h; sourceTree = "<group>"; };
+		01C9A37F1FEA7D0D009ACFE4 /* OTMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapView.m; sourceTree = "<group>"; };
 		01D191251FA21466008F6BFB /* OTAboutMeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAboutMeViewController.h; sourceTree = "<group>"; };
 		01D191261FA21466008F6BFB /* OTAboutMeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAboutMeViewController.m; sourceTree = "<group>"; };
 		01DCFF0F1EEEAF9A007A0705 /* UserProfileEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfileEditor.storyboard; sourceTree = "<group>"; };
@@ -2665,6 +2668,8 @@
 		DBBE8ACB19E83CCE00FA218E /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				01C9A37E1FEA7D0C009ACFE4 /* OTMapView.h */,
+				01C9A37F1FEA7D0D009ACFE4 /* OTMapView.m */,
 				6B4930C819A773C500DA7EE0 /* OTMainViewController.h */,
 				6B4930C919A773C500DA7EE0 /* OTMainViewController.m */,
 				45FD17B51CFC4F3E0037270B /* OTOptionsViewController.h */,
@@ -3286,6 +3291,7 @@
 				1EA5C65B1E48AE7200891C9B /* OTAutoGrowTextView.m in Sources */,
 				01C9A37D1FE96ECB009ACFE4 /* OTSocialViewController.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
+				01C9A3801FEA7D0D009ACFE4 /* OTMapView.m in Sources */,
 				1E8767181E5AEA8B0080486A /* OTTutorial3ViewController.m in Sources */,
 				D615B20C1E964036004277F6 /* OTShareFeedItemBehavior.m in Sources */,
 				1E4661831DAE6D2F00ED0CD0 /* OTDescriptionCell.m in Sources */,

@@ -89,6 +89,7 @@
 #import "KPAnnotation.h"
 #import "OTAnnouncement.h"
 #import "OTWebViewController.h"
+#import "OTMapView.h"
 
 #define MAPVIEW_HEIGHT 224.f
 
@@ -128,7 +129,7 @@
 @property (nonatomic, weak) IBOutlet OTTourCreatorBehavior          *tourCreatorBehavior;
 @property (nonatomic, weak) IBOutlet UIView                         *showSolidarityGuideView;
 @property (nonatomic, weak) IBOutlet UILabel                        *solidarityGuideLabel;
-@property (nonatomic, strong) MKMapView                             *mapView;
+@property (nonatomic, strong) OTMapView                             *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer                *tapGestureRecognizer;
 @property (nonatomic) CLLocationCoordinate2D                        encounterLocation;
 @property (nonatomic, strong) OTToursMapDelegate                    *toursMapDelegate;
@@ -201,7 +202,7 @@
     self.solidarityFilter = [OTSolidarityGuideFilter new];
     self.encounters = [NSMutableArray new];
     self.markers = [NSMutableArray new];
-    self.mapView = [MKMapView new];
+    self.mapView = [OTMapView new];
     self.mapDelegateProxy.mapView = self.mapView;
     self.overlayFeeder.mapView = self.mapView;
     [self.mapDelegateProxy initialize];
@@ -1104,6 +1105,7 @@
 #pragma mark - "Screens"
 
 - (void)showToursList {
+    self.tableView.scrollEnabled = YES;
     [OTLogger logEvent:@"Screen06_1FeedView"];
     [self.toggleCollectionView toggle:NO animated:NO];
     self.showSolidarityGuideView.hidden = YES;
@@ -1121,6 +1123,7 @@
 }
 
 - (void)showToursMap {
+    self.tableView.scrollEnabled = NO;
     if(self.guideMapDelegate.isActive) {
         [self.showSolidarityGuideView setHidden:YES];
         [self.toggleCollectionView toggle:NO animated:NO];

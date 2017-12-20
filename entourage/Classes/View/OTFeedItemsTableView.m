@@ -231,21 +231,21 @@
         if(self.contentSize.height - scrollView.contentOffset.y <= scrollView.frame.size.height && self.tableFooterView != self.emptyFooterView && self.contentSize.height > self.frame.size.height)
         [self.superview layoutIfNeeded];
     }];
-    
+
     CGFloat scrollOffset = scrollView.contentOffset.y;
     CGRect headerFrame = self.tableHeaderView.frame;//self.mapView.frame;
-    
+
     if (scrollOffset < 0)
     {
         headerFrame.origin.y = scrollOffset;// MIN(kMapHeaderOffsetY - ((scrollOffset / 3)), 0);
         headerFrame.size.height = MAPVIEW_HEIGHT - scrollOffset;
-        
+
     }
     else //scrolling up
     {
         headerFrame.origin.y = kMapHeaderOffsetY ;//- scrollOffset;
     }
-    
+
     self.tableHeaderView.subviews[0].frame = headerFrame;
 }
 

@@ -16,6 +16,7 @@
 #import "OTLocationManager.h"
 #import "NSNotification+entourage.h"
 #import "UIBarButtonItem+factory.h"
+#import "OTMapView.h"
 
 #define SEARCHBAR_FRAME CGRectMake(16, 80, [UIScreen mainScreen].bounds.size.width-32, 48)
 #define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
@@ -23,7 +24,7 @@
 
 @interface OTLocationSelectorViewController () <MKMapViewDelegate>
 
-@property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) IBOutlet OTMapView *mapView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong)  UISearchBar *searchBar;
