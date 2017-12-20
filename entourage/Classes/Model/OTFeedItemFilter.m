@@ -14,11 +14,19 @@
 + (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
                          active:(BOOL)active
                        children:(NSArray *)children {
+    return [OTFeedItemFilter createFor:key active:active children:children showBoldText:NO];
+}
+
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
+                       children:(NSArray *)children
+                   showBoldText:(BOOL)showBoldText {
     OTFeedItemFilter *result = [OTFeedItemFilter new];
     result.key = key;
     result.active = active;
     result.title = [OTFeedItemFilter stringForKey:key];
     result.subItems = children;
+    result.showBoldText = showBoldText;
     return result;
 }
 

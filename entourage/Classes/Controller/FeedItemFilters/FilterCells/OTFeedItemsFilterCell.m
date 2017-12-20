@@ -15,12 +15,8 @@
 
 - (void)configureWith:(OTFeedItemFilter *)filter {
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:filter.title];
-    if([filter.title isEqualToString:OTLocalizedString(@"contribution_filter")]) {
-        title = [self attributedTitle:filter.title boldChars:13];
-    } else if([filter.title isEqualToString:OTLocalizedString(@"demande")]) {
-        title = [self attributedTitle:filter.title boldChars:8];
-    } else if ([filter.title isEqualToString:OTLocalizedString(@"filter_entourage_show_tours")]) {
-        title =[self attributedTitle:filter.title boldChars:filter.title.length];
+    if (filter.showBoldText) {
+        title = [self attributedTitle:filter.title boldChars:filter.title.length];
     }
     self.lblTitle.attributedText = title;
     [self.swtActive setOn:filter.active animated:NO];

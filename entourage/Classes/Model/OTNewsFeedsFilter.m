@@ -193,7 +193,8 @@
     NSMutableArray *tours = [[NSMutableArray alloc] initWithObjects:
                              [OTFeedItemFilter createFor:FeedItemFilterKeyTour
                                                   active:self.showTours
-                                                children:tourChildren], nil];
+                                                children:tourChildren
+                                            showBoldText:YES], nil];
     [tours addObjectsFromArray:tourChildren];
     [array addObject:tours];
     [array addObject:[self groupActions]];
@@ -249,11 +250,13 @@
     NSArray *demandeArray = [self demandCategory:demande];
     [action addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
                                             active:[[self.categoryDictionary valueForKey:demande.type] boolValue]
-                                          children:demandeArray]];
+                                          children:demandeArray
+                                      showBoldText:YES]];
     [action addObjectsFromArray:demandeArray];
     [action addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                             active:[[self.categoryDictionary valueForKey:contribution.type] boolValue]
-                                          children:contributionArray]];
+                                          children:contributionArray
+                                      showBoldText:YES]];
     [action addObjectsFromArray:contributionArray];
     return action;
 }
