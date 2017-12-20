@@ -139,8 +139,12 @@
             default:
                 return 44;
                 break;
-    }
-    
+        }//switch(item.key)
+    }//if(parents.count > 0)
+    else {
+        if (item.key == FeedItemFilterKeyMyOrganisationOnly && [[UIScreen mainScreen] bounds].size.width <= 321) {
+            size = 65;
+        }
     }
     return item.key == FeedItemFilterKeyTimeframe ? 90 : size;
 }

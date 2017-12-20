@@ -115,7 +115,7 @@
                      [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntouragesOnly
                                           active:self.showMyEntouragesOnly
                                         children:@[]],
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyOrganisationOnly
                                           active:self.showFromOrganisationOnly
                                         children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
@@ -166,7 +166,7 @@
                      [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntouragesOnly
                                           active:self.showMyEntouragesOnly
                                         children:@[]],
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyOrganisationOnly
                                           active:self.showFromOrganisationOnly
                                         children:@[]],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed

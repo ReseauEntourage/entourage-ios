@@ -86,6 +86,8 @@
             return OTLocalizedString(@"filter_entourage_my_entourages");
         case FeedItemFilterKeyMyEntouragesOnly:
             return OTLocalizedString(@"filter_entourage_only_my_entourages");
+        case FeedItemFilterKeyMyOrganisationOnly:
+            return OTLocalizedString(@"filter_entourage_only_my_organisation");
         default:
             return @"";
     }

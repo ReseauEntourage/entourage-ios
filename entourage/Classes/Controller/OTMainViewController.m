@@ -963,6 +963,11 @@
 #pragma mark - OTFeedItemsFilterDelegate
 
 - (void)filterChanged:(OTNewsFeedsFilter *)filter {
+    if (filter == nil) {
+        // discard the changes if user pressed close button
+        self.currentFilter = [OTNewsFeedsFilter new];
+        return;
+    }
     self.currentFilter = filter;
     [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
     [self reloadFeeds];
