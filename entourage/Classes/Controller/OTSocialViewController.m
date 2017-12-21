@@ -18,6 +18,7 @@
 #import "OTHTTPRequestManager.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
+#import "OTDeepLinkService.h"
 
 @interface OTSocialViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -84,7 +85,8 @@
    if (indexPath.row == 3 || indexPath.row == 4) {
         NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, item.identifier, TOKEN];
         NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        [[OTDeepLinkService new] openWithWebView: [NSURL URLWithString:url]];
+        //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     }
     else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];

@@ -262,7 +262,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 	NSMutableArray *menuItems = [NSMutableArray array];
     OTMenuItem *itemBlog = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_scb")
                                                     iconName: @"blog"
-                                                         identifier:SCB_LINK_ID];
+                                                  identifier:SCB_LINK_ID];
     [menuItems addObject:itemBlog];
     
     OTMenuItem *itemEntourageActions = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_entourage_actions")
