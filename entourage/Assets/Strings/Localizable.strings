@@ -49,7 +49,7 @@
 
 "menu_guide" = "Guide de solidarité";
 "menu_param" = "Paramètres de l'application";
-"menu_about" = "À propos";
+"menu_about" = "Aide & à propos";
 "menu_map_title" = "Maraudes";
 "menu_guide_title" = "Guide";
 "menu_profile_title" = "Profil";
@@ -62,10 +62,10 @@
 "menu_yourOpinion_title" = "VOTRE AVIS";
 "menu_translate_title" = "TRADUIRE";
 "menu_disconnect_title" = "Déconnexion";
-"menu_entourage_actions" = "Quelques idées d'actions";
+"menu_entourage_actions" = "Idées d'actions dans l'appli";
 "menu_make_donation" = "Faire un don";
 "menu_application_usage" = "Utilisation de l'appli";
-"menu_atd_partner" = "Notre partenariat avec ATD";
+"menu_atd_partner" = "Agir avec Entourage";
 "menu_solidarity_guide" = "Carte des structures solidaires";
 
 // AboutItems
@@ -76,6 +76,9 @@
 "about_email" = "Contactez Entourage";
 "about_email_notavailable" = "Email introuvable";
 "terms_and_conditions_for_onboarding" = "conditions d’utilisation";
+"about_twitter" = "Suivez-nous sur Twitter";
+"about_suggestions" = "Suggérer des améliorations";
+"about_join" = "Devenir bénévole - ambassadeur";
 
 // Map Options
 "create_tour" = "Créer une maraude";
@@ -112,7 +115,7 @@ Déplacez la carte pour trouver des structures d’assistance: restaurants solid
 Une structure manque sur la carte ?
 Proposez une structure";
 "no_data_guide_link" = "Proposez une structure";
-"want_to_join_tour" = "veut rejoindre votre maraude.";
+"want_to_join_tour" = "veut entrer en contact avec vous.";
 "want_to_join_entourage" = "veut rejoindre votre entourage.";
 
 // Disclaimer
@@ -188,7 +191,7 @@ Proposez une structure";
 "formater_encounterAnd" = "%@ et";
 "formater_meetEncounter" = "se sont rencontrés ici le %@";
 "formatter_encounter_and_user_meet" = " et %@ se sont rencontrés ici.";
-"user_joined_tour" = " a rejoint la maraude.";
+"user_joined_tour" = " est entré(e) en contact avec %@";
 "user_joined_entourage" = " a rejoint l’entourage.";
 "user_join_reject" = " a reçu une notification du rejet de sa demande.";
 "meetingCreated" = "Rencontre créée";
@@ -288,10 +291,14 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 "filter_entourage_demand" = "Demandes";
 "filter_entourage_contribution" = "Contributions";
 "filter_entourage_show_tours" = "Maraudes";
-"filter_entourage_only_my_entourages" = "Ne visualiser que mes entourages";
-"filter_entourage_from_sympathisants_title" = "Montrer uniquement";
-"filter_entourage_from_sympathisants" = "Crées par les sympathisants de l’association que je soutiens";
+"filter_entourage_mine_title" = "Montrer";
+"filter_entourage_unread" = "Uniquement les messages non lus";
+"filter_entourage_only_my_entourages" = "Uniquement les actions que j'ai créées";
+"filter_entourage_only_my_organisation" = "Uniquement les actions créées par des sympathisants d'assos que je soutiens";
+"filter_entourage_include_closed" = "Inclure les actions clôturées";
 "filter_entourage_my_entourages" = "Mes entourages";
+"filter_entourage_from_sympathisants_title" = "Montrer uniquement";
+"filter_entourage_from_sympathisants" = "Crées par les sympathisants de l'association que je soutiens";
 
 "filter_solidarity_guide_categories" = "Catégories";
 
@@ -305,6 +312,7 @@ Membres d'une association utilisatrice d'Entourage, contactez associations@entou
 
 // Titles
 "aboutTitle" = "À propos";
+"socialTitle" = "AGIR AVEC ENTOURAGE";
 "descriptionTitle" = "Description";
 "discoverEntourage" = "Découvrez Entourage";
 "guideviewcontroller_title" = "GUIDE";
@@ -353,8 +361,8 @@ On dirait bien qu’il n’y a aucun entourage à proximité… pour l’instant
 Vous pouvez créer votre propre entourage en cliquant sur
 le + en bas à droite.
 ";
-"no_feeds_received" = "Aucun entourage près de cette position";
-"no_more_feeds" = "Aucun autre entourage près de cette position";
+"no_feeds_received" = "Aucune action près de cette position";
+"no_more_feeds" = "Aucune action près de cette position";
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
 "ok" = "OK";
 
@@ -399,6 +407,7 @@ le + en bas à droite.
 "share_public" = "Ce projet solidaire sur Entourage a besoin de toi. Rejoins-le en téléchargeant l'app ici %@";
 "share_creator" = "J'ai créé ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
 "share_joiner" = "J'ai rejoint ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
+"share_webview" = "J'ai découvert le guide Simple Comme Bonjour pour aller à la rencontre des personnes sans-abri. C'est à découvrir ici : %@";
 
 "feed_item_time_distance" = "Créée il y a ";
 

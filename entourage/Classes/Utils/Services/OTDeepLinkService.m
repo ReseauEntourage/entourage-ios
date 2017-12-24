@@ -19,10 +19,11 @@
 #import "OTLoginViewController.h"
 #import "OTMainViewController.h"
 #import "OTSelectAssociationViewController.h"
+#import "OTEntourageEditorViewController.h"
 
 @interface OTDeepLinkService ()
 
-@property (nonatomic, weak) NSString *link;
+@property (nonatomic, weak) NSURL *link;
 
 @end
 
@@ -72,10 +73,7 @@
     UINavigationController *rootUserProfileController = (UINavigationController *)[userProfileStorybard instantiateInitialViewController];
     OTUserViewController *userController = (OTUserViewController *)rootUserProfileController.topViewController;
     userController.userId = userId;
-    UIViewController *currentController = [self getTopViewController];
-    while(currentController.presentedViewController)
-        currentController = currentController.presentedViewController;
-    [currentController presentViewController:rootUserProfileController animated:YES completion:nil];
+    [self showControllerFromAnywhere:rootUserProfileController];
 }
 
 - (void)navigateToLogin {
@@ -86,27 +84,73 @@
     [currentController showViewController:loginController sender:self];
 }
 
-- (void)handleFeedAndBadgeLinks: (NSURL *)url {
+- (void)handleDeepLink: (NSURL *)url {
     NSString *host = url.host;
     NSString *query = url.query;
-    self.link = host;
+    self.link = url;
     if(!TOKEN) {
         [self navigateToLogin];
     } else {
-        if ([host isEqualToString:@"feed"]) {
-            UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            OTMainViewController *mainController = (OTMainViewController *)[mainStorybard instantiateInitialViewController];
-            [self updateAppWindow:mainController];
-        } else if ([host isEqualToString:@"badge"]) {
-            OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[self instatiateControllerWithStoryboardIdentifier:@"UserProfileEditor" andControllerIdentifier:@"SelectAssociation"];
-            [self showController:selectAssociationController];
-        } else if ([host isEqualToString:@"webview"]) {
-            OTMainViewController *publicFeedItemController = (OTMainViewController *)[self instatiateControllerWithStoryboardIdentifier:@"Main"
-                                    andControllerIdentifier:@"OTMain"];
-            NSArray *elts = [query componentsSeparatedByString:@"="];
-            publicFeedItemController.webview = elts[1];
-            [self showController:publicFeedItemController];
+        [self handleDeepLinkWithKey:host pathComponents:url.pathComponents andQuery:query];
+    }
+}
+
+- (void)handleUniversalLink:(NSURL *)url {
+    if (url.pathComponents == nil || url.pathComponents.count < 2) return;
+    NSMutableArray *pathComponents = [NSMutableArray arrayWithArray:url.pathComponents];
+    // remove the leading '/'
+    [pathComponents removeObjectAtIndex:0];
+    // handle the 'entourages/<extra>'
+    NSString *key = [pathComponents objectAtIndex:0];
+    if ([key isEqualToString:@"entourages"]) {
+        [self handleDeepLinkWithKey:key pathComponents:pathComponents andQuery:nil];
+    }
+    else if ([key isEqualToString:@"deeplink"]) {
+        // handle the 'deeplink/<key>/<extra>?<query>'
+        // remove the 'deeplink'
+        [pathComponents removeObjectAtIndex:0];
+        // handle the deep link
+        key = [pathComponents objectAtIndex:0];
+        [self handleDeepLinkWithKey:key pathComponents:pathComponents andQuery:url.query];
+    }
+}
+
+- (void)handleDeepLinkWithKey:(NSString *)key pathComponents:(NSArray *)pathComponents andQuery:(NSString *)query {
+    if ([key isEqualToString:@"feed"]) {
+        OTMainViewController *mainViewController = [self popToMainViewController];
+        [mainViewController leaveGuide];
+        //            UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        //            OTMainViewController *mainController = (OTMainViewController *)[mainStorybard instantiateInitialViewController];
+        //            [self updateAppWindow:mainController];
+        // "feed/filters"
+        if (pathComponents != nil && pathComponents.count >= 2) {
+            if ([pathComponents[1] isEqualToString:@"filters"]) {
+                [mainViewController showFilters];
+            }
         }
+    } else if ([key isEqualToString:@"badge"]) {
+        OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[self instatiateControllerWithStoryboardIdentifier:@"UserProfileEditor" andControllerIdentifier:@"SelectAssociation"];
+        [self showController:selectAssociationController];
+    } else if ([key isEqualToString:@"webview"]) {
+        OTMainViewController *publicFeedItemController = (OTMainViewController *)[self instatiateControllerWithStoryboardIdentifier:@"Main" andControllerIdentifier:@"OTMain"];
+        NSArray *elts = [query componentsSeparatedByString:@"="];
+        publicFeedItemController.webview = elts[1];
+        [self showController:publicFeedItemController];
+    } else if ([key isEqualToString:@"profile"]) {
+        [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].sid];
+    } else if ([key isEqualToString:@"messages"]) {
+        OTMainViewController *mainViewController = [self popToMainViewController];
+        [mainViewController performSegueWithIdentifier:@"MyEntouragesSegue" sender:nil];
+    } else if ([key isEqualToString:@"create-action"]) {
+        OTMainViewController *mainViewController = [self popToMainViewController];
+        [mainViewController performSegueWithIdentifier:@"EntourageEditorSegue" sender:nil];
+    } else if ([key isEqualToString:@"entourage"] || [key isEqualToString:@"entourages"]) {
+        if (pathComponents != nil && pathComponents.count >= 2) {
+            [self navigateTo:pathComponents[1]];
+        }
+    } else if ([key isEqualToString:@"guide"]) {
+        OTMainViewController *mainViewController = [self popToMainViewController];
+        [mainViewController switchToGuide];
     }
 }
 
@@ -128,6 +172,33 @@
     UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
     [mainController setViewControllers:@[mainController.topViewController, controller]];
     [self updateAppWindow:revealController];
+}
+
+- (void)showControllerFromAnywhere:(UIViewController *)controller {
+    UIViewController *currentController = [self getTopViewController];
+    while(currentController.presentedViewController)
+        currentController = currentController.presentedViewController;
+    [currentController presentViewController:controller animated:YES completion:nil];
+}
+
+- (OTMainViewController *)popToMainViewController {
+    UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([result isKindOfClass:[SWRevealViewController class]]) {
+        SWRevealViewController *revealController = (SWRevealViewController*)result;
+        [revealController setFrontViewPosition:FrontViewPositionLeft];
+        result = revealController.frontViewController;
+    }
+    if([result isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController*)result;
+        [navController popToRootViewControllerAnimated:NO];
+        if ([navController.childViewControllers count] > 0) {
+            if ([navController.childViewControllers[0] isKindOfClass:[OTMainViewController class]]) {
+                [navController.childViewControllers[0] dismissViewControllerAnimated:NO completion:nil];
+                return navController.childViewControllers[0];
+            }
+        }
+    }
+    return nil;
 }
 
 - (void)prepareControllers:(OTFeedItem *)feedItem {

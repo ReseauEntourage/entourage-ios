@@ -16,6 +16,7 @@
 #import "OTLocationManager.h"
 #import "NSNotification+entourage.h"
 #import "UIBarButtonItem+factory.h"
+#import "OTMapView.h"
 
 #define SEARCHBAR_FRAME CGRectMake(16, 80, [UIScreen mainScreen].bounds.size.width-32, 48)
 #define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
@@ -23,7 +24,7 @@
 
 @interface OTLocationSelectorViewController () <MKMapViewDelegate>
 
-@property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) IBOutlet OTMapView *mapView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong)  UISearchBar *searchBar;
@@ -37,9 +38,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
+#if BETA
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(saveNewLocation)
@@ -71,12 +73,12 @@
             [textField.leftView addSubview: leftImage];
         }
     }
-    
     self.resultSearchController.hidesNavigationBarDuringPresentation = NO;
     self.resultSearchController.dimsBackgroundDuringPresentation = YES;
     self.definesPresentationContext = YES;
     self.locationSearchTable.mapView = self.mapView;
     self.locationSearchTable.pinDelegate = self;
+    [self zoomToCurrentLocation:nil];
     UIBarButtonItem *cancelBtn = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
     [cancelBtn setTitle:OTLocalizedString(@"cancel")];
     [cancelBtn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"SFUItext-Bold" size:17], NSFontAttributeName, nil] forState:UIControlStateNormal];
@@ -87,18 +89,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self zoomToCurrentLocation:nil];
-}
-
 - (IBAction)zoomToCurrentLocation:(id)sender {
     if(!self.selectedLocation)
         self.selectedLocation = [OTLocationManager sharedInstance].currentLocation;
     if (self.selectedLocation) {
         MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.selectedLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
-        [self.mapView setRegion:region animated:YES];
-        [self updateMapPin:self.selectedLocation];
+        [self.mapView setRegion:region animated:NO];
+        [self updateSelectedLocation:self.selectedLocation];
         [self.activityIndicator stopAnimating];
     }
 }
@@ -110,12 +107,7 @@
     [self updateSelectedLocation:self.selectedLocation];
     [self dismissViewControllerAnimated:YES completion:^{
         [self.mapView removeAnnotations:self.mapView.annotations];
-        MKPointAnnotation *annotation = [MKPointAnnotation new];
-        annotation.coordinate = placemark.coordinate;
-        annotation.title = placemark.name;
-        [self.mapView addAnnotation:annotation];
         MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
-                                 
         [self.mapView setRegion:region];
         [self.activityIndicator stopAnimating];
     }];
@@ -123,26 +115,21 @@
 
 #pragma mark - MKMapViewDelegate
 
-- (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id) annotation {
+- (MKAnnotationView *)mapView: (MKMapView *)mapView viewForAnnotation: (id)annotation {
     if([annotation isKindOfClass: [MKUserLocation class]])
         return nil;
     MKPinAnnotationView *pin = (MKPinAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier: @"myPin"];
     if (pin == nil)
         pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: @"myPin"];
     pin.annotation = annotation;
-    pin.animatesDrop = YES;
-    pin.draggable = YES;
-    
+    pin.animatesDrop = NO;
+    pin.draggable = NO;
     return pin;
 }
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
-    if (newState == MKAnnotationViewDragStateEnding) {
-        CLLocationCoordinate2D droppedAt = annotationView.annotation.coordinate;
-        [annotationView.annotation setCoordinate:droppedAt];
-        CLLocation *location = [[CLLocation alloc] initWithLatitude:droppedAt.latitude longitude:droppedAt.longitude];
-        [self updateSelectedLocation:location];
-    }
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    CLLocation *center = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
+    [self updateSelectedLocation:center];
 }
 
 #pragma mark - private methods
@@ -155,19 +142,6 @@
         }
     }];
     self.selectedLocation = location;
-}
-
-- (void)updateMapPin:(CLLocation *)location {
-    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil];
-    [self.mapView removeAnnotations:self.mapView.annotations];
-    MKPointAnnotation *annotation = [MKPointAnnotation new];
-    annotation.coordinate = placemark.coordinate;
-    annotation.title = placemark.name;
-    [self.mapView addAnnotation:annotation];
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( location.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
-    [self.mapView setRegion:region animated:YES];
-    [self.activityIndicator stopAnimating];
-    [self updateSelectedLocation:location];
 }
 
 - (void)saveNewLocation {

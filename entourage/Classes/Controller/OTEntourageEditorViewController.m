@@ -37,6 +37,9 @@
     [self setupData];
     [self.editTableSource configureWith:self.entourage];
     [self setupCloseModal];
+#if BETA
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(sendEntourage:)
@@ -109,7 +112,7 @@
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
         [OTLogger logEvent:@"CreateEntourageSuccess"];
         if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)])
-            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:self.editTableSource.entourage];
+            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotCreated")];
         sender.enabled = YES;

@@ -63,7 +63,7 @@
         }
         else {
             self.showMedical = self.isPro;
-            self.showSocial = !self.isPro;
+            self.showSocial = self.isPro;
             self.showDistributive = self.isPro;
             self.showDemand = YES;
             self.showContribution = YES;
@@ -147,14 +147,22 @@
                                                     active:self.showTours
                                                   children:tourChildren]];
     }
-    NSArray *contributionArray = [self contributionCategory:data[0]];
+    OTCategoryType *contribution;
+    OTCategoryType *demande;
+    for(OTCategoryType *type in data) {
+        if ([type.type isEqualToString:@"contribution"])
+            contribution = type;
+        else if ([type.type isEqualToString:@"ask_for_help"])
+            demande = type;
+    }
+    NSArray *contributionArray = [self contributionCategory:contribution];
     [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
-                                            active:self.showContribution
-                                          children:contributionArray]];
-    NSArray *demandeArray = [self demandCategory:data[1]];
+                                                 active:self.showContribution
+                                               children:contributionArray]];
+    NSArray *demandeArray = [self demandCategory:demande];
     [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
-                                            active:self.showDemand
-                                          children:demandeArray]];
+                                                 active:self.showDemand
+                                               children:demandeArray]];
     
     return parentArray;
 }
@@ -164,8 +172,8 @@
     [array addObject:[self groupActions]];
     [array addObject:[self groupUniquement]];
     NSArray *timeframe =  @[
-                                [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
-                                                    timeframeInHours:self.timeframeInHours]
+                            [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
+                                                timeframeInHours:self.timeframeInHours]
                             ];
     [array addObject:timeframe];
     return array;
@@ -173,19 +181,20 @@
 
 - (NSArray *)groupForPro {
     NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
-                                                  active:self.showMedical
-                                               withImage:@"filter_heal"],
-                             [OTFeedItemFilter createFor:FeedItemFilterKeySocial
-                                                  active:self.showSocial
-                                               withImage:@"filter_social"],
-                             [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
-                                                  active:self.showDistributive
-                                               withImage:@"filter_eat"]];
+                                                   active:self.showMedical
+                                                withImage:@"filter_heal"],
+                              [OTFeedItemFilter createFor:FeedItemFilterKeySocial
+                                                   active:self.showSocial
+                                                withImage:@"filter_social"],
+                              [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
+                                                   active:self.showDistributive
+                                                withImage:@"filter_eat"]];
     NSMutableArray *array = [[NSMutableArray alloc] init];
     NSMutableArray *tours = [[NSMutableArray alloc] initWithObjects:
                              [OTFeedItemFilter createFor:FeedItemFilterKeyTour
                                                   active:self.showTours
-                                                children:tourChildren], nil];
+                                                children:tourChildren
+                                            showBoldText:YES], nil];
     [tours addObjectsFromArray:tourChildren];
     [array addObject:tours];
     [array addObject:[self groupActions]];
@@ -229,17 +238,25 @@
 - (NSArray *)groupActions {
     NSArray *data = [OTCategoryFromJsonService getData];
     NSMutableArray *action = [[NSMutableArray alloc] init];
-    OTCategoryType *contribution = data[0];
-    OTCategoryType *demande = data[1];
-    NSArray *contributionArray = [self contributionCategory:data[0]];
-    NSArray *demandeArray = [self demandCategory:data[1]];
+    OTCategoryType *contribution;
+    OTCategoryType *demande;
+    for(OTCategoryType *type in data) {
+        if ([type.type isEqualToString:@"contribution"])
+            contribution = type;
+        else if ([type.type isEqualToString:@"ask_for_help"])
+            demande = type;
+    }
+    NSArray *contributionArray = [self contributionCategory:contribution];
+    NSArray *demandeArray = [self demandCategory:demande];
     [action addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
                                             active:[[self.categoryDictionary valueForKey:demande.type] boolValue]
-                                          children:demandeArray]];
+                                          children:demandeArray
+                                      showBoldText:YES]];
     [action addObjectsFromArray:demandeArray];
     [action addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                             active:[[self.categoryDictionary valueForKey:contribution.type] boolValue]
-                                          children:contributionArray]];
+                                          children:contributionArray
+                                      showBoldText:YES]];
     [action addObjectsFromArray:contributionArray];
     return action;
 }
@@ -267,16 +284,16 @@
 
 - (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before andLocation:(CLLocationCoordinate2D)location {
     return [NSMutableDictionary dictionaryWithDictionary: @{
-        @"before" : before,
-        @"latitude": @(location.latitude),
-        @"longitude": @(location.longitude),
-        @"distance": @(self.distance),
-        @"types" : [self getTypes],
-        @"show_my_entourages_only" : self.showOnlyMyEntourages ? @"true" : @"false",
-        @"show_my_partner_only" : self.showFromOrganisation ? @"true" : @"false",
-        @"time_range" : @(self.timeframeInHours),
-        @"announcements" : @"v1"
-    }];
+                                                            @"before" : before,
+                                                            @"latitude": @(location.latitude),
+                                                            @"longitude": @(location.longitude),
+                                                            @"distance": @(self.distance),
+                                                            @"types" : [self getTypes],
+                                                            @"show_my_entourages_only" : self.showOnlyMyEntourages ? @"true" : @"false",
+                                                            @"show_my_partner_only" : self.showFromOrganisation ? @"true" : @"false",
+                                                            @"time_range" : @(self.timeframeInHours),
+                                                            @"announcements" : @"v1"
+                                                            }];
 }
 
 - (void)updateValue:(OTFeedItemFilter *)filter {
@@ -360,7 +377,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|", self.showMedical, self.showSocial, self.showDistributive, self.showDemand, self.showContribution, self.showTours, self.showOnlyMyEntourages, self.timeframeInHours, self.location.latitude, self.location.longitude, self.distance, self.showFromOrganisation, self.showDemandeSocial, self.showDemandeEvent, self.showDemandeHelp, self.showDemandeResource, self.showDemandeInfo, self.showDemandeSkill, self.showDemandeOther, self.showContributionSocial, self.showContributionEvent, self.showContributionHelp, self.showContributionResource, self.showContributionInfo, self.showContributionSkill, self.showContributionOther];  
+    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|", self.showMedical, self.showSocial, self.showDistributive, self.showDemand, self.showContribution, self.showTours, self.showOnlyMyEntourages, self.timeframeInHours, self.location.latitude, self.location.longitude, self.distance, self.showFromOrganisation, self.showDemandeSocial, self.showDemandeEvent, self.showDemandeHelp, self.showDemandeResource, self.showDemandeInfo, self.showDemandeSkill, self.showDemandeOther, self.showContributionSocial, self.showContributionEvent, self.showContributionHelp, self.showContributionResource, self.showContributionInfo, self.showContributionSkill, self.showContributionOther];
 }
 
 - (NSString *)getTourTypes {
@@ -443,3 +460,4 @@
 }
 
 @end
+

@@ -13,6 +13,9 @@
 #define USER_ID [[NSUserDefaults standardUserDefaults] currentUser].sid
 #define IS_PRO_USER [[NSUserDefaults standardUserDefaults].currentUser.type isEqualToString:USER_TYPE_PRO]
 
+// Mixpanel
+#define API_URL_MIXPANEL_ENGAGE @"http://api.mixpanel.com/engage/?data=%@"
+
 // Onboarding
 #define API_URL_ONBOARD  @"users"
 
@@ -48,7 +51,7 @@
 
 // Entourages
 #define API_URL_ENTOURAGES @"entourages?token=%@"
-#define API_URL_ENTOURAGE_BY_ID @"entourages/%@?token=%@"
+#define API_URL_ENTOURAGE_BY_ID @"entourages/%@"
 #define API_URL_ENTOURAGE_UPDATE @"entourages/%@?token=%@"
 #define API_URL_ENTOURAGE_QUIT @"entourages/%@/users/%@?token=%@"
 #define API_URL_ENTOURAGE_JOIN_REQUEST @"entourages/%@/users?token=%@"

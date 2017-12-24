@@ -30,11 +30,12 @@
 #import "OTSolidarityGuideFiltersViewController.h"
 #import "OTHTTPRequestManager.h"
 #import "OTDeepLinkService.h"
+#import "OTAboutViewController.h"
 
 #define HEADER_CELL_INDEX 7
 #define LOG_OUT_CELL_INDEX 8
-#define SOLIDARITY_GUIDE_INDEX 3
-#define DONATION_CELL_INDEX 2
+#define SOLIDARITY_GUIDE_INDEX 2
+#define DONATION_CELL_INDEX 3
 
 @import MessageUI;
 
@@ -45,6 +46,7 @@ NSString *const OTMenuViewControllerSegueMenuProfileIdentifier = @"segueMenuIden
 NSString *const OTMenuViewControllerSegueMenuSettingsIdentifier = @"segueMenuIdentifierForSettings";
 NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
 NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdentifierForAbout";
+NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdentifierForSocial";
 
 @interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -121,7 +123,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellID;
-    if(indexPath.row == 2)
+    if(indexPath.row == DONATION_CELL_INDEX)
         cellID = OTMenuMakeDonationTableViewCellIdentifier;
     else if (indexPath.row == HEADER_CELL_INDEX)
         cellID = @"HeaderViewCell";
@@ -162,6 +164,20 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
         [OTLogger logEvent:@"SolidarityGuideFrom07Menu"];
         [self.revealViewController revealToggle:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:kSolidarityGuideNotification object:self];
+//        NSArray *deepLinks = @[
+//                               @"https://www.entourage.social/deeplink/guide",
+//                               @"https://www.entourage.social/entourages/e0nEjytD9mU8",
+//                               @"https://www.entourage.social/deeplink/badge",
+//                               @"https://www.entourage.social/deeplink/feed",
+//                               @"https://www.entourage.social/deeplink/webview?url=https://www.google.ro",
+//                               @"https://www.entourage.social/deeplink/entourage/e0nEjytD9mU8"
+//                               ];
+//        NSTimeInterval delta = 10;
+//        NSTimeInterval delay = 5;
+//        for (NSString *deepLink in deepLinks) {
+//            [self performSelector:@selector(testDeepLink:) withObject:deepLink afterDelay:delay];
+//            delay += delta;
+//        }
     }
     else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
@@ -220,9 +236,9 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 #pragma mark - Storyboard
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuAboutIdentifier])
+    if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuAboutIdentifier]) {
         [OTLogger logEvent:@"AboutClick"];
-    else if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuDisconnectIdentifier]) {
+    } else if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuDisconnectIdentifier]) {
         [OTLogger logEvent:@"LogOut"];
         [OTOngoingTourService sharedInstance].isOngoing = NO;
     }
@@ -246,7 +262,7 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
 	NSMutableArray *menuItems = [NSMutableArray array];
     OTMenuItem *itemBlog = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_scb")
                                                     iconName: @"blog"
-                                                         identifier:SCB_LINK_ID];
+                                                  identifier:SCB_LINK_ID];
     [menuItems addObject:itemBlog];
     
     OTMenuItem *itemEntourageActions = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_entourage_actions")
@@ -255,20 +271,19 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     [menuItems addObject:itemEntourageActions];
     
     
-    //add 3rd new one
+   
+    OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide")
+                                                               iconName:@"mapPin"];
+    [menuItems addObject:itemSolidarityGuide];
+    
     OTMenuItem *itemDon = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_make_donation")
                                                    iconName:@"heartNofillWhite"
                                                  identifier:DONATE_LINK_ID];
     [menuItems addObject:itemDon];
     
-    
-    OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide")
-                                                               iconName:@"mapPin"];
-    [menuItems addObject:itemSolidarityGuide];
-    
     OTMenuItem *itemAtd = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_atd_partner")
-                                                   iconName:@"atdLogo"
-                                                 identifier:ATD_LINK_ID];
+                                                   iconName:@"broadcast"
+                                                 segueIdentifier:OTMenuViewControllerSegueMenuSocialIdentifier];
     [menuItems addObject:itemAtd];
     
    // NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
@@ -310,6 +325,11 @@ NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdenti
     self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     self.imgAssociation.hidden = self.currentUser.partner == nil;
     [self.imgAssociation setupFromUrl:self.currentUser.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
+}
+
+- (void)testDeepLink:(NSString *)deepLink {
+    //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"entourage://create-action"]];
+    [[OTDeepLinkService new] handleUniversalLink:[NSURL URLWithString:deepLink]];
 }
 
 @end

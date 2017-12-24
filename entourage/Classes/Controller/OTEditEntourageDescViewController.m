@@ -32,7 +32,9 @@
         else
             self.txtDescription.placeholder = OTLocalizedString(@"edit_contribution_desc");
     }
+#if BETA
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(doneEdit)

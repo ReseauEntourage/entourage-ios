@@ -11,12 +11,13 @@
 
 @interface OTMyEntouragesFilter : OTFeedItemFilters
 
-@property (nonatomic) BOOL isUnread;
-@property (nonatomic) BOOL isIncludingClosed;
+@property (nonatomic) BOOL showTours;
 @property (nonatomic) BOOL showDemand;
 @property (nonatomic) BOOL showContribution;
-@property (nonatomic) BOOL showTours;
-@property (nonatomic) BOOL showMyEntourages;
-@property (nonatomic) BOOL showFromOrganisation;
+
+@property (nonatomic) BOOL isUnread;
+@property (nonatomic) BOOL showMyEntouragesOnly;
+@property (nonatomic) BOOL showFromOrganisationOnly;
+@property (nonatomic) BOOL isIncludingClosed;
 
 @end

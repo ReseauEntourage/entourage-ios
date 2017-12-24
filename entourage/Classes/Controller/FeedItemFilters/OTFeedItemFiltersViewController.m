@@ -25,7 +25,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.tableDataSource initializeWith:self.filterDelegate.currentFilter];
     self.title =  OTLocalizedString(@"filters").uppercaseString;
     self.tableView.tableFooterView = [UIView new];
@@ -37,6 +36,9 @@
 
 - (void)setupToolbarButtons {
     [self setupCloseModalWithTarget:self andSelector:@selector(close)];
+#if BETA
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
                                                         withTarget:self
                                                          andAction:@selector(saveFilters)
@@ -55,7 +57,9 @@
 
 - (void)close {
     [OTLogger logEvent:@"CloseFilter"];
-    [self dismissViewControllerAnimated:YES completion: nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.filterDelegate filterChanged:nil];
+    }];
 }
 
 @end

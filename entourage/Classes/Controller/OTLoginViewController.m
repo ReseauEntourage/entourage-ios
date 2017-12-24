@@ -70,6 +70,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [super viewDidLoad];
     self.title = @"";
     self.phoneIsValid = NO;
+    self.phoneTextField.floatingLabelTextColor = [UIColor whiteColor];
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.phoneIsValid = YES;
         self.continueButton.enabled = [self validateForm];
@@ -78,7 +79,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
         self.continueButton.enabled = [self validateForm];
     };
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-   
+
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.passwordTextField indentRight];
     [self.countryCodeTxtField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
@@ -142,7 +143,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                success: ^(OTUser *user) {
                                    [OTLogger logEvent:@"Login_Success"];
                                    NSLog(@"User : %@ authenticated successfully", user.email);
-                                   [self setupMixpanelWithUser:user];
+                                   [OTLogger setupMixpanelWithUser:user];
                                    user.phone = [self.codeCountry stringByAppendingString:phone];
                                    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                    if (loggedNumbers == nil)
@@ -159,11 +160,10 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    else {
                                        [self.onboardingNavigation nextFromLogin];
                                    }
-                                   if (self.fromLink && [self.fromLink isEqualToString:@"badge"]) {
-                                       [[OTDeepLinkService new] handleFeedAndBadgeLinks:self.fromLink];
+                                   if (self.fromLink) {
+                                       [[OTDeepLinkService new] handleDeepLink:self.fromLink];
                                        self.fromLink = nil;
                                    }
-                                   [[OTLocationManager sharedInstance] startLocationUpdates];
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    [OTLogger logEvent:@"TelephoneSubmitFail"];
@@ -197,14 +197,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [self presentViewController:alert animated:YES completion:nil];
 
                                }];
-}
-
-- (void)setupMixpanelWithUser: (OTUser *)user {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel identify:[user.sid stringValue]];
-    [mixpanel.people set:@{@"$email": user.email != nil ? user.email : @""}];
-    [mixpanel.people set:@{@"EntouragePartner": user.partner != nil ? user.partner.name : @""}];
-    [mixpanel.people set:@{@"EntourageUserType": user.type}];
 }
 
 #pragma mark - Segue
@@ -267,7 +259,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 #pragma mark - UIPickerViewDelegate
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {    
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return [self.pickerDataSource count];
 }
 

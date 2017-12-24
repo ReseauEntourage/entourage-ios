@@ -32,7 +32,9 @@
         if([self.currentEntourage.type isEqualToString:@"ask_for_help"])
             self.txtTitle.placeholder = OTLocalizedString(@"edit_demand_title");
     }
+#if BETA
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(doneEdit)

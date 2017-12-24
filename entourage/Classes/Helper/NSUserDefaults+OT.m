@@ -8,6 +8,7 @@ static NSString *const kUser = @"kUser";
 static NSString *const kTemporaryUser = @"kTemporaryUser";
 static NSString *const kAutoTutorialComplete = @"kAutoTutorialComplete";
 static NSString *const kNewsfeedsFilter = @"kNewsfeedsFilter_";
+static NSString *const kMyEntouragesFilter = @"kMyEntouragesFilter_";
 static NSString *const kTourOngoing = @"kTour";
 
 @implementation NSUserDefaults (OT)
@@ -104,7 +105,26 @@ static NSString *const kTourOngoing = @"kTour";
 }
 
 - (NSString *)keyForSavedFilter {
-    return [kNewsfeedsFilter stringByAppendingString:self.currentUser.sid.stringValue];
+    if (self.currentUser != nil)
+        return [kNewsfeedsFilter stringByAppendingString:self.currentUser.sid.stringValue];
+    return @"";
+}
+
+- (OTSavedMyEntouragesFilter *)savedMyEntouragesFilter {
+    NSString *key = [self keyForSavedMyEntouragesFilter];
+    NSData *encodedObject = [self objectForKey:key];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+}
+
+- (void)setSavedMyEntouragesFilter:(OTSavedMyEntouragesFilter *)savedMyentouragesFilter {
+    NSString *key = [self keyForSavedMyEntouragesFilter];
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:savedMyentouragesFilter];
+    [[NSUserDefaults standardUserDefaults] setObject:encodedObject forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)keyForSavedMyEntouragesFilter {
+    return [kMyEntouragesFilter stringByAppendingString:self.currentUser.sid.stringValue];
 }
 
 - (BOOL)isTourOngoing {

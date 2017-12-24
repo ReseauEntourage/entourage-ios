@@ -14,11 +14,19 @@
 + (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
                          active:(BOOL)active
                        children:(NSArray *)children {
+    return [OTFeedItemFilter createFor:key active:active children:children showBoldText:NO];
+}
+
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
+                       children:(NSArray *)children
+                   showBoldText:(BOOL)showBoldText {
     OTFeedItemFilter *result = [OTFeedItemFilter new];
     result.key = key;
     result.active = active;
     result.title = [OTFeedItemFilter stringForKey:key];
     result.subItems = children;
+    result.showBoldText = showBoldText;
     return result;
 }
 
@@ -57,9 +65,9 @@
 + (NSString *)stringForKey:(FeedItemFilterKey)key {
     switch (key) {
         case FeedItemFilterKeyUnread:
-            return OTLocalizedString(@"unique_unread");
+            return OTLocalizedString(@"filter_entourage_unread");
         case FeedItemFilterKeyIncludingClosed:
-            return OTLocalizedString(@"closed");
+            return OTLocalizedString(@"filter_entourage_include_closed");
         case FeedItemFilterKeyDemand:
             return OTLocalizedString(@"demande");
         case FeedItemFilterKeyContribution:
@@ -76,6 +84,10 @@
             return OTLocalizedString(@"filter_entourage_from_sympathisants");
         case FeedItemFilterKeyMyEntourages:
             return OTLocalizedString(@"filter_entourage_my_entourages");
+        case FeedItemFilterKeyMyEntouragesOnly:
+            return OTLocalizedString(@"filter_entourage_only_my_entourages");
+        case FeedItemFilterKeyMyOrganisationOnly:
+            return OTLocalizedString(@"filter_entourage_only_my_organisation");
         default:
             return @"";
     }

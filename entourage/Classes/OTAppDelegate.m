@@ -36,12 +36,13 @@
 #import "Mixpanel/Mixpanel.h"
 #import "OTDeepLinkService.h"
 #import "FBSDKCoreKit.h"
+#import <UserNotifications/UserNotifications.h>
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
 NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 
-@interface OTAppDelegate () <UIApplicationDelegate>
+@interface OTAppDelegate () <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 @property (nonatomic, strong) OTPushNotificationsService *pnService;
 @property (nonatomic, assign) BOOL launchedFromNotifications;
@@ -65,19 +66,21 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [Mixpanel sharedInstance].enableLogging = YES;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
-    
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    NSString *language = [[NSLocale preferredLanguages] firstObject];
-    [mixpanel.people set:@{@"EntourageLanguage": language}];
-    
+
     [self configureUIAppearance];
-    
+
+    if (@available(iOS 10.0, *)) {
+        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+    }
+
     self.pnService = [OTPushNotificationsService new];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin:) name:[kLoginFailureNotification copy] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
-    
-    if ([NSUserDefaults standardUserDefaults].currentUser) {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (currentUser) {
+        [OTLogger setupMixpanelWithUser:currentUser];
+        [[OTAuthService new] sendAppInfoWithSuccess:nil failure:nil];
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
             NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -92,7 +95,6 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
         self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         [UIStoryboard showStartup];
     }
-    
     [OTPictureUploadService configure];
 	return YES;
 }
@@ -117,12 +119,13 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 - (BOOL)application:(UIApplication *)application
 continueUserActivity:(NSUserActivity *)userActivity
  restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
-    
+
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
         NSURL *url = userActivity.webpageURL;
-        NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
-        NSString *entourageId = arrayWithStrings.lastObject;
-        [[OTDeepLinkService new] navigateTo:entourageId];
+        //NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
+        //NSString *entourageId = arrayWithStrings.lastObject;
+        //[[OTDeepLinkService new] navigateTo:entourageId];
+        [[OTDeepLinkService new] handleUniversalLink:url];
     }
     return true;
 
@@ -133,10 +136,17 @@ continueUserActivity:(NSUserActivity *)userActivity
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    if ([[url scheme] isEqualToString:@"entourage"]) {
-        [[OTDeepLinkService new] handleFeedAndBadgeLinks:url];
+#if BETA
+    if ([[url scheme] isEqualToString:@"entourage-staging"]) {
+        [[OTDeepLinkService new] handleDeepLink:url];
         return YES;
     }
+#else
+    if ([[url scheme] isEqualToString:@"entourage"]) {
+        [[OTDeepLinkService new] handleDeepLink:url];
+        return YES;
+    }
+#endif
     return NO;
 }
 
@@ -162,7 +172,7 @@ continueUserActivity:(NSUserActivity *)userActivity
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPassword];
 
@@ -178,7 +188,7 @@ continueUserActivity:(NSUserActivity *)userActivity
     [self.pnService saveToken:deviceToken];
     }
     @catch (NSException *ex) {
-        
+
     }
 }
 
@@ -201,6 +211,17 @@ continueUserActivity:(NSUserActivity *)userActivity
         [self.pnService handleLocalNotification:userInfo];
 }
 
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
+{
+    NSDictionary *userInfo = notification.request.content.userInfo;
+    if ([self.pnService isMixpanelDeepLinkNotification:userInfo]) {
+        //for mixpanel deeplinks, shows the push notification
+        completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
+    } else {
+        [self.pnService handleRemoteNotification:userInfo];
+    }
+}
+
 #pragma mark - Configure UIAppearance
 
 - (void)configureUIAppearance {
@@ -209,12 +230,12 @@ continueUserActivity:(NSUserActivity *)userActivity
     UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
 	UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
 	UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
-	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
+	[UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0],
         NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
 
     UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
     UIPageControl.appearance.currentPageIndicatorTintColor = [UIColor appGreyishBrownColor];
-    
+
 #if BETA
     UINavigationBar.appearance.barTintColor = [UIColor redColor];
     UINavigationBar.appearance.tintColor = [UIColor redColor];

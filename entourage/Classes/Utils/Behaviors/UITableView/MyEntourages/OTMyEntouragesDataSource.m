@@ -13,6 +13,8 @@
 #import "OTConsts.h"
 #import "OTMyEntouragesFilter.h"
 #import "OTFeedItem.h"
+#import "OTSavedMyEntouragesFilter.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTMyEntouragesDataSource ()
 
@@ -71,7 +73,14 @@
 #pragma mark - OTFeedItemsFilterDelegate
 
 - (void)filterChanged:(OTMyEntouragesFilter *)filter {
+    if (filter == nil) {
+        // cancel the changes the user made to the filter
+        // by reinitialising it
+        self.currentFilter = [OTMyEntouragesFilter new];
+        return;
+    }
     self.currentFilter = filter;
+    [NSUserDefaults standardUserDefaults].savedMyEntouragesFilter = [OTSavedMyEntouragesFilter fromMyEntouragesFilter:self.currentFilter];
     [self.items removeAllObjects];
     [self.tableView reloadData];
     self.pageNumber = 1;

@@ -46,7 +46,7 @@
         [self.tableDelegate beginUpdatingFeeds];
         NSDate *beforeDate = [NSDate date];
         [self requestData:beforeDate withSuccess:^(NSArray *items) {
-            [self.feedItems addObjectsFromArray:[self sortItems:items]];
+            [self.feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
             [self.tableDelegate finishUpdatingFeeds:items.count];
         } orError:^(NSError *error) {
@@ -74,7 +74,7 @@
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         if(items.count > 0) {
-            [self.feedItems addObjectsFromArray:[self sortItems:items]];
+            [self.feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
         }
         [self.tableDelegate finishUpdatingFeeds:items.count];
@@ -90,8 +90,7 @@
     [self.tableDelegate beginUpdatingFeeds];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         if(items.count > 0) {
-            NSArray *sorted = [self sortItems:items];
-            [self.feedItems addObjectsFromArray:sorted];
+            [self.feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
         }
         [self.tableDelegate finishUpdatingFeeds:items.count];
@@ -167,11 +166,6 @@
         if(failure)
             failure(error);
     }];
-}
-
-- (NSArray *)sortItems:(NSArray *)array {
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"updatedDate" ascending:NO];
-    return [array sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 - (void)addFeedItem:(OTFeedItem *)feedItem {

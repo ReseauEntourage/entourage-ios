@@ -48,7 +48,7 @@
 }
 
 - (NSString *)joinAcceptedText {
-    return OTLocalizedString(@"user_joined_tour");
+    return [NSString stringWithFormat:OTLocalizedString(@"user_joined_tour"), self.tour.author.displayName];
 }
 
 - (double)distance {

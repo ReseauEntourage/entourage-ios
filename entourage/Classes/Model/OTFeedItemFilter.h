@@ -35,7 +35,9 @@ typedef enum {
     FeedItemFilterKeySocial,
     FeedItemFilterKeyDistributive,
     FeedItemFilterKeyOrganisation,
-    FeedItemFilterKeyMyEntourages
+    FeedItemFilterKeyMyEntourages,
+    FeedItemFilterKeyMyEntouragesOnly,
+    FeedItemFilterKeyMyOrganisationOnly
 } FeedItemFilterKey;
 
 @interface OTFeedItemFilter : NSObject
@@ -44,11 +46,16 @@ typedef enum {
 @property (nonatomic) BOOL active;
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* image;
+@property (nonatomic) BOOL showBoldText;
 @property (nonatomic, strong) NSArray<OTFeedItemFilter *> *subItems; 
 
 + (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
                          active:(BOOL)active
                        children:(NSArray *)children;
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
+                       children:(NSArray *)children
+                   showBoldText:(BOOL)showBoldText;
 + (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
                          active:(BOOL)active
                           title:(NSString *)title;

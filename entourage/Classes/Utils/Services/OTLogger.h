@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTUser.h"
 
 @interface OTLogger : NSObject
 
 + (void)logEvent:(NSString *)eventName;
++ (void)setupMixpanelWithUser:(OTUser *)user;
 
 @end

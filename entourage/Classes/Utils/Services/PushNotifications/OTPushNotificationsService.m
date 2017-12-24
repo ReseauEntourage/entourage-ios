@@ -25,6 +25,8 @@
 #import "OTUnreadMessagesService.h"
 #import "Mixpanel/Mixpanel.h"
 
+#import <UserNotifications/UserNotifications.h>
+
 
 #define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
 #define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
@@ -32,6 +34,7 @@
 #define APNOTIFICATION_INVITE_REQUEST "ENTOURAGE_INVITATION"
 #define APNOTIFICATION_INVITE_STATUS "INVITATION_STATUS"
 #define APNOTIFICATION_JOIN_REQUEST_CANCELED "JOIN_REQUEST_CANCELED"
+#define APNOTIFICATION_MIXPANEL_DEEPLINK "mp_cta"
 
 @implementation OTPushNotificationsService
 
@@ -53,6 +56,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self sendAppInfoWithSuccess:success orFailure:failure];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people removeAllPushDeviceTokens];
 }
 
 - (void)promptUserForPushNotifications {
@@ -66,7 +71,7 @@
     OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
     if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST])
         [self handleJoinRequestNotification:pnData];
-    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST_CANCELED]) 
+    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST_CANCELED])
         [self handleCancelJoinNotification:pnData];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_REQUEST_ACCEPTED])
         [self handleAcceptJoinNotification:pnData];
@@ -80,12 +85,14 @@
         [self handleInviteRequestNotification:pnData];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_INVITE_STATUS])
         [self handleInviteStatusNotification:pnData];
+    else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_MIXPANEL_DEEPLINK])
+        [self handleMixpanelDeepLinkNotification:pnData];
 }
 
 - (void)handleLocalNotification:(NSDictionary *)userInfo {
     UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
     OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
-    
+
     if([pnData.sender isEqualToString:@""]) {
         pnData.sender = pnData.message;
         pnData.message = @"";
@@ -103,7 +110,7 @@
     }];
     [alert addAction:defaultAction];
     [alert addAction:openAction];
-    
+
     [self showAlert:alert withPresentingBlock:^(UIViewController *topController, UIViewController *presentedViewController) {
         if (![topController isKindOfClass:[OTCreateMeetingViewController class]])
             [presentedViewController presentViewController:alert animated:YES completion:nil];
@@ -116,6 +123,11 @@
         [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
 }
 
+- (BOOL)isMixpanelDeepLinkNotification:(NSDictionary *)userInfo {
+    OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
+    return [pnData.notificationType isEqualToString:@APNOTIFICATION_MIXPANEL_DEEPLINK];
+}
+
 #pragma mark - private methods
 
 - (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData
@@ -126,7 +138,7 @@
             if([item.uID isEqualToNumber:userId] && [item.status isEqualToString:JOIN_PENDING]) {
                 [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
                 OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
-            
+
                 UIAlertAction *viewProfileAction = [UIAlertAction   actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [OTLogger logEvent:@"UserProfileClick"];
                     [[OTDeepLinkService new] showProfileFromAnywhereForUser:joiner.uID];
@@ -220,6 +232,26 @@
     [self displayAlertWithActions:@[openAction] forPushData:pnData];
 }
 
+- (void)handleMixpanelDeepLinkNotification:(OTPushNotificationsData *)pnData
+{
+    NSString *deeplink = (NSString *)[pnData.content objectForKey:@"mp_cta"];
+    if (deeplink != nil) {
+        NSURL *deeplinkURL = [NSURL URLWithString:deeplink];
+        if (@available(ios 10.0, *)) {
+            [[OTDeepLinkService new] handleDeepLink:deeplinkURL];
+        } else {
+            //for ios 9 or less, display an alert
+            UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [[OTDeepLinkService new] handleDeepLink:deeplinkURL];
+            }];
+            [self displayAlertWithActions:@[openAction]
+                                    title:@"Entourage"
+                                  message:[[pnData.content objectForKey:@"aps"] objectForKey:@"alert"]
+                              forPushData:pnData];
+        }
+    }
+}
+
 - (void)sendAppInfoWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
     [[OTAuthService new] sendAppInfoWithSuccess:^() {
         NSLog(@"Application info sent!");
@@ -234,12 +266,19 @@
 }
 
 - (void)displayAlertWithActions:(NSArray<UIAlertAction*> *)actions forPushData:(OTPushNotificationsData *)pnData  {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:pnData.sender message:pnData.message preferredStyle:UIAlertControllerStyleAlert];
+    [self displayAlertWithActions:actions
+                            title:pnData.sender
+                          message:pnData.message
+                      forPushData:pnData];
+}
+
+- (void)displayAlertWithActions:(NSArray<UIAlertAction*> *)actions title:(NSString *)title message:(NSString *)message forPushData:(OTPushNotificationsData *)pnData  {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     for(UIAlertAction *action in actions)
         [alert addAction:action];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:defaultAction];
-    
+
     [self showAlert:alert withPresentingBlock:^(UIViewController *topController, UIViewController *presentedViewController) {
         BOOL showMessage = YES;
         if ([topController isKindOfClass:[OTActiveFeedItemViewController class]]) {

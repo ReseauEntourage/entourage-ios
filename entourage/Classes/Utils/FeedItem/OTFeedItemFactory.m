@@ -57,12 +57,9 @@
 }
 
 + (id<OTFeedItemFactoryDelegate>)createForId:(NSString *)feedItemId {
-
         OTEntourage *entourage = [OTEntourage new];
         entourage.fid = feedItemId;
         return [[OTEntourageFactory alloc] initWithEntourage:entourage];
-
 }
-
 
 @end

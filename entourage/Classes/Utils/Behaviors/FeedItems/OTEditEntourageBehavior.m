@@ -46,9 +46,13 @@
     OTCategoryType *categoryType;
     NSDictionary *categoryDict = [OTCategory createDictionary];
     if([self.entourage.entourage_type isEqualToString:@"contribution"]) {
-         categoryType = categorySource[OTContribution];
+        for(OTCategoryType *type in categorySource)
+            if ([type.type isEqualToString:@"contribution"])
+                categoryType = type;
     } else {
-        categoryType = categorySource[OTAskForHelp];
+        for(OTCategoryType *type in categorySource)
+            if ([type.type isEqualToString:@"ask_for_help"])
+                categoryType = type;
     }
     NSNumber *indexNumber = [categoryDict valueForKey:self.entourage.category];
     self.entourage.categoryObject = categoryType.categories[indexNumber.intValue];

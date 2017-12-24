@@ -107,6 +107,9 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)showSaveButton {
+#if BETA
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+#endif
     UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save")
                                                         withTarget:self
                                                          andAction:@selector(updateUser)

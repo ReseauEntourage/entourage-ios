@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		011270621E9D1751006ADA79 /* OTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 011270611E9D1751006ADA79 /* OTTextView.m */; };
+		011718441FDB365C00743214 /* OTActivityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 011718431FDB365C00743214 /* OTActivityProvider.m */; };
+		011718471FE400D300743214 /* OTMixpanelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 011718461FE400D300743214 /* OTMixpanelService.m */; };
 		011DC1E01EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */; };
 		011DC1E61EFA969A00B46C5F /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 011DC1E51EFA969A00B46C5F /* CountryList.csv */; };
 		012DFB441F785B73002B85E8 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 012DFB431F785B73002B85E8 /* categories.json */; };
@@ -42,6 +44,9 @@
 		01A6DA8A1E8D089300089DC5 /* SolidarityGuideFilters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01A6DA891E8D089300089DC5 /* SolidarityGuideFilters.storyboard */; };
 		01B210951FBC6647005AD5C3 /* OTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B210941FBC6647005AD5C3 /* OTWebViewController.m */; };
 		01C2BF041E6EEB4D00A54159 /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */; };
+		01C9A37A1FE96EBD009ACFE4 /* Social.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C9A3791FE96EBC009ACFE4 /* Social.storyboard */; };
+		01C9A37D1FE96ECB009ACFE4 /* OTSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C9A37C1FE96ECA009ACFE4 /* OTSocialViewController.m */; };
+		01C9A3801FEA7D0D009ACFE4 /* OTMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C9A37F1FEA7D0D009ACFE4 /* OTMapView.m */; };
 		01D191271FA21466008F6BFB /* OTAboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D191261FA21466008F6BFB /* OTAboutMeViewController.m */; };
 		01DCFF101EEEAF9A007A0705 /* UserProfileEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01DCFF0F1EEEAF9A007A0705 /* UserProfileEditor.storyboard */; };
 		01E3AA421EEEADC5007FB282 /* AssociationDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E3AA411EEEADC5007FB282 /* AssociationDetails.storyboard */; };
@@ -279,6 +284,7 @@
 		1EFBCFDC1E56E59C008CEF30 /* OTTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFBCFDB1E56E59C008CEF30 /* OTTutorialViewController.m */; };
 		2E5B0EC01CF06CE50078454F /* OTFilterRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EBF1CF06CE50078454F /* OTFilterRadioButton.m */; };
 		2E5B0EC31CF070DD0078454F /* OTFilterCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B0EC21CF070DD0078454F /* OTFilterCellTableViewCell.m */; };
+		2E6D91571FE9513D00F1E5AE /* OTSavedMyEntouragesFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6D91561FE9513D00F1E5AE /* OTSavedMyEntouragesFilter.m */; };
 		2E7064EE1CB273120034C55A /* MapOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E7064ED1CB273120034C55A /* MapOptions.storyboard */; };
 		2E7064F11CB273AE0034C55A /* OTMapOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7064F01CB273AE0034C55A /* OTMapOptionsViewController.m */; };
 		2EC77E4F1CEDE4BC0031BB67 /* OTEntourageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC77E4E1CEDE4BC0031BB67 /* OTEntourageService.m */; };
@@ -395,6 +401,10 @@
 /* Begin PBXFileReference section */
 		011270601E9D1751006ADA79 /* OTTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTextView.h; sourceTree = "<group>"; };
 		011270611E9D1751006ADA79 /* OTTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTextView.m; sourceTree = "<group>"; };
+		011718421FDB365C00743214 /* OTActivityProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTActivityProvider.h; sourceTree = "<group>"; };
+		011718431FDB365C00743214 /* OTActivityProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTActivityProvider.m; sourceTree = "<group>"; };
+		011718451FE400D300743214 /* OTMixpanelService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTMixpanelService.h; sourceTree = "<group>"; };
+		011718461FE400D300743214 /* OTMixpanelService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTMixpanelService.m; sourceTree = "<group>"; };
 		011DC1DE1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTCountryCodePickerViewDataSource.h; path = Behaviors/OTCountryCodePickerViewDataSource.h; sourceTree = "<group>"; };
 		011DC1DF1EF7D65100B46C5F /* OTCountryCodePickerViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTCountryCodePickerViewDataSource.m; path = Behaviors/OTCountryCodePickerViewDataSource.m; sourceTree = "<group>"; };
 		011DC1E51EFA969A00B46C5F /* CountryList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CountryList.csv; path = entourage/CountryList.csv; sourceTree = "<group>"; };
@@ -463,6 +473,11 @@
 		01B210941FBC6647005AD5C3 /* OTWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTWebViewController.m; sourceTree = "<group>"; };
 		01C2BF021E6EEB4D00A54159 /* OTAlertViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTAlertViewBehavior.h; path = Behaviors/UI/OTAlertViewBehavior.h; sourceTree = "<group>"; };
 		01C2BF031E6EEB4D00A54159 /* OTAlertViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTAlertViewBehavior.m; path = Behaviors/UI/OTAlertViewBehavior.m; sourceTree = "<group>"; };
+		01C9A3791FE96EBC009ACFE4 /* Social.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Social.storyboard; sourceTree = "<group>"; };
+		01C9A37B1FE96ECA009ACFE4 /* OTSocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSocialViewController.h; sourceTree = "<group>"; };
+		01C9A37C1FE96ECA009ACFE4 /* OTSocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSocialViewController.m; sourceTree = "<group>"; };
+		01C9A37E1FEA7D0C009ACFE4 /* OTMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMapView.h; sourceTree = "<group>"; };
+		01C9A37F1FEA7D0D009ACFE4 /* OTMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapView.m; sourceTree = "<group>"; };
 		01D191251FA21466008F6BFB /* OTAboutMeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAboutMeViewController.h; sourceTree = "<group>"; };
 		01D191261FA21466008F6BFB /* OTAboutMeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAboutMeViewController.m; sourceTree = "<group>"; };
 		01DCFF0F1EEEAF9A007A0705 /* UserProfileEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfileEditor.storyboard; sourceTree = "<group>"; };
@@ -930,6 +945,8 @@
 		2E5B0EBF1CF06CE50078454F /* OTFilterRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFilterRadioButton.m; sourceTree = "<group>"; };
 		2E5B0EC11CF070DD0078454F /* OTFilterCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFilterCellTableViewCell.h; sourceTree = "<group>"; };
 		2E5B0EC21CF070DD0078454F /* OTFilterCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFilterCellTableViewCell.m; sourceTree = "<group>"; };
+		2E6D91551FE9513D00F1E5AE /* OTSavedMyEntouragesFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTSavedMyEntouragesFilter.h; sourceTree = "<group>"; };
+		2E6D91561FE9513D00F1E5AE /* OTSavedMyEntouragesFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTSavedMyEntouragesFilter.m; sourceTree = "<group>"; };
 		2E7064ED1CB273120034C55A /* MapOptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapOptions.storyboard; sourceTree = "<group>"; };
 		2E7064EF1CB273AE0034C55A /* OTMapOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMapOptionsViewController.h; sourceTree = "<group>"; };
 		2E7064F01CB273AE0034C55A /* OTMapOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapOptionsViewController.m; sourceTree = "<group>"; };
@@ -2215,6 +2232,7 @@
 		45CE5A621C5242FC00F68C24 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				01C9A3791FE96EBC009ACFE4 /* Social.storyboard */,
 				0161DD0E1F729E470081AE71 /* Intro.storyboard */,
 				1EC816951D9BB1150084BADB /* FeedChangeOptions.storyboard */,
 				1EFAC0C61D89242D00BE396F /* FeedItemFilters.storyboard */,
@@ -2269,6 +2287,8 @@
 			children = (
 				1EFAC0EB1D8928E200BE396F /* OTMyEntouragesFilter.h */,
 				1EFAC0EC1D8928E200BE396F /* OTMyEntouragesFilter.m */,
+				2E6D91551FE9513D00F1E5AE /* OTSavedMyEntouragesFilter.h */,
+				2E6D91561FE9513D00F1E5AE /* OTSavedMyEntouragesFilter.m */,
 				45EB70D81CE5F0CC00EB2CD1 /* OTEntourage.h */,
 				45EB70D91CE5F0CC00EB2CD1 /* OTEntourage.m */,
 				1E8E16E71D5A3814005C42ED /* OTEntourageInvitation.h */,
@@ -2383,6 +2403,8 @@
 				1EC9D6811D6468A800C6E9AA /* OTInvitationsService.m */,
 				1E22727C1E2E25270053365E /* OTAssociationsService.h */,
 				1E22727D1E2E25270053365E /* OTAssociationsService.m */,
+				011718451FE400D300743214 /* OTMixpanelService.h */,
+				011718461FE400D300743214 /* OTMixpanelService.m */,
 			);
 			name = WebService;
 			path = Service;
@@ -2646,6 +2668,8 @@
 		DBBE8ACB19E83CCE00FA218E /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				01C9A37E1FEA7D0C009ACFE4 /* OTMapView.h */,
+				01C9A37F1FEA7D0D009ACFE4 /* OTMapView.m */,
 				6B4930C819A773C500DA7EE0 /* OTMainViewController.h */,
 				6B4930C919A773C500DA7EE0 /* OTMainViewController.m */,
 				45FD17B51CFC4F3E0037270B /* OTOptionsViewController.h */,
@@ -2657,6 +2681,8 @@
 				019AE49D1EB0DD35007B244C /* OTNewsFeedCell.m */,
 				01B210931FBC6647005AD5C3 /* OTWebViewController.h */,
 				01B210941FBC6647005AD5C3 /* OTWebViewController.m */,
+				011718421FDB365C00743214 /* OTActivityProvider.h */,
+				011718431FDB365C00743214 /* OTActivityProvider.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -2696,6 +2722,8 @@
 		DBE9EF2919E7D71C00031144 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				01C9A37B1FE96ECA009ACFE4 /* OTSocialViewController.h */,
+				01C9A37C1FE96ECA009ACFE4 /* OTSocialViewController.m */,
 				1DA682EF19E823C3007BD4BC /* OTSWRevealViewController.h */,
 				1DA682F019E823C3007BD4BC /* OTSWRevealViewController.m */,
 				DBE9EF3519E7DCCA00031144 /* UIViewController+menu.h */,
@@ -2851,6 +2879,7 @@
 				1E78B7E81D5134D20008C00E /* SF-UI-Text-Ultrathin.otf in Resources */,
 				1E78B7DC1D5134D20008C00E /* SF-UI-Text-Bold.otf in Resources */,
 				1E90036F1D352C0B004E18BC /* UserPicture.storyboard in Resources */,
+				01C9A37A1FE96EBD009ACFE4 /* Social.storyboard in Resources */,
 				1E5F79841D5A0E6A0005003C /* MyEntourages.storyboard in Resources */,
 				1E78B7DF1D5134D20008C00E /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				1E488E021D4FAFA600A2E5B0 /* UserProfileDetails.storyboard in Resources */,
@@ -3138,6 +3167,7 @@
 				1EB4A5471DC943740057993E /* OTJoinRequestedNotOwnerCell.m in Sources */,
 				1E2432C61DA6CCE1000EF74F /* OTContactPhoneCell.m in Sources */,
 				6B4930E319A77E1D00DA7EE0 /* OTPoi.m in Sources */,
+				011718441FDB365C00743214 /* OTActivityProvider.m in Sources */,
 				1E488E121D4FB81700A2E5B0 /* OTPhoneViewController.m in Sources */,
 				013E39DE1FAC6A98005F7549 /* OTAnnouncementCell.m in Sources */,
 				1EFAC0E61D89252600BE396F /* OTFeedItemFiltersCellProvider.m in Sources */,
@@ -3210,6 +3240,7 @@
 				1DA682F119E823C3007BD4BC /* OTSWRevealViewController.m in Sources */,
 				D2448D6F1F6A9E920048B67A /* OTHeatzonesCellProviderBehavior.m in Sources */,
 				1EEFFE4B1DCB9D7B003A32A1 /* OTPublicInfoTableDataSource.m in Sources */,
+				2E6D91571FE9513D00F1E5AE /* OTSavedMyEntouragesFilter.m in Sources */,
 				D6BDA6D21E9B818800ED5F22 /* OTSavedFilter.m in Sources */,
 				1E4937201DC74FFA001D4954 /* OTDebugLog.m in Sources */,
 				DBE9EF3719E7DCCA00031144 /* UIViewController+menu.m in Sources */,
@@ -3258,7 +3289,9 @@
 				1E587F251E2E14E900FEBB67 /* OTAssociationsSourceBehavior.m in Sources */,
 				1E0972BD1D55541E006E1FAD /* OTInviteByPhoneViewController.m in Sources */,
 				1EA5C65B1E48AE7200891C9B /* OTAutoGrowTextView.m in Sources */,
+				01C9A37D1FE96ECB009ACFE4 /* OTSocialViewController.m in Sources */,
 				1DA682E819E80BE7007BD4BC /* NSUserDefaults+OT.m in Sources */,
+				01C9A3801FEA7D0D009ACFE4 /* OTMapView.m in Sources */,
 				1E8767181E5AEA8B0080486A /* OTTutorial3ViewController.m in Sources */,
 				D615B20C1E964036004277F6 /* OTShareFeedItemBehavior.m in Sources */,
 				1E4661831DAE6D2F00ED0CD0 /* OTDescriptionCell.m in Sources */,
@@ -3329,6 +3362,7 @@
 				1EFAC0F31D89294F00BE396F /* OTFeedItemTimeframeFilter.m in Sources */,
 				1E46617D1DAE6CF900ED0CD0 /* OTMemberCountCell.m in Sources */,
 				1E06FDC61D574D9800370F4F /* OTChatCellBase.m in Sources */,
+				011718471FE400D300743214 /* OTMixpanelService.m in Sources */,
 				1E6E550A1D707FE3002845D0 /* OTPushNotificationsService.m in Sources */,
 				A82B95A11DCD045200332305 /* OnBoardingTextField.swift in Sources */,
 				1E40A3341D4A2A10009E2D73 /* UIBarButtonItem+factory.m in Sources */,
@@ -3545,6 +3579,7 @@
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FACEBOOK_ID = 276507866203529;
@@ -3571,7 +3606,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "1fe4debe-0efa-4c9c-bc7c-b667e665ced4";
+				PROVISIONING_PROFILE = "d6098093-30b0-4352-b526-de50ea67ac87";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
@@ -3594,6 +3629,7 @@
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FACEBOOK_ID = 280727035774134;
@@ -3616,7 +3652,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3b6f3395-91e7-4700-a4b2-68b4086df771";
+				PROVISIONING_PROFILE = "7299ae5e-d774-4bcb-9b5e-779b8b5c5ce8";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
@@ -3729,6 +3765,7 @@
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FACEBOOK_ID = 280727035774134;
@@ -3755,7 +3792,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "3a17a4ee-979a-436c-a6c6-b14adc5e3b11";
+				PROVISIONING_PROFILE = "2efffefe-3945-4890-bdc8-8539e2892911";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";

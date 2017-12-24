@@ -52,7 +52,6 @@
 @property (nonatomic, weak) IBOutlet UIButton *furtherEntouragesBtn;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, weak) IBOutlet UIButton *tourOptionsBtn;
-@property (nonatomic, strong) IBOutlet NSLayoutConstraint *tourOptionBottomContraint;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior *sourceBehavior;
 @property (nonatomic, strong) UIView *currentNewsfeedFooter;;
 
@@ -204,7 +203,8 @@
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
+                  willDecelerate:(BOOL)decelerate {
     if([[self.items firstObject] isKindOfClass:[OTPoi class]])
         return;
     if(self.tableFooterView != self.emptyFooterView)
@@ -229,26 +229,23 @@
     if (self.tableHeaderView == nil) return;
     [UIView animateWithDuration:0.5 animations:^() {
         if(self.contentSize.height - scrollView.contentOffset.y <= scrollView.frame.size.height && self.tableFooterView != self.emptyFooterView && self.contentSize.height > self.frame.size.height)
-            self.tourOptionBottomContraint.constant = 12 + self.loadingView.frame.size.height;
-        else
-            self.tourOptionBottomContraint.constant = 12;
         [self.superview layoutIfNeeded];
     }];
-    
+
     CGFloat scrollOffset = scrollView.contentOffset.y;
     CGRect headerFrame = self.tableHeaderView.frame;//self.mapView.frame;
-    
+
     if (scrollOffset < 0)
     {
         headerFrame.origin.y = scrollOffset;// MIN(kMapHeaderOffsetY - ((scrollOffset / 3)), 0);
         headerFrame.size.height = MAPVIEW_HEIGHT - scrollOffset;
-        
+
     }
     else //scrolling up
     {
         headerFrame.origin.y = kMapHeaderOffsetY ;//- scrollOffset;
     }
-    
+
     self.tableHeaderView.subviews[0].frame = headerFrame;
 }
 

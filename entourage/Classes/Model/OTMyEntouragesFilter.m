@@ -14,6 +14,7 @@
 #import "OTConsts.h"
 #import "OTAPIConsts.h"
 #import "NSUserDefaults+OT.h"
+#import "OTSavedMyEntouragesFilter.h"
 
 #define ALL_STATUS_STRING @"all"
 
@@ -22,13 +23,27 @@
 - (instancetype)init {
     self = [super init];
     if(self) {
-        self.isUnread = NO;
-        self.isIncludingClosed = YES;
-        self.showDemand = YES;
-        self.showContribution = YES;
-        self.showTours = YES;
-        self.showMyEntourages = YES;
-        self.showFromOrganisation = YES;
+        OTSavedMyEntouragesFilter *savedFilter = [NSUserDefaults standardUserDefaults].savedMyEntouragesFilter;
+        if (savedFilter) {
+            self.showTours = savedFilter.showTours.boolValue;
+            self.showDemand = savedFilter.showDemand.boolValue;
+            self.showContribution = savedFilter.showContribution.boolValue;
+            
+            self.isUnread = savedFilter.isUnread.boolValue;
+            self.showMyEntouragesOnly = savedFilter.showMyEntouragesOnly.boolValue;
+            self.showFromOrganisationOnly = savedFilter.showFromOrganisationOnly.boolValue;
+            self.isIncludingClosed = savedFilter.isIncludingClosed.boolValue;
+        }
+        else {
+            self.showTours = YES;
+            self.showDemand = YES;
+            self.showContribution = YES;
+            
+            self.isUnread = NO;
+            self.showMyEntouragesOnly = NO;
+            self.showFromOrganisationOnly = NO;
+            self.isIncludingClosed = YES;
+        }
     }
     return self;
 }
@@ -36,15 +51,14 @@
 - (NSArray *)groupHeaders {
     if(IS_PRO_USER)
         return @[
-                    OTLocalizedString(@"myEntouragesTitle"),
-                    OTLocalizedString(@"filter_entourages_title"),
-                    OTLocalizedString(@"filter_entourage_from_sympathisants_title")
+                 OTLocalizedString(@"filter_entourages_title"),
+                 OTLocalizedString(@"filter_entourage_mine_title")
                  ];
     else
         return @[
                  OTLocalizedString(@"filter_entourages_title"),
-                 OTLocalizedString(@"filter_timeframe_title"),
-                 OTLocalizedString(@"filter_entourage_from_sympathisants_title")];
+                 OTLocalizedString(@"filter_entourage_mine_title")
+                 ];
 }
 
 - (NSArray *)toGroupedArray {
@@ -59,57 +73,53 @@
     if(user.partner == nil)
         return @[
                  @[
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
-                                          active:self.isUnread
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyTour
+                                          active:self.showTours
                                         children:@[]],
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
-                                          active:self.isIncludingClosed
-                                        children:@[]]
-                     ],
-                 @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
                                           active:self.showDemand
                                            title:OTLocalizedString(@"filter_entourage_demand")],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                           active:self.showContribution
-                                           title:OTLocalizedString(@"filter_entourage_contribution")],
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyTour
-                                          active:self.showTours
-                                        children:@[]]
+                                           title:OTLocalizedString(@"filter_entourage_contribution")]
                      ],
                  @[
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
-                                          active:self.showMyEntourages
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
+                                          active:self.isUnread
+                                        children:@[]],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntouragesOnly
+                                          active:self.showMyEntouragesOnly
+                                        children:@[]],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
+                                          active:self.isIncludingClosed
                                         children:@[]]
                      ]
                  ];
     else
         return @[
                  @[
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
-                                          active:self.isUnread
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyTour
+                                          active:self.showTours
                                         children:@[]],
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
-                                          active:self.isIncludingClosed
-                                        children:@[]]
-                     ],
-                 @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
                                           active:self.showDemand
                                            title:OTLocalizedString(@"filter_entourage_demand")],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                           active:self.showContribution
-                                           title:OTLocalizedString(@"filter_entourage_contribution")],
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyTour
-                                          active:self.showTours
-                                        children:@[]]
+                                           title:OTLocalizedString(@"filter_entourage_contribution")]
                      ],
                  @[
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
-                                          active:self.showMyEntourages
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
+                                          active:self.isUnread
                                         children:@[]],
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
-                                          active:self.showFromOrganisation
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntouragesOnly
+                                          active:self.showMyEntouragesOnly
+                                        children:@[]],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyOrganisationOnly
+                                          active:self.showFromOrganisationOnly
+                                        children:@[]],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
+                                          active:self.isIncludingClosed
                                         children:@[]]
                      ]
                  ];
@@ -120,51 +130,47 @@
     if(user.partner == nil)
         return @[
                  @[
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
-                                          active:self.isUnread
-                                        children:@[]],
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
-                                          active:self.isIncludingClosed
-                                        children:@[]]
-                     ],
-                 @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
                                           active:self.showDemand
                                            title:OTLocalizedString(@"filter_entourage_demand")],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                           active:self.showContribution
-                                           title:OTLocalizedString(@"filter_entourage_contribution")],
+                                           title:OTLocalizedString(@"filter_entourage_contribution")]
                      ],
                  @[
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
-                                          active:self.showMyEntourages
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
+                                          active:self.isUnread
+                                        children:@[]],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntouragesOnly
+                                          active:self.showMyEntouragesOnly
+                                        children:@[]],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
+                                          active:self.isIncludingClosed
                                         children:@[]]
                      ]
                  ];
     else
         return @[
                  @[
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
-                                          active:self.isUnread
-                                        children:@[]],
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
-                                          active:self.isIncludingClosed
-                                        children:@[]]
-                     ],
-                 @[
                      [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
                                           active:self.showDemand
                                            title:OTLocalizedString(@"filter_entourage_demand")],
                      [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                           active:self.showContribution
-                                        title:OTLocalizedString(@"filter_entourage_contribution")],
+                                           title:OTLocalizedString(@"filter_entourage_contribution")]
                      ],
                  @[
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
-                                          active:self.showMyEntourages
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyUnread
+                                          active:self.isUnread
                                         children:@[]],
-                     [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
-                                          active:self.showFromOrganisation
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntouragesOnly
+                                          active:self.showMyEntouragesOnly
+                                        children:@[]],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyMyOrganisationOnly
+                                          active:self.showFromOrganisationOnly
+                                        children:@[]],
+                     [OTFeedItemFilter createFor:FeedItemFilterKeyIncludingClosed
+                                          active:self.isIncludingClosed
                                         children:@[]]
                      ]
                  ];
@@ -176,8 +182,10 @@
     [result setObject:[self getEntourageTypes] forKey:@"entourage_types"];
     [result setObject:@(pageNumber) forKey:@"page"];
     [result setObject:@(pageSize) forKey:@"per"];
-    if(self.isUnread)
+    if(self.showMyEntouragesOnly)
         [result setObject:@"true" forKey:@"created_by_me"];
+    if (self.showFromOrganisationOnly)
+        [result setObject:@"true" forKey:@"show_my_partner_only"];
     NSString *status = [self getStatus];
     if(status)
         [result setObject:[self getStatus] forKey:@"status"];
@@ -186,12 +194,6 @@
 
 - (void)updateValue:(OTFeedItemFilter *)filter {
     switch (filter.key) {
-        case FeedItemFilterKeyUnread:
-            self.isUnread = filter.active;
-            break;
-        case FeedItemFilterKeyIncludingClosed:
-            self.isIncludingClosed = filter.active;
-            break;
         case FeedItemFilterKeyDemand:
             self.showDemand = filter.active;
             break;
@@ -200,6 +202,18 @@
             break;
         case FeedItemFilterKeyTour:
             self.showTours = filter.active;
+            break;
+        case FeedItemFilterKeyUnread:
+            self.isUnread = filter.active;
+            break;
+        case FeedItemFilterKeyMyEntouragesOnly:
+            self.showMyEntouragesOnly = filter.active;
+            break;
+        case FeedItemFilterKeyMyOrganisationOnly:
+            self.showFromOrganisationOnly = filter.active;
+            break;
+        case FeedItemFilterKeyIncludingClosed:
+            self.isIncludingClosed = filter.active;
             break;
         default:
             break;

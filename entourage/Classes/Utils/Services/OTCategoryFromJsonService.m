@@ -46,6 +46,8 @@
         }
         [resultArray addObject:categoryType];
     }
+    NSSortDescriptor *valueDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES];
+    resultArray = (NSMutableArray *)[resultArray sortedArrayUsingDescriptors:@[valueDescriptor]];
     return resultArray;
 }
 
