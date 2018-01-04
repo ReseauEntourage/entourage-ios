@@ -35,13 +35,14 @@
                                            byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight
                                                  cornerRadii: (CGSize){14, 14}].CGPath;
     self.animatedView.layer.mask = maskLayer;
-//    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]
-//                                                    initWithTarget:self
-//                                                    action:@selector(moveViewWithGestureRecognizer:)];
-//    [self.view addGestureRecognizer:panGestureRecognizer];
-//    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                                                                           action:@selector(tap:)];
-//    [self.view addGestureRecognizer:tapGestureRecognizer];
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]
+                                                    initWithTarget:self
+                                                    action:@selector(moveViewWithGestureRecognizer:)];
+    [self.view addGestureRecognizer:panGestureRecognizer];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(tap:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    panGestureRecognizer.cancelsTouchesInView = NO;
     _webView.delegate = self;
 }
 
@@ -120,7 +121,7 @@
     if(self.webView.canGoBack)
         [self.webView goBack];
     else {
-        [self dismissViewControllerAnimated:NO completion:^() {
+        [self dismissViewControllerAnimated:YES completion:^() {
             [SVProgressHUD dismiss];
             if ([self.webViewDelegate respondsToSelector:@selector(webview:)])
                 [self.webViewDelegate performSelector:@selector(webview:) withObject:nil];
@@ -174,40 +175,40 @@
     [self presentViewController:activityVC animated:YES completion:nil];
 }
 
-//- (void)moveViewWithGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer{
-//    [UIView animateWithDuration:0.5 animations:^{
-//        CGPoint velocity = [panGestureRecognizer velocityInView:self.animatedView];
-//        CGPoint translation = [panGestureRecognizer translationInView:self.animatedView];
-//        CGFloat finalY = translation.y + 0.2*velocity.y;
-//        if(translation.y > 0) {
-//            if (finalY < DISTANCE_ABOVE_NAVIGATION_BAR) { 
-//                finalY = DISTANCE_ABOVE_NAVIGATION_BAR;
-//            } else if (finalY > self.view.frame.size.height) {
-//                finalY = self.view.frame.size.height;
-//            }
-//            CGRect frame = self.animatedView.frame;
-//            frame.origin.y = finalY;
-//            self.animatedView.frame = frame;
-//        }
-//    }];
-//    if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
-//        [UIView animateWithDuration:0.5 animations:^{
-//            CGPoint translation = [panGestureRecognizer translationInView:self.animatedView];
-//            if(translation.y >= self.view.bounds.size.height/2)
-//                [self closeWebview];
-//            else {
-//                CGRect frame = self.animatedView.frame;
-//                frame.origin = CGPointMake(0, DISTANCE_ABOVE_NAVIGATION_BAR);
-//                self.animatedView.frame = frame;
-//            }
-//        }];
-//    }
-//}
-//
-//- (void)tap:(UITapGestureRecognizer *)tapGestureRecognizer {
-//    CGPoint touchPoint = [tapGestureRecognizer locationInView:self.view];
-//    if(touchPoint.y < DISTANCE_ABOVE_NAVIGATION_BAR)
-//        [self closeWebview];
-//}
+- (void)moveViewWithGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer{
+    [UIView animateWithDuration:0.5 animations:^{
+        CGPoint velocity = [panGestureRecognizer velocityInView:self.animatedView];
+        CGPoint translation = [panGestureRecognizer translationInView:self.animatedView];
+        CGFloat finalY = translation.y + 0.2*velocity.y;
+        if(translation.y > 0) {
+            if (finalY < DISTANCE_ABOVE_NAVIGATION_BAR) {
+                finalY = DISTANCE_ABOVE_NAVIGATION_BAR;
+            } else if (finalY > self.view.frame.size.height) {
+                finalY = self.view.frame.size.height;
+            }
+            CGRect frame = self.animatedView.frame;
+            frame.origin.y = finalY;
+            self.animatedView.frame = frame;
+        }
+    }];
+    if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
+        [UIView animateWithDuration:0.5 animations:^{
+            CGPoint translation = [panGestureRecognizer translationInView:self.animatedView];
+            if(translation.y >= self.view.bounds.size.height/2)
+                [self closeWebview];
+            else {
+                CGRect frame = self.animatedView.frame;
+                frame.origin = CGPointMake(0, DISTANCE_ABOVE_NAVIGATION_BAR);
+                self.animatedView.frame = frame;
+            }
+        }];
+    }
+}
+
+- (void)tap:(UITapGestureRecognizer *)tapGestureRecognizer {
+    CGPoint touchPoint = [tapGestureRecognizer locationInView:self.view];
+    if(touchPoint.y < DISTANCE_ABOVE_NAVIGATION_BAR)
+        [self closeWebview];
+}
 
 @end
