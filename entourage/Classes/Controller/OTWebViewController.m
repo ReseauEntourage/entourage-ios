@@ -42,6 +42,7 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
     panGestureRecognizer.cancelsTouchesInView = NO;
     _webView.delegate = self;
 }
