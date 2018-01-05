@@ -103,6 +103,17 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     // Call the 'activateApp' method to log an app event for use
     // in analytics and advertising reporting.
     [FBSDKAppEvents activateApp];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    if (@available(iOS 10.0, *)) {
+        [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
+            if (settings.authorizationStatus == UNAuthorizationStatusAuthorized) {
+                [mixpanel.people set:@{@"EntourageNotifEnable": @"YES"}];
+            }
+            else {
+                [mixpanel.people set:@{@"EntourageNotifEnable": @"NO"}];
+            }
+        }];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -118,8 +129,8 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 
 - (BOOL)application:(UIApplication *)application
 continueUserActivity:(NSUserActivity *)userActivity
- restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
-
+ restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
         NSURL *url = userActivity.webpageURL;
         //NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
@@ -128,7 +139,6 @@ continueUserActivity:(NSUserActivity *)userActivity
         [[OTDeepLinkService new] handleUniversalLink:url];
     }
     return true;
-
 }
 
 - (BOOL)application:(UIApplication *)application
