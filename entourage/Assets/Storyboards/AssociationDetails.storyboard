@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AsY-WH-Ifv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AsY-WH-Ifv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -87,25 +87,22 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="252" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jtt-x4-D4M">
-                                        <rect key="frame" x="15" y="245" width="344" height="195"/>
+                                        <rect key="frame" x="15" y="245" width="344" height="34"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <string key="text">ATD Quart Monde a pour but d’éradiquer la misère en agissant sur trois plans :
-– sur le terrain avec les personnes concernées pour obtenir l’application du droit pour tous
-– auprès des institutions et parlementaires, pour faire changer les lois (DALO, CMU,
-RMI…)
-– auprès de l’opinion publique, par des campagnes citoyennes pour faire changer le
-regard porté sur les plus pauvres.</string>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                     </textView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXN-vt-QpN">
-                                        <rect key="frame" x="0.0" y="458" width="374" height="46"/>
+                                        <rect key="frame" x="0.0" y="297" width="374" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Informations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5M-bg-ZXH">
                                                 <rect key="frame" x="0.0" y="20" width="374" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="YcC-o2-l7I"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -121,52 +118,70 @@ regard porté sur les plus pauvres.</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Numéro de téléphone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5YZ-eN-Rda">
-                                        <rect key="frame" x="15" y="520" width="145.5" height="18"/>
+                                        <rect key="frame" x="15" y="359" width="151.5" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="6Kk-Ta-ZMu"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="+33 (0) 1 42 46 81 95" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="Ipu-xN-lWh">
-                                        <rect key="frame" x="165.5" y="513" width="193.5" height="33"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="Ipu-xN-lWh">
+                                        <rect key="frame" x="171.5" y="352" width="187.5" height="33"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="vth-7y-orW"/>
+                                        </constraints>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adresse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1k-lU-MuZ">
-                                        <rect key="frame" x="15" y="558" width="54.5" height="18"/>
+                                        <rect key="frame" x="15" y="397" width="57" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="AEZ-NW-akL"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="63 rue Beaumarchais 93100 Montreuil" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="ZFx-7K-r4m">
-                                        <rect key="frame" x="74.5" y="551" width="284.5" height="33"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="ZFx-7K-r4m">
+                                        <rect key="frame" x="77" y="390" width="282" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="0G0-Hl-j7m"/>
+                                        </constraints>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <dataDetectorType key="dataDetectorTypes" address="YES"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Site web" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izi-PO-E0a">
-                                        <rect key="frame" x="15" y="597" width="58.5" height="18"/>
+                                        <rect key="frame" x="15" y="436" width="60" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="8id-zz-7X0"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="www.atd-quartmonde.fr" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="wJS-Zy-RII">
-                                        <rect key="frame" x="78.5" y="589" width="280.5" height="33"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="wJS-Zy-RII">
+                                        <rect key="frame" x="80" y="428" width="279" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="CdD-cC-fIL"/>
+                                        </constraints>
                                         <color key="textColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="deb-A6-oFw" firstAttribute="leading" secondItem="wYc-6L-omN" secondAttribute="leading" id="3QK-Ux-I3c"/>
                                     <constraint firstAttribute="trailing" secondItem="sqy-cJ-s4F" secondAttribute="trailing" id="3fv-9L-VJm"/>
@@ -189,23 +204,23 @@ regard porté sur les plus pauvres.</string>
                                     <constraint firstItem="sqy-cJ-s4F" firstAttribute="top" secondItem="deb-A6-oFw" secondAttribute="bottom" constant="18" id="Mxd-EU-dfa"/>
                                     <constraint firstItem="kRj-Yn-31D" firstAttribute="centerX" secondItem="wYc-6L-omN" secondAttribute="centerX" id="Q4u-re-cFF"/>
                                     <constraint firstItem="kRj-Yn-31D" firstAttribute="leading" secondItem="wYc-6L-omN" secondAttribute="leading" id="Rxx-1X-gNz"/>
-                                    <constraint firstItem="R1k-lU-MuZ" firstAttribute="leading" secondItem="5YZ-eN-Rda" secondAttribute="leading" id="Vf9-uP-FVW"/>
                                     <constraint firstAttribute="trailing" secondItem="jtt-x4-D4M" secondAttribute="trailing" constant="15" id="W39-2L-d8d"/>
                                     <constraint firstAttribute="trailing" secondItem="kRj-Yn-31D" secondAttribute="trailing" id="bWI-IF-pdN"/>
                                     <constraint firstAttribute="trailing" secondItem="wJS-Zy-RII" secondAttribute="trailing" constant="15" id="bx4-W8-GBi"/>
-                                    <constraint firstItem="Izi-PO-E0a" firstAttribute="leading" secondItem="R1k-lU-MuZ" secondAttribute="leading" id="dBl-g5-DVu"/>
+                                    <constraint firstItem="R1k-lU-MuZ" firstAttribute="leading" secondItem="wYc-6L-omN" secondAttribute="leading" constant="15" id="doF-kT-An3"/>
                                     <constraint firstAttribute="trailing" secondItem="deb-A6-oFw" secondAttribute="trailing" id="e4s-1C-61R"/>
                                     <constraint firstItem="Ipu-xN-lWh" firstAttribute="leading" secondItem="5YZ-eN-Rda" secondAttribute="trailing" constant="5" id="edD-9M-Bjp"/>
                                     <constraint firstItem="wJS-Zy-RII" firstAttribute="centerY" secondItem="Izi-PO-E0a" secondAttribute="centerY" id="fUT-F0-EhC"/>
                                     <constraint firstAttribute="trailing" secondItem="eXN-vt-QpN" secondAttribute="trailing" id="ltA-Bp-YFj"/>
                                     <constraint firstItem="DhK-aL-osp" firstAttribute="centerY" secondItem="kRj-Yn-31D" secondAttribute="centerY" constant="37" id="pqb-e2-Ooe"/>
                                     <constraint firstItem="jtt-x4-D4M" firstAttribute="top" secondItem="sqy-cJ-s4F" secondAttribute="bottom" constant="18" id="rPX-fO-WbV"/>
+                                    <constraint firstItem="Izi-PO-E0a" firstAttribute="leading" secondItem="wYc-6L-omN" secondAttribute="leading" constant="15" id="rcu-fa-7aA"/>
                                     <constraint firstItem="ZFx-7K-r4m" firstAttribute="top" secondItem="Ipu-xN-lWh" secondAttribute="bottom" constant="5" id="rjO-Pm-rJ3"/>
                                     <constraint firstItem="ZFx-7K-r4m" firstAttribute="leading" secondItem="R1k-lU-MuZ" secondAttribute="trailing" constant="5" id="teA-QG-h9g"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="wYc-6L-omN" firstAttribute="top" secondItem="VOP-5i-nEf" secondAttribute="bottom" id="hoe-Lj-8Zj"/>
                             <constraint firstAttribute="trailing" secondItem="wYc-6L-omN" secondAttribute="trailing" id="hsc-ZN-RpT"/>
@@ -215,7 +230,19 @@ regard porté sur les plus pauvres.</string>
                     </view>
                     <navigationItem key="navigationItem" id="Aud-TU-T7q"/>
                     <connections>
+                        <outlet property="heightLblAddress" destination="AEZ-NW-akL" id="9H7-ir-sxL"/>
+                        <outlet property="heightLblInfo" destination="YcC-o2-l7I" id="J8J-xJ-YGK"/>
+                        <outlet property="heightLblPhone" destination="6Kk-Ta-ZMu" id="xqe-jW-KfR"/>
+                        <outlet property="heightLblSite" destination="8id-zz-7X0" id="6pM-Ad-euc"/>
+                        <outlet property="heightTxtAddress" destination="0G0-Hl-j7m" id="2tD-RN-ckg"/>
+                        <outlet property="heightTxtPhone" destination="vth-7y-orW" id="vZg-Pd-h7S"/>
+                        <outlet property="heightTxtSite" destination="CdD-cC-fIL" id="qOk-od-DZO"/>
+                        <outlet property="heightView" destination="sha-Cq-dw1" id="M0T-ye-sQq"/>
+                        <outlet property="lblAssociationName" destination="deb-A6-oFw" id="cGe-WP-rrv"/>
+                        <outlet property="lblTelephone" destination="5YZ-eN-Rda" id="FoP-jv-Edg"/>
+                        <outlet property="logoImageView" destination="qpc-Kk-SUm" id="AD7-Iv-oxy"/>
                         <outlet property="txtAddress" destination="ZFx-7K-r4m" id="oKc-Nr-Dfr"/>
+                        <outlet property="txtDescription" destination="jtt-x4-D4M" id="cod-Om-dSw"/>
                         <outlet property="txtSite" destination="wJS-Zy-RII" id="Jxa-9R-ogC"/>
                         <outlet property="txtTelephone" destination="Ipu-xN-lWh" id="l9T-pT-euJ"/>
                         <outlet property="viewImage" destination="DhK-aL-osp" id="kAK-Uf-9yV"/>

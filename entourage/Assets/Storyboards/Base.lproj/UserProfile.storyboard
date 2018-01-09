@@ -257,6 +257,9 @@
                                                         <constraint firstAttribute="height" constant="50" id="98g-Mw-uV5"/>
                                                         <constraint firstAttribute="width" constant="50" id="SfH-k7-0jd"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <segue destination="YiS-7u-sXs" kind="presentation" identifier="AssociationDetails" id="27p-jY-k9o"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -292,7 +295,6 @@
                         <outlet property="mailSender" destination="SOE-vz-seE" id="DbS-PU-wg8"/>
                         <outlet property="tableView" destination="8C3-0y-HVH" id="4Rf-Gt-8w0"/>
                         <outlet property="tapToEditBehavior" destination="auQ-gj-IRF" id="L7N-Rw-hjy"/>
-                        <segue destination="YiS-7u-sXs" kind="presentation" identifier="AssociationDetails" id="ONi-BX-JkX"/>
                         <segue destination="dKG-Bp-PN8" kind="presentation" identifier="EditProfileSegue" id="GEi-3D-9G6"/>
                     </connections>
                 </viewController>
@@ -333,7 +335,7 @@
                 <viewControllerPlaceholder storyboardName="UserProfileEditor" id="dKG-Bp-PN8" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UMy-vL-5A4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2933" y="-368"/>
+            <point key="canvasLocation" x="2934" y="-307"/>
         </scene>
     </scenes>
     <resources>

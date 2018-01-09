@@ -10,4 +10,6 @@
 
 @interface OTAssociationDetailsViewController : UIViewController
 
+@property (strong, nonatomic) OTAssociation *association;
+
 @end
