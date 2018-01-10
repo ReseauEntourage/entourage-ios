@@ -30,4 +30,15 @@
     return self;
 }
 
+- (instancetype)initWithTitle:(NSString *)title
+              segueIdentifier:(NSString *)segueIdentifier
+{
+    self = [super init];
+    if (self) {
+        self.title = title;
+        self.segueIdentifier = segueIdentifier;
+    }
+    return self;
+}
+
 @end

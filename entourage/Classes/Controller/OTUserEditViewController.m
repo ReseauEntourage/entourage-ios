@@ -82,19 +82,6 @@ typedef NS_ENUM(NSInteger) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:EDIT_PASSWORD_SEGUE]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        OTUserEditPasswordViewController *controller = (OTUserEditPasswordViewController*)navController.topViewController;
-        controller.delegate = self;
-    }
-    else if ([segue.identifier isEqualToString:@"AboutMeSegue"]) {
-        OTAboutMeViewController *controller = (OTAboutMeViewController*)segue.destinationViewController;
-        controller.delegate = self;
-        controller.aboutMeMessage = self.aboutMeTextView.text;
-    }
-}
-
 - (void)appActive {
     [self.tableView reloadData];
 }
@@ -520,5 +507,17 @@ typedef NS_ENUM(NSInteger) {
     [self performSegueWithIdentifier:@"AboutMeSegue" sender:self];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:EDIT_PASSWORD_SEGUE]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        OTUserEditPasswordViewController *controller = (OTUserEditPasswordViewController*)navController.topViewController;
+        controller.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"AboutMeSegue"]) {
+        OTAboutMeViewController *controller = (OTAboutMeViewController*)segue.destinationViewController;
+        controller.delegate = self;
+        controller.aboutMeMessage = self.aboutMeTextView.text;
+    }
+}
 
 @end

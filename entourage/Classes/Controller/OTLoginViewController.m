@@ -149,10 +149,10 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    if (loggedNumbers == nil)
                                        loggedNumbers = [NSMutableArray new];
                                    [SVProgressHUD dismiss];
-                                   [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
+                                   [[NSUserDefaults standardUserDefaults] setBool:NO
+                                                                           forKey:@"user_tours_only"];
                                    [NSUserDefaults standardUserDefaults].currentUser = user;
                                    [[NSUserDefaults standardUserDefaults] synchronize];
-
                                    if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
                                        [[OTPushNotificationsService new] promptUserForPushNotifications];
                                        [UIStoryboard showSWRevealController];

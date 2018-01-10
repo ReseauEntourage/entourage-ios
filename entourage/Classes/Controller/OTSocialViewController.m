@@ -82,11 +82,10 @@
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OTAboutItem *item = [self aboutItemAtIndexPath:indexPath];
-   if (indexPath.row == 3 || indexPath.row == 4) {
+    if (indexPath.row == 3 || indexPath.row == 4) {
         NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, item.identifier, TOKEN];
         NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
         [[OTDeepLinkService new] openWithWebView: [NSURL URLWithString:url]];
-        //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     }
     else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];

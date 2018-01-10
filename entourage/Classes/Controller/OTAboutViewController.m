@@ -21,6 +21,7 @@
 
 @import MessageUI;
 
+#define TUTORIAL_INDEXPATH 0
 #define FAQ_INDEXPATH 1
 
 @interface OTAboutViewController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
@@ -88,6 +89,9 @@
         case Facebook:
             message = @"FacebookPageClick";
             break;
+        case Tutorial:
+            message = @"";
+            break;
         case GeneralConditions:
             message = @"CGUClick";
             break;
@@ -132,6 +136,9 @@
         NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     }
+    else if (indexPath.row == TUTORIAL_INDEXPATH) {
+        [self performSegueWithIdentifier:item.segueIdentifier sender:nil];
+    }
     else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];
     }
@@ -144,15 +151,20 @@
 {
     NSMutableArray *aboutItems = [NSMutableArray array];
     
-    OTAboutItem *itemCGU = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_cgu")
-                                                          url:ABOUT_CGU_URL];
-    itemCGU.type = GeneralConditions;
-    [aboutItems addObject:itemCGU];
+    OTAboutItem *itemTutorial = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_tutorial")
+                                                   segueIdentifier:@"TutorialSegueIdentifier"];
+    itemTutorial.type = Tutorial;
+    [aboutItems addObject:itemTutorial];
     
     OTAboutItem *itemApplicationUsage = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"menu_application_usage")
                                                                 identifier:FAQ_LINK_ID];
     itemApplicationUsage.type = FAQ;
     [aboutItems addObject:itemApplicationUsage];
+    
+    OTAboutItem *itemCGU = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_cgu")
+                                                          url:ABOUT_CGU_URL];
+    itemCGU.type = GeneralConditions;
+    [aboutItems addObject:itemCGU];
     
     OTAboutItem *itemWebsite = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_website")
                                                               url:ABOUT_WEBSITE_URL];
