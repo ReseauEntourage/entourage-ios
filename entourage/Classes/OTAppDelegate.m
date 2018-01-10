@@ -64,6 +64,8 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     NSString *mixpanelToken = [ConfigurationManager shared].MixpanelToken;
     [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
     [Mixpanel sharedInstance].enableLogging = YES;
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    mixpanel.minimumSessionDuration = 0;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
 
