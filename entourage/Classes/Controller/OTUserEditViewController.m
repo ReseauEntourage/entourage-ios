@@ -487,11 +487,6 @@ typedef NS_ENUM(NSInteger) {
 - (void)setupAboutMeCell:(UITableViewCell *)cell withText:(NSString *)aboutText {
     self.aboutMeTextView = [cell viewWithTag:ABOUT_ME_TEXT];
     self.aboutMeTextView.delegate = self;
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                action:@selector(addAboutMeDescription)];
-    singleTap.numberOfTapsRequired = 1;
-    singleTap.numberOfTouchesRequired = 1;
-    [self.aboutMeTextView addGestureRecognizer:singleTap];
     self.aboutMeTextView.text = aboutText;
 }
 
@@ -521,8 +516,9 @@ typedef NS_ENUM(NSInteger) {
     [self appActive];
 }
 
-- (void)addAboutMeDescription {
-    [self performSegueWithIdentifier:@"AboutMeSegue" sender:nil];
+- (IBAction)addAboutMeDescription:(id)sender {
+    [self performSegueWithIdentifier:@"AboutMeSegue" sender:self];
 }
+
 
 @end
