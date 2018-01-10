@@ -152,6 +152,9 @@
         OTMainViewController *mainViewController = [self popToMainViewController];
         [mainViewController switchToGuide];
     }
+    else if([key isEqualToString:@"phone-settings"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }
 }
 
 - (void)openWithWebView: (NSURL *)url {
