@@ -79,6 +79,12 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
+        [[OTAuthService new] getDetailsForUser:currentUser.sid success:^(OTUser *user) {
+            [NSUserDefaults standardUserDefaults].currentUser = user;
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        } failure:^(NSError *error) {
+            NSLog(@"@fails getting user %@", error.description);
+        }];
         [OTLogger setupMixpanelWithUser:currentUser];
         [[OTAuthService new] sendAppInfoWithSuccess:nil failure:nil];
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
