@@ -15,6 +15,7 @@
 #import "NSNotification+entourage.h"
 #import "OTOngoingTourService.h"
 #import "OTTourPoint.h"
+#import "NSUserDefaults+OT.h"
 
 #define MIN_POINTS_TO_SEND 3
 #define HOW_RECENT_THRESHOLD 120
@@ -73,10 +74,11 @@
 }
 
 - (void)stopTour {
-    if(self.tourPointsToSend.count == 0) {
-        [self.delegate stoppedTour];
-        return;
-    }
+//    self.tourPointsToSend = self.tour.tourPoints;
+//    if(self.tourPointsToSend.count == 0) {
+//        [self.delegate stoppedTour];
+//        return;
+//    }
     OTTourPoint *lastTourPoint = self.tour.tourPoints.lastObject;
     if(self.tourPointsToSend.count > 0)
         lastTourPoint = self.tourPointsToSend.lastObject;
@@ -126,8 +128,13 @@
 
 - (OTTourPoint *)addTourPointFromLocation:(CLLocation *)location toLastLocation:(CLLocation *)lastLocation {
     self.tour.distance = @(self.tour.distance.doubleValue + [location distanceFromLocation:lastLocation]);
+ //   CLLocation *loc = [[CLLocation alloc] initWithLatitude:46.777264 longitude:23.608863];
+//    OTTourPoint *tourPoint2 = [[OTTourPoint alloc] initWithLocation:loc];
+//    [self.tour.tourPoints addObject:tourPoint2];
     OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:location];
     [self.tour.tourPoints addObject:tourPoint];
+    [NSUserDefaults standardUserDefaults].currentOngoingTour = self.tour;
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self.delegate tourDataUpdated];
     return tourPoint;
 }
