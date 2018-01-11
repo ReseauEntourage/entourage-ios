@@ -153,7 +153,9 @@
         [mainViewController switchToGuide];
     }
     else if([key isEqualToString:@"phone-settings"]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        });
     }
 }
 
