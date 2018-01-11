@@ -41,6 +41,7 @@ NSString *const kKeyDefault = @"default";
             self.descr = [dictionary stringForKey:kKeyAssociationDescription];
             self.phone = [dictionary stringForKey:kKeyAssociationPhone];
             self.address = [dictionary stringForKey:kKeyAssociationAddress];
+            self.websiteUrl = [dictionary stringForKey:kKeyAssociationWebsiteUrl];
             self.email = [dictionary stringForKey:kKeyAssociationEmail];
             self.isDefault = [dictionary boolForKey:kKeyDefault];
         }
@@ -56,6 +57,7 @@ NSString *const kKeyDefault = @"default";
     [encoder encodeObject:self.descr forKey:kKeyAssociationDescription];
     [encoder encodeObject:self.phone forKey:kKeyAssociationPhone];
     [encoder encodeObject:self.address forKey:kKeyAssociationAddress];
+    [encoder encodeObject:self.websiteUrl forKey:kKeyAssociationWebsiteUrl];
     [encoder encodeObject:self.email forKey:kKeyAssociationEmail];
     [encoder encodeBool:self.isDefault forKey:kKeyDefault];
 }
@@ -70,6 +72,7 @@ NSString *const kKeyDefault = @"default";
         self.descr = [decoder decodeObjectForKey:kKeyAssociationDescription];
         self.phone = [decoder decodeObjectForKey:kKeyAssociationPhone];
         self.address = [decoder decodeObjectForKey:kKeyAssociationAddress];
+        self.websiteUrl = [decoder decodeObjectForKey:kKeyAssociationWebsiteUrl];
         self.email = [decoder decodeObjectForKey:kKeyAssociationEmail];
         self.isDefault = [decoder decodeBoolForKey:kKeyDefault];
     }

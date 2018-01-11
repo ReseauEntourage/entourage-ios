@@ -157,7 +157,6 @@
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
-                                        <dataDetectorType key="dataDetectorTypes" address="YES"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Site web" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izi-PO-E0a">
                                         <rect key="frame" x="15" y="436" width="60" height="18"/>
@@ -180,6 +179,26 @@
                                         <textInputTraits key="textInputTraits"/>
                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                     </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEk-q3-wRY">
+                                        <rect key="frame" x="15" y="474" width="37.5" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="k8i-Pz-Zdd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="YGL-5F-l4z">
+                                        <rect key="frame" x="57.5" y="466" width="301.5" height="33"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="XBE-9b-Pzr"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -195,14 +214,16 @@
                                     <constraint firstItem="eXN-vt-QpN" firstAttribute="top" secondItem="jtt-x4-D4M" secondAttribute="bottom" constant="18" id="Gmn-fw-42o"/>
                                     <constraint firstItem="wJS-Zy-RII" firstAttribute="leading" secondItem="Izi-PO-E0a" secondAttribute="trailing" constant="5" id="H0i-UG-hyd"/>
                                     <constraint firstItem="Ipu-xN-lWh" firstAttribute="centerY" secondItem="5YZ-eN-Rda" secondAttribute="centerY" id="HdV-Ub-Fhn"/>
+                                    <constraint firstItem="YGL-5F-l4z" firstAttribute="top" secondItem="wJS-Zy-RII" secondAttribute="bottom" constant="5" id="IP3-Ko-mhx"/>
                                     <constraint firstItem="sqy-cJ-s4F" firstAttribute="leading" secondItem="wYc-6L-omN" secondAttribute="leading" id="J2e-zP-4sw"/>
+                                    <constraint firstAttribute="bottom" secondItem="YGL-5F-l4z" secondAttribute="bottom" constant="17" id="JSf-kE-75z"/>
                                     <constraint firstItem="wJS-Zy-RII" firstAttribute="top" secondItem="ZFx-7K-r4m" secondAttribute="bottom" constant="5" id="JZN-vO-NX9"/>
                                     <constraint firstItem="jtt-x4-D4M" firstAttribute="leading" secondItem="wYc-6L-omN" secondAttribute="leading" constant="15" id="Jwn-7F-7Di"/>
                                     <constraint firstItem="5YZ-eN-Rda" firstAttribute="top" secondItem="eXN-vt-QpN" secondAttribute="bottom" constant="16" id="KH8-ah-ysb"/>
-                                    <constraint firstAttribute="bottom" secondItem="wJS-Zy-RII" secondAttribute="bottom" constant="17" id="L1Q-om-cyi"/>
                                     <constraint firstItem="kRj-Yn-31D" firstAttribute="top" secondItem="wYc-6L-omN" secondAttribute="top" id="MIO-fB-zy8"/>
                                     <constraint firstItem="sqy-cJ-s4F" firstAttribute="top" secondItem="deb-A6-oFw" secondAttribute="bottom" constant="18" id="Mxd-EU-dfa"/>
                                     <constraint firstItem="kRj-Yn-31D" firstAttribute="centerX" secondItem="wYc-6L-omN" secondAttribute="centerX" id="Q4u-re-cFF"/>
+                                    <constraint firstItem="YGL-5F-l4z" firstAttribute="leading" secondItem="tEk-q3-wRY" secondAttribute="trailing" constant="5" id="R6w-Da-jFS"/>
                                     <constraint firstItem="kRj-Yn-31D" firstAttribute="leading" secondItem="wYc-6L-omN" secondAttribute="leading" id="Rxx-1X-gNz"/>
                                     <constraint firstAttribute="trailing" secondItem="jtt-x4-D4M" secondAttribute="trailing" constant="15" id="W39-2L-d8d"/>
                                     <constraint firstAttribute="trailing" secondItem="kRj-Yn-31D" secondAttribute="trailing" id="bWI-IF-pdN"/>
@@ -211,12 +232,16 @@
                                     <constraint firstAttribute="trailing" secondItem="deb-A6-oFw" secondAttribute="trailing" id="e4s-1C-61R"/>
                                     <constraint firstItem="Ipu-xN-lWh" firstAttribute="leading" secondItem="5YZ-eN-Rda" secondAttribute="trailing" constant="5" id="edD-9M-Bjp"/>
                                     <constraint firstItem="wJS-Zy-RII" firstAttribute="centerY" secondItem="Izi-PO-E0a" secondAttribute="centerY" id="fUT-F0-EhC"/>
+                                    <constraint firstItem="tEk-q3-wRY" firstAttribute="leading" secondItem="wYc-6L-omN" secondAttribute="leading" constant="15" id="fab-JA-lYw"/>
                                     <constraint firstAttribute="trailing" secondItem="eXN-vt-QpN" secondAttribute="trailing" id="ltA-Bp-YFj"/>
+                                    <constraint firstAttribute="trailing" secondItem="YGL-5F-l4z" secondAttribute="trailing" constant="15" id="oHX-hm-j3U"/>
                                     <constraint firstItem="DhK-aL-osp" firstAttribute="centerY" secondItem="kRj-Yn-31D" secondAttribute="centerY" constant="37" id="pqb-e2-Ooe"/>
                                     <constraint firstItem="jtt-x4-D4M" firstAttribute="top" secondItem="sqy-cJ-s4F" secondAttribute="bottom" constant="18" id="rPX-fO-WbV"/>
                                     <constraint firstItem="Izi-PO-E0a" firstAttribute="leading" secondItem="wYc-6L-omN" secondAttribute="leading" constant="15" id="rcu-fa-7aA"/>
                                     <constraint firstItem="ZFx-7K-r4m" firstAttribute="top" secondItem="Ipu-xN-lWh" secondAttribute="bottom" constant="5" id="rjO-Pm-rJ3"/>
+                                    <constraint firstItem="YGL-5F-l4z" firstAttribute="centerY" secondItem="tEk-q3-wRY" secondAttribute="centerY" id="sIn-fa-s89"/>
                                     <constraint firstItem="ZFx-7K-r4m" firstAttribute="leading" secondItem="R1k-lU-MuZ" secondAttribute="trailing" constant="5" id="teA-QG-h9g"/>
+                                    <constraint firstItem="YGL-5F-l4z" firstAttribute="leading" secondItem="tEk-q3-wRY" secondAttribute="trailing" constant="5" id="v9F-g2-ll2"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -231,10 +256,12 @@
                     <navigationItem key="navigationItem" id="Aud-TU-T7q"/>
                     <connections>
                         <outlet property="heightLblAddress" destination="AEZ-NW-akL" id="9H7-ir-sxL"/>
+                        <outlet property="heightLblEmail" destination="k8i-Pz-Zdd" id="YBD-j9-awy"/>
                         <outlet property="heightLblInfo" destination="YcC-o2-l7I" id="J8J-xJ-YGK"/>
                         <outlet property="heightLblPhone" destination="6Kk-Ta-ZMu" id="xqe-jW-KfR"/>
                         <outlet property="heightLblSite" destination="8id-zz-7X0" id="6pM-Ad-euc"/>
                         <outlet property="heightTxtAddress" destination="0G0-Hl-j7m" id="2tD-RN-ckg"/>
+                        <outlet property="heightTxtEmail" destination="XBE-9b-Pzr" id="oeY-hR-PAm"/>
                         <outlet property="heightTxtPhone" destination="vth-7y-orW" id="vZg-Pd-h7S"/>
                         <outlet property="heightTxtSite" destination="CdD-cC-fIL" id="qOk-od-DZO"/>
                         <outlet property="heightView" destination="sha-Cq-dw1" id="M0T-ye-sQq"/>
@@ -243,6 +270,7 @@
                         <outlet property="logoImageView" destination="qpc-Kk-SUm" id="AD7-Iv-oxy"/>
                         <outlet property="txtAddress" destination="ZFx-7K-r4m" id="oKc-Nr-Dfr"/>
                         <outlet property="txtDescription" destination="jtt-x4-D4M" id="cod-Om-dSw"/>
+                        <outlet property="txtEmail" destination="YGL-5F-l4z" id="SPp-NG-PuP"/>
                         <outlet property="txtSite" destination="wJS-Zy-RII" id="Jxa-9R-ogC"/>
                         <outlet property="txtTelephone" destination="Ipu-xN-lWh" id="l9T-pT-euJ"/>
                         <outlet property="viewImage" destination="DhK-aL-osp" id="kAK-Uf-9yV"/>
