@@ -8,11 +8,17 @@
 
 #import "OTTutorial1ViewController.h"
 #import "OTConsts.h"
+#import "UIColor+entourage.h"
 
 @implementation OTTutorial1ViewController
 
-- (IBAction)gotoBlog:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:TUTORIAL_BLOG_LINK]];
+- (void)viewDidLoad {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Pour renseigner votre description, accédez à votre profil depuis le bouton menu en haut à gauche : "];
+    [attributedString addAttributes:@{
+                                      NSFontAttributeName: self.descriptionLabel.font,
+                                      NSForegroundColorAttributeName: [UIColor appOrangeColor]
+                                      } range:NSMakeRange(35, 44)];
+    [self.descriptionLabel setAttributedText:attributedString];
 }
 
 - (IBAction)close:(id)sender {
