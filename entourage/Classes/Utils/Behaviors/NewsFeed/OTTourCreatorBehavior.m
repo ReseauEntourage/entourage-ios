@@ -120,7 +120,7 @@
             double distance = [self.lastLocation distanceFromLocation:lastLocationToSend];
             if (fabs(distance) > LOCATION_MIN_DISTANCE)
                 [self updateTourPointsToSendIfNeeded:addedPoint];
-            if (self.tourPointsToSend.count > MIN_POINTS_TO_SEND)
+            if (self.tour.tourPoints.count > MIN_POINTS_TO_SEND)
                 [self sendTourPointsWithSuccess:nil orFailure:nil];
         }
     }
@@ -128,13 +128,15 @@
 
 - (OTTourPoint *)addTourPointFromLocation:(CLLocation *)location toLastLocation:(CLLocation *)lastLocation {
     self.tour.distance = @(self.tour.distance.doubleValue + [location distanceFromLocation:lastLocation]);
- //   CLLocation *loc = [[CLLocation alloc] initWithLatitude:46.777264 longitude:23.608863];
+    CLLocation *loc = [[CLLocation alloc] initWithLatitude:46.777264 longitude:23.608863];
 //    OTTourPoint *tourPoint2 = [[OTTourPoint alloc] initWithLocation:loc];
 //    [self.tour.tourPoints addObject:tourPoint2];
     OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:location];
     [self.tour.tourPoints addObject:tourPoint];
-    [NSUserDefaults standardUserDefaults].currentOngoingTour = self.tour;
+    [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour: nil];
+    [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour: self.tour];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    OTTour *t = [NSUserDefaults standardUserDefaults].currentOngoingTour;
     [self.delegate tourDataUpdated];
     return tourPoint;
 }
@@ -144,12 +146,15 @@
 }
 
 - (void)sendTourPointsWithSuccess:(void(^)())success orFailure:(void(^)(NSError *))failure {
-    NSArray *sentPoints = [NSArray arrayWithArray:self.tourPointsToSend];
+    NSArray *sentPoints = [NSArray arrayWithArray:self.tour.tourPoints];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[OTTourService new] sendTourPoint:self.tourPointsToSend
+    [[OTTourService new] sendTourPoint:self.tour.tourPoints
                             withTourId:self.tour.uid
                            withSuccess:^(OTTour *updatedTour) {
-        [self.tourPointsToSend removeObjectsInArray:sentPoints];
+        [self.tour.tourPoints removeObjectsInArray:sentPoints];
+        [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:self.tour];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        //[self.tourPointsToSend removeObjectsInArray:sentPoints];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         if (success)
             success();
