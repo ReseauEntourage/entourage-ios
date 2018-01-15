@@ -93,6 +93,11 @@ typedef NS_ENUM(NSInteger) {
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
+- (IBAction)showAssociations:(id)sender {
+    [OTLogger logEvent:@"ToBadgePageFromProfile"];
+    [self performSegueWithIdentifier:@"SelectAssociationSegue" sender:nil];
+}
+
 - (void)showSaveButton {
 #if BETA
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];

@@ -506,9 +506,7 @@ quelques mots !</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <segue destination="tB3-88-q3n" kind="show" id="YSr-g9-Sne">
-                                                            <nil key="action"/>
-                                                        </segue>
+                                                        <action selector="showAssociations:" destination="aOS-K6-p4c" eventType="touchUpInside" id="IMC-R9-j8o"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -566,6 +564,7 @@ quelques mots !</string>
                         <outlet property="checkMailBehavior" destination="xeP-Xi-jGk" id="fhG-9s-eo0"/>
                         <outlet property="tableView" destination="HGi-wx-kYf" id="bxU-9K-Dyd"/>
                         <segue destination="fo1-Nj-4px" kind="presentation" identifier="EditPasswordSegue" id="IPy-M8-vIb"/>
+                        <segue destination="tB3-88-q3n" kind="show" identifier="SelectAssociationSegue" id="F78-yU-l2a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Mj-AJ-w28" userLabel="First Responder" sceneMemberID="firstResponder"/>
