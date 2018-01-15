@@ -7,6 +7,7 @@
 //
 
 #import "OTTutorial1ViewController.h"
+#import "OTTutorialViewController.h"
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
 
@@ -21,6 +22,21 @@
                                       NSForegroundColorAttributeName: [UIColor appOrangeColor]
                                       } range:NSMakeRange(35, 44)];
     [self.descriptionLabel setAttributedText:attributedString];
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeft)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeLeft];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+    
+    [(OTTutorialViewController*)self.parentViewController enableScrolling:NO];
+}
+
+- (void)handleSwipeLeft {
+    [(OTTutorialViewController*)self.parentViewController showNextViewController:self];
+    [(OTTutorialViewController*)self.parentViewController enableScrolling:YES];
 }
 
 - (IBAction)close:(id)sender {

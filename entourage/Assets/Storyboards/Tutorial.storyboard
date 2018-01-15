@@ -329,13 +329,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="164.5"/>
                                         <subviews>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="p3_group" translatesAutoresizingMaskIntoConstraints="NO" id="3rP-xw-J2r">
-                                                <rect key="frame" x="51.5" y="15.5" width="217" height="149"/>
+                                                <rect key="frame" x="51.5" y="18.5" width="217" height="149"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="deviceRGB"/>
                                         <constraints>
                                             <constraint firstItem="3rP-xw-J2r" firstAttribute="centerX" secondItem="o70-VA-ahM" secondAttribute="centerX" id="ADG-c7-nlR"/>
-                                            <constraint firstAttribute="bottom" secondItem="3rP-xw-J2r" secondAttribute="bottom" id="X7h-1a-kCb"/>
+                                            <constraint firstAttribute="bottom" secondItem="3rP-xw-J2r" secondAttribute="bottom" constant="-3" id="X7h-1a-kCb"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="uiK-sn-ik8">
