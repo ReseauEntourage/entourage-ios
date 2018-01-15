@@ -7,11 +7,11 @@
 //
 
 #import "OTTutorial4ViewController.h"
+#import "UIColor+entourage.h"
 
 @interface OTTutorial4ViewController ()
 
-@property (nonatomic, weak) IBOutlet UIButton *btnSelectAssociation;
-@property (nonatomic, weak) IBOutlet UIButton *btnClose;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 
 @end
 
@@ -20,9 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.btnSelectAssociation setContentEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 20)];
-    [self.btnClose setContentEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 20)];
-    self.btnClose.layer.borderColor = self.btnClose.currentTitleColor.CGColor;
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Faites appel à vos voisins afin d’entourer une personne sans-abri. Créez une action avec le bouton :"];
+    [attributedString addAttributes:@{
+                                NSForegroundColorAttributeName: [UIColor appOrangeColor]
+                                      } range:NSMakeRange(67, 33)];
+    self.descriptionLabel.attributedText = attributedString;
 }
 
 - (IBAction)showPartnerSelection:(id)sender {

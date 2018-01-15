@@ -11,6 +11,20 @@
 
 @implementation OTTutorial3ViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Découvrez les conseils pratiques du guide Simple Comme Bonjour depuis le menu en haut à gauche :"];
+    [attributedString addAttributes:@{
+                                      NSForegroundColorAttributeName: [UIColor appOrangeColor]
+                                      } range:NSMakeRange(0, 32)];
+    [attributedString addAttributes:@{
+                                      NSForegroundColorAttributeName: [UIColor appOrangeColor]
+                                      } range:NSMakeRange(63, 14)];
+    
+    self.descriptionLabel.attributedText = attributedString;
+}
+
 - (IBAction)close:(id)sender {
     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
 }
