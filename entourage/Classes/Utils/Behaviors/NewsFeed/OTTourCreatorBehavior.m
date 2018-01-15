@@ -80,8 +80,8 @@
 //        return;
 //    }
     OTTourPoint *lastTourPoint = self.tour.tourPoints.lastObject;
-    if(self.tourPointsToSend.count > 0)
-        lastTourPoint = self.tourPointsToSend.lastObject;
+//    if(self.tourPointsToSend.count > 0)
+//        lastTourPoint = self.tourPointsToSend.lastObject;
     CLLocation *lastLocationToSend = [self locationFromTourPoint:lastTourPoint];
     OTTourPoint *lastPoint = [self addTourPointFromLocation:self.lastLocation toLastLocation:lastLocationToSend];
     [self updateTourPointsToSendIfNeeded:lastPoint];

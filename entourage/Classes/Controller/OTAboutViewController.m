@@ -138,6 +138,7 @@
     }
     else if (indexPath.row == TUTORIAL_INDEXPATH) {
         [self performSegueWithIdentifier:item.segueIdentifier sender:nil];
+        [OTLogger logEvent:@"OpenTutorialFromMenu"];
     }
     else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];
