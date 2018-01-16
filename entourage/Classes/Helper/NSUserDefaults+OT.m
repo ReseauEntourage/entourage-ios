@@ -1,6 +1,7 @@
 
 #import "OTUser.h"
 #import "OTTour.h"
+#import "OTTourPoint.h"
 
 #import "NSUserDefaults+OT.h"
 
@@ -10,6 +11,7 @@ static NSString *const kAutoTutorialComplete = @"kAutoTutorialComplete";
 static NSString *const kNewsfeedsFilter = @"kNewsfeedsFilter_";
 static NSString *const kMyEntouragesFilter = @"kMyEntouragesFilter_";
 static NSString *const kTourOngoing = @"kTour";
+static NSString *const kTourPoints = @"kTourPoints";
 
 @implementation NSUserDefaults (OT)
 
@@ -43,6 +45,19 @@ static NSString *const kTourOngoing = @"kTour";
     [self synchronize];
 }
 
+- (void)setTourPoints:(NSArray *)tourPoints {
+    if (tourPoints)
+    {
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:tourPoints];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:kTourPoints];
+    }
+    else
+    {
+        [self removeObjectForKey:kTourPoints];
+    }
+    [self synchronize];
+}
+
 - (OTUser *)currentUser
 {
 	NSData *encodedObject = [self objectForKey:kUser];
@@ -54,6 +69,12 @@ static NSString *const kTourOngoing = @"kTour";
     NSData *encodedObject = [self objectForKey:kTourOngoing];
     OTTour *tour = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
     return tour;
+}
+
+- (NSArray *)tourPoints {
+    NSData *encodedObject = [self objectForKey:kTourPoints];
+    NSArray *tourPoints = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+    return tourPoints;
 }
 
 - (void)setTemporaryUser:(OTUser *)temporaryUser {

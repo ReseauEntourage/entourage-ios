@@ -188,6 +188,7 @@ continueUserActivity:(NSUserActivity *)userActivity
 - (void)clearUserData {
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
+    [[NSUserDefaults standardUserDefaults] setTourPoints:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 

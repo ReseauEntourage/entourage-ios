@@ -76,6 +76,7 @@
             if ([self.delegate respondsToSelector:@selector(tourSent:)])
                 [self.delegate tourSent:self.tour];
             [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
+            [[NSUserDefaults standardUserDefaults] setTourPoints:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
         } failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"tour_close_error")];
