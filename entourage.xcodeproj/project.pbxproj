@@ -3651,7 +3651,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Entourage;
 				PROVISIONING_PROFILE = "7299ae5e-d774-4bcb-9b5e-779b8b5c5ce8";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";

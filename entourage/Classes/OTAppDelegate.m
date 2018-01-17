@@ -125,8 +125,8 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-//    if ([NSUserDefaults standardUserDefaults].currentUser)
-//        [[OTLocationManager sharedInstance] startLocationUpdates];
+    if ([NSUserDefaults standardUserDefaults].currentUser)
+        [[OTLocationManager sharedInstance] startLocationUpdates];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
