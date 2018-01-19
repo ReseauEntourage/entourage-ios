@@ -18,7 +18,7 @@ else
     build=`git rev-list HEAD --count`
     previous_tag="$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))"
 
-    previous_tag="Version_4.1.722"
+    previous_tag="Version_4.2.769"
 
     filename="GITCHANGELOG-FROM-$previous_tag-TO-$latest_tag.md"
     echo "#Changelog" > $filename
