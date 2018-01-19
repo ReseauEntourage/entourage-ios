@@ -22,6 +22,7 @@
 #import "UIImageView+entourage.h"
 #import "OTUserTableConfigurator.h"
 #import "OTMailSenderBehavior.h"
+#import "OTAssociationDetailsViewController.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -221,7 +222,10 @@ typedef NS_ENUM(NSInteger) {
                     [self setupTitleProfileCell:cell withTitle:OTLocalizedString(@"organizations")];
                     break;
                 case AssociationRowTypeOrganisation:
-                    [self setupAssociationProfileCell:cell withAssociationTitle:self.user.organization.name andAssociationLogoUrl:self.user.organization.logoUrl];
+                    [self setupAssociationProfileCell:cell
+                                 withAssociationTitle:self.user.organization.name
+                                andAssociationLogoUrl:self.user.organization.logoUrl];
+                    cell.userInteractionEnabled = NO;
                     break;
                 case AssociationRowTypePartner:
                     [self setupAssociationPartnerCell:cell withPartner:self.user.partner];
@@ -276,7 +280,9 @@ typedef NS_ENUM(NSInteger) {
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }
 
-- (void)setupVerificationProfileCell:(UITableViewCell *)cell withCheck:(NSString *)checkString andStatus:(BOOL)isChecked
+- (void)setupVerificationProfileCell:(UITableViewCell *)cell
+                           withCheck:(NSString *)checkString
+                           andStatus:(BOOL)isChecked
 {
     UILabel *checkLabel = [cell viewWithTag:VERIFICATION_LABEL];
     checkLabel.text = checkString;
@@ -295,7 +301,10 @@ typedef NS_ENUM(NSInteger) {
     }
 }
 
-- (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationLogoUrl:(NSString *)imageURL {
+- (void)setupAssociationProfileCell:(UITableViewCell *)cell
+               withAssociationTitle:(NSString *)title
+              andAssociationLogoUrl:(NSString *)imageURL
+{
     UIButton *titleBtn = [cell viewWithTag:ASSOCIATION_TITLE];
     [titleBtn setTitle:title forState:UIControlStateNormal];
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE];
@@ -306,7 +315,8 @@ typedef NS_ENUM(NSInteger) {
     lblSupportType.text = OTLocalizedString(@"marauder");
 }
 
-- (void)setupAssociationPartnerCell:(UITableViewCell *)cell withPartner:(OTAssociation *)partner {
+- (void)setupAssociationPartnerCell:(UITableViewCell *)cell
+                        withPartner:(OTAssociation *)partner {
     UIButton *titleBtn = [cell viewWithTag:ASSOCIATION_TITLE];
     [titleBtn setTitle:partner.name forState:UIControlStateNormal];
     [titleBtn addTarget:self action:@selector(showPartnerDetails) forControlEvents:UIControlEventTouchUpInside];
@@ -340,6 +350,14 @@ typedef NS_ENUM(NSInteger) {
         [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
     else
         [self performSegueWithIdentifier:@"AssociationDetails" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"AssociationDetails"]) {
+        UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
+        OTAssociationDetailsViewController *associationController = (OTAssociationDetailsViewController *)controller.topViewController;
+        associationController.association = self.user.partner;
+    }
 }
 
 @end

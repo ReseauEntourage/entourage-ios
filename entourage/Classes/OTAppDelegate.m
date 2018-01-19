@@ -64,6 +64,8 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     NSString *mixpanelToken = [ConfigurationManager shared].MixpanelToken;
     [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
     [Mixpanel sharedInstance].enableLogging = YES;
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    mixpanel.minimumSessionDuration = 0;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
 
@@ -79,6 +81,12 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
+        [[OTAuthService new] getDetailsForUser:currentUser.sid success:^(OTUser *user) {
+            [NSUserDefaults standardUserDefaults].currentUser = user;
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        } failure:^(NSError *error) {
+            NSLog(@"@fails getting user %@", error.description);
+        }];
         [OTLogger setupMixpanelWithUser:currentUser];
         [[OTAuthService new] sendAppInfoWithSuccess:nil failure:nil];
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
@@ -103,11 +111,22 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     // Call the 'activateApp' method to log an app event for use
     // in analytics and advertising reporting.
     [FBSDKAppEvents activateApp];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    if (@available(iOS 10.0, *)) {
+        [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
+            if (settings.authorizationStatus == UNAuthorizationStatusAuthorized) {
+                [mixpanel.people set:@{@"EntourageNotifEnable": @"YES"}];
+            }
+            else {
+                [mixpanel.people set:@{@"EntourageNotifEnable": @"NO"}];
+            }
+        }];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-//    if ([NSUserDefaults standardUserDefaults].currentUser)
-//        [[OTLocationManager sharedInstance] startLocationUpdates];
+    if ([NSUserDefaults standardUserDefaults].currentUser)
+        [[OTLocationManager sharedInstance] startLocationUpdates];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -118,8 +137,8 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 
 - (BOOL)application:(UIApplication *)application
 continueUserActivity:(NSUserActivity *)userActivity
- restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
-
+ restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
         NSURL *url = userActivity.webpageURL;
         //NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
@@ -128,7 +147,6 @@ continueUserActivity:(NSUserActivity *)userActivity
         [[OTDeepLinkService new] handleUniversalLink:url];
     }
     return true;
-
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -170,6 +188,7 @@ continueUserActivity:(NSUserActivity *)userActivity
 - (void)clearUserData {
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
+    [[NSUserDefaults standardUserDefaults] setTourPoints:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 

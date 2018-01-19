@@ -398,7 +398,7 @@
     if(self.showMedical)
         [types addObject:@"tm"];
     if(self.showSocial)
-        [types addObject:@"ts"];
+        [types addObject:@"tb"];
     if(self.showDistributive)
         [types addObject:@"ta"];
     if(self.showDemandeSocial)

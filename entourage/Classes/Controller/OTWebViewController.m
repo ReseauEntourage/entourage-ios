@@ -42,6 +42,8 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(tap:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    panGestureRecognizer.cancelsTouchesInView = NO;
     _webView.delegate = self;
 }
 
@@ -72,13 +74,13 @@
 }
 
 - (void)configureUIBarButtonItems {
-    UIImage *menuImage = [[UIImage imageNamed:@"back.png"]
+    UIImage *backImage = [[UIImage imageNamed:@"back.png"]
                           imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
-    [menuButton setImage:menuImage];
-    [menuButton setTarget:self];
-    [menuButton setAction:@selector(close)];
-    [self.navigationItem setLeftBarButtonItem:menuButton];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
+    [backButton setImage:backImage];
+    [backButton setTarget:self];
+    [backButton setAction:@selector(closeWebview)];
+    [self.navigationItem setLeftBarButtonItem:backButton];
     
     NSMutableArray *rightButtons = [NSMutableArray new];
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -116,11 +118,11 @@
     }
 }
 
-- (void)close {
+- (void)closeWebview {
     if(self.webView.canGoBack)
         [self.webView goBack];
     else {
-        [self dismissViewControllerAnimated:NO completion:^() {
+        [self dismissViewControllerAnimated:YES completion:^() {
             [SVProgressHUD dismiss];
             if ([self.webViewDelegate respondsToSelector:@selector(webview:)])
                 [self.webViewDelegate performSelector:@selector(webview:) withObject:nil];
@@ -180,7 +182,7 @@
         CGPoint translation = [panGestureRecognizer translationInView:self.animatedView];
         CGFloat finalY = translation.y + 0.2*velocity.y;
         if(translation.y > 0) {
-            if (finalY < DISTANCE_ABOVE_NAVIGATION_BAR) { 
+            if (finalY < DISTANCE_ABOVE_NAVIGATION_BAR) {
                 finalY = DISTANCE_ABOVE_NAVIGATION_BAR;
             } else if (finalY > self.view.frame.size.height) {
                 finalY = self.view.frame.size.height;
@@ -194,7 +196,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             CGPoint translation = [panGestureRecognizer translationInView:self.animatedView];
             if(translation.y >= self.view.bounds.size.height/2)
-                [self close];
+                [self closeWebview];
             else {
                 CGRect frame = self.animatedView.frame;
                 frame.origin = CGPointMake(0, DISTANCE_ABOVE_NAVIGATION_BAR);
@@ -207,7 +209,7 @@
 - (void)tap:(UITapGestureRecognizer *)tapGestureRecognizer {
     CGPoint touchPoint = [tapGestureRecognizer locationInView:self.view];
     if(touchPoint.y < DISTANCE_ABOVE_NAVIGATION_BAR)
-        [self close];
+        [self closeWebview];
 }
 
 @end

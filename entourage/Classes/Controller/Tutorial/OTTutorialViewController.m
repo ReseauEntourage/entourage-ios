@@ -29,14 +29,16 @@
         [self instantiateTutorial:@"Tutorial4"], nil
     ];
     [self setViewControllers:@[[self.tutorialControllers objectAtIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
+
     self.dataSource = self;
     self.delegate = self;
+    
+    [self enableScrolling:NO];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self addBorderToPageControl];
+    [self configurePageControl];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,8 +66,9 @@
     if(index == NSNotFound)
         return nil;
     index++;
-    if(index == self.tutorialControllers.count)
+    if(index == self.tutorialControllers.count) {
         return nil;
+    }
     return [self.tutorialControllers objectAtIndex:index];
 }
 
@@ -74,7 +77,31 @@
 }
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
-    return 0;
+    return [self.tutorialControllers indexOfObject:pageViewController.viewControllers[0]];
+}
+
+#pragma mark - Manual scrolling
+
+-(void)enableScrolling:(BOOL)enabled {
+    for (UIScrollView *view in self.view.subviews) {
+        if ([view isKindOfClass:[UIScrollView class]]) {
+            view.scrollEnabled = enabled;
+        }
+    }
+}
+
+-(void)showPreviousViewController:(UIViewController *)viewController {
+    [self setViewControllers:@[[self.dataSource pageViewController:self viewControllerBeforeViewController:viewController]]
+                   direction:UIPageViewControllerNavigationDirectionReverse
+                    animated:YES
+                  completion:nil];
+}
+
+-(void)showNextViewController:(UIViewController *)viewController {
+    [self setViewControllers:@[[self.dataSource pageViewController:self viewControllerAfterViewController:viewController]]
+                   direction:UIPageViewControllerNavigationDirectionForward
+                    animated:YES
+                  completion:nil];
 }
 
 #pragma mark - private members
@@ -84,9 +111,10 @@
     return [tutorialStoryboard instantiateViewControllerWithIdentifier:identifier];
 }
 
-- (void)addBorderToPageControl {
+- (void)configurePageControl {
     for(UIView *view in self.view.subviews) {
         if([view isKindOfClass:[UIPageControl class]]) {
+            ((UIPageControl*) view).currentPageIndicatorTintColor = [UIColor appOrangeColor];
             for(UIView *subview in view.subviews) {
                 subview.layer.borderColor = [UIColor appGreyishBrownColor].CGColor;
                 subview.layer.borderWidth = 0.5;

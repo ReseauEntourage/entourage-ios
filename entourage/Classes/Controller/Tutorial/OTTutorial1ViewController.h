@@ -10,4 +10,6 @@
 
 @interface OTTutorial1ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+
 @end

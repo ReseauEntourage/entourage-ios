@@ -14,6 +14,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "OTAssociation.h"
 #import "SVProgressHUD.h"
+#import "OTAssociationDetailsViewController.h"
 
 @interface OTSelectAssociationViewController ()
 
@@ -77,6 +78,16 @@
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(hasAssociationSet ? @"association_set" : @"association_reset")];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationAssociationUpdated object:nil];
     }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"AssociationDetails"]) {
+        UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
+        OTAssociationDetailsViewController *associationController = (OTAssociationDetailsViewController *)controller.topViewController;
+        NSIndexPath *indexPath = [self.tblAssociations indexPathForCell:(UITableViewCell *)sender];
+        OTAssociation *item = (OTAssociation *)[self.dataSource.items objectAtIndex:indexPath.row];
+        associationController.association = item;
+    }
 }
 
 @end

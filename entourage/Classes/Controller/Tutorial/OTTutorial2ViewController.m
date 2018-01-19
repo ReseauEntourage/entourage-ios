@@ -20,11 +20,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSMutableAttributedString *newText = [[NSMutableAttributedString alloc] initWithString:self.lblDetails.text];
-    NSString *replaceString = @"entourages";
-    NSRange range = [self.lblDetails.text rangeOfString:replaceString];
-    [newText setAttributes:@{ NSForegroundColorAttributeName : [UIColor appOrangeColor] } range:range];
-    self.lblDetails.attributedText = newText;
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Consultez les actions créées par vos voisins et rejoignez celles qui vous intéressent depuis la carte : "];
+    [attributedString addAttributes:@{
+                                      NSForegroundColorAttributeName: [UIColor appGreyishBrownColor]
+                                      } range:NSMakeRange(0, 47)];
+    
+    self.lblDetails.attributedText = attributedString;
 }
 
 - (IBAction)close:(id)sender {

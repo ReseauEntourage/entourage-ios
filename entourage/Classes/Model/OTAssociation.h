@@ -14,6 +14,11 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *largeLogoUrl;
 @property (strong, nonatomic) NSString *smallLogoUrl;
+@property (strong, nonatomic) NSString *descr;
+@property (strong, nonatomic, nullable) NSString *phone;
+@property (strong, nonatomic, nullable) NSString *address;
+@property (strong, nonatomic, nullable) NSString *websiteUrl;
+@property (strong, nonatomic, nullable) NSString *email;
 @property (assign, nonatomic) BOOL isDefault;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;

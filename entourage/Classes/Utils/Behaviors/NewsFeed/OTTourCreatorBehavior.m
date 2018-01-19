@@ -15,6 +15,7 @@
 #import "NSNotification+entourage.h"
 #import "OTOngoingTourService.h"
 #import "OTTourPoint.h"
+#import "NSUserDefaults+OT.h"
 
 #define MIN_POINTS_TO_SEND 3
 #define HOW_RECENT_THRESHOLD 120
@@ -29,7 +30,7 @@
 @implementation OTTourCreatorBehavior
 
 - (void)initialize {
-    self.tourPointsToSend = [NSMutableArray new];
+    self.tourPointsToSend = [[NSMutableArray alloc] initWithArray:[NSUserDefaults standardUserDefaults].tourPoints];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
 }
 
@@ -73,10 +74,10 @@
 }
 
 - (void)stopTour {
-    if(self.tourPointsToSend.count == 0) {
-        [self.delegate stoppedTour];
-        return;
-    }
+//    if(self.tourPointsToSend.count == 0) {
+//        [self.delegate stoppedTour];
+//        return;
+//    }
     OTTourPoint *lastTourPoint = self.tour.tourPoints.lastObject;
     if(self.tourPointsToSend.count > 0)
         lastTourPoint = self.tourPointsToSend.lastObject;
@@ -102,6 +103,7 @@
 
 - (void)locationUpdated:(NSNotification *)notification {
     NSArray *locations = [notification readLocations];
+    
     for (CLLocation *newLocation in locations) {
         NSDate *eventDate = newLocation.timestamp;
         NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
@@ -128,12 +130,17 @@
     self.tour.distance = @(self.tour.distance.doubleValue + [location distanceFromLocation:lastLocation]);
     OTTourPoint *tourPoint = [[OTTourPoint alloc] initWithLocation:location];
     [self.tour.tourPoints addObject:tourPoint];
+    [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour: nil];
+    [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour: self.tour];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self.delegate tourDataUpdated];
     return tourPoint;
 }
 
 - (void)updateTourPointsToSendIfNeeded:(OTTourPoint *)tourPoint {
     [self.tourPointsToSend addObject:tourPoint];
+    [[NSUserDefaults standardUserDefaults] setTourPoints:self.tourPointsToSend];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)sendTourPointsWithSuccess:(void(^)())success orFailure:(void(^)(NSError *))failure {
@@ -143,6 +150,8 @@
                             withTourId:self.tour.uid
                            withSuccess:^(OTTour *updatedTour) {
         [self.tourPointsToSend removeObjectsInArray:sentPoints];
+        [[NSUserDefaults standardUserDefaults] setTourPoints:self.tourPointsToSend];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         if (success)
             success();

@@ -11,6 +11,7 @@
 typedef enum {
     Rate,
     Facebook,
+    Tutorial,
     GeneralConditions,
     FAQ,
     Website,
@@ -27,6 +28,7 @@ typedef enum {
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *identifier;
+@property (nonatomic, strong) NSString *segueIdentifier;
 @property (nonatomic, assign) AboutItems type;
 
 /**************************************************************************************************/
@@ -34,5 +36,6 @@ typedef enum {
 
 - (instancetype)initWithTitle:(NSString *)title url:(NSString *)url;
 - (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier;
+- (instancetype)initWithTitle:(NSString *)title segueIdentifier:(NSString *)segueIdentifier;
 
 @end

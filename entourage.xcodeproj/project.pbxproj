@@ -2109,12 +2109,12 @@
 		1EFBCFD91E56E56D008CEF30 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				1E8767131E5AE4660080486A /* OTTutorial2ViewController.h */,
-				1E8767141E5AE4660080486A /* OTTutorial2ViewController.m */,
 				1EFBCFDA1E56E59C008CEF30 /* OTTutorialViewController.h */,
 				1EFBCFDB1E56E59C008CEF30 /* OTTutorialViewController.m */,
 				1E8767101E5ADD960080486A /* OTTutorial1ViewController.h */,
 				1E8767111E5ADD960080486A /* OTTutorial1ViewController.m */,
+				1E8767131E5AE4660080486A /* OTTutorial2ViewController.h */,
+				1E8767141E5AE4660080486A /* OTTutorial2ViewController.m */,
 				1E8767161E5AEA8B0080486A /* OTTutorial3ViewController.h */,
 				1E8767171E5AEA8B0080486A /* OTTutorial3ViewController.m */,
 				1E8767191E5AEFBA0080486A /* OTTutorial4ViewController.h */,
@@ -3651,7 +3651,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Entourage;
 				PROVISIONING_PROFILE = "7299ae5e-d774-4bcb-9b5e-779b8b5c5ce8";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";

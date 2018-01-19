@@ -10,4 +10,8 @@
 
 @interface OTTutorialViewController : UIPageViewController
 
+-(void)enableScrolling:(BOOL)enabled;
+-(void)showPreviousViewController:(UIViewController *)viewController;
+-(void)showNextViewController:(UIViewController *)viewController;
+
 @end

@@ -16,7 +16,7 @@ typedef enum {
 NSInteger const kOTMapViewTouchSensitivity = 1;
 double const kOTMapViewBaseZoom = 2;
 
-@interface OTMapView() <UIGestureRecognizerDelegate>
+@interface OTMapView()
 
 @property (nonatomic, assign) CGPoint zoomTouchLocation;
 @property (nonatomic, assign) OTMapViewTouchState zoomTouchState;
@@ -27,7 +27,7 @@ double const kOTMapViewBaseZoom = 2;
 
 @implementation OTMapView
 
--(void) layoutSubviews
+- (void)layoutSubviews
 {
     static dispatch_once_t onceToken = 0;
     __weak typeof(self) weakMe = self;
@@ -36,7 +36,7 @@ double const kOTMapViewBaseZoom = 2;
     });
 }
 
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if ([touches count] == 0) {
         return;
@@ -97,17 +97,17 @@ double const kOTMapViewBaseZoom = 2;
     [self setZoomTouchState:OTMapViewTouchStateNormal];
 }
 
--(void) zoomIn
+- (void)zoomIn
 {
     [self applyZoom:YES withVelocity:0.05];
 }
 
--(void) zoomOut
+- (void)zoomOut
 {
     [self applyZoom:NO withVelocity:0.05];
 }
 
--(void) applyZoom:(BOOL)increaseZoom withVelocity:(double)velocity
+- (void)applyZoom:(BOOL)increaseZoom withVelocity:(double)velocity
 {
     CGFloat currentWidth = [self bounds].size.width;
     CGFloat currentHeight = [self bounds].size.height;

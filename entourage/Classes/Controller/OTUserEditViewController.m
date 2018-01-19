@@ -82,19 +82,6 @@ typedef NS_ENUM(NSInteger) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:EDIT_PASSWORD_SEGUE]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        OTUserEditPasswordViewController *controller = (OTUserEditPasswordViewController*)navController.topViewController;
-        controller.delegate = self;
-    }
-    else if ([segue.identifier isEqualToString:@"AboutMeSegue"]) {
-        OTAboutMeViewController *controller = (OTAboutMeViewController*)segue.destinationViewController;
-        controller.delegate = self;
-        controller.aboutMeMessage = self.aboutMeTextView.text;
-    }
-}
-
 - (void)appActive {
     [self.tableView reloadData];
 }
@@ -104,6 +91,11 @@ typedef NS_ENUM(NSInteger) {
 - (void)profilePictureUpdated:(NSNotification *)notification {
     self.user.avatarURL = [[[NSUserDefaults standardUserDefaults] currentUser] avatarURL];
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (IBAction)showAssociations:(id)sender {
+    [OTLogger logEvent:@"ToBadgePageFromProfile"];
+    [self performSegueWithIdentifier:@"SelectAssociationSegue" sender:nil];
 }
 
 - (void)showSaveButton {
@@ -487,11 +479,6 @@ typedef NS_ENUM(NSInteger) {
 - (void)setupAboutMeCell:(UITableViewCell *)cell withText:(NSString *)aboutText {
     self.aboutMeTextView = [cell viewWithTag:ABOUT_ME_TEXT];
     self.aboutMeTextView.delegate = self;
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                action:@selector(addAboutMeDescription)];
-    singleTap.numberOfTapsRequired = 1;
-    singleTap.numberOfTouchesRequired = 1;
-    [self.aboutMeTextView addGestureRecognizer:singleTap];
     self.aboutMeTextView.text = aboutText;
 }
 
@@ -521,8 +508,21 @@ typedef NS_ENUM(NSInteger) {
     [self appActive];
 }
 
-- (void)addAboutMeDescription {
-    [self performSegueWithIdentifier:@"AboutMeSegue" sender:nil];
+- (IBAction)addAboutMeDescription:(id)sender {
+    [self performSegueWithIdentifier:@"AboutMeSegue" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:EDIT_PASSWORD_SEGUE]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        OTUserEditPasswordViewController *controller = (OTUserEditPasswordViewController*)navController.topViewController;
+        controller.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"AboutMeSegue"]) {
+        OTAboutMeViewController *controller = (OTAboutMeViewController*)segue.destinationViewController;
+        controller.delegate = self;
+        controller.aboutMeMessage = self.aboutMeTextView.text;
+    }
 }
 
 @end

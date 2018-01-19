@@ -6,6 +6,7 @@
 @class OTTour;
 @class OTSavedFilter;
 @class OTSavedMyEntouragesFilter;
+@class OTTourPoint;
 
 extern NSString *const kTutorialDone;
 
@@ -17,6 +18,7 @@ extern NSString *const kTutorialDone;
 @property (nonatomic, assign) BOOL autoTutorialShown;
 @property (nonatomic, strong) OTSavedFilter *savedNewsfeedsFilter;
 @property (nonatomic, strong) OTSavedMyEntouragesFilter *savedMyEntouragesFilter;
+@property (nonatomic, strong) NSArray *tourPoints;
 
 - (BOOL)isTutorialCompleted;
 - (BOOL)isTourOngoing;

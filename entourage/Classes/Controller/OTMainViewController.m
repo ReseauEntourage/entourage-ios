@@ -808,6 +808,7 @@
     [self dismissViewControllerAnimated:NO completion:nil];
     [self zoomToCurrentLocation:nil];
     self.launcherButton.enabled = NO;
+    [self.tourCreatorBehavior initialize];
     [self.tourCreatorBehavior startTour:tourType];
 }
 

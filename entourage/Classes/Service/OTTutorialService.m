@@ -12,7 +12,7 @@
 #import "OTDeepLinkService.h"
 #import "OTAPIConsts.h"
 
-#define TUTORIAL_DELAY 2
+#define TUTORIAL_DELAY 15
 
 @implementation OTTutorialService
 
