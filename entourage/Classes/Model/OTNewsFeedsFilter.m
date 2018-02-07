@@ -406,7 +406,7 @@
     if(self.showDemandeEvent)
         [types addObject:@"ae"];
     if(self.showDemandeHelp)
-        [types addObject:@"ah"];
+        [types addObject:@"am"];
     if(self.showDemandeResource)
         [types addObject:@"ar"];
     if(self.showDemandeInfo)
@@ -420,7 +420,7 @@
     if(self.showContributionEvent)
         [types addObject:@"ce"];
     if(self.showContributionHelp)
-        [types addObject:@"ch"];
+        [types addObject:@"cm"];
     if(self.showContributionResource)
         [types addObject:@"cr"];
     if(self.showContributionInfo)
