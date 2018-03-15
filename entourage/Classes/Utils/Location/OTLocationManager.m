@@ -14,7 +14,7 @@
 #import "OTUser.h"
 #import "Mixpanel.h"
 
-@import Firebase
+@import Firebase;
 
 @interface OTLocationManager () <CLLocationManagerDelegate>
 

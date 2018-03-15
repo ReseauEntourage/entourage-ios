@@ -14,7 +14,7 @@
 #import "entourage-Swift.h"
 #import "OTMixpanelService.h"
 
-@import Firebase
+@import Firebase;
 
 @implementation OTLogger
 
@@ -27,7 +27,7 @@
 + (void)setupMixpanelWithUser: (OTUser *)user {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel identify:[user.sid stringValue]];
-    [FIRAnalytics setUserId:[user.sid stringValue]];
+    [FIRAnalytics setUserID:[user.sid stringValue]];
     [mixpanel.people set:@{@"$email": user.email != nil ? user.email : @""}];
     [FIRAnalytics setUserPropertyString:(user.email != nil ? user.email : @"") forName:@"$email"];
     [mixpanel.people set:@{@"EntouragePartner": user.partner != nil ? user.partner.name : @""}];

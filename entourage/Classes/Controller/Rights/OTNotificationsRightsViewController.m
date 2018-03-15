@@ -23,7 +23,7 @@
 #import "OTLocationManager.h"
 #import "Mixpanel/Mixpanel.h"
 
-@import Firebase
+@import Firebase;
 
 @implementation OTNotificationsRightsViewController
 

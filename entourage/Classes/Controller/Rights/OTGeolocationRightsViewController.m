@@ -15,7 +15,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "Mixpanel/Mixpanel.h"
 
-@import Firebase
+@import Firebase;
 
 @implementation OTGeolocationRightsViewController
 

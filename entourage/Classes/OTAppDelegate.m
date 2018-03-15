@@ -37,7 +37,7 @@
 #import "FBSDKCoreKit.h"
 #import <UserNotifications/UserNotifications.h>
 
-@import Firebase
+@import Firebase;
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";

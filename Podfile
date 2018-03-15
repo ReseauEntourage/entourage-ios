@@ -19,7 +19,6 @@ target "entourage" do
     pod 'Crashlytics', '~>  3.9'
     pod 'JVFloatLabeledTextField'
     pod 'libPhoneNumber-iOS'
-    pod 'Flurry-iOS-SDK/FlurrySDK'
 	pod 'Mixpanel'
 	pod 'kingpin', '0.3.1'
     pod 'FBSDKCoreKit'
