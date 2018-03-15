@@ -37,7 +37,8 @@
 #import "OTDeepLinkService.h"
 #import "FBSDKCoreKit.h"
 #import <UserNotifications/UserNotifications.h>
-#import <Firebase.h>
+
+@import Firebase
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -118,9 +119,11 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
         [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
             if (settings.authorizationStatus == UNAuthorizationStatusAuthorized) {
                 [mixpanel.people set:@{@"EntourageNotifEnable": @"YES"}];
+                [FIRAnalytics setUserPropertyString:@"YES" forName:@"EntourageGeolocEnable"];
             }
             else {
                 [mixpanel.people set:@{@"EntourageNotifEnable": @"NO"}];
+                [FIRAnalytics setUserPropertyString:@"NO" forName:@"EntourageGeolocEnable"];
             }
         }];
     }

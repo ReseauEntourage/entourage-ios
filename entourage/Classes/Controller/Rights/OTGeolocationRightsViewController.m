@@ -15,6 +15,8 @@
 #import "UIBarButtonItem+factory.h"
 #import "Mixpanel/Mixpanel.h"
 
+@import Firebase
+
 @implementation OTGeolocationRightsViewController
 
 - (void)viewDidLoad {
@@ -59,6 +61,7 @@
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     BOOL allowed = [notification readAllowedLocation];
     [mixpanel.people set:@{@"EntourageGeolocEnable": allowed ? @"YES" : @"NO"}];
+    [FIRAnalytics setUserPropertyString:(allowed ? @"YES" : @"NO") forName:@"EntourageGeolocEnable"];
     if (allowed)
         [self goToNotifications];
     else
