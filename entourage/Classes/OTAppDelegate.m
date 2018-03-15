@@ -37,6 +37,7 @@
 #import "OTDeepLinkService.h"
 #import "FBSDKCoreKit.h"
 #import <UserNotifications/UserNotifications.h>
+#import <Firebase.h>
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -60,6 +61,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [Flurry setBackgroundSessionEnabled:NO];
     FlurrySessionBuilder *builder = [[[[FlurrySessionBuilder new] withLogLevel:FlurryLogLevelAll] withCrashReporting:YES] withAppVersion:[OTVersionInfo currentVersion]];
     [Flurry startSession:[ConfigurationManager shared].flurryAPIKey withSessionBuilder:builder];
+    [FIRApp configure];
 #endif
     NSString *mixpanelToken = [ConfigurationManager shared].MixpanelToken;
     [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];

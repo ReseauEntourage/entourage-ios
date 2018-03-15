@@ -340,6 +340,8 @@
 		45F443471C9314A800DDEBE1 /* OTFeedItemStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F443461C9314A800DDEBE1 /* OTFeedItemStatus.m */; };
 		45FD17B71CFC4F3E0037270B /* OTOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FD17B61CFC4F3E0037270B /* OTOptionsViewController.m */; };
 		6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */; };
+		65B2813F205A8B6E006C4070 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B2813E205A8B6E006C4070 /* GoogleService-Info.plist */; };
+		65B28140205A8B6E006C4070 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B2813E205A8B6E006C4070 /* GoogleService-Info.plist */; };
 		6B1A847119E811210020FB93 /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A847019E811210020FB93 /* OTPoiService.m */; };
 		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
@@ -1044,6 +1046,7 @@
 		45F443461C9314A800DDEBE1 /* OTFeedItemStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemStatus.m; sourceTree = "<group>"; };
 		45FD17B51CFC4F3E0037270B /* OTOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTOptionsViewController.h; sourceTree = "<group>"; };
 		45FD17B61CFC4F3E0037270B /* OTOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOptionsViewController.m; sourceTree = "<group>"; };
+		65B2813E205A8B6E006C4070 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6B1A846F19E811210020FB93 /* OTPoiService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoiService.h; sourceTree = "<group>"; };
 		6B1A847019E811210020FB93 /* OTPoiService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoiService.m; sourceTree = "<group>"; };
 		6B1A847819E822150020FB93 /* pois_categories_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pois_categories_mock.json; sourceTree = "<group>"; };
@@ -2517,6 +2520,7 @@
 				012DFB451F785BA9002B85E8 /* categories.json */,
 				012DFB3F1F7855D2002B85E8 /* category.rtf */,
 				011DC1E51EFA969A00B46C5F /* CountryList.csv */,
+				65B2813E205A8B6E006C4070 /* GoogleService-Info.plist */,
 				1E78B7AF1D5133970008C00E /* Resources */,
 				6B92CAA719A7461C004E8C9B /* entourage */,
 				6B92CAC619A7461C004E8C9B /* entourageTests */,
@@ -2855,6 +2859,7 @@
 				1E78B7E51D5134D20008C00E /* SF-UI-Text-RegularItalic.otf in Resources */,
 				452FE3ED1CAD54F800063334 /* About.storyboard in Resources */,
 				1E3174911D10299400027824 /* QuitFeedItem.storyboard in Resources */,
+				65B2813F205A8B6E006C4070 /* GoogleService-Info.plist in Resources */,
 				1E78B7E71D5134D20008C00E /* SF-UI-Text-SemiboldItalic.otf in Resources */,
 				1EC816961D9BB1150084BADB /* FeedChangeOptions.storyboard in Resources */,
 				45CE5A601C5241AA00F68C24 /* Localizable.strings in Resources */,
@@ -2904,6 +2909,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B4930DB19A779F200DA7EE0 /* poi_mock.json in Resources */,
+				65B28140205A8B6E006C4070 /* GoogleService-Info.plist in Resources */,
 				6B89EF9F19E7E8B6008F2600 /* poi_category_mock.json in Resources */,
 				6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */,
 			);
@@ -2956,6 +2962,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Flurry-iOS-SDK/Flurry_iOS_SDK.framework",
 				"${BUILT_PRODUCTS_DIR}/FormatterKit/FormatterKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JSBadgeView/JSBadgeView.framework",
 				"${BUILT_PRODUCTS_DIR}/JVFloatLabeledTextField/JVFloatLabeledTextField.framework",
@@ -2967,6 +2974,7 @@
 				"${BUILT_PRODUCTS_DIR}/WYPopoverController/WYPopoverController.framework",
 				"${BUILT_PRODUCTS_DIR}/kingpin/kingpin.framework",
 				"${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -2977,6 +2985,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flurry_iOS_SDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FormatterKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSBadgeView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JVFloatLabeledTextField.framework",
@@ -2988,6 +2997,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WYPopoverController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/kingpin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libPhoneNumber_iOS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -104,6 +104,8 @@
                 r[action] = [NSDictionary dictionaryWithDictionary:p];
             }
 
+            [r addEntriesFromDictionary:[self.mixpanel.sessionMetadata toDictionaryForEvent:NO]];
+
             if (self.distinctId) {
                 r[@"$distinct_id"] = self.distinctId;
                 MPLogInfo(@"%@ queueing people record: %@", strongMixpanel, r);
@@ -125,6 +127,10 @@
         });
 #if MIXPANEL_FLUSH_IMMEDIATELY
         [strongMixpanel flush];
+#else
+        if ([Mixpanel isAppExtension]) {
+            [strongMixpanel flush];
+        }
 #endif
     }
 }
@@ -146,8 +152,11 @@
 
 - (void)addPushDeviceToken:(NSData *)deviceToken
 {
-    NSDictionary *properties = @{@"$ios_devices": @[[MixpanelPeople pushDeviceTokenToString:deviceToken]]};
-    [self addPeopleRecordToQueueWithAction:@"$union" andProperties:properties];
+    NSString *tokenString = [MixpanelPeople pushDeviceTokenToString:deviceToken];
+    if (tokenString) {
+        NSDictionary *properties = @{@"$ios_devices": @[tokenString]};
+        [self addPeopleRecordToQueueWithAction:@"$union" andProperties:properties];
+    }
 }
 
 - (void)removeAllPushDeviceTokens

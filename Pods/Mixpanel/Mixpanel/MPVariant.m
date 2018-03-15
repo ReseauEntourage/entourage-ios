@@ -6,19 +6,20 @@
 //  Copyright (c) 2014 Mixpanel. All rights reserved.
 //
 
-#import "MPVariant.h"
+#import "MixpanelPrivate.h"
 #import "MPLogger.h"
 #import "MPObjectSelector.h"
 #import "MPSwizzler.h"
 #import "MPTweak.h"
 #import "MPTweakStore.h"
 #import "MPValueTransformers.h"
+#import "MPVariant.h"
 #import "NSThread+MPHelpers.h"
 
 @interface MPVariant ()
 
-    @property (nonatomic, strong) NSMutableOrderedSet *actions;
-    @property (nonatomic, strong) NSMutableArray *tweaks;
+@property (nonatomic, strong) NSMutableOrderedSet *actions;
+@property (nonatomic, strong) NSMutableArray *tweaks;
 
 @end
 
@@ -240,13 +241,11 @@
 
 #pragma mark Equality
 
-- (BOOL)isEqualToVariant:(MPVariant *)variant
-{
-    return self.ID == variant.ID && [self.actions isEqual:variant.actions];
+- (BOOL)isEqualToVariant:(MPVariant *)variant {
+    return self.ID == variant.ID && [self.actions isEqual:variant.actions] && [self.tweaks isEqual:variant.tweaks];
 }
 
-- (BOOL)isEqual:(id)object
-{
+- (BOOL)isEqual:(id)object {
     if (self == object) {
         return YES;
     }
@@ -258,8 +257,7 @@
     return [self isEqualToVariant:(MPVariant *)object];
 }
 
-- (NSUInteger)hash
-{
+- (NSUInteger)hash {
     return self.ID;
 }
 
@@ -442,7 +440,7 @@ static NSMapTable *originalCache;
             NSArray *invocations = [[self class] executeSelector:self.selector
                                                         withArgs:self.args
                                                           onPath:self.path
-                                                        fromRoot:[UIApplication sharedApplication].keyWindow.rootViewController
+                                                        fromRoot:[Mixpanel sharedUIApplication].keyWindow.rootViewController
                                                           toLeaf:view];
 
             for (NSInvocation *invocation in invocations) {
@@ -498,7 +496,7 @@ static NSMapTable *originalCache;
         NSArray *cacheInvocations = [[self class] executeSelector:cacheSelector
                                                          withArgs:self.args
                                                            onPath:self.path
-                                                         fromRoot:[UIApplication sharedApplication].keyWindow.rootViewController
+                                                         fromRoot:[Mixpanel sharedUIApplication].keyWindow.rootViewController
                                                            toLeaf:view];
         for (NSInvocation *invocation in cacheInvocations) {
             if (![originalCache objectForKey:invocation.target]) {
@@ -727,13 +725,11 @@ static NSMapTable *originalCache;
 
 #pragma mark Equality
 
-- (BOOL)isEqualToTweak:(MPVariantTweak *)tweak
-{
-    return [self.name isEqualToString:tweak.name];
+- (BOOL)isEqualToTweak:(MPVariantTweak *)tweak {
+    return [self.name isEqualToString:tweak.name] && [self.value isEqual:tweak.value];
 }
 
-- (BOOL)isEqual:(id)object
-{
+- (BOOL)isEqual:(id)object {
     if (self == object) {
         return YES;
     }
@@ -745,8 +741,7 @@ static NSMapTable *originalCache;
     return [self isEqualToTweak:(MPVariantTweak *)object];
 }
 
-- (NSUInteger)hash
-{
+- (NSUInteger)hash {
     return self.name.hash;
 }
 
