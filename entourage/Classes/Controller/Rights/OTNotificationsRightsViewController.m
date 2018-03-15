@@ -23,6 +23,8 @@
 #import "OTLocationManager.h"
 #import "Mixpanel/Mixpanel.h"
 
+@import Firebase;
+
 @implementation OTNotificationsRightsViewController
 
 - (void)viewDidLoad {
@@ -61,6 +63,7 @@
 - (void)doShowNext {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people set:@{@"EntourageNotifEnable": self.notificationEnabled}];
+    [FIRAnalytics setUserPropertyString:self.notificationEnabled forName:@"EntourageGeolocEnable"];
     [self setTutorialCompleted];
     [self checkInvitationsToJoin];
 }

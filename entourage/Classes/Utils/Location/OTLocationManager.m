@@ -14,6 +14,8 @@
 #import "OTUser.h"
 #import "Mixpanel.h"
 
+@import Firebase;
+
 @interface OTLocationManager () <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -110,6 +112,7 @@
     self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedWhenInUse || self.status == kCLAuthorizationStatusAuthorizedAlways;
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people set:@{@"EntourageGeolocEnable": self.isAuthorized ? @"YES" : @"NO"}];
+    [FIRAnalytics setUserPropertyString:(self.isAuthorized ? @"YES" : @"NO") forName:@"EntourageGeolocEnable"];
     NSDictionary *info = @{ kNotificationLocationAuthorizationChangedKey: [NSNumber numberWithBool:self.isAuthorized] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationAuthorizationChanged object:nil userInfo:info];
 }

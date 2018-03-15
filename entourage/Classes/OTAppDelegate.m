@@ -21,7 +21,6 @@
 #import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
 #import "SVProgressHUD.h"
-#import "Flurry.h"
 #import "OTVersionInfo.h"
 #import "OTDebugLog.h"
 #import <Fabric/Fabric.h>
@@ -37,6 +36,8 @@
 #import "OTDeepLinkService.h"
 #import "FBSDKCoreKit.h"
 #import <UserNotifications/UserNotifications.h>
+
+@import Firebase;
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 NSString *const kLoginFailureNotification = @"loginFailureNotification";
@@ -57,9 +58,7 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [[OTDebugLog sharedInstance] setConsoleOutput];
 #if !DEBUG
     [Fabric with:@[[Crashlytics class]]];
-    [Flurry setBackgroundSessionEnabled:NO];
-    FlurrySessionBuilder *builder = [[[[FlurrySessionBuilder new] withLogLevel:FlurryLogLevelAll] withCrashReporting:YES] withAppVersion:[OTVersionInfo currentVersion]];
-    [Flurry startSession:[ConfigurationManager shared].flurryAPIKey withSessionBuilder:builder];
+    [FIRApp configure];
 #endif
     NSString *mixpanelToken = [ConfigurationManager shared].MixpanelToken;
     [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
@@ -116,9 +115,11 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
         [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
             if (settings.authorizationStatus == UNAuthorizationStatusAuthorized) {
                 [mixpanel.people set:@{@"EntourageNotifEnable": @"YES"}];
+                [FIRAnalytics setUserPropertyString:@"YES" forName:@"EntourageGeolocEnable"];
             }
             else {
                 [mixpanel.people set:@{@"EntourageNotifEnable": @"NO"}];
+                [FIRAnalytics setUserPropertyString:@"NO" forName:@"EntourageGeolocEnable"];
             }
         }];
     }
