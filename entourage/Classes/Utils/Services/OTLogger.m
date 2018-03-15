@@ -10,7 +10,6 @@
 #import "OTConsts.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
-#import "Flurry.h"
 #import "Mixpanel/Mixpanel.h"
 #import "entourage-Swift.h"
 #import "OTMixpanelService.h"
@@ -20,7 +19,6 @@
 @implementation OTLogger
 
 + (void)logEvent:(NSString *)eventName {
-    [Flurry logEvent:eventName];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:eventName];
     [FIRAnalytics logEventWithName:eventName parameters:nil];

@@ -8,8 +8,6 @@
 	<string>https://entourage-back-preprod.herokuapp.com/api/v1/</string>
 	<key>ApiKey</key>
 	<string>7d02a340c88e851bc87097a3</string>
-	<key>FlurryAPIKey</key>
-	<string>B7KH4H9T4HCY5PCR5P45</string>
 	<key>NuanceHostAddress</key>
 	<string>sslsandbox.nmdp.nuancemobility.net</string>
 	<key>NuanceAppId</key>

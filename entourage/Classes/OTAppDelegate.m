@@ -21,7 +21,6 @@
 #import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
 #import "SVProgressHUD.h"
-#import "Flurry.h"
 #import "OTVersionInfo.h"
 #import "OTDebugLog.h"
 #import <Fabric/Fabric.h>
@@ -59,9 +58,6 @@ NSString *const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
     [[OTDebugLog sharedInstance] setConsoleOutput];
 #if !DEBUG
     [Fabric with:@[[Crashlytics class]]];
-    [Flurry setBackgroundSessionEnabled:NO];
-    FlurrySessionBuilder *builder = [[[[FlurrySessionBuilder new] withLogLevel:FlurryLogLevelAll] withCrashReporting:YES] withAppVersion:[OTVersionInfo currentVersion]];
-    [Flurry startSession:[ConfigurationManager shared].flurryAPIKey withSessionBuilder:builder];
     [FIRApp configure];
 #endif
     NSString *mixpanelToken = [ConfigurationManager shared].MixpanelToken;
