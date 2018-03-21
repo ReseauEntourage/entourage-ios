@@ -78,7 +78,7 @@
     }
     if (self.poi.website != nil && self.poi.website.length > 0) {
         self.webButton.hidden = NO;
-        [self.webButton setTitle:self.poi.address forState:UIControlStateNormal];
+        [self.webButton setTitle:self.poi.website forState:UIControlStateNormal];
     } else {
         self.webButton.hidden = YES;
     }
