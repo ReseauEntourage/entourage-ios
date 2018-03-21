@@ -8,9 +8,5 @@
 	<string>https://entourage-back-preprod.herokuapp.com/api/v1/</string>
 	<key>ApiKey</key>
 	<string>7d02a340c88e851bc87097a3</string>
-	<key>NuanceHostAddress</key>
-	<string>sslsandbox.nmdp.nuancemobility.net</string>
-	<key>NuanceAppId</key>
-	<string>NMDPTRIAL_francois_entourage_social20160104052924</string>
 </dict>
 </plist>
