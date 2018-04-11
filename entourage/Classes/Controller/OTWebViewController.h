@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "OTAnnouncement.h"
 
+@protocol OTWebViewControllerDelegate <NSObject>
+- (void)didCloseWebViewController;
+@end
+
 @interface OTWebViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) id<OTWebViewControllerDelegate> webViewDelegate;
 @property (nonatomic, strong) NSString *urlString;
 @property (nonatomic, strong) NSString *viewTitle;
 @property (nonatomic, assign) BOOL shouldDisableClosingOnPangesture;

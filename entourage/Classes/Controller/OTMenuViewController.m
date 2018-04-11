@@ -184,7 +184,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
         if(menuItem.segueIdentifier)
             [self openControllerWithSegueIdentifier:menuItem.segueIdentifier];
         else {
-            if([menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")])
+            if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")])
                 [OTLogger logEvent:@"WhatActionsClick"];
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")])
                 [OTLogger logEvent:@"SimpleCommeBonjourClick"];
@@ -195,10 +195,14 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
             
             NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, menuItem.identifier, TOKEN];
             NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
-            if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")])
+            
+            if  ( ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")]) ||
+                [menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")] ) {
                 [[OTDeepLinkService new] openWithWebView: [NSURL URLWithString:url]];
-            else
+            }
+            else {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+            }
         }
 	}
     [[tableView cellForRowAtIndexPath:indexPath]setSelected:NO];
