@@ -64,12 +64,10 @@
         host = [url.host substringFromIndex:4];
     NSString *domain = [NSString stringWithFormat:@"%@%@",[[host substringToIndex:1] uppercaseString],[host substringFromIndex:1]];
     self.navigationItem.title = domain;
-    [SVProgressHUD dismiss];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    [SVProgressHUD show];
     return YES;
 }
 
@@ -123,7 +121,6 @@
         [self.webView goBack];
     else {
         [self dismissViewControllerAnimated:YES completion:^() {
-            [SVProgressHUD dismiss];
             if ([self.webViewDelegate respondsToSelector:@selector(webview:)])
                 [self.webViewDelegate performSelector:@selector(webview:) withObject:nil];
         }];
