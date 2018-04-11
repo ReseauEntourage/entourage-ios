@@ -360,7 +360,7 @@
         <!--Web View Controller-->
         <scene sceneID="H9m-pk-iGX">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="h0R-pH-Cwq" customClass="OTWebViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTWebViewController" modalPresentationStyle="overCurrentContext" id="h0R-pH-Cwq" customClass="OTWebViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="i4p-s6-ToZ"/>
                         <viewControllerLayoutGuide type="bottom" id="Vvu-fT-iGj"/>
@@ -369,44 +369,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kMH-HI-PA1">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem id="E1y-k2-fDC">
+                                        <barButtonItem key="backBarButtonItem" title="Back" id="UJV-aO-aMF"/>
+                                    </navigationItem>
+                                </items>
+                                <connections>
+                                    <outlet property="delegate" destination="2gM-Ps-qrY" id="siO-kM-Ko0"/>
+                                </connections>
+                            </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAP-Ac-6px">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMH-HI-PA1">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                        <items>
-                                            <navigationItem id="E1y-k2-fDC">
-                                                <barButtonItem key="backBarButtonItem" title="Back" id="UJV-aO-aMF"/>
-                                            </navigationItem>
-                                        </items>
-                                        <connections>
-                                            <outlet property="delegate" destination="2gM-Ps-qrY" id="siO-kM-Ko0"/>
-                                        </connections>
-                                    </navigationBar>
-                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zp8-5a-Eze">
-                                        <rect key="frame" x="0.0" y="45" width="375" height="558"/>
-                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </webView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLA-FM-huk">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="1"/>
-                                        <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hk5-Qz-zGx">
+                                        <rect key="frame" x="0.0" y="559" width="375" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="kGl-ey-Xn0"/>
+                                            <constraint firstAttribute="height" constant="44" id="G3o-wx-k0e"/>
                                         </constraints>
-                                    </view>
+                                        <items>
+                                            <barButtonItem image="back" style="plain" id="0Ev-8f-aFN">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="navigateBack" destination="h0R-pH-Cwq" id="BPN-OR-m75"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Xx1-4e-LWn">
+                                                <color key="tintColor" red="1" green="0.3503308296" blue="0.37804955239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </barButtonItem>
+                                            <barButtonItem image="next" style="plain" id="mOl-th-0Ep">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="navigateNext" destination="h0R-pH-Cwq" id="wLW-oG-6ar"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="dkZ-as-byl"/>
+                                            <barButtonItem systemItem="refresh" id="M3T-UX-XYT">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="reload" destination="h0R-pH-Cwq" id="Hes-d4-Ci9"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                        <color key="barTintColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </toolbar>
+                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zp8-5a-Eze">
+                                        <rect key="frame" x="0.0" y="-44" width="375" height="603"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </webView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="FLA-FM-huk" secondAttribute="trailing" id="2Gn-LF-kvo"/>
                                     <constraint firstItem="zp8-5a-Eze" firstAttribute="leading" secondItem="eAP-Ac-6px" secondAttribute="leading" id="3SQ-kY-t4f"/>
-                                    <constraint firstItem="FLA-FM-huk" firstAttribute="top" secondItem="kMH-HI-PA1" secondAttribute="bottom" id="ABx-hg-X7k"/>
-                                    <constraint firstAttribute="bottom" secondItem="zp8-5a-Eze" secondAttribute="bottom" id="MIf-Cu-GYe"/>
-                                    <constraint firstItem="kMH-HI-PA1" firstAttribute="leading" secondItem="eAP-Ac-6px" secondAttribute="leading" id="QxY-rX-iI5"/>
-                                    <constraint firstItem="zp8-5a-Eze" firstAttribute="top" secondItem="FLA-FM-huk" secondAttribute="bottom" id="SSJ-Oi-e9b"/>
+                                    <constraint firstItem="Hk5-Qz-zGx" firstAttribute="leading" secondItem="eAP-Ac-6px" secondAttribute="leading" id="Flu-zX-ymR"/>
+                                    <constraint firstAttribute="bottom" secondItem="zp8-5a-Eze" secondAttribute="bottom" constant="44" id="MIf-Cu-GYe"/>
+                                    <constraint firstAttribute="bottom" secondItem="Hk5-Qz-zGx" secondAttribute="bottom" id="QKo-pb-WFa"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hk5-Qz-zGx" secondAttribute="trailing" id="TZu-WB-hyy"/>
+                                    <constraint firstItem="zp8-5a-Eze" firstAttribute="top" secondItem="eAP-Ac-6px" secondAttribute="top" constant="-44" id="TtU-IG-EJl"/>
                                     <constraint firstAttribute="trailing" secondItem="zp8-5a-Eze" secondAttribute="trailing" id="dvV-mp-uG6"/>
-                                    <constraint firstItem="kMH-HI-PA1" firstAttribute="top" secondItem="eAP-Ac-6px" secondAttribute="top" id="e6w-MS-yiM"/>
-                                    <constraint firstAttribute="trailing" secondItem="kMH-HI-PA1" secondAttribute="trailing" id="eVH-VK-lUN"/>
-                                    <constraint firstItem="FLA-FM-huk" firstAttribute="leading" secondItem="eAP-Ac-6px" secondAttribute="leading" id="uwy-zo-kBm"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
@@ -416,23 +440,29 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="eAP-Ac-6px" firstAttribute="top" secondItem="i4p-s6-ToZ" secondAttribute="bottom" constant="44" id="5d7-P6-ICl"/>
                             <constraint firstItem="Vvu-fT-iGj" firstAttribute="top" secondItem="eAP-Ac-6px" secondAttribute="bottom" id="I6L-eq-yK4"/>
                             <constraint firstAttribute="trailing" secondItem="eAP-Ac-6px" secondAttribute="trailing" id="K56-TX-HeT"/>
+                            <constraint firstItem="eAP-Ac-6px" firstAttribute="top" secondItem="i4p-s6-ToZ" secondAttribute="bottom" constant="44" id="gBF-k2-4or"/>
                             <constraint firstItem="eAP-Ac-6px" firstAttribute="leading" secondItem="2gM-Ps-qrY" secondAttribute="leading" id="kZz-lQ-S7W"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="animatedView" destination="eAP-Ac-6px" id="b0U-ha-Oof"/>
-                        <outlet property="navigationItem" destination="E1y-k2-fDC" id="6Eo-Pm-9qN"/>
+                        <outlet property="backItem" destination="0Ev-8f-aFN" id="jNw-Si-OSs"/>
+                        <outlet property="bottomToolbar" destination="Hk5-Qz-zGx" id="gch-df-LtP"/>
+                        <outlet property="customNavigationItem" destination="E1y-k2-fDC" id="rUk-fy-FbV"/>
+                        <outlet property="nextItem" destination="mOl-th-0Ep" id="Sue-FF-N72"/>
+                        <outlet property="refreshItem" destination="M3T-UX-XYT" id="962-jd-IgQ"/>
+                        <outlet property="topNavigationItemConstraint" destination="TtU-IG-EJl" id="TVp-AG-xkN"/>
                         <outlet property="webView" destination="zp8-5a-Eze" id="OLk-Tk-G6S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WNn-77-d8m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2052" y="-15"/>
+            <point key="canvasLocation" x="2051.5" y="-15.5"/>
         </scene>
         <!--ActiveFeedItem-->
         <scene sceneID="19F-zf-hvr">
@@ -1848,6 +1878,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
         <image name="activeButton" width="45" height="45"/>
         <image name="arrowForMenu" width="7" height="13"/>
         <image name="arrowNewEntourages" width="12" height="22"/>
+        <image name="back" width="8" height="13"/>
         <image name="carte" width="40" height="35"/>
         <image name="carte_selected" width="40" height="35"/>
         <image name="closeNoShadow" width="62" height="62"/>
@@ -1860,6 +1891,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
         <image name="list_selected" width="40" height="35"/>
         <image name="mapPinWhite" width="32" height="32"/>
         <image name="newEntourages" width="180" height="39"/>
+        <image name="next" width="8" height="13"/>
         <image name="pause" width="62" height="62"/>
         <image name="tel" width="25" height="25"/>
         <image name="user" width="100" height="100"/>

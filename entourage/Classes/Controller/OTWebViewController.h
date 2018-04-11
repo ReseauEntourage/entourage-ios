@@ -9,16 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "OTAnnouncement.h"
 
-@protocol OTWebViewDelegate <NSObject>
-
-- (void)webview:(NSString *)url;
-
-@end
-
 @interface OTWebViewController : UIViewController
 
-@property (nonatomic, weak) id<OTWebViewDelegate> webViewDelegate;
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
 @property (nonatomic, strong) NSString *urlString;
+@property (nonatomic, strong) NSString *viewTitle;
+@property (nonatomic, assign) BOOL shouldDisableClosingOnPangesture;
+@property (nonatomic, assign) BOOL shouldHideCustomLoadingIndicator;
+@property (nonatomic, assign) BOOL shouldHideCustomNavigationItem;
 
 @end

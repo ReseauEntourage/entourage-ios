@@ -18,6 +18,7 @@
 #import "OTHTTPRequestManager.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
+#import "OTWebViewController.h"
 
 @import MessageUI;
 
@@ -38,11 +39,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = OTLocalizedString(@"aboutTitle").uppercaseString;//@"À PROPOS";
+
     //[self createMenuButton];
     [self setupCloseModal];
     
     self.aboutItems = [OTAboutViewController createAboutItems];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.title = OTLocalizedString(@"aboutTitle").uppercaseString;//@"À PROPOS";
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -134,7 +141,15 @@
     else if (indexPath.row == FAQ_INDEXPATH) {
         NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, item.identifier, TOKEN];
         NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        
+        UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        OTWebViewController *webViewController = (OTWebViewController *)[mainStorybard instantiateViewControllerWithIdentifier:@"OTWebViewController"];
+        webViewController.urlString = url;
+        webViewController.shouldDisableClosingOnPangesture = YES;
+        webViewController.shouldHideCustomNavigationItem = YES;
+        //[self.navigationController presentViewController:webViewController animated:YES completion:nil];
+        [self.navigationController pushViewController:webViewController animated:YES];
     }
     else if (indexPath.row == TUTORIAL_INDEXPATH) {
         [self performSegueWithIdentifier:item.segueIdentifier sender:nil];
