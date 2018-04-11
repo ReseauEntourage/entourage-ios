@@ -14,9 +14,9 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AWSCore (2.6.14)
-  - AWSS3 (2.6.14):
-    - AWSCore (= 2.6.14)
+  - AWSCore (2.6.15)
+  - AWSS3 (2.6.15):
+    - AWSCore (= 2.6.15)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
@@ -28,15 +28,15 @@ PODS:
   - Fabric (1.7.6)
   - FBSDKCoreKit (4.31.1):
     - Bolts (~> 1.7)
-  - Firebase/Core (4.11.0):
+  - Firebase/Core (4.12.0):
     - FirebaseAnalytics (= 4.1.0)
-    - FirebaseCore (= 4.0.18)
+    - FirebaseCore (= 4.0.19)
   - FirebaseAnalytics (4.1.0):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.18):
+  - FirebaseCore (4.0.19):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (2.0.10):
     - FirebaseCore (~> 4.0)
@@ -114,15 +114,15 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AWSCore: 8c883c2623d314dd82cca3809527784e1d1a02e5
-  AWSS3: a8cf89448c74637e34c46839ce5b5f7850f206e6
+  AWSCore: 4a19c5635b3b9dcacec4d8dab835c2f6375a6fdb
+  AWSS3: d3831638f91e7cba50b1fb2d8d82161c60a92dfe
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   FBSDKCoreKit: e08ccfcefa7bc1347a07c276dac9bf6c7fe57024
-  Firebase: cc13dfab1038c8b45d7903e01fc690451d6d0b24
+  Firebase: d7fdf40e4d6c841849c52919f437fd3a0009ded0
   FirebaseAnalytics: 3dfae28d4a5e06f86c4fae830efc2ad3fadb19bc
-  FirebaseCore: b981f47e5254cbcfdeb483355300d743f6fcab2c
+  FirebaseCore: ff49ebb37e0f63a570d78c4f1c1c0befe8659d5c
   FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
   FormatterKit: 4b8f29acc9b872d5d12a63efb560661e8f2e1b98
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
