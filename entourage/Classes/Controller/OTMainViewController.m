@@ -90,6 +90,8 @@
 #import "OTAnnouncement.h"
 #import "OTWebViewController.h"
 #import "OTMapView.h"
+#import "entourage-Swift.h"
+#import "OTHTTPRequestManager.h"
 
 #define MAPVIEW_HEIGHT 224.f
 
@@ -113,7 +115,7 @@
     OTNewsFeedsSourceDelegate,
     OTTourCreatorBehaviorDelegate,
     OTHeatzonesCollectionViewDelegate,
-    OTWebViewDelegate
+    OTWebViewControllerDelegate
 >
 
 @property (nonatomic, weak) IBOutlet OTFeedItemsTableView           *tableView;
@@ -323,6 +325,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     if (self.webview) {
         [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
     }
@@ -926,21 +929,26 @@
 }
 
 - (void)dismissOptions {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissOptions:YES];
+}
+
+- (void)dismissOptions:(BOOL)animated {
+    [self dismissViewControllerAnimated:animated completion:nil];
 }
 
 - (void)proposeStructure {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PROPOSE_STRUCTURE_URL]];
+
+    [self dismissOptions];
+    
+    NSString *url = [NSString stringWithFormat: PROPOSE_STRUCTURE_URL, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
+    self.webview = url;
+    [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
 }
 
-#pragma mark - OTWebViewDelegate
+#pragma mark - OTWebViewControllerDelegate
 
-- (void)webview:(NSString *)url {
-    self.webview = url;
+- (void)didCloseWebViewController {
     [self.parentViewController.view.subviews.lastObject removeFromSuperview];
-    if (self.webview) {
-        [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
-    }
 }
 
 #pragma mark - EntourageEditorDelegate
@@ -1279,14 +1287,23 @@
         controller.optionsDelegate = self;
     }
     else if ([segue.identifier isEqualToString:@"OTWebViewSegue"]) {
-        OTWebViewController *controller = (OTWebViewController *)destinationViewController;
-        controller.urlString = self.webview;
+//        UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        OTWebViewController *webViewController = (OTWebViewController *)[mainStorybard instantiateViewControllerWithIdentifier:@"OTWebViewController"];
+//        webViewController.urlString = self.webview;
+//        webViewController.shouldDisableClosingOnPangesture = NO;
+//        webViewController.shouldHideCustomLoadingIndicator = NO;
+//        [self.navigationController presentViewController:webViewController animated:YES completion:nil];
+        
         [self showToursList];
+        
+        OTWebViewController *webViewController = (OTWebViewController *)destinationViewController;
+        webViewController.urlString = self.webview;
+        webViewController.webViewDelegate = self;
+
         UIView *grayView = [[UIView alloc] initWithFrame:self.parentViewController.view.frame];
         grayView.backgroundColor = [UIColor appGreyishColor];
         grayView.alpha = 0.6;
         [self.parentViewController.view addSubview:grayView];
-        controller.webViewDelegate = self;
     }
 }
 

@@ -131,11 +131,11 @@ class NBTextField: JVFloatLabeledTextField, Validable {
   }
 
   func numberTextDidChange() {
-    let numbersOnly = phoneNumberUtility.normalizePhoneNumber(text)
+    let numbersOnly:Bool = phoneNumberUtility.isViablePhoneNumber(text)
     //text = phoneNumberFormatter.inputStringAndRememberPosition(numbersOnly)
 
-    var isValid = inputIsValid(numbersOnly)
-    isValid = true
+    //var isValid = inputIsValid(numbersOnly)
+    var isValid:Bool = true
     inputValidationChanged?(isValid)
   }
 
