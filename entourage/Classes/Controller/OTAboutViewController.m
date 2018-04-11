@@ -141,14 +141,12 @@
     else if (indexPath.row == FAQ_INDEXPATH) {
         NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, item.identifier, TOKEN];
         NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
-        //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
         
         UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         OTWebViewController *webViewController = (OTWebViewController *)[mainStorybard instantiateViewControllerWithIdentifier:@"OTWebViewController"];
         webViewController.urlString = url;
         webViewController.shouldDisableClosingOnPangesture = YES;
         webViewController.shouldHideCustomNavigationItem = YES;
-        //[self.navigationController presentViewController:webViewController animated:YES completion:nil];
         [self.navigationController pushViewController:webViewController animated:YES];
     }
     else if (indexPath.row == TUTORIAL_INDEXPATH) {
