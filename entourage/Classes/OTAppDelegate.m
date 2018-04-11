@@ -256,11 +256,11 @@ continueUserActivity:(NSUserActivity *)userActivity
     UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
     UIPageControl.appearance.currentPageIndicatorTintColor = [UIColor appGreyishBrownColor];
 
-//#if BETA
-//    UINavigationBar.appearance.barTintColor = [UIColor redColor];
-//    UINavigationBar.appearance.tintColor = [UIColor redColor];
-//    UINavigationBar.appearance.backgroundColor = [UIColor redColor];
-//#endif
+#if BETA
+    UINavigationBar.appearance.barTintColor = [UIColor redColor];
+    UINavigationBar.appearance.tintColor = [UIColor redColor];
+    UINavigationBar.appearance.backgroundColor = [UIColor redColor];
+#endif
 }
 
 @end
