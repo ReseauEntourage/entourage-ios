@@ -25,7 +25,8 @@
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *nextItem;
 @property (nonatomic, weak) IBOutlet UIToolbar *bottomToolbar;
 @property (nonatomic) IBOutlet NSLayoutConstraint *topNavigationItemConstraint;
-
+@property (nonatomic) IBOutlet NSLayoutConstraint *topWebViewConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *topCustomNavigationBarConstraint;
 @end
 
 @implementation OTWebViewController
@@ -37,28 +38,30 @@
         [self setupPanGesture];
     }
     
-    if (!self.shouldHideCustomLoadingIndicator) {
+    if (!self.shouldHideCustomNavigationItem) {
         self.animatedView.layer.borderWidth = 14;
         CAShapeLayer * maskLayer = [CAShapeLayer layer];
         maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.view.bounds
                                                byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight
                                                      cornerRadii: (CGSize){14, 14}].CGPath;
         self.animatedView.layer.mask = maskLayer;
+    } else {
+        self.topNavigationItemConstraint.constant = 0;
+        self.topWebViewConstraint.constant = 0;
+        self.topCustomNavigationBarConstraint.constant = -44;
+
+        [self.webView setNeedsLayout];
+        [self.webView layoutIfNeeded];
+        [self.view updateConstraints];
+        [self.view setNeedsLayout];
     }
     
     _webView.delegate = self;
-    
-    if (self.shouldHideCustomNavigationItem) {
-        self.topNavigationItemConstraint.constant = 0;
-        [self.webView setNeedsLayout];
-        [self.webView layoutIfNeeded];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-    self.bottomToolbar.tintColor = [UIColor appOrangeColor];
     
     [self configureUIBarButtonItems];
     [self loadUrlWithString:self.urlString];
@@ -203,20 +206,12 @@
 }
 
 - (void)closeWebview {
-//    if (self.webView.canGoBack) {
-//        [self.webView goBack];
-//    }
-//    else {
-//        [self dismissViewControllerAnimated:YES completion:^() {
-//            [self hideLoading];
-//
-//            if ([self.webViewDelegate respondsToSelector:@selector(didLoadUrlWithPath:)]) {
-//                [self.webViewDelegate performSelector:@selector(webview:) withObject:nil];
-//            }
-//        }];
-//    }
+    [self hideLoading];
+    
     [self dismissViewControllerAnimated:YES completion:^() {
-        [self hideLoading];
+        if ([self.webViewDelegate respondsToSelector:@selector(didCloseWebViewController)]) {
+            [self.webViewDelegate performSelector:@selector(didCloseWebViewController) withObject:nil];
+        }
     }];
 }
 
