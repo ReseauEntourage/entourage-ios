@@ -18,8 +18,13 @@
 
 @interface OTWebViewController () <UIWebViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UINavigationItem *navigationItem;
+@property (nonatomic, weak) IBOutlet UINavigationItem *customNavigationItem;
 @property (nonatomic, weak) IBOutlet UIView *animatedView;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *refreshItem;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *backItem;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *nextItem;
+@property (nonatomic, weak) IBOutlet UIToolbar *bottomToolbar;
+@property (nonatomic) IBOutlet NSLayoutConstraint *topNavigationItemConstraint;
 
 @end
 
@@ -27,14 +32,55 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configureUIBarButtonItems];
     
-    self.animatedView.layer.borderWidth = 14;
-    CAShapeLayer * maskLayer = [CAShapeLayer layer];
-    maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.view.bounds
-                                           byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight
-                                                 cornerRadii: (CGSize){14, 14}].CGPath;
-    self.animatedView.layer.mask = maskLayer;
+    if (!self.shouldDisableClosingOnPangesture) {
+        [self setupPanGesture];
+    }
+    
+    if (!self.shouldHideCustomLoadingIndicator) {
+        self.animatedView.layer.borderWidth = 14;
+        CAShapeLayer * maskLayer = [CAShapeLayer layer];
+        maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.view.bounds
+                                               byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight
+                                                     cornerRadii: (CGSize){14, 14}].CGPath;
+        self.animatedView.layer.mask = maskLayer;
+    }
+    
+    _webView.delegate = self;
+    
+    if (self.shouldHideCustomNavigationItem) {
+        self.topNavigationItemConstraint.constant = 0;
+        [self.webView setNeedsLayout];
+        [self.webView layoutIfNeeded];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    self.bottomToolbar.tintColor = [UIColor appOrangeColor];
+    
+    [self configureUIBarButtonItems];
+    [self loadUrlWithString:self.urlString];
+    
+    if (self.viewTitle) {
+        self.title = self.viewTitle;
+    } else {
+        NSURL *url = [NSURL URLWithString:self.urlString];
+        [self updateTitle:url];
+    }
+}
+
+- (UINavigationItem*)navigationItem {
+    if (self.navigationController) {
+        return self.navigationController.navigationItem;
+    }
+    
+    return self.customNavigationItem;
+}
+
+- (void)setupPanGesture {
+
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                                     initWithTarget:self
                                                     action:@selector(moveViewWithGestureRecognizer:)];
@@ -44,32 +90,67 @@
     [self.view addGestureRecognizer:tapGestureRecognizer];
     tapGestureRecognizer.cancelsTouchesInView = NO;
     panGestureRecognizer.cancelsTouchesInView = NO;
-    _webView.delegate = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-    NSURL *url = [NSURL URLWithString: self.urlString];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    self.webView.scalesPageToFit = YES;
-    [_webView loadRequest:urlRequest];
+- (void)showLoading {
+    if (self.shouldHideCustomLoadingIndicator) {
+        return;
+    }
+    
+    [SVProgressHUD show];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSURL *url = [webView.request mainDocumentURL];
+- (void)hideLoading {
+    if (self.shouldHideCustomLoadingIndicator) {
+        return;
+    }
+    
+    [SVProgressHUD dismiss];
+}
+
+- (void)updateTitle:(NSURL*)url {
     self.urlString = url.absoluteString;
+    
     NSString *host = url.host;
     if ([url.host hasPrefix:@"www"])
         host = [url.host substringFromIndex:4];
     NSString *domain = [NSString stringWithFormat:@"%@%@",[[host substringToIndex:1] uppercaseString],[host substringFromIndex:1]];
+    
     self.navigationItem.title = domain;
-    [SVProgressHUD dismiss];
+}
+
+- (void)updateBottomToolbarItems
+{
+    self.backItem.enabled = self.webView.canGoBack;
+    self.nextItem.enabled = self.webView.canGoForward;
+    self.refreshItem.enabled = !self.webView.isLoading;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+    if (!self.viewTitle) {
+        [self updateTitle:[self.webView.request mainDocumentURL]];
+    }
+    
+    [self hideLoading];
+    [self updateBottomToolbarItems];
+}
+
+- (IBAction)navigateNext {
+    [self.webView goForward];
+}
+
+- (IBAction)navigateBack {
+    [self.webView goBack];
+}
+
+- (IBAction)reload {
+    [self.webView reload];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    [SVProgressHUD show];
+    [self showLoading];
     return YES;
 }
 
@@ -97,37 +178,46 @@
     
     UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:moreBarBtnView];
     [rightButtons addObject:optionsButton];
+    
     [self setRightBarButtonView:rightButtons];
 }
 
 - (void)setRightBarButtonView:(NSMutableArray *)views
 {
-    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 11)
-    {
+    BOOL isIOSVersion11 = [[[UIDevice currentDevice] systemVersion] doubleValue] >= 11;
+    CGFloat spaceOffset = -13;
+    
+    if (isIOSVersion11) {
         [self.navigationItem setRightBarButtonItems:views];
     }
-    else
-    {
+    else {
         UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                target:nil
-                                action:NULL];
-        [space setWidth:-13];
-
+                                                                               target:nil
+                                                                               action:NULL];
+        [space setWidth:spaceOffset];
         NSArray *items = @[space];
-        [self.navigationItem setRightBarButtonItems:[items arrayByAddingObjectsFromArray:views]];
+        NSArray *moreItems = [items arrayByAddingObjectsFromArray:views];
+        
+        [self.navigationItem setRightBarButtonItems:moreItems];
     }
 }
 
 - (void)closeWebview {
-    if(self.webView.canGoBack)
-        [self.webView goBack];
-    else {
-        [self dismissViewControllerAnimated:YES completion:^() {
-            [SVProgressHUD dismiss];
-            if ([self.webViewDelegate respondsToSelector:@selector(webview:)])
-                [self.webViewDelegate performSelector:@selector(webview:) withObject:nil];
-        }];
-    }
+//    if (self.webView.canGoBack) {
+//        [self.webView goBack];
+//    }
+//    else {
+//        [self dismissViewControllerAnimated:YES completion:^() {
+//            [self hideLoading];
+//
+//            if ([self.webViewDelegate respondsToSelector:@selector(didLoadUrlWithPath:)]) {
+//                [self.webViewDelegate performSelector:@selector(webview:) withObject:nil];
+//            }
+//        }];
+//    }
+    [self dismissViewControllerAnimated:YES completion:^() {
+        [self hideLoading];
+    }];
 }
 
 - (void)showOptions {
@@ -150,6 +240,7 @@
     {
         [self share];
     }];
+    
     [self displayAlertWithActions:@[openInBorwser, copyLink, share]];
 }
 
@@ -208,8 +299,19 @@
 
 - (void)tap:(UITapGestureRecognizer *)tapGestureRecognizer {
     CGPoint touchPoint = [tapGestureRecognizer locationInView:self.view];
-    if(touchPoint.y < DISTANCE_ABOVE_NAVIGATION_BAR)
+    if(touchPoint.y < DISTANCE_ABOVE_NAVIGATION_BAR) {
         [self closeWebview];
+    }
 }
 
+#pragma mark - Public
+
+- (void)loadUrlWithString:(NSString*)path {
+    NSURL *url = [NSURL URLWithString: path];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    self.webView.scalesPageToFit = YES;
+    self.webView.delegate = self;
+    [_webView loadRequest:urlRequest];
+    [self updateBottomToolbarItems];
+}
 @end

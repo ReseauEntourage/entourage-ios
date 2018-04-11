@@ -112,8 +112,7 @@
     OTSolidarityGuideFilterDelegate,
     OTNewsFeedsSourceDelegate,
     OTTourCreatorBehaviorDelegate,
-    OTHeatzonesCollectionViewDelegate,
-    OTWebViewDelegate
+    OTHeatzonesCollectionViewDelegate
 >
 
 @property (nonatomic, weak) IBOutlet OTFeedItemsTableView           *tableView;
@@ -323,6 +322,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     if (self.webview) {
         [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
     }
@@ -1279,14 +1279,23 @@
         controller.optionsDelegate = self;
     }
     else if ([segue.identifier isEqualToString:@"OTWebViewSegue"]) {
-        OTWebViewController *controller = (OTWebViewController *)destinationViewController;
-        controller.urlString = self.webview;
-        [self showToursList];
-        UIView *grayView = [[UIView alloc] initWithFrame:self.parentViewController.view.frame];
-        grayView.backgroundColor = [UIColor appGreyishColor];
-        grayView.alpha = 0.6;
-        [self.parentViewController.view addSubview:grayView];
-        controller.webViewDelegate = self;
+        UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        OTWebViewController *webViewController = (OTWebViewController *)[mainStorybard instantiateViewControllerWithIdentifier:@"OTWebViewController"];
+        webViewController.urlString = self.webview;
+        webViewController.shouldDisableClosingOnPangesture = NO;
+        webViewController.shouldHideCustomLoadingIndicator = NO;
+        [self.navigationController presentViewController:webViewController animated:YES completion:nil];
+        
+              [self showToursList];
+        
+//        OTWebViewController *controller = (OTWebViewController *)destinationViewController;
+//        controller.urlString = self.webview;
+//
+//        UIView *grayView = [[UIView alloc] initWithFrame:self.parentViewController.view.frame];
+//        grayView.backgroundColor = [UIColor appGreyishColor];
+//        grayView.alpha = 0.6;
+//        [self.parentViewController.view addSubview:grayView];
+//        controller.webViewDelegate = self;
     }
 }
 
