@@ -137,6 +137,13 @@
 - (void)updateSelectedLocation:(CLLocation *) location {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        CLPlacemark *placemark = placemarks.firstObject;
+        if (placemark.thoroughfare !=  nil) {
+            [self.searchBar setText:placemark.thoroughfare];
+        }
+        else {
+            [self.searchBar setText:placemark.locality];
+        }
         if (error) {
             NSLog(@"error: %@", error.description);
         }
