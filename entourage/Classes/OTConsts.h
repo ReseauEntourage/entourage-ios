@@ -95,4 +95,5 @@
 
 #define NO_GIUDE_DATA_LINK @"https://goo.gl/jD5uIQ"
 
-#define PROPOSE_STRUCTURE_URL @"https://docs.google.com/forms/d/e/1FAIpQLSdcpYpAWz9zllF2TUS4USDQzu4T4ywu_XjXaD-ovsTS5eo1YA/viewform"
+#define PROPOSE_STRUCTURE_URL_GOOGLE_DOCS @"https://docs.google.com/forms/d/e/1FAIpQLSdcpYpAWz9zllF2TUS4USDQzu4T4ywu_XjXaD-ovsTS5eo1YA/viewform"
+#define PROPOSE_STRUCTURE_URL @"%@links/propose-poi/redirect?token=%@"
