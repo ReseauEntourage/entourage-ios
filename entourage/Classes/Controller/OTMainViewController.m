@@ -92,6 +92,7 @@
 #import "OTMapView.h"
 #import "entourage-Swift.h"
 #import "OTHTTPRequestManager.h"
+#import "OTSafariService.h"
 
 #define MAPVIEW_HEIGHT 224.f
 
@@ -938,11 +939,10 @@
 
 - (void)proposeStructure {
 
-    [self dismissOptions];
+    [self dismissOptions:NO];
     
     NSString *url = [NSString stringWithFormat: PROPOSE_STRUCTURE_URL, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
-    self.webview = url;
-    [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
+    [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
 }
 
 #pragma mark - OTWebViewControllerDelegate
@@ -1287,23 +1287,19 @@
         controller.optionsDelegate = self;
     }
     else if ([segue.identifier isEqualToString:@"OTWebViewSegue"]) {
-//        UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        OTWebViewController *webViewController = (OTWebViewController *)[mainStorybard instantiateViewControllerWithIdentifier:@"OTWebViewController"];
+    
+        [OTSafariService launchInAppBrowserWithUrlString:self.webview viewController:self.navigationController];
+        self.webview = nil;
+        
+        // This shows custom modal webView with transparent nav bar
+//        OTWebViewController *webViewController = (OTWebViewController *)destinationViewController;
 //        webViewController.urlString = self.webview;
-//        webViewController.shouldDisableClosingOnPangesture = NO;
-//        webViewController.shouldHideCustomLoadingIndicator = NO;
-//        [self.navigationController presentViewController:webViewController animated:YES completion:nil];
-        
-        [self showToursList];
-        
-        OTWebViewController *webViewController = (OTWebViewController *)destinationViewController;
-        webViewController.urlString = self.webview;
-        webViewController.webViewDelegate = self;
-
-        UIView *grayView = [[UIView alloc] initWithFrame:self.parentViewController.view.frame];
-        grayView.backgroundColor = [UIColor appGreyishColor];
-        grayView.alpha = 0.6;
-        [self.parentViewController.view addSubview:grayView];
+//        webViewController.webViewDelegate = self;
+//
+//        UIView *grayView = [[UIView alloc] initWithFrame:self.parentViewController.view.frame];
+//        grayView.backgroundColor = [UIColor appGreyishColor];
+//        grayView.alpha = 0.6;
+//        [self.parentViewController.view addSubview:grayView];
     }
 }
 

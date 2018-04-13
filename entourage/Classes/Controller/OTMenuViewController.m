@@ -31,6 +31,7 @@
 #import "OTHTTPRequestManager.h"
 #import "OTDeepLinkService.h"
 #import "OTAboutViewController.h"
+#import "OTSafariService.h"
 
 #define HEADER_CELL_INDEX 7
 #define LOG_OUT_CELL_INDEX 8
@@ -198,7 +199,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
             
             if  ( ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")]) ||
                 [menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")] ) {
-                [[OTDeepLinkService new] openWithWebView: [NSURL URLWithString:url]];
+                [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
             }
             else {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
