@@ -1,4 +1,4 @@
-# FormatterKit [![Build Status](https://travis-ci.org/mattt/FormatterKit.svg?branch=master)](https://travis-ci.org/mattt/FormatterKit) [![CocoaPods compatible](https://img.shields.io/cocoapods/v/FormatterKit.svg)](https://cocoapods.org/pods/FormatterKit) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+# FormatterKit [![Build Status](https://travis-ci.org/mattt/FormatterKit.svg?branch=master)](https://travis-ci.org/mattt/FormatterKit) [![Coverage Status](https://coveralls.io/repos/github/mattt/FormatterKit/badge.svg?branch=master)](https://coveralls.io/github/mattt/FormatterKit?branch=master) [![CocoaPods compatible](https://img.shields.io/cocoapods/v/FormatterKit.svg)](https://cocoapods.org/pods/FormatterKit) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 `FormatterKit` is a collection of well-crafted `NSFormatter` subclasses for things like units of information, distance, and relative time intervals. Each formatter abstracts away the complex business logic of their respective domain, so that you can focus on the more important aspects of your application.
 
@@ -47,14 +47,6 @@ FormatterKit comes fully internationalized, with `.strings` files for the follow
 - Vietnamese (`vi`)
 
 If you'd like to contribute an additional localization, feel free to [open a new pull request](https://github.com/mattt/FormatterKit/pulls).
-
-### Removing Unused Localizations
-
-Because the App Store automatically attempts to determine supported locales, and FormatterKit includes localizations for the aforementioned locales, you may want to remove the `.strings` file and `.lproj` directory. You can do this most easily by having the following command run in a new Build Phase:
-
-        $ find "$TARGET_BUILD_DIR" -maxdepth 8 -type f -name "FormatterKit.strings" -execdir rm -r -v {} \;
-
-If you are using CocoaPods, a seprate localization bundle will be created for the pod. Therefore, App Store won't pick up the extraneous localizations.
 
 ## Demo
 
