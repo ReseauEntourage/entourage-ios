@@ -359,6 +359,7 @@
 		6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
 		6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFE639319E7E85400C661AB /* OTPoiCategory.m */; };
+		A2418EED207F9CDB00BC7466 /* OTSafariService.m in Sources */ = {isa = PBXBuildFile; fileRef = A2418EEC207F9CDB00BC7466 /* OTSafariService.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
 		A815528F1DBA211C00E2517A /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A815528E1DBA211C00E2517A /* ConfigurationManager.swift */; };
@@ -1078,6 +1079,8 @@
 		79016BE7EDCE7EC3FA1F7032 /* Pods-entourageTests.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.store.xcconfig"; sourceTree = "<group>"; };
 		963D3690207D517C006E5DED /* OTMixpanelConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
 		963D3691207D517C006E5DED /* OTAmazonConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
+		A2418EEB207F9CDB00BC7466 /* OTSafariService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTSafariService.h; sourceTree = "<group>"; };
+		A2418EEC207F9CDB00BC7466 /* OTSafariService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTSafariService.m; sourceTree = "<group>"; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A815528D1DBA211B00E2517A /* entourage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "entourage-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -2412,6 +2415,8 @@
 				1E22727D1E2E25270053365E /* OTAssociationsService.m */,
 				011718451FE400D300743214 /* OTMixpanelService.h */,
 				011718461FE400D300743214 /* OTMixpanelService.m */,
+				A2418EEB207F9CDB00BC7466 /* OTSafariService.h */,
+				A2418EEC207F9CDB00BC7466 /* OTSafariService.m */,
 			);
 			name = WebService;
 			path = Service;
@@ -3265,6 +3270,7 @@
 				013013941E7AAA3B00C2504C /* OTConfirmCloseViewController.m in Sources */,
 				1EF23E2C1DD08D9100E71BB7 /* OTCustomAnnotation.m in Sources */,
 				0130138B1E7965CE00C2504C /* OTUnreadMessageCount.m in Sources */,
+				A2418EED207F9CDB00BC7466 /* OTSafariService.m in Sources */,
 				1EACE4191D11515200F3A2A6 /* OTTourFactory.m in Sources */,
 				455940551C5D2E220099A8EE /* OTJSONResponseSerializer.m in Sources */,
 				1EACE4181D11515200F3A2A6 /* OTFeedItemFactory.m in Sources */,
@@ -3533,7 +3539,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DBETA";
 				SDKROOT = iphoneos;
@@ -3573,7 +3579,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
@@ -3758,7 +3764,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DBETA";
 				SDKROOT = iphoneos;

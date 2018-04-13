@@ -14,6 +14,7 @@
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"
 #import "OTWebViewController.h"
+#import "OTSafariService.h"
 
 //#define SECTION_HEIGHT 44.f
 #define CATEGORY_TITLE_TAG 1
@@ -149,13 +150,7 @@
 
 - (IBAction)openLink:(id)sender {
     NSString *url = @"https://blog.entourage.social/2017/04/28/quelles-actions-faire-avec-entourage/";
-    
-    UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    OTWebViewController *webViewController = (OTWebViewController *)[mainStorybard instantiateViewControllerWithIdentifier:@"OTWebViewController"];
-    webViewController.urlString = url;
-    webViewController.shouldDisableClosingOnPangesture = NO;
-    webViewController.shouldHideCustomNavigationItem = NO;
-    [self presentViewController:webViewController animated:YES completion:nil];
+    [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
 }
 
 @end
