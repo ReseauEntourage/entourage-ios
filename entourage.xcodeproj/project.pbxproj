@@ -359,6 +359,8 @@
 		6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
 		6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFE639319E7E85400C661AB /* OTPoiCategory.m */; };
+		963D369320810346006E5DED /* Popup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 963D369220810346006E5DED /* Popup.storyboard */; };
+		963D36952081043D006E5DED /* OTPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D36942081043D006E5DED /* OTPopupViewController.swift */; };
 		A2418EED207F9CDB00BC7466 /* OTSafariService.m in Sources */ = {isa = PBXBuildFile; fileRef = A2418EEC207F9CDB00BC7466 /* OTSafariService.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
@@ -1079,6 +1081,8 @@
 		79016BE7EDCE7EC3FA1F7032 /* Pods-entourageTests.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.store.xcconfig"; sourceTree = "<group>"; };
 		963D3690207D517C006E5DED /* OTMixpanelConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
 		963D3691207D517C006E5DED /* OTAmazonConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
+		963D369220810346006E5DED /* Popup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Popup.storyboard; sourceTree = "<group>"; };
+		963D36942081043D006E5DED /* OTPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPopupViewController.swift; sourceTree = "<group>"; };
 		A2418EEB207F9CDB00BC7466 /* OTSafariService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTSafariService.h; sourceTree = "<group>"; };
 		A2418EEC207F9CDB00BC7466 /* OTSafariService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTSafariService.m; sourceTree = "<group>"; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1258,6 +1262,8 @@
 			isa = PBXGroup;
 			children = (
 				1E587F291E2E159100FEBB67 /* Cells */,
+				01D191251FA21466008F6BFB /* OTAboutMeViewController.h */,
+				01D191261FA21466008F6BFB /* OTAboutMeViewController.m */,
 				454C8F511C500FE2001362B2 /* OTStartupViewController.h */,
 				454C8F521C500FE2001362B2 /* OTStartupViewController.m */,
 				1DA682C719E7D097007BD4BC /* OTLoginViewController.h */,
@@ -1278,6 +1284,7 @@
 				1E4852AB1E4351230094FC13 /* OTUserTableConfigurator.m */,
 				1EA3B7071E5D7937003FF875 /* OTAssociationDetailsViewController.h */,
 				1EA3B7081E5D7937003FF875 /* OTAssociationDetailsViewController.m */,
+				963D36942081043D006E5DED /* OTPopupViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -2273,6 +2280,7 @@
 				0135517D1EC328BF00D99994 /* EncounterEditor.storyboard */,
 				01E3AA411EEEADC5007FB282 /* AssociationDetails.storyboard */,
 				01DCFF0F1EEEAF9A007A0705 /* UserProfileEditor.storyboard */,
+				963D369220810346006E5DED /* Popup.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2747,8 +2755,6 @@
 				4525EB301CA46082006784E6 /* OTSettingsViewController.m */,
 				4525EB321CA46582006784E6 /* OTAboutViewController.h */,
 				4525EB331CA46582006784E6 /* OTAboutViewController.m */,
-				01D191251FA21466008F6BFB /* OTAboutMeViewController.h */,
-				01D191261FA21466008F6BFB /* OTAboutMeViewController.m */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -2902,6 +2908,7 @@
 				452FE3E81CAD549200063334 /* GuideSolidarity.storyboard in Resources */,
 				A8FD766E1E42FE9200063C5F /* staging.plist in Resources */,
 				D6EB4D4D1E6D6AA900CDC8A4 /* Images.xcassets in Resources */,
+				963D369320810346006E5DED /* Popup.storyboard in Resources */,
 				1E78B7E31D5134D20008C00E /* SF-UI-Text-MediumItalic.otf in Resources */,
 				01DCFF101EEEAF9A007A0705 /* UserProfileEditor.storyboard in Resources */,
 				1E78B7A41D5108B20008C00E /* PublicFeedItem.storyboard in Resources */,
@@ -3344,6 +3351,7 @@
 				1EE817601D79F36D0003133D /* OTEntourageRenderer.m in Sources */,
 				1E488E1B1D4FB99300A2E5B0 /* OTNotificationsRightsViewController.m in Sources */,
 				1EE8176A1D7A1BBE0003133D /* OTOnboardingNavigationBehavior.m in Sources */,
+				963D36952081043D006E5DED /* OTPopupViewController.swift in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				1E49BCBA1D7D8C0C0024EDC1 /* OTDisclaimerViewController.m in Sources */,
 				1EC9D6821D6468A800C6E9AA /* OTInvitationsService.m in Sources */,
@@ -3616,7 +3624,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3662,7 +3670,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3802,7 +3810,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
