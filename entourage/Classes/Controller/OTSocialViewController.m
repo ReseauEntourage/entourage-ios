@@ -19,6 +19,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTDeepLinkService.h"
+#import "OTSafariService.h"
 
 @interface OTSocialViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -85,7 +86,7 @@
     if (indexPath.row == 3 || indexPath.row == 4) {
         NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, item.identifier, TOKEN];
         NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
-        [[OTDeepLinkService new] openWithWebView: [NSURL URLWithString:url]];
+        [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
     }
     else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];

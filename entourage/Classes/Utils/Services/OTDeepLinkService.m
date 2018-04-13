@@ -21,6 +21,7 @@
 #import "OTSelectAssociationViewController.h"
 #import "OTEntourageEditorViewController.h"
 #import "OTTutorialViewController.h"
+#import "OTSafariService.h"
 
 @interface OTDeepLinkService ()
 
@@ -167,9 +168,10 @@
 }
 
 - (void)openWithWebView: (NSURL *)url {
-    OTMainViewController *publicFeedItemController = (OTMainViewController *)[self instatiateControllerWithStoryboardIdentifier:@"Main" andControllerIdentifier:@"OTMain"];
-    publicFeedItemController.webview = url.absoluteString;
-    [self showController:publicFeedItemController];
+//    OTMainViewController *publicFeedItemController = (OTMainViewController *)[self instatiateControllerWithStoryboardIdentifier:@"Main" andControllerIdentifier:@"OTMain"];
+//    publicFeedItemController.webview = url.absoluteString;
+//    [self showController:publicFeedItemController];
+    [OTSafariService launchInAppBrowserWithUrl:url viewController:nil];
 }
 
 - (UIViewController *)instatiateControllerWithStoryboardIdentifier: (NSString *)storyboardId
