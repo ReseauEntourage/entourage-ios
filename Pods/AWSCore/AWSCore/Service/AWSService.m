@@ -21,7 +21,7 @@
 #import "AWSCocoaLumberjack.h"
 #import "AWSCategory.h"
 
-NSString *const AWSiOSSDKVersion = @"2.6.13";
+NSString *const AWSiOSSDKVersion = @"2.6.15";
 NSString *const AWSServiceErrorDomain = @"com.amazonaws.AWSServiceErrorDomain";
 
 static NSString *const AWSServiceConfigurationUnknown = @"Unknown";
@@ -93,7 +93,7 @@ static NSString *const AWSServiceConfigurationUnknown = @"Unknown";
 - (void)setDefaultServiceConfiguration:(AWSServiceConfiguration *)defaultServiceConfiguration {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _defaultServiceConfiguration = [defaultServiceConfiguration copy];
+        self->_defaultServiceConfiguration = [defaultServiceConfiguration copy];
     });
 }
 

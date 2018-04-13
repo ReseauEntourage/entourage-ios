@@ -62,25 +62,26 @@
         self.addressButton.hidden = NO;
         [self.addressButton setTitle:self.poi.address forState:UIControlStateNormal];
     } else {
-        self.addressButton.hidden = YES;
+        [self.addressButton removeFromSuperview];
     }
     if (self.poi.phone != nil && self.poi.phone.length > 0) {
         self.phoneButton.hidden = NO;
         [self.phoneButton setTitle:[@"Tel: " stringByAppendingString:self.poi.phone] forState:UIControlStateNormal];
     } else {
-        self.phoneButton.hidden = YES;
+        [self.phoneButton removeFromSuperview];
     }
     if (self.poi.email != nil && self.poi.email.length > 0) {
         self.emailButton.hidden = NO;
         [self.emailButton setTitle:self.poi.email forState:UIControlStateNormal];
+        
     } else {
-        self.emailButton.hidden = YES;
+        [self.emailButton removeFromSuperview];
     }
     if (self.poi.website != nil && self.poi.website.length > 0) {
         self.webButton.hidden = NO;
-        [self.webButton setTitle:self.poi.address forState:UIControlStateNormal];
+        [self.webButton setTitle:self.poi.website forState:UIControlStateNormal];
     } else {
-        self.webButton.hidden = YES;
+        [self.webButton removeFromSuperview];
     }
     self.btnSendMail.layer.borderColor = UIColor.whiteColor.CGColor;
 }

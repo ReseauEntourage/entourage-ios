@@ -21,6 +21,9 @@
 // THE SOFTWARE.
 
 #import "TTTAddressFormatter.h"
+#import "NSBundle+FormatterKit.h"
+
+#if !TARGET_OS_WATCH && !TARGET_OS_TV
 
 #import <Availability.h>
 
@@ -114,7 +117,7 @@
              forString:(__unused NSString *)string
       errorDescription:(out NSString *__autoreleasing *)error
 {
-    *error = NSLocalizedStringFromTableInBundle(@"Method Not Implemented", @"FormatterKit", [NSBundle bundleForClass:[self class]], nil);
+    *error = NSLocalizedStringFromTableInBundle(@"Method Not Implemented", @"FormatterKit", [NSBundle formatterKitBundle], nil);
     
     return NO;
 }
@@ -145,3 +148,5 @@
 }
 
 @end
+
+#endif
