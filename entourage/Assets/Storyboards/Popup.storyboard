@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2SC-Ib-DZj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,10 +19,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Owner-->
+        <!--Popup View Controller-->
         <scene sceneID="T9w-wo-jB0">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="2SC-Ib-DZj" customClass="OTPopupViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="popup" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2SC-Ib-DZj" customClass="OTPopupViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="J3j-N9-xpM"/>
                         <viewControllerLayoutGuide type="bottom" id="12q-gM-7NP"/>
@@ -36,7 +36,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9y5-kR-TIO">
-                                <rect key="frame" x="16" y="138.5" width="343" height="390"/>
+                                <rect key="frame" x="16" y="139" width="343" height="390"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qfb-vd-Qft">
                                         <rect key="frame" x="10" y="10" width="30" height="30"/>
@@ -46,10 +46,10 @@
                                         </constraints>
                                         <state key="normal" image="close"/>
                                         <connections>
-                                            <action selector="close:" destination="2SC-Ib-DZj" eventType="touchUpInside" id="gVr-AM-gFk"/>
+                                            <action selector="close:" destination="2SC-Ib-DZj" eventType="touchUpInside" id="q2o-Kb-afz"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Présentez-vous, le réseau Entourage a hâte de faire votre connaissance !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="d10-JS-Nat">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Présentez-vous, le réseau Entourage a hâte de faire votre connaissance !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="d10-JS-Nat">
                                         <rect key="frame" x="15" y="50" width="308" height="41"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="17"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -77,9 +77,6 @@
                                                 <exclude reference="ziq-1Y-VRo"/>
                                             </mask>
                                         </variation>
-                                        <connections>
-                                            <action selector="doSendDescription" destination="2SC-Ib-DZj" eventType="touchUpInside" id="OX7-WC-Reb"/>
-                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KD5-hk-7Tx" customClass="OTTextWithCount">
                                         <rect key="frame" x="0.0" y="121" width="343" height="204"/>
@@ -124,11 +121,11 @@
                         <viewLayoutGuide key="safeArea" id="OYG-GD-U5P"/>
                     </view>
                     <connections>
-                        <outlet property="closeKeyboardBehavior" destination="PJF-TK-XD5" id="gVA-MU-yg4"/>
-                        <outlet property="completionButton" destination="zUT-tg-Gu5" id="35H-Gg-dgM"/>
-                        <outlet property="descriptionLabel" destination="d10-JS-Nat" id="QJv-1H-llo"/>
-                        <outlet property="tapBehavior" destination="sMf-ia-upb" id="qRZ-3c-BQU"/>
-                        <outlet property="textWithCount" destination="KD5-hk-7Tx" id="HHT-Ht-jsh"/>
+                        <outlet property="closeKeyboardBehavior" destination="PJF-TK-XD5" id="Vck-tA-yOa"/>
+                        <outlet property="completionButton" destination="zUT-tg-Gu5" id="YEu-qQ-O7T"/>
+                        <outlet property="descriptionLabel" destination="d10-JS-Nat" id="bep-Zn-BhI"/>
+                        <outlet property="tapBehavior" destination="sMf-ia-upb" id="hZI-qu-It8"/>
+                        <outlet property="textWithCount" destination="KD5-hk-7Tx" id="CnS-a2-YUy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2SX-bU-WKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -137,11 +134,7 @@
                         <outlet property="tapView" destination="9y5-kR-TIO" id="BeJ-Hu-kWF"/>
                     </connections>
                 </customObject>
-                <customObject id="PJF-TK-XD5" customClass="OTCloseKeyboardOnTapBehavior">
-                    <connections>
-                        <outlet property="owner" destination="2SC-Ib-DZj" id="3pI-rr-Yvk"/>
-                    </connections>
-                </customObject>
+                <customObject id="PJF-TK-XD5" customClass="OTCloseKeyboardOnTapBehavior"/>
             </objects>
             <point key="canvasLocation" x="5890" y="130"/>
         </scene>
