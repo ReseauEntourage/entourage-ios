@@ -23,6 +23,7 @@
 #import "OTUserTableConfigurator.h"
 #import "OTMailSenderBehavior.h"
 #import "OTAssociationDetailsViewController.h"
+#import "entourage-Swift.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -105,8 +106,17 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)sendReportMail {
-    NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"report_user_subject"), self.user.displayName];
-    [self.mailSender sendMailWithSubject:subject andRecipient:REPORT_EMAIL_ADDRESS];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Popup"
+                                                         bundle:nil];
+    OTPopupViewController *popup = [storyboard instantiateInitialViewController];
+    popup.labelString = OTLocalizedString(@"report_user_title");
+    popup.textFieldPlaceholder = OTLocalizedString(@"report_user_placeholder");
+    popup.buttonTitle = OTLocalizedString(@"report_user_button");
+    popup.reportedUserId = self.user.sid.stringValue;
+    
+    [self presentViewController:popup
+                       animated:YES
+                     completion:nil];
 }
 
 - (IBAction)showEditView {

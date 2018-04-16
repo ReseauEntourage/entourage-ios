@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 // Model
 #import "OTUser.h"
+@class OTPopupViewController;
 
 @interface OTUserViewController : UIViewController
 
