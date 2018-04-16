@@ -943,12 +943,6 @@
     [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
 }
 
-#pragma mark - OTWebViewControllerDelegate
-
-- (void)didCloseWebViewController {
-    [self.parentViewController.view.subviews.lastObject removeFromSuperview];
-}
-
 #pragma mark - EntourageEditorDelegate
 
 - (void)didEditEntourage:(OTEntourage *)entourage {
