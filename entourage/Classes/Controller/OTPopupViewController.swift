@@ -67,6 +67,7 @@ import Foundation
     
     @objc private func sendMail() {
         OTUserService.init().reportUser(reportedUserId, message: textWithCount.textView?.text, success: nil, failure: nil)
+        SVProgressHUD.showSuccess(withStatus: "Utilisateur signalé")
         close(self)
     }
     
