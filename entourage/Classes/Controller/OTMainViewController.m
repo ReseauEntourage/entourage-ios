@@ -88,7 +88,6 @@
 #import "KPClusteringController.h"
 #import "KPAnnotation.h"
 #import "OTAnnouncement.h"
-#import "OTWebViewController.h"
 #import "OTMapView.h"
 #import "entourage-Swift.h"
 #import "OTHTTPRequestManager.h"
@@ -115,8 +114,7 @@
     OTSolidarityGuideFilterDelegate,
     OTNewsFeedsSourceDelegate,
     OTTourCreatorBehaviorDelegate,
-    OTHeatzonesCollectionViewDelegate,
-    OTWebViewControllerDelegate
+    OTHeatzonesCollectionViewDelegate
 >
 
 @property (nonatomic, weak) IBOutlet OTFeedItemsTableView           *tableView;
@@ -1290,16 +1288,6 @@
     
         [OTSafariService launchInAppBrowserWithUrlString:self.webview viewController:self.navigationController];
         self.webview = nil;
-        
-        // This shows custom modal webView with transparent nav bar
-//        OTWebViewController *webViewController = (OTWebViewController *)destinationViewController;
-//        webViewController.urlString = self.webview;
-//        webViewController.webViewDelegate = self;
-//
-//        UIView *grayView = [[UIView alloc] initWithFrame:self.parentViewController.view.frame];
-//        grayView.backgroundColor = [UIColor appGreyishColor];
-//        grayView.alpha = 0.6;
-//        [self.parentViewController.view addSubview:grayView];
     }
 }
 

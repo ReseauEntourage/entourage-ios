@@ -134,10 +134,9 @@
         OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[self instatiateControllerWithStoryboardIdentifier:@"UserProfileEditor" andControllerIdentifier:@"SelectAssociation"];
         [self showController:selectAssociationController];
     } else if ([key isEqualToString:@"webview"]) {
-        OTMainViewController *publicFeedItemController = (OTMainViewController *)[self instatiateControllerWithStoryboardIdentifier:@"Main" andControllerIdentifier:@"OTMain"];
         NSArray *elts = [query componentsSeparatedByString:@"="];
-        publicFeedItemController.webview = elts[1];
-        [self showController:publicFeedItemController];
+        NSURL *url = [NSURL URLWithString:elts[1]];
+        [self openWithWebView:url];
     } else if ([key isEqualToString:@"profile"]) {
         [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].sid];
     } else if ([key isEqualToString:@"messages"]) {
@@ -168,9 +167,6 @@
 }
 
 - (void)openWithWebView: (NSURL *)url {
-//    OTMainViewController *publicFeedItemController = (OTMainViewController *)[self instatiateControllerWithStoryboardIdentifier:@"Main" andControllerIdentifier:@"OTMain"];
-//    publicFeedItemController.webview = url.absoluteString;
-//    [self showController:publicFeedItemController];
     [OTSafariService launchInAppBrowserWithUrl:url viewController:nil];
 }
 

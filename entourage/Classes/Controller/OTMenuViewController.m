@@ -198,6 +198,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
             NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
             
             if  ( ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")]) ||
+                 ([menuItem.title isEqualToString:OTLocalizedString(@"menu_chart")]) ||
                 [menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")] ) {
                 [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
             }

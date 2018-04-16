@@ -13,7 +13,6 @@
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"
-#import "OTWebViewController.h"
 #import "OTSafariService.h"
 
 //#define SECTION_HEIGHT 44.f

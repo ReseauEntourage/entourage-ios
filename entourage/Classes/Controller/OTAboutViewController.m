@@ -18,7 +18,6 @@
 #import "OTHTTPRequestManager.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
-#import "OTWebViewController.h"
 #import "OTSafariService.h"
 
 @import MessageUI;
