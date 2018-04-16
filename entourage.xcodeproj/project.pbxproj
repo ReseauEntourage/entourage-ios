@@ -359,6 +359,9 @@
 		6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
 		6BFE639419E7E85400C661AB /* OTPoiCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFE639319E7E85400C661AB /* OTPoiCategory.m */; };
+		9608423520825BC5002F7BE5 /* OTUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9608423420825BC5002F7BE5 /* OTUserService.m */; };
+		963D369320810346006E5DED /* Popup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 963D369220810346006E5DED /* Popup.storyboard */; };
+		963D36952081043D006E5DED /* OTPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D36942081043D006E5DED /* OTPopupViewController.swift */; };
 		A2418EED207F9CDB00BC7466 /* OTSafariService.m in Sources */ = {isa = PBXBuildFile; fileRef = A2418EEC207F9CDB00BC7466 /* OTSafariService.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
@@ -1077,8 +1080,12 @@
 		6DE4A491763D292ADECF1896 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		6E1FE7C1E296A4FD392A8A39 /* Pods_entourageTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourageTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79016BE7EDCE7EC3FA1F7032 /* Pods-entourageTests.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.store.xcconfig"; sourceTree = "<group>"; };
+		9608423320825BC5002F7BE5 /* OTUserService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTUserService.h; sourceTree = "<group>"; };
+		9608423420825BC5002F7BE5 /* OTUserService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTUserService.m; sourceTree = "<group>"; };
 		963D3690207D517C006E5DED /* OTMixpanelConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
 		963D3691207D517C006E5DED /* OTAmazonConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
+		963D369220810346006E5DED /* Popup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Popup.storyboard; sourceTree = "<group>"; };
+		963D36942081043D006E5DED /* OTPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPopupViewController.swift; sourceTree = "<group>"; };
 		A2418EEB207F9CDB00BC7466 /* OTSafariService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTSafariService.h; sourceTree = "<group>"; };
 		A2418EEC207F9CDB00BC7466 /* OTSafariService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTSafariService.m; sourceTree = "<group>"; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1258,6 +1265,8 @@
 			isa = PBXGroup;
 			children = (
 				1E587F291E2E159100FEBB67 /* Cells */,
+				01D191251FA21466008F6BFB /* OTAboutMeViewController.h */,
+				01D191261FA21466008F6BFB /* OTAboutMeViewController.m */,
 				454C8F511C500FE2001362B2 /* OTStartupViewController.h */,
 				454C8F521C500FE2001362B2 /* OTStartupViewController.m */,
 				1DA682C719E7D097007BD4BC /* OTLoginViewController.h */,
@@ -1278,6 +1287,7 @@
 				1E4852AB1E4351230094FC13 /* OTUserTableConfigurator.m */,
 				1EA3B7071E5D7937003FF875 /* OTAssociationDetailsViewController.h */,
 				1EA3B7081E5D7937003FF875 /* OTAssociationDetailsViewController.m */,
+				963D36942081043D006E5DED /* OTPopupViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -2273,6 +2283,7 @@
 				0135517D1EC328BF00D99994 /* EncounterEditor.storyboard */,
 				01E3AA411EEEADC5007FB282 /* AssociationDetails.storyboard */,
 				01DCFF0F1EEEAF9A007A0705 /* UserProfileEditor.storyboard */,
+				963D369220810346006E5DED /* Popup.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2417,6 +2428,8 @@
 				011718461FE400D300743214 /* OTMixpanelService.m */,
 				A2418EEB207F9CDB00BC7466 /* OTSafariService.h */,
 				A2418EEC207F9CDB00BC7466 /* OTSafariService.m */,
+				9608423320825BC5002F7BE5 /* OTUserService.h */,
+				9608423420825BC5002F7BE5 /* OTUserService.m */,
 			);
 			name = WebService;
 			path = Service;
@@ -2747,8 +2760,6 @@
 				4525EB301CA46082006784E6 /* OTSettingsViewController.m */,
 				4525EB321CA46582006784E6 /* OTAboutViewController.h */,
 				4525EB331CA46582006784E6 /* OTAboutViewController.m */,
-				01D191251FA21466008F6BFB /* OTAboutMeViewController.h */,
-				01D191261FA21466008F6BFB /* OTAboutMeViewController.m */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -2812,7 +2823,7 @@
 					6B92CA9D19A7461C004E8C9B = {
 						DevelopmentTeam = RT7X9LLTN6;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2902,6 +2913,7 @@
 				452FE3E81CAD549200063334 /* GuideSolidarity.storyboard in Resources */,
 				A8FD766E1E42FE9200063C5F /* staging.plist in Resources */,
 				D6EB4D4D1E6D6AA900CDC8A4 /* Images.xcassets in Resources */,
+				963D369320810346006E5DED /* Popup.storyboard in Resources */,
 				1E78B7E31D5134D20008C00E /* SF-UI-Text-MediumItalic.otf in Resources */,
 				01DCFF101EEEAF9A007A0705 /* UserProfileEditor.storyboard in Resources */,
 				1E78B7A41D5108B20008C00E /* PublicFeedItem.storyboard in Resources */,
@@ -3248,6 +3260,7 @@
 				1E76AE4A1D144D9900C496BA /* OTEntourageStateInfo.m in Sources */,
 				0135517C1EC30A4C00D99994 /* OTEditEncounterBehavior.m in Sources */,
 				0AA4C0741C17283800DBBE11 /* OTAskMoreViewController.m in Sources */,
+				9608423520825BC5002F7BE5 /* OTUserService.m in Sources */,
 				1E37C32B1DC0E67D00477090 /* OTPublicInfoDataSource.m in Sources */,
 				1E22727E1E2E25270053365E /* OTAssociationsService.m in Sources */,
 				1E2F29241D4BF0DF00ABC68A /* OTTableDataSourceBehavior.m in Sources */,
@@ -3344,6 +3357,7 @@
 				1EE817601D79F36D0003133D /* OTEntourageRenderer.m in Sources */,
 				1E488E1B1D4FB99300A2E5B0 /* OTNotificationsRightsViewController.m in Sources */,
 				1EE8176A1D7A1BBE0003133D /* OTOnboardingNavigationBehavior.m in Sources */,
+				963D36952081043D006E5DED /* OTPopupViewController.swift in Sources */,
 				1D3BD36C19E964FC001687F9 /* OTMeetingCalloutViewController.m in Sources */,
 				1E49BCBA1D7D8C0C0024EDC1 /* OTDisclaimerViewController.m in Sources */,
 				1EC9D6821D6468A800C6E9AA /* OTInvitationsService.m in Sources */,
@@ -3597,9 +3611,9 @@
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 45;
-				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				DEVELOPMENT_TEAM = "";
 				FACEBOOK_ID = 276507866203529;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3616,7 +3630,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3624,8 +3638,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "d6098093-30b0-4352-b526-de50ea67ac87";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
@@ -3647,9 +3661,9 @@
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 45;
-				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				DEVELOPMENT_TEAM = "";
 				FACEBOOK_ID = 280727035774134;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3662,7 +3676,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3670,8 +3684,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = Entourage;
-				PROVISIONING_PROFILE = "7299ae5e-d774-4bcb-9b5e-779b8b5c5ce8";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3783,9 +3797,9 @@
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 45;
-				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				DEVELOPMENT_TEAM = "";
 				FACEBOOK_ID = 280727035774134;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3802,7 +3816,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3810,8 +3824,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "2efffefe-3945-4890-bdc8-8539e2892911";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
