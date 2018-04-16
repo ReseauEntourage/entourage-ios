@@ -18,6 +18,7 @@
 
 // Onboarding
 #define API_URL_ONBOARD  @"users"
+#define API_URL_REPORT_USER @"users/%@/report?token=%@"
 
 //Menu
 #define API_URL_MENU_OPTIONS @"links/%@/redirect?token=%@"
