@@ -735,6 +735,8 @@
 		A21D65C22085FDAA00EF8E0E /* EncounterEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A12085FDAA00EF8E0E /* EncounterEditor.storyboard */; };
 		A21D65C32085FDAA00EF8E0E /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A22085FDAA00EF8E0E /* Tutorial.storyboard */; };
 		A21D65C42085FDAA00EF8E0E /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A32085FDAA00EF8E0E /* About.storyboard */; };
+		A23D401A2086253600E32F45 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A23D40172086253600E32F45 /* staging.plist */; };
+		A23D401B2086253600E32F45 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A23D40182086253600E32F45 /* prod.plist */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
 /* End PBXBuildFile section */
@@ -1486,6 +1488,10 @@
 		A21D65A12085FDAA00EF8E0E /* EncounterEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EncounterEditor.storyboard; sourceTree = "<group>"; };
 		A21D65A22085FDAA00EF8E0E /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		A21D65A32085FDAA00EF8E0E /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
+		A23D40152086253600E32F45 /* OTAmazonConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
+		A23D40162086253600E32F45 /* OTMixpanelConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
+		A23D40172086253600E32F45 /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
+		A23D40182086253600E32F45 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
@@ -1590,7 +1596,8 @@
 		6B92CAA719A7461C004E8C9B /* entourage */ = {
 			isa = PBXGroup;
 			children = (
-				1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */,
+				A23D40192086253600E32F45 /* Classes */,
+				A23D40132086253600E32F45 /* Settings */,
 				6B92CAA819A7461C004E8C9B /* Supporting Files */,
 			);
 			path = entourage;
@@ -1599,6 +1606,7 @@
 		6B92CAA819A7461C004E8C9B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */,
 				6B92CAA919A7461C004E8C9B /* entourage-Info.plist */,
 				6B92CAAD19A7461C004E8C9B /* main.m */,
 				A21D64AF2085E92200EF8E0E /* GoogleService-Info.plist */,
@@ -2896,13 +2904,39 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		A23D40132086253600E32F45 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A23D40142086253600E32F45 /* Environment */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A23D40142086253600E32F45 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				A23D40152086253600E32F45 /* OTAmazonConsts.h */,
+				A23D40162086253600E32F45 /* OTMixpanelConsts.h */,
+				A23D40172086253600E32F45 /* staging.plist */,
+				A23D40182086253600E32F45 /* prod.plist */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		A23D40192086253600E32F45 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		A24199B52084F87100BC7466 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A21D65822085FDAA00EF8E0E /* Storyboards */,
 				A202E7BC2085CFC20058F32C /* entourage-Bridging-Header.h */,
 				A202E80A2085D0FE0058F32C /* OTAppDelegate.h */,
 				A202E8092085D0FD0058F32C /* OTAppDelegate.m */,
+				A21D65822085FDAA00EF8E0E /* Storyboards */,
 				A202E7BD2085CFC30058F32C /* Classes */,
 				A202E79E2085CFC20058F32C /* Resources */,
 			);
@@ -3060,6 +3094,7 @@
 				A21D65A82085FDAA00EF8E0E /* Disclaimer.storyboard in Resources */,
 				A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
 				A202E7FF2085CFC40058F32C /* prod.plist in Resources */,
+				A23D401A2086253600E32F45 /* staging.plist in Resources */,
 				A21D65A52085FDAA00EF8E0E /* Social.storyboard in Resources */,
 				A21D64AB2085E8B400EF8E0E /* Oradea.gpx in Resources */,
 				A202E7D12085CFC40058F32C /* category.rtf in Resources */,
@@ -3070,6 +3105,7 @@
 				A202E7CF2085CFC40058F32C /* logo_black.png in Resources */,
 				A202E7F32085CFC40058F32C /* SF-UI-Text-Medium.otf in Resources */,
 				A21D65B02085FDAA00EF8E0E /* EntourageEditor.storyboard in Resources */,
+				A23D401B2086253600E32F45 /* prod.plist in Resources */,
 				A202E7F12085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */,
 				A202E7D72085CFC40058F32C /* SharedImages.xcassets in Resources */,
 				A21D65B62085FDAA00EF8E0E /* Popup.storyboard in Resources */,
