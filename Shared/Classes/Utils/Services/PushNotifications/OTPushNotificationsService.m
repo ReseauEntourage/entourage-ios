@@ -27,15 +27,6 @@
 
 #import <UserNotifications/UserNotifications.h>
 
-
-#define APNOTIFICATION_CHAT_MESSAGE "NEW_CHAT_MESSAGE"
-#define APNOTIFICATION_JOIN_REQUEST "NEW_JOIN_REQUEST"
-#define APNOTIFICATION_REQUEST_ACCEPTED "JOIN_REQUEST_ACCEPTED"
-#define APNOTIFICATION_INVITE_REQUEST "ENTOURAGE_INVITATION"
-#define APNOTIFICATION_INVITE_STATUS "INVITATION_STATUS"
-#define APNOTIFICATION_JOIN_REQUEST_CANCELED "JOIN_REQUEST_CANCELED"
-#define APNOTIFICATION_MIXPANEL_DEEPLINK "mp_cta"
-
 @implementation OTPushNotificationsService
 
 - (void)sendAppInfo {
@@ -115,12 +106,6 @@
         if (![topController isKindOfClass:[OTCreateMeetingViewController class]])
             [presentedViewController presentViewController:alert animated:YES completion:nil];
     }];
-}
-
-- (void)handleAppLaunchFromNotificationCenter:(NSDictionary *)userInfo {
-    OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
-    if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST])
-        [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
 }
 
 - (BOOL)isMixpanelDeepLinkNotification:(NSDictionary *)userInfo {

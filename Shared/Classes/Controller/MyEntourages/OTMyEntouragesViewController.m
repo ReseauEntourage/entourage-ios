@@ -25,6 +25,7 @@
 #import "OTUnreadMessagesService.h"
 #import "OTConsts.h"
 #import "OTFeedItemFactory.h"
+#import "OTAppConfiguration.h"
 
 @interface OTMyEntouragesViewController ()
 

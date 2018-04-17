@@ -92,6 +92,7 @@
 #import "entourage-Swift.h"
 #import "OTHTTPRequestManager.h"
 #import "OTSafariService.h"
+#import "OTAppConfiguration.h"
 
 #define MAPVIEW_HEIGHT 224.f
 

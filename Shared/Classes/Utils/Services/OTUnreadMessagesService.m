@@ -13,6 +13,7 @@
 #import "OTConsts.h"
 #import "OTAppDelegate.h"
 #import "OTAPIConsts.h"
+#import "OTAppConfiguration.h"
 
 #define UserKey @"UserKey"
 
