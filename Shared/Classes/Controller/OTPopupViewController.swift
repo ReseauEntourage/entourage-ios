@@ -16,15 +16,15 @@ import Foundation
     @IBOutlet weak var tapBehavior: OTTapViewBehavior!
     @IBOutlet weak var closeKeyboardBehavior: OTCloseKeyboardOnTapBehavior!
     
-    lazy var labelString: String = {
-        return ""
+    lazy var labelString: NSMutableAttributedString = {
+        return NSMutableAttributedString.init(string: "")
     }()
     lazy var textFieldPlaceholder = ""
     lazy var buttonTitle = ""
     lazy var message = ""
     lazy var reportedUserId = ""
     
-    init(labelString: String, textFieldPlaceholder: String, buttonTitle: String) {
+    init(labelString: NSMutableAttributedString, textFieldPlaceholder: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
         self.labelString = labelString
         self.textFieldPlaceholder = textFieldPlaceholder
@@ -58,7 +58,7 @@ import Foundation
     
     //MARK: - private functions
     private func setupUI() {
-        descriptionLabel.text = labelString
+        descriptionLabel.attributedText = labelString
         completionButton.setTitle(buttonTitle, for: .normal)
         textWithCount.placeholderLargeColor = UIColor.appGreyish()
         textWithCount.placeholder = textFieldPlaceholder

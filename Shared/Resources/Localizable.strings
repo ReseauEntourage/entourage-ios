@@ -282,11 +282,11 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 
 Membres d'une association utilisatrice d'Entourage, contactez associations@entourage.social";
 "report_user_title" = "
-
 Vous allez signaler cet utilisateur à nos administrateurs.
- Merci de préciser pourquoi
-vous signalez cette personne :
+ 
 ";
+"report_user_attributed_title" = "Merci de préciser pourquoi
+vous signalez cette personne :";
 "report_user_button" = "Envoyer";
 "report_user_placeholder" = "Ecrivez quelque chose…";
 
