@@ -136,7 +136,11 @@
 }
 
 - (IBAction)showWebsite:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.poi.website]];
+    NSString *url = self.poi.website;
+    if (![url containsString:@"http"]) {
+        url = [NSString stringWithFormat:@"http://%@", url];
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 /********************************************************************************/
