@@ -16,6 +16,7 @@
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 @interface OTAppConfiguration ()
+@property (nonatomic) OTPushNotificationsService *pushNotificationService;
 @end
 
 @implementation OTAppConfiguration
@@ -31,9 +32,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions {
 
+    [self configurePushNotifcations];
+    
     [OTAppConfiguration configureUIAppearance];
     [OTAppConfiguration configureAnalyticsWithOptions:launchOptions];
-    [OTAppConfiguration configurePushNotifcations];
     [OTAppConfiguration configurePhotoUploadingService];
     
     [self launchApplicatioWithOptions:launchOptions];
@@ -207,8 +209,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
 }
 
-+ (void)configurePushNotifcations
+- (void)configurePushNotifcations
 {
+    self.pushNotificationService = [OTPushNotificationsService new];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin) name:[kLoginFailureNotification copy] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
 }
@@ -239,7 +243,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 #pragma mark - Push notifications
 
 + (void)applicationDidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    OTPushNotificationsService *pnService = [OTPushNotificationsService new];
+    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
     NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:YES] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
     @try {
@@ -258,7 +262,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
     UIApplicationState state = [application applicationState];
-    OTPushNotificationsService *pnService = [OTPushNotificationsService new];
+    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive) {
         [pnService handleRemoteNotification:userInfo];
     }
@@ -267,7 +271,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     UIApplicationState state = [application applicationState];
-    OTPushNotificationsService *pnService = [OTPushNotificationsService new];
+    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
     if (state == UIApplicationStateActive || state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
         [pnService handleLocalNotification:userInfo];
     }
@@ -276,7 +280,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
 {
     NSDictionary *userInfo = notification.request.content.userInfo;
-    OTPushNotificationsService *pnService = [OTPushNotificationsService new];
+    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
     if ([pnService isMixpanelDeepLinkNotification:userInfo]) {
         //for mixpanel deeplinks, shows the push notification
         completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
