@@ -109,7 +109,12 @@ typedef NS_ENUM(NSInteger) {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Popup"
                                                          bundle:nil];
     OTPopupViewController *popup = [storyboard instantiateInitialViewController];
-    popup.labelString = OTLocalizedString(@"report_user_title");
+    NSMutableAttributedString *firstString = [[NSMutableAttributedString alloc] initWithString: OTLocalizedString(@"report_user_title")];
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: OTLocalizedString(@"report_user_attributed_title")];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"SFUIText-Medium" size: 17]  range:NSMakeRange(0, attributedString.length)];
+    [firstString appendAttributedString:attributedString];
+    popup.labelString = firstString;
     popup.textFieldPlaceholder = OTLocalizedString(@"report_user_placeholder");
     popup.buttonTitle = OTLocalizedString(@"report_user_button");
     popup.reportedUserId = self.user.sid.stringValue;
