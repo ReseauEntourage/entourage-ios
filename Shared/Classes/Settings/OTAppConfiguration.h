@@ -7,41 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#import "OTVersionInfo.h"
+#import "Mixpanel/Mixpanel.h"
+#import "OTDeepLinkService.h"
+#import "FBSDKCoreKit.h"
+#import <UserNotifications/UserNotifications.h>
+#import "OTPushNotificationsService.h"
 #import "OTDebugLog.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "Mixpanel/Mixpanel.h"
-#import "OTDeepLinkService.h"
-#import "FBSDKCoreKit.h"
-#import "OTLocationManager.h"
-#import <UserNotifications/UserNotifications.h>
-#import "OTUser.h"
-#import "A0SimpleKeychain.h"
-#import "OTConsts.h"
-#import "IQKeyboardManager.h"
-#import "NSUserDefaults+OT.h"
-#import "UIStoryboard+entourage.h"
-#import "OTPushNotificationsService.h"
-#import "OTPictureUploadService.h"
-#import "OTAuthService.h"
-#import "OTDeepLinkService.h"
-#import "OTMainViewController.h"
-#import "OTOngoingTourService.h"
-#import "SVProgressHUD.h"
-#import "entourage-Swift.h"
-#import "UIColor+entourage.h"
-#import "OTUnreadMessagesService.h"
-#import "OTLoginViewController.h"
-#import "OTLostCodeViewController.h"
-#import "OTPhoneViewController.h"
-#import "OTCodeViewController.h"
-#import "Mixpanel/Mixpanel.h"
-#import "OTDeepLinkService.h"
-#import "FBSDKCoreKit.h"
-#import <UserNotifications/UserNotifications.h>
-#import "OTPushNotificationsService.h"
 
 @interface OTAppConfiguration : NSObject
 

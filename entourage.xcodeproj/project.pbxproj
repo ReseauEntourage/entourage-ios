@@ -70,8 +70,6 @@
 		A202E7FA2085CFC40058F32C /* DINMittelschrift-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7BA2085CFC20058F32C /* DINMittelschrift-Regular.ttf */; };
 		A202E7FB2085CFC40058F32C /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = A202E7BB2085CFC20058F32C /* CountryList.csv */; };
 		A202E7FC2085CFC40058F32C /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = A202E7BB2085CFC20058F32C /* CountryList.csv */; };
-		A202E7FE2085CFC40058F32C /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A202E7C32085CFC30058F32C /* staging.plist */; };
-		A202E8002085CFC40058F32C /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A202E7C42085CFC30058F32C /* prod.plist */; };
 		A202E80B2085D0FE0058F32C /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8092085D0FD0058F32C /* OTAppDelegate.m */; };
 		A202E80C2085D0FE0058F32C /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8092085D0FD0058F32C /* OTAppDelegate.m */; };
 		A202EAC72085D2C70058F32C /* OTFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E80E2085D2C40058F32C /* OTFeedItem.m */; };
@@ -735,6 +733,9 @@
 		A21D65C42085FDAA00EF8E0E /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A32085FDAA00EF8E0E /* About.storyboard */; };
 		A2E5FA09208629B60099B989 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA07208629B50099B989 /* staging.plist */; };
 		A2E5FA0A208629B60099B989 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA08208629B50099B989 /* prod.plist */; };
+		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
+		A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
+		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
 /* End PBXBuildFile section */
@@ -802,10 +803,6 @@
 		A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Shared-Bridging-Header.h"; sourceTree = "<group>"; };
 		A202E7BF2085CFC30058F32C /* OTConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTConsts.h; sourceTree = "<group>"; };
 		A202E7C02085CFC30058F32C /* OTAPIKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAPIKeys.h; sourceTree = "<group>"; };
-		A202E7C12085CFC30058F32C /* OTAmazonConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
-		A202E7C22085CFC30058F32C /* OTMixpanelConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
-		A202E7C32085CFC30058F32C /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
-		A202E7C42085CFC30058F32C /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
 		A202E7C52085CFC30058F32C /* OTAPIConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAPIConsts.h; sourceTree = "<group>"; };
 		A202E8092085D0FD0058F32C /* OTAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAppDelegate.m; sourceTree = "<group>"; };
 		A202E80A2085D0FE0058F32C /* OTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAppDelegate.h; sourceTree = "<group>"; };
@@ -1491,6 +1488,11 @@
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA07208629B50099B989 /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
 		A2E5FA08208629B50099B989 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
+		A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Appearance.h"; sourceTree = "<group>"; };
+		A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Appearance.m"; sourceTree = "<group>"; };
+		A2E5FA0E20862E780099B989 /* UINavigationBar+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Appearance.h"; sourceTree = "<group>"; };
+		A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Appearance.m"; sourceTree = "<group>"; };
+		A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
@@ -1713,15 +1715,12 @@
 			isa = PBXGroup;
 			children = (
 				A21D649F2085D6A400EF8E0E /* ConfigurationManager.swift */,
+				A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */,
 				A21D64A12085D6D200EF8E0E /* OTAppConfiguration.h */,
 				A21D64A22085D6D200EF8E0E /* OTAppConfiguration.m */,
-				A202E7C12085CFC30058F32C /* OTAmazonConsts.h */,
 				A202E7C52085CFC30058F32C /* OTAPIConsts.h */,
 				A202E7C02085CFC30058F32C /* OTAPIKeys.h */,
 				A202E7BF2085CFC30058F32C /* OTConsts.h */,
-				A202E7C22085CFC30058F32C /* OTMixpanelConsts.h */,
-				A202E7C42085CFC30058F32C /* prod.plist */,
-				A202E7C32085CFC30058F32C /* staging.plist */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -2829,24 +2828,28 @@
 		A202EAB42085D2C70058F32C /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				A202EAB52085D2C70058F32C /* NSDictionary+Parsing.h */,
 				A202EAB62085D2C70058F32C /* NSAttributedString+OTBuilder.h */,
-				A202EAB72085D2C70058F32C /* NSDate+OTFormatter.m */,
-				A202EAB82085D2C70058F32C /* NSDate+ui.h */,
-				A202EAB92085D2C70058F32C /* NSString+Validators.m */,
-				A202EABA2085D2C70058F32C /* UINavigationController+entourage.m */,
-				A202EABB2085D2C70058F32C /* NSError+OTErrorData.m */,
-				A202EABC2085D2C70058F32C /* OTVersionInfo.h */,
-				A202EABD2085D2C70058F32C /* NSUserDefaults+OT.m */,
 				A202EABE2085D2C70058F32C /* NSAttributedString+OTBuilder.m */,
 				A202EABF2085D2C70058F32C /* NSDate+OTFormatter.h */,
-				A202EAC02085D2C70058F32C /* NSDictionary+Parsing.m */,
+				A202EAB72085D2C70058F32C /* NSDate+OTFormatter.m */,
+				A202EAB82085D2C70058F32C /* NSDate+ui.h */,
 				A202EAC12085D2C70058F32C /* NSDate+ui.m */,
-				A202EAC22085D2C70058F32C /* UINavigationController+entourage.h */,
-				A202EAC32085D2C70058F32C /* NSString+Validators.h */,
-				A202EAC42085D2C70058F32C /* NSUserDefaults+OT.h */,
-				A202EAC52085D2C70058F32C /* OTVersionInfo.m */,
+				A202EAB52085D2C70058F32C /* NSDictionary+Parsing.h */,
+				A202EAC02085D2C70058F32C /* NSDictionary+Parsing.m */,
 				A202EAC62085D2C70058F32C /* NSError+OTErrorData.h */,
+				A202EABB2085D2C70058F32C /* NSError+OTErrorData.m */,
+				A202EAC32085D2C70058F32C /* NSString+Validators.h */,
+				A202EAB92085D2C70058F32C /* NSString+Validators.m */,
+				A202EAC42085D2C70058F32C /* NSUserDefaults+OT.h */,
+				A202EABD2085D2C70058F32C /* NSUserDefaults+OT.m */,
+				A202EABC2085D2C70058F32C /* OTVersionInfo.h */,
+				A202EAC52085D2C70058F32C /* OTVersionInfo.m */,
+				A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */,
+				A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */,
+				A2E5FA0E20862E780099B989 /* UINavigationBar+Appearance.h */,
+				A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */,
+				A202EAC22085D2C70058F32C /* UINavigationController+entourage.h */,
+				A202EABA2085D2C70058F32C /* UINavigationController+entourage.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -3115,7 +3118,6 @@
 			files = (
 				A202E7F82085CFC40058F32C /* SF-UI-Text-Semibold.otf in Resources */,
 				A202E7D42085CFC40058F32C /* Entourage.clr in Resources */,
-				A202E8002085CFC40058F32C /* prod.plist in Resources */,
 				6B4930DB19A779F200DA7EE0 /* poi_mock.json in Resources */,
 				A202E7D22085CFC40058F32C /* category.rtf in Resources */,
 				A202E7F22085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */,
@@ -3139,7 +3141,6 @@
 				A202E7F42085CFC40058F32C /* SF-UI-Text-Medium.otf in Resources */,
 				A202E7CE2085CFC40058F32C /* categories.json in Resources */,
 				A202E7E42085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */,
-				A202E7FE2085CFC40058F32C /* staging.plist in Resources */,
 				A202E7DC2085CFC40058F32C /* InfoPlist.strings in Resources */,
 				A202E7E02085CFC40058F32C /* SF-UI-Text-Ultrathin.otf in Resources */,
 			);
@@ -3370,6 +3371,7 @@
 				A202EADD2085D2C70058F32C /* OTOrganization.m in Sources */,
 				A202ECAD2085D2C80058F32C /* OTUserProfileBehavior.m in Sources */,
 				A202EBBF2085D2C80058F32C /* OTSolidarityGuideFiltersViewController.m in Sources */,
+				A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */,
 				A202ECFF2085D2C80058F32C /* OTEntourageChangedHandler.m in Sources */,
 				A202EB8B2085D2C80058F32C /* OTSolidarityGuideFilterCell.m in Sources */,
 				A202EBEF2085D2C80058F32C /* OTMenuTableViewCell.m in Sources */,
@@ -3426,6 +3428,7 @@
 				A202EAF72085D2C70058F32C /* OTAddressBookPhone.m in Sources */,
 				A202EC9F2085D2C80058F32C /* OTPublicInfoCellProvider.m in Sources */,
 				A202EC812085D2C80058F32C /* OTSolidarityGuideFiltersCellProvider.m in Sources */,
+				A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */,
 				A202EBA72085D2C80058F32C /* OTPopupViewController.swift in Sources */,
 				A202EB492085D2C80058F32C /* OTChatCellBase.m in Sources */,
 				A202EB072085D2C70058F32C /* OTTour.m in Sources */,
@@ -3496,6 +3499,7 @@
 				A202ECCB2085D2C80058F32C /* OTNoDataBehavior.m in Sources */,
 				A202EB4D2085D2C80058F32C /* OTLocationSearchTableViewController.m in Sources */,
 				A202ECB72085D2C80058F32C /* OTInviteBehavior.m in Sources */,
+				A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */,
 				A202EC592085D2C80058F32C /* OTBottomScrollBehavior.m in Sources */,
 				A202ED252085D2C80058F32C /* UINavigationController+entourage.m in Sources */,
 				A202EB272085D2C70058F32C /* OTMapCell.m in Sources */,

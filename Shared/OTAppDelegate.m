@@ -9,6 +9,9 @@
 #import "OTAppDelegate.h"
 #import "OTAppConfiguration.h"
 
+NSString * const kLoginFailureNotification = @"loginFailureNotification";
+NSString * const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
+
 @interface OTAppDelegate () <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 @end
 

@@ -9,7 +9,31 @@
 #import "OTAppConfiguration.h"
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"
+#import "entourage-Swift.h"
+#import "OTVersionInfo.h"
+#import "OTDeepLinkService.h"
+#import "FBSDKCoreKit.h"
+#import "OTLocationManager.h"
+#import "OTUser.h"
+#import "OTConsts.h"
+#import "IQKeyboardManager.h"
+#import "NSUserDefaults+OT.h"
+#import "UIStoryboard+entourage.h"
+#import "OTPushNotificationsService.h"
+#import "OTPictureUploadService.h"
+#import "OTAuthService.h"
+#import "OTDeepLinkService.h"
+#import "OTMainViewController.h"
+#import "OTOngoingTourService.h"
+#import "SVProgressHUD.h"
+#import "UIColor+entourage.h"
+#import "OTUnreadMessagesService.h"
+#import "OTLoginViewController.h"
+#import "OTLostCodeViewController.h"
+#import "OTPhoneViewController.h"
+#import "OTCodeViewController.h"
 #import "OTAppDelegate.h"
+#import "A0SimpleKeychain.h"
 
 @import Firebase;
 
@@ -86,7 +110,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [UIStoryboard showStartup];
 }
 
-- (void)updateBadge {
+- (void)updateBadge: (NSNotification *) notification {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[OTUnreadMessagesService new] totalCount].integerValue];
 }
 
@@ -209,14 +233,19 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)configurePushNotifcations
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin) name:[kLoginFailureNotification copy] object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(popToLogin)
+                                                 name:kLoginFailureNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateBadge:)
+                                                 name:[kUpdateBadgeCountNotification copy] object:nil];
 }
 
 + (void)configureUIAppearance {
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
     UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
     UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
+    
     UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
     UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
     [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0],
@@ -283,6 +312,17 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     } else {
         [pnService handleRemoteNotification:userInfo];
     }
+}
+
+#pragma - Appearance
+
++ (void)configureApplicationAppearance
+{
+    UIColor *navigationBarTintColor = [UIColor whiteColor];
+#if BETA
+    navigationBarTintColor = [UIColor appOrangeColor];
+#endif
+    [[ApplicationTheme shared] setNavigationBarTintColor:navigationBarTintColor];
 }
 
 @end

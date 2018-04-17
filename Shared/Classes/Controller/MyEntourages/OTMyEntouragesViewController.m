@@ -53,7 +53,12 @@
     [self.optionsBehavior configureWith:self.optionsDelegate];
     self.entouragesDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.entouragesDataSource.tableView.estimatedRowHeight = 200;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateBadgeCountNotification copy] object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateBadge:)
+                                                 name:kUpdateBadgeCountNotification
+                                               object:nil];
+    
     self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
     [self.entouragesDataSource loadData];

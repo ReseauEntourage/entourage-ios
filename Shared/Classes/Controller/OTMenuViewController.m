@@ -32,6 +32,7 @@
 #import "OTDeepLinkService.h"
 #import "OTAboutViewController.h"
 #import "OTSafariService.h"
+#import "OTAppConfiguration.h"
 
 #define HEADER_CELL_INDEX 7
 #define LOG_OUT_CELL_INDEX 8

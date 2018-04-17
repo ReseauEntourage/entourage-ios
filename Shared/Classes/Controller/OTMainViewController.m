@@ -295,8 +295,8 @@
                                                  name:kSolidarityGuideNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateBadge)
-                                                 name:[kUpdateBadgeCountNotification copy]
+                                             selector:@selector(updateBadge:)
+                                                 name:kUpdateBadgeCountNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(entourageUpdated:)
@@ -1292,7 +1292,7 @@
     [self.mailSender sendCloseMail:reason forItem: feedItem];
 }
 
-- (void)updateBadge {
+- (void)updateBadge:(NSNotification *) notification {
     self.navigationItem.rightBarButtonItem.badgeValue = [OTUnreadMessagesService sharedInstance].totalCount.stringValue;
     [self forceGetNewData];
 }
