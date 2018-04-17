@@ -70,9 +70,7 @@
 		A202E7FA2085CFC40058F32C /* DINMittelschrift-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7BA2085CFC20058F32C /* DINMittelschrift-Regular.ttf */; };
 		A202E7FB2085CFC40058F32C /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = A202E7BB2085CFC20058F32C /* CountryList.csv */; };
 		A202E7FC2085CFC40058F32C /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = A202E7BB2085CFC20058F32C /* CountryList.csv */; };
-		A202E7FD2085CFC40058F32C /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A202E7C32085CFC30058F32C /* staging.plist */; };
 		A202E7FE2085CFC40058F32C /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A202E7C32085CFC30058F32C /* staging.plist */; };
-		A202E7FF2085CFC40058F32C /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A202E7C42085CFC30058F32C /* prod.plist */; };
 		A202E8002085CFC40058F32C /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A202E7C42085CFC30058F32C /* prod.plist */; };
 		A202E80B2085D0FE0058F32C /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8092085D0FD0058F32C /* OTAppDelegate.m */; };
 		A202E80C2085D0FE0058F32C /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8092085D0FD0058F32C /* OTAppDelegate.m */; };
@@ -735,8 +733,8 @@
 		A21D65C22085FDAA00EF8E0E /* EncounterEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A12085FDAA00EF8E0E /* EncounterEditor.storyboard */; };
 		A21D65C32085FDAA00EF8E0E /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A22085FDAA00EF8E0E /* Tutorial.storyboard */; };
 		A21D65C42085FDAA00EF8E0E /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A32085FDAA00EF8E0E /* About.storyboard */; };
-		A23D401A2086253600E32F45 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A23D40172086253600E32F45 /* staging.plist */; };
-		A23D401B2086253600E32F45 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A23D40182086253600E32F45 /* prod.plist */; };
+		A2E5FA09208629B60099B989 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA07208629B50099B989 /* staging.plist */; };
+		A2E5FA0A208629B60099B989 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA08208629B50099B989 /* prod.plist */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
 /* End PBXBuildFile section */
@@ -801,7 +799,7 @@
 		A202E7B92085CFC20058F32C /* SF-UI-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Semibold.otf"; sourceTree = "<group>"; };
 		A202E7BA2085CFC20058F32C /* DINMittelschrift-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DINMittelschrift-Regular.ttf"; sourceTree = "<group>"; };
 		A202E7BB2085CFC20058F32C /* CountryList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CountryList.csv; sourceTree = "<group>"; };
-		A202E7BC2085CFC20058F32C /* entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Bridging-Header.h"; sourceTree = "<group>"; };
+		A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Shared-Bridging-Header.h"; sourceTree = "<group>"; };
 		A202E7BF2085CFC30058F32C /* OTConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTConsts.h; sourceTree = "<group>"; };
 		A202E7C02085CFC30058F32C /* OTAPIKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAPIKeys.h; sourceTree = "<group>"; };
 		A202E7C12085CFC30058F32C /* OTAmazonConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
@@ -1488,10 +1486,11 @@
 		A21D65A12085FDAA00EF8E0E /* EncounterEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EncounterEditor.storyboard; sourceTree = "<group>"; };
 		A21D65A22085FDAA00EF8E0E /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		A21D65A32085FDAA00EF8E0E /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
-		A23D40152086253600E32F45 /* OTAmazonConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
-		A23D40162086253600E32F45 /* OTMixpanelConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
-		A23D40172086253600E32F45 /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
-		A23D40182086253600E32F45 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
+		A2E5FA04208629480099B989 /* OTAmazonConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
+		A2E5FA05208629480099B989 /* OTMixpanelConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
+		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
+		A2E5FA07208629B50099B989 /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
+		A2E5FA08208629B50099B989 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
@@ -1596,7 +1595,6 @@
 		6B92CAA719A7461C004E8C9B /* entourage */ = {
 			isa = PBXGroup;
 			children = (
-				A23D40192086253600E32F45 /* Classes */,
 				A23D40132086253600E32F45 /* Settings */,
 				6B92CAA819A7461C004E8C9B /* Supporting Files */,
 			);
@@ -2915,25 +2913,19 @@
 		A23D40142086253600E32F45 /* Environment */ = {
 			isa = PBXGroup;
 			children = (
-				A23D40152086253600E32F45 /* OTAmazonConsts.h */,
-				A23D40162086253600E32F45 /* OTMixpanelConsts.h */,
-				A23D40172086253600E32F45 /* staging.plist */,
-				A23D40182086253600E32F45 /* prod.plist */,
+				A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */,
+				A2E5FA04208629480099B989 /* OTAmazonConsts.h */,
+				A2E5FA05208629480099B989 /* OTMixpanelConsts.h */,
+				A2E5FA08208629B50099B989 /* prod.plist */,
+				A2E5FA07208629B50099B989 /* staging.plist */,
 			);
 			path = Environment;
-			sourceTree = "<group>";
-		};
-		A23D40192086253600E32F45 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		A24199B52084F87100BC7466 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A202E7BC2085CFC20058F32C /* entourage-Bridging-Header.h */,
+				A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */,
 				A202E80A2085D0FE0058F32C /* OTAppDelegate.h */,
 				A202E8092085D0FD0058F32C /* OTAppDelegate.m */,
 				A21D65822085FDAA00EF8E0E /* Storyboards */,
@@ -3086,15 +3078,13 @@
 				A202E7F72085CFC40058F32C /* SF-UI-Text-Semibold.otf in Resources */,
 				A21D65AF2085FDAA00EF8E0E /* UserProfile.storyboard in Resources */,
 				A202E7E12085CFC40058F32C /* SF-UI-Text-RegularItalic.otf in Resources */,
-				A202E7FD2085CFC40058F32C /* staging.plist in Resources */,
 				A202E7E92085CFC40058F32C /* SF-UI-Text-BoldItalic.otf in Resources */,
 				A202E7DB2085CFC40058F32C /* InfoPlist.strings in Resources */,
 				A21D65BD2085FDAA00EF8E0E /* ActiveFeedItem.storyboard in Resources */,
 				A21D65B82085FDAA00EF8E0E /* UserProfileEditor.storyboard in Resources */,
 				A21D65A82085FDAA00EF8E0E /* Disclaimer.storyboard in Resources */,
 				A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
-				A202E7FF2085CFC40058F32C /* prod.plist in Resources */,
-				A23D401A2086253600E32F45 /* staging.plist in Resources */,
+				A2E5FA09208629B60099B989 /* staging.plist in Resources */,
 				A21D65A52085FDAA00EF8E0E /* Social.storyboard in Resources */,
 				A21D64AB2085E8B400EF8E0E /* Oradea.gpx in Resources */,
 				A202E7D12085CFC40058F32C /* category.rtf in Resources */,
@@ -3105,7 +3095,7 @@
 				A202E7CF2085CFC40058F32C /* logo_black.png in Resources */,
 				A202E7F32085CFC40058F32C /* SF-UI-Text-Medium.otf in Resources */,
 				A21D65B02085FDAA00EF8E0E /* EntourageEditor.storyboard in Resources */,
-				A23D401B2086253600E32F45 /* prod.plist in Resources */,
+				A2E5FA0A208629B60099B989 /* prod.plist in Resources */,
 				A202E7F12085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */,
 				A202E7D72085CFC40058F32C /* SharedImages.xcassets in Resources */,
 				A21D65B62085FDAA00EF8E0E /* Popup.storyboard in Resources */,
@@ -4118,7 +4108,7 @@
 				PROVISIONING_PROFILE = "2eb40226-8524-487b-b862-d70368a4f534";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/entourage-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -4163,7 +4153,7 @@
 				PRODUCT_NAME = Entourage;
 				PROVISIONING_PROFILE = "3cee3cd3-1044-4f02-aafc-212692b18297";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/entourage-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -4305,7 +4295,7 @@
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "2eb40226-8524-487b-b862-d70368a4f534";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/entourage-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
