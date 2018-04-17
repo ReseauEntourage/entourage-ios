@@ -24,7 +24,7 @@
         <!--Entourage Editor-->
         <scene sceneID="1KP-Ao-jAx">
             <objects>
-                <viewController storyboardIdentifier="EntourageEditor" automaticallyAdjustsScrollViewInsets="NO" id="UEB-Je-c5t" userLabel="Entourage Editor" customClass="OTEntourageEditorViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EntourageEditor" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UEB-Je-c5t" userLabel="Entourage Editor" customClass="OTEntourageEditorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dEQ-Bo-9Bm"/>
                         <viewControllerLayoutGuide type="bottom" id="Ysa-oq-h9F"/>

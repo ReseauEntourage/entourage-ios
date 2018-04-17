@@ -49,7 +49,8 @@
                                                            colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
 
-    self.locationSearchTable = [[UIStoryboard entourageEditorStoryboard] instantiateViewControllerWithIdentifier:@"OTLocationSearchTableViewController"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LocationSelection" bundle:nil];
+    self.locationSearchTable = (OTLocationSearchTableViewController*)[storyboard instantiateViewControllerWithIdentifier:@"OTLocationSearchTableViewController"];
     self.resultSearchController = [[UISearchController alloc] initWithSearchResultsController:self.locationSearchTable];
     self.resultSearchController.searchResultsUpdater = self.locationSearchTable;
     
