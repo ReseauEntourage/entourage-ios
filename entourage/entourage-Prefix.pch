@@ -6,8 +6,8 @@
 
 #import <Availability.h>
 
-#ifndef __IPHONE_5_0
-#warning "This project uses features only available in iOS SDK 5.0 and later."
+#ifndef __IPHONE_9_0
+#warning "This project uses features only available in iOS SDK 9.0 and later."
 #endif
 
 #ifdef __OBJC__
@@ -15,6 +15,4 @@
     #import <Foundation/Foundation.h>
     #import "OTLogger.h"
 #endif
-
-#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 

@@ -2,21 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Paris.gpx">
-   </FileRef>
-   <FileRef
-      location = "group:Oradea.gpx">
-   </FileRef>
-   <FileRef
-      location = "group:Nowhere.gpx">
-   </FileRef>
-   <FileRef
-      location = "group:Bucharest.gpx">
-   </FileRef>
-   <FileRef
-      location = "group:Platinia.gpx">
-   </FileRef>
-   <FileRef
       location = "group:entourage.xcodeproj">
    </FileRef>
    <FileRef
