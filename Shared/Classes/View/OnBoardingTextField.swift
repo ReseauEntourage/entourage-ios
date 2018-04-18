@@ -12,8 +12,8 @@ class OnBoardingTextField: JVFloatLabeledTextField, Validable {
     super.awakeFromNib()
 
     if let placeholder = placeholder {
-      let attributes = [NSForegroundColorAttributeName: UIColor.appTextFieldPlaceholder(),
-                        NSFontAttributeName: UIColor.appTextFieldPlaceholderFont()] as [String : Any]
+      let attributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.appTextFieldPlaceholder(),
+                        NSAttributedStringKey.font: UIColor.appTextFieldPlaceholderFont()] as? [NSAttributedStringKey : Any]
       attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
     }
     registerForNotifications()
@@ -31,7 +31,7 @@ class OnBoardingTextField: JVFloatLabeledTextField, Validable {
                                            name: NSNotification.Name.UITextFieldTextDidChange, object: self)
   }
 
-  func textDidChange() {
+  @objc func textDidChange() {
     let isValid = inputIsValid(text)
     inputValidationChanged?(isValid)
   }
@@ -51,8 +51,8 @@ class OnBoardingNumberTextField: NBTextField {
     super.awakeFromNib()
 
     if let placeholder = placeholder {
-      let attributes = [NSForegroundColorAttributeName: UIColor.appTextFieldPlaceholder(),
-                        NSFontAttributeName: UIColor.appTextFieldPlaceholderFont()] as [String : Any]
+      let attributes = [NSAttributedStringKey.foregroundColor: UIColor.appTextFieldPlaceholder(),
+                        NSAttributedStringKey.font: UIColor.appTextFieldPlaceholderFont()] as [NSAttributedStringKey : Any]?
       attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
     }
   }
@@ -130,7 +130,7 @@ class NBTextField: JVFloatLabeledTextField, Validable {
                                            name: NSNotification.Name.UITextFieldTextDidChange, object: self)
   }
 
-  func numberTextDidChange() {
+  @objc func numberTextDidChange() {
     let numbersOnly:Bool = phoneNumberUtility.isViablePhoneNumber(text)
     //text = phoneNumberFormatter.inputStringAndRememberPosition(numbersOnly)
 
