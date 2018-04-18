@@ -11,15 +11,17 @@
 #import "OTApiConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
-#import "entourage-Swift.h"
+#import "OTAppConfiguration.h"
 
+// TODO: Lazar
 #define PICTURE_BUCKET @"entourage-avatars-production-thumb"
 
 @implementation OTPictureUploadService
 
 + (void)configure {
-    NSString *amazonAccessKey = [[ConfigurationManager shared] amazonAccessKey];
-    NSString *amazonSecretKey = [[ConfigurationManager shared] amazonSecretKey];
+    NSString *amazonAccessKey = [OTAppConfiguration sharedInstance].environmentConfiguration.amazonAccessKey;
+    NSString *amazonSecretKey = [OTAppConfiguration sharedInstance].environmentConfiguration.amazonSecretKey;
+
     AWSStaticCredentialsProvider *staticProvider = [[AWSStaticCredentialsProvider alloc] initWithAccessKey:amazonAccessKey
                                                                                                  secretKey:amazonSecretKey];
     AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionEUWest1 credentialsProvider:staticProvider];
@@ -44,7 +46,8 @@
 - (AWSS3TransferManagerUploadRequest *)buildUploadRequestFor:(NSURL *)fileUri withName:(NSString *)fileName {
     AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
     uploadRequest.bucket = PICTURE_BUCKET;
-    uploadRequest.key = [[ConfigurationManager shared].amazonPictureFolder stringByAppendingString:fileName];
+    NSString *amazonPictureFolder = [OTAppConfiguration sharedInstance].environmentConfiguration.amazonPictureFolder;
+    uploadRequest.key = [amazonPictureFolder stringByAppendingString:fileName];
     uploadRequest.body = fileUri;
     uploadRequest.contentType = @"image/jpeg";
     return uploadRequest;

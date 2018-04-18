@@ -9,13 +9,11 @@
 #import "OTAppConfiguration.h"
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"
-#import "entourage-Swift.h"
 #import "OTVersionInfo.h"
 #import "OTDeepLinkService.h"
 #import "FBSDKCoreKit.h"
 #import "OTLocationManager.h"
 #import "OTUser.h"
-#import "OTConsts.h"
 #import "IQKeyboardManager.h"
 #import "NSUserDefaults+OT.h"
 #import "UIStoryboard+entourage.h"
@@ -40,7 +38,6 @@
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 @interface OTAppConfiguration ()
-@property (nonatomic) OTPushNotificationsService *pushNotificationService;
 @end
 
 @implementation OTAppConfiguration
@@ -54,12 +51,22 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return sharedInstance;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.pushNotificationService = [OTPushNotificationsService new];
+        self.environmentConfiguration = [[EnvironmentConfigurationManager alloc] initWithBundleId:[[NSBundle mainBundle] bundleIdentifier]];
+    }
+    return self;
+}
+
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions {
 
     [self configurePushNotifcations];
+    [self configureAnalyticsWithOptions:launchOptions];
     
     [OTAppConfiguration configureUIAppearance];
-    [OTAppConfiguration configureAnalyticsWithOptions:launchOptions];
     [OTAppConfiguration configurePhotoUploadingService];
     
     [self launchApplicatioWithOptions:launchOptions];
@@ -202,7 +209,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 #pragma mark - App Configurations
 
-+ (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions
+- (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions
 {
     [[OTDebugLog sharedInstance] setConsoleOutput];
     
@@ -211,7 +218,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [FIRApp configure];
 #endif
     
-    NSString *mixpanelToken = [ConfigurationManager shared].MixpanelToken;
+    NSString *mixpanelToken = self.environmentConfiguration.MixpanelToken;
+    
     [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
     [Mixpanel sharedInstance].enableLogging = YES;
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
@@ -235,10 +243,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 - (void)configurePushNotifcations
 {
-    self.pushNotificationService = [OTPushNotificationsService new];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin) name:[kLoginFailureNotification copy] object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateBadgeCountNotification copy] object:nil];
 }
 
 + (void)configureUIAppearance {
@@ -319,10 +325,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)configureApplicationAppearance
 {
     UIColor *navigationBarTintColor = [UIColor whiteColor];
+    UIColor *backgroundThemeColor = [UIColor appOrangeColor];
 #if BETA
     navigationBarTintColor = [UIColor appOrangeColor];
 #endif
+    
     [[ApplicationTheme shared] setNavigationBarTintColor:navigationBarTintColor];
+    [[ApplicationTheme shared] setBackgroundThemeColor:backgroundThemeColor];
 }
 
 @end

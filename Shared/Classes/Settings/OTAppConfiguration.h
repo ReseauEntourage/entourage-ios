@@ -16,8 +16,13 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "Mixpanel/Mixpanel.h"
+#import "OTConsts.h"
+#import "entourage-Swift.h"
 
 @interface OTAppConfiguration : NSObject
+
+@property (nonatomic) OTPushNotificationsService *pushNotificationService;
+@property (nonatomic) EnvironmentConfigurationManager *environmentConfiguration;
 
 + (OTAppConfiguration*)sharedInstance;
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions;

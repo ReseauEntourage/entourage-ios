@@ -10,7 +10,7 @@
 #import "UIView+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "UINavigationController+entourage.h"
-#import "entourage-Swift.h"
+#import "OTAppConfiguration.h"
 
 @interface OTStartupViewController ()
 
@@ -27,9 +27,9 @@
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
     [self.navigationController presentTransparentNavigationBar];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-
+    
     self.title = @"";
-
+    
     self.loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.loginButton.layer.borderWidth = 1.5f;
 }
@@ -38,14 +38,14 @@
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"Screen01SplashView"];
     [NSUserDefaults standardUserDefaults].temporaryUser = nil;
-
-  self.betaButton.hidden = NO;
-  NSString *env = [[ConfigurationManager shared] environment];
-  NSString *title = [NSString stringWithFormat:@"Vous êtes sur %@.\n(Tapez pour changer)", env];
-  self.betaButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-  self.betaButton.titleLabel.numberOfLines = 2;
-  [self.betaButton setTitle:title forState:UIControlStateNormal];
-  self.betaButton.hidden = YES;
+    
+    self.betaButton.hidden = NO;
+    
+    NSString *title = [NSString stringWithFormat:@"Vous êtes sur %@.\n(Tapez pour changer)", [[OTAppConfiguration sharedInstance] environmentConfiguration].environmentName];
+    self.betaButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.betaButton.titleLabel.numberOfLines = 2;
+    [self.betaButton setTitle:title forState:UIControlStateNormal];
+    self.betaButton.hidden = YES;
 }
 
 -(IBAction)showSignUp:(id)sender {

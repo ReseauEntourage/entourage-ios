@@ -691,7 +691,7 @@
 		A202ED302085D2C80058F32C /* NSDate+ui.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC12085D2C70058F32C /* NSDate+ui.m */; };
 		A202ED312085D2C80058F32C /* OTVersionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC52085D2C70058F32C /* OTVersionInfo.m */; };
 		A202ED322085D2C80058F32C /* OTVersionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC52085D2C70058F32C /* OTVersionInfo.m */; };
-		A21D64A02085D6A400EF8E0E /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21D649F2085D6A400EF8E0E /* ConfigurationManager.swift */; };
+		A21D64A02085D6A400EF8E0E /* EnvironmentConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21D649F2085D6A400EF8E0E /* EnvironmentConfigurationManager.swift */; };
 		A21D64A32085D6D200EF8E0E /* OTAppConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A21D64A22085D6D200EF8E0E /* OTAppConfiguration.m */; };
 		A21D64AA2085E8B400EF8E0E /* Platinia.gpx in Resources */ = {isa = PBXBuildFile; fileRef = A21D64A52085E8B400EF8E0E /* Platinia.gpx */; };
 		A21D64AB2085E8B400EF8E0E /* Oradea.gpx in Resources */ = {isa = PBXBuildFile; fileRef = A21D64A62085E8B400EF8E0E /* Oradea.gpx */; };
@@ -773,7 +773,7 @@
 		A296B77C20871CFC00F6AFBD /* UIStoryboard+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9942085D2C60058F32C /* UIStoryboard+entourage.m */; };
 		A296B77D20871CFC00F6AFBD /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E97A2085D2C60058F32C /* OTPoiService.m */; };
 		A296B77E20871CFC00F6AFBD /* NSError+OTErrorData.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EABB2085D2C70058F32C /* NSError+OTErrorData.m */; };
-		A296B77F20871CFC00F6AFBD /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21D649F2085D6A400EF8E0E /* ConfigurationManager.swift */; };
+		A296B77F20871CFC00F6AFBD /* EnvironmentConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21D649F2085D6A400EF8E0E /* EnvironmentConfigurationManager.swift */; };
 		A296B78020871CFC00F6AFBD /* OTEntourageStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA922085D2C60058F32C /* OTEntourageStateInfo.m */; };
 		A296B78120871CFC00F6AFBD /* OTBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E12085D2C40058F32C /* OTBarButtonView.m */; };
 		A296B78220871CFC00F6AFBD /* OTOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8262085D2C40058F32C /* OTOrganization.m */; };
@@ -1118,11 +1118,14 @@
 		A296B8D920871CFC00F6AFBD /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
 		A296B8DA20871CFC00F6AFBD /* Nowhere.gpx in Resources */ = {isa = PBXBuildFile; fileRef = A21D64A82085E8B400EF8E0E /* Nowhere.gpx */; };
 		A296B8DB20871CFC00F6AFBD /* GuideSolidarity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D659E2085FDAA00EF8E0E /* GuideSolidarity.storyboard */; };
-		A296B8EC20871FD900F6AFBD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B8E920871FD800F6AFBD /* GoogleService-Info.plist */; };
 		A296B8ED20871FD900F6AFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B8EB20871FD800F6AFBD /* main.m */; };
 		A296B90E2087218700F6AFBD /* Entourage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A296B90D2087218700F6AFBD /* Entourage.xcassets */; };
 		A296B90F2087218700F6AFBD /* Entourage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A296B90D2087218700F6AFBD /* Entourage.xcassets */; };
 		A296B912208721CF00F6AFBD /* Pfp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A296B911208721CF00F6AFBD /* Pfp.xcassets */; };
+		A296B9192087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B9172087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.beta.plist */; };
+		A296B91A2087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B9182087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist */; };
+		A296B91D2087A6F100F6AFBD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B91B2087A6F000F6AFBD /* GoogleService-Info.plist */; };
+		A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */; };
 		A2E5FA09208629B60099B989 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA07208629B50099B989 /* staging.plist */; };
 		A2E5FA0A208629B60099B989 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA08208629B50099B989 /* prod.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
@@ -1835,7 +1838,7 @@
 		A202EAC42085D2C70058F32C /* NSUserDefaults+OT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+OT.h"; sourceTree = "<group>"; };
 		A202EAC52085D2C70058F32C /* OTVersionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTVersionInfo.m; sourceTree = "<group>"; };
 		A202EAC62085D2C70058F32C /* NSError+OTErrorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OTErrorData.h"; sourceTree = "<group>"; };
-		A21D649F2085D6A400EF8E0E /* ConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationManager.swift; sourceTree = "<group>"; };
+		A21D649F2085D6A400EF8E0E /* EnvironmentConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentConfigurationManager.swift; sourceTree = "<group>"; };
 		A21D64A12085D6D200EF8E0E /* OTAppConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppConfiguration.h; sourceTree = "<group>"; };
 		A21D64A22085D6D200EF8E0E /* OTAppConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppConfiguration.m; sourceTree = "<group>"; };
 		A21D64A52085E8B400EF8E0E /* Platinia.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Platinia.gpx; sourceTree = "<group>"; };
@@ -1876,12 +1879,15 @@
 		A21D65A22085FDAA00EF8E0E /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		A21D65A32085FDAA00EF8E0E /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A296B8E920871FD800F6AFBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A296B8F02087207400F6AFBD /* pfp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "pfp-Info.plist"; sourceTree = "<group>"; };
 		A296B90D2087218700F6AFBD /* Entourage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Entourage.xcassets; sourceTree = "<group>"; };
 		A296B911208721CF00F6AFBD /* Pfp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Pfp.xcassets; sourceTree = "<group>"; };
+		A296B9172087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.pfpios.beta.plist"; sourceTree = "<group>"; };
+		A296B9182087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.pfpios.plist"; sourceTree = "<group>"; };
+		A296B91B2087A6F000F6AFBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.ios.beta.plist"; sourceTree = "<group>"; };
 		A2E5FA04208629480099B989 /* OTAmazonConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
 		A2E5FA05208629480099B989 /* OTMixpanelConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -2136,7 +2142,7 @@
 		A202E7BE2085CFC30058F32C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				A21D649F2085D6A400EF8E0E /* ConfigurationManager.swift */,
+				A21D649F2085D6A400EF8E0E /* EnvironmentConfigurationManager.swift */,
 				A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */,
 				A21D64A12085D6D200EF8E0E /* OTAppConfiguration.h */,
 				A21D64A22085D6D200EF8E0E /* OTAppConfiguration.m */,
@@ -3339,6 +3345,8 @@
 			isa = PBXGroup;
 			children = (
 				A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */,
+				A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */,
+				A296B91B2087A6F000F6AFBD /* GoogleService-Info.plist */,
 				A2E5FA04208629480099B989 /* OTAmazonConsts.h */,
 				A2E5FA05208629480099B989 /* OTMixpanelConsts.h */,
 				A2E5FA08208629B50099B989 /* prod.plist */,
@@ -3354,7 +3362,6 @@
 				A202E8092085D0FD0058F32C /* OTAppDelegate.m */,
 				A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */,
 				A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */,
-				A296B8E920871FD800F6AFBD /* GoogleService-Info.plist */,
 				A296B8EB20871FD800F6AFBD /* main.m */,
 				A21D65822085FDAA00EF8E0E /* Storyboards */,
 				A202E7BD2085CFC30058F32C /* Classes */,
@@ -3366,6 +3373,7 @@
 		A296B8E520871E0900F6AFBD /* pfp */ = {
 			isa = PBXGroup;
 			children = (
+				A296B9152087A6B900F6AFBD /* Settings */,
 				A296B9142087225200F6AFBD /* Classes */,
 				A296B910208721BF00F6AFBD /* Resources */,
 				A296B8F22087208200F6AFBD /* Supporting Files */,
@@ -3410,6 +3418,23 @@
 			children = (
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		A296B9152087A6B900F6AFBD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A296B9162087A6B900F6AFBD /* Environment */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A296B9162087A6B900F6AFBD /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				A296B9172087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.beta.plist */,
+				A296B9182087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist */,
+			);
+			path = Environment;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3599,10 +3624,12 @@
 				A296B90E2087218700F6AFBD /* Entourage.xcassets in Resources */,
 				A202E7CF2085CFC40058F32C /* logo_black.png in Resources */,
 				A202E7F32085CFC40058F32C /* SF-UI-Text-Medium.otf in Resources */,
+				A296B91D2087A6F100F6AFBD /* GoogleService-Info.plist in Resources */,
 				A21D65B02085FDAA00EF8E0E /* EntourageEditor.storyboard in Resources */,
 				A2E5FA0A208629B60099B989 /* prod.plist in Resources */,
 				A202E7F12085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */,
 				A202E7D72085CFC40058F32C /* SharedImages.xcassets in Resources */,
+				A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
 				A21D65B62085FDAA00EF8E0E /* Popup.storyboard in Resources */,
 				A21D65BE2085FDAA00EF8E0E /* Launch Screen.storyboard in Resources */,
 				A202E7D52085CFC40058F32C /* Localizable.strings in Resources */,
@@ -3654,6 +3681,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A296B89C20871CFC00F6AFBD /* CountryList.csv in Resources */,
+				A296B91A2087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist in Resources */,
 				A296B89D20871CFC00F6AFBD /* Main.storyboard in Resources */,
 				A296B89E20871CFC00F6AFBD /* PublicFeedItem.storyboard in Resources */,
 				A296B89F20871CFC00F6AFBD /* Rights.storyboard in Resources */,
@@ -3678,6 +3706,7 @@
 				A296B8B120871CFC00F6AFBD /* SF-UI-Text-SemiboldItalic.otf in Resources */,
 				A296B8B220871CFC00F6AFBD /* UserPicture.storyboard in Resources */,
 				A296B8B320871CFC00F6AFBD /* TourCreator.storyboard in Resources */,
+				A296B9192087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.beta.plist in Resources */,
 				A296B8B420871CFC00F6AFBD /* SF-UI-Text-Regular.otf in Resources */,
 				A296B8B620871CFC00F6AFBD /* JoinFeedItem.storyboard in Resources */,
 				A296B8B720871CFC00F6AFBD /* Bucharest.gpx in Resources */,
@@ -3705,7 +3734,6 @@
 				A296B8CD20871CFC00F6AFBD /* SolidarityGuideFilters.storyboard in Resources */,
 				A296B8CE20871CFC00F6AFBD /* logo_black.png in Resources */,
 				A296B8CF20871CFC00F6AFBD /* SF-UI-Text-Medium.otf in Resources */,
-				A296B8EC20871FD900F6AFBD /* GoogleService-Info.plist in Resources */,
 				A296B8D020871CFC00F6AFBD /* EntourageEditor.storyboard in Resources */,
 				A296B8D120871CFC00F6AFBD /* prod.plist in Resources */,
 				A296B8D220871CFC00F6AFBD /* SF-UI-Text-LightItalic.otf in Resources */,
@@ -4055,7 +4083,7 @@
 				A202EC2F2085D2C80058F32C /* UIStoryboard+entourage.m in Sources */,
 				A202EC192085D2C80058F32C /* OTPoiService.m in Sources */,
 				A202ED272085D2C80058F32C /* NSError+OTErrorData.m in Sources */,
-				A21D64A02085D6A400EF8E0E /* ConfigurationManager.swift in Sources */,
+				A21D64A02085D6A400EF8E0E /* EnvironmentConfigurationManager.swift in Sources */,
 				A202ED072085D2C80058F32C /* OTEntourageStateInfo.m in Sources */,
 				A202EB872085D2C80058F32C /* OTBarButtonView.m in Sources */,
 				A202EADD2085D2C70058F32C /* OTOrganization.m in Sources */,
@@ -4695,7 +4723,7 @@
 				A296B77C20871CFC00F6AFBD /* UIStoryboard+entourage.m in Sources */,
 				A296B77D20871CFC00F6AFBD /* OTPoiService.m in Sources */,
 				A296B77E20871CFC00F6AFBD /* NSError+OTErrorData.m in Sources */,
-				A296B77F20871CFC00F6AFBD /* ConfigurationManager.swift in Sources */,
+				A296B77F20871CFC00F6AFBD /* EnvironmentConfigurationManager.swift in Sources */,
 				A296B78020871CFC00F6AFBD /* OTEntourageStateInfo.m in Sources */,
 				A296B78120871CFC00F6AFBD /* OTBarButtonView.m in Sources */,
 				A296B8ED20871FD900F6AFBD /* main.m in Sources */,
@@ -5262,6 +5290,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 					BETA,
+					PFP,
 				);
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
@@ -5273,11 +5302,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_SWIFT_FLAGS = "-DBETA -DPFP";
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.pfp.beta;
 				PRODUCT_NAME = "Voi-Beta";
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BETA PFP";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5313,6 +5343,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 					BETA,
+					PFP,
 				);
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
@@ -5324,10 +5355,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_SWIFT_FLAGS = "-DBETA -DPFP";
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.pfp.beta;
 				PRODUCT_NAME = "Voi-Beta";
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PFP;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5360,6 +5393,14 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"$(inherited)",
+					"PB_FIELD_32BIT=1",
+					"PB_NO_PACKED_STRUCTS=1",
+					PFP,
+				);
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
@@ -5370,10 +5411,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_SWIFT_FLAGS = "-DPFP";
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.pfp.beta;
 				PRODUCT_NAME = "Voisin-Age";
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PFP;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

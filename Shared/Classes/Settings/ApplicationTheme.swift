@@ -20,4 +20,5 @@ class ApplicationTheme: NSObject {
     }
     
     @objc var navigationBarTintColor: UIColor = UIColor.white
+    @objc var backgroundThemeColor: UIColor = UIColor.appOrange()
 }

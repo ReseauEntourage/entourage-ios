@@ -14,12 +14,12 @@
 #import "OTAboutItem.h"
 #import "NSBundle+entourage.h"
 #import "UIColor+entourage.h"
-#import "entourage-Swift.h"
 #import "OTHTTPRequestManager.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTDeepLinkService.h"
 #import "OTSafariService.h"
+#import "OTAppConfiguration.h"
 
 @interface OTSocialViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -70,11 +70,14 @@
     OTAboutItem *aboutItem = [self aboutItemAtIndexPath:indexPath];
     if (aboutItem != nil) {
         cell.titleLabel.text = aboutItem.title;
+        
         if (indexPath.row == 0) {
-            if([[ConfigurationManager shared].environment isEqualToString:@"staging"])
+            if ([[OTAppConfiguration sharedInstance].environmentConfiguration runsOnProduction]) {
+                cell.extraLabel.text = [NSString stringWithFormat:@"v%@", [NSBundle currentVersion]];
+                
+            } else {
                 cell.extraLabel.text = [NSString stringWithFormat:@"v%@",[NSBundle fullCurrentVersion]];
-            else
-                cell.extraLabel.text = [NSString stringWithFormat:@"v%@",[NSBundle currentVersion]];
+            }
         }
     }
     return cell;
