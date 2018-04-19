@@ -32,6 +32,7 @@
 #import "OTCodeViewController.h"
 #import "OTAppDelegate.h"
 #import "A0SimpleKeychain.h"
+#import "UIStoryboard+entourage.h"
 
 #import "entourage-Swift.h"
 
@@ -88,44 +89,36 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
             }
         }
         else {
-            [self showUserProfile];
+            [OTAppConfiguration navigateToUserProfile];
         }
     }
     else
     {
-        [self showStartup];
+        [OTAppConfiguration navigateToStartupScreen];
     }
 }
 
 - (void)popToLogin {
-    OTPushNotificationsService *pnService = [OTPushNotificationsService new];
+    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
     [SVProgressHUD show];
+    
     [pnService clearTokenWithSuccess:^() {
         [SVProgressHUD dismiss];
-        [self clearUserData];
+        [OTAppConfiguration clearUserData];
+        [OTAppConfiguration navigateToStartupScreen];
+        
     } orFailure:^(NSError *error) {
         [SVProgressHUD dismiss];
-        [self clearUserData];
+        [OTAppConfiguration clearUserData];
+        [OTAppConfiguration navigateToStartupScreen];
     }];
-}
-
-- (void)showUserProfile
-{
-    [UIStoryboard showUserProfileDetails];
-}
-
-- (void)showStartup
-{
-    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
-    appDelegate.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [UIStoryboard showStartup];
 }
 
 - (void)updateBadge: (NSNotification *) notification {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[OTUnreadMessagesService new] totalCount].integerValue];
 }
 
-- (void)clearUserData {
++ (void)clearUserData {
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
     [[NSUserDefaults standardUserDefaults] setTourPoints:nil];
@@ -134,8 +127,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPassword];
-    
-    [UIStoryboard showStartup];
 }
 
 #pragma mark - Application State
@@ -207,6 +198,23 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         [[OTDeepLinkService new] handleUniversalLink:url];
     }
     return true;
+}
+
++ (void)navigateToAuthenticatedLandingScreen
+{
+    [UIStoryboard showSWRevealController];
+}
+
++ (void)navigateToUserProfile
+{
+    [UIStoryboard showUserProfileDetails];
+}
+
++ (void)navigateToStartupScreen
+{
+    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
+    appDelegate.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [UIStoryboard showStartup];
 }
 
 #pragma mark - App Configurations

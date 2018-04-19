@@ -103,10 +103,12 @@
         [SVProgressHUD dismiss];
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;
-        if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
-            [UIStoryboard showSWRevealController];
-        else
+        if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+            [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+        }
+        else {
             [self.onboardingNavigation nextFromLogin];
+        }
     } failure: ^(NSError *error) {
         [SVProgressHUD dismiss];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"tryAgain") message:OTLocalizedString(@"invalidPhoneNumberOrCode") preferredStyle:UIAlertControllerStyleAlert];

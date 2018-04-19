@@ -33,7 +33,6 @@
 + (void)applicationDidEnterBackground:(UIApplication *)application;
 + (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity
  restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler;
-
 + (void)handleAppLaunchFromNotificationCenter:(NSDictionary *)userInfo;
 + (BOOL)handleApplication:(UIApplication *)application openURL:(NSURL *)url;
 
@@ -42,6 +41,10 @@
 + (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler;
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
 + (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler;
+
++ (void)navigateToAuthenticatedLandingScreen;
++ (void)navigateToUserProfile;
++ (void)navigateToStartupScreen;
 
 + (BOOL)supportsTourFunctionality;
 + (BOOL)supportsSolidarityGuideFunctionality;

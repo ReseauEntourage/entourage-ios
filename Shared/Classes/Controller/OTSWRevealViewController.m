@@ -32,9 +32,10 @@
 {
 	[super viewDidAppear:animated];
     [self customizeSlideOutMenu];
+    
 	if (![[NSUserDefaults standardUserDefaults] currentUser])
 	{
-		[UIStoryboard showStartup];
+        [OTAppConfiguration navigateToStartupScreen];
 	}
 }
 

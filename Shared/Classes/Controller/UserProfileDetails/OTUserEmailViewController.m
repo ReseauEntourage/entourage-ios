@@ -42,11 +42,16 @@
     [super viewDidLoad];
 
     self.title = @"";
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    
     [self.emailTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    
     self.emailTextField.inputValidationChanged = ^(BOOL isValid) {
         self.continueButton.enabled = [self.emailTextField.text isValidEmail];
     };
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
     [self loadCurrentData];
     [self addIgnoreButton];
 }

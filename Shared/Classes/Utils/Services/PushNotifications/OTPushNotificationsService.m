@@ -96,8 +96,9 @@
         [rootVC dismissViewControllerAnimated:YES completion:nil];
         if ([rootVC isKindOfClass:[SWRevealViewController class]])
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationLocalTourConfirmation object:nil];
-        else
-            [UIStoryboard showSWRevealController];
+        else {
+            [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+        }
     }];
     [alert addAction:defaultAction];
     [alert addAction:openAction];

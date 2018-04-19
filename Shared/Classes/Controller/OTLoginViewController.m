@@ -159,7 +159,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [[NSUserDefaults standardUserDefaults] synchronize];
                                    if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
                                        [[OTPushNotificationsService new] promptUserForPushNotifications];
-                                       [UIStoryboard showSWRevealController];
+                                       [OTAppConfiguration navigateToAuthenticatedLandingScreen];
                                    }
                                    else {
                                        [self.onboardingNavigation nextFromLogin];
@@ -253,7 +253,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - OTUserNameViewController
 
 - (void)userNameDidChange {
-    [UIStoryboard showSWRevealController];
+    [OTAppConfiguration navigateToAuthenticatedLandingScreen];
 }
 
 #pragma mark - UIPickerViewDataSource

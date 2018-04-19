@@ -93,11 +93,12 @@
             [[OTDeepLinkService new] navigateTo:joinedInvitation.entourageId withType:nil];
             [[OTTutorialService new] showTutorial];
         }
-        else
-            [UIStoryboard showSWRevealController];
+        else {
+            [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+        }
     } withError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"automaticJoinFailedMessage")];
-        [UIStoryboard showSWRevealController];
+        [OTAppConfiguration navigateToAuthenticatedLandingScreen];
     }];
 }
 

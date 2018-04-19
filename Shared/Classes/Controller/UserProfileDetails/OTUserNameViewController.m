@@ -36,10 +36,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 
     self.title = @"";
     [self.firstNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.lastNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self loadCurrentData];
 
@@ -50,6 +53,8 @@
     self.lastNameTextField.inputValidationChanged = ^(BOOL isValid) {
         self.continueButton.enabled = [self formIsValid];
     };
+    
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
