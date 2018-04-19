@@ -1126,6 +1126,8 @@
 		A296B91A2087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B9182087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist */; };
 		A296B91D2087A6F100F6AFBD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B91B2087A6F000F6AFBD /* GoogleService-Info.plist */; };
 		A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */; };
+		A296B9232088D99700F6AFBD /* UIColor+pfp.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B9222088D99700F6AFBD /* UIColor+pfp.m */; };
+		A296B9242088D99700F6AFBD /* UIColor+pfp.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B9222088D99700F6AFBD /* UIColor+pfp.m */; };
 		A2E5FA09208629B60099B989 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA07208629B50099B989 /* staging.plist */; };
 		A2E5FA0A208629B60099B989 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA08208629B50099B989 /* prod.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
@@ -1888,6 +1890,8 @@
 		A296B9182087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.pfpios.plist"; sourceTree = "<group>"; };
 		A296B91B2087A6F000F6AFBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.ios.beta.plist"; sourceTree = "<group>"; };
+		A296B9212088D99700F6AFBD /* UIColor+pfp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+pfp.h"; sourceTree = "<group>"; };
+		A296B9222088D99700F6AFBD /* UIColor+pfp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+pfp.m"; sourceTree = "<group>"; };
 		A2E5FA04208629480099B989 /* OTAmazonConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
 		A2E5FA05208629480099B989 /* OTMixpanelConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -2726,6 +2730,8 @@
 				A202EA5D2085D2C60058F32C /* UIButton+entourage.m */,
 				A202E9852085D2C60058F32C /* UIColor+entourage.h */,
 				A202EA642085D2C60058F32C /* UIColor+entourage.m */,
+				A296B9212088D99700F6AFBD /* UIColor+pfp.h */,
+				A296B9222088D99700F6AFBD /* UIColor+pfp.m */,
 				A202E97D2085D2C60058F32C /* UIImage+processing.h */,
 				A202EA5E2085D2C60058F32C /* UIImage+processing.m */,
 				A202E9922085D2C60058F32C /* UIImageView+entourage.h */,
@@ -4193,6 +4199,7 @@
 				A202ED152085D2C80058F32C /* OTEditEncounterBehavior.m in Sources */,
 				A202EACD2085D2C70058F32C /* OTMenuItem.m in Sources */,
 				A202EB9F2085D2C80058F32C /* OTMeetingCalloutViewController.m in Sources */,
+				A296B9232088D99700F6AFBD /* UIColor+pfp.m in Sources */,
 				A202EB312085D2C80058F32C /* OTInviteByPhoneViewController.m in Sources */,
 				A202EBCB2085D2C80058F32C /* OTSWRevealViewController.m in Sources */,
 				A202EB412085D2C80058F32C /* OTJoinRejectedCell.m in Sources */,
@@ -4732,6 +4739,7 @@
 				A296B78420871CFC00F6AFBD /* OTSolidarityGuideFiltersViewController.m in Sources */,
 				A296B78520871CFC00F6AFBD /* UINavigationBar+Appearance.m in Sources */,
 				A296B78620871CFC00F6AFBD /* OTEntourageChangedHandler.m in Sources */,
+				A296B9242088D99700F6AFBD /* UIColor+pfp.m in Sources */,
 				A296B78720871CFC00F6AFBD /* OTSolidarityGuideFilterCell.m in Sources */,
 				A296B78820871CFC00F6AFBD /* OTMenuTableViewCell.m in Sources */,
 				A296B78920871CFC00F6AFBD /* OTUserEditPasswordViewController.m in Sources */,

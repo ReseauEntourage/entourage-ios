@@ -80,6 +80,9 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     };
     
     self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    self.countryCodePicker.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.passwordTextField indentRight];
@@ -207,6 +210,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
         UINavigationController *navController = segue.destinationViewController;
         OTLostCodeViewController *controller = (OTLostCodeViewController *)navController.viewControllers.firstObject;
         controller.codeDelegate = self;
+        controller.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
         long code = [self.countryCodePicker selectedRowInComponent:0];
         controller.countryCodeTextField.text = [self.pickerDataSource getCountryShortNameForRow:code];
         controller.codeCountry = [self.pickerDataSource getCountryCodeForRow:code];

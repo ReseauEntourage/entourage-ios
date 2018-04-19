@@ -15,5 +15,6 @@
     #import <Foundation/Foundation.h>
     #import "OTLogger.h"
     #import "OTAppConfiguration.h"
+    #import "UIColor+pfp.h"
 #endif
 

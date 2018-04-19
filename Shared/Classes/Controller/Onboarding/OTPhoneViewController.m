@@ -57,6 +57,8 @@
     self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];
     self.pickerDataSource = [OTCountryCodePickerViewDataSource sharedInstance];
     self.codeCountry = @"+33";
+    
+    self.countryCodePicker.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

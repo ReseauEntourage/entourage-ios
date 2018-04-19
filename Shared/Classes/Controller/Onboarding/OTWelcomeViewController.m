@@ -14,6 +14,7 @@
 #import "NSUserDefaults+OT.h"
 #import "NSAttributedString+OTBuilder.h"
 #import "OTLogger.h"
+#import "entourage-Swift.h"
 
 #define SHOW_LOGIN_SEGUE @"WelcomeLoginSegue"
 #define CONTINUE_ONBOARDING_SEGUE @"SegueOnboarding"
@@ -21,6 +22,7 @@
 @interface OTWelcomeViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextView *txtTerms;
+@property (nonatomic, weak) IBOutlet UIButton *continueButton;
 
 @end
 
@@ -28,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 
     self.title = @"";
     if(![NSUserDefaults standardUserDefaults].currentUser) {
@@ -37,6 +40,8 @@
             toLinkText:OTLocalizedString(@"terms_and_conditions_for_onboarding") 
             withLink:ABOUT_CGU_URL];
     }
+    
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

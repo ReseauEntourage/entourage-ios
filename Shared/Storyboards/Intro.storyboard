@@ -304,6 +304,7 @@
                     <navigationItem key="navigationItem" id="oc7-iw-O1J"/>
                     <connections>
                         <outlet property="loginButton" destination="mwv-HX-aYM" id="nPa-jz-z55"/>
+                        <outlet property="registerButton" destination="1oI-JN-xF6" id="YRW-Zx-IdR"/>
                         <segue destination="8Pa-2W-O1j" kind="show" identifier="SignUpSegue" id="UUz-OA-utW"/>
                         <segue destination="Gt1-cc-4DI" kind="show" identifier="LoginSegue" id="usp-d3-u4q"/>
                     </connections>
@@ -746,6 +747,7 @@ saisissez votre numéro de portable.</string>
                     <navigationItem key="navigationItem" id="kYV-5U-zfM"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="continueButton" destination="PRp-JX-WyY" id="igK-IC-bnS"/>
                         <outlet property="countryCodeTextField" destination="fMp-TQ-cvd" id="PLo-rR-4WH"/>
                         <outlet property="countryPicker" destination="lMx-Rd-gIG" id="Aij-0v-s4Z"/>
                         <outlet property="phoneTextField" destination="9pu-ww-5CV" id="aHD-Ur-6bi"/>
@@ -852,7 +854,7 @@ sur Entourage.</string>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wF4-5f-khB">
                                 <rect key="frame" x="12" y="198" width="351" height="388"/>
-                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Vous allez rejoindre une communauté de citoyens qui collaborent pour lutter contre l’exclusion sociale! 
 En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -893,6 +895,7 @@ En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez
                     </view>
                     <navigationItem key="navigationItem" id="3Xs-Xs-bSI"/>
                     <connections>
+                        <outlet property="continueButton" destination="8vj-nj-f39" id="JHO-46-BHf"/>
                         <outlet property="txtTerms" destination="wF4-5f-khB" id="Zjt-g3-JHE"/>
                         <segue destination="Gt1-cc-4DI" kind="show" identifier="WelcomeLoginSegue" id="GFk-L8-2yS"/>
                         <segue destination="L2Y-m3-WnX" kind="show" identifier="SegueOnboarding" id="YvZ-rG-WF2"/>
@@ -910,6 +913,6 @@ En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez
         <image name="whitePhone" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="usp-d3-u4q"/>
+        <segue reference="GFk-L8-2yS"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -23,11 +23,13 @@
 #import "NSError+OTErrorData.h"
 #import "OTCountryCodePickerViewDataSource.h"
 #import "JVFloatLabeledTextField.h"
+#import "entourage-Swift.h"
 
 @interface OTLostCodeViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
+@property (weak, nonatomic) IBOutlet UIButton *continueButton;
 
 @property (weak, nonatomic) OTCountryCodePickerViewDataSource *pickerDataSource;
 
@@ -42,6 +44,8 @@
     self.countryCodeTextField.floatingLabelTextColor = [UIColor clearColor];
     self.countryCodeTextField.floatingLabelActiveTextColor = [UIColor clearColor];
     self.codeCountry = @"+33";
+    self.countryPicker.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated
