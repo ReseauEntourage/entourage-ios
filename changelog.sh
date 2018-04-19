@@ -28,6 +28,7 @@ else
     # Get commit messages since previous tag
     changelog="$(git log --pretty=format:"* %s (%cd) by <%cn>" --date=short $previous_tag...$latest_tag)"
     echo "$changelog" >> $filename
+    echo  "Created file: $filename"
 fi
 
 # Output collected information
