@@ -27,6 +27,7 @@
 
 + (OTAppConfiguration*)sharedInstance;
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions;
+- (BOOL)isPFPApp;
 
 + (void)applicationDidBecomeActive:(UIApplication *)application;
 + (void)applicationWillEnterForeground:(UIApplication *)application;
