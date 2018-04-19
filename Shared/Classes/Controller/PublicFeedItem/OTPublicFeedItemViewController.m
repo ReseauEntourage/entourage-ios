@@ -23,6 +23,7 @@
 #import "OTConsts.h"
 #import "OTEntourage.h"
 #import "OTBarButtonView.h"
+#import "entourage-Swift.h"
 
 @interface OTPublicFeedItemViewController ()
 
@@ -66,7 +67,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
 }
 
 - (IBAction)showUserProfile:(id)sender {

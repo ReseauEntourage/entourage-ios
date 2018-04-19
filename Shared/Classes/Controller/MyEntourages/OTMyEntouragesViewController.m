@@ -26,6 +26,7 @@
 #import "OTConsts.h"
 #import "OTFeedItemFactory.h"
 #import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -70,7 +71,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -11,6 +11,7 @@
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"
 #import "OTTextWithCount.h"
+#import "entourage-Swift.h"
 
 @interface OTEditEntourageDescViewController ()
 
@@ -32,9 +33,8 @@
         else
             self.txtDescription.placeholder = OTLocalizedString(@"edit_contribution_desc");
     }
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(doneEdit)

@@ -13,6 +13,7 @@
 #import "OTConsts.h"
 #import "SVProgressHUD.h"
 #import "OTActivityProvider.h"
+#import "entourage-Swift.h"
 
 #define DISTANCE_ABOVE_NAVIGATION_BAR 65
 
@@ -61,7 +62,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     
     [self configureUIBarButtonItems];
     [self loadUrlWithString:self.urlString];

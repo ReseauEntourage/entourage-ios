@@ -33,6 +33,7 @@
 #import "OTEditEncounterBehavior.h"
 #import "OTMessageTableCellProviderBehavior.h"
 #import "OTBarButtonView.h"
+#import "entourage-Swift.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -96,7 +97,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"OTActiveFeedItemViewController"];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    
     [self reloadMessages];
 }
 

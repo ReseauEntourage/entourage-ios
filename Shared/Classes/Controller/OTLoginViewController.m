@@ -78,7 +78,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.passwordTextField.inputValidationChanged = ^(BOOL isValid) {
         self.continueButton.enabled = [self validateForm];
     };
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
 
     [self.passwordTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.passwordTextField indentRight];

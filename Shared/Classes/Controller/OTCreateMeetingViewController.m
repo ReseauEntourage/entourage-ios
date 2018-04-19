@@ -28,6 +28,7 @@
 #import "OTJSONResponseSerializer.h"
 #import "OTFeedItemFactory.h"
 #import "OTOngoingTourService.h"
+#import "entourage-Swift.h"
 
 #define PADDING 20.0f
 
@@ -48,8 +49,10 @@
 @implementation OTCreateMeetingViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
+    
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
     [self setupUI];
     if(!self.encounter && self.displayedOnceForTour) {
@@ -71,10 +74,10 @@
 
 - (void)setupUI {
     [self setupCloseModal];
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
-        UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
+
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                             withTarget:self
                                                              andAction:@selector(sendEncounter:)
                                                                andFont:@"SFUIText-Bold"

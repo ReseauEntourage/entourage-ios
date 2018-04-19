@@ -33,6 +33,8 @@
 #import "OTAppDelegate.h"
 #import "A0SimpleKeychain.h"
 
+#import "entourage-Swift.h"
+
 @import Firebase;
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
@@ -66,7 +68,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [self configurePushNotifcations];
     [self configureAnalyticsWithOptions:launchOptions];
     
-    [OTAppConfiguration configureUIAppearance];
+    [OTAppConfiguration configureApplicationAppearance];
     [OTAppConfiguration configurePhotoUploadingService];
     
     [self launchApplicatioWithOptions:launchOptions];
@@ -247,26 +249,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateBadgeCountNotification copy] object:nil];
 }
 
-+ (void)configureUIAppearance {
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
-    UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
-    
-    UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
-    UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
-    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0],
-                                                          NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
-    
-    UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
-    UIPageControl.appearance.currentPageIndicatorTintColor = [UIColor appGreyishBrownColor];
-    
-#if BETA
-    UINavigationBar.appearance.barTintColor = [UIColor redColor];
-    UINavigationBar.appearance.tintColor = [UIColor redColor];
-    UINavigationBar.appearance.backgroundColor = [UIColor redColor];
-#endif
-}
-
 + (void)configurePhotoUploadingService {
     [OTPictureUploadService configure];
 }
@@ -324,15 +306,34 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)configureApplicationAppearance
 {
-    UIColor *navigationBarTintColor = [UIColor whiteColor];
+    UIColor *primaryNavigationBarTintColor = [UIColor whiteColor];
+    UIColor *secondaryNavigationBarTintColor = [UIColor appOrangeColor];
     UIColor *backgroundThemeColor = [UIColor appOrangeColor];
     
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        backgroundThemeColor = [UIColor blueColor];
+        secondaryNavigationBarTintColor = [UIColor blueColor];
+    }
+    
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.runsOnStaging) {
-        navigationBarTintColor = [UIColor appOrangeColor];
+        primaryNavigationBarTintColor = [UIColor redColor];
     }
 
-    [[ApplicationTheme shared] setNavigationBarTintColor:navigationBarTintColor];
+    [[ApplicationTheme shared] setPrimaryNavigationBarTintColor:primaryNavigationBarTintColor];
+    [[ApplicationTheme shared] setSecondaryNavigationBarTintColor:secondaryNavigationBarTintColor];
     [[ApplicationTheme shared] setBackgroundThemeColor:backgroundThemeColor];
+    
+    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
+    UINavigationBar.appearance.barTintColor = primaryNavigationBarTintColor;
+    UINavigationBar.appearance.backgroundColor = primaryNavigationBarTintColor;
+    
+    UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
+    UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
+    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0],
+                                                          NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
+    
+    UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
+    UIPageControl.appearance.currentPageIndicatorTintColor = [UIColor appGreyishBrownColor];
 }
 
 #pragma - Application flows

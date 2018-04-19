@@ -17,6 +17,7 @@
 #import "NSNotification+entourage.h"
 #import "UIBarButtonItem+factory.h"
 #import "OTMapView.h"
+#import "entourage-Swift.h"
 
 #define SEARCHBAR_FRAME CGRectMake(16, 80, [UIScreen mainScreen].bounds.size.width-32, 48)
 #define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
@@ -39,9 +40,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(saveNewLocation)

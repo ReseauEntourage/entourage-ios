@@ -20,6 +20,7 @@
 #import "OTDeepLinkService.h"
 #import "OTSafariService.h"
 #import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @interface OTSocialViewController () <UITableViewDelegate, UITableViewDataSource>
 

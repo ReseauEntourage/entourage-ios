@@ -15,6 +15,7 @@
 #import "OTPhotoPickerBehavior.h"
 #import "UIBarButtonItem+factory.h"
 #import "NSUserDefaults+OT.h"
+#import "entourage-Swift.h"
 
 #define PREVIEW_PICTURE_SEGUE @"PreviewPictureSegue"
 
@@ -37,10 +38,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"Screen09_6ChoosePhotoView"];
-    if ([NSUserDefaults standardUserDefaults].isTutorialCompleted)
-        self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-    else
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    }
+    else {
+        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -14,5 +14,6 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "OTLogger.h"
+    #import "OTAppConfiguration.h"
 #endif
 

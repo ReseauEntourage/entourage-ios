@@ -19,6 +19,7 @@ class ApplicationTheme: NSObject {
         return sharedInstance
     }
     
-    @objc var navigationBarTintColor: UIColor = UIColor.white
+    @objc var primaryNavigationBarTintColor: UIColor = UIColor.white
+    @objc var secondaryNavigationBarTintColor: UIColor = UIColor.appOrange()
     @objc var backgroundThemeColor: UIColor = UIColor.appOrange()
 }

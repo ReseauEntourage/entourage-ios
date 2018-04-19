@@ -11,6 +11,7 @@
 #import "NSUserDefaults+OT.h"
 #import "UINavigationController+entourage.h"
 #import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @interface OTStartupViewController ()
 
@@ -26,7 +27,8 @@
     // Do any additional setup after loading the view.
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
     [self.navigationController presentTransparentNavigationBar];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     
     self.title = @"";
     

@@ -11,6 +11,7 @@
 #import "UIColor+entourage.h"
 #import "UIBarButtonItem+factory.h"
 #import "OTConsts.h"
+#import "entourage-Swift.h"
 
 @interface OTEditEntourageTitleViewController () <TextWithCountDelegate>
 
@@ -32,9 +33,9 @@
         if([self.currentEntourage.type isEqualToString:@"ask_for_help"])
             self.txtTitle.placeholder = OTLocalizedString(@"edit_demand_title");
     }
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(doneEdit)

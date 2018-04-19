@@ -12,6 +12,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 // TODO: Lazar
 #define PICTURE_BUCKET @"entourage-avatars-production-thumb"

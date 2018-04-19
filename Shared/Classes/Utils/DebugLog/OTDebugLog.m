@@ -10,6 +10,7 @@
 #import "SVProgressHUD.h"
 #import "OTDeepLinkService.h"
 #import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @import MessageUI;
 

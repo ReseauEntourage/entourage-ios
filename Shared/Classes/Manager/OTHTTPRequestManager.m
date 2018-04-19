@@ -12,6 +12,7 @@
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @implementation OTHTTPRequestManager
 

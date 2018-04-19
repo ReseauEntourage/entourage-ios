@@ -33,6 +33,7 @@
 #import "OTAboutViewController.h"
 #import "OTSafariService.h"
 #import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 #define HEADER_CELL_INDEX 7
 #define LOG_OUT_CELL_INDEX 8
@@ -94,7 +95,9 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [self.modifyLabel underline];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableHeaderView = self.headerView;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSupportedPartner:) name:@kNotificationSupportedPartnerUpdated object:nil];
 }

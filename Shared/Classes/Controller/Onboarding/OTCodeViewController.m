@@ -50,7 +50,9 @@
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
     if([NSUserDefaults standardUserDefaults].currentUser) {
         [NSUserDefaults standardUserDefaults].temporaryUser = [NSUserDefaults standardUserDefaults].currentUser;
         [NSUserDefaults standardUserDefaults].currentUser = nil;

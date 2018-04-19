@@ -17,7 +17,8 @@
 #import <Crashlytics/Crashlytics.h>
 #import "Mixpanel/Mixpanel.h"
 #import "OTConsts.h"
-#import "entourage-Swift.h"
+
+@class EnvironmentConfigurationManager;
 
 @interface OTAppConfiguration : NSObject
 

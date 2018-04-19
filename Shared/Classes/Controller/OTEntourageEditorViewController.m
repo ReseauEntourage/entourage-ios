@@ -20,6 +20,7 @@
 #import "OTEntourageDisclaimerBehavior.h"
 #import "OTEditEntourageTableSource.h"
 #import "OTEditEntourageNavigationBehavior.h"
+#import "entourage-Swift.h"
 
 @interface OTEntourageEditorViewController()
 
@@ -37,9 +38,9 @@
     [self setupData];
     [self.editTableSource configureWith:self.entourage];
     [self setupCloseModal];
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(sendEntourage:)
