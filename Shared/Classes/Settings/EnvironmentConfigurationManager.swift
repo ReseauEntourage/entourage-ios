@@ -14,6 +14,11 @@ struct UserStorageKey {
     static let amazonPictureFolder = "AmazonPictureFolder"
 }
 
+@objc enum ApplicationType:Int {
+    case entourage = 0
+    case voisinAge = 1
+}
+
 @objc class EnvironmentConfigurationManager: NSObject {
     
     private var plist: NSDictionary?
@@ -21,11 +26,16 @@ struct UserStorageKey {
     private let prodEnvironmentName: String = "prod"
     
     @objc var environmentName: String = ""
+    @objc var applicationType: ApplicationType = ApplicationType.entourage
     
     @objc convenience init(bundleId:String) {
         self.init()
         self.environmentName = self.plistFileName(bundleId: bundleId)
         self.plist = EnvironmentConfigurationManager.plist(name: self.environmentName)
+        
+    #if PFP
+        self.applicationType = ApplicationType.voisinAge
+    #endif
     }
     
     @objc var amazonAccessKey: NSString {
@@ -62,6 +72,10 @@ struct UserStorageKey {
     
     @objc var runsOnProduction: Bool {
         return self.environmentName == stagingEnvironmentName
+    }
+    
+    @objc var runsOnStaging: Bool {
+        return self.runsOnProduction == false
     }
     
     private func configuration(forKey: String) -> NSString {

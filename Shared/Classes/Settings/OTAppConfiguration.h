@@ -42,4 +42,7 @@
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
 + (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler;
 
++ (BOOL)supportsTourFunctionality;
++ (BOOL)supportsSolidarityGuideFunctionality;
+
 @end

@@ -326,12 +326,33 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 {
     UIColor *navigationBarTintColor = [UIColor whiteColor];
     UIColor *backgroundThemeColor = [UIColor appOrangeColor];
-#if BETA
-    navigationBarTintColor = [UIColor appOrangeColor];
-#endif
     
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.runsOnStaging) {
+        navigationBarTintColor = [UIColor appOrangeColor];
+    }
+
     [[ApplicationTheme shared] setNavigationBarTintColor:navigationBarTintColor];
     [[ApplicationTheme shared] setBackgroundThemeColor:backgroundThemeColor];
+}
+
+#pragma - Application flows
+
++ (BOOL)supportsTourFunctionality
+{
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)supportsSolidarityGuideFunctionality
+{
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end
