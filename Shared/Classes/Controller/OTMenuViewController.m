@@ -35,10 +35,10 @@
 #import "OTAppConfiguration.h"
 #import "entourage-Swift.h"
 
-#define HEADER_CELL_INDEX 7
-#define LOG_OUT_CELL_INDEX 8
+#define HEADER_CELL_INDEX [OTAppConfiguration sharedInstance].isPFPApp ? 6 : 7
+#define LOG_OUT_CELL_INDEX [OTAppConfiguration sharedInstance].isPFPApp ? 7 : 8
 #define SOLIDARITY_GUIDE_INDEX 2
-#define DONATION_CELL_INDEX 3
+#define DONATION_CELL_INDEX [OTAppConfiguration sharedInstance].isPFPApp ? 2 : 3
 
 @import MessageUI;
 
@@ -123,7 +123,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.menuItems.count;
+    return self.menuItems.count - 1 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -284,7 +284,9 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
    
     OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide")
                                                                iconName:@"mapPin"];
-    [menuItems addObject:itemSolidarityGuide];
+    if(![OTAppConfiguration sharedInstance].isPFPApp) {
+        [menuItems addObject:itemSolidarityGuide];
+    }
     
     OTMenuItem *itemDon = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_make_donation")
                                                    iconName:@"heartNofillWhite"
@@ -296,7 +298,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                                                  segueIdentifier:OTMenuViewControllerSegueMenuSocialIdentifier];
     [menuItems addObject:itemAtd];
     
-   // NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
     OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart")
                                                      iconName: @"chart"
                                                    identifier:CHARTE_LINK_ID];

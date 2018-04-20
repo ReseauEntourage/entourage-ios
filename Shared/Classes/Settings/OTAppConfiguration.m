@@ -64,10 +64,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return self;
 }
 
-- (BOOL)isPFPApp {
-    return true;
-}
-
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions {
 
     [self configurePushNotifcations];
