@@ -12,8 +12,8 @@ class OnBoardingTextField: JVFloatLabeledTextField, Validable {
     super.awakeFromNib()
 
     if let placeholder = placeholder {
-      let attributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.appTextFieldPlaceholder(),
-                        NSAttributedStringKey.font: UIColor.appTextFieldPlaceholderFont()] as? [NSAttributedStringKey : Any]
+      let attributes = [NSAttributedStringKey.foregroundColor: UIColor.appTextFieldPlaceholder(),
+                        NSAttributedStringKey.font: UIColor.appTextFieldPlaceholderFont()] as [NSAttributedStringKey : Any]
       attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
     }
     registerForNotifications()
@@ -52,7 +52,7 @@ class OnBoardingNumberTextField: NBTextField {
 
     if let placeholder = placeholder {
       let attributes = [NSAttributedStringKey.foregroundColor: UIColor.appTextFieldPlaceholder(),
-                        NSAttributedStringKey.font: UIColor.appTextFieldPlaceholderFont()] as [NSAttributedStringKey : Any]?
+                        NSAttributedStringKey.font: UIColor.appTextFieldPlaceholderFont()] as [NSAttributedStringKey : Any]
       attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
     }
   }

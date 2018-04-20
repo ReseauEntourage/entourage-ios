@@ -1128,6 +1128,8 @@
 		A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */; };
 		A296B9232088D99700F6AFBD /* UIColor+pfp.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B9222088D99700F6AFBD /* UIColor+pfp.m */; };
 		A296B9242088D99700F6AFBD /* UIColor+pfp.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B9222088D99700F6AFBD /* UIColor+pfp.m */; };
+		A296B92A2089DE4300F6AFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B8EB20871FD800F6AFBD /* main.m */; };
+		A296B92B2089DE4400F6AFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B8EB20871FD800F6AFBD /* main.m */; };
 		A2E5FA09208629B60099B989 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA07208629B50099B989 /* staging.plist */; };
 		A2E5FA0A208629B60099B989 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA08208629B50099B989 /* prod.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
@@ -2491,16 +2493,16 @@
 		A202E8A82085D2C40058F32C /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				A202E8A92085D2C40058F32C /* OTTutorial3ViewController.h */,
-				A202E8AA2085D2C40058F32C /* OTTutorialViewController.m */,
-				A202E8AB2085D2C40058F32C /* OTTutorial4ViewController.h */,
+				A202E8B12085D2C40058F32C /* OTTutorial1ViewController.h */,
 				A202E8AC2085D2C40058F32C /* OTTutorial1ViewController.m */,
 				A202E8AD2085D2C40058F32C /* OTTutorial2ViewController.h */,
-				A202E8AE2085D2C40058F32C /* OTTutorialViewController.h */,
-				A202E8AF2085D2C40058F32C /* OTTutorial3ViewController.m */,
-				A202E8B02085D2C40058F32C /* OTTutorial4ViewController.m */,
-				A202E8B12085D2C40058F32C /* OTTutorial1ViewController.h */,
 				A202E8B22085D2C40058F32C /* OTTutorial2ViewController.m */,
+				A202E8A92085D2C40058F32C /* OTTutorial3ViewController.h */,
+				A202E8AF2085D2C40058F32C /* OTTutorial3ViewController.m */,
+				A202E8AB2085D2C40058F32C /* OTTutorial4ViewController.h */,
+				A202E8B02085D2C40058F32C /* OTTutorial4ViewController.m */,
+				A202E8AE2085D2C40058F32C /* OTTutorialViewController.h */,
+				A202E8AA2085D2C40058F32C /* OTTutorialViewController.m */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -3531,7 +3533,7 @@
 				TargetAttributes = {
 					6B92CA9D19A7461C004E8C9B = {
 						DevelopmentTeam = RT7X9LLTN6;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -4250,6 +4252,7 @@
 				A202EB692085D2C80058F32C /* OTDisclaimerViewController.m in Sources */,
 				A202EC512085D2C80058F32C /* OTCustomSegmentedBehavior.m in Sources */,
 				A202EAEF2085D2C70058F32C /* OTUser.m in Sources */,
+				A296B92A2089DE4300F6AFBD /* main.m in Sources */,
 				A202EAD52085D2C70058F32C /* OTEntourage.m in Sources */,
 				A202ECD52085D2C80058F32C /* OTGuideInfoBehavior.m in Sources */,
 				A202EB6F2085D2C80058F32C /* OTUserPictureViewController.m in Sources */,
@@ -4686,6 +4689,7 @@
 				A202ECA22085D2C80058F32C /* OTPublicInfoDataSource.m in Sources */,
 				A202EBB62085D2C80058F32C /* OTAboutViewController.m in Sources */,
 				A202EB4C2085D2C80058F32C /* OTInviteContactsViewController.m in Sources */,
+				A296B92B2089DE4400F6AFBD /* main.m in Sources */,
 				A202EBA42085D2C80058F32C /* OTSocialViewController.m in Sources */,
 				A202ECE02085D2C80058F32C /* UIColor+entourage.m in Sources */,
 			);
@@ -5090,6 +5094,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DBETA";
 				SDKROOT = iphoneos;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -5137,6 +5142,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5162,7 +5168,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
+				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -5186,7 +5192,8 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5213,7 +5220,7 @@
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
+				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
@@ -5231,7 +5238,8 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5248,7 +5256,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
+				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -5256,6 +5264,7 @@
 				INFOPLIST_FILE = "entourageTests/entourageTests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -5272,10 +5281,11 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
+				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
 				INFOPLIST_FILE = "entourageTests/entourageTests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -5327,7 +5337,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -5380,7 +5390,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -5436,7 +5446,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -5495,6 +5505,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DBETA";
 				SDKROOT = iphoneos;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Beta;
@@ -5519,7 +5530,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
+				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -5542,7 +5553,8 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5559,7 +5571,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "entourage/entourage-Prefix.pch";
+				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -5567,6 +5579,7 @@
 				INFOPLIST_FILE = "entourageTests/entourageTests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
 				WRAPPER_EXTENSION = xctest;
 			};
