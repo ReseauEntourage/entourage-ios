@@ -723,7 +723,7 @@
 		A21D65BB2085FDAA00EF8E0E /* MapOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D659A2085FDAA00EF8E0E /* MapOptions.storyboard */; };
 		A21D65BC2085FDAA00EF8E0E /* UserProfileDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D659B2085FDAA00EF8E0E /* UserProfileDetails.storyboard */; };
 		A21D65BD2085FDAA00EF8E0E /* ActiveFeedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D659C2085FDAA00EF8E0E /* ActiveFeedItem.storyboard */; };
-		A21D65BE2085FDAA00EF8E0E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D659D2085FDAA00EF8E0E /* Launch Screen.storyboard */; };
+		A21D65BE2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D659D2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard */; };
 		A21D65BF2085FDAA00EF8E0E /* GuideSolidarity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D659E2085FDAA00EF8E0E /* GuideSolidarity.storyboard */; };
 		A21D65C02085FDAA00EF8E0E /* FeedChangeOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D659F2085FDAA00EF8E0E /* FeedChangeOptions.storyboard */; };
 		A21D65C12085FDAA00EF8E0E /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A02085FDAA00EF8E0E /* Settings.storyboard */; };
@@ -1111,7 +1111,7 @@
 		A296B8D220871CFC00F6AFBD /* SF-UI-Text-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B62085CFC20058F32C /* SF-UI-Text-LightItalic.otf */; };
 		A296B8D320871CFC00F6AFBD /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A62085CFC20058F32C /* SharedImages.xcassets */; };
 		A296B8D420871CFC00F6AFBD /* Popup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65952085FDAA00EF8E0E /* Popup.storyboard */; };
-		A296B8D520871CFC00F6AFBD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D659D2085FDAA00EF8E0E /* Launch Screen.storyboard */; };
+		A296B8D520871CFC00F6AFBD /* EntourageLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D659D2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard */; };
 		A296B8D620871CFC00F6AFBD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A52085CFC20058F32C /* Localizable.strings */; };
 		A296B8D720871CFC00F6AFBD /* categoryJson.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A72085CFC20058F32C /* categoryJson.json */; };
 		A296B8D820871CFC00F6AFBD /* Platinia.gpx in Resources */ = {isa = PBXBuildFile; fileRef = A21D64A52085E8B400EF8E0E /* Platinia.gpx */; };
@@ -1130,6 +1130,7 @@
 		A296B9242088D99700F6AFBD /* UIColor+pfp.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B9222088D99700F6AFBD /* UIColor+pfp.m */; };
 		A296B92A2089DE4300F6AFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B8EB20871FD800F6AFBD /* main.m */; };
 		A296B92B2089DE4400F6AFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B8EB20871FD800F6AFBD /* main.m */; };
+		A296B92D208A08E800F6AFBD /* PfpLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A296B92C208A08E800F6AFBD /* PfpLaunchScreen.storyboard */; };
 		A2E5FA09208629B60099B989 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA07208629B50099B989 /* staging.plist */; };
 		A2E5FA0A208629B60099B989 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA08208629B50099B989 /* prod.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
@@ -1875,7 +1876,7 @@
 		A21D659A2085FDAA00EF8E0E /* MapOptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapOptions.storyboard; sourceTree = "<group>"; };
 		A21D659B2085FDAA00EF8E0E /* UserProfileDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfileDetails.storyboard; sourceTree = "<group>"; };
 		A21D659C2085FDAA00EF8E0E /* ActiveFeedItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ActiveFeedItem.storyboard; sourceTree = "<group>"; };
-		A21D659D2085FDAA00EF8E0E /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		A21D659D2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EntourageLaunchScreen.storyboard; sourceTree = "<group>"; };
 		A21D659E2085FDAA00EF8E0E /* GuideSolidarity.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GuideSolidarity.storyboard; sourceTree = "<group>"; };
 		A21D659F2085FDAA00EF8E0E /* FeedChangeOptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedChangeOptions.storyboard; sourceTree = "<group>"; };
 		A21D65A02085FDAA00EF8E0E /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -1894,6 +1895,7 @@
 		A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.ios.beta.plist"; sourceTree = "<group>"; };
 		A296B9212088D99700F6AFBD /* UIColor+pfp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+pfp.h"; sourceTree = "<group>"; };
 		A296B9222088D99700F6AFBD /* UIColor+pfp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+pfp.m"; sourceTree = "<group>"; };
+		A296B92C208A08E800F6AFBD /* PfpLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PfpLaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2E5FA04208629480099B989 /* OTAmazonConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
 		A2E5FA05208629480099B989 /* OTMixpanelConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -3330,7 +3332,7 @@
 				A21D659A2085FDAA00EF8E0E /* MapOptions.storyboard */,
 				A21D659B2085FDAA00EF8E0E /* UserProfileDetails.storyboard */,
 				A21D659C2085FDAA00EF8E0E /* ActiveFeedItem.storyboard */,
-				A21D659D2085FDAA00EF8E0E /* Launch Screen.storyboard */,
+				A21D659D2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard */,
 				A21D659E2085FDAA00EF8E0E /* GuideSolidarity.storyboard */,
 				A21D659F2085FDAA00EF8E0E /* FeedChangeOptions.storyboard */,
 				A21D65A02085FDAA00EF8E0E /* Settings.storyboard */,
@@ -3449,6 +3451,7 @@
 		A296B927208924E600F6AFBD /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				A296B92C208A08E800F6AFBD /* PfpLaunchScreen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -3647,7 +3650,7 @@
 				A202E7D72085CFC40058F32C /* SharedImages.xcassets in Resources */,
 				A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
 				A21D65B62085FDAA00EF8E0E /* Popup.storyboard in Resources */,
-				A21D65BE2085FDAA00EF8E0E /* Launch Screen.storyboard in Resources */,
+				A21D65BE2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard in Resources */,
 				A202E7D52085CFC40058F32C /* Localizable.strings in Resources */,
 				A202E7D92085CFC40058F32C /* categoryJson.json in Resources */,
 				A21D64AA2085E8B400EF8E0E /* Platinia.gpx in Resources */,
@@ -3755,12 +3758,13 @@
 				A296B8D220871CFC00F6AFBD /* SF-UI-Text-LightItalic.otf in Resources */,
 				A296B8D320871CFC00F6AFBD /* SharedImages.xcassets in Resources */,
 				A296B8D420871CFC00F6AFBD /* Popup.storyboard in Resources */,
-				A296B8D520871CFC00F6AFBD /* Launch Screen.storyboard in Resources */,
+				A296B8D520871CFC00F6AFBD /* EntourageLaunchScreen.storyboard in Resources */,
 				A296B8D620871CFC00F6AFBD /* Localizable.strings in Resources */,
 				A296B8D720871CFC00F6AFBD /* categoryJson.json in Resources */,
 				A296B8D820871CFC00F6AFBD /* Platinia.gpx in Resources */,
 				A296B8D920871CFC00F6AFBD /* categories.json in Resources */,
 				A296B8DA20871CFC00F6AFBD /* Nowhere.gpx in Resources */,
+				A296B92D208A08E800F6AFBD /* PfpLaunchScreen.storyboard in Resources */,
 				A296B8DB20871CFC00F6AFBD /* GuideSolidarity.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

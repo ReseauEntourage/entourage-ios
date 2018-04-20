@@ -387,7 +387,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UITabBar.appearance.barTintColor = backgroundThemeColor;
 }
 
-#pragma - Application flows
+#pragma mark - Application features/options
 
 + (BOOL)supportsTourFunctionality
 {
@@ -413,6 +413,23 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     return YES;
+}
+
++ (BOOL)isMVP {
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (UIImage*)applicationLogo
+{
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        return [UIImage imageNamed:@"pfp-logo"];;
+    }
+    
+    return [UIImage imageNamed:@"entourageLogo"];
 }
 
 @end

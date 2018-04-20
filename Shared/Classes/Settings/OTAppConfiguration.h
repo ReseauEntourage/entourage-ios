@@ -49,5 +49,7 @@
 + (BOOL)isGeolocationMandatory;
 + (BOOL)supportsTourFunctionality;
 + (BOOL)supportsSolidarityGuideFunctionality;
++ (BOOL)isMVP;
++ (UIImage*)applicationLogo;
 
 @end

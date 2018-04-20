@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *betaButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImage;
+@property (weak, nonatomic) IBOutlet UILabel *logoTitle;
 
 @end
 
@@ -31,12 +34,28 @@
     
     self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     
+    [self.loginButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
     [self.registerButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
     self.title = @"";
     
     self.loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.loginButton.layer.borderWidth = 1.5f;
+    
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        self.registerButton.hidden = YES;
+        
+        self.loginButton.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+        [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        self.registerButton.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+        [self.registerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        self.bgImage.hidden = YES;
+        self.logoTitle.hidden = YES;
+        self.logo.image = [OTAppConfiguration applicationLogo];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
