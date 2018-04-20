@@ -81,6 +81,8 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+     self.navigationItem.title = OTLocalizedString(@"myProfile");
 
     [self.tapNameBehavior initialize];
     [self.tapModifyBehavior initialize];
@@ -89,7 +91,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 	self.menuItems = [self createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
-    self.title = OTLocalizedString(@"myProfile");
+   
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
     [self createBackFrontMenuButton];
     [self.modifyLabel underline];

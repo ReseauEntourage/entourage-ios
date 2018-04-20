@@ -33,6 +33,7 @@
 #import "OTAppDelegate.h"
 #import "A0SimpleKeychain.h"
 #import "UIStoryboard+entourage.h"
+#import "OTMenuViewController.h"
 
 #import "entourage-Swift.h"
 
@@ -84,8 +85,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [[OTLocationManager sharedInstance] startLocationUpdates];
             NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-            if(pnData) {
+            if (pnData) {
                 [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
+            } else {
+                [OTAppConfiguration navigateToAuthenticatedLandingScreen];
             }
         }
         else {
@@ -173,17 +176,18 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (BOOL)handleApplication:(UIApplication *)application openURL:(NSURL *)url
 {
-#if BETA
-    if ([[url scheme] isEqualToString:@"entourage-staging"]) {
-        [[OTDeepLinkService new] handleDeepLink:url];
-        return YES;
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.runsOnStaging) {
+        if ([[url scheme] isEqualToString:@"entourage-staging"]) {
+            [[OTDeepLinkService new] handleDeepLink:url];
+            return YES;
+        }
+    } else {
+        if ([[url scheme] isEqualToString:@"entourage"]) {
+            [[OTDeepLinkService new] handleDeepLink:url];
+            return YES;
+        }
     }
-#else
-    if ([[url scheme] isEqualToString:@"entourage"]) {
-        [[OTDeepLinkService new] handleDeepLink:url];
-        return YES;
-    }
-#endif
+
     return NO;
 }
 
@@ -202,6 +206,16 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)navigateToAuthenticatedLandingScreen
 {
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        
+        OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
+        UIWindow *window = [appDelegate window];
+        window.rootViewController = [OTAppConfiguration configureMainTabBar];
+        [window makeKeyAndVisible];
+        
+        return;
+    }
+    
     [UIStoryboard showSWRevealController];
 }
 
@@ -259,6 +273,28 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)configurePhotoUploadingService {
     [OTPictureUploadService configure];
+}
+
++ (UITabBarController*)configureMainTabBar
+{
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    // Menu tab
+    OTMenuViewController *menuViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMenuViewControllerIdentifier"];
+    UINavigationController *menuNavController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
+    menuNavController.tabBarItem.title = @"menu";
+    menuNavController.tabBarItem.image = [UIImage imageNamed:@"menu"];
+    
+    // Proximity Map Tab
+    OTMainViewController *mainMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
+    UINavigationController *mainMapNavController = [[UINavigationController alloc] initWithRootViewController:mainMapViewController];
+    mainMapNavController.tabBarItem.title = @"à proximité";
+    mainMapNavController.tabBarItem.image = [UIImage imageNamed:@"guide"];
+    
+    tabBarController.viewControllers = @[mainMapNavController, menuNavController];
+
+    return tabBarController;
 }
 
 #pragma mark - Push notifications
@@ -342,6 +378,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     
     UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
     UIPageControl.appearance.currentPageIndicatorTintColor = [UIColor appGreyishBrownColor];
+    
+    UITabBar.appearance.backgroundColor = backgroundThemeColor;
+    UITabBar.appearance.tintColor = primaryNavigationBarTintColor;
+    UITabBar.appearance.barTintColor = backgroundThemeColor;
 }
 
 #pragma - Application flows
