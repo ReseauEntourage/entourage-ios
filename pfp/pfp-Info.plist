@@ -34,10 +34,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>social.entourage.entourageios</string>
+			<string>social.entourage.entourageios.pfp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>entourage</string>
+				<string>pfp-prod</string>
 			</array>
 		</dict>
 		<dict>
@@ -50,10 +50,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>social.entourage.entourageios.beta</string>
+			<string>social.entourage.entourageios.pfp.beta</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>entourage-staging</string>
+				<string>pfp-prepod</string>
 			</array>
 		</dict>
 	</array>

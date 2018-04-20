@@ -26,6 +26,7 @@ struct UserStorageKey {
     private let prodEnvironmentName: String = "prod"
     
     @objc var environmentName: String = ""
+    @objc var awsPictureBucket: String = "entourage-avatars-production-thumb"
     @objc var applicationType: ApplicationType = ApplicationType.entourage
     
     @objc convenience init(bundleId:String) {
@@ -35,6 +36,7 @@ struct UserStorageKey {
         
     #if PFP
         self.applicationType = ApplicationType.voisinAge
+        self.awsPictureBucket = "entourage-avatars-production-thumb/pfp"
     #endif
     }
     

@@ -5438,7 +5438,7 @@
 					"$(PROJECT_DIR)",
 				);
 				OTHER_SWIFT_FLAGS = "-DPFP";
-				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.pfp.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.pfp;
 				PRODUCT_NAME = "Voisin-Age";
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";

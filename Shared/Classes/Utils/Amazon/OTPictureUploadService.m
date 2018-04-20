@@ -14,9 +14,6 @@
 #import "OTAppConfiguration.h"
 #import "entourage-Swift.h"
 
-// TODO: Lazar
-#define PICTURE_BUCKET @"entourage-avatars-production-thumb"
-
 @implementation OTPictureUploadService
 
 + (void)configure {
@@ -46,7 +43,7 @@
 
 - (AWSS3TransferManagerUploadRequest *)buildUploadRequestFor:(NSURL *)fileUri withName:(NSString *)fileName {
     AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
-    uploadRequest.bucket = PICTURE_BUCKET;
+    uploadRequest.bucket = [OTAppConfiguration sharedInstance].environmentConfiguration.awsPictureBucket;
     NSString *amazonPictureFolder = [OTAppConfiguration sharedInstance].environmentConfiguration.amazonPictureFolder;
     uploadRequest.key = [amazonPictureFolder stringByAppendingString:fileName];
     uploadRequest.body = fileUri;
