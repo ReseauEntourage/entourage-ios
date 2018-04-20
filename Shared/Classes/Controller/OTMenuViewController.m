@@ -35,10 +35,10 @@
 #import "OTAppConfiguration.h"
 #import "entourage-Swift.h"
 
-#define HEADER_CELL_INDEX [OTAppConfiguration sharedInstance].isPFPApp ? 6 : 7
-#define LOG_OUT_CELL_INDEX [OTAppConfiguration sharedInstance].isPFPApp ? 7 : 8
+#define HEADER_CELL_INDEX OTAppConfiguration.supportsSolidarityGuideFunctionality ? 7 : 6
+#define LOG_OUT_CELL_INDEX OTAppConfiguration.supportsSolidarityGuideFunctionality ? 8 : 7
 #define SOLIDARITY_GUIDE_INDEX 2
-#define DONATION_CELL_INDEX [OTAppConfiguration sharedInstance].isPFPApp ? 2 : 3
+#define DONATION_CELL_INDEX OTAppConfiguration.supportsSolidarityGuideFunctionality ? 3 : 2
 
 @import MessageUI;
 
@@ -286,7 +286,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
    
     OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide")
                                                                iconName:@"mapPin"];
-    if(![OTAppConfiguration sharedInstance].isPFPApp) {
+    if(OTAppConfiguration.supportsSolidarityGuideFunctionality) {
         [menuItems addObject:itemSolidarityGuide];
     }
     

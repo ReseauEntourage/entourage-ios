@@ -66,7 +66,7 @@
     if (allowed)
         [self goToNotifications];
     else
-        [[OTAppConfiguration sharedInstance] isPFPApp] ? [self goToNotifications] : [self performSegueWithIdentifier:@"NoLocationRightsSegue" sender:self];
+        OTAppConfiguration.isGeolocationMandatory ? [self goToNotifications] : [self performSegueWithIdentifier:@"NoLocationRightsSegue" sender:self];
 }
 
 #pragma mark - IBAction
