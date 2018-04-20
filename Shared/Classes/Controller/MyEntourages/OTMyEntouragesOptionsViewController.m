@@ -14,6 +14,7 @@
 #import "OTAlertViewBehavior.h"
 #import "OTConsts.h"
 #import "OTAPIConsts.h"
+#import "OTAppConfiguration.h"
 
 @interface OTMyEntouragesOptionsViewController ()
 
@@ -35,7 +36,7 @@
     [self.toggleMaraude toggle:NO];
     [self.toggleEncounter toggle:NO];
     [self.toggleAction toggle:NO];
-    if(IS_PRO_USER) {
+    if(IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
         [self.toggleAction toggle:YES];
         if([OTOngoingTourService sharedInstance].isOngoing)
             [self.toggleEncounter toggle:YES];

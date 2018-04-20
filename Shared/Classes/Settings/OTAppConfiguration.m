@@ -407,4 +407,12 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
++ (BOOL)isGeolocationMandatory {
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

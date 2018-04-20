@@ -89,7 +89,7 @@
 }
 
 - (NSArray *)groupHeaders {
-    if(IS_PRO_USER)
+    if(IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality)
         return @[
                  OTLocalizedString(@"filter_maraudes_title"),
                  OTLocalizedString(@"filter_entourages_title"),
@@ -124,7 +124,7 @@
                                  @"ask_for_help" : [NSNumber numberWithBool:self.showDemand],
                                  @"contribution" : [NSNumber numberWithBool:self.showContribution]
                                  };
-    if(IS_PRO_USER)
+    if(IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality)
         return [self groupForPro];
     else
         return [self groupForPublic];

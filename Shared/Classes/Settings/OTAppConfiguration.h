@@ -46,6 +46,7 @@
 + (void)navigateToUserProfile;
 + (void)navigateToStartupScreen;
 
++ (BOOL)isGeolocationMandatory;
 + (BOOL)supportsTourFunctionality;
 + (BOOL)supportsSolidarityGuideFunctionality;
 

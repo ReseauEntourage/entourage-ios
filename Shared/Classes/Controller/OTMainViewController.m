@@ -374,7 +374,7 @@
     [self.customSegmentedBehavior updateVisible:YES];
     [self clearMap];
     [self feedMapWithFeedItems];
-    self.showSolidarityGuideView.hidden = NO;
+    self.showSolidarityGuideView.hidden = !OTAppConfiguration.supportsSolidarityGuideFunctionality;
     if (self.isTourListDisplayed) {
         [self showToursList];
     }
@@ -1132,11 +1132,11 @@
 - (void)showToursMap {
     self.tableView.scrollEnabled = NO;
     if(self.guideMapDelegate.isActive) {
-        [self.showSolidarityGuideView setHidden:YES];
+        [self.showSolidarityGuideView setHidden: YES];
         [self.toggleCollectionView toggle:NO animated:NO];
     }else {
         [OTLogger logEvent:@"Screen06_2MapView"];
-        [self.showSolidarityGuideView setHidden:NO];
+        [self.showSolidarityGuideView setHidden: !OTAppConfiguration.supportsSolidarityGuideFunctionality];
     }
     if(self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0)
         [self.noDataBehavior showNoData];

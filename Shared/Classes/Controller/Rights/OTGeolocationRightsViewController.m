@@ -14,6 +14,7 @@
 #import "UINavigationController+entourage.h"
 #import "UIBarButtonItem+factory.h"
 #import "Mixpanel/Mixpanel.h"
+#import "OTAppConfiguration.h"
 
 @import Firebase;
 
@@ -65,7 +66,7 @@
     if (allowed)
         [self goToNotifications];
     else
-        [self performSegueWithIdentifier:@"NoLocationRightsSegue" sender:self];
+        OTAppConfiguration.isGeolocationMandatory ? [self goToNotifications] : [self performSegueWithIdentifier:@"NoLocationRightsSegue" sender:self];
 }
 
 #pragma mark - IBAction

@@ -12,6 +12,7 @@
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
 #import "OTAPIConsts.h"
+#import "OTAppConfiguration.h"
 
 @interface OTMapOptionsViewController ()
 
@@ -49,7 +50,7 @@
     self.createTourLabel.hidden = YES;
     self.createTourButton.hidden = YES;
 
-    if (IS_PRO_USER) {
+    if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
         [self addOptionWithIcon:@"createMaraude" andAction:@selector(doCreateTour:) withTranslation:NORTH_WEST];
         [self addOptionWithIcon:@"heart" andAction:@selector(doCreateAction:) withTranslation:NORTH_EAST];
     } else {
@@ -65,7 +66,7 @@
 - (void)setupOptionsAsList {
     [super setupOptionsAsList];
     
-    if (IS_PRO_USER) {
+    if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
         [self setupForProUser];
     } else {
         [self setupForPublicUser];
