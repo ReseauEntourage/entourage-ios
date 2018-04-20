@@ -16,15 +16,15 @@ import Foundation
     @IBOutlet weak var tapBehavior: OTTapViewBehavior!
     @IBOutlet weak var closeKeyboardBehavior: OTCloseKeyboardOnTapBehavior!
     
-    lazy var labelString: NSMutableAttributedString = {
+    @objc lazy var labelString: NSMutableAttributedString = {
         return NSMutableAttributedString.init(string: "")
     }()
-    lazy var textFieldPlaceholder = ""
-    lazy var buttonTitle = ""
-    lazy var message = ""
-    lazy var reportedUserId = ""
+    @objc lazy var textFieldPlaceholder = ""
+    @objc lazy var buttonTitle = ""
+    @objc lazy var message = ""
+    @objc lazy var reportedUserId = ""
     
-    init(labelString: NSMutableAttributedString, textFieldPlaceholder: String, buttonTitle: String) {
+    @objc init(labelString: NSMutableAttributedString, textFieldPlaceholder: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
         self.labelString = labelString
         self.textFieldPlaceholder = textFieldPlaceholder

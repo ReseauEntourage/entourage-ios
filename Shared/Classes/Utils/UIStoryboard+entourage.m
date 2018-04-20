@@ -30,6 +30,15 @@
     return storyboard;
 }
 
++ (void)showTabBarControllerFromStoryboardNamed:(NSString *)storyboardName {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+    OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIWindow *window = [appDelegate window];
+    UITabBarController *viewController = (UITabBarController*)[storyboard instantiateViewControllerWithIdentifier:storyboardName];
+    window.rootViewController = viewController;
+    [window makeKeyAndVisible];
+}
+
 #pragma mark - Private
 
 + (void)showInitialViewControllerFromStoryboardNamed:(NSString *)storyboardName addingNavigation:(BOOL)addNavigation {
