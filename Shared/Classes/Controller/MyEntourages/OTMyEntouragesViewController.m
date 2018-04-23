@@ -60,7 +60,7 @@
                                                  name:kUpdateBadgeCountNotification
                                                object:nil];
     
-    self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
+    self.navigationItem.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
     [self.entouragesDataSource loadData];
 }

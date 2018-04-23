@@ -20,5 +20,7 @@
 
 + (UIStoryboard *)introStoryboard;
 + (UIStoryboard *)onboardingStoryboard;
++ (UIStoryboard *)mainStoryboard;
++ (UIStoryboard *)myEntouragesStoryboard;
 
 @end

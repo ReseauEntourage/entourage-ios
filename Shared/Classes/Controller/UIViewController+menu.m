@@ -105,10 +105,10 @@
 }
 
 - (void)setupLogoImageWithTarget:(id)target andSelector:(SEL)action {
-    UIImage *image = [UIImage imageNamed:@"logo"];
+    UIImage *image = [ApplicationTheme applicationLogo];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0,0,image.size.width, image.size.height);
-    [button setBackgroundImage:image forState:UIControlStateNormal];
+    [button setImage:image forState:UIControlStateNormal];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = button;
 }

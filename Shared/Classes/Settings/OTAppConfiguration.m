@@ -35,6 +35,7 @@
 #import "UIStoryboard+entourage.h"
 #import "OTMenuViewController.h"
 #import "OTAppState.h"
+#import "OTMyEntouragesViewController.h"
 
 #import "entourage-Swift.h"
 
@@ -220,7 +221,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (UITabBarController*)configureMainTabBar
 {
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *mainStoryboard = [UIStoryboard mainStoryboard];
     
     // Menu tab
     OTMenuViewController *menuViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMenuViewControllerIdentifier"];
@@ -234,7 +235,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     mainMapNavController.tabBarItem.title = @"à proximité";
     mainMapNavController.tabBarItem.image = [UIImage imageNamed:@"guide"];
     
-    tabBarController.viewControllers = @[mainMapNavController, menuNavController];
+    // Messages Tab
+    OTMyEntouragesViewController *messagesViewController = [[UIStoryboard myEntouragesStoryboard] instantiateViewControllerWithIdentifier:@"OTMyEntouragesViewController"];
+    UINavigationController *messagesNavController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
+    messagesNavController.tabBarItem.title = @"messagerie";
+    messagesNavController.tabBarItem.image = [UIImage imageNamed:@"discussion"];
+    
+    tabBarController.viewControllers = @[mainMapNavController, messagesNavController, menuNavController];
 
     return tabBarController;
 }

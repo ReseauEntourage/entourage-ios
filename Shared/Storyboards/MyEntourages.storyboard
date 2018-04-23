@@ -27,7 +27,7 @@
         <!--My Entourages-->
         <scene sceneID="YRj-3L-CT0">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="MH3-uF-0WG" userLabel="My Entourages" customClass="OTMyEntouragesViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTMyEntouragesViewController" automaticallyAdjustsScrollViewInsets="NO" id="MH3-uF-0WG" userLabel="My Entourages" customClass="OTMyEntouragesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hCo-dZ-Q9I"/>
                         <viewControllerLayoutGuide type="bottom" id="Ph8-ss-CHi"/>
