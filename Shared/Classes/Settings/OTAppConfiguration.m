@@ -34,6 +34,7 @@
 #import "A0SimpleKeychain.h"
 #import "UIStoryboard+entourage.h"
 #import "OTMenuViewController.h"
+#import "OTAppState.h"
 
 #import "entourage-Swift.h"
 
@@ -73,48 +74,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [OTAppConfiguration configureApplicationAppearance];
     [OTAppConfiguration configurePhotoUploadingService];
     
-    [self launchApplicatioWithOptions:launchOptions];
+    [OTAppState launchApplicatioWithOptions:launchOptions];
     
     return YES;
 }
 
-- (void)launchApplicatioWithOptions:(NSDictionary *)launchOptions
-{
-    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if (currentUser) {
-        if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
-            [[OTLocationManager sharedInstance] startLocationUpdates];
-            NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-            if (pnData) {
-                [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
-            } else {
-                [OTAppConfiguration navigateToAuthenticatedLandingScreen];
-            }
-        }
-        else {
-            [OTAppConfiguration navigateToUserProfile];
-        }
-    }
-    else
-    {
-        [OTAppConfiguration navigateToStartupScreen];
-    }
-}
-
 - (void)popToLogin {
-    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
-    [SVProgressHUD show];
-    
-    [pnService clearTokenWithSuccess:^() {
-        [SVProgressHUD dismiss];
-        [OTAppConfiguration clearUserData];
-        [OTAppConfiguration navigateToStartupScreen];
-        
-    } orFailure:^(NSError *error) {
-        [SVProgressHUD dismiss];
-        [OTAppConfiguration clearUserData];
-        [OTAppConfiguration navigateToStartupScreen];
-    }];
+    [OTAppState returnToLogin];
 }
 
 - (void)updateBadge: (NSNotification *) notification {
@@ -205,33 +171,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         [[OTDeepLinkService new] handleUniversalLink:url];
     }
     return true;
-}
-
-+ (void)navigateToAuthenticatedLandingScreen
-{
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        
-        OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
-        UIWindow *window = [appDelegate window];
-        window.rootViewController = [OTAppConfiguration configureMainTabBar];
-        [window makeKeyAndVisible];
-        
-        return;
-    }
-    
-    [UIStoryboard showSWRevealController];
-}
-
-+ (void)navigateToUserProfile
-{
-    [UIStoryboard showUserProfileDetails];
-}
-
-+ (void)navigateToStartupScreen
-{
-    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
-    appDelegate.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [UIStoryboard showStartup];
 }
 
 #pragma mark - App Configurations
@@ -428,6 +367,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         return NO;
     }
+    return YES;
+}
+
++ (BOOL)shouldAllowLoginFromWelcomeScreen
+{
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
     return YES;
 }
 

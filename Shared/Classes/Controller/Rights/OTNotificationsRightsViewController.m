@@ -22,6 +22,7 @@
 #import "OTTutorialService.h"
 #import "OTLocationManager.h"
 #import "Mixpanel/Mixpanel.h"
+#import "OTAppState.h"
 
 @import Firebase;
 
@@ -98,11 +99,11 @@
             }
         }
         else {
-            [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+            [OTAppState navigateToAuthenticatedLandingScreen];
         }
     } withError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"automaticJoinFailedMessage")];
-        [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+        [OTAppState navigateToAuthenticatedLandingScreen];
     }];
 }
 

@@ -15,5 +15,10 @@
 + (void)showSWRevealController;
 + (void)showTabBarControllerFromStoryboardNamed:(NSString *)storyboardName;
 + (UIStoryboard*)entourageEditorStoryboard;
++ (void)showInitialViewControllerFromStoryboardNamed:(NSString *)storyboardName addingNavigation:(BOOL)addNavigation;
+
+
++ (UIStoryboard *)introStoryboard;
++ (UIStoryboard *)onboardingStoryboard;
 
 @end

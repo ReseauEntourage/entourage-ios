@@ -104,7 +104,7 @@
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;
         if([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
-            [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+            [OTAppState navigateToAuthenticatedLandingScreen];
         }
         else {
             [self.onboardingNavigation nextFromLogin];

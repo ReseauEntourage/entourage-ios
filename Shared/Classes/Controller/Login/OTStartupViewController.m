@@ -11,6 +11,7 @@
 #import "NSUserDefaults+OT.h"
 #import "UINavigationController+entourage.h"
 #import "OTAppConfiguration.h"
+#import "OTAppState.h"
 #import "entourage-Swift.h"
 
 @interface OTStartupViewController ()
@@ -43,6 +44,7 @@
     self.loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.loginButton.layer.borderWidth = 1.5f;
     
+    // TODO: temporary - find a better approach
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         self.registerButton.hidden = YES;
         
@@ -78,8 +80,7 @@
 }
 
 -(IBAction)showLogin:(id)sender {
-    [OTLogger logEvent:@"SplashLogIn"];
-    [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+    [OTAppState continueFromStartupScreen];
 }
 
 @end

@@ -35,7 +35,7 @@
     
 	if (![[NSUserDefaults standardUserDefaults] currentUser])
 	{
-        [OTAppConfiguration navigateToStartupScreen];
+        [OTAppState navigateToStartupScreen];
 	}
 }
 
