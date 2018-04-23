@@ -11,7 +11,14 @@ struct UserStorageKey {
     static let environment = "environment"
     static let APIHostURL = "ApiBaseUrl"
     static let APIKey = "ApiKey"
+    
     static let amazonPictureFolder = "AmazonPictureFolder"
+    static let amazonAccessKey = "AmazonAccessKey"
+    static let amazonSecretKey = "AmazonSecretKey"
+    
+    static let mixpanelToken = "MixpanelToken"
+    static let mixpanelKey = "MixpanelKey"
+    static let mixpanelSecretKey = "MixpanelSecretKey"
 }
 
 @objc enum ApplicationType:Int {
@@ -41,11 +48,11 @@ struct UserStorageKey {
     }
     
     @objc var amazonAccessKey: NSString {
-        return AMAZON_ACCESS_KEY as NSString
+        return configuration(forKey: UserStorageKey.amazonAccessKey)
     }
     
     @objc var amazonSecretKey: NSString {
-        return AMAZON_SECRET_KEY as NSString
+        return configuration(forKey: UserStorageKey.amazonSecretKey)
     }
     
     @objc var amazonPictureFolder: NSString {
@@ -61,15 +68,15 @@ struct UserStorageKey {
     }
     
     @objc var MixpanelToken : NSString {
-        return MIXPANEL_TOKEN as NSString;
+        return configuration(forKey: UserStorageKey.mixpanelToken)
     }
     
     @objc var MixpanelKey: NSString {
-        return MIXPANEL_KEY as NSString;
+        return configuration(forKey: UserStorageKey.mixpanelKey)
     }
     
     @objc var MixpanelSecretKey: NSString {
-        return MIXPANEL_SECRET_KEY as NSString;
+        return configuration(forKey: UserStorageKey.mixpanelSecretKey)
     }
     
     @objc var runsOnProduction: Bool {

@@ -50,6 +50,9 @@
 + (BOOL)supportsTourFunctionality;
 + (BOOL)supportsSolidarityGuideFunctionality;
 + (BOOL)isMVP;
++ (BOOL)shouldShowIntroTutorial;
++ (NSString*)aboutUrlString;
+
 + (UIImage*)applicationLogo;
 
 @end

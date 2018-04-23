@@ -1896,8 +1896,7 @@
 		A296B9212088D99700F6AFBD /* UIColor+pfp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+pfp.h"; sourceTree = "<group>"; };
 		A296B9222088D99700F6AFBD /* UIColor+pfp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+pfp.m"; sourceTree = "<group>"; };
 		A296B92C208A08E800F6AFBD /* PfpLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PfpLaunchScreen.storyboard; sourceTree = "<group>"; };
-		A2E5FA04208629480099B989 /* OTAmazonConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
-		A2E5FA05208629480099B989 /* OTMixpanelConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
+		A296B92E208DEC5400F6AFBD /* PFPConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFPConsts.h; sourceTree = "<group>"; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA07208629B50099B989 /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
 		A2E5FA08208629B50099B989 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
@@ -2157,6 +2156,7 @@
 				A202E7C52085CFC30058F32C /* OTAPIConsts.h */,
 				A202E7C02085CFC30058F32C /* OTAPIKeys.h */,
 				A202E7BF2085CFC30058F32C /* OTConsts.h */,
+				A296B92E208DEC5400F6AFBD /* PFPConsts.h */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -3357,8 +3357,6 @@
 				A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */,
 				A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */,
 				A296B91B2087A6F000F6AFBD /* GoogleService-Info.plist */,
-				A2E5FA04208629480099B989 /* OTAmazonConsts.h */,
-				A2E5FA05208629480099B989 /* OTMixpanelConsts.h */,
 				A2E5FA08208629B50099B989 /* prod.plist */,
 				A2E5FA07208629B50099B989 /* staging.plist */,
 			);
@@ -5338,7 +5336,7 @@
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BETA PFP";
-				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Shared-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -5391,7 +5389,7 @@
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PFP;
-				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Shared-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -5447,7 +5445,7 @@
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PFP;
-				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Shared-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;

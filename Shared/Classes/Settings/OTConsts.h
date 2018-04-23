@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 OCTO Technology. All rights reserved.
 //
 
+#import "PFPConsts.h"
+
 #define DEVICE_TOKEN_KEY "device_token"
 
 #define PARIS_LAT 48.856578

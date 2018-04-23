@@ -423,13 +423,20 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return NO;
 }
 
-+ (UIImage*)applicationLogo
++ (BOOL)shouldShowIntroTutorial
 {
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        return [UIImage imageNamed:@"pfp-logo"];;
+        return NO;
     }
-    
-    return [UIImage imageNamed:@"entourageLogo"];
+    return YES;
+}
+
++ (NSString*)aboutUrlString
+{
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        return PFP_ABOUT_CGU_URL;
+    }
+    return ABOUT_CGU_URL;
 }
 
 @end

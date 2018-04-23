@@ -179,7 +179,10 @@
     [super viewDidLoad];
     
     [self setup];
-    [[OTTutorialService new] showTutorial];
+    
+    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+        [[OTTutorialService new] showTutorial];
+    }
 }
 
 - (void)setup {

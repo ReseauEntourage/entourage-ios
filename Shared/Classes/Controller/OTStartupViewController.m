@@ -54,7 +54,7 @@
         
         self.bgImage.hidden = YES;
         self.logoTitle.hidden = YES;
-        self.logo.image = [OTAppConfiguration applicationLogo];
+        self.logo.image = [ApplicationTheme applicationLogo];
     }
 }
 
