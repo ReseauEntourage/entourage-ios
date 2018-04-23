@@ -3,5 +3,3 @@
 //
 
 #import "Shared-Bridging-Header.h"
-#import "OTAmazonConsts.h"
-#import "OTMixpanelConsts.h"
