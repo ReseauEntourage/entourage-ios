@@ -1131,6 +1131,9 @@
 		A296B92A2089DE4300F6AFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B8EB20871FD800F6AFBD /* main.m */; };
 		A296B92B2089DE4400F6AFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B8EB20871FD800F6AFBD /* main.m */; };
 		A296B92D208A08E800F6AFBD /* PfpLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A296B92C208A08E800F6AFBD /* PfpLaunchScreen.storyboard */; };
+		A296B931208DFE8A00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
+		A296B932208E06AA00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
+		A296B933208E06AB00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
 		A2E5FA09208629B60099B989 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA07208629B50099B989 /* staging.plist */; };
 		A2E5FA0A208629B60099B989 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA08208629B50099B989 /* prod.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
@@ -1896,8 +1899,9 @@
 		A296B9212088D99700F6AFBD /* UIColor+pfp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+pfp.h"; sourceTree = "<group>"; };
 		A296B9222088D99700F6AFBD /* UIColor+pfp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+pfp.m"; sourceTree = "<group>"; };
 		A296B92C208A08E800F6AFBD /* PfpLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PfpLaunchScreen.storyboard; sourceTree = "<group>"; };
-		A2E5FA04208629480099B989 /* OTAmazonConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAmazonConsts.h; sourceTree = "<group>"; };
-		A2E5FA05208629480099B989 /* OTMixpanelConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMixpanelConsts.h; sourceTree = "<group>"; };
+		A296B92E208DEC5400F6AFBD /* PFPConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFPConsts.h; sourceTree = "<group>"; };
+		A296B92F208DFE8A00F6AFBD /* OTAppState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppState.h; sourceTree = "<group>"; };
+		A296B930208DFE8A00F6AFBD /* OTAppState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppState.m; sourceTree = "<group>"; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA07208629B50099B989 /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
 		A2E5FA08208629B50099B989 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
@@ -2154,9 +2158,12 @@
 				A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */,
 				A21D64A12085D6D200EF8E0E /* OTAppConfiguration.h */,
 				A21D64A22085D6D200EF8E0E /* OTAppConfiguration.m */,
+				A296B92F208DFE8A00F6AFBD /* OTAppState.h */,
+				A296B930208DFE8A00F6AFBD /* OTAppState.m */,
 				A202E7C52085CFC30058F32C /* OTAPIConsts.h */,
 				A202E7C02085CFC30058F32C /* OTAPIKeys.h */,
 				A202E7BF2085CFC30058F32C /* OTConsts.h */,
+				A296B92E208DEC5400F6AFBD /* PFPConsts.h */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -2256,121 +2263,115 @@
 		A202E8552085D2C40058F32C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A202E8562085D2C40058F32C /* OTEntourageEditorViewController.m */,
-				A202E8572085D2C40058F32C /* OTConfirmationViewController.h */,
-				A202E8582085D2C40058F32C /* MyEntourages */,
-				A202E8662085D2C40058F32C /* OTUserEditViewController.h */,
-				A202E8672085D2C40058F32C /* OTSolidarityGuideCell.m */,
-				A202E8682085D2C40058F32C /* OTCreateMeetingViewController.m */,
-				A202E8692085D2C40058F32C /* OTMapOptionsViewController.h */,
 				A202E86A2085D2C40058F32C /* ActiveFeedItem */,
-				A202E89E2085D2C40058F32C /* LocationSelection */,
-				A202E8A32085D2C40058F32C /* OTTourOptionsViewController.m */,
-				A202E8A42085D2C40058F32C /* OTTourCreatorViewController.h */,
-				A202E8A52085D2C40058F32C /* OTMyMeetingsViewController.m */,
-				A202E8A62085D2C40058F32C /* OTEntourageDisclaimerViewController.m */,
-				A202E8A72085D2C40058F32C /* OTAskMoreViewController.m */,
-				A202E8A82085D2C40058F32C /* Tutorial */,
-				A202E8B32085D2C40058F32C /* OTOptionsViewController.m */,
-				A202E8B42085D2C40058F32C /* OTLoginViewController.h */,
-				A202E8B52085D2C40058F32C /* OTSettingsViewController.m */,
-				A202E8B62085D2C40058F32C /* OTLostCodeViewController.h */,
-				A202E8B72085D2C40058F32C /* OTSocialViewController.h */,
-				A202E8B82085D2C40058F32C /* OTNewsFeedCell.m */,
-				A202E8B92085D2C40058F32C /* OTGuideDetailsViewController.h */,
 				A202E8BA2085D2C40058F32C /* Disclaimer */,
-				A202E8BD2085D2C40058F32C /* OTAnnouncementCell.m */,
-				A202E8BE2085D2C40058F32C /* UserPicture */,
-				A202E8C32085D2C40058F32C /* OTEditEntourageTitleViewController.m */,
-				A202E8C42085D2C40058F32C /* OTMeetingCalloutViewController.h */,
-				A202E8C52085D2C40058F32C /* OTSelectAssociationViewController.m */,
-				A202E8C62085D2C40058F32C /* OTWebViewController.m */,
-				A202E8C72085D2C40058F32C /* OTSummaryInfoCell.m */,
-				A202E8C82085D2C40058F32C /* OTCalloutViewController.m */,
-				A202E8C92085D2C40058F32C /* OTEntourageEditItemCell.h */,
-				A202E8CA2085D2C40058F32C /* OTEditEntourageDescViewController.h */,
-				A202E8CB2085D2C40058F32C /* OTSWRevealViewController.h */,
 				A202E8CC2085D2C40058F32C /* FeedChangeOptions */,
-				A202E8CF2085D2C40058F32C /* OTMainViewController.h */,
-				A202E8D02085D2C40058F32C /* OTSolidarityGuideFiltersViewController.h */,
-				A202E8D12085D2C40058F32C /* OTActivityProvider.h */,
-				A202E8D22085D2C40058F32C /* OTBaseMapDelegate.h */,
-				A202E8D32085D2C40058F32C /* OTMapView.h */,
+				A202E9082085D2C50058F32C /* FeedItemFilters */,
+				A202E8EE2085D2C40058F32C /* JoinRequest */,
+				A202E89E2085D2C40058F32C /* LocationSelection */,
+				A202E9302085D2C50058F32C /* Login */,
+				A202E8582085D2C40058F32C /* MyEntourages */,
+				A202E93C2085D2C50058F32C /* Onboarding */,
 				A202E8D42085D2C40058F32C /* OTAboutMeViewController.h */,
-				A202E8D52085D2C40058F32C /* OTMessageViewController.h */,
-				A202E8D62085D2C40058F32C /* OTUserViewController.m */,
-				A202E8D72085D2C40058F32C /* UIViewController+menu.h */,
+				A202E9192085D2C50058F32C /* OTAboutMeViewController.m */,
 				A202E8D82085D2C40058F32C /* OTAboutViewController.h */,
-				A202E8D92085D2C40058F32C /* OTCategoryViewController.m */,
-				A202E8DA2085D2C40058F32C /* OTEntourageEditItemImageCell.h */,
-				A202E8DB2085D2C40058F32C /* OTConfirmCloseViewController.m */,
-				A202E8DC2085D2C40058F32C /* OTQuitFeedItemViewController.h */,
-				A202E8DD2085D2C40058F32C /* OTToursMapDelegate.h */,
-				A202E8DE2085D2C40058F32C /* OTStartupViewController.h */,
-				A202E8DF2085D2C40058F32C /* OTCategoryEditCell.m */,
-				A202E8E02085D2C40058F32C /* OTGuideMapDelegate.m */,
-				A202E8E12085D2C40058F32C /* OTBarButtonView.m */,
-				A202E8E22085D2C40058F32C /* OTUserEditPasswordViewController.h */,
-				A202E8E32085D2C40058F32C /* OTMenuViewController.m */,
-				A202E8E42085D2C40058F32C /* OTSolidarityGuideFilterCell.m */,
+				A202E9142085D2C50058F32C /* OTAboutViewController.m */,
+				A202E8D12085D2C40058F32C /* OTActivityProvider.h */,
+				A202E91C2085D2C50058F32C /* OTActivityProvider.m */,
+				A202E8FF2085D2C40058F32C /* OTAnnouncementCell.h */,
+				A202E8BD2085D2C40058F32C /* OTAnnouncementCell.m */,
 				A202E8E52085D2C40058F32C /* OTAskMoreViewController.h */,
+				A202E8A72085D2C40058F32C /* OTAskMoreViewController.m */,
+				A202E9262085D2C50058F32C /* OTBarButtonView.h */,
+				A202E8E12085D2C40058F32C /* OTBarButtonView.m */,
+				A202E8D22085D2C40058F32C /* OTBaseMapDelegate.h */,
+				A202E91D2085D2C50058F32C /* OTBaseMapDelegate.m */,
+				A202E9222085D2C50058F32C /* OTCalloutViewController.h */,
+				A202E8C82085D2C40058F32C /* OTCalloutViewController.m */,
+				A202E92A2085D2C50058F32C /* OTCategoryEditCell.h */,
+				A202E8DF2085D2C40058F32C /* OTCategoryEditCell.m */,
+				A202E9152085D2C50058F32C /* OTCategoryViewController.h */,
+				A202E8D92085D2C40058F32C /* OTCategoryViewController.m */,
+				A202E8572085D2C40058F32C /* OTConfirmationViewController.h */,
+				A202E8FA2085D2C40058F32C /* OTConfirmationViewController.m */,
+				A202E9462085D2C50058F32C /* OTConfirmCloseViewController.h */,
+				A202E8DB2085D2C40058F32C /* OTConfirmCloseViewController.m */,
+				A202E8EA2085D2C40058F32C /* OTCreateMeetingViewController.h */,
+				A202E8682085D2C40058F32C /* OTCreateMeetingViewController.m */,
+				A202E8CA2085D2C40058F32C /* OTEditEntourageDescViewController.h */,
+				A202E91F2085D2C50058F32C /* OTEditEntourageDescViewController.m */,
+				A202E8FE2085D2C40058F32C /* OTEditEntourageTitleViewController.h */,
+				A202E8C32085D2C40058F32C /* OTEditEntourageTitleViewController.m */,
+				A202E8E82085D2C40058F32C /* OTEntourageDisclaimerViewController.h */,
+				A202E8A62085D2C40058F32C /* OTEntourageDisclaimerViewController.m */,
+				A202E8C92085D2C40058F32C /* OTEntourageEditItemCell.h */,
+				A202E9202085D2C50058F32C /* OTEntourageEditItemCell.m */,
+				A202E8DA2085D2C40058F32C /* OTEntourageEditItemImageCell.h */,
+				A202E9452085D2C50058F32C /* OTEntourageEditItemImageCell.m */,
+				A202E8FB2085D2C40058F32C /* OTEntourageEditorViewController.h */,
+				A202E8562085D2C40058F32C /* OTEntourageEditorViewController.m */,
+				A202E8B92085D2C40058F32C /* OTGuideDetailsViewController.h */,
+				A202E9002085D2C40058F32C /* OTGuideDetailsViewController.m */,
+				A202E9272085D2C50058F32C /* OTGuideMapDelegate.h */,
+				A202E8E02085D2C40058F32C /* OTGuideMapDelegate.m */,
+				A202E8CF2085D2C40058F32C /* OTMainViewController.h */,
+				A202E91E2085D2C50058F32C /* OTMainViewController.m */,
+				A202E8692085D2C40058F32C /* OTMapOptionsViewController.h */,
+				A202E8EB2085D2C40058F32C /* OTMapOptionsViewController.m */,
+				A202E8D32085D2C40058F32C /* OTMapView.h */,
+				A202E91A2085D2C50058F32C /* OTMapView.m */,
+				A202E8C42085D2C40058F32C /* OTMeetingCalloutViewController.h */,
+				A202E8FD2085D2C40058F32C /* OTMeetingCalloutViewController.m */,
+				A202E9282085D2C50058F32C /* OTMenuViewController.h */,
+				A202E8E32085D2C40058F32C /* OTMenuViewController.m */,
+				A202E8D52085D2C40058F32C /* OTMessageViewController.h */,
+				A202E9182085D2C50058F32C /* OTMessageViewController.m */,
+				A202E8E92085D2C40058F32C /* OTMyMeetingsViewController.h */,
+				A202E8A52085D2C40058F32C /* OTMyMeetingsViewController.m */,
+				A202E9012085D2C40058F32C /* OTNewsFeedCell.h */,
+				A202E8B82085D2C40058F32C /* OTNewsFeedCell.m */,
+				A202E9062085D2C50058F32C /* OTOptionsViewController.h */,
+				A202E8B32085D2C40058F32C /* OTOptionsViewController.m */,
+				A202E9042085D2C40058F32C /* OTPopupViewController.swift */,
+				A202E8DC2085D2C40058F32C /* OTQuitFeedItemViewController.h */,
+				A202E9442085D2C50058F32C /* OTQuitFeedItemViewController.m */,
+				A202E8FC2085D2C40058F32C /* OTSelectAssociationViewController.h */,
+				A202E8C52085D2C40058F32C /* OTSelectAssociationViewController.m */,
+				A202E9052085D2C50058F32C /* OTSettingsViewController.h */,
+				A202E8B52085D2C40058F32C /* OTSettingsViewController.m */,
+				A202E8B72085D2C40058F32C /* OTSocialViewController.h */,
+				A202E9022085D2C40058F32C /* OTSocialViewController.m */,
+				A202E8ED2085D2C40058F32C /* OTSolidarityGuideCell.h */,
+				A202E8672085D2C40058F32C /* OTSolidarityGuideCell.m */,
+				A202E9252085D2C50058F32C /* OTSolidarityGuideFilterCell.h */,
+				A202E8E42085D2C40058F32C /* OTSolidarityGuideFilterCell.m */,
+				A202E8D02085D2C40058F32C /* OTSolidarityGuideFiltersViewController.h */,
+				A202E91B2085D2C50058F32C /* OTSolidarityGuideFiltersViewController.m */,
+				A202E9232085D2C50058F32C /* OTSummaryInfoCell.h */,
+				A202E8C72085D2C40058F32C /* OTSummaryInfoCell.m */,
+				A202E8CB2085D2C40058F32C /* OTSWRevealViewController.h */,
+				A202E9212085D2C50058F32C /* OTSWRevealViewController.m */,
+				A202E8A42085D2C40058F32C /* OTTourCreatorViewController.h */,
 				A202E8E62085D2C40058F32C /* OTTourCreatorViewController.m */,
 				A202E8E72085D2C40058F32C /* OTTourOptionsViewController.h */,
-				A202E8E82085D2C40058F32C /* OTEntourageDisclaimerViewController.h */,
-				A202E8E92085D2C40058F32C /* OTMyMeetingsViewController.h */,
-				A202E8EA2085D2C40058F32C /* OTCreateMeetingViewController.h */,
-				A202E8EB2085D2C40058F32C /* OTMapOptionsViewController.m */,
-				A202E8EC2085D2C40058F32C /* OTUserEditViewController.m */,
-				A202E8ED2085D2C40058F32C /* OTSolidarityGuideCell.h */,
-				A202E8EE2085D2C40058F32C /* JoinRequest */,
-				A202E8F32085D2C40058F32C /* Rights */,
-				A202E8FA2085D2C40058F32C /* OTConfirmationViewController.m */,
-				A202E8FB2085D2C40058F32C /* OTEntourageEditorViewController.h */,
-				A202E8FC2085D2C40058F32C /* OTSelectAssociationViewController.h */,
-				A202E8FD2085D2C40058F32C /* OTMeetingCalloutViewController.m */,
-				A202E8FE2085D2C40058F32C /* OTEditEntourageTitleViewController.h */,
-				A202E8FF2085D2C40058F32C /* OTAnnouncementCell.h */,
-				A202E9002085D2C40058F32C /* OTGuideDetailsViewController.m */,
-				A202E9012085D2C40058F32C /* OTNewsFeedCell.h */,
-				A202E9022085D2C40058F32C /* OTSocialViewController.m */,
-				A202E9032085D2C40058F32C /* OTLostCodeViewController.m */,
-				A202E9042085D2C40058F32C /* OTPopupViewController.swift */,
-				A202E9052085D2C50058F32C /* OTSettingsViewController.h */,
-				A202E9062085D2C50058F32C /* OTOptionsViewController.h */,
-				A202E9072085D2C50058F32C /* OTLoginViewController.m */,
-				A202E9082085D2C50058F32C /* FeedItemFilters */,
-				A202E9142085D2C50058F32C /* OTAboutViewController.m */,
-				A202E9152085D2C50058F32C /* OTCategoryViewController.h */,
-				A202E9162085D2C50058F32C /* OTUserViewController.h */,
-				A202E9172085D2C50058F32C /* UIViewController+menu.m */,
-				A202E9182085D2C50058F32C /* OTMessageViewController.m */,
-				A202E9192085D2C50058F32C /* OTAboutMeViewController.m */,
-				A202E91A2085D2C50058F32C /* OTMapView.m */,
-				A202E91B2085D2C50058F32C /* OTSolidarityGuideFiltersViewController.m */,
-				A202E91C2085D2C50058F32C /* OTActivityProvider.m */,
-				A202E91D2085D2C50058F32C /* OTBaseMapDelegate.m */,
-				A202E91E2085D2C50058F32C /* OTMainViewController.m */,
-				A202E91F2085D2C50058F32C /* OTEditEntourageDescViewController.m */,
-				A202E9202085D2C50058F32C /* OTEntourageEditItemCell.m */,
-				A202E9212085D2C50058F32C /* OTSWRevealViewController.m */,
-				A202E9222085D2C50058F32C /* OTCalloutViewController.h */,
-				A202E9232085D2C50058F32C /* OTSummaryInfoCell.h */,
-				A202E9242085D2C50058F32C /* OTWebViewController.h */,
-				A202E9252085D2C50058F32C /* OTSolidarityGuideFilterCell.h */,
-				A202E9262085D2C50058F32C /* OTBarButtonView.h */,
-				A202E9272085D2C50058F32C /* OTGuideMapDelegate.h */,
-				A202E9282085D2C50058F32C /* OTMenuViewController.h */,
-				A202E9292085D2C50058F32C /* OTUserEditPasswordViewController.m */,
-				A202E92A2085D2C50058F32C /* OTCategoryEditCell.h */,
-				A202E92B2085D2C50058F32C /* UserProfileDetails */,
-				A202E9302085D2C50058F32C /* Login */,
-				A202E9382085D2C50058F32C /* OTStartupViewController.m */,
-				A202E9392085D2C50058F32C /* PublicFeedItem */,
-				A202E93C2085D2C50058F32C /* Onboarding */,
+				A202E8A32085D2C40058F32C /* OTTourOptionsViewController.m */,
+				A202E8DD2085D2C40058F32C /* OTToursMapDelegate.h */,
 				A202E9432085D2C50058F32C /* OTToursMapDelegate.m */,
-				A202E9442085D2C50058F32C /* OTQuitFeedItemViewController.m */,
-				A202E9452085D2C50058F32C /* OTEntourageEditItemImageCell.m */,
-				A202E9462085D2C50058F32C /* OTConfirmCloseViewController.h */,
+				A202E8E22085D2C40058F32C /* OTUserEditPasswordViewController.h */,
+				A202E9292085D2C50058F32C /* OTUserEditPasswordViewController.m */,
+				A202E8662085D2C40058F32C /* OTUserEditViewController.h */,
+				A202E8EC2085D2C40058F32C /* OTUserEditViewController.m */,
+				A202E9162085D2C50058F32C /* OTUserViewController.h */,
+				A202E8D62085D2C40058F32C /* OTUserViewController.m */,
+				A202E9242085D2C50058F32C /* OTWebViewController.h */,
+				A202E8C62085D2C40058F32C /* OTWebViewController.m */,
+				A202E9392085D2C50058F32C /* PublicFeedItem */,
+				A202E8F32085D2C40058F32C /* Rights */,
+				A202E8A82085D2C40058F32C /* Tutorial */,
+				A202E8D72085D2C40058F32C /* UIViewController+menu.h */,
+				A202E9172085D2C50058F32C /* UIViewController+menu.m */,
+				A202E8BE2085D2C40058F32C /* UserPicture */,
+				A202E92B2085D2C50058F32C /* UserProfileDetails */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2601,11 +2602,17 @@
 		A202E9302085D2C50058F32C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				A202E9312085D2C50058F32C /* OTUserTableConfigurator.h */,
+				A202E8DE2085D2C40058F32C /* OTStartupViewController.h */,
+				A202E9382085D2C50058F32C /* OTStartupViewController.m */,
+				A202E8B42085D2C40058F32C /* OTLoginViewController.h */,
+				A202E9072085D2C50058F32C /* OTLoginViewController.m */,
+				A202E8B62085D2C40058F32C /* OTLostCodeViewController.h */,
+				A202E9032085D2C40058F32C /* OTLostCodeViewController.m */,
 				A202E9322085D2C50058F32C /* Cells */,
 				A202E9352085D2C50058F32C /* OTAssociationDetailsViewController.h */,
-				A202E9362085D2C50058F32C /* OTUserTableConfigurator.m */,
 				A202E9372085D2C50058F32C /* OTAssociationDetailsViewController.m */,
+				A202E9312085D2C50058F32C /* OTUserTableConfigurator.h */,
+				A202E9362085D2C50058F32C /* OTUserTableConfigurator.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2631,12 +2638,12 @@
 		A202E93C2085D2C50058F32C /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				A202E93D2085D2C50058F32C /* OTWelcomeViewController.m */,
+				A202E9412085D2C50058F32C /* OTCodeViewController.h */,
 				A202E93E2085D2C50058F32C /* OTCodeViewController.m */,
 				A202E93F2085D2C50058F32C /* OTPhoneViewController.h */,
 				A202E9402085D2C50058F32C /* OTPhoneViewController.m */,
-				A202E9412085D2C50058F32C /* OTCodeViewController.h */,
 				A202E9422085D2C50058F32C /* OTWelcomeViewController.h */,
+				A202E93D2085D2C50058F32C /* OTWelcomeViewController.m */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -3357,8 +3364,6 @@
 				A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */,
 				A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */,
 				A296B91B2087A6F000F6AFBD /* GoogleService-Info.plist */,
-				A2E5FA04208629480099B989 /* OTAmazonConsts.h */,
-				A2E5FA05208629480099B989 /* OTMixpanelConsts.h */,
 				A2E5FA08208629B50099B989 /* prod.plist */,
 				A2E5FA07208629B50099B989 /* staging.plist */,
 			);
@@ -4078,6 +4083,7 @@
 				A202ECE72085D2C80058F32C /* OTDeepLinkService.m in Sources */,
 				A202EC292085D2C80058F32C /* UIBarButtonItem+Badge.m in Sources */,
 				A21D64A32085D6D200EF8E0E /* OTAppConfiguration.m in Sources */,
+				A296B931208DFE8A00F6AFBD /* OTAppState.m in Sources */,
 				A202EB3B2085D2C80058F32C /* OTJoinAcceptedCell.m in Sources */,
 				A202EAF92085D2C70058F32C /* OTMyEntouragesFilter.m in Sources */,
 				A202EC012085D2C80058F32C /* OTMixpanelService.m in Sources */,
@@ -4661,6 +4667,7 @@
 				A202EB122085D2C70058F32C /* OTHeatZoneCollectionViewCell.m in Sources */,
 				A202EC2E2085D2C80058F32C /* MKMapView+entourage.m in Sources */,
 				A202EBF82085D2C80058F32C /* OTAboutTableViewCell.m in Sources */,
+				A296B933208E06AB00F6AFBD /* OTAppState.m in Sources */,
 				A202EADA2085D2C70058F32C /* OTFeedItemJoiner.m in Sources */,
 				A202ECBE2085D2C80058F32C /* OTMailTextCheckBehavior.m in Sources */,
 				A202EACC2085D2C70058F32C /* OTFeedItemAuthor.m in Sources */,
@@ -4721,6 +4728,7 @@
 				A296B76320871CFC00F6AFBD /* OTDeepLinkService.m in Sources */,
 				A296B76420871CFC00F6AFBD /* UIBarButtonItem+Badge.m in Sources */,
 				A296B76520871CFC00F6AFBD /* OTAppConfiguration.m in Sources */,
+				A296B932208E06AA00F6AFBD /* OTAppState.m in Sources */,
 				A296B76620871CFC00F6AFBD /* OTJoinAcceptedCell.m in Sources */,
 				A296B76720871CFC00F6AFBD /* OTMyEntouragesFilter.m in Sources */,
 				A296B76820871CFC00F6AFBD /* OTMixpanelService.m in Sources */,
@@ -5338,7 +5346,7 @@
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BETA PFP";
-				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Shared-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -5391,7 +5399,7 @@
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PFP;
-				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Shared-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -5447,7 +5455,7 @@
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PFP;
-				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Shared-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;

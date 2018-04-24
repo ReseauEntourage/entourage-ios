@@ -24,6 +24,7 @@
 #import "SVProgressHUD.h"
 #import "OTUnreadMessagesService.h"
 #import "Mixpanel/Mixpanel.h"
+#import "OTAppState.h"
 
 #import <UserNotifications/UserNotifications.h>
 
@@ -97,7 +98,7 @@
         if ([rootVC isKindOfClass:[SWRevealViewController class]])
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationLocalTourConfirmation object:nil];
         else {
-            [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+            [OTAppState navigateToAuthenticatedLandingScreen];
         }
     }];
     [alert addAction:defaultAction];

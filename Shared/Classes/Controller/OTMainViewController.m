@@ -179,7 +179,10 @@
     [super viewDidLoad];
     
     [self setup];
-    [[OTTutorialService new] showTutorial];
+    
+    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+        [[OTTutorialService new] showTutorial];
+    }
 }
 
 - (void)setup {
@@ -433,8 +436,8 @@
 - (void)configureNavigationBar {
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
     [self createMenuButton];
-    [self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
-    [self setupLogoImageWithTarget:self andSelector:@selector(logoTapped)];
+    //[self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
+    //[self setupLogoImageWithTarget:self andSelector:@selector(logoTapped)];
 }
 
 - (void)logoTapped {

@@ -34,6 +34,7 @@
 #import "UIColor+entourage.h"
 #import "Mixpanel/Mixpanel.h"
 #import "OTDeepLinkService.h"
+#import "OTAppState.h"
 
 NSString *const kTutorialDone = @"has_done_tutorial";
 
@@ -159,7 +160,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [[NSUserDefaults standardUserDefaults] synchronize];
                                    if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
                                        [[OTPushNotificationsService new] promptUserForPushNotifications];
-                                       [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+                                       [OTAppState navigateToAuthenticatedLandingScreen];
                                    }
                                    else {
                                        [self.onboardingNavigation nextFromLogin];
@@ -253,7 +254,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - OTUserNameViewController
 
 - (void)userNameDidChange {
-    [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+    [OTAppState navigateToAuthenticatedLandingScreen];
 }
 
 #pragma mark - UIPickerViewDataSource

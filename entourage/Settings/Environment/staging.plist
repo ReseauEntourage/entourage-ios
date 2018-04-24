@@ -4,10 +4,20 @@
 <dict>
 	<key>AmazonPictureFolder</key>
 	<string>staging/300x300/</string>
+	<key>AmazonAccessKey</key>
+	<string>AKIAIMJQ4B4OJY2X3FDQ</string>
+	<key>AmazonSecretKey</key>
+	<string>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</string>
 	<key>ApiBaseUrl</key>
 	<string>https://entourage-back-preprod.herokuapp.com/api/v1/</string>
 	<key>ApiKey</key>
 	<string>69b3961a0d1e6b99c4b36a40</string>
+	<key>MixpanelToken</key>
+	<string>38079f8f9c6fb8391aee77ee7e95e6b3</string>
+	<key>MixpanelKey</key>
+	<string>08d2723f3886f2d9e5a914bdecb0e477</string>
+	<key>MixpanelSecretKey</key>
+	<string>e9cf4f4bbe66a3bfb04d2e4f73a2449b</string>
 	<key>Pfp-AmazonPictureFolder</key>
 	<string>staging/300x300/</string>
 	<key>Pfp-ApiBaseUrl</key>

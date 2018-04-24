@@ -25,6 +25,26 @@
     [self showInitialViewControllerFromStoryboardNamed:@"Main" addingNavigation:NO];
 }
 
++ (UIStoryboard *)introStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
+}
+
++ (UIStoryboard *)onboardingStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"Onboarding" bundle:nil];
+}
+
++ (UIStoryboard *)mainStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+}
+
++ (UIStoryboard *)myEntouragesStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"MyEntourages" bundle:nil];
+}
+
 + (UIStoryboard*)entourageEditorStoryboard {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"EntourageEditor" bundle:nil];
     return storyboard;

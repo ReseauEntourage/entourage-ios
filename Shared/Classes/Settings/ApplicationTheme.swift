@@ -22,4 +22,11 @@ class ApplicationTheme: NSObject {
     @objc var primaryNavigationBarTintColor: UIColor = UIColor.white
     @objc var secondaryNavigationBarTintColor: UIColor = UIColor.appOrange()
     @objc var backgroundThemeColor: UIColor = UIColor.appOrange()
+    
+    @objc class func applicationLogo () -> UIImage {
+        if OTAppConfiguration.sharedInstance().environmentConfiguration.applicationType == .voisinAge {
+            return UIImage.init(named: "pfp-logo")!
+        }
+        return UIImage.init(named: "entourageLogo")!
+    }
 }

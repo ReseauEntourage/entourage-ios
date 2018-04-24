@@ -4,10 +4,20 @@
 <dict>
 	<key>AmazonPictureFolder</key>
 	<string>300x300/</string>
+	<key>AmazonAccessKey</key>
+	<string>AKIAIMJQ4B4OJY2X3FDQ</string>
+	<key>AmazonSecretKey</key>
+	<string>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</string>
 	<key>ApiBaseUrl</key>
 	<string>https://api.entourage.social/api/v1/</string>
 	<key>ApiKey</key>
 	<string>69b3961a0d1e6b99c4b36a40</string>
+	<key>MixpanelToken</key>
+	<string>613be420a69e5fdc010072338bf0a058</string>
+	<key>MixpanelKey</key>
+	<string>844592e2d355c0a61c096b8d057fdb57</string>
+	<key>MixpanelSecretKey</key>
+	<string>c34e05aae226b4c4b7354093db39cb72</string>
 	<key>Pfp-AmazonPictureFolder</key>
 	<string>300x300/</string>
 	<key>Pfp-ApiBaseUrl</key>

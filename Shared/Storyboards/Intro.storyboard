@@ -180,7 +180,7 @@
         <!--Startup View Controller-->
         <scene sceneID="6VV-8c-dP7">
             <objects>
-                <viewController id="d0v-Fd-fA9" customClass="OTStartupViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTStartupViewController" id="d0v-Fd-fA9" customClass="OTStartupViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qgm-QM-88m"/>
                         <viewControllerLayoutGuide type="bottom" id="W7p-IX-DwJ"/>
@@ -332,7 +332,7 @@
         <!--Login-->
         <scene sceneID="CLK-Te-XOf">
             <objects>
-                <viewController storyboardIdentifier="OTLoginViewControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="Gt1-cc-4DI" userLabel="Login" customClass="OTLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTLoginViewController" automaticallyAdjustsScrollViewInsets="NO" id="Gt1-cc-4DI" userLabel="Login" customClass="OTLoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wX3-SU-kbf"/>
                         <viewControllerLayoutGuide type="bottom" id="8IX-Sx-Dln"/>
@@ -796,7 +796,7 @@ saisissez votre numéro de portable.</string>
         <!--Welcome View Controller-->
         <scene sceneID="Jxm-X1-QSd">
             <objects>
-                <viewController id="8Pa-2W-O1j" customClass="OTWelcomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTWelcomeViewController" id="8Pa-2W-O1j" customClass="OTWelcomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UIV-Pr-4Jl"/>
                         <viewControllerLayoutGuide type="bottom" id="b9i-3f-AXD"/>
@@ -913,6 +913,6 @@ En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez
         <image name="whitePhone" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="usp-d3-u4q"/>
+        <segue reference="GFk-L8-2yS"/>
     </inferredMetricsTieBreakers>
 </document>

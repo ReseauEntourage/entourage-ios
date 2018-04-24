@@ -22,6 +22,7 @@
 #import "OTTutorialService.h"
 #import "OTLocationManager.h"
 #import "Mixpanel/Mixpanel.h"
+#import "OTAppState.h"
 
 @import Firebase;
 
@@ -88,17 +89,21 @@
     [SVProgressHUD show];
     [[OTOnboardingJoinService new] checkForJoins:^(OTEntourageInvitation *joinedInvitation) {
         [SVProgressHUD dismiss];
+        
         if(joinedInvitation) {
             [SVProgressHUD showWithStatus:OTLocalizedString(@"joiningEntouragesMessage")];
             [[OTDeepLinkService new] navigateTo:joinedInvitation.entourageId withType:nil];
-            [[OTTutorialService new] showTutorial];
+            
+            if ([OTAppConfiguration shouldShowIntroTutorial]) {
+                [[OTTutorialService new] showTutorial];
+            }
         }
         else {
-            [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+            [OTAppState navigateToAuthenticatedLandingScreen];
         }
     } withError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"automaticJoinFailedMessage")];
-        [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+        [OTAppState navigateToAuthenticatedLandingScreen];
     }];
 }
 
