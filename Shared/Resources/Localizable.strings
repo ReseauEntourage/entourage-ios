@@ -9,6 +9,10 @@
 // Keys
 "CURRENT_USER" = "currentUser";
 
+// Welcome
+"welcomeText" = "Vous allez rejoindre une communauté de citoyens qui collaborent pour lutter contre l’exclusion sociale! En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.";
+"pfp_welcomeText" = "Voisin-Age est la communauté de voisins qui tissent des liens intergénérationnels. \nEn vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.";
+
 // User prompted
 "microphoneNotEnabled" = "Accès refusé au micro";
 "promptForMicrophone" = "L'application demande l'accès à votre microphone.\n\nSVP Activez l'accès au micro pour cette app dans Réglages > Confidentialité > Micro";
@@ -254,6 +258,12 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "invalidPhoneNumberOrCode" = "Le numéro de téléphone et ce code d’accès ne correspondent pas.";
 "mustAddCode" = "Veuillez renseigner un code de vérification";
 "invalidPhoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
+"userNameDescriptionText" = "Seuls le prénom et la première lettre du nom apparaitront aux autres utilisateurs.";
+"pfp-userNameDescriptionText" = "Si vous êtes voisiné(e), seuls votre prénom et la première lettre de votre nom apparaitront.";
+"userEmailDescriptionText" = "Nous ne l’utiliserons que pour vous envoyer notre newsletter et les dernières actualités d’Entourage";
+"pfp_userEmailDescriptionText" = "Nous vous enverrons uniquement des informations de votre voisinage";
+"userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\n Activer les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
+"pfp_userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\n Activer les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
 "close" = "Fermer";

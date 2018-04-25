@@ -23,6 +23,7 @@
 #import "OTLocationManager.h"
 #import "Mixpanel/Mixpanel.h"
 #import "OTAppState.h"
+#import "OTAppConfiguration.h"
 
 @import Firebase;
 

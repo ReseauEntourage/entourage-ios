@@ -897,6 +897,8 @@ En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez
                     <connections>
                         <outlet property="continueButton" destination="8vj-nj-f39" id="JHO-46-BHf"/>
                         <outlet property="txtTerms" destination="wF4-5f-khB" id="Zjt-g3-JHE"/>
+                        <outlet property="welcomeLogo" destination="3bR-VB-ndO" id="rEv-pr-efs"/>
+                        <outlet property="welcomeTitleLabel" destination="eEZ-Ma-DdB" id="G8F-SM-Zfm"/>
                         <segue destination="Gt1-cc-4DI" kind="show" identifier="WelcomeLoginSegue" id="GFk-L8-2yS"/>
                         <segue destination="L2Y-m3-WnX" kind="show" identifier="SegueOnboarding" id="YvZ-rG-WF2"/>
                     </connections>

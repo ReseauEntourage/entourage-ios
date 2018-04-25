@@ -1,0 +1,13 @@
+/*
+  Localizable.strings
+  entourage
+
+  Created by Guillaume Lagorce on 10/10/2014.
+  Copyright (c) 2014 OCTO Technology. All rights reserved.
+*/
+
+"pfp_welcomeText" = "Voisin-Age est la communauté de voisins qui tissent des liens intergénérationnels. \nEn vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.";
+
+"pfp-userNameDescriptionText" = "Si vous êtes voisiné(e), seuls votre prénom et la première lettre de votre nom apparaitront.";
+"pfp_userEmailDescriptionText" = "Nous vous enverrons uniquement des informations de votre voisinage";
+"pfp_userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\n Activer les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";

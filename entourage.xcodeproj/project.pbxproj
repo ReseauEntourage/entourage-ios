@@ -1134,6 +1134,8 @@
 		A296B931208DFE8A00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
 		A296B932208E06AA00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
 		A296B933208E06AB00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
+		A296B937208FB46C00F6AFBD /* Pfp-Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A296B936208FB46B00F6AFBD /* Pfp-Localizable.strings */; };
+		A296B938208FB46C00F6AFBD /* Pfp-Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A296B936208FB46B00F6AFBD /* Pfp-Localizable.strings */; };
 		A2E5FA09208629B60099B989 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA07208629B50099B989 /* staging.plist */; };
 		A2E5FA0A208629B60099B989 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA08208629B50099B989 /* prod.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
@@ -1902,6 +1904,7 @@
 		A296B92E208DEC5400F6AFBD /* PFPConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFPConsts.h; sourceTree = "<group>"; };
 		A296B92F208DFE8A00F6AFBD /* OTAppState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppState.h; sourceTree = "<group>"; };
 		A296B930208DFE8A00F6AFBD /* OTAppState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppState.m; sourceTree = "<group>"; };
+		A296B936208FB46B00F6AFBD /* Pfp-Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "Pfp-Localizable.strings"; path = "Shared/Resources/Pfp-Localizable.strings"; sourceTree = SOURCE_ROOT; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA07208629B50099B989 /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
 		A2E5FA08208629B50099B989 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
@@ -3408,6 +3411,7 @@
 		A296B8F3208720E100F6AFBD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A296B936208FB46B00F6AFBD /* Pfp-Localizable.strings */,
 				A296B90D2087218700F6AFBD /* Entourage.xcassets */,
 			);
 			path = Resources;
@@ -3656,6 +3660,7 @@
 				A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
 				A21D65B62085FDAA00EF8E0E /* Popup.storyboard in Resources */,
 				A21D65BE2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard in Resources */,
+				A296B937208FB46C00F6AFBD /* Pfp-Localizable.strings in Resources */,
 				A202E7D52085CFC40058F32C /* Localizable.strings in Resources */,
 				A202E7D92085CFC40058F32C /* categoryJson.json in Resources */,
 				A21D64AA2085E8B400EF8E0E /* Platinia.gpx in Resources */,
@@ -3744,6 +3749,7 @@
 				A296B8BF20871CFC00F6AFBD /* SF-UI-Text-RegularItalic.otf in Resources */,
 				A296B8C020871CFC00F6AFBD /* SF-UI-Text-BoldItalic.otf in Resources */,
 				A296B8C120871CFC00F6AFBD /* InfoPlist.strings in Resources */,
+				A296B938208FB46C00F6AFBD /* Pfp-Localizable.strings in Resources */,
 				A296B8C220871CFC00F6AFBD /* ActiveFeedItem.storyboard in Resources */,
 				A296B8C320871CFC00F6AFBD /* UserProfileEditor.storyboard in Resources */,
 				A296B8C420871CFC00F6AFBD /* Disclaimer.storyboard in Resources */,
