@@ -62,6 +62,7 @@ class OnBoardingButton: UIButton {
 
   override func awakeFromNib() {
     super.awakeFromNib()
+    self.setTitleColor(ApplicationTheme.shared().backgroundThemeColor, for: UIControlState.normal)
   }
 
   override var isEnabled: Bool {

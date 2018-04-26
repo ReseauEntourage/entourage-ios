@@ -59,6 +59,8 @@
     self.codeCountry = @"+33";
     
     self.countryCodePicker.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    
+    [self.validateButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

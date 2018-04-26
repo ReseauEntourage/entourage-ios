@@ -482,6 +482,14 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return OTLocalizedString(@"userNotificationsDescriptionText");
 }
 
++ (NSString *)geolocalisationRightsDescription
+{
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_geolocalisationDescriptionText");
+    }
+    
+    return OTLocalizedString(@"geolocalisationDescriptionText");
+}
 
 
 @end

@@ -260,7 +260,7 @@
                                                     <constraint firstAttribute="width" constant="56" id="k7W-2L-MWz"/>
                                                 </constraints>
                                                 <state key="normal" image="nextFull">
-                                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <state key="disabled" image="nextOpacity70"/>
                                                 <userDefinedRuntimeAttributes>
@@ -293,7 +293,7 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="tRX-Ut-nfY" firstAttribute="trailing" secondItem="Ipw-CS-mnA" secondAttribute="trailing" id="7EJ-SS-Ds2"/>
                                             <constraint firstItem="HTl-fM-N6f" firstAttribute="top" secondItem="2Jf-Al-b2c" secondAttribute="bottom" id="CvV-3A-Icj"/>

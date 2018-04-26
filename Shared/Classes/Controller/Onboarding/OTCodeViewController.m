@@ -53,6 +53,8 @@
     
     self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     
+    //[self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
     if([NSUserDefaults standardUserDefaults].currentUser) {
         [NSUserDefaults standardUserDefaults].temporaryUser = [NSUserDefaults standardUserDefaults].currentUser;
         [NSUserDefaults standardUserDefaults].currentUser = nil;

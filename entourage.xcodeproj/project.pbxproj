@@ -1136,6 +1136,8 @@
 		A296B933208E06AB00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
 		A296B937208FB46C00F6AFBD /* Pfp-Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A296B936208FB46B00F6AFBD /* Pfp-Localizable.strings */; };
 		A296B938208FB46C00F6AFBD /* Pfp-Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A296B936208FB46B00F6AFBD /* Pfp-Localizable.strings */; };
+		A296B93B2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
+		A296B93C2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
 		A2E5FA09208629B60099B989 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA07208629B50099B989 /* staging.plist */; };
 		A2E5FA0A208629B60099B989 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2E5FA08208629B50099B989 /* prod.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
@@ -1905,6 +1907,8 @@
 		A296B92F208DFE8A00F6AFBD /* OTAppState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppState.h; sourceTree = "<group>"; };
 		A296B930208DFE8A00F6AFBD /* OTAppState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppState.m; sourceTree = "<group>"; };
 		A296B936208FB46B00F6AFBD /* Pfp-Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "Pfp-Localizable.strings"; path = "Shared/Resources/Pfp-Localizable.strings"; sourceTree = SOURCE_ROOT; };
+		A296B9392091ABDD00F6AFBD /* OTLocalisationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTLocalisationService.h; sourceTree = "<group>"; };
+		A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTLocalisationService.m; sourceTree = "<group>"; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA07208629B50099B989 /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
 		A2E5FA08208629B50099B989 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
@@ -2717,6 +2721,8 @@
 				A202E9702085D2C60058F32C /* OTTutorialService.m */,
 				A202E96B2085D2C60058F32C /* OTUserService.h */,
 				A202E9792085D2C60058F32C /* OTUserService.m */,
+				A296B9392091ABDD00F6AFBD /* OTLocalisationService.h */,
+				A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -4079,6 +4085,7 @@
 				A202EBAF2085D2C80058F32C /* OTImageFeedItemsFilterCell.m in Sources */,
 				A202EC132085D2C80058F32C /* OTSafariService.m in Sources */,
 				A202EC612085D2C80058F32C /* OTCountryCodePickerViewDataSource.m in Sources */,
+				A296B93B2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */,
 				A202EC972085D2C80058F32C /* OTMessageDataSourceBehavior.m in Sources */,
 				A202ECF32085D2C80058F32C /* OTPushNotificationsService.m in Sources */,
 				A202EC4B2085D2C80058F32C /* OTToggleVisibleBehavior.m in Sources */,
@@ -4724,6 +4731,7 @@
 				A296B75920871CFC00F6AFBD /* OTImageFeedItemsFilterCell.m in Sources */,
 				A296B75A20871CFC00F6AFBD /* OTSafariService.m in Sources */,
 				A296B75B20871CFC00F6AFBD /* OTCountryCodePickerViewDataSource.m in Sources */,
+				A296B93C2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */,
 				A296B75C20871CFC00F6AFBD /* OTMessageDataSourceBehavior.m in Sources */,
 				A296B75D20871CFC00F6AFBD /* OTPushNotificationsService.m in Sources */,
 				A296B75E20871CFC00F6AFBD /* OTToggleVisibleBehavior.m in Sources */,

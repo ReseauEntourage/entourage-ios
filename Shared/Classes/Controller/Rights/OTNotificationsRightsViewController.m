@@ -24,6 +24,7 @@
 #import "Mixpanel/Mixpanel.h"
 #import "OTAppState.h"
 #import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @import Firebase;
 
@@ -33,7 +34,11 @@
     [super viewDidLoad];
     self.notificationEnabled = @"NO";
     self.title = @"";
+    
     [self addIgnoreButton];
+    self.descLabel.text = [OTAppConfiguration notificationsRightsDescription];
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationAuthorizationChanged:) name:kNotificationPushStatusChanged object:nil];
 }

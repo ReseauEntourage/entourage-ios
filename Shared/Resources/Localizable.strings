@@ -11,7 +11,7 @@
 
 // Welcome
 "welcomeText" = "Vous allez rejoindre une communauté de citoyens qui collaborent pour lutter contre l’exclusion sociale! En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.";
-"pfp_welcomeText" = "Voisin-Age est la communauté de voisins qui tissent des liens intergénérationnels. \nEn vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.";
+"geolocalisationDescriptionText" = "Entourage, c’est utile parce que c’est local!\nParticipez à la solidarité de votre quartier : pour voir les actions de vos voisins, qu’ils soient avec ou sans-abri, activez la géolocalisation.";
 
 // User prompted
 "microphoneNotEnabled" = "Accès refusé au micro";
@@ -259,11 +259,8 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "mustAddCode" = "Veuillez renseigner un code de vérification";
 "invalidPhoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
 "userNameDescriptionText" = "Seuls le prénom et la première lettre du nom apparaitront aux autres utilisateurs.";
-"pfp-userNameDescriptionText" = "Si vous êtes voisiné(e), seuls votre prénom et la première lettre de votre nom apparaitront.";
 "userEmailDescriptionText" = "Nous ne l’utiliserons que pour vous envoyer notre newsletter et les dernières actualités d’Entourage";
-"pfp_userEmailDescriptionText" = "Nous vous enverrons uniquement des informations de votre voisinage";
 "userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\n Activer les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
-"pfp_userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\n Activer les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
 "close" = "Fermer";

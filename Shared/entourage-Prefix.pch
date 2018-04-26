@@ -17,5 +17,6 @@
     #import "OTAppConfiguration.h"
     #import "UIColor+pfp.h"
     #import "OTAppState.h"
+    #import "OTLocalisationService.h"
 #endif
 
