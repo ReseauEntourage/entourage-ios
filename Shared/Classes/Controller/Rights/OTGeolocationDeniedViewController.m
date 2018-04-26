@@ -9,8 +9,18 @@
 #import "OTGeolocationDeniedViewController.h"
 #import "OTLocationManager.h"
 #import "NSNotification+entourage.h"
+#import "entourage-Swift.h"
 
 @implementation OTGeolocationDeniedViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.activateButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    [self.ignoreButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    self.titleLabel.text = [OTAppConfiguration notificationsNeedDescription];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

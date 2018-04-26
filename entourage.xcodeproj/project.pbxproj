@@ -1909,6 +1909,7 @@
 		A296B936208FB46B00F6AFBD /* Pfp-Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "Pfp-Localizable.strings"; path = "Shared/Resources/Pfp-Localizable.strings"; sourceTree = SOURCE_ROOT; };
 		A296B9392091ABDD00F6AFBD /* OTLocalisationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTLocalisationService.h; sourceTree = "<group>"; };
 		A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTLocalisationService.m; sourceTree = "<group>"; };
+		A29BAAC42091D0BB0003800D /* Pfp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pfp-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA07208629B50099B989 /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = "<group>"; };
 		A2E5FA08208629B50099B989 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
@@ -3457,6 +3458,7 @@
 		A296B9162087A6B900F6AFBD /* Environment */ = {
 			isa = PBXGroup;
 			children = (
+				A29BAAC42091D0BB0003800D /* Pfp-Bridging-Header.h */,
 				A296B9172087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.beta.plist */,
 				A296B9182087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist */,
 			);
@@ -5360,7 +5362,7 @@
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BETA PFP";
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Shared-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "pfp/Settings/Environment/pfp-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -5413,7 +5415,7 @@
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PFP;
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Shared-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "pfp/Settings/Environment/pfp-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -5469,7 +5471,7 @@
 				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PFP;
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/Shared-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "pfp/Settings/Environment/pfp-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;

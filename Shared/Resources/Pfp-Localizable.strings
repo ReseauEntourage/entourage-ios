@@ -13,3 +13,5 @@
 "pfp_userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\n Activer les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
 
 "pfp_geolocalisationDescriptionText" = "Voisin-Age, c’est utile parce que c’est local!\nParticipez à la vie du réseau dans votre quartier. Pour découvrir les nouvelles sorties de votre voisinage, activez la géolocalisation.";
+
+"pfp_notificationNeedDescription" = "Pour vous faire découvrir le réseau Voisin-Age autour de vous, Voisin-Age doit connaître votre position.";

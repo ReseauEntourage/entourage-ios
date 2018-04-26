@@ -284,7 +284,7 @@ Activer les notifications vous permet d’être informé(e) des nouveautés dans
                             <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DBY-cw-2gO">
                                 <rect key="frame" x="-3" y="27" width="336" height="427"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapPin" translatesAutoresizingMaskIntoConstraints="NO" id="6e2-gd-bHF">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapPinSquare" translatesAutoresizingMaskIntoConstraints="NO" id="6e2-gd-bHF">
                                         <rect key="frame" x="131" y="2" width="75" height="75.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -313,14 +313,8 @@ votre position.</string>
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nous concoctons une alternative qui sera disponible prochainement !" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnj-T2-BzO">
-                                        <rect key="frame" x="21" y="349" width="284" height="75.5"/>
-                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="21"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cef-68-9y9">
-                                        <rect key="frame" x="19" y="228" width="288" height="50"/>
+                                        <rect key="frame" x="19" y="242" width="288" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="z7B-u2-qyB"/>
@@ -338,17 +332,43 @@ votre position.</string>
                                             <action selector="activateGeolocation" destination="evb-jd-QBs" eventType="touchUpInside" id="YJU-XX-ngd"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nous concoctons une alternative qui sera disponible prochainement !" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnj-T2-BzO">
+                                        <rect key="frame" x="21" y="349" width="284" height="75.5"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="21"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHz-5J-CRX">
+                                        <rect key="frame" x="19" y="300" width="288" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="288" id="PFP-q9-GPg"/>
+                                            <constraint firstAttribute="height" constant="50" id="XUW-0y-0SP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                        <state key="normal" title="Ignorer">
+                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="cef-68-9y9" firstAttribute="top" secondItem="Y5g-nI-qNv" secondAttribute="bottom" constant="7.5" id="48w-st-HYD"/>
+                                    <constraint firstItem="cef-68-9y9" firstAttribute="top" secondItem="Y5g-nI-qNv" secondAttribute="bottom" constant="21.5" id="48w-st-HYD"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="427" id="4Wt-MQ-eMc"/>
                                     <constraint firstAttribute="bottom" secondItem="cnj-T2-BzO" secondAttribute="bottom" constant="2" id="HOl-pm-phL"/>
                                     <constraint firstItem="6e2-gd-bHF" firstAttribute="top" secondItem="DBY-cw-2gO" secondAttribute="top" constant="2" id="Ui0-Eb-DOt"/>
                                     <constraint firstItem="6e2-gd-bHF" firstAttribute="centerX" secondItem="DBY-cw-2gO" secondAttribute="centerX" id="X42-Ly-jtH"/>
                                     <constraint firstAttribute="height" constant="427" id="gbJ-wc-lxx"/>
+                                    <constraint firstAttribute="trailing" secondItem="sHz-5J-CRX" secondAttribute="trailing" constant="29" id="mZ0-UI-NmZ"/>
+                                    <constraint firstItem="sHz-5J-CRX" firstAttribute="leading" secondItem="DBY-cw-2gO" secondAttribute="leading" constant="19" id="njp-H8-PHw"/>
                                     <constraint firstItem="cef-68-9y9" firstAttribute="centerX" secondItem="DBY-cw-2gO" secondAttribute="centerX" constant="-5" id="uzR-Ta-dSe"/>
                                     <constraint firstItem="Y5g-nI-qNv" firstAttribute="top" secondItem="6e2-gd-bHF" secondAttribute="bottom" constant="17.5" id="wkA-qq-zvY"/>
+                                    <constraint firstItem="sHz-5J-CRX" firstAttribute="top" secondItem="cef-68-9y9" secondAttribute="bottom" constant="8" id="xhu-b5-9uO"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -372,6 +392,10 @@ votre position.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activateButton" destination="cef-68-9y9" id="ffW-vE-Cyj"/>
+                        <outlet property="ignoreButton" destination="sHz-5J-CRX" id="pPu-Lq-ZCZ"/>
+                        <outlet property="subtitleLabel" destination="cnj-T2-BzO" id="XhE-kv-1q7"/>
+                        <outlet property="titleLabel" destination="Y5g-nI-qNv" id="0qI-59-xcl"/>
                         <segue destination="gUz-vW-h1c" kind="show" identifier="GrantedGeoSegue" id="c2y-uN-gYU"/>
                     </connections>
                 </viewController>
@@ -381,7 +405,6 @@ votre position.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="mapPin" width="32" height="32"/>
         <image name="mapPinSquare" width="56" height="56"/>
         <image name="notificationsSquare" width="56" height="56"/>
     </resources>

@@ -243,7 +243,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un peu de chaleur humaine." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPF-Wr-lQ0">
-                                <rect key="frame" x="48" y="256" width="280" height="58"/>
+                                <rect key="frame" x="48" y="267" width="280" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="fz7-U9-CWf"/>
                                     <constraint firstAttribute="width" constant="280" id="xZd-ZE-XbC"/>
@@ -281,7 +281,7 @@
                             <constraint firstAttribute="bottom" secondItem="tPf-h7-A0x" secondAttribute="bottom" id="9s4-4M-lZ7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="H1V-0f-AM4" secondAttribute="trailing" constant="-4" id="Csv-YN-Mdp"/>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="D3N-XI-gkf"/>
-                            <constraint firstItem="bPF-Wr-lQ0" firstAttribute="bottom" secondItem="60w-tv-tKx" secondAttribute="centerY" constant="-20" id="Hxe-we-Y2Z"/>
+                            <constraint firstItem="bPF-Wr-lQ0" firstAttribute="bottom" secondItem="60w-tv-tKx" secondAttribute="centerY" constant="-8.5" id="Hxe-we-Y2Z"/>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="I3C-ND-duB"/>
                             <constraint firstItem="tPf-h7-A0x" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leading" id="KX8-Cv-XdY"/>
                             <constraint firstItem="bPF-Wr-lQ0" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="Myk-g9-Wav"/>
@@ -915,6 +915,6 @@ En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez
         <image name="whitePhone" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GFk-L8-2yS"/>
+        <segue reference="usp-d3-u4q"/>
     </inferredMetricsTieBreakers>
 </document>

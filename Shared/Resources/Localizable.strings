@@ -12,6 +12,7 @@
 // Welcome
 "welcomeText" = "Vous allez rejoindre une communauté de citoyens qui collaborent pour lutter contre l’exclusion sociale! En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.";
 "geolocalisationDescriptionText" = "Entourage, c’est utile parce que c’est local!\nParticipez à la solidarité de votre quartier : pour voir les actions de vos voisins, qu’ils soient avec ou sans-abri, activez la géolocalisation.";
+"notificationNeedDescription" = "Pour vous faire découvrir les actions solidaires autour de vous, Entourage doit connaître votre position.";
 
 // User prompted
 "microphoneNotEnabled" = "Accès refusé au micro";

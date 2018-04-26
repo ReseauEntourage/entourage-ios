@@ -203,13 +203,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Seuls le prénom et la première lettre du nom apparaitront aux autres utilisateurs." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="7v0-hv-w6f">
-                                        <rect key="frame" x="20" y="147" width="343" height="36"/>
+                                        <rect key="frame" x="20" y="147" width="343" height="35"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2M-ml-Dbj">
-                                        <rect key="frame" x="0.0" y="221" width="383" height="203"/>
+                                        <rect key="frame" x="0.0" y="220" width="383" height="203"/>
                                         <subviews>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HTl-fM-N6f">
                                                 <rect key="frame" x="15" y="50" width="353" height="1"/>

@@ -59,5 +59,6 @@
 + (NSString *)userProfileEmailDescription;
 + (NSString *)notificationsRightsDescription;
 + (NSString *)geolocalisationRightsDescription;
++ (NSString *)notificationsNeedDescription;
 
 @end
