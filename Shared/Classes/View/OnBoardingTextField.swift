@@ -62,6 +62,13 @@ class OnBoardingButton: UIButton {
 
   override func awakeFromNib() {
     super.awakeFromNib()
+
+    if let customImage = self.image(for: UIControlState.normal) {
+        let customImageWithTint = customImage.withRenderingMode(.alwaysTemplate)
+        self.setImage(customImageWithTint, for: .normal)
+        self.backgroundColor = UIColor.white
+        self.tintColor = ApplicationTheme.shared().backgroundThemeColor
+    }
   }
 
   override var isEnabled: Bool {

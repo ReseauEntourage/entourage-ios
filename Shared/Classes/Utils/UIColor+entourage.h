@@ -30,4 +30,5 @@
 + (UIColor *)maxLenghtReachedColor;
 
 + (UIFont *)appTextFieldPlaceholderFont;
+
 @end

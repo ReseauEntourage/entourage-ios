@@ -131,6 +131,9 @@ Participez à la solidarité de votre quartier : pour voir les actions de vos vo
                     </view>
                     <navigationItem key="navigationItem" id="5FM-3S-kdS"/>
                     <connections>
+                        <outlet property="continueButton" destination="UXJ-eW-gG2" id="E0a-2q-BBt"/>
+                        <outlet property="rightsDescLabel" destination="dqk-c4-rFx" id="cgL-9e-LvB"/>
+                        <outlet property="rightsTitleLabel" destination="6rv-q7-YzH" id="eHV-AA-6gD"/>
                         <segue destination="gUz-vW-h1c" kind="show" identifier="GeoToNotificationsSegue" id="X8W-6a-Kl5"/>
                         <segue destination="evb-jd-QBs" kind="show" identifier="NoLocationRightsSegue" id="MOn-Od-XM1"/>
                     </connections>
@@ -253,6 +256,10 @@ Activer les notifications vous permet d’être informé(e) des nouveautés dans
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="aw7-FF-05m"/>
+                    <connections>
+                        <outlet property="continueButton" destination="wEJ-eh-I02" id="2Cf-Yg-EVn"/>
+                        <outlet property="descLabel" destination="ROi-Zv-4sG" id="EIq-Pd-oFy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fhm-Wi-4x8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -270,15 +277,16 @@ Activer les notifications vous permet d’être informé(e) des nouveautés dans
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="ZAK-ei-4qC">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZAK-ei-4qC">
                                 <rect key="frame" x="-8" y="0.0" width="336" height="480"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DBY-cw-2gO">
                                 <rect key="frame" x="-3" y="27" width="336" height="427"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entourageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="6e2-gd-bHF">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapPinSquare" translatesAutoresizingMaskIntoConstraints="NO" id="6e2-gd-bHF">
                                         <rect key="frame" x="131" y="2" width="75" height="75.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="JLh-ex-9R0"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="75" id="hbD-a6-WoR"/>
@@ -287,7 +295,7 @@ Activer les notifications vous permet d’être informé(e) des nouveautés dans
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y5g-nI-qNv">
-                                        <rect key="frame" x="21" y="124.5" width="284" height="125.5"/>
+                                        <rect key="frame" x="21" y="95" width="284" height="125.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="58" id="k7Q-3y-7Fq"/>
                                             <constraint firstAttribute="width" constant="280" id="oyE-Eg-eGj"/>
@@ -306,7 +314,7 @@ votre position.</string>
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cef-68-9y9">
-                                        <rect key="frame" x="24" y="274" width="288" height="50"/>
+                                        <rect key="frame" x="19" y="242" width="288" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="z7B-u2-qyB"/>
@@ -330,28 +338,48 @@ votre position.</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHz-5J-CRX">
+                                        <rect key="frame" x="19" y="300" width="288" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="288" id="PFP-q9-GPg"/>
+                                            <constraint firstAttribute="height" constant="50" id="XUW-0y-0SP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                        <state key="normal" title="Ignorer">
+                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="cef-68-9y9" firstAttribute="top" secondItem="Y5g-nI-qNv" secondAttribute="bottom" constant="24" id="48w-st-HYD"/>
+                                    <constraint firstItem="cef-68-9y9" firstAttribute="top" secondItem="Y5g-nI-qNv" secondAttribute="bottom" constant="21.5" id="48w-st-HYD"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="427" id="4Wt-MQ-eMc"/>
                                     <constraint firstAttribute="bottom" secondItem="cnj-T2-BzO" secondAttribute="bottom" constant="2" id="HOl-pm-phL"/>
                                     <constraint firstItem="6e2-gd-bHF" firstAttribute="top" secondItem="DBY-cw-2gO" secondAttribute="top" constant="2" id="Ui0-Eb-DOt"/>
                                     <constraint firstItem="6e2-gd-bHF" firstAttribute="centerX" secondItem="DBY-cw-2gO" secondAttribute="centerX" id="X42-Ly-jtH"/>
                                     <constraint firstAttribute="height" constant="427" id="gbJ-wc-lxx"/>
-                                    <constraint firstItem="cef-68-9y9" firstAttribute="centerX" secondItem="DBY-cw-2gO" secondAttribute="centerX" id="uzR-Ta-dSe"/>
-                                    <constraint firstItem="Y5g-nI-qNv" firstAttribute="top" secondItem="6e2-gd-bHF" secondAttribute="bottom" constant="47" id="wkA-qq-zvY"/>
+                                    <constraint firstAttribute="trailing" secondItem="sHz-5J-CRX" secondAttribute="trailing" constant="29" id="mZ0-UI-NmZ"/>
+                                    <constraint firstItem="sHz-5J-CRX" firstAttribute="leading" secondItem="DBY-cw-2gO" secondAttribute="leading" constant="19" id="njp-H8-PHw"/>
+                                    <constraint firstItem="cef-68-9y9" firstAttribute="centerX" secondItem="DBY-cw-2gO" secondAttribute="centerX" constant="-5" id="uzR-Ta-dSe"/>
+                                    <constraint firstItem="Y5g-nI-qNv" firstAttribute="top" secondItem="6e2-gd-bHF" secondAttribute="bottom" constant="17.5" id="wkA-qq-zvY"/>
+                                    <constraint firstItem="sHz-5J-CRX" firstAttribute="top" secondItem="cef-68-9y9" secondAttribute="bottom" constant="8" id="xhu-b5-9uO"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ZAK-ei-4qC" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" constant="-24" id="9qO-rW-Awm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="cef-68-9y9" secondAttribute="trailing" constant="-5" id="B5B-1b-ytl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cef-68-9y9" secondAttribute="trailing" id="B5B-1b-ytl"/>
                             <constraint firstItem="DBY-cw-2gO" firstAttribute="leading" secondItem="ZAK-ei-4qC" secondAttribute="leading" constant="5" id="Gsu-rU-YIK"/>
                             <constraint firstItem="qfP-1j-fFF" firstAttribute="top" secondItem="ZAK-ei-4qC" secondAttribute="bottom" id="JRO-xQ-Kfi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Y5g-nI-qNv" secondAttribute="trailing" constant="2" id="Kj1-ut-eZL"/>
-                            <constraint firstItem="cef-68-9y9" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" constant="5" id="Puu-SH-tqM"/>
+                            <constraint firstItem="cef-68-9y9" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" id="Puu-SH-tqM"/>
                             <constraint firstItem="ZAK-ei-4qC" firstAttribute="top" secondItem="Wfa-yT-nOy" secondAttribute="top" id="RST-uE-aqp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZAK-ei-4qC" secondAttribute="trailing" constant="-24" id="Sdl-8y-v64"/>
                             <constraint firstItem="Y5g-nI-qNv" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" constant="2" id="VeQ-0d-RbQ"/>
@@ -364,6 +392,10 @@ votre position.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activateButton" destination="cef-68-9y9" id="ffW-vE-Cyj"/>
+                        <outlet property="ignoreButton" destination="sHz-5J-CRX" id="pPu-Lq-ZCZ"/>
+                        <outlet property="subtitleLabel" destination="cnj-T2-BzO" id="XhE-kv-1q7"/>
+                        <outlet property="titleLabel" destination="Y5g-nI-qNv" id="0qI-59-xcl"/>
                         <segue destination="gUz-vW-h1c" kind="show" identifier="GrantedGeoSegue" id="c2y-uN-gYU"/>
                     </connections>
                 </viewController>
@@ -373,12 +405,10 @@ votre position.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="bg" width="166" height="296"/>
-        <image name="entourageLogo" width="75" height="75"/>
         <image name="mapPinSquare" width="56" height="56"/>
         <image name="notificationsSquare" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="X8W-6a-Kl5"/>
+        <segue reference="c2y-uN-gYU"/>
     </inferredMetricsTieBreakers>
 </document>

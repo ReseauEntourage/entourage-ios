@@ -28,6 +28,7 @@
 + (OTAppConfiguration*)sharedInstance;
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions;
 + (UITabBarController*)configureMainTabBar;
++ (void)configureTabBarAppearance:(UITabBarController*)tabBarController;
 
 + (void)applicationDidBecomeActive:(UIApplication *)application;
 + (void)applicationWillEnterForeground:(UIApplication *)application;
@@ -52,5 +53,12 @@
 + (BOOL)shouldAllowLoginFromWelcomeScreen;
 
 + (NSString*)aboutUrlString;
++ (NSString *)welcomeDescription;
++ (UIImage*)welcomeLogo;
++ (NSString *)userProfileNameDescription;
++ (NSString *)userProfileEmailDescription;
++ (NSString *)notificationsRightsDescription;
++ (NSString *)geolocalisationRightsDescription;
++ (NSString *)notificationsNeedDescription;
 
 @end

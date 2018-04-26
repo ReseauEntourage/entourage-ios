@@ -21,8 +21,10 @@
 
 @interface OTWelcomeViewController ()
 
+@property (nonatomic, weak) IBOutlet UILabel *welcomeTitleLabel;
 @property (nonatomic, weak) IBOutlet UITextView *txtTerms;
 @property (nonatomic, weak) IBOutlet UIButton *continueButton;
+@property (nonatomic, weak) IBOutlet UIImageView *welcomeLogo;
 
 @end
 
@@ -35,6 +37,11 @@
     self.title = @"";
     if (![NSUserDefaults standardUserDefaults].currentUser) {
         [self addLoginBarButton];
+        
+        NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+        self.welcomeTitleLabel.text = [NSString stringWithFormat:@"Bienvenue sur %@", appName];
+        self.txtTerms.text = [OTAppConfiguration welcomeDescription];
+        self.welcomeLogo.image = [OTAppConfiguration welcomeLogo];
         
         [NSAttributedString applyLinkOnTextView:self.txtTerms 
             withText:self.txtTerms.text 

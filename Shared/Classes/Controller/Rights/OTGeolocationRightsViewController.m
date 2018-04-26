@@ -15,6 +15,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "Mixpanel/Mixpanel.h"
 #import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @import Firebase;
 
@@ -24,6 +25,11 @@
     [super viewDidLoad];
     
     self.title = @"";
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+
+    self.rightsDescLabel.text = [OTAppConfiguration geolocalisationRightsDescription];
     [self addIgnoreButton];
     [self.navigationController presentTransparentNavigationBar];
 }
