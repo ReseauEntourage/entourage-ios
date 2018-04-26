@@ -41,12 +41,6 @@
 			</array>
 		</dict>
 		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb276507866203529</string>
-			</array>
-		</dict>
-		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
@@ -98,7 +92,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Pour réaliser votre photo de profil.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Pour envoyer des invitations au réseau Entourage</string>
+	<string>Pour envoyer des invitations au réseau Voisin-Age</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -106,9 +100,9 @@
 	<key>NSLocationUsageDescription</key>
 	<string>Pour afficher les POIs, vos rencontres, etc....</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Pour afficher les entourages à proximité</string>
+	<string>Pour afficher les POIs à proximité</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Pour saisir la description des entourages</string>
+	<string>Pour saisir la description des POIs</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Pour afficher votre photo de profil.</string>
 	<key>UIAppFonts</key>

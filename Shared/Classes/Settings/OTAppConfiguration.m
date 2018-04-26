@@ -378,9 +378,14 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 #pragma mark - Application features/options
 
++ (ApplicationType)applicationType
+{
+    return [OTAppConfiguration sharedInstance].environmentConfiguration.applicationType;
+}
+
 + (BOOL)supportsTourFunctionality
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
     }
     
@@ -389,7 +394,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (BOOL)supportsSolidarityGuideFunctionality
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
     }
     
@@ -397,7 +402,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (BOOL)isGeolocationMandatory {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
     }
     
@@ -405,7 +410,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (BOOL)isMVP {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return YES;
     }
     
@@ -414,7 +419,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (BOOL)shouldShowIntroTutorial
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
     }
     return YES;
@@ -422,7 +427,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (BOOL)shouldAllowLoginFromWelcomeScreen
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
     }
     
@@ -431,7 +436,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (NSString*)aboutUrlString
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return PFP_ABOUT_CGU_URL;
     }
     return ABOUT_CGU_URL;
@@ -439,7 +444,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (NSString *)welcomeDescription
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_welcomeText");
     }
     
@@ -448,7 +453,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (UIImage*)welcomeLogo
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return nil;
     }
     
@@ -457,7 +462,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (NSString *)userProfileNameDescription
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_userNameDescriptionText");
     }
     
@@ -466,7 +471,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (NSString *)userProfileEmailDescription
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_userEmailDescriptionText");
     }
     
@@ -475,7 +480,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (NSString *)notificationsRightsDescription
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_userNotificationsDescriptionText");
     }
     
@@ -484,7 +489,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (NSString *)geolocalisationRightsDescription
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_geolocalisationDescriptionText");
     }
     
