@@ -1138,6 +1138,10 @@
 		A296B93C2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
 		A2A2BC752093123900AA4FC8 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC732093123800AA4FC8 /* prod.plist */; };
 		A2A2BC762093123900AA4FC8 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC742093123800AA4FC8 /* staging.plist */; };
+		A2A2BC772093127D00AA4FC8 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC732093123800AA4FC8 /* prod.plist */; };
+		A2A2BC782093127D00AA4FC8 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC742093123800AA4FC8 /* staging.plist */; };
+		A2A2BC792093127E00AA4FC8 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC732093123800AA4FC8 /* prod.plist */; };
+		A2A2BC7A2093127E00AA4FC8 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC742093123800AA4FC8 /* staging.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
 		A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
 		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
@@ -3694,6 +3698,7 @@
 				A202E7D02085CFC40058F32C /* logo_black.png in Resources */,
 				A202E7F02085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				A202E7EC2085CFC40058F32C /* SF-UI-Text-Light.otf in Resources */,
+				A2A2BC7A2093127E00AA4FC8 /* staging.plist in Resources */,
 				A202E7EA2085CFC40058F32C /* SF-UI-Text-BoldItalic.otf in Resources */,
 				A296B90F2087218700F6AFBD /* Entourage.xcassets in Resources */,
 				A202E7F62085CFC40058F32C /* SF-UI-Text-Heavy.otf in Resources */,
@@ -3701,6 +3706,7 @@
 				A202E7D82085CFC40058F32C /* SharedImages.xcassets in Resources */,
 				6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */,
 				A202E7E82085CFC40058F32C /* SF-UI-Text-Regular.otf in Resources */,
+				A2A2BC792093127E00AA4FC8 /* prod.plist in Resources */,
 				A202E7EE2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
 				A202E7FC2085CFC40058F32C /* CountryList.csv in Resources */,
 				A202E7F42085CFC40058F32C /* SF-UI-Text-Medium.otf in Resources */,
@@ -3749,6 +3755,7 @@
 				A296B8B920871CFC00F6AFBD /* UserProfileDetails.storyboard in Resources */,
 				A296B8BA20871CFC00F6AFBD /* Tutorial.storyboard in Resources */,
 				A296B8BB20871CFC00F6AFBD /* About.storyboard in Resources */,
+				A2A2BC772093127D00AA4FC8 /* prod.plist in Resources */,
 				A296B8BC20871CFC00F6AFBD /* FeedItemFilters.storyboard in Resources */,
 				A296B8BD20871CFC00F6AFBD /* SF-UI-Text-Semibold.otf in Resources */,
 				A296B8BE20871CFC00F6AFBD /* UserProfile.storyboard in Resources */,
@@ -3758,6 +3765,7 @@
 				A296B938208FB46C00F6AFBD /* Pfp-Localizable.strings in Resources */,
 				A296B8C220871CFC00F6AFBD /* ActiveFeedItem.storyboard in Resources */,
 				A296B8C320871CFC00F6AFBD /* UserProfileEditor.storyboard in Resources */,
+				A2A2BC782093127D00AA4FC8 /* staging.plist in Resources */,
 				A296B8C420871CFC00F6AFBD /* Disclaimer.storyboard in Resources */,
 				A296B8C520871CFC00F6AFBD /* SF-UI-Text-MediumItalic.otf in Resources */,
 				A296B8C720871CFC00F6AFBD /* Social.storyboard in Resources */,
