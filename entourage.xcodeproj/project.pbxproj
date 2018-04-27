@@ -1136,6 +1136,8 @@
 		A296B938208FB46C00F6AFBD /* Pfp-Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A296B936208FB46B00F6AFBD /* Pfp-Localizable.strings */; };
 		A296B93B2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
 		A296B93C2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
+		A2A2BC752093123900AA4FC8 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC732093123800AA4FC8 /* prod.plist */; };
+		A2A2BC762093123900AA4FC8 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC742093123800AA4FC8 /* staging.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
 		A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
 		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
@@ -1906,6 +1908,8 @@
 		A296B9392091ABDD00F6AFBD /* OTLocalisationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTLocalisationService.h; sourceTree = "<group>"; };
 		A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTLocalisationService.m; sourceTree = "<group>"; };
 		A29BAAC42091D0BB0003800D /* Pfp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pfp-Bridging-Header.h"; sourceTree = "<group>"; };
+		A2A2BC732093123800AA4FC8 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = SOURCE_ROOT; };
+		A2A2BC742093123800AA4FC8 /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = SOURCE_ROOT; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Appearance.h"; sourceTree = "<group>"; };
 		A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Appearance.m"; sourceTree = "<group>"; };
@@ -3380,6 +3384,8 @@
 				A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */,
 				A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */,
 				A296B8EB20871FD800F6AFBD /* main.m */,
+				A2A2BC732093123800AA4FC8 /* prod.plist */,
+				A2A2BC742093123800AA4FC8 /* staging.plist */,
 				A21D65822085FDAA00EF8E0E /* Storyboards */,
 				A202E7BD2085CFC30058F32C /* Classes */,
 				A202E79E2085CFC20058F32C /* Resources */,
@@ -3603,6 +3609,7 @@
 				A202E7FB2085CFC40058F32C /* CountryList.csv in Resources */,
 				A21D65B52085FDAA00EF8E0E /* Main.storyboard in Resources */,
 				A21D65B92085FDAA00EF8E0E /* PublicFeedItem.storyboard in Resources */,
+				A2A2BC762093123900AA4FC8 /* staging.plist in Resources */,
 				A21D65BA2085FDAA00EF8E0E /* Rights.storyboard in Resources */,
 				A21D65C22085FDAA00EF8E0E /* EncounterEditor.storyboard in Resources */,
 				A21D65B12085FDAA00EF8E0E /* AssociationDetails.storyboard in Resources */,
@@ -3655,6 +3662,7 @@
 				A21D65B02085FDAA00EF8E0E /* EntourageEditor.storyboard in Resources */,
 				A202E7F12085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */,
 				A202E7D72085CFC40058F32C /* SharedImages.xcassets in Resources */,
+				A2A2BC752093123900AA4FC8 /* prod.plist in Resources */,
 				A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
 				A21D65B62085FDAA00EF8E0E /* Popup.storyboard in Resources */,
 				A21D65BE2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard in Resources */,
