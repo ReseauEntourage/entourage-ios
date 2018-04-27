@@ -465,6 +465,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
++ (BOOL)shouldAlwaysRequestUserToUploadPicture
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 + (NSString*)aboutUrlString
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {

@@ -38,11 +38,11 @@
                 }
             }
             else {
-                [OTAppState navigateToUserProfile];
+                [OTAppState continueFromLoginScreen];
             }
         }
         else {
-            [OTAppState navigateToUserProfile];
+            [OTAppState continueFromLoginScreen];
         }
     }
     else
@@ -134,11 +134,17 @@
 + (void)continueFromUserEmailScreen
 {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if (currentUser.avatarURL.length > 0) {
+    BOOL isFirstLogin = [[NSUserDefaults standardUserDefaults] isFirstLogin];
+    
+    if ([OTAppConfiguration shouldAlwaysRequestUserToUploadPicture] || isFirstLogin) {
+        if (currentUser.avatarURL.length > 0) {
+            [OTAppState navigateToRightsScreen:[OTAppState getTopViewController]];
+        }
+        else {
+            [OTAppState navigateToUserPicture:[OTAppState getTopViewController]];
+        }
+    } else {
         [OTAppState navigateToRightsScreen:[OTAppState getTopViewController]];
-    }
-    else {
-        [OTAppState navigateToUserPicture:[OTAppState getTopViewController]];
     }
 }
 

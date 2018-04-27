@@ -51,6 +51,7 @@
 + (BOOL)isMVP;
 + (BOOL)shouldShowIntroTutorial;
 + (BOOL)shouldAllowLoginFromWelcomeScreen;
++ (BOOL)shouldAlwaysRequestUserToUploadPicture;
 
 + (NSString*)aboutUrlString;
 + (NSString *)welcomeDescription;

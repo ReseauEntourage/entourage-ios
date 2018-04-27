@@ -118,7 +118,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="I8k-tV-cnv"/>
                     <connections>
+                        <outlet property="choosePictureButton" destination="ma1-OC-ZEH" id="Ufh-UF-Qxk"/>
                         <outlet property="photoPickerBehavior" destination="aO6-e6-oYq" id="sZZ-zL-6n7"/>
+                        <outlet property="takePictureButton" destination="XBY-w9-wlD" id="a8B-OR-AJA"/>
                         <segue destination="xml-Uv-sbT" kind="show" identifier="PreviewPictureSegue" id="9bG-Kh-Ax2"/>
                         <segue destination="tKv-lS-TmP" kind="show" identifier="SkipPreviewSegue" id="k7U-3x-y4I"/>
                     </connections>
@@ -193,7 +195,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fot-wr-6TS" customClass="OnBoardingButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="12" y="596" width="351" height="56"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="296" id="HXC-sY-0y9"/>
                                     <constraint firstAttribute="width" constant="56" id="IH1-G0-e1a"/>
@@ -203,7 +205,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="oE3-92-Ki7"/>
                                 </constraints>
                                 <state key="normal" image="nextFull">
-                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -266,6 +268,6 @@
         <image name="nextFull" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="k7U-3x-y4I"/>
+        <segue reference="7Aa-Ot-sEG"/>
     </inferredMetricsTieBreakers>
 </document>

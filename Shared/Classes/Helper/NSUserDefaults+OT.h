@@ -22,5 +22,7 @@ extern NSString *const kTutorialDone;
 
 - (BOOL)isTutorialCompleted;
 - (BOOL)isTourOngoing;
+- (void)setCompleteFirstLogin;
+- (BOOL)isFirstLogin;
 
 @end
