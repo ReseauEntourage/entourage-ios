@@ -104,4 +104,6 @@ Temporary Items
 # Hide Amazon data
 OTAmazonConsts.h
 OTMixpanelConsts.h
+prod.plist
+staging.plist
 
