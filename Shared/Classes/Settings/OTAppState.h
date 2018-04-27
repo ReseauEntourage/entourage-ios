@@ -16,4 +16,12 @@
 + (void)navigateToStartupScreen;
 + (void)continueFromStartupScreen;
 + (void)continueFromWelcomeScreen;
++ (void)continueFromLoginScreen;
++ (void)continueFromUserEmailScreen;
++ (void)continueFromUserNameScreen;
+
++ (void)navigateToUserEmail:(UIViewController*)viewController;
++ (void)navigateToUserName:(UIViewController*)viewController;
++ (void)navigateToUserPicture:(UIViewController*)viewController;
++ (void)navigateToRightsScreen:(UIViewController*)viewController;
 @end

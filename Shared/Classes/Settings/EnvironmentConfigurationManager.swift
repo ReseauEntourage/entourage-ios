@@ -17,8 +17,8 @@ struct UserStorageKey {
     static let amazonSecretKey = "AmazonSecretKey"
     
     static let mixpanelToken = "MixpanelToken"
-    static let mixpanelKey = "MixpanelKey"
-    static let mixpanelSecretKey = "MixpanelSecretKey"
+    
+    static let awsPictureBucket = "AwsPictureBucket"
 }
 
 @objc enum ApplicationType:Int {
@@ -33,7 +33,6 @@ struct UserStorageKey {
     private let prodEnvironmentName: String = "prod"
     
     @objc var environmentName: String = ""
-    @objc var awsPictureBucket: String = "entourage-avatars-production-thumb"
     @objc var applicationType: ApplicationType = ApplicationType.entourage
     
     @objc convenience init(bundleId:String) {
@@ -43,8 +42,8 @@ struct UserStorageKey {
         
     #if PFP
         self.applicationType = ApplicationType.voisinAge
-        self.awsPictureBucket = "entourage-avatars-production-thumb/pfp"
     #endif
+        
     }
     
     @objc var amazonAccessKey: NSString {
@@ -71,12 +70,8 @@ struct UserStorageKey {
         return configuration(forKey: UserStorageKey.mixpanelToken)
     }
     
-    @objc var MixpanelKey: NSString {
-        return configuration(forKey: UserStorageKey.mixpanelKey)
-    }
-    
-    @objc var MixpanelSecretKey: NSString {
-        return configuration(forKey: UserStorageKey.mixpanelSecretKey)
+    @objc var AwsPictureBucket : NSString {
+        return configuration(forKey: UserStorageKey.awsPictureBucket)
     }
     
     @objc var runsOnProduction: Bool {
@@ -88,7 +83,11 @@ struct UserStorageKey {
     }
     
     private func configuration(forKey: String) -> NSString {
-        return plist![forKey] as! NSString
+        var key = forKey
+        if self.applicationType == ApplicationType.voisinAge {
+            key = "Pfp-\(key)"
+        }
+        return plist![key] as! NSString
     }
     
     private static func plist(name: String) -> NSDictionary? {
