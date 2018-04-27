@@ -120,6 +120,39 @@
     }
 }
 
++ (void)continueFromLoginScreen
+{
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (currentUser.lastName.length > 0 && currentUser.firstName.length > 0) {
+        [OTAppState continueFromUserEmailScreen];
+    }
+    else {
+        [OTAppState navigateToUserName:[OTAppState getTopViewController]];
+    }
+}
+
++ (void)continueFromUserEmailScreen
+{
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (currentUser.avatarURL.length > 0) {
+        [OTAppState navigateToRightsScreen:[OTAppState getTopViewController]];
+    }
+    else {
+        [OTAppState navigateToUserPicture:[OTAppState getTopViewController]];
+    }
+}
+
++ (void)continueFromUserNameScreen
+{
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (currentUser.email.length > 0) {
+        [OTAppState continueFromUserEmailScreen];
+    }
+    else {
+        [OTAppState navigateToUserEmail:[OTAppState getTopViewController]];
+    }
+}
+
 + (UIViewController *)getTopViewController {
     UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
     if ([result isKindOfClass:[UINavigationController class]]) {
@@ -127,6 +160,30 @@
         result = navController.topViewController;
     }
     return result;
+}
+
++ (void)navigateToUserEmail:(UIViewController*)viewController {
+    UIStoryboard *profileDetailsStoryboard = [UIStoryboard storyboardWithName:@"UserProfileDetails" bundle:nil];
+    UIViewController *emailViewController = [profileDetailsStoryboard instantiateViewControllerWithIdentifier:@"EmailScene"];
+    [viewController.navigationController pushViewController:emailViewController animated:YES];
+}
+
++ (void)navigateToUserName:(UIViewController*)viewController {
+    UIStoryboard *profileDetailsStoryboard = [UIStoryboard storyboardWithName:@"UserProfileDetails" bundle:nil];
+    UIViewController *nameController = [profileDetailsStoryboard instantiateViewControllerWithIdentifier:@"NameScene"];
+    [viewController.navigationController pushViewController:nameController animated:YES];
+}
+
++ (void)navigateToUserPicture:(UIViewController*)viewController {
+    UIStoryboard *userPictureStoryboard = [UIStoryboard storyboardWithName:@"UserPicture" bundle:nil];
+    UIViewController *pictureViewController = [userPictureStoryboard instantiateInitialViewController];
+    [viewController.navigationController pushViewController:pictureViewController animated:YES];
+}
+
++ (void)navigateToRightsScreen:(UIViewController*)viewController {
+    UIStoryboard *rightsStoryboard = [UIStoryboard storyboardWithName:@"Rights" bundle:nil];
+    UIViewController *rightsViewController = [rightsStoryboard instantiateInitialViewController];
+    [viewController.navigationController pushViewController:rightsViewController animated:YES];
 }
 
 @end

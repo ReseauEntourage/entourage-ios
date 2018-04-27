@@ -43,7 +43,7 @@
 
 - (AWSS3TransferManagerUploadRequest *)buildUploadRequestFor:(NSURL *)fileUri withName:(NSString *)fileName {
     AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
-    uploadRequest.bucket = [OTAppConfiguration sharedInstance].environmentConfiguration.awsPictureBucket;
+    uploadRequest.bucket = [OTAppConfiguration sharedInstance].environmentConfiguration.AwsPictureBucket;
     NSString *amazonPictureFolder = [OTAppConfiguration sharedInstance].environmentConfiguration.amazonPictureFolder;
     uploadRequest.key = [amazonPictureFolder stringByAppendingString:fileName];
     uploadRequest.body = fileUri;

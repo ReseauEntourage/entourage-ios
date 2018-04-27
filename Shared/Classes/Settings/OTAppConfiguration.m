@@ -68,12 +68,21 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions {
 
+    [[OTDebugLog sharedInstance] setConsoleOutput];
+    
+#if !DEBUG
+    [self configureCrashReporting];
+    [self configureFirebase];
+#endif
+    
+    [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    
     [self configurePushNotifcations];
     [self configureAnalyticsWithOptions:launchOptions];
+    [self configurePhotoUploadingService];
     
     [OTAppConfiguration configureApplicationAppearance];
-    [OTAppConfiguration configurePhotoUploadingService];
-    
     [OTAppState launchApplicatioWithOptions:launchOptions];
     
     return YES;
@@ -175,23 +184,55 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 #pragma mark - App Configurations
 
+- (void)configurePushNotifcations
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin) name:[kLoginFailureNotification copy] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateBadgeCountNotification copy] object:nil];
+}
+
+- (void)configurePhotoUploadingService {
+    [OTPictureUploadService configure];
+}
+
+- (void)configureCrashReporting
+{
+    [Fabric with:@[[Crashlytics class]]];
+}
+
+- (void)configureFirebase
+{
+    NSString *firebaseConfigFileName = nil;
+    
+    switch ([OTAppConfiguration applicationType]) {
+        case ApplicationTypeVoisinAge:
+            firebaseConfigFileName = [self.environmentConfiguration runsOnStaging] ?
+            @"GoogleService-Info-social.entourage.pfpios.beta" :
+            @"GoogleService-Info-social.entourage.pfpios";
+            break;
+            
+        default:
+            firebaseConfigFileName = [self.environmentConfiguration runsOnStaging] ?
+            @"GoogleService-Info-social.entourage.ios.beta" :
+            @"GoogleService-Info";
+            break;
+    }
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:firebaseConfigFileName ofType:@"plist"];
+    FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:filePath];
+    
+    if (options) {
+        [FIRApp configureWithOptions:options];
+    }
+}
+
 - (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions
 {
-    [[OTDebugLog sharedInstance] setConsoleOutput];
-    
-#if !DEBUG
-    [Fabric with:@[[Crashlytics class]]];
-    [FIRApp configure];
-#endif
-    
     NSString *mixpanelToken = self.environmentConfiguration.MixpanelToken;
     
     [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
     [Mixpanel sharedInstance].enableLogging = YES;
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     mixpanel.minimumSessionDuration = 0;
-    [IQKeyboardManager sharedManager].enable = YES;
-    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
@@ -205,16 +246,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         [OTLogger setupMixpanelWithUser:currentUser];
         [[OTAuthService new] sendAppInfoWithSuccess:nil failure:nil];
     }
-}
-
-- (void)configurePushNotifcations
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin) name:[kLoginFailureNotification copy] object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateBadgeCountNotification copy] object:nil];
-}
-
-+ (void)configurePhotoUploadingService {
-    [OTPictureUploadService configure];
 }
 
 + (UITabBarController*)configureMainTabBar
