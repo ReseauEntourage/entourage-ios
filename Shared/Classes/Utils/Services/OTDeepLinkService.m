@@ -86,7 +86,7 @@
     [currentController showViewController:loginController sender:self];
 }
 
-- (void)handleDeepLink: (NSURL *)url {
+- (void) handleDeepLink: (NSURL *)url {
     NSString *host = url.host;
     NSString *query = url.query;
     self.link = url;

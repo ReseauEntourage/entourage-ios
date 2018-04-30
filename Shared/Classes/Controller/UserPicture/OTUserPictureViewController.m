@@ -23,7 +23,8 @@
 
 @property (nonatomic, strong) UIImage *image;
 @property (strong, nonatomic) IBOutlet OTPhotoPickerBehavior *photoPickerBehavior;
-
+@property (weak, nonatomic) IBOutlet UIButton *takePictureButton;
+@property (weak, nonatomic) IBOutlet UIButton *choosePictureButton;
 @end
 
 @implementation OTUserPictureViewController
@@ -31,8 +32,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    if (![NSUserDefaults standardUserDefaults].isTutorialCompleted)
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.choosePictureButton setTitleColor:self.view.backgroundColor forState:UIControlStateNormal];
+    [self.takePictureButton setTitleColor:self.view.backgroundColor forState:UIControlStateNormal];
+    
+    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+        if (![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+            [self addIgnoreButton];
+        }
+    } else {
         [self addIgnoreButton];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

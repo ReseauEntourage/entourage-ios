@@ -18,6 +18,7 @@
 #import "NSUserDefaults+OT.h"
 #import "NSUserDefaults+OT.h"
 #import "UIImage+processing.h"
+#import "entourage-Swift.h"
 
 #define MaxImageSize 300
 
@@ -33,6 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 
     self.image = [self.image toSquare];
     [self.imageView setImage:self.image];

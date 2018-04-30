@@ -101,9 +101,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Hide Amazon data
-OTAmazonConsts.h
-OTMixpanelConsts.h
-prod.plist
-staging.plist
+# Hide Amazon/Api keys/tokens data
+AppConfigurations.plist
 

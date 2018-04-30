@@ -1136,12 +1136,9 @@
 		A296B938208FB46C00F6AFBD /* Pfp-Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A296B936208FB46B00F6AFBD /* Pfp-Localizable.strings */; };
 		A296B93B2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
 		A296B93C2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
-		A2A2BC752093123900AA4FC8 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC732093123800AA4FC8 /* prod.plist */; };
-		A2A2BC762093123900AA4FC8 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC742093123800AA4FC8 /* staging.plist */; };
-		A2A2BC772093127D00AA4FC8 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC732093123800AA4FC8 /* prod.plist */; };
-		A2A2BC782093127D00AA4FC8 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC742093123800AA4FC8 /* staging.plist */; };
-		A2A2BC792093127E00AA4FC8 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC732093123800AA4FC8 /* prod.plist */; };
-		A2A2BC7A2093127E00AA4FC8 /* staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC742093123800AA4FC8 /* staging.plist */; };
+		A2A2BC822096F4B700AA4FC8 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC812096F4B600AA4FC8 /* AppConfigurations.plist */; };
+		A2A2BC832096F4B700AA4FC8 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC812096F4B600AA4FC8 /* AppConfigurations.plist */; };
+		A2A2BC842096F4B700AA4FC8 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC812096F4B600AA4FC8 /* AppConfigurations.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
 		A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
 		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
@@ -1912,8 +1909,7 @@
 		A296B9392091ABDD00F6AFBD /* OTLocalisationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTLocalisationService.h; sourceTree = "<group>"; };
 		A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTLocalisationService.m; sourceTree = "<group>"; };
 		A29BAAC42091D0BB0003800D /* Pfp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pfp-Bridging-Header.h"; sourceTree = "<group>"; };
-		A2A2BC732093123800AA4FC8 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = SOURCE_ROOT; };
-		A2A2BC742093123800AA4FC8 /* staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = staging.plist; sourceTree = SOURCE_ROOT; };
+		A2A2BC812096F4B600AA4FC8 /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Appearance.h"; sourceTree = "<group>"; };
 		A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Appearance.m"; sourceTree = "<group>"; };
@@ -3388,8 +3384,7 @@
 				A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */,
 				A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */,
 				A296B8EB20871FD800F6AFBD /* main.m */,
-				A2A2BC732093123800AA4FC8 /* prod.plist */,
-				A2A2BC742093123800AA4FC8 /* staging.plist */,
+				A2A2BC812096F4B600AA4FC8 /* AppConfigurations.plist */,
 				A21D65822085FDAA00EF8E0E /* Storyboards */,
 				A202E7BD2085CFC30058F32C /* Classes */,
 				A202E79E2085CFC20058F32C /* Resources */,
@@ -3613,12 +3608,12 @@
 				A202E7FB2085CFC40058F32C /* CountryList.csv in Resources */,
 				A21D65B52085FDAA00EF8E0E /* Main.storyboard in Resources */,
 				A21D65B92085FDAA00EF8E0E /* PublicFeedItem.storyboard in Resources */,
-				A2A2BC762093123900AA4FC8 /* staging.plist in Resources */,
 				A21D65BA2085FDAA00EF8E0E /* Rights.storyboard in Resources */,
 				A21D65C22085FDAA00EF8E0E /* EncounterEditor.storyboard in Resources */,
 				A21D65B12085FDAA00EF8E0E /* AssociationDetails.storyboard in Resources */,
 				A202E7E32085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */,
 				A21D65BB2085FDAA00EF8E0E /* MapOptions.storyboard in Resources */,
+				A2A2BC822096F4B700AA4FC8 /* AppConfigurations.plist in Resources */,
 				A21D65AB2085FDAA00EF8E0E /* LocationSelection.storyboard in Resources */,
 				A21D65AD2085FDAA00EF8E0E /* TourConfirmation.storyboard in Resources */,
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
@@ -3666,7 +3661,6 @@
 				A21D65B02085FDAA00EF8E0E /* EntourageEditor.storyboard in Resources */,
 				A202E7F12085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */,
 				A202E7D72085CFC40058F32C /* SharedImages.xcassets in Resources */,
-				A2A2BC752093123900AA4FC8 /* prod.plist in Resources */,
 				A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
 				A21D65B62085FDAA00EF8E0E /* Popup.storyboard in Resources */,
 				A21D65BE2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard in Resources */,
@@ -3697,8 +3691,8 @@
 				A202E7E62085CFC40058F32C /* SF-UI-Text-UltrathinItalic.otf in Resources */,
 				A202E7D02085CFC40058F32C /* logo_black.png in Resources */,
 				A202E7F02085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
+				A2A2BC842096F4B700AA4FC8 /* AppConfigurations.plist in Resources */,
 				A202E7EC2085CFC40058F32C /* SF-UI-Text-Light.otf in Resources */,
-				A2A2BC7A2093127E00AA4FC8 /* staging.plist in Resources */,
 				A202E7EA2085CFC40058F32C /* SF-UI-Text-BoldItalic.otf in Resources */,
 				A296B90F2087218700F6AFBD /* Entourage.xcassets in Resources */,
 				A202E7F62085CFC40058F32C /* SF-UI-Text-Heavy.otf in Resources */,
@@ -3706,7 +3700,6 @@
 				A202E7D82085CFC40058F32C /* SharedImages.xcassets in Resources */,
 				6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */,
 				A202E7E82085CFC40058F32C /* SF-UI-Text-Regular.otf in Resources */,
-				A2A2BC792093127E00AA4FC8 /* prod.plist in Resources */,
 				A202E7EE2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
 				A202E7FC2085CFC40058F32C /* CountryList.csv in Resources */,
 				A202E7F42085CFC40058F32C /* SF-UI-Text-Medium.otf in Resources */,
@@ -3755,7 +3748,6 @@
 				A296B8B920871CFC00F6AFBD /* UserProfileDetails.storyboard in Resources */,
 				A296B8BA20871CFC00F6AFBD /* Tutorial.storyboard in Resources */,
 				A296B8BB20871CFC00F6AFBD /* About.storyboard in Resources */,
-				A2A2BC772093127D00AA4FC8 /* prod.plist in Resources */,
 				A296B8BC20871CFC00F6AFBD /* FeedItemFilters.storyboard in Resources */,
 				A296B8BD20871CFC00F6AFBD /* SF-UI-Text-Semibold.otf in Resources */,
 				A296B8BE20871CFC00F6AFBD /* UserProfile.storyboard in Resources */,
@@ -3765,7 +3757,6 @@
 				A296B938208FB46C00F6AFBD /* Pfp-Localizable.strings in Resources */,
 				A296B8C220871CFC00F6AFBD /* ActiveFeedItem.storyboard in Resources */,
 				A296B8C320871CFC00F6AFBD /* UserProfileEditor.storyboard in Resources */,
-				A2A2BC782093127D00AA4FC8 /* staging.plist in Resources */,
 				A296B8C420871CFC00F6AFBD /* Disclaimer.storyboard in Resources */,
 				A296B8C520871CFC00F6AFBD /* SF-UI-Text-MediumItalic.otf in Resources */,
 				A296B8C720871CFC00F6AFBD /* Social.storyboard in Resources */,
@@ -3785,6 +3776,7 @@
 				A296B8D620871CFC00F6AFBD /* Localizable.strings in Resources */,
 				A296B8D720871CFC00F6AFBD /* categoryJson.json in Resources */,
 				A296B8D820871CFC00F6AFBD /* Platinia.gpx in Resources */,
+				A2A2BC832096F4B700AA4FC8 /* AppConfigurations.plist in Resources */,
 				A296B8D920871CFC00F6AFBD /* categories.json in Resources */,
 				A296B8DA20871CFC00F6AFBD /* Nowhere.gpx in Resources */,
 				A296B92D208A08E800F6AFBD /* PfpLaunchScreen.storyboard in Resources */,
