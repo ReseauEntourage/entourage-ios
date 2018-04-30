@@ -47,6 +47,31 @@ platform :ios do
       )
   end
 
+  desc "Submit a new Pfp-Beta Build to appaloosa"
+  desc "This will also make sure the profile is up to date"
+  lane :pfp-beta do |options|
+    sigh(
+     app_identifier: "social.entourage.entourageios.pfp.beta",
+     username: "apple@entourage.social",
+     adhoc: true,
+     force: true
+    )
+    badge(
+      dark: true
+    )
+    gym(
+      clean: true,
+      scheme: "PfpBeta",
+      output_directory: ENV["BITRISE_DEPLOY_DIR"]
+      )
+    appaloosa(
+      api_token: options[:appaloosa_api_key],
+      store_id: options[:appaloosa_store_id],
+      screenshots: "",
+      group_ids: "13446"
+      )
+  end
+
   desc "Submit a new Beta Build to appaloosa"
   desc "This will also make sure the profile is up to date"
   lane :deploy_to_TestFlight do |options|
