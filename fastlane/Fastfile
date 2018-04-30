@@ -49,7 +49,7 @@ platform :ios do
 
   desc "Submit a new Pfp-Beta Build to appaloosa"
   desc "This will also make sure the profile is up to date"
-  lane :pfp-beta do |options|
+  lane :pfp_beta do |options|
     sigh(
      app_identifier: "social.entourage.entourageios.pfp.beta",
      username: "apple@entourage.social",
