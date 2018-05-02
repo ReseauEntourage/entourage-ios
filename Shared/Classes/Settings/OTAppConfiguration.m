@@ -284,7 +284,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     // Menu tab
-    OTMenuViewController *menuViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMenuViewControllerIdentifier"];
+   // OTMenuViewController *menuViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMenuViewControllerIdentifier"];
+    OTPfpMenuViewController *menuViewController = [[OTPfpMenuViewController alloc] init];
     UINavigationController *menuNavController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
     menuNavController.tabBarItem.title = @"menu";
     menuNavController.tabBarItem.image = [UIImage imageNamed:@"menu"];

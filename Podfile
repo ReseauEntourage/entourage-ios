@@ -25,6 +25,7 @@ def sharedPods
     pod 'kingpin', '0.3.1'
     pod 'FBSDKCoreKit'
     pod 'Firebase/Core'
+    pod 'SnapKit', '~> 4.0.0'
 end
 
 target "entourage" do
