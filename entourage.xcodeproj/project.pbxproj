@@ -25,6 +25,7 @@
 		9647D514208F8709003CA4FD /* OTEntMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D513208F8709003CA4FD /* OTEntMenuViewController.swift */; };
 		9647D516208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */; };
 		9647D517208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */; };
+		96B658AA209A380000EB0398 /* OTMenuCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658A9209A380000EB0398 /* OTMenuCellView.swift */; };
 		97B688FDB2DCD2CE3094ADDF /* Pods_pfp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */; };
 		A202E7CD2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
 		A202E7CE2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
@@ -1182,6 +1183,7 @@
 		9647D511208F86EB003CA4FD /* OTPfpMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPfpMenuViewController.swift; sourceTree = "<group>"; };
 		9647D513208F8709003CA4FD /* OTEntMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEntMenuViewController.swift; sourceTree = "<group>"; };
 		9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuHeaderView.swift; sourceTree = "<group>"; };
+		96B658A9209A380000EB0398 /* OTMenuCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuCellView.swift; sourceTree = "<group>"; };
 		A19BDADC422EDAB56B022976 /* Pods-pfp.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.store.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.store.xcconfig"; sourceTree = "<group>"; };
 		A202E79F2085CFC20058F32C /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		A202E7A22085CFC20058F32C /* logo_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black.png; sourceTree = "<group>"; };
@@ -2668,6 +2670,7 @@
 				A202E9572085D2C50058F32C /* OTTextWithCount.h */,
 				A202E94F2085D2C50058F32C /* OTTextWithCount.m */,
 				9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */,
+				96B658A9209A380000EB0398 /* OTMenuCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4197,6 +4200,7 @@
 				A202EC1B2085D2C80058F32C /* OTPictureUploadService.m in Sources */,
 				A202ECDF2085D2C80058F32C /* UIColor+entourage.m in Sources */,
 				A202EAD32085D2C70058F32C /* OTFeedItemTimelinePoint.m in Sources */,
+				96B658AA209A380000EB0398 /* OTMenuCellView.swift in Sources */,
 				A202EC0D2085D2C80058F32C /* OTAuthService.m in Sources */,
 				A202ECCB2085D2C80058F32C /* OTNoDataBehavior.m in Sources */,
 				A202EB4D2085D2C80058F32C /* OTLocationSearchTableViewController.m in Sources */,
