@@ -27,8 +27,8 @@
 		9647D517208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */; };
 		96B658AA209A380000EB0398 /* OTMenuCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658A9209A380000EB0398 /* OTMenuCellView.swift */; };
 		96B658AB209A3A4700EB0398 /* OTMenuCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658A9209A380000EB0398 /* OTMenuCellView.swift */; };
-		96B658AD209A417900EB0398 /* OTMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658AC209A417900EB0398 /* OTMenuTableViewCell.swift */; };
-		96B658AE209A424700EB0398 /* OTMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658AC209A417900EB0398 /* OTMenuTableViewCell.swift */; };
+		96B658AD209A417900EB0398 /* OTItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658AC209A417900EB0398 /* OTItemTableViewCell.swift */; };
+		96B658AE209A424700EB0398 /* OTItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658AC209A417900EB0398 /* OTItemTableViewCell.swift */; };
 		96B658B0209A54F300EB0398 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658AF209A54F200EB0398 /* OTLogoutViewCell.swift */; };
 		96B658B2209A599F00EB0398 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658B1209A599F00EB0398 /* ButtonStyles.swift */; };
 		96B658B3209A599F00EB0398 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658B1209A599F00EB0398 /* ButtonStyles.swift */; };
@@ -40,6 +40,8 @@
 		96B658BC209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658BA209A5D2B00EB0398 /* UIKit+Stylable.swift */; };
 		96B658BE209A689200EB0398 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658BD209A689200EB0398 /* LabelStyles.swift */; };
 		96B658BF209A689200EB0398 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658BD209A689200EB0398 /* LabelStyles.swift */; };
+		96B658C1209A7C8A00EB0398 /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D511208F86EB003CA4FD /* OTPfpMenuViewController.swift */; };
+		96B658C2209A7CB000EB0398 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658AF209A54F200EB0398 /* OTLogoutViewCell.swift */; };
 		97B688FDB2DCD2CE3094ADDF /* Pods_pfp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */; };
 		A202E7CD2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
 		A202E7CE2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
@@ -1198,7 +1200,7 @@
 		9647D513208F8709003CA4FD /* OTEntMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEntMenuViewController.swift; sourceTree = "<group>"; };
 		9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuHeaderView.swift; sourceTree = "<group>"; };
 		96B658A9209A380000EB0398 /* OTMenuCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuCellView.swift; sourceTree = "<group>"; };
-		96B658AC209A417900EB0398 /* OTMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuTableViewCell.swift; sourceTree = "<group>"; };
+		96B658AC209A417900EB0398 /* OTItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTItemTableViewCell.swift; sourceTree = "<group>"; };
 		96B658AF209A54F200EB0398 /* OTLogoutViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTLogoutViewCell.swift; sourceTree = "<group>"; };
 		96B658B1209A599F00EB0398 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		96B658B4209A5A3700EB0398 /* ComponentStylable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStylable.swift; sourceTree = "<group>"; };
@@ -2704,7 +2706,7 @@
 				A202E94F2085D2C50058F32C /* OTTextWithCount.m */,
 				9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */,
 				96B658A9209A380000EB0398 /* OTMenuCellView.swift */,
-				96B658AC209A417900EB0398 /* OTMenuTableViewCell.swift */,
+				96B658AC209A417900EB0398 /* OTItemTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4138,7 +4140,8 @@
 				A202EBD92085D2C80058F32C /* OTStartupViewController.m in Sources */,
 				A202EB5F2085D2C80058F32C /* OTTutorial4ViewController.m in Sources */,
 				A202ED132085D2C80058F32C /* OTTourUI.m in Sources */,
-				96B658AD209A417900EB0398 /* OTMenuTableViewCell.swift in Sources */,
+				96B658C1209A7C8A00EB0398 /* OTPfpMenuViewController.swift in Sources */,
+				96B658AD209A417900EB0398 /* OTItemTableViewCell.swift in Sources */,
 				A202ED0F2085D2C80058F32C /* OTTourStateInfo.m in Sources */,
 				A202EC652085D2C80058F32C /* OTDistributedDelegateBehavior.m in Sources */,
 				A202EAFB2085D2C70058F32C /* OTAnnouncement.m in Sources */,
@@ -4176,6 +4179,7 @@
 				A202EB072085D2C70058F32C /* OTTour.m in Sources */,
 				A202ECDD2085D2C80058F32C /* UITextField+indentation.m in Sources */,
 				A202EC5F2085D2C80058F32C /* OTEntourageDisclaimerBehavior.m in Sources */,
+				96B658C2209A7CB000EB0398 /* OTLogoutViewCell.swift in Sources */,
 				A202EB612085D2C80058F32C /* OTTutorial2ViewController.m in Sources */,
 				A202EBB72085D2C80058F32C /* UIViewController+menu.m in Sources */,
 				A202EB572085D2C80058F32C /* OTAskMoreViewController.m in Sources */,
@@ -4790,7 +4794,7 @@
 				A296B79C20871CFC00F6AFBD /* OTSolidarityGuideFilter.m in Sources */,
 				A296B79D20871CFC00F6AFBD /* OTUserEmailViewController.m in Sources */,
 				A296B79E20871CFC00F6AFBD /* OTStartupViewController.m in Sources */,
-				96B658AE209A424700EB0398 /* OTMenuTableViewCell.swift in Sources */,
+				96B658AE209A424700EB0398 /* OTItemTableViewCell.swift in Sources */,
 				A296B79F20871CFC00F6AFBD /* OTTutorial4ViewController.m in Sources */,
 				A296B7A020871CFC00F6AFBD /* OTTourUI.m in Sources */,
 				96B658BF209A689200EB0398 /* LabelStyles.swift in Sources */,

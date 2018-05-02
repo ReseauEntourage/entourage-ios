@@ -138,8 +138,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
         cellID = OTMenuLogoutTableViewCellIdentifier;
     else
         cellID = OTMenuTableViewCellIdentifier;
-    
-        
     OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
     if (menuItem.iconName != nil)
