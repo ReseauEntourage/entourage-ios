@@ -317,8 +317,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     
     UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
     UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor] };
-//    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0],
-//                                                          NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
+    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                          NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
     
     UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
     UIPageControl.appearance.currentPageIndicatorTintColor = [UIColor appGreyishBrownColor];
