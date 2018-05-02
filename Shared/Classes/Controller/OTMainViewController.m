@@ -238,7 +238,7 @@
     self.entourageScale = 1.0;
     [self addObservers];
     
-    //[self showToursListAction];
+    [self showToursListAction];
 }
 
 - (void)setupUIForTourOngoing {
