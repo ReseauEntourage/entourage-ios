@@ -31,6 +31,7 @@ final class OTMenuCellView: UIView {
     private func commonInit() {
         addSubview(iconImageView)
         addSubview(itemLabel)
+        backgroundColor = UIColor.pfpTableBackground()
         
         iconImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -40,7 +41,7 @@ final class OTMenuCellView: UIView {
         
         itemLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(iconImageView.snp.trailing).inset(17)
+            $0.leading.equalTo(iconImageView.snp.trailing).inset(-17)
             $0.trailing.equalToSuperview()
         }
     }

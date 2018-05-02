@@ -10,4 +10,5 @@
 
 @interface UIColor (pfp)
 + (UIColor*)pfpBlueColor;
++ (UIColor*)pfpTableBackgroundColor;
 @end
