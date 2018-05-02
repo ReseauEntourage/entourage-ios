@@ -103,7 +103,7 @@
                 UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"close") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
                 [alert addAction:defaultAction];
                 UIAlertAction *openLoginAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"already_subscribed") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    [[OTDeepLinkService new] navigateToLogin];
+                    [OTAppState navigateToLoginScreen:nil];
                 }];
                 [alert addAction:openLoginAction];
                 [self presentViewController:alert animated:YES completion:nil];

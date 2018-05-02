@@ -19,6 +19,9 @@
 #import "OTLoginViewController.h"
 #import "OTWelcomeViewController.h"
 #import "OTPhoneViewController.h"
+#import "OTAPIConsts.h"
+
+#define TUTORIAL_DELAY 15
 
 @implementation OTAppState
 
@@ -49,6 +52,34 @@
     {
         [OTAppState navigateToStartupScreen];
     }
+}
+
++ (void)presentTutorialScreen
+{
+    if (IS_PRO_USER) {
+        return;
+    }
+    
+    if ([NSUserDefaults standardUserDefaults].autoTutorialShown) {
+        return;
+    }
+    
+    [NSUserDefaults standardUserDefaults].autoTutorialShown = YES;
+    
+    [OTAppState performSelector:@selector(loadTutorialScreen) withObject:nil afterDelay:TUTORIAL_DELAY];
+}
+
++ (void)loadTutorialScreen {
+    UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
+    UIViewController *tutorialController = [tutorialStoryboard instantiateInitialViewController];
+    [[OTAppState getTopViewController] presentViewController:tutorialController animated:YES completion:nil];
+}
+
++ (void)navigateToLoginScreen:(NSURL*)link
+{
+    OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
+    loginController.fromLink = link;
+    [[OTAppState getTopViewController] showViewController:loginController sender:self];
 }
 
 + (void)returnToLogin {

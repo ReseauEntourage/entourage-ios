@@ -19,7 +19,6 @@
 #import "SVProgressHUD.h"
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsService.h"
-#import "OTTutorialService.h"
 #import "OTLocationManager.h"
 #import "Mixpanel/Mixpanel.h"
 #import "OTAppState.h"
@@ -101,7 +100,7 @@
             [[OTDeepLinkService new] navigateTo:joinedInvitation.entourageId withType:nil];
             
             if ([OTAppConfiguration shouldShowIntroTutorial]) {
-                [[OTTutorialService new] showTutorial];
+                [OTAppState presentTutorialScreen];
             }
         }
         else {
