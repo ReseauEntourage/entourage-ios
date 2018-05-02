@@ -56,15 +56,14 @@ final class OTPfpMenuViewController: UIViewController {
     }
     
     private func createMenuItems() {
-        
         let contactItem = OTMenuItem(title: "Contacter l'équipe Voisin-Age", iconName:"contact")
-        let ethicalChartItem = OTMenuItem(title: "Proposer une sortie", iconName: "ethicalChart")
         let howIsUsedItem = OTMenuItem(title: "Mode d'emploi de l'application", iconName: "howIsUsed")
+        let ethicalChartItem = OTMenuItem(title: "Charte éthique de Voisin-Age", iconName: "ethicalChart")
         let logoutItem = OTMenuItem(title: "déconnexion", iconName: "")
         
         guard let item1 = contactItem,
-            let item2 = ethicalChartItem,
-            let item3 = howIsUsedItem,
+            let item2 = howIsUsedItem,
+            let item3 = ethicalChartItem,
             let item4 = logoutItem else {
             return
         }
@@ -106,5 +105,4 @@ extension OTPfpMenuViewController: UITableViewDataSource {
             return cell
         }
     }
-    
 }

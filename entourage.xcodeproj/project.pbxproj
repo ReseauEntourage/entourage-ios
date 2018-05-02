@@ -2097,6 +2097,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		96B658C0209A6C1100EB0398 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				96B658B7209A5AF000EB0398 /* UIFont+Extensions.swift */,
+				96B658B1209A599F00EB0398 /* ButtonStyles.swift */,
+				96B658BD209A689200EB0398 /* LabelStyles.swift */,
+				96B658B4209A5A3700EB0398 /* ComponentStylable.swift */,
+				96B658BA209A5D2B00EB0398 /* UIKit+Stylable.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		A202E79E2085CFC20058F32C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -2784,11 +2796,7 @@
 				A202EA5C2085D2C60058F32C /* UIView+entourage.m */,
 				A202EA662085D2C60058F32C /* UIViewController+OTEmptyBackButton.h */,
 				A202E9842085D2C60058F32C /* UIViewController+OTEmptyBackButton.m */,
-				96B658B7209A5AF000EB0398 /* UIFont+Extensions.swift */,
-				96B658B1209A599F00EB0398 /* ButtonStyles.swift */,
-				96B658BD209A689200EB0398 /* LabelStyles.swift */,
-				96B658B4209A5A3700EB0398 /* ComponentStylable.swift */,
-				96B658BA209A5D2B00EB0398 /* UIKit+Stylable.swift */,
+				96B658C0209A6C1100EB0398 /* Styles */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
