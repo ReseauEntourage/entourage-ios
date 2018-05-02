@@ -201,7 +201,6 @@
     self.tourCreatorBehavior.delegate = self;
     self.newsFeedsSourceBehavior.tableDelegate = self.tableView;
     
-    [self configureNavigationBar];
     self.currentFilter = [OTNewsFeedsFilter new];
     self.solidarityFilter = [OTSolidarityGuideFilter new];
     self.encounters = [NSMutableArray new];
@@ -238,6 +237,8 @@
     [self.mapDelegateProxy.delegates addObject:self];
     self.entourageScale = 1.0;
     [self addObservers];
+    
+    //[self showToursListAction];
 }
 
 - (void)setupUIForTourOngoing {
@@ -331,6 +332,8 @@
     if (self.webview) {
         [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
     }
+    
+    [self configureNavigationBar];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -373,12 +376,13 @@
     self.backToNewsFeedsButton.hidden = YES;
     if (self.toursMapDelegate) [self.mapDelegateProxy.delegates addObject:self.toursMapDelegate];
     [self.mapDelegateProxy.delegates removeObject:self.guideMapDelegate];
-    [self.customSegmentedBehavior updateVisible:YES];
+    [self.customSegmentedBehavior updateVisible:NO];
     [self clearMap];
     [self feedMapWithFeedItems];
     self.showSolidarityGuideView.hidden = !OTAppConfiguration.supportsSolidarityGuideFunctionality;
+    
     if (self.isTourListDisplayed) {
-        [self showToursList];
+        [self showToursList:YES];
     }
 }
 
@@ -391,7 +395,7 @@
     self.backToNewsFeedsButton.hidden = NO;
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
     if (self.guideMapDelegate) [self.mapDelegateProxy.delegates addObject:self.guideMapDelegate];
-    [self.customSegmentedBehavior updateVisible:YES];
+    [self.customSegmentedBehavior updateVisible:NO];
     [self clearMap];
     [self showToursMap];
     [self reloadPois];
@@ -434,9 +438,36 @@
 
 - (void)configureNavigationBar {
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
-    [self createMenuButton];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"filter_nav_title").uppercaseString style:UIBarButtonItemStylePlain target:self action:@selector(showFilters)];
+    self.navigationItem.leftBarButtonItem = leftButton;
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:[self rightBarButtonTitle] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonAction)];
+    self.navigationItem.rightBarButtonItem = rightButton;
+    
+    //[self createMenuButton];
     //[self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
     //[self setupLogoImageWithTarget:self andSelector:@selector(logoTapped)];
+}
+
+- (void)rightBarButtonAction
+{
+    if (self.isTourListDisplayed) {
+        [self showToursMapAction];
+    } else {
+        [self showToursListAction];
+    }
+    
+    [self configureNavigationBar];
+}
+
+- (NSString*)rightBarButtonTitle
+{
+    if (self.isTourListDisplayed) {
+        return OTLocalizedString(@"view_map_nav_title").uppercaseString;
+    } else {
+        return OTLocalizedString(@"view_list_nav_title").uppercaseString;
+    }
 }
 
 - (void)logoTapped {
@@ -688,6 +719,18 @@
     return nil;
 }
 
+- (void)showToursMapAction
+{
+    [OTLogger logEvent:@"MapViewClick"];
+    [self showToursMap];
+}
+
+- (void)showToursListAction
+{
+    [OTLogger logEvent:@"ListViewClick"];
+    [self showToursList:YES];
+}
+
 #pragma mark - Location updates
 
 - (void)locationUpdated:(NSNotification *)notification {
@@ -726,7 +769,7 @@
     self.wasLoadedOnce = YES;
     if (self.newsFeedsSourceBehavior.feedItems.count && self.isFirstLoad) {
         self.isFirstLoad = NO;
-        [self showToursList];
+        [self showToursList:YES];
     }
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self feedMapWithFeedItems];
@@ -781,7 +824,7 @@
 - (void)stoppedTour {
     self.launcherButton.hidden = YES;
     self.createEncounterButton.hidden = YES;
-    [self showToursList];
+    [self showToursList:YES];
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tourCreatorBehavior.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotEndFilename];
     [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:self];
@@ -1082,12 +1125,10 @@
 
 - (IBAction)segmentChanged {
     if (self.customSegmentedBehavior.selectedIndex == 1) {
-        [OTLogger logEvent:@"ListViewClick"];
-        [self showToursList];
+        [self showToursListAction];
     }
     else {
-        [OTLogger logEvent:@"MapViewClick"];
-        [self showToursMap];
+        [self showToursMapAction];
     }
 }
 
@@ -1113,22 +1154,34 @@
 
 #pragma mark - "Screens"
 
-- (void)showToursList {
+- (void)showToursList:(BOOL)animated {
     self.tableView.scrollEnabled = YES;
+    
     [OTLogger logEvent:@"Screen06_1FeedView"];
     [self.toggleCollectionView toggle:NO animated:NO];
     self.showSolidarityGuideView.hidden = YES;
     [self.noDataBehavior hideNoData];
     [self.guideInfoBehavior hide];
+    
     self.isTourListDisplayed = YES;
-    self.customSegmentedBehavior.selectedIndex = 1;
-    [UIView animateWithDuration:0.2 animations:^(void) {
+    
+    //self.customSegmentedBehavior.selectedIndex = 1;
+    
+    if (animated) {
+        [UIView animateWithDuration:0.2 animations:^(void) {
+            CGRect mapFrame = self.mapView.frame;
+            mapFrame.size.height = MAPVIEW_HEIGHT;
+            self.tableView.tableHeaderView.frame = mapFrame;
+            self.mapView.frame = mapFrame;
+            [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+        }];
+    } else {
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-    }];
+    }
 }
 
 - (void)showToursMap {
