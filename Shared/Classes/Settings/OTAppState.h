@@ -11,8 +11,10 @@
 @interface OTAppState : NSObject
 + (void)launchApplicatioWithOptions:(NSDictionary *)launchOptions;
 + (void)returnToLogin;
++ (void)presentTutorialScreen;
 + (void)navigateToAuthenticatedLandingScreen;
 + (void)navigateToUserProfile;
++ (void)navigateToLoginScreen:(NSURL*)link;
 + (void)navigateToStartupScreen;
 + (void)continueFromStartupScreen;
 + (void)continueFromWelcomeScreen;

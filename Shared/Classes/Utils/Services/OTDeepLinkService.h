@@ -14,7 +14,6 @@
 - (void)navigateTo:(NSString *)feedItemId;
 - (UIViewController *)getTopViewController;
 - (void)showProfileFromAnywhereForUser:(NSNumber *)userId;
-- (void)navigateToLogin;
 - (void)handleDeepLink:(NSURL *)url;
 - (void)handleUniversalLink:(NSURL *)url;
 - (void)openWithWebView: (NSURL *)url;

@@ -71,7 +71,6 @@
 #import "OTTourCreatorBehaviorDelegate.h"
 #import "OTStartTourAnnotation.h"
 #import "OTNoDataBehavior.h"
-#import "OTTutorialService.h"
 #import "OTUnreadMessagesService.h"
 #import "OTMailSenderBehavior.h"
 #import "OTSolidarityGuideFiltersViewController.h"
@@ -181,7 +180,7 @@
     [self setup];
     
     if ([OTAppConfiguration shouldShowIntroTutorial]) {
-        [[OTTutorialService new] showTutorial];
+        [OTAppState presentTutorialScreen];
     }
 }
 

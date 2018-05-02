@@ -389,8 +389,6 @@
 		A202EC022085D2C80058F32C /* OTMixpanelService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E96E2085D2C60058F32C /* OTMixpanelService.m */; };
 		A202EC032085D2C80058F32C /* OTFeedsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E96F2085D2C60058F32C /* OTFeedsService.m */; };
 		A202EC042085D2C80058F32C /* OTFeedsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E96F2085D2C60058F32C /* OTFeedsService.m */; };
-		A202EC052085D2C80058F32C /* OTTutorialService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9702085D2C60058F32C /* OTTutorialService.m */; };
-		A202EC062085D2C80058F32C /* OTTutorialService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9702085D2C60058F32C /* OTTutorialService.m */; };
 		A202EC072085D2C80058F32C /* OTInvitationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9712085D2C60058F32C /* OTInvitationsService.m */; };
 		A202EC082085D2C80058F32C /* OTInvitationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9712085D2C60058F32C /* OTInvitationsService.m */; };
 		A202EC092085D2C80058F32C /* OTEntourageService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9722085D2C60058F32C /* OTEntourageService.m */; };
@@ -961,7 +959,6 @@
 		A296B83820871CFC00F6AFBD /* OTFeedItemJoinOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F02085D2C40058F32C /* OTFeedItemJoinOptionsViewController.m */; };
 		A296B83920871CFC00F6AFBD /* OTMyEntouragesTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E62085D2C60058F32C /* OTMyEntouragesTableDataSource.m */; };
 		A296B83A20871CFC00F6AFBD /* OTCustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A52085D2C60058F32C /* OTCustomAnnotation.m */; };
-		A296B83B20871CFC00F6AFBD /* OTTutorialService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9702085D2C60058F32C /* OTTutorialService.m */; };
 		A296B83C20871CFC00F6AFBD /* OTGuideMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E02085D2C40058F32C /* OTGuideMapDelegate.m */; };
 		A296B83D20871CFC00F6AFBD /* UIView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5C2085D2C60058F32C /* UIView+entourage.m */; };
 		A296B83E20871CFC00F6AFBD /* OTBaseInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8702085D2C40058F32C /* OTBaseInfoCell.m */; };
@@ -1528,7 +1525,6 @@
 		A202E95F2085D2C50058F32C /* OTJSONResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTJSONResponseSerializer.h; sourceTree = "<group>"; };
 		A202E9612085D2C60058F32C /* OTInvitationsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTInvitationsService.h; sourceTree = "<group>"; };
 		A202E9622085D2C60058F32C /* OTFeedsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedsService.h; sourceTree = "<group>"; };
-		A202E9632085D2C60058F32C /* OTTutorialService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTutorialService.h; sourceTree = "<group>"; };
 		A202E9642085D2C60058F32C /* OTMixpanelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMixpanelService.h; sourceTree = "<group>"; };
 		A202E9652085D2C60058F32C /* OTEncounterService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterService.h; sourceTree = "<group>"; };
 		A202E9662085D2C60058F32C /* OTAuthService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAuthService.h; sourceTree = "<group>"; };
@@ -1541,7 +1537,6 @@
 		A202E96D2085D2C60058F32C /* OTTourService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourService.h; sourceTree = "<group>"; };
 		A202E96E2085D2C60058F32C /* OTMixpanelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMixpanelService.m; sourceTree = "<group>"; };
 		A202E96F2085D2C60058F32C /* OTFeedsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedsService.m; sourceTree = "<group>"; };
-		A202E9702085D2C60058F32C /* OTTutorialService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTutorialService.m; sourceTree = "<group>"; };
 		A202E9712085D2C60058F32C /* OTInvitationsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTInvitationsService.m; sourceTree = "<group>"; };
 		A202E9722085D2C60058F32C /* OTEntourageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageService.m; sourceTree = "<group>"; };
 		A202E9732085D2C60058F32C /* OTEncounterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEncounterService.m; sourceTree = "<group>"; };
@@ -2716,8 +2711,6 @@
 				A202E9772085D2C60058F32C /* OTSafariService.m */,
 				A202E96D2085D2C60058F32C /* OTTourService.h */,
 				A202E9782085D2C60058F32C /* OTTourService.m */,
-				A202E9632085D2C60058F32C /* OTTutorialService.h */,
-				A202E9702085D2C60058F32C /* OTTutorialService.m */,
 				A202E96B2085D2C60058F32C /* OTUserService.h */,
 				A202E9792085D2C60058F32C /* OTUserService.m */,
 				A296B9392091ABDD00F6AFBD /* OTLocalisationService.h */,
@@ -4310,7 +4303,6 @@
 				A202EB952085D2C80058F32C /* OTFeedItemJoinOptionsViewController.m in Sources */,
 				A202EC792085D2C80058F32C /* OTMyEntouragesTableDataSource.m in Sources */,
 				A202EC3D2085D2C80058F32C /* OTCustomAnnotation.m in Sources */,
-				A202EC052085D2C80058F32C /* OTTutorialService.m in Sources */,
 				A202EB852085D2C80058F32C /* OTGuideMapDelegate.m in Sources */,
 				A202ECD72085D2C80058F32C /* UIView+entourage.m in Sources */,
 				A202EB212085D2C70058F32C /* OTBaseInfoCell.m in Sources */,
@@ -4493,7 +4485,6 @@
 				A202EB082085D2C70058F32C /* OTTour.m in Sources */,
 				A202ED242085D2C80058F32C /* NSString+Validators.m in Sources */,
 				A202EBAE2085D2C80058F32C /* OTFeedItemsFilterCell.m in Sources */,
-				A202EC062085D2C80058F32C /* OTTutorialService.m in Sources */,
 				A202EBB82085D2C80058F32C /* UIViewController+menu.m in Sources */,
 				A202EB522085D2C80058F32C /* OTTourOptionsViewController.m in Sources */,
 				A202EBD02085D2C80058F32C /* OTUserNameViewController.m in Sources */,
@@ -4956,7 +4947,6 @@
 				A296B83820871CFC00F6AFBD /* OTFeedItemJoinOptionsViewController.m in Sources */,
 				A296B83920871CFC00F6AFBD /* OTMyEntouragesTableDataSource.m in Sources */,
 				A296B83A20871CFC00F6AFBD /* OTCustomAnnotation.m in Sources */,
-				A296B83B20871CFC00F6AFBD /* OTTutorialService.m in Sources */,
 				A296B83C20871CFC00F6AFBD /* OTGuideMapDelegate.m in Sources */,
 				A296B83D20871CFC00F6AFBD /* UIView+entourage.m in Sources */,
 				A296B83E20871CFC00F6AFBD /* OTBaseInfoCell.m in Sources */,

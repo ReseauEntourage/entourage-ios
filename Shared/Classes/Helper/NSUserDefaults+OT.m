@@ -102,9 +102,9 @@ static NSString *const kIsFirstLogin = @"kIsFirstLogin";
 - (void)setAutoTutorialShown:(BOOL)autoTutorialShown {
     NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kAutoTutorialComplete]];
     BOOL hasPhoneInNumbers = [loggedNumbers containsObject:self.currentUser.phone];
-    if(hasPhoneInNumbers && !autoTutorialShown)
+    if (hasPhoneInNumbers && !autoTutorialShown)
        [loggedNumbers removeObject:self.currentUser.phone];
-    if(!hasPhoneInNumbers && autoTutorialShown)
+    if (!hasPhoneInNumbers && autoTutorialShown)
         [loggedNumbers addObject:self.currentUser.phone];
     [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kAutoTutorialComplete];
     [[NSUserDefaults standardUserDefaults] synchronize];

@@ -43,7 +43,7 @@
 
 - (void)navigateTo: (NSString *)feedItemId {
     [SVProgressHUD show];
-    if(TOKEN) {
+    if (TOKEN) {
         [[[OTFeedItemFactory createForId:feedItemId] getStateInfo] loadWithSuccess2:^(OTFeedItem *feedItem) {
         [SVProgressHUD dismiss];
         [self prepareControllers:feedItem];
@@ -52,7 +52,7 @@
         }];
     }
     else {
-        [self navigateToLogin];
+        [OTAppState navigateToLoginScreen:nil];
         [SVProgressHUD dismiss];
     }
 }
@@ -78,20 +78,12 @@
     [self showControllerFromAnywhere:rootUserProfileController];
 }
 
-- (void)navigateToLogin {
-    UIStoryboard *introStorybard = [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
-    OTLoginViewController *loginController = [introStorybard instantiateViewControllerWithIdentifier:@"OTLoginViewControllerIdentifier"];
-    UIViewController *currentController = [self getTopViewController];
-    loginController.fromLink = self.link;
-    [currentController showViewController:loginController sender:self];
-}
-
 - (void) handleDeepLink: (NSURL *)url {
     NSString *host = url.host;
     NSString *query = url.query;
     self.link = url;
-    if(!TOKEN) {
-        [self navigateToLogin];
+    if (!TOKEN) {
+        [OTAppState navigateToLoginScreen:url];
     } else {
         [self handleDeepLinkWithKey:host pathComponents:url.pathComponents andQuery:query];
     }
