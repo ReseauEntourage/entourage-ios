@@ -38,6 +38,8 @@
 		96B658B9209A5AF000EB0398 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658B7209A5AF000EB0398 /* UIFont+Extensions.swift */; };
 		96B658BB209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658BA209A5D2B00EB0398 /* UIKit+Stylable.swift */; };
 		96B658BC209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658BA209A5D2B00EB0398 /* UIKit+Stylable.swift */; };
+		96B658BE209A689200EB0398 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658BD209A689200EB0398 /* LabelStyles.swift */; };
+		96B658BF209A689200EB0398 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658BD209A689200EB0398 /* LabelStyles.swift */; };
 		97B688FDB2DCD2CE3094ADDF /* Pods_pfp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */; };
 		A202E7CD2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
 		A202E7CE2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
@@ -1202,6 +1204,7 @@
 		96B658B4209A5A3700EB0398 /* ComponentStylable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStylable.swift; sourceTree = "<group>"; };
 		96B658B7209A5AF000EB0398 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		96B658BA209A5D2B00EB0398 /* UIKit+Stylable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Stylable.swift"; sourceTree = "<group>"; };
+		96B658BD209A689200EB0398 /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 		A19BDADC422EDAB56B022976 /* Pods-pfp.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.store.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.store.xcconfig"; sourceTree = "<group>"; };
 		A202E79F2085CFC20058F32C /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		A202E7A22085CFC20058F32C /* logo_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black.png; sourceTree = "<group>"; };
@@ -2783,6 +2786,7 @@
 				A202E9842085D2C60058F32C /* UIViewController+OTEmptyBackButton.m */,
 				96B658B7209A5AF000EB0398 /* UIFont+Extensions.swift */,
 				96B658B1209A599F00EB0398 /* ButtonStyles.swift */,
+				96B658BD209A689200EB0398 /* LabelStyles.swift */,
 				96B658B4209A5A3700EB0398 /* ComponentStylable.swift */,
 				96B658BA209A5D2B00EB0398 /* UIKit+Stylable.swift */,
 			);
@@ -4251,6 +4255,7 @@
 				A202EC512085D2C80058F32C /* OTCustomSegmentedBehavior.m in Sources */,
 				A202EAEF2085D2C70058F32C /* OTUser.m in Sources */,
 				A296B92A2089DE4300F6AFBD /* main.m in Sources */,
+				96B658BE209A689200EB0398 /* LabelStyles.swift in Sources */,
 				A202EAD52085D2C70058F32C /* OTEntourage.m in Sources */,
 				A202ECD52085D2C80058F32C /* OTGuideInfoBehavior.m in Sources */,
 				A202EB6F2085D2C80058F32C /* OTUserPictureViewController.m in Sources */,
@@ -4780,6 +4785,7 @@
 				96B658AE209A424700EB0398 /* OTMenuTableViewCell.swift in Sources */,
 				A296B79F20871CFC00F6AFBD /* OTTutorial4ViewController.m in Sources */,
 				A296B7A020871CFC00F6AFBD /* OTTourUI.m in Sources */,
+				96B658BF209A689200EB0398 /* LabelStyles.swift in Sources */,
 				A296B7A120871CFC00F6AFBD /* OTTourStateInfo.m in Sources */,
 				A296B7A220871CFC00F6AFBD /* OTDistributedDelegateBehavior.m in Sources */,
 				A296B7A320871CFC00F6AFBD /* OTAnnouncement.m in Sources */,

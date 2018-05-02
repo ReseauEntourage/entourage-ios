@@ -15,3 +15,11 @@ extension UIButton {
         layer.borderColor = style.borderColor.cgColor
     }
 }
+
+extension UILabel {
+    func apply(style: LabelStyles) {
+        textColor = style.textColor
+        font = style.font
+        backgroundColor = style.backgroundColor
+    }
+}

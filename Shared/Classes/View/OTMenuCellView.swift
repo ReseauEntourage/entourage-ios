@@ -44,5 +44,6 @@ final class OTMenuCellView: UIView {
             $0.leading.equalTo(iconImageView.snp.trailing).inset(-17)
             $0.trailing.equalToSuperview()
         }
+        itemLabel.apply(style: .boldGray)
     }
 }
