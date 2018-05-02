@@ -1108,7 +1108,7 @@
                                 <rect key="frame" x="18" y="610" width="173" height="48"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapPinWhite" translatesAutoresizingMaskIntoConstraints="NO" id="9mv-KH-vwy">
-                                        <rect key="frame" x="8" y="8.5" width="32" height="32"/>
+                                        <rect key="frame" x="8" y="9" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="WTm-75-u6m"/>
                                             <constraint firstAttribute="width" constant="32" id="avS-oA-tiV"/>
@@ -1121,7 +1121,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowForMenu" translatesAutoresizingMaskIntoConstraints="NO" id="OUn-iw-fN0">
-                                        <rect key="frame" x="152" y="18" width="8" height="13"/>
+                                        <rect key="frame" x="152" y="18.5" width="8" height="13"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="13" id="adG-9M-AKK"/>
                                             <constraint firstAttribute="width" constant="8" id="bho-bp-dXO"/>
