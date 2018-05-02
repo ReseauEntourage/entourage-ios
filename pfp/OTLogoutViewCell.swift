@@ -23,6 +23,10 @@ final class OTLogoutViewCell: UITableViewCell {
     }
     
     // MARK: - Private Functions
+    @objc private func signout() {
+        NotificationCenter.default.post(name: Notification.Name("loginFailureNotification"), object: self)
+    }
+    
     private func setupUI() {
         addSubview(logoutButton)
         
@@ -37,5 +41,7 @@ final class OTLogoutViewCell: UITableViewCell {
             $0.height.equalTo(32)
             $0.bottom.equalToSuperview().inset(3)
         }
+        
+        logoutButton.addTarget(self, action: #selector(signout), for: .touchUpInside)
     }
 }

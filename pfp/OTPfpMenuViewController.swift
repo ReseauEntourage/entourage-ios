@@ -85,6 +85,25 @@ extension OTPfpMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //TODO: Refactor musai!!
+        
+        if indexPath.row == 0 {
+            contactPFP()
+        }
+        else if indexPath.row == 1 {
+            let url = URL(string: "http://bit.ly/charteethiquevoisin-age")
+            OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
+        }
+        else if indexPath.row == 2 {
+            let url = URL(string: "http://bit.ly/faqapplivoisin-age")
+            OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
+        }
+        else {
+            NotificationCenter.default.post(name: Notification.Name("loginFailureNotification"), object: self)
+        }
+    }
 }
 
 extension OTPfpMenuViewController: UITableViewDataSource {
@@ -104,5 +123,24 @@ extension OTPfpMenuViewController: UITableViewDataSource {
             cell.logoutButton.setTitle(menuItems[indexPath.row].title.capitalized, for: .normal)
             return cell
         }
+    }
+}
+
+extension OTPfpMenuViewController: MFMailComposeViewControllerDelegate {
+    private func contactPFP() {
+        guard MFMailComposeViewController.canSendMail() else {
+            let alert = UIAlertController(title: "", message: "email not available", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            return
+        }
+        
+        let composeViewController = MFMailComposeViewController()
+        composeViewController.mailComposeDelegate = self
+        composeViewController.setToRecipients(["voisin-age@petitsfreresdespauvres.fr"])
+        composeViewController.setSubject("")
+        composeViewController.setMessageBody("", isHTML: false)
+        present(composeViewController, animated: true, completion: nil)
     }
 }
