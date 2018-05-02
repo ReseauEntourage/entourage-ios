@@ -15,12 +15,6 @@ final class OTMenuHeaderView: UIView {
     var imgAssociation = UIImageView()
     var editLabel = UILabel()
     var nameLabel = UILabel()
-    var menuTableView = UITableView()
-    var insets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0) {
-        didSet {
-            
-        }
-    }
     
     // MARK: - Init
     
@@ -43,12 +37,13 @@ final class OTMenuHeaderView: UIView {
         addSubview(imgAssociation)
         addSubview(editLabel)
         addSubview(nameLabel)
-        addSubview(menuTableView)
-
+        
+        self.backgroundColor = .white
         profileBtn.snp.makeConstraints {
+            
             $0.height.width.equalTo(100)
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(insets.top)
+            $0.top.equalToSuperview().inset(20)
         }
         
         imgAssociation.snp.makeConstraints {
@@ -57,16 +52,14 @@ final class OTMenuHeaderView: UIView {
             $0.bottom.equalTo(profileBtn.snp.bottom)
         }
         
-        nameLabel.backgroundColor = .red
         nameLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(profileBtn)
+            $0.height.equalTo(20)
+            $0.top.equalTo(profileBtn.snp.bottom)
         }
         
-        nameLabel.backgroundColor = .blue
-        editLabel.textColor = .red
         editLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(10)
+            $0.bottom.equalToSuperview()
             $0.top.equalTo(nameLabel.snp.bottom)
             $0.centerX.equalToSuperview()
         }

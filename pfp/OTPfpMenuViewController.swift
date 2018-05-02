@@ -21,11 +21,11 @@ final class OTPfpMenuViewController: UIViewController {
     //MARK: - private functions
     private func setupUI() {
         self.view.addSubview(tableView)
-        self.view.addSubview(headerView)
+        tableView.delegate = self
+        
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        tableView.tableHeaderView = headerView
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         customizeHeader()
     }
@@ -42,7 +42,15 @@ final class OTPfpMenuViewController: UIViewController {
     private func customizeHeader() {
         headerView.editLabel.text = "Modifier mon profil"
         headerView.nameLabel.text = "Nom prenom"
-        headerView.nameLabel.textColor = .blue
         headerView.profileBtn.setImage(UIImage(named: "user"), for: .normal)
     }
+}
+
+extension OTPfpMenuViewController: UITableViewDelegate {
+   
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return headerView
+    }
+    
+    
 }
