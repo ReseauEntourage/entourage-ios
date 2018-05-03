@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface OTGeolocationRightsViewController : UIViewController
-
+@property (nonatomic, weak) IBOutlet UILabel *rightsTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *rightsDescLabel;
+@property (nonatomic, weak) IBOutlet UIButton *continueButton;
 @end

@@ -27,6 +27,8 @@
 
 + (OTAppConfiguration*)sharedInstance;
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions;
++ (UITabBarController*)configureMainTabBar;
++ (void)configureTabBarAppearance:(UITabBarController*)tabBarController;
 
 + (void)applicationDidBecomeActive:(UIApplication *)application;
 + (void)applicationWillEnterForeground:(UIApplication *)application;
@@ -35,6 +37,7 @@
  restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler;
 + (void)handleAppLaunchFromNotificationCenter:(NSDictionary *)userInfo;
 + (BOOL)handleApplication:(UIApplication *)application openURL:(NSURL *)url;
++ (void)clearUserData;
 
 + (void)applicationDidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 + (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
@@ -42,12 +45,21 @@
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
 + (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler;
 
-+ (void)navigateToAuthenticatedLandingScreen;
-+ (void)navigateToUserProfile;
-+ (void)navigateToStartupScreen;
-
 + (BOOL)isGeolocationMandatory;
 + (BOOL)supportsTourFunctionality;
 + (BOOL)supportsSolidarityGuideFunctionality;
++ (BOOL)isMVP;
++ (BOOL)shouldShowIntroTutorial;
++ (BOOL)shouldAllowLoginFromWelcomeScreen;
++ (BOOL)shouldAlwaysRequestUserToUploadPicture;
+
++ (NSString*)aboutUrlString;
++ (NSString *)welcomeDescription;
++ (UIImage*)welcomeLogo;
++ (NSString *)userProfileNameDescription;
++ (NSString *)userProfileEmailDescription;
++ (NSString *)notificationsRightsDescription;
++ (NSString *)geolocalisationRightsDescription;
++ (NSString *)notificationsNeedDescription;
 
 @end

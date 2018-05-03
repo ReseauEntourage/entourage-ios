@@ -16,3 +16,4 @@
 #import "OTApiConsts.h"
 #import "OTSafariService.h"
 @import MessageUI;
+#import "OTAppConfiguration.h"

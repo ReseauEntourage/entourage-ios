@@ -34,6 +34,7 @@
 #import "UIColor+entourage.h"
 #import "Mixpanel/Mixpanel.h"
 #import "OTDeepLinkService.h"
+#import "OTAppState.h"
 
 NSString *const kTutorialDone = @"has_done_tutorial";
 
@@ -137,37 +138,48 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
 - (void)launchAuthentication {
     [SVProgressHUD show];
+    
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     NSString *phone = self.phoneTextField.text;
-    if([self.phoneTextField.text hasPrefix:@"0"])
+    if ([self.phoneTextField.text hasPrefix:@"0"])
         phone = [self.phoneTextField.text substringFromIndex:1];
+    
     [[OTAuthService new] authWithPhone:[self.codeCountry stringByAppendingString: phone]
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
                                success: ^(OTUser *user) {
+                                   
+                                   [SVProgressHUD dismiss];
                                    [OTLogger logEvent:@"Login_Success"];
                                    NSLog(@"User : %@ authenticated successfully", user.email);
+                                   
                                    [OTLogger setupMixpanelWithUser:user];
                                    user.phone = [self.codeCountry stringByAppendingString:phone];
-                                   NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
-                                   if (loggedNumbers == nil)
-                                       loggedNumbers = [NSMutableArray new];
-                                   [SVProgressHUD dismiss];
-                                   [[NSUserDefaults standardUserDefaults] setBool:NO
-                                                                           forKey:@"user_tours_only"];
-                                   [NSUserDefaults standardUserDefaults].currentUser = user;
-                                   [[NSUserDefaults standardUserDefaults] synchronize];
-                                   if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
-                                       [[OTPushNotificationsService new] promptUserForPushNotifications];
-                                       [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+                                   
+                                   if ([OTAppConfiguration supportsTourFunctionality]) {
+                                       [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    }
-                                   else {
-                                       [self.onboardingNavigation nextFromLogin];
+                                   
+                                   if ([OTAppConfiguration shouldShowIntroTutorial]) {
+                                       NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+                                       if (loggedNumbers == nil) {
+                                           loggedNumbers = [NSMutableArray new];
+                                       }
+                                       
+                                       if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
+                                           [[OTPushNotificationsService new] promptUserForPushNotifications];
+                                       }
                                    }
+                                   
+                                   [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+
+                                   [OTAppState continueFromLoginScreen];
+                                   
                                    if (self.fromLink) {
                                        [[OTDeepLinkService new] handleDeepLink:self.fromLink];
                                        self.fromLink = nil;
                                    }
+                                   
                                } failure: ^(NSError *error) {
                                    [SVProgressHUD dismiss];
                                    [OTLogger logEvent:@"TelephoneSubmitFail"];
@@ -253,7 +265,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - OTUserNameViewController
 
 - (void)userNameDidChange {
-    [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+    [OTAppState navigateToAuthenticatedLandingScreen];
 }
 
 #pragma mark - UIPickerViewDataSource

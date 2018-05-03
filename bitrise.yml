@@ -24,8 +24,8 @@ workflows:
 
             echo "Download Amazon credentials"
 
-            staging_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/staging.plist
-            prod_file_local_path=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/prod.plist
+            staging_file_local_path=$BITRISE_SOURCE_DIR/staging.plist
+            prod_file_local_path=$BITRISE_SOURCE_DIR/prod.plist
 
             # download the file
             #wget -O "$staging_file_local_path" "$BITRISEIO_STAGING_PLIST_URL"

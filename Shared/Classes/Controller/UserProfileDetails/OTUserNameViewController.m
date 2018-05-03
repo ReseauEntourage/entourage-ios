@@ -29,6 +29,7 @@
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
 @property (weak, nonatomic) IBOutlet OnBoardingButton *continueButton;
+@property (weak, nonatomic) IBOutlet UILabel *nameDescLabel;
 
 @end
 
@@ -55,6 +56,8 @@
     };
     
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
+    self.nameDescLabel.text = [OTAppConfiguration userProfileNameDescription];
 }
 
 -(void)viewWillAppear:(BOOL)animated {

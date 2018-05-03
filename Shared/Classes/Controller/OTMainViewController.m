@@ -71,7 +71,6 @@
 #import "OTTourCreatorBehaviorDelegate.h"
 #import "OTStartTourAnnotation.h"
 #import "OTNoDataBehavior.h"
-#import "OTTutorialService.h"
 #import "OTUnreadMessagesService.h"
 #import "OTMailSenderBehavior.h"
 #import "OTSolidarityGuideFiltersViewController.h"
@@ -179,7 +178,10 @@
     [super viewDidLoad];
     
     [self setup];
-    [[OTTutorialService new] showTutorial];
+    
+    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+        [OTAppState presentTutorialScreen];
+    }
 }
 
 - (void)setup {
@@ -433,8 +435,8 @@
 - (void)configureNavigationBar {
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
     [self createMenuButton];
-    [self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
-    [self setupLogoImageWithTarget:self andSelector:@selector(logoTapped)];
+    //[self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
+    //[self setupLogoImageWithTarget:self andSelector:@selector(logoTapped)];
 }
 
 - (void)logoTapped {

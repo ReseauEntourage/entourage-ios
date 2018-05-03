@@ -33,6 +33,7 @@
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 @property (nonatomic, weak) IBOutlet OnBoardingButton *continueButton;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
+@property (weak, nonatomic) IBOutlet UILabel *emailDescLabel;
 
 @end
 
@@ -51,6 +52,8 @@
         self.continueButton.enabled = [self.emailTextField.text isValidEmail];
     };
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
+    self.emailDescLabel.text = [OTAppConfiguration userProfileEmailDescription];
     
     [self loadCurrentData];
     [self addIgnoreButton];

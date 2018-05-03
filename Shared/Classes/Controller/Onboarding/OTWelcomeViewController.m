@@ -21,8 +21,10 @@
 
 @interface OTWelcomeViewController ()
 
+@property (nonatomic, weak) IBOutlet UILabel *welcomeTitleLabel;
 @property (nonatomic, weak) IBOutlet UITextView *txtTerms;
 @property (nonatomic, weak) IBOutlet UIButton *continueButton;
+@property (nonatomic, weak) IBOutlet UIImageView *welcomeLogo;
 
 @end
 
@@ -33,12 +35,18 @@
     self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 
     self.title = @"";
-    if(![NSUserDefaults standardUserDefaults].currentUser) {
+    if (![NSUserDefaults standardUserDefaults].currentUser) {
         [self addLoginBarButton];
+        
+        NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+        self.welcomeTitleLabel.text = [NSString stringWithFormat:@"Bienvenue sur %@", appName];
+        self.txtTerms.text = [OTAppConfiguration welcomeDescription];
+        self.welcomeLogo.image = [OTAppConfiguration welcomeLogo];
+        
         [NSAttributedString applyLinkOnTextView:self.txtTerms 
             withText:self.txtTerms.text 
             toLinkText:OTLocalizedString(@"terms_and_conditions_for_onboarding") 
-            withLink:ABOUT_CGU_URL];
+            withLink:[OTAppConfiguration aboutUrlString]];
     }
     
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
@@ -52,12 +60,14 @@
 #pragma mark - Private
 
 - (void)addLoginBarButton {
-    UIBarButtonItem *loginButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doLogin")
+    if ([OTAppConfiguration shouldAllowLoginFromWelcomeScreen]) {
+        UIBarButtonItem *loginButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"doLogin")
                                                          withTarget:self
                                                           andAction:@selector(doLogin)
                                                             andFont:@"SFUIText-Bold"
                                                             colored:[UIColor whiteColor]];
-    [self.navigationItem setRightBarButtonItem:loginButton];
+        [self.navigationItem setRightBarButtonItem:loginButton];
+    }
 }
 
 #pragma mark - IBActions
@@ -67,8 +77,7 @@
 }
 
 - (IBAction)continueOnboarding:(id)sender {
-    [OTLogger logEvent:@"WelcomeScreenContinue"];
-    [self performSegueWithIdentifier:CONTINUE_ONBOARDING_SEGUE sender:self];
+    [OTAppState continueFromWelcomeScreen];
 }
 
 @end

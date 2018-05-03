@@ -10,8 +10,14 @@ extension String {
 struct UserStorageKey {
     static let environment = "environment"
     static let APIHostURL = "ApiBaseUrl"
+    
     static let APIKey = "ApiKey"
     static let amazonPictureFolder = "AmazonPictureFolder"
+    static let amazonAccessKey = "AmazonAccessKey"
+    static let amazonSecretKey = "AmazonSecretKey"
+    static let mixpanelToken = "MixpanelToken"
+    static let awsPictureBucket = "AwsPictureBucket"
+    static let environmentTypeKey = "EnvironmentType"
 }
 
 @objc enum ApplicationType:Int {
@@ -21,31 +27,28 @@ struct UserStorageKey {
 
 @objc class EnvironmentConfigurationManager: NSObject {
     
-    private var plist: NSDictionary?
+    private var config: NSDictionary?
     private let stagingEnvironmentName: String = "staging"
     private let prodEnvironmentName: String = "prod"
     
-    @objc var environmentName: String = ""
-    @objc var awsPictureBucket: String = "entourage-avatars-production-thumb"
     @objc var applicationType: ApplicationType = ApplicationType.entourage
     
     @objc convenience init(bundleId:String) {
         self.init()
-        self.environmentName = self.plistFileName(bundleId: bundleId)
-        self.plist = EnvironmentConfigurationManager.plist(name: self.environmentName)
+        self.config = EnvironmentConfigurationManager.plist(name: "AppConfigurations", bundleId: bundleId)
         
     #if PFP
         self.applicationType = ApplicationType.voisinAge
-        self.awsPictureBucket = "entourage-avatars-production-thumb/pfp"
     #endif
+        
     }
     
     @objc var amazonAccessKey: NSString {
-        return AMAZON_ACCESS_KEY as NSString
+        return configuration(forKey: UserStorageKey.amazonAccessKey)
     }
     
     @objc var amazonSecretKey: NSString {
-        return AMAZON_SECRET_KEY as NSString
+        return configuration(forKey: UserStorageKey.amazonSecretKey)
     }
     
     @objc var amazonPictureFolder: NSString {
@@ -61,19 +64,19 @@ struct UserStorageKey {
     }
     
     @objc var MixpanelToken : NSString {
-        return MIXPANEL_TOKEN as NSString;
+        return configuration(forKey: UserStorageKey.mixpanelToken)
     }
     
-    @objc var MixpanelKey: NSString {
-        return MIXPANEL_KEY as NSString;
+    @objc var AwsPictureBucket : NSString {
+        return configuration(forKey: UserStorageKey.awsPictureBucket)
     }
     
-    @objc var MixpanelSecretKey: NSString {
-        return MIXPANEL_SECRET_KEY as NSString;
+    @objc var environmentName : NSString {
+        return configuration(forKey: UserStorageKey.environmentTypeKey)
     }
     
     @objc var runsOnProduction: Bool {
-        return self.environmentName == stagingEnvironmentName
+        return self.environmentName as String == stagingEnvironmentName
     }
     
     @objc var runsOnStaging: Bool {
@@ -81,22 +84,19 @@ struct UserStorageKey {
     }
     
     private func configuration(forKey: String) -> NSString {
-        return plist![forKey] as! NSString
+        return self.config![forKey] as! NSString
     }
     
-    private static func plist(name: String) -> NSDictionary? {
+    private static func plist(name: String, bundleId:String) -> NSDictionary? {
         guard let plistFile = Bundle.main.path(forResource: name, ofType: "plist"),
-            let plist = NSDictionary(contentsOfFile: plistFile) else {
+            let config:NSDictionary = NSDictionary(contentsOfFile: plistFile) else {
                 return nil
         }
-        return plist
-    }
-    
-    private func plistFileName (bundleId: String) -> String {
-        #if BETA
-            return "staging"
-        #else
-            return "prod"
-        #endif
+        
+        if let plist:NSDictionary = config.object(forKey: bundleId) as? NSDictionary {
+            return plist
+        }
+        
+        return nil
     }
 }

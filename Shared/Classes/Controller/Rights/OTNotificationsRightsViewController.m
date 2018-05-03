@@ -19,9 +19,11 @@
 #import "SVProgressHUD.h"
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsService.h"
-#import "OTTutorialService.h"
 #import "OTLocationManager.h"
 #import "Mixpanel/Mixpanel.h"
+#import "OTAppState.h"
+#import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @import Firebase;
 
@@ -31,7 +33,11 @@
     [super viewDidLoad];
     self.notificationEnabled = @"NO";
     self.title = @"";
+    
     [self addIgnoreButton];
+    self.descLabel.text = [OTAppConfiguration notificationsRightsDescription];
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationAuthorizationChanged:) name:kNotificationPushStatusChanged object:nil];
 }
@@ -88,17 +94,21 @@
     [SVProgressHUD show];
     [[OTOnboardingJoinService new] checkForJoins:^(OTEntourageInvitation *joinedInvitation) {
         [SVProgressHUD dismiss];
+        
         if(joinedInvitation) {
             [SVProgressHUD showWithStatus:OTLocalizedString(@"joiningEntouragesMessage")];
             [[OTDeepLinkService new] navigateTo:joinedInvitation.entourageId withType:nil];
-            [[OTTutorialService new] showTutorial];
+            
+            if ([OTAppConfiguration shouldShowIntroTutorial]) {
+                [OTAppState presentTutorialScreen];
+            }
         }
         else {
-            [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+            [OTAppState navigateToAuthenticatedLandingScreen];
         }
     } withError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"automaticJoinFailedMessage")];
-        [OTAppConfiguration navigateToAuthenticatedLandingScreen];
+        [OTAppState navigateToAuthenticatedLandingScreen];
     }];
 }
 
