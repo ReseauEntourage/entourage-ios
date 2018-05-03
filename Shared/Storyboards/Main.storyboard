@@ -1324,14 +1324,14 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc9-kH-YQ7">
-                                <rect key="frame" x="305" y="593" width="62" height="62"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc9-kH-YQ7">
+                                <rect key="frame" x="305" y="592" width="62" height="62"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="SMt-8o-SPY"/>
                                     <constraint firstAttribute="width" constant="62" id="p7h-GC-Qtf"/>
                                 </constraints>
-                                <state key="normal" image="create">
+                                <state key="normal" backgroundImage="create">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -1355,7 +1355,6 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstItem="aPq-MR-sA9" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="QIf-iG-H2m"/>
                             <constraint firstItem="Lzp-RD-PWj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="T4w-9f-t1L"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uRg-cj-T9Q" secondAttribute="bottom" constant="12" id="TDA-nJ-u0d"/>
-                            <constraint firstItem="8zL-iD-eto" firstAttribute="centerY" secondItem="Kc9-kH-YQ7" secondAttribute="centerY" id="TuO-RT-GkE"/>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="UhE-G3-aXJ"/>
                             <constraint firstItem="mDS-Eg-kke" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="UkA-py-3qY"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="VLV-3h-yeI"/>
@@ -1885,8 +1884,8 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
         <image name="back" width="8" height="13"/>
         <image name="carte" width="40" height="35"/>
         <image name="carte_selected" width="40" height="35"/>
-        <image name="closeNoShadow" width="62" height="62"/>
-        <image name="closeShadow" width="62" height="62"/>
+        <image name="closeNoShadow" width="64" height="64"/>
+        <image name="closeShadow" width="64" height="64"/>
         <image name="create" width="62" height="62"/>
         <image name="filters" width="22" height="22"/>
         <image name="geoloc" width="20" height="20"/>
