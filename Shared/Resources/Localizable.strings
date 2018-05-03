@@ -372,24 +372,24 @@ vous signalez cette personne :";
 // User profile
 "user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";
 
-"increase_radius" = "C’est tout pour les actions dans ce rayon autour de vous ! ";
+"increase_radius" = "C’est tout pour les activité dans ce rayon autour de vous ! ";
 "no_feeds_increase_radius" = "
 C’est plutôt calme par ici !
 
-On dirait bien qu’il n’y a aucun entourage à proximité… pour l’instant !
+On dirait bien qu’il n’y a aucun activité à proximité… pour l’instant !
 
-Vous pouvez créer votre propre entourage en cliquant sur
+Vous pouvez créer votre propre activité en cliquant sur
 le + en bas à droite.
 ";
-"no_feeds_received" = "Aucune action près de cette position";
-"no_more_feeds" = "Aucune action près de cette position";
+"no_feeds_received" = "Aucune activité près de cette position";
+"no_more_feeds" = "Aucune activité près de cette position";
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
 "ok" = "OK";
 
 "mail_not_configured" = "Vous devez configurer votre messagerie email";
 "mail_sent" = "Mail envoyé";
 "mail_send_failure" = "Le mail n’a pu être envoyé";
-"mail_signal_subject" = "Signalement d’un entourage qui pose problème: \"%@\" créé par %@";
+"mail_signal_subject" = "Signalement d’un activité qui pose problème: \"%@\" créé par %@";
 
 // associations
 "select_association_title" = "SOUTENIR";

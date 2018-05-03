@@ -274,6 +274,10 @@
                                                  name:@kNotificationShowCurrentLocation 
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showCurrentLocation)
+                                                 name:@kNotificationShowFeedsMapCurrentLocation
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pushReceived)
                                                  name:@kNotificationPushReceived
                                                object:nil];
