@@ -70,7 +70,10 @@
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people set:@{@"EntourageNotifEnable": self.notificationEnabled}];
     [FIRAnalytics setUserPropertyString:self.notificationEnabled forName:@"EntourageGeolocEnable"];
-    [self setTutorialCompleted];
+    
+    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+        [self setTutorialCompleted];
+    }
     [self checkInvitationsToJoin];
 }
 

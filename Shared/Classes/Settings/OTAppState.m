@@ -175,7 +175,12 @@
             [OTAppState navigateToUserPicture:[OTAppState getTopViewController]];
         }
     } else {
-        [OTAppState navigateToRightsScreen:[OTAppState getTopViewController]];
+        UIViewController *currentViewController = [OTAppState getTopViewController];
+        if (currentViewController) {
+            [OTAppState navigateToRightsScreen:currentViewController];
+        } else {
+            [OTAppState navigateToAuthenticatedLandingScreen];
+        }        
     }
 }
 
