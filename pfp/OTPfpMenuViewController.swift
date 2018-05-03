@@ -115,6 +115,7 @@ extension OTPfpMenuViewController: UITableViewDataSource {
         if indexPath.row != menuItems.count - 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCellIdentifier") as! OTItemTableViewCell
             cell.view.iconImageView.image = UIImage(named: menuItems[indexPath.row].iconName)
+            cell.view.iconImageView.tintColor = UIColor.pfpBlue()
             cell.view.itemLabel.text = menuItems[indexPath.row].title
             return cell
         }
