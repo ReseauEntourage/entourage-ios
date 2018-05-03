@@ -258,7 +258,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
                                               NSFontAttributeName:selectedTabBarFont};
     // Menu tab
     id menuViewController;
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         menuViewController = [[OTPfpMenuViewController alloc] init];
     }
     else {
