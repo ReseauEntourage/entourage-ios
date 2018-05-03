@@ -256,9 +256,14 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UIFont *selectedTabBarFont = [UIFont boldSystemFontOfSize:12];
     NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],
                                               NSFontAttributeName:selectedTabBarFont};
-    
     // Menu tab
-    OTMenuViewController *menuViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMenuViewControllerIdentifier"];
+    id menuViewController;
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        menuViewController = [[OTPfpMenuViewController alloc] init];
+    }
+    else {
+        menuViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMenuViewControllerIdentifier"];
+    }
     UINavigationController *menuNavController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
     menuNavController.tabBarItem.title = @"menu";
     menuNavController.tabBarItem.image = [UIImage imageNamed:@"menu"];

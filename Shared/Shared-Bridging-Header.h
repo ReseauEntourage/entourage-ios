@@ -12,4 +12,8 @@
 #import "NSUserDefaults+OT.h"
 #import "OTConsts.h"
 #import "UIColor+pfp.h"
+#import "OTMenuItem.h"
+#import "OTApiConsts.h"
+#import "OTSafariService.h"
+@import MessageUI;
 #import "OTAppConfiguration.h"

@@ -39,6 +39,7 @@
 @property (nonatomic, strong) IBOutlet OTFeedItemDetailsBehavior *feedItemDetailsBehavior;
 @property (nonatomic, strong) IBOutlet OTManageInvitationBehavior* manageInvitation;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
+@property (strong, nonatomic) IBOutlet UIButton *optionsButton;
 
 @end
 
@@ -47,6 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.optionsButton.hidden = YES;
     [self.invitationsCollectionDataSource initialize];
     [self.entouragesTableDataSource initialize];
     [self.toggleCollectionView initialize];
