@@ -953,7 +953,7 @@
                                     <outlet property="tourOptionsBtn" destination="Kc9-kH-YQ7" id="Mpa-Fn-ehk"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDS-Eg-kke">
+                            <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDS-Eg-kke">
                                 <rect key="frame" x="26" y="73" width="42" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -973,7 +973,7 @@
                                     <action selector="showFilters" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5tC-BZ-rkP"/>
                                 </connections>
                             </button>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-MR-sA9">
+                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-MR-sA9">
                                 <rect key="frame" x="147.5" y="76.5" width="80" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QES-lt-CoV">
@@ -1227,6 +1227,7 @@
                                             <constraint firstItem="ckr-aN-4ol" firstAttribute="top" secondItem="qkY-IH-s2c" secondAttribute="top" id="6Oh-5b-ejv"/>
                                             <constraint firstItem="ckr-aN-4ol" firstAttribute="leading" secondItem="qkY-IH-s2c" secondAttribute="leading" id="Juj-IU-l2d"/>
                                             <constraint firstAttribute="bottom" secondItem="ckr-aN-4ol" secondAttribute="bottom" id="g2F-gD-gbQ"/>
+                                            <constraint firstItem="ckr-aN-4ol" firstAttribute="leading" secondItem="qkY-IH-s2c" secondAttribute="leading" id="rEc-xO-Ads"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="lblNumberOfUsers" destination="oef-Ka-s1w" id="XVA-k2-N4G"/>
@@ -1902,7 +1903,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dno-Ju-GCg"/>
-        <segue reference="ZNZ-ec-dR4"/>
-        <segue reference="xSV-rR-wZy"/>
+        <segue reference="b42-UE-vP1"/>
+        <segue reference="Dfo-uz-6se"/>
     </inferredMetricsTieBreakers>
 </document>

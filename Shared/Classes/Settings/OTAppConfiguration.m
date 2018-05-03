@@ -316,12 +316,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[ApplicationTheme shared] setBackgroundThemeColor:backgroundThemeColor];
     
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-    UINavigationBar.appearance.barTintColor = primaryNavigationBarTintColor;
-    UINavigationBar.appearance.backgroundColor = primaryNavigationBarTintColor;
+    UINavigationBar.appearance.barTintColor = secondaryNavigationBarTintColor;
+    UINavigationBar.appearance.backgroundColor = secondaryNavigationBarTintColor;
+    UINavigationBar.appearance.tintColor = primaryNavigationBarTintColor;
     
     UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
-    UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
-    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0],
+    UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor] };
+    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor],
                                                           NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
     
     UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
