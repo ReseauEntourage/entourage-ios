@@ -11,6 +11,8 @@
 #import "OTAppDelegate.h"
 #import "OTSWRevealViewController.h"
 #import "UIColor+entourage.h"
+#import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @implementation OTSafariService
 
@@ -26,7 +28,7 @@
     
     double iOSVersion = [[[UIDevice currentDevice] systemVersion] doubleValue];
     if (iOSVersion >= 10) {
-        safariController.preferredBarTintColor = [UIColor appOrangeColor];
+        safariController.preferredBarTintColor = [ApplicationTheme shared].backgroundThemeColor;
         safariController.preferredControlTintColor = [UIColor whiteColor];
     }
     
@@ -38,20 +40,6 @@
         UINavigationController *rootController = (UINavigationController*)appDelegate.window.rootViewController;
         if (rootController.navigationController.topViewController) {
             [rootController.navigationController.topViewController presentViewController:safariController animated:YES completion:nil];
-            
-        } else if ([rootController isKindOfClass:[OTSWRevealViewController class]]) {
-            OTSWRevealViewController *menuController = (OTSWRevealViewController*)rootController;
-            UIViewController *activeController = menuController.frontViewController;
-            if ([activeController isKindOfClass:[UINavigationController class]]) {
-                UINavigationController *activeNavController = (UINavigationController*)menuController.frontViewController;
-                if (activeNavController.topViewController) {
-                     [activeNavController.topViewController.navigationController presentViewController:safariController animated:YES completion:nil];
-                } else {
-                    [activeNavController presentViewController:safariController animated:YES completion:nil];
-                }
-            } else {
-                [activeController.navigationController presentViewController:safariController animated:YES completion:nil];
-            }
         }
         else {
             [rootController presentViewController:safariController animated:YES completion:nil];

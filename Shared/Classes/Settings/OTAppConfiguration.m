@@ -258,7 +258,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
                                               NSFontAttributeName:selectedTabBarFont};
     // Menu tab
     id menuViewController;
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         menuViewController = [[OTPfpMenuViewController alloc] init];
     }
     else {
@@ -316,9 +316,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[ApplicationTheme shared] setBackgroundThemeColor:backgroundThemeColor];
     
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-    UINavigationBar.appearance.barTintColor = secondaryNavigationBarTintColor;
-    UINavigationBar.appearance.backgroundColor = secondaryNavigationBarTintColor;
-    UINavigationBar.appearance.tintColor = primaryNavigationBarTintColor;
+    UINavigationBar.appearance.barTintColor = primaryNavigationBarTintColor;
+    UINavigationBar.appearance.backgroundColor = primaryNavigationBarTintColor;
+    UINavigationBar.appearance.tintColor = secondaryNavigationBarTintColor;
     
     UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
     UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor] };
@@ -348,6 +348,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [UITabBarItem.appearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
                                                       NSFontAttributeName:[UIFont systemFontOfSize:12]}
                                            forState:UIControlStateNormal];
+}
+
++ (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
+{
+    navigationController.navigationBar.barTintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
+    navigationController.navigationBar.backgroundColor = [[ApplicationTheme shared] backgroundThemeColor];
+    navigationController.navigationBar.tintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
 }
 
 #pragma mark - Push notifications

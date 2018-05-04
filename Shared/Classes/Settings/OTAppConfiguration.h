@@ -29,6 +29,7 @@
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions;
 + (UITabBarController*)configureMainTabBar;
 + (void)configureTabBarAppearance:(UITabBarController*)tabBarController;
++ (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController;
 
 + (void)applicationDidBecomeActive:(UIApplication *)application;
 + (void)applicationWillEnterForeground:(UIApplication *)application;
