@@ -14,6 +14,8 @@
 #import "UINavigationController+entourage.h"
 #import "UIBarButtonItem+factory.h"
 #import "Mixpanel/Mixpanel.h"
+#import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @import Firebase;
 
@@ -23,6 +25,11 @@
     [super viewDidLoad];
     
     self.title = @"";
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+
+    self.rightsDescLabel.text = [OTAppConfiguration geolocalisationRightsDescription];
     [self addIgnoreButton];
     [self.navigationController presentTransparentNavigationBar];
 }
@@ -65,7 +72,7 @@
     if (allowed)
         [self goToNotifications];
     else
-        [self performSegueWithIdentifier:@"NoLocationRightsSegue" sender:self];
+        OTAppConfiguration.isGeolocationMandatory ? [self goToNotifications] : [self performSegueWithIdentifier:@"NoLocationRightsSegue" sender:self];
 }
 
 #pragma mark - IBAction

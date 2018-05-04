@@ -8,16 +8,12 @@
 
 #import "OTAskMoreViewController.h"
 #import "OTConsts.h"
-// Service
 #import "OTAuthService.h"
-
-// Helper
 #import "NSString+Validators.h"
 #import "NSDictionary+Parsing.h"
 #import "UIViewController+menu.h"
-
-// View
 #import "SVProgressHUD.h"
+#import "entourage-Swift.h"
 
 /********************************************************************************/
 #pragma mark - OTMapViewController
@@ -41,6 +37,7 @@
     [super viewDidLoad];
     self.title = OTLocalizedString(@"discoverEntourage");
     self.navigationController.navigationBarHidden = NO;
+    self.subscribeButton.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     [self setupCloseModal];
 }
 

@@ -8,6 +8,7 @@
 
 #import "OTTutorialViewController.h"
 #import "UIColor+entourage.h"
+#import "entourage-Swift.h"
 
 @interface OTTutorialViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource>
 
@@ -114,7 +115,7 @@
 - (void)configurePageControl {
     for(UIView *view in self.view.subviews) {
         if([view isKindOfClass:[UIPageControl class]]) {
-            ((UIPageControl*) view).currentPageIndicatorTintColor = [UIColor appOrangeColor];
+            ((UIPageControl*) view).currentPageIndicatorTintColor = [ApplicationTheme shared].backgroundThemeColor;
             for(UIView *subview in view.subviews) {
                 subview.layer.borderColor = [UIColor appGreyishBrownColor].CGColor;
                 subview.layer.borderWidth = 0.5;

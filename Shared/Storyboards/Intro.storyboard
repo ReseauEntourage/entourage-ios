@@ -59,7 +59,9 @@
                                                     <constraint firstAttribute="height" constant="57" id="zy2-Bp-fXv"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                <state key="normal" title="Me tenir informé!"/>
+                                                <state key="normal" title="Me tenir informé!">
+                                                    <color key="titleColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="5"/>
@@ -178,7 +180,7 @@
         <!--Startup View Controller-->
         <scene sceneID="6VV-8c-dP7">
             <objects>
-                <viewController id="d0v-Fd-fA9" customClass="OTStartupViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTStartupViewController" id="d0v-Fd-fA9" customClass="OTStartupViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qgm-QM-88m"/>
                         <viewControllerLayoutGuide type="bottom" id="W7p-IX-DwJ"/>
@@ -241,7 +243,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un peu de chaleur humaine." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPF-Wr-lQ0">
-                                <rect key="frame" x="48" y="256" width="280" height="58"/>
+                                <rect key="frame" x="48" y="267" width="280" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="fz7-U9-CWf"/>
                                     <constraint firstAttribute="width" constant="280" id="xZd-ZE-XbC"/>
@@ -250,12 +252,8 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entourageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Yl-vAI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entourageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Yl-vAI">
                                 <rect key="frame" x="150" y="166" width="75" height="75"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="Cf9-2C-NxO"/>
-                                    <constraint firstAttribute="width" constant="75" id="FAX-3S-fc3"/>
-                                </constraints>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H1V-0f-AM4">
                                 <rect key="frame" x="12" y="470" width="351" height="50"/>
@@ -276,32 +274,37 @@
                                 </variation>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="top" secondItem="H1V-0f-AM4" secondAttribute="bottom" constant="16" id="3UX-Fi-EuG"/>
                             <constraint firstItem="H1V-0f-AM4" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="8s3-HQ-c36"/>
                             <constraint firstAttribute="bottom" secondItem="tPf-h7-A0x" secondAttribute="bottom" id="9s4-4M-lZ7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="H1V-0f-AM4" secondAttribute="trailing" constant="-4" id="Csv-YN-Mdp"/>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="D3N-XI-gkf"/>
-                            <constraint firstItem="bPF-Wr-lQ0" firstAttribute="bottom" secondItem="60w-tv-tKx" secondAttribute="centerY" constant="-20" id="Hxe-we-Y2Z"/>
+                            <constraint firstItem="bPF-Wr-lQ0" firstAttribute="bottom" secondItem="60w-tv-tKx" secondAttribute="centerY" constant="-8.5" id="Hxe-we-Y2Z"/>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="I3C-ND-duB"/>
                             <constraint firstItem="tPf-h7-A0x" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leading" id="KX8-Cv-XdY"/>
                             <constraint firstItem="bPF-Wr-lQ0" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="Myk-g9-Wav"/>
+                            <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" relation="lessThanOrEqual" secondItem="gln-Yl-vAI" secondAttribute="bottom" constant="426" id="Ow3-rF-AXd"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="top" secondItem="1oI-JN-xF6" secondAttribute="bottom" constant="16" id="Pvi-NW-Ow3"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="Q4k-a2-1L2"/>
                             <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="mwv-HX-aYM" secondAttribute="bottom" constant="15" id="WGz-P9-g6X"/>
                             <constraint firstItem="tPf-h7-A0x" firstAttribute="width" secondItem="60w-tv-tKx" secondAttribute="width" id="XX3-wq-WT3"/>
                             <constraint firstItem="gln-Yl-vAI" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="bZY-KF-103"/>
-                            <constraint firstItem="bPF-Wr-lQ0" firstAttribute="top" secondItem="gln-Yl-vAI" secondAttribute="bottom" constant="15" id="foC-Ie-EJD"/>
                             <constraint firstItem="tPf-h7-A0x" firstAttribute="top" secondItem="60w-tv-tKx" secondAttribute="top" id="gvD-Pn-zhi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwv-HX-aYM" secondAttribute="trailing" constant="-4" id="jBT-Ve-tb9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1oI-JN-xF6" secondAttribute="trailing" constant="-4" id="tml-dp-994"/>
+                            <constraint firstItem="gln-Yl-vAI" firstAttribute="top" secondItem="qgm-QM-88m" secondAttribute="bottom" constant="146" id="v5l-yk-G0f"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="xue-aD-E7N"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oc7-iw-O1J"/>
                     <connections>
+                        <outlet property="bgImage" destination="tPf-h7-A0x" id="frX-Tq-tlu"/>
                         <outlet property="loginButton" destination="mwv-HX-aYM" id="nPa-jz-z55"/>
+                        <outlet property="logo" destination="gln-Yl-vAI" id="bCA-he-IZR"/>
+                        <outlet property="logoTitle" destination="bPF-Wr-lQ0" id="88W-aM-vrb"/>
+                        <outlet property="registerButton" destination="1oI-JN-xF6" id="YRW-Zx-IdR"/>
                         <segue destination="8Pa-2W-O1j" kind="show" identifier="SignUpSegue" id="UUz-OA-utW"/>
                         <segue destination="Gt1-cc-4DI" kind="show" identifier="LoginSegue" id="usp-d3-u4q"/>
                     </connections>
@@ -329,7 +332,7 @@
         <!--Login-->
         <scene sceneID="CLK-Te-XOf">
             <objects>
-                <viewController storyboardIdentifier="OTLoginViewControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="Gt1-cc-4DI" userLabel="Login" customClass="OTLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTLoginViewController" automaticallyAdjustsScrollViewInsets="NO" id="Gt1-cc-4DI" userLabel="Login" customClass="OTLoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wX3-SU-kbf"/>
                         <viewControllerLayoutGuide type="bottom" id="8IX-Sx-Dln"/>
@@ -744,6 +747,7 @@ saisissez votre numéro de portable.</string>
                     <navigationItem key="navigationItem" id="kYV-5U-zfM"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="continueButton" destination="PRp-JX-WyY" id="igK-IC-bnS"/>
                         <outlet property="countryCodeTextField" destination="fMp-TQ-cvd" id="PLo-rR-4WH"/>
                         <outlet property="countryPicker" destination="lMx-Rd-gIG" id="Aij-0v-s4Z"/>
                         <outlet property="phoneTextField" destination="9pu-ww-5CV" id="aHD-Ur-6bi"/>
@@ -792,7 +796,7 @@ saisissez votre numéro de portable.</string>
         <!--Welcome View Controller-->
         <scene sceneID="Jxm-X1-QSd">
             <objects>
-                <viewController id="8Pa-2W-O1j" customClass="OTWelcomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTWelcomeViewController" id="8Pa-2W-O1j" customClass="OTWelcomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UIV-Pr-4Jl"/>
                         <viewControllerLayoutGuide type="bottom" id="b9i-3f-AXD"/>
@@ -850,7 +854,7 @@ sur Entourage.</string>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wF4-5f-khB">
                                 <rect key="frame" x="12" y="198" width="351" height="388"/>
-                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Vous allez rejoindre une communauté de citoyens qui collaborent pour lutter contre l’exclusion sociale! 
 En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -891,7 +895,10 @@ En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez
                     </view>
                     <navigationItem key="navigationItem" id="3Xs-Xs-bSI"/>
                     <connections>
+                        <outlet property="continueButton" destination="8vj-nj-f39" id="JHO-46-BHf"/>
                         <outlet property="txtTerms" destination="wF4-5f-khB" id="Zjt-g3-JHE"/>
+                        <outlet property="welcomeLogo" destination="3bR-VB-ndO" id="rEv-pr-efs"/>
+                        <outlet property="welcomeTitleLabel" destination="eEZ-Ma-DdB" id="G8F-SM-Zfm"/>
                         <segue destination="Gt1-cc-4DI" kind="show" identifier="WelcomeLoginSegue" id="GFk-L8-2yS"/>
                         <segue destination="L2Y-m3-WnX" kind="show" identifier="SegueOnboarding" id="YvZ-rG-WF2"/>
                     </connections>

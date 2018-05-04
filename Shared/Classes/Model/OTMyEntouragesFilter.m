@@ -62,7 +62,7 @@
 }
 
 - (NSArray *)toGroupedArray {
-    if(IS_PRO_USER)
+    if(IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality)
         return [self groupForPro];
     else
         return [self groupForPublic];

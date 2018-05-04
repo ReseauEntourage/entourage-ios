@@ -17,6 +17,7 @@
 #import "OTContactsFilteredDataSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTContactPhoneCell.h"
+#import "entourage-Swift.h"
 
 @interface OTInviteContactsViewController () <UITableViewDelegate>
 
@@ -48,7 +49,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
 }
 
 #pragma mark - Contacts table view delegate implementation

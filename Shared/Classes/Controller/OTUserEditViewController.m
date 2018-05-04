@@ -26,6 +26,7 @@
 #import "OTUserTableConfigurator.h"
 #import "OTTextWithCount.h"
 #import "OTAboutMeViewController.h"
+#import "entourage-Swift.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
@@ -99,9 +100,9 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)showSaveButton {
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
     UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save")
                                                         withTarget:self
                                                          andAction:@selector(updateUser)

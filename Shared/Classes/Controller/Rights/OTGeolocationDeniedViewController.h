@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface OTGeolocationDeniedViewController : UIViewController
-
+@property (nonatomic, weak) IBOutlet UIButton *activateButton;
+@property (nonatomic, weak) IBOutlet UIButton *ignoreButton;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @end

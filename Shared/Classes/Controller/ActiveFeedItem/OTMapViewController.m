@@ -20,6 +20,7 @@
 #import "UIImageView+entourage.h"
 #import "OTConsts.h"
 #import "OTBarButtonView.h"
+#import "entourage-Swift.h"
 
 @interface OTMapViewController ()
 
@@ -56,8 +57,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"Screen14_2PublicPageViewAsMemberOrCreator"];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-}
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;}
 
 - (IBAction)showProfile {
     [OTLogger logEvent:@"UserProfileClick"];

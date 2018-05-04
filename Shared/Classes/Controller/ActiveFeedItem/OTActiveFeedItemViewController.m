@@ -33,6 +33,7 @@
 #import "OTEditEncounterBehavior.h"
 #import "OTMessageTableCellProviderBehavior.h"
 #import "OTBarButtonView.h"
+#import "entourage-Swift.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -84,14 +85,21 @@
     } orFailure:^(NSError *error) {
         [SVProgressHUD dismiss];
     }];
-    if(self.inviteBehaviorTriggered)
+    if (self.inviteBehaviorTriggered)
         [self performSegueWithIdentifier:@"SegueInviteSource" sender:self];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"OTActiveFeedItemViewController"];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    
     [self reloadMessages];
 }
 

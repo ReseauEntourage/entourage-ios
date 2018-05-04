@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.6</string>
+	<string>5.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -53,7 +53,7 @@
 			<string>social.entourage.entourageios.beta</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>entourage-staging</string>
+				<string>entourage-preprod</string>
 			</array>
 		</dict>
 	</array>
@@ -135,7 +135,7 @@
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>Launch Screen</string>
+	<string>EntourageLaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
