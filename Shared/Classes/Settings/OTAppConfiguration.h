@@ -62,5 +62,7 @@
 + (NSString *)notificationsRightsDescription;
 + (NSString *)geolocalisationRightsDescription;
 + (NSString *)notificationsNeedDescription;
++ (NSString *)noFeedsDescription;
++ (NSString *)extendSearchParameterDescription;
 
 @end

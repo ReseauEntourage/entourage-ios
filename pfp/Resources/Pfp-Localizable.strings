@@ -15,3 +15,7 @@
 "pfp_geolocalisationDescriptionText" = "Voisin-Age, c’est utile parce que c’est local!\nParticipez à la vie du réseau dans votre quartier. Pour découvrir les nouvelles sorties de votre voisinage, activez la géolocalisation.";
 
 "pfp_notificationNeedDescription" = "Pour vous faire découvrir le réseau Voisin-Age autour de vous, Voisin-Age doit connaître votre position.";
+
+"pfp_no_feeds_increase_radius" = "\nC’est plutôt calme par ici !\n\nOn dirait bien qu’il n’y a aucun activité à proximité… pour l’instant !\n\nVous pouvez créer votre propre activité en cliquant sur\nle + en bas à droite.";
+
+"pfp_no_more_feeds" = "Aucune activité près de cette position";

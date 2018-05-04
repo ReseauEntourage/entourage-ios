@@ -253,9 +253,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     UIStoryboard *mainStoryboard = [UIStoryboard mainStoryboard];
     
-    UIFont *selectedTabBarFont = [UIFont boldSystemFontOfSize:12];
-    NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],
-                                              NSFontAttributeName:selectedTabBarFont};
     // Menu tab
     id menuViewController;
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
@@ -266,20 +263,22 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     UINavigationController *menuNavController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
     menuNavController.tabBarItem.title = @"menu";
-    menuNavController.tabBarItem.image = [UIImage imageNamed:@"menu"];
-    [menuNavController.tabBarItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+    menuNavController.tabBarItem.image = [UIImage imageNamed:@"menu_tab"];
+    menuNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"menu_tab_selected"];
     
     // Proximity Map Tab
     OTMainViewController *mainMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
     UINavigationController *mainMapNavController = [[UINavigationController alloc] initWithRootViewController:mainMapViewController];
     mainMapNavController.tabBarItem.title = @"à proximité";
-    mainMapNavController.tabBarItem.image = [UIImage imageNamed:@"guide"];
+    mainMapNavController.tabBarItem.image = [UIImage imageNamed:@"map_tab"];
+    mainMapNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"map_tab_selected"];
     
     // Messages Tab
     OTMyEntouragesViewController *messagesViewController = [[UIStoryboard myEntouragesStoryboard] instantiateViewControllerWithIdentifier:@"OTMyEntouragesViewController"];
     UINavigationController *messagesNavController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
     messagesNavController.tabBarItem.title = @"messagerie";
-    messagesNavController.tabBarItem.image = [UIImage imageNamed:@"discussion"];
+    messagesNavController.tabBarItem.image = [UIImage imageNamed:@"messages_tab"];
+    messagesNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"messages_tab_selected"];
     
     NSArray *controllers = @[];
     
@@ -340,14 +339,20 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     currentTabBar.selectionIndicatorImage = [OTAppConfiguration tabSelectionIndicatorImage:[UIColor whiteColor] size:size];
     currentTabBar.unselectedItemTintColor = [UIColor whiteColor];
     
-    UIFont *selectedTabBarFont = [UIFont boldSystemFontOfSize:12];
+    UIFont *selectedTabBarFont = [UIFont boldSystemFontOfSize:13];
     NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],
                                               NSFontAttributeName:selectedTabBarFont};
+    UIFont *regularTabBarFont = [UIFont systemFontOfSize:12];
+    NSDictionary *normalTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                                           NSFontAttributeName:regularTabBarFont};
     
+    for (UIBarButtonItem *item in currentTabBar.items) {
+        [item setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+        [item setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+    }
+
     [UITabBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
-    [UITabBarItem.appearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                      NSFontAttributeName:[UIFont systemFontOfSize:12]}
-                                           forState:UIControlStateNormal];
+    [UITabBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
 }
 
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
@@ -355,6 +360,16 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     navigationController.navigationBar.barTintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
     navigationController.navigationBar.backgroundColor = [[ApplicationTheme shared] backgroundThemeColor];
     navigationController.navigationBar.tintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+
+    UIFont *selectedTabBarFont = [UIFont boldSystemFontOfSize:13];
+    NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],
+                                              NSFontAttributeName:selectedTabBarFont};
+    UIFont *regularTabBarFont = [UIFont systemFontOfSize:12];
+    NSDictionary *normalTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                                           NSFontAttributeName:regularTabBarFont};
+    
+    [navigationController.tabBarItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+    [navigationController.tabBarItem setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
 }
 
 #pragma mark - Push notifications
@@ -556,6 +571,24 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     return OTLocalizedString(@"notificationNeedDescription");
+}
+
++ (NSString *)noFeedsDescription
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_no_more_feeds");
+    }
+    
+    return OTLocalizedString(@"no_more_feeds");
+}
+
++ (NSString *)extendSearchParameterDescription
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_no_feeds_increase_radius");
+    }
+    
+    return OTLocalizedString(@"no_feeds_increase_radius");
 }
 
 
