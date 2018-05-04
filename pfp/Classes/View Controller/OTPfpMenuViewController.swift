@@ -28,6 +28,7 @@ final class OTPfpMenuViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
     }
     
     //MARK: - Private Functions

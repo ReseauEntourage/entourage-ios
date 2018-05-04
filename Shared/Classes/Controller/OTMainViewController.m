@@ -182,6 +182,8 @@
     if ([OTAppConfiguration shouldShowIntroTutorial]) {
         [OTAppState presentTutorialScreen];
     }
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)setup {

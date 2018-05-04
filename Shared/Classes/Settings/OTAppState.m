@@ -100,17 +100,10 @@
 
 + (void)navigateToAuthenticatedLandingScreen
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        
-        OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
-        UIWindow *window = [appDelegate window];
-        window.rootViewController = [OTAppConfiguration configureMainTabBar];
-        [window makeKeyAndVisible];
-        
-        return;
-    }
-    
-    [UIStoryboard showSWRevealController];
+    OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIWindow *window = [appDelegate window];
+    window.rootViewController = [OTAppConfiguration configureMainTabBar];
+    [window makeKeyAndVisible];
 }
 
 + (void)navigateToUserProfile
@@ -166,16 +159,24 @@
 {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     BOOL isFirstLogin = [[NSUserDefaults standardUserDefaults] isFirstLogin];
+    UIViewController *currentViewController = [OTAppState getTopViewController];
     
     if ([OTAppConfiguration shouldAlwaysRequestUserToUploadPicture] || isFirstLogin) {
         if (currentUser.avatarURL.length > 0) {
-            [OTAppState navigateToRightsScreen:[OTAppState getTopViewController]];
+            if (currentViewController) {
+                [OTAppState navigateToRightsScreen:currentViewController];
+            } else {
+                [OTAppState navigateToAuthenticatedLandingScreen];
+            }
         }
         else {
-            [OTAppState navigateToUserPicture:[OTAppState getTopViewController]];
+            if (currentViewController) {
+                [OTAppState navigateToUserPicture:currentViewController];
+            } else {
+                [OTAppState navigateToAuthenticatedLandingScreen];
+            }
         }
     } else {
-        UIViewController *currentViewController = [OTAppState getTopViewController];
         if (currentViewController) {
             [OTAppState navigateToRightsScreen:currentViewController];
         } else {
