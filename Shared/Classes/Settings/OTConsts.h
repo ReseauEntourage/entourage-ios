@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 OCTO Technology. All rights reserved.
 //
 
+#import "PFPConsts.h"
+
 #define DEVICE_TOKEN_KEY "device_token"
 
 #define PARIS_LAT 48.856578
@@ -38,6 +40,7 @@
 #define kNotificationLocalTourConfirmation "NotificationShowTourConfirmation"
 
 #define kNotificationShowCurrentLocation "NotificationCurrentLocation"
+#define kNotificationShowFeedsMapCurrentLocation "NotificationFeedsMapCurrentLocation"
 
 #define kNotificationProfilePictureUpdated "NotificationProfilePictureUpdated"
 #define kNotificationAboutMeUpdated "NotificationAboutMeUpdated"
@@ -57,10 +60,6 @@
 #define kNotificationUpdateBadge @"NotificationUpdateBadge"
 #define kSolidarityGuideNotification @"NotificationSolidarityGuide"
 
-#define kLoginFailureNotification @"loginFailureNotification"
-#define kUpdateBadgeCountNotification @"updateBadgeCountNotification"
-
-
 #define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"
 #define ABOUT_TWITTER_URL @"https://twitter.com/r_entourage"
@@ -68,8 +67,6 @@
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
 #define REPORT_EMAIL_ADDRESS @"contact@entourage.social"
-
-#define OTLocalizedString(key) [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
 
 #define SNAPSHOT_START "snapshot_start_%d.png"
 #define SNAPSHOT_STOP "snapshot_end_%d.png"

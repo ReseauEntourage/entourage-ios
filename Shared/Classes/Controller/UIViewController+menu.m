@@ -10,9 +10,8 @@
 #import "UIBarButtonItem+Badge.h"
 #import "OTUnreadMessagesService.h"
 #import "OTConsts.h"
-
-// Controller
 #import "SWRevealViewController.h"
+#import "entourage-Swift.h"
 
 @implementation UIViewController (menu)
 
@@ -62,7 +61,8 @@
         
         [self.navigationController.navigationBar addGestureRecognizer:self.revealViewController.panGestureRecognizer];
         [self.navigationItem setRightBarButtonItem:menuButton];
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        
+        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     }
     return menuButton;
 }
@@ -87,7 +87,8 @@
     [menuButton setAction:@selector(dismissModal)];
     
     [self.navigationItem setLeftBarButtonItem:menuButton];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
     return  menuButton;
 }
 
@@ -104,10 +105,10 @@
 }
 
 - (void)setupLogoImageWithTarget:(id)target andSelector:(SEL)action {
-    UIImage *image = [UIImage imageNamed:@"logo"];
+    UIImage *image = [ApplicationTheme applicationLogo];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0,0,image.size.width, image.size.height);
-    [button setBackgroundImage:image forState:UIControlStateNormal];
+    [button setImage:image forState:UIControlStateNormal];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = button;
 }

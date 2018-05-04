@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="bGF-q3-B8f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="bGF-q3-B8f">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Calibri.ttf">
+            <string>Calibri</string>
+        </array>
         <array key="SF-UI-Text-Light.otf">
             <string>SFUIText-Light</string>
         </array>
@@ -97,8 +100,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <outlet property="itemIcon" destination="wc1-BD-BQp" id="w8p-dg-ICq"/>
-                                            <outlet property="itemLabel" destination="XdS-73-BBy" id="oZk-iO-4I0"/>
+                                            <outlet property="itemIcon" destination="wc1-BD-BQp" id="nX7-Ec-qsb"/>
+                                            <outlet property="itemLabel" destination="XdS-73-BBy" id="TVA-Ck-kNS"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="makeDonationCellIdentifier" id="b0K-pZ-G4F" customClass="OTMenuTableViewCell">
@@ -261,7 +264,7 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                            <rect key="frame" x="121" y="161" width="133" height="18"/>
+                            <rect key="frame" x="121.5" y="161" width="133" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="R2h-5U-huy"/>
                             </constraints>
@@ -510,7 +513,7 @@
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </activityIndicatorView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C’est tout pour les actions dans ce rayon autour de vous ! " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTq-Rc-zQl">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C'est tout pour les activités dans ce rayon autour de vous !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTq-Rc-zQl">
                                             <rect key="frame" x="15" y="16" width="268" height="41"/>
                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -522,7 +525,7 @@
                                                 <attributedString key="attributedTitle">
                                                     <fragment content="Rechercher plus loin">
                                                         <attributes>
-                                                            <color key="NSColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="NSColor" red="0.21960784310000001" green="0.60392156860000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" metaFont="system" size="17"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
                                                             <integer key="NSUnderline" value="1"/>
@@ -953,7 +956,7 @@
                                     <outlet property="tourOptionsBtn" destination="Kc9-kH-YQ7" id="Mpa-Fn-ehk"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDS-Eg-kke">
+                            <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDS-Eg-kke">
                                 <rect key="frame" x="26" y="73" width="42" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -973,7 +976,7 @@
                                     <action selector="showFilters" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5tC-BZ-rkP"/>
                                 </connections>
                             </button>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-MR-sA9">
+                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-MR-sA9">
                                 <rect key="frame" x="147.5" y="76.5" width="80" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QES-lt-CoV">
@@ -1019,7 +1022,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTC-ba-e0E">
+                            <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTC-ba-e0E">
                                 <rect key="frame" x="307" y="73" width="42" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1043,7 +1046,7 @@
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRg-cj-T9Q">
-                                <rect key="frame" x="305" y="593" width="62" height="62"/>
+                                <rect key="frame" x="303" y="593" width="64" height="62"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="axY-8W-1bi"/>
@@ -1065,7 +1068,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVf-Bh-vdD">
-                                <rect key="frame" x="305" y="521" width="62" height="62"/>
+                                <rect key="frame" x="304" y="521" width="62" height="62"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="F0l-W0-UJ0"/>
@@ -1227,6 +1230,7 @@
                                             <constraint firstItem="ckr-aN-4ol" firstAttribute="top" secondItem="qkY-IH-s2c" secondAttribute="top" id="6Oh-5b-ejv"/>
                                             <constraint firstItem="ckr-aN-4ol" firstAttribute="leading" secondItem="qkY-IH-s2c" secondAttribute="leading" id="Juj-IU-l2d"/>
                                             <constraint firstAttribute="bottom" secondItem="ckr-aN-4ol" secondAttribute="bottom" id="g2F-gD-gbQ"/>
+                                            <constraint firstItem="ckr-aN-4ol" firstAttribute="leading" secondItem="qkY-IH-s2c" secondAttribute="leading" id="rEc-xO-Ads"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="lblNumberOfUsers" destination="oef-Ka-s1w" id="XVA-k2-N4G"/>
@@ -1320,15 +1324,14 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc9-kH-YQ7">
-                                <rect key="frame" x="305" y="593" width="62" height="62"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc9-kH-YQ7">
+                                <rect key="frame" x="305" y="592" width="62" height="62"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="SMt-8o-SPY"/>
                                     <constraint firstAttribute="width" constant="62" id="p7h-GC-Qtf"/>
                                 </constraints>
-                                <state key="normal" image="create">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" backgroundImage="create">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -1352,7 +1355,6 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstItem="aPq-MR-sA9" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="QIf-iG-H2m"/>
                             <constraint firstItem="Lzp-RD-PWj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="T4w-9f-t1L"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uRg-cj-T9Q" secondAttribute="bottom" constant="12" id="TDA-nJ-u0d"/>
-                            <constraint firstItem="8zL-iD-eto" firstAttribute="centerY" secondItem="Kc9-kH-YQ7" secondAttribute="centerY" id="TuO-RT-GkE"/>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="UhE-G3-aXJ"/>
                             <constraint firstItem="mDS-Eg-kke" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="UkA-py-3qY"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="VLV-3h-yeI"/>
@@ -1884,7 +1886,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
         <image name="carte_selected" width="40" height="35"/>
         <image name="closeNoShadow" width="62" height="62"/>
         <image name="closeShadow" width="62" height="62"/>
-        <image name="create" width="62" height="62"/>
+        <image name="create" width="64" height="64"/>
         <image name="filters" width="22" height="22"/>
         <image name="geoloc" width="20" height="20"/>
         <image name="leaveGuideButton" width="58" height="58"/>
@@ -1903,6 +1905,6 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
     <inferredMetricsTieBreakers>
         <segue reference="dno-Ju-GCg"/>
         <segue reference="b42-UE-vP1"/>
-        <segue reference="xSV-rR-wZy"/>
+        <segue reference="Dfo-uz-6se"/>
     </inferredMetricsTieBreakers>
 </document>

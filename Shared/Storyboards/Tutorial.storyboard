@@ -168,6 +168,8 @@
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="cEX-uO-THw" id="7ww-kv-MdF"/>
+                        <outlet property="headerView" destination="cNW-9Q-qLY" id="UUZ-yg-Luk"/>
+                        <outlet property="topView" destination="1r4-wP-zZK" id="sKa-A6-e0R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vON-9T-JFa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -401,6 +403,8 @@
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="3GM-jo-9aO" id="P7D-OS-T5Q"/>
+                        <outlet property="headerView" destination="o70-VA-ahM" id="5wo-PP-msA"/>
+                        <outlet property="topView" destination="AGC-1T-1Xl" id="sts-DL-EZ3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ad7-yf-Lpm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -519,7 +523,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="gwf-K0-D8F" id="Myw-Tu-oMl"/>
                         <outlet property="descriptionLabel" destination="RNM-4o-Wan" id="tvc-HY-I6Y"/>
+                        <outlet property="headerView" destination="HTX-In-4PO" id="IzU-D5-hJy"/>
+                        <outlet property="topView" destination="YPr-3D-TM0" id="QMc-2X-yZD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Obu-rA-Ves" userLabel="First Responder" sceneMemberID="firstResponder"/>

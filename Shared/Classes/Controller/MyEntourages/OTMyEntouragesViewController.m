@@ -26,6 +26,7 @@
 #import "OTConsts.h"
 #import "OTFeedItemFactory.h"
 #import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -38,6 +39,7 @@
 @property (nonatomic, strong) IBOutlet OTFeedItemDetailsBehavior *feedItemDetailsBehavior;
 @property (nonatomic, strong) IBOutlet OTManageInvitationBehavior* manageInvitation;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
+@property (strong, nonatomic) IBOutlet UIButton *optionsButton;
 
 @end
 
@@ -46,6 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.optionsButton.hidden = YES;
     [self.invitationsCollectionDataSource initialize];
     [self.entouragesTableDataSource initialize];
     [self.toggleCollectionView initialize];
@@ -53,15 +56,25 @@
     [self.optionsBehavior configureWith:self.optionsDelegate];
     self.entouragesDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.entouragesDataSource.tableView.estimatedRowHeight = 200;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateBadgeCountNotification copy] object:nil];
-    self.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateBadge:)
+                                                 name:kUpdateBadgeCountNotification
+                                               object:nil];
+    
+    self.navigationItem.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
     [self.entouragesDataSource loadData];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

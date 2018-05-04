@@ -12,6 +12,7 @@
 #import "SimpleKeychain.h"
 #import "OTRequestOperationManager.h"
 #import "OTAuthService.h"
+#import "OTAppConfiguration.h"
 
 @implementation OTRequestOperationManager
 

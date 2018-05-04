@@ -50,7 +50,11 @@
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 100;
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
+    //[self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
     if([NSUserDefaults standardUserDefaults].currentUser) {
         [NSUserDefaults standardUserDefaults].temporaryUser = [NSUserDefaults standardUserDefaults].currentUser;
         [NSUserDefaults standardUserDefaults].currentUser = nil;
@@ -95,16 +99,25 @@
     NSString *code = self.codeTextField.text;
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     [SVProgressHUD show];
+    
     [[OTAuthService new] authWithPhone:phone password:code deviceId:deviceAPNSid success: ^(OTUser *user) {
         NSLog(@"User : %@ authenticated successfully", user.email);
         user.phone = phone;
         [SVProgressHUD dismiss];
+        
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;
-        if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
-            [UIStoryboard showSWRevealController];
-        else
-            [self.onboardingNavigation nextFromLogin];
+        
+
+        if ([OTAppConfiguration shouldShowIntroTutorial]) {
+            if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+                [OTAppState navigateToAuthenticatedLandingScreen];
+                return;
+            }
+        }
+
+        [OTAppState continueFromLoginScreen];
+        
     } failure: ^(NSError *error) {
         [SVProgressHUD dismiss];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"tryAgain") message:OTLocalizedString(@"invalidPhoneNumberOrCode") preferredStyle:UIAlertControllerStyleAlert];

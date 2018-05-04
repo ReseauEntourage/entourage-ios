@@ -2,9 +2,11 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 inhibit_all_warnings!
 use_frameworks!
-platform :ios, '8.0'
+platform :ios, '9.0'
 
-target "entourage" do
+def sharedPods
+    platform :ios, '9.0'
+    
     pod 'AFNetworking', '3.1.0'
     pod 'SWRevealViewController', '2.3.0'
     pod 'WYPopoverController', '0.3.8'
@@ -19,10 +21,19 @@ target "entourage" do
     pod 'Crashlytics', '~>  3.9'
     pod 'JVFloatLabeledTextField'
     pod 'libPhoneNumber-iOS'
-	pod 'Mixpanel'
-	pod 'kingpin', '0.3.1'
+    pod 'Mixpanel'
+    pod 'kingpin', '0.3.1'
     pod 'FBSDKCoreKit'
     pod 'Firebase/Core'
+    pod 'SnapKit', '~> 4.0.0'
+end
+
+target "entourage" do
+    sharedPods
+end
+
+target "pfp" do
+    sharedPods
 end
 
 target "entourageTests" do

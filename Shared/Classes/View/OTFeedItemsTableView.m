@@ -88,10 +88,21 @@
     self.emptyFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
     self.tableFooterView = self.emptyFooterView;
     
+    CGFloat buttonSize = 42;
+    CGFloat marginOffset = 20;
+    CGFloat x = self.bounds.size.width - buttonSize;
+    UIButton *showCurrentLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(x, marginOffset, buttonSize, buttonSize)];
+    [showCurrentLocationButton setImage:[UIImage imageNamed:@"geoloc"] forState:UIControlStateNormal];
+    showCurrentLocationButton.backgroundColor = [UIColor whiteColor];
+    showCurrentLocationButton.clipsToBounds = YES;
+    showCurrentLocationButton.layer.cornerRadius = buttonSize / 2;
+    [showCurrentLocationButton addTarget:self action:@selector(requestCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
+    
     //show map on table header
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, MAPVIEW_HEIGHT)];
     mapView.frame = headerView.bounds;
     [headerView addSubview:mapView];
+    [headerView addSubview:showCurrentLocationButton];
     [headerView sendSubviewToBack:mapView];
     //[self configureMapView];
     
@@ -122,6 +133,11 @@
     mapView.center = headerView.center;
         
     self.tableHeaderView = headerView;
+}
+
+- (void)requestCurrentLocation
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowFeedsMapCurrentLocation object:nil];
 }
 
 - (void)updateItems:(NSArray *)items {

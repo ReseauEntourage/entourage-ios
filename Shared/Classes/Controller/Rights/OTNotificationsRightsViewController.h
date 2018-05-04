@@ -13,5 +13,7 @@ extern NSString *const kTutorialDone;
 @interface OTNotificationsRightsViewController : UIViewController
 
 @property (nonatomic, strong) NSString *notificationEnabled;
+@property (nonatomic, weak) IBOutlet UILabel *descLabel;
+@property (nonatomic, weak) IBOutlet UIButton *continueButton;
 
 @end

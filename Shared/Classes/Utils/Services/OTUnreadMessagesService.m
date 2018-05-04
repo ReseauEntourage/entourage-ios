@@ -54,6 +54,7 @@
         [self saveUnreadMessages:unreadMessages];
     }
     NSDictionary* notificationInfo = @{ kNotificationUpdateBadgeCountKey: @(unreadMessages.count), kNotificationUpdateBadgeFeedIdKey:feedId};
+
     [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:notificationInfo];
 }
 

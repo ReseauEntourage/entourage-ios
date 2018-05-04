@@ -29,6 +29,7 @@
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
 @property (weak, nonatomic) IBOutlet OnBoardingButton *continueButton;
+@property (weak, nonatomic) IBOutlet UILabel *nameDescLabel;
 
 @end
 
@@ -36,10 +37,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 
     self.title = @"";
     [self.firstNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.lastNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self loadCurrentData];
 
@@ -50,6 +54,10 @@
     self.lastNameTextField.inputValidationChanged = ^(BOOL isValid) {
         self.continueButton.enabled = [self formIsValid];
     };
+    
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
+    self.nameDescLabel.text = [OTAppConfiguration userProfileNameDescription];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -68,7 +76,8 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.firstNameTextField becomeFirstResponder];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

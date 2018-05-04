@@ -25,9 +25,38 @@
     [self showInitialViewControllerFromStoryboardNamed:@"Main" addingNavigation:NO];
 }
 
++ (UIStoryboard *)introStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"Intro" bundle:nil];
+}
+
++ (UIStoryboard *)onboardingStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"Onboarding" bundle:nil];
+}
+
++ (UIStoryboard *)mainStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+}
+
++ (UIStoryboard *)myEntouragesStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"MyEntourages" bundle:nil];
+}
+
 + (UIStoryboard*)entourageEditorStoryboard {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"EntourageEditor" bundle:nil];
     return storyboard;
+}
+
++ (void)showTabBarControllerFromStoryboardNamed:(NSString *)storyboardName {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+    OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIWindow *window = [appDelegate window];
+    UITabBarController *viewController = (UITabBarController*)[storyboard instantiateViewControllerWithIdentifier:storyboardName];
+    window.rootViewController = viewController;
+    [window makeKeyAndVisible];
 }
 
 #pragma mark - Private

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface OTTutorial4ViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 @end

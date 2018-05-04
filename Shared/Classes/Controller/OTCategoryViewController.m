@@ -14,6 +14,7 @@
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"
 #import "OTSafariService.h"
+#import "entourage-Swift.h"
 
 //#define SECTION_HEIGHT 44.f
 #define CATEGORY_TITLE_TAG 1
@@ -36,9 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(saveNewCategory)

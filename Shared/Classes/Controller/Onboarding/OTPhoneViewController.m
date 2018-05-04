@@ -57,13 +57,18 @@
     self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];
     self.pickerDataSource = [OTCountryCodePickerViewDataSource sharedInstance];
     self.codeCountry = @"+33";
+    
+    self.countryCodePicker.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    
+    [self.validateButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [OTLogger logEvent:@"Screen30_2InputPhoneView"];
     self.countryCodeTxtField.inputView = self.pickerView;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -98,7 +103,7 @@
                 UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"close") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
                 [alert addAction:defaultAction];
                 UIAlertAction *openLoginAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"already_subscribed") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    [[OTDeepLinkService new] navigateToLogin];
+                    [OTAppState navigateToLoginScreen:nil];
                 }];
                 [alert addAction:openLoginAction];
                 [self presentViewController:alert animated:YES completion:nil];

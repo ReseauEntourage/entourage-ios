@@ -17,7 +17,7 @@
         <!--Owner-->
         <scene sceneID="qT4-XV-W5p">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BbA-ED-vfm" customClass="OTPhoneViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTPhoneViewController" automaticallyAdjustsScrollViewInsets="NO" id="BbA-ED-vfm" customClass="OTPhoneViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dEw-T0-guo"/>
                         <viewControllerLayoutGuide type="bottom" id="pTB-3p-Tq2"/>

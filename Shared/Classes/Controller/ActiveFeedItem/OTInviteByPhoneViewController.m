@@ -16,6 +16,7 @@
 #import "SVProgressHUD.h"
 #import "IQKeyboardManager.h"
 #import "UIScrollView+entourage.h"
+#import "entourage-Swift.h"
 
 @interface OTInviteByPhoneViewController ()
 
@@ -42,7 +43,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [self.txtPhone becomeFirstResponder];
 }
 

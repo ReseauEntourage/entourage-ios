@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="arx-da-V22">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="arx-da-V22">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -142,6 +142,7 @@
                     <navigationItem key="navigationItem" id="Ia2-7v-WVr"/>
                     <connections>
                         <outlet property="continueButton" destination="low-DP-9YO" id="Dva-kc-Jxh"/>
+                        <outlet property="emailDescLabel" destination="EkB-xg-Re2" id="Woc-p1-0hl"/>
                         <outlet property="emailTextField" destination="aSU-wJ-Ja3" id="sKB-fe-v1s"/>
                         <outlet property="onboardingNavigation" destination="jcL-ET-Bed" id="w6q-zH-Eck"/>
                         <outlet property="scrollBehavior" destination="wFT-tq-qsq" id="Wbn-iZ-Hf3"/>
@@ -202,13 +203,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Seuls le prénom et la première lettre du nom apparaitront aux autres utilisateurs." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="7v0-hv-w6f">
-                                        <rect key="frame" x="20" y="147" width="343" height="35"/>
+                                        <rect key="frame" x="20" y="147" width="343" height="36"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2M-ml-Dbj">
-                                        <rect key="frame" x="0.0" y="220" width="383" height="203"/>
+                                        <rect key="frame" x="0.0" y="221" width="383" height="203"/>
                                         <subviews>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HTl-fM-N6f">
                                                 <rect key="frame" x="15" y="50" width="353" height="1"/>
@@ -259,7 +260,7 @@
                                                     <constraint firstAttribute="width" constant="56" id="k7W-2L-MWz"/>
                                                 </constraints>
                                                 <state key="normal" image="nextFull">
-                                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <state key="disabled" image="nextOpacity70"/>
                                                 <userDefinedRuntimeAttributes>
@@ -292,7 +293,7 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="tRX-Ut-nfY" firstAttribute="trailing" secondItem="Ipw-CS-mnA" secondAttribute="trailing" id="7EJ-SS-Ds2"/>
                                             <constraint firstItem="HTl-fM-N6f" firstAttribute="top" secondItem="2Jf-Al-b2c" secondAttribute="bottom" id="CvV-3A-Icj"/>
@@ -344,6 +345,7 @@
                         <outlet property="continueButton" destination="tRX-Ut-nfY" id="daj-4R-Uda"/>
                         <outlet property="firstNameTextField" destination="2Jf-Al-b2c" id="UGc-To-P78"/>
                         <outlet property="lastNameTextField" destination="WdG-RU-kzQ" id="rG4-yE-i1i"/>
+                        <outlet property="nameDescLabel" destination="7v0-hv-w6f" id="2yl-Cu-kfX"/>
                         <outlet property="onboardingNavigation" destination="oQM-Cw-LaS" id="hSw-KJ-ycw"/>
                         <outlet property="scrollBehavior" destination="wei-p9-gEA" id="Jrq-bU-g3s"/>
                         <segue destination="xTS-x7-VFR" kind="show" identifier="NameToEmailSegue" id="wkd-D6-ilY"/>
@@ -379,7 +381,7 @@
                 <viewControllerPlaceholder storyboardName="UserPicture" id="9j2-eA-PqP" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMa-Ri-yNX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="107" y="-2487"/>
+            <point key="canvasLocation" x="98" y="-2489"/>
         </scene>
     </scenes>
     <resources>

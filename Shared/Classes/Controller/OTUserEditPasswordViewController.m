@@ -13,6 +13,7 @@
 #import "A0SimpleKeychain.h"
 #import "UIColor+entourage.h"
 #import "UIBarButtonItem+factory.h"
+#import "entourage-Swift.h"
 
 #define MIN_PASSWORD_LENGTH 6
 #define MAX_PASSWORD_LENGTH 6
@@ -41,9 +42,9 @@
 
 - (void)setupToolbarButtons {
     [self setupCloseModal];
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
                                                         withTarget:self
                                                          andAction:@selector(doValidate:)

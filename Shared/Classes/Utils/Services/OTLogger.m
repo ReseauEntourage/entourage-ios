@@ -7,12 +7,12 @@
 //
 
 #import "OTLogger.h"
-#import "OTConsts.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "Mixpanel/Mixpanel.h"
-#import "entourage-Swift.h"
 #import "OTMixpanelService.h"
+#import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
 @import Firebase;
 
@@ -38,9 +38,11 @@
     [mixpanel.people set:@{@"Language": language}];
     [FIRAnalytics setUserPropertyString:language forName:@"Language"];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
+    NSString *mixpanelToken = [OTAppConfiguration sharedInstance].environmentConfiguration.MixpanelToken;
+    
     if(token) {
         NSDictionary *mixpanelDict =    @{@"$distinct_id": [user.sid stringValue],
-                                                @"$token": [ConfigurationManager shared].MixpanelToken,
+                                                @"$token": mixpanelToken,
                                                 @"$union": @{
                                                                 @"$ios_devices" : @[token]
                                                             }

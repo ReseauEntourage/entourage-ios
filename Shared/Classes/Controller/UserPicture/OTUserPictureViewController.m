@@ -15,6 +15,7 @@
 #import "OTPhotoPickerBehavior.h"
 #import "UIBarButtonItem+factory.h"
 #import "NSUserDefaults+OT.h"
+#import "entourage-Swift.h"
 
 #define PREVIEW_PICTURE_SEGUE @"PreviewPictureSegue"
 
@@ -22,7 +23,8 @@
 
 @property (nonatomic, strong) UIImage *image;
 @property (strong, nonatomic) IBOutlet OTPhotoPickerBehavior *photoPickerBehavior;
-
+@property (weak, nonatomic) IBOutlet UIButton *takePictureButton;
+@property (weak, nonatomic) IBOutlet UIButton *choosePictureButton;
 @end
 
 @implementation OTUserPictureViewController
@@ -30,17 +32,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    if (![NSUserDefaults standardUserDefaults].isTutorialCompleted)
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.choosePictureButton setTitleColor:self.view.backgroundColor forState:UIControlStateNormal];
+    [self.takePictureButton setTitleColor:self.view.backgroundColor forState:UIControlStateNormal];
+    
+    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+        if (![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+            [self addIgnoreButton];
+        }
+    } else {
         [self addIgnoreButton];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"Screen09_6ChoosePhotoView"];
-    if ([NSUserDefaults standardUserDefaults].isTutorialCompleted)
-        self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-    else
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    }
+    else {
+        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
