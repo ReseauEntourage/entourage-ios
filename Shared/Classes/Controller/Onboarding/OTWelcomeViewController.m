@@ -40,13 +40,13 @@
         
         NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
         self.welcomeTitleLabel.text = [NSString stringWithFormat:@"Bienvenue sur %@", appName];
-        self.txtTerms.text = [OTAppConfiguration welcomeDescription];
-        self.welcomeLogo.image = [OTAppConfiguration welcomeLogo];
+        self.txtTerms.text = [OTAppAppearance welcomeDescription];
+        self.welcomeLogo.image = [OTAppAppearance welcomeLogo];
         
         [NSAttributedString applyLinkOnTextView:self.txtTerms 
             withText:self.txtTerms.text 
             toLinkText:OTLocalizedString(@"terms_and_conditions_for_onboarding") 
-            withLink:[OTAppConfiguration aboutUrlString]];
+            withLink:[OTAppAppearance aboutUrlString]];
     }
     
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];

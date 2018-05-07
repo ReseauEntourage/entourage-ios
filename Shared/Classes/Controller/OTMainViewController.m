@@ -75,7 +75,6 @@
 #import "OTMailSenderBehavior.h"
 #import "OTSolidarityGuideFiltersViewController.h"
 #import "OTSolidarityGuideFilterDelegate.h"
-#import "OTCustomSegmentedBehavior.h"
 #import "OTAppDelegate.h"
 #import "OTSavedFilter.h"
 #import "OTGuideInfoBehavior.h"
@@ -159,11 +158,11 @@
 @property (nonatomic) BOOL                                          inviteBehaviorTriggered;
 @property (nonatomic, weak) IBOutlet OTNoDataBehavior               *noDataBehavior;
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior           *mailSender;
-@property (nonatomic, weak) IBOutlet OTCustomSegmentedBehavior      *customSegmentedBehavior;
 @property (nonatomic, weak) IBOutlet OTGuideInfoBehavior            *guideInfoBehavior;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior      *toggleCollectionView;
 @property (nonatomic, strong) IBOutlet OTCollectionSourceBehavior   *heatzonesDataSource;
 @property (nonatomic, strong) IBOutlet OTHeatzonesCollectionSource  *heatzonesCollectionDataSource;
+@property (nonatomic, strong) IBOutlet UIView  *hideScreenPlaceholder;
 
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 @property (nonatomic) double entourageScale;
@@ -195,7 +194,6 @@
     [self.toggleCollectionView toggle:NO animated:NO];
     [self.noDataBehavior initialize];
     [self.newsFeedsSourceBehavior initialize];
-    [self.customSegmentedBehavior initialize];
     [self.tapViewBehavior initialize];
     
     self.newsFeedsSourceBehavior.delegate = self;
@@ -256,6 +254,17 @@
         NSLog(@"GET TOUR ENCOUNTERSErr: %@", error.description);
     }];
     [self feedMapViewWithEncounters];
+}
+
+- (void)checkIfShouldDisableFeedsAndMap {
+    if (![OTAppConfiguration shouldHideFeedsAndMap]) {
+        return;
+    }
+    
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    self.hideScreenPlaceholder.hidden = NO;
+    self.hideScreenPlaceholder.backgroundColor = UIColor.pfpTableBackgroundColor;
+    [self.view bringSubviewToFront:self.hideScreenPlaceholder];
 }
 
 - (void)addObservers {
@@ -340,6 +349,7 @@
     }
     
     [self configureNavigationBar];
+    [self checkIfShouldDisableFeedsAndMap];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -382,7 +392,7 @@
     self.backToNewsFeedsButton.hidden = YES;
     if (self.toursMapDelegate) [self.mapDelegateProxy.delegates addObject:self.toursMapDelegate];
     [self.mapDelegateProxy.delegates removeObject:self.guideMapDelegate];
-    [self.customSegmentedBehavior updateVisible:NO];
+
     [self clearMap];
     [self feedMapWithFeedItems];
     self.showSolidarityGuideView.hidden = !OTAppConfiguration.supportsSolidarityGuideFunctionality;
@@ -401,7 +411,7 @@
     self.backToNewsFeedsButton.hidden = NO;
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
     if (self.guideMapDelegate) [self.mapDelegateProxy.delegates addObject:self.guideMapDelegate];
-    [self.customSegmentedBehavior updateVisible:NO];
+
     [self clearMap];
     [self showToursMap];
     [self reloadPois];
@@ -934,7 +944,7 @@
 #pragma mark - OTOptionsDelegate
 
 - (void)createTour {
-    void(^createBlock)() = ^() {
+    void(^createBlock)(void) = ^() {
         [self switchToNewsfeed];
         [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
     };
@@ -1127,17 +1137,6 @@
     }
 }
 
-#pragma mark - Segmented control
-
-- (IBAction)segmentChanged {
-    if (self.customSegmentedBehavior.selectedIndex == 1) {
-        [self showToursListAction];
-    }
-    else {
-        [self showToursMapAction];
-    }
-}
-
 #pragma mark - Geo and filter buttons
 
 - (IBAction)showFilters {
@@ -1206,7 +1205,7 @@
         self.isTourListDisplayed = NO;
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
-    self.customSegmentedBehavior.selectedIndex = 0;
+
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.25 animations:^(void) {
         self.tableView.tableHeaderView.frame = mapFrame;
@@ -1225,7 +1224,7 @@
 - (void)showNewTourOnGoing {
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
-    self.customSegmentedBehavior.selectedIndex = 0;
+
     self.isTourListDisplayed = NO;
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.5 animations:^(void) {

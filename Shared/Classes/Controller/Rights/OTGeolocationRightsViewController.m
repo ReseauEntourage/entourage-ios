@@ -29,7 +29,7 @@
     self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
 
-    self.rightsDescLabel.text = [OTAppConfiguration geolocalisationRightsDescription];
+    self.rightsDescLabel.text = [OTAppAppearance geolocalisationRightsDescription];
     [self addIgnoreButton];
     [self.navigationController presentTransparentNavigationBar];
 }

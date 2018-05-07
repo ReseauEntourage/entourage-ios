@@ -17,6 +17,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import "Mixpanel/Mixpanel.h"
 #import "OTConsts.h"
+#import "OTAppAppearance.h"
 
 @class EnvironmentConfigurationManager;
 
@@ -46,6 +47,7 @@
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
 + (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler;
 
++ (NSInteger)applicationType;
 + (BOOL)isGeolocationMandatory;
 + (BOOL)supportsTourFunctionality;
 + (BOOL)supportsSolidarityGuideFunctionality;
@@ -53,16 +55,6 @@
 + (BOOL)shouldShowIntroTutorial;
 + (BOOL)shouldAllowLoginFromWelcomeScreen;
 + (BOOL)shouldAlwaysRequestUserToUploadPicture;
-
-+ (NSString*)aboutUrlString;
-+ (NSString *)welcomeDescription;
-+ (UIImage*)welcomeLogo;
-+ (NSString *)userProfileNameDescription;
-+ (NSString *)userProfileEmailDescription;
-+ (NSString *)notificationsRightsDescription;
-+ (NSString *)geolocalisationRightsDescription;
-+ (NSString *)notificationsNeedDescription;
-+ (NSString *)noFeedsDescription;
-+ (NSString *)extendSearchParameterDescription;
++ (BOOL)shouldHideFeedsAndMap;
 
 @end
