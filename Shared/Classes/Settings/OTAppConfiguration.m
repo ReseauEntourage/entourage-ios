@@ -465,6 +465,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
++ (BOOL)supportsFacebookIntegration
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 + (BOOL)isGeolocationMandatory {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
