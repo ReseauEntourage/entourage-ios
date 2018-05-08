@@ -37,6 +37,7 @@
 #import "OTAppState.h"
 #import "OTMyEntouragesViewController.h"
 #import "UIImage+processing.h"
+#import "OTAPIConsts.h"
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -504,6 +505,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     return YES;
+}
+
++ (BOOL)shouldAlwaysRequestUserLocation
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return IS_PRO_USER ? NO : YES;
 }
 
 + (BOOL)shouldHideFeedsAndMap

@@ -55,6 +55,7 @@
 + (BOOL)shouldShowIntroTutorial;
 + (BOOL)shouldAllowLoginFromWelcomeScreen;
 + (BOOL)shouldAlwaysRequestUserToUploadPicture;
++ (BOOL)shouldAlwaysRequestUserLocation;
 + (BOOL)shouldHideFeedsAndMap;
 
 @end

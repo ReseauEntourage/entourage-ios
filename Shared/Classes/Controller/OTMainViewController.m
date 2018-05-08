@@ -1154,12 +1154,16 @@
 
 - (IBAction)showCurrentLocation {
     [OTLogger logEvent:@"RecenterMapClick"];
-    if(![OTLocationManager sharedInstance].isAuthorized)
+    
+    if (![OTLocationManager sharedInstance].isAuthorized) {
         [[OTLocationManager sharedInstance] showGeoLocationNotAllowedMessage:OTLocalizedString(@"ask_permission_location_recenter_map")];
-    else if(![OTLocationManager sharedInstance].currentLocation)
+    }
+    else if(![OTLocationManager sharedInstance].currentLocation) {
         [[OTLocationManager sharedInstance] showLocationNotFoundMessage:OTLocalizedString(@"no_location_recenter_map")];
-    else
+    }
+    else {
         [self zoomToCurrentLocation:self];
+    }
 }
 
 #pragma mark - "Screens"
