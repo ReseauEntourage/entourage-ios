@@ -92,6 +92,15 @@
     return OTLocalizedString(@"no_more_feeds");
 }
 
++ (NSString *)noMapFeedsDescription
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_no_more_map_feeds");
+    }
+    
+    return OTLocalizedString(@"no_more_map_feeds");
+}
+
 + (NSString *)extendSearchParameterDescription
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
@@ -99,5 +108,14 @@
     }
     
     return OTLocalizedString(@"no_feeds_increase_radius");
+}
+
++ (NSString *)extendMapSearchParameterDescription
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_no_map_feeds_increase_radius");
+    }
+    
+    return OTLocalizedString(@"no_map_feeds_increase_radius");
 }
 @end
