@@ -163,6 +163,8 @@
 @property (nonatomic, strong) IBOutlet OTCollectionSourceBehavior   *heatzonesDataSource;
 @property (nonatomic, strong) IBOutlet OTHeatzonesCollectionSource  *heatzonesCollectionDataSource;
 @property (nonatomic, strong) IBOutlet UIView  *hideScreenPlaceholder;
+@property (nonatomic, strong) IBOutlet UILabel  *hideScreenPlaceholderTitle;
+@property (nonatomic, strong) IBOutlet UILabel  *hideScreenPlaceholderSubtitle;
 
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 @property (nonatomic) double entourageScale;
@@ -263,8 +265,11 @@
     
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.hideScreenPlaceholder.hidden = NO;
-    self.hideScreenPlaceholder.backgroundColor = UIColor.pfpTableBackgroundColor;
+    self.hideScreenPlaceholder.backgroundColor = [[ApplicationTheme shared] tableViewBackgroundColor];
     [self.view bringSubviewToFront:self.hideScreenPlaceholder];
+    
+    self.hideScreenPlaceholderTitle.textColor = [[ApplicationTheme shared] titleLabelColor];
+    self.hideScreenPlaceholderSubtitle.textColor = [[ApplicationTheme shared] subtitleLabelColor];
 }
 
 - (void)addObservers {
