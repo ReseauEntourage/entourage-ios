@@ -100,8 +100,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSupportedPartner:) name:@kNotificationSupportedPartnerUpdated object:nil];
-    
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -119,6 +117,11 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [OTLogger logEvent:@"OpenMenu"];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 /**************************************************************************************************/

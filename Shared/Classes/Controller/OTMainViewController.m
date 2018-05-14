@@ -183,8 +183,6 @@
     if ([OTAppConfiguration shouldShowIntroTutorial]) {
         [OTAppState presentTutorialScreen];
     }
-    
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)setup {
@@ -348,6 +346,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     
     if (self.webview) {
         [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];

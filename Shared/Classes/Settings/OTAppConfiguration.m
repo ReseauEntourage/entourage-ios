@@ -347,10 +347,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     CGSize size = CGSizeMake(currentTabBar.frame.size.width / currentTabBar.items.count, currentTabBar.frame.size.height);
     currentTabBar.selectionIndicatorImage = [OTAppConfiguration tabSelectionIndicatorImage:[UIColor whiteColor] size:size];
     currentTabBar.unselectedItemTintColor = [UIColor whiteColor];
-    
-    for (UINavigationController *vc in tabBarController.viewControllers) {
-        [OTAppConfiguration configureNavigationControllerAppearance:vc];
-    }
 }
 
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
@@ -372,9 +368,19 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
     [UITabBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
     [UITabBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
-    
+
     [UIBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
     [UIBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+    
+    UITabBarController *tabBarController = (UITabBarController*)[UIApplication sharedApplication].delegate.window.rootViewController;
+
+    if (tabBarController.tabBar) {
+        UITabBar *currentTabBar = tabBarController.tabBar;
+        for (UITabBarItem *item in currentTabBar.items) {
+            [item setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+        }
+        [currentTabBar.selectedItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - Push notifications
