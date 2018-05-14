@@ -300,6 +300,10 @@ vous signalez cette personne :";
 "report_user_button" = "Envoyer";
 "report_user_placeholder" = "Ecrivez quelque chose…";
 
+// My Entourages
+"all_messages_nav_title" = "tous les messages";
+"unread_messages_nav_title" = "non lus";
+
 // Filter
 "filter_nav_title" = "Filtrer";
 "filter_maraudes_title" = "Types de maraude";

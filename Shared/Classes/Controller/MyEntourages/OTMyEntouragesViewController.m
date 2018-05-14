@@ -79,6 +79,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [OTLogger logEvent:@"Screen17_2MyMessagesView"];
     [super viewDidAppear:animated];
+    [self configureNavigationBar];
     [self.entouragesDataSource.tableView reloadRowsAtIndexPaths:[self.entouragesDataSource.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
@@ -136,6 +137,27 @@
         [self.invitationsDataSource updateItems:items];
         [self.invitationsCollectionDataSource refresh];
     } failure:nil];
+}
+
+- (void)configureNavigationBar {
+    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
+    
+    UIButton *leftButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, self.navigationController.navigationBar.frame.size.width / 2 , self.navigationController.navigationBar.frame.size.height)];
+    [leftButton targetForAction:@selector(showFilters) withSender:self];
+    [leftButton setTitle: OTLocalizedString(@"all_messages_nav_title").uppercaseString forState: UIControlStateNormal];
+    leftButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+    
+    UIButton *rightButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, self.navigationController.navigationBar.frame.size.width / 2 , self.navigationController.navigationBar.frame.size.height)];
+    [rightButton targetForAction:@selector(showFilters) withSender:self];
+    [rightButton setTitle: OTLocalizedString(@"unread_messages_nav_title").uppercaseString forState: UIControlStateNormal];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    
+    //[self createMenuButton];
+    //[self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
+    //[self setupLogoImageWithTarget:self andSelector:@selector(logoTapped)];
 }
 
 @end
