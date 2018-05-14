@@ -32,13 +32,14 @@ final class OTLogoutViewCell: UITableViewCell {
         
         backgroundColor = UIColor.pfpTableBackground()
         logoutButton.apply(style: .whiteRounded)
-        logoutButton.layer.cornerRadius = 100
+        logoutButton.layer.cornerRadius = 20
         logoutButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         
         logoutButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(3)
-            $0.height.equalTo(100)
+            $0.height.equalTo(40)
+            $0.width.equalTo(290)
             $0.bottom.equalToSuperview().inset(3)
         }
         

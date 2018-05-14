@@ -12,6 +12,7 @@ final class OTPfpMenuViewController: UIViewController {
     var tableView = UITableView()
     var headerView = OTMenuHeaderView()
     private var menuItems = [OTMenuItem]()
+    var currentUser = UserDefaults.standard.currentUser
     
     //MARK: - Init
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -56,8 +57,8 @@ final class OTPfpMenuViewController: UIViewController {
     
     private func customizeHeader() {
         headerView.editLabel.text = "Modifier mon profil"
-        headerView.nameLabel.text = "Nom prenom"
-        headerView.profileBtn.setImage(UIImage(named: "user"), for: .normal)
+        headerView.nameLabel.text = currentUser?.displayName
+        headerView.profileBtn.setupAsProfilePicture(fromUrl: currentUser?.avatarURL, withPlaceholder: "user")
     }
     
     private func createMenuItems() {
