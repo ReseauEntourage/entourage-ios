@@ -28,6 +28,7 @@ struct UserStorageKey {
 @objc class EnvironmentConfigurationManager: NSObject {
     
     private var config: NSDictionary?
+    private var apiKeys: NSDictionary?
     private let stagingEnvironmentName: String = "staging"
     private let prodEnvironmentName: String = "prod"
     
@@ -36,6 +37,7 @@ struct UserStorageKey {
     @objc convenience init(bundleId:String) {
         self.init()
         self.config = EnvironmentConfigurationManager.plist(name: "AppConfigurations", bundleId: bundleId)
+        self.apiKeys = EnvironmentConfigurationManager.plist(name: "ApiKeys", bundleId: bundleId)
         
     #if PFP
         self.applicationType = ApplicationType.voisinAge
@@ -60,7 +62,7 @@ struct UserStorageKey {
     }
     
     @objc var APIKey: NSString {
-        return configuration(forKey: UserStorageKey.APIKey)
+        return apiKeysConfiguration(forKey: UserStorageKey.APIKey)
     }
     
     @objc var MixpanelToken : NSString {
@@ -85,6 +87,10 @@ struct UserStorageKey {
     
     private func configuration(forKey: String) -> NSString {
         return self.config![forKey] as! NSString
+    }
+    
+    private func apiKeysConfiguration(forKey: String) -> NSString {
+        return self.apiKeys![forKey] as! NSString
     }
     
     private static func plist(name: String, bundleId:String) -> NSDictionary? {

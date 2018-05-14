@@ -53,7 +53,7 @@
     };
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
-    self.emailDescLabel.text = [OTAppConfiguration userProfileEmailDescription];
+    self.emailDescLabel.text = [OTAppAppearance userProfileEmailDescription];
     
     [self loadCurrentData];
     [self addIgnoreButton];

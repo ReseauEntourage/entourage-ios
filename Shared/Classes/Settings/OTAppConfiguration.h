@@ -17,6 +17,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import "Mixpanel/Mixpanel.h"
 #import "OTConsts.h"
+#import "OTAppAppearance.h"
 
 @class EnvironmentConfigurationManager;
 
@@ -29,6 +30,7 @@
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions;
 + (UITabBarController*)configureMainTabBar;
 + (void)configureTabBarAppearance:(UITabBarController*)tabBarController;
++ (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController;
 
 + (void)applicationDidBecomeActive:(UIApplication *)application;
 + (void)applicationWillEnterForeground:(UIApplication *)application;
@@ -45,21 +47,16 @@
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
 + (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler;
 
++ (NSInteger)applicationType;
 + (BOOL)isGeolocationMandatory;
 + (BOOL)supportsTourFunctionality;
 + (BOOL)supportsSolidarityGuideFunctionality;
++ (BOOL)supportsFacebookIntegration;
 + (BOOL)isMVP;
 + (BOOL)shouldShowIntroTutorial;
 + (BOOL)shouldAllowLoginFromWelcomeScreen;
 + (BOOL)shouldAlwaysRequestUserToUploadPicture;
-
-+ (NSString*)aboutUrlString;
-+ (NSString *)welcomeDescription;
-+ (UIImage*)welcomeLogo;
-+ (NSString *)userProfileNameDescription;
-+ (NSString *)userProfileEmailDescription;
-+ (NSString *)notificationsRightsDescription;
-+ (NSString *)geolocalisationRightsDescription;
-+ (NSString *)notificationsNeedDescription;
++ (BOOL)shouldAlwaysRequestUserLocation;
++ (BOOL)shouldHideFeedsAndMap;
 
 @end

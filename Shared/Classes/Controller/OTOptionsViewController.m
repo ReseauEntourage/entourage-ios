@@ -10,6 +10,7 @@
 #import "OTOngoingTourService.h"
 #import "OTAlertViewBehavior.h"
 #import "SVProgressHUD.h"
+#import "entourage-Swift.h"
 
 @interface OTOptionsViewController ()
 
@@ -38,6 +39,8 @@
         if ([weakSelf.optionsDelegate respondsToSelector:@selector(createEncounter)])
             [weakSelf.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
     }];
+    
+    self.togglePOILabel.textColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
 /*******************************************************************************/
@@ -88,7 +91,7 @@
     actionLabel.frame = ACTION_LABEL_FRAME;
     actionLabel.center = CGPointMake(button.center.x - actionLabel.frame.size.width/2.0f - PADDING_HORIZONTAL/2.0f - button.frame.size.width/2.0f, button.center.y);
     actionLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
-    actionLabel.textColor = [UIColor appOrangeColor];
+    actionLabel.textColor = [ApplicationTheme shared].backgroundThemeColor;
     actionLabel.textAlignment = NSTextAlignmentRight;
     actionLabel.text = optionName;
     [self.view addSubview: actionLabel];

@@ -40,6 +40,7 @@
 #define kNotificationLocalTourConfirmation "NotificationShowTourConfirmation"
 
 #define kNotificationShowCurrentLocation "NotificationCurrentLocation"
+#define kNotificationShowFeedsMapCurrentLocation "NotificationFeedsMapCurrentLocation"
 
 #define kNotificationProfilePictureUpdated "NotificationProfilePictureUpdated"
 #define kNotificationAboutMeUpdated "NotificationAboutMeUpdated"

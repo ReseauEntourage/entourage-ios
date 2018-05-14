@@ -36,6 +36,8 @@
 #import "OTMenuViewController.h"
 #import "OTAppState.h"
 #import "OTMyEntouragesViewController.h"
+#import "UIImage+processing.h"
+#import "OTAPIConsts.h"
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -253,12 +255,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     UIStoryboard *mainStoryboard = [UIStoryboard mainStoryboard];
     
-    UIFont *selectedTabBarFont = [UIFont boldSystemFontOfSize:12];
-    NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],
-                                              NSFontAttributeName:selectedTabBarFont};
     // Menu tab
     id menuViewController;
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         menuViewController = [[OTPfpMenuViewController alloc] init];
     }
     else {
@@ -266,20 +265,22 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     UINavigationController *menuNavController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
     menuNavController.tabBarItem.title = @"menu";
-    menuNavController.tabBarItem.image = [UIImage imageNamed:@"menu"];
-    [menuNavController.tabBarItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+    menuNavController.tabBarItem.image = [UIImage imageNamed:@"menu_tab"];
+    menuNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"menu_tab_selected"];
     
     // Proximity Map Tab
     OTMainViewController *mainMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
     UINavigationController *mainMapNavController = [[UINavigationController alloc] initWithRootViewController:mainMapViewController];
     mainMapNavController.tabBarItem.title = @"à proximité";
-    mainMapNavController.tabBarItem.image = [UIImage imageNamed:@"guide"];
+    mainMapNavController.tabBarItem.image = [UIImage imageNamed:@"map_tab"];
+    mainMapNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"map_tab_selected"];
     
     // Messages Tab
     OTMyEntouragesViewController *messagesViewController = [[UIStoryboard myEntouragesStoryboard] instantiateViewControllerWithIdentifier:@"OTMyEntouragesViewController"];
     UINavigationController *messagesNavController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
     messagesNavController.tabBarItem.title = @"messagerie";
-    messagesNavController.tabBarItem.image = [UIImage imageNamed:@"discussion"];
+    messagesNavController.tabBarItem.image = [UIImage imageNamed:@"messages_tab"];
+    messagesNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"messages_tab_selected"];
     
     NSArray *controllers = @[];
     
@@ -290,8 +291,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     tabBarController.viewControllers = controllers;
-    
-    [OTAppConfiguration configureTabBarAppearance:tabBarController];
 
     return tabBarController;
 }
@@ -301,10 +300,16 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UIColor *primaryNavigationBarTintColor = [UIColor whiteColor];
     UIColor *secondaryNavigationBarTintColor = [UIColor appOrangeColor];
     UIColor *backgroundThemeColor = [UIColor appOrangeColor];
+    UIColor *titleColor = [UIColor appGreyishBrownColor];
+    UIColor *subtitleColor = [UIColor appGreyishColor];
+    UIColor *tableViewBgColor = [UIColor groupTableViewBackgroundColor];
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         backgroundThemeColor = [UIColor pfpBlueColor];
         secondaryNavigationBarTintColor = [UIColor pfpBlueColor];
+        titleColor = [UIColor pfpGrayTextColor];
+        tableViewBgColor = [UIColor pfpTableBackgroundColor];
+        subtitleColor = [UIColor pfpSubtitleBlueColor];
     }
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.runsOnStaging) {
@@ -314,11 +319,14 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[ApplicationTheme shared] setPrimaryNavigationBarTintColor:primaryNavigationBarTintColor];
     [[ApplicationTheme shared] setSecondaryNavigationBarTintColor:secondaryNavigationBarTintColor];
     [[ApplicationTheme shared] setBackgroundThemeColor:backgroundThemeColor];
+    [[ApplicationTheme shared] setTableViewBackgroundColor: tableViewBgColor];
+    [[ApplicationTheme shared] setTitleLabelColor: titleColor];
+    [[ApplicationTheme shared] setSubtitleLabelColor: subtitleColor];
     
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-    UINavigationBar.appearance.barTintColor = secondaryNavigationBarTintColor;
-    UINavigationBar.appearance.backgroundColor = secondaryNavigationBarTintColor;
-    UINavigationBar.appearance.tintColor = primaryNavigationBarTintColor;
+    UINavigationBar.appearance.barTintColor = primaryNavigationBarTintColor;
+    UINavigationBar.appearance.backgroundColor = primaryNavigationBarTintColor;
+    UINavigationBar.appearance.tintColor = secondaryNavigationBarTintColor;
     
     UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
     UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor] };
@@ -339,15 +347,40 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     CGSize size = CGSizeMake(currentTabBar.frame.size.width / currentTabBar.items.count, currentTabBar.frame.size.height);
     currentTabBar.selectionIndicatorImage = [OTAppConfiguration tabSelectionIndicatorImage:[UIColor whiteColor] size:size];
     currentTabBar.unselectedItemTintColor = [UIColor whiteColor];
+}
+
++ (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
+{
+    navigationController.navigationBar.barTintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
+    navigationController.navigationBar.backgroundColor = [[ApplicationTheme shared] backgroundThemeColor];
+    navigationController.navigationBar.tintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
     
-    UIFont *selectedTabBarFont = [UIFont boldSystemFontOfSize:12];
+    UIFont *selectedTabBarFont = [UIFont fontWithName:@"SFUIText-Bold" size:12];
     NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],
                                               NSFontAttributeName:selectedTabBarFont};
+    UIFont *regularTabBarFont = [UIFont fontWithName:@"SFUIText-Regular" size:12];
+    NSDictionary *normalTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                                           NSFontAttributeName:regularTabBarFont};
     
+    UIViewController *topViewController = navigationController.topViewController;
+    [topViewController.tabBarItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+    [topViewController.tabBarItem setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+
     [UITabBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
-    [UITabBarItem.appearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                      NSFontAttributeName:[UIFont systemFontOfSize:12]}
-                                           forState:UIControlStateNormal];
+    [UITabBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+
+    [UIBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+    [UIBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+    
+    UITabBarController *tabBarController = (UITabBarController*)[UIApplication sharedApplication].delegate.window.rootViewController;
+
+    if (tabBarController.tabBar) {
+        UITabBar *currentTabBar = tabBarController.tabBar;
+        for (UITabBarItem *item in currentTabBar.items) {
+            [item setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+        }
+        [currentTabBar.selectedItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - Push notifications
@@ -415,7 +448,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 #pragma mark - Application features/options
 
-+ (ApplicationType)applicationType
++ (NSInteger)applicationType
 {
     return [OTAppConfiguration sharedInstance].environmentConfiguration.applicationType;
 }
@@ -430,6 +463,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (BOOL)supportsSolidarityGuideFunctionality
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)supportsFacebookIntegration
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
@@ -480,76 +522,22 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
-+ (NSString*)aboutUrlString
++ (BOOL)shouldAlwaysRequestUserLocation
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return PFP_ABOUT_CGU_URL;
-    }
-    return ABOUT_CGU_URL;
-}
-
-+ (NSString *)welcomeDescription
-{
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_welcomeText");
+        return NO;
     }
     
-    return OTLocalizedString(@"welcomeText");
+    return IS_PRO_USER ? NO : YES;
 }
 
-+ (UIImage*)welcomeLogo
++ (BOOL)shouldHideFeedsAndMap
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return nil;
+        return YES;
     }
     
-    return [UIImage imageNamed:@"logoWhiteEntourage"];
+    return NO;
 }
-
-+ (NSString *)userProfileNameDescription
-{
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_userNameDescriptionText");
-    }
-    
-    return OTLocalizedString(@"userNameDescriptionText");
-}
-
-+ (NSString *)userProfileEmailDescription
-{
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_userEmailDescriptionText");
-    }
-    
-    return OTLocalizedString(@"userEmailDescriptionText");
-}
-
-+ (NSString *)notificationsRightsDescription
-{
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_userNotificationsDescriptionText");
-    }
-    
-    return OTLocalizedString(@"userNotificationsDescriptionText");
-}
-
-+ (NSString *)geolocalisationRightsDescription
-{
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_geolocalisationDescriptionText");
-    }
-    
-    return OTLocalizedString(@"geolocalisationDescriptionText");
-}
-
-+ (NSString *)notificationsNeedDescription
-{
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_notificationNeedDescription");
-    }
-    
-    return OTLocalizedString(@"notificationNeedDescription");
-}
-
 
 @end

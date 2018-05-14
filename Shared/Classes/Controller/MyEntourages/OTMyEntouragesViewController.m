@@ -80,6 +80,7 @@
     [OTLogger logEvent:@"Screen17_2MyMessagesView"];
     [super viewDidAppear:animated];
     [self.entouragesDataSource.tableView reloadRowsAtIndexPaths:[self.entouragesDataSource.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

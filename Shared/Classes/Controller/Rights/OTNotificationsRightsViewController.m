@@ -24,6 +24,7 @@
 #import "OTAppState.h"
 #import "OTAppConfiguration.h"
 #import "entourage-Swift.h"
+#import "OTAppAppearance.h"
 
 @import Firebase;
 
@@ -35,7 +36,7 @@
     self.title = @"";
     
     [self addIgnoreButton];
-    self.descLabel.text = [OTAppConfiguration notificationsRightsDescription];
+    self.descLabel.text = [OTAppAppearance notificationsRightsDescription];
     self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
