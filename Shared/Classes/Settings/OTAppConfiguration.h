@@ -51,10 +51,12 @@
 + (BOOL)isGeolocationMandatory;
 + (BOOL)supportsTourFunctionality;
 + (BOOL)supportsSolidarityGuideFunctionality;
++ (BOOL)supportsFacebookIntegration;
 + (BOOL)isMVP;
 + (BOOL)shouldShowIntroTutorial;
 + (BOOL)shouldAllowLoginFromWelcomeScreen;
 + (BOOL)shouldAlwaysRequestUserToUploadPicture;
++ (BOOL)shouldAlwaysRequestUserLocation;
 + (BOOL)shouldHideFeedsAndMap;
 
 @end

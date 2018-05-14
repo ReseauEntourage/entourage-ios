@@ -163,6 +163,8 @@
 @property (nonatomic, strong) IBOutlet OTCollectionSourceBehavior   *heatzonesDataSource;
 @property (nonatomic, strong) IBOutlet OTHeatzonesCollectionSource  *heatzonesCollectionDataSource;
 @property (nonatomic, strong) IBOutlet UIView  *hideScreenPlaceholder;
+@property (nonatomic, strong) IBOutlet UILabel  *hideScreenPlaceholderTitle;
+@property (nonatomic, strong) IBOutlet UILabel  *hideScreenPlaceholderSubtitle;
 
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 @property (nonatomic) double entourageScale;
@@ -181,8 +183,6 @@
     if ([OTAppConfiguration shouldShowIntroTutorial]) {
         [OTAppState presentTutorialScreen];
     }
-    
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)setup {
@@ -263,8 +263,11 @@
     
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.hideScreenPlaceholder.hidden = NO;
-    self.hideScreenPlaceholder.backgroundColor = UIColor.pfpTableBackgroundColor;
+    self.hideScreenPlaceholder.backgroundColor = [[ApplicationTheme shared] tableViewBackgroundColor];
     [self.view bringSubviewToFront:self.hideScreenPlaceholder];
+    
+    self.hideScreenPlaceholderTitle.textColor = [[ApplicationTheme shared] titleLabelColor];
+    self.hideScreenPlaceholderSubtitle.textColor = [[ApplicationTheme shared] subtitleLabelColor];
 }
 
 - (void)addObservers {
@@ -343,6 +346,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     
     if (self.webview) {
         [self performSegueWithIdentifier:@"OTWebViewSegue" sender:self];
@@ -1149,12 +1153,16 @@
 
 - (IBAction)showCurrentLocation {
     [OTLogger logEvent:@"RecenterMapClick"];
-    if(![OTLocationManager sharedInstance].isAuthorized)
+    
+    if (![OTLocationManager sharedInstance].isAuthorized) {
         [[OTLocationManager sharedInstance] showGeoLocationNotAllowedMessage:OTLocalizedString(@"ask_permission_location_recenter_map")];
-    else if(![OTLocationManager sharedInstance].currentLocation)
+    }
+    else if(![OTLocationManager sharedInstance].currentLocation) {
         [[OTLocationManager sharedInstance] showLocationNotFoundMessage:OTLocalizedString(@"no_location_recenter_map")];
-    else
+    }
+    else {
         [self zoomToCurrentLocation:self];
+    }
 }
 
 #pragma mark - "Screens"

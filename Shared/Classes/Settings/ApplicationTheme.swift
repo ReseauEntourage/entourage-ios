@@ -22,6 +22,9 @@ class ApplicationTheme: NSObject {
     @objc var primaryNavigationBarTintColor: UIColor = UIColor.white
     @objc var secondaryNavigationBarTintColor: UIColor = UIColor.appOrange()
     @objc var backgroundThemeColor: UIColor = UIColor.appOrange()
+    @objc var tableViewBackgroundColor: UIColor = UIColor.groupTableViewBackground
+    @objc var titleLabelColor: UIColor = UIColor.appGreyishBrown()
+    @objc var subtitleLabelColor: UIColor = UIColor.appPaleGrey()
     
     @objc class func applicationLogo () -> UIImage {
         if OTAppConfiguration.sharedInstance().environmentConfiguration.applicationType == .voisinAge {

@@ -36,6 +36,8 @@
 #import "OTMenuViewController.h"
 #import "OTAppState.h"
 #import "OTMyEntouragesViewController.h"
+#import "UIImage+processing.h"
+#import "OTAPIConsts.h"
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -289,8 +291,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     tabBarController.viewControllers = controllers;
-    
-    [OTAppConfiguration configureTabBarAppearance:tabBarController];
 
     return tabBarController;
 }
@@ -300,10 +300,16 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UIColor *primaryNavigationBarTintColor = [UIColor whiteColor];
     UIColor *secondaryNavigationBarTintColor = [UIColor appOrangeColor];
     UIColor *backgroundThemeColor = [UIColor appOrangeColor];
+    UIColor *titleColor = [UIColor appGreyishBrownColor];
+    UIColor *subtitleColor = [UIColor appGreyishColor];
+    UIColor *tableViewBgColor = [UIColor groupTableViewBackgroundColor];
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         backgroundThemeColor = [UIColor pfpBlueColor];
         secondaryNavigationBarTintColor = [UIColor pfpBlueColor];
+        titleColor = [UIColor pfpGrayTextColor];
+        tableViewBgColor = [UIColor pfpTableBackgroundColor];
+        subtitleColor = [UIColor pfpSubtitleBlueColor];
     }
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.runsOnStaging) {
@@ -313,6 +319,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[ApplicationTheme shared] setPrimaryNavigationBarTintColor:primaryNavigationBarTintColor];
     [[ApplicationTheme shared] setSecondaryNavigationBarTintColor:secondaryNavigationBarTintColor];
     [[ApplicationTheme shared] setBackgroundThemeColor:backgroundThemeColor];
+    [[ApplicationTheme shared] setTableViewBackgroundColor: tableViewBgColor];
+    [[ApplicationTheme shared] setTitleLabelColor: titleColor];
+    [[ApplicationTheme shared] setSubtitleLabelColor: subtitleColor];
     
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
     UINavigationBar.appearance.barTintColor = primaryNavigationBarTintColor;
@@ -338,21 +347,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     CGSize size = CGSizeMake(currentTabBar.frame.size.width / currentTabBar.items.count, currentTabBar.frame.size.height);
     currentTabBar.selectionIndicatorImage = [OTAppConfiguration tabSelectionIndicatorImage:[UIColor whiteColor] size:size];
     currentTabBar.unselectedItemTintColor = [UIColor whiteColor];
-    
-    UIFont *selectedTabBarFont = [UIFont boldSystemFontOfSize:13];
-    NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],
-                                              NSFontAttributeName:selectedTabBarFont};
-    UIFont *regularTabBarFont = [UIFont systemFontOfSize:12];
-    NSDictionary *normalTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                                           NSFontAttributeName:regularTabBarFont};
-    
-    for (UIBarButtonItem *item in currentTabBar.items) {
-        [item setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
-        [item setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
-    }
-
-    [UITabBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
-    [UITabBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
 }
 
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
@@ -360,16 +354,33 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     navigationController.navigationBar.barTintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
     navigationController.navigationBar.backgroundColor = [[ApplicationTheme shared] backgroundThemeColor];
     navigationController.navigationBar.tintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
-
-    UIFont *selectedTabBarFont = [UIFont boldSystemFontOfSize:13];
+    
+    UIFont *selectedTabBarFont = [UIFont fontWithName:@"SFUIText-Bold" size:12];
     NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],
                                               NSFontAttributeName:selectedTabBarFont};
-    UIFont *regularTabBarFont = [UIFont systemFontOfSize:12];
+    UIFont *regularTabBarFont = [UIFont fontWithName:@"SFUIText-Regular" size:12];
     NSDictionary *normalTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
                                            NSFontAttributeName:regularTabBarFont};
     
-    [navigationController.tabBarItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
-    [navigationController.tabBarItem setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+    UIViewController *topViewController = navigationController.topViewController;
+    [topViewController.tabBarItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+    [topViewController.tabBarItem setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+
+    [UITabBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+    [UITabBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+
+    [UIBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+    [UIBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+    
+    UITabBarController *tabBarController = (UITabBarController*)[UIApplication sharedApplication].delegate.window.rootViewController;
+
+    if (tabBarController.tabBar) {
+        UITabBar *currentTabBar = tabBarController.tabBar;
+        for (UITabBarItem *item in currentTabBar.items) {
+            [item setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+        }
+        [currentTabBar.selectedItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - Push notifications
@@ -460,6 +471,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
++ (BOOL)supportsFacebookIntegration
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 + (BOOL)isGeolocationMandatory {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
@@ -500,6 +520,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     return YES;
+}
+
++ (BOOL)shouldAlwaysRequestUserLocation
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return IS_PRO_USER ? NO : YES;
 }
 
 + (BOOL)shouldHideFeedsAndMap

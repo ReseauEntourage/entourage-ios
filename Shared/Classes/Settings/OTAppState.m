@@ -102,7 +102,11 @@
 {
     OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIWindow *window = [appDelegate window];
-    window.rootViewController = [OTAppConfiguration configureMainTabBar];
+    
+    UITabBarController *tabBarController = [OTAppConfiguration configureMainTabBar];
+    [OTAppConfiguration configureTabBarAppearance:tabBarController];
+    
+    window.rootViewController = tabBarController;
     [window makeKeyAndVisible];
 }
 

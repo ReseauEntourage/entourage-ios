@@ -18,5 +18,7 @@
 + (NSString *)geolocalisationRightsDescription;
 + (NSString *)notificationsNeedDescription;
 + (NSString *)noFeedsDescription;
++ (NSString *)noMapFeedsDescription;
 + (NSString *)extendSearchParameterDescription;
++ (NSString *)extendMapSearchParameterDescription;
 @end
