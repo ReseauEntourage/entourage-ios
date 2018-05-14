@@ -1164,6 +1164,8 @@
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
 		A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
 		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
+		A2FE6D5120A0783C0025842D /* OTAppAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FE6D5020A0783C0025842D /* OTAppAppearance.m */; };
+		A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FE6D5020A0783C0025842D /* OTAppAppearance.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
 /* End PBXBuildFile section */
@@ -1948,6 +1950,8 @@
 		A2E5FA0E20862E780099B989 /* UINavigationBar+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Appearance.h"; sourceTree = "<group>"; };
 		A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Appearance.m"; sourceTree = "<group>"; };
 		A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
+		A2FE6D4F20A0783C0025842D /* OTAppAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppAppearance.h; sourceTree = "<group>"; };
+		A2FE6D5020A0783C0025842D /* OTAppAppearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppAppearance.m; sourceTree = "<group>"; };
 		A466D9EB1BD55201EACF4D5A /* Pods-pfp.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.beta.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.beta.xcconfig"; sourceTree = "<group>"; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -2209,6 +2213,8 @@
 				A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */,
 				A21D64A12085D6D200EF8E0E /* OTAppConfiguration.h */,
 				A21D64A22085D6D200EF8E0E /* OTAppConfiguration.m */,
+				A2FE6D4F20A0783C0025842D /* OTAppAppearance.h */,
+				A2FE6D5020A0783C0025842D /* OTAppAppearance.m */,
 				A296B92F208DFE8A00F6AFBD /* OTAppState.h */,
 				A296B930208DFE8A00F6AFBD /* OTAppState.m */,
 				A202E7C52085CFC30058F32C /* OTAPIConsts.h */,
@@ -4287,6 +4293,7 @@
 				A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */,
 				A202EC592085D2C80058F32C /* OTBottomScrollBehavior.m in Sources */,
 				A202ED252085D2C80058F32C /* UINavigationController+entourage.m in Sources */,
+				A2FE6D5120A0783C0025842D /* OTAppAppearance.m in Sources */,
 				A202EB272085D2C70058F32C /* OTMapCell.m in Sources */,
 				A202ECFB2085D2C80058F32C /* OTEntourageStateTransition.m in Sources */,
 				A202ECA72085D2C80058F32C /* OTMembersCellProvider.m in Sources */,
@@ -4926,6 +4933,7 @@
 				A296B7F220871CFC00F6AFBD /* OTUserService.m in Sources */,
 				A296B7F320871CFC00F6AFBD /* OTEditEntourageTitleViewController.m in Sources */,
 				A296B7F420871CFC00F6AFBD /* OTEntourageService.m in Sources */,
+				A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */,
 				A296B7F520871CFC00F6AFBD /* OTEditEntourageBehavior.m in Sources */,
 				A296B7F620871CFC00F6AFBD /* OTStartTourAnnotationView.m in Sources */,
 				A296B7F720871CFC00F6AFBD /* OTBaseMapDelegate.m in Sources */,
@@ -5333,7 +5341,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -5354,7 +5362,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Store;
@@ -5648,7 +5656,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Beta;

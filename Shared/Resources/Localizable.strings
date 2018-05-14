@@ -372,17 +372,11 @@ vous signalez cette personne :";
 // User profile
 "user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";
 
-"increase_radius" = "C’est tout pour les activité dans ce rayon autour de vous ! ";
-"no_feeds_increase_radius" = "
-C’est plutôt calme par ici !
-
-On dirait bien qu’il n’y a aucun activité à proximité… pour l’instant !
-
-Vous pouvez créer votre propre activité en cliquant sur
-le + en bas à droite.
-";
-"no_feeds_received" = "Aucune activité près de cette position";
-"no_more_feeds" = "Aucune activité près de cette position";
+"increase_radius" = "C’est tout pour les activités dans ce rayon autour de vous !";
+"no_feeds_increase_radius" = "\nC’est plutôt calme par ici !\n\nOn dirait bien qu’il n’y a aucun action à proximité… pour l’instant !\n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur\n + en bas à droite";
+"no_map_feeds_increase_radius" = "\nOn dirait que c'est calme ici !\n\nDéplacez la carte pour trouver des activités du réseau.\n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur\n + en bas à droite";
+"no_more_feeds" = "Aucune action près de cette position";
+"no_more_map_feeds" = "Aucune action près de cette position";
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
 "ok" = "OK";
 

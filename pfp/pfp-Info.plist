@@ -67,10 +67,6 @@
 			</dict>
 		</array>
 	</dict>
-	<key>FacebookAppID</key>
-	<string>${FACEBOOK_ID}</string>
-	<key>FacebookDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>

@@ -37,17 +37,30 @@
 
 - (void)startLocationUpdates {
     [self notifyStatus];
-    if(self.status == kCLAuthorizationStatusDenied) 
-        return;
     
-    if (self.locationManager == nil)
+    if (self.status == kCLAuthorizationStatusDenied) {
+        return;
+    }
+    
+    if (self.locationManager == nil) {
         self.locationManager = [[CLLocationManager alloc] init];
-    //iOS 8+
-    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] || [self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-        IS_PRO_USER ? [self.locationManager requestAlwaysAuthorization] : [self.locationManager requestWhenInUseAuthorization] ;
+    }
+    
+    if ([OTAppConfiguration shouldAlwaysRequestUserLocation]) {
+        if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+            [self.locationManager requestAlwaysAuthorization];
+        }
+        [self.locationManager requestAlwaysAuthorization];
+    } else {
+        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [self.locationManager requestWhenInUseAuthorization];
+        }
+    }
+    
     //iOS 9+
-    if ([self.locationManager respondsToSelector:@selector(allowsBackgroundLocationUpdates)])
+    if ([self.locationManager respondsToSelector:@selector(allowsBackgroundLocationUpdates)]) {
         self.locationManager.allowsBackgroundLocationUpdates = YES;
+    }
     
     self.locationManager.pausesLocationUpdatesAutomatically = NO;
     self.locationManager.delegate = self;
