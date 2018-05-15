@@ -36,7 +36,7 @@ final class OTMenuCellView: UIView {
         iconImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(24)
-            $0.width.height.equalTo(32)
+            $0.width.height.equalTo(24)
         }
         iconImageView.sizeToFit()
         

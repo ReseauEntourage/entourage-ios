@@ -16,7 +16,7 @@ extension LabelStyles: ComponentStylable {
     var font: UIFont {
         switch self {
         case .boldGray:
-            return UIFont.SFUIText(size: 14, type: .bold)
+            return UIFont.SFUIText(size: 16, type: .bold)
         }
     }
     
