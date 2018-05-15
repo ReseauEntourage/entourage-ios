@@ -38,7 +38,8 @@ final class OTLogoutViewCell: UITableViewCell {
         logoutButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(3)
-            $0.height.equalTo(32)
+            $0.height.equalTo(40)
+            $0.width.equalTo(290)
             $0.bottom.equalToSuperview().inset(3)
         }
         
