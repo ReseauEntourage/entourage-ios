@@ -31,9 +31,19 @@ final class OTPfpMenuViewController: UIViewController {
         setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     //MARK: - Private Functions
@@ -47,7 +57,7 @@ final class OTPfpMenuViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
         self.tableView.rowHeight = UITableViewAutomaticDimension;
-        tableView.backgroundColor = UIColor.pfpTableBackground()
+        tableView.backgroundColor = UIColor.white
         tableView.separatorColor = .white
         customizeHeader()
         createMenuItems()
@@ -62,15 +72,17 @@ final class OTPfpMenuViewController: UIViewController {
     }
     
     private func createMenuItems() {
-        let contactItem = OTMenuItem(title: "Contacter l'équipe Voisin-Age", iconName:"contact")
+        let contactItem = OTMenuItem(title: "Contacter l'équipe Voisin-Age", iconName:"question_chat")
         let howIsUsedItem = OTMenuItem(title: "Mode d'emploi de l'application", iconName: "howIsUsed")
         let ethicalChartItem = OTMenuItem(title: "Charte éthique de Voisin-Age", iconName: "ethicalChart")
         let logoutItem = OTMenuItem(title: "déconnexion", iconName: "")
+        let aboutItem = OTMenuItem(title: OTLocalisationService.getLocalizedValue(forKey: "aboutTitle"), iconName:"contact")
         
         guard let item1 = contactItem,
             let item2 = howIsUsedItem,
             let item3 = ethicalChartItem,
-            let item4 = logoutItem else {
+            let item4 = aboutItem,
+            let item5 = logoutItem else {
             return
         }
         
@@ -78,6 +90,13 @@ final class OTPfpMenuViewController: UIViewController {
         menuItems.append(item2)
         menuItems.append(item3)
         menuItems.append(item4)
+        menuItems.append(item5)
+    }
+    
+    private func loadAbout () {
+        let vc = PfpAboutViewController.init(style: UITableViewStyle.plain)
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -89,7 +108,11 @@ extension OTPfpMenuViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension;
+        return 51;
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView.init()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -106,9 +129,14 @@ extension OTPfpMenuViewController: UITableViewDelegate {
             let url = URL(string: "http://bit.ly/faqapplivoisin-age")
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
         }
+        else if indexPath.row == 3 {
+            self.loadAbout()
+        }
         else {
             NotificationCenter.default.post(name: Notification.Name("loginFailureNotification"), object: self)
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
@@ -120,14 +148,18 @@ extension OTPfpMenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row != menuItems.count - 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCellIdentifier") as! OTItemTableViewCell
-            cell.view.iconImageView.image = UIImage(named: menuItems[indexPath.row].iconName)
+            let icon:UIImage = UIImage(named: menuItems[indexPath.row].iconName)!
+            cell.view.iconImageView.image = icon.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             cell.view.iconImageView.tintColor = UIColor.pfpBlue()
+            cell.view.iconImageView.contentMode = UIViewContentMode.scaleAspectFit
             cell.view.itemLabel.text = menuItems[indexPath.row].title
+            cell.backgroundColor = UIColor.pfpTableBackground()
+            
             return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LogoutItemCellIdentifier") as! OTLogoutViewCell
-            cell.logoutButton.setTitle(menuItems[indexPath.row].title.capitalized, for: .normal)
+            cell.logoutButton.setTitle(menuItems[indexPath.row].title.uppercased(), for: .normal)
             return cell
         }
     }

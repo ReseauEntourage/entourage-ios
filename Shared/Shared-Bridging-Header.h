@@ -19,3 +19,6 @@
 #import "OTAppConfiguration.h"
 #import "OTAppAppearance.h"
 #import "UIButton+entourage.h"
+#import "OTLocalisationService.h"
+#import "UIStoryboard+entourage.h"
+#import "OTAboutTableViewCell.h"
