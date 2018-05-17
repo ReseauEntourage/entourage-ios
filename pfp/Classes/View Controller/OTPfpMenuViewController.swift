@@ -94,7 +94,7 @@ final class OTPfpMenuViewController: UIViewController {
     }
     
     private func loadAbout () {
-        let vc = PfpAboutViewController.init(style: UITableViewStyle.plain)
+        let vc = PFPAboutViewController.init(nibName: "PFPAboutView", bundle: nil)
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }

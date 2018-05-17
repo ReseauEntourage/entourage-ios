@@ -1,52 +1,68 @@
 //
-//  PfpTableViewController.swift
-//  pfp
+//  PFPAboutViewController.swift
+//  entourage
 //
-//  Created by Smart Care on 16/05/2018.
+//  Created by Smart Care on 17/05/2018.
 //  Copyright © 2018 OCTO Technology. All rights reserved.
 //
 
 import UIKit
+import StoreKit
 
-class PfpAboutViewController: UITableViewController {
+class PFPAboutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKStoreProductViewControllerDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.title = OTLocalisationService.getLocalizedValue(forKey: "aboutTitle").uppercased()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "aboutCellId")
         self.tableView.separatorColor = UIColor.clear
         self.tableView.backgroundColor = UIColor.white
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    private func openStoreProductWithiTunesItemIdentifier(identifier: String) {
+        let storeViewController = SKStoreProductViewController()
+        storeViewController.delegate = self
+        
+        let parameters = [ SKStoreProductParameterITunesItemIdentifier : identifier]
+        storeViewController.loadProduct(withParameters: parameters) { [weak self] (loaded, error) -> Void in
+            if loaded {
+                // Parent class of self is UIViewContorller
+                self?.present(storeViewController, animated: true, completion: nil)
+            }
+        }
+    }
+    
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
     
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView.init()
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 4
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = UITableViewCell.init(style: UITableViewCellStyle.value1, reuseIdentifier: "aboutCellId")
         
         cell.backgroundColor = UIColor.pfpTableBackground()
@@ -68,21 +84,30 @@ class PfpAboutViewController: UITableViewController {
         default:
             break
         }
-
+        
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section {
         case 0:
+            // TODO: Update app id for pfp once available
+            self.openStoreProductWithiTunesItemIdentifier(identifier: "1072244410");
             break
         case 1:
+            let url = URL(string: "http://bit.ly/cgu_applivoisin-age")
+            OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
             break
             
         default:
             break
         }
     }
+    
+    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
+
 }
