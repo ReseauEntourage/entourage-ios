@@ -13,6 +13,7 @@ extension UIButton {
         setTitleColor(style.textColor, for: .normal)
         backgroundColor = style.backgroundColor
         layer.borderColor = style.borderColor.cgColor
+        layer.borderWidth = 1.0
     }
 }
 

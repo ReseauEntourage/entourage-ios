@@ -1149,9 +1149,7 @@
 		A296B93B2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
 		A296B93C2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
 		A2A2BC8A2099E0C500AA4FC8 /* Pfp-Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC892099E0C500AA4FC8 /* Pfp-Localizable.strings */; };
-		A2A2BC93209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
 		A2A2BC94209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
-		A2A2BC95209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
 		A2A2BC96209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */; };
 		A2A2BC97209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */; };
 		A2A2BC98209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */; };
@@ -1164,6 +1162,11 @@
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
 		A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
 		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
+		A2FCF5B620AC8563004604AC /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
+		A2FCF5C420AD4FF8004604AC /* PFPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */; };
+		A2FCF5C520AD4FF8004604AC /* PFPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */; };
+		A2FCF5C920AD5030004604AC /* PFPAboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2FCF5C820AD502F004604AC /* PFPAboutView.xib */; };
+		A2FCF5CA20AD5030004604AC /* PFPAboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2FCF5C820AD502F004604AC /* PFPAboutView.xib */; };
 		A2FE6D5120A0783C0025842D /* OTAppAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FE6D5020A0783C0025842D /* OTAppAppearance.m */; };
 		A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FE6D5020A0783C0025842D /* OTAppAppearance.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
@@ -1950,6 +1953,8 @@
 		A2E5FA0E20862E780099B989 /* UINavigationBar+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Appearance.h"; sourceTree = "<group>"; };
 		A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Appearance.m"; sourceTree = "<group>"; };
 		A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
+		A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PFPAboutViewController.swift; sourceTree = "<group>"; };
+		A2FCF5C820AD502F004604AC /* PFPAboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFPAboutView.xib; sourceTree = "<group>"; };
 		A2FE6D4F20A0783C0025842D /* OTAppAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppAppearance.h; sourceTree = "<group>"; };
 		A2FE6D5020A0783C0025842D /* OTAppAppearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppAppearance.m; sourceTree = "<group>"; };
 		A466D9EB1BD55201EACF4D5A /* Pods-pfp.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.beta.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.beta.xcconfig"; sourceTree = "<group>"; };
@@ -3530,6 +3535,7 @@
 			isa = PBXGroup;
 			children = (
 				A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */,
+				A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -3538,6 +3544,7 @@
 			isa = PBXGroup;
 			children = (
 				A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */,
+				A2FCF5C820AD502F004604AC /* PFPAboutView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3716,6 +3723,7 @@
 				A21D65B82085FDAA00EF8E0E /* UserProfileEditor.storyboard in Resources */,
 				A21D65A82085FDAA00EF8E0E /* Disclaimer.storyboard in Resources */,
 				A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
+				A2FCF5C920AD5030004604AC /* PFPAboutView.xib in Resources */,
 				A21D65A52085FDAA00EF8E0E /* Social.storyboard in Resources */,
 				A21D64AB2085E8B400EF8E0E /* Oradea.gpx in Resources */,
 				A202E7D12085CFC40058F32C /* category.rtf in Resources */,
@@ -3792,6 +3800,7 @@
 				A296B8A020871CFC00F6AFBD /* EncounterEditor.storyboard in Resources */,
 				A296B8A120871CFC00F6AFBD /* AssociationDetails.storyboard in Resources */,
 				A296B8A220871CFC00F6AFBD /* SF-UI-Text-Bold.otf in Resources */,
+				A2FCF5CA20AD5030004604AC /* PFPAboutView.xib in Resources */,
 				A296B8A320871CFC00F6AFBD /* MapOptions.storyboard in Resources */,
 				A2C2F36B20AABFDA001762DA /* AppConfigurations.plist in Resources */,
 				A296B8A420871CFC00F6AFBD /* LocationSelection.storyboard in Resources */,
@@ -4183,6 +4192,7 @@
 				A202EBD12085D2C80058F32C /* OTUserEmailViewController.m in Sources */,
 				A202EBD92085D2C80058F32C /* OTStartupViewController.m in Sources */,
 				A202EB5F2085D2C80058F32C /* OTTutorial4ViewController.m in Sources */,
+				A2FCF5C420AD4FF8004604AC /* PFPAboutViewController.swift in Sources */,
 				A202ED132085D2C80058F32C /* OTTourUI.m in Sources */,
 				96B658AD209A417900EB0398 /* OTItemTableViewCell.swift in Sources */,
 				A202ED0F2085D2C80058F32C /* OTTourStateInfo.m in Sources */,
@@ -4333,7 +4343,6 @@
 				A202EAF12085D2C70058F32C /* OTPoiCategory.m in Sources */,
 				A202EC992085D2C80058F32C /* OTMessageTableCellProviderBehavior.m in Sources */,
 				A202EAD72085D2C70058F32C /* OTPoi.m in Sources */,
-				A2A2BC93209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */,
 				A202EC872085D2C80058F32C /* OTContactsTableCellProviderBehavior.m in Sources */,
 				A202EB112085D2C70058F32C /* OTHeatZoneCollectionViewCell.m in Sources */,
 				A202EB452085D2C80058F32C /* OTJoinRequestedNotOwnerCell.m in Sources */,
@@ -4398,6 +4407,7 @@
 				96B658B2209A599F00EB0398 /* ButtonStyles.swift in Sources */,
 				A202EC9B2085D2C80058F32C /* OTGroupedTableDataSourceBehavior.m in Sources */,
 				A2A2BC96209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */,
+				A2FCF5B620AC8563004604AC /* OTPfpMenuViewController.swift in Sources */,
 				A202EB432085D2C80058F32C /* OTJoinRequestedCell.m in Sources */,
 				A202EC752085D2C80058F32C /* OTMyEntouragesDataSource.m in Sources */,
 				A202EB772085D2C80058F32C /* OTSummaryInfoCell.m in Sources */,
@@ -4577,7 +4587,6 @@
 				A202ED1A2085D2C80058F32C /* OTTourMapHandler.m in Sources */,
 				A202ED062085D2C80058F32C /* OTEntourageMessaging.m in Sources */,
 				A202ECBC2085D2C80058F32C /* OTPhotoPickerBehavior.m in Sources */,
-				A2A2BC95209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */,
 				A202ED162085D2C80058F32C /* OTEditEncounterBehavior.m in Sources */,
 				A202ECA82085D2C80058F32C /* OTMembersCellProvider.m in Sources */,
 				A202ECB02085D2C80058F32C /* OTStatusChangedBehavior.m in Sources */,
@@ -5034,6 +5043,7 @@
 				96B658BC209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */,
 				A296B85420871CFC00F6AFBD /* OTJoinBehavior.m in Sources */,
 				A296B85520871CFC00F6AFBD /* OTSettingsViewController.m in Sources */,
+				A2FCF5C520AD4FF8004604AC /* PFPAboutViewController.swift in Sources */,
 				A296B85620871CFC00F6AFBD /* OTCategory.m in Sources */,
 				A296B85720871CFC00F6AFBD /* OTCollectionSourceBehavior.m in Sources */,
 				A296B85820871CFC00F6AFBD /* OTActivityProvider.m in Sources */,
