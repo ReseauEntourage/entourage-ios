@@ -1149,21 +1149,26 @@
 		A296B93B2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
 		A296B93C2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
 		A2A2BC8A2099E0C500AA4FC8 /* Pfp-Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC892099E0C500AA4FC8 /* Pfp-Localizable.strings */; };
-		A2A2BC8C209AE8A900AA4FC8 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC8B209AE8A900AA4FC8 /* AppConfigurations.plist */; };
-		A2A2BC8D209AE8A900AA4FC8 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC8B209AE8A900AA4FC8 /* AppConfigurations.plist */; };
-		A2A2BC8E209AE8A900AA4FC8 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC8B209AE8A900AA4FC8 /* AppConfigurations.plist */; };
-		A2A2BC93209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
 		A2A2BC94209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
-		A2A2BC95209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
 		A2A2BC96209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */; };
 		A2A2BC97209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */; };
 		A2A2BC98209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */; };
 		A2A2BC9A209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
 		A2A2BC9B209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
 		A2A2BC9C209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
+		A2C2F36A20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
+		A2C2F36B20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
+		A2C2F36C20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
 		A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
 		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
+		A2FCF5B620AC8563004604AC /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
+		A2FCF5C420AD4FF8004604AC /* PFPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */; };
+		A2FCF5C520AD4FF8004604AC /* PFPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */; };
+		A2FCF5C920AD5030004604AC /* PFPAboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2FCF5C820AD502F004604AC /* PFPAboutView.xib */; };
+		A2FCF5CA20AD5030004604AC /* PFPAboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2FCF5C820AD502F004604AC /* PFPAboutView.xib */; };
+		A2FE6D5120A0783C0025842D /* OTAppAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FE6D5020A0783C0025842D /* OTAppAppearance.m */; };
+		A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FE6D5020A0783C0025842D /* OTAppAppearance.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
 /* End PBXBuildFile section */
@@ -1938,16 +1943,20 @@
 		A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTLocalisationService.m; sourceTree = "<group>"; };
 		A29BAAC42091D0BB0003800D /* Pfp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pfp-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2A2BC892099E0C500AA4FC8 /* Pfp-Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Pfp-Localizable.strings"; sourceTree = "<group>"; };
-		A2A2BC8B209AE8A900AA4FC8 /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
 		A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPfpMenuViewController.swift; sourceTree = "<group>"; };
 		A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLogoutViewCell.swift; sourceTree = "<group>"; };
 		A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = SOURCE_ROOT; };
+		A2C2F36920AABFDA001762DA /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Appearance.h"; sourceTree = "<group>"; };
 		A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Appearance.m"; sourceTree = "<group>"; };
 		A2E5FA0E20862E780099B989 /* UINavigationBar+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Appearance.h"; sourceTree = "<group>"; };
 		A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Appearance.m"; sourceTree = "<group>"; };
 		A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
+		A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PFPAboutViewController.swift; sourceTree = "<group>"; };
+		A2FCF5C820AD502F004604AC /* PFPAboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFPAboutView.xib; sourceTree = "<group>"; };
+		A2FE6D4F20A0783C0025842D /* OTAppAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppAppearance.h; sourceTree = "<group>"; };
+		A2FE6D5020A0783C0025842D /* OTAppAppearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppAppearance.m; sourceTree = "<group>"; };
 		A466D9EB1BD55201EACF4D5A /* Pods-pfp.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.beta.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.beta.xcconfig"; sourceTree = "<group>"; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -2209,6 +2218,8 @@
 				A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */,
 				A21D64A12085D6D200EF8E0E /* OTAppConfiguration.h */,
 				A21D64A22085D6D200EF8E0E /* OTAppConfiguration.m */,
+				A2FE6D4F20A0783C0025842D /* OTAppAppearance.h */,
+				A2FE6D5020A0783C0025842D /* OTAppAppearance.m */,
 				A296B92F208DFE8A00F6AFBD /* OTAppState.h */,
 				A296B930208DFE8A00F6AFBD /* OTAppState.m */,
 				A202E7C52085CFC30058F32C /* OTAPIConsts.h */,
@@ -3426,7 +3437,7 @@
 		A24199B52084F87100BC7466 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A2A2BC8B209AE8A900AA4FC8 /* AppConfigurations.plist */,
+				A2C2F36920AABFDA001762DA /* AppConfigurations.plist */,
 				A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */,
 				A202E80A2085D0FE0058F32C /* OTAppDelegate.h */,
 				A202E8092085D0FD0058F32C /* OTAppDelegate.m */,
@@ -3524,6 +3535,7 @@
 			isa = PBXGroup;
 			children = (
 				A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */,
+				A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -3532,6 +3544,7 @@
 			isa = PBXGroup;
 			children = (
 				A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */,
+				A2FCF5C820AD502F004604AC /* PFPAboutView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3681,6 +3694,7 @@
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
 				A21D65AA2085FDAA00EF8E0E /* Onboarding.storyboard in Resources */,
 				A21D64AE2085E8B400EF8E0E /* Paris.gpx in Resources */,
+				A2C2F36A20AABFDA001762DA /* AppConfigurations.plist in Resources */,
 				A21D65AE2085FDAA00EF8E0E /* MyEntourages.storyboard in Resources */,
 				A202E7EF2085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				A202E7E52085CFC40058F32C /* SF-UI-Text-UltrathinItalic.otf in Resources */,
@@ -3696,7 +3710,6 @@
 				A21D65B22085FDAA00EF8E0E /* JoinFeedItem.storyboard in Resources */,
 				A21D64AC2085E8B400EF8E0E /* Bucharest.gpx in Resources */,
 				A21D65C12085FDAA00EF8E0E /* Settings.storyboard in Resources */,
-				A2A2BC8C209AE8A900AA4FC8 /* AppConfigurations.plist in Resources */,
 				A21D65BC2085FDAA00EF8E0E /* UserProfileDetails.storyboard in Resources */,
 				A21D65C32085FDAA00EF8E0E /* Tutorial.storyboard in Resources */,
 				A21D65C42085FDAA00EF8E0E /* About.storyboard in Resources */,
@@ -3710,6 +3723,7 @@
 				A21D65B82085FDAA00EF8E0E /* UserProfileEditor.storyboard in Resources */,
 				A21D65A82085FDAA00EF8E0E /* Disclaimer.storyboard in Resources */,
 				A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
+				A2FCF5C920AD5030004604AC /* PFPAboutView.xib in Resources */,
 				A21D65A52085FDAA00EF8E0E /* Social.storyboard in Resources */,
 				A21D64AB2085E8B400EF8E0E /* Oradea.gpx in Resources */,
 				A202E7D12085CFC40058F32C /* category.rtf in Resources */,
@@ -3754,6 +3768,7 @@
 				A202E7E62085CFC40058F32C /* SF-UI-Text-UltrathinItalic.otf in Resources */,
 				A202E7D02085CFC40058F32C /* logo_black.png in Resources */,
 				A202E7F02085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
+				A2C2F36C20AABFDA001762DA /* AppConfigurations.plist in Resources */,
 				A202E7EC2085CFC40058F32C /* SF-UI-Text-Light.otf in Resources */,
 				A202E7EA2085CFC40058F32C /* SF-UI-Text-BoldItalic.otf in Resources */,
 				A296B90F2087218700F6AFBD /* Entourage.xcassets in Resources */,
@@ -3769,7 +3784,6 @@
 				A202E7E42085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */,
 				A202E7DC2085CFC40058F32C /* InfoPlist.strings in Resources */,
 				A202E7E02085CFC40058F32C /* SF-UI-Text-Ultrathin.otf in Resources */,
-				A2A2BC8E209AE8A900AA4FC8 /* AppConfigurations.plist in Resources */,
 				A2A2BC9C209AF5F000AA4FC8 /* ApiKeys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3786,7 +3800,9 @@
 				A296B8A020871CFC00F6AFBD /* EncounterEditor.storyboard in Resources */,
 				A296B8A120871CFC00F6AFBD /* AssociationDetails.storyboard in Resources */,
 				A296B8A220871CFC00F6AFBD /* SF-UI-Text-Bold.otf in Resources */,
+				A2FCF5CA20AD5030004604AC /* PFPAboutView.xib in Resources */,
 				A296B8A320871CFC00F6AFBD /* MapOptions.storyboard in Resources */,
+				A2C2F36B20AABFDA001762DA /* AppConfigurations.plist in Resources */,
 				A296B8A420871CFC00F6AFBD /* LocationSelection.storyboard in Resources */,
 				A296B8A520871CFC00F6AFBD /* TourConfirmation.storyboard in Resources */,
 				A296B8A620871CFC00F6AFBD /* QuitFeedItem.storyboard in Resources */,
@@ -3839,7 +3855,6 @@
 				A296B8D520871CFC00F6AFBD /* EntourageLaunchScreen.storyboard in Resources */,
 				A296B8D620871CFC00F6AFBD /* Localizable.strings in Resources */,
 				A296B8D720871CFC00F6AFBD /* categoryJson.json in Resources */,
-				A2A2BC8D209AE8A900AA4FC8 /* AppConfigurations.plist in Resources */,
 				A2A2BC8A2099E0C500AA4FC8 /* Pfp-Localizable.strings in Resources */,
 				A296B8D820871CFC00F6AFBD /* Platinia.gpx in Resources */,
 				A296B8D920871CFC00F6AFBD /* categories.json in Resources */,
@@ -4177,6 +4192,7 @@
 				A202EBD12085D2C80058F32C /* OTUserEmailViewController.m in Sources */,
 				A202EBD92085D2C80058F32C /* OTStartupViewController.m in Sources */,
 				A202EB5F2085D2C80058F32C /* OTTutorial4ViewController.m in Sources */,
+				A2FCF5C420AD4FF8004604AC /* PFPAboutViewController.swift in Sources */,
 				A202ED132085D2C80058F32C /* OTTourUI.m in Sources */,
 				96B658AD209A417900EB0398 /* OTItemTableViewCell.swift in Sources */,
 				A202ED0F2085D2C80058F32C /* OTTourStateInfo.m in Sources */,
@@ -4287,6 +4303,7 @@
 				A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */,
 				A202EC592085D2C80058F32C /* OTBottomScrollBehavior.m in Sources */,
 				A202ED252085D2C80058F32C /* UINavigationController+entourage.m in Sources */,
+				A2FE6D5120A0783C0025842D /* OTAppAppearance.m in Sources */,
 				A202EB272085D2C70058F32C /* OTMapCell.m in Sources */,
 				A202ECFB2085D2C80058F32C /* OTEntourageStateTransition.m in Sources */,
 				A202ECA72085D2C80058F32C /* OTMembersCellProvider.m in Sources */,
@@ -4326,7 +4343,6 @@
 				A202EAF12085D2C70058F32C /* OTPoiCategory.m in Sources */,
 				A202EC992085D2C80058F32C /* OTMessageTableCellProviderBehavior.m in Sources */,
 				A202EAD72085D2C70058F32C /* OTPoi.m in Sources */,
-				A2A2BC93209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */,
 				A202EC872085D2C80058F32C /* OTContactsTableCellProviderBehavior.m in Sources */,
 				A202EB112085D2C70058F32C /* OTHeatZoneCollectionViewCell.m in Sources */,
 				A202EB452085D2C80058F32C /* OTJoinRequestedNotOwnerCell.m in Sources */,
@@ -4391,6 +4407,7 @@
 				96B658B2209A599F00EB0398 /* ButtonStyles.swift in Sources */,
 				A202EC9B2085D2C80058F32C /* OTGroupedTableDataSourceBehavior.m in Sources */,
 				A2A2BC96209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */,
+				A2FCF5B620AC8563004604AC /* OTPfpMenuViewController.swift in Sources */,
 				A202EB432085D2C80058F32C /* OTJoinRequestedCell.m in Sources */,
 				A202EC752085D2C80058F32C /* OTMyEntouragesDataSource.m in Sources */,
 				A202EB772085D2C80058F32C /* OTSummaryInfoCell.m in Sources */,
@@ -4570,7 +4587,6 @@
 				A202ED1A2085D2C80058F32C /* OTTourMapHandler.m in Sources */,
 				A202ED062085D2C80058F32C /* OTEntourageMessaging.m in Sources */,
 				A202ECBC2085D2C80058F32C /* OTPhotoPickerBehavior.m in Sources */,
-				A2A2BC95209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */,
 				A202ED162085D2C80058F32C /* OTEditEncounterBehavior.m in Sources */,
 				A202ECA82085D2C80058F32C /* OTMembersCellProvider.m in Sources */,
 				A202ECB02085D2C80058F32C /* OTStatusChangedBehavior.m in Sources */,
@@ -4926,6 +4942,7 @@
 				A296B7F220871CFC00F6AFBD /* OTUserService.m in Sources */,
 				A296B7F320871CFC00F6AFBD /* OTEditEntourageTitleViewController.m in Sources */,
 				A296B7F420871CFC00F6AFBD /* OTEntourageService.m in Sources */,
+				A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */,
 				A296B7F520871CFC00F6AFBD /* OTEditEntourageBehavior.m in Sources */,
 				A296B7F620871CFC00F6AFBD /* OTStartTourAnnotationView.m in Sources */,
 				A296B7F720871CFC00F6AFBD /* OTBaseMapDelegate.m in Sources */,
@@ -5026,6 +5043,7 @@
 				96B658BC209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */,
 				A296B85420871CFC00F6AFBD /* OTJoinBehavior.m in Sources */,
 				A296B85520871CFC00F6AFBD /* OTSettingsViewController.m in Sources */,
+				A2FCF5C520AD4FF8004604AC /* PFPAboutViewController.swift in Sources */,
 				A296B85620871CFC00F6AFBD /* OTCategory.m in Sources */,
 				A296B85720871CFC00F6AFBD /* OTCollectionSourceBehavior.m in Sources */,
 				A296B85820871CFC00F6AFBD /* OTActivityProvider.m in Sources */,
@@ -5333,7 +5351,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -5354,7 +5372,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Store;
@@ -5648,7 +5666,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/entourage.app/entourage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Beta;

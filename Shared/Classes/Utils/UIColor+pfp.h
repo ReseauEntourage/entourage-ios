@@ -12,4 +12,5 @@
 + (UIColor*)pfpBlueColor;
 + (UIColor*)pfpTableBackgroundColor;
 + (UIColor*)pfpGrayTextColor;
++ (UIColor*)pfpSubtitleBlueColor;
 @end

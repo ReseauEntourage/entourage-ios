@@ -26,6 +26,7 @@
 #import "OTEntourageService.h"
 #import "OTAnnouncement.h"
 #import "OTAnnouncementCell.h"
+#import "entourage-Swift.h"
 
 #define TABLEVIEW_FOOTER_HEIGHT 15.0f
 
@@ -133,6 +134,10 @@
     mapView.center = headerView.center;
         
     self.tableHeaderView = headerView;
+    
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithAttributedString:[self.furtherEntouragesBtn attributedTitleForState:UIControlStateNormal]];
+    [title setAttributes:@{NSForegroundColorAttributeName:[ApplicationTheme shared].backgroundThemeColor, NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)} range:NSMakeRange(0, title.length)];
+    [self.furtherEntouragesBtn setAttributedTitle:title forState:UIControlStateNormal];
 }
 
 - (void)requestCurrentLocation
@@ -154,7 +159,7 @@
 }
 
 - (void)setNoFeeds {
-    self.lblEmptyTableReason.text = OTLocalizedString(@"no_feeds_received");
+    self.lblEmptyTableReason.text = [OTAppAppearance noFeedsDescription];
 }
 
 /********************************************************************************/
@@ -309,12 +314,13 @@
     BOOL isMaxRadius = self.sourceBehavior.radius == [RADIUS_ARRAY[RADIUS_ARRAY.count - 1] intValue];
     self.furtherEntouragesBtn.hidden = isMaxRadius;
     self.loadingView.frame = CGRectMake(0, 0, 1, SMALL_FOOTER_HEIGHT);
+    
     if(self.items.count > 0)
-        self.infoLabel.text = OTLocalizedString(isMaxRadius ? @"no_more_feeds" : @"increase_radius");
+        self.infoLabel.text = isMaxRadius ? [OTAppAppearance noFeedsDescription] : [OTAppAppearance extendSearchParameterDescription];
     else {
-        if(!isMaxRadius)
+        if (!isMaxRadius)
             self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
-        self.infoLabel.text = OTLocalizedString(isMaxRadius ? @"no_feeds_received" : @"no_feeds_increase_radius");
+        self.infoLabel.text = isMaxRadius ? [OTAppAppearance noMapFeedsDescription] : [OTAppAppearance extendMapSearchParameterDescription];
     }
     self.tableFooterView = self.loadingView;
 }

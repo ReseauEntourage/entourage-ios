@@ -57,7 +57,7 @@
     
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
-    self.nameDescLabel.text = [OTAppConfiguration userProfileNameDescription];
+    self.nameDescLabel.text = [OTAppAppearance userProfileNameDescription];
 }
 
 -(void)viewWillAppear:(BOOL)animated {

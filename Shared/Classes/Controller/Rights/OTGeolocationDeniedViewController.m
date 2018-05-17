@@ -19,7 +19,7 @@
     self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     [self.activateButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     [self.ignoreButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
-    self.titleLabel.text = [OTAppConfiguration notificationsNeedDescription];
+    self.titleLabel.text = [OTAppAppearance notificationsNeedDescription];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

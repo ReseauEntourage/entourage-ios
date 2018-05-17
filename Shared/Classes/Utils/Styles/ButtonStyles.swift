@@ -10,6 +10,7 @@ import Foundation
 
 enum ButtonStyles {
     case whiteRounded
+    case whiteRoundedWithBorder
 }
 
 extension ButtonStyles: ComponentStylable {
@@ -31,7 +32,7 @@ extension ButtonStyles: ComponentStylable {
     
     var backgroundColor: UIColor {
         switch self {
-        case .whiteRounded:
+        case .whiteRounded, .whiteRoundedWithBorder:
             return .white
         }
     }
