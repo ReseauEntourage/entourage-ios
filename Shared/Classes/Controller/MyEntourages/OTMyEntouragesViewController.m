@@ -49,6 +49,7 @@
     [super viewDidLoad];
     
     self.optionsButton.hidden = YES;
+    
     [self.invitationsCollectionDataSource initialize];
     [self.entouragesTableDataSource initialize];
     [self.toggleCollectionView initialize];
@@ -79,22 +80,25 @@
 - (void)viewDidAppear:(BOOL)animated {
     [OTLogger logEvent:@"Screen17_2MyMessagesView"];
     [super viewDidAppear:animated];
+    
     [self.entouragesDataSource.tableView reloadRowsAtIndexPaths:[self.entouragesDataSource.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if(self.isMovingFromParentViewController)
+    
+    if (self.isMovingFromParentViewController) {
         [OTLogger logEvent:@"BackToFeedClick"];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.optionsBehavior prepareSegueForOptions:segue]) {
+    if ([self.optionsBehavior prepareSegueForOptions:segue]) {
         [OTLogger logEvent:@"PlusOnMessagesPageClick"];
         return;
     }
-    if([self.feedItemDetailsBehavior prepareSegueForDetails:segue]){
+    if ([self.feedItemDetailsBehavior prepareSegueForDetails:segue]){
         [OTLogger logEvent:@"DiscussionMembersListView"];
         return;
     }
