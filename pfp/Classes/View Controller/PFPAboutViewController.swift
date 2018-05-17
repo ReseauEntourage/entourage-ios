@@ -64,18 +64,27 @@ class PFPAboutViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = UITableViewCell.init(style: UITableViewCellStyle.value1, reuseIdentifier: "aboutCellId")
-        
+        let textSize: CGFloat = 15
         cell.backgroundColor = UIColor.pfpTableBackground()
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        cell.accessoryType = UITableViewCellAccessoryType.none
         cell.textLabel?.textColor = ApplicationTheme.shared().titleLabelColor
-        cell.textLabel?.font = UIFont.SFUIText(size: 15, type: UIFont.SFUITextFontType.regular)
+        cell.textLabel?.font = UIFont.SFUIText(size: textSize, type: UIFont.SFUITextFontType.regular)
         cell.detailTextLabel?.textColor = ApplicationTheme.shared().subtitleLabelColor
-        cell.detailTextLabel?.font = UIFont.SFUIText(size: 15, type: UIFont.SFUITextFontType.bold)
+        cell.detailTextLabel?.font = UIFont.SFUIText(size: textSize, type: UIFont.SFUITextFontType.bold)
+        
+        let arrowImage:UIImage = UIImage.init(named: "arrowForMenu")!
+        let imageView:UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: textSize, height: textSize))
+        imageView.image = arrowImage.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        imageView.tintColor = ApplicationTheme.shared().subtitleLabelColor
+        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        cell.accessoryView = imageView
         
         switch indexPath.section {
         case 0:
             cell.textLabel?.text = OTLocalisationService.getLocalizedValue(forKey: "about_appVersion")
-            //cell.detailTextLabel?.text = "v1.1"
+            if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                cell.detailTextLabel?.text = "v\(version)"
+            }
             break
         case 1:
             cell.textLabel?.text = OTLocalisationService.getLocalizedValue(forKey: "about_cgu")
