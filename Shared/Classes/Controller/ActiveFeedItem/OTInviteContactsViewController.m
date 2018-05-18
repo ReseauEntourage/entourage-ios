@@ -39,7 +39,7 @@
                                          withTarget:self
                                           andAction:@selector(save)
                                             andFont:@"SFUIText-Bold"
-                                            colored:[UIColor appOrangeColor]];
+                                            colored:[ApplicationTheme shared].backgroundThemeColor];
     [self.btnSave changeEnabled:NO];
     [self.navigationItem setRightBarButtonItem:self.btnSave];
     self.tblContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

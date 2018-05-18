@@ -69,6 +69,7 @@ final class OTPfpMenuViewController: UIViewController {
         headerView.editLabel.text = "Modifier mon profil"
         headerView.nameLabel.text = currentUser?.displayName
         headerView.profileBtn.setupAsProfilePicture(fromUrl: currentUser?.avatarURL, withPlaceholder: "user")
+        headerView.profileBtn.addTarget(self, action: #selector(loadProfile), for: UIControlEvents.touchUpInside)
     }
     
     private func createMenuItems() {
@@ -97,6 +98,14 @@ final class OTPfpMenuViewController: UIViewController {
         let vc = PFPAboutViewController.init(nibName: "PFPAboutView", bundle: nil)
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func loadProfile () {
+        let vc: OTUserViewController = UIStoryboard.userProfile().instantiateViewController(withIdentifier: "UserProfile") as! OTUserViewController
+        vc.hidesBottomBarWhenPushed = true
+        vc.userId = self.currentUser?.sid
+        let profileNavController:UINavigationController = UINavigationController.init(rootViewController: vc)
+        self.present(profileNavController, animated: true, completion: nil)
     }
 }
 
