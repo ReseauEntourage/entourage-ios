@@ -76,8 +76,8 @@ final class OTPfpMenuViewController: UIViewController {
         let contactItem = OTMenuItem(title: "Contacter l'équipe Voisin-Age", iconName:"question_chat")
         let howIsUsedItem = OTMenuItem(title: "Mode d'emploi de l'application", iconName: "howIsUsed")
         let ethicalChartItem = OTMenuItem(title: "Charte éthique de Voisin-Age", iconName: "ethicalChart")
-        let logoutItem = OTMenuItem(title: "déconnexion", iconName: "")
-        let aboutItem = OTMenuItem(title: OTLocalisationService.getLocalizedValue(forKey: "aboutTitle"), iconName:"contact")
+        let logoutItem = OTMenuItem(title: String.localized("menu_disconnect_title"), iconName: "")
+        let aboutItem = OTMenuItem(title: String.localized("aboutTitle"), iconName:"contact")
         
         guard let item1 = contactItem,
             let item2 = howIsUsedItem,

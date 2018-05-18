@@ -1156,6 +1156,9 @@
 		A2A2BC9A209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
 		A2A2BC9B209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
 		A2A2BC9C209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
+		A2A777EE20AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
+		A2A777EF20AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
+		A2A777F020AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
 		A2C2F36A20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
 		A2C2F36B20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
 		A2C2F36C20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
@@ -1946,6 +1949,7 @@
 		A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPfpMenuViewController.swift; sourceTree = "<group>"; };
 		A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLogoutViewCell.swift; sourceTree = "<group>"; };
 		A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = SOURCE_ROOT; };
+		A2A777ED20AF06EC006D2772 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		A2C2F36920AABFDA001762DA /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Appearance.h"; sourceTree = "<group>"; };
@@ -3339,6 +3343,7 @@
 		A202EAB42085D2C70058F32C /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				A2A777EC20AF06C0006D2772 /* Extensions */,
 				A202EAB62085D2C70058F32C /* NSAttributedString+OTBuilder.h */,
 				A202EABE2085D2C70058F32C /* NSAttributedString+OTBuilder.m */,
 				A202EABF2085D2C70058F32C /* NSDate+OTFormatter.h */,
@@ -3547,6 +3552,14 @@
 				A2FCF5C820AD502F004604AC /* PFPAboutView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A2A777EC20AF06C0006D2772 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A2A777ED20AF06EC006D2772 /* String+Localization.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4261,6 +4274,7 @@
 				A202EACF2085D2C70058F32C /* OTNewsFeedsFilter.m in Sources */,
 				A202ECE92085D2C80058F32C /* OTMessagingService.m in Sources */,
 				A202EC272085D2C80058F32C /* NSBundle+entourage.m in Sources */,
+				A2A777EE20AF06EC006D2772 /* String+Localization.swift in Sources */,
 				9647D516208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */,
 				A202ECE52085D2C80058F32C /* OTUnreadMessagesService.m in Sources */,
 				A202ECA32085D2C80058F32C /* OTMembersDataSource.m in Sources */,
@@ -4696,6 +4710,7 @@
 				A202EC322085D2C80058F32C /* OTMapDelegateProxyBehavior.m in Sources */,
 				A202EC142085D2C80058F32C /* OTSafariService.m in Sources */,
 				A202EC602085D2C80058F32C /* OTEntourageDisclaimerBehavior.m in Sources */,
+				A2A777F020AF06EC006D2772 /* String+Localization.swift in Sources */,
 				A202EB602085D2C80058F32C /* OTTutorial4ViewController.m in Sources */,
 				A202EBC02085D2C80058F32C /* OTSolidarityGuideFiltersViewController.m in Sources */,
 				A202EC082085D2C80058F32C /* OTInvitationsService.m in Sources */,
@@ -5083,6 +5098,7 @@
 				A296B87920871CFC00F6AFBD /* OTCloseKeyboardOnTapBehavior.m in Sources */,
 				A296B87A20871CFC00F6AFBD /* OTMyFeedMessage.m in Sources */,
 				A296B87B20871CFC00F6AFBD /* OTTapEntourageBehavior.m in Sources */,
+				A2A777EF20AF06EC006D2772 /* String+Localization.swift in Sources */,
 				A296B87C20871CFC00F6AFBD /* OTCreateMeetingViewController.m in Sources */,
 				A296B87D20871CFC00F6AFBD /* OTFeedItemFilters.m in Sources */,
 				A296B87E20871CFC00F6AFBD /* OTEncounter.m in Sources */,
