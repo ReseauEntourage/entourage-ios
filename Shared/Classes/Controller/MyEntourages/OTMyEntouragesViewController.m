@@ -27,6 +27,7 @@
 #import "OTFeedItemFactory.h"
 #import "OTAppConfiguration.h"
 #import "entourage-Swift.h"
+#import "OTMyEntouragesFilter.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -40,7 +41,6 @@
 @property (nonatomic, strong) IBOutlet OTManageInvitationBehavior* manageInvitation;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 @property (strong, nonatomic) IBOutlet UIButton *optionsButton;
-@property (nonatomic) BOOL isUnread;
 @property (nonatomic, strong) UIView *leftLineView;
 @property (nonatomic, strong) UIView *rightLineView;
 @end
@@ -170,7 +170,9 @@
     self.rightLineView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2, rightButton.frame.size.height - 3, rightButton.frame.size.width, 3)];
     self.rightLineView.backgroundColor = [UIColor whiteColor];
     [leftButton addSubview:self.rightLineView];
-    self.rightLineView.hidden = YES;
+    
+    self.rightLineView.hidden = !((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread;
+    self.leftLineView.hidden = ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread;
     
     //[self createMenuButton];
     //[self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
@@ -180,12 +182,15 @@
 - (void)showAllMessages {
     self.leftLineView.hidden = NO;
     self.rightLineView.hidden = YES;
+    ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = NO;
+    [self.entouragesDataSource loadData];
 }
 
 - (void)showUnread {
     self.leftLineView.hidden = YES;
     self.rightLineView.hidden = NO;
-    self.isUnread = YES;
+    ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = YES;
+    [self.entouragesDataSource loadData];
 }
 
 @end

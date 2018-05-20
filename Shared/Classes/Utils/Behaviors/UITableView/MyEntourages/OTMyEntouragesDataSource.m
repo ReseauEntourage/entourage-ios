@@ -91,7 +91,7 @@
 
 #pragma mark - private methods
 
-- (void)requestDataWithSuccess:(void(^)(NSArray *items))success orFailure:(void(^)())failure {
+- (void)requestDataWithSuccess:(void(^)(NSArray *items))success orFailure:(void(^)(void))failure {
     [SVProgressHUD show];
     NSMutableDictionary *parameters = [self.currentFilter toDictionaryWithPageNumber:self.pageNumber andSize:DATA_PAGE_SIZE];
     [[OTFeedsService new] getMyFeedsWithParameters:parameters success:^(NSArray *items) {
