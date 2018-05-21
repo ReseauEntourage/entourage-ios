@@ -22,3 +22,4 @@
 #import "OTLocalisationService.h"
 #import "UIStoryboard+entourage.h"
 #import "OTAboutTableViewCell.h"
+#import "OTUserViewController.h"

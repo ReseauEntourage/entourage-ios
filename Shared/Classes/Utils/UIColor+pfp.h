@@ -10,7 +10,11 @@
 
 @interface UIColor (pfp)
 + (UIColor*)pfpBlueColor;
++ (UIColor*)pfpGreenColor;
++ (UIColor*)pfpPurpleColor;
+
 + (UIColor*)pfpTableBackgroundColor;
 + (UIColor*)pfpGrayTextColor;
 + (UIColor*)pfpSubtitleBlueColor;
+
 @end

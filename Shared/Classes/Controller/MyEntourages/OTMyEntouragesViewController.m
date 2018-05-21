@@ -27,6 +27,7 @@
 #import "OTFeedItemFactory.h"
 #import "OTAppConfiguration.h"
 #import "entourage-Swift.h"
+#import "OTMyEntouragesFilter.h"
 
 @interface OTMyEntouragesViewController ()
 
@@ -40,7 +41,8 @@
 @property (nonatomic, strong) IBOutlet OTManageInvitationBehavior* manageInvitation;
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 @property (strong, nonatomic) IBOutlet UIButton *optionsButton;
-
+@property (nonatomic, strong) UIView *leftLineView;
+@property (nonatomic, strong) UIView *rightLineView;
 @end
 
 @implementation OTMyEntouragesViewController
@@ -49,6 +51,7 @@
     [super viewDidLoad];
     
     self.optionsButton.hidden = YES;
+    
     [self.invitationsCollectionDataSource initialize];
     [self.entouragesTableDataSource initialize];
     [self.toggleCollectionView initialize];
@@ -62,7 +65,6 @@
                                                  name:kUpdateBadgeCountNotification
                                                object:nil];
     
-    self.navigationItem.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
     [self.entouragesDataSource loadData];
 }
@@ -73,28 +75,30 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [OTLogger logEvent:@"Screen17_2MyMessagesView"];
     [super viewDidAppear:animated];
+    [self configureNavigationBar];
     [self.entouragesDataSource.tableView reloadRowsAtIndexPaths:[self.entouragesDataSource.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if(self.isMovingFromParentViewController)
+    
+    if (self.isMovingFromParentViewController) {
         [OTLogger logEvent:@"BackToFeedClick"];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.optionsBehavior prepareSegueForOptions:segue]) {
+    if ([self.optionsBehavior prepareSegueForOptions:segue]) {
         [OTLogger logEvent:@"PlusOnMessagesPageClick"];
         return;
     }
-    if([self.feedItemDetailsBehavior prepareSegueForDetails:segue]){
+    if ([self.feedItemDetailsBehavior prepareSegueForDetails:segue]){
         [OTLogger logEvent:@"DiscussionMembersListView"];
         return;
     }
@@ -136,6 +140,60 @@
         [self.invitationsDataSource updateItems:items];
         [self.invitationsCollectionDataSource refresh];
     } failure:nil];
+}
+
+- (void)configureNavigationBar {
+    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
+    
+    UIButton *leftButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width / 2 , self.navigationController.navigationBar.frame.size.height)];
+    [leftButton addTarget:self
+                    action:@selector(showAllMessages)
+          forControlEvents:UIControlEventTouchUpInside];
+    [leftButton setTitle: OTLocalizedString(@"all_messages_nav_title").uppercaseString forState: UIControlStateNormal];
+    leftButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    leftButton.titleLabel.font = [UIFont fontWithName:@"SFUIText-Medium" size:14];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+    [leftButton setTitleColor:[ApplicationTheme shared].secondaryNavigationBarTintColor forState:UIControlStateNormal];
+    
+    self.leftLineView = [[UIView alloc] initWithFrame:CGRectMake(-20, leftButton.frame.size.height - 3, leftButton.frame.size.width, 3)];
+    self.leftLineView.backgroundColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    [leftButton addSubview:self.leftLineView];
+    
+    UIButton *rightButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, self.navigationController.navigationBar.frame.size.width / 2 , self.navigationController.navigationBar.frame.size.height)];
+    [rightButton setTitle: OTLocalizedString(@"unread_messages_nav_title").uppercaseString forState: UIControlStateNormal];
+    rightButton.titleLabel.font = [UIFont fontWithName:@"SFUIText-Medium" size:14];
+    [rightButton setTitleColor:[ApplicationTheme shared].secondaryNavigationBarTintColor forState:UIControlStateNormal];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    [rightButton addTarget:self
+             action:@selector(showUnread)
+   forControlEvents:UIControlEventTouchUpInside];
+    
+    self.rightLineView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2, rightButton.frame.size.height - 3, rightButton.frame.size.width, 3)];
+    self.rightLineView.backgroundColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    [leftButton addSubview:self.rightLineView];
+    
+    self.rightLineView.hidden = !((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread;
+    self.leftLineView.hidden = ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread;
+    
+    //[self createMenuButton];
+    //[self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
+    //[self setupLogoImageWithTarget:self andSelector:@selector(logoTapped)];
+}
+
+- (void)showAllMessages {
+    self.leftLineView.hidden = NO;
+    self.rightLineView.hidden = YES;
+    ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = NO;
+    [self.entouragesDataSource loadData];
+}
+
+- (void)showUnread {
+    self.leftLineView.hidden = YES;
+    self.rightLineView.hidden = NO;
+    ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = YES;
+    [self.entouragesDataSource loadData];
 }
 
 @end

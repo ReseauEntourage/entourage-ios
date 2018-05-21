@@ -12,6 +12,7 @@
 + (NSString*)aboutUrlString;
 + (NSString *)welcomeDescription;
 + (UIImage*)welcomeLogo;
++ (UIImage*)applicationLogo;
 + (NSString *)userProfileNameDescription;
 + (NSString *)userProfileEmailDescription;
 + (NSString *)notificationsRightsDescription;
@@ -21,4 +22,6 @@
 + (NSString *)noMapFeedsDescription;
 + (NSString *)extendSearchParameterDescription;
 + (NSString *)extendMapSearchParameterDescription;
++ (UIColor*)leftTagColor:(OTUser*)user;
++ (UIColor*)rightTagColor:(OTUser*)user;
 @end

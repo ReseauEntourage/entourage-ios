@@ -413,13 +413,14 @@
     self.toursMapDelegate.isActive = NO;
     self.guideMapDelegate.isActive = YES;
     self.backToNewsFeedsButton.hidden = NO;
+    
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
     if (self.guideMapDelegate) [self.mapDelegateProxy.delegates addObject:self.guideMapDelegate];
 
     [self clearMap];
     [self showToursMap];
     [self reloadPois];
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [OTAppState switchMapToSolidarityGuide];
 }
 
 - (IBAction)goToTourOptions:(id)sender {

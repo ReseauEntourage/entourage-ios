@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="MH3-uF-0WG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="MH3-uF-0WG">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -110,37 +110,15 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6O-su-Iph">
-                                <rect key="frame" x="-4" y="438" width="328" height="42"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G53-uu-geo">
-                                        <rect key="frame" x="15" y="11" width="20" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="epO-6a-JDX"/>
-                                            <constraint firstAttribute="width" constant="20" id="tOj-Cp-lvk"/>
-                                        </constraints>
-                                        <state key="normal" image="filtersBlue"/>
-                                        <connections>
-                                            <segue destination="Tys-aE-4fn" kind="modal" identifier="FiltersSegue" id="yA9-tW-pDD"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="3Zk-dT-2bQ"/>
-                                    <constraint firstItem="G53-uu-geo" firstAttribute="centerY" secondItem="N6O-su-Iph" secondAttribute="centerY" id="7Hn-5h-1lg"/>
-                                    <constraint firstItem="G53-uu-geo" firstAttribute="leading" secondItem="N6O-su-Iph" secondAttribute="leading" constant="15" id="fM3-tg-rDs"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vbB-1w-yBt">
-                                <rect key="frame" x="0.0" y="437" width="320" height="1"/>
+                                <rect key="frame" x="0.0" y="479" width="320" height="1"/>
                                 <color key="backgroundColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="rtD-kN-tFC"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="140" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="sIZ-hk-qpn">
-                                <rect key="frame" x="-4" y="135" width="328" height="302"/>
+                                <rect key="frame" x="-4" y="135" width="328" height="344"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -334,16 +312,13 @@
                             <constraint firstItem="vbB-1w-yBt" firstAttribute="top" secondItem="sIZ-hk-qpn" secondAttribute="bottom" id="4Ba-8G-hBR"/>
                             <constraint firstItem="HbN-lj-jrZ" firstAttribute="top" secondItem="hCo-dZ-Q9I" secondAttribute="bottom" id="7uJ-8m-OYp"/>
                             <constraint firstItem="vbB-1w-yBt" firstAttribute="leading" secondItem="1km-6s-G4Q" secondAttribute="leading" id="Epa-9F-ofF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="N6O-su-Iph" secondAttribute="trailing" constant="-20" id="Jms-Ln-EEN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sIZ-hk-qpn" secondAttribute="trailing" constant="-20" id="KbX-Lb-UYc"/>
-                            <constraint firstItem="N6O-su-Iph" firstAttribute="top" secondItem="vbB-1w-yBt" secondAttribute="bottom" id="Qvg-zR-Xbg"/>
                             <constraint firstAttribute="trailing" secondItem="HbN-lj-jrZ" secondAttribute="trailing" id="RKp-oq-a79"/>
                             <constraint firstItem="sIZ-hk-qpn" firstAttribute="leading" secondItem="1km-6s-G4Q" secondAttribute="leadingMargin" constant="-20" id="VWb-9s-plB"/>
                             <constraint firstItem="sIZ-hk-qpn" firstAttribute="top" secondItem="HbN-lj-jrZ" secondAttribute="bottom" id="Vty-Dp-6el"/>
-                            <constraint firstItem="Ph8-ss-CHi" firstAttribute="top" secondItem="N6O-su-Iph" secondAttribute="bottom" id="ZPp-Ia-0Ps"/>
-                            <constraint firstItem="N6O-su-Iph" firstAttribute="leading" secondItem="1km-6s-G4Q" secondAttribute="leadingMargin" constant="-20" id="ZhN-jN-Oqi"/>
                             <constraint firstItem="HbN-lj-jrZ" firstAttribute="leading" secondItem="1km-6s-G4Q" secondAttribute="leading" id="gSf-Tg-3kp"/>
                             <constraint firstAttribute="trailing" secondItem="vbB-1w-yBt" secondAttribute="trailing" id="hsy-2c-KBB"/>
+                            <constraint firstItem="Ph8-ss-CHi" firstAttribute="top" secondItem="vbB-1w-yBt" secondAttribute="bottom" id="iX1-UK-wmf"/>
                             <constraint firstItem="Ph8-ss-CHi" firstAttribute="top" secondItem="0qG-8g-Me3" secondAttribute="bottom" constant="12" id="rtg-s4-Dgt"/>
                         </constraints>
                     </view>
@@ -822,9 +797,8 @@
     </scenes>
     <resources>
         <image name="closeShadow" width="62" height="62"/>
-        <image name="create" width="62" height="62"/>
+        <image name="create" width="64" height="64"/>
         <image name="createMaraude" width="48" height="48"/>
-        <image name="filtersBlue" width="22" height="22"/>
         <image name="heart" width="48" height="48"/>
         <image name="invitationSquare" width="56" height="56"/>
         <image name="report" width="48" height="48"/>

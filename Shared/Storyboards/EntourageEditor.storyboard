@@ -711,7 +711,7 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
         <!--Navigation Controller-->
         <scene sceneID="ZVz-al-EeJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QW3-Z2-faC" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="QW3-Z2-faC" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hTu-zA-fKa">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>

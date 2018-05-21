@@ -1156,9 +1156,12 @@
 		A2A2BC9A209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
 		A2A2BC9B209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
 		A2A2BC9C209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
-		A2C2F36A20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
-		A2C2F36B20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
-		A2C2F36C20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
+		A2A777EE20AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
+		A2A777EF20AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
+		A2A777F020AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
+		A2A777F220B2B4B8006D2772 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A777F120B2B4B8006D2772 /* AppConfigurations.plist */; };
+		A2A777F320B2B4B8006D2772 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A777F120B2B4B8006D2772 /* AppConfigurations.plist */; };
+		A2A777F420B2B4B8006D2772 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A777F120B2B4B8006D2772 /* AppConfigurations.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
 		A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
 		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
@@ -1946,7 +1949,8 @@
 		A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPfpMenuViewController.swift; sourceTree = "<group>"; };
 		A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLogoutViewCell.swift; sourceTree = "<group>"; };
 		A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = SOURCE_ROOT; };
-		A2C2F36920AABFDA001762DA /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
+		A2A777ED20AF06EC006D2772 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		A2A777F120B2B4B8006D2772 /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Appearance.h"; sourceTree = "<group>"; };
 		A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Appearance.m"; sourceTree = "<group>"; };
@@ -3339,6 +3343,7 @@
 		A202EAB42085D2C70058F32C /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				A2A777EC20AF06C0006D2772 /* Extensions */,
 				A202EAB62085D2C70058F32C /* NSAttributedString+OTBuilder.h */,
 				A202EABE2085D2C70058F32C /* NSAttributedString+OTBuilder.m */,
 				A202EABF2085D2C70058F32C /* NSDate+OTFormatter.h */,
@@ -3437,10 +3442,10 @@
 		A24199B52084F87100BC7466 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A2C2F36920AABFDA001762DA /* AppConfigurations.plist */,
 				A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */,
 				A202E80A2085D0FE0058F32C /* OTAppDelegate.h */,
 				A202E8092085D0FD0058F32C /* OTAppDelegate.m */,
+				A2A777F120B2B4B8006D2772 /* AppConfigurations.plist */,
 				A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */,
 				A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */,
 				A296B8EB20871FD800F6AFBD /* main.m */,
@@ -3547,6 +3552,14 @@
 				A2FCF5C820AD502F004604AC /* PFPAboutView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A2A777EC20AF06C0006D2772 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A2A777ED20AF06EC006D2772 /* String+Localization.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3694,7 +3707,6 @@
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
 				A21D65AA2085FDAA00EF8E0E /* Onboarding.storyboard in Resources */,
 				A21D64AE2085E8B400EF8E0E /* Paris.gpx in Resources */,
-				A2C2F36A20AABFDA001762DA /* AppConfigurations.plist in Resources */,
 				A21D65AE2085FDAA00EF8E0E /* MyEntourages.storyboard in Resources */,
 				A202E7EF2085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				A202E7E52085CFC40058F32C /* SF-UI-Text-UltrathinItalic.otf in Resources */,
@@ -3742,6 +3754,7 @@
 				A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
 				A21D65B62085FDAA00EF8E0E /* Popup.storyboard in Resources */,
 				A21D65BE2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard in Resources */,
+				A2A777F220B2B4B8006D2772 /* AppConfigurations.plist in Resources */,
 				A202E7D52085CFC40058F32C /* Localizable.strings in Resources */,
 				A202E7D92085CFC40058F32C /* categoryJson.json in Resources */,
 				A21D64AA2085E8B400EF8E0E /* Platinia.gpx in Resources */,
@@ -3768,7 +3781,7 @@
 				A202E7E62085CFC40058F32C /* SF-UI-Text-UltrathinItalic.otf in Resources */,
 				A202E7D02085CFC40058F32C /* logo_black.png in Resources */,
 				A202E7F02085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
-				A2C2F36C20AABFDA001762DA /* AppConfigurations.plist in Resources */,
+				A2A777F420B2B4B8006D2772 /* AppConfigurations.plist in Resources */,
 				A202E7EC2085CFC40058F32C /* SF-UI-Text-Light.otf in Resources */,
 				A202E7EA2085CFC40058F32C /* SF-UI-Text-BoldItalic.otf in Resources */,
 				A296B90F2087218700F6AFBD /* Entourage.xcassets in Resources */,
@@ -3802,7 +3815,6 @@
 				A296B8A220871CFC00F6AFBD /* SF-UI-Text-Bold.otf in Resources */,
 				A2FCF5CA20AD5030004604AC /* PFPAboutView.xib in Resources */,
 				A296B8A320871CFC00F6AFBD /* MapOptions.storyboard in Resources */,
-				A2C2F36B20AABFDA001762DA /* AppConfigurations.plist in Resources */,
 				A296B8A420871CFC00F6AFBD /* LocationSelection.storyboard in Resources */,
 				A296B8A520871CFC00F6AFBD /* TourConfirmation.storyboard in Resources */,
 				A296B8A620871CFC00F6AFBD /* QuitFeedItem.storyboard in Resources */,
@@ -3857,6 +3869,7 @@
 				A296B8D720871CFC00F6AFBD /* categoryJson.json in Resources */,
 				A2A2BC8A2099E0C500AA4FC8 /* Pfp-Localizable.strings in Resources */,
 				A296B8D820871CFC00F6AFBD /* Platinia.gpx in Resources */,
+				A2A777F320B2B4B8006D2772 /* AppConfigurations.plist in Resources */,
 				A296B8D920871CFC00F6AFBD /* categories.json in Resources */,
 				A296B8DA20871CFC00F6AFBD /* Nowhere.gpx in Resources */,
 				A296B92D208A08E800F6AFBD /* PfpLaunchScreen.storyboard in Resources */,
@@ -4261,6 +4274,7 @@
 				A202EACF2085D2C70058F32C /* OTNewsFeedsFilter.m in Sources */,
 				A202ECE92085D2C80058F32C /* OTMessagingService.m in Sources */,
 				A202EC272085D2C80058F32C /* NSBundle+entourage.m in Sources */,
+				A2A777EE20AF06EC006D2772 /* String+Localization.swift in Sources */,
 				9647D516208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */,
 				A202ECE52085D2C80058F32C /* OTUnreadMessagesService.m in Sources */,
 				A202ECA32085D2C80058F32C /* OTMembersDataSource.m in Sources */,
@@ -4696,6 +4710,7 @@
 				A202EC322085D2C80058F32C /* OTMapDelegateProxyBehavior.m in Sources */,
 				A202EC142085D2C80058F32C /* OTSafariService.m in Sources */,
 				A202EC602085D2C80058F32C /* OTEntourageDisclaimerBehavior.m in Sources */,
+				A2A777F020AF06EC006D2772 /* String+Localization.swift in Sources */,
 				A202EB602085D2C80058F32C /* OTTutorial4ViewController.m in Sources */,
 				A202EBC02085D2C80058F32C /* OTSolidarityGuideFiltersViewController.m in Sources */,
 				A202EC082085D2C80058F32C /* OTInvitationsService.m in Sources */,
@@ -5083,6 +5098,7 @@
 				A296B87920871CFC00F6AFBD /* OTCloseKeyboardOnTapBehavior.m in Sources */,
 				A296B87A20871CFC00F6AFBD /* OTMyFeedMessage.m in Sources */,
 				A296B87B20871CFC00F6AFBD /* OTTapEntourageBehavior.m in Sources */,
+				A2A777EF20AF06EC006D2772 /* String+Localization.swift in Sources */,
 				A296B87C20871CFC00F6AFBD /* OTCreateMeetingViewController.m in Sources */,
 				A296B87D20871CFC00F6AFBD /* OTFeedItemFilters.m in Sources */,
 				A296B87E20871CFC00F6AFBD /* OTEncounter.m in Sources */,

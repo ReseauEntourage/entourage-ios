@@ -41,7 +41,7 @@
 }
 
 - (void)setupToolbarButtons {
-    [self setupCloseModal];
+    [self setupCloseModalWithTintColor];
 
     self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     
@@ -49,7 +49,7 @@
                                                         withTarget:self
                                                          andAction:@selector(doValidate:)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[UIColor appOrangeColor]];
+                                                           colored:[ApplicationTheme shared].backgroundThemeColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
 }
 

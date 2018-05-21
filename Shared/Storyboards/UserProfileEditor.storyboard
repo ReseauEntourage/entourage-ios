@@ -61,7 +61,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="134.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K2C-Ei-5Nm">
+                                                <view tag="20" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K2C-Ei-5Nm">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="73"/>
                                                     <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>

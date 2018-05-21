@@ -122,6 +122,12 @@
     [UIStoryboard showStartup];
 }
 
++ (void)switchMapToSolidarityGuide {
+    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
+    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
+    tabBarController.selectedIndex = 0;
+}
+
 + (void)continueFromStartupScreen
 {
     OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];

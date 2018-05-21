@@ -480,6 +480,14 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
++ (BOOL)supportsProfileEditing {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 + (BOOL)isGeolocationMandatory {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;

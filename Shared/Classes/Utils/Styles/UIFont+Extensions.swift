@@ -20,5 +20,6 @@ extension UIFont {
     enum SFUITextFontType: String {
         case bold = "-Bold"
         case regular = "-Regular"
+        case semibold = "-Semibold"
     }
 }
