@@ -65,7 +65,6 @@
                                                  name:kUpdateBadgeCountNotification
                                                object:nil];
     
-    self.navigationItem.title = OTLocalizedString(@"myEntouragesTitle").uppercaseString;
     [self loadInvitations];
     [self.entouragesDataSource loadData];
 }
@@ -76,7 +75,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -156,14 +154,16 @@
     leftButton.titleLabel.font = [UIFont fontWithName:@"SFUIText-Medium" size:14];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = leftBarButton;
+    [leftButton setTitleColor:[ApplicationTheme shared].secondaryNavigationBarTintColor forState:UIControlStateNormal];
     
     self.leftLineView = [[UIView alloc] initWithFrame:CGRectMake(-20, leftButton.frame.size.height - 3, leftButton.frame.size.width, 3)];
-    self.leftLineView.backgroundColor = [UIColor whiteColor];
+    self.leftLineView.backgroundColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [leftButton addSubview:self.leftLineView];
     
     UIButton *rightButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, self.navigationController.navigationBar.frame.size.width / 2 , self.navigationController.navigationBar.frame.size.height)];
     [rightButton setTitle: OTLocalizedString(@"unread_messages_nav_title").uppercaseString forState: UIControlStateNormal];
     rightButton.titleLabel.font = [UIFont fontWithName:@"SFUIText-Medium" size:14];
+    [rightButton setTitleColor:[ApplicationTheme shared].secondaryNavigationBarTintColor forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = rightBarButton;
     [rightButton addTarget:self
@@ -171,7 +171,7 @@
    forControlEvents:UIControlEventTouchUpInside];
     
     self.rightLineView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2, rightButton.frame.size.height - 3, rightButton.frame.size.width, 3)];
-    self.rightLineView.backgroundColor = [UIColor whiteColor];
+    self.rightLineView.backgroundColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [leftButton addSubview:self.rightLineView];
     
     self.rightLineView.hidden = !((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread;

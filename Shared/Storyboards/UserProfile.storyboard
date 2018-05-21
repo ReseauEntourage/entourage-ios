@@ -107,7 +107,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Emw-8X-gin">
-                                                    <rect key="frame" x="25" y="209" width="333" height="55.5"/>
+                                                    <rect key="frame" x="25" y="199" width="333" height="65.5"/>
                                                     <string key="text">Je vis dans le IXème et souhaite mettre mes quelques compétences à la disposition du réseau Entourage. Humaniste de nature, je me sens proche de chaque personne, avec ou sans abri !</string>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="13"/>
                                                     <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
@@ -202,7 +202,7 @@
                                                 <constraint firstItem="qs8-jY-ziV" firstAttribute="bottom" secondItem="Qfk-EF-iCu" secondAttribute="bottom" constant="4" id="seA-BO-lEE"/>
                                                 <constraint firstItem="Qfk-EF-iCu" firstAttribute="centerX" secondItem="4j2-AX-ByI" secondAttribute="centerX" id="soP-Nh-WNq"/>
                                                 <constraint firstItem="UMh-zc-6Hy" firstAttribute="top" secondItem="SYZ-Vm-z0D" secondAttribute="top" id="wLd-xZ-ujW"/>
-                                                <constraint firstItem="Emw-8X-gin" firstAttribute="top" secondItem="QC6-AW-9kS" secondAttribute="bottom" constant="46" id="xDD-rf-S83"/>
+                                                <constraint firstItem="Emw-8X-gin" firstAttribute="top" secondItem="QC6-AW-9kS" secondAttribute="bottom" constant="36" id="xDD-rf-S83"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

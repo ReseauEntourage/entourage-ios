@@ -130,7 +130,7 @@
 
 + (UIColor*)leftTagColor:(OTUser*)user {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return (user.leftTag) ? [UIColor redColor] : [UIColor clearColor];
+        return (user.leftTag) ? [UIColor pfpPurpleColor] : [UIColor clearColor];
     }
     
     return [UIColor clearColor];
@@ -138,7 +138,7 @@
 
 + (UIColor*)rightTagColor:(OTUser*)user {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return (user.rightTag) ? [UIColor greenColor] : [UIColor clearColor];
+        return (user.rightTag) ? [UIColor pfpGreenColor] : [UIColor clearColor];
     }
     
     return [UIColor clearColor];
