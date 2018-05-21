@@ -92,7 +92,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
    
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
     [self createBackFrontMenuButton];
     [self.modifyLabel underline];
     self.tableView.rowHeight = UITableViewAutomaticDimension;

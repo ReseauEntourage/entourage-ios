@@ -457,9 +457,7 @@
     [self.mapView addGestureRecognizer:longPressMapGesture];
 }
 
-- (void)configureNavigationBar {
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
-    
+- (void)configureNavigationBar {    
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"filter_nav_title").uppercaseString style:UIBarButtonItemStylePlain target:self action:@selector(showFilters)];
     self.navigationItem.leftBarButtonItem = leftButton;
     
