@@ -29,8 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
+
     [self.navigationController presentTransparentNavigationBar];
     
     self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;

@@ -31,6 +31,10 @@ final class OTPfpMenuViewController: UIViewController {
         setupUI()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -39,6 +43,7 @@ final class OTPfpMenuViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,18 +81,21 @@ final class OTPfpMenuViewController: UIViewController {
         let contactItem = OTMenuItem(title: "Contacter l'équipe Voisin-Age", iconName:"question_chat")
         let howIsUsedItem = OTMenuItem(title: "Mode d'emploi de l'application", iconName: "howIsUsed")
         let ethicalChartItem = OTMenuItem(title: "Charte éthique de Voisin-Age", iconName: "ethicalChart")
-        let logoutItem = OTMenuItem(title: String.localized("menu_disconnect_title"), iconName: "")
         let aboutItem = OTMenuItem(title: String.localized("aboutTitle"), iconName:"contact")
+        let donnationItem = OTMenuItem(title: String.localized("menu_donnation"), iconName:"star")
+        let logoutItem = OTMenuItem(title: String.localized("menu_disconnect_title"), iconName: "")
         
         guard let item1 = contactItem,
             let item2 = howIsUsedItem,
             let item3 = ethicalChartItem,
             let item4 = aboutItem,
-            let item5 = logoutItem else {
+            let item5 = logoutItem,
+            let item6 = donnationItem else {
             return
         }
         
         menuItems.append(item1)
+        menuItems.append(item6)
         menuItems.append(item2)
         menuItems.append(item3)
         menuItems.append(item4)
@@ -131,14 +139,18 @@ extension OTPfpMenuViewController: UITableViewDelegate {
             contactPFP()
         }
         else if indexPath.row == 1 {
-            let url = URL(string: "http://bit.ly/charteethiquevoisin-age")
+            let url = URL(string: "https://entourage-asso.typeform.com/to/Imi9sX?user_id="+"\(self.currentUser?.sid!.intValue ?? 0)")
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
         }
         else if indexPath.row == 2 {
-            let url = URL(string: "http://bit.ly/faqapplivoisin-age")
+            let url = URL(string: "http://bit.ly/charteethiquevoisin-age")
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
         }
         else if indexPath.row == 3 {
+            let url = URL(string: "http://bit.ly/faqapplivoisin-age")
+            OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
+        }
+        else if indexPath.row == 4 {
             self.loadAbout()
         }
         else {
