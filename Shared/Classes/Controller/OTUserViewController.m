@@ -269,9 +269,16 @@ typedef NS_ENUM(NSInteger) {
 
 #define SUMMARY_AVATAR 1
 #define SUMMARY_AVATAR_SHADOW 10
+
+#define SUMMARY_RIGHT_CONTAINER_TAG 11
+#define SUMMARY_RIGHT_TAG 12
+#define SUMMARY_LEFT_CONTAINER_TAG 13
+#define SUMMARY_LEFT_TAG 14
+
 #define SUMMARY_NAME 2
 #define SUMMARY_DESCRIPTION 3
 #define SUMMARY_TITLE 6
+#define HEADER_BG_VIEW 20
 
 #define VERIFICATION_LABEL 1
 #define VERIFICATION_STATUS 2
@@ -302,7 +309,19 @@ typedef NS_ENUM(NSInteger) {
     UILabel *aboutMeLabel = [cell viewWithTag:SUMMARY_DESCRIPTION];
     aboutMeLabel.text = self.user.about;
     
-    UIView *headerBgView = [cell viewWithTag:20];
+    UIView *rightTagContainer = [cell viewWithTag:SUMMARY_RIGHT_CONTAINER_TAG];
+    rightTagContainer.backgroundColor = [OTAppAppearance rightTagColor:self.user];
+    
+    UIView *leftTagContainer = [cell viewWithTag:SUMMARY_LEFT_CONTAINER_TAG];
+    leftTagContainer.backgroundColor = [OTAppAppearance leftTagColor:self.user];
+    
+    UILabel *rightTagLabel = [cell viewWithTag:SUMMARY_RIGHT_TAG];
+    rightTagLabel.text = self.user.rightTag;
+    
+    UILabel *leftTagLabel = [cell viewWithTag:SUMMARY_LEFT_TAG];
+    leftTagLabel.text = self.user.leftTag;
+    
+    UIView *headerBgView = [cell viewWithTag:HEADER_BG_VIEW];
     headerBgView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 

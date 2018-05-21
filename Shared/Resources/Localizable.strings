@@ -390,6 +390,12 @@ vous signalez cette personne :";
 "mail_send_failure" = "Le mail n’a pu être envoyé";
 "mail_signal_subject" = "Signalement d’un activité qui pose problème: \"%@\" créé par %@";
 
+// Tags
+"not_validated" = "En attente";
+"visitor" = "Voisineur";
+"visited" = "Voisiné";
+"coordinator" = "Animateur";
+
 // associations
 "select_association_title" = "SOUTENIR";
 "update_association_error" = "L’association soutenue n’a pas pu être mise à jour";

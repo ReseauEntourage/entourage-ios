@@ -25,56 +25,61 @@ NSString *const kKeyEntourageCount = @"entourage_count";
 NSString *const kKeyEncounterCount = @"encounter_count";
 NSString *const kKeyOrganization = @"organization";
 NSString *const kKeyPartner = @"partner";
+NSString *const kKeyRoles = @"roles";
 
 @implementation OTUser
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
-  self = [super init];
-  if (self)
-  {
-    _sid = [dictionary numberForKey:kKeySid];
-    _type = [dictionary stringForKey:kKeyType];
-    _email = [dictionary stringForKey:kKeyEmail];
-    _avatarURL = [dictionary stringForKey:kKeyAvatarURL];
-    _firstName = [dictionary stringForKey:kWSKeyFirstname];
-    _lastName = [dictionary stringForKey:kWSKeyLastname];
-    _about = [dictionary stringForKey:kWSKeyAboutMe];
-    _displayName = [dictionary stringForKey:kKeyDisplayName];
-    _phone = [dictionary stringForKey:kKeyUserPhone];
-    _token = [dictionary stringForKey:kKeyToken];
-    _tourCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyTourCount defaultValue:0];
-    _entourageCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEntourageCount defaultValue:0];
-    _encounterCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEncounterCount];
-    _organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
-    _partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kKeyPartner]];
-  }
-  return self;
+    self = [super init];
+    if (self)
+    {
+        _sid = [dictionary numberForKey:kKeySid];
+        _type = [dictionary stringForKey:kKeyType];
+        _email = [dictionary stringForKey:kKeyEmail];
+        _avatarURL = [dictionary stringForKey:kKeyAvatarURL];
+        _firstName = [dictionary stringForKey:kWSKeyFirstname];
+        _lastName = [dictionary stringForKey:kWSKeyLastname];
+        _about = [dictionary stringForKey:kWSKeyAboutMe];
+        _displayName = [dictionary stringForKey:kKeyDisplayName];
+        _phone = [dictionary stringForKey:kKeyUserPhone];
+        _token = [dictionary stringForKey:kKeyToken];
+        _tourCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyTourCount defaultValue:0];
+        _entourageCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEntourageCount defaultValue:0];
+        _encounterCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEncounterCount];
+        _organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
+        _partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kKeyPartner]];
+        
+        if ([[dictionary allKeys] containsObject:kKeyRoles]) {
+            _roles = [dictionary arrayWithObjectsOfClass:[NSString class] forKey:kKeyRoles];
+        }
+    }
+    return self;
 }
 
 - (NSDictionary *)dictionaryForWebservice
 {
-  NSMutableDictionary *dictionary = [NSMutableDictionary new];
-  if (self.firstName != nil) {
-    [dictionary setObject:self.firstName forKey:kWSKeyFirstname];
-  }
-  if (self.lastName != nil) {
-    [dictionary setObject:self.lastName forKey:kWSKeyLastname];
-  }
+    NSMutableDictionary *dictionary = [NSMutableDictionary new];
+    if (self.firstName != nil) {
+        [dictionary setObject:self.firstName forKey:kWSKeyFirstname];
+    }
+    if (self.lastName != nil) {
+        [dictionary setObject:self.lastName forKey:kWSKeyLastname];
+    }
     if(self.about != nil) {
         [dictionary setObject:self.about forKey:kWSKeyAboutMe];
     }
-  if (self.email != nil && self.email.length > 0) {
-    [dictionary setObject:self.email forKey:kKeyEmail];
-  }
-  if (self.password != nil) {
-    [dictionary setObject:self.password forKey:kKeyPassword];
-  }
-  if(self.avatarKey != nil) {
-    [dictionary setObject:self.avatarKey forKey:kKeyAvatarKey];
-  }
-
-  return dictionary;
+    if (self.email != nil && self.email.length > 0) {
+        [dictionary setObject:self.email forKey:kKeyEmail];
+    }
+    if (self.password != nil) {
+        [dictionary setObject:self.password forKey:kKeyPassword];
+    }
+    if(self.avatarKey != nil) {
+        [dictionary setObject:self.avatarKey forKey:kKeyAvatarKey];
+    }
+    
+    return dictionary;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
@@ -94,29 +99,31 @@ NSString *const kKeyPartner = @"partner";
     [encoder encodeObject:self.encounterCount forKey:kKeyEncounterCount];
     [encoder encodeObject:self.organization forKey:kKeyOrganization];
     [encoder encodeObject:self.partner forKey:kKeyPartner];
+    [encoder encodeObject:self.roles forKey:kKeyRoles];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
-  if ((self = [super init]))
-  {
-    self.sid = [decoder decodeObjectForKey:kKeySid];
-    self.type = [decoder decodeObjectForKey:kKeyType];
-    self.email = [decoder decodeObjectForKey:kKeyEmail];
-    self.avatarURL = [decoder decodeObjectForKey:kKeyAvatarURL];
-    self.firstName = [decoder decodeObjectForKey:kWSKeyFirstname];
-    self.lastName = [decoder decodeObjectForKey:kWSKeyLastname];
-    self.about = [decoder decodeObjectForKey:kWSKeyAboutMe];
-    self.displayName = [decoder decodeObjectForKey:kKeyDisplayName];
-    self.phone = [decoder decodeObjectForKey:kKeyUserPhone];
-    self.token = [decoder decodeObjectForKey:kKeyToken];
-    self.tourCount = [decoder decodeObjectForKey:kKeyTourCount];
-    self.entourageCount = [decoder decodeObjectForKey:kKeyEntourageCount];
-    self.encounterCount = [decoder decodeObjectForKey:kKeyEncounterCount];
-    self.organization = [decoder decodeObjectForKey:kKeyOrganization];
-    self.partner = [decoder decodeObjectForKey:kKeyPartner];
-  }
-  return self;
+    if ((self = [super init]))
+    {
+        self.sid = [decoder decodeObjectForKey:kKeySid];
+        self.type = [decoder decodeObjectForKey:kKeyType];
+        self.email = [decoder decodeObjectForKey:kKeyEmail];
+        self.avatarURL = [decoder decodeObjectForKey:kKeyAvatarURL];
+        self.firstName = [decoder decodeObjectForKey:kWSKeyFirstname];
+        self.lastName = [decoder decodeObjectForKey:kWSKeyLastname];
+        self.about = [decoder decodeObjectForKey:kWSKeyAboutMe];
+        self.displayName = [decoder decodeObjectForKey:kKeyDisplayName];
+        self.phone = [decoder decodeObjectForKey:kKeyUserPhone];
+        self.token = [decoder decodeObjectForKey:kKeyToken];
+        self.tourCount = [decoder decodeObjectForKey:kKeyTourCount];
+        self.entourageCount = [decoder decodeObjectForKey:kKeyEntourageCount];
+        self.encounterCount = [decoder decodeObjectForKey:kKeyEncounterCount];
+        self.organization = [decoder decodeObjectForKey:kKeyOrganization];
+        self.partner = [decoder decodeObjectForKey:kKeyPartner];
+        self.roles = [decoder decodeObjectForKey:kKeyRoles];
+    }
+    return self;
 }
 
 #pragma mark - Helper functions
@@ -124,6 +131,27 @@ NSString *const kKeyPartner = @"partner";
 - (BOOL)isPro
 {
     return [USER_TYPE_PRO isEqualToString:self.type];
+}
+
+- (NSString*)leftTag {
+    
+    if (self.roles) {
+        NSString *key = @"not_validated";
+        if ([self.roles containsObject:key]) {
+            return OTLocalizedString(key);
+        }
+    }
+    return nil;
+}
+
+- (NSString*)rightTag {
+    if (self.roles) {
+        NSString *key = @"coordinator";
+        if ([self.roles containsObject:key]) {
+            return OTLocalizedString(key);
+        }
+    }
+    return nil;
 }
 
 @end

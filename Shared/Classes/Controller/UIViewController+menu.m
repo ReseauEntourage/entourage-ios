@@ -131,7 +131,7 @@
 }
 
 - (void)setupLogoImageWithTarget:(id)target andSelector:(SEL)action {
-    UIImage *image = [ApplicationTheme applicationLogo];
+    UIImage *image = [OTAppAppearance applicationLogo];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0,0,image.size.width, image.size.height);
     [button setImage:image forState:UIControlStateNormal];

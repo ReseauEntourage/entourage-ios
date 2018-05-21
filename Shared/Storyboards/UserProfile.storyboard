@@ -16,6 +16,12 @@
         <array key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
         </array>
+        <array key="SF-UI-Text-Regular.otf">
+            <string>SFUIText-Regular</string>
+        </array>
+        <array key="SF-UI-Text-Semibold.otf">
+            <string>SFUIText-Semibold</string>
+        </array>
     </customFonts>
     <scenes>
         <!--AssociationDetails-->
@@ -100,40 +106,103 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chip Do" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igZ-LQ-DoQ">
-                                                    <rect key="frame" x="15" y="140" width="353" height="26"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="26" id="Gjt-la-JXW"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                                    <color key="textColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Emw-8X-gin">
-                                                    <rect key="frame" x="25" y="190" width="333" height="74.5"/>
+                                                    <rect key="frame" x="25" y="209" width="333" height="55.5"/>
                                                     <string key="text">Je vis dans le IXème et souhaite mettre mes quelques compétences à la disposition du réseau Entourage. Humaniste de nature, je me sens proche de chaque personne, avec ou sans abri !</string>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="13"/>
                                                     <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QC6-AW-9kS" userLabel="nameAndTagsContainer">
+                                                    <rect key="frame" x="112" y="137" width="159" height="26"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chip Do" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igZ-LQ-DoQ">
+                                                            <rect key="frame" x="42.5" y="0.0" width="68" height="26"/>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
+                                                            <color key="textColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l15-Lf-r4O" userLabel="rightTagContainer">
+                                                            <rect key="frame" x="115.5" y="0.0" width="43" height="26"/>
+                                                            <subviews>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="12" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tag 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfj-qy-UH8">
+                                                                    <rect key="frame" x="4" y="4" width="35" height="17"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="14"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="lfj-qy-UH8" firstAttribute="leading" secondItem="l15-Lf-r4O" secondAttribute="leading" constant="4" id="0lY-yL-j4Y"/>
+                                                                <constraint firstAttribute="bottom" secondItem="lfj-qy-UH8" secondAttribute="bottom" constant="5" id="VcZ-T8-r1H"/>
+                                                                <constraint firstAttribute="trailing" secondItem="lfj-qy-UH8" secondAttribute="trailing" constant="4" id="WHF-Tu-Pxb"/>
+                                                                <constraint firstItem="lfj-qy-UH8" firstAttribute="top" secondItem="l15-Lf-r4O" secondAttribute="top" constant="4" id="ZUJ-sf-5XQ"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="5"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                        <view tag="13" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lv2-8o-VVD" userLabel="leftTagContainer">
+                                                            <rect key="frame" x="0.0" y="0.0" width="37.5" height="26"/>
+                                                            <subviews>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="14" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tag1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAQ-bB-rQJ">
+                                                                    <rect key="frame" x="4" y="4" width="29.5" height="17"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="14"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="kAQ-bB-rQJ" secondAttribute="trailing" constant="4" id="OhC-Ia-ZQR"/>
+                                                                <constraint firstAttribute="bottom" secondItem="kAQ-bB-rQJ" secondAttribute="bottom" constant="5" id="ain-Qb-8IG"/>
+                                                                <constraint firstItem="kAQ-bB-rQJ" firstAttribute="top" secondItem="lv2-8o-VVD" secondAttribute="top" constant="4" id="eyO-qN-xup"/>
+                                                                <constraint firstItem="kAQ-bB-rQJ" firstAttribute="leading" secondItem="lv2-8o-VVD" secondAttribute="leading" constant="4" id="spk-05-d06"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="5"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="l15-Lf-r4O" firstAttribute="leading" secondItem="igZ-LQ-DoQ" secondAttribute="trailing" constant="5" id="EGZ-GD-e38"/>
+                                                        <constraint firstItem="lv2-8o-VVD" firstAttribute="top" secondItem="QC6-AW-9kS" secondAttribute="top" id="Idq-9D-ymF"/>
+                                                        <constraint firstAttribute="trailing" secondItem="l15-Lf-r4O" secondAttribute="trailing" id="Js7-8q-Tt5"/>
+                                                        <constraint firstAttribute="height" constant="26" id="Rhc-7O-Nmu"/>
+                                                        <constraint firstItem="lv2-8o-VVD" firstAttribute="leading" secondItem="QC6-AW-9kS" secondAttribute="leading" id="YWP-4z-Kno"/>
+                                                        <constraint firstItem="igZ-LQ-DoQ" firstAttribute="top" secondItem="QC6-AW-9kS" secondAttribute="top" id="fMG-31-NX4"/>
+                                                        <constraint firstItem="l15-Lf-r4O" firstAttribute="top" secondItem="QC6-AW-9kS" secondAttribute="top" id="fqt-Ky-Amb"/>
+                                                        <constraint firstAttribute="bottom" secondItem="l15-Lf-r4O" secondAttribute="bottom" id="lZH-9g-4VD"/>
+                                                        <constraint firstAttribute="bottom" secondItem="igZ-LQ-DoQ" secondAttribute="bottom" id="qhX-B8-KnS"/>
+                                                        <constraint firstItem="igZ-LQ-DoQ" firstAttribute="leading" secondItem="lv2-8o-VVD" secondAttribute="trailing" constant="5" id="txQ-cx-oam"/>
+                                                        <constraint firstAttribute="bottom" secondItem="lv2-8o-VVD" secondAttribute="bottom" id="xeb-Ly-IEJ"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="UMh-zc-6Hy" firstAttribute="leading" secondItem="SYZ-Vm-z0D" secondAttribute="leading" id="0zt-va-cZG"/>
-                                                <constraint firstItem="Emw-8X-gin" firstAttribute="top" secondItem="igZ-LQ-DoQ" secondAttribute="bottom" constant="24" id="Ikb-3R-GDr"/>
+                                                <constraint firstItem="QC6-AW-9kS" firstAttribute="centerX" secondItem="SYZ-Vm-z0D" secondAttribute="centerX" id="Jve-QK-0EY"/>
                                                 <constraint firstItem="Qfk-EF-iCu" firstAttribute="centerX" secondItem="SYZ-Vm-z0D" secondAttribute="centerX" id="Vfb-AR-eRi"/>
                                                 <constraint firstItem="Qfk-EF-iCu" firstAttribute="centerY" secondItem="4j2-AX-ByI" secondAttribute="centerY" id="WzR-oU-VMN"/>
+                                                <constraint firstItem="QC6-AW-9kS" firstAttribute="top" secondItem="4j2-AX-ByI" secondAttribute="bottom" constant="10" id="Xb9-9O-Kic"/>
                                                 <constraint firstItem="Qfk-EF-iCu" firstAttribute="top" secondItem="SYZ-Vm-z0D" secondAttribute="topMargin" constant="14" id="bka-sW-qhB"/>
-                                                <constraint firstItem="igZ-LQ-DoQ" firstAttribute="leading" secondItem="SYZ-Vm-z0D" secondAttribute="leadingMargin" id="d57-Dg-7Ts"/>
-                                                <constraint firstItem="igZ-LQ-DoQ" firstAttribute="top" secondItem="Qfk-EF-iCu" secondAttribute="bottom" constant="13" id="dmD-Vf-bRR"/>
                                                 <constraint firstAttribute="trailing" secondItem="UMh-zc-6Hy" secondAttribute="trailing" id="fqe-dT-9zd"/>
                                                 <constraint firstAttribute="bottom" secondItem="Emw-8X-gin" secondAttribute="bottom" constant="35" id="iMb-N3-NdZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="Emw-8X-gin" secondAttribute="trailing" constant="25" id="ivh-Ge-ZrK"/>
                                                 <constraint firstItem="qs8-jY-ziV" firstAttribute="trailing" secondItem="Qfk-EF-iCu" secondAttribute="trailing" constant="4" id="kmW-uA-zAM"/>
-                                                <constraint firstItem="igZ-LQ-DoQ" firstAttribute="trailing" secondItem="SYZ-Vm-z0D" secondAttribute="trailingMargin" id="lYI-Dd-ppz"/>
                                                 <constraint firstItem="Emw-8X-gin" firstAttribute="leading" secondItem="SYZ-Vm-z0D" secondAttribute="leading" constant="25" id="ook-Wk-zNj"/>
                                                 <constraint firstItem="qs8-jY-ziV" firstAttribute="bottom" secondItem="Qfk-EF-iCu" secondAttribute="bottom" constant="4" id="seA-BO-lEE"/>
                                                 <constraint firstItem="Qfk-EF-iCu" firstAttribute="centerX" secondItem="4j2-AX-ByI" secondAttribute="centerX" id="soP-Nh-WNq"/>
                                                 <constraint firstItem="UMh-zc-6Hy" firstAttribute="top" secondItem="SYZ-Vm-z0D" secondAttribute="top" id="wLd-xZ-ujW"/>
+                                                <constraint firstItem="Emw-8X-gin" firstAttribute="top" secondItem="QC6-AW-9kS" secondAttribute="bottom" constant="46" id="xDD-rf-S83"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
