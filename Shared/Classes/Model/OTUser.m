@@ -27,6 +27,9 @@ NSString *const kKeyOrganization = @"organization";
 NSString *const kKeyPartner = @"partner";
 NSString *const kKeyRoles = @"roles";
 
+NSString *const kCoordinatorUserTag = @"coordinator";
+NSString *const kNotValidatedUserTag = @"not_validated";
+
 @implementation OTUser
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
@@ -134,21 +137,20 @@ NSString *const kKeyRoles = @"roles";
 }
 
 - (NSString*)leftTag {
-    
-    if (self.roles) {
-        NSString *key = @"not_validated";
-        if ([self.roles containsObject:key]) {
-            return OTLocalizedString(key);
-        }
-    }
+    // Not used for now
     return nil;
 }
 
 - (NSString*)rightTag {
     if (self.roles) {
-        NSString *key = @"coordinator";
+        NSString *key = kCoordinatorUserTag;
         if ([self.roles containsObject:key]) {
             return OTLocalizedString(key);
+        } else {
+            key = self.roles.firstObject;
+            if (key) {
+                return OTLocalizedString(key);
+            }
         }
     }
     return nil;

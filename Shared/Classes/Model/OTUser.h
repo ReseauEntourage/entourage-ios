@@ -11,6 +11,8 @@
 #import "OTAssociation.h"
 
 extern NSString *const kKeyToken;
+extern NSString *const kCoordinatorUserTag;
+extern NSString *const kNotValidatedUserTag;
 
 #define USER_TYPE_PRO       @"pro"
 #define USER_TYPE_PUBLIC    @"public"

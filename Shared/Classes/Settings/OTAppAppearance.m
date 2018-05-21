@@ -138,7 +138,10 @@
 
 + (UIColor*)rightTagColor:(OTUser*)user {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return (user.rightTag) ? [UIColor pfpGreenColor] : [UIColor clearColor];
+        if (user.rightTag) {
+            return ([user.roles containsObject:kCoordinatorUserTag]) ?
+            [UIColor pfpGreenColor] : [UIColor pfpPurpleColor];
+        }
     }
     
     return [UIColor clearColor];
