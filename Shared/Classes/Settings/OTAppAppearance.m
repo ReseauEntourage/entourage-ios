@@ -12,6 +12,15 @@
 
 @implementation OTAppAppearance
 
++ (UIImage*)applicationLogo
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return [UIImage imageNamed:@"pfp-logo"];
+    }
+    
+    return [UIImage imageNamed:@"entourageLogo"];
+}
+
 + (NSString*)aboutUrlString
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
@@ -118,4 +127,24 @@
     
     return OTLocalizedString(@"no_map_feeds_increase_radius");
 }
+
++ (UIColor*)leftTagColor:(OTUser*)user {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return (user.leftTag) ? [UIColor pfpPurpleColor] : [UIColor clearColor];
+    }
+    
+    return [UIColor clearColor];
+}
+
++ (UIColor*)rightTagColor:(OTUser*)user {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if (user.rightTag) {
+            return ([user.roles containsObject:kCoordinatorUserTag]) ?
+            [UIColor pfpGreenColor] : [UIColor pfpPurpleColor];
+        }
+    }
+    
+    return [UIColor clearColor];
+}
+
 @end

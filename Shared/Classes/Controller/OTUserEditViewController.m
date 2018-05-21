@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger) {
     self.title = OTLocalizedString(@"profile").uppercaseString;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 1000;
-    [self setupCloseModal];
+    [self setupCloseModalWithTintColor];
     [self showSaveButton];
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
     self.sections = @[@(SectionTypeSummary), @(SectionTypeAbout), @(SectionTypeAssociations), @(SectionTypeInfoPrivate), @(SectionTypeDelete)];
@@ -107,7 +107,7 @@ typedef NS_ENUM(NSInteger) {
                                                         withTarget:self
                                                          andAction:@selector(updateUser)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[UIColor appOrangeColor]];
+                                                           colored:[ApplicationTheme shared].backgroundThemeColor];
     [self.navigationItem setRightBarButtonItem:saveButton];
 }
 
@@ -414,6 +414,9 @@ typedef NS_ENUM(NSInteger) {
     avatarButton.layer.borderColor = [UIColor whiteColor].CGColor;
     [avatarButton setupAsProfilePictureFromUrl:self.user.avatarURL withPlaceholder:@"user"];
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
+    
+    UIView *headerBgView = [cell viewWithTag:20];
+    headerBgView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
 - (void)setupTitleProfileCell:(UITableViewCell *)cell withTitle:(NSString *)title {

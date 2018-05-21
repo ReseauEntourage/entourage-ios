@@ -52,6 +52,7 @@
 + (BOOL)supportsTourFunctionality;
 + (BOOL)supportsSolidarityGuideFunctionality;
 + (BOOL)supportsFacebookIntegration;
++ (BOOL)supportsProfileEditing;
 + (BOOL)isMVP;
 + (BOOL)shouldShowIntroTutorial;
 + (BOOL)shouldAllowLoginFromWelcomeScreen;

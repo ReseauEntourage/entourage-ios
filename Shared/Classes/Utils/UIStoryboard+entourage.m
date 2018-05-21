@@ -55,6 +55,12 @@
     return [UIStoryboard storyboardWithName:@"About" bundle:nil];
 }
 
++ (UIStoryboard *)userProfileStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
+}
+
+
 + (void)showTabBarControllerFromStoryboardNamed:(NSString *)storyboardName {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
     OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];

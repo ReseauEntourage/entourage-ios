@@ -15,6 +15,16 @@
     return [UIColor colorWithRed: 0 green: 171.0/255.0 blue: 240.0/255.0 alpha: 1];
 }
 
++ (UIColor*)pfpGreenColor
+{
+    return [UIColor colorWithRed: 0 green: 184.0/255.0 blue: 89.0/255.0 alpha: 1];
+}
+
++ (UIColor*)pfpPurpleColor
+{
+    return [UIColor colorWithRed: 177.0/255.0 green: 15.0/255.0 blue: 105.0/255.0 alpha: 1];
+}
+
 + (UIColor*)pfpSubtitleBlueColor
 {
     return [UIColor colorWithRed: 2.0/255.0 green: 94.0/255.0 blue: 127.0/255.0 alpha: 1];

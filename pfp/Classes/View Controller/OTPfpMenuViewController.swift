@@ -69,14 +69,15 @@ final class OTPfpMenuViewController: UIViewController {
         headerView.editLabel.text = "Modifier mon profil"
         headerView.nameLabel.text = currentUser?.displayName
         headerView.profileBtn.setupAsProfilePicture(fromUrl: currentUser?.avatarURL, withPlaceholder: "user")
+        headerView.profileBtn.addTarget(self, action: #selector(loadProfile), for: UIControlEvents.touchUpInside)
     }
     
     private func createMenuItems() {
         let contactItem = OTMenuItem(title: "Contacter l'équipe Voisin-Age", iconName:"question_chat")
         let howIsUsedItem = OTMenuItem(title: "Mode d'emploi de l'application", iconName: "howIsUsed")
         let ethicalChartItem = OTMenuItem(title: "Charte éthique de Voisin-Age", iconName: "ethicalChart")
-        let logoutItem = OTMenuItem(title: "déconnexion", iconName: "")
-        let aboutItem = OTMenuItem(title: OTLocalisationService.getLocalizedValue(forKey: "aboutTitle"), iconName:"contact")
+        let logoutItem = OTMenuItem(title: String.localized("menu_disconnect_title"), iconName: "")
+        let aboutItem = OTMenuItem(title: String.localized("aboutTitle"), iconName:"contact")
         
         guard let item1 = contactItem,
             let item2 = howIsUsedItem,
@@ -97,6 +98,14 @@ final class OTPfpMenuViewController: UIViewController {
         let vc = PFPAboutViewController.init(nibName: "PFPAboutView", bundle: nil)
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func loadProfile () {
+        let vc: OTUserViewController = UIStoryboard.userProfile().instantiateViewController(withIdentifier: "UserProfile") as! OTUserViewController
+        vc.hidesBottomBarWhenPushed = true
+        vc.userId = self.currentUser?.sid
+        let profileNavController:UINavigationController = UINavigationController.init(rootViewController: vc)
+        self.present(profileNavController, animated: true, completion: nil)
     }
 }
 
