@@ -38,6 +38,8 @@
 		96B658BC209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658BA209A5D2B00EB0398 /* UIKit+Stylable.swift */; };
 		96B658BE209A689200EB0398 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658BD209A689200EB0398 /* LabelStyles.swift */; };
 		96B658BF209A689200EB0398 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658BD209A689200EB0398 /* LabelStyles.swift */; };
+		96F30D5D20B236B800229BB8 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96F30D5C20B236B800229BB8 /* AppConfigurations.plist */; };
+		96F30D5E20B236B800229BB8 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96F30D5C20B236B800229BB8 /* AppConfigurations.plist */; };
 		97B688FDB2DCD2CE3094ADDF /* Pods_pfp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */; };
 		A202E7CD2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
 		A202E7CE2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
@@ -1159,9 +1161,6 @@
 		A2A777EE20AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
 		A2A777EF20AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
 		A2A777F020AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
-		A2C2F36A20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
-		A2C2F36B20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
-		A2C2F36C20AABFDA001762DA /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2F36920AABFDA001762DA /* AppConfigurations.plist */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
 		A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
 		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
@@ -1221,6 +1220,7 @@
 		96B658B7209A5AF000EB0398 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		96B658BA209A5D2B00EB0398 /* UIKit+Stylable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Stylable.swift"; sourceTree = "<group>"; };
 		96B658BD209A689200EB0398 /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
+		96F30D5C20B236B800229BB8 /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = "<group>"; };
 		A19BDADC422EDAB56B022976 /* Pods-pfp.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.store.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.store.xcconfig"; sourceTree = "<group>"; };
 		A202E79F2085CFC20058F32C /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		A202E7A22085CFC20058F32C /* logo_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black.png; sourceTree = "<group>"; };
@@ -1950,7 +1950,6 @@
 		A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLogoutViewCell.swift; sourceTree = "<group>"; };
 		A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = SOURCE_ROOT; };
 		A2A777ED20AF06EC006D2772 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
-		A2C2F36920AABFDA001762DA /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Appearance.h"; sourceTree = "<group>"; };
 		A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Appearance.m"; sourceTree = "<group>"; };
@@ -3442,7 +3441,7 @@
 		A24199B52084F87100BC7466 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A2C2F36920AABFDA001762DA /* AppConfigurations.plist */,
+				96F30D5C20B236B800229BB8 /* AppConfigurations.plist */,
 				A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */,
 				A202E80A2085D0FE0058F32C /* OTAppDelegate.h */,
 				A202E8092085D0FD0058F32C /* OTAppDelegate.m */,
@@ -3703,11 +3702,11 @@
 				A202E7E32085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */,
 				A21D65BB2085FDAA00EF8E0E /* MapOptions.storyboard in Resources */,
 				A21D65AB2085FDAA00EF8E0E /* LocationSelection.storyboard in Resources */,
+				96F30D5D20B236B800229BB8 /* AppConfigurations.plist in Resources */,
 				A21D65AD2085FDAA00EF8E0E /* TourConfirmation.storyboard in Resources */,
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
 				A21D65AA2085FDAA00EF8E0E /* Onboarding.storyboard in Resources */,
 				A21D64AE2085E8B400EF8E0E /* Paris.gpx in Resources */,
-				A2C2F36A20AABFDA001762DA /* AppConfigurations.plist in Resources */,
 				A21D65AE2085FDAA00EF8E0E /* MyEntourages.storyboard in Resources */,
 				A202E7EF2085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				A202E7E52085CFC40058F32C /* SF-UI-Text-UltrathinItalic.otf in Resources */,
@@ -3781,7 +3780,6 @@
 				A202E7E62085CFC40058F32C /* SF-UI-Text-UltrathinItalic.otf in Resources */,
 				A202E7D02085CFC40058F32C /* logo_black.png in Resources */,
 				A202E7F02085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
-				A2C2F36C20AABFDA001762DA /* AppConfigurations.plist in Resources */,
 				A202E7EC2085CFC40058F32C /* SF-UI-Text-Light.otf in Resources */,
 				A202E7EA2085CFC40058F32C /* SF-UI-Text-BoldItalic.otf in Resources */,
 				A296B90F2087218700F6AFBD /* Entourage.xcassets in Resources */,
@@ -3815,9 +3813,9 @@
 				A296B8A220871CFC00F6AFBD /* SF-UI-Text-Bold.otf in Resources */,
 				A2FCF5CA20AD5030004604AC /* PFPAboutView.xib in Resources */,
 				A296B8A320871CFC00F6AFBD /* MapOptions.storyboard in Resources */,
-				A2C2F36B20AABFDA001762DA /* AppConfigurations.plist in Resources */,
 				A296B8A420871CFC00F6AFBD /* LocationSelection.storyboard in Resources */,
 				A296B8A520871CFC00F6AFBD /* TourConfirmation.storyboard in Resources */,
+				96F30D5E20B236B800229BB8 /* AppConfigurations.plist in Resources */,
 				A296B8A620871CFC00F6AFBD /* QuitFeedItem.storyboard in Resources */,
 				A296B8A720871CFC00F6AFBD /* Onboarding.storyboard in Resources */,
 				A296B8A820871CFC00F6AFBD /* Paris.gpx in Resources */,

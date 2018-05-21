@@ -39,6 +39,10 @@
     [self performSegueWithIdentifier:@"GrantedGeoSegue" sender:self];
 }
 
+- (IBAction)ignoreGeolocation {
+    [self performSegueWithIdentifier:@"GrantedGeoSegue" sender:self];
+}
+
 #pragma mark - private methods
 
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
