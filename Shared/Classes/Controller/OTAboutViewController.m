@@ -29,6 +29,7 @@
 
 // UI
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UIImageView *logo;
 
 // Data
 @property (nonatomic, strong) NSArray *aboutItems;

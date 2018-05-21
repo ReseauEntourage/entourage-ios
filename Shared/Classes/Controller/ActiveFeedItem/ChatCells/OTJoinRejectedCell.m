@@ -10,6 +10,7 @@
 #import "OTFeedItemJoiner.h"
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
+#import "entourage-Swift.h"
 
 @implementation OTJoinRejectedCell
 
@@ -21,7 +22,7 @@
 #pragma mark - private methods
 
 - (NSAttributedString *)getLabelText:(NSString *)userName forItem:(OTFeedItem *)feedItem {
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:userName attributes:@{NSForegroundColorAttributeName: [UIColor appOrangeColor]}];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:userName attributes:@{NSForegroundColorAttributeName: [ApplicationTheme shared].backgroundThemeColor}];
     NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:OTLocalizedString(@"user_join_reject") attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
     NSMutableAttributedString *nameInfoAttrString = nameAttrString.mutableCopy;
     [nameInfoAttrString appendAttributedString:infoAttrString];

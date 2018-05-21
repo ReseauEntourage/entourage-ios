@@ -11,6 +11,7 @@ import Foundation
 enum ButtonStyles {
     case whiteRounded
     case navButton
+    case whiteRoundedWithBorder
 }
 
 extension ButtonStyles: ComponentStylable {
@@ -20,7 +21,7 @@ extension ButtonStyles: ComponentStylable {
     
     var font: UIFont {
         switch self {
-        case .whiteRounded:
+        case .whiteRounded, .whiteRoundedWithBorder:
             return UIFont.SFUIText(size: 7, type: .bold)
         case .navButton:
             return UIFont.SFUIText(size: 12, type: .semibold)
@@ -29,7 +30,7 @@ extension ButtonStyles: ComponentStylable {
     
     var borderColor: UIColor {
         switch self {
-        case .whiteRounded:
+        case .whiteRounded, .whiteRoundedWithBorder:
             return UIColor.pfpBlue()
         case .navButton:
             return .clear
@@ -38,7 +39,7 @@ extension ButtonStyles: ComponentStylable {
     
     var textColor: UIColor {
         switch self {
-        case .whiteRounded:
+        case .whiteRounded, .whiteRoundedWithBorder:
             return UIColor.pfpBlue()
         case .navButton:
             return .white
@@ -47,7 +48,7 @@ extension ButtonStyles: ComponentStylable {
     
     var backgroundColor: UIColor {
         switch self {
-        case .whiteRounded:
+        case .whiteRounded, .whiteRoundedWithBorder:
             return .white
         case .navButton:
             return UIColor.pfpBlue()

@@ -17,8 +17,10 @@
 - (UIBarButtonItem *)createBackFrontMenuButton;
 - (UIBarButtonItem *)setupChatsButtonWithTarget:(id)target andSelector:(SEL)selector;
 - (UIBarButtonItem *)setupCloseModal;
+- (UIBarButtonItem*)setupCloseModalWithTintColor;
 - (UIBarButtonItem *)setupCloseModalTransparent;
 - (void)setupLogoImageWithTarget:(id)target andSelector:(SEL)action;
 - (UIBarButtonItem *)setupCloseModalWithTarget:(id)target andSelector:(SEL)action;
+- (UIBarButtonItem *)setupCloseModalWithTintColorAndTarget:(id)target andSelector:(SEL)action;
 
 @end

@@ -77,6 +77,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [OTLogger logEvent:@"MessageOpen"];
     OTFeedItem *feedItem = (OTFeedItem *)[self getItemAtIndexPath:indexPath];
+    //Mself.detailsBehavior.owner.hidesBottomBarWhenPushed = YES;
     [self.detailsBehavior showDetails:feedItem];
 }
 

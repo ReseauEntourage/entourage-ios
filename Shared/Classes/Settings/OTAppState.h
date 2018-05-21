@@ -14,6 +14,7 @@
 + (void)presentTutorialScreen;
 + (void)navigateToAuthenticatedLandingScreen;
 + (void)navigateToUserProfile;
++ (void)switchMapToSolidarityGuide;
 + (void)navigateToLoginScreen:(NSURL*)link;
 + (void)navigateToStartupScreen;
 + (void)continueFromStartupScreen;

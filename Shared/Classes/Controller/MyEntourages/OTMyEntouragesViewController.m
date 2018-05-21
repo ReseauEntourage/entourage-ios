@@ -51,6 +51,7 @@
     [super viewDidLoad];
     
     self.optionsButton.hidden = YES;
+    
     [self.invitationsCollectionDataSource initialize];
     [self.entouragesTableDataSource initialize];
     [self.toggleCollectionView initialize];
@@ -75,7 +76,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -88,16 +89,18 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if(self.isMovingFromParentViewController)
+    
+    if (self.isMovingFromParentViewController) {
         [OTLogger logEvent:@"BackToFeedClick"];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.optionsBehavior prepareSegueForOptions:segue]) {
+    if ([self.optionsBehavior prepareSegueForOptions:segue]) {
         [OTLogger logEvent:@"PlusOnMessagesPageClick"];
         return;
     }
-    if([self.feedItemDetailsBehavior prepareSegueForDetails:segue]){
+    if ([self.feedItemDetailsBehavior prepareSegueForDetails:segue]){
         [OTLogger logEvent:@"DiscussionMembersListView"];
         return;
     }

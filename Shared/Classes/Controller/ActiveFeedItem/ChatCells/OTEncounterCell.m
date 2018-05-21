@@ -14,6 +14,7 @@
 #import "OTOngoingTourService.h"
 #import "OTTour.h"
 #import "OTUser.h"
+#import "entourage-Swift.h"
 
 @interface OTEncounterCell ()
 
@@ -38,7 +39,7 @@
 #pragma mark - private methods
 
 - (NSAttributedString *)getLabelTextForUser:(NSString *)userName withStreetPersonName:(NSString *)streetPersonName {
-    NSMutableAttributedString *nameAttrString = [[NSMutableAttributedString alloc] initWithString:userName attributes:@{NSForegroundColorAttributeName: [UIColor appOrangeColor]}];
+    NSMutableAttributedString *nameAttrString = [[NSMutableAttributedString alloc] initWithString:userName attributes:@{NSForegroundColorAttributeName: [ApplicationTheme shared].backgroundThemeColor}];
     NSMutableAttributedString *infoAttrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_encounter_and_user_meet"), streetPersonName] attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
     
        [nameAttrString addAttribute: NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range: NSMakeRange(0, [nameAttrString length])];
