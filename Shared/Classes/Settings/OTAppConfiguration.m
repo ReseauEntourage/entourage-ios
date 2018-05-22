@@ -546,4 +546,22 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return NO;
 }
 
++ (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return [user.type isEqualToString:USER_TYPE_PRO];
+}
+
++ (BOOL)shouldShowNumberOfUserAssociationsSection:(OTUser*)user
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return ((user.organization && [user.type isEqualToString:USER_TYPE_PRO]) || user.partner);
+}
+
 @end
