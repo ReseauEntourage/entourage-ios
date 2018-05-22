@@ -213,6 +213,7 @@ Proposez une structure";
 
 // Entourage
 "entourages" = "Entourages";
+"numberOfUserActions" = "Nombre d'entourages";
 "myLocation" = "Ma position";
 "category" = "Catégorie";
 "searchLocationPlaceholder" = "Chercher ou déplacer la carte";

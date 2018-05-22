@@ -22,3 +22,6 @@
 
 "pfp_no_more_feeds" = "Aucune activité près de cette position";
 "pfp_no_more_map_feeds" = "Aucune activité près de cette position";
+
+"pfp_entourages" = "Sorties";
+"pfp_numberOfUserActions" = "Nombre de sorties";

@@ -59,5 +59,7 @@
 + (BOOL)shouldAlwaysRequestUserToUploadPicture;
 + (BOOL)shouldAlwaysRequestUserLocation;
 + (BOOL)shouldHideFeedsAndMap;
++ (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user;
++ (BOOL)shouldShowNumberOfUserAssociationsSection:(OTUser*)user;
 
 @end
