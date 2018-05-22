@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)showReportButton {
-    UIBarButtonItem *reportButton = [UIBarButtonItem createWithImageNamed:@"flag" withTarget:self andAction:@selector(sendReportMail)];
+    UIBarButtonItem *reportButton = [UIBarButtonItem createWithImageNamed:@"flag" withTarget:self andAction:@selector(sendReportMail) changeTintColor:YES];
     [self.navigationItem setRightBarButtonItem:reportButton];
 }
 
@@ -160,8 +160,10 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if(self.user == nil)
+    if (self.user == nil) {
         return 0;
+    }
+    
     return self.sections.count;
 }
 
@@ -284,6 +286,7 @@ typedef NS_ENUM(NSInteger) {
 #define VERIFICATION_STATUS 2
 
 #define NOENTOURAGES 1
+#define NOENTOURAGESTITLE 2
 
 #define ASSOCIATION_TITLE 1
 #define ASSOCIATION_IMAGE 2
@@ -344,12 +347,9 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)setupEntouragesProfileCell:(UITableViewCell *)cell {
     UILabel *noEntouragesLabel = [cell viewWithTag:NOENTOURAGES];
-    if ([self.user isPro]) {
-        noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.tourCount.intValue];
-    }
-    else {
-        noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.entourageCount.intValue];
-    }
+    UILabel *noEntouragesTitleLabel = [cell viewWithTag:NOENTOURAGESTITLE];
+    noEntouragesTitleLabel.text = [OTAppAppearance numberOfUserActionsTitle];
+    noEntouragesLabel.text = [OTAppAppearance numberOfUserActionsValueTitle:self.user];
 }
 
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell
@@ -388,19 +388,27 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)configureSections {
     NSMutableArray *mSections = [NSMutableArray arrayWithObject:@(SectionTypeSummary)];
-    if((self.user.organization && [self.user.type isEqualToString:USER_TYPE_PRO]) || self.user.partner)
-       [mSections addObject:@(SectionTypeAssociations)];
+    
+    if ([OTAppConfiguration shouldShowNumberOfUserAssociationsSection:self.user]) {
+        [mSections addObject:@(SectionTypeAssociations)];
+    }
+    
     [mSections addObject:@(SectionTypeVerification)];
-    if([self.user.type isEqualToString:USER_TYPE_PRO])
+    
+    if ([OTAppConfiguration shouldShowNumberOfUserActionsSection:self.user]) {
         [mSections addObject:@(SectionTypeEntourages)];
+    }
+    
     self.sections = mSections;
 }
 
 - (void)showPartnerDetails {
-    if(self.user.sid.intValue == self.currentUser.sid.intValue)
+    if (self.user.sid.intValue == self.currentUser.sid.intValue) {
         [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
-    else
+    }
+    else {
         [self performSegueWithIdentifier:@"AssociationDetails" sender:self];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

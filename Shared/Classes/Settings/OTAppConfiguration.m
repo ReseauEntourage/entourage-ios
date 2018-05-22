@@ -324,7 +324,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[ApplicationTheme shared] setTitleLabelColor: titleColor];
     [[ApplicationTheme shared] setSubtitleLabelColor: subtitleColor];
     
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
     UINavigationBar.appearance.backgroundColor = primaryNavigationBarTintColor;
     UINavigationBar.appearance.tintColor = secondaryNavigationBarTintColor;
     
@@ -351,7 +350,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
 {
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
     navigationController.navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
     navigationController.navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
     
@@ -546,6 +544,24 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     return NO;
+}
+
++ (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return [user.type isEqualToString:USER_TYPE_PRO];
+}
+
++ (BOOL)shouldShowNumberOfUserAssociationsSection:(OTUser*)user
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return ((user.organization && [user.type isEqualToString:USER_TYPE_PRO]) || user.partner);
 }
 
 @end

@@ -143,7 +143,6 @@
 }
 
 - (void)configureNavigationBar {
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
     
     UIButton *leftButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width / 2 , self.navigationController.navigationBar.frame.size.height)];
     [leftButton addTarget:self

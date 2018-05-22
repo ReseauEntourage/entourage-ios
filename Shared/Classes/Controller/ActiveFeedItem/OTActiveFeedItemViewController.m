@@ -144,11 +144,11 @@
     NSMutableArray *rightButtons = [NSMutableArray new];
     
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
-    [more setImage:[UIImage imageNamed:@"more"]
+    [more setImage:[[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
           forState:UIControlStateNormal];
+    more.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [more addTarget:self.statusChangedBehavior
-             action:@selector(startChangeStatus)
-   forControlEvents:UIControlEventTouchUpInside];
+             action:@selector(startChangeStatus) forControlEvents:UIControlEventTouchUpInside];
     [more setFrame:CGRectMake(0, 0, 30, 30)];
     
     OTBarButtonView *moreBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
@@ -159,13 +159,13 @@
     
     [rightButtons addObject:optionsButton];
     
-    if([stateInfo canInvite]) {
+    if ([stateInfo canInvite]) {
         UIButton *plus = [UIButton buttonWithType:UIButtonTypeCustom];
-        [plus setImage:[UIImage imageNamed:@"userPlus"]
-               forState:UIControlStateNormal];
+        [plus setImage:[[UIImage imageNamed:@"userPlus"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+              forState:UIControlStateNormal];
+        plus.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
         [plus addTarget:self.inviteBehavior
-                 action:@selector(startInvite)
-       forControlEvents:UIControlEventTouchUpInside];
+                 action:@selector(startInvite) forControlEvents:UIControlEventTouchUpInside];
         [plus setFrame:CGRectMake(0, 0, 30, 30)];
         
         OTBarButtonView *plusBarBtnView = [[OTBarButtonView alloc] initWithFrame:plus.frame];

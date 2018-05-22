@@ -72,6 +72,7 @@
 "menu_application_usage" = "Questions fréquentes";
 "menu_atd_partner" = "Agir avec Entourage";
 "menu_solidarity_guide" = "Carte des structures solidaires";
+"menu_donnation" = "Donnez vos retours rapidez";
 
 // AboutItems
 "about_tutorial" = "Voir le tutoriel";
@@ -212,6 +213,7 @@ Proposez une structure";
 
 // Entourage
 "entourages" = "Entourages";
+"numberOfUserActions" = "Nombre d'entourages";
 "myLocation" = "Ma position";
 "category" = "Catégorie";
 "searchLocationPlaceholder" = "Chercher ou déplacer la carte";
