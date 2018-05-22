@@ -1481,6 +1481,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tmu-3a-qPZ"/>
+                    <connections>
+                        <outlet property="popupContainerView" destination="sZH-EA-3W8" id="L9e-cN-Ery"/>
+                        <outletCollection property="buttons" destination="vVL-xv-WKX" id="g60-73-tKE"/>
+                        <outletCollection property="buttons" destination="yMd-P1-fFT" id="OTg-3F-7hH"/>
+                        <outletCollection property="buttons" destination="0Jq-r5-MKD" id="sG2-JP-fl4"/>
+                        <outletCollection property="icons" destination="9MO-C7-ZZc" id="AsT-hV-TVA"/>
+                        <outletCollection property="icons" destination="sSy-Yl-SG5" id="6qi-u6-p7d"/>
+                        <outletCollection property="icons" destination="CMf-wW-xkH" id="psd-0f-p7y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FdL-Yf-G2o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
