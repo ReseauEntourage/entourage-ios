@@ -19,7 +19,7 @@
 #import "OTConsts.h"
 #import "OTAPIConsts.h"
 #import "OTShareFeedItemBehavior.h"
-
+#import "entourage-Swift.h"
 
 @interface OTChangeStateViewController ()
 
@@ -30,6 +30,7 @@
 @property (nonatomic, strong) IBOutlet OTSignalEntourageBehavior* singalEntourageBehavior;
 @property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareItem;
 @property (nonatomic, weak) IBOutlet UIButton *shareBtn;
+@property (nonatomic, weak) IBOutlet UIButton *cancelButton;
 
 @end
 
@@ -84,8 +85,12 @@
 #pragma mark - private methods
 
 - (void)changeBorderColors {
-    for(UIView *view in self.buttonsWithBorder)
-        view.layer.borderColor = [UIColor appOrangeColor].CGColor;
+    UIColor *color = ApplicationTheme.shared.backgroundThemeColor;
+    for (UIButton *button in self.buttonsWithBorder) {
+        button.layer.borderColor = color.CGColor;
+        [button setTitleColor:color forState:UIControlStateNormal];
+    }
+    self.cancelButton.backgroundColor = color;
 }
 
 @end

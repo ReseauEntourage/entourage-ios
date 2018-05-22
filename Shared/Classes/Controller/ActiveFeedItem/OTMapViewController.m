@@ -87,8 +87,9 @@
     
     NSMutableArray *rightButtons = [NSMutableArray new];
     UIButton *options = [UIButton buttonWithType:UIButtonTypeCustom];
-    [options setImage:[UIImage imageNamed:@"more"]
-             forState:UIControlStateNormal];
+    [options setImage:[[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+          forState:UIControlStateNormal];
+    options.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [options addTarget:self.statusChangedBehavior
                 action:@selector(startChangeStatus)
       forControlEvents:UIControlEventTouchUpInside];
@@ -100,10 +101,11 @@
     
     UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:optionsBarBtnView];
     [rightButtons addObject:optionsButton];
-    if([stateInfo canInvite]) {
+    if ([stateInfo canInvite]) {
         UIButton *plus = [UIButton buttonWithType:UIButtonTypeCustom];
-        [plus setImage:[UIImage imageNamed:@"userPlus"]
-                 forState:UIControlStateNormal];
+        [plus setImage:[[UIImage imageNamed:@"userPlus"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+              forState:UIControlStateNormal];
+        plus.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
         [plus addTarget:self.inviteBehavior
                     action:@selector(startInvite)
           forControlEvents:UIControlEventTouchUpInside];

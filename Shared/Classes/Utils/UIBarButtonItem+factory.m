@@ -7,13 +7,30 @@
 //
 
 #import "UIBarButtonItem+factory.h"
+#import "entourage-Swift.h"
 
 @implementation UIBarButtonItem (factory)
 
-+ (UIBarButtonItem *)createWithImageNamed:(NSString *)imageName withTarget:(id)target andAction:(SEL)action {
-    UIImage *image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
++ (UIBarButtonItem *)createWithImageNamed:(NSString *)imageName
+                               withTarget:(id)target
+                                andAction:(SEL)action {
+    return [UIBarButtonItem createWithImageNamed:imageName withTarget:target andAction:action changeTintColor:NO];
+}
+
++ (UIBarButtonItem *)createWithImageNamed:(NSString *)imageName
+                               withTarget:(id)target
+                                andAction:(SEL)action
+                          changeTintColor:(BOOL)changeTintColor {
     UIBarButtonItem *btn = [UIBarButtonItem new];
-    [btn setImage:image];
+    if (changeTintColor) {
+        UIImage *image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [btn setImage:image];
+        btn.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    } else {
+        UIImage *image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [btn setImage:image];
+    }
+    
     [btn setTarget:target];
     [btn setAction:action];
     return btn;

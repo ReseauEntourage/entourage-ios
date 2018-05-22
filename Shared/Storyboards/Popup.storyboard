@@ -121,6 +121,7 @@
                         <viewLayoutGuide key="safeArea" id="OYG-GD-U5P"/>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="Qfb-vd-Qft" id="aYb-OX-glr"/>
                         <outlet property="closeKeyboardBehavior" destination="PJF-TK-XD5" id="Vck-tA-yOa"/>
                         <outlet property="completionButton" destination="zUT-tg-Gu5" id="YEu-qQ-O7T"/>
                         <outlet property="descriptionLabel" destination="d10-JS-Nat" id="bep-Zn-BhI"/>
