@@ -144,6 +144,18 @@
     return OTLocalizedString(@"numberOfUserActions");
 }
 
++ (NSString*)userPrivateCirclesSectionTitle:(OTUser*)user {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([user.roles containsObject:kVisitorUserTag] || [user.roles containsObject:kCoordinatorUserTag]) {
+            return OTLocalizedString(@"pfp_visitorPrivateCirclesSectionTitle");
+        } else {
+            return OTLocalizedString(@"pfp_visitedPrivateCirclesSectionTitle");
+        }
+    }
+    
+    return nil;
+}
+
 + (NSString*)numberOfUserActionsValueTitle:(OTUser *)user {
     /*
      https://jira.mytkw.com/browse/EMA-1949

@@ -13,6 +13,8 @@
 extern NSString *const kKeyToken;
 extern NSString *const kCoordinatorUserTag;
 extern NSString *const kNotValidatedUserTag;
+extern NSString *const kVisitorUserTag;
+extern NSString *const kVisitedUserTag;
 
 #define USER_TYPE_PRO       @"pro"
 #define USER_TYPE_PUBLIC    @"public"
@@ -37,6 +39,7 @@ extern NSString *const kNotValidatedUserTag;
 @property (strong, nonatomic) OTOrganization *organization;
 @property (strong, nonatomic) OTAssociation *partner;
 @property (strong, nonatomic) NSArray *roles;
+@property (strong, nonatomic) NSArray *privateCircles;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;

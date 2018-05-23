@@ -745,6 +745,8 @@
 		A21D65C22085FDAA00EF8E0E /* EncounterEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A12085FDAA00EF8E0E /* EncounterEditor.storyboard */; };
 		A21D65C32085FDAA00EF8E0E /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A22085FDAA00EF8E0E /* Tutorial.storyboard */; };
 		A21D65C42085FDAA00EF8E0E /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A32085FDAA00EF8E0E /* About.storyboard */; };
+		A21E8F1F20B5BA8400433606 /* OTPrivateCircleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A21E8F1E20B5BA8400433606 /* OTPrivateCircleCell.m */; };
+		A21E8F2020B5BA8400433606 /* OTPrivateCircleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A21E8F1E20B5BA8400433606 /* OTPrivateCircleCell.m */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
 		A296B75520871CFC00F6AFBD /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
 		A296B75620871CFC00F6AFBD /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
@@ -1926,6 +1928,8 @@
 		A21D65A12085FDAA00EF8E0E /* EncounterEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EncounterEditor.storyboard; sourceTree = "<group>"; };
 		A21D65A22085FDAA00EF8E0E /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		A21D65A32085FDAA00EF8E0E /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
+		A21E8F1D20B5BA8400433606 /* OTPrivateCircleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPrivateCircleCell.h; sourceTree = "<group>"; };
+		A21E8F1E20B5BA8400433606 /* OTPrivateCircleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPrivateCircleCell.m; sourceTree = "<group>"; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2737,6 +2741,8 @@
 				9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */,
 				96B658A9209A380000EB0398 /* OTMenuCellView.swift */,
 				96B658AC209A417900EB0398 /* OTItemTableViewCell.swift */,
+				A21E8F1D20B5BA8400433606 /* OTPrivateCircleCell.h */,
+				A21E8F1E20B5BA8400433606 /* OTPrivateCircleCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4269,6 +4275,7 @@
 				A202EC8B2085D2C80058F32C /* OTContactsFilteredDataSourceBehavior.m in Sources */,
 				A202ED0D2085D2C80058F32C /* OTTourStateTransition.m in Sources */,
 				A202EBAB2085D2C80058F32C /* OTFeedItemFiltersViewController.m in Sources */,
+				A21E8F1F20B5BA8400433606 /* OTPrivateCircleCell.m in Sources */,
 				A202ECAB2085D2C80058F32C /* OTSummaryProviderBehavior.m in Sources */,
 				A202ED172085D2C80058F32C /* OTTourChangedHandler.m in Sources */,
 				A202EACF2085D2C70058F32C /* OTNewsFeedsFilter.m in Sources */,
@@ -5049,6 +5056,7 @@
 				A296B84C20871CFC00F6AFBD /* OTFeedItemTimeframeFilter.m in Sources */,
 				A296B84D20871CFC00F6AFBD /* OTEditEntourageDescViewController.m in Sources */,
 				A296B84E20871CFC00F6AFBD /* OTAssociationsSourceBehavior.m in Sources */,
+				A21E8F2020B5BA8400433606 /* OTPrivateCircleCell.m in Sources */,
 				96B658B9209A5AF000EB0398 /* UIFont+Extensions.swift in Sources */,
 				A296B84F20871CFC00F6AFBD /* OTGeolocationRightsViewController.m in Sources */,
 				A296B85020871CFC00F6AFBD /* OTQuitFeedItemViewController.m in Sources */,

@@ -344,6 +344,50 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OTPrivateCircleCell" rowHeight="54" id="xIq-gS-2dS" customClass="OTPrivateCircleCell">
+                                        <rect key="frame" x="0.0" y="537" width="383" height="54"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xIq-gS-2dS" id="ju6-Hy-X89">
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="53.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmp-aI-tlo">
+                                                    <rect key="frame" x="16" y="8.5" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="9Wd-pD-5VJ"/>
+                                                        <constraint firstAttribute="height" constant="35" id="cnK-Rg-88t"/>
+                                                    </constraints>
+                                                    <state key="normal" image="userSmall"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="17"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KO3-Ue-FT7">
+                                                    <rect key="frame" x="66" y="0.0" width="287" height="54"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="53.5" id="E8A-Ta-eFW"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hmp-aI-tlo" firstAttribute="leading" secondItem="ju6-Hy-X89" secondAttribute="leading" constant="16" id="AS9-1n-4tf"/>
+                                                <constraint firstItem="hmp-aI-tlo" firstAttribute="centerY" secondItem="ju6-Hy-X89" secondAttribute="centerY" id="Ctn-Xr-X8g"/>
+                                                <constraint firstItem="KO3-Ue-FT7" firstAttribute="top" secondItem="ju6-Hy-X89" secondAttribute="top" id="T8x-0b-YkL"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="KO3-Ue-FT7" secondAttribute="trailing" constant="15" id="TEQ-Xs-mEq"/>
+                                                <constraint firstAttribute="bottom" secondItem="KO3-Ue-FT7" secondAttribute="bottom" id="h7H-dg-lw9"/>
+                                                <constraint firstItem="KO3-Ue-FT7" firstAttribute="leading" secondItem="hmp-aI-tlo" secondAttribute="trailing" constant="15" id="uN3-hH-GhV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="btnProfile" destination="hmp-aI-tlo" id="iFe-SG-sNT"/>
+                                            <outlet property="lblDisplayName" destination="KO3-Ue-FT7" id="PkW-fS-v3h"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="imo-7q-aPw" id="c2R-Cf-0Vy"/>
@@ -409,5 +453,6 @@
     </scenes>
     <resources>
         <image name="user" width="100" height="100"/>
+        <image name="userSmall" width="35" height="35"/>
     </resources>
 </document>

@@ -25,3 +25,6 @@
 
 "pfp_entourages" = "Sorties";
 "pfp_numberOfUserActions" = "Nombre de sorties";
+
+"pfp_visitedPrivateCirclesSectionTitle" = "Je suis voisiné(e) par";
+"pfp_visitorPrivateCirclesSectionTitle" = "Je voisine";

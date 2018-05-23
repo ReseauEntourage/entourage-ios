@@ -23,13 +23,16 @@
 #import "OTUserTableConfigurator.h"
 #import "OTMailSenderBehavior.h"
 #import "OTAssociationDetailsViewController.h"
+#import "OTMembersCell.h"
+#import "OTPrivateCircleCell.h"
 #import "entourage-Swift.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
     SectionTypeAssociations,
     SectionTypeVerification,
-    SectionTypeEntourages
+    SectionTypeEntourages,
+    SectionTypePrivateCircles
 } SectionType;
 
 @interface OTUserViewController ()
@@ -57,8 +60,8 @@ typedef NS_ENUM(NSInteger) {
     self.mailSender.successMessage = OTLocalizedString(@"user_reported");
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 1000;
-    NSNumber *userId = self.userId;
     
+    NSNumber *userId = self.userId;
     if (!userId) {
         userId = self.user.sid;
     }
@@ -177,6 +180,8 @@ typedef NS_ENUM(NSInteger) {
             return 1;
         case SectionTypeAssociations:
             return self.associationRows.count;
+        case SectionTypePrivateCircles:
+            return self.user.privateCircles.count + 1;
         default:
             return 0;
     }
@@ -225,9 +230,14 @@ typedef NS_ENUM(NSInteger) {
             cellID = indexPath.row == 0 ? @"TitleProfileCell" : @"AssociationProfileCell";
             break;
         }
+        case SectionTypePrivateCircles: {
+            cellID = indexPath.row == 0 ? @"TitleProfileCell" : @"OTPrivateCircleCell";
+            break;
+        }
         default:
             break;
     }
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     switch ([self.sections[indexPath.section] intValue]) {
         case SectionTypeSummary: {
@@ -264,6 +274,18 @@ typedef NS_ENUM(NSInteger) {
                     break;
             }
             break;
+        }
+        case SectionTypePrivateCircles: {
+            if (indexPath.row == 0) {
+                [self setupTitleProfileCell:cell withTitle:[OTAppAppearance userPrivateCirclesSectionTitle:self.user]];
+                break;
+            } else {
+                
+                // Test only/ temporary
+                OTPrivateCircleCell *privateCircleCell = (OTPrivateCircleCell*)cell;
+                [privateCircleCell configureWithTitle:@"test" url:self.user.avatarURL];
+                return privateCircleCell;
+            };
         }
     }
     return cell;
@@ -394,6 +416,10 @@ typedef NS_ENUM(NSInteger) {
     }
     
     [mSections addObject:@(SectionTypeVerification)];
+    
+    if ([OTAppConfiguration shouldShowNumberOfUserPrivateCirclesSection:self.user]) {
+        [mSections addObject:@(SectionTypePrivateCircles)];
+    }
     
     if ([OTAppConfiguration shouldShowNumberOfUserActionsSection:self.user]) {
         [mSections addObject:@(SectionTypeEntourages)];

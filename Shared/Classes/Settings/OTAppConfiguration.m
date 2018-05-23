@@ -564,4 +564,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return ((user.organization && [user.type isEqualToString:USER_TYPE_PRO]) || user.partner);
 }
 
++ (BOOL)shouldShowNumberOfUserPrivateCirclesSection:(OTUser*)user
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 @end
