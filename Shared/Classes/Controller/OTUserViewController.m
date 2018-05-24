@@ -181,7 +181,7 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeAssociations:
             return self.associationRows.count;
         case SectionTypePrivateCircles:
-            return self.user.privateCircles.count + 1;
+            return self.user.privateCircles.count > 0 ? self.user.privateCircles.count + 1 : 0;
         default:
             return 0;
     }
