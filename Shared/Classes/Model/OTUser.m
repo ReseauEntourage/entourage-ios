@@ -26,9 +26,12 @@ NSString *const kKeyEncounterCount = @"encounter_count";
 NSString *const kKeyOrganization = @"organization";
 NSString *const kKeyPartner = @"partner";
 NSString *const kKeyRoles = @"roles";
+NSString *const kPrivateCircles = @"roles";
 
 NSString *const kCoordinatorUserTag = @"coordinator";
 NSString *const kNotValidatedUserTag = @"not_validated";
+NSString *const kVisitorUserTag = @"visitor";
+NSString *const kVisitedUserTag = @"visited";
 
 @implementation OTUser
 
@@ -103,6 +106,7 @@ NSString *const kNotValidatedUserTag = @"not_validated";
     [encoder encodeObject:self.organization forKey:kKeyOrganization];
     [encoder encodeObject:self.partner forKey:kKeyPartner];
     [encoder encodeObject:self.roles forKey:kKeyRoles];
+    [encoder encodeObject:self.privateCircles forKey:kPrivateCircles];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -125,6 +129,7 @@ NSString *const kNotValidatedUserTag = @"not_validated";
         self.organization = [decoder decodeObjectForKey:kKeyOrganization];
         self.partner = [decoder decodeObjectForKey:kKeyPartner];
         self.roles = [decoder decodeObjectForKey:kKeyRoles];
+        self.privateCircles = [decoder decodeObjectForKey:kPrivateCircles];
     }
     return self;
 }
@@ -143,14 +148,9 @@ NSString *const kNotValidatedUserTag = @"not_validated";
 
 - (NSString*)rightTag {
     if (self.roles) {
-        NSString *key = kCoordinatorUserTag;
-        if ([self.roles containsObject:key]) {
+        NSString *key = self.roles.firstObject;
+        if (key) {
             return OTLocalizedString(key);
-        } else {
-            key = self.roles.firstObject;
-            if (key) {
-                return OTLocalizedString(key);
-            }
         }
     }
     return nil;
