@@ -181,11 +181,7 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeAssociations:
             return self.associationRows.count;
         case SectionTypePrivateCircles: {
-            OTUserMembership *privateCircle = [self.user privateCircles].firstObject;
-            if (privateCircle) {
-                return privateCircle.list.count > 0 ? privateCircle.list.count + 1 : 0;
-            }
-            return 0;
+            return self.user.privateCircles.count > 0 ? self.user.privateCircles.count + 1 : 0;
         }
         default:
             return 0;
@@ -285,8 +281,7 @@ typedef NS_ENUM(NSInteger) {
                 [self setupTitleProfileCell:cell withTitle:[OTAppAppearance userPrivateCirclesSectionTitle:self.user]];
                 break;
             } else {
-                OTUserMembership *privateCircle = [[self.user privateCircles] firstObject];
-                OTUserMembershipListItem *privateCircleItem = [privateCircle.list objectAtIndex:indexPath.row - 1];
+                OTUserMembershipListItem *privateCircleItem = [self.user.privateCircles objectAtIndex:indexPath.row - 1];
                 OTPrivateCircleCell *privateCircleCell = (OTPrivateCircleCell*)cell;
                 [privateCircleCell configureWithItem:privateCircleItem];
                 return privateCircleCell;
