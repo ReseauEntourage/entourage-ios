@@ -12,15 +12,12 @@
 
 @implementation OTPrivateCircleCell
 
-- (void)configureWithTitle:(NSString*)title url:(NSString*)url {
-    self.lblDisplayName.font = [UIFont fontWithName:@"SFUIText-Bold" size:15];
-    self.lblDisplayName.text = title;
-    [self.btnProfile setupAsProfilePictureFromUrl:url];
-}
-
 - (void)configureWithItem:(OTUserMembershipListItem*)membershipItem {
     self.lblDisplayName.font = [UIFont fontWithName:@"SFUIText-Bold" size:15];
     self.lblDisplayName.text = membershipItem.title;
+    
+    self.lblCount.font = [UIFont fontWithName:@"SFUIText-Bold" size:15];
+    self.lblCount.text = [NSString stringWithFormat:@"%ld", membershipItem.noOfPeople.integerValue];
 }
 
 @end

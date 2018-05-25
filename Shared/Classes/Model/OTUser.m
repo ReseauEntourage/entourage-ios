@@ -168,9 +168,16 @@ NSString *const kVisitedUserTag = @"visited";
     return nil;
 }
 
-- (NSArray <OTUserMembership*>*)privateCircles {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type = %@", @"private_group"];
-    return [self.memberships filteredArrayUsingPredicate:predicate];
+- (NSArray <OTUserMembershipListItem*>*)privateCircles {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type = %@", @"private_circle"];
+    OTUserMembership *group = [self.memberships filteredArrayUsingPredicate:predicate].firstObject;
+    return group ? group.list : @[];
+}
+
+- (NSArray <OTUserMembershipListItem*>*)neighborhoods {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type = %@", @"neighborhood"];
+    OTUserMembership *group = [self.memberships filteredArrayUsingPredicate:predicate].firstObject;
+    return group ? group.list : @[];
 }
 
 @end
