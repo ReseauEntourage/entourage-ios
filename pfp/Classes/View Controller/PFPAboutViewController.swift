@@ -102,8 +102,7 @@ class PFPAboutViewController: UIViewController, UITableViewDelegate, UITableView
         
         switch indexPath.section {
         case 0:
-            // TODO: Update app id for pfp once available
-            self.openStoreProductWithiTunesItemIdentifier(identifier: "1072244410");
+            self.openStoreProductWithiTunesItemIdentifier(identifier: "1388843838");
             break
         case 1:
             let url = URL(string: "http://bit.ly/cgu_applivoisin-age")

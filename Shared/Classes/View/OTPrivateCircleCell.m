@@ -16,6 +16,11 @@
     self.lblDisplayName.font = [UIFont fontWithName:@"SFUIText-Bold" size:15];
     self.lblDisplayName.text = title;
     [self.btnProfile setupAsProfilePictureFromUrl:url];
-    
 }
+
+- (void)configureWithItem:(OTUserMembershipListItem*)membershipItem {
+    self.lblDisplayName.font = [UIFont fontWithName:@"SFUIText-Bold" size:15];
+    self.lblDisplayName.text = membershipItem.title;
+}
+
 @end
