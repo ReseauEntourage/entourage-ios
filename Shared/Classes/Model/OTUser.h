@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "OTOrganization.h"
 #import "OTAssociation.h"
+#import "OTUserMembership.h"
 
 extern NSString *const kKeyToken;
 extern NSString *const kCoordinatorUserTag;
@@ -39,7 +40,7 @@ extern NSString *const kVisitedUserTag;
 @property (strong, nonatomic) OTOrganization *organization;
 @property (strong, nonatomic) OTAssociation *partner;
 @property (strong, nonatomic) NSArray *roles;
-@property (strong, nonatomic) NSArray *privateCircles;
+@property (nonatomic, readonly) NSArray *memberships;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;
@@ -58,5 +59,7 @@ extern NSString *const kVisitedUserTag;
  * Returns the name of the role to be didplayed in the rigt side of the user's fullname
  */
 - (NSString*)rightTag;
+
+- (NSArray <OTUserMembership*>*)privateCircles;
 
 @end

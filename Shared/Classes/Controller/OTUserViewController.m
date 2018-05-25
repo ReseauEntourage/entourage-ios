@@ -180,8 +180,13 @@ typedef NS_ENUM(NSInteger) {
             return 1;
         case SectionTypeAssociations:
             return self.associationRows.count;
-        case SectionTypePrivateCircles:
-            return self.user.privateCircles.count > 0 ? self.user.privateCircles.count + 1 : 0;
+        case SectionTypePrivateCircles: {
+            OTUserMembership *privateCircle = [self.user privateCircles].firstObject;
+            if (privateCircle) {
+                return privateCircle.list.count > 0 ? privateCircle.list.count + 1 : 0;
+            }
+            return 0;
+        }
         default:
             return 0;
     }
@@ -280,10 +285,10 @@ typedef NS_ENUM(NSInteger) {
                 [self setupTitleProfileCell:cell withTitle:[OTAppAppearance userPrivateCirclesSectionTitle:self.user]];
                 break;
             } else {
-                
-                // Test only/ temporary
+                OTUserMembership *privateCircle = [[self.user privateCircles] firstObject];
+                OTUserMembershipListItem *privateCircleItem = [privateCircle.list objectAtIndex:indexPath.row - 1];
                 OTPrivateCircleCell *privateCircleCell = (OTPrivateCircleCell*)cell;
-                [privateCircleCell configureWithTitle:@"test" url:self.user.avatarURL];
+                [privateCircleCell configureWithItem:privateCircleItem];
                 return privateCircleCell;
             };
         }

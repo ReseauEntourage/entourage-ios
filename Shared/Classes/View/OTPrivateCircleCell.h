@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTUserMembership.h"
 
 @interface OTPrivateCircleCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UIButton *btnProfile;
 @property (nonatomic, weak) IBOutlet UILabel *lblDisplayName;
 
 - (void)configureWithTitle:(NSString*)title url:(NSString*)url;
+- (void)configureWithItem:(OTUserMembershipListItem*)membershipItem;
 @end

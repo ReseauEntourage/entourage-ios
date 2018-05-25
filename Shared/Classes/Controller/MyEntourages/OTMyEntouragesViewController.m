@@ -146,7 +146,7 @@
 - (void)configureNavigationBar {
     
     NSString *buttonTitle = OTLocalizedString(@"all_messages_nav_title").uppercaseString;
-    UIFont *buttonFont = [UIFont fontWithName:@"SFUIText-Medium" size:14];
+    UIFont *buttonFont = [UIFont fontWithName:@"SFUIText-Medium" size:17];
     CGFloat buttonWidth = [buttonTitle sizeWithFont:buttonFont].width;
     UIColor *buttonSelectedColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     CGFloat underlineHeight = 3.0f;
@@ -167,14 +167,14 @@
     
     CGRect lineFrame = CGRectMake(-marginOffset,
                                     leftButton.frame.size.height - underlineHeight,
-                                    leftButton.frame.size.width + marginOffset,
+                                    leftButton.frame.size.width + 2*marginOffset,
                                     underlineHeight);
     self.leftLineView = [[UIView alloc] initWithFrame:lineFrame];
     self.leftLineView.backgroundColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [leftButton addSubview:self.leftLineView];
     
     buttonTitle = OTLocalizedString(@"unread_messages_nav_title").uppercaseString;
-    buttonWidth = [buttonTitle sizeWithFont:buttonFont].width;;
+    buttonWidth = [buttonTitle sizeWithFont:buttonFont].width;
     UIButton *rightButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, buttonWidth , self.navigationController.navigationBar.frame.size.height)];
     [rightButton setTitle: buttonTitle forState: UIControlStateNormal];
     rightButton.titleLabel.font = buttonFont;
@@ -185,9 +185,9 @@
     self.navigationItem.rightBarButtonItem = rightBarButton;
     [rightButton addTarget:self action:@selector(showUnread) forControlEvents:UIControlEventTouchUpInside];
     
-    lineFrame = CGRectMake(0,
+    lineFrame = CGRectMake(-marginOffset,
                            rightButton.frame.size.height - underlineHeight,
-                           rightButton.frame.size.width + marginOffset,
+                           rightButton.frame.size.width + 2*marginOffset,
                            underlineHeight);
     self.rightLineView = [[UIView alloc] initWithFrame:lineFrame];
     self.rightLineView.backgroundColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
@@ -195,10 +195,6 @@
     
     self.rightLineView.hidden = !((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread;
     self.leftLineView.hidden = ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread;
-    
-    //[self createMenuButton];
-    //[self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
-    //[self setupLogoImageWithTarget:self andSelector:@selector(logoTapped)];
 }
 
 - (void)showAllMessages {
