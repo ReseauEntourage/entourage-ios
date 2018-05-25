@@ -13,10 +13,10 @@
 @implementation OTPrivateCircleCell
 
 - (void)configureWithItem:(OTUserMembershipListItem*)membershipItem {
-    self.lblDisplayName.font = [UIFont fontWithName:@"SFUIText-Bold" size:15];
+    self.lblDisplayName.font = [UIFont fontWithName:@"SFUIText-Medium" size:15];
     self.lblDisplayName.text = membershipItem.title;
     
-    self.lblCount.font = [UIFont fontWithName:@"SFUIText-Bold" size:15];
+    self.lblCount.font = [UIFont fontWithName:@"SFUIText-Medium" size:15];
     self.lblCount.text = [NSString stringWithFormat:@"%ld", membershipItem.noOfPeople.integerValue];
 }
 
