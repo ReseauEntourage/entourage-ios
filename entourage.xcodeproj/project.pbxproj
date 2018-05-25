@@ -747,6 +747,10 @@
 		A21D65C42085FDAA00EF8E0E /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65A32085FDAA00EF8E0E /* About.storyboard */; };
 		A21E8F1F20B5BA8400433606 /* OTPrivateCircleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A21E8F1E20B5BA8400433606 /* OTPrivateCircleCell.m */; };
 		A21E8F2020B5BA8400433606 /* OTPrivateCircleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A21E8F1E20B5BA8400433606 /* OTPrivateCircleCell.m */; };
+		A21E8F2320B6AFC300433606 /* OTUnderlinedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A21E8F2220B6AFC300433606 /* OTUnderlinedButton.m */; };
+		A21E8F2420B6AFC300433606 /* OTUnderlinedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A21E8F2220B6AFC300433606 /* OTUnderlinedButton.m */; };
+		A21E8F2820B7F3AE00433606 /* OTUserMembership.m in Sources */ = {isa = PBXBuildFile; fileRef = A21E8F2720B7F3AE00433606 /* OTUserMembership.m */; };
+		A21E8F2920B7F3AE00433606 /* OTUserMembership.m in Sources */ = {isa = PBXBuildFile; fileRef = A21E8F2720B7F3AE00433606 /* OTUserMembership.m */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
 		A296B75520871CFC00F6AFBD /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
 		A296B75620871CFC00F6AFBD /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
@@ -1930,6 +1934,10 @@
 		A21D65A32085FDAA00EF8E0E /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		A21E8F1D20B5BA8400433606 /* OTPrivateCircleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPrivateCircleCell.h; sourceTree = "<group>"; };
 		A21E8F1E20B5BA8400433606 /* OTPrivateCircleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPrivateCircleCell.m; sourceTree = "<group>"; };
+		A21E8F2120B6AFC300433606 /* OTUnderlinedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTUnderlinedButton.h; sourceTree = "<group>"; };
+		A21E8F2220B6AFC300433606 /* OTUnderlinedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTUnderlinedButton.m; sourceTree = "<group>"; };
+		A21E8F2620B7F3AE00433606 /* OTUserMembership.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTUserMembership.h; sourceTree = "<group>"; };
+		A21E8F2720B7F3AE00433606 /* OTUserMembership.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTUserMembership.m; sourceTree = "<group>"; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2249,6 +2257,8 @@
 				A202E8492085D2C40058F32C /* OTAnnouncement.m */,
 				A202E81D2085D2C40058F32C /* OTAssociation.h */,
 				A202E84D2085D2C40058F32C /* OTAssociation.m */,
+				A21E8F2620B7F3AE00433606 /* OTUserMembership.h */,
+				A21E8F2720B7F3AE00433606 /* OTUserMembership.m */,
 				A202E81A2085D2C40058F32C /* OTEncounter.h */,
 				A202E8412085D2C40058F32C /* OTEncounter.m */,
 				A202E84E2085D2C40058F32C /* OTEntourage.h */,
@@ -2736,6 +2746,8 @@
 				A202E94C2085D2C50058F32C /* OTMenuTableViewCell.m */,
 				A202E9542085D2C50058F32C /* OTTextView.h */,
 				A202E9492085D2C50058F32C /* OTTextView.m */,
+				A21E8F2120B6AFC300433606 /* OTUnderlinedButton.h */,
+				A21E8F2220B6AFC300433606 /* OTUnderlinedButton.m */,
 				A202E9572085D2C50058F32C /* OTTextWithCount.h */,
 				A202E94F2085D2C50058F32C /* OTTextWithCount.m */,
 				9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */,
@@ -4272,6 +4284,7 @@
 				A202ED2B2085D2C80058F32C /* NSAttributedString+OTBuilder.m in Sources */,
 				A202EBA52085D2C80058F32C /* OTLostCodeViewController.m in Sources */,
 				A202EB6D2085D2C80058F32C /* OTPicturePreviewViewController.m in Sources */,
+				A21E8F2820B7F3AE00433606 /* OTUserMembership.m in Sources */,
 				A202EC8B2085D2C80058F32C /* OTContactsFilteredDataSourceBehavior.m in Sources */,
 				A202ED0D2085D2C80058F32C /* OTTourStateTransition.m in Sources */,
 				A202EBAB2085D2C80058F32C /* OTFeedItemFiltersViewController.m in Sources */,
@@ -4283,6 +4296,7 @@
 				A202EC272085D2C80058F32C /* NSBundle+entourage.m in Sources */,
 				A2A777EE20AF06EC006D2772 /* String+Localization.swift in Sources */,
 				9647D516208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */,
+				A21E8F2320B6AFC300433606 /* OTUnderlinedButton.m in Sources */,
 				A202ECE52085D2C80058F32C /* OTUnreadMessagesService.m in Sources */,
 				A202ECA32085D2C80058F32C /* OTMembersDataSource.m in Sources */,
 				A202EAD12085D2C70058F32C /* OTEntourageInvitation.m in Sources */,
@@ -5020,6 +5034,7 @@
 				A296B82720871CFC00F6AFBD /* UIButton+entourage.m in Sources */,
 				A296B82820871CFC00F6AFBD /* OTMapDelegateBehavior.m in Sources */,
 				A296B82920871CFC00F6AFBD /* OTPoiCategory.m in Sources */,
+				A21E8F2920B7F3AE00433606 /* OTUserMembership.m in Sources */,
 				A296B82A20871CFC00F6AFBD /* OTMessageTableCellProviderBehavior.m in Sources */,
 				A296B82B20871CFC00F6AFBD /* OTPoi.m in Sources */,
 				A296B82C20871CFC00F6AFBD /* OTContactsTableCellProviderBehavior.m in Sources */,
@@ -5100,6 +5115,7 @@
 				A296B87320871CFC00F6AFBD /* OTWebViewController.m in Sources */,
 				A296B87420871CFC00F6AFBD /* OTTourFactory.m in Sources */,
 				A296B87520871CFC00F6AFBD /* OTAnnouncementUI.m in Sources */,
+				A21E8F2420B6AFC300433606 /* OTUnderlinedButton.m in Sources */,
 				A296B87620871CFC00F6AFBD /* OTNewsFeedsSourceBehavior.m in Sources */,
 				A296B87720871CFC00F6AFBD /* OTFeedItemFactory.m in Sources */,
 				A296B87820871CFC00F6AFBD /* NSDictionary+Parsing.m in Sources */,

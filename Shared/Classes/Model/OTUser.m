@@ -26,12 +26,16 @@ NSString *const kKeyEncounterCount = @"encounter_count";
 NSString *const kKeyOrganization = @"organization";
 NSString *const kKeyPartner = @"partner";
 NSString *const kKeyRoles = @"roles";
-NSString *const kPrivateCircles = @"roles";
+NSString *const kMemberships = @"memberships";
 
 NSString *const kCoordinatorUserTag = @"coordinator";
 NSString *const kNotValidatedUserTag = @"not_validated";
 NSString *const kVisitorUserTag = @"visitor";
 NSString *const kVisitedUserTag = @"visited";
+
+@interface OTUser ()
+@property (nonatomic, readwrite) NSArray *memberships;
+@end
 
 @implementation OTUser
 
@@ -59,6 +63,14 @@ NSString *const kVisitedUserTag = @"visited";
         if ([[dictionary allKeys] containsObject:kKeyRoles]) {
             _roles = [dictionary arrayWithObjectsOfClass:[NSString class] forKey:kKeyRoles];
         }
+        
+        NSArray *membershipArray = [dictionary objectForKey:kMemberships];
+        NSMutableArray *userMemberships = [[NSMutableArray alloc] init];
+        for (NSDictionary *membershipDict in membershipArray) {
+            OTUserMembership *userMembership = [[OTUserMembership alloc] initWithDictionary:membershipDict];
+            [userMemberships addObject:userMembership];
+        }
+        _memberships = userMemberships;
     }
     return self;
 }
@@ -106,7 +118,7 @@ NSString *const kVisitedUserTag = @"visited";
     [encoder encodeObject:self.organization forKey:kKeyOrganization];
     [encoder encodeObject:self.partner forKey:kKeyPartner];
     [encoder encodeObject:self.roles forKey:kKeyRoles];
-    [encoder encodeObject:self.privateCircles forKey:kPrivateCircles];
+    [encoder encodeObject:self.memberships forKey:kMemberships];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -129,7 +141,7 @@ NSString *const kVisitedUserTag = @"visited";
         self.organization = [decoder decodeObjectForKey:kKeyOrganization];
         self.partner = [decoder decodeObjectForKey:kKeyPartner];
         self.roles = [decoder decodeObjectForKey:kKeyRoles];
-        self.privateCircles = [decoder decodeObjectForKey:kPrivateCircles];
+        self.memberships = [decoder decodeObjectForKey:kMemberships];
     }
     return self;
 }
@@ -154,6 +166,11 @@ NSString *const kVisitedUserTag = @"visited";
         }
     }
     return nil;
+}
+
+- (NSArray <OTUserMembership*>*)privateCircles {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type = %@", @"private_group"];
+    return [self.memberships filteredArrayUsingPredicate:predicate];
 }
 
 @end
