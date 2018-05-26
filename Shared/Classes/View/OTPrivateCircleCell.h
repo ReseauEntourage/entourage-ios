@@ -12,7 +12,7 @@
 @interface OTPrivateCircleCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UIButton *btnProfile;
 @property (nonatomic, weak) IBOutlet UILabel *lblDisplayName;
+@property (nonatomic, weak) IBOutlet UILabel *lblCount;
 
-- (void)configureWithTitle:(NSString*)title url:(NSString*)url;
 - (void)configureWithItem:(OTUserMembershipListItem*)membershipItem;
 @end

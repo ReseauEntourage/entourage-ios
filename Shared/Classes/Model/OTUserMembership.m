@@ -14,6 +14,7 @@ NSString *const kUserMembershipList = @"list";
 
 NSString *const kUserMembershipListItemId = @"id";
 NSString *const kUserMembershipListItemTitle = @"title";
+NSString *const kUserMembershipListItemPeople = @"number_of_people";
 
 @interface OTUserMembership ()
 @property (nonatomic, readwrite) NSMutableArray <OTUserMembershipListItem*> *list;
@@ -30,6 +31,7 @@ NSString *const kUserMembershipListItemTitle = @"title";
         if ([dictionary isKindOfClass:[NSDictionary class]]) {
             self.id = [dictionary numberForKey:kUserMembershipListItemId];
             self.title = [dictionary objectForKey:kUserMembershipListItemTitle];
+            self.noOfPeople = [dictionary numberForKey:kUserMembershipListItemPeople];
         }
     }
     
@@ -39,6 +41,7 @@ NSString *const kUserMembershipListItemTitle = @"title";
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:self.id forKey:kUserMembershipListItemId];
     [encoder encodeObject:self.title forKey:kUserMembershipListItemTitle];
+    [encoder encodeObject:self.noOfPeople forKey:kUserMembershipListItemPeople];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -46,6 +49,7 @@ NSString *const kUserMembershipListItemTitle = @"title";
     {
         self.id = [decoder decodeObjectForKey:kUserMembershipListItemId];
         self.title = [decoder decodeObjectForKey:kUserMembershipListItemTitle];
+        self.noOfPeople = [decoder decodeObjectForKey:kUserMembershipListItemPeople];
     }
     return self;
 }
