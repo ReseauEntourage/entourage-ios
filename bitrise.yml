@@ -4,8 +4,6 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 trigger_map:
 - push_branch: develop
   workflow: Entourage-Beta
-- push_branch: whitelabeling
-  workflow: Voisin-Age-Beta
 workflows:
   testflightFull:
     steps:
@@ -23,18 +21,7 @@ workflows:
             # fail if any commands fails
             set -e
             # debug log
-            set -x
-
-            echo "Download Amazon credentials"
-
-            amazon_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTAmazonConsts.h
-            mixpanel_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTMixpanelConsts.h
-
-            # download the fileS
-            wget -O "$amazon_consts_file" "$BITRISEIO_OTAMAZONCONSTS_URL"
-            wget -O "$mixpanel_consts_file" "$BITRISEIO_OTMIXPANELCONSTS_URL"
-
-            #gem install badge
+            #set -x
     - fastlane:
         inputs:
         - lane: deploy_to_TestFlight
@@ -43,7 +30,7 @@ workflows:
         - lane: refresh_dsyms api_token:$CRASHLYTICS_API_TOKEN
     - deploy-to-bitrise-io:
         inputs:
-        - notify_email_list: antoine@entourage.social, gregoire@entourage.social,  vaite@entourage.social
+        - notify_email_list: gregoire@entourage.social,  vaite@entourage.social
   testflightNocache:
     steps:
     - activate-ssh-key:
@@ -62,80 +49,12 @@ workflows:
             # debug log
             #set -x
 
-            echo "Download Amazon credentials"
-
-            amazon_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTAmazonConsts.h
-            mixpanel_consts_file=$BITRISE_SOURCE_DIR/entourage/Settings/Environment/OTMixpanelConsts.h
-
-            # download the fileS
-            wget -O "$amazon_consts_file" "$BITRISEIO_OTAMAZONCONSTS_URL"
-            wget -O "$mixpanel_consts_file" "$BITRISEIO_OTMIXPANELCONSTS_URL"
-
-            #gem install badge
     - fastlane:
         inputs:
         - lane: deploy_to_TestFlight
     - deploy-to-bitrise-io:
         inputs:
-        - notify_email_list: antoine@entourage.social, gregoire@entourage.social,
-            vaite@entourage.social
-  Voisin-Age-Beta:
-    steps:
-    - activate-ssh-key:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone:
-        inputs:
-        - commit: ''
-        - tag: ''
-    - certificate-and-profile-installer: {}
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-
-            echo "Download App credentials"
-
-            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
-
-            # download the fileS
-            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-
-            echo "Install dependencies"
-
-            #brew install librsvg
-            #brew upgrade imagemagick
-            gem install badge
-    - fastlane:
-        inputs:
-        - lane: pfp_beta appaloosa_api_key:$APPALOOSA_API_KEY appaloosa_store_id:$APPALOOSA_STORE_ID
-    - deploy-to-bitrise-io: {}
-    - slack:
-        inputs:
-        - channel: "#androiddev"
-        - from_username: Voisin-Age Beta
-        - from_username_on_error: Voisin-Age Beta
-        - message: |-
-            New *PFP dev* iOS build is available: $BITRISE_BUILD_NUMBER  here:
-            $BITRISE_APP_URL
-        - message_on_error: Oups, build has failed for PFP iOS... @francoispellissier
-            @veronicagliga @Lazar
-        - pretext: "*Build Succeeded for Voisin-Age Beta!*"
-        - pretext_on_error: "*Build Failed for Voisin-Age Beta!*"
-        - color: "#00ABF0"
-        - webhook_url: https://hooks.slack.com/services/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
-    description: Prepares the Voisin-Age Beta builds pinting to preprod/staging environament
+        - notify_email_list: gregoire@entourage.social, vaite@entourage.social
   Entourage-Beta:
     steps:
     - activate-ssh-key:
@@ -176,7 +95,7 @@ workflows:
             gem install badge
     - fastlane:
         inputs:
-        - lane: beta appaloosa_api_key:$APPALOOSA_API_KEY appaloosa_store_id:$APPALOOSA_STORE_ID
+        - lane: beta
     - deploy-to-bitrise-io: {}
     - slack:
         inputs:
@@ -199,12 +118,6 @@ app:
   - opts:
       is_expand: false
     BITRISE_SCHEME: Entourage-ios
-  - opts:
-      is_expand: true
-    APPALOOSA_STORE_ID: '3949'
-  - opts:
-      is_expand: true
-    APPALOOSA_API_KEY: fhyk78ldv01r2yazk1h91949wvhopo
   - opts:
       is_expand: true
     FASTLANE_PASSWORD: Entourage95
