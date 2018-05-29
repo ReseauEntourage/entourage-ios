@@ -293,8 +293,8 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 
 "profile" = "Profil";
 "lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit: créez un compte\n\nMembres d'une association utilisatrice d'Entourage, contactez associations@entourage.social";
-"report_user_title" = "Vous allez signaler cet utilisateur à nos administrateurs.";
-"report_user_attributed_title" = "Merci de préciser pourquoi\n vous signalez cette personne :";
+"report_user_title" = "Vous allez signaler cet utilisateur à nos administrateurs.\n";
+"report_user_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cette personne :";
 "report_user_button" = "Envoyer";
 "report_user_placeholder" = "Ecrivez quelque chose…";
 
