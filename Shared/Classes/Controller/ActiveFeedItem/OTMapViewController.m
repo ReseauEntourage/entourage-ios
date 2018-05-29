@@ -49,7 +49,7 @@
     self.membersDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.membersDataSource.tableView.estimatedRowHeight = 1000;
 
-    self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
+    [self configureTitleView];
     [self setupToolbarButtons];
     [self.membersDataSource loadDataFor:self.feedItem];
 }
@@ -60,17 +60,26 @@
     
     self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;}
 
+- (void)configureTitleView {
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    id iconName = [[[OTFeedItemFactory createFor:self.feedItem] getUI] categoryIconSource];
+    id titleString = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle];
+    UIButton *iconButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    iconButton.backgroundColor = UIColor.whiteColor;
+    iconButton.layer.cornerRadius = 20;
+    [iconButton setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
+    iconButton.userInteractionEnabled = NO;
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 130, 40)];
+    title.text = titleString;
+    [titleView addSubview:iconButton];
+    [titleView addSubview:title];
+    self.navigationItem.titleView = titleView;
+}
+
 - (IBAction)showProfile {
     [OTLogger logEvent:@"UserProfileClick"];
     [self.userProfileBehavior showProfile:self.feedItem.author.uID];
-}
-- (IBAction)invite:(id)sender {
-    id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
-    if(![stateInfo canChangeEditState])
-        return;
-     if ([stateInfo canInvite]) {
-         [self.inviteBehavior startInvite];
-     }
 }
 
 #pragma mark - navigation
@@ -109,24 +118,7 @@
     
     UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:optionsBarBtnView];
     [rightButtons addObject:optionsButton];
-    if ([stateInfo canInvite]) {
-        UIButton *plus = [UIButton buttonWithType:UIButtonTypeCustom];
-        [plus setImage:[[UIImage imageNamed:@"userPlus"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-              forState:UIControlStateNormal];
-        plus.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-        [plus addTarget:self.inviteBehavior
-                    action:@selector(startInvite)
-          forControlEvents:UIControlEventTouchUpInside];
-        [plus setFrame:CGRectMake(0, 0, 30, 30)];
-        
-        OTBarButtonView *plusBarBtnView = [[OTBarButtonView alloc] initWithFrame:plus.frame];
-        [plusBarBtnView setPosition:BarButtonViewPositionRight];
-        [plusBarBtnView addSubview:plus];
-        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithCustomView:plusBarBtnView];
-        [rightButtons addObject:plusButton];
-    }
     [self setRightBarButtonView:rightButtons];
-    //[self.navigationItem setRightBarButtonItems:rightButtons];
 }
 
 - (void)setRightBarButtonView:(NSMutableArray *)views

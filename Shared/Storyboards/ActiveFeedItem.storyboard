@@ -1097,9 +1097,6 @@
                                                             <integer key="value" value="17"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="invite:" destination="9Ay-63-LSU" eventType="touchUpInside" id="iYs-7O-8pm"/>
-                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="inviter un ami" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZH2-PB-6F3">
                                                     <rect key="frame" x="66" y="0.0" width="313" height="54"/>
