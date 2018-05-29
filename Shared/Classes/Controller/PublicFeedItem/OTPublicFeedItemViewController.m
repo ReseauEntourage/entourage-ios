@@ -69,6 +69,7 @@
     iconButton.backgroundColor = UIColor.whiteColor;
     iconButton.layer.cornerRadius = 20;
     [iconButton setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
+    iconButton.userInteractionEnabled = NO;
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 130, 40)];
     title.text = titleString;

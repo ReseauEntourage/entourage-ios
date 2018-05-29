@@ -35,7 +35,7 @@
 }
 
 - (NSString *)navigationTitle {
-    return OTLocalizedString([self displayType]);
+    return self.entourage.title;
 }
 
 - (NSString *)joinAcceptedText {
