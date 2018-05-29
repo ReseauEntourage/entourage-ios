@@ -22,6 +22,7 @@
 + (NSString *)noMapFeedsDescription;
 + (NSString *)extendSearchParameterDescription;
 + (NSString *)extendMapSearchParameterDescription;
++ (NSString*)userPhoneNumberNotFoundMessage;
 + (NSString *)userActionsTitle;
 + (NSString*)numberOfUserActionsTitle;
 + (NSString*)numberOfUserActionsValueTitle:(OTUser *)user;
