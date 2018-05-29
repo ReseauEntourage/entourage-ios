@@ -98,7 +98,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Pour vous montrer les voisinages à proximité</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Pour saisir la description des POIs</string>
+	<string>Pour saisir la description des voisinages</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Pour afficher votre photo de profil.</string>
 	<key>UIAppFonts</key>
